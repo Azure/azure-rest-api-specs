@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2023-07-03
+tag: package-2024-03-01-preview
 
 directive:
   - where:
@@ -265,6 +265,16 @@ These settings apply only when `--tag=package-2024-03-01-preview-only` is specif
 input-file:
   - Microsoft.Compute/DiagnosticRP/preview/2024-03-01-preview/diagnostic.json
 ```
+
+### Tag: package-2024-03-01-preview
+
+These settings apply only when `--tag=package-2024-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-03-01-preview'
+input-file:
+  - Microsoft.Compute/DiagnosticRP/preview/2024-03-01-preview/diagnostic.json
+```
+
 
 ### Tag: package-2023-07-03
 
