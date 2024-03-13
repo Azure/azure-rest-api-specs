@@ -12,9 +12,9 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
-@doc("Defines the HybridIdentityMetadata.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@doc("Defines the HybridIdentityMetadata.")
 @singleton("default")
 @parentResource(VirtualMachineInstance)
 @includeInapplicableMetadataInPayload(false)
@@ -39,8 +39,8 @@ interface HybridIdentityMetadataOperationGroup {
   @doc("Implements HybridIdentityMetadata GET method.")
   get is ArmResourceRead<HybridIdentityMetadata>;
 
-  @doc("Returns the list of HybridIdentityMetadata of the given vm.")
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @doc("Returns the list of HybridIdentityMetadata of the given vm.")
   @operationId("HybridIdentityMetadata_List")
   list is ArmResourceListByParent<HybridIdentityMetadata>;
 }

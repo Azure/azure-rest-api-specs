@@ -11,9 +11,9 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
-@doc("The virtual machine instance resource definition.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@doc("The virtual machine instance resource definition.")
 @singleton("default")
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
@@ -25,7 +25,7 @@ model VirtualMachineInstance extends ExtensionResourceBase {
   @segment("virtualMachineInstances")
   @visibility("read")
   name: string;
-  
+
   @doc("The extendedLocation of the resource.")
   extendedLocation?: ExtendedLocation;
 
@@ -64,8 +64,8 @@ interface VirtualMachineInstances {
     ArmAsyncOperationHeader
   >;
 
-  @doc("Lists all of the virtual machine instances within the specified parent resource.")
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @doc("Lists all of the virtual machine instances within the specified parent resource.")
   @operationId("VirtualMachineInstances_List")
   list is ArmResourceListByParent<VirtualMachineInstance>;
 

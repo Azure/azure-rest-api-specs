@@ -11,9 +11,9 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
-@doc("NetworkSecurityGroup resource.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@doc("NetworkSecurityGroup resource.")
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(
   NetworkSecurityGroupPropertiesFormat
@@ -61,17 +61,18 @@ interface NetworkSecurityGroups {
     ArmAsyncOperationHeader
   >;
 
-  @doc("Gets all network security groups in a resource group.")
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @doc("Gets all network security groups in a resource group.")
   @operationId("NetworkSecurityGroups_List")
   list is ArmResourceListByParent<NetworkSecurityGroup>;
 
   @doc("Gets all network security groups in a subscription.")
   listAll is ArmListBySubscription<NetworkSecurityGroup>;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "NSG is a short form. It is the correct case"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get the specified network security rule.")
   // FIXME: SecurityRules_Get could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("SecurityRules_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/networkSecurityGroups/{networkSecurityGroupName}/securityRules/{securityRuleName}")
   @get
@@ -104,9 +105,10 @@ interface NetworkSecurityGroups {
     SecurityRule
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "NSG is a short form. It is the correct case"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets all security rules in a network security group.")
   // FIXME: SecurityRules_List could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("SecurityRules_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/networkSecurityGroups/{networkSecurityGroupName}/securityRules")
   @get
@@ -132,9 +134,10 @@ interface NetworkSecurityGroups {
     SecurityRuleListResult
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "NSG is a short form. It is the correct case"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Gets all default security rules in a network security group.")
   // FIXME: DefaultSecurityRules_List could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("DefaultSecurityRules_List")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/networkSecurityGroups/{networkSecurityGroupName}/defaultSecurityRules")
   @get
@@ -160,9 +163,10 @@ interface NetworkSecurityGroups {
     SecurityRuleListResult
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "NSG is a short form. It is the correct case"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Get the specified default network security rule.")
   // FIXME: DefaultSecurityRules_Get could not be converted to a resource operation
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("DefaultSecurityRules_Get")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/networkSecurityGroups/{networkSecurityGroupName}/defaultSecurityRules/{defaultSecurityRuleName}")
   @get

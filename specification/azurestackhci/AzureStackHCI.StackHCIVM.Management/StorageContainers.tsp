@@ -11,9 +11,9 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
-@doc("The storage container resource definition.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@doc("The storage container resource definition.")
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(StorageContainerProperties)
 model StorageContainers extends TrackedResourceBase {
@@ -64,8 +64,8 @@ interface StorageContainersOperationGroup {
     ArmAsyncOperationHeader
   >;
 
-  @doc("Lists all of the storage containers in the specified resource group. Use the nextLink property in the response to get the next page of storage containers.")
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @doc("Lists all of the storage containers in the specified resource group. Use the nextLink property in the response to get the next page of storage containers.")
   @operationId("StorageContainers_List")
   list is ArmResourceListByParent<StorageContainers>;
 

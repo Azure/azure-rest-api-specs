@@ -11,9 +11,9 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
-@doc("The logical network resource definition.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@doc("The logical network resource definition.")
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(LogicalNetworkProperties)
 model LogicalNetworks extends TrackedResourceBase {
@@ -63,8 +63,8 @@ interface LogicalNetworksOperationGroup {
     ArmAsyncOperationHeader
   >;
 
-  @doc("Lists all of the logical networks in the specified resource group. Use the nextLink property in the response to get the next page of logical networks.")
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @doc("Lists all of the logical networks in the specified resource group. Use the nextLink property in the response to get the next page of logical networks.")
   @operationId("LogicalNetworks_List")
   list is ArmResourceListByParent<LogicalNetworks>;
 

@@ -13,6 +13,7 @@ using TypeSpec.Versioning;
 /**
  * Azure Stack HCI management service
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "HCI itself is a short form."
 @armProviderNamespace
 @useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
@@ -20,7 +21,6 @@ using TypeSpec.Versioning;
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-#suppress "@azure-tools/typespec-azure-core/casing-style" "HCI itself is a short form."
 namespace Microsoft.AzureStackHCI;
 
 /**

@@ -19,6 +19,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 enum CloudInitDataSource {
   @doc("NoCloud is used as the datasource")
   NoCloud,
+
   @doc("Azure is used as the datasource")
   Azure,
 }
@@ -27,6 +28,7 @@ enum CloudInitDataSource {
 enum HyperVGeneration {
   @doc("Generation 1 (V1) hypervisor")
   V1,
+
   @doc("Generation 2 (V2) hypervisor")
   V2,
 }
@@ -35,14 +37,19 @@ enum HyperVGeneration {
 enum ProvisioningStateEnum {
   @doc("Provisioning has succeeded")
   Succeeded,
+
   @doc("Provisioning has failed")
   Failed,
+
   @doc("Provisioning is in progress")
   InProgress,
+
   @doc("Provisioning has been accepted")
   Accepted,
+
   @doc("Deletion of the resource is in progress")
   Deleting,
+
   @doc("Provisioning has been canceled")
   Canceled,
 }
@@ -51,8 +58,10 @@ enum ProvisioningStateEnum {
 enum Status {
   @doc("Operation succeeded")
   Succeeded,
+
   @doc("Operation failed")
   Failed,
+
   @doc("Operation is in progress")
   InProgress,
 }
@@ -67,6 +76,7 @@ enum ExtendedLocationTypes {
 enum IpAllocationMethodEnum {
   @doc("Dynamic IP allocation method")
   Dynamic,
+
   @doc("Static IP allocation method")
   Static,
 }
@@ -75,10 +85,13 @@ enum IpAllocationMethodEnum {
 enum SecurityRuleProtocol {
   @doc("Transmission Control Protocol")
   Tcp,
+
   @doc("User Datagram Protocol")
   Udp,
+
   @doc("Internet Control Message Protocol")
   Icmp,
+
   @doc("Wildcard rule for all protocols")
   Asterisk: "*",
 }
@@ -87,6 +100,7 @@ enum SecurityRuleProtocol {
 enum SecurityRuleAccess {
   @doc("Network traffic is allowed")
   Allow,
+
   @doc("Network traffic is denied")
   Deny,
 }
@@ -95,6 +109,7 @@ enum SecurityRuleAccess {
 enum SecurityRuleDirection {
   @doc("Rule is evaluated on incoming traffic")
   Inbound,
+
   @doc("Rule is evaluated on outgoing traffic")
   Outbound,
 }
@@ -103,12 +118,16 @@ enum SecurityRuleDirection {
 enum ProvisioningState {
   @doc("Provisioning has succeeded")
   Succeeded,
+
   @doc("Resource is being updated")
   Updating,
+
   @doc("Resource is being deleted")
   Deleting,
+
   @doc("Provisioning has failed")
   Failed,
+
   @doc("Provisioning has been canceled")
   Canceled,
 }
@@ -117,6 +136,7 @@ enum ProvisioningState {
 enum DiskFileFormat {
   @doc("VHDX file format")
   vhdx,
+
   @doc("VHD file format")
   vhd,
 }
@@ -125,48 +145,70 @@ enum DiskFileFormat {
 enum VmSizeEnum {
   @doc("Default virtual machine size")
   Default,
+
   @doc("Standard A2 v2 virtual machine size")
   Standard_A2_v2,
+
   @doc("Standard A4 v2 virtual machine size")
   Standard_A4_v2,
+
   @doc("Standard D2s v3 virtual machine size")
   Standard_D2s_v3,
+
   @doc("Standard D4s v3 virtual machine size")
   Standard_D4s_v3,
+
   @doc("Standard D8s v3 virtual machine size")
   Standard_D8s_v3,
+
   @doc("Standard D16s v3 virtual machine size")
   Standard_D16s_v3,
+
   @doc("Standard D32s v3 virtual machine size")
   Standard_D32s_v3,
+
   @doc("Standard DS2 v2 virtual machine size")
   Standard_DS2_v2,
+
   @doc("Standard DS3 v2 virtual machine size")
   Standard_DS3_v2,
+
   @doc("Standard DS4 v2 virtual machine size")
   Standard_DS4_v2,
+
   @doc("Standard DS5 v2 virtual machine size")
   Standard_DS5_v2,
+
   @doc("Standard DS13 v2 virtual machine size")
   Standard_DS13_v2,
+
   @doc("Standard K8S v1 virtual machine size")
   Standard_K8S_v1,
+
   @doc("Standard K8S2 v1 virtual machine size")
   Standard_K8S2_v1,
+
   @doc("Standard K8S3 v1 virtual machine size")
   Standard_K8S3_v1,
+
   @doc("Standard K8S4 v1 virtual machine size")
   Standard_K8S4_v1,
+
   @doc("Standard NK6 virtual machine size")
   Standard_NK6,
+
   @doc("Standard NK12 virtual machine size")
   Standard_NK12,
+
   @doc("Standard NV6 virtual machine size")
   Standard_NV6,
+
   @doc("Standard NV12 virtual machine size")
   Standard_NV12,
+
   @doc("Standard K8S5 v1 virtual machine size")
   Standard_K8S5_v1,
+
   @doc("Custom virtual machine size")
   Custom,
 }
@@ -175,6 +217,7 @@ enum VmSizeEnum {
 enum SecurityTypes {
   @doc("Trusted Launch security type")
   TrustedLaunch,
+
   @doc("Confidential VM security type")
   ConfidentialVM,
 }
@@ -183,8 +226,10 @@ enum SecurityTypes {
 enum StatusLevelTypes {
   @doc("Informational status level")
   Info,
+
   @doc("Warning status level")
   Warning,
+
   @doc("Error status level")
   Error,
 }
@@ -193,16 +238,22 @@ enum StatusLevelTypes {
 enum PowerStateEnum {
   @doc("Virtual machine deallocated")
   Deallocated,
+
   @doc("Virtual machine deallocating")
   Deallocating,
+
   @doc("Virtual machine running")
   Running,
+
   @doc("Virtual machine starting")
   Starting,
+
   @doc("Virtual machine stopped")
   Stopped,
+
   @doc("Virtual machine stopping")
   Stopping,
+
   @doc("Power state of the virtual machine is unknown")
   Unknown,
 }
@@ -211,8 +262,10 @@ enum PowerStateEnum {
 enum StatusTypes {
   @doc("Installation succeeded")
   Succeeded,
+
   @doc("Installation in progress")
   InProgress,
+
   @doc("Installation failed")
   Failed,
 }
@@ -221,8 +274,10 @@ enum StatusTypes {
 enum AttestSecureBootPropertyEnum {
   @doc("Secure boot enabled")
   Enabled,
+
   @doc("Secure boot disabled")
   Disabled,
+
   @doc("Secure boot status is unknown")
   Unknown,
 }
@@ -231,8 +286,10 @@ enum AttestSecureBootPropertyEnum {
 enum AttestCertPropertyEnum {
   @doc("Attestation certificate is valid")
   Valid,
+
   @doc("Attestation certificate is invalid")
   Invalid,
+
   @doc("Attestation certificate status is unknown")
   Unknown,
 }
@@ -241,8 +298,10 @@ enum AttestCertPropertyEnum {
 enum AttestBootIntegrityPropertyEnum {
   @doc("Boot integrity properties are valid")
   Valid,
+
   @doc("Boot integrity properties are invalid")
   Invalid,
+
   @doc("Boot integrity properties status is unknown")
   Unknown,
 }
@@ -251,10 +310,13 @@ enum AttestBootIntegrityPropertyEnum {
 enum AttestHealthStatusEnum {
   @doc("Attestation validation and parsing pending")
   Pending,
+
   @doc("Attestation validation and parsing healthy")
   Healthy,
+
   @doc("Attestation validation and parsing unhealthy")
   Unhealthy,
+
   @doc("Attestation validation and parsing status is unknown")
   Unknown,
 }
@@ -263,27 +325,29 @@ enum AttestHealthStatusEnum {
 enum ProvisioningAction {
   @doc("Install guest agent")
   install,
+
   @doc("Uninstall guest agent")
   uninstall,
+
   @doc("Repair guest agent")
   repair,
 }
 
 @doc("Operating system type that the gallery image uses [Windows, Linux]")
-@fixed
 enum OperatingSystemTypes {
   @doc("Windows operating system")
   Windows,
+
   @doc("Linux operating system")
   Linux,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
 @doc("Type of the IP Pool [vm, vippool]")
-@fixed
 enum IPPoolTypeEnum {
   @doc("Virtual Machine IP Pool")
   vm,
+
   @doc("VIP Pool")
   vippool,
 }
@@ -1155,7 +1219,6 @@ model VirtualMachineInstancePropertiesOsProfileWindowsConfiguration {
 
 @doc("SecurityProfile - Specifies the security settings for the virtual machine instance.")
 model VirtualMachineInstancePropertiesSecurityProfile {
-
   #suppress "@azure-tools/typespec-azure-core/casing-style" "TPM is a short form. It is the correct case"
   @doc("Enable TPM flag")
   enableTPM?: boolean;
@@ -1389,7 +1452,7 @@ model NetworkProfileUpdateNetworkInterfacesItem {
 model OsProfileUpdate {
   @doc("ComputerName - name of the computer")
   computerName?: string;
- 
+
   @doc("Linux configuration properties")
   linuxConfiguration?: OsProfileUpdateLinuxConfiguration;
 
@@ -1399,7 +1462,6 @@ model OsProfileUpdate {
 
 @doc("OSProfile update linux configuration")
 model OsProfileUpdateLinuxConfiguration {
-
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a short form. It is the correct case"
   @doc("Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine instance creation process.")
   provisionVMAgent?: boolean;
@@ -1411,7 +1473,6 @@ model OsProfileUpdateLinuxConfiguration {
 
 @doc("OSProfile update windows configuration")
 model OsProfileUpdateWindowsConfiguration {
-
   #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a short form. It is the correct case"
   @doc("Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine instance creation process.")
   provisionVMAgent?: boolean;

@@ -11,9 +11,9 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
-@doc("The network interface resource definition.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@doc("The network interface resource definition.")
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(NetworkInterfaceProperties)
 model NetworkInterfaces extends TrackedResourceBase {
@@ -64,8 +64,8 @@ interface NetworkInterfacesOperationGroup {
     ArmAsyncOperationHeader
   >;
 
-  @doc("Lists all of the network interfaces in the specified resource group. Use the nextLink property in the response to get the next page of network interfaces.")
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @doc("Lists all of the network interfaces in the specified resource group. Use the nextLink property in the response to get the next page of network interfaces.")
   @operationId("NetworkInterfaces_List")
   list is ArmResourceListByParent<NetworkInterfaces>;
 
