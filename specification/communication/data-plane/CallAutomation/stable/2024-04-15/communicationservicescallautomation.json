@@ -20,11 +20,14 @@
         "tags": [
           "PreConnections"
         ],
+        "summary": "Create an outbound call.",
+        "description": "Create an outbound call.",
         "operationId": "CreateCall",
         "parameters": [
           {
             "name": "createCallRequest",
             "in": "body",
+            "description": "The create call request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CreateCallRequest"
@@ -74,11 +77,14 @@
         "tags": [
           "PreConnections"
         ],
+        "summary": "Answer a Call.",
+        "description": "Answer a call using the IncomingCallContext from Event Grid.",
         "operationId": "AnswerCall",
         "parameters": [
           {
             "name": "answerCallRequest",
             "in": "body",
+            "description": "The answer call request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AnswerCallRequest"
@@ -128,11 +134,14 @@
         "tags": [
           "PreConnections"
         ],
+        "summary": "Redirect a call.",
+        "description": "Redirect a call.",
         "operationId": "RedirectCall",
         "parameters": [
           {
             "name": "redirectCallRequest",
             "in": "body",
+            "description": "The redirect call request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RedirectCallRequest"
@@ -179,11 +188,14 @@
         "tags": [
           "PreConnections"
         ],
+        "summary": "Reject the call.",
+        "description": "Reject the call.",
         "operationId": "RejectCall",
         "parameters": [
           {
             "name": "rejectCallRequest",
             "in": "body",
+            "description": "The reject call request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RejectCallRequest"
@@ -230,11 +242,13 @@
         "tags": [
           "MidConnections"
         ],
+        "summary": "Get the detail properties of an ongoing call.",
         "operationId": "CallConnection_GetCall",
         "parameters": [
           {
             "name": "callConnectionId",
             "in": "path",
+            "description": "The call connection id.",
             "required": true,
             "type": "string"
           },
@@ -266,11 +280,14 @@
         "tags": [
           "MidConnections"
         ],
+        "summary": "Hang up call automation service from the call. This will make call automation service leave the call, but does not terminate if there are more than 1 caller in the call.",
+        "description": "Hang up call automation service from the call. This will make call automation service leave the call, but does not terminate if there are more than 1 caller in the call.",
         "operationId": "CallConnection_HangupCall",
         "parameters": [
           {
             "name": "callConnectionId",
             "in": "path",
+            "description": "The call connection id.",
             "required": true,
             "type": "string"
           },
@@ -301,11 +318,14 @@
         "tags": [
           "MidConnections"
         ],
+        "summary": "Terminate a call using CallConnectionId.",
+        "description": "Terminate a call using CallConnectionId.",
         "operationId": "CallConnection_TerminateCall",
         "parameters": [
           {
             "name": "callConnectionId",
             "in": "path",
+            "description": "The terminate call request.",
             "required": true,
             "type": "string"
           },
@@ -350,17 +370,21 @@
         "tags": [
           "MidConnections"
         ],
+        "summary": "Transfer the call to a participant.",
+        "description": "Transfer the call to a participant.",
         "operationId": "CallConnection_TransferToParticipant",
         "parameters": [
           {
             "name": "callConnectionId",
             "in": "path",
+            "description": "The call connection id.",
             "required": true,
             "type": "string"
           },
           {
             "name": "transferToParticipantRequest",
             "in": "body",
+            "description": "The transfer to participant request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/TransferToParticipantRequest"
@@ -410,17 +434,21 @@
         "tags": [
           "MidConnections"
         ],
+        "summary": "Plays audio to participants in the call.",
+        "description": "Plays audio to participants in the call.",
         "operationId": "CallMedia_Play",
         "parameters": [
           {
             "name": "callConnectionId",
             "in": "path",
+            "description": "The call connection id.",
             "required": true,
             "type": "string"
           },
           {
             "name": "playRequest",
             "in": "body",
+            "description": "play request payload.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PlayRequest"
@@ -453,11 +481,14 @@
         "tags": [
           "MidConnections"
         ],
+        "summary": "Cancel all media operations in a call.",
+        "description": "Cancel all media operations in a call.",
         "operationId": "CallMedia_CancelAllMediaOperations",
         "parameters": [
           {
             "name": "callConnectionId",
             "in": "path",
+            "description": "The call connection id",
             "required": true,
             "type": "string"
           },
@@ -488,17 +519,21 @@
         "tags": [
           "MidConnections"
         ],
+        "summary": "Recognize media from call.",
+        "description": "Recognize media from call.",
         "operationId": "CallMedia_Recognize",
         "parameters": [
           {
             "name": "callConnectionId",
             "in": "path",
+            "description": "The call connection id",
             "required": true,
             "type": "string"
           },
           {
             "name": "recognizeRequest",
             "in": "body",
+            "description": "The media recognize request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RecognizeRequest"
@@ -531,17 +566,20 @@
         "tags": [
           "MidConnections"
         ],
+        "summary": "Start continuous Dtmf recognition by subscribing to tones.",
         "operationId": "CallMedia_StartContinuousDtmfRecognition",
         "parameters": [
           {
             "name": "callConnectionId",
             "in": "path",
+            "description": "The call connection id",
             "required": true,
             "type": "string"
           },
           {
             "name": "continuousDtmfRecognitionRequest",
             "in": "body",
+            "description": "The continuous recognize request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ContinuousDtmfRecognitionRequest"
@@ -574,17 +612,20 @@
         "tags": [
           "MidConnections"
         ],
+        "summary": "Stop continuous Dtmf recognition by unsubscribing to tones.",
         "operationId": "CallMedia_StopContinuousDtmfRecognition",
         "parameters": [
           {
             "name": "callConnectionId",
             "in": "path",
+            "description": "The call connection id",
             "required": true,
             "type": "string"
           },
           {
             "name": "continuousDtmfRecognitionRequest",
             "in": "body",
+            "description": "The continuous recognize request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ContinuousDtmfRecognitionRequest"
@@ -617,17 +658,21 @@
         "tags": [
           "MidConnections"
         ],
+        "summary": "Send dtmf tones.",
+        "description": "Send dtmf tones.",
         "operationId": "CallMedia_SendDtmfTones",
         "parameters": [
           {
             "name": "callConnectionId",
             "in": "path",
+            "description": "The call connection id",
             "required": true,
             "type": "string"
           },
           {
             "name": "sendDtmfTonesRequest",
             "in": "body",
+            "description": "The send dtmf tones request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SendDtmfTonesRequest"
@@ -677,11 +722,14 @@
         "tags": [
           "MidConnections"
         ],
+        "summary": "Get participants from a call. Recording and transcription bots are omitted from this list.",
+        "description": "Get participants from a call. Recording and transcription bots are omitted from this list.",
         "operationId": "CallConnection_GetParticipants",
         "parameters": [
           {
             "name": "callConnectionId",
             "in": "path",
+            "description": "The call connection Id",
             "required": true,
             "type": "string"
           },
@@ -719,11 +767,14 @@
         "tags": [
           "MidConnections"
         ],
+        "summary": "Add a participant to the call.",
+        "description": "Add a participant to the call.",
         "operationId": "CallConnection_AddParticipant",
         "parameters": [
           {
             "name": "callConnectionId",
             "in": "path",
+            "description": "The call connection Id",
             "required": true,
             "type": "string"
           },
@@ -779,17 +830,21 @@
         "tags": [
           "MidConnections"
         ],
+        "summary": "Remove a participant from the call using identifier.",
+        "description": "Remove a participant from the call using identifier.",
         "operationId": "CallConnection_RemoveParticipant",
         "parameters": [
           {
             "name": "callConnectionId",
             "in": "path",
+            "description": "The call connection id.",
             "required": true,
             "type": "string"
           },
           {
             "name": "removeParticipantRequest",
             "in": "body",
+            "description": "The participant to be removed from the call.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RemoveParticipantRequest"
@@ -839,17 +894,21 @@
         "tags": [
           "MidConnections"
         ],
+        "summary": "Mute participants from the call using identifier.",
+        "description": "Mute participants from the call using identifier.",
         "operationId": "CallConnection_Mute",
         "parameters": [
           {
             "name": "callConnectionId",
             "in": "path",
+            "description": "The call connection id.",
             "required": true,
             "type": "string"
           },
           {
             "name": "muteParticipantsRequest",
             "in": "body",
+            "description": "The participants to be muted from the call.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/MuteParticipantsRequest"
@@ -899,17 +958,21 @@
         "tags": [
           "MidConnections"
         ],
+        "summary": "Cancel add participant operation.",
+        "description": "Cancel add participant operation.",
         "operationId": "CallConnection_CancelAddParticipant",
         "parameters": [
           {
             "name": "callConnectionId",
             "in": "path",
+            "description": "The call connection Id",
             "required": true,
             "type": "string"
           },
           {
             "name": "cancelAddParticipantRequest",
             "in": "body",
+            "description": "Cancellation request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CancelAddParticipantRequest"
@@ -959,17 +1022,21 @@
         "tags": [
           "MidConnections"
         ],
+        "summary": "Get participant from a call.",
+        "description": "Get participant from a call.",
         "operationId": "CallConnection_GetParticipant",
         "parameters": [
           {
             "name": "callConnectionId",
             "in": "path",
+            "description": "The call connection Id",
             "required": true,
             "type": "string"
           },
           {
             "name": "participantRawId",
             "in": "path",
+            "description": "Raw id of the participant to retrieve.",
             "required": true,
             "type": "string"
           },
@@ -1003,11 +1070,13 @@
         "tags": [
           "Recording"
         ],
+        "summary": "Start recording the call.",
         "operationId": "CallRecording_StartRecording",
         "parameters": [
           {
             "name": "startCallRecording",
             "in": "body",
+            "description": "The request body of start call recording request.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/StartCallRecordingRequest"
@@ -1057,11 +1126,13 @@
         "tags": [
           "Recording"
         ],
+        "summary": "Get call recording properties.",
         "operationId": "CallRecording_GetRecordingProperties",
         "parameters": [
           {
             "name": "recordingId",
             "in": "path",
+            "description": "The recording id.",
             "required": true,
             "type": "string"
           },
@@ -1093,11 +1164,13 @@
         "tags": [
           "Recording"
         ],
+        "summary": "Stop recording the call.",
         "operationId": "CallRecording_StopRecording",
         "parameters": [
           {
             "name": "recordingId",
             "in": "path",
+            "description": "The recording id.",
             "required": true,
             "type": "string"
           },
@@ -1128,11 +1201,13 @@
         "tags": [
           "Recording"
         ],
+        "summary": "Pause recording the call.",
         "operationId": "CallRecording_PauseRecording",
         "parameters": [
           {
             "name": "recordingId",
             "in": "path",
+            "description": "The recording id.",
             "required": true,
             "type": "string"
           },
@@ -1163,11 +1238,13 @@
         "tags": [
           "Recording"
         ],
+        "summary": "Resume recording the call.",
         "operationId": "CallRecording_ResumeRecording",
         "parameters": [
           {
             "name": "recordingId",
             "in": "path",
+            "description": "The recording id.",
             "required": true,
             "type": "string"
           },
@@ -1196,6 +1273,7 @@
   },
   "definitions": {
     "CreateCallRequest": {
+      "description": "The request payload for creating the call.",
       "required": [
         "targets",
         "callbackUri"
@@ -1203,28 +1281,35 @@
       "type": "object",
       "properties": {
         "targets": {
+          "description": "The targets of the call.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CommunicationIdentifierModel"
           }
         },
         "sourceCallerIdNumber": {
-          "$ref": "#/definitions/PhoneNumberIdentifierModel"
+          "$ref": "#/definitions/PhoneNumberIdentifierModel",
+          "description": "The source caller Id, a phone number, that's shown to the PSTN participant being invited.\r\nRequired only when calling a PSTN callee."
         },
         "sourceDisplayName": {
+          "description": "Display name of the call if dialing out to a pstn number",
           "type": "string"
         },
         "source": {
-          "$ref": "#/definitions/CommunicationUserIdentifierModel"
+          "$ref": "#/definitions/CommunicationUserIdentifierModel",
+          "description": "The identifier of the source of the call"
         },
         "operationContext": {
+          "description": "A customer set value used to track the answering of a call.",
           "type": "string"
         },
         "callbackUri": {
+          "description": "The callback URI.",
           "type": "string"
         },
         "callIntelligenceOptions": {
-          "$ref": "#/definitions/CallIntelligenceOptions"
+          "$ref": "#/definitions/CallIntelligenceOptions",
+          "description": "AI options for the call."
         }
       }
     },
@@ -1257,6 +1342,7 @@
       "$ref": "../../../Common/stable/2023-11-15/common.json#/definitions/CommunicationErrorResponse"
     },
     "CallConnectionStateModel": {
+      "description": "The state of the call connection.",
       "enum": [
         "unknown",
         "connecting",
@@ -1273,15 +1359,19 @@
       }
     },
     "CallConnectionProperties": {
+      "description": "Properties of a call connection",
       "type": "object",
       "properties": {
         "callConnectionId": {
+          "description": "The call connection id.",
           "type": "string"
         },
         "serverCallId": {
+          "description": "The server call id.",
           "type": "string"
         },
         "targets": {
+          "description": "The targets of the call.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CommunicationIdentifierModel"
@@ -1291,26 +1381,33 @@
           "$ref": "#/definitions/CallConnectionStateModel"
         },
         "callbackUri": {
+          "description": "The callback URI.",
           "type": "string"
         },
         "sourceCallerIdNumber": {
-          "$ref": "#/definitions/PhoneNumberIdentifierModel"
+          "$ref": "#/definitions/PhoneNumberIdentifierModel",
+          "description": "The source caller Id, a phone number, that's shown to the PSTN participant being invited.\r\nRequired only when calling a PSTN callee."
         },
         "sourceDisplayName": {
+          "description": "Display name of the call if dialing out to a pstn number.",
           "type": "string"
         },
         "source": {
-          "$ref": "#/definitions/CommunicationIdentifierModel"
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "Source identity."
         },
         "correlationId": {
+          "description": "The correlation ID.",
           "type": "string"
         },
         "answeredBy": {
-          "$ref": "#/definitions/CommunicationUserIdentifierModel"
+          "$ref": "#/definitions/CommunicationUserIdentifierModel",
+          "description": "Identity of the answering entity. Only populated when identity is provided in the request."
         }
       }
     },
     "AnswerCallRequest": {
+      "description": "The request payload for answering the call.",
       "required": [
         "incomingCallContext",
         "callbackUri"
@@ -1318,23 +1415,29 @@
       "type": "object",
       "properties": {
         "incomingCallContext": {
+          "description": "The context associated with the call.",
           "type": "string"
         },
         "callbackUri": {
+          "description": "The callback uri.",
           "type": "string"
         },
         "operationContext": {
+          "description": "A customer set value used to track the answering of a call.",
           "type": "string"
         },
         "callIntelligenceOptions": {
-          "$ref": "#/definitions/CallIntelligenceOptions"
+          "$ref": "#/definitions/CallIntelligenceOptions",
+          "description": "AI options for the call."
         },
         "answeredBy": {
-          "$ref": "#/definitions/CommunicationUserIdentifierModel"
+          "$ref": "#/definitions/CommunicationUserIdentifierModel",
+          "description": "The identifier of the call automation entity which answers the call"
         }
       }
     },
     "RedirectCallRequest": {
+      "description": "The request payload for redirecting the call.",
       "required": [
         "incomingCallContext",
         "target"
@@ -1342,10 +1445,12 @@
       "type": "object",
       "properties": {
         "incomingCallContext": {
+          "description": "The context associated with the call.",
           "type": "string"
         },
         "target": {
-          "$ref": "#/definitions/CommunicationIdentifierModel"
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The target identity to redirect the call to."
         }
       }
     },
@@ -1379,25 +1484,31 @@
       }
     },
     "TransferToParticipantRequest": {
+      "description": "The request payload for transferring call to a participant.",
       "required": [
         "targetParticipant"
       ],
       "type": "object",
       "properties": {
         "targetParticipant": {
-          "$ref": "#/definitions/CommunicationIdentifierModel"
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The identity of the target where call should be transferred to."
         },
         "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
         },
         "transferee": {
-          "$ref": "#/definitions/CommunicationIdentifierModel"
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "Transferee is the participant who is transferred away."
         },
         "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
           "type": "string"
         },
         "customCallingContext": {
-          "$ref": "#/definitions/CustomCallingContext"
+          "$ref": "#/definitions/CustomCallingContext",
+          "description": "Used by customer to send custom calling context to targets"
         }
       }
     },
@@ -1852,34 +1963,42 @@
       }
     },
     "AddParticipantRequest": {
+      "description": "The request payload for adding participant to the call.",
       "required": [
         "participantToAdd"
       ],
       "type": "object",
       "properties": {
         "sourceCallerIdNumber": {
-          "$ref": "#/definitions/PhoneNumberIdentifierModel"
+          "$ref": "#/definitions/PhoneNumberIdentifierModel",
+          "description": "The source caller Id, a phone number, that's shown to the PSTN participant being invited.\r\nRequired only when inviting a PSTN participant."
         },
         "sourceDisplayName": {
+          "description": "(Optional) The display name of the source that is associated with this invite operation when\r\nadding a PSTN participant or teams user.  Note: Will not update the display name in the roster.",
           "type": "string"
         },
         "participantToAdd": {
-          "$ref": "#/definitions/CommunicationIdentifierModel"
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The participant to invite."
         },
         "invitationTimeoutInSeconds": {
           "format": "int32",
+          "description": "Gets or sets the timeout to wait for the invited participant to pickup.\r\nThe maximum value of this is 180 seconds",
           "maximum": 180,
           "minimum": 0,
           "type": "integer"
         },
         "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
         },
         "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
           "type": "string"
         },
         "customCallingContext": {
-          "$ref": "#/definitions/CustomCallingContext"
+          "$ref": "#/definitions/CustomCallingContext",
+          "description": "Used by customer to send custom calling context to targets"
         }
       }
     },
@@ -1902,18 +2021,22 @@
       }
     },
     "RemoveParticipantRequest": {
+      "description": "The remove participant by identifier request.",
       "required": [
         "participantToRemove"
       ],
       "type": "object",
       "properties": {
         "participantToRemove": {
-          "$ref": "#/definitions/CommunicationIdentifierModel"
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The participants to be removed from the call."
         },
         "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
         },
         "operationCallbackUri": {
+          "description": "Set a callback URI that overrides the default callback URI set by CreateCall/AnswerCall for this operation.\r\nThis setup is per-action. If this is not set, the default callback URI set by CreateCall/AnswerCall will be used.",
           "type": "string"
         }
       }
@@ -1929,18 +2052,21 @@
       }
     },
     "MuteParticipantsRequest": {
+      "description": "The request payload for muting participants from the call.",
       "required": [
         "targetParticipants"
       ],
       "type": "object",
       "properties": {
         "targetParticipants": {
+          "description": "Participants to be muted from the call.\r\nOnly ACS Users are supported.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CommunicationIdentifierModel"
           }
         },
         "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
         }
       }
@@ -2132,17 +2258,7 @@
       "type": "string",
       "x-ms-enum": {
         "name": "RecordingStorageKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "Name": "AzureCommunicationServices",
-            "Description": "Storage managed by Azure Communication Services"
-          },
-          {
-            "Name": "AzureBlobStorage",
-            "Description": "Storage managed by provided Azure blob"
-          }
-        ]
+        "modelAsString": true
       }
     },
     "ExternalStorage": {
@@ -2168,7 +2284,7 @@
       "type": "object",
       "properties": {
         "containerUri": {
-          "format": "uri",
+          "format": "url",
           "description": "Uri of a container or a location within a container",
           "type": "string"
         }
@@ -2194,21 +2310,7 @@
       "type": "string",
       "x-ms-enum": {
         "name": "RecordingKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "Name": "AzureCommunicationServices",
-            "Description": "Recording initated by Azure Communication Services"
-          },
-          {
-            "Name": "Teams",
-            "Description": "Recording initated by Teams user"
-          },
-          {
-            "Name": "TeamsCompliance",
-            "Description": "Recording initated by Teams compliance policy"
-          }
-        ]
+        "modelAsString": true
       }
     },
     "RecordingStateResponse": {
