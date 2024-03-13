@@ -3,7 +3,7 @@
   "info": {
     "title": "SharedImageGalleryServiceClient",
     "description": "Shared Image Gallery Service Client.",
-    "version": "2023-07-03"
+    "version": "2024-03-03"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -521,6 +521,248 @@
         "x-ms-examples": {
           "Delete a gallery image.": {
             "$ref": "./examples/galleryExamples/GalleryImage_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/remoteContainerImages/{galleryRemoteContainerImageName}": {
+      "put": {
+        "tags": [
+          "GalleryRemoteContainerImages"
+        ],
+        "operationId": "GalleryRemoteContainerImages_CreateOrUpdate",
+        "description": "Create or update a gallery remote container image.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Shared Image Gallery in which the Gallery Remote Container Image is to be created."
+          },
+          {
+            "name": "galleryRemoteContainerImageName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery remote container image to be created or updated. The allowed characters are alphabets and numbers with dots, dashes, and periods allowed in the middle. The maximum length is 80 characters."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "galleryRemoteContainerImage",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GalleryRemoteContainerImage"
+            },
+            "description": "Parameters supplied to the create or update gallery remote container image operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryRemoteContainerImage"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/GalleryRemoteContainerImage"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/GalleryRemoteContainerImage"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or update a simple gallery remote container image.": {
+            "$ref": "./examples/galleryExamples/GalleryRemoteContainerImage_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "GalleryRemoteContainerImages"
+        ],
+        "operationId": "GalleryRemoteContainerImages_Update",
+        "description": "Update a gallery remote container image.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Shared Image Gallery in which the Image Definition is to be updated."
+          },
+          {
+            "name": "galleryRemoteContainerImageName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery remote container image to be updated. The allowed characters are alphabets and numbers with dots, dashes, and periods allowed in the middle. The maximum length is 80 characters."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "galleryRemoteContainerImage",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GalleryRemoteContainerImageUpdate"
+            },
+            "description": "Parameters supplied to the update gallery remote container image operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryRemoteContainerImage"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a simple gallery remote container image.": {
+            "$ref": "./examples/galleryExamples/GalleryRemoteContainerImage_Update.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "GalleryRemoteContainerImages"
+        ],
+        "operationId": "GalleryRemoteContainerImages_Get",
+        "description": "Retrieves information about a gallery remote container image.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Shared Image Gallery from which the Gallery Remote Container Image are to be retrieved."
+          },
+          {
+            "name": "galleryRemoteContainerImageName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery remote container image to be retrieved."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GalleryRemoteContainerImage"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a gallery remote container image.": {
+            "$ref": "./examples/galleryExamples/GalleryRemoteContainerImage_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "GalleryRemoteContainerImages"
+        ],
+        "operationId": "GalleryRemoteContainerImages_Delete",
+        "description": "Delete a gallery remote container image.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Shared Image Gallery in which the Gallery Remote Container Image is to be deleted."
+          },
+          {
+            "name": "galleryRemoteContainerImageName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery remote container image to be deleted."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a gallery remote container image.": {
+            "$ref": "./examples/galleryExamples/GalleryRemoteContainerImage_Delete.json"
           }
         }
       }
@@ -2385,6 +2627,82 @@
         "identifier"
       ],
       "description": "Describes the properties of a gallery image definition."
+    },
+    "GalleryRemoteContainerImage": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GalleryRemoteContainerImageProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common-types/v1/common.json#/definitions/Resource"
+        }
+      ],
+      "description": "Specifies information about the gallery remote container image that you want to create or update."
+    },
+    "GalleryRemoteContainerImageUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GalleryRemoteContainerImageProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResourceDefinition"
+        }
+      ],
+      "description": "Specifies information about the gallery remote container image that you want to update."
+    },
+    "GalleryRemoteContainerImageProperties": {
+      "properties": {
+        "sourceProfile": {
+          "type": "object",
+          "properties": {
+            "registryCredentials": {
+              "type": "object",
+              "properties": {
+                "server": {
+                  "type": "string",
+                  "example": "myacr.azurecr.io"
+                },
+                "activeKey": {
+                  "type": "object",
+                  "properties": {
+                    "sourceVault": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "/subscriptions/49d70b3e-440a-41ee-8559-6a94d952b5d6/resourceGroups/Mock_RGNamexpmuo/providers/Microsoft.KeyVault/vaults/mockvault"
+                        }
+                      }
+                    },
+                    "secretUrl": {
+                      "type": "string",
+                      "example": "https://mockvault.vault.azure.net/secrets/mysecret/b432becabcde4b26143250d2cb07f374"
+                    }
+                  }
+                },
+                "imageReference": {
+                  "type": "string",
+                  "example": "myacr.azurecr.io/hello-world@sha256:4a1c4b21597c1b4415bdbecb28a3296c6b5e23ca4f9feeb599860a1dac6a0108"
+                }
+              }
+            },
+            "provisioningState": {
+              "type": "string",
+              "example": "Succeeded"
+            }
+          }
+        }
+      },
+      "required": [
+        "imageReference"
+      ],
+      "description": "Describes the properties of a gallery remote container image."
     },
     "GalleryImageVersion": {
       "properties": {
