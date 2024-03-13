@@ -6,8 +6,10 @@ namespace Azure.OpenAI;
 using TypeSpec.Versioning;
 
 @doc("Defines available options for the underlying response format of output translation information.")
-@added(ServiceApiVersions.v2023_09_01_Preview)
-enum AudioTranslationFormat {
+@added(ServiceApiVersions.v2024_02_15_Preview)
+union AudioTranslationFormat {
+  string,
+
   @doc("Use a response body that is a JSON object containing a single 'text' field for the translation.")
   json: "json",
 
@@ -32,7 +34,7 @@ enum AudioTranslationFormat {
 @doc("""
 The configuration information for an audio translation request.
 """)
-@added(ServiceApiVersions.v2023_09_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 model AudioTranslationOptions {
   @doc("""
   The audio data to translate. This must be the binary content of a file in one of the supported media formats:
@@ -51,7 +53,7 @@ model AudioTranslationOptions {
   @doc("""
   The requested format of the translation response data, which will influence the content and detail of the result.
   """)
-  @projectedName("json", "response_format")
+  @encodedName("application/json", "response_format")
   responseFormat?: AudioTranslationFormat;
 
   @doc("""
@@ -82,7 +84,7 @@ Extended information about a single segment of translated audio data.
 Segments generally represent roughly 5-10 seconds of speech. Segment boundaries typically occur between words but not
 necessarily sentences.
 """)
-@added(ServiceApiVersions.v2023_09_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 model AudioTranslationSegment {
   @doc("The 0-based index of this segment within a translation.")
   id: int32;
@@ -102,16 +104,16 @@ model AudioTranslationSegment {
   temperature: float32;
 
   @doc("The average log probability associated with this audio segment.")
-  @projectedName("json", "avg_logprob")
+  @encodedName("application/json", "avg_logprob")
   @projectedName("csharp", "AverageLogProbability")
   avgLogprob: float32;
 
   @doc("The compression ratio of this audio segment.")
-  @projectedName("json", "compression_ratio")
+  @encodedName("application/json", "compression_ratio")
   compressionRatio: float32;
 
   @doc("The probability of no speech detection within this audio segment.")
-  @projectedName("json", "no_speech_prob")
+  @encodedName("application/json", "no_speech_prob")
   @projectedName("csharp", "NoSpeechProbability")
   noSpeechProb: float32;
 
@@ -129,7 +131,7 @@ model AudioTranslationSegment {
 }
 
 @doc("Result information for an operation that translated spoken audio into written text.")
-@added(ServiceApiVersions.v2023_09_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 model AudioTranslation {
   @doc("The translated text for the provided audio data.")
   text: string;

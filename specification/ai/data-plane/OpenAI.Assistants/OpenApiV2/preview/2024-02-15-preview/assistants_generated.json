@@ -641,6 +641,30 @@
         }
       }
     },
+    "/files/{fileId}/content": {
+      "get": {
+        "operationId": "GetFileContent",
+        "description": "Returns information about a specific file. Does not retrieve file content.",
+        "parameters": [
+          {
+            "name": "fileId",
+            "in": "path",
+            "description": "The ID of the file to retrieve.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string",
+              "format": "byte"
+            }
+          }
+        }
+      }
+    },
     "/threads": {
       "post": {
         "operationId": "CreateThread",
@@ -2250,22 +2274,8 @@
       "description": "An image reference, as represented in thread message content.",
       "properties": {
         "file_id": {
-          "$ref": "#/definitions/MessageImageFileIdDetails",
-          "description": "The ID for the file associated with this image.",
-          "x-ms-client-name": "fileId"
-        }
-      },
-      "required": [
-        "file_id"
-      ]
-    },
-    "MessageImageFileIdDetails": {
-      "type": "object",
-      "description": "An encapsulation of an image file ID, as used by message image content.",
-      "properties": {
-        "file_id": {
           "type": "string",
-          "description": "The ID of the specific image file.",
+          "description": "The ID for the file associated with this image.",
           "x-ms-client-name": "fileId"
         }
       },

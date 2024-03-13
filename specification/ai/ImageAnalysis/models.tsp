@@ -15,12 +15,12 @@ model ImageBoundingBox {
 
   @doc("Width of the area, in pixels.")
   @minValue(0)
-  @projectedName("json", "w")
+  @encodedName("application/json", "w")
   width: int32;
 
   @doc("Height of the area, in pixels.")
   @minValue(0)
-  @projectedName("json", "h")
+  @encodedName("application/json", "h")
   height: int32;
 }
 
@@ -166,14 +166,14 @@ model DetectedTextBlock {
 @doc("Represents the outcome of an Image Analysis operation.")
 model ImageAnalysisResult {
   @doc("The generated phrase that describes the content of the analyzed image.")
-  @projectedName("json", "captionResult")
+  @encodedName("application/json", "captionResult")
   caption?: CaptionResult;
 
   @doc("""
   The up to 10 generated phrases, the first describing the content of the whole image,
   and the others describing the content of different regions of the image.
   """)
-  @projectedName("json", "denseCaptionsResult")
+  @encodedName("application/json", "denseCaptionsResult")
   denseCaptions?: DenseCaptionsResult;
 
   @doc("Metadata associated with the analyzed image.")
@@ -183,26 +183,26 @@ model ImageAnalysisResult {
   modelVersion: string;
 
   @doc("A list of detected physical objects in the analyzed image, and their location.")
-  @projectedName("json", "objectsResult")
+  @encodedName("application/json", "objectsResult")
   objects?: ObjectsResult;
 
   @doc("A list of detected people in the analyzed image, and their location.")
-  @projectedName("json", "peopleResult")
+  @encodedName("application/json", "peopleResult")
   people?: PeopleResult;
 
   @doc("The extracted printed and hand-written text in the analyze image. Also knows as OCR.")
-  @projectedName("json", "readResult")
+  @encodedName("application/json", "readResult")
   read?: ReadResult;
 
   @doc("""
   A list of crop regions at the desired as aspect ratios (if provided) that can be used as image thumbnails.
   These regions preserve as much content as possible from the analyzed image, with priority given to detected faces.
   """)
-  @projectedName("json", "smartCropsResult")
+  @encodedName("application/json", "smartCropsResult")
   smartCrops?: SmartCropsResult;
 
   @doc("A list of content tags in the analyzed image.")
-  @projectedName("json", "tagsResult")
+  @encodedName("application/json", "tagsResult")
   tags?: TagsResult;
 }
 
@@ -282,27 +282,29 @@ model TagsResult {
 }
 
 @doc("The visual features supported by the Image Analysis service")
-enum VisualFeatures {
+union VisualFeatures {
+  string,
+
   @doc("Extract content tags for thousands of recognizable objects, living beings, scenery, and actions that appear in the image.")
-  tags,
+  "tags",
 
   @doc("Generate a human-readable caption sentence that describes the content of the image.")
-  caption,
+  "caption",
 
   @doc("Generate human-readable caption sentences for up to 10 different regions in the image, including one for the whole image.")
-  denseCaptions,
+  "denseCaptions",
 
   @doc("Object detection. This is similar to tags, but focused on detecting physical objects in the image and returning their location.")
-  objects,
+  "objects",
 
   @doc("Extract printed or handwritten text from the image. Also known as Optical Character Recognition (OCR).")
-  read,
+  "read",
 
   @doc("Find representative sub-regions of the image for thumbnail generation, at desired aspect ratios, with priority given to detected faces.")
-  smartCrops,
+  "smartCrops",
 
   @doc("Detect people in the image and return their location.")
-  people,
+  "people",
 }
 
 @doc("An object holding the publicly reachable URL of an image to analyze.")
