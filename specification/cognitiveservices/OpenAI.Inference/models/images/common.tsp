@@ -11,24 +11,26 @@ namespace Azure.OpenAI;
 @lroStatus
 @doc("The state of a job or item.")
 @removed(ServiceApiVersions.v2024_02_15_Preview)
-enum AzureOpenAIOperationState {
+union AzureOpenAIOperationState {
+  string,
+
   @doc("The operation was created and is queued to be processed in the future.")
-  notRunning,
+  notRunning: "notRunning",
 
   @doc("The operation has started to be processed.")
-  running,
+  running: "running",
 
   @lroSucceeded
   @doc("The operation has successfully be processed and is ready for consumption.")
-  succeeded,
+  succeeded: "succeeded",
 
   @lroCanceled
   @doc("The operation has been canceled and is incomplete.")
-  canceled,
+  canceled: "canceled",
 
   @lroFailed
   @doc("The operation has completed processing with a failure and cannot be further consumed.")
-  failed,
+  failed: "failed",
 }
 
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "template"
