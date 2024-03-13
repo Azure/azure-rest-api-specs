@@ -8982,6 +8982,10 @@
           "description": "Properties of the Service resource",
           "x-ms-client-flatten": false
         },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "description": "Managed Identity of the Service resource"
+        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "Sku of the Service resource"
@@ -11316,6 +11320,30 @@
           "description": "Indicates whether the data plane components(log stream, app connect, remote debugging) in vnet injection instance could be accessed from internet.",
           "type": "boolean",
           "default": false
+        },
+        "privateLinkState": {
+          "description": "Indicates whether the vnet injection service enables private links for backend storage account and container registry.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PrivateLinkState",
+            "modelAsString": true
+          }
+        },
+        "privateDnsZoneId": {
+          "description": "Fully qualified resource Id of the Private DNS zone to link with the customer virtual network.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/privateDnsZones"
+              }
+            ]
+          }
         }
       }
     },
