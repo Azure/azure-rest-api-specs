@@ -17,7 +17,9 @@ using TypeSpec.Versioning;
   completions request that should use Azure OpenAI chat extensions to augment the response behavior.
   The use of this configuration is compatible only with Azure OpenAI.
 """)
-enum AzureChatExtensionType {
+union AzureChatExtensionType {
+  string,
+
   @doc("Represents the use of Azure AI Search as an Azure OpenAI chat extension.")
   azureSearch: "azure_search",
 
