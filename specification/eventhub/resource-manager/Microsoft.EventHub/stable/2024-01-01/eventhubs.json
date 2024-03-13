@@ -97,6 +97,9 @@
           },
           "EHEventHubWithDeletePolicyCreate": {
             "$ref": "./examples/EventHubs/EHEventHubWithDeletePolicyCreate.json"
+          },
+          "EHEventHubWithCompactPolicyCreate": {
+            "$ref": "./examples/EventHubs/EHEventHubWithCompactPolicyCreate.json"
           }
         },
         "description": "Creates or updates a new Event Hub as a nested resource within a Namespace.",
@@ -278,8 +281,7 @@
           "enum": [
             "Delete",
             "Compact",
-            "DeleteCompact",
-            "CompactDelete"
+            "Delete,Compact"
           ],
           "x-ms-enum": {
             "name": "CleanupPolicyRetentionDescription",
@@ -291,10 +293,10 @@
           "type": "integer",
           "description": "Number of hours to retain the events for this Event Hub. If cleanupPolicy is Compact the returned value of this property is Long.MaxValue "
         },
-        "minLagCompactionLagInHours": {
+        "minCompactionLagInMins": {
           "format": "int64",
           "type": "integer",
-          "description": "The maximum time a message will remain ineligible for compaction in the log. Only applicable for logs that are being compacted."
+          "description": "The minimum time a message will remain ineligible for compaction in the log. Only applicable for logs that are being compacted."
         },
         "tombstoneRetentionTimeInHours": {
           "format": "int32",
