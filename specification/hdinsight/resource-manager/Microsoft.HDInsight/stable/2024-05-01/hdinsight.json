@@ -1871,6 +1871,70 @@
         }
       }
     },
+    "ManagedIdentityProfile": {
+      "type": "object",
+      "description": "The details of managed identity.",
+      "required": [
+        "identityList"
+      ],
+      "properties": {
+        "identityList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedIdentitySpec"
+          },
+          "description": "The list of managed identity.",
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ManagedIdentitySpec": {
+      "type": "object",
+      "description": "The details of a managed identity.",
+      "required": [
+        "type",
+        "resourceId",
+        "clientId",
+        "objectId"
+      ],
+      "properties": {
+        "type": {
+          "description": "The type of managed identity.",
+          "type": "string",
+          "enum": [
+            "cluster",
+            "user",
+            "internal"
+          ],
+          "x-ms-enum": {
+            "name": "managedIdentityType",
+            "modelAsString": true
+          }
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "ResourceId of the managed identity.",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        },
+        "clientId": {
+          "type": "string",
+          "description": "ClientId of the managed identity.",
+          "pattern": "^[{(]?[0-9A-Fa-f]{8}[-]?(?:[0-9A-Fa-f]{4}[-]?){3}[0-9A-Fa-f]{12}[)}]?$"
+        },
+        "objectId": {
+          "type": "string",
+          "description": "ObjectId of the managed identity.",
+          "pattern": "^[{(]?[0-9A-Fa-f]{8}[-]?(?:[0-9A-Fa-f]{4}[-]?){3}[0-9A-Fa-f]{12}[)}]?$"
+        }
+      }
+    },
     "AuthorizationProfile": {
       "type": "object",
       "description": "Authorization profile with details of AAD user Ids and group Ids authorized for data plane access.",
@@ -2155,8 +2219,12 @@
           "$ref": "#/definitions/ClusterComponents"
         },
         "identityProfile": {
-          "description": "This property is required by Trino, Spark and Flink cluster but is optional for Kafka cluster.",
+          "description": "This is deprecated. Please use managed identity profile instead.",
           "$ref": "#/definitions/IdentityProfile"
+        },
+        "managedIdentityProfile": {
+          "description": "This property is required by Trino, Spark and Flink cluster but is optional for Kafka cluster.",
+          "$ref": "#/definitions/ManagedIdentityProfile"
         },
         "authorizationProfile": {
           "$ref": "#/definitions/AuthorizationProfile"
@@ -3170,11 +3238,6 @@
         },
         "diskStorage": {
           "$ref": "#/definitions/DiskStorageProfile"
-        },
-        "clusterIdentity": {
-          "description": "Identity of the internal service components inside the Kafka cluster.",
-          "$ref": "#/definitions/IdentityProfile",
-          "readOnly": true
         },
         "connectivityEndpoints": {
           "description": "Kafka bootstrap server and brokers related connectivity endpoints.",
