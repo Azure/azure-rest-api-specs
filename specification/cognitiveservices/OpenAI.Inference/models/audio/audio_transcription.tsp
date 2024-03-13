@@ -6,8 +6,10 @@ namespace Azure.OpenAI;
 using TypeSpec.Versioning;
 
 @doc("Defines available options for the underlying response format of output transcription information.")
-@added(ServiceApiVersions.v2023_09_01_Preview)
-enum AudioTranscriptionFormat {
+@added(ServiceApiVersions.v2024_02_15_Preview)
+union AudioTranscriptionFormat {
+  string,
+
   @doc("Use a response body that is a JSON object containing a single 'text' field for the transcription.")
   json: "json",
 
@@ -32,7 +34,7 @@ enum AudioTranscriptionFormat {
 @doc("""
 The configuration information for an audio transcription request.
 """)
-@added(ServiceApiVersions.v2023_09_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 model AudioTranscriptionOptions {
   @doc("""
   The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:
@@ -89,7 +91,7 @@ Extended information about a single segment of transcribed audio data.
 Segments generally represent roughly 5-10 seconds of speech. Segment boundaries typically occur between words but not
 necessarily sentences.
 """)
-@added(ServiceApiVersions.v2023_09_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 model AudioTranscriptionSegment {
   @doc("The 0-based index of this segment within a transcription.")
   id: int32;
@@ -136,7 +138,7 @@ model AudioTranscriptionSegment {
 }
 
 @doc("Result information for an operation that transcribed spoken audio into written text.")
-@added(ServiceApiVersions.v2023_09_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 model AudioTranscription {
   @doc("The transcribed text for the provided audio data.")
   text: string;

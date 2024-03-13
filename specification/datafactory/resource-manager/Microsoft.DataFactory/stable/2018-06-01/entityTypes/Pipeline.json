@@ -2296,6 +2296,22 @@
         }
       }
     },
+    "PostgreSqlV2Source": {
+      "description": "A copy activity source for PostgreSQL databases.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "SybaseSource": {
       "description": "A copy activity source for Sybase databases.",
       "type": "object",
