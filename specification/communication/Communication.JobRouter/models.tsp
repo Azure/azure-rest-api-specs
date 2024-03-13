@@ -69,258 +69,288 @@ model RouterReturnConditionalResponseHeaders<TVersionAdded extends EnumMember | 
 }
 
 @doc("Describes the various status of a job.")
-enum RouterJobStatus {
+union RouterJobStatus {
+  string,
+
   @doc("Job is waiting to be classified.")
-  pendingClassification,
+  "pendingClassification",
 
   @doc("Job has been queued.")
-  queued,
+  "queued",
 
   @doc("Job has been assigned to a worker.")
-  assigned,
+  "assigned",
 
   @doc("Job has been completed by a worker.")
-  completed,
+  "completed",
 
   @doc("Job has been closed by a worker.")
-  closed,
+  "closed",
 
   @doc("Job has been cancelled.")
-  cancelled,
+  "cancelled",
 
   @doc("Classification process failed for the job.")
-  classificationFailed,
+  "classificationFailed",
 
   @doc("Job has been created.")
-  created,
+  "created",
 
   @doc("Job has been created but not been scheduled yet.")
-  pendingSchedule,
+  "pendingSchedule",
 
   @doc("Job has been scheduled successfully.")
-  scheduled,
+  "scheduled",
 
   @doc("Job scheduling failed.")
-  scheduleFailed,
+  "scheduleFailed",
 
   @doc("Job is in a suspended state and waiting for an update.")
-  waitingForActivation,
+  "waitingForActivation",
 }
 
 @doc("Describes supported operations on label values.")
-enum LabelOperator {
+union LabelOperator {
+  string,
+
   @doc("Equal.")
-  equal,
+  "equal",
 
   @doc("Not Equal.")
-  notEqual,
+  "notEqual",
 
   @doc("Less than.")
-  lessThan,
+  "lessThan",
 
   @doc("Less than or equal.")
-  lessThanOrEqual,
+  "lessThanOrEqual",
 
   @doc("Greater than.")
-  greaterThan,
+  "greaterThan",
 
   @doc("Greater than or equal.")
-  greaterThanOrEqual,
+  "greaterThanOrEqual",
 }
 
 @doc("Describes the status of a worker selector.")
-enum RouterWorkerSelectorStatus {
+union RouterWorkerSelectorStatus {
+  string,
+
   @doc("Worker selector is valid.")
-  active,
+  "active",
 
   @doc("Worker selector is not valid.")
-  expired,
+  "expired",
 }
 
 @doc("Enums used to filters jobs by status.")
-enum RouterJobStatusSelector {
+union RouterJobStatusSelector {
+  string,
+
   @doc("Default")
-  all,
+  all: "all",
 
   @doc("Job is waiting to be classified.")
-  pendingClassification,
+  pendingClassification: "pendingClassification",
 
   @doc("Job has been queued.")
-  queued,
+  queued: "queued",
 
   @doc("Job has been assigned to a worker.")
-  assigned,
+  assigned: "assigned",
 
   @doc("Job has been completed by a worker.")
-  completed,
+  completed: "completed",
 
   @doc("Job has been closed by a worker.")
-  closed,
+  closed: "closed",
 
   @doc("Job has been cancelled.")
-  cancelled,
+  cancelled: "cancelled",
 
   @doc("Classification process failed for the job.")
-  classificationFailed,
+  classificationFailed: "classificationFailed",
 
   @doc("Job has been created.")
-  created,
+  created: "created",
 
   @doc("Job has been created but not been scheduled yet.")
-  pendingSchedule,
+  pendingSchedule: "pendingSchedule",
 
   @doc("Job has been scheduled successfully.")
-  scheduled,
+  scheduled: "scheduled",
 
   @doc("Job scheduling failed.")
-  scheduleFailed,
+  scheduleFailed: "scheduleFailed",
 
   @doc("Job is in a suspended state and waiting for an update.")
-  waitingForActivation,
+  waitingForActivation: "waitingForActivation",
 
   @doc("Job is in a state of PendingClassification or Queued or Assigned or ClassificationFailed or Completed or PendingSchedule or Scheduled or ScheduleFailed or WaitingForActivation.")
-  active,
+  active: "active",
 }
 
 @doc("Enums for worker states.")
-enum RouterWorkerState {
+union RouterWorkerState {
+  string,
+
   @doc("Worker is active and available to take offers.")
-  active,
+  "active",
 
   @doc("Worker is not active, if there are existing offers they are being revoked. No new offers are sent.")
-  draining,
+  "draining",
 
   @doc("Worker is not active. No new offers are sent.")
-  inactive,
+  "inactive",
 }
 
 @doc("Enums used to filters workers by state")
-enum RouterWorkerStateSelector {
+union RouterWorkerStateSelector {
+  string,
+
   @doc("Worker is active and available to take offers.")
-  active,
+  active: "active",
 
   @doc("Worker is not active, if there are existing offers they are being revoked. No new offers are sent.")
-  draining,
+  draining: "draining",
 
   @doc("Worker is not active. No new offers are sent.")
-  inactive,
+  inactive: "inactive",
 
   @doc("Worker is active or draining or inactive.")
-  all,
+  all: "all",
 }
 
 @doc("Supported parameters for scoring workers used with BestWorkerMode.")
-enum ScoringRuleParameterSelector {
+union ScoringRuleParameterSelector {
+  string,
+
   @doc("Parameter to add job labels to scoring payload.  Property is sent as `job`.")
-  jobLabels,
+  jobLabels: "jobLabels",
 
   @doc("Parameter to add worker selectors from a job to scoring payload.  Property is sent as `selectors`.")
-  workerSelectors,
+  workerSelectors: "workerSelectors",
 }
 
 @doc("Available expression languages that can be configured.")
-enum ExpressionRouterRuleLanguage {
+union ExpressionRouterRuleLanguage {
+  string,
+
   @doc("PowerFx")
-  powerFx,
+  "powerFx",
 }
 
 @doc("Discriminators for supported matching mode types.")
-enum JobMatchingModeKind {
+union JobMatchingModeKind {
+  string,
+
   @doc("Discriminator value for QueueAndMatchMode.")
-  queueAndMatch,
+  queueAndMatch: "queueAndMatch",
 
   @doc("Discriminator value for ScheduleAndSuspendMode.")
-  scheduleAndSuspend,
+  scheduleAndSuspend: "scheduleAndSuspend",
 
   @doc("Discriminator value for SuspendMode.")
-  suspend,
+  suspend: "suspend",
 }
 
 @doc("Discriminators for supported router rule types.")
-enum RouterRuleKind {
+union RouterRuleKind {
+  string,
+
   @doc("Discriminator value for DirectMapRouterRule.")
-  directMap,
+  directMap: "directMap",
 
   @doc("Discriminator value for ExpressionRouterRule.")
-  expression,
+  expression: "expression",
 
   @doc("Discriminator value for FunctionRouterRule.")
-  function,
+  function: "function",
 
   @doc("Discriminator value for StaticRouterRule.")
-  static,
+  static: "static",
 
   @doc("Discriminator value for WebhookRouterRule.")
-  webhook,
+  webhook: "webhook",
 }
 
 @doc("Discriminators for supported distribution mode types.")
-enum DistributionModeKind {
+union DistributionModeKind {
+  string,
+
   @doc("Discriminator value for BestWorkerMode.")
-  bestWorker,
+  bestWorker: "bestWorker",
 
   @doc("Discriminator value for LongestIdleMode.")
-  longestIdle,
+  longestIdle: "longestIdle",
 
   @doc("Discriminator value for RoundRobinMode.")
-  roundRobin,
+  roundRobin: "roundRobin",
 }
 
 @doc("Discriminators for supported exception trigger types.")
-enum ExceptionTriggerKind {
+union ExceptionTriggerKind {
+  string,
+
   @doc("Discriminator value for QueueLengthExceptionTrigger.")
-  queueLength,
+  queueLength: "queueLength",
 
   @doc("Discriminator value for WaitTimeExceptionTrigger.")
-  waitTime,
+  waitTime: "waitTime",
 }
 
 @doc("Discriminators for supported exception action types.")
-enum ExceptionActionKind {
+union ExceptionActionKind {
+  string,
+
   @doc("Discriminator value for CancelExceptionAction.")
-  cancel,
+  cancel: "cancel",
 
   @doc("Discriminator value for ManualReclassifyExceptionAction.")
-  manualReclassify,
+  manualReclassify: "manualReclassify",
 
   @doc("Discriminator value for ReclassifyExceptionAction.")
-  reclassify,
+  reclassify: "reclassify",
 }
 
 @doc("Discriminators for supported queue selector attachment types.")
-enum QueueSelectorAttachmentKind {
+union QueueSelectorAttachmentKind {
+  string,
+
   @doc("Discriminator value for ConditionalQueueSelectorAttachment.")
-  conditional,
+  conditional: "conditional",
 
   @doc("Discriminator value for PassThroughQueueSelectorAttachment.")
-  passThrough,
+  passThrough: "passThrough",
 
   @doc("Discriminator value for RuleEngineQueueSelectorAttachment.")
-  ruleEngine,
+  ruleEngine: "ruleEngine",
 
   @doc("Discriminator value for StaticQueueSelectorAttachment.")
-  static,
+  static: "static",
 
   @doc("Discriminator value for WeightedAllocationQueueSelectorAttachment.")
-  weightedAllocation,
+  weightedAllocation: "weightedAllocation",
 }
 
 @doc("Discriminators for supported worker selector attachment types.")
-enum WorkerSelectorAttachmentKind {
+union WorkerSelectorAttachmentKind {
+  string,
+
   @doc("Discriminator value for ConditionalWorkerSelectorAttachment.")
-  conditional,
+  conditional: "conditional",
 
   @doc("Discriminator value for PassThroughWorkerSelectorAttachment.")
-  passThrough,
+  passThrough: "passThrough",
 
   @doc("Discriminator value for RuleEngineWorkerSelectorAttachment.")
-  ruleEngine,
+  ruleEngine: "ruleEngine",
 
   @doc("Discriminator value for StaticWorkerSelectorAttachment.")
-  static,
+  static: "static",
 
   @doc("Discriminator value for WeightedAllocationWorkerSelectorAttachment.")
-  weightedAllocation,
+  weightedAllocation: "weightedAllocation",
 }
 
 @projectedName("java", "ClassificationPolicyInternal")
