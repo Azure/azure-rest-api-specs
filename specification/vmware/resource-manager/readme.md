@@ -145,13 +145,13 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/publicIPs/{publicIPId}"].delete
     
   - code: ConsistentPatchProperties
-    reason: The properties are consistent for the discriminator hierarchy.
+    reason: The PlacementPolicies_Update properties are consistent for the discriminator hierarchy.
     from: vmware.json
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].patch.parameters.vmMembers
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].patch.parameters.hostMembers
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].patch.parameters.affinityStrength
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].patch.parameters.azureHybridBenefitType
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].patch.parameters.placementPolicyUpdate.vmMembers
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].patch.parameters.placementPolicyUpdate.hostMembers
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].patch.parameters.placementPolicyUpdate.affinityStrength
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].patch.parameters.placementPolicyUpdate.azureHybridBenefitType
 
   - code: DefinitionsPropertiesNamesCamelCase
     reason: Breaking change to update existing property names
@@ -181,17 +181,18 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"].patch
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}"].patch
 
+  - code: LroPatch202
+    reason: PrivateClouds_Update and Clusters_Update respond with 201 instead of 202. Changing it is breaking.
+    from: vmware.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"].patch
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}"].patch
+
   - code: PostResponseCodes
     reason: PrivateClouds_RotateNsxtPassword & PrivateClouds_RotateVcenterPassword respond with 202 & 204. Changing it is breaking.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/rotateNsxtPassword"].post
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/rotateVcenterPassword"].post
-
-  # - code: UnSupportedPatchProperties
-  #   reason: Breaking change to remove name or type properties
-  #   from: vmware.json
-    # where: 
-    #   - $ $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/segments/{segmentId}"].patch
 
   - code: XmsLongRunningOperationOptions
     reason: This option is designed for cases where the server does NOT follow ARM guidelines
@@ -221,12 +222,10 @@ suppressions:
     reasons: ArmResourceDeleteAsync is still being used. Moving to ArmResourceDeleteWithoutOkAsync is breaking.
 
   - code: PatchBodyParametersSchema
-    reasons: false positives
-    # https://github.com/Azure/azure-sdk-tools/issues/7802
+    reasons: False positives. https://github.com/Azure/azure-sdk-tools/issues/7802
 
   - code: EvenSegmentedPathForPutOperation
-    reasons: false positives
-    # https://github.com/Azure/azure-sdk-tools/issues/7801
+    reasons: False positives. https://github.com/Azure/azure-sdk-tools/issues/7801
 
 ```
 
