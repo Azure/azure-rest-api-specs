@@ -3,7 +3,7 @@
 These settings apply only when `--ruby` is specified on the command line.
 
 ```yaml
-package-name: azure_mgmt_azurestackhci
+package-name: azure_mgmt_stackhcivm
 package-version: 2020-03-01-preview
 azure-arm: true
 ```
