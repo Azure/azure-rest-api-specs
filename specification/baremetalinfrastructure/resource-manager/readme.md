@@ -26,18 +26,27 @@ These are the global settings for the BareMetalInfrastructure API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-08
+tag: package-preview-2023-11
 ```
 
 
+### Tag: package-preview-2023-11
+
+These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-11'
+input-file:
+  - Microsoft.BareMetalInfrastructure/preview/2023-11-01-preview/baremetalinfrastructure.json
+```
 ### Tag: package-preview-2023-08
 
 These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-08'
+``` yaml $(tag) == 'package-preview-2023-08'
 input-file:
   - Microsoft.BareMetalInfrastructure/preview/2023-08-04-preview/baremetalinfrastructure.json
 ```
+
 ### Tag: package-2023-04-06
 
 These settings apply only when `--tag=package-2023-04-06` is specified on the command line.

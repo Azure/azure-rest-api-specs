@@ -39,6 +39,8 @@ interface ProxyResourceOperationsDevice<
     TResource,
     TListParameters & BaseParameters<TResource>
   >;
+  #suppress "deprecated" "Existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
   delete is ArmResourceDeleteAsync<Device>;
   @doc("Update a Device. Use '.unassigned' or '.default' for the device group and product names to move a device to the catalog level.")
   update is CustomArmResourcePatchAsync<Device, DevicePatchProperties>;
@@ -47,6 +49,32 @@ interface ProxyResourceOperationsDevice<
 @armResourceOperations
 interface Devices extends ProxyResourceOperationsDevice<Device> {
   @autoRoute
+  @sharedRoute
+  @removed(Versions.v2024_04_01)
+  @renamedFrom(Versions.v2024_04_01, "generateCapabilityImage")
+  @armResourceAction(Device)
+  @action("generateCapabilityImage")
+  @post
+  @doc("Generates the capability image for the device. Use '.unassigned' or '.default' for the device group and product names to generate the image for a device that does not belong to a specific device group and product.")
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "location",
+    }
+  )
+  deprecatedGenerateCapabilityImage(
+    ...ResourceInstanceParameters<Device>,
+
+    @doc("Generate capability image request body.")
+    @body
+    generateDeviceCapabilityRequest: GenerateCapabilityImageRequest,
+  ): ArmResponse<SignedCapabilityImageResponse> | ArmAcceptedResponse | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "preview api"
+  @autoRoute
+  @sharedRoute
+  @added(Versions.v2024_04_01)
   @armResourceAction(Device)
   @post
   @doc("Generates the capability image for the device. Use '.unassigned' or '.default' for the device group and product names to generate the image for a device that does not belong to a specific device group and product.")
@@ -63,7 +91,7 @@ interface Devices extends ProxyResourceOperationsDevice<Device> {
     @doc("Generate capability image request body.")
     @body
     generateDeviceCapabilityRequest: GenerateCapabilityImageRequest,
-  ): ArmResponse<SignedCapabilityImageResponse> | ArmAcceptedResponse | ErrorResponse;
+  ): ArmResponse<SignedCapabilityImageResponse> | ArmAcceptedLroResponse | ErrorResponse;
 }
 
 @doc("The properties of device")
@@ -112,12 +140,14 @@ model SignedCapabilityImageResponse {
 }
 
 @doc("Capability image type")
-enum CapabilityType {
+union CapabilityType {
+  string,
+
   /** Application development capability */
-  ApplicationDevelopment,
+  "ApplicationDevelopment",
 
   /** Field servicing capability */
-  FieldServicing,
+  "FieldServicing",
 }
 
 @doc("The properties of device patch")

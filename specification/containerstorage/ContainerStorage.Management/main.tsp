@@ -14,11 +14,17 @@ using Azure.ResourceManager.Foundations;
 @armProviderNamespace
 @service({
   title: "Azure-ContainerStorageRP",
-  version: "2023-07-01-preview",
 })
+@versioned(Versions)
 @doc("Azure Container Storage Resource Provider API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.ContainerStorage;
+
+/** Api versions */
+enum Versions {
+  /** 2023-07-01-preview preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  `2023-07-01-preview`,
+}
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -66,7 +72,9 @@ model PoolProperties {
 }
 
 @doc("Availability Zones")
-enum Zone {
+union Zone {
+  string,
+
   @doc("First availability zone.")
   Zone1: "1",
 
@@ -104,12 +112,14 @@ model PoolType {
 }
 
 @doc("Reclaim policy")
-enum ReclaimPolicy {
+union ReclaimPolicy {
+  string,
+
   @doc("Delete resource")
-  Delete,
+  "Delete",
 
   @doc("Retain resource")
-  Retain,
+  "Retain",
 }
 
 @doc("Model for disk for that pool is using")
@@ -149,27 +159,29 @@ model AzureDisk {
 }
 
 @doc("SKU of the underlying managed disk")
-enum AzureDiskSkuName {
+union AzureDiskSkuName {
+  string,
+
   @doc("Premium_LRS SKU")
-  Premium_LRS,
+  "Premium_LRS",
 
   @doc("Standard_LRS SKU")
-  Standard_LRS,
+  "Standard_LRS",
 
   @doc("StandardSSD_LRS SKU")
-  StandardSSD_LRS,
+  "StandardSSD_LRS",
 
   @doc("UltraSSD_LRS SKU")
-  UltraSSD_LRS,
+  "UltraSSD_LRS",
 
   @doc("Premium_ZRS SKU")
-  Premium_ZRS,
+  "Premium_ZRS",
 
   @doc("PremiumV2_LRS SKU")
-  PremiumV2_LRS,
+  "PremiumV2_LRS",
 
   @doc("StandardSSD_ZRS SKU")
-  StandardSSD_ZRS,
+  "StandardSSD_ZRS",
 }
 
 @doc("Encryption key properties for the pool.")
@@ -190,12 +202,14 @@ model ElasticSan {
 
 /** Sku Name enum type */
 @doc("ElasticSAN SKUs")
-enum ElasticSanSkuName {
+union ElasticSanSkuName {
+  string,
+
   @doc("Premium_LRS SKU")
-  Premium_LRS,
+  "Premium_LRS",
 
   @doc("Premium_ZRS SKU")
-  Premium_ZRS,
+  "Premium_ZRS",
 }
 
 @doc("Ephemeral Disk Pool Properties")
@@ -210,20 +224,21 @@ model EphemeralDisk {
 
 @doc("Provisioning state of the resource.")
 @Azure.Core.lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("The resource is being provisioned")
-  Provisioning,
+  Provisioning: "Provisioning",
 
   @doc("The resource is updating")
-  Updating,
+  Updating: "Updating",
 
   @doc("The resource is being deleted")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("The resource create request has been accepted")
-  Accepted,
+  Accepted: "Accepted",
 }
 
 @doc("Status of the resource")
@@ -236,15 +251,17 @@ model ResourceOperationalStatus {
 }
 
 @doc("State of the resource.")
-enum ResourceOperationStatusState {
+union ResourceOperationStatusState {
+  string,
+
   @doc("The resource is pending.")
-  Pending,
+  "Pending",
 
   @doc("The resource is available.")
-  Available,
+  "Available",
 
   @doc("The resource is unavailable.")
-  Unavailable,
+  "Unavailable",
 }
 
 // END POOL
@@ -273,6 +290,7 @@ model VolumeProperties {
   @visibility("read")
   status?: ResourceOperationalStatus;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("String KV pairs indicating labels")
   labels: Record<string>;
 
@@ -353,18 +371,20 @@ model AssignmentStatus {
 }
 
 @doc("Status of the assignment resource")
-enum AssignmentStatusState {
+union AssignmentStatusState {
+  string,
+
   @doc("The assignment of the pool to the resource is in progress")
-  Assigning,
+  "Assigning",
 
   @doc("The assignment to the pool was successful.")
-  Assigned,
+  "Assigned",
 
   @doc("The pool is being unassigned.")
-  Unassigning,
+  "Unassigning",
 
   @doc("The operation of assigning or unassigning the pool failed.")
-  Failed,
+  "Failed",
 }
 
 scalar AssignmentId
