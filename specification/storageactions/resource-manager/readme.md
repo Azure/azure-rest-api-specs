@@ -29,6 +29,11 @@ openapi-type: arm
 tag: package-2023-01-01
 ```
 
+``` yaml
+modelerfour:
+  flatten-models: false
+```
+
 ### Tag: package-2023-01-01
 
 These settings apply only when `--tag=package-2023-01-01` is specified on the command line.

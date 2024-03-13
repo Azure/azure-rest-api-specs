@@ -1171,6 +1171,16 @@
           "description": "The type of copy behavior for copy sink.",
           "type": "object",
           "x-ms-format": "dfe-string"
+        },
+        "metadata": {
+          "type": "array",
+          "description": "Specify the custom metadata to be added to sink data. Type: array of objects (or Expression with resultType array of objects).",
+          "items": {
+            "$ref": "#/definitions/MetadataItem"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "additionalProperties": {
@@ -2271,6 +2281,22 @@
       }
     },
     "PostgreSqlSource": {
+      "description": "A copy activity source for PostgreSQL databases.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "PostgreSqlV2Source": {
       "description": "A copy activity source for PostgreSQL databases.",
       "type": "object",
       "allOf": [
@@ -3729,6 +3755,22 @@
         }
       }
     },
+    "GoogleBigQueryV2Source": {
+      "description": "A copy activity Google BigQuery service source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "GreenplumSource": {
       "description": "A copy activity Greenplum Database source.",
       "type": "object",
@@ -4283,6 +4325,29 @@
         "exportSettings"
       ]
     },
+    "SnowflakeV2Source": {
+      "description": "A copy activity snowflake source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Snowflake Sql query. Type: string (or Expression with resultType string)."
+        },
+        "exportSettings": {
+          "$ref": "#/definitions/SnowflakeExportCopyCommand",
+          "description": "Snowflake export settings."
+        }
+      },
+      "required": [
+        "exportSettings"
+      ]
+    },
     "ExportSettings": {
       "description": "Export command settings.",
       "discriminator": "type",
@@ -4406,6 +4471,79 @@
           "type": "object",
           "x-ms-format": "dfe-string",
           "description": "Specify the timestamp format for csv in Azure Databricks Delta Lake Copy. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "WarehouseSource": {
+      "description": "A copy activity Microsoft Fabric Warehouse source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "sqlReaderQuery": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Microsoft Fabric Warehouse reader query. Type: string (or Expression with resultType string)."
+        },
+        "sqlReaderStoredProcedureName": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Name of the stored procedure for a Microsoft Fabric Warehouse source. This cannot be used at the same time as SqlReaderQuery. Type: string (or Expression with resultType string)."
+        },
+        "storedProcedureParameters": {
+          "type": "object",
+          "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\". Type: object (or Expression with resultType object), itemType: StoredProcedureParameter."
+        },
+        "isolationLevel": {
+          "x-ms-format": "dfe-string",
+          "description": "Specifies the transaction locking behavior for the Microsoft Fabric Warehouse source. Allowed values: ReadCommitted/ReadUncommitted/RepeatableRead/Serializable/Snapshot. The default value is ReadCommitted. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for Sql read in parallel. Possible values include: \"None\", \"PhysicalPartitionsOfTable\", \"DynamicRange\".",
+          "type": "object"
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for Sql source partitioning.",
+          "$ref": "#/definitions/SqlPartitionSettings"
+        }
+      }
+    },
+    "WarehouseSink": {
+      "description": "A copy activity Microsoft Fabric Warehouse sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "preCopyScript": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "SQL pre-copy script. Type: string (or Expression with resultType string)."
+        },
+        "allowCopyCommand": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Indicates to use Copy Command to copy data into SQL Data Warehouse. Type: boolean (or Expression with resultType boolean)."
+        },
+        "copyCommandSettings": {
+          "description": "Specifies Copy Command related settings when allowCopyCommand is true.",
+          "$ref": "#/definitions/DWCopyCommandSettings"
+        },
+        "tableOption": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
+        },
+        "writeBehavior": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Write behavior when copying data into azure Microsoft Fabric Data Warehouse. Type: DWWriteBehaviorEnum (or Expression with resultType DWWriteBehaviorEnum)"
         }
       }
     },
@@ -5131,6 +5269,26 @@
       }
     },
     "SnowflakeSink": {
+      "description": "A copy activity snowflake sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "preCopyScript": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "SQL pre-copy script. Type: string (or Expression with resultType string)."
+        },
+        "importSettings": {
+          "$ref": "#/definitions/SnowflakeImportCopyCommand",
+          "description": "Snowflake import settings."
+        }
+      }
+    },
+    "SnowflakeV2Sink": {
       "description": "A copy activity snowflake sink.",
       "type": "object",
       "allOf": [
@@ -7007,8 +7165,11 @@
         },
         "headers": {
           "type": "object",
-          "x-ms-format": "dfe-key-value-pairs",
-          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: dictionary (or Expression with resultType dictionary)."
+          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string).",
+          "additionalProperties": {
+            "type": "string",
+            "x-ms-format": "dfe-string"
+          }
         },
         "body": {
           "type": "object",
@@ -8045,8 +8206,11 @@
         },
         "headers": {
           "type": "object",
-          "x-ms-format": "dfe-key-value-pairs",
-          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: dictionary (or Expression with resultType dictionary)."
+          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string).",
+          "additionalProperties": {
+            "type": "string",
+            "x-ms-format": "dfe-string"
+          }
         },
         "body": {
           "type": "object",
@@ -8111,8 +8275,11 @@
         },
         "headers": {
           "type": "object",
-          "x-ms-format": "dfe-key-value-pairs",
-          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: dictionary (or Expression with resultType dictionary)."
+          "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string).",
+          "additionalProperties": {
+            "type": "string",
+            "x-ms-format": "dfe-string"
+          }
         },
         "body": {
           "type": "object",
@@ -8915,6 +9082,170 @@
         "type",
         "referenceName"
       ]
+    },
+    "SalesforceV2Source": {
+      "description": "A copy activity Salesforce V2 source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "SOQLQuery": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        },
+        "includeDeletedObjects": {
+          "description": "This property control whether query result contains Deleted objects. Default is false. Type: boolean (or Expression with resultType boolean).",
+          "type": "object",
+          "x-ms-format": "dfe-bool"
+        }
+      }
+    },
+    "SalesforceServiceCloudV2Source": {
+      "description": "A copy activity Salesforce Service Cloud V2 source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "SOQLQuery": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        },
+        "includeDeletedObjects": {
+          "description": "This property control whether query result contains Deleted objects. Default is false. Type: boolean (or Expression with resultType boolean).",
+          "type": "object",
+          "x-ms-format": "dfe-bool"
+        },
+        "additionalColumns": {
+          "type": "object",
+          "description": "Specifies the additional columns to be added to source data. Type: array of objects(AdditionalColumns) (or Expression with resultType array of objects)."
+        }
+      }
+    },
+    "SalesforceV2Sink": {
+      "description": "A copy activity Salesforce V2 sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "description": "The write behavior for the operation. Default is Insert.",
+          "type": "string",
+          "enum": [
+            "Insert",
+            "Upsert"
+          ],
+          "x-ms-enum": {
+            "name": "SalesforceV2SinkWriteBehavior",
+            "modelAsString": true
+          }
+        },
+        "externalIdFieldName": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name of the external ID field for upsert operation. Default value is 'Id' column. Type: string (or Expression with resultType string)."
+        },
+        "ignoreNullValues": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "The flag indicating whether or not to ignore null values from input dataset (except key fields) during write operation. Default value is false. If set it to true, it means ADF will leave the data in the destination object unchanged when doing upsert/update operation and insert defined default value when doing insert operation, versus ADF will update the data in the destination object to NULL when doing upsert/update operation and insert NULL value when doing insert operation. Type: boolean (or Expression with resultType boolean)."
+        }
+      }
+    },
+    "SalesforceServiceCloudV2Sink": {
+      "description": "A copy activity Salesforce Service Cloud V2 sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "description": "The write behavior for the operation. Default is Insert.",
+          "type": "string",
+          "enum": [
+            "Insert",
+            "Upsert"
+          ],
+          "x-ms-enum": {
+            "name": "SalesforceV2SinkWriteBehavior",
+            "modelAsString": true
+          }
+        },
+        "externalIdFieldName": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name of the external ID field for upsert operation. Default value is 'Id' column. Type: string (or Expression with resultType string)."
+        },
+        "ignoreNullValues": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "The flag indicating whether or not to ignore null values from input dataset (except key fields) during write operation. Default value is false. If set it to true, it means ADF will leave the data in the destination object unchanged when doing upsert/update operation and insert defined default value when doing insert operation, versus ADF will update the data in the destination object to NULL when doing upsert/update operation and insert NULL value when doing insert operation. Type: boolean (or Expression with resultType boolean)."
+        }
+      }
+    },
+    "ServiceNowV2Source": {
+      "description": "A copy activity ServiceNowV2 server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "expression": {
+          "type": "object",
+          "description": "Expression to filter data from source.",
+          "$ref": "#/definitions/ExpressionV2"
+        }
+      }
+    },
+    "ExpressionV2": {
+      "description": "Nested representation of a complex expression.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "x-ms-enum": {
+            "name": "ExpressionV2Type",
+            "modelAsString": true
+          },
+          "enum": [
+            "Constant",
+            "Field",
+            "Unary",
+            "Binary"
+          ],
+          "type": "string",
+          "description": "Type of expressions supported by the system. Type: string."
+        },
+        "value": {
+          "description": "Value for Constant/Field Type: string.",
+          "type": "string"
+        },
+        "operator": {
+          "description": "Expression operator value Type: string.",
+          "type": "string"
+        },
+        "operands": {
+          "description": "List of nested expressions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressionV2",
+            "description": "Type: ExpressionV2."
+          }
+        }
+      }
     }
   }
 }

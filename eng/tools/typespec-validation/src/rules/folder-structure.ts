@@ -47,10 +47,7 @@ export class FolderStructureRule implements Rule {
     }
 
     // Verify second level folder is capitalized after each '.'
-    if (
-      /(^|\. *)([a-z])/g.test(packageFolder) &&
-      !["data-plane", "resource-manager"].includes(packageFolder)
-    ) {
+    if (/(^|\. *)([a-z])/g.test(packageFolder)) {
       success = false;
       errorOutput += `Invalid folder name. Folders under specification/${folderStruct[1]} must be capitalized after each '.'\n`;
     }
@@ -64,22 +61,25 @@ export class FolderStructureRule implements Rule {
     }
 
     // Verify tspconfig, main.tsp, examples/
-    let containsMinStruct =
-      (await host.checkFileExists(path.join(folder, "main.tsp"))) ||
-      (await host.checkFileExists(path.join(folder, "client.tsp")));
+    let mainExists = await host.checkFileExists(path.join(folder, "main.tsp"));
+    let clientExists = await host.checkFileExists(path.join(folder, "client.tsp"));
 
-    if (await host.checkFileExists(path.join(folder, "main.tsp"))) {
-      containsMinStruct =
-        containsMinStruct && (await host.checkFileExists(path.join(folder, "examples")));
-    }
-
-    if (!packageFolder.includes("Shared")) {
-      containsMinStruct =
-        containsMinStruct && (await host.checkFileExists(path.join(folder, "tspconfig.yaml")));
-    }
-    if (!containsMinStruct) {
+    if (!mainExists && !clientExists) {
+      errorOutput += `Invalid folder structure: Spec folder must contain main.tsp or client.tsp.`;
       success = false;
-      errorOutput += `Invalid folder structure. Package must contain main.tsp or client.tsp, tspconfig.yaml, and examples folder if there's main.tsp.`;
+    }
+
+    if (mainExists && !(await host.checkFileExists(path.join(folder, "examples")))) {
+      errorOutput += `Invalid folder structure: Spec folder with main.tsp must contain examples folder.`;
+      success = false;
+    }
+
+    if (
+      !packageFolder.includes("Shared") &&
+      !(await host.checkFileExists(path.join(folder, "tspconfig.yaml")))
+    ) {
+      errorOutput += `Invalid folder structure: Spec folder must contain tspconfig.yaml.`;
+      success = false;
     }
 
     return {

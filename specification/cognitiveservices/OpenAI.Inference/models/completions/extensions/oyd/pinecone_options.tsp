@@ -1,4 +1,5 @@
 import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
 import "./../../azure_chat_extensions.tsp";
 import "./common_options.tsp";
 import "./vector_search.tsp";
@@ -6,11 +7,12 @@ import "./vector_search.tsp";
 namespace Azure.OpenAI;
 
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("""
-A specific representation of configurable options for Elasticsearch when using it as an Azure OpenAI chat
+A specific representation of configurable options for Pinecone when using it as an Azure OpenAI chat
 extension.
 """)
 model PineconeChatExtensionConfiguration
@@ -25,55 +27,54 @@ model PineconeChatExtensionConfiguration
   parameters: PineconeChatExtensionParameters;
 }
 
-@added(ServiceApiVersions.v2023_12_01_Preview)
-@doc("Parameters for configuring Azure OpenAI Pinecone chat extensions.")
+@added(ServiceApiVersions.v2024_02_15_Preview)
+@doc("Parameters for configuring Azure OpenAI Pinecone chat extensions. The supported authentication type is APIKey.")
 model PineconeChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
 
   @doc("The environment name of Pinecone.")
-  @projectedName("csharp", "EnvironmentName")
+  @clientName("EnvironmentName", "csharp")
   environment: string;
 
   @doc("The name of the Pinecone database index.")
+  @encodedName("application/json", "index_name")
   indexName: string;
 
   @doc("Customized field mapping behavior to use when interacting with the search index.")
-  @projectedName("csharp", "FieldMappingOptions")
+  @clientName("FieldMappingOptions", "csharp")
+  @encodedName("application/json", "fields_mapping")
   fieldsMapping: PineconeFieldMappingOptions;
 
   @doc("The embedding dependency for vector search.")
-  embeddingDependency?: OnYourDataVectorizationSource;
+  @encodedName("application/json", "embedding_dependency")
+  embeddingDependency: OnYourDataVectorizationSource;
 }
 
 @doc("Optional settings to control how fields are processed when using a configured Pinecone resource.")
-@added(ServiceApiVersions.v2023_08_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 model PineconeFieldMappingOptions {
   @doc("The name of the index field to use as a title.")
-  @projectedName("csharp", "TitleFieldName")
+  @clientName("TitleFieldName", "csharp")
+  @encodedName("application/json", "title_field")
   titleField?: string;
 
   @doc("The name of the index field to use as a URL.")
-  @projectedName("csharp", "UrlFieldName")
+  @clientName("UrlFieldName", "csharp")
+  @encodedName("application/json", "url_field")
   urlField?: string;
 
   @doc("The name of the index field to use as a filepath.")
-  @projectedName("csharp", "FilepathFieldName")
+  @clientName("FilepathFieldName", "csharp")
+  @encodedName("application/json", "filepath_field")
   filepathField?: string;
 
   @doc("The names of index fields that should be treated as content.")
-  @projectedName("csharp", "ContentFieldNames")
-  contentFields?: string[];
+  @clientName("ContentFieldNames", "csharp")
+  @encodedName("application/json", "content_fields")
+  contentFields: string[];
 
   @doc("The separator pattern that content fields should use.")
-  @projectedName("csharp", "ContentFieldSeparator")
+  @clientName("ContentFieldSeparator", "csharp")
+  @encodedName("application/json", "content_fields_separator")
   contentFieldsSeparator?: string;
-
-  @doc("The names of fields that represent vector data.")
-  @projectedName("csharp", "VectorFieldNames")
-  vectorFields?: string[];
-
-  @added(ServiceApiVersions.v2023_12_01_Preview)
-  @doc("The names of fields that represent image vector data.")
-  @projectedName("csharp", "ImageVectorFieldNames")
-  imageVectorFields?: string[];
 }
