@@ -423,16 +423,19 @@ model GalleryImageVersionStorageProfile {
   osDiskImage?: GalleryOSDiskImage;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "GalleryOSDiskImage is the correct case."
-@doc("This is the OS disk image.")
-model GalleryOSDiskImage extends GalleryDiskImage {}
-
 @doc("This is the disk image base class.")
 model GalleryDiskImage {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is a short form."
   @doc("This property indicates the size of the VHD to be created.")
   @visibility("read")
   sizeInMB?: int64;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "OS is a short form. GalleryOSDiskImage is the correct case."
+@doc("This is the OS disk image.")
+model GalleryOSDiskImage {
+  ...GalleryDiskImage,
+  // Add additional properties specific to GalleryOSDiskImage if needed
 }
 
 @doc("The observed state of gallery images")

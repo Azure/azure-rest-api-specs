@@ -24,6 +24,7 @@ model AttestationStatus extends ProxyResourceBase {
   @key("attestationStatus")
   @segment("attestationStatus")
   @visibility("read")
+  @path
   name: string;
 
   @doc("Attestation status properties.")

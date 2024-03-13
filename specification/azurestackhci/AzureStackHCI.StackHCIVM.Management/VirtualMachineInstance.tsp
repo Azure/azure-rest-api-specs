@@ -24,6 +24,7 @@ model VirtualMachineInstance extends ExtensionResourceBase {
   @key("virtualMachineInstance")
   @segment("virtualMachineInstances")
   @visibility("read")
+  @path
   name: string;
 
   @doc("The extendedLocation of the resource.")

@@ -26,6 +26,7 @@ model HybridIdentityMetadata extends ProxyResourceBase {
   @key("hybridIdentityMetadatum")
   @segment("hybridIdentityMetadata")
   @visibility("read")
+  @path
   name: string;
 
   @doc("Resource properties.")
