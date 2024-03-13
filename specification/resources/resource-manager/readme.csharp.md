@@ -193,6 +193,10 @@ tag: pkg-2016-02-Az-pol
 input-file:
 - Microsoft.Resources/stable/2016-02-01/deployments.json
 - Microsoft.Resources/stable/2016-02-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### 2) pkg-2016-02-AzStk-lnk
@@ -256,6 +260,10 @@ tag: pkg-2018-02-Az-polD
 input-file:
 - Microsoft.Resources/stable/2018-02-01/deployments.json
 - Microsoft.Resources/stable/2018-02-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### 2) pkg-2018-02-AzStk-lnk
@@ -323,6 +331,10 @@ tag: pkg-2020-06-Az-polD
 input-file:
 - Microsoft.Resources/stable/2019-05-01/deployments.json
 - Microsoft.Resources/stable/2019-05-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### 2) pkg-2020-06-AzStk-lnk
@@ -390,6 +402,10 @@ tag: pkg-2020-10-Az-polD
 input-file:
 - Microsoft.Resources/stable/2019-05-01/deployments.json
 - Microsoft.Resources/stable/2019-05-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### 2) pkg-2020-10-AzStk-lnk
@@ -459,6 +475,10 @@ tag: pkg-2018-05-Az-polD
 input-file:
 - Microsoft.Resources/stable/2018-05-01/deployments.json
 - Microsoft.Resources/stable/2018-05-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### 2) pkg-2018-05-AzStk-lnk
@@ -528,6 +548,10 @@ tag: pkg-2019-05-Az-polD
 input-file:
 - Microsoft.Resources/stable/2019-05-01/deployments.json
 - Microsoft.Resources/stable/2019-05-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### 2) pkg-2019-05-AzStk-lnk
@@ -597,6 +621,10 @@ tag: pkg-2019-0510-Az-polD
 input-file:
 - Microsoft.Resources/stable/2019-05-10/deployments.json
 - Microsoft.Resources/stable/2019-05-10/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### 2) pkg-2019-0510-AzStk-lnk
@@ -666,6 +694,10 @@ tag: pkg-2019-07-Az-polD
 input-file:
 - Microsoft.Resources/stable/2019-07-01/deployments.json
 - Microsoft.Resources/stable/2019-07-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### 2) pkg-2019-07-AzStk-lnk
@@ -735,6 +767,10 @@ tag: pkg-2019-08-Az-polD
 input-file:
 - Microsoft.Resources/stable/2019-08-01/deployments.json
 - Microsoft.Resources/stable/2019-08-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### 2) pkg-2019-08-AzStk-lnk
@@ -804,6 +840,10 @@ tag: pkg-2019-10-Az-polD
 input-file:
 - Microsoft.Resources/stable/2019-10-01/deployments.json
 - Microsoft.Resources/stable/2019-10-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### 2) pkg-2019-10-AzStk-lnk

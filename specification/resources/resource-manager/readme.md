@@ -199,6 +199,10 @@ These settings apply only when `--tag=package-resources-2023-07` is specified on
 input-file:
   - Microsoft.Resources/stable/2023-07-01/deployments.json
   - Microsoft.Resources/stable/2023-07-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### Tag: package-2022-12
@@ -374,6 +378,10 @@ These settings apply only when `--tag=package-resources-2022-09` is specified on
 input-file:
 - Microsoft.Resources/stable/2022-09-01/deployments.json
 - Microsoft.Resources/stable/2022-09-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### Tag: package-policy-2020-09
@@ -736,6 +744,10 @@ These settings apply only when `--tag=package-resources-2021-04` is specified on
 input-file:
 - Microsoft.Resources/stable/2021-04-01/deployments.json
 - Microsoft.Resources/stable/2021-04-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### Tag: package-resources-2021-01
@@ -746,6 +758,10 @@ These settings apply only when `--tag=package-resources-2021-01` is specified on
 input-file:
 - Microsoft.Resources/stable/2021-01-01/deployments.json
 - Microsoft.Resources/stable/2021-01-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### Tag: package-resources-2020-10
@@ -756,6 +772,10 @@ These settings apply only when `--tag=package-resources-2020-10` is specified on
 input-file:
   - Microsoft.Resources/stable/2020-10-01/deployments.json
   - Microsoft.Resources/stable/2020-10-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### Tag: package-resources-2020-08
@@ -766,6 +786,10 @@ These settings apply only when `--tag=package-resources-2020-08` is specified on
 input-file:
   - Microsoft.Resources/stable/2020-08-01/deployments.json
   - Microsoft.Resources/stable/2020-08-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### Tag: package-resources-2020-06
@@ -776,6 +800,10 @@ These settings apply only when `--tag=package-resources-2020-06` is specified on
 input-file:
 - Microsoft.Resources/stable/2020-06-01/deployments.json
 - Microsoft.Resources/stable/2020-06-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### Tag: package-resources-2019-10
@@ -786,6 +814,10 @@ These settings apply only when `--tag=package-resources-2019-10` is specified on
 input-file:
 - Microsoft.Resources/stable/2019-10-01/deployments.json
 - Microsoft.Resources/stable/2019-10-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### Tag: package-resources-2019-08
@@ -796,6 +828,10 @@ These settings apply only when `--tag=package-resources-2019-08` is specified on
 input-file:
 - Microsoft.Resources/stable/2019-08-01/deployments.json
 - Microsoft.Resources/stable/2019-08-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### Tag: package-resources-2019-07
@@ -806,6 +842,10 @@ These settings apply only when `--tag=package-resources-2019-07` is specified on
 input-file:
 - Microsoft.Resources/stable/2019-07-01/deployments.json
 - Microsoft.Resources/stable/2019-07-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### Tag: package-resources-2019-0510
@@ -816,6 +856,10 @@ These settings apply only when `--tag=package-resources-2019-0510` is specified 
 input-file:
 - Microsoft.Resources/stable/2019-05-10/deployments.json
 - Microsoft.Resources/stable/2019-05-10/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### Tag: package-resources-2019-05
@@ -826,6 +870,10 @@ These settings apply only when `--tag=package-resources-2019-05` is specified on
 input-file:
 - Microsoft.Resources/stable/2019-05-01/deployments.json
 - Microsoft.Resources/stable/2019-05-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### Tag: package-resources-2019-03
@@ -836,6 +884,10 @@ These settings apply only when `--tag=package-resources-2019-03` is specified on
 input-file:
 - Microsoft.Resources/stable/2019-03-01/deployments.json
 - Microsoft.Resources/stable/2019-03-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### Tag: package-resources-2018-05
@@ -846,6 +898,10 @@ These settings apply only when `--tag=package-resources-2018-05` is specified on
 input-file:
 - Microsoft.Resources/stable/2018-05-01/deployments.json
 - Microsoft.Resources/stable/2018-05-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### Tag: package-resources-2018-02
@@ -856,6 +912,10 @@ These settings apply only when `--tag=package-resources-2018-02` is specified on
 input-file:
 - Microsoft.Resources/stable/2018-02-01/deployments.json
 - Microsoft.Resources/stable/2018-02-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### Tag: package-resources-2017-05
@@ -866,6 +926,10 @@ These settings apply only when `--tag=package-resources-2017-05` is specified on
 input-file:
 - Microsoft.Resources/stable/2017-05-10/deployments.json
 - Microsoft.Resources/stable/2017-05-10/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### Tag: package-resources-2016-09
@@ -876,6 +940,10 @@ These settings apply only when `--tag=package-resources-2016-09` is specified on
 input-file:
 - Microsoft.Resources/stable/2016-09-01/deployments.json
 - Microsoft.Resources/stable/2016-09-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### Tag: package-resources-2016-07
@@ -886,6 +954,10 @@ These settings apply only when `--tag=package-resources-2016-07` is specified on
 input-file:
 - Microsoft.Resources/stable/2016-07-01/deployments.json
 - Microsoft.Resources/stable/2016-07-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### Tag: package-resources-2016-02
@@ -896,6 +968,10 @@ These settings apply only when `--tag=package-resources-2016-02` is specified on
 input-file:
 - Microsoft.Resources/stable/2016-02-01/deployments.json
 - Microsoft.Resources/stable/2016-02-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### Tag: package-resources-2015-11
@@ -906,6 +982,10 @@ These settings apply only when `--tag=package-resources-2015-11` is specified on
 input-file:
 - Microsoft.Resources/stable/2015-11-01/deployments.json
 - Microsoft.Resources/stable/2015-11-01/resources.json
+
+# Needed when there is more than one input file
+override-info:
+  title: ResourceManagementClient
 ```
 
 ### Tag: package-subscriptions-2020-01
