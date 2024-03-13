@@ -15,9 +15,8 @@ using OpenAPI;
 
 @armProviderNamespace
 @service({
-  title: "Carbon"
+  title: "Carbon",
 })
-
 @versioned(Versions)
 @doc("Carbon Report Resource Provider query API.")
 namespace Microsoft.Carbon;
