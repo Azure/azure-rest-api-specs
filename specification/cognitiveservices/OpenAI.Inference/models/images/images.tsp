@@ -13,7 +13,9 @@ namespace Azure.OpenAI;
 
 @doc("The desired size of generated images.")
 @added(ServiceApiVersions.v2023_06_01_Preview)
-enum ImageSize {
+union ImageSize {
+  string,
+
   @doc("""
   Very small image size of 256x256 pixels.
   Only supported with dall-e-2 models.
@@ -53,7 +55,9 @@ An image generation configuration that specifies how the model should prioritize
 Only configurable with dall-e-3 models.
 """)
 @added(ServiceApiVersions.v2024_02_15_Preview)
-enum ImageGenerationQuality {
+union ImageGenerationQuality {
+  string,
+
   @doc("""
   Requests image generation with standard, balanced characteristics of quality, cost, and speed.
   """)
@@ -70,7 +74,9 @@ An image generation configuration that specifies how the model should incorporat
 Only configurable with dall-e-3 models.
 """)
 @added(ServiceApiVersions.v2024_02_15_Preview)
-enum ImageGenerationStyle {
+union ImageGenerationStyle {
+  string,
+
   @doc("""
   Requests image generation in a natural style with less preference for dramatic and hyper-realistic characteristics.
   """)
@@ -85,7 +91,9 @@ enum ImageGenerationStyle {
 
 @doc("The format in which the generated images are returned.")
 @added(ServiceApiVersions.v2023_06_01_Preview)
-enum ImageGenerationResponseFormat {
+union ImageGenerationResponseFormat {
+  string,
+
   @doc("Image generation response items should provide a URL from which the image may be retrieved.")
   url: "url",
 
