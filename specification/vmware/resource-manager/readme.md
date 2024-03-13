@@ -115,6 +115,8 @@ swagger-to-sdk:
   - repo: azure-powershell
 ```
 
+## Suppression
+
 ``` yaml
 directive:
 
@@ -124,6 +126,107 @@ directive:
       - $.definitions.Addon.properties.properties
       - $.definitions.PlacementPolicy.properties.properties
       - $.definitions.WorkloadNetworkDhcp.properties.properties
+
+suppressions:
+    
+  - code: pathresourceprovidernamepascalcase
+    reason: Microsoft.AVS was chosen over Microsoft.AzureVMwareSolution
+    from: vmware.json
+
+  - code: ParametersOrder
+    reason: Breaking change to update the parameters order
+    from: vmware.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dhcpConfigurations/{dhcpId}"].get
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/portMirroringProfiles/{portMirroringId}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/vmGroups/{vmGroupId}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsServices/{dnsServiceId}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsZones/{dnsZoneId}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/publicIPs/{publicIPId}"].delete
+    
+  - code: ConsistentPatchProperties
+    reason: The PlacementPolicies_Update properties are consistent for the discriminator hierarchy.
+    from: vmware.json
+    # where:
+    #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].patch.parameters.placementPolicyUpdate.vmMembers
+    #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].patch.parameters.placementPolicyUpdate.hostMembers
+    #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].patch.parameters.placementPolicyUpdate.affinityStrength
+    #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].patch.parameters.placementPolicyUpdate.azureHybridBenefitType
+
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: Breaking change to update existing property names
+    from: vmware.json
+    where:
+      - $.definitions.Circuit.properties.expressRouteID
+      - $.definitions.Circuit.properties.expressRoutePrivatePeeringID
+      - $.definitions.IdentitySource.properties.baseUserDN
+      - $.definitions.IdentitySource.properties.baseGroupDN
+      - $.definitions.WorkloadNetworkPublicIPProperties.properties.numberOfPublicIPs
+      - $.definitions.WorkloadNetworkPublicIPProperties.properties.publicIPBlock
+      - $.definitions.WorkloadNetworkPublicIPProperties.properties.numberOfPublicIPs
+
+  - code: DeleteOperationAsyncResponseValidation
+    reason: x-ms-long-running-operation-options does not need to be set if you follow ARM guidelines
+    # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
+    from: vmware.json
+
+  - code: PatchSkuProperty
+    reason: sku can not be updated
+    from: vmware.json
+
+  - code: PatchResponseCodes
+    reason: PrivateClouds_Update and Clusters_Update respond with 201 instead of 202. Changing it is breaking.
+    from: vmware.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"].patch
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}"].patch
+
+  - code: LroPatch202
+    reason: PrivateClouds_Update and Clusters_Update respond with 201 instead of 202. Changing it is breaking.
+    from: vmware.json
+    # where:
+    #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"].patch
+    #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}"].patch
+
+  - code: PostResponseCodes
+    reason: PrivateClouds_RotateNsxtPassword & PrivateClouds_RotateVcenterPassword respond with 202 & 204. Changing it is breaking.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/rotateNsxtPassword"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/rotateVcenterPassword"].post
+
+  - code: XmsLongRunningOperationOptions
+    reason: This option is designed for cases where the server does NOT follow ARM guidelines
+    # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
+    from: vmware.json
+
+  - code: XmsClientName
+    reason: false positives
+    from: vmware.json
+
+  - code: XmsClientNameParameter
+    reason: this warning is false postive
+    from: vmware.json
+
+  - code: docLinkLocale
+    reason: false positives
+    from: vmware.json
+
+  - code: XmsPageableForListCalls
+    reasons: This are gets on a TypeSpec @singleton. These are false positives.
+    from: vmware.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/iscsiPaths/default"].get
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default"].get
+
+  - code: DeleteResponseCodes
+    reasons: ArmResourceDeleteAsync is still being used. Moving to ArmResourceDeleteWithoutOkAsync is breaking.
+
+  - code: PatchBodyParametersSchema
+    reasons: False positives. https://github.com/Azure/azure-sdk-tools/issues/7802
+
+  - code: EvenSegmentedPathForPutOperation
+    reasons: False positives. https://github.com/Azure/azure-sdk-tools/issues/7801
+
 ```
 
 ## TypeScript
