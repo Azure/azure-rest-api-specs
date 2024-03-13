@@ -278,6 +278,7 @@ enum OperatingSystemTypes {
   Linux,
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
 @doc("Type of the IP Pool [vm, vippool]")
 @fixed
 enum IPPoolTypeEnum {
@@ -305,6 +306,7 @@ model GalleryImageProperties {
   @doc("Datasource for the gallery image when provisioning with cloud-init [NoCloud, Azure]")
   cloudInitDataSource?: CloudInitDataSource;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "HyperV is the correct case."
   @doc("The hypervisor generation of the Virtual Machine [V1, V2]")
   hyperVGeneration?: HyperVGeneration;
 
@@ -357,11 +359,13 @@ model GalleryImageVersionStorageProfile {
   osDiskImage?: GalleryOSDiskImage;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "GalleryOSDiskImage is the correct case."
 @doc("This is the OS disk image.")
 model GalleryOSDiskImage extends GalleryDiskImage {}
 
 @doc("This is the disk image base class.")
 model GalleryDiskImage {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is a short form."
   @doc("This property indicates the size of the VHD to be created.")
   @visibility("read")
   sizeInMB?: int64;
@@ -396,6 +400,7 @@ model GalleryImageStatusProvisioningStatus {
 
 @doc("The download status of the gallery image")
 model GalleryImageStatusDownloadStatus {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "MB should be referenced as MB."
   @doc("The downloaded sized of the image in MB")
   downloadSizeInMB?: int64;
 }
@@ -549,11 +554,13 @@ model RoutePropertiesFormat {
   nextHopIpAddress?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
 @doc("Describes IPPool")
 model IPPool {
   @doc("Name of the IP-Pool")
   name?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("Type of the IP Pool [vm, vippool]")
   ipPoolType?: IPPoolTypeEnum;
 
@@ -563,10 +570,12 @@ model IPPool {
   @doc("End of the IP address pool")
   end?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("IPPool info")
   info?: IPPoolInfo;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
 @doc("IP Pool info")
 model IPPoolInfo {
   @doc("Number of IP addresses allocated from the IP Pool")
@@ -686,6 +695,7 @@ model NetworkInterfaceProperties {
   status?: NetworkInterfaceStatus;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
 @doc("InterfaceIPConfiguration iPConfiguration in a network interface.")
 model IPConfiguration {
   @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
@@ -693,33 +703,40 @@ model IPConfiguration {
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$")
   name?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("InterfaceIPConfigurationPropertiesFormat properties of IP configuration.")
   properties?: IPConfigurationProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
 @doc("InterfaceIPConfigurationPropertiesFormat properties of IP configuration.")
 model IPConfigurationProperties {
   @doc("Gateway for network interface")
   @visibility("read")
   gateway?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("prefixLength for network interface")
   @visibility("read")
   prefixLength?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("PrivateIPAddress - Private IP address of the IP configuration.")
   privateIPAddress?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("Subnet - Name of Subnet bound to the IP configuration.")
   subnet?: IPConfigurationPropertiesSubnet;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
 @doc("Subnet - Name of Subnet bound to the IP configuration.")
 model IPConfigurationPropertiesSubnet {
   @doc("ID - The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/...")
   id?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "DNS is a short form. The casing is correct."
 @doc("DNS Settings of the interface")
 model InterfaceDNSSettings {
   @doc("List of DNS server IP Addresses for the interface")
@@ -789,6 +806,7 @@ model MarketplaceGalleryImageProperties {
   @doc("Datasource for the gallery image when provisioning with cloud-init [NoCloud, Azure]")
   cloudInitDataSource?: CloudInitDataSource;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "HyperV is the correct case."
   @doc("The hypervisor generation of the Virtual Machine [V1, V2]")
   hyperVGeneration?: HyperVGeneration;
 
@@ -836,6 +854,7 @@ model MarketplaceGalleryImageStatusProvisioningStatus {
 
 @doc("The download status of the gallery image")
 model MarketplaceGalleryImageStatusDownloadStatus {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is a short form."
   @doc("The downloaded sized of the image in MB")
   downloadSizeInMB?: int64;
 }
@@ -883,9 +902,11 @@ model StorageContainerStatus {
   @doc("Descriptive error message")
   errorMessage?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is a short form."
   @doc("Amount of space available on the disk in MB")
   availableSizeMB?: int64;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is a short form."
   @doc("Total size of the disk in MB")
   containerSizeMB?: int64;
 
@@ -913,6 +934,7 @@ model VirtualHardDiskProperties {
   @doc("Block size in bytes")
   blockSizeBytes?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "GB is a short form."
   @doc("Size of the disk in GB")
   diskSizeGB?: int64;
 
@@ -925,6 +947,7 @@ model VirtualHardDiskProperties {
   @doc("Physical sector in bytes")
   physicalSectorBytes?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "HyperV is the correct case."
   @doc("The hypervisor generation of the Virtual Machine [V1, V2]")
   hyperVGeneration?: HyperVGeneration;
 
@@ -1025,6 +1048,7 @@ model VirtualMachineInstancePropertiesHardwareProfile {
   @doc("number of processors for the virtual machine instance")
   processors?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is a short form."
   @doc("RAM in MB for the virtual machine instance")
   memoryMB?: int64;
 
@@ -1034,9 +1058,11 @@ model VirtualMachineInstancePropertiesHardwareProfile {
 
 @doc("Dynamic memory config")
 model VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig {
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is a short form."
   @doc("Maximum memory in MB")
   maximumMemoryMB?: int64;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is a short form."
   @doc("Minimum memory in MB")
   minimumMemoryMB?: int64;
 
@@ -1083,9 +1109,11 @@ model VirtualMachineInstancePropertiesOsProfileLinuxConfiguration {
   @doc("Specifies the ssh key configuration for a Linux OS.")
   ssh?: SshConfiguration;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a short form. It is the correct case"
   @doc("Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine instance creation process.")
   provisionVMAgent?: boolean = true;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a short form. It is the correct case"
   @doc("Used to indicate whether the VM Config Agent should be installed during the virtual machine creation process.")
   provisionVMConfigAgent?: boolean = true;
 }
@@ -1116,9 +1144,11 @@ model VirtualMachineInstancePropertiesOsProfileWindowsConfiguration {
   @doc("TimeZone for the virtual machine instance")
   timeZone?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a short form. It is the correct case"
   @doc("Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine instance creation process.")
   provisionVMAgent?: boolean = true;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a short form. It is the correct case"
   @doc("Used to indicate whether the VM Config Agent should be installed during the virtual machine creation process.")
   provisionVMConfigAgent?: boolean = true;
 }
@@ -1126,6 +1156,7 @@ model VirtualMachineInstancePropertiesOsProfileWindowsConfiguration {
 @doc("SecurityProfile - Specifies the security settings for the virtual machine instance.")
 model VirtualMachineInstancePropertiesSecurityProfile {
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "TPM is a short form. It is the correct case"
   @doc("Enable TPM flag")
   enableTPM?: boolean;
 
@@ -1325,6 +1356,7 @@ model HardwareProfileUpdate {
   @doc("number of processors for the virtual machine instance")
   processors?: int32;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "MB is a short form."
   @doc("RAM in MB for the virtual machine instance")
   memoryMB?: int64;
 }
@@ -1367,18 +1399,24 @@ model OsProfileUpdate {
 
 @doc("OSProfile update linux configuration")
 model OsProfileUpdateLinuxConfiguration {
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a short form. It is the correct case"
   @doc("Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine instance creation process.")
   provisionVMAgent?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a short form. It is the correct case"
   @doc("Used to indicate whether the VM Config Agent should be installed during the virtual machine creation process.")
   provisionVMConfigAgent?: boolean;
 }
 
 @doc("OSProfile update windows configuration")
 model OsProfileUpdateWindowsConfiguration {
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a short form. It is the correct case"
   @doc("Used to indicate whether Arc for Servers agent onboarding should be triggered during the virtual machine instance creation process.")
   provisionVMAgent?: boolean;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a short form. It is the correct case"
   @doc("Used to indicate whether the VM Config Agent should be installed during the virtual machine creation process.")
   provisionVMConfigAgent?: boolean;
 }
