@@ -36,7 +36,7 @@ model EntityLinkingTaskResult extends AnalyzeTextTaskResult {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model EntityLinkingResult is AnalyzeTextPreBuiltResult {
+model EntityLinkingResult is PreBuiltResult {
   @doc("Response by document")
   @typeChangedFrom(
     Versions.v2023_04_15_preview,

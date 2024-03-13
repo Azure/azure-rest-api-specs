@@ -14,6 +14,25 @@ namespace Language.Conversations;
 @doc("Error response.")
 model ErrorResponse is Azure.Core.Foundations.ErrorResponse;
 
+@doc("The error object.")
+model Error {
+  @doc("One of a server-defined set of error codes.")
+  code: ErrorCode;
+
+  @doc("A human-readable representation of the error.")
+  message: string;
+
+  @doc("The target of the error.")
+  target?: string;
+
+  @doc("An array of details about specific errors that led to this reported error.")
+  details?: Array<Error>;
+
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
+  @doc("An object containing more specific information than the current object about the error.")
+  innererror?: InnerErrorModel;
+}
+
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.")
 model InnerErrorModel is Record<unknown> {
@@ -152,7 +171,7 @@ model JobState {
   status: State;
 
   @doc("errors")
-  errors?: Array<ErrorResponse>;
+  errors?: Array<Error>;
 
   @doc("next link")
   nextLink?: string;
@@ -161,7 +180,7 @@ model JobState {
 @doc("job errors")
 model JobErrors {
   @doc("errors")
-  errors: Array<ErrorResponse>;
+  errors: Array<Error>;
 }
 
 @doc("Contains details of errors encountered during a job execution.")
@@ -170,7 +189,7 @@ model DocumentError {
   id: string;
 
   @doc("Error encountered.")
-  error: ErrorResponse;
+  error: Error;
 }
 
 @doc("Contains details of warnings encountered during a job execution.")

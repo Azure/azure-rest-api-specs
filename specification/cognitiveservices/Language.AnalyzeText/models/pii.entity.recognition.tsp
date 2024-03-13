@@ -54,7 +54,7 @@ model PIITaskResult extends AnalyzeTextTaskResult {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-model PIIResult is AnalyzeTextPreBuiltResult {
+model PIIResult is PreBuiltResult {
   @doc("Response by document")
   @typeChangedFrom(
     Versions.v2023_04_15_preview,

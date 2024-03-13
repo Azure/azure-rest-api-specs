@@ -181,6 +181,7 @@ model AnalyzeTextJobsInput {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   tasks: Array<AnalyzeTextLROTask>;
 
+  @added(Versions.v2023_04_15_preview)
   @doc("Default language to use for records requesting automatic language detection.")
   defaultLanguage?: string;
 }

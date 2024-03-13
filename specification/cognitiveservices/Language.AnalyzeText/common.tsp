@@ -167,7 +167,7 @@ model JobState {
   status: State;
 
   @doc("errors")
-  errors?: Array<ErrorResponse>;
+  errors?: Array<Error>;
 
   @doc("next link")
   nextLink?: string;
@@ -176,7 +176,7 @@ model JobState {
 @doc("job errors")
 model JobErrors {
   @doc("errors")
-  errors?: Array<ErrorResponse>;
+  errors?: Array<Error>;
 }
 
 @doc("Contains details of errors encountered during a job execution.")
@@ -185,7 +185,7 @@ model DocumentError {
   id: string;
 
   @doc("Error encountered.")
-  error: ErrorResponse;
+  error: Error;
 }
 
 @doc("Contains details of warnings encountered during a job execution.")

@@ -36,8 +36,7 @@ model SentimentTaskResult extends AnalyzeTextTaskResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   kind: AnalyzeTextTaskResultsKind.SentimentAnalysisResults;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  @typeChangedFrom(Versions.v2023_04_15_preview, SentimentResponse)
-  results: SentimentResponseWithDocumentDetectedLanguage;
+  results: SentimentResponse;
 }
 
 @doc("The predicted Sentiment for the sentence.")
@@ -61,12 +60,14 @@ enum TokenSentimentValue {
 }
 
 @doc("Sentiment analysis per document.")
-model SentimentResponse is SentimentDocumentResult {
+model SentimentResponse is PreBuiltResult {
+  @typeChangedFrom(Versions.v2023_04_15_preview, Array<SentimentDocumentResult>)
+  documents: Array<SentimentDocumentResultWithDetectedLanguage>;
 }
 
 @doc("Sentiment analysis per document.")
-model SentimentResponseWithDocumentDetectedLanguage is SentimentDocumentResult {
-  ...DocumentDetectedLanguage;
+model SentimentDocumentResultWithDetectedLanguage is SentimentDocumentResult {
+...DocumentDetectedLanguage
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -188,8 +189,7 @@ model SentimentLROResult extends AnalyzeTextLROResult {
   kind: AnalyzeTextLROResultsKind.SentimentAnalysisLROResults;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  @typeChangedFrom(Versions.v2023_04_15_preview, SentimentResponse)
-  results: SentimentResponseWithDocumentDetectedLanguage;
+  results: SentimentResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"

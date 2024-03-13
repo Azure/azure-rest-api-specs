@@ -54,7 +54,7 @@ model EntitiesTaskResult extends AnalyzeTextTaskResult {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model EntitiesResult is AnalyzeTextPreBuiltResult {
+model EntitiesResult is PreBuiltResult {
   @doc("Response by document")
   @typeChangedFrom(Versions.v2023_04_15_preview, Array<EntitiesDocumentResult>)
   documents: Array<EntitiesDocumentResultWithMetadataDetectedLanguage>;

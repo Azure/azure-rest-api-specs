@@ -644,7 +644,7 @@
           "type": "array",
           "description": "errors",
           "items": {
-            "$ref": "#/definitions/ErrorResponse"
+            "$ref": "#/definitions/Error"
           },
           "x-ms-identifiers": []
         },
@@ -690,10 +690,6 @@
             "$ref": "#/definitions/AnalyzeTextLROTask"
           },
           "x-ms-identifiers": []
-        },
-        "defaultLanguage": {
-          "type": "string",
-          "description": "Default language to use for records requesting automatic language detection."
         }
       },
       "required": [
@@ -1681,7 +1677,7 @@
           "description": "The ID of the input document."
         },
         "error": {
-          "$ref": "#/definitions/ErrorResponse",
+          "$ref": "#/definitions/Error",
           "description": "Error encountered."
         }
       },
@@ -1809,16 +1805,18 @@
     },
     "EntitiesResult": {
       "type": "object",
+      "description": "Pre built result",
       "properties": {
         "errors": {
           "type": "array",
           "description": "Errors by document id.",
           "items": {
-            "$ref": "#/definitions/AnalyzeTextDocumentError"
+            "$ref": "#/definitions/DocumentError"
           }
         },
         "statistics": {
-          "$ref": "#/definitions/RequestStatistics"
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "statistics"
         },
         "modelVersion": {
           "type": "string",
@@ -1974,16 +1972,18 @@
     },
     "EntityLinkingResult": {
       "type": "object",
+      "description": "Pre built result",
       "properties": {
         "errors": {
           "type": "array",
           "description": "Errors by document id.",
           "items": {
-            "$ref": "#/definitions/AnalyzeTextDocumentError"
+            "$ref": "#/definitions/DocumentError"
           }
         },
         "statistics": {
-          "$ref": "#/definitions/RequestStatistics"
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "statistics"
         },
         "modelVersion": {
           "type": "string",
@@ -2153,10 +2153,6 @@
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "The error object."
-        },
-        "errorCode": {
-          "type": "string",
-          "description": "String error code indicating what went wrong."
         }
       },
       "required": [
@@ -2729,16 +2725,18 @@
     },
     "HealthcareResult": {
       "type": "object",
+      "description": "Pre built result",
       "properties": {
         "errors": {
           "type": "array",
           "description": "Errors by document id.",
           "items": {
-            "$ref": "#/definitions/AnalyzeTextDocumentError"
+            "$ref": "#/definitions/DocumentError"
           }
         },
         "statistics": {
-          "$ref": "#/definitions/RequestStatistics"
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "statistics"
         },
         "modelVersion": {
           "type": "string",
@@ -2892,7 +2890,7 @@
           "type": "array",
           "description": "errors",
           "items": {
-            "$ref": "#/definitions/ErrorResponse"
+            "$ref": "#/definitions/Error"
           },
           "x-ms-identifiers": []
         }
@@ -2934,7 +2932,7 @@
           "type": "array",
           "description": "errors",
           "items": {
-            "$ref": "#/definitions/ErrorResponse"
+            "$ref": "#/definitions/Error"
           },
           "x-ms-identifiers": []
         },
@@ -2984,16 +2982,18 @@
     },
     "KeyPhraseResult": {
       "type": "object",
+      "description": "Pre built result",
       "properties": {
         "errors": {
           "type": "array",
           "description": "Errors by document id.",
           "items": {
-            "$ref": "#/definitions/AnalyzeTextDocumentError"
+            "$ref": "#/definitions/DocumentError"
           }
         },
         "statistics": {
-          "$ref": "#/definitions/RequestStatistics"
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "statistics"
         },
         "modelVersion": {
           "type": "string",
@@ -3268,16 +3268,18 @@
     },
     "LanguageDetectionResult": {
       "type": "object",
+      "description": "Pre built result",
       "properties": {
         "errors": {
           "type": "array",
           "description": "Errors by document id.",
           "items": {
-            "$ref": "#/definitions/AnalyzeTextDocumentError"
+            "$ref": "#/definitions/DocumentError"
           }
         },
         "statistics": {
-          "$ref": "#/definitions/RequestStatistics"
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "statistics"
         },
         "modelVersion": {
           "type": "string",
@@ -3639,16 +3641,18 @@
     },
     "PIIResult": {
       "type": "object",
+      "description": "Pre built result",
       "properties": {
         "errors": {
           "type": "array",
           "description": "Errors by document id.",
           "items": {
-            "$ref": "#/definitions/AnalyzeTextDocumentError"
+            "$ref": "#/definitions/DocumentError"
           }
         },
         "statistics": {
-          "$ref": "#/definitions/RequestStatistics"
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "statistics"
         },
         "modelVersion": {
           "type": "string",
@@ -4537,79 +4541,7 @@
         "sentences"
       ]
     },
-    "SentimentLROResult": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/SentimentResponse"
-        }
-      },
-      "required": [
-        "results"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextLROResult"
-        }
-      ],
-      "x-ms-discriminator-value": "SentimentAnalysisLROResults"
-    },
-    "SentimentRelationType": {
-      "type": "string",
-      "description": "The type related to the target.",
-      "enum": [
-        "assessment",
-        "target"
-      ],
-      "x-ms-enum": {
-        "name": "SentimentRelationType",
-        "modelAsString": true
-      }
-    },
-    "SentimentResponse": {
-      "type": "object",
-      "description": "Sentiment analysis per document.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique, non-empty document identifier."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "Warnings encountered while processing document.",
-          "items": {
-            "$ref": "#/definitions/DocumentWarning"
-          },
-          "x-ms-identifiers": []
-        },
-        "statistics": {
-          "$ref": "#/definitions/DocumentStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
-        },
-        "sentiment": {
-          "$ref": "#/definitions/Sentiment",
-          "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed)."
-        },
-        "confidenceScores": {
-          "$ref": "#/definitions/SentimentConfidenceScores"
-        },
-        "sentences": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SentenceSentiment"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "id",
-        "warnings",
-        "sentiment",
-        "confidenceScores",
-        "sentences"
-      ]
-    },
-    "SentimentResponseWithDocumentDetectedLanguage": {
+    "SentimentDocumentResultWithDetectedLanguage": {
       "type": "object",
       "description": "Sentiment analysis per document.",
       "properties": {
@@ -4654,6 +4586,67 @@
         "sentiment",
         "confidenceScores",
         "sentences"
+      ]
+    },
+    "SentimentLROResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/SentimentResponse"
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        }
+      ],
+      "x-ms-discriminator-value": "SentimentAnalysisLROResults"
+    },
+    "SentimentRelationType": {
+      "type": "string",
+      "description": "The type related to the target.",
+      "enum": [
+        "assessment",
+        "target"
+      ],
+      "x-ms-enum": {
+        "name": "SentimentRelationType",
+        "modelAsString": true
+      }
+    },
+    "SentimentResponse": {
+      "type": "object",
+      "description": "Sentiment analysis per document.",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "statistics"
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
+        },
+        "documents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SentimentDocumentResult"
+          }
+        }
+      },
+      "required": [
+        "errors",
+        "modelVersion",
+        "documents"
       ]
     },
     "SentimentTaskResult": {

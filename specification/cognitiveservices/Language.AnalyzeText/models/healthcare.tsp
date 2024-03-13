@@ -59,7 +59,7 @@ model HealthcareLROTask extends AnalyzeTextLROTask {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model HealthcareResult is AnalyzeTextPreBuiltResult {
+model HealthcareResult is PreBuiltResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   @typeChangedFrom(
     Versions.v2023_04_15_preview,

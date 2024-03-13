@@ -438,7 +438,7 @@
           "type": "array",
           "description": "errors",
           "items": {
-            "$ref": "#/definitions/ErrorResponse"
+            "$ref": "#/definitions/Error"
           },
           "x-ms-identifiers": []
         },
@@ -1088,7 +1088,7 @@
           "description": "Language of the conversation item in BCP-47 format."
         },
         "modality": {
-          "$ref": "#/definitions/InputModality",
+          "$ref": "#/definitions/Modality",
           "description": "modality"
         },
         "domain": {
@@ -1256,7 +1256,7 @@
           "description": "The override language of a conversation item in BCP 47 language representation."
         },
         "modality": {
-          "$ref": "#/definitions/InputModality",
+          "$ref": "#/definitions/Modality",
           "description": "Enumeration of supported conversational modalities."
         },
         "role": {
@@ -2391,7 +2391,7 @@
           "description": "The ID of the input document."
         },
         "error": {
-          "$ref": "#/definitions/ErrorResponse",
+          "$ref": "#/definitions/Error",
           "description": "Error encountered."
         }
       },
@@ -2456,6 +2456,40 @@
       ],
       "x-ms-discriminator-value": "EntitySubtype"
     },
+    "Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/ErrorCode",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerErrorModel",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
     "ErrorCode": {
       "type": "string",
       "description": "Human-readable error code.",
@@ -2491,10 +2525,6 @@
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "The error object."
-        },
-        "errorCode": {
-          "type": "string",
-          "description": "String error code indicating what went wrong."
         }
       },
       "required": [
@@ -2607,18 +2637,6 @@
       ],
       "additionalProperties": {}
     },
-    "InputModality": {
-      "type": "string",
-      "description": "Enumeration of supported conversational modalities.",
-      "enum": [
-        "transcript",
-        "text"
-      ],
-      "x-ms-enum": {
-        "name": "InputModality",
-        "modelAsString": true
-      }
-    },
     "InputWarning": {
       "type": "object",
       "description": "Contains details of warnings encountered during a job execution.",
@@ -2674,7 +2692,7 @@
           "type": "array",
           "description": "errors",
           "items": {
-            "$ref": "#/definitions/ErrorResponse"
+            "$ref": "#/definitions/Error"
           },
           "x-ms-identifiers": []
         }
@@ -2719,7 +2737,7 @@
           "type": "array",
           "description": "errors",
           "items": {
-            "$ref": "#/definitions/ErrorResponse"
+            "$ref": "#/definitions/Error"
           },
           "x-ms-identifiers": []
         },
@@ -3037,6 +3055,18 @@
         "key",
         "value"
       ]
+    },
+    "Modality": {
+      "type": "string",
+      "description": "Enumeration of supported conversational modalities.",
+      "enum": [
+        "transcript",
+        "text"
+      ],
+      "x-ms-enum": {
+        "name": "Modality",
+        "modelAsString": true
+      }
     },
     "MultiLanguageConversationAnalysisInput": {
       "type": "object",
@@ -4190,7 +4220,7 @@
           "description": "The override language of a conversation item in BCP 47 language representation."
         },
         "modality": {
-          "$ref": "#/definitions/InputModality",
+          "$ref": "#/definitions/Modality",
           "description": "Enumeration of supported conversational modalities."
         },
         "role": {
@@ -4262,7 +4292,7 @@
           "description": "The override language of a conversation item in BCP 47 language representation."
         },
         "modality": {
-          "$ref": "#/definitions/InputModality",
+          "$ref": "#/definitions/Modality",
           "description": "Enumeration of supported conversational modalities."
         },
         "role": {

@@ -35,7 +35,7 @@ model KeyPhraseTaskResult extends AnalyzeTextTaskResult {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model KeyPhraseResult is AnalyzeTextPreBuiltResult {
+model KeyPhraseResult is PreBuiltResult {
   @doc("Response by document")
   @typeChangedFrom(
     Versions.v2023_04_15_preview,
