@@ -1418,15 +1418,25 @@
                 "OverwriteIfDirty",
                 "OverwriteAlways"
               ],
+              "default": "Fail",
               "x-ms-enum": {
                 "name": "ConflictResolutionMode",
                 "modelAsString": true
-              }
+              },
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
             },
             "maximumErrors": {
               "description": "Total non-conflict oriented errors the import job will tolerate before exiting with failure. -1 means infinite. 0 means exit immediately and is the default.",
               "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "default": 0,
+              "x-ms-mutability": [
+                "read",
+                "create"
+              ]
             },
             "status": {
               "x-ms-client-flatten": true,
