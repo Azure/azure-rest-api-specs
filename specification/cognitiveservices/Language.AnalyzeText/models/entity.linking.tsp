@@ -17,7 +17,7 @@ model AnalyzeTextEntityLinkingInput extends AnalyzeTextTask {
 @doc("Supported parameters for an Entity Linking task.")
 model EntityLinkingTaskParameters is PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  stringIndexType?: StringIndexType;
+  stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -69,7 +69,7 @@ model LinkedEntity {
   language: string;
 
   @doc("Unique identifier of the recognized entity from the data source.")
-  id: string;
+  id?: string;
 
   @doc("URL for the entity's page from the data source.")
   url: url;

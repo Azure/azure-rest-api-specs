@@ -270,14 +270,14 @@ model KnowledgeBaseAnswerDialog {
 @doc("Prompt for an answer.")
 model KnowledgeBaseAnswerPrompt {
   @doc("Index of the prompt - used in ordering of the prompts.")
-  displayOrder: int32;
+  displayOrder?: int32;
 
   @doc("QnA ID corresponding to the prompt.")
-  qnaId: int32;
+  qnaId?: int32;
 
   @doc("Text displayed to represent a follow up question prompt.")
   @maxLength(200)
-  displayText: string;
+  displayText?: string;
 }
 
 @doc("Answer span object of QnA.")
@@ -536,7 +536,7 @@ model AbstractiveSummarizationTaskParametersBase {
   sentenceCount?: int32;
 
   @doc("String index type")
-  stringIndexType?: StringIndexType;
+  stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   @added(Versions.v2023_11_15_preview)
   @doc("(NOTE: Recommended to use summaryLength over sentenceCount) Controls the approximate length of the output summaries.")

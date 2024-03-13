@@ -208,7 +208,7 @@ model AnalyzeTextJobState {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model Pagination {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  nextLink: url;
+  nextLink?: url;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -337,5 +337,5 @@ model MultiLanguageInput {
 @added(Versions.v2023_04_15_preview)
 model DocumentDetectedLanguage {
   @doc("If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document.")
-  detectedLanguage?: string;
+  detectedLanguage?: DetectedLanguage;
 }

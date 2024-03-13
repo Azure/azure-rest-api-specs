@@ -8,7 +8,7 @@ namespace Language.AnalyzeText;
 @doc("Supported parameters for a custom Healthcare task.")
 model CustomHealthcareTaskParameters is CustomTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  stringIndexType?: StringIndexType;
+  stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -59,5 +59,5 @@ model CustomHealthcareLROResult extends AnalyzeTextLROResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   kind: AnalyzeTextLROResultsKind.CustomHealthcareLROResults;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  results?: CustomHealthcareResult;
+  results: CustomHealthcareResult;
 }

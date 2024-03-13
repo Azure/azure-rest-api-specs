@@ -17,7 +17,7 @@ model AnalyzeTextEntityRecognitionInput extends AnalyzeTextTask {
 @doc("Supported parameters for an Entity Recognition task.")
 model EntitiesTaskParameters is PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  stringIndexType?: StringIndexType;
+  stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   @added(Versions.v2023_04_15_preview)
   @doc("(Optional) request parameter that limits the output to the requested entity types included in this list. We will apply inclusionList before exclusionList")
@@ -269,7 +269,7 @@ alias EntityList = Array<EntityCategory>;
 @doc("The class that houses the inference options allowed for named entity recognition.")
 model EntityInferenceOptions {
   @doc("Option to include/exclude the detected entity values to be normalized and included in the metadata. The numeric and temporal entity types support value normalization.")
-  excludeNormalizedValues: boolean = false;
+  excludeNormalizedValues?: boolean = false;
 }
 
 @added(Versions.v2023_04_15_preview)
@@ -277,7 +277,7 @@ model EntityInferenceOptions {
 @doc("The abstract base class for entity OverlapPolicy.")
 model BaseEntityOverlapPolicy {
   @doc("The entity OverlapPolicy object kind.")
-  policyKind: EntityOverlapPolicyKind;
+  policyKind: EntityOverlapPolicyKind = EntityOverlapPolicyKind.matchLongest;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -515,7 +515,7 @@ enum LengthUnit {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'LightYear' should have a documentation or description, please use decorator @doc to add it."
   LightYear,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Pt' should have a documentation or description, please use decorator @doc to add it."
-  Pt,
+  Point,
 }
 
 @added(Versions.v2023_04_15_preview)
@@ -871,7 +871,7 @@ model DateValue {
 @added(Versions.v2023_04_15_preview)
 model BaseTemporalMetadata {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  dateValues: Array<DateValue>;
+  dateValues?: Array<DateValue>;
 }
 
 @added(Versions.v2023_04_15_preview)
@@ -940,7 +940,7 @@ model TemporalSpanMetadata extends BaseMetadata {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   metadataKind: MetadataKind.TemporalSpanMetadata;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  spanValues: TemporalSpanValues;
+  spanValues?: TemporalSpanValues;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"

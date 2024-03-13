@@ -867,7 +867,7 @@ model ConversationRequestStatistics is RequestStatistics {
   conversationsCount: int32;
 
   @doc("Number of conversation documents. This excludes documents that are empty, over the size limit, or in unsupported languages.")
-  validConversationCount: int32;
+  validConversationsCount: int32;
 
   @doc("Number of invalid documents. This includes documents that are empty, over the size limit, or in unsupported languages.")
   erroneousConversationsCount: int32;
@@ -1035,7 +1035,7 @@ model ConversationPiiTaskParameters is PreBuiltTaskParameters {
 
   @added(Versions.v2023_04_15_preview)
   @doc("Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.")
-  redactionCharacter?: RedactionCharacter;
+  redactionCharacter?: RedactionCharacter = RedactionCharacter.asterisk;
 
   @added(Versions.v2023_04_15_preview)
   @doc("List of categories that need to be excluded instead of included.")
@@ -1251,7 +1251,7 @@ model ConversationTaskParameters {
   isLoggingEnabled?: boolean;
 
   @doc("Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.")
-  stringIndexType?: StringIndexType;
+  stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   @doc("The name of a target project to forward the request to.")
   directTarget?: string;
@@ -1538,11 +1538,11 @@ enum SpeedUnit {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'MilesPerHour' should have a documentation or description, please use decorator @doc to add it."
   MilesPerHour,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Knot' should have a documentation or description, please use decorator @doc to add it."
-  Knot,
+  Knots,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'FootPerSecond' should have a documentation or description, please use decorator @doc to add it."
-  FootPerSecond,
+  FeetPerSecond,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'FootPerMinute' should have a documentation or description, please use decorator @doc to add it."
-  FootPerMinute,
+  FeetPerMinute,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'YardsPerMinute' should have a documentation or description, please use decorator @doc to add it."
   YardsPerMinute,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'YardsPerSecond' should have a documentation or description, please use decorator @doc to add it."

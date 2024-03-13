@@ -7,7 +7,7 @@ namespace Language.AnalyzeText;
 @doc("Supported parameters for a Healthcare task.")
 model HealthcareTaskParameters is PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  stringIndexType?: StringIndexType;
+  stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @added(Versions.v2023_04_15_preview)

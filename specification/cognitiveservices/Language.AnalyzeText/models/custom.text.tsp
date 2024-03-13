@@ -11,7 +11,7 @@ namespace Language.AnalyzeText;
 @doc("Supported parameters for a Custom Entities task.")
 model CustomEntitiesTaskParameters is CustomTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  stringIndexType?: StringIndexType;
+  stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -134,9 +134,9 @@ model AnalyzeTextDynamicClassificationInput extends AnalyzeTextTask {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   kind: AnalyzeTextTaskKind.DynamicClassification;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  analysisInput: MultiLanguageAnalysisInput;
+  analysisInput?: MultiLanguageAnalysisInput;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  parameters: DynamicClassificationTaskParameters;
+  parameters?: DynamicClassificationTaskParameters;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -172,7 +172,7 @@ model PrebuiltComponent extends EntityComponentInformation {
   entityComponentKind: EntityComponentKind.PrebuiltComponent;
 
   @doc("The prebuilt component of an extracted entity type.")
-  value: string;
+  value?: string;
 }
 
 @added(Versions.v2023_04_15_preview)
@@ -182,7 +182,7 @@ model LearnedComponent extends EntityComponentInformation {
   entityComponentKind: EntityComponentKind.LearnedComponent;
 
   @doc("The learned component of an extracted entity type.")
-  value: string;
+  value?: string;
 }
 
 @added(Versions.v2023_04_15_preview)
@@ -192,14 +192,14 @@ model ListComponent extends EntityComponentInformation {
   entityComponentKind: EntityComponentKind.ListComponent;
 
   @doc("The list key of an extracted entity type.")
-  value: string;
+  value?: string;
 }
 
 @added(Versions.v2023_04_15_preview)
 @doc("Supported parameters for a Dynamic Classification task.")
 model DynamicClassificationTaskParameters is PreBuiltTaskParameters {
   @doc("Specifies either one or multiple categories per document. Defaults to multi classification which may return more than one class for each document.")
-  classificationType: DynamicClassificationType = DynamicClassificationType.Multi;
+  classificationType?: DynamicClassificationType = DynamicClassificationType.Multi;
 
   @doc("a list of categories to which input is classified to.")
   categories: Array<string>;

@@ -12,7 +12,7 @@ model ExtractiveSummarizationTaskParameters is PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   sortBy?: ExtractiveSummarizationSortingCriteria = ExtractiveSummarizationSortingCriteria.Offset;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  stringIndexType?: StringIndexType;
+  stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   @added(Versions.v2023_11_15_preview)
   @doc("(Optional) If provided, the query will be used to extract most relevant sentences from the document.")
@@ -98,7 +98,7 @@ model AbstractiveSummarizationLROTask extends AnalyzeTextLROTask {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   kind: AnalyzeTextLROTaskKind.AbstractiveSummarization;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  parameters?: AbstractiveSummarizationTaskParameters;
+  parameters: AbstractiveSummarizationTaskParameters;
 }
 
 @added(Versions.v2023_04_01)

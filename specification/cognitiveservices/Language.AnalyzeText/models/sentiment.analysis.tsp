@@ -19,7 +19,7 @@ model SentimentAnalysisTaskParameters is PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   opinionMining?: boolean = false;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  stringIndexType?: StringIndexType;
+  stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
@@ -50,7 +50,7 @@ enum SentimentValue {
 }
 
 @doc("Sentiment analysis per document.")
-model SentimentResponse is AnalyzeTextPreBuiltResult {
+model SentimentResponse is PreBuiltResult {
   @doc("Response by document")
   documents: Array<SentimentResponseWithDocumentDetectedLanguage>;
 }
@@ -98,7 +98,7 @@ model SentenceSentiment {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model SentenceTarget {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  sentiment: SentimentValue;
+  sentiment: SentenceTargetSentimentValue;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   confidenceScores: TargetConfidenceScoreLabel;
 
@@ -114,6 +114,17 @@ model SentenceTarget {
   @doc("The array of either assessment or target objects which is related to the target.")
   relations: Array<TargetRelation>;
 }
+
+@doc("The predicted Sentiment for the sentence.")
+enum SentenceTargetSentimentValue {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  positive,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  mixed,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  negative,
+}
+
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model SentenceAssessment {
@@ -207,7 +218,7 @@ model CustomSentimentDocumentResult is DocumentResult {
 @doc("Supported parameters for a Custom Sentiment Analysis task.")
 model CustomSentimentAnalysisTaskParameters is CustomTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  stringIndexType?: StringIndexType;
+  stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"

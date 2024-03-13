@@ -65,8 +65,6 @@ enum TaskStatus {
   running,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'succeeded' should have a documentation or description, please use decorator @doc to add it."
   succeeded,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'partiallyCompleted' should have a documentation or description, please use decorator @doc to add it."
-  partiallyCompleted,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'failed' should have a documentation or description, please use decorator @doc to add it."
   failed,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'cancelled' should have a documentation or description, please use decorator @doc to add it."
@@ -193,7 +191,7 @@ model RequestStatistics {
   documentsCount: int32;
 
   @doc("Number of valid documents. This excludes empty, over-size limit or non-supported languages documents.")
-  validDocumentCount: int32;
+  validDocumentsCount: int32;
 
   @doc("Number of invalid documents. This includes empty, over-size limit or non-supported languages documents.")
   erroneousDocumentCount: int32;
@@ -266,14 +264,14 @@ model KnowledgeBaseAnswerDialog {
 @doc("Prompt for an answer.")
 model KnowledgeBaseAnswerPrompt {
   @doc("Index of the prompt - used in ordering of the prompts.")
-  displayOrder: int32;
+  displayOrder?: int32;
 
   @doc("QnA ID corresponding to the prompt.")
-  qnaId: int32;
+  qnaId?: int32;
 
   @doc("Text displayed to represent a follow up question prompt.")
   @maxLength(200)
-  displayText: string;
+  displayText?: string;
 }
 
 @doc("Answer span object of QnA.")
@@ -335,10 +333,10 @@ model AnswersOptions {
 @doc("Type of ranker to be used")
 enum RankerKind {
   @doc("Default ranker.")
-  Default: "Default ranker",
+  Default,
 
   @doc("Question only ranker.")
-  Question: "Question only ranker",
+  QuestionOnly,
 }
 
 @doc("Context object with previous QnA's information.")
@@ -514,6 +512,19 @@ model SentimentConfidenceScores {
   negative: float64;
 }
 
+@added(Versions.v2023_11_15_preview)
+@doc("Enum that defines the length of the output summaries.")
+enum SummaryLengthBucket {
+  @doc("Instructs model to generate shorter length summaries.")
+  short,
+
+  @doc("Instructs model to generate medium length summaries.")
+  medium,
+
+  @doc("Instructs model to generate longer length summaries.")
+  long,
+}
+
 @doc("Supported parameters for an Abstractive Summarization task.")
 @added(Versions.v2023_04_01)
 model AbstractiveSummarizationTaskParametersBase {
@@ -521,7 +532,11 @@ model AbstractiveSummarizationTaskParametersBase {
   sentenceCount?: int32;
 
   @doc("String index type")
-  stringIndexType?: StringIndexType;
+  stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
+
+  @added(Versions.v2023_11_15_preview)
+  @doc("(NOTE: Recommended to use summaryLength over sentenceCount) Controls the approximate length of the output summaries.")
+  summaryLength?: SummaryLengthBucket;
 }
 
 @doc("The context of the summary.")

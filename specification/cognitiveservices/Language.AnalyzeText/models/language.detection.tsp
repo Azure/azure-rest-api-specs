@@ -34,7 +34,7 @@ model LanguageDetectionTaskResult extends AnalyzeTextTaskResult {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model LanguageDetectionResult is AnalyzeTextPreBuiltResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  documents?: Array<LanguageDetectionDocumentResult>;
+  documents: Array<LanguageDetectionDocumentResult>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"

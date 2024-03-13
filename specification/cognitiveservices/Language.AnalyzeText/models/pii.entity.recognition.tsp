@@ -23,7 +23,7 @@ model PIITaskParameters is PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   piiCategories?: Array<PiiCategories>;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  stringIndexType?: StringIndexType;
+  stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   @added(Versions.v2023_04_15_preview)
@@ -31,7 +31,7 @@ model PIITaskParameters is PreBuiltTaskParameters {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   @added(Versions.v2023_04_15_preview)
-  redactionCharacter?: RedactionCharacter;
+  redactionCharacter?: RedactionCharacter = RedactionCharacter.asterisk;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
