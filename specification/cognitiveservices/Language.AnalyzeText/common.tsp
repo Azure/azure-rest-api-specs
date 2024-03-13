@@ -51,7 +51,23 @@ model TaskState {
   lastUpdateDateTime: utcDateTime;
 
   @doc("The status of the task at the mentioned last update time.")
-  status: State;
+  status: TaskStatus;
+}
+
+@doc("The status of the task at the mentioned last update time.")
+enum TaskStatus {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'notStarted' should have a documentation or description, please use decorator @doc to add it."
+  notStarted,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'running' should have a documentation or description, please use decorator @doc to add it."
+  running,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'succeeded' should have a documentation or description, please use decorator @doc to add it."
+  succeeded,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'failed' should have a documentation or description, please use decorator @doc to add it."
+  failed,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'cancelled' should have a documentation or description, please use decorator @doc to add it."
+  cancelled,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'cancelling' should have a documentation or description, please use decorator @doc to add it."
+  cancelling,
 }
 
 @doc("The status of the task at the mentioned last update time.")

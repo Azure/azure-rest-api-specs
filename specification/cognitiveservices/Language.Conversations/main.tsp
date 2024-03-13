@@ -346,6 +346,7 @@ enum extraInformationKind {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'ListKey' should have a documentation or description, please use decorator @doc to add it."
   ListKey,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'RegexKey' should have a documentation or description, please use decorator @doc to add it."
+  @added(Versions.v2023_04_01)
   RegexKey,
 }
 

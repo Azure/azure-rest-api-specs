@@ -238,6 +238,34 @@
     }
   },
   "definitions": {
+    "AADToken": {
+      "type": "object",
+      "description": "These are the [Azure Active Directory OAuth2](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Azure Active directory configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* Currently, Azure Active Directory [v1.0 or v2.0](https://docs.microsoft.com/azure/active-directory/develop/azure-ad-endpoint-comparison) supports Work, School, and Guests but does not support Personal accounts.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "OAuth2 authentication",
+          "enum": [
+            "oauth2"
+          ]
+        },
+        "flows": {
+          "type": "array",
+          "description": "Supported OAuth2 flows",
+          "items": {}
+        },
+        "defaultScopes": {
+          "type": "array",
+          "description": "Oauth2 scopes of every flow. Overridden by scope definitions in specific flows",
+          "items": {}
+        }
+      },
+      "required": [
+        "type",
+        "flows",
+        "defaultScopes"
+      ]
+    },
     "AbstractiveSummarizationLROResult": {
       "type": "object",
       "description": "An object representing the results for an Abstractive Summarization task.",
@@ -304,6 +332,22 @@
         "documents"
       ]
     },
+    "AbstractiveSummarizationResultBase": {
+      "type": "object",
+      "description": "An object representing the summarization results of each document.",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "$ref": "#/definitions/AbstractiveSummaryDocumentResultWithDetectedLanguage"
+          }
+        }
+      },
+      "required": [
+        "documents"
+      ]
+    },
     "AbstractiveSummarizationTaskParameters": {
       "type": "object",
       "description": "Supported parameters for the pre-build Abstractive Summarization task.",
@@ -318,6 +362,21 @@
           "description": "model version",
           "default": "latest"
         },
+        "sentenceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Controls the approximate number of sentences in the output summaries."
+        },
+        "stringIndexType": {
+          "$ref": "#/definitions/StringIndexType",
+          "description": "String index type"
+        }
+      }
+    },
+    "AbstractiveSummarizationTaskParametersBase": {
+      "type": "object",
+      "description": "Supported parameters for an Abstractive Summarization task.",
+      "properties": {
         "sentenceCount": {
           "type": "integer",
           "format": "int32",
@@ -348,6 +407,41 @@
       },
       "required": [
         "text"
+      ]
+    },
+    "AbstractiveSummaryDocumentResult": {
+      "type": "object",
+      "description": "An object representing the pre-build summarization results of each document.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
+        "summaries": {
+          "type": "array",
+          "description": "A list of abstractive summaries.",
+          "items": {
+            "$ref": "#/definitions/AbstractiveSummary"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "id",
+        "warnings",
+        "summaries"
       ]
     },
     "AbstractiveSummaryDocumentResultWithDetectedLanguage": {
@@ -510,6 +604,21 @@
       ],
       "x-ms-discriminator-value": "EntityRecognition"
     },
+    "AnalyzeTextJobErrors": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "errors"
+      ]
+    },
     "AnalyzeTextJobState": {
       "type": "object",
       "properties": {
@@ -568,6 +677,14 @@
         "tasks"
       ]
     },
+    "AnalyzeTextJobStatistics": {
+      "type": "object",
+      "properties": {
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics"
+        }
+      }
+    },
     "AnalyzeTextJobsInput": {
       "type": "object",
       "properties": {
@@ -621,7 +738,7 @@
           "description": "The last updated time in UTC for the task."
         },
         "status": {
-          "$ref": "#/definitions/State",
+          "$ref": "#/definitions/TaskStatus",
           "description": "The status of the task at the mentioned last update time."
         },
         "taskName": {
@@ -737,6 +854,29 @@
       ],
       "x-ms-discriminator-value": "PiiEntityRecognition"
     },
+    "AnalyzeTextPreBuiltResult": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/AnalyzeTextDocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics"
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
+        }
+      },
+      "required": [
+        "errors",
+        "modelVersion"
+      ]
+    },
     "AnalyzeTextSentimentAnalysisInput": {
       "type": "object",
       "properties": {
@@ -811,6 +951,101 @@
       "x-ms-enum": {
         "name": "AnalyzeTextTaskResultsKind",
         "modelAsString": true
+      }
+    },
+    "AnswerSpan": {
+      "type": "object",
+      "description": "Answer span object of QnA.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Predicted text of answer span."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Predicted score of answer span, value ranges from 0 to 1.",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The answer span offset from the start of answer."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of the answer span."
+        }
+      }
+    },
+    "AnswersOptions": {
+      "type": "object",
+      "description": "Parameters to query a knowledge base.",
+      "properties": {
+        "qnaId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Exact QnA ID to fetch from the knowledge base, this field takes priority over question."
+        },
+        "question": {
+          "type": "string",
+          "description": "User question to query against the knowledge base."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max number of answers to be returned for the question."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Unique identifier for the user."
+        },
+        "confidenceScoreThreshold": {
+          "type": "number",
+          "format": "double",
+          "description": "Minimum threshold score for answers, value ranges from 0 to 1.",
+          "minimum": 0,
+          "maximum": 1,
+          "x-ms-client-name": "confidenceThreshold"
+        },
+        "context": {
+          "$ref": "#/definitions/KnowledgeBaseAnswerContext",
+          "description": "Context object with previous QnA's information.",
+          "x-ms-client-name": "answerContext"
+        },
+        "rankerType": {
+          "$ref": "#/definitions/RankerKind",
+          "description": "Type of ranker to be used.",
+          "x-ms-client-name": "rankerKind"
+        },
+        "filters": {
+          "$ref": "#/definitions/QueryFilters",
+          "description": "Filter QnAs based on given metadata list and knowledge base sources."
+        },
+        "answerSpanRequest": {
+          "$ref": "#/definitions/ShortAnswerOptions",
+          "description": "To configure Answer span prediction feature.",
+          "x-ms-client-name": "shortAnswerOptions"
+        },
+        "includeUnstructuredSources": {
+          "type": "boolean",
+          "description": "(Optional) Flag to enable Query over Unstructured Sources."
+        }
+      }
+    },
+    "AnswersResult": {
+      "type": "object",
+      "description": "Represents List of Question Answers.",
+      "properties": {
+        "answers": {
+          "type": "array",
+          "description": "Represents Answer Result list.",
+          "items": {
+            "$ref": "#/definitions/KnowledgeBaseAnswer"
+          }
+        }
       }
     },
     "AreaMetadata": {
@@ -958,6 +1193,21 @@
       "discriminator": "metadataKind",
       "required": [
         "metadataKind"
+      ]
+    },
+    "BaseTemporalMetadata": {
+      "type": "object",
+      "properties": {
+        "dateValues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DateValue"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "dateValues"
       ]
     },
     "Certainty": {
@@ -1197,6 +1447,43 @@
       ],
       "x-ms-discriminator-value": "CustomEntityRecognition"
     },
+    "CustomEntitiesResult": {
+      "type": "object",
+      "description": "Custom Task Results",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+        },
+        "projectName": {
+          "type": "string",
+          "description": "This field indicates the project name for the model."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
+        },
+        "documents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntitiesDocumentResult"
+          }
+        }
+      },
+      "required": [
+        "errors",
+        "projectName",
+        "deploymentName",
+        "documents"
+      ]
+    },
     "CustomEntitiesResultWithDocumentDetectedLanguage": {
       "type": "object",
       "description": "Custom Task Results",
@@ -1280,6 +1567,49 @@
         }
       ],
       "x-ms-discriminator-value": "CustomEntityRecognitionLROResults"
+    },
+    "CustomHealthcareEntitiesDocumentResult": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
+        "entities": {
+          "type": "array",
+          "description": "Healthcare entities.",
+          "items": {
+            "$ref": "#/definitions/CustomHealthcareEntity"
+          },
+          "x-ms-identifiers": []
+        },
+        "relations": {
+          "type": "array",
+          "description": "Healthcare entity relations.",
+          "items": {
+            "$ref": "#/definitions/HealthcareRelation"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "id",
+        "warnings",
+        "entities",
+        "relations"
+      ]
     },
     "CustomHealthcareEntitiesDocumentResultWithDocumentDetectedLanguage": {
       "type": "object",
@@ -1480,6 +1810,44 @@
         "deploymentName"
       ]
     },
+    "CustomLabelClassificationResult": {
+      "type": "object",
+      "description": "Custom Task Results",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+        },
+        "projectName": {
+          "type": "string",
+          "description": "This field indicates the project name for the model."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
+        },
+        "documents": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "$ref": "#/definitions/ClassificationDocumentResult"
+          }
+        }
+      },
+      "required": [
+        "errors",
+        "projectName",
+        "deploymentName",
+        "documents"
+      ]
+    },
     "CustomLabelClassificationResultWithDocumentDetectedLanguage": {
       "type": "object",
       "description": "Custom Task Results",
@@ -1573,6 +1941,36 @@
         }
       },
       "required": [
+        "projectName",
+        "deploymentName"
+      ]
+    },
+    "CustomResult": {
+      "type": "object",
+      "description": "Custom Task Results",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+        },
+        "projectName": {
+          "type": "string",
+          "description": "This field indicates the project name for the model."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
+        }
+      },
+      "required": [
+        "errors",
         "projectName",
         "deploymentName"
       ]
@@ -1753,6 +2151,49 @@
         "deploymentName"
       ]
     },
+    "CustomSentimentDocumentResult": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
+        "sentiment": {
+          "$ref": "#/definitions/Sentiment",
+          "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed)."
+        },
+        "confidenceScores": {
+          "$ref": "#/definitions/SentimentConfidenceScores",
+          "description": "The sentiment confidence score between 0 and 1 for the sentence for all classes."
+        },
+        "sentences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomSentenceSentiment"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "id",
+        "warnings",
+        "sentiment",
+        "confidenceScores",
+        "sentences"
+      ]
+    },
     "CustomSingleLabelClassificationLROResult": {
       "type": "object",
       "properties": {
@@ -1788,6 +2229,29 @@
     "CustomSingleLabelClassificationTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a Custom Single Classification task.",
+      "properties": {
+        "loggingOptOut": {
+          "type": "boolean",
+          "description": "logging opt out",
+          "default": false
+        },
+        "projectName": {
+          "type": "string",
+          "description": "This field indicates the project name for the model."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
+        }
+      },
+      "required": [
+        "projectName",
+        "deploymentName"
+      ]
+    },
+    "CustomTaskParameters": {
+      "type": "object",
+      "description": "Parameters object for a text analysis task using custom models.",
       "properties": {
         "loggingOptOut": {
           "type": "boolean",
@@ -1900,6 +2364,15 @@
         "confidenceScore"
       ]
     },
+    "DocumentDetectedLanguage": {
+      "type": "object",
+      "properties": {
+        "detectedLanguage": {
+          "type": "string",
+          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
+        }
+      }
+    },
     "DocumentError": {
       "type": "object",
       "description": "Contains details of errors encountered during a job execution.",
@@ -1916,6 +2389,34 @@
       "required": [
         "id",
         "error"
+      ]
+    },
+    "DocumentResponse": {
+      "type": "object"
+    },
+    "DocumentResult": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        }
+      },
+      "required": [
+        "id",
+        "warnings"
       ]
     },
     "DocumentStatistics": {
@@ -2083,6 +2584,18 @@
       ],
       "x-ms-discriminator-value": "DynamicClassificationResults"
     },
+    "DynamicClassificationType": {
+      "type": "string",
+      "description": "Specifies either one or multiple categories per document. Defaults to multi classification which may return more than one class for each document.",
+      "enum": [
+        "Multi",
+        "Single"
+      ],
+      "x-ms-enum": {
+        "name": "DynamicClassificationType",
+        "modelAsString": true
+      }
+    },
     "EntitiesDocumentResult": {
       "type": "object",
       "properties": {
@@ -2107,6 +2620,40 @@
           "description": "Recognized entities in the document.",
           "items": {
             "$ref": "#/definitions/Entity"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "id",
+        "warnings",
+        "entities"
+      ]
+    },
+    "EntitiesDocumentResultWithMetadata": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
+        "entities": {
+          "type": "array",
+          "description": "Recognized entities in the document.",
+          "items": {
+            "$ref": "#/definitions/EntityWithMetadata"
           },
           "x-ms-identifiers": []
         }
@@ -2891,6 +3438,59 @@
         "tags"
       ]
     },
+    "EntityWithTags": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Entity text as appears in the request."
+        },
+        "category": {
+          "type": "string",
+          "description": "Entity type."
+        },
+        "subcategory": {
+          "type": "string",
+          "description": "(Optional) Entity sub type."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score between 0 and 1 of the extracted entity."
+        },
+        "type": {
+          "type": "string",
+          "description": "An entity type is the lowest (or finest) granularity at which the entity has been detected. The type maps to the specific metadata attributes associated with the entity detected."
+        },
+        "tags": {
+          "type": "array",
+          "description": "List of entity tags. Tags are to express some similarities/affinity between entities.",
+          "items": {
+            "$ref": "#/definitions/EntityTag"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "text",
+        "category",
+        "offset",
+        "length",
+        "confidenceScore",
+        "type",
+        "tags"
+      ]
+    },
     "Error": {
       "type": "object",
       "description": "The error object.",
@@ -2968,6 +3568,40 @@
       },
       "required": [
         "error"
+      ]
+    },
+    "ExtractedSummaryDocumentResult": {
+      "type": "object",
+      "description": "A ranked list of sentences representing the extracted summary.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
+        "sentences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExtractedSummarySentence"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "id",
+        "warnings",
+        "sentences"
       ]
     },
     "ExtractedSummaryDocumentResultWithDetectedLanguage": {
@@ -3103,6 +3737,30 @@
         "documents"
       ]
     },
+    "ExtractiveSummarizationSortingCriteria": {
+      "type": "string",
+      "description": "The sorting criteria to use for the results of Extractive Summarization.",
+      "enum": [
+        "Offset",
+        "Rank"
+      ],
+      "x-ms-enum": {
+        "name": "ExtractiveSummarizationSortingCriteria",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Offset",
+            "value": "Offset",
+            "description": "Indicates that results should be sorted in order of appearance in the text."
+          },
+          {
+            "name": "Rank",
+            "value": "Rank",
+            "description": "Indicates that results should be sorted in order of importance (i.e. rank score) according to the model."
+          }
+        ]
+      }
+    },
     "ExtractiveSummarizationTaskParameters": {
       "type": "object",
       "description": "Supported parameters for an Extractive Summarization task.",
@@ -3217,6 +3875,54 @@
           "description": "Describes temporal information regarding the entity."
         }
       }
+    },
+    "HealthcareEntitiesDocumentResult": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
+        "entities": {
+          "type": "array",
+          "description": "Healthcare entities.",
+          "items": {
+            "$ref": "#/definitions/HealthcareEntity"
+          },
+          "x-ms-identifiers": []
+        },
+        "relations": {
+          "type": "array",
+          "description": "Healthcare entity relations.",
+          "items": {
+            "$ref": "#/definitions/HealthcareRelation"
+          },
+          "x-ms-identifiers": []
+        },
+        "fhirBundle": {
+          "type": "object",
+          "description": "JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html.",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "id",
+        "warnings",
+        "entities",
+        "relations"
+      ]
     },
     "HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage": {
       "type": "object",
@@ -3623,6 +4329,97 @@
       ],
       "additionalProperties": {}
     },
+    "InputWarning": {
+      "type": "object",
+      "description": "Contains details of warnings encountered during a job execution.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Warning code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Warning message."
+        },
+        "targetRef": {
+          "type": "string",
+          "description": "A JSON pointer reference indicating the target object."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "JobErrors": {
+      "type": "object",
+      "description": "job errors",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "errors",
+          "items": {
+            "$ref": "#/definitions/ErrorResponse"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "errors"
+      ]
+    },
+    "JobState": {
+      "type": "object",
+      "description": "job state",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "display name"
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time job created"
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time job expires"
+        },
+        "jobId": {
+          "type": "string",
+          "description": "job ID",
+          "readOnly": true
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "last updated date and time"
+        },
+        "status": {
+          "$ref": "#/definitions/State",
+          "description": "status"
+        },
+        "errors": {
+          "type": "array",
+          "description": "errors",
+          "items": {
+            "$ref": "#/definitions/ErrorResponse"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "next link"
+        }
+      },
+      "required": [
+        "createdDateTime",
+        "jobId",
+        "lastUpdatedDateTime",
+        "status"
+      ]
+    },
     "KeyPhraseExtractionLROResult": {
       "type": "object",
       "properties": {
@@ -3719,6 +4516,39 @@
       ],
       "x-ms-discriminator-value": "KeyPhraseExtractionResults"
     },
+    "KeyPhrasesDocumentResult": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
+        "keyPhrases": {
+          "type": "array",
+          "description": "A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "warnings",
+        "keyPhrases"
+      ]
+    },
     "KeyPhrasesDocumentResultWithDetectedLanguage": {
       "type": "object",
       "description": "A ranked list of sentences representing the extracted summary.",
@@ -3755,6 +4585,119 @@
         "id",
         "warnings",
         "keyPhrases"
+      ]
+    },
+    "KnowledgeBaseAnswer": {
+      "type": "object",
+      "description": "Represents knowledge base answer.",
+      "properties": {
+        "questions": {
+          "type": "array",
+          "description": "List of questions associated with the answer.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "answer": {
+          "type": "string",
+          "description": "Answer text."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Answer confidence score, value ranges from 0 to 1.",
+          "minimum": 0,
+          "maximum": 1,
+          "x-ms-client-name": "confidence"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "ID of the QnA result.",
+          "x-ms-client-name": "qnaId"
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of QnA result."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Metadata associated with the answer, useful to categorize or filter question answers.",
+          "additionalProperties": {}
+        },
+        "dialog": {
+          "$ref": "#/definitions/KnowledgeBaseAnswerDialog",
+          "description": "Dialog associated with Answer."
+        },
+        "answerSpan": {
+          "$ref": "#/definitions/AnswerSpan",
+          "description": "Answer span object of QnA with respect to user's question.",
+          "x-ms-client-name": "shortAnswer"
+        }
+      }
+    },
+    "KnowledgeBaseAnswerContext": {
+      "type": "object",
+      "description": "Context object with previous QnA's information.",
+      "properties": {
+        "previousQnaId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Previous turn top answer result QnA ID."
+        },
+        "previousUserQuery": {
+          "type": "string",
+          "description": "Previous user query.",
+          "x-ms-client-name": "previousQuestion"
+        }
+      },
+      "required": [
+        "previousQnaId"
+      ]
+    },
+    "KnowledgeBaseAnswerDialog": {
+      "type": "object",
+      "description": "Dialog associated with Answer.",
+      "properties": {
+        "isContextOnly": {
+          "type": "boolean",
+          "description": "To mark if a prompt is relevant only with a previous question or not. If true, do not include this QnA as search result for queries without context; otherwise, if false, ignores context and includes this QnA in search result."
+        },
+        "prompts": {
+          "type": "array",
+          "description": "List of prompts associated with the answer.",
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/definitions/KnowledgeBaseAnswerPrompt"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "KnowledgeBaseAnswerPrompt": {
+      "type": "object",
+      "description": "Prompt for an answer.",
+      "properties": {
+        "displayOrder": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Index of the prompt - used in ordering of the prompts."
+        },
+        "qnaId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "QnA ID corresponding to the prompt."
+        },
+        "displayText": {
+          "type": "string",
+          "description": "Text displayed to represent a follow up question prompt.",
+          "maxLength": 200
+        }
+      },
+      "required": [
+        "displayOrder",
+        "qnaId",
+        "displayText"
       ]
     },
     "LanguageDetectionAnalysisInput": {
@@ -3950,6 +4893,39 @@
         "modelAsString": true
       }
     },
+    "LinkedEntitiesDocumentResult": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
+        "entities": {
+          "type": "array",
+          "description": "Recognized well known entities in the document.",
+          "items": {
+            "$ref": "#/definitions/LinkedEntity"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "warnings",
+        "entities"
+      ]
+    },
     "LinkedEntity": {
       "type": "object",
       "properties": {
@@ -4015,6 +4991,18 @@
       ],
       "x-ms-discriminator-value": "ListComponent"
     },
+    "LogicalOperationKind": {
+      "type": "string",
+      "description": "Set to 'OR' or 'AND' for using corresponding logical operation.",
+      "enum": [
+        "AND",
+        "OR"
+      ],
+      "x-ms-enum": {
+        "name": "LogicalOperationKind",
+        "modelAsString": true
+      }
+    },
     "Match": {
       "type": "object",
       "properties": {
@@ -4055,6 +5043,33 @@
       ],
       "x-ms-discriminator-value": "matchLongest"
     },
+    "MetadataFilter": {
+      "type": "object",
+      "description": "Find QnAs that are associated with the given list of metadata.",
+      "properties": {
+        "metadata": {
+          "type": "array",
+          "description": "List of metadata.",
+          "items": {
+            "$ref": "#/definitions/MetadataRecord"
+          },
+          "x-ms-identifiers": []
+        },
+        "logicalOperation": {
+          "type": "string",
+          "description": "Operation used to join metadata filters.",
+          "default": "AND",
+          "enum": [
+            "AND",
+            "OR"
+          ],
+          "x-ms-enum": {
+            "name": "LogicalOperationKind",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "MetadataKind": {
       "type": "string",
       "description": "The entity Metadata object kind.",
@@ -4081,6 +5096,24 @@
         "name": "MetadataKind",
         "modelAsString": true
       }
+    },
+    "MetadataRecord": {
+      "type": "object",
+      "description": "Object to provide the key value pair for each metadata.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Metadata Key from Metadata dictionary used in the QnA."
+        },
+        "value": {
+          "type": "string",
+          "description": "Metadata Value from Metadata dictionary used in the QnA."
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ]
     },
     "MultiLanguageAnalysisInput": {
       "type": "object",
@@ -4248,6 +5281,45 @@
         "name": "OrdinalRelativeTo",
         "modelAsString": true
       }
+    },
+    "PIIEntitiesDocumentResult": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
+        "redactedText": {
+          "type": "string",
+          "description": "Returns redacted text."
+        },
+        "entities": {
+          "type": "array",
+          "description": "Recognized entities in the document.",
+          "items": {
+            "$ref": "#/definitions/Entity"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "id",
+        "warnings",
+        "redactedText",
+        "entities"
+      ]
     },
     "PIIEntityRecognitionLROResult": {
       "type": "object",
@@ -4428,6 +5500,18 @@
         }
       ],
       "x-ms-discriminator-value": "PiiEntityRecognitionResults"
+    },
+    "Pagination": {
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
+      "required": [
+        "nextLink"
+      ]
     },
     "PiiCategories": {
       "type": "string",
@@ -4793,6 +5877,70 @@
         "modelAsString": true
       }
     },
+    "PiiDomain": {
+      "type": "string",
+      "enum": [
+        "phi",
+        "none"
+      ],
+      "x-ms-enum": {
+        "name": "PiiDomain",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "phi",
+            "value": "phi",
+            "description": "Indicates that entities in the Personal Health Information domain should be redacted."
+          },
+          {
+            "name": "none",
+            "value": "none",
+            "description": "Indicates that no domain is specified."
+          }
+        ]
+      }
+    },
+    "PreBuiltResult": {
+      "type": "object",
+      "description": "Pre built result",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "statistics"
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
+        }
+      },
+      "required": [
+        "errors",
+        "modelVersion"
+      ]
+    },
+    "PreBuiltTaskParameters": {
+      "type": "object",
+      "description": "Parameters object for a text analysis task using pre-built models.",
+      "properties": {
+        "loggingOptOut": {
+          "type": "boolean",
+          "description": "logging opt out",
+          "default": false
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "model version",
+          "default": "latest"
+        }
+      }
+    },
     "PrebuiltComponent": {
       "type": "object",
       "description": "This object contains information of the prebuilt component of the detected entity.",
@@ -4812,6 +5960,47 @@
       ],
       "x-ms-discriminator-value": "PrebuiltComponent"
     },
+    "QuantityMetadata": {
+      "type": "object",
+      "description": "Represents Metadata for quantities.",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "The numeric value that the extracted text denotes."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "QueryFilters": {
+      "type": "object",
+      "description": "filters over knowledge base.",
+      "properties": {
+        "metadataFilter": {
+          "$ref": "#/definitions/MetadataFilter",
+          "description": "filters over knowledge base."
+        },
+        "sourceFilter": {
+          "$ref": "#/definitions/SourceFilter",
+          "description": "filters over knowledge base."
+        },
+        "logicalOperation": {
+          "type": "string",
+          "description": "Logical operation used to join metadata filter with source filter.",
+          "default": "AND",
+          "enum": [
+            "AND",
+            "OR"
+          ],
+          "x-ms-enum": {
+            "name": "LogicalOperationKind",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "RangeInclusivity": {
       "type": "string",
       "description": "The range inclusiveness of this property property.",
@@ -4824,6 +6013,30 @@
       "x-ms-enum": {
         "name": "RangeInclusivity",
         "modelAsString": true
+      }
+    },
+    "RankerKind": {
+      "type": "string",
+      "description": "Type of ranker to be used",
+      "enum": [
+        "Default ranker",
+        "Question only ranker"
+      ],
+      "x-ms-enum": {
+        "name": "RankerKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "Default ranker",
+            "description": "Default ranker."
+          },
+          {
+            "name": "Question",
+            "value": "Question only ranker",
+            "description": "Question only ranker."
+          }
+        ]
       }
     },
     "RedactionCharacter": {
@@ -5186,6 +6399,48 @@
         "negative"
       ]
     },
+    "SentimentDocumentResult": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
+        "sentiment": {
+          "$ref": "#/definitions/Sentiment",
+          "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed)."
+        },
+        "confidenceScores": {
+          "$ref": "#/definitions/SentimentConfidenceScores"
+        },
+        "sentences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SentenceSentiment"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "id",
+        "warnings",
+        "sentiment",
+        "confidenceScores",
+        "sentences"
+      ]
+    },
     "SentimentLROResult": {
       "type": "object",
       "properties": {
@@ -5324,6 +6579,42 @@
         "modelAsString": true
       }
     },
+    "ShortAnswerOptions": {
+      "type": "object",
+      "description": "To configure Answer span prediction feature.",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "description": "Enable or disable Answer Span prediction."
+        },
+        "confidenceScoreThreshold": {
+          "type": "number",
+          "format": "double",
+          "description": "Minimum threshold score required to include an answer span, value ranges from 0 to 1.",
+          "minimum": 0,
+          "maximum": 1,
+          "x-ms-client-name": "confidenceThreshold"
+        },
+        "topAnswersWithSpan": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of Top answers to be considered for span prediction from 1 to 10.",
+          "minimum": 1,
+          "maximum": 10,
+          "x-ms-client-name": "top"
+        }
+      },
+      "required": [
+        "enable"
+      ]
+    },
+    "SourceFilter": {
+      "type": "array",
+      "description": "Find QnAs that are associated with any of the given list of sources in knowledge base.",
+      "items": {
+        "type": "string"
+      }
+    },
     "SpeedMetadata": {
       "type": "object",
       "description": "Represents the Speed entity Metadata model.",
@@ -5386,6 +6677,21 @@
       ],
       "x-ms-enum": {
         "name": "State",
+        "modelAsString": true
+      }
+    },
+    "Status": {
+      "type": "string",
+      "enum": [
+        "notStarted",
+        "running",
+        "succeeded",
+        "failed",
+        "cancelled",
+        "cancelling"
+      ],
+      "x-ms-enum": {
+        "name": "Status",
         "modelAsString": true
       }
     },
@@ -5476,6 +6782,62 @@
         "relationType"
       ]
     },
+    "TaskIdentifier": {
+      "type": "object",
+      "description": "Base task object.",
+      "properties": {
+        "taskName": {
+          "type": "string",
+          "description": "task name"
+        }
+      }
+    },
+    "TaskParameters": {
+      "type": "object",
+      "description": "Base parameters object for a text analysis task.",
+      "properties": {
+        "loggingOptOut": {
+          "type": "boolean",
+          "description": "logging opt out",
+          "default": false
+        }
+      }
+    },
+    "TaskState": {
+      "type": "object",
+      "description": "Returns the current state of the task.",
+      "properties": {
+        "lastUpdateDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last updated time in UTC for the task."
+        },
+        "status": {
+          "$ref": "#/definitions/TaskStatus",
+          "description": "The status of the task at the mentioned last update time."
+        }
+      },
+      "required": [
+        "lastUpdateDateTime",
+        "status"
+      ]
+    },
+    "TaskStatus": {
+      "type": "string",
+      "description": "The status of the task at the mentioned last update time.",
+      "enum": [
+        "notStarted",
+        "running",
+        "succeeded",
+        "failed",
+        "cancelled",
+        "cancelling"
+      ],
+      "x-ms-enum": {
+        "name": "TaskStatus",
+        "modelAsString": true
+      }
+    },
     "Tasks": {
       "type": "object",
       "properties": {
@@ -5508,6 +6870,17 @@
         "failed",
         "inProgress",
         "total"
+      ]
+    },
+    "TasksState": {
+      "type": "object",
+      "properties": {
+        "tasks": {
+          "$ref": "#/definitions/Tasks"
+        }
+      },
+      "required": [
+        "tasks"
       ]
     },
     "TemperatureMetadata": {
@@ -5675,6 +7048,42 @@
         }
       ],
       "x-ms-discriminator-value": "TimeMetadata"
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Analyze Conversations Service Versions",
+      "enum": [
+        "2022-05-01",
+        "2023-04-01",
+        "2023-04-15-preview",
+        "2023-11-15-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2022_05_01",
+            "value": "2022-05-01",
+            "description": "Version 2022-05-01"
+          },
+          {
+            "name": "v2023_04_01",
+            "value": "2023-04-01",
+            "description": "Version 2023-04-01"
+          },
+          {
+            "name": "v2023_04_15_preview",
+            "value": "2023-04-15-preview",
+            "description": "Version 2023-04-15-preview"
+          },
+          {
+            "name": "v2023_11_15_preview",
+            "value": "2023-11-15-preview",
+            "description": "Version 2023-11-15-preview"
+          }
+        ]
+      }
     },
     "VolumeMetadata": {
       "type": "object",
