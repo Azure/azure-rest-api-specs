@@ -1113,6 +1113,49 @@
         }
       }
     },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/quotaAllocationRequests": {
+      "get": {
+        "tags": [
+          "SubscriptionQuotaAllocationRequests"
+        ],
+        "summary": "Get all the quotaAllocationRequests for a resourceProvider/location.",
+        "description": "Get all the quotaAllocationRequests for a resourceProvider/location. The filter paramter for location is required.",
+        "operationId": "GroupQuotaSubscriptionQuotaAllocation_List",
+        "x-ms-examples": {
+          "SubscriptionQuotaAllocation_Put_Request_ForCompute": {
+            "$ref": "./examples/SubscriptionQuotaAllocationRequests/PutSubscriptionQuotaAllocationRequest_List-Compute.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagementGroupId"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/GroupQuotaName"
+          },
+          {
+            "$ref": "#/parameters/ResourceProviderName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#parameters/FilterInQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. , Create or Update",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionQuotaAllocationsList"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Management/managementGroups/{managementGroupId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/quotaAllocationRequests/{resourceName}": {
       "put": {
         "tags": [
