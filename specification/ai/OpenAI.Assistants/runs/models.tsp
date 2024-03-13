@@ -138,7 +138,9 @@ model RunError {
 
 @doc("Possible values for the status of an assistant thread run.")
 @added(ServiceApiVersions.v2024_02_15_preview)
-enum RunStatus {
+union RunStatus {
+  string,
+
   @doc("Represents a run that is queued to start.")
   queued: "queued",
 
