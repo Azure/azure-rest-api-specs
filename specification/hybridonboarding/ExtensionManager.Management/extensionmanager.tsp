@@ -161,7 +161,7 @@ interface ExtensionManagers {
   get is ArmResourceRead<ExtensionManager>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ExtensionManager>;
   update is ArmCustomPatchAsync<ExtensionManager, ExtensionManagerPatch>;
-  delete is ArmResourceDeleteAsync<ExtensionManager>;
+  delete is ArmResourceDeleteWithoutOkAsync<ExtensionManager>;
   listByResourceGroup is ArmResourceListByParent<ExtensionManager>;
   listBySubscription is ArmListBySubscription<ExtensionManager>;
   @doc("Enable extension(s) on the extension manager resource")
