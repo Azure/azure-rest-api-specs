@@ -148,11 +148,10 @@ suppressions:
     reason: The properties are consistent for the discriminator hierarchy.
     from: vmware.json
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].patch
-      - $.definitions.PlacementPolicyUpdate.properties.vmMembers
-      - $.definitions.PlacementPolicyUpdate.properties.hostMembers
-      - $.definitions.PlacementPolicyUpdate.properties.affinityStrength
-      - $.definitions.PlacementPolicyUpdate.properties.azureHybridBenefitType
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].patch.parameters.vmMembers
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].patch.parameters.hostMembers
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].patch.parameters.affinityStrength
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].patch.parameters.azureHybridBenefitType
 
   - code: DefinitionsPropertiesNamesCamelCase
     reason: Breaking change to update existing property names
@@ -166,12 +165,6 @@ suppressions:
       - $.definitions.WorkloadNetworkPublicIPProperties.properties.publicIPBlock
       - $.definitions.WorkloadNetworkPublicIPProperties.properties.numberOfPublicIPs
 
-  # - code: ArmResourcePropertiesBag
-  #   reason: Breaking change to update existing property names
-  #   from: vmware.json
-  #   where:
-  #     - $.definitions.PlacementPolicy
-
   - code: DeleteOperationAsyncResponseValidation
     reason: x-ms-long-running-operation-options does not need to be set if you follow ARM guidelines
     # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
@@ -180,21 +173,23 @@ suppressions:
   - code: PatchSkuProperty
     reason: sku can not be updated
     from: vmware.json
-    # where:
-    #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"].patch
-    #   - $.definitions.PrivateCloudUpdate
-    #   - $.definitions.ClusterUpdate
 
-  - code: LroPatch202
-    reason: Breaking change to add response
+  - code: PatchResponseCodes
+    reason: PrivateClouds_Update and Clusters_Update respond with 201 instead of 202. Changing it is breaking.
     from: vmware.json
-    # where:
-    #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"].patch
-    #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}"].patch
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"].patch
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}"].patch
 
-  - code: UnSupportedPatchProperties
-    reason: Breaking change to remove name or type properties
-    from: vmware.json
+  - code: PostResponseCodes
+    reason: PrivateClouds_RotateNsxtPassword & PrivateClouds_RotateVcenterPassword respond with 202 & 204. Changing it is breaking.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/rotateNsxtPassword"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/rotateVcenterPassword"].post
+
+  # - code: UnSupportedPatchProperties
+  #   reason: Breaking change to remove name or type properties
+  #   from: vmware.json
     # where: 
     #   - $ $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/segments/{segmentId}"].patch
 
@@ -215,10 +210,6 @@ suppressions:
     reason: false positives
     from: vmware.json
 
-  # - code: PropertiesTypeObjectNoDefinition
-  #   reason: false positives
-  #   from: vmware.json
-
   - code: XmsPageableForListCalls
     reasons: This are gets on a TypeSpec @singleton. These are false positives.
     from: vmware.json
@@ -228,10 +219,6 @@ suppressions:
 
   - code: DeleteResponseCodes
     reasons: ArmResourceDeleteAsync is still being used. Moving to ArmResourceDeleteWithoutOkAsync is breaking.
-
-  # - code: RequestBodyMustExistForPutPatch
-  #   reasons: false positives
-    # createOrUpdate is ArmResourceCreateOrUpdateAsync<IscsiPath>;
 
   - code: PatchBodyParametersSchema
     reasons: false positives
