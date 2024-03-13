@@ -101,7 +101,9 @@ model AzureSearchIndexFieldMappingOptions {
 The type of Azure Search retrieval query that should be executed when using it as an Azure OpenAI chat extension.
 """)
 @added(ServiceApiVersions.v2024_02_15_Preview)
-enum AzureSearchQueryType {
+union AzureSearchQueryType {
+  string,
+
   @doc("Represents the default, simple query parser.")
   simple: "simple",
 
