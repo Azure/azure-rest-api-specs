@@ -38,6 +38,8 @@ interface ProxyResourceOperationsDeviceGroups<
   get is ArmResourceRead<DeviceGroup>;
   @doc("Create a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DeviceGroup>;
+  #suppress "deprecated" "Existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
   @doc("Delete a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   delete is ArmResourceDeleteAsync<DeviceGroup>;
   @doc("Update a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
@@ -50,15 +52,56 @@ interface DeviceGroups
       DeviceGroup,
       ListQueryParameters
     > {
-  @autoRoute
   @doc("Counts devices in device group. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
+  @removed(Versions.v2024_04_01)
+  @sharedRoute
+  @autoRoute
+  @renamedFrom(Versions.v2024_04_01, "countDevices")
+  @armResourceAction(DeviceGroup)
+  @action("countDevices")
+  @post
+  deprecatedCountDevices(
+    ...ResourceInstanceParameters<DeviceGroup>,
+  ): ArmResponse<CountDeviceResponse> | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "preview api"
+  @doc("Counts devices in device group. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
+  @added(Versions.v2024_04_01)
+  @autoRoute
+  @sharedRoute
   @armResourceAction(DeviceGroup)
   @post
   countDevices(
     ...ResourceInstanceParameters<DeviceGroup>,
-  ): ArmResponse<CountDeviceResponse> | ErrorResponse;
+  ): ArmResponse<CountDevicesResponse> | ErrorResponse;
 
   @autoRoute
+  @sharedRoute
+  @armResourceAction(DeviceGroup)
+  @action("claimDevices")
+  @removed(Versions.v2024_04_01)
+  @renamedFrom(Versions.v2024_04_01, "claimDevices")
+  @doc("Bulk claims the devices. Use '.unassigned' or '.default' for the device group and product names when bulk claiming devices to a catalog only.")
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "location",
+    }
+  )
+  @post
+  deprecatedClaimDevices(
+    ...ResourceInstanceParameters<DeviceGroup>,
+
+    @doc("Bulk claim devices request body.")
+    @body
+    claimDevicesRequest: ClaimDevicesRequest,
+  ): ArmAcceptedResponse | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "preview api"
+  @autoRoute
+  @sharedRoute
+  @added(Versions.v2024_04_01)
   @armResourceAction(DeviceGroup)
   @doc("Bulk claims the devices. Use '.unassigned' or '.default' for the device group and product names when bulk claiming devices to a catalog only.")
   @extension("x-ms-long-running-operation", true)
@@ -75,7 +118,7 @@ interface DeviceGroups
     @doc("Bulk claim devices request body.")
     @body
     claimDevicesRequest: ClaimDevicesRequest,
-  ): ArmAcceptedResponse | ErrorResponse;
+  ): ArmAcceptedLroResponse | ErrorResponse;
 }
 
 @doc("The properties of deviceGroup")
@@ -105,21 +148,25 @@ model DeviceGroupProperties {
 }
 
 @doc("OS feed type values.")
-enum OSFeedType {
+union OSFeedType {
+  string,
+
   /** Retail OS feed type. */
-  Retail,
+  "Retail",
 
   /** Retail evaluation OS feed type. */
-  RetailEval,
+  "RetailEval",
 }
 
 @doc("Update policy values.")
-enum UpdatePolicy {
+union UpdatePolicy {
+  string,
+
   /** Update all policy. */
-  UpdateAll,
+  "UpdateAll",
 
   /** No update for 3rd party app policy. */
-  No3rdPartyAppUpdates,
+  "No3rdPartyAppUpdates",
 }
 
 // Device group models

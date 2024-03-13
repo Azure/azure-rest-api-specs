@@ -17,3 +17,8 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/elasticsan/azure-mgmt-elasticsan/azure/mgmt/elasticsan
 ```
+
+``` yaml $(python)
+modelerfour:
+  flatten-models: false
+```
