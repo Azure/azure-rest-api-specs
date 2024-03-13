@@ -8803,7 +8803,7 @@
         "tags": [
           "AppPlatform"
         ],
-        "description": "Get an Job and its properties.",
+        "description": "Get a Job and its properties.",
         "operationId": "Job_Get",
         "parameters": [
           {
@@ -8956,7 +8956,7 @@
         "tags": [
           "AppPlatform"
         ],
-        "summary": "Start a Azure Spring Apps Job",
+        "summary": "Start an Azure Spring Apps Job",
         "operationId": "Job_Start",
         "parameters": [
           {
@@ -8977,7 +8977,7 @@
           {
             "name": "properties",
             "in": "body",
-            "description": "Properties used to start a job execution.",
+            "description": "Properties used to start a Job execution.",
             "required": false,
             "schema": {
               "$ref": "#/definitions/JobExecutionProperties"
@@ -9022,7 +9022,7 @@
         "tags": [
           "AppPlatform"
         ],
-        "description": "List sensitive environment variables of Job.",
+        "description": "List sensitive environment variables of the Job.",
         "operationId": "Job_ListEnvSecrets",
         "parameters": [
           {
@@ -9067,7 +9067,7 @@
         "tags": [
           "AppPlatform"
         ],
-        "description": "Terminate execution of a running Azure Spring Apps job",
+        "description": "Terminate execution of a running Azure Spring Apps Job",
         "operationId": "JobExecution_Cancel",
         "parameters": [
           {
@@ -9091,7 +9091,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted. The response indicates the Job is now canceled and contains a Location header to\r\nquery the operation result.",
+            "description": "Accepted. The response indicates the Job is now canceled and contains a Location header to query the operation result.",
             "headers": {
               "Location": {
                 "type": "string"
@@ -9169,7 +9169,7 @@
         "tags": [
           "AppPlatform"
         ],
-        "description": "Get details of an execution of an Azure Spring Apps job",
+        "description": "Get details of an execution of an Azure Spring Apps Job",
         "operationId": "JobExecution_Get",
         "parameters": [
           {
@@ -15737,9 +15737,9 @@
           "$ref": "#/definitions/UserSourceInfo",
           "description": "Uploaded source information of the Job."
         },
-        "configServers": {
-          "$ref": "#/definitions/ConfigServerCollection",
-          "description": "Referenced config server collection"
+        "managedComponentReferences": {
+          "$ref": "#/definitions/ManagedComponentReferenceCollection",
+          "description": "Referenced managed components collection"
         },
         "triggerConfig": {
           "$ref": "#/definitions/JobTriggerConfig",
@@ -15940,15 +15940,15 @@
         }
       }
     },
-    "ConfigServerReference": {
-      "description": "A reference to the Config Server",
+    "ManagedComponentReference": {
+      "description": "A reference to the managed component like Config Server.",
       "required": [
         "resourceId"
       ],
       "type": "object",
       "properties": {
         "resourceId": {
-          "description": "Resource Id of the Config Server",
+          "description": "Resource Id of the managed component",
           "type": "string",
           "format": "arm-id",
           "x-ms-arm-id-details": {
@@ -15961,14 +15961,14 @@
         }
       }
     },
-    "ConfigServerCollection": {
-      "description": "Collection of Config Server reference",
+    "ManagedComponentReferenceCollection": {
+      "description": "Collection of managed component reference",
       "type": "array",
       "x-ms-identifiers": [
         "resourceId"
       ],
       "items": {
-        "$ref": "#/definitions/ConfigServerReference"
+        "$ref": "#/definitions/ManagedComponentReference"
       }
     }
   },
