@@ -36,8 +36,9 @@ model FleetUpdateStrategy is ProxyResource<FleetUpdateStrategyProperties> {
 }
 
 @doc("The provisioning state of the UpdateStrategy resource.")
-enum FleetUpdateStrategyProvisioningState {
-  ...ResourceProvisioningState,
+union FleetUpdateStrategyProvisioningState {
+  string,
+  ResourceProvisioningState,
 }
 
 @doc("The properties of the UpdateStrategy.")
@@ -63,6 +64,8 @@ interface FleetUpdateStrategies {
       IfNoneMatchParameters<FleetUpdateStrategy>
   >;
 
+  #suppress "deprecated" "Existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
   delete is FleetArmResourceDeleteAsync<
     FleetUpdateStrategy,
     BaseParameters<FleetUpdateStrategy> & IfMatchParameters<FleetUpdateStrategy>
