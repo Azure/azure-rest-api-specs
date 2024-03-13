@@ -147,7 +147,8 @@
             "in": "path",
             "description": "job ID",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "name": "showStats",
@@ -209,7 +210,8 @@
             "in": "path",
             "description": "job ID",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -705,7 +707,7 @@
           "description": "Date and time job expires"
         },
         "jobId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "job ID",
           "readOnly": true
         },
@@ -1235,6 +1237,11 @@
           "description": "Inner error."
         }
       }
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
     },
     "BaseEntityOverlapPolicy": {
       "type": "object",
@@ -3901,7 +3908,7 @@
       "description": "Error response.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "$ref": "#/definitions/Error",
           "description": "The error object."
         }
       },
@@ -4785,7 +4792,7 @@
           "description": "Date and time job expires"
         },
         "jobId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "job ID",
           "readOnly": true
         },
@@ -7428,6 +7435,7 @@
         },
         "documents": {
           "type": "array",
+          "description": "The sentiment analysis results for each document in the input.",
           "items": {
             "$ref": "#/definitions/SentimentDocumentResultWithDetectedLanguage"
           }
@@ -7539,9 +7547,9 @@
         "KilometersPerMinute",
         "KilometersPerSecond",
         "MilesPerHour",
-        "Knot",
-        "FootPerSecond",
-        "FootPerMinute",
+        "Knots",
+        "FeetPerSecond",
+        "FeetPerMinute",
         "YardsPerMinute",
         "YardsPerSecond",
         "MetersPerMillisecond",
@@ -7763,19 +7771,19 @@
       "properties": {
         "completed": {
           "type": "integer",
-          "format": "int32"
+          "format": "int64"
         },
         "failed": {
           "type": "integer",
-          "format": "int32"
+          "format": "int64"
         },
         "inProgress": {
           "type": "integer",
-          "format": "int32"
+          "format": "int64"
         },
         "total": {
           "type": "integer",
-          "format": "int32"
+          "format": "int64"
         },
         "items": {
           "type": "array",

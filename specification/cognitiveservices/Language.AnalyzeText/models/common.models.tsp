@@ -233,13 +233,13 @@ model TasksState {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model Tasks {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  completed: int32;
+  completed: int64;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  failed: int32;
+  failed: int64;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  inProgress: int32;
+  inProgress: int64;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  total: int32;
+  total: int64;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   items?: Array<AnalyzeTextLROResult>;
 }

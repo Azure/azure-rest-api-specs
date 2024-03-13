@@ -62,6 +62,7 @@ enum TokenSentimentValue {
 @doc("Sentiment analysis per document.")
 model SentimentResponse is PreBuiltResult {
   @typeChangedFrom(Versions.v2023_04_15_preview, Array<SentimentDocumentResult>)
+  @doc("The sentiment analysis results for each document in the input.")
   documents: Array<SentimentDocumentResultWithDetectedLanguage>;
 }
 

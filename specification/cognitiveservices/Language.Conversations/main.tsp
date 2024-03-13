@@ -205,7 +205,7 @@ model LuisCallingOptions {
   `show-all-intents`?: boolean;
 
   @doc("The timezone offset for the location of the request.")
-  timezoneOffset?: float32;
+  timezoneOffset?: int64;
 
   @doc("Enable spell checking.")
   spellCheck?: boolean;
@@ -699,16 +699,16 @@ model ConversationTasksState {
 @added(Versions.v2023_04_01)
 model Tasks {
   @doc("Count of tasks that finished successfully.")
-  completed: int32;
+  completed: int64;
 
   @doc("Count of tasks that failed.")
-  failed: int32;
+  failed: int64;
 
   @doc("Count of tasks that are currently in progress.")
-  inProgress: int32;
+  inProgress: int64;
 
   @doc("Total count of tasks submitted as part of the job.")
-  total: int32;
+  total: int64;
 
   @doc("List of results from tasks (if available).")
   items?: Array<AnalyzeConversationJobResult>;

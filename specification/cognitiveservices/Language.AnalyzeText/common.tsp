@@ -12,7 +12,10 @@ using Azure.Core.Traits;
 namespace Language.AnalyzeText;
 
 @doc("Error response.")
-model ErrorResponse is Azure.Core.Foundations.ErrorResponse;
+model ErrorResponse {
+  @doc("The error object.")
+  error: Error;
+}
 
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.")
@@ -158,7 +161,7 @@ model JobState {
   @doc("job ID")
   @key
   @visibility("read")
-  jobId: string;
+  jobId: uuid;
 
   @doc("last updated date and time")
   lastUpdatedDateTime: utcDateTime;
