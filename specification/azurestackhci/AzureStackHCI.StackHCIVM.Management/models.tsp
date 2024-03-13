@@ -434,7 +434,7 @@ model GalleryDiskImage {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "OS is a short form. GalleryOSDiskImage is the correct case."
 @doc("This is the OS disk image.")
 model GalleryOSDiskImage {
-  ...GalleryDiskImage,
+  ...GalleryDiskImage;
   // Add additional properties specific to GalleryOSDiskImage if needed
 }
 
