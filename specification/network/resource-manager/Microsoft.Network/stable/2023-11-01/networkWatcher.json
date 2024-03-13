@@ -2780,6 +2780,15 @@
             "$ref": "#/definitions/PacketCaptureFilter"
           },
           "description": "A list of packet capture filters."
+        },
+        "continuousCapture": {
+          "description": "This continuous capture is a nullable boolean, which can hold 'null', 'true' or 'false' value. If we do not pass this parameter, it would be consider as 'null', default value is 'null'.",
+          "type": "boolean"
+        },
+        "captureSettings": {
+          "type": "object",
+          "$ref": "#/definitions/PacketCaptureSettings",
+          "description": "The capture setting holds the 'FileCount', 'FileSizeInBytes', 'SessionTimeLimitInSeconds' values."
         }
       },
       "required": [
@@ -2812,7 +2821,7 @@
       "properties": {
         "storageId": {
           "type": "string",
-          "description": "The ID of the storage account to save the packet capture session. Required if no local file path is provided."
+          "description": "The ID of the storage account to save the packet capture session. Required if no localPath or filePath is provided."
         },
         "storagePath": {
           "type": "string",
@@ -2820,7 +2829,40 @@
         },
         "filePath": {
           "type": "string",
-          "description": "A valid local path on the targeting VM. Must include the name of the capture file (*.cap). For linux virtual machine it must start with /var/captures. Required if no storage ID is provided, otherwise optional."
+          "description": "This path is invalid if 'Continuous Capture' is provided with 'true' or 'false'. A valid local path on the targeting VM. Must include the name of the capture file (*.cap). For linux virtual machine it must start with /var/captures. Required if no storage ID is provided, otherwise optional."
+        },
+        "localPath": {
+          "type": "string",
+          "description": "This path is valid if 'Continuous Capture' is provided with 'true' or 'false' and required if no storage ID is provided, otherwise optional. Must include the name of the capture file (*.cap). For linux virtual machine it must start with /var/captures."
+        }
+      },
+      "description": "The storage location for a packet capture session."
+    },
+    "PacketCaptureSettings": {
+      "properties": {
+        "fileCount": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 10000,
+          "default": 10,
+          "description": "Number of file count. Default value of count is 10 and maximum number is 10000."
+        },
+        "fileSizeInBytes": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "default": 104857600,
+          "description": "Number of bytes captured per packet. Default value in bytes 104857600 (100MB) and maximum in bytes 4294967295 (4GB)."
+        },
+        "sessionTimeLimitInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "maximum": 604800,
+          "default": 86400,
+          "description": "Maximum duration of the capture session in seconds is 604800s (7 days) for a file. Default value in second 86400s (1 day)."
         }
       },
       "description": "The storage location for a packet capture session."
@@ -3117,6 +3159,10 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "identity": {
+          "description": "FlowLog resource Managed Identity",
+          "$ref": "./network.json#/definitions/ManagedServiceIdentity"
         }
       },
       "allOf": [
@@ -3263,6 +3309,10 @@
         "flowAnalyticsConfiguration": {
           "$ref": "#/definitions/TrafficAnalyticsProperties",
           "description": "Parameters that define the configuration of traffic analytics."
+        },
+        "identity": {
+          "description": "FlowLog resource Managed Identity",
+          "$ref": "./network.json#/definitions/ManagedServiceIdentity"
         }
       }
     },
