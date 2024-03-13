@@ -1243,6 +1243,9 @@
           },
           "Create Agent Pool with VirtualMachines pool type": {
             "$ref": "./examples/AgentPoolsCreate_TypeVirtualMachines.json"
+          },
+          "Create Agent Pool with VirtualMachines pool type and enable autoscaling": {
+            "$ref": "./examples/AgentPoolsCreate_TypeVirtualMachines_Autoscale.json"
           }
         }
       },
@@ -3870,6 +3873,14 @@
           },
           "x-ms-identifiers": [],
           "description": "Specifications on how to scale the VirtualMachines agent pool to a fixed size."
+        },
+        "autoscale": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AutoScaleProfile"
+          },
+          "x-ms-identifiers": [],
+          "description": "Specifications on how to auto-scale the VirtualMachines agent pool within a predefined size range."
         }
       },
       "description": "Specifications on how to scale a VirtualMachines agent pool."
@@ -3893,6 +3904,29 @@
         }
       },
       "description": "Specifications on number of machines."
+    },
+    "AutoScaleProfile": {
+      "type": "object",
+      "properties": {
+        "sizes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of allowed vm sizes. AKS will use the first available one when autoscaling. If a VM size is unavailable (e.g. due to quota or regional capacity reasons), AKS will use the next size."
+        },
+        "minCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of nodes for auto-scaling."
+        },
+        "maxCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of nodes for auto-scaling."
+        }
+      },
+      "description": "Specifications on auto-scaling."
     },
     "VirtualMachineNodesStatus": {
       "type": "array",
