@@ -422,13 +422,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridOnboarding/extensionManagers/{extensionManagerName}/addNewFabric": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridOnboarding/extensionManagers/{extensionManagerName}/addCustomLocation": {
       "post": {
-        "operationId": "ExtensionManagers_AddNewFabric",
+        "operationId": "ExtensionManagers_AddCustomLocation",
         "tags": [
           "ExtensionManagers"
         ],
-        "description": "Add new fabric/infra/scenario on the extension manager resource",
+        "description": "Add a new custom location on extension(s)",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -455,7 +455,11 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AddFabricRequestDetails"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AddCustomLocationDetails"
+              },
+              "x-ms-identifiers": []
             }
           }
         ],
@@ -492,8 +496,8 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "ExtensionManagers_AddNewFabric_MaximumSet_Gen": {
-            "$ref": "./examples/ExtensionManagers_AddNewFabric_MaximumSet_Gen.json"
+          "ExtensionManagers_AddCustomLocation_MaximumSet_Gen": {
+            "$ref": "./examples/ExtensionManagers_AddCustomLocation_MaximumSet_Gen.json"
           }
         }
       }
@@ -504,7 +508,7 @@
         "tags": [
           "ExtensionManagers"
         ],
-        "description": "Disable extensions on the extension manager resource",
+        "description": "Disable extension(s) on the extension manager resource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -584,7 +588,7 @@
         "tags": [
           "ExtensionManagers"
         ],
-        "description": "Enable extensions on the extension manager resource",
+        "description": "Enable extension(s) on the extension manager resource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -658,13 +662,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridOnboarding/extensionManagers/{extensionManagerName}/removeInfraAndScenario": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridOnboarding/extensionManagers/{extensionManagerName}/removeCustomLocation": {
       "post": {
-        "operationId": "ExtensionManagers_RemoveInfraAndScenario",
+        "operationId": "ExtensionManagers_RemoveCustomLocation",
         "tags": [
           "ExtensionManagers"
         ],
-        "description": "Remove a fabric/infra/scenario on the extension manager resource",
+        "description": "Remove a custom location from extension(s)",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -691,7 +695,11 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RemoveInfraAndScenarioDetails"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RemoveCustomLocationDetails"
+              },
+              "x-ms-identifiers": []
             }
           }
         ],
@@ -728,105 +736,68 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "ExtensionManagers_RemoveInfraAndScenario_MaximumSet_Gen": {
-            "$ref": "./examples/ExtensionManagers_RemoveInfraAndScenario_MaximumSet_Gen.json"
+          "ExtensionManagers_RemoveCustomLocation_MaximumSet_Gen": {
+            "$ref": "./examples/ExtensionManagers_RemoveCustomLocation_MaximumSet_Gen.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "AddFabricRequestDetails": {
+    "AddCustomLocationDetails": {
       "type": "object",
-      "description": "Request body for adding new fabric/scenario/infra POST action",
+      "description": "Request body for adding new custom location to an extension.",
       "properties": {
-        "infrastructure": {
+        "name": {
           "type": "string",
-          "description": "Infra of new fabric."
-        },
-        "scenario": {
-          "type": "string",
-          "description": "Azure scenario enabled. Ex: Migrate"
+          "description": "Name of the extension"
         }
       },
       "required": [
-        "infrastructure",
-        "scenario"
+        "name"
       ]
     },
     "DisableExtensionsRequestDetails": {
       "type": "object",
-      "description": "Request body details for disabling extensions POST action",
+      "description": "Request body details for disabling extension POST action",
       "properties": {
         "name": {
           "type": "string",
           "description": "Name of the extension"
-        },
-        "infrastructure": {
-          "type": "string",
-          "description": "Infra on which the extension will be disabled."
-        },
-        "scenario": {
-          "type": "string",
-          "description": "Azure scenario enabled. Ex: Migrate"
         }
       },
       "required": [
-        "name",
-        "infrastructure",
-        "scenario"
+        "name"
       ]
     },
     "EnableExtensionsRequestDetails": {
       "type": "object",
-      "description": "Request body details for enabling extensions POST action",
+      "description": "Request body details for enabling extension POST action",
       "properties": {
         "name": {
           "type": "string",
           "description": "Name of the extension"
         },
-        "infrastructure": {
-          "type": "string",
-          "description": "Infra on which the extension will be enabled."
+        "configurationSettings": {
+          "type": "object",
+          "x-nullable": true,
+          "description": "Configuration settings, as name-value pairs for configuring this extension.",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
-        "scenario": {
-          "type": "string",
-          "description": "Azure scenario enabled. Ex: Migrate"
-        },
-        "additionalCustomLocationCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Number of additional custom locations required for the extension"
+        "configurationProtectedSettings": {
+          "type": "object",
+          "x-nullable": true,
+          "x-ms-secret": true,
+          "description": "Configuration settings that are sensitive, as name-value pairs for configuring this extension.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
-        "name",
-        "infrastructure",
-        "scenario",
-        "additionalCustomLocationCount"
-      ]
-    },
-    "ExtensionDetails": {
-      "type": "object",
-      "description": "Extension details of an extension in extension profile.",
-      "properties": {
-        "customLocation": {
-          "type": "string",
-          "description": "Custom Location of the extension",
-          "readOnly": true
-        },
-        "infrastructure": {
-          "type": "string",
-          "description": "Infra on which extension is deployed."
-        },
-        "scenario": {
-          "type": "string",
-          "description": "Azure scenario enabled. Ex: Migrate"
-        }
-      },
-      "required": [
-        "infrastructure",
-        "scenario"
+        "name"
       ]
     },
     "ExtensionManager": {
@@ -917,14 +888,6 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
-        },
-        "scenarioProfile": {
-          "type": "array",
-          "description": "Scenario profile of the extension manager resource",
-          "items": {
-            "$ref": "#/definitions/ScenarioObject"
-          },
-          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -939,22 +902,38 @@
           "type": "string",
           "description": "Name of the extension"
         },
-        "extensionDetails": {
+        "customLocations": {
           "type": "array",
-          "description": "Extension details of an extension in extension profile.",
+          "description": "List of custom locations associated with the extension.",
           "items": {
-            "$ref": "#/definitions/ExtensionDetails"
+            "type": "string"
           },
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "state": {
           "$ref": "#/definitions/ExtensionState",
           "description": "Flag to enable/disable the extension"
+        },
+        "configurationSettings": {
+          "type": "object",
+          "x-nullable": true,
+          "description": "Configuration settings, as name-value pairs for configuring this extension.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "configurationProtectedSettings": {
+          "type": "object",
+          "x-nullable": true,
+          "x-ms-secret": true,
+          "description": "Configuration settings that are sensitive, as name-value pairs for configuring this extension.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
         "name",
-        "extensionDetails",
         "state"
       ]
     },
@@ -1037,40 +1016,22 @@
       },
       "readOnly": true
     },
-    "RemoveInfraAndScenarioDetails": {
+    "RemoveCustomLocationDetails": {
       "type": "object",
-      "description": "Request body for removing a fabric/scenario/infra POST action",
+      "description": "Request body for removing custom location from extension.",
       "properties": {
-        "infrastructure": {
+        "name": {
           "type": "string",
-          "description": "Infra of fabric to be removed."
+          "description": "Name of the extension"
         },
-        "scenario": {
+        "customLocationId": {
           "type": "string",
-          "description": "Azure scenario enabled. Ex: Migrate"
+          "description": "ARM ID of the custom location"
         }
       },
       "required": [
-        "infrastructure",
-        "scenario"
-      ]
-    },
-    "ScenarioObject": {
-      "type": "object",
-      "description": "Scenario object inside the scenario profile.",
-      "properties": {
-        "infrastructure": {
-          "type": "string",
-          "description": "Infra on which extension is deployed."
-        },
-        "scenario": {
-          "type": "string",
-          "description": "Azure scenario enabled. Ex: Migrate"
-        }
-      },
-      "required": [
-        "infrastructure",
-        "scenario"
+        "name",
+        "customLocationId"
       ]
     },
     "Versions": {

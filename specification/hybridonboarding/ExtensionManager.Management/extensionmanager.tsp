@@ -41,8 +41,8 @@ model ExtensionManagerProperties {
   @visibility("read")
   extensionProfile?: ExtensionObject[];
 
-  @doc("Scenario profile of the extension manager resource")
-  scenarioProfile?: ScenarioObject[];
+  // @doc("Scenario profile of the extension manager resource")
+  // scenarioProfile?: ScenarioObject[];
 }
 
 @doc("Extension object inside the extension profile.")
@@ -50,34 +50,41 @@ model ExtensionObject {
   @doc("Name of the extension")
   name: string;
 
-  @doc("Extension details of an extension in extension profile.")
-  extensionDetails: ExtensionDetails[];
+  @doc("List of custom locations associated with the extension.")
+  @visibility("read")
+  customLocations?: string[];
 
   @doc("Flag to enable/disable the extension")
   state: ExtensionState;
+
+  @doc("Configuration settings, as name-value pairs for configuring this extension.")
+  configurationSettings?: Record<string>;
+
+  @doc("Configuration settings that are sensitive, as name-value pairs for configuring this extension.")
+  configurationProtectedSettings?: Record<string>;
 }
 
-@doc("Extension details of an extension in extension profile.")
-model ExtensionDetails {
-  @visibility("read")
-  @doc("Custom Location of the extension")
-  customLocation?: string;
+// @doc("Extension details of an extension in extension profile.")
+// model ExtensionDetails {
+//   @visibility("read")
+//   @doc("Custom Location of the extension")
+//   customLocation?: string;
 
-  @doc("Infra on which extension is deployed.")
-  infrastructure: string;
+//   @doc("Infra on which extension is deployed.")
+//   infrastructure: string;
 
-  @doc("Azure scenario enabled. Ex: Migrate")
-  scenario: string;
-}
+//   @doc("Azure scenario enabled. Ex: Migrate")
+//   scenario: string;
+// }
 
-@doc("Scenario object inside the scenario profile.")
-model ScenarioObject {
-  @doc("Infra on which extension is deployed.")
-  infrastructure: string;
+// @doc("Scenario object inside the scenario profile.")
+// model ScenarioObject {
+//   @doc("Infra on which extension is deployed.")
+//   infrastructure: string;
 
-  @doc("Azure scenario enabled. Ex: Migrate")
-  scenario: string;
-}
+//   @doc("Azure scenario enabled. Ex: Migrate")
+//   scenario: string;
+// }
 
 @doc("Properties of a Extension Manager that can be patched.")
 model ExtensionManagerPatch {
@@ -114,49 +121,37 @@ enum ExtensionState {
   Disabled,
 }
 
-@doc("Request body details for enabling extensions POST action")
+@doc("Request body details for enabling extension POST action")
 model EnableExtensionsRequestDetails {
   @doc("Name of the extension")
   name: string;
 
-  @doc("Infra on which the extension will be enabled.")
-  infrastructure: string;
+  @doc("Configuration settings, as name-value pairs for configuring this extension.")
+  configurationSettings?: Record<string>;
 
-  @doc("Azure scenario enabled. Ex: Migrate")
-  scenario: string;
-
-  @doc("Number of additional custom locations required for the extension")
-  additionalCustomLocationCount: int64;
+  @doc("Configuration settings that are sensitive, as name-value pairs for configuring this extension.")
+  configurationProtectedSettings?: Record<string>;
 }
 
-@doc("Request body details for disabling extensions POST action")
+@doc("Request body details for disabling extension POST action")
 model DisableExtensionsRequestDetails {
   @doc("Name of the extension")
   name: string;
-
-  @doc("Infra on which the extension will be disabled.")
-  infrastructure: string;
-
-  @doc("Azure scenario enabled. Ex: Migrate")
-  scenario: string;
 }
 
-@doc("Request body for adding new fabric/scenario/infra POST action")
-model AddFabricRequestDetails {
-  @doc("Infra of new fabric.")
-  infrastructure: string;
-
-  @doc("Azure scenario enabled. Ex: Migrate")
-  scenario: string;
+@doc("Request body for adding new custom location to an extension.")
+model AddCustomLocationDetails {
+  @doc("Name of the extension")
+  name: string;
 }
 
-@doc("Request body for removing a fabric/scenario/infra POST action")
-model RemoveInfraAndScenarioDetails {
-  @doc("Infra of fabric to be removed.")
-  infrastructure: string;
+@doc("Request body for removing custom location from extension.")
+model RemoveCustomLocationDetails {
+  @doc("Name of the extension")
+  name: string;
 
-  @doc("Azure scenario enabled. Ex: Migrate")
-  scenario: string;
+  @doc("ARM ID of the custom location")
+  customLocationId: string;
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -169,28 +164,28 @@ interface ExtensionManagers {
   delete is ArmResourceDeleteAsync<ExtensionManager>;
   listByResourceGroup is ArmResourceListByParent<ExtensionManager>;
   listBySubscription is ArmListBySubscription<ExtensionManager>;
-  @doc("Enable extensions on the extension manager resource")
+  @doc("Enable extension(s) on the extension manager resource")
   enableExtensions is ArmResourceActionAsync<
     ExtensionManager,
     EnableExtensionsRequestDetails[],
     ExtensionManager
   >;
-  @doc("Disable extensions on the extension manager resource")
+  @doc("Disable extension(s) on the extension manager resource")
   disableExtensions is ArmResourceActionAsync<
     ExtensionManager,
     DisableExtensionsRequestDetails[],
     ExtensionManager
   >;
-  @doc("Add new fabric/infra/scenario on the extension manager resource")
-  addNewFabric is ArmResourceActionAsync<
+  @doc("Add a new custom location on extension(s)")
+  addCustomLocation is ArmResourceActionAsync<
     ExtensionManager,
-    AddFabricRequestDetails,
+    AddCustomLocationDetails[],
     ExtensionManager
   >;
-  @doc("Remove a fabric/infra/scenario on the extension manager resource")
-  removeInfraAndScenario is ArmResourceActionAsync<
+  @doc("Remove a custom location from extension(s)")
+  removeCustomLocation is ArmResourceActionAsync<
     ExtensionManager,
-    RemoveInfraAndScenarioDetails,
+    RemoveCustomLocationDetails[],
     ExtensionManager
   >;
 }
