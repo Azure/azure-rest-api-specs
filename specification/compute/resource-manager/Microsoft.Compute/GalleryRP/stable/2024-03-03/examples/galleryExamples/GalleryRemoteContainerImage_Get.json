@@ -10,7 +10,7 @@
     "200": {
       "body": {
         "name": "MockGalleryRemoteContainerImageName",
-        "id": "/subscriptions/49d70b3e-440a-41ee-8559-6a94d952b5d6/resourceGroups/Mock_RGNamexpmuo/providers/Microsoft.Compute/galleries/MockGalleryName/remoteContainerImages/MockGalleryRemoteContainerImageName",
+        "id": "/subscriptions/49d70b3e-440a-41ee-8559-6a94d952b5d6/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/MockGalleryName/remoteContainerImages/MockGalleryRemoteContainerImageName",
         "type": "Microsoft.Compute/galleries/remoteContainerImages",
         "location": "westus",
         "tags": {
@@ -19,15 +19,15 @@
         "properties": {
           "sourceProfile": {
             "registryCredentials": {
-              "server": "myacr.azurecr.io",
+              "server": "registry.azurecr.io",
               "activeKey": {
                 "sourceVault": {
-                  "id": "/subscriptions/49d70b3e-440a-41ee-8559-6a94d952b5d6/resourceGroups/Mock_RGNamexpmuo/providers/Microsoft.KeyVault/vaults/mockvault"
+                  "id": "/subscriptions/49d70b3e-440a-41ee-8559-6a94d952b5d6/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/mockvault"
                 },
                 "secretUrl": "https://mockvault.vault.azure.net/secrets/mysecret/b432becabcde4b26143250d2cb07f374"
               }
             },
-            "imageReference": "myacr.azurecr.io/hello-world@sha256:4a1c4b21597c1b4415bdbecb28a3296c6b5e23ca4f9feeb599860a1dac6a0108"
+            "imageReference": "registry.azurecr.io/hello-world@sha256:4a1c4b21597c1b4415bdbecb28a3296c6b5e23ca4f9feeb599860a1dac6a0108"
           },
           "provisioningState": "Succeeded"
         }
