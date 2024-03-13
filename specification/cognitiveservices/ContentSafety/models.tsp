@@ -9,35 +9,41 @@ namespace ContentSafety;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("Text analyze category.")
-enum TextCategory {
-  Hate,
-  SelfHarm,
-  Sexual,
-  Violence,
+union TextCategory {
+  string,
+  "Hate",
+  "SelfHarm",
+  "Sexual",
+  "Violence",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("Image analyze category.")
-enum ImageCategory {
-  Hate,
-  SelfHarm,
-  Sexual,
-  Violence,
+union ImageCategory {
+  string,
+  "Hate",
+  "SelfHarm",
+  "Sexual",
+  "Violence",
 }
 
 @doc("The type of text analysis output.")
-enum AnalyzeTextOutputType {
+union AnalyzeTextOutputType {
+  string,
+
   @doc("Output severities in four levels, the value could be 0,2,4,6.")
-  FourSeverityLevels,
+  FourSeverityLevels: "FourSeverityLevels",
 
   @doc("Output severities in eight levels, the value could be 0,1,2,3,4,5,6,7.")
-  EightSeverityLevels,
+  EightSeverityLevels: "EightSeverityLevels",
 }
 
 @doc("The type of image analysis output.")
-enum AnalyzeImageOutputType {
+union AnalyzeImageOutputType {
+  string,
+
   @doc("Output severities in four levels, the value could be 0,2,4,6.")
-  FourSeverityLevels,
+  FourSeverityLevels: "FourSeverityLevels",
 }
 
 @doc("The text analysis request.")
@@ -183,4 +189,48 @@ model AddOrUpdateTextBlocklistItemsResult {
 model RemoveTextBlocklistItemsOptions {
   @doc("Array of blocklistItemIds to remove.")
   blocklistItemIds: string[];
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("The protected material analysis request.")
+model AnalyzeTextProtectedMaterialOptions {
+  @doc("The text needs to be analyzed. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request.")
+  @maxLength(1000)
+  text: string;
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("The protected material analysis response.")
+model AnalyzeTextProtectedMaterialResult {
+  @doc("Analysis result for protected material.")
+  protectedMaterialAnalysis: ProtectedMaterialAnalysisResult;
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("The text protected material analysis response.")
+model ProtectedMaterialAnalysisResult {
+  @doc("Analysis result for protected material..")
+  detected: boolean;
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("The text jailbreak analysis request.")
+model AnalyzeTextJailbreakOptions {
+  @doc("The text needs to be analyzed if it attempt to jailbreak. We support a maximum of 1k Unicode characters (Unicode code points) in the text of one request.")
+  @maxLength(1000)
+  text: string;
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("The text jailbreak analysis request.")
+model AnalyzeTextJailbreakResult {
+  @doc("Analysis result for jailbreak.")
+  jailbreakAnalysis: JailbreakAnalysisResult;
+}
+
+@added(ContentSafety.Versions.v2023_10_15_Preview)
+@doc("The text jailbreak analysis response.")
+model JailbreakAnalysisResult {
+  @doc("Analysis result for jailbreak.")
+  detected: boolean;
 }

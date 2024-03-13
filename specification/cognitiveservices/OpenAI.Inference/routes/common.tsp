@@ -1,12 +1,8 @@
 import "@typespec/rest";
 import "@typespec/http";
-// import "@typespec/versioning";
-
-// import "./routes.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
-// using TypeSpec.Versioning;
 
 @doc("A specific deployment")
 @TypeSpec.Rest.resource("deployments")
@@ -29,4 +25,10 @@ alias MultipartFormDataRequestHeadersTraits = Azure.Core.Traits.RequestHeadersTr
   @doc("The content type for the operation. Always multipart/form-data for this operation.")
   @header("content-type")
   contentType: "multipart/form-data";
+}>;
+
+alias TextPlainResponseHeadersTraits = Azure.Core.Traits.ResponseHeadersTrait<{
+  @doc("The content type 'text/plain' for the audio text response.")
+  @header("content-type")
+  contentType: "text/plain";
 }>;

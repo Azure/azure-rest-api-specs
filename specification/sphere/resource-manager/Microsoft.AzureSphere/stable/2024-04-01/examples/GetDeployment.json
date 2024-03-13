@@ -1,0 +1,38 @@
+{
+  "operationId": "Deployments_Get",
+  "title": "Deployments_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "MyResourceGroup1",
+    "catalogName": "MyCatalog1",
+    "productName": "MyProduct1",
+    "deviceGroupName": "myDeviceGroup1",
+    "deploymentName": "MyDeployment1",
+    "api-version": "2024-04-01"
+  },
+  "responses": {
+    "200": {
+      "description": "ARM operation completed successfully.",
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphere/catalogs/MyCatalog1/products/MyProduct1/deviceGroups/MyDeviceGroup1/deployments/MyDeployment1",
+        "name": "MyDeployment1",
+        "properties": {
+          "deployedImages": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphere/catalogs/MyCatalog1/images/MyImage1",
+              "properties": {
+                "image": "dGVzdGltYWdl",
+                "regionalDataBoundary": "None",
+                "uri": "imageUri",
+                "description": "description",
+                "componentId": "componentId",
+                "imageType": "ImageType",
+                "provisioningState": "Succeeded"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
