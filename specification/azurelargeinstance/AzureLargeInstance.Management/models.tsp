@@ -11,7 +11,6 @@ using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
 
 namespace Microsoft.AzureLargeInstance;
-namespace Azure.ClientGenerator.Core;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 

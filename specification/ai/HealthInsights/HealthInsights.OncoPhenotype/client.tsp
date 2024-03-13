@@ -74,15 +74,15 @@ interface CancerProfilingClient {
   "Fhir_R4_ObservationReferenceRange",
   "csharp"
 );
-@@encodedName(Fhir.R4.ObservationComponent,
+@@clientName(Fhir.R4.ObservationComponent,
   "Fhir_R4_ObservationComponent",
   "java"
 );
-@@encodedName(Fhir.R4.ObservationComponent,
+@@clientName(Fhir.R4.ObservationComponent,
   "Fhir_R4_ObservationComponent",
-  "csharp",
+  "csharp"
 );
 @@clientName(Fhir.R4.ResearchStudy, "Fhir_R4_ResearchStudy", "java");
 @@clientName(Fhir.R4.ResearchStudy, "Fhir_R4_ResearchStudy", "csharp");
-@@clientName(AzureHealthInsights.PatientInfoSex, "PatientSex);
+@@clientName(AzureHealthInsights.PatientInfoSex, "PatientSex");
 @@clientName(AzureHealthInsights.PatientInfo, "PatientDetails");

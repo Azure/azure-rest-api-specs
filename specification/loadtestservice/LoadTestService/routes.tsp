@@ -15,7 +15,10 @@ using Azure.ClientGenerator.Core;
 
 namespace Microsoft.LoadTestService;
 
-@@encodedName(Azure.Core.Foundations.ResourceBody.resource, "application/json", "body");
+@@encodedName(Azure.Core.Foundations.ResourceBody.resource,
+  "application/json",
+  "body"
+);
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "body");
 
 @tag("Test")

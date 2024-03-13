@@ -163,15 +163,9 @@ namespace Azure.AI.OpenAI.Assistants;
 @@clientName(ThreadMessage.content, "ContentItems", "csharp");
 @@clientName(MessageTextDetails.value, "Text", "csharp");
 @@clientName(CreateRunOptions.`model`, "OverrideModelName", "csharp");
-@@clientName(CreateRunOptions.instructions,
-  "OverrideInstructions",
-  "csharp"
-);
+@@clientName(CreateRunOptions.instructions, "OverrideInstructions", "csharp");
 @@clientName(CreateRunOptions.tools, "OverrideTools", "csharp");
-@@clientName(CreateAndRunThreadOptions.`model`,
-  "OverrideModelName",
-  "csharp"
-);
+@@clientName(CreateAndRunThreadOptions.`model`, "OverrideModelName", "csharp");
 @@clientName(CreateAndRunThreadOptions.instructions,
   "OverrideInstructions",
   "csharp"

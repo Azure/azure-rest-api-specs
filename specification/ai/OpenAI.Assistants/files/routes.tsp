@@ -1,7 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
-import "@azure-tools/typespec-client-generator-core"
+import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
 
 using TypeSpec.Rest;

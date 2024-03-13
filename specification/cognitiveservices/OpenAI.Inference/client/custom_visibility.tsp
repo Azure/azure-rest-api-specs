@@ -76,10 +76,7 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 
-@@clientName(Azure.OpenAI.ChatChoice.logprobs,
-  "LogProbabilityInfo",
-  "csharp"
-);
+@@clientName(Azure.OpenAI.ChatChoice.logprobs, "LogProbabilityInfo", "csharp");
 @@clientName(Azure.OpenAI.ChatChoiceLogProbabilityInfo.content,
   "TokenLogProbabilityResults",
   "csharp"

@@ -38,86 +38,74 @@ enum Versions {
   v2024_03_01: "2024-03-01",
 }
 
-@@encodedName(Apis.createOrUpdate::parameters.resource, "application/json", "payload")
+@@encodedName(Apis.createOrUpdate::parameters.resource,
+  "application/json",
+  "payload"
+);
 @@clientName(Apis.createOrUpdate::parameters.resource, "payload");
 
 @@encodedName(ApiDefinitions.createOrUpdate::parameters.resource,
   "application/json",
   "payload"
 );
-@@clientName(ApiDefinitions.createOrUpdate::parameters.resource,
-  "payload"
-);
+@@clientName(ApiDefinitions.createOrUpdate::parameters.resource, "payload");
 
 @@encodedName(ApiVersions.createOrUpdate::parameters.resource,
   "application/json",
   "payload"
 );
-@@clientName(ApiVersions.createOrUpdate::parameters.resource,
-  "payload"
-);
+@@clientName(ApiVersions.createOrUpdate::parameters.resource, "payload");
 
 @@encodedName(Deployments.createOrUpdate::parameters.resource,
   "application/json",
   "payload"
 );
-@@clientName(Deployments.createOrUpdate::parameters.resource,
-  "payload"
-);
+@@clientName(Deployments.createOrUpdate::parameters.resource, "payload");
 
 @@encodedName(Environments.createOrUpdate::parameters.resource,
   "application/json",
   "payload"
 );
-@@clientName(Environments.createOrUpdate::parameters.resource,
-  "payload"
-);
+@@clientName(Environments.createOrUpdate::parameters.resource, "payload");
 
 @@encodedName(MetadataSchemas.createOrUpdate::parameters.resource,
   "application/json",
   "payload"
 );
-@@clientName(MetadataSchemas.createOrUpdate::parameters.resource,
+@@clientName(MetadataSchemas.createOrUpdate::parameters.resource, "payload");
+
+@@encodedName(Services.update::parameters.properties,
+  "application/json",
   "payload"
 );
-
-@@encodedName(Services.update::parameters.properties, "application/json", "payload");
 @@clientName(Services.update::parameters.properties, "payload");
 
 @@encodedName(Workspaces.createOrUpdate::parameters.resource,
   "application/json",
   "payload"
 );
-@@clientName(Workspaces.createOrUpdate::parameters.resource,
-  "payload"
-);
+@@clientName(Workspaces.createOrUpdate::parameters.resource, "payload");
 
 @@encodedName(ApiDefinitions.importSpecification::parameters.body,
   "application/json",
   "payload"
 );
 
-@@clientName(ApiDefinitions.importSpecification::parameters.body,
-  "payload"
-);
+@@clientName(ApiDefinitions.importSpecification::parameters.body, "payload");
 
 @@encodedName(ApiDefinitions.exportSpecification::parameters.body,
   "application/json",
   "payload"
 );
 
-@@clientName(ApiDefinitions.exportSpecification::parameters.body,
-  "payload"
-);
+@@clientName(ApiDefinitions.exportSpecification::parameters.body, "payload");
 
 @@encodedName(Services.exportMetadataSchema::parameters.body,
   "application/json",
   "payload"
 );
 
-@@clientName(Services.exportMetadataSchema::parameters.body,
-  "payload"
-);
+@@clientName(Services.exportMetadataSchema::parameters.body, "payload");
 
 @@visibility(Azure.Core.Page.nextLink, "read");
 @@visibility(Azure.Core.Page.value, "read");
