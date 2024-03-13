@@ -216,7 +216,9 @@ model FeedInfo {
   svn: string;
 }
 
-alias UVMEndorsementFeeds = Record<FeedInfo>;
+@doc("Collection of endorsement feeds, keyed by feed name.")
+model UvmEndorsementFeeds extends Record<FeedInfo> {
+}
 
 @doc("Join policy fields specific to nodes running on AMD SEV-SNP hardware.")
 model SnpJoinPolicy {
@@ -225,8 +227,8 @@ model SnpJoinPolicy {
   @doc("Collection of acceptable host data values.")
   hostData: Record<bytes>;
 
-  @doc("Collection of acceptable UVM endorsements. Keyed by endorser's did, then feed name.")
-  uvmEndorsements: Record<UVMEndorsementFeeds>;
+  @doc("Collection of acceptable UVM endorsements. Keyed by endorser's did.")
+  uvmEndorsements: Record<UvmEndorsementFeeds>;
 }
 
 @TypeSpec.Rest.resource("service")

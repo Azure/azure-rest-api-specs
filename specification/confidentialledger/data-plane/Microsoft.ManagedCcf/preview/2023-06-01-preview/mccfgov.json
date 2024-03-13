@@ -2113,12 +2113,9 @@
         },
         "uvmEndorsements": {
           "type": "object",
-          "description": "Collection of acceptable UVM endorsements. Keyed by endorser's did, then feed name.",
+          "description": "Collection of acceptable UVM endorsements. Keyed by endorser's did.",
           "additionalProperties": {
-            "additionalProperties": {
-              "$ref": "#/definitions/ServiceState.FeedInfo"
-            },
-            "type": "object"
+            "$ref": "#/definitions/ServiceState.UvmEndorsementFeeds"
           }
         }
       },
@@ -2153,6 +2150,13 @@
         }
       ],
       "x-ms-discriminator-value": "AMD_SEV_SNP_v1"
+    },
+    "ServiceState.UvmEndorsementFeeds": {
+      "type": "object",
+      "description": "Collection of endorsement feeds, keyed by feed name.",
+      "additionalProperties": {
+        "$ref": "#/definitions/ServiceState.FeedInfo"
+      }
     },
     "ServiceState.caCertBundle": {
       "type": "string",
