@@ -1826,7 +1826,7 @@
           "WebPubSub"
         ],
         "description": "List shared private link resources",
-        "operationId": "WebPubSubReplica_SharedPrivateLinkResources_List",
+        "operationId": "WebPubSubReplicaSharedPrivateLinkResources_List",
         "produces": [
           "application/json"
         ],
@@ -1865,8 +1865,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "WebPubSubReplica_SharedPrivateLinkResources_List": {
-            "$ref": "./examples/WebPubSubReplica_SharedPrivateLinkResources_List.json"
+          "WebPubSubReplicaSharedPrivateLinkResources_List": {
+            "$ref": "./examples/WebPubSubReplicaSharedPrivateLinkResources_List.json"
           }
         }
       }
@@ -1877,7 +1877,7 @@
           "WebPubSub"
         ],
         "description": "Get the specified shared private link resource",
-        "operationId": "WebPubSubReplica_SharedPrivateLinkResources_Get",
+        "operationId": "WebPubSubReplicaSharedPrivateLinkResources_Get",
         "produces": [
           "application/json"
         ],
@@ -1895,11 +1895,7 @@
             "$ref": "#/parameters/ReplicaName"
           },
           {
-            "in": "path",
-            "name": "sharedPrivateLinkResourceName",
-            "description": "The name of the shared private link resource",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SharedPrivateLinkResourceName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1920,8 +1916,8 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSubReplica_SharedPrivateLinkResources_Get": {
-            "$ref": "./examples/WebPubSubReplica_SharedPrivateLinkResources_Get.json"
+          "WebPubSubReplicaSharedPrivateLinkResources_Get": {
+            "$ref": "./examples/WebPubSubReplicaSharedPrivateLinkResources_Get.json"
           }
         }
       },
@@ -1930,7 +1926,7 @@
           "WebPubSub"
         ],
         "description": "Create or update a shared private link resource",
-        "operationId": "WebPubSubReplica_SharedPrivateLinkResources_CreateOrUpdate",
+        "operationId": "WebPubSubReplicaSharedPrivateLinkResources_CreateOrUpdate",
         "consumes": [
           "application/json",
           "text/json"
@@ -1952,11 +1948,7 @@
             "$ref": "#/parameters/ReplicaName"
           },
           {
-            "in": "path",
-            "name": "sharedPrivateLinkResourceName",
-            "description": "The name of the shared private link resource",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SharedPrivateLinkResourceName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1996,8 +1988,8 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "WebPubSubReplica_SharedPrivateLinkResources_CreateOrUpdate": {
-            "$ref": "./examples/WebPubSubReplica_SharedPrivateLinkResources_CreateOrUpdate.json"
+          "WebPubSubReplicaSharedPrivateLinkResources_CreateOrUpdate": {
+            "$ref": "./examples/WebPubSubReplicaSharedPrivateLinkResources_CreateOrUpdate.json"
           }
         }
       }
@@ -2161,11 +2153,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "sharedPrivateLinkResourceName",
-            "description": "The name of the shared private link resource",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SharedPrivateLinkResourceName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2211,11 +2199,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "sharedPrivateLinkResourceName",
-            "description": "The name of the shared private link resource",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SharedPrivateLinkResourceName"
           },
           {
             "in": "body",
@@ -2277,11 +2261,7 @@
         "operationId": "WebPubSubSharedPrivateLinkResources_Delete",
         "parameters": [
           {
-            "in": "path",
-            "name": "sharedPrivateLinkResourceName",
-            "description": "The name of the shared private link resource",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SharedPrivateLinkResourceName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3987,6 +3967,17 @@
       "in": "path",
       "name": "replicaName",
       "description": "The name of the replica.",
+      "required": true,
+      "maxLength": 63,
+      "minLength": 3,
+      "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SharedPrivateLinkResourceName": {
+      "in": "path",
+      "name": "sharedPrivateLinkResourceName",
+      "description": "The name of the shared private link resource.",
       "required": true,
       "maxLength": 63,
       "minLength": 3,

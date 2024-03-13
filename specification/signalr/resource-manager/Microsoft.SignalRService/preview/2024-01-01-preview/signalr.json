@@ -1603,7 +1603,7 @@
           "SignalR"
         ],
         "description": "List shared private link resources",
-        "operationId": "SignalRReplica_SharedPrivateLinkResources_List",
+        "operationId": "SignalRReplicaSharedPrivateLinkResources_List",
         "produces": [
           "application/json"
         ],
@@ -1642,8 +1642,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "SignalRReplica_SharedPrivateLinkResources_List": {
-            "$ref": "./examples/SignalRReplica_SharedPrivateLinkResources_List.json"
+          "SignalRReplicaSharedPrivateLinkResources_List": {
+            "$ref": "./examples/SignalRReplicaSharedPrivateLinkResources_List.json"
           }
         }
       }
@@ -1654,7 +1654,7 @@
           "SignalR"
         ],
         "description": "Get the specified shared private link resource",
-        "operationId": "SignalRReplica_SharedPrivateLinkResources_Get",
+        "operationId": "SignalRReplicaSharedPrivateLinkResources_Get",
         "produces": [
           "application/json"
         ],
@@ -1672,11 +1672,7 @@
             "$ref": "#/parameters/ReplicaName"
           },
           {
-            "in": "path",
-            "name": "sharedPrivateLinkResourceName",
-            "description": "The name of the shared private link resource",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SharedPrivateLinkResourceName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1697,8 +1693,8 @@
           }
         },
         "x-ms-examples": {
-          "SignalRReplica_SharedPrivateLinkResources_Get": {
-            "$ref": "./examples/SignalRReplica_SharedPrivateLinkResources_Get.json"
+          "SignalRReplicaSharedPrivateLinkResources_Get": {
+            "$ref": "./examples/SignalRReplicaSharedPrivateLinkResources_Get.json"
           }
         }
       },
@@ -1707,7 +1703,7 @@
           "SignalR"
         ],
         "description": "Create or update a shared private link resource",
-        "operationId": "SignalRReplica_SharedPrivateLinkResources_CreateOrUpdate",
+        "operationId": "SignalRReplicaSharedPrivateLinkResources_CreateOrUpdate",
         "consumes": [
           "application/json",
           "text/json"
@@ -1729,11 +1725,7 @@
             "$ref": "#/parameters/ReplicaName"
           },
           {
-            "in": "path",
-            "name": "sharedPrivateLinkResourceName",
-            "description": "The name of the shared private link resource",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SharedPrivateLinkResourceName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1773,8 +1765,8 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "SignalRReplica_SharedPrivateLinkResources_CreateOrUpdate": {
-            "$ref": "./examples/SignalRReplica_SharedPrivateLinkResources_CreateOrUpdate.json"
+          "SignalRReplicaSharedPrivateLinkResources_CreateOrUpdate": {
+            "$ref": "./examples/SignalRReplicaSharedPrivateLinkResources_CreateOrUpdate.json"
           }
         }
       }
@@ -1938,11 +1930,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "sharedPrivateLinkResourceName",
-            "description": "The name of the shared private link resource",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SharedPrivateLinkResourceName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1988,11 +1976,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "sharedPrivateLinkResourceName",
-            "description": "The name of the shared private link resource",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SharedPrivateLinkResourceName"
           },
           {
             "in": "body",
@@ -2054,11 +2038,7 @@
         "operationId": "SignalRSharedPrivateLinkResources_Delete",
         "parameters": [
           {
-            "in": "path",
-            "name": "sharedPrivateLinkResourceName",
-            "description": "The name of the shared private link resource",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SharedPrivateLinkResourceName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3675,6 +3655,17 @@
       "in": "path",
       "name": "replicaName",
       "description": "The name of the replica.",
+      "required": true,
+      "maxLength": 63,
+      "minLength": 3,
+      "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SharedPrivateLinkResourceName": {
+      "in": "path",
+      "name": "sharedPrivateLinkResourceName",
+      "description": "The name of the shared private link resource.",
       "required": true,
       "maxLength": 63,
       "minLength": 3,
