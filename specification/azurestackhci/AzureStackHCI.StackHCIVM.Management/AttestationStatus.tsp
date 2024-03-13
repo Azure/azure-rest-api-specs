@@ -12,9 +12,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
-/**
- * The attestation status of the virtual machine
- */
+@doc("The attestation status of the virtual machine")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
@@ -22,23 +20,20 @@ namespace Microsoft.AzureStackHCI;
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(AttestationStatusProperties)
 model AttestationStatus extends ProxyResourceBase {
+  @doc("Name of attestation status")
   @key("attestationStatus")
   @segment("attestationStatus")
   @visibility("read")
   name: string;
 
-  /**
-   * Attestation status properties.
-   */
+  @doc("Attestation status properties.")
   @extension("x-ms-client-flatten", true)
   properties: AttestationStatusProperties;
 }
 
 @armResourceOperations
 interface AttestationStatuses {
-  /**
-   * Implements AttestationStatus GET method.
-   */
+  @doc("Implements AttestationStatus GET method.")
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("AttestationStatus_Get")
   get is ArmResourceRead<AttestationStatus>;

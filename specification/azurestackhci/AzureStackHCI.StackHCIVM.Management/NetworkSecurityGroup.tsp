@@ -11,9 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
-/**
- * NetworkSecurityGroup resource.
- */
+@doc("NetworkSecurityGroup resource.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
@@ -21,9 +19,7 @@ namespace Microsoft.AzureStackHCI;
   NetworkSecurityGroupPropertiesFormat
 )
 model NetworkSecurityGroup extends TrackedResourceBase {
-  /**
-   * Name of the network security group
-   */
+  @doc("Name of the network security group")
   @maxLength(80)
   @minLength(1)
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$")
@@ -33,65 +29,47 @@ model NetworkSecurityGroup extends TrackedResourceBase {
   @visibility("read")
   name: string;
 
-  /**
-   * A unique read-only string that changes whenever the resource is updated.
-   */
+  @doc("A unique read-only string that changes whenever the resource is updated.")
   @visibility("read")
   etag?: string;
 
-  /**
-   * Properties of the network security group.
-   */
+  @doc("Properties of the network security group.")
   @extension("x-ms-client-flatten", true)
   properties?: NetworkSecurityGroupPropertiesFormat;
 }
 
 @armResourceOperations
 interface NetworkSecurityGroups {
-  /**
-   * Gets the specified network security group.
-   */
+  @doc("Gets the specified network security group.")
   get is ArmResourceRead<NetworkSecurityGroup>;
 
-  /**
-   * Creates or updates a network security group in the specified resource group.
-   */
+  @doc("Creates or updates a network security group in the specified resource group.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     NetworkSecurityGroup,
     BaseParameters<NetworkSecurityGroup>,
     ArmAsyncOperationHeader
   >;
 
-  /**
-   * Updates a network security group tags.
-   */
+  @doc("Updates a network security group tags.")
   @parameterVisibility("read")
   updateTags is ArmCustomPatchSync<NetworkSecurityGroup, TagsObject>;
 
-  /**
-   * Deletes the specified network security group.
-   */
+  @doc("Deletes the specified network security group.")
   delete is ArmResourceDeleteWithoutOkAsync<
     NetworkSecurityGroup,
     BaseParameters<NetworkSecurityGroup>,
     ArmAsyncOperationHeader
   >;
 
-  /**
-   * Gets all network security groups in a resource group.
-   */
+  @doc("Gets all network security groups in a resource group.")
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("NetworkSecurityGroups_List")
   list is ArmResourceListByParent<NetworkSecurityGroup>;
 
-  /**
-   * Gets all network security groups in a subscription.
-   */
+  @doc("Gets all network security groups in a subscription.")
   listAll is ArmListBySubscription<NetworkSecurityGroup>;
 
-  /**
-   * Get the specified network security rule.
-   */
+  @doc("Get the specified network security rule.")
   // FIXME: SecurityRules_Get could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("SecurityRules_Get")
@@ -99,32 +77,24 @@ interface NetworkSecurityGroups {
   @get
   getNSG is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the target subscription. The value must be an UUID.
-       */
+      @doc("The ID of the target subscription. The value must be an UUID.")
       @path
       subscriptionId: string;
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
+      @doc("The name of the resource group. The name is case insensitive.")
       @maxLength(90)
       @minLength(1)
       @path
       resourceGroupName: string;
 
-      /**
-       * Name of the network security group
-       */
+      @doc("Name of the network security group")
       @maxLength(80)
       @minLength(1)
       @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$")
       @path
       networkSecurityGroupName: string;
 
-      /**
-       * Name of the network security rule
-       */
+      @doc("Name of the network security rule")
       @maxLength(80)
       @minLength(1)
       @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$")
@@ -134,9 +104,7 @@ interface NetworkSecurityGroups {
     SecurityRule
   >;
 
-  /**
-   * Gets all security rules in a network security group.
-   */
+  @doc("Gets all security rules in a network security group.")
   // FIXME: SecurityRules_List could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("SecurityRules_List")
@@ -144,23 +112,17 @@ interface NetworkSecurityGroups {
   @get
   listNSGs is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the target subscription. The value must be an UUID.
-       */
+      @doc("The ID of the target subscription. The value must be an UUID.")
       @path
       subscriptionId: string;
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
+      @doc("The name of the resource group. The name is case insensitive.")
       @maxLength(90)
       @minLength(1)
       @path
       resourceGroupName: string;
 
-      /**
-       * Name of the network security group
-       */
+      @doc("Name of the network security group")
       @maxLength(80)
       @minLength(1)
       @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$")
@@ -170,9 +132,7 @@ interface NetworkSecurityGroups {
     SecurityRuleListResult
   >;
 
-  /**
-   * Gets all default security rules in a network security group.
-   */
+  @doc("Gets all default security rules in a network security group.")
   // FIXME: DefaultSecurityRules_List could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("DefaultSecurityRules_List")
@@ -180,23 +140,17 @@ interface NetworkSecurityGroups {
   @get
   listDefaultNSG is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the target subscription. The value must be an UUID.
-       */
+      @doc("The ID of the target subscription. The value must be an UUID.")
       @path
       subscriptionId: string;
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
+      @doc("The name of the resource group. The name is case insensitive.")
       @maxLength(90)
       @minLength(1)
       @path
       resourceGroupName: string;
 
-      /**
-       * Name of the network security group
-       */
+      @doc("Name of the network security group")
       @maxLength(80)
       @minLength(1)
       @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$")
@@ -206,9 +160,7 @@ interface NetworkSecurityGroups {
     SecurityRuleListResult
   >;
 
-  /**
-   * Get the specified default network security rule.
-   */
+  @doc("Get the specified default network security rule.")
   // FIXME: DefaultSecurityRules_Get could not be converted to a resource operation
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("DefaultSecurityRules_Get")
@@ -216,32 +168,24 @@ interface NetworkSecurityGroups {
   @get
   getDefaultNSG is Azure.Core.Foundations.Operation<
     {
-      /**
-       * The ID of the target subscription. The value must be an UUID.
-       */
+      @doc("The ID of the target subscription. The value must be an UUID.")
       @path
       subscriptionId: string;
 
-      /**
-       * The name of the resource group. The name is case insensitive.
-       */
+      @doc("The name of the resource group. The name is case insensitive.")
       @maxLength(90)
       @minLength(1)
       @path
       resourceGroupName: string;
 
-      /**
-       * Name of the network security group
-       */
+      @doc("Name of the network security group")
       @maxLength(80)
       @minLength(1)
       @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$")
       @path
       networkSecurityGroupName: string;
 
-      /**
-       * Name of the default security rule.
-       */
+      @doc("Name of the default security rule.")
       @maxLength(80)
       @minLength(1)
       @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$")

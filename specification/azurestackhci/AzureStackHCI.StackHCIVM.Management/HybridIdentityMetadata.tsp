@@ -12,9 +12,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
-/**
- * Defines the HybridIdentityMetadata.
- */
+@doc("Defines the HybridIdentityMetadata.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
@@ -24,14 +22,13 @@ namespace Microsoft.AzureStackHCI;
   HybridIdentityMetadataProperties
 )
 model HybridIdentityMetadata extends ProxyResourceBase {
+  @doc("Name of the hybrididentitymetadata")
   @key("hybridIdentityMetadatum")
   @segment("hybridIdentityMetadata")
   @visibility("read")
   name: string;
 
-  /**
-   * Resource properties.
-   */
+  @doc("Resource properties.")
   @extension("x-ms-client-flatten", true)
   properties: HybridIdentityMetadataProperties;
 }
@@ -39,14 +36,10 @@ model HybridIdentityMetadata extends ProxyResourceBase {
 @armResourceOperations
 @projectedName("client", "HybridIdentityMetadata")
 interface HybridIdentityMetadataOperationGroup {
-  /**
-   * Implements HybridIdentityMetadata GET method.
-   */
+  @doc("Implements HybridIdentityMetadata GET method.")
   get is ArmResourceRead<HybridIdentityMetadata>;
 
-  /**
-   * Returns the list of HybridIdentityMetadata of the given vm.
-   */
+  @doc("Returns the list of HybridIdentityMetadata of the given vm.")
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("HybridIdentityMetadata_List")
   list is ArmResourceListByParent<HybridIdentityMetadata>;

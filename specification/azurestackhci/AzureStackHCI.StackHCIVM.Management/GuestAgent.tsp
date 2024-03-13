@@ -12,9 +12,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
-/**
- * Defines the GuestAgent.
- */
+@doc("Defines the GuestAgent.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @singleton("default")
@@ -22,30 +20,25 @@ namespace Microsoft.AzureStackHCI;
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(GuestAgentProperties)
 model GuestAgent extends ProxyResourceBase {
+  @doc("guestAgent name")
   @key("guestAgent")
   @segment("guestAgents")
   @visibility("read")
   name: string;
 
-  /**
-   * Resource properties.
-   */
+  @doc("Resource properties.")
   @extension("x-ms-client-flatten", true)
   properties: GuestAgentProperties;
 }
 
 @armResourceOperations
 interface GuestAgents {
-  /**
-   * Implements GuestAgent GET method.
-   */
+  @doc("Implements GuestAgent GET method.")
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("GuestAgent_Get")
   get is ArmResourceRead<GuestAgent>;
 
-  /**
-   * Create Or Update GuestAgent.
-   */
+  @doc("Create Or Update GuestAgent.")
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("GuestAgent_Create")
   create is ArmResourceCreateOrReplaceAsync<
@@ -54,16 +47,12 @@ interface GuestAgents {
     ArmAsyncOperationHeader
   >;
 
-  /**
-   * Implements GuestAgent DELETE method.
-   */
+  @doc("Implements GuestAgent DELETE method.")
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("GuestAgent_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<GuestAgent>;
 
-  /**
-   * Returns the list of GuestAgent of the given vm.
-   */
+  @doc("Returns the list of GuestAgent of the given vm.")
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("GuestAgents_List")
   list is ArmResourceListByParent<GuestAgent>;

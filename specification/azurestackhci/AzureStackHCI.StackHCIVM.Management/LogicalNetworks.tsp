@@ -11,17 +11,13 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
-/**
- * The logical network resource definition.
- */
+@doc("The logical network resource definition.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(LogicalNetworkProperties)
 model LogicalNetworks extends TrackedResourceBase {
-  /**
-   * Name of the logical network
-   */
+  @doc("Name of the logical network")
   @maxLength(64)
   @minLength(2)
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[_a-zA-Z0-9]$")
@@ -31,14 +27,10 @@ model LogicalNetworks extends TrackedResourceBase {
   @visibility("read")
   name: string;
 
-  /**
-   * The extendedLocation of the resource.
-   */
+  @doc("The extendedLocation of the resource.")
   extendedLocation?: ExtendedLocation;
 
-  /**
-   * Properties under the logical network resource
-   */
+  @doc("Properties under the logical network resource")
   @extension("x-ms-client-flatten", true)
   properties?: LogicalNetworkProperties;
 }
@@ -48,18 +40,14 @@ model LogicalNetworks extends TrackedResourceBase {
 interface LogicalNetworksOperationGroup {
   get is ArmResourceRead<LogicalNetworks>;
 
-  /**
-   * The operation to create or update a logical network. Please note some properties can be set only during logical network creation.
-   */
+  @doc("The operation to create or update a logical network. Please note some properties can be set only during logical network creation.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     LogicalNetworks,
     BaseParameters<LogicalNetworks>,
     ArmAsyncOperationHeader
   >;
 
-  /**
-   * The operation to update a logical network.
-   */
+  @doc("The operation to update a logical network.")
   @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     LogicalNetworks,
@@ -68,25 +56,19 @@ interface LogicalNetworksOperationGroup {
     ArmAsyncOperationHeader
   >;
 
-  /**
-   * The operation to delete a logical network.
-   */
+  @doc("The operation to delete a logical network.")
   delete is ArmResourceDeleteWithoutOkAsync<
     LogicalNetworks,
     BaseParameters<LogicalNetworks>,
     ArmAsyncOperationHeader
   >;
 
-  /**
-   * Lists all of the logical networks in the specified resource group. Use the nextLink property in the response to get the next page of logical networks.
-   */
+  @doc("Lists all of the logical networks in the specified resource group. Use the nextLink property in the response to get the next page of logical networks.")
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("LogicalNetworks_List")
   list is ArmResourceListByParent<LogicalNetworks>;
 
-  /**
-   * Lists all of the logical networks in the specified subscription. Use the nextLink property in the response to get the next page of logical networks.
-   */
+  @doc("Lists all of the logical networks in the specified subscription. Use the nextLink property in the response to get the next page of logical networks.")
   listAll is ArmListBySubscription<LogicalNetworks>;
 }
 
