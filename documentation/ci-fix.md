@@ -269,28 +269,20 @@ If none of the above helped, please reach out on [TypeSpec Discussions Teams cha
 
 ### Passed build but APIView not generated
 
-- In the RestApiSpecsPipeline panel, check that all of the following are green:
+- First, ensure that all checks in the CI are green before proceeding. 
+- You should also see the comment box pictured below with a reference to your language:
 
-  * `ApiDocPreview`
-  * `Breaking Change`
-  * `Avocado`
-  * `LintDiff`
-  * `ModelValidation`
-  * `SemanticValidation`
-  * `LintRPaas`
-  * `CrossVersionBreakingChange`
-  * `PoliCheck`
-  * `CredScan`
+![alt text](image-3.png)
 
-- Address any sections in red prior to proceeding.
 
-- Check for an unexpected skip of `Publish SDK APIView Artifact to Pipeline Artifacts` and `Generate SDK APIView` step.
-- Look in `SDK Automation` step to verify that the API token generation completed successfully.
-- Search logs for `Read Temp File`
-- Find the .json object below and search for the `apiViewArtifact` property.
-- If not present, the APIView parser for the language failed to generate the `APIView Token Artifacts`.
-- Further investigate by running the package through the appropriate language parser locally: [here](https://github.com/Azure/azure-sdk-tools/tree/main/tools/apiview) or [here](https://github.com/Azure/azure-sdk-tools/tree/main/src)
-- If issues persist, contact [APIView Support Teams Channel]
+If the above requirements are met proceed with the following steps, in order:
+
+1. Check for an unexpected skip of `Publish SDK APIView Artifact to Pipeline Artifacts` and `Generate SDK APIView` step.
+2. Look in `SDK Automation` step to verify that the API token generation completed successfully.
+3. Search logs for `Read Temp File`
+4. Below `Read Temp File` find the .json object and search within to locate the `apiViewArtifact` property.
+5. If not present, the APIView parser for the language failed to generate the `APIView Token Artifacts`.
+6. Please contact [APIView Support Teams Channel] for assistance.
 
 ## Suppression Process
 
