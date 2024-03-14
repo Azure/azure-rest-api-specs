@@ -265,10 +265,22 @@ These settings apply only when `--tag=package-2024-03-01-preview-only` is specif
 input-file:
   - Microsoft.Compute/DiagnosticRP/preview/2024-03-01-preview/diagnostic.json
 suppressions:
-  - code:  OperationsAPIImplementation
+  - code: OperationsAPIImplementation
     reason: Operations list command does not apply to our resource provider operations.
     where:
-      - Microsoft.Compute/DiagnosticRP/preview/2024-03-01-preview/diagnostic.json
+      - diagnostic.json
+  - code: PathForResourceAction
+    reason: API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
+    where:
+      - diagnostic.json
+  - code: PathForNestedResource
+    reason: API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
+    where:
+      - diagnostic.json
+  - code: XmsPageableForListCalls
+    reason: API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
+    where:
+      - diagnostic.json
 ```
 
 ### Tag: package-2024-03-01-preview
