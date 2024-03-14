@@ -264,6 +264,11 @@ These settings apply only when `--tag=package-2024-03-01-preview-only` is specif
 ```yaml $(tag) == 'package-2024-03-01-preview-only'
 input-file:
   - Microsoft.Compute/DiagnosticRP/preview/2024-03-01-preview/diagnostic.json
+suppressions:
+  - code:  OperationsAPIImplementation
+    reason: Operations list command does not apply to our resource provider operations.
+    where:
+      - Microsoft.Compute/DiagnosticRP/preview/2024-03-01-preview/diagnostic.json
 ```
 
 ### Tag: package-2024-03-01-preview
