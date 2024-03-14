@@ -914,7 +914,7 @@
           "200": {
             "description": "Success, with the details of the group quota request.",
             "schema": {
-              "$ref": "#/definitions/SubmittedResourceRequestStatusList"
+              "$ref": "#/definitions/SubmittedResourceRequestStatus"
             }
           },
           "default": {
@@ -1153,7 +1153,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/SubscriptionQuotaAllocationsList"
+              "$ref": "#/definitions/SubscriptionQuotaAllocationsStatusList"
             }
           },
           "default": {
@@ -2147,6 +2147,24 @@
             "$ref": "#/definitions/SubmittedResourceRequestStatus"
           },
           "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The URL to use for getting the next set of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SubscriptionQuotaAllocationsStatusList": {
+      "type": "object",
+      "description": "Subscription quota allocation requests status list.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Subscription quota allocation status list.",
+          "items": {
+            "$ref": "#/definitions/SubmittedResourceRequestStatus"
+          }
         },
         "nextLink": {
           "description": "The URL to use for getting the next set of results.",
