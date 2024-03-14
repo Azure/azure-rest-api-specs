@@ -641,7 +641,7 @@ enum AnalyzeConversationLROTaskKind {
 
   @added(Versions.v2023_04_15_preview)
   @doc("Conversational PII Task")
-  ConversationalPIITask,
+  ConversationalPiiTask,
 
   @added(Versions.v2023_04_15_preview)
   @doc("Custom Conversational Summarization Task")
@@ -661,7 +661,7 @@ enum AnalyzeConversationResultsKind {
 
   @added(Versions.v2023_04_15_preview)
   @doc("Conversational PII Results")
-  ConversationalPIIResults,
+  ConversationalPiiResults,
 
   @added(Versions.v2023_04_15_preview)
   @doc("Custom Conversational Summarization Results")
@@ -969,7 +969,7 @@ model Entity {
 model AnalyzeConversationConversationPiiResult
   extends AnalyzeConversationJobResult {
   @doc("discriminator kind")
-  kind: AnalyzeConversationResultsKind.ConversationalPIIResults;
+  kind: AnalyzeConversationResultsKind.ConversationalPiiResults;
 
   @doc("results")
   results: ConversationPiiResults;
@@ -1013,7 +1013,7 @@ model ConversationPiiItemResult {
 @doc("Task definition for a PII redaction in conversations.")
 model AnalyzeConversationPiiTask extends AnalyzeConversationLROTask {
   @doc("discriminator kind")
-  kind: AnalyzeConversationLROTaskKind.ConversationalPIITask;
+  kind: AnalyzeConversationLROTaskKind.ConversationalPiiTask;
 
   @doc("parameters")
   parameters?: ConversationPiiTaskParameters;
@@ -1024,7 +1024,7 @@ model AnalyzeConversationPiiTask extends AnalyzeConversationLROTask {
 model ConversationPiiTaskParameters is PreBuiltTaskParameters {
   @added(Versions.v2023_04_15_preview)
   @doc("Array of ConversationPIICategories")
-  piiCategories?: Array<ConversationPIICategories>;
+  piiCategories?: Array<ConversationPiiCategories>;
 
   @doc("Flag to indicate if response should include audio stream offset and duration for any detected entities to be redacted. By default, audio timing of redacted entities are not included.")
   redactAudioTiming?: boolean;
@@ -1039,12 +1039,12 @@ model ConversationPiiTaskParameters is PreBuiltTaskParameters {
 
   @added(Versions.v2023_04_15_preview)
   @doc("List of categories that need to be excluded instead of included.")
-  excludePiiCategories?: Array<ConversationPIICategoriesExclude>;
+  excludePiiCategories?: Array<ConversationPiiCategoriesExclude>;
 }
 
 @added(Versions.v2023_04_15_preview)
 @doc("Describes the PII categories to return for detection. If not provided, 'default' categories will be returned which will vary with the language.")
-enum ConversationPIICategories {
+enum ConversationPiiCategories {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   Address,
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -1069,7 +1069,7 @@ enum ConversationPIICategories {
 
 @added(Versions.v2023_04_15_preview)
 @doc("Describes the PII categories to exclude for detection. If not provided, 'default' categories will be returned which will vary with the language.")
-enum ConversationPIICategoriesExclude {
+enum ConversationPiiCategoriesExclude {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   Address,
   #suppress "@azure-tools/typespec-azure-core/documentation-required"

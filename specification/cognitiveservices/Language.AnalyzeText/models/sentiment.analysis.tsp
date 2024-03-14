@@ -1,6 +1,8 @@
 import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Versioning;
+using Azure.Core;
 
 namespace Language.AnalyzeText;
 
@@ -39,7 +41,9 @@ model SentimentTaskResult extends AnalyzeTextTaskResult {
   results: SentimentResponse;
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum"
 @doc("The predicted Sentiment for the sentence.")
+@fixed
 enum SentimentValue {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   positive,
@@ -49,7 +53,9 @@ enum SentimentValue {
   negative,
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum"
 @doc("The predicted Sentiment for the sentence.")
+@fixed
 enum TokenSentimentValue {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   positive,
@@ -166,7 +172,9 @@ model TargetRelation {
   relationType: SentimentRelationType;
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum"
 @doc("The type related to the target.")
+@fixed
 enum SentimentRelationType {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   assessment,

@@ -1,6 +1,8 @@
 import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Versioning;
+using Azure.Core;
 
 namespace Language.AnalyzeText;
 
@@ -339,7 +341,9 @@ model HealthcareAssertion {
   temporality?: Temporality;
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum"
 @added(Versions.v2023_04_15_preview)
+@fixed
 @doc("Describes temporal information regarding the entity.")
 enum Temporality {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -350,14 +354,19 @@ enum Temporality {
   future,
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum"
 @doc("Describes any conditionality on the entity.")
+@fixed
 enum Conditionality {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   hypothetical,
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   conditional,
 }
+
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum"
 @doc("Describes the entities certainty and polarity.")
+@fixed
 enum Certainty {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   positive,
@@ -371,7 +380,9 @@ enum Certainty {
   negative,
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum"
 @doc("Describes if the entity is the subject of the text or if it describes someone else.")
+@fixed
 enum Association {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   subject,

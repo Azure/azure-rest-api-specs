@@ -371,7 +371,7 @@
           "$ref": "#/definitions/AnalyzeConversationJobResult"
         }
       ],
-      "x-ms-discriminator-value": "ConversationalPIIResults"
+      "x-ms-discriminator-value": "ConversationalPiiResults"
     },
     "AnalyzeConversationJobResult": {
       "type": "object",
@@ -526,7 +526,7 @@
       "description": "Enumeration of supported analysis tasks on a collection of conversations.",
       "enum": [
         "ConversationalSummarizationTask",
-        "ConversationalPIITask",
+        "ConversationalPiiTask",
         "CustomConversationalSummarizationTask",
         "ConversationalSentimentTask"
       ],
@@ -540,8 +540,8 @@
             "description": "Conversational Summarization Task"
           },
           {
-            "name": "ConversationalPIITask",
-            "value": "ConversationalPIITask",
+            "name": "ConversationalPiiTask",
+            "value": "ConversationalPiiTask",
             "description": "Conversational PII Task"
           },
           {
@@ -571,7 +571,7 @@
           "$ref": "#/definitions/AnalyzeConversationLROTask"
         }
       ],
-      "x-ms-discriminator-value": "ConversationalPIITask"
+      "x-ms-discriminator-value": "ConversationalPiiTask"
     },
     "AnalyzeConversationResult": {
       "type": "object",
@@ -600,7 +600,7 @@
       "description": "Enumeration of results for supported conversation analysis Results.",
       "enum": [
         "ConversationalSummarizationResults",
-        "ConversationalPIIResults",
+        "ConversationalPiiResults",
         "CustomConversationalSummarizationResults",
         "ConversationalSentimentResults"
       ],
@@ -614,8 +614,8 @@
             "description": "Conversational Summarization Results"
           },
           {
-            "name": "ConversationalPIIResults",
-            "value": "ConversationalPIIResults",
+            "name": "ConversationalPiiResults",
+            "value": "ConversationalPiiResults",
             "description": "Conversational PII Results"
           },
           {
@@ -1286,43 +1286,6 @@
         }
       }
     },
-    "ConversationPIICategories": {
-      "type": "string",
-      "description": "Describes the PII categories to return for detection. If not provided, 'default' categories will be returned which will vary with the language.",
-      "enum": [
-        "Address",
-        "CreditCardNumber",
-        "Email",
-        "Person",
-        "NumericIdentifier",
-        "PhoneNumber",
-        "USSocialSecurityNumber",
-        "Miscellaneous",
-        "All",
-        "Default"
-      ],
-      "x-ms-enum": {
-        "name": "ConversationPIICategories",
-        "modelAsString": true
-      }
-    },
-    "ConversationPIICategoriesExclude": {
-      "type": "string",
-      "description": "Describes the PII categories to exclude for detection. If not provided, 'default' categories will be returned which will vary with the language.",
-      "enum": [
-        "Address",
-        "CreditCardNumber",
-        "Email",
-        "Person",
-        "NumericIdentifier",
-        "PhoneNumber",
-        "USSocialSecurityNumber"
-      ],
-      "x-ms-enum": {
-        "name": "ConversationPIICategoriesExclude",
-        "modelAsString": true
-      }
-    },
     "ConversationParameters": {
       "type": "object",
       "description": "This is a set of request parameters for Customized Conversation projects.",
@@ -1338,6 +1301,43 @@
         }
       ],
       "x-ms-discriminator-value": "Conversation"
+    },
+    "ConversationPiiCategories": {
+      "type": "string",
+      "description": "Describes the PII categories to return for detection. If not provided, 'default' categories will be returned which will vary with the language.",
+      "enum": [
+        "Address",
+        "CreditCardNumber",
+        "Email",
+        "Person",
+        "NumericIdentifier",
+        "PhoneNumber",
+        "USSocialSecurityNumber",
+        "Miscellaneous",
+        "All",
+        "Default"
+      ],
+      "x-ms-enum": {
+        "name": "ConversationPiiCategories",
+        "modelAsString": true
+      }
+    },
+    "ConversationPiiCategoriesExclude": {
+      "type": "string",
+      "description": "Describes the PII categories to exclude for detection. If not provided, 'default' categories will be returned which will vary with the language.",
+      "enum": [
+        "Address",
+        "CreditCardNumber",
+        "Email",
+        "Person",
+        "NumericIdentifier",
+        "PhoneNumber",
+        "USSocialSecurityNumber"
+      ],
+      "x-ms-enum": {
+        "name": "ConversationPiiCategoriesExclude",
+        "modelAsString": true
+      }
     },
     "ConversationPiiItemResult": {
       "type": "object",
@@ -1433,7 +1433,7 @@
           "type": "array",
           "description": "Array of ConversationPIICategories",
           "items": {
-            "$ref": "#/definitions/ConversationPIICategories"
+            "$ref": "#/definitions/ConversationPiiCategories"
           }
         },
         "redactAudioTiming": {
@@ -1531,7 +1531,7 @@
           "type": "array",
           "description": "List of categories that need to be excluded instead of included.",
           "items": {
-            "$ref": "#/definitions/ConversationPIICategoriesExclude"
+            "$ref": "#/definitions/ConversationPiiCategoriesExclude"
           }
         }
       }
