@@ -345,6 +345,7 @@ model DocumentDetectedLanguage {
 }
 
 @doc("Error response.")
+@error
 model ErrorResponse {
   #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("The error object.")

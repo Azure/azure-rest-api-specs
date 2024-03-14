@@ -1755,7 +1755,7 @@ op analyzeConversations(
   @body
   body: AnalyzeConversationTask,
   ...Azure.Core.Foundations.ApiVersionParameter,
-): AnalyzeConversationTaskResult | Azure.Core.Foundations.ErrorResponse;
+): AnalyzeConversationTaskResult | ErrorResponse;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.v2023_04_01)
@@ -1768,7 +1768,7 @@ op analyzeConversations(
 // @example("./SuccessfulConversationSummarizationTaskStatusRequest.json", "SuccessfulConversationSummarizationTaskStatusRequest")
 // @example("./SuccessfulCustomConversationSummarizationTaskResult.json", "SuccessfulCustomConversationSummarizationTaskResult")
 // @example("./SuccessfulConversationSummarizationTaskResult.json", "SuccessfulConversationSummarizationTaskResult")
-op analyzeConversationsJobStatus is Operations.ResourceRead<
+op analyzeConversationsJobStatus is LanguageLongRunningResourceRead<
   AnalyzeConversationJobState,
   ShowStatsQueryParameter
 >;

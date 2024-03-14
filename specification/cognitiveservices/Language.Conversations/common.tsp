@@ -12,7 +12,12 @@ using Azure.Core.Traits;
 namespace Language.Conversations;
 
 @doc("Error response.")
-model ErrorResponse is Azure.Core.Foundations.ErrorResponse;
+@error
+model ErrorResponse {
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
+  @doc("The error object.")
+  error: Error;
+}
 
 @doc("The error object.")
 model Error {
@@ -635,7 +640,7 @@ op LanguageLongRunningOperation<
   TStatusResult extends TypeSpec.Reflection.Model,
   TStatusError = Foundations.Error,
   Traits extends TypeSpec.Reflection.Model = {},
-  TErrorResponse = Azure.Core.Foundations.ErrorResponse
+  TErrorResponse = ErrorResponse
 > is Foundations.Operation<
   TParams &
     Azure.Core.Traits.Private.TraitProperties<
@@ -659,7 +664,7 @@ op LanguageLongRunningOperation<
 op LanguageLongRunningResourceCancel<
   TParams extends TypeSpec.Reflection.Model,
   Traits extends TypeSpec.Reflection.Model = {},
-  TErrorResponse = Azure.Core.Foundations.ErrorResponse
+  TErrorResponse = ErrorResponse
 > is Foundations.ResourceOperation<
   TParams,
   Azure.Core.Traits.Private.TraitProperties<Traits, TraitLocation.Parameters>,
@@ -668,3 +673,20 @@ op LanguageLongRunningResourceCancel<
   Traits,
   TErrorResponse
 >;
+
+#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "template"
+@Foundations.Private.needsRoute
+@get
+@doc("Long running operation template to match Azure Language.")
+op LanguageLongRunningResourceRead<
+    Resource extends TypeSpec.Reflection.Model,
+    Traits extends TypeSpec.Reflection.Model = {},
+    TErrorResponse = ErrorResponse
+  > is Foundations.ResourceOperation<
+    Resource,
+    Azure.Core.Traits.Private.TraitProperties<Traits, TraitLocation.Parameters, TraitContext.Read>,
+    Resource &
+    Azure.Core.Traits.Private.TraitProperties<Traits, TraitLocation.Response, TraitContext.Read>,
+    Traits,
+    TErrorResponse
+  >;

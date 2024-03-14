@@ -93,7 +93,7 @@ op analyzeText(
   @body
   body: AnalyzeTextTask,
   ...AnalyzeTextQueryParameters
-): AnalyzeTextTaskResult | Azure.Core.Foundations.ErrorResponse;
+): AnalyzeTextTaskResult | ErrorResponse;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.")
@@ -105,7 +105,7 @@ op analyzeText(
 // @example("./SuccessfulCustomSentimentAnalysisTaskStatusRequest.json", "SuccessfulCustomSentimentAnalysisTaskStatusRequest")
 // @example("./SuccessfulHealthcareDocumentTypeTaskStatusRequest.json", "SuccessfulHealthcareDocumentTypeTaskStatusRequest")
 // @example("./SuccessfulHealthcareTaskStatusRequest.json", "SuccessfulHealthcareTaskStatusRequest")
-op analyzeTextJobStatus is Operations.ResourceRead<
+op analyzeTextJobStatus is LanguageLongRunningResourceRead<
   AnalyzeTextJobState,
   AnalyzeTextJobQueryParameters
 >;
