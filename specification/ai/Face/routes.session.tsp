@@ -53,14 +53,14 @@ interface LivenessSessionOperations {
   List sessions from the last sessionId greater than the \"start\".
   The result should be ordered by sessionId in ascending order.
   """)
-  listLivenessSessions is FaceResourceListOperation<
+  getLivenessSessions is FaceResourceListOperation<
     LivenessSession,
     LivenessSessionItem
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "ResourceList does not fit, we put object array in response directly"
   @doc("Gets session requests and response body for the session.")
-  listLivenessSessionAuditEntries is FaceLivenessSessionListAuditEntries<LivenessSession>;
+  getLivenessSessionAuditEntries is FaceLivenessSessionListAuditEntries<LivenessSession>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "ResourceCreateWithServiceProvidedName does not fit, we don't return Location in header."
   @doc("""
@@ -114,12 +114,12 @@ interface LivenessSessionOperations {
   The result should be ordered by sessionId in ascending order.
   """)
   @sharedRoute
-  listLivenessWithVerifySessions is FaceResourceListOperation<
+  getLivenessWithVerifySessions is FaceResourceListOperation<
     LivenessWithVerifySession,
     LivenessSessionItem
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "ResourceList does not fit, we put object array in response directly"
   @doc("Gets session requests and response body for the session.")
-  listLivenessWithVerifySessionAuditEntries is FaceLivenessSessionListAuditEntries<LivenessWithVerifySession>;
+  getLivenessWithVerifySessionAuditEntries is FaceLivenessSessionListAuditEntries<LivenessWithVerifySession>;
 }
