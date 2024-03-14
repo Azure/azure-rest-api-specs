@@ -42,8 +42,8 @@
         "operationId": "ApiManagementGateway_CreateOrUpdate",
         "description": "Creates or updates an API Management gateway. This is long running operation and could take several minutes to complete.",
         "x-ms-examples": {
-          "ApiManagementCreateCloudNativeGateway": {
-            "$ref": "./examples/ApiManagementCreateCloudNativeGateway.json"
+          "ApiManagementCreateStandardGateway": {
+            "$ref": "./examples/ApiManagementCreateStandardGateway.json"
           }
         },
         "parameters": [
@@ -98,8 +98,8 @@
         "operationId": "ApiManagementGateway_Update",
         "description": "Updates an existing API Management gateway.",
         "x-ms-examples": {
-          "ApiManagementUpdateCloudNativeGateway": {
-            "$ref": "./examples/ApiManagementUpdateCloudNativeGateway.json"
+          "ApiManagementUpdateStandardGateway": {
+            "$ref": "./examples/ApiManagementUpdateStandardGateway.json"
           }
         },
         "parameters": [
@@ -334,15 +334,15 @@
             "url": "https://azure.microsoft.com/en-us/pricing/details/api-management/"
           },
           "enum": [
-            "CloudNativeBasic"
+            "Standard"
           ],
           "x-ms-enum": {
             "name": "SkuType",
             "modelAsString": true,
             "values": [
               {
-                "value": "CloudNativeBasic",
-                "description": "Basic SKU of a cloud-native API gateway."
+                "value": "Standard",
+                "description": "Standard SKU of the API gateway."
               }
             ]
           }
@@ -359,7 +359,7 @@
           "description": "Hostname to which the agent connects to propagate configuration to the cloud."
         }
       },
-      "description": "Information regarding the Configuration API of the API Management gateway. This is only applicable for cloud-native API gateway."
+      "description": "Information regarding the Configuration API of the API Management gateway. This is only applicable for API gateway with Standard SKU."
     },
     "FrontendConfiguration": {
       "type": "object",
@@ -367,7 +367,7 @@
         "defaultHostname": {
           "readOnly": true,
           "type": "string",
-          "description": "The default hostname of the data-plane gateway to which requests can be sent. This is only applicable for cloud-native API gateway."
+          "description": "The default hostname of the data-plane gateway to which requests can be sent. This is only applicable for API gateway with Standard SKU."
         }
       },
       "description": "Information regarding how the gateway should be exposed."
@@ -441,7 +441,7 @@
         },
         "configurationApi": {
           "$ref": "#/definitions/ConfigurationApi",
-          "description": "Information regarding the Configuration API of the API Management gateway. This is only applicable for cloud-native API gateway."
+          "description": "Information regarding the Configuration API of the API Management gateway. This is only applicable for API gateway with Standard SKU."
         }
       },
       "description": "Base Properties of an API Management gateway resource description."
@@ -487,15 +487,15 @@
             "url": "https://azure.microsoft.com/en-us/pricing/details/api-management/"
           },
           "enum": [
-            "CloudNativeBasic"
+            "Standard"
           ],
           "x-ms-enum": {
             "name": "SkuType",
             "modelAsString": true,
             "values": [
               {
-                "value": "CloudNativeBasic",
-                "description": "Basic SKU of a cloud-native Api gateway."
+                "value": "Standard",
+                "description": "Standard SKU of the API gateway."
               }
             ]
           }
