@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2021-09-01",
+    "subscriptionId": "e605a3bc-ee4e-4c7a-9709-1868a28b1d4d",
+    "resourceGroupName": "resourceGroupName",
+    "name": "exampleLab",
+    "labVirtualMachineCreationParameter": {
+      "properties": {
+        "size": "Standard_A2_v2",
+        "userName": "UserName001",
+        "password": "{userPassword}",
+        "labSubnetName": "{virtualnetwork-subnet-name}",
+        "labVirtualNetworkId": "/subscriptions/e605a3bc-ee4e-4c7a-9709-1868a28b1d4d/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/exampleLab/virtualnetworks/dtlexampleLab",
+        "disallowPublicIpAddress": true,
+        "galleryImageReference": {
+          "offer": "UbuntuServer",
+          "publisher": "Canonical",
+          "sku": "16.04-LTS",
+          "osType": "Linux",
+          "version": "Latest"
+        },
+        "allowClaim": true,
+        "storageType": "Standard"
+      },
+      "name": "vmName001",
+      "location": "westcentralus",
+      "tags": {
+        "tagName1": "tagValue1"
+      }
+    }
+  },
+  "responses": {
+    "200": {},
+    "202": {}
+  }
+}

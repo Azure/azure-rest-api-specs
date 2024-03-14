@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "api-version": "2021-09-01",
+    "subscriptionId": "e605a3bc-ee4e-4c7a-9709-1868a28b1d4d",
+    "resourceGroupName": "resourceGroupName",
+    "labName": "exampleLab",
+    "name": "customImageName",
+    "customImage": {
+      "properties": {
+        "vm": {
+          "linuxOsInfo": {
+            "linuxOsState": "NonDeprovisioned"
+          },
+          "sourceVmId": "/subscriptions/e605a3bc-ee4e-4c7a-9709-1868a28b1d4d/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/exampleLab/virtualmachines/vmName001"
+        },
+        "description": "My Custom Image"
+      },
+      "location": "westcentralus",
+      "tags": {
+        "tagName1": "tagValue1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/e605a3bc-ee4e-4c7a-9709-1868a28b1d4d/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/exampleLab/customimages/customImageName",
+        "name": "customImageName",
+        "type": "Microsoft.DevTestLab/labs/customImages",
+        "location": "westcentralus",
+        "properties": {
+          "vm": {
+            "linuxOsInfo": {
+              "linuxOsState": "NonDeprovisioned"
+            },
+            "sourceVmId": "/subscriptions/e605a3bc-ee4e-4c7a-9709-1868a28b1d4d/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/exampleLab/virtualmachines/vmName001"
+          },
+          "description": "My Custom Image",
+          "author": "{authorName}",
+          "creationDate": "2021-10-10T09:59:28.7985144+00:00",
+          "provisioningState": "Succeeded",
+          "uniqueIdentifier": "{uniqueIdentifier}"
+        },
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/e605a3bc-ee4e-4c7a-9709-1868a28b1d4d/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/exampleLab/customimages/customImageName",
+        "name": "customImageName",
+        "type": "Microsoft.DevTestLab/labs/customImages",
+        "location": "westcentralus",
+        "properties": {
+          "vm": {
+            "linuxOsInfo": {
+              "linuxOsState": "NonDeprovisioned"
+            },
+            "sourceVmId": "/subscriptions/e605a3bc-ee4e-4c7a-9709-1868a28b1d4d/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/exampleLab/virtualmachines/vmName001"
+          },
+          "description": "My Custom Image",
+          "author": "{authorName}",
+          "creationDate": "2021-10-10T09:59:28.7985144+00:00",
+          "provisioningState": "Creating",
+          "uniqueIdentifier": "{uniqueIdentifier}"
+        },
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    }
+  }
+}

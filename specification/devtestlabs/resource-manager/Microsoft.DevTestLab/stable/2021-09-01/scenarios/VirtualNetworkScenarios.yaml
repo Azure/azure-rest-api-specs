@@ -1,0 +1,63 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+variables:
+  labName:
+    type: string
+    prefix: lab
+  virtualNetworkName:
+    type: string
+    prefix: vnet
+prepareSteps: 
+  - step: Create_a_lab
+    operationId: Labs_CreateOrUpdate
+    exampleFile: ..\examples\Labs_CreateOrUpdate.json
+    variables:
+      name:
+        type: string
+        value: $(labName)
+cleanUpSteps:
+  - step: Delete_Lab
+    operationId: Labs_Delete
+    exampleFile: ..\examples\Labs_Delete.json
+    variables:
+      name:
+        type: string
+        value: $(labName)
+scenarios:
+  - scenario: VirtualMachine_Scenarios
+    steps:
+      - step: Create_VirtualNetwork
+        operationId: VirtualNetworks_CreateOrUpdate
+        exampleFile: ..\examples\VirtualNetworks_CreateOrUpdate.json
+        variables:
+          name:
+            type: string
+            value: $(virtualNetworkName)
+      - step: Get_VirtualNetwork
+        operationId: VirtualNetworks_Get
+        exampleFile: ../examples/VirtualNetworks_Get.json
+        variables:
+          name:
+            type: string
+            value: $(virtualNetworkName)
+      - step: Update_VirtualNetwork
+        operationId: VirtualNetworks_Update
+        exampleFile: ../examples/VirtualNetworks_Update.json
+        variables:
+          name:
+            type: string
+            value: $(virtualNetworkName)
+      - step: List_VirtualNetwork
+        operationId: VirtualNetworks_List
+        exampleFile: ../examples/VirtualNetworks_List.json
+        variables:
+          name:
+            type: string
+            value: $(labName)
+      - step: Delete_VirtualNetwork
+        operationId: VirtualNetworks_Delete
+        exampleFile: ../examples/VirtualNetworks_Delete.json
+        variables:
+          name:
+            type: string
+            value: $(virtualNetworkName)

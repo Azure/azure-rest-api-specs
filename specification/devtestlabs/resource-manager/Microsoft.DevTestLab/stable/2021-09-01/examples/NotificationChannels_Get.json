@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2021-09-01",
+    "subscriptionId": "e605a3bc-ee4e-4c7a-9709-1868a28b1d4d",
+    "resourceGroupName": "resourceGroupName",
+    "labName": "exampleLab",
+    "name": "{notificationChannelName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "webHookUrl": "{webhookUrl}",
+          "emailRecipient": "{email}",
+          "notificationLocale": "en",
+          "description": "Integration configured for auto-shutdown",
+          "events": [
+            {
+              "eventName": "AutoShutdown"
+            }
+          ],
+          "createdDate": "2021-01-05T02:14:05.2392034+00:00",
+          "provisioningState": "Succeeded",
+          "uniqueIdentifier": "{uniqueIdentifier}"
+        },
+        "id": "/subscriptions/e605a3bc-ee4e-4c7a-9709-1868a28b1d4d/resourceGroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/exampleLab/notificationChannels/{notificationChannelName}",
+        "name": "{notificationChannelName}",
+        "type": "Microsoft.DevTestLab/labs/notificationChannels",
+        "location": "westcentralus",
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    }
+  }
+}

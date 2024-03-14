@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2021-09-01",
+    "subscriptionId": "e605a3bc-ee4e-4c7a-9709-1868a28b1d4d",
+    "resourceGroupName": "resourceGroupName",
+    "labName": "exampleLab",
+    "artifactSourceName": "artifactSourceName",
+    "name": "armTemplateName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "displayName": "Template1",
+          "publisher": "Microsoft",
+          "contents": {
+            "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
+            "contentVersion": "1.0.0.0",
+            "parameters": {},
+            "variables": {
+              "resourceNamePrefix": "[take(uniqueString(resourceGroup().id), 3)]",
+              "hostingPlanName": "[toLower(concat(variables('resourceNamePrefix'), '-', take(uniqueString(resourceGroup().id), 6), '-sp'))]",
+              "siteName": "[toLower(concat(variables('resourceNamePrefix'), '-', take(uniqueString(resourceGroup().id), 6)))]"
+            },
+            "resources": []
+          },
+          "parametersValueFilesInfo": [],
+          "enabled": true
+        },
+        "id": "/subscriptions/e605a3bc-ee4e-4c7a-9709-1868a28b1d4d/resourceGroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/exampleLab/artifactSources/artifactSourceName/armTemplates/armTemplateName",
+        "name": "Template1",
+        "type": "Microsoft.DevTestLab/labs/artifactSources/armTemplates"
+      }
+    }
+  }
+}

@@ -1,0 +1,72 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+variables:
+  labName:
+    type: string
+    prefix: lab
+  artifactSourceName:
+    type: string
+    prefix: artifactSource
+prepareSteps: 
+  - step: Create_a_lab
+    operationId: Labs_CreateOrUpdate
+    exampleFile: ..\examples\Labs_CreateOrUpdate.json
+    variables:
+      name:
+        type: string
+        value: $(labName)
+cleanUpSteps:
+  - step: Delete_Lab
+    operationId: Labs_Delete
+    exampleFile: ..\examples\Labs_Delete.json
+    variables:
+      name:
+        type: string
+        value: $(labName)
+scenarios:
+  - scenario: ArtifactSource_AddCustomSource
+    steps:
+      - step: Create_ArtifactSource
+        operationId: ArtifactSources_CreateOrUpdate
+        exampleFile: ../examples/ArtifactSources_CreateOrUpdate.json
+        variables:
+          labName:
+            type: string
+            value: $(labName)
+          name:
+            type: string
+            value: $(artifactSourceName)
+        requestUpdate:
+          - replace: /artifactSource/properties/displayName
+            value: 'ApiTest artifact source'
+          - replace: /artifactSource/properties/uri
+            value: $(repo_cloneuri)
+          - replace: /artifactSource/properties/sourceType
+            value: $(repo_type)
+          - replace: /artifactSource/properties/folderPath
+            value: $(repo_folderPath)
+          - replace: /artifactSource/properties/armTemplateFolderPath
+            value: null
+          - replace: /artifactSource/properties/branchRef
+            value: $(repo_branchref)
+          - replace: /artifactSource/properties/securityToken
+            value: $(repo_pat)
+          - replace: /artifactSource/properties/status
+            value: 'Enabled'
+      - step: Get_ArtifactSource
+        operationId: ArtifactSources_Get
+        exampleFile: ../examples/ArtifactSources_Get.json
+        variables:
+          labName:
+            type: string
+            value: $(labName)
+          name:
+            type: string
+            value: $(artifactSourceName)
+      - step: List_ArtifactSource
+        operationId: ArtifactSources_List
+        exampleFile: ../examples/ArtifactSources_List.json
+        variables:
+          labName:
+            type: string
+            value: $(labName)

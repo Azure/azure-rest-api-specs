@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2021-09-01",
+    "subscriptionId": "e605a3bc-ee4e-4c7a-9709-1868a28b1d4d",
+    "resourceGroupName": "resourceGroupName",
+    "labName": "exampleLab",
+    "name": "dtlexampleLab",
+    "virtualNetwork": {}
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "externalProviderResourceId": "/subscriptions/e605a3bc-ee4e-4c7a-9709-1868a28b1d4d/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualNetworks/dtlexampleLab",
+          "subnetOverrides": [
+            {
+              "resourceId": "/subscriptions/e605a3bc-ee4e-4c7a-9709-1868a28b1d4d/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualNetworks/dtlexampleLab/subnets/dtlexampleLabSubnet",
+              "labSubnetName": "dtlexampleLabSubnet",
+              "useInVmCreationPermission": "Allow",
+              "usePublicIpAddressPermission": "Allow",
+              "sharedPublicIpAddressConfiguration": {
+                "allowedPorts": [
+                  {
+                    "transportProtocol": "Tcp",
+                    "backendPort": 3389
+                  },
+                  {
+                    "transportProtocol": "Tcp",
+                    "backendPort": 22
+                  }
+                ]
+              }
+            }
+          ],
+          "createdDate": "2018-10-01T13:01:44.6005134-07:00",
+          "provisioningState": "Succeeded",
+          "uniqueIdentifier": "{uniqueIdentifier}"
+        },
+        "id": "/subscriptions/e605a3bc-ee4e-4c7a-9709-1868a28b1d4d/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/exampleLab/virtualnetworks/dtlexampleLab",
+        "name": "dtlexampleLab",
+        "type": "Microsoft.DevTestLab/labs/virtualNetworks"
+      }
+    }
+  }
+}

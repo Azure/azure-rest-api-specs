@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "api-version": "2021-09-01",
+    "subscriptionId": "e605a3bc-ee4e-4c7a-9709-1868a28b1d4d",
+    "resourceGroupName": "resourceGroupName",
+    "labName": "exampleLab",
+    "artifactSourceName": "artifactSourceName",
+    "name": "exampleArtifact",
+    "generateArmTemplateRequest": {
+      "fileUploadOptions": "None",
+      "location": "westcentralus",
+      "virtualMachineName": "vmName001"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "template": {
+          "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
+          "contentVersion": "1.0.0.0",
+          "parameters": {
+            "location": {
+              "type": "string"
+            },
+            "extensionName": {
+              "type": "string"
+            }
+          },
+          "variables": {
+            "_commandToExecute": "{commandToExecute}."
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Compute/virtualMachines/extensions",
+              "name": "[parameters('extensionName')]",
+              "apiVersion": "2015-06-15",
+              "location": "[parameters('location')]",
+              "properties": {
+                "publisher": "Microsoft.Compute",
+                "type": "CustomScriptExtension",
+                "typeHandlerVersion": "1.9",
+                "autoUpgradeMinorVersion": "true",
+                "forceUpdateTag": "15/10/2018 00:00:00 +00:00",
+                "settings": {
+                  "fileUris": [
+                    "{MsDtlArtifactFileUris}"
+                  ],
+                  "commandToExecute": ""
+                },
+                "protectedSettings": {
+                  "commandToExecute": "[concat('cd {MsDtlScriptFolder}/scripts && ', variables('_commandToExecute'))]"
+                }
+              }
+            }
+          ]
+        },
+        "parameters": {
+          "extensionName": {
+            "value": "vmName001/CustomScriptExtension"
+          },
+          "location": {
+            "value": "westcentralus"
+          }
+        }
+      }
+    }
+  }
+}

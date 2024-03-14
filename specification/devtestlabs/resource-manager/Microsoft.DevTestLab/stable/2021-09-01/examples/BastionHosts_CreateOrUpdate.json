@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2021-09-01",
+    "subscriptionId": "e605a3bc-ee4e-4c7a-9709-1868a28b1d4d",
+    "resourceGroupName": "resourceGroupName",
+    "labName": "exampleLab",
+    "virtualNetworkName": "dtlexampleLab",
+    "name": "{bastionHostName}",
+    "bastionHost": {
+      "properties": {},
+      "location": "westcentralus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "ipAddressId": "/subscriptions/e605a3bc-ee4e-4c7a-9709-1868a28b1d4d/resourceGroups/resourceGroupName/providers/Microsoft.Network/publicIpAddresses/{ipName}",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/e605a3bc-ee4e-4c7a-9709-1868a28b1d4d/resourcegroups/pt-test-rg/providers/microsoft.devtestlab/labs/exampleLab/virtualnetworks/dtlexampleLab/bastionhosts/{bastionHostName}",
+        "name": "{bastionHostName}",
+        "type": "Microsoft.DevTestLab/labs/virtualNetworks/bastionHosts",
+        "location": "westcentralus",
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "provisioningState": "Created"
+        },
+        "id": "/subscriptions/e605a3bc-ee4e-4c7a-9709-1868a28b1d4d/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/exampleLab/virtualnetworks/dtlexampleLab/bastionhosts/{bastionHostName}",
+        "name": "{bastionHostName}",
+        "type": "Microsoft.DevTestLab/labs/virtualNetworks/bastionHosts",
+        "location": "westcentralus",
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    }
+  }
+}

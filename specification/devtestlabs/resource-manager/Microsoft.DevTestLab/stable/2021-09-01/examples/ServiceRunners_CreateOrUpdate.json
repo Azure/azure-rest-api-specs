@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "api-version": "2021-09-01",
+    "subscriptionId": "e605a3bc-ee4e-4c7a-9709-1868a28b1d4d",
+    "resourceGroupName": "resourceGroupName",
+    "labName": "exampleLab",
+    "name": "{servicerunnerName}",
+    "serviceRunner": {
+      "properties": {},
+      "identity": {
+        "type": "{identityType}",
+        "principalId": "{identityPrincipalId}",
+        "tenantId": "{identityTenantId}",
+        "clientSecretUrl": "{identityClientSecretUrl}"
+      },
+      "tags": {
+        "tagName1": "tagValue1"
+      },
+      "location": "westcentralus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "identity": {
+          "type": "{identityType}",
+          "principalId": "{identityPrincipalId}",
+          "tenantId": "{identityTenantId}",
+          "clientSecretUrl": "{identityClientSecretUrl}"
+        },
+        "properties": {
+          "identityUsageType": "environment"
+        },
+        "id": "/subscriptions/e605a3bc-ee4e-4c7a-9709-1868a28b1d4d/resourceGroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/exampleLab/serviceRunners/{serviceRunnerName}",
+        "name": "{serviceRunnerName}",
+        "type": "Microsoft.DevTestLab/labs/serviceRunners",
+        "location": "southeastasia",
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "identity": {
+          "type": "{identityType}",
+          "principalId": "{identityPrincipalId}",
+          "tenantId": "{identityTenantId}",
+          "clientSecretUrl": "{identityClientSecretUrl}"
+        },
+        "properties": {
+          "identityUsageType": "environment"
+        },
+        "id": "/subscriptions/e605a3bc-ee4e-4c7a-9709-1868a28b1d4d/resourceGroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/exampleLab/serviceRunners/{serviceRunnerName}",
+        "name": "{serviceRunnerName}",
+        "type": "Microsoft.DevTestLab/labs/serviceRunners",
+        "location": "southeastasia",
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    }
+  }
+}

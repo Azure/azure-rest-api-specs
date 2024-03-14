@@ -1,0 +1,113 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+variables:
+  labName:
+    type: string
+    prefix: lab
+  virtualNetworkName:
+    type: string
+    prefix: vnet
+  virtualMachineName:
+    type: string
+    prefix: vm
+prepareSteps: 
+  - step: Create_a_lab
+    operationId: Labs_CreateOrUpdate
+    exampleFile: ..\examples\Labs_CreateOrUpdate.json
+    variables:
+      name:
+        type: string
+        value: $(labName)
+  - step: Create_VirtualNetwork
+    operationId: VirtualNetworks_CreateOrUpdate
+    exampleFile: ..\examples\VirtualNetworks_CreateOrUpdate.json
+    variables:
+      name:
+        type: string
+        value: $(virtualNetworkName)
+cleanUpSteps:
+  - step: Delete_Lab
+    operationId: Labs_Delete
+    exampleFile: ..\examples\Labs_Delete.json
+    variables:
+      name:
+        type: string
+        value: $(labName)
+scenarios:
+  - scenario: VirtualMachine_Scenarios
+    steps:
+      - step: Create_a_virtual_machine
+        operationId: VirtualMachines_CreateOrUpdate
+        exampleFile: ../examples/VirtualMachines_CreateOrUpdate.json
+        variables:
+          name:
+            type: string
+            value: $(virtualMachineName)
+          username:
+            type: string
+            prefix: user
+          virtualNetworkName:
+            type: string
+            value: $(virtualNetworkName)
+      - step: Get_A_VirtualMachine
+        operationId: VirtualMachines_Get
+        exampleFile: ../examples/VirtualMachines_Get.json
+        variables:
+          name:
+            type: string
+            value: $(virtualMachineName)
+      - step: Stop_The_Virtual_Machine
+        operationId: VirtualMachines_Stop
+        exampleFile: ../examples/VirtualMachines_Stop.json
+        variables:
+          name:
+            type: string
+            value: $(virtualMachineName)
+      - step: Start_The_Virtual_Machine
+        operationId: VirtualMachines_Start
+        exampleFile: ../examples/VirtualMachines_Start.json
+        variables:
+          name:
+            type: string
+            value: $(virtualMachineName)
+      - step: Restart_The_Virtual_Machine
+        operationId: VirtualMachines_Restart
+        exampleFile: ../examples/VirtualMachines_Restart.json
+        variables:
+          name:
+            type: string
+            value: $(virtualMachineName)
+      - step: Resize_The_Virtual_Machine
+        operationId: VirtualMachines_Resize
+        exampleFile: ../examples/VirtualMachines_Resize.json
+        variables:
+          name:
+            type: string
+            value: $(virtualMachineName)
+      - step: Redeploy_The_Virtual_Machine
+        operationId: VirtualMachines_Redeploy
+        exampleFile: ../examples/VirtualMachines_Redeploy.json
+        variables:
+          name:
+            type: string
+            value: $(virtualMachineName)
+      - step: Add_Data_Disk
+        operationId: VirtualMachines_AddDataDisk
+        exampleFile: ../examples/VirtualMachines_AddDataDisk.json
+        variables:
+          name:
+            type: string
+            value: $(virtualMachineName)
+          diskName:
+            type: string
+            prefix: data
+          diskType:
+            type: string
+            value: Premium
+      - step: Delete_The_Virtual_Machine
+        operationId: VirtualMachines_Delete
+        exampleFile: ../examples/VirtualMachines_Delete.json
+        variables:
+          name:
+            type: string
+            value: $(virtualMachineName)

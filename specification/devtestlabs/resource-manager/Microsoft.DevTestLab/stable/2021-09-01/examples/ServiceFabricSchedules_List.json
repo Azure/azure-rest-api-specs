@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2021-09-01",
+    "subscriptionId": "e605a3bc-ee4e-4c7a-9709-1868a28b1d4d",
+    "resourceGroupName": "resourceGroupName",
+    "labName": "exampleLab",
+    "userName": "@me",
+    "serviceFabricName": "{serviceFrabicName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "status": "Enabled",
+              "taskType": "Unknown",
+              "weeklyRecurrence": {
+                "weekdays": [
+                  "Sunday",
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday"
+                ],
+                "time": "1900"
+              },
+              "timeZoneId": "Pacific Standard Time",
+              "notificationSettings": {
+                "status": "Disabled",
+                "timeInMinutes": 15,
+                "webhookUrl": "{webhookUrl}",
+                "emailRecipient": "{email}",
+                "notificationLocale": "EN"
+              },
+              "createdDate": "2018-10-15T00:00:00.0000000-00:00",
+              "targetResourceId": "/subscriptions/e605a3bc-ee4e-4c7a-9709-1868a28b1d4d/resourceGroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/exampleLab/users/{uniqueIdentifier}/servicefabrics/{serviceFrabicName}",
+              "provisioningState": "Succeeded",
+              "uniqueIdentifier": "{uniqueIdentifier}"
+            },
+            "id": "/subscriptions/e605a3bc-ee4e-4c7a-9709-1868a28b1d4d/resourceGroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/exampleLab/users/{uniqueIdentifier}/servicefabrics/{serviceFrabicName}/schedules/{scheduleName}",
+            "name": "{scheduleName}",
+            "type": "microsoft.devtestlab/labs/users/servicefabrics/schedules",
+            "location": "westcentralus",
+            "tags": {
+              "tagName1": "tagValue1"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
