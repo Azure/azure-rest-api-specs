@@ -314,6 +314,9 @@ model PostgreSqlSourceConnectorProperties extends ConnectorProperties {
 
   @doc("ReplicationSlotName for PostgreSql Server.")
   replicationSlotName: string;
+
+  @doc("Tables used as source.")
+  tableNames: string;
 }
 
 @doc("Configuration for SqlServerSqlSourceConnector")
@@ -339,6 +342,9 @@ model SqlServerSourceConnectorProperties extends ConnectorProperties {
   @doc("Password for SqlServer.")
   @secret
   password: string;
+
+  @doc("Tables used as source.")
+  tableNames: string;
 }
 
 @doc("Configuration for MySqlSourceConnector")
@@ -367,4 +373,7 @@ model MySqlSourceConnectorProperties extends ConnectorProperties {
 
   @doc("Server id for MySql.")
   serverId: int32;
+
+  @doc("Tables used as source.")
+  tableNames: string;
 }

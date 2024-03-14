@@ -225,6 +225,9 @@
           },
           "PostgreSqlSourceConnector Get": {
             "$ref": "./examples/PostgreSqlSourceConnector_Get.json"
+          },
+          "SqlServerSourceConnector Get": {
+            "$ref": "./examples/SqlServerSourceConnector_Get.json"
           }
         }
       },
@@ -303,6 +306,9 @@
           },
           "PostgreSqlSourceConnector CreateOrUpdate": {
             "$ref": "./examples/PostgreSqlSourceConnector_CreateOrUpdate.json"
+          },
+          "SqlServerSourceConnector CreateOrUpdate": {
+            "$ref": "./examples/SqlServerSourceConnector_CreateOrUpdate.json"
           }
         }
       },
@@ -375,6 +381,9 @@
           },
           "PostgreSqlSourceConnector UpdateTags": {
             "$ref": "./examples/PostgreSqlSourceConnector_UpdateTags.json"
+          },
+          "SqlServerSourceConnector UpdateTags": {
+            "$ref": "./examples/SqlServerSourceConnector_UpdateTags.json"
           }
         }
       },
@@ -438,6 +447,9 @@
           },
           "PostgreSqlSourceConnector Delete": {
             "$ref": "./examples/PostgreSqlSourceConnector_Delete.json"
+          },
+          "SqlServerSourceConnector Delete": {
+            "$ref": "./examples/SqlServerSourceConnector_Delete.json"
           }
         }
       }
@@ -509,6 +521,9 @@
           },
           "PostgreSqlSourceConnector Pause": {
             "$ref": "./examples/PostgreSqlSourceConnector_Pause.json"
+          },
+          "SqlServerSourceConnector Pause": {
+            "$ref": "./examples/SqlServerSourceConnector_Pause.json"
           }
         }
       }
@@ -580,6 +595,9 @@
           },
           "PostgreSqlSourceConnector Resume": {
             "$ref": "./examples/PostgreSqlSourceConnector_Resume.json"
+          },
+          "SqlServerSourceConnector Resume": {
+            "$ref": "./examples/SqlServerSourceConnector_Resume.json"
           }
         }
       }
@@ -1364,6 +1382,10 @@
           "type": "integer",
           "format": "int32",
           "description": "Server id for MySql."
+        },
+        "tableNames": {
+          "type": "string",
+          "description": "Tables used as source."
         }
       },
       "required": [
@@ -1372,7 +1394,8 @@
         "databaseName",
         "username",
         "password",
-        "serverId"
+        "serverId",
+        "tableNames"
       ],
       "allOf": [
         {
@@ -1466,6 +1489,10 @@
         "replicationSlotName": {
           "type": "string",
           "description": "ReplicationSlotName for PostgreSql Server."
+        },
+        "tableNames": {
+          "type": "string",
+          "description": "Tables used as source."
         }
       },
       "required": [
@@ -1474,7 +1501,8 @@
         "databaseName",
         "username",
         "password",
-        "replicationSlotName"
+        "replicationSlotName",
+        "tableNames"
       ],
       "allOf": [
         {
@@ -1558,6 +1586,10 @@
           "format": "password",
           "description": "Password for SqlServer.",
           "x-ms-secret": true
+        },
+        "tableNames": {
+          "type": "string",
+          "description": "Tables used as source."
         }
       },
       "required": [
@@ -1565,7 +1597,8 @@
         "port",
         "databaseName",
         "username",
-        "password"
+        "password",
+        "tableNames"
       ],
       "allOf": [
         {

@@ -1,11 +1,11 @@
 {
-  "title": "MySqlSourceConnector CreateOrUpdate",
+  "title": "SqlServerSourceConnector CreateOrUpdate",
   "operationId": "ConnectorOperations_CreateOrUpdate",
   "parameters": {
     "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
     "resourceGroupName": "abcd",
     "api-version": "2024-03-10-preview",
-    "name": "mySqlSourceConnector1",
+    "name": "sqlServerSourceConnector1",
     "resource": {
       "location": "East US",
       "tags": {
@@ -14,7 +14,7 @@
       },
       "properties": {
         "connectorProperties": {
-          "connectorType": "MySqlSource",
+          "connectorType": "SqlServerSource",
           "eventHubConfig": {
             "namespaceHostName": "ns",
             "eventHubName": "eh",
@@ -22,12 +22,12 @@
           },
           "maxTasks": 1,
           "valueConverter": "JsonConverter",
-          "hostName": "hostName.mysql.com",
+          "hostName": "hostName.SqlServerSource1.com",
           "port": 8080,
           "databaseName": "databaseName1",
           "username": "username1",
           "password": "",
-          "serverId": 1,
+          "replicationSlotName": "slotA",
           "tableNames": "tableNames1"
         }
       }
@@ -36,8 +36,8 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/abcd/providers/Microsoft.MessagingConnectors/connectors/mySqlSourceConnector1",
-        "name": "mySqlSourceConnector1",
+        "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/abcd/providers/Microsoft.MessagingConnectors/connectors/sqlServerSourceConnector1",
+        "name": "sqlServerSourceConnector1",
         "type": "Microsoft.MessagingConnectors/connector",
         "location": "East US",
         "tags": {
@@ -46,7 +46,7 @@
         },
         "properties": {
           "connectorProperties": {
-            "connectorType": "MySqlSource",
+            "connectorType": "SqlServerSource",
             "connectorDirection": "Source",
             "eventHubConfig": {
               "namespaceHostName": "ns",
@@ -54,11 +54,11 @@
             },
             "maxTasks": 1,
             "valueConverter": "JsonConverter",
-            "hostName": "hostName.mysql.com",
+            "hostName": "hostName.SqlServerSource1.com",
             "port": 8080,
             "databaseName": "databaseName1",
             "username": "username1",
-            "serverId": 1,
+            "replicationSlotName": "slotA",
             "tableNames": "tableNames1",
             "connectorState": "Running"
           },
@@ -68,8 +68,8 @@
     },
     "201": {
       "body": {
-        "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/abcd/providers/Microsoft.MessagingConnectors/connectors/mySqlSourceConnector2",
-        "name": "mySqlSourceConnector2",
+        "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/abcd/providers/Microsoft.MessagingConnectors/connectors/sqlServerSourceConnector1",
+        "name": "sqlServerSourceConnector1",
         "type": "Microsoft.MessagingConnectors/connector",
         "location": "East US",
         "tags": {
@@ -78,7 +78,7 @@
         },
         "properties": {
           "connectorProperties": {
-            "connectorType": "MySqlSource",
+            "connectorType": "SqlServerSource",
             "connectorDirection": "Source",
             "eventHubConfig": {
               "namespaceHostName": "ns",
@@ -86,11 +86,11 @@
             },
             "maxTasks": 1,
             "valueConverter": "JsonConverter",
-            "hostName": "hostName.mysql.com",
+            "hostName": "hostName.SqlServerSource1.com",
             "port": 8080,
             "databaseName": "databaseName1",
             "username": "username1",
-            "serverId": 1,
+            "replicationSlotName": "slotA",
             "tableNames": "tableNames1",
             "connectorState": "Creating"
           },
