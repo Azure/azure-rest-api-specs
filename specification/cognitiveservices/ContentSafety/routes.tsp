@@ -1,6 +1,7 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/http";
 import "@typespec/rest";
+import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
 
 using TypeSpec.Http;
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
+using Azure.ClientGenerator.Core;
 
 namespace ContentSafety;
 
@@ -20,9 +22,9 @@ interface TextOperations {
     {
       @body
       @doc("The text analysis request.")
-      @projectedName("csharp", "options")
-      @projectedName("python", "options")
-      @projectedName("java", "options")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
       body: AnalyzeTextOptions;
     },
     AnalyzeTextResult
@@ -37,9 +39,9 @@ interface TextOperations {
     {
       @body
       @doc("The text jailbreak analysis request.")
-      @projectedName("csharp", "options")
-      @projectedName("python", "options")
-      @projectedName("java", "options")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
       body: AnalyzeTextJailbreakOptions;
     },
     AnalyzeTextJailbreakResult
@@ -54,9 +56,9 @@ interface TextOperations {
     {
       @body
       @doc("The text protected material analysis request.")
-      @projectedName("csharp", "options")
-      @projectedName("python", "options")
-      @projectedName("java", "options")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
       body: AnalyzeTextProtectedMaterialOptions;
     },
     AnalyzeTextProtectedMaterialResult
@@ -72,9 +74,9 @@ interface ImageOperations {
     {
       @doc("The image analysis request.")
       @body
-      @projectedName("csharp", "options")
-      @projectedName("python", "options")
-      @projectedName("java", "options")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
       body: AnalyzeImageOptions;
     },
     AnalyzeImageResult
@@ -86,10 +88,7 @@ interface BlockOps
       NoConditionalRequests &
       NoClientRequestId> {}
 
-@@projectedName(Azure.Core.Foundations.ResourceBody.resource,
-  "client",
-  "options"
-);
+@@clientName(Azure.Core.Foundations.ResourceBody.resource, "options");
 
 interface TextBlocklists {
   @summary("Get Text Blocklist By blocklistName")
@@ -115,9 +114,9 @@ interface TextBlocklists {
     {
       @doc("Options for adding or updating blocklist items.")
       @body
-      @projectedName("csharp", "options")
-      @projectedName("python", "options")
-      @projectedName("java", "options")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
       body: AddOrUpdateTextBlocklistItemsOptions;
     },
     AddOrUpdateTextBlocklistItemsResult
@@ -130,9 +129,9 @@ interface TextBlocklists {
     {
       @doc("Options for removing blocklist items.")
       @body
-      @projectedName("csharp", "options")
-      @projectedName("python", "options")
-      @projectedName("java", "options")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
       body: RemoveTextBlocklistItemsOptions;
     },
     NoContentResponse
