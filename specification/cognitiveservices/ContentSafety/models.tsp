@@ -240,17 +240,19 @@ model JailbreakAnalysisResult {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @added(ContentSafety.Versions.v2024_02_15_Preview)
 @doc("Domain.")
-enum Domain {
-  Generic,
-  Medical,
+union Domain {
+  string,
+  Generic: "Generic",
+  Medical: "Medical",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @added(ContentSafety.Versions.v2024_02_15_Preview)
 @doc("Task type.")
-enum Task {
-  Summarization,
-  QnA,
+union Task {
+  string,
+  Summarization: "Summarization",
+  QnA: "QnA",
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use PascalCase"
@@ -264,9 +266,10 @@ model QnAOptions {
 
 @added(ContentSafety.Versions.v2024_02_15_Preview)
 @doc("LLM resource type.")
-enum LLMResourceType {
+union LLMResourceType {
+  string,
   @doc("Azure OpenAI resource type.")
-  AzureOpenAI,
+  AzureOpenAI: "AzureOpenAI",
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use PascalCase"
