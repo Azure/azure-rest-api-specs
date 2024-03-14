@@ -94,30 +94,34 @@ model Account {
 }
 
 @doc("The account state.")
-enum AccountState {
+union AccountState {
+  string,
+
   @doc("The account is Active.")
-  Active,
+  "Active",
 
   @doc("The account is Inactive.")
-  Inactive,
+  "Inactive",
 }
 
 @doc("The ARM-based subscription state.")
-enum SubscriptionState {
+union SubscriptionState {
+  string,
+
   @doc("The subscription state is Registered.")
-  Registered,
+  "Registered",
 
   @doc("The subscription state is Warned.")
-  Warned,
+  "Warned",
 
   @doc("The subscription state is Suspended.")
-  Suspended,
+  "Suspended",
 
   @doc("The subscription state is Deleted.")
-  Deleted,
+  "Deleted",
 
   @doc("The subscription state is Unregistered.")
-  Unregistered,
+  "Unregistered",
 }
 
 @doc("Model of an access-token linked to an account.")
@@ -154,21 +158,25 @@ model AccessToken {
 }
 
 @doc("The access-token state.")
-enum AccessTokenState {
+union AccessTokenState {
+  string,
+
   @doc("The access-token is Active.")
-  Active,
+  "Active",
 
   @doc("The access-token is Expired.")
-  Expired,
+  "Expired",
 }
 
 @doc("The enablement status of a feature.")
-enum EnablementStatus {
+union EnablementStatus {
+  string,
+
   @doc("The feature is Enabled.")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("The feature is Disabled.")
-  Disabled,
+  Disabled: "Disabled",
 }
 
 // Operations ////////////////////
