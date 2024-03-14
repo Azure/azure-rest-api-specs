@@ -75,13 +75,22 @@ input-file:
 - preview/2021-06-08/DataLakeStorage.json
 ```
 
+### Tag: package-2023-05-preview
+
+These settings apply only when `--tag=package-2023-05-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-05-preview'
+input-file:
+- preview/2023-05-03/DataLakeStorage.json
+```
+
 ### Tag: package-2023-05
 
 These settings apply only when `--tag=package-2023-05` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2023-05'
 input-file:
-- preview/2023-05-03/DataLakeStorage.json
+- stable/2023-05-03/DataLakeStorage.json
 ```
 
 ### Suppression
