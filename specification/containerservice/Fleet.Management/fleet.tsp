@@ -124,23 +124,23 @@ model AgentProfile {
 
 @lroStatus
 @doc("The provisioning state of the last accepted operation.")
-enum FleetProvisioningState {
-  ...ResourceProvisioningState,
+union FleetProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("The provisioning state of a fleet being created.")
-  Creating,
+  Creating: "Creating",
 
   @doc("The provisioning state of a fleet being updated.")
-  Updating,
+  Updating: "Updating",
 
   @doc("The provisioning state of a fleet being deleted.")
-  Deleting,
+  Deleting: "Deleting",
 }
 
 @doc("Properties of a Fleet that can be patched.")
 model FleetPatch {
-  @doc("Resource tags.")
-  tags?: Record<string>;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   // adding a response header in the model currently impacts the model used in the List result model.
   // omitting it for now as response headers do not impact SDK generation.
@@ -205,6 +205,8 @@ interface Fleets {
     BaseParameters<Fleet> & IfMatchParameters<Fleet>
   >;
 
+  #suppress "deprecated" "Existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
   @sharedRoute // why do we need to set shared route on delete? compiler complains with an error
   // All shared routes must agree on the value of the shared parameter.TypeSpec(@typespec/http/shared-inconsistency)
   delete is ArmResourceDeleteAsync<

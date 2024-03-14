@@ -1,0 +1,3015 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Cosmos DB for PostgreSQL",
+    "description": "Azure Cosmos DB for PostgreSQL database service resource provider REST APIs",
+    "version": "2023-03-02-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account."
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2": {
+      "get": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_List",
+        "x-ms-examples": {
+          "List all the clusters": {
+            "$ref": "./examples/ClusterList.json"
+          }
+        },
+        "description": "Lists all clusters in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClusterListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2": {
+      "get": {
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_ListByResourceGroup",
+        "x-ms-examples": {
+          "List the clusters by resource group": {
+            "$ref": "./examples/ClusterListByResourceGroup.json"
+          }
+        },
+        "description": "Lists all clusters in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClusterListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}": {
+      "put": {
+        "description": "Creates a new cluster with servers.",
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create a new single node cluster": {
+            "$ref": "./examples/ClusterCreateSingleNode.json"
+          },
+          "Create a new multi-node cluster": {
+            "$ref": "./examples/ClusterCreateMultiNode.json"
+          },
+          "Create a new single node Burstable 1 vCore cluster": {
+            "$ref": "./examples/ClusterCreateBurstablev1.json"
+          },
+          "Create a new single node Burstable 2 vCores cluster": {
+            "$ref": "./examples/ClusterCreateBurstablev2.json"
+          },
+          "Create a new cluster as a point in time restore": {
+            "$ref": "./examples/ClusterCreatePITR.json"
+          },
+          "Create a new cluster as a read replica": {
+            "$ref": "./examples/ClusterCreateReadReplica.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            },
+            "description": "The required parameters for creating or updating a cluster."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "headers": {
+              "location": {
+                "type": "string"
+              },
+              "azure-async-operation": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Gets information about a cluster such as compute and storage configuration and cluster lifecycle metadata such as cluster creation date and time.",
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_Get",
+        "x-ms-examples": {
+          "Get the cluster": {
+            "$ref": "./examples/ClusterGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a cluster together with servers in it.",
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete the cluster": {
+            "$ref": "./examples/ClusterDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "location": {
+                "type": "string"
+              },
+              "azure-async-operation": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates an existing cluster. The request body can contain one or several properties from the cluster definition.",
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Update multiple configuration settings of the cluster": {
+            "$ref": "./examples/ClusterUpdate.json"
+          },
+          "Scale compute up or down": {
+            "$ref": "./examples/ClusterScaleCompute.json"
+          },
+          "Scale up storage": {
+            "$ref": "./examples/ClusterScaleStorage.json"
+          },
+          "Scale out: Add new worker nodes": {
+            "$ref": "./examples/ClusterAddNode.json"
+          },
+          "Update or define maintenance window": {
+            "$ref": "./examples/ClusterUpdateMaintenanceWindow.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterForUpdate"
+            },
+            "description": "The parameters for updating a cluster."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "location": {
+                "type": "string"
+              },
+              "azure-async-operation": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/servers": {
+      "get": {
+        "description": "Lists servers of a cluster.",
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_ListByCluster",
+        "x-ms-examples": {
+          "List servers of the cluster": {
+            "$ref": "./examples/ServerListByCluster.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClusterServerListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/servers/{serverName}": {
+      "get": {
+        "description": "Gets information about a server in cluster.",
+        "tags": [
+          "Servers"
+        ],
+        "operationId": "Servers_Get",
+        "x-ms-examples": {
+          "Get the server of cluster": {
+            "$ref": "./examples/ServerGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClusterServer"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/servers/{serverName}/configurations": {
+      "get": {
+        "description": "List all the configurations of a server in cluster.",
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_ListByServer",
+        "x-ms-examples": {
+          "List configurations of the server that in the cluster": {
+            "$ref": "./examples/ConfigurationListByServer.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/configurations": {
+      "get": {
+        "description": "List all the configurations of a cluster.",
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_ListByCluster",
+        "x-ms-examples": {
+          "List configurations of the cluster": {
+            "$ref": "./examples/ConfigurationListByCluster.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClusterConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/configurations/{configurationName}": {
+      "get": {
+        "description": "Gets information of a configuration for coordinator and nodes.",
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_Get",
+        "x-ms-examples": {
+          "Get configuration details.": {
+            "$ref": "./examples/ConfigurationGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Configuration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/coordinatorConfigurations/{configurationName}": {
+      "get": {
+        "description": "Gets information of a configuration for coordinator.",
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_GetCoordinator",
+        "x-ms-examples": {
+          "Get configuration details for coordinator.": {
+            "$ref": "./examples/ConfigurationGetCoordinator.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Updates configuration of coordinator in a cluster",
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_UpdateOnCoordinator",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Update single configuration of coordinator": {
+            "$ref": "./examples/ConfigurationUpdateCoordinator.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerConfiguration"
+            },
+            "description": "The required parameters for updating a cluster configuration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerConfiguration"
+            }
+          },
+          "201": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ServerConfiguration"
+            },
+            "headers": {
+              "location": {
+                "type": "string"
+              },
+              "azure-async-operation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/nodeConfigurations/{configurationName}": {
+      "get": {
+        "description": "Gets information of a configuration for worker nodes.",
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_GetNode",
+        "x-ms-examples": {
+          "Get configuration details for node.": {
+            "$ref": "./examples/ConfigurationGetNode.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Updates configuration of worker nodes in a cluster",
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_UpdateOnNode",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Update single configuration of nodes": {
+            "$ref": "./examples/ConfigurationUpdateNode.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerConfiguration"
+            },
+            "description": "The required parameters for updating a cluster configuration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerConfiguration"
+            }
+          },
+          "201": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ServerConfiguration"
+            },
+            "headers": {
+              "location": {
+                "type": "string"
+              },
+              "azure-async-operation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/firewallRules/{firewallRuleName}": {
+      "put": {
+        "description": "Creates a new cluster firewall rule or updates an existing cluster firewall rule.",
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create a firewall rule of the cluster": {
+            "$ref": "./examples/FirewallRuleCreate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FirewallRuleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            },
+            "description": "The required parameters for creating or updating a firewall rule."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          },
+          "201": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            },
+            "headers": {
+              "location": {
+                "type": "string"
+              },
+              "azure-async-operation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a cluster firewall rule.",
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete the firewall rule of the cluster": {
+            "$ref": "./examples/FirewallRuleDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FirewallRuleNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "location": {
+                "type": "string"
+              },
+              "azure-async-operation": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Gets information about a cluster firewall rule.",
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_Get",
+        "x-ms-examples": {
+          "Get the firewall rule of the cluster": {
+            "$ref": "./examples/FirewallRuleGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FirewallRuleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/firewallRules": {
+      "get": {
+        "description": "Lists all the firewall rules on cluster.",
+        "tags": [
+          "FirewallRules"
+        ],
+        "operationId": "FirewallRules_ListByCluster",
+        "x-ms-examples": {
+          "List firewall rules of the cluster": {
+            "$ref": "./examples/FirewallRuleListByCluster.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FirewallRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/roles/{roleName}": {
+      "get": {
+        "description": "Gets information about a cluster role.",
+        "tags": [
+          "Roles"
+        ],
+        "operationId": "Roles_Get",
+        "x-ms-examples": {
+          "Get the role of the cluster": {
+            "$ref": "./examples/RoleGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RoleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Role"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Roles"
+        ],
+        "operationId": "Roles_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "RoleCreate": {
+            "$ref": "./examples/RoleCreate.json"
+          }
+        },
+        "description": "Creates a new role or updates an existing role.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RoleNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Role"
+            },
+            "description": "The required parameters for creating or updating a role."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Role"
+            }
+          },
+          "201": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/Role"
+            },
+            "headers": {
+              "location": {
+                "type": "string"
+              },
+              "azure-async-operation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Roles"
+        ],
+        "operationId": "Roles_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "RoleDelete": {
+            "$ref": "./examples/RoleDelete.json"
+          }
+        },
+        "description": "Deletes a cluster role.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RoleNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "location": {
+                "type": "string"
+              },
+              "azure-async-operation": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/roles": {
+      "get": {
+        "tags": [
+          "Roles"
+        ],
+        "operationId": "Roles_ListByCluster",
+        "x-ms-examples": {
+          "RoleList": {
+            "$ref": "./examples/RoleListByCluster.json"
+          }
+        },
+        "description": "List all the roles in a given cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RoleListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/restart": {
+      "post": {
+        "description": "Restarts all nodes in the cluster.",
+        "tags": [
+          "ClusterOperations"
+        ],
+        "operationId": "Clusters_Restart",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Restart all servers in the cluster": {
+            "$ref": "./examples/ClusterRestart.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "location": {
+                "type": "string"
+              },
+              "azure-async-operation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/start": {
+      "post": {
+        "description": "Starts stopped compute on all cluster nodes.",
+        "tags": [
+          "ClusterOperations"
+        ],
+        "operationId": "Clusters_Start",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Start all servers in the cluster": {
+            "$ref": "./examples/ClusterStart.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "location": {
+                "type": "string"
+              },
+              "azure-async-operation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/stop": {
+      "post": {
+        "description": "Stops compute on all cluster nodes.",
+        "tags": [
+          "ClusterOperations"
+        ],
+        "operationId": "Clusters_Stop",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Stop all servers in the cluster": {
+            "$ref": "./examples/ClusterStop.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "location": {
+                "type": "string"
+              },
+              "azure-async-operation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/promote": {
+      "post": {
+        "description": "Promotes read replica cluster to an independent read-write cluster.",
+        "tags": [
+          "ClusterOperations"
+        ],
+        "operationId": "Clusters_PromoteReadReplica",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Promote read replica cluster to an independent read-write cluster.": {
+            "$ref": "./examples/ClusterPromoteReadReplica.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "promoteRequest",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/PromoteRequest"
+            },
+            "description": "The parameter for enabling geo-redundant backup while promoting read replica."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "location": {
+                "type": "string"
+              },
+              "azure-async-operation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/checkNameAvailability": {
+      "post": {
+        "description": "Checks availability of a cluster name. Cluster names should be globally unique; at least 3 characters and at most 40 characters long; they must only contain lowercase letters, numbers, and hyphens; and must not start or end with a hyphen.",
+        "tags": [
+          "Clusters"
+        ],
+        "operationId": "Clusters_CheckNameAvailability",
+        "x-ms-examples": {
+          "Check name availability": {
+            "$ref": "./examples/CheckNameAvailability.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "nameAvailabilityRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NameAvailabilityRequest"
+            },
+            "description": "The required parameters for checking if cluster name is available."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NameAvailability"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.DBforPostgreSQL/operations": {
+      "get": {
+        "description": "Lists all of the available REST API operations.",
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "List all available operations": {
+            "$ref": "./examples/OperationList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/privateEndpointConnections": {
+      "get": {
+        "description": "Gets list of private endpoint connections on a cluster.",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_ListByCluster",
+        "x-ms-examples": {
+          "Gets list of private endpoint connections on a cluster.": {
+            "$ref": "./examples/PrivateEndpointConnectionsListByCluster.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved private endpoint connections.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "description": "Gets private endpoint connection.",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Get",
+        "x-ms-examples": {
+          "Gets private endpoint connection.": {
+            "$ref": "./examples/PrivateEndpointConnectionsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved a specified private endpoint connection.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Approves or Rejects a private endpoint connection with a given name.",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Approves or Rejects a Private Endpoint Connection with a given name.": {
+            "$ref": "./examples/PrivateEndpointConnectionCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+            },
+            "description": "The required parameters for approving a private endpoint connection."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "201": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+            },
+            "headers": {
+              "location": {
+                "type": "string"
+              },
+              "azure-async-operation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a private endpoint connection with a given name.",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Deletes a private endpoint connection with a given name.": {
+            "$ref": "./examples/PrivateEndpointConnectionsDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "location": {
+                "type": "string"
+              },
+              "azure-async-operation": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Private endpoint connection does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/privateLinkResources": {
+      "get": {
+        "description": "Gets the private link resources for cluster.",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "operationId": "PrivateLinkResources_ListByCluster",
+        "x-ms-examples": {
+          "Gets the private link resources for cluster.": {
+            "$ref": "./examples/PrivateLinkResourceListByCluster.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved private link resources.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "description": "Gets a private link resource for cluster.",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "operationId": "PrivateLinkResources_Get",
+        "x-ms-examples": {
+          "Gets a private link resource for cluster.": {
+            "$ref": "./examples/PrivateLinkResourcesGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateLinkResourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved private link resources.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ServerRole": {
+      "type": "string",
+      "description": "The role of a server.",
+      "enum": [
+        "Coordinator",
+        "Worker"
+      ],
+      "x-ms-enum": {
+        "name": "ServerRole",
+        "modelAsString": true
+      }
+    },
+    "ServerProperties": {
+      "type": "object",
+      "description": "The properties of a server.",
+      "properties": {
+        "serverEdition": {
+          "type": "string",
+          "description": "The edition of a server."
+        },
+        "storageQuotaInMb": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The storage of a server in MB."
+        },
+        "vCores": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The vCores count of a server."
+        },
+        "enableHa": {
+          "type": "boolean",
+          "description": "If high availability (HA) is enabled or not for the server."
+        },
+        "enablePublicIpAccess": {
+          "type": "boolean",
+          "description": "If public access is enabled on server.",
+          "readOnly": true
+        },
+        "isReadOnly": {
+          "type": "boolean",
+          "description": "If server database is set to read-only by system maintenance depending on high disk space usage.",
+          "readOnly": true
+        },
+        "administratorLogin": {
+          "type": "string",
+          "description": "The administrator's login name of the servers in the cluster.",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerNameItem": {
+      "description": "The name object for a server.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of a server."
+        },
+        "fullyQualifiedDomainName": {
+          "type": "string",
+          "description": "The fully qualified domain name of a server.",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterServerProperties": {
+      "description": "The properties of a server in cluster.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerProperties"
+        }
+      ],
+      "properties": {
+        "fullyQualifiedDomainName": {
+          "type": "string",
+          "description": "The fully qualified domain name of a server.",
+          "readOnly": true
+        },
+        "role": {
+          "$ref": "#/definitions/ServerRole",
+          "description": "The role of server in the cluster."
+        },
+        "state": {
+          "type": "string",
+          "description": "A state of a cluster/server that is visible to user.",
+          "readOnly": true
+        },
+        "haState": {
+          "type": "string",
+          "description": "A state of HA feature for the cluster.",
+          "readOnly": true
+        },
+        "availabilityZone": {
+          "type": "string",
+          "description": "Availability Zone information of the server."
+        },
+        "postgresqlVersion": {
+          "type": "string",
+          "description": "The major PostgreSQL version of server."
+        },
+        "citusVersion": {
+          "type": "string",
+          "description": "The Citus extension version of server."
+        }
+      }
+    },
+    "ClusterServer": {
+      "description": "Represents a server in a cluster.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterServerProperties",
+          "description": "The properties of a server in a cluster.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ClusterServerListResult": {
+      "description": "A list of servers in a cluster.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of servers in a cluster.",
+          "items": {
+            "$ref": "#/definitions/ClusterServer"
+          }
+        }
+      }
+    },
+    "ClusterForUpdate": {
+      "description": "Represents a cluster for update.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterPropertiesForUpdate",
+          "x-ms-client-flatten": true,
+          "description": "Properties of the cluster."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application-specific metadata in the form of key-value pairs."
+        }
+      }
+    },
+    "ClusterPropertiesForUpdate": {
+      "description": "The properties used to update a cluster.",
+      "type": "object",
+      "properties": {
+        "administratorLoginPassword": {
+          "type": "string",
+          "x-ms-secret": true,
+          "format": "password",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "description": "The password of the administrator login. Each cluster is created with pre-defined administrative role called ‘citus’. "
+        },
+        "postgresqlVersion": {
+          "type": "string",
+          "description": "The major PostgreSQL version on all cluster servers."
+        },
+        "citusVersion": {
+          "type": "string",
+          "description": "The Citus extension version on all cluster servers."
+        },
+        "enableShardsOnCoordinator": {
+          "type": "boolean",
+          "description": "If distributed tables are placed on coordinator or not. Should be set to 'true' on single node clusters. Requires shard rebalancing after value is changed."
+        },
+        "enableHa": {
+          "type": "boolean",
+          "description": "If high availability (HA) is enabled or not for the cluster."
+        },
+        "preferredPrimaryZone": {
+          "type": "string",
+          "description": "Preferred primary availability zone (AZ) for all cluster servers."
+        },
+        "coordinatorServerEdition": {
+          "type": "string",
+          "description": "The edition of the coordinator (default: GeneralPurpose)."
+        },
+        "coordinatorStorageQuotaInMb": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The storage of the coordinator in MB."
+        },
+        "coordinatorVCores": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The vCores count of the coordinator (max: 96)."
+        },
+        "coordinatorEnablePublicIpAccess": {
+          "type": "boolean",
+          "description": "If public access is enabled on coordinator."
+        },
+        "nodeServerEdition": {
+          "type": "string",
+          "description": "The edition of a node (default: MemoryOptimized)."
+        },
+        "nodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Worker node count of the cluster. When node count is 0, it represents a single node configuration with the ability to create distributed tables on that node. 2 or more worker nodes represent multi-node configuration. Node count value cannot be 1."
+        },
+        "nodeStorageQuotaInMb": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The storage in MB on each worker node."
+        },
+        "nodeVCores": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The compute in vCores on each worker node (max: 104)."
+        },
+        "nodeEnablePublicIpAccess": {
+          "type": "boolean",
+          "description": "If public access is enabled on worker nodes.",
+          "readOnly": true
+        },
+        "maintenanceWindow": {
+          "$ref": "#/definitions/MaintenanceWindow",
+          "description": "Maintenance window of a cluster."
+        }
+      }
+    },
+    "ClusterListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Cluster"
+          },
+          "description": "The list of clusters"
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of cluster list.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "description": "A list of clusters."
+    },
+    "Cluster": {
+      "description": "Represents a cluster.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of the cluster."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ClusterProperties": {
+      "description": "Properties of the cluster.",
+      "type": "object",
+      "properties": {
+        "administratorLogin": {
+          "type": "string",
+          "description": "The administrator's login name of the servers in the cluster.",
+          "readOnly": true
+        },
+        "administratorLoginPassword": {
+          "type": "string",
+          "x-ms-secret": true,
+          "format": "password",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "description": "The password of the administrator login. Required for creation."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the cluster",
+          "readOnly": true
+        },
+        "state": {
+          "type": "string",
+          "description": "A state of a cluster/server that is visible to user.",
+          "readOnly": true
+        },
+        "postgresqlVersion": {
+          "type": "string",
+          "description": "The major PostgreSQL version on all cluster servers."
+        },
+        "citusVersion": {
+          "type": "string",
+          "description": "The Citus extension version on all cluster servers."
+        },
+        "maintenanceWindow": {
+          "$ref": "#/definitions/MaintenanceWindow",
+          "description": "Maintenance window of a cluster."
+        },
+        "preferredPrimaryZone": {
+          "type": "string",
+          "description": "Preferred primary availability zone (AZ) for all cluster servers."
+        },
+        "enableShardsOnCoordinator": {
+          "type": "boolean",
+          "description": "If distributed tables are placed on coordinator or not. Should be set to 'true' on single node clusters. Requires shard rebalancing after value is changed."
+        },
+        "enableHa": {
+          "type": "boolean",
+          "description": "If high availability (HA) is enabled or not for the cluster."
+        },
+        "coordinatorServerEdition": {
+          "type": "string",
+          "description": "The edition of a coordinator server (default: GeneralPurpose). Required for creation."
+        },
+        "coordinatorStorageQuotaInMb": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The storage of a server in MB. Required for creation. See https://learn.microsoft.com/azure/cosmos-db/postgresql/resources-compute for more information."
+        },
+        "coordinatorVCores": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The vCores count of a server (max: 96). Required for creation. See https://learn.microsoft.com/azure/cosmos-db/postgresql/resources-compute for more information."
+        },
+        "coordinatorEnablePublicIpAccess": {
+          "type": "boolean",
+          "description": "If public access is enabled on coordinator."
+        },
+        "nodeServerEdition": {
+          "type": "string",
+          "description": "The edition of a node server (default: MemoryOptimized)."
+        },
+        "nodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Worker node count of the cluster. When node count is 0, it represents a single node configuration with the ability to create distributed tables on that node. 2 or more worker nodes represent multi-node configuration. Node count value cannot be 1. Required for creation."
+        },
+        "nodeStorageQuotaInMb": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The storage in MB on each worker node. See https://learn.microsoft.com/azure/cosmos-db/postgresql/resources-compute for more information."
+        },
+        "nodeVCores": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The compute in vCores on each worker node (max: 104). See https://learn.microsoft.com/azure/cosmos-db/postgresql/resources-compute for more information."
+        },
+        "nodeEnablePublicIpAccess": {
+          "type": "boolean",
+          "description": "If public access is enabled on worker nodes."
+        },
+        "serverNames": {
+          "type": "array",
+          "description": "The list of server names in the cluster",
+          "items": {
+            "$ref": "#/definitions/ServerNameItem"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "readOnly": true,
+          "uniqueItems": true
+        },
+        "sourceResourceId": {
+          "type": "string",
+          "description": "The resource id of source cluster for read replica clusters."
+        },
+        "sourceLocation": {
+          "type": "string",
+          "description": "The Azure region of source cluster for read replica clusters."
+        },
+        "pointInTimeUTC": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time in UTC (ISO8601 format) for cluster restore."
+        },
+        "readReplicas": {
+          "type": "array",
+          "description": "The array of read replica clusters.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "uniqueItems": true
+        },
+        "earliestRestoreTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The earliest restore point time (ISO8601 format) for the cluster.",
+          "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "description": "The private endpoint connections for a cluster.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SimplePrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The database name of the cluster. Only one database per cluster is supported."
+        },
+        "enableGeoBackup": {
+          "type": "boolean",
+          "description": "If cluster backup is stored in another Azure region in addition to the copy of the backup stored in the cluster's region. Enabled only at the time of cluster creation."
+        },
+        "authConfig": {
+          "$ref": "#/definitions/AuthConfig",
+          "description": "Authentication configuration of a cluster."
+        }
+      }
+    },
+    "AuthConfig": {
+      "type": "object",
+      "description": "Authentication configuration of a cluster.",
+      "properties": {
+        "activeDirectoryAuth": {
+          "type": "string",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ActiveDirectoryAuth",
+            "modelAsString": true
+          }
+        },
+        "passwordAuth": {
+          "type": "string",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PasswordAuth",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "MaintenanceWindow": {
+      "type": "object",
+      "description": "Schedule settings for regular cluster updates.",
+      "properties": {
+        "customWindow": {
+          "type": "string",
+          "description": "Indicates whether custom maintenance window is enabled or not."
+        },
+        "startHour": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start hour within preferred day of the week for maintenance window."
+        },
+        "startMinute": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start minute within the start hour for maintenance window."
+        },
+        "dayOfWeek": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Preferred day of the week for maintenance window."
+        }
+      }
+    },
+    "ConfigurationProperties": {
+      "description": "The properties of configuration.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the configuration.",
+          "readOnly": true
+        },
+        "dataType": {
+          "type": "string",
+          "description": "Data type of the configuration.",
+          "enum": [
+            "Boolean",
+            "Numeric",
+            "Integer",
+            "Enumeration"
+          ],
+          "x-ms-enum": {
+            "name": "ConfigurationDataType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "allowedValues": {
+          "type": "string",
+          "description": "Allowed values of the configuration.",
+          "readOnly": true
+        },
+        "requiresRestart": {
+          "type": "boolean",
+          "description": "If configuration change requires restart."
+        },
+        "serverRoleGroupConfigurations": {
+          "type": "array",
+          "description": "The list of server role group configuration values.",
+          "items": {
+            "$ref": "#/definitions/ServerRoleGroupConfiguration"
+          },
+          "x-ms-identifiers": [],
+          "uniqueItems": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the configuration",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "serverRoleGroupConfigurations"
+      ]
+    },
+    "Configuration": {
+      "description": "Represents configuration details for coordinator and node.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConfigurationProperties",
+          "description": "The properties of configuration.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ServerRoleGroupConfiguration": {
+      "description": "Represents server role group configuration value.",
+      "type": "object",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/ServerRole",
+          "description": "The role of servers in the server role group."
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the configuration."
+        },
+        "defaultValue": {
+          "type": "string",
+          "description": "Default value of the configuration.",
+          "readOnly": true
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of the configuration.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "role",
+        "value"
+      ]
+    },
+    "ClusterConfigurationListResult": {
+      "description": "A list of cluster configurations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of cluster configurations.",
+          "items": {
+            "$ref": "#/definitions/Configuration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to retrieve next page of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerConfigurationProperties": {
+      "description": "The properties of a configuration.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Value of the configuration."
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of the configuration.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the configuration.",
+          "readOnly": true
+        },
+        "defaultValue": {
+          "type": "string",
+          "description": "Default value of the configuration.",
+          "readOnly": true
+        },
+        "dataType": {
+          "type": "string",
+          "description": "Data type of the configuration.",
+          "enum": [
+            "Boolean",
+            "Numeric",
+            "Integer",
+            "Enumeration"
+          ],
+          "x-ms-enum": {
+            "name": "ConfigurationDataType",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "allowedValues": {
+          "type": "string",
+          "description": "Allowed values of the configuration.",
+          "readOnly": true
+        },
+        "requiresRestart": {
+          "type": "boolean",
+          "description": "If configuration change requires restart.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the configuration.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ServerConfiguration": {
+      "description": "Represents a configuration.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerConfigurationProperties",
+          "description": "The properties of a configuration.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ServerConfigurationListResult": {
+      "description": "A list of server configurations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of server configurations.",
+          "items": {
+            "$ref": "#/definitions/ServerConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to retrieve next page of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "FirewallRuleProperties": {
+      "description": "The properties of a cluster firewall rule.",
+      "type": "object",
+      "properties": {
+        "startIpAddress": {
+          "type": "string",
+          "description": "The start IP address of the cluster firewall rule. Must be IPv4 format.",
+          "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
+        },
+        "endIpAddress": {
+          "type": "string",
+          "description": "The end IP address of the cluster firewall rule. Must be IPv4 format.",
+          "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the firewall rule.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "startIpAddress",
+        "endIpAddress"
+      ]
+    },
+    "FirewallRule": {
+      "description": "Represents a cluster firewall rule.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FirewallRuleProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a firewall rule."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "FirewallRuleListResult": {
+      "description": "A list of firewall rules.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of firewall rules in a cluster.",
+          "items": {
+            "$ref": "#/definitions/FirewallRule"
+          }
+        }
+      }
+    },
+    "RoleProperties": {
+      "properties": {
+        "roleType": {
+          "type": "string",
+          "enum": [
+            "user",
+            "admin"
+          ],
+          "default": "user",
+          "x-ms-enum": {
+            "name": "RoleType",
+            "modelAsString": true
+          }
+        },
+        "password": {
+          "type": "string",
+          "x-ms-secret": true,
+          "format": "password",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "description": "The password of the cluster role. If an identity is used, password will not be required."
+        },
+        "externalIdentity": {
+          "type": "object",
+          "required": [
+            "objectId",
+            "principalType"
+          ],
+          "properties": {
+            "objectId": {
+              "type": "string",
+              "format": "arm-id"
+            },
+            "principalType": {
+              "type": "string",
+              "enum": [
+                "user",
+                "servicePrincipal",
+                "group"
+              ],
+              "x-ms-enum": {
+                "name": "PrincipalType",
+                "modelAsString": true
+              }
+            },
+            "tenantId": {
+              "type": "string",
+              "format": "arm-id"
+            }
+          },
+          "x-ms-client-flatten": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the role",
+          "readOnly": true
+        }
+      },
+      "description": "The properties of a cluster role.",
+      "type": "object"
+    },
+    "Role": {
+      "description": "Represents a cluster role.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoleProperties",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a role."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "RoleListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Role"
+          },
+          "description": "The list of roles in a cluster."
+        }
+      },
+      "description": "A list of roles.",
+      "type": "object"
+    },
+    "OperationDisplay": {
+      "description": "Display metadata associated with the operation.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Operation resource provider name.",
+          "readOnly": true
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource on which the operation is performed.",
+          "readOnly": true
+        },
+        "operation": {
+          "type": "string",
+          "description": "Localized friendly name for the operation.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Operation description.",
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "description": "REST API operation definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the operation being performed on this particular object."
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "readOnly": true,
+          "description": "The localized display information for this particular operation or action."
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action.",
+          "type": "boolean"
+        },
+        "origin": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The intended executor of the operation.",
+          "enum": [
+            "NotSpecified",
+            "user",
+            "system"
+          ],
+          "x-ms-enum": {
+            "name": "OperationOrigin",
+            "modelAsString": true
+          }
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "readOnly": true,
+          "x-ms-client-flatten": true,
+          "description": "Additional descriptions for the operation."
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "A list of resource provider operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of available operation details.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "NameAvailabilityRequest": {
+      "description": "Request from client to check cluster name availability.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Cluster name to verify."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.DBforPostgreSQL/serverGroupsv2"
+          ],
+          "description": "Resource type used for verification.",
+          "x-ms-enum": {
+            "name": "CheckNameAvailabilityResourceType",
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "NameAvailability": {
+      "description": "Represents cluster name availability.",
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        },
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Indicates whether the cluster name is available."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the cluster."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the cluster."
+        }
+      }
+    },
+    "PrivateEndpointProperty": {
+      "type": "object",
+      "description": "Property to represent resource id of the private endpoint.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource id of the private endpoint."
+        }
+      }
+    },
+    "SimplePrivateEndpointConnection": {
+      "description": "A private endpoint connection.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionSimpleProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of the private endpoint connection."
+        }
+      }
+    },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private endpoint connections.",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+          }
+        }
+      },
+      "description": "List of private endpoint connections associated with the specified resource."
+    },
+    "PrivateEndpointConnectionSimpleProperties": {
+      "description": "The properties in private endpoint connection",
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpointProperty",
+          "description": "Private endpoint which the connection belongs to."
+        },
+        "groupIds": {
+          "type": "array",
+          "description": "Group ids of the private endpoint connection.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateLinkServiceConnectionState"
+        }
+      }
+    },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private link resources",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateLinkResource"
+          }
+        }
+      },
+      "description": "A list of private link resources."
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Canceled",
+        "InProgress",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "PromoteRequest": {
+      "description": "Request from client to promote geo-redundant replica",
+      "type": "object",
+      "properties": {
+        "enableGeoBackup": {
+          "type": "boolean",
+          "description": "Cluster name to verify."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ClusterNameParameter": {
+      "name": "clusterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the cluster.",
+      "pattern": "^(?![0-9]+$)(?!-)[a-z0-9-]{3,40}(?<!-)$",
+      "minLength": 3,
+      "maxLength": 40,
+      "x-ms-parameter-location": "method"
+    },
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server.",
+      "pattern": "^[-\\w\\._]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "ConfigurationNameParameter": {
+      "name": "configurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the cluster configuration.",
+      "pattern": "^[-\\w\\._]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "FirewallRuleNameParameter": {
+      "name": "firewallRuleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the cluster firewall rule.",
+      "pattern": "^[-\\w\\._]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "RoleNameParameter": {
+      "name": "roleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the cluster role.",
+      "pattern": "^[-\\w\\._]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "PrivateEndpointConnectionNameParameter": {
+      "name": "privateEndpointConnectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the private endpoint connection associated with the cluster.",
+      "pattern": "^[-\\w\\._]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "PrivateLinkResourceName": {
+      "name": "privateLinkResourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the private link resource.",
+      "pattern": "^[-\\w\\._]+$",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
