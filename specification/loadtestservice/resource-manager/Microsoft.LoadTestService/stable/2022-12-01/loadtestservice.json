@@ -247,7 +247,7 @@
             "schema": {
               "$ref": "#/definitions/QuotaBucketRequest"
             },
-            "x-ms-client-name": "QuotaBucketRequest"
+            "x-ms-client-name": "body"
           }
         ],
         "responses": {
@@ -335,8 +335,7 @@
             "in": "path",
             "description": "Load Test name",
             "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "type": "string"
           }
         ],
         "responses": {
@@ -380,8 +379,7 @@
             "in": "path",
             "description": "Load Test name",
             "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "type": "string"
           },
           {
             "name": "LoadTestResource",
@@ -391,7 +389,7 @@
             "schema": {
               "$ref": "#/definitions/LoadTestResource"
             },
-            "x-ms-client-name": "LoadTestResource"
+            "x-ms-client-name": "resource"
           }
         ],
         "responses": {
@@ -414,7 +412,7 @@
               },
               "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "URL to query for status of the operation."
+                "description": "A link to the status monitor"
               }
             }
           },
@@ -456,8 +454,7 @@
             "in": "path",
             "description": "Load Test name",
             "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "type": "string"
           },
           {
             "name": "LoadTestResourcePatchRequestBody",
@@ -467,7 +464,7 @@
             "schema": {
               "$ref": "#/definitions/LoadTestResourceUpdate"
             },
-            "x-ms-client-name": "LoadTestResourcePatchRequestBody"
+            "x-ms-client-name": "properties"
           }
         ],
         "responses": {
@@ -487,7 +484,7 @@
               },
               "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "URL to query for status of the operation."
+                "description": "A link to the status monitor"
               }
             }
           },
@@ -529,8 +526,7 @@
             "in": "path",
             "description": "Load Test name",
             "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "type": "string"
           }
         ],
         "responses": {
@@ -591,15 +587,14 @@
             "in": "path",
             "description": "Load Test name",
             "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/OutboundEnvironmentEndpointCollection"
+              "$ref": "#/definitions/PagedOutboundEnvironmentEndpoint"
             }
           },
           "default": {
@@ -625,16 +620,35 @@
       "type": "object",
       "description": "Check quota availability response object.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "readOnly": true
+        },
         "properties": {
           "$ref": "#/definitions/CheckQuotaAvailabilityResponseProperties",
           "description": "Check quota availability response properties.",
           "x-ms-client-flatten": true
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
-        }
+      "required": [
+        "id",
+        "type"
       ]
     },
     "CheckQuotaAvailabilityResponseProperties": {
@@ -705,7 +719,10 @@
             "port"
           ]
         }
-      }
+      },
+      "required": [
+        "domainName"
+      ]
     },
     "EndpointDetail": {
       "type": "object",
@@ -848,23 +865,22 @@
         }
       }
     },
-    "OutboundEnvironmentEndpointCollection": {
+    "PagedOutboundEnvironmentEndpoint": {
       "type": "object",
       "description": "Values returned by the List operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The collection of outbound network dependency endpoints returned by the listing operation.",
+          "description": "The OutboundEnvironmentEndpoint items on this page",
           "items": {
             "$ref": "#/definitions/OutboundEnvironmentEndpoint"
           },
-          "readOnly": true,
           "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The continuation token."
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -880,12 +896,7 @@
           "description": "Request object of new quota for a quota bucket.",
           "x-ms-client-flatten": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
-        }
-      ]
+      }
     },
     "QuotaBucketRequestProperties": {
       "type": "object",

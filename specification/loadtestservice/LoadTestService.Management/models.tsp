@@ -21,7 +21,6 @@ namespace Microsoft.LoadTestService;
 model LoadTestResource is TrackedResource<LoadTestProperties> {
   @doc("Load Test name")
   @key("loadTestName")
-  @extension("x-ms-parameter-location", "method")
   @path
   @segment("loadTests")
   name: string;
@@ -58,7 +57,8 @@ model EndpointDetail {
 model EndpointDependency {
   @doc("The domain name of the dependency. Domain names may be fully qualified or may contain a * wildcard.")
   @visibility("read")
-  domainName?: string;
+  @key
+  domainName: string;
 
   @doc("Human-readable supplemental information about the dependency and when it is applicable.")
   @visibility("read")
@@ -116,22 +116,8 @@ model QuotaResourceProperties {
   provisioningState?: ResourceState;
 }
 
-@doc("The location of quota resource")
-@subscriptionResource
-model Location {
-  @doc("The location of quota in ARM Normalized format like eastus, southeastasia etc.")
-  @key("location")
-  @path
-  @segment("locations")
-  @visibility("query", "read", "update")
-  @armCommonParameter("LocationParameter", Azure.ResourceManager.CommonTypes.Versions.v3)
-  @armCommonParameter("LocationParameter", Azure.ResourceManager.CommonTypes.Versions.v4)
-  @armCommonParameter("LocationParameter", Azure.ResourceManager.CommonTypes.Versions.v5)
-  name: string;
-}
-
 @doc("Quota bucket details object.")
-@parentResource(Location)
+@parentResource(ArmLocationResource<"Subscription">)
 model QuotaResource is ProxyResource<QuotaResourceProperties> {
   @doc("The quota name.")
   @key("quotaBucketName")
@@ -163,7 +149,13 @@ model LoadTestProperties {
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "CheckQuotaAvailabilityResponse has a allOf relationship with Resource"
 @doc("Check quota availability response object.")
-model CheckQuotaAvailabilityResponse extends Resource {
+model CheckQuotaAvailabilityResponse {
+  ...ArmResource;
+
+  @doc("The name of the resource.")
+  @visibility("read")
+  name?: string;
+
   @doc("Check quota availability response properties.")
   @extension("x-ms-client-flatten", true)
   properties?: CheckQuotaAvailabilityResponseProperties;
@@ -178,31 +170,9 @@ model CheckQuotaAvailabilityResponseProperties {
   availabilityStatus?: string;
 }
 
-@doc("Common properties for resources.")
-@armCommonDefinition("Resource", Azure.ResourceManager.CommonTypes.Versions.v3)
-@armCommonDefinition("Resource", Azure.ResourceManager.CommonTypes.Versions.v4)
-@armCommonDefinition("Resource", Azure.ResourceManager.CommonTypes.Versions.v5)
-model Resource {
-  @doc("Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}")
-  @visibility("read")
-  id?: string;
-
-  @doc("The name of the resource.")
-  @visibility("read")
-  name?: string;
-
-  @doc("The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"")
-  @visibility("read")
-  type?: string;
-
-  @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information.")
-  @visibility("read")
-  systemData?: SystemData;
-}
-
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "QuotaBucketRequest has a allOf relationship with Resource"
 @doc("Request object of new quota for a quota bucket.")
-model QuotaBucketRequest extends Resource {
+model QuotaBucketRequest {
   @extension("x-ms-client-flatten", true)
   @doc("Request object of new quota for a quota bucket.")
   properties?: QuotaBucketRequestProperties;
@@ -238,21 +208,5 @@ model QuotaBucketRequestPropertiesDimensions {
 }
 
 @doc("Values returned by the List operation.")
-model OutboundEnvironmentEndpointCollection {
-  @items
-  @visibility("read")
-  @doc("The collection of outbound network dependency endpoints returned by the listing operation.")
-  @extension("x-ms-identifiers", [])
-  value: OutboundEnvironmentEndpoint[];
-
-  @doc("The continuation token.")
-  @nextLink
-  nextLink?: ResourceLocation<OutboundEnvironmentEndpoint>;
-}
-
-@doc("URL to query for status of the operation.")
-model AzureAsyncOperationHeader {
-  @doc("URL to query for status of the operation.")
-  @header("Azure-AsyncOperation")
-  azureAsyncOperation?: string;
-}
+model OutboundEnvironmentEndpointCollection
+  is Azure.Core.Page<OutboundEnvironmentEndpoint>;

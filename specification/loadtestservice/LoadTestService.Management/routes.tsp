@@ -22,18 +22,8 @@ interface Operations extends Azure.ResourceManager.Operations {}
   "LoadTestResource"
 );
 
-@@OpenAPI.extension(LoadTests.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "LoadTestResource"
-);
-
 @@encodedName(LoadTests.update::parameters.properties,
   "application/json",
-  "LoadTestResourcePatchRequestBody"
-);
-
-@@OpenAPI.extension(LoadTests.update::parameters.properties,
-  "x-ms-client-name",
   "LoadTestResourcePatchRequestBody"
 );
 
@@ -42,32 +32,23 @@ interface Operations extends Azure.ResourceManager.Operations {}
   "QuotaBucketRequest"
 );
 
-@@OpenAPI.extension(Quotas.checkAvailability::parameters.body,
-  "x-ms-client-name",
-  "QuotaBucketRequest"
-);
-
 @armResourceOperations
 interface LoadTests {
-  
-  listBySubscription is ArmListBySubscription<
-    LoadTestResource
-  >;
-  
-  listByResourceGroup is ArmResourceListByParent<
-    LoadTestResource
-  >;
+  listBySubscription is ArmListBySubscription<LoadTestResource>;
+
+  listByResourceGroup is ArmResourceListByParent<LoadTestResource>;
   get is ArmResourceRead<LoadTestResource>;
 
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     LoadTestResource,
-    LroHeaders = AzureAsyncOperationHeader
+    LroHeaders = ArmAsyncOperationHeader
   >;
 
   update is ArmResourcePatchAsync<
     LoadTestResource,
     LoadTestProperties,
-    LroHeaders = AzureAsyncOperationHeader>;
+    LroHeaders = ArmAsyncOperationHeader
+  >;
 
   delete is ArmResourceDeleteWithoutOkAsync<LoadTestResource>;
 
