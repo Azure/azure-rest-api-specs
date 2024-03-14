@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "Endpoint": "https://eastus.api.cognitive.microsoft.com/",
+    "Ocp-Apim-Subscription-Key": "{API Key}",
+    "api-version": "2023-09-01",
+    "id": "my-batch-synthesis-job-text-input-1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "textKind": "PlainText",
+        "synthesisConfig": {
+          "voice": "en-US-JennyNeural"
+        },
+        "customVoices": {},
+        "properties": {
+          "timeToLiveInHours": 744,
+          "outputFormat": "riff-24khz-16bit-mono-pcm",
+          "concatenateResult": false,
+          "decompressOutputFiles": false,
+          "wordBoundaryEnabled": false,
+          "sentenceBoundaryEnabled": false,
+          "audioSizeInBytes": 120000,
+          "durationInMilliseconds": 2500,
+          "durationInTicks": 25000000,
+          "succeededAudioCount": 1,
+          "billingDetails": {
+            "neural": 29,
+            "customNeural": 0
+          }
+        },
+        "outputs": {
+          "result": "https://cvoicedevusw2.blob.core.windows.net/batch-synthesis-output/9878de85-12b6-4b1e-9231-58fd8a31748e/results.zip?skoid=45504c48-aa40-48c9-b59b-012faa154df8&sktid=72f988bf-86f1-41af-91ab-2d7cd011db47&skt=2023-10-16T05%3A29%3A30Z&ske=2023-10-22T05%3A34%3A30Z&sks=b&skv=2023-08-03&sv=2023-08-03&st=2023-10-16T05%3A29%3A30Z&se=2023-10-16T17%3A34%3A30Z&sr=b&sp=rl&sig={Masked}"
+        },
+        "status": "Succeeded",
+        "lastActionDateTime": "2023-10-16T05:32:25.283Z",
+        "id": "my-batch-synthesis-job-text-input-1",
+        "createdDateTime": "2023-10-16T05:32:22.910Z"
+      }
+    }
+  }
+}
