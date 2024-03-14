@@ -35,17 +35,17 @@ modelerfour:
   flatten-models: false
 ```
 
-### Tag: package-preview-2024-04
+### Tag: package-preview-2024-04-01-preview
 
-These settings apply only when `--tag=package-preview-2024-04` is specified on the command line.
+These settings apply only when `--tag=package-preview-2024-04-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-04'
+```yaml $(tag) == 'package-preview-2024-04-01-preview'
 input-file:
   - Microsoft.OffAzureSpringBoot/preview/2024-04-01-preview/springbootdiscovery.json
 ```
-### Tag: package-2021-01-03-preview
+### Tag: package-2023-01-01-preview
 
-These settings apply only when `--tag=package-2021-01-03-preview` is specified on the command line.
+These settings apply only when `--tag=package-2023-01-01-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2023-01-01-preview'
 input-file:
