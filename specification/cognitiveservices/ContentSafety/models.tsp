@@ -268,6 +268,7 @@ model QnAOptions {
 @doc("LLM resource type.")
 union LLMResourceType {
   string,
+
   @doc("Azure OpenAI resource type.")
   AzureOpenAI: "AzureOpenAI",
 }
