@@ -27,15 +27,13 @@ These are the global settings for the OffAzureSpringBoot.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-01-01-preview
+tag: package-preview-2024-04-01-preview
 ```
 
 ``` yaml
 modelerfour:
   flatten-models: false
-tag: package-preview-2024-04
 ```
-
 
 ### Tag: package-preview-2024-04
 
