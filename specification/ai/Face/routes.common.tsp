@@ -39,22 +39,10 @@ op FaceResourceCreateOperation<TResource extends TypeSpec.Reflection.Model> is F
   ServiceTraits
 >;
 
-@sharedRoute
-@createsResource(TFace)
-op AddFaceFromUrl<TFace extends BaseFace> is Foundations.ResourceCollectionOperation<
-  TFace,
-  AddFaceOptions & {
-    @doc("URL of input image.")
-    url: url;
-  },
-  AddFaceResult,
-  ServiceTraits
->;
-
 #suppress "@azure-tools/typespec-azure-core/byos" "It's a template."
 @sharedRoute
 @createsResource(TFace)
-op AddFaceFromStream<TFace extends BaseFace> is Foundations.ResourceCollectionOperation<
+op AddFace<TFace extends BaseFace> is Foundations.ResourceCollectionOperation<
   TFace,
   AddFaceOptions & {
     @doc("The format of the HTTP payload.")
@@ -64,6 +52,18 @@ op AddFaceFromStream<TFace extends BaseFace> is Foundations.ResourceCollectionOp
     @doc("The image to be analyzed")
     @body
     imageContent: bytes;
+  },
+  AddFaceResult,
+  ServiceTraits
+>;
+
+@sharedRoute
+@createsResource(TFace)
+op AddFaceFromUrl<TFace extends BaseFace> is Foundations.ResourceCollectionOperation<
+  TFace,
+  AddFaceOptions & {
+    @doc("URL of input image.")
+    url: url;
   },
   AddFaceResult,
   ServiceTraits

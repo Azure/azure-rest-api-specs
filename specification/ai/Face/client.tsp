@@ -22,7 +22,7 @@ interface FaceClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path."
   #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
-  detectFromStream is FaceDetectionOperations.detectFromStream;
+  detect is FaceDetectionOperations.detect;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path."
@@ -74,7 +74,7 @@ interface FaceClient {
   addFaceListFaceFromUrl is FaceListOperations.addFaceListFaceFromUrl;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
-  addFaceListFaceFromStream is FaceListOperations.addFaceListFaceFromStream;
+  addFaceListFace is FaceListOperations.addFaceListFace;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   deleteFaceListFace is FaceListOperations.deleteFaceListFace;
 
@@ -94,7 +94,7 @@ interface FaceClient {
   addLargeFaceListFaceFromUrl is FaceListOperations.addLargeFaceListFaceFromUrl;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
-  addLargeFaceListFaceFromStream is FaceListOperations.addLargeFaceListFaceFromStream;
+  addLargeFaceListFace is FaceListOperations.addLargeFaceListFace;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   deleteLargeFaceListFace is FaceListOperations.deleteLargeFaceListFace;
   getLargeFaceListFace is FaceListOperations.getLargeFaceListFace;
@@ -128,7 +128,7 @@ interface FaceClient {
   addPersonGroupPersonFaceFromUrl is PersonGroupOperations.addPersonGroupPersonFaceFromUrl;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
-  addPersonGroupPersonFaceFromStream is PersonGroupOperations.addPersonGroupPersonFaceFromStream;
+  addPersonGroupPersonFace is PersonGroupOperations.addPersonGroupPersonFace;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   deletePersonGroupPersonFace is PersonGroupOperations.deletePersonGroupPersonFace;
   getPersonGroupPersonFace is PersonGroupOperations.getPersonGroupPersonFace;
@@ -160,7 +160,7 @@ interface FaceClient {
   addLargePersonGroupPersonFaceFromUrl is PersonGroupOperations.addLargePersonGroupPersonFaceFromUrl;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
-  addLargePersonGroupPersonFaceFromStream is PersonGroupOperations.addLargePersonGroupPersonFaceFromStream;
+  addLargePersonGroupPersonFace is PersonGroupOperations.addLargePersonGroupPersonFace;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   deleteLargePersonGroupPersonFace is PersonGroupOperations.deleteLargePersonGroupPersonFace;
   getLargePersonGroupPersonFace is PersonGroupOperations.getLargePersonGroupPersonFace;
@@ -182,7 +182,7 @@ interface FaceClient {
   addPersonFaceFromUrl is PersonDirectoryOperations.addPersonFaceFromUrl;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
-  addPersonFaceFromStream is PersonDirectoryOperations.addPersonFaceFromStream;
+  addPersonFace is PersonDirectoryOperations.addPersonFace;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   deletePersonFace is PersonDirectoryOperations.deletePersonFace;
   getPersonFace is PersonDirectoryOperations.getPersonFace;

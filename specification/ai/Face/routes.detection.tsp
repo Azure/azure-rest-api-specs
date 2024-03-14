@@ -25,6 +25,18 @@ op DetectOperation<T extends TypeSpec.Reflection.Model> is Azure.Core.RpcOperati
 >;
 
 interface FaceDetectionOperations {
+  #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path."
+  detect is DetectOperation<{
+    @doc("The format of the HTTP payload.")
+    @header
+    contentType: "application/octet-stream";
+
+    @doc("The input image binary.")
+    @body
+    imageContent: bytes;
+  }>;
+  
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path."
   detectFromUrl is DetectOperation<{
     @doc("The format of the HTTP payload.")
@@ -35,15 +47,4 @@ interface FaceDetectionOperations {
     url: url;
   }>;
 
-  #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
-  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path."
-  detectFromStream is DetectOperation<{
-    @doc("The format of the HTTP payload.")
-    @header
-    contentType: "application/octet-stream";
-
-    @doc("The input image binary.")
-    @body
-    imageContent: bytes;
-  }>;
 }

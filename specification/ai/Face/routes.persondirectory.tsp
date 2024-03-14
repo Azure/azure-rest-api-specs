@@ -138,11 +138,16 @@ interface PersonDirectoryOperations {
   """)
   @sharedRoute
   @createsResource(PersonDirectoryFace)
-  addPersonFaceFromUrl is FaceResourceCollectionLongRunningOperation<
+  addPersonFace is FaceResourceCollectionLongRunningOperation<
     PersonDirectoryFace,
     AddFaceOptions & {
-      @doc("URL of input image.")
-      url: url;
+      @doc("The format of the HTTP payload.")
+      @header
+      contentType: "application/octet-stream";
+
+      @doc("The image to be analyzed")
+      @body
+      imageContent: bytes;
     },
     AddFaceResult
   >;
@@ -168,16 +173,11 @@ interface PersonDirectoryOperations {
   """)
   @sharedRoute
   @createsResource(PersonDirectoryFace)
-  addPersonFaceFromStream is FaceResourceCollectionLongRunningOperation<
+  addPersonFaceFromUrl is FaceResourceCollectionLongRunningOperation<
     PersonDirectoryFace,
     AddFaceOptions & {
-      @doc("The format of the HTTP payload.")
-      @header
-      contentType: "application/octet-stream";
-
-      @doc("The image to be analyzed")
-      @body
-      imageContent: bytes;
+      @doc("URL of input image.")
+      url: url;
     },
     AddFaceResult
   >;
