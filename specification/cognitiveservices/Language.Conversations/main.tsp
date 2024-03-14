@@ -1737,6 +1737,14 @@ enum WeightUnit {
   Dram,
 }
 
+@doc("Error response.")
+@error
+model ErrorResponseWithHeader is ErrorResponse{
+  @header("x-ms-error-code")
+  @doc("The error code for specific error that occurred.")
+  errorCode?: string;
+}
+
 alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
   NoClientRequestId;
@@ -1755,7 +1763,7 @@ op analyzeConversations(
   @body
   body: AnalyzeConversationTask,
   ...Azure.Core.Foundations.ApiVersionParameter,
-): AnalyzeConversationTaskResult | ErrorResponse;
+): AnalyzeConversationTaskResult | ErrorResponseWithHeader;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.v2023_04_01)

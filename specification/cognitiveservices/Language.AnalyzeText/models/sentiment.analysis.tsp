@@ -132,7 +132,9 @@ model SentenceTarget {
   relations: Array<TargetRelation>;
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum"
 @doc("The predicted Sentiment for the sentence.")
+@fixed
 enum SentenceTargetSentimentValue {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   positive,

@@ -74,7 +74,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseWithHeader"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code for specific error that occurred."
+              }
             }
           }
         }
@@ -1493,6 +1499,19 @@
       }
     },
     "ErrorResponse": {
+      "type": "object",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "ErrorResponseWithHeader": {
       "type": "object",
       "description": "Error response.",
       "properties": {
