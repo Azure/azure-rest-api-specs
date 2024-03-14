@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Communication Routing Service",
-    "version": "2023-11-01",
+    "version": "2024-01-18-preview",
     "description": "Azure Communication Routing Service",
     "x-typespec-generated": [
       {
@@ -1967,6 +1967,9 @@
         "x-ms-examples": {
           "Creates a worker": {
             "$ref": "./examples/Workers_CreateWorker.json"
+          },
+          "Creates a worker with max concurrent offers set to one": {
+            "$ref": "./examples/Workers_CreateWorkerWithMaxConcurrentOffers.json"
           },
           "De-register an active worker": {
             "$ref": "./examples/Workers_DeregisterActiveWorker.json"
@@ -4121,6 +4124,11 @@
         "availableForOffers": {
           "type": "boolean",
           "description": "A flag indicating this worker is open to receive offers or not."
+        },
+        "maxConcurrentOffers": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If this is set, the worker will only receive up to this many new offers at a time."
         }
       },
       "required": [
@@ -4195,6 +4203,11 @@
         "availableForOffers": {
           "type": "boolean",
           "description": "A flag indicating this worker is open to receive offers or not."
+        },
+        "maxConcurrentOffers": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If this is set, the worker will only receive up to this many new offers at a time."
         }
       }
     },
