@@ -9,148 +9,159 @@ using TypeSpec.Http;
 namespace DevCenterService;
 
 @doc("The operating system type.")
-enum OsType {
-  @doc("The Windows operating system.") Windows,
+union OsType {
+  @doc("The Windows operating system.") Windows: "Windows",
+  string,
 }
 
 @doc("Indicates whether hibernate is supported and enabled, disabled, or unsupported by the operating system. Unknown hibernate support is represented as null.")
-enum HibernateSupport {
-  @doc("Hibernate is enabled.") Enabled,
-  @doc("Hibernate is not enabled.") Disabled,
-  @doc("Hibernate is not supported by the operating system.") OsUnsupported,
+union HibernateSupport {
+  @doc("Hibernate is enabled.") Enabled: "Enabled",
+  @doc("Hibernate is not enabled.") Disabled: "Disabled",
+  @doc("Hibernate is not supported by the operating system.") OsUnsupported: "OsUnsupported",
+  string,
 }
 
 @doc("Indicates whether owners of Dev Boxes in a pool are local administrators on the Dev Boxes.")
-enum LocalAdminStatus {
+union LocalAdminStatus {
   @doc("Owners of Dev Boxes in the pool are local administrators on the Dev Boxes.")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("Owners of Dev Boxes in the pool are not local administrators on the Dev Boxes.")
-  Disabled,
+  Disabled: "Disabled",
+  string,
 }
 
 @doc("Indicates the provisioning state of the Dev Box.")
-enum DevBoxProvisioningState {
-  @doc("Dev Box was successfully provisioned") Succeeded,
-  @doc("Dev Box failed to provision") Failed,
-  @doc("Dev Box provision was canceled") Canceled,
-  @doc("Dev Box is being created") Creating,
-  @doc("Dev Box is being deleted") Deleting,
-  @doc("Dev Box is updating") Updating,
-  @doc("Dev Box is starting") Starting,
-  @doc("Dev Box is stopping") Stopping,
-  @doc("Dev Box is provisioning") Provisioning,
-  @doc("Dev Box was provisioned with warning") ProvisionedWithWarning,
-  @doc("Dev Box is in grace period") InGracePeriod,
-  @doc("Dev Box is not provisioned") NotProvisioned,
+union DevBoxProvisioningState {
+  @doc("Dev Box was successfully provisioned") Succeeded: "Succeeded",
+  @doc("Dev Box failed to provision") Failed: "Failed",
+  @doc("Dev Box provision was canceled") Canceled: "Canceled",
+  @doc("Dev Box is being created") Creating: "Creating",
+  @doc("Dev Box is being deleted") Deleting: "Deleting",
+  @doc("Dev Box is updating") Updating: "Updating",
+  @doc("Dev Box is starting") Starting: "Starting",
+  @doc("Dev Box is stopping") Stopping: "Stopping",
+  @doc("Dev Box is provisioning") Provisioning: "Provisioning",
+  @doc("Dev Box was provisioned with warning") ProvisionedWithWarning : "ProvisionedWithWarning",
+  @doc("Dev Box is in grace period") InGracePeriod: "InGracePeriod" ,
+  @doc("Dev Box is not provisioned") NotProvisioned: "NotProvisioned",
+  string,
 }
 
 @doc("Indicates the Dev Box compute.")
-enum SkuName {
+union SkuName {
   @doc("Intel, 8 vCPU, 32 GB RAM, 256 GB Storage")
-  general_i_8c32gb256ssd_v2,
+  general_i_8c32gb256ssd_v2: "general_i_8c32gb256ssd_v2",
 
   @doc("Intel, 8 vCPU, 32 GB RAM, 512 GB Storage")
-  general_i_8c32gb512ssd_v2,
+  general_i_8c32gb512ssd_v2: "general_i_8c32gb512ssd_v2",
 
   @doc("Intel, 8 vCPU, 32 GB RAM, 1024 GB Storage")
-  general_i_8c32gb1024ssd_v2,
+  general_i_8c32gb1024ssd_v2: "general_i_8c32gb1024ssd_v2",
 
   @doc("Intel, 8 vCPU, 32 GB RAM, 2048 GB Storage")
-  general_i_8c32gb2048ssd_v2,
+  general_i_8c32gb2048ssd_v2: "general_i_8c32gb2048ssd_v2",
 
   @doc("Intel, 16 vCPU, 64 GB RAM, 256 GB Storage")
-  general_i_16c64gb256ssd_v2,
+  general_i_16c64gb256ssd_v2: "general_i_16c64gb256ssd_v2",
 
   @doc("Intel, 16 vCPU, 64 GB RAM, 512 GB Storage")
-  general_i_16c64gb512ssd_v2,
+  general_i_16c64gb512ssd_v2: "general_i_16c64gb512ssd_v2",
 
   @doc("Intel, 16 vCPU, 64 GB RAM, 1024 GB Storage")
-  general_i_16c64gb1024ssd_v2,
+  general_i_16c64gb1024ssd_v2: "general_i_16c64gb1024ssd_v2",
 
   @doc("Intel, 16 vCPU, 64 GB RAM, 2048 GB Storage")
-  general_i_16c64gb2048ssd_v2,
+  general_i_16c64gb2048ssd_v2: "general_i_16c64gb2048ssd_v2",
 
   @doc("Intel, 32 vCPU, 128 GB RAM, 512 GB Storage")
-  general_i_32c128gb512ssd_v2,
+  general_i_32c128gb512ssd_v2: "general_i_32c128gb512ssd_v2",
 
   @doc("Intel, 32 vCPU, 128 GB RAM, 1024 GB Storage")
-  general_i_32c128gb1024ssd_v2,
+  general_i_32c128gb1024ssd_v2: "general_i_32c128gb1024ssd_v2",
 
   @doc("Intel, 32 vCPU, 128 GB RAM, 2048 GB Storage")
-  general_i_32c128gb2048ssd_v2,
+  general_i_32c128gb2048ssd_v2: "general_i_32c128gb2048ssd_v2",
 
   @doc("AMD, 8 vCPU, 32 GB RAM, 256 GB Storage")
-  general_a_8c32gb256ssd_v2,
+  general_a_8c32gb256ssd_v2: "general_a_8c32gb256ssd_v2",
 
   @doc("AMD, 8 vCPU, 32 GB RAM, 512 GB Storage")
-  general_a_8c32gb512ssd_v2,
+  general_a_8c32gb512ssd_v2: "general_a_8c32gb512ssd_v2",
 
   @doc("AMD, 8 vCPU, 32 GB RAM, 1024 GB Storage")
-  general_a_8c32gb1024ssd_v2,
+  general_a_8c32gb1024ssd_v2: "general_a_8c32gb1024ssd_v2",
 
   @doc("AMD, 8 vCPU, 32 GB RAM, 2048 GB Storage")
-  general_a_8c32gb2048ssd_v2,
+  general_a_8c32gb2048ssd_v2: "general_a_8c32gb2048ssd_v2",
 
   @doc("AMD, 16 vCPU, 64 GB RAM, 256 GB Storage")
-  general_a_16c64gb256ssd_v2,
+  general_a_16c64gb256ssd_v2: "general_a_16c64gb256ssd_v2",
 
   @doc("AMD, 16 vCPU, 64 GB RAM, 512 GB Storage")
-  general_a_16c64gb512ssd_v2,
+  general_a_16c64gb512ssd_v2: "general_a_16c64gb512ssd_v2",
 
   @doc("AMD, 16 vCPU, 64 GB RAM, 1024 GB Storage")
-  general_a_16c64gb1024ssd_v2,
+  general_a_16c64gb1024ssd_v2: "general_a_16c64gb1024ssd_v2",
 
   @doc("AMD, 16 vCPU, 64 GB RAM, 2048 GB Storage")
-  general_a_16c64gb2048ssd_v2,
+  general_a_16c64gb2048ssd_v2: "general_a_16c64gb2048ssd_v2",
 
   @doc("AMD, 32 vCPU, 128 GB RAM, 512 GB Storage")
-  general_a_32c128gb512ssd_v2,
+  general_a_32c128gb512ssd_v2: "general_a_32c128gb512ssd_v2",
 
   @doc("AMD, 32 vCPU, 128 GB RAM, 1024 GB Storage")
-  general_a_32c128gb1024ssd_v2,
+  general_a_32c128gb1024ssd_v2: "general_a_32c128gb1024ssd_v2",
 
   @doc("AMD, 32 vCPU, 128 GB RAM, 2048 GB Storage")
-  general_a_32c128gb2048ssd_v2,
+  general_a_32c128gb2048ssd_v2: "general_a_32c128gb2048ssd_v2",
+  string,
 }
 
 @doc("Indicates whether the feature to stop the devbox on disconnect once the grace period has lapsed is enabled.")
-enum StopOnDisconnectEnableStatus {
-  @doc("Stop on disconnect is enabled on the Dev Box.") Enabled,
-  @doc("Stop on disconnect is not enabled on the Dev Box.") Disabled,
+union StopOnDisconnectEnableStatus {
+  @doc("Stop on disconnect is enabled on the Dev Box.") Enabled: "Enabled",
+  @doc("Stop on disconnect is not enabled on the Dev Box.") Disabled: "Disabled",
+  string,
 }
 
 @doc("Pool status indicating whether a pool is available to create Dev Boxes.")
-enum PoolHealthStatus {
-  @doc("The pool health status is not known.") Unknown,
-  @doc("The pool health status waiting for health checks to run.") Pending,
-  @doc("The pool health status is healthy.") Healthy,
-  @doc("The pool health status has one or more warnings.") Warning,
-  @doc("The pool health status is not healthy.") Unhealthy,
+union PoolHealthStatus {
+  @doc("The pool health status is not known.") Unknown: "Unknown",
+  @doc("The pool health status waiting for health checks to run.") Pending: "Pending",
+  @doc("The pool health status is healthy.") Healthy: "Healthy",
+  @doc("The pool health status has one or more warnings.") Warning: "Warning",
+  @doc("The pool health status is not healthy.") Unhealthy: "Unhealthy",
+  string,
 }
 
 @doc("The supported types for a scheduled task.")
-enum ScheduledType {
-  @doc("The scheduled task will stop impacted Dev Boxes.") StopDevBox,
+union ScheduledType {
+  @doc("The scheduled task will stop impacted Dev Boxes.") StopDevBox: "StopDevBox",
+  string,
 }
 
 @doc("The frequency of task execution.")
-enum ScheduledFrequency {
-  @doc("The scheduled task will run every day.") Daily,
+union ScheduledFrequency {
+  @doc("The scheduled task will run every day.") Daily: "Daily",
+  string,
 }
 
 @doc("The power states of a Dev Box.")
-enum PowerState {
-  @doc("The Dev Box power state is not known.") Unknown,
-  @doc("The Dev Box is running.") Running,
-  @doc("The Dev Box is deallocated.") Deallocated,
-  @doc("The Dev Box is powered off.") PoweredOff,
-  @doc("The Dev Box is hibernated.") Hibernated,
+union PowerState {
+  @doc("The Dev Box power state is not known.") Unknown: "Unknown",
+  @doc("The Dev Box is running.") Running: "Running",
+  @doc("The Dev Box is deallocated.") Deallocated: "Deallocated",
+  @doc("The Dev Box is powered off.") PoweredOff: "PoweredOff",
+  @doc("The Dev Box is hibernated.") Hibernated: "Hibernated",
+  string,
 }
 
 @doc("The type of action which will take place on a Dev Box.")
-enum DevBoxActionType {
-  @doc("The action will stop the Dev Box.") Stop,
+union DevBoxActionType {
+  @doc("The action will stop the Dev Box.") Stop: "Stop",
+  string,
 }
 
 @doc("The result of the delay operation on this action.")
@@ -337,7 +348,7 @@ action performed by user.
 
   @doc("The current power state of the Dev Box.")
   @visibility("read")
-  powerState?: PowerState = PowerState.Unknown;
+  powerState?: PowerState;
 
   @doc("""
 A unique identifier for the Dev Box. This is a GUID-formatted string (e.g.
