@@ -3,7 +3,7 @@
   "info": {
     "title": "SignalRManagementClient",
     "description": "REST API for Azure SignalR Service",
-    "version": "2023-08-01-preview"
+    "version": "2024-01-01-preview"
   },
   "paths": {
     "/providers/Microsoft.SignalRService/operations": {
@@ -1597,6 +1597,180 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/replicas/{replicaName}/sharedPrivateLinkResources": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "List shared private link resources",
+        "operationId": "SignalRReplicaSharedPrivateLinkResources_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ReplicaName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes a list of shared private link resources.",
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SignalRReplicaSharedPrivateLinkResources_List": {
+            "$ref": "./examples/SignalRReplicaSharedPrivateLinkResources_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/replicas/{replicaName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Get the specified shared private link resource",
+        "operationId": "SignalRReplicaSharedPrivateLinkResources_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ReplicaName"
+          },
+          {
+            "$ref": "#/parameters/SharedPrivateLinkResourceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes a shared private link resource.",
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SignalRReplicaSharedPrivateLinkResources_Get": {
+            "$ref": "./examples/SignalRReplicaSharedPrivateLinkResources_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Create or update a shared private link resource",
+        "operationId": "SignalRReplicaSharedPrivateLinkResources_CreateOrUpdate",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ReplicaName"
+          },
+          {
+            "$ref": "#/parameters/SharedPrivateLinkResourceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "The shared private link resource",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The response indicates the shared private link resource is updated.",
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResource"
+            }
+          },
+          "201": {
+            "description": "Created. The response indicates the shared private link resource is created.",
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "SignalRReplicaSharedPrivateLinkResources_CreateOrUpdate": {
+            "$ref": "./examples/SignalRReplicaSharedPrivateLinkResources_CreateOrUpdate.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/replicas/{replicaName}/skus": {
       "get": {
         "tags": [
@@ -1756,11 +1930,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "sharedPrivateLinkResourceName",
-            "description": "The name of the shared private link resource",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SharedPrivateLinkResourceName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1806,11 +1976,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "sharedPrivateLinkResourceName",
-            "description": "The name of the shared private link resource",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SharedPrivateLinkResourceName"
           },
           {
             "in": "body",
@@ -1872,11 +2038,7 @@
         "operationId": "SignalRSharedPrivateLinkResources_Delete",
         "parameters": [
           {
-            "in": "path",
-            "name": "sharedPrivateLinkResourceName",
-            "description": "The name of the shared private link resource",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SharedPrivateLinkResourceName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2760,7 +2922,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "The name of the SKU. Required.\r\n\r\nAllowed values: Standard_S1, Free_F1, Premium_P1",
+          "description": "The name of the SKU. Required.\r\n\r\nAllowed values: Standard_S1, Free_F1, Premium_P1, Premium_P2",
           "type": "string"
         },
         "tier": {
@@ -2778,7 +2940,7 @@
         },
         "capacity": {
           "format": "int32",
-          "description": "Optional, integer. The unit count of the resource. 1 by default.\r\n\r\nIf present, following values are allowed:\r\n    Free: 1;\r\n    Standard: 1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100;\r\n    Premium:  1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100;",
+          "description": "Optional, integer. The unit count of the resource.\r\n1 for Free_F1/Standard_S1/Premium_P1, 100 for Premium_P2 by default.\r\n\r\nIf present, following values are allowed:\r\n    Free_F1: 1;\r\n    Standard_S1: 1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100;\r\n    Premium_P1:  1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100;\r\n    Premium_P2:  100,200,300,400,500,600,700,800,900,1000;",
           "type": "integer"
         }
       }
@@ -3493,6 +3655,17 @@
       "in": "path",
       "name": "replicaName",
       "description": "The name of the replica.",
+      "required": true,
+      "maxLength": 63,
+      "minLength": 3,
+      "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SharedPrivateLinkResourceName": {
+      "in": "path",
+      "name": "sharedPrivateLinkResourceName",
+      "description": "The name of the shared private link resource.",
       "required": true,
       "maxLength": 63,
       "minLength": 3,

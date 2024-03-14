@@ -3,7 +3,7 @@
   "info": {
     "title": "WebPubSubManagementClient",
     "description": "REST API for Azure WebPubSub Service",
-    "version": "2023-08-01-preview"
+    "version": "2024-01-01-preview"
   },
   "paths": {
     "/providers/Microsoft.SignalRService/operations": {
@@ -1820,6 +1820,180 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/replicas/{replicaName}/sharedPrivateLinkResources": {
+      "get": {
+        "tags": [
+          "WebPubSub"
+        ],
+        "description": "List shared private link resources",
+        "operationId": "WebPubSubReplicaSharedPrivateLinkResources_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ReplicaName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes a list of shared private link resources.",
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "WebPubSubReplicaSharedPrivateLinkResources_List": {
+            "$ref": "./examples/WebPubSubReplicaSharedPrivateLinkResources_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/replicas/{replicaName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}": {
+      "get": {
+        "tags": [
+          "WebPubSub"
+        ],
+        "description": "Get the specified shared private link resource",
+        "operationId": "WebPubSubReplicaSharedPrivateLinkResources_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ReplicaName"
+          },
+          {
+            "$ref": "#/parameters/SharedPrivateLinkResourceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes a shared private link resource.",
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WebPubSubReplicaSharedPrivateLinkResources_Get": {
+            "$ref": "./examples/WebPubSubReplicaSharedPrivateLinkResources_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WebPubSub"
+        ],
+        "description": "Create or update a shared private link resource",
+        "operationId": "WebPubSubReplicaSharedPrivateLinkResources_CreateOrUpdate",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ReplicaName"
+          },
+          {
+            "$ref": "#/parameters/SharedPrivateLinkResourceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "The shared private link resource",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The response indicates the shared private link resource is updated.",
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResource"
+            }
+          },
+          "201": {
+            "description": "Created. The response indicates the shared private link resource is created.",
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "WebPubSubReplicaSharedPrivateLinkResources_CreateOrUpdate": {
+            "$ref": "./examples/WebPubSubReplicaSharedPrivateLinkResources_CreateOrUpdate.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/webPubSub/{resourceName}/replicas/{replicaName}/skus": {
       "get": {
         "tags": [
@@ -1979,11 +2153,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "sharedPrivateLinkResourceName",
-            "description": "The name of the shared private link resource",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SharedPrivateLinkResourceName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2029,11 +2199,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "sharedPrivateLinkResourceName",
-            "description": "The name of the shared private link resource",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SharedPrivateLinkResourceName"
           },
           {
             "in": "body",
@@ -2095,11 +2261,7 @@
         "operationId": "WebPubSubSharedPrivateLinkResources_Delete",
         "parameters": [
           {
-            "in": "path",
-            "name": "sharedPrivateLinkResourceName",
-            "description": "The name of the shared private link resource",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SharedPrivateLinkResourceName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -3101,7 +3263,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "The name of the SKU. Required.\r\n\r\nAllowed values: Standard_S1, Free_F1, Premium_P1",
+          "description": "The name of the SKU. Required.\r\n\r\nAllowed values: Standard_S1, Free_F1, Premium_P1, Premium_P2",
           "type": "string"
         },
         "tier": {
@@ -3119,7 +3281,7 @@
         },
         "capacity": {
           "format": "int32",
-          "description": "Optional, integer. The unit count of the resource. 1 by default.\r\n\r\nIf present, following values are allowed:\r\n    Free: 1;\r\n    Standard: 1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100;\r\n    Premium:  1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100;",
+          "description": "Optional, integer. The unit count of the resource.\r\n1 for Free_F1/Standard_S1/Premium_P1, 100 for Premium_P2 by default.\r\n\r\nIf present, following values are allowed:\r\n    Free_F1: 1;\r\n    Standard_S1: 1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100;\r\n    Premium_P1:  1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100;\r\n    Premium_P2:  100,200,300,400,500,600,700,800,900,1000;",
           "type": "integer"
         }
       }
@@ -3525,6 +3687,14 @@
           "description": "The settings for configuring if anonymous connections are allowed for this hub: \"allow\" or \"deny\". Default to \"deny\".",
           "default": "deny",
           "type": "string"
+        },
+        "webSocketKeepAliveIntervalInSeconds": {
+          "format": "int32",
+          "description": "The settings for configuring the WebSocket ping-pong interval in seconds for all clients in the hub. Valid range: 1 to 120. Default to 20 seconds.",
+          "default": 20,
+          "maximum": 120,
+          "minimum": 1,
+          "type": "integer"
         }
       }
     },
@@ -3676,9 +3846,12 @@
           "type": "string"
         },
         "resourceStopped": {
-          "description": "Stop or start the resource.  Default to \"false\".\r\nWhen it's true, the data plane of the resource is shutdown.\r\nWhen it's false, the data plane of the resource is started.",
+          "description": "Stop or start the resource.  Default to \"False\".\r\nWhen it's true, the data plane of the resource is shutdown.\r\nWhen it's false, the data plane of the resource is started.",
           "default": "false",
           "type": "string"
+        },
+        "socketIO": {
+          "$ref": "#/definitions/WebPubSubSocketIOSettings"
         }
       }
     },
@@ -3756,6 +3929,16 @@
         "modelAsString": true
       }
     },
+    "WebPubSubSocketIOSettings": {
+      "description": "SocketIO settings for the resource",
+      "type": "object",
+      "properties": {
+        "serviceMode": {
+          "description": "The service mode of Web PubSub for Socket.IO. Values allowed: \r\n\"Default\": have your own backend Socket.IO server\r\n\"Serverless\": your application doesn't have a backend server",
+          "type": "string"
+        }
+      }
+    },
     "WebPubSubTlsSettings": {
       "description": "TLS settings for the resource",
       "type": "object",
@@ -3784,6 +3967,17 @@
       "in": "path",
       "name": "replicaName",
       "description": "The name of the replica.",
+      "required": true,
+      "maxLength": 63,
+      "minLength": 3,
+      "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SharedPrivateLinkResourceName": {
+      "in": "path",
+      "name": "sharedPrivateLinkResourceName",
+      "description": "The name of the shared private link resource.",
       "required": true,
       "maxLength": 63,
       "minLength": 3,
