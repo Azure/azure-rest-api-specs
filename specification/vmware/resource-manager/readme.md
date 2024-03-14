@@ -144,9 +144,9 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsZones/{dnsZoneId}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/publicIPs/{publicIPId}"].delete
     
-  - code: ConsistentPatchProperties
-    reason: The PlacementPolicies_Update properties are consistent for the discriminator hierarchy.
-    from: vmware.json
+  # - code: ConsistentPatchProperties
+  #   reason: The PlacementPolicies_Update properties are consistent for the discriminator hierarchy.
+  #   from: vmware.json
     # where:
     #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].patch.parameters.placementPolicyUpdate.vmMembers
     #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"].patch.parameters.placementPolicyUpdate.hostMembers
@@ -170,9 +170,9 @@ suppressions:
     # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
     from: vmware.json
 
-  - code: PatchSkuProperty
-    reason: sku can not be updated
-    from: vmware.json
+  # - code: PatchSkuProperty
+  #   reason: sku can not be updated
+  #   from: vmware.json
 
   - code: PatchResponseCodes
     reason: PrivateClouds_Update and Clusters_Update respond with 201 instead of 202. Changing it is breaking.
@@ -181,9 +181,9 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"].patch
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}"].patch
 
-  - code: LroPatch202
-    reason: PrivateClouds_Update and Clusters_Update respond with 201 instead of 202. Changing it is breaking.
-    from: vmware.json
+  # - code: LroPatch202
+  #   reason: PrivateClouds_Update and Clusters_Update respond with 201 instead of 202. Changing it is breaking.
+  #   from: vmware.json
     # where:
     #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"].patch
     #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}"].patch
@@ -194,22 +194,22 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/rotateNsxtPassword"].post
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/rotateVcenterPassword"].post
 
-  - code: XmsLongRunningOperationOptions
-    reason: This option is designed for cases where the server does NOT follow ARM guidelines
-    # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
-    from: vmware.json
+  # - code: XmsLongRunningOperationOptions
+  #   reason: This option is designed for cases where the server does NOT follow ARM guidelines
+  #   # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
+  #   from: vmware.json
 
-  - code: XmsClientName
-    reason: false positives
-    from: vmware.json
+  # - code: XmsClientName
+  #   reason: false positives
+  #   from: vmware.json
 
-  - code: XmsClientNameParameter
-    reason: this warning is false postive
-    from: vmware.json
+  # - code: XmsClientNameParameter
+  #   reason: this warning is false postive
+  #   from: vmware.json
 
-  - code: docLinkLocale
-    reason: false positives
-    from: vmware.json
+  # - code: docLinkLocale
+  #   reason: false positives
+  #   from: vmware.json
 
   - code: XmsPageableForListCalls
     reasons: This are gets on a TypeSpec @singleton. These are false positives.
@@ -218,14 +218,14 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/iscsiPaths/default"].get
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default"].get
 
-  - code: DeleteResponseCodes
-    reasons: ArmResourceDeleteAsync is still being used. Moving to ArmResourceDeleteWithoutOkAsync is breaking.
+  # - code: DeleteResponseCodes
+  #   reasons: ArmResourceDeleteAsync is still being used. Moving to ArmResourceDeleteWithoutOkAsync is breaking.
 
-  - code: PatchBodyParametersSchema
-    reasons: False positives. https://github.com/Azure/azure-sdk-tools/issues/7802
+  # - code: PatchBodyParametersSchema
+  #   reasons: False positives. https://github.com/Azure/azure-sdk-tools/issues/7802
 
-  - code: EvenSegmentedPathForPutOperation
-    reasons: False positives. https://github.com/Azure/azure-sdk-tools/issues/7801
+  # - code: EvenSegmentedPathForPutOperation
+  #   reasons: False positives. https://github.com/Azure/azure-sdk-tools/issues/7801
 
 ```
 
