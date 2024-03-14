@@ -11240,6 +11240,18 @@
         }
       }
     },
+    "SecurityConfiguration": {
+      "description": "Security configuration state.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "SecurityConfiguration",
+        "modelAsString": true
+      }
+    },
     "Display": {
       "description": "Contains the localized display information for this particular operation / action. These value will be used by several clients for (1) custom role definitions for RBAC; (2) complex query filters for the event service; and (3) audit history / records for management operations.",
       "type": "object",
@@ -12635,8 +12647,7 @@
           "type": "string"
         },
         "targetDiskAccountType": {
-          "description": "The target disk account type.",
-          "type": "string"
+          "$ref": "#/definitions/DiskAccountType"
         },
         "sectorSizeInBytes": {
           "format": "int32",
@@ -22529,21 +22540,21 @@
             "modelAsString": true
           }
         },
-        "isTargetVmSecureBootEnabled": {
-          "description": "A value indicating whether secure boot to be enabled.",
-          "type": "string"
+        "targetVmSecureBoot": {
+          "$ref": "#/definitions/SecurityConfiguration",
+          "description": "A value indicating whether secure boot to be enabled."
         },
-        "isTargetVmTpmEnabled": {
-          "description": "A value indicating whether trusted platform module to be enabled.",
-          "type": "string"
+        "targetVmTpm": {
+          "$ref": "#/definitions/SecurityConfiguration",
+          "description": "A value indicating whether trusted platform module to be enabled."
         },
-        "isTargetVmIntegrityMonitoringEnabled": {
-          "description": "A value indicating whether integrity monitoring to be enabled.",
-          "type": "string"
+        "targetVmMonitoring": {
+          "$ref": "#/definitions/SecurityConfiguration",
+          "description": "A value indicating whether integrity monitoring to be enabled."
         },
-        "isTargetVmConfidentialEncryptionEnabled": {
-          "description": "A value indicating whether confidential compute encryption to be enabled.",
-          "type": "string"
+        "targetVmConfidentialEncryption": {
+          "$ref": "#/definitions/SecurityConfiguration",
+          "description": "A value indicating whether confidential compute encryption to be enabled."
         }
       }
     },
@@ -24504,7 +24515,16 @@
         },
         "linuxLicenseType": {
           "description": "The license type for Linux VM's.",
-          "type": "string"
+          "enum": [
+            "NotSpecified",
+            "NoLicenseType",
+            "LinuxServer"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "LinuxLicenseType",
+            "modelAsString": true
+          }
         },
         "dataMoverRunAsAccountId": {
           "description": "The data mover run as account Id.",
