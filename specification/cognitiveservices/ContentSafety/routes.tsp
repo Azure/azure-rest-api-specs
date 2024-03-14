@@ -173,7 +173,14 @@ interface TextGroundednessDetectionOperations {
   @route("/text:detectGroundedness")
   @post
   detectGroundednessOptions is Azure.Core.RpcOperation<
-    AnalyzeTextGroundednessOptions,
+    {
+      @body
+      @doc("The text groundedness detection request.")
+      @projectedName("csharp", "options")
+      @projectedName("python", "options")
+      @projectedName("java", "options")
+      body: AnalyzeTextGroundednessOptions;
+    },
     AnalyzeTextGroundednessResult
   >;
 }
