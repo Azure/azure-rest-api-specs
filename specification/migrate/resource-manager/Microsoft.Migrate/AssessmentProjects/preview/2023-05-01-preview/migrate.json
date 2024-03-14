@@ -11920,6 +11920,10 @@
           },
           "readOnly": true
         },
+        "failuresToTolerateAndRaidLevel": {
+          "$ref": "#/definitions/FttAndRaidLevel",
+          "description": "Failures to tolerate and RAID level in a common property."
+        },
         "failuresToTolerateAndRaidLevelList": {
           "type": "array",
           "description": "List of Failures to tolerate and RAID levels in a common property.",
@@ -11931,6 +11935,10 @@
           "type": "number",
           "format": "float",
           "description": "VCPU over subscription."
+        },
+        "nodeType": {
+          "$ref": "#/definitions/AzureAvsNodeType",
+          "description": "AVS node type."
         },
         "nodeTypes": {
           "type": "array",
@@ -12001,11 +12009,11 @@
           "description": "Predicted total Storage used in GB.",
           "readOnly": true
         },
-        "recommendedNodes": {
+        "avsEstimatedNodes": {
           "type": "array",
-          "description": "RecommendedNodes AVS SKU for Assessment.",
+          "description": "EstimatedNodes AVS SKU for Assessment.",
           "items": {
-            "$ref": "#/definitions/AvsRecommendedNode"
+            "$ref": "#/definitions/AvsEstimatedNode"
           },
           "readOnly": true,
           "x-ms-identifiers": []
@@ -12209,9 +12217,9 @@
         }
       }
     },
-    "AvsRecommendedNode": {
+    "AvsEstimatedNode": {
       "type": "object",
-      "description": "Details on the Recommended nodes for AVS Assessment.",
+      "description": "Details on the Estimated nodes for AVS Assessment.",
       "properties": {
         "MonthlyPrice": {
           "type": "number",
