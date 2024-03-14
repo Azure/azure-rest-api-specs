@@ -2903,6 +2903,10 @@
               "type": "string",
               "readOnly": true
             },
+            "dnsConfiguration": {
+              "$ref": "#/definitions/SiteDnsConfig",
+              "description": "Property to configure various DNS related settings for a site."
+            },
             "vnetRouteAllEnabled": {
               "description": "Virtual Network Route All enabled. This causes all outbound traffic to have Virtual Network Security Groups and User Defined Routes applied.",
               "type": "boolean"
@@ -3803,6 +3807,42 @@
         "memory": {
           "description": "Required memory, e.g. \"1Gi\"",
           "type": "string"
+        }
+      }
+    },
+    "SiteDnsConfig": {
+      "type": "object",
+      "properties": {
+        "dnsServers": {
+          "description": "List of custom DNS servers to be used by an app for lookups. Maximum 5 dns servers can be set.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dnsAltServer": {
+          "description": "Alternate DNS server to be used by apps. This property replicates the WEBSITE_DNS_ALT_SERVER app setting.",
+          "type": "string"
+        },
+        "dnsRetryAttemptTimeout": {
+          "format": "int32",
+          "description": "Timeout for a single dns lookup in seconds. Allowed range: 1-30. Default is 3.",
+          "type": "integer"
+        },
+        "dnsRetryAttemptCount": {
+          "format": "int32",
+          "description": "Total number of retries for dns lookup. Allowed range: 1-5. Default is 3.",
+          "type": "integer"
+        },
+        "dnsMaxCacheTimeout": {
+          "format": "int32",
+          "description": "Custom time for DNS to be cached in seconds. Allowed range: 0-60. Default is 30 seconds. 0 means caching disabled.",
+          "type": "integer"
+        },
+        "dnsLegacySortOrder": {
+          "description": "Indicates that sites using Virtual network custom DNS servers are still sorting the list of DNS servers. Read-Only.",
+          "type": "boolean",
+          "readOnly": true
         }
       }
     },
