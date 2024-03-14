@@ -39,7 +39,7 @@
           "ContainerAppsBuilds"
         ],
         "operationId": "ContainerAppsBuildsByContainerApp_List",
-        "description": "List ContainerAppsBuild resources by Container App",
+        "description": "List Container Apps Build resources by Container App",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -84,7 +84,7 @@
           "ContainerAppsBuilds"
         ],
         "operationId": "ContainerAppsBuilds_Get",
-        "description": "Get a ContainerAppsBuild resource",
+        "description": "Get a Container Apps Build resource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -127,7 +127,7 @@
           "ContainerAppsBuilds"
         ],
         "operationId": "ContainerAppsBuilds_Delete",
-        "description": "Delete a ContainerAppsBuild resource",
+        "description": "Delete a Container Apps Build resource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -182,15 +182,18 @@
       "properties": {
         "baseOs": {
           "type": "string",
-          "description": "Base OS used to build and run the app."
+          "description": "Base OS used to build and run the app.",
+          "readOnly": true
         },
         "platform": {
           "type": "string",
-          "description": "Platform to be used to build and run the app."
+          "description": "Platform to be used to build and run the app.",
+          "readOnly": true
         },
         "platformVersion": {
           "type": "string",
-          "description": "Platform version to be used to build and run the app."
+          "description": "Platform version to be used to build and run the app.",
+          "readOnly": true
         },
         "environmentVariables": {
           "type": "array",
@@ -200,7 +203,8 @@
           "x-ms-identifiers": [
             "name"
           ],
-          "description": "List of environment variables to be passed to the build, secrets should not be used in environment variable."
+          "description": "List of environment variables to be passed to the build, secrets should not be used in environment variable.",
+          "readOnly": true
         },
         "preBuildSteps": {
           "type": "array",
@@ -208,7 +212,8 @@
             "$ref": "#/definitions/PreBuildStep"
           },
           "x-ms-identifiers": [],
-          "description": "List of steps to perform before the build."
+          "description": "List of steps to perform before the build.",
+          "readOnly": true
         }
       },
       "description": "Configuration of the build."
@@ -228,11 +233,13 @@
         },
         "destinationContainerRegistry": {
           "$ref": "#/definitions/ContainerRegistryWithCustomImage",
-          "description": "Container registry that the final image will be uploaded to."
+          "description": "Container registry that the final image will be uploaded to.",
+          "readOnly": true
         },
         "configuration": {
           "$ref": "#/definitions/ContainerAppsBuildConfiguration",
-          "description": "Configuration of the build."
+          "description": "Configuration of the build.",
+          "readOnly": true
         },
         "logStreamEndpoint": {
           "type": "string",
@@ -250,15 +257,14 @@
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
-            "read",
-            "create"
+            "read"
           ]
         }
       },
       "description": "Information pertaining to an individual build.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -270,7 +276,7 @@
           "items": {
             "$ref": "#/definitions/ContainerAppsBuildResource"
           },
-          "description": "The ContainerAppsBuildResource items on this page"
+          "description": "The Container Apps Build Resource items on this page"
         },
         "nextLink": {
           "type": "string",
@@ -278,7 +284,7 @@
           "description": "The link to the next page of items"
         }
       },
-      "description": "The response of a ContainerAppsBuildResource list operation.",
+      "description": "The response of a Container Apps Build Resource list operation.",
       "required": [
         "value"
       ]
@@ -296,18 +302,21 @@
       "x-ms-enum": {
         "name": "BuildStatus",
         "modelAsString": true
-      }
+      },
+      "readOnly": true
     },
     "ContainerRegistryWithCustomImage": {
       "type": "object",
       "properties": {
         "server": {
           "type": "string",
-          "description": "Login server of the container registry that the final image should be uploaded to. Builder resource needs to have this container registry defined along with an identity to use to access it."
+          "description": "Login server of the container registry that the final image should be uploaded to.",
+          "readOnly": true
         },
         "image": {
           "type": "string",
-          "description": "Full name that the final image should be uploaded as, including both image name and tag."
+          "description": "Full name that the final image should be uploaded as, including both image name and tag.",
+          "readOnly": true
         }
       },
       "description": "Container registry that the final image will be uploaded to.",
@@ -320,18 +329,21 @@
       "properties": {
         "url": {
           "type": "string",
-          "description": "URL to make HTTP GET request against."
+          "description": "URL to make HTTP GET request against.",
+          "readOnly": true
         },
         "fileName": {
           "type": "string",
-          "description": "Name of the file that the request should be saved to."
+          "description": "Name of the file that the request should be saved to.",
+          "readOnly": true
         },
         "headers": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "List of headers to send with the request."
+          "description": "List of headers to send with the request.",
+          "readOnly": true
         }
       },
       "description": "Model representing a http get request.",
@@ -344,14 +356,16 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "Description of the pre-build step."
+          "description": "Description of the pre-build step.",
+          "readOnly": true
         },
         "scripts": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "List of custom commands to run."
+          "description": "List of custom commands to run.",
+          "readOnly": true
         },
         "httpGet": {
           "$ref": "#/definitions/HttpGet",

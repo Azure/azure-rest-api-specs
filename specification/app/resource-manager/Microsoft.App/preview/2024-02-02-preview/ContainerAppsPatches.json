@@ -39,16 +39,16 @@
           "ContainerAppsPatches"
         ],
         "operationId": "ContainerAppsPatches_ListByContainerApp",
-        "description": "List ContainerAppsPatch resources by ContainerApp.",
+        "description": "List Container Apps Patch resources by ContainerApp.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ContainerAppsNameParameter"
@@ -56,7 +56,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "description": "The filter to apply on the operation.",
+            "description": "The filter to apply on the operation. For example, $filter=properties/patchApplyStatus eq 'Succeeded'",
             "required": false,
             "type": "string"
           }
@@ -92,16 +92,16 @@
           "ContainerAppsPatches"
         ],
         "operationId": "ContainerAppsPatches_Get",
-        "description": "Get details for specific ContainerAppsPatch by patch name.",
+        "description": "Get details for specific Container Apps Patch by patch name.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ContainerAppsNameParameter"
@@ -135,16 +135,16 @@
           "ContainerAppsPatches"
         ],
         "operationId": "ContainerAppsPatches_Delete",
-        "description": "Delete specific ContainerAppsPatch by patch name.",
+        "description": "Delete specific Container Apps Patch by patch name.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ContainerAppsNameParameter"
@@ -189,16 +189,16 @@
           "ContainerAppsPatches"
         ],
         "operationId": "ContainerAppsPatches_SkipConfigure",
-        "description": "Configure the ContainerAppsPatch skip option by patch name.",
+        "description": "Configure the Container Apps Patch skip option by patch name.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ContainerAppsNameParameter"
@@ -212,14 +212,20 @@
             "required": true,
             "description": "Configure patcher to skip a patch or not.",
             "schema": {
-              "description": "Configure a patch to be skipped or not by passing a boolean.",
-              "type": "boolean"
+              "description": "Configure a patch to be skipped or not. If the patch is skipped, the patch will not be applied to the target container app.",
+              "type": "object",
+              "properties": {
+                "skip": {
+                  "type": "boolean",
+                  "description": "The flag to indicate if the patch should be skipped or not."
+                }
+              }
             }
           }
         ],
         "responses": {
           "202": {
-            "description": "Updating patch skipping detail.",
+            "description": "Updating patch skipping detail. Updating status tracked by location header.",
             "headers": {
               "Location": {
                 "type": "string"
@@ -250,16 +256,16 @@
           "ContainerAppsPatches"
         ],
         "operationId": "ContainerAppsPatches_Apply",
-        "description": "Apply a ContainerAppsPatch resource with patch name.",
+        "description": "Apply a Container Apps Patch resource with patch name.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ContainerAppsNameParameter"
@@ -324,20 +330,6 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
-    },
-    "PatchProvisioningState": {
-      "type": "string",
-      "description": "Resource instance provisioning state.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "PatchProvisioningState",
-        "modelAsString": true
-      },
-      "readOnly": true
     },
     "PatchApplyStatus": {
       "type": "string",
@@ -426,8 +418,7 @@
             }
           },
           "description": "New layer update details in the target image.",
-          "readOnly": true,
-          "x-ms-client-flatten": true
+          "readOnly": true
         },
         "oldLayer": {
           "type": "object",
@@ -446,8 +437,7 @@
             }
           },
           "description": "The old layer details in the target image.",
-          "readOnly": true,
-          "x-ms-client-flatten": true
+          "readOnly": true
         },
         "patchType": {
           "type": "string",
@@ -474,35 +464,30 @@
         "targetEnvironmentId": {
           "format": "arm-id",
           "type": "string",
-          "description": "The id of the target environment for the patch."
+          "description": "The Azure resource id of the target environment for the patch."
         },
         "targetContainerAppId": {
           "format": "arm-id",
           "type": "string",
-          "description": "The id of the target container app for the patch."
+          "description": "The Azure resource id of the target container app for the patch."
         },
         "targetRevisionId": {
           "format": "arm-id",
           "type": "string",
-          "description": "The id of the target revision for the patch."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/PatchProvisioningState",
-          "description": "Patch provisioning state.",
-          "readOnly": true
+          "description": "The Azure resource id of the target revision for the patch."
         },
         "patchApplyStatus": {
           "$ref": "#/definitions/PatchApplyStatus",
-          "description": "The status of the patch operation once it has been provisioned",
+          "description": "The status of the patch operation.",
           "readOnly": true
         },
-        "createdTime": {
+        "createdAt": {
           "type": "string",
           "format": "date-time",
           "description": "The UTC timestamp that describes when the patch object was created.",
           "readOnly": true
         },
-        "updatedTime": {
+        "lastModifiedAt": {
           "type": "string",
           "format": "date-time",
           "description": "The UTC timestamp that describes when the patch object was last updated.",
