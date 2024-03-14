@@ -266,18 +266,18 @@ that the generated OpenAPI spec files were not in-sync with the TypeSpec project
 If none of the above helped, please reach out on [TypeSpec Discussions Teams channel].
 
 ## APIView Failures: troubleshooting guides
-
-### Passed build but APIView not generated
-
-- First, ensure that all checks in the CI are green before proceeding. 
-- You should also see the comment box pictured below with a reference to your language:
+Various APIViews are generated as part of the Azure REST API specs PR build. Among these are TypeSpec and Swagger as well as any other language that is being generated in the run. When everything is successful you should see a comment box similar to the picture below showing the APIViews generated for TypeSpec or Swagger, plus all other languages being generated.
 
 ![alt text](image-3.png)
 
+#### If an expected APIView was not generated, follow the step below to troubleshoot.
 
-If the above requirements are met proceed with the following steps, in order:
+- On the CI check click on `details` > `View Azure DevOps build log for more details` to view the devOps logs.
+- Investigate the CI job for the languge with error. TypeSpec and Swagger APIViews are generated as part of the `AzureRestApiSpecsPipeline` stage in the `TypeSpecAPIView` and `SwaggerAPIView` jobs respectively, while APIViews for other SDK languges are generated in their respective language jobs in the `SDK Automation` stage.
+- Ensure that all previous checks in the job are green before proceeding. 
 
-1. Check for an unexpected skip of `Publish SDK APIView Artifact to Pipeline Artifacts` and `Generate SDK APIView` step.
+#### Diagnosing APIView failure for SDK Language (not Swagger or TypeSpec)
+1. Check for an unexpected skip of the `Publish SDK APIView Artifact to Pipeline Artifacts` and `Generate SDK APIView` step.
 2. Look in `SDK Automation` step to verify that the API token generation completed successfully.
 3. Search logs for `Read Temp File`
 4. Below `Read Temp File` find the .json object and search within to locate the `apiViewArtifact` property.
