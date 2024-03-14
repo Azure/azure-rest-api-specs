@@ -5,15 +5,17 @@
     "accountName": "account1",
     "api-version": "2023-05-01-preview",
     "accountUpdateParameters": {
+      "properties": {
+        "cloudConnectors": {},
+        "publicNetworkAccess": "Disabled",
+        "managedResourcesPublicNetworkAccess": "Disabled",
+        "ingestionStorage": {
+          "publicNetworkAccess": "Disabled"
+        }
+      },
       "tags": {
         "newTag": "New tag value."
       }
-    },
-    "properties": {
-      "cloudConnectors": {},
-      "managedResourceGroupName": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-      "publicNetworkAccess": "NotSpecified",
-      "managedResourcesPublicNetworkAccess": "Disabled"
     }
   },
   "responses": {
@@ -53,7 +55,7 @@
             "catalog": "https://account2.catalog.purview.azure-test.com",
             "scan": "https://account2.scan.purview.azure-test.com"
           },
-          "publicNetworkAccess": "Enabled",
+          "publicNetworkAccess": "Disabled",
           "managedResources": {
             "resourceGroup": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl",
             "storageAccount": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl/providers/Microsoft.Storage/storageAccounts/scanwestustzaagzr",
@@ -62,7 +64,7 @@
           "ingestionStorage": {
             "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/ingestion-storage-rg-mwjotkl",
             "primaryEndpoint": "https://ingestioneastusddnpkar.z31.blob.storage.azure.net/",
-            "publicNetworkAccess": "Enabled"
+            "publicNetworkAccess": "Disabled"
           }
         },
         "tags": {
@@ -104,7 +106,7 @@
             "catalog": "https://account2.catalog.purview.azure-test.com",
             "scan": "https://account2.scan.purview.azure-test.com"
           },
-          "publicNetworkAccess": "Enabled",
+          "publicNetworkAccess": "Disabled",
           "managedResources": {
             "resourceGroup": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl",
             "storageAccount": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/managed-rg-mwjotkl/providers/Microsoft.Storage/storageAccounts/scanwestustzaagzr",
@@ -113,7 +115,7 @@
           "ingestionStorage": {
             "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/ingestion-storage-rg-mwjotkl",
             "primaryEndpoint": "https://ingestioneastusddnpkar.z31.blob.storage.azure.net/",
-            "publicNetworkAccess": "Enabled"
+            "publicNetworkAccess": "Disabled"
           }
         },
         "tags": {
