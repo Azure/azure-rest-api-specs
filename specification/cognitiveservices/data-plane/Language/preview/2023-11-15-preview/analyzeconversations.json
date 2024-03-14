@@ -249,7 +249,7 @@
       "description": "This is the parameter set of either the Orchestration project itself or one of the target services.",
       "properties": {
         "targetProjectKind": {
-          "$ref": "#/definitions/targetProjectKind",
+          "$ref": "#/definitions/TargetProjectKind",
           "description": "The type of a target service"
         },
         "apiVersion": {
@@ -852,7 +852,7 @@
       "description": "The abstract base object for entity extra information.",
       "properties": {
         "extraInformationKind": {
-          "$ref": "#/definitions/extraInformationKind",
+          "$ref": "#/definitions/ExtraInformationKind",
           "description": "The extra information object kind."
         }
       },
@@ -884,7 +884,7 @@
       "description": "The abstract base class for entity resolutions.",
       "properties": {
         "resolutionKind": {
-          "$ref": "#/definitions/resolutionKind",
+          "$ref": "#/definitions/ResolutionKind",
           "description": "The entity resolution object kind."
         }
       },
@@ -2201,6 +2201,19 @@
         "error"
       ]
     },
+    "ExtraInformationKind": {
+      "type": "string",
+      "description": "The extra information object kind.",
+      "enum": [
+        "EntitySubtype",
+        "ListKey",
+        "RegexKey"
+      ],
+      "x-ms-enum": {
+        "name": "ExtraInformationKind",
+        "modelAsString": true
+      }
+    },
     "InformationResolution": {
       "type": "object",
       "description": "Represents the information (data) entity resolution model.",
@@ -3010,6 +3023,31 @@
         "transactionsCount"
       ]
     },
+    "ResolutionKind": {
+      "type": "string",
+      "description": "The entity resolution object kind.",
+      "enum": [
+        "BooleanResolution",
+        "DateTimeResolution",
+        "NumberResolution",
+        "OrdinalResolution",
+        "SpeedResolution",
+        "WeightResolution",
+        "LengthResolution",
+        "VolumeResolution",
+        "AreaResolution",
+        "AgeResolution",
+        "InformationResolution",
+        "TemperatureResolution",
+        "CurrencyResolution",
+        "NumericRangeResolution",
+        "TemporalSpanResolution"
+      ],
+      "x-ms-enum": {
+        "name": "ResolutionKind",
+        "modelAsString": true
+      }
+    },
     "Role": {
       "type": "string",
       "description": "Role of the participant.",
@@ -3346,7 +3384,7 @@
       "description": "This is the base class of an intent prediction",
       "properties": {
         "targetProjectKind": {
-          "$ref": "#/definitions/targetProjectKind",
+          "$ref": "#/definitions/TargetProjectKind",
           "description": "This is the base class of an intent prediction"
         },
         "apiVersion": {
@@ -3367,6 +3405,20 @@
         "targetProjectKind",
         "confidenceScore"
       ]
+    },
+    "TargetProjectKind": {
+      "type": "string",
+      "description": "The type of a target service.",
+      "enum": [
+        "Luis",
+        "Conversation",
+        "QuestionAnswering",
+        "NonLinked"
+      ],
+      "x-ms-enum": {
+        "name": "TargetProjectKind",
+        "modelAsString": true
+      }
     },
     "TaskStatus": {
       "type": "string",
@@ -3818,19 +3870,6 @@
         }
       }
     },
-    "extraInformationKind": {
-      "type": "string",
-      "description": "The extra information object kind.",
-      "enum": [
-        "EntitySubtype",
-        "ListKey",
-        "RegexKey"
-      ],
-      "x-ms-enum": {
-        "name": "extraInformationKind",
-        "modelAsString": true
-      }
-    },
     "projectKind": {
       "type": "string",
       "description": "The type of the project.",
@@ -3840,45 +3879,6 @@
       ],
       "x-ms-enum": {
         "name": "projectKind",
-        "modelAsString": true
-      }
-    },
-    "resolutionKind": {
-      "type": "string",
-      "description": "The entity resolution object kind.",
-      "enum": [
-        "BooleanResolution",
-        "DateTimeResolution",
-        "NumberResolution",
-        "OrdinalResolution",
-        "SpeedResolution",
-        "WeightResolution",
-        "LengthResolution",
-        "VolumeResolution",
-        "AreaResolution",
-        "AgeResolution",
-        "InformationResolution",
-        "TemperatureResolution",
-        "CurrencyResolution",
-        "NumericRangeResolution",
-        "TemporalSpanResolution"
-      ],
-      "x-ms-enum": {
-        "name": "resolutionKind",
-        "modelAsString": true
-      }
-    },
-    "targetProjectKind": {
-      "type": "string",
-      "description": "The type of a target service.",
-      "enum": [
-        "Luis",
-        "Conversation",
-        "QuestionAnswering",
-        "NonLinked"
-      ],
-      "x-ms-enum": {
-        "name": "targetProjectKind",
         "modelAsString": true
       }
     }

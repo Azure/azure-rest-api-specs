@@ -162,7 +162,7 @@ model TextConversationItem is ConversationItemBase {
 @discriminator("targetProjectKind")
 model AnalysisParameters {
   @doc("The type of a target service")
-  targetProjectKind: targetProjectKind;
+  targetProjectKind: TargetProjectKind;
 
   @doc("The API version to use when call a specific target service.")
   apiVersion?: string;
@@ -171,7 +171,7 @@ model AnalysisParameters {
 @doc("A wrap up of non-linked intent response.")
 model NoneLinkedTargetIntentResult extends TargetIntentResult {
   @doc("The actual response from a Conversation project.")
-  targetProjectKind: targetProjectKind.NonLinked;
+  targetProjectKind: TargetProjectKind.NonLinked;
 
   @doc("The actual response from a Conversation project.")
   result?: ConversationResult;
@@ -182,7 +182,7 @@ model LuisParameters extends AnalysisParameters {
   ...Record<unknown>;
 
   @doc("The type of a target service")
-  targetProjectKind: targetProjectKind.Luis;
+  targetProjectKind: TargetProjectKind.Luis;
 
   @doc("The utterance to predict.")
   @maxLength(500)
@@ -218,7 +218,7 @@ model LuisCallingOptions {
 @doc("This is a set of request parameters for Customized Conversation projects.")
 model ConversationParameters extends AnalysisParameters {
   @doc("This is a set of request parameters for Customized Conversation projects.")
-  targetProjectKind: targetProjectKind.Conversation;
+  targetProjectKind: TargetProjectKind.Conversation;
 
   @doc("The option to set to call a Conversation project.")
   callingOptions?: ConversationCallingOptions;
@@ -239,7 +239,7 @@ model ConversationCallingOptions {
 @doc("This is a set of request parameters for Question Answering knowledge bases.")
 model QuestionAnsweringParameters extends AnalysisParameters {
   @doc("This is a set of request parameters for Question Answering knowledge bases.")
-  targetProjectKind: targetProjectKind.QuestionAnswering;
+  targetProjectKind: TargetProjectKind.QuestionAnswering;
 
   @doc("The options sent to a Question Answering KB.")
   callingOptions?: AnswersOptions;
@@ -249,7 +249,7 @@ model QuestionAnsweringParameters extends AnalysisParameters {
 @discriminator("targetProjectKind")
 model TargetIntentResult {
   @doc("This is the base class of an intent prediction")
-  targetProjectKind: targetProjectKind;
+  targetProjectKind: TargetProjectKind;
 
   @doc("The API version used to call a target service.")
   apiVersion?: string;
@@ -264,7 +264,7 @@ model TargetIntentResult {
 @doc("A wrap up of Conversation project response.")
 model ConversationTargetIntentResult extends TargetIntentResult {
   @doc("A wrap up of Conversation project response.")
-  targetProjectKind: targetProjectKind.Conversation;
+  targetProjectKind: TargetProjectKind.Conversation;
 
   @doc("The actual response from a Conversation project.")
   result?: ConversationResult;
@@ -335,12 +335,12 @@ model ConversationEntity {
 @discriminator("extraInformationKind")
 model BaseExtraInformation {
   @doc("The extra information object kind.")
-  extraInformationKind: extraInformationKind;
+  extraInformationKind: ExtraInformationKind;
 }
 
 //todo: add enum member descriptions
 @doc("The extra information object kind.")
-enum extraInformationKind {
+enum ExtraInformationKind {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'EntitySubtype' should have a documentation or description, please use decorator @doc to add it."
   EntitySubtype,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'ListKey' should have a documentation or description, please use decorator @doc to add it."
@@ -353,7 +353,7 @@ enum extraInformationKind {
 @doc("The concrete entity Subtype model of extra information.")
 model EntitySubtype extends BaseExtraInformation {
   @doc("The extra information object kind.")
-  extraInformationKind: extraInformationKind.EntitySubtype;
+  extraInformationKind: ExtraInformationKind.EntitySubtype;
 
   @doc("The Subtype of an extracted entity type.")
   value?: string;
@@ -362,7 +362,7 @@ model EntitySubtype extends BaseExtraInformation {
 @doc("The list key extra data kind.")
 model ListKey extends BaseExtraInformation {
   @doc("The list key extra data kind.")
-  extraInformationKind: extraInformationKind.ListKey;
+  extraInformationKind: ExtraInformationKind.ListKey;
 
   @doc("The canonical form of the extracted entity.")
   key?: string;
@@ -372,7 +372,7 @@ model ListKey extends BaseExtraInformation {
 @added(Versions.v2023_04_01)
 model RegexKey extends BaseExtraInformation {
   @doc("The regex key extra data kind.")
-  extraInformationKind: extraInformationKind.RegexKey;
+  extraInformationKind: ExtraInformationKind.RegexKey;
 
   @doc("The key of the regex pattern used in extracting the entity.")
   key?: string;
@@ -385,7 +385,7 @@ model RegexKey extends BaseExtraInformation {
 @discriminator("resolutionKind")
 model BaseResolution {
   @doc("The entity resolution object kind.")
-  resolutionKind: resolutionKind;
+  resolutionKind: ResolutionKind;
 }
 
 @doc("Represents resolutions for quantities.")
@@ -397,7 +397,7 @@ model QuantityResolution {
 @doc("Represents the Age entity resolution model.")
 model AgeResolution extends BaseResolution {
   @doc("Represents the Age entity resolution model.")
-  resolutionKind: resolutionKind.AgeResolution;
+  resolutionKind: ResolutionKind.AgeResolution;
 
   ...QuantityResolution;
 
@@ -408,7 +408,7 @@ model AgeResolution extends BaseResolution {
 @doc("Represents the volume entity resolution model.")
 model VolumeResolution extends BaseResolution {
   @doc("Represents the volume entity resolution model.")
-  resolutionKind: resolutionKind.VolumeResolution;
+  resolutionKind: ResolutionKind.VolumeResolution;
 
   ...QuantityResolution;
 
@@ -419,7 +419,7 @@ model VolumeResolution extends BaseResolution {
 @doc("Represents the speed entity resolution model.")
 model SpeedResolution extends BaseResolution {
   @doc("Represents the speed entity resolution model.")
-  resolutionKind: resolutionKind.SpeedResolution;
+  resolutionKind: ResolutionKind.SpeedResolution;
 
   ...QuantityResolution;
 
@@ -430,7 +430,7 @@ model SpeedResolution extends BaseResolution {
 @doc("Represents the area entity resolution model.")
 model AreaResolution extends BaseResolution {
   @doc("Represents the area entity resolution model.")
-  resolutionKind: resolutionKind.AreaResolution;
+  resolutionKind: ResolutionKind.AreaResolution;
 
   ...QuantityResolution;
 
@@ -440,7 +440,7 @@ model AreaResolution extends BaseResolution {
 @doc("Represents the length entity resolution model.")
 model LengthResolution extends BaseResolution {
   @doc("Represents the length entity resolution model.")
-  resolutionKind: resolutionKind.LengthResolution;
+  resolutionKind: ResolutionKind.LengthResolution;
 
   ...QuantityResolution;
 
@@ -451,7 +451,7 @@ model LengthResolution extends BaseResolution {
 @doc("Represents the information (data) entity resolution model.")
 model InformationResolution extends BaseResolution {
   @doc("Represents the information (data) entity resolution model.")
-  resolutionKind: resolutionKind.InformationResolution;
+  resolutionKind: ResolutionKind.InformationResolution;
 
   ...QuantityResolution;
 
@@ -462,7 +462,7 @@ model InformationResolution extends BaseResolution {
 @doc("Represents the temperature entity resolution model.")
 model TemperatureResolution extends BaseResolution {
   @doc("Represents the temperature entity resolution model.")
-  resolutionKind: resolutionKind.TemperatureResolution;
+  resolutionKind: ResolutionKind.TemperatureResolution;
 
   ...QuantityResolution;
 
@@ -473,7 +473,7 @@ model TemperatureResolution extends BaseResolution {
 @doc("Represents the weight entity resolution model.")
 model WeightResolution extends BaseResolution {
   @doc("Represents the weight entity resolution model.")
-  resolutionKind: resolutionKind.WeightResolution;
+  resolutionKind: ResolutionKind.WeightResolution;
 
   ...QuantityResolution;
 
@@ -484,7 +484,7 @@ model WeightResolution extends BaseResolution {
 @doc("Represents the currency entity resolution model.")
 model CurrencyResolution extends BaseResolution {
   @doc("Represents the currency entity resolution model.")
-  resolutionKind: resolutionKind.CurrencyResolution;
+  resolutionKind: ResolutionKind.CurrencyResolution;
 
   @doc("The alphabetic code based on another ISO standard, ISO 3166, which lists the codes for country names. The first two letters of the ISO 4217 three-letter code are the same as the code for the country name, and, where possible, the third letter corresponds to the first letter of the currency name.")
   @projectedName("json", "ISO4217")
@@ -500,7 +500,7 @@ model CurrencyResolution extends BaseResolution {
 @doc("A resolution for boolean expressions")
 model BooleanResolution extends BaseResolution {
   @doc("A resolution for boolean expressions")
-  resolutionKind: resolutionKind.BooleanResolution;
+  resolutionKind: ResolutionKind.BooleanResolution;
 
   @doc("A resolution for boolean expressions")
   value: boolean;
@@ -509,7 +509,7 @@ model BooleanResolution extends BaseResolution {
 @doc("A resolution for datetime entity instances.")
 model DateTimeResolution extends BaseResolution {
   @doc("A resolution for datetime entity instances.")
-  resolutionKind: resolutionKind.DateTimeResolution;
+  resolutionKind: ResolutionKind.DateTimeResolution;
 
   @doc("An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)")
   timex: utcDateTime;
@@ -527,7 +527,7 @@ model DateTimeResolution extends BaseResolution {
 @doc("A resolution for numeric entity instances.")
 model NumberResolution extends BaseResolution {
   @doc("A resolution for numeric entity instances.")
-  resolutionKind: resolutionKind.NumberResolution;
+  resolutionKind: ResolutionKind.NumberResolution;
 
   @doc("The type of the extracted number entity.")
   numberKind: NumberKind;
@@ -539,7 +539,7 @@ model NumberResolution extends BaseResolution {
 @doc("A resolution for ordinal numbers entity instances.")
 model OrdinalResolution extends BaseResolution {
   @doc("A resolution for ordinal numbers entity instances.")
-  resolutionKind: resolutionKind.OrdinalResolution;
+  resolutionKind: ResolutionKind.OrdinalResolution;
 
   @doc("The offset With respect to the reference (e.g., offset = -1 in \"show me the second to last\"")
   offset: string;
@@ -554,7 +554,7 @@ model OrdinalResolution extends BaseResolution {
 @doc("represents the resolution of a date and/or time span.")
 model TemporalSpanResolution extends BaseResolution {
   @doc("represents the resolution of a date and/or time span.")
-  resolutionKind: resolutionKind.TemporalSpanResolution;
+  resolutionKind: ResolutionKind.TemporalSpanResolution;
 
   @doc("represents the resolution of a date and/or time span. An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)")
   begin?: utcDateTime;
@@ -576,7 +576,7 @@ model TemporalSpanResolution extends BaseResolution {
 @doc("represents the resolution of numeric intervals.")
 model NumericRangeResolution extends BaseResolution {
   @doc("represents the resolution of numeric intervals.")
-  resolutionKind: resolutionKind.NumericRangeResolution;
+  resolutionKind: ResolutionKind.NumericRangeResolution;
 
   @doc("The kind of range that the resolution object represents.")
   rangeKind: RangeKind;
@@ -591,7 +591,7 @@ model NumericRangeResolution extends BaseResolution {
 @doc("It is a wrap up of LUIS Generally Available response.")
 model LuisTargetIntentResult extends TargetIntentResult {
   @doc("It is a wrap up of LUIS Generally Available response.")
-  targetProjectKind: targetProjectKind.Luis;
+  targetProjectKind: TargetProjectKind.Luis;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "LuisTargetIntentResult.result should not use ': Record<unknown>'. Use ': Record<string>' instead."
   @doc("The actual response from a LUIS Generally Available application.")
@@ -601,7 +601,7 @@ model LuisTargetIntentResult extends TargetIntentResult {
 @doc("It is a wrap up a Question Answering KB response.")
 model QuestionAnsweringTargetIntentResult extends TargetIntentResult {
   @doc("It is a wrap up a Question Answering KB response.")
-  targetProjectKind: targetProjectKind.QuestionAnswering;
+  targetProjectKind: TargetProjectKind.QuestionAnswering;
 
   @doc("The generated answer by a Question Answering KB.")
   result?: AnswersResult;
@@ -1489,7 +1489,7 @@ enum RelativeTo {
 
 //todo: add enum member descriptions
 @doc("The entity resolution object kind.")
-enum resolutionKind {
+enum ResolutionKind {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'BooleanResolution' should have a documentation or description, please use decorator @doc to add it."
   BooleanResolution,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'DateTimeResolution' should have a documentation or description, please use decorator @doc to add it."
@@ -1557,7 +1557,7 @@ enum SpeedUnit {
 
 //todo: add enum member descriptions
 @doc("The type of a target service.")
-enum targetProjectKind {
+enum TargetProjectKind {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Luis' should have a documentation or description, please use decorator @doc to add it."
   Luis,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Conversation' should have a documentation or description, please use decorator @doc to add it."
