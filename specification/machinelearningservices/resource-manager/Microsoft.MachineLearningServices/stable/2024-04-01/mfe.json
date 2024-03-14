@@ -21118,7 +21118,7 @@
           "format": "arm-id",
           "description": "[Required] arm-id of the code asset.",
           "minLength": 1,
-          "pattern": "[a-zA-Z0-9_]",
+          "pattern": "^[a-zA-Z0-9/._-]+$",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -21311,7 +21311,7 @@
         "file": {
           "description": "[Required] Relative python file path for job entry point.",
           "minLength": 1,
-          "pattern": "[a-zA-Z0-9_]",
+          "pattern": "^[a-zA-Z0-9/._-]+$",
           "type": "string",
           "example": "train.py",
           "x-ms-mutability": [
