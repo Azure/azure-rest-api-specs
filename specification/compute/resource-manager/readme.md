@@ -267,20 +267,16 @@ input-file:
 suppressions:
   - code: OperationsAPIImplementation
     reason: Operations list command does not apply to our resource provider operations.
-    where:
-      - diagnostic.json
+    from: diagnostic.json
   - code: PathForResourceAction
-    reason: API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
-    where:
-      - diagnostic.json
+    reason: This is not a valid scenario for the diskInspection and spotPlacementRecommender API as API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
+    from: diagnostic.json
   - code: PathForNestedResource
-    reason: API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
-    where:
-      - diagnostic.json
+    reason: This is not a valid scenario for the diskInspection and spotPlacementRecommender API as API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
+    from: diagnostic.json
   - code: XmsPageableForListCalls
-    reason: API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
-    where:
-      - diagnostic.json
+    reason: False positive error as API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
+    from: diagnostic.json
 ```
 
 ### Tag: package-2024-03-01-preview
