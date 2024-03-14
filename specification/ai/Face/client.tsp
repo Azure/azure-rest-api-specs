@@ -60,7 +60,13 @@ interface FaceClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path."
   group is FaceRecognitionOperations.group;
+}
 
+@client({
+  name: "FaceAdministrationClient",
+  service: Face,
+})
+interface FaceAdministrationClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   createFaceList is FaceListOperations.createFaceList;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
