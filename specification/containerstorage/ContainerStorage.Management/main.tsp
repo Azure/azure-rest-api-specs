@@ -14,11 +14,17 @@ using Azure.ResourceManager.Foundations;
 @armProviderNamespace
 @service({
   title: "Azure-ContainerStorageRP",
-  version: "2023-07-01-preview",
 })
+@versioned(Versions)
 @doc("Azure Container Storage Resource Provider API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.ContainerStorage;
+
+/** Api versions */
+enum Versions {
+  /** 2023-07-01-preview preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  `2023-07-01-preview`,
+}
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -284,6 +290,7 @@ model VolumeProperties {
   @visibility("read")
   status?: ResourceOperationalStatus;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("String KV pairs indicating labels")
   labels: Record<string>;
 
