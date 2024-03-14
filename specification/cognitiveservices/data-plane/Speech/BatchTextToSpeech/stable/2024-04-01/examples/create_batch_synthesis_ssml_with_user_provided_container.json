@@ -2,18 +2,18 @@
   "parameters": {
     "Endpoint": "https://eastus.api.cognitive.microsoft.com/",
     "Ocp-Apim-Subscription-Key": "{API Key}",
-    "api-version": "2023-09-01",
+    "api-version": "2024-04-01",
     "id": "my-batch-synthesis-job-ssml-input-1",
     "Operation-Id": "f43cb3f3-e35d-4df7-9b0f-9f2a49693d1a",
     "definition": {
-      "textKind": "SSML",
+      "inputKind": "SSML",
       "inputs": [
         {
-          "text": "<speak version=\"1.0\" xml:lang=\"en-US\"><voice name=\"en-US-JennyNeural\">The rainbow has seven colors.</voice></speak>"
+          "content": "<speak version=\"1.0\" xml:lang=\"en-US\"><voice name=\"en-US-JennyNeural\">The rainbow has seven colors.</voice></speak>"
         }
       ],
       "properties": {
-        "destinationContainerUrl": "https://lingtestbyos.blob.core.windows.net/default?sv=2021-04-10&st=2023-10-16T05%3A25%3A45Z&se=2023-12-17T05%3A25%3A00Z&sr=c&sp=racwl&sig=Masked",
+        "destinationContainerUrl": "https://lingtestbyos.blob.core.windows.net/default?sv=2021-04-10&st=2024-02-16T05%3A25%3A45Z&se=2023-12-17T05%3A25%3A00Z&sr=c&sp=racwl&sig=Masked",
         "decompressOutputFiles": true
       }
     },
@@ -22,11 +22,11 @@
   "responses": {
     "201": {
       "headers": {
-        "Operation-Location": "https://eastus.api.cognitive.microsoft.com/texttospeech/operations/f43cb3f3-e35d-4df7-9b0f-9f2a49693d1af?api-version=2023-09-01",
+        "Operation-Location": "https://eastus.api.cognitive.microsoft.com/texttospeech/operations/f43cb3f3-e35d-4df7-9b0f-9f2a49693d1af?api-version=2024-04-01",
         "Operation-Id": "f43cb3f3-e35d-4df7-9b0f-9f2a49693d1a"
       },
       "body": {
-        "textKind": "batch synthesis ssml sample",
+        "inputKind": "batch synthesis ssml sample",
         "customVoices": {},
         "properties": {
           "timeToLiveInHours": 744,
@@ -35,12 +35,12 @@
           "decompressOutputFiles": true,
           "wordBoundaryEnabled": false,
           "sentenceBoundaryEnabled": false,
-          "destinationContainerUrl": "https://lingtestbyos.blob.core.windows.net/default?sv=2021-04-10&st=2023-10-16T05%3A25%3A45Z&se=2023-12-17T05%3A25%3A00Z&sr=c&sp=racwl&sig=Masked"
+          "destinationContainerUrl": "https://lingtestbyos.blob.core.windows.net/default?sv=2021-04-10&st=2024-02-16T05%3A25%3A45Z&se=2023-12-17T05%3A25%3A00Z&sr=c&sp=racwl&sig=Masked"
         },
         "status": "NotStarted",
-        "lastActionDateTime": "2023-10-16T05:32:22.909Z",
+        "lastActionDateTime": "2024-02-16T05:32:22.909Z",
         "id": "my-batch-synthesis-job-ssml-input-1",
-        "createdDateTime": "2023-10-16T05:32:22.909Z"
+        "createdDateTime": "2024-02-16T05:32:22.909Z"
       }
     }
   }

@@ -7,10 +7,10 @@
       "name": "Cognitive Services - Speech Services",
       "url": "https://docs.microsoft.com/azure/cognitive-services/speech-service/support"
     },
-    "version": "2023-09-01"
+    "version": "2024-04-01"
   },
   "paths": {
-    "/batchsynthesises": {
+    "/batchsyntheses": {
       "get": {
         "tags": [
           "BatchSynthesis"
@@ -25,7 +25,7 @@
             "$ref": "#/parameters/QuerySkip"
           },
           {
-            "$ref": "#/parameters/QueryTop"
+            "$ref": "#/parameters/QueryMaxPageSize"
           },
           {
             "$ref": "#/parameters/QueryApiVersion"
@@ -51,12 +51,12 @@
         },
         "x-ms-examples": {
           "Create a project": {
-            "$ref": "./examples/get_batch_synthesises.json"
+            "$ref": "./examples/get_batch_syntheses.json"
           }
         }
       }
     },
-    "/batchsynthesises/{id}": {
+    "/batchsyntheses/{id}": {
       "get": {
         "tags": [
           "BatchSynthesis"
@@ -257,15 +257,15 @@
     "BatchSynthesis": {
       "description": "Bath synthesis task.",
       "required": [
-        "textKind"
+        "inputKind"
       ],
       "type": "object",
       "properties": {
-        "textKind": {
-          "$ref": "#/definitions/TextKind"
+        "inputKind": {
+          "$ref": "#/definitions/InputKind"
         },
         "inputs": {
-          "description": "Text or SSML inputs, it's allowed up to 1000 items.",
+          "description": "Text or SSML inputs, it's allowed up to 10000 items.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/BatchSynthesisInput"
@@ -275,7 +275,7 @@
           "$ref": "#/definitions/BatchSynthesisConfig"
         },
         "customVoices": {
-          "description": "The custom voice map of voice name and deployment ID .",
+          "description": "The custom voice map of voice name and deployment ID.",
           "type": "object",
           "additionalProperties": {
             "type": "string",
@@ -286,13 +286,6 @@
         },
         "properties": {
           "$ref": "#/definitions/BatchSynthesisProperties"
-        },
-        "customProperties": {
-          "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum allowed value length is 256 characters and the count of allowed entries is 10.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "outputs": {
           "$ref": "#/definitions/BatchSynthesisOutputs"
@@ -354,14 +347,29 @@
       "description": "Bath synthesis billing details.",
       "type": "object",
       "properties": {
-        "neural": {
+        "neuralCharacters": {
           "format": "int64",
           "description": "The number of billable characters for prebuild neural voices in the input file.",
           "type": "integer"
         },
-        "customNeural": {
+        "customNeuralCharacters": {
           "format": "int64",
           "description": "The number of billable characters for custom neural voices in the input file.",
+          "type": "integer"
+        },
+        "aoaiCharacters": {
+          "format": "int64",
+          "description": "The number of billable characters for AOAI voices in the input file.",
+          "type": "integer"
+        },
+        "aoaiHDCharacters": {
+          "format": "int64",
+          "description": "The number of billable characters for AOAI HD voices in the input file.",
+          "type": "integer"
+        },
+        "personalVoiceCharacters": {
+          "format": "int64",
+          "description": "The number of billable characters for personal voices in the input file.",
           "type": "integer"
         }
       },
@@ -418,11 +426,11 @@
     "BatchSynthesisInput": {
       "description": "Batch Synthesis input.",
       "required": [
-        "text"
+        "content"
       ],
       "type": "object",
       "properties": {
-        "text": {
+        "content": {
           "description": "It could be SSML or plain text.",
           "minLength": 1,
           "type": "string"
@@ -482,7 +490,7 @@
           "description": "The destination path in destination container, default to null, it only works when \"DestinationContainerUrl\" is specified, the final path prefix of outputs should be {DestinationPath}/{TaskId}/, or {TaskId} if not specified.",
           "type": "string"
         },
-        "audioSizeInBytes": {
+        "sizeInBytes": {
           "format": "int64",
           "description": "The generated audio size in bytes.",
           "type": "integer",
@@ -504,12 +512,6 @@
           "description": "The generated audio duration in milliseconds.",
           "type": "integer",
           "format": "int32",
-          "readOnly": true
-        },
-        "durationInTicks": {
-          "format": "int64",
-          "description": "The generated audio duration in ticks. 10000 milliseconds is a tick.",
-          "type": "integer",
           "readOnly": true
         },
         "billingDetails": {
@@ -680,7 +682,7 @@
       },
       "readOnly": true
     },
-    "TextKind": {
+    "InputKind": {
       "description": "Input text kind.",
       "enum": [
         "PlainText",
@@ -688,7 +690,7 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "TextKind",
+        "name": "InputKind",
         "modelAsString": true
       }
     }
@@ -753,14 +755,13 @@
       "default": 0,
       "x-ms-parameter-location": "method"
     },
-    "QueryTop": {
-      "name": "top",
+    "QueryMaxPageSize": {
+      "name": "maxpagesize",
       "in": "query",
-      "description": "The number of result items to return.",
+      "description": "The maximum number of result items to include in a single response.",
       "required": false,
       "type": "integer",
       "format": "int32",
-      "default": 100,
       "x-ms-parameter-location": "method"
     },
     "PathId": {
