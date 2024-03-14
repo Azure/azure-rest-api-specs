@@ -169,7 +169,7 @@ model Pool {
   name: string;
 
   @doc("Azure region where Dev Boxes in the pool are located")
-  location: string;
+  location: Azure.Core.azureLocation;
 
   @doc("The operating system type of Dev Boxes in this pool")
   osType?: OsType;
@@ -355,7 +355,7 @@ Azure region where this Dev Box is located. This will be the same region as the
 Virtual Network it is attached to.
 """)
   @visibility("read")
-  location?: string;
+  location?: Azure.Core.azureLocation;
 
   @doc("The operating system type of this Dev Box.")
   @visibility("read")
