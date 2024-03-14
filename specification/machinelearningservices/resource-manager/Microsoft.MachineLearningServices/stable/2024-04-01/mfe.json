@@ -14183,7 +14183,8 @@
         "AzureBlob",
         "AzureDataLakeGen1",
         "AzureDataLakeGen2",
-        "AzureFile"
+        "AzureFile",
+        "OneLake"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -14201,6 +14202,9 @@
           },
           {
             "value": "AzureFile"
+          },
+          {
+            "value": "OneLake"
           }
         ]
       },
@@ -17685,6 +17689,16 @@
       "x-ms-discriminator-value": "Kubernetes",
       "additionalProperties": false
     },
+    "LakeHouseArtifact": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OneLakeArtifact"
+        }
+      ],
+      "x-ms-discriminator-value": "LakeHouse",
+      "additionalProperties": false
+    },
     "LearningRateScheduler": {
       "description": "Learning rate scheduler enum.",
       "enum": [
@@ -19190,6 +19204,102 @@
       },
       "additionalProperties": false
     },
+    "OneLakeArtifact": {
+      "description": "OneLake artifact (data source) configuration.",
+      "required": [
+        "artifactName",
+        "artifactType"
+      ],
+      "type": "object",
+      "properties": {
+        "artifactName": {
+          "description": "[Required] OneLake artifact name",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "artifactType": {
+          "description": "[Required] OneLake artifact type",
+          "$ref": "#/definitions/OneLakeArtifactType"
+        }
+      },
+      "discriminator": "artifactType"
+    },
+    "OneLakeArtifactType": {
+      "description": "Enum to determine OneLake artifact type.",
+      "enum": [
+        "LakeHouse"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "OneLakeArtifactType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "LakeHouse"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "OneLakeDatastore": {
+      "description": "OneLake (Trident) datastore configuration.",
+      "required": [
+        "artifact",
+        "oneLakeWorkspaceName"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Datastore"
+        }
+      ],
+      "properties": {
+        "artifact": {
+          "description": "[Required] OneLake artifact backing the datastore.",
+          "$ref": "#/definitions/OneLakeArtifact",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "endpoint": {
+          "description": "OneLake endpoint to use for the datastore.",
+          "type": "string",
+          "example": "data.microsoft.com",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "oneLakeWorkspaceName": {
+          "description": "[Required] OneLake workspace name.",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "serviceDataAccessAuthIdentity": {
+          "description": "Indicates which identity to use to authenticate service data access to customer's storage.",
+          "default": "None",
+          "$ref": "#/definitions/ServiceDataAccessAuthIdentity",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "x-ms-discriminator-value": "OneLake",
+      "additionalProperties": false
+    },
     "OnlineDeployment": {
       "required": [
         "endpointComputeType"
@@ -19427,7 +19537,7 @@
         },
         "maxQueueWait": {
           "format": "duration",
-          "description": "(Deprecated for Managed Online Endpoints) The maximum amount of time a request will stay in the queue in ISO 8601 format.\r\nDefaults to 500ms.\r\n(Now increase `request_timeout_ms` to account for any networking/queue delays)",
+          "description": "The maximum amount of time a request will stay in the queue in ISO 8601 format.\r\nDefaults to 500ms.",
           "default": "PT0.5S",
           "type": "string"
         },
