@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/json-schema";
 import "@azure-tools/typespec-azure-core";
 import "../shared/models.tsp";
 
 using TypeSpec.Versioning;
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.JsonSchema;
 
 namespace DevCenterService;
 
@@ -202,6 +204,7 @@ value.
 
   @doc("An array of allowed values")
   @minItems(1)
+  @uniqueItems
   allowed?: string[];
 }
 
