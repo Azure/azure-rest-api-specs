@@ -1,8 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 namespace Azure.OpenAI;
 
@@ -23,7 +27,7 @@ model EmbeddingsOptions {
     Not applicable to Azure OpenAI, where deployment information should be included in the Azure
     resource URI that's connected to.
     """)
-  @projectedName("csharp", "DeploymentName")
+  @clientName("DeploymentName", "csharp")
   `model`?: string;
 
   @doc("""
@@ -34,6 +38,11 @@ model EmbeddingsOptions {
     as we have observed inferior results when newlines are present.
     """)
   input: string[];
+
+  @doc("When using Azure OpenAI, specifies the input type to use for embedding search.")
+  @added(ServiceApiVersions.v2024_02_15_Preview)
+  @encodedName("application/json", "input_type")
+  inputType?: string;
 }
 
 @doc("""
@@ -58,7 +67,7 @@ model EmbeddingItem {
   embedding: float32[];
 
   @doc("Index of the prompt to which the EmbeddingItem corresponds.")
-  @projectedName("java", "promptIndex")
+  @clientName("promptIndex", "java")
   index: int32;
 }
 

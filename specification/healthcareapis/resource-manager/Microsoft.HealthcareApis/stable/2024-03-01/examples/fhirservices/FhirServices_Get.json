@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "testRG",
+    "workspaceName": "workspace1",
+    "fhirServiceName": "fhirservices1",
+    "api-version": "2024-03-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "fhirservices1",
+        "id": "/subscriptions/subid/resourceGroups/testRG/providers/Microsoft.HealthcareApis/workspaces/workspace1/fhirservices/fhirservices1",
+        "type": "Microsoft.HealthcareApis/workspaces/fhirservices",
+        "properties": {
+          "authenticationConfiguration": {
+            "authority": "https://login.microsoftonline.com/abfde7b2-df0f-47e6-aabf-2462b07508dc",
+            "audience": "https://azurehealthcareapis.com",
+            "smartProxyEnabled": true,
+            "smartIdentityProviders": [
+              {
+                "authority": "https://login.b2clogin.com/11111111-1111-1111-1111-111111111111/v2.0",
+                "applications": [
+                  {
+                    "clientId": "22222222-2222-2222-2222-222222222222",
+                    "audience": "22222222-2222-2222-2222-222222222222",
+                    "allowedDataActions": [
+                      "Read"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "corsConfiguration": {
+            "origins": [
+              "*"
+            ],
+            "headers": [
+              "*"
+            ],
+            "methods": [
+              "DELETE",
+              "GET",
+              "OPTIONS",
+              "PATCH",
+              "POST",
+              "PUT"
+            ],
+            "maxAge": 1440,
+            "allowCredentials": false
+          },
+          "exportConfiguration": {
+            "storageAccountName": "existingStorageAccount"
+          },
+          "importConfiguration": {
+            "enabled": false,
+            "initialImportMode": false,
+            "integrationDataStore": "existingStorageAccount"
+          },
+          "implementationGuidesConfiguration": {
+            "usCoreMissingData": false
+          },
+          "provisioningState": "Creating",
+          "encryption": {
+            "customerManagedKeyEncryption": {
+              "keyEncryptionKeyUrl": "https://mykeyvault.vault.azure.net/keys/myEncryptionKey/myKeyVersion"
+            }
+          }
+        },
+        "identity": {
+          "principalId": "2f1f372f-edcf-43f5-aedb-173da3cc5c1e",
+          "tenantId": "abfde7b2-df0f-47e6-aabf-2462b07508dc",
+          "type": "SystemAssigned"
+        }
+      }
+    }
+  }
+}
