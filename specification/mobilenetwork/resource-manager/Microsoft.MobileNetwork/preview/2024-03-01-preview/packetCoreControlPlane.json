@@ -3,7 +3,7 @@
   "info": {
     "title": "MobileNetworkManagementClient",
     "description": "The resources in this API specification will be used to manage packet core control plane resources",
-    "version": "2024-03-01-preview"
+    "version": "2023-10-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -760,10 +760,6 @@
           "minItems": 1,
           "description": "Site(s) under which this packet core control plane should be deployed. The sites must be in the same location as the packet core control plane."
         },
-        "deploymentType": {
-          "$ref": "#/definitions/DeploymentType",
-          "description": "The deployment type of the packet core software (Single Node / Multi Node). This is an optional property, valid only for the packet core deployments on Nexus."
-        },
         "platform": {
           "$ref": "#/definitions/PlatformConfiguration",
           "description": "The platform where the packet core is deployed."
@@ -834,10 +830,6 @@
           "readOnly": true,
           "$ref": "#/definitions/homeNetworkPrivateKeysProvisioning",
           "description": "The provisioning state of the secret containing private keys and keyIds for SUPI concealment."
-        },
-        "managedOnBehalfOfConfiguration": {
-          "$ref": "../../../../../common-types/resource-management/v5/mobo.json#/definitions/ManagedOnBehalfOfConfiguration",
-          "description": "Managed-On-Behalf-Of configuration for packet core to manage the kubernetes cluster resources on behalf of the resource owner for the deployment on Nexus. This is a read-only property, valid only for the packet core deployments on Nexus."
         }
       },
       "required": [
@@ -1059,28 +1051,6 @@
         ]
       }
     },
-    "DeploymentType": {
-      "type": "string",
-      "description": "The deployment type of the packet core software (Single Node / Multi Node).",
-      "enum": [
-        "Single Node",
-        "Multi Node"
-      ],
-      "default": "Single Node",
-      "x-ms-enum": {
-        "name": "DeploymentType",
-        "values": [
-          {
-            "value": "Single Node",
-            "description": "The packet core software will be deployed on single standalone server."
-          },
-          {
-            "value": "Multi Node",
-            "description": "The packet core software will be deployed on multiple servers and supports high availability."
-          }
-        ]
-      }
-    },
     "PlatformConfiguration": {
       "description": "The platform where the packet core is deployed.",
       "type": "object",
@@ -1105,10 +1075,6 @@
           "$ref": "./common.json#/definitions/AzureStackHCIClusterResourceId",
           "description": "The Azure Stack HCI cluster where the packet core is deployed."
         },
-        "nexusEdgeCluster": {
-          "$ref": "./common.json#/definitions/NexusEdgeClusterResourceId",
-          "description": "The Nexus Edge Cluster where the packet core is deployed."
-        },
         "connectedCluster": {
           "$ref": "./common.json#/definitions/ConnectedClusterResourceId",
           "description": "Azure Arc connected cluster where the packet core is deployed."
@@ -1116,10 +1082,6 @@
         "customLocation": {
           "$ref": "./common.json#/definitions/CustomLocationResourceId",
           "description": "Azure Arc custom location where the packet core is deployed."
-        },
-        "nexusNetworkConfiguration": {
-          "$ref": "#/definitions/NexusNetworkConfiguration",
-          "description": "The Nexus network configuration to deploy the Nexus Azure Kubernetes Service and the packet core."
         }
       },
       "required": [
@@ -1131,8 +1093,7 @@
       "description": "The platform type where packet core is deployed. The contents of this enum can change.",
       "enum": [
         "AKS-HCI",
-        "3P-AZURE-STACK-HCI",
-        "Nexus"
+        "3P-AZURE-STACK-HCI"
       ],
       "x-ms-enum": {
         "name": "PlatformType",
@@ -1145,34 +1106,8 @@
           {
             "value": "3P-AZURE-STACK-HCI",
             "description": "If this option is chosen, you must set one of \"azureStackHciCluster\", \"connectedCluster\" or \"customLocation\". If multiple are set, they must be consistent with each other."
-          },
-          {
-            "value": "Nexus",
-            "description": "If this option is chosen, you must set \"nexusEdgeCluster\"."
           }
         ]
-      }
-    },
-    "NexusNetworkConfiguration": {
-      "description": "The Nexus network configuration to deploy the Nexus Azure Kubernetes Service and the packet core.",
-      "type": "object",
-      "properties": {
-        "loadBalancerIpAddresses": {
-          "description": "The list of IP address ranges. Each range can be a either a subnet in CIDR format or an explicit start-end range of IP addresses.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "uniqueItems": true
-        },
-        "cloudServicesNetwork": {
-          "$ref": "./common.json#/definitions/NexusCloudServicesNetworkResourceId",
-          "description": "The Cloud Services Network that provides VMs/Kubernetes clusters access to cloud services such as DNS, NTP, and user-specified Azure PaaS services"
-        },
-        "containerNetworkInterface": {
-          "$ref": "./common.json#/definitions/NexusL3NetworkResourceId",
-          "description": "The Layer 3 Network that is used for creation of the container networking interface network."
-        }
       }
     },
     "LocalDiagnosticsAccessConfiguration": {
