@@ -11,4 +11,30 @@ typescript:
   payload-flattening-threshold: 1
   clear-output-folder: true
   generate-metadata: true
+
+directive:
+  - from: apicenter.json 
+    where: '$.paths[*].put.parameters'
+    transform: >
+      for (const param of $) {
+        if (param['name'] == 'payload') {
+           delete param["x-ms-client-name"]
+        }
+      }
+  - from: apicenter.json 
+    where: '$.paths[*].post.parameters'
+    transform: >
+      for (const param of $) {
+        if (param['name'] == 'payload') {
+           delete param["x-ms-client-name"]
+        }
+      }
+  - from: apicenter.json 
+    where: '$.paths[*].patch.parameters'
+    transform: >
+      for (const param of $) {
+        if (param['name'] == 'payload') {
+           delete param["x-ms-client-name"]
+        }
+      }
 ```
