@@ -1091,11 +1091,7 @@
         },
         "operation": {
           "description": "The operation to be performed on the selected layer. The default value is 'extract', but it can be set to 'copy'.",
-          "type": "string",
-          "enum": [
-            "extract",
-            "copy"
-          ],
+          "$ref": "#/definitions/OperationDefinition",
           "x-nullable": true
         }
       }
@@ -1112,13 +1108,22 @@
         },
         "operation": {
           "description": "The operation to be performed on the selected layer. The default value is 'extract', but it can be set to 'copy'.",
-          "type": "string",
-          "enum": [
-            "extract",
-            "copy"
-          ],
+          "$ref": "#/definitions/OperationDefinition",
           "x-nullable": true
         }
+      }
+    },
+    "OperationDefinition": {
+      "description": "The operation to be performed on the selected layer. The default value is 'extract', but it can be set to 'copy'.",
+      "type": "string",
+      "enum": [
+        "extract",
+        "copy"
+      ],
+      "default": "extract",
+      "x-ms-enum": {
+        "name": "OperationType",
+        "modelAsString": true
       }
     },
     "VerifyDefinition": {
