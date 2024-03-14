@@ -1246,7 +1246,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -1526,30 +1527,6 @@
         ]
       }
     },
-    "TargetCollectionStatus": {
-      "type": "string",
-      "description": "The target states.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "TargetCollectionStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Denotes a target that is enabled."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Denotes a target that is disabled."
-          }
-        ]
-      }
-    },
     "TargetListResult": {
       "type": "object",
       "description": "The response of a Target list operation.",
@@ -1564,7 +1541,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -1591,30 +1569,6 @@
           "type": "string",
           "description": "The server name to use in the connection string when connecting to a target. Port number and instance name must be specified separately.",
           "maxLength": 200
-        },
-        "targetCollectionStatus": {
-          "type": "string",
-          "description": "The target collection status.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "string",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "Denotes a target that is enabled."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "Denotes a target that is disabled."
-              }
-            ]
-          }
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
@@ -1647,11 +1601,13 @@
         },
         "akvTargetUser": {
           "type": "string",
-          "description": "The path to the Key Vault secret storing the login name (aka user name, aka account name) for authentication to a target."
+          "description": "The path to the Key Vault secret storing the login name (aka user name, aka account name) for authentication to a target.",
+          "pattern": "^[a-zA-Z0-9-]{1,127}$"
         },
         "akvTargetPassword": {
           "type": "string",
-          "description": "The path to the Key Vault secret storing the password for authentication to a target."
+          "description": "The path to the Key Vault secret storing the password for authentication to a target.",
+          "pattern": "^[a-zA-Z0-9-]{1,127}$"
         }
       }
     },
@@ -1711,7 +1667,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
