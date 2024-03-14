@@ -512,7 +512,7 @@ model RouterJob {
   @doc("Id of a queue that this job is queued to.")
   queueId?: string;
 
-  @doc("Priority of this job.")
+  @doc("Priority of this job. Value must be between -100 to 100.")
   priority?: int32;
 
   @doc("Reason code for cancelled or closed jobs.")
@@ -808,6 +808,10 @@ model RouterWorker {
 
   @doc("A flag indicating this worker is open to receive offers or not.")
   availableForOffers?: boolean;
+
+  @doc("If this is set, the worker will only receive up to this many new offers at a time.")
+  @added(Versions.c2024_01_18_Preview)
+  maxConcurrentOffers?: int32;
 }
 
 @doc("Represents the capacity a job in this channel will consume from a worker.")
@@ -818,7 +822,7 @@ model RouterChannel {
   @doc("The amount of capacity that an instance of a job of this channel will consume of the total worker capacity.")
   capacityCostPerJob: int32;
 
-  @doc("The maximum number of jobs that can be supported concurrently for this channel.")
+  @doc("The maximum number of jobs that can be supported concurrently for this channel. Value must be greater than zero.")
   maxNumberOfJobs?: int32;
 }
 
@@ -1387,4 +1391,8 @@ enum Versions {
   @doc("JobRouter 2023-11-01 api version")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2023_11_01: "2023-11-01",
+
+  @doc("JobRouter 2024-01-18-preview api version")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  c2024_01_18_Preview: "2024-01-18-preview",
 }
