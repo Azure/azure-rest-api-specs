@@ -213,6 +213,7 @@ model CertificateProfileProperties {
 
   @doc("List of renewed certificates.")
   @visibility("read")
+  @extension("x-ms-identifiers", [])
   @extension("x-ms-client-flatten", true)
   certificates?: Certificate[];
 }
