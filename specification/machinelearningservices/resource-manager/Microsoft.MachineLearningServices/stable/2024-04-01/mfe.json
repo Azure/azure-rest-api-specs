@@ -11896,6 +11896,11 @@
           "type": "string",
           "x-nullable": true
         },
+        "deploymentConfiguration": {
+          "description": "Properties relevant to different deployment types.",
+          "$ref": "#/definitions/BatchDeploymentConfiguration",
+          "x-nullable": true
+        },
         "errorThreshold": {
           "format": "int32",
           "description": "Error threshold, if the error count for the entire input goes above this value,\r\nthe batch inference will be aborted. Range is [-1, int.MaxValue].\r\nFor FileDataset, this value is the count of file failures.\r\nFor TabularDataset, this value is the count of record failures.\r\nIf set to -1 (the lower bound), all failures during batch inference will be ignored.",
@@ -11954,6 +11959,41 @@
         }
       },
       "x-ms-client-name": "BatchDeploymentProperties",
+      "additionalProperties": false
+    },
+    "BatchDeploymentConfiguration": {
+      "description": "Properties relevant to different deployment types.",
+      "required": [
+        "deploymentConfigurationType"
+      ],
+      "type": "object",
+      "properties": {
+        "deploymentConfigurationType": {
+          "description": "[Required] The type of the deployment",
+          "$ref": "#/definitions/BatchDeploymentConfigurationType"
+        }
+      },
+      "discriminator": "deploymentConfigurationType"
+    },
+    "BatchDeploymentConfigurationType": {
+      "description": "The enumerated property types for batch deployments.",
+      "enum": [
+        "Model",
+        "PipelineComponent"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "BatchDeploymentConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Model"
+          },
+          {
+            "value": "PipelineComponent"
+          }
+        ]
+      },
       "additionalProperties": false
     },
     "BatchDeploymentTrackedResource": {
@@ -12138,6 +12178,47 @@
           }
         ]
       },
+      "additionalProperties": false
+    },
+    "BatchPipelineComponentDeploymentConfiguration": {
+      "description": "Properties for a Batch Pipeline Component Deployment.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BatchDeploymentConfiguration"
+        }
+      ],
+      "properties": {
+        "componentId": {
+          "description": "The ARM id of the component to be run.",
+          "$ref": "#/definitions/IdAssetReference",
+          "x-nullable": true
+        },
+        "description": {
+          "description": "The description which will be applied to the job.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "settings": {
+          "description": "Run-time settings for the pipeline job.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
+        },
+        "tags": {
+          "description": "The tags which will be applied to the job.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "PipelineComponent",
       "additionalProperties": false
     },
     "BatchRetrySettings": {
