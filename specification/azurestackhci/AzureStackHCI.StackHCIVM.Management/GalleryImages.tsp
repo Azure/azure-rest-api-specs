@@ -11,12 +11,11 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @doc("The gallery images resource definition.")
 @includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(GalleryImageProperties)
-model GalleryImages extends TrackedResourceBase {
+model GalleryImage is TrackedResource<GalleryImageProperties> {
   @doc("Name of the gallery image")
   @maxLength(80)
   @minLength(1)
@@ -29,65 +28,38 @@ model GalleryImages extends TrackedResourceBase {
 
   @doc("The extendedLocation of the resource.")
   extendedLocation?: ExtendedLocation;
-
-  @doc("Properties under the gallery image resource")
-  @extension("x-ms-client-flatten", true)
-  properties?: GalleryImageProperties;
 }
 
 @armResourceOperations
 @projectedName("client", "GalleryImages")
-interface GalleryImagesOperationGroup {
+interface GalleryImages {
   @doc("Gets a gallery image")
-  get is ArmResourceRead<GalleryImages>;
+  get is ArmResourceRead<GalleryImage>;
 
   @doc("The operation to create or update a gallery image. Please note some properties can be set only during gallery image creation.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    GalleryImages,
-    BaseParameters<GalleryImages>,
-    ArmAsyncOperationHeader
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    GalleryImage,
+    LroHeaders = ArmAsyncOperationHeader
   >;
 
   @doc("The operation to update a gallery image.")
   @parameterVisibility("read")
   update is ArmCustomPatchAsync<
-    GalleryImages,
-    GalleryImagesUpdateRequest,
-    BaseParameters<GalleryImages>,
-    ArmAsyncOperationHeader
+    GalleryImage,
+    LroHeaders = ArmAsyncOperationHeader
   >;
 
   @doc("The operation to delete a gallery image.")
   delete is ArmResourceDeleteWithoutOkAsync<
-    GalleryImages,
-    BaseParameters<GalleryImages>,
-    ArmAsyncOperationHeader
+    GalleryImage,
+    LroHeaders = ArmAsyncOperationHeader
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all of the gallery images in the specified resource group. Use the nextLink property in the response to get the next page of gallery images.")
   @operationId("GalleryImages_List")
-  list is ArmResourceListByParent<GalleryImages>;
+  list is ArmResourceListByParent<GalleryImage>;
 
   @doc("Lists all of the gallery images in the specified subscription. Use the nextLink property in the response to get the next page of gallery images.")
-  listAll is ArmListBySubscription<GalleryImages>;
+  listAll is ArmListBySubscription<GalleryImage>;
 }
-
-@@projectedName(GalleryImagesOperationGroup.createOrUpdate::parameters.resource,
-  "json",
-  "galleryImages"
-);
-@@extension(GalleryImagesOperationGroup.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "galleryImages"
-);
-@@doc(GalleryImagesOperationGroup.createOrUpdate::parameters.resource, "");
-@@projectedName(GalleryImagesOperationGroup.update::parameters.properties,
-  "json",
-  "galleryImages"
-);
-@@extension(GalleryImagesOperationGroup.update::parameters.properties,
-  "x-ms-client-name",
-  "galleryImages"
-);
-@@doc(GalleryImagesOperationGroup.update::parameters.properties, "");

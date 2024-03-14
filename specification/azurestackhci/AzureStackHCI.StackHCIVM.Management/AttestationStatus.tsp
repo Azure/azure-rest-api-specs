@@ -12,24 +12,18 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @doc("The attestation status of the virtual machine")
 @singleton("default")
 @parentResource(VirtualMachineInstance)
 @includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(AttestationStatusProperties)
-model AttestationStatus extends ProxyResourceBase {
+model AttestationStatus is ProxyResource<AttestationStatusProperties> {
   @doc("Name of attestation status")
   @key("attestationStatus")
   @segment("attestationStatus")
   @visibility("read")
   @path
   name: string;
-
-  @doc("Attestation status properties.")
-  @extension("x-ms-client-flatten", true)
-  properties: AttestationStatusProperties;
 }
 
 @armResourceOperations

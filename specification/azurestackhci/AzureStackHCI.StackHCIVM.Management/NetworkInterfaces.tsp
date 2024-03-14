@@ -11,12 +11,11 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @doc("The network interface resource definition.")
 @includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(NetworkInterfaceProperties)
-model NetworkInterfaces extends TrackedResourceBase {
+model NetworkInterface is TrackedResource<NetworkInterfaceProperties> {
   @doc("Name of the network interface")
   @maxLength(80)
   @minLength(1)
@@ -29,65 +28,38 @@ model NetworkInterfaces extends TrackedResourceBase {
 
   @doc("The extendedLocation of the resource.")
   extendedLocation?: ExtendedLocation;
-
-  @doc("Properties under the network interface resource")
-  @extension("x-ms-client-flatten", true)
-  properties?: NetworkInterfaceProperties;
 }
 
 @armResourceOperations
 @projectedName("client", "NetworkInterfaces")
-interface NetworkInterfacesOperationGroup {
+interface NetworkInterfaceGroup {
   @doc("Gets a network interface")
-  get is ArmResourceRead<NetworkInterfaces>;
+  get is ArmResourceRead<NetworkInterface>;
 
   @doc("The operation to create or update a network interface. Please note some properties can be set only during network interface creation.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    NetworkInterfaces,
-    BaseParameters<NetworkInterfaces>,
-    ArmAsyncOperationHeader
+    NetworkInterface,
+    LroHeaders=ArmAsyncOperationHeader
   >;
 
   @doc("The operation to update a network interface.")
   @parameterVisibility("read")
   update is ArmCustomPatchAsync<
-    NetworkInterfaces,
-    NetworkInterfacesUpdateRequest,
-    BaseParameters<NetworkInterfaces>,
-    ArmAsyncOperationHeader
+    NetworkInterface,
+    LroHeaders=ArmAsyncOperationHeader
   >;
 
   @doc("The operation to delete a network interface.")
   delete is ArmResourceDeleteWithoutOkAsync<
-    NetworkInterfaces,
-    BaseParameters<NetworkInterfaces>,
-    ArmAsyncOperationHeader
+    NetworkInterface,
+    LroHeaders=ArmAsyncOperationHeader
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all of the network interfaces in the specified resource group. Use the nextLink property in the response to get the next page of network interfaces.")
   @operationId("NetworkInterfaces_List")
-  list is ArmResourceListByParent<NetworkInterfaces>;
+  list is ArmResourceListByParent<NetworkInterface>;
 
   @doc("Lists all of the network interfaces in the specified subscription. Use the nextLink property in the response to get the next page of network interfaces.")
-  listAll is ArmListBySubscription<NetworkInterfaces>;
+  listAll is ArmListBySubscription<NetworkInterface>;
 }
-
-@@projectedName(NetworkInterfacesOperationGroup.createOrUpdate::parameters.resource,
-  "json",
-  "networkInterfaces"
-);
-@@extension(NetworkInterfacesOperationGroup.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "networkInterfaces"
-);
-@@doc(NetworkInterfacesOperationGroup.createOrUpdate::parameters.resource, "");
-@@projectedName(NetworkInterfacesOperationGroup.update::parameters.properties,
-  "json",
-  "networkInterfaces"
-);
-@@extension(NetworkInterfacesOperationGroup.update::parameters.properties,
-  "x-ms-client-name",
-  "networkInterfaces"
-);
-@@doc(NetworkInterfacesOperationGroup.update::parameters.properties, "");

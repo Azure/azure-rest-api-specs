@@ -12,31 +12,24 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @doc("Defines the HybridIdentityMetadata.")
 @singleton("default")
 @parentResource(VirtualMachineInstance)
 @includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  HybridIdentityMetadataProperties
-)
-model HybridIdentityMetadata extends ProxyResourceBase {
+model HybridIdentityMetadata is ProxyResource<HybridIdentityMetadataProperties> {
   @doc("Name of the hybrididentitymetadata")
   @key("hybridIdentityMetadatum")
   @segment("hybridIdentityMetadata")
   @visibility("read")
   @path
   name: string;
-
-  @doc("Resource properties.")
-  @extension("x-ms-client-flatten", true)
-  properties: HybridIdentityMetadataProperties;
 }
 
 @armResourceOperations
 @projectedName("client", "HybridIdentityMetadata")
-interface HybridIdentityMetadataOperationGroup {
+interface HybridIdentityMetadataGroup {
   @doc("Implements HybridIdentityMetadata GET method.")
   get is ArmResourceRead<HybridIdentityMetadata>;
 

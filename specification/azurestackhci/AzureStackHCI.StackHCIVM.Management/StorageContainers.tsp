@@ -11,12 +11,10 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @doc("The storage container resource definition.")
 @includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(StorageContainerProperties)
-model StorageContainers extends TrackedResourceBase {
+model StorageContainer is TrackedResource<VirtualHardDiskProperties> {
   @doc("Name of the storage container")
   @maxLength(80)
   @minLength(1)
@@ -29,65 +27,38 @@ model StorageContainers extends TrackedResourceBase {
 
   @doc("The extendedLocation of the resource.")
   extendedLocation?: ExtendedLocation;
-
-  @doc("Properties under the storage container resource")
-  @extension("x-ms-client-flatten", true)
-  properties?: StorageContainerProperties;
 }
 
 @armResourceOperations
 @projectedName("client", "StorageContainers")
-interface StorageContainersOperationGroup {
+interface StorageContainers {
   @doc("Gets a storage container")
-  get is ArmResourceRead<StorageContainers>;
+  get is ArmResourceRead<StorageContainer>;
 
   @doc("The operation to create or update a storage container. Please note some properties can be set only during storage container creation.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    StorageContainers,
-    BaseParameters<StorageContainers>,
-    ArmAsyncOperationHeader
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
+    StorageContainer,
+    LroHeaders=ArmAsyncOperationHeader
   >;
 
   @doc("The operation to update a storage container.")
   @parameterVisibility("read")
-  update is ArmCustomPatchAsync<
-    StorageContainers,
-    StorageContainersUpdateRequest,
-    BaseParameters<StorageContainers>,
-    ArmAsyncOperationHeader
+  update is ArmTagsPatchAsync<
+    StorageContainer,
+    LroHeaders=ArmAsyncOperationHeader
   >;
 
   @doc("The operation to delete a storage container.")
   delete is ArmResourceDeleteWithoutOkAsync<
-    StorageContainers,
-    BaseParameters<StorageContainers>,
-    ArmAsyncOperationHeader
+    StorageContainer,
+    LroHeaders=ArmAsyncOperationHeader
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all of the storage containers in the specified resource group. Use the nextLink property in the response to get the next page of storage containers.")
   @operationId("StorageContainers_List")
-  list is ArmResourceListByParent<StorageContainers>;
+  list is ArmResourceListByParent<StorageContainer>;
 
   @doc("Lists all of the storage containers in the specified subscription. Use the nextLink property in the response to get the next page of storage containers.")
-  listAll is ArmListBySubscription<StorageContainers>;
+  listAll is ArmListBySubscription<StorageContainer>;
 }
-
-@@projectedName(StorageContainersOperationGroup.createOrUpdate::parameters.resource,
-  "json",
-  "storageContainers"
-);
-@@extension(StorageContainersOperationGroup.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "storageContainers"
-);
-@@doc(StorageContainersOperationGroup.createOrUpdate::parameters.resource, "");
-@@projectedName(StorageContainersOperationGroup.update::parameters.properties,
-  "json",
-  "storageContainers"
-);
-@@extension(StorageContainersOperationGroup.update::parameters.properties,
-  "x-ms-client-name",
-  "storageContainers"
-);
-@@doc(StorageContainersOperationGroup.update::parameters.properties, "");

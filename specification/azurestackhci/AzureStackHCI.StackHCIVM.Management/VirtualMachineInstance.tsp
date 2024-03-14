@@ -11,15 +11,11 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @doc("The virtual machine instance resource definition.")
 @singleton("default")
 @includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  VirtualMachineInstanceProperties
-)
-model VirtualMachineInstance extends ExtensionResourceBase {
+model VirtualMachineInstance is ExtensionResource<VirtualMachineInstanceProperties> {
   @doc("name of virtual machine")
   @key("virtualMachineInstance")
   @segment("virtualMachineInstances")
@@ -30,10 +26,6 @@ model VirtualMachineInstance extends ExtensionResourceBase {
   @doc("The extendedLocation of the resource.")
   extendedLocation?: ExtendedLocation;
 
-  @doc("Properties under the virtual machine instance resource")
-  @extension("x-ms-client-flatten", true)
-  properties?: VirtualMachineInstanceProperties;
-
   ...Azure.ResourceManager.ManagedServiceIdentity;
 }
 
@@ -43,10 +35,9 @@ interface VirtualMachineInstances {
   get is ArmResourceRead<VirtualMachineInstance>;
 
   @doc("The operation to create or update a virtual machine instance. Please note some properties can be set only during virtual machine instance creation.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<
     VirtualMachineInstance,
-    BaseParameters<VirtualMachineInstance>,
-    ArmAsyncOperationHeader
+    LroHeaders=ArmAsyncOperationHeader
   >;
 
   @doc("The operation to update a virtual machine instance.")
@@ -54,15 +45,13 @@ interface VirtualMachineInstances {
   update is ArmCustomPatchAsync<
     VirtualMachineInstance,
     VirtualMachineInstanceUpdateRequest,
-    BaseParameters<VirtualMachineInstance>,
-    ArmAsyncOperationHeader
+    LroHeaders=ArmAsyncOperationHeader
   >;
 
   @doc("The operation to delete a virtual machine instance.")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualMachineInstance,
-    BaseParameters<VirtualMachineInstance>,
-    ArmAsyncOperationHeader
+    LroHeaders=ArmAsyncOperationHeader
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
@@ -71,66 +60,37 @@ interface VirtualMachineInstances {
   list is ArmResourceListByParent<VirtualMachineInstance>;
 
   @doc("The operation to start a virtual machine instance.")
-  start is ArmResourceActionAsync<
+  start is ArmResourceActionNoResponseContentAsync<
     VirtualMachineInstance,
-    void,
-    VirtualMachineInstance,
-    BaseParameters<VirtualMachineInstance>,
-    ArmLroLocationHeader
+    Request=void,
+    LroHeaders=ArmLroLocationHeader
   >;
 
   @doc("The operation to stop a virtual machine instance.")
-  stop is ArmResourceActionAsync<
+  stop is ArmResourceActionNoResponseContentAsync<
     VirtualMachineInstance,
-    void,
-    VirtualMachineInstance,
-    BaseParameters<VirtualMachineInstance>,
-    ArmLroLocationHeader
+    Request=void,
+    LroHeaders=ArmLroLocationHeader
   >;
 
   @doc("The operation to restart a virtual machine instance.")
-  restart is ArmResourceActionAsync<
+  restart is ArmResourceActionNoResponseContentAsync<
     VirtualMachineInstance,
-    void,
-    VirtualMachineInstance,
-    BaseParameters<VirtualMachineInstance>,
-    ArmLroLocationHeader
+    Request=void,
+    LroHeaders=ArmLroLocationHeader
   >;
 
   @doc("The operation to pause a virtual machine instance.")
-  pause is ArmResourceActionAsync<
+  pause is ArmResourceActionNoResponseContentAsync<
     VirtualMachineInstance,
-    void,
-    VirtualMachineInstance,
-    BaseParameters<VirtualMachineInstance>,
-    ArmLroLocationHeader
+    Request=void,
+    LroHeaders=ArmLroLocationHeader
   >;
 
   @doc("The operation to save a virtual machine instance.")
-  save is ArmResourceActionAsync<
+  save is ArmResourceActionNoResponseContentAsync<
     VirtualMachineInstance,
-    void,
-    VirtualMachineInstance,
-    BaseParameters<VirtualMachineInstance>,
-    ArmLroLocationHeader
+    Request=void,
+    LroHeaders=ArmLroLocationHeader
   >;
 }
-
-@@projectedName(VirtualMachineInstances.createOrUpdate::parameters.resource,
-  "json",
-  "virtualMachineInstance"
-);
-@@extension(VirtualMachineInstances.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "virtualMachineInstance"
-);
-@@doc(VirtualMachineInstances.createOrUpdate::parameters.resource, "");
-@@projectedName(VirtualMachineInstances.update::parameters.properties,
-  "json",
-  "virtualMachineInstance"
-);
-@@extension(VirtualMachineInstances.update::parameters.properties,
-  "x-ms-client-name",
-  "virtualMachineInstance"
-);
-@@doc(VirtualMachineInstances.update::parameters.properties, "");

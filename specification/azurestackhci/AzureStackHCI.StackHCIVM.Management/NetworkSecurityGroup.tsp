@@ -199,26 +199,3 @@ interface NetworkSecurityGroups {
     SecurityRule
   >;
 }
-
-@@projectedName(NetworkSecurityGroups.createOrUpdate::parameters.resource,
-  "json",
-  "networkSecurityGroups"
-);
-@@extension(NetworkSecurityGroups.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "networkSecurityGroups"
-);
-@@doc(NetworkSecurityGroups.createOrUpdate::parameters.resource,
-  "Parameters supplied to the create or update network security group operation."
-);
-@@projectedName(NetworkSecurityGroups.updateTags::parameters.properties,
-  "json",
-  "parameters"
-);
-@@extension(NetworkSecurityGroups.updateTags::parameters.properties,
-  "x-ms-client-name",
-  "parameters"
-);
-@@doc(NetworkSecurityGroups.updateTags::parameters.properties,
-  "Parameters supplied to update network security group tags."
-);

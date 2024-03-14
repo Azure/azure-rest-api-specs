@@ -12,24 +12,18 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @doc("Defines the GuestAgent.")
 @singleton("default")
 @parentResource(VirtualMachineInstance)
 @includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(GuestAgentProperties)
-model GuestAgent extends ProxyResourceBase {
+model GuestAgent is ProxyResource<GuestAgentProperties> {
   @doc("guestAgent name")
   @key("guestAgent")
   @segment("guestAgents")
   @visibility("read")
   @path
   name: string;
-
-  @doc("Resource properties.")
-  @extension("x-ms-client-flatten", true)
-  properties: GuestAgentProperties;
 }
 
 @armResourceOperations
@@ -44,8 +38,7 @@ interface GuestAgents {
   @operationId("GuestAgent_Create")
   create is ArmResourceCreateOrReplaceAsync<
     GuestAgent,
-    BaseParameters<GuestAgent>,
-    ArmAsyncOperationHeader
+    LroHeaders=ArmAsyncOperationHeader
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
@@ -58,10 +51,3 @@ interface GuestAgents {
   @operationId("GuestAgents_List")
   list is ArmResourceListByParent<GuestAgent>;
 }
-
-@@projectedName(GuestAgents.create::parameters.resource, "json", "body");
-@@extension(GuestAgents.create::parameters.resource,
-  "x-ms-client-name",
-  "body"
-);
-@@doc(GuestAgents.create::parameters.resource, "Request payload.");

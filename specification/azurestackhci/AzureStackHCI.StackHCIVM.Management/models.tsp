@@ -665,7 +665,7 @@ model NetworkSecurityGroupPropertiesFormat {
 
   @doc("A collection of references to network interfaces that are currently using this NSG.")
   @visibility("read")
-  networkInterfaces?: NetworkInterfaces[];
+  networkInterfaces?: NetworkInterface[];
 
   @doc("A collection of references to subnets that are currently using this NSG")
   @visibility("read")
