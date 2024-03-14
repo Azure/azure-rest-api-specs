@@ -211,16 +211,7 @@
             "in": "body",
             "required": true,
             "description": "Configure patcher to skip a patch or not.",
-            "schema": {
-              "description": "Configure a patch to be skipped or not. If the patch is skipped, the patch will not be applied to the target container app.",
-              "type": "object",
-              "properties": {
-                "skip": {
-                  "type": "boolean",
-                  "description": "The flag to indicate if the patch should be skipped or not."
-                }
-              }
-            }
+            "schema": "#/definitions/PatchSkipConfig"
           }
         ],
         "responses": {
@@ -523,6 +514,16 @@
           "description": "the link to the next page of items",
           "type": "string",
           "format": "uri"
+        }
+      }
+    },
+    "PatchSkipConfig": {
+      "description": "The configuration for patcher to skip a patch or not.",
+      "type": "object",
+      "properties": {
+        "skip": {
+          "type": "boolean",
+          "description": "The flag to indicate whether to skip the patch or not."
         }
       }
     }
