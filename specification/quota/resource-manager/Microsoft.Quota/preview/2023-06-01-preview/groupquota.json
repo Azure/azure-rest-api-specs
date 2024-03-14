@@ -1115,8 +1115,11 @@
     },
     "/providers/Microsoft.Management/managementGroups/{managementGroupId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/quotaAllocationRequests": {
       "get": {
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "tags": [
-          "SubscriptionQuotaAllocationRequests"
+          "SubscriptionQuotaAllocationRequestsStatus"
         ],
         "summary": "Get all the quotaAllocationRequests for a resourceProvider/location.",
         "description": "Get all the quotaAllocationRequests for a resourceProvider/location. The filter paramter for location is required.",
@@ -1125,9 +1128,6 @@
           "SubscriptionQuotaAllocation_List_Request_ForCompute": {
             "$ref": "./examples/SubscriptionQuotaAllocationRequests/SubscriptionQuotaAllocationRequest_List-Compute.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "parameters": [
           {
@@ -1146,7 +1146,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#parameters/FilterInQuery"
+            "$ref": "#/parameters/FilterInQuery"
           }
         ],
         "responses": {
