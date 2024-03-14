@@ -3582,7 +3582,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The KeyVault ARM resource id."
+          "description": "The KeyVault ARM resource id.",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVaults/vaults"
+              }
+            ]
+          }
         }
       },
       "description": "Contains they KeyVault ARM resource id."
