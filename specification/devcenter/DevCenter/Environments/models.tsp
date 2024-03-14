@@ -165,9 +165,9 @@ model EnvironmentDefinition {
   @doc("Input parameters passed to an environment.")
   parameters?: EnvironmentDefinitionParameter[];
 
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "there is no build in type to describe json"
+  //typespec does not have a way to represent this. Issue https://github.com/microsoft/typespec/issues/3005
   @doc("JSON schema defining the parameters object passed to an environment.")
-  parametersSchema?: unknown;
+  parametersSchema?: string;
 
   @doc("Path to the Environment Definition entrypoint file.")
   templatePath?: string;
