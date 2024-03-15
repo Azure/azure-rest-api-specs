@@ -211,6 +211,9 @@
           },
           "Create or Update App On A Connected Environment": {
             "$ref": "./examples/ContainerApps_CreateOrUpdate_ConnectedEnvironment.json"
+          },
+          "Create or Update SourceToCloud App": {
+            "$ref": "./examples/ContainerApps_SourceToCloudApp_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -731,6 +734,25 @@
             "workloadProfileName": {
               "$ref": "./CommonDefinitions.json#/definitions/WorkloadProfileName",
               "description": "Workload profile name to pin for container app execution."
+            },
+            "patchingConfiguration": {
+              "description": "Container App auto patch configuration.",
+              "type": "object",
+              "properties": {
+                "patchingMode": {
+                  "description": "Patching mode for the container app. Null or default in this field will be interpreted as Automatic by RP. Automatic mode will automatically apply available patches. Manual mode will require the user to manually apply patches. Disabled mode will stop patch detection and auto patching.",
+                  "type": "string",
+                  "enum": [
+                    "Automatic",
+                    "Manual",
+                    "Disabled"
+                  ],
+                  "x-ms-enum": {
+                    "name": "patchingMode",
+                    "modelAsString": true
+                  }
+                }
+              }
             },
             "latestRevisionName": {
               "description": "Name of the latest revision of the Container App.",

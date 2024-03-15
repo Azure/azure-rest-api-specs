@@ -48,6 +48,8 @@ input-file:
   - Microsoft.App/preview/2024-02-02-preview/ConnectedEnvironmentsStorages.json
   - Microsoft.App/preview/2024-02-02-preview/ContainerApps.json
   - Microsoft.App/preview/2024-02-02-preview/ContainerAppsRevisions.json
+  - Microsoft.App/preview/2024-02-02-preview/ContainerAppsBuilds.json
+  - Microsoft.App/preview/2024-02-02-preview/ContainerAppsPatches.json
   - Microsoft.App/preview/2024-02-02-preview/Diagnostics.json
   - Microsoft.App/preview/2024-02-02-preview/DotNetComponents.json
   - Microsoft.App/preview/2024-02-02-preview/Global.json
