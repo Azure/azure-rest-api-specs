@@ -80,9 +80,9 @@ interface EnvironmentClientOperations {
   "client",
   "EnvironmentTypeStatus"
 );
-@@projectedName(DevCenterService.DevBoxActionDelayResultStatus,
+@@projectedName(DevCenterService.DevBoxActionDelayResult.result,
   "client",
-  "DevBoxActionDelayStatus"
+  "delayStatus"
 );
 
 @@projectedName(DevCenterService.OsType, "csharp", "DevBoxOSType");
