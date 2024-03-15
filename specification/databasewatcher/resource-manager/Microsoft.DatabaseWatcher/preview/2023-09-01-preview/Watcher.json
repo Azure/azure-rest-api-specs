@@ -78,11 +78,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List_200.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -115,11 +110,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Watchers_ListBySubscription": {
-            "$ref": "./examples/Watchers_ListBySubscription_200.json"
           }
         },
         "x-ms-pageable": {
@@ -157,11 +147,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Watchers_ListByResourceGroup": {
-            "$ref": "./examples/Watchers_ListByResourceGroup_200.json"
           }
         },
         "x-ms-pageable": {
@@ -207,11 +192,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Watchers_Get": {
-            "$ref": "./examples/Watchers_Get_200.json"
           }
         }
       },
@@ -274,11 +254,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Watchers_CreateOrUpdate": {
-            "$ref": "./examples/Watchers_CreateOrUpdate_200.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -348,11 +323,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Watchers_Update": {
-            "$ref": "./examples/Watchers_Update_200.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -387,14 +357,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -406,11 +376,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Watchers_Delete": {
-            "$ref": "./examples/Watchers_Delete_200.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -457,11 +422,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "SharedPrivateLinkResources_ListByWatcher": {
-            "$ref": "./examples/SharedPrivateLinkResources_ListByWatcher_200.json"
           }
         },
         "x-ms-pageable": {
@@ -515,11 +475,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "SharedPrivateLinkResources_Get": {
-            "$ref": "./examples/SharedPrivateLinkResources_Get_200.json"
           }
         }
       },
@@ -592,11 +547,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "SharedPrivateLinkResources_Create": {
-            "$ref": "./examples/SharedPrivateLinkResources_Create_200.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -639,14 +589,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -658,11 +608,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "SharedPrivateLinkResources_Delete": {
-            "$ref": "./examples/SharedPrivateLinkResources_Delete_200.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -725,11 +670,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Watchers_Start": {
-            "$ref": "./examples/Watchers_Start_200.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -790,11 +730,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Watchers_Stop": {
-            "$ref": "./examples/Watchers_Stop_200.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -839,11 +774,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Targets_ListByWatcher": {
-            "$ref": "./examples/Targets_ListByWatcher_200.json"
           }
         },
         "x-ms-pageable": {
@@ -897,11 +827,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Targets_Get": {
-            "$ref": "./examples/Targets_Get_200.json"
           }
         }
       },
@@ -966,11 +891,6 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Targets_CreateOrUpdate": {
-            "$ref": "./examples/Targets_CreateOrUpdate_200.json"
-          }
         }
       },
       "delete": {
@@ -1018,11 +938,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Targets_Delete": {
-            "$ref": "./examples/Targets_Delete_200.json"
           }
         }
       }
