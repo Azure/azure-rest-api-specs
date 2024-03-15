@@ -14,7 +14,7 @@ namespace Microsoft.AzureStackHCI;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @doc("The storage container resource definition.")
 @includeInapplicableMetadataInPayload(false)
-model StorageContainer is TrackedResource<VirtualHardDiskProperties> {
+model StorageContainer is TrackedResource<StorageContainerProperties> {
   @doc("Name of the storage container")
   @maxLength(80)
   @minLength(1)
