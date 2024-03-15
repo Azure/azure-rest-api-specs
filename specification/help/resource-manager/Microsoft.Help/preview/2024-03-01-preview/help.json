@@ -413,6 +413,100 @@
         }
       }
     },
+    "/{scope}/providers/Microsoft.Help/simplifiedSolutions/{simplifiedSolutionsResourceName}": {
+      "put": {
+        "tags": [
+          "simplifiedSolutions"
+        ],
+        "description": "Creates a simplified Solutions for the specific Azure resource or subscription using the inputs ‘solutionId and requiredInputs’ from discovery solutions. In the absence of the ‘Parameters’ it is likely that some of the simplified Solutions might fail execution, and you might see an empty response. <br/><br/> <b>Note:</b>  <br/>1. ‘requiredInputs’ from Discovery solutions response must be passed via ‘parameters’ in the request body of simplified Solutions API. <br/>",
+        "operationId": "SimplifiedSolutions_Create",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/SimplifiedSolutionsResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "simplifiedSolutionsRequestBody",
+            "description": "The required request body for simplified Solutions resource creation.",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SimplifiedSolutionsResource"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Create simplified Solutions invocation.",
+            "schema": {
+              "$ref": "#/definitions/SimplifiedSolutionsResource"
+            }
+          },
+          "200": {
+            "description": "Create solution invocation.",
+            "schema": {
+              "$ref": "#/definitions/SimplifiedSolutionsResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Solution_Create": {
+            "$ref": "./examples/SimplifiedSolutions_Create.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "simplifiedSolutions"
+        ],
+        "description": "Get the simplified Solutions using the applicable solutionResourceName while creating the simplified Solutions.",
+        "operationId": "SimplifiedSolutions_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/SimplifiedSolutionsResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful fetched simplified Solutions result.",
+            "schema": {
+              "$ref": "#/definitions/SimplifiedSolutionsResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Solution_Get": {
+            "$ref": "./examples/SimplifiedSolutions_Get.json"
+          }
+        }
+      }
+    },
     "/{scope}/providers/Microsoft.Help/solutions/{solutionResourceName}/warmup": {
       "post": {
         "tags": [
@@ -1637,6 +1731,95 @@
         }
       }
     },
+    "SimplifiedSolutionsResource": {
+      "description": "Simplified Solutions response.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SimplifiedSolutionsResourceProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SimplifiedSolutionsResourceProperties": {
+      "description": "Simplified Solutions result",
+      "type": "object",
+      "properties": {
+        "solutionId": {
+          "description": "Solution Id to identify single Simplified Solution.",
+          "type": "string"
+        },
+        "parameters": {
+          "description": "Client input parameters to run Simplified Solutions",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "title": {
+          "description": "The title.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "appendix": {
+          "description": "Additional parameter response for Simplified Solutions",
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "content": {
+          "description": "The HTML content that needs to be rendered and shown to customer.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Status of Simplified Solution provisioning.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "PartialComplete",
+            "Failed",
+            "Running",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "SolutionProvisioningState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Succeeded",
+                "description": "All Simplified Solutions in the Batch succeeded."
+              },
+              {
+                "value": "PartialComplete",
+                "description": "Some Simplified Solutions are still running or failed."
+              },
+              {
+                "value": "Failed",
+                "description": "All Simplified Solutions failed to run."
+              },
+              {
+                "value": "Running",
+                "description": "All Simplified Solutions are still running."
+              },
+              {
+                "value": "Canceled",
+                "description": "When Simplified Solutions request gets canceled."
+              }
+            ]
+          }
+        }
+      }
+    },
     "SelfHelpSolutionResource": {
       "description": "Self Help Solution response.",
       "type": "object",
@@ -2231,20 +2414,12 @@
       "description": "Nlp metadata.",
       "type": "object",
       "properties": {
-        "problemTitle": {
+        "title": {
           "description": "Title for given ProblemClassificationId",
           "type": "string"
         },
-        "problemDescription": {
+        "description": {
           "description": "Description for given ProblemClassificationId",
-          "type": "string"
-        },
-        "serviceId": {
-          "description": "Service resource id that is having the problem",
-          "type": "string"
-        },
-        "problemClassificationId": {
-          "description": "Problem Classification Id that is having the issue",
           "type": "string"
         },
         "solutions": {
@@ -2307,6 +2482,17 @@
       "required": true,
       "type": "string",
       "description": "Solution resource Name.",
+      "x-ms-parameter-location": "method",
+      "minLength": 1,
+      "maxLength": 100,
+      "pattern": "^[A-Za-z0-9-+@()_]+$"
+    },
+    "SimplifiedSolutionsResourceNameParameter": {
+      "name": "simplifiedSolutionsResourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Simplified Solutions Resource Name.",
       "x-ms-parameter-location": "method",
       "minLength": 1,
       "maxLength": 100,
