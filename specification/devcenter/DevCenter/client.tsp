@@ -68,18 +68,6 @@ interface EnvironmentClientOperations {
 @@access(DevCenterService.DevBox, Access.public);
 @@usage(DevCenterService.DevBox, Usage.input | Usage.output);
 
-@@projectedName(DevCenterService.LocalAdminStatus,
-  "client",
-  "LocalAdministratorStatus"
-);
-@@projectedName(DevCenterService.StopOnDisconnectEnableStatus,
-  "client",
-  "StopOnDisconnectStatus"
-);
-@@projectedName(DevCenterService.EnvironmentTypeEnableStatus,
-  "client",
-  "EnvironmentTypeStatus"
-);
 @@projectedName(DevCenterService.DevBoxActionDelayResult.result,
   "client",
   "delayStatus"

@@ -26,7 +26,7 @@ union HibernateSupport {
 }
 
 @doc("Indicates whether owners of Dev Boxes in a pool are local administrators on the Dev Boxes.")
-union LocalAdminStatus {
+union LocalAdministratorStatus {
   @doc("Owners of Dev Boxes in the pool are local administrators on the Dev Boxes.")
   Enabled: "Enabled",
 
@@ -128,7 +128,7 @@ union SkuName {
 }
 
 @doc("Indicates whether the feature to stop the devbox on disconnect once the grace period has lapsed is enabled.")
-union StopOnDisconnectEnableStatus {
+union StopOnDisconnectStatus {
   @doc("Stop on disconnect is enabled on the Dev Box.") Enabled: "Enabled",
 
   @doc("Stop on disconnect is not enabled on the Dev Box.")
@@ -218,7 +218,7 @@ model Pool {
 Indicates whether owners of Dev Boxes in this pool are local administrators on
 the Dev Boxes.
 """)
-  localAdministrator?: LocalAdminStatus;
+  localAdministrator?: LocalAdministratorStatus;
 
   @doc("Stop on disconnect configuration settings for Dev Boxes created in this pool.")
   stopOnDisconnect?: StopOnDisconnectConfiguration;
@@ -290,7 +290,7 @@ model StopOnDisconnectConfiguration {
 Indicates whether the feature to stop the devbox on disconnect once the grace
 period has lapsed is enabled.
 """)
-  status: StopOnDisconnectEnableStatus;
+  status: StopOnDisconnectStatus;
 
   @doc("""
 The specified time in minutes to wait before stopping a Dev Box once disconnect
@@ -411,7 +411,7 @@ Virtual Network it is attached to.
 
   @doc("Indicates whether the owner of the Dev Box is a local administrator.")
   @visibility("read", "create")
-  localAdministrator?: LocalAdminStatus;
+  localAdministrator?: LocalAdministratorStatus;
 }
 
 @doc("Provides remote connection information for a Dev Box.")

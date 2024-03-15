@@ -21,7 +21,7 @@ union ParameterType {
 }
 
 @doc("Indicates whether an environment type is enabled for use in a project.")
-union EnvironmentTypeEnableStatus {
+union EnvironmentTypeStatus {
   @doc("The environment type is enabled for use in the project.")
   Enabled: "Enabled",
 
@@ -229,5 +229,5 @@ or management group.
   deploymentTargetId: string;
 
   @doc("Indicates whether this environment type is enabled for use in this project.")
-  status: EnvironmentTypeEnableStatus;
+  status: EnvironmentTypeStatus;
 }
