@@ -165,14 +165,7 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2024-03-15-preview/updateRuns.json
   - Microsoft.AzureStackHCI/preview/2024-03-15-preview/updateSummaries.json
   - Microsoft.AzureStackHCI/preview/2024-03-15-preview/updates.json
-  - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/common.json
-  - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/galleryImages.json
-  - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/logicalNetworks.json
-  - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/marketplaceGalleryImages.json
-  - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/networkInterfaces.json
-  - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/storageContainers.json
-  - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/virtualHardDisks.json
-  - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/virtualMachineInstances.json
+  - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/openapi.json
   - Microsoft.AzureStackHCI/operations/preview/2024-02-01-preview/operations.json
 ```
 
@@ -228,15 +221,8 @@ These settings apply only when `--tag=package-2024-02-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2024-02-01-preview'
 input-file:
-  - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/common.json
-  - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/galleryImages.json
-  - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/logicalNetworks.json
-  - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/marketplaceGalleryImages.json
-  - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/networkInterfaces.json
-  - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/networkSecurityGroups.json
-  - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/storageContainers.json
-  - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/virtualHardDisks.json
-  - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/virtualMachineInstances.json
+  - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/openapi.json
+  - Microsoft.AzureStackHCI/operations/preview/2024-02-01-preview/operations.json
 ```
 
 ### Tag: package-preview-2023-12
