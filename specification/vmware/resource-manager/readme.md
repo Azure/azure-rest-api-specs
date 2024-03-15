@@ -191,11 +191,6 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/rotateNsxtPassword"].post
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/rotateVcenterPassword"].post
 
-  # - code: XmsLongRunningOperationOptions
-  #   reason: This option is designed for cases where the server does NOT follow ARM guidelines
-  #   # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
-  #   from: vmware.json
-
   - code: XmsClientName
     reason: False positives. https://github.com/Azure/azure-sdk-tools/issues/7886
     from: vmware.json
