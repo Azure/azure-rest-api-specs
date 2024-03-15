@@ -1,10 +1,10 @@
 {
-  "title": "Create a PipelineGroup instance using a syslog receiver and cache.",
+  "title": "Create a PipelineGroup instance using a syslog receiver",
   "operationId": "PipelineGroups_CreateOrUpdate",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
-    "pipelineGroupName": "myPipelineGroup",
+    "pipelineGroupName": "plGroup1",
     "api-version": "2023-10-01-preview",
     "resource": {
       "location": "eastus2",
@@ -61,10 +61,6 @@
               "concurrency": {
                 "workerCount": 4,
                 "batchQueueSize": 100
-              },
-              "cache": {
-                "maxStorageUsage": 100,
-                "retentionPeriod": 10
               }
             }
           }
@@ -91,8 +87,8 @@
   "responses": {
     "201": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/pipelineGroups/myPipelineGroup",
-        "name": "myPipelineGroup",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/pipelineGroups/plGroup1",
+        "name": "plGroup1",
         "type": "Microsoft.Monitor/pipelineGroup",
         "location": "eastus2",
         "extendedLocation": {
@@ -182,8 +178,8 @@
     },
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/pipelineGroups/myPipelineGroup",
-        "name": "myPipelineGroup",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/pipelineGroups/plGroup1",
+        "name": "plGroup1",
         "type": "Microsoft.Monitor/pipelineGroup",
         "location": "eastus2",
         "extendedLocation": {

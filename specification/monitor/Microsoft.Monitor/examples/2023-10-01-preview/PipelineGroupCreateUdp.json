@@ -1,10 +1,10 @@
 {
-  "title": "Create a PipelineGroup instance using a syslog receiver",
+  "title": "Create a PipelineGroup instance using UDP receiver",
   "operationId": "PipelineGroups_CreateOrUpdate",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
-    "pipelineGroupName": "myPipelineGroup",
+    "pipelineGroupName": "plGroup1",
     "api-version": "2023-10-01-preview",
     "resource": {
       "location": "eastus2",
@@ -19,19 +19,15 @@
       "properties": {
         "receivers": [
           {
-            "type": "Syslog",
-            "name": "syslog-receiver1",
-            "syslog": {
-              "endpoint": "0.0.0.0:514"
+            "type": "UDP",
+            "name": "udp-receiver1",
+            "udp": {
+              "endpoint": "0.0.0.0:518",
+              "encoding": "utf-8"
             }
           }
         ],
-        "processors": [
-          {
-            "type": "Batch",
-            "name": "batch-processor1"
-          }
-        ],
+        "processors": [],
         "exporters": [
           {
             "type": "AzureMonitorWorkspaceLogs",
@@ -70,11 +66,9 @@
             {
               "name": "MyPipelineForLogs1",
               "receivers": [
-                "syslog-receiver1"
+                "udp-receiver1"
               ],
-              "processors": [
-                "batch-processor1"
-              ],
+              "processors": [],
               "exporters": [
                 "my-workspace-logs-exporter1"
               ]
@@ -87,8 +81,8 @@
   "responses": {
     "201": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/pipelineGroups/myPipelineGroup",
-        "name": "myPipelineGroup",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/pipelineGroups/plGroup1",
+        "name": "plGroup1",
         "type": "Microsoft.Monitor/pipelineGroup",
         "location": "eastus2",
         "extendedLocation": {
@@ -103,19 +97,15 @@
           "provisioningState": "Accepted",
           "receivers": [
             {
-              "type": "Syslog",
-              "name": "syslog-receiver1",
-              "syslog": {
-                "endpoint": "0.0.0.0:514"
+              "type": "UDP",
+              "name": "udp-receiver1",
+              "udp": {
+                "endpoint": "0.0.0.0:518",
+                "encoding": "utf-8"
               }
             }
           ],
-          "processors": [
-            {
-              "type": "Batch",
-              "name": "batch-processor1"
-            }
-          ],
+          "processors": [],
           "exporters": [
             {
               "type": "AzureMonitorWorkspaceLogs",
@@ -154,11 +144,9 @@
               {
                 "name": "MyPipelineForLogs1",
                 "receivers": [
-                  "syslog-receiver1"
+                  "udp-receiver1"
                 ],
-                "processors": [
-                  "batch-processor1"
-                ],
+                "processors": [],
                 "exporters": [
                   "my-workspace-logs-exporter1"
                 ]
@@ -169,17 +157,17 @@
         "systemData": {
           "createdBy": "myuser@myorg.com",
           "createdByType": "User",
-          "createdAt": "2023-10-02T18:48:39.6050449Z",
+          "createdAt": "2023-11-17T18:48:39.6050449Z",
           "lastModifiedBy": "myuser@myorg.com",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2023-10-02T18:48:39.6050449Z"
+          "lastModifiedAt": "2023-11-17T18:48:39.6050449Z"
         }
       }
     },
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/pipelineGroups/myPipelineGroup",
-        "name": "myPipelineGroup",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/pipelineGroups/plGroup1",
+        "name": "plGroup1",
         "type": "Microsoft.Monitor/pipelineGroup",
         "location": "eastus2",
         "extendedLocation": {
@@ -194,19 +182,15 @@
           "provisioningState": "Succeeded",
           "receivers": [
             {
-              "type": "Syslog",
-              "name": "syslog-receiver1",
-              "syslog": {
-                "endpoint": "0.0.0.0:514"
+              "type": "UDP",
+              "name": "udp-receiver1",
+              "udp": {
+                "endpoint": "0.0.0.0:518",
+                "encoding": "utf-8"
               }
             }
           ],
-          "processors": [
-            {
-              "type": "Batch",
-              "name": "batch-processor1"
-            }
-          ],
+          "processors": [],
           "exporters": [
             {
               "type": "AzureMonitorWorkspaceLogs",
@@ -245,11 +229,9 @@
               {
                 "name": "MyPipelineForLogs1",
                 "receivers": [
-                  "syslog-receiver1"
+                  "udp-receiver1"
                 ],
-                "processors": [
-                  "batch-processor1"
-                ],
+                "processors": [],
                 "exporters": [
                   "my-workspace-logs-exporter1"
                 ]
@@ -260,10 +242,10 @@
         "systemData": {
           "createdBy": "myuser@myorg.com",
           "createdByType": "User",
-          "createdAt": "2023-10-02T18:48:39.6050449Z",
+          "createdAt": "2023-11-17T18:48:39.6050449Z",
           "lastModifiedBy": "myuser@myorg.com",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2023-10-02T18:48:39.6050449Z"
+          "lastModifiedAt": "2023-11-17T18:48:39.6050449Z"
         }
       }
     }
