@@ -694,28 +694,16 @@ model SecurityRuleProperties {
   @doc("Network protocol this rule applies to.")
   protocol: SecurityRuleProtocol;
 
-  @doc("The source port or range. Integer or range between 0 and 65535. Asterisk '' can also be used to match all ports.")
-  sourcePortRange?: string;
-
-  @doc("The destination port or range. Integer or range between 0 and 65535. Asterisk '' can also be used to match all ports.")
-  destinationPortRange?: string;
-
-  @doc("The CIDR or source IP range. Asterisk '' can also be used to match all source IPs. Default tags such as 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used. If this is an ingress rule, specifies where network traffic originates from.")
-  sourceAddressPrefix?: string;
-
   @doc("The CIDR or source IP ranges.")
   sourceAddressPrefixes?: string[];
-
-  @doc("The destination address prefix. CIDR or destination IP range. Asterisk '' can also be used to match all source IPs. Default tags such as 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used.")
-  destinationAddressPrefix?: string;
 
   @doc("The destination address prefixes. CIDR or destination IP ranges.")
   destinationAddressPrefixes?: string[];
 
-  @doc("The source port ranges.")
+  @doc("The source port ranges. Integer or range between 0 and 65535. Asterisk '' can also be used to match all ports.")
   sourcePortRanges?: string[];
 
-  @doc("The destination port ranges.")
+  @doc("The destination port ranges. Integer or range between 0 and 65535. Asterisk '' can also be used to match all ports.")
   destinationPortRanges?: string[];
 
   @doc("The network traffic is allowed or denied.")
