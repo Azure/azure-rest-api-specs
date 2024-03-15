@@ -212,7 +212,6 @@ value.
 
   @doc("An array of allowed values")
   @minItems(1)
-  @uniqueItems
   allowed?: string[];
 }
 
