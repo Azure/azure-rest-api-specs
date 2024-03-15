@@ -38,25 +38,23 @@ interface VirtualHardDisks {
   @doc("The operation to create or update a virtual hard disk. Please note some properties can be set only during virtual hard disk creation.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     VirtualHardDisk,
-    LroHeaders=ArmAsyncOperationHeader
+    LroHeaders = ArmAsyncOperationHeader
   >;
 
   @doc("The operation to update a virtual hard disk.")
   @parameterVisibility("read")
   update is ArmTagsPatchAsync<
     VirtualHardDisk,
-    LroHeaders=ArmAsyncOperationHeader
+    LroHeaders = ArmAsyncOperationHeader
   >;
 
   @doc("The operation to delete a virtual hard disk.")
   delete is ArmResourceDeleteWithoutOkAsync<
-  VirtualHardDisk,
-  LroHeaders=ArmAsyncOperationHeader
+    VirtualHardDisk,
+    LroHeaders = ArmAsyncOperationHeader
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all of the virtual hard disks in the specified resource group. Use the nextLink property in the response to get the next page of virtual hard disks.")
-  @operationId("VirtualHardDisks_List")
   list is ArmResourceListByParent<VirtualHardDisk>;
 
   @doc("Lists all of the virtual hard disks in the specified subscription. Use the nextLink property in the response to get the next page of virtual hard disks.")

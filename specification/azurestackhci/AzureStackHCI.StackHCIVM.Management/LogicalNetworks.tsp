@@ -32,7 +32,7 @@ model LogicalNetwork is TrackedResource<LogicalNetworkProperties> {
 
 @armResourceOperations
 @projectedName("client", "LogicalNetworks")
-interface logicalNetworks {
+interface LogicalNetworks {
   get is ArmResourceRead<LogicalNetwork>;
 
   @doc("The operation to create or update a logical network. Please note some properties can be set only during logical network creation.")
@@ -55,9 +55,7 @@ interface logicalNetworks {
     LroHeaders = ArmAsyncOperationHeader
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all of the logical networks in the specified resource group. Use the nextLink property in the response to get the next page of logical networks.")
-  @operationId("LogicalNetworks_List")
   list is ArmResourceListByParent<LogicalNetwork>;
 
   @doc("Lists all of the logical networks in the specified subscription. Use the nextLink property in the response to get the next page of logical networks.")

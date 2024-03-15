@@ -38,25 +38,23 @@ interface StorageContainers {
   @doc("The operation to create or update a storage container. Please note some properties can be set only during storage container creation.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     StorageContainer,
-    LroHeaders=ArmAsyncOperationHeader
+    LroHeaders = ArmAsyncOperationHeader
   >;
 
   @doc("The operation to update a storage container.")
   @parameterVisibility("read")
   update is ArmTagsPatchAsync<
     StorageContainer,
-    LroHeaders=ArmAsyncOperationHeader
+    LroHeaders = ArmAsyncOperationHeader
   >;
 
   @doc("The operation to delete a storage container.")
   delete is ArmResourceDeleteWithoutOkAsync<
     StorageContainer,
-    LroHeaders=ArmAsyncOperationHeader
+    LroHeaders = ArmAsyncOperationHeader
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all of the storage containers in the specified resource group. Use the nextLink property in the response to get the next page of storage containers.")
-  @operationId("StorageContainers_List")
   list is ArmResourceListByParent<StorageContainer>;
 
   @doc("Lists all of the storage containers in the specified subscription. Use the nextLink property in the response to get the next page of storage containers.")

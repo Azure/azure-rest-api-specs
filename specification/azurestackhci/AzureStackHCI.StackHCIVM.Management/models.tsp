@@ -565,9 +565,6 @@ model SubnetPropertiesFormat {
 
   @doc("Vlan to use for the subnet")
   vlan?: int32;
-
-  @doc("The reference of the NetworkSecurityGroup resource.")
-  networkSecurityGroup?: NetworkSecurityGroup;
 }
 
 @doc("IPConfigurationReference - Describes a IPConfiguration under the virtual network")
@@ -732,9 +729,6 @@ model NetworkInterfaceProperties {
 
   @doc("DNS Settings for the interface")
   dnsSettings?: InterfaceDNSSettings;
-
-  @doc("The reference to the NetworkSecurityGroup resource.")
-  networkSecurityGroup?: NetworkSecurityGroup;
 
   @doc("Provisioning state of the network interface.")
   @visibility("read")
@@ -926,9 +920,6 @@ model TagsObject {
   @doc("Resource tags.")
   tags?: Record<string>;
 }
-
-@doc("Response for ListSecurityRule API service call. Retrieves all security rules that belongs to a network security group.")
-model SecurityRuleListResult is Azure.Core.Page<SecurityRule>;
 
 @doc("Properties under the storage container resource")
 model StorageContainerProperties {
