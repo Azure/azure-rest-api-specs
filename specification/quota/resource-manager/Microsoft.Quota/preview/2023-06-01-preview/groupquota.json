@@ -731,7 +731,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/groupQuotaRequests": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/groupQuotaRequests/{resourceName}": {
       "put": {
         "tags": [
           "GroupQuotaLimitRequests"
@@ -758,6 +758,9 @@
           },
           {
             "$ref": "#/parameters/ResourceProviderName"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -834,6 +837,9 @@
             "$ref": "#/parameters/ResourceProviderName"
           },
           {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -879,9 +885,6 @@
         }
       },
       "get": {
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "tags": [
           "GroupQuotaLimitRequests"
         ],
@@ -902,6 +905,9 @@
           },
           {
             "$ref": "#/parameters/ResourceProviderName"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1215,7 +1221,7 @@
           "200": {
             "description": "OK. , Create or Update",
             "schema": {
-              "$ref": "#/definitions/SubscriptionQuotaAllocations"
+              "$ref": "#/definitions/QuotaAllocationRequestStatus"
             }
           },
           "201": {
@@ -1296,7 +1302,7 @@
           "200": {
             "description": "Request status details.",
             "schema": {
-              "$ref": "#/definitions/SubscriptionQuotaAllocations"
+              "$ref": "#/definitions/QuotaAllocationRequestStatus"
             }
           },
           "202": {
@@ -2115,24 +2121,29 @@
         }
       ],
       "properties": {
-        "requestedResource": {
-          "description": "Requested Resource.",
-          "$ref": "#/definitions/QuotaAllocationRequestBase"
-        },
-        "requestSubmitTime": {
-          "description": "The request submission time. The date conforms to the following format specified by the ISO 8601 standard: yyyy-MM-ddTHH:mm:ssZ",
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time"
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/RequestState",
-          "readOnly": true
-        },
-        "faultCode": {
-          "type": "string",
-          "description": "Details of the failure.",
-          "readOnly": true
+        "properties": {
+          "type": "object",
+          "properties": {
+            "requestedResource": {
+              "description": "Requested Resource.",
+              "$ref": "#/definitions/QuotaAllocationRequestBase"
+            },
+            "requestSubmitTime": {
+              "description": "The request submission time. The date conforms to the following format specified by the ISO 8601 standard: yyyy-MM-ddTHH:mm:ssZ",
+              "type": "string",
+              "readOnly": true,
+              "format": "date-time"
+            },
+            "provisioningState": {
+              "$ref": "#/definitions/RequestState",
+              "readOnly": true
+            },
+            "faultCode": {
+              "type": "string",
+              "description": "Details of the failure.",
+              "readOnly": true
+            }
+          }
         }
       }
     },
