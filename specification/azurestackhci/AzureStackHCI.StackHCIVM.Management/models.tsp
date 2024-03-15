@@ -254,6 +254,12 @@ enum PowerStateEnum {
   @doc("Virtual machine stopping")
   Stopping,
 
+  @doc("Virtual machine paused")
+  Paused,
+
+  @doc("Virtual machine Saved,")
+  Saved,
+
   @doc("Power state of the virtual machine is unknown")
   Unknown,
 }
