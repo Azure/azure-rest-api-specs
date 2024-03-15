@@ -3,7 +3,7 @@
   "info": {
     "title": "Batch Document Translation Client",
     "version": "v1.0",
-    "description": "// FIXME: (miissing-service-description) Add service description",
+    "description": "Batch document translation service",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -142,7 +142,7 @@
           {
             "name": "$orderBy",
             "in": "query",
-            "description": "the sorting query for the collection (ex: 'CreatedDateTimeUtc asc',\n'CreatedDateTimeUtc desc')",
+            "description": "the sorting query for the collection (ex: 'CreatedDateTimeUtc asc','CreatedDateTimeUtc desc')",
             "required": false,
             "type": "array",
             "items": {
@@ -170,6 +170,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Returns a list of batch requests submitted and the status for each request": {
+            "$ref": "./examples/operations.json"
           }
         },
         "x-ms-pageable": {
@@ -208,6 +213,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Submit a document translation request to the Document Translation service": {
+            "$ref": "./examples/batch.json"
           }
         }
       }
@@ -249,6 +259,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Returns the status for a batch document translation request": {
+            "$ref": "./examples/operation.json"
+          }
         }
       },
       "delete": {
@@ -286,6 +301,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel a currently processing or queued translation": {
+            "$ref": "./examples/cancel.json"
           }
         }
       }
@@ -381,7 +401,7 @@
           {
             "name": "$orderBy",
             "in": "query",
-            "description": "the sorting query for the collection (ex: 'CreatedDateTimeUtc asc',\n'CreatedDateTimeUtc desc')",
+            "description": "the sorting query for the collection (ex: 'CreatedDateTimeUtc asc','CreatedDateTimeUtc desc')",
             "required": false,
             "type": "array",
             "items": {
@@ -409,6 +429,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Returns the status for all documents in a batch document translation request": {
+            "$ref": "./examples/documents.json"
           }
         },
         "x-ms-pageable": {
@@ -461,6 +486,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Returns the status of a single document in a batch translation request": {
+            "$ref": "./examples/document.json"
+          }
         }
       }
     },
@@ -492,6 +522,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Returns a list of supported document formats": {
+            "$ref": "./examples/format.json"
           }
         }
       }
@@ -525,6 +560,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Returns a list of supported glossary formats": {
+            "$ref": "./examples/glossary.json"
+          }
         }
       }
     },
@@ -556,6 +596,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Returns a list of supported storage sources": {
+            "$ref": "./examples/storage.json"
           }
         }
       }

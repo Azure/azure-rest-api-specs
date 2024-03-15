@@ -25,12 +25,12 @@ using Azure.Core.Traits;
 })
 @server(
   "{endpoint}/translator/text/batch/v1.0",
-  "// FIXME: (miissing-service-description) Add service description",
+  "Batch document translation service endpoint",
   {
     endpoint: string,
   }
 )
-@doc("// FIXME: (miissing-service-description) Add service description")
+@doc("Batch document translation service")
 @versioned(DocumentTranslationClient.Versions)
 namespace DocumentTranslationClient;
 

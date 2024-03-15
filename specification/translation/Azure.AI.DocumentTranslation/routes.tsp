@@ -173,10 +173,7 @@ if the specified page size is smaller than the server's default page size.
       @query("createdDateTimeUtcEnd")
       createdDateTimeUtcEnd?: utcDateTime;
 
-      @doc("""
-the sorting query for the collection (ex: 'CreatedDateTimeUtc asc',
-'CreatedDateTimeUtc desc')
-""")
+      @doc("the sorting query for the collection (ex: 'CreatedDateTimeUtc asc','CreatedDateTimeUtc desc')")
       @query({
         name: "$orderBy",
         format: "csv",
@@ -381,10 +378,7 @@ if the specified page size is smaller than the server's default page size.
       @query("createdDateTimeUtcEnd")
       createdDateTimeUtcEnd?: utcDateTime;
 
-      @doc("""
-the sorting query for the collection (ex: 'CreatedDateTimeUtc asc',
-'CreatedDateTimeUtc desc')
-""")
+      @doc("the sorting query for the collection (ex: 'CreatedDateTimeUtc asc','CreatedDateTimeUtc desc')")
       @query({
         name: "$orderBy",
         format: "csv",
