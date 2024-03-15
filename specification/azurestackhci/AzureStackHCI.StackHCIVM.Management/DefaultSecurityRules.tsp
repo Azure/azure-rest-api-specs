@@ -23,7 +23,7 @@ model DefaultSecurityRule is TrackedResource<SecurityRuleProperties> {
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$")
   @path
   @key("defaultSecurityRuleName")
-  @segment("networkSecurityGroups")
+  @segment("defaultsecurityrules")
   @visibility("read")
   name: string;
 
