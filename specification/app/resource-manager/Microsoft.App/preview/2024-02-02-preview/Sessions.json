@@ -58,13 +58,6 @@
             "maxLength": 63
           },
           {
-            "name": "count",
-            "in": "query",
-            "description": "How many Sessions to generate.",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
             "name": "sessionEnvelope",
             "in": "body",
             "description": "Properties used to generate a session",
@@ -335,12 +328,17 @@
       ],
       "properties": {
         "properties": {
-          "description": "Session resource specific properties",
+          "description": "Session resource specific properties.",
           "type": "object",
           "properties": {
             "name": {
               "description": "The name of the Session.",
               "type": "string"
+            },
+            "count": {
+              "description": "The number of Sessions to generate.",
+              "type": "integer",
+              "format": "int32"
             },
             "requestedDurationInSeconds": {
               "description": "The requested duration of the Session in seconds.",

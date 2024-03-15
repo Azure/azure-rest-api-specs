@@ -4,10 +4,10 @@
     "resourceGroupName": "rg",
     "sessionPoolName": "testsessionpool",
     "api-version": "2024-02-02-preview",
-    "count": 1,
     "sessionEnvelope": {
       "properties": {
         "name": "testsession",
+        "count": 20,
         "requestedDurationInSeconds": 3600,
         "timeElapsedInSeconds": 3600,
         "sessionKind": "CustomImage",
@@ -33,6 +33,7 @@
             "type": "Microsoft.App/sessionpools/sessions",
             "properties": {
               "name": "testsession",
+              "count": 20,
               "requestedDurationInSeconds": 3600,
               "timeElapsedInSeconds": 3600,
               "expiryTime": "2023-08-02T00:00:00Z",
