@@ -476,6 +476,21 @@
         "ipv4Gateway": {
           "$ref": "./ts29571.json#/definitions/Ipv4Addr",
           "description": "The default IPv4 gateway (router)."
+        },
+        "vlanId": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 4094,
+          "description": "VLAN identifier of the network interface. Example: 501."
+        },
+        "ipv4AddressList": {
+          "type": "array",
+          "items": {
+            "$ref": "./ts29571.json#/definitions/Ipv4Addr"
+          },
+          "x-ms-identifiers": [],
+          "description": "The list of IPv4 addresses, for a multi-node system."
         }
       },
       "description": "Interface properties"
