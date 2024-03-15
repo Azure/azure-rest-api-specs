@@ -198,10 +198,6 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
               }
             }
           },
@@ -269,9 +265,9 @@
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -315,9 +311,9 @@
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -370,6 +366,11 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "GetAttestationStatus": {
+            "$ref": "./examples/AttestationStatuses_Get.json"
+          }
         }
       }
     },
@@ -400,6 +401,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GuestAgentListByVirtualMachineInstances": {
+            "$ref": "./examples/GuestAgents_ListByVirtualMachineInstance.json"
           }
         },
         "x-ms-pageable": {
@@ -434,6 +440,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetGuestAgent": {
+            "$ref": "./examples/GuestAgents_Get.json"
           }
         }
       },
@@ -477,10 +488,6 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
               }
             }
           },
@@ -489,6 +496,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CreateGuestAgent": {
+            "$ref": "./examples/GuestAgents_Create.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -535,6 +547,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DeleteGuestAgent": {
+            "$ref": "./examples/GuestAgents_Delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -568,6 +585,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "HybridIdentityMetadataListByVirtualMachineInstances": {
+            "$ref": "./examples/HybridIdentityMetadata_ListByVirtualMachineInstance.json"
           }
         },
         "x-ms-pageable": {
@@ -606,7 +628,7 @@
         },
         "x-ms-examples": {
           "GetHybridIdentityMetadata": {
-            "$ref": "./examples/HybridIdentityMetadata_Get.json"
+            "$ref": "./examples/HybridIdentityMetadataGroup_Get.json"
           }
         }
       }
@@ -1187,6 +1209,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListGalleryImageByResourceGroup": {
+            "$ref": "./examples/GalleryImages_ListByResourceGroup.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1293,10 +1320,6 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
               }
             }
           },
@@ -1368,9 +1391,9 @@
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1427,9 +1450,9 @@
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1484,6 +1507,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListLogicalNetworkByResourceGroup": {
+            "$ref": "./examples/LogicalNetworks_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -1592,10 +1620,6 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
               }
             }
           },
@@ -1667,9 +1691,9 @@
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1726,9 +1750,9 @@
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1891,10 +1915,6 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
               }
             }
           },
@@ -1966,9 +1986,9 @@
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -2025,9 +2045,9 @@
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -2082,6 +2102,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListNetworkInterfaceByResourceGroup": {
+            "$ref": "./examples/NetworkInterfaces_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -2190,10 +2215,6 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
               }
             }
           },
@@ -2265,9 +2286,9 @@
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -2324,9 +2345,9 @@
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -2381,6 +2402,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List network security groups in resource group": {
+            "$ref": "./examples/NetworkSecurityGroups_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -2489,10 +2515,6 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
               }
             }
           },
@@ -2608,9 +2630,9 @@
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -2783,6 +2805,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List network security rules in network security group": {
+            "$ref": "./examples/SecurityRules_ListByNetworkSecurityGroup.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2909,10 +2936,6 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
               }
             }
           },
@@ -2974,9 +2997,9 @@
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -3026,6 +3049,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListStorageContainerByResourceGroup": {
+            "$ref": "./examples/StorageContainers_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -3134,10 +3162,6 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
               }
             }
           },
@@ -3209,9 +3233,9 @@
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -3268,9 +3292,9 @@
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -3325,6 +3349,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ListVirtualHardDiskByResourceGroup": {
+            "$ref": "./examples/VirtualHardDisks_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -3433,10 +3462,6 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
               }
             }
           },
@@ -3508,9 +3533,9 @@
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -3567,9 +3592,9 @@
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               },
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -5834,6 +5859,11 @@
         "direction": {
           "$ref": "#/definitions/SecurityRuleDirection",
           "description": "The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningStateEnum",
+          "description": "Provisioning state of the virtual machine instance.",
+          "readOnly": true
         }
       },
       "required": [

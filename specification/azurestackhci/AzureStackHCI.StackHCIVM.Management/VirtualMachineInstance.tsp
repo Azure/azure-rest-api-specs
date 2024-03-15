@@ -36,24 +36,17 @@ interface VirtualMachineInstances {
   get is ArmResourceRead<VirtualMachineInstance>;
 
   @doc("The operation to create or update a virtual machine instance. Please note some properties can be set only during virtual machine instance creation.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    VirtualMachineInstance,
-    LroHeaders = ArmAsyncOperationHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualMachineInstance>;
 
   @doc("The operation to update a virtual machine instance.")
   @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     VirtualMachineInstance,
-    VirtualMachineInstanceUpdateRequest,
-    LroHeaders = ArmAsyncOperationHeader
+    VirtualMachineInstanceUpdateRequest
   >;
 
   @doc("The operation to delete a virtual machine instance.")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    VirtualMachineInstance,
-    LroHeaders = ArmAsyncOperationHeader
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<VirtualMachineInstance>;
 
   @doc("Lists all of the virtual machine instances within the specified parent resource.")
   list is ArmResourceListByParent<VirtualMachineInstance>;
@@ -61,35 +54,30 @@ interface VirtualMachineInstances {
   @doc("The operation to start a virtual machine instance.")
   start is ArmResourceActionNoResponseContentAsync<
     VirtualMachineInstance,
-    Request = void,
-    LroHeaders = ArmLroLocationHeader
+    Request = void
   >;
 
   @doc("The operation to stop a virtual machine instance.")
   stop is ArmResourceActionNoResponseContentAsync<
     VirtualMachineInstance,
-    Request = void,
-    LroHeaders = ArmLroLocationHeader
+    Request = void
   >;
 
   @doc("The operation to restart a virtual machine instance.")
   restart is ArmResourceActionNoResponseContentAsync<
     VirtualMachineInstance,
-    Request = void,
-    LroHeaders = ArmLroLocationHeader
+    Request = void
   >;
 
   @doc("The operation to pause a virtual machine instance.")
   pause is ArmResourceActionNoResponseContentAsync<
     VirtualMachineInstance,
-    Request = void,
-    LroHeaders = ArmLroLocationHeader
+    Request = void
   >;
 
   @doc("The operation to save a virtual machine instance.")
   save is ArmResourceActionNoResponseContentAsync<
     VirtualMachineInstance,
-    Request = void,
-    LroHeaders = ArmLroLocationHeader
+    Request = void
   >;
 }

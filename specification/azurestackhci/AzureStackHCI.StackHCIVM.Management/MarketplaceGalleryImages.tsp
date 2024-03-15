@@ -38,23 +38,14 @@ interface MarketplaceGalleryImages {
   get is ArmResourceRead<MarketplaceGalleryImage>;
 
   @doc("The operation to create or update a marketplace gallery image. Please note some properties can be set only during marketplace gallery image creation.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    MarketplaceGalleryImage,
-    LroHeaders = ArmAsyncOperationHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<MarketplaceGalleryImage>;
 
   @doc("The operation to update a marketplace gallery image.")
   @parameterVisibility("read")
-  update is ArmCustomPatchAsync<
-    MarketplaceGalleryImage,
-    LroHeaders = ArmAsyncOperationHeader
-  >;
+  update is ArmCustomPatchAsync<MarketplaceGalleryImage>;
 
   @doc("The operation to delete a marketplace gallery image.")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    MarketplaceGalleryImage,
-    LroHeaders = ArmAsyncOperationHeader
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<MarketplaceGalleryImage>;
 
   @doc("Lists all of the marketplace gallery images in the specified resource group. Use the nextLink property in the response to get the next page of marketplace gallery images.")
   list is ArmResourceListByParent<MarketplaceGalleryImage>;

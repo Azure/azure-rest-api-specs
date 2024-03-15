@@ -25,7 +25,7 @@ model NetworkSecurityGroup is TrackedResource<NetworkSecurityGroupProperties> {
   @visibility("read")
   name: string;
 
-  ...EntityTag
+  ...EntityTag;
 }
 
 @armResourceOperations
@@ -34,20 +34,14 @@ interface NetworkSecurityGroups {
   get is ArmResourceRead<NetworkSecurityGroup>;
 
   @doc("Creates or updates a network security group in the specified resource group.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    NetworkSecurityGroup,
-    LroHeaders=ArmAsyncOperationHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkSecurityGroup>;
 
   @doc("Updates a network security group tags.")
   @parameterVisibility("read")
   updateTags is ArmCustomPatchSync<NetworkSecurityGroup, TagsObject>;
 
   @doc("Deletes the specified network security group.")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    NetworkSecurityGroup,
-    LroHeaders=ArmAsyncOperationHeader
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<NetworkSecurityGroup>;
 
   @doc("Gets all network security groups in a resource group.")
   list is ArmResourceListByParent<NetworkSecurityGroup>;
@@ -55,4 +49,3 @@ interface NetworkSecurityGroups {
   @doc("Gets all network security groups in a subscription.")
   listAll is ArmListBySubscription<NetworkSecurityGroup>;
 }
-

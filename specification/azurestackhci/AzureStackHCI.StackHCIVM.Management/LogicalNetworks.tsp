@@ -36,24 +36,14 @@ interface LogicalNetworks {
   get is ArmResourceRead<LogicalNetwork>;
 
   @doc("The operation to create or update a logical network. Please note some properties can be set only during logical network creation.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    LogicalNetwork,
-    LroHeaders = ArmAsyncOperationHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<LogicalNetwork>;
 
   @doc("The operation to update a logical network.")
   @parameterVisibility("read")
-  update is ArmCustomPatchAsync<
-    LogicalNetwork,
-    LogicalNetworksUpdateRequest,
-    LroHeaders = ArmAsyncOperationHeader
-  >;
+  update is ArmCustomPatchAsync<LogicalNetwork, LogicalNetworksUpdateRequest>;
 
   @doc("The operation to delete a logical network.")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    LogicalNetwork,
-    LroHeaders = ArmAsyncOperationHeader
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<LogicalNetwork>;
 
   @doc("Lists all of the logical networks in the specified resource group. Use the nextLink property in the response to get the next page of logical networks.")
   list is ArmResourceListByParent<LogicalNetwork>;

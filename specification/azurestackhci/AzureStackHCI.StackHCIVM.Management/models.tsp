@@ -726,6 +726,10 @@ model SecurityRuleProperties {
 
   @doc("The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic.")
   direction: SecurityRuleDirection;
+
+  @doc("Provisioning state of the virtual machine instance.")
+  @visibility("read")
+  provisioningState?: ProvisioningStateEnum;
 }
 
 @doc("Properties under the network interface resource")

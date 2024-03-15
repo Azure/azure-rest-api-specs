@@ -9,22 +9,16 @@
       "body": {
         "value": [
           {
-            "name": "test-vhd",
-            "type": "Microsoft.AzureStackHCI/virtualHardDisks",
+            "name": "Default_Container",
+            "type": "Microsoft.AzureStackHCI/storageContainers",
             "extendedLocation": {
               "name": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location",
               "type": "CustomLocation"
             },
-            "id": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/virtualHardDisks/test-vhd",
+            "id": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/storageContainers/Default_Container",
             "location": "West US2",
             "properties": {
-              "blockSizeBytes": 0,
-              "diskFileFormat": "vhdx",
-              "diskSizeGB": 32,
-              "dynamic": true,
-              "hyperVGeneration": "V2",
-              "logicalSectorBytes": 512,
-              "physicalSectorBytes": 512,
+              "path": "C:\\container_storage",
               "provisioningState": "Accepted"
             }
           }
@@ -32,6 +26,6 @@
       }
     }
   },
-  "operationId": "VirtualHardDisks_List",
-  "title": "ListVirtualHardDiskByResourceGroup"
+  "operationId": "StorageContainers_ListByResourceGroup",
+  "title": "ListStorageContainerByResourceGroup"
 }
