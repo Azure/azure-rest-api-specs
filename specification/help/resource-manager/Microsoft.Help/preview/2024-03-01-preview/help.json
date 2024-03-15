@@ -149,13 +149,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Create or Update diagnostics successfully.",
             "schema": {
               "$ref": "#/definitions/DiagnosticResource"
             }
           },
-          "200": {
+          "201": {
             "description": "Create or Update diagnostics successfully.",
             "schema": {
               "$ref": "#/definitions/DiagnosticResource"
@@ -212,7 +212,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Help/discoverySolutions": {
+    "/providers/Microsoft.Help/discoverySolutions": {
       "get": {
         "tags": [
           "discoverySolutions"
@@ -220,9 +220,6 @@
         "description": "Lists the relevant Azure diagnostics and solutions using [problemClassification API](https://learn.microsoft.com/rest/api/support/problem-classifications/list?tabs=HTTP)) AND  resourceUri or resourceType.<br/> Discovery Solutions is the initial entry point within Help API, which identifies relevant Azure diagnostics and solutions. <br/><br/> Required Input :  problemClassificationId (Use the [problemClassification API](https://learn.microsoft.com/rest/api/support/problem-classifications/list?tabs=HTTP)) <br/>Optional input: resourceUri OR resource Type <br/><br/> <b>Note: </b>  ‘requiredInputs’ from Discovery solutions response must be passed via ‘additionalParameters’ as an input to Diagnostics and Solutions API.",
         "operationId": "DiscoverySolution_List",
         "parameters": [
-          {
-            "$ref": "#/parameters/ScopeParameter"
-          },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
@@ -252,10 +249,7 @@
         },
         "x-ms-examples": {
           "List DiscoverySolutions at resource scope": {
-            "$ref": "./examples/ListDiscoverySolutionsAtResourceScope.json"
-          },
-          "List DiscoverySolutions at subscription scope": {
-            "$ref": "./examples/ListDiscoverySolutionsAtSubscriptionScope.json"
+            "$ref": "./examples/ListDiscoverySolutionsAtTenantScope.json"
           }
         }
       }
@@ -291,13 +285,13 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Create or Update solution invocation.",
             "schema": {
               "$ref": "#/definitions/SolutionResource"
             }
           },
-          "200": {
+          "201": {
             "description": "Create or Update solution invocation.",
             "schema": {
               "$ref": "#/definitions/SolutionResource"
@@ -383,7 +377,7 @@
           }
         ],
         "responses": {
-          "202": {
+          "200": {
             "description": "Successful updated solution resource.",
             "headers": {
               "Location": {
@@ -394,7 +388,7 @@
               "$ref": "#/definitions/SolutionResource"
             }
           },
-          "200": {
+          "202": {
             "description": "Successful updated solution resource.",
             "headers": {
               "Location": {
@@ -415,6 +409,55 @@
         "x-ms-examples": {
           "Solution_Update": {
             "$ref": "./examples/Solution_Update.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Help/solutions/{solutionResourceName}/warmup": {
+      "post": {
+        "tags": [
+          "solutions"
+        ],
+        "description": "Warm up the solution resource by preloading asynchronous diagnostics results into cache",
+        "operationId": "Solution_WarmUp",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/SolutionResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "solutionWarmUpRequestBody",
+            "description": "The required request body for warming up a solution resource.",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SolutionWarmUpRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully warmed up the solution resource",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Troubleshooter_Continue": {
+            "$ref": "./examples/Solution_WarmUp.json"
           }
         }
       }
@@ -446,14 +489,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Successful Troubleshooter create invocation.",
+          "200": {
+            "description": "Successful Troubleshooter update invocation.",
             "schema": {
               "$ref": "#/definitions/TroubleshooterResource"
             }
           },
-          "200": {
-            "description": "Successful Troubleshooter update invocation.",
+          "201": {
+            "description": "Successful Troubleshooter create invocation.",
             "schema": {
               "$ref": "#/definitions/TroubleshooterResource"
             }
@@ -639,6 +682,127 @@
         "x-ms-examples": {
           "Troubleshooters_Restart": {
             "$ref": "./examples/Troubleshooter_Restart.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Help/SelfHelp/{SolutionId}": {
+      "get": {
+        "tags": [
+          "SelfHelpSolutions"
+        ],
+        "description": "Finds and Executes a Self Help Solution based on the Solution Id. These are static self help content to help users troubleshoot their issues.",
+        "operationId": "SelfHelpSolution_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SolutionId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful fetched solution result.",
+            "schema": {
+              "$ref": "#/definitions/SelfHelpSolutionResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Solution_Get": {
+            "$ref": "./examples/SelfHelpSolution_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Help/discoverSolutions": {
+      "post": {
+        "tags": [
+          "discoverySolutions"
+        ],
+        "description": "Solution discovery using natural language processing.",
+        "operationId": "DiscoverySolutionTenantScope_Post",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "discoverSolutionRequest",
+            "description": "Request body for discovering solutions using NLP.",
+            "schema": {
+              "$ref": "#/definitions/DiscoveryNlpRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful fetched list of solution metadata.",
+            "schema": {
+              "$ref": "#/definitions/DiscoveryNlpResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Discovery Solutions using issue summary and service id.": {
+            "$ref": "./examples/DiscoverSolutionsAtTenantScope.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Help/discoverSolutions": {
+      "post": {
+        "tags": [
+          "discoverySolutions"
+        ],
+        "description": "Solution discovery using natural language processing.",
+        "operationId": "DiscoverySolutionSubscriptionScope_Post",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "discoverSolutionRequest",
+            "description": "Request body for discovering solutions using NLP.",
+            "schema": {
+              "$ref": "#/definitions/DiscoveryNlpRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful fetched list of solution metadata.",
+            "schema": {
+              "$ref": "#/definitions/DiscoveryNlpResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Discovery Solutions using issue summary and service id.": {
+            "$ref": "./examples/DiscoverSolutionsAtSubscriptionScope.json"
           }
         }
       }
@@ -948,7 +1112,9 @@
       "readOnly": true,
       "enum": [
         "Diagnostics",
-        "Solutions"
+        "Solutions",
+        "Troubleshooters",
+        "SelfHelp"
       ],
       "x-ms-enum": {
         "name": "SolutionType",
@@ -961,6 +1127,14 @@
           {
             "value": "Solutions",
             "description": "Solutions resource type."
+          },
+          {
+            "value": "Troubleshooters",
+            "description": "Troubleshooters resource type."
+          },
+          {
+            "value": "SelfHelp",
+            "description": "SelfHelp resource type."
           }
         ]
       }
@@ -989,13 +1163,26 @@
       }
     },
     "SolutionPatchRequestBody": {
-      "description": "Solution response",
+      "description": "Solution PatchRequest body",
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
         "properties": {
           "$ref": "#/definitions/SolutionResourceProperties",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SolutionWarmUpRequestBody": {
+      "description": "Solution WarmUpRequest body",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1276,6 +1463,10 @@
           "description": "Place holder used in HTML Content replace control with the content",
           "type": "string"
         },
+        "estimatedCompletionTime": {
+          "description": "Diagnostics estimated completion time in minutes",
+          "type": "string"
+        },
         "requiredParameters": {
           "description": "Required parameters of this item",
           "type": "array",
@@ -1446,6 +1637,105 @@
         }
       }
     },
+    "SelfHelpSolutionResource": {
+      "description": "Self Help Solution response.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SelfHelpSolutionsResourceProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SelfHelpSolutionsResourceProperties": {
+      "description": "Solution result",
+      "type": "object",
+      "properties": {
+        "solutionId": {
+          "description": "SolutionId is a unique id to identify a solution. You can retrieve the solution id using the Discovery api - https://learn.microsoft.com/en-us/rest/api/help/discovery-solution/list?view=rest-help-2023-09-01-preview&tabs=HTTP",
+          "readOnly": true,
+          "type": "string"
+        },
+        "title": {
+          "description": "The title.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "content": {
+          "description": "The HTML content that needs to be rendered and shown to customer.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "replacementMaps": {
+          "$ref": "#/definitions/SelfHelpReplacementMaps",
+          "readOnly": true
+        },
+        "sections": {
+          "description": "List of section object.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SelfHelpSection"
+          },
+          "x-ms-identifiers": [
+            "title"
+          ]
+        }
+      }
+    },
+    "SelfHelpSection": {
+      "description": "Part of the solution and are dividers in the solution rendering.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "description": "Solution sections title.",
+          "type": "string"
+        },
+        "content": {
+          "description": "Solution sections content.",
+          "type": "string"
+        },
+        "replacementMaps": {
+          "$ref": "#/definitions/SelfHelpReplacementMaps"
+        }
+      }
+    },
+    "SelfHelpReplacementMaps": {
+      "description": "Solution replacement maps.",
+      "type": "object",
+      "properties": {
+        "webResults": {
+          "description": "Solution AzureKB results",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebResult"
+          },
+          "x-ms-identifiers": []
+        },
+        "videos": {
+          "description": "Video solutions, which have the power to engage the customer by stimulating their senses",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Video"
+          },
+          "x-ms-identifiers": []
+        },
+        "videoGroups": {
+          "description": "Group of Videos",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VideoGroup"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "ContinueRequestBody": {
       "description": "Troubleshooter ContinueRequest body.",
       "type": "object",
@@ -1601,7 +1891,8 @@
             "Decision",
             "Solution",
             "Insight",
-            "AutomatedCheck"
+            "AutomatedCheck",
+            "Input"
           ],
           "x-ms-enum": {
             "name": "type",
@@ -1642,6 +1933,14 @@
       "description": "Only for AutomatedStep type",
       "type": "object",
       "properties": {
+        "version": {
+          "description": "Version for automated check result",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status for automated check result",
+          "type": "string"
+        },
         "result": {
           "description": "Insight Article Content",
           "type": "string"
@@ -1672,6 +1971,10 @@
         },
         "questionType": {
           "$ref": "#/definitions/QuestionType"
+        },
+        "questionTitle": {
+          "description": "Question title",
+          "type": "string"
         },
         "questionContent": {
           "description": "User question content.",
@@ -1723,6 +2026,21 @@
         "regex": {
           "description": "Regex used for the input validation.",
           "type": "string"
+        },
+        "validationScope": {
+          "description": "Validation scope",
+          "type": "string",
+          "enum": [
+            "None",
+            "URLFormat",
+            "GuidFormat",
+            "IpAddressFormat",
+            "NumberOnlyFormat"
+          ],
+          "x-ms-enum": {
+            "name": "validationScope",
+            "modelAsString": true
+          }
         },
         "isRequired": {
           "description": "Default True",
@@ -1777,7 +2095,9 @@
         "RadioButton",
         "Dropdown",
         "TextInput",
-        "MultiLineInfoBox"
+        "MultiLineInfoBox",
+        "DateTimePicker",
+        "MultiSelect"
       ],
       "x-ms-enum": {
         "name": "questionType",
@@ -1798,6 +2118,14 @@
           {
             "value": "MultiLineInfoBox",
             "description": "MultiLineInfoBox"
+          },
+          {
+            "value": "DateTimePicker",
+            "description": "DateTime Picker"
+          },
+          {
+            "value": "MultiSelect",
+            "description": "Multi Select"
           }
         ]
       }
@@ -1846,9 +2174,125 @@
           }
         }
       }
+    },
+    "DiscoveryNlpRequest": {
+      "description": "Discover NLP request.",
+      "type": "object",
+      "properties": {
+        "issueSummary": {
+          "description": "Describe the issue with the affected resource.",
+          "type": "string"
+        },
+        "resourceId": {
+          "description": "Provide resourceId of affected resource",
+          "type": "string"
+        },
+        "serviceId": {
+          "description": "Service Classification id for the resource. You can find required serviceId from Services API: https://learn.microsoft.com/rest/api/support/services/list?tabs=HTTP Service Id is the GUID which can be found under name field in Services List response",
+          "type": "string"
+        },
+        "additionalContext": {
+          "description": "Additional information in the form of a string.",
+          "type": "string"
+        }
+      }
+    },
+    "DiscoveryNlpResponse": {
+      "description": "Discovery Nlp response.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of solution metadata.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SolutionNlpMetadataResource"
+          }
+        }
+      }
+    },
+    "SolutionNlpMetadataResource": {
+      "description": "Nlp Metadata resource",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NlpSolutions",
+          "description": "Solution metadata Resource properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NlpSolutions": {
+      "description": "Nlp metadata.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "description": "Title for given ProblemClassificationId",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description for given ProblemClassificationId",
+          "type": "string"
+        },
+        "solutions": {
+          "description": "The list of solution metadata.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SolutionMetadataProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "relatedServices": {
+          "description": "The list of solution metadata.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClassificationService"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ClassificationService": {
+      "description": "Service Classification result object.",
+      "type": "object",
+      "properties": {
+        "serviceId": {
+          "description": "Azure resource Id of the service.",
+          "type": "string",
+          "format": "arm-id",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Localized name of the azure service.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceTypes": {
+          "description": "List of applicable ARM resource types for this service.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   "parameters": {
+    "SolutionId": {
+      "name": "SolutionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "SolutionId is a unique id to identify a solution. You can retrieve the solution id using the Discovery api - https://learn.microsoft.com/en-us/rest/api/help/discovery-solution/list?view=rest-help-2023-09-01-preview&tabs=HTTP",
+      "x-ms-parameter-location": "method",
+      "minLength": 1,
+      "maxLength": 100
+    },
     "SolutionResourceNameParameter": {
       "name": "solutionResourceName",
       "in": "path",
