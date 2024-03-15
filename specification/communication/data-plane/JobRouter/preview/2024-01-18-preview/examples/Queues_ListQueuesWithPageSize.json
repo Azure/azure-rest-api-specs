@@ -1,0 +1,34 @@
+{
+  "title": "Retrieves existing queues",
+  "operationId": "JobRouterAdministrationOperations_ListQueues",
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2024-01-18-preview",
+    "maxpagesize": 2
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "MainQueue",
+            "name": "Main",
+            "distributionPolicyId": "MainDistributionPolicy",
+            "labels": {},
+            "exceptionPolicyId": "MainExceptionPolicy",
+            "etag": "etag"
+          },
+          {
+            "id": "SecondaryQueue",
+            "name": "Secondary",
+            "distributionPolicyId": "SecondaryDistributionPolicy",
+            "labels": {},
+            "exceptionPolicyId": "SecondaryExceptionPolicy",
+            "etag": "etag"
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}
