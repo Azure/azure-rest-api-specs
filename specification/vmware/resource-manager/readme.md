@@ -293,8 +293,14 @@ suppressions:
   # - code: DeleteResponseCodes
   #   reasons: ArmResourceDeleteAsync is still being used. Moving to ArmResourceDeleteWithoutOkAsync is breaking.
 
-  # - code: PatchBodyParametersSchema
-  #   reasons: False positives. https://github.com/Azure/azure-sdk-tools/issues/7802
+  - code: PatchBodyParametersSchema
+    reasons: False positives. https://github.com/Azure/azure-sdk-tools/issues/7802
+    from: vmware.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"].patch.parameters[4].schema.properties.identity
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"].patch.parameters[4].schema.properties.sku
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}"].patch.parameters[5].schema.properties.sku
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dhcpConfigurations/{dhcpId}"].patch.parameters[5].schema.properties.properties
 
   # - code: EvenSegmentedPathForPutOperation
   #   reasons: False positives. https://github.com/Azure/azure-sdk-tools/issues/7801
