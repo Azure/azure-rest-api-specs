@@ -95,6 +95,15 @@ tag: package-composite-v3
 The following packages may be composed from multiple api-versions.
 
 
+### Tag: package-preview-2023-12
+
+These settings apply only when `--tag=package-preview-2023-12` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-12'
+input-file:
+  - Microsoft.Security/preview/2023-12-01-preview/securityContacts.json
+  - Microsoft.Security/preview/2023-12-01-preview/automations.json
+```
 ### Tag: package-2023-11-15
 
 These settings apply only when `--tag=package-2023-11-15` is specified on the command line.
@@ -108,7 +117,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-10'
+``` yaml $(tag) == 'package-preview-2023-10'
 input-file:
   - Microsoft.Security/preview/2023-10-01-preview/securityConnectors.json
 ```
@@ -117,7 +126,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-09'
+``` yaml $(tag) == 'package-preview-2023-09'
 input-file:
   - Microsoft.Security/preview/2023-09-01-preview/securityConnectorsDevOps.json
 suppressions:
@@ -426,11 +435,11 @@ input-file:
 - Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json
 - Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
 - Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
-- Microsoft.Security/preview/2019-01-01-preview/automations.json
+- Microsoft.Security/preview/2023-12-01-preview/automations.json
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
-- Microsoft.Security/preview/2020-01-01-preview/securityContacts.json
+- Microsoft.Security/preview/2023-12-01-preview/securityContacts.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
 - Microsoft.Security/preview/2021-07-01-preview/customAssessmentAutomation.json
 - Microsoft.Security/preview/2021-07-01-preview/customEntityStoreAssignment.json
