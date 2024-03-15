@@ -21118,7 +21118,7 @@
           "format": "arm-id",
           "description": "[Required] arm-id of the code asset.",
           "minLength": 1,
-          "pattern": "^[a-zA-Z0-9/._-]+$",
+          "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
             "create",
@@ -21152,6 +21152,7 @@
           ]
         },
         "environmentId": {
+          "format": "arm-id",
           "description": "The ARM resource ID of the Environment specification for the job.",
           "type": "string",
           "x-ms-mutability": [
@@ -21311,7 +21312,7 @@
         "file": {
           "description": "[Required] Relative python file path for job entry point.",
           "minLength": 1,
-          "pattern": "^[a-zA-Z0-9/._-]+$",
+          "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "example": "train.py",
           "x-ms-mutability": [
