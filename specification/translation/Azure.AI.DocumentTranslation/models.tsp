@@ -264,7 +264,6 @@ model TranslationsStatus {
 
   @doc("Url for the next page.  Null if no more pages available")
   @nextLink
-  @projectedName("json", "@nextLink")
   nextLink?: string;
 }
 
@@ -366,7 +365,6 @@ model DocumentsStatus {
 
   @doc("Url for the next page.  Null if no more pages available")
   @nextLink
-  @projectedName("json", "@nextLink")
   nextLink?: string;
 }
 
