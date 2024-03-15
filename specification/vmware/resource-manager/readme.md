@@ -167,10 +167,6 @@ suppressions:
     # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
     from: vmware.json
 
-  # - code: PatchSkuProperty
-  #   reason: sku can not be updated
-  #   from: vmware.json
-
   - code: PatchResponseCodes
     reason: PrivateClouds_Update and Clusters_Update respond with 201 instead of 202. Changing it is breaking.
     from: vmware.json
@@ -178,12 +174,12 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"].patch
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}"].patch
 
-  # - code: LroPatch202
-  #   reason: PrivateClouds_Update and Clusters_Update respond with 201 instead of 202. Changing it is breaking.
-  #   from: vmware.json
-    # where:
-    #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"].patch
-    #   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}"].patch
+  - code: LroPatch202
+    reason: PrivateClouds_Update and Clusters_Update respond with 201 instead of 202. Changing it is breaking.
+    from: vmware.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"].patch.responses
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}"].patch.responses
 
   - code: PostResponseCodes
     reason: PrivateClouds_RotateNsxtPassword & PrivateClouds_RotateVcenterPassword respond with 202 & 204. Changing it is breaking.
