@@ -1216,7 +1216,7 @@ model VirtualMachineInstancePropertiesSecurityProfile {
   @doc("Enable TPM flag")
   enableTPM?: boolean;
 
-  @doc("Uefisettings")
+  @doc("Uefisettings of the virtual machine instance")
   uefiSettings?: VirtualMachineInstancePropertiesSecurityProfileUefiSettings;
 
   @doc("Specifies the SecurityType of the virtual machine. EnableTPM and SecureBootEnabled must be set to true for SecurityType to function.")

@@ -1809,6 +1809,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ListMarketplaceGalleryImageByResourceGroup": {
+            "$ref": "./examples/MarketplaceGalleryImages_ListByResourceGroup.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -3621,6 +3626,28 @@
     }
   },
   "definitions": {
+    "AADToken": {
+      "type": "object",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "OAuth2 authentication",
+          "enum": [
+            "oauth2"
+          ]
+        },
+        "flows": {
+          "type": "array",
+          "description": "Supported OAuth2 flows",
+          "items": {}
+        }
+      },
+      "required": [
+        "type",
+        "flows"
+      ]
+    },
     "AttestBootIntegrityPropertyEnum": {
       "type": "string",
       "description": "The status of whether the list of boot integrity properties is validated.",
@@ -6769,7 +6796,7 @@
         },
         "uefiSettings": {
           "$ref": "#/definitions/VirtualMachineInstancePropertiesSecurityProfileUefiSettings",
-          "description": "Uefisettings"
+          "description": "Uefisettings of the virtual machine instance"
         },
         "securityType": {
           "$ref": "#/definitions/SecurityTypes",
