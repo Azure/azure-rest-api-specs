@@ -285,9 +285,6 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/iscsiPaths/default"].get
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default"].get
 
-  # - code: DeleteResponseCodes
-  #   reasons: ArmResourceDeleteAsync is still being used. Moving to ArmResourceDeleteWithoutOkAsync is breaking.
-
   - code: PatchBodyParametersSchema
     reasons: False positives. https://github.com/Azure/azure-sdk-tools/issues/7802
     from: vmware.json
