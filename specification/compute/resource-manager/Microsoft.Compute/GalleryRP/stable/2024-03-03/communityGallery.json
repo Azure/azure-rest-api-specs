@@ -3,7 +3,7 @@
   "info": {
     "title": "CommunityGalleryServiceClient",
     "description": "Community Gallery Service Client.",
-    "version": "2023-07-03"
+    "version": "2024-03-03"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -259,6 +259,99 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/SecurityPostures/{securityPostureName}": {
+      "get": {
+        "tags": [
+          "CommunityGallerySecurityPostures"
+        ],
+        "operationId": "CommunityGallerySecurityPostures_Get",
+        "description": "Get a community gallery security posture.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./galleryRPCommon.json#/parameters/LocationNameParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PublicGalleryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GallerySecurityPostureNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CommunitySecurityPosture"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a community gallery security posture.": {
+            "$ref": "./examples/communityGalleryExamples/CommunityGallerySecurityPosture_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/communityGalleries/{publicGalleryName}/securityPostures/{securityPostureName}/versions/{securityPostureVersionName}": {
+      "get": {
+        "tags": [
+          "CommunityGallerySecurityPostureVersions"
+        ],
+        "operationId": "CommunityGallerySecurityPostureVersions_Get",
+        "description": "Get a community gallery security posture version.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./galleryRPCommon.json#/parameters/LocationNameParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/PublicGalleryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GallerySecurityPostureNameParameter"
+          },
+          {
+            "$ref": "#/parameters/GallerySecurityPostureVersionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CommunitySecurityPostureVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a community gallery security posture version.": {
+            "$ref": "./examples/communityGalleryExamples/CommunityGallerySecurityPostureVersion_Get.json"
+          }
         }
       }
     }
@@ -584,6 +677,123 @@
         }
       },
       "description": "This is the community gallery image definition identifier."
+    },
+    "CommunitySecurityPosture": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CommunitySecurityPostureProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PirCommunityGalleryResource"
+        }
+      ],
+      "description": "Specifies information about the gallery security posture that you want to create or update."
+    },
+    "CommunitySecurityPostureProperties": {
+      "properties": {
+        "osType": {
+          "type": "string",
+          "description": "This property allows you to specify the type of the OS that is included in the disk when creating a VM from a managed image. Possible values are: **Windows,** **Linux.**",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "x-ms-enum": {
+            "name": "OperatingSystemTypes",
+            "modelAsString": false
+          }
+        },
+        "applicableResourceTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": [],
+          "description": "Applicable resource types, like virtual machine scale set, of this posture setting."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description for the current community security posture."
+        },
+        "releaseNotesUri": {
+          "type": "string",
+          "description": "Release notes URI for the current community gallery security posture."
+        },
+        "endOfLifeDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end of life date of the gallery security posture. This property can be used for decommissioning purposes. This property is updatable."
+        },
+        "privacyStatementUri": {
+          "type": "string",
+          "description": "Privacy statement URI for the current community gallery security posture."
+        },
+        "eula": {
+          "type": "string",
+          "description": "The end-user license agreement for the current community gallery security posture."
+        },
+        "disclaimer": {
+          "$ref": "#/definitions/CommunityGalleryDisclaimer"
+        },
+        "artifactTags": {
+          "$ref": "#/definitions/CommunityGalleryArtifactTags"
+        }
+      },
+      "required": [
+        "osType"
+      ],
+      "description": "Describes the properties of a gallery security posture."
+    },
+    "CommunitySecurityPostureVersion": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CommunitySecurityPostureVersionProperties"
+        },
+        "securityPosture": {
+          "$ref": "#/definitions/CommunitySecurityPosture"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PirCommunityGalleryResource"
+        }
+      ],
+      "description": "Specifies information about the gallery security posture version that you want to create or update."
+    },
+    "CommunitySecurityPostureVersionProperties": {
+      "properties": {
+        "excludeFromLatest": {
+          "type": "boolean",
+          "description": "If set to true, Virtual Machines deployed from the latest version of the security posture won't use this posture version."
+        },
+        "settings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PostureSetting"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "A list of security posture settings, in key-value pair."
+        },
+        "vmExtensions": {
+          "$ref": "#/definitions/VirtualMachineExtension"
+        },
+        "disclaimer": {
+          "$ref": "#/definitions/CommunityGalleryDisclaimer"
+        },
+        "artifactTags": {
+          "$ref": "#/definitions/CommunityGalleryArtifactTags"
+        }
+      },
+      "required": [
+        "osType"
+      ],
+      "description": "Describes the properties of a gallery security posture version."
     }
   },
   "parameters": {
@@ -610,6 +820,22 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "The name of the community gallery image version. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
+    },
+    "GallerySecurityPostureNameParameter": {
+      "name": "securityPostureName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The name of the community gallery security posture definition."
+    },
+    "GallerySecurityPostureVersionNameParameter": {
+      "name": "securityPostureVersionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The name of the community gallery security posture version. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
     }
   }
 }

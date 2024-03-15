@@ -3,7 +3,7 @@
   "info": {
     "title": "SharedImageGalleryServiceClient",
     "description": "Shared Image Gallery Service Client.",
-    "version": "2023-07-03"
+    "version": "2024-03-03"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1737,6 +1737,532 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/securityPostures/{securityPostureName}": {
+      "put": {
+        "tags": [
+          "GallerySecurityPostures"
+        ],
+        "operationId": "GallerySecurityPostures_CreateOrUpdate",
+        "description": "Create or update a gallery security posture definition.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Shared Image Gallery in which the security posture Definition is to be created."
+          },
+          {
+            "name": "securityPostureName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery security posture definition to be created or updated. The allowed characters are alphabets and numbers with dots, dashes, and periods allowed in the middle. The maximum length is 80 characters."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "gallerySecurityPosture",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GallerySecurityPosture"
+            },
+            "description": "Parameters supplied to the create or update gallery security posture operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GallerySecurityPosture"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/GallerySecurityPosture"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/GallerySecurityPosture"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or update a simple gallery security posture.": {
+            "$ref": "./examples/galleryExamples/GallerySecurityPosture_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "GallerySecurityPostures"
+        ],
+        "operationId": "GallerySecurityPostures_Update",
+        "description": "Update a gallery security posture definition.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Shared Image Gallery in which the security posture Definition is to be updated."
+          },
+          {
+            "name": "securityPostureName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery security posture definition to be updated. The allowed characters are alphabets and numbers with dots, dashes, and periods allowed in the middle. The maximum length is 80 characters."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "gallerySecurityPosture",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GallerySecurityPostureUpdate"
+            },
+            "description": "Parameters supplied to the update gallery security posture operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GallerySecurityPosture"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a simple gallery security posture.": {
+            "$ref": "./examples/galleryExamples/GallerySecurityPosture_Update.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "GallerySecurityPostures"
+        ],
+        "operationId": "GallerySecurityPostures_Get",
+        "description": "Retrieves information about a gallery security posture definition.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Shared Image Gallery from which the security posture Definitions are to be retrieved."
+          },
+          {
+            "name": "securityPostureName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery security posture definition to be retrieved."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GallerySecurityPosture"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a gallery security posture.": {
+            "$ref": "./examples/galleryExamples/GallerySecurityPosture_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "GallerySecurityPostures"
+        ],
+        "operationId": "GallerySecurityPostures_Delete",
+        "description": "Delete a gallery security posture.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Shared Image Gallery in which the security posture is to be deleted."
+          },
+          {
+            "name": "securityPostureName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery security posture definition to be deleted."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a gallery security posture.": {
+            "$ref": "./examples/galleryExamples/GallerySecurityPosture_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/securityPostures/{securityPostureName}/versions/{securityPostureVersionName}": {
+      "put": {
+        "tags": [
+          "GallerySecurityPostureVersions"
+        ],
+        "operationId": "GallerySecurityPostureVersions_CreateOrUpdate",
+        "description": "Create or update a gallery security posture version.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery in which the security posture definition resides."
+          },
+          {
+            "name": "securityPostureName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery security posture definition in which the security posture version is to be created."
+          },
+          {
+            "name": "securityPostureVersionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery security posture Version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "gallerySecurityPostureVersion",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GallerySecurityPostureVersion"
+            },
+            "description": "Parameters supplied to the create or update gallery security posture version operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GallerySecurityPostureVersion"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/GallerySecurityPostureVersion"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/GallerySecurityPostureVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create or update a simple gallery security posture version.": {
+            "$ref": "./examples/galleryExamples/GallerySecurityPostureVersion_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "GallerySecurityPostureVersions"
+        ],
+        "operationId": "GallerySecurityPostureVersions_Update",
+        "description": "Update a gallery security posture version.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery in which the security posture definition resides."
+          },
+          {
+            "name": "securityPostureName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery security posture definition in which the version is to be updated."
+          },
+          {
+            "name": "securityPostureVersionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery security posture version to be updated. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "gallerySecurityPostureVersion",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GallerySecurityPostureVersionUpdate"
+            },
+            "description": "Parameters supplied to the update gallery security posture version operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GallerySecurityPostureVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a simple gallery security posture version.": {
+            "$ref": "./examples/galleryExamples/GallerySecurityPostureVersion_Update.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "GallerySecurityPostureVersions"
+        ],
+        "operationId": "GallerySecurityPostureVersions_Get",
+        "description": "Retrieves information about a gallery security posture version.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Shared Application Gallery in which the Application Definition resides."
+          },
+          {
+            "name": "securityPostureName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery security posture definition in which the version resides."
+          },
+          {
+            "name": "securityPostureVersionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery security posture version to be retrieved."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation.",
+            "enum": [
+              "ReplicationStatus"
+            ],
+            "x-ms-enum": {
+              "name": "ReplicationStatusTypes",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GallerySecurityPostureVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a gallery security posture version.": {
+            "$ref": "./examples/galleryExamples/GallerySecurityPostureVersion_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "GallerySecurityPostureVersions"
+        ],
+        "operationId": "GallerySecurityPostureVersions_Delete",
+        "description": "Delete a gallery security posture version.",
+        "parameters": [
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "galleryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Shared Application Gallery in which the Application Definition resides."
+          },
+          {
+            "name": "securityPostureName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery security posture definition in which the version resides."
+          },
+          {
+            "name": "securityPostureVersionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gallery security posture version to be deleted."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete a gallery security posture version.": {
+            "$ref": "./examples/galleryExamples/GallerySecurityPostureVersion_Delete.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2261,6 +2787,165 @@
         }
       },
       "description": "Additional settings for the VM app that contains the target package and config file name when it is deployed to target VM or VM scale set."
+    },
+    "GallerySecurityPosture": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GallerySecurityPostureProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common-types/v1/common.json#/definitions/Resource"
+        }
+      ],
+      "description": "Specifies information about the gallery security posture definition that you want to create or update."
+    },
+    "GallerySecurityPostureUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GallerySecurityPostureProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResourceDefinition"
+        }
+      ],
+      "description": "Specifies information about the gallery security posture definition that you want to update."
+    },
+    "GallerySecurityPostureProperties": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of this gallery security posture definition resource. This property is updatable."
+        },
+        "eula": {
+          "type": "string",
+          "description": "The Eula agreement for the gallery security posture definition."
+        },
+        "privacyStatementUri": {
+          "type": "string",
+          "description": "The privacy statement uri."
+        },
+        "releaseNoteUri": {
+          "type": "string",
+          "description": "The release note uri."
+        },
+        "endOfLifeDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end of life date of the gallery security posture definitionn. This property can be used for decommissioning purposes. This property is updatable."
+        },
+        "osType": {
+          "type": "string",
+          "description": "This property allows you to specify the supported type of the OS that application is built for. Possible values are: **Windows,** **Linux.**",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "x-ms-enum": {
+            "name": "OperatingSystemTypes",
+            "modelAsString": false
+          }
+        },
+        "applicableResourceTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": [],
+          "description": "Applicable resource types, like virtual machine scale set, of this posture setting."
+        }
+      },
+      "required": [
+        "osType"
+      ],
+      "description": "Describes the properties of a gallery security posture definition."
+    },
+    "GallerySecurityPostureVersion": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GallerySecurityPostureVersionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common-types/v1/common.json#/definitions/Resource"
+        }
+      ],
+      "description": "Specifies information about the gallery security posture version that you want to create or update."
+    },
+    "GallerySecurityPostureVersionUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GallerySecurityPostureVersionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResourceDefinition"
+        }
+      ],
+      "description": "Specifies information about the gallery security posture version that you want to update."
+    },
+    "GallerySecurityPostureVersionProperties": {
+      "properties": {
+        "excludeFromLatest": {
+          "type": "boolean",
+          "description": "If set to true, virtual machines deployed from the latest version of the security posture won't use this version."
+        },
+        "publishedDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp for when the gallery security posture version is published."
+        },
+        "endOfLifeDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end of life date of the gallery security posture version. This property can be used for decommissioning purposes. This property is updatable."
+        },
+        "settings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PostureSetting"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "A list of security posture settings, in key-value pair."
+        },
+        "targetLocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TargetRegion"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The target regions where the security posture version is going to be replicated to. This property is updatable."
+        },
+        "virtualMachineExtensions": {
+          "$ref": "#/definitions/VirtualMachineExtension"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/GalleryProvisioningState"
+        },
+        "replicationStatus": {
+          "readOnly": true,
+          "$ref": "#/definitions/ReplicationStatus"
+        }
+      },
+      "required": [
+        "storageProfile"
+      ],
+      "description": "Describes the properties of a gallery security posture version."
     },
     "GalleryImage": {
       "properties": {

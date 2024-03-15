@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2024-03-03",
+    "galleryName": "myGalleryName",
+    "securityPostureName": "myGallerySecurityPostureName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName/securityPostures/myGallerySecurityPostureName",
+        "properties": {
+          "description": "This is the gallery security posture description.",
+          "eula": "This is the gallery security posture EULA.",
+          "privacyStatementUri": "myPrivacyStatementUri}",
+          "releaseNoteUri": "myReleaseNoteUri",
+          "osType": "Windows",
+          "applicableResourceTypes": [
+            "vmss"
+          ],
+          "endOfLifeDate": "2022-03-20T09:12:28Z"
+        },
+        "location": "West US",
+        "name": "myGallerySecurityPostureName"
+      }
+    }
+  }
+}
