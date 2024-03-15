@@ -16,7 +16,7 @@ namespace Microsoft.AzureStackHCI;
 @doc("Security Rule resource.")
 @includeInapplicableMetadataInPayload(false)
 @parentResource(NetworkSecurityGroup)
-model SecurityRule is TrackedResource<SecurityRuleProperties> {
+model SecurityRule is ProxyResource<SecurityRuleProperties> {
   @doc("Name of the security rule.")
   @maxLength(80)
   @minLength(1)
