@@ -32,27 +32,27 @@ model NetworkInterface is TrackedResource<NetworkInterfaceProperties> {
 
 @armResourceOperations
 @projectedName("client", "NetworkInterfaces")
-interface NetworkInterfaceGroup {
+interface NetworkInterfaces {
   @doc("Gets a network interface")
   get is ArmResourceRead<NetworkInterface>;
 
   @doc("The operation to create or update a network interface. Please note some properties can be set only during network interface creation.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     NetworkInterface,
-    LroHeaders=ArmAsyncOperationHeader
+    LroHeaders = ArmAsyncOperationHeader
   >;
 
   @doc("The operation to update a network interface.")
   @parameterVisibility("read")
   update is ArmCustomPatchAsync<
     NetworkInterface,
-    LroHeaders=ArmAsyncOperationHeader
+    LroHeaders = ArmAsyncOperationHeader
   >;
 
   @doc("The operation to delete a network interface.")
   delete is ArmResourceDeleteWithoutOkAsync<
     NetworkInterface,
-    LroHeaders=ArmAsyncOperationHeader
+    LroHeaders = ArmAsyncOperationHeader
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"

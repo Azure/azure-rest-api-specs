@@ -15,7 +15,8 @@ namespace Microsoft.AzureStackHCI;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @doc("The marketplace gallery image resource definition.")
 @includeInapplicableMetadataInPayload(false)
-model MarketplaceGalleryImage is TrackedResource<MarketplaceGalleryImageProperties> {
+model MarketplaceGalleryImage
+  is TrackedResource<MarketplaceGalleryImageProperties> {
   @doc("Name of the marketplace gallery image")
   @maxLength(80)
   @minLength(1)
@@ -32,14 +33,14 @@ model MarketplaceGalleryImage is TrackedResource<MarketplaceGalleryImageProperti
 
 @armResourceOperations
 @projectedName("client", "MarketplaceGalleryImages")
-interface MarketplaceGalleryImagesOperationGroup {
+interface MarketplaceGalleryImages {
   @doc("Gets a marketplace gallery image")
   get is ArmResourceRead<MarketplaceGalleryImage>;
 
   @doc("The operation to create or update a marketplace gallery image. Please note some properties can be set only during marketplace gallery image creation.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     MarketplaceGalleryImage,
-    LroHeaders=ArmAsyncOperationHeader
+    LroHeaders = ArmAsyncOperationHeader
   >;
 
   @doc("The operation to update a marketplace gallery image.")

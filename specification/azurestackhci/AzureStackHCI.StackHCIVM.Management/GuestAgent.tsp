@@ -38,7 +38,7 @@ interface GuestAgents {
   @operationId("GuestAgent_Create")
   create is ArmResourceCreateOrReplaceAsync<
     GuestAgent,
-    LroHeaders=ArmAsyncOperationHeader
+    LroHeaders = ArmAsyncOperationHeader
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"

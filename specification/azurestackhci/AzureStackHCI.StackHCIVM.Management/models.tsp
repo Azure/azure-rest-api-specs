@@ -565,9 +565,6 @@ model SubnetPropertiesFormat {
 
   @doc("Vlan to use for the subnet")
   vlan?: int32;
-
-  @doc("The reference of the NetworkSecurityGroup resource.")
-  networkSecurityGroup?: NetworkSecurityGroup;
 }
 
 @doc("IPConfigurationReference - Describes a IPConfiguration under the virtual network")
@@ -654,91 +651,6 @@ model IPPoolInfo {
   available?: string;
 }
 
-@doc("Network Security Group resource.")
-model NetworkSecurityGroupPropertiesFormat {
-  @doc("A collection of security rules of the network security group.")
-  securityRules?: SecurityRule[];
-
-  @doc("The default security rules of network security group.")
-  @visibility("read")
-  defaultSecurityRules?: SecurityRule[];
-
-  @doc("A collection of references to network interfaces that are currently using this NSG.")
-  @visibility("read")
-  networkInterfaces?: NetworkInterface[];
-
-  @doc("A collection of references to subnets that are currently using this NSG")
-  @visibility("read")
-  subnets?: Subnet[];
-
-  @doc("The resource GUID property of the network security group resource.")
-  @visibility("read")
-  resourceGuid?: string;
-
-  @doc("The provisioning state of the network security group resource.")
-  @visibility("read")
-  provisioningState?: ProvisioningState;
-}
-
-@doc("Network security rule.")
-model SecurityRule {
-  @doc("Properties of the security rule.")
-  @extension("x-ms-client-flatten", true)
-  properties?: SecurityRulePropertiesFormat;
-
-  @doc("The name of the resource that is unique within a resource group. This name can be used to access the resource.")
-  name?: string;
-
-  @doc("A unique read-only string that changes whenever the resource is updated.")
-  @visibility("read")
-  etag?: string;
-
-  @doc("The type of the resource.")
-  type?: string;
-}
-
-@doc("Security rule resource.")
-model SecurityRulePropertiesFormat {
-  @doc("A description for this rule. Restricted to 140 chars.")
-  description?: string;
-
-  @doc("Network protocol this rule applies to.")
-  protocol: SecurityRuleProtocol;
-
-  @doc("The source port or range. Integer or range between 0 and 65535. Asterisk '' can also be used to match all ports.")
-  sourcePortRange?: string;
-
-  @doc("The destination port or range. Integer or range between 0 and 65535. Asterisk '' can also be used to match all ports.")
-  destinationPortRange?: string;
-
-  @doc("The CIDR or source IP range. Asterisk '' can also be used to match all source IPs. Default tags such as 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used. If this is an ingress rule, specifies where network traffic originates from.")
-  sourceAddressPrefix?: string;
-
-  @doc("The CIDR or source IP ranges.")
-  sourceAddressPrefixes?: string[];
-
-  @doc("The destination address prefix. CIDR or destination IP range. Asterisk '' can also be used to match all source IPs. Default tags such as 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used.")
-  destinationAddressPrefix?: string;
-
-  @doc("The destination address prefixes. CIDR or destination IP ranges.")
-  destinationAddressPrefixes?: string[];
-
-  @doc("The source port ranges.")
-  sourcePortRanges?: string[];
-
-  @doc("The destination port ranges.")
-  destinationPortRanges?: string[];
-
-  @doc("The network traffic is allowed or denied.")
-  access: SecurityRuleAccess;
-
-  @doc("The priority of the rule. The value can be between 100 and 4096. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule.")
-  priority: int32;
-
-  @doc("The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic.")
-  direction: SecurityRuleDirection;
-}
-
 @doc("Properties under the network interface resource")
 model NetworkInterfaceProperties {
   @doc("IPConfigurations - A list of IPConfigurations of the network interface.")
@@ -749,9 +661,6 @@ model NetworkInterfaceProperties {
 
   @doc("DNS Settings for the interface")
   dnsSettings?: InterfaceDNSSettings;
-
-  @doc("The reference to the NetworkSecurityGroup resource.")
-  networkSecurityGroup?: NetworkSecurityGroup;
 
   @doc("Provisioning state of the network interface.")
   @visibility("read")
@@ -943,9 +852,6 @@ model TagsObject {
   @doc("Resource tags.")
   tags?: Record<string>;
 }
-
-@doc("Response for ListSecurityRule API service call. Retrieves all security rules that belongs to a network security group.")
-model SecurityRuleListResult is Azure.Core.Page<SecurityRule>;
 
 @doc("Properties under the storage container resource")
 model StorageContainerProperties {

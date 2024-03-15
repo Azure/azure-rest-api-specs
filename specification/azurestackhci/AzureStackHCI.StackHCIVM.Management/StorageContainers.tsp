@@ -38,20 +38,20 @@ interface StorageContainers {
   @doc("The operation to create or update a storage container. Please note some properties can be set only during storage container creation.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     StorageContainer,
-    LroHeaders=ArmAsyncOperationHeader
+    LroHeaders = ArmAsyncOperationHeader
   >;
 
   @doc("The operation to update a storage container.")
   @parameterVisibility("read")
   update is ArmTagsPatchAsync<
     StorageContainer,
-    LroHeaders=ArmAsyncOperationHeader
+    LroHeaders = ArmAsyncOperationHeader
   >;
 
   @doc("The operation to delete a storage container.")
   delete is ArmResourceDeleteWithoutOkAsync<
     StorageContainer,
-    LroHeaders=ArmAsyncOperationHeader
+    LroHeaders = ArmAsyncOperationHeader
   >;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"

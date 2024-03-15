@@ -32,7 +32,7 @@ model LogicalNetwork is TrackedResource<LogicalNetworkProperties> {
 
 @armResourceOperations
 @projectedName("client", "LogicalNetworks")
-interface logicalNetworks {
+interface LogicalNetworks {
   get is ArmResourceRead<LogicalNetwork>;
 
   @doc("The operation to create or update a logical network. Please note some properties can be set only during logical network creation.")

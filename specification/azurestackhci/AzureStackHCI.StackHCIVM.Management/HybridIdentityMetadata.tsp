@@ -18,7 +18,8 @@ namespace Microsoft.AzureStackHCI;
 @singleton("default")
 @parentResource(VirtualMachineInstance)
 @includeInapplicableMetadataInPayload(false)
-model HybridIdentityMetadata is ProxyResource<HybridIdentityMetadataProperties> {
+model HybridIdentityMetadata
+  is ProxyResource<HybridIdentityMetadataProperties> {
   @doc("Name of the hybrididentitymetadata")
   @key("hybridIdentityMetadatum")
   @segment("hybridIdentityMetadata")
