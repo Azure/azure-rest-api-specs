@@ -162,11 +162,6 @@ suppressions:
       - $.definitions.WorkloadNetworkPublicIPProperties.properties.publicIPBlock
       - $.definitions.WorkloadNetworkPublicIPProperties.properties.numberOfPublicIPs
 
-  - code: DeleteOperationAsyncResponseValidation
-    reason: x-ms-long-running-operation-options does not need to be set if you follow ARM guidelines
-    # https://azure.github.io/autorest/extensions/#x-ms-long-running-operation-options
-    from: vmware.json
-
   - code: PatchResponseCodes
     reason: PrivateClouds_Update and Clusters_Update respond with 201 instead of 202. Changing it is breaking.
     from: vmware.json
