@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "api-version": "2024-05-01-preview",
+    "snapToRoadsRequest": {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "geometry": {
+            "coordinates": [
+              -122.122353,
+              47.672662
+            ],
+            "type": "Point"
+          },
+          "properties": {
+            "pointIndex": 0
+          }
+        },
+        {
+          "type": "Feature",
+          "geometry": {
+            "coordinates": [
+              -122.132452,
+              47.644234
+            ],
+            "type": "Point"
+          },
+          "properties": {
+            "pointIndex": 1
+          }
+        }
+      ],
+      "interpolate": true,
+      "includeSpeedLimit": true,
+      "travelMode": "driving"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "geometry": {
+              "coordinates": [
+                -122.125153,
+                47.671762
+              ],
+              "type": "Point"
+            },
+            "properties": {
+              "inputIndex": 0,
+              "name": "NE 92nd St",
+              "speedLimitInKilometersPerHour": 45
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "coordinates": [
+                -122.123452,
+                47.645234
+              ],
+              "type": "Point"
+            },
+            "properties": {
+              "inputIndex": 1,
+              "name": "NE 140th St",
+              "speedLimitInKilometersPerHour": 55
+            }
+          }
+        ]
+      }
+    }
+  }
+}
