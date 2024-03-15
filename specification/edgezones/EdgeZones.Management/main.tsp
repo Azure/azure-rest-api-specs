@@ -46,7 +46,7 @@ enum ProvisioningState {
   Accepted,
 }
 
-@doc("The Azure Extended Zone registration status for a subscription.")
+@doc("The ExtendedZone registration status for a subscription.")
 enum RegistrationState {
   @doc("Not Registered State")
   NotRegistered,
@@ -61,51 +61,60 @@ enum RegistrationState {
   PendingUnregister,
 }
 
-@doc("The properties of an AzureExtendedZone Resource")
-model AzureExtendedZoneProperties {
+@doc("The properties of an ExtendedZone Resource")
+model ExtendedZoneProperties {
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
   @visibility("read")
-  @doc("AzureExtendedZone registration approved or not")
+  @doc("ExtendedZone registration approved or not")
   registrationState?: RegistrationState;
 
-  @doc("AzureExtendedZone displayName")
+  @visibility("read")
+  @doc("ExtendedZone displayName")
   displayName: string;
 
-  @doc("AzureExtendedZone regionalDisplayName")
+  @visibility("read")
+  @doc("ExtendedZone regionalDisplayName")
   regionalDisplayName: string;
 
-  @doc("AzureExtendedZone regionType")
+  @visibility("read")
+  @doc("ExtendedZone regionType")
   regionType: string;
 
-  @doc("AzureExtendedZone regionCategory")
+  @visibility("read")
+  @doc("ExtendedZone regionCategory")
   regionCategory: string;
 
-  @doc("AzureExtendedZone geography")
+  @visibility("read")
+  @doc("ExtendedZone geography")
   geography: string;
 
-  @doc("AzureExtendedZone geographyGroup")
+  @visibility("read")
+  @doc("ExtendedZone geographyGroup")
   geographyGroup: string;
 
-  @doc("AzureExtendedZone longitude")
+  @visibility("read")
+  @doc("ExtendedZone longitude")
   longitude: string;
 
-  @doc("AzureExtendedZone latitude")
+  @visibility("read")
+  @doc("ExtendedZone latitude")
   latitude: string;
 
-  @doc("AzureExtendedZone homeLocation")
+  @visibility("read")
+  @doc("ExtendedZone homeLocation")
   homeLocation: string;
 }
 
-@doc("An AzureExtendedZone resource")
+@doc("An ExtendedZone resource")
 @subscriptionResource
-model AzureExtendedZone is ProxyResource<AzureExtendedZoneProperties> {
-  @doc("The name of the AzureExtendedZone")
+model ExtendedZone is ProxyResource<ExtendedZoneProperties> {
+  @doc("The name of the ExtendedZone")
   @pattern("^[a-zA-Z0-9-]{3,24}$")
-  @key("azureExtendedZoneName")
-  @segment("azureExtendedZones")
+  @key("extendedZoneName")
+  @segment("extendedZones")
   @path
   name: string;
 }
@@ -123,18 +132,18 @@ op ArmResourceActionNoBodySync<
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 ): ArmResponse<TResource> | ErrorResponse;
 
-@doc("AzureExtendedZone operations")
+@doc("ExtendedZone operations")
 @armResourceOperations
-interface AzureExtendedZones {
-  @doc("Get an Azure Extended Zone for a subscription")
-  get is ArmResourceRead<AzureExtendedZone>;
+interface ExtendedZones {
+  @doc("Get an Extended Zone for a subscription")
+  get is ArmResourceRead<ExtendedZone>;
 
-  @doc("Lists the Azure Extended Zones for a subscription")
-  listBySubscription is ArmListBySubscription<AzureExtendedZone>;
+  @doc("Lists the Extended Zones for a subscription")
+  listBySubscription is ArmListBySubscription<ExtendedZone>;
 
-  @doc("Registers a subscription for an Azure Extended Zone")
-  register is ArmResourceActionNoBodySync<AzureExtendedZone>;
+  @doc("Registers a subscription for an Extended Zone")
+  register is ArmResourceActionNoBodySync<ExtendedZone>;
 
-  @doc("Unregisters a subscription for an Azure Extended Zone")
-  unregister is ArmResourceActionNoBodySync<AzureExtendedZone>;
+  @doc("Unregisters a subscription for an Extended Zone")
+  unregister is ArmResourceActionNoBodySync<ExtendedZone>;
 }
