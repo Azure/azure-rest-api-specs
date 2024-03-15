@@ -1173,6 +1173,23 @@
         "modelAsString": true
       }
     },
+    "WorkspaceNPIPParameter": {
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/WorkspaceCustomParameterType",
+          "description": "The type of variable that this is"
+        },
+        "value": {
+          "type": "boolean",
+          "description": "The value which should be used for this field.",
+          "default": true
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The value which should be used for this field."
+    },
     "WorkspaceCustomBooleanParameter": {
       "properties": {
         "type": {
@@ -1240,8 +1257,8 @@
           "description": "The name of the Private Subnet within the Virtual Network"
         },
         "enableNoPublicIp": {
-          "$ref": "#/definitions/WorkspaceCustomBooleanParameter",
-          "description": "Should the Public IP be Disabled?"
+          "$ref": "#/definitions/WorkspaceNPIPParameter",
+          "description": "Boolean indicating whether the public IP should be disabled. Default value is true"
         },
         "loadBalancerBackendPoolName": {
           "$ref": "#/definitions/WorkspaceCustomStringParameter",
