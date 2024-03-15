@@ -258,7 +258,7 @@ directive:
 
 suppressions:
   - code: OperationsAPIImplementation
-    reason: Operations list command does not apply to our resource provider operations.
+    reason: The operations API is defined in a separate file.
     from: diagnostic.json
   - code: PathForResourceAction
     reason: This is not a valid scenario for the diskInspection and spotPlacementRecommender API as API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
