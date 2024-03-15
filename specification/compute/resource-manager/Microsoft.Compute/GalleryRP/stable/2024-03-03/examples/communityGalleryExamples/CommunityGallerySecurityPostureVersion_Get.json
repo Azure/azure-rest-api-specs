@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "{subscription-id}",
     "location": "myLocation",
-    "api-version": "2023-07-03",
+    "api-version": "2024-03-03",
     "publicGalleryName": "publicGalleryName",
     "securityPostureName": "myGallerySecurityPostureName",
     "securityPostureVersionName": "myGallerySecurityPostureVersionName"
@@ -10,26 +10,88 @@
   "responses": {
     "200": {
       "body": {
-        "properties": {
-          "publishedDate": "2018-03-20T09:12:28Z",
-          "endOfLifeDate": "2022-03-20T09:12:28Z",
-          "excludeFromLatest": false,
-          "storageProfile": {
-            "osDiskImage": {
-              "diskSizeGB": 29,
-              "hostCaching": "None"
-            }
+        "securityPosture": {
+          "properties": {
+            "osType": "Windows",
+            "releaseNotesUri": "https://test-uri.com",
+            "privacyStatementUri": "https://test-uri.com",
+            "eula": "https://test-uri.com",
+            "disclaimer": "https://test-uri.com"
           },
+          "location": "myLocation",
+          "name": "myGallerySecurityPostureName"
+        },
+        "properties": {
+          "settings": [
+            {
+              "name": "enableBootDiagnostics",
+              "value": "true"
+            },
+            {
+              "name": "enableEncryptionAtHost",
+              "value": "true"
+            },
+            {
+              "name": "securityType",
+              "value": "TrustedLaunch"
+            },
+            {
+              "name": "secureBootEnabled",
+              "value": "true"
+            },
+            {
+              "name": "vTpmEnabled",
+              "value": "true"
+            }
+          ],
+          "vmExtensions": [
+            {
+              "name": "SecurityPostureGuestAttestation",
+              "properties": {
+                "publisher": "Microsoft.Azure.Security.LinuxAttestation",
+                "type": "GuestAttestation",
+                "typeHandlerVersion": "1.0",
+                "autoUpgradeMinorVersion": true,
+                "enableAutomaticUpgrade": false,
+                "settings": {},
+                "protectedSettings": {}
+              }
+            },
+            {
+              "name": "SecurityPostureGuestConfiguration",
+              "properties": {
+                "publisher": "Microsoft.GuestConfiguration",
+                "type": "ConfigurationForLinux",
+                "typeHandlerVersion": "1.0",
+                "autoUpgradeMinorVersion": true,
+                "enableAutomaticUpgrade": false,
+                "settings": {},
+                "protectedSettings": {}
+              }
+            },
+            {
+              "name": "SecurityPostureSecurityAgent",
+              "properties": {
+                "publisher": "Microsoft.Azure.Security.Monitoring",
+                "type": "AzureSecurityLinuxAgent",
+                "typeHandlerVersion": "2.0",
+                "autoUpgradeMinorVersion": true,
+                "enableAutomaticUpgrade": false,
+                "settings": {},
+                "protectedSettings": {}
+              }
+            }
+          ],
           "artifactTags": {
             "ShareTag-CommunityGallery": "CommunityGallery"
           },
           "disclaimer": "https://test-uri.com"
         },
         "location": "myLocation",
-        "name": "myGalleryImageVersionName",
-        "type": "Microsoft.Compute/locations/communityGalleryImageVersion",
+        "name": "myGallerySecurityPostureVersionName",
+        "type": "Microsoft.Compute/locations/communityGallerySecurityPostureVersion",
         "identifier": {
-          "uniqueId": "/CommunityGalleries/publicGalleryName/Images/myGalleryImageName/Versions/myGalleryImageVersionName"
+          "uniqueId": "/CommunityGalleries/publicGalleryName/SecurityPostures/myGallerySecurityPostureName/Versions/myGallerySecurityPostureVersionName"
         }
       }
     }
