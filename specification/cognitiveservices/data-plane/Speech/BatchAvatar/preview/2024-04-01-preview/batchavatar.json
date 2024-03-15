@@ -2,13 +2,14 @@
   "swagger": "2.0",
   "info": {
     "title": "Batch synthesis API",
-    "description": "Batch synthesis API for talking avatar.",
+    "description": "Batch synthesis API for text to speech avatar.",
     "contact": {
       "name": "Cognitive Services - Speech Services",
       "url": "https://docs.microsoft.com/azure/cognitive-services/speech-service/support"
     },
     "version": "2024-04-01-preview"
   },
+  "host": "sadf",
   "paths": {
     "/batchsyntheses": {
       "get": {
@@ -283,7 +284,7 @@
           "$ref": "#/definitions/BatchSynthesisProperties"
         },
         "avatarConfig": {
-          "$ref": "#/definitions/BatchTalkingAvatarConfig"
+          "$ref": "#/definitions/BatchAvatarConfig"
         },
         "outputs": {
           "$ref": "#/definitions/BatchSynthesisOutputs"
@@ -316,17 +317,27 @@
       "description": "Bath synthesis billing details.",
       "type": "object",
       "properties": {
-        "neural": {
+        "neuralCharacters": {
           "format": "int64",
           "description": "The number of billable characters for prebuild neural voices in the input file.",
           "type": "integer"
         },
-        "customNeural": {
+        "customNeuralCharacters": {
           "format": "int64",
           "description": "The number of billable characters for custom neural voices in the input file.",
           "type": "integer"
         },
-        "talkingAvatarDurationInSeconds": {
+        "aoaiCharacters": {
+          "format": "int64",
+          "description": "The number of billable characters for AOAI voices in the input file.",
+          "type": "integer"
+        },
+        "aoaiHDCharacters": {
+          "format": "int64",
+          "description": "The number of billable characters for AOAI HD voices in the input file.",
+          "type": "integer"
+        },
+        "talkingAvatarDurationSeconds": {
           "format": "int64",
           "description": "The duration of the talking avatar generated video.",
           "type": "integer",
@@ -403,7 +414,7 @@
           "type": "string"
         },
         "summary": {
-          "description": "When BatchSynthesisProperties.decompressOutputFiles is true, job summary file path will be provided here.",
+          "description": "Job summary file path will be provided here.",
           "type": "string"
         }
       },
@@ -417,14 +428,6 @@
           "description": "How long the batch task will be kept in the system after it has completed. Once the batch task reaches the time to live after completion (succeeded or failed) it will be automatically deleted. The longest supported duration is 744 hours (31 days). The default value is 744 hours. ",
           "type": "integer",
           "format": "int32"
-        },
-        "concatenateResult": {
-          "description": "Whether synthesis result is concatenated.",
-          "type": "boolean"
-        },
-        "decompressOutputFiles": {
-          "description": "Whether synthesis result is decompressed in target container. It only take effect when \"destinationContainerUrl\" is specified or \"BYOS\" is configured.",
-          "type": "boolean"
         },
         "destinationContainerUrl": {
           "format": "uri",
@@ -467,7 +470,7 @@
         }
       }
     },
-    "BatchTalkingAvatarConfig": {
+    "BatchAvatarConfig": {
       "description": "Avatar configuration.",
       "required": [
         "talkingAvatarCharacter"
@@ -503,21 +506,17 @@
           "description": "The talking avatar background image.",
           "type": "string"
         },
-        "backgroundVideo": {
-          "description": "The talking avatar background video.",
-          "type": "string"
-        },
         "avatarPosition": {
-          "$ref": "#/definitions/BatchTalkingAvatarCoordinateDefinition"
+          "$ref": "#/definitions/BatchAvatarCoordinateDefinition"
         },
         "avatarSize": {
-          "$ref": "#/definitions/BatchTalkingAvatarCoordinateDefinition"
+          "$ref": "#/definitions/BatchAvatarCoordinateDefinition"
         },
         "resolution": {
-          "$ref": "#/definitions/BatchTalkingAvatarCoordinateDefinition"
+          "$ref": "#/definitions/BatchAvatarCoordinateDefinition"
         },
         "videoCrop": {
-          "$ref": "#/definitions/BatchTalkingAvatarVideoCropDefinition"
+          "$ref": "#/definitions/BatchAvatarVideoCropDefinition"
         },
         "bitrateKbps": {
           "format": "int64",
@@ -530,7 +529,7 @@
         }
       }
     },
-    "BatchTalkingAvatarCoordinateDefinition": {
+    "BatchAvatarCoordinateDefinition": {
       "description": "Coordinate definition",
       "type": "object",
       "properties": {
@@ -546,7 +545,7 @@
         }
       }
     },
-    "BatchTalkingAvatarVideoCropDefinition": {
+    "BatchAvatarVideoCropDefinition": {
       "description": "Only keep the region defined by this object in original Avatar output video.",
       "required": [
         "bottomRight",
@@ -555,10 +554,10 @@
       "type": "object",
       "properties": {
         "topLeft": {
-          "$ref": "#/definitions/BatchTalkingAvatarCoordinateDefinition"
+          "$ref": "#/definitions/BatchAvatarCoordinateDefinition"
         },
         "bottomRight": {
-          "$ref": "#/definitions/BatchTalkingAvatarCoordinateDefinition"
+          "$ref": "#/definitions/BatchAvatarCoordinateDefinition"
         }
       }
     },
@@ -762,7 +761,7 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}/talkingavatar",
+    "hostTemplate": "{endpoint}/avatar",
     "useSchemePrefix": false,
     "parameters": [
       {
