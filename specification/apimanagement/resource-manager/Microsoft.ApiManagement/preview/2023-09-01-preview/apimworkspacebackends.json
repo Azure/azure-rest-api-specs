@@ -390,60 +390,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/backends/{backendId}/reconnect": {
-      "post": {
-        "tags": [
-          "BackendReconnect"
-        ],
-        "operationId": "WorkspaceBackend_Reconnect",
-        "description": "Notifies the API Management gateway to create a new connection to the backend after the specified timeout. If no timeout was specified, timeout of 2 minutes is used.",
-        "x-ms-examples": {
-          "ApiManagementWorkspaceBackendReconnect": {
-            "$ref": "./examples/ApiManagementWorkspaceBackendReconnect.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/WorkspaceIdParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/BackendIdParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "./definitions.json#/definitions/BackendReconnectContract"
-            },
-            "description": "Reconnect request parameters."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Reconnect request accepted."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {},
