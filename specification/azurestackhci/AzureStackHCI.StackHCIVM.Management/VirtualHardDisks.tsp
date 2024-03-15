@@ -36,23 +36,14 @@ interface VirtualHardDisks {
   get is ArmResourceRead<VirtualHardDisk>;
 
   @doc("The operation to create or update a virtual hard disk. Please note some properties can be set only during virtual hard disk creation.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    VirtualHardDisk,
-    LroHeaders = ArmAsyncOperationHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualHardDisk>;
 
   @doc("The operation to update a virtual hard disk.")
   @parameterVisibility("read")
-  update is ArmTagsPatchAsync<
-    VirtualHardDisk,
-    LroHeaders = ArmAsyncOperationHeader
-  >;
+  update is ArmTagsPatchAsync<VirtualHardDisk>;
 
   @doc("The operation to delete a virtual hard disk.")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    VirtualHardDisk,
-    LroHeaders = ArmAsyncOperationHeader
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<VirtualHardDisk>;
 
   @doc("Lists all of the virtual hard disks in the specified resource group. Use the nextLink property in the response to get the next page of virtual hard disks.")
   list is ArmResourceListByParent<VirtualHardDisk>;

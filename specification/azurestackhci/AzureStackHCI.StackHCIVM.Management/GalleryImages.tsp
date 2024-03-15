@@ -37,23 +37,14 @@ interface GalleryImages {
   get is ArmResourceRead<GalleryImage>;
 
   @doc("The operation to create or update a gallery image. Please note some properties can be set only during gallery image creation.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    GalleryImage,
-    LroHeaders = ArmAsyncOperationHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<GalleryImage>;
 
   @doc("The operation to update a gallery image.")
   @parameterVisibility("read")
-  update is ArmCustomPatchAsync<
-    GalleryImage,
-    LroHeaders = ArmAsyncOperationHeader
-  >;
+  update is ArmCustomPatchAsync<GalleryImage>;
 
   @doc("The operation to delete a gallery image.")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    GalleryImage,
-    LroHeaders = ArmAsyncOperationHeader
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<GalleryImage>;
 
   @doc("Lists all of the gallery images in the specified resource group. Use the nextLink property in the response to get the next page of gallery images.")
   list is ArmResourceListByParent<GalleryImage>;

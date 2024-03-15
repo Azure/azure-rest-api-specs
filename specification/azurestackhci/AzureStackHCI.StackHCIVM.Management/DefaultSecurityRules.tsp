@@ -27,7 +27,7 @@ model DefaultSecurityRule is TrackedResource<SecurityRuleProperties> {
   @visibility("read")
   name: string;
 
-  ...EntityTag
+  ...EntityTag;
 }
 
 @armResourceOperations
@@ -38,4 +38,3 @@ interface DefaultSecurityRules {
   @doc("Gets all Default Security Rules in a Network Security Group.")
   list is ArmResourceListByParent<DefaultSecurityRule>;
 }
-

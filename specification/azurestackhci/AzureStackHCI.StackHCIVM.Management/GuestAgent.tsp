@@ -32,10 +32,7 @@ interface GuestAgents {
   get is ArmResourceRead<GuestAgent>;
 
   @doc("Create Or Update GuestAgent.")
-  create is ArmResourceCreateOrReplaceAsync<
-    GuestAgent,
-    LroHeaders = ArmAsyncOperationHeader
-  >;
+  create is ArmResourceCreateOrReplaceAsync<GuestAgent>;
 
   @doc("Implements GuestAgent DELETE method.")
   delete is ArmResourceDeleteWithoutOkAsync<GuestAgent>;

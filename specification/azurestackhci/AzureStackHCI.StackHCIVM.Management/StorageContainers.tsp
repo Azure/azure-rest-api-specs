@@ -36,23 +36,14 @@ interface StorageContainers {
   get is ArmResourceRead<StorageContainer>;
 
   @doc("The operation to create or update a storage container. Please note some properties can be set only during storage container creation.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<
-    StorageContainer,
-    LroHeaders = ArmAsyncOperationHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<StorageContainer>;
 
   @doc("The operation to update a storage container.")
   @parameterVisibility("read")
-  update is ArmTagsPatchAsync<
-    StorageContainer,
-    LroHeaders = ArmAsyncOperationHeader
-  >;
+  update is ArmTagsPatchAsync<StorageContainer>;
 
   @doc("The operation to delete a storage container.")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    StorageContainer,
-    LroHeaders = ArmAsyncOperationHeader
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<StorageContainer>;
 
   @doc("Lists all of the storage containers in the specified resource group. Use the nextLink property in the response to get the next page of storage containers.")
   list is ArmResourceListByParent<StorageContainer>;

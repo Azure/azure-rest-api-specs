@@ -27,7 +27,7 @@ model SecurityRule is TrackedResource<SecurityRuleProperties> {
   @visibility("read")
   name: string;
 
-  ...EntityTag
+  ...EntityTag;
 }
 
 @armResourceOperations
@@ -36,18 +36,11 @@ interface SecurityRules {
   get is ArmResourceRead<SecurityRule>;
 
   @doc("Creates or updates a security rule in the specified resource group.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    SecurityRule,
-    LroHeaders=ArmAsyncOperationHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<SecurityRule>;
 
   @doc("Deletes the specified security rule.")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    SecurityRule,
-    LroHeaders=ArmAsyncOperationHeader
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<SecurityRule>;
 
   @doc("Gets all security rules in a Network Security Group.")
   list is ArmResourceListByParent<SecurityRule>;
 }
-

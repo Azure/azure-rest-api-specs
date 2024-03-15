@@ -37,23 +37,14 @@ interface NetworkInterfaces {
   get is ArmResourceRead<NetworkInterface>;
 
   @doc("The operation to create or update a network interface. Please note some properties can be set only during network interface creation.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    NetworkInterface,
-    LroHeaders = ArmAsyncOperationHeader
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<NetworkInterface>;
 
   @doc("The operation to update a network interface.")
   @parameterVisibility("read")
-  update is ArmCustomPatchAsync<
-    NetworkInterface,
-    LroHeaders = ArmAsyncOperationHeader
-  >;
+  update is ArmCustomPatchAsync<NetworkInterface>;
 
   @doc("The operation to delete a network interface.")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    NetworkInterface,
-    LroHeaders = ArmAsyncOperationHeader
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<NetworkInterface>;
 
   @doc("Lists all of the network interfaces in the specified resource group. Use the nextLink property in the response to get the next page of network interfaces.")
   list is ArmResourceListByParent<NetworkInterface>;
