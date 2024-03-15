@@ -55,9 +55,7 @@ interface NetworkInterfaces {
     LroHeaders = ArmAsyncOperationHeader
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all of the network interfaces in the specified resource group. Use the nextLink property in the response to get the next page of network interfaces.")
-  @operationId("NetworkInterfaces_List")
   list is ArmResourceListByParent<NetworkInterface>;
 
   @doc("Lists all of the network interfaces in the specified subscription. Use the nextLink property in the response to get the next page of network interfaces.")

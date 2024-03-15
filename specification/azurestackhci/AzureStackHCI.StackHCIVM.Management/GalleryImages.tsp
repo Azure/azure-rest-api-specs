@@ -55,9 +55,7 @@ interface GalleryImages {
     LroHeaders = ArmAsyncOperationHeader
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all of the gallery images in the specified resource group. Use the nextLink property in the response to get the next page of gallery images.")
-  @operationId("GalleryImages_List")
   list is ArmResourceListByParent<GalleryImage>;
 
   @doc("Lists all of the gallery images in the specified subscription. Use the nextLink property in the response to get the next page of gallery images.")

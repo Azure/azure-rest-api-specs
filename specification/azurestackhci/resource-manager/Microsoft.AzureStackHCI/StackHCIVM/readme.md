@@ -74,14 +74,6 @@ These settings apply only when `--tag=package-preview-2024-02-01` is specified o
 
 ```yaml $(tag) == 'package-preview-2024-02-01'
 input-file:
-  - preview/2024-02-01-preview/common.json
-  - preview/2024-02-01-preview/galleryImages.json
-  - preview/2024-02-01-preview/logicalNetworks.json
-  - preview/2024-02-01-preview/marketplaceGalleryImages.json
-  - preview/2024-02-01-preview/networkInterfaces.json
-  - preview/2024-02-01-preview/networkSecurityGroups.json
-  - preview/2024-02-01-preview/storageContainers.json
-  - preview/2024-02-01-preview/virtualHardDisks.json
-  - preview/2024-02-01-preview/virtualMachineInstances.json
+  - preview/2024-02-01-preview/openapi.json
   - ../operations/preview/2024-02-01-preview/operations.json
 ```

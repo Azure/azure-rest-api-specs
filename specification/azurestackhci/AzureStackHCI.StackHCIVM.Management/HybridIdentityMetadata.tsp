@@ -34,8 +34,6 @@ interface HybridIdentityMetadataGroup {
   @doc("Implements HybridIdentityMetadata GET method.")
   get is ArmResourceRead<HybridIdentityMetadata>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Returns the list of HybridIdentityMetadata of the given vm.")
-  @operationId("HybridIdentityMetadata_List")
   list is ArmResourceListByParent<HybridIdentityMetadata>;
 }

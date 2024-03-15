@@ -55,9 +55,7 @@ interface VirtualMachineInstances {
     LroHeaders = ArmAsyncOperationHeader
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all of the virtual machine instances within the specified parent resource.")
-  @operationId("VirtualMachineInstances_List")
   list is ArmResourceListByParent<VirtualMachineInstance>;
 
   @doc("The operation to start a virtual machine instance.")

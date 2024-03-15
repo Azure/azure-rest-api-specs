@@ -55,9 +55,7 @@ interface LogicalNetworks {
     LroHeaders = ArmAsyncOperationHeader
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Lists all of the logical networks in the specified resource group. Use the nextLink property in the response to get the next page of logical networks.")
-  @operationId("LogicalNetworks_List")
   list is ArmResourceListByParent<LogicalNetwork>;
 
   @doc("Lists all of the logical networks in the specified subscription. Use the nextLink property in the response to get the next page of logical networks.")

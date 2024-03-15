@@ -28,8 +28,6 @@ model AttestationStatus is ProxyResource<AttestationStatusProperties> {
 
 @armResourceOperations
 interface AttestationStatuses {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @doc("Implements AttestationStatus GET method.")
-  @operationId("AttestationStatus_Get")
   get is ArmResourceRead<AttestationStatus>;
 }

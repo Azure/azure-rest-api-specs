@@ -335,7 +335,7 @@
     },
     "/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default/attestationStatus/default": {
       "get": {
-        "operationId": "AttestationStatus_Get",
+        "operationId": "AttestationStatuses_Get",
         "tags": [
           "AttestationStatuses"
         ],
@@ -361,17 +361,12 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "GetAttestationStatus": {
-            "$ref": "./examples/AttestationStatus_Get.json"
-          }
         }
       }
     },
     "/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default/guestAgents": {
       "get": {
-        "operationId": "GuestAgents_List",
+        "operationId": "GuestAgents_ListByVirtualMachineInstance",
         "tags": [
           "GuestAgents"
         ],
@@ -398,11 +393,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "GuestAgentListByVirtualMachineInstances": {
-            "$ref": "./examples/GuestAgents_List.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -410,7 +400,7 @@
     },
     "/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default/guestAgents/default": {
       "get": {
-        "operationId": "GuestAgent_Get",
+        "operationId": "GuestAgents_Get",
         "tags": [
           "GuestAgents"
         ],
@@ -436,15 +426,10 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "GetGuestAgent": {
-            "$ref": "./examples/GuestAgent_Get.json"
-          }
         }
       },
       "put": {
-        "operationId": "GuestAgent_Create",
+        "operationId": "GuestAgents_Create",
         "tags": [
           "GuestAgents"
         ],
@@ -497,18 +482,13 @@
             }
           }
         },
-        "x-ms-examples": {
-          "CreateGuestAgent": {
-            "$ref": "./examples/GuestAgent_Create.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "GuestAgent_Delete",
+        "operationId": "GuestAgents_Delete",
         "tags": [
           "GuestAgents"
         ],
@@ -546,11 +526,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "DeleteGuestAgent": {
-            "$ref": "./examples/GuestAgent_Delete.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -559,7 +534,7 @@
     },
     "/{resourceUri}/providers/Microsoft.AzureStackHCI/virtualMachineInstances/default/hybridIdentityMetadata": {
       "get": {
-        "operationId": "HybridIdentityMetadata_List",
+        "operationId": "HybridIdentityMetadata_ListByVirtualMachineInstance",
         "tags": [
           "HybridIdentityMetadataGroup"
         ],
@@ -584,11 +559,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "HybridIdentityMetadataListByVirtualMachineInstances": {
-            "$ref": "./examples/HybridIdentityMetadata_List.json"
           }
         },
         "x-ms-pageable": {
@@ -1139,7 +1109,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/galleryImages": {
       "get": {
-        "operationId": "GalleryImages_List",
+        "operationId": "GalleryImages_ListByResourceGroup",
         "tags": [
           "GalleryImages"
         ],
@@ -1167,11 +1137,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ListGalleryImageByResourceGroup": {
-            "$ref": "./examples/GalleryImages_List.json"
           }
         },
         "x-ms-pageable": {
@@ -1443,7 +1408,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/logicalNetworks": {
       "get": {
-        "operationId": "LogicalNetworks_List",
+        "operationId": "LogicalNetworks_ListByResourceGroup",
         "tags": [
           "LogicalNetworks"
         ],
@@ -1471,11 +1436,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ListLogicalNetworkByResourceGroup": {
-            "$ref": "./examples/LogicalNetworks_List.json"
           }
         },
         "x-ms-pageable": {
@@ -1747,7 +1707,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/marketplaceGalleryImages": {
       "get": {
-        "operationId": "MarketplaceGalleryImages_List",
+        "operationId": "MarketplaceGalleryImages_ListByResourceGroup",
         "tags": [
           "MarketplaceGalleryImages"
         ],
@@ -1775,11 +1735,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ListMarketplaceGalleryImageByResourceGroup": {
-            "$ref": "./examples/MarketplaceGalleryImages_List.json"
           }
         },
         "x-ms-pageable": {
@@ -2051,7 +2006,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/networkInterfaces": {
       "get": {
-        "operationId": "NetworkInterfaces_List",
+        "operationId": "NetworkInterfaces_ListByResourceGroup",
         "tags": [
           "NetworkInterfaces"
         ],
@@ -2079,11 +2034,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ListNetworkInterfaceByResourceGroup": {
-            "$ref": "./examples/NetworkInterfaces_List.json"
           }
         },
         "x-ms-pageable": {
@@ -2355,7 +2305,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/storageContainers": {
       "get": {
-        "operationId": "StorageContainers_List",
+        "operationId": "StorageContainers_ListByResourceGroup",
         "tags": [
           "StorageContainers"
         ],
@@ -2383,11 +2333,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ListStorageContainerByResourceGroup": {
-            "$ref": "./examples/StorageContainers_List.json"
           }
         },
         "x-ms-pageable": {
@@ -2659,7 +2604,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualHardDisks": {
       "get": {
-        "operationId": "VirtualHardDisks_List",
+        "operationId": "VirtualHardDisks_ListByResourceGroup",
         "tags": [
           "VirtualHardDisks"
         ],
@@ -2687,11 +2632,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ListVirtualHardDiskByResourceGroup": {
-            "$ref": "./examples/VirtualHardDisks_List.json"
           }
         },
         "x-ms-pageable": {
