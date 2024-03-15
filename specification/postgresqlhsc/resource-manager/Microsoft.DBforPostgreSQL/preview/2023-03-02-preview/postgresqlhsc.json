@@ -2130,6 +2130,9 @@
           "$ref": "#/definitions/ClusterProperties",
           "x-ms-client-flatten": true,
           "description": "Properties of the cluster."
+        },
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties"
         }
       },
       "allOf": [
@@ -2156,6 +2159,10 @@
             "update"
           ],
           "description": "The password of the administrator login. Required for creation."
+        },
+        "dataEncryption": {
+          "$ref": "#/definitions/DataEncryption",
+          "description": "The data encryption properties of a cluster."
         },
         "provisioningState": {
           "type": "string",
@@ -2319,6 +2326,25 @@
             "name": "PasswordAuth",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "DataEncryption": {
+      "type": "object",
+      "properties": {
+        "primaryKeyUri": {
+          "type": "string"
+        },
+        "primaryUserAssignedIdentityId": {
+          "type": "string",
+          "description": "Resource Id for the User assigned identity to be used for data encryption of the primary server."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "AzureKeyVault",
+            "SystemAssigned"
+          ]
         }
       }
     },
@@ -2607,6 +2633,21 @@
           "items": {
             "$ref": "#/definitions/FirewallRule"
           }
+        }
+      }
+    },
+    "IdentityProperties": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "UserAssigned",
+            "SystemAssigned"
+          ]
+        },
+        "userAssignedIdentities": {
+          "type": "object"
         }
       }
     },
@@ -2936,7 +2977,7 @@
       "properties": {
         "enableGeoBackup": {
           "type": "boolean",
-          "description": "Cluster name to verify."
+          "description": "Boolean property to enable geo-redundant replica promotion."
         }
       }
     }
