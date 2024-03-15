@@ -18,7 +18,8 @@ union OsType {
 union HibernateSupport {
   @doc("Hibernate is enabled.") Enabled: "Enabled",
   @doc("Hibernate is not enabled.") Disabled: "Disabled",
-  @doc("Hibernate is not supported by the operating system.") OsUnsupported: "OsUnsupported",
+  @doc("Hibernate is not supported by the operating system.")
+  OsUnsupported: "OsUnsupported",
   string,
 }
 
@@ -29,6 +30,7 @@ union LocalAdminStatus {
 
   @doc("Owners of Dev Boxes in the pool are not local administrators on the Dev Boxes.")
   Disabled: "Disabled",
+
   string,
 }
 
@@ -43,8 +45,9 @@ union DevBoxProvisioningState {
   @doc("Dev Box is starting") Starting: "Starting",
   @doc("Dev Box is stopping") Stopping: "Stopping",
   @doc("Dev Box is provisioning") Provisioning: "Provisioning",
-  @doc("Dev Box was provisioned with warning") ProvisionedWithWarning : "ProvisionedWithWarning",
-  @doc("Dev Box is in grace period") InGracePeriod: "InGracePeriod" ,
+  @doc("Dev Box was provisioned with warning")
+  ProvisionedWithWarning: "ProvisionedWithWarning",
+  @doc("Dev Box is in grace period") InGracePeriod: "InGracePeriod",
   @doc("Dev Box is not provisioned") NotProvisioned: "NotProvisioned",
   string,
 }
@@ -116,20 +119,23 @@ union SkuName {
 
   @doc("AMD, 32 vCPU, 128 GB RAM, 2048 GB Storage")
   general_a_32c128gb2048ssd_v2: "general_a_32c128gb2048ssd_v2",
+
   string,
 }
 
 @doc("Indicates whether the feature to stop the devbox on disconnect once the grace period has lapsed is enabled.")
 union StopOnDisconnectEnableStatus {
   @doc("Stop on disconnect is enabled on the Dev Box.") Enabled: "Enabled",
-  @doc("Stop on disconnect is not enabled on the Dev Box.") Disabled: "Disabled",
+  @doc("Stop on disconnect is not enabled on the Dev Box.")
+  Disabled: "Disabled",
   string,
 }
 
 @doc("Pool status indicating whether a pool is available to create Dev Boxes.")
 union PoolHealthStatus {
   @doc("The pool health status is not known.") Unknown: "Unknown",
-  @doc("The pool health status waiting for health checks to run.") Pending: "Pending",
+  @doc("The pool health status waiting for health checks to run.")
+  Pending: "Pending",
   @doc("The pool health status is healthy.") Healthy: "Healthy",
   @doc("The pool health status has one or more warnings.") Warning: "Warning",
   @doc("The pool health status is not healthy.") Unhealthy: "Unhealthy",
@@ -138,7 +144,8 @@ union PoolHealthStatus {
 
 @doc("The supported types for a scheduled task.")
 union ScheduledType {
-  @doc("The scheduled task will stop impacted Dev Boxes.") StopDevBox: "StopDevBox",
+  @doc("The scheduled task will stop impacted Dev Boxes.")
+  StopDevBox: "StopDevBox",
   string,
 }
 

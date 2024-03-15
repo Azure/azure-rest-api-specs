@@ -24,8 +24,10 @@ union ParameterType {
 
 @doc("Indicates whether an environment type is enabled for use in a project.")
 union EnvironmentTypeEnableStatus {
-  @doc("The environment type is enabled for use in the project.") Enabled: "Enabled",
-  @doc("The environment type is not enabled for use in the project.") Disabled: "Disabled",
+  @doc("The environment type is enabled for use in the project.")
+  Enabled: "Enabled",
+  @doc("The environment type is not enabled for use in the project.")
+  Disabled: "Disabled",
   string,
 }
 
@@ -69,6 +71,7 @@ union EnvironmentProvisioningState {
 
   @doc("The environment storage provisioning failed.")
   StorageProvisioningFailed: "StorageProvisioningFailed",
+
   string,
 }
 

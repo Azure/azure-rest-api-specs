@@ -1,22 +1,20 @@
 parameters:
   service-dir:
     default: "sdk/devcenter"
-emit: [
-  "@azure-tools/typespec-autorest",
-]
+emit: ["@azure-tools/typespec-autorest"]
 linter:
-  extends: 
-   - "@azure-tools/typespec-azure-core/all"
+  extends:
+    - "@azure-tools/typespec-azure-core/all"
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/Microsoft.DevCenter/{version-status}/{version}/devcenter.json"
-    examples-directory: "examples"     
+    examples-directory: "examples"
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.Developer.DevCenter"
     namespace: "{package-dir}"
-    clear-output-folder : true
+    clear-output-folder: true
     flavor: azure
   "@azure-tools/typespec-python":
     package-dir: "azure-developer-devcenter"
