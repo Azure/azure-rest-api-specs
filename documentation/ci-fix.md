@@ -143,7 +143,6 @@ npm install -g @azure/oad
 oad compare <old-spec-path> <new-spec-path>
 ```
 Please see [readme](https://github.com/Azure/openapi-diff/blob/main/README.md) for how to install or run tool in details.
-Or you can run it in [OpenAPI Hub](https://openapihub.azure-devex-tools.com/tools/diff).
 Refer to [Oad Docs](https://github.com/Azure/openapi-diff/tree/main/docs) for detailed description of all oad rules.
 
 ## `Swagger LintDiff` and `Swagger Lint(RPaaS)`
