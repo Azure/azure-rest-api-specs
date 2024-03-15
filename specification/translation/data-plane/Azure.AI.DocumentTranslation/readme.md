@@ -6,26 +6,26 @@ Configuration for generating Translation Document SDK.
 
 ## Releases
 
-The current release of Document is **2023-11-01-preview**.
+The current release of Document is **v1.0**.
 ``` yaml
-tag: 2023-11-01-preview
+tag: v1.0
 add-credentials: true
 clear-output-folder: true
 openapi-type: data-plane
 ```
 
-### Release 2023-11-01-preview
-These settings apply only when `--tag=2023-11-01-preview` is specified on the command line.
+### Release v1.0
+These settings apply only when `--tag=v1.0` is specified on the command line.
 
-``` yaml $(tag) == '2023-11-01-preview'
-version: 2023-11-01-preview
+``` yaml $(tag) == 'v1.0'
+version: v1.0
 input-file:
-  - $(this-folder)/preview/2023-11-01-preview/openapi.json
+  - $(this-folder)/stable/v1.0/openapi.json
 ```
 
-## Multi-API/Profile support for AutoRest '2023-11-01-preview' generators 
+## Multi-API/Profile support for AutoRest 'v1.0' generators 
 
-AutoRest `2023-11-01-preview` generators require the use of `--tag=all-api-versions` to select api files.
+AutoRest `v1.0` generators require the use of `--tag=all-api-versions` to select api files.
 
 This block is updated by an automatic script. Edits may be lost!
 
@@ -35,7 +35,7 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/preview/2023-11-01-preview/openapi.json
+  - $(this-folder)/stable/v1.0/openapi.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
