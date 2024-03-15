@@ -62,6 +62,11 @@ input-file:
   - Microsoft.App/preview/2024-02-02-preview/Subscriptions.json
   - Microsoft.App/preview/2024-02-02-preview/Usages.json
   - Microsoft.App/preview/2024-02-02-preview/FunctionsExtension.json
+directive:
+  - suppress: PatchBodyParametersSchema
+    from: JavaComponents.json
+    reason: |
+      Java Component is using componentType as the discriminator. While the discriminator is a required property, this rule prevent it being present in the patch request body.
 ```
 
 ### Tag: package-2024-03

@@ -401,61 +401,140 @@
         "properties": {
           "description": "Java Component resource specific properties",
           "type": "object",
-          "properties": {
-            "componentType": {
-              "description": "Type of the Java Component.",
-              "enum": [
-                "SpringBootAdmin",
-                "SpringCloudEureka",
-                "SpringCloudConfig",
-                "Nacos"
-              ],
-              "type": "string",
-              "x-ms-enum": {
-                "name": "JavaComponentType",
-                "modelAsString": true
-              }
-            },
-            "provisioningState": {
-              "description": "Provisioning state of the Java Component.",
-              "enum": [
-                "Succeeded",
-                "Failed",
-                "Canceled",
-                "Deleting",
-                "InProgress"
-              ],
-              "type": "string",
-              "readOnly": true,
-              "x-ms-enum": {
-                "name": "JavaComponentProvisioningState",
-                "modelAsString": true
-              }
-            },
-            "configurations": {
-              "description": "List of Java Components configuration properties",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/JavaComponentConfigurationProperty"
-              },
-              "x-ms-identifiers": [
-                "propertyName"
-              ]
-            },
-            "serviceBinds": {
-              "description": "List of Java Components that are bound to the Java component",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/JavaComponentServiceBind"
-              },
-              "x-ms-identifiers": [
-                "name"
-              ]
-            }
-          },
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/JavaComponentProperties"
         }
       }
+    },
+    "JavaComponentProperties": {
+      "description": "Java Component common properties.",
+      "type": "object",
+      "required": [
+        "componentType"
+      ],
+      "properties": {
+        "componentType": {
+          "description": "Type of the Java Component.",
+          "enum": [
+            "SpringBootAdmin",
+            "SpringCloudEureka",
+            "SpringCloudConfig",
+            "Nacos"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JavaComponentType",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the Java Component.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Deleting",
+            "InProgress"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "JavaComponentProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "configurations": {
+          "description": "List of Java Components configuration properties",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JavaComponentConfigurationProperty"
+          },
+          "x-ms-identifiers": [
+            "propertyName"
+          ]
+        },
+        "serviceBinds": {
+          "description": "List of Java Components that are bound to the Java component",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JavaComponentServiceBind"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "x-ms-client-flatten": true,
+      "discriminator": "componentType"
+    },
+    "JavaComponentIngress": {
+      "description": "Container App Ingress configuration.",
+      "type": "object",
+      "properties": {
+        "fqdn": {
+          "description": "Hostname of the Java Component endpoint",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SpringBootAdminComponent": {
+      "description": "Spring Boot Admin properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JavaComponentProperties"
+        }
+      ],
+      "properties": {
+        "ingress": {
+          "$ref": "#/definitions/JavaComponentIngress",
+          "description": "Java Component Ingress configurations."
+        }
+      },
+      "x-ms-discriminator-value": "SpringBootAdmin"
+    },
+    "NacosComponent": {
+      "description": "Nacos properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JavaComponentProperties"
+        }
+      ],
+      "properties": {
+        "ingress": {
+          "$ref": "#/definitions/JavaComponentIngress",
+          "description": "Java Component Ingress configurations."
+        }
+      },
+      "x-ms-discriminator-value": "Nacos"
+    },
+    "SpringCloudEurekaComponent": {
+      "description": "Spring Cloud Eureka properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JavaComponentProperties"
+        }
+      ],
+      "properties": {
+        "ingress": {
+          "$ref": "#/definitions/JavaComponentIngress",
+          "description": "Java Component Ingress configurations."
+        }
+      },
+      "x-ms-discriminator-value": "SpringCloudEureka"
+    },
+    "SpringCloudConfigComponent": {
+      "description": "Spring Cloud Config properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JavaComponentProperties"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "SpringCloudConfig"
     },
     "JavaComponentsCollection": {
       "description": "Java Components ARM resource.",
