@@ -192,6 +192,66 @@
           }
         }
       }
+    },
+    "/route/snapToRoads": {
+      "post": {
+        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe Snap to Roads API accepts GPS point data, represented as latitude and longitude coordinates, and generates a route that aligns with existing roadways on a map. This process, known as \"snapping to roads,\" produces a series of objects that trace a path closely following the road network. The resulting data includes road names and their respective speed limits, pertinent to the traversed segments.\n\nMoreover, the Snap to Roads API offers an interpolation feature, which refines the GPS points to create a smoother route that adheres to the road's geometry. This functionality is especially beneficial for asset tracking and enhancing data visualization in mapping applications.\n\n\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=route-v2).\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n",
+        "operationId": "Route_PostSnapToRoads",
+        "consumes": [
+          "application/geo+json"
+        ],
+        "produces": [
+          "application/geo+json",
+          "application/json"
+        ],
+        "x-ms-client-name": "Route_PostSnapToRoads",
+        "x-ms-examples": {
+          "Successfully retrieve a snap to roads points with additional parameters in the body": {
+            "$ref": "./examples/PostSnapToRoads.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/Accept-Language"
+          },
+          {
+            "name": "snapToRoadsRequest",
+            "in": "body",
+            "description": "Request body of SnapToRoads API in GeoJSON format.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SnapToRoadsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SnapToRoadsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code of the error that occurred."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -423,6 +483,84 @@
           }
         }
       ]
+    },
+    "SnapToRoadsRequest": {
+      "description": "This object is the request body.",
+      "type": "object",
+      "required": [
+        "type",
+        "features"
+      ],
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FeatureTypeEnum"
+        },
+        "features": {
+          "type": "array",
+          "description": "A set of points to snap to roads. You can have a maximum of 100 points. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details on the GeoJSON format.",
+          "minimum": 2,
+          "items": {
+            "$ref": "#/definitions/InputSnapToRoadsFeaturesItem"
+          }
+        },
+        "pointIndex": {
+          "description": "Identify the corresponding index in the original list of points for each snapped point. Ensure that interpolated points have unique indices to distinguish them from the snapped points.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "interpolate": {
+          "description": "Specify whether to insert additional points between the snapped points to complete the full route path",
+          "type": "boolean",
+          "default": false
+        },
+        "includeSpeedLimit": {
+          "description": "Specify whether to include speed limit information for the snapped points. The unit is in kilometers per hour.",
+          "type": "boolean",
+          "default": false
+        },
+        "travelMode": {
+          "description": "Specify the travel mode for snapping the coordinates. If unspecified, the default mode is \"driving\", which optimizes the snapped coordinates for driving routes.",
+          "type": "string",
+          "default": "driving",
+          "enum": [
+            "driving",
+            "walking"
+          ],
+          "x-ms-enum": {
+            "name": "TravelMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "driving",
+                "description": "driving"
+              },
+              {
+                "value": "walking",
+                "description": "walking."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "SnapToRoadsResponse": {
+      "description": "This object is returned from a successful call.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FeatureTypeEnum"
+        },
+        "features": {
+          "type": "array",
+          "description": "`GeoJSON` feature object that contains Geometry object and additional properties. Refer to [RFC 7946, Section 3.2](https://www.rfc-editor.org/rfc/rfc7946#section-3.2) for details.",
+          "items": {
+            "$ref": "#/definitions/SnapToRoadFeaturesItem"
+          }
+        },
+        "nextLink": {
+          "$ref": "#/definitions/NextLink"
+        }
+      }
     },
     "FeatureCollection": {
       "description": "`GeoJSON` FeatureCollection object that contains a list of Features. Refer to [RFC 7946, section 3.3](https://www.rfc-editor.org/rfc/rfc7946#section-3.3) for details.",
@@ -1922,6 +2060,82 @@
           "description": "System-optimized waypoint and viaWaypoint index.",
           "type": "integer",
           "format": "int64"
+        }
+      }
+    },
+    "InputSnapToRoadsFeaturesItem": {
+      "type": "object",
+      "description": "Specifies the input snap to roads points. `GeoJSON` feature object and additional properties. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FeaturesItemTypeEnum"
+        },
+        "geometry": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/InputSnapToRoadsProperties"
+        }
+      },
+      "required": [
+        "type",
+        "geometry",
+        "properties"
+      ]
+    },
+    "SnapToRoadFeaturesItem": {
+      "type": "object",
+      "description": "GeoJSON feature object that contains Geometry object and additional properties of the route.",
+      "allOf": [
+        {
+          "type": "object",
+          "description": "GeoJSON feature object that contains Geometry object and additional properties of the route.",
+          "properties": {
+            "type": {
+              "$ref": "#/definitions/FeaturesItemTypeEnum"
+            },
+            "geometry": {
+              "$ref": "#/definitions/Geometry"
+            },
+            "bbox": {
+              "$ref": "#/definitions/Bbox"
+            },
+            "properties": {
+              "$ref": "#/definitions/SnapToRoadsFeatureProperties"
+            }
+          }
+        }
+      ]
+    },
+    "SnapToRoadsFeatureProperties": {
+      "description": "Snap to Roads properties.",
+      "type": "object",
+      "properties": {
+        "inputIndex": {
+          "description": "Identify the corresponding index in the original list of points for each snapped point. Ensure that interpolated points have unique indices to distinguish them from the snapped points.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "name": {
+          "description": "Name of the road.",
+          "type": "string"
+        },
+        "speedLimitInKilometers": {
+          "description": "Speed limit in kilometers per hour.",
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "InputSnapToRoadsProperties": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "pointIndex": {
+          "description": "Identify the corresponding index in the original list of points for each snapped point. Ensure that interpolated points have unique indices to distinguish them from the snapped points.",
+          "format": "int64",
+          "type": "integer"
         }
       }
     },
