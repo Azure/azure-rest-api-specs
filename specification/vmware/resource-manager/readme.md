@@ -211,6 +211,7 @@ suppressions:
   #   reason: false positives
   #   from: vmware.json
 
+
   - code: XmsPageableForListCalls
     reasons: This are gets on a TypeSpec @singleton. These are false positives.
     from: vmware.json
