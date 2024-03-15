@@ -517,6 +517,9 @@ model LogicalNetworkProperties {
   @doc("DhcpOptions contains an array of DNS servers available to VMs deployed in the logical network. Standard DHCP option for a subnet overrides logical network DHCP options.")
   dhcpOptions?: LogicalNetworkPropertiesDhcpOptions;
 
+  @doc("NetworkSecurityGroup - Network Security Group attached to the logical network.")
+  networkSecurityGroup?: NetworkSecurityGroup;
+
   @doc("Subnet - list of subnets under the logical network")
   subnets?: Subnet[];
 
@@ -729,6 +732,9 @@ model SecurityRuleProperties {
 model NetworkInterfaceProperties {
   @doc("IPConfigurations - A list of IPConfigurations of the network interface.")
   ipConfigurations?: IPConfiguration[];
+
+  @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
+  networkSecurityGroup?: NetworkSecurityGroup;
 
   @doc("MacAddress - The MAC address of the network interface.")
   macAddress?: string;
