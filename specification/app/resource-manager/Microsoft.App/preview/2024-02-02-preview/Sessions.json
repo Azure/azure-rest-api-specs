@@ -426,11 +426,11 @@
       "description": "An item of the environment variables collection.",
       "type": "object",
       "properties": {
-        "containerId": {
+        "key": {
           "description": "The key of the item.",
           "type": "string"
         },
-        "containerEnvironmentVariables": {
+        "value": {
           "description": "The value of the item.",
           "type": "array",
           "items": {
@@ -443,15 +443,11 @@
       "description": "Environment variables to update.",
       "type": "object",
       "properties": {
-        "properties": {
-          "description": "Specific environment variables to update.",
-          "type": "object",
-          "environmentVariables": {
-            "description": "Collection of environment variables",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/EnvironmentVariablesItem"
-            }
+        "environmentVariables": {
+          "description": "Collection of environment variables",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentVariablesItem"
           }
         }
       },
