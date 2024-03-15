@@ -21,7 +21,7 @@ using Azure.Core.Traits;
   ]>
 )
 @service({
-  title: "Batch Document Translation Client",
+  title: "Azure.AI.DocumentTranslation",
 })
 @server(
   "{endpoint}/translator/text/batch/v1.0",
