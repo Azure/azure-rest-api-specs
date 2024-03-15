@@ -1,31 +1,43 @@
-# Cognitive Services Translation Document SDK
+# Cognitive Services Document Translation  SDK
 
 > see https://aka.ms/autorest
 
-Configuration for generating Translation Document SDK.
+Configuration for generating Document Translation  SDK.
 
-## Releases
+### Basic Information
 
-The current release of Document is **v1.0**.
+These are the global settings for the app.
+The current release is `v1.0`.
+
 ``` yaml
 tag: v1.0
 add-credentials: true
-clear-output-folder: true
 openapi-type: data-plane
 ```
 
-### Release v1.0
+# Releases
+
+### Release Tag: v1.0
 These settings apply only when `--tag=v1.0` is specified on the command line.
 
 ``` yaml $(tag) == 'v1.0'
-version: v1.0
-input-file:
-  - $(this-folder)/stable/v1.0/openapi.json
+input-file: 
+  - stable/v1.0/openapi.json
+  - preview/2023-11-01-preview/openapi.json
+```
+ 
+### Release Tag: 2023-11-01-preview
+These settings apply only when `--tag=2023-11-01-preview` is specified on the command line.
+
+``` yaml $(tag) == '2023-11-01-preview'
+input-file: 
+  - stable/v1.0/openapi.json
+  - preview/2023-11-01-preview/openapi.json
 ```
 
-## Multi-API/Profile support for AutoRest 'v1.0' generators 
+## Multi-API/Profile support for AutoRest v3 generators 
 
-AutoRest `v1.0` generators require the use of `--tag=all-api-versions` to select api files.
+AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
 This block is updated by an automatic script. Edits may be lost!
 
@@ -35,7 +47,7 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/stable/v1.0/openapi.json
+  - $(this-folder)/preview/2023-11-01-preview/openapi.json
 ```
 
 If there are files that should not be in the `all-api-versions` set, 
