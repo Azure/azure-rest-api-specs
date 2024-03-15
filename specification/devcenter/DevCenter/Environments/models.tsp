@@ -26,8 +26,10 @@ union ParameterType {
 union EnvironmentTypeEnableStatus {
   @doc("The environment type is enabled for use in the project.")
   Enabled: "Enabled",
+
   @doc("The environment type is not enabled for use in the project.")
   Disabled: "Disabled",
+
   string,
 }
 
