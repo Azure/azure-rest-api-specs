@@ -2192,7 +2192,7 @@
           }
         },
         "pauseOnStart": {
-          "description": "When set to true will start recording in Pause mode, which could be resumed.",
+          "description": "When set to true will start recording in Pause mode, which can be resumed.",
           "type": "boolean"
         },
         "externalStorage": {
@@ -2258,7 +2258,19 @@
       "type": "string",
       "x-ms-enum": {
         "name": "RecordingStorageKind",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureCommunicationServices",
+            "description": "Storage managed by Azure Communication Services",
+            "value": "AzureCommunicationServices"
+          },
+          {
+            "name": "AzureBlobStorage",
+            "description": "Storage managed by provided Azure blob",
+            "value": "AzureBlobStorage"
+          }
+        ]
       }
     },
     "ExternalStorage": {
@@ -2270,21 +2282,9 @@
         "recordingStorageKind": {
           "$ref": "#/definitions/RecordingStorageKind"
         },
-        "azureBlobStorage": {
-          "$ref": "#/definitions/AzureBlobStorage",
-          "description": "Defines the Azure Blob storage location where the recording will be stored"
-        }
-      }
-    },
-    "AzureBlobStorage": {
-      "description": "Used to specify Azure Blob container url to recording storage",
-      "required": [
-        "containerUri"
-      ],
-      "type": "object",
-      "properties": {
-        "containerUri": {
-          "description": "Url of a container or a location within a container",
+        "recordingDesintationContainerUrl": {
+          "format": "uri",
+          "description": "Uri of a container or a location within a container",
           "type": "string"
         }
       }
@@ -2304,13 +2304,29 @@
       "enum": [
         "azureCommunicationServices",
         "teams",
-        "teamsCompliance",
-        "others"
+        "teamsCompliance"
       ],
       "type": "string",
       "x-ms-enum": {
         "name": "RecordingKind",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureCommunicationServices",
+            "description": "Recording initated by Azure Communication Services",
+            "value": "AzureCommunicationServices"
+          },
+          {
+            "name": "Teams",
+            "description": "Recording initated by Teams user",
+            "value": "Teams"
+          },
+          {
+            "name": "TeamsCompliance",
+            "description": "Recording initated by Teams compliance policy",
+            "value": "TeamsCompliance"
+          }
+        ]
       }
     },
     "RecordingStateResponse": {
