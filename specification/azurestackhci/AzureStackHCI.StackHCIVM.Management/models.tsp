@@ -254,6 +254,12 @@ enum PowerStateEnum {
   @doc("Virtual machine stopping")
   Stopping,
 
+  @doc("Virtual machine paused")
+  Paused,
+
+  @doc("Virtual machine Saved,")
+  Saved,
+
   @doc("Power state of the virtual machine is unknown")
   Unknown,
 }
@@ -649,6 +655,74 @@ model IPPoolInfo {
   @doc("Number of IP addresses available in the IP Pool")
   @visibility("read")
   available?: string;
+}
+
+@doc("Network Security Group resource.")
+model NetworkSecurityGroupProperties {
+  @doc("A collection of security rules of the network security group.")
+  securityRules?: SecurityRule[];
+
+  @doc("The default security rules of network security group.")
+  @visibility("read")
+  defaultSecurityRules?: DefaultSecurityRule[];
+
+  @doc("A collection of references to network interfaces that are currently using this NSG.")
+  @visibility("read")
+  networkInterfaces?: NetworkInterface[];
+
+  @doc("A collection of references to subnets that are currently using this NSG")
+  @visibility("read")
+  subnets?: Subnet[];
+
+  @doc("The resource GUID property of the network security group resource.")
+  @visibility("read")
+  resourceGuid?: string;
+
+  @doc("The provisioning state of the network security group resource.")
+  @visibility("read")
+  provisioningState?: ProvisioningState;
+}
+
+@doc("Security rule resource.")
+model SecurityRuleProperties {
+  @doc("A description for this rule. Restricted to 140 chars.")
+  description?: string;
+
+  @doc("Network protocol this rule applies to.")
+  protocol: SecurityRuleProtocol;
+
+  @doc("The source port or range. Integer or range between 0 and 65535. Asterisk '' can also be used to match all ports.")
+  sourcePortRange?: string;
+
+  @doc("The destination port or range. Integer or range between 0 and 65535. Asterisk '' can also be used to match all ports.")
+  destinationPortRange?: string;
+
+  @doc("The CIDR or source IP range. Asterisk '' can also be used to match all source IPs. Default tags such as 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used. If this is an ingress rule, specifies where network traffic originates from.")
+  sourceAddressPrefix?: string;
+
+  @doc("The CIDR or source IP ranges.")
+  sourceAddressPrefixes?: string[];
+
+  @doc("The destination address prefix. CIDR or destination IP range. Asterisk '' can also be used to match all source IPs. Default tags such as 'VirtualNetwork', 'AzureLoadBalancer' and 'Internet' can also be used.")
+  destinationAddressPrefix?: string;
+
+  @doc("The destination address prefixes. CIDR or destination IP ranges.")
+  destinationAddressPrefixes?: string[];
+
+  @doc("The source port ranges.")
+  sourcePortRanges?: string[];
+
+  @doc("The destination port ranges.")
+  destinationPortRanges?: string[];
+
+  @doc("The network traffic is allowed or denied.")
+  access: SecurityRuleAccess;
+
+  @doc("The priority of the rule. The value can be between 100 and 4096. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule.")
+  priority: int32;
+
+  @doc("The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic.")
+  direction: SecurityRuleDirection;
 }
 
 @doc("Properties under the network interface resource")
