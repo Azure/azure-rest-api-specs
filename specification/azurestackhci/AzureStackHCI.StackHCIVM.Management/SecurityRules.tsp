@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "./NetworkSecurityGroup.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -12,15 +13,16 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-@doc("NetworkSecurityGroup resource.")
+@doc("Security Rule resource.")
 @includeInapplicableMetadataInPayload(false)
-model NetworkSecurityGroup is TrackedResource<NetworkSecurityGroupProperties> {
-  @doc("Name of the network security group")
+@parentResource(NetworkSecurityGroup)
+model SecurityRule is TrackedResource<SecurityRuleProperties> {
+  @doc("Name of the security rule.")
   @maxLength(80)
   @minLength(1)
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$")
   @path
-  @key("networkSecurityGroupName")
+  @key("securityRuleName")
   @segment("networkSecurityGroups")
   @visibility("read")
   name: string;
@@ -29,30 +31,23 @@ model NetworkSecurityGroup is TrackedResource<NetworkSecurityGroupProperties> {
 }
 
 @armResourceOperations
-interface NetworkSecurityGroups {
-  @doc("Gets the specified network security group.")
-  get is ArmResourceRead<NetworkSecurityGroup>;
+interface SecurityRules {
+  @doc("Gets the specified security rule.")
+  get is ArmResourceRead<SecurityRule>;
 
-  @doc("Creates or updates a network security group in the specified resource group.")
+  @doc("Creates or updates a security rule in the specified resource group.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    NetworkSecurityGroup,
+    SecurityRule,
     LroHeaders=ArmAsyncOperationHeader
   >;
 
-  @doc("Updates a network security group tags.")
-  @parameterVisibility("read")
-  updateTags is ArmCustomPatchSync<NetworkSecurityGroup, TagsObject>;
-
-  @doc("Deletes the specified network security group.")
+  @doc("Deletes the specified security rule.")
   delete is ArmResourceDeleteWithoutOkAsync<
-    NetworkSecurityGroup,
+    SecurityRule,
     LroHeaders=ArmAsyncOperationHeader
   >;
 
-  @doc("Gets all network security groups in a resource group.")
-  list is ArmResourceListByParent<NetworkSecurityGroup>;
-
-  @doc("Gets all network security groups in a subscription.")
-  listAll is ArmListBySubscription<NetworkSecurityGroup>;
+  @doc("Gets all security rules in a Network Security Group.")
+  list is ArmResourceListByParent<SecurityRule>;
 }
 

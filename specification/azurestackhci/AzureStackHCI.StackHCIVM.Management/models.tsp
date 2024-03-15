@@ -655,13 +655,13 @@ model IPPoolInfo {
 }
 
 @doc("Network Security Group resource.")
-model NetworkSecurityGroupPropertiesFormat {
+model NetworkSecurityGroupProperties {
   @doc("A collection of security rules of the network security group.")
   securityRules?: SecurityRule[];
 
   @doc("The default security rules of network security group.")
   @visibility("read")
-  defaultSecurityRules?: SecurityRule[];
+  defaultSecurityRules?: DefaultSecurityRule[];
 
   @doc("A collection of references to network interfaces that are currently using this NSG.")
   @visibility("read")
@@ -680,25 +680,8 @@ model NetworkSecurityGroupPropertiesFormat {
   provisioningState?: ProvisioningState;
 }
 
-@doc("Network security rule.")
-model SecurityRule {
-  @doc("Properties of the security rule.")
-  @extension("x-ms-client-flatten", true)
-  properties?: SecurityRulePropertiesFormat;
-
-  @doc("The name of the resource that is unique within a resource group. This name can be used to access the resource.")
-  name?: string;
-
-  @doc("A unique read-only string that changes whenever the resource is updated.")
-  @visibility("read")
-  etag?: string;
-
-  @doc("The type of the resource.")
-  type?: string;
-}
-
 @doc("Security rule resource.")
-model SecurityRulePropertiesFormat {
+model SecurityRuleProperties {
   @doc("A description for this rule. Restricted to 140 chars.")
   description?: string;
 
