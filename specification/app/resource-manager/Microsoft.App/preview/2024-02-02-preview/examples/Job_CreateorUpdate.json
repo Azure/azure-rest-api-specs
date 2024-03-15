@@ -69,7 +69,23 @@
                 "while true; do echo hello; sleep 10;done"
               ]
             }
-          ]
+          ],
+          "scale": {
+            "minExecutions": 1,
+            "maxExecutions": 5,
+            "rules": [
+              {
+                "name": "servicebus",
+                "type": "azure-servicebus",
+                "metadata": {
+                  "queueName": "myqueue",
+                  "namespace": "mynamespace",
+                  "messageCount": "5"
+                },
+                "identity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity"
+              }
+            ]
+          }
         }
       }
     }
@@ -151,6 +167,22 @@
                 ]
               }
             ],
+            "scale": {
+              "minExecutions": 1,
+              "maxExecutions": 5,
+              "rules": [
+                {
+                  "name": "servicebus",
+                  "type": "azure-servicebus",
+                  "metadata": {
+                    "queueName": "myqueue",
+                    "namespace": "mynamespace",
+                    "messageCount": "5"
+                  },
+                  "identity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity"
+                }
+              ]
+            },
             "volumes": [
               {
                 "name": "azurefile",
