@@ -5,32 +5,38 @@
     "sessionPoolName": "testsessionpool",
     "name": "testsession",
     "api-version": "2024-02-02-preview",
-    "environmentVariables": {
-      "container1": [
-        {
-          "name": "envvarname1",
-          "value": "envvarval1",
-          "secretRef": "envvarsecretref1"
-        },
-        {
-          "name": "envvarname2",
-          "value": "envvarval2",
-          "secretRef": "envvarsecretref2"
-        }
-      ],
-      "container2": [
-        {
-          "name": "envvarname3",
-          "value": "envvarval3",
-          "secretRef": "envvarsecretref3"
-        },
-        {
-          "name": "envvarname4",
-          "value": "envvarval4",
-          "secretRef": "envvarsecretref4"
-        }
-      ]
-    }
+    "environmentVariables": [
+      {
+        "key": "key1",
+        "value": [
+          {
+            "name": "name-1-1",
+            "value": "value-1-1",
+            "secretRef": "secretRef-1-1"
+          },
+          {
+            "name": "name-1-2",
+            "value": "value-1-2",
+            "secretRef": "secretRef-1-2"
+          }
+        ]
+      },
+      {
+        "key": "key2",
+        "value": [
+          {
+            "name": "name-2-1",
+            "value": "value-2-1",
+            "secretRef": "secretRef-2-1"
+          },
+          {
+            "name": "name-2-2",
+            "value": "value-2-2",
+            "secretRef": "secretRef-2-2"
+          }
+        ]
+      }
+    ]
   },
   "responses": {
     "200": {

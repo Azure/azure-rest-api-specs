@@ -309,11 +309,11 @@
       "type": "object",
       "properties": {
         "jwtToken": {
-          "description": "JWT token for the session",
+          "description": "JWT token for the session.",
           "type": "string"
         },
         "authEnabled": {
-          "description": "Is auth enabled for the session",
+          "description": "Is auth enabled for the session.",
           "type": "boolean"
         }
       }
@@ -422,15 +422,40 @@
         }
       }
     },
-    "EnvironmentVariableCollection": {
-      "description": "Session collection ARM resource.",
+    "EnvironmentVariablesItem": {
+      "description": "An item of the environment variables collection.",
       "type": "object",
-      "additionalProperties": {
-        "type": "array",
-        "items": {
-          "$ref": "./CommonDefinitions.json#/definitions/EnvironmentVar"
+      "properties": {
+        "key": {
+          "description": "The key of the item.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value of the item.",
+          "type": "array",
+          "items": {
+            "$ref": "./CommonDefinitions.json#/definitions/EnvironmentVar"
+          }
         }
       }
+    },
+    "EnvironmentVariableCollection": {
+      "description": "Environment variables to update.",
+      "type": "object",
+      "properties": {
+        "description": "Specific environment variables to update.",
+        "type": "object",
+        "properties": {
+          "environmentVariables": {
+            "description": "Collection of environment variables",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/EnvironmentVariablesItem"
+            }
+          }
+        }
+      },
+      "x-ms-client-flatten": true
     }
   }
 }
