@@ -68,7 +68,7 @@ model ExtendedZoneProperties {
   provisioningState?: ProvisioningState;
 
   @visibility("read")
-  @doc("Indicates the Azure Extended Zone registration�s approval status.")
+  @doc("Indicates the Azure Extended Zone registration’s approval status.")
   registrationState?: RegistrationState;
 
   @visibility("read")
