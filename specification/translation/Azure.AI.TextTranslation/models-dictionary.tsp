@@ -55,7 +55,9 @@ model DictionaryExamplesResult {
 }
 
 @doc("Element containing the text with translation.")
-model DictionaryExampleTextItem extends InputTextItem {
+model DictionaryExampleTextItem {
+  ...InputTextItem;
+
   @doc("""
     A string specifying the translated text previously returned by the Dictionary lookup operation. 
     This should be the value from the normalizedTarget field in the translations list of the Dictionary 

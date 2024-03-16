@@ -779,18 +779,18 @@
       "type": "object",
       "description": "Element containing the text with translation.",
       "properties": {
+        "text": {
+          "type": "string",
+          "description": "Text to translate."
+        },
         "translation": {
           "type": "string",
           "description": "A string specifying the translated text previously returned by the Dictionary lookup operation. \nThis should be the value from the normalizedTarget field in the translations list of the Dictionary \nlookup response. The service will return examples for the specific source-target word-pair."
         }
       },
       "required": [
+        "text",
         "translation"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/InputTextItem"
-        }
       ]
     },
     "DictionaryExamplesParameters": {
@@ -1287,6 +1287,22 @@
       "type": "object",
       "description": "Script definition with list of script into which given script can be translitered.",
       "properties": {
+        "code": {
+          "type": "string",
+          "description": "Code identifying the script."
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of the script in the locale requested via Accept-Language header."
+        },
+        "nativeName": {
+          "type": "string",
+          "description": "Display name of the language in the locale native for the language."
+        },
+        "dir": {
+          "type": "string",
+          "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages."
+        },
         "toScripts": {
           "type": "array",
           "description": "List of scripts available to convert text to.",
@@ -1297,12 +1313,11 @@
         }
       },
       "required": [
+        "code",
+        "name",
+        "nativeName",
+        "dir",
         "toScripts"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/CommonScriptModel"
-        }
       ]
     },
     "TransliterateResult": {
