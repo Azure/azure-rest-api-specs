@@ -923,7 +923,7 @@
             "networkInterfaceConfigurations": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/NetworkInterfaceConfiguration"
+                "$ref": "#/definitions/NetworkVirtualApplianceNetworkInterfaceConfiguration"
               }
             }
           },
@@ -1043,50 +1043,50 @@
       },
       "description": "Network Virtual Appliance NIC properties."
     },
-    "NetworkInterfaceConfiguration": {
+    "NetworkVirtualApplianceNetworkInterfaceConfiguration": {
       "type": "object",
       "readOnly": false,
-      "description": "Particluar NIC's configuration",
+      "description": "Represents a single NIC configuration",
       "properties": {
         "type": {
           "type": "string",
           "enum": [ "PublicNic", "PrivateNic" ]
         },
         "properties": {
-          "$ref": "#/definitions/NetworkInterfaceConfigurationProperties"
+          "$ref": "#/definitions/NetworkVirtualApplianceNetworkInterfaceConfigurationProperties"
         }
       }
     },
-    "NetworkInterfaceConfigurationProperties": {
+    "NetworkVirtualApplianceNetworkInterfaceConfigurationProperties": {
       "type": "object",
       "readOnly": false,
-      "description": "Particluar NIC's configuration properties",
+      "description": "Represents a single NIC configuration properties",
       "properties": {
         "ipConfigurations": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IPConfiguration"
+            "$ref": "#/definitions/NetworkVirtualApplianceIPConfiguration"
           }
         }
       }
     },
-    "IPConfiguration": {
+    "NetworkVirtualApplianceIPConfiguration": {
       "type": "object",
       "readOnly": false,
-      "description": "Particluar IP's configuration",
+      "description": "Represents a single IP configuration",
       "properties": {
         "name": {
           "type": "string"
         },
         "properties": {
-          "$ref": "#/definitions/IPConfigurationProperties"
+          "$ref": "#/definitions/NetworkVirtualApplianceIPConfigurationProperties"
         }
       }
     },
-    "IPConfigurationProperties": {
+    "NetworkVirtualApplianceIPConfigurationProperties": {
       "type": "object",
       "readOnly": false,
-      "description": "Particluar IP's configuration properties",
+      "description": "Represents a single IP configuration properties",
       "properties": {
         "primary": {
           "type": "boolean"
