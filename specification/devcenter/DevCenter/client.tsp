@@ -55,6 +55,7 @@ interface EnvironmentClientOperations {
   listAllEnvironments is DevCenterService.EnvironmentsOperations.listAllEnvironments;
   listEnvironments is DevCenterService.EnvironmentsOperations.listEnvironments;
   getEnvironment is DevCenterService.EnvironmentsOperations.getEnvironment;
+  @convenientAPI(false, "csharp") // same issue as described in https://github.com/Azure/azure-rest-api-specs/issues/28083  
   createOrUpdateEnvironment is DevCenterService.EnvironmentsOperations.createOrUpdateEnvironment;
   deleteEnvironment is DevCenterService.EnvironmentsOperations.deleteEnvironment;
   listCatalogs is DevCenterService.EnvironmentsOperations.listCatalogs;
@@ -67,6 +68,7 @@ interface EnvironmentClientOperations {
 
 @@access(DevCenterService.DevBox, Access.public);
 @@usage(DevCenterService.DevBox, Usage.input | Usage.output);
+@@usage(DevCenterService.Environment, Usage.input | Usage.output);
 
 @@projectedName(DevCenterService.DevBoxActionDelayResult.result,
   "client",
