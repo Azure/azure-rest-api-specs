@@ -46,69 +46,69 @@ enum ProvisioningState {
   Accepted,
 }
 
-@doc("The ExtendedZone registration status for a subscription.")
+@doc("The Azure Extended Zone registration status for a subscription")
 enum RegistrationState {
-  @doc("Not Registered State")
+  @doc("Subscription not registered for the Azure Extended Zone")
   NotRegistered,
 
-  @doc("Pending Register State")
+  @doc("Subscription pending registration for the Azure Extended Zone")
   PendingRegister,
 
-  @doc("Registered State")
+  @doc("Subscription is registered for the Azure Extended Zone")
   Registered,
 
-  @doc("Pending Unregister State")
+  @doc("Subscription is pending unregistering for the Azure Extended Zone")
   PendingUnregister,
 }
 
-@doc("The properties of an ExtendedZone Resource")
+@doc("The properties of an Extended Zone resource.")
 model ExtendedZoneProperties {
   @visibility("read")
-  @doc("The status of the last operation.")
+  @doc("Status of the last operation performed by the subscription on the Edge Zone resource")
   provisioningState?: ProvisioningState;
 
   @visibility("read")
-  @doc("ExtendedZone registration approved or not")
+  @doc("Indicates the Azure Extended Zone registration�s approval status.")
   registrationState?: RegistrationState;
 
   @visibility("read")
-  @doc("ExtendedZone displayName")
+  @doc("Display name of the Azure Extended Zone.")
   displayName: string;
 
   @visibility("read")
-  @doc("ExtendedZone regionalDisplayName")
+  @doc("Regional display name of the Azure Extended Zone.")
   regionalDisplayName: string;
 
   @visibility("read")
-  @doc("ExtendedZone regionType")
+  @doc("Type of region for the Azure Extended Zone.")
   regionType: string;
 
   @visibility("read")
-  @doc("ExtendedZone regionCategory")
+  @doc("Category of region for the Azure Extended Zone.")
   regionCategory: string;
 
   @visibility("read")
-  @doc("ExtendedZone geography")
+  @doc("Geography of the Azure Extended Zone.")
   geography: string;
 
   @visibility("read")
-  @doc("ExtendedZone geographyGroup")
+  @doc("The Geography Group of the Azure Extended Zone.")
   geographyGroup: string;
 
   @visibility("read")
-  @doc("ExtendedZone longitude")
+  @doc("The Longitude of the Azure Extended Zone.")
   longitude: string;
 
   @visibility("read")
-  @doc("ExtendedZone latitude")
+  @doc("The Latitude of the Azure Extended Zone.")
   latitude: string;
 
   @visibility("read")
-  @doc("ExtendedZone homeLocation")
+  @doc("The Home Location of the Azure Extended Zone.")
   homeLocation: string;
 }
 
-@doc("An ExtendedZone resource")
+@doc("Resource that represents an Azure Extended Zone available to a subscription for registering and unregistering.")
 @subscriptionResource
 model ExtendedZone is ProxyResource<ExtendedZoneProperties> {
   @doc("The name of the ExtendedZone")
@@ -135,10 +135,10 @@ op ArmResourceActionNoBodySync<
 @doc("ExtendedZone operations")
 @armResourceOperations
 interface ExtendedZones {
-  @doc("Get an Extended Zone for a subscription")
+  @doc("Gets an Azure Extended Zone for a subscription")
   get is ArmResourceRead<ExtendedZone>;
 
-  @doc("Lists the Extended Zones for a subscription")
+  @doc("Lists the Azure Extended Zones available to a subscription")
   listBySubscription is ArmListBySubscription<ExtendedZone>;
 
   @doc("Registers a subscription for an Extended Zone")
