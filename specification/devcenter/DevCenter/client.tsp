@@ -66,7 +66,6 @@ interface EnvironmentClientOperations {
   listEnvironmentTypes is DevCenterService.EnvironmentsOperations.listEnvironmentTypes;
 }
 
-@@access(DevCenterService.DevBox, Access.public);
 @@usage(DevCenterService.DevBox, Usage.input | Usage.output);
 @@usage(DevCenterService.Environment, Usage.input | Usage.output);
 
