@@ -915,6 +915,20 @@
             "$ref": "#/definitions/VirtualApplianceNicProperties"
           }
         },
+        "networkProfile": {
+          "type": "object",
+          "readOnly": false,
+          "description": "Network Profile containing configurations for Public and Private NIC",
+          "properties": {
+            "networkInterfaceConfigurations": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkInterfaceConfiguration"
+              }
+            }
+          },
+          "x-ms-identifiers": []
+        },
         "additionalNics": {
           "type": "array",
           "readOnly": false,
@@ -1000,6 +1014,12 @@
     },
     "VirtualApplianceNicProperties": {
       "properties": {
+        "nicType": {
+          "type": "string",
+          "enum": [ "PublicNic", "PrivateNic", "AdditionalNic" ],
+          "readOnly": true,
+          "description": "NIC type - Public, Private, or Additional"
+        },
         "name": {
           "type": "string",
           "readOnly": true,
@@ -1022,6 +1042,56 @@
         }
       },
       "description": "Network Virtual Appliance NIC properties."
+    },
+    "NetworkInterfaceConfiguration": {
+      "type": "object",
+      "readOnly": false,
+      "description": "Particluar NIC's configuration",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [ "PublicNic", "PrivateNic" ]
+        },
+        "properties": {
+          "$ref": "#/definitions/NetworkInterfaceConfigurationProperties"
+        }
+      }
+    },
+    "NetworkInterfaceConfigurationProperties": {
+      "type": "object",
+      "readOnly": false,
+      "description": "Particluar NIC's configuration properties",
+      "properties": {
+        "ipConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPConfiguration"
+          }
+        }
+      }
+    },
+    "IPConfiguration": {
+      "type": "object",
+      "readOnly": false,
+      "description": "Particluar IP's configuration",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/IPConfigurationProperties"
+        }
+      }
+    },
+    "IPConfigurationProperties": {
+      "type": "object",
+      "readOnly": false,
+      "description": "Particluar IP's configuration properties",
+      "properties": {
+        "primary": {
+          "type": "boolean"
+        }
+      }
     },
     "VirtualApplianceAdditionalNicProperties": {
       "type": "object",
