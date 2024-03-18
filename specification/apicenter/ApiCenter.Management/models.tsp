@@ -540,3 +540,16 @@ model Onboarding {
   @doc("The location of the development portal")
   developerPortalUri?: string[];
 }
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing service"
+@doc("Deleted service properties.")
+model DeletedServiceProperties {
+  @doc("The resource ID of the soft-deleted service.")
+  resourceId: string;
+
+  @doc("UTC date and time when the service will be automatically purged. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.")
+  expiresOn?: utcDateTime;
+
+  @doc("UTC date and time when the service was soft-deleted. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.")
+  deletedOn?: utcDateTime;
+}

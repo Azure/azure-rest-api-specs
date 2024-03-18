@@ -1,0 +1,30 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/rest";
+import "./models.tsp";
+import "./Service.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+
+namespace Microsoft.ApiCenter;
+@doc("Soft-deleted service entity.")
+model DeletedService is ProxyResource<DeletedServiceProperties> {
+  @doc("The name of the deleted service.")
+  @path
+  @key("deletedServiceName")
+  @segment("deletedServices")
+  name: string;
+}
+
+@armResourceOperations
+interface DeletedServices {
+  @doc("Returns details of the soft-deleted service.")
+  get is ArmResourceRead<DeletedService>;
+  @doc("Permanently deletes specified service.")
+  delete is ArmResourceDeleteSync<DeletedService>;
+  @doc("Returns a collection of soft-deleted services.")
+  list is ArmResourceListByParent<DeletedService>;
+}
