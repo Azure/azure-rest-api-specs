@@ -1,13 +1,17 @@
 import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
 import "./common.tsp";
 
 namespace Azure.OpenAI;
 
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 @doc("Defines available options for the underlying response format of output translation information.")
 @added(ServiceApiVersions.v2024_02_15_Preview)
-enum AudioTranslationFormat {
+union AudioTranslationFormat {
+  string,
+
   @doc("Use a response body that is a JSON object containing a single 'text' field for the translation.")
   json: "json",
 
@@ -38,7 +42,7 @@ model AudioTranslationOptions {
   The audio data to translate. This must be the binary content of a file in one of the supported media formats:
    flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.
   """)
-  @projectedName("csharp", "AudioData")
+  @clientName("AudioData", "csharp")
   file: bytes;
 
   @doc("""
@@ -73,7 +77,7 @@ model AudioTranslationOptions {
   // Implementation note: developer-facing specification of deployment or model by clients should be controlled either
   // via an operation parameter or by this request body field -- but only one of those. This field should be hidden by
   // clients if operation parameters are used and populated into the request body on an as-needed basis.
-  @projectedName("csharp", "DeploymentName")
+  @clientName("DeploymentName", "csharp")
   `model`?: string;
 }
 
@@ -103,7 +107,7 @@ model AudioTranslationSegment {
 
   @doc("The average log probability associated with this audio segment.")
   @encodedName("application/json", "avg_logprob")
-  @projectedName("csharp", "AverageLogProbability")
+  @clientName("AverageLogProbability", "csharp")
   avgLogprob: float32;
 
   @doc("The compression ratio of this audio segment.")
@@ -112,7 +116,7 @@ model AudioTranslationSegment {
 
   @doc("The probability of no speech detection within this audio segment.")
   @encodedName("application/json", "no_speech_prob")
-  @projectedName("csharp", "NoSpeechProbability")
+  @clientName("NoSpeechProbability", "csharp")
   noSpeechProb: float32;
 
   @doc("The token IDs matching the translated text in this audio segment.")
@@ -135,7 +139,7 @@ model AudioTranslation {
   text: string;
 
   @doc("The label that describes which operation type generated the accompanying response data.")
-  @projectedName("csharp", "InternalAudioTaskLabel")
+  @clientName("InternalAudioTaskLabel", "csharp")
   task?: AudioTaskLabel;
 
   @doc("""
