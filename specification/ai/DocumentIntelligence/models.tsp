@@ -2,12 +2,14 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
 using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using OpenAPI;
+using Azure.ClientGenerator.Core;
 
 namespace DocumentIntelligence;
 
@@ -366,7 +368,7 @@ model ErrorResponse {
 }
 
 @doc("The error object.")
-@projectedName("csharp", "DocumentIntelligenceError")
+@clientName("DocumentIntelligenceError", "csharp")
 model Error {
   @doc("One of a server-defined set of error codes.")
   code: string;
@@ -392,13 +394,14 @@ model InnerError {
   @doc("A human-readable representation of the error.")
   message?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "https://github.com/Azure/typespec-azure/issues/417"
   @doc("Inner error.")
-  @projectedName("csharp", "InnerErrorObject")
+  @clientName("InnerErrorObject", "csharp")
   innererror?: InnerError;
 }
 
 @doc("The error object.")
-@projectedName("csharp", "DocumentIntelligenceWarning")
+@clientName("DocumentIntelligenceWarning", "csharp")
 model Warning {
   @doc("One of a server-defined set of warning codes.")
   code: string;
@@ -934,7 +937,7 @@ model DocumentLanguage {
 }
 
 @doc("An object describing the location and semantic content of a document.")
-@projectedName("csharp", "AnalyzedDocument")
+@clientName("AnalyzedDocument", "csharp")
 model Document {
   @doc("Document type.")
   @minLength(2)
