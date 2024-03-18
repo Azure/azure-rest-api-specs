@@ -176,9 +176,9 @@ interface TextGroundednessDetectionOperations {
     {
       @body
       @doc("The text groundedness detection request.")
-      @projectedName("csharp", "options")
-      @projectedName("python", "options")
-      @projectedName("java", "options")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
       body: AnalyzeTextGroundednessOptions;
     },
     AnalyzeTextGroundednessResult
