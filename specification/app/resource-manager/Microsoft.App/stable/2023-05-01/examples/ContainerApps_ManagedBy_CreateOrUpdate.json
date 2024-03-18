@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "resourceGroupName": "rg",
-    "containerAppName": "testcontainerAppManagedBy",
+    "containerAppName": "testcontainerappmanagedby",
     "api-version": "2023-05-01",
     "containerAppEnvelope": {
       "location": "East US",
@@ -18,7 +18,7 @@
             "traffic": [
               {
                 "weight": 100,
-                "revisionName": "testcontainerAppManagedBy-ab1234"
+                "revisionName": "testcontainerappmanagedby-ab1234"
               }
             ]
           }
@@ -26,8 +26,8 @@
         "template": {
           "containers": [
             {
-              "image": "repo/testcontainerAppManagedBy:v1",
-              "name": "testcontainerAppManagedBy",
+              "image": "repo/testcontainerappmanagedby:v1",
+              "name": "testcontainerappmanagedby",
               "probes": [
                 {
                   "type": "Liveness",
@@ -62,19 +62,19 @@
     "200": {
       "headers": {},
       "body": {
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerAppManagedBy",
-        "name": "testcontainerAppManagedBy",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerappmanagedby",
+        "name": "testcontainerappmanagedby",
         "type": "Microsoft.App/containerApps",
         "location": "East US",
         "managedBy": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.AppPlatform/Spring/springapp",
         "properties": {
           "provisioningState": "Succeeded",
           "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
-          "latestRevisionFqdn": "testcontainerAppManagedBy-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
-          "latestReadyRevisionName": "testcontainerAppManagedBy-pjxhsye",
+          "latestRevisionFqdn": "testcontainerappmanagedby-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+          "latestReadyRevisionName": "testcontainerappmanagedby-pjxhsye",
           "configuration": {
             "ingress": {
-              "fqdn": "testcontainerAppManagedBy.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+              "fqdn": "testcontainerappmanagedby.demokube-t24clv0g.eastus.containerApps.k4apps.io",
               "external": true,
               "targetPort": 3000,
               "exposedPort": 4000,
@@ -82,11 +82,11 @@
               "traffic": [
                 {
                   "weight": 80,
-                  "revisionName": "testcontainerAppManagedBy-ab1234"
+                  "revisionName": "testcontainerappmanagedby-ab1234"
                 },
                 {
                   "weight": 20,
-                  "revisionName": "testcontainerAppManagedBy-ab4321"
+                  "revisionName": "testcontainerappmanagedby-ab4321"
                 }
               ]
             }
@@ -94,11 +94,11 @@
           "template": {
             "containers": [
               {
-                "image": "repo/testcontainerAppManagedBy:v4",
-                "name": "testcontainerAppManagedBy",
+                "image": "repo/testcontainerappmanagedby:v4",
+                "name": "testcontainerappmanagedby",
                 "resources": {
-                  "cpu": 0.2,
-                  "memory": "100Mi"
+                  "cpu": 0.5,
+                  "memory": "1Gi"
                 },
                 "probes": [
                   {
@@ -133,18 +133,18 @@
     "201": {
       "headers": {},
       "body": {
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerAppManagedBy",
-        "name": "testcontainerAppManagedBy",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerappmanagedby",
+        "name": "testcontainerappmanagedby",
         "type": "Microsoft.App/containerApps",
         "location": "East US",
         "managedBy": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.AppPlatform/Spring/springapp",
         "properties": {
           "provisioningState": "InProgress",
           "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
-          "latestRevisionFqdn": "testcontainerAppManagedBy-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+          "latestRevisionFqdn": "testcontainerappmanagedby-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
           "configuration": {
             "ingress": {
-              "fqdn": "testcontainerAppManagedBy.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+              "fqdn": "testcontainerappmanagedby.demokube-t24clv0g.eastus.containerApps.k4apps.io",
               "external": true,
               "targetPort": 3000,
               "exposedPort": 4000,
@@ -152,11 +152,11 @@
               "traffic": [
                 {
                   "weight": 80,
-                  "revisionName": "testcontainerAppManagedBy-ab1234"
+                  "revisionName": "testcontainerappmanagedby-ab1234"
                 },
                 {
                   "weight": 20,
-                  "revisionName": "testcontainerAppManagedBy-ab4321"
+                  "revisionName": "testcontainerappmanagedby-ab4321"
                 }
               ]
             }
@@ -164,11 +164,11 @@
           "template": {
             "containers": [
               {
-                "image": "repo/testcontainerAppManagedBy:v4",
-                "name": "testcontainerAppManagedBy",
+                "image": "repo/testcontainerappmanagedby:v4",
+                "name": "testcontainerappmanagedby",
                 "resources": {
-                  "cpu": 0.2,
-                  "memory": "100Mi"
+                  "cpu": 0.5,
+                  "memory": "1Gi"
                 },
                 "probes": [
                   {

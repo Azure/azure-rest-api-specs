@@ -58,6 +58,12 @@ The [Azure API Review Board](https://aka.ms/azsdk/onboarding/restapischedule) is
 
 ### Helpful Links
 
- * [Azure DevTools Wiki](https://aka.ms/azapi)
+ * [Schedule a data plane REST API spec review](https://aka.ms/azsdk/onboarding/restapischedule)
 
+</details>
+
+<details>
+  <summary>Checks stuck in `queued` state?</summary>
+If the PR CI checks appear to be stuck in `queued` state, please add a comment with contents `/azp run`.
+This should result in a new comment denoting a `PR validation pipeline` has started and the checks should be updated after few minutes.  
 </details>

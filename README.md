@@ -10,7 +10,7 @@ If you're a Microsoft employee looking for information about all of the reposito
 
 External Contributors can read [Getting Started with OpenAPI Specifications](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Getting%20started%20with%20OpenAPI%20specifications.md).
 
-<!--Please check the [announcements page](https://github.com/Azure/azure-rest-api-specs/wiki/Announcements) for any new updates since your last visit.-->
+<!-- Please check the [announcements page](https://github.com/Azure/azure-rest-api-specs/wiki/Announcements) for any new updates since your last visit.-->
 
 ### Terminology
 

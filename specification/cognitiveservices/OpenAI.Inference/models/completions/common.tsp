@@ -12,22 +12,24 @@ other consumers.
 """)
 model CompletionsUsage {
   @doc("The number of tokens generated across all completions emissions.")
-  @projectedName("json", "completion_tokens")
+  @encodedName("application/json", "completion_tokens")
   completionTokens: int32;
 
   @doc("The number of tokens in the provided prompts for the completions request.")
-  @projectedName("json", "prompt_tokens")
+  @encodedName("application/json", "prompt_tokens")
   promptTokens: int32;
 
   @doc("The total number of tokens processed for the completions request and response.")
-  @projectedName("json", "total_tokens")
+  @encodedName("application/json", "total_tokens")
   totalTokens: int32;
 }
 
 @doc("""
 Representation of the manner in which a completions response concluded.
 """)
-enum CompletionsFinishReason {
+union CompletionsFinishReason {
+  string,
+
   @doc("Completions ended normally and reached its end of token generation.")
   stopped: "stop",
 
@@ -43,103 +45,30 @@ enum CompletionsFinishReason {
   @doc("Completion ended normally, with the model requesting a function to be called.")
   @added(ServiceApiVersions.v2023_07_01_Preview)
   functionCall: "function_call",
+
+  @doc("Completion ended with the model calling a provided tool for output.")
+  @added(ServiceApiVersions.v2024_02_15_Preview)
+  toolCalls: "tool_calls",
 }
 
-@added(ServiceApiVersions.v2023_06_01_Preview)
-@doc("Ratings for the intensity and risk level of harmful content.")
-enum ContentFilterSeverity {
-  @doc("""
-  Content may be related to violence, self-harm, sexual, or hate categories but the terms 
-  are used in general, journalistic, scientific, medical, and similar professional contexts, 
-  which are appropriate for most audiences.
-  """)
-  safe: "safe",
+@doc("A description of the intended purpose of a message within a chat completions interaction.")
+union ChatRole {
+  string,
 
-  @doc("""
-  Content that expresses prejudiced, judgmental, or opinionated views, includes offensive 
-  use of language, stereotyping, use cases exploring a fictional world (for example, gaming,
-  literature) and depictions at low intensity.
-  """)
-  low: "low",
+  @doc("The role that instructs or sets the behavior of the assistant.")
+  system: "system",
 
-  @doc("""
-  Content that uses offensive, insulting, mocking, intimidating, or demeaning language 
-  towards specific identity groups, includes depictions of seeking and executing harmful 
-  instructions, fantasies, glorification, promotion of harm at medium intensity.
-  """)
-  medium: "medium",
+  @doc("The role that provides responses to system-instructed, user-prompted input.")
+  assistant: "assistant",
 
-  @doc("""
-  Content that displays explicit and severe harmful instructions, actions, 
-  damage, or abuse; includes endorsement, glorification, or promotion of severe 
-  harmful acts, extreme or illegal forms of harm, radicalization, or non-consensual 
-  power exchange or abuse.
-  """)
-  high: "high",
-}
+  @doc("The role that provides input for chat completions.")
+  user: "user",
 
-@added(ServiceApiVersions.v2023_06_01_Preview)
-@doc("Information about filtered content severity level and if it has been filtered or not.")
-model ContentFilterResult {
-  @doc("Ratings for the intensity and risk level of filtered content.")
-  @projectedName("json", "severity")
-  severity: ContentFilterSeverity;
+  @doc("The role that provides function results for chat completions.")
+  @added(ServiceApiVersions.v2023_07_01_Preview)
+  function: "function",
 
-  @doc("A value indicating whether or not the content has been filtered.")
-  @projectedName("json", "filtered")
-  filtered: boolean;
-}
-
-@added(ServiceApiVersions.v2023_06_01_Preview)
-@doc("Information about the content filtering category, if it has been detected.")
-model ContentFilterResults {
-  @doc("""
-  Describes language related to anatomical organs and genitals, romantic relationships,
-   acts portrayed in erotic or affectionate terms, physical sexual acts, including 
-   those portrayed as an assault or a forced sexual violent act against one’s will, 
-   prostitution, pornography, and abuse.
-  """)
-  sexual?: ContentFilterResult;
-
-  @doc("""
-  Describes language related to physical actions intended to hurt, injure, damage, or 
-  kill someone or something; describes weapons, etc.
-  """)
-  violence?: ContentFilterResult;
-
-  @doc("""
-  Describes language attacks or uses that include pejorative or discriminatory language 
-  with reference to a person or identity group on the basis of certain differentiating 
-  attributes of these groups including but not limited to race, ethnicity, nationality,
-  gender identity and expression, sexual orientation, religion, immigration status, ability
-  status, personal appearance, and body size.
-  """)
-  hate?: ContentFilterResult;
-
-  @doc("""
-  Describes language related to physical actions intended to purposely hurt, injure,
-  or damage one’s body, or kill oneself.
-  """)
-  @projectedName("json", "self_harm")
-  selfHarm?: ContentFilterResult;
-
-  @doc("""
-  Describes an error returned if the content filtering system is
-  down or otherwise unable to complete the operation in time.
-  """)
-  error?: Azure.Core.Foundations.Error;
-}
-
-@added(ServiceApiVersions.v2023_06_01_Preview)
-@doc("""
-Content filtering results for a single prompt in the request.
-""")
-model PromptFilterResult {
-  @doc("The index of this prompt in the set of prompt results")
-  @projectedName("json", "prompt_index")
-  promptIndex: int32;
-
-  @doc("Content filtering results for this prompt")
-  @projectedName("json", "content_filter_results")
-  contentFilterResults?: ContentFilterResults;
+  @doc("The role that represents extension tool activity within a chat completions operation.")
+  @added(ServiceApiVersions.v2024_02_15_Preview)
+  tool: "tool",
 }

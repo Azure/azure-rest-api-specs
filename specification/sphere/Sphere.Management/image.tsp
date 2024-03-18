@@ -1,9 +1,11 @@
 import "@typespec/rest";
+import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager.Foundations;
@@ -16,7 +18,7 @@ namespace Microsoft.AzureSphere;
 @doc("An image resource belonging to a catalog resource.")
 @parentResource(Catalog)
 model Image is ProxyResource<ImageProperties> {
-  @doc("Image name. Use .default for image creation.")
+  @doc("Image name. Use an image GUID for GA versions of the API.")
   @key("imageName")
   @path
   @segment("images")
@@ -69,83 +71,79 @@ model ImageProperties {
   provisioningState?: ProvisioningState;
 }
 
-@doc("Image upload request body.")
-model ImageUploadRequestBody {
-  @doc(".")
-  images: string;
-}
-
 @doc("Image type values.")
-enum ImageType {
+union ImageType {
+  string,
+
   /** Invalid image. */
-  InvalidImageType,
+  "InvalidImageType",
 
   /** One Bl image type */
-  OneBl,
+  "OneBl",
 
   /** Pluton image type */
-  PlutonRuntime,
+  "PlutonRuntime",
 
   /** Wifi firmware image type */
-  WifiFirmware,
+  "WifiFirmware",
 
   /** Security monitor image type */
-  SecurityMonitor,
+  "SecurityMonitor",
 
   /** Normal world loader image type */
-  NormalWorldLoader,
+  "NormalWorldLoader",
 
   /** Normal world dtb image type */
-  NormalWorldDtb,
+  "NormalWorldDtb",
 
   /** Normal world kernel image type */
-  NormalWorldKernel,
+  "NormalWorldKernel",
 
   /** Root FS image type */
-  RootFs,
+  "RootFs",
 
   /** Services image type */
-  Services,
+  "Services",
 
   /** Applications image type */
-  Applications,
+  "Applications",
 
   /** FW config image type */
-  FwConfig,
+  "FwConfig",
 
   /** Boot manifest image type */
-  BootManifest,
+  "BootManifest",
 
   /** Nwfs image type */
-  Nwfs,
+  "Nwfs",
 
   /** Trusted key store image type */
-  TrustedKeystore,
+  "TrustedKeystore",
 
   /** Policy image type */
-  Policy,
+  "Policy",
 
   /** Customer board config image type */
-  CustomerBoardConfig,
+  "CustomerBoardConfig",
 
   /** Update certificate store image type */
-  UpdateCertStore,
+  "UpdateCertStore",
 
   /** Base system update manifest image type */
-  BaseSystemUpdateManifest,
+  "BaseSystemUpdateManifest",
 
   /** Firmware update manifest image type */
-  FirmwareUpdateManifest,
+  "FirmwareUpdateManifest",
 
   /** Customer update manifest image type */
-  CustomerUpdateManifest,
+  "CustomerUpdateManifest",
 
   /** Recovery manifest image type */
-  RecoveryManifest,
+  "RecoveryManifest",
 
   /** manifest set image type */
-  ManifestSet,
+  "ManifestSet",
 
   /** Other image type */
-  Other,
+  "Other",
 }

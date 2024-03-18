@@ -19,7 +19,9 @@ The collection of predefined behaviors for handling request-provided function in
 operation.
 """)
 @added(ServiceApiVersions.v2023_07_01_Preview)
-enum FunctionCallPreset {
+union FunctionCallPreset {
+  string,
+
   @doc("""
   Specifies that the model may either use any of the functions provided in this chat completions request or
   instead return a standard chat completions response as if no functions were provided.
@@ -51,7 +53,7 @@ model FunctionDefinition {
   description?: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "External API shape takes an arbitrary json"
-  @doc("The parameters the functions accepts, described as a JSON Schema object.")
+  @doc("The parameters the function accepts, described as a JSON Schema object.")
   parameters?: unknown;
 }
 
