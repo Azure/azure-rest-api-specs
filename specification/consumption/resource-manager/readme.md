@@ -26,19 +26,29 @@ These are the global settings for the Consumption API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-11
+tag: package-2024-06
 ```
 
 
+### Tag: package-2024-06
+
+These settings apply only when `--tag=package-2024-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-06'
+input-file:
+  - Microsoft.Consumption/stable/2024-06-01/consumption.json
+  - Microsoft.Consumption/stable/2024-06-01/consumption_pricesheet.json
+```
 ### Tag: package-2023-11
 
 These settings apply only when `--tag=package-2023-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-11'
+``` yaml $(tag) == 'package-2023-11'
 input-file:
   - Microsoft.Consumption/stable/2023-11-01/consumption.json
   - Microsoft.Consumption/stable/2023-11-01/consumption_pricesheet.json
 ```
+
 ### Tag: package-2023-05
 
 These settings apply only when `--tag=package-2023-05` is specified on the command line.
