@@ -24,7 +24,7 @@ interface PrivateEndpointConnections {
   /** Get a specific private connection */
   get is ArmResourceRead<PrivateEndpointConnectionResource>;
   /** Create a Private endpoint connection */
-  create is Operations.ArmResourceCreateOrUpdateWithAcceptedAsync<PrivateEndpointConnectionResource>;
+  create is ArmResourceCreateOrUpdateAsync<PrivateEndpointConnectionResource>;
   /** Delete the private endpoint connection */
   delete is ArmResourceDeleteWithoutOkAsync<PrivateEndpointConnectionResource>;
 }
