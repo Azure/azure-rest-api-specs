@@ -5482,34 +5482,6 @@
     }
   },
   "definitions": {
-    "AADToken": {
-      "type": "object",
-      "description": "The Azure Active Directory OAuth2 Flow",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "OAuth2 authentication",
-          "enum": [
-            "oauth2"
-          ]
-        },
-        "flows": {
-          "type": "array",
-          "description": "Supported OAuth2 flows",
-          "items": {}
-        },
-        "defaultScopes": {
-          "type": "array",
-          "description": "Oauth2 scopes of every flow. Overridden by scope definitions in specific flows",
-          "items": {}
-        }
-      },
-      "required": [
-        "type",
-        "flows",
-        "defaultScopes"
-      ]
-    },
     "AccessoryItem": {
       "type": "object",
       "description": "Accessory item and corresponding confidence level.",
@@ -5677,98 +5649,6 @@
         ]
       }
     },
-    "BaseFace": {
-      "type": "object",
-      "description": "Common model for persisted face.",
-      "properties": {
-        "persistedFaceId": {
-          "type": "string",
-          "description": "Face ID of the face.",
-          "readOnly": true
-        },
-        "userData": {
-          "type": "string",
-          "description": "User-provided data attached to the face. The size limit is 1KB."
-        }
-      },
-      "required": [
-        "persistedFaceId"
-      ]
-    },
-    "BaseFaceList": {
-      "type": "object",
-      "description": "Base model for face list.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "User defined name, maximum length is 128."
-        },
-        "userData": {
-          "type": "string",
-          "description": "Optional user defined data. Length should not exceed 16KB."
-        },
-        "recognitionModel": {
-          "$ref": "#/definitions/RecognitionModel",
-          "description": "The 'recognitionModel' associated with this face list. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02, 'recognition_03', and 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'."
-        }
-      },
-      "required": [
-        "name"
-      ]
-    },
-    "BasePersonGroup": {
-      "type": "object",
-      "description": "Base model for person group.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "User defined name, maximum length is 128."
-        },
-        "userData": {
-          "type": "string",
-          "description": "Optional user defined data. Length should not exceed 16KB."
-        },
-        "recognitionModel": {
-          "$ref": "#/definitions/RecognitionModel",
-          "description": "Name of recognition model. Recognition model is used when the face features are extracted and associated with detected faceIds. The default value is 'recognition_01', if latest model needed, please explicitly specify the model you need.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "name"
-      ]
-    },
-    "BasePersonGroupPerson": {
-      "type": "object",
-      "description": "Base model for person.",
-      "properties": {
-        "personId": {
-          "type": "string",
-          "description": "ID of the person.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "User defined name, maximum length is 128."
-        },
-        "userData": {
-          "type": "string",
-          "description": "Optional user defined data. Length should not exceed 16KB."
-        },
-        "persistedFaceIds": {
-          "type": "array",
-          "description": "Face ids of registered faces in the person.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
-      },
-      "required": [
-        "personId",
-        "name"
-      ]
-    },
     "BlurLevel": {
       "type": "string",
       "description": "Indicates level of blurriness.",
@@ -5897,36 +5777,6 @@
       "required": [
         "personId"
       ]
-    },
-    "DetectionModel": {
-      "type": "string",
-      "description": "The detection model for the face.",
-      "enum": [
-        "detection_01",
-        "detection_02",
-        "detection_03"
-      ],
-      "x-ms-enum": {
-        "name": "DetectionModel",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "detection_01",
-            "value": "detection_01",
-            "description": "The default detection model for Face - Detect. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected."
-          },
-          {
-            "name": "detection_02",
-            "value": "detection_02",
-            "description": "Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces."
-          },
-          {
-            "name": "detection_03",
-            "value": "detection_03",
-            "description": "Detection model released in 2021 February with improved accuracy especially on small faces."
-          }
-        ]
-      }
     },
     "DynamicPersonGroup": {
       "type": "object",
@@ -6753,41 +6603,6 @@
         "yaw"
       ]
     },
-    "KeyAuth": {
-      "type": "object",
-      "description": "The secret key for your Azure AI Face subscription.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "API key authentication",
-          "enum": [
-            "apiKey"
-          ]
-        },
-        "in": {
-          "type": "string",
-          "description": "location of the API key",
-          "enum": [
-            "header"
-          ]
-        },
-        "name": {
-          "type": "string",
-          "description": "name of the API key",
-          "enum": [
-            "Ocp-Apim-Subscription-Key"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
-        }
-      },
-      "required": [
-        "type",
-        "in",
-        "name"
-      ]
-    },
     "LandmarkCoordinate": {
       "type": "object",
       "description": "Coordinates within an image.",
@@ -7233,43 +7048,6 @@
         "authToken"
       ]
     },
-    "LivenessSessionData": {
-      "type": "object",
-      "description": "Data for liveness session.",
-      "properties": {
-        "deviceCorrelationId": {
-          "type": "string",
-          "description": "Device Correlation Id to use for linking multiple sessions together."
-        },
-        "authTokenTimeToLiveInSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Session length in seconds. Range is 60 to 86400 seconds."
-        }
-      },
-      "required": [
-        "deviceCorrelationId"
-      ]
-    },
-    "LivenessSessionDetails": {
-      "type": "object",
-      "description": "Session details data.",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/FaceSessionStatus",
-          "description": "The session status.",
-          "readOnly": true
-        },
-        "result": {
-          "$ref": "#/definitions/LivenessSessionAuditEntry",
-          "description": "The last result of session.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "status"
-      ]
-    },
     "LivenessSessionItem": {
       "type": "object",
       "description": "Session data returned for enumeration.",
@@ -7440,23 +7218,6 @@
         ]
       }
     },
-    "NameAndUserData": {
-      "type": "object",
-      "description": "Model for object name and user data.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "User defined name, maximum length is 128."
-        },
-        "userData": {
-          "type": "string",
-          "description": "Optional user defined data. Length should not exceed 16KB."
-        }
-      },
-      "required": [
-        "name"
-      ]
-    },
     "NoiseLevel": {
       "type": "string",
       "description": "Indicates level of noise.",
@@ -7595,23 +7356,6 @@
           "description": "Optional user defined data. Length should not exceed 16KB."
         }
       }
-    },
-    "PersonDirectoryRecognitionModel": {
-      "type": "object",
-      "description": "Middle tier resource for person directory.",
-      "properties": {
-        "recognitionModel": {
-          "$ref": "#/definitions/RecognitionModel",
-          "description": "The 'recognitionModel' associated with faces.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "recognitionModel"
-      ]
     },
     "PersonGroup": {
       "type": "object",
@@ -7878,22 +7622,6 @@
             "type": "string"
           }
         }
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "enum": [
-        "v1.1-preview.1"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v1_1_preview_1",
-            "value": "v1.1-preview.1"
-          }
-        ]
       }
     }
   },
