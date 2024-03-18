@@ -8134,7 +8134,7 @@
             "Constant",
             "Field",
             "Unary",
-            "Binary"
+            "NAry"
           ],
           "type": "string",
           "description": "Type of expressions supported by the system. Type: string."
@@ -8144,8 +8144,13 @@
           "type": "string"
         },
         "operator": {
-          "description": "Expression operator value Type: string.",
-          "type": "string"
+          "description": "Expression operator value Type: list of strings.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "x-ms-format": "dfe-string",
+            "description": "Type: string."
+          }
         },
         "operands": {
           "description": "List of nested expressions.",
