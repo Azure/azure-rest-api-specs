@@ -17,9 +17,6 @@ namespace Microsoft.AzureStackHCI;
 @includeInapplicableMetadataInPayload(false)
 model GalleryImage is TrackedResource<GalleryImageProperties> {
   @doc("Name of the gallery image")
-  @maxLength(80)
-  @minLength(1)
-  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[a-zA-Z0-9]$")
   @path
   @key("galleryImageName")
   @segment("galleryImages")

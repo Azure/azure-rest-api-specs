@@ -17,9 +17,6 @@ namespace Microsoft.AzureStackHCI;
 @parentResource(NetworkSecurityGroup)
 model DefaultSecurityRule is ProxyResource<SecurityRuleProperties> {
   @doc("Name of the default security rule.")
-  @maxLength(80)
-  @minLength(1)
-  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$")
   @path
   @key("defaultSecurityRuleName")
   @segment("defaultsecurityrules")

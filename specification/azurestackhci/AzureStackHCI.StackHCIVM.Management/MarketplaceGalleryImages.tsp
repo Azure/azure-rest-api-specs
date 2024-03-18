@@ -18,9 +18,6 @@ namespace Microsoft.AzureStackHCI;
 model MarketplaceGalleryImage
   is TrackedResource<MarketplaceGalleryImageProperties> {
   @doc("Name of the marketplace gallery image")
-  @maxLength(80)
-  @minLength(1)
-  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[a-zA-Z0-9]$")
   @path
   @key("marketplaceGalleryImageName")
   @segment("marketplaceGalleryImages")

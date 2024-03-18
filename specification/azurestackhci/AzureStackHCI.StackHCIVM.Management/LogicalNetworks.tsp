@@ -17,9 +17,6 @@ namespace Microsoft.AzureStackHCI;
 @includeInapplicableMetadataInPayload(false)
 model LogicalNetwork is TrackedResource<LogicalNetworkProperties> {
   @doc("Name of the logical network")
-  @maxLength(64)
-  @minLength(2)
-  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[_a-zA-Z0-9]$")
   @path
   @key("logicalNetworkName")
   @segment("logicalNetworks")
@@ -33,6 +30,7 @@ model LogicalNetwork is TrackedResource<LogicalNetworkProperties> {
 @armResourceOperations
 @projectedName("client", "LogicalNetworks")
 interface LogicalNetworks {
+  @doc("The operation to get a logical network.")
   get is ArmResourceRead<LogicalNetwork>;
 
   @doc("The operation to create or update a logical network. Please note some properties can be set only during logical network creation.")

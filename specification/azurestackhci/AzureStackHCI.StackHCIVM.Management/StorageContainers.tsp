@@ -16,9 +16,6 @@ namespace Microsoft.AzureStackHCI;
 @includeInapplicableMetadataInPayload(false)
 model StorageContainer is TrackedResource<StorageContainerProperties> {
   @doc("Name of the storage container")
-  @maxLength(80)
-  @minLength(1)
-  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$")
   @path
   @key("storageContainerName")
   @segment("storageContainers")

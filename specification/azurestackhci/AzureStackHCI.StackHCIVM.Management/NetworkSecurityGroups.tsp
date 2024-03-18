@@ -16,9 +16,6 @@ namespace Microsoft.AzureStackHCI;
 @includeInapplicableMetadataInPayload(false)
 model NetworkSecurityGroup is TrackedResource<NetworkSecurityGroupProperties> {
   @doc("Name of the network security group")
-  @maxLength(80)
-  @minLength(1)
-  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$")
   @path
   @key("networkSecurityGroupName")
   @segment("networkSecurityGroups")
@@ -38,7 +35,7 @@ interface NetworkSecurityGroups {
 
   @doc("Updates a network security group tags.")
   @parameterVisibility("read")
-  updateTags is ArmCustomPatchSync<NetworkSecurityGroup, TagsObject>;
+  updateTags is ArmTagsPatchAsync<NetworkSecurityGroup, TagsObject>;
 
   @doc("Deletes the specified network security group.")
   delete is ArmResourceDeleteWithoutOkAsync<NetworkSecurityGroup>;
