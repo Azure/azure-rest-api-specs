@@ -239,8 +239,8 @@ model JailbreakAnalysisResult {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @added(ContentSafety.Versions.v2024_02_15_Preview)
-@doc("Domain.")
-union Domain {
+@doc("Groundedness Domain.")
+union GroundednessDomain {
   string,
   Generic: "Generic",
   Medical: "Medical",
@@ -248,8 +248,8 @@ union Domain {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @added(ContentSafety.Versions.v2024_02_15_Preview)
-@doc("Task type.")
-union Task {
+@doc("Groundedness Task type.")
+union GroundednessTask {
   string,
   Summarization: "Summarization",
   QnA: "QnA",
@@ -296,13 +296,13 @@ model AnalyzeTextGroundednessOptions {
   The domain of the text for analysis. Allowed values: Medical, Generic.
   This field is optional, with a default value of Generic.
   """)
-  domain?: Domain = Domain.Generic;
+  domain?: GroundednessDomain = GroundednessDomain.Generic;
 
   @doc("""
   The task type for the text analysis. Type of task: QnA, Summarization.
   This field is optional, with a default value of Summarization.
   """)
-  task?: Task = Task.Summarization;
+  task?: GroundednessTask = GroundednessTask.Summarization;
 
   @doc("""
   The user's question input in a QnA scenario.
