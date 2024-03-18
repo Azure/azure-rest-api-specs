@@ -18,7 +18,7 @@ model BlobDetails {
 
   @visibility("read", "create")
   @doc("The blob name.")
-  blobName: string;
+  blobName?: string;
 }
 
 @doc("SAS URI operation response.")
