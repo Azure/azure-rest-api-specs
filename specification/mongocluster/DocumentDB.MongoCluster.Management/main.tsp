@@ -25,8 +25,6 @@ using Azure.ResourceManager;
 @doc("The Microsoft Azure management API provides create, read, update, and delete functionality for Azure Cosmos DB for MongoDB vCore resources including clusters and firewall rules.")
 namespace Microsoft.DocumentDB;
 
-interface Operations extends Azure.ResourceManager.Operations {}
-
 @doc("The available API versions.")
 enum Versions {
   @doc("Azure Cosmos DB for Mongo vCore clusters api version 2024-03-01-preview.")
