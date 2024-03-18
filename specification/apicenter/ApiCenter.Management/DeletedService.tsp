@@ -13,6 +13,9 @@ namespace Microsoft.ApiCenter;
 @doc("Soft-deleted service entity.")
 model DeletedService is ProxyResource<DeletedServiceProperties> {
   @doc("The name of the deleted service.")
+  @maxLength(90)
+  @minLength(1)
+  @pattern("^[a-zA-Z0-9-]{3,90}$")
   @path
   @key("deletedServiceName")
   @segment("deletedServices")
