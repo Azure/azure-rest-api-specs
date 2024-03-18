@@ -48,7 +48,7 @@ namespace Quantum.Workspace.BaseOperations {
     {
       @doc("This request has a JSON Merge Patch body.")
       @TypeSpec.Http.header("Content-Type")
-      contentType: "application/merge-patch+json";
+      contentType: "application/json-patch+json";
 
       ...Foundations.ResourceBody<JsonPatchDocument>;
       ...Azure.Core.Traits.Private.TraitProperties<
