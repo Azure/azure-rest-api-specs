@@ -12,7 +12,9 @@ alias ChatCompletionsToolSelection = ChatCompletionsToolSelectionPreset | ChatCo
 
 @added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("Represents a generic policy for how a chat completions tool may be selected.")
-enum ChatCompletionsToolSelectionPreset {
+union ChatCompletionsToolSelectionPreset {
+  string,
+
   @doc("""
   Specifies that the model may either use any of the tools provided in this chat completions request or
   instead return a standard chat completions response as if no tools were provided.

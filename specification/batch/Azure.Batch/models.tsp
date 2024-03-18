@@ -1,6 +1,8 @@
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Reflection;
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -704,7 +706,7 @@ information about the Image.
 model ImageInfo {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
   @doc("The ID of the Compute Node agent SKU which the Image supports.")
-  @projectedName("client", "nodeAgentSkuId")
+  @clientName("nodeAgentSkuId")
   nodeAgentSKUId: string;
 
   @doc("The reference to the Azure Virtual Machine's Marketplace Image.")
@@ -819,7 +821,7 @@ model BatchNodeCounts {
   total: int32;
 
   @doc("The number of Compute Nodes in the upgradingOS state.")
-  @projectedName("client", "upgradingOS")
+  @clientName("upgradingOS")
   upgradingOs: int32;
 }
 
@@ -863,7 +865,7 @@ model BatchPoolResourceStatistics {
   lastUpdateTime: utcDateTime;
 
   @doc("The average CPU usage across all Compute Nodes in the Pool (percentage per node).")
-  @projectedName("client", "avgCpuPercentage")
+  @clientName("avgCpuPercentage")
   avgCPUPercentage: float32;
 
   @doc("The average memory usage in GiB across all Compute Nodes in the Pool.")
@@ -910,11 +912,11 @@ model BatchJobStatistics {
   lastUpdateTime: utcDateTime;
 
   @doc("The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in the Job.")
-  @projectedName("client", "userCpuTime")
+  @clientName("userCpuTime")
   userCPUTime: duration;
 
   @doc("The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in the Job.")
-  @projectedName("client", "kernelCpuTime")
+  @clientName("kernelCpuTime")
   kernelCPUTime: duration;
 
   @doc("The total wall clock time of all Tasks in the Job.  The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If a Task was retried, this includes the wall clock time of all the Task retries.")
@@ -1785,7 +1787,7 @@ model VirtualMachineConfiguration {
   imageReference: ImageReference;
 
   @doc("The SKU of the Batch Compute Node agent to be provisioned on Compute Nodes in the Pool. The Batch Compute Node agent is a program that runs on each Compute Node in the Pool, and provides the command-and-control interface between the Compute Node and the Batch service. There are different implementations of the Compute Node agent, known as SKUs, for different operating systems. You must specify a Compute Node agent SKU which matches the selected Image reference. To get the list of supported Compute Node agent SKUs along with their list of verified Image references, see the 'List supported Compute Node agent SKUs' operation.")
-  @projectedName("client", "nodeAgentSkuId")
+  @clientName("nodeAgentSkuId")
   nodeAgentSKUId: string;
 
   @doc("Windows operating system settings on the virtual machine. This property must not be specified if the imageReference property specifies a Linux OS Image.")
@@ -1843,14 +1845,14 @@ disks from within a VM to use them.
 """)
 model DataDisk {
   @doc("The logical unit number. The logicalUnitNumber is used to uniquely identify each data disk. If attaching multiple disks, each should have a distinct logicalUnitNumber. The value must be between 0 and 63, inclusive.")
-  @projectedName("client", "logicalUnitNumber")
+  @clientName("logicalUnitNumber")
   lun: int32;
 
   @doc("The type of caching to be enabled for the data disks. The default value for caching is readwrite. For information about the caching options see: https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.")
   caching?: CachingType;
 
   @doc("The initial disk size in gigabytes.")
-  @projectedName("client", "diskSizeGb")
+  @clientName("diskSizeGb")
   diskSizeGB: int32;
 
   @doc("The storage Account type to be used for the data disk. If omitted, the default is \"standard_lrs\".")
@@ -1967,7 +1969,7 @@ model NetworkConfiguration {
   endpointConfiguration?: BatchPoolEndpointConfiguration;
 
   @doc("The Public IPAddress configuration for Compute Nodes in the Batch Pool. Public IP configuration property is only supported on Pools with the virtualMachineConfiguration property.")
-  @projectedName("client", "publicIpAddressConfiguration")
+  @clientName("publicIpAddressConfiguration")
   publicIPAddressConfiguration?: PublicIpAddressConfiguration;
 
   @doc("Whether this pool should enable accelerated networking. Accelerated networking enables single root I/O virtualization (SR-IOV) to a VM, which may lead to improved networking performance. For more details, see: https://learn.microsoft.com/azure/virtual-network/accelerated-networking-overview.")
@@ -1978,7 +1980,7 @@ model NetworkConfiguration {
 @doc("The endpoint configuration for a Pool.")
 model BatchPoolEndpointConfiguration {
   @doc("A list of inbound NAT Pools that can be used to address specific ports on an individual Compute Node externally. The maximum number of inbound NAT Pools per Batch Pool is 5. If the maximum number of inbound NAT Pools is exceeded the request fails with HTTP status code 400. This cannot be specified if the IPAddressProvisioningType is NoPublicIPAddresses.")
-  @projectedName("client", "inboundNatPools")
+  @clientName("inboundNatPools")
   inboundNATPools: InboundNATPool[];
 }
 
@@ -2026,7 +2028,7 @@ model NetworkSecurityGroupRule {
 @doc("The public IP Address configuration of the networking configuration of a Pool.")
 model PublicIpAddressConfiguration {
   @doc("The provisioning type for Public IP Addresses for the Pool. The default value is BatchManaged.")
-  @projectedName("client", "IpAddressProvisioningType")
+  @clientName("IpAddressProvisioningType")
   provision?: IpAddressProvisioningType;
 
   @doc("The list of public IPs which the Batch service will use when provisioning Compute Nodes. The number of IPs specified here limits the maximum size of the Pool - 100 dedicated nodes or 100 Spot/Low-priority nodes can be allocated for each public IP. For example, a pool needing 250 dedicated VMs would need at least 3 public IPs specified. Each element of this collection is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}.")
@@ -2271,11 +2273,11 @@ model BatchJobScheduleStatistics {
   lastUpdateTime: utcDateTime;
 
   @doc("The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in all Jobs created under the schedule.")
-  @projectedName("client", "userCpuTime")
+  @clientName("userCpuTime")
   userCPUTime: duration;
 
   @doc("The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by all Tasks in all Jobs created under the schedule.")
-  @projectedName("client", "kernelCpuTime")
+  @clientName("kernelCpuTime")
   kernelCPUTime: duration;
 
   @doc("The total wall clock time of all the Tasks in all the Jobs created under the schedule. The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If a Task was retried, this includes the wall clock time of all the Task retries.")
@@ -2509,7 +2511,7 @@ model BatchJobExecutionInfo {
   schedulingError?: BatchJobSchedulingError;
 
   @doc("A string describing the reason the Job ended. This property is set only if the Job is in the completed state. If the Batch service terminates the Job, it sets the reason as follows: JMComplete - the Job Manager Task completed, and killJobOnCompletion was set to true. MaxWallClockTimeExpiry - the Job reached its maxWallClockTime constraint. TerminateJobSchedule - the Job ran as part of a schedule, and the schedule terminated. AllTasksComplete - the Job's onAllTasksComplete attribute is set to terminatejob, and all Tasks in the Job are complete. TaskFailed - the Job's onTaskFailure attribute is set to performExitOptionsJobAction, and a Task in the Job failed with an exit condition that specified a jobAction of terminatejob. Any other string is a user-defined reason specified in a call to the 'Terminate a Job' operation.")
-  @projectedName("client", "terminationReason")
+  @clientName("terminationReason")
   terminateReason?: string;
 }
 
@@ -2537,7 +2539,7 @@ model BatchJobDisableContent {
 @doc("Parameters for terminating an Azure Batch Job.")
 model BatchJobTerminateContent {
   @doc("The text you want to appear as the Job's TerminationReason. The default is 'UserTerminate'.")
-  @projectedName("client", "terminationReason")
+  @clientName("terminationReason")
   terminateReason?: string;
 }
 
@@ -3464,11 +3466,11 @@ model BatchTaskStatistics {
   lastUpdateTime: utcDateTime;
 
   @doc("The total user mode CPU time (summed across all cores and all Compute Nodes) consumed by the Task.")
-  @projectedName("client", "userCpuTime")
+  @clientName("userCpuTime")
   userCPUTime: duration;
 
   @doc("The total kernel mode CPU time (summed across all cores and all Compute Nodes) consumed by the Task.")
-  @projectedName("client", "kernelCpuTime")
+  @clientName("kernelCpuTime")
   kernelCPUTime: duration;
 
   @doc("The total wall clock time of the Task. The wall clock time is the elapsed time from when the Task started running on a Compute Node to when it finished (or to the last time the statistics were updated, if the Task had not finished by then). If the Task was retried, this includes the wall clock time of all the Task retries.")
@@ -3619,7 +3621,7 @@ model UpgradePolicy {
   mode: UpgradeMode;
 
   @doc("Configuration parameters used for performing automatic OS Upgrade. The configuration parameters used for performing automatic OS upgrade.")
-  @projectedName("client", "automaticOSUpgradePolicy")
+  @clientName("automaticOSUpgradePolicy")
   automaticOsUpgradePolicy?: AutomaticOsUpgradePolicy;
 
   @doc("The configuration parameters used while performing a rolling upgrade. This property is only supported on Pools with the virtualMachineConfiguration property.")
@@ -3632,7 +3634,7 @@ model AutomaticOsUpgradePolicy {
   disableAutomaticRollback?: boolean;
 
   @doc("Indicates whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the OS image becomes available. <br /><br /> If this is set to true for Windows based pools, [WindowsConfiguration.enableAutomaticUpdates](https://learn.microsoft.com/en-us/rest/api/batchservice/pool/add?tabs=HTTP#windowsconfiguration) cannot be set to true.")
-  @projectedName("client", "enableAutomaticOSUpgrade")
+  @clientName("enableAutomaticOSUpgrade")
   enableAutomaticOsUpgrade?: boolean;
 
   @doc("Indicates whether rolling upgrade policy should be used during Auto OS Upgrade. Auto OS Upgrade will fallback to the default policy if no policy is defined on the VMSS.")
@@ -3852,7 +3854,7 @@ model InboundEndpoint {
   protocol: InboundEndpointProtocol;
 
   @doc("The public IP address of the Compute Node.")
-  @projectedName("client", "publicIpAddress")
+  @clientName("publicIpAddress")
   publicIPAddress: string;
 
   @doc("The public fully qualified domain name for the Compute Node.")
@@ -3908,7 +3910,7 @@ model BatchNodeDisableSchedulingContent {
 @doc("The remote login settings for a Compute Node.")
 model BatchNodeRemoteLoginSettings {
   @doc("The IP address used for remote login to the Compute Node.")
-  @projectedName("client", "remoteLoginIpAddress")
+  @clientName("remoteLoginIpAddress")
   remoteLoginIPAddress: string;
 
   @doc("The port used for remote login to the Compute Node.")
