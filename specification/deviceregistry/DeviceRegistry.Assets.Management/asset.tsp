@@ -88,6 +88,7 @@ model AssetProperties {
   serialNumber?: string;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "attributes property field is custom defined by customer"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "existing API"
   @doc("A set of key-value pairs that contain custom attributes set by the customer.")
   attributes?: Record<unknown>;
 
