@@ -1640,6 +1640,13 @@
         "experimentation": {
           "$ref": "#/definitions/ExperimentationProperties",
           "description": "Property specifying the configuration of experimentation for this configuration store"
+        },
+        "replicas": {
+          "description": "Property specifying the configuration of replicas for this configuration store",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReplicaInfo"
+          }
         }
       }
     },
@@ -1739,6 +1746,20 @@
         },
         "identityClientId": {
           "description": "The client id of the identity which will be used to access key vault.",
+          "type": "string"
+        }
+      }
+    },
+    "ReplicaInfo": {
+      "description": "Replica information.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "The location of replica.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of replica.",
           "type": "string"
         }
       }
