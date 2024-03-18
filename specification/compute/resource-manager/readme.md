@@ -255,7 +255,40 @@ directive:
   - suppress: ResourceNameRestriction
     from: dedicatedHost.json
     reason: there is no dedicated host naming requirement. It only follows ARM resource naming requirement.
+
+suppressions:
+  - code: OperationsAPIImplementation
+    reason: The operations API is defined in a separate file.
+    from: diagnostic.json
+  - code: PathForResourceAction
+    reason: This is not a valid scenario for the diskInspection and spotPlacementRecommender API as API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
+    from: diagnostic.json
+  - code: PathForNestedResource
+    reason: This is not a valid scenario for the diskInspection and spotPlacementRecommender API as API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
+    from: diagnostic.json
+  - code: XmsPageableForListCalls
+    reason: False positive error as API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
+    from: diagnostic.json
 ```
+
+### Tag: package-2024-03-01-preview-only
+
+These settings apply only when `--tag=package-2024-03-01-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-03-01-preview-only'
+input-file:
+  - Microsoft.Compute/DiagnosticRP/preview/2024-03-01-preview/diagnostic.json
+```
+
+### Tag: package-2024-03-01-preview
+
+These settings apply only when `--tag=package-2024-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-03-01-preview'
+input-file:
+  - Microsoft.Compute/DiagnosticRP/preview/2024-03-01-preview/diagnostic.json
+```
+
 
 ### Tag: package-2023-07-03
 
