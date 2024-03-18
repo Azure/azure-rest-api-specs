@@ -93,7 +93,7 @@ interface PersonDirectoryOperations {
   "start=&top=2" will return "personId1", "personId2".
   "start=personId2&top=3" will return "personId3", "personId4", "personId5".
   """)
-  listPerson is FaceResourceListOperation<PersonDirectoryPerson>;
+  getPeople is FaceResourceListOperation<PersonDirectoryPerson>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @doc("""
@@ -110,7 +110,7 @@ interface PersonDirectoryOperations {
   @get
   @action("dynamicPersonGroupReferences")
   @actionSeparator("/")
-  listDynamicPersonGroupReferences is Foundations.ResourceOperation<
+  getDynamicPersonGroupReferences is Foundations.ResourceOperation<
     PersonDirectoryPerson,
     ListRequestOptions,
     ListGroupReferenceResult,
@@ -206,7 +206,7 @@ interface PersonDirectoryOperations {
   Retrieve a person's persistedFaceIds representing the registered person face feature(s).
   """)
   @sharedRoute
-  listPersonFace is Foundations.ResourceList<
+  getPersonFaces is Foundations.ResourceList<
     PersonDirectoryFace,
     {},
     ListFaceResult,
@@ -254,7 +254,7 @@ interface PersonDirectoryOperations {
   "start=&top=2" will return "dynamicPersonGroupId1", "dynamicPersonGroupId2".
   "start=dynamicPersonGroupId2&top=3" will return "dynamicPersonGroupId3", "dynamicPersonGroupId4", "dynamicPersonGroupId5".
   """)
-  listDynamicPersonGroups is FaceResourceListOperation<DynamicPersonGroup>;
+  getDynamicPersonGroups is FaceResourceListOperation<DynamicPersonGroup>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @doc("""
@@ -271,7 +271,7 @@ interface PersonDirectoryOperations {
   @get
   @action("persons")
   @actionSeparator("/")
-  listDynamicPersonGroupPerson is Foundations.ResourceOperation<
+  getDynamicPersonGroupPeople is Foundations.ResourceOperation<
     DynamicPersonGroup,
     ListRequestOptions,
     ListPersonResult,

@@ -38,7 +38,7 @@ interface FaceListOperations {
   List face lists' faceListId, name, userData and recognitionModel.
   To get face information inside faceList use Get Face List.
   """)
-  listFaceLists is Foundations.ResourceList<
+  getFaceLists is Foundations.ResourceList<
     FaceList,
     ReturnRecognitionModelOptions,
     Body<FaceList[]>,
@@ -91,7 +91,7 @@ interface FaceListOperations {
   List large face lists' information of largeFaceListId, name, userData and recognitionModel.
   To get face information inside largeFaceList use Get Large Face List Face.
   """)
-  listLargeFaceLists is FaceResourceListOperation<
+  getLargeFaceLists is FaceResourceListOperation<
     LargeFaceList,
     LargeFaceList,
     ReturnRecognitionModelOptions
@@ -142,5 +142,5 @@ interface FaceListOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "List doesn't support Azure paging"
   @doc("List faces' persistedFaceId and userData in a specified large face list.")
   @sharedRoute
-  listLargeFaceListFaces is FaceResourceListOperation<LargeFaceListFace>;
+  getLargeFaceListFaces is FaceResourceListOperation<LargeFaceListFace>;
 }

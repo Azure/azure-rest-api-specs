@@ -61,7 +61,7 @@ interface PersonGroupOperations {
   "start=&top=2" will return "group1", "group2".
   "start=group2&top=3" will return "group3", "group4", "group5".
   """)
-  listPersonGroups is FaceResourceListOperation<
+  getPersonGroups is FaceResourceListOperation<
     PersonGroup,
     PersonGroup,
     ReturnRecognitionModelOptions
@@ -123,7 +123,7 @@ interface PersonGroupOperations {
   "start=&top=2" will return "personId1", "personId2".
   "start=personId2&top=3" will return "personId3", "personId4", "personId5".
   """)
-  listPersonGroupPerson is FaceResourceListOperation<PersonGroupPerson>;
+  getPersonGroupPeople is FaceResourceListOperation<PersonGroupPerson>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Add face perform on resource collection but not response created resource location in header"
   #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
@@ -229,7 +229,7 @@ interface PersonGroupOperations {
   "start=&top=2" will return "group1", "group2".
   "start=group2&top=3" will return "group3", "group4", "group5".
   """)
-  listLargePersonGroups is FaceResourceListOperation<
+  getLargePersonGroups is FaceResourceListOperation<
     LargePersonGroup,
     LargePersonGroup,
     ReturnRecognitionModelOptions
@@ -292,7 +292,7 @@ interface PersonGroupOperations {
   "start=&top=2" will return "personId1", "personId2".
   "start=personId2&top=3" will return "personId3", "personId4", "personId5".
   """)
-  listLargePersonGroupPerson is FaceResourceListOperation<LargePersonGroupPerson>;
+  getLargePersonGroupPeople is FaceResourceListOperation<LargePersonGroupPerson>;
   
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Add face perform on resource collection but not response created resource location in header"
   #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
