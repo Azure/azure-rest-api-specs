@@ -503,10 +503,17 @@
         }
       }
     },
-    "EnclaveType":{
+    "EnclaveType": {
       "type": "string",
-      "description": "EnclaveType to deploy Managed CCF on.",
-      "title": "EnclaveType"
+      "description": "Type of the Enclave.",
+      "enum": [
+        "IntelSgx",
+        "AmdSevSnp"
+      ],
+      "x-ms-enum": {
+        "name": "EnclaveType",
+        "modelAsString": true
+      }
     },
     "CertificateTags": {
       "description": "Tags for Managed CCF Certificates",
