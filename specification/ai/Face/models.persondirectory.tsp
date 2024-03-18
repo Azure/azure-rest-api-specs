@@ -17,7 +17,7 @@ model PersonDirectoryPerson {
   @doc("Person ID of the person.")
   personId: string;
 
-  ...NameAndUserData;
+  ...UserDefinedFields;
 }
 
 @resource("operations")
@@ -64,28 +64,26 @@ model DynamicPersonGroup {
   @doc("ID of the dynamic person group.")
   dynamicPersonGroupId: string;
 
-  ...NameAndUserData;
+  ...UserDefinedFields;
 }
 
 @doc("Request of create dynamic person group.")
-model CreateDynamicPersonGroupContent is DynamicPersonGroup {
+model CreateDynamicPersonGroupContent {
   @doc("Array of personIds created by PersonDirectory Person - Create to add.")
   addPersonIds?: string[];
+
+  ...UserDefinedFields;
 }
 
 @doc("Request of update dynamic person group.")
-model UpdateDynamicPersonGroupContent is DynamicPersonGroup {
+model UpdateDynamicPersonGroupContent {
   @doc("Array of personIds created by PersonDirectory Person - Create to add.")
   addPersonIds?: string[];
 
   @doc("Array of personIds created by PersonDirectory Person - Create to remove.")
   removePersonIds?: string[];
-}
 
-@doc("Response of create person.")
-model CreatePersonResult {
-  @doc("Person ID of the person.")
-  personId: string;
+  ...UserDefinedFields;
 }
 
 @doc("Response of list dynamic person group of person.")

@@ -11,10 +11,9 @@ namespace Face;
 
 @doc("Base model for person group.")
 model BasePersonGroup {
-  ...NameAndUserData;
+  ...UserDefinedFields;
 
   @doc("Name of recognition model. Recognition model is used when the face features are extracted and associated with detected faceIds. The default value is 'recognition_01', if latest model needed, please explicitly specify the model you need.")
-  @visibility("read")
   recognitionModel?: RecognitionModel;
 }
 
@@ -26,7 +25,7 @@ model BasePersonGroupPerson {
   @doc("ID of the person.")
   personId: string;
 
-  ...NameAndUserData;
+  ...UserDefinedFields;
 
   @doc("Face ids of registered faces in the person.")
   @visibility("read")
@@ -34,7 +33,7 @@ model BasePersonGroupPerson {
 }
 
 @resource("persongroups")
-@doc("Free-tier subscription quota: 1,000 person groups. Each holds up to 1,000 persons. S0-tier subscription quota: 1,000,000 person groups. Each holds up to 10,000 persons. To handle larger scale face identification problem, please consider using LargePersonGroup.")
+@doc("The container of the uploaded person data, including face recognition feature, and up to 10,000 persons. To handle larger scale face identification problem, please consider using LargePersonGroup.")
 model PersonGroup is BasePersonGroup {
   @key
   @visibility("read")

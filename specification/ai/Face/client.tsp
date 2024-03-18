@@ -129,7 +129,7 @@ interface FaceAdministrationClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   updatePersonGroupPerson is PersonGroupOperations.updatePersonGroupPerson;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  getPersonGroupPeople is PersonGroupOperations.getPersonGroupPeople;
+  getPersonGroupPersons is PersonGroupOperations.getPersonGroupPersons;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   addPersonGroupPersonFaceFromUrl is PersonGroupOperations.addPersonGroupPersonFaceFromUrl;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -161,7 +161,7 @@ interface FaceAdministrationClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   updateLargePersonGroupPerson is PersonGroupOperations.updateLargePersonGroupPerson;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  getLargePersonGroupPeople is PersonGroupOperations.getLargePersonGroupPeople;
+  getLargePersonGroupPersons is PersonGroupOperations.getLargePersonGroupPersons;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   addLargePersonGroupPersonFaceFromUrl is PersonGroupOperations.addLargePersonGroupPersonFaceFromUrl;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -183,7 +183,7 @@ interface FaceAdministrationClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   updatePerson is PersonDirectoryOperations.updatePerson;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  getPeople is PersonDirectoryOperations.getPeople;
+  getPersons is PersonDirectoryOperations.getPersons;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   getDynamicPersonGroupReferences is PersonDirectoryOperations.getDynamicPersonGroupReferences;
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Doesn't fit in generated long-running operation"
@@ -217,7 +217,7 @@ interface FaceAdministrationClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   getDynamicPersonGroups is PersonDirectoryOperations.getDynamicPersonGroups;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  getDynamicPersonGroupPeople is PersonDirectoryOperations.getDynamicPersonGroupPeople;
+  getDynamicPersonGroupPersons is PersonDirectoryOperations.getDynamicPersonGroupPersons;
 }
 
 @client({
@@ -229,7 +229,7 @@ interface FaceSessionClient {
   createLivenessSession is LivenessSessionOperations.createLivenessSession;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   deleteLivenessSession is LivenessSessionOperations.deleteLivenessSession;
-  getLivenessSession is LivenessSessionOperations.getLivenessSession;
+  getLivenessSessionResult is LivenessSessionOperations.getLivenessSessionResult;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   getLivenessSessions is LivenessSessionOperations.getLivenessSessions;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -242,7 +242,7 @@ interface FaceSessionClient {
   createLivenessWithVerifySessionWithVerifyImage is LivenessSessionOperations.createLivenessWithVerifySessionWithVerifyImage;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   deleteLivenessWithVerifySession is LivenessSessionOperations.deleteLivenessWithVerifySession;
-  getLivenessWithVerifySession is LivenessSessionOperations.getLivenessWithVerifySession;
+  getLivenessWithVerifySessionResult is LivenessSessionOperations.getLivenessWithVerifySessionResult;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   getLivenessWithVerifySessions is LivenessSessionOperations.getLivenessWithVerifySessions;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
