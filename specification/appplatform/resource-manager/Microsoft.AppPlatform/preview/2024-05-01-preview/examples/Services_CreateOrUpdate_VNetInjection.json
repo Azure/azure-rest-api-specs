@@ -15,12 +15,16 @@
         "vnetAddons": {
           "logStreamPublicEndpoint": true,
           "dataPlanePublicEndpoint": true,
-          "privateStorageAccess": "Enabled"
+          "privateStorageAccess": "Enabled",
+          "privateDnsZoneId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/privateDnsZones/myPrivateDnsZone"
         }
       },
       "sku": {
         "name": "S0",
         "tier": "Standard"
+      },
+      "identity": {
+        "type": "SystemAssigned"
       },
       "location": "eastus",
       "tags": {
@@ -81,7 +85,8 @@
           "vnetAddons": {
             "logStreamPublicEndpoint": true,
             "dataPlanePublicEndpoint": true,
-            "privateStorageAccess": "Enabled"
+            "privateStorageAccess": "Enabled",
+            "privateDnsZoneId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/privateDnsZones/myPrivateDnsZone"
           },
           "serviceId": "12345678abcd1234abcd12345678abcd"
         },
@@ -97,6 +102,11 @@
         "sku": {
           "name": "S0",
           "tier": "Standard"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000"
         },
         "location": "eastus",
         "tags": {
@@ -154,7 +164,8 @@
           "vnetAddons": {
             "logStreamPublicEndpoint": true,
             "dataPlanePublicEndpoint": true,
-            "privateStorageAccess": "Enabled"
+            "privateStorageAccess": "Enabled",
+            "privateDnsZoneId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/privateDnsZones/myPrivateDnsZone"
           },
           "serviceId": "12345678abcd1234abcd12345678abcd"
         },
@@ -170,6 +181,11 @@
         "sku": {
           "name": "S0",
           "tier": "Standard"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000"
         },
         "location": "eastus",
         "tags": {
@@ -227,7 +243,8 @@
           "vnetAddons": {
             "logStreamPublicEndpoint": true,
             "dataPlanePublicEndpoint": true,
-            "privateStorageAccess": "Enabled"
+            "privateStorageAccess": "Enabled",
+            "privateDnsZoneId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/privateDnsZones/myPrivateDnsZone"
           },
           "serviceId": "12345678abcd1234abcd12345678abcd"
         },
@@ -243,6 +260,11 @@
         "sku": {
           "name": "S0",
           "tier": "Standard"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000"
         },
         "location": "eastus",
         "tags": {

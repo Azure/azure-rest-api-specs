@@ -8752,6 +8752,513 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/jobs": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get the Azure Spring Apps Jobs in a given service",
+        "operationId": "Jobs_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of Jobs in the Service.",
+            "schema": {
+              "$ref": "#/definitions/JobResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Jobs_List": {
+            "$ref": "./examples/Jobs_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/jobs/{jobName}": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get a Job and its properties.",
+        "operationId": "Job_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the corresponding Job.",
+            "schema": {
+              "$ref": "#/definitions/JobResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Job_Get": {
+            "$ref": "./examples/Job_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Create a new Job or update an exiting Job.",
+        "operationId": "Job_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          },
+          {
+            "name": "jobResource",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the updated Job.",
+            "schema": {
+              "$ref": "#/definitions/JobResource"
+            }
+          },
+          "201": {
+            "description": "Created. The response describes the new Job and contains an Azure-AsyncOperation header to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/JobResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Job_CreateOrUpdate": {
+            "$ref": "./examples/Job_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Operation to delete a Job.",
+        "operationId": "Job_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The response indicates the delete operation is performed in the background.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Success. The response indicates the resource doesn't exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Job_Delete": {
+            "$ref": "./examples/Job_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/jobs/{jobName}/start": {
+      "post": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "summary": "Start an Azure Spring Apps Job",
+        "operationId": "Job_Start",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Properties used to start a Job execution.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/JobExecutionProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/JobExecution"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the Job is now starting and contains a Location header to query the operation result.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Job_Start": {
+            "$ref": "./examples/Job_Start.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/jobs/{jobName}/listEnvSecrets": {
+      "post": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "List sensitive environment variables of the Job.",
+        "operationId": "Job_ListEnvSecrets",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the sensitive environment variables of the Job.",
+            "schema": {
+              "$ref": "#/definitions/EnvSecretsCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Job_ListEnvSecrets": {
+            "$ref": "./examples/Job_ListEnvSecrets.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/jobs/{jobName}/executions/{jobExecutionName}/cancel": {
+      "post": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Terminate execution of a running Azure Spring Apps Job",
+        "operationId": "JobExecution_Cancel",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JobExecutionNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The response indicates the Job is now canceled and contains a Location header to query the operation result.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "JobExecution_Cancel": {
+            "$ref": "./examples/JobExecution_Cancel.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/jobs/{jobName}/executions": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get executions of a Azure Spring Apps Job",
+        "operationId": "JobExecutions_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of Job executions in the Service.",
+            "schema": {
+              "$ref": "#/definitions/JobExecutionCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "JobExecutions_List": {
+            "$ref": "./examples/JobExecutions_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/jobs/{jobName}/executions/{jobExecutionName}": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get details of an execution of an Azure Spring Apps Job",
+        "operationId": "JobExecution_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JobExecutionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/JobExecution"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "JobExecution_Get": {
+            "$ref": "./examples/JobExecution_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/jobs/{jobName}/executions/{jobExecutionName}/listEnvSecrets": {
+      "post": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "List sensitive environment variables of Job execution.",
+        "operationId": "JobExecution_ListEnvSecrets",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JobNameParameter"
+          },
+          {
+            "$ref": "#/parameters/JobExecutionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the sensitive environment variables of the Job execution.",
+            "schema": {
+              "$ref": "#/definitions/EnvSecretsCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "JobExecution_ListEnvSecrets": {
+            "$ref": "./examples/JobExecution_ListEnvSecrets.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -8768,6 +9275,10 @@
           "$ref": "#/definitions/ClusterResourceProperties",
           "description": "Properties of the Service resource",
           "x-ms-client-flatten": false
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity",
+          "description": "Managed Identity of the Service resource"
         },
         "sku": {
           "$ref": "#/definitions/Sku",
@@ -10994,6 +11505,18 @@
             "name": "PrivateStorageAccess",
             "modelAsString": true
           }
+        },
+        "privateDnsZoneId": {
+          "description": "Fully qualified resource Id of the Private DNS zone to link with the customer virtual network.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/privateDnsZones"
+              }
+            ]
+          }
         }
       }
     },
@@ -12426,7 +12949,7 @@
       }
     },
     "UserSourceInfo": {
-      "description": "Source information for a deployment",
+      "description": "Source information for a deployment or a job",
       "type": "object",
       "required": [
         "type"
@@ -12882,7 +13405,7 @@
       }
     },
     "ResourceRequests": {
-      "description": "Deployment resource request payload",
+      "description": "Deployment/Job resource request payload",
       "type": "object",
       "properties": {
         "cpu": {
@@ -15181,6 +15704,285 @@
           }
         }
       }
+    },
+    "JobResource": {
+      "description": "Job resource payload",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobResourceProperties",
+          "description": "Properties of the Job resource",
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "JobResourceProperties": {
+      "description": "Job resource properties payload",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the Job",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "JobResourceProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "template": {
+          "$ref": "#/definitions/JobExecutionTemplate",
+          "description": "The template which is applied for all executions of the Job."
+        },
+        "source": {
+          "$ref": "#/definitions/UserSourceInfo",
+          "description": "Uploaded source information of the Job."
+        },
+        "managedComponentReferences": {
+          "$ref": "#/definitions/ManagedComponentReferenceCollection",
+          "description": "Referenced managed components collection"
+        },
+        "triggerConfig": {
+          "$ref": "#/definitions/JobTriggerConfig",
+          "description": "The Job trigger related configuration."
+        }
+      }
+    },
+    "JobTriggerConfig": {
+      "description": "Configuration for different trigger types",
+      "type": "object",
+      "required": [
+        "triggerType"
+      ],
+      "properties": {
+        "triggerType": {
+          "description": "Type of job trigger",
+          "type": "string"
+        }
+      },
+      "discriminator": "triggerType"
+    },
+    "ManualJobTriggerConfig": {
+      "description": "Configuration for manual triggered job",
+      "type": "object",
+      "x-ms-discriminator-value": "Manual",
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobTriggerConfig"
+        }
+      ],
+      "properties": {
+        "timeoutInSeconds": {
+          "description": "Maximum number of seconds an execution is allowed to run.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "replicaRetryLimit": {
+          "format": "int32",
+          "description": "Maximum number of retries for each replica before failing the job.",
+          "type": "integer"
+        }
+      }
+    },
+    "JobResourceCollection": {
+      "description": "List of Azure Spring Apps Jobs and a possible link for next set.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of Job resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string"
+        }
+      }
+    },
+    "JobExecutionProperties": {
+      "description": "Job's execution template, containing configuration for an execution",
+      "type": "object",
+      "properties": {
+        "template": {
+          "$ref": "#/definitions/JobExecutionTemplate",
+          "description": "The template which is applied for the execution of the Job."
+        },
+        "resourceRequests": {
+          "$ref": "#/definitions/ResourceRequests",
+          "description": "The requested resource quantity for required CPU and Memory."
+        }
+      }
+    },
+    "JobExecutionTemplate": {
+      "description": "Job's execution template, containing configuration for an execution",
+      "type": "object",
+      "properties": {
+        "environmentVariables": {
+          "description": "Environment variables of Job execution",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvVar"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "args": {
+          "description": "Arguments for the Job execution.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "JobExecution": {
+      "description": "Azure Spring Apps Job execution.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "name": {
+          "description": "Job execution Name.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Current state of the job execution",
+          "enum": [
+            "Running",
+            "Pending",
+            "Canceled",
+            "Failed",
+            "Completed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "JobExecutionRunningState",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "description": "Job execution start time.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "Job execution end time.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Job's execution properties.",
+          "$ref": "#/definitions/JobExecutionProperties"
+        },
+        "jobSnapshot": {
+          "$ref": "#/definitions/JobResourceProperties",
+          "description": "The properties of job configuration"
+        }
+      }
+    },
+    "JobExecutionCollection": {
+      "description": "Azure Spring App Job executions collection.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of Job executions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobExecution"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EnvVar": {
+      "description": "Azure Spring Apps components' environment variable.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Environment variable name.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Non-secret environment variable value.",
+          "type": "string"
+        },
+        "secretValue": {
+          "description": "secret environment variable value.",
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "EnvSecretsCollection": {
+      "description": "Secret environment variable collection.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Secret"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "ManagedComponentReference": {
+      "description": "A reference to the managed component like Config Server.",
+      "required": [
+        "resourceId"
+      ],
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "Resource Id of the managed component",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AppPlatform/Spring/configServers"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "ManagedComponentReferenceCollection": {
+      "description": "Collection of managed component reference",
+      "type": "array",
+      "x-ms-identifiers": [
+        "resourceId"
+      ],
+      "items": {
+        "$ref": "#/definitions/ManagedComponentReference"
+      }
     }
   },
   "parameters": {
@@ -15452,6 +16254,24 @@
       "name": "predefinedAcceleratorName",
       "in": "path",
       "description": "The name of the predefined accelerator.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$",
+      "x-ms-parameter-location": "method"
+    },
+    "JobNameParameter": {
+      "name": "jobName",
+      "in": "path",
+      "description": "The name of the Job resource.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$",
+      "x-ms-parameter-location": "method"
+    },
+    "JobExecutionNameParameter": {
+      "name": "jobExecutionName",
+      "in": "path",
+      "description": "The name of the Job execution.",
       "required": true,
       "type": "string",
       "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$",
