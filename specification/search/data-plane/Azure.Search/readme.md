@@ -911,8 +911,8 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/preview/2024-05-01-preview/searchservice.json
-  - $(this-folder)/preview/2024-05-01-preview/searchindex.json
+  - $(this-folder)/preview/2024-05-01-Preview/searchservice.json
+  - $(this-folder)/preview/2024-05-01-Preview/searchindex.json
   - $(this-folder)/preview/2024-03-01-Preview/searchservice.json
   - $(this-folder)/preview/2024-03-01-Preview/searchindex.json
   - $(this-folder)/preview/2023-10-01-Preview/searchservice.json
