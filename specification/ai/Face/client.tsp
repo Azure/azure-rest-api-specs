@@ -173,6 +173,7 @@ interface FaceAdministrationClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   updateLargePersonGroupPersonFace is PersonGroupOperations.updateLargePersonGroupPersonFace;
 
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Doesn't fit in generated long-running operation"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   createPerson is PersonDirectoryOperations.createPerson;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -184,8 +185,10 @@ interface FaceAdministrationClient {
   getPeople is PersonDirectoryOperations.getPeople;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   getDynamicPersonGroupReferences is PersonDirectoryOperations.getDynamicPersonGroupReferences;
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Doesn't fit in generated long-running operation"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   addPersonFaceFromUrl is PersonDirectoryOperations.addPersonFaceFromUrl;
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Doesn't fit in generated long-running operation"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
   addPersonFace is PersonDirectoryOperations.addPersonFace;
@@ -197,11 +200,13 @@ interface FaceAdministrationClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   getPersonFaces is PersonDirectoryOperations.getPersonFaces;
 
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Doesn't fit in generated long-running operation"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   createDynamicPersonGroup is PersonDirectoryOperations.createDynamicPersonGroup;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   deleteDynamicPersonGroup is PersonDirectoryOperations.deleteDynamicPersonGroup;
   getDynamicPersonGroup is PersonDirectoryOperations.getDynamicPersonGroup;
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Doesn't fit in generated long-running operation"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   updateDynamicPersonGroup is PersonDirectoryOperations.updateDynamicPersonGroup;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
