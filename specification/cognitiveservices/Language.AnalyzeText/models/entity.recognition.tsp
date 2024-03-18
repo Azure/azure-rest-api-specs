@@ -68,8 +68,7 @@ model EntitiesDocumentResult is DocumentResult {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_15_preview)
-model EntitiesDocumentResultWithDetectedLanguage
-  is EntitiesDocumentResult {
+model EntitiesDocumentResultWithDetectedLanguage is EntitiesDocumentResult {
   ...DocumentDetectedLanguage;
 }
 

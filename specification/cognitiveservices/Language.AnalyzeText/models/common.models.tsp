@@ -476,11 +476,11 @@ alias AnalyzeTextJobQueryParameters = QueryParametersTrait<{
 @doc("Query parameters for the AnalyzeText operation.")
 model AnalyzeTextQueryParameters {
   ...Azure.Core.Foundations.ApiVersionParameter;
+
   @doc("(Optional) if set to true, response will contain request and document level statistics.")
   @query
   showStats?: boolean;
 }
-
 
 @doc("job state")
 model JobState {
@@ -960,8 +960,8 @@ enum RedactionCharacter {
   tilde: "~",
 }
 
-@doc("The error object.")
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
+@doc("The error object.")
 model Error is Record<unknown> {
   @doc("One of a server-defined set of error codes.")
   code: ErrorCode;

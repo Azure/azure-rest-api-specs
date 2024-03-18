@@ -3,7 +3,7 @@ import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
-import "@azure-tools/typespec-autorest";
+// import "@azure-tools/typespec-autorest";
 import "./common.tsp";
 
 using TypeSpec.Http;
@@ -12,7 +12,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
-using Autorest;
+// using Autorest;
 
 @useAuth(
   TypeSpec.Http.ApiKeyAuth<
@@ -345,6 +345,7 @@ enum ExtraInformationKind {
   EntitySubtype,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'ListKey' should have a documentation or description, please use decorator @doc to add it."
   ListKey,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'RegexKey' should have a documentation or description, please use decorator @doc to add it."
   @added(Versions.v2023_04_01)
   RegexKey,
@@ -1739,7 +1740,7 @@ enum WeightUnit {
 
 @doc("Error response.")
 @error
-model ErrorResponseWithHeader is ErrorResponse{
+model ErrorResponseWithHeader is ErrorResponse {
   @header("x-ms-error-code")
   @doc("The error code for specific error that occurred.")
   errorCode?: string;
@@ -1755,13 +1756,14 @@ alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 @post
 @doc("Analyzes the input conversation utterance.")
 @route("/:analyze-conversations")
-@example("./SuccessfulAnalyzeConversations.json", "SuccessfulAnalyzeConversations")
-@example("./SuccessfulAnalyzeConversationsArbitration.json", "SuccessfulAnalyzeConversationsArbitration")
-@example("./SuccessfulAnalyzeConversationsArbitrationDirectTarget.json", "SuccessfulAnalyzeConversationsArbitrationDirectTarget")
+// @example("./SuccessfulAnalyzeConversations.json", "SuccessfulAnalyzeConversations")
+// @example("./SuccessfulAnalyzeConversationsArbitration.json", "SuccessfulAnalyzeConversationsArbitration")
+// @example("./SuccessfulAnalyzeConversationsArbitrationDirectTarget.json", "SuccessfulAnalyzeConversationsArbitrationDirectTarget")
 op analyzeConversations(
   @doc("Collection of conversations to analyze and a single task to execute.")
   @body
   body: AnalyzeConversationTask,
+
   ...Azure.Core.Foundations.ApiVersionParameter,
 ): AnalyzeConversationTaskResult | ErrorResponseWithHeader;
 
@@ -1769,13 +1771,13 @@ op analyzeConversations(
 @added(Versions.v2023_04_01)
 @doc("Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.")
 @summary("Get analysis status and results")
-@example("./SuccessfulConversationPIIExclusionTaskStatusRequest.json", "SuccessfulConversationPIIExclusionTaskStatusRequest")
-@example("./SuccessfulConversationPIIRedactionCharTaskStatusRequest.json", "SuccessfulConversationPIIRedactionCharTaskStatusRequest")
-@example("./SuccessfulConversationPIITaskStatusRequest.json", "SuccessfulConversationPIITaskStatusRequest")
-@example("./SuccessfulConversationSentimentTaskStatusRequest.json", "SuccessfulConversationSentimentTaskStatusRequest")
-@example("./SuccessfulConversationSummarizationTaskStatusRequest.json", "SuccessfulConversationSummarizationTaskStatusRequest")
-@example("./SuccessfulCustomConversationSummarizationTaskResult.json", "SuccessfulCustomConversationSummarizationTaskResult")
-@example("./SuccessfulConversationSummarizationTaskResult.json", "SuccessfulConversationSummarizationTaskResult")
+// @example("./SuccessfulConversationPIIExclusionTaskStatusRequest.json", "SuccessfulConversationPIIExclusionTaskStatusRequest")
+// @example("./SuccessfulConversationPIIRedactionCharTaskStatusRequest.json", "SuccessfulConversationPIIRedactionCharTaskStatusRequest")
+// @example("./SuccessfulConversationPIITaskStatusRequest.json", "SuccessfulConversationPIITaskStatusRequest")
+// @example("./SuccessfulConversationSentimentTaskStatusRequest.json", "SuccessfulConversationSentimentTaskStatusRequest")
+// @example("./SuccessfulConversationSummarizationTaskStatusRequest.json", "SuccessfulConversationSummarizationTaskStatusRequest")
+// @example("./SuccessfulCustomConversationSummarizationTaskResult.json", "SuccessfulCustomConversationSummarizationTaskResult")
+// @example("./SuccessfulConversationSummarizationTaskResult.json", "SuccessfulConversationSummarizationTaskResult")
 op analyzeConversationsJobStatus is LanguageLongRunningResourceRead<
   AnalyzeConversationJobState,
   ShowStatsQueryParameter
@@ -1786,13 +1788,13 @@ op analyzeConversationsJobStatus is LanguageLongRunningResourceRead<
 @doc("Analyzes the input conversation utterance.")
 @route("/analyze-conversations/jobs")
 @pollingOperation(analyzeConversationsJobStatus)
-@example("./SuccessfulConversationPIIExclusionSubmit.json", "SuccessfulConversationPIIExclusionSubmit")
-@example("./SuccessfulConversationPIIRedactionCharSubmit.json", "SuccessfulConversationPIIRedactionCharSubmit")
-@example("./SuccessfulConversationPIISubmit.json", "SuccessfulConversationPIISubmit")
-@example("./SuccessfulConversationSentimentSubmit.json", "SuccessfulConversationSentimentSubmit")
-@example("./SuccessfulConversationSummarySubmit.json", "SuccessfulConversationSummarySubmit")
-@example("./SuccessfulCustomConversationSummarizationTaskSubmit.json", "SuccessfulCustomConversationSummarizationTaskSubmit")
-@example("./SuccessfulConversationSummarizationTaskSubmit.json", "SuccessfulConversationSummarizationTaskSubmit")
+// @example("./SuccessfulConversationPIIExclusionSubmit.json", "SuccessfulConversationPIIExclusionSubmit")
+// @example("./SuccessfulConversationPIIRedactionCharSubmit.json", "SuccessfulConversationPIIRedactionCharSubmit")
+// @example("./SuccessfulConversationPIISubmit.json", "SuccessfulConversationPIISubmit")
+// @example("./SuccessfulConversationSentimentSubmit.json", "SuccessfulConversationSentimentSubmit")
+// @example("./SuccessfulConversationSummarySubmit.json", "SuccessfulConversationSummarySubmit")
+// @example("./SuccessfulCustomConversationSummarizationTaskSubmit.json", "SuccessfulCustomConversationSummarizationTaskSubmit")
+// @example("./SuccessfulConversationSummarizationTaskSubmit.json", "SuccessfulConversationSummarizationTaskSubmit")
 op analyzeConversationsSubmitJob is LanguageLongRunningOperation<
   AnalyzeConversationJobsInput,
   AnalyzeConversationJobState
@@ -1805,5 +1807,5 @@ op analyzeConversationsSubmitJob is LanguageLongRunningOperation<
 @pollingOperation(analyzeConversationsJobStatus)
 @actionSeparator(":")
 @action("cancel")
-@example("./SuccessfulAnalyzeConversationsJobsCancelRequest.json", "SuccessfulAnalyzeConversationsJobsCancelRequest")
+// @example("./SuccessfulAnalyzeConversationsJobsCancelRequest.json", "SuccessfulAnalyzeConversationsJobsCancelRequest")
 op analyzeConversationsCancelJob is LanguageLongRunningResourceCancel<AnalyzeConversationJobState>;

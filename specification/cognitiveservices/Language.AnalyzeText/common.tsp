@@ -20,7 +20,7 @@ op LanguageLongRunningOperation<
   TStatusResult extends TypeSpec.Reflection.Model,
   TStatusError = Foundations.Error,
   Traits extends TypeSpec.Reflection.Model = {},
-  TErrorResponse =  ErrorResponse
+  TErrorResponse = ErrorResponse
 > is Foundations.Operation<
   TParams &
     Azure.Core.Traits.Private.TraitProperties<
@@ -59,14 +59,22 @@ op LanguageLongRunningResourceCancel<
 @get
 @doc("Long running operation template to match Azure Language.")
 op LanguageLongRunningResourceRead<
-    Resource extends TypeSpec.Reflection.Model,
-    Traits extends TypeSpec.Reflection.Model = {},
-    TErrorResponse = ErrorResponse
-  > is Foundations.ResourceOperation<
-    Resource,
-    Azure.Core.Traits.Private.TraitProperties<Traits, TraitLocation.Parameters, TraitContext.Read>,
-    Resource &
-    Azure.Core.Traits.Private.TraitProperties<Traits, TraitLocation.Response, TraitContext.Read>,
+  Resource extends TypeSpec.Reflection.Model,
+  Traits extends TypeSpec.Reflection.Model = {},
+  TErrorResponse = ErrorResponse
+> is Foundations.ResourceOperation<
+  Resource,
+  Azure.Core.Traits.Private.TraitProperties<
     Traits,
-    TErrorResponse
-  >;
+    TraitLocation.Parameters,
+    TraitContext.Read
+  >,
+  Resource &
+    Azure.Core.Traits.Private.TraitProperties<
+      Traits,
+      TraitLocation.Response,
+      TraitContext.Read
+    >,
+  Traits,
+  TErrorResponse
+>;

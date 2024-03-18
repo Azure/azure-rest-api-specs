@@ -74,7 +74,7 @@ model SentimentResponse is PreBuiltResult {
 
 @doc("Sentiment analysis per document.")
 model SentimentDocumentResultWithDetectedLanguage is SentimentDocumentResult {
-...DocumentDetectedLanguage
+  ...DocumentDetectedLanguage;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -144,7 +144,6 @@ enum SentenceTargetSentimentValue {
   negative,
 }
 
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model SentenceAssessment {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -198,7 +197,6 @@ model TargetConfidenceScoreLabel {
 model SentimentLROResult extends AnalyzeTextLROResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   kind: AnalyzeTextLROResultsKind.SentimentAnalysisLROResults;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: SentimentResponse;
 }

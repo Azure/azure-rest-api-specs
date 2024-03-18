@@ -56,7 +56,8 @@ model CustomLabelClassificationResult is CustomResult {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_15_preview)
-model CustomLabelClassificationResultWithDocumentDetectedLanguage is CustomResult {
+model CustomLabelClassificationResultWithDocumentDetectedLanguage
+  is CustomResult {
   @doc("Response by document")
   documents: Array<ClassificationDocumentResultWithDetectedLanguage>;
 }
@@ -89,7 +90,8 @@ model ClassificationDocumentResult is DocumentResult {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model ClassificationDocumentResultWithDetectedLanguage is ClassificationDocumentResult {
+model ClassificationDocumentResultWithDetectedLanguage
+  is ClassificationDocumentResult {
   ...DocumentDetectedLanguage;
 }
 
