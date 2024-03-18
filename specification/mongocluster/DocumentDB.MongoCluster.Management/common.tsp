@@ -39,8 +39,7 @@ interface Operations extends Azure.ResourceManager.Operations {
     LroHeaders extends TypeSpec.Reflection.Model = {},
     Parameters extends {} = {},
     Response extends {} = ArmAcceptedLroResponse<
-      "Resource operation accepted.",
-      LroHeaders
+      "Resource operation accepted."
     > | ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedResponse<
       Resource,
       LroHeaders
