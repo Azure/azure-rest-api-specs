@@ -12,7 +12,47 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.DocumentDB;
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations extends Azure.ResourceManager.Operations {
+  /**
+   * A long-running resource CreateOrUpdate (PUT)
+   * @template Resource the resource being patched
+   * @template BaseParameters Optional. Allows overriding the operation parameters
+   * @template LroHeaders Optional.  Allows overriding the lro headers returned on resource create
+   * @template Parameters Optional. Additional parameters after the path parameters
+   * @template Response Optional. The success response for the createOrUpdate operation
+   * @template Error Optional. The error response, if non-standard.
+   */
+  @autoRoute
+  @doc("Create a {name}", Resource)
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
+  @armResourceCreateOrUpdate(Resource)
+  @put
+  ArmResourceCreateOrUpdateWithAcceptedAsync<
+    Resource extends ArmResource,
+    BaseParameters = DefaultBaseParameters<Resource>,
+    LroHeaders extends TypeSpec.Reflection.Model = {},
+    Parameters extends {} = {},
+    Response extends {} = ArmAcceptedLroResponse<
+      "Resource operation accepted.",
+      LroHeaders
+    > | ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedResponse<
+      Resource,
+      LroHeaders
+    >,
+    Error extends {} = ErrorResponse
+  > is ArmCreateOperation<
+    ResourceInstanceParameters<Resource, BaseParameters> & Parameters,
+    Resource,
+    Response,
+    Error
+  >;
+}
 
 @lroStatus
 @doc("The provisioning state of the last accepted operation.")
@@ -29,3 +69,34 @@ union ProvisioningState {
   @doc("A drop operation is in-progress on the resource.")
   "Dropping",
 }
+
+// @armResourceOperations
+// interface CustomOperations {
+//   /**
+//    * @dev A long-running resource CreateOrUpdate (PUT) with Accepted LRO response.
+//    * @template Resource the resource being patched
+//    * @template BaseParameters Optional. Allows overriding the operation parameters
+//    * @template LroHeaders Optional.  Allows overriding the lro headers returned on resource create
+//    * @template Parameters Optional. Additional parameters after the path parameters
+//    * @template Response Optional. The success response for the createOrReplace operation
+//    * @template Error Optional. The error response, if non-standard.
+//    */
+//   op ArmResourceCreateOrReplaceAcceptedAsync<
+//     Resource extends ArmResource,
+//     BaseParameters = DefaultBaseParameters<Resource>,
+//     LroHeaders extends TypeSpec.Reflection.Model = {},
+//     Parameters extends {} = {},
+//     Response extends {} = ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedResponse<
+//       Resource,
+//       LroHeaders
+//     > | ArmAcceptedLroResponse<"Resource operation accepted.", LroHeaders>,
+//     Error extends {} = ErrorResponse
+//   > is ArmResourceCreateOrReplaceAsync<
+//     Resource,
+//     BaseParameters,
+//     LroHeaders,
+//     Parameters,
+//     Response,
+//     Error
+//   >;
+// }

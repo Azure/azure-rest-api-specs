@@ -44,7 +44,7 @@ interface FirewallRules {
   @doc("Gets information about a mongo cluster firewall rule.")
   get is ArmResourceRead<FirewallRule>;
   @doc("Creates a new firewall rule or updates an existing firewall rule on a mongo cluster.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<FirewallRule>;
+  createOrUpdate is Operations.ArmResourceCreateOrUpdateWithAcceptedAsync<FirewallRule>;
   @doc("Deletes a mongo cluster firewall rule.")
   delete is ArmResourceDeleteWithoutOkAsync<FirewallRule>;
   @doc("List all the firewall rules in a given mongo cluster.")
