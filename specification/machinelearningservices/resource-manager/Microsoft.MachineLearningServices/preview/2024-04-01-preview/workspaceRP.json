@@ -895,6 +895,10 @@
           "Create Azure OpenAI Connection Deployment": {
             "$ref": "./examples/WorkspaceConnection/createDeployment.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -1003,7 +1007,7 @@
           "V2WorkspaceConnectionResource"
         ],
         "summary": "List the specified Content Filters associated with the Azure OpenAI connection.",
-        "operationId": "Connection_RaiPolicies_List",
+        "operationId": "ConnectionRaiPolicies_List",
         "produces": [
           "application/json"
         ],
@@ -1054,7 +1058,7 @@
           "V2WorkspaceConnectionResource"
         ],
         "summary": "Deletes the specified Content Filters associated with the Azure OpenAI connection.",
-        "operationId": "Connection_aiPolicy_Delete",
+        "operationId": "ConnectionRaiPolicy_Delete",
         "produces": [
           "application/json"
         ],
@@ -1118,7 +1122,7 @@
           "V2WorkspaceConnectionResource"
         ],
         "summary": "Gets the specified Content Filters associated with the Azure OpenAI connection.",
-        "operationId": "Connection_RaiPolicy_Get",
+        "operationId": "ConnectionRaiPolicy_Get",
         "produces": [
           "application/json"
         ],
@@ -1167,7 +1171,7 @@
           "V2WorkspaceConnectionResource"
         ],
         "summary": "Update the state of specified Content Filters associated with the Azure OpenAI connection.",
-        "operationId": "Connection_RaiPolicy_Create",
+        "operationId": "ConnectionRaiPolicy_Create",
         "consumes": [
           "application/json"
         ],
