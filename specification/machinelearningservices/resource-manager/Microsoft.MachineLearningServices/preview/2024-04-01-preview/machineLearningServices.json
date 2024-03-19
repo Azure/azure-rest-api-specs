@@ -2164,13 +2164,6 @@
             "modelAsString": true
           }
         },
-        "osPatchingResult": {
-          "readOnly": true,
-          "x-nullable": true,
-          "title": "OsPatching status and errors.",
-          "description": "The result of os patching operation on this ComputeInstance.",
-          "$ref": "#/definitions/ComputeInstanceOsPatchingResult"
-        },
         "enableOSPatching": {
           "type": "boolean",
           "default": false,
@@ -3005,6 +2998,17 @@
         "scheduledRebootTime": {
           "type": "string",
           "description": "Time of scheduled reboot."
+        },
+        "osPatchingErrors": {
+          "type": "array",
+          "x-nullable": true,
+          "description": "Collection of errors encountered when doing os patching.",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          },
+          "x-ms-identifiers": [
+            "/error/code"
+          ]
         }
       }
     },
@@ -3999,31 +4003,6 @@
           "readOnly": true,
           "description": "Private IP Address of this ComputeInstance (local to the VNET in which the compute instance is deployed).",
           "x-nullable": true
-        }
-      }
-    },
-    "ComputeInstanceOsPatchingResult": {
-      "type": "object",
-      "readOnly": true,
-      "description": "The result of os patching operation on this ComputeInstance.",
-      "properties": {
-        "osPatchingErrors": {
-          "readOnly": true,
-          "x-nullable": true,
-          "description": "Collection of errors encountered when doing os patching.",
-          "type": "array",
-          "items": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          },
-          "x-ms-identifiers": [
-            "/error/code"
-          ]
-        },
-        "osPatchingStatus": {
-          "type": "string",
-          "readOnly": true,
-          "x-nullable": true,
-          "description": "The current status of current os patching operation."
         }
       }
     },
