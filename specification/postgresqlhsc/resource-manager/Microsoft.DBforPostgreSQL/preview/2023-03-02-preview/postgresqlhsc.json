@@ -2662,27 +2662,7 @@
           }
         },
         "userAssignedIdentities": {
-          "type": "object",
-          "description": "The list of user-assigned identities associated with the resource. The user-assigned identity dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
-          "additionalProperties": {
-            "$ref": "#/definitions/UserIdentity"
-          }
-        }
-      }
-    },
-    "UserIdentity": {
-      "type": "object",
-      "description": "A resource identity that is managed by the user of the service.",
-      "properties": {
-        "principalId": {
-          "description": "The principal ID of the user-assigned identity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "clientId": {
-          "description": "The client ID of the user-assigned identity.",
-          "type": "string",
-          "readOnly": true
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/UserAssignedIdentities"
         }
       }
     },
