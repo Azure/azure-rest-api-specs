@@ -10,7 +10,7 @@ using TypeSpec.Http;
 
 namespace DevCenterService;
 
-interface EnvironmentsOperations {
+interface Environments {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern since Environment has a different path"
   @doc("Lists the environments for a project.")
   @route("/projects/{projectName}/environments")
@@ -50,7 +50,7 @@ interface EnvironmentsOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
   //Can not use LongRunningCreateOrReplace because response is 200 or 201, but we only respond with 201"
   @doc("Creates or updates an environment.")
-  @finalOperation(EnvironmentsOperations.getEnvironmentByUser)
+  @finalOperation(Environments.getEnvironmentByUser)
   @pollingOperation(OperationStatuses.get)
   @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
   @put

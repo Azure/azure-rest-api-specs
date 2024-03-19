@@ -9,7 +9,7 @@ using TypeSpec.Http;
 
 namespace DevCenterService;
 
-interface DevBoxesOperations {
+interface DevBoxes {
   @doc("Lists available pools")
   listPools is StandardResourceOperations.ResourceList<Pool>;
 
@@ -57,7 +57,7 @@ interface DevBoxesOperations {
   //     "in": "body",
   //  }
   @doc("Creates or replaces a Dev Box.")
-  @finalOperation(DevBoxesOperations.getDevBoxByUser)
+  @finalOperation(DevBoxes.getDevBoxByUser)
   @pollingOperation(OperationStatuses.get)
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
   @put
