@@ -1265,7 +1265,7 @@
         },
         "systemData": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NspSystemData",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "System data of the network security perimeter."
         },
         "location": {
@@ -1355,7 +1355,7 @@
         },
         "systemData": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NspSystemData",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "System data of the network security perimeter profile"
         },
         "name": {
@@ -1423,7 +1423,7 @@
         },
         "systemData": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NspSystemData",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "System data of the network security perimeter access rule."
         },
         "name": {
@@ -1579,7 +1579,7 @@
         },
         "systemData": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NspSystemData",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "System data of the network security perimeter association."
         },
         "name": {
@@ -1783,7 +1783,7 @@
         },
         "systemData": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NspSystemData",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "System data of the network security perimeter link."
         }
       },
@@ -1903,7 +1903,7 @@
         },
         "systemData": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NspSystemData",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "description": "System data of the network security perimeter link reference."
         }
       },
@@ -2008,58 +2008,6 @@
         }
       },
       "description": "Properties of NSP LinkReference resource."
-    },
-    "NspSystemData": {
-      "type": "object",
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "A string identifier for the identity that created the resource."
-        },
-        "createdByType": {
-          "type": "string",
-          "description": "The type of identity that last modified the resource: User, Application, ManagedIdentity or Key.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "systemData",
-            "modelAsString": true
-          }
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)."
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "A string identifier for the identity that last modified the resource."
-        },
-        "lastModifiedByType": {
-          "type": "string",
-          "description": "The type of identity that last modified the resource: User, Application, ManagedIdentity or Key.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "systemData",
-            "modelAsString": true
-          }
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource last modification (UTC)."
-        }
-      },
-      "description": "System data object structure."
     }
   },
   "parameters": {
