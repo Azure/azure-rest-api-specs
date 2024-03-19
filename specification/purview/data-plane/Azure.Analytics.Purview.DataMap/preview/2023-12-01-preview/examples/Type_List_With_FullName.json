@@ -111,7 +111,7 @@
             },
             "attributeDefs": [],
             "superTypes": [],
-            "entityTypes": [],
+            "entityTypes": ["ATLAS.Asset"],
             "subTypes": []
           }
         ],
@@ -240,7 +240,25 @@
                 "relationshipFullTypeName": "ATLAS.AtlasGlossarySemanticAssignment",
                 "isLegacyAttribute": false
               }
-            ]
+            ],
+            "businessAttributeDefs": {
+              "MICROSOFT.PurviewDataQuality": [
+                {
+                  "name": "overallScore",
+                  "typeName": "double",
+                  "isOptional": true,
+                  "cardinality": "SINGLE",
+                  "valuesMinCount": 0,
+                  "valuesMaxCount": 1,
+                  "isUnique": false,
+                  "isIndexable": true,
+                  "includeInNotification": false,
+                  "options": {
+                    "applicableEntityTypes": "[\"ATLAS.hive_table\",\"ATLAS.DataSet\"]"
+                  }
+                }
+              ]
+            }
           }
         ],
         "relationshipDefs": [
@@ -276,6 +294,32 @@
               "cardinality": "SET",
               "isLegacyAttribute": false
             }
+          }
+        ],
+        "businessMetadataDefs": [
+          {
+            "category": "BUSINESS_METADATA",
+            "version": 1,
+            "name": "PurviewDataQuality",
+            "fullName": "MICROSOFT.PurviewDataQuality",
+            "description": "PurviewDataQuality",
+            "serviceType": "hive",
+            "attributeDefs": [
+              {
+                "name": "overallScore",
+                "typeName": "double",
+                "isOptional": true,
+                "cardinality": "SINGLE",
+                "valuesMinCount": 0,
+                "valuesMaxCount": 1,
+                "isUnique": false,
+                "isIndexable": true,
+                "includeInNotification": false,
+                "options": {
+                  "applicableEntityTypes": "[\"ATLAS.hive_table\",\"ATLAS.DataSet\"]"
+                }
+              }
+            ]
           }
         ]
       }
