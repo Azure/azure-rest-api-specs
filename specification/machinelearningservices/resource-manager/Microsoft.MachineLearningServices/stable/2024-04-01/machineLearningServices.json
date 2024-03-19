@@ -1875,6 +1875,523 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments": {
+      "get": {
+        "tags": [
+          "V2WorkspaceConnectionResource"
+        ],
+        "summary": "Get all the deployments under the Azure OpenAI connection.",
+        "operationId": "Connection_ListDeployments",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/EndpointDeploymentResourcePropertiesBasicResourceArmPaginatedResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Azure OpenAI Connection Deployments": {
+            "$ref": "./examples/WorkspaceConnection/listDeployments.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments/{deploymentName}": {
+      "delete": {
+        "tags": [
+          "V2WorkspaceConnectionResource"
+        ],
+        "summary": "Delete Azure OpenAI connection deployment resource by name",
+        "operationId": "Connection_DeleteDeployment",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Azure OpenAI Connection Deployment": {
+            "$ref": "./examples/WorkspaceConnection/deleteDeployment.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "V2WorkspaceConnectionResource"
+        ],
+        "summary": "Get deployments under the Azure OpenAI connection by name.",
+        "operationId": "Connection_GetDeployment",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/EndpointDeploymentResourcePropertiesBasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Azure OpenAI Connection Deployment": {
+            "$ref": "./examples/WorkspaceConnection/getDeployment.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "V2WorkspaceConnectionResource"
+        ],
+        "summary": "Create or update Azure OpenAI connection deployment resource with the specified parameters",
+        "operationId": "Connection_CreateOrUpdateDeployment",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "deployment object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EndpointDeploymentResourcePropertiesBasicResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/EndpointDeploymentResourcePropertiesBasicResource"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Azure OpenAI Connection Deployment": {
+            "$ref": "./examples/WorkspaceConnection/createDeployment.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/models": {
+      "get": {
+        "tags": [
+          "V2WorkspaceConnectionResource"
+        ],
+        "summary": "Get available models under the Azure OpenAI connection.",
+        "operationId": "Connection_GetModels",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/EndpointModels"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Azure OpenAI Connection Models": {
+            "$ref": "./examples/WorkspaceConnection/getModels.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiPolicies": {
+      "get": {
+        "tags": [
+          "V2WorkspaceConnectionResource"
+        ],
+        "summary": "List the specified Content Filters associated with the Azure OpenAI connection.",
+        "operationId": "Connection_RaiPolicies_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/RaiPolicyPropertiesBasicResourceArmPaginatedResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Rai policy": {
+            "$ref": "./examples/WorkspaceConnection/RaiPolicy/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiPolicies/{raiPolicyName}": {
+      "delete": {
+        "tags": [
+          "V2WorkspaceConnectionResource"
+        ],
+        "summary": "Deletes the specified Content Filters associated with the Azure OpenAI connection.",
+        "operationId": "Connection_aiPolicy_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "#/parameters/RaiPolicyNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Rai policy": {
+            "$ref": "./examples/WorkspaceConnection/RaiPolicy/delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "V2WorkspaceConnectionResource"
+        ],
+        "summary": "Gets the specified Content Filters associated with the Azure OpenAI connection.",
+        "operationId": "Connection_RaiPolicy_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "#/parameters/RaiPolicyNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/RaiPolicyPropertiesBasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Rai policy": {
+            "$ref": "./examples/WorkspaceConnection/RaiPolicy/get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "V2WorkspaceConnectionResource"
+        ],
+        "summary": "Update the state of specified Content Filters associated with the Azure OpenAI connection.",
+        "operationId": "Connection_RaiPolicy_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "#/parameters/RaiPolicyNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RaiPolicyPropertiesBasicResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/RaiPolicyPropertiesBasicResource"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/RaiPolicyPropertiesBasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Rai policy": {
+            "$ref": "./examples/WorkspaceConnection/RaiPolicy/create.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundNetworkDependenciesEndpoints": {
       "get": {
         "tags": [
@@ -2352,6 +2869,24 @@
       "type": "boolean",
       "default": false,
       "x-ms-parameter-location": "method"
+    },
+    "DeploymentNameParameter": {
+      "in": "path",
+      "name": "deploymentName",
+      "description": "Name of the deployment resource",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+    },
+    "RaiPolicyNameParameter": {
+      "in": "path",
+      "name": "raiPolicyName",
+      "description": "Name of the Rai Policy.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
     }
   },
   "definitions": {
@@ -6833,6 +7368,592 @@
         "sparkRuntimeVersion": {
           "type": "string"
         }
+      }
+    },
+    "EndpointDeploymentResourcePropertiesBasicResourceArmPaginatedResult": {
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointDeploymentResourcePropertiesBasicResource"
+          }
+        }
+      }
+    },
+    "EndpointDeploymentResourcePropertiesBasicResource": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EndpointDeploymentResourceProperties"
+        }
+      }
+    },
+    "EndpointDeploymentResourceProperties": {
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "failureReason": {
+          "description": "The failure reason if the creation failed.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "Read-only provision state status property.",
+          "$ref": "#/definitions/DefaultResourceProvisioningState"
+        },
+        "type": {
+          "description": "Kind of the deployment.",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9._]",
+          "type": "string"
+        }
+      },
+      "discriminator": "type"
+    },
+    "DefaultResourceProvisioningState": {
+      "enum": [
+        "NotStarted",
+        "Failed",
+        "Creating",
+        "Updating",
+        "Succeeded",
+        "Deleting",
+        "Accepted",
+        "Canceled"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-mutability": [
+        "read"
+      ],
+      "x-ms-enum": {
+        "name": "DefaultResourceProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "ManagedOnlineEndpointDeploymentResourceProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EndpointDeploymentResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "managedOnlineEndpoint"
+    },
+    "OpenAIEndpointDeploymentResourceProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CognitiveServiceEndpointDeploymentResourceProperties"
+        },
+        {
+          "$ref": "#/definitions/EndpointDeploymentResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Azure.OpenAI"
+    },
+    "CognitiveServiceEndpointDeploymentResourceProperties": {
+      "required": [
+        "model"
+      ],
+      "type": "object",
+      "properties": {
+        "model": {
+          "description": "Model used for the endpoint deployment.",
+          "$ref": "#/definitions/EndpointDeploymentModel"
+        },
+        "raiPolicyName": {
+          "type": "string",
+          "description": "The name of RAI policy."
+        },
+        "sku": {
+          "$ref": "#/definitions/CognitiveServicesSku"
+        },
+        "versionUpgradeOption": {
+          "description": "Deployment model version upgrade option.",
+          "type": "string",
+          "enum": [
+            "OnceNewDefaultVersionAvailable",
+            "OnceCurrentVersionExpired",
+            "NoAutoUpgrade"
+          ],
+          "x-ms-enum": {
+            "name": "DeploymentModelVersionUpgradeOption",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "EndpointDeploymentModel": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "description": "Model format",
+          "type": "string"
+        },
+        "name": {
+          "description": "Model name.",
+          "type": "string"
+        },
+        "source": {
+          "description": "Optional. Deployment model source ARM resource ID.",
+          "type": "string"
+        },
+        "version": {
+          "description": "Model version.",
+          "type": "string"
+        }
+      }
+    },
+    "CognitiveServicesSku": {
+      "type": "object",
+      "properties": {
+        "capacity": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "family": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "size": {
+          "type": "string"
+        },
+        "tier": {
+          "type": "string"
+        }
+      }
+    },
+    "SpeechEndpointDeploymentResourceProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CognitiveServiceEndpointDeploymentResourceProperties"
+        },
+        {
+          "$ref": "#/definitions/EndpointDeploymentResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Azure.Speech"
+    },
+    "ContentSafetyEndpointDeploymentResourceProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CognitiveServiceEndpointDeploymentResourceProperties"
+        },
+        {
+          "$ref": "#/definitions/EndpointDeploymentResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Azure.ContentSafety"
+    },
+    "EndpointModels": {
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page constructed using the continuationToken.  If null, there are no additional pages.",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of models.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccountModel"
+          }
+        }
+      }
+    },
+    "AccountModel": {
+      "description": "Cognitive Services account Model.",
+      "type": "object",
+      "properties": {
+        "baseModel": {
+          "type": "object",
+          "description": "Base Model Identifier.",
+          "$ref": "#/definitions/DeploymentModel"
+        },
+        "isDefaultVersion": {
+          "type": "boolean",
+          "description": "If the model is default version."
+        },
+        "skus": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelSku"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The list of Model Sku."
+        },
+        "maxCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The max capacity."
+        },
+        "capabilities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The capabilities."
+        },
+        "finetuneCapabilities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The capabilities for finetune models."
+        },
+        "deprecation": {
+          "type": "object",
+          "$ref": "#/definitions/ModelDeprecationInfo"
+        },
+        "lifecycleStatus": {
+          "type": "string",
+          "enum": [
+            "GenerallyAvailable",
+            "Preview"
+          ],
+          "x-ms-enum": {
+            "name": "ModelLifecycleStatus",
+            "modelAsString": true
+          },
+          "description": "Model lifecycle status."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentModel"
+        }
+      ]
+    },
+    "DeploymentModel": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "type": "string",
+          "description": "Deployment model format."
+        },
+        "name": {
+          "type": "string",
+          "description": "Deployment model name."
+        },
+        "version": {
+          "type": "string",
+          "description": "Optional. Deployment model version. If version is not specified, a default version will be assigned. The default version is different for different models and might change when there is new version available for a model. Default version for a model could be found from list models API."
+        },
+        "source": {
+          "type": "string",
+          "description": "Optional. Deployment model source ARM resource ID."
+        },
+        "callRateLimit": {
+          "readOnly": true,
+          "$ref": "#/definitions/CallRateLimit"
+        }
+      },
+      "description": "Properties of Cognitive Services account deployment model."
+    },
+    "CallRateLimit": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "number",
+          "description": "The count value of Call Rate Limit."
+        },
+        "renewalPeriod": {
+          "type": "number",
+          "description": "The renewal period in seconds of Call Rate Limit."
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ThrottlingRule"
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
+        }
+      },
+      "description": "The call rate limit Cognitive Services account."
+    },
+    "ThrottlingRule": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "renewalPeriod": {
+          "type": "number"
+        },
+        "count": {
+          "type": "number"
+        },
+        "minCount": {
+          "type": "number"
+        },
+        "dynamicThrottlingEnabled": {
+          "type": "boolean"
+        },
+        "matchPatterns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RequestMatchPattern"
+          },
+          "x-ms-identifiers": [
+            "path",
+            "method"
+          ]
+        }
+      }
+    },
+    "RequestMatchPattern": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        }
+      }
+    },
+    "ModelSku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the model SKU."
+        },
+        "usageName": {
+          "type": "string",
+          "description": "The usage name of the model SKU."
+        },
+        "deprecationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The datetime of deprecation of the model SKU."
+        },
+        "capacity": {
+          "type": "object",
+          "description": "The capacity configuration.",
+          "$ref": "#/definitions/CapacityConfig"
+        },
+        "rateLimits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CallRateLimit"
+          },
+          "x-ms-identifiers": [],
+          "description": "The list of rateLimit."
+        }
+      },
+      "description": "Describes an available Cognitive Services Model SKU."
+    },
+    "CapacityConfig": {
+      "type": "object",
+      "properties": {
+        "minimum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum capacity."
+        },
+        "maximum": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum capacity."
+        },
+        "step": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimal incremental between allowed values for capacity."
+        },
+        "default": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The default capacity."
+        },
+        "allowedValues": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "description": "The array of allowed values for capacity."
+        }
+      },
+      "description": "The capacity configuration."
+    },
+    "ModelDeprecationInfo": {
+      "description": "Cognitive Services account ModelDeprecationInfo.",
+      "type": "object",
+      "properties": {
+        "fineTune": {
+          "type": "string",
+          "description": "The datetime of deprecation of the fineTune Model."
+        },
+        "inference": {
+          "type": "string",
+          "description": "The datetime of deprecation of the inference Model."
+        }
+      }
+    },
+    "RaiPolicyPropertiesBasicResourceArmPaginatedResult": {
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RaiPolicyPropertiesBasicResource"
+          }
+        }
+      }
+    },
+    "RaiPolicyPropertiesBasicResource": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RaiPolicyProperties"
+        }
+      }
+    },
+    "RaiPolicyProperties": {
+      "type": "object",
+      "properties": {
+        "basePolicyName": {
+          "type": "string"
+        },
+        "completionBlocklists": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RaiBlocklistConfig"
+          }
+        },
+        "contentFilters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RaiPolicyContentFilter"
+          }
+        },
+        "mode": {
+          "$ref": "#/definitions/RaiPolicyMode"
+        },
+        "policyType": {
+          "$ref": "#/definitions/RaiPolicyType"
+        },
+        "promptBlocklists": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RaiBlocklistConfig"
+          }
+        }
+      }
+    },
+    "RaiBlocklistConfig": {
+      "type": "object",
+      "properties": {
+        "blocking": {
+          "type": "boolean"
+        },
+        "blocklistName": {
+          "type": "string"
+        }
+      }
+    },
+    "RaiPolicyContentFilter": {
+      "type": "object",
+      "properties": {
+        "allowedContentLevel": {
+          "$ref": "#/definitions/AllowedContentLevel"
+        },
+        "blocking": {
+          "type": "boolean"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "policyName": {
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/definitions/RaiPolicyContentSource"
+        }
+      }
+    },
+    "AllowedContentLevel": {
+      "enum": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AllowedContentLevel",
+        "modelAsString": true
+      }
+    },
+    "RaiPolicyContentSource": {
+      "enum": [
+        "Prompt",
+        "Completion"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RaiPolicyContentSource",
+        "modelAsString": true
+      }
+    },
+    "RaiPolicyMode": {
+      "enum": [
+        "Default",
+        "Deferred",
+        "Blocking"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RaiPolicyMode",
+        "modelAsString": true
+      }
+    },
+    "RaiPolicyType": {
+      "enum": [
+        "UserManaged",
+        "SystemManaged"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RaiPolicyType",
+        "modelAsString": true
       }
     }
   }
