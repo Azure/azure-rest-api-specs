@@ -54,33 +54,24 @@ interface DevCenterClientOperations {
   listEnvironmentTypes is DevCenterService.EnvironmentsOperations.listEnvironmentTypes;
 }
 
-@@projectedName(DevCenterService.LocalAdminStatus,
-  "client",
-  "LocalAdministratorStatus"
-);
-@@projectedName(DevCenterService.StopOnDisconnectEnableStatus,
-  "client",
+@@clientName(DevCenterService.LocalAdminStatus, "LocalAdministratorStatus");
+@@clientName(DevCenterService.StopOnDisconnectEnableStatus,
   "StopOnDisconnectStatus"
 );
-@@projectedName(DevCenterService.EnvironmentTypeEnableStatus,
-  "client",
+@@clientName(DevCenterService.EnvironmentTypeEnableStatus,
   "EnvironmentTypeStatus"
 );
-@@projectedName(DevCenterService.DevBoxActionDelayResultStatus,
-  "client",
+@@clientName(DevCenterService.DevBoxActionDelayResultStatus,
   "DevBoxActionDelayStatus"
 );
 
-@@projectedName(DevCenterService.OsType, "python", "OSType");
-@@projectedName(DevCenterService.HardwareProfile.vCPUs, "python", "vcpus");
-@@projectedName(DevCenterService.HardwareProfile.memoryGB,
-  "python",
-  "memoryGb"
-);
-@@projectedName(DevCenterService.OsDisk, "python", "OSDisk");
-@@projectedName(DevCenterService.OsDisk.diskSizeGB, "python", "diskSizeGb");
-@@projectedName(DevCenterService.OperationStatus, "python", "OperationDetails");
-@@projectedName(DevCenterService.OperationStatusValue,
-  "python",
-  "OperationStatus"
+@@clientName(DevCenterService.OsType, "OSType", "python");
+@@clientName(DevCenterService.HardwareProfile.vCPUs, "vcpus", "python");
+@@clientName(DevCenterService.HardwareProfile.memoryGB, "memoryGb", "python");
+@@clientName(DevCenterService.OsDisk, "OSDisk", "python");
+@@clientName(DevCenterService.OsDisk.diskSizeGB, "diskSizeGb", "python");
+@@clientName(DevCenterService.OperationStatus, "OperationDetails", "python");
+@@clientName(DevCenterService.OperationStatusValue,
+  "OperationStatus",
+  "python"
 );
