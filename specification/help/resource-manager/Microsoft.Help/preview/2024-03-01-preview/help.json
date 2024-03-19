@@ -514,7 +514,6 @@
         ],
         "description": "Warm up the solution resource by preloading asynchronous diagnostics results into cache",
         "operationId": "Solution_WarmUp",
-        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/ScopeParameter"
@@ -536,12 +535,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Successfully warmed up the solution resource",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
+            "description": "Successfully warmed up the solution resource"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -551,7 +545,7 @@
           }
         },
         "x-ms-examples": {
-          "Troubleshooter_Continue": {
+          "Solution_WarmUp": {
             "$ref": "./examples/Solution_WarmUp.json"
           }
         }
@@ -2467,7 +2461,7 @@
     }
   },
   "parameters": {
-    "SolutionId": {
+    "solutionId": {
       "name": "SolutionId",
       "in": "path",
       "required": true,
