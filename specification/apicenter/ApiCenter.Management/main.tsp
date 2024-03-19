@@ -6,6 +6,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "./models.tsp";
 import "./Service.tsp";
+import "./DeletedService.tsp";
 import "./MetadataSchema.tsp";
 import "./Workspace.tsp";
 import "./Api.tsp";
