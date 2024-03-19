@@ -6,7 +6,61 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 
-namespace DocumentTranslationClient;
+namespace DocumentTranslation;
+@doc("Document Translate Request Content")
+model SingleDocumentTranslateContent {
+  @doc("""
+  Specifies source language of the input document.
+  If this parameter isn't specified, automatic language detection is applied to determine the source language.
+  For example if the source document is written in English, then use sourceLanguage=en
+  """)
+  @query("sourceLanguage")
+  sourceLanguage?: string;
+
+  @doc("""
+  Specifies the language of the output document.
+  The target language must be one of the supported languages included in the translation scope.
+  For example if you want to translate the document in German language, then use targetLanguage=de 
+  """)
+  @query("targetLanguage")
+  targetLanguage: string;
+
+  @doc("""
+  A string specifying the category (domain) of the translation. This parameter is used to get translations 
+  from a customized system built with Custom Translator. Add the Category ID from your Custom Translator 
+  project details to this parameter to use your deployed customized system. Default value is: general.
+  """)
+  @query("category")
+  category?: string = "general";
+
+  @doc("""
+  Specifies that the service is allowed to fall back to a general system when a custom system doesn't exist. 
+  Possible values are: true (default) or false.
+  """)
+  @query("allowFallback")
+  allowFallback?: boolean;
+
+  @doc("Content Type as multipart/form-data")
+  @header
+  contentType: "multipart/form-data";
+
+  @doc("Document to be translated in the form")
+  document: bytes;
+
+  @doc("Glossary-translation memory will be used during translation in the form. ")
+  glossary?: bytes[];
+}
+
+@doc("Document Translate Result / Response.")
+model SingleDocumentTranslateResult {
+  @doc("response content type")
+  @header
+  contentType: "application/octet-stream";
+
+  @doc("Request response, response is a translated document.")
+  @body
+  document: bytes;
+}
 
 @doc("Storage Source")
 enum StorageSource {

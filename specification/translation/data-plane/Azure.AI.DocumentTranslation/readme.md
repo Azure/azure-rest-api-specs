@@ -30,7 +30,7 @@ input-file:
 These settings apply only when `--tag=2023-11-01-preview` is specified on the command line.
 
 ``` yaml $(tag) == '2023-11-01-preview'
-input-file: 
+input-file:
   - stable/v1.0/openapi.json
   - preview/2023-11-01-preview/openapi.json
 ```

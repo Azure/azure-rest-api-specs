@@ -2,11 +2,30 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 
+using TypeSpec.Versioning;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using Azure.Core.Traits;
 
-namespace DocumentTranslationClient;
+namespace DocumentTranslation;
+
+alias ServiceTraits = SupportsRepeatableRequests &
+  SupportsConditionalRequests &
+  SupportsClientRequestId;
+
+interface SingleDocumentTranslationOperations {
+  #suppress "@azure-tools/typespec-azure-core/byos"
+  @summary("Translate a single document")
+  @doc("API to translate single document")
+  @post
+  @route("document:translate")
+  singleDocumentTranslate is RpcOperation<
+    SingleDocumentTranslateContent,
+    SingleDocumentTranslateResult,
+    ServiceTraits
+  >;
+}
 
 interface DocumentTranslationOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -32,7 +51,7 @@ If a file with the same name already exists at the
 destination, it will be overwritten. The targetUrl for each target language
 must be unique.
 """)
-  @route("/batches")
+  @route("/text/batch/v1.0/batches")
   @post
   startTranslation is Azure.Core.Foundations.Operation<
     StartTranslationDetails,
@@ -95,7 +114,7 @@ instead of just ignoring the query options.
 This reduces the risk of the client
 making assumptions about the data returned.
 """)
-  @route("/batches")
+  @route("/text/batch/v1.0/batches")
   @get
   getTranslationsStatus is Azure.Core.Foundations.Operation<
     {
@@ -189,7 +208,7 @@ if the specified page size is smaller than the server's default page size.
 Returns the translation status for a specific document based on the request Id
 and document Id.
 """)
-  @route("/batches/{id}/documents/{documentId}")
+  @route("/text/batch/v1.0/batches/{id}/documents/{documentId}")
   @get
   getDocumentStatus is Azure.Core.Foundations.Operation<
     {
@@ -212,7 +231,7 @@ The status includes the
 overall request status, as well as the status for documents that are being
 translated as part of that request.
 """)
-  @route("/batches/{id}")
+  @route("/text/batch/v1.0/batches/{id}")
   @get
   getTranslationStatus is Azure.Core.Foundations.Operation<
     {
@@ -235,7 +254,7 @@ cancelled and will be charged.
 All pending documents will be cancelled if
 possible.
 """)
-  @route("/batches/{id}")
+  @route("/text/batch/v1.0/batches/{id}")
   @delete
   cancelTranslation is Azure.Core.Foundations.Operation<
     {
@@ -296,7 +315,7 @@ the query options.
 This reduces the risk of the client making assumptions about
 the data returned.
 """)
-  @route("/batches/{id}/documents")
+  @route("/text/batch/v1.0/batches/{id}/documents")
   @get
   getDocumentsStatus is Azure.Core.Foundations.Operation<
     {
@@ -396,7 +415,7 @@ service.
 The list includes the common file extension, as well as the
 content-type if using the upload API.
 """)
-  @route("/documents/formats")
+  @route("/text/batch/v1.0/documents/formats")
   @get
   getSupportedDocumentFormats is Azure.Core.Foundations.Operation<
     {},
@@ -410,7 +429,7 @@ The list of supported glossary formats supported by the Document Translation
 service.
 The list includes the common file extension used.
 """)
-  @route("/glossaries/formats")
+  @route("/text/batch/v1.0/glossaries/formats")
   @get
   getSupportedGlossaryFormats is Azure.Core.Foundations.Operation<
     {},
@@ -423,7 +442,7 @@ The list includes the common file extension used.
 Returns a list of storage sources/options supported by the Document Translation
 service.
 """)
-  @route("/storagesources")
+  @route("/text/batch/v1.0/storagesources")
   @get
   getSupportedStorageSources is Azure.Core.Foundations.Operation<
     {},

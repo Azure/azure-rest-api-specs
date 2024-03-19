@@ -8,8 +8,11 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
-using Azure.Core.Traits;
 
+@service({
+  title: "DocumentTranslation Service",
+})
+@versioned(DocumentTranslation.Versions)
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
     {
@@ -20,23 +23,22 @@ using Azure.Core.Traits;
     }
   ]>
 )
-@service({
-  title: "Azure.AI.DocumentTranslation",
-})
 @server(
-  "{endpoint}/translator/text/batch/v1.0",
-  "Batch document translation service endpoint",
+  "{endpoint}/translator",
+  "Document translation service endpoint",
   {
+    @doc("Supported document Translation endpoint, protocol and hostname, for example: https://{TranslatorResourceName}.cognitiveservices.azure.com/translator.")
     endpoint: string,
   }
 )
-@doc("Batch document translation service")
-@versioned(DocumentTranslationClient.Versions)
-namespace DocumentTranslationClient;
+@doc("Document translation service")
+namespace DocumentTranslation;
 
-/** The Azure.AI.DocumentTranslation versions. */
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
 enum Versions {
-  /** DocumentTranslationClient versions. */
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  `v1.0`,
+  v1_0: "v1.0",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2023_11_01_preview: "2023-11-01-preview",
 }
