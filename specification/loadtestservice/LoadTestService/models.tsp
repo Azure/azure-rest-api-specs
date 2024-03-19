@@ -72,9 +72,10 @@ union CertificateType {
 @doc("Types of file supported.")
 union FileType {
   string,
+
   @doc("If the file is a JMX script.")
   "JMX_FILE",
-  
+
   @doc("If the file is a user properties file.")
   "USER_PROPERTIES",
 
@@ -182,13 +183,13 @@ union TimeGrain {
 @doc("Test kind")
 union TestKind {
   string,
-  
+
   @doc("URL Test")
   "URL",
-  
+
   @doc("JMX Test")
   "JMX",
-  
+
   @added(APIVersions.v2024_03_01_preview)
   @doc("Locust Test")
   "Locust",
@@ -412,7 +413,7 @@ model LocustConfiguration {
   durationInSeconds?: int32;
 
   @doc("Number of users to spawn every second.")
-  spawnRate?: float32
+  spawnRate?: float32;
 }
 
 @doc("The input artifacts for the test.")
