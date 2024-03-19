@@ -3,6 +3,8 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./assets.tsp";
+import "./assetEndpointProfiles.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -15,15 +17,17 @@ using Azure.ResourceManager.Foundations;
 @service({
   title: "Microsoft.DeviceRegistry management service",
 })
-@versioned(Versions)
+@versioned(Microsoft.DeviceRegistry.Versions)
 @doc("Microsoft.DeviceRegistry Resource Provider management API.")
 namespace Microsoft.DeviceRegistry;
 
-/** Api versions */
+/** API versions */
+@doc("Microsoft.DeviceRegistry Resource Provider supported API versions.")
 enum Versions {
-  /** 2023-11-01-preview preview version */
+  @doc("Microsoft.DeviceRegistry Resource Provider management API version 2023-11-01-preview.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2023-11-01-preview`,
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+  v2023_11_01_preview: "2023-11-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
