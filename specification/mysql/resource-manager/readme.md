@@ -381,7 +381,7 @@ input-file:
 - Microsoft.DBforMySQL/FlexibleServers/stable/2023-12-30/FlexibleServers.json
 - Microsoft.DBforMySQL/FlexibleServers/stable/2023-12-30/AdvancedThreatProtectionSettings.json
 - Microsoft.DBforMySQL/LogFiles/preview/2023-06-01-preview/LogFiles.json
-- Microsoft.DBforMySQL/ServiceOperations/preview/2023-12-01-preview/ServiceOperations.json
+- Microsoft.DBforMySQL/ServiceOperations/stable/2023-12-30/ServiceOperations.json
 - Microsoft.DBforMySQL/Maintenance/preview/2023-10-01-preview/Maintenances.json
 suppressions:
   - code: PostOperationAsyncResponseValidation
