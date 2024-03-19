@@ -9327,12 +9327,12 @@
             "$ref": "#/parameters/JobNameParameter"
           },
           {
-            "name": "properties",
+            "name": "template",
             "in": "body",
-            "description": "Properties used to start a Job execution.",
+            "description": "Template used to start a Job execution.",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/JobExecutionProperties"
+              "$ref": "#/definitions/JobExecutionTemplate"
             }
           }
         ],
@@ -13983,7 +13983,7 @@
       }
     },
     "ResourceRequests": {
-      "description": "Deployment/Job resource request payload",
+      "description": "Deployment resource request payload",
       "type": "object",
       "properties": {
         "cpu": {
@@ -16362,14 +16362,19 @@
         }
       ],
       "properties": {
+        "parallelism": {
+          "description": "Number of parallel replicas of a job execution can run.",
+          "format": "int32",
+          "type": "integer"
+        },
         "timeoutInSeconds": {
           "description": "Maximum number of seconds an execution is allowed to run.",
           "format": "int32",
           "type": "integer"
         },
-        "replicaRetryLimit": {
+        "retryLimit": {
           "format": "int32",
-          "description": "Maximum number of retries for each replica before failing the job.",
+          "description": "Maximum number of retries before failing the job.",
           "type": "integer"
         }
       }
@@ -16388,20 +16393,6 @@
         "nextLink": {
           "description": "Link to next page of resources.",
           "type": "string"
-        }
-      }
-    },
-    "JobExecutionProperties": {
-      "description": "Job's execution template, containing configuration for an execution",
-      "type": "object",
-      "properties": {
-        "template": {
-          "$ref": "#/definitions/JobExecutionTemplate",
-          "description": "The template which is applied for the execution of the Job."
-        },
-        "resourceRequests": {
-          "$ref": "#/definitions/ResourceRequests",
-          "description": "The requested resource quantity for required CPU and Memory."
         }
       }
     },
@@ -16426,6 +16417,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "resourceRequests": {
+          "$ref": "#/definitions/JobResourceRequests",
+          "description": "The requested resource quantity for required CPU and Memory."
         }
       }
     },
@@ -16463,13 +16458,13 @@
           "format": "date-time",
           "type": "string"
         },
-        "properties": {
-          "description": "Job's execution properties.",
-          "$ref": "#/definitions/JobExecutionProperties"
+        "template": {
+          "$ref": "#/definitions/JobExecutionTemplate",
+          "description": "The template which is applied for the execution of the Job."
         },
         "jobSnapshot": {
           "$ref": "#/definitions/JobResourceProperties",
-          "description": "The properties of job configuration"
+          "description": "The snapshot of job configuration"
         }
       }
     },
@@ -16528,6 +16523,22 @@
           "x-ms-identifiers": [
             "name"
           ]
+        }
+      }
+    },
+    "JobResourceRequests": {
+      "description": "Job resource request payload",
+      "type": "object",
+      "properties": {
+        "cpu": {
+          "description": "CPU allocated to each job execution instance.",
+          "type": "string",
+          "default": "1"
+        },
+        "memory": {
+          "description": "Memory allocated to each job execution instance.",
+          "type": "string",
+          "default": "2Gi"
         }
       }
     },
