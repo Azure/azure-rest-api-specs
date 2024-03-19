@@ -6159,6 +6159,33 @@
             "type": "string"
           }
         },
+        "scalingMethod": {
+          "enum": [
+            "PowerManage",
+            "CreateDeletePowerManage"
+          ],
+          "x-ms-enum": {
+            "name": "ScalingMethod",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "PowerManage",
+                "description": "Scaling will manage hosts in the host pool by power managing the hosts, but will not change the host pool size."
+              },
+              {
+                "value": "CreateDeletePowerManage",
+                "description": "Scaling will manage the hosts in the host pool by power managing the hosts, as well as creating and deleting hosts to modify the host pool size. This requires the create delete object to be set, and the assigned hostpool to have a session host config property."
+              }
+            ]
+          },
+          "type": "string",
+          "description": "The desired scaling method to be used to scale the hosts in the assigned host pool.",
+          "default": "PowerManage"
+        },
+        "createDelete": {
+          "$ref": "#/definitions/CreateDeleteProperties",
+          "description": "The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts."
+        },
         "rampUpStartTime": {
           "$ref": "#/definitions/Time",
           "description": "Starting time for ramp up period."
@@ -6188,27 +6215,6 @@
           "minimum": 1,
           "maximum": 100,
           "description": "Capacity threshold for ramp up period."
-        },
-        "rampUpMaximumHostCount": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 0,
-          "description": "Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.",
-          "x-nullable": true
-        },
-        "rampUpMinimumCreatedHostCount ": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 0,
-          "description": "Minimum number of session hosts that will be be created by the Scaling Service. Scaling will not delete any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.",
-          "x-nullable": true
-        },
-        "rampUpMinimumStartedHostCount ": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 0,
-          "description": "Minimum number of session hosts that will be be started by the Scaling Service. Scaling will not deallocate any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.",
-          "x-nullable": true
         },
         "peakStartTime": {
           "$ref": "#/definitions/Time",
@@ -6255,27 +6261,6 @@
           "minimum": 1,
           "maximum": 100,
           "description": "Capacity threshold for ramp down period."
-        },
-        "rampDownMaximumHostCount": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 0,
-          "description": "Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.",
-          "x-nullable": true
-        },
-        "rampDownMinimumCreatedHostCount ": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 0,
-          "description": "Minimum number of session hosts that will be be created by the Scaling Service. Scaling will not delete any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.",
-          "x-nullable": true
-        },
-        "rampDownMinimumStartedHostCount ": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 0,
-          "description": "Minimum number of session hosts that will be be started by the Scaling Service. Scaling will not deallocate any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.",
-          "x-nullable": true
         },
         "rampDownForceLogoffUsers": {
           "type": "boolean",
@@ -6403,6 +6388,33 @@
             }
           }
         },
+        "scalingMethod": {
+          "enum": [
+            "PowerManage",
+            "CreateDeletePowerManage"
+          ],
+          "x-ms-enum": {
+            "name": "ScalingMethod",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "PowerManage",
+                "description": "Scaling will manage hosts in the host pool by power managing the hosts, but will not change the host pool size."
+              },
+              {
+                "value": "CreateDeletePowerManage",
+                "description": "Scaling will manage the hosts in the host pool by power managing the hosts, as well as creating and deleting hosts to modify the host pool size. This requires the create delete object to be set, and the assigned hostpool to have a session host config property."
+              }
+            ]
+          },
+          "type": "string",
+          "description": "The desired scaling method to be used to scale the hosts in the assigned host pool.",
+          "default": "PowerManage"
+        },
+        "createDelete": {
+          "$ref": "#/definitions/CreateDeleteProperties",
+          "description": "The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts."
+        },
         "rampUpStartTime": {
           "$ref": "#/definitions/Time",
           "description": "Starting time for ramp up period."
@@ -6561,6 +6573,43 @@
           },
           "type": "string",
           "description": "Load balancing algorithm for off-peak period."
+        }
+      }
+    },
+    "CreateDeleteProperties": {
+      "description": "The properties that control how Scaling will manage the size of the hostpool by creating and deleting hosts.",
+      "type": "object",
+      "x-nullable": true,
+      "properties": {
+        "rampUpMaximumHostPoolSize": {
+          "format": "int32",
+          "description": "Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.",
+          "x-nullable": true,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "rampUpMinimumHostPoolSize": {
+          "format": "int32",
+          "description": "Minimum number of session hosts that will be be created by the Scaling Service. Scaling will not delete any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.",
+          "x-nullable": true,
+          "maximum": 59,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "rampDownMaximumHostPoolSize": {
+          "format": "int32",
+          "description": "Maximum number of session hosts that may be created by the Scaling Service. This requires the assigned hostpool to have a session host config property.",
+          "x-nullable": true,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "rampDownMinimumHostPoolSize": {
+          "format": "int32",
+          "description": "Minimum number of session hosts that will be be created by the Scaling Service. Scaling will not delete any hosts when this limit is met. This requires the assigned hostpool to have a session host config property.",
+          "x-nullable": true,
+          "maximum": 59,
+          "minimum": 0,
+          "type": "integer"
         }
       }
     },
