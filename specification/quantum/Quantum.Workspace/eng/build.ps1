@@ -3,36 +3,20 @@
 # Licensed under the MIT License. See License.txt in the project root for license information.
 # --------------------------------------------------------------------------------------------
 
+Import-Module (Join-Path $PSScriptRoot "./common.psm1")
+$outputFolder = "./output/build/"
+
 try {
     Push-Location (Join-Path $PSScriptRoot "../")
 
-    $outputDirectory = Join-Path (Resolve-Path .) "/output/"
+    $outputDirectory = Join-Path (Resolve-Path .) $outputFolder
     Remove-Item -Path $outputDirectory -Recurse -Force *> $null
     New-Item -ItemType Directory -Force -Path $outputDirectory *> $null
 
-    $logDirectory = Join-Path $outputDirectory "/logs/"
+    $logDirectory = Join-Path $outputDirectory "./logs"
     Remove-Item -Path $outputDirectory -Recurse -Force *> $null
     New-Item -ItemType Directory -Force -Path $logDirectory *> $null
 
-    function RunAndCheck {
-        param (
-            [string] $name,
-            [string] $logFolder,
-            [Scriptblock] $expression
-        )
-        Write-Host "Running $name..."
-        $global:LASTEXITCODE = 0
-        $outputFile = Join-Path $logDirectory "$name.txt"
-        &$expression *> $outputFile
-        if ($LASTEXITCODE -eq 0) {
-            Write-Host "$name completed with success!"
-        } else {
-            Write-Host "$name completed with error! Exit code: {$LASTEXITCODE}."
-            $outputFile = Resolve-Path $outputFile
-            Write-Host "Check $outputFile"
-        }
-        Write-Host ""
-    }
     function GetVersions {
         param (
             [string] $configFile
@@ -112,11 +96,11 @@ Copying examples from $source to $newVersionExamples
         }
     }
 
-    RunAndCheck "tsp-format" \ {
+    RunAndCheck "tsp-format" $logDirectory {
         tsp format **/*.tsp
     }
 
-    RunAndCheck "prettify-examples" \ {
+    RunAndCheck "prettify-examples" $logDirectory {
         $examples = $newVersionExamples
         # Uncomment this line if you need to prettify all examples
         # $examples = ".\examples\"
@@ -125,11 +109,11 @@ Copying examples from $source to $newVersionExamples
         }
     }
 
-    RunAndCheck "tsp-compile" \ {
+    RunAndCheck "tsp-compile" $logDirectory {
         tsp compile . --pretty --debug
     }
 
-    RunAndCheck "tsp-compile-api-view" \ {
+    RunAndCheck "tsp-compile-api-view" $logDirectory {
         tsp compile . --pretty --debug --emit=@azure-tools/typespec-apiview --output-dir (Join-Path $logDirectory "../api-view/")
     }
         
@@ -137,7 +121,7 @@ Copying examples from $source to $newVersionExamples
     New-Item -ItemType Directory -Force -Path (Join-Path $PSScriptRoot "../output/swagger/") *> $null
     Copy-Item $newSwaggerFile (Join-Path $PSScriptRoot "../output/swagger/quantum.swagger") -Force -Recurse
 
-    RunAndCheck "swagger-preview" \ {
+    RunAndCheck "swagger-preview" $logDirectory {
         $openApi = Get-Content -Path $newSwaggerFile
         $spec = "let spec = $openApi"
         Set-Content ./eng/swagger-ui/spec.js $spec
@@ -153,7 +137,7 @@ Copying examples from $source to $newVersionExamples
     # Pipeline validations
     # from https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/ci-fix.md
 
-    RunAndCheck "tsp-validate" \ {
+    RunAndCheck "tsp-validate" $logDirectory {
         # To run the TypeSpec Validation we need to go
         # to the root of the azure-rest-api-specs repo
         Push-Location (Join-Path $PSScriptRoot "../../../../")
@@ -167,19 +151,19 @@ Copying examples from $source to $newVersionExamples
         }     
     }   
 
-    RunAndCheck "example-validation" \ {
+    RunAndCheck "example-validation" $logDirectory {
         oav validate-example $newSwaggerFile
     }
 
-    RunAndCheck "semantic-validation" \ {
+    RunAndCheck "semantic-validation" $logDirectory {
         oav validate-spec $newSwaggerFile
     }
 
-    RunAndCheck "model-compare" \ {
+    RunAndCheck "model-compare" $logDirectory {
         oad compare $previousSwaggerFile $newSwaggerFile --logFilepath (Join-Path $logDirectory "/oad-compare-log.json") > (Join-Path $logDirectory "/model-compare.json")
     }
 
-    RunAndCheck "model-compare-viz" \ {
+    RunAndCheck "model-compare-viz" $logDirectory {
         $modelCompare = Get-Content -Path (Join-Path $logDirectory "/model-compare.json")
         $modelCompare = "let modelCompare = $modelCompare"
         Set-Content ./eng/model-compare/model-compare.js $modelCompare
@@ -193,11 +177,11 @@ Copying examples from $source to $newVersionExamples
         Set-Content ./eng/model-compare/old-spec.js $spec
     }
 
-    RunAndCheck "lint-diff" \ {
+    RunAndCheck "lint-diff" $logDirectory {
         autorest --v3 --spectral --validation --azure-validator --openapi-type=data-plane --use=@microsoft.azure/openapi-validator@latest $newTag $configFile
     }
 
-    RunAndCheck "avocado" \ {
+    RunAndCheck "avocado" $logDirectory {
         avocado -f (Join-Path $logDirectory "/avocado-log.txt") -d (Join-Path $logDirectory "../data-plane")
     }
 
