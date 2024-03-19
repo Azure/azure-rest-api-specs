@@ -63,9 +63,9 @@ enum OsType {
   Other,
 }
 
-/** Network address allocaiton method. */
+/** Network address allocation method. */
 enum AllocationMethod {
-  /** Dyanmically allocated address. */
+  /** Dynamically allocated address. */
   Dynamic,
 
   /** Statically allocated address. */
@@ -453,6 +453,7 @@ model VirtualDisk {
   createDiffDisk?: CreateDiffDisk;
 }
 
+/** Virtual Disk Update model */
 model VirtualDiskUpdate is UpdateableProperties<VirtualDisk> {}
 
 /** The StorageQoSPolicyDetails definition. */
@@ -546,7 +547,7 @@ model VirtualMachineInstanceProperties {
   provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
 }
 
-/** The updatable properties of the VirtualMachineInstance. */
+/** Virtual Machine Instance Properties Update model */
 model VirtualMachineInstanceUpdateProperties is UpdateableProperties<OmitProperties<VirtualMachineInstanceProperties,"hardwareProfile" | "networkProfile" | "storageProfile" | "infrastructureProfile">> {
   /** Hardware properties. */
   hardwareProfile?: HardwareProfileUpdate;
