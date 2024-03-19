@@ -77,16 +77,13 @@ model Embeddings {
   usage: EmbeddingsUsage;
 }
 
-@encode("base64")
-scalar myBase64 extends bytes;
-
 @doc("Representation of a single embeddings relatedness comparison.")
 model EmbeddingItem {
   @doc("""
-    List of embeddings value for the input prompt. These represent a measurement of the
+    List of embeddings value for the input prompt in base64 encoded string format. These represent a measurement of the
     vector-based relatedness of the provided input.
     """)
-  embedding: float32[] | myBase64;
+  embedding: string;
 
   @doc("Index of the prompt to which the EmbeddingItem corresponds.")
   @clientName("promptIndex", "java")
