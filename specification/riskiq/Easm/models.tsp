@@ -35,6 +35,9 @@ alias AssetsListTrait = {
     ...SkipQueryParameter;
     ...MaxPageSizeQueryParameter;
     ...MarkParameter;
+    ...ResponseTypeParameter;
+    ...ResponseIncludesParameter;
+    ...RecentOnlyParameter;
   }>;
 };
 alias AssetsUpdateParameter = {
@@ -102,9 +105,63 @@ alias SavedFiltersListTrait = {
   }>;
 };
 
+alias ObservationsParameters = {
+  ...QueryParametersTrait<{
+    ...FilterQueryParameter;
+    ...OrderByParameter;
+    ...SkipQueryParameter;
+    ...MaxPageSizeQueryParameter;
+  }>;
+};
+
+alias AssetsExportTrait = {
+  fileName?: string;
+  columns?: string[];
+  ...QueryParametersTrait<{
+    ...FilterQueryParameter;
+    ...OrderByParameter;
+  }>;
+};
+alias ObservationsTrait = {
+  ...QueryParametersTrait<{
+    ...FilterQueryParameter;
+    ...OrderByParameter;
+    ...SkipQueryParameter;
+    ...MaxPageSizeQueryParameter;
+  }>;
+};
+
+alias DeltaDetailsParameter = {
+  deltaDetailType: DeltaDetailType;
+  daysPrior: int32;
+  kind: GlobalAssetType;
+
+  @doc("expected format to be: yyyy-MM-dd")
+  date: string;
+
+  ...QueryParametersTrait<{
+    ...SkipQueryParameter;
+    ...MaxPageSizeQueryParameter;
+  }>;
+};
+
+alias DeltaSummaryParameter = {
+  daysPrior: int32;
+
+  @doc("expected format to be: yyyy-MM-dd")
+  date: string;
+};
+
+alias CisaCveListTrait = {
+  ...PageResultBodyFields<{
+    @doc("The total number of items available in the full result set.")
+    totalElements?: int64;
+  }>;
+};
+
 // Models
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@clientName("AlexaDetails", "java")
+@projectedName("java", "AlexaDetails")
 model AlexaInfo {
   alexaRank?: int64;
   category?: string;
@@ -252,7 +309,7 @@ model AssetSummaryResult {
 }
 
 @doc("A request body used to update an asset.")
-@clientName("AssetUpdatePayload", "csharp")
+@projectedName("csharp", "AssetUpdatePayload")
 model AssetUpdateData {
   @doc("The state to update the asset to.")
   state?: AssetUpdateState;
@@ -268,7 +325,7 @@ model AssetUpdateData {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@clientName("AttributeDetails", "csharp")
+@projectedName("csharp", "AttributeDetails")
 model Attribute {
   attributeType?: string;
   attributeValue?: string;
@@ -312,11 +369,11 @@ model AzureDataExplorerDataConnectionProperties
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict"
-@clientName("BannerDetails", "csharp")
+@projectedName("csharp", "BannerDetails")
 model Banner {
   port?: int32;
 
-  @clientName("bannerName", "csharp")
+  @projectedName("csharp", "bannerName")
   banner?: string;
 
   firstSeen?: utcDateTime;
@@ -363,7 +420,7 @@ model ContactAsset extends InventoryAsset {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@clientName("CookieDetails", "csharp")
+@projectedName("csharp", "CookieDetails")
 model Cookie {
   cookieName?: string;
   cookieDomain?: string;
@@ -375,7 +432,7 @@ model Cookie {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@clientName("CveDetails", "csharp")
+@projectedName("csharp", "CveDetails")
 model Cve {
   name?: string;
   cweId?: string;
@@ -388,7 +445,7 @@ model DataConnectionProperties {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @discriminator("kind")
-@clientName("DataConnectionPayload", "csharp")
+@projectedName("csharp", "DataConnectionPayload")
 model DataConnectionData {
   @doc("The name of data connection")
   name?: string;
@@ -476,7 +533,7 @@ model DependentResource {
 }
 
 @doc("A request body used to create a discovery group.")
-@clientName("DiscoveryGroupPayload", "csharp")
+@projectedName("csharp", "DiscoveryGroupPayload")
 model DiscoGroupData {
   @doc("The name for a disco group.")
   name?: string;
@@ -505,7 +562,7 @@ model DiscoGroupData {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @resource("discoGroups")
-@clientName("DiscoveryGroup", "csharp")
+@projectedName("csharp", "DiscoveryGroup")
 model DiscoGroup {
   @doc("The system generated unique id for the resource.")
   id?: string;
@@ -548,7 +605,7 @@ model DiscoGroup {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @pagedResult
-@clientName("DiscoveryRunPageResult", "csharp")
+@projectedName("csharp", "DiscoveryRunPageResult")
 model DiscoRunPageResult {
   @doc("The total number of items available in the full result set.")
   totalElements?: int64;
@@ -563,7 +620,7 @@ model DiscoRunPageResult {
 }
 
 @doc("The latest run of this disco group with some limited information, null if the group has never been run.")
-@clientName("DiscoveryRunResult", "csharp")
+@projectedName("csharp", "DiscoveryRunResult")
 model DiscoRunResult {
   @doc("The date for when the disco run was created in the system.")
   submittedDate?: utcDateTime;
@@ -594,7 +651,7 @@ model DiscoRunResult {
 }
 
 @doc("Source entity used to drive discovery.")
-@clientName("DiscoverySource", "csharp")
+@projectedName("csharp", "DiscoverySource")
 model DiscoSource {
   @doc("The kind of disco source.")
   kind?: DiscoSourceKind;
@@ -604,7 +661,7 @@ model DiscoSource {
 }
 
 @doc("The items in the current page of results.")
-@clientName("DiscoveryTemplate", "csharp")
+@projectedName("csharp", "DiscoveryTemplate")
 @resource("discoTemplates")
 model DiscoTemplate {
   @doc("The system generated unique id for the resource.")
@@ -825,7 +882,7 @@ model IpAddressAsset extends InventoryAsset {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict"
 model IpBlock {
-  @clientName("ipBlockName", "csharp")
+  @projectedName("csharp", "ipBlockName")
   ipBlock?: string;
 
   sources?: Source[];
@@ -871,7 +928,7 @@ model IpBlockAsset extends InventoryAsset {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@clientName("ObservedLocationDetails", "csharp")
+@projectedName("csharp", "ObservedLocationDetails")
 model Location {
   countryCode?: string;
   countryName?: string;
@@ -1022,9 +1079,9 @@ model PageCause {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict"
-@clientName("PortDetails", "csharp")
+@projectedName("csharp", "PortDetails")
 model Port {
-  @clientName("portName", "csharp")
+  @projectedName("csharp", "portName")
   port?: int32;
 
   firstSeen?: utcDateTime;
@@ -1033,7 +1090,7 @@ model Port {
 }
 
 @doc("A request body used for an asset report snapshot export.")
-@clientName("ReportAssetSnapshotExportPayload", "csharp")
+@projectedName("csharp", "ReportAssetSnapshotExportPayload")
 model ReportAssetSnapshotExportRequest {
   @doc("The metric to retrieve a snapshot for.")
   metric?: string;
@@ -1046,7 +1103,7 @@ model ReportAssetSnapshotExportRequest {
 }
 
 @doc("A request body used to retrieve an asset report snapshot.")
-@clientName("ReportAssetSnapshotPayload", "csharp")
+@projectedName("csharp", "ReportAssetSnapshotPayload")
 model ReportAssetSnapshotRequest {
   @doc("The metric to retrieve a snapshot for.")
   metric?: string;
@@ -1083,7 +1140,7 @@ model ReportAssetSnapshotResult {
 }
 
 @doc("A request body used to retrieve summary asset information. One and only one collection of summary identifiers must be provided: filters, metrics, or metricCategories.")
-@clientName("ReportAssetSummaryPayload", "csharp")
+@projectedName("csharp", "ReportAssetSummaryPayload")
 model ReportAssetSummaryRequest {
   @doc("Categories to retrieve risk reporting data for.")
   metricCategories?: string[];
@@ -1133,11 +1190,12 @@ model ReportBillableAssetSnapshotResult {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model ReportBillableAssetSummaryResult {
+  @doc("Shows the breakdown by asset type for a range of days.")
   assetSummaries?: ReportBillableAssetSnapshotResult[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@clientName("ReputationDetails", "csharp")
+@projectedName("csharp", "ReputationDetails")
 model Reputation {
   listName?: string;
   threatType?: string;
@@ -1150,7 +1208,7 @@ model Reputation {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@clientName("ResourceUri", "csharp")
+@projectedName("csharp", "ResourceUri")
 model ResourceUrl {
   url?: url;
   resources?: DependentResource[];
@@ -1161,7 +1219,7 @@ model ResourceUrl {
 }
 
 @doc("A request body used to create a saved filter.")
-@clientName("SavedFilterPayload", "csharp")
+@projectedName("csharp", "SavedFilterPayload")
 model SavedFilterData {
   @doc("An expression on the resource type that selects the resources to be returned.")
   filter: string;
@@ -1197,7 +1255,7 @@ model ScanMetadata {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@clientName("AssetService", "csharp")
+@projectedName("csharp", "AssetService")
 model Service {
   scheme?: string;
   port?: int32;
@@ -1225,9 +1283,9 @@ model SoaRecord {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 #suppress "@azure-tools/typespec-azure-core/property-name-conflict"
-@clientName("SourceDetails", "csharp")
+@projectedName("csharp", "SourceDetails")
 model Source {
-  @clientName("sourceName", "csharp")
+  @projectedName("csharp", "sourceName")
   source?: string;
 
   firstSeen?: utcDateTime;
@@ -1298,7 +1356,7 @@ model SubResourceIntegrityCheck {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @resource("tasks")
-@clientName("TaskResource", "csharp")
+@projectedName("csharp", "TaskResource")
 model Task {
   @doc("The unique identifier of the task.")
   @key("taskId")
@@ -1359,179 +1417,339 @@ model ObservedValue {
   count?: int64;
   recent?: boolean;
 }
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+model DeltaResponse {
+  @doc("Shows the asset kind")
+  kind: GlobalAssetType;
+
+  @doc("Shows the asset name")
+  name: string;
+
+  @doc("Shows the date when the asset was originally created")
+  createdAt: utcDateTime;
+
+  @doc("Shows the date when the asset was last updated, usually the date the we trying to pull up the results for")
+  updatedAt: utcDateTime;
+
+  @doc("Shows the inventory state")
+  state: GlobalInventoryState;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@pagedResult
+model DeltaPageResponse {
+  @doc("The total number of items available in the full result set.")
+  totalElements?: int64;
+
+  @doc("The link to access the next page of results.  Not set if at the end of the result set.")
+  @nextLink
+  nextLink?: string;
+
+  @doc("The items in the current page of results.")
+  @items
+  value?: DeltaResponse[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+model DeltaSummaryResponse {
+  @doc("Contains added, removed, and difference values for the whole range either 7 or 30 days")
+  summary: DeltaRangeResponse;
+
+  @doc("Contains added, removed, count, and difference values for each day")
+  daily: DeltaDateResponse[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+model DeltaRangeResponse {
+  @doc("The range of dates requested")
+  range: int64;
+
+  @doc("The total amount of assets removed over a date range")
+  removed: int64;
+
+  @doc("The total amount of assets added over a date range")
+  added: int64;
+
+  @doc("The total amount of assets changed removed over a date range")
+  difference: int64;
+
+  @doc("A list of summary changes per asset kind")
+  kindSummaries: DeltaTypeResponse[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+model DeltaTypeResponse {
+  @doc("The kind of asset")
+  kind: GlobalAssetType;
+
+  @doc("The amount of assets removed for one asset kind")
+  removed: int64;
+
+  @doc("The amount of assets added for one asset kind")
+  added: int64;
+
+  @doc("The amount of assets changed for one asset kind")
+  difference: int64;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+model DeltaDateResponse {
+  @doc("The date that is being requested")
+  date: utcDateTime;
+
+  @doc("A list of summary counts per day")
+  deltas: DailyDeltaTypeResponse[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+model DailyDeltaTypeResponse extends DeltaTypeResponse {
+  @doc("The current number of assets for one asset kind")
+  count: int64;
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("A list of asset types to cascade the updates to.")
-union AssetUpdateTransfers {
-  string,
-  "as",
-  "contact",
-  "domain",
-  "host",
-  "ipAddress",
-  "ipBlock",
-  "page",
-  "sslCert",
+enum AssetUpdateTransfers {
+  as,
+  contact,
+  domain,
+  host,
+  ipAddress,
+  ipBlock,
+  page,
+  sslCert,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The kind of billable asset.")
-union ReportBillableAssetBreakdownKind {
-  string,
-  "domain",
-  "host",
-  "ipAddress",
+enum ReportBillableAssetBreakdownKind {
+  domain,
+  host,
+  ipAddress,
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+enum GlobalInventoryState {
+  CANDIDATE,
+  CANDIDATE_INVESTIGATE,
+  CONFIRMED,
+  ASSOCIATED,
+  ASSOCIATED_PARTNER,
+  ASSOCIATED_THIRDPARTY,
+  ARCHIVED,
+  DISMISSED,
+  AUTOCONFIRMED,
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+enum AssetResponseType {
+  @doc("Return only the asset id.")
+  ID,
+
+  @doc("Return the standard set of asset fields.")
+  STANDARD,
+
+  @doc("Return the full set of asset fields.")
+  FULL,
+
+  @doc("Return a reduced set of fields.")
+  REDUCED,
+}
+
+enum DeltaDetailType {
+  ADDED,
+  REMOVED,
+}
+
+enum GlobalAssetType {
+  PAGE,
+  RESOURCE,
+  MAIL_SERVER,
+  NAME_SERVER,
+  HOST,
+  DOMAIN,
+  IP_ADDRESS,
+  IP_BLOCK,
+  AS,
+  CONTACT,
+  SSL_CERT,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The state the task is in.")
-@clientName("TaskResourceState", "csharp")
-union TaskState {
-  string,
-  "pending",
-  "running",
-  "paused",
-  "complete",
-  "incomplete",
-  "failed",
-  "warning",
+@projectedName("csharp", "TaskResourceState")
+enum TaskState {
+  pending,
+  running,
+  paused,
+  complete,
+  incomplete,
+  failed,
+  warning,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The phase the task is in.")
-@clientName("TaskResourcePhase", "csharp")
-union TaskPhase {
-  string,
-  "running",
-  "polling",
-  "complete",
+@projectedName("csharp", "TaskResourcePhase")
+enum TaskPhase {
+  running,
+  polling,
+  complete,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The kind of data connection.")
-union DataConnectionKind {
-  string,
-  "logAnalytics",
-  "azureDataExplorer",
+enum DataConnectionKind {
+  logAnalytics,
+  azureDataExplorer,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The rate at which the data connection will receive updates.")
-union DataConnectionFrequency {
-  string,
-  "daily",
-  "weekly",
-  "monthly",
+enum DataConnectionFrequency {
+  daily,
+  weekly,
+  monthly,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The kind of asset.")
-union AssetKind {
-  string,
-  "as",
-  "contact",
-  "domain",
-  "host",
-  "ipAddress",
-  "ipBlock",
-  "page",
-  "sslCert",
+enum AssetKind {
+  as,
+  contact,
+  domain,
+  host,
+  ipAddress,
+  ipBlock,
+  page,
+  sslCert,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The State of the disco run.")
-union DiscoRunState {
-  string,
-  "pending",
-  "running",
-  "completed",
-  "failed",
+enum DiscoRunState {
+  pending,
+  running,
+  completed,
+  failed,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The type of data the data connection will transfer")
-union DataConnectionContent {
-  string,
-  "assets",
-  "attackSurfaceInsights",
+enum DataConnectionContent {
+  assets,
+  attackSurfaceInsights,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The kind of disco source.")
-@clientName("DiscoverySourceKind", "csharp")
-union DiscoSourceKind {
-  string,
-  "as",
-  "attribute",
-  "contact",
-  "domain",
-  "host",
-  "ipBlock",
+@projectedName("csharp", "DiscoverySourceKind")
+enum DiscoSourceKind {
+  as,
+  attribute,
+  contact,
+  domain,
+  host,
+  ipBlock,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("state of observed port")
-union ObservedPortStateValue {
-  string,
-  "open",
-  "closed",
-  "filtered",
+enum ObservedPortStateValue {
+  open,
+  closed,
+  filtered,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The state to update the asset to.")
-union AssetUpdateState {
-  string,
-  "candidate",
-  "confirmed",
-  "dismissed",
-  "candidateInvestigate",
-  "associatedPartner",
-  "associatedThirdparty",
+enum AssetUpdateState {
+  candidate,
+  confirmed,
+  dismissed,
+  candidateInvestigate,
+  associatedPartner,
+  associatedThirdparty,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The state of assets")
-union AssetState {
-  string,
-  AssetUpdateState,
-  "archived",
+enum AssetState {
+  ...AssetUpdateState,
+  archived,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The kind of asset.")
-union AuditTrailItemKind {
-  string,
-  "as",
-  "contact",
-  "domain",
-  "host",
-  "ipAddress",
-  "ipBlock",
-  "page",
-  "sslCert",
+enum AuditTrailItemKind {
+  as,
+  contact,
+  domain,
+  host,
+  ipAddress,
+  ipBlock,
+  page,
+  sslCert,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The redirect type of a page")
-union PageAssetRedirectType {
-  string,
-  "httpHeader",
-  "metaRefresh",
-  "javascript",
-  "final",
+enum PageAssetRedirectType {
+  httpHeader,
+  metaRefresh,
+  javascript,
+  final,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The validation type of a Ssl certificate")
-union SslCertAssetValidationType {
-  string,
-  "domainValidation",
-  "organizationValidation",
-  "extendedValidation",
+enum SslCertAssetValidationType {
+  domainValidation,
+  organizationValidation,
+  extendedValidation,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@clientName("LogAnalyticsDataConnectionPayload", "csharp")
+enum ObservationType {
+  CVE,
+  INSIGHT,
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+enum ObservationPriority {
+  HIGH: 3,
+  MEDIUM: 2,
+  LOW: 1,
+  NONE: 0,
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+model ObservationResponse {
+  name: string;
+  type: ObservationType[];
+  priority: ObservationPriority;
+  cvssScoreV2: float;
+  cvssScoreV3: float;
+}
+
+model ObservationPageResponse {
+  totalElements: int64;
+  prioritySummary: Array<{
+    key: ObservationPriority;
+    value: int32;
+  }>;
+  value: ObservationResponse[];
+}
+
+enum AssetChainSource {
+  DISCO_GROUP,
+  DISCO_SEED,
+  ASSET_CHAIN,
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@projectedName("csharp", "LogAnalyticsDataConnectionPayload")
 model LogAnalyticsDataConnectionData extends DataConnectionData {
   @doc("The kind of DataConnectionData")
   kind: "logAnalytics";
@@ -1541,7 +1759,7 @@ model LogAnalyticsDataConnectionData extends DataConnectionData {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@clientName("AzureDataExplorerDataConnectionPayload", "csharp")
+@projectedName("csharp", "AzureDataExplorerDataConnectionPayload")
 model AzureDataExplorerDataConnectionData extends DataConnectionData {
   @doc("The kind of DataConnectionData")
   kind: "azureDataExplorer";
@@ -1641,7 +1859,7 @@ model AzureDataExplorerDataConnection extends DataConnection {
 }
 
 @doc("The unique identifier for the discovery group.")
-@clientName("DiscoveryGroupNameParameter", "csharp")
+@projectedName("csharp", "DiscoveryGroupNameParameter")
 model DiscoGroupNameParameter {
   @doc("The unique identifier for the discovery group.")
   @path("groupName")
@@ -1662,9 +1880,98 @@ model MarkParameter {
   mark?: string;
 }
 
+@doc("Specify the response type.")
+model ResponseTypeParameter {
+  @doc("Specify the response type. The possible values are: ID, STANDARD, FULL, REDUCED")
+  @query("responseType")
+  responseType?: AssetResponseType;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+model ResponseIncludesParameter {
+  @query({
+    format: "multi",
+  })
+  responseIncludes?: string[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+model RecentOnlyParameter {
+  @query("recentOnly")
+  recentOnly?: boolean;
+}
+
 @doc("An expression on the resource type that selects the resources to be returned.")
 model RequiredFilterParameter {
   @doc("An expression on the resource type that selects the resources to be returned.")
   @query("filter")
   filter: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@resource("cisaCves")
+model CisaCveResponse {
+  @key("cveId")
+  @doc("The CVE ID of the vulnerability in the format CVE-YYYY-NNNN, note that the number portion can have more than 4 digits.")
+  cveID: string;
+
+  @doc("The vendor or project name for the vulnerability.")
+  vendorProject: string;
+
+  @doc("The vulnerability product")
+  product: string;
+
+  @doc("The name of the vulnerability")
+  vulnerabilityName: string;
+
+  @doc("A short description of the vulnerability")
+  shortDescription: string;
+
+  @doc("The required action to address the vulnerability")
+  requiredAction: string;
+
+  @doc("Any additional notes about the vulnerability")
+  notes: string;
+
+  @doc("The date the vulnerability was added to the catalog in the format YYYY-MM-DD")
+  dateAdded: utcDateTime;
+
+  @doc("The date the required action is due in the format YYYY-MM-DD")
+  dueDate: utcDateTime;
+
+  @doc("The date the vulnerability was updated")
+  updatedAt: utcDateTime;
+
+  @doc("The number of assets affected by the vulnerability")
+  count: int64;
+}
+
+model AssetChainRequest {
+  @doc("Asset chain source.")
+  assetChainSource: AssetChainSource;
+
+  @doc("A collection of asset chain source ids.")
+  sourceIds: string[];
+}
+
+model AssetChainSummaryResponse {
+  @doc("A list of asset chain summaries per asset kind")
+  affectedAssetsSummary: AssetChainKindSummaryResponse[];
+
+  @doc("A list of disco group summaries")
+  affectedGroupsSummary: DiscoGroupSummaryResponse[];
+
+  @doc("The list of exceptions")
+  errors: ErrorResponse[];
+}
+
+model AssetChainKindSummaryResponse {
+  kind: AssetKind;
+  afffectedCount: int64;
+}
+
+model DiscoGroupSummaryResponse {
+  id: string;
+  name: string;
+  displayName: string;
 }
