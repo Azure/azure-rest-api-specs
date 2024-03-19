@@ -58,7 +58,7 @@ interface DevBoxesOperations {
   //  }
   @doc("Creates or replaces a Dev Box.")
   @finalOperation(DevBoxesOperations.getDevBoxByUser)
-  @pollingOperation(SharedOperations.getProjectOperationStatus)
+  @pollingOperation(OperationStatuses.get)
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
   @put
   createDevBox is Azure.Core.Foundations.Operation<
@@ -96,7 +96,7 @@ interface DevBoxesOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
   //Can not use LongRunningResourceDelete because response is 202 or error, but we also accept 204 response"
   @doc("Deletes a Dev Box.")
-  @pollingOperation(SharedOperations.getProjectOperationStatus)
+  @pollingOperation(OperationStatuses.get)
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
   @delete
   deleteDevBox is Azure.Core.Foundations.Operation<
@@ -130,7 +130,7 @@ interface DevBoxesOperations {
   >;
 
   @doc("Starts a Dev Box")
-  @pollingOperation(SharedOperations.getProjectOperationStatus)
+  @pollingOperation(OperationStatuses.get)
   @action("start")
   startDevBox is StandardResourceOperations.LongRunningResourceAction<
     DevBox,
@@ -145,7 +145,7 @@ interface DevBoxesOperations {
   >;
 
   @doc("Stops a Dev Box")
-  @pollingOperation(SharedOperations.getProjectOperationStatus)
+  @pollingOperation(OperationStatuses.get)
   @action("stop")
   stopDevBox is StandardResourceOperations.LongRunningResourceAction<
     DevBox,
@@ -164,7 +164,7 @@ interface DevBoxesOperations {
   >;
 
   @doc("Restarts a Dev Box")
-  @pollingOperation(SharedOperations.getProjectOperationStatus)
+  @pollingOperation(OperationStatuses.get)
   @action("restart")
   restartDevBox is StandardResourceOperations.LongRunningResourceAction<
     DevBox,

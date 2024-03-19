@@ -51,7 +51,7 @@ interface EnvironmentsOperations {
   //Can not use LongRunningCreateOrReplace because response is 200 or 201, but we only respond with 201"
   @doc("Creates or updates an environment.")
   @finalOperation(EnvironmentsOperations.getEnvironmentByUser)
-  @pollingOperation(SharedOperations.getProjectOperationStatus)
+  @pollingOperation(OperationStatuses.get)
   @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
   @put
   createOrReplaceEnvironment is Azure.Core.Foundations.Operation<
@@ -87,7 +87,7 @@ interface EnvironmentsOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
   //Can not use LongRunningResourceDelete because response is 202 or error, but we also accept 204 response"
   @doc("Deletes an environment and all its associated resources")
-  @pollingOperation(SharedOperations.getProjectOperationStatus)
+  @pollingOperation(OperationStatuses.get)
   @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
   @delete
   deleteEnvironment is Azure.Core.Foundations.Operation<
