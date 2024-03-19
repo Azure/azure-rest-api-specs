@@ -647,8 +647,50 @@
           "description": "The time when Migration Assessment Report upload was last performed.",
           "readOnly": true
         },
+        "serverAssessments": {
+          "$ref": "#/definitions/ServerAssessments"
+        },
         "skuRecommendationResults": {
           "$ref": "#/definitions/SkuRecommendationResults"
+        }
+      }
+    },
+    "ServerAssessments": {
+      "description": "Issues and warnings impacting the migration of SQL Server instance to particular Azure Migration Target.",
+      "readOnly": true,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "appliesToMigrationTargetPlatform": {
+            "type": "string"
+          },
+          "featureId": {
+            "type": "string"
+          },
+          "impactedObjects": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "impactDetail": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "objectType": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "issueCategory": {
+            "type": "string"
+          },
+          "moreInformation": {
+            "type": "string"
+          }
         }
       }
     },

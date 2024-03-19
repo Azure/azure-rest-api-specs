@@ -502,8 +502,33 @@
           "description": "The time when Migration Assessment Report upload was last performed for this database.",
           "readOnly": true
         },
+        "databaseAssessments": {
+          "$ref": "#/definitions/DatabaseAssessments"
+        },
         "targetReadiness": {
           "$ref": "#/definitions/TargetReadiness"
+        }
+      }
+    },
+    "DatabaseAssessments": {
+      "description": "Issues and warnings impacting the migration of Database to particular Azure Migration Target.",
+      "readOnly": true,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "appliesToMigrationTargetPlatform": {
+            "type": "string"
+          },
+          "featureId": {
+            "type": "string"
+          },
+          "issueCategory": {
+            "type": "string"
+          },
+          "moreInformation": {
+            "type": "string"
+          }
         }
       }
     },
