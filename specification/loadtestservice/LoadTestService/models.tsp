@@ -72,8 +72,11 @@ union CertificateType {
 @doc("Types of file supported.")
 union FileType {
   string,
-  @doc("If the file is a JMX script.") "JMX_FILE",
-  @doc("If the file is a user properties file.") "USER_PROPERTIES",
+  @doc("If the file is a JMX script.")
+  "JMX_FILE",
+  
+  @doc("If the file is a user properties file.")
+  "USER_PROPERTIES",
 
   @doc("If the file is not among any of the other supported file types.")
   "ADDITIONAL_ARTIFACTS",
@@ -85,6 +88,10 @@ union FileType {
   @added(APIVersions.v2023_04_01_preview)
   @doc("If the file is a JSON config file to define the requests for a URL test.")
   "URL_TEST_CONFIG_JSON",
+
+  @added(APIVersions.v2024_03_01_preview)
+  @doc("If the file is a test script.")
+  "TEST_SCRIPT",
 }
 
 @doc("File status.")
@@ -175,8 +182,16 @@ union TimeGrain {
 @doc("Test kind")
 union TestKind {
   string,
-  @doc("URL Test") "URL",
-  @doc("JMX Test") "JMX",
+  
+  @doc("URL Test")
+  "URL",
+  
+  @doc("JMX Test")
+  "JMX",
+  
+  @added(APIVersions.v2024_03_01_preview)
+  @doc("Locust Test")
+  "Locust",
 }
 
 @doc("Test file info.")
@@ -358,6 +373,10 @@ not required to upload.
 
   @doc("Configuration for quick load test")
   optionalLoadTestConfig?: OptionalLoadTestConfig;
+
+  @added(APIVersions.v2024_03_01_preview)
+  @doc("Locust test configuration, in case kind is Locust")
+  locustConfiguration?: LocustConfiguration;
 }
 
 @doc("Configuration for quick load test")
@@ -381,6 +400,19 @@ model OptionalLoadTestConfig {
 
   @doc("Test run duration in seconds.")
   duration?: int32;
+}
+
+@added(APIVersions.v2024_03_01_preview)
+@doc("Locust test configuration, in case kind is Locust")
+model LocustConfiguration {
+  @doc("Number of concurrent virtual users")
+  users?: int32;
+
+  @doc("Test run duration in seconds.")
+  durationInSeconds?: int32;
+
+  @doc("Number of users to spawn every second.")
+  spawnRate?: float32
 }
 
 @doc("The input artifacts for the test.")
