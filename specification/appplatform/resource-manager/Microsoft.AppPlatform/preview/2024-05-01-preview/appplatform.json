@@ -2861,6 +2861,267 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices/{buildServiceName}/buildSettings": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get collection of build settings.",
+        "operationId": "BuildSettings_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of build settings.",
+            "schema": {
+              "$ref": "#/definitions/BuildSettingResourceCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "BuildSettings_List": {
+            "$ref": "./examples/BuildSettings_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices/{buildServiceName}/buildSettings/{buildSettingName}": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Get the build setting by name.",
+        "operationId": "BuildSettings_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildSettingNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the build setting.",
+            "schema": {
+              "$ref": "#/definitions/BuildSettingResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BuildSettings_Get": {
+            "$ref": "./examples/BuildSettings_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Create or update a build settings.",
+        "operationId": "BuildSetting_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildSettingNameParameter"
+          },
+          {
+            "name": "buildSettingResource",
+            "in": "body",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BuildSettingResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the build setting updated.",
+            "schema": {
+              "$ref": "#/definitions/BuildSettingResource"
+            }
+          },
+          "201": {
+            "description": "Created. The response describes the new build setting created and contains an Azure-AsyncOperation header to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/BuildSettingResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "BuildSettings_CreateOrUpdate": {
+            "$ref": "./examples/BuildSettings_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "Operation to delete a build setting",
+        "operationId": "BuildSettings_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildSettingNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The response indicates the delete operation is performed in the background.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Success. The response indicates the resource doesn't exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "BuildSettings_Delete": {
+            "$ref": "./examples/BuildSettings_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices/{buildServiceName}/supportedBuildSettingTypes": {
+      "get": {
+        "tags": [
+          "AppPlatform"
+        ],
+        "description": "List supported build setting types for a Service.",
+        "operationId": "BuildSettings_ListSupportedTypes",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BuildServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the supported build setting types.",
+            "schema": {
+              "$ref": "#/definitions/SupportedBuildSettingTypes"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "BuildSettings_ListSupportedTypes": {
+            "$ref": "./examples/BuildSettings_ListSupportedTypes.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppPlatform/Spring/{serviceName}/buildServices/{buildServiceName}/builds": {
       "get": {
         "tags": [
@@ -9829,6 +10090,155 @@
         }
       }
     },
+    "BuildSettingResourceCollection": {
+      "description": "Object that includes an array of build setting resources and a possible link for next set",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of build setting resources",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BuildSettingResource"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "BuildSettingResource": {
+      "description": "Build setting resource object",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BuildSettingProperties",
+          "description": "Properties of a build setting",
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "BuildSettingProperties": {
+      "description": "Properties of a build setting",
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "description": "build setting type",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "State of the build setting.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Succeeded",
+            "Failed",
+            "Deleting",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "BuildSettingProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "secrets": {
+          "description": "Sensitive properties for the APM",
+          "type": "object",
+          "properties": {
+            "settingsXml": {
+              "description": "the context of settings.xml encoded by base64",
+              "type": "string"
+            },
+            "settingsSecurityXml": {
+              "description": "the context of settings-security.xml encoded by base64",
+              "type": "string"
+            },
+            "gradleProperties": {
+              "description": "the context of gradle.properties encoded by base64",
+              "type": "string"
+            }
+          },
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        }
+      }
+    },
+    "BuildSettingReference": {
+      "description": "A reference to the build setting",
+      "required": [
+        "resourceId"
+      ],
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "Resource id of the build setting",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AppPlatform/Spring/buildServices/buildSettings"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "BuildSettingReferenceCollection": {
+      "description": "Collection of BuildSettingReferences",
+      "type": "array",
+      "x-ms-identifiers": [
+        "resourceId"
+      ],
+      "items": {
+        "$ref": "#/definitions/BuildSettingReference"
+      }
+    },
+    "SupportedBuildSettingTypes": {
+      "description": "Supported build setting types payload",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of the supported build setting type",
+          "uniqueItems": false,
+          "type": "array",
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "items": {
+            "$ref": "#/definitions/SupportedBuildSettingType"
+          }
+        },
+        "nextLink": {
+          "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "SupportedBuildSettingType": {
+      "description": "Supported build setting type",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the supported build setting type",
+          "type": "string"
+        }
+      }
+    },
     "BuildCollection": {
       "description": "Object that includes an array of Build resources and a possible link for next set",
       "type": "object",
@@ -9909,6 +10319,10 @@
         "certificates": {
           "$ref": "#/definitions/CertificateReferenceCollection",
           "description": "The CA Certificates for this build"
+        },
+        "buildSettings": {
+          "$ref": "#/definitions/BuildSettingReferenceCollection",
+          "description": "The build settings for this build"
         },
         "triggeredBuildResult": {
           "$ref": "#/definitions/TriggeredBuildResult",
@@ -16222,6 +16636,16 @@
       "description": "The name of the build service resource.",
       "required": true,
       "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$",
+      "x-ms-parameter-location": "method"
+    },
+    "BuildSettingNameParameter": {
+      "name": "buildSettingName",
+      "in": "path",
+      "description": "The name of the build setting",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*[a-z0-9]$",
       "x-ms-parameter-location": "method"
     },
     "BuildServiceBuildpackNameParameter": {
