@@ -17,10 +17,10 @@ interface DevBoxesOperations {
   getPool is StandardResourceOperations.ResourceRead<Pool>;
 
   @doc("Lists available schedules for a pool.")
-  listSchedules is StandardResourceOperations.ResourceList<Schedule>;
+  listSchedulesByPool is StandardResourceOperations.ResourceList<Schedule>;
 
   @doc("Gets a schedule.")
-  getSchedule is StandardResourceOperations.ResourceRead<Schedule>;
+  getScheduleByPool is StandardResourceOperations.ResourceRead<Schedule>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need of reuse DevBoxListResult"
   // This does fit in the ResourceList<DevBox> but since there are three different operations that returns dev box list result,
@@ -29,7 +29,7 @@ interface DevBoxesOperations {
   @doc("Lists Dev Boxes in the project for a particular user.")
   @route("/projects/{projectName}/users/{userId}/devboxes")
   @get
-  listDevBoxes is Azure.Core.Foundations.Operation<
+  listDevBoxesByUser is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -43,7 +43,7 @@ interface DevBoxesOperations {
   >;
 
   @doc("Gets a Dev Box")
-  getDevBox is StandardResourceOperations.ResourceRead<DevBox>;
+  getDevBoxByUser is StandardResourceOperations.ResourceRead<DevBox>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard operations produce wrong swagger"
   // The standard operation names the body as resource, so the generated swagger has parameter
@@ -57,7 +57,7 @@ interface DevBoxesOperations {
   //     "in": "body",
   //  }
   @doc("Creates or replaces a Dev Box.")
-  @finalOperation(DevBoxesOperations.getDevBox)
+  @finalOperation(DevBoxesOperations.getDevBoxByUser)
   @pollingOperation(SharedOperations.getProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
   @put
@@ -201,10 +201,10 @@ interface DevBoxesOperations {
   >;
 
   @doc("Lists actions on a Dev Box.")
-  listDevBoxActions is StandardResourceOperations.ResourceList<DevBoxAction>;
+  listActions is StandardResourceOperations.ResourceList<DevBoxAction>;
 
   @doc("Gets an action.")
-  getDevBoxAction is StandardResourceOperations.ResourceRead<DevBoxAction>;
+  getAction is StandardResourceOperations.ResourceRead<DevBoxAction>;
 
   @doc("Skips an occurrence of an action.")
   @action("skip")
@@ -228,7 +228,7 @@ interface DevBoxesOperations {
 
   @doc("Delays all actions.")
   @action("delay")
-  delayAllActions is StandardResourceOperations.ResourceCollectionAction<
+  delayActions is StandardResourceOperations.ResourceCollectionAction<
     DevBoxAction,
     {
       @doc("The time to delay the Dev Box action or actions until.")

@@ -26,12 +26,12 @@ interface DevCenterClientOperations {
 interface DevBoxesClientOperations {
   listPools is DevCenterService.DevBoxesOperations.listPools;
   getPool is DevCenterService.DevBoxesOperations.getPool;
-  listSchedules is DevCenterService.DevBoxesOperations.listSchedules;
-  getSchedule is DevCenterService.DevBoxesOperations.getSchedule;
+  listSchedules is DevCenterService.DevBoxesOperations.listSchedulesByPool;
+  getSchedule is DevCenterService.DevBoxesOperations.getScheduleByPool;
   listAllDevBoxes is DevCenterService.DevCenterOperations.listAllDevBoxes;
   listAllDevBoxesByUser is DevCenterService.DevCenterOperations.listAllDevBoxesByUser;
-  listDevBoxes is DevCenterService.DevBoxesOperations.listDevBoxes;
-  getDevBox is DevCenterService.DevBoxesOperations.getDevBox;
+  listDevBoxes is DevCenterService.DevBoxesOperations.listDevBoxesByUser;
+  getDevBox is DevCenterService.DevBoxesOperations.getDevBoxByUser;
   @convenientAPI(false, "csharp") // https://github.com/Azure/azure-rest-api-specs/issues/28083
   createDevBox is DevCenterService.DevBoxesOperations.createDevBox;
   deleteDevBox is DevCenterService.DevBoxesOperations.deleteDevBox;
@@ -39,11 +39,11 @@ interface DevBoxesClientOperations {
   stopDevBox is DevCenterService.DevBoxesOperations.stopDevBox;
   restartDevBox is DevCenterService.DevBoxesOperations.restartDevBox;
   getRemoteConnection is DevCenterService.DevBoxesOperations.getRemoteConnection;
-  listDevBoxActions is DevCenterService.DevBoxesOperations.listDevBoxActions;
-  getDevBoxAction is DevCenterService.DevBoxesOperations.getDevBoxAction;
+  listDevBoxActions is DevCenterService.DevBoxesOperations.listActions;
+  getDevBoxAction is DevCenterService.DevBoxesOperations.getAction;
   skipAction is DevCenterService.DevBoxesOperations.skipAction;
   delayAction is DevCenterService.DevBoxesOperations.delayAction;
-  delayAllActions is DevCenterService.DevBoxesOperations.delayAllActions;
+  delayAllActions is DevCenterService.DevBoxesOperations.delayActions;
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "detailed suppress description for each operation can be found in routes.tsp"
@@ -52,15 +52,15 @@ interface DevBoxesClientOperations {
   service: DevCenterService,
 })
 interface EnvironmentClientOperations {
-  listAllEnvironments is DevCenterService.EnvironmentsOperations.listAllEnvironments;
-  listEnvironments is DevCenterService.EnvironmentsOperations.listEnvironments;
-  getEnvironment is DevCenterService.EnvironmentsOperations.getEnvironment;
+  listAllEnvironments is DevCenterService.EnvironmentsOperations.listEnvironments;
+  listEnvironments is DevCenterService.EnvironmentsOperations.listEnvironmentsByUser;
+  getEnvironment is DevCenterService.EnvironmentsOperations.getEnvironmentByUser;
   @convenientAPI(false, "csharp") // same issue as described in https://github.com/Azure/azure-rest-api-specs/issues/28083
-  createOrUpdateEnvironment is DevCenterService.EnvironmentsOperations.createOrUpdateEnvironment;
+  createOrUpdateEnvironment is DevCenterService.EnvironmentsOperations.createOrReplaceEnvironment;
   deleteEnvironment is DevCenterService.EnvironmentsOperations.deleteEnvironment;
-  listCatalogs is DevCenterService.EnvironmentsOperations.listCatalogs;
+  listCatalogs is DevCenterService.EnvironmentsOperations.listCatalogsByProject;
   getCatalog is DevCenterService.EnvironmentsOperations.getCatalog;
-  listEnvironmentDefinitions is DevCenterService.EnvironmentsOperations.listEnvironmentDefinitions;
+  listEnvironmentDefinitions is DevCenterService.EnvironmentsOperations.listEnvironmentDefinitionsByProject;
   listEnvironmentDefinitionsByCatalog is DevCenterService.EnvironmentsOperations.listEnvironmentDefinitionsByCatalog;
   getEnvironmentDefinition is DevCenterService.EnvironmentsOperations.getEnvironmentDefinition;
   listEnvironmentTypes is DevCenterService.EnvironmentsOperations.listEnvironmentTypes;

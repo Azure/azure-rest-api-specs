@@ -15,7 +15,7 @@ interface EnvironmentsOperations {
   @doc("Lists the environments for a project.")
   @route("/projects/{projectName}/environments")
   @get
-  listAllEnvironments is Azure.Core.Foundations.Operation<
+  listEnvironments is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -31,7 +31,7 @@ interface EnvironmentsOperations {
   @doc("Lists the environments for a project and user.")
   @route("/projects/{projectName}/users/{userId}/environments")
   @get
-  listEnvironments is Azure.Core.Foundations.Operation<
+  listEnvironmentsByUser is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -45,16 +45,16 @@ interface EnvironmentsOperations {
   >;
 
   @doc("Gets an environment")
-  getEnvironment is StandardResourceOperations.ResourceRead<Environment>;
+  getEnvironmentByUser is StandardResourceOperations.ResourceRead<Environment>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
   //Can not use LongRunningCreateOrReplace because response is 200 or 201, but we only respond with 201"
   @doc("Creates or updates an environment.")
-  @finalOperation(EnvironmentsOperations.getEnvironment)
+  @finalOperation(EnvironmentsOperations.getEnvironmentByUser)
   @pollingOperation(SharedOperations.getProjectOperationStatus)
   @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
   @put
-  createOrUpdateEnvironment is Azure.Core.Foundations.Operation<
+  createOrReplaceEnvironment is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -123,7 +123,7 @@ interface EnvironmentsOperations {
   >;
 
   @doc("Lists all of the catalogs available for a project.")
-  listCatalogs is StandardResourceOperations.ResourceList<Catalog>;
+  listCatalogsByProject is StandardResourceOperations.ResourceList<Catalog>;
 
   @doc("Gets the specified catalog within the project")
   getCatalog is StandardResourceOperations.ResourceRead<Catalog>;
@@ -132,7 +132,7 @@ interface EnvironmentsOperations {
   @doc("Lists all environment definitions available for a project.")
   @route("/projects/{projectName}/environmentDefinitions")
   @get
-  listEnvironmentDefinitions is Azure.Core.Foundations.Operation<
+  listEnvironmentDefinitionsByProject is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
