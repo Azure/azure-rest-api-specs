@@ -1910,6 +1910,7 @@ model RequiredFilterParameter {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @resource("cisaCves")
+@doc("cisa cve in a given workspace.")
 model CisaCveResponse {
   @key("cveId")
   @doc("The CVE ID of the vulnerability in the format CVE-YYYY-NNNN, note that the number portion can have more than 4 digits.")
@@ -1946,6 +1947,7 @@ model CisaCveResponse {
   count: int64;
 }
 
+@doc("AssetChainRequest containing information needed for the retrieval of the asset chain summary.")
 model AssetChainRequest {
   @doc("Asset chain source.")
   assetChainSource: AssetChainSource;
@@ -1954,6 +1956,7 @@ model AssetChainRequest {
   sourceIds: string[];
 }
 
+@doc("Response for the asset chain summary.")
 model AssetChainSummaryResponse {
   @doc("A list of asset chain summaries per asset kind")
   affectedAssetsSummary: AssetChainKindSummaryResponse[];
@@ -1965,13 +1968,20 @@ model AssetChainSummaryResponse {
   errors: ErrorResponse[];
 }
 
+@doc("A list of asset chain summaries per asset kind")
 model AssetChainKindSummaryResponse {
+  @doc("The kind of asset")
   kind: AssetKind;
-  afffectedCount: int64;
+  @doc("The amount of assets affected for a given asset kind")
+  affectedCount: int64;
 }
 
+@doc("A list of disco group summaries")
 model DiscoGroupSummaryResponse {
+  @doc("The system generated unique id for the resource.")
   id: string;
+  @doc("The caller provided unique name for the resource.")
   name: string;
+  @doc("The name that can be used for display purposes.")
   displayName: string;
 }

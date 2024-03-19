@@ -16,6 +16,11 @@ interface EasmClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   updateAssets is Easm.Assets.updateAssets;
   getAssetResource is Easm.Assets.getAssetResource;
+  dismissAssetChain is Easm.Assets.dismissAssetChain;
+  getAssetsExport is Easm.Assets.getAssetsExport;
+  getObservations is Easm.Assets.getObservations;
+  getDeltaDetails is Easm.Assets.getDeltaDetails;
+  getDeltaSummary is Easm.Assets.getDeltaSummary;
 
   listDataConnection is Easm.DataConnections.listDataConnection;
   validateDataConnection is Easm.DataConnections.validateDataConnection;
@@ -32,6 +37,9 @@ interface EasmClient {
   runDiscoGroup is Easm.DiscoveryGroups.runDiscoGroup;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   listRuns is Easm.DiscoveryGroups.listRuns;
+  getAssetChainSummary is Easm.DiscoveryGroups.getAssetChainSummary;
+  dismissSeedChain is Easm.DiscoveryGroups.dismissSeedChain;
+  deleteDiscoGroup is Easm.DiscoveryGroups.deleteDiscoGroup;
 
   listDiscoTemplate is Easm.DiscoveryTemplates.listDiscoTemplate;
   getDiscoTemplate is Easm.DiscoveryTemplates.getDiscoTemplate;
@@ -42,6 +50,8 @@ interface EasmClient {
   getSnapshot is Easm.Reports.getSnapshot;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   getSummary is Easm.Reports.getSummary;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  getSnapshotExport is Easm.Reports.getSnapshotExport;
 
   listSavedFilter is Easm.SavedFilters.listSavedFilter;
   getSavedFilter is Easm.SavedFilters.getSavedFilter;
@@ -52,4 +62,9 @@ interface EasmClient {
   listTask is Easm.Tasks.listTask;
   getTask is Easm.Tasks.getTask;
   cancelTask is Easm.Tasks.cancelTask;
+  runTask is Easm.Tasks.runTask;
+  downloadTask is Easm.Tasks.downloadTask;
+
+  getCisaCves is Easm.CisaCves.getCisaCves;
+  getCisaCve is Easm.CisaCves.getCisaCve;
 }

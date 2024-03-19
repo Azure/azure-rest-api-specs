@@ -37,7 +37,7 @@ interface Assets {
   getAssetResource is Operations.ResourceRead<AssetResource>;
 
   @doc("Dismiss discovery chain for a given asset")
-  @action("dismissDiscoveryChain")
+  @action("dismissAssetChain")
   dismissAssetChain is Operations.ResourceAction<
     AssetResource,
     AssetResource,
@@ -46,15 +46,15 @@ interface Assets {
 
   @doc("Export a list of assets for the provided search parameters.")
   @action("export")
-  export is Operations.ResourceCollectionAction<
+  getAssetsExport is Operations.ResourceCollectionAction<
     AssetResource,
     AssetsExportTrait,
     Task
   >;
 
   @doc("Retrieve observations on an asset")
-  @action("observations")
-  observations is Operations.ResourceAction<
+  @action("getObservations")
+  getObservations is Operations.ResourceAction<
     AssetResource,
     ObservationsParameters,
     ObservationPageResponse
