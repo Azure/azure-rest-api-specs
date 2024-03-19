@@ -515,6 +515,40 @@
       },
       "type": "object"
     },
+    "HardwareProfileUpdate": {
+      "description": "Defines the resource update properties.",
+      "properties": {
+        "cpuCount": {
+          "description": "Gets or sets the number of vCPUs for the vm.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "dynamicMemoryEnabled": {
+          "description": "Gets or sets a value indicating whether to enable dynamic memory or not.",
+          "$ref": "#/definitions/DynamicMemoryEnabled"
+        },
+        "dynamicMemoryMaxMB": {
+          "description": "Gets or sets the max dynamic memory for the vm.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "dynamicMemoryMinMB": {
+          "description": "Gets or sets the min dynamic memory for the vm.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "limitCpuForMigration": {
+          "description": "Gets or sets a value indicating whether to enable processor compatibility mode for live migration of VMs.",
+          "$ref": "#/definitions/LimitCpuForMigration"
+        },
+        "memoryMB": {
+          "description": "MemoryMB is the size of a virtual machine's memory, in MB.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
     "HttpProxyConfiguration": {
       "description": "HTTP Proxy configuration for the VM.",
       "properties": {
@@ -530,7 +564,11 @@
       "properties": {
         "biosGuid": {
           "description": "Gets or sets the bios guid for the vm.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "checkpoints": {
           "description": "Checkpoints in the vm.",
@@ -545,7 +583,12 @@
         },
         "checkpointType": {
           "description": "Type of checkpoint supported for the vm.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
         },
         "cloudId": {
           "description": "ARM Id of the cloud resource to use for deploying the vm.",
@@ -557,16 +600,28 @@
                 "type": "Microsoft.ScVmm/clouds"
               }
             ]
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "generation": {
           "description": "Gets or sets the generation for the vm.",
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "inventoryItemId": {
           "description": "Gets or sets the inventory Item ID for the resource.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "lastRestoredVMCheckpoint": {
           "$ref": "#/definitions/Checkpoint",
@@ -584,11 +639,19 @@
                 "type": "Microsoft.ScVmm/virtualMachineTemplates"
               }
             ]
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "uuid": {
           "description": "Unique ID of the virtual machine.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "vmmServerId": {
           "description": "ARM Id of the vmmServer resource in which this resource resides.",
@@ -600,12 +663,35 @@
                 "type": "Microsoft.ScVmm/vmmServers"
               }
             ]
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "vmName": {
           "description": "VMName is the name of VM on the SCVmm server.",
           "minLength": 1,
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "InfrastructureProfileUpdate": {
+      "description": "Specifies the vmmServer infrastructure specific update settings for the virtual machine instance.",
+      "properties": {
+        "checkpointType": {
+          "description": "Type of checkpoint supported for the vm.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
       "type": "object"
@@ -885,6 +971,48 @@
       },
       "type": "object"
     },
+    "NetworkInterfaceUpdate": {
+      "description": "Network Interface Update model",
+      "properties": {
+        "ipv4AddressType": {
+          "description": "Gets or sets the ipv4 address type.",
+          "$ref": "#/definitions/AllocationMethod"
+        },
+        "ipv6AddressType": {
+          "description": "Gets or sets the ipv6 address type.",
+          "$ref": "#/definitions/AllocationMethod"
+        },
+        "macAddress": {
+          "description": "Gets or sets the nic MAC address.",
+          "type": "string"
+        },
+        "macAddressType": {
+          "description": "Gets or sets the mac address type.",
+          "$ref": "#/definitions/AllocationMethod"
+        },
+        "name": {
+          "description": "Gets or sets the name of the network interface.",
+          "type": "string"
+        },
+        "nicId": {
+          "description": "Gets or sets the nic id.",
+          "type": "string"
+        },
+        "virtualNetworkId": {
+          "description": "Gets or sets the ARM Id of the Microsoft.ScVmm/virtualNetwork resource to connect the nic.",
+          "format": "arm-id",
+          "type": "string",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ScVmm/virtualNetwork"
+              }
+            ]
+          }
+        }
+      },
+      "type": "object"
+    },
     "NetworkProfile": {
       "description": "Defines the resource properties.",
       "properties": {
@@ -892,6 +1020,23 @@
           "description": "Gets or sets the list of network interfaces associated with the virtual machine.",
           "items": {
             "$ref": "#/definitions/NetworkInterface"
+          },
+          "type": "array",
+          "x-ms-identifiers": [
+            "name",
+            "nicId"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "NetworkProfileUpdate": {
+      "description": "Defines the resource update properties.",
+      "properties": {
+        "networkInterfaces": {
+          "description": "Gets or sets the list of network interfaces associated with the virtual machine.",
+          "items": {
+            "$ref": "#/definitions/NetworkInterfaceUpdate"
           },
           "type": "array",
           "x-ms-identifiers": [
@@ -1085,8 +1230,29 @@
       "description": "Defines the stop action properties.",
       "properties": {
         "skipShutdown": {
-          "$ref": "#/definitions/SkipShutdown",
-          "description": "Gets or sets a value indicating whether to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Defaults to false."
+          "default": "false",
+          "description": "Gets or sets a value indicating whether to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Defaults to false.",
+          "enum": [
+            "false",
+            "true"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "SkipShutdown",
+            "values": [
+              {
+                "name": "true",
+                "value": "true",
+                "description": "Enable skip shutdown."
+              },
+              {
+                "name": "false",
+                "value": "false",
+                "description": "Disable skip shutdown."
+              }
+            ]
+          }
         }
       },
       "type": "object"
@@ -1098,6 +1264,23 @@
           "description": "Gets or sets the list of virtual disks associated with the virtual machine.",
           "items": {
             "$ref": "#/definitions/VirtualDisk"
+          },
+          "type": "array",
+          "x-ms-identifiers": [
+            "diskId",
+            "name"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "StorageProfileUpdate": {
+      "description": "Defines the resource update properties.",
+      "properties": {
+        "disks": {
+          "description": "Gets or sets the list of virtual disks associated with the virtual machine.",
+          "items": {
+            "$ref": "#/definitions/VirtualDiskUpdate"
           },
           "type": "array",
           "x-ms-identifiers": [
@@ -1187,7 +1370,11 @@
         },
         "createDiffDisk": {
           "$ref": "#/definitions/CreateDiffDisk",
-          "description": "Gets or sets a value indicating diff disk."
+          "description": "Gets or sets a value indicating diff disk.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "diskId": {
           "description": "Gets or sets the disk id.",
@@ -1225,7 +1412,11 @@
         },
         "templateDiskId": {
           "description": "Gets or sets the disk id in the template.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "vhdFormatType": {
           "description": "Gets the disk vhd format type.",
@@ -1240,6 +1431,48 @@
           "description": "Gets the disk volume type.",
           "readOnly": true,
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "VirtualDiskUpdate": {
+      "description": "The template for adding updateable properties.",
+      "properties": {
+        "bus": {
+          "description": "Gets or sets the disk bus.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "busType": {
+          "description": "Gets or sets the disk bus type.",
+          "type": "string"
+        },
+        "diskId": {
+          "description": "Gets or sets the disk id.",
+          "type": "string"
+        },
+        "diskSizeGB": {
+          "description": "Gets or sets the disk total size.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "lun": {
+          "description": "Gets or sets the disk lun.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "description": "Gets or sets the name of the disk.",
+          "type": "string"
+        },
+        "vhdType": {
+          "description": "Gets or sets the disk vhd type.",
+          "type": "string"
+        },
+        "storageQoSPolicy": {
+          "description": "The QoS policy for the disk.",
+          "$ref": "#/definitions/StorageQosPolicyDetails",
+          "x-ms-client-name": "storageQosPolicy"
         }
       },
       "type": "object"
@@ -1342,7 +1575,11 @@
         },
         "osProfile": {
           "$ref": "#/definitions/OsProfileForVmInstance",
-          "description": "OS properties."
+          "description": "OS properties.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "powerState": {
           "description": "Gets the power state of the virtual machine.",
@@ -1366,6 +1603,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/VirtualMachineInstanceUpdateProperties",
+          "description": "The update properties of the VirtualMachineInstance.",
           "x-ms-client-flatten": true
         }
       },
@@ -1382,23 +1620,19 @@
           "type": "array"
         },
         "hardwareProfile": {
-          "$ref": "#/definitions/HardwareProfile",
+          "$ref": "#/definitions/HardwareProfileUpdate",
           "description": "Hardware properties."
         },
         "infrastructureProfile": {
-          "$ref": "#/definitions/InfrastructureProfile",
+          "$ref": "#/definitions/InfrastructureProfileUpdate",
           "description": "Gets the infrastructure profile."
         },
         "networkProfile": {
-          "$ref": "#/definitions/NetworkProfile",
+          "$ref": "#/definitions/NetworkProfileUpdate",
           "description": "Network properties."
         },
-        "osProfile": {
-          "$ref": "#/definitions/OsProfileForVmInstance",
-          "description": "OS properties."
-        },
         "storageProfile": {
-          "$ref": "#/definitions/StorageProfile",
+          "$ref": "#/definitions/StorageProfileUpdate",
           "description": "Storage properties."
         }
       },
@@ -3240,6 +3474,10 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "description": "A link to the status monitor",
+                "type": "string"
+              },
               "Location": {
                 "description": "The Location header contains the URL where the status of the long running operation can be checked.",
                 "type": "string"
@@ -3447,6 +3685,10 @@
           "201": {
             "description": "Resource 'AvailabilitySet' create operation succeeded",
             "headers": {
+              "Azure-AsyncOperation": {
+                "description": "A link to the status monitor",
+                "type": "string"
+              },
               "Retry-After": {
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
                 "format": "int32",

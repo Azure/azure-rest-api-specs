@@ -396,6 +396,9 @@ model NetworkInterface {
   nicId?: string;
 }
 
+/** Network Interface Update model */
+model NetworkInterfaceUpdate is UpdateableProperties<NetworkInterface> {}
+
 /** Virtual disk model */
 model VirtualDisk {
   /** Gets or sets the name of the disk. */
@@ -438,6 +441,7 @@ model VirtualDisk {
   vhdFormatType?: string;
 
   /** Gets or sets the disk id in the template. */
+  @visibility("read", "create")
   templateDiskId?: string;
 
   /** The QoS policy for the disk. */
@@ -445,8 +449,11 @@ model VirtualDisk {
   storageQosPolicy?: StorageQosPolicyDetails;
 
   /** Gets or sets a value indicating diff disk. */
+  @visibility("read", "create")
   createDiffDisk?: CreateDiffDisk;
 }
+
+model VirtualDiskUpdate is UpdateableProperties<VirtualDisk> {}
 
 /** The StorageQoSPolicyDetails definition. */
 model StorageQosPolicyDetails {
@@ -515,6 +522,7 @@ model VirtualMachineInstanceProperties {
   availabilitySets?: AvailabilitySetListItem[];
 
   /** OS properties. */
+  @visibility("read", "create")
   osProfile?: OsProfileForVmInstance;
 
   /** Hardware properties. */
@@ -536,6 +544,21 @@ model VirtualMachineInstanceProperties {
   /** Provisioning state of the resource. */
   @visibility("read")
   provisioningState?: Microsoft.ScVmm.ResourceProvisioningState;
+}
+
+/** The updatable properties of the VirtualMachineInstance. */
+model VirtualMachineInstanceUpdateProperties is UpdateableProperties<OmitProperties<VirtualMachineInstanceProperties,"hardwareProfile" | "networkProfile" | "storageProfile" | "infrastructureProfile">> {
+  /** Hardware properties. */
+  hardwareProfile?: HardwareProfileUpdate;
+
+  /** Network properties. */
+  networkProfile?: NetworkProfileUpdate;
+
+  /** Storage properties. */
+  storageProfile?: StorageProfileUpdate;
+
+  /** Gets the infrastructure profile. */
+  infrastructureProfile?: InfrastructureProfileUpdate;
 }
 
 /** Availability Set model */
@@ -602,11 +625,21 @@ model HardwareProfile {
   isHighlyAvailable?: IsHighlyAvailable;
 }
 
+/** Defines the resource update properties. */
+model HardwareProfileUpdate is UpdateableProperties<HardwareProfile> {}
+
 /** Defines the resource properties. */
 model NetworkProfile {
   /** Gets or sets the list of network interfaces associated with the virtual machine. */
   @extension("x-ms-identifiers", ["name", "nicId"])
   networkInterfaces?: NetworkInterface[];
+}
+
+/** Defines the resource update properties. */
+model NetworkProfileUpdate is UpdateableProperties<OmitProperties<NetworkProfile, "networkInterfaces">> {
+  /** Gets or sets the list of network interfaces associated with the virtual machine. */
+  @extension("x-ms-identifiers", ["name", "nicId"])
+  networkInterfaces?: NetworkInterfaceUpdate[];
 }
 
 /** Defines the resource properties. */
@@ -616,15 +649,25 @@ model StorageProfile {
   disks?: VirtualDisk[];
 }
 
+/** Defines the resource update properties. */
+model StorageProfileUpdate is UpdateableProperties<OmitProperties<StorageProfile, "disks">> {
+  /** Gets or sets the list of virtual disks associated with the virtual machine. */
+  @extension("x-ms-identifiers", ["diskId", "name"])
+  disks?: VirtualDiskUpdate[];
+}
+
 /** Specifies the vmmServer infrastructure specific settings for the virtual machine instance. */
 model InfrastructureProfile {
   /** Gets or sets the inventory Item ID for the resource. */
+  @visibility("read", "create")
   inventoryItemId?: string;
 
   /** ARM Id of the vmmServer resource in which this resource resides. */
+  @visibility("read", "create")
   vmmServerId?: VmmServerId;
 
   /** ARM Id of the cloud resource to use for deploying the vm. */
+  @visibility("read", "create")
   cloudId?: ResourceIdentifier<[
     {
       type: "Microsoft.ScVmm/clouds";
@@ -632,6 +675,7 @@ model InfrastructureProfile {
   ]>;
 
   /** ARM Id of the template resource to use for deploying the vm. */
+  @visibility("read", "create")
   templateId?: ResourceIdentifier<[
     {
       type: "Microsoft.ScVmm/virtualMachineTemplates";
@@ -640,9 +684,11 @@ model InfrastructureProfile {
 
   /** VMName is the name of VM on the SCVmm server. */
   @minLength(1)
+  @visibility("read", "create")
   vmName?: string;
 
   /** Unique ID of the virtual machine. */
+  @visibility("read", "create")
   uuid?: string;
 
   /** Last restored checkpoint in the vm. */
@@ -656,14 +702,20 @@ model InfrastructureProfile {
   checkpoints?: Checkpoint[];
 
   /** Type of checkpoint supported for the vm. */
+  @visibility("read", "create", "update")
   checkpointType?: string;
 
   /** Gets or sets the generation for the vm. */
+  @visibility("read", "create")
   generation?: int32;
 
   /** Gets or sets the bios guid for the vm. */
+  @visibility("read", "create")
   biosGuid?: string;
 }
+
+/** Specifies the vmmServer infrastructure specific update settings for the virtual machine instance. */
+model InfrastructureProfileUpdate is UpdateableProperties<InfrastructureProfile> {}
 
 /** Defines the resource properties. */
 model Checkpoint {
@@ -685,7 +737,7 @@ model Checkpoint {
 /** Defines the stop action properties. */
 model StopVirtualMachineOptions {
   /** Gets or sets a value indicating whether to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Defaults to false. */
-  skipShutdown?: SkipShutdown;
+  skipShutdown?: SkipShutdown = SkipShutdown.`false`;
 }
 
 /** Describes the properties of Hybrid Identity Metadata for a Virtual Machine. */

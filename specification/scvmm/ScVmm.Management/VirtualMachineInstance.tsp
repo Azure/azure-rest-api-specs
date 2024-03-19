@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.ScVmm;
 /** Define the virtualMachineInstance. */
@@ -26,6 +27,13 @@ model VirtualMachineInstance
   extendedLocation: ExtendedLocation;
 }
 
+/** The type used for update operations of the VirtualMachineInstance. */
+model VirtualMachineInstanceUpdate is UpdateableProperties<OmitProperties<VirtualMachineInstance, "properties">> {
+  /** The update properties of the VirtualMachineInstance. */
+  @extension("x-ms-client-flatten", true)
+  properties?: VirtualMachineInstanceUpdateProperties;
+}
+
 @armResourceOperations
 interface VirtualMachineInstances {
   /** Retrieves information about a virtual machine instance. */
@@ -33,9 +41,9 @@ interface VirtualMachineInstances {
   /** The operation to create or update a virtual machine instance. Please note some properties can be set only during virtual machine instance creation. */
   createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualMachineInstance>;
   /** The operation to update a virtual machine instance. */
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     VirtualMachineInstance,
-    VirtualMachineInstanceProperties
+    VirtualMachineInstanceUpdate
   >;
   /** The operation to delete a virtual machine instance. */
   delete is ArmResourceDeleteWithoutOkAsync<
