@@ -235,8 +235,8 @@
         "tags": [
           "PrivateAccesses"
         ],
-        "operationId": "PrivateAccesses_UpdateTags",
-        "description": "Update a private access tags",
+        "operationId": "PrivateAccesses_Patch",
+        "description": "Patch a private access tags",
         "parameters": [
           {
             "$ref": "./types/common.json#/parameters/apiVersion"
@@ -261,8 +261,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Private Access resource's tagas updated successfully.",
+          "202": {
+            "description": "The request to update the tags for the Private Access resource has been accepted for processing.",
             "schema": {
               "$ref": "./types/privateAccesses.json#/definitions/PrivateAccess"
             }
@@ -278,7 +278,11 @@
           "Update a private access resource's tags": {
             "$ref": "./examples/UpdateAPrivateAccessTags.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
