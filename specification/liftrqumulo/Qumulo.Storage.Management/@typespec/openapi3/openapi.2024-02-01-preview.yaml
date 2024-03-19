@@ -1,0 +1,986 @@
+openapi: 3.0.0
+info:
+  title: Qumulo.Storage
+  version: 2024-02-01-preview
+tags:
+  - name: Operations
+  - name: FileSystemResources
+paths:
+  /providers/Qumulo.Storage/operations:
+    get:
+      tags:
+        - Operations
+      operationId: Operations_list
+      description: List the operations for the provider
+      parameters:
+        - $ref: '#/components/parameters/Azure.ResourceManager.ApiVersionParameter'
+      responses:
+        '200':
+          description: Azure operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PagedOperation'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.ResourceManager.ErrorResponse'
+  /subscriptions/{subscriptionId}/providers/Qumulo.Storage/fileSystems:
+    get:
+      tags:
+        - FileSystemResources
+      operationId: FileSystems_ListBySubscription
+      description: List FileSystemResource resources by subscription ID
+      parameters:
+        - $ref: '#/components/parameters/Azure.ResourceManager.ApiVersionParameter'
+        - $ref: '#/components/parameters/Azure.ResourceManager.SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Azure operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileSystemResourceListResult'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.ResourceManager.ErrorResponse'
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Qumulo.Storage/fileSystems:
+    get:
+      tags:
+        - FileSystemResources
+      operationId: FileSystems_ListByResourceGroup
+      description: List FileSystemResource resources by resource group
+      parameters:
+        - $ref: '#/components/parameters/Azure.ResourceManager.ApiVersionParameter'
+        - $ref: '#/components/parameters/Azure.ResourceManager.SubscriptionIdParameter'
+        - $ref: '#/components/parameters/Azure.ResourceManager.ResourceGroupParameter'
+      responses:
+        '200':
+          description: Azure operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileSystemResourceListResult'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.ResourceManager.ErrorResponse'
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Qumulo.Storage/fileSystems/{fileSystemName}:
+    get:
+      tags:
+        - FileSystemResources
+      operationId: FileSystems_Get
+      description: Get a FileSystemResource
+      parameters:
+        - $ref: '#/components/parameters/Azure.ResourceManager.ApiVersionParameter'
+        - $ref: '#/components/parameters/Azure.ResourceManager.SubscriptionIdParameter'
+        - $ref: '#/components/parameters/Azure.ResourceManager.ResourceGroupParameter'
+        - name: fileSystemName
+          in: path
+          required: true
+          description: Name of the File System resource
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Azure operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiftrBase.Storage.FileSystemResource'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.ResourceManager.ErrorResponse'
+    put:
+      tags:
+        - FileSystemResources
+      operationId: FileSystems_CreateOrUpdate
+      description: Create a FileSystemResource
+      parameters:
+        - $ref: '#/components/parameters/Azure.ResourceManager.ApiVersionParameter'
+        - $ref: '#/components/parameters/Azure.ResourceManager.SubscriptionIdParameter'
+        - $ref: '#/components/parameters/Azure.ResourceManager.ResourceGroupParameter'
+        - name: fileSystemName
+          in: path
+          required: true
+          description: Name of the File System resource
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Resource 'FileSystemResource' update operation succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiftrBase.Storage.FileSystemResource'
+        '201':
+          description: Resource 'FileSystemResource' create operation succeeded
+          headers:
+            Retry-After:
+              required: false
+              description: The Retry-After header can indicate how long the client should wait before polling the operation status.
+              schema:
+                type: integer
+                format: int32
+            Azure-AsyncOperation:
+              required: false
+              description: A link to the status monitor
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiftrBase.Storage.FileSystemResource'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.ResourceManager.ErrorResponse'
+      requestBody:
+        description: Resource create parameters.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LiftrBase.Storage.FileSystemResource'
+      x-ms-long-running-operation-options:
+        final-state-via: azure-async-operation
+      x-ms-long-running-operation: true
+    patch:
+      tags:
+        - FileSystemResources
+      operationId: FileSystems_Update
+      description: Update a FileSystemResource
+      parameters:
+        - $ref: '#/components/parameters/Azure.ResourceManager.ApiVersionParameter'
+        - $ref: '#/components/parameters/Azure.ResourceManager.SubscriptionIdParameter'
+        - $ref: '#/components/parameters/Azure.ResourceManager.ResourceGroupParameter'
+        - name: fileSystemName
+          in: path
+          required: true
+          description: Name of the File System resource
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Azure operation completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiftrBase.Storage.FileSystemResource'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.ResourceManager.ErrorResponse'
+      requestBody:
+        description: The resource properties to be updated.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LiftrBase.Storage.FileSystemResourceUpdate'
+    delete:
+      tags:
+        - FileSystemResources
+      operationId: FileSystems_Delete
+      description: Delete a FileSystemResource
+      parameters:
+        - $ref: '#/components/parameters/Azure.ResourceManager.ApiVersionParameter'
+        - $ref: '#/components/parameters/Azure.ResourceManager.SubscriptionIdParameter'
+        - $ref: '#/components/parameters/Azure.ResourceManager.ResourceGroupParameter'
+        - name: fileSystemName
+          in: path
+          required: true
+          description: Name of the File System resource
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Resource deleted successfully.
+        '202':
+          description: Resource deletion accepted.
+          headers:
+            Retry-After:
+              required: false
+              description: The Retry-After header can indicate how long the client should wait before polling the operation status.
+              schema:
+                type: integer
+                format: int32
+            Azure-AsyncOperation:
+              required: false
+              description: A link to the status monitor
+              schema:
+                type: string
+        '204':
+          description: Resource does not exist.
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.ResourceManager.ErrorResponse'
+      x-ms-long-running-operation-options:
+        final-state-via: location
+      x-ms-long-running-operation: true
+security:
+  - azure_auth:
+      - user_impersonation
+components:
+  parameters:
+    Azure.ResourceManager.ApiVersionParameter:
+      name: api-version
+      in: query
+      required: true
+      description: The API version to use for this operation.
+      schema:
+        type: string
+        minLength: 1
+    Azure.ResourceManager.ResourceGroupParameter:
+      name: resourceGroupName
+      in: path
+      required: true
+      description: The name of the resource group. The name is case insensitive.
+      schema:
+        type: string
+        pattern: ^[-\w\._\(\)]+$
+        minLength: 1
+        maxLength: 90
+    Azure.ResourceManager.SubscriptionIdParameter:
+      name: subscriptionId
+      in: path
+      required: true
+      description: The ID of the target subscription.
+      schema:
+        type: string
+        minLength: 1
+  schemas:
+    Azure.ResourceManager.ErrorResponse:
+      type: object
+      properties:
+        value:
+          error:
+            value:
+              allOf:
+                - $ref: '#/components/schemas/Azure.ResourceManager.Foundations.ErrorDetail'
+              description: The error object.
+            kind: code
+        kind: code
+      description: Common error response for all Azure Resource Manager APIs to return error details for failed operations.
+    Azure.ResourceManager.Foundations.ActionType:
+      type: string
+      enum:
+        - Internal
+      description: Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
+    Azure.ResourceManager.Foundations.ArmResource:
+      type: object
+      required:
+        - id
+        - type
+      properties:
+        value:
+          id:
+            value:
+              type: string
+              description: Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+              readOnly: true
+            kind: code
+          type:
+            value:
+              type: string
+              description: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
+              readOnly: true
+            kind: code
+          systemData:
+            value:
+              allOf:
+                - $ref: '#/components/schemas/Azure.ResourceManager.Foundations.SystemData'
+              description: Azure Resource Manager metadata containing createdBy and modifiedBy information.
+              readOnly: true
+            kind: code
+        kind: code
+      allOf:
+        - value:
+            $ref: '#/components/schemas/Azure.ResourceManager.Foundations.ArmResourceBase'
+          kind: code
+      description: Common properties for all Azure Resource Manager resources.
+    Azure.ResourceManager.Foundations.ArmResourceBase:
+      type: object
+      properties:
+        kind: none
+      description: Base class used for type definitions
+    Azure.ResourceManager.Foundations.ErrorAdditionalInfo:
+      type: object
+      properties:
+        value:
+          type:
+            value:
+              type: string
+              description: The additional info type.
+              readOnly: true
+            kind: code
+          info:
+            value:
+              type: object
+              properties:
+                kind: none
+              description: The additional info.
+              readOnly: true
+            kind: code
+        kind: code
+      description: The resource management error additional info.
+    Azure.ResourceManager.Foundations.ErrorDetail:
+      type: object
+      properties:
+        value:
+          code:
+            value:
+              type: string
+              description: The error code.
+              readOnly: true
+            kind: code
+          message:
+            value:
+              type: string
+              description: The error message.
+              readOnly: true
+            kind: code
+          target:
+            value:
+              type: string
+              description: The error target.
+              readOnly: true
+            kind: code
+          details:
+            value:
+              type: array
+              items:
+                value:
+                  $ref: '#/components/schemas/Azure.ResourceManager.Foundations.ErrorDetail'
+                kind: code
+              description: The error details.
+              x-ms-identifiers:
+                - message
+                - target
+              readOnly: true
+            kind: code
+          additionalInfo:
+            value:
+              type: array
+              items:
+                value:
+                  $ref: '#/components/schemas/Azure.ResourceManager.Foundations.ErrorAdditionalInfo'
+                kind: code
+              description: The error additional info.
+              x-ms-identifiers:
+                - message
+                - target
+              readOnly: true
+            kind: code
+        kind: code
+      description: The error detail.
+    Azure.ResourceManager.Foundations.ExtensionResourceBase:
+      type: object
+      properties:
+        kind: none
+      allOf:
+        - value:
+            $ref: '#/components/schemas/Azure.ResourceManager.Foundations.ArmResource'
+          kind: code
+      description: The base extension resource.
+    Azure.ResourceManager.Foundations.ManagedIdentityProperties:
+      type: object
+      required:
+        - type
+      properties:
+        value:
+          tenantId:
+            value:
+              type: string
+              description: The Active Directory tenant id of the principal.
+              readOnly: true
+            kind: code
+          principalId:
+            value:
+              type: string
+              description: The active directory identifier of this principal.
+              readOnly: true
+            kind: code
+          type:
+            value:
+              allOf:
+                - $ref: '#/components/schemas/Azure.ResourceManager.Foundations.ManagedIdentityType'
+              description: The type of managed identity assigned to this resource.
+            kind: code
+          userAssignedIdentities:
+            value:
+              type: object
+              properties:
+                kind: none
+              additionalProperties:
+                value:
+                  $ref: '#/components/schemas/Azure.ResourceManager.Foundations.UserAssignedIdentity'
+                kind: code
+              description: The identities assigned to this resource by the user.
+            kind: code
+        kind: code
+      description: The properties of the managed service identities assigned to this resource.
+    Azure.ResourceManager.Foundations.ManagedIdentityType:
+      type: string
+      enum:
+        - None
+        - SystemAssigned
+        - UserAssigned
+        - SystemAssigned, UserAssigned
+      description: The kind of managed identity assigned to this resource.
+    Azure.ResourceManager.Foundations.Operation:
+      type: object
+      properties:
+        value:
+          name:
+            value:
+              type: string
+              description: 'The name of the operation, as per Resource-Based Access Control (RBAC). Examples: "Microsoft.Compute/virtualMachines/write", "Microsoft.Compute/virtualMachines/capture/action"'
+              readOnly: true
+            kind: code
+          isDataAction:
+            value:
+              type: boolean
+              description: Whether the operation applies to data-plane. This is "true" for data-plane operations and "false" for Azure Resource Manager/control-plane operations.
+              readOnly: true
+            kind: code
+          display:
+            value:
+              allOf:
+                - $ref: '#/components/schemas/Azure.ResourceManager.Foundations.OperationDisplay'
+              description: Localized display information for this particular operation.
+            kind: code
+          origin:
+            value:
+              allOf:
+                - $ref: '#/components/schemas/Azure.ResourceManager.Foundations.Origin'
+              description: The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is "user,system"
+              readOnly: true
+            kind: code
+          actionType:
+            value:
+              allOf:
+                - $ref: '#/components/schemas/Azure.ResourceManager.Foundations.ActionType'
+              description: Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
+            kind: code
+        kind: code
+      description: Details of a REST API operation, returned from the Resource Provider Operations API
+    Azure.ResourceManager.Foundations.OperationDisplay:
+      type: object
+      properties:
+        value:
+          provider:
+            value:
+              type: string
+              description: The localized friendly form of the resource provider name, e.g. "Microsoft Monitoring Insights" or "Microsoft Compute".
+            kind: code
+          resource:
+            value:
+              type: string
+              description: The localized friendly name of the resource type related to this operation. E.g. "Virtual Machines" or "Job Schedule Collections".
+            kind: code
+          operation:
+            value:
+              type: string
+              description: The concise, localized friendly name for the operation; suitable for dropdowns. E.g. "Create or Update Virtual Machine", "Restart Virtual Machine".
+            kind: code
+          description:
+            value:
+              type: string
+              description: The short, localized friendly description of the operation; suitable for tool tips and detailed views.
+            kind: code
+        kind: code
+      description: Localized display information for and operation.
+    Azure.ResourceManager.Foundations.Origin:
+      type: string
+      enum:
+        - user
+        - system
+        - user,system
+      description: The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is "user,system"
+    Azure.ResourceManager.Foundations.ProxyResourceBase:
+      type: object
+      properties:
+        kind: none
+      allOf:
+        - value:
+            $ref: '#/components/schemas/Azure.ResourceManager.Foundations.ArmResource'
+          kind: code
+      description: The base proxy resource.
+    Azure.ResourceManager.Foundations.SystemData:
+      type: object
+      properties:
+        value:
+          createdBy:
+            value:
+              type: string
+              description: The identity that created the resource.
+              readOnly: true
+            kind: code
+          createdByType:
+            value:
+              allOf:
+                - $ref: '#/components/schemas/Azure.ResourceManager.Foundations.createdByType'
+              description: The type of identity that created the resource.
+              readOnly: true
+            kind: code
+          createdAt:
+            value:
+              type: string
+              format: date
+              description: The type of identity that created the resource.
+              readOnly: true
+            kind: code
+          lastModifiedBy:
+            value:
+              type: string
+              description: The identity that last modified the resource.
+              readOnly: true
+            kind: code
+          lastModifiedByType:
+            value:
+              allOf:
+                - $ref: '#/components/schemas/Azure.ResourceManager.Foundations.createdByType'
+              description: The type of identity that last modified the resource.
+              readOnly: true
+            kind: code
+          lastModifiedAt:
+            value:
+              type: string
+              format: date
+              description: The timestamp of resource last modification (UTC)
+              readOnly: true
+            kind: code
+        kind: code
+      description: Metadata pertaining to creation and last modification of the resource.
+    Azure.ResourceManager.Foundations.TrackedResourceBase:
+      type: object
+      required:
+        - location
+      properties:
+        value:
+          location:
+            value:
+              type: string
+              description: The geo-location where the resource lives
+            kind: code
+          tags:
+            value:
+              type: object
+              properties:
+                kind: none
+              additionalProperties:
+                value:
+                  type: string
+                kind: code
+              description: Resource tags.
+            kind: code
+        kind: code
+      allOf:
+        - value:
+            $ref: '#/components/schemas/Azure.ResourceManager.Foundations.ArmResource'
+          kind: code
+      description: The resource model definition for an Azure Resource Manager tracked top level resource
+    Azure.ResourceManager.Foundations.UserAssignedIdentity:
+      type: object
+      properties:
+        value:
+          clientId:
+            value:
+              type: string
+              description: The active directory client identifier for this principal.
+            kind: code
+          principalId:
+            value:
+              type: string
+              description: The active directory identifier for this principal.
+            kind: code
+        kind: code
+      description: A managed identity assigned by the user.
+    Azure.ResourceManager.Foundations.createdByType:
+      type: string
+      enum:
+        - User
+        - Application
+        - ManagedIdentity
+        - Key
+      description: The kind of entity that created the resource.
+    Azure.ResourceManager.ManagedServiceIdentity:
+      type: object
+      properties:
+        value:
+          identity:
+            value:
+              allOf:
+                - $ref: '#/components/schemas/Azure.ResourceManager.Foundations.ManagedIdentityProperties'
+              description: The managed service identities assigned to this resource.
+            kind: code
+        kind: code
+      description: The managed service identities envelope.
+    Azure.ResourceManager.PrivateEndpoint:
+      type: object
+      properties:
+        value:
+          id:
+            value:
+              type: string
+              format: arm-id
+              description: The resource identifier for private endpoint
+              x-ms-arm-id-details:
+                allowedResources:
+                  - type: Microsoft.Network/privateEndpoints
+            kind: code
+        kind: code
+      description: The private endpoint resource
+    Azure.ResourceManager.PrivateEndpointConnection:
+      type: object
+      properties:
+        value:
+          properties:
+            value:
+              allOf:
+                - $ref: '#/components/schemas/Azure.ResourceManager.PrivateEndpointConnectionProperties'
+              description: The private endpoint connection properties
+            kind: code
+        kind: code
+      allOf:
+        - value:
+            $ref: '#/components/schemas/Azure.ResourceManager.Foundations.ProxyResourceBase'
+          kind: code
+      description: The private endpoint connection resource
+    Azure.ResourceManager.PrivateEndpointConnectionProperties:
+      type: object
+      required:
+        - privateLinkServiceConnectionState
+      properties:
+        value:
+          groupIds:
+            value:
+              type: array
+              items:
+                value:
+                  type: string
+                kind: code
+              description: The group identifiers for the private endpoint resource
+              readOnly: true
+            kind: code
+          privateEndpoint:
+            value:
+              allOf:
+                - $ref: '#/components/schemas/Azure.ResourceManager.PrivateEndpoint'
+              description: The private endpoint resource
+            kind: code
+          privateLinkServiceConnectionState:
+            value:
+              allOf:
+                - $ref: '#/components/schemas/Azure.ResourceManager.PrivateLinkServiceConnectionState'
+              description: A collection of information about the state of the connection between service consumer and provider.
+            kind: code
+          provisioningState:
+            value:
+              allOf:
+                - $ref: '#/components/schemas/Azure.ResourceManager.PrivateEndpointConnectionProvisioningState'
+              description: The provisioning state of the private endpoint connection resource.
+            kind: code
+        kind: code
+      description: Properties of he private endpoint connection resource
+    Azure.ResourceManager.PrivateEndpointConnectionProvisioningState:
+      type: string
+      enum:
+        - Succeeded
+        - Failed
+        - Canceled
+        - Creating
+        - Deleting
+      description: The provisioning state of the connection
+    Azure.ResourceManager.PrivateEndpointServiceConnectionStatus:
+      type: string
+      enum:
+        - Pending
+        - Approved
+        - Rejected
+      description: The private endpoint connection status
+    Azure.ResourceManager.PrivateLinkResource:
+      type: object
+      properties:
+        value:
+          properties:
+            value:
+              allOf:
+                - $ref: '#/components/schemas/Azure.ResourceManager.PrivateLinkResourceProperties'
+              description: Properties of the private link resource.
+            kind: code
+        kind: code
+      allOf:
+        - value:
+            $ref: '#/components/schemas/Azure.ResourceManager.Foundations.ProxyResourceBase'
+          kind: code
+    Azure.ResourceManager.PrivateLinkResourceProperties:
+      type: object
+      properties:
+        value:
+          groupId:
+            value:
+              type: string
+              description: The private link resource group id.
+              readOnly: true
+            kind: code
+          requiredMembers:
+            value:
+              type: array
+              items:
+                value:
+                  type: string
+                kind: code
+              description: The private link resource required member names.
+              readOnly: true
+            kind: code
+          requiredZoneNames:
+            value:
+              type: array
+              items:
+                value:
+                  type: string
+                kind: code
+              description: The private link resource private link DNS zone name.
+            kind: code
+        kind: code
+      description: Properties of a private link resource.
+    Azure.ResourceManager.PrivateLinkServiceConnectionState:
+      type: object
+      properties:
+        value:
+          status:
+            value:
+              allOf:
+                - $ref: '#/components/schemas/Azure.ResourceManager.PrivateEndpointServiceConnectionStatus'
+              description: Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service.
+            kind: code
+          description:
+            value:
+              type: string
+              description: The reason for approval/rejection of the connection.
+            kind: code
+          actionsRequired:
+            value:
+              type: string
+              description: A message indicating if changes on the service provider require any updates on the consumer.
+            kind: code
+        kind: code
+      description: A collection of information about the state of the connection between service consumer and provider.
+    FileSystemResourceListResult:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          value:
+            value:
+              type: array
+              items:
+                value:
+                  $ref: '#/components/schemas/LiftrBase.Storage.FileSystemResource'
+                kind: code
+              description: The FileSystemResource items on this page
+            kind: code
+          nextLink:
+            value:
+              type: string
+              format: uri
+              description: The link to the next page of items
+            kind: code
+        kind: code
+      description: The response of a FileSystemResource list operation.
+    LiftrBase.MarketplaceDetails:
+      type: object
+      required:
+        - planId
+        - offerId
+      properties:
+        value:
+          marketplaceSubscriptionId:
+            value:
+              type: string
+              description: Marketplace Subscription Id
+            kind: code
+          planId:
+            value:
+              type: string
+              description: Plan Id
+            kind: code
+          offerId:
+            value:
+              type: string
+              description: Offer Id
+            kind: code
+          publisherId:
+            value:
+              type: string
+              description: Publisher Id
+            kind: code
+          termUnit:
+            value:
+              type: string
+              description: Term Unit
+            kind: code
+          marketplaceSubscriptionStatus:
+            value:
+              allOf:
+                - $ref: '#/components/schemas/LiftrBase.MarketplaceSubscriptionStatus'
+              description: Marketplace subscription status
+              readOnly: true
+            kind: code
+        kind: code
+      description: MarketplaceDetails of Qumulo FileSystem resource
+    LiftrBase.MarketplaceSubscriptionStatus:
+      type: string
+      enum:
+        - PendingFulfillmentStart
+        - Subscribed
+        - Suspended
+        - Unsubscribed
+      description: Marketplace subscription status of the file system resource
+    LiftrBase.Storage.FileSystemResource:
+      type: object
+      properties:
+        value:
+          identity:
+            value:
+              allOf:
+                - $ref: '#/components/schemas/Azure.ResourceManager.Foundations.ManagedIdentityProperties'
+              description: The managed service identities assigned to this resource.
+            kind: code
+        kind: code
+      allOf:
+        - value:
+            $ref: '#/components/schemas/Azure.ResourceManager.Foundations.TrackedResourceBase'
+          kind: code
+    LiftrBase.Storage.FileSystemResourceUpdate:
+      type: object
+      properties:
+        value:
+          identity:
+            value:
+              allOf:
+                - $ref: '#/components/schemas/Azure.ResourceManager.ManagedServiceIdentity'
+              description: The managed service identities assigned to this resource.
+            kind: code
+          tags:
+            value:
+              type: object
+              properties:
+                kind: none
+              additionalProperties:
+                value:
+                  type: string
+                kind: code
+              description: Resource tags.
+            kind: code
+          properties:
+            value:
+              allOf:
+                - $ref: '#/components/schemas/LiftrBase.Storage.FileSystemResourceUpdateProperties'
+              description: The updatable properties of the FileSystemResource.
+            kind: code
+        kind: code
+      description: The type used for update operations of the FileSystemResource.
+    LiftrBase.Storage.FileSystemResourceUpdateProperties:
+      type: object
+      properties:
+        value:
+          marketplaceDetails:
+            value:
+              allOf:
+                - $ref: '#/components/schemas/LiftrBase.MarketplaceDetails'
+              description: Marketplace details
+            kind: code
+          userDetails:
+            value:
+              allOf:
+                - $ref: '#/components/schemas/LiftrBase.UserDetails'
+              description: User Details
+            kind: code
+          delegatedSubnetId:
+            value:
+              type: string
+              description: Delegated subnet id for Vnet injection
+            kind: code
+          fsGBpsProvisioned:
+            value:
+              type: integer
+              format: int32
+              description: GBs per second provisioned
+            kind: code
+        kind: code
+      description: The updatable properties of the FileSystemResource.
+    LiftrBase.UserDetails:
+      type: object
+      required:
+        - email
+      properties:
+        value:
+          email:
+            value:
+              type: string
+              description: User Email
+            kind: code
+        kind: code
+      description: User Details of Qumulo FileSystem resource
+    PagedOperation:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          value:
+            value:
+              type: array
+              items:
+                value:
+                  $ref: '#/components/schemas/Azure.ResourceManager.Foundations.Operation'
+                kind: code
+              description: The Operation items on this page
+            kind: code
+          nextLink:
+            value:
+              type: string
+              format: uri
+              description: The link to the next page of items
+            kind: code
+        kind: code
+      description: A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
+    Versions:
+      type: string
+      enum:
+        - 2024-02-01-preview
+      description: The available API versions.
+  securitySchemes:
+    azure_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://login.microsoftonline.com/common/oauth2/authorize
+          scopes:
+            user_impersonation: impersonate your user account
+      description: Azure Active Directory OAuth2 Flow.
+servers:
+  - url: https://management.azure.com
+    description: Azure Resource Manager url.
+    variables: {}
