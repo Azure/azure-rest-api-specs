@@ -2109,6 +2109,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/listsecrets": {
+      "post": {
+        "tags": [
+          "V2WorkspaceConnectionResource"
+        ],
+        "summary": "List all the secrets of a machine learning workspaces connections.",
+        "operationId": "WorkspaceConnections_ListSecrets",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceConnectionPropertiesV2BasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetWorkspaceConnection": {
+            "$ref": "./examples/WorkspaceConnection/listSecrets.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/models": {
       "get": {
         "tags": [
@@ -7185,6 +7233,11 @@
         },
         "password": {
           "type": "string"
+        },
+        "securityToken": {
+          "description": "Optional, required by connections like SalesForce for extra security in addition to UsernamePassword",
+          "type": "string",
+          "x-ms-secret": true
         }
       },
       "additionalProperties": false
