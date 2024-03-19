@@ -87,7 +87,7 @@ enum PublicStatusKind {
  * The extension version source kind.
  */
 enum ExtensionVersionSourceKind {
-  @doc("The build artifcat zip uri of the extension version.")
+  @doc("The build artifact zip uri of the extension version.")
   BuildArtifactZipUri,
 }
 
@@ -106,7 +106,7 @@ enum DeploymentSourceKind {
  * The kind of alteration.
  */
 enum AlterKind {
-  @doc("The kind of alteration is wrtie")
+  @doc("The kind of alteration is write")
   Write,
 
   @doc("The kind of alteration is delete")
@@ -638,7 +638,7 @@ model PortalTenantCompileFileProperties {
 model PortalTenantCompileFileResult is Record<unknown>;
 
 /**
- * The extenson list source SVG.
+ * The extension list source SVG.
  */
 model PortalExtensionListSourcesSvgFile extends PortalExtensionListSourcesFile {
   /**

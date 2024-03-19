@@ -265,6 +265,7 @@ model Actions {
   onClick?: ActionsOnClick;
 
   @doc("Actions available on the tile on footer.")
+  @extension("x-ms-identifiers", [])
   footer?: ActionReference[];
 
   @doc("Actions available on the tile on context menu.")
