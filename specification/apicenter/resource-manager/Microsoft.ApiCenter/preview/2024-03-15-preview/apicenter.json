@@ -46,6 +46,9 @@
       "name": "Services"
     },
     {
+      "name": "DeletedServices"
+    },
+    {
       "name": "MetadataSchemas"
     },
     {
@@ -140,6 +143,153 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/deletedServices": {
+      "get": {
+        "operationId": "DeletedServices_List",
+        "tags": [
+          "DeletedServices"
+        ],
+        "description": "Returns a collection of soft-deleted services.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OdataFilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeletedServiceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeletedServices_List": {
+            "$ref": "./examples/DeletedServices_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiCenter/deletedServices/{deletedServiceName}": {
+      "get": {
+        "operationId": "DeletedServices_Get",
+        "tags": [
+          "DeletedServices"
+        ],
+        "description": "Returns details of the soft-deleted service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "deletedServiceName",
+            "in": "path",
+            "description": "The name of the deleted service.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeletedService"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The entity tag for the response."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeletedServices_Get": {
+            "$ref": "./examples/DeletedServices_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeletedServices_Delete",
+        "tags": [
+          "DeletedServices"
+        ],
+        "description": "Permanently deletes specified service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "deletedServiceName",
+            "in": "path",
+            "description": "The name of the deleted service.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[a-zA-Z0-9-]{3,90}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeletedServices_Delete": {
+            "$ref": "./examples/DeletedServices_Delete.json"
+          }
         }
       }
     },
@@ -3839,6 +3989,65 @@
       "type": "object",
       "description": "The custom metadata defined for API catalog entities."
     },
+    "DeletedService": {
+      "type": "object",
+      "description": "Soft-deleted service entity.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeletedServiceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DeletedServiceListResult": {
+      "type": "object",
+      "description": "The response of a DeletedService list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeletedService items on this page",
+          "items": {
+            "$ref": "#/definitions/DeletedService"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DeletedServiceProperties": {
+      "type": "object",
+      "description": "Deleted service properties.",
+      "properties": {
+        "expiresOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC date and time when the service will be automatically purged. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard."
+        },
+        "deletedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC date and time when the service was soft-deleted. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard."
+        }
+      }
+    },
     "Deployment": {
       "type": "object",
       "description": "API deployment entity.",
@@ -4620,7 +4829,7 @@
       "type": "string",
       "description": "The available API versions.",
       "enum": [
-        "2024-03-15-preview"
+        "2024-03-01"
       ],
       "x-ms-enum": {
         "name": "Versions",
@@ -4628,7 +4837,7 @@
         "values": [
           {
             "name": "v2024_03_01",
-            "value": "2024-03-15-preview",
+            "value": "2024-03-01",
             "description": "The initial service version"
           }
         ]
