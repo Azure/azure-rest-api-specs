@@ -83,7 +83,7 @@
       "name": "ofs",
       "in": "query",
       "x-ms-client-name": "skip",
-      "description": "Starting offset of the returned results within the full result set. Default: 0, minimum: 0 and maximum: 1900",
+      "description": "Starting offset of the returned results within the full result set. Default: 0",
       "type": "integer",
       "minimum": 0,
       "maximum": 1900,
@@ -2393,6 +2393,11 @@
           "type": "string",
           "readOnly": true
         },
+        "neighbourhood": {
+          "description": "A Neighbourhood is a geographically localized area within a city or town with distinctive characteristics and social interactions between inhabitants.",
+          "type": "string",
+          "readOnly": true
+        },
         "municipality": {
           "description": "City / Town <BR>Note:  `municipality` represents the residential municipality. Depending on the location, the `municipality` value may differ from the commonly known name of a city or town. For the commonly known name of the city or town, it’s suggested that the `localName` value be used instead of the `municipality` value.",
           "type": "string",
@@ -2403,6 +2408,16 @@
           "type": "string",
           "readOnly": true
         },
+        "countrySubdivision": {
+          "description": "State or Province",
+          "type": "string",
+          "readOnly": true
+        },
+        "countrySubdivisionCode": {
+          "description": "`countrySubdivisionCode` prefixed by `countryCode` ( countryCode-countrySubdivisionCode ) and the hyphen forms the ISO 3166-2 code. Examples: TX for Texas, SCT for Scotland and ON for Ontario.",
+          "type": "string",
+          "readOnly": true
+        },
         "countryTertiarySubdivision": {
           "description": "Named Area",
           "type": "string",
@@ -2410,11 +2425,6 @@
         },
         "countrySecondarySubdivision": {
           "description": "County",
-          "type": "string",
-          "readOnly": true
-        },
-        "countrySubdivision": {
-          "description": "State or Province",
           "type": "string",
           "readOnly": true
         },
