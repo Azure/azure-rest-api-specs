@@ -640,6 +640,196 @@
         "enabled": {
           "type": "boolean",
           "description": "Indicates if migration assessment is enabled for this SQL Server instance."
+        },
+        "assessmentUploadTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when Migration Assessment Report upload was last performed.",
+          "readOnly": true
+        },
+        "skuRecommendationResults": {
+          "$ref": "#/definitions/SkuRecommendationResults"
+        }
+      }
+    },
+    "SkuRecommendationResults": {
+      "description": "SKU Recommendation results for Azure migration targets for SQL Server.",
+      "readOnly": true,
+      "type": "object",
+      "properties": {
+        "azureSqlDatabase": {
+          "$ref": "#/definitions/SkuRecommendationResultsAzureSqlDatabase"
+        },
+        "azureSqlManagedInstance": {
+          "$ref": "#/definitions/SkuRecommendationResultsAzureSqlManagedInstance"
+        },
+        "azureSqlVirtualMachine": {
+          "$ref": "#/definitions/SkuRecommendationResultsAzureSqlVirtualMachine"
+        }
+      }
+    },
+    "SkuRecommendationResultsAzureSqlDatabase": {
+      "description": "SKU Recommendation results for Azure SQL Database.",
+      "type": "object",
+      "properties": {
+        "recommendationStatus": {
+          "$ref": "#/definitions/SkuRecommendationResultsRecommendationStatus"
+        },
+        "numberOfServerBlockerIssues": {
+          "$ref": "#/definitions/SkuRecommendationResultsNumberOfServerBlockerIssues"
+        },
+        "monthlyCost": {
+          "$ref": "#/definitions/SkuRecommendationResultsMonthlyCost"
+        },
+        "targetSku": {
+          "type": "object",
+          "properties": {
+            "category": {
+              "type": "object",
+              "properties": {
+                "computeTier": {
+                  "type": "string",
+                  "description": "The compute tier of the target SKU."
+                },
+                "hardwareType": {
+                  "type": "string",
+                  "description": "The hardware type of the target SKU."
+                },
+                "sqlPurchasingModel": {
+                  "type": "string",
+                  "description": "The SQL purchasing model of the target SKU."
+                },
+                "sqlServiceTier": {
+                  "type": "string",
+                  "description": "The SQL service tier of the target SKU."
+                },
+                "zoneRedundancyAvailable": {
+                  "type": "boolean",
+                  "description": "Indicates if zone redundancy is available for the target SKU."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "SkuRecommendationResultsAzureSqlManagedInstance": {
+      "description": "SKU Recommendation results for Azure SQL Managed Instance.",
+      "type": "object",
+      "properties": {
+        "recommendationStatus": {
+          "$ref": "#/definitions/SkuRecommendationResultsRecommendationStatus"
+        },
+        "numberOfServerBlockerIssues": {
+          "$ref": "#/definitions/SkuRecommendationResultsNumberOfServerBlockerIssues"
+        },
+        "monthlyCost": {
+          "$ref": "#/definitions/SkuRecommendationResultsMonthlyCost"
+        },
+        "targetSku": {
+          "type": "object",
+          "properties": {
+            "category": {
+              "type": "object",
+              "properties": {
+                "computeTier": {
+                  "type": "string",
+                  "description": "The compute tier of the target SKU."
+                },
+                "hardwareType": {
+                  "type": "string",
+                  "description": "The hardware type of the target SKU."
+                },
+                "sqlPurchasingModel": {
+                  "type": "string",
+                  "description": "The SQL purchasing model of the target SKU."
+                },
+                "sqlServiceTier": {
+                  "type": "string",
+                  "description": "The SQL service tier of the target SKU."
+                },
+                "zoneRedundancyAvailable": {
+                  "type": "boolean",
+                  "description": "Indicates if zone redundancy is available for the target SKU."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "SkuRecommendationResultsAzureSqlVirtualMachine": {
+      "description": "SKU Recommendation results for Azure SQL Virtual Machine.",
+      "type": "object",
+      "properties": {
+        "recommendationStatus": {
+          "$ref": "#/definitions/SkuRecommendationResultsRecommendationStatus"
+        },
+        "numberOfServerBlockerIssues": {
+          "$ref": "#/definitions/SkuRecommendationResultsNumberOfServerBlockerIssues"
+        },
+        "monthlyCost": {
+          "$ref": "#/definitions/SkuRecommendationResultsMonthlyCost"
+        },
+        "targetSku": {
+          "type": "object",
+          "properties": {
+            "category": {
+              "type": "object",
+              "properties": {
+                "availableVmSkus": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Available VM SKUs for the Azure SQL Virtual Machine."
+                },
+                "virtualMachineFamily": {
+                  "type": "string",
+                  "description": "The virtual machine family of the target SKU."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "SkuRecommendationResultsRecommendationStatus": {
+      "description": "The target recommendation Status.",
+      "type": "string",
+      "enum": [
+        "NotReady",
+        "Ready",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "recommendationStatus",
+        "modelAsString": true
+      }
+    },
+    "SkuRecommendationResultsNumberOfServerBlockerIssues": {
+      "description": "Number of blocker issues to fix before migrating to the target platform.",
+      "type": "integer",
+      "format": "int32"
+    },
+    "SkuRecommendationResultsMonthlyCost": {
+      "description": "The Monthly cost of the particular SKU.",
+      "type": "object",
+      "properties": {
+        "computeCost": {
+          "format": "float",
+          "description": "Represents the Cost of Compute.",
+          "type": "number"
+        },
+        "storageCost": {
+          "format": "float",
+          "description": "Represents the Cost of Storage.",
+          "type": "number"
+        },
+        "totalCost": {
+          "format": "float",
+          "description": "Represents the Total Cost.",
+          "type": "number"
         }
       }
     },
