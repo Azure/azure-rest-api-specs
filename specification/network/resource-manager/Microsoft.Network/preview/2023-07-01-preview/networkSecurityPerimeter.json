@@ -1263,6 +1263,11 @@
           "$ref": "#/definitions/NetworkSecurityPerimeterProperties",
           "description": "The network security perimeter properties"
         },
+        "systemData": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NspSystemData",
+          "description": "System data of the network security perimeter."
+        },
         "location": {
           "type": "string",
           "description": "The location in which NSP is created."
@@ -1348,6 +1353,11 @@
           "$ref": "#/definitions/NspProfileProperties",
           "description": "Properties of the network security perimeter profile"
         },
+        "systemData": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NspSystemData",
+          "description": "System data of the network security perimeter."
+        },
         "name": {
           "type": "string",
           "description": "The name of the profile resource that is unique within a perimeter. This name can be used to access the resource."
@@ -1410,6 +1420,11 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/NspAccessRuleProperties",
           "description": "Properties of the NSP access rule."
+        },
+        "systemData": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NspSystemData",
+          "description": "System data of the network security perimeter."
         },
         "name": {
           "type": "string",
@@ -1554,6 +1569,11 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/NspAssociationProperties",
           "description": "Properties of the NSP resource association."
+        },
+        "systemData": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NspSystemData",
+          "description": "System data of the network security perimeter."
         },
         "name": {
           "type": "string",
@@ -1753,6 +1773,11 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/NspLinkProperties",
           "description": "Properties of the network security perimeter link resource."
+        },
+        "systemData": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NspSystemData",
+          "description": "System data of the network security perimeter."
         }
       },
       "allOf": [
@@ -1868,6 +1893,11 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/NspLinkReferenceProperties",
           "description": "Properties of the network security perimeter linkReference resource."
+        },
+        "systemData": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NspSystemData",
+          "description": "System data of the network security perimeter."
         }
       },
       "allOf": [
@@ -1971,6 +2001,58 @@
         }
       },
       "description": "Properties of NSP LinkReference resource."
+    },
+    "NspSystemData": {
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "description": "A string identifier for the identity that created the resource."
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource: User, Application, ManagedIdentity or Key.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "systemData",
+            "modelAsString": true
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource creation (UTC)."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "A string identifier for the identity that last modified the resource."
+        },
+        "lastModifiedByType": {
+          "type": "string",
+          "description": "The type of identity that last modified the resource: User, Application, ManagedIdentity or Key.",
+          "enum": [
+            "User",
+            "Application",
+            "ManagedIdentity",
+            "Key"
+          ],
+          "x-ms-enum": {
+            "name": "systemData",
+            "modelAsString": true
+          }
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)."
+        }
+      },
+      "description": "System data object structure."
     }
   },
   "parameters": {
