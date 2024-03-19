@@ -3411,7 +3411,7 @@
           "readOnly": true
         },
         "reservationOrderTerm": {
-          "description": "Term period of the reservation, ex: P1Y or P3Y.",
+          "description": "Term period of the reservation. Will be in ISO 8601 Duration format. ex: P1M, P1Y or P3Y.",
           "type": "string",
           "readOnly": true
         },
@@ -3575,7 +3575,7 @@
           "readOnly": true
         },
         "term": {
-          "description": "RI recommendations in one or three year terms.",
+          "description": "Term period of the reservation. Will be in ISO 8601 Duration format. ex: P1M, P1Y or P3Y.",
           "type": "string",
           "readOnly": true
         },
@@ -3735,7 +3735,7 @@
           "readOnly": true
         },
         "term": {
-          "description": "RI recommendations in one or three year terms.",
+          "description": "Term period of the reservation. Will be in ISO 8601 Duration format. ex: P1M, P1Y or P3Y.",
           "type": "string",
           "readOnly": true
         },
@@ -5980,32 +5980,12 @@
       "x-ms-parameter-location": "method"
     },
     "termParameter": {
-      "description": "Specify length of reservation recommendation term.",
-      "type": "string",
-      "in": "query",
-      "required": true,
       "name": "term",
-      "x-ms-parameter-location": "method",
-      "enum": [
-        "P1Y",
-        "P3Y"
-      ],
-      "x-ms-enum": {
-        "name": "term",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "P1Y",
-            "description": "1 year reservation term",
-            "name": "P1Y"
-          },
-          {
-            "value": "P3Y",
-            "description": "3 year reservation term",
-            "name": "P3Y"
-          }
-        ]
-      }
+      "in": "query",
+      "description": "Specify length of reservation recommendation term. Specify in ISO 8601 Duration. Allowed values: ['P1M', 'P1Y', 'P3Y']",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "regionParameter": {
       "name": "region",
