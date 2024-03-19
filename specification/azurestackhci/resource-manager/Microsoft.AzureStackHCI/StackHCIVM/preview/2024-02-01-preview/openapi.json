@@ -4502,7 +4502,7 @@
     },
     "IPConfiguration": {
       "type": "object",
-      "description": "InterfaceIPConfiguration iPConfiguration in a network interface.",
+      "description": "InterfaceIPConfiguration I  PConfiguration in a network interface.",
       "properties": {
         "name": {
           "type": "string",
@@ -4540,6 +4540,10 @@
         "subnet": {
           "$ref": "#/definitions/IPConfigurationPropertiesSubnet",
           "description": "Subnet - Name of Subnet bound to the IP configuration."
+        },
+        "networkSecurityGroup": {
+          "$ref": "#/definitions/NetworkSecurityGroup",
+          "description": "NetworkSecurityGroup - Network Security Group attached to the network interface."
         }
       }
     },
@@ -5078,10 +5082,6 @@
             "$ref": "#/definitions/IPConfiguration"
           },
           "x-ms-identifiers": []
-        },
-        "networkSecurityGroup": {
-          "$ref": "#/definitions/NetworkSecurityGroup",
-          "description": "NetworkSecurityGroup - Network Security Group attached to the network interface."
         },
         "macAddress": {
           "type": "string",
@@ -5795,11 +5795,6 @@
         "direction": {
           "$ref": "#/definitions/SecurityRuleDirection",
           "description": "The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningStateEnum",
-          "description": "Provisioning state of the virtual machine instance.",
-          "readOnly": true
         }
       },
       "required": [

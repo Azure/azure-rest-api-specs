@@ -19,12 +19,12 @@
               "properties": {
                 "description": "Allow inbound traffic from all VMs in VNET",
                 "access": "Allow",
-                "destinationAddressPrefix": "VirtualNetwork",
-                "destinationPortRange": "*",
+                "destinationAddressPrefixes": ["VirtualNetwork"],
+                "destinationPortRanges": ["*"],
                 "direction": "Inbound",
                 "priority": 65000,
-                "sourceAddressPrefix": "VirtualNetwork",
-                "sourcePortRange": "*",
+                "sourceAddressPrefixes": ["VirtualNetwork"],
+                "sourcePortRanges": ["*"],
                 "protocol": "*"
               }
             },
@@ -33,12 +33,12 @@
               "properties": {
                 "description": "Allow inbound traffic from azure load balancer",
                 "access": "Allow",
-                "destinationAddressPrefix": "*",
-                "destinationPortRange": "*",
+                "destinationAddressPrefixes": ["*"],
+                "destinationPortRanges": ["*"],
                 "direction": "Inbound",
                 "priority": 65001,
-                "sourceAddressPrefix": "AzureLoadBalancer",
-                "sourcePortRange": "*",
+                "sourceAddressPrefixes": ["AzureLoadBalancer"],
+                "sourcePortRanges": ["*"],
                 "protocol": "*"
               }
             },
@@ -47,12 +47,12 @@
               "properties": {
                 "description": "Deny all inbound traffic",
                 "access": "Deny",
-                "destinationAddressPrefix": "*",
-                "destinationPortRange": "*",
+                "destinationAddressPrefixes": ["*"],
+                "destinationPortRanges": ["*"],
                 "direction": "Inbound",
                 "priority": 65500,
-                "sourceAddressPrefix": "*",
-                "sourcePortRange": "*",
+                "sourceAddressPrefixes": ["*"],
+                "sourcePortRanges": ["*"],
                 "protocol": "*"
               }
             },
@@ -61,12 +61,12 @@
               "properties": {
                 "description": "Allow outbound traffic from all VMs to all VMs in VNET",
                 "access": "Allow",
-                "destinationAddressPrefix": "VirtualNetwork",
-                "destinationPortRange": "*",
+                "destinationAddressPrefixes": ["VirtualNetwork"],
+                "destinationPortRanges": ["*"],
                 "direction": "Outbound",
                 "priority": 65000,
-                "sourceAddressPrefix": "VirtualNetwork",
-                "sourcePortRange": "*",
+                "sourceAddressPrefixes": ["VirtualNetwork"],
+                "sourcePortRanges": ["*"],
                 "protocol": "*"
               }
             },
@@ -75,12 +75,12 @@
               "properties": {
                 "description": "Allow outbound traffic from all VMs to Internet",
                 "access": "Allow",
-                "destinationAddressPrefix": "Internet",
-                "destinationPortRange": "*",
+                "destinationAddressPrefixes": ["Internet"],
+                "destinationPortRanges": ["*"],
                 "direction": "Outbound",
                 "priority": 65001,
-                "sourceAddressPrefix": "*",
-                "sourcePortRange": "*",
+                "sourceAddressPrefixes": ["*"],
+                "sourcePortRanges": ["*"],
                 "protocol": "*"
               }
             },
@@ -89,12 +89,12 @@
               "properties": {
                 "description": "Deny all outbound traffic",
                 "access": "Deny",
-                "destinationAddressPrefix": "*",
-                "destinationPortRange": "*",
+                "destinationAddressPrefixes": ["*"],
+                "destinationPortRanges": ["*"],
                 "direction": "Outbound",
                 "priority": 65500,
-                "sourceAddressPrefix": "*",
-                "sourcePortRange": "*",
+                "sourceAddressPrefixes": ["*"],
+                "sourcePortRanges": ["*"],
                 "protocol": "*"
               }
             }
@@ -105,12 +105,12 @@
               "name": "rule1",
               "properties": {
                 "access": "Allow",
-                "destinationAddressPrefix": "*",
-                "destinationPortRange": "80",
+                "destinationAddressPrefixes": ["*"],
+                "destinationPortRanges": ["80"],
                 "direction": "Inbound",
                 "priority": 130,
-                "sourceAddressPrefix": "*",
-                "sourcePortRange": "*",
+                "sourceAddressPrefixes": ["*"],
+                "sourcePortRanges": ["*"],
                 "protocol": "*"
               }
             }

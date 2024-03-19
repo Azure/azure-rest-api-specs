@@ -714,19 +714,12 @@ model SecurityRuleProperties {
 
   @doc("The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic.")
   direction: SecurityRuleDirection;
-
-  @doc("Provisioning state of the virtual machine instance.")
-  @visibility("read")
-  provisioningState?: ProvisioningStateEnum;
 }
 
 @doc("Properties under the network interface resource")
 model NetworkInterfaceProperties {
   @doc("IPConfigurations - A list of IPConfigurations of the network interface.")
   ipConfigurations?: IPConfiguration[];
-
-  @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
-  networkSecurityGroup?: NetworkSecurityGroup;
 
   @doc("MacAddress - The MAC address of the network interface.")
   macAddress?: string;
@@ -744,7 +737,7 @@ model NetworkInterfaceProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
-@doc("InterfaceIPConfiguration iPConfiguration in a network interface.")
+@doc("InterfaceIPConfiguration I  PConfiguration in a network interface.")
 model IPConfiguration {
   @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
   @visibility("read", "create")
@@ -775,6 +768,9 @@ model IPConfigurationProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("Subnet - Name of Subnet bound to the IP configuration.")
   subnet?: IPConfigurationPropertiesSubnet;
+
+  @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
+  networkSecurityGroup?: NetworkSecurityGroup;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
