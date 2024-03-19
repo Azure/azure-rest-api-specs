@@ -22,8 +22,6 @@ output-folder: $(python-sdks-folder)/hybridcompute/azure-mgmt-hybridcompute/azur
 directive:
   - remove-operation: 
     - Machines_Reconnect
-    - Machines_CreateOrUpdate
-    - Machines_Update
 ```
 
 ``` yaml $(python)
