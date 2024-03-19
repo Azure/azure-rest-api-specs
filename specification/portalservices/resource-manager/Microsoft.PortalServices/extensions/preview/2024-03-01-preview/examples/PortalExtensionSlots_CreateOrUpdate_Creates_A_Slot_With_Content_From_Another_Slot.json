@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2023-01-01-preview",
+    "parameters": {
+      "properties": {
+        "source": {
+          "kind": "CopySlot",
+          "value": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/declarativeportalextension/slots/myfeaturea"
+        }
+      }
+    },
+    "portalExtensionName": "declarativeportalextension",
+    "resourceGroupName": "testRG",
+    "slotName": "otherslot",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "otherslot",
+        "type": "Microsoft.PortalServices/extensions/slots",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/declarativeportalextension/slots/otherslot",
+        "properties": {
+          "nextStage": "otherslot",
+          "provisioningState": "InProgress",
+          "source": {
+            "kind": "CopySlot",
+            "value": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/declarativeportalextension/slots/myfeaturea"
+          }
+        },
+        "tags": {}
+      }
+    }
+  },
+  "operationId": "PortalExtensionSlots_CreateOrUpdate",
+  "title": "Creates a slot with content from another slot"
+}

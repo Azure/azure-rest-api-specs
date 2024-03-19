@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2023-01-01-preview",
+    "portalExtensionName": "storage",
+    "resourceGroupName": "testRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "myfeaturex",
+            "type": "Microsoft.PortalServices/extensions/slot",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/storage/slots/myfeaturex",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "source": {
+                "kind": "Version",
+                "value": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/storage/versions/someversion"
+              }
+            },
+            "tags": {}
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PortalExtensionSlots_ListByPortalExtension",
+  "title": "List all slots on the portal extension"
+}

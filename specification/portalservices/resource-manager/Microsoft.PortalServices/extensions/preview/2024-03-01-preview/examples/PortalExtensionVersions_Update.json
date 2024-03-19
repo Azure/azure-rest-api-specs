@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2023-01-01-preview",
+    "parameters": {
+      "properties": {
+        "hasBeenDeployed": true
+      },
+      "tags": {
+        "myfeaturex": "myfeaturex2"
+      }
+    },
+    "portalExtensionName": "storage",
+    "resourceGroupName": "testRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "versionName": "sometextname"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sometextname",
+        "type": "Microsoft.PortalServices/extensions/versions",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/storage/versions/sometextname",
+        "properties": {
+          "hasBeenDeployed": true,
+          "provisioningState": "InProgress",
+          "source": {
+            "kind": "BuildArtifactUri",
+            "value": "https://someuri/someBuildArtifact/1.2.3.4.zip?sas"
+          }
+        },
+        "tags": {
+          "myfeaturex": "myfeaturex2"
+        }
+      }
+    }
+  },
+  "operationId": "PortalExtensionVersions_Update",
+  "title": "Update a portal extension version"
+}

@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2023-01-01-preview",
+    "deploymentName": "deploySourceSlot",
+    "parameters": {
+      "properties": {
+        "source": {
+          "kind": "CopySlot",
+          "value": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/storage/slots/sourceSlot"
+        },
+        "waitDuration": "PT24H"
+      }
+    },
+    "portalExtensionName": "storage",
+    "resourceGroupName": "testRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "deploySourceSlot",
+        "type": "Microsoft.PortalServices/extensions/deployment",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/storage/deployments/deploySourceSlot",
+        "properties": {
+          "nextStage": "stage1",
+          "provisioningState": "InProgress",
+          "source": {
+            "kind": "CopySlot",
+            "value": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/storage/slots/sourceSlot"
+          },
+          "waitDuration": "PT24H"
+        },
+        "tags": {}
+      }
+    }
+  },
+  "operationId": "PortalExtensionDeployments_Create",
+  "title": "Create Extension Deployment: Promote existing slot"
+}

@@ -1,0 +1,2767 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.PortalServices",
+    "version": "2024-03-01-preview",
+    "description": "Allows creation and deletion of Azure portal extensions.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "PortalExtensions"
+    },
+    {
+      "name": "PortalExtensionVersions"
+    },
+    {
+      "name": "PortalExtensionDeployments"
+    },
+    {
+      "name": "PortalExtensionSlots"
+    },
+    {
+      "name": "PortalTenant"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.PortalServices/compileFile": {
+      "post": {
+        "operationId": "PortalTenant_CompileFile",
+        "tags": [
+          "PortalTenant"
+        ],
+        "description": "compiles a file using inline content.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PortalTenantCompileFile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PortalTenantCompileFileResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Compiles a file using inline content.": {
+            "$ref": "./examples/PortalTenant_CompileFile.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.PortalServices/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the operations for the Microsoft.PortalServices provider.": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PortalServices/extensions": {
+      "get": {
+        "operationId": "PortalExtensions_ListBySubscription",
+        "tags": [
+          "PortalExtensions"
+        ],
+        "description": "Gets all the portal extensions within a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PortalExtensionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all portal extensions on the subscription": {
+            "$ref": "./examples/PortalExtensions_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PortalServices/extensions": {
+      "get": {
+        "operationId": "PortalExtensions_ListByResourceGroup",
+        "tags": [
+          "PortalExtensions"
+        ],
+        "description": "Gets all the portal extensions within a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PortalExtensionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all portal extensions on the resourceGroup": {
+            "$ref": "./examples/PortalExtensions_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PortalServices/extensions/{portalExtensionName}": {
+      "get": {
+        "operationId": "PortalExtensions_Get",
+        "tags": [
+          "PortalExtensions"
+        ],
+        "description": "Gets the portal extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "portalExtensionName",
+            "in": "path",
+            "description": "The name of the portal extension.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PortalExtension"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Extension: Declarative portal extension, Not Onboarded": {
+            "$ref": "./examples/PortalExtensions_Get_Get_Extension_Declarative_Portal_Extension_Not_Onboarded.json"
+          },
+          "Get Extension: Microsoft Extension, GA": {
+            "$ref": "./examples/PortalExtensions_Get_Get_Extension_Microsoft_Extension_Ga.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PortalExtensions_CreateOrUpdate",
+        "tags": [
+          "PortalExtensions"
+        ],
+        "description": "Creates or updates a portal extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "portalExtensionName",
+            "in": "path",
+            "description": "The name of the portal extension.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The parameters required to create or update a portal extension.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PortalExtension"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PortalExtension' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PortalExtension"
+            }
+          },
+          "201": {
+            "description": "Resource 'PortalExtension' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PortalExtension"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a portal extension": {
+            "$ref": "./examples/PortalExtensions_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "PortalExtensions_Update",
+        "tags": [
+          "PortalExtensions"
+        ],
+        "description": "Updates an existing portal extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "portalExtensionName",
+            "in": "path",
+            "description": "The name of the portal extension.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The updatable fields of a portal extension.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchablePortalExtension"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PortalExtension"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a PortalExtension": {
+            "$ref": "./examples/PortalExtensions_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "PortalExtensions_Delete",
+        "tags": [
+          "PortalExtensions"
+        ],
+        "description": "Deletes the portal extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "portalExtensionName",
+            "in": "path",
+            "description": "The name of the portal extension.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a portal extension": {
+            "$ref": "./examples/PortalExtensions_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PortalServices/extensions/{portalExtensionName}/alter": {
+      "post": {
+        "operationId": "PortalExtensions_Alter",
+        "tags": [
+          "PortalExtensions"
+        ],
+        "description": "Alters portal extension source files.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "portalExtensionName",
+            "in": "path",
+            "description": "The name of the portal extension.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The parameters required to alter portal extension sources.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PortalExtensionAlter"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Alter portal extension source files": {
+            "$ref": "./examples/PortalExtensions_Alter.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PortalServices/extensions/{portalExtensionName}/compileFile": {
+      "post": {
+        "operationId": "PortalExtensions_CompileFile",
+        "tags": [
+          "PortalExtensions"
+        ],
+        "description": "compiles a file in the context of the extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "portalExtensionName",
+            "in": "path",
+            "description": "The name of the portal extension.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The parameters required to compile a source file.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PortalExtensionCompileFile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PortalExtensionCompileFileResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Compile single extension source file": {
+            "$ref": "./examples/PortalExtensions_CompileFile.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PortalServices/extensions/{portalExtensionName}/deployments": {
+      "get": {
+        "operationId": "PortalExtensionDeployments_ListByPortalExtension",
+        "tags": [
+          "PortalExtensionDeployments"
+        ],
+        "description": "Gets all the portal extension deployments within an extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "portalExtensionName",
+            "in": "path",
+            "description": "The name of the portal extension.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionDeploymentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all deployments on the portal extension": {
+            "$ref": "./examples/PortalExtensionDeployments_ListByExtensions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PortalServices/extensions/{portalExtensionName}/deployments/{deploymentName}": {
+      "get": {
+        "operationId": "PortalExtensionDeployments_Get",
+        "tags": [
+          "PortalExtensionDeployments"
+        ],
+        "description": "Gets the portal extension deployment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "portalExtensionName",
+            "in": "path",
+            "description": "The name of the portal extension.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "The name of the deployment",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionDeployment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a portal extension deployment": {
+            "$ref": "./examples/PortalExtensionDeployments_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PortalExtensionDeployments_Create",
+        "tags": [
+          "PortalExtensionDeployments"
+        ],
+        "description": "Deploys an extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "portalExtensionName",
+            "in": "path",
+            "description": "The name of the portal extension.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "The name of the deployment",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "deployment definition",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExtensionDeployment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ExtensionDeployment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExtensionDeployment"
+            }
+          },
+          "201": {
+            "description": "Resource 'ExtensionDeployment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExtensionDeployment"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Extension Deployment: From Version Resource Id": {
+            "$ref": "./examples/PortalExtensionDeployments_Create_Create_Extension_Deployment_From_Version_Resource_Id.json"
+          },
+          "Create Extension Deployment: Promote existing slot": {
+            "$ref": "./examples/PortalExtensionDeployments_Create_Create_Extension_Deployment_Promote_Existing_Slot.json"
+          },
+          "Create Extension Deployment: Single Stage": {
+            "$ref": "./examples/PortalExtensionDeployments_Create_Create_Extension_Deployment_Single_Stage.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "PortalExtensionDeployments_Update",
+        "tags": [
+          "PortalExtensionDeployments"
+        ],
+        "description": "Updates an existing portal extension deployment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "portalExtensionName",
+            "in": "path",
+            "description": "The name of the portal extension.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "The name of the deployment",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The updatable fields of a portal extension deployment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchableExtensionDeployment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionDeployment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a portal extension deployment": {
+            "$ref": "./examples/PortalExtensionDeployments_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PortalExtensionDeployments_Delete",
+        "tags": [
+          "PortalExtensionDeployments"
+        ],
+        "description": "Only deletes if in a terminal state. Deletes the record only but not the actively running code.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "portalExtensionName",
+            "in": "path",
+            "description": "The name of the portal extension.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "The name of the deployment",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a portal extension deployment": {
+            "$ref": "./examples/PortalExtensionDeployments_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PortalServices/extensions/{portalExtensionName}/deployments/{deploymentName}/stop": {
+      "post": {
+        "operationId": "PortalExtensionDeployments_Stop",
+        "tags": [
+          "PortalExtensionDeployments"
+        ],
+        "description": "Stops or cancels the deployment, if in progress.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "portalExtensionName",
+            "in": "path",
+            "description": "The name of the portal extension.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "The name of the deployment",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Azure operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Stop deployment": {
+            "$ref": "./examples/PortalExtensionDeployments_Stop.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PortalServices/extensions/{portalExtensionName}/export": {
+      "post": {
+        "operationId": "PortalExtensions_Export",
+        "tags": [
+          "PortalExtensions"
+        ],
+        "description": "Exports the extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "portalExtensionName",
+            "in": "path",
+            "description": "The name of the portal extension.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The parameters required to export the extension.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PortalExtensionExport"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Export extension files": {
+            "$ref": "./examples/PortalExtensions_Export.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PortalServices/extensions/{portalExtensionName}/listSources": {
+      "post": {
+        "operationId": "PortalExtensions_ListSources",
+        "tags": [
+          "PortalExtensions"
+        ],
+        "description": "Lists sources of the extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "portalExtensionName",
+            "in": "path",
+            "description": "The name of the portal extension.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PortalExtensionListSourcesResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List sources of the extension": {
+            "$ref": "./examples/PortalExtensions_ListSources.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PortalServices/extensions/{portalExtensionName}/slots": {
+      "get": {
+        "operationId": "PortalExtensionSlots_ListByPortalExtension",
+        "tags": [
+          "PortalExtensionSlots"
+        ],
+        "description": "Gets all the portal extension Slots within an extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "portalExtensionName",
+            "in": "path",
+            "description": "The name of the portal extension.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionSlotListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all slots on the portal extension": {
+            "$ref": "./examples/PortalExtensionSlots_ListByExtensions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PortalServices/extensions/{portalExtensionName}/slots/{slotName}": {
+      "get": {
+        "operationId": "PortalExtensionSlots_Get",
+        "tags": [
+          "PortalExtensionSlots"
+        ],
+        "description": "Gets the portal extension slot.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "portalExtensionName",
+            "in": "path",
+            "description": "The name of the portal extension.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "slotName",
+            "in": "path",
+            "description": "The name of the slot",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionSlot"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a portal extension slot": {
+            "$ref": "./examples/PortalExtensionSlots_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PortalExtensionSlots_CreateOrUpdate",
+        "tags": [
+          "PortalExtensionSlots"
+        ],
+        "description": "Creates or Updates a slot",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "portalExtensionName",
+            "in": "path",
+            "description": "The name of the portal extension.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "slotName",
+            "in": "path",
+            "description": "The name of the slot",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The slot deployment definition",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExtensionSlot"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ExtensionSlot' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExtensionSlot"
+            }
+          },
+          "201": {
+            "description": "Resource 'ExtensionSlot' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExtensionSlot"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a slot with content from another slot": {
+            "$ref": "./examples/PortalExtensionSlots_CreateOrUpdate_Creates_A_Slot_With_Content_From_Another_Slot.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "PortalExtensionSlots_Update",
+        "tags": [
+          "PortalExtensionSlots"
+        ],
+        "description": "Updates an existing portal extension slot.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "portalExtensionName",
+            "in": "path",
+            "description": "The name of the portal extension.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "slotName",
+            "in": "path",
+            "description": "The name of the slot",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The updatable fields of a portal extension slot.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchableExtensionSlot"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionSlot"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a portal extension slot": {
+            "$ref": "./examples/PortalExtensionSlots_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PortalExtensionSlots_Delete",
+        "tags": [
+          "PortalExtensionSlots"
+        ],
+        "description": "Deletes a portal extension slot.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "portalExtensionName",
+            "in": "path",
+            "description": "The name of the portal extension.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "slotName",
+            "in": "path",
+            "description": "The name of the slot",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a portal extension slot": {
+            "$ref": "./examples/PortalExtensionSlots_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PortalServices/extensions/{portalExtensionName}/versions": {
+      "get": {
+        "operationId": "PortalExtensionVersions_ListByPortalExtension",
+        "tags": [
+          "PortalExtensionVersions"
+        ],
+        "description": "Gets all the portal extension versions within a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "portalExtensionName",
+            "in": "path",
+            "description": "The name of the portal extension.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all versions on the portal extension": {
+            "$ref": "./examples/PortalExtensionVersions_ListByExtensions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PortalServices/extensions/{portalExtensionName}/versions/{versionName}": {
+      "get": {
+        "operationId": "PortalExtensionVersions_Get",
+        "tags": [
+          "PortalExtensionVersions"
+        ],
+        "description": "Gets the portal extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "portalExtensionName",
+            "in": "path",
+            "description": "The name of the portal extension.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "The name of the version",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a portal extension version": {
+            "$ref": "./examples/PortalExtensionVersions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PortalExtensionVersions_Create",
+        "tags": [
+          "PortalExtensionVersions"
+        ],
+        "description": "Creates an extension version",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "portalExtensionName",
+            "in": "path",
+            "description": "The name of the portal extension.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "The name of the version",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "extension version definition.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExtensionVersion"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ExtensionVersion' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExtensionVersion"
+            }
+          },
+          "201": {
+            "description": "Resource 'ExtensionVersion' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExtensionVersion"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Extension Version from Extension": {
+            "$ref": "./examples/PortalExtensionVersions_Create_Create_Extension_Version_From_Extension.json"
+          },
+          "Create Extension Version from External Build Artifact": {
+            "$ref": "./examples/PortalExtensionVersions_Create_Create_Extension_Version_From_External_Build_Artifact.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "PortalExtensionVersions_Update",
+        "tags": [
+          "PortalExtensionVersions"
+        ],
+        "description": "Updates an existing portal extension version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "portalExtensionName",
+            "in": "path",
+            "description": "The name of the portal extension.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "The name of the version",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The updatable fields of a portal extension version.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchableExtensionVersion"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a portal extension version": {
+            "$ref": "./examples/PortalExtensionVersions_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PortalExtensionVersions_Delete",
+        "tags": [
+          "PortalExtensionVersions"
+        ],
+        "description": "Deletes the portal extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "portalExtensionName",
+            "in": "path",
+            "description": "The name of the portal extension.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "The name of the version",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z][a-z0-9]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a portal extension version": {
+            "$ref": "./examples/PortalExtensionVersions_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AlterKind": {
+      "type": "string",
+      "description": "The kind of alteration.",
+      "enum": [
+        "Write",
+        "Delete"
+      ],
+      "x-ms-enum": {
+        "name": "AlterKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Write",
+            "value": "Write",
+            "description": "The kind of alteration is wrtie"
+          },
+          {
+            "name": "Delete",
+            "value": "Delete",
+            "description": "The kind of alteration is delete"
+          }
+        ]
+      }
+    },
+    "DeploymentConfig": {
+      "type": "object",
+      "description": "Deployment config for the extension.",
+      "properties": {
+        "stageDefinition": {
+          "type": "object",
+          "description": "Defines the deployment stages, regions to deploy to for each stage and sequence to rollout to individual stages.",
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "DeploymentSourceKind": {
+      "type": "string",
+      "description": "The deployment source kind",
+      "enum": [
+        "Version",
+        "CopySlot"
+      ],
+      "x-ms-enum": {
+        "name": "DeploymentSourceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Version",
+            "value": "Version",
+            "description": "The deployment source is from extension version."
+          },
+          {
+            "name": "CopySlot",
+            "value": "CopySlot",
+            "description": "The deployment source is from copying extension slot."
+          }
+        ]
+      }
+    },
+    "ExportKind": {
+      "type": "string",
+      "description": "The kind of the source package.",
+      "enum": [
+        "SourceCodeZipUri",
+        "BuildArtifactZipUri"
+      ],
+      "x-ms-enum": {
+        "name": "ExportKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SourceCodeZipUri",
+            "value": "SourceCodeZipUri",
+            "description": "The export source is from zip uri."
+          },
+          {
+            "name": "BuildArtifactZipUri",
+            "value": "BuildArtifactZipUri",
+            "description": "The export source is from build artifact zip uri."
+          }
+        ]
+      }
+    },
+    "ExtensionApiDefinition": {
+      "type": "object",
+      "description": "The ARM API definition used to generate extension content.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "The uri of the ARM API swagger."
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "The api version of the ARM APIs."
+        }
+      }
+    },
+    "ExtensionDeployment": {
+      "type": "object",
+      "description": "Extension Deployment",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExtensionDeploymentProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ExtensionDeploymentListResult": {
+      "type": "object",
+      "description": "The response of a ExtensionDeployment list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ExtensionDeployment items on this page",
+          "items": {
+            "$ref": "#/definitions/ExtensionDeployment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExtensionDeploymentProperties": {
+      "type": "object",
+      "description": "Properties of an extension deployment",
+      "properties": {
+        "waitDuration": {
+          "type": "string",
+          "format": "duration",
+          "description": "Default PT24H. The wait duration after each stage of the deployment. If a only single stage is being deployed waitDuration is ignored."
+        },
+        "source": {
+          "$ref": "#/definitions/ExtensionDeploymentPropertiesSource",
+          "description": "The build output artifact zip to deploy."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Readonly. The current registration or provisioning state which only appears in the response",
+          "readOnly": true
+        },
+        "nextStage": {
+          "type": "string",
+          "description": "Readonly. The next stage of deployment from the deployment sequence e.g stage2",
+          "readOnly": true
+        },
+        "stage": {
+          "type": "string",
+          "description": "Optional. The name of a a single stage to deploy. If omitted the Extensions stageDefinition is used for deployment."
+        }
+      }
+    },
+    "ExtensionDeploymentPropertiesSource": {
+      "type": "object",
+      "description": "The build output artifact zip to deploy.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of source content for deployment",
+          "default": "Version",
+          "enum": [
+            "Version",
+            "CopySlot"
+          ],
+          "x-ms-enum": {
+            "name": "DeploymentSourceKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Version",
+                "value": "Version",
+                "description": "The deployment source is from extension version."
+              },
+              {
+                "name": "CopySlot",
+                "value": "CopySlot",
+                "description": "The deployment source is from copying extension slot."
+              }
+            ]
+          }
+        },
+        "value": {
+          "type": "string",
+          "description": "The instance id of the source kind."
+        }
+      }
+    },
+    "ExtensionSlot": {
+      "type": "object",
+      "description": "A Portal Extension Slot",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExtensionSlotProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ExtensionSlotListResult": {
+      "type": "object",
+      "description": "The response of a ExtensionSlot list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ExtensionSlot items on this page",
+          "items": {
+            "$ref": "#/definitions/ExtensionSlot"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExtensionSlotProperties": {
+      "type": "object",
+      "description": "Properties of a extension slot",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/ExtensionSlotPropertiesSource",
+          "description": "The source content for deployment to the slot."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Readonly. The current registration or provisioning state which only appears in the response",
+          "readOnly": true
+        },
+        "nextStage": {
+          "type": "string",
+          "description": "Readonly. The slot that will be deployed to.",
+          "readOnly": true
+        }
+      }
+    },
+    "ExtensionSlotPropertiesSource": {
+      "type": "object",
+      "description": "The source content for deployment to the slot.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/DeploymentSourceKind",
+          "description": "The source content kind for deployment to the slot."
+        },
+        "value": {
+          "type": "string",
+          "description": "The instance id of the source kind."
+        }
+      }
+    },
+    "ExtensionVersion": {
+      "type": "object",
+      "description": "Extension Version",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExtensionVersionProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ExtensionVersionListResult": {
+      "type": "object",
+      "description": "The response of a ExtensionVersion list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ExtensionVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/ExtensionVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExtensionVersionProperties": {
+      "type": "object",
+      "description": "The properties of an extension version.",
+      "properties": {
+        "buildOutputArtifactUri": {
+          "type": "string",
+          "description": "The path to the ingested extension build artifact zip for the version."
+        },
+        "hasBeenDeployed": {
+          "type": "boolean",
+          "description": "Indicates if the version has ever been deployed",
+          "readOnly": true
+        },
+        "ignoreDuplicateZipError": {
+          "type": "boolean",
+          "description": "Indicates if duplicate zip error should be ignored."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Readonly. The provisioning state.",
+          "readOnly": true
+        },
+        "source": {
+          "$ref": "#/definitions/ExtensionVersionPropertiesSource",
+          "description": "The build output artifact zip to create a version from"
+        },
+        "version": {
+          "type": "string",
+          "description": "The extension page version of the zip"
+        }
+      }
+    },
+    "ExtensionVersionPropertiesSource": {
+      "type": "object",
+      "description": "The build output artifact zip to create a version from",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/ExtensionVersionSourceKind",
+          "description": "The kind of source content for the version. If omitted uses latest exported version from extension."
+        },
+        "value": {
+          "type": "string",
+          "description": "The instance id of the source kind."
+        }
+      }
+    },
+    "ExtensionVersionSourceKind": {
+      "type": "string",
+      "description": "The extension version source kind.",
+      "enum": [
+        "BuildArtifactZipUri"
+      ],
+      "x-ms-enum": {
+        "name": "ExtensionVersionSourceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BuildArtifactZipUri",
+            "value": "BuildArtifactZipUri",
+            "description": "The build artifcat zip uri of the extension version."
+          }
+        ]
+      }
+    },
+    "PatchableExtensionDeployment": {
+      "type": "object",
+      "description": "The patchable fields of extension deployment.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PatchableExtensionSlot": {
+      "type": "object",
+      "description": "The patchable fields of extension slot.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExtensionSlotProperties",
+          "description": "The patchable extension slot properties."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PatchableExtensionVersion": {
+      "type": "object",
+      "description": "The patchable fields of extension version.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PatchableExtensionVersionProperties",
+          "description": "The patchable extension version properties."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PatchableExtensionVersionProperties": {
+      "type": "object",
+      "description": "Patchable properties of an extension version.",
+      "properties": {
+        "hasBeenDeployed": {
+          "type": "boolean",
+          "description": "Set by RP to indicate if the version has ever been deployed"
+        }
+      }
+    },
+    "PatchablePortalExtension": {
+      "type": "object",
+      "description": "The portal extension resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PortalExtensionProperties",
+          "description": "The portal extension properties."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PortalExtension": {
+      "type": "object",
+      "description": "The portal extension resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PortalExtensionProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "PortalExtensionAlter": {
+      "type": "object",
+      "description": "The extension alter request.",
+      "properties": {
+        "alterations": {
+          "type": "array",
+          "description": "The list of alterations to perform on the source code.",
+          "items": {
+            "$ref": "#/definitions/PortalExtensionAlterAlterationsItem"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "PortalExtensionAlterAlterationsItem": {
+      "type": "object",
+      "description": "The alterations item to perform on the source code.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AlterKind",
+          "description": "The kind of alteration."
+        },
+        "path": {
+          "type": "string",
+          "description": "The file path to alter."
+        },
+        "content": {
+          "type": "object",
+          "description": "The content of the file.",
+          "additionalProperties": {}
+        },
+        "base64Content": {
+          "type": "string",
+          "description": "The base 64 encoded content of the file."
+        }
+      },
+      "required": [
+        "kind",
+        "path"
+      ]
+    },
+    "PortalExtensionCompileFile": {
+      "type": "object",
+      "description": "The contents of the file to compile.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The file path."
+        },
+        "contents": {
+          "type": "object",
+          "description": "The contents of the file.",
+          "additionalProperties": {}
+        },
+        "stringSource": {
+          "type": "object",
+          "description": "The contents of the string source.",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "PortalExtensionCompileFileResult": {
+      "type": "object",
+      "description": "The result of contents of the file to compile.",
+      "additionalProperties": {}
+    },
+    "PortalExtensionExport": {
+      "type": "object",
+      "description": "The export extension request",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/ExportKind",
+          "description": "The kind of the source package."
+        }
+      }
+    },
+    "PortalExtensionListResult": {
+      "type": "object",
+      "description": "The response of a PortalExtension list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PortalExtension items on this page",
+          "items": {
+            "$ref": "#/definitions/PortalExtension"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PortalExtensionListSourcesAssetTypeFile": {
+      "type": "object",
+      "description": "The extension list source asset type file.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the asset type."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PortalExtensionListSourcesFile"
+        }
+      ],
+      "x-ms-discriminator-value": "AssetType"
+    },
+    "PortalExtensionListSourcesFile": {
+      "type": "object",
+      "description": "The content metadata of a file",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Discriminator property for PortalExtensionListSourcesFile."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "description": "The last time stamp the file was modified."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind",
+        "lastModifiedAt"
+      ]
+    },
+    "PortalExtensionListSourcesFolder": {
+      "type": "object",
+      "description": "The content metadata of a folder",
+      "properties": {
+        "folders": {
+          "type": "object",
+          "description": "The list of child folders",
+          "additionalProperties": {
+            "$ref": "#/definitions/PortalExtensionListSourcesFolder"
+          }
+        },
+        "files": {
+          "type": "object",
+          "description": "The list of child files",
+          "additionalProperties": {
+            "$ref": "#/definitions/PortalExtensionListSourcesFile"
+          }
+        }
+      }
+    },
+    "PortalExtensionListSourcesOtherFile": {
+      "type": "object",
+      "description": "The extension list source other file.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PortalExtensionListSourcesFile"
+        }
+      ],
+      "x-ms-discriminator-value": "Other"
+    },
+    "PortalExtensionListSourcesResult": {
+      "type": "object",
+      "description": "The list of sources in the extension",
+      "properties": {
+        "folders": {
+          "type": "object",
+          "description": "The list of child folders",
+          "additionalProperties": {
+            "$ref": "#/definitions/PortalExtensionListSourcesFolder"
+          }
+        },
+        "files": {
+          "type": "object",
+          "description": "The list of child files",
+          "additionalProperties": {
+            "$ref": "#/definitions/PortalExtensionListSourcesFile"
+          }
+        }
+      }
+    },
+    "PortalExtensionListSourcesSvgFile": {
+      "type": "object",
+      "description": "The extenson list source SVG.",
+      "properties": {
+        "image": {
+          "type": "string",
+          "description": "The SVG image content."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PortalExtensionListSourcesFile"
+        }
+      ],
+      "x-ms-discriminator-value": "Svg"
+    },
+    "PortalExtensionListSourcesViewFile": {
+      "type": "object",
+      "description": "The extension list source view file.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the view."
+        },
+        "viewKind": {
+          "type": "string",
+          "description": "The kind of view."
+        }
+      },
+      "required": [
+        "name",
+        "viewKind"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PortalExtensionListSourcesFile"
+        }
+      ],
+      "x-ms-discriminator-value": "View"
+    },
+    "PortalExtensionProperties": {
+      "type": "object",
+      "description": "The portal extension properties.",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/PortalExtensionPropertiesSource",
+          "description": "The new source code of the extension."
+        },
+        "deploymentConfig": {
+          "$ref": "#/definitions/DeploymentConfig",
+          "description": "Deployment config for the extension."
+        },
+        "icm": {
+          "$ref": "#/definitions/PortalExtensionPropertiesIcm",
+          "description": "Readonly. The ICM routing details for any live site issues for the extension set in service tree",
+          "readOnly": true
+        },
+        "feedbackEmail": {
+          "type": "string",
+          "description": "Readonly. Email for customer feedback from service tree.",
+          "readOnly": true
+        },
+        "serviceTreeId": {
+          "type": "string",
+          "description": "Readonly. The service tree id.",
+          "readOnly": true
+        },
+        "oAuthClientId": {
+          "type": "string",
+          "description": "Readonly. The oAuthClientId guid from service tree.",
+          "readOnly": true
+        },
+        "previewStamp": {
+          "type": "string",
+          "description": "Readonly. The preview stamp from service tree.",
+          "readOnly": true
+        },
+        "portalName": {
+          "type": "string",
+          "description": "Readonly. The Azure portal extension name e.g Microsoft_Azure_Storage. Comes in from extension.pdl or extension.dx.json or is generated.",
+          "readOnly": true
+        },
+        "apiDefinition": {
+          "$ref": "#/definitions/ExtensionApiDefinition",
+          "description": "The ARM API definition used to generate extension content."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The current registration or provisioning state which only appears in the response",
+          "readOnly": true
+        },
+        "publicStatus": {
+          "$ref": "#/definitions/PublicStatusKind",
+          "description": "The visibility of the extension. By default status will be NotOnboarded. Microsoft owned extensions can promote using service tree. External extensions can promote your application use partner center.",
+          "readOnly": true
+        },
+        "runtimeUri": {
+          "type": "string",
+          "description": "Once provisioningState is in the terminal state of Succeeded this is the portal runtime uri for portal extensions with status of private",
+          "readOnly": true
+        }
+      }
+    },
+    "PortalExtensionPropertiesIcm": {
+      "type": "object",
+      "description": "Readonly. The ICM routing details for any live site issues for the extension set in service tree",
+      "properties": {
+        "service": {
+          "type": "string",
+          "description": "Readonly. The ICM service route e.g Azure Portal (IbizaFx) from ICM for the service tree icm teamId.",
+          "readOnly": true
+        },
+        "team": {
+          "type": "string",
+          "description": "Readonly. The team under the ICM service e.g Portal from ICM for the service tree icm teamId.",
+          "readOnly": true
+        },
+        "teamId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Readonly. The ICM team Id from service tree.",
+          "readOnly": true
+        }
+      }
+    },
+    "PortalExtensionPropertiesSource": {
+      "type": "object",
+      "description": "The new source code of the extension.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/PortalExtensionSourceKind",
+          "description": "The kind of the source package."
+        },
+        "uri": {
+          "type": "string",
+          "description": "The uri of the source package."
+        }
+      }
+    },
+    "PortalExtensionSourceKind": {
+      "type": "string",
+      "description": "The extension source kind",
+      "enum": [
+        "SourceCodeZipUri"
+      ],
+      "x-ms-enum": {
+        "name": "PortalExtensionSourceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SourceCodeZipUri",
+            "value": "SourceCodeZipUri",
+            "description": "The source code zip uri of the extension."
+          }
+        ]
+      }
+    },
+    "PortalTenantCompileFile": {
+      "type": "object",
+      "description": "The portal tenant provider action.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PortalTenantCompileFileProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "PortalTenantCompileFileProperties": {
+      "type": "object",
+      "description": "The contents of the file to compile.",
+      "properties": {
+        "contents": {
+          "type": "object",
+          "description": "The contents of the file.",
+          "additionalProperties": {}
+        },
+        "stringSource": {
+          "type": "object",
+          "description": "The contents of the string source.",
+          "additionalProperties": {}
+        },
+        "files": {
+          "type": "object",
+          "description": "The contents of referenced files. The property name is the relative file path and the value is its contents.",
+          "additionalProperties": {}
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The current registration or provisioning state which only appears in the response.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "contents"
+      ]
+    },
+    "PortalTenantCompileFileResult": {
+      "type": "object",
+      "description": "The contents of the file to compile.",
+      "additionalProperties": {}
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state.",
+      "enum": [
+        "NotSpecified",
+        "Accepted",
+        "Running",
+        "Ready",
+        "Creating",
+        "Created",
+        "Deleting",
+        "Deleted",
+        "Canceled",
+        "Failed",
+        "Succeeded",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The operation is not specified."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The operation is accepted."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The operation is running."
+          },
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "The operation is ready."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The operation is creating."
+          },
+          {
+            "name": "Created",
+            "value": "Created",
+            "description": "The operation is created."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The operation is deleting."
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "The operation is deleted."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation is canceled."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation is failed."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation is succeeded."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The operation is updating."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "PublicStatusKind": {
+      "type": "string",
+      "description": "The extension public status state.",
+      "enum": [
+        "NotOnboarded",
+        "PrivatePreview",
+        "PublicPreview",
+        "GA"
+      ],
+      "x-ms-enum": {
+        "name": "PublicStatusKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotOnboarded",
+            "value": "NotOnboarded",
+            "description": "The extension is not onboarded."
+          },
+          {
+            "name": "PrivatePreview",
+            "value": "PrivatePreview",
+            "description": "The extension is in private preview."
+          },
+          {
+            "name": "PublicPreview",
+            "value": "PublicPreview",
+            "description": "The extension is in public preview."
+          },
+          {
+            "name": "GA",
+            "value": "GA",
+            "description": "The extension is in GA."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

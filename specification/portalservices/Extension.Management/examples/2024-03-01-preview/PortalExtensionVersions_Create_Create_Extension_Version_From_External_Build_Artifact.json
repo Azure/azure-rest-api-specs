@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2023-01-01-preview",
+    "parameters": {
+      "properties": {
+        "source": {
+          "kind": "BuildArtifactUri",
+          "value": "https://someuri/someBuildArtifact/1.2.3.4.zip?sas"
+        }
+      },
+      "tags": {}
+    },
+    "portalExtensionName": "storage",
+    "resourceGroupName": "testRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "versionName": "sometextname"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sometextFeature",
+        "type": "Microsoft.PortalServices/extensions/versions",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/storage/versions/sometextFeature",
+        "properties": {
+          "provisioningState": "InProgress",
+          "source": {
+            "kind": "BuildArtifactUri",
+            "value": "https://someuri/someBuildArtifact/1.2.3.4.zip?sas"
+          }
+        },
+        "tags": {}
+      }
+    },
+    "201": {
+      "body": {
+        "name": "sometextFeature",
+        "type": "Microsoft.PortalServices/extensions/versions",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/storage/versions/sometextFeature",
+        "properties": {
+          "provisioningState": "InProgress",
+          "source": {
+            "kind": "BuildArtifactUri",
+            "value": "https://someuri/someBuildArtifact/1.2.3.4.zip?sas"
+          }
+        },
+        "tags": {}
+      }
+    }
+  },
+  "operationId": "PortalExtensionVersions_Create",
+  "title": "Create Extension Version from External Build Artifact"
+}

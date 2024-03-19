@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2023-01-01-preview",
+    "portalExtensionCompileFile": {
+      "path": "Client/Views/MyView.dx.json",
+      "contents": {
+        "$schema": "../../Definitions/dx.schema.json#",
+        "stringSource": "Resources/MyStrings.resjson",
+        "view": {
+          "export": true,
+          "kind": "Markdown",
+          "properties": {
+            "content": {
+              "property": "markdownContent"
+            }
+          }
+        }
+      },
+      "stringSource": {
+        "markdownContent": "# This is an example of a markdown view!"
+      }
+    },
+    "portalExtensionName": "testPortalExtension",
+    "resourceGroupName": "testRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {}
+    }
+  },
+  "operationId": "PortalExtensions_CompileFile",
+  "title": "Compile single extension source file"
+}

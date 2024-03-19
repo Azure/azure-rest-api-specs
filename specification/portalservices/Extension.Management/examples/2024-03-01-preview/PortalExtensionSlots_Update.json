@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2023-01-01-preview",
+    "parameters": {
+      "properties": {
+        "source": {
+          "kind": "Version",
+          "value": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/storage/versions/someversion"
+        }
+      },
+      "tags": {
+        "myfeaturex": "myfeaturex2"
+      }
+    },
+    "portalExtensionName": "declarativeportalextension",
+    "resourceGroupName": "testRG",
+    "slotName": "myfeaturea",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myfeaturea",
+        "type": "Microsoft.PortalServices/extensions/slots",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/declarativeportalextension/slots/myfeaturea",
+        "properties": {
+          "nextStage": "myfeaturea",
+          "provisioningState": "InProgress",
+          "source": {
+            "kind": "Version",
+            "value": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/storage/versions/someversion"
+          }
+        },
+        "tags": {
+          "myfeaturex": "myfeaturex2"
+        }
+      }
+    }
+  },
+  "operationId": "PortalExtensionSlots_Update",
+  "title": "Update a portal extension slot"
+}

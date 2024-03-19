@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2023-01-01-preview",
+    "portalExtension": {
+      "tags": {
+        "aKey": "bValue",
+        "anotherKey": "anotherValue2"
+      }
+    },
+    "portalExtensionName": "testPortalExtension",
+    "resourceGroupName": "testRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testPortalExtension",
+        "type": "Microsoft.PortalServices/extensions",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/testPortalExtension",
+        "location": "eastus",
+        "properties": {
+          "portalName": "00000000-1111-2222-3333-444444444444",
+          "provisioningState": "Succeeded",
+          "publicStatus": "NotOnboarded",
+          "runtimeUri": "https://UriToRuntimeFiles"
+        },
+        "tags": {
+          "aKey": "bValue",
+          "anotherKey": "anotherValue2"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "testPortalExtension",
+        "type": "Microsoft.PortalServices/extensions",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/testPortalExtension",
+        "location": "eastus",
+        "properties": {
+          "portalName": "00000000-1111-2222-3333-444444444444",
+          "provisioningState": "Succeeded",
+          "publicStatus": "NotOnboarded",
+          "runtimeUri": "https://UriToRuntimeFiles"
+        },
+        "tags": {
+          "aKey": "bValue",
+          "anotherKey": "anotherValue2"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://foo.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "PortalExtensions_Update",
+  "title": "Update a PortalExtension"
+}

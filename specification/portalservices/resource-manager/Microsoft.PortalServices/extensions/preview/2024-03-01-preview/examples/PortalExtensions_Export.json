@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "api-version": "2023-01-01-preview",
+    "portalExtensionExport": {
+      "kind": "SourceCodeZipUri"
+    },
+    "portalExtensionName": "testPortalExtension",
+    "resourceGroupName": "testRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "kind": "SourceCodeZipUri",
+        "uri": "https://TheUriToSourceCode.Zip"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://foo.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "PortalExtensions_Export",
+  "title": "Export extension files"
+}

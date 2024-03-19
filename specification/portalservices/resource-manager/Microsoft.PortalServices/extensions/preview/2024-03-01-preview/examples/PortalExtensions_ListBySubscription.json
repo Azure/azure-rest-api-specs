@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2023-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "declarativeportalextension",
+            "type": "Microsoft.PortalServices/extensions",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/declarativeportalextension",
+            "location": "eastus",
+            "properties": {
+              "portalName": "00000000-1111-2222-3333-444444444444",
+              "provisioningState": "Succeeded",
+              "publicStatus": "NotOnboarded",
+              "runtimeUri": "https://UriToRuntimeFiles"
+            },
+            "tags": {
+              "aKey": "aValue",
+              "anotherKey": "anotherValue"
+            }
+          },
+          {
+            "name": "storage",
+            "type": "Microsoft.PortalServices/extensions",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/storage",
+            "location": "westus",
+            "properties": {
+              "feedbackEmail": "azure-iaasexp@microsoft.com",
+              "icm": {
+                "service": "Azure Portal IaaS Experiences",
+                "team": "Triage",
+                "teamId": 23201
+              },
+              "oAuthClientId": "99999999-8888-4444-5555-111111111111",
+              "portalName": "Microsoft_Azure_Storage",
+              "provisioningState": "Succeeded",
+              "publicStatus": "GA",
+              "serviceTreeId": "1a193c4c-529f-469f-9e26-7f76f9777d3f"
+            },
+            "tags": {}
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PortalExtensions_ListBySubscription",
+  "title": "List all portal extensions on the subscription"
+}

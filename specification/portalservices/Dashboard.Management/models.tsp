@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using OpenAPI;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
@@ -170,9 +171,11 @@ model DashboardProperties {
   title: string;
 
   @doc("The dashboard pages.")
+  @extension("x-ms-identifiers", [])
   pages: DashboardPage[];
 
   @doc("The dashboard parameters.")
+  @extension("x-ms-identifiers", [])
   parameters?: DashboardParameter[];
 }
 
@@ -196,6 +199,7 @@ model DashboardPage {
   title: string;
 
   @doc("The dashboard tiles.")
+  @extension("x-ms-identifiers", [])
   tiles: DashboardTile[];
 }
 
@@ -242,6 +246,7 @@ model DashboardTileLayout {
 @doc("The dashboard parameter list.")
 model DashboardParameterValuesList {
   @doc("The array of dashboard parameter values.")
+  @extension("x-ms-identifiers", [])
   parameters?: DashboardParameterValues[];
 }
 
@@ -263,6 +268,7 @@ model Actions {
   footer?: ActionReference[];
 
   @doc("Actions available on the tile on context menu.")
+  @extension("x-ms-identifiers", [])
   contextMenu?: ActionReference[];
 }
 
@@ -542,6 +548,7 @@ model ArgDataDefinition extends QueryTileData {
 @doc("The data definition of App Insights Query Tile.")
 model AppInsightsDataDefinition extends QueryTileData {
   @doc("Array of metrics object for an app insights query tile data.")
+  @extension("x-ms-identifiers", [])
   metrics: QueryTileMetricsItem[];
 
   @doc("Dashboard Query tile kind.")

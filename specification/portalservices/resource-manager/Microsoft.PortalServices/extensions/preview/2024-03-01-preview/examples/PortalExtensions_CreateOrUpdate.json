@@ -1,0 +1,139 @@
+{
+  "parameters": {
+    "api-version": "2023-01-01-preview",
+    "portalExtension": {
+      "location": "eastus",
+      "properties": {
+        "deploymentConfig": {
+          "stageDefinition": {
+            "$sequence": [
+              "stage1",
+              "stage2",
+              "stage3",
+              "stage4",
+              "stage5"
+            ],
+            "stage1": [
+              "centraluseuap"
+            ],
+            "stage2": [
+              "westcentralus"
+            ],
+            "stage3": [
+              "southcentralus"
+            ],
+            "stage4": [
+              "westus"
+            ],
+            "stage5": [
+              "*"
+            ]
+          }
+        },
+        "source": {
+          "kind": "SourceCodeZipUri",
+          "uri": "https://someuri/extensionSourceCode.zip?sas"
+        }
+      },
+      "tags": {
+        "aKey": "aValue",
+        "anotherKey": "anotherValue"
+      }
+    },
+    "portalExtensionName": "declarativeportalextension",
+    "resourceGroupName": "testRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "declarativeportalextension",
+        "type": "Microsoft.PortalServices/extensions",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/declarativeportalextension",
+        "location": "eastus",
+        "properties": {
+          "deploymentConfig": {
+            "stageDefinition": {
+              "$sequence": [
+                "stage1",
+                "stage2",
+                "stage3",
+                "stage4",
+                "stage5"
+              ],
+              "stage1": [
+                "centraluseuap"
+              ],
+              "stage2": [
+                "westcentralus"
+              ],
+              "stage3": [
+                "southcentralus"
+              ],
+              "stage4": [
+                "westus"
+              ],
+              "stage5": [
+                "*"
+              ]
+            }
+          },
+          "portalName": "00000000-1111-2222-3333-444444444444",
+          "provisioningState": "Succeeded",
+          "publicStatus": "NotOnboarded",
+          "runtimeUri": "https://UriToRuntimeFiles"
+        },
+        "tags": {
+          "aKey": "aValue",
+          "anotherKey": "anotherValue"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "declarativeportalextension",
+        "type": "Microsoft.PortalServices/extensions",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/declarativeportalextension",
+        "location": "eastus",
+        "properties": {
+          "deploymentConfig": {
+            "stageDefinition": {
+              "$sequence": [
+                "stage1",
+                "stage2",
+                "stage3",
+                "stage4",
+                "stage5"
+              ],
+              "stage1": [
+                "centraluseuap"
+              ],
+              "stage2": [
+                "westcentralus"
+              ],
+              "stage3": [
+                "southcentralus"
+              ],
+              "stage4": [
+                "westus"
+              ],
+              "stage5": [
+                "*"
+              ]
+            }
+          },
+          "portalName": "00000000-1111-2222-3333-444444444444",
+          "provisioningState": "InProgress",
+          "publicStatus": "NotOnboarded",
+          "runtimeUri": "https://UriToRuntimeFiles"
+        },
+        "tags": {
+          "aKey": "aValue",
+          "anotherKey": "anotherValue"
+        }
+      }
+    }
+  },
+  "operationId": "PortalExtensions_CreateOrUpdate",
+  "title": "Create or update a portal extension"
+}
