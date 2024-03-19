@@ -1,6 +1,7 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/http";
 import "@typespec/rest";
+import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
 
 using TypeSpec.Http;
@@ -8,6 +9,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
+using Azure.ClientGenerator.Core;
 
 namespace ContentSafety;
 
@@ -20,9 +22,46 @@ interface TextOperations {
     {
       @body
       @doc("The text analysis request.")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
       body: AnalyzeTextOptions;
     },
     AnalyzeTextResult
+  >;
+
+  @added(ContentSafety.Versions.v2023_10_15_Preview)
+  @summary("Analyze Text Jailbreak")
+  @doc("A synchronous API for the analysis of text jailbreak.")
+  @route("/text:detectJailbreak")
+  @post
+  detectTextJailbreak is Azure.Core.RpcOperation<
+    {
+      @body
+      @doc("The text jailbreak analysis request.")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
+      body: AnalyzeTextJailbreakOptions;
+    },
+    AnalyzeTextJailbreakResult
+  >;
+
+  @added(ContentSafety.Versions.v2023_10_15_Preview)
+  @summary("Analyze Protected Material")
+  @doc("A synchronous API for the analysis of protected material.")
+  @route("/text:detectProtectedMaterial")
+  @post
+  detectTextProtectedMaterial is Azure.Core.RpcOperation<
+    {
+      @body
+      @doc("The text protected material analysis request.")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
+      body: AnalyzeTextProtectedMaterialOptions;
+    },
+    AnalyzeTextProtectedMaterialResult
   >;
 }
 
@@ -35,6 +74,9 @@ interface ImageOperations {
     {
       @doc("The image analysis request.")
       @body
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
       body: AnalyzeImageOptions;
     },
     AnalyzeImageResult
@@ -45,6 +87,8 @@ interface BlockOps
   extends Azure.Core.ResourceOperations<NoRepeatableRequests &
       NoConditionalRequests &
       NoClientRequestId> {}
+
+@@clientName(Azure.Core.Foundations.ResourceBody.resource, "options");
 
 interface TextBlocklists {
   @summary("Get Text Blocklist By blocklistName")
@@ -67,7 +111,14 @@ interface TextBlocklists {
   @doc("Add or update blocklistItems to a text blocklist. You can add or update at most 100 blocklistItems in one request.")
   addOrUpdateBlocklistItems is BlockOps.ResourceAction<
     TextBlocklist,
-    AddOrUpdateTextBlocklistItemsOptions,
+    {
+      @doc("Options for adding or updating blocklist items.")
+      @body
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
+      body: AddOrUpdateTextBlocklistItemsOptions;
+    },
     AddOrUpdateTextBlocklistItemsResult
   >;
 
@@ -75,7 +126,14 @@ interface TextBlocklists {
   @doc("Remove blocklistItems from a text blocklist. You can remove at most 100 BlocklistItems in one request.")
   removeBlocklistItems is BlockOps.ResourceAction<
     TextBlocklist,
-    RemoveTextBlocklistItemsOptions,
+    {
+      @doc("Options for removing blocklist items.")
+      @body
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
+      body: RemoveTextBlocklistItemsOptions;
+    },
     NoContentResponse
   >;
 
