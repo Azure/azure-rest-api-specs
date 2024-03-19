@@ -1817,7 +1817,7 @@
           "items": {
             "type": "string"
           },
-          "description": "Local Inbound profile names to which Inbound is allowed. Use ['*'] to allow inbound to all profiles. It's default value is ['*'].",
+          "description": "Local Inbound profile names to which Inbound is allowed. Use ['*'] to allow inbound to all profiles.",
           "uniqueItems": true
         },
         "localOutboundProfiles": {
@@ -1834,7 +1834,7 @@
           "items": {
             "type": "string"
           },
-          "description": "Remote Inbound profile names to which Inbound is allowed. Use ['*'] to allow inbound to all profiles. This property can only be updated in auto-approval mode. It's default value is ['*'].",
+          "description": "Remote Inbound profile names to which Inbound is allowed. Use ['*'] to allow inbound to all profiles. This property can only be updated in auto-approval mode.",
           "uniqueItems": true
         },
         "remoteOutboundProfiles": {
@@ -1929,7 +1929,7 @@
           "items": {
             "type": "string"
           },
-          "description": "Local Inbound profile names to which Inbound is allowed. Use ['*'] to allow inbound to all profiles. It's default value is ['*'].",
+          "description": "Local Inbound profile names to which Inbound is allowed. Use ['*'] to allow inbound to all profiles.",
           "uniqueItems": true
         },
         "localOutboundProfiles": {
@@ -1938,7 +1938,7 @@
             "type": "string"
           },
           "readOnly": true,
-          "description": "Local Outbound profile names from which Outbound is allowed. Use ['*'] to allow outbound from all profiles. It's default value is ['*'].",
+          "description": "Local Outbound profile names from which Outbound is allowed. In current version, it is readonly property and it's value is set to ['*'] to allow outbound from all profiles. In later version, user will be able to modify it.",
           "uniqueItems": true
         },
         "remoteInboundProfiles": {
@@ -1947,7 +1947,7 @@
             "type": "string"
           },
           "readOnly": true,
-          "description": "Remote Inbound profile names to which Inbound is allowed. ['*'] value implies inbound is allowed to all profiles at remote perimeter. This property can only be updated from remote perimeter."
+          "description": "Remote Inbound profile names to which Inbound is allowed. ['*'] value implies inbound is allowed to all profiles at remote perimeter. This property can only be updated from corresponding link resource present in remote perimeter."
         },
         "remoteOutboundProfiles": {
           "type": "array",
@@ -1955,7 +1955,7 @@
             "type": "string"
           },
           "readOnly": true,
-          "description": "Remote Outbound profile names from which Outbound is allowed. ['*'] value implies outbound is allowed from all profiles at remote perimeter. This property can only be updated from remote perimeter."
+          "description": "Remote Outbound profile names from which Outbound is allowed. ['*'] value implies outbound is allowed from all profiles at remote perimeter. This property can only be updated from corresponding link resource present in remote perimeter."
         },
         "description": {
           "type": "string",

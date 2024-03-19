@@ -1,10 +1,9 @@
 import "../HealthInsights.Common/model.common.request.tsp";
 import "../HealthInsights.Common/model.common.response.tsp";
 import "../HealthInsights.Common/model.common.shared.tsp";
-import "@azure-tools/typespec-azure-core";
+import "../HealthInsights.Common/model.common.fhir.elements.tsp";
 
 using TypeSpec.Rest;
-using Azure.Core;
 
 namespace AzureHealthInsights;
 
@@ -29,41 +28,21 @@ resulting trial set is a union of the two sets.
   clinicalTrials: ClinicalTrials;
 }
 
-@resource("trialmatcher/jobs")
+@resource("trial-matcher/jobs")
 @doc("The response for the Trial Matcher request.")
-model TrialMatcherResult {
-  ...Response;
-
-  @doc("The inference results for the Trial Matcher request.")
-  @visibility("read")
-  @lroResult
-  results?: TrialMatcherResults;
-}
+model TrialMatcherResult
+  is HealthInsightsOperationStatus<TrialMatcherInferenceResult>;
 
 @doc("The inference results for the Trial Matcher request.")
-model TrialMatcherResults {
+model TrialMatcherInferenceResult {
   @doc("Results for the patients given in the request.")
-  patients: TrialMatcherPatientResult[];
+  patientResults: TrialMatcherPatientResult[];
 
   @doc("The version of the model used for inference, expressed as the model date.")
   modelVersion: ModelVersion;
 
   @doc("The date when the clinical trials knowledge graph was last updated.")
   knowledgeGraphLastUpdateDate?: plainDate;
-}
-
-@doc("The results of the model's work for a single patient.")
-model TrialMatcherPatientResult {
-  @doc("The identifier given for the patient in the request.")
-  id: string;
-
-  @doc("The model's inferences for the given patient.")
-  inferences: TrialMatcherInference[];
-
-  @doc("""
-Clinical information which is needed to provide better trial matching results for the patient.
-""")
-  neededClinicalInfo?: NeededClinicalInfo;
 }
 
 @doc("Clinical information which is needed to provide better trial matching results for the patient.")
@@ -86,6 +65,28 @@ The bio-medical category related to the coded concept, e.g. Diagnosis, Symptom, 
   category?: string;
 }
 
+@doc("The results of the model's work for a single patient.")
+model TrialMatcherPatientResult {
+  @doc("The identifier given for the patient in the request.")
+  patientId: string;
+
+  @doc("The inference results for the patient.")
+  inferences: Array<TrialMatcherInference>;
+
+  @doc("""
+  Clinical information which is needed to provide better trial matching results for the patient.
+  """)
+  neededClinicalInfo?: NeededClinicalInfo;
+}
+
+@doc("A piece of evidence corresponding to a Trial Matcher inference.")
+model TrialMatcherInferenceEvidence {
+  @doc("A piece of evidence from the eligibility criteria text of a clinical trial.")
+  eligibilityCriteriaEvidence?: string;
+
+  ...InferenceEvidence;
+}
+
 @doc("An inference made by the Trial Matcher model regarding a patient.")
 model TrialMatcherInference {
   @doc("The type of the Trial Matcher inference.")
@@ -98,7 +99,7 @@ model TrialMatcherInference {
 
   @doc("The identifier of the clinical trial.")
   @minLength(1)
-  id?: string;
+  clinicalTrialId?: string;
 
   @doc("Possible sources of a clinical trial.")
   source?: ClinicalTrialSource;
@@ -108,19 +109,19 @@ model TrialMatcherInference {
 }
 
 @doc("""
-The clinical trials that the patient(s) should be matched to. 
+The clinical trials that the patient(s) should be matched to.
 The trial selection can be given as a list of custom clinical trials and/or a list of filters to known clinical trial registries.
 In case both are given, the resulting trial set is a union of the two sets.
 """)
 model ClinicalTrials {
   @doc("A list of clinical trials.")
   @minItems(1)
-  customTrials?: ClinicalTrialDetails[];
+  customTrials?: Array<Fhir.R4.ResearchStudy>;
 
   @doc("""
-A list of filters, each one creating a selection of trials from a given
-clinical trial registry.
-""")
+  A list of filters, each one creating a selection of trials from a given
+  clinical trial registry.
+  """)
   @minItems(1)
   registryFilters?: ClinicalTrialRegistryFilter[];
 }
@@ -234,56 +235,6 @@ model AreaProperties {
   radius: float64;
 }
 
-@doc("A description of a clinical trial.")
-model ClinicalTrialDetails {
-  @doc("""
-A given identifier for the clinical trial. Has to be unique within a list of clinical trials.
-""")
-  @minLength(1)
-  id: string;
-
-  @doc("""
-The eligibility criteria of the clinical trial (inclusion and exclusion), given as text.
-""")
-  eligibilityCriteriaText?: string;
-
-  @doc("Demographic criteria for a clinical trial.")
-  demographics?: ClinicalTrialDemographics;
-
-  @doc("Trial data which is of interest to the potential participant.")
-  metadata: ClinicalTrialMetadata;
-}
-
-@doc("Demographic criteria for a clinical trial.")
-model ClinicalTrialDemographics {
-  @doc("Indication of the sex of people who may participate in the clinical trial.")
-  acceptedSex?: ClinicalTrialAcceptedSex;
-
-  @doc("A definition of the range of ages accepted by a clinical trial. Contains a minimum age and/or a maximum age.")
-  acceptedAgeRange?: AcceptedAgeRange;
-}
-
-@doc("""
-A definition of the range of ages accepted by a clinical trial. Contains a minimum age and/or a maximum age.
-""")
-model AcceptedAgeRange {
-  @doc("A person's age, given as a number (value) and a unit (e.g. years, months)")
-  minimumAge?: AcceptedAge;
-
-  @doc("A person's age, given as a number (value) and a unit (e.g. years, months)")
-  maximumAge?: AcceptedAge;
-}
-
-@doc("A person's age, given as a number (value) and a unit (e.g. years, months)")
-model AcceptedAge {
-  @doc("Possible units for a person's age.")
-  unit: AgeUnit;
-
-  @doc("The number of years/months/days that represents the person's age.")
-  @minValueExclusive(0.0)
-  value: float32;
-}
-
 @doc("Trial data which is of interest to the potential participant.")
 model ClinicalTrialMetadata {
   @doc("""
@@ -337,24 +288,9 @@ model ClinicalTrialResearchFacility {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-@doc("Possible values for the Sex eligibility criterion as accepted by clinical trials, which indicates the sex of people who may participate in a clinical study.")
-enum ClinicalTrialAcceptedSex {
-  All: "all",
-  Female: "female",
-  Male: "male",
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-@doc("Possible units for a person's age.")
-enum AgeUnit {
-  Years: "years",
-  Months: "months",
-  Days: "days",
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("Possible phases of a clinical trial.")
-enum ClinicalTrialPhase {
+union ClinicalTrialPhase {
+  string,
   NotApplicable: "notApplicable",
   EarlyPhase1: "earlyPhase1",
   Phase1: "phase1",
@@ -365,7 +301,8 @@ enum ClinicalTrialPhase {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("Possible study types of a clinical trial.")
-enum ClinicalTrialStudyType {
+union ClinicalTrialStudyType {
+  string,
   Interventional: "interventional",
   Observational: "observational",
   ExpandedAccess: "expandedAccess",
@@ -374,7 +311,8 @@ enum ClinicalTrialStudyType {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("Possible recruitment status of a clinical trial.")
-enum ClinicalTrialRecruitmentStatus {
+union ClinicalTrialRecruitmentStatus {
+  string,
   UnknownStatus: "unknownStatus",
   NotYetRecruiting: "notYetRecruiting",
   Recruiting: "recruiting",
@@ -383,7 +321,8 @@ enum ClinicalTrialRecruitmentStatus {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("Possible purposes of a clinical trial.")
-enum ClinicalTrialPurpose {
+union ClinicalTrialPurpose {
+  string,
   NotApplicable: "notApplicable",
   Screening: "screening",
   Diagnostic: "diagnostic",
@@ -398,31 +337,36 @@ enum ClinicalTrialPurpose {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("Possible sources of a clinical trial.")
-enum ClinicalTrialSource {
+union ClinicalTrialSource {
+  string,
   Custom: "custom",
   ClinicaltrialsGov: "clinicaltrials.gov",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("`GeoJSON` type.")
-enum GeoJsonType {
+union GeoJsonType {
+  string,
   Feature: "Feature",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("`GeoJSON` geometry type.")
-enum GeoJsonGeometryType {
+union GeoJsonGeometryType {
+  string,
   Point: "Point",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("`GeoJSON` object sub-type.")
-enum GeoJsonPropertiesSubType {
+union GeoJsonPropertiesSubType {
+  string,
   Circle: "Circle",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("The type of the Trial Matcher inference.")
-enum TrialMatcherInferenceType {
+union TrialMatcherInferenceType {
+  string,
   TrialEligibility: "trialEligibility",
 }
