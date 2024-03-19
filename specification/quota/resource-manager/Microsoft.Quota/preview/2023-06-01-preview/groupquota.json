@@ -1253,7 +1253,7 @@
             "description": "Quota requests payload.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SubmittedResourceRequestStatus"
+              "$ref": "#/definitions/QuotaAllocationRequestStatus"
             }
           }
         ],
@@ -1261,7 +1261,7 @@
           "200": {
             "description": "OK. , Create or Update",
             "schema": {
-              "$ref": "#/definitions/SubmittedResourceRequestStatus"
+              "$ref": "#/definitions/QuotaAllocationRequestStatus"
             }
           },
           "201": {
@@ -1334,7 +1334,7 @@
             "description": "Quota requests payload.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SubmittedResourceRequestStatus"
+              "$ref": "#/definitions/QuotaAllocationRequestStatus"
             }
           }
         ],
@@ -1342,7 +1342,7 @@
           "200": {
             "description": "Request status details.",
             "schema": {
-              "$ref": "#/definitions/SubmittedResourceRequestStatus"
+              "$ref": "#/definitions/QuotaAllocationRequestStatus"
             }
           },
           "202": {
@@ -1410,7 +1410,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/SubmittedResourceRequestStatus"
+              "$ref": "#/definitions/QuotaAllocationRequestStatus"
             }
           },
           "default": {
@@ -1730,7 +1730,7 @@
     },
     "QuotaAllocationRequestStatus": {
       "type": "object",
-      "description": "The new quota limit request status.",
+      "description": "The subscription quota allocation status.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
@@ -1802,7 +1802,7 @@
         }
       }
     },
-    "QuotaAllocationRequestBase": {
+    "GroupQuotaRequestBase": {
       "type": "object",
       "description": "The new GroupQuota limit requested.",
       "properties": {
@@ -1837,6 +1837,27 @@
             "comments": {
               "description": "GroupQuota Request comments and details for request. This is optional paramter to provide more details related to the requested resource.",
               "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "QuotaAllocationRequestBase": {
+      "type": "object",
+      "description": "The new quota request allocated to subscription.",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "format": "int64",
+              "description": "The new quota limit for the subscription. The incremental quota will be allocated from pre-approved group quota."
+            },
+            "location" : {
+              "type": "string",
+              "description": "The location for which the subscription is allocated"
             }
           }
         }
@@ -2166,7 +2187,7 @@
           "properties": {
             "requestedResource": {
               "description": "Requested Resource.",
-              "$ref": "#/definitions/QuotaAllocationRequestBase"
+              "$ref": "#/definitions/GroupQuotaRequestBase"
             },
             "requestSubmitTime": {
               "description": "The request submission time. The date conforms to the following format specified by the ISO 8601 standard: yyyy-MM-ddTHH:mm:ssZ",
