@@ -48,7 +48,7 @@ param (
             Get-Version $_ })]
     [string] $NewVersion,
     
-    [Parameter()]
+    [Parameter(Mandatory = $true)]
     [ValidateScript({ Get-Version $_ })]
     [ArgumentCompleter({
             param($commandName,
@@ -62,10 +62,7 @@ param (
             ForEach-Object { "preview/$_" }
             return $stableVersions + $previewVersions
         })]
-    # By Default, use the last preview version
-    [string] $BaseVersion = (
-        Get-ChildItem "$PSScriptRoot/../../specification/$ServiceDirectory/$ServiceType/$Provider/preview/" -Directory | Select-Object -ExpandProperty Name | Sort-Object -Descending | Select-Object -First 1 | ForEach-Object { "preview/$_" }
-    )
+    [string] $BaseVersion
 )
 
 $ErrorActionPreference = 'Stop'
