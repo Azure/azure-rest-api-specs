@@ -935,7 +935,7 @@
     "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaRequests/{requestId}": {
       "get": {
         "tags": [
-          "GroupQuotaLimitRequests"
+          "GroupQuotaLimitRequestStatus"
         ],
         "summary": "Get the status of a single GroupQuota request by requestId.",
         "description": "Get API to check the status of a GroupQuota request by requestId.",
@@ -974,8 +974,48 @@
           }
         }
       }
+    },"/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaRequests": {
+      "get": {
+        "tags": [
+          "GroupQuotaLimitRequestStatus"
+        ],
+        "summary": "Get the status of a single GroupQuota request by requestId.",
+        "description": "Get API to check the status of a GroupQuota request by requestId.",
+        "operationId": "GroupQuotaLimitsRequests_Get",
+        "x-ms-examples": {
+          "GroupQuotaLimitsRequests_Get": {
+            "$ref": "./examples/GroupQuotaLimitsRequests/GroupQuotaLimitsRequests_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ManagementGroupId"
+          },
+          {
+            "$ref": "#/parameters/GroupQuotaName"
+          },
+
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success, with the details of the group quota request.",
+            "schema": {
+              "$ref": "#/definitions/SubmittedResourceRequestStatusList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocations": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocations/ resources": {
       "get": {
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
