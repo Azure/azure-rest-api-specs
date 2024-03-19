@@ -24,8 +24,8 @@ interface DevCenterClientOperations {
   getPool is DevCenterService.DevBoxesOperations.getPool;
   listSchedules is DevCenterService.DevBoxesOperations.listSchedules;
   getSchedule is DevCenterService.DevBoxesOperations.getSchedule;
-  listAllDevBoxes is DevCenterService.DevBoxesDevCenter.listAllDevBoxes;
-  listAllDevBoxesByUser is DevCenterService.DevBoxesDevCenter.listAllDevBoxesByUser;
+  listAllDevBoxes is DevCenterService.DevCenterOperations.listAllDevBoxes;
+  listAllDevBoxesByUser is DevCenterService.DevCenterOperations.listAllDevBoxesByUser;
   listDevBoxes is DevCenterService.DevBoxesOperations.listDevBoxes;
   getDevBox is DevCenterService.DevBoxesOperations.getDevBox;
   createDevBox is DevCenterService.DevBoxesOperations.createDevBox;

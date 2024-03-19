@@ -28,8 +28,8 @@ interface DevBoxesClientOperations {
   getPool is DevCenterService.DevBoxesOperations.getPool;
   listSchedules is DevCenterService.DevBoxesOperations.listSchedules;
   getSchedule is DevCenterService.DevBoxesOperations.getSchedule;
-  listAllDevBoxes is DevCenterService.DevBoxesDevCenter.listAllDevBoxes;
-  listAllDevBoxesByUser is DevCenterService.DevBoxesDevCenter.listAllDevBoxesByUser;
+  listAllDevBoxes is DevCenterService.DevCenterOperations.listAllDevBoxes;
+  listAllDevBoxesByUser is DevCenterService.DevCenterOperations.listAllDevBoxesByUser;
   listDevBoxes is DevCenterService.DevBoxesOperations.listDevBoxes;
   getDevBox is DevCenterService.DevBoxesOperations.getDevBox;
   @convenientAPI(false, "csharp") // https://github.com/Azure/azure-rest-api-specs/issues/28083
