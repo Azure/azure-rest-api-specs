@@ -46,66 +46,75 @@ enum ProvisioningState {
   Accepted,
 }
 
-@doc("The Azure Extended Zone registration status for a subscription.")
+@doc("The Azure Extended Zone registration status for a subscription")
 enum RegistrationState {
-  @doc("Not Registered State")
+  @doc("Subscription not registered for the Azure Extended Zone")
   NotRegistered,
 
-  @doc("Pending Register State")
+  @doc("Subscription pending registration for the Azure Extended Zone")
   PendingRegister,
 
-  @doc("Registered State")
+  @doc("Subscription is registered for the Azure Extended Zone")
   Registered,
 
-  @doc("Pending Unregister State")
+  @doc("Subscription is pending unregistering for the Azure Extended Zone")
   PendingUnregister,
 }
 
-@doc("The properties of an AzureExtendedZone Resource")
-model AzureExtendedZoneProperties {
+@doc("The properties of an Extended Zone resource.")
+model ExtendedZoneProperties {
   @visibility("read")
-  @doc("The status of the last operation.")
+  @doc("Status of the last operation performed by the subscription on the Edge Zone resource")
   provisioningState?: ProvisioningState;
 
   @visibility("read")
-  @doc("AzureExtendedZone registration approved or not")
+  @doc("Indicates the Azure Extended Zone registration’s approval status.")
   registrationState?: RegistrationState;
 
-  @doc("AzureExtendedZone displayName")
+  @visibility("read")
+  @doc("Display name of the Azure Extended Zone.")
   displayName: string;
 
-  @doc("AzureExtendedZone regionalDisplayName")
+  @visibility("read")
+  @doc("Regional display name of the Azure Extended Zone.")
   regionalDisplayName: string;
 
-  @doc("AzureExtendedZone regionType")
+  @visibility("read")
+  @doc("Type of region for the Azure Extended Zone.")
   regionType: string;
 
-  @doc("AzureExtendedZone regionCategory")
+  @visibility("read")
+  @doc("Category of region for the Azure Extended Zone.")
   regionCategory: string;
 
-  @doc("AzureExtendedZone geography")
+  @visibility("read")
+  @doc("Geography of the Azure Extended Zone.")
   geography: string;
 
-  @doc("AzureExtendedZone geographyGroup")
+  @visibility("read")
+  @doc("The Geography Group of the Azure Extended Zone.")
   geographyGroup: string;
 
-  @doc("AzureExtendedZone longitude")
+  @visibility("read")
+  @doc("The Longitude of the Azure Extended Zone.")
   longitude: string;
 
-  @doc("AzureExtendedZone latitude")
+  @visibility("read")
+  @doc("The Latitude of the Azure Extended Zone.")
   latitude: string;
 
-  @doc("AzureExtendedZone homeLocation")
+  @visibility("read")
+  @doc("The Home Location of the Azure Extended Zone.")
   homeLocation: string;
 }
 
-@doc("An AzureExtendedZone resource")
+@doc("Resource that represents an Azure Extended Zone available to a subscription for registering and unregistering.")
 @subscriptionResource
-model AzureExtendedZone is ProxyResource<AzureExtendedZoneProperties> {
-  @doc("The name of the AzureExtendedZone")
+model ExtendedZone is ProxyResource<ExtendedZoneProperties> {
+  @doc("The name of the ExtendedZone")
   @pattern("^[a-zA-Z0-9-]{3,24}$")
-  @key("azureExtendedZoneName")
-  @segment("azureExtendedZones")
+  @key("extendedZoneName")
+  @segment("extendedZones")
   @path
   name: string;
 }
@@ -123,18 +132,18 @@ op ArmResourceActionNoBodySync<
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 ): ArmResponse<TResource> | ErrorResponse;
 
-@doc("AzureExtendedZone operations")
+@doc("ExtendedZone operations")
 @armResourceOperations
-interface AzureExtendedZones {
-  @doc("Get an Azure Extended Zone for a subscription")
-  get is ArmResourceRead<AzureExtendedZone>;
+interface ExtendedZones {
+  @doc("Gets an Azure Extended Zone for a subscription")
+  get is ArmResourceRead<ExtendedZone>;
 
-  @doc("Lists the Azure Extended Zones for a subscription")
-  listBySubscription is ArmListBySubscription<AzureExtendedZone>;
+  @doc("Lists the Azure Extended Zones available to a subscription")
+  listBySubscription is ArmListBySubscription<ExtendedZone>;
 
-  @doc("Registers a subscription for an Azure Extended Zone")
-  register is ArmResourceActionNoBodySync<AzureExtendedZone>;
+  @doc("Registers a subscription for an Extended Zone")
+  register is ArmResourceActionNoBodySync<ExtendedZone>;
 
-  @doc("Unregisters a subscription for an Azure Extended Zone")
-  unregister is ArmResourceActionNoBodySync<AzureExtendedZone>;
+  @doc("Unregisters a subscription for an Extended Zone")
+  unregister is ArmResourceActionNoBodySync<ExtendedZone>;
 }
