@@ -11896,6 +11896,11 @@
           "type": "string",
           "x-nullable": true
         },
+        "deploymentConfiguration": {
+          "description": "Properties relevant to different deployment types.",
+          "$ref": "#/definitions/BatchDeploymentConfiguration",
+          "x-nullable": true
+        },
         "errorThreshold": {
           "format": "int32",
           "description": "Error threshold, if the error count for the entire input goes above this value,\r\nthe batch inference will be aborted. Range is [-1, int.MaxValue].\r\nFor FileDataset, this value is the count of file failures.\r\nFor TabularDataset, this value is the count of record failures.\r\nIf set to -1 (the lower bound), all failures during batch inference will be ignored.",
@@ -11954,6 +11959,41 @@
         }
       },
       "x-ms-client-name": "BatchDeploymentProperties",
+      "additionalProperties": false
+    },
+    "BatchDeploymentConfiguration": {
+      "description": "Properties relevant to different deployment types.",
+      "required": [
+        "deploymentConfigurationType"
+      ],
+      "type": "object",
+      "properties": {
+        "deploymentConfigurationType": {
+          "description": "[Required] The type of the deployment",
+          "$ref": "#/definitions/BatchDeploymentConfigurationType"
+        }
+      },
+      "discriminator": "deploymentConfigurationType"
+    },
+    "BatchDeploymentConfigurationType": {
+      "description": "The enumerated property types for batch deployments.",
+      "enum": [
+        "Model",
+        "PipelineComponent"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "BatchDeploymentConfigurationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Model"
+          },
+          {
+            "value": "PipelineComponent"
+          }
+        ]
+      },
       "additionalProperties": false
     },
     "BatchDeploymentTrackedResource": {
@@ -12138,6 +12178,47 @@
           }
         ]
       },
+      "additionalProperties": false
+    },
+    "BatchPipelineComponentDeploymentConfiguration": {
+      "description": "Properties for a Batch Pipeline Component Deployment.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BatchDeploymentConfiguration"
+        }
+      ],
+      "properties": {
+        "componentId": {
+          "description": "The ARM id of the component to be run.",
+          "$ref": "#/definitions/IdAssetReference",
+          "x-nullable": true
+        },
+        "description": {
+          "description": "The description which will be applied to the job.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "settings": {
+          "description": "Run-time settings for the pipeline job.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
+        },
+        "tags": {
+          "description": "The tags which will be applied to the job.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "PipelineComponent",
       "additionalProperties": false
     },
     "BatchRetrySettings": {
@@ -12879,33 +12960,6 @@
       },
       "additionalProperties": false
     },
-    "Collection": {
-      "type": "object",
-      "properties": {
-        "clientId": {
-          "description": "The msi client id used to collect logging to blob storage. If it's null,backend will pick a registered endpoint identity to auth.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "dataCollectionMode": {
-          "description": "Enable or disable data collection.",
-          "default": "Disabled",
-          "$ref": "#/definitions/DataCollectionMode"
-        },
-        "dataId": {
-          "description": "The data asset arm resource id. Client side will ensure data asset is pointing to the blob storage, and backend will collect data to the blob storage.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "samplingRate": {
-          "format": "double",
-          "description": "The sampling rate for collection. Sampling rate 1.0 means we collect 100% of data by default.",
-          "default": 1,
-          "type": "number"
-        }
-      },
-      "additionalProperties": false
-    },
     "ColumnTransformer": {
       "description": "Column transformer parameters.",
       "type": "object",
@@ -13593,53 +13647,6 @@
             "value": "Complete"
           }
         ]
-      },
-      "additionalProperties": false
-    },
-    "DataCollectionMode": {
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "DataCollectionMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Enabled"
-          },
-          {
-            "value": "Disabled"
-          }
-        ]
-      },
-      "additionalProperties": false
-    },
-    "DataCollector": {
-      "required": [
-        "collections"
-      ],
-      "type": "object",
-      "properties": {
-        "collections": {
-          "description": "[Required] The collection configuration. Each collection has it own configuration to collect model data and the name of collection can be arbitrary string.\r\nModel data collector can be used for either payload logging or custom logging or both of them. Collection request and response are reserved for payload logging, others are for custom logging.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/Collection",
-            "x-nullable": true
-          }
-        },
-        "requestLogging": {
-          "description": "The request logging configuration for mdc, it includes advanced logging settings for all collections. It's optional.",
-          "$ref": "#/definitions/RequestLogging",
-          "x-nullable": true
-        },
-        "rollingRate": {
-          "description": "When model data is collected to blob storage, we need to roll the data to different path to avoid logging all of them in a single blob file.\r\nIf the rolling rate is hour, all data will be collected in the blob path /yyyy/MM/dd/HH/.\r\nIf it's day, all data will be collected in blob path /yyyy/MM/dd/.\r\nThe other benefit of rolling path is that model monitoring ui is able to select a time range of data very quickly.",
-          "default": "Hour",
-          "$ref": "#/definitions/RollingRateType"
-        }
       },
       "additionalProperties": false
     },
@@ -19313,11 +19320,6 @@
           "default": false,
           "type": "boolean"
         },
-        "dataCollector": {
-          "description": "The mdc configuration, we disable mdc when it's null.",
-          "$ref": "#/definitions/DataCollector",
-          "x-nullable": true
-        },
         "egressPublicNetworkAccess": {
           "description": "If Enabled, allow egress public network access. If Disabled, this will create secure egress. Default: Enabled.",
           "default": "Enabled",
@@ -20476,20 +20478,6 @@
       },
       "additionalProperties": false
     },
-    "RequestLogging": {
-      "type": "object",
-      "properties": {
-        "captureHeaders": {
-          "description": "For payload logging, we only collect payload by default. If customers also want to collect the specified headers, they can set them in captureHeaders so that backend will collect those headers along with payload.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
-    },
     "ResourceBase": {
       "type": "object",
       "properties": {
@@ -20599,38 +20587,6 @@
         }
       },
       "x-ms-discriminator-value": "Rolling",
-      "additionalProperties": false
-    },
-    "RollingRateType": {
-      "enum": [
-        "Year",
-        "Month",
-        "Day",
-        "Hour",
-        "Minute"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "RollingRateType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Year"
-          },
-          {
-            "value": "Month"
-          },
-          {
-            "value": "Day"
-          },
-          {
-            "value": "Hour"
-          },
-          {
-            "value": "Minute"
-          }
-        ]
-      },
       "additionalProperties": false
     },
     "Route": {
