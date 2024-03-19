@@ -1817,27 +1817,62 @@
           "$ref": "#/definitions/stringResourceName",
           "description": "Reference to the name of the authentication setting which is used for querying Azure Resource Graph. The same authentication setting will also be assigned to any discovered entities."
         },
-        "showEntity": {
-          "$ref": "#/definitions/DiscoveryRuleShowEntityBehavior",
-          "description": "Whether to create an entity for the discovery rule itself. If set, all discovered entities will be children of this entity."
-        },
         "discoverRelationships": {
           "$ref": "#/definitions/DiscoveryRuleRelationshipDiscoveryBehavior",
           "description": "Whether to create relationships between the discovered entities based on a set of built-in rules. These relationships cannot be manually deleted."
+        },
+        "addRecommendedSignals": {
+          "$ref": "#/definitions/DiscoveryRuleRecommendedSignalsBehavior",
+          "description": "Whether to add all recommended signals to the discovered entities."
         },
         "deletionDate": {
           "type": "string",
           "format": "date-time",
           "description": "Date when the discovery rule was (soft-)deleted",
           "readOnly": true
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message if the last discovery operation failed.",
+          "readOnly": true
+        },
+        "numberOfDiscoveredEntities": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of discovered entities in the last discovery operation.",
+          "readOnly": true
         }
       },
       "required": [
         "resourceGraphQuery",
         "authenticationSetting",
-        "showEntity",
-        "discoverRelationships"
+        "discoverRelationships",
+        "addRecommendedSignals"
       ]
+    },
+    "DiscoveryRuleRecommendedSignalsBehavior": {
+      "type": "string",
+      "description": "Discovery rule recommended signal behavior",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "DiscoveryRuleRecommendedSignalsBehavior",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Automatically add recommended signals"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Do not automatically add recommended signals"
+          }
+        ]
+      }
     },
     "DiscoveryRuleRelationshipDiscoveryBehavior": {
       "type": "string",
@@ -1859,30 +1894,6 @@
             "name": "Disabled",
             "value": "Disabled",
             "description": "Do not automatically attempt to discover relationships"
-          }
-        ]
-      }
-    },
-    "DiscoveryRuleShowEntityBehavior": {
-      "type": "string",
-      "description": "Discovery rule show entity behavior",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "DiscoveryRuleShowEntityBehavior",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Create an entity for the discovery rule itself"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Do not create entity for discovery rule"
           }
         ]
       }
@@ -2080,10 +2091,10 @@
           "$ref": "#/definitions/IconDefinition",
           "description": "Visual icon definition. If not set, a default icon is used."
         },
-        "serviceLevelObjective": {
+        "healthObjective": {
           "type": "number",
           "format": "float",
-          "description": "Service level objective",
+          "description": "Health objective as a percentage of time the entity should be healthy.",
           "minimum": 0,
           "maximum": 100
         },
@@ -2138,6 +2149,11 @@
           "type": "string",
           "format": "date-time",
           "description": "Date when the entity was (soft-)deleted",
+          "readOnly": true
+        },
+        "healthState": {
+          "$ref": "#/definitions/HealthState",
+          "description": "Health state of this entity",
           "readOnly": true
         }
       }
@@ -2285,6 +2301,48 @@
             "type": "string"
           }
         }
+      }
+    },
+    "HealthState": {
+      "type": "string",
+      "description": "Health state of an entity",
+      "enum": [
+        "Healthy",
+        "Degraded",
+        "Error",
+        "Unknown",
+        "Deleted"
+      ],
+      "x-ms-enum": {
+        "name": "HealthState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Healthy",
+            "value": "Healthy",
+            "description": "Healthy status"
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "Degraded status"
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "Error status (Unhealthy)"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown status"
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Deleted status"
+          }
+        ]
       }
     },
     "IconDefinition": {
@@ -2824,10 +2882,6 @@
           "$ref": "#/definitions/EvaluationRule",
           "description": "Evaluation rules for the signal definition"
         },
-        "enabledState": {
-          "$ref": "#/definitions/SignalEnabledState",
-          "description": "Signal definition enabled state"
-        },
         "deletionDate": {
           "type": "string",
           "format": "date-time",
@@ -2838,21 +2892,8 @@
       "discriminator": "signalKind",
       "required": [
         "signalKind",
-        "evaluationRules",
-        "enabledState"
+        "evaluationRules"
       ]
-    },
-    "SignalEnabledState": {
-      "type": "string",
-      "description": "Signal enabled state",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "SignalEnabledState",
-        "modelAsString": true
-      }
     },
     "SignalGroup": {
       "type": "object",

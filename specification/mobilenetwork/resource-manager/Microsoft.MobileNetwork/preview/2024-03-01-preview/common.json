@@ -259,6 +259,50 @@
       "description": "Reference to an Azure Arc custom location resource.",
       "x-ms-azure-resource": true
     },
+    "VirtualNetworkResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Virtual network resource ID."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Reference to an virtual network resource, to be used as an interface for an Edge Virtual Network.",
+      "x-ms-azure-resource": true
+    },
+    "EdgeNetworkSecurityGroupResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+/[eE][dD][gG][eE][nN][eE][tT][wW][oO][rR][kK][sS][eE][cC][uU][rR][iI][tT][yY][gG][rR][oO][uU][pP][sS]/[^/?#]+$",
+          "description": "Reference to an Edge Network Security Group Resource Id"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Reference to an Edge Network Security Group Resource",
+      "x-ms-azure-resource": true
+    },
+    "EdgeVirtualNetworkResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^/[sS][uU][bB][sS][cC][rR][iI][pP][tT][iI][oO][nN][sS]/[^/?#]+/[rR][eE][sS][oO][uU][rR][cC][eE][gG][rR][oO][uU][pP][sS]/[^/?#]+/[pP][rR][oO][vV][iI][dD][eE][rR][sS]/[mM][iI][cC][rR][oO][sS][oO][fF][tT]\\.[mM][oO][bB][iI][lL][eE][nN][eE][tT][wW][oO][rR][kK]/[pP][aA][cC][kK][eE][tT][cC][oO][rR][eE][cC][oO][nN][tT][rR][oO][lL][pP][lL][aA][nN][eE][sS]/[^/?#]+/[pP][aA][cC][kK][eE][tT][cC][oO][rR][eE][dD][aA][tT][aA][pP][lL][aA][nN][eE][sS]/[^/?#]+/[eE][dD][gG][eE][vV][iI][rR][tT][uU][aA][lL][nN][eE][tT][wW][oO][rR][kK][sS]/[^/?#]+$",
+          "description": "Reference to an Edge Virtual Network Resource Id"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "Reference to an Edge Virtual Network",
+      "x-ms-azure-resource": true
+    },
     "NexusCloudServicesNetworkResourceId": {
       "type": "object",
       "properties": {
@@ -551,6 +595,42 @@
       },
       "description": "Interface properties"
     },
+    "EdgeNetworkInterface": {
+      "type": "object",
+      "description": "Edge Network Interface properties",
+      "properties": {
+        "deviceInterface": {
+          "description": "The interface on the core side to which traffic on this Virtual Network is sent.",
+          "$ref": "#/definitions/VirtualNetworkResourceId"
+        },
+        "interfaceProperties": {
+          "description": "Core side interface properties",
+          "$ref": "#/definitions/InterfaceProperties"
+        },
+        "edgeNetworkSecurityGroup": {
+          "description": "Edge Network Security Group applying to traffic on this interface.",
+          "$ref": "#/definitions/EdgeNetworkSecurityGroupResourceId"
+        }
+      }
+    },
+    "EdgeSubnetReference": {
+      "type": "object",
+      "description": "Reference to an Edge Subnet within an Edge Virtual Network",
+      "properties": {
+        "edgeVirtualNetwork": {
+          "description": "The Edge Virtual Network containing the Edge Subnet",
+          "$ref": "#/definitions/EdgeVirtualNetworkResourceId"
+        },
+        "edgeSubnetName": {
+          "description": "The name of the Edge Subnet",
+          "type": "string"
+        }
+      },
+      "required": [
+        "edgeVirtualNetwork",
+        "edgeSubnetName"
+      ]
+    },
     "BillingSku": {
       "type": "string",
       "description": "The SKU of the packet core control plane resource. The SKU list may change over time when a new SKU gets added or an exiting SKU gets removed.",
@@ -588,6 +668,18 @@
         ]
       }
     },
+    "EndpointSecurityGroup": {
+      "type": "object",
+      "description": "A group of User Equipment endpoints to which security policy can be applied.",
+      "properties": {
+        "name": {
+          "description": "The name of the endpoint security group.",
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+          "maxLength": 64
+        }
+      }
+    },
     "ManagedServiceIdentityType": {
       "description": "Type of managed service identity (currently only UserAssigned allowed).",
       "enum": [
@@ -614,6 +706,34 @@
       "required": [
         "type"
       ]
+    },
+    "UserEquipmentAddressPool": {
+      "type": "object",
+      "properties": {
+        "subnet": {
+          "$ref": "./common.json#/definitions/EdgeSubnetReference"
+        },
+        "ipv4Prefix": {
+          "$ref": "./ts29571.json#/definitions/Ipv4AddrMask"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Static",
+            "Dynamic",
+            "Unmanaged"
+          ],
+          "x-ms-enum": {
+            "name": "UserEquipmentAddressPoolType",
+            "modelAsString": true
+          },
+          "description": "The type of User Equipment Address Pool."
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "description": "Pool of addresses which can be used by User Equipment"
     }
   },
   "parameters": {
@@ -625,6 +745,16 @@
       "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])*(\\.[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])*)*$",
       "maxLength": 64,
       "description": "The name of the attached data network.",
+      "x-ms-parameter-location": "method"
+    },
+    "AttachedWifiSsidNameParameter": {
+      "name": "attachedWifiSsidName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the Wi-Fi Attached SSID.",
       "x-ms-parameter-location": "method"
     },
     "DataNetworkNameParameter": {
@@ -645,6 +775,26 @@
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
       "maxLength": 64,
       "description": "The name of the diagnostics package.",
+      "x-ms-parameter-location": "method"
+    },
+    "EdgeNetworkSecurityGroupNameParameter": {
+      "name": "edgeNetworkSecurityGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the Edge Network Security Group.",
+      "x-ms-parameter-location": "method"
+    },
+    "EdgeVirtualNetworkNameParameter": {
+      "name": "edgeVirtualNetworkName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the Edge Virtual Network.",
       "x-ms-parameter-location": "method"
     },
     "MobileNetworkNameParameter": {
@@ -685,6 +835,16 @@
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
       "maxLength": 64,
       "description": "The name of the packet core data plane.",
+      "x-ms-parameter-location": "method"
+    },
+    "RadioAccessNetworkNameParameter": {
+      "name": "radioAccessNetworkName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the radio access network.",
       "x-ms-parameter-location": "method"
     },
     "ServiceNameParameter": {
@@ -745,6 +905,16 @@
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
       "maxLength": 64,
       "description": "The name of the network slice.",
+      "x-ms-parameter-location": "method"
+    },
+    "WifiSsidNameParameter": {
+      "name": "wifiSsidName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+      "maxLength": 64,
+      "description": "The name of the Wi-Fi SSID.",
       "x-ms-parameter-location": "method"
     }
   }

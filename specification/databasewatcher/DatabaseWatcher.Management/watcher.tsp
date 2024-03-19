@@ -2,8 +2,7 @@ import "@typespec/rest";
 import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@azure-tools/typespec-providerhub";
-import "./sqlDbSingleDatabaseTarget.tsp";
+import "./sqlDbDatabaseTarget.tsp";
 import "./sqlDbElasticPoolTarget.tsp";
 import "./sqlMiTarget.tsp";
 import "./sqlVmTarget.tsp";
@@ -68,23 +67,18 @@ model Datastore {
   @doc("The Kusto cluster display name.")
   kustoClusterDisplayName?: string;
 
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"
   @doc("The Kusto cluster URI.")
   kustoClusterUri: string;
 
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"
   @doc("The Kusto data ingestion URI.")
   kustoDataIngestionUri: string;
 
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"
   @doc("The name of a Kusto database.")
   kustoDatabaseName: string;
 
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"
   @doc("The Kusto management URL.")
   kustoManagementUrl: string;
 
-  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning"
   @doc("The type of a Kusto offering.")
   kustoOfferingType: KustoOfferingType;
 }
@@ -108,9 +102,9 @@ enum KustoOfferingType {
 @armResourceOperations
 interface Watchers {
   get is ArmResourceRead<Watcher>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Watcher>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Watcher>;
   update is ArmResourcePatchAsync<Watcher, WatcherProperties>;
-  delete is ArmResourceDeleteAsync<Watcher>;
+  delete is ArmResourceDeleteWithoutOkAsync<Watcher>;
   listByResourceGroup is ArmResourceListByParent<Watcher>;
   listBySubscription is ArmListBySubscription<Watcher>;
 
@@ -127,7 +121,7 @@ interface Watchers {
   )
   start(
     ...ResourceInstanceParameters<Watcher>,
-  ): ArmAcceptedResponse | ArmResponse<Watcher> | ErrorResponse;
+  ): ArmAcceptedLroResponse | ArmResponse<Watcher> | ErrorResponse;
 
   @doc("The action to stop monitoring all targets configured for a database watcher.")
   @action
@@ -142,7 +136,7 @@ interface Watchers {
   )
   stop(
     ...ResourceInstanceParameters<Watcher>,
-  ): ArmAcceptedResponse | ArmResponse<Watcher> | ErrorResponse;
+  ): ArmAcceptedLroResponse | ArmResponse<Watcher> | ErrorResponse;
 }
 
 @doc("The monitoring collection status of a watcher.")
