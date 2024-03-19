@@ -1,7 +1,7 @@
 ## Java
 These settings apply only when `--java` is specified on the command line.
 
-``` yaml $(tag) == 'package-2024-02' && $(java)
+``` yaml $(java)
 directive:
   - from: ueInfo.json
     where:
