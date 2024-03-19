@@ -27,7 +27,7 @@ These are the global settings for the newrelic.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-01-01
+tag: package-2024-03-01
 ```
 
 ### Tag: package-2022-07-01-preview
@@ -82,6 +82,15 @@ These settings apply only when `--tag=package-2024-01-01` is specified on the co
 ```yaml $(tag) == 'package-2024-01-01'
 input-file:
   - NewRelic.Observability/stable/2024-01-01/NewRelic.json
+```
+
+### Tag: package-2024-03-01
+
+These settings apply only when `--tag=package-2024-03-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-03-01'
+input-file:
+  - NewRelic.Observability/stable/2024-03-01/NewRelic.json
 ```
 
 ---

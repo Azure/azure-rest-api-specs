@@ -1,0 +1,83 @@
+{
+  "title": "PlacementPolicies_Update",
+  "operationId": "PlacementPolicies_Update",
+  "parameters": {
+    "api-version": "2023-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "group1",
+    "privateCloudName": "cloud1",
+    "clusterName": "cluster1",
+    "placementPolicyName": "policy1",
+    "placementPolicyUpdate": {
+      "properties": {
+        "state": "Disabled",
+        "vmMembers": [
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/clusters/cluster1/virtualMachines/vm-128",
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/clusters/cluster1/virtualMachines/vm-256"
+        ],
+        "hostMembers": [
+          "fakehost22.nyc1.kubernetes.center",
+          "fakehost23.nyc1.kubernetes.center",
+          "fakehost24.nyc1.kubernetes.center"
+        ],
+        "affinityStrength": "Must",
+        "azureHybridBenefitType": "SqlHost"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/clusters/cluster1/placementPolicies/policy1",
+        "name": "policy1",
+        "type": "Microsoft.AVS/privateClouds/clusters/placementPolicies",
+        "properties": {
+          "displayName": "policy1",
+          "type": "VmHost",
+          "state": "Disabled",
+          "vmMembers": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/clusters/cluster1/virtualMachines/vm-128",
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/clusters/cluster1/virtualMachines/vm-256"
+          ],
+          "hostMembers": [
+            "fakehost22.nyc1.kubernetes.center",
+            "fakehost23.nyc1.kubernetes.center",
+            "fakehost24.nyc1.kubernetes.center"
+          ],
+          "affinityType": "AntiAffinity",
+          "affinityStrength": "Must",
+          "azureHybridBenefitType": "SqlHost",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/clusters/cluster1/placementPolicies/policy1/operationstatuses/00000000-0000-0000-0000-000000000000"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/clusters/cluster1/placementPolicies/policy1",
+        "name": "policy1",
+        "type": "Microsoft.AVS/privateClouds/clusters/placementPolicies",
+        "properties": {
+          "displayName": "policy1",
+          "type": "VmHost",
+          "state": "Disabled",
+          "vmMembers": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/clusters/cluster1/virtualMachines/vm-128",
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/clusters/cluster1/virtualMachines/vm-256"
+          ],
+          "hostMembers": [
+            "fakehost22.nyc1.kubernetes.center",
+            "fakehost23.nyc1.kubernetes.center",
+            "fakehost24.nyc1.kubernetes.center"
+          ],
+          "affinityType": "AntiAffinity",
+          "affinityStrength": "Must",
+          "azureHybridBenefitType": "SqlHost",
+          "provisioningState": "Updating"
+        }
+      }
+    }
+  }
+}

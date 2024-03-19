@@ -388,7 +388,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "original-uri"
         },
         "x-ms-long-running-operation": true
       },
@@ -812,7 +812,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "original-uri"
         },
         "x-ms-long-running-operation": true
       },
@@ -1877,7 +1877,8 @@
             "description": "The provisioning state of a member being updated."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "FleetMemberUpdate": {
       "type": "object",
@@ -1976,7 +1977,8 @@
             "description": "The provisioning state of a fleet being deleted."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "FleetUpdateStrategy": {
       "type": "object",
@@ -2076,7 +2078,8 @@
             "description": "Resource creation was canceled."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "FleetUpdateStrategyResourceId": {
       "type": "string",
@@ -2120,7 +2123,7 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/ManagedClusterUpgradeType",
-          "description": "The upgrade type.\nFull requires the KubernetesVersion property to be set.\nNodeImageOnly requires the KubernetesVersion property not to be set."
+          "description": "ManagedClusterUpgradeType is the type of upgrade to be applied."
         },
         "kubernetesVersion": {
           "$ref": "#/definitions/KubernetesVersion",
@@ -2145,12 +2148,12 @@
           {
             "name": "Full",
             "value": "Full",
-            "description": "Full upgrades the control plane and all agent pools of the target ManagedClusters."
+            "description": "Full upgrades the control plane and all agent pools of the target ManagedClusters. Requires the ManagedClusterUpgradeSpec.KubernetesVersion property to be set."
           },
           {
             "name": "NodeImageOnly",
             "value": "NodeImageOnly",
-            "description": "NodeImageOnly upgrades only the node images of the target ManagedClusters."
+            "description": "NodeImageOnly upgrades only the node images of the target ManagedClusters. Requires the ManagedClusterUpgradeSpec.KubernetesVersion property to NOT be set."
           }
         ]
       }
@@ -2356,7 +2359,7 @@
         },
         "updateStrategyId": {
           "$ref": "#/definitions/FleetUpdateStrategyResourceId",
-          "description": "The resource id of the FleetUpdateStrategy resource to reference.\n\nWhen creating a new run, there are three ways to define a strategy for the run:\n1. Define a new strategy in place: Set the \"strategy\" field.\n2. Use an existing strategy: Set the \"updateStrategyId\" field. (since 2023-08-15-preview)\n3. Use the default strategy to update all the members one by one: Leave both \"updateStrategyId\" and \"strategy\" unset. (since 2023-08-15-preview)\n\nSetting both \"updateStrategyId\" and \"strategy\" is invalid.\n\nUpdateRuns created by \"updateStrategyId\" snapshot the referenced UpdateStrategy at the time of creation and store it in the \"strategy\" field.\nSubsequent changes to the referenced FleetUpdateStrategy resource do not propagate.\nUpdateRunStrategy changes can be made directly on the \"strategy\" field before launching the UpdateRun."
+          "description": "The resource id of the FleetUpdateStrategy resource to reference.\n\nWhen creating a new run, there are three ways to define a strategy for the run:\n1. Define a new strategy in place: Set the \"strategy\" field.\n2. Use an existing strategy: Set the \"updateStrategyId\" field. (since 2023-08-15-preview)\n3. Use the default strategy to update all the members one by one: Leave both \"updateStrategyId\" and \"strategy\" unset. (since 2023-08-15-preview)\n\nSetting both \"updateStrategyId\" and \"strategy\" is invalid.\n\nUpdateRuns created by \"updateStrategyId\" snapshot the referenced UpdateStrategy at the time of creation and store it in the \"strategy\" field. \nSubsequent changes to the referenced FleetUpdateStrategy resource do not propagate.\nUpdateRunStrategy changes can be made directly on the \"strategy\" field before launching the UpdateRun."
         },
         "strategy": {
           "$ref": "#/definitions/UpdateRunStrategy",
@@ -2404,7 +2407,8 @@
             "description": "Resource creation was canceled."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "UpdateRunStatus": {
       "type": "object",

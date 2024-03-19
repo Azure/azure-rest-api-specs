@@ -1,0 +1,41 @@
+{
+  "title": "WorkloadNetworks_UpdatePortMirroring",
+  "operationId": "WorkloadNetworks_UpdatePortMirroring",
+  "parameters": {
+    "api-version": "2023-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "group1",
+    "privateCloudName": "cloud1",
+    "portMirroringId": "portMirroring1",
+    "workloadNetworkPortMirroring": {
+      "properties": {
+        "direction": "BIDIRECTIONAL",
+        "source": "vmGroup1",
+        "destination": "vmGroup2",
+        "revision": 1
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/workloadNetworks/default/portMirroringProfiles/portMirroring1",
+        "name": "portMirroring1",
+        "properties": {
+          "displayName": "portMirroring1",
+          "direction": "BIDIRECTIONAL",
+          "source": "vmGroup1",
+          "destination": "vmGroup2",
+          "status": "SUCCESS",
+          "revision": 2
+        },
+        "type": "Microsoft.AVS/privateClouds/workloadNetworks/portMirroringProfiles"
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/group1/providers/Microsoft.AVS/operationstatuses/00000000-0000-0000-0000-000000000000?api-version=2023-09-01"
+      }
+    }
+  }
+}
