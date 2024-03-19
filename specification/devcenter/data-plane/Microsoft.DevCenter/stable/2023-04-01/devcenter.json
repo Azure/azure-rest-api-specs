@@ -53,7 +53,7 @@
   "paths": {
     "/devboxes": {
       "get": {
-        "operationId": "DevBoxesDevCenter_ListAllDevBoxes",
+        "operationId": "DevCenterOperations_ListAllDevBoxes",
         "description": "Lists Dev Boxes that the caller has access to in the DevCenter.",
         "parameters": [
           {
@@ -82,7 +82,7 @@
         },
         "x-ms-examples": {
           "Lists Dev Boxes that the caller has access to in the DevCenter.": {
-            "$ref": "./examples/DevBoxesDevCenterOperations_ListAllDevBoxes.json"
+            "$ref": "./examples/DevCenterOperations_ListAllDevBoxes.json"
           }
         },
         "x-ms-pageable": {
@@ -177,7 +177,7 @@
     },
     "/projects/{projectName}/catalogs": {
       "get": {
-        "operationId": "EnvironmentsOperations_ListCatalogs",
+        "operationId": "EnvironmentsOperations_ListCatalogsByProject",
         "description": "Lists all of the catalogs available for a project.",
         "parameters": [
           {
@@ -216,7 +216,7 @@
         },
         "x-ms-examples": {
           "Lists all of the catalogs available for a project.": {
-            "$ref": "./examples/EnvironmentsOperations_ListCatalogs.json"
+            "$ref": "./examples/EnvironmentsOperations_ListCatalogsByProject.json"
           }
         },
         "x-ms-pageable": {
@@ -401,7 +401,7 @@
     },
     "/projects/{projectName}/environmentDefinitions": {
       "get": {
-        "operationId": "EnvironmentsOperations_ListEnvironmentDefinitions",
+        "operationId": "EnvironmentsOperations_ListEnvironmentDefinitionsByProject",
         "description": "Lists all environment definitions available for a project.",
         "parameters": [
           {
@@ -437,7 +437,7 @@
         },
         "x-ms-examples": {
           "Lists all environment definitions available for a project.": {
-            "$ref": "./examples/EnvironmentsOperations_ListEnvironmentDefinitions.json"
+            "$ref": "./examples/EnvironmentsOperations_ListEnvironmentDefinitionsByProject.json"
           }
         },
         "x-ms-pageable": {
@@ -493,7 +493,7 @@
     },
     "/projects/{projectName}/environments": {
       "get": {
-        "operationId": "EnvironmentsOperations_ListAllEnvironments",
+        "operationId": "EnvironmentsOperations_ListEnvironments",
         "description": "Lists the environments for a project.",
         "parameters": [
           {
@@ -529,7 +529,7 @@
         },
         "x-ms-examples": {
           "Lists the environments for a project.": {
-            "$ref": "./examples/EnvironmentsOperations_ListAllEnvironments.json"
+            "$ref": "./examples/EnvironmentsOperations_ListEnvironments.json"
           }
         },
         "x-ms-pageable": {
@@ -694,7 +694,7 @@
     },
     "/projects/{projectName}/pools/{poolName}/schedules": {
       "get": {
-        "operationId": "DevBoxesOperations_ListSchedules",
+        "operationId": "DevBoxesOperations_ListSchedulesByPool",
         "description": "Lists available schedules for a pool.",
         "parameters": [
           {
@@ -740,7 +740,7 @@
         },
         "x-ms-examples": {
           "Lists available schedules for a pool.": {
-            "$ref": "./examples/DevBoxesOperations_ListSchedules.json"
+            "$ref": "./examples/DevBoxesOperations_ListSchedulesByPool.json"
           }
         },
         "x-ms-pageable": {
@@ -750,7 +750,7 @@
     },
     "/projects/{projectName}/pools/{poolName}/schedules/{scheduleName}": {
       "get": {
-        "operationId": "DevBoxesOperations_GetSchedule",
+        "operationId": "DevBoxesOperations_GetScheduleByPool",
         "description": "Gets a schedule.",
         "parameters": [
           {
@@ -803,14 +803,14 @@
         },
         "x-ms-examples": {
           "Gets a schedule.": {
-            "$ref": "./examples/DevBoxesOperations_GetSchedule.json"
+            "$ref": "./examples/DevBoxesOperations_GetScheduleByPool.json"
           }
         }
       }
     },
     "/projects/{projectName}/users/{userId}/devboxes": {
       "get": {
-        "operationId": "DevBoxesOperations_ListDevBoxes",
+        "operationId": "DevBoxesOperations_ListDevBoxesByUser",
         "description": "Lists Dev Boxes in the project for a particular user.",
         "parameters": [
           {
@@ -853,7 +853,7 @@
         },
         "x-ms-examples": {
           "Lists Dev Boxes in the project for a particular user.": {
-            "$ref": "./examples/DevBoxesOperations_ListDevBoxes.json"
+            "$ref": "./examples/DevBoxesOperations_ListDevBoxesByUser.json"
           }
         },
         "x-ms-pageable": {
@@ -863,7 +863,7 @@
     },
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}": {
       "get": {
-        "operationId": "DevBoxesOperations_GetDevBox",
+        "operationId": "DevBoxesOperations_GetDevBoxByUser",
         "description": "Gets a Dev Box",
         "parameters": [
           {
@@ -922,7 +922,7 @@
         },
         "x-ms-examples": {
           "Gets a Dev Box": {
-            "$ref": "./examples/DevBoxesOperations_GetDevBox.json"
+            "$ref": "./examples/DevBoxesOperations_GetDevBoxByUser.json"
           }
         }
       },
@@ -1306,7 +1306,7 @@
     },
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions": {
       "get": {
-        "operationId": "DevBoxesOperations_ListDevBoxActions",
+        "operationId": "DevBoxesOperations_ListActions",
         "description": "Lists actions on a Dev Box.",
         "parameters": [
           {
@@ -1365,7 +1365,7 @@
         },
         "x-ms-examples": {
           "Lists actions on a Dev Box.": {
-            "$ref": "./examples/DevBoxesOperations_ListDevBoxActions.json"
+            "$ref": "./examples/DevBoxesOperations_ListActions.json"
           }
         },
         "x-ms-pageable": {
@@ -1375,7 +1375,7 @@
     },
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}": {
       "get": {
-        "operationId": "DevBoxesOperations_GetDevBoxAction",
+        "operationId": "DevBoxesOperations_GetAction",
         "description": "Gets an action.",
         "parameters": [
           {
@@ -1444,7 +1444,7 @@
         },
         "x-ms-examples": {
           "Gets an action.": {
-            "$ref": "./examples/DevBoxesOperations_GetDevBoxAction.json"
+            "$ref": "./examples/DevBoxesOperations_GetAction.json"
           }
         }
       }
@@ -1609,7 +1609,7 @@
     },
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions:delay": {
       "post": {
-        "operationId": "DevBoxesOperations_DelayAllActions",
+        "operationId": "DevBoxesOperations_DelayActions",
         "description": "Delays all actions.",
         "parameters": [
           {
@@ -1677,7 +1677,7 @@
         },
         "x-ms-examples": {
           "Delays all actions.": {
-            "$ref": "./examples/DevBoxesOperations_DelayAllActions.json"
+            "$ref": "./examples/DevBoxesOperations_DelayActions.json"
           }
         },
         "x-ms-pageable": {
@@ -1744,7 +1744,7 @@
     },
     "/projects/{projectName}/users/{userId}/environments": {
       "get": {
-        "operationId": "EnvironmentsOperations_ListEnvironments",
+        "operationId": "EnvironmentsOperations_ListEnvironmentsByUser",
         "description": "Lists the environments for a project and user.",
         "parameters": [
           {
@@ -1787,7 +1787,7 @@
         },
         "x-ms-examples": {
           "Lists the environments for a project and user.": {
-            "$ref": "./examples/EnvironmentsOperations_ListEnvironments.json"
+            "$ref": "./examples/EnvironmentsOperations_ListEnvironmentsByUser.json"
           }
         },
         "x-ms-pageable": {
@@ -1797,7 +1797,7 @@
     },
     "/projects/{projectName}/users/{userId}/environments/{environmentName}": {
       "get": {
-        "operationId": "EnvironmentsOperations_GetEnvironment",
+        "operationId": "EnvironmentsOperations_GetEnvironmentByUser",
         "description": "Gets an environment",
         "parameters": [
           {
@@ -1856,12 +1856,12 @@
         },
         "x-ms-examples": {
           "Gets an environment": {
-            "$ref": "./examples/EnvironmentsOperations_GetEnvironment.json"
+            "$ref": "./examples/EnvironmentsOperations_GetEnvironmentByUser.json"
           }
         }
       },
       "put": {
-        "operationId": "EnvironmentsOperations_CreateOrUpdateEnvironment",
+        "operationId": "EnvironmentsOperations_CreateOrReplaceEnvironment",
         "description": "Creates or updates an environment.",
         "parameters": [
           {
@@ -1925,7 +1925,7 @@
         },
         "x-ms-examples": {
           "Creates or updates an environment.": {
-            "$ref": "./examples/EnvironmentsOperations_CreateOrUpdateEnvironment.json"
+            "$ref": "./examples/EnvironmentsOperations_CreateOrReplaceEnvironment.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -2000,7 +2000,7 @@
     },
     "/users/{userId}/devboxes": {
       "get": {
-        "operationId": "DevBoxesDevCenter_ListAllDevBoxesByUser",
+        "operationId": "DevCenterOperations_ListAllDevBoxesByUser",
         "description": "Lists Dev Boxes in the Dev Center for a particular user.",
         "parameters": [
           {
@@ -2036,7 +2036,7 @@
         },
         "x-ms-examples": {
           "Lists Dev Boxes in the Dev Center for a particular user.": {
-            "$ref": "./examples/DevBoxesDevCenterOperations_ListAllDevBoxesByUser.json"
+            "$ref": "./examples/DevCenterOperations_ListAllDevBoxesByUser.json"
           }
         },
         "x-ms-pageable": {
