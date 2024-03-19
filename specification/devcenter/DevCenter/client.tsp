@@ -69,183 +69,153 @@ interface EnvironmentClientOperations {
 @@usage(DevCenterService.DevBox, Usage.input | Usage.output);
 @@usage(DevCenterService.Environment, Usage.input | Usage.output);
 
-@@projectedName(DevCenterService.LocalAdminStatus,
-  "client",
-  "LocalAdministratorStatus"
-);
-@@projectedName(DevCenterService.StopOnDisconnectEnableStatus,
-  "client",
+@@clientName(DevCenterService.LocalAdminStatus, "LocalAdministratorStatus");
+@@clientName(DevCenterService.StopOnDisconnectEnableStatus,
   "StopOnDisconnectStatus"
 );
-@@projectedName(DevCenterService.EnvironmentTypeEnableStatus,
-  "client",
+@@clientName(DevCenterService.EnvironmentTypeEnableStatus,
   "EnvironmentTypeStatus"
 );
-@@projectedName(DevCenterService.DevBoxActionDelayResultStatus,
-  "client",
+@@clientName(DevCenterService.DevBoxActionDelayResultStatus,
   "DevBoxActionDelayStatus"
 );
-@@projectedName(DevCenterService.DevBoxActionDelayResult.result,
-  "client",
-  "delayStatus"
-);
+@@clientName(DevCenterService.DevBoxActionDelayResult.result, "delayStatus");
 
-@@projectedName(DevCenterService.OsType, "csharp", "DevBoxOSType");
-@@projectedName(DevCenterService.ScheduledFrequency,
-  "csharp",
-  "ScheduleFrequency"
+@@clientName(DevCenterService.OsType, "DevBoxOSType", "csharp");
+@@clientName(DevCenterService.ScheduledFrequency,
+  "ScheduleFrequency",
+  "csharp"
 );
-@@projectedName(DevCenterService.ScheduledType, "csharp", "ScheduleType");
-@@projectedName(DevCenterService.Pool, "csharp", "DevBoxPool");
-@@projectedName(DevCenterService.Pool.osType, "csharp", "OSType");
-@@projectedName(DevCenterService.Pool.localAdministrator,
-  "csharp",
-  "LocalAdministratorStatus"
+@@clientName(DevCenterService.ScheduledType, "ScheduleType", "csharp");
+@@clientName(DevCenterService.Pool, "DevBoxPool", "csharp");
+@@clientName(DevCenterService.Pool.osType, "OSType", "csharp");
+@@clientName(DevCenterService.Pool.localAdministrator,
+  "LocalAdministratorStatus",
+  "csharp"
 );
-@@projectedName(DevCenterService.HardwareProfile,
-  "csharp",
-  "DevBoxHardwareProfile"
+@@clientName(DevCenterService.HardwareProfile,
+  "DevBoxHardwareProfile",
+  "csharp"
 );
-@@projectedName(DevCenterService.StorageProfile,
-  "csharp",
-  "DevBoxStorageProfile"
+@@clientName(DevCenterService.StorageProfile, "DevBoxStorageProfile", "csharp");
+@@clientName(DevCenterService.StorageProfile.osDisk, "OSDisk", "csharp");
+@@clientName(DevCenterService.OsDisk, "OSDisk", "csharp");
+@@clientName(DevCenterService.ImageReference, "DevBoxImageReference", "csharp");
+@@clientName(DevCenterService.ImageReference.osBuildNumber,
+  "OSBuildNumber",
+  "csharp"
 );
-@@projectedName(DevCenterService.StorageProfile.osDisk, "csharp", "OSDisk");
-@@projectedName(DevCenterService.OsDisk, "csharp", "OSDisk");
-@@projectedName(DevCenterService.ImageReference,
-  "csharp",
-  "DevBoxImageReference"
+@@clientName(DevCenterService.Schedule, "DevBoxSchedule", "csharp");
+@@clientName(DevCenterService.Schedule.type, "scheduleType", "csharp");
+@@clientName(DevCenterService.Schedule.frequency,
+  "scheduleFrequency",
+  "csharp"
 );
-@@projectedName(DevCenterService.ImageReference.osBuildNumber,
-  "csharp",
-  "OSBuildNumber"
+@@clientName(DevCenterService.DevBox.osType, "OSType", "csharp");
+@@clientName(DevCenterService.DevBox.user, "userId", "csharp");
+@@clientName(DevCenterService.DevBox.localAdministrator,
+  "LocalAdministratorStatus",
+  "csharp"
 );
-@@projectedName(DevCenterService.Schedule, "csharp", "DevBoxSchedule");
-@@projectedName(DevCenterService.Schedule.type, "csharp", "scheduleType");
-@@projectedName(DevCenterService.Schedule.frequency,
-  "csharp",
-  "scheduleFrequency"
+@@clientName(DevCenterService.RemoteConnection.webUrl, "webUri", "csharp");
+@@clientName(DevCenterService.RemoteConnection.rdpConnectionUrl,
+  "rdpConnectionUri",
+  "csharp"
 );
-@@projectedName(DevCenterService.DevBox.osType, "csharp", "OSType");
-@@projectedName(DevCenterService.DevBox.user, "csharp", "userId");
-@@projectedName(DevCenterService.DevBox.localAdministrator,
-  "csharp",
-  "LocalAdministratorStatus"
+@@clientName(DevCenterService.DevBoxAction.next, "nextAction", "csharp");
+@@clientName(DevCenterService.DevBoxActionDelayResult.name,
+  "actionName",
+  "csharp"
 );
-@@projectedName(DevCenterService.RemoteConnection.webUrl, "csharp", "webUri");
-@@projectedName(DevCenterService.RemoteConnection.rdpConnectionUrl,
-  "csharp",
-  "rdpConnectionUri"
+@@clientName(DevCenterService.ParameterType,
+  "EnvironmentDefinitionParameterType",
+  "csharp"
 );
-@@projectedName(DevCenterService.DevBoxAction.next, "csharp", "nextAction");
-@@projectedName(DevCenterService.DevBoxActionDelayResult.name,
-  "csharp",
-  "actionName"
+@@clientName(DevCenterService.Environment, "DevCenterEnvironment", "csharp");
+@@clientName(DevCenterService.Environment.environmentType,
+  "environmentTypeName",
+  "csharp"
 );
-@@projectedName(DevCenterService.ParameterType,
-  "csharp",
-  "EnvironmentDefinitionParameterType"
+@@clientName(DevCenterService.Environment.user, "userId", "csharp");
+@@clientName(DevCenterService.Catalog, "DevCenterCatalog", "csharp");
+@@clientName(DevCenterService.EnvironmentDefinitionParameter.default,
+  "defaultValue",
+  "csharp"
 );
-@@projectedName(DevCenterService.Environment, "csharp", "DevCenterEnvironment");
-@@projectedName(DevCenterService.Environment.environmentType,
-  "csharp",
-  "environmentTypeName"
+@@clientName(DevCenterService.EnvironmentDefinitionParameter.type,
+  "parameterType",
+  "csharp"
 );
-@@projectedName(DevCenterService.Environment.user, "csharp", "userId");
-@@projectedName(DevCenterService.Catalog, "csharp", "DevCenterCatalog");
-@@projectedName(DevCenterService.EnvironmentDefinitionParameter.default,
-  "csharp",
-  "defaultValue"
+@@clientName(DevCenterService.EnvironmentType,
+  "DevCenterEnvironmentType",
+  "csharp"
 );
-@@projectedName(DevCenterService.EnvironmentDefinitionParameter.type,
-  "csharp",
-  "parameterType"
+@@clientName(DevCenterService.OperationStatusValue,
+  "DevCenterOperationStatus",
+  "csharp"
 );
-@@projectedName(DevCenterService.EnvironmentType,
-  "csharp",
-  "DevCenterEnvironmentType"
+@@clientName(DevCenterService.OperationStatus,
+  "DevCenterOperationDetails",
+  "csharp"
 );
-@@projectedName(DevCenterService.OperationStatusValue,
-  "csharp",
-  "DevCenterOperationStatus"
-);
-@@projectedName(DevCenterService.OperationStatus,
-  "csharp",
-  "DevCenterOperationDetails"
-);
-@@projectedName(DevCenterService.Project, "csharp", "DevCenterProject");
+@@clientName(DevCenterService.Project, "DevCenterProject", "csharp");
 
-@@projectedName(DevCenterService.OsType, "java", "DevBoxOsType");
-@@projectedName(DevCenterService.ScheduledFrequency,
-  "java",
-  "ScheduleFrequency"
+@@clientName(DevCenterService.OsType, "DevBoxOsType", "java");
+@@clientName(DevCenterService.ScheduledFrequency, "ScheduleFrequency", "java");
+@@clientName(DevCenterService.ScheduledType, "ScheduleType", "java");
+@@clientName(DevCenterService.Pool, "DevBoxPool", "java");
+@@clientName(DevCenterService.Pool.localAdministrator,
+  "LocalAdministratorStatus",
+  "java"
 );
-@@projectedName(DevCenterService.ScheduledType, "java", "ScheduleType");
-@@projectedName(DevCenterService.Pool, "java", "DevBoxPool");
-@@projectedName(DevCenterService.Pool.localAdministrator,
-  "java",
-  "LocalAdministratorStatus"
+@@clientName(DevCenterService.HardwareProfile, "DevBoxHardwareProfile", "java");
+@@clientName(DevCenterService.StorageProfile, "DevBoxStorageProfile", "java");
+@@clientName(DevCenterService.OsDisk.diskSizeGB, "diskSizeGb", "java");
+@@clientName(DevCenterService.ImageReference, "DevBoxImageReference", "java");
+@@clientName(DevCenterService.Schedule, "DevBoxSchedule", "java");
+@@clientName(DevCenterService.Schedule.type, "scheduleType", "java");
+@@clientName(DevCenterService.Schedule.frequency, "scheduleFrequency", "java");
+@@clientName(DevCenterService.DevBox.user, "userId", "java");
+@@clientName(DevCenterService.DevBox.localAdministrator,
+  "LocalAdministratorStatus",
+  "java"
 );
-@@projectedName(DevCenterService.HardwareProfile,
-  "java",
-  "DevBoxHardwareProfile"
+@@clientName(DevCenterService.DevBoxAction.next, "nextAction", "java");
+@@clientName(DevCenterService.DevBoxActionDelayResult.name,
+  "actionName",
+  "java"
 );
-@@projectedName(DevCenterService.StorageProfile,
-  "java",
-  "DevBoxStorageProfile"
+@@clientName(DevCenterService.ParameterType,
+  "EnvironmentDefinitionParameterType",
+  "java"
 );
-@@projectedName(DevCenterService.OsDisk.diskSizeGB, "java", "diskSizeGb");
-@@projectedName(DevCenterService.ImageReference,
-  "java",
-  "DevBoxImageReference"
+@@clientName(DevCenterService.Environment, "DevCenterEnvironment", "java");
+@@clientName(DevCenterService.Environment.environmentType,
+  "environmentTypeName",
+  "java"
 );
-@@projectedName(DevCenterService.Schedule, "java", "DevBoxSchedule");
-@@projectedName(DevCenterService.Schedule.type, "java", "scheduleType");
-@@projectedName(DevCenterService.Schedule.frequency,
-  "java",
-  "scheduleFrequency"
+@@clientName(DevCenterService.Environment.user, "userId", "java");
+@@clientName(DevCenterService.Catalog, "DevCenterCatalog", "java");
+@@clientName(DevCenterService.EnvironmentDefinitionParameter.default,
+  "defaultValue",
+  "java"
 );
-@@projectedName(DevCenterService.DevBox.user, "java", "userId");
-@@projectedName(DevCenterService.DevBox.localAdministrator,
-  "java",
-  "LocalAdministratorStatus"
+@@clientName(DevCenterService.EnvironmentDefinitionParameter.type,
+  "parameterType",
+  "java"
 );
-@@projectedName(DevCenterService.DevBoxAction.next, "java", "nextAction");
-@@projectedName(DevCenterService.DevBoxActionDelayResult.name,
-  "java",
-  "actionName"
+@@clientName(DevCenterService.EnvironmentType,
+  "DevCenterEnvironmentType",
+  "java"
 );
-@@projectedName(DevCenterService.ParameterType,
-  "java",
-  "EnvironmentDefinitionParameterType"
+@@clientName(DevCenterService.HardwareProfile.vCPUs, "vCpus", "java");
+@@clientName(DevCenterService.HardwareProfile.memoryGB, "memoryGb", "java");
+@@clientName(DevCenterService.OperationStatusValue,
+  "DevCenterOperationStatus",
+  "java"
 );
-@@projectedName(DevCenterService.Environment, "java", "DevCenterEnvironment");
-@@projectedName(DevCenterService.Environment.environmentType,
-  "java",
-  "environmentTypeName"
+@@clientName(DevCenterService.OperationStatus,
+  "DevCenterOperationDetails",
+  "java"
 );
-@@projectedName(DevCenterService.Environment.user, "java", "userId");
-@@projectedName(DevCenterService.Catalog, "java", "DevCenterCatalog");
-@@projectedName(DevCenterService.EnvironmentDefinitionParameter.default,
-  "java",
-  "defaultValue"
-);
-@@projectedName(DevCenterService.EnvironmentDefinitionParameter.type,
-  "java",
-  "parameterType"
-);
-@@projectedName(DevCenterService.EnvironmentType,
-  "java",
-  "DevCenterEnvironmentType"
-);
-@@projectedName(DevCenterService.HardwareProfile.vCPUs, "java", "vCpus");
-@@projectedName(DevCenterService.HardwareProfile.memoryGB, "java", "memoryGb");
-@@projectedName(DevCenterService.OperationStatusValue,
-  "java",
-  "DevCenterOperationStatus"
-);
-@@projectedName(DevCenterService.OperationStatus,
-  "java",
-  "DevCenterOperationDetails"
-);
-@@projectedName(DevCenterService.Project, "java", "DevCenterProject");
+@@clientName(DevCenterService.Project, "DevCenterProject", "java");
