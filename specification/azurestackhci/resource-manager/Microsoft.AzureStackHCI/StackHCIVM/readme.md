@@ -38,17 +38,7 @@ tag: package-preview-2024-02-01
 directive:
   - suppress: R3020
     from:
-      - galleryImages.json
-      - logicalNetworks.json
-      - marketplaceGalleryImages.json
-      - networkInterfaces.json
-      - networkSecurityGroups.json
-      - operations.json
-      - storageContainers.json
-      - virtualHardDisks.json
-      - virtualMachines.json
-      - virtualMachineInstances.json
-      - virtualNetworks.json
+      - preview/2024-02-01-preview/openapi.json
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 suppressions:
   - code: PathResourceProviderNamePascalCase
