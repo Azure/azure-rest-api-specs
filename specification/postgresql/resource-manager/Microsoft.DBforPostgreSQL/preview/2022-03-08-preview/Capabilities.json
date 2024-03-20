@@ -1,0 +1,485 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PostgreSQLServerManagementClient",
+    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.",
+    "version": "2022-03-08-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/locations/{locationName}/capabilities": {
+      "get": {
+        "tags": [
+          "LocationBasedCapabilities"
+        ],
+        "operationId": "LocationBasedCapabilities_Execute",
+        "x-ms-examples": {
+          "CapabilitiesList": {
+            "$ref": "./examples/CapabilitiesByLocation.json"
+          }
+        },
+        "description": "Get capabilities at specified location in a given subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "common-types.json#/parameters/LocationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CapabilitiesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "StorageTierCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name to represent Storage tier capability",
+          "readOnly": true
+        },
+        "tierName": {
+          "type": "string",
+          "description": "Storage tier name",
+          "readOnly": true
+        },
+        "iops": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Supported IOPS for this storage tier",
+          "readOnly": true
+        },
+        "isBaseline": {
+          "type": "boolean",
+          "description": "Indicates if this is a baseline storage tier or not",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Status os this storage tier",
+          "readOnly": true
+        }
+      }
+    },
+    "StorageMBCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "storage MB name",
+          "readOnly": true
+        },
+        "supportedIops": {
+          "type": "integer",
+          "format": "int64",
+          "description": "supported IOPS",
+          "readOnly": true
+        },
+        "storageSizeMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "storage size in MB",
+          "readOnly": true
+        },
+        "supportedUpgradableTierList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageTierCapability"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status",
+          "readOnly": true
+        }
+      },
+      "description": "storage size in MB capability"
+    },
+    "VcoreCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "vCore name",
+          "readOnly": true
+        },
+        "vCores": {
+          "type": "integer",
+          "format": "int64",
+          "description": "supported vCores",
+          "readOnly": true
+        },
+        "supportedIops": {
+          "type": "integer",
+          "format": "int64",
+          "description": "supported IOPS",
+          "readOnly": true
+        },
+        "supportedMemoryPerVcoreMB": {
+          "type": "integer",
+          "format": "int64",
+          "description": "supported memory per vCore in MB",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status",
+          "readOnly": true
+        }
+      },
+      "description": "Vcores capability"
+    },
+    "ServerVersion": {
+      "type": "string",
+      "description": "The version of a server.",
+      "enum": [
+        "14",
+        "13",
+        "12",
+        "11"
+      ],
+      "x-ms-enum": {
+        "name": "ServerVersion",
+        "modelAsString": true
+      }
+    },
+    "ServerVersionCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "server version",
+          "readOnly": true
+        },
+        "supportedVersionsToUpgrade": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Supported servers versions to upgrade",
+          "readOnly": true
+        },
+        "supportedVcores": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VcoreCapability"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status",
+          "readOnly": true
+        }
+      },
+      "description": "Server version capabilities."
+    },
+    "StorageEditionCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "storage edition name",
+          "readOnly": true
+        },
+        "supportedStorageMB": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageMBCapability"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status",
+          "readOnly": true
+        }
+      },
+      "description": "storage edition capability"
+    },
+    "NodeTypeCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "note type name",
+          "readOnly": true
+        },
+        "nodeType": {
+          "type": "string",
+          "description": "note type",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status",
+          "readOnly": true
+        }
+      },
+      "description": "node type capability"
+    },
+    "FastProvisioningEditionCapability": {
+      "type": "object",
+      "properties": {
+        "supportedSku": {
+          "type": "string",
+          "description": "Fast provisioning supported sku name",
+          "readOnly": true
+        },
+        "supportedStorageGb": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Fast provisioning supported storage in Gb",
+          "readOnly": true
+        },
+        "supportedServerVersions": {
+          "type": "string",
+          "description": "Fast provisioning supported version",
+          "readOnly": true
+        }
+      }
+    },
+    "FlexibleServerEditionCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Server edition name",
+          "readOnly": true
+        },
+        "supportedStorageEditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageEditionCapability"
+          },
+          "description": "The list of editions supported by this server edition.",
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "supportedServerVersions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerVersionCapability"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The list of server versions supported by this server edition.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status",
+          "readOnly": true
+        }
+      },
+      "description": "Flexible server edition capabilities."
+    },
+    "HyperscaleNodeEditionCapability": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Server edition name",
+          "readOnly": true
+        },
+        "supportedStorageEditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageEditionCapability"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The list of editions supported by this server edition.",
+          "readOnly": true
+        },
+        "supportedServerVersions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerVersionCapability"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The list of server versions supported by this server edition.",
+          "readOnly": true
+        },
+        "supportedNodeTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeTypeCapability"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The list of Node Types supported by this server edition.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status",
+          "readOnly": true
+        }
+      },
+      "description": "Hyperscale node edition capabilities."
+    },
+    "CapabilityProperties": {
+      "type": "object",
+      "properties": {
+        "zone": {
+          "type": "string",
+          "description": "zone name",
+          "readOnly": true
+        },
+        "supportedHAMode": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Supported high availability mode",
+          "readOnly": true
+        },
+        "geoBackupSupported": {
+          "type": "boolean",
+          "description": "A value indicating whether a new server in this region can have geo-backups to paired region.",
+          "readOnly": true
+        },
+        "zoneRedundantHaSupported": {
+          "type": "boolean",
+          "description": "A value indicating whether a new server in this region can support multi zone HA.",
+          "readOnly": true
+        },
+        "zoneRedundantHaAndGeoBackupSupported": {
+          "type": "boolean",
+          "description": "A value indicating whether a new server in this region can have geo-backups to paired region.",
+          "readOnly": true
+        },
+        "supportedFlexibleServerEditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FlexibleServerEditionCapability"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "readOnly": true
+        },
+        "supportedHyperscaleNodeEditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HyperscaleNodeEditionCapability"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "readOnly": true
+        },
+        "fastProvisioningSupported": {
+          "type": "boolean",
+          "description": "A value indicating whether fast provisioning is supported in this region.",
+          "readOnly": true
+        },
+        "supportedFastProvisioningEditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FastProvisioningEditionCapability"
+          },
+          "x-ms-identifiers": [
+            "supportedSku"
+          ],
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status",
+          "readOnly": true
+        }
+      },
+      "description": "Location capabilities."
+    },
+    "CapabilitiesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of supported capabilities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CapabilityProperties"
+          },
+          "x-ms-identifiers": [
+            "zone"
+          ],
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "description": "location capability"
+    }
+  },
+  "parameters": {}
+}

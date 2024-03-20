@@ -1,0 +1,100 @@
+{
+  "parameters": {
+    "subscriptionId": "ae640e6b-ba3e-4256-9d62-2993eecfa6f2",
+    "policyDefinitionName": "ResourceNaming",
+    "api-version": "2023-04-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "mode": "All",
+              "displayName": "Naming Convention",
+              "description": "Force resource names to begin with 'prefix' and end with 'suffix'",
+              "metadata": {
+                "category": "Naming"
+              },
+              "parameters": {
+                "prefix": {
+                  "type": "String",
+                  "metadata": {
+                    "displayName": "Prefix",
+                    "description": "Resource name prefix"
+                  }
+                },
+                "suffix": {
+                  "type": "String",
+                  "metadata": {
+                    "displayName": "Suffix",
+                    "description": "Resource name suffix"
+                  }
+                }
+              },
+              "version": "1.2.1",
+              "policyRule": {
+                "if": {
+                  "not": {
+                    "field": "name",
+                    "like": "[concat(parameters('prefix'), '*', parameters('suffix'))]"
+                  }
+                },
+                "then": {
+                  "effect": "deny"
+                }
+              },
+              "policyType": "Custom"
+            },
+            "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming/versions/1.2.1",
+            "type": "Microsoft.Authorization/policyDefinitions/versions",
+            "name": "1.2.1"
+          },
+          {
+            "properties": {
+              "mode": "All",
+              "displayName": "Naming Convention",
+              "description": "Force resource names to begin with 'prefix' and end with 'suffix'",
+              "metadata": {
+                "category": "Naming"
+              },
+              "parameters": {
+                "prefix": {
+                  "type": "String",
+                  "metadata": {
+                    "displayName": "Prefix",
+                    "description": "Resource name prefix"
+                  }
+                },
+                "suffix": {
+                  "type": "String",
+                  "metadata": {
+                    "displayName": "Suffix",
+                    "description": "Resource name suffix"
+                  }
+                }
+              },
+              "version": "1.0.0",
+              "policyRule": {
+                "if": {
+                  "not": {
+                    "field": "name",
+                    "like": "[concat(parameters('prefix'), '-*', parameters('suffix'))]"
+                  }
+                },
+                "then": {
+                  "effect": "deny"
+                }
+              },
+              "policyType": "Custom"
+            },
+            "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/versions/1.0.0",
+            "type": "Microsoft.Authorization/policyDefinitions",
+            "name": "1.0.0"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "api-version": "2023-07-12-preview",
+    "scope": "subscriptions/72fa99ef-9c84-4a7c-b343-ec62da107d81",
+    "alertId": "66114d64-d9d9-478b-95c9-b789d6502101"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/9e261de7-c804-4b9d-9ebf-6f50fe350a9a/providers/Microsoft.AlertsManagement/alerts/66114d64-d9d9-478b-95c9-b789d6502101/enrichments/default",
+            "type": "Microsoft.AlertsManagement/alerts/enrichments",
+            "name": "default",
+            "properties": {
+              "alertId": "66114d64-d9d9-478b-95c9-b789d6502101",
+              "enrichments": [
+                {
+                  "title": "Number of OOM killed events by container",
+                  "description": "Enrichment description",
+                  "status": "Succeeded",
+                  "type": "PrometheusInstantQuery",
+                  "grafanaExplorePath": "/explore?left=%7B%22datasource%22...",
+                  "linkToApi": "https://test-3sxl.eastus.prometheus.monitor.azure.com/api/v1/query_range?...",
+                  "datasources": [
+                    "/subscriptions/72fa99ef-9c84-4a7c-b343-ec62da107d81/resourceGroups/SyntheticRules/providers/microsoft.monitor/accounts/canaryamw"
+                  ],
+                  "query": "sum by (cluster,container,replicaset,namespace)(label_replace( kube_pod_container_status_last_terminated_reason{reason='OOMKilled', cluster='cluster1', namespace='namespace1'}'}, 'replicaset', '$1', 'pod', '(.*)(-[a-z0-9]{5})$')) > 0",
+                  "time": "2015-07-01T20:10:51.781Z"
+                },
+                {
+                  "title": "Number of OOM killed events by container",
+                  "description": "Enrichment description",
+                  "status": "Succeeded",
+                  "type": "PrometheusRangeQuery",
+                  "linkToApi": "https://test-3sxl.eastus.prometheus.monitor.azure.com/api/v1/query_range?...",
+                  "grafanaExplorePath": "/explore?left=%7B%22datasource%22...",
+                  "datasources": [
+                    "/subscriptions/72fa99ef-9c84-4a7c-b343-ec62da107d81/resourceGroups/SyntheticRules/providers/microsoft.monitor/accounts/canaryamw"
+                  ],
+                  "query": "sum by (cluster,container,replicaset,namespace)(label_replace( kube_pod_container_status_last_terminated_reason{reason='OOMKilled', cluster='cluster1', namespace='namespace'}'}, 'replicaset', '$1', 'pod', '(.*)(-[a-z0-9]{5})$')) > 0",
+                  "start": "2015-07-01T20:10:51.781Z",
+                  "end": "2015-07-01T20:20:51.781Z",
+                  "step": "PT15S"
+                },
+                {
+                  "title": "Number of OOM killed events by container",
+                  "description": "Enrichment description",
+                  "status": "Failed",
+                  "type": "PrometheusRangeQuery",
+                  "linkToApi": "https://test-3sxl.eastus.prometheus.monitor.azure.com/api/v1/query_range?...",
+                  "grafanaExplorePath": "/explore?left=%7B%22datasource%22...",
+                  "errorMessage": "Calling Prometheus query API failed",
+                  "datasources": [
+                    "/subscriptions/72fa99ef-9c84-4a7c-b343-ec62da107d81/resourceGroups/SyntheticRules/providers/microsoft.monitor/accounts/canaryamw"
+                  ],
+                  "query": "sum by (cluster,container,replicaset,namespace)(label_replace( kube_pod_container_status_last_terminated_reason{reason='OOMKilled', cluster='cluster1', namespace='namespace'}'}, 'replicaset', '$1', 'pod', '(.*)(-[a-z0-9]{5})$')) > 0",
+                  "start": "2015-07-01T20:10:51.781Z",
+                  "end": "2015-07-01T20:20:51.781Z",
+                  "step": "PT15S"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

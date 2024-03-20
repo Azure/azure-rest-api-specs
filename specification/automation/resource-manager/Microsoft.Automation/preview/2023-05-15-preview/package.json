@@ -1,0 +1,525 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutomationManagement",
+    "version": "2023-05-15-preview",
+    "x-ms-code-generation-settings": {
+      "useDateTimeOffset": true
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runtimeEnvironments/{runtimeEnvironmentName}/packages/{packageName}": {
+      "delete": {
+        "tags": [
+          "Package"
+        ],
+        "operationId": "Package_Delete",
+        "description": "Delete the package by name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/packageoperations"
+        },
+        "x-ms-examples": {
+          "Delete a package": {
+            "$ref": "./examples/package/deletePackage.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "$ref": "../../common/v5/definitions.json#/parameters/RuntimeEnvironmentNameParameter"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Package name."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Package"
+        ],
+        "operationId": "Package_Get",
+        "description": "Retrieve the Package identified by Package name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/packageoperations"
+        },
+        "x-ms-examples": {
+          "Get a package": {
+            "$ref": "./examples/package/getPackage.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "$ref": "../../common/v5/definitions.json#/parameters/RuntimeEnvironmentNameParameter"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The Package name."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Package"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Package"
+        ],
+        "operationId": "Package_CreateOrUpdate",
+        "description": "Create or update the package identified by package name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/packageoperations"
+        },
+        "x-ms-examples": {
+          "Create or update a package": {
+            "$ref": "./examples/package/createOrUpdatePackage.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "$ref": "../../common/v5/definitions.json#/parameters/RuntimeEnvironmentNameParameter"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of Package."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PackageCreateOrUpdateParameters"
+            },
+            "description": "The create or update parameters for Package."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Package"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Package"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Package"
+        ],
+        "operationId": "Package_Update",
+        "description": "Update the Package identified by Package name.",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/packageoperations"
+        },
+        "x-ms-examples": {
+          "Update a package": {
+            "$ref": "./examples/package/updatePackage.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "$ref": "../../common/v5/definitions.json#/parameters/RuntimeEnvironmentNameParameter"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of Package."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PackageUpdateParameters"
+            },
+            "description": "The update parameters for Package."
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Package"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/runtimeEnvironments/{runtimeEnvironmentName}/packages": {
+      "get": {
+        "tags": [
+          "Package"
+        ],
+        "operationId": "Package_ListByRuntimeEnvironment",
+        "description": "Retrieve the a list of Packages",
+        "externalDocs": {
+          "url": "http://aka.ms/azureautomationsdk/packageoperations"
+        },
+        "x-ms-examples": {
+          "Get a package": {
+            "$ref": "./examples/package/listPackagesByRuntimeEnvironment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/AutomationAccountNameParameter"
+          },
+          {
+            "$ref": "../../common/v5/definitions.json#/parameters/RuntimeEnvironmentNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PackageListResult"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PackageErrorInfo": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Package import error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Package import error message."
+        }
+      },
+      "description": "Definition of the package error info type."
+    },
+    "ContentHash": {
+      "type": "object",
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "description": "Gets or sets the content hash algorithm used to hash the content."
+        },
+        "value": {
+          "type": "string",
+          "description": "Gets or sets expected hash value of the content."
+        }
+      },
+      "required": [
+        "algorithm",
+        "value"
+      ],
+      "description": "Definition of the runbook property type."
+    },
+    "ContentLink": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "Gets or sets the uri of content."
+        },
+        "contentHash": {
+          "$ref": "#/definitions/ContentHash",
+          "description": "Gets or sets the hash."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets or sets the version of the content."
+        }
+      },
+      "description": "Definition of the content link."
+    },
+    "PackageCreateOrUpdateProperties": {
+      "properties": {
+        "contentLink": {
+          "$ref": "#/definitions/ContentLink",
+          "description": "Gets or sets the package content link."
+        }
+      },
+      "required": [
+        "contentLink"
+      ],
+      "description": "The parameters supplied to the create or update package properties."
+    },
+    "PackageCreateOrUpdateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PackageCreateOrUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the package create properties."
+        },
+        "allOf": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The parameters supplied to the create or update package operation."
+    },
+    "PackageProperties": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "type": "boolean",
+          "description": "Gets or sets the isGlobal flag of the package."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets or sets the version of the Package."
+        },
+        "sizeInBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets or sets the size in bytes of the Package."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Gets or sets the provisioning state of the Package.",
+          "enum": [
+            "Created",
+            "Creating",
+            "StartingImportModuleRunbook",
+            "RunningImportModuleRunbook",
+            "ContentRetrieved",
+            "ContentDownloaded",
+            "ContentValidated",
+            "ConnectionTypeImported",
+            "ContentStored",
+            "ModuleDataStored",
+            "ActivitiesStored",
+            "ModuleImportRunbookComplete",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "PackageProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "contentLink": {
+          "$ref": "#/definitions/ContentLink",
+          "description": "Gets or sets the contentLink of the Package."
+        },
+        "error": {
+          "$ref": "#/definitions/PackageErrorInfo",
+          "description": "Gets or sets the error info of the Package."
+        },
+        "allOf": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+        }
+      },
+      "description": "Definition of the package property type."
+    },
+    "PackageUpdateProperties": {
+      "properties": {
+        "contentLink": {
+          "$ref": "#/definitions/ContentLink",
+          "description": "Gets or sets the package content link."
+        }
+      },
+      "description": "The parameters supplied to the update properties."
+    },
+    "PackageUpdateParameters": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PackageUpdateProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the package update properties."
+        },
+        "allOf": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      },
+      "description": "The parameters supplied to the update package operation."
+    },
+    "Package": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PackageProperties",
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the Package properties."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Definition of the Package type."
+    },
+    "PackageListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Package"
+          },
+          "description": "list of the Packages of the runtime environment."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the next link."
+        }
+      },
+      "description": "The response model for the list runtime environments operation."
+    }
+  },
+  "parameters": {}
+}

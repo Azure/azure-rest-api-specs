@@ -24,7 +24,6 @@ batch:
   - tag: package-preview-2022-01
   - tag: package-2020-01
   - tag: package-2019-01-preview
-  - tag: package-preview-2021-09
 ```
 
 ### Tag: package-preview-2022-01

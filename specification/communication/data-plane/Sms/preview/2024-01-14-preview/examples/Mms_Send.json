@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2024-01-14-preview",
+    "endpoint": "https://resourcename.communication.azure.com/",
+    "body": {
+      "from": "+18004567891",
+      "recipients": [
+        {
+          "to": "+18335852071"
+        },
+        {
+          "to": "+11234567890"
+        },
+        {
+          "to": "+112345678910abc"
+        }
+      ],
+      "message": "Hey, Let's go for Dinner to these nice place",
+      "attachments": [
+        {
+          "contentType": "image/png",
+          "contentInBase64": "iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAF1SURBVHhe7dyxUVVRGEbRc28sCR04YxMklkAmAQ4d2ANUYBEOERppwJAb2AQJDUBA/K7Dm1OCwb7jWsk5X7zzf3k9/7CNvdq2H+9+PX6a6+jmflwt6/g25+6s8yVCkBhBYgSJESRGkBhBYgSJESRGkBhBYgSJESRGkBhBYgSJESRGkBhBYgSJESRGkBhBYgSJESRGkBhBYgSJESRGkBhBYgSJESRGkBhBYgSJESRGkBhBYgSJESRGkBhBYgSJESRGkJi380x3878729j+nPx8/Drn0fXD+Lhu48ucAPDfWMbty+X8789yeBqfT3/PdXR4GO/Hsp7NuTvLcvu85yOY37er04u5jg73qyOY/DuCxAgSI0iMIDGCxAgSI0iMIDGCxAgSI0iMIDGCxAgSI0iMIDGCxAgSI0iMIDGCxAgSI0iMIDGCxAgSI0iMIDGCxAgSI0iMIDGCxAgSI0iMIDGCxAgSI0iMIDGCxAgSI0iMIDGCpIzxF44oJKb+uryCAAAAAElFTkSuQmCC"
+        }
+      ],
+      "sendOptions": {
+        "enableDeliveryReport": true,
+        "tag": "CustomerId"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "to": "+18335852071",
+            "messageId": "9f339141-1539-49e1-828f-80ee3b5804e5",
+            "httpStatusCode": 202,
+            "successful": true
+          },
+          {
+            "to": "+11234567890",
+            "messageId": "571697e9-baba-4d8a-b493-e919bde9723a",
+            "httpStatusCode": 202,
+            "successful": true
+          },
+          {
+            "to": "+112345678910abc",
+            "httpStatusCode": 400,
+            "errorMessage": "Invalid phone number format.",
+            "successful": false
+          }
+        ]
+      }
+    }
+  }
+}

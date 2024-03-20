@@ -8,7 +8,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-confidentialledger
 namespace: azure.mgmt.confidentialledger
-package-version: 1.0.0b1
+package-version: 1.0.0
 clear-output-folder: true
 ```
 
