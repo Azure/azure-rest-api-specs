@@ -46,10 +46,6 @@ model Job {
   @visibility("read")
   createdAt: utcDateTime;
 
-  @doc("Error when job fails in it's entirety.")
-  @visibility("read")
-  error?: Azure.Core.Foundations.Error;
-
   @doc("Date and time when the job was started.")
   @visibility("read")
   startedAt?: utcDateTime;
@@ -62,7 +58,11 @@ model Job {
   If the job failed, this is the time when the job failed.
   """)
   @visibility("read")
-  completedAt?: utcDateTime;
+  lastUpdatedAt?: utcDateTime;
+
+  @doc("Error when job fails in it's entirety.")
+  @visibility("read")
+  error?: Azure.Core.Foundations.Error;
 
   @doc("Summary of a job. Exists only when the job is completed.")
   @visibility("read")
