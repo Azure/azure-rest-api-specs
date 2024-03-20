@@ -10,8 +10,6 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.ApiCenter;
-
-@subscriptionResource
 @doc("Soft-deleted service entity.")
 model DeletedService is ProxyResource<DeletedServiceProperties> {
   @doc("The name of the deleted service.")
@@ -30,6 +28,8 @@ interface DeletedServices {
   get is ArmResourceRead<DeletedService>;
   @doc("Permanently deletes specified service.")
   delete is ArmResourceDeleteSync<DeletedService>;
-  @doc("Returns a collection of soft-deleted services.")
+  @doc("Lists soft-deleted services.")
   list is ArmResourceListByParent<DeletedService>;
+  @doc("Lists services within an Azure subscription.")
+  listBySubscription is ArmListBySubscription<DeletedService>;
 }
