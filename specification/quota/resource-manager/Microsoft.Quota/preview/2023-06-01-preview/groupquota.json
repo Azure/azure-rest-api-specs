@@ -663,7 +663,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/FilterInQuery"
+            "$ref": "#/parameters/FilterLocationInQuery"
           }
         ],
         "responses": {
@@ -712,7 +712,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/FilterInQuery"
+            "$ref": "#/parameters/FilterLocationInQuery"
           }
         ],
         "responses": {
@@ -883,53 +883,6 @@
             }
           }
         }
-      },
-      "get": {
-        "tags": [
-          "GroupQuotaLimitRequests"
-        ],
-        "summary": "List the status of all GroupQuota requests.",
-        "description": "List API to check the status of a GroupQuota requests by requestId. The groupQuotaRequest history is maintained for 1 year. Use the $filter parameter to filter out the specific resource based on the ResourceProvider/Location. ",
-        "operationId": "GroupQuotaLimitsRequests_List",
-        "x-ms-examples": {
-          "GroupQuotaLimitsRequests_List": {
-            "$ref": "./examples/GroupQuotaLimitsRequests/GroupQuotaLimitsRequests_List.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ManagementGroupId"
-          },
-          {
-            "$ref": "#/parameters/GroupQuotaName"
-          },
-          {
-            "$ref": "#/parameters/ResourceProviderName"
-          },
-          {
-            "$ref": "#/parameters/ResourceName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/FilterInQuery"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success, with the details of the group quota request.",
-            "schema": {
-              "$ref": "#/definitions/SubmittedResourceRequestStatusList"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
       }
     },
     "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaRequests/{requestId}": {
@@ -975,8 +928,11 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaRequests": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/groupQuotaRequests": {
       "get": {
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "tags": [
           "GroupQuotaLimitRequestStatus"
         ],
@@ -996,7 +952,13 @@
             "$ref": "#/parameters/GroupQuotaName"
           },
           {
+            "$ref": "#/parameters/ResourceProviderName"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterResourceAndLocationInQuery"
           }
         ],
         "responses": {
@@ -1045,7 +1007,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/FilterInQuery"
+            "$ref": "#/parameters/FilterLocationInQuery"
           }
         ],
         "responses": {
@@ -1094,7 +1056,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/FilterInQuery"
+            "$ref": "#/parameters/FilterLocationInQuery"
           }
         ],
         "responses": {
@@ -1192,7 +1154,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/FilterInQuery"
+            "$ref": "#/parameters/FilterLocationInQuery"
           }
         ],
         "responses": {
@@ -1403,7 +1365,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/FilterInQuery"
+            "$ref": "#/parameters/FilterLocationInQuery"
           }
         ],
         "responses": {
@@ -1818,11 +1780,13 @@
             "name": {
               "type": "object",
               "x-ms-client-flatten": true,
+              "readOnly": true,
               "description": "Name of the resource provided by the resource provider. This property is already included in the request URI, so it is a readonly property returned in the response.",
               "properties": {
                 "value": {
                   "description": "Resource name.",
-                  "type": "string"
+                  "type": "string",
+                  "readOnly": true
                 },
                 "localizedValue": {
                   "description": "Resource display name.",
@@ -2628,13 +2592,22 @@
       "description": "The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.",
       "x-ms-parameter-location": "method"
     },
-    "FilterInQuery": {
+    "FilterLocationInQuery": {
       "name": "$filter",
       "in": "query",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "| Field | Supported operators  \r\n|---------------------|------------------------\n\r\n location eq {location}\n Example: $filter=location eq eastus",
+      "minLength": 12
+    },
+    "FilterResourceAndLocationInQuery": {
+      "name": "$filter",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "| Field | Supported operators  \r\n|---------------------|------------------------\n\r\n location eq {location} and resource eq {resourceName}\n Example: $filter=location eq eastus and resourceName eq standardav2family",
       "minLength": 12
     }
   }
