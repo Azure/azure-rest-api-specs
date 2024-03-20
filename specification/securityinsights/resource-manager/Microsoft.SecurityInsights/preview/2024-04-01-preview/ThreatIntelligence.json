@@ -464,6 +464,203 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/stixAttackPatterns": {
+      "get": {
+        "tags": [
+          "AttackPatterns"
+        ],
+        "description": "Gets all STIX Attack Patterns on the workspace.",
+        "operationId": "AttackPatterns_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AttackPatternsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get All AttackPatterns": {
+            "$ref": "./examples/threatIntelligence/GetAttackPatterns.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/stixAttackPatterns/{attackPatternId}": {
+      "get": {
+        "tags": [
+          "AttackPatterns"
+        ],
+        "description": "Gets an Attack Pattern.",
+        "operationId": "AttackPattern_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/AttackPatternId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AttackPattern"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Attack Pattern By ID": {
+            "$ref": "./examples/threatIntelligence/GetAttackPatternById.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AttackPatterns"
+        ],
+        "description": "Creates or updates an Attack Pattern.",
+        "operationId": "AttackPattern_CreateOrUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/AttackPatternId"
+          },
+          {
+            "$ref": "#/parameters/AttackPattern"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AttackPattern"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/AttackPattern"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Or Update Attack Pattern": {
+            "$ref": "./examples/threatIntelligence/CreateOrUpdateAttackPattern.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AttackPatterns"
+        ],
+        "description": "Delete an Attack Pattern",
+        "operationId": "AttackPattern_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/AttackPatternId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Attack Pattern": {
+            "$ref": "./examples/threatIntelligence/DeleteAttackPattern.json"
+          }
+        }
+      }
     }
   },
   "parameters": {
@@ -520,6 +717,24 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/ThreatIntelligenceAppendTags"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "AttackPatternId": {
+      "description": "Attack Pattern ID",
+      "in": "path",
+      "name": "attackPatternId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AttackPattern": {
+      "description": "The Attack Pattern",
+      "in": "body",
+      "name": "attackPattern",
+      "required": true,
+      "schema": {
+        "$ref": "../threatIntelligenceQuery.json#/definitions/AttackPattern"
       },
       "x-ms-parameter-location": "method"
     }
