@@ -522,12 +522,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/locations/{location}/adooauth/default/getADOOAuthInfo": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/locations/{location}/adoOAuth/default/getADOOAuthInfo": {
       "post": {
         "tags": [
           "ADOOAuth"
         ],
-        "operationId": "ADOOAuthInfo",
+        "operationId": "ADOOAuthInfo_Get",
         "summary": "Gets ADOOAuth info used to authenticate users with ADO.",
         "parameters": [
           {
@@ -541,6 +541,7 @@
           },
           {
             "name": "parameters",
+            "description": "The fields required in ADO OAuth call request.",
             "required": false,
             "in": "body",
             "schema": {
@@ -569,12 +570,12 @@
         }
       }
     },
-    "/subscriptions/{subscription_id}/providers/Microsoft.DevHub/locations/{location}/adooauth/default": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/locations/{location}/adoOAuth/default": {
       "get": {
         "tags": [
           "ADOOAuth"
         ],
-        "operationId": "ADOOAuthDefault",
+        "operationId": "ADOOAuth_Get",
         "summary": "Callback URL to hit once authenticated with Entra ID to have the service store the OAuth token.",
         "parameters": [
           {
@@ -614,12 +615,12 @@
         }
       }
     },
-    "/subscriptions/{subscription_id}/providers/Microsoft.DevHub/locations/{location}/adooauth": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/locations/{location}/adoOAuth": {
       "get": {
         "tags": [
           "ADOOAuth"
         ],
-        "operationId": "ADOOAuthList",
+        "operationId": "ADOOAuth_List",
         "summary": "Callback URL to hit once authenticated with ADO to have the service store the OAuth token.",
         "parameters": [
           {
@@ -645,6 +646,9 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List ADO OAuth": {
@@ -1447,6 +1451,11 @@
             "$ref": "#/definitions/ADOOAuthResponse"
           },
           "description": "Singleton list response containing one ADOOAuthResponse"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to the next set of ADO OAuth results.",
+          "readOnly": true
         }
       },
       "description": "The response from List ADOOAuth operation."
