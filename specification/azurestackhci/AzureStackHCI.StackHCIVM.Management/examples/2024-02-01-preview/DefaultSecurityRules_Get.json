@@ -10,19 +10,16 @@
     "200": {
       "body": {
         "name": "AllowVnetInBound",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.AzureStackHCI/networkSecurityGroups/nsg1/defaultSecurityRules/AllowVnetInBound",
         "properties": {
           "description": "Allow inbound traffic from all VMs in VNET",
           "access": "Allow",
-          "destinationAddressPrefix": "VirtualNetwork",
-          "destinationAddressPrefixes": [],
-          "destinationPortRange": "*",
-          "destinationPortRanges": [],
+          "destinationAddressPrefixes": ["VirtualNetwork"],
+          "destinationPortRanges": ["*"],
           "direction": "Inbound",
           "priority": 65000,
-          "sourceAddressPrefix": "VirtualNetwork",
-          "sourceAddressPrefixes": [],
-          "sourcePortRange": "*",
-          "sourcePortRanges": [],
+          "sourceAddressPrefixes": ["VirtualNetwork"],
+          "sourcePortRanges": ["*"],
           "protocol": "*"
         }
       }
