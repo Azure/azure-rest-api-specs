@@ -6,7 +6,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 
-namespace DocumentTranslation;
+namespace DocumentTranslationClient;
 @doc("Document Translate Request Content")
 model SingleDocumentTranslateContent {
   @doc("""

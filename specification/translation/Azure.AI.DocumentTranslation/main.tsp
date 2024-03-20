@@ -32,7 +32,7 @@ using Azure.Core;
   }
 )
 @doc("Document translation service")
-namespace DocumentTranslation;
+namespace DocumentTranslationClient;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
 enum Versions {
