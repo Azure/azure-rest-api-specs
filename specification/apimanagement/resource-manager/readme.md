@@ -1160,4 +1160,8 @@ suppressions:
     from: apimworkspaceloggers.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/loggers"].get.responses["200"].schema.properties
     reason: Our object contain count property as a sibling to nextLink and value and it used for proxy resource collection GETs.
+  - code: PatchBodyParametersSchema
+    from: apimworkspacebackends.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/backends/{backendId}"].patch.parameters[4].schema
+    reason: The issue will be fixed in the next preview version.
 ```
