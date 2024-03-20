@@ -105,6 +105,7 @@ model NodeImageSelection {
   @added(Versions.v2024_05_02_preview)
   @visibility("create", "read")
   @doc("Custom node image versions to upgrade the nodes to. This field is required if node image selection type is Custom. Otherwise, it must be empty. For each node image family (e.g., 'AKSUbuntu-1804gen2containerd'), this field can contain at most one version (e.g., only one of 'AKSUbuntu-1804gen2containerd-2023.01.12' or 'AKSUbuntu-1804gen2containerd-2023.02.12', not both). If the nodes belong to a family without a matching image version in this field, they are not upgraded.")
+  @extension("x-ms-identifiers", ["version"])
   customNodeImageVersions?: NodeImageVersion[];
 }
 

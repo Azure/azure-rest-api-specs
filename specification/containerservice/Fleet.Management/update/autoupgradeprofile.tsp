@@ -111,10 +111,4 @@ interface AutoUpgradeProfiles {
   >;
 
   listByParent is ArmResourceListByParent<AutoUpgradeProfile>;
-
-  @doc("List UpdateRuns created by AutoUpgradeProfile.")
-  listUpdateRuns is ArmResourceNoRequestBodyActionSync<
-    AutoUpgradeProfile,
-    ListUpdateRunsResult
-  >;
 }
