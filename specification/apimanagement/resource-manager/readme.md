@@ -1150,18 +1150,21 @@ suppressions:
     reason: Our object contain count property as a sibling to nextLink and value and it used for proxy resource collection GETs.
   - code: GetCollectionOnlyHasValueAndNextLink
     from: apimworkspacediagnostics.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/diagnostics"].get.responses["200"].schema.properties
-    reason: Our object contain count property as a sibling to nextLink and value and it used for proxy resource collection GETs.
-  - code: GetCollectionOnlyHasValueAndNextLink
-    from: apimworkspacediagnostics.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/apis/{apiId}/diagnostics"].get.responses.["200"].schema.properties
+    where: 
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/diagnostics"].get.responses["200"].schema.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/apis/{apiId}/diagnostics"].get.responses.["200"].schema.properties
     reason: Our object contain count property as a sibling to nextLink and value and it used for proxy resource collection GETs.
   - code: GetCollectionOnlyHasValueAndNextLink
     from: apimworkspaceloggers.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/loggers"].get.responses["200"].schema.properties
     reason: Our object contain count property as a sibling to nextLink and value and it used for proxy resource collection GETs.
   - code: PatchBodyParametersSchema
+    reasons: This are the object fields which when updated require some data to be present.
     from: apimworkspacebackends.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/backends/{backendId}"].patch.parameters[4].schema
-    reason: The issue will be fixed in the next preview version.
-```
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/backends/{backendId}"].patch.parameters[4].schema.properties.properties.managementEndpoints
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/backends/{backendId}"].patch.parameters[4].schema.properties.credentials.authorization.scheme
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/backends/{backendId}"].patch.parameters[4].schema.properties.credentials.authorization.parameter
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/backends/{backendId}"].patch.parameters[4].schema.properties.credentials.proxy.url
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/backends/{backendId}"].patch.parameters[4].schema.properties.credentials.tls.validateCertificateChain
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/backends/{backendId}"].patch.parameters[4].schema.properties.credentials.tls.validateCertificateName
