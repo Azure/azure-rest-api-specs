@@ -23,7 +23,8 @@ model DefaultSecurityRule is ProxyResource<SecurityRuleProperties> {
   @visibility("read")
   name: string;
 
-  ...EntityTag;
+  @doc("The extendedLocation of the resource.")
+  extendedLocation?: ExtendedLocation;
 }
 
 @armResourceOperations

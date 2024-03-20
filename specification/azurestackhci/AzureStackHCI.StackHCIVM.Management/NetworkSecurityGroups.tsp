@@ -22,6 +22,9 @@ model NetworkSecurityGroup is TrackedResource<NetworkSecurityGroupProperties> {
   @visibility("read")
   name: string;
 
+  @doc("The extendedLocation of the resource.")
+  extendedLocation?: ExtendedLocation;
+
   ...EntityTag;
 }
 
