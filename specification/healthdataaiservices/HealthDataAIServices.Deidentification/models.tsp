@@ -74,16 +74,25 @@ model Job {
 @parentResource(Job)
 model File {
   @key
-  @doc("Relative path to file from location prefix.")
+  @doc("Id of the file report.")
   @visibility("read")
-  @maxLength(1024)
-  path: string;
+  id: string;
+
+  @doc("File Location for the output.")
+  output: FileLocation;
 
   @doc("Status of the file.")
   status: Azure.Core.Foundations.OperationState;
 
   @doc("Error when file fails.")
   error?: Azure.Core.Foundations.Error;
+}
+
+@doc("Location of a file.")
+model FileLocation {
+  @doc("Absolute path to the file in storage.")
+  @maxLength(1024)
+  path: string;
 
   ...EtagProperty;
 }

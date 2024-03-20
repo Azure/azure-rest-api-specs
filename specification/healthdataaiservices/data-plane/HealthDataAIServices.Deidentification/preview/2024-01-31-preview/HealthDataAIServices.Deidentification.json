@@ -660,11 +660,14 @@
       "type": "object",
       "description": "File report once job has completed.",
       "properties": {
-        "path": {
+        "id": {
           "type": "string",
-          "description": "Relative path to file from location prefix.",
-          "maxLength": 1024,
+          "description": "Id of the file report.",
           "readOnly": true
+        },
+        "output": {
+          "$ref": "#/definitions/FileLocation",
+          "description": "File Location for the output."
         },
         "status": {
           "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
@@ -673,6 +676,22 @@
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "Error when file fails."
+        }
+      },
+      "required": [
+        "id",
+        "output",
+        "status"
+      ]
+    },
+    "FileLocation": {
+      "type": "object",
+      "description": "Location of a file.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Absolute path to the file in storage.",
+          "maxLength": 1024
         },
         "etag": {
           "$ref": "#/definitions/Azure.Core.eTag",
@@ -682,7 +701,6 @@
       },
       "required": [
         "path",
-        "status",
         "etag"
       ]
     },
@@ -927,8 +945,7 @@
           "description": "The File items on this page",
           "items": {
             "$ref": "#/definitions/File"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
