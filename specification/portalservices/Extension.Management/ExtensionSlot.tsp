@@ -5,6 +5,7 @@ import "@typespec/rest";
 import "./models.tsp";
 import "./PortalExtension.tsp";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -64,4 +65,16 @@ interface PortalExtensionSlots {
 );
 @@doc(PortalExtensionSlots.update::parameters.properties,
   "The updatable fields of a portal extension slot."
+);
+
+@@clientName(PortalExtensionSlots.createOrUpdate::parameters.resource,
+  "parameters"
+);
+@@encodedName(PortalExtensionSlots.createOrUpdate::parameters.resource,
+  "application/json",
+  "parameters"
+);
+@@OpenAPI.extension(PortalExtensionSlots.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
 );

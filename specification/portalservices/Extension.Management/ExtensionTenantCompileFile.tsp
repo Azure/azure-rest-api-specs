@@ -5,6 +5,7 @@ import "@typespec/rest";
 import "./models.tsp";
 import "@typespec/http";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
@@ -52,3 +53,13 @@ interface PortalTenant {
     PortalTenantCompileFileResult
   >;
 }
+
+// @@clientName(PortalTenant.compileFile::parameters.body, "portalTenantCompileFile");
+// @@encodedName(PortalTenant.compileFile::parameters.body,
+//   "application/json",
+//   "portalTenantCompileFile"
+// );
+// @@OpenAPI.extension(PortalTenant.compileFile::parameters.body,
+//   "x-ms-client-name",
+//   "portalTenantCompileFile"
+// );

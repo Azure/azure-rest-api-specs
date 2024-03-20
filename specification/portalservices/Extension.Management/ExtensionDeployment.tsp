@@ -5,6 +5,7 @@ import "@typespec/rest";
 import "./models.tsp";
 import "./PortalExtension.tsp";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -72,4 +73,28 @@ interface PortalExtensionDeployments {
 );
 @@doc(PortalExtensionDeployments.update::parameters.properties,
   "The updatable fields of a portal extension deployment."
+);
+
+@@clientName(PortalExtensionDeployments.create::parameters.resource,
+  "parameters"
+);
+@@encodedName(PortalExtensionDeployments.create::parameters.resource,
+  "application/json",
+  "parameters"
+);
+@@OpenAPI.extension(PortalExtensionDeployments.create::parameters.resource,
+  "x-ms-client-name",
+  "parameters"
+);
+
+@@clientName(PortalExtensionDeployments.update::parameters.properties,
+  "parameters"
+);
+@@encodedName(PortalExtensionDeployments.update::parameters.properties,
+  "application/json",
+  "parameters"
+);
+@@OpenAPI.extension(PortalExtensionDeployments.update::parameters.properties,
+  "x-ms-client-name",
+  "parameters"
 );

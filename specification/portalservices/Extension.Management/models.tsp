@@ -389,6 +389,21 @@ model PortalExtensionExport {
 }
 
 /**
+ * The result of the export extension request
+ */
+model PortalExtensionExportResult {
+  /**
+   * The kind of the source package.
+   */
+  kind?: ExportKind;
+
+  /**
+   * The uri of the source package.
+   */
+  uri?: string;
+}
+
+/**
  * The list of sources in the extension
  */
 model PortalExtensionListSourcesResult is PortalExtensionListSourcesFolder;

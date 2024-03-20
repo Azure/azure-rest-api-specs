@@ -243,7 +243,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9]+$"
           }
         ],
         "responses": {
@@ -293,16 +293,17 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9]+$"
           },
           {
-            "name": "resource",
+            "name": "portalExtension",
             "in": "body",
             "description": "The parameters required to create or update a portal extension.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PortalExtension"
-            }
+            },
+            "x-ms-client-name": "portalExtension"
           }
         ],
         "responses": {
@@ -366,7 +367,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9]+$"
           },
           {
             "name": "properties",
@@ -440,7 +441,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9]+$"
           }
         ],
         "responses": {
@@ -504,16 +505,17 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9]+$"
           },
           {
-            "name": "body",
+            "name": "portalExtensionAlter",
             "in": "body",
             "description": "The parameters required to alter portal extension sources.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PortalExtensionAlter"
-            }
+            },
+            "x-ms-client-name": "portalExtensionAlter"
           }
         ],
         "responses": {
@@ -574,16 +576,17 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9]+$"
           },
           {
-            "name": "body",
+            "name": "portalExtensionCompileFile",
             "in": "body",
             "description": "The parameters required to compile a source file.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PortalExtensionCompileFile"
-            }
+            },
+            "x-ms-client-name": "portalExtensionCompileFile"
           }
         ],
         "responses": {
@@ -632,7 +635,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9]+$"
           }
         ],
         "responses": {
@@ -684,7 +687,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9]+$"
           },
           {
             "name": "deploymentName",
@@ -741,7 +744,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9]+$"
           },
           {
             "name": "deploymentName",
@@ -754,13 +757,14 @@
             "pattern": "^[a-zA-Z0-9]+$"
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
             "description": "deployment definition",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ExtensionDeployment"
-            }
+            },
+            "x-ms-client-name": "parameters"
           }
         ],
         "responses": {
@@ -830,7 +834,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9]+$"
           },
           {
             "name": "deploymentName",
@@ -843,13 +847,14 @@
             "pattern": "^[a-zA-Z0-9]+$"
           },
           {
-            "name": "properties",
+            "name": "parameters",
             "in": "body",
             "description": "The updatable fields of a portal extension deployment.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PatchableExtensionDeployment"
-            }
+            },
+            "x-ms-client-name": "parameters"
           }
         ],
         "responses": {
@@ -896,7 +901,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9]+$"
           },
           {
             "name": "deploymentName",
@@ -955,7 +960,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9]+$"
           },
           {
             "name": "deploymentName",
@@ -1011,7 +1016,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9]+$"
           },
           {
             "name": "portalExtensionExport",
@@ -1021,10 +1026,16 @@
             "schema": {
               "$ref": "#/definitions/PortalExtensionExport"
             },
-            "x-ms-client-name": "body"
+            "x-ms-client-name": "portalExtensionExport"
           }
         ],
         "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PortalExtensionExportResult"
+            }
+          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -1082,7 +1093,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9]+$"
           }
         ],
         "responses": {
@@ -1131,7 +1142,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9]+$"
           }
         ],
         "responses": {
@@ -1183,7 +1194,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9]+$"
           },
           {
             "name": "slotName",
@@ -1240,7 +1251,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9]+$"
           },
           {
             "name": "slotName",
@@ -1253,13 +1264,14 @@
             "pattern": "^[a-zA-Z0-9]+$"
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
             "description": "The slot deployment definition",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ExtensionSlot"
-            }
+            },
+            "x-ms-client-name": "parameters"
           }
         ],
         "responses": {
@@ -1323,7 +1335,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9]+$"
           },
           {
             "name": "slotName",
@@ -1389,7 +1401,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9]+$"
           },
           {
             "name": "slotName",
@@ -1448,7 +1460,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9]+$"
           }
         ],
         "responses": {
@@ -1500,7 +1512,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9]+$"
           },
           {
             "name": "versionName",
@@ -1557,7 +1569,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9]+$"
           },
           {
             "name": "versionName",
@@ -1643,7 +1655,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9]+$"
           },
           {
             "name": "versionName",
@@ -1709,7 +1721,7 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 64,
-            "pattern": "^[a-z][a-z0-9]*$"
+            "pattern": "^[a-zA-Z0-9]+$"
           },
           {
             "name": "versionName",
@@ -2318,6 +2330,20 @@
         "kind": {
           "$ref": "#/definitions/ExportKind",
           "description": "The kind of the source package."
+        }
+      }
+    },
+    "PortalExtensionExportResult": {
+      "type": "object",
+      "description": "The result of the export extension request",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/ExportKind",
+          "description": "The kind of the source package."
+        },
+        "uri": {
+          "type": "string",
+          "description": "The uri of the source package."
         }
       }
     },

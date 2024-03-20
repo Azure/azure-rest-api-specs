@@ -22,7 +22,7 @@ model PortalExtension is TrackedResource<PortalExtensionProperties> {
    */
   @maxLength(64)
   @minLength(3)
-  @pattern("^[a-z][a-z0-9]*$")
+  @pattern("^[a-zA-Z0-9]+$")
   @path
   @key("portalExtensionName")
   @segment("extensions")
@@ -107,7 +107,7 @@ interface PortalExtensions {
   export is ArmResourceActionAsync<
     PortalExtension,
     PortalExtensionExport,
-    never
+    PortalExtensionExportResult
   >;
 
   /**
@@ -144,4 +144,38 @@ interface PortalExtensions {
 @@OpenAPI.extension(PortalExtensions.export::parameters.body,
   "x-ms-client-name",
   "portalExtensionExport"
+);
+
+@@clientName(PortalExtensions.compileFile::parameters.body,
+  "portalExtensionCompileFile"
+);
+@@encodedName(PortalExtensions.compileFile::parameters.body,
+  "application/json",
+  "portalExtensionCompileFile"
+);
+@@OpenAPI.extension(PortalExtensions.compileFile::parameters.body,
+  "x-ms-client-name",
+  "portalExtensionCompileFile"
+);
+
+@@clientName(PortalExtensions.alter::parameters.body, "portalExtensionAlter");
+@@encodedName(PortalExtensions.alter::parameters.body,
+  "application/json",
+  "portalExtensionAlter"
+);
+@@OpenAPI.extension(PortalExtensions.alter::parameters.body,
+  "x-ms-client-name",
+  "portalExtensionAlter"
+);
+
+@@clientName(PortalExtensions.createOrUpdate::parameters.resource,
+  "portalExtension"
+);
+@@encodedName(PortalExtensions.createOrUpdate::parameters.resource,
+  "application/json",
+  "portalExtension"
+);
+@@OpenAPI.extension(PortalExtensions.createOrUpdate::parameters.resource,
+  "x-ms-client-name",
+  "portalExtension"
 );
