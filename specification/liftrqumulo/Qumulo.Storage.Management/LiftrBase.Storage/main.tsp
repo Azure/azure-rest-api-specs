@@ -69,6 +69,7 @@ model FileSystemResourceProperties {
   /**
    * Initial administrator password of the resource
    */
+  @extension("x-ms-secret", true)
   adminPassword: string;
 
   /**

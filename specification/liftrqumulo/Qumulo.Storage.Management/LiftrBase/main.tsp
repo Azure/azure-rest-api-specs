@@ -3,11 +3,13 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-providerhub";
 import "@typespec/rest";
+import "@typespec/openapi";
 import "@typespec/versioning";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using TypeSpec.Reflection;
+using TypeSpec.OpenAPI;
 
 @versioned(LiftrBase.Versions)
 namespace LiftrBase;
@@ -84,6 +86,7 @@ model UserDetails {
   /**
    * User Email
    */
+  @extension("x-ms-secret", true)
   email: string;
 }
 
