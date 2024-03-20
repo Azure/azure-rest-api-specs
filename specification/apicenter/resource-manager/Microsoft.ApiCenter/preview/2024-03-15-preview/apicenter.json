@@ -4075,12 +4075,12 @@
       "type": "object",
       "description": "Deleted service properties.",
       "properties": {
-        "expiresOn": {
+        "scheduledPurgeDate": {
           "type": "string",
           "format": "date-time",
           "description": "UTC date and time when the service will be automatically purged. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard."
         },
-        "deletedOn": {
+        "softDeletionDate": {
           "type": "string",
           "format": "date-time",
           "description": "UTC date and time when the service was soft-deleted. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard."
@@ -4823,6 +4823,11 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the service.",
           "readOnly": true
+        },
+        "restore": {
+          "type": "boolean",
+          "description": "Flag used to restore soft-deleted API Center service. If specified and set to 'true' all other properties will be ignored.",
+          "default": false
         }
       }
     },
@@ -4840,6 +4845,21 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "properties": {
+          "$ref": "#/definitions/ServiceUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ServiceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Service.",
+      "properties": {
+        "restore": {
+          "type": "boolean",
+          "description": "Flag used to restore soft-deleted API Center service. If specified and set to 'true' all other properties will be ignored.",
+          "default": false
         }
       }
     },
