@@ -818,6 +818,16 @@
               "description": "The cloud role ARN in AWS for this feature"
             }
           }
+        },
+        "vmScanners": {
+          "type": "object",
+          "description": "The Microsoft Defender for Container K8s VM host scanning configuration",
+          "allOf": [
+            {
+              "$ref": "#/definitions/vmScannersAws"
+            }
+          ],
+          "properties":{}
         }
       }
     },
@@ -844,30 +854,12 @@
         "arcAutoProvisioning": {
           "type": "object",
           "description": "The ARC autoprovisioning configuration",
-          "properties": {
-            "enabled": {
-              "type": "boolean",
-              "description": "Is arc auto provisioning enabled"
-            },
-            "cloudRoleArn": {
-              "type": "string",
-              "description": "The cloud role ARN in AWS for this feature"
-            },
-            "configuration": {
-              "type": "object",
-              "description": "Configuration for servers Arc auto provisioning",
-              "properties": {
-                "proxy": {
-                  "type": "string",
-                  "description": "Optional HTTP proxy endpoint to use for the Arc agent"
-                },
-                "privateLinkScope": {
-                  "type": "string",
-                  "description": "Optional Arc private link scope resource id to link the Arc agent"
-                }
-              }
+          "allOf": [
+            {
+              "$ref": "#/definitions/arcAutoProvisioningAws"
             }
-          }
+          ],
+          "properties": {}
         },
         "vaAutoProvisioning": {
           "type": "object",
@@ -933,40 +925,12 @@
         "vmScanners": {
           "type": "object",
           "description": "The Microsoft Defender for Server VM scanning configuration",
-          "properties": {
-            "enabled": {
-              "type": "boolean",
-              "description": "Is Microsoft Defender for Server VM scanning enabled"
-            },
-            "configuration": {
-              "type": "object",
-              "description": "configuration for Microsoft Defender for Server VM scanning",
-              "properties": {
-                "cloudRoleArn": {
-                  "type": "string",
-                  "description": "The cloud role ARN in AWS for this feature"
-                },
-                "scanningMode": {
-                  "type": "string",
-                  "description": "The scanning mode for the VM scan.",
-                  "enum": [
-                    "Default"
-                  ],
-                  "x-ms-enum": {
-                    "name": "scanningMode",
-                    "modelAsString": true
-                  }
-                },
-                "exclusionTags": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "description": "VM tags that indicates that VM should not be scanned"
-                }
-              }
+          "allOf": [
+            {
+              "$ref": "#/definitions/vmScannersAws"
             }
-          }
+          ],
+          "properties": {}
         }
       }
     },
@@ -983,30 +947,12 @@
         "arcAutoProvisioning": {
           "type": "object",
           "description": "The ARC autoprovisioning configuration",
-          "properties": {
-            "enabled": {
-              "type": "boolean",
-              "description": "Is arc auto provisioning enabled"
-            },
-            "cloudRoleArn": {
-              "type": "string",
-              "description": "The cloud role ARN in AWS for this feature"
-            },
-            "configuration": {
-              "type": "object",
-              "description": "Configuration for servers Arc auto provisioning",
-              "properties": {
-                "proxy": {
-                  "type": "string",
-                  "description": "Optional http proxy endpoint to use for the Arc agent"
-                },
-                "privateLinkScope": {
-                  "type": "string",
-                  "description": "Optional Arc private link scope resource id to link the Arc agent"
-                }
-              }
+          "allOf": [
+            {
+              "$ref": "#/definitions/arcAutoProvisioningAws"
             }
-          }
+          ],
+          "properties": {}
         },
         "rds": {
           "type": "object",
@@ -1091,26 +1037,12 @@
         "arcAutoProvisioning": {
           "type": "object",
           "description": "The ARC autoprovisioning configuration",
-          "properties": {
-            "enabled": {
-              "type": "boolean",
-              "description": "Is arc auto provisioning enabled"
-            },
-            "configuration": {
-              "type": "object",
-              "description": "Configuration for servers Arc auto provisioning",
-              "properties": {
-                "proxy": {
-                  "type": "string",
-                  "description": "Optional HTTP proxy endpoint to use for the Arc agent"
-                },
-                "privateLinkScope": {
-                  "type": "string",
-                  "description": "Optional Arc private link scope resource id to link the Arc agent"
-                }
-              }
+          "allOf": [
+            {
+              "$ref": "#/definitions/arcAutoProvisioningGcp"
             }
-          }
+          ],
+          "properties": {}
         },
         "vaAutoProvisioning": {
           "type": "object",
@@ -1176,36 +1108,12 @@
         "vmScanners": {
           "type": "object",
           "description": "The Microsoft Defender for Server VM scanning configuration",
-          "properties": {
-            "enabled": {
-              "type": "boolean",
-              "description": "Is Microsoft Defender for Server VM scanning enabled"
-            },
-            "configuration": {
-              "type": "object",
-              "description": "configuration for Microsoft Defender for Server VM scanning",
-              "properties": {
-                "scanningMode": {
-                  "type": "string",
-                  "description": "The scanning mode for the VM scan.",
-                  "enum": [
-                    "Default"
-                  ],
-                  "x-ms-enum": {
-                    "name": "scanningMode",
-                    "modelAsString": true
-                  }
-                },
-                "exclusionTags": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "description": "VM tags that indicate that VM should not be scanned"
-                }
-              }
+          "allOf": [
+            {
+              "$ref": "#/definitions/vmScannersGcp"
             }
-          }
+          ],
+          "properties": {}
         }
       }
     },
@@ -1222,26 +1130,12 @@
         "arcAutoProvisioning": {
           "type": "object",
           "description": "The ARC autoprovisioning configuration",
-          "properties": {
-            "enabled": {
-              "type": "boolean",
-              "description": "Is arc auto provisioning enabled"
-            },
-            "configuration": {
-              "type": "object",
-              "description": "Configuration for servers Arc auto provisioning",
-              "properties": {
-                "proxy": {
-                  "type": "string",
-                  "description": "Optional http proxy endpoint to use for the Arc agent"
-                },
-                "privateLinkScope": {
-                  "type": "string",
-                  "description": "Optional Arc private link scope resource id to link the Arc agent"
-                }
-              }
+          "allOf": [
+            {
+              "$ref": "#/definitions/arcAutoProvisioningGcp"
             }
-          }
+          ],
+          "properties": {}
         },
         "defenderForDatabasesArcAutoProvisioning": {
           "type": "object",
@@ -1344,6 +1238,16 @@
               "description": "The service account email address in GCP for this feature"
             }
           }
+        },
+        "vmScanners": {
+          "type": "object",
+          "description": "The Microsoft Defender for Container K8s VM host scanning configuration",
+          "allOf": [
+            {
+              "$ref": "#/definitions/vmScannersGcp"
+            }
+          ],
+          "properties": {}
         }
       }
     },
@@ -1381,41 +1285,13 @@
       "properties": {
         "vmScanners": {
           "type": "object",
-          "description": "The Microsoft Defender for Server VM scanning configuration",
-          "properties": {
-            "enabled": {
-              "type": "boolean",
-              "description": "Is Microsoft Defender for Server VM scanning enabled"
-            },
-            "configuration": {
-              "type": "object",
-              "description": "configuration for Microsoft Defender for Server VM scanning",
-              "properties": {
-                "cloudRoleArn": {
-                  "type": "string",
-                  "description": "The cloud role ARN in AWS for this feature"
-                },
-                "scanningMode": {
-                  "type": "string",
-                  "description": "The scanning mode for the VM scan.",
-                  "enum": [
-                    "Default"
-                  ],
-                  "x-ms-enum": {
-                    "name": "scanningMode",
-                    "modelAsString": true
-                  }
-                },
-                "exclusionTags": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "description": "VM tags that indicates that VM should not be scanned"
-                }
-              }
+          "description": "The Microsoft Defender for CSPM offering VM scanning configuration",
+          "allOf": [
+            {
+              "$ref": "#/definitions/vmScannersAws"
             }
-          }
+          ],
+          "properties": {}
         },
         "dataSensitivityDiscovery": {
           "type": "object",
@@ -1535,37 +1411,13 @@
         },
         "vmScanners": {
           "type": "object",
-          "description": "The Microsoft Defender for Server VM scanning configuration",
-          "properties": {
-            "enabled": {
-              "type": "boolean",
-              "description": "Is Microsoft Defender for Server VM scanning enabled"
-            },
-            "configuration": {
-              "type": "object",
-              "description": "configuration for Microsoft Defender for Server VM scanning",
-              "properties": {
-                "scanningMode": {
-                  "type": "string",
-                  "description": "The scanning mode for the VM scan.",
-                  "enum": [
-                    "Default"
-                  ],
-                  "x-ms-enum": {
-                    "name": "scanningMode",
-                    "modelAsString": true
-                  }
-                },
-                "exclusionTags": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "description": "VM tags that indicates that VM should not be scanned"
-                }
-              }
+          "description": "The Microsoft Defender for CSPM VM scanning configuration",
+          "allOf": [
+            {
+              "$ref": "#/definitions/vmScannersGcp"
             }
-          }
+          ],
+          "properties": {}
         },
         "dataSensitivityDiscovery": {
           "type": "object",
@@ -1633,6 +1485,114 @@
         }
       ],
       "properties": {}
+    },
+    "vmScanners": {
+      "type": "object",
+      "description": "A VM scanning configuration for a security offering of a given environment",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Is VM scanning enabled"
+        },
+        "configuration": {
+          "type": "object",
+          "description": "Configuration for VM scanning",
+          "properties": {
+            "scanningMode": {
+              "type": "string",
+              "description": "The scanning mode for the VM scan.",
+              "enum": [
+                "Default"
+              ],
+              "x-ms-enum": {
+                "name": "scanningMode",
+                "modelAsString": true
+              }
+            },
+            "exclusionTags": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "description": "Tags that indicates that a resource should not be scanned"
+            }
+          }
+        }
+      }
+    },
+    "vmScannersGcp": {
+      "type": "object",
+      "description": "A VM scanning configuration for a security offering of a GCP environment",
+      "properties": {},
+      "allOf": [
+        {
+          "$ref": "#/definitions/vmScanners"
+        }
+      ]
+    },
+    "vmScannersAws": {
+      "type": "object",
+      "description": "A VM scanning configuration for a security offering of a Aws environment",
+      "properties": {
+        "cloudRoleArn": {
+          "type": "string",
+          "description": "The cloud role ARN in AWS for this feature"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/vmScanners"
+        }
+      ]
+    },
+    "arcAutoProvisioning": {
+      "type": "object",
+      "description": "The ARC autoprovisioning configuration",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Is arc auto provisioning enabled"
+        },
+        "configuration": {
+          "type": "object",
+          "description": "Configuration for servers Arc auto provisioning for a given environment",
+          "properties": {
+            "proxy": {
+              "type": "string",
+              "description": "Optional HTTP proxy endpoint to use for the Arc agent"
+            },
+            "privateLinkScope": {
+              "type": "string",
+              "description": "Optional Arc private link scope resource id to link the Arc agent"
+            }
+          }
+        }
+      }
+    },
+    "arcAutoProvisioningGcp": {
+      "type": "object",
+      "description": "The ARC autoprovisioning configuration for an GCP environment",
+      "properties": {},
+      "allOf": [
+        {
+          "$ref": "#/definitions/arcAutoProvisioning"
+        }
+      ]
+    },
+    "arcAutoProvisioningAws": {
+      "type": "object",
+      "description": "The ARC autoprovisioning configuration for an AWS environment",
+      "properties": {
+        "cloudRoleArn": {
+          "type": "string",
+          "description": "The cloud role ARN in AWS for this feature"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/arcAutoProvisioning"
+        }
+      ]
     }
   },
   "parameters": {
