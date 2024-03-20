@@ -21,6 +21,183 @@ model StorageError {
 
 /// Parameters
 
+@doc("The legal hold optional parameter.")
+model LegalHoldOptionalParameter {
+  @doc("Specified if a legal hold should be set on the blob.")
+  @clientName("legalHold")
+  @header `x-ms-legal-hold`?: boolean;
+}
+
+@doc("The immutability policy mode parameter.")
+model ImmutabilityPolicyModeParameter {
+  @doc("Specifies the immutability policy mode to set on the blob.")
+  @header
+  @clientName("immutabilityPolicyMode")
+  `x-ms-immutability-policy-mode`?: BlobImmutabilityPolicyMode;
+}
+
+@doc("The immutability policy expiration parameter.")
+model ImmutabilityPolicyExpiryParameter {
+  @doc("Specifies the date time when the blobs immutability policy is set to expire.")
+  @header
+  @clientName("immutabilityPolicyExpiry")
+  @encode("date-time-rfc1123")
+  `x-ms-immutability-policy-until-date`?: string;
+}
+
+@doc("The blobs tags header parameter.")
+model BlobTagsHeaderParameter {
+  @doc("Optional.  Used to set blob tags in various blob operations.")
+  @clientName("BlobTagsString")
+  @header
+  `x-ms-tags`?: string;
+}
+
+@doc("The blob sequence number parameter.")
+model BlobSequenceNumberParameter {
+  @doc("Optional.  The sequence number is a user-controlled property that you can use to track requests. The value of the sequence number must be between 0 and 2^63 - 1. The default value is 0.")
+  @header
+  @clientName("blobSequenceNumber")
+  `x-ms-blob-sequence-number`?: int64;
+}
+
+@doc("The blob content length parameter.")
+model BlobContentLengthRequiredParameter {
+  @doc("This header specifies the maximum size for the page blob, up to 1 TB. The page blob size must be aligned to a 512-byte boundary.")
+  @header
+  @clientName("blobContentLength")
+  `x-ms-blob-content-length`: int64;
+}
+
+@doc("The encryption scope parameter.")
+model EncryptionScopeParameter {
+  @doc("Optional.  Version 2019-07-07 and later.  Specifies the encryption scope to use to encrypt the data provided in the request. If not specified, the request will be encrypted with the root account key.")
+  @clientName("encryptionScope")
+  @header `x-ms-encryption-scope`?: string;
+}
+
+@doc("The blob content disposition parameter.")
+model BlobContentDispositionParameter {
+  @doc("Optional. Sets the blob's content disposition. If specified, this property is stored with the blob and returned with a read request.")
+  @header
+  @clientName("blobContentDisposition")
+  `x-ms-blob-content-disposition`?: string;
+}
+
+@doc("The blob cache control parameter.")
+model BlobCacheControlParameter {
+  @doc("Optional. Sets the blob's cache control. If specified, this property is stored with the blob and returned with a read request.")
+  @header
+  @clientName("blobCacheControl")
+  `x-ms-blob-cache-control`?: string;
+}
+
+@doc("The blob content MD5 parameter.")
+model BlobContentMD5Parameter {
+  @doc("Optional. An MD5 hash of the blob content. Note that this hash is not validated, as the hashes for the individual blocks were validated when each was uploaded.")
+  @clientName("blobContentMD5")
+  @header
+  `x-ms-blob-content-md5`?: string;
+}
+
+@doc("The blob content type parameter.")
+model BlobContentLanguageParameter {
+  @doc("Optional. Set the blob's content language. If specified, this property is stored with the blob and returned with a read request.")
+  @header
+  @clientName("blobContentLanguage")
+  `x-ms-blob-content-language`?: string;
+}
+
+@doc("The blob content type parameter.")
+model BlobContentEncodingParameter {
+  @doc("Optional. Sets the blob's content encoding. If specified, this property is stored with the blob and returned with a read request.")
+  @clientName("blobContentEncoding")
+  @header
+  `x-ms-blob-content-encoding`?: string;
+}
+
+@doc("The blob content type parameter.")
+model BlobContentTypeParamter {
+  @doc("Optional. Sets the blob's content type. If specified, this property is stored with the blob and returned with a read request.")
+  @header
+  @clientName("blobContentType")
+  `x-ms-blob-content-type`?: string;
+}
+
+@doc("The optional premium page blob access tier parameter.")
+model PremiumPageBlobAccessTierOptional {
+  @doc("Optional. Indicates the tier to be set on the page blob.")
+  @clientName("tier")
+  @header
+  `x-ms-access-tier`?: PremiumPageBlobAccessTier;
+}
+
+@doc("The premium page blob access tier types.")
+enum PremiumPageBlobAccessTier {
+  @doc("The premium page blob access tier is P4.")
+  P4,
+  @doc("The premium page blob access tier is P6.")
+  P6,
+  @doc("The premium page blob access tier is P10.")
+  P10,
+  @doc("The premium page blob access tier is P15.")
+  P15,
+  @doc("The premium page blob access tier is P20.")
+  P20,
+  @doc("The premium page blob access tier is P30.")
+  P30,
+  @doc("The premium page blob access tier is P40.")
+  P40,
+  @doc("The premium page blob access tier is P50.")
+  P50,
+  @doc("The premium page blob access tier is P60.")
+  P60,
+  @doc("The premium page blob access tier is P70.")
+  P70,
+  @doc("The premium page blob access tier is P80.")
+  P80
+}
+
+@doc("The blob name parameter.")
+model BlobNameParameter {
+  @doc("The name of the blob.")
+  @minLength(1)
+  @maxLength(1024)
+  @pattern("^[a-zA-Z0-9]+(?:/[a-zA-Z0-9]+)*(?:\\.[a-zA-Z0-9]+){0,1}$")
+  @path
+  blobName: string;
+}
+
+@doc("The blob delete type parameter.")
+model BlobDeleteTypeParameter {
+  @doc("Optional.  Only possible value is 'permanent', which specifies to permanently delete a blob if blob soft delete is enabled.")
+  @query
+  @clientName("blobDeleteType")
+  deletetype?: DeleteSnapshotsOptionType;
+}
+
+@doc("The type of blob deletions.")
+enum BlobDeleteType {
+  @doc("Permanently delete the blob.")
+  Permanent,
+}
+
+@doc("The delete snapshot parameter.")
+model DeleteSnapshotsParameter {
+  @doc("Required if the blob has associated snapshots. Specify one of the following two options: include: Delete the base blob and all of its snapshots. only: Delete only the blob's snapshots and not the blob itself")
+  @clientName("deleteSnapshots")
+  @header
+  `x-ms-delete-snapshots`?: DeleteSnapshotsOptionType;
+}
+
+@doc("The delete snapshots option type.")
+enum DeleteSnapshotsOptionType {
+  @doc("The delete snapshots include option is not specified.")
+  none,
+  @doc("The delete snapshots include option is include.")
+  include,
+}
+
 @doc("The encryption algorithm parameter.")
 model EncryptionAlgorithmParameter {
   @doc("Optional.  Version 2019-07-07 and later.  Specifies the algorithm to use for encryption. If not specified, the default is AES256.")
