@@ -9,13 +9,26 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
 
+
+@doc("The ApiVersion query parameter for Atlas API.")
+model AtlasApiVersionParameter {
+  @doc("The API version to use for this operation.")
+  @query("api-version")
+  @minLength(1)
+  apiVersion?: string;
+}
+
+alias AtlasApiVersionParameterTraits = Azure.Core.Traits.VersionParameterTrait<AtlasApiVersionParameter>;
+
+@armResourceOperations 
 interface ListSitesOperations {
   /**
    * List Site resources by ResourceGroup
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/sites")
   @get
-  byRg is Azure.Core.Foundations.Operation<
+  @armResourceList(Site)
+  byResourceGroup is Azure.Core.Foundations.Operation<
     {
       /**
        * The ID of the target subscription. The value must be an UUID.
@@ -35,13 +48,15 @@ interface ListSitesOperations {
   >;
 }
 
+@armResourceOperations 
 interface SitesGetOperations {
   /**
    * Get a Site at Resource Group scope
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/sites/{siteName}")
   @get
-  byRG is Azure.Core.Foundations.Operation<
+  @armResourceRead(Site)
+  byResourceGroup is Azure.Core.Foundations.Operation<
     {
       /**
        * The ID of the target subscription. The value must be an UUID.
@@ -68,13 +83,16 @@ interface SitesGetOperations {
   >;
 }
 
+@armResourceOperations 
 interface SitesCreateOperations {
   /**
    * Create a Site at Resource Group scope
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/sites/{siteName}")
   @put
-  byRG is Azure.Core.Foundations.Operation<
+  @armResourceCreateOrUpdate(Site)
+  byResourceGroup is Azure.Core.Foundations.Operation<
+			Azure.Core.StandardListQueryParameters & 
     {
       /**
        * The ID of the target subscription. The value must be an UUID.
@@ -107,13 +125,15 @@ interface SitesCreateOperations {
   >;
 }
 
+@armResourceOperations 
 interface SitesUpdateOperations {
   /**
    * Update a Site at Resource Group scope
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/sites/{siteName}")
   @patch
-  byRG is Azure.Core.Foundations.Operation<
+  @armResourceUpdate(Site)
+  byResourceGroup is Azure.Core.Foundations.Operation<
     {
       /**
        * The ID of the target subscription. The value must be an UUID.
@@ -146,13 +166,15 @@ interface SitesUpdateOperations {
   >;
 }
 
+@armResourceOperations 
 interface SitesDeleteOperations {
   /**
    * Delete a Site at ResourceGroup scope
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/sites/{siteName}")
   @delete
-  byRG is Azure.Core.Foundations.Operation<
+  @armResourceDelete(Site)
+  byResourceGroup is Azure.Core.Foundations.Operation<
     {
       /**
        * The ID of the target subscription. The value must be an UUID.

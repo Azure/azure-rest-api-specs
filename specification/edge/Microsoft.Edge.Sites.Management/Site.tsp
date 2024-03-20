@@ -35,15 +35,15 @@ interface Sites {
    * Get a Site at Subscription scope
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("SitesGet_AtSub")
+  @operationId("sitesGetAtSubscription")
   sitesGetAtSubscription is ArmResourceRead<Site>;
 
   /**
    * Create a Site at Subscription scope
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("SitesCreate_AtSub")
-  sitesCreate_AtSub is ArmResourceCreateOrReplaceAsync<
+  @operationId("sitesCreateAtSubscription")
+  sitesCreateAtSubscription is ArmResourceCreateOrReplaceAsync<
     Site,
     BaseParameters<Site>,
     ArmAsyncOperationHeader
@@ -54,20 +54,20 @@ interface Sites {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @parameterVisibility("read")
-  @operationId("SitesUpdate_AtSub")
-  sitesUpdate_AtSub is ArmCustomPatchSync<Site, SiteUpdate>;
+  @operationId("sitesUpdateAtSubscription")
+  sitesUpdateAtSubscription is ArmCustomPatchSync<Site, SiteUpdate>;
 
   /**
    * Delete a Site at Subscription scope
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("SitesDelete_AtSub")
-  sitesDelete_AtSub is ArmResourceDeleteSync<Site>;
+  @operationId("sitesDeleteAtSubscription")
+  sitesDeleteAtSubscription is ArmResourceDeleteSync<Site>;
 
   /**
    * List Site resources by Subscription
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("ListSites_BySubscription")
-  bySubscription is ArmResourceListByParent<Site>;
+  @operationId("listSitesAtSubscription")
+  listSitesAtSubscription is ArmResourceListByParent<Site>;
 }

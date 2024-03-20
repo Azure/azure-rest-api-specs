@@ -15,9 +15,24 @@ namespace Microsoft.Edge;
  * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
  */
 enum ManagedServiceIdentityType {
+  /**
+ * None.
+ */
   None,
+
+  /**
+ * SystemAssigned.
+ */
   SystemAssigned,
+
+ /**
+ * UserAssigned.
+ */
   UserAssigned,
+
+   /**
+ * SystemAssigned,UserAssigned.
+ */
   `SystemAssigned,UserAssigned`,
 }
 
