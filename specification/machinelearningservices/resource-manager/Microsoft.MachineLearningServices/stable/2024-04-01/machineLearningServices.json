@@ -3164,21 +3164,9 @@
         "hubResourceId": {
           "type": "string"
         },
-        "ipAllowlist": {
-          "description": "The list of IPv4  addresses that are allowed to access the workspace.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
         "workspaceHubConfig": {
           "description": "WorkspaceHub's configuration object.",
           "$ref": "#/definitions/WorkspaceHubConfig"
-        },
-        "softDeleteRetentionInDays": {
-          "format": "int32",
-          "description": "Retention time in days after workspace get soft deleted.",
-          "type": "integer"
         }
       }
     },
@@ -3276,18 +3264,6 @@
         },
         "encryption": {
           "$ref": "#/definitions/EncryptionUpdateProperties"
-        },
-        "ipAllowlist": {
-          "description": "The list of IPv4 addresses that are allowed to access the workspace.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "softDeleteRetentionInDays": {
-          "format": "int32",
-          "description": "Retention time in days after workspace get soft deleted.",
-          "type": "integer"
         }
       }
     },
@@ -6822,13 +6798,6 @@
         "status": {
           "description": "Status of the Provisioning for the managed network of a machine learning workspace.",
           "$ref": "#/definitions/ManagedNetworkProvisionStatus"
-        },
-        "changeableIsolationModes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IsolationMode"
-          },
-          "readOnly": true
         }
       }
     },
