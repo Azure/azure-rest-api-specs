@@ -397,7 +397,7 @@ model NetworkInterface {
 }
 
 /** Network Interface Update model */
-model NetworkInterfaceUpdate is UpdateableProperties<NetworkInterface> {}
+model NetworkInterfaceUpdate is UpdateableProperties<NetworkInterface>;
 
 /** Virtual disk model */
 model VirtualDisk {
@@ -454,7 +454,7 @@ model VirtualDisk {
 }
 
 /** Virtual Disk Update model */
-model VirtualDiskUpdate is UpdateableProperties<VirtualDisk> {}
+model VirtualDiskUpdate is UpdateableProperties<VirtualDisk>;
 
 /** The StorageQoSPolicyDetails definition. */
 model StorageQosPolicyDetails {
@@ -548,7 +548,15 @@ model VirtualMachineInstanceProperties {
 }
 
 /** Virtual Machine Instance Properties Update model */
-model VirtualMachineInstanceUpdateProperties is UpdateableProperties<OmitProperties<VirtualMachineInstanceProperties,"hardwareProfile" | "networkProfile" | "storageProfile" | "infrastructureProfile">> {
+model VirtualMachineInstanceUpdateProperties
+  is UpdateableProperties<OmitProperties<
+    VirtualMachineInstanceProperties,
+
+      | "hardwareProfile"
+      | "networkProfile"
+      | "storageProfile"
+      | "infrastructureProfile"
+  >> {
   /** Hardware properties. */
   hardwareProfile?: HardwareProfileUpdate;
 
@@ -627,7 +635,7 @@ model HardwareProfile {
 }
 
 /** Defines the resource update properties. */
-model HardwareProfileUpdate is UpdateableProperties<HardwareProfile> {}
+model HardwareProfileUpdate is UpdateableProperties<HardwareProfile>;
 
 /** Defines the resource properties. */
 model NetworkProfile {
@@ -637,7 +645,8 @@ model NetworkProfile {
 }
 
 /** Defines the resource update properties. */
-model NetworkProfileUpdate is UpdateableProperties<OmitProperties<NetworkProfile, "networkInterfaces">> {
+model NetworkProfileUpdate
+  is UpdateableProperties<OmitProperties<NetworkProfile, "networkInterfaces">> {
   /** Gets or sets the list of network interfaces associated with the virtual machine. */
   @extension("x-ms-identifiers", ["name", "nicId"])
   networkInterfaces?: NetworkInterfaceUpdate[];
@@ -651,7 +660,8 @@ model StorageProfile {
 }
 
 /** Defines the resource update properties. */
-model StorageProfileUpdate is UpdateableProperties<OmitProperties<StorageProfile, "disks">> {
+model StorageProfileUpdate
+  is UpdateableProperties<OmitProperties<StorageProfile, "disks">> {
   /** Gets or sets the list of virtual disks associated with the virtual machine. */
   @extension("x-ms-identifiers", ["diskId", "name"])
   disks?: VirtualDiskUpdate[];
@@ -717,7 +727,8 @@ model InfrastructureProfile {
 }
 
 /** Specifies the vmmServer infrastructure specific update settings for the virtual machine instance. */
-model InfrastructureProfileUpdate is UpdateableProperties<InfrastructureProfile> {}
+model InfrastructureProfileUpdate
+  is UpdateableProperties<InfrastructureProfile>;
 
 /** Defines the resource properties. */
 model Checkpoint {
