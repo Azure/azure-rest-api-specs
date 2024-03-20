@@ -117,7 +117,7 @@ model Resources {
   ids: Array<string>;
 }
 
-@doc("The resources needed for the user request")
+@doc("The retry policy for the user request")
 model RetryPolicy {
   @doc("Retry count for user request")
   retryCount?: int32;
@@ -181,8 +181,8 @@ model ResourceOperationDetails {
   @doc("Time the operation was complete if errors are null")
   completedAt?: offsetDateTime;
 
-  @doc("Number of minutes to retry retriable errors")
-  retryWindowInMinutes?: float32;
+  @doc("Retry policy the user can pass")
+  retryPolicy?: RetryPolicy;
 }
 
 @doc("High level response from an operation on a resource")
@@ -368,30 +368,4 @@ model CancelOperationsResponse {
   @extension("x-ms-identifiers", ["resourceId"])
   @doc("An array of resource operations that were successfully cancelled")
   results: Array<ResourceOperation>;
-}
-
-@doc("These describe errors that occur at the request level")
-model RequestError {
-  @doc("Code for the error eg 404, 500")
-  code: string;
-
-  @doc("Detailed message about the error")
-  message: string;
-}
-
-@doc("This is the default error for requests made with ScheduledActions")
-@error
-model RequestLevelError {
-  @doc("Description of the request that failed, ie SubmitDeallocateRequest/SubmitStartRequest/SubmitHibernateRequest")
-  description: string;
-
-  @doc("The type of resources used in the request")
-  type: string;
-
-  @doc("The location of the resource used in the request")
-  @extension("x-ms-mutability", ["read", "create"])
-  location: string;
-
-  @doc("The error details")
-  error: RequestError;
 }
