@@ -19,12 +19,6 @@
         "domain": "domain1",
         "cpuCoreCount": 2,
         "ocpuCount": 3,
-        "nsgCidrs": [
-          {
-            "cidr": "10.0.0.1/16",
-            "port": "1521-1522,22"
-          }
-        ],
         "clusterName": "cluster1",
         "dataStoragePercentage": 100,
         "isLocalBackupEnabled": false,
@@ -32,6 +26,18 @@
         "isSparseDiskgroupEnabled": false,
         "sshPublicKeys": [
           "ssh-key 1"
+        ],
+        "nsgCidrs": [
+          {
+            "source": "10.0.0.0/16",
+            "destinationPortRange": {
+              "min": 1520,
+              "max": 1522
+            }
+          },
+          {
+            "source": "10.10.0.0/24"
+          }
         ],
         "licenseModel": "LicenseIncluded",
         "scanListenerPortTcp": 1050,
@@ -78,13 +84,6 @@
           "domain": "domain1",
           "cpuCoreCount": 10,
           "ocpuCount": 100,
-          "nsgUrl": "https://fake",
-          "nsgCidrs": [
-            {
-              "cidr": "10.0.0.1/16",
-              "port": "1521-1522,22"
-            }
-          ],
           "clusterName": "cluster1",
           "dataStoragePercentage": 80,
           "isLocalBackupEnabled": false,
