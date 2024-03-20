@@ -101,7 +101,7 @@ op updateRun(
 op submitToolOutputsToRun(
   @path threadId: string,
   @path runId: string,
-  @projectedName("json", "tool_outputs") toolOutputs: ToolOutput[],
+  @encodedName("application/json", "tool_outputs") toolOutputs: ToolOutput[],
 ): ThreadRun;
 
 /**

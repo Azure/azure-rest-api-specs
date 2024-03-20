@@ -1,0 +1,275 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-01-01",
+    "title": "AzureStackHCI",
+    "description": "Azure Stack HCI management service"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/publishers/{publisherName}/offers/{offerName}/skus": {
+      "get": {
+        "operationId": "Skus_ListByOffer",
+        "description": "List Skus available for a offer within the HCI Cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OfferNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ODataExpandParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SkuList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List SKU resources by offer for the HCI Cluster": {
+            "$ref": "./examples/ListSkusByOffer.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/publishers/{publisherName}/offers/{offerName}/skus/{skuName}": {
+      "get": {
+        "operationId": "Skus_Get",
+        "description": "Get SKU resource details within a offer of HCI Cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "#/parameters/OfferNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SkuNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ODataExpandParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Sku"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Sku": {
+            "$ref": "./examples/GetSku.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SkuList": {
+      "description": "List of SKU proxy resources for the HCI cluster.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of SKU proxy resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Sku"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to the next set of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Sku": {
+      "description": "Sku details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "SKU properties.",
+          "$ref": "#/definitions/SkuProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SkuProperties": {
+      "description": "SKU properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning State",
+          "type": "string",
+          "readOnly": true
+        },
+        "publisherId": {
+          "type": "string",
+          "description": "Identifier of the Publisher for the offer"
+        },
+        "offerId": {
+          "type": "string",
+          "description": "Identifier of the Offer for the sku"
+        },
+        "content": {
+          "type": "string",
+          "description": "JSON serialized catalog content of the sku offer"
+        },
+        "contentVersion": {
+          "type": "string",
+          "description": "The API version of the catalog service used to serve the catalog content"
+        },
+        "skuMappings": {
+          "type": "array",
+          "description": "Array of SKU mappings",
+          "items": {
+            "$ref": "#/definitions/SkuMappings"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SkuMappings": {
+      "description": "SKU Mapping details.",
+      "type": "object",
+      "properties": {
+        "catalogPlanId": {
+          "type": "string",
+          "description": "Identifier of the CatalogPlan for the sku"
+        },
+        "marketplaceSkuId": {
+          "type": "string",
+          "description": "Identifier for the sku"
+        },
+        "marketplaceSkuVersions": {
+          "type": "array",
+          "description": "Array of SKU versions available",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ClusterNameParameter": {
+      "name": "clusterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the cluster.",
+      "x-ms-parameter-location": "method"
+    },
+    "PublisherNameParameter": {
+      "name": "publisherName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the publisher available within HCI cluster.",
+      "x-ms-parameter-location": "method"
+    },
+    "OfferNameParameter": {
+      "name": "offerName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the offer available within HCI cluster.",
+      "x-ms-parameter-location": "method"
+    },
+    "SkuNameParameter": {
+      "name": "skuName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the SKU available within HCI cluster.",
+      "x-ms-parameter-location": "method"
+    },
+    "ODataExpandParameter": {
+      "name": "$expand",
+      "in": "query",
+      "description": "Specify $expand=content,contentVersion to populate additional fields related to the marketplace offer.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
