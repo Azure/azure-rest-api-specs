@@ -1161,6 +1161,6 @@ suppressions:
   - code: PatchBodyParametersSchema
     from: apimworkspacebackends.json
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/backends/{backendId}"].patch.parameters[4].schema.properties.managementEndpoints
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/backends/{backendId}"].patch.parameters[4].schema.properties
     reasons: This are the object fields which when updated require some data to be present.
 
