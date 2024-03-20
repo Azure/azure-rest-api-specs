@@ -303,7 +303,7 @@
         },
         "statistics": {
           "$ref": "#/definitions/RequestStatistics",
-          "description": "statistics"
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
         },
         "modelVersion": {
           "type": "string",
@@ -512,7 +512,8 @@
           "$ref": "#/definitions/Tasks"
         },
         "statistics": {
-          "$ref": "#/definitions/RequestStatistics"
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
         }
       },
       "required": [
@@ -1173,6 +1174,42 @@
         "error"
       ]
     },
+    "DocumentSentimentValue": {
+      "type": "string",
+      "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).",
+      "enum": [
+        "positive",
+        "neutral",
+        "negative",
+        "mixed"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentSentimentValue",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "positive",
+            "value": "positive",
+            "description": "Positive statement"
+          },
+          {
+            "name": "neutral",
+            "value": "neutral",
+            "description": "Neutral statement"
+          },
+          {
+            "name": "negative",
+            "value": "negative",
+            "description": "Negative statement"
+          },
+          {
+            "name": "mixed",
+            "value": "mixed",
+            "description": "Mixed statement"
+          }
+        ]
+      }
+    },
     "DocumentStatistics": {
       "type": "object",
       "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
@@ -1275,7 +1312,7 @@
         },
         "statistics": {
           "$ref": "#/definitions/RequestStatistics",
-          "description": "statistics"
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
         },
         "modelVersion": {
           "type": "string",
@@ -1442,7 +1479,7 @@
         },
         "statistics": {
           "$ref": "#/definitions/RequestStatistics",
-          "description": "statistics"
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
         },
         "modelVersion": {
           "type": "string",
@@ -1728,7 +1765,7 @@
         },
         "statistics": {
           "$ref": "#/definitions/RequestStatistics",
-          "description": "statistics"
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
         },
         "modelVersion": {
           "type": "string",
@@ -2134,7 +2171,7 @@
         },
         "statistics": {
           "$ref": "#/definitions/RequestStatistics",
-          "description": "statistics"
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
         },
         "modelVersion": {
           "type": "string",
@@ -2255,8 +2292,7 @@
       "required": [
         "code",
         "message"
-      ],
-      "additionalProperties": {}
+      ]
     },
     "KeyPhraseExtractionLROResult": {
       "type": "object",
@@ -2303,7 +2339,7 @@
         },
         "statistics": {
           "$ref": "#/definitions/RequestStatistics",
-          "description": "statistics"
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
         },
         "modelVersion": {
           "type": "string",
@@ -2443,7 +2479,7 @@
         },
         "statistics": {
           "$ref": "#/definitions/RequestStatistics",
-          "description": "statistics"
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
         },
         "modelVersion": {
           "type": "string",
@@ -2657,7 +2693,7 @@
         "text"
       ]
     },
-    "PiiCategories": {
+    "PiiCategory": {
       "type": "string",
       "description": "(Optional) describes the PII categories to return",
       "enum": [
@@ -2836,7 +2872,7 @@
         "Default"
       ],
       "x-ms-enum": {
-        "name": "PiiCategories",
+        "name": "PiiCategory",
         "modelAsString": true
       }
     },
@@ -2923,7 +2959,7 @@
         },
         "statistics": {
           "$ref": "#/definitions/RequestStatistics",
-          "description": "statistics"
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
         },
         "modelVersion": {
           "type": "string",
@@ -2984,7 +3020,7 @@
         "piiCategories": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PiiCategories"
+            "$ref": "#/definitions/PiiCategory"
           }
         },
         "stringIndexType": {
@@ -3067,7 +3103,8 @@
         "validDocumentsCount",
         "erroneousDocumentsCount",
         "transactionsCount"
-      ]
+      ],
+      "additionalProperties": {}
     },
     "SentenceAssessment": {
       "type": "object",
@@ -3210,42 +3247,6 @@
         "modelAsString": false
       }
     },
-    "Sentiment": {
-      "type": "string",
-      "description": "Predicted sentiment",
-      "enum": [
-        "positive",
-        "neutral",
-        "negative",
-        "mixed"
-      ],
-      "x-ms-enum": {
-        "name": "Sentiment",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "positive",
-            "value": "positive",
-            "description": "Positive statement"
-          },
-          {
-            "name": "neutral",
-            "value": "neutral",
-            "description": "Neutral statement"
-          },
-          {
-            "name": "negative",
-            "value": "negative",
-            "description": "Negative statement"
-          },
-          {
-            "name": "mixed",
-            "value": "mixed",
-            "description": "Mixed statement"
-          }
-        ]
-      }
-    },
     "SentimentAnalysisLROTask": {
       "type": "object",
       "description": "An object representing the task definition for a Sentiment Analysis task.",
@@ -3358,7 +3359,7 @@
           "description": "if showStats=true was specified in the request this field will contain information about the document payload."
         },
         "sentiment": {
-          "$ref": "#/definitions/Sentiment",
+          "$ref": "#/definitions/DocumentSentimentValue",
           "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed)."
         },
         "confidenceScores": {
@@ -3422,7 +3423,7 @@
         },
         "statistics": {
           "$ref": "#/definitions/RequestStatistics",
-          "description": "statistics"
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
         },
         "modelVersion": {
           "type": "string",

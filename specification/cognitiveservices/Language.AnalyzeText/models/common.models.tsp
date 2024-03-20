@@ -193,7 +193,8 @@ model AnalyzeTextPreBuiltResult {
   @doc("Errors by document id.")
   errors: Array<AnalyzeTextDocumentError>;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
+  @doc("if showStats=true was specified in the request this field will contain information about the request payload.")
   statistics?: RequestStatistics;
 
   @doc("This field indicates which model is used for scoring.")
@@ -222,7 +223,8 @@ model AnalyzeTextJobErrors {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model AnalyzeTextJobStatistics {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
+  @doc("if showStats=true was specified in the request this field will contain information about the request payload.")
   statistics?: RequestStatistics;
 }
 
@@ -352,9 +354,8 @@ model ErrorResponse {
   error: Error;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.")
-model InnerErrorModel is Record<unknown> {
+model InnerErrorModel {
   @doc("One of a server-defined set of error codes.")
   code: InnerErrorCode;
 
@@ -539,8 +540,9 @@ model InputWarning {
   targetRef?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("if showStats=true was specified in the request this field will contain information about the request payload.")
-model RequestStatistics {
+model RequestStatistics is Record<unknown> {
   @doc("Number of documents submitted in the request.")
   documentsCount: int32;
 
@@ -559,7 +561,8 @@ model PreBuiltResult {
   @doc("Errors by document id.")
   errors: Array<DocumentError>;
 
-  @doc("statistics")
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
+  @doc("if showStats=true was specified in the request this field will contain information about the request payload.")
   statistics?: RequestStatistics;
 
   @doc("This field indicates which model is used for scoring.")
@@ -838,9 +841,9 @@ enum ErrorCode {
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-extensible-enum"
-@doc("Predicted sentiment")
+@doc("Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).")
 @fixed
-enum Sentiment {
+enum DocumentSentimentValue {
   @doc("Positive statement")
   positive,
 
@@ -918,6 +921,7 @@ model CustomResult {
   @doc("Errors by document id.")
   errors: Array<DocumentError>;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("if showStats=true was specified in the request this field will contain information about the request payload.")
   statistics?: RequestStatistics;
 

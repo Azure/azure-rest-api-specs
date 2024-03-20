@@ -80,7 +80,7 @@ model SentimentDocumentResultWithDetectedLanguage is SentimentDocumentResult {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model SentimentDocumentResult is DocumentResult {
   @doc("Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).")
-  sentiment: Sentiment;
+  sentiment: DocumentSentimentValue;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   confidenceScores: SentimentConfidenceScores;
@@ -224,7 +224,7 @@ model CustomSentenceSentiment {
 @added(Versions.v2023_04_15_preview)
 model CustomSentimentDocumentResult is DocumentResult {
   @doc("Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).")
-  sentiment: Sentiment;
+  sentiment: DocumentSentimentValue;
 
   @doc("The sentiment confidence score between 0 and 1 for the sentence for all classes.")
   confidenceScores: SentimentConfidenceScores;

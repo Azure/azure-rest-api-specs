@@ -38,9 +38,8 @@ model Error {
   innererror?: InnerErrorModel;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.")
-model InnerErrorModel is Record<unknown> {
+model InnerErrorModel {
   @doc("One of a server-defined set of error codes.")
   code: InnerErrorCode;
 
@@ -53,7 +52,6 @@ model InnerErrorModel is Record<unknown> {
   @doc("Error target.")
   target?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("An object containing more specific information than the current object about the error.")
   innererror?: InnerErrorModel;
 }

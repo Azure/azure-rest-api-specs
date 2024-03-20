@@ -303,7 +303,7 @@
         },
         "statistics": {
           "$ref": "#/definitions/RequestStatistics",
-          "description": "statistics"
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
         },
         "modelVersion": {
           "type": "string",
@@ -582,7 +582,8 @@
           "$ref": "#/definitions/Tasks"
         },
         "statistics": {
-          "$ref": "#/definitions/RequestStatistics"
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
         }
       },
       "required": [
@@ -1772,7 +1773,7 @@
           "description": "if showStats=true was specified in the request this field will contain information about the document payload."
         },
         "sentiment": {
-          "$ref": "#/definitions/Sentiment",
+          "$ref": "#/definitions/DocumentSentimentValue",
           "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed)."
         },
         "confidenceScores": {
@@ -2012,6 +2013,42 @@
         "error"
       ]
     },
+    "DocumentSentimentValue": {
+      "type": "string",
+      "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).",
+      "enum": [
+        "positive",
+        "neutral",
+        "negative",
+        "mixed"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentSentimentValue",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "positive",
+            "value": "positive",
+            "description": "Positive statement"
+          },
+          {
+            "name": "neutral",
+            "value": "neutral",
+            "description": "Neutral statement"
+          },
+          {
+            "name": "negative",
+            "value": "negative",
+            "description": "Negative statement"
+          },
+          {
+            "name": "mixed",
+            "value": "mixed",
+            "description": "Mixed statement"
+          }
+        ]
+      }
+    },
     "DocumentStatistics": {
       "type": "object",
       "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
@@ -2098,7 +2135,7 @@
         },
         "statistics": {
           "$ref": "#/definitions/RequestStatistics",
-          "description": "statistics"
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
         },
         "modelVersion": {
           "type": "string",
@@ -2280,7 +2317,7 @@
         },
         "statistics": {
           "$ref": "#/definitions/RequestStatistics",
-          "description": "statistics"
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
         },
         "modelVersion": {
           "type": "string",
@@ -2813,7 +2850,7 @@
         },
         "statistics": {
           "$ref": "#/definitions/RequestStatistics",
-          "description": "statistics"
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
         },
         "modelVersion": {
           "type": "string",
@@ -3214,7 +3251,7 @@
         },
         "statistics": {
           "$ref": "#/definitions/RequestStatistics",
-          "description": "statistics"
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
         },
         "modelVersion": {
           "type": "string",
@@ -3311,6 +3348,16 @@
         }
       }
     },
+    "FhirVersion": {
+      "type": "string",
+      "enum": [
+        "4.0.1"
+      ],
+      "x-ms-enum": {
+        "name": "FhirVersion",
+        "modelAsString": true
+      }
+    },
     "HealthRelationType": {
       "type": "string",
       "description": "Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc.",
@@ -3375,6 +3422,24 @@
           "$ref": "#/definitions/Temporality",
           "description": "Describes temporal information regarding the entity."
         }
+      }
+    },
+    "HealthcareDocumentType": {
+      "type": "string",
+      "enum": [
+        "None",
+        "ClinicalTrial",
+        "DischargeSummary",
+        "ProgressNote",
+        "HistoryAndPhysical",
+        "Consult",
+        "Imaging",
+        "Pathology",
+        "ProcedureNote"
+      ],
+      "x-ms-enum": {
+        "name": "HealthcareDocumentType",
+        "modelAsString": true
       }
     },
     "HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage": {
@@ -3633,7 +3698,7 @@
         },
         "statistics": {
           "$ref": "#/definitions/RequestStatistics",
-          "description": "statistics"
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
         },
         "modelVersion": {
           "type": "string",
@@ -3698,11 +3763,11 @@
           }
         },
         "fhirVersion": {
-          "$ref": "#/definitions/fhirVersion",
+          "$ref": "#/definitions/FhirVersion",
           "description": "The FHIR Spec version that the result will use to format the fhirBundle. For additional information see https://www.hl7.org/fhir/overview.html."
         },
         "documentType": {
-          "$ref": "#/definitions/healthcareDocumentType",
+          "$ref": "#/definitions/HealthcareDocumentType",
           "description": "Document type that can be provided as input for Fhir Documents. Expect to have fhirVersion provided when used. Behavior of using None enum is the same as not using the documentType parameter."
         }
       }
@@ -3809,8 +3874,7 @@
       "required": [
         "code",
         "message"
-      ],
-      "additionalProperties": {}
+      ]
     },
     "KeyPhraseExtractionLROResult": {
       "type": "object",
@@ -3857,7 +3921,7 @@
         },
         "statistics": {
           "$ref": "#/definitions/RequestStatistics",
-          "description": "statistics"
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
         },
         "modelVersion": {
           "type": "string",
@@ -4002,7 +4066,7 @@
         },
         "statistics": {
           "$ref": "#/definitions/RequestStatistics",
-          "description": "statistics"
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
         },
         "modelVersion": {
           "type": "string",
@@ -4436,189 +4500,6 @@
         "modelAsString": true
       }
     },
-    "PiiCategories": {
-      "type": "string",
-      "description": "(Optional) describes the PII categories to return",
-      "enum": [
-        "ABARoutingNumber",
-        "ARNationalIdentityNumber",
-        "AUBankAccountNumber",
-        "AUDriversLicenseNumber",
-        "AUMedicalAccountNumber",
-        "AUPassportNumber",
-        "AUTaxFileNumber",
-        "AUBusinessNumber",
-        "AUCompanyNumber",
-        "ATIdentityCard",
-        "ATTaxIdentificationNumber",
-        "ATValueAddedTaxNumber",
-        "AzureDocumentDBAuthKey",
-        "AzureIAASDatabaseConnectionAndSQLString",
-        "AzureIoTConnectionString",
-        "AzurePublishSettingPassword",
-        "AzureRedisCacheString",
-        "AzureSAS",
-        "AzureServiceBusString",
-        "AzureStorageAccountKey",
-        "AzureStorageAccountGeneric",
-        "BENationalNumber",
-        "BENationalNumberV2",
-        "BEValueAddedTaxNumber",
-        "BRCPFNumber",
-        "BRLegalEntityNumber",
-        "BRNationalIDRG",
-        "BGUniformCivilNumber",
-        "CABankAccountNumber",
-        "CADriversLicenseNumber",
-        "CAHealthServiceNumber",
-        "CAPassportNumber",
-        "CAPersonalHealthIdentification",
-        "CASocialInsuranceNumber",
-        "CLIdentityCardNumber",
-        "CNResidentIdentityCardNumber",
-        "CreditCardNumber",
-        "HRIdentityCardNumber",
-        "HRNationalIDNumber",
-        "HRPersonalIdentificationNumber",
-        "HRPersonalIdentificationOIBNumberV2",
-        "CYIdentityCard",
-        "CYTaxIdentificationNumber",
-        "CZPersonalIdentityNumber",
-        "CZPersonalIdentityV2",
-        "DKPersonalIdentificationNumber",
-        "DKPersonalIdentificationV2",
-        "DrugEnforcementAgencyNumber",
-        "EEPersonalIdentificationCode",
-        "EUDebitCardNumber",
-        "EUDriversLicenseNumber",
-        "EUGPSCoordinates",
-        "EUNationalIdentificationNumber",
-        "EUPassportNumber",
-        "EUSocialSecurityNumber",
-        "EUTaxIdentificationNumber",
-        "FIEuropeanHealthNumber",
-        "FINationalID",
-        "FINationalIDV2",
-        "FIPassportNumber",
-        "FRDriversLicenseNumber",
-        "FRHealthInsuranceNumber",
-        "FRNationalID",
-        "FRPassportNumber",
-        "FRSocialSecurityNumber",
-        "FRTaxIdentificationNumber",
-        "FRValueAddedTaxNumber",
-        "DEDriversLicenseNumber",
-        "DEPassportNumber",
-        "DEIdentityCardNumber",
-        "DETaxIdentificationNumber",
-        "DEValueAddedNumber",
-        "GRNationalIDCard",
-        "GRNationalIDV2",
-        "GRTaxIdentificationNumber",
-        "HKIdentityCardNumber",
-        "HUValueAddedNumber",
-        "HUPersonalIdentificationNumber",
-        "HUTaxIdentificationNumber",
-        "INPermanentAccount",
-        "INUniqueIdentificationNumber",
-        "IDIdentityCardNumber",
-        "InternationalBankingAccountNumber",
-        "IEPersonalPublicServiceNumber",
-        "IEPersonalPublicServiceNumberV2",
-        "ILBankAccountNumber",
-        "ILNationalID",
-        "ITDriversLicenseNumber",
-        "ITFiscalCode",
-        "ITValueAddedTaxNumber",
-        "JPBankAccountNumber",
-        "JPDriversLicenseNumber",
-        "JPPassportNumber",
-        "JPResidentRegistrationNumber",
-        "JPSocialInsuranceNumber",
-        "JPMyNumberCorporate",
-        "JPMyNumberPersonal",
-        "JPResidenceCardNumber",
-        "LVPersonalCode",
-        "LTPersonalCode",
-        "LUNationalIdentificationNumberNatural",
-        "LUNationalIdentificationNumberNonNatural",
-        "MYIdentityCardNumber",
-        "MTIdentityCardNumber",
-        "MTTaxIDNumber",
-        "NLCitizensServiceNumber",
-        "NLCitizensServiceNumberV2",
-        "NLTaxIdentificationNumber",
-        "NLValueAddedTaxNumber",
-        "NZBankAccountNumber",
-        "NZDriversLicenseNumber",
-        "NZInlandRevenueNumber",
-        "NZMinistryOfHealthNumber",
-        "NZSocialWelfareNumber",
-        "NOIdentityNumber",
-        "PHUnifiedMultiPurposeIDNumber",
-        "PLIdentityCard",
-        "PLNationalID",
-        "PLNationalIDV2",
-        "PLPassportNumber",
-        "PLTaxIdentificationNumber",
-        "PLREGONNumber",
-        "PTCitizenCardNumber",
-        "PTCitizenCardNumberV2",
-        "PTTaxIdentificationNumber",
-        "ROPersonalNumericalCode",
-        "RUPassportNumberDomestic",
-        "RUPassportNumberInternational",
-        "SANationalID",
-        "SGNationalRegistrationIdentityCardNumber",
-        "SKPersonalNumber",
-        "SITaxIdentificationNumber",
-        "SIUniqueMasterCitizenNumber",
-        "ZAIdentificationNumber",
-        "KRResidentRegistrationNumber",
-        "ESDNI",
-        "ESSocialSecurityNumber",
-        "ESTaxIdentificationNumber",
-        "SQLServerConnectionString",
-        "SENationalID",
-        "SENationalIDV2",
-        "SEPassportNumber",
-        "SETaxIdentificationNumber",
-        "SWIFTCode",
-        "CHSocialSecurityNumber",
-        "TWNationalID",
-        "TWPassportNumber",
-        "TWResidentCertificate",
-        "THPopulationIdentificationCode",
-        "TRNationalIdentificationNumber",
-        "UKDriversLicenseNumber",
-        "UKElectoralRollNumber",
-        "UKNationalHealthNumber",
-        "UKNationalInsuranceNumber",
-        "UKUniqueTaxpayerNumber",
-        "USUKPassportNumber",
-        "USBankAccountNumber",
-        "USDriversLicenseNumber",
-        "USIndividualTaxpayerIdentification",
-        "USSocialSecurityNumber",
-        "UAPassportNumberDomestic",
-        "UAPassportNumberInternational",
-        "Organization",
-        "Email",
-        "URL",
-        "Age",
-        "PhoneNumber",
-        "IPAddress",
-        "Date",
-        "Person",
-        "Address",
-        "All",
-        "Default"
-      ],
-      "x-ms-enum": {
-        "name": "PiiCategories",
-        "modelAsString": true
-      }
-    },
     "PiiCategoriesExcludeCategories": {
       "type": "string",
       "description": "(Optional) describes the PII categories to return",
@@ -4800,6 +4681,189 @@
         "modelAsString": true
       }
     },
+    "PiiCategory": {
+      "type": "string",
+      "description": "(Optional) describes the PII categories to return",
+      "enum": [
+        "ABARoutingNumber",
+        "ARNationalIdentityNumber",
+        "AUBankAccountNumber",
+        "AUDriversLicenseNumber",
+        "AUMedicalAccountNumber",
+        "AUPassportNumber",
+        "AUTaxFileNumber",
+        "AUBusinessNumber",
+        "AUCompanyNumber",
+        "ATIdentityCard",
+        "ATTaxIdentificationNumber",
+        "ATValueAddedTaxNumber",
+        "AzureDocumentDBAuthKey",
+        "AzureIAASDatabaseConnectionAndSQLString",
+        "AzureIoTConnectionString",
+        "AzurePublishSettingPassword",
+        "AzureRedisCacheString",
+        "AzureSAS",
+        "AzureServiceBusString",
+        "AzureStorageAccountKey",
+        "AzureStorageAccountGeneric",
+        "BENationalNumber",
+        "BENationalNumberV2",
+        "BEValueAddedTaxNumber",
+        "BRCPFNumber",
+        "BRLegalEntityNumber",
+        "BRNationalIDRG",
+        "BGUniformCivilNumber",
+        "CABankAccountNumber",
+        "CADriversLicenseNumber",
+        "CAHealthServiceNumber",
+        "CAPassportNumber",
+        "CAPersonalHealthIdentification",
+        "CASocialInsuranceNumber",
+        "CLIdentityCardNumber",
+        "CNResidentIdentityCardNumber",
+        "CreditCardNumber",
+        "HRIdentityCardNumber",
+        "HRNationalIDNumber",
+        "HRPersonalIdentificationNumber",
+        "HRPersonalIdentificationOIBNumberV2",
+        "CYIdentityCard",
+        "CYTaxIdentificationNumber",
+        "CZPersonalIdentityNumber",
+        "CZPersonalIdentityV2",
+        "DKPersonalIdentificationNumber",
+        "DKPersonalIdentificationV2",
+        "DrugEnforcementAgencyNumber",
+        "EEPersonalIdentificationCode",
+        "EUDebitCardNumber",
+        "EUDriversLicenseNumber",
+        "EUGPSCoordinates",
+        "EUNationalIdentificationNumber",
+        "EUPassportNumber",
+        "EUSocialSecurityNumber",
+        "EUTaxIdentificationNumber",
+        "FIEuropeanHealthNumber",
+        "FINationalID",
+        "FINationalIDV2",
+        "FIPassportNumber",
+        "FRDriversLicenseNumber",
+        "FRHealthInsuranceNumber",
+        "FRNationalID",
+        "FRPassportNumber",
+        "FRSocialSecurityNumber",
+        "FRTaxIdentificationNumber",
+        "FRValueAddedTaxNumber",
+        "DEDriversLicenseNumber",
+        "DEPassportNumber",
+        "DEIdentityCardNumber",
+        "DETaxIdentificationNumber",
+        "DEValueAddedNumber",
+        "GRNationalIDCard",
+        "GRNationalIDV2",
+        "GRTaxIdentificationNumber",
+        "HKIdentityCardNumber",
+        "HUValueAddedNumber",
+        "HUPersonalIdentificationNumber",
+        "HUTaxIdentificationNumber",
+        "INPermanentAccount",
+        "INUniqueIdentificationNumber",
+        "IDIdentityCardNumber",
+        "InternationalBankingAccountNumber",
+        "IEPersonalPublicServiceNumber",
+        "IEPersonalPublicServiceNumberV2",
+        "ILBankAccountNumber",
+        "ILNationalID",
+        "ITDriversLicenseNumber",
+        "ITFiscalCode",
+        "ITValueAddedTaxNumber",
+        "JPBankAccountNumber",
+        "JPDriversLicenseNumber",
+        "JPPassportNumber",
+        "JPResidentRegistrationNumber",
+        "JPSocialInsuranceNumber",
+        "JPMyNumberCorporate",
+        "JPMyNumberPersonal",
+        "JPResidenceCardNumber",
+        "LVPersonalCode",
+        "LTPersonalCode",
+        "LUNationalIdentificationNumberNatural",
+        "LUNationalIdentificationNumberNonNatural",
+        "MYIdentityCardNumber",
+        "MTIdentityCardNumber",
+        "MTTaxIDNumber",
+        "NLCitizensServiceNumber",
+        "NLCitizensServiceNumberV2",
+        "NLTaxIdentificationNumber",
+        "NLValueAddedTaxNumber",
+        "NZBankAccountNumber",
+        "NZDriversLicenseNumber",
+        "NZInlandRevenueNumber",
+        "NZMinistryOfHealthNumber",
+        "NZSocialWelfareNumber",
+        "NOIdentityNumber",
+        "PHUnifiedMultiPurposeIDNumber",
+        "PLIdentityCard",
+        "PLNationalID",
+        "PLNationalIDV2",
+        "PLPassportNumber",
+        "PLTaxIdentificationNumber",
+        "PLREGONNumber",
+        "PTCitizenCardNumber",
+        "PTCitizenCardNumberV2",
+        "PTTaxIdentificationNumber",
+        "ROPersonalNumericalCode",
+        "RUPassportNumberDomestic",
+        "RUPassportNumberInternational",
+        "SANationalID",
+        "SGNationalRegistrationIdentityCardNumber",
+        "SKPersonalNumber",
+        "SITaxIdentificationNumber",
+        "SIUniqueMasterCitizenNumber",
+        "ZAIdentificationNumber",
+        "KRResidentRegistrationNumber",
+        "ESDNI",
+        "ESSocialSecurityNumber",
+        "ESTaxIdentificationNumber",
+        "SQLServerConnectionString",
+        "SENationalID",
+        "SENationalIDV2",
+        "SEPassportNumber",
+        "SETaxIdentificationNumber",
+        "SWIFTCode",
+        "CHSocialSecurityNumber",
+        "TWNationalID",
+        "TWPassportNumber",
+        "TWResidentCertificate",
+        "THPopulationIdentificationCode",
+        "TRNationalIdentificationNumber",
+        "UKDriversLicenseNumber",
+        "UKElectoralRollNumber",
+        "UKNationalHealthNumber",
+        "UKNationalInsuranceNumber",
+        "UKUniqueTaxpayerNumber",
+        "USUKPassportNumber",
+        "USBankAccountNumber",
+        "USDriversLicenseNumber",
+        "USIndividualTaxpayerIdentification",
+        "USSocialSecurityNumber",
+        "UAPassportNumberDomestic",
+        "UAPassportNumberInternational",
+        "Organization",
+        "Email",
+        "URL",
+        "Age",
+        "PhoneNumber",
+        "IPAddress",
+        "Date",
+        "Person",
+        "Address",
+        "All",
+        "Default"
+      ],
+      "x-ms-enum": {
+        "name": "PiiCategory",
+        "modelAsString": true
+      }
+    },
     "PiiEntityRecognitionLROResult": {
       "type": "object",
       "properties": {
@@ -4844,7 +4908,7 @@
         },
         "statistics": {
           "$ref": "#/definitions/RequestStatistics",
-          "description": "statistics"
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
         },
         "modelVersion": {
           "type": "string",
@@ -4948,7 +5012,7 @@
         "piiCategories": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PiiCategories"
+            "$ref": "#/definitions/PiiCategory"
           }
         },
         "stringIndexType": {
@@ -5150,7 +5214,8 @@
         "validDocumentsCount",
         "erroneousDocumentsCount",
         "transactionsCount"
-      ]
+      ],
+      "additionalProperties": {}
     },
     "ScriptKind": {
       "type": "string",
@@ -5311,42 +5376,6 @@
         "modelAsString": false
       }
     },
-    "Sentiment": {
-      "type": "string",
-      "description": "Predicted sentiment",
-      "enum": [
-        "positive",
-        "neutral",
-        "negative",
-        "mixed"
-      ],
-      "x-ms-enum": {
-        "name": "Sentiment",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "positive",
-            "value": "positive",
-            "description": "Positive statement"
-          },
-          {
-            "name": "neutral",
-            "value": "neutral",
-            "description": "Neutral statement"
-          },
-          {
-            "name": "negative",
-            "value": "negative",
-            "description": "Negative statement"
-          },
-          {
-            "name": "mixed",
-            "value": "mixed",
-            "description": "Mixed statement"
-          }
-        ]
-      }
-    },
     "SentimentAnalysisLROTask": {
       "type": "object",
       "description": "An object representing the task definition for a Sentiment Analysis task.",
@@ -5460,7 +5489,7 @@
           "description": "if showStats=true was specified in the request this field will contain information about the document payload."
         },
         "sentiment": {
-          "$ref": "#/definitions/Sentiment",
+          "$ref": "#/definitions/DocumentSentimentValue",
           "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed)."
         },
         "confidenceScores": {
@@ -5528,7 +5557,7 @@
         },
         "statistics": {
           "$ref": "#/definitions/RequestStatistics",
-          "description": "statistics"
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
         },
         "modelVersion": {
           "type": "string",
@@ -6029,34 +6058,6 @@
       ],
       "x-ms-enum": {
         "name": "WeightUnit",
-        "modelAsString": true
-      }
-    },
-    "fhirVersion": {
-      "type": "string",
-      "enum": [
-        "4.0.1"
-      ],
-      "x-ms-enum": {
-        "name": "fhirVersion",
-        "modelAsString": true
-      }
-    },
-    "healthcareDocumentType": {
-      "type": "string",
-      "enum": [
-        "None",
-        "ClinicalTrial",
-        "DischargeSummary",
-        "ProgressNote",
-        "HistoryAndPhysical",
-        "Consult",
-        "Imaging",
-        "Pathology",
-        "ProcedureNote"
-      ],
-      "x-ms-enum": {
-        "name": "healthcareDocumentType",
         "modelAsString": true
       }
     }

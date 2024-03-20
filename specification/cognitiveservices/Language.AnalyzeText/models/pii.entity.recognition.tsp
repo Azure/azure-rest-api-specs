@@ -21,7 +21,7 @@ model PiiTaskParameters is PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   domain?: PiiDomain = PiiDomain.none;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  piiCategories?: Array<PiiCategories>;
+  piiCategories?: Array<PiiCategory>;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
@@ -89,7 +89,7 @@ model PiiResultWithDetectedLanguage is PiiEntitiesDocumentResult {
 }
 
 @doc("(Optional) describes the PII categories to return")
-enum PiiCategories {
+enum PiiCategory {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   ABARoutingNumber,
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
