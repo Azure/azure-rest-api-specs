@@ -9,7 +9,7 @@ using TypeSpec.Http;
 
 namespace DevCenterService;
 
-interface DevBoxesOperations {
+interface DevBoxes {
   @doc("Lists available pools")
   listPools is StandardResourceOperations.ResourceList<Pool>;
 
@@ -17,10 +17,10 @@ interface DevBoxesOperations {
   getPool is StandardResourceOperations.ResourceRead<Pool>;
 
   @doc("Lists available schedules for a pool.")
-  listSchedules is StandardResourceOperations.ResourceList<Schedule>;
+  listSchedulesByPool is StandardResourceOperations.ResourceList<Schedule>;
 
   @doc("Gets a schedule.")
-  getSchedule is StandardResourceOperations.ResourceRead<Schedule>;
+  getScheduleByPool is StandardResourceOperations.ResourceRead<Schedule>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need of reuse DevBoxListResult"
   // This does fit in the ResourceList<DevBox> but since there are three different operations that returns dev box list result,
@@ -29,7 +29,7 @@ interface DevBoxesOperations {
   @doc("Lists Dev Boxes in the project for a particular user.")
   @route("/projects/{projectName}/users/{userId}/devboxes")
   @get
-  listDevBoxes is Azure.Core.Foundations.Operation<
+  listDevBoxesByUser is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
       @path
@@ -43,7 +43,7 @@ interface DevBoxesOperations {
   >;
 
   @doc("Gets a Dev Box")
-  getDevBox is StandardResourceOperations.ResourceRead<DevBox>;
+  getDevBoxByUser is StandardResourceOperations.ResourceRead<DevBox>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard operations produce wrong swagger"
   // The standard operation names the body as resource, so the generated swagger has parameter
@@ -57,8 +57,8 @@ interface DevBoxesOperations {
   //     "in": "body",
   //  }
   @doc("Creates or replaces a Dev Box.")
-  @finalOperation(DevBoxesOperations.getDevBox)
-  @pollingOperation(SharedOperations.getProjectOperationStatus)
+  @finalOperation(DevBoxes.getDevBoxByUser)
+  @pollingOperation(OperationStatuses.get)
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
   @put
   createDevBox is Azure.Core.Foundations.Operation<
@@ -96,7 +96,7 @@ interface DevBoxesOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
   //Can not use LongRunningResourceDelete because response is 202 or error, but we also accept 204 response"
   @doc("Deletes a Dev Box.")
-  @pollingOperation(SharedOperations.getProjectOperationStatus)
+  @pollingOperation(OperationStatuses.get)
   @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}")
   @delete
   deleteDevBox is Azure.Core.Foundations.Operation<
@@ -130,7 +130,7 @@ interface DevBoxesOperations {
   >;
 
   @doc("Starts a Dev Box")
-  @pollingOperation(SharedOperations.getProjectOperationStatus)
+  @pollingOperation(OperationStatuses.get)
   @action("start")
   startDevBox is StandardResourceOperations.LongRunningResourceAction<
     DevBox,
@@ -145,7 +145,7 @@ interface DevBoxesOperations {
   >;
 
   @doc("Stops a Dev Box")
-  @pollingOperation(SharedOperations.getProjectOperationStatus)
+  @pollingOperation(OperationStatuses.get)
   @action("stop")
   stopDevBox is StandardResourceOperations.LongRunningResourceAction<
     DevBox,
@@ -164,7 +164,7 @@ interface DevBoxesOperations {
   >;
 
   @doc("Restarts a Dev Box")
-  @pollingOperation(SharedOperations.getProjectOperationStatus)
+  @pollingOperation(OperationStatuses.get)
   @action("restart")
   restartDevBox is StandardResourceOperations.LongRunningResourceAction<
     DevBox,
@@ -201,10 +201,10 @@ interface DevBoxesOperations {
   >;
 
   @doc("Lists actions on a Dev Box.")
-  listDevBoxActions is StandardResourceOperations.ResourceList<DevBoxAction>;
+  listActions is StandardResourceOperations.ResourceList<DevBoxAction>;
 
   @doc("Gets an action.")
-  getDevBoxAction is StandardResourceOperations.ResourceRead<DevBoxAction>;
+  getAction is StandardResourceOperations.ResourceRead<DevBoxAction>;
 
   @doc("Skips an occurrence of an action.")
   @action("skip")
@@ -228,7 +228,7 @@ interface DevBoxesOperations {
 
   @doc("Delays all actions.")
   @action("delay")
-  delayAllActions is StandardResourceOperations.ResourceCollectionAction<
+  delayActions is StandardResourceOperations.ResourceCollectionAction<
     DevBoxAction,
     {
       @doc("The time to delay the Dev Box action or actions until.")
@@ -236,26 +236,5 @@ interface DevBoxesOperations {
       delayUntil: utcDateTime;
     },
     DevBoxActionsDelayMultipleResult
-  >;
-}
-
-interface DevBoxesDevCenter {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern since DevBox has a different path"
-  @doc("Lists Dev Boxes that the caller has access to in the DevCenter.")
-  @route("/devboxes")
-  @get
-  listAllDevBoxes is Azure.Core.Foundations.Operation<{}, DevBoxListResult>;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern since DevBox has a different path"
-  @doc("Lists Dev Boxes in the Dev Center for a particular user.")
-  @route("/users/{userId}/devboxes")
-  @get
-  listAllDevBoxesByUser is Azure.Core.Foundations.Operation<
-    {
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @path
-      userId: string;
-    },
-    DevBoxListResult
   >;
 }
