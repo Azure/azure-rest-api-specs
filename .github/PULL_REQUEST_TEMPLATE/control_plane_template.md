@@ -10,7 +10,7 @@
 
 Please understand this diagram before proceeding. It explains how to get your PR approved & merged.
 
-![diagram](https://github.com/Azure/azure-rest-api-specs/assets/4429827/f5cdc159-40bd-42a5-8a1c-1e398a1d80fd)
+![diagram](https://github.com/Azure/azure-rest-api-specs/assets/20296335/9e51cff7-28f7-4ae7-99a3-0f4a116c759f)
 
 <details>
 <summary>Click here to see the details of Step 1, Breaking Changes review</summary>
