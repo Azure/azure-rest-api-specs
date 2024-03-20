@@ -41,15 +41,19 @@ model VirtualMachineInstanceUpdate
 @armResourceOperations
 interface VirtualMachineInstances {
   /** Retrieves information about a virtual machine instance. */
+  @summary("Gets a virtual machine.")
   get is ArmResourceRead<VirtualMachineInstance>;
   /** The operation to create or update a virtual machine instance. Please note some properties can be set only during virtual machine instance creation. */
+  @summary("Implements virtual machine PUT method.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualMachineInstance>;
   /** The operation to update a virtual machine instance. */
+  @summary("Updates a virtual machine.")
   update is ArmCustomPatchAsync<
     VirtualMachineInstance,
     VirtualMachineInstanceUpdate
   >;
   /** The operation to delete a virtual machine instance. */
+  @summary("Deletes an virtual machine.")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualMachineInstance,
     {
@@ -62,30 +66,37 @@ interface VirtualMachineInstances {
     }
   >;
   /** Lists all of the virtual machine instances within the specified parent resource. */
+  @summary("Implements List virtual machine instances.")
   listByArm is ArmResourceListByParent<VirtualMachineInstance>;
   /** The operation to power off (stop) a virtual machine instance. */
+  @summary("Implements the operation to stop a virtual machine.")
   stop is ArmResourceActionNoResponseContentAsync<
     VirtualMachineInstance,
     StopVirtualMachineOptions
   >;
   /** The operation to start a virtual machine instance. */
+  @summary("Implements the operation to start a virtual machine.")
   start is ArmResourceActionNoResponseContentAsync<VirtualMachineInstance, {}>;
   /** The operation to restart a virtual machine instance. */
+  @summary("Implements the operation to restart a virtual machine.")
   restart is ArmResourceActionNoResponseContentAsync<
     VirtualMachineInstance,
     void
   >;
   /** Creates a checkpoint in virtual machine instance. */
+  @summary("Implements the operation to creates a checkpoint in a virtual machine instance.")
   createCheckpoint is ArmResourceActionNoResponseContentAsync<
     VirtualMachineInstance,
     VirtualMachineCreateCheckpoint
   >;
   /** Deletes a checkpoint in virtual machine instance. */
+  @summary("Implements the operation to delete a checkpoint in a virtual machine instance.")
   deleteCheckpoint is ArmResourceActionNoResponseContentAsync<
     VirtualMachineInstance,
     VirtualMachineDeleteCheckpoint
   >;
   /** Restores to a checkpoint in virtual machine instance. */
+  @summary("Implements the operation to restores to a checkpoint in a virtual machine instance.")
   restoreCheckpoint is ArmResourceActionNoResponseContentAsync<
     VirtualMachineInstance,
     VirtualMachineRestoreCheckpoint

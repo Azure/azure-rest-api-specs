@@ -28,15 +28,19 @@ model AvailabilitySet is TrackedResource<AvailabilitySetProperties> {
 @armResourceOperations
 interface AvailabilitySets {
   /** Implements AvailabilitySet GET method. */
+  @summary("Gets an AvailabilitySet.")
   get is ArmResourceRead<AvailabilitySet>;
   /** Onboards the ScVmm availability set as an Azure resource. */
+  @summary("Implements AvailabilitySets PUT method.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AvailabilitySet,
     LroHeaders = ArmAsyncOperationHeader
   >;
   /** Updates the AvailabilitySets resource. */
+  @summary("Implements the AvailabilitySets PATCH method.")
   update is ArmTagsPatchAsync<AvailabilitySet>;
   /** Deregisters the ScVmm availability set from Azure. */
+  @summary("Implements AvailabilitySet DELETE method.")
   delete is ArmResourceDeleteWithoutOkAsync<
     AvailabilitySet,
     {
@@ -46,7 +50,9 @@ interface AvailabilitySets {
     LroHeaders = ArmAsyncOperationHeader & ArmLroLocationHeader
   >;
   /** List of AvailabilitySets in a resource group. */
+  @summary("Implements GET AvailabilitySets in a resource group.")
   listByResourceGroup is ArmResourceListByParent<AvailabilitySet>;
   /** List of AvailabilitySets in a subscription. */
+  @summary("Implements GET AvailabilitySets in a subscription.")
   listBySubscription is ArmListBySubscription<AvailabilitySet>;
 }

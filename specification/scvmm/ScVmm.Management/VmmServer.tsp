@@ -28,12 +28,16 @@ model VmmServer is TrackedResource<VmmServerProperties> {
 @armResourceOperations
 interface VmmServers {
   /** Implements VmmServer GET method. */
+  @summary("Gets a VMMServer.")
   get is ArmResourceRead<VmmServer>;
   /** Onboards the SCVmm fabric as an Azure VmmServer resource. */
+  @summary("Implements VmmServers PUT method.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<VmmServer>;
   /** Updates the VmmServers resource. */
+  @summary("Implements VmmServers PATCH method.")
   update is ArmTagsPatchAsync<VmmServer>;
   /** Removes the SCVmm fabric from Azure. */
+  @summary("Implements VmmServers DELETE method.")
   delete is ArmResourceDeleteWithoutOkAsync<
     VmmServer,
     {
@@ -42,7 +46,9 @@ interface VmmServers {
     }
   >;
   /** List of VmmServers in a resource group. */
+  @summary("Implements GET VmmServers in a resource group.")
   listByResourceGroup is ArmResourceListByParent<VmmServer>;
   /** List of VmmServers in a subscription. */
+  @summary("Implements GET VmmServers in a subscription.")
   listBySubscription is ArmListBySubscription<VmmServer>;
 }

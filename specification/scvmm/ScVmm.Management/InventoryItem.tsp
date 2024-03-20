@@ -26,11 +26,15 @@ model InventoryItem is ProxyResource<InventoryItemProperties> {
 @armResourceOperations
 interface InventoryItems {
   /** Shows an inventory item. */
+  @summary("Implements GET InventoryItem method.")
   get is ArmResourceRead<InventoryItem>;
   /** Create Or Update InventoryItem. */
+  @summary("Implements InventoryItem PUT method.")
   create is ArmResourceCreateOrReplaceSync<InventoryItem>;
   /** Deletes an inventoryItem. */
+  @summary("Implements inventoryItem DELETE method.")
   delete is ArmResourceDeleteSync<InventoryItem>;
   /** Returns the list of inventoryItems in the given VmmServer. */
+  @summary("Implements GET for the list of Inventory Items in the VMMServer.")
   listByVmmServer is ArmResourceListByParent<InventoryItem>;
 }

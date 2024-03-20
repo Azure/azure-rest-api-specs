@@ -29,12 +29,16 @@ model VirtualMachineTemplate
 @armResourceOperations
 interface VirtualMachineTemplates {
   /** Implements VirtualMachineTemplate GET method. */
+  @summary("Gets a VirtualMachineTemplate.")
   get is ArmResourceRead<VirtualMachineTemplate>;
   /** Onboards the ScVmm VM Template as an Azure VM Template resource. */
+  @summary("Implements VirtualMachineTemplates PUT method.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualMachineTemplate>;
   /** Updates the VirtualMachineTemplate resource. */
+  @summary("Implements the VirtualMachineTemplate PATCH method.")
   update is ArmTagsPatchAsync<VirtualMachineTemplate>;
   /** Deregisters the ScVmm VM Template from Azure. */
+  @summary("Implements VirtualMachineTemplate DELETE method.")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualMachineTemplate,
     {
@@ -43,7 +47,9 @@ interface VirtualMachineTemplates {
     }
   >;
   /** List of VirtualMachineTemplates in a resource group. */
+  @summary("Implements GET VirtualMachineTemplates in a resource group.")
   listByResourceGroup is ArmResourceListByParent<VirtualMachineTemplate>;
   /** List of VirtualMachineTemplates in a subscription. */
+  @summary("Implements GET VirtualMachineTemplates in a subscription.")
   listBySubscription is ArmListBySubscription<VirtualMachineTemplate>;
 }

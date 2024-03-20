@@ -27,7 +27,9 @@ model VmInstanceHybridIdentityMetadata
 @armResourceOperations
 interface VmInstanceHybridIdentityMetadatas {
   /** Implements HybridIdentityMetadata GET method. */
+  @summary("Gets HybridIdentityMetadata.")
   get is ArmResourceRead<VmInstanceHybridIdentityMetadata>;
   /** Returns the list of HybridIdentityMetadata of the given VM. */
+  @summary("Implements GET HybridIdentityMetadata in a vm.")
   listByVirtualMachineInstance is ArmResourceListByParent<VmInstanceHybridIdentityMetadata>;
 }

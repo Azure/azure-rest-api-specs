@@ -25,11 +25,15 @@ model GuestAgent is ProxyResource<GuestAgentProperties> {
 @armResourceOperations
 interface GuestAgents {
   /** Implements GuestAgent GET method. */
+  @summary("Gets GuestAgent.")
   get is ArmResourceRead<GuestAgent>;
   /** Create Or Update GuestAgent. */
+  @summary("Implements GuestAgent PUT method.")
   create is ArmResourceCreateOrReplaceAsync<GuestAgent>;
   /** Implements GuestAgent DELETE method. */
+  @summary("Deletes an GuestAgent.")
   delete is ArmResourceDeleteSync<GuestAgent>;
   /** Returns the list of GuestAgent of the given vm. */
+  @summary("Implements GET GuestAgent in a vm.")
   listByVirtualMachineInstance is ArmResourceListByParent<GuestAgent>;
 }

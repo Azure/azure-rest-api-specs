@@ -28,12 +28,16 @@ model VirtualNetwork is TrackedResource<VirtualNetworkProperties> {
 @armResourceOperations
 interface VirtualNetworks {
   /** Implements VirtualNetwork GET method. */
+  @summary("Gets a VirtualNetwork.")
   get is ArmResourceRead<VirtualNetwork>;
   /** Onboards the ScVmm virtual network as an Azure virtual network resource. */
+  @summary("Implements VirtualNetworks PUT method.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualNetwork>;
   /** Updates the VirtualNetworks resource. */
+  @summary("Implements the VirtualNetworks PATCH method.")
   update is ArmTagsPatchAsync<VirtualNetwork>;
   /** Deregisters the ScVmm virtual network from Azure. */
+  @summary("Implements VirtualNetwork DELETE method.")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetwork,
     {
@@ -42,7 +46,9 @@ interface VirtualNetworks {
     }
   >;
   /** List of VirtualNetworks in a resource group. */
+  @summary("Implements GET VirtualNetworks in a resource group.")
   listByResourceGroup is ArmResourceListByParent<VirtualNetwork>;
   /** List of VirtualNetworks in a subscription. */
+  @summary("Implements GET VirtualNetworks in a subscription.")
   listBySubscription is ArmListBySubscription<VirtualNetwork>;
 }
