@@ -698,8 +698,8 @@ model InfrastructureProfile {
   lastRestoredVmCheckpoint?: Checkpoint;
 
   /** Checkpoints in the vm. */
-  @visibility("read")
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Workaround for emitter problem"
+  @visibility("read")
   @extension("x-ms-identifiers", ["checkpointID"])
   checkpoints?: Checkpoint[];
 
