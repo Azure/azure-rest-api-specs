@@ -204,7 +204,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Private access resource created successfully.",
+            "description": "Long running Private access resource created successfully.",
             "schema": {
               "$ref": "./types/privateAccesses.json#/definitions/PrivateAccess"
             }
@@ -222,6 +222,10 @@
             }
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create or Update a private access resource": {
             "$ref": "./examples/CreateOrUpdateAPrivateAccess.json"
@@ -255,6 +259,9 @@
           "200": {
             "description": "OK"
           },
+          "202": {
+            "description": "Asynchronous delete operation."
+          },
           "204": {
             "description": "Resource deleted successfully."
           },
@@ -265,6 +272,10 @@
             }
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Delete a private access resource": {
             "$ref": "./examples/DeleteAPrivateAccess.json"
