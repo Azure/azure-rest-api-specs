@@ -521,135 +521,135 @@
           }
         }
       }
-    }
-  },
-  "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/locations/{location}/adooauth/default/getADOOAuthInfo": {
-    "post": {
-      "tags": [
-        "ADOOAuth"
-      ],
-      "operationId": "ADOOAuthInfo",
-      "summary": "Gets ADOOAuth info used to authenticate users with ADO.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-        },
-        {
-          "name": "parameters",
-          "required": false,
-          "in": "body",
-          "schema": {
-            "$ref": "#/definitions/ADOOAuthCallRequest"
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/locations/{location}/adooauth/default/getADOOAuthInfo": {
+      "post": {
+        "tags": [
+          "ADOOAuth"
+        ],
+        "operationId": "ADOOAuthInfo",
+        "summary": "Gets ADOOAuth info used to authenticate users with ADO.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "parameters",
+            "required": false,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ADOOAuthCallRequest"
+            }
           }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "OK",
-          "schema": {
-            "$ref": "#/definitions/ADOOAuthInfoResponse"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ADOOAuthInfoResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         },
-        "default": {
-          "description": "Error response describing why the operation failed.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+        "x-ms-examples": {
+          "ADO OAuthInfo": {
+            "$ref": "./examples/ADOOAuthInfo.json"
           }
-        }
-      },
-      "x-ms-examples": {
-        "ADO OAuthInfo": {
-          "$ref": "./examples/ADOOAuthInfo.json"
         }
       }
-    }
-  },
-  "/subscriptions/{subscription_id}/providers/Microsoft.DevHub/locations/{location}/adooauth/default": {
-    "get": {
-      "tags": [
-        "ADOOAuth"
-      ],
-      "operationId": "ADOOAuthDefault",
-      "summary": "Callback URL to hit once authenticated with Entra ID to have the service store the OAuth token.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-        },
-        {
-          "$ref": "#/parameters/ADOOAuthCodeParameter"
-        },
-        {
-          "$ref": "#/parameters/ADOOAuthStateParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "OK",
-          "schema": {
-            "$ref": "#/definitions/ADOOAuthResponse"
+    },
+    "/subscriptions/{subscription_id}/providers/Microsoft.DevHub/locations/{location}/adooauth/default": {
+      "get": {
+        "tags": [
+          "ADOOAuth"
+        ],
+        "operationId": "ADOOAuthDefault",
+        "summary": "Callback URL to hit once authenticated with Entra ID to have the service store the OAuth token.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ADOOAuthCodeParameter"
+          },
+          {
+            "$ref": "#/parameters/ADOOAuthStateParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ADOOAuthResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         },
-        "default": {
-          "description": "Error response describing why the operation failed.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+        "x-ms-examples": {
+          "ADO OAuth Callback": {
+            "$ref": "./examples/ADOOAuthDefault.json"
           }
-        }
-      },
-      "x-ms-examples": {
-        "ADO OAuth Callback": {
-          "$ref": "./examples/ADOOAuthDefault.json"
         }
       }
-    }
-  },
-  "/subscriptions/{subscription_id}/providers/Microsoft.DevHub/locations/{location}/adooauth": {
-    "get": {
-      "tags": [
-        "ADOOAuth"
-      ],
-      "operationId": "ADOOAuthList",
-      "summary": "Callback URL to hit once authenticated with ADO to have the service store the OAuth token.",
-      "parameters": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "OK",
-          "schema": {
-            "$ref": "#/definitions/ADOOAuthListResponse"
+    },
+    "/subscriptions/{subscription_id}/providers/Microsoft.DevHub/locations/{location}/adooauth": {
+      "get": {
+        "tags": [
+          "ADOOAuth"
+        ],
+        "operationId": "ADOOAuthList",
+        "summary": "Callback URL to hit once authenticated with ADO to have the service store the OAuth token.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ADOOAuthListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         },
-        "default": {
-          "description": "Error response describing why the operation failed.",
-          "schema": {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+        "x-ms-examples": {
+          "List ADO OAuth": {
+            "$ref": "./examples/ADOOAuthList.json"
           }
-        }
-      },
-      "x-ms-examples": {
-        "List ADO OAuth": {
-          "$ref": "./examples/ADOOAuthList.json"
         }
       }
     }
