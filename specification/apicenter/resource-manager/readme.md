@@ -33,15 +33,14 @@ tag: package-2024-03
 ``` yaml
 modelerfour:
   flatten-models: false
-tag: package-preview-2024-03
+tag: package-2024-03-15-preview
 ```
 
+### Tag: package-2024-03-15-preview
 
-### Tag: package-preview-2024-03
+These settings apply only when `--tag=package-2024-03-15-preview` is specified on the command line.
 
-These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2024-03'
+```yaml $(tag) == 'package-2024-03-15-preview'
 input-file:
   - Microsoft.ApiCenter/preview/2024-03-15-preview/apicenter.json
 ```
