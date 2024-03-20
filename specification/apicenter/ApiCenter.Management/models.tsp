@@ -5,6 +5,7 @@ import "@typespec/openapi";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ApiCenter;
 
@@ -542,6 +543,7 @@ model Onboarding {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing service"
+@added(Versions.v2024_03_15_preview)
 @doc("Deleted service properties.")
 model DeletedServiceProperties {
   @doc("UTC date and time when the service will be automatically purged. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.")

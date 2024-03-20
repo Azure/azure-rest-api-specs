@@ -5,11 +5,14 @@ import "./models.tsp";
 import "./Service.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.ApiCenter;
+
+@added(Versions.v2024_03_15_preview)
 @doc("Soft-deleted service entity.")
 model DeletedService is ProxyResource<DeletedServiceProperties> {
   @doc("The name of the deleted service.")
@@ -23,6 +26,7 @@ model DeletedService is ProxyResource<DeletedServiceProperties> {
 }
 
 @armResourceOperations
+@added(Versions.v2024_03_15_preview)
 interface DeletedServices {
   @doc("Returns details of the soft-deleted service.")
   get is ArmResourceRead<DeletedService>;
