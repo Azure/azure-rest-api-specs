@@ -53,7 +53,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-10-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-01-01-preview'
+```yaml $(tag) == 'package-2023-10-01-preview'
 input-file:
   - Microsoft.PortalServices/dashboards/preview/2023-10-01-preview/dashboards.json
 ```
