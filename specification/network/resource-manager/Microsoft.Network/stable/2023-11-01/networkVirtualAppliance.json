@@ -1282,6 +1282,18 @@
     },
     "InboundSecurityRuleProperties": {
       "properties": {
+        "ruleType": {
+          "type": "string",
+          "enum": [
+            "AutoExpire",
+            "Permanent"
+          ],
+          "x-ms-enum": {
+            "name": "InboundSecurityRuleType",
+            "modelAsString": true
+          },
+          "description": "Rule Type. This should be either AutoExpire or Permanent Auto Expire Rule only creates NSG rules. Permanent Rule creates NSG rule and SLB LB Rule."
+        },
         "rules": {
           "type": "array",
           "readOnly": false,
@@ -1300,6 +1312,10 @@
     },
     "InboundSecurityRules": {
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the rule."
+        },
         "protocol": {
           "type": "string",
           "enum": [
@@ -1314,7 +1330,7 @@
         },
         "sourceAddressPrefix": {
           "type": "string",
-          "description": "The CIDR or source IP range. Only /30, /31 and /32 Ip ranges are allowed."
+          "description": "The CIDR or source IP range."
         },
         "destinationPortRange": {
           "type": "integer",
@@ -1322,6 +1338,22 @@
           "minimum": 0,
           "maximum": 65535,
           "description": "NVA port ranges to be opened up. One needs to provide specific ports."
+        },
+        "destinationPortRanges": {
+          "type": "array",
+          "readOnly": false,
+          "description": "NVA port ranges to be opened up. One can provide a range of ports. Allowed port value between 0 and 65535.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "appliesOn": {
+          "type": "array",
+          "readOnly": false,
+          "description": "Public IP name in case of Permanent Rule type & Interface Name in case of Auto Expire Rule type",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "description": "Properties of the Inbound Security Rules resource."
