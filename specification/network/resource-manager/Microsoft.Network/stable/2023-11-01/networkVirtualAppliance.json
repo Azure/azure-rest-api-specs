@@ -923,11 +923,11 @@
             "networkInterfaceConfigurations": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/NetworkVirtualApplianceNetworkInterfaceConfiguration"
-              }
+                "$ref": "#/definitions/VirtualApplianceNetworkInterfaceConfiguration"
+              },
+              "x-ms-identifiers": []
             }
-          },
-          "x-ms-identifiers": []
+          }
         },
         "additionalNics": {
           "type": "array",
@@ -1051,7 +1051,7 @@
       },
       "description": "Network Virtual Appliance NIC properties."
     },
-    "NetworkVirtualApplianceNetworkInterfaceConfiguration": {
+    "VirtualApplianceNetworkInterfaceConfiguration": {
       "type": "object",
       "readOnly": false,
       "description": "Represents a single NIC configuration.",
@@ -1070,11 +1070,11 @@
           "x-ms-client-name": "NicType"
         },
         "properties": {
-          "$ref": "#/definitions/NetworkVirtualApplianceNetworkInterfaceConfigurationProperties"
+          "$ref": "#/definitions/VirtualApplianceNetworkInterfaceConfigurationProperties"
         }
       }
     },
-    "NetworkVirtualApplianceNetworkInterfaceConfigurationProperties": {
+    "VirtualApplianceNetworkInterfaceConfigurationProperties": {
       "type": "object",
       "readOnly": false,
       "description": "Represents a single NIC configuration properties.",
@@ -1082,12 +1082,13 @@
         "ipConfigurations": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/NetworkVirtualApplianceIPConfiguration"
-          }
+            "$ref": "#/definitions/VirtualApplianceIPConfiguration"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
-    "NetworkVirtualApplianceIPConfiguration": {
+    "VirtualApplianceIPConfiguration": {
       "type": "object",
       "readOnly": false,
       "description": "Represents a single IP configuration.",
@@ -1097,11 +1098,11 @@
           "description": "Name of the IP configuration."
         },
         "properties": {
-          "$ref": "#/definitions/NetworkVirtualApplianceIPConfigurationProperties"
+          "$ref": "#/definitions/VirtualApplianceIPConfigurationProperties"
         }
       }
     },
-    "NetworkVirtualApplianceIPConfigurationProperties": {
+    "VirtualApplianceIPConfigurationProperties": {
       "type": "object",
       "readOnly": false,
       "description": "Represents a single IP configuration properties.",
