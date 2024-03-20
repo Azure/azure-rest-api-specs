@@ -47,12 +47,6 @@ interface AvailabilitySets {
   )
   update is ArmTagsPatchAsync<AvailabilitySet>;
   /** Deregisters the ScVmm availability set from Azure. */
-  @extension(
-    "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
-  )
   @summary("Implements AvailabilitySet DELETE method.")
   delete is ArmResourceDeleteWithoutOkAsync<
     AvailabilitySet,
