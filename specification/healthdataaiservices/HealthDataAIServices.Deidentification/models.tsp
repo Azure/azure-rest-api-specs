@@ -78,8 +78,11 @@ model File {
   @visibility("read")
   id: string;
 
+  @doc("File Location for the input.")
+  input: FileLocation;
+
   @doc("File Location for the output.")
-  output: FileLocation;
+  output?: FileLocation;
 
   @doc("Status of the file.")
   status: Azure.Core.Foundations.OperationState;
