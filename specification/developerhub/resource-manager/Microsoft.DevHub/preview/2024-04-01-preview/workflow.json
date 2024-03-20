@@ -1384,69 +1384,69 @@
         }
       },
       "description": "The response from List GitHubOAuth operation."
-    }
-  },
-  "ADOOAuthCallRequest": {
-    "type": "object",
-    "properties": {
-      "redirectUrl": {
-        "type": "string",
-        "description": "The URL the client will redirect to on successful authentication. If empty, no redirect will occur."
-      }
     },
-    "description": "ADOOAuth request object"
-  },
-  "ADOOAuthInfoResponse": {
-    "type": "object",
-    "description": "Response containing ADO OAuth information",
-    "properties": {
-      "authURL": {
-        "type": "string",
-        "description": "URL used to authorize ADO app using Entra ID"
-      },
-      "token": {
-        "type": "string",
-        "description": "OAuth token used to make calls to ADO APIs"
-      }
-    }
-  },
-  "ADOOAuthResponse": {
-    "type": "object",
-    "allOf": [
-      {
-        "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-      }
-    ],
-    "properties": {
+    "ADOOAuthCallRequest": {
+      "type": "object",
       "properties": {
-        "description": "Properties of ADO OAuth.",
-        "$ref": "#/definitions/ADOOAuthProperties"
-      }
+        "redirectUrl": {
+          "type": "string",
+          "description": "The URL the client will redirect to on successful authentication. If empty, no redirect will occur."
+        }
+      },
+      "description": "ADOOAuth request object"
     },
-    "description": "Singleton response of ADO OAuth."
-  },
-  "ADOOAuthProperties": {
-    "type": "object",
-    "properties": {
-      "username": {
-        "type": "string",
-        "description": "user making request"
-      }
-    },
-    "description": "The properties of ADO OAuth."
-  },
-  "ADOOAuthListResponse": {
-    "type": "object",
-    "properties": {
-      "value": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/ADOOAuthResponse"
+    "ADOOAuthInfoResponse": {
+      "type": "object",
+      "description": "Response containing ADO OAuth information",
+      "properties": {
+        "authURL": {
+          "type": "string",
+          "description": "URL used to authorize ADO app using Entra ID"
         },
-        "description": "Singleton list response containing one ADOOAuthResponse"
+        "token": {
+          "type": "string",
+          "description": "OAuth token used to make calls to ADO APIs"
+        }
       }
     },
-    "description": "The response from List ADOOAuth operation."
+    "ADOOAuthResponse": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Properties of ADO OAuth.",
+          "$ref": "#/definitions/ADOOAuthProperties"
+        }
+      },
+      "description": "Singleton response of ADO OAuth."
+    },
+    "ADOOAuthProperties": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "user making request"
+        }
+      },
+      "description": "The properties of ADO OAuth."
+    },
+    "ADOOAuthListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ADOOAuthResponse"
+          },
+          "description": "Singleton list response containing one ADOOAuthResponse"
+        }
+      },
+      "description": "The response from List ADOOAuth operation."
+    }
   },
   "parameters": {
     "ManagedClusterParameter": {
