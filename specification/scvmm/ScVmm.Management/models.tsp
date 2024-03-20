@@ -215,7 +215,7 @@ model CloudProperties {
 
   /** List of QoS policies available for the cloud. */
   @visibility("read")
-  @projectedName("json", "storageQoSPolicies")
+  @encodedName("application/json", "storageQoSPolicies")
   storageQosPolicies?: StorageQosPolicy[];
 
   /** Provisioning state of the resource. */
@@ -445,7 +445,7 @@ model VirtualDisk {
   templateDiskId?: string;
 
   /** The QoS policy for the disk. */
-  @projectedName("json", "storageQoSPolicy")
+  @encodedName("application/json", "storageQoSPolicy")
   storageQosPolicy?: StorageQosPolicyDetails;
 
   /** Gets or sets a value indicating diff disk. */
@@ -704,7 +704,7 @@ model InfrastructureProfile {
 
   /** Last restored checkpoint in the vm. */
   @visibility("read")
-  @projectedName("json", "lastRestoredVMCheckpoint")
+  @encodedName("application/json", "lastRestoredVMCheckpoint")
   lastRestoredVmCheckpoint?: Checkpoint;
 
   /** Checkpoints in the vm. */
@@ -733,11 +733,11 @@ model InfrastructureProfileUpdate
 /** Defines the resource properties. */
 model Checkpoint {
   /** Gets ID of parent of the checkpoint. */
-  @projectedName("json", "parentCheckpointID")
+  @encodedName("application/json", "parentCheckpointID")
   parentCheckpointId?: string;
 
   /** Gets ID of the checkpoint. */
-  @projectedName("json", "checkpointID")
+  @encodedName("application/json", "checkpointID")
   checkpointId?: string;
 
   /** Gets name of the checkpoint. */
