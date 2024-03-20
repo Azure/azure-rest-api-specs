@@ -2053,6 +2053,14 @@
         "locustConfiguration": {
           "$ref": "#/definitions/LocustConfiguration",
           "description": "Locust test configuration, in case kind is Locust"
+        },
+        "regionalLoadTestConfig": {
+          "type": "array",
+          "description": "Region distribution configuration for the load test.",
+          "items": {
+            "$ref": "#/definitions/RegionalConfiguration"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -2658,6 +2666,25 @@
           "readOnly": true
         }
       }
+    },
+    "RegionalConfiguration": {
+      "type": "object",
+      "description": "Region distribution configuration for the load test.",
+      "properties": {
+        "engineInstances": {
+          "type": "integer",
+          "format": "int32",
+          "description": "  The number of engine instances to execute load test in specified region. Supported values are in range of 1-400."
+        },
+        "region": {
+          "type": "string",
+          "description": "Name of region"
+        }
+      },
+      "required": [
+        "engineInstances",
+        "region"
+      ]
     },
     "ResourceMetric": {
       "type": "object",
@@ -3276,6 +3303,14 @@
         "testRunStatistics": {
           "type": "object",
           "description": "Test run statistics.",
+          "additionalProperties": {
+            "$ref": "#/definitions/TestRunStatistics"
+          },
+          "readOnly": true
+        },
+        "regionalStatistics": {
+          "type": "object",
+          "description": "Regional statistics",
           "additionalProperties": {
             "$ref": "#/definitions/TestRunStatistics"
           },

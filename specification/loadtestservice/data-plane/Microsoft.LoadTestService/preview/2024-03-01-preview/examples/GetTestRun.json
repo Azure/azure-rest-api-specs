@@ -23,7 +23,17 @@
             "users": 5,
             "durationInSeconds": 60,
             "spawnRate": 2.5
-          }
+          },
+          "regionalLoadTestConfig": [
+            {
+              "engineInstances": 1,
+              "region": "northeurope"
+            },
+            {
+              "engineInstances": 1,
+              "region": "westeurope"
+            }
+          ]
         },
         "testResult": "PASSED",
         "passFailCriteria": {
@@ -111,6 +121,56 @@
             "throughput": 5,
             "receivedKBytesPerSec": 13,
             "sentKBytesPerSec": 4
+          }
+        },
+        "regionalStatistics": {
+          "westeurope": {
+            "transaction": "westeurope",
+            "sampleCount": 123518.0,
+            "errorCount": 0.0,
+            "errorPct": 0.0,
+            "meanResTime": 102.52102527566832,
+            "medianResTime": 89.0,
+            "maxResTime": 19168.0,
+            "minResTime": 11.0,
+            "pct1ResTime": 166.0,
+            "pct2ResTime": 186.0,
+            "pct3ResTime": 231.0,
+            "throughput": 950.14,
+            "receivedKBytesPerSec": 0.0,
+            "sentKBytesPerSec": 0.0
+          },
+          "northeurope": {
+            "transaction": "northeurope",
+            "sampleCount": 41361.0,
+            "errorCount": 0.0,
+            "errorPct": 0.0,
+            "meanResTime": 247.06568990111458,
+            "medianResTime": 188.0,
+            "maxResTime": 3098.0,
+            "minResTime": 150.0,
+            "pct1ResTime": 365.0,
+            "pct2ResTime": 404.0,
+            "pct3ResTime": 611.0,
+            "throughput": 308.66,
+            "receivedKBytesPerSec": 0.0,
+            "sentKBytesPerSec": 0.0
+          },
+          "Total": {
+            "transaction": "Total",
+            "sampleCount": 164879.0,
+            "errorCount": 0.0,
+            "errorPct": 0.0,
+            "meanResTime": 138.78102123375325,
+            "medianResTime": 120.0,
+            "maxResTime": 19168.0,
+            "minResTime": 11.0,
+            "pct1ResTime": 235.0,
+            "pct2ResTime": 347.0,
+            "pct3ResTime": 424.0,
+            "throughput": 1203.5,
+            "receivedKBytesPerSec": 0.0,
+            "sentKBytesPerSec": 0.0
           }
         },
         "createdDateTime": "2021-12-05T16:43:46.072Z",

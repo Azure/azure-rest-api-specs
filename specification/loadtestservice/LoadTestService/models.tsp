@@ -378,6 +378,21 @@ not required to upload.
   @added(APIVersions.v2024_03_01_preview)
   @doc("Locust test configuration, in case kind is Locust")
   locustConfiguration?: LocustConfiguration;
+
+  @added(APIVersions.v2024_03_01_preview)
+  @doc("Region distribution configuration for the load test.")
+  regionalLoadTestConfig?: RegionalConfiguration[];
+}
+
+@doc("Region distribution configuration for the load test.")
+model RegionalConfiguration {
+  @doc("""
+  The number of engine instances to execute load test in specified region. Supported values are in range of 1-400.
+""")
+  engineInstances: int32;
+
+  @doc("Name of region")
+  region: string;
 }
 
 @doc("Configuration for quick load test")
@@ -597,6 +612,11 @@ SECRET_VALUE.
   @doc("Test run statistics.")
   @visibility("read")
   testRunStatistics?: Record<TestRunStatistics>;
+
+  @doc("Regional statistics")
+  @visibility("read")
+  @added(APIVersions.v2024_03_01_preview)
+  regionalStatistics?: Record<TestRunStatistics>;
 
   @doc("The load test configuration.")
   loadTestConfiguration?: LoadTestConfiguration;
