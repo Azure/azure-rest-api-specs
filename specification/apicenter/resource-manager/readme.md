@@ -27,8 +27,9 @@ These are the global settings for the Azure API Center.
 ``` yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2024-03
+tag: package-2024-03-15-preview
 ```
+
 
 ``` yaml
 modelerfour:
