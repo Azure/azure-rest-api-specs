@@ -20,7 +20,8 @@ model InventoryItem is ProxyResource<InventoryItemProperties> {
   @segment("inventoryItems")
   name: string;
 
-  ...Azure.ResourceManager.ResourceKind;
+  /** Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value. */
+  kind?: string;
 }
 
 @armResourceOperations

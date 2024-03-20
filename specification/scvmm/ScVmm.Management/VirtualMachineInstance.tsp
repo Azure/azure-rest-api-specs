@@ -76,7 +76,7 @@ interface VirtualMachineInstances {
   >;
   /** The operation to start a virtual machine instance. */
   @summary("Implements the operation to start a virtual machine.")
-  start is ArmResourceActionNoResponseContentAsync<VirtualMachineInstance, {}>;
+  start is ArmResourceActionNoResponseContentAsync<VirtualMachineInstance, void>;
   /** The operation to restart a virtual machine instance. */
   @summary("Implements the operation to restart a virtual machine.")
   restart is ArmResourceActionNoResponseContentAsync<
