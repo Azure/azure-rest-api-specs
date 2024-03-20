@@ -8,7 +8,7 @@ using TypeSpec.Http;
 using Azure.Core;
 using Azure.Core.Traits;
 
-namespace DocumentTranslationClient;
+namespace DocumentTranslation;
 
 alias ServiceTraits = SupportsRepeatableRequests &
   SupportsConditionalRequests &
