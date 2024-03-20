@@ -1,9 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -132,4 +134,14 @@ interface PortalExtensions {
 );
 @@doc(PortalExtensions.export::parameters.body,
   "The parameters required to export the extension."
+);
+
+@@clientName(PortalExtensions.export::parameters.body, "portalExtensionExport");
+@@encodedName(PortalExtensions.export::parameters.body,
+  "application/json",
+  "portalExtensionExport"
+);
+@@OpenAPI.extension(PortalExtensions.export::parameters.body,
+  "x-ms-client-name",
+  "portalExtensionExport"
 );

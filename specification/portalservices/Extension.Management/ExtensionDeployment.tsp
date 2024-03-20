@@ -22,7 +22,7 @@ model ExtensionDeployment is TrackedResource<ExtensionDeploymentProperties> {
    */
   @maxLength(64)
   @minLength(3)
-  @pattern("^[a-z][a-z0-9]*$")
+  @pattern("^[a-zA-Z0-9]+$")
   @path
   @key("deploymentName")
   @segment("deployments")
