@@ -527,7 +527,7 @@
         "tags": [
           "ADOOAuth"
         ],
-        "operationId": "ADOOAuthInfo_Get",
+        "operationId": "GetADOOAuthInfo",
         "summary": "Gets ADOOAuth info used to authenticate users with ADO.",
         "parameters": [
           {
@@ -586,12 +586,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          },
-          {
-            "$ref": "#/parameters/ADOOAuthCodeParameter"
-          },
-          {
-            "$ref": "#/parameters/ADOOAuthStateParameter"
           }
         ],
         "responses": {
@@ -671,8 +665,7 @@
       "properties": {
         "properties": {
           "description": "Properties of a workflow.",
-          "$ref": "#/definitions/WorkflowProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/WorkflowProperties"
         }
       }
     },
@@ -1364,8 +1357,7 @@
       "properties": {
         "properties": {
           "description": "Properties of a workflow.",
-          "$ref": "#/definitions/GitHubOAuthProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/GitHubOAuthProperties"
         }
       },
       "description": "Singleton response of GitHubOAuth containing "
@@ -1495,22 +1487,6 @@
       "required": true,
       "type": "string",
       "description": "The state response from authenticating the GitHub App.",
-      "x-ms-parameter-location": "method"
-    },
-    "ADOOAuthCodeParameter": {
-      "name": "code",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The code response from authenticating with Entra ID oauth app.",
-      "x-ms-parameter-location": "method"
-    },
-    "ADOOAuthStateParameter": {
-      "name": "state",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The state response from authenticating with Entra ID oauth App.",
       "x-ms-parameter-location": "method"
     }
   }
