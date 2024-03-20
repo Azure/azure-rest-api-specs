@@ -9,8 +9,12 @@
     "api-version": "2023-06-01-preview",
     "allocateQuotaRequest": {
       "properties": {
-        "location": "westus",
-        "limit": 110
+        "requestedResource": {
+          "properties": {
+            "limit": 10,
+            "location": "westus"
+          }
+        }
       }
     }
   },
@@ -21,13 +25,19 @@
         "type": "Microsoft.Quota/groupQuotas/quotaAllocations",
         "name": "standardav2family",
         "properties": {
-          "limit": 110,
-          "shareableQuota": 35,
-          "location": "westus",
-          "name": {
-            "value": "standardav2family",
-            "localizedValue": "standard Av2 Family vCPUs"
-          }
+          "requestedResource": {
+            "properties": {
+              "limit": 70,
+              "name": {
+                "value": "standardav2family",
+                "localizedValue": "Standard Av2 Family"
+              },
+              "location": "westus"
+            }
+          },
+          "requestSubmitTime": "2024-03-20T18:42:53.779Z",
+          "provisioningState": "Accepted",
+          "faultCode": "string"
         }
       }
     },
