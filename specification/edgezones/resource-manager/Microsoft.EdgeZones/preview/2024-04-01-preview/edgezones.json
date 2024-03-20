@@ -42,7 +42,7 @@
       "name": "Operations"
     },
     {
-      "name": "AzureExtendedZones"
+      "name": "ExtendedZones"
     }
   ],
   "paths": {
@@ -82,13 +82,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeZones/azureExtendedZones": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeZones/extendedZones": {
       "get": {
-        "operationId": "AzureExtendedZones_ListBySubscription",
+        "operationId": "ExtendedZones_ListBySubscription",
         "tags": [
-          "AzureExtendedZones"
+          "ExtendedZones"
         ],
-        "description": "Lists the Azure Extended Zones for a subscription",
+        "description": "Lists the Azure Extended Zones available to a subscription",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -101,7 +101,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AzureExtendedZoneListResult"
+              "$ref": "#/definitions/ExtendedZoneListResult"
             }
           },
           "default": {
@@ -112,8 +112,8 @@
           }
         },
         "x-ms-examples": {
-          "ListAzureExtendedZones": {
-            "$ref": "./examples/AzureExtendedZones_ListBySubscription.json"
+          "ListExtendedZones": {
+            "$ref": "./examples/ExtendedZones_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -121,13 +121,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeZones/azureExtendedZones/{azureExtendedZoneName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeZones/extendedZones/{extendedZoneName}": {
       "get": {
-        "operationId": "AzureExtendedZones_Get",
+        "operationId": "ExtendedZones_Get",
         "tags": [
-          "AzureExtendedZones"
+          "ExtendedZones"
         ],
-        "description": "Get an Azure Extended Zone for a subscription",
+        "description": "Gets an Azure Extended Zone for a subscription",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -136,9 +136,9 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "azureExtendedZoneName",
+            "name": "extendedZoneName",
             "in": "path",
-            "description": "The name of the AzureExtendedZone",
+            "description": "The name of the ExtendedZone",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -148,7 +148,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AzureExtendedZone"
+              "$ref": "#/definitions/ExtendedZone"
             }
           },
           "default": {
@@ -159,19 +159,19 @@
           }
         },
         "x-ms-examples": {
-          "GetAzureExtendedZone": {
-            "$ref": "./examples/AzureExtendedZones_Get.json"
+          "GetExtendedZone": {
+            "$ref": "./examples/ExtendedZones_Get.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeZones/azureExtendedZones/{azureExtendedZoneName}/register": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeZones/extendedZones/{extendedZoneName}/register": {
       "post": {
-        "operationId": "AzureExtendedZones_Register",
+        "operationId": "ExtendedZones_Register",
         "tags": [
-          "AzureExtendedZones"
+          "ExtendedZones"
         ],
-        "description": "Registers a subscription for an Azure Extended Zone",
+        "description": "Registers a subscription for an Extended Zone",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -180,9 +180,9 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "azureExtendedZoneName",
+            "name": "extendedZoneName",
             "in": "path",
-            "description": "The name of the AzureExtendedZone",
+            "description": "The name of the ExtendedZone",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -192,7 +192,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AzureExtendedZone"
+              "$ref": "#/definitions/ExtendedZone"
             }
           },
           "default": {
@@ -203,19 +203,19 @@
           }
         },
         "x-ms-examples": {
-          "RegisterAzureExtendedZone": {
-            "$ref": "./examples/AzureExtendedZones_Register.json"
+          "RegisterExtendedZone": {
+            "$ref": "./examples/ExtendedZones_Register.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeZones/azureExtendedZones/{azureExtendedZoneName}/unregister": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EdgeZones/extendedZones/{extendedZoneName}/unregister": {
       "post": {
-        "operationId": "AzureExtendedZones_Unregister",
+        "operationId": "ExtendedZones_Unregister",
         "tags": [
-          "AzureExtendedZones"
+          "ExtendedZones"
         ],
-        "description": "Unregisters a subscription for an Azure Extended Zone",
+        "description": "Unregisters a subscription for an Extended Zone",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -224,9 +224,9 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "azureExtendedZoneName",
+            "name": "extendedZoneName",
             "in": "path",
-            "description": "The name of the AzureExtendedZone",
+            "description": "The name of the ExtendedZone",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -236,7 +236,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AzureExtendedZone"
+              "$ref": "#/definitions/ExtendedZone"
             }
           },
           "default": {
@@ -247,20 +247,20 @@
           }
         },
         "x-ms-examples": {
-          "UnregisterAzureExtendedZone": {
-            "$ref": "./examples/AzureExtendedZones_Unregister.json"
+          "UnregisterExtendedZone": {
+            "$ref": "./examples/ExtendedZones_Unregister.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "AzureExtendedZone": {
+    "ExtendedZone": {
       "type": "object",
-      "description": "An AzureExtendedZone resource",
+      "description": "Resource that represents an Azure Extended Zone available to a subscription for registering and unregistering.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AzureExtendedZoneProperties",
+          "$ref": "#/definitions/ExtendedZoneProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -275,15 +275,15 @@
         }
       ]
     },
-    "AzureExtendedZoneListResult": {
+    "ExtendedZoneListResult": {
       "type": "object",
-      "description": "The response of a AzureExtendedZone list operation.",
+      "description": "The response of a ExtendedZone list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The AzureExtendedZone items on this page",
+          "description": "The ExtendedZone items on this page",
           "items": {
-            "$ref": "#/definitions/AzureExtendedZone"
+            "$ref": "#/definitions/ExtendedZone"
           }
         },
         "nextLink": {
@@ -297,55 +297,64 @@
         "value"
       ]
     },
-    "AzureExtendedZoneProperties": {
+    "ExtendedZoneProperties": {
       "type": "object",
-      "description": "The properties of an AzureExtendedZone Resource",
+      "description": "The properties of an Extended Zone resource.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
+          "description": "Status of the last operation performed by the subscription on the Edge Zone resource",
           "readOnly": true
         },
         "registrationState": {
           "$ref": "#/definitions/RegistrationState",
-          "description": "AzureExtendedZone registration approved or not",
+          "description": "Indicates the Azure Extended Zone registration’s approval status.",
           "readOnly": true
         },
         "displayName": {
           "type": "string",
-          "description": "AzureExtendedZone displayName"
+          "description": "Display name of the Azure Extended Zone.",
+          "readOnly": true
         },
         "regionalDisplayName": {
           "type": "string",
-          "description": "AzureExtendedZone regionalDisplayName"
+          "description": "Regional display name of the Azure Extended Zone.",
+          "readOnly": true
         },
         "regionType": {
           "type": "string",
-          "description": "AzureExtendedZone regionType"
+          "description": "Type of region for the Azure Extended Zone.",
+          "readOnly": true
         },
         "regionCategory": {
           "type": "string",
-          "description": "AzureExtendedZone regionCategory"
+          "description": "Category of region for the Azure Extended Zone.",
+          "readOnly": true
         },
         "geography": {
           "type": "string",
-          "description": "AzureExtendedZone geography"
+          "description": "Geography of the Azure Extended Zone.",
+          "readOnly": true
         },
         "geographyGroup": {
           "type": "string",
-          "description": "AzureExtendedZone geographyGroup"
+          "description": "The Geography Group of the Azure Extended Zone.",
+          "readOnly": true
         },
         "longitude": {
           "type": "string",
-          "description": "AzureExtendedZone longitude"
+          "description": "The Longitude of the Azure Extended Zone.",
+          "readOnly": true
         },
         "latitude": {
           "type": "string",
-          "description": "AzureExtendedZone latitude"
+          "description": "The Latitude of the Azure Extended Zone.",
+          "readOnly": true
         },
         "homeLocation": {
           "type": "string",
-          "description": "AzureExtendedZone homeLocation"
+          "description": "The Home Location of the Azure Extended Zone.",
+          "readOnly": true
         }
       },
       "required": [
@@ -417,7 +426,7 @@
     },
     "RegistrationState": {
       "type": "string",
-      "description": "The Azure Extended Zone registration status for a subscription.",
+      "description": "The Azure Extended Zone registration status for a subscription",
       "enum": [
         "NotRegistered",
         "PendingRegister",
@@ -431,22 +440,22 @@
           {
             "name": "NotRegistered",
             "value": "NotRegistered",
-            "description": "Not Registered State"
+            "description": "Subscription not registered for the Azure Extended Zone"
           },
           {
             "name": "PendingRegister",
             "value": "PendingRegister",
-            "description": "Pending Register State"
+            "description": "Subscription pending registration for the Azure Extended Zone"
           },
           {
             "name": "Registered",
             "value": "Registered",
-            "description": "Registered State"
+            "description": "Subscription is registered for the Azure Extended Zone"
           },
           {
             "name": "PendingUnregister",
             "value": "PendingUnregister",
-            "description": "Pending Unregister State"
+            "description": "Subscription is pending unregistering for the Azure Extended Zone"
           }
         ]
       }
