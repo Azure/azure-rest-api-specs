@@ -1462,6 +1462,9 @@
       "properties": {
         "smtp": {
           "$ref": "#/definitions/Smtp"
+        },
+        "customConfigs":{
+          "$ref": "#/definitions/CustomConfigs"
         }
       }
     },
@@ -1500,6 +1503,20 @@
         },
         "skipVerify": {
           "description": "Verify SSL for SMTP server. Default is false\r\nhttps://pkg.go.dev/crypto/tls#Config",
+          "type": "boolean"
+        }
+      }
+    },
+    "CustomConfigs": {
+      "description": "Customized Grafana settings",
+      "type": "object",
+      "properties": {
+        "snapshotsExternalEnabled": {
+          "description": "Set to false to disable external snapshot publish endpoint",
+          "type": "boolean"
+        },
+        "usersViewersCanEdit": {
+          "description": "Set to true so viewers can access and use explore and perform temporary edits on panels in dashboards they have access to. They cannot save their changes.",
           "type": "boolean"
         }
       }
