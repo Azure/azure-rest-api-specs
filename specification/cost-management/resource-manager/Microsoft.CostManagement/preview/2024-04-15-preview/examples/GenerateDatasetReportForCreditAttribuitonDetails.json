@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2024-04-15-preview",
+    "scope": "providers/Microsoft.Billing/billingAccounts/12345",
+    "parameters": {
+      "datasetName": "CreditAttributionDetails",
+      "dataVersion": "2023-05-01",
+      "fileFormatOptions": {
+        "compressionMode": "None",
+        "format": "Csv"
+      },
+      "datasetOptions": {
+        "filters": [
+          {
+            "name": "lotId",
+            "value": "lot123"
+          }
+        ],
+        "timePeriod": {
+          "from": "2024-04-15T00:00:00.000Z",
+          "to": "2024-05-15T00:00:00.000Z"
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/12345/providers/Microsoft.CostManagement/reportStatus/00000000-0000-0000-0000-000000000000?api-version=2024-04-15-preview",
+        "Retry-After": "60"
+      }
+    }
+  }
+}

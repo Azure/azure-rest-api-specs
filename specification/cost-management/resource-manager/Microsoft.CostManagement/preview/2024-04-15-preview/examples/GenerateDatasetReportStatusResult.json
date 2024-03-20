@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2024-04-15-preview",
+    "reportId": "00000000-0000-0000-0000-000000000000",
+    "scope": "providers/Microsoft.Billing/billingAccounts/12345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "providers/Microsoft.Billing/billingAccounts/12345/providers/Microsoft.CostManagement/reportStatus/00000000-0000-0000-0000-000000000000",
+        "name": "00000000-0000-0000-0000-000000000000",
+        "status": "Completed",
+        "type": "Microsoft.CostManagement/reportStatus",
+        "requestContext": {
+          "datasetName": "CreditAttribution Details",
+          "dataVersion": "2023-05-01",
+          "fileFormatOptions": {
+            "compressionMode": "None",
+            "format": "Csv"
+          },
+          "datasetOptions": {
+            "filters": [
+              {
+                "name": "lotId",
+                "value": "lot123"
+              }
+            ],
+            "timePeriod": {
+              "from": "2024-04-15T00:00:00.000Z",
+              "to": "2024-05-15T00:00:00.000Z"
+            }
+          }
+        },
+        "result": {
+          "blobCount": 1,
+          "byteCount": 50000,
+          "blobs": [
+            {
+              "blobLink": "https://storage/sasurl",
+              "byteCount": 50000
+            }
+          ],
+          "validTill": "2022-05-10T08:08:46.1973252Z"
+        }
+      }
+    }
+  }
+}

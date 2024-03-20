@@ -1,0 +1,393 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-04-15-preview",
+    "title": "CostManagementClient"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{scope}/providers/Microsoft.CostManagement/generateDatasetReport": {
+      "post": {
+        "tags": [
+          "generateDatasetReport"
+        ],
+        "operationId": "GenerateDatasetReport_CreateOperation",
+        "description": "This API is a general-purpose API that allow customers to download multiple types of datasets asynchronously. The initial call to request a report will return a 202 with a 'Location' and 'Retry-After' header. The 'Location' header will provide the endpoint to poll to get the result of the report generation. The 'Retry-After' provides the duration to wait before polling for the generated report. A call to poll the report operation will provide a 202 response with a 'Location' header if the operation is still in progress. Once the report generation operation completes, the polling endpoint will provide a 200 response along with details on the report blob(s) that are available for download. The details on the file(s) available for download will be available in the polling response body. ",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "GenerateDatasetReportForCreditAttribuitonDetailsDataset": {
+            "$ref": "./examples/GenerateDatasetReportForCreditAttribuitonDetails.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateDatasetReportRequestDefinition"
+            },
+            "description": "Parameters supplied to the generate dataset report operation."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Request will be processed. Use the Location header to check the status.",
+            "headers": {
+              "Location": {
+                "description": "The URL to check the result of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.CostManagement/reportStatus/{reportId}": {
+      "get": {
+        "tags": [
+          "generateDatasetReport"
+        ],
+        "operationId": "GenerateDatasetReport_GetReportStatus",
+        "description": "Get the result of the specified operation. This link is provided in the creation request response Location header.",
+        "x-ms-examples": {
+          "Get details of the operation result": {
+            "$ref": "./examples/GenerateDatasetReportStatusResult.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeParameter"
+          },
+          {
+            "name": "reportId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The report id to check the status"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GenerateDatasetReportStatusResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "GenerateDatasetReportRequestDefinition": {
+      "description": "The definition of the request to generate a dataset report.",
+      "type": "object",
+      "properties": {
+        "datasetName": {
+          "description": "The type of dataset",
+          "type": "string",
+          "enum": [
+            "CreditAttributionDetails"
+          ],
+          "x-ms-enum": {
+            "name": "DatasetName",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "CreditAttributionDetails",
+                "description": "Credit Attribution Details Dataset.",
+                "name": "CreditAttributionDetailsDatasetName"
+              }
+            ]
+          }
+        },
+        "dataVersion": {
+          "description": "The data version of the dataset",
+          "type": "string"
+        },
+        "datasetOptions": {
+          "description": "The options on the dataset(Filters, Timeframe etc.)",
+          "$ref": "#/definitions/DatasetOptions"
+        },
+        "fileFormatOptions": {
+          "description": "The options on the downloaded file format",
+          "$ref": "#/definitions/FileFormatOptions"
+        }
+      }
+    },
+    "DatasetOptions": {
+      "description": "The Dataset Configurations. Allows specifying the dataset filters and timeframes.",
+      "type": "object",
+      "properties": {
+        "filters": {
+          "description": "The filters to be applied on the dataset.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilterItem"
+          }
+        },
+        "timePeriod": {
+          "description": "The data range for the dataset.",
+          "$ref": "#/definitions/TimePeriod"
+        }
+      }
+    },
+    "FileFormatOptions": {
+      "description": "The File format Configurations. Allows specifying the downloaded file(s) format.",
+      "type": "object",
+      "properties": {
+        "compressionMode": {
+          "description": "The compression mode of the downloaded file(s). Currently only supports Gzip.",
+          "type": "string",
+          "enum": [
+            "None",
+            "Gzip"
+          ]
+        },
+        "format": {
+          "description": "The format of the downloaded file(s). Currently only supports Csv.",
+          "type": "string",
+          "enum": [
+            "Csv"
+          ]
+        }
+      }
+    },
+    "TimePeriod": {
+      "description": "The start and end date for pulling data for the report.",
+      "type": "object",
+      "properties": {
+        "from": {
+          "description": "The start date to pull data from.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "to": {
+          "description": "The end date to pull data to.",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "from",
+        "to"
+      ]
+    },
+    "FilterItem": {
+      "description": "The custom filter to be applied on the dataset.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The filter name",
+          "type": "string"
+        },
+        "value": {
+          "description": "The filter value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "ErrorResponse": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 413 Request Entity Too Large - Request is throttled. The amount of data required to fulfill the request exceeds the maximum size permitted of 2Gb. Please utilize our Exports feature instead. \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "common-types.json#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "GenerateDatasetReportStatusResponse": {
+      "description": "The result of the generate dataset report operation.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The id of the long running operation.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the long running operation.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the long running operation.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the report generate operation",
+          "type": "string",
+          "enum": [
+            "Completed",
+            "InProgress",
+            "NoDataFound",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "GenerateDatasetReportStatusType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Completed",
+                "description": "Operation is Completed.",
+                "name": "CompletedStatusType"
+              },
+              {
+                "value": "InProgress",
+                "description": "Operation is in progress.",
+                "name": "InProgressStatusType"
+              },
+              {
+                "value": "NoDataFound",
+                "description": "Operation is Completed and no cost data found.",
+                "name": "NoDataFoundStatusType"
+              },
+              {
+                "value": "Failed",
+                "description": "Operation Failed.",
+                "name": "FailedStatusType"
+              }
+            ]
+          }
+        },
+        "requestContext": {
+          "x-ms-client-flatten": true,
+          "description": "The request that initiated the operation.",
+          "$ref": "#/definitions/GenerateDatasetReportRequestDefinition"
+        },
+        "result": {
+          "x-ms-client-flatten": true,
+          "description": "The result of the report generation operation.",
+          "$ref": "#/definitions/ReportStatusResult"
+        },
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "common-types.json#/definitions/ErrorDetails"
+        }
+      }
+    },
+    "ReportStatusResult": {
+      "description": "The result of the report generation operation.",
+      "type": "object",
+      "properties": {
+        "byteCount": {
+          "description": "The total number of bytes in all blobs.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "blobCount": {
+          "description": "The total number of blobs.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "blobs": {
+          "description": "List of blob information generated by this operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BlobInfo"
+          },
+          "x-ms-identifiers": [
+            "blobLink"
+          ]
+        },
+        "validTill": {
+          "description": "The time at which report URL becomes invalid/expires in UTC e.g. 2020-12-08T05:55:59.4394737Z.",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "BlobInfo": {
+      "description": "The blob information generated by this operation.",
+      "type": "object",
+      "properties": {
+        "blobLink": {
+          "description": "Link to the blob to download file.",
+          "type": "string"
+        },
+        "byteCount": {
+          "description": "Bytes in the blob.",
+          "format": "int64",
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "scopeParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ARM Resource ID for subscription, resource group, billing account, or other billing scopes. Currently only billing account scope is supported. For details, see https://aka.ms/costmgmt/scopes.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}
