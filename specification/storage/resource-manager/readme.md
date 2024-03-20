@@ -26,9 +26,38 @@ These are the global settings for the Storage API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-04
+tag: package-2023-05
 ```
 
+### Tag: package-2023-04
+
+These settings apply only when `--tag=package-2023-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-05'
+input-file:
+  - Microsoft.Storage/stable/2023-05-01/storageTaskAssignments.json
+
+directive:
+  - suppress: R3018
+    reason: Existing boolean properties
+    approved-by: "@fearthecowboy"
+
+  - where:
+    - $.paths["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Storage/storageAccounts/{accountName}/storageTaskAssignmentsExecutionSummary"].post.operationId
+    - $.paths["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Storage/storageAccounts/{accountName}/storageTaskAssignments/{storageTaskAssignmentName}/executionSummary"].post.operationId
+    suppress: R1003
+    reason: APIs return array of values, is not actually a 'list' operation
+    approved-by: "@fearthecowboy"
+
+  - where:
+    - $.paths["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Storage/storageAccounts/{accountName}/storageTaskAssignments/{storageTaskAssignmentName}"].patch
+    - $.paths["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Storage/storageAccounts/{accountName}/storageTaskAssignments/{storageTaskAssignmentName}"].put
+    - $.paths["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Storage/storageAccounts/{accountName}/storageTaskAssignments/{storageTaskAssignmentName}"].get
+    - $.paths["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Storage/storageAccounts/{accountName}/storageTaskAssignments/{storageTaskAssignmentName}/reports"].get
+    - $.paths["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Storage/storageAccounts/{accountName}/storageTaskAssignments"].get
+    - $.paths["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Storage/storageAccounts/{accountName}/reports"].get
+    suppress: R4009
+```
 
 ### Tag: package-2023-04
 
