@@ -4,14 +4,12 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using OpenAPI;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.PortalServices;
 
-@removed(Versions.v2024_01_01_preview)
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("The types of dashboard tiles.")
