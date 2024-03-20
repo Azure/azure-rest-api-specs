@@ -1838,9 +1838,6 @@ Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batc
   @doc("The list of Packages to be installed on each Compute Node in the Pool. When creating a pool, the package's application ID must be fully qualified (/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}). Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Package references on any given Pool.")
   applicationPackageReferences?: BatchApplicationPackageReference[];
 
-  @doc("The list of application licenses the Batch service will make available on each Compute Node in the Pool. The list of application licenses must be a subset of available Batch service application licenses. If a license is requested which is not supported, Pool creation will fail. The permitted licenses available on the Pool are 'maya', 'vray', '3dsmax', 'arnold'. An additional charge applies for each application license added to the Pool.")
-  applicationLicenses?: string[];
-
   @doc("The list of user Accounts to be created on each Compute Node in the Pool.")
   userAccounts?: UserAccount[];
 
@@ -2960,10 +2957,6 @@ Warning: This property is deprecated and will be removed after February, 2024. P
   @visibility("read")
   applicationPackageReferences?: BatchApplicationPackageReference[];
 
-  @doc("The list of application licenses the Batch service will make available on each Compute Node in the Pool. The list of application licenses must be a subset of available Batch service application licenses. If a license is requested which is not supported, Pool creation will fail.")
-  @visibility("read")
-  applicationLicenses?: string[];
-
   @doc("The number of task slots that can be used to run concurrent tasks on a single compute node in the pool. The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.")
   @visibility("read")
   taskSlotsPerNode?: int32;
@@ -3060,9 +3053,6 @@ Warning: This property is deprecated and will be removed after February, 2024. P
 
   @doc("The list of Packages to be installed on each Compute Node in the Pool. When creating a pool, the package's application ID must be fully qualified (/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}). Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Package references on any given Pool.")
   applicationPackageReferences?: BatchApplicationPackageReference[];
-
-  @doc("The list of application licenses the Batch service will make available on each Compute Node in the Pool. The list of application licenses must be a subset of available Batch service application licenses. If a license is requested which is not supported, Pool creation will fail.")
-  applicationLicenses?: string[];
 
   @doc("The number of task slots that can be used to run concurrent tasks on a single compute node in the pool. The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.")
   taskSlotsPerNode?: int32;
