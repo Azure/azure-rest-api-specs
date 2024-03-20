@@ -1,6 +1,8 @@
 import "@typespec/versioning";
 import "@typespec/http";
+import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 using TypeSpec.Http;
 
@@ -69,7 +71,7 @@ model SpeechGenerationOptions {
   // Implementation note: developer-facing specification of deployment or model by clients should be controlled either
   // via an operation parameter or by this request body field -- but only one of those. This field should be hidden by
   // clients if operation parameters are used and populated into the request body on an as-needed basis.
-  @projectedName("csharp", "DeploymentName")
+  @clientName("DeploymentName", "csharp")
   `model`?: string;
 }
 
