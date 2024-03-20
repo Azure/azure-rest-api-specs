@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "resourceGroupName": "MyResourceGroup",
+    "accountName": "MyAccount",
+    "api-version": "2020-04-06-preview",
+    "remoteRenderingAccount": {
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "location": "eastus2euap",
+      "tags": {
+        "heroine": "juliet",
+        "hero": "romeo"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "accountId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+          "accountDomain": "mixedreality.azure.com"
+        },
+        "tags": {
+          "heroine": "juliet",
+          "hero": "romeo"
+        },
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "location": "eastus2euap",
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/MyResourceGroup/providers/Microsoft.MixedReality/remoteRenderingAccounts/MyAccount",
+        "name": "MyAccount",
+        "type": "Microsoft.MixedReality/remoteRenderingAccounts"
+      }
+    }
+  }
+}

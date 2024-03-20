@@ -1,0 +1,60 @@
+parameters:
+  endpoint: https://aoairesource.openai.azure.com
+  api-key: '{api key}'
+  api-version: 2023-10-01-preview
+  fineTune:
+    hyperParameters: 
+    suffix: 
+    n_epochs: 
+    batch_size: 
+    learning_rate_multiplier: 
+    prompt_loss_weight: 
+    compute_classification_metrics: 
+    classification_n_classes: 
+    classification_positive_class: 
+    classification_betas: 
+    model: curie
+    trainingFile: file-181a1cbdcdcf4677ada87f63a0928099
+    validationFile: 
+  Content-Type: application/json
+responses:
+  201:
+    headers:
+      Location: https://aoairesource.openai.azure.com/openai/fine-tunes/ft-72a2792ef7d24ba7b82c7fe4a37e379f
+    body:
+      hyperparams:
+        compute_classification_metrics: 
+        classification_n_classes: 
+        classification_positive_class: 
+        classification_betas: 
+        batchSize: 32
+        learningRateMultiplier: 1
+        numberOfEpochs: 2
+        promptLossWeight: 0.1
+      suffix: 
+      error: 
+      status: pending
+      model: curie
+      fine_tuned_model: 
+      training_files:
+      - statistics:
+          tokens: 42
+          examples: 23
+        status_details: 
+        status: processed
+        bytes: 140
+        purpose: fine-tune
+        filename: puppy.jsonl
+        id: file-181a1cbdcdcf4677ada87f63a0928099
+        created_at: 1646126127
+        updated_at: 1646127311
+        object: file
+      validation_files: 
+      result_files: 
+      events: 
+      organization_id: 
+      user_id: 
+      id: ft-72a2792ef7d24ba7b82c7fe4a37e379f
+      created_at: 1646126127
+      updated_at: 1646127311
+      object: fine-tune

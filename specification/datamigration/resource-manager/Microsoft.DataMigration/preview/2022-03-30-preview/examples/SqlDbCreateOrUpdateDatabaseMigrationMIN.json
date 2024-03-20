@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "sqlDbInstanceName": "sqldbinstance",
+    "targetDbName": "db1",
+    "api-version": "2022-03-30-preview",
+    "parameters": {
+      "properties": {
+        "kind": "SqlDb",
+        "sourceDatabaseName": "aaa",
+        "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/servers/sqldbinstance",
+        "migrationService": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DataMigration/sqlMigrationServices/testagent",
+        "targetSqlConnection": {
+          "dataSource": "sqldbinstance",
+          "userName": "bbb",
+          "password": "placeholder",
+          "encryptConnection": true,
+          "trustServerCertificate": true,
+          "authentication": "SqlAuthentication"
+        },
+        "sourceSqlConnection": {
+          "dataSource": "aaa",
+          "userName": "bbb",
+          "password": "placeholder",
+          "encryptConnection": true,
+          "trustServerCertificate": true,
+          "authentication": "WindowsAuthentication"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "offlineConfiguration": {
+            "offline": true
+          },
+          "kind": "SqlDb",
+          "migrationStatus": "InProgress",
+          "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/servers/sqldbinstance",
+          "migrationService": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DataMigration/sqlMigrationServices/testagent",
+          "provisioningState": "Succeeded",
+          "startedOn": "0001-01-01T08:00:00Z",
+          "endedOn": "0001-01-01T08:00:00Z",
+          "sourceServerName": "sourceserver",
+          "sourceDatabaseName": "sourcename",
+          "migrationOperationId": "858ba109-5ab7-4fa1-8aea-bea487cacdcd"
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/servers/sqldbinstance/providers/Microsoft.DataMigration/databaseMigrations/db1",
+        "name": "db1",
+        "type": "Microsoft.DataMigration/databaseMigrations"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "offlineConfiguration": {
+            "offline": true
+          },
+          "kind": "SqlDb",
+          "migrationStatus": "InProgress",
+          "scope": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/servers/sqldbinstance",
+          "migrationService": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.DataMigration/sqlMigrationServices/testagent",
+          "provisioningState": "Succeeded",
+          "startedOn": "0001-01-01T08:00:00Z",
+          "endedOn": "0001-01-01T08:00:00Z",
+          "sourceServerName": "sourceserver",
+          "sourceDatabaseName": "sourcename",
+          "migrationOperationId": "858ba109-5ab7-4fa1-8aea-bea487cacdcd"
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/servers/sqldbinstance/providers/Microsoft.DataMigration/databaseMigrations/db1",
+        "name": "db1",
+        "type": "Microsoft.DataMigration/databaseMigrations"
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "overrides": [
+    {
+      "files": [
+        "specification/**/*.json",
+        "documentation/swagger-bootstrap.json",
+        "documentation/samplefiles/**/*.json"
+      ],
+      "options": {
+        "plugins": [
+          "./scripts/prettier-swagger-plugin.js"
+        ],
+        "parser": "json-swagger",
+        "printWidth": 20,
+        "endOfLine": "auto"
+      }
+    },
+    {
+      "files": [
+        "**/*.json"
+      ],
+      "options": {
+        "parser": "json",
+        "printWidth": 20,
+        "endOfLine": "auto"
+      },
+      "excludeFiles": [
+        "specification/**/*.json"
+      ]
+    },
+    {
+      "files": [
+        "**/*.ts"
+      ],
+      "options": {
+        "arrowParens": "always",
+        "bracketSpacing": true,
+        "endOfLine": "lf",
+        "printWidth": 100,
+        "semi": true,
+        "singleQuote": false,
+        "tabWidth": 2
+      }
+    }
+  ]
+}

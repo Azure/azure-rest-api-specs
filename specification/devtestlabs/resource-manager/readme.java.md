@@ -30,7 +30,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2018-09' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.devtestlabs.v2018_09_15
-  output-folder: $(azure-libraries-for-java-folder)/devtestlabs/resource-manager/v2018_09_15
+  output-folder: $(azure-libraries-for-java-folder)/sdk/devtestlabs/mgmt-v2018_09_15
 regenerate-manager: true
 generate-interface: true
 ```
@@ -43,7 +43,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2016-05' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.devtestlabs.v2016_05_15
-  output-folder: $(azure-libraries-for-java-folder)/devtestlabs/resource-manager/v2016_05_15
+  output-folder: $(azure-libraries-for-java-folder)/sdk/devtestlabs/mgmt-v2016_05_15
 regenerate-manager: true
 generate-interface: true
 ```
@@ -56,7 +56,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2015-05-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.devtestlabs.v2015_05_21_preview
-  output-folder: $(azure-libraries-for-java-folder)/devtestlabs/resource-manager/v2015_05_21_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/devtestlabs/mgmt-v2015_05_21_preview
 regenerate-manager: true
 generate-interface: true
 ```

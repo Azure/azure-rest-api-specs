@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2021-06-01",
+    "virtualMachineName": "testVm1",
+    "resourceGroupName": "testRg1",
+    "subscriptionId": "d90d145a-4cdd-45a3-b2c4-971d69775278"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.RecoveryServices/replicationEligibilityResults",
+        "id": "/subscriptions/d90d145a-4cdd-45a3-b2c4-971d69775278/resourceGroups/testRg1/providers/Microsoft.Compute/virtualMachines/testVm1/providers/Microsoft.RecoveryServices/replicationEligibilityResults/default",
+        "properties": {
+          "clientRequestId": "7d72ade7-b9f7-4d9b-8a19-15d9728c6190",
+          "errors": [
+            {
+              "code": "A2AOperatingSystemNotSupported",
+              "message": "The A2A operation could not be completed as the virtual machine is running OS 'ubuntu' with version '18.04' which is not supported for replication.",
+              "possibleCauses": "OS version not supported.",
+              "recommendedAction": "The virtual machine is running unsupported Operating system. Refer to the documentation for supported OS versions - https://aka.ms/a2a-os-support-matrix.",
+              "status": "Error"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

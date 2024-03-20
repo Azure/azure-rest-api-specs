@@ -1,0 +1,6907 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Metrics Advisor",
+    "description": "Microsoft Azure Metrics Advisor REST API (OpenAPI v2)",
+    "version": "1.0"
+  },
+  "paths": {
+    "/stats/latest": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "Get latest usage stats",
+        "operationId": "getActiveSeriesCount",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/UsageStats"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get latest usage stats": {
+            "$ref": "./examples/getActiveSeriesCount.json"
+          }
+        }
+      }
+    },
+    "/alert/anomaly/configurations/{configurationId}": {
+      "get": {
+        "tags": [
+          "AnomalyAlerting"
+        ],
+        "summary": "Query a single anomaly alerting configuration",
+        "operationId": "getAnomalyAlertingConfiguration",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly alerting configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AnomalyAlertingConfiguration"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query a single anomaly alerting configuration": {
+            "$ref": "./examples/getAnomalyAlertingConfiguration.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AnomalyAlerting"
+        ],
+        "summary": "Update anomaly alerting configuration",
+        "operationId": "updateAnomalyAlertingConfiguration",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly alerting configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "anomaly alerting configuration",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnomalyAlertingConfigurationPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AnomalyAlertingConfiguration"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update anomaly alerting configuration": {
+            "$ref": "./examples/updateAnomalyAlertingConfiguration.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AnomalyAlerting"
+        ],
+        "summary": "Delete anomaly alerting configuration",
+        "operationId": "deleteAnomalyAlertingConfiguration",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly alerting configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The resource is deleted successfully or does not exist."
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete anomaly alerting configuration": {
+            "$ref": "./examples/deleteAnomalyAlertingConfiguration.json"
+          }
+        }
+      }
+    },
+    "/alert/anomaly/configurations": {
+      "post": {
+        "tags": [
+          "AnomalyAlerting"
+        ],
+        "summary": "Create anomaly alerting configuration",
+        "operationId": "createAnomalyAlertingConfiguration",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "anomaly alerting configuration",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnomalyAlertingConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "headers": {
+              "Location": {
+                "description": "Location of the newly created resource.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create anomaly alerting configuration": {
+            "$ref": "./examples/createAnomalyAlertingConfiguration.json"
+          }
+        }
+      }
+    },
+    "/alert/anomaly/configurations/{configurationId}/alerts/query": {
+      "post": {
+        "tags": [
+          "AnomalyAlerting"
+        ],
+        "summary": "Query alerts under anomaly alerting configuration",
+        "operationId": "getAlertsByAnomalyAlertingConfiguration",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly alerting configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "description": "for paging, skipped number",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$maxpagesize",
+            "description": "the maximum number of items in one page",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "query alerting result request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AlertingResultQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AlertResultList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        },
+        "x-ms-examples": {
+          "Query alerts under anomaly alerting configuration": {
+            "$ref": "./examples/getAlertsByAnomalyAlertingConfiguration.json"
+          }
+        }
+      }
+    },
+    "/alert/anomaly/configurations/{configurationId}/alerts/{alertId}/anomalies": {
+      "get": {
+        "tags": [
+          "AnomalyAlerting"
+        ],
+        "summary": "Query anomalies under a specific alert",
+        "operationId": "getAnomaliesFromAlertByAnomalyAlertingConfiguration",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly alerting configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "path",
+            "name": "alertId",
+            "description": "alert id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "description": "for paging, skipped number",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$maxpagesize",
+            "description": "the maximum number of items in one page",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AnomalyResultList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        },
+        "x-ms-examples": {
+          "Query anomalies under a specific alert": {
+            "$ref": "./examples/getAnomaliesFromAlertByAnomalyAlertingConfiguration.json"
+          }
+        }
+      }
+    },
+    "/alert/anomaly/configurations/{configurationId}/alerts/{alertId}/incidents": {
+      "get": {
+        "tags": [
+          "AnomalyAlerting"
+        ],
+        "summary": "Query incidents under a specific alert",
+        "operationId": "getIncidentsFromAlertByAnomalyAlertingConfiguration",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly alerting configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "path",
+            "name": "alertId",
+            "description": "alert id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "description": "for paging, skipped number",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$maxpagesize",
+            "description": "the maximum number of items in one page",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IncidentResultList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        },
+        "x-ms-examples": {
+          "Query incidents under a specific alert": {
+            "$ref": "./examples/getIncidentsFromAlertByAnomalyAlertingConfiguration.json"
+          }
+        }
+      }
+    },
+    "/enrichment/anomalyDetection/configurations/{configurationId}": {
+      "get": {
+        "tags": [
+          "AnomalyDetection"
+        ],
+        "summary": "Query a single anomaly detection configuration",
+        "operationId": "getAnomalyDetectionConfiguration",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly detection configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AnomalyDetectionConfiguration"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query a single anomaly detection configuration": {
+            "$ref": "./examples/getAnomalyDetectionConfiguration.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AnomalyDetection"
+        ],
+        "summary": "Update anomaly detection configuration",
+        "operationId": "updateAnomalyDetectionConfiguration",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly detection configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "anomaly detection configuration",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnomalyDetectionConfigurationPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AnomalyDetectionConfiguration"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update anomaly detection configuration": {
+            "$ref": "./examples/updateAnomalyDetectionConfiguration.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AnomalyDetection"
+        ],
+        "summary": "Delete anomaly detection configuration",
+        "operationId": "deleteAnomalyDetectionConfiguration",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly detection configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The resource is deleted successfully or does not exist."
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete anomaly detection configuration": {
+            "$ref": "./examples/deleteAnomalyDetectionConfiguration.json"
+          }
+        }
+      }
+    },
+    "/enrichment/anomalyDetection/configurations": {
+      "post": {
+        "tags": [
+          "AnomalyDetection"
+        ],
+        "summary": "Create anomaly detection configuration",
+        "operationId": "createAnomalyDetectionConfiguration",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "anomaly detection configuration",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnomalyDetectionConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "headers": {
+              "Location": {
+                "description": "Location of the newly created resource.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create anomaly detection configuration": {
+            "$ref": "./examples/createAnomalyDetectionConfiguration.json"
+          }
+        }
+      }
+    },
+    "/enrichment/anomalyDetection/configurations/{configurationId}/alert/anomaly/configurations": {
+      "get": {
+        "tags": [
+          "AnomalyDetection"
+        ],
+        "summary": "List all anomaly alerting configurations for specific anomaly detection configuration",
+        "operationId": "getAnomalyAlertingConfigurationsByAnomalyDetectionConfiguration",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly detection configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "description": "for paging, skipped number",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$maxpagesize",
+            "description": "the maximum number of items in one page",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AnomalyAlertingConfigurationList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        },
+        "x-ms-examples": {
+          "List all anomaly alerting configurations for specific anomaly detection configuration": {
+            "$ref": "./examples/getAnomalyAlertingConfigurationsByAnomalyDetectionConfiguration.json"
+          }
+        }
+      }
+    },
+    "/enrichment/anomalyDetection/configurations/{configurationId}/series/query": {
+      "post": {
+        "tags": [
+          "AnomalyDetection"
+        ],
+        "summary": "Query series enriched by anomaly detection",
+        "operationId": "getSeriesByAnomalyDetectionConfiguration",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly detection configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "query series detection result request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DetectionSeriesQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SeriesResultList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query series enriched by anomaly detection": {
+            "$ref": "./examples/getSeriesByAnomalyDetectionConfiguration.json"
+          }
+        }
+      }
+    },
+    "/enrichment/anomalyDetection/configurations/{configurationId}/anomalies/query": {
+      "post": {
+        "tags": [
+          "AnomalyDetection"
+        ],
+        "summary": "Query anomalies under anomaly detection configuration",
+        "operationId": "getAnomaliesByAnomalyDetectionConfiguration",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly detection configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "description": "for paging, skipped number",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$maxpagesize",
+            "description": "the maximum number of items in one page",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "query detection anomaly result request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DetectionAnomalyResultQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AnomalyResultList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        },
+        "x-ms-examples": {
+          "Query anomalies under anomaly detection configuration": {
+            "$ref": "./examples/getAnomaliesByAnomalyDetectionConfiguration.json"
+          }
+        }
+      }
+    },
+    "/enrichment/anomalyDetection/configurations/{configurationId}/anomalies/dimension/query": {
+      "post": {
+        "tags": [
+          "AnomalyDetection"
+        ],
+        "summary": "Query dimension values of anomalies",
+        "operationId": "getDimensionOfAnomaliesByAnomalyDetectionConfiguration",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly detection configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "description": "for paging, skipped number",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$maxpagesize",
+            "description": "the maximum number of items in one page",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "query dimension values request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnomalyDimensionQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AnomalyDimensionList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        },
+        "x-ms-examples": {
+          "Query dimension values of anomalies": {
+            "$ref": "./examples/getDimensionOfAnomaliesByAnomalyDetectionConfiguration.json"
+          }
+        }
+      }
+    },
+    "/enrichment/anomalyDetection/configurations/{configurationId}/incidents/query": {
+      "post": {
+        "tags": [
+          "AnomalyDetection"
+        ],
+        "summary": "Query incidents under anomaly detection configuration",
+        "operationId": "getIncidentsByAnomalyDetectionConfiguration",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly detection configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "$maxpagesize",
+            "description": "the maximum number of items in one page",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "query detection incident result request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DetectionIncidentResultQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IncidentResultList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        },
+        "x-ms-examples": {
+          "Query incidents under anomaly detection configuration": {
+            "$ref": "./examples/getIncidentsByAnomalyDetectionConfiguration.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "AnomalyDetection"
+        ],
+        "summary": "Query incidents under anomaly detection configuration",
+        "operationId": "getIncidentsByAnomalyDetectionConfigurationNextPages",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly detection configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "$maxpagesize",
+            "description": "the maximum number of items in one page",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$token",
+            "description": "the token for getting the next page",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IncidentResultList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        },
+        "x-ms-examples": {
+          "Query incidents under anomaly detection configuration": {
+            "$ref": "./examples/getIncidentsByAnomalyDetectionConfigurationNextPages.json"
+          }
+        }
+      }
+    },
+    "/enrichment/anomalyDetection/configurations/{configurationId}/incidents/{incidentId}/rootCause": {
+      "get": {
+        "tags": [
+          "AnomalyDetection"
+        ],
+        "summary": "Query root cause for incident",
+        "operationId": "getRootCauseOfIncidentByAnomalyDetectionConfiguration",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "configurationId",
+            "description": "anomaly detection configuration unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "path",
+            "name": "incidentId",
+            "description": "incident id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RootCauseList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query root cause for incident": {
+            "$ref": "./examples/getRootCauseOfIncidentByAnomalyDetectionConfiguration.json"
+          }
+        }
+      }
+    },
+    "/credentials": {
+      "post": {
+        "tags": [
+          "Credential"
+        ],
+        "summary": "Create a new data source credential",
+        "operationId": "createCredential",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Create data source credential request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataSourceCredential"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "headers": {
+              "Location": {
+                "description": "Location of the newly created resource.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a new data source credential": {
+            "$ref": "./examples/createCredential.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Credential"
+        ],
+        "summary": "List all credentials",
+        "operationId": "listCredentials",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$skip",
+            "description": "for paging, skipped number",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$maxpagesize",
+            "description": "the maximum number of items in one page",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataSourceCredentialList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        },
+        "x-ms-examples": {
+          "List all credentials": {
+            "$ref": "./examples/listCredentials.json"
+          }
+        }
+      }
+    },
+    "/credentials/{credentialId}": {
+      "patch": {
+        "tags": [
+          "Credential"
+        ],
+        "summary": "Update a data source credential",
+        "operationId": "updateCredential",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "credentialId",
+            "description": "Data source credential unique ID",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Update data source credential request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataSourceCredentialPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataSourceCredential"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a data source credential": {
+            "$ref": "./examples/updateCredential.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Credential"
+        ],
+        "summary": "Delete a data source credential",
+        "operationId": "deleteCredential",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "credentialId",
+            "description": "Data source credential unique ID",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The resource is deleted successfully or does not exist."
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a data source credential": {
+            "$ref": "./examples/deleteCredential.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Credential"
+        ],
+        "summary": "Get a data source credential",
+        "operationId": "getCredential",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "credentialId",
+            "description": "Data source credential unique ID",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataSourceCredential"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a data source credential": {
+            "$ref": "./examples/getCredential.json"
+          }
+        }
+      }
+    },
+    "/dataFeeds": {
+      "get": {
+        "tags": [
+          "DataFeed"
+        ],
+        "summary": "List all data feeds",
+        "operationId": "listDataFeeds",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "dataFeedName",
+            "description": "filter data feed by its name",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "dataSourceType",
+            "description": "filter data feed by its source type",
+            "type": "string",
+            "enum": [
+              "AzureApplicationInsights",
+              "AzureBlob",
+              "AzureCosmosDB",
+              "AzureDataExplorer",
+              "AzureDataLakeStorageGen2",
+              "AzureEventHubs",
+              "AzureLogAnalytics",
+              "AzureTable",
+              "InfluxDB",
+              "MongoDB",
+              "MySql",
+              "PostgreSql",
+              "SqlServer"
+            ],
+            "x-ms-enum": {
+              "name": "DataSourceType",
+              "modelAsString": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "granularityName",
+            "description": "filter data feed by its granularity",
+            "type": "string",
+            "enum": [
+              "Yearly",
+              "Monthly",
+              "Weekly",
+              "Daily",
+              "Hourly",
+              "Minutely",
+              "Custom"
+            ],
+            "x-ms-enum": {
+              "name": "Granularity",
+              "modelAsString": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "description": "filter data feed by its status",
+            "type": "string",
+            "enum": [
+              "Active",
+              "Paused"
+            ],
+            "x-ms-enum": {
+              "name": "EntityStatus",
+              "modelAsString": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "creator",
+            "description": "filter data feed by its creator",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "description": "for paging, skipped number",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$maxpagesize",
+            "description": "the maximum number of items in one page",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataFeedList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        },
+        "x-ms-examples": {
+          "List all data feeds": {
+            "$ref": "./examples/listDataFeeds.json"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "DataFeed"
+        ],
+        "summary": "Create a new data feed",
+        "operationId": "createDataFeed",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "parameters to create a data feed",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataFeedDetail"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "headers": {
+              "Location": {
+                "description": "Location of the newly created resource.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a new data feed": {
+            "$ref": "./examples/createDataFeed.json"
+          }
+        }
+      }
+    },
+    "/dataFeeds/{dataFeedId}": {
+      "get": {
+        "tags": [
+          "DataFeed"
+        ],
+        "summary": "Get a data feed by its id",
+        "operationId": "getDataFeedById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataFeedId",
+            "description": "The data feed unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataFeedDetail"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a data feed by its id": {
+            "$ref": "./examples/getDataFeedById.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DataFeed"
+        ],
+        "summary": "Update a data feed",
+        "operationId": "updateDataFeed",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataFeedId",
+            "description": "The data feed unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "parameters to update a data feed",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataFeedDetailPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataFeedDetail"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a data feed": {
+            "$ref": "./examples/updateDataFeed.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataFeed"
+        ],
+        "summary": "Delete a data feed",
+        "operationId": "deleteDataFeed",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataFeedId",
+            "description": "The data feed unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The resource is deleted successfully or does not exist."
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a data feed": {
+            "$ref": "./examples/deleteDataFeed.json"
+          }
+        }
+      }
+    },
+    "/feedback/metric/{feedbackId}": {
+      "get": {
+        "tags": [
+          "Feedback"
+        ],
+        "summary": "Get a metric feedback by its id",
+        "operationId": "getMetricFeedback",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "feedbackId",
+            "description": "the unique feedback ID",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MetricFeedback"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a metric feedback by its id": {
+            "$ref": "./examples/getMetricFeedback.json"
+          }
+        }
+      }
+    },
+    "/feedback/metric/query": {
+      "post": {
+        "tags": [
+          "Feedback"
+        ],
+        "summary": "List feedback on the given metric",
+        "operationId": "listMetricFeedbacks",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$skip",
+            "description": "for paging, skipped number",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$maxpagesize",
+            "description": "the maximum number of items in one page",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "metric feedback filter",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MetricFeedbackFilter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MetricFeedbackList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        },
+        "x-ms-examples": {
+          "List feedback on the given metric": {
+            "$ref": "./examples/listMetricFeedbacks.json"
+          }
+        }
+      }
+    },
+    "/feedback/metric": {
+      "post": {
+        "tags": [
+          "Feedback"
+        ],
+        "summary": "Create a new metric feedback",
+        "operationId": "createMetricFeedback",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "metric feedback",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MetricFeedback"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "headers": {
+              "Location": {
+                "description": "Location of the newly created resource.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a new metric feedback": {
+            "$ref": "./examples/createMetricFeedback.json"
+          }
+        }
+      }
+    },
+    "/hooks": {
+      "get": {
+        "tags": [
+          "Hook"
+        ],
+        "summary": "List all hooks",
+        "operationId": "listHooks",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "hookName",
+            "description": "filter hook by its name",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "description": "for paging, skipped number",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$maxpagesize",
+            "description": "the maximum number of items in one page",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/HookList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        },
+        "x-ms-examples": {
+          "List all hooks": {
+            "$ref": "./examples/listHooks.json"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Hook"
+        ],
+        "summary": "Create a new hook",
+        "operationId": "createHook",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Create hook request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HookInfo"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "headers": {
+              "Location": {
+                "description": "Location of the newly created resource.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a new hook": {
+            "$ref": "./examples/createHook.json"
+          }
+        }
+      }
+    },
+    "/hooks/{hookId}": {
+      "get": {
+        "tags": [
+          "Hook"
+        ],
+        "summary": "Get a hook by its id",
+        "operationId": "getHook",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hookId",
+            "description": "Hook unique ID",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/HookInfo"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a hook by its id": {
+            "$ref": "./examples/getHook.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Hook"
+        ],
+        "summary": "Update a hook",
+        "operationId": "updateHook",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hookId",
+            "description": "Hook unique ID",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Update hook request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HookInfoPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/HookInfo"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a hook": {
+            "$ref": "./examples/updateHook.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Hook"
+        ],
+        "summary": "Delete a hook",
+        "operationId": "deleteHook",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hookId",
+            "description": "Hook unique ID",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The resource is deleted successfully or does not exist."
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a hook": {
+            "$ref": "./examples/deleteHook.json"
+          }
+        }
+      }
+    },
+    "/dataFeeds/{dataFeedId}/ingestionStatus/query": {
+      "post": {
+        "tags": [
+          "IngestionStatus"
+        ],
+        "summary": "Get data ingestion status by data feed",
+        "operationId": "getDataFeedIngestionStatus",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataFeedId",
+            "description": "The data feed unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "description": "for paging, skipped number",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$maxpagesize",
+            "description": "the maximum number of items in one page",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The query time range",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IngestionStatusQueryOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IngestionStatusList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        },
+        "x-ms-examples": {
+          "Get data ingestion status by data feed": {
+            "$ref": "./examples/getDataFeedIngestionStatus.json"
+          }
+        }
+      }
+    },
+    "/dataFeeds/{dataFeedId}/ingestionProgress/reset": {
+      "post": {
+        "tags": [
+          "IngestionStatus"
+        ],
+        "summary": "Reset data ingestion status by data feed to backfill data",
+        "operationId": "resetDataFeedIngestionStatus",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataFeedId",
+            "description": "The data feed unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The backfill time range",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IngestionProgressResetOptions"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reset data ingestion status by data feed to backfill data": {
+            "$ref": "./examples/resetDataFeedIngestionStatus.json"
+          }
+        }
+      }
+    },
+    "/dataFeeds/{dataFeedId}/ingestionProgress": {
+      "get": {
+        "tags": [
+          "IngestionStatus"
+        ],
+        "summary": "Get data last success ingestion job timestamp by data feed",
+        "operationId": "getIngestionProgress",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dataFeedId",
+            "description": "The data feed unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataFeedIngestionProgress"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get data last success ingestion job timestamp by data feed": {
+            "$ref": "./examples/getIngestionProgress.json"
+          }
+        }
+      }
+    },
+    "/metrics/{metricId}/data/query": {
+      "post": {
+        "tags": [
+          "Metric"
+        ],
+        "summary": "Get time series data from metric",
+        "operationId": "getMetricData",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "metricId",
+            "description": "metric unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "query time series data condition",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MetricDataQueryOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MetricDataList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get time series data from metric": {
+            "$ref": "./examples/getMetricData.json"
+          }
+        }
+      }
+    },
+    "/metrics/{metricId}/series/query": {
+      "post": {
+        "tags": [
+          "Metric"
+        ],
+        "summary": "List series (dimension combinations) from metric",
+        "operationId": "getMetricSeries",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "metricId",
+            "description": "metric unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "description": "for paging, skipped number",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$maxpagesize",
+            "description": "the maximum number of items in one page",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "filter to query series",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MetricSeriesQueryOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MetricSeriesList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        },
+        "x-ms-examples": {
+          "List series (dimension combinations) from metric": {
+            "$ref": "./examples/getMetricSeries.json"
+          }
+        }
+      }
+    },
+    "/metrics/{metricId}/dimension/query": {
+      "post": {
+        "tags": [
+          "Metric"
+        ],
+        "summary": "List dimension from certain metric",
+        "operationId": "getMetricDimension",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "metricId",
+            "description": "metric unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "description": "for paging, skipped number",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$maxpagesize",
+            "description": "the maximum number of items in one page",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "query dimension option",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MetricDimensionQueryOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/MetricDimensionList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        },
+        "x-ms-examples": {
+          "List dimension from certain metric": {
+            "$ref": "./examples/getMetricDimension.json"
+          }
+        }
+      }
+    },
+    "/metrics/{metricId}/enrichment/anomalyDetection/configurations": {
+      "get": {
+        "tags": [
+          "Metric"
+        ],
+        "summary": "List all anomaly detection configurations for specific metric",
+        "operationId": "getAnomalyDetectionConfigurationsByMetric",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "metricId",
+            "description": "metric unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "description": "for paging, skipped number",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$maxpagesize",
+            "description": "the maximum number of items in one page",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AnomalyDetectionConfigurationList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        },
+        "x-ms-examples": {
+          "List all anomaly detection configurations for specific metric": {
+            "$ref": "./examples/getAnomalyDetectionConfigurationsByMetric.json"
+          }
+        }
+      }
+    },
+    "/metrics/{metricId}/status/enrichment/anomalyDetection/query": {
+      "post": {
+        "tags": [
+          "Metric"
+        ],
+        "summary": "Query anomaly detection status",
+        "operationId": "getEnrichmentStatusByMetric",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "metricId",
+            "description": "metric unique id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "description": "for paging, skipped number",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$maxpagesize",
+            "description": "the maximum number of items in one page",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "query options",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnrichmentStatusQueryOption"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnrichmentStatusList"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorCode"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        },
+        "x-ms-examples": {
+          "Query anomaly detection status": {
+            "$ref": "./examples/getEnrichmentStatusByMetric.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "UsageStats": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "format": "date-time",
+          "description": "The timestamp of the stats",
+          "type": "string",
+          "readOnly": true
+        },
+        "activeSeriesCount": {
+          "format": "int32",
+          "description": "The active series count",
+          "type": "integer",
+          "readOnly": true
+        },
+        "allSeriesCount": {
+          "format": "int32",
+          "description": "All series count under non deleted data feed",
+          "type": "integer",
+          "readOnly": true
+        },
+        "metricsCount": {
+          "format": "int32",
+          "description": "The metrics count under non deleted data feed",
+          "type": "integer",
+          "readOnly": true
+        },
+        "dataFeedCount": {
+          "format": "int32",
+          "description": "The count of non deleted data feed",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorCode": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        }
+      }
+    },
+    "DimensionGroupIdentity": {
+      "required": [
+        "dimension"
+      ],
+      "type": "object",
+      "properties": {
+        "dimension": {
+          "description": "dimension specified for series group",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TopNGroupScope": {
+      "required": [
+        "minTopCount",
+        "period",
+        "top"
+      ],
+      "type": "object",
+      "properties": {
+        "top": {
+          "format": "int32",
+          "description": "top N, value range : [1, +∞)",
+          "type": "integer"
+        },
+        "period": {
+          "format": "int32",
+          "description": "point count used to look back, value range : [1, +∞)",
+          "type": "integer"
+        },
+        "minTopCount": {
+          "format": "int32",
+          "description": "min count should be in top N, value range : [1, +∞)\r\n\r\nshould be less than or equal to period",
+          "type": "integer"
+        }
+      }
+    },
+    "SeverityCondition": {
+      "required": [
+        "maxAlertSeverity",
+        "minAlertSeverity"
+      ],
+      "type": "object",
+      "properties": {
+        "minAlertSeverity": {
+          "description": "min alert severity",
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Severity",
+            "modelAsString": true
+          }
+        },
+        "maxAlertSeverity": {
+          "description": "max alert severity",
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Severity",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "AlertSnoozeCondition": {
+      "required": [
+        "autoSnooze",
+        "onlyForSuccessive",
+        "snoozeScope"
+      ],
+      "type": "object",
+      "properties": {
+        "autoSnooze": {
+          "format": "int32",
+          "description": "snooze point count, value range : [0, +∞)",
+          "type": "integer"
+        },
+        "snoozeScope": {
+          "description": "snooze scope",
+          "enum": [
+            "Metric",
+            "Series"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SnoozeScope",
+            "modelAsString": true
+          }
+        },
+        "onlyForSuccessive": {
+          "description": "only snooze for successive anomalies",
+          "type": "boolean"
+        }
+      }
+    },
+    "ValueCondition": {
+      "required": [
+        "direction"
+      ],
+      "type": "object",
+      "properties": {
+        "lower": {
+          "format": "double",
+          "description": "lower bound\r\n\r\nshould be specified when direction is Both or Down",
+          "type": "number"
+        },
+        "upper": {
+          "format": "double",
+          "description": "upper bound\r\n\r\nshould be specified when direction is Both or Up",
+          "type": "number"
+        },
+        "direction": {
+          "description": "value filter direction",
+          "enum": [
+            "Both",
+            "Down",
+            "Up"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Direction",
+            "modelAsString": true
+          }
+        },
+        "type": {
+          "description": "data used to implement value filter",
+          "default": "Value",
+          "enum": [
+            "Value",
+            "Mean"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ValueType",
+            "modelAsString": true
+          }
+        },
+        "metricId": {
+          "format": "uuid",
+          "description": "the other metric unique id used for value filter",
+          "type": "string"
+        },
+        "triggerForMissing": {
+          "description": "trigger alert when the corresponding point is missing in the other metric\r\n\r\nshould be specified only when using other metric to filter",
+          "type": "boolean"
+        }
+      }
+    },
+    "MetricAlertingConfiguration": {
+      "required": [
+        "anomalyDetectionConfigurationId",
+        "anomalyScopeType"
+      ],
+      "type": "object",
+      "properties": {
+        "anomalyDetectionConfigurationId": {
+          "format": "uuid",
+          "description": "Anomaly detection configuration unique id",
+          "type": "string"
+        },
+        "anomalyScopeType": {
+          "description": "Anomaly scope",
+          "enum": [
+            "All",
+            "Dimension",
+            "TopN"
+          ],
+          "type": "string",
+          "example": "All",
+          "x-ms-enum": {
+            "name": "AnomalyScope",
+            "modelAsString": true
+          }
+        },
+        "negationOperation": {
+          "description": "Negation operation",
+          "default": false,
+          "type": "boolean"
+        },
+        "dimensionAnomalyScope": {
+          "$ref": "#/definitions/DimensionGroupIdentity"
+        },
+        "topNAnomalyScope": {
+          "$ref": "#/definitions/TopNGroupScope"
+        },
+        "severityFilter": {
+          "$ref": "#/definitions/SeverityCondition"
+        },
+        "snoozeFilter": {
+          "$ref": "#/definitions/AlertSnoozeCondition"
+        },
+        "valueFilter": {
+          "$ref": "#/definitions/ValueCondition"
+        }
+      }
+    },
+    "AnomalyAlertingConfiguration": {
+      "required": [
+        "hookIds",
+        "metricAlertingConfigurations",
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "anomalyAlertingConfigurationId": {
+          "format": "uuid",
+          "description": "anomaly alerting configuration unique id",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "anomaly alerting configuration name",
+          "type": "string"
+        },
+        "description": {
+          "description": "anomaly alerting configuration description",
+          "default": "",
+          "type": "string"
+        },
+        "crossMetricsOperator": {
+          "description": "cross metrics operator\r\n\r\nshould be specified when setting up multiple metric alerting configurations",
+          "enum": [
+            "AND",
+            "OR",
+            "XOR"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AnomalyAlertingConfigurationLogicType",
+            "modelAsString": true
+          }
+        },
+        "splitAlertByDimensions": {
+          "description": "dimensions used to split alert",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hookIds": {
+          "description": "hook unique ids",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "metricAlertingConfigurations": {
+          "description": "Anomaly alerting configurations",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricAlertingConfiguration"
+          }
+        }
+      },
+      "example": {
+        "name": "alerting configuration name",
+        "crossMetricsOperator": "AND",
+        "hookIds": [
+          "00000000-0000-0000-0000-000000000001"
+        ],
+        "metricAlertingConfigurations": [
+          {
+            "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
+            "anomalyScopeType": "All",
+            "negationOperation": false,
+            "severityFilter": {
+              "minAlertSeverity": "Medium",
+              "maxAlertSeverity": "High"
+            },
+            "snoozeFilter": {
+              "autoSnooze": 0,
+              "snoozeScope": "Series",
+              "onlyForSuccessive": true
+            }
+          },
+          {
+            "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000002",
+            "anomalyScopeType": "Dimension",
+            "negationOperation": false,
+            "dimensionAnomalyScope": {
+              "dimension": {
+                "city": "Beijing"
+              }
+            },
+            "severityFilter": {
+              "minAlertSeverity": "Low",
+              "maxAlertSeverity": "High"
+            },
+            "snoozeFilter": {
+              "autoSnooze": 0,
+              "snoozeScope": "Series",
+              "onlyForSuccessive": true
+            },
+            "valueFilter": {
+              "lower": 0.0,
+              "upper": 1000.0,
+              "direction": "Both",
+              "type": "Value"
+            }
+          }
+        ]
+      }
+    },
+    "AnomalyAlertingConfigurationPatch": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Anomaly alerting configuration name",
+          "type": "string"
+        },
+        "description": {
+          "description": "anomaly alerting configuration description",
+          "default": "",
+          "type": "string"
+        },
+        "crossMetricsOperator": {
+          "description": "cross metrics operator",
+          "enum": [
+            "AND",
+            "OR",
+            "XOR"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AnomalyAlertingConfigurationLogicType",
+            "modelAsString": true
+          }
+        },
+        "splitAlertByDimensions": {
+          "description": "dimensions used to split alert",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hookIds": {
+          "description": "hook unique ids",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "metricAlertingConfigurations": {
+          "description": "Anomaly alerting configurations",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricAlertingConfiguration"
+          }
+        }
+      },
+      "example": {
+        "name": "alerting configuration name",
+        "description": "this is an anomaly alerting configuration",
+        "crossMetricsOperator": "AND",
+        "hookIds": [
+          "00000000-0000-0000-0000-000000000001"
+        ],
+        "metricAlertingConfigurations": [
+          {
+            "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
+            "anomalyScopeType": "All",
+            "negationOperation": false,
+            "severityFilter": {
+              "minAlertSeverity": "Medium",
+              "maxAlertSeverity": "High"
+            },
+            "snoozeFilter": {
+              "autoSnooze": 0,
+              "snoozeScope": "Series",
+              "onlyForSuccessive": true
+            }
+          },
+          {
+            "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000002",
+            "anomalyScopeType": "Dimension",
+            "negationOperation": false,
+            "dimensionAnomalyScope": {
+              "dimension": {
+                "city": "Beijing"
+              }
+            },
+            "severityFilter": {
+              "minAlertSeverity": "Low",
+              "maxAlertSeverity": "High"
+            },
+            "snoozeFilter": {
+              "autoSnooze": 0,
+              "snoozeScope": "Series",
+              "onlyForSuccessive": true
+            },
+            "valueFilter": {
+              "lower": 0.0,
+              "upper": 1000.0,
+              "direction": "Both"
+            }
+          }
+        ]
+      }
+    },
+    "AlertingResultQuery": {
+      "required": [
+        "endTime",
+        "startTime",
+        "timeMode"
+      ],
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "description": "start time",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "end time",
+          "type": "string"
+        },
+        "timeMode": {
+          "description": "time mode",
+          "enum": [
+            "AnomalyTime",
+            "CreatedTime",
+            "ModifiedTime"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TimeMode",
+            "modelAsString": true
+          }
+        }
+      },
+      "example": {
+        "startTime": "2020-01-01T00:00:00Z",
+        "endTime": "2020-02-01T00:00:00Z",
+        "timeMode": "AnomalyTime"
+      }
+    },
+    "AlertResult": {
+      "type": "object",
+      "properties": {
+        "alertId": {
+          "description": "alert id",
+          "type": "string",
+          "readOnly": true
+        },
+        "timestamp": {
+          "format": "date-time",
+          "description": "anomaly time",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdTime": {
+          "format": "date-time",
+          "description": "created time",
+          "type": "string",
+          "readOnly": true
+        },
+        "modifiedTime": {
+          "format": "date-time",
+          "description": "modified time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AlertResultList": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "@nextLink": {
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlertResult"
+          }
+        }
+      }
+    },
+    "AnomalyProperty": {
+      "required": [
+        "anomalySeverity"
+      ],
+      "type": "object",
+      "properties": {
+        "anomalySeverity": {
+          "description": "anomaly severity",
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Severity",
+            "modelAsString": true
+          }
+        },
+        "anomalyStatus": {
+          "description": "anomaly status\r\n\r\nonly return for alerting anomaly result",
+          "enum": [
+            "Active",
+            "Resolved"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AnomalyStatus",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "format": "double",
+          "description": "value of the anomaly",
+          "type": "number",
+          "readOnly": true
+        },
+        "expectedValue": {
+          "format": "double",
+          "description": "expected value of the anomaly given by smart detector",
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "AnomalyResult": {
+      "required": [
+        "dimension",
+        "property",
+        "timestamp"
+      ],
+      "type": "object",
+      "properties": {
+        "dataFeedId": {
+          "format": "uuid",
+          "description": "data feed unique id\r\n\r\nonly return for alerting anomaly result",
+          "type": "string",
+          "readOnly": true
+        },
+        "metricId": {
+          "format": "uuid",
+          "description": "metric unique id\r\n\r\nonly return for alerting anomaly result",
+          "type": "string",
+          "readOnly": true
+        },
+        "anomalyDetectionConfigurationId": {
+          "format": "uuid",
+          "description": "anomaly detection configuration unique id\r\n\r\nonly return for alerting anomaly result",
+          "type": "string",
+          "readOnly": true
+        },
+        "timestamp": {
+          "format": "date-time",
+          "description": "anomaly time",
+          "type": "string"
+        },
+        "createdTime": {
+          "format": "date-time",
+          "description": "created time\r\n\r\nonly return for alerting result",
+          "type": "string",
+          "readOnly": true
+        },
+        "modifiedTime": {
+          "format": "date-time",
+          "description": "modified time\r\n\r\nonly return for alerting result",
+          "type": "string",
+          "readOnly": true
+        },
+        "dimension": {
+          "description": "dimension specified for series",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "property": {
+          "$ref": "#/definitions/AnomalyProperty"
+        }
+      }
+    },
+    "AnomalyResultList": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "@nextLink": {
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnomalyResult"
+          }
+        }
+      }
+    },
+    "SeriesIdentity": {
+      "required": [
+        "dimension"
+      ],
+      "type": "object",
+      "properties": {
+        "dimension": {
+          "description": "dimension specified for series",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "IncidentProperty": {
+      "required": [
+        "maxSeverity"
+      ],
+      "type": "object",
+      "properties": {
+        "maxSeverity": {
+          "description": "max severity of latest anomalies in the incident",
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Severity",
+            "modelAsString": true
+          }
+        },
+        "incidentStatus": {
+          "description": "incident status\r\n\r\nonly return for alerting incident result",
+          "enum": [
+            "Active",
+            "Resolved"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "IncidentStatus",
+            "modelAsString": true
+          }
+        },
+        "valueOfRootNode": {
+          "format": "double",
+          "description": "value of the root node",
+          "type": "number",
+          "readOnly": true
+        },
+        "expectedValueOfRootNode": {
+          "format": "double",
+          "description": "expected value of the root node given by smart detector",
+          "type": "number",
+          "readOnly": true
+        }
+      }
+    },
+    "IncidentResult": {
+      "required": [
+        "incidentId",
+        "lastTime",
+        "property",
+        "rootNode",
+        "startTime"
+      ],
+      "type": "object",
+      "properties": {
+        "dataFeedId": {
+          "format": "uuid",
+          "description": "data feed unique id\r\n\r\nonly return for alerting anomaly result",
+          "type": "string",
+          "readOnly": true
+        },
+        "metricId": {
+          "format": "uuid",
+          "description": "metric unique id\r\n\r\nonly return for alerting incident result",
+          "type": "string",
+          "readOnly": true
+        },
+        "anomalyDetectionConfigurationId": {
+          "format": "uuid",
+          "description": "anomaly detection configuration unique id\r\n\r\nonly return for alerting incident result",
+          "type": "string",
+          "readOnly": true
+        },
+        "incidentId": {
+          "description": "incident id",
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "incident start time",
+          "type": "string"
+        },
+        "lastTime": {
+          "format": "date-time",
+          "description": "incident last time",
+          "type": "string"
+        },
+        "rootNode": {
+          "$ref": "#/definitions/SeriesIdentity"
+        },
+        "property": {
+          "$ref": "#/definitions/IncidentProperty"
+        }
+      }
+    },
+    "IncidentResultList": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "@nextLink": {
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IncidentResult"
+          }
+        }
+      }
+    },
+    "SuppressCondition": {
+      "required": [
+        "minNumber",
+        "minRatio"
+      ],
+      "type": "object",
+      "properties": {
+        "minNumber": {
+          "format": "int32",
+          "description": "min point number, value range : [1, +∞)",
+          "type": "integer"
+        },
+        "minRatio": {
+          "format": "double",
+          "description": "min point ratio, value range : (0, 100]",
+          "type": "number"
+        }
+      }
+    },
+    "SmartDetectionCondition": {
+      "required": [
+        "anomalyDetectorDirection",
+        "sensitivity",
+        "suppressCondition"
+      ],
+      "type": "object",
+      "properties": {
+        "sensitivity": {
+          "format": "double",
+          "description": "sensitivity, value range : (0, 100]",
+          "type": "number"
+        },
+        "anomalyDetectorDirection": {
+          "description": "detection direction",
+          "enum": [
+            "Both",
+            "Down",
+            "Up"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AnomalyDetectorDirection",
+            "modelAsString": true
+          }
+        },
+        "suppressCondition": {
+          "$ref": "#/definitions/SuppressCondition"
+        }
+      }
+    },
+    "HardThresholdCondition": {
+      "required": [
+        "anomalyDetectorDirection",
+        "suppressCondition"
+      ],
+      "type": "object",
+      "properties": {
+        "lowerBound": {
+          "format": "double",
+          "description": "lower bound\r\n\r\nshould be specified when anomalyDetectorDirection is Both or Down",
+          "type": "number"
+        },
+        "upperBound": {
+          "format": "double",
+          "description": "upper bound\r\n\r\nshould be specified when anomalyDetectorDirection is Both or Up",
+          "type": "number"
+        },
+        "anomalyDetectorDirection": {
+          "description": "detection direction",
+          "enum": [
+            "Both",
+            "Down",
+            "Up"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AnomalyDetectorDirection",
+            "modelAsString": true
+          }
+        },
+        "suppressCondition": {
+          "$ref": "#/definitions/SuppressCondition"
+        }
+      }
+    },
+    "ChangeThresholdCondition": {
+      "required": [
+        "anomalyDetectorDirection",
+        "changePercentage",
+        "shiftPoint",
+        "suppressCondition",
+        "withinRange"
+      ],
+      "type": "object",
+      "properties": {
+        "changePercentage": {
+          "format": "double",
+          "description": "change percentage, value range : [0, +∞)",
+          "type": "number"
+        },
+        "shiftPoint": {
+          "format": "int32",
+          "description": "shift point, value range : [1, +∞)",
+          "type": "integer"
+        },
+        "withinRange": {
+          "description": "if the withinRange = true, detected data is abnormal when the value falls in the range, in this case anomalyDetectorDirection must be Both\r\nif the withinRange = false, detected data is abnormal when the value falls out of the range",
+          "type": "boolean"
+        },
+        "anomalyDetectorDirection": {
+          "description": "detection direction",
+          "enum": [
+            "Both",
+            "Down",
+            "Up"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AnomalyDetectorDirection",
+            "modelAsString": true
+          }
+        },
+        "suppressCondition": {
+          "$ref": "#/definitions/SuppressCondition"
+        }
+      }
+    },
+    "WholeMetricConfiguration": {
+      "type": "object",
+      "properties": {
+        "conditionOperator": {
+          "description": "condition operator\r\n\r\nshould be specified when combining multiple detection conditions",
+          "enum": [
+            "AND",
+            "OR"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AnomalyDetectionConfigurationLogicType",
+            "modelAsString": true
+          }
+        },
+        "smartDetectionCondition": {
+          "$ref": "#/definitions/SmartDetectionCondition"
+        },
+        "hardThresholdCondition": {
+          "$ref": "#/definitions/HardThresholdCondition"
+        },
+        "changeThresholdCondition": {
+          "$ref": "#/definitions/ChangeThresholdCondition"
+        }
+      }
+    },
+    "DimensionGroupConfiguration": {
+      "required": [
+        "group"
+      ],
+      "type": "object",
+      "properties": {
+        "group": {
+          "$ref": "#/definitions/DimensionGroupIdentity"
+        },
+        "conditionOperator": {
+          "description": "condition operator\r\n\r\nshould be specified when combining multiple detection conditions",
+          "enum": [
+            "AND",
+            "OR"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AnomalyDetectionConfigurationLogicType",
+            "modelAsString": true
+          }
+        },
+        "smartDetectionCondition": {
+          "$ref": "#/definitions/SmartDetectionCondition"
+        },
+        "hardThresholdCondition": {
+          "$ref": "#/definitions/HardThresholdCondition"
+        },
+        "changeThresholdCondition": {
+          "$ref": "#/definitions/ChangeThresholdCondition"
+        }
+      }
+    },
+    "SeriesConfiguration": {
+      "required": [
+        "series"
+      ],
+      "type": "object",
+      "properties": {
+        "series": {
+          "$ref": "#/definitions/SeriesIdentity"
+        },
+        "conditionOperator": {
+          "description": "condition operator\r\n\r\nshould be specified when combining multiple detection conditions",
+          "enum": [
+            "AND",
+            "OR"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AnomalyDetectionConfigurationLogicType",
+            "modelAsString": true
+          }
+        },
+        "smartDetectionCondition": {
+          "$ref": "#/definitions/SmartDetectionCondition"
+        },
+        "hardThresholdCondition": {
+          "$ref": "#/definitions/HardThresholdCondition"
+        },
+        "changeThresholdCondition": {
+          "$ref": "#/definitions/ChangeThresholdCondition"
+        }
+      }
+    },
+    "AnomalyDetectionConfiguration": {
+      "required": [
+        "metricId",
+        "name",
+        "wholeMetricConfiguration"
+      ],
+      "type": "object",
+      "properties": {
+        "anomalyDetectionConfigurationId": {
+          "format": "uuid",
+          "description": "anomaly detection configuration unique id",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "anomaly detection configuration name",
+          "type": "string"
+        },
+        "description": {
+          "description": "anomaly detection configuration description",
+          "default": "",
+          "type": "string"
+        },
+        "metricId": {
+          "format": "uuid",
+          "description": "metric unique id",
+          "type": "string"
+        },
+        "wholeMetricConfiguration": {
+          "$ref": "#/definitions/WholeMetricConfiguration"
+        },
+        "dimensionGroupOverrideConfigurations": {
+          "description": "detection configuration for series group",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DimensionGroupConfiguration"
+          }
+        },
+        "seriesOverrideConfigurations": {
+          "description": "detection configuration for specific series",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SeriesConfiguration"
+          }
+        }
+      },
+      "example": {
+        "name": "Anomaly detection configuration name",
+        "description": "Anomaly detection configuration description",
+        "metricId": "22222222-2222-2222-2222-000000000001",
+        "wholeMetricConfiguration": {
+          "conditionOperator": "AND",
+          "smartDetectionCondition": {
+            "sensitivity": 91.0,
+            "anomalyDetectorDirection": "Both",
+            "suppressCondition": {
+              "minNumber": 1,
+              "minRatio": 100.0
+            }
+          },
+          "hardThresholdCondition": {
+            "lowerBound": 1.0,
+            "upperBound": 100.0,
+            "anomalyDetectorDirection": "Both",
+            "suppressCondition": {
+              "minNumber": 1,
+              "minRatio": 100.0
+            }
+          },
+          "changeThresholdCondition": {
+            "changePercentage": 5.0,
+            "shiftPoint": 1,
+            "withinRange": false,
+            "anomalyDetectorDirection": "Both",
+            "suppressCondition": {
+              "minNumber": 1,
+              "minRatio": 100.0
+            }
+          }
+        },
+        "dimensionGroupOverrideConfigurations": [
+          {
+            "group": {
+              "dimension": {
+                "city": "Beijing"
+              }
+            },
+            "conditionOperator": "AND",
+            "smartDetectionCondition": {
+              "sensitivity": 91.0,
+              "anomalyDetectorDirection": "Both",
+              "suppressCondition": {
+                "minNumber": 1,
+                "minRatio": 100.0
+              }
+            },
+            "hardThresholdCondition": {
+              "lowerBound": 1.0,
+              "upperBound": 100.0,
+              "anomalyDetectorDirection": "Both",
+              "suppressCondition": {
+                "minNumber": 1,
+                "minRatio": 100.0
+              }
+            },
+            "changeThresholdCondition": {
+              "changePercentage": 5.0,
+              "shiftPoint": 1,
+              "withinRange": false,
+              "anomalyDetectorDirection": "Both",
+              "suppressCondition": {
+                "minNumber": 1,
+                "minRatio": 100.0
+              }
+            }
+          }
+        ],
+        "seriesOverrideConfigurations": [
+          {
+            "series": {
+              "dimension": {
+                "category": "Jewelry",
+                "city": "Beijing"
+              }
+            },
+            "conditionOperator": "AND",
+            "smartDetectionCondition": {
+              "sensitivity": 91.0,
+              "anomalyDetectorDirection": "Both",
+              "suppressCondition": {
+                "minNumber": 1,
+                "minRatio": 100.0
+              }
+            },
+            "hardThresholdCondition": {
+              "lowerBound": 1.0,
+              "upperBound": 100.0,
+              "anomalyDetectorDirection": "Both",
+              "suppressCondition": {
+                "minNumber": 1,
+                "minRatio": 100.0
+              }
+            },
+            "changeThresholdCondition": {
+              "changePercentage": 5.0,
+              "shiftPoint": 1,
+              "withinRange": false,
+              "anomalyDetectorDirection": "Both",
+              "suppressCondition": {
+                "minNumber": 1,
+                "minRatio": 100.0
+              }
+            }
+          }
+        ]
+      }
+    },
+    "SuppressConditionPatch": {
+      "type": "object",
+      "properties": {
+        "minNumber": {
+          "format": "int32",
+          "description": "min point number, value range : [1, +∞)",
+          "type": "integer"
+        },
+        "minRatio": {
+          "format": "double",
+          "description": "min point ratio, value range : (0, 100]",
+          "type": "number"
+        }
+      }
+    },
+    "SmartDetectionConditionPatch": {
+      "type": "object",
+      "properties": {
+        "sensitivity": {
+          "format": "double",
+          "description": "sensitivity, value range : (0, 100]",
+          "type": "number"
+        },
+        "anomalyDetectorDirection": {
+          "description": "detection direction",
+          "enum": [
+            "Both",
+            "Down",
+            "Up"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AnomalyDetectorDirection",
+            "modelAsString": true
+          }
+        },
+        "suppressCondition": {
+          "$ref": "#/definitions/SuppressConditionPatch"
+        }
+      }
+    },
+    "HardThresholdConditionPatch": {
+      "type": "object",
+      "properties": {
+        "lowerBound": {
+          "format": "double",
+          "description": "lower bound\r\n\r\nshould be specified when anomalyDetectorDirection is Both or Down",
+          "type": "number"
+        },
+        "upperBound": {
+          "format": "double",
+          "description": "upper bound\r\n\r\nshould be specified when anomalyDetectorDirection is Both or Up",
+          "type": "number"
+        },
+        "anomalyDetectorDirection": {
+          "description": "detection direction",
+          "enum": [
+            "Both",
+            "Down",
+            "Up"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AnomalyDetectorDirection",
+            "modelAsString": true
+          }
+        },
+        "suppressCondition": {
+          "$ref": "#/definitions/SuppressConditionPatch"
+        }
+      }
+    },
+    "ChangeThresholdConditionPatch": {
+      "type": "object",
+      "properties": {
+        "changePercentage": {
+          "format": "double",
+          "description": "change percentage, value range : [0, +∞)",
+          "type": "number"
+        },
+        "shiftPoint": {
+          "format": "int32",
+          "description": "shift point, value range : [1, +∞)",
+          "type": "integer"
+        },
+        "withinRange": {
+          "description": "if the withinRange = true, detected data is abnormal when the value falls in the range, in this case anomalyDetectorDirection must be Both\r\nif the withinRange = false, detected data is abnormal when the value falls out of the range",
+          "type": "boolean"
+        },
+        "anomalyDetectorDirection": {
+          "description": "detection direction",
+          "enum": [
+            "Both",
+            "Down",
+            "Up"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AnomalyDetectorDirection",
+            "modelAsString": true
+          }
+        },
+        "suppressCondition": {
+          "$ref": "#/definitions/SuppressConditionPatch"
+        }
+      }
+    },
+    "WholeMetricConfigurationPatch": {
+      "type": "object",
+      "properties": {
+        "conditionOperator": {
+          "description": "condition operator\r\n\r\nshould be specified when combining multiple detection conditions",
+          "enum": [
+            "AND",
+            "OR"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AnomalyDetectionConfigurationLogicType",
+            "modelAsString": true
+          }
+        },
+        "smartDetectionCondition": {
+          "$ref": "#/definitions/SmartDetectionConditionPatch"
+        },
+        "hardThresholdCondition": {
+          "$ref": "#/definitions/HardThresholdConditionPatch"
+        },
+        "changeThresholdCondition": {
+          "$ref": "#/definitions/ChangeThresholdConditionPatch"
+        }
+      }
+    },
+    "AnomalyDetectionConfigurationPatch": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "anomaly detection configuration name",
+          "type": "string"
+        },
+        "description": {
+          "description": "anomaly detection configuration description",
+          "default": "",
+          "type": "string"
+        },
+        "wholeMetricConfiguration": {
+          "$ref": "#/definitions/WholeMetricConfigurationPatch"
+        },
+        "dimensionGroupOverrideConfigurations": {
+          "description": "detection configuration for series group",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DimensionGroupConfiguration"
+          }
+        },
+        "seriesOverrideConfigurations": {
+          "description": "detection configuration for specific series",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SeriesConfiguration"
+          }
+        }
+      },
+      "example": {
+        "wholeMetricConfiguration": {
+          "smartDetectionCondition": {
+            "sensitivity": 91.0
+          }
+        }
+      }
+    },
+    "AnomalyAlertingConfigurationList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnomalyAlertingConfiguration"
+          },
+          "readOnly": true
+        },
+        "@nextLink": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DetectionSeriesQuery": {
+      "required": [
+        "endTime",
+        "series",
+        "startTime"
+      ],
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "description": "This is inclusive. The maximum number of data points (series number * time range) is 10000.",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "This is exclusive. The maximum number of data points (series number * time range) is 10000.",
+          "type": "string"
+        },
+        "series": {
+          "description": "The series to be queried. The identity must be able to define one single time series instead of a group of time series. The maximum number of series is 100.",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SeriesIdentity"
+          }
+        }
+      },
+      "example": {
+        "startTime": "2020-01-01T00:00:00Z",
+        "endTime": "2020-02-01T00:00:00Z",
+        "series": [
+          {
+            "dimension": {
+              "category": "Jewelry",
+              "city": "Beijing"
+            }
+          }
+        ]
+      }
+    },
+    "SeriesResult": {
+      "required": [
+        "expectedValueList",
+        "isAnomalyList",
+        "lowerBoundaryList",
+        "periodList",
+        "series",
+        "timestampList",
+        "upperBoundaryList",
+        "valueList"
+      ],
+      "type": "object",
+      "properties": {
+        "series": {
+          "$ref": "#/definitions/SeriesIdentity"
+        },
+        "timestampList": {
+          "description": "timestamps of the series",
+          "type": "array",
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "valueList": {
+          "description": "values of the series",
+          "type": "array",
+          "items": {
+            "format": "double",
+            "type": "number"
+          }
+        },
+        "isAnomalyList": {
+          "description": "whether points of the series are anomalies",
+          "type": "array",
+          "items": {
+            "type": "boolean"
+          }
+        },
+        "periodList": {
+          "description": "period calculated on each point of the series",
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "expectedValueList": {
+          "description": "expected values of the series given by smart detector",
+          "type": "array",
+          "items": {
+            "format": "double",
+            "type": "number"
+          }
+        },
+        "lowerBoundaryList": {
+          "description": "lower boundary list of the series given by smart detector",
+          "type": "array",
+          "items": {
+            "format": "double",
+            "type": "number"
+          }
+        },
+        "upperBoundaryList": {
+          "description": "upper boundary list of the series given by smart detector",
+          "type": "array",
+          "items": {
+            "format": "double",
+            "type": "number"
+          }
+        }
+      }
+    },
+    "SeriesResultList": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SeriesResult"
+          }
+        }
+      }
+    },
+    "SeverityFilterCondition": {
+      "required": [
+        "max",
+        "min"
+      ],
+      "type": "object",
+      "properties": {
+        "min": {
+          "description": "min severity",
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Severity",
+            "modelAsString": true
+          }
+        },
+        "max": {
+          "description": "max severity",
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Severity",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "DetectionAnomalyFilterCondition": {
+      "type": "object",
+      "properties": {
+        "dimensionFilter": {
+          "description": "dimension filter",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DimensionGroupIdentity"
+          }
+        },
+        "severityFilter": {
+          "$ref": "#/definitions/SeverityFilterCondition"
+        }
+      }
+    },
+    "DetectionAnomalyResultQuery": {
+      "required": [
+        "endTime",
+        "startTime"
+      ],
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "description": "start time",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "end time",
+          "type": "string"
+        },
+        "filter": {
+          "$ref": "#/definitions/DetectionAnomalyFilterCondition"
+        }
+      },
+      "example": {
+        "startTime": "2020-01-01T00:00:00Z",
+        "endTime": "2020-02-01T00:00:00Z",
+        "filter": {
+          "dimensionFilter": [
+            {
+              "dimension": {
+                "city": "Beijing"
+              }
+            }
+          ],
+          "severityFilter": {
+            "min": "Low",
+            "max": "High"
+          }
+        }
+      }
+    },
+    "AnomalyDimensionQuery": {
+      "required": [
+        "dimensionName",
+        "endTime",
+        "startTime"
+      ],
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "description": "start time",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "end time",
+          "type": "string"
+        },
+        "dimensionName": {
+          "description": "dimension to query",
+          "type": "string"
+        },
+        "dimensionFilter": {
+          "$ref": "#/definitions/DimensionGroupIdentity"
+        }
+      },
+      "example": {
+        "startTime": "2020-01-01T00:00:00Z",
+        "endTime": "2020-02-01T00:00:00Z",
+        "dimensionName": "category",
+        "dimensionFilter": {
+          "dimension": {
+            "city": "Beijing"
+          }
+        }
+      }
+    },
+    "AnomalyDimensionList": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "@nextLink": {
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DetectionIncidentFilterCondition": {
+      "type": "object",
+      "properties": {
+        "dimensionFilter": {
+          "description": "dimension filter",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DimensionGroupIdentity"
+          }
+        }
+      }
+    },
+    "DetectionIncidentResultQuery": {
+      "required": [
+        "endTime",
+        "startTime"
+      ],
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "description": "start time",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "end time",
+          "type": "string"
+        },
+        "filter": {
+          "$ref": "#/definitions/DetectionIncidentFilterCondition"
+        }
+      },
+      "example": {
+        "startTime": "2020-01-01T00:00:00Z",
+        "endTime": "2020-02-01T00:00:00Z",
+        "filter": {
+          "dimensionFilter": [
+            {
+              "dimension": {
+                "city": "Beijing"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "RootCause": {
+      "required": [
+        "description",
+        "path",
+        "rootCause",
+        "score"
+      ],
+      "type": "object",
+      "properties": {
+        "rootCause": {
+          "$ref": "#/definitions/DimensionGroupIdentity"
+        },
+        "path": {
+          "description": "drilling down path from query anomaly to root cause",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "score": {
+          "format": "double",
+          "description": "score of the root cause",
+          "type": "number"
+        },
+        "description": {
+          "description": "description of the root cause",
+          "type": "string"
+        }
+      }
+    },
+    "RootCauseList": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RootCause"
+          }
+        }
+      }
+    },
+    "AzureSQLConnectionStringParam": {
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string to access the Azure SQL.",
+          "type": "string"
+        }
+      }
+    },
+    "DataSourceCredential": {
+      "required": [
+        "dataSourceCredentialName",
+        "dataSourceCredentialType"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSourceCredentialType": {
+          "description": "Type of data source credential",
+          "enum": [
+            "AzureSQLConnectionString",
+            "DataLakeGen2SharedKey",
+            "ServicePrincipal",
+            "ServicePrincipalInKV"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataSourceCredentialType",
+            "modelAsString": true
+          }
+        },
+        "dataSourceCredentialId": {
+          "format": "uuid",
+          "description": "Unique id of data source credential",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataSourceCredentialName": {
+          "description": "Name of data source credential",
+          "type": "string"
+        },
+        "dataSourceCredentialDescription": {
+          "description": "Description of data source credential",
+          "type": "string"
+        }
+      },
+      "discriminator": "dataSourceCredentialType",
+      "example": {
+        "parameters": {
+          "clientId": "88888888-8888-8888-8888-888888888888",
+          "clientSecret": "fake-client-secret",
+          "tenantId": "12345678-1234-1234-1234-123456788888"
+        },
+        "dataSourceCredentialName": "A data source credential",
+        "dataSourceCredentialDescription": "This is a data source credential",
+        "dataSourceCredentialType": "ServicePrincipal"
+      }
+    },
+    "AzureSQLConnectionStringCredential": {
+      "required": [
+        "parameters"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceCredential"
+        }
+      ],
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/AzureSQLConnectionStringParam"
+        }
+      },
+      "x-ms-discriminator-value": "AzureSQLConnectionString"
+    },
+    "DataLakeGen2SharedKeyParam": {
+      "type": "object",
+      "properties": {
+        "accountKey": {
+          "description": "The account key to access the Azure Data Lake Storage Gen2.",
+          "type": "string"
+        }
+      }
+    },
+    "DataLakeGen2SharedKeyCredential": {
+      "required": [
+        "parameters"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceCredential"
+        }
+      ],
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/DataLakeGen2SharedKeyParam"
+        }
+      },
+      "x-ms-discriminator-value": "DataLakeGen2SharedKey"
+    },
+    "ServicePrincipalParam": {
+      "required": [
+        "clientId",
+        "tenantId"
+      ],
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "description": "The client id of the service principal.",
+          "type": "string"
+        },
+        "clientSecret": {
+          "description": "The client secret of the service principal.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenant id of the service principal.",
+          "type": "string"
+        }
+      }
+    },
+    "ServicePrincipalCredential": {
+      "required": [
+        "parameters"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceCredential"
+        }
+      ],
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/ServicePrincipalParam"
+        }
+      },
+      "x-ms-discriminator-value": "ServicePrincipal"
+    },
+    "ServicePrincipalInKVParam": {
+      "required": [
+        "keyVaultClientId",
+        "keyVaultEndpoint",
+        "servicePrincipalIdNameInKV",
+        "servicePrincipalSecretNameInKV",
+        "tenantId"
+      ],
+      "type": "object",
+      "properties": {
+        "keyVaultEndpoint": {
+          "description": "The Key Vault endpoint that storing the service principal.",
+          "type": "string"
+        },
+        "keyVaultClientId": {
+          "description": "The Client Id to access the Key Vault.",
+          "type": "string"
+        },
+        "keyVaultClientSecret": {
+          "description": "The Client Secret to access the Key Vault.",
+          "type": "string"
+        },
+        "servicePrincipalIdNameInKV": {
+          "description": "The secret name of the service principal's client Id in the Key Vault.",
+          "type": "string"
+        },
+        "servicePrincipalSecretNameInKV": {
+          "description": "The secret name of the service principal's client secret in the Key Vault.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenant id of your service principal.",
+          "type": "string"
+        }
+      }
+    },
+    "ServicePrincipalInKVCredential": {
+      "required": [
+        "parameters"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceCredential"
+        }
+      ],
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/ServicePrincipalInKVParam"
+        }
+      },
+      "x-ms-discriminator-value": "ServicePrincipalInKV"
+    },
+    "DataSourceCredentialList": {
+      "type": "object",
+      "properties": {
+        "@nextLink": {
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataSourceCredential"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "AzureSQLConnectionStringParamPatch": {
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string to access the Azure SQL.",
+          "type": "string"
+        }
+      }
+    },
+    "DataSourceCredentialPatch": {
+      "required": [
+        "dataSourceCredentialType"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSourceCredentialType": {
+          "description": "Type of data source credential",
+          "enum": [
+            "AzureSQLConnectionString",
+            "DataLakeGen2SharedKey",
+            "ServicePrincipal",
+            "ServicePrincipalInKV"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataSourceCredentialType",
+            "modelAsString": true
+          }
+        },
+        "dataSourceCredentialName": {
+          "description": "Name of data source credential",
+          "type": "string"
+        },
+        "dataSourceCredentialDescription": {
+          "description": "Description of data source credential",
+          "type": "string"
+        }
+      },
+      "discriminator": "dataSourceCredentialType",
+      "example": {
+        "dataSourceCredentialDescription": "This is a data source credential"
+      }
+    },
+    "AzureSQLConnectionStringCredentialPatch": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceCredentialPatch"
+        }
+      ],
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/AzureSQLConnectionStringParamPatch"
+        }
+      },
+      "x-ms-discriminator-value": "AzureSQLConnectionString"
+    },
+    "DataLakeGen2SharedKeyParamPatch": {
+      "type": "object",
+      "properties": {
+        "accountKey": {
+          "description": "The account key to access the Azure Data Lake Storage Gen2.",
+          "type": "string"
+        }
+      }
+    },
+    "DataLakeGen2SharedKeyCredentialPatch": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceCredentialPatch"
+        }
+      ],
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/DataLakeGen2SharedKeyParamPatch"
+        }
+      },
+      "x-ms-discriminator-value": "DataLakeGen2SharedKey"
+    },
+    "ServicePrincipalParamPatch": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "description": "The client id of the service principal.",
+          "type": "string"
+        },
+        "clientSecret": {
+          "description": "The client secret of the service principal.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenant id of the service principal.",
+          "type": "string"
+        }
+      }
+    },
+    "ServicePrincipalCredentialPatch": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceCredentialPatch"
+        }
+      ],
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/ServicePrincipalParamPatch"
+        }
+      },
+      "x-ms-discriminator-value": "ServicePrincipal"
+    },
+    "ServicePrincipalInKVParamPatch": {
+      "type": "object",
+      "properties": {
+        "keyVaultEndpoint": {
+          "description": "The Key Vault endpoint that storing the service principal.",
+          "type": "string"
+        },
+        "keyVaultClientId": {
+          "description": "The Client Id to access the Key Vault.",
+          "type": "string"
+        },
+        "keyVaultClientSecret": {
+          "description": "The Client Secret to access the Key Vault.",
+          "type": "string"
+        },
+        "servicePrincipalIdNameInKV": {
+          "description": "The secret name of the service principal's client Id in the Key Vault.",
+          "type": "string"
+        },
+        "servicePrincipalSecretNameInKV": {
+          "description": "The secret name of the service principal's client secret in the Key Vault.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenant id of your service principal.",
+          "type": "string"
+        }
+      }
+    },
+    "ServicePrincipalInKVCredentialPatch": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSourceCredentialPatch"
+        }
+      ],
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/ServicePrincipalInKVParamPatch"
+        }
+      },
+      "x-ms-discriminator-value": "ServicePrincipalInKV"
+    },
+    "AzureApplicationInsightsParameter": {
+      "required": [
+        "query"
+      ],
+      "type": "object",
+      "properties": {
+        "azureCloud": {
+          "description": "The Azure cloud that this Azure Application Insights in",
+          "type": "string"
+        },
+        "applicationId": {
+          "description": "The application id of this Azure Application Insights",
+          "type": "string"
+        },
+        "apiKey": {
+          "description": "The API Key that can access this Azure Application Insights",
+          "type": "string"
+        },
+        "query": {
+          "description": "The statement to query this Azure Application Insights",
+          "type": "string"
+        }
+      }
+    },
+    "Metric": {
+      "required": [
+        "metricName"
+      ],
+      "type": "object",
+      "properties": {
+        "metricId": {
+          "format": "uuid",
+          "description": "metric id",
+          "type": "string",
+          "readOnly": true
+        },
+        "metricName": {
+          "description": "metric name",
+          "type": "string"
+        },
+        "metricDisplayName": {
+          "description": "metric display name",
+          "pattern": "[.a-zA-Z0-9_-]+",
+          "type": "string"
+        },
+        "metricDescription": {
+          "description": "metric description",
+          "type": "string"
+        }
+      }
+    },
+    "Dimension": {
+      "required": [
+        "dimensionName"
+      ],
+      "type": "object",
+      "properties": {
+        "dimensionName": {
+          "description": "dimension name",
+          "type": "string"
+        },
+        "dimensionDisplayName": {
+          "description": "dimension display name",
+          "pattern": "[.a-zA-Z0-9_-]+",
+          "type": "string"
+        }
+      }
+    },
+    "DataFeedDetail": {
+      "required": [
+        "dataFeedName",
+        "dataSourceType",
+        "dataStartFrom",
+        "granularityName",
+        "metrics"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSourceType": {
+          "description": "data source type",
+          "enum": [
+            "AzureApplicationInsights",
+            "AzureBlob",
+            "AzureCosmosDB",
+            "AzureDataExplorer",
+            "AzureDataLakeStorageGen2",
+            "AzureEventHubs",
+            "AzureLogAnalytics",
+            "AzureTable",
+            "InfluxDB",
+            "MongoDB",
+            "MySql",
+            "PostgreSql",
+            "SqlServer"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataSourceType",
+            "modelAsString": true
+          }
+        },
+        "dataFeedId": {
+          "format": "uuid",
+          "description": "data feed unique id",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataFeedName": {
+          "description": "data feed name",
+          "type": "string",
+          "example": "dummy data feed name"
+        },
+        "dataFeedDescription": {
+          "description": "data feed description",
+          "default": "",
+          "type": "string"
+        },
+        "granularityName": {
+          "description": "granularity of the time series",
+          "enum": [
+            "Yearly",
+            "Monthly",
+            "Weekly",
+            "Daily",
+            "Hourly",
+            "Minutely",
+            "Custom"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Granularity",
+            "modelAsString": true
+          }
+        },
+        "granularityAmount": {
+          "format": "int32",
+          "description": "if granularity is custom,it is required.",
+          "type": "integer"
+        },
+        "metrics": {
+          "description": "measure list",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Metric"
+          }
+        },
+        "dimension": {
+          "description": "dimension list",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          }
+        },
+        "timestampColumn": {
+          "description": "user-defined timestamp column. if timestampColumn is null, start time of every time slice will be used as default value.",
+          "default": "",
+          "type": "string"
+        },
+        "dataStartFrom": {
+          "format": "date-time",
+          "description": "ingestion start time",
+          "type": "string"
+        },
+        "startOffsetInSeconds": {
+          "format": "int64",
+          "description": "the time that the beginning of data ingestion task will delay for every data slice according to this offset.",
+          "default": 0,
+          "type": "integer"
+        },
+        "maxConcurrency": {
+          "format": "int32",
+          "description": "the max concurrency of data ingestion queries against user data source. 0 means no limitation.",
+          "default": -1,
+          "type": "integer"
+        },
+        "minRetryIntervalInSeconds": {
+          "format": "int64",
+          "description": "the min retry interval for failed data ingestion tasks.",
+          "default": -1,
+          "type": "integer"
+        },
+        "stopRetryAfterInSeconds": {
+          "format": "int64",
+          "description": "stop retry data ingestion after the data slice first schedule time in seconds.",
+          "default": -1,
+          "type": "integer"
+        },
+        "needRollup": {
+          "description": "mark if the data feed need rollup",
+          "default": "NoRollup",
+          "enum": [
+            "NoRollup",
+            "NeedRollup",
+            "AlreadyRollup"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NeedRollupEnum",
+            "modelAsString": true
+          }
+        },
+        "rollUpMethod": {
+          "description": "roll up method",
+          "default": "None",
+          "enum": [
+            "None",
+            "Sum",
+            "Max",
+            "Min",
+            "Avg",
+            "Count"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RollUpMethod",
+            "modelAsString": true
+          }
+        },
+        "rollUpColumns": {
+          "description": "roll up columns",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allUpIdentification": {
+          "description": "the identification value for the row of calculated all-up value.",
+          "type": "string"
+        },
+        "fillMissingPointType": {
+          "description": "the type of fill missing point for anomaly detection",
+          "default": "SmartFilling",
+          "enum": [
+            "SmartFilling",
+            "PreviousValue",
+            "CustomValue",
+            "NoFilling"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FillMissingPointType",
+            "modelAsString": true
+          }
+        },
+        "fillMissingPointValue": {
+          "format": "double",
+          "description": "the value of fill missing point for anomaly detection",
+          "type": "number"
+        },
+        "viewMode": {
+          "description": "data feed access mode, default is Private",
+          "default": "Private",
+          "enum": [
+            "Private",
+            "Public"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ViewMode",
+            "modelAsString": true
+          }
+        },
+        "admins": {
+          "description": "data feed administrator",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "viewers": {
+          "description": "data feed viewer",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isAdmin": {
+          "description": "the query user is one of data feed administrator or not",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "creator": {
+          "description": "data feed creator",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "data feed status",
+          "enum": [
+            "Active",
+            "Paused"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "EntityStatus",
+            "modelAsString": true
+          }
+        },
+        "createdTime": {
+          "format": "date-time",
+          "description": "data feed created time",
+          "type": "string",
+          "readOnly": true
+        },
+        "actionLinkTemplate": {
+          "description": "action link for alert",
+          "default": "",
+          "type": "string"
+        },
+        "authenticationType": {
+          "description": "authentication type for corresponding data source",
+          "default": "Basic",
+          "enum": [
+            "Basic",
+            "ManagedIdentity",
+            "AzureSQLConnectionString",
+            "DataLakeGen2SharedKey",
+            "ServicePrincipal",
+            "ServicePrincipalInKV"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AuthenticationTypeEnum",
+            "modelAsString": true
+          }
+        },
+        "credentialId": {
+          "description": "The credential entity id",
+          "type": "string"
+        }
+      },
+      "discriminator": "dataSourceType",
+      "example": {
+        "dataSourceParameter": {
+          "connectionString": "Server=PlaceholderSqlServer,1433;Initial Catalog=PlaceholderDatabase;User ID=PlaceholderUserName;Password=PlaceholderPassword;",
+          "query": "select * from your_table where timestamp = @StartTime"
+        },
+        "dataFeedName": "Sample - cost/revenue - city/category",
+        "dataFeedDescription": "This is a sample data feed.",
+        "granularityName": "Daily",
+        "metrics": [
+          {
+            "metricName": "cost",
+            "metricDisplayName": "cost"
+          },
+          {
+            "metricName": "revenue",
+            "metricDisplayName": "revenue"
+          }
+        ],
+        "dimension": [
+          {
+            "dimensionName": "category",
+            "dimensionDisplayName": "category"
+          },
+          {
+            "dimensionName": "city",
+            "dimensionDisplayName": "city"
+          }
+        ],
+        "timestampColumn": "timestamp",
+        "dataStartFrom": "2020-01-01T00:00:00Z",
+        "dataSourceType": "SqlServer",
+        "startOffsetInSeconds": 86400,
+        "maxConcurrency": 5,
+        "minRetryIntervalInSeconds": 3600,
+        "stopRetryAfterInSeconds": 604800,
+        "needRollup": "NeedRollup",
+        "rollUpMethod": "Sum",
+        "allUpIdentification": "__SUM__",
+        "fillMissingPointType": "SmartFilling",
+        "viewMode": "Private",
+        "authenticationType": "Basic"
+      }
+    },
+    "AzureApplicationInsightsDataFeed": {
+      "required": [
+        "dataSourceParameter"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetail"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureApplicationInsightsParameter"
+        }
+      },
+      "x-ms-discriminator-value": "AzureApplicationInsights"
+    },
+    "AzureBlobParameter": {
+      "required": [
+        "blobTemplate",
+        "container"
+      ],
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string of this Azure Blob",
+          "type": "string"
+        },
+        "container": {
+          "description": "The container name in this Azure Blob",
+          "type": "string"
+        },
+        "blobTemplate": {
+          "description": "The path template in this container",
+          "type": "string"
+        }
+      }
+    },
+    "AzureBlobDataFeed": {
+      "required": [
+        "dataSourceParameter"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetail"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureBlobParameter"
+        }
+      },
+      "x-ms-discriminator-value": "AzureBlob"
+    },
+    "AzureCosmosDBParameter": {
+      "required": [
+        "collectionId",
+        "database",
+        "sqlQuery"
+      ],
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string of this Azure CosmosDB",
+          "type": "string"
+        },
+        "sqlQuery": {
+          "description": "The statement to query this collection",
+          "type": "string"
+        },
+        "database": {
+          "description": "A database name in this Azure CosmosDB",
+          "type": "string"
+        },
+        "collectionId": {
+          "description": "A collection id in this database",
+          "type": "string"
+        }
+      }
+    },
+    "AzureCosmosDBDataFeed": {
+      "required": [
+        "dataSourceParameter"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetail"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureCosmosDBParameter"
+        }
+      },
+      "x-ms-discriminator-value": "AzureCosmosDB"
+    },
+    "SqlSourceParameter": {
+      "required": [
+        "query"
+      ],
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string of this database",
+          "type": "string"
+        },
+        "query": {
+          "description": "The script to query this database",
+          "type": "string"
+        }
+      }
+    },
+    "AzureDataExplorerDataFeed": {
+      "required": [
+        "dataSourceParameter"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetail"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/SqlSourceParameter"
+        }
+      },
+      "x-ms-discriminator-value": "AzureDataExplorer"
+    },
+    "AzureDataLakeStorageGen2Parameter": {
+      "required": [
+        "directoryTemplate",
+        "fileSystemName",
+        "fileTemplate"
+      ],
+      "type": "object",
+      "properties": {
+        "accountName": {
+          "description": "The account name of this Azure Data Lake",
+          "type": "string"
+        },
+        "accountKey": {
+          "description": "The account key that can access this Azure Data Lake",
+          "type": "string"
+        },
+        "fileSystemName": {
+          "description": "The file system (container) name in this Azure Data Lake",
+          "type": "string"
+        },
+        "directoryTemplate": {
+          "description": "The directory template under this file system",
+          "type": "string"
+        },
+        "fileTemplate": {
+          "description": "The file template",
+          "type": "string"
+        }
+      }
+    },
+    "AzureDataLakeStorageGen2DataFeed": {
+      "required": [
+        "dataSourceParameter"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetail"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureDataLakeStorageGen2Parameter"
+        }
+      },
+      "x-ms-discriminator-value": "AzureDataLakeStorageGen2"
+    },
+    "AzureEventHubsParameter": {
+      "required": [
+        "consumerGroup"
+      ],
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string of this Azure Event Hubs",
+          "type": "string"
+        },
+        "consumerGroup": {
+          "description": "The consumer group to be used in this data feed",
+          "type": "string"
+        }
+      }
+    },
+    "AzureEventHubsDataFeed": {
+      "required": [
+        "dataSourceParameter"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetail"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureEventHubsParameter"
+        }
+      },
+      "x-ms-discriminator-value": "AzureEventHubs"
+    },
+    "AzureLogAnalyticsParameter": {
+      "required": [
+        "query",
+        "workspaceId"
+      ],
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id of service principal that have access to this Log Analytics",
+          "type": "string"
+        },
+        "clientId": {
+          "description": "The client id of service principal that have access to this Log Analytics",
+          "type": "string"
+        },
+        "clientSecret": {
+          "description": "The client secret of service principal that have access to this Log Analytics",
+          "type": "string"
+        },
+        "workspaceId": {
+          "description": "The workspace id of this Log Analytics",
+          "type": "string"
+        },
+        "query": {
+          "description": "The KQL (Kusto Query Language) query to fetch data from this Log Analytics",
+          "type": "string"
+        }
+      }
+    },
+    "AzureLogAnalyticsDataFeed": {
+      "required": [
+        "dataSourceParameter"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetail"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureLogAnalyticsParameter"
+        }
+      },
+      "x-ms-discriminator-value": "AzureLogAnalytics"
+    },
+    "AzureTableParameter": {
+      "required": [
+        "query",
+        "table"
+      ],
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string of this Azure Table",
+          "type": "string"
+        },
+        "table": {
+          "description": "A table name in this Azure Table",
+          "type": "string"
+        },
+        "query": {
+          "description": "The statement to query this table. Please find syntax and details from Azure Table documents.",
+          "type": "string"
+        }
+      }
+    },
+    "AzureTableDataFeed": {
+      "required": [
+        "dataSourceParameter"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetail"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureTableParameter"
+        }
+      },
+      "x-ms-discriminator-value": "AzureTable"
+    },
+    "InfluxDBParameter": {
+      "required": [
+        "query"
+      ],
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string of this InfluxDB",
+          "type": "string"
+        },
+        "database": {
+          "description": "A database name",
+          "type": "string"
+        },
+        "userName": {
+          "description": "The user name of the account that can access this database",
+          "type": "string"
+        },
+        "password": {
+          "description": "The password of the account that can access this database",
+          "type": "string"
+        },
+        "query": {
+          "description": "The script to query this database",
+          "type": "string"
+        }
+      }
+    },
+    "InfluxDBDataFeed": {
+      "required": [
+        "dataSourceParameter"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetail"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/InfluxDBParameter"
+        }
+      },
+      "x-ms-discriminator-value": "InfluxDB"
+    },
+    "MySqlDataFeed": {
+      "required": [
+        "dataSourceParameter"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetail"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/SqlSourceParameter"
+        }
+      },
+      "x-ms-discriminator-value": "MySql"
+    },
+    "PostgreSqlDataFeed": {
+      "required": [
+        "dataSourceParameter"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetail"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/SqlSourceParameter"
+        }
+      },
+      "x-ms-discriminator-value": "PostgreSql"
+    },
+    "SQLServerDataFeed": {
+      "required": [
+        "dataSourceParameter"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetail"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/SqlSourceParameter"
+        }
+      },
+      "x-ms-discriminator-value": "SqlServer"
+    },
+    "MongoDBParameter": {
+      "required": [
+        "command"
+      ],
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string of this MongoDB",
+          "type": "string"
+        },
+        "database": {
+          "description": "A database name in this MongoDB",
+          "type": "string"
+        },
+        "command": {
+          "description": "The script to query this database",
+          "type": "string"
+        }
+      }
+    },
+    "MongoDBDataFeed": {
+      "required": [
+        "dataSourceParameter"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetail"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/MongoDBParameter"
+        }
+      },
+      "x-ms-discriminator-value": "MongoDB"
+    },
+    "DataFeedList": {
+      "type": "object",
+      "properties": {
+        "@nextLink": {
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataFeedDetail"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "AzureApplicationInsightsParameterPatch": {
+      "type": "object",
+      "properties": {
+        "azureCloud": {
+          "description": "The Azure cloud that this Azure Application Insights in",
+          "type": "string"
+        },
+        "applicationId": {
+          "description": "The application id of this Azure Application Insights",
+          "type": "string"
+        },
+        "apiKey": {
+          "description": "The API Key that can access this Azure Application Insights",
+          "type": "string"
+        },
+        "query": {
+          "description": "The statement to query this Azure Application Insights",
+          "type": "string"
+        }
+      }
+    },
+    "DataFeedDetailPatch": {
+      "required": [
+        "dataSourceType"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSourceType": {
+          "description": "data source type",
+          "enum": [
+            "AzureApplicationInsights",
+            "AzureBlob",
+            "AzureCosmosDB",
+            "AzureDataExplorer",
+            "AzureDataLakeStorageGen2",
+            "AzureEventHubs",
+            "AzureLogAnalytics",
+            "AzureTable",
+            "InfluxDB",
+            "MongoDB",
+            "MySql",
+            "PostgreSql",
+            "SqlServer"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DataSourceType",
+            "modelAsString": true
+          }
+        },
+        "dataFeedName": {
+          "description": "data feed name",
+          "type": "string"
+        },
+        "dataFeedDescription": {
+          "description": "data feed description",
+          "type": "string"
+        },
+        "timestampColumn": {
+          "description": "user-defined timestamp column. if timestampColumn is null, start time of every time slice will be used as default value.",
+          "type": "string"
+        },
+        "dataStartFrom": {
+          "format": "date-time",
+          "description": "ingestion start time",
+          "type": "string"
+        },
+        "startOffsetInSeconds": {
+          "format": "int64",
+          "description": "the time that the beginning of data ingestion task will delay for every data slice according to this offset.",
+          "type": "integer"
+        },
+        "maxConcurrency": {
+          "format": "int32",
+          "description": "the max concurrency of data ingestion queries against user data source. 0 means no limitation.",
+          "type": "integer"
+        },
+        "minRetryIntervalInSeconds": {
+          "format": "int64",
+          "description": "the min retry interval for failed data ingestion tasks.",
+          "type": "integer"
+        },
+        "stopRetryAfterInSeconds": {
+          "format": "int64",
+          "description": "stop retry data ingestion after the data slice first schedule time in seconds.",
+          "type": "integer"
+        },
+        "needRollup": {
+          "description": "mark if the data feed need rollup",
+          "enum": [
+            "NoRollup",
+            "NeedRollup",
+            "AlreadyRollup"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "NeedRollupEnum",
+            "modelAsString": true
+          }
+        },
+        "rollUpMethod": {
+          "description": "roll up method",
+          "enum": [
+            "None",
+            "Sum",
+            "Max",
+            "Min",
+            "Avg",
+            "Count"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RollUpMethod",
+            "modelAsString": true
+          }
+        },
+        "rollUpColumns": {
+          "description": "roll up columns",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allUpIdentification": {
+          "description": "the identification value for the row of calculated all-up value.",
+          "type": "string"
+        },
+        "fillMissingPointType": {
+          "description": "the type of fill missing point for anomaly detection",
+          "enum": [
+            "SmartFilling",
+            "PreviousValue",
+            "CustomValue",
+            "NoFilling"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FillMissingPointType",
+            "modelAsString": true
+          }
+        },
+        "fillMissingPointValue": {
+          "format": "double",
+          "description": "the value of fill missing point for anomaly detection",
+          "type": "number"
+        },
+        "viewMode": {
+          "description": "data feed access mode, default is Private",
+          "enum": [
+            "Private",
+            "Public"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ViewMode",
+            "modelAsString": true
+          }
+        },
+        "admins": {
+          "description": "data feed administrator",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "viewers": {
+          "description": "data feed viewer",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "description": "data feed status",
+          "enum": [
+            "Active",
+            "Paused"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EntityStatus",
+            "modelAsString": true
+          }
+        },
+        "actionLinkTemplate": {
+          "description": "action link for alert",
+          "type": "string"
+        },
+        "authenticationType": {
+          "description": "authentication type for corresponding data source",
+          "enum": [
+            "Basic",
+            "ManagedIdentity",
+            "AzureSQLConnectionString",
+            "DataLakeGen2SharedKey",
+            "ServicePrincipal",
+            "ServicePrincipalInKV"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AuthenticationTypeEnum",
+            "modelAsString": true
+          }
+        },
+        "credentialId": {
+          "description": "The credential entity id",
+          "type": "string"
+        }
+      },
+      "discriminator": "dataSourceType"
+    },
+    "AzureApplicationInsightsDataFeedPatch": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetailPatch"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureApplicationInsightsParameterPatch"
+        }
+      },
+      "x-ms-discriminator-value": "AzureApplicationInsights"
+    },
+    "AzureBlobParameterPatch": {
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string of this Azure Blob",
+          "type": "string"
+        },
+        "container": {
+          "description": "The container name in this Azure Blob",
+          "type": "string"
+        },
+        "blobTemplate": {
+          "description": "The path template in this container",
+          "type": "string"
+        }
+      }
+    },
+    "AzureBlobDataFeedPatch": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetailPatch"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureBlobParameterPatch"
+        }
+      },
+      "x-ms-discriminator-value": "AzureBlob"
+    },
+    "AzureCosmosDBParameterPatch": {
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string of this Azure CosmosDB",
+          "type": "string"
+        },
+        "sqlQuery": {
+          "description": "The statement to query this collection",
+          "type": "string"
+        },
+        "database": {
+          "description": "A database name in this Azure CosmosDB",
+          "type": "string"
+        },
+        "collectionId": {
+          "description": "A collection id in this database",
+          "type": "string"
+        }
+      }
+    },
+    "AzureCosmosDBDataFeedPatch": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetailPatch"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureCosmosDBParameterPatch"
+        }
+      },
+      "x-ms-discriminator-value": "AzureCosmosDB"
+    },
+    "SQLSourceParameterPatch": {
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string of this database",
+          "type": "string"
+        },
+        "query": {
+          "description": "The script to query this database",
+          "type": "string"
+        }
+      }
+    },
+    "AzureDataExplorerDataFeedPatch": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetailPatch"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/SQLSourceParameterPatch"
+        }
+      },
+      "x-ms-discriminator-value": "AzureDataExplorer"
+    },
+    "AzureDataLakeStorageGen2ParameterPatch": {
+      "type": "object",
+      "properties": {
+        "accountName": {
+          "description": "The account name of this Azure Data Lake",
+          "type": "string"
+        },
+        "accountKey": {
+          "description": "The account key that can access this Azure Data Lake",
+          "type": "string"
+        },
+        "fileSystemName": {
+          "description": "The file system (container) name in this Azure Data Lake",
+          "type": "string"
+        },
+        "directoryTemplate": {
+          "description": "The directory template under this file system",
+          "type": "string"
+        },
+        "fileTemplate": {
+          "description": "The file template",
+          "type": "string"
+        }
+      }
+    },
+    "AzureDataLakeStorageGen2DataFeedPatch": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetailPatch"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureDataLakeStorageGen2ParameterPatch"
+        }
+      },
+      "x-ms-discriminator-value": "AzureDataLakeStorageGen2"
+    },
+    "AzureEventHubsParameterPatch": {
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string of this Azure Event Hubs",
+          "type": "string"
+        },
+        "consumerGroup": {
+          "description": "The consumer group to be used in this data feed",
+          "type": "string"
+        }
+      }
+    },
+    "AzureEventHubsDataFeedPatch": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetailPatch"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureEventHubsParameterPatch"
+        }
+      },
+      "x-ms-discriminator-value": "AzureEventHubs"
+    },
+    "AzureLogAnalyticsParameterPatch": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id of service principal that have access to this Log Analytics",
+          "type": "string"
+        },
+        "clientId": {
+          "description": "The client id of service principal that have access to this Log Analytics",
+          "type": "string"
+        },
+        "clientSecret": {
+          "description": "The client secret of service principal that have access to this Log Analytics",
+          "type": "string"
+        },
+        "workspaceId": {
+          "description": "The workspace id of this Log Analytics",
+          "type": "string"
+        },
+        "query": {
+          "description": "The KQL (Kusto Query Language) query to fetch data from this Log Analytics",
+          "type": "string"
+        }
+      }
+    },
+    "AzureLogAnalyticsDataFeedPatch": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetailPatch"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureLogAnalyticsParameterPatch"
+        }
+      },
+      "x-ms-discriminator-value": "AzureLogAnalytics"
+    },
+    "AzureTableParameterPatch": {
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string of this Azure Table",
+          "type": "string"
+        },
+        "table": {
+          "description": "A table name in this Azure Table",
+          "type": "string"
+        },
+        "query": {
+          "description": "The statement to query this table. Please find syntax and details from Azure Table documents.",
+          "type": "string"
+        }
+      }
+    },
+    "AzureTableDataFeedPatch": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetailPatch"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/AzureTableParameterPatch"
+        }
+      },
+      "x-ms-discriminator-value": "AzureTable"
+    },
+    "InfluxDBParameterPatch": {
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string of this InfluxDB",
+          "type": "string"
+        },
+        "database": {
+          "description": "A database name",
+          "type": "string"
+        },
+        "userName": {
+          "description": "The user name of the account that can access this database",
+          "type": "string"
+        },
+        "password": {
+          "description": "The password of the account that can access this database",
+          "type": "string"
+        },
+        "query": {
+          "description": "The script to query this database",
+          "type": "string"
+        }
+      }
+    },
+    "InfluxDBDataFeedPatch": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetailPatch"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/InfluxDBParameterPatch"
+        }
+      },
+      "x-ms-discriminator-value": "InfluxDB"
+    },
+    "MySqlDataFeedPatch": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetailPatch"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/SQLSourceParameterPatch"
+        }
+      },
+      "x-ms-discriminator-value": "MySql"
+    },
+    "PostgreSqlDataFeedPatch": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetailPatch"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/SQLSourceParameterPatch"
+        }
+      },
+      "x-ms-discriminator-value": "PostgreSql"
+    },
+    "SQLServerDataFeedPatch": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetailPatch"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/SQLSourceParameterPatch"
+        }
+      },
+      "example": {
+        "dataFeedName": "Sample - cost/revenue - city/category"
+      },
+      "x-ms-discriminator-value": "SqlServer"
+    },
+    "MongoDBParameterPatch": {
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string of this MongoDB",
+          "type": "string"
+        },
+        "database": {
+          "description": "A database name in this MongoDB",
+          "type": "string"
+        },
+        "command": {
+          "description": "The script to query this database",
+          "type": "string"
+        }
+      }
+    },
+    "MongoDBDataFeedPatch": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataFeedDetailPatch"
+        }
+      ],
+      "properties": {
+        "dataSourceParameter": {
+          "$ref": "#/definitions/MongoDBParameterPatch"
+        }
+      },
+      "x-ms-discriminator-value": "MongoDB"
+    },
+    "AnomalyFeedbackValue": {
+      "required": [
+        "anomalyValue"
+      ],
+      "type": "object",
+      "properties": {
+        "anomalyValue": {
+          "enum": [
+            "AutoDetect",
+            "Anomaly",
+            "NotAnomaly"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AnomalyValue",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "FeedbackDimensionFilter": {
+      "required": [
+        "dimension"
+      ],
+      "type": "object",
+      "properties": {
+        "dimension": {
+          "description": "metric dimension filter",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MetricFeedback": {
+      "required": [
+        "dimensionFilter",
+        "feedbackType",
+        "metricId"
+      ],
+      "type": "object",
+      "properties": {
+        "feedbackType": {
+          "description": "feedback type",
+          "enum": [
+            "Anomaly",
+            "ChangePoint",
+            "Period",
+            "Comment"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FeedbackType",
+            "modelAsString": true
+          }
+        },
+        "feedbackId": {
+          "format": "uuid",
+          "description": "feedback unique id",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdTime": {
+          "format": "date-time",
+          "description": "feedback created time",
+          "type": "string",
+          "readOnly": true
+        },
+        "userPrincipal": {
+          "description": "user who gives this feedback",
+          "type": "string",
+          "readOnly": true
+        },
+        "metricId": {
+          "format": "uuid",
+          "description": "metric unique id",
+          "type": "string"
+        },
+        "dimensionFilter": {
+          "$ref": "#/definitions/FeedbackDimensionFilter"
+        }
+      },
+      "discriminator": "feedbackType"
+    },
+    "AnomalyFeedback": {
+      "required": [
+        "endTime",
+        "startTime",
+        "value"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetricFeedback"
+        }
+      ],
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "description": "the start timestamp of feedback time range",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "the end timestamp of feedback time range, when equals to startTime means only one timestamp",
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/definitions/AnomalyFeedbackValue"
+        },
+        "anomalyDetectionConfigurationId": {
+          "format": "uuid",
+          "description": "the corresponding anomaly detection configuration of this feedback",
+          "type": "string"
+        },
+        "anomalyDetectionConfigurationSnapshot": {
+          "$ref": "#/definitions/AnomalyDetectionConfiguration"
+        }
+      },
+      "example": {
+        "startTime": "2020-01-01T00:00:00Z",
+        "endTime": "2020-01-01T00:00:00Z",
+        "value": {
+          "anomalyValue": "NotAnomaly"
+        },
+        "anomalyDetectionConfigurationId": "33333333-3333-3333-3333-000000000001",
+        "metricId": "22222222-2222-2222-2222-000000000001",
+        "dimensionFilter": {
+          "dimension": {
+            "city": "Beijing"
+          }
+        },
+        "feedbackType": "Anomaly"
+      },
+      "x-ms-discriminator-value": "Anomaly"
+    },
+    "ChangePointFeedbackValue": {
+      "required": [
+        "changePointValue"
+      ],
+      "type": "object",
+      "properties": {
+        "changePointValue": {
+          "enum": [
+            "AutoDetect",
+            "ChangePoint",
+            "NotChangePoint"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ChangePointValue",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ChangePointFeedback": {
+      "required": [
+        "endTime",
+        "startTime",
+        "value"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetricFeedback"
+        }
+      ],
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "description": "the start timestamp of feedback time range",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "the end timestamp of feedback time range, when equals to startTime means only one timestamp",
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/definitions/ChangePointFeedbackValue"
+        }
+      },
+      "x-ms-discriminator-value": "ChangePoint"
+    },
+    "CommentFeedbackValue": {
+      "required": [
+        "commentValue"
+      ],
+      "type": "object",
+      "properties": {
+        "commentValue": {
+          "description": "the comment string",
+          "type": "string"
+        }
+      }
+    },
+    "CommentFeedback": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetricFeedback"
+        }
+      ],
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "description": "the start timestamp of feedback time range",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "the end timestamp of feedback time range, when equals to startTime means only one timestamp",
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/definitions/CommentFeedbackValue"
+        }
+      },
+      "x-ms-discriminator-value": "Comment"
+    },
+    "PeriodFeedbackValue": {
+      "required": [
+        "periodType",
+        "periodValue"
+      ],
+      "type": "object",
+      "properties": {
+        "periodType": {
+          "description": "the type of setting period",
+          "enum": [
+            "AutoDetect",
+            "AssignValue"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PeriodType",
+            "modelAsString": true
+          }
+        },
+        "periodValue": {
+          "format": "int32",
+          "description": "the number of intervals a period contains, when no period set to 0",
+          "default": 0,
+          "type": "integer"
+        }
+      }
+    },
+    "PeriodFeedback": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MetricFeedback"
+        }
+      ],
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/PeriodFeedbackValue"
+        }
+      },
+      "x-ms-discriminator-value": "Period"
+    },
+    "MetricFeedbackFilter": {
+      "required": [
+        "metricId"
+      ],
+      "type": "object",
+      "properties": {
+        "metricId": {
+          "format": "uuid",
+          "description": "filter feedbacks by metric id",
+          "type": "string"
+        },
+        "dimensionFilter": {
+          "$ref": "#/definitions/FeedbackDimensionFilter"
+        },
+        "feedbackType": {
+          "description": "filter feedbacks by type",
+          "enum": [
+            "Anomaly",
+            "ChangePoint",
+            "Period",
+            "Comment"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FeedbackType",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "start time filter under chosen time mode",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "end time filter under chosen time mode",
+          "type": "string"
+        },
+        "timeMode": {
+          "description": "time mode to filter feedback",
+          "enum": [
+            "MetricTimestamp",
+            "FeedbackCreatedTime"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FeedbackQueryTimeMode",
+            "modelAsString": true
+          }
+        }
+      },
+      "example": {
+        "metricId": "22222222-2222-2222-2222-000000000001",
+        "feedbackType": "Anomaly",
+        "startTime": "2020-01-01T00:00:00Z",
+        "endTime": "2020-01-01T00:00:00Z",
+        "timeMode": "MetricTimestamp"
+      }
+    },
+    "MetricFeedbackList": {
+      "type": "object",
+      "properties": {
+        "@nextLink": {
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricFeedback"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "EmailHookParameter": {
+      "required": [
+        "toList"
+      ],
+      "type": "object",
+      "properties": {
+        "toList": {
+          "description": "Email TO: list.",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "HookInfo": {
+      "required": [
+        "hookName",
+        "hookType"
+      ],
+      "type": "object",
+      "properties": {
+        "hookType": {
+          "description": "hook type",
+          "enum": [
+            "Webhook",
+            "Email"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "HookType",
+            "modelAsString": true
+          }
+        },
+        "hookId": {
+          "format": "uuid",
+          "description": "Hook unique id",
+          "type": "string",
+          "readOnly": true
+        },
+        "hookName": {
+          "description": "hook unique name",
+          "type": "string"
+        },
+        "description": {
+          "description": "hook description",
+          "default": "",
+          "type": "string"
+        },
+        "externalLink": {
+          "description": "hook external link",
+          "default": "",
+          "type": "string"
+        },
+        "admins": {
+          "description": "hook administrators",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "discriminator": "hookType"
+    },
+    "EmailHookInfo": {
+      "required": [
+        "hookParameter"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HookInfo"
+        }
+      ],
+      "properties": {
+        "hookParameter": {
+          "$ref": "#/definitions/EmailHookParameter"
+        }
+      },
+      "x-ms-discriminator-value": "Email"
+    },
+    "WebhookHookParameter": {
+      "required": [
+        "endpoint"
+      ],
+      "type": "object",
+      "properties": {
+        "endpoint": {
+          "description": "API address, will be called when alert is triggered, only support POST method via SSL",
+          "type": "string"
+        },
+        "username": {
+          "description": "(Deprecated) The username, if using basic authentication",
+          "type": "string"
+        },
+        "password": {
+          "description": "(Deprecated) The password, if using basic authentication",
+          "type": "string"
+        },
+        "headers": {
+          "description": "custom headers in api call",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "certificateKey": {
+          "description": "The certificate key/URL, if using client certificate, please read documents for more informations.",
+          "type": "string"
+        },
+        "certificatePassword": {
+          "description": "The certificate password, if using client certificate, please read documents for more informations.",
+          "type": "string"
+        }
+      }
+    },
+    "WebhookHookInfo": {
+      "required": [
+        "hookParameter"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HookInfo"
+        }
+      ],
+      "properties": {
+        "hookParameter": {
+          "$ref": "#/definitions/WebhookHookParameter"
+        }
+      },
+      "example": {
+        "hookParameter": {
+          "endpoint": "https://localhost/demo/post"
+        },
+        "hookName": "A webhook",
+        "hookType": "Webhook",
+        "description": "This is a webhook.",
+        "externalLink": ""
+      },
+      "x-ms-discriminator-value": "Webhook"
+    },
+    "HookList": {
+      "type": "object",
+      "properties": {
+        "@nextLink": {
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HookInfo"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "EmailHookParameterPatch": {
+      "type": "object",
+      "properties": {
+        "toList": {
+          "description": "Email TO: list.",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "HookInfoPatch": {
+      "required": [
+        "hookType"
+      ],
+      "type": "object",
+      "properties": {
+        "hookType": {
+          "description": "hook type",
+          "enum": [
+            "Webhook",
+            "Email"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "HookType",
+            "modelAsString": true
+          }
+        },
+        "hookName": {
+          "description": "hook unique name",
+          "type": "string"
+        },
+        "description": {
+          "description": "hook description",
+          "type": "string"
+        },
+        "externalLink": {
+          "description": "hook external link",
+          "type": "string"
+        },
+        "admins": {
+          "description": "hook administrators",
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "discriminator": "hookType"
+    },
+    "EmailHookInfoPatch": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HookInfoPatch"
+        }
+      ],
+      "properties": {
+        "hookParameter": {
+          "$ref": "#/definitions/EmailHookParameterPatch"
+        }
+      },
+      "x-ms-discriminator-value": "Email"
+    },
+    "WebhookHookParameterPatch": {
+      "type": "object",
+      "properties": {
+        "endpoint": {
+          "description": "API address, will be called when alert is triggered, only support POST method via SSL",
+          "type": "string"
+        },
+        "username": {
+          "description": "(Deprecated) The username, if using basic authentication",
+          "type": "string"
+        },
+        "password": {
+          "description": "(Deprecated) The password, if using basic authentication",
+          "type": "string"
+        },
+        "headers": {
+          "description": "custom headers in api call",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "certificateKey": {
+          "description": "The certificate key, if using client certificate",
+          "type": "string"
+        },
+        "certificatePassword": {
+          "description": "The certificate password, if using client certificate",
+          "type": "string"
+        }
+      }
+    },
+    "WebhookHookInfoPatch": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HookInfoPatch"
+        }
+      ],
+      "properties": {
+        "hookParameter": {
+          "$ref": "#/definitions/WebhookHookParameterPatch"
+        }
+      },
+      "example": {
+        "description": "This is a webhook."
+      },
+      "x-ms-discriminator-value": "Webhook"
+    },
+    "IngestionStatusQueryOptions": {
+      "required": [
+        "endTime",
+        "startTime"
+      ],
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "description": "the start point of time range to query data ingestion status.",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "the end point of time range to query data ingestion status.",
+          "type": "string"
+        }
+      },
+      "example": {
+        "startTime": "2020-01-01T00:00:00Z",
+        "endTime": "2020-02-01T00:00:00Z"
+      }
+    },
+    "IngestionStatus": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "format": "date-time",
+          "description": "data slice timestamp.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "latest ingestion task status for this data slice.",
+          "enum": [
+            "NotStarted",
+            "Scheduled",
+            "Running",
+            "Succeeded",
+            "Failed",
+            "NoData",
+            "Error",
+            "Paused"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "IngestionStatusType",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "description": "the trimmed message of last ingestion job.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "IngestionStatusList": {
+      "type": "object",
+      "properties": {
+        "@nextLink": {
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IngestionStatus"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "IngestionProgressResetOptions": {
+      "required": [
+        "endTime",
+        "startTime"
+      ],
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "description": "the start point of time range to reset data ingestion status.",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "the end point of time range to reset data ingestion status.",
+          "type": "string"
+        }
+      },
+      "example": {
+        "startTime": "2020-01-01T00:00:00Z",
+        "endTime": "2020-02-01T00:00:00Z"
+      }
+    },
+    "DataFeedIngestionProgress": {
+      "type": "object",
+      "properties": {
+        "latestSuccessTimestamp": {
+          "format": "date-time",
+          "description": "the timestamp of latest success ingestion job.\r\nnull indicates not available",
+          "type": "string",
+          "readOnly": true
+        },
+        "latestActiveTimestamp": {
+          "format": "date-time",
+          "description": "the timestamp of latest ingestion job with status update.\r\nnull indicates not available",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MetricDataQueryOptions": {
+      "required": [
+        "endTime",
+        "series",
+        "startTime"
+      ],
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "description": "start time of query a time series data, and format should be yyyy-MM-ddThh:mm:ssZ. The maximum number of data points (series number * time range) is 10000.",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "start time of query a time series data, and format should be yyyy-MM-ddThh:mm:ssZ. The maximum number of data points (series number * time range) is 10000.",
+          "type": "string"
+        },
+        "series": {
+          "description": "query specific series. The maximum number of series is 100.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "example": {
+        "startTime": "2020-01-01T00:00:00Z",
+        "endTime": "2020-02-01T00:00:00Z",
+        "series": [
+          {
+            "category": "__SUM__",
+            "city": "Beijing"
+          }
+        ]
+      }
+    },
+    "MetricSeriesItem": {
+      "type": "object",
+      "properties": {
+        "metricId": {
+          "format": "uuid",
+          "description": "metric unique id",
+          "type": "string",
+          "readOnly": true
+        },
+        "dimension": {
+          "description": "dimension name and value pair",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "MetricDataItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/MetricSeriesItem"
+        },
+        "timestampList": {
+          "description": "timestamps of the data related to this time series",
+          "type": "array",
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "valueList": {
+          "description": "values of the data related to this time series",
+          "type": "array",
+          "items": {
+            "format": "double",
+            "type": "number"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "MetricDataList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDataItem"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "MetricSeriesQueryOptions": {
+      "required": [
+        "activeSince"
+      ],
+      "type": "object",
+      "properties": {
+        "activeSince": {
+          "format": "date-time",
+          "description": "query series ingested after this time, the format should be yyyy-MM-ddTHH:mm:ssZ",
+          "type": "string"
+        },
+        "dimensionFilter": {
+          "description": "filter specific dimension name and values",
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "example": {
+        "activeSince": "2020-01-01T00:00:00Z",
+        "dimensionFilter": {
+          "city": [
+            "Beijing"
+          ]
+        }
+      }
+    },
+    "MetricSeriesList": {
+      "type": "object",
+      "properties": {
+        "@nextLink": {
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSeriesItem"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "MetricDimensionQueryOptions": {
+      "required": [
+        "dimensionName"
+      ],
+      "type": "object",
+      "properties": {
+        "dimensionName": {
+          "description": "dimension name",
+          "type": "string"
+        },
+        "dimensionValueFilter": {
+          "description": "dimension value to be filtered",
+          "type": "string"
+        }
+      },
+      "example": {
+        "dimensionName": "city"
+      }
+    },
+    "MetricDimensionList": {
+      "type": "object",
+      "properties": {
+        "@nextLink": {
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "uniqueItems": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "AnomalyDetectionConfigurationList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnomalyDetectionConfiguration"
+          },
+          "readOnly": true
+        },
+        "@nextLink": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EnrichmentStatusQueryOption": {
+      "required": [
+        "endTime",
+        "startTime"
+      ],
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "description": "the start point of time range to query anomaly detection status.",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "description": "the end point of time range to query anomaly detection status.",
+          "type": "string"
+        }
+      },
+      "example": {
+        "startTime": "2020-01-01T00:00:00Z",
+        "endTime": "2020-02-01T00:00:00Z"
+      }
+    },
+    "EnrichmentStatus": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "format": "date-time",
+          "description": "data slice timestamp.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "latest enrichment status for this data slice.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "the trimmed message describes details of the enrichment status.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EnrichmentStatusList": {
+      "type": "object",
+      "properties": {
+        "@nextLink": {
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnrichmentStatus"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "ma_api_key": {
+      "type": "apiKey",
+      "name": "x-api-key",
+      "in": "header"
+    },
+    "apim_key": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apim_key": [],
+      "ma_api_key": []
+    }
+  ],
+  "parameters": {
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://<resource-name>.cognitiveservices.azure.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/metricsadvisor/v1.0",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  }
+}

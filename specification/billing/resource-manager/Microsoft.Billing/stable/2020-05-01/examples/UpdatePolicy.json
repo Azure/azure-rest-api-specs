@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2020-05-01",
+    "billingAccountName": "{billingAccountName}",
+    "billingProfileName": "{billingProfileName}",
+    "parameters": {
+      "properties": {
+        "marketplacePurchases": "OnlyFreeAllowed",
+        "reservationPurchases": "NotAllowed",
+        "viewCharges": "Allowed"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/policies/default",
+        "name": "default",
+        "type": "Microsoft.Billing/billingAccounts/billingProfiles/policies",
+        "properties": {
+          "marketplacePurchases": "OnlyFreeAllowed",
+          "reservationPurchases": "NotAllowed",
+          "viewCharges": "Allowed"
+        }
+      }
+    }
+  }
+}

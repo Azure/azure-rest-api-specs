@@ -42,6 +42,11 @@
         "operationId": "Subscriptions_ListLocations",
         "summary": "Gets all available geo-locations.",
         "description": "This operation provides all the locations that are available for resource providers; however, each resource provider may support a subset of this list.",
+        "x-ms-examples": {
+          "listLocations": {
+            "$ref": "./examples/listLocations.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -70,6 +75,11 @@
         ],
         "operationId": "Subscriptions_Get",
         "description": "Gets details about a specified subscription.",
+        "x-ms-examples": {
+          "getSubscription": {
+            "$ref": "./examples/getSubscription.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -95,6 +105,11 @@
         ],
         "operationId": "Subscriptions_List",
         "description": "Gets all subscriptions for a tenant.",
+        "x-ms-examples": {
+          "listSubscriptions": {
+            "$ref": "./examples/listSubscriptions.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -120,6 +135,11 @@
         ],
         "operationId": "Tenants_List",
         "description": "Gets the tenants for your account.",
+        "x-ms-examples": {
+          "listTenants": {
+            "$ref": "./examples/listTenants.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -220,6 +240,18 @@
             "modelAsString": false
           }
         },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID. For example, 00000000-0000-0000-0000-000000000000."
+        },
+        "tags": {
+          "description": "Tags for the subscription",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "subscriptionPolicies": {
           "$ref": "#/definitions/SubscriptionPolicies",
           "description": "The subscription policies."
@@ -274,9 +306,6 @@
           "description": "The URL to get the next set of results."
         }
       },
-      "required": [
-        "nextLink"
-      ],
       "description": "Subscription list operation response."
     },
     "TenantIdDescription": {
@@ -290,6 +319,41 @@
           "readOnly": true,
           "type": "string",
           "description": "The tenant ID. For example, 00000000-0000-0000-0000-000000000000."
+        },
+        "tenantCategory": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The category of the tenant. Possible values are TenantCategoryHome,TenantCategoryProjectedBy,TenantCategoryManagedBy"
+        },
+        "country": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The country/region name of the address for the tenant."
+        },
+        "countryCode": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The Country/region abbreviation for the tenant."
+        },
+        "displayName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The display name of the tenant."
+        },
+        "domains": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The list of domains for the tenant."
+        },
+        "defaultDomain": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The default domain for the tenant."
+        },
+        "tenantType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant type. Only available for Home tenant category."
         }
       },
       "description": "Tenant Id information."

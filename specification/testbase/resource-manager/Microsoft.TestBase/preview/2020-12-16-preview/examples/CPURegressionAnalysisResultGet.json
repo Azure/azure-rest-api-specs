@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "subscriptionId": "476f61a4-952c-422a-b4db-568a828f35df",
+    "resourceGroupName": "contoso-rg1",
+    "testBaseAccountName": "contoso-testBaseAccount1",
+    "packageName": "contoso-package2",
+    "testResultName": "Windows-10-1909-Test-Id",
+    "analysisResultName": "cpuRegression",
+    "api-version": "2020-12-16-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cpuRegression",
+        "id": "/subscriptions/476f61a4-952c-422a-b4db-568a828f35df/resourceGroups/contoso-rg1/providers/Microsoft.TestBase/testBaseAccounts/contoso-testBaseAccount1/packages/contoso-package2/testResults/Windows-10-1909-Test-Id/analysisResults/cpuRegression",
+        "type": "Microsoft.TestBase/testBaseAccounts/packages/testResults/analysisResults",
+        "properties": {
+          "grade": "Pass",
+          "analysisResultType": "CPURegression",
+          "cpuRegressionResults": [
+            {
+              "fileName": "testApp.exe",
+              "grade": "Pass",
+              "details": "Some details of testApp",
+              "diff": 0.1,
+              "isRegressed": false
+            },
+            {
+              "fileName": "dependencies.exe",
+              "grade": "Pass",
+              "details": "Some details of dependencies",
+              "diff": 0.15,
+              "isRegressed": false
+            }
+          ]
+        }
+      }
+    }
+  }
+}

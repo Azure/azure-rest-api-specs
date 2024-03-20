@@ -186,6 +186,70 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         }
+      },
+      "patch": {
+        "tags": [
+          "BastionHosts"
+        ],
+        "operationId": "BastionHosts_UpdateTags",
+        "x-ms-examples": {
+          "BastionHostUpdate": {
+            "$ref": "./examples/BastionHostUpdateTags.json"
+          }
+        },
+        "description": "Updates bastion host tags.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the BastionHost."
+          },
+          {
+            "name": "bastionHostName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the bastionHost."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "bastionHostParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update a bastion host tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the updated bastion host.",
+            "schema": {
+              "$ref": "#/definitions/BastionHost"
+            }
+          },
+          "201": {
+            "description": "Request received successfully. Returns the details of the updated bastion host.",
+            "schema": {
+              "$ref": "#/definitions/BastionHost"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/bastionHosts": {

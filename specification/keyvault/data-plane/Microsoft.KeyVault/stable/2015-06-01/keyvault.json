@@ -267,7 +267,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 25,
-            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+            "description": "Specifies the maximum number of results to return in a page. Setting maxresults to a value less than 1 or greater than 25 results in error response code 400 (Bad Request). If there are additional results to return, then the service returns a nextLink containing a skip token for pagination. In certain cases, the service might return fewer results than specified by maxresults (even 0 results) and also return a nextLink. Clients should not make any assumptions on the minimum number of results per page, and should enumerate all pages until the nextLink becomes null."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -308,7 +308,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 25,
-            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+            "description": "Specifies the maximum number of results to return in a page. Setting maxresults to a value less than 1 or greater than 25 results in error response code 400 (Bad Request). If there are additional results to return, then the service returns a nextLink containing a skip token for pagination. In certain cases, the service might return fewer results than specified by maxresults (even 0 results) and also return a nextLink. Clients should not make any assumptions on the minimum number of results per page, and should enumerate all pages until the nextLink becomes null."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -904,7 +904,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 25,
-            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+            "description": "Specifies the maximum number of results to return in a page. Setting maxresults to a value less than 1 or greater than 25 results in error response code 400 (Bad Request). If there are additional results to return, then the service returns a nextLink containing a skip token for pagination. In certain cases, the service might return fewer results than specified by maxresults (even 0 results) and also return a nextLink. Clients should not make any assumptions on the minimum number of results per page, and should enumerate all pages until the nextLink becomes null."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -952,7 +952,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 25,
-            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+            "description": "Specifies the maximum number of results to return in a page. Setting maxresults to a value less than 1 or greater than 25 results in error response code 400 (Bad Request). If there are additional results to return, then the service returns a nextLink containing a skip token for pagination. In certain cases, the service might return fewer results than specified by maxresults (even 0 results) and also return a nextLink. Clients should not make any assumptions on the minimum number of results per page, and should enumerate all pages until the nextLink becomes null."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -993,7 +993,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 25,
-            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+            "description": "Specifies the maximum number of results to return in a page. Setting maxresults to a value less than 1 or greater than 25 results in error response code 400 (Bad Request). If there are additional results to return, then the service returns a nextLink containing a skip token for pagination. In certain cases, the service might return fewer results than specified by maxresults (even 0 results) and also return a nextLink. Clients should not make any assumptions on the minimum number of results per page, and should enumerate all pages until the nextLink becomes null."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1158,7 +1158,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 25,
-            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+            "description": "Specifies the maximum number of results to return in a page. Setting maxresults to a value less than 1 or greater than 25 results in error response code 400 (Bad Request). If there are additional results to return, then the service returns a nextLink containing a skip token for pagination. In certain cases, the service might return fewer results than specified by maxresults (even 0 results) and also return a nextLink. Clients should not make any assumptions on the minimum number of results per page, and should enumerate all pages until the nextLink becomes null."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1452,7 +1452,7 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 25,
-            "description": "Maximum number of results to return in a page. If not specified the service will return up to 25 results."
+            "description": "Specifies the maximum number of results to return in a page. Setting maxresults to a value less than 1 or greater than 25 results in error response code 400 (Bad Request). If there are additional results to return, then the service returns a nextLink containing a skip token for pagination. In certain cases, the service might return fewer results than specified by maxresults (even 0 results) and also return a nextLink. Clients should not make any assumptions on the minimum number of results per page, and should enumerate all pages until the nextLink becomes null."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1813,25 +1813,25 @@
           "x-ms-client-name": "NotBefore",
           "type": "integer",
           "format": "unixtime",
-          "description": "Not before date in UTC"
+          "description": "Not before date in seconds since 1970-01-01T00:00:00Z"
         },
         "exp": {
           "x-ms-client-name": "Expires",
           "type": "integer",
           "format": "unixtime",
-          "description": "Expiry date in UTC"
+          "description": "Expiry date in seconds since 1970-01-01T00:00:00Z"
         },
         "created": {
           "type": "integer",
           "format": "unixtime",
           "readOnly": true,
-          "description": "Creation time in UTC"
+          "description": "Creation time in seconds since 1970-01-01T00:00:00Z"
         },
         "updated": {
           "type": "integer",
           "format": "unixtime",
           "readOnly": true,
-          "description": "Last updated time in UTC"
+          "description": "Last updated time in seconds since 1970-01-01T00:00:00Z"
         }
       },
       "description": "The object attributes managed by the KeyVault service"
@@ -2443,13 +2443,13 @@
           "type": "integer",
           "format": "unixtime",
           "readOnly": true,
-          "description": "Creation time in UTC"
+          "description": "Creation time in seconds since 1970-01-01T00:00:00Z"
         },
         "updated": {
           "type": "integer",
           "format": "unixtime",
           "readOnly": true,
-          "description": "Last updated time in UTC"
+          "description": "Last updated time in seconds since 1970-01-01T00:00:00Z"
         }
       },
       "description": "The attributes of an issuer managed by the KeyVault service"

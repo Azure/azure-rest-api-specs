@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2023-09-15",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rgName",
+    "accountName": "ddb1",
+    "keyspaceName": "keyspaceName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/cassandraKeyspaces/keyspaceName/cassandraTables/tableName",
+            "name": "tableName",
+            "type": "Microsoft.DocumentDB/databaseAccounts/cassandraKeyspaces/cassandraTables",
+            "location": "West US",
+            "tags": {},
+            "properties": {
+              "resource": {
+                "id": "tableName",
+                "defaultTtl": 100,
+                "schema": {
+                  "columns": [
+                    {
+                      "name": "columnA",
+                      "type": "Ascii"
+                    }
+                  ],
+                  "partitionKeys": [
+                    {
+                      "name": "columnA"
+                    }
+                  ],
+                  "clusterKeys": [
+                    {
+                      "name": "columnA",
+                      "orderBy": "Asc"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

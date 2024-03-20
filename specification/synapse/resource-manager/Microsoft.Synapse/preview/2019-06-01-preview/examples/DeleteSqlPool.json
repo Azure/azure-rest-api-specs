@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "subscriptionId": "01234567-89ab-4def-0123-456789abcdef",
+    "resourceGroupName": "ExampleResourceGroup",
+    "workspaceName": "ExampleWorkspace",
+    "sqlPoolName": "ExampleSqlPool",
+    "api-version": "2019-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/sqlPools/ExampleSqlPool",
+        "name": "ExampleSqlPool",
+        "type": "Microsoft.Synapse/workspaces/sqlPools",
+        "location": "West US 2",
+        "properties": {
+          "provisioningState": "Deleting",
+          "status": "Paused"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "id": "/subscriptions/01234567-89ab-4def-0123-456789abcdef/resourceGroups/ExampleResourceGroup/providers/Microsoft.Synapse/workspaces/ExampleWorkspace/sqlPools/ExampleSqlPool",
+        "name": "ExampleSqlPool",
+        "type": "Microsoft.Synapse/workspaces/sqlPools",
+        "location": "West US 2",
+        "properties": {
+          "provisioningState": "Deleting",
+          "status": "Paused"
+        }
+      }
+    },
+    "204": {},
+    "default": {
+      "body": {
+        "error": {
+          "code": "Error code",
+          "message": "Error message"
+        }
+      }
+    }
+  }
+}

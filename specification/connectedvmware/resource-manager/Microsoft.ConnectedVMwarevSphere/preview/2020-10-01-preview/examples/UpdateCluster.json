@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2020-10-01-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "testrg",
+    "clusterName": "HRCluster",
+    "body": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.ConnectedVMwarevSphere/Clusters/HRCluster",
+        "name": "HRCluster",
+        "type": "Microsoft.ConnectedVMwarevSphere/Clusters",
+        "location": "East US",
+        "extendedLocation": {
+          "type": "customLocation",
+          "name": "/subscriptions/a5015e1c-867f-4533-8541-85cd470d0cfb/resourceGroups/demoRG/providers/Microsoft.ExtendedLocation/customLocations/contoso"
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "vCenterId": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.ConnectedVMwarevSphere/VCenters/ContosoVCenter",
+          "moRefId": "aaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}
