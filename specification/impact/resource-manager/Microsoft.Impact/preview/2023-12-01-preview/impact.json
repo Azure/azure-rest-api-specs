@@ -94,7 +94,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/Connectors": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/connectors": {
       "get": {
         "operationId": "Connectors_ListBySubscription",
         "tags": [
@@ -128,7 +128,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/Connectors/{connectorName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Impact/connectors/{connectorName}": {
       "get": {
         "operationId": "Connectors_Get",
         "tags": [
@@ -1175,11 +1175,6 @@
           "description": "tenant id of this connector",
           "readOnly": true
         },
-        "subscriptionId": {
-          "type": "string",
-          "description": "subscription id of this connector",
-          "readOnly": true
-        },
         "connectorType": {
           "$ref": "#/definitions/Platform",
           "description": "connector type"
@@ -1198,7 +1193,6 @@
       "required": [
         "connectorId",
         "tenantId",
-        "subscriptionId",
         "connectorType",
         "lastRunTimeStamp"
       ]

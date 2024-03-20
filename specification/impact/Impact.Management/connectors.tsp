@@ -23,7 +23,7 @@ model Connector is ProxyResource<ConnectorProperties> {
   @doc("The name of the connector")
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   @key("connectorName")
-  @segment("Connectors")
+  @segment("connectors")
   @path
   name: string;
 }
@@ -38,10 +38,6 @@ model ConnectorProperties is ResourceProperties{
   @visibility("read")
   @doc("tenant id of this connector")
   tenantId: string;
-
-  @visibility("read")
-  @doc("subscription id of this connector")
-  subscriptionId: string;
 
   @doc("connector type")
   connectorType: Platform;
