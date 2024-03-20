@@ -8,9 +8,11 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ApiCenter;
 @doc("API deployment entity.")
+@added(Versions.v2024_03_15_preview)
 @parentResource(Api)
 model Deployment is ProxyResource<DeploymentProperties> {
   @doc("The name of the API deployment.")
@@ -24,6 +26,7 @@ model Deployment is ProxyResource<DeploymentProperties> {
 }
 
 @armResourceOperations
+@added(Versions.v2024_03_15_preview)
 interface Deployments {
   @doc("Returns details of the API deployment.")
   get is ArmResourceRead<Deployment>;
