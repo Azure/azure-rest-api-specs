@@ -1,43 +1,51 @@
 import "@typespec/http";
 import "@typespec/rest";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 namespace ContentSafety;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("Text analyze category.")
-enum TextCategory {
-  Hate,
-  SelfHarm,
-  Sexual,
-  Violence,
+union TextCategory {
+  string,
+  "Hate",
+  "SelfHarm",
+  "Sexual",
+  "Violence",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("Image analyze category.")
-enum ImageCategory {
-  Hate,
-  SelfHarm,
-  Sexual,
-  Violence,
+union ImageCategory {
+  string,
+  "Hate",
+  "SelfHarm",
+  "Sexual",
+  "Violence",
 }
 
 @doc("The type of text analysis output.")
-enum AnalyzeTextOutputType {
+union AnalyzeTextOutputType {
+  string,
+
   @doc("Output severities in four levels, the value could be 0,2,4,6.")
-  FourSeverityLevels,
+  FourSeverityLevels: "FourSeverityLevels",
 
   @doc("Output severities in eight levels, the value could be 0,1,2,3,4,5,6,7.")
-  EightSeverityLevels,
+  EightSeverityLevels: "EightSeverityLevels",
 }
 
 @doc("The type of image analysis output.")
-enum AnalyzeImageOutputType {
+union AnalyzeImageOutputType {
+  string,
+
   @doc("Output severities in four levels, the value could be 0,2,4,6.")
-  FourSeverityLevels,
+  FourSeverityLevels: "FourSeverityLevels",
 }
 
 @doc("The text analysis request.")
@@ -105,14 +113,14 @@ model AnalyzeImageOptions {
 }
 
 @doc("The image can be either base64 encoded bytes or a blob URL. You can choose only one of these options. If both are provided, the request will be refused. The maximum image size is 2048 x 2048 pixels and should not exceed 4 MB, while the minimum image size is 50 x 50 pixels.")
-@projectedName("csharp", "ContentSafetyImageData")
-@projectedName("java", "ContentSafetyImageData")
+@clientName("ContentSafetyImageData", "csharp")
+@clientName("ContentSafetyImageData", "java")
 model ImageData {
   @doc("The Base64 encoding of the image.")
   content?: bytes;
 
   @doc("The blob url of the image.")
-  @projectedName("csharp", "BlobUri")
+  @clientName("BlobUri", "csharp")
   blobUrl?: url;
 }
 
@@ -139,8 +147,8 @@ model TextBlocklist {
   @key("blocklistName")
   @visibility("read", "create", "query")
   @maxLength(64)
-  @projectedName("csharp", "Name")
-  @projectedName("java", "name")
+  @clientName("Name", "csharp")
+  @clientName("name", "java")
   blocklistName: string;
 
   @doc("Text blocklist description.")
