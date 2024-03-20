@@ -19,7 +19,7 @@ model DefaultSecurityRule is ProxyResource<SecurityRuleProperties> {
   @doc("Name of the default security rule.")
   @path
   @key("defaultSecurityRuleName")
-  @segment("defaultsecurityrules")
+  @segment("defaultSecurityRules")
   @visibility("read")
   name: string;
 

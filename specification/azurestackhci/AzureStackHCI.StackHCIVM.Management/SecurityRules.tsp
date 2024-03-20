@@ -19,7 +19,7 @@ model SecurityRule is ProxyResource<SecurityRuleProperties> {
   @doc("Name of the security rule.")
   @path
   @key("securityRuleName")
-  @segment("securityrules")
+  @segment("securityRules")
   @visibility("read")
   name: string;
 
