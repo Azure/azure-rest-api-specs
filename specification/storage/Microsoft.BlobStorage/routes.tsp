@@ -534,6 +534,8 @@ interface BlobListService {
   @doc("The Filter Blobs operation enables callers to list blobs in a container whose tags match a given search expression.  Filter blobs searches within the given container.")
   @get
   @operationId("Container_FilterBlobs")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   filterBlobs(
     ...ContainerNameParameter;
     ...MarkerParameter;
@@ -563,13 +565,15 @@ interface ContainerLeaseService {
   @doc("[Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite")
   @put
   @operationId("Container_AcquireLease")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   acquireLease(
     ...ContainerNameParameter;
-    ...LeaseDuration;
+    ...LeaseDurationParameter;
     ...TimeoutParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
-    ...ProposedLeaseId;
+    ...ProposedLeaseIdOptional;
     ...IfModifiedSince;
     ...IfUnmodifiedSince;
   ): {
@@ -598,6 +602,8 @@ interface ContainerReleaseLeaseService {
   @doc("[Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite")
   @put
   @operationId("Container_ReleaseLease")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   releaseLease(
     ...ContainerNameParameter;
     ...LeaseIdRequired;
@@ -630,6 +636,8 @@ interface ContainerRenewLeaseService {
   @doc("[Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite")
   @put
   @operationId("Container_RenewLease")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   renewLease(
     ...ContainerNameParameter;
     ...LeaseIdRequired;
@@ -664,6 +672,8 @@ interface ConatinerBreakLeaseService {
   @doc("[Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite")
   @put
   @operationId("Container_BreakLease")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   breakLease(
     ...ContainerNameParameter;
     ...TimeoutParameter;
@@ -675,7 +685,7 @@ interface ConatinerBreakLeaseService {
   ): {
     @statusCode statusCode: 202;
     @doc("The lease time remaining on the container.")
-    @header `x-ms-lease-time`: number;
+    @header `x-ms-lease-time`: int32;
     @doc("The ETag contains a value that you can use to perform operations conditionally.")
     @header ETag: string;
     @doc("The date/time that the container was last modified.")
@@ -696,6 +706,8 @@ interface ContainerChangeLeaseService {
   @doc("[Update] establishes and manages a lock on a container for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite")
   @put
   @operationId("Container_ChangeLease")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   changeLease(
     ...ContainerNameParameter;
     ...LeaseIdRequired;
@@ -715,7 +727,7 @@ interface ContainerChangeLeaseService {
     @encode("date-time-rfc1123")
     @header `Last-Modified`: utcDateTime;
     @doc("The lease time remaining on the container.")
-    @header `x-ms-lease-time`: number;
+    @header `x-ms-lease-time`: int64;
     @doc("If a client request id header is sent in the request, this header will be present in the response with the same value.")
     @header `x-ms-client-request-id`?: string;
     @doc("Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.")
@@ -727,40 +739,375 @@ interface ContainerChangeLeaseService {
 
 @route("/{containerName}?restype=container&comp=list&flat")
 interface ContainerListBlobsService {
-  @doc("[Update] The List Blobs operation returns a list of the blobs under the specified container",)
+  @doc("[Update] The List Blobs operation returns a list of the blobs under the specified container")
   @get
-  @operationId("Container_ListBlobs")
+  @operationId("Container_ListBlobFlatSegment")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   listBlobs(
     ...ContainerNameParameter;
     ...PrefixParameter;
     ...MarkerParameter;
     ...MaxResultsParameter;
-    ...IncludeParameter;
-    ...DelimiterParameter;
+    ...ListBlobsInclude;
     ...TimeoutParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
   ): {
     @statusCode statusCode: 200;
-    @body body: ListBlobsFlatSegment;
-    @doc("The ETag contains a value that you can use to perform operations conditionally.")
-    @header ETag: string;
+    @body body: ListBlobsFlatSegmentResponse;
+    @doc("If a client request id header is sent in the request, this header will be present in the response with the same value.")
+    @header `x-ms-client-request-id`?: string;
+    @doc("This header uniquely identifies the request that was made and can be used for troubleshooting the request.")
+    @header `x-ms-request-id`: string;
+    @doc("Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.")
+    @header `x-ms-version`: string;
+    @doc("UTC date/time value generated by the service that indicates the time at which the response was initiated")
+    @encode("date-time-rfc1123")
+    @header Date: utcDateTime;
+  } | StorageError;
+}
+
+@route("/{containerName}?restype=container&comp=list&hierarchy")
+interface ContainerListBlobsHierarchyService {
+  @doc("[Update] The List Blobs operation returns a list of the blobs under the specified container")
+  @get
+  @operationId("Container_ListBlobHierarchySegment")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  listBlobs(
+    ...ContainerNameParameter;
+    ...DelimiterParameter;
+    ...PrefixParameter;
+    ...MarkerParameter;
+    ...MaxResultsParameter;
+    ...ListBlobsInclude;
+    ...TimeoutParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
+  ): {
+    @statusCode statusCode: 200;
+    @body body: ListBlobsHierarchySegmentResponse;
+    @doc("If a client request id header is sent in the request, this header will be present in the response with the same value.")
+    @header `x-ms-client-request-id`?: string;
+    @doc("This header uniquely identifies the request that was made and can be used for troubleshooting the request.")
+    @header `x-ms-request-id`: string;
+    @doc("Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.")
+    @header `x-ms-version`: string;
+    @doc("UTC date/time value generated by the service that indicates the time at which the response was initiated")
+    @encode("date-time-rfc1123")
+    @header Date: utcDateTime;
+  } | StorageError;
+}
+
+@route("/{containerName}?restype=account&comp=properties")
+interface ContainerAccountInfoService {
+  @doc("Returns the sku name and account kind ")
+  @get
+  @operationId("Container_GetAccountInfo")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  getAccountInfo(
+    ...ApiVersionParameter;
+  ): {
+    @statusCode statusCode: 200;
+    @doc("If a client request id header is sent in the request, this header will be present in the response with the same value.")
+    @header `x-ms-client-request-id`?: string;
+    @doc("This header uniquely identifies the request that was made and can be used for troubleshooting the request.")
+    @header `x-ms-request-id`: string;
+    @doc("Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.")
+    @header `x-ms-version`: string;
+    @doc("UTC date/time value generated by the service that indicates the time at which the response was initiated")
+    @encode("date-time-rfc1123")
+    @header Date: utcDateTime;
+    @doc("Identifies the sku name of the account.")
+    @clientName("SkuName")
+    @header `x-ms-sku-name`: SkuName;
+    @doc("Identifies the account kind.")
+    @clientName("AccountKind")
+    @header `x-ms-account-kind`: AccountKind;
+  } | StorageError;
+}
+
+@route("/{containerName}/{blob}")
+interface BlobService {
+  @doc("The Download operation reads or downloads a blob from the system, including its metadata and properties. You can also call Download to read a snapshot.")
+  @get
+  @operationId("Blob_Download")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  downloadBlob(
+    ...SnapshotParameter;
+    ...VersionIdParameter;
+    ...TimeoutParameter;
+    ...RangeParameter;
+    ...LeaseIdOptional;
+    ...GetRangeContentMD5;
+    ...GetRangeContentCRC64;
+    ...EncryptionKeyParameter;
+    ...EncryptionKeySha256Parameter;
+    ...EncryptionAlgorithmParameter;
+    ...IfMatchParameter;
+    ...IfNoneMatchParameter;
+    ...IfTagsParameter;
+    ...IfModifiedSince;
+    ...IfUnmodifiedSince;
+    ...ClientRequestIdParameter;
+    ...ApiVersionParameter;
+  ): {
+    @statusCode statusCode: 200;
+    @body body: bytes;
+    // TODO: x-ms-meta headers
+    // TODO: x-ms-or headers
     @doc("The date/time that the container was last modified.")
     @encode("date-time-rfc1123")
     @header `Last-Modified`: utcDateTime;
+    @doc("Returns the date and time the blob was created.")
+    @encode("date-time-rfc1123")
+    @clientName("CreationTime")
+    @header `x-ms-creation-time`: utcDateTime;
+    @doc("Optional. Only valid when Object Replication is enabled for the storage container and on the destination blob of the replication.")
+    @clientName("ObjectReplicationPolicyId")
+    @header `x-ms-or-policy-id`: string;
+    @doc("Indicates the range of bytes returned in the event that the client requested a subset of the blob by setting the 'Range' request header.")
+    @header `Content-Range`: string;
+    @doc("If the blob has an MD5 hash and this operation is to read the full blob, this response header is returned so that the client can check for message content integrity.")
+    @header `Content-MD5`: string;
+    @doc("This header returns the value that was specified for the Content-Encoding request header")
+    @header `Content-Encoding`: string;
+    @doc("This header is returned if it was previously specified for the blob.")
+    @header `Cache-Control`: string;
+    @doc("This header returns the value that was specified for the 'x-ms-blob-content-disposition' header. The Content-Disposition response header field conveys additional information about how to process the response payload, and also can be used to attach additional metadata. For example, if set to attachment, it indicates that the user-agent should not display the response, but instead show a Save As dialog with a filename other than the blob name specified.")
+    @header `Content-Disposition`: string;
+    @doc("This header returns the value that was specified for the Content-Language request header.")
+    @header `Content-Language`: string;
+    @doc("The current sequence number for a page blob. This header is not returned for block blobs or append blobs")
+    @clientName("BlobSequenceNumber")
+    @header `x-ms-blob-sequence-number`: int64;
+    @doc("The type of the blob.")
+    @clientName("BlobType")
+    @header `x-ms-blob-type`: BlobType;
+    @doc("Conclusion time of the last attempted Copy Blob operation where this blob was the destination blob. This value can specify the time of a completed, aborted, or failed copy attempt. This header does not appear if a copy is pending, if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List.")
+    @clientName("CopyCompletionTime")
+    @encode("date-time-rfc1123")
+    @header `x-ms-copy-completion-time`: utcDateTime;
+    @doc("Only appears when x-ms-copy-status is failed or pending. Describes the cause of the last fatal or non-fatal copy operation failure. This header does not appear if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List")
+    @clientName("CopyStatusDescription")
+    @header `x-ms-copy-status-description`: string;
+    @doc("String identifier for this copy operation. Use with Get Blob Properties to check the status of this copy operation, or pass to Abort Copy Blob to abort a pending copy.")
+    @clientName("CopyId")
+    @header `x-ms-copy-id`: string;
+    @doc("Contains the number of bytes copied and the total bytes in the source in the last attempted Copy Blob operation where this blob was the destination blob. Can show between 0 and Content-Length bytes copied. This header does not appear if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List")
+    @clientName("CopyProgress")
+    @header `x-ms-copy-progress`: string;
+    @doc("State of the copy operation identified by x-ms-copy-id.")
+    @clientName("CopyStatus")
+    @header `x-ms-copy-status`: CopyStatus;
+    @doc("URL up to 2 KB in length that specifies the source blob or file used in the last attempted Copy Blob operation where this blob was the destination blob. This header does not appear if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List.")
+    @clientName("CopySource")
+    @header `x-ms-copy-source`: string;
+    @doc("When a blob is leased, specifies whether the lease is of infinite or fixed duration.")
+    @clientName("LeaseDuration")
+    @header `x-ms-lease-duration`: LeaseDuration;
+    @doc("Lease state of the blob.")
+    @clientName("LeaseState")
+    @header `x-ms-lease-state`: LeaseState;
+    @doc("The lease status of the blob.")
+    @clientName("LeaseStatus")
+    @header `x-ms-lease-status`: LeaseStatus;
     @doc("Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.")
+    @clientName("Version")
     @header `x-ms-version`: string;
-    @doc("The value of the NextMarker header is used when the number of blobs to return exceeds the maximum that can be returned in a single response.")
-    @header `x-ms-blob-continuation-token`: string;
+    @doc("A DateTime value returned by the service that uniquely identifies the blob. The value of this header indicates the blob version, and may be used in subsequent requests to access this version of the blob.")
+    @clientName("VersionId")
+    @header `x-ms-version-id`: string;
+    @doc("The value of this header indicates whether version of this blob is a current version, see also x-ms-version-id header.")
+    @clientName("IsCurrentVersion")
+    @header `x-ms-is-current-version`: boolean;
+    @doc("Indicates that the service supports requests for partial blob content.")
+    @header `Accept-Ranges`: string;
+    @doc("The number of committed blocks present in the blob. This header is returned only for append blobs.")
+    @clientName("BlobCommittedBlockCount")
+    @header `x-ms-blob-committed-block-count`: int32;
+    @doc("The value of this header is set to true if the blob data and application metadata are completely encrypted using the specified algorithm. Otherwise, the value is set to false (when the blob is unencrypted, or if only parts of the blob/application metadata are encrypted).")
+    @clientName("IsServerEncrypted")
+    @header `x-ms-server-encrypted`: boolean;
+    @doc("The SHA-256 hash of the encryption key used to encrypt the blob. This header is only returned when the blob was encrypted with a customer-provided key.")
+    @clientName("EncryptionKeySha256")
+    @header `x-ms-encryption-key-sha256`: string;
+    @doc("If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range")
+    @clientName("EncryptionScope")
+    @header `x-ms-encryption-scope`: string;
+    @doc("The number of tags associated with the blob")
+    @clientName("TagCount")
+    @header `x-ms-tag-count`: int64;
+    @doc("If this blob has been sealed")
+    @clientName("IsSealed")
+    @header `x-ms-blob-sealed`: boolean;
+    @doc("UTC date/time value generated by the service that indicates the time at which the blob was last read or written to")
+    @clientName("LastAccessed")
+    @encode("date-time-rfc1123")
+    @header `x-ms-last-access-time`: utcDateTime;
+    @doc("UTC date/time value generated by the service that indicates the time at which the blob immutability policy will expire.")
+    @clientName("ImmutabilityPolicyExpiresOn")
+    @encode("date-time-rfc1123")
+    @header `x-ms-immutability-policy-until-date`: utcDateTime;
+    @doc("Indicates immutability policy mode.")
+    @clientName("ImmutabilityPolicyMode")
+    @header `x-ms-immutability-policy-mode`: BlobImmutabilityPolicyMode;
+    @doc("Indicates if a legal hold is present on the blob.")
+    @clientName("LegalHold")
+    @header `x-ms-legal-hold`: boolean;
     @doc("The media type of the body of the response. For batch requests, this is multipart/mixed; boundary=batchresponse_GUID")
     @header `Content-Type`: string;
-    @doc("The value of the NextMarker header is used when the number of blobs to return exceeds the maximum that can be returned in a single response.")
-    @header `x-ms-continuation-token`: string;
-    @doc("The value of the NextMarker header is used when the number of blobs to return exceeds the maximum that can be returned in a single response.")
-    @header `x-ms-marker`: string;
-    @doc("The value of the NextMarker header is used when the number of blobs to return exceeds the maximum that can be returned in a single response.")
-    @header `x-ms-blob-continuation-token`: string;
-    @doc("The value of the NextMarker header is used when the number of blobs to return exceeds the maximum that can be returned in a single response.")
-    @header `x-ms-continuation-token`: string;
-    @doc("The value of the NextMarker header is used when
+    @doc("The number of bytes present in the response body.")
+    @header `Content-Length`: int64;
+    @doc("The ETag contains a value that you can use to perform operations conditionally.")
+    @header ETag: string;
+  } | {
+    @statusCode statusCode: 206;
+    @body body: bytes;
+    // TODO: x-ms-meta headers
+    // TODO: x-ms-or headers
+    @doc("The date/time that the container was last modified.")
+    @encode("date-time-rfc1123")
+    @header `Last-Modified`: utcDateTime;
+    @doc("Returns the date and time the blob was created.")
+    @encode("date-time-rfc1123")
+    @clientName("CreationTime")
+    @header `x-ms-creation-time`: utcDateTime;
+    @doc("Optional. Only valid when Object Replication is enabled for the storage container and on the destination blob of the replication.")
+    @clientName("ObjectReplicationPolicyId")
+    @header `x-ms-or-policy-id`: string;
+    @doc("Indicates the range of bytes returned in the event that the client requested a subset of the blob by setting the 'Range' request header.")
+    @header `Content-Range`: string;
+    @doc("If the blob has an MD5 hash and this operation is to read the full blob, this response header is returned so that the client can check for message content integrity.")
+    @header `Content-MD5`: string;
+    @doc("This header returns the value that was specified for the Content-Encoding request header")
+    @header `Content-Encoding`: string;
+    @doc("This header is returned if it was previously specified for the blob.")
+    @header `Cache-Control`: string;
+    @doc("This header returns the value that was specified for the 'x-ms-blob-content-disposition' header. The Content-Disposition response header field conveys additional information about how to process the response payload, and also can be used to attach additional metadata. For example, if set to attachment, it indicates that the user-agent should not display the response, but instead show a Save As dialog with a filename other than the blob name specified.")
+    @header `Content-Disposition`: string;
+    @doc("This header returns the value that was specified for the Content-Language request header.")
+    @header `Content-Language`: string;
+    @doc("The current sequence number for a page blob. This header is not returned for block blobs or append blobs")
+    @clientName("BlobSequenceNumber")
+    @header `x-ms-blob-sequence-number`: int64;
+    @doc("The type of the blob.")
+    @header `x-ms-blob-type`: BlobType;
+    @doc("Conclusion time of the last attempted Copy Blob operation where this blob was the destination blob. This value can specify the time of a completed, aborted, or failed copy attempt. This header does not appear if a copy is pending, if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List.")
+    @clientName("CopyCompletionTime")
+    @encode("date-time-rfc1123")
+    @header `x-ms-copy-completion-time`: utcDateTime;
+    @doc("Only appears when x-ms-copy-status is failed or pending. Describes the cause of the last fatal or non-fatal copy operation failure. This header does not appear if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List")
+    @clientName("CopyStatusDescription")
+    @header `x-ms-copy-status-description`: string;
+    @doc("String identifier for this copy operation. Use with Get Blob Properties to check the status of this copy operation, or pass to Abort Copy Blob to abort a pending copy.")
+    @clientName("CopyId")
+    @header `x-ms-copy-id`: string;
+    @doc("Contains the number of bytes copied and the total bytes in the source in the last attempted Copy Blob operation where this blob was the destination blob. Can show between 0 and Content-Length bytes copied. This header does not appear if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List")
+    @clientName("CopyProgress")
+    @header `x-ms-copy-progress`: string;
+    @doc("State of the copy operation identified by x-ms-copy-id.")
+    @clientName("CopyStatus")
+    @header `x-ms-copy-status`: CopyStatus;
+    @doc("URL up to 2 KB in length that specifies the source blob or file used in the last attempted Copy Blob operation where this blob was the destination blob. This header does not appear if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List.")
+    @clientName("CopySource")
+    @header `x-ms-copy-source`: string;
+    @doc("When a blob is leased, specifies whether the lease is of infinite or fixed duration.")
+    @clientName("LeaseDuration")
+    @header `x-ms-lease-duration`: LeaseDuration;
+    @doc("Lease state of the blob.")
+    @clientName("LeaseState")
+    @header `x-ms-lease-state`: LeaseState;
+    @doc("The lease status of the blob.")
+    @clientName("LeaseStatus")
+    @header `x-ms-lease-status`: LeaseStatus;
+    @doc("Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above.")
+    @clientName("Version")
+    @header `x-ms-version`: string;
+    @doc("A DateTime value returned by the service that uniquely identifies the blob. The value of this header indicates the blob version, and may be used in subsequent requests to access this version of the blob.")
+    @clientName("VersionId")
+    @header `x-ms-version-id`: string;
+    @doc("The value of this header indicates whether version of this blob is a current version, see also x-ms-version-id header.")
+    @clientName("IsCurrentVersion")
+    @header `x-ms-is-current-version`: boolean;
+    @doc("Indicates that the service supports requests for partial blob content.")
+    @header `Accept-Ranges`: string;
+    @doc("The number of committed blocks present in the blob. This header is returned only for append blobs.")
+    @clientName("BlobCommittedBlockCount")
+    @header `x-ms-blob-committed-block-count`: int32;
+    @doc("The value of this header is set to true if the blob data and application metadata are completely encrypted using the specified algorithm. Otherwise, the value is set to false (when the blob is unencrypted, or if only parts of the blob/application metadata are encrypted).")
+    @clientName("IsServerEncrypted")
+    @header `x-ms-server-encrypted`: boolean;
+    @doc("The SHA-256 hash of the encryption key used to encrypt the blob. This header is only returned when the blob was encrypted with a customer-provided key.")
+    @clientName("EncryptionKeySha256")
+    @header `x-ms-encryption-key-sha256`: string;
+    @doc("If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range")
+    @clientName("EncryptionScope")
+    @header `x-ms-encryption-scope`: string;
+    @doc("The number of tags associated with the blob")
+    @clientName("TagCount")
+    @header `x-ms-tag-count`: int64;
+    @doc("If this blob has been sealed")
+    @clientName("IsSealed")
+    @header `x-ms-blob-sealed`: boolean;
+    @doc("UTC date/time value generated by the service that indicates the time at which the blob was last read or written to")
+    @clientName("LastAccessed")
+    @encode("date-time-rfc1123")
+    @header `x-ms-last-access-time`: utcDateTime;
+    @doc("UTC date/time value generated by the service that indicates the time at which the blob immutability policy will expire.")
+    @clientName("ImmutabilityPolicyExpiresOn")
+    @encode("date-time-rfc1123")
+    @header `x-ms-immutability-policy-until-date`: utcDateTime;
+    @doc("Indicates immutability policy mode.")
+    @clientName("ImmutabilityPolicyMode")
+    @header `x-ms-immutability-policy-mode`: BlobImmutabilityPolicyMode;
+    @doc("Indicates if a legal hold is present on the blob.")
+    @clientName("LegalHold")
+    @header `x-ms-legal-hold`: boolean;
+    @doc("The media type of the body of the response. For batch requests, this is multipart/mixed; boundary=batchresponse_GUID")
+    @header `Content-Type`: string;
+    @doc("The number of bytes present in the response body.")
+    @header `Content-Length`: int64;
+    @doc("The ETag contains a value that you can use to perform operations conditionally.")
+    @header ETag: string;
+  } | StorageError;
+
+  @doc("The Get Properties operation returns all user-defined metadata, standard HTTP properties, and system properties for the blob. It does not return the content of the blob.")
+  @head
+  @operationId("Blob_GetProperties")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  getBlobProperties(
+    ...SnapshotParameter;
+    ...VersionIdParameter;
+    ...LeaseIdOptional;
+    ...EncryptionKeyParameter;
+    ...EncryptionKeySha256Parameter;
+    ...EncryptionAlgorithmParameter;
+    ...IfModifiedSince;
+    ...IfUnmodifiedSince;
+    ...IfMatchParameter;
+    ...IfNoneMatchParameter;
+    ...IfTagsParameter;
+    ...ClientRequestIdParameter;
+    ...ApiVersionParameter;
+  ): {
+    @statusCode statusCode: 200;
+    // TODO: x-ms-meta headers
+    // TODO: x-ms-or headers
+
+    @doc("The date/time that the container was last modified.")
+    @encode("date-time-rfc1123")
+    @header `Last-Modified`: utcDateTime;
+    @doc("Returns the date and time the blob was created.")
+    @encode("date-time-rfc1123")
+    @clientName("CreationTime")
+    @header `x-ms-creation-time`: utcDateTime;
+    @doc("Optional. Only valid when Object Replication is enabled for the storage container and on the destination blob of the replication.")
+    @clientName("ObjectReplicationPolicyId")
+    @header `x-ms-or-policy-id`: string;
+  } | StorageError;
 }

@@ -21,6 +21,157 @@ model StorageError {
 
 /// Parameters
 
+@doc("The encryption algorithm parameter.")
+model EncryptionAlgorithmParameter {
+  @doc("Optional.  Version 2019-07-07 and later.  Specifies the algorithm to use for encryption. If not specified, the default is AES256.")
+  @clientName("encryptionAlgorithm")
+  @header `x-ms-encryption-algorithm`?: string;
+}
+
+@doc("The encryption key SHA256 hash parameter.")
+model EncryptionKeySha256Parameter {
+  @doc("Optional.  Version 2019-07-07 and later.  Specifies the SHA256 hash of the encryption key used to encrypt the data provided in the request. This header is only used for encryption with a customer-provided key. If the request is authenticated with a client token, this header should be specified using the SHA256 hash of the encryption key.")
+  @clientName("encryptionKeySha256")
+  @header `x-ms-encryption-key-sha256`?: string;
+}
+
+
+@doc("The encryption key parameter.")
+model EncryptionKeyParameter {
+  @doc("Optional.  Version 2019-07-07 and later.  Specifies the encryption key to use to encrypt the data provided in the request. If not specified, the request will be encrypted with the root account key.")
+  @clientName("encryptionKey")
+  @header `x-ms-encryption-key`?: string;
+}
+
+@doc("The If-Tags parameters.")
+model IfTagsParameter {
+  @doc("Specify a SQL where clause on blob tags to operate only on blobs with a matching value.")
+  @clientName("ifTags")
+  @header `x-ms-if-tags`?: string;
+}
+
+@doc("The If-Match parameter.")
+model IfMatchParameter {
+  @doc("A condition that must be met in order for the request to be processed.")
+  @header
+  @clientName("ifMatch")
+  `If-Match`?: string;
+}
+
+@doc("The If-None-Match parameter.")
+model IfNoneMatchParameter {
+  @doc("A condition that must be met in order for the request to be processed.")
+  @header
+  @clientName("ifNoneMatch")
+  `If-None-Match`?: string;
+}
+
+@doc("The get range content CRC64 parameter.")
+model GetRangeContentCRC64 {
+  @doc("Optional.  When this header is set to true and specified together with the Range header, the service returns the CRC64 hash for the range, as long as the range is less than or equal to 4 MB in size.")
+  @header `x-ms-range-get-content-crc64`?: boolean;
+}
+
+@doc("The get range content MD5 parameter.")
+model GetRangeContentMD5 {
+  @doc("Optional.  When this header is set to true and specified together with the Range header, the service returns the MD5 hash for the range, as long as the range is less than or equal to 4 MB in size.")
+  @header `x-ms-range-get-content-md5`?: boolean;
+}
+
+@doc("The range parameter.")
+model RangeParameter {
+  @doc("Return only the bytes of the blob in the specified range.")
+  @header
+  @clientName("range")
+  `x-ms-range`: string;
+}
+
+@doc("The version ID parameter.")
+model VersionIdParameter {
+  @doc("The version id parameter is an opaque DateTime value that, when present, specifies the version of the blob to operate on. It's for service version 2019-10-10 and newer.")
+  @header
+  @clientName("versionId")
+  versionid: string;
+}
+
+@doc("The snapshot parameter.")
+model SnapshotParameter {
+  @doc("The snapshot parameter is an opaque DateTime value that, when present, specifies the blob snapshot to retrieve. For more information on working with blob snapshots, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/creating-a-snapshot-of-a-blob\">Creating a Snapshot of a Blob.</a>")
+  @query
+  snapshot?: string;
+}
+
+@doc("An enumeration of blobs")
+model ListBlobsHierarchySegmentResponse {
+  @doc("The service endpoint.")
+  ServiceEndpoint: string; // TODO: XML Attribute
+
+  @doc("The container name.")
+  ContainerName: string; // TODO: XML Attribute
+
+  @doc("The delimiter of the blobs.")
+  Delimiter?: string;
+
+  @doc("The prefix of the blobs.")
+  Prefix?: string;
+
+  @doc("The marker of the blobs.")
+  Marker?: string;
+
+  @doc("The max results of the blobs.")
+  MaxResults?: int32;
+
+  @doc("The blob segment.")
+  Segment: BlobItem[]; // TODO: XML Serialization
+
+  @doc("The next marker of the blobs.")
+  NextMarker?: string;
+}
+
+@doc("The delimiter parameter.")
+model DelimiterParameter {
+  @doc("When the request includes this parameter, the operation returns a BlobPrefix element in the response body that acts as a placeholder for all blobs whose names begin with the same substring up to the appearance of the delimiter character. The delimiter may be a single character or a string.")
+  @query delimiter: string;
+}
+
+@doc("The list blob includes parameter.")
+model ListBlobsInclude {
+  @doc("Include this parameter to specify one or more datasets to include in the response.")
+  @query({ format: "csv" }) include?: ListBlobsIncludes[];
+}
+
+@doc("The list blob includes parameter values.")
+enum ListBlobsIncludes {
+  @doc("The include copies.")
+  copies,
+  @doc("The include deleted blobs.")
+  deleted,
+  @doc("The include metadata.")
+  metadata,
+  @doc("The include snapshots.")
+  snapshots,
+  @doc("The include uncommitted blobs.")
+  uncommittedblobs,
+  @doc("The include versions.")
+  versions,
+  @doc("The include tags.")
+  tags,
+  @doc("The include immutable policy.")
+  immutabilitypolicy,
+  @doc("The include legal hold.")
+  legalhold,
+  @doc("The include deleted with versions.")
+  deletedwithversions
+}
+
+@doc("The lease duration parameter.")
+model LeaseDurationParameter {
+  @doc("Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change.")
+  @clientName("duration")
+  @header
+  `x-ms-lease-duration`: int32;
+}
+
 @doc("The source lease ID header parameter.")
 model SourceLeaseId {
   @doc("A lease ID for the source path. If specified, the source path must have an active lease and the lease ID must match.")
