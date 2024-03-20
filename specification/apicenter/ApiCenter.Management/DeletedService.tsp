@@ -10,6 +10,8 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 
 namespace Microsoft.ApiCenter;
+
+@subscriptionResource
 @doc("Soft-deleted service entity.")
 model DeletedService is ProxyResource<DeletedServiceProperties> {
   @doc("The name of the deleted service.")
