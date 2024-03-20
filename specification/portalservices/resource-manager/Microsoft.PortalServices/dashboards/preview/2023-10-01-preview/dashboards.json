@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2023-10-01-preview",
-    "title": "Microsoft.PortalServices",
+    "title": "portal",
     "description": "Allows creation and deletion of Azure Shared Dashboards."
   },
   "host": "management.azure.com",
@@ -535,7 +535,8 @@
           "$ref": "#/definitions/QueryTileVisualization"
         },
         "data": {
-          "description": "The definition of data source object within the Query tile.",          
+          "description": "The definition of data source object within the Query tile.",
+          "type": "object",
           "$ref": "#/definitions/QueryTileData"
         }
       },
@@ -548,6 +549,7 @@
     "QueryTileData": {
       "type": "object",
       "description": "A dashboard query tile.",
+      "additionalProperties": true,
       "properties": {
         "kind": {
           "$ref": "#/definitions/QueryTileKind"
@@ -719,6 +721,7 @@
     "ResourceTileData": {
       "type": "object",
       "description": "Data definition for a resource tile.",
+      "additionalProperties": true,
       "properties": {
         "resourceId": {
           "type": "string",
