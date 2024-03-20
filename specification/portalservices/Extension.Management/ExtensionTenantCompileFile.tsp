@@ -48,7 +48,7 @@ alias ProviderAction<
 @armResourceOperations
 interface PortalTenant {
   @doc("compiles a file using inline content.")
-  compileFile is ProviderAction<
+  compilefile is ProviderAction<
     PortalTenantCompileFile,
     PortalTenantCompileFileResult
   >;
