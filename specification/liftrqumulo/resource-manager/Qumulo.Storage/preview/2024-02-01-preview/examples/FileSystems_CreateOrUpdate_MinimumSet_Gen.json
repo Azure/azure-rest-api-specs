@@ -1,73 +1,75 @@
 {
   "parameters": {
     "api-version": "2024-02-01-preview",
-    "subscriptionId": "aaaaaaaaaaaaaaaaaaaaaaaa",
-    "resourceGroupName": "rgopenapi",
     "fileSystemName": "aaaaaaaa",
     "resource": {
+      "location": "aaaaaaaaaaaaaaaaaaaaaaaaa",
       "properties": {
+        "adminPassword": "ekceujoecaashtjlsgcymnrdozk",
+        "delegatedSubnetId": "aaaaaaaaaa",
         "marketplaceDetails": {
           "marketplaceSubscriptionId": "aaaaaaaaaaaaa",
-          "planId": "aaaaaa",
+          "marketplaceSubscriptionStatus": "PendingFulfillmentStart",
           "offerId": "aaaaaaaaaaaaaaaaaaaaaaaaa",
-          "marketplaceSubscriptionStatus": "PendingFulfillmentStart"
+          "planId": "aaaaaa"
         },
         "provisioningState": "Accepted",
+        "storageSku": "Standard",
         "userDetails": {
           "email": "viptslwulnpaupfljvnjeq"
-        },
-        "delegatedSubnetId": "aaaaaaaaaa",
-        "adminPassword": "ekceujoecaashtjlsgcymnrdozk",
-        "storageSku": "Standard"
-      },
-      "location": "aaaaaaaaaaaaaaaaaaaaaaaaa"
-    }
-  },
-  "responses": {
-    "201": {
-      "headers": {
-        "Azure-AsyncOperation": "https://foo.com/operationstatus"
-      },
-      "body": {
-        "id": "aaaaaaaaaaaaaaaaa",
-        "properties": {
-          "marketplaceDetails": {
-            "marketplaceSubscriptionId": "aaaaaaaaaaaaa",
-            "planId": "aaaaaa",
-            "offerId": "aaaaaaaaaaaaaaaaaaaaaaaaa",
-            "publisherId": "aa",
-            "marketplaceSubscriptionStatus": "PendingFulfillmentStart"
-          },
-          "provisioningState": "Accepted",
-          "userDetails": {},
-          "delegatedSubnetId": "aaaaaaaaaa",
-          "storageSku": "Standard",
-          "fsGBpsProvisioned": 1,
-          "highAvailability": "Disabled"
-        },
-        "location": "aaaaaaaaa"
+        }
       }
     },
+    "resourceGroupName": "rgopenapi",
+    "subscriptionId": "aaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "responses": {
     "200": {
       "body": {
         "id": "aaaaaaaaaaaaaaaaa",
+        "location": "aaaaaaaaa",
         "properties": {
+          "delegatedSubnetId": "aaaaaaaaaa",
+          "fsGBpsProvisioned": 1,
+          "highAvailability": "Disabled",
           "marketplaceDetails": {
             "marketplaceSubscriptionId": "aaaaaaaaaaaaa",
-            "planId": "aaaaaa",
+            "marketplaceSubscriptionStatus": "PendingFulfillmentStart",
             "offerId": "aaaaaaaaaaaaaaaaaaaaaaaaa",
-            "publisherId": "aa",
-            "marketplaceSubscriptionStatus": "PendingFulfillmentStart"
+            "planId": "aaaaaa",
+            "publisherId": "aa"
           },
           "provisioningState": "Accepted",
-          "userDetails": {},
-          "delegatedSubnetId": "aaaaaaaaaa",
           "storageSku": "Standard",
+          "userDetails": {}
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "aaaaaaaaaaaaaaaaa",
+        "location": "aaaaaaaaa",
+        "properties": {
+          "delegatedSubnetId": "aaaaaaaaaa",
           "fsGBpsProvisioned": 1,
-          "highAvailability": "Disabled"
-        },
-        "location": "aaaaaaaaa"
+          "highAvailability": "Disabled",
+          "marketplaceDetails": {
+            "marketplaceSubscriptionId": "aaaaaaaaaaaaa",
+            "marketplaceSubscriptionStatus": "PendingFulfillmentStart",
+            "offerId": "aaaaaaaaaaaaaaaaaaaaaaaaa",
+            "planId": "aaaaaa",
+            "publisherId": "aa"
+          },
+          "provisioningState": "Accepted",
+          "storageSku": "Standard",
+          "userDetails": {}
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://foo.com/operationstatus"
       }
     }
-  }
+  },
+  "operationId": "FileSystems_CreateOrUpdate",
+  "title": "FileSystems_CreateOrUpdate_MinimumSet_Gen"
 }

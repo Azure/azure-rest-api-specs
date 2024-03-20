@@ -22,8 +22,8 @@ namespace LiftrBase.Storage;
 enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1 and LiftrBase.Versions.v1_preview")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(LiftrBase.Versions.v2024_02_01_preview)
-  v2024_02_01_preview: "2024-02-01-preview",
+  @useDependency(LiftrBase.Versions.v2_preview)
+  v2_preview: "2024-02-01-preview",
 }
 
 /**
@@ -170,7 +170,7 @@ model FileSystemResourceUpdateProperties {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 @includeInapplicableMetadataInPayload(false)
 @Azure.ResourceManager.Private.armResourceInternal(FileSystemResourceProperties)
-model FileSystemResource extends TrackedResourceBase {
+model FileSystemResource is TrackedResource<FileSystemResourceProperties> {
   /**
    * Name of the File System resource
    */
@@ -180,12 +180,5 @@ model FileSystemResource extends TrackedResourceBase {
   @visibility("read")
   name: string;
 
-  /**
-   * The resource-specific properties for this resource.
-   */
-  @extension("x-ms-client-flatten", true)
-  @visibility("read,create")
-  properties: FileSystemResourceProperties;
-
-  ...Azure.ResourceManager.ManagedServiceIdentity;
+  ...ManagedServiceIdentity;
 }

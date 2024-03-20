@@ -1,35 +1,37 @@
 {
   "parameters": {
     "api-version": "2024-02-01-preview",
-    "subscriptionId": "aaaaaaa",
-    "resourceGroupName": "rgQumulo"
+    "resourceGroupName": "rgQumulo",
+    "subscriptionId": "aaaaaaa"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "name": "aaaaa",
             "id": "aaaaaaaaaaaaaaaaa",
+            "location": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "properties": {
+              "delegatedSubnetId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "fsGBpsProvisioned": 1,
+              "highAvailability": "Disabled",
               "marketplaceDetails": {
                 "marketplaceSubscriptionId": "aaaaaaaaaaaaaaaaa",
-                "planId": "aaaaaaa",
+                "marketplaceSubscriptionStatus": "PendingFulfillmentStart",
                 "offerId": "aaaaaaaaa",
-                "marketplaceSubscriptionStatus": "PendingFulfillmentStart"
+                "planId": "aaaaaaa"
               },
               "provisioningState": "Accepted",
-              "userDetails": {},
-              "delegatedSubnetId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
               "storageSku": "Standard",
               "usedStorage": 9,
-              "fsGBpsProvisioned": 1,
-              "highAvailability": "Disabled"
-            },
-            "name": "aaaaa",
-            "location": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              "userDetails": {}
+            }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "FileSystems_ListByResourceGroup",
+  "title": "FileSystems_ListByResourceGroup_MinimumSet_Gen"
 }

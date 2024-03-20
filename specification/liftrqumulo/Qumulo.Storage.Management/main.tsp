@@ -22,7 +22,6 @@ using LiftrBase;
   title: "Qumulo.Storage",
 })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Qumulo.Storage;
 
 /**
@@ -33,15 +32,15 @@ enum Versions {
    * The 2024-02-01-preview API version.
    */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(LiftrBase.Versions.v2024_02_01_preview)
-  @useDependency(LiftrBase.Storage.Versions.v2024_02_01_preview)
-  v2024_02_01_preview: "2024-02-01-preview",
+  @useDependency(LiftrBase.Versions.v2_preview)
+  @useDependency(LiftrBase.Storage.Versions.v2_preview)
+  v2_preview: "2024-02-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @armResourceOperations
-interface FileSystemResources {
+interface FileSystems {
   /**
    * Get a FileSystemResource
    */

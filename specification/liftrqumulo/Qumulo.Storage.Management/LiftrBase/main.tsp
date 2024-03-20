@@ -16,7 +16,7 @@ namespace LiftrBase;
 enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  v2024_02_01_preview: "2024-02-01-preview",
+  v2_preview: "2024-02-01-preview",
 }
 
 
