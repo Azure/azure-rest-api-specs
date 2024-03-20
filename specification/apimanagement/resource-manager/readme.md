@@ -1160,7 +1160,5 @@ suppressions:
     reason: Our object contain count property as a sibling to nextLink and value and it used for proxy resource collection GETs.
   - code: PatchBodyParametersSchema
     from: apimworkspacebackends.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/backends/{backendId}"].patch.parameters[4].schema.properties.managementEndpoints
     reasons: This are the object fields which when updated require some data to be present.
 
