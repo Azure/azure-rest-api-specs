@@ -521,6 +521,135 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/locations/{location}/adooauth/default/getADOOAuthInfo": {
+      "post": {
+        "tags": [
+          "ADOOAuth"
+        ],
+        "operationId": "GetADOOAuthInfo",
+        "summary": "Gets ADOOAuth info used to authenticate users with ADO.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "parameters",
+            "description": "The fields required in ADO OAuth call request.",
+            "required": false,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ADOOAuthCallRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ADOOAuthInfoResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ADO OAuthInfo": {
+            "$ref": "./examples/ADOOAuthInfo.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/locations/{location}/adooauth/default": {
+      "get": {
+        "tags": [
+          "ADOOAuth"
+        ],
+        "operationId": "ADOOAuth_Get",
+        "summary": "Callback URL to hit once authenticated with Entra ID to have the service store the OAuth token.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ADOOAuthResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ADO OAuth Callback": {
+            "$ref": "./examples/ADOOAuthDefault.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/locations/{location}/adooauth": {
+      "get": {
+        "tags": [
+          "ADOOAuth"
+        ],
+        "operationId": "ADOOAuth_List",
+        "summary": "Callback URL to hit once authenticated with ADO to have the service store the OAuth token.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ADOOAuthListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List ADO OAuth": {
+            "$ref": "./examples/ADOOAuthList.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -536,8 +665,7 @@
       "properties": {
         "properties": {
           "description": "Properties of a workflow.",
-          "$ref": "#/definitions/WorkflowProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/WorkflowProperties"
         }
       }
     },
@@ -547,13 +675,15 @@
       "properties": {
         "githubWorkflowProfile": {
           "description": "Profile of a github workflow.",
-          "$ref": "#/definitions/GitHubWorkflowProfile",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/GitHubWorkflowProfile"
         },
         "artifactGenerationProperties": {
           "description": "Properties for generating artifacts like dockerfile and manifests.",
-          "$ref": "#/definitions/ArtifactGenerationProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/ArtifactGenerationProperties"
+        },
+        "azurePipelineProfile": {
+          "description": "Profile of an azure pipeline.",
+          "$ref": "#/definitions/AzurePipelineProfile"
         }
       }
     },
@@ -587,7 +717,7 @@
           "description": "Path to Dockerfile Build Context within the repository."
         },
         "deploymentProperties": {
-          "$ref": "#/definitions/DeploymentProperties"
+          "$ref": "#/definitions/Deployment"
         },
         "namespace": {
           "type": "string",
@@ -629,6 +759,62 @@
         },
         "prStatus": {
           "$ref": "#/definitions/PullRequestStatus"
+        },
+        "lastWorkflowRun": {
+          "$ref": "#/definitions/WorkflowRun"
+        },
+        "authStatus": {
+          "$ref": "#/definitions/AuthorizationStatus"
+        }
+      }
+    },
+    "AzurePipelineProfile": {
+      "type": "object",
+      "description": "Azure Pipeline Profile",
+      "properties": {
+        "repository": {
+          "$ref": "#/definitions/ADORepository"
+        },
+        "armServiceConnection": {
+          "type": "string",
+          "description": "The name of the ARM Service Connection the pipeline is associated with."
+        },
+        "build": {
+          "$ref": "#/definitions/Build"
+        },
+        "deployment": {
+          "$ref": "#/definitions/Deployment"
+        },
+        "namespace": {
+          "type": "string",
+          "description": "Kubernetes namespace the application is deployed to."
+        },
+        "acr": {
+          "type": "string",
+          "description": "Resource identifier for azure container registry repository associated with the workflow.",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ContainerRegistry/registries"
+              }
+            ]
+          }
+        },
+        "clusterId": {
+          "type": "string",
+          "description": "The Azure Kubernetes Cluster Resource the application will be deployed to.",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ContainerService/managedClusters"
+              }
+            ]
+          }
+        },
+        "pullRequest": {
+          "$ref": "#/definitions/PullRequest"
         },
         "lastWorkflowRun": {
           "$ref": "#/definitions/WorkflowRun"
@@ -689,8 +875,9 @@
       },
       "description": "The status of the Pull Request submitted against the users repository."
     },
-    "DeploymentProperties": {
+    "Deployment": {
       "type": "object",
+      "description": "Deployment details of the repository associated with the workflow.",
       "properties": {
         "manifestType": {
           "$ref": "#/definitions/ManifestType"
@@ -716,6 +903,66 @@
           },
           "title": "Manifest override values.",
           "description": "Manifest override values."
+        }
+      }
+    },
+    "ADORepository": {
+      "type": "object",
+      "description": "Details of the ADO repository associated with the workflow.",
+      "properties": {
+        "repositoryOwner": {
+          "type": "string",
+          "description": "The owner of the repository the workflow is associated with."
+        },
+        "repositoryName": {
+          "type": "string",
+          "description": "The name of the repository the workflow is associated with."
+        },
+        "branchName": {
+          "type": "string",
+          "description": "The name of the branch the workflow is associated with."
+        },
+        "adoOrganization": {
+          "type": "string",
+          "description": "The name of the Azure DevOps organization the pipeline is associated with."
+        },
+        "projectName": {
+          "type": "string",
+          "description": "The name of the project the pipeline is associated with."
+        }
+      }
+    },
+    "Build": {
+      "type": "object",
+      "description": "Build details of the repository associated with the workflow.",
+      "properties": {
+        "dockerfile": {
+          "type": "string",
+          "description": "Path to the Dockerfile within the repository."
+        },
+        "dockerBuildContext": {
+          "type": "string",
+          "description": "Path to Dockerfile Build Context within the repository."
+        }
+      }
+    },
+    "PullRequest": {
+      "type": "object",
+      "description": "Details of the pull request containing the workflow.",
+      "properties": {
+        "prURL": {
+          "type": "string",
+          "description": "The URL to the Pull Request submitted against the users repository.",
+          "readOnly": true
+        },
+        "pullNumber": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "The number associated with the submitted pull request."
+        },
+        "prStatus": {
+          "$ref": "#/definitions/PullRequestStatus"
         }
       }
     },
@@ -994,6 +1241,7 @@
     },
     "WorkflowRunStatus": {
       "type": "string",
+      "readOnly": true,
       "enum": [
         "queued",
         "inprogress",
@@ -1109,8 +1357,7 @@
       "properties": {
         "properties": {
           "description": "Properties of a workflow.",
-          "$ref": "#/definitions/GitHubOAuthProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/GitHubOAuthProperties"
         }
       },
       "description": "Singleton response of GitHubOAuth containing "
@@ -1137,6 +1384,73 @@
         }
       },
       "description": "The response from List GitHubOAuth operation."
+    },
+    "ADOOAuthCallRequest": {
+      "type": "object",
+      "properties": {
+        "redirectUrl": {
+          "type": "string",
+          "description": "The URL the client will redirect to on successful authentication. If empty, no redirect will occur."
+        }
+      },
+      "description": "ADOOAuth request object"
+    },
+    "ADOOAuthInfoResponse": {
+      "type": "object",
+      "description": "Response containing ADO OAuth information",
+      "properties": {
+        "authURL": {
+          "type": "string",
+          "description": "URL used to authorize ADO app using Entra ID"
+        },
+        "token": {
+          "type": "string",
+          "description": "OAuth token used to make calls to ADO APIs"
+        }
+      }
+    },
+    "ADOOAuthResponse": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Details of ADO OAuth.",
+          "$ref": "#/definitions/ADOOAuth"
+        }
+      },
+      "description": "Singleton response of ADO OAuth."
+    },
+    "ADOOAuth": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "user making request"
+        }
+      },
+      "description": "The properties of ADO OAuth."
+    },
+    "ADOOAuthListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ADOOAuthResponse"
+          },
+          "description": "Singleton list response containing one ADOOAuthResponse"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to the next set of ADO OAuth results.",
+          "readOnly": true
+        }
+      },
+      "description": "The response from List ADOOAuth operation."
     }
   },
   "parameters": {
