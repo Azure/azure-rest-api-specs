@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using OpenAPI;
 
 namespace Microsoft.ScVmm;
 /** The VirtualNetworks resource definition. */
@@ -35,9 +36,21 @@ interface VirtualNetworks {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualNetwork>;
   /** Updates the VirtualNetworks resource. */
   @summary("Implements the VirtualNetworks PATCH method.")
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
   update is ArmTagsPatchAsync<VirtualNetwork>;
   /** Deregisters the ScVmm virtual network from Azure. */
   @summary("Implements VirtualNetwork DELETE method.")
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetwork,
     {

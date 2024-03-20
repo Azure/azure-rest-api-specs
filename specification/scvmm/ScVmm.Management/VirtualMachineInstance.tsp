@@ -48,12 +48,24 @@ interface VirtualMachineInstances {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualMachineInstance>;
   /** The operation to update a virtual machine instance. */
   @summary("Updates a virtual machine.")
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
   update is ArmCustomPatchAsync<
     VirtualMachineInstance,
     VirtualMachineInstanceUpdate
   >;
   /** The operation to delete a virtual machine instance. */
   @summary("Deletes an virtual machine.")
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualMachineInstance,
     {

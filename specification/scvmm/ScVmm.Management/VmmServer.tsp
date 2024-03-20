@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using OpenAPI;
 
 namespace Microsoft.ScVmm;
 /** The VmmServers resource definition. */
@@ -35,9 +36,21 @@ interface VmmServers {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<VmmServer>;
   /** Updates the VmmServers resource. */
   @summary("Implements VmmServers PATCH method.")
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
   update is ArmTagsPatchAsync<VmmServer>;
   /** Removes the SCVmm fabric from Azure. */
   @summary("Implements VmmServers DELETE method.")
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
   delete is ArmResourceDeleteWithoutOkAsync<
     VmmServer,
     {

@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using OpenAPI;
 
 namespace Microsoft.ScVmm;
 /** The AvailabilitySets resource definition. */
@@ -38,8 +39,20 @@ interface AvailabilitySets {
   >;
   /** Updates the AvailabilitySets resource. */
   @summary("Implements the AvailabilitySets PATCH method.")
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
   update is ArmTagsPatchAsync<AvailabilitySet>;
   /** Deregisters the ScVmm availability set from Azure. */
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
   @summary("Implements AvailabilitySet DELETE method.")
   delete is ArmResourceDeleteWithoutOkAsync<
     AvailabilitySet,

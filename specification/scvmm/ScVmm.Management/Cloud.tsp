@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using OpenAPI;
 
 namespace Microsoft.ScVmm;
 /** The Clouds resource definition. */
@@ -35,9 +36,21 @@ interface Clouds {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Cloud>;
   /** Updates the Clouds resource. */
   @summary("Implements the Clouds PATCH method.")
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
   update is ArmTagsPatchAsync<Cloud>;
   /** Deregisters the ScVmm fabric cloud from Azure. */
   @summary("Implements Cloud resource DELETE method.")
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
   delete is ArmResourceDeleteWithoutOkAsync<
     Cloud,
     {

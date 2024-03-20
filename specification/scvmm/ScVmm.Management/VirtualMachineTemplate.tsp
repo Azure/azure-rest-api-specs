@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
+using OpenAPI;
 
 namespace Microsoft.ScVmm;
 /** The VirtualMachineTemplates resource definition. */
@@ -36,9 +37,21 @@ interface VirtualMachineTemplates {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<VirtualMachineTemplate>;
   /** Updates the VirtualMachineTemplate resource. */
   @summary("Implements the VirtualMachineTemplate PATCH method.")
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
   update is ArmTagsPatchAsync<VirtualMachineTemplate>;
   /** Deregisters the ScVmm VM Template from Azure. */
   @summary("Implements VirtualMachineTemplate DELETE method.")
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "azure-async-operation",
+    }
+  )
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualMachineTemplate,
     {
