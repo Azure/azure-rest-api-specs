@@ -8,39 +8,39 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 
 @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_1)
-@TypeSpec.Versioning.useDependency(DocumentTranslationClient.Versions.v1_0)
+@TypeSpec.Versioning.useDependency(DocumentTranslation.Versions.v1_0)
 namespace ClientCustomizations;
 
 @client({
-  name: "BatchDocumentTranslationClient",
-  service: DocumentTranslationClient,
+  name: "DocumentTranslationClient",
+  service: DocumentTranslation,
 })
-interface BatchDocumentTranslationClient {
+interface DocumentTranslationClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  startTranslation is DocumentTranslationClient.DocumentTranslationOperations.startTranslation;
+  startTranslation is DocumentTranslation.DocumentTranslationOperations.startTranslation;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  getTranslationsStatus is DocumentTranslationClient.DocumentTranslationOperations.startTranslation;
+  getTranslationsStatus is DocumentTranslation.DocumentTranslationOperations.startTranslation;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  getDocumentStatus is DocumentTranslationClient.DocumentTranslationOperations.startTranslation;
+  getDocumentStatus is DocumentTranslation.DocumentTranslationOperations.startTranslation;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  getTranslationStatus is DocumentTranslationClient.DocumentTranslationOperations.startTranslation;
+  getTranslationStatus is DocumentTranslation.DocumentTranslationOperations.startTranslation;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  cancelTranslation is DocumentTranslationClient.DocumentTranslationOperations.startTranslation;
+  cancelTranslation is DocumentTranslation.DocumentTranslationOperations.startTranslation;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  getDocumentsStatus is DocumentTranslationClient.DocumentTranslationOperations.startTranslation;
+  getDocumentsStatus is DocumentTranslation.DocumentTranslationOperations.startTranslation;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  getSupportedDocumentFormats is DocumentTranslationClient.DocumentTranslationOperations.startTranslation;
+  getSupportedDocumentFormats is DocumentTranslation.DocumentTranslationOperations.startTranslation;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  getSupportedGlossaryFormats is DocumentTranslationClient.DocumentTranslationOperations.startTranslation;
+  getSupportedGlossaryFormats is DocumentTranslation.DocumentTranslationOperations.startTranslation;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  getSupportedStorageSources is DocumentTranslationClient.DocumentTranslationOperations.startTranslation;
+  getSupportedStorageSources is DocumentTranslation.DocumentTranslationOperations.startTranslation;
 }
 
 @client({
   name: "SingleDocumentTranslationClient",
-  service: DocumentTranslationClient,
+  service: DocumentTranslation,
 })
 interface SingleDocumentTranslationClient {
   #suppress "@azure-tools/typespec-azure-core/byos"
-  singleDocumentTranslate is DocumentTranslationClient.SingleDocumentTranslationOperations.singleDocumentTranslate;
+  singleDocumentTranslate is DocumentTranslation.SingleDocumentTranslationOperations.singleDocumentTranslate;
 }

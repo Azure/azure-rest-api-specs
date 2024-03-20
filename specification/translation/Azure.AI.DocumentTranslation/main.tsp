@@ -12,7 +12,7 @@ using Azure.Core;
 @service({
   title: "DocumentTranslation Service",
 })
-@versioned(DocumentTranslationClient.Versions)
+@versioned(DocumentTranslation.Versions)
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
     {
