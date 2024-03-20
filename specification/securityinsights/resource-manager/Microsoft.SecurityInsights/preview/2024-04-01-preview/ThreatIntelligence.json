@@ -1522,7 +1522,7 @@
       "name": "attackPattern",
       "required": true,
       "schema": {
-        "$ref": "../threatIntelligenceQuery.json#/definitions/AttackPattern"
+        "$ref": "threatIntelligenceQuery.json#/definitions/AttackPattern"
       },
       "x-ms-parameter-location": "method"
     },
@@ -1540,7 +1540,7 @@
       "name": "identity",
       "required": true,
       "schema": {
-        "$ref": "../threatIntelligenceQuery.json#/definitions/Identity"
+        "$ref": "threatIntelligenceQuery.json#/definitions/Identity"
       },
       "x-ms-parameter-location": "method"
     },
@@ -1558,7 +1558,7 @@
       "name": "indicator",
       "required": true,
       "schema": {
-        "$ref": "../threatIntelligenceQuery.json#/definitions/Indicator"
+        "$ref": "threatIntelligenceQuery.json#/definitions/Indicator"
       },
       "x-ms-parameter-location": "method"
     },
@@ -1576,7 +1576,7 @@
       "name": "relationship",
       "required": true,
       "schema": {
-        "$ref": "../threatIntelligenceQuery.json#/definitions/Relationship"
+        "$ref": "threatIntelligenceQuery.json#/definitions/Relationship"
       },
       "x-ms-parameter-location": "method"
     },
@@ -1594,7 +1594,7 @@
       "name": "threatActor",
       "required": true,
       "schema": {
-        "$ref": "../threatIntelligenceQuery.json#/definitions/ThreatActor"
+        "$ref": "threatIntelligenceQuery.json#/definitions/ThreatActor"
       },
       "x-ms-parameter-location": "method"
     }
@@ -2167,6 +2167,111 @@
         }
       },
       "type": "object"
+    },
+    "AttackPatternsList": {
+      "description": "List all the Attack Patterns.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of Attack Patterns.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of Attack Patterns.",
+          "items": {
+            "$ref": "threatIntelligenceQuery.json#/definitions/AttackPattern"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": [
+        "value"
+      ]
+    },
+    "IdentitiesList": {
+      "description": "List all the Identities.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of Identities.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of Identities.",
+          "items": {
+            "$ref": "threatIntelligenceQuery.json#/definitions/Identity"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": [
+        "value"
+      ]
+    },
+    "IndicatorsList": {
+      "description": "List all the Indicators.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of Indicators.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of Indicators.",
+          "items": {
+            "$ref": "threatIntelligenceQuery.json#/definitions/Indicator"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": [
+        "value"
+      ]
+    },
+    "RelationshipsList": {
+      "description": "List all the Relationships.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of Relationships.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of Relationships.",
+          "items": {
+            "$ref": "threatIntelligenceQuery.json#/definitions/Relationship"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": [
+        "value"
+      ]
+    },
+    "ThreatActorsList": {
+      "description": "List all the Threat Actors.",
+      "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of Threat Actors.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of Threat Actors.",
+          "items": {
+            "$ref": "threatIntelligenceQuery.json#/definitions/ThreatActor"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": [
+        "value"
+      ]
     }
   }
 }
