@@ -28,7 +28,11 @@ model VirtualMachineInstance
 }
 
 /** The type used for update operations of the VirtualMachineInstance. */
-model VirtualMachineInstanceUpdate is UpdateableProperties<OmitProperties<VirtualMachineInstance, "properties">> {
+model VirtualMachineInstanceUpdate
+  is UpdateableProperties<OmitProperties<
+    VirtualMachineInstance,
+    "properties"
+  >> {
   /** The update properties of the VirtualMachineInstance. */
   @extension("x-ms-client-flatten", true)
   properties?: VirtualMachineInstanceUpdateProperties;
