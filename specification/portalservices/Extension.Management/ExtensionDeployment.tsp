@@ -74,19 +74,3 @@ interface PortalExtensionDeployments {
 @@doc(PortalExtensionDeployments.update::parameters.properties,
   "The updatable fields of a portal extension deployment."
 );
-
-@@clientName(PortalExtensionDeployments.create::parameters.resource,
-  "parameters"
-);
-@@encodedName(PortalExtensionDeployments.create::parameters.resource,
-  "application/json",
-  "parameters"
-);
-
-@@clientName(PortalExtensionDeployments.update::parameters.properties,
-  "parameters"
-);
-@@encodedName(PortalExtensionDeployments.update::parameters.properties,
-  "application/json",
-  "parameters"
-);
