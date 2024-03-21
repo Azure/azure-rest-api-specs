@@ -77,6 +77,10 @@ suppressions:
     reason: publisherName, publisherName etc didn't have a pattern initially, adding the constraint now will cause a breaking change.
   - code: DefinitionsPropertiesNamesCamelCase
     reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility.
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: already working without the properties section, adding it will break polymorphism
+    from:
+      - edgeDevices.json
 ```
 
 ### Tag: package-preview-2024-02
