@@ -882,7 +882,18 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
           },
           "default": {
             "description": "Error",
@@ -3292,7 +3303,9 @@
         }
       ]
     },
-    "AllowedContentLevel": {
+    "AllowedContentLevel":
+    {
+      "description": "Level at which content is filtered.",
       "enum": [
         "Low",
         "Medium",
@@ -4841,6 +4854,7 @@
           "$ref": "#/definitions/PrivateEndpointDestination"
         },
         "parentRuleName": {
+          "description": "The dependency rule name.",
           "type": "string",
           "readOnly": true,
           "x-ms-mutability": [
@@ -4981,6 +4995,7 @@
       }
     },
     "RaiBlocklistConfig": {
+      "description": "Azure OpenAI blocklist config.",
       "type": "object",
       "properties": {
         "blocking": {
@@ -4992,6 +5007,7 @@
       }
     },
     "RaiPolicyContentFilter": {
+      "description": "Azure OpenAI Content Filter.",
       "type": "object",
       "properties": {
         "allowedContentLevel": {
@@ -5003,7 +5019,7 @@
         "enabled": {
           "type": "boolean"
         },
-        "policyName": {
+        "name": {
           "type": "string"
         },
         "source": {
@@ -5012,6 +5028,7 @@
       }
     },
     "RaiPolicyContentSource": {
+      "description": "Content source to apply the Content Filters.",
       "enum": [
         "Prompt",
         "Completion"
@@ -5023,6 +5040,7 @@
       }
     },
     "RaiPolicyMode": {
+      "description": "Content Filters mode.",
       "enum": [
         "Default",
         "Deferred",
@@ -5035,6 +5053,7 @@
       }
     },
     "RaiPolicyProperties": {
+      "description": "Azure OpenAI Content Filters properties.",
       "type": "object",
       "properties": {
         "basePolicyName": {
@@ -5067,6 +5086,7 @@
       }
     },
     "RaiPolicyPropertiesBasicResource": {
+      "description": "Azure OpenAI Content Filters resource.",
       "required": [
         "properties"
       ],
@@ -5083,6 +5103,7 @@
       }
     },
     "RaiPolicyPropertiesBasicResourceArmPaginatedResult": {
+      "description": "Azure OpenAI Content Filters resource list.",
       "type": "object",
       "properties": {
         "nextLink": {
@@ -5097,6 +5118,7 @@
       }
     },
     "RaiPolicyType": {
+      "description": "Content Filters policy type.",
       "enum": [
         "UserManaged",
         "SystemManaged"
@@ -5562,7 +5584,11 @@
           "type": "boolean"
         },
         "metadata": {
-          "type": "object"
+          "description": "Store user metadata for this connection",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "sharedUserList": {
           "type": "array",
