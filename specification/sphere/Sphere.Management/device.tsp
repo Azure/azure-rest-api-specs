@@ -39,6 +39,8 @@ interface ProxyResourceOperationsDevice<
     TResource,
     TListParameters & BaseParameters<TResource>
   >;
+  #suppress "deprecated" "Existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
   delete is ArmResourceDeleteAsync<Device>;
   @doc("Update a Device. Use '.unassigned' or '.default' for the device group and product names to move a device to the catalog level.")
   update is CustomArmResourcePatchAsync<Device, DevicePatchProperties>;
@@ -47,6 +49,7 @@ interface ProxyResourceOperationsDevice<
 @armResourceOperations
 interface Devices extends ProxyResourceOperationsDevice<Device> {
   @autoRoute
+  @sharedRoute
   @removed(Versions.v2024_04_01)
   @renamedFrom(Versions.v2024_04_01, "generateCapabilityImage")
   @armResourceAction(Device)
@@ -137,12 +140,14 @@ model SignedCapabilityImageResponse {
 }
 
 @doc("Capability image type")
-enum CapabilityType {
+union CapabilityType {
+  string,
+
   /** Application development capability */
-  ApplicationDevelopment,
+  "ApplicationDevelopment",
 
   /** Field servicing capability */
-  FieldServicing,
+  "FieldServicing",
 }
 
 @doc("The properties of device patch")

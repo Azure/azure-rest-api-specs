@@ -38,6 +38,8 @@ interface ProxyResourceOperationsDeviceGroups<
   get is ArmResourceRead<DeviceGroup>;
   @doc("Create a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DeviceGroup>;
+  #suppress "deprecated" "Existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
   @doc("Delete a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   delete is ArmResourceDeleteAsync<DeviceGroup>;
   @doc("Update a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
@@ -52,6 +54,7 @@ interface DeviceGroups
     > {
   @doc("Counts devices in device group. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   @removed(Versions.v2024_04_01)
+  @sharedRoute
   @autoRoute
   @renamedFrom(Versions.v2024_04_01, "countDevices")
   @armResourceAction(DeviceGroup)
@@ -73,6 +76,7 @@ interface DeviceGroups
   ): ArmResponse<CountDevicesResponse> | ErrorResponse;
 
   @autoRoute
+  @sharedRoute
   @armResourceAction(DeviceGroup)
   @action("claimDevices")
   @removed(Versions.v2024_04_01)
@@ -144,21 +148,25 @@ model DeviceGroupProperties {
 }
 
 @doc("OS feed type values.")
-enum OSFeedType {
+union OSFeedType {
+  string,
+
   /** Retail OS feed type. */
-  Retail,
+  "Retail",
 
   /** Retail evaluation OS feed type. */
-  RetailEval,
+  "RetailEval",
 }
 
 @doc("Update policy values.")
-enum UpdatePolicy {
+union UpdatePolicy {
+  string,
+
   /** Update all policy. */
-  UpdateAll,
+  "UpdateAll",
 
   /** No update for 3rd party app policy. */
-  No3rdPartyAppUpdates,
+  "No3rdPartyAppUpdates",
 }
 
 // Device group models
