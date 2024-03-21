@@ -114,7 +114,7 @@ model TimestampProperty {
 @doc("Property for result.")
 model ResultProperty {
   @doc("Result of the operation.")
-  result: string;
+  result?: string;
 }
 
 @doc("Common interface for all tracked resources")

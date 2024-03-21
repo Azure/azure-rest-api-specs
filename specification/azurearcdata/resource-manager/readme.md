@@ -83,6 +83,25 @@ input-file:
   - Microsoft.AzureArcData/preview/2024-02-01-preview/sqlServerLicenses.json
 ```
 
+### Tag: package-2024-01
+
+These settings apply only when `--tag=package-2024-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-01'
+input-file:
+  - Microsoft.AzureArcData/stable/2024-01-01/activeDirectoryConnectors.json
+  - Microsoft.AzureArcData/stable/2024-01-01/azurearcdata.json
+  - Microsoft.AzureArcData/stable/2024-01-01/common.json
+  - Microsoft.AzureArcData/stable/2024-01-01/dataControllers.json
+  - Microsoft.AzureArcData/stable/2024-01-01/failoverGroups.json
+  - Microsoft.AzureArcData/stable/2024-01-01/operations.json
+  - Microsoft.AzureArcData/stable/2024-01-01/postgresInstances.json
+  - Microsoft.AzureArcData/stable/2024-01-01/sqlManagedInstances.json
+  - Microsoft.AzureArcData/stable/2024-01-01/sqlServerAvailabilityGroups.json
+  - Microsoft.AzureArcData/stable/2024-01-01/sqlServerDatabases.json
+  - Microsoft.AzureArcData/stable/2024-01-01/sqlServerInstances.json  
+```
+
 ### Tag: package-preview-2023-12
 
 These settings apply only when `--tag=package-preview-2023-12` is specified on the command line.

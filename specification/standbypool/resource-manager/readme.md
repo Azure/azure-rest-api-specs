@@ -27,10 +27,11 @@ These are the global settings for the standbypool.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2023-12
+tag: package-preview-2024-03
 ```
 
 ### Suppression
+
 ``` yaml
 suppressions:
   - code: OperationIdNounVerb
@@ -39,14 +40,23 @@ suppressions:
 ```
 
 
+### Tag: package-preview-2024-03
+
+These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-03'
+input-file:
+  - Microsoft.StandbyPool/preview/2024-03-01-preview/standbypool.json
+```
 ### Tag: package-preview-2023-12
 
 These settings apply only when `--tag=package-preview-2023-12` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-12'
+``` yaml $(tag) == 'package-preview-2023-12'
 input-file:
   - Microsoft.StandbyPool/preview/2023-12-01-preview/standbypool.json
 ```
+
 ### Tag: package-2023-06-01-preview
 
 These settings apply only when `--tag=package-2023-06-01-preview` is specified on the command line.
