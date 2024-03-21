@@ -60,6 +60,7 @@ directive:
       - deploymentSettings.json
       - edgeDevices.json
       - securitySettings.json
+      - hciCommon.json
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 suppressions:
   - code: PathResourceProviderNamePascalCase
@@ -84,20 +85,20 @@ These settings apply only when `--tag=package-preview-2024-02` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-02'
 input-file:
-  - Microsoft.AzureStackHCI/preview/2023-02-15-preview/arcSettings.json
-  - Microsoft.AzureStackHCI/preview/2023-02-15-preview/clusters.json
-  - Microsoft.AzureStackHCI/preview/2023-02-15-preview/deploymentSettings.json
-  - Microsoft.AzureStackHCI/preview/2023-02-15-preview/edgeDevices.json
-  - Microsoft.AzureStackHCI/preview/2023-02-15-preview/extensions.json
-  - Microsoft.AzureStackHCI/preview/2023-02-15-preview/offers.json
-  - Microsoft.AzureStackHCI/preview/2023-02-15-preview/operations.json
-  - Microsoft.AzureStackHCI/preview/2023-02-15-preview/publishers.json
-  - Microsoft.AzureStackHCI/preview/2023-02-15-preview/securitySettings.json
-  - Microsoft.AzureStackHCI/preview/2023-02-15-preview/skus.json
-  - Microsoft.AzureStackHCI/preview/2023-02-15-preview/updateRuns.json
-  - Microsoft.AzureStackHCI/preview/2023-02-15-preview/updateSummaries.json
-  - Microsoft.AzureStackHCI/preview/2023-02-15-preview/updates.json
-  - Microsoft.AzureStackHCI/preview/2023-02-15-preview/hciCommon.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/arcSettings.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/clusters.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/deploymentSettings.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/edgeDevices.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/extensions.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/offers.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/operations.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/publishers.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/securitySettings.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/skus.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/updateRuns.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/updateSummaries.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/updates.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/hciCommon.json
 ```
 
 ### Tag: package-2024-01
