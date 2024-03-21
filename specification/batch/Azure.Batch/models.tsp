@@ -25,7 +25,7 @@ union OSType {
 @doc("ImageVerificationType enums")
 union ImageVerificationType {
   string,
-  
+
   @doc("The Image is guaranteed to be compatible with the associated Compute Node agent SKU and all Batch features have been confirmed to work as expected.")
   Verified: "verified",
 
@@ -36,7 +36,7 @@ union ImageVerificationType {
 @doc("BatchCertificateState enums")
 union BatchCertificateState {
   string,
-  
+
   @doc("The Certificate is available for use in Pools.")
   Active: "active",
 
@@ -50,7 +50,7 @@ union BatchCertificateState {
 @doc("BatchCertificateFormat enums")
 union BatchCertificateFormat {
   string,
-  
+
   @doc("The Certificate is a PFX (PKCS#12) formatted Certificate or Certificate chain.")
   Pfx: "pfx",
 
@@ -61,7 +61,7 @@ union BatchCertificateFormat {
 @doc("BatchJobScheduleState enums")
 union BatchJobScheduleState {
   string,
-  
+
   @doc("The Job Schedule is active and will create Jobs as per its schedule.")
   Active: "active",
 
@@ -81,7 +81,7 @@ union BatchJobScheduleState {
 @doc("The action the Batch service should take when all Tasks in the Job are in the completed state.")
 union OnAllBatchTasksComplete {
   string,
-  
+
   @doc("Do nothing. The Job remains active unless terminated or disabled by some other means.")
   NoAction: "noaction",
 
@@ -92,7 +92,7 @@ union OnAllBatchTasksComplete {
 @doc("OnTaskFailure enums")
 union OnBatchTaskFailure {
   string,
-  
+
   @doc("Do nothing. The Job remains active unless terminated or disabled by some other means.")
   NoAction: "noaction",
 
@@ -103,7 +103,7 @@ union OnBatchTaskFailure {
 @doc("ContainerWorkingDirectory enums")
 union ContainerWorkingDirectory {
   string,
-  
+
   @doc("Use the standard Batch service Task working directory, which will contain the Task Resource Files populated by Batch.")
   TaskWorkingDirectory: "taskWorkingDirectory",
 
@@ -114,7 +114,7 @@ union ContainerWorkingDirectory {
 @doc("OutputFileUploadCondition enums")
 union OutputFileUploadCondition {
   string,
-  
+
   @doc("Upload the file(s) only after the Task process exits with an exit code of 0.")
   TaskSuccess: "tasksuccess",
 
@@ -128,7 +128,7 @@ union OutputFileUploadCondition {
 @doc("AutoUserScope enums")
 union AutoUserScope {
   string,
-  
+
   @doc("Specifies that the service should create a new user for the Task.")
   Task: "task",
 
@@ -139,7 +139,7 @@ union AutoUserScope {
 @doc("ElevationLevel enums")
 union ElevationLevel {
   string,
-  
+
   @doc("The user is a standard user without elevated access.")
   NonAdmin: "nonadmin",
 
@@ -150,7 +150,7 @@ union ElevationLevel {
 @doc("BatchPoolLifetimeOption enums")
 union BatchPoolLifetimeOption {
   string,
-  
+
   @doc("The Pool exists for the lifetime of the Job Schedule. The Batch Service creates the Pool when it creates the first Job on the schedule. You may apply this option only to Job Schedules, not to Jobs.")
   JobSchedule: "jobschedule",
 
@@ -161,7 +161,7 @@ union BatchPoolLifetimeOption {
 @doc("CachingType enums")
 union CachingType {
   string,
-  
+
   @doc("The caching mode for the disk is not enabled.")
   None: "none",
 
@@ -175,7 +175,7 @@ union CachingType {
 @doc("StorageAccountType enums")
 union StorageAccountType {
   string,
-  
+
   @doc("The data disk should use standard locally redundant storage.")
   StandardLRS: "standard_lrs",
 
@@ -189,7 +189,7 @@ union StorageAccountType {
 @doc("DiskEncryptionTarget enums")
 union DiskEncryptionTarget {
   string,
-  
+
   @doc("The OS Disk on the compute node is encrypted.")
   OsDisk: "osdisk",
 
@@ -200,7 +200,7 @@ union DiskEncryptionTarget {
 @doc("BatchNodePlacementPolicyType enums")
 union BatchNodePlacementPolicyType {
   string,
-  
+
   @doc("All nodes in the pool will be allocated in the same region.")
   Regional: "regional",
 
@@ -211,7 +211,7 @@ union BatchNodePlacementPolicyType {
 @doc("BatchNodeFillType enums")
 union BatchNodeFillType {
   string,
-  
+
   @doc("Tasks should be assigned evenly across all Compute Nodes in the Pool.")
   Spread: "spread",
 
@@ -222,7 +222,7 @@ union BatchNodeFillType {
 @doc("DynamicVNetAssignmentScope enums")
 union DynamicVNetAssignmentScope {
   string,
-  
+
   @doc("No dynamic VNet assignment is enabled.")
   None: "none",
 
@@ -233,7 +233,7 @@ union DynamicVNetAssignmentScope {
 @doc("InboundEndpointProtocol enums")
 union InboundEndpointProtocol {
   string,
-  
+
   @doc("Use TCP for the endpoint.")
   Tcp: "tcp",
 
@@ -244,7 +244,7 @@ union InboundEndpointProtocol {
 @doc("NetworkSecurityGroupRuleAccess enums")
 union NetworkSecurityGroupRuleAccess {
   string,
-  
+
   @doc("Allow access.")
   Allow: "allow",
 
@@ -255,7 +255,7 @@ union NetworkSecurityGroupRuleAccess {
 @doc("IPAddressProvisioningType enums")
 union IpAddressProvisioningType {
   string,
-  
+
   @doc("A public IP will be created and managed by Batch. There may be multiple public IPs depending on the size of the Pool.")
   BatchManaged: "batchmanaged",
 
@@ -269,7 +269,7 @@ union IpAddressProvisioningType {
 @doc("AccessDiffDiskPlacementScope enums")
 union DiffDiskPlacement {
   string,
-  
+
   @doc("The Ephemeral OS Disk is stored on the VM cache.")
   CacheDisk: "cachedisk",
 }
@@ -277,7 +277,7 @@ union DiffDiskPlacement {
 @doc("ContainerType enums")
 union ContainerType {
   string,
-  
+
   @doc("A Docker compatible container technology will be used to launch the containers.")
   DockerCompatible: "dockerCompatible",
 
@@ -288,7 +288,7 @@ union ContainerType {
 @doc("AccessScope enums")
 union AccessScope {
   string,
-  
+
   @doc("Grants access to perform all operations on the Job containing the Task.")
   Job: "job",
 }
@@ -296,7 +296,7 @@ union AccessScope {
 @doc("BatchCertificateStoreLocation enums")
 union BatchCertificateStoreLocation {
   string,
-  
+
   @doc("Certificates should be installed to the CurrentUser Certificate store.")
   CurrentUser: "currentuser",
 
@@ -307,7 +307,7 @@ union BatchCertificateStoreLocation {
 @doc("BatchCertificateVisibility enums")
 union BatchCertificateVisibility {
   string,
-  
+
   @doc("The Certificate should be visible to the user account under which the StartTask is run. Note that if AutoUser Scope is Pool for both the StartTask and a Task, this certificate will be visible to the Task as well.")
   StartTask: "starttask",
 
@@ -321,7 +321,7 @@ union BatchCertificateVisibility {
 @doc("LoginMode enums")
 union LoginMode {
   string,
-  
+
   @doc("The LOGON32_LOGON_BATCH Win32 login mode. The batch login mode is recommended for long running parallel processes.")
   Batch: "batch",
 
@@ -332,7 +332,7 @@ union LoginMode {
 @doc("BatchNodeCommunicationMode enums")
 union BatchNodeCommunicationMode {
   string,
-  
+
   @doc("The node communication mode is automatically set by the Batch service.")
   Default: "default",
 
@@ -346,7 +346,7 @@ union BatchNodeCommunicationMode {
 @doc("BatchJobState enums")
 union BatchJobState {
   string,
-  
+
   @doc("The Job is available to have Tasks scheduled.")
   Active: "active",
 
@@ -372,7 +372,7 @@ union BatchJobState {
 @doc("ErrorCategory enums")
 union ErrorCategory {
   string,
-  
+
   @doc("The error is due to a user issue, such as misconfiguration.")
   UserError: "usererror",
 
@@ -383,7 +383,7 @@ union ErrorCategory {
 @doc("DisableBatchJobOption enums")
 union DisableBatchJobOption {
   string,
-  
+
   @doc("Terminate running Tasks and requeue them. The Tasks will run again when the Job is enabled.")
   Requeue: "requeue",
 
@@ -397,7 +397,7 @@ union DisableBatchJobOption {
 @doc("BatchJobPreparationTaskState enums")
 union BatchJobPreparationTaskState {
   string,
-  
+
   @doc("The Task is currently running (including retrying).")
   Running: "running",
 
@@ -408,7 +408,7 @@ union BatchJobPreparationTaskState {
 @doc("BatchTaskExecutionResult enums")
 union BatchTaskExecutionResult {
   string,
-  
+
   @doc("The Task ran successfully.")
   Success: "success",
 
@@ -419,7 +419,7 @@ union BatchTaskExecutionResult {
 @doc("BatchJobReleaseTaskState enums")
 union BatchJobReleaseTaskState {
   string,
-  
+
   @doc("The Task is currently running (including retrying).")
   Running: "running",
 
@@ -430,7 +430,7 @@ union BatchJobReleaseTaskState {
 @doc("BatchPoolState enums")
 union BatchPoolState {
   string,
-  
+
   @doc("The Pool is available to run Tasks subject to the availability of Compute Nodes.")
   Active: "active",
 
@@ -441,7 +441,7 @@ union BatchPoolState {
 @doc("AllocationState enums")
 union AllocationState {
   string,
-  
+
   @doc("The Pool is not resizing. There are no changes to the number of Compute Nodes in the Pool in progress. A Pool enters this state when it is created and when no operations are being performed on the Pool to change the number of Compute Nodes.")
   Steady: "steady",
 
@@ -455,18 +455,18 @@ union AllocationState {
 @doc("BatchPoolIdentityType enums")
 union BatchPoolIdentityType {
   string,
-  
+
   @doc("Batch pool has user assigned identities with it.")
-  UserAssigned,
+  "UserAssigned",
 
   @doc("Batch pool has no identity associated with it. Setting `None` in update pool will remove existing identities.")
-  None,
+  "None",
 }
 
 @doc("BatchNodeDeallocationOption enums")
 union BatchNodeDeallocationOption {
   string,
-  
+
   @doc("Terminate running Task processes and requeue the Tasks. The Tasks will run again when a Compute Node is available. Remove Compute Nodes as soon as Tasks have been terminated.")
   Requeue: "requeue",
 
@@ -483,7 +483,7 @@ union BatchNodeDeallocationOption {
 @doc("BatchJobAction enums")
 union BatchJobAction {
   string,
-  
+
   @doc("Take no action.")
   None: "none",
 
@@ -497,7 +497,7 @@ union BatchJobAction {
 @doc("DependencyAction enums")
 union DependencyAction {
   string,
-  
+
   @doc("Satisfy tasks waiting on this task; once all dependencies are satisfied, the task will be scheduled to run.")
   Satisfy: "satisfy",
 
@@ -508,7 +508,7 @@ union DependencyAction {
 @doc("BatchTaskState enums")
 union BatchTaskState {
   string,
-  
+
   @doc("The Task is queued and able to run, but is not currently assigned to a Compute Node. A Task enters this state when it is created, when it is enabled after being disabled, or when it is awaiting a retry after a failed run.")
   Active: "active",
 
@@ -525,7 +525,7 @@ union BatchTaskState {
 @doc("BatchTaskAddStatus enums")
 union BatchTaskAddStatus {
   string,
-  
+
   @doc("The Task was added successfully.")
   Success: "success",
 
@@ -539,7 +539,7 @@ union BatchTaskAddStatus {
 @doc("BatchSubtaskState enums")
 union BatchSubtaskState {
   string,
-  
+
   @doc("The Task has been assigned to a Compute Node, but is waiting for a required Job Preparation Task to complete on the Compute Node. If the Job Preparation Task succeeds, the Task will move to running. If the Job Preparation Task fails, the Task will return to active and will be eligible to be assigned to a different Compute Node.")
   Preparing: "preparing",
 
@@ -553,7 +553,7 @@ union BatchSubtaskState {
 @doc("BatchNodeState enums")
 union BatchNodeState {
   string,
-  
+
   @doc("The Compute Node is not currently running a Task.")
   Idle: "idle",
 
@@ -600,7 +600,7 @@ union BatchNodeState {
 @doc("UpgradeMode enums")
 union UpgradeMode {
   string,
-  
+
   @doc("TAll virtual machines in the scale set are automatically updated at the same time.")
   Automatic: "automatic",
 
@@ -614,7 +614,7 @@ union UpgradeMode {
 @doc("SchedulingState enums")
 union SchedulingState {
   string,
-  
+
   @doc("Tasks can be scheduled on the Compute Node.")
   Enabled: "enabled",
 
@@ -625,7 +625,7 @@ union SchedulingState {
 @doc("BatchStartTaskState enums")
 union BatchStartTaskState {
   string,
-  
+
   @doc("The StartTask is currently running.")
   Running: "running",
 
@@ -636,7 +636,7 @@ union BatchStartTaskState {
 @doc("BatchNodeRebootOption enums")
 union BatchNodeRebootOption {
   string,
-  
+
   @doc("Terminate running Task processes and requeue the Tasks. The Tasks will run again when a Compute Node is available. Restart the Compute Node as soon as Tasks have been terminated.")
   Requeue: "requeue",
 
@@ -653,7 +653,7 @@ union BatchNodeRebootOption {
 @doc("BatchNodeReimageOption enums")
 union BatchNodeReimageOption {
   string,
-  
+
   @doc("Terminate running Task processes and requeue the Tasks. The Tasks will run again when a Compute Node is available. Reimage the Compute Node as soon as Tasks have been terminated.")
   Requeue: "requeue",
 
@@ -670,7 +670,7 @@ union BatchNodeReimageOption {
 @doc("BatchNodeDisableSchedulingOption enums")
 union BatchNodeDisableSchedulingOption {
   string,
-  
+
   @doc("Terminate running Task processes and requeue the Tasks. The Tasks may run again on other Compute Nodes, or when Task scheduling is re-enabled on this Compute Node. Enter offline state as soon as Tasks have been terminated.")
   Requeue: "requeue",
 
@@ -684,23 +684,23 @@ union BatchNodeDisableSchedulingOption {
 @doc("Level code.")
 union StatusLevelTypes {
   string,
-  
+
   @doc("Error")
-  Error,
+  "Error",
 
   @doc("Info")
-  Info,
+  "Info",
 
   @doc("Warning")
-  Warning,
+  "Warning",
 }
 
 @doc("Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings.")
 union SecurityTypes {
   string,
-  
+
   @doc("Trusted launch protects against advanced and persistent attack techniques.")
-  trustedLaunch,
+  "trustedLaunch",
 }
 
 @doc("The result of listing the applications available in an Account.")
