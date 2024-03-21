@@ -62,10 +62,12 @@ param (
             ForEach-Object { "preview/$_" }
             return $stableVersions + $previewVersions
         })]
-    [string] $BaseVersion
+    [string] $BaseVersion,
+
+    [bool] $testMode = $false
 )
 
-$ErrorActionPreference = 'Stop'
+. "$PSScriptRoot/Copy-ApiVersion-Functions.ps1"
 
 $oldApiVersionStatus, $oldApiVersion = Get-Version $BaseVersion
 $newApiVersionStatus, $newApiVersion = Get-Version $NewVersion
@@ -75,26 +77,25 @@ $readmeDirectory = Join-Path $repoDirectory "specification/$ServiceDirectory/$Se
 $oldDirectory = Join-Path $repoDirectory "specification/$ServiceDirectory/$ServiceType/$Provider/$oldApiVersionStatus/$oldApiVersion" -Resolve
 $newDirectory = Join-Path $repoDirectory "specification/$ServiceDirectory/$ServiceType/$Provider/$newApiVersionStatus/$newApiVersion"
 
-Write-Host "----------------------------------------" -ForegroundColor Green
-Write-Host "Service Directory: $ServiceDirectory" -ForegroundColor Green
-Write-Host "Service Type: $ServiceType" -ForegroundColor Green
-Write-Host "Provider: $Provider" -ForegroundColor Green
-Write-Host "Base Version: $BaseVersion" -ForegroundColor Green
-Write-Host "New Version: $NewVersion" -ForegroundColor Green
-Write-Host "----------------------------------------" -ForegroundColor Green
+Write-Host "----------------------------------------" 
+Write-Host "Service Directory: $ServiceDirectory"
+Write-Host "Service Type: $ServiceType"
+Write-Host "Provider: $Provider"
+Write-Host "Base Version: $BaseVersion"
+Write-Host "New Version: $NewVersion"
+Write-Host "----------------------------------------"
 
 Write-Verbose "Copying $oldDirectory to $newDirectory"
 
 # Copy the specs and create and initial commit to make it easier to diff changes to the previous version in a PR.
 Copy-Item $oldDirectory $newDirectory -Recurse -Force
 
-git add $newDirectory
-@"
+New-GitAddAndCommit $newDirectory @"
 Copy files from $BaseVersion
 
 Copied the files in a separate commit.
 This allows reviewers to easily diff subsequent changes against the previous spec.
-"@ | git commit --file=-
+"@ $testMode
 
 # Replace the $oldApiVersion with the $newApiVersion within all files in $newDirectory.
 foreach ($file in Get-ChildItem $newDirectory -File -Recurse) {
@@ -104,69 +105,39 @@ foreach ($file in Get-ChildItem $newDirectory -File -Recurse) {
 }
 
 # Commit just the version changes.
-git add $newDirectory
-@"
+New-GitAddAndCommit $newDirectory @"
 Update version to $NewVersion
 
 Updated the API version from $BaseVersion to $NewVersion.
-"@ | git commit --file=-
+"@ $testMode
 
-# Update readme file in the service type directory
-$jsonFiles = Get-ChildItem $newDirectory -Filter '*.json' | Select-Object -ExpandProperty Name
+# Add new version tag in the readme file
 $readmeFile = Get-ChildItem $readmeDirectory -Filter 'readme.md'
-
-$readmeContentBlock = @"
-### Tag: package-$newApiVersion
-
-These settings apply only when ``--tag=package-$newApiVersion`` is specified on the command line.
-
-```````yaml `$(tag) == 'package-$newApiVersion'
-input-file:
-$(
-foreach ($jsonFile in $jsonFiles) {
-  "  - $Provider/$newApiVersionStatus/$newApiVersion/$jsonFile"
-}
-)
-```````
-
-"@
-
 if ($readmeFile) {
+    $jsonFiles = Get-ChildItem $newDirectory -Filter '*.json' | Select-Object -ExpandProperty Name
+    Write-Host $jsonFiles
+    $newReadmeTagBlock = Get-NewTagSection $newApiVersion $Provider $newApiVersionStatus $jsonFiles
+    
     $readmeContent = $readmeFile | Get-Content -Raw
-    $readmeContent -replace '(?s)(### tag: package.*)', "$readmeContentBlock`n`$1" | Set-Content $readmeFile.FullName -NoNewline
+    $readmeContent = Get-ReadmeWithNewTag $readmeContent $newReadmeTagBlock
+    $readmeContent | Set-Content $readmeFile.FullName -NoNewline
+}
+else {
+    Write-Error "No readme file found in $readmeDirectory"
+    Exit 1
 }
 
-# Update the tag to the latest preview or stable version in the readme file
-$currentTag = $readmeContent -match '(openapi-type:.*\n+tag:\s*)(?<version>package-.*)'
-$currentTag = $Matches['version']
-$latestVersionDate = if ($currentTag -match '(\d{4})-(\d{2})-?(\d{0,2}).*') { 
-    if ($Matches[3] -eq '') { $Matches[3] = '01' }
-    [datetime]::ParseExact($Matches[1] + '-' + $Matches[2] + '-' + $Matches[3], 'yyyy-MM-dd', $null) 
-} 
-else { 
-    Write-Warning "No date found in the readme tag"
-    [datetime]::MinValue 
-}
-
-$newVersionDate = if ($newApiVersion -match '(\d{4})-(\d{2})-?(\d{0,2})') { 
-    if ($Matches[3] -eq '') { $Matches[3] = '01' }
-    [datetime]::ParseExact($Matches[1] + '-' + $Matches[2] + '-' + $Matches[3], 'yyyy-MM-dd', $null) 
-} 
-else { 
-    Write-Warning "No date found in the new version"
-    [datetime]::MinValue 
-}
-
-if ( $newVersionDate -gt $latestVersionDate) {    
+# Update the latest version tag in the readme file
+$val = Get-ReadmeWithLatestTag $readmeContent $newApiVersion
+if ($val -ne "") {
     Write-Verbose "Updating the first tag in the first yaml code block in $readmeFile"
-    if ($readmeFile) {
-        $providerReadmeContent = $readmeFile | Get-Content -Raw
-        $providerReadmeContent -replace '(openapi-type:.*\n+tag:\s*)(package-.*)', "`$1package-$newApiVersion" | Set-Content $readmeFile.FullName -NoNewline
-    }
+    $val | Set-Content $readmeFile.FullName -NoNewline
+    Write-Information "Latest version tag in readme file updated."
 }
 else {
     Write-Warning "The new version is not newer than the current version in the readme file. No changes were made."
 }
 
-git add $readmeDirectory
-git commit -am"Added tag for $newApiVersion in readme file"
+New-GitAddAndCommit $readmeDirectory @"
+Added tag for $newApiVersion in readme file
+"@ $testMode
