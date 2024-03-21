@@ -21,6 +21,7 @@ model InventoryItem is ProxyResource<InventoryItemProperties> {
   name: string;
 
   /** Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This property is allowed but not recognized by the linter"
   kind?: string;
 }
 
