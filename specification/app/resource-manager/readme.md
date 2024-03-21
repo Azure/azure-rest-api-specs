@@ -49,6 +49,8 @@ input-file:
   - Microsoft.App/preview/2024-02-02-preview/ConnectedEnvironmentsStorages.json
   - Microsoft.App/preview/2024-02-02-preview/ContainerApps.json
   - Microsoft.App/preview/2024-02-02-preview/ContainerAppsRevisions.json
+  - Microsoft.App/preview/2024-02-02-preview/ContainerAppsBuilds.json
+  - Microsoft.App/preview/2024-02-02-preview/ContainerAppsPatches.json
   - Microsoft.App/preview/2024-02-02-preview/Diagnostics.json
   - Microsoft.App/preview/2024-02-02-preview/DotNetComponents.json
   - Microsoft.App/preview/2024-02-02-preview/Global.json
@@ -63,6 +65,11 @@ input-file:
   - Microsoft.App/preview/2024-02-02-preview/Subscriptions.json
   - Microsoft.App/preview/2024-02-02-preview/Usages.json
   - Microsoft.App/preview/2024-02-02-preview/FunctionsExtension.json
+directive:
+  - suppress: PatchBodyParametersSchema
+    from: JavaComponents.json
+    reason: |
+      Java Component is using componentType as the discriminator. While the discriminator is a required property, this rule prevent it being present in the patch request body.
 ```
 ### Tag: package-preview-2023-11
 
