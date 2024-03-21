@@ -1100,6 +1100,16 @@
         "nasReroute": {
           "$ref": "#/definitions/NASRerouteConfiguration",
           "description": "Configuration enabling 4G NAS reroute."
+        },
+        "nasEncryption": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/definitions/NASEncryptionType"
+          },
+          "description": "An ordered list of NAS encryption algorithms, used to encrypt control plane traffic between the UE and packet core, in order from most to least preferred. If not specified, the packet core will use a built-in default ordering."
         }
       }
     },
@@ -1118,6 +1128,33 @@
       "required": [
         "macroMmeGroupId"
       ]
+    },
+    "NASEncryptionType": {
+      "type": "string",
+      "description": "The supported NAS Encryption types.",
+      "enum": [
+        "NEA0/EEA0",
+        "NEA1/EEA1",
+        "NEA2/EEA2"
+      ],
+      "x-ms-enum": {
+        "name": "nasEncryptionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "NEA0/EEA0",
+            "description": "NAS signaling is not encrypted."
+          },
+          {
+            "value": "NEA1/EEA1",
+            "description": "NAS signaling is encrypted with SNOW 3G cipher."
+          },
+          {
+            "value": "NEA2/EEA2",
+            "description": " NAS signaling is encrypted with AES cipher."
+          }
+        ]
+      }
     },
     "HttpsServerCertificate": {
       "description": "HTTPS server certificate configuration.",
