@@ -396,7 +396,7 @@
           "description": "The last updated time in UTC for the task."
         },
         "status": {
-          "$ref": "#/definitions/TaskStatus",
+          "$ref": "#/definitions/State",
           "description": "The status of the task at the mentioned last update time."
         },
         "taskName": {
@@ -1475,37 +1475,6 @@
         "error"
       ]
     },
-    "HealthRelationType": {
-      "type": "string",
-      "description": "Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc.",
-      "enum": [
-        "Abbreviation",
-        "DirectionOfBodyStructure",
-        "DirectionOfCondition",
-        "DirectionOfExamination",
-        "DirectionOfTreatment",
-        "DosageOfMedication",
-        "FormOfMedication",
-        "FrequencyOfMedication",
-        "FrequencyOfTreatment",
-        "QualifierOfCondition",
-        "RelationOfExamination",
-        "RouteOfMedication",
-        "TimeOfCondition",
-        "TimeOfEvent",
-        "TimeOfExamination",
-        "TimeOfMedication",
-        "TimeOfTreatment",
-        "UnitOfCondition",
-        "UnitOfExamination",
-        "ValueOfCondition",
-        "ValueOfExamination"
-      ],
-      "x-ms-enum": {
-        "name": "HealthRelationType",
-        "modelAsString": true
-      }
-    },
     "HealthcareAssertion": {
       "type": "object",
       "properties": {
@@ -1574,7 +1543,7 @@
           "description": "Entity text as appears in the request."
         },
         "category": {
-          "$ref": "#/definitions/HealthcareEntityCategory",
+          "$ref": "#/definitions/healthcareEntityCategory",
           "description": "Healthcare Entity Category."
         },
         "subcategory": {
@@ -1618,42 +1587,6 @@
         "length",
         "confidenceScore"
       ]
-    },
-    "HealthcareEntityCategory": {
-      "type": "string",
-      "description": "Healthcare Entity Category.",
-      "enum": [
-        "BodyStructure",
-        "Age",
-        "Gender",
-        "ExaminationName",
-        "Date",
-        "Direction",
-        "Frequency",
-        "MeasurementValue",
-        "MeasurementUnit",
-        "RelationalOperator",
-        "Time",
-        "GeneOrProtein",
-        "Variant",
-        "AdministrativeEvent",
-        "CareEnvironment",
-        "HealthcareProfession",
-        "Diagnosis",
-        "SymptomOrSign",
-        "ConditionQualifier",
-        "MedicationClass",
-        "MedicationName",
-        "Dosage",
-        "MedicationForm",
-        "MedicationRoute",
-        "FamilyRelation",
-        "TreatmentName"
-      ],
-      "x-ms-enum": {
-        "name": "HealthcareEntityCategory",
-        "modelAsString": true
-      }
     },
     "HealthcareEntityLink": {
       "type": "object",
@@ -1708,7 +1641,7 @@
       "description": "Every relation is an entity graph of a certain relationType, where all entities are connected and have specific roles within the relation context.",
       "properties": {
         "relationType": {
-          "$ref": "#/definitions/HealthRelationType",
+          "$ref": "#/definitions/relationType",
           "description": "Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc."
         },
         "entities": {
@@ -2735,7 +2668,7 @@
           "description": "The sentence text."
         },
         "sentiment": {
-          "$ref": "#/definitions/SentimentValue",
+          "$ref": "#/definitions/SentenceSentimentValue",
           "description": "The predicted Sentiment for the sentence."
         },
         "confidenceScores": {
@@ -2777,11 +2710,24 @@
         "length"
       ]
     },
+    "SentenceSentimentValue": {
+      "type": "string",
+      "description": "The predicted Sentiment for the sentence.",
+      "enum": [
+        "positive",
+        "neutral",
+        "negative"
+      ],
+      "x-ms-enum": {
+        "name": "SentenceSentimentValue",
+        "modelAsString": false
+      }
+    },
     "SentenceTarget": {
       "type": "object",
       "properties": {
         "sentiment": {
-          "$ref": "#/definitions/SentenceTargetSentimentValue"
+          "$ref": "#/definitions/TokenSentimentValue"
         },
         "confidenceScores": {
           "$ref": "#/definitions/TargetConfidenceScoreLabel"
@@ -2817,19 +2763,6 @@
         "text",
         "relations"
       ]
-    },
-    "SentenceTargetSentimentValue": {
-      "type": "string",
-      "description": "The predicted Sentiment for the sentence.",
-      "enum": [
-        "positive",
-        "mixed",
-        "negative"
-      ],
-      "x-ms-enum": {
-        "name": "SentenceTargetSentimentValue",
-        "modelAsString": false
-      }
     },
     "SentimentAnalysisLROTask": {
       "type": "object",
@@ -3044,19 +2977,6 @@
       ],
       "x-ms-discriminator-value": "SentimentAnalysisResults"
     },
-    "SentimentValue": {
-      "type": "string",
-      "description": "The predicted Sentiment for the sentence.",
-      "enum": [
-        "positive",
-        "neutral",
-        "negative"
-      ],
-      "x-ms-enum": {
-        "name": "SentimentValue",
-        "modelAsString": false
-      }
-    },
     "State": {
       "type": "string",
       "description": "The status of the task at the mentioned last update time.",
@@ -3111,22 +3031,6 @@
         "relationType"
       ]
     },
-    "TaskStatus": {
-      "type": "string",
-      "description": "The status of the task at the mentioned last update time.",
-      "enum": [
-        "notStarted",
-        "running",
-        "succeeded",
-        "failed",
-        "cancelled",
-        "cancelling"
-      ],
-      "x-ms-enum": {
-        "name": "TaskStatus",
-        "modelAsString": true
-      }
-    },
     "Tasks": {
       "type": "object",
       "properties": {
@@ -3172,6 +3076,73 @@
       "x-ms-enum": {
         "name": "TokenSentimentValue",
         "modelAsString": false
+      }
+    },
+    "healthcareEntityCategory": {
+      "type": "string",
+      "description": "Healthcare Entity Category.",
+      "enum": [
+        "BodyStructure",
+        "Age",
+        "Gender",
+        "ExaminationName",
+        "Date",
+        "Direction",
+        "Frequency",
+        "MeasurementValue",
+        "MeasurementUnit",
+        "RelationalOperator",
+        "Time",
+        "GeneOrProtein",
+        "Variant",
+        "AdministrativeEvent",
+        "CareEnvironment",
+        "HealthcareProfession",
+        "Diagnosis",
+        "SymptomOrSign",
+        "ConditionQualifier",
+        "MedicationClass",
+        "MedicationName",
+        "Dosage",
+        "MedicationForm",
+        "MedicationRoute",
+        "FamilyRelation",
+        "TreatmentName"
+      ],
+      "x-ms-enum": {
+        "name": "healthcareEntityCategory",
+        "modelAsString": true
+      }
+    },
+    "relationType": {
+      "type": "string",
+      "description": "Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc.",
+      "enum": [
+        "Abbreviation",
+        "DirectionOfBodyStructure",
+        "DirectionOfCondition",
+        "DirectionOfExamination",
+        "DirectionOfTreatment",
+        "DosageOfMedication",
+        "FormOfMedication",
+        "FrequencyOfMedication",
+        "FrequencyOfTreatment",
+        "QualifierOfCondition",
+        "RelationOfExamination",
+        "RouteOfMedication",
+        "TimeOfCondition",
+        "TimeOfEvent",
+        "TimeOfExamination",
+        "TimeOfMedication",
+        "TimeOfTreatment",
+        "UnitOfCondition",
+        "UnitOfExamination",
+        "ValueOfCondition",
+        "ValueOfExamination"
+      ],
+      "x-ms-enum": {
+        "name": "relationType",
+        "modelAsString": true
       }
     }
   },

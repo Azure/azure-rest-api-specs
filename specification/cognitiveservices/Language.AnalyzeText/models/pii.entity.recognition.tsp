@@ -31,7 +31,7 @@ model PiiTaskParameters is PreBuiltTaskParameters {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   @added(Versions.v2023_04_15_preview)
-  redactionCharacter?: RedactionCharacter = RedactionCharacter.asterisk;
+  redactionCharacter?: redactionCharacter = redactionCharacter.asterisk;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -449,7 +449,7 @@ model PiiEntityRecognitionLROResult extends AnalyzeTextLROResult {
 
 @added(Versions.v2023_04_15_preview)
 @doc("(Optional) describes the PII categories to return")
-enum PiiCategoriesExcludeCategories {
+enum PiiCategoriesExclude {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   ABARoutingNumber,
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -796,5 +796,3 @@ enum PiiCategoriesExcludeCategories {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   Address,
 }
-
-alias PiiCategoriesExclude = Array<PiiCategoriesExcludeCategories>;

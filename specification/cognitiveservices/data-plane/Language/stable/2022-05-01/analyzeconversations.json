@@ -144,7 +144,7 @@
       "description": "This is the parameter set of either the Orchestration project itself or one of the target services.",
       "properties": {
         "targetProjectKind": {
-          "$ref": "#/definitions/TargetProjectKind",
+          "$ref": "#/definitions/targetProjectKind",
           "description": "The type of a target service"
         },
         "apiVersion": {
@@ -564,7 +564,7 @@
           "description": "The override language of a conversation item in BCP 47 language representation."
         },
         "modality": {
-          "$ref": "#/definitions/Modality",
+          "$ref": "#/definitions/InputModality",
           "description": "Enumeration of supported conversational modalities."
         }
       },
@@ -1057,6 +1057,18 @@
         "message"
       ]
     },
+    "InputModality": {
+      "type": "string",
+      "description": "Enumeration of supported conversational modalities.",
+      "enum": [
+        "transcript",
+        "text"
+      ],
+      "x-ms-enum": {
+        "name": "InputModality",
+        "modelAsString": true
+      }
+    },
     "KnowledgeBaseAnswer": {
       "type": "object",
       "description": "Represents knowledge base answer.",
@@ -1093,7 +1105,9 @@
         "metadata": {
           "type": "object",
           "description": "Metadata associated with the answer, useful to categorize or filter question answers.",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "dialog": {
           "$ref": "#/definitions/KnowledgeBaseAnswerDialog",
@@ -1347,18 +1361,6 @@
         "key",
         "value"
       ]
-    },
-    "Modality": {
-      "type": "string",
-      "description": "Enumeration of supported conversational modalities.",
-      "enum": [
-        "transcript",
-        "text"
-      ],
-      "x-ms-enum": {
-        "name": "Modality",
-        "modelAsString": true
-      }
     },
     "NoneLinkedTargetIntentResult": {
       "type": "object",
@@ -1730,7 +1732,7 @@
       "description": "This is the base class of an intent prediction",
       "properties": {
         "targetProjectKind": {
-          "$ref": "#/definitions/TargetProjectKind",
+          "$ref": "#/definitions/targetProjectKind",
           "description": "This is the base class of an intent prediction"
         },
         "apiVersion": {
@@ -1751,20 +1753,6 @@
         "targetProjectKind",
         "confidenceScore"
       ]
-    },
-    "TargetProjectKind": {
-      "type": "string",
-      "description": "The type of a target service.",
-      "enum": [
-        "Luis",
-        "Conversation",
-        "QuestionAnswering",
-        "NonLinked"
-      ],
-      "x-ms-enum": {
-        "name": "TargetProjectKind",
-        "modelAsString": true
-      }
     },
     "TemperatureResolution": {
       "type": "object",
@@ -1988,6 +1976,20 @@
       ],
       "x-ms-enum": {
         "name": "projectKind",
+        "modelAsString": true
+      }
+    },
+    "targetProjectKind": {
+      "type": "string",
+      "description": "The type of a target service.",
+      "enum": [
+        "Luis",
+        "Conversation",
+        "QuestionAnswering",
+        "NonLinked"
+      ],
+      "x-ms-enum": {
+        "name": "targetProjectKind",
         "modelAsString": true
       }
     }

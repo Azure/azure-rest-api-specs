@@ -75,24 +75,7 @@ model TaskState {
   lastUpdateDateTime: utcDateTime;
 
   @doc("The status of the task at the mentioned last update time.")
-  status: TaskStatus;
-}
-
-@doc("The status of the task at the mentioned last update time.")
-@added(Versions.v2023_04_01)
-enum TaskStatus {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'notStarted' should have a documentation or description, please use decorator @doc to add it."
-  notStarted,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'running' should have a documentation or description, please use decorator @doc to add it."
-  running,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'succeeded' should have a documentation or description, please use decorator @doc to add it."
-  succeeded,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'failed' should have a documentation or description, please use decorator @doc to add it."
-  failed,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'cancelled' should have a documentation or description, please use decorator @doc to add it."
-  cancelled,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'cancelling' should have a documentation or description, please use decorator @doc to add it."
-  cancelling,
+  status: State;
 }
 
 @doc("The status of the task at the mentioned last update time.")
@@ -207,8 +190,9 @@ model InputWarning {
   targetRef?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("if showStats=true was specified in the request this field will contain information about the request payload.")
-model RequestStatistics {
+model RequestStatistics is Record<unknown> {
   @doc("Number of documents submitted in the request.")
   documentsCount: int32;
 
@@ -227,6 +211,7 @@ model PreBuiltResult {
   @doc("Errors by document id.")
   errors: Array<DocumentError>;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("statistics")
   statistics?: RequestStatistics;
 
@@ -263,7 +248,7 @@ model KnowledgeBaseAnswer {
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "KnowledgeBaseAnswer.metadata should not use ': Record<unknown>'. Use ': Record<string>' instead."
   @doc("Metadata associated with the answer, useful to categorize or filter question answers.")
-  metadata?: Record<unknown>;
+  metadata?: Record<string>;
 
   @doc("Dialog associated with Answer.")
   dialog?: KnowledgeBaseAnswerDialog;
@@ -507,7 +492,7 @@ enum ErrorCode {
 
 @doc("Predicted sentiment")
 @added(Versions.v2023_04_01)
-enum Sentiment {
+enum TextSentiment {
   @doc("Positive statement")
   positive,
 
@@ -587,6 +572,7 @@ model CustomResult {
   @doc("Errors by document id.")
   errors: Array<DocumentError>;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("if showStats=true was specified in the request this field will contain information about the request payload.")
   statistics?: RequestStatistics;
 
@@ -598,7 +584,7 @@ model CustomResult {
 }
 
 @doc("Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.")
-enum RedactionCharacter {
+enum redactionCharacter {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   exclamationPoint: "!",
   #suppress "@azure-tools/typespec-azure-core/documentation-required"

@@ -265,7 +265,7 @@
       "description": "This is the parameter set of either the Orchestration project itself or one of the target services.",
       "properties": {
         "targetProjectKind": {
-          "$ref": "#/definitions/TargetProjectKind",
+          "$ref": "#/definitions/targetProjectKind",
           "description": "The type of a target service"
         },
         "apiVersion": {
@@ -295,7 +295,7 @@
           "$ref": "#/definitions/AnalyzeConversationJobResult"
         }
       ],
-      "x-ms-discriminator-value": "ConversationalPiiResults"
+      "x-ms-discriminator-value": "ConversationalPIIResults"
     },
     "AnalyzeConversationJobResult": {
       "type": "object",
@@ -307,7 +307,7 @@
           "description": "The last updated time in UTC for the task."
         },
         "status": {
-          "$ref": "#/definitions/TaskStatus",
+          "$ref": "#/definitions/State",
           "description": "The status of the task at the mentioned last update time."
         },
         "taskName": {
@@ -440,7 +440,7 @@
       "description": "Enumeration of supported analysis tasks on a collection of conversations.",
       "enum": [
         "ConversationalSummarizationTask",
-        "ConversationalPiiTask",
+        "ConversationalPIITask",
         "CustomConversationalSummarizationTask",
         "ConversationalSentimentTask"
       ],
@@ -454,8 +454,8 @@
             "description": "Conversational Summarization Task"
           },
           {
-            "name": "ConversationalPiiTask",
-            "value": "ConversationalPiiTask",
+            "name": "ConversationalPIITask",
+            "value": "ConversationalPIITask",
             "description": "Conversational PII Task"
           },
           {
@@ -485,7 +485,7 @@
           "$ref": "#/definitions/AnalyzeConversationLROTask"
         }
       ],
-      "x-ms-discriminator-value": "ConversationalPiiTask"
+      "x-ms-discriminator-value": "ConversationalPIITask"
     },
     "AnalyzeConversationResult": {
       "type": "object",
@@ -514,7 +514,7 @@
       "description": "Enumeration of results for supported conversation analysis Results.",
       "enum": [
         "ConversationalSummarizationResults",
-        "ConversationalPiiResults",
+        "ConversationalPIIResults",
         "CustomConversationalSummarizationResults",
         "ConversationalSentimentResults"
       ],
@@ -528,8 +528,8 @@
             "description": "Conversational Summarization Results"
           },
           {
-            "name": "ConversationalPiiResults",
-            "value": "ConversationalPiiResults",
+            "name": "ConversationalPIIResults",
+            "value": "ConversationalPIIResults",
             "description": "Conversational PII Results"
           },
           {
@@ -941,7 +941,7 @@
           "description": "Language of the conversation item in BCP-47 format."
         },
         "modality": {
-          "$ref": "#/definitions/Modality",
+          "$ref": "#/definitions/InputModality",
           "description": "modality"
         },
         "domain": {
@@ -1109,11 +1109,11 @@
           "description": "The override language of a conversation item in BCP 47 language representation."
         },
         "modality": {
-          "$ref": "#/definitions/Modality",
+          "$ref": "#/definitions/InputModality",
           "description": "Enumeration of supported conversational modalities."
         },
         "role": {
-          "$ref": "#/definitions/Role",
+          "$ref": "#/definitions/role",
           "description": "Role of the participant."
         }
       },
@@ -1302,7 +1302,7 @@
             "~"
           ],
           "x-ms-enum": {
-            "name": "RedactionCharacter",
+            "name": "redactionCharacter",
             "modelAsString": true,
             "values": [
               {
@@ -1453,7 +1453,8 @@
         "conversationsCount",
         "validConversationsCount",
         "erroneousConversationsCount"
-      ]
+      ],
+      "additionalProperties": {}
     },
     "ConversationResult": {
       "type": "object",
@@ -1489,7 +1490,7 @@
           "description": "The identifier for the speaker"
         },
         "sentiment": {
-          "$ref": "#/definitions/Sentiment",
+          "$ref": "#/definitions/TextSentiment",
           "description": "Predicted sentiment"
         },
         "confidenceScores": {
@@ -2335,6 +2336,18 @@
         "message"
       ]
     },
+    "InputModality": {
+      "type": "string",
+      "description": "Enumeration of supported conversational modalities.",
+      "enum": [
+        "transcript",
+        "text"
+      ],
+      "x-ms-enum": {
+        "name": "InputModality",
+        "modelAsString": true
+      }
+    },
     "InputWarning": {
       "type": "object",
       "description": "Contains details of warnings encountered during a job execution.",
@@ -2418,7 +2431,9 @@
         "metadata": {
           "type": "object",
           "description": "Metadata associated with the answer, useful to categorize or filter question answers.",
-          "additionalProperties": {}
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "dialog": {
           "$ref": "#/definitions/KnowledgeBaseAnswerDialog",
@@ -2672,18 +2687,6 @@
         "key",
         "value"
       ]
-    },
-    "Modality": {
-      "type": "string",
-      "description": "Enumeration of supported conversational modalities.",
-      "enum": [
-        "transcript",
-        "text"
-      ],
-      "x-ms-enum": {
-        "name": "Modality",
-        "modelAsString": true
-      }
     },
     "MultiLanguageConversationAnalysisInput": {
       "type": "object",
@@ -3036,7 +3039,8 @@
         "validDocumentsCount",
         "erroneousDocumentsCount",
         "transactionsCount"
-      ]
+      ],
+      "additionalProperties": {}
     },
     "ResolutionKind": {
       "type": "string",
@@ -3061,72 +3065,6 @@
       "x-ms-enum": {
         "name": "ResolutionKind",
         "modelAsString": true
-      }
-    },
-    "Role": {
-      "type": "string",
-      "description": "Role of the participant.",
-      "enum": [
-        "customer",
-        "agent",
-        "generic"
-      ],
-      "x-ms-enum": {
-        "name": "Role",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "customer",
-            "value": "customer",
-            "description": "The participant is a customer."
-          },
-          {
-            "name": "agent",
-            "value": "agent",
-            "description": "The participant is an agent."
-          },
-          {
-            "name": "generic",
-            "value": "generic",
-            "description": "The is a generic participant."
-          }
-        ]
-      }
-    },
-    "Sentiment": {
-      "type": "string",
-      "description": "Predicted sentiment",
-      "enum": [
-        "positive",
-        "neutral",
-        "negative",
-        "mixed"
-      ],
-      "x-ms-enum": {
-        "name": "Sentiment",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "positive",
-            "value": "positive",
-            "description": "Positive statement"
-          },
-          {
-            "name": "neutral",
-            "value": "neutral",
-            "description": "Neutral statement"
-          },
-          {
-            "name": "negative",
-            "value": "negative",
-            "description": "Negative statement"
-          },
-          {
-            "name": "mixed",
-            "value": "mixed",
-            "description": "Mixed statement"
-          }
-        ]
       }
     },
     "SentimentConfidenceScores": {
@@ -3399,7 +3337,7 @@
       "description": "This is the base class of an intent prediction",
       "properties": {
         "targetProjectKind": {
-          "$ref": "#/definitions/TargetProjectKind",
+          "$ref": "#/definitions/targetProjectKind",
           "description": "This is the base class of an intent prediction"
         },
         "apiVersion": {
@@ -3420,36 +3358,6 @@
         "targetProjectKind",
         "confidenceScore"
       ]
-    },
-    "TargetProjectKind": {
-      "type": "string",
-      "description": "The type of a target service.",
-      "enum": [
-        "Luis",
-        "Conversation",
-        "QuestionAnswering",
-        "NonLinked"
-      ],
-      "x-ms-enum": {
-        "name": "TargetProjectKind",
-        "modelAsString": true
-      }
-    },
-    "TaskStatus": {
-      "type": "string",
-      "description": "The status of the task at the mentioned last update time.",
-      "enum": [
-        "notStarted",
-        "running",
-        "succeeded",
-        "failed",
-        "cancelled",
-        "cancelling"
-      ],
-      "x-ms-enum": {
-        "name": "TaskStatus",
-        "modelAsString": true
-      }
     },
     "Tasks": {
       "type": "object",
@@ -3633,11 +3541,11 @@
           "description": "The override language of a conversation item in BCP 47 language representation."
         },
         "modality": {
-          "$ref": "#/definitions/Modality",
+          "$ref": "#/definitions/InputModality",
           "description": "Enumeration of supported conversational modalities."
         },
         "role": {
-          "$ref": "#/definitions/Role",
+          "$ref": "#/definitions/role",
           "description": "Role of the participant."
         },
         "text": {
@@ -3651,6 +3559,42 @@
         "text"
       ],
       "additionalProperties": {}
+    },
+    "TextSentiment": {
+      "type": "string",
+      "description": "Predicted sentiment",
+      "enum": [
+        "positive",
+        "neutral",
+        "negative",
+        "mixed"
+      ],
+      "x-ms-enum": {
+        "name": "TextSentiment",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "positive",
+            "value": "positive",
+            "description": "Positive statement"
+          },
+          {
+            "name": "neutral",
+            "value": "neutral",
+            "description": "Neutral statement"
+          },
+          {
+            "name": "negative",
+            "value": "negative",
+            "description": "Negative statement"
+          },
+          {
+            "name": "mixed",
+            "value": "mixed",
+            "description": "Mixed statement"
+          }
+        ]
+      }
     },
     "TranscriptContentType": {
       "type": "string",
@@ -3705,11 +3649,11 @@
           "description": "The override language of a conversation item in BCP 47 language representation."
         },
         "modality": {
-          "$ref": "#/definitions/Modality",
+          "$ref": "#/definitions/InputModality",
           "description": "Enumeration of supported conversational modalities."
         },
         "role": {
-          "$ref": "#/definitions/Role",
+          "$ref": "#/definitions/role",
           "description": "Role of the participant."
         },
         "itn": {
@@ -3894,6 +3838,50 @@
       ],
       "x-ms-enum": {
         "name": "projectKind",
+        "modelAsString": true
+      }
+    },
+    "role": {
+      "type": "string",
+      "description": "Role of the participant.",
+      "enum": [
+        "customer",
+        "agent",
+        "generic"
+      ],
+      "x-ms-enum": {
+        "name": "role",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "customer",
+            "value": "customer",
+            "description": "The participant is a customer."
+          },
+          {
+            "name": "agent",
+            "value": "agent",
+            "description": "The participant is an agent."
+          },
+          {
+            "name": "generic",
+            "value": "generic",
+            "description": "The is a generic participant."
+          }
+        ]
+      }
+    },
+    "targetProjectKind": {
+      "type": "string",
+      "description": "The type of a target service.",
+      "enum": [
+        "Luis",
+        "Conversation",
+        "QuestionAnswering",
+        "NonLinked"
+      ],
+      "x-ms-enum": {
+        "name": "targetProjectKind",
         "modelAsString": true
       }
     }

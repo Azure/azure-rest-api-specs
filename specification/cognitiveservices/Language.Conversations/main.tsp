@@ -128,16 +128,16 @@ model ConversationItemBase is Record<unknown> {
   language?: string;
 
   @doc("Enumeration of supported conversational modalities.")
-  modality?: Modality;
+  modality?: InputModality;
 
   @added(Versions.v2023_04_01)
   @doc("Role of the participant.")
-  role?: Role;
+  role?: role;
 }
 
 @added(Versions.v2023_04_01)
 @doc("Role of the participant.")
-enum Role {
+enum role {
   @added(Versions.v2023_04_01)
   @doc("The participant is a customer.")
   customer,
@@ -162,7 +162,7 @@ model TextConversationItem is ConversationItemBase {
 @discriminator("targetProjectKind")
 model AnalysisParameters {
   @doc("The type of a target service")
-  targetProjectKind: TargetProjectKind;
+  targetProjectKind: targetProjectKind;
 
   @doc("The API version to use when call a specific target service.")
   apiVersion?: string;
@@ -171,7 +171,7 @@ model AnalysisParameters {
 @doc("A wrap up of non-linked intent response.")
 model NoneLinkedTargetIntentResult extends TargetIntentResult {
   @doc("The actual response from a Conversation project.")
-  targetProjectKind: TargetProjectKind.NonLinked;
+  targetProjectKind: targetProjectKind.NonLinked;
 
   @doc("The actual response from a Conversation project.")
   result?: ConversationResult;
@@ -182,7 +182,7 @@ model LuisParameters extends AnalysisParameters {
   ...Record<unknown>;
 
   @doc("The type of a target service")
-  targetProjectKind: TargetProjectKind.Luis;
+  targetProjectKind: targetProjectKind.Luis;
 
   @doc("The utterance to predict.")
   @maxLength(500)
@@ -218,7 +218,7 @@ model LuisCallingOptions {
 @doc("This is a set of request parameters for Customized Conversation projects.")
 model ConversationParameters extends AnalysisParameters {
   @doc("This is a set of request parameters for Customized Conversation projects.")
-  targetProjectKind: TargetProjectKind.Conversation;
+  targetProjectKind: targetProjectKind.Conversation;
 
   @doc("The option to set to call a Conversation project.")
   callingOptions?: ConversationCallingOptions;
@@ -239,7 +239,7 @@ model ConversationCallingOptions {
 @doc("This is a set of request parameters for Question Answering knowledge bases.")
 model QuestionAnsweringParameters extends AnalysisParameters {
   @doc("This is a set of request parameters for Question Answering knowledge bases.")
-  targetProjectKind: TargetProjectKind.QuestionAnswering;
+  targetProjectKind: targetProjectKind.QuestionAnswering;
 
   @doc("The options sent to a Question Answering KB.")
   callingOptions?: AnswersOptions;
@@ -249,7 +249,7 @@ model QuestionAnsweringParameters extends AnalysisParameters {
 @discriminator("targetProjectKind")
 model TargetIntentResult {
   @doc("This is the base class of an intent prediction")
-  targetProjectKind: TargetProjectKind;
+  targetProjectKind: targetProjectKind;
 
   @doc("The API version used to call a target service.")
   apiVersion?: string;
@@ -264,7 +264,7 @@ model TargetIntentResult {
 @doc("A wrap up of Conversation project response.")
 model ConversationTargetIntentResult extends TargetIntentResult {
   @doc("A wrap up of Conversation project response.")
-  targetProjectKind: TargetProjectKind.Conversation;
+  targetProjectKind: targetProjectKind.Conversation;
 
   @doc("The actual response from a Conversation project.")
   result?: ConversationResult;
@@ -592,7 +592,7 @@ model NumericRangeResolution extends BaseResolution {
 @doc("It is a wrap up of LUIS Generally Available response.")
 model LuisTargetIntentResult extends TargetIntentResult {
   @doc("It is a wrap up of LUIS Generally Available response.")
-  targetProjectKind: TargetProjectKind.Luis;
+  targetProjectKind: targetProjectKind.Luis;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "LuisTargetIntentResult.result should not use ': Record<unknown>'. Use ': Record<string>' instead."
   @doc("The actual response from a LUIS Generally Available application.")
@@ -602,7 +602,7 @@ model LuisTargetIntentResult extends TargetIntentResult {
 @doc("It is a wrap up a Question Answering KB response.")
 model QuestionAnsweringTargetIntentResult extends TargetIntentResult {
   @doc("It is a wrap up a Question Answering KB response.")
-  targetProjectKind: TargetProjectKind.QuestionAnswering;
+  targetProjectKind: targetProjectKind.QuestionAnswering;
 
   @doc("The generated answer by a Question Answering KB.")
   result?: AnswersResult;
@@ -642,7 +642,7 @@ enum AnalyzeConversationLROTaskKind {
 
   @added(Versions.v2023_04_15_preview)
   @doc("Conversational PII Task")
-  ConversationalPiiTask,
+  ConversationalPIITask,
 
   @added(Versions.v2023_04_15_preview)
   @doc("Custom Conversational Summarization Task")
@@ -662,7 +662,7 @@ enum AnalyzeConversationResultsKind {
 
   @added(Versions.v2023_04_15_preview)
   @doc("Conversational PII Results")
-  ConversationalPiiResults,
+  ConversationalPIIResults,
 
   @added(Versions.v2023_04_15_preview)
   @doc("Custom Conversational Summarization Results")
@@ -685,6 +685,7 @@ model AnalyzeConversationJobState {
 @doc("Contains the statistics for the submitted job.")
 @added(Versions.v2023_04_01)
 model AnalyzeConversationJobStatistics {
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("Contains the statistics for the submitted job.")
   statistics?: ConversationRequestStatistics;
 }
@@ -743,7 +744,7 @@ model Conversation {
   language: string;
 
   @doc("modality")
-  modality: Modality;
+  modality: InputModality;
 
   @doc("domain")
   domain?: ConversationDomain;
@@ -766,7 +767,7 @@ enum ConversationDomain {
 @added(Versions.v2023_04_01)
 model TextConversation extends Conversation {
   @doc("modality discriminator")
-  modality: Modality.text;
+  modality: InputModality.text;
 
   @doc("Ordered list of text conversation items in the conversation.")
   conversationItems: Array<TextConversationItem>;
@@ -776,7 +777,7 @@ model TextConversation extends Conversation {
 @added(Versions.v2023_04_01)
 model TranscriptConversation extends Conversation {
   @doc("modality discriminator")
-  modality: Modality.transcript;
+  modality: InputModality.transcript;
 
   @doc("Ordered list of transcript conversation items in the conversation.")
   conversationItems: Array<TranscriptConversationItem>;
@@ -861,6 +862,7 @@ model ConversationStatistics {
   transactionsCount: int32;
 }
 
+#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("if showStats=true was specified in the request, this field contains information about the request payload.")
 @added(Versions.v2023_04_01)
 model ConversationRequestStatistics is RequestStatistics {
@@ -937,7 +939,7 @@ model ConversationSentimentItemResult {
   participantId: string;
 
   @doc("Predicted sentiment")
-  sentiment: Sentiment;
+  sentiment: TextSentiment;
 
   @doc("Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative.")
   confidenceScores: SentimentConfidenceScores;
@@ -970,7 +972,7 @@ model Entity {
 model AnalyzeConversationConversationPiiResult
   extends AnalyzeConversationJobResult {
   @doc("discriminator kind")
-  kind: AnalyzeConversationResultsKind.ConversationalPiiResults;
+  kind: AnalyzeConversationResultsKind.ConversationalPIIResults;
 
   @doc("results")
   results: ConversationPiiResults;
@@ -1014,7 +1016,7 @@ model ConversationPiiItemResult {
 @doc("Task definition for a PII redaction in conversations.")
 model AnalyzeConversationPiiTask extends AnalyzeConversationLROTask {
   @doc("discriminator kind")
-  kind: AnalyzeConversationLROTaskKind.ConversationalPiiTask;
+  kind: AnalyzeConversationLROTaskKind.ConversationalPIITask;
 
   @doc("parameters")
   parameters?: ConversationPiiTaskParameters;
@@ -1036,7 +1038,7 @@ model ConversationPiiTaskParameters is PreBuiltTaskParameters {
 
   @added(Versions.v2023_04_15_preview)
   @doc("Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.")
-  redactionCharacter?: RedactionCharacter = RedactionCharacter.asterisk;
+  redactionCharacter?: redactionCharacter = redactionCharacter.asterisk;
 
   @added(Versions.v2023_04_15_preview)
   @doc("List of categories that need to be excluded instead of included.")
@@ -1419,7 +1421,7 @@ enum InformationUnit {
 
 //todo: add enum member descriptions
 @doc("Enumeration of supported conversational modalities.")
-enum Modality {
+enum InputModality {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'transcript' should have a documentation or description, please use decorator @doc to add it."
   transcript,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'text' should have a documentation or description, please use decorator @doc to add it."
@@ -1558,7 +1560,7 @@ enum SpeedUnit {
 
 //todo: add enum member descriptions
 @doc("The type of a target service.")
-enum TargetProjectKind {
+enum targetProjectKind {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Luis' should have a documentation or description, please use decorator @doc to add it."
   Luis,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Conversation' should have a documentation or description, please use decorator @doc to add it."

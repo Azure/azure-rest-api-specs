@@ -390,23 +390,7 @@ model TaskState {
   lastUpdateDateTime: utcDateTime;
 
   @doc("The status of the task at the mentioned last update time.")
-  status: TaskStatus;
-}
-
-@doc("The status of the task at the mentioned last update time.")
-enum TaskStatus {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'notStarted' should have a documentation or description, please use decorator @doc to add it."
-  notStarted,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'running' should have a documentation or description, please use decorator @doc to add it."
-  running,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'succeeded' should have a documentation or description, please use decorator @doc to add it."
-  succeeded,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'failed' should have a documentation or description, please use decorator @doc to add it."
-  failed,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'cancelled' should have a documentation or description, please use decorator @doc to add it."
-  cancelled,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'cancelling' should have a documentation or description, please use decorator @doc to add it."
-  cancelling,
+  status: State;
 }
 
 @doc("The status of the task at the mentioned last update time.")
@@ -933,7 +917,7 @@ model CustomResult {
 }
 
 @doc("Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.")
-enum RedactionCharacter {
+enum redactionCharacter {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   exclamationPoint: "!",
   #suppress "@azure-tools/typespec-azure-core/documentation-required"

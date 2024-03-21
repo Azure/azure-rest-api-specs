@@ -18,7 +18,7 @@ model HealthcareTaskParameters is PreBuiltTaskParameters {
 
   @added(Versions.v2023_04_15_preview)
   @doc("Document type that can be provided as input for Fhir Documents. Expect to have fhirVersion provided when used. Behavior of using None enum is the same as not using the documentType parameter.")
-  documentType?: HealthcareDocumentType;
+  documentType?: healthcareDocumentType;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -30,7 +30,7 @@ enum FhirVersion {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_15_preview)
-enum HealthcareDocumentType {
+enum healthcareDocumentType {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   None,
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -90,7 +90,7 @@ model HealthcareEntity {
   text: string;
 
   @doc("Healthcare Entity Category.")
-  category: HealthcareEntityCategory;
+  category: healthcareEntityCategory;
 
   @doc("(Optional) Entity sub type.")
   subcategory?: string;
@@ -115,7 +115,7 @@ model HealthcareEntity {
 }
 
 @doc("Healthcare Entity Category.")
-enum HealthcareEntityCategory {
+enum healthcareEntityCategory {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   BodyStructure,
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -213,7 +213,7 @@ enum HealthcareEntityCategory {
 @doc("Every relation is an entity graph of a certain relationType, where all entities are connected and have specific roles within the relation context.")
 model HealthcareRelation {
   @doc("Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc.")
-  relationType: HealthRelationType;
+  relationType: relationType;
 
   @doc("The entities in the relation.")
   entities: Array<HealthcareRelationEntity>;
@@ -224,7 +224,7 @@ model HealthcareRelation {
 }
 
 @doc("Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc.")
-enum HealthRelationType {
+enum relationType {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   Abbreviation,
   #suppress "@azure-tools/typespec-azure-core/documentation-required"

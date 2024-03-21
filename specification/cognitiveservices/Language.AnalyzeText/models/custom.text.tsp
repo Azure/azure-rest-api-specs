@@ -157,12 +157,12 @@ model DynamicClassificationDocumentResult is DocumentResult {
 @doc("This object contains information of the detected entity components. The possible component types may expand in the future. Parsing code should handle unexpected values gracefully")
 model EntityComponentInformation {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  entityComponentKind: EntityComponentKind;
+  entityComponentKind: entityComponentKind;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_15_preview)
-enum EntityComponentKind {
+enum entityComponentKind {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   PrebuiltComponent,
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -175,7 +175,7 @@ enum EntityComponentKind {
 @doc("This object contains information of the prebuilt component of the detected entity.")
 model PrebuiltComponent extends EntityComponentInformation {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  entityComponentKind: EntityComponentKind.PrebuiltComponent;
+  entityComponentKind: entityComponentKind.PrebuiltComponent;
 
   @doc("The prebuilt component of an extracted entity type.")
   value?: string;
@@ -185,7 +185,7 @@ model PrebuiltComponent extends EntityComponentInformation {
 @doc("This object contains information of the learned component of the detected entity.")
 model LearnedComponent extends EntityComponentInformation {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  entityComponentKind: EntityComponentKind.LearnedComponent;
+  entityComponentKind: entityComponentKind.LearnedComponent;
 
   @doc("The learned component of an extracted entity type.")
   value?: string;
@@ -195,7 +195,7 @@ model LearnedComponent extends EntityComponentInformation {
 @doc("This object contains information of the list component of the detected entity.")
 model ListComponent extends EntityComponentInformation {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  entityComponentKind: EntityComponentKind.ListComponent;
+  entityComponentKind: entityComponentKind.ListComponent;
 
   @doc("The list key of an extracted entity type.")
   value?: string;
@@ -205,7 +205,7 @@ model ListComponent extends EntityComponentInformation {
 @doc("Supported parameters for a Dynamic Classification task.")
 model DynamicClassificationTaskParameters is PreBuiltTaskParameters {
   @doc("Specifies either one or multiple categories per document. Defaults to multi classification which may return more than one class for each document.")
-  classificationType?: DynamicClassificationType = DynamicClassificationType.Multi;
+  classificationType?: ClassificationType = ClassificationType.Multi;
 
   @doc("a list of categories to which input is classified to.")
   categories: Array<string>;
@@ -213,7 +213,7 @@ model DynamicClassificationTaskParameters is PreBuiltTaskParameters {
 
 @added(Versions.v2023_04_15_preview)
 @doc("Specifies either one or multiple categories per document. Defaults to multi classification which may return more than one class for each document.")
-enum DynamicClassificationType {
+enum ClassificationType {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   Multi,
   #suppress "@azure-tools/typespec-azure-core/documentation-required"

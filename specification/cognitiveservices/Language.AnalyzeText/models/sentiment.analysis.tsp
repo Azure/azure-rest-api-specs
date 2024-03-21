@@ -44,7 +44,7 @@ model SentimentTaskResult extends AnalyzeTextTaskResult {
 #suppress "@azure-tools/typespec-azure-core/use-extensible-enum"
 @doc("The predicted Sentiment for the sentence.")
 @fixed
-enum SentimentValue {
+enum SentenceSentimentValue {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   positive,
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -94,7 +94,7 @@ model SentenceSentiment {
   text: string;
 
   @doc("The predicted Sentiment for the sentence.")
-  sentiment: SentimentValue;
+  sentiment: SentenceSentimentValue;
 
   @doc("The sentiment confidence score between 0 and 1 for the sentence for all classes.")
   confidenceScores: SentimentConfidenceScores;
@@ -115,7 +115,7 @@ model SentenceSentiment {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model SentenceTarget {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  sentiment: SentenceTargetSentimentValue;
+  sentiment: TokenSentimentValue;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   confidenceScores: TargetConfidenceScoreLabel;
 
@@ -130,18 +130,6 @@ model SentenceTarget {
 
   @doc("The array of either assessment or target objects which is related to the target.")
   relations: Array<TargetRelation>;
-}
-
-#suppress "@azure-tools/typespec-azure-core/use-extensible-enum"
-@doc("The predicted Sentiment for the sentence.")
-@fixed
-enum SentenceTargetSentimentValue {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  positive,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  mixed,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  negative,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -208,7 +196,7 @@ model CustomSentenceSentiment {
   text: string;
 
   @doc("The predicted Sentiment for the sentence.")
-  sentiment: SentimentValue;
+  sentiment: SentenceSentimentValue;
 
   @doc("The sentiment confidence score between 0 and 1 for the sentence for all classes.")
   confidenceScores: SentimentConfidenceScores;

@@ -647,7 +647,7 @@
           "description": "The last updated time in UTC for the task."
         },
         "status": {
-          "$ref": "#/definitions/TaskStatus",
+          "$ref": "#/definitions/State",
           "description": "The status of the task at the mentioned last update time."
         },
         "taskName": {
@@ -916,7 +916,7 @@
             "allowOverlap"
           ],
           "x-ms-enum": {
-            "name": "EntityOverlapPolicyKind",
+            "name": "policyKind",
             "modelAsString": true,
             "values": [
               {
@@ -1382,7 +1382,7 @@
           "description": "Entity text as appears in the request."
         },
         "category": {
-          "$ref": "#/definitions/HealthcareEntityCategory",
+          "$ref": "#/definitions/healthcareEntityCategory",
           "description": "Healthcare Entity Category."
         },
         "subcategory": {
@@ -1658,7 +1658,7 @@
           "description": "The sentence text."
         },
         "sentiment": {
-          "$ref": "#/definitions/SentimentValue",
+          "$ref": "#/definitions/SentenceSentimentValue",
           "description": "The predicted Sentiment for the sentence."
         },
         "confidenceScores": {
@@ -2178,7 +2178,7 @@
             "Single"
           ],
           "x-ms-enum": {
-            "name": "DynamicClassificationType",
+            "name": "ClassificationType",
             "modelAsString": true
           }
         },
@@ -2786,25 +2786,13 @@
       "description": "This object contains information of the detected entity components. The possible component types may expand in the future. Parsing code should handle unexpected values gracefully",
       "properties": {
         "entityComponentKind": {
-          "$ref": "#/definitions/EntityComponentKind"
+          "$ref": "#/definitions/entityComponentKind"
         }
       },
       "discriminator": "entityComponentKind",
       "required": [
         "entityComponentKind"
       ]
-    },
-    "EntityComponentKind": {
-      "type": "string",
-      "enum": [
-        "PrebuiltComponent",
-        "LearnedComponent",
-        "ListComponent"
-      ],
-      "x-ms-enum": {
-        "name": "EntityComponentKind",
-        "modelAsString": true
-      }
     },
     "EntityLinkingLROResult": {
       "type": "object",
@@ -3358,51 +3346,6 @@
         "modelAsString": true
       }
     },
-    "HealthRelationType": {
-      "type": "string",
-      "description": "Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc.",
-      "enum": [
-        "Abbreviation",
-        "DirectionOfBodyStructure",
-        "DirectionOfCondition",
-        "DirectionOfExamination",
-        "DirectionOfTreatment",
-        "DosageOfMedication",
-        "FormOfMedication",
-        "FrequencyOfMedication",
-        "FrequencyOfTreatment",
-        "QualifierOfCondition",
-        "RelationOfExamination",
-        "RouteOfMedication",
-        "TimeOfCondition",
-        "TimeOfEvent",
-        "TimeOfExamination",
-        "TimeOfMedication",
-        "TimeOfTreatment",
-        "UnitOfCondition",
-        "UnitOfExamination",
-        "ValueOfCondition",
-        "ValueOfExamination",
-        "BodySiteOfCondition",
-        "BodySiteOfTreatment",
-        "CourseOfCondition",
-        "CourseOfExamination",
-        "CourseOfMedication",
-        "CourseOfTreatment",
-        "ExaminationFindsCondition",
-        "ExpressionOfGene",
-        "ExpressionOfVariant",
-        "FrequencyOfCondition",
-        "MutationTypeOfGene",
-        "MutationTypeOfVariant",
-        "ScaleOfCondition",
-        "VariantOfGene"
-      ],
-      "x-ms-enum": {
-        "name": "HealthRelationType",
-        "modelAsString": true
-      }
-    },
     "HealthcareAssertion": {
       "type": "object",
       "properties": {
@@ -3422,24 +3365,6 @@
           "$ref": "#/definitions/Temporality",
           "description": "Describes temporal information regarding the entity."
         }
-      }
-    },
-    "HealthcareDocumentType": {
-      "type": "string",
-      "enum": [
-        "None",
-        "ClinicalTrial",
-        "DischargeSummary",
-        "ProgressNote",
-        "HistoryAndPhysical",
-        "Consult",
-        "Imaging",
-        "Pathology",
-        "ProcedureNote"
-      ],
-      "x-ms-enum": {
-        "name": "HealthcareDocumentType",
-        "modelAsString": true
       }
     },
     "HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage": {
@@ -3502,7 +3427,7 @@
           "description": "Entity text as appears in the request."
         },
         "category": {
-          "$ref": "#/definitions/HealthcareEntityCategory",
+          "$ref": "#/definitions/healthcareEntityCategory",
           "description": "Healthcare Entity Category."
         },
         "subcategory": {
@@ -3546,52 +3471,6 @@
         "length",
         "confidenceScore"
       ]
-    },
-    "HealthcareEntityCategory": {
-      "type": "string",
-      "description": "Healthcare Entity Category.",
-      "enum": [
-        "BodyStructure",
-        "Age",
-        "Gender",
-        "ExaminationName",
-        "Date",
-        "Direction",
-        "Frequency",
-        "MeasurementValue",
-        "MeasurementUnit",
-        "RelationalOperator",
-        "Time",
-        "GeneOrProtein",
-        "Variant",
-        "AdministrativeEvent",
-        "CareEnvironment",
-        "HealthcareProfession",
-        "Diagnosis",
-        "SymptomOrSign",
-        "ConditionQualifier",
-        "MedicationClass",
-        "MedicationName",
-        "Dosage",
-        "MedicationForm",
-        "MedicationRoute",
-        "FamilyRelation",
-        "TreatmentName",
-        "Ethnicity",
-        "Course",
-        "Expression",
-        "MutationType",
-        "ConditionScale",
-        "Allergen",
-        "Employment",
-        "LivingStatus",
-        "SubstanceUse",
-        "SubstanceUseAmount"
-      ],
-      "x-ms-enum": {
-        "name": "HealthcareEntityCategory",
-        "modelAsString": true
-      }
     },
     "HealthcareEntityLink": {
       "type": "object",
@@ -3646,7 +3525,7 @@
       "description": "Every relation is an entity graph of a certain relationType, where all entities are connected and have specific roles within the relation context.",
       "properties": {
         "relationType": {
-          "$ref": "#/definitions/HealthRelationType",
+          "$ref": "#/definitions/relationType",
           "description": "Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc."
         },
         "entities": {
@@ -3767,7 +3646,7 @@
           "description": "The FHIR Spec version that the result will use to format the fhirBundle. For additional information see https://www.hl7.org/fhir/overview.html."
         },
         "documentType": {
-          "$ref": "#/definitions/HealthcareDocumentType",
+          "$ref": "#/definitions/healthcareDocumentType",
           "description": "Document type that can be provided as input for Fhir Documents. Expect to have fhirVersion provided when used. Behavior of using None enum is the same as not using the documentType parameter."
         }
       }
@@ -4407,31 +4286,12 @@
       ],
       "x-ms-discriminator-value": "NumberMetadata"
     },
-    "NumericRangeKind": {
-      "type": "string",
-      "enum": [
-        "Number",
-        "Speed",
-        "Weight",
-        "Length",
-        "Volume",
-        "Area",
-        "Age",
-        "Information",
-        "Temperature",
-        "Currency"
-      ],
-      "x-ms-enum": {
-        "name": "NumericRangeKind",
-        "modelAsString": true
-      }
-    },
     "NumericRangeMetadata": {
       "type": "object",
       "description": "represents the Metadata of numeric intervals.",
       "properties": {
         "rangeKind": {
-          "$ref": "#/definitions/NumericRangeKind"
+          "$ref": "#/definitions/RangeKind"
         },
         "minimum": {
           "type": "number",
@@ -4468,7 +4328,7 @@
           "description": "The offset With respect to the reference (e.g., offset = -1 in \"show me the second to last\""
         },
         "relativeTo": {
-          "$ref": "#/definitions/OrdinalRelativeTo"
+          "$ref": "#/definitions/RelativeTo"
         },
         "value": {
           "type": "string",
@@ -4487,20 +4347,7 @@
       ],
       "x-ms-discriminator-value": "OrdinalMetadata"
     },
-    "OrdinalRelativeTo": {
-      "type": "string",
-      "description": "The reference point that the ordinal number denotes.",
-      "enum": [
-        "Current",
-        "End",
-        "Start"
-      ],
-      "x-ms-enum": {
-        "name": "OrdinalRelativeTo",
-        "modelAsString": true
-      }
-    },
-    "PiiCategoriesExcludeCategories": {
+    "PiiCategoriesExclude": {
       "type": "string",
       "description": "(Optional) describes the PII categories to return",
       "enum": [
@@ -4677,7 +4524,7 @@
         "Address"
       ],
       "x-ms-enum": {
-        "name": "PiiCategoriesExcludeCategories",
+        "name": "PiiCategoriesExclude",
         "modelAsString": true
       }
     },
@@ -5047,10 +4894,7 @@
           }
         },
         "excludePiiCategories": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PiiCategoriesExcludeCategories"
-          }
+          "$ref": "#/definitions/PiiCategoriesExclude"
         },
         "redactionCharacter": {
           "type": "string",
@@ -5073,7 +4917,7 @@
             "~"
           ],
           "x-ms-enum": {
-            "name": "RedactionCharacter",
+            "name": "redactionCharacter",
             "modelAsString": true,
             "values": [
               {
@@ -5184,6 +5028,38 @@
         "modelAsString": true
       }
     },
+    "RangeKind": {
+      "type": "string",
+      "enum": [
+        "Number",
+        "Speed",
+        "Weight",
+        "Length",
+        "Volume",
+        "Area",
+        "Age",
+        "Information",
+        "Temperature",
+        "Currency"
+      ],
+      "x-ms-enum": {
+        "name": "RangeKind",
+        "modelAsString": true
+      }
+    },
+    "RelativeTo": {
+      "type": "string",
+      "description": "The reference point that the ordinal number denotes.",
+      "enum": [
+        "Current",
+        "End",
+        "Start"
+      ],
+      "x-ms-enum": {
+        "name": "RelativeTo",
+        "modelAsString": true
+      }
+    },
     "RequestStatistics": {
       "type": "object",
       "description": "if showStats=true was specified in the request this field will contain information about the request payload.",
@@ -5280,7 +5156,7 @@
           "description": "The sentence text."
         },
         "sentiment": {
-          "$ref": "#/definitions/SentimentValue",
+          "$ref": "#/definitions/SentenceSentimentValue",
           "description": "The predicted Sentiment for the sentence."
         },
         "confidenceScores": {
@@ -5322,11 +5198,24 @@
         "length"
       ]
     },
+    "SentenceSentimentValue": {
+      "type": "string",
+      "description": "The predicted Sentiment for the sentence.",
+      "enum": [
+        "positive",
+        "neutral",
+        "negative"
+      ],
+      "x-ms-enum": {
+        "name": "SentenceSentimentValue",
+        "modelAsString": false
+      }
+    },
     "SentenceTarget": {
       "type": "object",
       "properties": {
         "sentiment": {
-          "$ref": "#/definitions/SentenceTargetSentimentValue"
+          "$ref": "#/definitions/TokenSentimentValue"
         },
         "confidenceScores": {
           "$ref": "#/definitions/TargetConfidenceScoreLabel"
@@ -5362,19 +5251,6 @@
         "text",
         "relations"
       ]
-    },
-    "SentenceTargetSentimentValue": {
-      "type": "string",
-      "description": "The predicted Sentiment for the sentence.",
-      "enum": [
-        "positive",
-        "mixed",
-        "negative"
-      ],
-      "x-ms-enum": {
-        "name": "SentenceTargetSentimentValue",
-        "modelAsString": false
-      }
     },
     "SentimentAnalysisLROTask": {
       "type": "object",
@@ -5594,19 +5470,6 @@
       ],
       "x-ms-discriminator-value": "SentimentAnalysisResults"
     },
-    "SentimentValue": {
-      "type": "string",
-      "description": "The predicted Sentiment for the sentence.",
-      "enum": [
-        "positive",
-        "neutral",
-        "negative"
-      ],
-      "x-ms-enum": {
-        "name": "SentimentValue",
-        "modelAsString": false
-      }
-    },
     "SpeedMetadata": {
       "type": "object",
       "description": "Represents the Speed entity Metadata model.",
@@ -5728,22 +5591,6 @@
         "ref",
         "relationType"
       ]
-    },
-    "TaskStatus": {
-      "type": "string",
-      "description": "The status of the task at the mentioned last update time.",
-      "enum": [
-        "notStarted",
-        "running",
-        "succeeded",
-        "failed",
-        "cancelled",
-        "cancelling"
-      ],
-      "x-ms-enum": {
-        "name": "TaskStatus",
-        "modelAsString": true
-      }
     },
     "Tasks": {
       "type": "object",
@@ -6058,6 +5905,127 @@
       ],
       "x-ms-enum": {
         "name": "WeightUnit",
+        "modelAsString": true
+      }
+    },
+    "entityComponentKind": {
+      "type": "string",
+      "enum": [
+        "PrebuiltComponent",
+        "LearnedComponent",
+        "ListComponent"
+      ],
+      "x-ms-enum": {
+        "name": "entityComponentKind",
+        "modelAsString": true
+      }
+    },
+    "healthcareDocumentType": {
+      "type": "string",
+      "enum": [
+        "None",
+        "ClinicalTrial",
+        "DischargeSummary",
+        "ProgressNote",
+        "HistoryAndPhysical",
+        "Consult",
+        "Imaging",
+        "Pathology",
+        "ProcedureNote"
+      ],
+      "x-ms-enum": {
+        "name": "healthcareDocumentType",
+        "modelAsString": true
+      }
+    },
+    "healthcareEntityCategory": {
+      "type": "string",
+      "description": "Healthcare Entity Category.",
+      "enum": [
+        "BodyStructure",
+        "Age",
+        "Gender",
+        "ExaminationName",
+        "Date",
+        "Direction",
+        "Frequency",
+        "MeasurementValue",
+        "MeasurementUnit",
+        "RelationalOperator",
+        "Time",
+        "GeneOrProtein",
+        "Variant",
+        "AdministrativeEvent",
+        "CareEnvironment",
+        "HealthcareProfession",
+        "Diagnosis",
+        "SymptomOrSign",
+        "ConditionQualifier",
+        "MedicationClass",
+        "MedicationName",
+        "Dosage",
+        "MedicationForm",
+        "MedicationRoute",
+        "FamilyRelation",
+        "TreatmentName",
+        "Ethnicity",
+        "Course",
+        "Expression",
+        "MutationType",
+        "ConditionScale",
+        "Allergen",
+        "Employment",
+        "LivingStatus",
+        "SubstanceUse",
+        "SubstanceUseAmount"
+      ],
+      "x-ms-enum": {
+        "name": "healthcareEntityCategory",
+        "modelAsString": true
+      }
+    },
+    "relationType": {
+      "type": "string",
+      "description": "Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc.",
+      "enum": [
+        "Abbreviation",
+        "DirectionOfBodyStructure",
+        "DirectionOfCondition",
+        "DirectionOfExamination",
+        "DirectionOfTreatment",
+        "DosageOfMedication",
+        "FormOfMedication",
+        "FrequencyOfMedication",
+        "FrequencyOfTreatment",
+        "QualifierOfCondition",
+        "RelationOfExamination",
+        "RouteOfMedication",
+        "TimeOfCondition",
+        "TimeOfEvent",
+        "TimeOfExamination",
+        "TimeOfMedication",
+        "TimeOfTreatment",
+        "UnitOfCondition",
+        "UnitOfExamination",
+        "ValueOfCondition",
+        "ValueOfExamination",
+        "BodySiteOfCondition",
+        "BodySiteOfTreatment",
+        "CourseOfCondition",
+        "CourseOfExamination",
+        "CourseOfMedication",
+        "CourseOfTreatment",
+        "ExaminationFindsCondition",
+        "ExpressionOfGene",
+        "ExpressionOfVariant",
+        "FrequencyOfCondition",
+        "MutationTypeOfGene",
+        "MutationTypeOfVariant",
+        "ScaleOfCondition",
+        "VariantOfGene"
+      ],
+      "x-ms-enum": {
+        "name": "relationType",
         "modelAsString": true
       }
     }

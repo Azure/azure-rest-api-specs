@@ -283,12 +283,12 @@ model EntityInferenceOptions {
 @doc("The abstract base class for entity OverlapPolicy.")
 model BaseEntityOverlapPolicy {
   @doc("The entity OverlapPolicy object kind.")
-  policyKind: EntityOverlapPolicyKind = EntityOverlapPolicyKind.matchLongest;
+  policyKind: policyKind = policyKind.matchLongest;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_15_preview)
-enum EntityOverlapPolicyKind {
+enum policyKind {
   @doc("Represents MatchLongestEntityPolicyType")
   matchLongest,
 
@@ -300,14 +300,14 @@ enum EntityOverlapPolicyKind {
 @doc("Represents the Match longest overlap policy. No overlapping entities as far as it is possible. 1. If there are overlapping entities, the longest one will be returned. 2. If the set of characters predicted for 2 or more entities are exactly the same, select the entity that has the higher confidence score.3. If the entity scores are identical, return all entities that are still present after applying the previous rules. 3. If there is partial overlap (as in Hello Text Analytics) follow the above steps starting from 1.")
 model MatchLongestEntityPolicyType extends BaseEntityOverlapPolicy {
   @doc("The entity OverlapPolicy object kind.")
-  policyKind: EntityOverlapPolicyKind.matchLongest;
+  policyKind: policyKind.matchLongest;
 }
 
 @added(Versions.v2023_04_15_preview)
 @doc("Represents the allow overlap policy. Will apply no post processing logic for the entities. Whatever the model predicts is what will be returned to the user. This allows the user to get a full view of every single model's possible values and apply their own custom logic on entity selection")
 model AllowOverlapEntityPolicyType extends BaseEntityOverlapPolicy {
   @doc("The entity OverlapPolicy object kind.")
-  policyKind: EntityOverlapPolicyKind.allowOverlap;
+  policyKind: policyKind.allowOverlap;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -626,7 +626,7 @@ enum NumberKind {
 
 @added(Versions.v2023_04_15_preview)
 @doc("The reference point that the ordinal number denotes.")
-enum OrdinalRelativeTo {
+enum RelativeTo {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   Current,
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -690,7 +690,7 @@ enum TemporalModifier {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-enum NumericRangeKind {
+enum RangeKind {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   Number,
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -934,7 +934,7 @@ model OrdinalMetadata extends BaseMetadata {
   offset: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  relativeTo: OrdinalRelativeTo;
+  relativeTo: RelativeTo;
 
   @doc("A simple arithmetic expression that the ordinal denotes.")
   value: string;
@@ -973,7 +973,7 @@ model NumericRangeMetadata extends BaseMetadata {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   metadataKind: MetadataKind.NumericRangeMetadata;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  rangeKind: NumericRangeKind;
+  rangeKind: RangeKind;
 
   @doc("The beginning value of  the interval.")
   minimum: float64;
