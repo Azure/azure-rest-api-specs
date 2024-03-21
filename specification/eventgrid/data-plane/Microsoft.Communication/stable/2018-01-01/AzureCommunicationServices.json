@@ -1534,6 +1534,134 @@
         }
       }
     },
+    "AcsAdvancedMessageReceivedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageReceived event.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsAdvancedMessageEventBaseProperties"
+        }
+      ],
+      "properties": {
+        "content": {
+          "description": "The The messaged received content",
+          "type": "string"
+        },
+        "channelType": {
+          "description": "The The messaged received channel type",
+          "type": "string",
+          "enum": [
+            "whatsapp"
+          ],
+          "x-ms-enum": {
+            "name": "AcsMessageChannelType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "whatsapp",
+                "description": "Updated messaged channel type is Whatsapp"
+              }
+            ]
+          }
+        },
+        "media": {
+          "description": "The messaged received media content",
+          "$ref": "#/definitions/AcsAdvancedMessageMediaContent",
+          "type": "object"
+        },
+        "error": {
+          "description": "The The messaged received context",
+          "$ref": "#/definitions/AcsAdvancedMessageContext",
+          "type": "object"
+        },
+        "button": {
+          "description": "The The messaged received button content",
+          "$ref": "#/definitions/AcsAdvancedMessageButtonContent",
+          "type": "object"
+        },
+        "interactive": {
+          "description": "The The messaged received interactive content",
+          "$ref": "#/definitions/AcsAdvancedMessageInteractiveContent",
+          "type": "object"
+        }
+      },
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/advanced_message_received.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/advanced_message_received.json"
+        }
+      }
+    },
+    "AcsAdvancedMessageDeliveryStatusUpdatedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageDeliveryStatusUpdated event.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AcsAdvancedMessageEventBaseProperties"
+        }
+      ],
+      "properties": {
+        "messageId": {
+          "description": "The message id",
+          "type": "string"
+        },
+        "status": {
+          "description": "The updated message status",
+          "type": "string"
+        },
+        "channelType": {
+          "description": "The updated message channel type",
+          "type": "string",
+          "enum": [
+            "whatsapp"
+          ],
+          "x-ms-enum": {
+            "name": "AcsMessageChannelType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "whatsapp",
+                "description": "Updated messaged channel type is Whatsapp"
+              }
+            ]
+          }
+        }
+      },
+      "x-ms-examples": {
+        "snapshotCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/advanced_message_delivery_status_updated.json"
+        },
+        "snapshotCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/advanced_message_delivery_status_updated.json"
+        }
+      }
+    },
+    "AcsAdvancedMessageEventBaseProperties": {
+      "description": "Schema of common properties of all chat thread events",
+      "type": "object",
+      "properties": {
+        "from": {
+          "description": "The message sender",
+          "type": "string"
+        },
+        "to": {
+          "description": "The message recipient",
+          "type": "string"
+        },
+        "receivedTimestamp": {
+          "description": "The time message was received",
+          "format": "date-time",
+          "type": "string"
+        },
+        "error": {
+          "description": "The channel event error",
+          "$ref": "#/definitions/AcsAdvancedMessageChannelEventError",
+          "type": "object"
+        }
+      }
+    },
     "AcsChatThreadEventBaseProperties": {
       "description": "Schema of common properties of all chat thread events",
       "allOf": [
@@ -2031,6 +2159,145 @@
           "description": "Router Job Worker Selector Expiration Time",
           "type": "string",
           "format": "date-time"
+        }
+      }
+    },
+    "AcsAdvancedMessageChannelEventError": {
+      "description": "Advanced Message Channel Event Error",
+      "type": "object",
+      "properties": {
+        "channelCode": {
+          "description": "The channel error code",
+          "type": "string"
+        },
+        "channelMessage": {
+          "description": "The channel error message",
+          "type": "string"
+        }
+      }
+    },
+    "AcsAdvancedMessageMediaContent": {
+      "description": "Advanced Message Media Content",
+      "type": "object",
+      "properties": {
+        "mimeType": {
+          "description": "The MIME type of the file this media represents",
+          "type": "string"
+        },
+        "id": {
+          "description": "The media identifier",
+          "type": "string"
+        },
+        "fileName": {
+          "description": "The filename of the underlying media file as specified when uploaded",
+          "type": "string"
+        },
+        "caption": {
+          "description": "The caption for the media object, if supported and provided",
+          "type": "string"
+        }
+      }
+    },
+    "AcsAdvancedMessageContext": {
+      "description": "Advanced Message Context",
+      "type": "object",
+      "properties": {
+        "from": {
+          "description": "The WhatsApp ID for the customer who replied to an inbound message.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The message ID for the sent message for an inbound reply",
+          "type": "string"
+        }
+      }
+    },
+    "AcsAdvancedMessageButtonContent": {
+      "description": "Advanced Message Button Content",
+      "type": "object",
+      "properties": {
+        "text": {
+          "description": "The Text of the button",
+          "type": "string"
+        },
+        "payload": {
+          "description": "The Payload of the button which was clicked by the user, setup by the business",
+          "type": "string"
+        }
+      }
+    },
+    "AcsAdvancedMessageInteractiveContent": {
+      "description": "Advanced Message Interactive Content",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The Message interactive reply type",
+          "type": "string",
+          "enum": [
+            "buttonReply",
+            "listReply",
+            "unknown"
+          ],
+          "x-ms-enum": {
+            "name": "AcsInteractiveReplyType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "buttonReply",
+                "description": "Messaged interactive reply type is ButtonReply"
+              },
+              {
+                "value": "listReply",
+                "description": "Messaged interactive reply type is ListReply"
+              },
+              {
+                "value": "unknown",
+                "description": "Messaged interactive reply type is Unknown"
+              }
+            ]
+          }
+        },
+        "buttonReply": {
+          "description": "The Message Sent when a customer clicks a button",
+          "$ref": "#/definitions/AcsAdvancedMessageInteractiveButtonReplyContent",
+          "type": "object"
+        },
+        "listReply": {
+          "description": "The Message Sent when a customer selects an item from a list",
+          "$ref": "#/definitions/AcsAdvancedMessageInteractiveListReplyContent",
+          "type": "object"
+        }
+      }
+    },
+    "AcsAdvancedMessageInteractiveButtonReplyContent": {
+      "description": "Advanced Message Interactive button reply content for a user to business message",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ID of the button",
+          "type": "string"
+        },
+        "title": {
+          "description": "The title of the button",
+          "type": "string"
+        }
+      }
+    },
+    "AcsAdvancedMessageInteractiveListReplyContent": {
+      "description": "Advanced Message Interactive list reply content for a user to business message",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ID of the selected list item",
+          "type": "string"
+        },
+        "title": {
+          "description": "The title of the selected list item",
+          "type": "string"
+        },
+        "description": {
+          "description": "The sescription of the selected row",
+          "type": "string"
         }
       }
     }
