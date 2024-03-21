@@ -1,3 +1,4 @@
+import "../versions.tsp";
 import "./genericgenevaactions.tsp";
 
 using TypeSpec.Versioning;
@@ -6,11 +7,10 @@ using Azure.ResourceManager;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Namespace types must use PascalCaseTypeSpec"
 @armProviderNamespace
 @service({
-  title: "Foundational ARM Client",
-  version: "2023-08-22-preview",
+  title: "Foundational ARM Client"
 })
 @doc("GenericGenevaActions Provider")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@versioned(Microsoft.AzureCIS.Versions)
 namespace Microsoft.AzureCIS;
 
 interface Operations extends Azure.ResourceManager.Operations {}

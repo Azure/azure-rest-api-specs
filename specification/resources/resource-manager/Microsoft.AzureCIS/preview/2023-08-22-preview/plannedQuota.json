@@ -73,11 +73,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List Operations PlannedQuota": {
-            "$ref": "./examples/PlannedQuota_Operations.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -110,11 +105,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ListBySubscription PlannedQuota": {
-            "$ref": "./examples/PlannedQuota_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -152,11 +142,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "ListByResourceGroup PlannedQuota": {
-            "$ref": "./examples/PlannedQuota_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -202,11 +187,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get PlannedQuota": {
-            "$ref": "./examples/PlannedQuota_Get.json"
           }
         }
       },
@@ -269,11 +249,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Create PlannedQuota": {
-            "$ref": "./examples/PlannedQuota_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -355,7 +330,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -427,6 +403,24 @@
         "placeholder",
         "resourceName"
       ]
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Supported versions.",
+      "enum": [
+        "2023-08-22-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2023_08_22_preview",
+            "value": "2023-08-22-preview",
+            "description": "API version 2023-08-22-preview"
+          }
+        ]
+      }
     }
   },
   "parameters": {}
