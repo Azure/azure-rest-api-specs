@@ -392,7 +392,7 @@
             "modelAsString": true
           }
         },
-        "coolDownPeriodInSecond": {
+        "coolDownPeriod": {
           "description": "The cool down period of a Session in seconds.",
           "type": "integer",
           "format": "int32"
@@ -534,6 +534,11 @@
                 "create",
                 "read"
               ]
+            },
+            "minWarmPoolSize": {
+              "description": "The minimum count of Sessions warmed up at the same time.",
+              "type": "integer",
+              "format": "int32"
             },
             "maxConcurrentSessions": {
               "description": "The max count of Sessions at the same time.",
