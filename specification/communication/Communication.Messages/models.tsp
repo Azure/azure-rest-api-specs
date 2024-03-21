@@ -19,13 +19,13 @@ union CommunicationMessageKind {
   string,
 
   @doc("Text message type.")
-  "text",
+  text: "text",
 
   @doc("Image message type.")
-  "image",
+  image: "image",
 
   @doc("Template message type.")
-  "template",
+  template: "template",
 }
 
 @doc("The WhatsApp button sub type.")
@@ -61,22 +61,22 @@ union MessageTemplateValueKind {
   string,
 
   @doc("The text template parameter type.")
-  "text",
+  text: "text",
 
   @doc("The image template parameter type.")
-  "image",
+  image: "image",
 
   @doc("The document template parameter type.")
-  "document",
+  document: "document",
 
   @doc("The video template parameter type.")
-  "video",
+  video: "video",
 
   @doc("The location template parameter type.")
-  "location",
+  location: "location",
 
   @doc("The quick action template parameter type.")
-  "quickAction",
+  quickAction: "quickAction",
 }
 
 @doc("The type of the communication messages channel.")
@@ -84,7 +84,7 @@ union CommunicationMessagesChannel {
   string,
 
   @doc("The WhatsApp communication messages channel type.")
-  "whatsApp",
+  whatsApp: "whatsApp",
 }
 
 @doc("The type of the message template.")
@@ -92,7 +92,7 @@ union MessageTemplateBindingsKind {
   string,
 
   @doc("The WhatsApp template type.")
-  "whatsApp",
+  whatsApp: "whatsApp",
 }
 
 @discriminator("kind")
