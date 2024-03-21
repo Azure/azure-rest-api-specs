@@ -21,7 +21,6 @@ enum Versions {
   v2_preview: "2024-02-01-preview",
 }
 
-
 /**
  * Marketplace subscription status of the file system resource
  */

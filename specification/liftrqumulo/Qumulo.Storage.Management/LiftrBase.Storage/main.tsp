@@ -64,7 +64,7 @@ model FileSystemResourceProperties {
   /**
    * Private IPs of the resource
    */
-  privateIPs?: string[];
+  privateIps?: string[];
 
   /**
    * Initial administrator password of the resource
@@ -80,7 +80,7 @@ model FileSystemResourceProperties {
   /**
    * GBs per second provisioned
    */
-  fsGBpsProvisioned?: int32;
+  fsGbpsProvisioned?: int32;
 
   /**
    * Availability zone
@@ -164,7 +164,7 @@ model FileSystemResourceUpdateProperties {
   /**
    * GBs per second provisioned
    */
-  fsGBpsProvisioned?: int32;
+  fsGbpsProvisioned?: int32;
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
