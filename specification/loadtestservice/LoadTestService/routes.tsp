@@ -438,3 +438,54 @@ numeric, underscore or hyphen characters.
     TestRunServerMetricConfig
   >;
 }
+
+@tag("TestProfile")
+interface TestProfileAdministration {
+  @summary("Create a new test profile or update an existing test profile by providing the test profile Id.")
+  @doc("Create a new test profile or update an existing test profile by providing the test profile Id.")
+  createOrUpdateTestProfile is StandardResourceOperations.ResourceCreateOrUpdate<TestProfile>;
+
+  @summary("Delete a test profile by its test profile Id.")
+  @doc("Delete a test profile by its test profile Id.")
+  deleteTestProfile is StandardResourceOperations.ResourceDelete<TestProfile>;
+
+  @summary("Get load test profile details by test profile Id")
+  @doc("Get load test profile details by test profile Id")
+  getTest is StandardResourceOperations.ResourceRead<TestProfile>;
+
+  @summary("""
+  Get all load test profiles by the fully qualified resource Id e.g
+  subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
+  """)
+    @doc("""
+  Get all load test profiles by the fully qualified resource Id e.g
+  subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.
+  """)
+    listTestProfiles is StandardResourceOperations.ResourceList<
+      TestProfile,
+      ListQueryParametersTrait<ListTestQueryParams> // TODO(mitsha): Verify if this is allowed
+    >;
+}
+
+@tag("TestProfileRun")
+interface TestProfileRuns {
+  @summary("Get test profile run details by test profile run Id.")
+  @doc("Get test run details by test run Id.")
+  getTestProfileRun is StandardResourceOperations.ResourceRead<TestProfileRun>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @summary("Create and start a new test run with the given test run Id.")
+  @doc("Create and start a new test run with the given test run Id.")
+  createOrUpdateTestProfileRun is StandardResourceOperations.ResourceCreateOrUpdate<TestProfileRun>;
+
+  @summary("Delete an existing load test run.")
+  @doc("Delete an existing load test run by providing the testRunId.")
+  deleteTestProfileRun is StandardResourceOperations.ResourceDelete<TestProfileRun>;
+
+  @summary("Get all test profile runs for the given filters.")
+  @doc("Get all test profile runs for the given filters.")
+  listTestProfileRuns is StandardResourceOperations.ResourceList<
+    TestProfileRun,
+    ListQueryParametersTrait<ListTestProfileRunQueryParams>
+  >;
+}

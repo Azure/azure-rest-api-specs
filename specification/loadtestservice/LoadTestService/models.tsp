@@ -273,6 +273,128 @@ SECRET_VALUE.
   ...SystemMetaData;
 }
 
+@doc("Test profile authentication kind")
+@added(APIVersions.v2024_03_01_preview)
+union AuthenticationKind {
+  string,
+
+  @doc("Managed Identity Based Authentication")
+  ManagedIdentity: "ManagedIdentity"
+}
+
+@doc("Performance tuner configurations kind")
+@added(APIVersions.v2024_03_01_preview)
+union PerformanceTunerConfigurationKind {
+  string,
+
+  @doc("Functions App with Flex Consumption Plan")
+  FunctionsFlexConsumption: "FunctionsFlexConsumption"
+}
+
+@doc("Performance tuner configurations on which the test profile will run.")
+@added(APIVersions.v2024_03_01_preview)
+model PerformanceTunerConfiguration {
+  @doc("""
+  Kind of the performance tuner configuration.
+  This corresponds to the type of source resource on which the test profile is created.
+  """)
+  performanceTunerConfigurationKind: PerformanceTunerConfigurationKind
+}
+
+@doc("Performance tuner configurations for a Flex Consumption based Azure Function App.")
+@added(APIVersions.v2024_03_01_preview)
+model FunctionFlexConsumptionPerformanceTunerConfigurations {
+  @doc("""
+  Kind of the performance tuner configuration.
+  This corresponds to the type of source resource on which the test profile is created.
+  This should not typically change its value for Function app with flex consumption plan.
+  """)
+  performanceTunerConfigurationKind: PerformanceTunerConfigurationKind.FunctionsFlexConsumption;
+
+  @doc("List of configurations for a flex consumption based Function app on which the test profile will run.")
+  configurations: Record<FunctionFlexConsumptionPerfomanceTunerConfiguration>;
+
+}
+
+@doc("Performance tuner configuration instance for a Flex Consumption based Azure Function App.")
+@added(APIVersions.v2024_03_01_preview)
+model FunctionFlexConsumptionPerfomanceTunerConfiguration {
+  @doc("Instance size of function app. Supported values are 512, 2048, 2096.")
+  instanceSize: int64;
+
+  @doc("HTTP Concurrency for the function app.")
+  httpConcurrency: int64;
+}
+
+@doc("Test profile authentication. Details on how a test profile authenticates to a source resource")
+@added(APIVersions.v2024_03_01_preview)
+@discriminator("authenticationKind")
+model TestProfileAuthentication {
+  @doc("The kind of authentication for the test profile.")
+  authenticationKind: AuthenticationKind;
+}
+
+@doc("The type of managed identity used for authentication.")
+@added(APIVersions.v2024_03_01_preview)
+union AuthenticationManagedIdentityType {
+  string,
+
+  /** Assigned by the system */
+  SystemAssigned: "SystemAssigned",
+
+  /** assigned by the user */
+  UserAssigned: "UserAssigned",
+}
+
+@doc("Managed identity based authentication for Test Profiles")
+@added(APIVersions.v2024_03_01_preview)
+model ManagedIdentityBasedTestProfileAuthentication extends TestProfileAuthentication {
+  @doc("""
+    The kind value to use when configuring managed identity based authentication for the test profile.
+    This should typically be not changed from its value for Managed Identity.
+    """)
+  authenticationKind: AuthenticationKind.ManagedIdentity;
+
+  @doc("Type of the managed identity.")
+  managedIdentityType?: AuthenticationManagedIdentityType;
+
+  @doc("Resource Id of the managed identity. This is only required if the managedIdentityType is UserAssigned.")
+  managedIdentityResourceId?: string;
+}
+
+@doc("Test Profile Model")
+@added(APIVersions.v2024_03_01_preview)
+@resource("test-profiles")
+model TestProfile {
+  ... TestProfileIdParameter;
+
+  @maxLength(100)
+  @doc("The test profile description")
+  description?: string;
+
+  @doc("Associated test ID for the test profile") 
+  @visibility("create") 
+  testId: string;
+
+  @doc("Source resource ID on which the test profile is created")
+  @visibility("create")
+  sourceResourceId: string;
+
+  @doc("""
+  Authentication configuration for how test profile will authenticate to the source resource id.
+  Pick the correct kind of authentication for the associated source resource type.
+  """)
+  authentication: TestProfileAuthentication;
+
+  @doc("""
+  Performance tuner configuration for the test profile.
+  Pick the correct kind of configuration for the associated source resource type.
+  """)
+  performanceTunerConfiguration: PerformanceTunerConfiguration;
+
+  ...SystemMetaData;
+}
+
 @doc("Pass fail criteria for a test.")
 model PassFailCriteria {
   @doc("Map of id and pass fail metrics { id  : pass fail metrics }.")
@@ -689,6 +811,101 @@ SECRET_VALUE.
   ...SystemMetaData;
 }
 
+@doc("Details of a particular test run for a test profile run.")
+@added(APIVersions.v2024_03_01_preview)
+model TestRunDetail {
+  @doc("Status of the test run.")
+  status: Status;
+
+  @doc("ID of the configuration on which the test ran.")
+  configurationId: string;
+
+  @doc("Key value pair of extra properties associated with the test run.")
+  properties: Record<string>;
+}
+
+@doc("List of configuration IDs for a source resource")
+@added(APIVersions.v2024_03_01_preview)
+model ConfigurationsList {
+  configurations?: string[]
+}
+
+@doc("Recommendations provided after running a test profile successfully.")
+@added(APIVersions.v2024_03_01_preview)
+model TestProfileRunRecommendations {
+  @doc("List of configurations that optimize throughput or RPS (Requests per Second).")
+  throughputOptimized: ConfigurationsList;
+
+  @doc("List of configurations that optimize cost.")
+  costOptimized: ConfigurationsList;
+}
+
+@doc("Test profile run model")
+@added(APIVersions.v2024_03_01_preview)
+@resource("test-profile-runs")
+model TestProfileRun {
+  ...TestProfileRunIdParameter;
+
+  // Begin section: Properties provided by user
+  @maxLength(100)
+  @doc("The test profile run description")
+  description?: string;
+
+  @doc("Associated test profile ID for the test profile run") 
+  @visibility("create") 
+  testProfileId: string;
+  // End section: Properties provided by user
+
+  // Begin section: Properties populated from test profile
+  @doc("Source resource ID on which the test profile is created")
+  @visibility("read")
+  sourceResourceId: string;
+
+  @doc("""
+  Authentication configuration for how test profile will authenticate to the source resource id.
+  Pick the correct kind of authentication for the associated source resource type.
+  """)
+  @visibility("read")
+  authentication: TestProfileAuthentication;
+
+  @doc("""
+  Performance tuner configuration for the test profile.
+  Pick the correct kind of configuration for the associated source resource type.
+  """)
+  @visibility("read")
+  performanceTunerConfiguration: PerformanceTunerConfiguration;
+  // End section: Properties populated from test profile
+
+  // Begin section: Test profile run specific properties
+  @doc("The test profile run status.")
+  @visibility("read")
+  status?: Status;
+
+  @doc("The test profile run start DateTime(RFC 3339 literal format).")
+  @visibility("read")
+  startDateTime?: utcDateTime;
+
+  @doc("The test profile run end DateTime(RFC 3339 literal format).")
+  @visibility("read")
+  endDateTime?: utcDateTime;
+
+  @doc("Test profile run duration in milliseconds.")
+  @visibility("read")
+  duration?: int64;
+
+  @doc("""
+  Details of the test runs ran as part of the test profile run.
+  Key is the testRunId of the corresponding testRun.
+  """)
+  testRunDetails?: Record<TestRunDetail>;
+
+  @doc("Recommendations provided based on a successful test profile run.")
+  recommendations?: TestProfileRunRecommendations;
+  // End section: Test profile run specific properties
+
+  ...SystemMetaData;
+}
+
 @doc("Error details if there is any failure in load test run")
 model ErrorDetails {
   @doc("Error details in case test run was not successfully run.")
@@ -1052,6 +1269,44 @@ the search parameter can be 500.
   maxpagesize?: int32 = 50;
 }
 
+@doc("Parameters for list test profile run operation")
+model ListTestProfileRunQueryParams {
+  @doc("""
+  Sort on the supported fields in (field asc/desc) format. eg: executedDateTime
+  asc. Supported fields - executedDateTime
+  """)
+    @query
+    orderby?: string;
+  
+    @doc("""
+  Prefix based, case sensitive search on searchable fields - description,
+  executedUser. For example, to search for a test profile run, with description 500 VUs,
+  the search parameter can be 500.
+  """)
+    @query
+    search?: string;
+  
+    @doc("Unique name of an existing test profile.")
+    @query
+    testProfileId?: string;
+  
+    @doc("Start DateTime(RFC 3339 literal format) of test profile run execution time filter range.")
+    @query
+    executionFrom?: utcDateTime;
+  
+    @doc("End DateTime(RFC 3339 literal format) of test profile run execution time filter range.")
+    @query
+    executionTo?: utcDateTime;
+  
+    @doc("Comma separated list of test profile run status.")
+    @query
+    status?: string;
+  
+    @doc("Number of results in response.")
+    @query
+    maxpagesize?: int32 = 50;
+}
+
 @doc("Parameters for list test operation")
 model ListTestQueryParams {
   @doc("""
@@ -1125,6 +1380,28 @@ model TestRunIdPathParameter {
   @key
   @pattern("^[a-z0-9_-]*$")
   testRunId: string;
+}
+
+@doc("Test Profile Id path parameter")
+model TestProfileIdParameter {
+  @doc("Unique identifier for the test profile, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.")
+  @visibility("read")
+  @maxLength(50)
+  @minLength(2)
+  @key
+  @pattern("^[a-z0-9_-]*$")
+  testProfileId: string;
+}
+
+@doc("Test Profile Run Id path parameter")
+model TestProfileRunIdParameter {
+  @doc("Unique identifier for the test profile run, must contain only lower-case alphabetic, numeric, underscore or hyphen characters.")
+  @visibility("read")
+  @maxLength(50)
+  @minLength(2)
+  @key
+  @pattern("^[a-z0-9_-]*$")
+  testProfileRunId: string;
 }
 
 alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Http.Response<201> &
