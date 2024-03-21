@@ -2445,6 +2445,26 @@
           "example": {
             "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/proxybackend"
           }
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The weight of the backend entity in the backend pool. Must be between 1 and 100.",
+          "minimum": 1,
+          "maximum": 100,
+          "example": {
+            "weight": 1
+          }
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority of the backend entity in the backend pool. Must be between 1 and 100.",
+          "minimum": 1,
+          "maximum": 100,
+          "example": {
+            "priority": 1
+          }
         }
       },
       "required": [
