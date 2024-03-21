@@ -10,13 +10,8 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
-@armProviderNamespace("Microsoft.Impact")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Impact;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-key-invalid-chars" "Existing template"
 @doc("A ImpactProviderHub resource")
 @subscriptionResource
 model Connector is ProxyResource<ConnectorProperties> {
@@ -29,8 +24,7 @@ model Connector is ProxyResource<ConnectorProperties> {
 }
 
 @doc("Details of the Impact Connector.")
-model ConnectorProperties is ResourceProperties{
-
+model ConnectorProperties is ResourceProperties {
   @visibility("read")
   @doc("unique id of the connector.")
   connectorId: string;
@@ -53,7 +47,7 @@ model ConnectorProperties is ResourceProperties{
 @doc("Enum for connector types")
 enum Platform {
   @doc("Type of Azure Monitor")
-  AzureMonitor: "AzureMonitor"
+  AzureMonitor: "AzureMonitor",
 }
 
 @armResourceOperations(Connector)
