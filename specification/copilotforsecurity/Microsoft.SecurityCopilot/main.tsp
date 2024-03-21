@@ -34,7 +34,7 @@ model Capacity is TrackedResource<CapacityProperties> {
 model CapacityProperties {
   @doc("No of Units")
   @minValue(1)
-  @maxValue(999)
+  @maxValue(100)
   numberOfUnits: int64;
 
   @doc("Is cross geo compute allowed")

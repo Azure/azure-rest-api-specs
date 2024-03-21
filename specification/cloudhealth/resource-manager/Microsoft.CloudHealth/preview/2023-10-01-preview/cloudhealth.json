@@ -1817,10 +1817,6 @@
           "$ref": "#/definitions/stringResourceName",
           "description": "Reference to the name of the authentication setting which is used for querying Azure Resource Graph. The same authentication setting will also be assigned to any discovered entities."
         },
-        "showEntity": {
-          "$ref": "#/definitions/DiscoveryRuleShowEntityBehavior",
-          "description": "Whether to create an entity for the discovery rule itself. If set, all discovered entities will be children of this entity."
-        },
         "discoverRelationships": {
           "$ref": "#/definitions/DiscoveryRuleRelationshipDiscoveryBehavior",
           "description": "Whether to create relationships between the discovered entities based on a set of built-in rules. These relationships cannot be manually deleted."
@@ -1850,7 +1846,6 @@
       "required": [
         "resourceGraphQuery",
         "authenticationSetting",
-        "showEntity",
         "discoverRelationships",
         "addRecommendedSignals"
       ]
@@ -1899,30 +1894,6 @@
             "name": "Disabled",
             "value": "Disabled",
             "description": "Do not automatically attempt to discover relationships"
-          }
-        ]
-      }
-    },
-    "DiscoveryRuleShowEntityBehavior": {
-      "type": "string",
-      "description": "Discovery rule show entity behavior",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "DiscoveryRuleShowEntityBehavior",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Create an entity for the discovery rule itself"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Do not create entity for discovery rule"
           }
         ]
       }
@@ -2338,7 +2309,9 @@
       "enum": [
         "Healthy",
         "Degraded",
-        "Error"
+        "Error",
+        "Unknown",
+        "Deleted"
       ],
       "x-ms-enum": {
         "name": "HealthState",
@@ -2358,6 +2331,16 @@
             "name": "Error",
             "value": "Error",
             "description": "Error status (Unhealthy)"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown status"
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Deleted status"
           }
         ]
       }
@@ -2899,10 +2882,6 @@
           "$ref": "#/definitions/EvaluationRule",
           "description": "Evaluation rules for the signal definition"
         },
-        "enabledState": {
-          "$ref": "#/definitions/SignalEnabledState",
-          "description": "Signal definition enabled state"
-        },
         "deletionDate": {
           "type": "string",
           "format": "date-time",
@@ -2913,21 +2892,8 @@
       "discriminator": "signalKind",
       "required": [
         "signalKind",
-        "evaluationRules",
-        "enabledState"
+        "evaluationRules"
       ]
-    },
-    "SignalEnabledState": {
-      "type": "string",
-      "description": "Signal enabled state",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "SignalEnabledState",
-        "modelAsString": true
-      }
     },
     "SignalGroup": {
       "type": "object",

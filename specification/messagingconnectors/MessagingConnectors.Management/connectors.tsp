@@ -17,7 +17,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.MessagingConnectors;
 
 @doc("A Connector resource Azure")
-model ConnectorInstance is TrackedResource<ConnectorProperties> {
+model ConnectorInstance is TrackedResource<ResourceProperties> {
   @doc("Name of the Connector resource.")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]")
   @path

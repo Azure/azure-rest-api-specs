@@ -25,7 +25,7 @@ namespace Microsoft.Monitor;
 @doc("A pipeline group definition.")
 model PipelineGroup is TrackedResource<PipelineGroupProperties> {
   @doc("The name of pipeline group. The name is case insensitive.")
-  @pattern("^(?!-)[a-zA-Z0-9-]{3,32}[^-]$")
+  @pattern("^(?!-)[a-zA-Z0-9-]{3,10}[^-]$")
   @key("pipelineGroupName")
   @path
   @segment("pipelineGroups")
@@ -40,7 +40,7 @@ model PipelineGroup is TrackedResource<PipelineGroupProperties> {
 @doc("Properties that need to be specified to create a new pipeline group instance.")
 model PipelineGroupProperties {
   @doc("Defines the amount of replicas of the pipeline group instance.")
-  replicas?: int32 = 1;
+  replicas?: int32;
 
   @doc("The receivers specified for a pipeline group instance.")
   @extension("x-ms-identifiers", [])
