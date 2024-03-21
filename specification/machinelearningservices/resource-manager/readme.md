@@ -74,6 +74,7 @@ suppressions:
       - $.definitions.EndpointModels.properties.value.items.properties.finetuneCapabilities
       - $.definitions.CustomKeysWorkspaceConnectionProperties.properties.credentials.properties.keys
       - $.definitions.CustomKeys.properties.keys
+      - $.definitions.WorkspaceConnectionPropertiesV2.properties.metadata
 ```
 ### Tag: package-preview-2024-01
 
