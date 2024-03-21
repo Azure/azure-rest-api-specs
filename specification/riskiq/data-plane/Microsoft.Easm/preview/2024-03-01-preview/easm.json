@@ -463,12 +463,10 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DeltaSummaryParameter"
-            }
+            "$ref": "#/parameters/DaysPriorParameter"
+          },
+          {
+            "$ref": "#/parameters/DateParameter"
           }
         ],
         "responses": {
@@ -1006,6 +1004,7 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "DiscoveryGroups_DeleteDiscoGroup": {
             "$ref": "./examples/DiscoveryGroups_DeleteDiscoGroup.json"

@@ -71,8 +71,9 @@ interface Assets {
   @action("getDeltaSummary")
   getDeltaSummary is Operations.ResourceCollectionAction<
     AssetResource,
-    DeltaSummaryParameter,
-    DeltaSummaryResponse
+    {},
+    DeltaSummaryResponse,
+    DeltaSummaryTrait
   >;
 }
 

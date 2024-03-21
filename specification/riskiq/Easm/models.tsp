@@ -149,6 +149,13 @@ alias CisaCveListTrait = {
   }>;
 };
 
+alias DeltaSummaryTrait = {
+  ...QueryParametersTrait<{
+    ...DaysPriorParameter;
+    ...DateParameter;
+  }>;
+};
+
 // Models
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @projectedName("java", "AlexaDetails")
@@ -1721,8 +1728,8 @@ model ObservationResponse {
   name: string;
   type: ObservationType[];
   priority: ObservationPriority;
-  cvssScoreV2: float;
-  cvssScoreV3: float;
+  cvssScoreV2: float64;
+  cvssScoreV3: float64;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
@@ -2015,12 +2022,4 @@ model DiscoGroupSummaryResponse {
 
   @doc("The name that can be used for display purposes.")
   displayName: string;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-model DeltaSummaryParameter {
-  daysPrior?: int32;
-
-  @doc("expected format to be: yyyy-MM-dd")
-  date?: string;
 }
