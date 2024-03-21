@@ -876,6 +876,9 @@
         "x-ms-examples": {
           "Get_DevOpsConfigurations": {
             "$ref": "./examples/SecurityConnectorsDevOps/GetDevOpsConfigurations_example.json"
+          },
+          "Get_DevOpsConfigurations_WithCapabilities": {
+            "$ref": "./examples/SecurityConnectorsDevOps/GetDevOpsConfigurationsWithCapabilities_example.json"
           }
         }
       },
@@ -2019,6 +2022,22 @@
         "modelAsExtensible": true
       }
     },
+    "DevOpsCapability": {
+      "description": "Details about DevOps capability.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets the name of the DevOps capability.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "Gets the value of the DevOps capability.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "DevOpsConfiguration": {
       "description": "DevOps Configuration resource.",
       "type": "object",
@@ -2085,6 +2104,14 @@
           "items": {
             "type": "string"
           }
+        },
+        "capabilities": {
+          "description": "List of capabilities assigned to the DevOps configuration during the discovery process.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DevOpsCapability"
+          },
+          "readOnly": true
         }
       }
     },
