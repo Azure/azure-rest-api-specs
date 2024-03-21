@@ -935,11 +935,6 @@
           },
           "x-ms-identifiers": [],
           "description": "A list of regions where replicas of the namespace are maintained."
-        },
-        "replicaState": {
-          "type": "string",
-          "description": "state of Namespace replica.",
-          "readOnly": true
         }
       },
       "description": "GeoDR Replication properties"
@@ -962,6 +957,11 @@
             "name": "GeoDRRoleType",
             "modelAsString": true
           }
+        },
+        "replicaState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "state of Namespace replica."
         },
         "clusterArmId": {
           "type": "string",
