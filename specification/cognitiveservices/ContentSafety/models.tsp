@@ -240,3 +240,93 @@ model JailbreakAnalysisResult {
   @doc("Analysis result for jailbreak.")
   detected: boolean;
 }
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@resource("text/autoReviewers")
+model AutoReviewerVersion {
+  @key
+  @visibility("read", "create", "update")
+  @pattern("^[0-9A-Za-z._~-]+$")
+  @maxLength(64)
+  @doc("The name of the auto reviewer.")
+  autoReviewerName: string;
+
+  @doc("The labels defined in the auto reviewer.")
+  labels: AutoReviewerLabelDetails[];
+
+  @doc("Whether let system add an otherwise label to the auto reviewer. Default value is true.")
+  enableOtherwiseLabel?: boolean;
+
+  @doc("URL of example jsonl blob. Read & write access to the last layer virtual directory is required.")
+  @visibility("create", "read", "update")
+  exampleBlobUrl?: string;
+
+  @doc("Delimiter of blob url. If not provided, '/' will be used as the delimiter to parse the exampleBlobUrl.")
+  @visibility("created", "update", "read")
+  blobDelimiter?: string;
+
+  @doc("URL of copied example jsonl blob. If exampleBlobUrl is not provided in the request, this field will not be shown in the response.")
+  @visibility("read")
+  exampleBlobCopyUrl?: string;
+
+  @doc("Version number of the auto reviewer.")
+  @visibility("read")
+  version: int32;
+
+  @doc("Creation time of the auto reviewer.")
+  @visibility("read")
+  createdTime: utcDateTime;
+
+  @doc("Build status of the auto reviewer.")
+  @visibility("read")
+  status: AutoReviewerStatus;
+
+  @doc("Error when building the auto reviewer.")
+  error?: Azure.Core.Foundations.ErrorResponse;
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+model AutoReviewerLabelDetails {
+  @doc("The name of the label.")
+  labelName: string;
+
+  @doc("The description of the label.")
+  description: string;
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+enum AutoReviewerStatus {
+  Building,
+  Succeeded,
+  Failed,
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("List of auto reviewer versions.")
+model AutoReviewerVersionList {
+  @doc("List of auto reviewer versions.")
+  value: AutoReviewerVersion[];
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The text auto reviewing request.")
+model AutoReviewTextOptions {
+  @doc("The text needs to be auto reviewed.")
+  text: string;
+
+  @doc("The name of the auto reviewer.")
+  autoReviewerName: string;
+
+  @doc("The version of the auto reviewer. If not assigned we will use the latest version.")
+  autoReviewerVersion?: int32;
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The text auto reviewing result.")
+model AutoReviewTextResult {
+  @doc("The output label name.")
+  labelName: string;
+
+  @doc("The reasoning of output label.")
+  reasoning: string;
+}
