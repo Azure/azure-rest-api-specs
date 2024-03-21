@@ -122,7 +122,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/communicationServicesGccm/{communicationServiceGccmName}/linkNotificationHub": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/communicationServicesGccm/{communicationServicesGccmName}/linkNotificationHub": {
       "post": {
         "description": "Links an Azure Notification Hub to this communication service.",
         "operationId": "CommunicationServicesGccm_LinkNotificationHub",
@@ -149,7 +149,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/CommunicationServiceGccmName"
+            "$ref": "#/parameters/CommunicationServicesGccmName"
           }
         ],
         "consumes": [
@@ -199,7 +199,7 @@
           "200": {
             "description": "Success. The response describes the list of CommunicationServices in the subscription.",
             "schema": {
-              "$ref": "#/definitions/CommunicationServiceGccmResourceList"
+              "$ref": "#/definitions/CommunicationServicesGccmResourceList"
             }
           },
           "default": {
@@ -245,7 +245,7 @@
           "200": {
             "description": "Success. The response describes the list of CommunicationServices in a resourceGroup.",
             "schema": {
-              "$ref": "#/definitions/CommunicationServiceGccmResourceList"
+              "$ref": "#/definitions/CommunicationServicesGccmResourceList"
             }
           },
           "default": {
@@ -268,7 +268,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/communicationServicesGccm/{communicationServiceGccmName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/communicationServicesGccm/{communicationServicesGccmName}": {
       "patch": {
         "description": "Operation to update an existing CommunicationService.",
         "operationId": "CommunicationServicesGccm_Update",
@@ -283,7 +283,7 @@
             "description": "Parameters for the update operation",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CommunicationServiceGccmResourceUpdate"
+              "$ref": "#/definitions/CommunicationServicesGccmResourceUpdate"
             }
           },
           {
@@ -296,14 +296,14 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/CommunicationServiceGccmName"
+            "$ref": "#/parameters/CommunicationServicesGccmName"
           }
         ],
         "responses": {
           "200": {
             "description": "The update request was successful",
             "schema": {
-              "$ref": "#/definitions/CommunicationServiceGccmResource"
+              "$ref": "#/definitions/CommunicationServicesGccmResource"
             }
           },
           "default": {
@@ -352,14 +352,14 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/CommunicationServiceGccmName"
+            "$ref": "#/parameters/CommunicationServicesGccmName"
           }
         ],
         "responses": {
           "200": {
             "description": "Success. The response describe the corresponding CommunicationService service.",
             "schema": {
-              "$ref": "#/definitions/CommunicationServiceGccmResource"
+              "$ref": "#/definitions/CommunicationServicesGccmResource"
             }
           },
           "default": {
@@ -392,7 +392,7 @@
             "description": "Parameters for the create or update operation",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CommunicationServiceGccmResource"
+              "$ref": "#/definitions/CommunicationServicesGccmResource"
             }
           },
           {
@@ -405,7 +405,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/CommunicationServiceGccmName"
+            "$ref": "#/parameters/CommunicationServicesGccmName"
           }
         ],
         "consumes": [
@@ -415,7 +415,7 @@
           "200": {
             "description": "The create or update request was completed successfully",
             "schema": {
-              "$ref": "#/definitions/CommunicationServiceGccmResource"
+              "$ref": "#/definitions/CommunicationServicesGccmResource"
             }
           },
           "201": {
@@ -427,7 +427,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/CommunicationServiceGccmResource"
+              "$ref": "#/definitions/CommunicationServicesGccmResource"
             }
           },
           "default": {
@@ -471,7 +471,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/CommunicationServiceGccmName"
+            "$ref": "#/parameters/CommunicationServicesGccmName"
           }
         ],
         "responses": {
@@ -508,7 +508,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/communicationServicesGccm/{communicationServiceGccmName}/listKeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/communicationServicesGccm/{communicationServicesGccmName}/listKeys": {
       "post": {
         "description": "Get the access keys of the CommunicationService resource.",
         "operationId": "CommunicationServices_ListKeys",
@@ -527,14 +527,14 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/CommunicationServiceGccmName"
+            "$ref": "#/parameters/CommunicationServicesGccmName"
           }
         ],
         "responses": {
           "200": {
             "description": "Success. The response describes CommunicationService access keys.",
             "schema": {
-              "$ref": "#/definitions/CommunicationServiceGccmKeys"
+              "$ref": "#/definitions/CommunicationServicesGccmKeys"
             }
           },
           "default": {
@@ -554,7 +554,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/communicationServicesGccm/{communicationServiceGccmName}/regenerateKey": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Communication/communicationServicesGccm/{communicationServicesGccmName}/regenerateKey": {
       "post": {
         "description": "Regenerate CommunicationService access key. PrimaryKey and SecondaryKey cannot be regenerated at the same time.",
         "operationId": "CommunicationServices_RegenerateKey",
@@ -582,14 +582,14 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/CommunicationServiceGccmName"
+            "$ref": "#/parameters/CommunicationServicesGccmName"
           }
         ],
         "responses": {
           "200": {
             "description": "Regenerate key request was completed successfully. The response contains the new key.",
             "schema": {
-              "$ref": "#/definitions/CommunicationServiceGccmKeys"
+              "$ref": "#/definitions/CommunicationServicesGccmKeys"
             }
           },
           "default": {
@@ -654,7 +654,7 @@
         }
       }
     },
-    "CommunicationServiceGccmResourceList": {
+    "CommunicationServicesGccmResourceList": {
       "description": "Object that includes an array of CommunicationServices and a possible link for next set.",
       "type": "object",
       "properties": {
@@ -662,7 +662,7 @@
           "description": "List of CommunicationService",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CommunicationServiceGccmResource"
+            "$ref": "#/definitions/CommunicationServicesGccmResource"
           }
         },
         "nextLink": {
@@ -671,7 +671,7 @@
         }
       }
     },
-    "CommunicationServiceGccmResource": {
+    "CommunicationServicesGccmResource": {
       "description": "A class representing a CommunicationService resource.",
       "type": "object",
       "allOf": [
@@ -681,7 +681,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/CommunicationServiceGccmProperties",
+          "$ref": "#/definitions/CommunicationServicesGccmProperties",
           "description": "The properties of the service.",
           "x-ms-client-flatten": true
         },
@@ -721,7 +721,7 @@
         }
       }
     },
-    "CommunicationServiceGccmProperties": {
+    "CommunicationServicesGccmProperties": {
       "description": "A class that describes the properties of the CommunicationService.",
       "required": [
         "dataLocation"
@@ -781,7 +781,7 @@
         }
       }
     },
-    "CommunicationServiceGccmKeys": {
+    "CommunicationServicesGccmKeys": {
       "description": "A class representing the access keys of a CommunicationService.",
       "type": "object",
       "properties": {
@@ -821,7 +821,7 @@
         }
       }
     },
-    "CommunicationServiceGccmUpdateProperties": {
+    "CommunicationServicesGccmUpdateProperties": {
       "description": "A class that describes the properties that can be updated for CommunicationService resource.",
       "type": "object",
       "properties": {
@@ -830,7 +830,7 @@
         }
       }
     },
-    "CommunicationServiceGccmResourceUpdate": {
+    "CommunicationServicesGccmResourceUpdate": {
       "description": "A class representing update parameters for CommunicationService resource.",
       "type": "object",
       "allOf": [
@@ -840,7 +840,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/CommunicationServiceGccmUpdateProperties",
+          "$ref": "#/definitions/CommunicationServicesGccmUpdateProperties",
           "description": "The properties of the service.",
           "x-ms-client-flatten": true
         },
@@ -851,10 +851,10 @@
     }
   },
   "parameters": {
-    "CommunicationServiceGccmName": {
-      "name": "communicationServiceGccmName",
+    "CommunicationServicesGccmName": {
+      "name": "communicationServicesGccmName",
       "in": "path",
-      "description": "The name of the CommunicationServiceGccm resource.",
+      "description": "The name of the CommunicationServicesGccm resource.",
       "pattern": "^[-\\w]+$",
       "minLength": 1,
       "maxLength": 63,
