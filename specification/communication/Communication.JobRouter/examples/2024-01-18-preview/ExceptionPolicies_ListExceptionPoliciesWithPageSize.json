@@ -1,0 +1,66 @@
+{
+  "title": "Retrieves existing exception policies",
+  "operationId": "JobRouterAdministrationOperations_ListExceptionPolicies",
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2024-01-18-preview",
+    "maxpagesize": 2
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "MainExceptionPolicy",
+            "name": "Main",
+            "exceptionRules": [
+              {
+                "id": "MaxWaitTimeExceeded",
+                "trigger": {
+                  "kind": "waitTime",
+                  "thresholdSeconds": 20
+                },
+                "actions": [
+                  {
+                    "id": "MoveJobToEscalatedQueue",
+                    "kind": "reclassify",
+                    "classificationPolicyId": "Main",
+                    "labelsToUpsert": {
+                      "escalated": true
+                    }
+                  }
+                ]
+              }
+            ],
+            "etag": "etag"
+          },
+          {
+            "id": "SecondaryExceptionPolicy",
+            "name": "Secondary",
+            "exceptionRules": [
+              {
+                "id": "MaxWaitTimeExceeded",
+                "trigger": {
+                  "kind": "waitTime",
+                  "thresholdSeconds": 50
+                },
+                "actions": [
+                  {
+                    "id": "MoveJobToVIPQueue",
+                    "kind": "reclassify",
+                    "classificationPolicyId": "Main",
+                    "labelsToUpsert": {
+                      "VIP": true
+                    }
+                  }
+                ]
+              }
+            ],
+            "etag": "etag"
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

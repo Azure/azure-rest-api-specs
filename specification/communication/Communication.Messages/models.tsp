@@ -2,7 +2,9 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -111,7 +113,7 @@ model MediaNotificationContent extends NotificationContent {
   @doc("Optional text content.")
   content?: string;
 
-  @projectedName("java", "mediaUrl")
+  @clientName("mediaUrl", "java")
   @doc("A media url for the file. Required if the type is one of the supported media types, e.g. image")
   mediaUri: url;
 }
@@ -144,7 +146,7 @@ model MessageTemplate {
 @doc("The class describes a parameter of a template.")
 model MessageTemplateValue {
   @doc("Template binding reference name")
-  @projectedName("java", "refValue")
+  @clientName("refValue", "java")
   name: string;
 
   @doc("The type discriminator describing a template parameter type.")
@@ -162,7 +164,7 @@ model MessageTemplateText extends MessageTemplateValue {
 
 @doc("The message template's media value information. Could be an image, document or video.")
 model MessageTemplateMedia {
-  @projectedName("csharp", "uri")
+  @clientName("uri", "csharp")
   @doc("The (public) URL of the media.")
   url: url;
 
@@ -316,7 +318,7 @@ model MessageDataStream {
   @key
   @visibility("read")
   @doc("The stream ID.")
-  @projectedName("java", "mediaId")
+  @clientName("mediaId", "java")
   id: string;
 
   @body

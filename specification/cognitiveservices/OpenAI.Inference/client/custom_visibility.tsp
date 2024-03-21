@@ -33,66 +33,63 @@ using Azure.ClientGenerator.Core;
 @@usage(Azure.OpenAI.AzureSearchChatExtensionConfiguration, Usage.input);
 
 // Remap "model" nomenclature to "DeploymentName" in appropriate containers; comments should clarify the dual use
-@@projectedName(Azure.OpenAI.ImageGenerationOptions.`model`,
-  "csharp",
-  "DeploymentName"
+@@clientName(Azure.OpenAI.ImageGenerationOptions.`model`,
+  "DeploymentName",
+  "csharp"
 );
 
-@@projectedName(Azure.OpenAI.ChatResponseMessage.context,
-  "csharp",
-  "AzureExtensionsContext"
+@@clientName(Azure.OpenAI.ChatResponseMessage.context,
+  "AzureExtensionsContext",
+  "csharp"
 );
 
-@@projectedName(Azure.OpenAI.AudioTranscriptionFormat.json, "csharp", "Simple");
+@@clientName(Azure.OpenAI.AudioTranscriptionFormat.json, "Simple", "csharp");
 
-@@projectedName(Azure.OpenAI.AudioTranscriptionFormat.verbose_json,
-  "csharp",
-  "Verbose"
-);
-
-@@projectedName(Azure.OpenAI.AudioTranscriptionFormat.text,
-  "csharp",
-  "InternalPlainText"
+@@clientName(Azure.OpenAI.AudioTranscriptionFormat.verbose_json,
+  "Verbose",
+  "csharp"
 );
 
-@@projectedName(Azure.OpenAI.AudioTranslationFormat.json, "csharp", "Simple");
-
-@@projectedName(Azure.OpenAI.AudioTranslationFormat.verbose_json,
-  "csharp",
-  "Verbose"
+@@clientName(Azure.OpenAI.AudioTranscriptionFormat.text,
+  "InternalPlainText",
+  "csharp"
 );
 
-@@projectedName(Azure.OpenAI.AudioTranslationFormat.text,
-  "csharp",
-  "InternalPlainText"
+@@clientName(Azure.OpenAI.AudioTranslationFormat.json, "Simple", "csharp");
+
+@@clientName(Azure.OpenAI.AudioTranslationFormat.verbose_json,
+  "Verbose",
+  "csharp"
 );
 
-@@projectedName(Azure.OpenAI.ChatCompletionsOptions.logprobs,
-  "csharp",
-  "EnableLogProbabilities"
-);
-@@projectedName(Azure.OpenAI.ChatCompletionsOptions.top_logprobs,
-  "csharp",
-  "LogProbabilitiesPerToken"
+@@clientName(Azure.OpenAI.AudioTranslationFormat.text,
+  "InternalPlainText",
+  "csharp"
 );
 
-@@projectedName(Azure.OpenAI.ChatChoice.logprobs,
-  "csharp",
-  "LogProbabilityInfo"
+@@clientName(Azure.OpenAI.ChatCompletionsOptions.logprobs,
+  "EnableLogProbabilities",
+  "csharp"
 );
-@@projectedName(Azure.OpenAI.ChatChoiceLogProbabilityInfo.content,
-  "csharp",
-  "TokenLogProbabilityResults"
+@@clientName(Azure.OpenAI.ChatCompletionsOptions.top_logprobs,
+  "LogProbabilitiesPerToken",
+  "csharp"
 );
-@@projectedName(Azure.OpenAI.ChatTokenLogProbabilityResult.top_logprobs,
-  "csharp",
-  "TopLogProbabilityEntries"
+
+@@clientName(Azure.OpenAI.ChatChoice.logprobs, "LogProbabilityInfo", "csharp");
+@@clientName(Azure.OpenAI.ChatChoiceLogProbabilityInfo.content,
+  "TokenLogProbabilityResults",
+  "csharp"
 );
-@@projectedName(Azure.OpenAI.ChatTokenLogProbabilityInfo.logprob,
-  "csharp",
-  "LogProbability"
+@@clientName(Azure.OpenAI.ChatTokenLogProbabilityResult.top_logprobs,
+  "TopLogProbabilityEntries",
+  "csharp"
 );
-@@projectedName(Azure.OpenAI.ChatTokenLogProbabilityInfo.bytes,
-  "csharp",
-  "Utf8ByteValues"
+@@clientName(Azure.OpenAI.ChatTokenLogProbabilityInfo.logprob,
+  "LogProbability",
+  "csharp"
+);
+@@clientName(Azure.OpenAI.ChatTokenLogProbabilityInfo.bytes,
+  "Utf8ByteValues",
+  "csharp"
 );
