@@ -21,6 +21,427 @@ model StorageError {
 
 /// Parameters
 
+/** The is hierarchical namespace enabled response header. */
+model IsHierarchicalNamespaceEnabledResponseHeader {
+  /** Version 2019-07-07 and newer. Indicates if the account has a hierarchical namespace enabled. */
+  @header
+  @clientName("IsHierarchicalNamespaceEnabled")
+  `x-ms-is-hns-enabled`: boolean;
+}
+
+/** The account kind response header. */
+model AccountKindResponseHeader {
+  /** Identifies the account kind */
+  @header
+  @clientName("AccountKind")
+  `x-ms-account-kind`: AccountKind;
+}
+
+/** The SKU name response header. */
+model SkuNameResponseHeader {
+  /** Identifies the sku name of the account */
+  @header
+  @clientName("SkuName")
+  `x-ms-sku-name`: SkuName;
+}
+
+/** The access tier required parameter. */
+model AccessTierRequiredParameter {
+  /** Indicates the tier to be set on the blob. */
+  @header
+  @clientName("AccessTier")
+  `x-ms-access-tier`: AccessTier;
+}
+
+/** The copy ID parameter. */
+model CopyIdParameter {
+  /** The copy identifier provided in the x-ms-copy-id header of the original Copy Blob operation. */
+  @header
+  @clientName("CopyId")
+  `x-ms-copy-id`: string;
+}
+
+/** The content CRC 64 response header. */
+model ContentCrc64ResponseHeader {
+  /** This response header is returned so that the client can check for the integrity of the copied content. */
+  @header
+  @clientName("ContentCrc64")
+  `x-ms-content-crc64`: string;
+}
+
+/** The copy status response header. */
+model CopyStatusResponseHeader {
+  /** State of the copy operation identified by x-ms-copy-id. */
+  @header
+  @clientName("CopyStatus")
+  `x-ms-copy-status`: CopyStatus;
+}
+
+/** The copy ID response header. */
+model CopyIdResponseHeader {
+  /** String identifier for this copy operation. Use with Get Blob Properties to check the status of this copy operation, or pass to Abort Copy Blob to abort a pending copy. */
+  @header
+  @clientName("CopyId")
+  `x-ms-copy-id`: string;
+}
+
+/** The seal blob parameter. */
+model SealBlobParameter {
+  /** Overrides the sealed state of the destination blob.  Service version 2019-12-12 and newer. */
+  @header
+  @clientName("SealBlob")
+  `x-ms-seal-blob`?: boolean;
+}
+
+/** The source if unmodified since parameter. */
+model SourceIfUnmodifiedSinceParameter {
+  /** Specify this header value to operate only on a blob if it has not been modified since the specified date/time. */
+  @header
+  @clientName("sourceIfUnmodifiedSince")
+  @encode("date-time-rfc1123")
+  `x-ms-source-if-unmodified-since`?: utcDateTime;
+}
+
+/** The rehydrate priority parameter. */
+model RehydratePriorityParameter {
+  /** Optional: Indicates the priority with which to rehydrate an archived blob. */
+  @clientName("rehydratePriority")
+  @header
+  `x-ms-rehydrate-priority`?: RehydratePriority;
+}
+
+/** The snapshot response header. */
+model SnapshotResponseHeader {
+  /** Uniquely identifies the snapshot and indicates the snapshot version. It may be used in subsequent requests to access the snapshot. */
+  @header
+  @clientName("Snapshot")
+  `x-ms-snapshot`: string;
+}
+
+/** The lease time response header. */
+model LeaseTimeResponseHeader {
+  /** Approximate time remaining in the lease period, in seconds. */
+  @header
+  @clientName("LeaseTime")
+  `x-ms-lease-time`: int32;
+}
+
+/** The lease break period parameter. */
+model LeaseBreakPeriodParameter {
+  /** For a break operation, proposed duration the lease should continue before it is broken, in seconds, between 0 and 60. This break period is only used if it is shorter than the time remaining on the lease. If longer, the time remaining on the lease is used. A new lease will not be available before the break period has expired, but the lease may be held for longer than the break period. If this header does not appear with a break operation, a fixed-duration lease breaks after the remaining lease period elapses, and an infinite lease breaks immediately. */
+  @clientName("breakPeriod")
+  @header `x-ms-lease-break-period`?: int32;
+}
+
+/** The lease ID required parameter. */
+model LeaseIdRequiredParameter {
+  /** Required.  A lease ID for the source path. If specified, the source path must have an active lease and the lease ID must match. */
+  @clientName("leaseId")
+  @header `x-ms-lease-id`: string;
+}
+
+/** The lease ID response header. */
+model LeaseIdResponseHeader {
+  /** Uniquely identifies a blobs' lease */
+  @header
+  @clientName("LeaseId")
+  `x-ms-lease-id`: string;
+}
+
+/** The encryption scope response header. */
+model EncryptionScopeResponseHeader {
+  /** If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range */
+  @clientName("EncryptionScope")
+  @header `x-ms-encryption-scope`: string;
+}
+
+/** The encryption key SHA256 response header. */
+model EncryptionKeySha256ResponseHeader {
+  /** The SHA-256 hash of the encryption key used to encrypt the blob. This header is only returned when the blob was encrypted with a customer-provided key. */
+  @clientName("EncryptionKeySha256")
+  @header `x-ms-encryption-key-sha256`: string;
+}
+
+/** The is server encrypted response header. */
+model IsServerEncryptedResponseHeader {
+  /** The value of this header is set to true if the contents of the request are successfully encrypted using the specified algorithm, and false otherwise. */
+  @header
+  @clientName("isServerEncrypted")
+  `x-ms-request-server-encrypted`?: boolean;
+}
+
+
+// TODO: Collapose Legal Hold?
+/** The legal hold response header. */
+model LegalHoldResponseHeader {
+  /** Specifies the legal hold status to set on the blob. */
+  @clientName("legalHold")
+  @header `x-ms-legal-hold`: boolean;
+}
+
+/** The legal hold required parameter. */
+model LegalHoldRequiredParameter {
+  /** Required.  Specifies the legal hold status to set on the blob. */
+  @clientName("legalHold")
+  @header `x-ms-legal-hold`: boolean;
+}
+
+/** The immutability policy mode response header. */
+model ImmutabilityPolicyModeResponseHeader {
+  /** Indicates the immutability policy mode of the blob. */
+  @clientName("ImmutabilityPolicyMode")
+  @header `x-ms-immutability-policy-mode`: BlobImmutabilityPolicyMode;
+}
+
+/** The immutability policy expiration response header. */
+model ImmutabilityPolicyExpiryResponseHeader {
+  /** Indicates the time the immutability policy will expire. */
+  @encode("date-time-rfc1123")
+  @clientName("ImmutabilityPolicyExpiry")
+  @header `x-ms-immutability-policy-until-date`: utcDateTime;
+}
+
+/** The blob sequence number response header. */
+model BlobSequenceNumberResponseHeader {
+  /** The current sequence number for a page blob. This header is not returned for block blobs or append blobs. */
+  @clientName("BlobSequenceNumber")
+  @header `x-ms-blob-sequence-number`: int64;
+}
+
+/** The blob expiration time parameter. */
+model BlobExpiryTimeParameter {
+  /** The time to set the blob to expiry. */
+  @clientName("ExpiresOn")
+  @header `x-ms-expiry-time`: string;
+}
+
+/** The blob expiration options parameter. */
+model BlobExpiryOptionsParameter {
+  /** Required. Indicates mode of the expiry time */
+  @clientName("ExpiryOptions")
+  @header `x-ms-expiry-option`: BlobExpiryOptions;
+}
+
+/** The blob expiration options. */
+enum BlobExpiryOptions {
+  /** Never expire. */
+  NeverExpire,
+  /** Relative to creation time. */
+  RelativeToCreation,
+  /** Relative to now. */
+  RelativeToNow,
+  /** Absolute time. */
+  Absolute
+}
+
+/** The Content-Language response header. */
+model ContentLanguageResponseHeader {
+  /** This header returns the value that was specified for the Content-Language request header. */
+  @header `Content-Language`: string;
+}
+
+/** The Content-Disposition response header. */
+model ContentDispositionResponseHeader {
+  /** This header returns the value that was specified for the 'x-ms-blob-content-disposition' header. The Content-Disposition response header field conveys additional information about how to process the response payload, and also can be used to attach additional metadata. For example, if set to attachment, it indicates that the user-agent should not display the response, but instead show a Save As dialog with a filename other than the blob name specified. */
+  @header `Content-Disposition`: string;
+}
+
+/** The Cache-Control response header. */
+model CacheControlResponseHeader {
+  /** This header is returned if it was previously specified for the blob. */
+  @header `Cache-Control`: string;
+}
+
+/** The Content-Encoding response header. */
+model ContentEncodingResponseParameter {
+  /** This header returns the value that was specified for the Content-Encoding request header */
+  @header `Content-Encoding`: string;
+}
+
+/** The Content-Range response header. */
+model ContentRangeResponseHeader {
+  /** Indicates the range of bytes returned in the event that the client requested a subset of the blob by setting the 'Range' request header. */
+  @header `Content-Range`: string;
+}
+
+/** The Content-MD5 response header. */
+model ContentMD5ResponseHeader {
+  /** If the blob has an MD5 hash and this operation is to read the full blob, this response header is returned so that the client can check for message content integrity. */
+  @header `Content-MD5`: string;
+}
+
+/** The Content-Type response header. */
+model ContentTypeResponseHeader {
+  /** The media type of the body of the response. For batch requests, this is multipart/mixed; boundary=batchresponse_GUID */
+  @header `Content-Type`: string;
+}
+
+/** The Content-Length response header. */
+model ContentLengthResponseHeader {
+  /** The number of bytes present in the response body. */
+  @header `Content-Length`: int64;
+}
+
+/** The version ID response header. */
+model VersionIdResponseHeader {
+  /** A DateTime value returned by the service that uniquely identifies the blob. The value of this header indicates the blob version, and may be used in subsequent requests to access this version of the blob. */
+  @clientName("VersionId")
+  @header `x-ms-version-id`: string;
+}
+
+/** The version response header. */
+model VersionResponseHeader {
+  /** Indicates the version of the Blob service used to execute the request. This header is returned for requests made against version 2009-09-19 and above. */
+  @clientName("Version")
+  @header `x-ms-version`: string;
+}
+
+/** The creation time response header. */
+model CreationTimeResponseHeader {
+  /** Returns the date and time the blob was created. */
+  @encode("date-time-rfc1123")
+  @clientName("CreationTime")
+  @header `x-ms-creation-time`: utcDateTime;
+}
+
+/** The last modified response header */
+model LastModifiedResponseHeader {
+  /** The date/time that the container was last modified. */
+  @encode("date-time-rfc1123")
+  @header `Last-Modified`: utcDateTime;
+}
+
+/** The request ID response header. */
+model RequestIdResponseHeader {
+  /** This header uniquely identifies the request that was made and can be used for troubleshooting the request. */
+  @clientName("RequestId")
+  @header `x-ms-request-id`: string;
+}
+
+/** The client request ID response header. */
+model ClientRequestIdResponseHeader {
+  /** If a client request id header is sent in the request, this header will be present in the response with the same value. */
+  @clientName("ClientRequestId")
+  @header `x-ms-client-request-id`?: string;
+}
+
+/** The Date response header */
+model DateResponseHeader {
+  /** UTC date/time value generated by the service that indicates the time at which the response was initiated */
+  @encode("date-time-rfc1123")
+  @header Date: utcDateTime;
+}
+
+/** The ETag response header */
+model ETagResponseHeader {
+  /** The ETag contains a value that you can use to perform operations conditionally. */
+  @header ETag: string;
+}
+
+/** The copy source tags header parameter. */
+model CopySourceTagsParameter {
+  /** Optional, default 'replace'.  Indicates if source tags should be copied or replaced with the tags specified by x-ms-tags. */
+  @clientName("copySourceTags")
+  @header `x-ms-copy-source-tags`?: string;
+}
+
+/** The blob copy source tags types. */
+enum BlobCopySourceTags {
+  /** The replace blob source tags option. */
+  REPLACE,
+  /** The copy blob source tags option. */
+  COPY
+}
+
+/** The copy source authorization header parameter */
+model CopySourceAuthorizationParameter {
+  /** Only Bearer type is supported. Credentials should be a valid OAuth access token to copy source. */
+  @header
+  @clientName("copySourceAuthorization")
+  `x-ms-copy-source-authorization`?: string;
+
+}
+
+/** The copy source blob properties parameter. */
+model CopySourceBlobPropertiesParameter {
+  /** Optional, default is true.  Indicates if properties from the source blob should be copied. */
+  @header
+  @clientName("copySourceBlobProperties")
+  `x-ms-copy-source-blob-properties`?: boolean;
+}
+
+/** The copy source header parameter. */
+model CopySourceParameter {
+  /** Specifies the name of the source page blob snapshot. This value is a URL of up to 2 KB in length that specifies a page blob snapshot. The value should be URL-encoded as it would appear in a request URI. The source blob must either be public or must be authenticated via a shared access signature. */
+  @header
+  @clientName("copySource")
+  `x-ms-copy-source`: string;
+}
+
+/** The source content MD5 header parameter. */
+model SourceContentMD5Parameter {
+  /** Specify the md5 calculated for the range of bytes that must be read from the copy source. */
+  @header
+  @clientName("sourceContentMD5")
+  `x-ms-source-content-md5`?: string;
+}
+
+/** The source if tags parameter. */
+model SourceIfTagsParameter {
+  /** Specify a SQL where clause on blob tags to operate only on blobs with a matching value. */
+  @header
+  @clientName("sourceIfTags")
+  `x-ms-source-if-tags`?: string;
+}
+
+/** The source if match parameter. */
+model SourceIfMatchParameter {
+  /** Specify an ETag value to operate only on blobs with a matching value. */
+  @header
+  @clientName("sourceIfMatch")
+  `x-ms-source-if-match`?: string;
+}
+
+@doc("The source if none match parameter.")
+model SourceIfNoneMatchParameter {
+  @doc("Specify this header value to operate only on a blob if it has been modified since the specified date/time.")
+  @header
+  @clientName("sourceIfNoneMatch")
+  `x-ms-source-if-none-match`?: string;
+}
+
+@doc("The source if modified since parameter.")
+model SourceIfModifiedSinceParameter {
+  @doc("Specify this header value to operate only on a blob if it has been modified since the specified date/time.")
+  @header
+  @clientName("sourceIfModifiedSince")
+  @encode("date-time-rfc1123")
+  `x-ms-source-if-modified-since`?: utcDateTime;
+}
+
+/** The content CRC64 parameter. */
+model ContentCrc64Parameter {
+  /** Specify the transactional crc64 for the body, to be validated by the service. */
+  @clientName("transactionalContentCrc64")
+  @header `x-ms-content-crc64`?: string;
+}
+
+@doc("The access tier optional parameter.")
+model AccessTierOptionalParameter {
+  @doc("Optional.  The tier to be set on the blob.")
+  @clientName("tier")
+  @header
+  `x-ms-access-tier`?: AccessTier;
+}
+
+@doc("The content MD5 parameter.")
+model ContentMD5Parameter {
+  @doc("Optional. An MD5 hash of the blob content. Note that this hash is not validated, as the hashes for the individual blocks were validated when each was uploaded.")
+  @header
+  @clientName("transactionalContentMD5")
+  `Content-MD5`?: string;
+}
+
 @doc("The legal hold optional parameter.")
 model LegalHoldOptionalParameter {
   @doc("Specified if a legal hold should be set on the blob.")
@@ -117,7 +538,7 @@ model BlobContentEncodingParameter {
 }
 
 @doc("The blob content type parameter.")
-model BlobContentTypeParamter {
+model BlobContentTypeParameter {
   @doc("Optional. Sets the blob's content type. If specified, this property is stored with the blob and returned with a read request.")
   @header
   @clientName("blobContentType")
