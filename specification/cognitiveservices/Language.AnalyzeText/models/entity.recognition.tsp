@@ -953,9 +953,9 @@ model TemporalSpanMetadata extends BaseMetadata {
 @added(Versions.v2023_04_15_preview)
 model TemporalSpanValues {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  begin?: utcDateTime;
+  begin?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  end?: utcDateTime;
+  end?: string;
 
   @doc("An optional duration value formatted based on the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)")
   duration?: string;

@@ -149,7 +149,7 @@ model JobState {
   @doc("job ID")
   @key
   @visibility("read")
-  jobId: string;
+  jobId: uuid;
 
   @doc("last updated date and time")
   lastUpdatedDateTime: utcDateTime;

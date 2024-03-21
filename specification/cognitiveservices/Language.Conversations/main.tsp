@@ -205,7 +205,7 @@ model LuisCallingOptions {
   `show-all-intents`?: boolean;
 
   @doc("The timezone offset for the location of the request.")
-  timezoneOffset?: int64;
+  timezoneOffset?: int32;
 
   @doc("Enable spell checking.")
   spellCheck?: boolean;
@@ -513,7 +513,7 @@ model DateTimeResolution extends BaseResolution {
   resolutionKind: ResolutionKind.DateTimeResolution;
 
   @doc("An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)")
-  timex: utcDateTime;
+  timex: string;
 
   @doc("The DateTime SubKind")
   dateTimeSubKind: DateTimeSubKind;
@@ -558,13 +558,13 @@ model TemporalSpanResolution extends BaseResolution {
   resolutionKind: ResolutionKind.TemporalSpanResolution;
 
   @doc("represents the resolution of a date and/or time span. An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)")
-  begin?: utcDateTime;
+  begin?: string;
 
   @doc("represents the resolution of a date and/or time span. An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)")
-  end?: utcDateTime;
+  end?: string;
 
   @doc("An optional duration value formatted based on the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)")
-  duration?: duration;
+  duration?: string;
 
   @doc("An optional modifier of a date/time instance.")
   modifier?: TemporalModifier;
@@ -701,16 +701,16 @@ model ConversationTasksState {
 @added(Versions.v2023_04_01)
 model Tasks {
   @doc("Count of tasks that finished successfully.")
-  completed: int64;
+  completed: int32;
 
   @doc("Count of tasks that failed.")
-  failed: int64;
+  failed: int32;
 
   @doc("Count of tasks that are currently in progress.")
-  inProgress: int64;
+  inProgress: int32;
 
   @doc("Total count of tasks submitted as part of the job.")
-  total: int64;
+  total: int32;
 
   @doc("List of results from tasks (if available).")
   items?: Array<AnalyzeConversationJobResult>;

@@ -212,7 +212,7 @@ model AnalyzeTextJobState {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model Pagination {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  nextLink?: url;
+  nextLink?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -237,13 +237,13 @@ model TasksState {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model Tasks {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  completed: int64;
+  completed: int32;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  failed: int64;
+  failed: int32;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  inProgress: int64;
+  inProgress: int32;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  total: int64;
+  total: int32;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   items?: Array<AnalyzeTextLROResult>;
 }

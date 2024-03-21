@@ -72,7 +72,7 @@ model LinkedEntity {
   id?: string;
 
   @doc("URL for the entity's page from the data source.")
-  url: url;
+  url: string;
 
   @doc("Data source used to extract entity linking, such as Wiki/Bing etc.")
   dataSource: string;

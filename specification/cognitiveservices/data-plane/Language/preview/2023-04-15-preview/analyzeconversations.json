@@ -149,7 +149,8 @@
             "in": "path",
             "description": "job ID",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "name": "showStats",
@@ -189,7 +190,8 @@
             "in": "path",
             "description": "job ID",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -345,7 +347,7 @@
           "description": "Date and time job expires"
         },
         "jobId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "job ID",
           "readOnly": true
         },
@@ -862,6 +864,11 @@
           "description": "Duration of word articulation, in ticks. 1 tick = 100 nanoseconds."
         }
       }
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
     },
     "BaseExtraInformation": {
       "type": "object",
@@ -2005,7 +2012,6 @@
       "properties": {
         "timex": {
           "type": "string",
-          "format": "date-time",
           "description": "An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
         },
         "dateTimeSubKind": {
@@ -2584,7 +2590,7 @@
         },
         "timezoneOffset": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "The timezone offset for the location of the request."
         },
         "spellCheck": {
@@ -3315,22 +3321,22 @@
       "properties": {
         "completed": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "Count of tasks that finished successfully."
         },
         "failed": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "Count of tasks that failed."
         },
         "inProgress": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "Count of tasks that are currently in progress."
         },
         "total": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "Total count of tasks submitted as part of the job."
         },
         "items": {
@@ -3423,17 +3429,14 @@
       "properties": {
         "begin": {
           "type": "string",
-          "format": "date-time",
           "description": "represents the resolution of a date and/or time span. An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
         },
         "end": {
           "type": "string",
-          "format": "date-time",
           "description": "represents the resolution of a date and/or time span. An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
         },
         "duration": {
           "type": "string",
-          "format": "duration",
           "description": "An optional duration value formatted based on the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)"
         },
         "modifier": {
