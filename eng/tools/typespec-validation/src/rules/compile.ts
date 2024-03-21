@@ -2,7 +2,6 @@ import path from "path";
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
 import { TsvHost } from "../tsv-host.js";
-import { gitDiffTopSpecFolder } from "../utils.js";
 
 export class CompileRule implements Rule {
   readonly name = "Compile";
@@ -46,7 +45,7 @@ export class CompileRule implements Rule {
     }
 
     if (success) {
-      const gitDiffResult = await gitDiffTopSpecFolder(host, folder);
+      const gitDiffResult = await host.gitDiffTopSpecFolder(host, folder);
       stdOutput += gitDiffResult.stdOutput;
       if (!gitDiffResult.success) {
         success = false;

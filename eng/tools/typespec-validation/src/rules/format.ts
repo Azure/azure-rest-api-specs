@@ -1,7 +1,6 @@
 import { Rule } from "../rule.js";
 import { RuleResult } from "../rule-result.js";
 import { TsvHost } from "../tsv-host.js";
-import { gitDiffTopSpecFolder } from "../utils.js";
 
 export class FormatRule implements Rule {
   readonly name = "Format";
@@ -13,7 +12,7 @@ export class FormatRule implements Rule {
     let [err, stdOutput, errorOutput] = await host.runCmd(`npx tsp format "../**/*.tsp"`, folder);
     let success = !err && !errorOutput;
     if (success) {
-      const gitDiffResult = await gitDiffTopSpecFolder(host, folder);
+      const gitDiffResult = await host.gitDiffTopSpecFolder(host, folder);
       stdOutput += gitDiffResult.stdOutput;
       if (!gitDiffResult.success) {
         success = false;
