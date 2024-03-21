@@ -72,7 +72,7 @@ interface FileSystems {
    */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("FileSystems_Delete")
-  delete is ArmResourceDeleteAsync<
+  delete is ArmResourceDeleteWithoutOkAsync<
     FileSystemResource,
     BaseParameters<FileSystemResource>,
     ArmAsyncOperationHeader
