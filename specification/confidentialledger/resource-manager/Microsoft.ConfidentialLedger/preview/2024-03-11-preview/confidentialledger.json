@@ -602,7 +602,7 @@
         "modelAsString": true
       }
     },
-    "EnclaveType": {
+    "EnclavePlatform": {
       "type": "string",
       "description": "Type of the Enclave.",
       "enum": [
@@ -610,7 +610,7 @@
         "AmdSevSnp"
       ],
       "x-ms-enum": {
-        "name": "EnclaveType",
+        "name": "EnclavePlatform",
         "modelAsString": true
       }
     },
@@ -707,11 +707,11 @@
       "description": "Additional Confidential Ledger properties.",
       "title": "LedgerProperties",
       "properties": {
-        "enclaveType": {
+        "enclavePlatform": {
           "type": "string",
           "readOnly": true,
-          "description": "Type of Enclave",
-          "$ref": "#/definitions/EnclaveType"
+          "description": "Enclave Platform on which Ledger Application is deployed",
+          "$ref": "#/definitions/EnclavePlatform"
         },
         "ledgerName": {
           "readOnly": true,
