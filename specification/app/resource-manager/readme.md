@@ -53,6 +53,8 @@ input-file:
   - Microsoft.App/stable/2024-03-01/ManagedEnvironmentsDaprComponents.json
   - Microsoft.App/stable/2024-03-01/ManagedEnvironmentsStorages.json
   - Microsoft.App/stable/2024-03-01/SourceControls.json
+  - Microsoft.App/stable/2024-03-01/Subscriptions.json
+  - Microsoft.App/stable/2024-03-01/Usages.json
 ```
 ### Tag: package-preview-2023-11
 
