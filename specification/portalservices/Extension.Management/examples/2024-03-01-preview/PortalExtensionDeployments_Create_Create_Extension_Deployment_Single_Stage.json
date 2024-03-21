@@ -13,11 +13,12 @@
     },
     "portalExtensionName": "storage",
     "resourceGroupName": "testRG",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "location": "eastus"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
-    "200": {},
+    "200": {
+      "location": "eastus"
+    },
     "201": {
       "body": {
         "name": "someDeployment",
@@ -31,7 +32,8 @@
             "value": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/storage/versions/someversion"
           }
         },
-        "tags": {}
+        "tags": {},
+        "location": "eastus"
       }
     }
   },
