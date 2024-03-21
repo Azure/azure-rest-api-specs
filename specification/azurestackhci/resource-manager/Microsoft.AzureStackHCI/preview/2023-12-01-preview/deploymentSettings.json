@@ -317,6 +317,14 @@
         "azureServiceEndpoint": {
           "type": "string",
           "description": "For Azure blob service endpoint type, select either Default or Custom domain. If you selected **Custom domain, enter the domain for the blob service in this format core.windows.net."
+        },
+        "stretchCluster": {
+          "$ref": "#/definitions/StretchCluster",
+          "description": "Stretch Cluster feature configuration for HCI cluster."
+        },
+        "replicationMode": {
+          "$ref": "#/definitions/ReplicationMode",
+          "description": "Replication mode feature configuration for HCI cluster."
         }
       }
     },
@@ -693,6 +701,14 @@
         "ipv4Address": {
           "type": "string",
           "description": "The IPv4 address assigned to each physical server on your Azure Stack HCI cluster."
+        },
+        "faultDomainName": {
+          "type": "string",
+          "description": "Fault domain name for HCI cluster. e.g. FaultDomainA, FaultDomainB"
+        },
+        "faultDomainMode": {
+          "$ref": "#/definitions/FaultDomainMode",
+          "description": "Fault Domain mode for HCI cluster."
         }
       }
     },
@@ -712,6 +728,54 @@
           "type": "string",
           "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
         }
+      }
+    },
+    "FaultDomainMode": {
+      "type": "string",
+      "description": "Fault Domain mode for HCI cluster.",
+      "enum": [
+        "Active",
+        "Passive"
+      ],
+      "x-ms-enum": {
+        "name": "FaultDomainMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Fault domain in active mode."
+          },
+          {
+            "name": "Passive",
+            "value": "Passive",
+            "description": "Fault domain in passive mode."
+          }
+        ]
+      }
+    },
+    "ReplicationMode": {
+      "type": "string",
+      "description": "Replication mode feature configuration for HCI cluster.",
+      "enum": [
+        "Sync",
+        "Async"
+      ],
+      "x-ms-enum": {
+        "name": "ReplicationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Sync",
+            "value": "Sync",
+            "description": "Sync mode enabled."
+          },
+          {
+            "name": "Async",
+            "value": "Async",
+            "description": "Async mode enabled."
+          }
+        ]
       }
     },
     "SbePartnerInfo": {
@@ -944,6 +1008,30 @@
             "physicalNode"
           ]
         }
+      }
+    },
+    "StretchCluster": {
+      "type": "string",
+      "description": "Stretch Cluster feature configuration for HCI cluster.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "StretchCluster",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "stretch cluster enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "stretch cluster disabled."
+          }
+        ]
       }
     },
     "VirtualSwitchConfigurationOverrides": {
