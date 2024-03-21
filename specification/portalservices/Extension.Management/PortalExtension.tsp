@@ -52,7 +52,7 @@ interface PortalExtensions {
       `final-state-via`: "azure-async-operation",
     }
   )
-  update is ArmCustomPatchAsync<PortalExtension, PatchablePortalExtension>;
+  update is ArmCustomPatchSync<PortalExtension, PatchablePortalExtension>;
 
   /**
    * Deletes the portal extension.
