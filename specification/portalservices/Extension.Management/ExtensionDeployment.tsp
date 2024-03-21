@@ -82,19 +82,11 @@ interface PortalExtensionDeployments {
   "application/json",
   "parameters"
 );
-@@OpenAPI.extension(PortalExtensionDeployments.create::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
 
 @@clientName(PortalExtensionDeployments.update::parameters.properties,
   "parameters"
 );
 @@encodedName(PortalExtensionDeployments.update::parameters.properties,
   "application/json",
-  "parameters"
-);
-@@OpenAPI.extension(PortalExtensionDeployments.update::parameters.properties,
-  "x-ms-client-name",
   "parameters"
 );

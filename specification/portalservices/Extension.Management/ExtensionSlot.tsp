@@ -74,7 +74,3 @@ interface PortalExtensionSlots {
   "application/json",
   "parameters"
 );
-@@OpenAPI.extension(PortalExtensionSlots.createOrUpdate::parameters.resource,
-  "x-ms-client-name",
-  "parameters"
-);
