@@ -74,3 +74,9 @@ interface PortalExtensionSlots {
   "application/json",
   "parameters"
 );
+
+@@clientName(PortalExtensionSlots.update::parameters.properties, "parameters");
+@@encodedName(PortalExtensionSlots.update::parameters.properties,
+  "application/json",
+  "parameters"
+);

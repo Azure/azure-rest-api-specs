@@ -71,13 +71,14 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "body",
+            "name": "portalTenantCompileFile",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "The parameters required to compile a file.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PortalTenantCompileFile"
-            }
+              "$ref": "#/definitions/PortalTenantCompileFileProperties"
+            },
+            "x-ms-client-name": "body"
           }
         ],
         "responses": {
@@ -1349,13 +1350,14 @@
             "pattern": "^[a-zA-Z0-9]+$"
           },
           {
-            "name": "properties",
+            "name": "parameters",
             "in": "body",
             "description": "The updatable fields of a portal extension slot.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PatchableExtensionSlot"
-            }
+            },
+            "x-ms-client-name": "properties"
           }
         ],
         "responses": {
@@ -1583,13 +1585,14 @@
             "pattern": "^[a-zA-Z0-9]+$"
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
             "description": "extension version definition.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ExtensionVersion"
-            }
+            },
+            "x-ms-client-name": "resource"
           }
         ],
         "responses": {
@@ -1669,13 +1672,14 @@
             "pattern": "^[a-zA-Z0-9]+$"
           },
           {
-            "name": "properties",
+            "name": "parameters",
             "in": "body",
             "description": "The updatable fields of a portal extension version.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PatchableExtensionVersion"
-            }
+            },
+            "x-ms-client-name": "properties"
           }
         ],
         "responses": {
@@ -2614,26 +2618,6 @@
           }
         ]
       }
-    },
-    "PortalTenantCompileFile": {
-      "type": "object",
-      "description": "The portal tenant provider action.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PortalTenantCompileFileProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ]
     },
     "PortalTenantCompileFileProperties": {
       "type": "object",

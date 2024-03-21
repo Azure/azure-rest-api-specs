@@ -31,35 +31,46 @@ model PortalTenantCompileFile
   @visibility("read")
   name: string;
 }
-alias ProviderAction<
-  Request extends {} | void,
-  Response extends {} | void,
-  Parameters extends {} = {}
-> = ArmResourceActionSync<
-  {
-    ...Azure.ResourceManager.Foundations.ArmResource;
-  },
-  Request,
-  Response,
-  Parameters = Parameters,
-  BaseParameters = ApiVersionParameter
->;
+// alias ProviderAction<
+//   Request extends {} | void,
+//   Response extends {} | void,
+//   Parameters extends {} = {}
+// > = ArmResourceActionSync<
+//   {
+//     ...Azure.ResourceManager.Foundations.ArmResource;
+//   },
+//   Request,
+//   Response,
+//   Parameters = Parameters,
+//   BaseParameters = ApiVersionParameter
+// >;
+
+// @armResourceOperations
+// interface PortalTenant {
+//   @doc("compiles a file using inline content.")
+//   compilefile is ProviderAction<
+//     PortalTenantCompileFile,
+//     PortalTenantCompileFileResult
+//   >;
+// }
 
 @armResourceOperations
 interface PortalTenant {
   @doc("compiles a file using inline content.")
-  compilefile is ProviderAction<
-    PortalTenantCompileFile,
-    PortalTenantCompileFileResult
-  >;
+  @route("/providers/Microsoft.PortalServices/compilefile")
+  compilefile(
+    ...ApiVersionParameter,
+
+    @doc("The parameters required to compile a file.")
+    @body
+    body: PortalTenantCompileFileProperties,
+  ): ArmResponse<PortalTenantCompileFileResult> | ErrorResponse;
 }
 
-// @@clientName(PortalTenant.compileFile::parameters.body, "portalTenantCompileFile");
-// @@encodedName(PortalTenant.compileFile::parameters.body,
-//   "application/json",
-//   "portalTenantCompileFile"
-// );
-// @@OpenAPI.extension(PortalTenant.compileFile::parameters.body,
-//   "x-ms-client-name",
-//   "portalTenantCompileFile"
-// );
+@@clientName(PortalTenant.compilefile::parameters.body,
+  "portalTenantCompileFile"
+);
+@@encodedName(PortalTenant.compilefile::parameters.body,
+  "application/json",
+  "portalTenantCompileFile"
+);
