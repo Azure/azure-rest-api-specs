@@ -136,14 +136,11 @@ model GetOperationResult {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
 @doc("Possible statuses of the operation.")
 @lroStatus
-enum OperationStatus {
-  running,
-
-  @lroFailed
-  failed,
-
-  @lroSucceeded
-  succeeded,
+union OperationStatus {
+  string,
+  @doc("Operation is still running.") "running",
+  @lroFailed @doc("Operation failed.") "failed",
+  @lroSucceeded @doc("Operation succeeded.") "succeeded",
 }
 
 @doc("A DID issuer")
