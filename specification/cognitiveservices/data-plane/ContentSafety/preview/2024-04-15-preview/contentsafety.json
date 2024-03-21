@@ -518,7 +518,7 @@
     },
     "/text/autoReviewers": {
       "get": {
-        "operationId": "AutoReviewerOperations_ListCustomizedCategory",
+        "operationId": "AutoReviewerOperations_ListAutoReviewers",
         "description": "List latest versions of auto reviewers.",
         "parameters": [
           {
@@ -679,7 +679,7 @@
         }
       },
       "delete": {
-        "operationId": "AutoReviewerOperations_DeleteCustomizedCategory",
+        "operationId": "AutoReviewerOperations_DeleteAutoReviewer",
         "description": "Delete an auto reviewer or a specific version of it.",
         "parameters": [
           {
@@ -1508,7 +1508,7 @@
     },
     "/text:autoReview": {
       "post": {
-        "operationId": "AutoReviewerOperations_AutoReview",
+        "operationId": "TextOperations_AutoReview",
         "summary": "Auto Review Text",
         "description": "A synchronous API for the automatic review of harmful content",
         "parameters": [
@@ -2277,6 +2277,7 @@
     },
     "AutoReviewerLabelDetails": {
       "type": "object",
+      "description": "The label details in the auto reviewer.",
       "properties": {
         "labelName": {
           "type": "string",
@@ -2306,6 +2307,7 @@
     },
     "AutoReviewerVersion": {
       "type": "object",
+      "description": "The auto reviewer version.",
       "properties": {
         "autoReviewerName": {
           "type": "string",
@@ -2384,6 +2386,7 @@
     },
     "AutoReviewerVersionItem": {
       "type": "object",
+      "description": "The auto reviewer version.",
       "properties": {
         "autoReviewerName": {
           "type": "string",

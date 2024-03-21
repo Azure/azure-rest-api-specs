@@ -82,6 +82,20 @@ interface TextOperations {
   >;
 
   @added(ContentSafety.Versions.v2024_04_15_Preview)
+  @summary("Auto Review Text")
+  @doc("A synchronous API for the automatic review of harmful content")
+  @route("/text:autoReview")
+  @post
+  autoReview is Azure.Core.RpcOperation<
+    {
+      @body
+      @doc("The text analysis request.")
+      body: AutoReviewTextOptions;
+    },
+    AutoReviewTextResult
+  >;
+
+  @added(ContentSafety.Versions.v2024_04_15_Preview)
   @summary("Analyze Text Detect Incidents")
   @doc("A synchronous API for the analysis of text detect incidents.")
   @route("/text:detectIncidents")
@@ -219,6 +233,51 @@ interface TextGroundednessDetectionOperations {
   >;
 }
 
+interface AutoReviewerOps
+  extends Azure.Core.ResourceOperations<NoRepeatableRequests &
+      NoConditionalRequests &
+      NoClientRequestId> {}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+interface AutoReviewerOperations {
+  @summary("Create a new version of auto reviewer.")
+  @doc("Create new auto reviewer or a new version of exisiting auto reviewer.")
+  createOrUpdateAutoReviewer is AutoReviewerOps.ResourceCreateOrReplace<AutoReviewerVersion>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Get a auto reviewer or a specific version of it.")
+  @get
+  @route("/text/autoReviewers/{autoReviewerName}")
+  getAutoReviewer is Azure.Core.Foundations.Operation<
+    {
+      @path
+      @doc("Name of the auto reviewer.")
+      autoReviewerName: string;
+
+      @query
+      @doc("If not provided, it will return the latest version.")
+      version?: int32;
+    },
+    AutoReviewerVersionList
+  >;
+
+  @doc("List latest versions of auto reviewers.")
+  listAutoReviewers is AutoReviewerOps.ResourceList<
+    AutoReviewerVersion,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
+
+  @doc("Delete an auto reviewer or a specific version of it.")
+  deleteAutoReviewer is AutoReviewerOps.ResourceDelete<
+    AutoReviewerVersion,
+    QueryParametersTrait<{
+      @query
+      @doc("If not provided, it will delete all the versions of the auto reviewer.")
+      version?: int32;
+    }>
+  >;
+}
+
 interface TextIncidentOps
   extends Azure.Core.ResourceOperations<NoRepeatableRequests &
       NoConditionalRequests &
@@ -324,63 +383,5 @@ interface ImageIncidents {
   listIncidentSamples is ImageIncidentOps.ResourceList<
     ListImageIncidentSampleResult,
     ListQueryParametersTrait<StandardListQueryParameters>
-  >;
-}
-
-interface AutoReviewerOps
-  extends Azure.Core.ResourceOperations<NoRepeatableRequests &
-      NoConditionalRequests &
-      NoClientRequestId> {}
-
-@added(ContentSafety.Versions.v2024_04_15_Preview)
-interface AutoReviewerOperations {
-  @summary("Create a new version of auto reviewer.")
-  @doc("Create new auto reviewer or a new version of exisiting auto reviewer.")
-  createOrUpdateAutoReviewer is AutoReviewerOps.ResourceCreateOrReplace<AutoReviewerVersion>;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Get a auto reviewer or a specific version of it.")
-  @get
-  @route("/text/autoReviewers/{autoReviewerName}")
-  getAutoReviewer is Azure.Core.Foundations.Operation<
-    {
-      @path
-      @doc("Name of the auto reviewer.")
-      autoReviewerName: string;
-
-      @query
-      @doc("If not provided, it will return the latest version.")
-      version?: int32;
-    },
-    AutoReviewerVersionList
-  >;
-
-  @doc("List latest versions of auto reviewers.")
-  listCustomizedCategory is AutoReviewerOps.ResourceList<
-    AutoReviewerVersion,
-    ListQueryParametersTrait<StandardListQueryParameters>
-  >;
-
-  @doc("Delete an auto reviewer or a specific version of it.")
-  deleteCustomizedCategory is AutoReviewerOps.ResourceDelete<
-    AutoReviewerVersion,
-    QueryParametersTrait<{
-      @query
-      @doc("If not provided, it will delete all the versions of the auto reviewer.")
-      version?: int32;
-    }>
-  >;
-
-  @summary("Auto Review Text")
-  @doc("A synchronous API for the automatic review of harmful content")
-  @route("/text:autoReview")
-  @post
-  autoReview is Azure.Core.RpcOperation<
-    {
-      @body
-      @doc("The text analysis request.")
-      body: AutoReviewTextOptions;
-    },
-    AutoReviewTextResult
   >;
 }
