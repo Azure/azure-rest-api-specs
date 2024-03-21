@@ -16,23 +16,23 @@ namespace Microsoft.Edge;
  */
 enum ManagedServiceIdentityType {
   /**
- * None.
- */
+   * None.
+   */
   None,
 
   /**
- * SystemAssigned.
- */
+   * SystemAssigned.
+   */
   SystemAssigned,
 
- /**
- * UserAssigned.
- */
+  /**
+   * UserAssigned.
+   */
   UserAssigned,
 
-   /**
- * SystemAssigned,UserAssigned.
- */
+  /**
+   * SystemAssigned,UserAssigned.
+   */
   `SystemAssigned,UserAssigned`,
 }
 

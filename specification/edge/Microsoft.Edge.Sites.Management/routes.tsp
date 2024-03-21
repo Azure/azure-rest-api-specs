@@ -9,7 +9,6 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
 
-
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom operation. Adding the interface is creating wrong endpoint."
 interface SitesOperations {
   /**
@@ -76,8 +75,7 @@ interface SitesOperations {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/sites/{siteName}")
   @put
   createOrUpdateByResourceGroup is Azure.Core.Foundations.Operation<
-			Azure.Core.StandardListQueryParameters & 
-    {
+    Azure.Core.StandardListQueryParameters & {
       /**
        * The ID of the target subscription. The value must be an UUID.
        */
