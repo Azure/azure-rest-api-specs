@@ -58,7 +58,7 @@ The [Azure API Review Board](https://aka.ms/azsdk/onboarding/restapischedule) is
 
 ### Helpful Links
 
- * [Azure DevTools Wiki](https://aka.ms/azapi)
+ * [Schedule a data plane REST API spec review](https://aka.ms/azsdk/onboarding/restapischedule)
 
 </details>
 
