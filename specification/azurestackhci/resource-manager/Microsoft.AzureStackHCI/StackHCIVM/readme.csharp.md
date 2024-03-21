@@ -11,6 +11,6 @@ csharp:
   clear-output-folder: true
   client-side-validation: false
   namespace: Microsoft.AzureStackHCI
-  package-name: Microsoft.Azure.Management.StackHCIVM     
+  package-name: Microsoft.Azure.Management.StackHCIVM
   output-folder: $(csharp-sdks-folder)/azurestackhci/management/Microsoft.AzureStackHCI/GeneratedProtocol
 ```
