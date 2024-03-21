@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using OpenAPI;
 
 namespace Microsoft.AzureSphere;
 
@@ -688,6 +689,7 @@ model ProductUpdate {
   /**
    * The updatable properties of the Product.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: ProductUpdateProperties;
 }
 
@@ -708,6 +710,7 @@ model DeviceGroupUpdate {
   /**
    * The updatable properties of the DeviceGroup.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DeviceGroupUpdateProperties;
 }
 
@@ -758,6 +761,7 @@ model DeviceUpdate {
   /**
    * The updatable properties of the Device.
    */
+  @extension("x-ms-client-flatten", true)
   properties?: DeviceUpdateProperties;
 }
 
@@ -796,3 +800,47 @@ model SignedCapabilityImageResponse {
  * Response to the action call for count devices in a catalog (preview API).
  */
 model CountDeviceResponse extends CountElementsResponse {}
+
+/**
+ * Provides the custom '$filter' query parameter for list operations
+ */
+model CustomFilterQueryParameter {
+  @query("$filter")
+  /** 
+   * Filter the result list using the given expression
+   */
+  filter?: string;
+}
+
+/**
+ * Provides the custom '$top' query parameter for list operations.
+ */
+model CustomTopQueryParameter {
+  @query("$top")
+  /**
+   * The number of result items to return.
+   */
+  top?: int32;
+}
+
+/**
+ * Provides the custom '$skip' query parameter for list operations.
+ */
+model CustomSkipQueryParameter {
+  @query("$skip")
+  /**
+   * The number of result items to skip.
+   */
+  skip?: int32;
+}
+
+/**
+ * Provides the custom '$maxpagesize' query parameter for list operations.
+ */
+model CustomMaxPageSizeQueryParameter {
+  @query("$maxpagesize")
+  /**
+   * The maximum number of result items per page.
+   */
+  maxpagesize?: int32;
+}

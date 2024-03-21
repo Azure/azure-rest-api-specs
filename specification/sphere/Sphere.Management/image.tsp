@@ -51,30 +51,10 @@ interface Images {
     Image,
     {
       ...BaseParameters<Image>;
-
-      /**
-       * Filter the result list using the given expression
-       */
-      @query("$filter")
-      filter?: string;
-
-      /**
-       * The number of result items to return.
-       */
-      @query("$top")
-      top?: int32;
-
-      /**
-       * The number of result items to skip.
-       */
-      @query("$skip")
-      skip?: int32;
-
-      /**
-       * The maximum number of result items per page.
-       */
-      @query("$maxpagesize")
-      maxpagesize?: int32;
+      ...CustomFilterQueryParameter;
+      ...CustomTopQueryParameter;
+      ...CustomSkipQueryParameter;
+      ...CustomMaxPageSizeQueryParameter;
     }
   >;
 }
