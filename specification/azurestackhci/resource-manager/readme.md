@@ -78,6 +78,27 @@ suppressions:
     reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility.
 ```
 
+### Tag: package-preview-2024-02
+
+These settings apply only when `--tag=package-preview-2024-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-02'
+input-file:
+  - Microsoft.AzureStackHCI/preview/2023-02-15-preview/arcSettings.json
+  - Microsoft.AzureStackHCI/preview/2023-02-15-preview/clusters.json
+  - Microsoft.AzureStackHCI/preview/2023-02-15-preview/deploymentSettings.json
+  - Microsoft.AzureStackHCI/preview/2023-02-15-preview/edgeDevices.json
+  - Microsoft.AzureStackHCI/preview/2023-02-15-preview/extensions.json
+  - Microsoft.AzureStackHCI/preview/2023-02-15-preview/offers.json
+  - Microsoft.AzureStackHCI/preview/2023-02-15-preview/operations.json
+  - Microsoft.AzureStackHCI/preview/2023-02-15-preview/publishers.json
+  - Microsoft.AzureStackHCI/preview/2023-02-15-preview/securitySettings.json
+  - Microsoft.AzureStackHCI/preview/2023-02-15-preview/skus.json
+  - Microsoft.AzureStackHCI/preview/2023-02-15-preview/updateRuns.json
+  - Microsoft.AzureStackHCI/preview/2023-02-15-preview/updateSummaries.json
+  - Microsoft.AzureStackHCI/preview/2023-02-15-preview/updates.json
+  - Microsoft.AzureStackHCI/preview/2023-02-15-preview/hciCommon.json
+```
 
 ### Tag: package-2024-01
 
@@ -107,26 +128,7 @@ input-file:
   - Microsoft.AzureStackHCI/stable/2024-01-01/virtualHardDisks.json
   - Microsoft.AzureStackHCI/stable/2024-01-01/virtualMachineInstances.json
 ```
-### Tag: package-preview-2023-11
 
-These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2023-11'
-input-file:
-  - Microsoft.AzureStackHCI/preview/2023-11-15-preview/arcSettings.json
-  - Microsoft.AzureStackHCI/preview/2023-11-15-preview/clusters.json
-  - Microsoft.AzureStackHCI/preview/2023-11-15-preview/deploymentSettings.json
-  - Microsoft.AzureStackHCI/preview/2023-11-15-preview/edgeDevices.json
-  - Microsoft.AzureStackHCI/preview/2023-11-15-preview/extensions.json
-  - Microsoft.AzureStackHCI/preview/2023-11-15-preview/offers.json
-  - Microsoft.AzureStackHCI/preview/2023-11-15-preview/operations.json
-  - Microsoft.AzureStackHCI/preview/2023-11-15-preview/publishers.json
-  - Microsoft.AzureStackHCI/preview/2023-11-15-preview/securitySettings.json
-  - Microsoft.AzureStackHCI/preview/2023-11-15-preview/skus.json
-  - Microsoft.AzureStackHCI/preview/2023-11-15-preview/updateRuns.json
-  - Microsoft.AzureStackHCI/preview/2023-11-15-preview/updateSummaries.json
-  - Microsoft.AzureStackHCI/preview/2023-11-15-preview/updates.json
-```
 ### Tag: package-preview-2023-11
 
 These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
