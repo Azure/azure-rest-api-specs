@@ -301,7 +301,7 @@ model AnalyzeTextDocumentError {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model DocumentWarning {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  code: Code;
+  code: WarningCodeValue;
 
   @doc("Warning message.")
   message: string;
@@ -311,7 +311,7 @@ model DocumentWarning {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-enum Code {
+enum WarningCodeValue {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   LongWordsInDocument,
   #suppress "@azure-tools/typespec-azure-core/documentation-required"

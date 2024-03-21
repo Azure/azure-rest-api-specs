@@ -14,7 +14,7 @@ model HealthcareTaskParameters is PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @added(Versions.v2023_04_15_preview)
   @doc("The FHIR Spec version that the result will use to format the fhirBundle. For additional information see https://www.hl7.org/fhir/overview.html.")
-  fhirVersion?: FhirVersion;
+  fhirVersion?: fhirVersion;
 
   @added(Versions.v2023_04_15_preview)
   @doc("Document type that can be provided as input for Fhir Documents. Expect to have fhirVersion provided when used. Behavior of using None enum is the same as not using the documentType parameter.")
@@ -23,7 +23,7 @@ model HealthcareTaskParameters is PreBuiltTaskParameters {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_15_preview)
-enum FhirVersion {
+enum fhirVersion {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   `4.0.1`,
 }

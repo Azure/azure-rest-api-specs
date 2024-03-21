@@ -158,13 +158,13 @@ model TargetRelation {
   ref: string;
 
   @doc("The type related to the target.")
-  relationType: SentimentRelationType;
+  relationType: TargetRelationType;
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-extensible-enum"
 @doc("The type related to the target.")
 @fixed
-enum SentimentRelationType {
+enum TargetRelationType {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   assessment,
   #suppress "@azure-tools/typespec-azure-core/documentation-required"

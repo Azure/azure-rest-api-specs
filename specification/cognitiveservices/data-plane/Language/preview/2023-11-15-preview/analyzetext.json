@@ -1029,17 +1029,6 @@
         "confidenceScore"
       ]
     },
-    "Code": {
-      "type": "string",
-      "enum": [
-        "LongWordsInDocument",
-        "DocumentTruncated"
-      ],
-      "x-ms-enum": {
-        "name": "Code",
-        "modelAsString": true
-      }
-    },
     "Conditionality": {
       "type": "string",
       "description": "Describes any conditionality on the entity.",
@@ -2089,7 +2078,7 @@
       "type": "object",
       "properties": {
         "code": {
-          "$ref": "#/definitions/Code"
+          "$ref": "#/definitions/WarningCodeValue"
         },
         "message": {
           "type": "string",
@@ -3371,16 +3360,6 @@
         }
       }
     },
-    "FhirVersion": {
-      "type": "string",
-      "enum": [
-        "4.0.1"
-      ],
-      "x-ms-enum": {
-        "name": "FhirVersion",
-        "modelAsString": true
-      }
-    },
     "HealthcareAssertion": {
       "type": "object",
       "properties": {
@@ -3677,7 +3656,7 @@
           }
         },
         "fhirVersion": {
-          "$ref": "#/definitions/FhirVersion",
+          "$ref": "#/definitions/fhirVersion",
           "description": "The FHIR Spec version that the result will use to format the fhirBundle. For additional information see https://www.hl7.org/fhir/overview.html."
         },
         "documentType": {
@@ -5797,18 +5776,6 @@
       ],
       "x-ms-discriminator-value": "SentimentAnalysisLROResults"
     },
-    "SentimentRelationType": {
-      "type": "string",
-      "description": "The type related to the target.",
-      "enum": [
-        "assessment",
-        "target"
-      ],
-      "x-ms-enum": {
-        "name": "SentimentRelationType",
-        "modelAsString": false
-      }
-    },
     "SentimentResponse": {
       "type": "object",
       "description": "Sentiment analysis per document.",
@@ -6002,7 +5969,7 @@
           "description": "The JSON pointer indicating the linked object."
         },
         "relationType": {
-          "$ref": "#/definitions/SentimentRelationType",
+          "$ref": "#/definitions/TargetRelationType",
           "description": "The type related to the target."
         }
       },
@@ -6010,6 +5977,18 @@
         "ref",
         "relationType"
       ]
+    },
+    "TargetRelationType": {
+      "type": "string",
+      "description": "The type related to the target.",
+      "enum": [
+        "assessment",
+        "target"
+      ],
+      "x-ms-enum": {
+        "name": "TargetRelationType",
+        "modelAsString": false
+      }
     },
     "Tasks": {
       "type": "object",
@@ -6277,6 +6256,17 @@
         "modelAsString": true
       }
     },
+    "WarningCodeValue": {
+      "type": "string",
+      "enum": [
+        "LongWordsInDocument",
+        "DocumentTruncated"
+      ],
+      "x-ms-enum": {
+        "name": "WarningCodeValue",
+        "modelAsString": true
+      }
+    },
     "WeightMetadata": {
       "type": "object",
       "description": "Represents the Weight ) entity Metadata model.",
@@ -6336,6 +6326,16 @@
       ],
       "x-ms-enum": {
         "name": "entityComponentKind",
+        "modelAsString": true
+      }
+    },
+    "fhirVersion": {
+      "type": "string",
+      "enum": [
+        "4.0.1"
+      ],
+      "x-ms-enum": {
+        "name": "fhirVersion",
         "modelAsString": true
       }
     },

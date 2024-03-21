@@ -19,8 +19,9 @@ model ErrorResponse {
   error: Error;
 }
 
+#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("The error object.")
-model Error {
+model Error is Record<unknown> {
   @doc("One of a server-defined set of error codes.")
   code: ErrorCode;
 
@@ -174,6 +175,7 @@ model DocumentError {
   @doc("The ID of the input document.")
   id: string;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("Error encountered.")
   error: Error;
 }
