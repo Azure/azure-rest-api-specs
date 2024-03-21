@@ -46,12 +46,6 @@ interface PortalExtensions {
    * Updates an existing portal extension.
    */
   @parameterVisibility("read")
-  @OpenAPI.extension(
-    "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
-  )
   update is ArmCustomPatchSync<PortalExtension, PatchablePortalExtension>;
 
   /**
