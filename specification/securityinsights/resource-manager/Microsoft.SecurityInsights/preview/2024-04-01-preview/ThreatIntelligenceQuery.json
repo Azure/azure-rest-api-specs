@@ -117,33 +117,30 @@
             "values": [
               {
                 "description": "A TI object that represents an attack pattern.",
-                "value": "AttackPattern"
+                "value": "attack-pattern"
               },
               {
                 "description": "A TI object that represents an identity.",
-                "value": "Identity"
+                "value": "identity"
               },
               {
                 "description": "A TI object that represents an indicator.",
-                "value": "Indicator"
+                "value": "indicator"
               },
               {
                 "description": "A TI object that represents a relationship between two TI objects.",
-                "value": "Relationship"
+                "value": "relationship"
               },
               {
                 "description": "A TI object that represents a threat actor.",
-                "value": "ThreatActor"
+                "value": "threat-actor"
               }
             ]
           }
         }
       },
       "discriminator": "kind",
-      "type": "object",
-      "required": [
-        "kind"
-      ]
+      "type": "object"
     },
     "ThreatIntelligenceList": {
       "description": "List all the threat intelligence objects on the workspace that match the provided query.",
@@ -182,7 +179,6 @@
         },
         "source": {
           "description": "The source name for this TI object.",
-          "readOnly": true,
           "type": "string"
         },
         "firstIngestedTimeUtc": {
