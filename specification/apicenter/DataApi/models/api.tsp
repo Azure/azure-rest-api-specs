@@ -8,7 +8,7 @@ model Api {
   @doc("The resource name.")
   @maxLength(50)
   @key("apiName")
-  @visibility()
+  @visibility
   name: string;
 
   @doc("The name of the API.")

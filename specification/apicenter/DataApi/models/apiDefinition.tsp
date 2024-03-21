@@ -8,7 +8,7 @@ using TypeSpec.Rest;
 model ApiDefinition {
   @doc("Definition identifier.")
   @key("apiDefinitionName")
-  @visibility()
+  @visibility
   @maxLength(50)
   name: string;
 

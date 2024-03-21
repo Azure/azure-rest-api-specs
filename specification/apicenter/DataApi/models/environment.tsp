@@ -7,7 +7,7 @@ using TypeSpec.Rest;
 model Environment {
   @doc("Environment identifier.")
   @key("environmentName")
-  @visibility()
+  @visibility
   @maxLength(50)
   name: string;
 

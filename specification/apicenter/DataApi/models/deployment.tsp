@@ -8,7 +8,7 @@ using TypeSpec.Rest;
 model ApiDeployment {
   @doc("Deployment identifier.")
   @key("deploymentName")
-  @visibility()
+  @visibility
   @maxLength(50)
   name: string;
 
