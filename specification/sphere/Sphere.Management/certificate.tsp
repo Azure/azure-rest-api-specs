@@ -70,3 +70,11 @@ interface Certificates {
 @@doc(Certificates.retrieveProofOfPossessionNonce::parameters.body,
   "Proof of possession nonce request body "
 );
+@@projectedName(Certificates.retrieveProofOfPossessionNonce::parameters.body,
+  "json",
+  "proofOfPossessionNonceRequest"
+);
+@@extension(Certificates.retrieveProofOfPossessionNonce::parameters.body,
+  "x-ms-client-name",
+  "proofOfPossessionNonceRequest"
+);

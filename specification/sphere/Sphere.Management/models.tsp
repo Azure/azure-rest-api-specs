@@ -805,10 +805,10 @@ model CountDeviceResponse extends CountElementsResponse {}
  * Provides the custom '$filter' query parameter for list operations
  */
 model CustomFilterQueryParameter {
-  @query("$filter")
-  /** 
+  /**
    * Filter the result list using the given expression
    */
+  @query("$filter")
   filter?: string;
 }
 
@@ -816,10 +816,10 @@ model CustomFilterQueryParameter {
  * Provides the custom '$top' query parameter for list operations.
  */
 model CustomTopQueryParameter {
-  @query("$top")
   /**
    * The number of result items to return.
    */
+  @query("$top")
   top?: int32;
 }
 
@@ -827,10 +827,10 @@ model CustomTopQueryParameter {
  * Provides the custom '$skip' query parameter for list operations.
  */
 model CustomSkipQueryParameter {
-  @query("$skip")
   /**
    * The number of result items to skip.
    */
+  @query("$skip")
   skip?: int32;
 }
 
@@ -838,9 +838,9 @@ model CustomSkipQueryParameter {
  * Provides the custom '$maxpagesize' query parameter for list operations.
  */
 model CustomMaxPageSizeQueryParameter {
-  @query("$maxpagesize")
   /**
    * The maximum number of result items per page.
    */
+  @query("$maxpagesize")
   maxpagesize?: int32;
 }

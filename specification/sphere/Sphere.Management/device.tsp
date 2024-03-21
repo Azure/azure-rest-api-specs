@@ -69,3 +69,11 @@ interface Devices {
 @@doc(Devices.generateCapabilityImage::parameters.body,
   "Generate capability image request body."
 );
+@@projectedName(Devices.generateCapabilityImage::parameters.body,
+  "json",
+  "generateDeviceCapabilityRequest"
+);
+@@extension(Devices.generateCapabilityImage::parameters.body,
+  "x-ms-client-name",
+  "generateDeviceCapabilityRequest"
+);

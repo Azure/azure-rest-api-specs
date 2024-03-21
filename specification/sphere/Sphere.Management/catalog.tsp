@@ -137,4 +137,20 @@ interface Catalogs {
 @@doc(Catalogs.listDeviceGroups::parameters.body,
   "List device groups for catalog."
 );
+@@projectedName(Catalogs.listDeviceGroups::parameters.body,
+  "json",
+  "listDeviceGroupsRequest"
+);
+@@extension(Catalogs.listDeviceGroups::parameters.body,
+  "x-ms-client-name",
+  "listDeviceGroupsRequest"
+);
 @@doc(Catalogs.uploadImage::parameters.body, "Image upload request body.");
+@@projectedName(Catalogs.uploadImage::parameters.body,
+  "json",
+  "uploadImageRequest"
+);
+@@extension(Catalogs.uploadImage::parameters.body,
+  "x-ms-client-name",
+  "uploadImageRequest"
+);

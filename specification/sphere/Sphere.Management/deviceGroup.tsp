@@ -86,3 +86,11 @@ interface DeviceGroups {
 @@doc(DeviceGroups.claimDevices::parameters.body,
   "Bulk claim devices request body."
 );
+@@projectedName(DeviceGroups.claimDevices::parameters.body,
+  "json",
+  "claimDevicesRequest"
+);
+@@extension(DeviceGroups.claimDevices::parameters.body,
+  "x-ms-client-name",
+  "claimDevicesRequest"
+);
