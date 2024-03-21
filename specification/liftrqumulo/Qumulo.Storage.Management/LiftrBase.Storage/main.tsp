@@ -129,7 +129,7 @@ model FileSystemResourceUpdate {
   /**
    * The managed service identities assigned to this resource.
    */
-  identity?: ManagedServiceIdentity;
+  identity?: ManagedIdentityProperties;
 
   /**
    * Resource tags.

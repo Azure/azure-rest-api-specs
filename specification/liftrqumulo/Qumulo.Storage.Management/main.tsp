@@ -75,7 +75,7 @@ interface FileSystems {
   delete is ArmResourceDeleteWithoutOkAsync<
     FileSystemResource,
     BaseParameters<FileSystemResource>,
-    ArmAsyncOperationHeader
+    ArmCombinedLroHeaders
   >;
 
   /**

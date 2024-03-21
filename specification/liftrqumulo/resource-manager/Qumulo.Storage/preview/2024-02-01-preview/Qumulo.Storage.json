@@ -388,7 +388,12 @@
               },
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -418,16 +423,6 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.ManagedServiceIdentity": {
-      "type": "object",
-      "description": "The managed service identities envelope.",
-      "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        }
-      }
-    },
     "FileSystemResourceListResult": {
       "type": "object",
       "description": "The response of a FileSystemResource list operation.",
@@ -691,7 +686,7 @@
       "description": "The type used for update operations of the FileSystemResource.",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentity",
+          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         },
         "tags": {
