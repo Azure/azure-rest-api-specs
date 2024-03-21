@@ -750,7 +750,7 @@
           "description": "Optional settings for Managed Identities that are assigned to the Container App. If a Managed Identity is not specified here, default settings will be used.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IdentitySettings"
+            "$ref": "./CommonDefinitions.json#/definitions/IdentitySettings"
           },
           "x-ms-identifiers": [
             "identity"
@@ -1193,34 +1193,6 @@
         "resources": {
           "$ref": "./CommonDefinitions.json#/definitions/ContainerResources",
           "description": "Container resource requirements."
-        }
-      }
-    },
-    "IdentitySettings": {
-      "description": "Optional settings for a Managed Identity that is assigned to the Container App.",
-      "type": "object",
-      "required": [
-        "identity"
-      ],
-      "properties": {
-        "identity": {
-          "description": "The resource ID of a user-assigned managed identity that is assigned to the Container App, or 'system' for system-assigned identity.",
-          "type": "string"
-        },
-        "lifecycle": {
-          "description": "Use to select the lifecycle stages of a Container App during which the Managed Identity should be available.",
-          "enum": [
-            "Init",
-            "Main",
-            "None",
-            "All"
-          ],
-          "type": "string",
-          "default": "All",
-          "x-ms-enum": {
-            "name": "IdentitySettingsLifeCycle",
-            "modelAsString": true
-          }
         }
       }
     }
