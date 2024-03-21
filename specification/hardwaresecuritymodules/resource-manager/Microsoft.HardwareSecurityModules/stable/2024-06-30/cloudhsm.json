@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Cloud HSM Resource Provider",
+    "title": "HardwareSecurityModules",
     "description": "The Azure management API provides a RESTful set of web services that interact with Azure Cloud HSM RP.",
     "version": "2024-06-30"
   },
@@ -85,7 +85,7 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmClusterError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -148,7 +148,7 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmClusterError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -223,9 +223,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK Response."
-          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -241,9 +238,12 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmClusterError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "CloudHsmCluster_Delete_MaximumSet_Gen": {
@@ -470,9 +470,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The private endpoint connection was successfully deleted."
-          },
           "202": {
             "description": "The private endpoint connection is being deleted.",
             "headers": {
@@ -488,7 +485,7 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudHsmClusterError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -647,6 +644,7 @@
         "provisioningState": {
           "type": "string",
           "description": "The Cloud HSM Cluster's provisioningState",
+          "readOnly": true,
           "enum": [
             "Provisioning",
             "Succeeded",
