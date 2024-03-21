@@ -1,0 +1,4240 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HDInsight on AKS Management Client",
+    "description": "The HDInsight on AKS Management Client.",
+    "version": "2023-11-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}": {
+      "get": {
+        "description": "Gets a cluster pool.",
+        "operationId": "ClusterPools_Get",
+        "x-ms-examples": {
+          "ClusterPoolGet": {
+            "$ref": "./examples/GetClusterPool.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Clusterpool details.",
+            "schema": {
+              "$ref": "#/definitions/ClusterPool"
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Creates or updates a cluster pool.",
+        "operationId": "ClusterPools_CreateOrUpdate",
+        "x-ms-examples": {
+          "ClusterPoolPut": {
+            "$ref": "./examples/CreateClusterPool.json"
+          },
+          "ClusterPoolPutWithPrivateAks": {
+            "$ref": "./examples/CreateClusterPoolWithPrivateAks.json"
+          },
+          "ClusterPoolPutWithUDRAks": {
+            "$ref": "./examples/CreateClusterPoolWithUDRAks.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "name": "ClusterPool",
+            "description": "The Cluster Pool to create.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterPool"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "ClusterPool is created.",
+            "schema": {
+              "$ref": "#/definitions/ClusterPool"
+            }
+          },
+          "200": {
+            "description": "Update successful.",
+            "schema": {
+              "$ref": "#/definitions/ClusterPool"
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "description": "Updates an existing Cluster Pool Tags.",
+        "operationId": "ClusterPools_UpdateTags",
+        "x-ms-examples": {
+          "ClusterPoolsPatchTags": {
+            "$ref": "./examples/PatchClusterPool.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "name": "clusterPoolTags",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/ClusterPool"
+            }
+          },
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ClusterPool"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "description": "Deletes a Cluster Pool.",
+        "operationId": "ClusterPools_Delete",
+        "x-ms-examples": {
+          "ClusterPoolDelete": {
+            "$ref": "./examples/DeleteClusterPool.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful."
+          },
+          "202": {
+            "description": "Accepted response definition.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No content - The Cluster Pool doesn't exist."
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/clusterpools": {
+      "get": {
+        "operationId": "ClusterPools_ListBySubscription",
+        "x-ms-examples": {
+          "ClusterPoolsListBySubscription": {
+            "$ref": "./examples/ListClusterPoolsSubscription.json"
+          }
+        },
+        "description": "Gets the list of Cluster Pools within a Subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cluster Pools successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/ClusterPoolListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools": {
+      "get": {
+        "operationId": "ClusterPools_ListByResourceGroup",
+        "x-ms-examples": {
+          "ClusterPoolsListByResourceGroup": {
+            "$ref": "./examples/ListClusterPools.json"
+          }
+        },
+        "description": "Lists the HDInsight cluster pools under a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cluster Pools successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/ClusterPoolListResult"
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/upgrade": {
+      "post": {
+        "description": "Upgrade a cluster pool.",
+        "operationId": "ClusterPools_Upgrade",
+        "x-ms-examples": {
+          "ClusterPoolsUpgradeAKSPatchVersion": {
+            "$ref": "./examples/UpgradeAKSPatchVersionForClusterPool.json"
+          },
+          "ClusterPoolsUpgradeNodeOs": {
+            "$ref": "./examples/UpgradeNodeOsForClusterPool.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "name": "ClusterPoolUpgradeRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterPoolUpgrade"
+            },
+            "description": "Upgrade a cluster pool."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/ClusterPool"
+            }
+          },
+          "202": {
+            "description": "Cluster Pool Upgrade request accepted.",
+            "headers": {
+              "location": {
+                "type": "string",
+                "description": "URL to get the status of the resize operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/availableUpgrades": {
+      "get": {
+        "description": "List a cluster pool available upgrade.",
+        "operationId": "ClusterPoolAvailableUpgrades_List",
+        "x-ms-examples": {
+          "GetClusterPoolAvailableUpgrade": {
+            "$ref": "./examples/ListClusterPoolAvailableUpgrades.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Clusterpool Available Upgrade details.",
+            "schema": {
+              "$ref": "#/definitions/ClusterPoolAvailableUpgradeList"
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters": {
+      "get": {
+        "operationId": "Clusters_ListByClusterPoolName",
+        "description": "Lists the HDInsight cluster pools under a resource group.",
+        "x-ms-examples": {
+          "HDInsightClustersListByClusterPoolName": {
+            "$ref": "./examples/ListClustersByClusterPoolName.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Clusters successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/ClusterListResult"
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/upgrade": {
+      "post": {
+        "description": "Upgrade a cluster.",
+        "operationId": "Clusters_Upgrade",
+        "x-ms-examples": {
+          "ClustersUpgradeAKSPatchVersion": {
+            "$ref": "./examples/UpgradeAKSPatchVersionForCluster.json"
+          },
+          "ClustersUpgradeHotfix": {
+            "$ref": "./examples/UpgradeHotfixForCluster.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "ClusterUpgradeRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterUpgrade"
+            },
+            "description": "Upgrade a cluster."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "Cluster Upgrade request accepted.",
+            "headers": {
+              "location": {
+                "type": "string",
+                "description": "URL to get the status of the resize operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/availableUpgrades": {
+      "get": {
+        "description": "List a cluster available upgrade.",
+        "operationId": "ClusterAvailableUpgrades_List",
+        "x-ms-examples": {
+          "GetClusterAvailableUpgrade": {
+            "$ref": "./examples/ListClusterAvailableUpgrades.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cluster Available Upgrade details.",
+            "schema": {
+              "$ref": "#/definitions/ClusterAvailableUpgradeList"
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/resize": {
+      "post": {
+        "description": "Resize an existing Cluster.",
+        "operationId": "Clusters_Resize",
+        "x-ms-examples": {
+          "HDInsightClusterResize": {
+            "$ref": "./examples/ResizeCluster.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "ClusterResizeRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterResizeData"
+            },
+            "description": "Resize a cluster."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "Cluster resize request accepted.",
+            "headers": {
+              "location": {
+                "type": "string",
+                "description": "URL to get the status of the resize operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}": {
+      "get": {
+        "operationId": "Clusters_Get",
+        "description": "Gets a HDInsight cluster.",
+        "x-ms-examples": {
+          "HDInsightClusterGet": {
+            "$ref": "./examples/GetCluster.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cluster details.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Clusters_Create",
+        "description": "Creates a cluster.",
+        "x-ms-examples": {
+          "HDInsightClusterPut": {
+            "$ref": "./examples/CreateAutoscaleCluster.json"
+          },
+          "HDInsightSparkClusterPut": {
+            "$ref": "./examples/CreateSparkCluster.json"
+          },
+          "HDInsightSparkClusterPutWithInternalIngress": {
+            "$ref": "./examples/CreateSparkClusterWithInternalIngress.json"
+          },
+          "HDInsightRangerClusterPut": {
+            "$ref": "./examples/CreateRangerCluster.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "HDInsightCluster",
+            "in": "body",
+            "required": true,
+            "description": "The cluster to create.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Cluster is created.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "200": {
+            "description": "Update successful.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "description": "Updates an existing Cluster.",
+        "operationId": "Clusters_Update",
+        "x-ms-examples": {
+          "HDInsightClustersPatchTags": {
+            "$ref": "./examples/PatchCluster.json"
+          },
+          "HDInsightRangerClusterPatchTags": {
+            "$ref": "./examples/PatchRangerCluster.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "ClusterPatchRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterPatch"
+            },
+            "description": "Patch a cluster."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "operationId": "Clusters_Delete",
+        "description": "Deletes a cluster.",
+        "x-ms-examples": {
+          "HDInsightClustersDelete": {
+            "$ref": "./examples/DeleteCluster.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful."
+          },
+          "202": {
+            "description": "Cluster delete request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No content - The Cluster doesn't exist."
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/runJob": {
+      "post": {
+        "operationId": "ClusterJobs_RunJob",
+        "description": "Operations on jobs of HDInsight on AKS cluster.",
+        "x-ms-examples": {
+          "RunClusterJob": {
+            "$ref": "./examples/RunClusterJob.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "ClusterJob",
+            "description": "The Cluster job.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterJob"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/ClusterJob"
+            }
+          },
+          "202": {
+            "description": "Run cluster job action request accepted.",
+            "headers": {
+              "location": {
+                "type": "string",
+                "description": "URL to get the status of the resize operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/jobs": {
+      "get": {
+        "operationId": "ClusterJobs_List",
+        "description": "Get jobs of HDInsight on AKS cluster.",
+        "x-ms-examples": {
+          "ListClusterJobs": {
+            "$ref": "./examples/ListClusterJobs.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The system query option to filter job returned in the response. Allowed value is 'jobName eq {jobName}' or 'jarName eq {jarName}'."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cluster job details.",
+            "schema": {
+              "$ref": "#/definitions/ClusterJobList"
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/serviceConfigs": {
+      "get": {
+        "operationId": "Clusters_ListServiceConfigs",
+        "description": "Lists the config dump of all services running in cluster.",
+        "x-ms-examples": {
+          "HDInsightClusterGetServiceConfigs": {
+            "$ref": "./examples/ListClusterServiceConfigs.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServiceConfigListResult"
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/checkNameAvailability": {
+      "post": {
+        "description": "Check the availability of the resource name.",
+        "operationId": "Locations_CheckNameAvailability",
+        "x-ms-examples": {
+          "LocationsNameAvailability": {
+            "$ref": "./examples/LocationsNameAvailability.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "NameAvailabilityParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NameAvailabilityParameters"
+            },
+            "description": "The name and type of the resource."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/instanceViews": {
+      "get": {
+        "operationId": "Clusters_ListInstanceViews",
+        "x-ms-examples": {
+          "HDInsightClusterGetInstanceViews": {
+            "$ref": "./examples/ListClusterInstanceViews.json"
+          }
+        },
+        "description": "Lists the lists of instance views",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClusterInstanceViewsResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/instanceViews/default": {
+      "get": {
+        "operationId": "Clusters_GetInstanceView",
+        "description": "Gets the status of a cluster instance.",
+        "x-ms-examples": {
+          "HDInsightClusterGetInstanceView": {
+            "$ref": "./examples/GetClusterInstanceView.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterPoolNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClusterInstanceViewResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.HDInsight/operations": {
+      "get": {
+        "description": "Returns list of operations.",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/GetOperations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation details.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/availableClusterPoolVersions": {
+      "get": {
+        "description": "Returns a list of available cluster pool versions.",
+        "operationId": "AvailableClusterPoolVersions_ListByLocation",
+        "x-ms-examples": {
+          "ClusterPoolVersionListResult": {
+            "$ref": "./examples/ListAvailableClusterPoolVersions.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Available cluster pool versions successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/ClusterPoolVersionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/availableClusterVersions": {
+      "get": {
+        "description": "Returns a list of available cluster versions.",
+        "operationId": "AvailableClusterVersions_ListByLocation",
+        "x-ms-examples": {
+          "ClusterVersionListResult": {
+            "$ref": "./examples/ListAvailableClusterVersions.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Available cluster versions successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/ClusterVersionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error Response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ClusterPoolListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClusterPool"
+          },
+          "description": "The list of cluster pools."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link (url) to the next page of results.",
+          "readOnly": true
+        }
+      },
+      "description": "The list cluster pools operation response."
+    },
+    "ClusterPoolProfile": {
+      "type": "object",
+      "description": "Cluster pool profile.",
+      "required": [
+        "clusterPoolVersion"
+      ],
+      "properties": {
+        "clusterPoolVersion": {
+          "$ref": "#/definitions/ClusterPoolVersionPattern"
+        }
+      }
+    },
+    "ClusterPoolComputeProfile": {
+      "type": "object",
+      "description": "Cluster pool compute profile.",
+      "required": [
+        "vmSize"
+      ],
+      "properties": {
+        "vmSize": {
+          "type": "string",
+          "description": "The virtual machine SKU.",
+          "pattern": "^[a-zA-Z0-9_\\-]{0,256}$"
+        },
+        "count": {
+          "description": "The number of virtual machines.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterPoolNetworkProfile": {
+      "type": "object",
+      "description": "Cluster pool networking configuration.",
+      "required": [
+        "subnetId"
+      ],
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "Cluster pool subnet resource id.",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
+        },
+        "outboundType": {
+          "type": "string",
+          "enum": [
+            "loadBalancer",
+            "userDefinedRouting"
+          ],
+          "x-ms-enum": {
+            "name": "outboundType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "loadBalancer",
+                "description": "The load balancer is used for egress through an AKS assigned public IP. This supports Kubernetes services of type 'loadBalancer'. "
+              },
+              {
+                "value": "userDefinedRouting",
+                "description": "Egress paths must be defined by the user. This is an advanced scenario and requires proper network configuration. "
+              }
+            ]
+          },
+          "default": "loadBalancer",
+          "title": "The outbound (egress) routing method.",
+          "description": "This can only be set at cluster pool creation time and cannot be changed later. "
+        },
+        "enablePrivateApiServer": {
+          "type": "boolean",
+          "description": "ClusterPool is based on AKS cluster. AKS cluster exposes the API server to public internet by default. If you set this property to true, a private AKS cluster will be created, and it will use private apiserver, which is not exposed to public internet.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "apiServerAuthorizedIpRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "The IP ranges authorized to access the AKS API server.",
+          "description": "IP ranges are specified in CIDR format, e.g. 137.117.106.88/29. This feature is not compatible with private AKS clusters. So you cannot set enablePrivateApiServer to true and apiServerAuthorizedIpRanges at the same time."
+        }
+      }
+    },
+    "ClusterPoolLogAnalyticsProfile": {
+      "type": "object",
+      "description": "Cluster pool log analytics profile used to enable or disable OMS agent for AKS cluster.",
+      "required": [
+        "enabled"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "True if log analytics is enabled for cluster pool, otherwise false."
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "Log analytics workspace to associate with the OMS agent.",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OperationalInsights/workspaces"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "AksClusterProfile": {
+      "type": "object",
+      "description": "Properties of the cluster pool underlying AKS cluster.",
+      "properties": {
+        "aksClusterResourceId": {
+          "type": "string",
+          "description": "ARM Resource ID of the AKS cluster",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ContainerService/managedClusters"
+              }
+            ]
+          }
+        },
+        "aksClusterAgentPoolIdentityProfile": {
+          "description": "Identity properties of the AKS cluster agentpool MSI",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IdentityProfile"
+            }
+          ]
+        },
+        "aksVersion": {
+          "type": "string",
+          "description": "AKS control plane and default node pool version of this ClusterPool",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterPoolResourceProperties": {
+      "type": "object",
+      "required": [
+        "computeProfile"
+      ],
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Succeeded",
+            "Canceled",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "deploymentId": {
+          "type": "string",
+          "description": "A unique id generated by the RP to identify the resource.",
+          "example": "45cd32aead6e4a91b079a0cdbfac8c36",
+          "readOnly": true
+        },
+        "managedResourceGroupName": {
+          "type": "string",
+          "description": "A resource group created by RP, to hold the resources created by RP on-behalf of customers. It will also be used to generate aksManagedResourceGroupName by pattern: MC_{managedResourceGroupName}_{clusterPoolName}_{region}. Please make sure it meets resource group name restriction.",
+          "minLength": 1,
+          "maxLength": 40,
+          "example": "hdi-45cd32aead6e4a91b079a0cdbfac8c36"
+        },
+        "aksManagedResourceGroupName": {
+          "type": "string",
+          "description": "A resource group created by AKS, to hold the infrastructure resources created by AKS on-behalf of customers. It is generated by cluster pool name and managed resource group name by pattern: MC_{managedResourceGroupName}_{clusterPoolName}_{region}",
+          "readOnly": true,
+          "example": "MC_hdi-45cd32aead6e4a91b079a0cdbfac8c36_test-pool_eastus"
+        },
+        "clusterPoolProfile": {
+          "description": "CLuster pool profile.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ClusterPoolProfile"
+            }
+          ]
+        },
+        "computeProfile": {
+          "description": "CLuster pool compute profile.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ClusterPoolComputeProfile"
+            }
+          ]
+        },
+        "aksClusterProfile": {
+          "description": "Properties of underlying AKS cluster.",
+          "readOnly": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/AksClusterProfile"
+            }
+          ]
+        },
+        "networkProfile": {
+          "description": "Cluster pool network profile.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ClusterPoolNetworkProfile"
+            }
+          ]
+        },
+        "logAnalyticsProfile": {
+          "description": "Cluster pool log analytics profile to enable OMS agent for AKS cluster.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ClusterPoolLogAnalyticsProfile"
+            }
+          ]
+        },
+        "status": {
+          "type": "string",
+          "description": "Business status of the resource.",
+          "example": "Running",
+          "readOnly": true
+        }
+      },
+      "description": "Cluster pool resource properties."
+    },
+    "ClusterPool": {
+      "type": "object",
+      "description": "Cluster pool.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties. Define cluster pool specific properties.",
+          "$ref": "#/definitions/ClusterPoolResourceProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "SystemData of cluster pool.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "TagsObject": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        }
+      },
+      "description": "Tags object for patch operations."
+    },
+    "ClusterListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Cluster"
+          },
+          "description": "The list of clusters."
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "description": "The list cluster operation response."
+    },
+    "ClusterLogAnalyticsProfile": {
+      "type": "object",
+      "description": "Cluster log analytics profile to enable or disable OMS agent for cluster.",
+      "required": [
+        "enabled"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "True if log analytics is enabled for the cluster, otherwise false."
+        },
+        "applicationLogs": {
+          "$ref": "#/definitions/ClusterLogAnalyticsApplicationLogs"
+        },
+        "metricsEnabled": {
+          "type": "boolean",
+          "description": "True if metrics are enabled, otherwise false."
+        }
+      }
+    },
+    "ClusterLogAnalyticsApplicationLogs": {
+      "type": "object",
+      "description": "Collection of logs to be enabled or disabled for log analytics.",
+      "properties": {
+        "stdOutEnabled": {
+          "type": "boolean",
+          "description": "True if stdout is enabled, otherwise false."
+        },
+        "stdErrorEnabled": {
+          "type": "boolean",
+          "description": "True if stderror is enabled, otherwise false."
+        }
+      }
+    },
+    "ClusterPrometheusProfile": {
+      "type": "object",
+      "description": "Cluster Prometheus profile.",
+      "required": [
+        "enabled"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable Prometheus for cluster or not.",
+          "default": false
+        }
+      }
+    },
+    "IdentityProfile": {
+      "type": "object",
+      "description": "Identity Profile with details of an MSI.",
+      "required": [
+        "msiResourceId",
+        "msiClientId",
+        "msiObjectId"
+      ],
+      "properties": {
+        "msiResourceId": {
+          "type": "string",
+          "description": "ResourceId of the MSI.",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        },
+        "msiClientId": {
+          "type": "string",
+          "description": "ClientId of the MSI.",
+          "pattern": "^[{(]?[0-9A-Fa-f]{8}[-]?(?:[0-9A-Fa-f]{4}[-]?){3}[0-9A-Fa-f]{12}[)}]?$"
+        },
+        "msiObjectId": {
+          "type": "string",
+          "description": "ObjectId of the MSI.",
+          "pattern": "^[{(]?[0-9A-Fa-f]{8}[-]?(?:[0-9A-Fa-f]{4}[-]?){3}[0-9A-Fa-f]{12}[)}]?$"
+        }
+      }
+    },
+    "AuthorizationProfile": {
+      "type": "object",
+      "description": "Authorization profile with details of AAD user Ids and group Ids authorized for data plane access.",
+      "properties": {
+        "userIds": {
+          "type": "array",
+          "description": "AAD user Ids authorized for data plane access.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "groupIds": {
+          "type": "array",
+          "description": "AAD group Ids authorized for data plane access.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SecretReference": {
+      "type": "object",
+      "description": "Secret reference and corresponding properties of a key vault secret.",
+      "required": [
+        "referenceName",
+        "type",
+        "keyVaultObjectName"
+      ],
+      "properties": {
+        "referenceName": {
+          "type": "string",
+          "description": "Reference name of the secret to be used in service configs."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of key vault object: secret, key or certificate.",
+          "enum": [
+            "Key",
+            "Secret",
+            "Certificate"
+          ],
+          "x-ms-enum": {
+            "name": "KeyVaultObjectType",
+            "modelAsString": true
+          }
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the secret in key vault."
+        },
+        "keyVaultObjectName": {
+          "type": "string",
+          "description": "Object identifier name of the secret in key vault.",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,126}$"
+        }
+      }
+    },
+    "SecretsProfile": {
+      "type": "object",
+      "description": "The cluster secret profile.",
+      "required": [
+        "keyVaultResourceId"
+      ],
+      "properties": {
+        "keyVaultResourceId": {
+          "type": "string",
+          "description": "Name of the user Key Vault where all the cluster specific user secrets are stored.",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults"
+              }
+            ]
+          }
+        },
+        "secrets": {
+          "type": "array",
+          "description": "Properties of Key Vault secret.",
+          "items": {
+            "$ref": "#/definitions/SecretReference"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ClusterConfigFile": {
+      "type": "object",
+      "description": "Cluster configuration files.",
+      "required": [
+        "fileName"
+      ],
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "description": "Configuration file name.",
+          "example": "hive-conf.xml."
+        },
+        "content": {
+          "type": "string",
+          "description": "Free form content of the entire configuration file."
+        },
+        "encoding": {
+          "type": "string",
+          "description": "This property indicates if the content is encoded and is case-insensitive. Please set the value to base64 if the content is base64 encoded. Set it to none or skip it if the content is plain text.",
+          "enum": [
+            "Base64",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ContentEncoding",
+            "modelAsString": true
+          }
+        },
+        "path": {
+          "type": "string",
+          "description": "Path of the config file if content is specified."
+        },
+        "values": {
+          "type": "object",
+          "description": "List of key value pairs\nwhere key represents a valid service configuration name and value represents the value of the config.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ClusterServiceConfig": {
+      "type": "object",
+      "description": "Cluster configs per component.",
+      "required": [
+        "component",
+        "files"
+      ],
+      "properties": {
+        "component": {
+          "type": "string",
+          "description": "Name of the component the config files should apply to."
+        },
+        "files": {
+          "type": "array",
+          "description": "List of Config Files.",
+          "items": {
+            "$ref": "#/definitions/ClusterConfigFile"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ClusterServiceConfigsProfile": {
+      "type": "object",
+      "description": "Cluster service configs.",
+      "required": [
+        "serviceName",
+        "configs"
+      ],
+      "properties": {
+        "serviceName": {
+          "type": "string",
+          "description": "Name of the service the configurations should apply to."
+        },
+        "configs": {
+          "type": "array",
+          "description": "List of service configs.",
+          "items": {
+            "$ref": "#/definitions/ClusterServiceConfig"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ConnectivityProfile": {
+      "type": "object",
+      "description": "Cluster connectivity profile.",
+      "required": [
+        "web"
+      ],
+      "properties": {
+        "web": {
+          "description": "Web connectivity endpoint details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/WebConnectivityEndpoint"
+            }
+          ]
+        },
+        "ssh": {
+          "type": "array",
+          "description": "List of SSH connectivity endpoints.",
+          "items": {
+            "$ref": "#/definitions/SshConnectivityEndpoint"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "readOnly": true
+    },
+    "ClusterAccessProfile": {
+      "type": "object",
+      "description": "Cluster access profile.",
+      "required": [
+        "enableInternalIngress"
+      ],
+      "properties": {
+        "enableInternalIngress": {
+          "type": "boolean",
+          "description": "Whether to create cluster using private IP instead of public IP. This property must be set at create time.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "privateLinkServiceId": {
+          "type": "string",
+          "readOnly": true,
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/privateLinkServices"
+              }
+            ]
+          },
+          "description": "Private link service resource ID. Only when enableInternalIngress is true, this property will be returned."
+        }
+      }
+    },
+    "WebConnectivityEndpoint": {
+      "type": "object",
+      "description": "Web connectivity endpoint details.",
+      "required": [
+        "fqdn"
+      ],
+      "properties": {
+        "fqdn": {
+          "type": "string",
+          "description": "Web connectivity endpoint.",
+          "example": "clusterName11223344.clusterPoolName55667788.subid.eastus.hdinsightaks.net"
+        },
+        "privateFqdn": {
+          "type": "string",
+          "description": "Private web connectivity endpoint. This property will only be returned when enableInternalIngress is true.",
+          "example": "clusterName11223344-int.clusterPoolName55667788.subid.eastus.hdinsightaks.net"
+        }
+      },
+      "readOnly": true
+    },
+    "SshConnectivityEndpoint": {
+      "type": "object",
+      "description": "SSH connectivity endpoint details.",
+      "required": [
+        "endpoint"
+      ],
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "description": "SSH connectivity endpoint.",
+          "example": "clusterName11223344.clusterPoolName55667788.eastus.hdinsightaks.net/ssh/host/podPrefix-0"
+        },
+        "privateSshEndpoint": {
+          "type": "string",
+          "description": "Private SSH connectivity endpoint. This property will only be returned when enableInternalIngress is true.",
+          "example": "clusterName11223344-int.clusterPoolName55667788.eastus.hdinsightaks.net/ssh/host/podPrefix-0"
+        }
+      }
+    },
+    "ClusterProfile": {
+      "type": "object",
+      "required": [
+        "authorizationProfile",
+        "clusterVersion",
+        "ossVersion"
+      ],
+      "properties": {
+        "clusterVersion": {
+          "$ref": "#/definitions/ThreeOrFourPartVersionPattern"
+        },
+        "ossVersion": {
+          "$ref": "#/definitions/ThreePartVersionPattern"
+        },
+        "components": {
+          "$ref": "#/definitions/ClusterComponents"
+        },
+        "identityProfile": {
+          "description": "This property is required by Trino, Spark and Flink cluster but is optional for Kafka cluster.",
+          "$ref": "#/definitions/IdentityProfile"
+        },
+        "authorizationProfile": {
+          "$ref": "#/definitions/AuthorizationProfile"
+        },
+        "secretsProfile": {
+          "$ref": "#/definitions/SecretsProfile"
+        },
+        "serviceConfigsProfiles": {
+          "type": "array",
+          "description": "The service configs profiles.",
+          "items": {
+            "$ref": "#/definitions/ClusterServiceConfigsProfile"
+          },
+          "x-ms-identifiers": []
+        },
+        "connectivityProfile": {
+          "$ref": "#/definitions/ConnectivityProfile"
+        },
+        "clusterAccessProfile": {
+          "$ref": "#/definitions/ClusterAccessProfile"
+        },
+        "logAnalyticsProfile": {
+          "$ref": "#/definitions/ClusterLogAnalyticsProfile"
+        },
+        "prometheusProfile": {
+          "$ref": "#/definitions/ClusterPrometheusProfile"
+        },
+        "sshProfile": {
+          "$ref": "#/definitions/SshProfile"
+        },
+        "autoscaleProfile": {
+          "$ref": "#/definitions/AutoscaleProfile"
+        },
+        "rangerPluginProfile": {
+          "$ref": "#/definitions/ClusterRangerPluginProfile"
+        },
+        "kafkaProfile": {
+          "$ref": "#/definitions/KafkaProfile"
+        },
+        "trinoProfile": {
+          "$ref": "#/definitions/TrinoProfile"
+        },
+        "llapProfile": {
+          "type": "object",
+          "description": "LLAP cluster profile.",
+          "additionalProperties": true
+        },
+        "flinkProfile": {
+          "$ref": "#/definitions/FlinkProfile"
+        },
+        "sparkProfile": {
+          "$ref": "#/definitions/SparkProfile"
+        },
+        "rangerProfile": {
+          "$ref": "#/definitions/RangerProfile"
+        },
+        "stubProfile": {
+          "type": "object",
+          "description": "Stub cluster profile.",
+          "additionalProperties": true
+        },
+        "scriptActionProfiles": {
+          "$ref": "#/definitions/ScriptActionProfiles"
+        }
+      },
+      "description": "Cluster profile."
+    },
+    "SshProfile": {
+      "type": "object",
+      "description": "Ssh profile for the cluster.",
+      "required": [
+        "count"
+      ],
+      "properties": {
+        "count": {
+          "type": "integer",
+          "description": "Number of ssh pods per cluster.",
+          "format": "int32",
+          "maximum": 5.0,
+          "minimum": 0.0
+        },
+        "podPrefix": {
+          "type": "string",
+          "description": "Prefix of the pod names. Pod number will be appended to the prefix. The ingress URLs for the pods will be available at <clusterFqdn>/<sshBasePath>/<prefix>-<number>",
+          "readOnly": true
+        }
+      }
+    },
+    "AutoscaleProfile": {
+      "type": "object",
+      "description": "This is the Autoscale profile for the cluster. This will allow customer to create cluster enabled with Autoscale.",
+      "required": [
+        "enabled"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "This indicates whether auto scale is enabled on HDInsight on AKS cluster."
+        },
+        "gracefulDecommissionTimeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "This property is for graceful decommission timeout; It has a default setting of 3600 seconds before forced shutdown takes place. This is the maximal time to wait for running containers and applications to complete before transition a DECOMMISSIONING node into DECOMMISSIONED. The default value is 3600 seconds. Negative value (like -1) is handled as infinite timeout."
+        },
+        "autoscaleType": {
+          "type": "string",
+          "description": "User to specify which type of Autoscale to be implemented - Scheduled Based or Load Based.",
+          "enum": [
+            "ScheduleBased",
+            "LoadBased"
+          ],
+          "x-ms-enum": {
+            "name": "AutoscaleType",
+            "modelAsString": true
+          }
+        },
+        "scheduleBasedConfig": {
+          "description": "Profiles of schedule based Autoscale.",
+          "$ref": "#/definitions/ScheduleBasedConfig"
+        },
+        "loadBasedConfig": {
+          "description": "Profiles of load based Autoscale.",
+          "$ref": "#/definitions/LoadBasedConfig"
+        }
+      }
+    },
+    "ScheduleBasedConfig": {
+      "type": "object",
+      "description": "Profile of schedule based Autoscale.",
+      "required": [
+        "timeZone",
+        "defaultCount",
+        "schedules"
+      ],
+      "properties": {
+        "timeZone": {
+          "type": "string",
+          "description": "User has to specify the timezone on which the schedule has to be set for schedule based autoscale configuration."
+        },
+        "defaultCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Setting default node count of current schedule configuration. Default node count specifies the number of nodes which are default when an specified scaling operation is executed (scale up/scale down)"
+        },
+        "schedules": {
+          "type": "array",
+          "description": "This specifies the schedules where scheduled based Autoscale to be enabled, the user has a choice to set multiple rules within the schedule across days and times (start/end).",
+          "items": {
+            "$ref": "#/definitions/Schedule"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Schedule": {
+      "type": "object",
+      "description": "Schedule definition.",
+      "required": [
+        "days",
+        "startTime",
+        "endTime",
+        "count"
+      ],
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "pattern": "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$",
+          "description": "User has to set the start time of current schedule configuration, format like 10:30 (HH:MM)."
+        },
+        "endTime": {
+          "type": "string",
+          "pattern": "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$",
+          "description": "User has to set the end time of current schedule configuration, format like 10:30 (HH:MM)."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "User has to set the node count anticipated at end of the scaling operation of the set current schedule configuration, format is integer."
+        },
+        "days": {
+          "type": "array",
+          "description": "User has to set the days where schedule has to be set for autoscale operation.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Sunday",
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "x-ms-enum": {
+              "name": "ScheduleDay",
+              "modelAsString": true
+            }
+          }
+        }
+      }
+    },
+    "LoadBasedConfig": {
+      "type": "object",
+      "description": "Profile of load based Autoscale.",
+      "required": [
+        "minNodes",
+        "maxNodes",
+        "scalingRules"
+      ],
+      "properties": {
+        "minNodes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "User needs to set the minimum number of nodes for load based scaling, the load based scaling will use this to scale up and scale down between minimum and maximum number of nodes."
+        },
+        "maxNodes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "User needs to set the maximum number of nodes for load based scaling, the load based scaling will use this to scale up and scale down between minimum and maximum number of nodes."
+        },
+        "pollInterval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "User can specify the poll interval, this is the time period (in seconds) after which scaling metrics are polled for triggering a scaling operation."
+        },
+        "cooldownPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "This is a cool down period, this is a time period in seconds, which determines the amount of time that must elapse between a scaling activity started by a rule and the start of the next scaling activity, regardless of the rule that triggers it. The default value is 300 seconds."
+        },
+        "scalingRules": {
+          "type": "array",
+          "description": "The scaling rules.",
+          "items": {
+            "$ref": "#/definitions/ScalingRule"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ScalingRule": {
+      "type": "object",
+      "description": "The scaling rule.",
+      "required": [
+        "actionType",
+        "comparisonRule",
+        "evaluationCount",
+        "scalingMetric"
+      ],
+      "properties": {
+        "actionType": {
+          "type": "string",
+          "description": "The action type.",
+          "enum": [
+            "scaleup",
+            "scaledown"
+          ],
+          "x-ms-enum": {
+            "name": "ScaleActionType",
+            "modelAsString": true
+          }
+        },
+        "evaluationCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "This is an evaluation count for a scaling condition, the number of times a trigger condition should be successful, before scaling activity is triggered."
+        },
+        "scalingMetric": {
+          "type": "string",
+          "description": "Metrics name for individual workloads. For example: cpu"
+        },
+        "comparisonRule": {
+          "$ref": "#/definitions/ComparisonRule"
+        }
+      }
+    },
+    "ComparisonRule": {
+      "type": "object",
+      "description": "The comparison rule.",
+      "required": [
+        "operator",
+        "threshold"
+      ],
+      "properties": {
+        "operator": {
+          "type": "string",
+          "description": "The comparison operator.",
+          "enum": [
+            "greaterThan",
+            "greaterThanOrEqual",
+            "lessThan",
+            "lessThanOrEqual"
+          ],
+          "x-ms-enum": {
+            "name": "ComparisonOperator",
+            "modelAsString": true
+          }
+        },
+        "threshold": {
+          "type": "number",
+          "description": "Threshold setting."
+        }
+      }
+    },
+    "TrinoProfile": {
+      "type": "object",
+      "description": "Trino Cluster profile.",
+      "properties": {
+        "catalogOptions": {
+          "$ref": "#/definitions/CatalogOptions"
+        },
+        "coordinator": {
+          "$ref": "#/definitions/TrinoCoordinator"
+        },
+        "userPluginsSpec": {
+          "$ref": "#/definitions/TrinoUserPlugins"
+        },
+        "userTelemetrySpec": {
+          "$ref": "#/definitions/TrinoUserTelemetry"
+        },
+        "worker": {
+          "$ref": "#/definitions/TrinoWorker"
+        }
+      }
+    },
+    "CatalogOptions": {
+      "type": "object",
+      "description": "Trino cluster catalog options.",
+      "properties": {
+        "hive": {
+          "type": "array",
+          "description": "hive catalog options.",
+          "items": {
+            "$ref": "#/definitions/HiveCatalogOption"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "HiveCatalogOption": {
+      "type": "object",
+      "description": "Hive Catalog Option",
+      "required": [
+        "catalogName",
+        "metastoreDbConnectionURL",
+        "metastoreWarehouseDir"
+      ],
+      "properties": {
+        "catalogName": {
+          "description": "Name of trino catalog which should use specified hive metastore.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "metastoreDbConnectionAuthenticationMode": {
+          "description": "The authentication mode to connect to your Hive metastore database. More details: https://learn.microsoft.com/en-us/azure/azure-sql/database/logins-create-manage?view=azuresql#authentication-and-authorization",
+          "type": "string",
+          "enum": [
+            "SqlAuth",
+            "IdentityAuth"
+          ],
+          "x-ms-enum": {
+            "name": "MetastoreDbConnectionAuthenticationMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "SqlAuth",
+                "description": "The password-based authentication to connect to your Hive metastore database. "
+              },
+              {
+                "value": "IdentityAuth",
+                "description": "The managed-identity-based authentication to connect to your Hive metastore database. "
+              }
+            ]
+          },
+          "default": "IdentityAuth"
+        },
+        "metastoreDbConnectionPasswordSecret": {
+          "description": "Secret reference name from secretsProfile.secrets containing password for database connection.",
+          "type": "string"
+        },
+        "metastoreDbConnectionURL": {
+          "description": "Connection string for hive metastore database.",
+          "type": "string"
+        },
+        "metastoreDbConnectionUserName": {
+          "description": "User name for database connection.",
+          "type": "string"
+        },
+        "metastoreWarehouseDir": {
+          "description": "Metastore root directory URI, format: abfs[s]://<container>@<account_name>.dfs.core.windows.net/<path>. More details: https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction-abfs-uri",
+          "type": "string"
+        }
+      }
+    },
+    "FlinkCatalogOptions": {
+      "type": "object",
+      "description": "Flink cluster catalog options.",
+      "properties": {
+        "hive": {
+          "$ref": "#/definitions/FlinkHiveCatalogOption"
+        }
+      }
+    },
+    "FlinkHiveCatalogOption": {
+      "type": "object",
+      "description": "Hive Catalog Option for Flink cluster.",
+      "required": [
+        "metastoreDbConnectionURL"
+      ],
+      "properties": {
+        "metastoreDbConnectionAuthenticationMode": {
+          "description": "The authentication mode to connect to your Hive metastore database. More details: https://learn.microsoft.com/en-us/azure/azure-sql/database/logins-create-manage?view=azuresql#authentication-and-authorization",
+          "type": "string",
+          "enum": [
+            "SqlAuth",
+            "IdentityAuth"
+          ],
+          "x-ms-enum": {
+            "name": "MetastoreDbConnectionAuthenticationMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "SqlAuth",
+                "description": "The password-based authentication to connect to your Hive metastore database. "
+              },
+              {
+                "value": "IdentityAuth",
+                "description": "The managed-identity-based authentication to connect to your Hive metastore database. "
+              }
+            ]
+          },
+          "default": "IdentityAuth"
+        },
+        "metastoreDbConnectionPasswordSecret": {
+          "description": "Secret reference name from secretsProfile.secrets containing password for database connection.",
+          "type": "string"
+        },
+        "metastoreDbConnectionURL": {
+          "description": "Connection string for hive metastore database.",
+          "type": "string"
+        },
+        "metastoreDbConnectionUserName": {
+          "description": "User name for database connection.",
+          "type": "string"
+        }
+      }
+    },
+    "TrinoCoordinator": {
+      "type": "object",
+      "description": "Trino Coordinator.",
+      "properties": {
+        "debug": {
+          "$ref": "#/definitions/TrinoDebugConfig",
+          "x-ms-client-flatten": true
+        },
+        "highAvailabilityEnabled": {
+          "type": "boolean",
+          "description": "The flag that if enable coordinator HA, uses multiple coordinator replicas with auto failover, one per each head node. Default: true.",
+          "default": true
+        }
+      }
+    },
+    "TrinoWorker": {
+      "type": "object",
+      "description": "Trino worker.",
+      "properties": {
+        "debug": {
+          "$ref": "#/definitions/TrinoDebugConfig",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "TrinoDebugConfig": {
+      "type": "object",
+      "description": "Trino debug configuration.",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "description": "The flag that if enable debug or not.",
+          "default": false
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The debug port.",
+          "default": 8008
+        },
+        "suspend": {
+          "type": "boolean",
+          "description": "The flag that if suspend debug or not.",
+          "default": false
+        }
+      }
+    },
+    "TrinoUserTelemetry": {
+      "type": "object",
+      "description": "User telemetry",
+      "properties": {
+        "storage": {
+          "$ref": "#/definitions/TrinoTelemetryConfig"
+        }
+      }
+    },
+    "TrinoTelemetryConfig": {
+      "type": "object",
+      "description": "Trino user telemetry definition.",
+      "properties": {
+        "hivecatalogName": {
+          "type": "string",
+          "description": "Hive Catalog name used to mount external tables on the logs written by trino, if not specified there tables are not created.",
+          "minLength": 1
+        },
+        "hivecatalogSchema": {
+          "type": "string",
+          "description": "Schema of the above catalog to use, to mount query logs as external tables, if not specified tables will be mounted under schema trinologs.",
+          "default": "trinologs"
+        },
+        "partitionRetentionInDays": {
+          "type": "integer",
+          "description": "Retention period for query log table partitions, this doesn't have any affect on actual data.",
+          "format": "int32",
+          "default": 365
+        },
+        "path": {
+          "type": "string",
+          "description": "Azure storage location of the blobs.",
+          "minLength": 1
+        }
+      }
+    },
+    "TrinoUserPlugins": {
+      "type": "object",
+      "description": "Trino user plugins spec",
+      "properties": {
+        "plugins": {
+          "type": "array",
+          "description": "Trino user plugins.",
+          "items": {
+            "$ref": "#/definitions/TrinoUserPlugin"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "TrinoUserPlugin": {
+      "type": "object",
+      "description": "Trino user plugin.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Denotes whether the plugin is active or not."
+        },
+        "name": {
+          "type": "string",
+          "description": "This field maps to the sub-directory in trino plugins location, that will contain all the plugins under path.",
+          "minLength": 1
+        },
+        "path": {
+          "type": "string",
+          "description": "Fully qualified path to the folder containing the plugins.",
+          "minLength": 1,
+          "pattern": "^(https)|(abfss)://.*$"
+        }
+      }
+    },
+    "SparkProfile": {
+      "type": "object",
+      "description": "The spark cluster profile.",
+      "properties": {
+        "defaultStorageUrl": {
+          "type": "string",
+          "description": "The default storage URL."
+        },
+        "metastoreSpec": {
+          "$ref": "#/definitions/SparkMetastoreSpec"
+        },
+        "userPluginsSpec": {
+          "$ref": "#/definitions/SparkUserPlugins"
+        }
+      }
+    },
+    "SparkUserPlugins": {
+      "type": "object",
+      "description": "Spark user plugins spec",
+      "properties": {
+        "plugins": {
+          "type": "array",
+          "description": "Spark user plugins.",
+          "items": {
+            "$ref": "#/definitions/SparkUserPlugin"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SparkUserPlugin": {
+      "type": "object",
+      "description": "Spark user plugin.",
+      "required": [
+        "path"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Fully qualified path to the folder containing the plugins.",
+          "minLength": 1,
+          "pattern": "^(https)|(abfss)://.*$"
+        }
+      }
+    },
+    "ScriptActionProfiles": {
+      "type": "array",
+      "description": "The script action profile list.",
+      "items": {
+        "$ref": "#/definitions/ScriptActionProfile"
+      },
+      "x-ms-identifiers": []
+    },
+    "ScriptActionProfile": {
+      "type": "object",
+      "description": "The script action profile.",
+      "required": [
+        "name",
+        "type",
+        "url",
+        "services"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the script action. Supported type is bash scripts."
+        },
+        "name": {
+          "type": "string",
+          "description": "Script name."
+        },
+        "url": {
+          "type": "string",
+          "description": "Url of the script file.",
+          "pattern": "^(https)|(http)://.*$"
+        },
+        "parameters": {
+          "type": "string",
+          "description": "Additional parameters for the script action. It should be space-separated list of arguments required for script execution."
+        },
+        "services": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "List of services to apply the script action."
+        },
+        "timeoutInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Timeout duration for the script action in minutes."
+        },
+        "shouldPersist": {
+          "type": "boolean",
+          "default": true,
+          "description": "Specify if the script should persist on the cluster."
+        }
+      }
+    },
+    "SparkMetastoreSpec": {
+      "type": "object",
+      "description": "The metastore specification for Spark cluster.",
+      "required": [
+        "dbServerHost",
+        "dbName"
+      ],
+      "properties": {
+        "dbServerHost": {
+          "type": "string",
+          "description": "The database server host."
+        },
+        "dbName": {
+          "type": "string",
+          "description": "The database name."
+        },
+        "dbConnectionAuthenticationMode": {
+          "description": "The authentication mode to connect to your Hive metastore database. More details: https://learn.microsoft.com/en-us/azure/azure-sql/database/logins-create-manage?view=azuresql#authentication-and-authorization",
+          "type": "string",
+          "enum": [
+            "SqlAuth",
+            "IdentityAuth"
+          ],
+          "x-ms-enum": {
+            "name": "DbConnectionAuthenticationMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "SqlAuth",
+                "description": "The password-based authentication to connect to your Hive metastore database. "
+              },
+              {
+                "value": "IdentityAuth",
+                "description": "The managed-identity-based authentication to connect to your Hive metastore database. "
+              }
+            ]
+          },
+          "default": "IdentityAuth"
+        },
+        "dbUserName": {
+          "type": "string",
+          "description": "The database user name."
+        },
+        "dbPasswordSecretName": {
+          "type": "string",
+          "description": "The secret name which contains the database user password."
+        },
+        "keyVaultId": {
+          "type": "string",
+          "description": "The key vault resource id."
+        },
+        "thriftUrl": {
+          "type": "string",
+          "description": "The thrift url."
+        }
+      }
+    },
+    "FlinkProfile": {
+      "type": "object",
+      "description": "The Flink cluster profile.",
+      "required": [
+        "storage",
+        "jobManager",
+        "taskManager"
+      ],
+      "properties": {
+        "storage": {
+          "$ref": "#/definitions/FlinkStorageProfile"
+        },
+        "numReplicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of task managers."
+        },
+        "jobManager": {
+          "description": "Job Manager container/ process CPU and memory requirements",
+          "$ref": "#/definitions/ComputeResourceDefinition"
+        },
+        "historyServer": {
+          "description": "History Server container/ process CPU and memory requirements",
+          "$ref": "#/definitions/ComputeResourceDefinition"
+        },
+        "taskManager": {
+          "description": "Task Manager container/ process CPU and memory requirements",
+          "$ref": "#/definitions/ComputeResourceDefinition"
+        },
+        "catalogOptions": {
+          "$ref": "#/definitions/FlinkCatalogOptions"
+        },
+        "deploymentMode": {
+          "description": "A string property that indicates the deployment mode of Flink cluster. It can have one of the following enum values => Application, Session. Default value is Session",
+          "type": "string",
+          "enum": [
+            "Application",
+            "Session"
+          ],
+          "x-ms-enum": {
+            "name": "deploymentMode",
+            "modelAsString": true
+          }
+        },
+        "jobSpec": {
+          "$ref": "#/definitions/FlinkJobProfile"
+        }
+      }
+    },
+    "FlinkJobProfile": {
+      "type": "object",
+      "description": "Job specifications for flink clusters in application deployment mode. The specification is immutable even if job properties are changed by calling the RunJob API, please use the ListJob API to get the latest job information.",
+      "required": [
+        "jobJarDirectory",
+        "jarName",
+        "upgradeMode"
+      ],
+      "properties": {
+        "jobJarDirectory": {
+          "description": "A string property that specifies the directory where the job JAR is located.",
+          "type": "string"
+        },
+        "jarName": {
+          "description": "A string property that represents the name of the job JAR.",
+          "type": "string"
+        },
+        "entryClass": {
+          "description": "A string property that specifies the entry class for the Flink job. If not specified, the entry point is auto-detected from the flink job jar package.",
+          "type": "string"
+        },
+        "args": {
+          "description": "A string property representing additional JVM arguments for the Flink job. It should be space separated value.",
+          "type": "string"
+        },
+        "savePointName": {
+          "description": "A string property that represents the name of the savepoint for the Flink job",
+          "type": "string"
+        },
+        "upgradeMode": {
+          "description": "A string property that indicates the upgrade mode to be performed on the Flink job. It can have one of the following enum values => STATELESS_UPDATE, UPDATE, LAST_STATE_UPDATE.",
+          "type": "string",
+          "enum": [
+            "STATELESS_UPDATE",
+            "UPDATE",
+            "LAST_STATE_UPDATE"
+          ],
+          "x-ms-enum": {
+            "name": "upgradeMode",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "FlinkStorageProfile": {
+      "type": "object",
+      "description": "The storage profile",
+      "required": [
+        "storageUri"
+      ],
+      "properties": {
+        "storageUri": {
+          "type": "string",
+          "pattern": "^(\\w{4,5})://(.*)@(.*).\\b(blob|dfs)\\b.*$",
+          "description": "Storage account uri which is used for savepoint and checkpoint state."
+        },
+        "storagekey": {
+          "type": "string",
+          "description": "Storage key is only required for wasb(s) storage.",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "ClusterRangerPluginProfile": {
+      "type": "object",
+      "description": "Cluster Ranger plugin profile.",
+      "required": [
+        "enabled"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable Ranger for cluster or not.",
+          "default": false
+        }
+      }
+    },
+    "RangerProfile": {
+      "type": "object",
+      "description": "The ranger cluster profile.",
+      "required": [
+        "rangerAdmin",
+        "rangerUsersync"
+      ],
+      "properties": {
+        "rangerAdmin": {
+          "$ref": "#/definitions/RangerAdminSpec"
+        },
+        "rangerAudit": {
+          "$ref": "#/definitions/RangerAuditSpec"
+        },
+        "rangerUsersync": {
+          "$ref": "#/definitions/RangerUsersyncSpec"
+        }
+      }
+    },
+    "RangerAdminSpec": {
+      "type": "object",
+      "description": "Specification for the Ranger Admin service.",
+      "properties": {
+        "admins": {
+          "description": "List of usernames that should be marked as ranger admins. These usernames should match the user principal name (UPN) of the respective AAD users.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "database": {
+          "properties": {
+            "host": {
+              "description": "The database URL",
+              "type": "string"
+            },
+            "name": {
+              "description": "The database name",
+              "type": "string"
+            },
+            "passwordSecretRef": {
+              "description": "Reference for the database password",
+              "type": "string"
+            },
+            "username": {
+              "description": "The name of the database user",
+              "type": "string"
+            }
+          },
+          "required": [
+            "host",
+            "name"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "admins",
+        "database"
+      ]
+    },
+    "RangerAuditSpec": {
+      "description": "Properties required to describe audit log storage.",
+      "properties": {
+        "storageAccount": {
+          "description": "Azure storage location of the blobs. MSI should have read/write access to this Storage account.",
+          "minLength": 1,
+          "pattern": "^(https)|(abfss)://.*$",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "RangerUsersyncSpec": {
+      "description": "Specification for the Ranger Usersync service",
+      "properties": {
+        "enabled": {
+          "description": "Denotes whether usersync service should be enabled",
+          "type": "boolean",
+          "default": true
+        },
+        "groups": {
+          "description": "List of groups that should be synced. These group names should match the object id of the respective AAD groups.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "mode": {
+          "default": "automatic",
+          "description": "User & groups can be synced automatically or via a static list that's refreshed.",
+          "type": "string",
+          "enum": [
+            "static",
+            "automatic"
+          ],
+          "x-ms-enum": {
+            "name": "RangerUsersyncMode",
+            "modelAsString": true
+          }
+        },
+        "userMappingLocation": {
+          "description": "Azure storage location of a mapping file that lists user & group associations.",
+          "minLength": 1,
+          "pattern": "^(https)|(abfss)://.*$",
+          "type": "string"
+        },
+        "users": {
+          "description": "List of user names that should be synced. These usernames should match the User principal name of the respective AAD users.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ComputeResourceDefinition": {
+      "type": "object",
+      "description": "The cpu and memory requirement definition.",
+      "required": [
+        "cpu",
+        "memory"
+      ],
+      "properties": {
+        "cpu": {
+          "type": "number",
+          "format": "float",
+          "description": "The required CPU."
+        },
+        "memory": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The required memory in MB, Container memory will be 110 percentile"
+        }
+      }
+    },
+    "KafkaProfile": {
+      "type": "object",
+      "description": "The Kafka cluster profile.",
+      "required": [
+        "diskStorage"
+      ],
+      "properties": {
+        "enableKRaft": {
+          "description": "Expose Kafka cluster in KRaft mode.",
+          "default": true,
+          "type": "boolean"
+        },
+        "enablePublicEndpoints": {
+          "description": "Expose worker nodes as public endpoints.",
+          "default": false,
+          "type": "boolean"
+        },
+        "remoteStorageUri": {
+          "description": "Fully qualified path of Azure Storage container used for Tiered Storage.",
+          "type": "string",
+          "pattern": "^(https?|abfss?):\\/\\/[^/]+(?:\\/|$)"
+        },
+        "diskStorage": {
+          "$ref": "#/definitions/DiskStorageProfile"
+        },
+        "clusterIdentity": {
+          "description": "Identity of the internal service components inside the Kafka cluster.",
+          "$ref": "#/definitions/IdentityProfile",
+          "readOnly": true
+        },
+        "connectivityEndpoints": {
+          "description": "Kafka bootstrap server and brokers related connectivity endpoints.",
+          "$ref": "#/definitions/KafkaConnectivityEndpoints",
+          "readOnly": true
+        }
+      }
+    },
+    "DiskStorageProfile": {
+      "type": "object",
+      "description": "Kafka disk storage profile.",
+      "required": [
+        "dataDiskSize",
+        "dataDiskType"
+      ],
+      "properties": {
+        "dataDiskSize": {
+          "description": "Managed Disk size in GB. The maximum supported disk size for Standard and Premium HDD/SSD is 32TB, except for Premium SSD v2, which supports up to 64TB.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "dataDiskType": {
+          "description": "Managed Disk Type.",
+          "type": "string",
+          "enum": [
+            "Standard_HDD_LRS",
+            "Standard_SSD_LRS",
+            "Standard_SSD_ZRS",
+            "Premium_SSD_LRS",
+            "Premium_SSD_ZRS",
+            "Premium_SSD_v2_LRS"
+          ],
+          "x-ms-enum": {
+            "name": "DataDiskType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "KafkaConnectivityEndpoints": {
+      "type": "object",
+      "description": "Kafka bootstrap server and broker related connectivity endpoints.",
+      "properties": {
+        "bootstrapServerEndpoint": {
+          "type": "string",
+          "description": "bootstrap server connectivity endpoint."
+        },
+        "brokerEndpoints": {
+          "description": "Kafka broker endpoint list.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ClusterResourceProperties": {
+      "type": "object",
+      "required": [
+        "clusterType",
+        "computeProfile",
+        "clusterProfile"
+      ],
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Succeeded",
+            "Canceled",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningStatus",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "clusterType": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The type of cluster.",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9]{0,31}$"
+        },
+        "deploymentId": {
+          "type": "string",
+          "description": "A unique id generated by the RP to identify the resource.",
+          "example": "45cd32aead6e4a91b079a0cdbfac8c36",
+          "readOnly": true
+        },
+        "computeProfile": {
+          "description": "The compute profile.",
+          "$ref": "#/definitions/ComputeProfile"
+        },
+        "clusterProfile": {
+          "$ref": "#/definitions/ClusterProfile"
+        },
+        "status": {
+          "type": "string",
+          "description": "Business status of the resource.",
+          "example": "Running",
+          "readOnly": true
+        }
+      },
+      "description": "Cluster resource properties."
+    },
+    "ComputeProfile": {
+      "type": "object",
+      "description": "The compute profile.",
+      "required": [
+        "nodes"
+      ],
+      "properties": {
+        "nodes": {
+          "type": "array",
+          "description": "The nodes definitions.",
+          "items": {
+            "$ref": "#/definitions/NodeProfile"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "NodeProfile": {
+      "type": "object",
+      "description": "The node profile.",
+      "required": [
+        "type",
+        "vmSize",
+        "count"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The node type.",
+          "pattern": "^(head|Head|HEAD|worker|Worker|WORKER)$"
+        },
+        "vmSize": {
+          "type": "string",
+          "description": "The virtual machine SKU.",
+          "pattern": "^[a-zA-Z0-9_\\-]{0,256}$"
+        },
+        "count": {
+          "description": "The number of virtual machines.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1
+        }
+      }
+    },
+    "Cluster": {
+      "type": "object",
+      "description": "The cluster.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties. Define cluster specific properties.",
+          "$ref": "#/definitions/ClusterResourceProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "SystemData of cluster.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ClusterPatch": {
+      "type": "object",
+      "description": "The patch for a cluster.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Define cluster patch specific properties.",
+          "$ref": "#/definitions/ClusterPatchProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        }
+      }
+    },
+    "ClusterPatchProperties": {
+      "type": "object",
+      "description": "Cluster resource patch data.",
+      "properties": {
+        "clusterProfile": {
+          "$ref": "#/definitions/UpdatableClusterProfile"
+        }
+      }
+    },
+    "UpdatableClusterProfile": {
+      "type": "object",
+      "properties": {
+        "serviceConfigsProfiles": {
+          "type": "array",
+          "description": "The service configs profiles.",
+          "items": {
+            "$ref": "#/definitions/ClusterServiceConfigsProfile"
+          },
+          "x-ms-identifiers": []
+        },
+        "sshProfile": {
+          "$ref": "#/definitions/SshProfile"
+        },
+        "autoscaleProfile": {
+          "$ref": "#/definitions/AutoscaleProfile"
+        },
+        "authorizationProfile": {
+          "$ref": "#/definitions/AuthorizationProfile"
+        },
+        "logAnalyticsProfile": {
+          "$ref": "#/definitions/ClusterLogAnalyticsProfile"
+        },
+        "prometheusProfile": {
+          "$ref": "#/definitions/ClusterPrometheusProfile"
+        },
+        "rangerPluginProfile": {
+          "$ref": "#/definitions/ClusterRangerPluginProfile"
+        },
+        "rangerProfile": {
+          "$ref": "#/definitions/RangerProfile"
+        },
+        "scriptActionProfiles": {
+          "$ref": "#/definitions/ScriptActionProfiles"
+        }
+      },
+      "description": "Cluster resource patch properties."
+    },
+    "ClusterResizeData": {
+      "type": "object",
+      "description": "The parameters for resizing a cluster.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Sets the properties. Define cluster resize specific properties.",
+          "$ref": "#/definitions/ClusterResizeProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ClusterResizeProperties": {
+      "type": "object",
+      "description": "The properties for resizing a cluster.",
+      "required": [
+        "targetWorkerNodeCount"
+      ],
+      "properties": {
+        "targetWorkerNodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Target node count of worker node."
+        }
+      }
+    },
+    "ServiceConfigListResult": {
+      "type": "object",
+      "description": "Cluster instance service configs api response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Cluster instance service config array.",
+          "items": {
+            "$ref": "#/definitions/ServiceConfigResult"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link (url) to the next page of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "ServiceConfigResult": {
+      "type": "object",
+      "description": "Cluster instance service config.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Cluster instance service config properties.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ServiceConfigListResultProperties"
+            }
+          ]
+        }
+      }
+    },
+    "ServiceConfigListResultProperties": {
+      "type": "object",
+      "properties": {
+        "serviceName": {
+          "type": "string",
+          "description": "Service Config Name."
+        },
+        "fileName": {
+          "type": "string",
+          "description": "File Name."
+        },
+        "content": {
+          "type": "string",
+          "description": "Content in the service config file."
+        },
+        "componentName": {
+          "type": "string",
+          "description": "Component Name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Config type."
+        },
+        "path": {
+          "type": "string",
+          "description": "Config file path."
+        },
+        "customKeys": {
+          "type": "object",
+          "description": "The custom keys.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "defaultKeys": {
+          "type": "object",
+          "description": "The default keys.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ServiceConfigListResultValueEntity"
+          }
+        }
+      },
+      "required": [
+        "serviceName",
+        "componentName",
+        "fileName"
+      ],
+      "description": "Service config response."
+    },
+    "ServiceConfigListResultValueEntity": {
+      "type": "object",
+      "description": "Default config details.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Config value."
+        },
+        "description": {
+          "type": "string",
+          "description": "Config description."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ClusterInstanceViewsResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "items": {
+            "$ref": "#/definitions/ClusterInstanceViewResult"
+          },
+          "type": "array",
+          "description": "Cluster instance view array.",
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "description": "The instance view of a HDInsight Cluster."
+    },
+    "ClusterInstanceViewResult": {
+      "type": "object",
+      "description": "Cluster Instance View.",
+      "required": [
+        "name",
+        "properties"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the instance view."
+        },
+        "properties": {
+          "description": "Properties of the instance view.",
+          "x-ms-client-flatten": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/ClusterInstanceViewProperties"
+            }
+          ]
+        }
+      }
+    },
+    "ClusterInstanceViewProperties": {
+      "type": "object",
+      "description": "Cluster Instance View Properties.",
+      "required": [
+        "status",
+        "serviceStatuses"
+      ],
+      "properties": {
+        "status": {
+          "description": "Status of the instance view.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ClusterInstanceViewStatus"
+            }
+          ]
+        },
+        "serviceStatuses": {
+          "type": "array",
+          "description": "List of statuses of relevant services that make up the HDInsight on AKS cluster to surface to the customer.",
+          "items": {
+            "$ref": "#/definitions/ServiceStatus"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ClusterInstanceViewStatus": {
+      "type": "object",
+      "description": "Status of the instance view.",
+      "required": [
+        "ready"
+      ],
+      "properties": {
+        "ready": {
+          "type": "string",
+          "description": "The cluster ready status"
+        },
+        "reason": {
+          "type": "string",
+          "description": "The status reason."
+        },
+        "message": {
+          "type": "string",
+          "description": "The additional message."
+        }
+      }
+    },
+    "ServiceStatus": {
+      "type": "object",
+      "description": "Describes the status of a service of a HDInsight on AKS cluster.",
+      "required": [
+        "kind",
+        "ready"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Kind of the service. E.g. \"Zookeeper\"."
+        },
+        "ready": {
+          "type": "string",
+          "description": "Indicates if the service is ready / healthy. Values can be \"true\", \"false\", \"unknown\" or anything else."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error if any."
+        }
+      }
+    },
+    "NameAvailabilityParameters": {
+      "description": "Details of check name availability request body.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name for checking availability."
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type in Microsoft.HDInsight."
+        }
+      }
+    },
+    "NameAvailabilityResult": {
+      "description": "Result of check name availability.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Indicator of availability of the Microsoft.HDInsight resource name."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason of unavailability."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message of unavailability."
+        }
+      }
+    },
+    "ClusterPoolVersionPattern": {
+      "type": "string",
+      "description": "Cluster pool version is a 2-part version.",
+      "example": "1.2",
+      "pattern": "^(0|[1-9][0-9]{0,18})\\.(0|[1-9][0-9]{0,18})$"
+    },
+    "ClusterPoolVersionsListResult": {
+      "type": "object",
+      "description": "Represents a list of cluster pool versions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of cluster pool versions.",
+          "items": {
+            "$ref": "#/definitions/ClusterPoolVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link (url) to the next page of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterPoolVersion": {
+      "type": "object",
+      "description": "Available cluster pool version.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Cluster pool version properties.",
+          "$ref": "#/definitions/ClusterPoolVersionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ClusterPoolVersionProperties": {
+      "type": "object",
+      "description": "Cluster pool version properties.",
+      "properties": {
+        "clusterPoolVersion": {
+          "$ref": "#/definitions/ClusterPoolVersionPattern"
+        },
+        "aksVersion": {
+          "type": "string",
+          "description": "AKS version.",
+          "example": "1.24"
+        },
+        "isPreview": {
+          "type": "boolean",
+          "description": "Indicate if this version is in preview or not.",
+          "default": false
+        }
+      }
+    },
+    "ThreePartVersionPattern": {
+      "type": "string",
+      "description": "Version with three part.",
+      "example": "1.0.4",
+      "pattern": "^(0|[1-9][0-9]{0,18})\\.(0|[1-9][0-9]{0,18})\\.(0|[1-9][0-9]{0,18})$"
+    },
+    "ThreeOrFourPartVersionPattern": {
+      "type": "string",
+      "description": "Version with 3/4 part.",
+      "example": "1.0.4",
+      "pattern": "^(0|[1-9][0-9]{0,18})\\.(0|[1-9][0-9]{0,18})\\.(0|[1-9][0-9]{0,18})(?:\\.(0|[1-9][0-9]{0,18}))?$"
+    },
+    "ClusterVersionsListResult": {
+      "type": "object",
+      "description": "Represents a list of cluster versions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of cluster versions.",
+          "items": {
+            "$ref": "#/definitions/ClusterVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link (url) to the next page of results.",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterVersion": {
+      "type": "object",
+      "description": "Available cluster version.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Cluster version properties.",
+          "$ref": "#/definitions/ClusterVersionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ClusterVersionProperties": {
+      "type": "object",
+      "description": "Cluster version properties.",
+      "properties": {
+        "clusterType": {
+          "type": "string",
+          "description": "The type of cluster.",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9]{0,31}$"
+        },
+        "clusterVersion": {
+          "$ref": "#/definitions/ThreePartVersionPattern"
+        },
+        "ossVersion": {
+          "$ref": "#/definitions/ThreePartVersionPattern"
+        },
+        "clusterPoolVersion": {
+          "type": "string",
+          "description": "The two part cluster pool version. If the cluster version is before cluster pool version on-board, the return value will be empty string",
+          "example": "1.0"
+        },
+        "isPreview": {
+          "type": "boolean",
+          "description": "Indicate if this version is in preview or not.",
+          "default": false
+        },
+        "components": {
+          "$ref": "#/definitions/ClusterComponents"
+        }
+      }
+    },
+    "ClusterComponents": {
+      "type": "array",
+      "description": "Component list of this cluster type and version.",
+      "readOnly": true,
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-identifiers": [],
+      "example": [
+        {
+          "name": "HDFS",
+          "version": "1.2.3"
+        },
+        {
+          "name": "HIVE",
+          "version": "1.2.3"
+        }
+      ]
+    },
+    "ClusterJobList": {
+      "description": "Collection of cluster job.",
+      "type": "object",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of cluster job.",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/ClusterJob"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        }
+      }
+    },
+    "ClusterJob": {
+      "description": "Cluster job.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      }
+    },
+    "ClusterJobProperties": {
+      "description": "Properties of cluster job.",
+      "type": "object",
+      "properties": {
+        "jobType": {
+          "description": "Type of cluster job.",
+          "enum": [
+            "FlinkJob"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "jobType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "jobType",
+      "required": [
+        "jobType"
+      ]
+    },
+    "FlinkJobProperties": {
+      "description": "Properties of flink job.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      ],
+      "properties": {
+        "runId": {
+          "description": "Run id of job",
+          "type": "string"
+        },
+        "jobName": {
+          "description": "Name of job",
+          "type": "string"
+        },
+        "jobJarDirectory": {
+          "description": "A string property that specifies the directory where the job JAR is located.",
+          "type": "string"
+        },
+        "jarName": {
+          "description": "A string property that represents the name of the job JAR.",
+          "type": "string"
+        },
+        "entryClass": {
+          "description": "A string property that specifies the entry class for the Flink job.",
+          "type": "string"
+        },
+        "args": {
+          "description": "A string property representing additional JVM arguments for the Flink job. It should be space separated value.",
+          "type": "string"
+        },
+        "savePointName": {
+          "description": "A string property that represents the name of the savepoint for the Flink job",
+          "type": "string"
+        },
+        "action": {
+          "description": "A string property that indicates the action to be performed on the Flink job. It can have one of the following enum values => NEW, UPDATE, STATELESS_UPDATE, STOP, START, CANCEL, SAVEPOINT, LIST_SAVEPOINT, or DELETE.",
+          "type": "string",
+          "enum": [
+            "NEW",
+            "UPDATE",
+            "STATELESS_UPDATE",
+            "STOP",
+            "START",
+            "CANCEL",
+            "SAVEPOINT",
+            "LIST_SAVEPOINT",
+            "DELETE",
+            "LAST_STATE_UPDATE",
+            "RE_LAUNCH"
+          ],
+          "x-ms-enum": {
+            "name": "action",
+            "modelAsString": true
+          }
+        },
+        "flinkConfiguration": {
+          "description": "Additional properties used to configure Flink jobs. It allows users to set properties such as parallelism and jobSavePointDirectory. It accepts additional key-value pairs as properties, where the keys are strings and the values are strings as well.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "jobId": {
+          "description": "Unique id for identifying a job",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Status of job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "jobOutput": {
+          "description": "Output of job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "actionResult": {
+          "description": "Action result of job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastSavePoint": {
+          "description": "The last savepoint.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-discriminator-value": "FlinkJob"
+    },
+    "ClusterPoolAvailableUpgradeList": {
+      "type": "object",
+      "description": "collection of cluster pool available upgrade.",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of cluster pool available upgrade.",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/ClusterPoolAvailableUpgrade"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        }
+      }
+    },
+    "ClusterPoolAvailableUpgrade": {
+      "type": "object",
+      "description": "Cluster pool available upgrade.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties. Define cluster pool upgrade specific properties.",
+          "$ref": "#/definitions/ClusterPoolAvailableUpgradeProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ClusterPoolAvailableUpgradeProperties": {
+      "type": "object",
+      "description": "Cluster pool available upgrade properties.",
+      "properties": {
+        "upgradeType": {
+          "description": "Type of upgrade.",
+          "enum": [
+            "AKSPatchUpgrade",
+            "NodeOsUpgrade"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "clusterPoolAvailableUpgradeType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "upgradeType",
+      "required": [
+        "upgradeType"
+      ]
+    },
+    "ClusterPoolAvailableUpgradeAksPatchUpgradeProperties": {
+      "type": "object",
+      "description": "Cluster pool available AKS patch version upgrade.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterPoolAvailableUpgradeProperties"
+        }
+      ],
+      "properties": {
+        "currentVersion": {
+          "description": "Current AKS version.",
+          "type": "string"
+        },
+        "currentVersionStatus": {
+          "description": "Current AKS version's status: whether it is deprecated or supported",
+          "enum": [
+            "Deprecated",
+            "Supported"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "currentClusterPoolAksVersionStatus",
+            "modelAsString": true
+          }
+        },
+        "latestVersion": {
+          "description": "Latest AKS patch version.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AKSPatchUpgrade"
+    },
+    "ClusterPoolAvailableUpgradeNodeOsUpgradeProperties": {
+      "type": "object",
+      "description": "Cluster pool available node OS update.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterPoolAvailableUpgradeProperties"
+        }
+      ],
+      "properties": {
+        "latestVersion": {
+          "description": "The latest node OS version.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "NodeOsUpgrade"
+    },
+    "ClusterAvailableUpgradeList": {
+      "type": "object",
+      "description": "Collection of cluster available upgrade.",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Collection of Cluster available upgrade.",
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/ClusterAvailableUpgrade"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The URL of next result page.",
+          "type": "string"
+        }
+      }
+    },
+    "ClusterAvailableUpgrade": {
+      "type": "object",
+      "description": "Cluster available upgrade.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Gets or sets the properties. Define cluster upgrade specific properties.",
+          "$ref": "#/definitions/ClusterAvailableUpgradeProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ClusterAvailableUpgradeProperties": {
+      "type": "object",
+      "description": "Cluster available upgrade properties.",
+      "properties": {
+        "upgradeType": {
+          "description": "Type of upgrade.",
+          "enum": [
+            "AKSPatchUpgrade",
+            "HotfixUpgrade"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "clusterAvailableUpgradeType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "upgradeType",
+      "required": [
+        "upgradeType"
+      ]
+    },
+    "ClusterAvailableUpgradeAksPatchUpgradeProperties": {
+      "type": "object",
+      "description": "Cluster available AKS patch version upgrade.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterAvailableUpgradeProperties"
+        }
+      ],
+      "properties": {
+        "currentVersion": {
+          "description": "Current node pool version.",
+          "type": "string"
+        },
+        "currentVersionStatus": {
+          "description": "Current AKS version's status: whether it is deprecated or supported",
+          "enum": [
+            "Deprecated",
+            "Supported"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "currentClusterAksVersionStatus",
+            "modelAsString": true
+          }
+        },
+        "latestVersion": {
+          "description": "Latest available version, which should be equal to AKS control plane version if it's not deprecated.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AKSPatchUpgrade"
+    },
+    "ClusterAvailableUpgradeHotfixUpgradeProperties": {
+      "type": "object",
+      "description": "Cluster available hotfix version upgrade.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterAvailableUpgradeProperties"
+        }
+      ],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Hotfix version upgrade description."
+        },
+        "sourceOssVersion": {
+          "description": "Source OSS version of current cluster component.",
+          "type": "string"
+        },
+        "sourceClusterVersion": {
+          "description": "Source cluster version of current cluster component.",
+          "type": "string"
+        },
+        "sourceBuildNumber": {
+          "description": "Source build number of current cluster component.",
+          "type": "string"
+        },
+        "targetOssVersion": {
+          "description": "Target OSS version of component to be upgraded.",
+          "type": "string"
+        },
+        "targetClusterVersion": {
+          "description": "Target cluster version of component to be upgraded.",
+          "type": "string"
+        },
+        "targetBuildNumber": {
+          "description": "Target build number of component to be upgraded.",
+          "type": "string"
+        },
+        "componentName": {
+          "description": "Name of component to be upgraded.",
+          "type": "string"
+        },
+        "severity": {
+          "description": "Severity of this upgrade.",
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Severity",
+            "modelAsString": true
+          }
+        },
+        "extendedProperties": {
+          "description": "Extended properties of current available upgrade version",
+          "type": "string"
+        },
+        "createdTime": {
+          "description": "Created time of current available upgrade version",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "x-ms-discriminator-value": "HotfixUpgrade"
+    },
+    "ClusterPoolUpgrade": {
+      "description": "Cluster Pool Upgrade.",
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterPoolUpgradeProperties"
+        }
+      }
+    },
+    "ClusterPoolUpgradeProperties": {
+      "description": "Properties of upgrading cluster pool.",
+      "type": "object",
+      "properties": {
+        "upgradeType": {
+          "description": "Type of upgrade.",
+          "enum": [
+            "AKSPatchUpgrade",
+            "NodeOsUpgrade"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "clusterPoolUpgradeType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "upgradeType",
+      "required": [
+        "upgradeType"
+      ]
+    },
+    "ClusterPoolAKSPatchVersionUpgradeProperties": {
+      "description": "Properties of upgrading cluster pool's AKS patch version.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterPoolUpgradeProperties"
+        }
+      ],
+      "properties": {
+        "upgradeClusterPool": {
+          "description": "whether upgrade cluster pool or not. If it's true, upgradeAllClusterNodes should be false.",
+          "type": "boolean",
+          "default": false
+        },
+        "upgradeAllClusterNodes": {
+          "description": "whether upgrade all clusters' nodes. If it's true, upgradeClusterPool should be false.",
+          "type": "boolean",
+          "default": false
+        },
+        "targetAksVersion": {
+          "description": "Target AKS version. When it's not set, latest version will be used. When upgradeClusterPool is true and upgradeAllClusterNodes is false, target version should be greater or equal to current version. When upgradeClusterPool is false and upgradeAllClusterNodes is true, target version should be equal to AKS version of cluster pool.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AKSPatchUpgrade"
+    },
+    "ClusterPoolNodeOsImageUpdateProperties": {
+      "description": "Properties of upgrading cluster pool's AKS patch version.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterPoolUpgradeProperties"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "NodeOsUpgrade"
+    },
+    "ClusterUpgrade": {
+      "description": "Cluster Upgrade.",
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterUpgradeProperties"
+        }
+      }
+    },
+    "ClusterUpgradeProperties": {
+      "description": "Properties of upgrading cluster.",
+      "type": "object",
+      "properties": {
+        "upgradeType": {
+          "description": "Type of upgrade.",
+          "enum": [
+            "AKSPatchUpgrade",
+            "HotfixUpgrade"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "clusterUpgradeType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "upgradeType",
+      "required": [
+        "upgradeType"
+      ]
+    },
+    "ClusterAKSPatchVersionUpgradeProperties": {
+      "description": "Properties of upgrading cluster's AKS patch version.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterUpgradeProperties"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "AKSPatchUpgrade"
+    },
+    "ClusterHotfixUpgradeProperties": {
+      "description": "Properties of upgrading cluster's hotfix.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterUpgradeProperties"
+        }
+      ],
+      "properties": {
+        "targetOssVersion": {
+          "description": "Target OSS version of component to be upgraded.",
+          "type": "string"
+        },
+        "targetClusterVersion": {
+          "description": "Target cluster version of component to be upgraded.",
+          "type": "string"
+        },
+        "targetBuildNumber": {
+          "description": "Target build number of component to be upgraded.",
+          "type": "string"
+        },
+        "componentName": {
+          "description": "Name of component to be upgraded.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "HotfixUpgrade"
+    }
+  },
+  "parameters": {
+    "ClusterPoolNameParameter": {
+      "name": "clusterPoolName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the cluster pool.",
+      "x-ms-parameter-location": "method"
+    },
+    "ClusterNameParameter": {
+      "name": "clusterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the HDInsight cluster.",
+      "x-ms-parameter-location": "method"
+    },
+    "ClusterTypeNameParameter": {
+      "name": "clusterTypeName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the HDInsight on AKS cluster type.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

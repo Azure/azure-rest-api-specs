@@ -1,9 +1,11 @@
 import "@typespec/http";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
@@ -12,10 +14,16 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service({
   title: "Managed DevOps Infrastructure",
-  version: "2023-12-13-preview",
 })
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@versioned(Versions)
 namespace Microsoft.DevOpsInfrastructure;
+
+/** Api versions */
+enum Versions {
+  /** 2023-12-13-preview preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  `2023-12-13-preview`,
+}
 
 model Pool is TrackedResource<PoolProperties> {
   @key("poolName")
@@ -30,6 +38,7 @@ model Pool is TrackedResource<PoolProperties> {
 
 @doc("Pool properties")
 model PoolProperties {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing SDK"
   @doc("The status of the current operation.")
   provisioningState?: ProvisioningState;
 
@@ -61,6 +70,7 @@ model GitHubOrganizationProfile extends OrganizationProfile {
   kind: "GitHub";
 
   @doc("The list of GitHub organizations/repositories the pool should be present in.")
+  @extension("x-ms-identifiers", [])
   organizations: GitHubOrganization[];
 }
 @doc("Defines a GitHub organization")
@@ -78,6 +88,7 @@ model AzureDevOpsOrganizationProfile extends OrganizationProfile {
   kind: "AzureDevOps";
 
   @doc("The list of Azure DevOps organizations the pool should be present in.")
+  @extension("x-ms-identifiers", [])
   organizations: Organization[];
 
   @doc("The type of permission which determines which accounts are admins on the Azure DevOps pool.")
@@ -106,15 +117,17 @@ model AzureDevOpsPermissionProfile {
   groups?: string[];
 }
 @doc("Determines who has admin permissions to the Azure DevOps pool.")
-enum AzureDevOpsPermissionType {
+union AzureDevOpsPermissionType {
+  string,
+
   @doc("Pool will inherit permissions from the project or organization.")
-  Inherit,
+  "Inherit",
 
   @doc("Only the pool creator will be an admin of the pool.")
-  CreatorOnly,
+  "CreatorOnly",
 
   @doc("Only the specified accounts will be admins of the pool.")
-  SpecificAccounts,
+  "SpecificAccounts",
 }
 
 @doc("Defines the type of fabric the agent will run on.")
@@ -129,6 +142,7 @@ model VmssFabricProfile extends FabricProfile {
   sku: DevOpsAzureSku;
 
   @doc("The VM images of the machines in the pool.")
+  @extension("x-ms-identifiers", [])
   images: PoolImage[];
 
   @doc("The OS profile of the machines in the pool.")
@@ -154,15 +168,17 @@ model StorageProfile {
 }
 
 @doc("The storage account type of the OS disk.")
-enum OsDiskStorageAccountType {
+union OsDiskStorageAccountType {
+  string,
+
   @doc("Standard OS disk type.")
-  Standard,
+  "Standard",
 
   @doc("Premium OS disk type.")
-  Premium,
+  "Premium",
 
   @doc("Standard SSD OS disk type.")
-  StandardSSD,
+  "StandardSSD",
 }
 
 @doc("The VM image of the machines in the pool.")
@@ -196,12 +212,14 @@ model SecretsManagementSettings {
   keyExportable: boolean;
 }
 @doc("Determines how the service should be run.")
-enum LogonType {
+union LogonType {
+  string,
+
   @doc("Run as a service.")
-  Service,
+  "Service",
 
   @doc("Run in interactive mode.")
-  Interactive,
+  "Interactive",
 }
 
 @doc("The network profile of the machines in the pool.")
@@ -233,27 +251,29 @@ model Stateful extends AgentProfile {
 model ResourcePredictions {}
 
 @doc("The status of the current operation.")
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   /** Represents a succeeded operation. */
-  Succeeded,
+  Succeeded: "Succeeded",
 
   /** Represents a failed operation. */
-  Failed,
+  Failed: "Failed",
 
   /** Represents a canceled operation. */
-  Canceled,
+  Canceled: "Canceled",
 
   /** Represents a pending operation. */
-  Provisioning,
+  Provisioning: "Provisioning",
 
   /** Represents a pending operation. */
-  Updating,
+  Updating: "Updating",
 
   /** Represents an operation under deletion. */
-  Deleting,
+  Deleting: "Deleting",
 
   /** Represents an accepted operation. */
-  Accepted,
+  Accepted: "Accepted",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

@@ -15,6 +15,11 @@ module-name: sdk/resourcemanager/hardwaresecuritymodules/armhardwaresecuritymodu
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
+directive:
+- from: dedicatedhsm.json
+  where: $.definitions
+  transform: >
+    $.SystemData["x-ms-client-name"] = "DedicatedHsmSystemData";
 ```
 
 ### Go multi-api
