@@ -1,16 +1,20 @@
 {
+    "operationId": "Assets_GetAssetsExport",
+    "title": "Assets_GetAssetsExport",
     "parameters": {
         "api-version": "2024-03-01-preview",
         "subscriptionId": "00000000-0000-0000-0000-000000000000",
         "resourceGroupName": "dummyrg",
         "workspaceName": "ThisisaWorkspace",
-        "fileName": "ThisisaFileName",
-        "filter": "state%20%3D%20%22confirmed%22",
-        "orderBy": "name",
-        "columns": [
-            "asset",
-            "name"
-        ]
+        "body": {
+            "fileName": "ThisisaFileName",
+            "filter": "state%20%3D%20%22confirmed%22",
+            "orderBy": "name",
+            "columns": [
+                "asset",
+                "name"
+            ]
+        }
     },
     "responses": {
         "200": {

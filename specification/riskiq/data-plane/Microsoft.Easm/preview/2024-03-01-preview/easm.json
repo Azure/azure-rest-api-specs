@@ -253,14 +253,6 @@
             "description": "The system generated unique id for the resource.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AssetResource"
-            }
           }
         ],
         "responses": {
@@ -378,18 +370,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "fileName": {
-                  "type": "string"
-                },
-                "columns": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
+              "$ref": "#/definitions/AssetExportParameter"
             }
           }
         ],
@@ -442,29 +423,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "deltaDetailType": {
-                  "$ref": "#/definitions/DeltaDetailType"
-                },
-                "daysPrior": {
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "kind": {
-                  "$ref": "#/definitions/GlobalAssetType"
-                },
-                "date": {
-                  "type": "string",
-                  "description": "expected format to be: yyyy-MM-dd"
-                }
-              },
-              "required": [
-                "deltaDetailType",
-                "daysPrior",
-                "kind",
-                "date"
-              ]
+              "$ref": "#/definitions/DeltaDetailsParameter"
             }
           }
         ],
@@ -514,21 +473,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "daysPrior": {
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "date": {
-                  "type": "string",
-                  "description": "expected format to be: yyyy-MM-dd"
-                }
-              },
-              "required": [
-                "daysPrior",
-                "date"
-              ]
+              "$ref": "#/definitions/DeltaSummaryParameter"
             }
           }
         ],
@@ -1991,7 +1936,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/Task"
             }
           },
           "default": {
@@ -2233,13 +2178,16 @@
     },
     "AssetChainKindSummaryResponse": {
       "type": "object",
+      "description": "A list of asset chain summaries per asset kind",
       "properties": {
         "kind": {
-          "$ref": "#/definitions/AssetKind"
+          "$ref": "#/definitions/AssetKind",
+          "description": "The kind of asset"
         },
         "affectedCount": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "description": "The amount of assets affected for a given asset kind"
         }
       },
       "required": [
@@ -2249,6 +2197,7 @@
     },
     "AssetChainRequest": {
       "type": "object",
+      "description": "AssetChainRequest containing information needed for the retrieval of the asset chain summary.",
       "properties": {
         "assetChainSource": {
           "$ref": "#/definitions/AssetChainSource",
@@ -2261,11 +2210,7 @@
             "type": "string"
           }
         }
-      },
-      "required": [
-        "assetChainSource",
-        "sourceIds"
-      ]
+      }
     },
     "AssetChainSource": {
       "type": "string",
@@ -2281,6 +2226,7 @@
     },
     "AssetChainSummaryResponse": {
       "type": "object",
+      "description": "Response for the asset chain summary.",
       "properties": {
         "affectedAssetsSummary": {
           "type": "array",
@@ -2308,9 +2254,23 @@
       },
       "required": [
         "affectedAssetsSummary",
-        "affectedGroupsSummary",
-        "errors"
+        "affectedGroupsSummary"
       ]
+    },
+    "AssetExportParameter": {
+      "type": "object",
+      "description": "Parameters for asset export",
+      "properties": {
+        "fileName": {
+          "type": "string"
+        },
+        "columns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     },
     "AssetKind": {
       "type": "string",
@@ -2433,33 +2393,33 @@
     "AssetResponseType": {
       "type": "string",
       "enum": [
-        "ID",
-        "STANDARD",
-        "FULL",
-        "REDUCED"
+        "id",
+        "standard",
+        "full",
+        "reduced"
       ],
       "x-ms-enum": {
         "name": "AssetResponseType",
         "modelAsString": true,
         "values": [
           {
-            "name": "ID",
-            "value": "ID",
+            "name": "id",
+            "value": "id",
             "description": "Return only the asset id."
           },
           {
-            "name": "STANDARD",
-            "value": "STANDARD",
+            "name": "standard",
+            "value": "standard",
             "description": "Return the standard set of asset fields."
           },
           {
-            "name": "FULL",
-            "value": "FULL",
+            "name": "full",
+            "value": "full",
             "description": "Return the full set of asset fields."
           },
           {
-            "name": "REDUCED",
-            "value": "REDUCED",
+            "name": "reduced",
+            "value": "reduced",
             "description": "Return a reduced set of fields."
           }
         ]
@@ -2892,6 +2852,7 @@
     },
     "CisaCveResponse": {
       "type": "object",
+      "description": "cisa cve in a given workspace.",
       "properties": {
         "cveID": {
           "type": "string",
@@ -3308,12 +3269,32 @@
     "DeltaDetailType": {
       "type": "string",
       "enum": [
-        "ADDED",
-        "REMOVED"
+        "added",
+        "removed"
       ],
       "x-ms-enum": {
         "name": "DeltaDetailType",
         "modelAsString": true
+      }
+    },
+    "DeltaDetailsParameter": {
+      "type": "object",
+      "description": "Parameters for getting delta details",
+      "properties": {
+        "deltaDetailType": {
+          "$ref": "#/definitions/DeltaDetailType"
+        },
+        "daysPrior": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "kind": {
+          "$ref": "#/definitions/GlobalAssetType"
+        },
+        "date": {
+          "type": "string",
+          "description": "expected format to be: yyyy-MM-dd"
+        }
       }
     },
     "DeltaPageResponse": {
@@ -3411,6 +3392,19 @@
         "updatedAt",
         "state"
       ]
+    },
+    "DeltaSummaryParameter": {
+      "type": "object",
+      "properties": {
+        "daysPrior": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "date": {
+          "type": "string",
+          "description": "expected format to be: yyyy-MM-dd"
+        }
+      }
     },
     "DeltaSummaryResponse": {
       "type": "object",
@@ -3677,15 +3671,19 @@
     },
     "DiscoGroupSummaryResponse": {
       "type": "object",
+      "description": "A list of disco group summaries",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "The system generated unique id for the resource."
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "The caller provided unique name for the resource."
         },
         "displayName": {
-          "type": "string"
+          "type": "string",
+          "description": "The name that can be used for display purposes."
         }
       },
       "required": [
@@ -4132,17 +4130,17 @@
     "GlobalAssetType": {
       "type": "string",
       "enum": [
-        "PAGE",
-        "RESOURCE",
-        "MAIL_SERVER",
-        "NAME_SERVER",
-        "HOST",
-        "DOMAIN",
-        "IP_ADDRESS",
-        "IP_BLOCK",
-        "AS",
-        "CONTACT",
-        "SSL_CERT"
+        "page",
+        "resource",
+        "mailServer",
+        "nameServer",
+        "host",
+        "domain",
+        "ipAddress",
+        "ipBlock",
+        "as",
+        "contact",
+        "sslCert"
       ],
       "x-ms-enum": {
         "name": "GlobalAssetType",
@@ -4152,15 +4150,15 @@
     "GlobalInventoryState": {
       "type": "string",
       "enum": [
-        "CANDIDATE",
-        "CANDIDATE_INVESTIGATE",
-        "CONFIRMED",
-        "ASSOCIATED",
-        "ASSOCIATED_PARTNER",
-        "ASSOCIATED_THIRDPARTY",
-        "ARCHIVED",
-        "DISMISSED",
-        "AUTOCONFIRMED"
+        "candidate",
+        "candidateInvestigate",
+        "confirmed",
+        "associated",
+        "associatedPartner",
+        "associatedThirdParty",
+        "archived",
+        "dismissed",
+        "autoconfirmed"
       ],
       "x-ms-enum": {
         "name": "GlobalInventoryState",
@@ -5120,24 +5118,11 @@
           "format": "int64"
         },
         "prioritySummary": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "key": {
-                "$ref": "#/definitions/ObservationPriority"
-              },
-              "value": {
-                "type": "integer",
-                "format": "int32"
-              }
-            },
-            "required": [
-              "key",
-              "value"
-            ]
-          },
-          "x-ms-identifiers": []
+          "type": "object",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          }
         },
         "value": {
           "type": "array",
@@ -5166,19 +5151,19 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "HIGH",
+            "name": "high",
             "value": 3
           },
           {
-            "name": "MEDIUM",
+            "name": "medium",
             "value": 2
           },
           {
-            "name": "LOW",
+            "name": "low",
             "value": 1
           },
           {
-            "name": "NONE",
+            "name": "none",
             "value": 0
           }
         ]
@@ -5217,8 +5202,8 @@
     "ObservationType": {
       "type": "string",
       "enum": [
-        "CVE",
-        "INSIGHT"
+        "cve",
+        "insight"
       ],
       "x-ms-enum": {
         "name": "ObservationType",
@@ -7046,33 +7031,33 @@
       "required": false,
       "type": "string",
       "enum": [
-        "ID",
-        "STANDARD",
-        "FULL",
-        "REDUCED"
+        "id",
+        "standard",
+        "full",
+        "reduced"
       ],
       "x-ms-enum": {
         "name": "AssetResponseType",
         "modelAsString": true,
         "values": [
           {
-            "name": "ID",
-            "value": "ID",
+            "name": "id",
+            "value": "id",
             "description": "Return only the asset id."
           },
           {
-            "name": "STANDARD",
-            "value": "STANDARD",
+            "name": "standard",
+            "value": "standard",
             "description": "Return the standard set of asset fields."
           },
           {
-            "name": "FULL",
-            "value": "FULL",
+            "name": "full",
+            "value": "full",
             "description": "Return the full set of asset fields."
           },
           {
-            "name": "REDUCED",
-            "value": "REDUCED",
+            "name": "reduced",
+            "value": "reduced",
             "description": "Return a reduced set of fields."
           }
         ]

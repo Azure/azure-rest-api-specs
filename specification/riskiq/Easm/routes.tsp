@@ -40,7 +40,7 @@ interface Assets {
   @action("dismissAssetChain")
   dismissAssetChain is Operations.ResourceAction<
     AssetResource,
-    AssetResource,
+    {},
     Task
   >;
 
@@ -48,8 +48,9 @@ interface Assets {
   @action("export")
   getAssetsExport is Operations.ResourceCollectionAction<
     AssetResource,
-    AssetsExportTrait,
-    Task
+    AssetExportParameter,
+    Task,
+    AssetsExportTrait
   >;
 
   @doc("Retrieve observations on an asset")
@@ -65,7 +66,8 @@ interface Assets {
   getDeltaDetails is Operations.ResourceCollectionAction<
     AssetResource,
     DeltaDetailsParameter,
-    DeltaPageResponse
+    DeltaPageResponse,
+    DeltaDetailsTrait
   >;
 
   @doc("Retrieve a list of deltas with overall summary changes for the provided time range.")
@@ -262,7 +264,7 @@ interface Tasks {
 
   @doc("Download a task.")
   @action("download")
-  downloadTask is Operations.ResourceAction<Task, {}, {}>;
+  downloadTask is Operations.ResourceAction<Task, {}, Task>;
 }
 
 @tag("CisaCves")

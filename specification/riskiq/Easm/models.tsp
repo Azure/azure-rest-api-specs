@@ -115,8 +115,6 @@ alias ObservationsParameters = {
 };
 
 alias AssetsExportTrait = {
-  fileName?: string;
-  columns?: string[];
   ...QueryParametersTrait<{
     ...FilterQueryParameter;
     ...OrderByParameter;
@@ -131,25 +129,11 @@ alias ObservationsTrait = {
   }>;
 };
 
-alias DeltaDetailsParameter = {
-  deltaDetailType: DeltaDetailType;
-  daysPrior: int32;
-  kind: GlobalAssetType;
-
-  @doc("expected format to be: yyyy-MM-dd")
-  date: string;
-
+alias DeltaDetailsTrait = {
   ...QueryParametersTrait<{
     ...SkipQueryParameter;
     ...MaxPageSizeQueryParameter;
   }>;
-};
-
-alias DeltaSummaryParameter = {
-  daysPrior: int32;
-
-  @doc("expected format to be: yyyy-MM-dd")
-  date: string;
 };
 
 alias CisaCveListTrait = {
@@ -1531,49 +1515,49 @@ enum ReportBillableAssetBreakdownKind {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 enum GlobalInventoryState {
-  CANDIDATE,
-  CANDIDATE_INVESTIGATE,
-  CONFIRMED,
-  ASSOCIATED,
-  ASSOCIATED_PARTNER,
-  ASSOCIATED_THIRDPARTY,
-  ARCHIVED,
-  DISMISSED,
-  AUTOCONFIRMED,
+  candidate,
+  candidateInvestigate,
+  confirmed,
+  associated,
+  associatedPartner,
+  associatedThirdParty,
+  archived,
+  dismissed,
+  autoconfirmed,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 enum AssetResponseType {
   @doc("Return only the asset id.")
-  ID,
+  id,
 
   @doc("Return the standard set of asset fields.")
-  STANDARD,
+  standard,
 
   @doc("Return the full set of asset fields.")
-  FULL,
+  full,
 
   @doc("Return a reduced set of fields.")
-  REDUCED,
+  reduced,
 }
 
 enum DeltaDetailType {
-  ADDED,
-  REMOVED,
+  added,
+  removed,
 }
 
 enum GlobalAssetType {
-  PAGE,
-  RESOURCE,
-  MAIL_SERVER,
-  NAME_SERVER,
-  HOST,
-  DOMAIN,
-  IP_ADDRESS,
-  IP_BLOCK,
-  AS,
-  CONTACT,
-  SSL_CERT,
+  page,
+  resource,
+  mailServer,
+  nameServer,
+  host,
+  domain,
+  ipAddress,
+  ipBlock,
+  as,
+  contact,
+  sslCert,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
@@ -1712,16 +1696,16 @@ enum SslCertAssetValidationType {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 enum ObservationType {
-  CVE,
-  INSIGHT,
+  cve,
+  insight,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 enum ObservationPriority {
-  HIGH: 3,
-  MEDIUM: 2,
-  LOW: 1,
-  NONE: 0,
+  high: 3,
+  medium: 2,
+  low: 1,
+  none: 0,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
@@ -1735,10 +1719,7 @@ model ObservationResponse {
 
 model ObservationPageResponse {
   totalElements: int64;
-  prioritySummary: Array<{
-    key: ObservationPriority;
-    value: int32;
-  }>;
+  prioritySummary: Record<int32>;
   value: ObservationResponse[];
 }
 
@@ -1950,10 +1931,10 @@ model CisaCveResponse {
 @doc("AssetChainRequest containing information needed for the retrieval of the asset chain summary.")
 model AssetChainRequest {
   @doc("Asset chain source.")
-  assetChainSource: AssetChainSource;
+  assetChainSource?: AssetChainSource;
 
   @doc("A collection of asset chain source ids.")
-  sourceIds: string[];
+  sourceIds?: string[];
 }
 
 @doc("Response for the asset chain summary.")
@@ -1965,13 +1946,14 @@ model AssetChainSummaryResponse {
   affectedGroupsSummary: DiscoGroupSummaryResponse[];
 
   @doc("The list of exceptions")
-  errors: ErrorResponse[];
+  errors?: ErrorResponse[];
 }
 
 @doc("A list of asset chain summaries per asset kind")
 model AssetChainKindSummaryResponse {
   @doc("The kind of asset")
   kind: AssetKind;
+
   @doc("The amount of assets affected for a given asset kind")
   affectedCount: int64;
 }
@@ -1980,8 +1962,34 @@ model AssetChainKindSummaryResponse {
 model DiscoGroupSummaryResponse {
   @doc("The system generated unique id for the resource.")
   id: string;
+
   @doc("The caller provided unique name for the resource.")
   name: string;
+
   @doc("The name that can be used for display purposes.")
   displayName: string;
+}
+
+@doc("Parameters for asset export")
+model AssetExportParameter {
+  fileName?: string;
+  columns?: string[];
+}
+
+@doc("Parameters for getting delta details")
+model DeltaDetailsParameter {
+  deltaDetailType?: DeltaDetailType;
+  daysPrior?: int32;
+  kind?: GlobalAssetType;
+
+  @doc("expected format to be: yyyy-MM-dd")
+  date?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+model DeltaSummaryParameter {
+  daysPrior?: int32;
+
+  @doc("expected format to be: yyyy-MM-dd")
+  date?: string;
 }
