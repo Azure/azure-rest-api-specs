@@ -10,7 +10,7 @@ using TypeSpec.Rest;
 model ApiVersion {
   @doc("Version identifier.")
   @key("versionName")
-  @visibility("read")
+  @visibility()
   @maxLength(50)
   name: string;
 

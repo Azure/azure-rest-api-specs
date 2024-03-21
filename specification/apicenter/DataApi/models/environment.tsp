@@ -7,7 +7,7 @@ using TypeSpec.Rest;
 model Environment {
   @doc("Environment identifier.")
   @key("environmentName")
-  @visibility("read")
+  @visibility()
   @maxLength(50)
   name: string;
 
@@ -28,8 +28,8 @@ model Environment {
   @doc("Onboarding information for this environment.")
   onboarding?: EnvironmentOnboardingModel;
 
-  @doc("The custom metadata defined for Environment entries.")
-  customProperties?: Record<string>;
+  @doc("The custom metadata defined for environment entities.")
+  customProperties?: {};
 }
 
 @doc("Environment Server")

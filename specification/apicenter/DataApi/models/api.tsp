@@ -8,7 +8,7 @@ model Api {
   @doc("The resource name.")
   @maxLength(50)
   @key("apiName")
-  @visibility("read")
+  @visibility()
   name: string;
 
   @doc("The name of the API.")
@@ -27,6 +27,7 @@ model Api {
   kind: ApiKind;
 
   @doc("Current lifecycle stage of the API.")
+  @visibility("read")
   lifecycleStage?: ApiLifecycleStage;
 
   @doc("Terms of service for the API.")
@@ -39,13 +40,14 @@ model Api {
   externalDocumentation?: ApiExternalDocumentation[];
 
   @doc("Points of contact for the API.")
-  contacts?: Array<ApiContact>;
+  contacts?: Array<Contact>;
 
-  @doc("The custom metadata defined for API entries.")
-  customProperties?: Record<string>;
+  @doc("The custom metadata defined for API entities.")
+  customProperties?: {};
 
   @doc("Last updated date and time.")
-  lastUpdated: utcDateTime;
+  @visibility("read")
+  lastUpdated?: utcDateTime;
 }
 
 @doc("Api External Documentation Model")
@@ -108,17 +110,17 @@ enum ApiLifecycleStage {
 }
 
 @doc("API contact information")
-model ApiContact {
+model Contact {
   @doc("Name of the contact.")
   @maxLength(100)
   name: string;
 
   @doc("URL for the contact.")
-  url: url;
+  url?: url;
 
   @doc("Email address for the contact.")
   @maxLength(100)
-  email: string;
+  email?: string;
 }
 
 @doc("API Terms of Service")

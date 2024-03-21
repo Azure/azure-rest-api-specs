@@ -8,7 +8,7 @@ using TypeSpec.Rest;
 model ApiDeployment {
   @doc("Deployment identifier.")
   @key("deploymentName")
-  @visibility("read")
+  @visibility()
   @maxLength(50)
   name: string;
 
@@ -26,8 +26,8 @@ model ApiDeployment {
   @doc("The server information of the API deployment.")
   server: ApiDeploymentServer;
 
-  @doc("The custom metadata defined for Deployment entries..")
-  customProperties?: Record<string>;
+  @doc("The custom metadata defined for API deployment entities.")
+  customProperties?: {};
 
   @doc("Indicates if this is currently recommended deployment.")
   recommended?: boolean;
