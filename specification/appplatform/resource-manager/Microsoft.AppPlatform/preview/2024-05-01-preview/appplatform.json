@@ -15933,7 +15933,15 @@
       "properties": {
         "triggerType": {
           "description": "Type of job trigger",
-          "type": "string"
+          "enum": [
+            "Manual"
+          ],
+          "type": "string",
+          "default": "Manual",
+          "x-ms-enum": {
+            "name": "TriggerType",
+            "modelAsString": true
+          }
         }
       },
       "discriminator": "triggerType"
@@ -16063,7 +16071,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/JobExecution"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "Link to next page of resources.",
