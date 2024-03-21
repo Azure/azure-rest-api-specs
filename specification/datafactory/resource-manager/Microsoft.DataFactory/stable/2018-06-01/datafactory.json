@@ -33,42 +33,6 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.DataFactory/operations": {
-      "get": {
-        "tags": [
-          "operations"
-        ],
-        "operationId": "Operations_List",
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/Operations_List.json"
-          }
-        },
-        "description": "Lists the available Azure Data Factory API operations.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/OperationListResponse"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Azure Data Factory service.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataFactory/factories": {
       "get": {
         "tags": [
