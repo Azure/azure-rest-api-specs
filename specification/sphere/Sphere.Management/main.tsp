@@ -21,9 +21,8 @@ using TypeSpec.Versioning;
  * Azure Sphere resource management API.
  */
 @armProviderNamespace
-@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
-  title: "AzureSphereManagementClient",
+  title: "AzureSphereProviderClient",
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
