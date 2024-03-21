@@ -67,14 +67,6 @@ interface PortalExtensionSlots {
   "The updatable fields of a portal extension slot."
 );
 
-@@clientName(PortalExtensionSlots.createOrUpdate::parameters.resource,
-  "parameters"
-);
-@@encodedName(PortalExtensionSlots.createOrUpdate::parameters.resource,
-  "application/json",
-  "parameters"
-);
-
 @@clientName(PortalExtensionSlots.update::parameters.properties, "parameters");
 @@encodedName(PortalExtensionSlots.update::parameters.properties,
   "application/json",

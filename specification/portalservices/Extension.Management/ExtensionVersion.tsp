@@ -73,12 +73,6 @@ interface PortalExtensionVersions {
   "The updatable fields of a portal extension version."
 );
 
-@@clientName(PortalExtensionVersions.create::parameters.resource, "parameters");
-@@encodedName(PortalExtensionVersions.create::parameters.resource,
-  "application/json",
-  "parameters"
-);
-
 @@clientName(PortalExtensionVersions.update::parameters.properties,
   "parameters"
 );

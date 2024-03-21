@@ -2,21 +2,19 @@
   "parameters": {
     "api-version": "2024-03-01-preview",
     "deploymentName": "deploySourceSlot",
-    "parameters": {
+    "resource": {
       "properties": {
         "source": {
           "kind": "CopySlot",
           "value": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/storage/slots/sourceSlot"
         },
         "waitDuration": "PT24H"
-      }
+      },
+      "location": "eastus"
     },
     "portalExtensionName": "storage",
     "resourceGroupName": "testRG",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resource": {
-      "location": "eastus"
-    }
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
