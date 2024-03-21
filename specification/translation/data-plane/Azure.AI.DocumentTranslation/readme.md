@@ -23,18 +23,8 @@ These settings apply only when `--tag=v1.0` is specified on the command line.
 ``` yaml $(tag) == 'v1.0'
 input-file: 
   - stable/v1.0/openapi.json
-  - preview/2023-11-01-preview/openapi.json
 ```
  
-### Release Tag: 2023-11-01-preview
-These settings apply only when `--tag=2023-11-01-preview` is specified on the command line.
-
-``` yaml $(tag) == '2023-11-01-preview'
-input-file:
-  - stable/v1.0/openapi.json
-  - preview/2023-11-01-preview/openapi.json
-```
-
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
