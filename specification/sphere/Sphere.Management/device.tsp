@@ -69,8 +69,8 @@ interface Devices {
 @@doc(Devices.generateCapabilityImage::parameters.body,
   "Generate capability image request body."
 );
-@@projectedName(Devices.generateCapabilityImage::parameters.body,
-  "json",
+@@encodedName(Devices.generateCapabilityImage::parameters.body,
+  "application/json",
   "generateDeviceCapabilityRequest"
 );
 @@extension(Devices.generateCapabilityImage::parameters.body,

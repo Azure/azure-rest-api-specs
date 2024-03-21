@@ -137,8 +137,8 @@ interface Catalogs {
 @@doc(Catalogs.listDeviceGroups::parameters.body,
   "List device groups for catalog."
 );
-@@projectedName(Catalogs.listDeviceGroups::parameters.body,
-  "json",
+@@encodedName(Catalogs.listDeviceGroups::parameters.body,
+  "application/json",
   "listDeviceGroupsRequest"
 );
 @@extension(Catalogs.listDeviceGroups::parameters.body,
@@ -146,8 +146,8 @@ interface Catalogs {
   "listDeviceGroupsRequest"
 );
 @@doc(Catalogs.uploadImage::parameters.body, "Image upload request body.");
-@@projectedName(Catalogs.uploadImage::parameters.body,
-  "json",
+@@encodedName(Catalogs.uploadImage::parameters.body,
+  "application/json",
   "uploadImageRequest"
 );
 @@extension(Catalogs.uploadImage::parameters.body,

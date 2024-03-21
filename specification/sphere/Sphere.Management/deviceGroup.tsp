@@ -86,8 +86,8 @@ interface DeviceGroups {
 @@doc(DeviceGroups.claimDevices::parameters.body,
   "Bulk claim devices request body."
 );
-@@projectedName(DeviceGroups.claimDevices::parameters.body,
-  "json",
+@@encodedName(DeviceGroups.claimDevices::parameters.body,
+  "application/json",
   "claimDevicesRequest"
 );
 @@extension(DeviceGroups.claimDevices::parameters.body,

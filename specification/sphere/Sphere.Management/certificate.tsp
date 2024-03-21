@@ -70,8 +70,8 @@ interface Certificates {
 @@doc(Certificates.retrieveProofOfPossessionNonce::parameters.body,
   "Proof of possession nonce request body "
 );
-@@projectedName(Certificates.retrieveProofOfPossessionNonce::parameters.body,
-  "json",
+@@encodedName(Certificates.retrieveProofOfPossessionNonce::parameters.body,
+  "application/json",
   "proofOfPossessionNonceRequest"
 );
 @@extension(Certificates.retrieveProofOfPossessionNonce::parameters.body,
