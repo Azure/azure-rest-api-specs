@@ -1915,7 +1915,10 @@
       }
     },
     "OperatorInformationRequest": {
-      "description": "Represents a search request for operator information for the given phone numbers",
+      "description": "Represents a search request for operator information for the given phone numbers.",
+      "required": [
+        "phoneNumbers"
+      ],
       "type": "object",
       "properties": {
         "phoneNumbers": {
@@ -1924,6 +1927,9 @@
           "items": {
             "type": "string"
           }
+        },
+        "options": {
+          "$ref": "#/definitions/OperatorInformationOptions"
         }
       }
     },
@@ -1942,10 +1948,25 @@
     },
     "OperatorInformation": {
       "description": "Represents metadata about a phone number that is controlled/provided by that phone number's operator.",
+      "required": [
+        "phoneNumber"
+      ],
       "type": "object",
       "properties": {
         "phoneNumber": {
           "description": "E.164 formatted string representation of the phone number",
+          "type": "string"
+        },
+        "nationalFormat": {
+          "description": "National format of the phone number",
+          "type": "string"
+        },
+        "internationalFormat": {
+          "description": "International format of the phone number",
+          "type": "string"
+        },
+        "isoCountryCode": {
+          "description": "ISO 3166-1 two character ('alpha-2') code associated with the phone number.",
           "type": "string"
         },
         "numberType": {
@@ -1962,10 +1983,6 @@
             "modelAsString": true
           }
         },
-        "isoCountryCode": {
-          "description": "ISO 3166-1 two character ('alpha-2') code associated with the phone number.",
-          "type": "string"
-        },
         "operatorDetails": {
           "$ref": "#/definitions/OperatorDetails"
         }
@@ -1973,6 +1990,9 @@
     },
     "OperatorDetails": {
       "description": "Represents metadata describing the operator of a phone number",
+      "required": [
+        "name"
+      ],
       "type": "object",
       "properties": {
         "name": {
@@ -1986,6 +2006,16 @@
         "mobileCountryCode": {
           "description": "Mobile Country Code",
           "type": "string"
+        }
+      }
+    },
+    "OperatorInformationOptions": {
+      "description": "Represents options to modify a search request for operator information",
+      "type": "object",
+      "properties": {
+        "includeAdditionalOperatorDetails": {
+          "description": "Includes the fields operatorDetails, numberType, and isoCountryCode in the response.  Please note: use of this option will result in additional costs",
+          "type": "boolean"
         }
       }
     }
