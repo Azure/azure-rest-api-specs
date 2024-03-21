@@ -65,7 +65,7 @@ input-file:
 - Microsoft.OperationalInsights/stable/2020-08-01/Gateways.json
 - Microsoft.OperationalInsights/stable/2020-08-01/Schema.json
 - Microsoft.OperationalInsights/stable/2020-08-01/WorkspacePurge.json
-- Microsoft.OperationalInsights/stable/2021-06-01/Clusters.json
+- Microsoft.OperationalInsights/stable/2022-10-01/Clusters.json
 ```
 ### Tag: package-2015-11-preview
 
@@ -326,7 +326,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
