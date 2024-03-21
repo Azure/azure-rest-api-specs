@@ -281,7 +281,7 @@
             "name": "parameters",
             "in": "body",
             "description": "Parameters for the update operation",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/CommunicationServicesGccmResourceUpdate"
             }
@@ -478,28 +478,12 @@
           "200": {
             "description": "The delete operation was successful."
           },
-          "202": {
-            "description": "The delete operation is being performed in the background.",
-            "headers": {
-              "location": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
-              }
-            }
-          },
-          "204": {
-            "description": "The resource did not exist."
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Delete resource": {
@@ -695,14 +679,6 @@
         }
       }
     },
-    "DomainsResourceList": {
-      "description": "List of email Domain resource Ids.",
-      "type": "array",
-      "items": {
-        "type": "string",
-        "description": "Resource ID of an EmailService/Domain resource linked to this resource."
-      }
-    },
     "TaggedResource": {
       "description": "An ARM resource with that can accept tags",
       "type": "object",
@@ -775,9 +751,6 @@
           "description": "The immutable resource Id of the communication service.",
           "type": "string",
           "readOnly": true
-        },
-        "linkedDomains": {
-          "$ref": "#/definitions/DomainsResourceList"
         }
       }
     },
@@ -824,11 +797,7 @@
     "CommunicationServicesGccmUpdateProperties": {
       "description": "A class that describes the properties that can be updated for CommunicationService resource.",
       "type": "object",
-      "properties": {
-        "linkedDomains": {
-          "$ref": "#/definitions/DomainsResourceList"
-        }
-      }
+      "properties": { }
     },
     "CommunicationServicesGccmResourceUpdate": {
       "description": "A class representing update parameters for CommunicationService resource.",
