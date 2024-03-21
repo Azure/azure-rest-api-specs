@@ -9,29 +9,29 @@ using TypeSpec.Versioning;
 
 alias DefaultAzureCoreVersion = Azure.Core.Versions.v1_0_Preview_2;
 
-@doc("The Azure Quantum Workspace REST API version.")
+/** The Azure Quantum Workspace REST API version. */
 enum QuantumWorkspaceAPIVersion {
-  @doc("2019-11-04-preview")
+  /** 2019-11-04-preview */
   @useDependency(DefaultAzureCoreVersion)
   `2019-11-04-preview`,
 
-  @doc("2021-05-06-preview")
+  /** 2021-05-06-preview */
   @useDependency(DefaultAzureCoreVersion)
   `2021-05-06-preview`,
 
-  @doc("2021-11-01-preview")
+  /** 2021-11-01-preview */
   @useDependency(DefaultAzureCoreVersion)
   `2021-11-01-preview`,
 
-  @doc("2022-09-12-preview")
+  /** 2022-09-12-preview */
   @useDependency(DefaultAzureCoreVersion)
   `2022-09-12-preview`,
 
-  @doc("2023-11-13-preview")
+  /** 2023-11-13-preview */
   @useDependency(DefaultAzureCoreVersion)
   `2023-11-13-preview`,
 
-  @doc("2024-03-01-preview")
+  /** 2024-03-01-preview */
   @useDependency(DefaultAzureCoreVersion)
   `2024-03-01-preview`,
 }

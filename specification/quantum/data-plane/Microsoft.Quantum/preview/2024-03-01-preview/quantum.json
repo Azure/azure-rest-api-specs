@@ -316,7 +316,7 @@
         "operationId": "Jobs_Update",
         "description": "Update job properties.",
         "consumes": [
-          "application/merge-patch+json"
+          "application/json-patch+json"
         ],
         "parameters": [
           {
@@ -984,18 +984,16 @@
           {
             "name": "sessionId",
             "in": "path",
-            "description": "Id of the session.",
+            "description": "The Azure subscription ID.",
             "required": true,
-            "type": "string",
-            "maxLength": 36,
-            "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedSessionJobDetails"
+              "$ref": "#/definitions/Quantum.Workspace.Operations.PagedSessionJobDetails"
             }
           },
           "default": {
@@ -1015,9 +1013,6 @@
           "List jobs in a workspace.": {
             "$ref": "./examples/SessionsJobs_List.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1232,8 +1227,7 @@
         }
       },
       "required": [
-        "containerName",
-        "blobName"
+        "containerName"
       ]
     },
     "CostEstimate": {
@@ -1849,28 +1843,6 @@
         "value"
       ]
     },
-    "PagedSessionJobDetails": {
-      "type": "object",
-      "description": "Paged collection of SessionJobDetails items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The SessionJobDetails items on this page",
-          "items": {
-            "$ref": "#/definitions/SessionJobDetails"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "ProviderAvailability": {
       "type": "string",
       "description": "Provider availability.",
@@ -1928,6 +1900,28 @@
         "id",
         "currentAvailability",
         "targets"
+      ]
+    },
+    "Quantum.Workspace.Operations.PagedSessionJobDetails": {
+      "type": "object",
+      "description": "A Paged List of JobDetails.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The JobDetails items on this page",
+          "items": {
+            "$ref": "#/definitions/JobDetails"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "QuantumComputingData": {

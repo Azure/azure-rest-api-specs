@@ -22,7 +22,7 @@ alias AzureCoreOperations = Azure.Core.ResourceOperations<DefaultServiceTraits>;
 namespace Quantum.Workspace.BaseOperations {
   alias ResourceOkOrNoContentResponse<Resource extends TypeSpec.Reflection.Model> = Azure.Core.Foundations.ResourceOkResponse<Resource> | TypeSpec.Http.NoContentResponse;
 
-  @doc("Generic POST operation.")
+  /** Generic POST operation. */
   @Foundations.Private.ensureVerb("PostOperation", "POST")
   @post
   op PostOperation<
@@ -36,17 +36,17 @@ namespace Quantum.Workspace.BaseOperations {
     TResponse
   >;
 
-  @doc("Operation to create a resource.")
-  op CreateOperation<TResource extends TypeSpec.Reflection.Model> is AzureCoreOperations.ResourceCreateOrReplace<TResource>;
+  /** Operation to create a resource. */
+  alias CreateOperation<TResource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceCreateOrReplace<TResource>;
 
-  @doc("Operation to patch a resource.")
+  /** Operation to patch a resource. */
   @updatesResource(Resource)
   @patch
   @Azure.Core.Foundations.Private.ensureVerb("PatchOperation", "PATCH")
   op PatchOperation<Resource extends TypeSpec.Reflection.Model> is Azure.Core.Foundations.ResourceOperation<
     Resource,
     {
-      @doc("This request has a JSON Merge Patch body.")
+      /** This request has a JSON Merge Patch body. */
       @TypeSpec.Http.header("Content-Type")
       contentType: "application/json-patch+json";
 
@@ -67,19 +67,19 @@ namespace Quantum.Workspace.BaseOperations {
     Azure.Core.Foundations.ErrorResponse
   >;
 
-  @doc("Operation to cancel a resource.")
-  op CancelOperation<TResource extends TypeSpec.Reflection.Model> is AzureCoreOperations.ResourceDelete<TResource>;
+  /** Operation to cancel a resource. */
+  alias CancelOperation<TResource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceDelete<TResource>;
 
-  @doc("Operation to get a resource.")
-  op GetOperation<TResource extends TypeSpec.Reflection.Model> is AzureCoreOperations.ResourceRead<TResource>;
+  /** Operation to get a resource. */
+  alias GetOperation<TResource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceRead<TResource>;
 
-  @doc("Operation to act on a resource.")
+  /** Operation to act on a resource. */
   op ActionOperation<TResource extends TypeSpec.Reflection.Model> is AzureCoreOperations.ResourceAction<
-    TResource,
-    {},
-    TResource
+    Resource = TResource,
+    Parameters = {},
+    Response = TResource
   >;
 
-  @doc("Operation to list a resource.")
-  op ListOperation<TResource extends TypeSpec.Reflection.Model> is AzureCoreOperations.ResourceList<TResource>;
+  /** Operation to list a resource. */
+  alias ListOperation<TResource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceList<TResource>;
 }

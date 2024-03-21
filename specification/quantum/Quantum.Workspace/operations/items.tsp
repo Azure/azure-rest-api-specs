@@ -8,73 +8,73 @@ import "./operations.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
-@doc("A key-value pair.")
+/** A key-value pair. */
 model KeyValue<TValue = string> {
-  @doc("Key.")
+  /** Key. */
   key: string;
 
-  @doc("Value.")
+  /** Value. */
   value: TValue;
 }
 
-@doc("The type of the workspace item.")
+/** The type of the workspace item. */
 enum ItemType {
-  @doc("A program, problem, or application submitted for processing.")
+  /** A program, problem, or application submitted for processing. */
   Job,
 
-  @doc("A logical grouping of jobs.")
+  /** A logical grouping of jobs. */
   Session,
 }
 
-@doc("Id of the workspace item.")
+/** Id of the workspace item. */
 @pattern("^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$")
 @maxLength(36)
 scalar WorkspaceItemId extends string;
 
-@doc("A workspace item.")
+/** A workspace item. */
 @discriminator("itemType")
 @resource("topLevelItems")
 @parentResource(QuantumWorkspace)
 model ItemDetails {
+  /** Id of the item. */
   @key
-  @doc("Id of the item.")
   @visibility("read")
   id: WorkspaceItemId;
 
+  /** The name of the item. It is not required for the name to be unique and it's only used for display purposes. */
   @visibility("read", "create", "update")
-  @doc("The name of the item. It is not required for the name to be unique and it's only used for display purposes.")
   name: string;
 
+  /** The unique identifier for the provider. */
   @visibility("read", "create")
-  @doc("The unique identifier for the provider.")
   providerId: string;
 
+  /** The target identifier to run the job. */
   @visibility("read", "create")
-  @doc("The target identifier to run the job.")
   target: string;
 
+  /** Type of the Quantum Workspace item */
   @visibility("read", "create")
-  @doc("Type of the Quantum Workspace item")
   itemType: ItemType;
 
+  /** The creation time of the item. */
   @visibility("read")
-  @doc("The creation time of the item.")
   creationTime?: utcDateTime;
 
+  /** The time when the item began execution. */
   @visibility("read")
-  @doc("The time when the item began execution.")
   beginExecutionTime?: utcDateTime;
 
+  /** The time when the item finished execution. */
   @visibility("read")
-  @doc("The time when the item finished execution.")
   endExecutionTime?: utcDateTime;
 
+  /** Cost estimate. */
   @visibility("read")
-  @doc("Cost estimate.")
   costEstimate?: CostEstimate;
 
+  /** Error information. */
   @visibility("read")
-  @doc("Error information.")
   errorData?: Errors.WorkspaceItemError;
 }
 
@@ -83,7 +83,7 @@ namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
 
   interface ItemsOperations {
-    @doc("List top-level items.")
+    /** List top-level items. */
     list is ListOperation<ItemDetails>;
   }
 }

@@ -1,8 +1,14 @@
-# Contributing
+# Contributing to Azure Quantum TypeSpec REST API Specification
 
-This file contains instructions to make it easier to maintain and test the TypeSpec REST API specifications for the Azure Quantum service.
+This file contains instructions to make it easier to maintain and test the *TypeSpec REST API specifications for the **Azure Quantum** service.
 
-## Pre-reqs
+1. How to maintain this folder.
+2. Setup your dev environment.
+3. Build and validate the *TypeSpec*.
+4. Generate *OpenAPI/Swagger specs*.
+5. Generate *Azure Quantum SDK clients*.
+
+## Pre-requisites
 
 1. Make sure you familiar with and follow the [Contributing guidelines](https://github.com/Azure/azure-rest-api-specs/blob/main/CONTRIBUTING.md) of this repo.
 2. [Install TypeSpec](https://microsoft.github.io/typespec/introduction/installation) and its pre-reqs.

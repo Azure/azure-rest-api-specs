@@ -8,35 +8,35 @@ import "./operations.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
-@doc("The job cost billed by the provider. The final cost on your bill might be slightly different due to added taxes and currency conversion rates.")
+/** The job cost billed by the provider. The final cost on your bill might be slightly different due to added taxes and currency conversion rates. */
 model CostEstimate {
-  @doc("The currency code.")
+  /** The currency code. */
   currencyCode: string;
 
-  @doc("List of usage events.")
+  /** List of usage events. */
   events?: UsageEvent[];
 
-  @doc("The estimated total.")
+  /** The estimated total. */
   estimatedTotal: float32;
 }
 
-@doc("Usage event details.")
+/** Usage event details. */
 model UsageEvent {
-  @doc("The dimension id.")
+  /** The dimension id. */
   dimensionId: string;
 
-  @doc("The dimension name.")
+  /** The dimension name. */
   dimensionName: string;
 
-  @doc("The unit of measure.")
+  /** The unit of measure. */
   measureUnit: string;
 
-  @doc("The amount billed.")
+  /** The amount billed. */
   amountBilled: float32;
 
-  @doc("The amount consumed.")
+  /** The amount consumed. */
   amountConsumed: float32;
 
-  @doc("The unit price.")
+  /** The unit price. */
   unitPrice: float32;
 }

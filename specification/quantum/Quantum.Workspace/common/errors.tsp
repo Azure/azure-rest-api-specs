@@ -7,10 +7,10 @@ import "./common.tsp";
 
 using TypeSpec.Versioning;
 
+/** A versioned namespace to use the Error model in the unversioned root namespace. */
 @useDependency(DefaultAzureCoreVersion)
-@doc("A versioned namespace to use the Error model in the unversioned root namespace.")
 namespace Errors {
-  @doc("The error object.")
+  /** The error object. */
   model WorkspaceItemError {
     ...Azure.Core.Foundations.Error;
   }

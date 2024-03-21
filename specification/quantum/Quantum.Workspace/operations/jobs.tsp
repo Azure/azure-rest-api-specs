@@ -11,44 +11,44 @@ using TypeSpec.Versioning;
 using TypeSpec.Http;
 using OpenAPI;
 
-@doc("The type of the job.")
+/** The type of the job. */
 enum JobType {
-  @doc("Unknown job type.")
+  /** Unknown job type. */
   Unknown,
 
-  @doc("Quantum Computing job type.")
+  /** Quantum Computing job type. */
   QuantumComputing,
 
-  @doc("Optimization job type.")
+  /** Optimization job type. */
   Optimization,
 }
 
-@doc("The status of the job.")
+/** The status of the job. */
 enum JobStatus {
-  @doc("The job is waiting in the queue to be executed.")
+  /** The job is waiting in the queue to be executed. */
   Waiting,
 
-  @doc("The job is being executed.")
+  /** The job is being executed. */
   Executing,
 
-  @doc("The job completed with success.")
+  /** The job completed with success. */
   Succeeded,
 
-  @doc("The job completed with failure.")
+  /** The job completed with failure. */
   Failed,
 
-  @doc("The job was cancelled.")
+  /** The job was cancelled. */
   Cancelled,
 }
 
-@doc("Quantum computing data.")
+/** Quantum computing data. */
 model QuantumComputingData {
-  @doc("The number of quantum computing items in the job.")
+  /** The number of quantum computing items in the job. */
   @visibility("read")
   count: int64;
 }
 
-@doc("A job to be run in the workspace.")
+/** A job to be run in the workspace. */
 // Notes:
 // - The generated Swagger is not automatically adding the x-ms-discriminator-value
 //   so we are adding it manually.
@@ -56,66 +56,66 @@ model QuantumComputingData {
 @resource("jobs")
 @parentResource(QuantumWorkspace)
 model JobDetails extends ItemDetails {
+  /** Id of the job. */
   #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "False-positive"
   @key("jobId")
-  @doc("Id of the job.")
   @visibility("read")
   id: WorkspaceItemId;
 
+  /** Type of the Quantum Workspace item is Job. */
   @visibility("read", "create")
-  @doc("Type of the Quantum Workspace item is Job.")
   itemType: ItemType.Job;
 
+  /** The type of job. */
   @visibility("read", "create")
-  @doc("The type of job.")
   jobType?: JobType;
 
+  /** The ID of the session that the job is part of. */
   @visibility("read", "create")
-  @doc("The ID of the session that the job is part of.")
   sessionId?: string;
 
+  /** The blob container SAS uri, the container is used to host job data. */
   @visibility("read", "create")
-  @doc("The blob container SAS uri, the container is used to host job data.")
   containerUri: string;
 
+  /** The input blob URI, if specified, it will override the default input blob in the container. */
   @visibility("read", "create")
-  @doc("The input blob URI, if specified, it will override the default input blob in the container.")
   inputDataUri?: string;
 
+  /** The format of the input data. */
   @visibility("read", "create")
-  @doc("The format of the input data.")
   inputDataFormat?: string;
 
+  /** The status of the job. */
   @visibility("read")
-  @doc("The status of the job.")
   status?: JobStatus;
 
+  /** The job metadata. Metadata provides client the ability to store client-specific information */
   @visibility("read", "create", "update")
-  @doc("The job metadata. Metadata provides client the ability to store client-specific information")
   metadata?: {};
 
+  /** The time when a job was successfully cancelled. */
   @visibility("read")
-  @doc("The time when a job was successfully cancelled.")
   cancellationTime?: utcDateTime;
 
-  @doc("List of user-supplied tags associated with the job.")
+  /** List of user-supplied tags associated with the job. */
   @visibility("read", "create", "update")
   tags?: string[];
 
-  @doc("Quantum computing data.")
+  /** Quantum computing data. */
   @visibility("read")
   quantumComputingData?: QuantumComputingData;
 
+  /** The input parameters for the job. JSON object used by the target solver. It is expected that the size of this object is small and only used to specify parameters for the execution target, not the input data. */
   @visibility("read", "create")
-  @doc("The input parameters for the job. JSON object used by the target solver. It is expected that the size of this object is small and only used to specify parameters for the execution target, not the input data.")
   inputParams?: {};
 
+  /** The output blob uri. When a job finishes successfully, results will be uploaded to this blob. */
   @visibility("read", "create")
-  @doc("The output blob uri. When a job finishes successfully, results will be uploaded to this blob.")
   outputDataUri?: string;
 
+  /** The format of the output data. */
   @visibility("read", "create")
-  @doc("The format of the output data.")
   outputDataFormat?: string;
 }
 
@@ -123,20 +123,20 @@ model JobDetails extends ItemDetails {
 namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
   interface JobOperations {
-    @doc("Create a new job.")
+    /** Create a new job. */
     create is CreateOperation<JobDetails>;
 
+    /** Update job properties. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The Azure.Core.ResourceUpdate does not support NoContentResponse and the JsonPatchDocument request body"
-    @doc("Update job properties.")
     update is PatchOperation<JobDetails>;
 
-    @doc("Request the cancellation of an existing job.")
+    /** Request the cancellation of an existing job. */
     cancel is CancelOperation<JobDetails>;
 
-    @doc("Get job by its id.")
+    /** Get job by its id. */
     get is GetOperation<JobDetails>;
 
-    @doc("List all jobs.")
+    /** List all jobs. */
     list is ListOperation<JobDetails>;
   }
 }

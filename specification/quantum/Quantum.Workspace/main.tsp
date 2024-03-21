@@ -28,6 +28,7 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 using OpenAPI;
 
+/** Azure Quantum Workspace Services */
 @service({
   title: "Azure Quantum Workspace Services",
 })
@@ -37,10 +38,10 @@ using OpenAPI;
   "https://{region}.{serviceBaseUrl}",
   "Endpoint for the Azure Quantum",
   {
-    @doc("The Azure region where the Azure Quantum Workspace is located.")
+    /** The Azure region where the Azure Quantum Workspace is located. */
     region: string,
 
-    @doc("The Azure Quantum service base url.")
+    /** The Azure Quantum service base url. */
     serviceBaseUrl: string = "quantum.azure.com",
   }
 )
@@ -49,11 +50,11 @@ using OpenAPI;
     email: "azqengg@microsoft.com",
   },
 })
-@doc("Azure Quantum Workspace Services")
 namespace Quantum.Workspace.Services {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The Azure.Core.ResourceUpdate does not support NoContentResponse and the JsonPatchDocument request body"
   interface Jobs extends Quantum.Workspace.Operations.JobOperations {}
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "When using Azure.Core.ResourceList<> for /sessions/{sessionId}/jobs, the autoroute is not adding the parent resource id to the path"
   interface Sessions extends Quantum.Workspace.Operations.SessionOperations {}
 
   interface Providers extends Quantum.Workspace.Operations.ProviderOperations {}

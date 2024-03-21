@@ -7,7 +7,7 @@ import "./common.tsp";
 
 using TypeSpec.Http;
 
-@doc("Azure Entra OAuth2 Authentication")
+/** Azure Entra OAuth2 Authentication */
 model AzureEntraAuth
   is OAuth2Auth<[
     {
@@ -17,6 +17,6 @@ model AzureEntraAuth
     }
   ]>;
 
-@doc("Azure Api-Key Authentication")
+/** Azure Api-Key Authentication */
 model AzureApiKeyAuth
   is ApiKeyAuth<ApiKeyLocation.header, "x-ms-quantum-api-key">;

@@ -8,64 +8,64 @@ import "./operations.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
-@doc("Provider availability.")
+/** Provider availability. */
 enum ProviderAvailability {
-  @doc("Provider is available.")
+  /** Provider is available. */
   Available,
 
-  @doc("Provider is available with degraded experience.")
+  /** Provider is available with degraded experience. */
   Degraded,
 
-  @doc("Provider is unavailable.")
+  /** Provider is unavailable. */
   Unavailable,
 }
 
-@doc("Target availability.")
+/** Target availability. */
 enum TargetAvailability {
-  @doc("Target is available.")
+  /** Target is available. */
   Available,
 
-  @doc("Target is available with degraded experience.")
+  /** Target is available with degraded experience. */
   Degraded,
 
-  @doc("Target is unavailable.")
+  /** Target is unavailable. */
   Unavailable,
 }
 
-@doc("Provider status.")
+/** Provider status. */
 @resource("providerStatus")
 @parentResource(QuantumWorkspace)
 model ProviderStatus {
+  /** Provider id. */
   @visibility("read")
-  @doc("Provider id.")
   @key
   id: string;
 
+  /** Current provider availability. */
   @visibility("read")
-  @doc("Current provider availability.")
   currentAvailability: ProviderAvailability;
 
+  /** Current target statuses. */
   @visibility("read")
-  @doc("Current target statuses.")
   targets: TargetStatus[];
 }
 
-@doc("Target status.")
+/** Target status. */
 model TargetStatus {
+  /** Target id. */
   @visibility("read")
-  @doc("Target id.")
   id: string;
 
+  /** Current target availability. */
   @visibility("read")
-  @doc("Current target availability.")
   currentAvailability: TargetAvailability;
 
+  /** Average queue time in seconds. */
   @visibility("read")
-  @doc("Average queue time in seconds.")
   averageQueueTime: int64;
 
+  /** A page with detailed status of the provider. */
   @visibility("read")
-  @doc("A page with detailed status of the provider.")
   statusPage?: string;
 }
 
@@ -73,7 +73,7 @@ model TargetStatus {
 namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
   interface ProviderOperations {
-    @doc("List all providers in the workspace with their respective status.")
+    /** List all providers in the workspace with their respective status. */
     list is ListOperation<ProviderStatus>;
   }
 }

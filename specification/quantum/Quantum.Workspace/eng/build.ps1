@@ -118,8 +118,8 @@ Copying examples from $source to $newVersionExamples
     }
         
     # copy to swagger folder to easy upload to https://apiview.dev/
-    New-Item -ItemType Directory -Force -Path (Join-Path $PSScriptRoot "../output/swagger/") *> $null
-    Copy-Item $newSwaggerFile (Join-Path $PSScriptRoot "../output/swagger/quantum.swagger") -Force -Recurse
+    New-Item -ItemType Directory -Force -Path (Join-Path $outputDirectory "./swagger/") *> $null
+    Copy-Item $newSwaggerFile (Join-Path $outputDirectory "./swagger/quantum.swagger") -Force *> $null
 
     RunAndCheck "swagger-preview" $logDirectory {
         $openApi = Get-Content -Path $newSwaggerFile

@@ -10,46 +10,46 @@ using TypeSpec.Rest;
 using TypeSpec.Rest.Resource;
 using OpenAPI;
 
-@doc("The operation to be performed.")
+/** The operation to be performed. */
 enum JsonPatchOperation {
-  @doc("Add value operation.")
+  /** Add value operation. */
   add,
 
-  @doc("Remove value operation.")
+  /** Remove value operation. */
   remove,
 
-  @doc("Replace value operation.")
+  /** Replace value operation. */
   replace,
 
-  @doc("Move value operation.")
+  /** Move value operation. */
   move,
 
-  @doc("Copy value operation.")
+  /** Copy value operation. */
   copy,
 
-  @doc("Test value operation.")
+  /** Test value operation. */
   test,
 }
 
-@doc("A JSONPatch object as defined by RFC 6902.")
+/** A JSONPatch object as defined by RFC 6902. */
 model JsonPatchObject {
+  /** The operation to be performed. */
   @visibility("create")
-  @doc("The operation to be performed.")
   @projectedName("json", "op")
   operation: JsonPatchOperation;
 
+  /** A JSON-Pointer. */
   @visibility("create")
-  @doc("A JSON-Pointer.")
   path: string;
 
+  /** A value to be used in the operation on the path. */
   @visibility("create")
-  @doc("A value to be used in the operation on the path.")
   value?: {};
 
+  /** Optional field used in copy and move operations. */
   @visibility("create")
-  @doc("Optional field used in copy and move operations.")
   from?: string;
 }
 
-@doc("A JSONPatch document as defined by RFC 6902.")
+/** A JSONPatch document as defined by RFC 6902. */
 model JsonPatchDocument is JsonPatchObject[];

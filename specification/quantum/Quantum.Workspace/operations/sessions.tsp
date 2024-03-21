@@ -5,69 +5,70 @@
 
 import "./operations.tsp";
 
+using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
 using OpenAPI;
 
-@doc("Policy controlling the behavior of the Session when a job in the session fails.")
+/** Policy controlling the behavior of the Session when a job in the session fails. */
 enum SessionJobFailurePolicy {
-  @doc("New jobs submitted after a job fails will be rejected.")
+  /** New jobs submitted after a job fails will be rejected. */
   Abort,
 
-  @doc("New jobs submitted after a job fails will be accepted.")
+  /** New jobs submitted after a job fails will be accepted. */
   Continue,
 }
 
-@doc("The status of the session.")
+/** The status of the session. */
 enum SessionStatus {
-  @doc("The session is waiting in the queue to be executed.")
+  /** The session is waiting in the queue to be executed. */
   Waiting,
 
-  @doc("The session is being executed.")
+  /** The session is being executed. */
   Executing,
 
-  @doc("The session completed with success.")
+  /** The session completed with success. */
   Succeeded,
 
-  @doc("The session completed with failure.")
+  /** The session completed with failure. */
   Failed,
 
-  @doc("The session completed with some failures.")
+  /** The session completed with some failures. */
   `Failure(s)`,
 
-  @doc("The session timed out.")
+  /** The session timed out. */
   TimedOut,
 }
 
 // Notes:
 // - The generated Swagger is not automatically adding the x-ms-discriminator-value
 //   so we are adding it manually.
+/** Session, a logical grouping of jobs. */
 @extension("x-ms-discriminator-value", ItemType.Session)
-@doc("Session, a logical grouping of jobs.")
 @resource("sessions")
 @parentResource(QuantumWorkspace)
 model SessionDetails extends ItemDetails {
+  /** Id of the session. */
   @key("sessionId")
-  @doc("Id of the session.")
   @visibility("read")
   id: WorkspaceItemId;
 
+  /** Type of the Quantum Workspace item is Session. */
   @visibility("read", "create")
-  @doc("Type of the Quantum Workspace item is Session.")
   itemType: ItemType.Session;
 
-  @doc("Policy controlling the behavior of the Session when a job in the session fails.")
+  /** Policy controlling the behavior of the Session when a job in the session fails. */
   @visibility("read", "create")
   jobFailurePolicy: SessionJobFailurePolicy;
 
-  @doc("The status of the session.")
+  /** The status of the session. */
   @visibility("read")
   status?: SessionStatus;
 }
 
+/** A Session Job. */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
-@doc("A Session Job.")
 @resource("jobs")
 @parentResource(SessionDetails)
 @withVisibility("read")
@@ -75,23 +76,40 @@ model SessionJobDetails extends JobDetails {}
 
 @useDependency(DefaultAzureCoreVersion)
 namespace Quantum.Workspace.Operations {
+  /** A Paged List of JobDetails. */
+  // This is used in the session.listJobs workaround
+  @encodedName("application/json", "PagedJobDetails")
+  model PagedSessionJobDetails {
+    ...Azure.Core.Page<JobDetails>;
+  }
+
   using Quantum.Workspace.BaseOperations;
   interface SessionOperations {
-    @doc("Open a new session.")
+    /** Open a new session. */
     open is CreateOperation<SessionDetails>;
 
-    @doc("Close an existing session.")
+    /** Close an existing session. */
     close is ActionOperation<SessionDetails>;
 
-    @doc("Get Session by its id.")
+    /** Get Session by its id. */
     get is GetOperation<SessionDetails>;
 
+    /** List jobs in a session. */
     #suppress "@azure-tools/typespec-azure-core/no-operation-id" "The nesting of Jobs under a Session makes the auto-generated ID to be Sessions_JobsList, which is not in a Noun_Verb format."
-    @doc("List jobs in a session.")
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "When using Azure.Core.ResourceList<>, the autoroute is not adding the parent resource id to the path"
     @operationId("SessionsJobs_List")
-    jobsList is ListOperation<SessionJobDetails>;
+    jobsList is Azure.Core.Foundations.ResourceList<
+      Resource = JobDetails,
+      Parameters = {
+        /** The Azure subscription ID. */
+        @path
+        @segment("sessions")
+        sessionId: string;
+      },
+      Response = PagedSessionJobDetails
+    >;
 
-    @doc("List all Sessions.")
+    /** List all Sessions. */
     list is ListOperation<SessionDetails>;
   }
 }
