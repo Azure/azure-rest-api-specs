@@ -10,25 +10,15 @@ using Azure.ResourceManager;
 namespace Microsoft.Edge;
 
 
-@doc("The ApiVersion query parameter for Atlas API.")
-model AtlasApiVersionParameter {
-  @doc("The API version to use for this operation.")
-  @query("api-version")
-  @minLength(1)
-  apiVersion?: string;
-}
-
-alias AtlasApiVersionParameterTraits = Azure.Core.Traits.VersionParameterTrait<AtlasApiVersionParameter>;
-
-@armResourceOperations 
-interface ListSitesOperations {
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom operation. Adding the interface is creating wrong endpoint."
+interface SitesOperations {
   /**
    * List Site resources by ResourceGroup
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Custom operation. Adding the interface is creating wrong endpoint."
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/sites")
   @get
-  @armResourceList(Site)
-  byResourceGroup is Azure.Core.Foundations.Operation<
+  listByResourceGroup is Azure.Core.Foundations.Operation<
     {
       /**
        * The ID of the target subscription. The value must be an UUID.
@@ -46,17 +36,14 @@ interface ListSitesOperations {
     },
     ResourceListResult<Site>
   >;
-}
 
-@armResourceOperations 
-interface SitesGetOperations {
   /**
    * Get a Site at Resource Group scope
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Custom operation. Adding the interface is creating wrong endpoint."
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/sites/{siteName}")
   @get
-  @armResourceRead(Site)
-  byResourceGroup is Azure.Core.Foundations.Operation<
+  getByResourceGroup is Azure.Core.Foundations.Operation<
     {
       /**
        * The ID of the target subscription. The value must be an UUID.
@@ -81,17 +68,14 @@ interface SitesGetOperations {
     },
     Site
   >;
-}
 
-@armResourceOperations 
-interface SitesCreateOperations {
   /**
    * Create a Site at Resource Group scope
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Custom operation. Adding the interface is creating wrong endpoint."
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/sites/{siteName}")
   @put
-  @armResourceCreateOrUpdate(Site)
-  byResourceGroup is Azure.Core.Foundations.Operation<
+  createOrUpdateByResourceGroup is Azure.Core.Foundations.Operation<
 			Azure.Core.StandardListQueryParameters & 
     {
       /**
@@ -123,17 +107,14 @@ interface SitesCreateOperations {
     },
     Site
   >;
-}
 
-@armResourceOperations 
-interface SitesUpdateOperations {
   /**
    * Update a Site at Resource Group scope
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Custom operation. Adding the interface is creating wrong endpoint."
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/sites/{siteName}")
   @patch
-  @armResourceUpdate(Site)
-  byResourceGroup is Azure.Core.Foundations.Operation<
+  updateByResourceGroup is Azure.Core.Foundations.Operation<
     {
       /**
        * The ID of the target subscription. The value must be an UUID.
@@ -164,17 +145,14 @@ interface SitesUpdateOperations {
     },
     Site
   >;
-}
 
-@armResourceOperations 
-interface SitesDeleteOperations {
   /**
    * Delete a Site at ResourceGroup scope
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Custom operation. Adding the interface is creating wrong endpoint."
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/sites/{siteName}")
   @delete
-  @armResourceDelete(Site)
-  byResourceGroup is Azure.Core.Foundations.Operation<
+  deleteByResourceGroup is Azure.Core.Foundations.Operation<
     {
       /**
        * The ID of the target subscription. The value must be an UUID.
