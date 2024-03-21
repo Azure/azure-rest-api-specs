@@ -3347,10 +3347,6 @@
           },
           "description": "The virtual machine zones."
         },
-        "placement": {
-          "$ref": "#/definitions/Placement",
-          "description": "Placement section specifies the user-defined constraints for virtual machine hardware placement.<br> Minimum api-version: 2024-03-01."
-        },
         "extendedLocation": {
           "$ref": "../../../common-types/v1/common.json#/definitions/ExtendedLocation",
           "description": "The extended location of the Virtual Machine."
@@ -3590,36 +3586,6 @@
         }
       },
       "description": "Describes the properties of the last installed patch summary."
-    },
-    "Placement": {
-      "properties": {
-        "zonePlacementPolicy": {
-          "type": "string",
-          "description": "Specifies the policy for resource's placement in availability zone. <br>Possible values are:<br>**Any** - An availability zone will be automatically picked by system as part of resource creation.",
-          "enum": [
-            "Any"
-          ],
-          "x-ms-enum": {
-            "name": "ZonePlacementPolicyType",
-            "modelAsString": true
-          }
-        },
-        "includeZones": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "This property supplements the 'zonePlacementPolicy' property.<br>If 'zonePlacementPolicy' is set to 'Any', availability zone selected by the system must be present in the list of availability zones passed with 'includeZones'. If 'includeZones' is not provided, all availability zones in region will be considered for selection."
-        },
-        "excludeZones": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "This property supplements the 'zonePlacementPolicy' property.<br>If 'zonePlacementPolicy' is set to 'Any', availability zone selected by the system must not be present in the list of availability zones passed with 'excludeZones'. If 'excludeZones' is not provided, all availability zones in region will be considered for selection."
-        }
-      },
-      "description": "Describes the user-defined constraints for resource hardware placement."
     }
   }
 }
