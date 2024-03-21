@@ -38,4 +38,7 @@ namespace DocumentTranslation;
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v1_0: "v1.0",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2023_11_01_Preview: "2023-11-01-preview",
 }
