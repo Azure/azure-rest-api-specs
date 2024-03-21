@@ -38,7 +38,7 @@
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 400 RPGenericUser - User Failure when calling other Resource Provider.\n\n * 400 InvalidArgument - Invalid argument '{0}'.\n\n * 400 ArgumentNotInRange - Argument '{0}' not in range.\n\n * 400 ResourceNotProvisioned - As the resource: {0} is not in a provisioned state, the request cannot be proceeded forward\n\n * 400 InvalidRgResourceId - Invalid Resourcegroup resource id specified.\n\n * 403 AccessDenied - Access denied.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotExist - Subscription id does not exist.\n\n * 404 ResourceDoesNotExist - Resource does not exist.\n\n * 404 OperationIdNotFound - Operation id could not be found.\n\n * 404 OperationTypeNotFound - Operation Type not found.\n\n * 409 ResourceAlreadyExists - Resource already exists.\n\n * 409 SqlExtensionNotInstalled - SQL extension not installed.\n\n * 409 MissingMoveResources - Cannot move resources(s) because some resources are missing in the request.\n\n * 409 OperationInProgress - Operation in progress on resource already.\n\n * 409 OperationCanceled - Operation Cancelled.\n\n * 500 RPGenericSystem - System Failure when calling other Resource Provider.\n\n * 500 UnExpectedErrorOccurred - Unexpected error occurred.\n\n * 500 OperationTimeout - Operation timed out.",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -77,7 +77,7 @@
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 404 ResourceNotFound - The requested resource was not found.",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -120,7 +120,7 @@
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -149,12 +149,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "sqlManagedInstanceName",
-            "description": "Name of SQL Managed Instance",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/sqlManagedInstanceName"
           },
           {
             "$ref": "#/parameters/apiVersion"
@@ -170,7 +165,7 @@
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -194,12 +189,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "sqlManagedInstanceName",
-            "description": "The name of SQL Managed Instances",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/sqlManagedInstanceName"
           },
           {
             "name": "sqlManagedInstance",
@@ -230,7 +220,7 @@
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -258,12 +248,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "sqlManagedInstanceName",
-            "description": "The name of Sql Managed Instances",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/sqlManagedInstanceName"
           },
           {
             "$ref": "#/parameters/apiVersion"
@@ -274,12 +259,12 @@
             "description": "Successfully deleted the SQL Managed Instance."
           },
           "202": {
-            "description": "Resource deletion is in progress.."
+            "description": "Resource deletion is in progress."
           },
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           },
           "204": {
@@ -307,12 +292,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "sqlManagedInstanceName",
-            "description": "Name of sqlManagedInstance",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/sqlManagedInstanceName"
           },
           {
             "name": "parameters",
@@ -337,13 +317,212 @@
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Updates a sql Instance tags.": {
             "$ref": "./examples/UpdateSqlManagedInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlManagedInstances/{sqlManagedInstanceName}/failoverGroups": {
+      "get": {
+        "tags": [
+          "FailoverGroups"
+        ],
+        "operationId": "FailoverGroups_List",
+        "summary": "List the failover groups associated with the given sql managed instance.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/sqlManagedInstanceName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./failoverGroups.json#/definitions/FailoverGroupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 404 ResourceNotFound - The requested resource was not found.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all failover groups associated with a sql managed instance.": {
+            "$ref": "./examples/ListBySqlManagedInstanceFailoverGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlManagedInstances/{sqlManagedInstanceName}/failoverGroups/{failoverGroupName}": {
+      "put": {
+        "tags": [
+          "FailoverGroups"
+        ],
+        "operationId": "FailoverGroups_Create",
+        "description": "Creates or replaces a failover group resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "failoverGroupResource",
+            "description": "desc",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "./failoverGroups.json#/definitions/FailoverGroupResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/sqlManagedInstanceName"
+          },
+          {
+            "$ref": "#/parameters/failoverGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./failoverGroups.json#/definitions/FailoverGroupResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "./failoverGroups.json#/definitions/FailoverGroupResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create or update a failover group instance.": {
+            "$ref": "./examples/CreateOrUpdateFailoverGroup.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "FailoverGroups"
+        ],
+        "operationId": "FailoverGroups_Delete",
+        "description": "Deletes a failover group resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/sqlManagedInstanceName"
+          },
+          {
+            "$ref": "#/parameters/failoverGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the failover group."
+          },
+          "202": {
+            "description": "Resource deletion is in progress."
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "204": {
+            "description": "The specified failover group does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deletes a failover group instance.": {
+            "$ref": "./examples/DeleteFailoverGroup.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "FailoverGroups"
+        ],
+        "operationId": "FailoverGroups_Get",
+        "description": "Retrieves a failover group resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/sqlManagedInstanceName"
+          },
+          {
+            "$ref": "#/parameters/failoverGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./failoverGroups.json#/definitions/FailoverGroupResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieves a failover group resource.": {
+            "$ref": "./examples/GetFailoverGroup.json"
           }
         }
       }
@@ -373,7 +552,7 @@
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 404 ResourceNotFound - The requested resource was not found.",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -416,7 +595,7 @@
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -445,12 +624,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "sqlServerInstanceName",
-            "description": "Name of SQL Server Instance",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/sqlServerInstanceName"
           },
           {
             "$ref": "#/parameters/apiVersion"
@@ -466,7 +640,7 @@
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -490,12 +664,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "sqlServerInstanceName",
-            "description": "The name of SQL Server Instance",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/sqlServerInstanceName"
           },
           {
             "name": "sqlServerInstance",
@@ -526,7 +695,7 @@
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -554,12 +723,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "sqlServerInstanceName",
-            "description": "The name of SQL Server Instance",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/sqlServerInstanceName"
           },
           {
             "$ref": "#/parameters/apiVersion"
@@ -575,7 +739,7 @@
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           },
           "204": {
@@ -603,12 +767,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "sqlServerInstanceName",
-            "description": "Name of sqlServerInstance",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/sqlServerInstanceName"
           },
           {
             "name": "parameters",
@@ -630,10 +789,19 @@
               "$ref": "./sqlServerInstances.json#/definitions/SqlServerInstance"
             }
           },
+          "202": {
+            "description": "Resource update is in progress.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -641,6 +809,79 @@
           "Updates a SQL Server Instance tags.": {
             "$ref": "./examples/UpdateSqlServerInstance.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlServerInstances/{sqlServerInstanceName}/getTelemetry": {
+      "post": {
+        "tags": [
+          "SqlServerInstances"
+        ],
+        "operationId": "SqlServerInstances_getTelemetry",
+        "description": "Retrieves SQL Server instance telemetry",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/sqlServerInstanceName"
+          },
+          {
+            "name": "sqlServerInstanceTelemetryRequest",
+            "in": "body",
+            "description": "Contains the parameters to get SQL Server instance telemetry.",
+            "required": true,
+            "schema": {
+              "$ref": "./sqlServerInstances.json#/definitions/SqlServerInstanceTelemetryRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./sqlServerInstances.json#/definitions/SqlServerInstanceTelemetryResponse"
+            }
+          },
+          "202": {
+            "description": "Arc SQL Server telemetry retrieval is in progress.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "operationName": "SqlServerInstances_PostInstanceTelemetry",
+          "itemName": "rows"
+        },
+        "x-ms-examples": {
+          "Retrieves Arc SQL Server cpu utilization telemetry": {
+            "$ref": "./examples/GetSqlServerInstanceTelemetry.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -669,7 +910,7 @@
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -711,7 +952,7 @@
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -749,11 +990,7 @@
             }
           },
           {
-            "name": "dataControllerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/dataControllerName"
           },
           {
             "$ref": "#/parameters/apiVersion"
@@ -775,7 +1012,7 @@
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -803,11 +1040,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "dataControllerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/dataControllerName"
           },
           {
             "$ref": "#/parameters/apiVersion"
@@ -823,7 +1056,7 @@
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           },
           "204": {
@@ -851,11 +1084,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "dataControllerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/dataControllerName"
           },
           {
             "$ref": "#/parameters/apiVersion"
@@ -871,7 +1100,7 @@
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -895,11 +1124,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "dataControllerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/dataControllerName"
           },
           {
             "$ref": "#/parameters/apiVersion"
@@ -921,16 +1146,498 @@
               "$ref": "./dataControllers.json#/definitions/DataControllerResource"
             }
           },
+          "202": {
+            "description": "Resource update is in progress."
+          },
           "default": {
             "description": "*** Error Responses: ***",
             "schema": {
-              "$ref": "./common.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Updates a dataController tags.": {
             "$ref": "./examples/UpdateDataController.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/dataControllers/{dataControllerName}/activeDirectoryConnectors": {
+      "get": {
+        "tags": [
+          "ActiveDirectoryConnectors"
+        ],
+        "operationId": "ActiveDirectoryConnectors_List",
+        "summary": "List the active directory connectors associated with the given data controller.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataControllerName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./activeDirectoryConnectors.json#/definitions/ActiveDirectoryConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 404 ResourceNotFound - The requested resource was not found.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all Active Directory connectors associated with a data controller.": {
+            "$ref": "./examples/ListByDataControllerActiveDirectoryConnector.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/dataControllers/{dataControllerName}/activeDirectoryConnectors/{activeDirectoryConnectorName}": {
+      "put": {
+        "tags": [
+          "ActiveDirectoryConnectors"
+        ],
+        "operationId": "ActiveDirectoryConnectors_Create",
+        "description": "Creates or replaces an Active Directory connector resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "activeDirectoryConnectorResource",
+            "description": "desc",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "./activeDirectoryConnectors.json#/definitions/ActiveDirectoryConnectorResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/dataControllerName"
+          },
+          {
+            "$ref": "#/parameters/activeDirectoryConnectorName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./activeDirectoryConnectors.json#/definitions/ActiveDirectoryConnectorResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "./activeDirectoryConnectors.json#/definitions/ActiveDirectoryConnectorResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create or update an Active Directory connector instance.": {
+            "$ref": "./examples/CreateOrUpdateActiveDirectoryConnector.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ActiveDirectoryConnectors"
+        ],
+        "operationId": "ActiveDirectoryConnectors_Delete",
+        "description": "Deletes an Active Directory connector resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataControllerName"
+          },
+          {
+            "$ref": "#/parameters/activeDirectoryConnectorName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the active directory connector."
+          },
+          "202": {
+            "description": "Resource deletion is in progress."
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "204": {
+            "description": "The specified active directory connector does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deletes an Active Directory connector instance.": {
+            "$ref": "./examples/DeleteActiveDirectoryConnector.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ActiveDirectoryConnectors"
+        ],
+        "operationId": "ActiveDirectoryConnectors_Get",
+        "description": "Retrieves an Active Directory connector resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/dataControllerName"
+          },
+          {
+            "$ref": "#/parameters/activeDirectoryConnectorName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./activeDirectoryConnectors.json#/definitions/ActiveDirectoryConnectorResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieves an Active Directory connector resource.": {
+            "$ref": "./examples/GetActiveDirectoryConnector.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureArcData/postgresInstances": {
+      "get": {
+        "tags": [
+          "PostgresInstances"
+        ],
+        "operationId": "PostgresInstances_List",
+        "summary": "List postgres Instance resources in the subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./postgresInstances.json#/definitions/PostgresInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all Postgres Instance in a subscription.": {
+            "$ref": "./examples/ListSubscriptionPostgresInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/postgresInstances": {
+      "get": {
+        "tags": [
+          "PostgresInstances"
+        ],
+        "operationId": "PostgresInstances_ListByResourceGroup",
+        "description": "Get a postgres Instances list by Resource group name.",
+        "summary": "List postgres Instance resources in the resource group",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./postgresInstances.json#/definitions/PostgresInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all postgres Instances in a resource group.": {
+            "$ref": "./examples/ListByResourceGroupPostgresInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/postgresInstances/{postgresInstanceName}": {
+      "get": {
+        "tags": [
+          "PostgresInstances"
+        ],
+        "operationId": "PostgresInstances_Get",
+        "description": "Retrieves a postgres Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/postgresInstanceName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./postgresInstances.json#/definitions/PostgresInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a postgres Instances.": {
+            "$ref": "./examples/GetPostgresInstance.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PostgresInstances"
+        ],
+        "operationId": "PostgresInstances_Create",
+        "description": "Creates or replaces a postgres Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/postgresInstanceName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "name": "resource",
+            "description": "The postgres instance",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "./postgresInstances.json#/definitions/PostgresInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./postgresInstances.json#/definitions/PostgresInstance"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "./postgresInstances.json#/definitions/PostgresInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a Postgres Instance.": {
+            "$ref": "./examples/CreateOrUpdatePostgresInstance.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "PostgresInstances"
+        ],
+        "operationId": "PostgresInstances_Delete",
+        "description": "Deletes a postgres Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/postgresInstanceName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the Postgres Instance."
+          },
+          "202": {
+            "description": "Resource deletion is in progress."
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "204": {
+            "description": "The specified Postgres Instance does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a PostgresInstances.": {
+            "$ref": "./examples/DeletePostgresInstance.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "PostgresInstances"
+        ],
+        "operationId": "PostgresInstances_Update",
+        "description": "Updates a postgres Instance resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/postgresInstanceName"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The Postgres Instance.",
+            "required": true,
+            "schema": {
+              "$ref": "./postgresInstances.json#/definitions/PostgresInstanceUpdate"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./postgresInstances.json#/definitions/PostgresInstance"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a postgres Instances tags.": {
+            "$ref": "./examples/UpdatePostgresInstance.json"
           }
         }
       }
@@ -968,6 +1675,54 @@
       "type": "string",
       "description": "The API version to use for the request",
       "x-ms-parameter-location": "client"
+    },
+    "dataControllerName": {
+      "name": "dataControllerName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the data controller",
+      "x-ms-parameter-location": "method"
+    },
+    "activeDirectoryConnectorName": {
+      "name": "activeDirectoryConnectorName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Active Directory connector instance",
+      "x-ms-parameter-location": "method"
+    },
+    "sqlManagedInstanceName": {
+      "name": "sqlManagedInstanceName",
+      "description": "Name of SQL Managed Instance",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "failoverGroupName": {
+      "name": "failoverGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Failover Group",
+      "x-ms-parameter-location": "method"
+    },
+    "sqlServerInstanceName": {
+      "name": "sqlServerInstanceName",
+      "description": "Name of SQL Server Instance",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "postgresInstanceName": {
+      "name": "postgresInstanceName",
+      "description": "Name of Postgres Instance",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {

@@ -26,6 +26,11 @@
           "username": "username",
           "password": "********"
         },
+        "activeDirectoryInformation": {
+          "keytabInformation": {
+            "keytab": "********"
+          }
+        },
         "licenseType": "LicenseIncluded",
         "clusterId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/connectedk8s",
         "extensionId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/connectedk8s/providers/Microsoft.KubernetesConfiguration/extensions/extension",
@@ -48,6 +53,31 @@
                   }
                 }
               }
+            },
+            "security": {
+              "adminLoginSecret": "test-sql-login-secret",
+              "serviceCertificateSecret": "Service Certificate Secret",
+              "activeDirectory": {
+                "connector": {
+                  "name": "Name of connector",
+                  "namespace": "Namespace of connector"
+                },
+                "accountName": "Account name",
+                "keytabSecret": "Key tab secret of account",
+                "encryptionTypes": [
+                  "Encryption type item1, Encryption type item2,..."
+                ]
+              },
+              "transparentDataEncryption": {
+                "mode": "SystemManaged"
+              }
+            },
+            "settings": {
+              "network": {
+                "forceencryption": 0,
+                "tlsciphers": "ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA384",
+                "tlsprotocols": "1.2"
+              }
             }
           }
         }
@@ -63,6 +93,9 @@
           "endTime": "Instance end time",
           "basicLoginInformation": {
             "username": "username"
+          },
+          "activeDirectoryInformation": {
+            "keytabInformation": {}
           },
           "licenseType": "LicenseIncluded",
           "clusterId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/connectedk8s",
@@ -85,6 +118,31 @@
                       "additionalProperty": "additionalValue"
                     }
                   }
+                }
+              },
+              "security": {
+                "adminLoginSecret": "test-sql-login-secret",
+                "serviceCertificateSecret": "Service Certificate Secret",
+                "activeDirectory": {
+                  "connector": {
+                    "name": "Name of connector",
+                    "namespace": "Namespace of connector"
+                  },
+                  "accountName": "Account name",
+                  "keytabSecret": "Key tab secret of account",
+                  "encryptionTypes": [
+                    "Encryption type item1, Encryption type item2,..."
+                  ]
+                },
+                "transparentDataEncryption": {
+                  "mode": "SystemManaged"
+                }
+              },
+              "settings": {
+                "network": {
+                  "forceencryption": 0,
+                  "tlsciphers": "ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA384",
+                  "tlsprotocols": "1.2"
                 }
               }
             }
@@ -125,6 +183,9 @@
           "basicLoginInformation": {
             "username": "username"
           },
+          "activeDirectoryInformation": {
+            "keytabInformation": {}
+          },
           "licenseType": "LicenseIncluded",
           "clusterId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/connectedk8s",
           "extensionId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/connectedk8s/providers/Microsoft.KubernetesConfiguration/extensions/extension",
@@ -146,6 +207,31 @@
                       "additionalProperty": "additionalValue"
                     }
                   }
+                }
+              },
+              "security": {
+                "adminLoginSecret": "test-sql-login-secret",
+                "serviceCertificateSecret": "Service Certificate Secret",
+                "activeDirectory": {
+                  "connector": {
+                    "name": "Name of connector",
+                    "namespace": "Namespace of connector"
+                  },
+                  "accountName": "Account name",
+                  "keytabSecret": "Key tab secret of account",
+                  "encryptionTypes": [
+                    "Encryption type item1, Encryption type item2,..."
+                  ]
+                },
+                "transparentDataEncryption": {
+                  "mode": "SystemManaged"
+                }
+              },
+              "settings": {
+                "network": {
+                  "forceencryption": 0,
+                  "tlsciphers": "ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA384",
+                  "tlsprotocols": "1.2"
                 }
               }
             }

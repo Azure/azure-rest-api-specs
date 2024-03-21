@@ -30,6 +30,19 @@ openapi-subtype: rpaas
 tag: package-2024-01
 ```
 
+``` yaml
+directive:
+  - suppress: ResourceNameRestriction
+    from: azurearcdata.json
+    reason: No Unicode support for attribute pattern regex on sqlServerInstanceName and others. This should be fixed by tooling.
+```
+
+``` yaml
+directive:
+  - suppress: ResourceNameRestriction
+    from: sqlServerAvailabilityGroups.json
+    reason: No Unicode support for attribute pattern regex on sqlServerInstanceName and others. This should be fixed by tooling.
+```
 
 ### Tag: package-2024-01
 
@@ -37,13 +50,19 @@ These settings apply only when `--tag=package-2024-01` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-01'
 input-file:
+  - Microsoft.AzureArcData/stable/2024-01-01/activeDirectoryConnectors.json
   - Microsoft.AzureArcData/stable/2024-01-01/azurearcdata.json
   - Microsoft.AzureArcData/stable/2024-01-01/common.json
   - Microsoft.AzureArcData/stable/2024-01-01/dataControllers.json
+  - Microsoft.AzureArcData/stable/2024-01-01/failoverGroups.json
   - Microsoft.AzureArcData/stable/2024-01-01/operations.json
+  - Microsoft.AzureArcData/stable/2024-01-01/postgresInstances.json
   - Microsoft.AzureArcData/stable/2024-01-01/sqlManagedInstances.json
-  - Microsoft.AzureArcData/stable/2024-01-01/sqlServerInstances.json
+  - Microsoft.AzureArcData/stable/2024-01-01/sqlServerAvailabilityGroups.json
+  - Microsoft.AzureArcData/stable/2024-01-01/sqlServerDatabases.json
+  - Microsoft.AzureArcData/stable/2024-01-01/sqlServerInstances.json  
 ```
+
 ### Tag: package-preview-2023-01
 
 These settings apply only when `--tag=package-preview-2023-01` is specified on the command line.
