@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "subscriptionId": "12345",
+    "resourceGroupName": "MyResourceGroup",
+    "communicationServiceName": "MyCommunicationResource",
+    "eventGridFilterName": "MyCommunicationEventFilter",
+    "api-version": "2020-08-20"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/12345/resourceGroups/MyResourceGroup/providers/Microsoft.Communication/CommunicationServicesGccm/MyCommunicationResource/eventGridFilters/MyCommunicationEventFilter",
+        "name": "MyCommunicationEventFilter",
+        "type": "Microsoft.Communication/CommunicationServicesGccm/eventGridFilters",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "filter": {
+            "subjectBeginsWith": "ConfiguredBegin",
+            "subjectEndsWith": "ConfiguredEnd",
+            "includedEventTypes": [
+              "Microsoft.Communication.EndpointCreated"
+            ]
+          },
+          "subscriberIdentityInfo": {
+            "clientPrincipalId": "00000000-0000-0000-0000-000000000000",
+            "clientObjectId": "11111111-1111-1111-1111-111111111111",
+            "clientTenantId": "22222222-2222-2222-2222-222222222222",
+            "clientApplicationId": "33333333-3333-3333-3333-333333333333",
+            "clientAuthorizationSource": "https://active.directory.com"
+          }
+        }
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "NotFound",
+          "message": "Requested resource not found"
+        }
+      }
+    }
+  }
+}
