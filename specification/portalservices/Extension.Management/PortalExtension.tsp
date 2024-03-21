@@ -163,3 +163,9 @@ interface PortalExtensions {
   "application/json",
   "portalExtension"
 );
+
+@@clientName(PortalExtensions.update::parameters.properties, "portalExtension");
+@@encodedName(PortalExtensions.update::parameters.properties,
+  "application/json",
+  "portalExtension"
+);

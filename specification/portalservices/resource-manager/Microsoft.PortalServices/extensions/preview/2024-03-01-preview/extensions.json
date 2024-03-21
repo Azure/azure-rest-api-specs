@@ -93,6 +93,11 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Compiles a file using inline content.": {
+            "$ref": "./examples/PortalTenant_Compilefile.json"
+          }
         }
       }
     },
@@ -365,13 +370,14 @@
             "pattern": "^[a-zA-Z0-9]+$"
           },
           {
-            "name": "properties",
+            "name": "portalExtension",
             "in": "body",
             "description": "The updatable fields of a portal extension.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PatchablePortalExtension"
-            }
+            },
+            "x-ms-client-name": "properties"
           }
         ],
         "responses": {
