@@ -596,7 +596,7 @@ model LuisTargetIntentResult extends TargetIntentResult {
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "LuisTargetIntentResult.result should not use ': Record<unknown>'. Use ': Record<string>' instead."
   @doc("The actual response from a LUIS Generally Available application.")
-  result?: Record<unknown>;
+  result?: {};
 }
 
 @doc("It is a wrap up a Question Answering KB response.")
