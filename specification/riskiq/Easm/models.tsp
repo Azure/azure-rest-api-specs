@@ -118,6 +118,8 @@ alias AssetsExportTrait = {
   ...QueryParametersTrait<{
     ...FilterQueryParameter;
     ...OrderByParameter;
+    ...FileNameParameter;
+    ...ColumnsParameter;
   }>;
 };
 alias ObservationsTrait = {
@@ -131,6 +133,10 @@ alias ObservationsTrait = {
 
 alias DeltaDetailsTrait = {
   ...QueryParametersTrait<{
+    ...DeltaDetailTypeParameter;
+    ...DaysPriorParameter;
+    ...KindParameter;
+    ...DateParameter;
     ...SkipQueryParameter;
     ...MaxPageSizeQueryParameter;
   }>;
@@ -1541,11 +1547,13 @@ enum AssetResponseType {
   reduced,
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 enum DeltaDetailType {
   added,
   removed,
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 enum GlobalAssetType {
   page,
   resource,
@@ -1717,12 +1725,14 @@ model ObservationResponse {
   cvssScoreV3: float;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model ObservationPageResponse {
   totalElements: int64;
   prioritySummary: Record<int32>;
   value: ObservationResponse[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 enum AssetChainSource {
   DISCO_GROUP,
   DISCO_SEED,
@@ -1861,6 +1871,42 @@ model MarkParameter {
   mark?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+model FileNameParameter {
+  @query("fileName")
+  fileName?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+model ColumnsParameter {
+  @query({
+    format: "csv",
+  })
+  columns?: string[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+model DeltaDetailTypeParameter {
+  @query("deltaDetailType")
+  deltaDetailType?: DeltaDetailType;
+}
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+model DaysPriorParameter {
+  @query("daysPrior")
+  daysPrior?: int32;
+}
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+model KindParameter {
+  @query("kind")
+  kind?: GlobalAssetType;
+}
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+model DateParameter {
+  @doc("expected format to be: yyyy-MM-dd")
+  @query("date")
+  date?: string;
+}
+
 @doc("Specify the response type.")
 model ResponseTypeParameter {
   @doc("Specify the response type. The possible values are: ID, STANDARD, FULL, REDUCED")
@@ -1871,7 +1917,7 @@ model ResponseTypeParameter {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model ResponseIncludesParameter {
   @query({
-    format: "multi",
+    format: "csv",
   })
   responseIncludes?: string[];
 }
@@ -1894,8 +1940,9 @@ model RequiredFilterParameter {
 @doc("cisa cve in a given workspace.")
 model CisaCveResponse {
   @key("cveId")
+  @visibility("read")
   @doc("The CVE ID of the vulnerability in the format CVE-YYYY-NNNN, note that the number portion can have more than 4 digits.")
-  cveID: string;
+  cveId: string;
 
   @doc("The vendor or project name for the vulnerability.")
   vendorProject: string;
@@ -1968,22 +2015,6 @@ model DiscoGroupSummaryResponse {
 
   @doc("The name that can be used for display purposes.")
   displayName: string;
-}
-
-@doc("Parameters for asset export")
-model AssetExportParameter {
-  fileName?: string;
-  columns?: string[];
-}
-
-@doc("Parameters for getting delta details")
-model DeltaDetailsParameter {
-  deltaDetailType?: DeltaDetailType;
-  daysPrior?: int32;
-  kind?: GlobalAssetType;
-
-  @doc("expected format to be: yyyy-MM-dd")
-  date?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"

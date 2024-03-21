@@ -311,14 +311,6 @@
           },
           {
             "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object"
-            }
           }
         ],
         "responses": {
@@ -366,12 +358,10 @@
             "$ref": "#/parameters/OrderByParameter"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AssetExportParameter"
-            }
+            "$ref": "#/parameters/FileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ColumnsParameter"
           }
         ],
         "responses": {
@@ -413,18 +403,22 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "$ref": "#/parameters/DeltaDetailTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/DaysPriorParameter"
+          },
+          {
+            "$ref": "#/parameters/KindParameter"
+          },
+          {
+            "$ref": "#/parameters/DateParameter"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
             "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DeltaDetailsParameter"
-            }
           }
         ],
         "responses": {
@@ -993,8 +987,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "202": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2257,21 +2254,6 @@
         "affectedGroupsSummary"
       ]
     },
-    "AssetExportParameter": {
-      "type": "object",
-      "description": "Parameters for asset export",
-      "properties": {
-        "fileName": {
-          "type": "string"
-        },
-        "columns": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "AssetKind": {
       "type": "string",
       "description": "The kind of asset.",
@@ -2854,9 +2836,10 @@
       "type": "object",
       "description": "cisa cve in a given workspace.",
       "properties": {
-        "cveID": {
+        "cveId": {
           "type": "string",
-          "description": "The CVE ID of the vulnerability in the format CVE-YYYY-NNNN, note that the number portion can have more than 4 digits."
+          "description": "The CVE ID of the vulnerability in the format CVE-YYYY-NNNN, note that the number portion can have more than 4 digits.",
+          "readOnly": true
         },
         "vendorProject": {
           "type": "string",
@@ -2904,7 +2887,7 @@
         }
       },
       "required": [
-        "cveID",
+        "cveId",
         "vendorProject",
         "product",
         "vulnerabilityName",
@@ -3275,26 +3258,6 @@
       "x-ms-enum": {
         "name": "DeltaDetailType",
         "modelAsString": true
-      }
-    },
-    "DeltaDetailsParameter": {
-      "type": "object",
-      "description": "Parameters for getting delta details",
-      "properties": {
-        "deltaDetailType": {
-          "$ref": "#/definitions/DeltaDetailType"
-        },
-        "daysPrior": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "kind": {
-          "$ref": "#/definitions/GlobalAssetType"
-        },
-        "date": {
-          "type": "string",
-          "description": "expected format to be: yyyy-MM-dd"
-        }
       }
     },
     "DeltaPageResponse": {
@@ -6974,12 +6937,85 @@
       "default": 0,
       "x-ms-parameter-location": "method"
     },
+    "ColumnsParameter": {
+      "name": "columns",
+      "in": "query",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method"
+    },
+    "DateParameter": {
+      "name": "date",
+      "in": "query",
+      "description": "expected format to be: yyyy-MM-dd",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DaysPriorParameter": {
+      "name": "daysPrior",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "DeltaDetailTypeParameter": {
+      "name": "deltaDetailType",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "added",
+        "removed"
+      ],
+      "x-ms-enum": {
+        "name": "DeltaDetailType",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
+    },
     "DiscoGroupNameParameter": {
       "name": "groupName",
       "in": "path",
       "description": "The unique identifier for the discovery group.",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "FileNameParameter": {
+      "name": "fileName",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "KindParameter": {
+      "name": "kind",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "page",
+        "resource",
+        "mailServer",
+        "nameServer",
+        "host",
+        "domain",
+        "ipAddress",
+        "ipBlock",
+        "as",
+        "contact",
+        "sslCert"
+      ],
+      "x-ms-enum": {
+        "name": "GlobalAssetType",
+        "modelAsString": true
+      },
       "x-ms-parameter-location": "method"
     },
     "MarkParameter": {
@@ -7021,7 +7057,7 @@
       "items": {
         "type": "string"
       },
-      "collectionFormat": "multi",
+      "collectionFormat": "csv",
       "x-ms-parameter-location": "method"
     },
     "ResponseTypeParameter": {

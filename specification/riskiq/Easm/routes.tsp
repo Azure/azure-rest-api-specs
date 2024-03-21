@@ -38,17 +38,13 @@ interface Assets {
 
   @doc("Dismiss discovery chain for a given asset")
   @action("dismissAssetChain")
-  dismissAssetChain is Operations.ResourceAction<
-    AssetResource,
-    {},
-    Task
-  >;
+  dismissAssetChain is Operations.ResourceAction<AssetResource, {}, Task>;
 
   @doc("Export a list of assets for the provided search parameters.")
   @action("export")
   getAssetsExport is Operations.ResourceCollectionAction<
     AssetResource,
-    AssetExportParameter,
+    {},
     Task,
     AssetsExportTrait
   >;
@@ -57,15 +53,16 @@ interface Assets {
   @action("getObservations")
   getObservations is Operations.ResourceAction<
     AssetResource,
-    ObservationsParameters,
-    ObservationPageResponse
+    {},
+    ObservationPageResponse,
+    ObservationsParameters
   >;
 
   @doc("Retrieve a list of deltas for the provided time range.")
   @action("getDeltaDetails")
   getDeltaDetails is Operations.ResourceCollectionAction<
     AssetResource,
-    DeltaDetailsParameter,
+    {},
     DeltaPageResponse,
     DeltaDetailsTrait
   >;
@@ -171,8 +168,10 @@ interface DiscoveryGroups {
     Task
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("deletes a discovery group")
-  deleteDiscoGroup is Operations.ResourceDelete<DiscoGroup>;
+  @delete
+  deleteDiscoGroup is Foundations.ResourceOperation<DiscoGroup, {}, Task>;
 }
 
 @tag("Discovery Templates")
