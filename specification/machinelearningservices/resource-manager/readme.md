@@ -49,6 +49,31 @@ suppressions:
     reason: This is for feature parity with other job type like commandjob, sweepjob etc. We have one interface for all type of job and other job take environment variable like this to match with them we also pass environment variable in this format. please check existing "CommandJob" in same file.
     where:
       - $.definitions["SparkJob"].properties["environmentVariables"]
+  - code: PatchBodyParametersSchema
+    reason: This is already exist in preview version api version, the reason we have required mark for the property inside is those are the only format we allow user to update this whole encryption property.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].patch.parameters[4].schema.properties.properties
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: Service already using 202 response code for the below APIs in preview version.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments/{deploymentName}].put
+      - $.paths["subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiPolicies/{raiPolicyName}"].put
+  - code: PutResponseCodes
+    reason: Service already using 202 response code for the below APIs, got exceptions from ARM reviewer from previous preview version already.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments/{deploymentName}"].put
+  - code: AvoidAdditionalProperties
+    reason: These schemas are already in production use,.
+    from: workspaceRP.json
+    where:
+      - $.definitions.WorkspaceUpdateParameters.properties.properties.properties.managedNetwork.properties.outboundRules
+      - $.definitions.WorkspacePropertiesUpdateParameters.properties.managedNetwork.properties.outboundRules
+      - $.definitions.EndpointModels.properties.value.items.properties.capabilities
+      - $.definitions.AccountModel.properties.finetuneCapabilities
+      - $.definitions.AccountModel.properties.capabilities
+      - $.definitions.EndpointModels.properties.value.items.properties.finetuneCapabilities
+      - $.definitions.CustomKeysWorkspaceConnectionProperties.properties.credentials.properties.keys
+      - $.definitions.CustomKeys.properties.keys
 ```
 ### Tag: package-preview-2024-01
 

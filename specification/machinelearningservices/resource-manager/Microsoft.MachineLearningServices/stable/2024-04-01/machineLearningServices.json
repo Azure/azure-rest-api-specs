@@ -2089,7 +2089,13 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error",
@@ -3151,10 +3157,6 @@
         "enableDataIsolation": {
           "type": "boolean"
         },
-        "enableSoftwareBillOfMaterials": {
-          "description": "Flag to tell if SoftwareBillOfMaterials should be enabled for this workspace",
-          "type": "boolean"
-        },
         "hubResourceId": {
           "type": "string"
         },
@@ -3250,10 +3252,6 @@
         },
         "v1LegacyMode": {
           "description": "Enabling v1_legacy_mode may prevent you from using features provided by the v2 API.",
-          "type": "boolean"
-        },
-        "enableSoftwareBillOfMaterials": {
-          "description": "Flag to tell if SoftwareBillOfMaterials should be enabled for this workspace",
           "type": "boolean"
         },
         "encryption": {
@@ -7303,7 +7301,11 @@
           "type": "string"
         },
         "metadata": {
-          "type": "object"
+          "description": "Store user metadata for this connection",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "sharedUserList": {
           "type": "array",
@@ -8132,7 +8134,7 @@
         "enabled": {
           "type": "boolean"
         },
-        "policyName": {
+        "name": {
           "type": "string"
         },
         "source": {
