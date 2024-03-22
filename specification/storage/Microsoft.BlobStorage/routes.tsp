@@ -2281,3 +2281,119 @@ interface AppendBlobSealService {
     ...IsSealedResponseHeader;
   } | StorageError;
 }
+
+@route("/{containerName}/{blob}?comp=query")
+interface BlobQueryService {
+  /** The Query operation enables users to select/project on blob data by providing simple query expressions. */
+  @post
+  @operationId("Blob_Query")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  query(
+    ...QueryRequestParameter;
+    ...ContainerNameParameter;
+    ...BlobNameParameter;
+    ...SnapshotParameter;
+    ...TimeoutParameter;
+    ...LeaseIdOptional;
+    ...EncryptionKeyParameter;
+    ...EncryptionKeySha256Parameter;
+    ...EncryptionAlgorithmParameter;
+    ...IfModifiedSince;
+    ...IfUnmodifiedSince;
+    ...IfMatchParameter;
+    ...IfNoneMatchParameter;
+    ...IfTagsParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
+  ): {
+    @statusCode statusCode: 200 | 206;
+    @body body: bytes;
+    // TODO: MetadataResponseHeader;
+
+    ...LastModifiedResponseHeader;
+    ...ContentLengthResponseHeader;
+    ...ContentTypeResponseHeader;
+    ...ContentRangeResponseHeader;
+    ...ETagResponseHeader;
+    ...ContentMD5ResponseHeader;
+    ...ContentEncodingResponseParameter;
+    ...CacheControlResponseHeader;
+    ...ContentLanguageResponseHeader;
+    ...BlobSequenceNumberResponseHeader;
+    ...BlobTypeResponseHeader;
+    ...CopyCompletionTimeResponseHeader;
+    ...CopyStatusDescriptionResponseHeader;
+    ...CopyIdResponseHeader;
+    ...CopyProgressResponseHeader;
+    ...CopySourceResponseHeader;
+    ...CopyStatusResponseHeader;
+    ...LeaseDurationResponseHeader;
+    ...LeaseStateResponseHeader;
+    ...LeaseStatusResponseHeader;
+    ...ClientRequestIdResponseHeader;
+    ...RequestIdResponseHeader;
+    ...VersionResponseHeader;
+    ...DateResponseHeader;
+    ...AcceptRangesResponseHeader;
+    ...BlobCommittedBlockCountResponseHeader;
+    ...IsServerEncryptedResponseHeader;
+    ...EncryptionKeySha256ResponseHeader;
+    ...EncryptionScopeResponseHeader;
+    ...BlobContentMD5ResponseHeader;
+  } | StorageError;
+}
+
+@route("/{containerName}/{blob}?comp=tags")
+interface BlobTagsService {
+
+  /** The Get Blob Tags operation enables users to get tags on a blob. */
+  @get
+  @operationId("Blob_GetTags")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  getTags(
+    ...ContainerNameParameter;
+    ...BlobNameParameter;
+    ...TimeoutParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
+    ...SnapshotParameter;
+    ...VersionIdParameter;
+    ...LeaseIdOptional;
+    ...IfTagsParameter;
+  ): {
+    @statusCode statusCode: 200;
+    @body body: BlobTags; // TODO: XML
+
+    ...ClientRequestIdResponseHeader;
+    ...RequestIdResponseHeader;
+    ...VersionResponseHeader;
+    ...DateResponseHeader;
+  } | StorageError;
+
+  /** The Set Tags operation enables users to set tags on a blob. */
+  @put
+  @operationId("Blob_SetTags")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  setTags(
+    ...ContainerNameParameter;
+    ...BlobNameParameter;
+    ...TimeoutParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
+    ...VersionIdParameter;
+    ...LeaseIdOptional;
+    ...ContentMD5Parameter;
+    ...ContentCrc64Parameter;
+    ...IfTagsParameter;
+    ...BlobTagsBodyParameter;
+  ): {
+    @statusCode statusCode: 204;
+    ...ClientRequestIdResponseHeader;
+    ...RequestIdResponseHeader;
+    ...VersionResponseHeader;
+    ...DateResponseHeader;
+  } | StorageError;
+}

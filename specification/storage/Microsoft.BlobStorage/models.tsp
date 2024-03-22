@@ -21,6 +21,140 @@ model StorageError {
 
 /// Parameters
 
+/** The blob tags body parameter. */
+model BlobTagsBodyParameter {
+  /** The blob tags. */
+  @body
+  Tags: BlobTags;
+}
+
+/** Represents blob tags. */
+model BlobTags {
+  // TODO: XML
+  /** Represents the blob tags. */
+  BlobTagSet: BlobTag[];
+}
+
+/** The blob content MD5 response header. */
+model BlobContentMD5ResponseHeader {
+  /** If the blob has a MD5 hash, and if request contains range header (Range or x-ms-range), this response header is returned with the value of the whole blob's MD5 value. This value may or may not be equal to the value returned in Content-MD5 header, with the latter calculated from the requested range */
+  @clientName("BlobContentMD5")
+  @header `x-ms-blob-content-md5`: string;
+}
+
+/** The query request body parameter. */
+model QueryRequestParameter {
+  /** The query request */
+  @body
+  queryRequest: QueryRequest;
+}
+
+/** Groups the set of query request settings. */
+model QueryRequest {
+  // TODO: XML
+  /** Required. The type of the provided query expression. */
+  QueryType: QueryType;
+
+  /** The query expression in SQL. The maximum size of the query expression is 256KiB. */
+  Expression: string;
+
+  /** The input serialization settings. */
+  InputSerialization?: QuerySerialization;
+
+  /** The output serialization settings. */
+  OutputSerialization?: QuerySerialization;
+}
+
+/** The query serialization settings. */
+model QuerySerialization {
+  /** The query format. */
+  Format: QueryFormat;
+
+  /** The query format type. */
+  QueryType: QueryFormatType;
+}
+
+/** The query format settings. */
+model QueryFormat {
+  /** The query type. */
+  Type: QueryFormatType;
+
+  /** The delimited text configuration. */
+  DelimitedTextConfiguration?: DelimitedTextConfiguration;
+
+  /** The JSON text configuration. */
+  JsonTextConfiguration?: JsonTextConfiguration;
+
+  /** The Apache Arrow configuration. */
+  ArrowConfiguration?: ArrowConfiguration;
+
+  /** The Parquet configuration. */
+  ParquetConfiguration?: ParquetConfiguration;
+}
+
+/** Represents the delimited text configuration. */
+model DelimitedTextConfiguration {
+  /** The string used to separate columns. */
+  ColumnSeparator?: string;
+
+  /** The string used to quote a specific field. */
+  FieldQuote?: string;
+
+  /** The string used to separate records. */
+  RecordSeparator?: string;
+
+  /** The string used to escape a quote character in a field. */
+  EscapeChar?: string;
+
+  /** Represents whether the data has headers. */
+  HeadersPresent?: boolean;
+}
+
+/** Represents the JSON text configuration. */
+model JsonTextConfiguration {
+  /** The string used to separate records. */
+  RecordSeparator?: string;
+}
+
+/** Represents the Apache Arrow configuration. */
+model ArrowConfiguration {
+  /** The Apache Arrow schema */
+  Schema: ArrowField[];
+}
+
+/** Represents an Apache Arrow field. */
+model ArrowField {
+  /** The arrow field type. */
+  Type: string;
+  /** The arrow field name. */
+  Name?: string;
+  /** The arrow field precision. */
+  Precision?: int32;
+  /** The arrow field scale. */
+  Scale?: int32;
+}
+
+/** Represents the Parquet configuration. */
+model ParquetConfiguration is Record<unknown>;
+
+/** The query format type. */
+enum QueryFormatType {
+  /** The query format type is delimited. */
+  delimited,
+  /** The query format type is JSON. */
+  json,
+  /** The query format type is Apache Arrow. */
+  arrow,
+  /** The query format type is Parquet. */
+  parquet
+}
+
+/** The query types. */
+enum QueryType {
+  /** The query type is SQL. */
+  SQL,
+}
+
 /** The blob append offset response header. */
 model BlobAppendOffsetResponseHeader {
   /** This response header is returned only for append operations. It returns the offset at which the block was committed, in bytes. */
