@@ -163,6 +163,5 @@ union WatcherStatus {
 @doc("The status of the last provisioning operation performed on the resource.")
 union DatabaseWatcherProvisioningState {
   string,
-
   ResourceProvisioningState,
 }

@@ -31,7 +31,6 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @Azure.Core.lroStatus
 union ProvisioningState {
   string,
-
   ResourceProvisioningState,
 
   @doc("Provisioning State")
