@@ -1775,8 +1775,10 @@ model VirtualMachine is ProxyResource<VirtualMachineProperties> {
 }
 
 @doc("Virtual Machine provisioning state")
-enum VirtualMachineProvisioningState {
-  ...ResourceProvisioningState,
+union VirtualMachineProvisioningState {
+  string,
+
+  ResourceProvisioningState,
 }
 
 @doc("Virtual Machine Properties")
