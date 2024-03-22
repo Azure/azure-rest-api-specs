@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2024-02-01-preview"
+    "version": "2024-04-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1162,24 +1162,6 @@
       },
       "description": "Describes the policy used when upgrading the cluster."
     },
-    "IPTag": {
-      "type": "object",
-      "required": [
-        "ipTagType",
-        "tag"
-      ],
-      "properties": {
-        "ipTagType": {
-          "type": "string",
-          "description": "The IP tag type."
-        },
-        "tag": {
-          "type": "string",
-          "description": "The value of the IP tag."
-        }
-      },
-      "description": "IPTag associated with the object."
-    },
     "LoadBalancingRule": {
       "type": "object",
       "required": [
@@ -1498,7 +1480,7 @@
         "ipTags": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IPTag"
+            "$ref": "#/definitions/IpTag"
           },
           "x-ms-identifiers": [],
           "description": "The list of IP tags associated with the default public IP address of the cluster."
@@ -1742,6 +1724,11 @@
           "type": "boolean",
           "description": "VM Size name.",
           "readOnly": true
+        },
+        "details": {
+          "type": "string",
+          "description": "Zone resiliency status details for the resource.",
+          "readOnly": true
         }
       },
       "description": "Describes Az Resiliency status of Base resources"
@@ -1941,6 +1928,24 @@
         }
       },
       "description": "The error details."
+    },
+    "IpTag": {
+      "type": "object",
+      "required": [
+        "ipTagType",
+        "tag"
+      ],
+      "properties": {
+        "ipTagType": {
+          "type": "string",
+          "description": "IP tag type. Example: FirstPartyUsage."
+        },
+        "tag": {
+          "type": "string",
+          "description": "IP tag associated with the public IP. Example: SQL, Storage etc."
+        }
+      },
+      "description": "The IP tag associated with the public IP address."
     },
     "ManagedResourceProvisioningState": {
       "type": "string",
@@ -2248,7 +2253,7 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2024-02-01-preview\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2024-04-01\" for this specification.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"

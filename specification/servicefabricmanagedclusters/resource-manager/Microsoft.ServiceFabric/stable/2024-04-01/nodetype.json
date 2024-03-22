@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2024-02-01-preview"
+    "version": "2024-04-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -841,24 +841,6 @@
         }
       }
     },
-    "IpTag": {
-      "type": "object",
-      "required": [
-        "ipTagType",
-        "tag"
-      ],
-      "properties": {
-        "ipTagType": {
-          "type": "string",
-          "description": "IP tag type. Example: FirstPartyUsage."
-        },
-        "tag": {
-          "type": "string",
-          "description": "IP tag associated with the public IP. Example: SQL, Storage etc."
-        }
-      },
-      "description": "The IP tag associated with the public IP address."
-    },
     "ManagedProxyResource": {
       "type": "object",
       "properties": {
@@ -1288,6 +1270,10 @@
             "name"
           ],
           "description": "Specifies the settings for any additional secondary network interfaces to attach to the node type."
+        },
+        "computerNamePrefix": {
+          "type": "string",
+          "description": "Specifies the computer name prefix. Limited to 9 characters. If specified, allows for a longer name to be specified for the node type name."
         }
       },
       "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster."
@@ -1796,6 +1782,24 @@
       },
       "description": "The error details."
     },
+    "IpTag": {
+      "type": "object",
+      "required": [
+        "ipTagType",
+        "tag"
+      ],
+      "properties": {
+        "ipTagType": {
+          "type": "string",
+          "description": "IP tag type. Example: FirstPartyUsage."
+        },
+        "tag": {
+          "type": "string",
+          "description": "IP tag associated with the public IP. Example: SQL, Storage etc."
+        }
+      },
+      "description": "The IP tag associated with the public IP address."
+    },
     "ManagedResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of the managed resource.",
@@ -1993,7 +1997,7 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2024-02-01-preview\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2024-04-01\" for this specification.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"
