@@ -83,6 +83,16 @@ input-file:
   - Microsoft.HardwareSecurityModules/stable/2021-11-30/dedicatedhsm.json
 ```
 
+### Tag: package-2024-06
+
+These settings apply only when `--tag=package-2024-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-06'
+input-file:
+  - Microsoft.HardwareSecurityModules/stable/2024-06-30/cloudhsm.json
+  - Microsoft.HardwareSecurityModules/stable/2024-06-30/operations.json
+```
+
 # Code Generation
 
 ## Swagger to SDK

@@ -44,19 +44,16 @@
         "description": "Create or Update a dedicated HSM in the specified subscription.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Resource Group to which the resource belongs."
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "description": "Name of the dedicated Hsm"
+            "$ref": "#/parameters/DedicatedHsmName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "parameters",
@@ -66,12 +63,6 @@
               "$ref": "#/definitions/DedicatedHsm"
             },
             "description": "Parameters to create or update the dedicated hsm"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -115,19 +106,16 @@
         "description": "Update a dedicated HSM in the specified subscription.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Resource Group to which the server belongs."
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
-            "description": "Name of the dedicated HSM"
+            "$ref": "#/parameters/DedicatedHsmName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "parameters",
@@ -138,12 +126,6 @@
               "$ref": "#/definitions/DedicatedHsmPatchParameters"
             },
             "description": "Parameters to patch the dedicated HSM"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -178,24 +160,16 @@
         "description": "Deletes the specified Azure Dedicated HSM.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Resource Group to which the dedicated HSM belongs."
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the dedicated HSM to delete"
+            "$ref": "#/parameters/DedicatedHsmName"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -229,24 +203,16 @@
         "description": "Gets the specified Azure dedicated HSM.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Resource Group to which the dedicated hsm belongs."
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the dedicated HSM."
+            "$ref": "#/parameters/DedicatedHsmName"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -285,11 +251,7 @@
         "description": "The List operation gets information about the dedicated hsms associated with the subscription and within the specified resource group.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Resource Group to which the dedicated HSM belongs."
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "$top",
@@ -299,10 +261,10 @@
             "description": "Maximum number of results to return."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -348,10 +310,10 @@
             "description": "Maximum number of results to return."
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -391,24 +353,16 @@
         "description": "Gets a list of egress endpoints (network endpoints of all outbound dependencies) in the specified dedicated hsm resource. The operation returns properties of each egress endpoint.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Resource Group to which the dedicated hsm belongs."
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the dedicated HSM."
+            "$ref": "#/parameters/DedicatedHsmName"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -437,47 +391,6 @@
     }
   },
   "definitions": {
-    "DedicatedHsmOperation": {
-      "description": "REST API operation",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name of the Dedicated HSM Resource Provider Operation.",
-          "type": "string"
-        },
-        "isDataAction": {
-          "description": "Gets or sets a value indicating whether it is a data plane action",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "origin": {
-          "description": "The origin of the operation",
-          "type": "string"
-        },
-        "display": {
-          "properties": {
-            "provider": {
-              "description": "The Resource Provider of the operation",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Operation type: Read, write, delete, etc.",
-              "type": "string"
-            },
-            "description": {
-              "description": "The object that represents the operation.",
-              "type": "string"
-            }
-          },
-          "description": "The display string.",
-          "type": "object"
-        }
-      }
-    },
     "ApiEntityReference": {
       "properties": {
         "id": {
@@ -930,12 +843,13 @@
     }
   },
   "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
+    "DedicatedHsmName": {
+      "name": "name",
+      "in": "path",
       "required": true,
       "type": "string",
-      "description": "Client Api Version."
+      "pattern": "^[a-zA-Z0-9-]{3,24}$",
+      "description": "Name of the dedicated Hsm"
     }
   }
 }
