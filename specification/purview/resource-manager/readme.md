@@ -26,7 +26,7 @@ These are the global settings for the Purview API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-05-01-preview
+tag: package-2024-04-01-preview
 ```
 
 ### Tag: package-2024-04-01-preview
