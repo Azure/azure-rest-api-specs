@@ -14,8 +14,8 @@ namespace SdkCustomizations;
   service: DevCenterService,
 })
 interface DevCenterClientOperations {
-  listProjects is DevCenterService.DevCenterOperations.listProjects;
-  getProject is DevCenterService.DevCenterOperations.getProject;
+  listProjects is DevCenterService.DevCenter.listProjects;
+  getProject is DevCenterService.DevCenter.getProject;
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "detailed suppress description for each operation can be found in routes.tsp"
@@ -24,26 +24,26 @@ interface DevCenterClientOperations {
   service: DevCenterService,
 })
 interface DevBoxesClientOperations {
-  listPools is DevCenterService.DevBoxesOperations.listPools;
-  getPool is DevCenterService.DevBoxesOperations.getPool;
-  listSchedules is DevCenterService.DevBoxesOperations.listSchedules;
-  getSchedule is DevCenterService.DevBoxesOperations.getSchedule;
-  listAllDevBoxes is DevCenterService.DevBoxesDevCenter.listAllDevBoxes;
-  listAllDevBoxesByUser is DevCenterService.DevBoxesDevCenter.listAllDevBoxesByUser;
-  listDevBoxes is DevCenterService.DevBoxesOperations.listDevBoxes;
-  getDevBox is DevCenterService.DevBoxesOperations.getDevBox;
+  listPools is DevCenterService.DevBoxes.listPools;
+  getPool is DevCenterService.DevBoxes.getPool;
+  listSchedules is DevCenterService.DevBoxes.listSchedulesByPool;
+  getSchedule is DevCenterService.DevBoxes.getScheduleByPool;
+  listAllDevBoxes is DevCenterService.DevCenter.listAllDevBoxes;
+  listAllDevBoxesByUser is DevCenterService.DevCenter.listAllDevBoxesByUser;
+  listDevBoxes is DevCenterService.DevBoxes.listDevBoxesByUser;
+  getDevBox is DevCenterService.DevBoxes.getDevBoxByUser;
   @convenientAPI(false, "csharp") // https://github.com/Azure/azure-rest-api-specs/issues/28083
-  createDevBox is DevCenterService.DevBoxesOperations.createDevBox;
-  deleteDevBox is DevCenterService.DevBoxesOperations.deleteDevBox;
-  startDevBox is DevCenterService.DevBoxesOperations.startDevBox;
-  stopDevBox is DevCenterService.DevBoxesOperations.stopDevBox;
-  restartDevBox is DevCenterService.DevBoxesOperations.restartDevBox;
-  getRemoteConnection is DevCenterService.DevBoxesOperations.getRemoteConnection;
-  listDevBoxActions is DevCenterService.DevBoxesOperations.listDevBoxActions;
-  getDevBoxAction is DevCenterService.DevBoxesOperations.getDevBoxAction;
-  skipAction is DevCenterService.DevBoxesOperations.skipAction;
-  delayAction is DevCenterService.DevBoxesOperations.delayAction;
-  delayAllActions is DevCenterService.DevBoxesOperations.delayAllActions;
+  createDevBox is DevCenterService.DevBoxes.createDevBox;
+  deleteDevBox is DevCenterService.DevBoxes.deleteDevBox;
+  startDevBox is DevCenterService.DevBoxes.startDevBox;
+  stopDevBox is DevCenterService.DevBoxes.stopDevBox;
+  restartDevBox is DevCenterService.DevBoxes.restartDevBox;
+  getRemoteConnection is DevCenterService.DevBoxes.getRemoteConnection;
+  listDevBoxActions is DevCenterService.DevBoxes.listActions;
+  getDevBoxAction is DevCenterService.DevBoxes.getAction;
+  skipAction is DevCenterService.DevBoxes.skipAction;
+  delayAction is DevCenterService.DevBoxes.delayAction;
+  delayAllActions is DevCenterService.DevBoxes.delayActions;
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "detailed suppress description for each operation can be found in routes.tsp"
@@ -52,200 +52,170 @@ interface DevBoxesClientOperations {
   service: DevCenterService,
 })
 interface EnvironmentClientOperations {
-  listAllEnvironments is DevCenterService.EnvironmentsOperations.listAllEnvironments;
-  listEnvironments is DevCenterService.EnvironmentsOperations.listEnvironments;
-  getEnvironment is DevCenterService.EnvironmentsOperations.getEnvironment;
+  listAllEnvironments is DevCenterService.Environments.listEnvironments;
+  listEnvironments is DevCenterService.Environments.listEnvironmentsByUser;
+  getEnvironment is DevCenterService.Environments.getEnvironmentByUser;
   @convenientAPI(false, "csharp") // same issue as described in https://github.com/Azure/azure-rest-api-specs/issues/28083
-  createOrUpdateEnvironment is DevCenterService.EnvironmentsOperations.createOrUpdateEnvironment;
-  deleteEnvironment is DevCenterService.EnvironmentsOperations.deleteEnvironment;
-  listCatalogs is DevCenterService.EnvironmentsOperations.listCatalogs;
-  getCatalog is DevCenterService.EnvironmentsOperations.getCatalog;
-  listEnvironmentDefinitions is DevCenterService.EnvironmentsOperations.listEnvironmentDefinitions;
-  listEnvironmentDefinitionsByCatalog is DevCenterService.EnvironmentsOperations.listEnvironmentDefinitionsByCatalog;
-  getEnvironmentDefinition is DevCenterService.EnvironmentsOperations.getEnvironmentDefinition;
-  listEnvironmentTypes is DevCenterService.EnvironmentsOperations.listEnvironmentTypes;
+  createOrUpdateEnvironment is DevCenterService.Environments.createOrReplaceEnvironment;
+  deleteEnvironment is DevCenterService.Environments.deleteEnvironment;
+  listCatalogs is DevCenterService.Environments.listCatalogsByProject;
+  getCatalog is DevCenterService.Environments.getCatalog;
+  listEnvironmentDefinitions is DevCenterService.Environments.listEnvironmentDefinitionsByProject;
+  listEnvironmentDefinitionsByCatalog is DevCenterService.Environments.listEnvironmentDefinitionsByCatalog;
+  getEnvironmentDefinition is DevCenterService.Environments.getEnvironmentDefinition;
+  listEnvironmentTypes is DevCenterService.Environments.listEnvironmentTypes;
 }
 
 @@usage(DevCenterService.DevBox, Usage.input | Usage.output);
 @@usage(DevCenterService.Environment, Usage.input | Usage.output);
 
-@@projectedName(DevCenterService.LocalAdminStatus,
-  "client",
-  "LocalAdministratorStatus"
-);
-@@projectedName(DevCenterService.StopOnDisconnectEnableStatus,
-  "client",
+@@clientName(DevCenterService.LocalAdminStatus, "LocalAdministratorStatus");
+@@clientName(DevCenterService.StopOnDisconnectEnableStatus,
   "StopOnDisconnectStatus"
 );
-@@projectedName(DevCenterService.EnvironmentTypeEnableStatus,
-  "client",
+@@clientName(DevCenterService.EnvironmentTypeEnableStatus,
   "EnvironmentTypeStatus"
 );
-@@projectedName(DevCenterService.DevBoxActionDelayResultStatus,
-  "client",
+@@clientName(DevCenterService.DevBoxActionDelayResultStatus,
   "DevBoxActionDelayStatus"
 );
-@@projectedName(DevCenterService.DevBoxActionDelayResult.result,
-  "client",
-  "delayStatus"
-);
+@@clientName(DevCenterService.DevBoxActionDelayResult.result, "delayStatus");
 
-@@projectedName(DevCenterService.OsType, "csharp", "DevBoxOSType");
-@@projectedName(DevCenterService.ScheduledFrequency,
-  "csharp",
-  "ScheduleFrequency"
+@@clientName(DevCenterService.OsType, "DevBoxOSType", "csharp");
+@@clientName(DevCenterService.ScheduledFrequency,
+  "ScheduleFrequency",
+  "csharp"
 );
-@@projectedName(DevCenterService.ScheduledType, "csharp", "ScheduleType");
-@@projectedName(DevCenterService.Pool, "csharp", "DevBoxPool");
-@@projectedName(DevCenterService.Pool.osType, "csharp", "OSType");
-@@projectedName(DevCenterService.Pool.localAdministrator,
-  "csharp",
-  "LocalAdministratorStatus"
+@@clientName(DevCenterService.ScheduledType, "ScheduleType", "csharp");
+@@clientName(DevCenterService.Pool, "DevBoxPool", "csharp");
+@@clientName(DevCenterService.Pool.osType, "OSType", "csharp");
+@@clientName(DevCenterService.Pool.localAdministrator,
+  "LocalAdministratorStatus",
+  "csharp"
 );
-@@projectedName(DevCenterService.HardwareProfile,
-  "csharp",
-  "DevBoxHardwareProfile"
+@@clientName(DevCenterService.HardwareProfile,
+  "DevBoxHardwareProfile",
+  "csharp"
 );
-@@projectedName(DevCenterService.StorageProfile,
-  "csharp",
-  "DevBoxStorageProfile"
+@@clientName(DevCenterService.StorageProfile, "DevBoxStorageProfile", "csharp");
+@@clientName(DevCenterService.StorageProfile.osDisk, "OSDisk", "csharp");
+@@clientName(DevCenterService.OsDisk, "OSDisk", "csharp");
+@@clientName(DevCenterService.ImageReference, "DevBoxImageReference", "csharp");
+@@clientName(DevCenterService.ImageReference.osBuildNumber,
+  "OSBuildNumber",
+  "csharp"
 );
-@@projectedName(DevCenterService.StorageProfile.osDisk, "csharp", "OSDisk");
-@@projectedName(DevCenterService.OsDisk, "csharp", "OSDisk");
-@@projectedName(DevCenterService.ImageReference,
-  "csharp",
-  "DevBoxImageReference"
+@@clientName(DevCenterService.Schedule, "DevBoxSchedule", "csharp");
+@@clientName(DevCenterService.Schedule.type, "scheduleType", "csharp");
+@@clientName(DevCenterService.Schedule.frequency,
+  "scheduleFrequency",
+  "csharp"
 );
-@@projectedName(DevCenterService.ImageReference.osBuildNumber,
-  "csharp",
-  "OSBuildNumber"
+@@clientName(DevCenterService.DevBox.osType, "OSType", "csharp");
+@@clientName(DevCenterService.DevBox.user, "userId", "csharp");
+@@clientName(DevCenterService.DevBox.localAdministrator,
+  "LocalAdministratorStatus",
+  "csharp"
 );
-@@projectedName(DevCenterService.Schedule, "csharp", "DevBoxSchedule");
-@@projectedName(DevCenterService.Schedule.type, "csharp", "scheduleType");
-@@projectedName(DevCenterService.Schedule.frequency,
-  "csharp",
-  "scheduleFrequency"
+@@clientName(DevCenterService.RemoteConnection.webUrl, "webUri", "csharp");
+@@clientName(DevCenterService.RemoteConnection.rdpConnectionUrl,
+  "rdpConnectionUri",
+  "csharp"
 );
-@@projectedName(DevCenterService.DevBox.osType, "csharp", "OSType");
-@@projectedName(DevCenterService.DevBox.user, "csharp", "userId");
-@@projectedName(DevCenterService.DevBox.localAdministrator,
-  "csharp",
-  "LocalAdministratorStatus"
+@@clientName(DevCenterService.DevBoxAction.next, "nextAction", "csharp");
+@@clientName(DevCenterService.DevBoxActionDelayResult.name,
+  "actionName",
+  "csharp"
 );
-@@projectedName(DevCenterService.RemoteConnection.webUrl, "csharp", "webUri");
-@@projectedName(DevCenterService.RemoteConnection.rdpConnectionUrl,
-  "csharp",
-  "rdpConnectionUri"
+@@clientName(DevCenterService.ParameterType,
+  "EnvironmentDefinitionParameterType",
+  "csharp"
 );
-@@projectedName(DevCenterService.DevBoxAction.next, "csharp", "nextAction");
-@@projectedName(DevCenterService.DevBoxActionDelayResult.name,
-  "csharp",
-  "actionName"
+@@clientName(DevCenterService.Environment, "DevCenterEnvironment", "csharp");
+@@clientName(DevCenterService.Environment.environmentType,
+  "environmentTypeName",
+  "csharp"
 );
-@@projectedName(DevCenterService.ParameterType,
-  "csharp",
-  "EnvironmentDefinitionParameterType"
+@@clientName(DevCenterService.Environment.user, "userId", "csharp");
+@@clientName(DevCenterService.Catalog, "DevCenterCatalog", "csharp");
+@@clientName(DevCenterService.EnvironmentDefinitionParameter.default,
+  "defaultValue",
+  "csharp"
 );
-@@projectedName(DevCenterService.Environment, "csharp", "DevCenterEnvironment");
-@@projectedName(DevCenterService.Environment.environmentType,
-  "csharp",
-  "environmentTypeName"
+@@clientName(DevCenterService.EnvironmentDefinitionParameter.type,
+  "parameterType",
+  "csharp"
 );
-@@projectedName(DevCenterService.Environment.user, "csharp", "userId");
-@@projectedName(DevCenterService.Catalog, "csharp", "DevCenterCatalog");
-@@projectedName(DevCenterService.EnvironmentDefinitionParameter.default,
-  "csharp",
-  "defaultValue"
+@@clientName(DevCenterService.EnvironmentType,
+  "DevCenterEnvironmentType",
+  "csharp"
 );
-@@projectedName(DevCenterService.EnvironmentDefinitionParameter.type,
-  "csharp",
-  "parameterType"
+@@clientName(DevCenterService.OperationStatusValue,
+  "DevCenterOperationStatus",
+  "csharp"
 );
-@@projectedName(DevCenterService.EnvironmentType,
-  "csharp",
-  "DevCenterEnvironmentType"
+@@clientName(DevCenterService.OperationStatus,
+  "DevCenterOperationDetails",
+  "csharp"
 );
-@@projectedName(DevCenterService.OperationStatusValue,
-  "csharp",
-  "DevCenterOperationStatus"
-);
-@@projectedName(DevCenterService.OperationStatus,
-  "csharp",
-  "DevCenterOperationDetails"
-);
-@@projectedName(DevCenterService.Project, "csharp", "DevCenterProject");
+@@clientName(DevCenterService.Project, "DevCenterProject", "csharp");
 
-@@projectedName(DevCenterService.OsType, "java", "DevBoxOsType");
-@@projectedName(DevCenterService.ScheduledFrequency,
-  "java",
-  "ScheduleFrequency"
+@@clientName(DevCenterService.OsType, "DevBoxOsType", "java");
+@@clientName(DevCenterService.ScheduledFrequency, "ScheduleFrequency", "java");
+@@clientName(DevCenterService.ScheduledType, "ScheduleType", "java");
+@@clientName(DevCenterService.Pool, "DevBoxPool", "java");
+@@clientName(DevCenterService.Pool.localAdministrator,
+  "LocalAdministratorStatus",
+  "java"
 );
-@@projectedName(DevCenterService.ScheduledType, "java", "ScheduleType");
-@@projectedName(DevCenterService.Pool, "java", "DevBoxPool");
-@@projectedName(DevCenterService.Pool.localAdministrator,
-  "java",
-  "LocalAdministratorStatus"
+@@clientName(DevCenterService.HardwareProfile, "DevBoxHardwareProfile", "java");
+@@clientName(DevCenterService.StorageProfile, "DevBoxStorageProfile", "java");
+@@clientName(DevCenterService.OsDisk.diskSizeGB, "diskSizeGb", "java");
+@@clientName(DevCenterService.ImageReference, "DevBoxImageReference", "java");
+@@clientName(DevCenterService.Schedule, "DevBoxSchedule", "java");
+@@clientName(DevCenterService.Schedule.type, "scheduleType", "java");
+@@clientName(DevCenterService.Schedule.frequency, "scheduleFrequency", "java");
+@@clientName(DevCenterService.DevBox.user, "userId", "java");
+@@clientName(DevCenterService.DevBox.localAdministrator,
+  "LocalAdministratorStatus",
+  "java"
 );
-@@projectedName(DevCenterService.HardwareProfile,
-  "java",
-  "DevBoxHardwareProfile"
+@@clientName(DevCenterService.DevBoxAction.next, "nextAction", "java");
+@@clientName(DevCenterService.DevBoxActionDelayResult.name,
+  "actionName",
+  "java"
 );
-@@projectedName(DevCenterService.StorageProfile,
-  "java",
-  "DevBoxStorageProfile"
+@@clientName(DevCenterService.ParameterType,
+  "EnvironmentDefinitionParameterType",
+  "java"
 );
-@@projectedName(DevCenterService.OsDisk.diskSizeGB, "java", "diskSizeGb");
-@@projectedName(DevCenterService.ImageReference,
-  "java",
-  "DevBoxImageReference"
+@@clientName(DevCenterService.Environment, "DevCenterEnvironment", "java");
+@@clientName(DevCenterService.Environment.environmentType,
+  "environmentTypeName",
+  "java"
 );
-@@projectedName(DevCenterService.Schedule, "java", "DevBoxSchedule");
-@@projectedName(DevCenterService.Schedule.type, "java", "scheduleType");
-@@projectedName(DevCenterService.Schedule.frequency,
-  "java",
-  "scheduleFrequency"
+@@clientName(DevCenterService.Environment.user, "userId", "java");
+@@clientName(DevCenterService.Catalog, "DevCenterCatalog", "java");
+@@clientName(DevCenterService.EnvironmentDefinitionParameter.default,
+  "defaultValue",
+  "java"
 );
-@@projectedName(DevCenterService.DevBox.user, "java", "userId");
-@@projectedName(DevCenterService.DevBox.localAdministrator,
-  "java",
-  "LocalAdministratorStatus"
+@@clientName(DevCenterService.EnvironmentDefinitionParameter.type,
+  "parameterType",
+  "java"
 );
-@@projectedName(DevCenterService.DevBoxAction.next, "java", "nextAction");
-@@projectedName(DevCenterService.DevBoxActionDelayResult.name,
-  "java",
-  "actionName"
+@@clientName(DevCenterService.EnvironmentType,
+  "DevCenterEnvironmentType",
+  "java"
 );
-@@projectedName(DevCenterService.ParameterType,
-  "java",
-  "EnvironmentDefinitionParameterType"
+@@clientName(DevCenterService.HardwareProfile.vCPUs, "vCpus", "java");
+@@clientName(DevCenterService.HardwareProfile.memoryGB, "memoryGb", "java");
+@@clientName(DevCenterService.OperationStatusValue,
+  "DevCenterOperationStatus",
+  "java"
 );
-@@projectedName(DevCenterService.Environment, "java", "DevCenterEnvironment");
-@@projectedName(DevCenterService.Environment.environmentType,
-  "java",
-  "environmentTypeName"
+@@clientName(DevCenterService.OperationStatus,
+  "DevCenterOperationDetails",
+  "java"
 );
-@@projectedName(DevCenterService.Environment.user, "java", "userId");
-@@projectedName(DevCenterService.Catalog, "java", "DevCenterCatalog");
-@@projectedName(DevCenterService.EnvironmentDefinitionParameter.default,
-  "java",
-  "defaultValue"
-);
-@@projectedName(DevCenterService.EnvironmentDefinitionParameter.type,
-  "java",
-  "parameterType"
-);
-@@projectedName(DevCenterService.EnvironmentType,
-  "java",
-  "DevCenterEnvironmentType"
-);
-@@projectedName(DevCenterService.HardwareProfile.vCPUs, "java", "vCpus");
-@@projectedName(DevCenterService.HardwareProfile.memoryGB, "java", "memoryGb");
-@@projectedName(DevCenterService.OperationStatusValue,
-  "java",
-  "DevCenterOperationStatus"
-);
-@@projectedName(DevCenterService.OperationStatus,
-  "java",
-  "DevCenterOperationDetails"
-);
-@@projectedName(DevCenterService.Project, "java", "DevCenterProject");
+@@clientName(DevCenterService.Project, "DevCenterProject", "java");
