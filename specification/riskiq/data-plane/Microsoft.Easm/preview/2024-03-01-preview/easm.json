@@ -334,7 +334,7 @@
           }
         },
         "x-ms-examples": {
-          "Assets_Observations": {
+          "Assets_GetObservations": {
             "$ref": "./examples/Assets_GetObservations.json"
           }
         }
@@ -385,7 +385,7 @@
           }
         },
         "x-ms-examples": {
-          "Assets_Export": {
+          "Assets_GetAssetsExport": {
             "$ref": "./examples/Assets_GetAssetsExport.json"
           }
         }
@@ -985,7 +985,7 @@
           }
         ],
         "responses": {
-          "202": {
+          "200": {
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Task"
@@ -1004,7 +1004,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "DiscoveryGroups_DeleteDiscoGroup": {
             "$ref": "./examples/DiscoveryGroups_DeleteDiscoGroup.json"
@@ -3355,19 +3354,6 @@
         "state"
       ]
     },
-    "DeltaSummaryParameter": {
-      "type": "object",
-      "properties": {
-        "daysPrior": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "date": {
-          "type": "string",
-          "description": "expected format to be: yyyy-MM-dd"
-        }
-      }
-    },
     "DeltaSummaryResponse": {
       "type": "object",
       "properties": {
@@ -5147,10 +5133,12 @@
           "$ref": "#/definitions/ObservationPriority"
         },
         "cvssScoreV2": {
-          "type": "number"
+          "type": "number",
+          "format": "double"
         },
         "cvssScoreV3": {
-          "type": "number"
+          "type": "number",
+          "format": "double"
         }
       },
       "required": [
