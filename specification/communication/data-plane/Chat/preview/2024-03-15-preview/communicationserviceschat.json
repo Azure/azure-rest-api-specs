@@ -2040,7 +2040,8 @@
         "kind": {
           "description": "Retention Policy Type",
           "enum": [
-            "threadCreationDate"
+            "threadCreationDate",
+            "none"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2050,6 +2051,10 @@
               {
                 "value": "threadCreationDate",
                 "description": "Thread retention policy based on thread creation date."
+              },
+              {
+                "value": "none",
+                "description": "No thread retention policy"
               }
             ]
           }
@@ -2077,6 +2082,16 @@
       },
       "required": [
         "deleteThreadAfterDays"
+      ]
+    },
+    "NoneRetentionPolicy": {
+      "description": "No thread retention policy.",
+      "type": "object",
+      "x-ms-discriminator-value": "none",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRetentionPolicy"
+        }
       ]
     },
     "ChatImageFile": {
