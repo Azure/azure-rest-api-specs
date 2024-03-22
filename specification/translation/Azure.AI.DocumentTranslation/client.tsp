@@ -6,11 +6,12 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
-@TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_1)
 @TypeSpec.Versioning.useDependency(DocumentTranslation.Versions.v1_0)
 namespace ClientCustomizations;
 
+@added(DocumentTranslation.Versions.v1_0)
 @client({
   name: "DocumentTranslationClient",
   service: DocumentTranslation,
