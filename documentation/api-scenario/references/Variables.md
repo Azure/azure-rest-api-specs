@@ -40,7 +40,7 @@ scenarios:
 
 If in `../examples/ResourceCreate.json` there is `$(resourceName)` in some string, it would be replaced with `level-3`.
 
-Variables could also be defined on test running. For example you could set `subscriptionId` or `resourceGroupName` on the global scope. How to set global env is based on the API scenario consumer.
+Variables could also be defined on test running. For example, you could set `subscriptionId` or `resourceGroupName` on the global scope. How to set global env is based on the API scenario consumer.
 
 Variables could be replaced recursively. For example if we have the following variables:
 
@@ -101,7 +101,7 @@ With this convention, you could control most of the parameters with variables.
 
 ## Convention: location
 
-In one rest call step, if we have variable `location` (exact match) in the API scenario, and we have `location` as top level property defined in request body (`requestParameters[bodyParamName]`) and response body (responseExpected), then the top level location property will be replaced with variable value of location.
+In one rest call step, if we have variable `location` (exact match) in the API scenario, and we have `location` as the top-level property defined in request body (`requestParameters[bodyParamName]`) and response body (responseExpected), then the top-level location property will be replaced with variable value of location.
 
 For example,
 
@@ -129,7 +129,7 @@ responseExpected:
 
 ## Convention: Arm Template Deployment
 
-When you deploy arm template in API scenario, you could define template parameters and outputs. By default if the parameter name matches the variable exists and the parameter type is string, then the parameter value would use the variable value. If the template has output which is string type, the variables will be set with output values.
+When you deploy arm template in API scenario, you could define template parameters and outputs. By default, if the parameter name matches the variable exists and the parameter type is string, then the parameter value would use the variable value. If the template has output which is string type, the variables will be set with output values.
 
 For example, given the following arm template:
 

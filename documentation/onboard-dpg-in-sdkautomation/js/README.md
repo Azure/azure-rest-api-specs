@@ -7,7 +7,7 @@
 - `<SubFolderName>`: The sub-folder name in the package. It's only used by multi-client scenario. 
 
 ## Single Client
-If you want to generate sdk with single client, please copy the following configuration into spec PR comment.
+If you want to generate sdk with a single client, please copy the following configuration into spec PR comment.
 ~~~
 # azure-sdk-for-js
 ``` yaml

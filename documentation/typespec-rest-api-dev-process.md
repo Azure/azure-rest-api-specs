@@ -37,7 +37,7 @@ If you are developing within your own ADO repo first and then submitting into `a
    npx tsp --version 
 ```
 
-- One-time set up: Install TypeSpec VisualStudio or VSCode extensions to get syntex highlighting, tool tips in IDE:
+- One-time set up: Install TypeSpec VisualStudio or VSCode extensions to get syntax highlighting, tool tips in IDE:
   
 ```
   npx tsp code install
@@ -49,7 +49,7 @@ OR
 
 #### 2.2  VSCode with local docker .devcontainer
 
-All prerequisites have been installed in the dev container. You should to have `Docker Desktop` and `WSL2` running if you are on Windows machine.
+All prerequisites have been installed in the dev container. You should have `Docker Desktop` and `WSL2` running if you are on Windows machine.
 
 To start, you just need to install `Dev Containers` VS code extension, then open the repo path. 
 
@@ -83,9 +83,9 @@ Please first review recommended folder structure detailed in [this document](htt
 ```cli
   npx tsp compile .
 ```
-  The generated swagger files should be correctly placed in `data-plane` or `resource-manager` folders follwoing the naming conventions.
+  The generated swagger files should be correctly placed in `data-plane` or `resource-manager` folders following the naming conventions.
 
-5. Now the project has been set up. You can modify the sample and develop your own APIs with TypeSpec
+5. Now the project has been set up. You can modify the sample and develop your own APIs with TypeSpec.
 
 ### 4. Prepare and submit a Pull Request for reviewing
 
@@ -97,7 +97,7 @@ Please first review recommended folder structure detailed in [this document](htt
 
    The [oav](https://github.com/Azure/oav) provides two ways to generate Swagger examples:
 
-   1. Generating basic examples and then manually modify the values. It will generate two examples for each operation: one contains minimal properties set, the other contains the maximal properties set. Since the auto-generated examples consist of random values for most types, you need replace them with meaningful values.
+   1. Generating basic examples and then manually modify the values. It will generate two examples for each operation: one contains minimal properties set, the other contains the maximal properties set. Since the auto-generated examples consist of random values for most types, you need to replace them with meaningful values.
 
    ```bash
    oav generate-examples openapi.json
@@ -110,8 +110,8 @@ Please first review recommended folder structure detailed in [this document](htt
    ```
 
     Note, latest OAV tool should automatically generate the following. However, if you are generating the examples manually, please ensure you have:
-    - include `title` field and make sure it is descriptive and unique for each operation.
-    - include `operationId`. This is used to match with declared operations in TypeSpec and correctly output in swagger.
+    - included `title` field and make sure it is descriptive and unique for each operation.
+    - included `operationId`. This is used to match with declared operations in TypeSpec and correctly output in swagger.
 
 4. Add/update the `readme.md` file in either the 'resource-manager' or 'data-plane' folder to specify the version and location of the OpenAPI files. The `readme.md` is needed for both management-plane and data-plane services for REST API Docs generation. For management-plane services, the `readme.md` is also needed for SDK generation -- see [generating client with autorest](https://github.com/Azure/autorest/blob/main/docs/generate/readme.md#keeping-your-options-in-one-place-the-preferred-option). The `readme.md` may contain generation options for multiple languages, separated into high-level sections.
 
@@ -127,7 +127,7 @@ Please first review recommended folder structure detailed in [this document](htt
 
 6. Ensure all generated files under `resource-manager` or `data-plane` have been added to PR.
 
-7. Send a pull request .
+7. Send a pull request.
 
    - commit all your changes.
    - push your branch to your fork of the repo.
@@ -147,7 +147,7 @@ For support & help, you can post a message to [TypeSpec parters - teams channel]
 
 The section describe the process for data-plane SDKs. Management-plane SDKs still follow separate existing `autorest` process.
 
-This assumes you have cloned language SDKs into your local folder at same level of `azure-rest-api-spec`.
+This assumes you have cloned language SDKs into your local folder at same level of `azure-rest-api-specs`.
 ```
  \-
    azure-rest-api-specs/
@@ -156,7 +156,7 @@ This assumes you have cloned language SDKs into your local folder at same level 
    azure-sdk-for-js/
    azure-sdk-for-net/
    azure-sdk-for-python/
-``````
+```
 
  You can then run `./eng/script/TypeSpec-Generate-Sdk.ps1` script to generate the necessary SDK folder and project structure if it does not already exist, and then regenerate the SDK source code.
 

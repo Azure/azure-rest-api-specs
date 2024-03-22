@@ -19,9 +19,9 @@ tag: package-xxxx-xx-xx
 
 ### tag
 Tags are used to define what swagger files are used in specific client SDK. In Single-API client, only one tag can be used to generate SDK client.
-A tag can contains a bunch of swagger files which are used to generate the SDK. 
+A tag can contain a bunch of swagger files which are used to generate the SDK. 
 
-The name of a tag should be in form of package-yyyy-mm-dd[-xxx], for example below tag names are available:
+The name of a tag should be in the form of package-yyyy-mm-dd[-xxx], for example, below tag names are available:
 - package-2020-02-03
 - package-2020-03-22-preview
 - package-2020-05-03-only
@@ -72,8 +72,8 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## Typescript Configuration
 Typescript dedicated configurations are configured in readme.typescript.md.
-the typical package-name is usually like `@azure/arm-xxx`  where the xxx is related with the service name.   
-and the typical output-folder in the azure-sdk-for-js is like `$(typescript-sdks-folder)/sdk/xxx/arm-xxx` where the xxx is related with the service name.  
+The typical package-name is usually like `@azure/arm-xxx` where the xxx is related with the service name.  
+And, the typical output-folder in the azure-sdk-for-js is like `$(typescript-sdks-folder)/sdk/xxx/arm-xxx` where the xxx is related with the service name.  
 A typical readme.typescript.md is like this: 
 ~~~
 // file: readme.typescript.md
@@ -95,7 +95,7 @@ typescript:
 ~~~
 
 ## Multi-api
-Currently the Azure SDK for Javascript (Typescript) doesn't support multi-api which means each operation contained in one package should only contains one api-version's. and Azure SDK for Javascript (Typescript) only supports single api package.
+Currently, the Azure SDK for Javascript (Typescript) doesn't support multi-api which means each operation contained in one package should only contain one api-version's. and Azure SDK for Javascript (Typescript) only supports single api package.
 
 ## Multi-packages 
 The batch is a tag list which are used in the one RP has multi-package scenarios. For example, 
@@ -176,8 +176,8 @@ input-file:
 ```
 ~~~
 
-Finally, in your readme.typescript.md you should include what packages you want to include in the Azure SDK for Javascript (Typescript).
-And in each package's section define the default package name output folder in azure-sdk-for-js repo etc.
+Finally, in your readme.typescript.md, you should include what packages you want to include in the Azure SDK for Javascript (Typescript).
+And in each package's section, define the default package name output folder in azure-sdk-for-js repo etc.
 
 ~~~
 ## TypeScript
@@ -229,7 +229,7 @@ typescript:
 
 
 ## Run codegen
-After configure all the readme files, autorest can be used to generate SDK.
+After configuring all the readme files, autorest can be used to generate SDK.
 ~~~
 autorest --typescript --typescript-sdks-folder=/home/qiaozha/code/azure-sdk-for-js --license-header=MICROSOFT_MIT_NO_VERSION /home/qiaozha/code/azure-rest-api-specs/specification/storage/resource-manager/readme.md --use=@microsoft.azure/autorest.typescript@4.2.2
 ~~~

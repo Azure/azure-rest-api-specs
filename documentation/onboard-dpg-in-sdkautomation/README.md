@@ -37,7 +37,7 @@ Otherwise, pipeline will try to find autorest configuration file in sdk reposito
 4. What should I do when it creates ApiView Failed?
 
    __Answer__: If the ApiView is created failed, you can find there is an error message: `Create ApiView failed. Please ensure your github account in Azure/Microsoft is public and re-trigger the CI. If issue still exists, please ask PR assignee for help`. If you want to get the ApiView, 
-please follow the action in error message, and make you github account's organization information public, then re-trigger the CI (You can re-trigger CI by comment `/azp run`, or close and reopen the PR). If it still cannot generate ApiView, please ask PR assignee for help. 
+please follow the action in error message, and make your GitHub account's organization information public, then re-trigger the CI (You can re-trigger CI by comment `/azp run`, or close and reopen the PR). If it still cannot generate ApiView, please ask PR assignee for help. 
 
 5. Is there ApiView generated when there is no sdk generated in sdk automation pipeline?
 

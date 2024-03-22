@@ -82,7 +82,7 @@ Every PR in this repo will go through a series of PR checks, including:
 - PrettierCheck - 
 - SDK Breaking Change -
 
-When any of these PR checks fails it will post a comment to the PR with links to information on how to resolve the problem.
+When any of these PR checks fails, it will post a comment to the PR with links to information on how to resolve the problem.
 There is also the [CI Fix Guide](https://aka.ms/ci-fix) that describes how to fix common PR check failures.
 
 ## Internal Contribution Guide

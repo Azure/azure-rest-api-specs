@@ -42,7 +42,7 @@ This creates a new directory `restlerConfig` with the following files:
 You often need to specify values for variables in the API definition.
 You can do this by adding these values in `restler_custom_payload` property in the `dict.json` file.
 
-For ARM APIs you generally need to specify the subscriptionId, resourceGroupName, and location.
+For ARM APIs, you generally need to specify the subscriptionId, resourceGroupName, and location.
 You may also want to specify the api-version, in case an operation does not have an example value for it.
 You can use the `jq` command to add these values. Here is an example:
 
@@ -101,7 +101,7 @@ Now you are ready to run the Test phase of Restler.
 dotnet $restler_bin/restler/Restler.dll test --dictionary_file Compile/dict.json --grammar_file Compile/grammar.py --settings Compile/engine_settings.json --token_refresh_command "bash $PWD/getToken.sh" --token_refresh_interval 60
 ```
 
-In most cases the tests will take no more than a few minutes to run and display results that look like:
+In most cases, the tests will take no more than a few minutes to run and display results that look like:
 
 ```text
 Starting task Test...

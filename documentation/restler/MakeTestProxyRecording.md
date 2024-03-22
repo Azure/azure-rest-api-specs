@@ -100,7 +100,7 @@ body='{
 recording_id=$(curl -X POST -s -D - -d ${body} http://localhost:5000/Record/Start | grep 'x-recording-id' | awk '{print $2}' | sed 's/\r$//')
 ```
 
-Now you can update the custom dictionary with the recording id and [the test-proxy headers](https://github.com/Azure/azure-sdk-tools/blob/main/tools/test-proxy/Azure.Sdk.Tools.TestProxy/README.md#run-your-tests):
+Now, you can update the custom dictionary with the recording id and [the test-proxy headers](https://github.com/Azure/azure-sdk-tools/blob/main/tools/test-proxy/Azure.Sdk.Tools.TestProxy/README.md#run-your-tests):
 - `x-recording-upstream-base-uri`: the base URI of the upstream service
 - `x-recording-id`: the recording id obtained from the test-proxy
 - `x-recording-mode`: the recording mode, which should be `record` for recording
@@ -116,7 +116,7 @@ jq ".restler_custom_payload_header = $headers" dict.json > tmp.json && mv tmp.js
 
 ### Recompile the configuration
 
-Now recompile the configuration to incorporate these changes.
+Now, recompile the configuration to incorporate these changes.
 
 ```sh
 dotnet $restler_bin/restler/Restler.dll compile config.json
@@ -124,7 +124,7 @@ dotnet $restler_bin/restler/Restler.dll compile config.json
 
 ## Run the tests
 
-Run the tests as describe in [QuickStart](./QuickStart.md#run-the-tests).
+Run the tests as described in [QuickStart](./QuickStart.md#run-the-tests).
 
 ## Stop the recording
 

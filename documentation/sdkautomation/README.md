@@ -26,39 +26,39 @@ SDK Automation is launched with matrix in azure pipeline. For each language conf
           - repo: azure-sdk-for-js
         ``` <EOL>
         ```
-    2. For TypeSpec PR, filter the list of tspconfig.yaml: find the `options` config in tspconfig.yaml, and see if the specified language is configure for that tsp-location.yaml.
+    2. For TypeSpec PR, filter the list of tspconfig.yaml: find the `options` config in tspconfig.yaml, and see if the specified language is configured for that tsp-location.yaml.
     
     If the configured language is not found here, generation for this typespec project will be skipped.
 
 4. Get `specificationRepositoryConfiguration.json` from spec repo default branch. See [SpecRepoConfig](#specrepoconfig). Get the repo and branch config in the file.
 
-5. Clone __mainRepository__ and checkout __mainBranch__. If __secondaryRepository__ is specified then checkout __secondaryRepository__ and __secondaryBranch__ instead.
+5. Clone __mainRepository__ and checkout __mainBranch__. If __secondaryRepository__ is specified, then checkout __secondaryRepository__ and __secondaryBranch__ instead.
 
-6. Get `swagger_to_sdk_config.json` from cloned SDK repository. The config file path could be customized by __configFilePath__ in spec config. For the definition of the config see [SwaggerToSdkConfig](#swaggertosdkconfig).
+6. Get `swagger_to_sdk_config.json` from cloned SDK repository. The config file path could be customized by __configFilePath__ in spec config. For the definition of the config, see [SwaggerToSdkConfig](#swaggertosdkconfig).
 
 7. Launch __initScript__ defined in [SwaggerToSdkConfig](#swaggertosdkconfig). All the script's working directory is root folder of cloned SDK repository.
 
-8. Calculate __PR diff__ and related `readme.md`. If __generationCallMode__ is __one-for-all-configs__ then run ___one pass for the rest steps___, else (__one-per-config__) ___loop the rest steps___ with each `readme.md`.
+8. Calculate __PR diff__ and related `readme.md`. If __generationCallMode__ is __one-for-all-configs__, then run ___one pass for the rest steps___, else (__one-per-config__) ___loop the rest steps___ with each `readme.md`.
 
-9. Launch __generateScript__ defined in [SwaggerToSdkConfig](#swaggertosdkconfig) with [generateInput.json](#generateinput). The script should produce [generateOutput.json](#generateoutput) if __parseGenerateOutput__ is true. If dryRun is set to true then first run of __generateScript__ will be used to collect package information , then loop each package info and checkout package related branch and launch __generateScript__ with package related readmeMd and dryRun set to false.
+9. Launch __generateScript__ defined in [SwaggerToSdkConfig](#swaggertosdkconfig) with [generateInput.json](#generateinput). The script should produce [generateOutput.json](#generateoutput) if __parseGenerateOutput__ is true. If dryRun is set to true, then the first run of __generateScript__ will be used to collect package information, then loop each package info and checkout package-related branch and launch __generateScript__ with package-related readmeMd and dryRun set to false.
 
-10. Get generated package. If __packageFolderFromFileSearch__ is defined with file search then package folder is detected based on git diff in SDK repository and algorithm described in [SwaggerToSdkConfig Schema](#swaggertosdkconfig-schema). Else package folder is from [generateOutput.json](#generateoutput). For each package ___loop the rest steps___.
+10. Get generated package. If __packageFolderFromFileSearch__ is defined with file search, then package folder is detected based on git diff in SDK repository and algorithm described in [SwaggerToSdkConfig Schema](#swaggertosdkconfig-schema). Else package folder is from [generateOutput.json](#generateoutput). For each package, ___loop the rest steps___.
 
 11. Launch __buildScript__ to build the package. Collect the artifacts by config __artifactPathFromFileSearch__. This step could be skipped if it's not defined in [SwaggerToSdkConfig](#swaggertosdkconfig) and it's covered by __generateScript__ and the result could be found in [generateOutput.json](#generateoutput).
 
-12. Upload all the package related artifacts to Azure Storage Blob Container. All the artifact for one package is uploaded in one folder. These file could be downloaded on URL prefixed by __downloadUrlPrefix__ defined in [InstallInstructionScriptInput](#installinstructionscriptinput). It's redirected by openapiHub by design, and for SDK Automation on public repo the redirect don't need auth, but for SDK Automation in private repo it requires microsoft AAD auth. User could authenticate and download via web page oauth in browser or bearer token auth with `az rest --resource` in command line.
+12. Upload all the package-related artifacts to Azure Storage Blob Container. All the artifact for one package is uploaded in one folder. These file could be downloaded on URL prefixed by __downloadUrlPrefix__ defined in [InstallInstructionScriptInput](#installinstructionscriptinput). It's redirected by openapiHub by design, and for SDK Automation on public repo the redirect don't need auth, but for SDK Automation in private repo it requires microsoft AAD auth. User could authenticate and download via web page oauth in browser or bearer token auth with `az rest --resource` in command line.
 
 13. Launch __changelogScript__ to get changelog and detect breaking change. This step could be skipped if changelog and breaking change could be found in [generateOutput.json](#generateoutput). If breaking change is found, the spec PR will be labelled with `CI-BreakingChange-<Lang>`.
 
 14. Launch __installInstructionScript__ to get install instruction for that package. This step could be skipped if install instruction could be found in [generateOutput.json](#generateoutput). The lite install instruction will be shown in spec PR comment, the full install instruction will be shown in generated SDK PR.
 
-15. Commit the package related code in SDK repository. Force push to [GenerationBranch](#generationbranch) in __integrationRepository__. Create or update [GenerationPR](#generationpr) from [GenerationBranch](#generationbranch) to [MainBranch](#mainbranch) in __integrationRepository__. If __integrationRepository__ is a fork of __mainRepository__, its [MainBranch](#mainbranch) should be synced once a day.
+15. Commit the package-related code in SDK repository. Force push to [GenerationBranch](#generationbranch) in __integrationRepository__. Create or update [GenerationPR](#generationpr) from [GenerationBranch](#generationbranch) to [MainBranch](#mainbranch) in __integrationRepository__. If __integrationRepository__ is a fork of __mainRepository__, its [MainBranch](#mainbranch) should be synced once a day.
 
 ### Continuous Integration (PR Merged) Trigger
 
 Almost the same as opened PR trigger, with different on step 15:
 
-15. Commit the package related code in SDK repository. Close [GenerationPR](#generationpr) and delete [GenerationBranch](#generationbranch). Force push to [IntegrationBranch](#integrationbranch) in __integrationRepository__. Create or update [IntegrationPR](#integrationpr) from [IntegrationBranch](#integrationbranch) to [MainBranch](#mainbranch) in __mainRepository__. Close the [integrationPR](#integrationPR) if __closeIntegrationPR__ in [SwaggerToSdkConfig](#swaggertosdkconfig) is set to true.
+15. Commit the package-related code in SDK repository. Close [GenerationPR](#generationpr) and delete [GenerationBranch](#generationbranch). Force push to [IntegrationBranch](#integrationbranch) in __integrationRepository__. Create or update [IntegrationPR](#integrationpr) from [IntegrationBranch](#integrationbranch) to [MainBranch](#mainbranch) in __mainRepository__. Close the [integrationPR](#integrationPR) if __closeIntegrationPR__ in [SwaggerToSdkConfig](#swaggertosdkconfig) is set to true.
 
 
 ## Definitions
@@ -117,7 +117,7 @@ This is type of file `./specificationRepositoryConfiguration.json` in swagger sp
 See [./SpecConfigSchema.json](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/sdkautomation/SpecConfigSchema.json)
 
 ### SwaggerToSdkConfig
-This is type of file `./swagger_to_sdk_config.json` in sdk repo.
+This is a type of file `./swagger_to_sdk_config.json` in sdk repo.
 The running environment of these scripts would be expected to be __Ubuntu 18.04__ on Azure Pipeline. This may change in the future. All the running script should be executable.
 The working folder of all the scripts is the __root folder of sdk repo__.
 

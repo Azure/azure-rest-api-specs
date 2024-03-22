@@ -19,7 +19,7 @@ Here is an example about how to create a VM with API Scenario.
 
 ### With external operation reference
 
-In operation based step, we can use property `readmeTag` to specify the external operation reference. In following example, `VirtualNetworks_CreateOrUpdate`, `NetworkSecurityGroups_CreateOrUpdate`, `PublicIPAddresses_CreateOrUpdate`, and `NetworkInterfaces_CreateOrUpdate` are external operations from Network RP, and the outputted variable `vmNicId` is referenced in `VirtualMachines_CreateOrUpdate` step when creating a VM.
+In an operation-based step, we can use property `readmeTag` to specify the external operation reference. In the following example, `VirtualNetworks_CreateOrUpdate`, `NetworkSecurityGroups_CreateOrUpdate`, `PublicIPAddresses_CreateOrUpdate`, and `NetworkInterfaces_CreateOrUpdate` are external operations from Network RP, and the outputted variable `vmNicId` is referenced in `VirtualMachines_CreateOrUpdate` step when creating a VM.
 
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json

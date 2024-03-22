@@ -65,7 +65,7 @@ scenarios:
         exampleFile: ../examples/ConfigurationStoresGet.json
 ```
 
-or use operation based step if Swagger examples are not ready or you want to create more scenarios without writing Swagger examples.
+or use operation-based step if Swagger examples are not ready or you want to create more scenarios without writing Swagger examples.
 
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json

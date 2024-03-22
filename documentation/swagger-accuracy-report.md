@@ -81,17 +81,17 @@ When testing a very large API, you may find it helpful to test one failed endpoi
 
 **C. Test your changes by running RESTler locally.**
 
-Compile the specifications using the command line below.  ```config.json``` will refer to your updated Swagger files and examples.
+Compile the specifications using the command line below. ```config.json``` will refer to your updated Swagger files and examples.
 
 >Restler.exe compile config.json
 
-Test the API using the exact command line taken from the _TrafficValidation_ step log in the CI pipeline (replace the ```token_refresh_command``` below with the authentication script on your local path).  For example:
+Test the API using the exact command line taken from the _TrafficValidation_ step log in the CI pipeline (replace the ```token_refresh_command``` below with the authentication script on your local path). For example:
 
 >Restler.exe test --dictionary_file dict.json --grammar_file grammar.py --settings engine_settings.json --token_refresh_command "/local-scripts/get-token.sh" --token_refresh_interval 60
 
 #### 3. Upload the modified RESTler configuration file so the PR pipeline can use it and re-run the Service Contract Accuracy report
 
-After you have debug RESTler locally and improved API coverage, you can upload the modified configuration files to the azure-rest-api-specs repo so the pipeline can use them. For a specific resource provider, the RESTler config files is located at `RESTler` under the api-version folder. In swagger pipeline, the traffic validation check will load the customized RESTler config from the api-version folder and then run the RESTler test. 
+After you have debugged RESTler locally and improved API coverage, you can upload the modified configuration files to the azure-rest-api-specs repo so the pipeline can use them. For a specific resource provider, the RESTler config files is located at `RESTler` under the api-version folder. In swagger pipeline, the traffic validation check will load the customized RESTler config from the api-version folder and then run the RESTler test. 
 
 ![](./images/check-in-restler-config.png)
 

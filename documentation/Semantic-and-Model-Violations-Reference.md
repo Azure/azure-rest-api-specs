@@ -1,5 +1,5 @@
 # Semantic and Model Violations Reference
-This document lists the set of automated rules that can be validated against swagger spec by running [OAV](https://github.com/Azure/oav) tool. This document also have some *tips for the fix*. Most of the time, the error information has the position of violations in swagger. If the error is internal error and doesn't have much meaningful information toward the fix, please create an issue [here](https://github.com/azure/oav/issues).
+This document lists the set of automated rules that can be validated against Swagger spec by running [OAV](https://github.com/Azure/oav) tool. This document also have some *tips for the fix*. Most of the time, the error information has the position of violations in Swagger. If the error is internal error and doesn't have much meaningful information toward the fix, please create an issue [here](https://github.com/azure/oav/issues).
 
 ### Validation Errors
 
@@ -77,7 +77,7 @@ This document lists the set of automated rules that can be validated against swa
 | [OPERATION_NOT_FOUND_IN_CACHE_WITH_PROVIDER](#OPERATION_NOT_FOUND_IN_CACHE_WITH_PROVIDER) | [OAV128](#OPERATION_NOT_FOUND_IN_CACHE_WITH_PROVIDER) |
 | [OPERATION_NOT_FOUND_IN_CACHE_WITH_API](#OPERATION_NOT_FOUND_IN_CACHE_WITH_API) | [OAV127](#OPERATION_NOT_FOUND_IN_CACHE_WITH_API) |
 | [OPERATION_NOT_FOUND_IN_CACHE_WITH_VERB](#OPERATION_NOT_FOUND_IN_CACHE_WITH_VERB) | [OAV126](#OPERATION_NOT_FOUND_IN_CACHE_WITH_VERB) |
-| [OPERATION_NOT_FOUND_IN_CACHE](#OPERATION_NOT_FOUND_IN_CACHE)] | [OAV125](#OPERATION_NOT_FOUND_IN_CACHE) |
+| [OPERATION_NOT_FOUND_IN_CACHE](#OPERATION_NOT_FOUND_IN_CACHE) | [OAV125](#OPERATION_NOT_FOUND_IN_CACHE) |
 | [PATH_NOT_FOUND_IN_REQUEST_URL](#PATH_NOT_FOUND_IN_REQUEST_URL) | [OAV124](#PATH_NOT_FOUND_IN_REQUEST_URL) |
 | [POTENTIAL_OPERATION_SEARCH_ERROR](#POTENTIAL_OPERATION_SEARCH_ERROR) | [OAV123](#POTENTIAL_OPERATION_SEARCH_ERROR) |
 | [INCORRECT_INPUT](#INCORRECT_INPUT) | [OAV122](#INCORRECT_INPUT) |
@@ -700,7 +700,7 @@ This document lists the set of automated rules that can be validated against swa
 
 ### <a name="OPERATION_NOT_FOUND_IN_CACHE_WITH_VERB" />OPERATION_NOT_FOUND_IN_CACHE_WITH_VERB
 
-**Output Message**: Could not find any methods with verb {0} for api-version {1 }and provider {2} in the cache.
+**Output Message**: Could not find any methods with verb {0} for api-version {1} and provider {2} in the cache.
 
 ### <a name="OPERATION_NOT_FOUND_IN_CACHE_WITH_API" />OPERATION_NOT_FOUND_IN_CACHE_WITH_API
 
@@ -712,7 +712,7 @@ This document lists the set of automated rules that can be validated against swa
 
 ### <a name="OPERATION_NOT_FOUND_IN_CACHE_WITH_VERB" />OPERATION_NOT_FOUND_IN_CACHE_WITH_VERB
 
-**Output Message**: Could not find any methods with verb {0} for api-version {1 }and provider {2} in the cache.
+**Output Message**: Could not find any methods with verb {0} for api-version {1} and provider {2} in the cache.
 
 **Description**: It fails to search for any matched api method based on verb, api-version and resource provider.
 

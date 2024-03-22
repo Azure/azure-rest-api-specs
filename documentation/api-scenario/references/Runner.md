@@ -4,7 +4,7 @@ This document explains the expected behavior of runner. The word "runner" here r
 
 ## Load API Scenario via OAV
 
-You could load the API scenario file via oav. It would be resolved as a simple object.
+You could load the API scenario file via OAV. It would be resolved as a simple object.
 
 ```typescript
 const readmeMd: string =
@@ -84,7 +84,7 @@ Let's assume the following things as input of runner:
 
 ### Scope
 
-It's the `scope` field defined at top level of API scenario file. Now only `ResourceGroup` is supported, it means that the API scenario will:
+It's the `scope` field defined at the top-level of API scenario file. Now only `ResourceGroup` is supported, it means that the API scenario will:
 
 - Run under specified resource group.
 - Runner would manage the resource group, it could create the resource group (defined by variable `subscriptionId`, `resourceGroup`, `location`) or use predefined resource group, it could also delete the resource group after the API scenario is done. Runner itself is responsible for managing the resource group, the behavior is not defined by this spec.
@@ -106,7 +106,7 @@ See [Variables](./Variables.md) for variable spec. The runner must follow the va
 
 - Load definition via OAV, load required variables' value (runner need to specify how to load it).
 - Manage the scope, runner could create/reuse the scope as user defined in input.
-- Run top level prepareSteps if it has not run. it's a list of steps defined in API scenario.
+- Run top level prepareSteps if it has not run. It's a list of steps defined in API scenario.
 - Pass the variables from prepareSteps to the following main steps.
 - For each steps defined in the API scenario array:
   - If `type` field is `restCall`:

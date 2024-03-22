@@ -21,7 +21,7 @@ Field Pattern | Type | Description
 }
 ```
  
-**_shortcomings/concerns_**: What if the service team wants to show different examples. Scenario: GET on NetworkInterface with $expand and without $expand will have an impact on the NetworkSecurityGroup property of the NIC. In the former it will be a full blown NSG and in the latter it will be a Subresource(object with one property 'id')?
+**_shortcomings/concerns_**: What if the service team wants to show different examples. Scenario: GET on NetworkInterface with $expand and without $expand will have an impact on the NetworkSecurityGroup property of the NIC. In the former, it will be a full blown NSG and in the latter it will be a Subresource (object with one property 'id')?
  
   - _**For any model definition**_ (body parameter is a model definition; example: StorageAccountCreateParameters), [swagger specification says](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#fixed-fields-13):
  
@@ -88,7 +88,7 @@ _This will keep the spec cleaner and easy to manage._
     },
     "responses": { //Provide examples of the response headers and body per status code (as per the operation defined in the swagger spec) as applicable.
       "statusCode1": {
-        "headers": { ... }, //Examples for location, azure-asyncoperation, retry-after response headers for long running (asynchronous) operations would be valuable
+        "headers": { ... }, //Examples for location, azure-asyncoperation, retry-after response headers for long-running (asynchronous) operations would be valuable
         "body": { ... }
       },
       "statuscode2": { ... }
@@ -107,10 +107,10 @@ _This will keep the spec cleaner and easy to manage._
       "api-version": "2016-01-01",
       "accountCreateParameters": {
         "sku": { 
-          "name": 'Standard_LRS' 
+          "name": "Standard_LRS" 
         },
-        "kind": 'Storage',
-        "location": 'eastasia',
+        "kind": "Storage",
+        "location": "eastasia",
         "properties": { 
           "encryption": { 
             "services": { 
@@ -118,7 +118,7 @@ _This will keep the spec cleaner and easy to manage._
                 "enabled": true 
               }
             },
-            "keySource": 'Microsoft.Storage' 
+            "keySource": "Microsoft.Storage" 
           }
         }
       }

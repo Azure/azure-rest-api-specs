@@ -51,7 +51,7 @@ The structure of the directory should strictly follow these rules:
 
 8. **API Versions Folders**: this folder is the direct child of the `preview` or `stable` folder. This folder contains the REST API Specs, and the `examples` folder.
 
-9. **'examples' Folders**: the example folder will contain the x-ms-examples files. it will reside under the APIs or Resources' version folders as different APIs or Resource types version can have different examples.
+9. **'examples' Folders**: the example folder will contain the x-ms-examples files. It will reside under the APIs or Resources' version folders as different APIs or Resource types version can have different examples.
 
 > Note:  some general guidance for folder names, and file names under `specification`:
 >
@@ -179,4 +179,4 @@ The next step in the process after a spec is completed is to generate SDKs and A
 External Contributors can read [Getting Started with OpenAPI Specifications](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Getting%20started%20with%20OpenAPI%20specifications.md).
 
 ---
-_This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments._
+_This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information, see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments._

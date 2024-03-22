@@ -44,7 +44,7 @@ Most guides here require for you to have `npm` installed, which you can get by i
 
 ## `Swagger SpellCheck`
 
-If you receive a spelling failure either fix the spelling to match or if there are words that need to be suppressed for your service then add the word to the override list in [cspell.json](https://github.com/Azure/azure-rest-api-specs/blob/main/cSpell.json). Either
+If you receive a spelling failure, either fix the spelling to match or if there are words that need to be suppressed for your service, then add the word to the override list in [cspell.json](https://github.com/Azure/azure-rest-api-specs/blob/main/cSpell.json). Either
 add to your existing section or create a new section for your specific spec or service family if the work is more generally used in lots of files under your service.
 ```
  "overrides": [
@@ -66,7 +66,7 @@ add to your existing section or create a new section for your specific spec or s
 ```
 Words are case-insensitive so use lower case for the word list.
 
-If you need more information on see [cspell configuration](https://cspell.org/configuration/). 
+If you need more information on, see [cspell configuration](https://cspell.org/configuration/). 
 
 *Note*: We are trying to move away from one shared dictionary file so try and avoid editing custom-words.txt in the root as it will likely go away in the future.
 
@@ -74,19 +74,19 @@ If you need more information on see [cspell configuration](https://cspell.org/co
 
 First, ensure you have fulfilled `Prerequisites` as explained above.
 
-To update all the spec files for a given service run the following:
+To update all the spec files for a given service, run the following:
 
 ```
-# To fix all the files in the repo run from the root of the repo
+# To fix all the files in the repo, run from the root of the repo.
 cd <local_repo_clone_root>
 
-# OPTIONAL STEP: To fix a particular service OpenAPI spec cd to that directory like
+# OPTIONAL STEP: To fix a particular service OpenAPI spec, cd to that directory like
 cd specification/contosowidgetmanager
 
 # Install the dependencies to the local 'node_modules' folder.
 npm install
 
-# Run 'prettier --check' to verify the problems can be reproduced locally
+# Run 'prettier --check' to verify the problems can be reproduced locally.
 npx prettier --check **/*.json
 
 # Run 'prettier --write' to fix the problems.
@@ -103,7 +103,7 @@ Then please commit and push changes made by prettier.
 
 ## `Swagger ModelValidation`
 
-To repro issues with `Swagger ModelValidation` locally:
+To reproduce issues with `Swagger ModelValidation` locally:
 ```
 npm install -g oav
 oav validate-example <openapi-spec-path>
@@ -114,7 +114,7 @@ Refer to [Swagger-Example-Generation](https://github.com/Azure/oav/blob/develop/
 
 ## `Swagger SemanticValidation`
 
-To repro issues with `Swagger SemanticValidation` locally:
+To reproduce issues with `Swagger SemanticValidation` locally:
 ```
 npm install -g oav
 oav validate-spec <openapi-spec-path>
@@ -133,7 +133,7 @@ Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azur
 ### Adding label on PR automatically
 
 The breaking change check has two types of violations: one is breaking change in the same version but not breaking change in a new version, the other is breaking change even in a new version.
-For the former, a label 'NewApiVersionRequired' will be added automatically; For the latter, a label 'BreakingChangeReviewRequired' will be added automatically. Adding each label will trigger a github comment with guldance on how to fix.
+For the former, a label 'NewApiVersionRequired' will be added automatically; For the latter, a label 'BreakingChangeReviewRequired' will be added automatically. Adding each label will trigger a github comment with guidance on how to fix.
 
 ### Run `oad` locally
 
@@ -225,7 +225,7 @@ avocado
 
 When type avocado in command line, avocado will validate in the current directory.
 
-Note: When running in OpenAPI spec PR pipeline, Avocado only report errors with file updates in the PR, but ignore the errors existing in base. However when running Avocado against local directory, it reports all errors existing in the files.
+Note: When running in OpenAPI spec PR pipeline, Avocado only reports errors with file updates in the PR, but ignore the errors existing in base. However, when running Avocado against local directory, it reports all errors existing in the files.
 
 - Run all specs: Clone the repo `azure/azure-rest-api-specs` and run "avocado" in folder `azure/azure-rest-api-specs`.
 - Run single service specs: create a folder `specification`. and move your service specs folder in `specification`. run "avocado"

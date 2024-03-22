@@ -194,7 +194,7 @@ For example, consider this `GetUserById` operation on the `SampleClient`.
       "operationId": "Users_GetById"
 ...
 ```
-The generated method signature is in the `IUsers`  interface
+The generated method signature is in the `IUsers` interface
 ```csharp
 public interface IUsers
 {
@@ -339,12 +339,12 @@ the common ancestor of success responses and error responses ends up being Objec
 
 ### Negative Responses<a name="NegativeResponses"></a>
 You can describe all the [possible HTTP Response status codes](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) in the responses section of an operation. AutoRest generated code will deserialize the response for all the described response status codes as per their definition in the swagger. If a response status code is not defined then generated code will align to the default response behavior as described above.
-- If **a schema is provided** for the negative response codes then this will have an impact on the return type of the generated method. 
+- If **a schema is provided** for the negative response codes, then this will have an impact on the return type of the generated method.
   - For example: if a schema was provided for 200, and 400 was also described with a schema then,
-    - the **return type** would be the Common Ancestor of both the schemas. In most cases there is nothing common between a positive and a negative response code. Hence the return type will be an `Object`. Note:This may not be very helpful to the customer
+    - the **return type** would be the Common Ancestor of both the schemas. In most cases, there is nothing common between a positive and a negative response code. Hence, the return type will be an `Object`. Note:This may not be very helpful to the customer
     - an exception **will NOT be thrown for 400** and the generated method will deserialize the response body as per the schema of "400".
     - any other negative response code will be treated as per the "default" response status code defined in the swagger for that operation.
-- If **a schema is NOT provided** for the negative response codes then this will **NOT** have an impact on the return type of the generated method.
+- If **a schema is NOT provided** for the negative response codes, then this will **NOT** have an impact on the return type of the generated method.
   - For example: if a schema was provided for 200 and 404 was described as one of the responses. However, 404 does not have a schema. In this scenario,
     - the **return type** of the generated method will be based upon the schema defined in "200".
     - an **exception will NOT be thrown** for 404 response status code
@@ -383,9 +383,9 @@ You can describe all the [possible HTTP Response status codes](http://www.w3.org
 }
 ```
 ### Custom Paths<a name="CustomPaths"></a>
-Swagger 2.0 has a built-in limitation on paths. Only one operation can be mapped to a path and http method. There are some APIs, however, where multiple distinct operations are mapped to the same path and same http method. For example `GET /mypath/query-drive?op=file` and `GET /mypath/query-drive?op=folder` may return two different model types (stream in the first example and JSON model representing Folder in the second). Since Swagger does not treat query parameters as part of the path the above 2 operations may not co-exist in the standard "paths" element.
+Swagger 2.0 has a built-in limitation on paths. Only one operation can be mapped to a path and http method. There are some APIs, however, where multiple distinct operations are mapped to the same path and same http method. For example, `GET /mypath/query-drive?op=file` and `GET /mypath/query-drive?op=folder` may return two different model types (stream in the first example and JSON model representing Folder in the second). Since Swagger does not treat query parameters as part of the path, the above 2 operations may not co-exist in the standard "paths" element.
 
-To overcome this limitation an "x-ms-paths" extension was introduced parallel to "paths". Urls under "x-ms-paths" are allowed to have query parameters for disambiguation, however they are removed during model parsing.
+To overcome this limitation, an "x-ms-paths" extension was introduced parallel to "paths". Urls under "x-ms-paths" are allowed to have query parameters for disambiguation, however they are removed during model parsing.
 
 ```json5
 "paths":{
@@ -408,7 +408,7 @@ To overcome this limitation an "x-ms-paths" extension was introduced parallel to
 
 ```
 
-Please note, that the use of "x-ms-paths" should be minimized to the above scenarios. Since any metadata inside the extension is not part of the default swagger specification, it will not be available to non-AutoRest tools.
+Please note that the use of "x-ms-paths" should be minimized to the above scenarios. Since any metadata inside the extension is not part of the default swagger specification, it will not be available to non-AutoRest tools.
 
 ## Defining Model Types<a name="DefiningModel"></a>
 The request body and response definitions become simple model types in the generated code. The models include 
@@ -431,7 +431,7 @@ definitions:
     required: [id]
     minLength: 8
 ```
-It's a valid schema, even though it combines object-specific keywords properties and required and string-specific keyword minLength. This schema means:
+It's a valid schema even though it combines object-specific keywords properties and required and string-specific keyword minLength. This schema means:
 - If the instance is an object, it must have an integer property named id. For example, `{"id": 4}` and `{"id": -1, "foo": "bar"}` are valid, but `{}` and `{"id": "ACB123"}` are not.
 - If the instance is a string, it must contain at least 8 characters. `"Hello, world!"` is valid, but `""` and `abc` are not.
 - Any instances of other types are valid - `true`, `false`, `-1.234`, `[]`, `[1, 2, 3]`, `[1, "foo", true]`, etc.
@@ -439,7 +439,7 @@ It's a valid schema, even though it combines object-specific keywords properties
 
 If there are tools that infer the `type` from other keywords (for example, handle schemas with no `type` but with `properties` as always objects), then these tools are not exactly following the OpenAPI Specification and JSON Schema.
 
-> Bottom line: If a schema must always be an object, add `"type": "object"` explicitly. Otherwise you might get unexpected results.
+> Bottom line: If a schema must always be an object, add `"type": "object"` explicitly. Otherwise, you might get unexpected results.
 
 **Credits** - Stack Overflow [link](https://stackoverflow.com/questions/47374980/schema-object-without-a-type-attribute-in-swagger-2-0).
 
@@ -669,13 +669,13 @@ resource properties is included inline, AutoRest still needs to generate a type 
 ```
 ## Enums with x-ms-enum<a name="Enum-x-ms-enum"></a>
 Enum definitions in Swagger indicate that only a particular set of values may be used for a property or parameter. When 
-the property is represented on the wire as a string, it would be  a natural choice to represent the property type in C# 
+the property is represented on the wire as a string, it would be a natural choice to represent the property type in C# 
 as an enum. However, not all enumeration values should necessarily be represented as C# enums - there are additional 
 considerations, such as how often expected values might change, since adding a new value to a C# enum is a breaking change 
 requiring an updated API version. Additionally, there is some metadata that is required to create a useful C# enum, such 
-as a descriptive name, which is not represented in swagger.  For this reason, enums are not automatically turned into 
+as a descriptive name, which is not represented in swagger. For this reason, enums are not automatically turned into 
 enum types in C# - instead they are rendered in the documentation comments for the property or parameter to indicate allowed 
-values.  To indicate that an enum will rarely change and that C# enum semantics are desired, use the `x-ms-enum` extension.
+values. To indicate that an enum will rarely change and that C# enum semantics are desired, use the `x-ms-enum` extension.
 
 In C#, an enum type is generated and is declared as the type of the related request/response object. The enum is serialized 
 as the string expected by the REST API.
@@ -721,7 +721,7 @@ methods for navigating between pages.
 {
   "x-ms-pageable" : {
     "nextLinkName": "Specify the name of the property that provides the nextLink. 
-                     If your model does not have the nextLink property then specify null.",
+                     If your model does not have the nextLink property, then specify null.",
     "itemName": "Specify the name of the property that provides the collection 
                  of pageable items. It is optional. Default value is 'value'.",
     "operationName": "Specify the name of the Next operation. It is optional. Default value is 'XXXNext' where XXX is the name of the operation." 

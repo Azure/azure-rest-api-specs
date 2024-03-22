@@ -18,7 +18,7 @@ It is crucial having simple and smooth processes that allow developer to easily:
         - [Flowchart](#flowchart-2)
         - [Remaining Tasks](#remaining-tasks-2)
         - [Details \& Open questions](#details--open-questions-1)
-      - [4.Dev Outer loop](#4dev-outer-loop)
+      - [4. Dev Outer loop](#4-dev-outer-loop)
         - [Use case](#use-case)
         - [4.1 Outer Dev loop azure-rest-api-specs pipeline](#41-outer-dev-loop-azure-rest-api-specs-pipeline)
           - [Flowchart](#flowchart-3)
@@ -26,7 +26,7 @@ It is crucial having simple and smooth processes that allow developer to easily:
         - [4.2 Outer Dev loop SDK repo pipeline](#42-outer-dev-loop-sdk-repo-pipeline)
           - [Flowchart](#flowchart-4)
           - [Details \& Open questions](#details--open-questions-3)
-      - [4. Outer loop Overall Status and tracking](#4-outer-loop-overall-status-and-tracking)
+      - [5. Outer loop Overall Status and tracking](#5-outer-loop-overall-status-and-tracking)
           - [Remaining Tasks](#remaining-tasks-3)
 
 Aside from the developer process, we have a few goals on managing repo package version
@@ -189,16 +189,16 @@ Use case and design proposals
 6. Optionally, after successful compile of TypeSpec project, spec author is able to run simple docker command to generate SDK for particular lanaguages locally.
 7. Optionally, sdk developer can work on sdk sample, sdk test, readme, etc., locally.
 
-#### 4.Dev Outer loop
+#### 4. Dev Outer loop
 
-Dev Outer Loop is defined as the experience of Spec writers sherparding the TypeSpec documents thru `azure-rest-api-sepcs` and its other depedency repos/branches like `-pr`, `-pr/RPSaasMain`, and `-pr/RPSaaSDev`, to different lanaguge SDK repos.
+Dev Outer Loop is defined as the experience of Spec writers shepharding the TypeSpec documents through `azure-rest-api-specs` and its other dependency repos/branches like `-pr`, `-pr/RPSaasMain`, and `-pr/RPSaaSDev`, to different lanaguge SDK repos.
 
 The experience should allow as much validations can be verified/debugged locally to ensure a clean CI for simple and fast PR reviews.
 
 ##### Use case
 - With the correct inner loop setup, the spec writer should be able to submit all relevant files as PR to `azure-rest-api-specs-pr` repo or `azure-rest-api-specs` repo
 - CI pipeline should verify TypeSpec compliation
-- CI Pipeline should be able to generate key language SDKs (.net,java,js,python)
+- CI Pipeline should be able to generate key language SDKs (.net, java, js, python)
 - Optionally CI generated key lanauge SDKs changes can be used to directly create PR on SDK public repo
 - Optionally user can add customized code to the working branch created by CI pipeline.
 
@@ -266,7 +266,7 @@ G["run test"]
 ```
 ###### Details & Open questions
 
-#### 4. Outer loop Overall Status and tracking
+#### 5. Outer loop Overall Status and tracking
 
 CI pipeline implementation
   - [x] 4.1 TypeSpec validation components

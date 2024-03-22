@@ -7,11 +7,11 @@
 
 # API Test Error Code
 
-OAV api testing define some rules and check whether actual service response match with example. Example is very important for downstream SDK test code generation, code samples and docs. The goal to detect example quality issues and check service behaviors consistent with example.
+OAV api testing defines some rules and checks whether actual service response match with the example. Example is very important for downstream SDK test code generation, code samples and docs. The goal is to detect example quality issues and check service behaviors are consistent with the example.
 
 ## INCORRECT_PROVISIONING_STATE
 
-If service return 200 status code,it means the operation is succeed and finished. So the provisioning state should be one of the terminal states ["succeeded", "failed", "canceled", "ready", "created", "deleted"].
+If the service returns 200 status code, it means the operation is succeeded and finished. So the provisioning state should be one of the terminal states ["succeeded", "failed", "canceled", "ready", "created", "deleted"].
 
 The provisioning state is very important for downstream terraform or cli to manage resource status. For more details about provisioning state, please refer to this [ARM RPC provisioning state](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#provisioningstate-property)
 
@@ -44,7 +44,7 @@ Example:
 
 **Error message** Return additional response value. Path: {}. Expected: undefined. Actual: {}
 
-The example doesn't define the response value, but service actually return this value.
+The example doesn't define the response value, but service actually returns this value.
 
 Example:
 

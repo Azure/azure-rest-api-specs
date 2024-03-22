@@ -5,7 +5,7 @@ This file describe how to configure readme files to make it available for Azure 
 In order to use cli codegen. We need readme.az.md and readme.cli.md and readme.python.md to be ready.  
 where the readme.cli.md is the common configuration for all the command line tools like Azure CLI, Powershell, Terraform etc. not only for Azure CLI.  
 and the readme.az.md is specific configuration for Azure CLI. 
-Because Azure CLI is calling Azure SDK for Python in the implementation layer. we need readme.python.md to be ready, we can refer to [configure-python-sdk.md](./configure-python-sdk.md) for more details about it.
+Because, Azure CLI is calling Azure SDK for Python in the implementation layer. We need readme.python.md to be ready, we can refer to [configure-python-sdk.md](./configure-python-sdk.md) for more details about it.
 
 
 ### Basic Information
@@ -25,7 +25,7 @@ tag: package-xxxx-xx-xx
 Tags are used to define what swagger files are used in specific client SDK. In Single-API client, only one tag can be used to generate SDK client.
 A tag can contains a bunch of swagger files which are used to generate the SDK. 
 
-The name of a tag should be in form of package-yyyy-mm-dd[-xxx], for example below tag names are available:
+The name of a tag should be in form of package-yyyy-mm-dd[-xxx], for example, below tag names are available:
 - package-2020-02-03
 - package-2020-03-22-preview
 - package-2020-05-03-only
@@ -101,14 +101,14 @@ where:
 1. the `namespace` means the python SDK namespace,  
 1. the `package-name` is the python SDK package name,  
 1. the `azure-cli-extension-folder` is the parameter that will be passed by user in their commmand line which should points to their local `azure-cli-extensions` repo.  
-  *Note: this parameter `azure-cli-extension-folder` is only for Azure CLI extensions and if user are targeting generate the Azure CLI main repo modules, the parameter should be `azure-cli-folder` that points to their local `azure-cli` repo.* 
-1. the `az-output-folder` is the specific output folder of this command modules. we should follow the basic code structure either in Azure CLI extensions or in Azure CLI main modules. If it is Azure CLI extensions that we are targeting, then the folder path should be like `$(azure-cli-extension-folder)/src/{serviceFolderName}`. If it's the Azure CLI main modules that we are targeting, then the folder path should be like `$(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/{serviceFolderName}`.  
+  *Note: this parameter `azure-cli-extension-folder` is only for Azure CLI extensions and if user are targeting to generate the Azure CLI main repo modules, the parameter should be `azure-cli-folder` that points to their local `azure-cli` repo.* 
+1. the `az-output-folder` is the specific output folder of this command modules. We should follow the basic code structure either in Azure CLI extensions or in Azure CLI main modules. If it is Azure CLI extensions that we are targeting, then the folder path should be like `$(azure-cli-extension-folder)/src/{serviceFolderName}`. If it's the Azure CLI main modules that we are targeting, then the folder path should be like `$(azure-cli-folder)/src/azure-cli/azure/cli/command_modules/{serviceFolderName}`.  
 1. the `python-sdk-output-folder` is the vendored sdk path. Please Note that, even if we don't really generate the sdk, but we still need the folder path.  It's worth notable that in the parts before and after vendored sdks are also configurable for specific user scenarios.   
 
 *Note: it's better to add the yaml condition `$(target-mode) != 'core'` for generating cli extensions and `$(target-mode) == 'core'` for generating cli main modules. Make sure those configuration can only be accessed when wanted.*
 
 ## Multi-api
-Currently the Azure CLI code generator doesn't support multi-api which means each operation contained in one package should only contains one api-version's. 
+Currently, the Azure CLI code generator doesn't support multi-api which means each operation contained in one package should only contain one api-version's. 
 
 ## Multi-packages 
 The batch is a tag list which are used in the one RP has multi-package scenarios. For example, 
@@ -158,8 +158,8 @@ input-file:
 
 ~~~
 
-Thirdly, in your readme.az.md you should include what packages you want to include in the Azure CLI.
-And in each package's section define the default package name output folder in azure-cli-extensions repo etc.
+Thirdly, in your readme.az.md, you should include what packages you want to include in the Azure CLI.
+And in each package's section, define the default package name output folder in azure-cli-extensions repo etc.
 
 ~~~
 ## AZ
@@ -238,11 +238,11 @@ python:
 
 
 ## Run codegen
-After configure all the readme files, autorest can be used to generate SDK.
+After configuring all the readme files, autorest can be used to generate SDK.
 ~~~
 autorest --az --use=@autorest/az@latest /home/qiaozha/code/azure-rest-api-specs/specification/storage/resource-manager/readme.md --azure-cli-extension-folder=../azure-cli-extensions
 ~~~
 
 ## Advance Usage 
 
-For advance usage of CLI Codegen, Please refer to [autorest.az doc](https://github.com/Azure/autorest.az/tree/master/doc)
+For advance usage of CLI Codegen, please refer to [autorest.az doc](https://github.com/Azure/autorest.az/tree/master/doc)

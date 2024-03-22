@@ -7,7 +7,7 @@
 - `<Title>`: SDK Client Name
 
 ## Single Client
-If you want to generate sdk with single client, please copy the following configuration into spec PR comment.
+If you want to generate sdk with a single client, please copy the following configuration into spec PR comment.
 ~~~
 # azure-sdk-for-python
 ``` yaml

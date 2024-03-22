@@ -46,12 +46,12 @@ scenarios:
   - **Type:** Required, Enum
   - **Enum:** ResourceGroup, Subscription, Tenant, None
     - **ResourceGroup:** All scenarios and steps should be executed under some resourceGroup. It means:
-      - The consumer (API scenario runner or anything consumes API scenario) SHOULD maintain the resource group itself. Usually it requires user to input the subscriptionId/location, then it creates the resource group before test running, and deletes the resource group after running
+      - The consumer (API scenario runner or anything consumes API scenario) SHOULD maintain the resource group itself. Usually, it requires user to input the subscriptionId/location, then it creates the resource group before test running, and deletes the resource group after running.
       - The consumer SHOULD set the following variables:
         - **subscriptionId**
         - **resourceGroupName**
         - **location**
-      - For details of how variables work please see [Variables](./Variables.md)
+      - For details of how variables work, please see [Variables](./Variables.md)
     - **Subscription:** All scenarios and steps will be executed under some subscription. It means:
       - No resource group need to be created.
       - The consumer SHOULD set the following variables:
@@ -353,7 +353,7 @@ Step to assign an Azure role to the scope.
 See [Json Patch Operation Schema](./v1.2/schema.json#L674)
 
 JsonPatchOp is used to define the update operation on json. You could add, remove, replace, copy, and move on json path.
-All the json path used in JsonPatchOp is in format of [JsonPointer](https://datatracker.ietf.org/doc/html/rfc6901).
+All the json path used in JsonPatchOp is in the format of [JsonPointer](https://datatracker.ietf.org/doc/html/rfc6901).
 
 - [JsonPatchOp](#jsonpatchop)
   - [JsonPatchOpAdd](#jsonpatchopadd)
@@ -554,7 +554,7 @@ result:
 See [Json Test Operation schema](./v1.2/schema.json#L767)
 
 JsonTestOp is used to define the test operation on json. You could test if the json path is expected.
-The json path used in JsonPatchOp is in format of [JsonPointer](https://datatracker.ietf.org/doc/html/rfc6901).
+The json path used in JsonPatchOp is in the format of [JsonPointer](https://datatracker.ietf.org/doc/html/rfc6901).
 
 - [JsonTestOp](#jsontestop)
   - [JsonTestOpEqual](#jsontestopequal)

@@ -19,9 +19,9 @@ tag: package-2019-10-01             // refer to below tag description
 
 ### tag
 Tags are used to define what swagger files are used in specific client SDK. In Single-API client, only one tag can be used to generate SDK client.
-A tag can contains a bunch of swagger files which are used to generate the SDK. 
+A tag can contain a bunch of swagger files which are used to generate the SDK. 
 
-The name of a tag should be in form of package-yyyy-mm-dd[-xxx], for example below tag names are available:
+The name of a tag should be in the form of package-yyyy-mm-dd[-xxx], for example, below tag names are available:
 - package-2020-02-03
 - package-2020-03-22-preview
 - package-2020-05-03-only
@@ -123,7 +123,7 @@ output-folder: $(python-sdks-folder)/[[ServiceName]]/azure-mgmt-[[ServiceName]]/
 ~~~
 
 ## Multi-API (not necessary)
-Multi-API SDK is a package that support multiple REST api-versions. With Python multi-api SDK, the end user can assign api-version for REST calls explicitly; nevertheless, they can also use the default api-version which is chose as the latest stable api-version.
+Multi-API SDK is a package that support multiple REST api-versions. With Python multi-api SDK, the end user can assign api-version for REST calls explicitly; nevertheless, they can also use the default api-version which is chosen as the latest stable api-version.
 
 If a multi-api package is need to be released, 'batch' should be used in the readme.python.md.
 Typical multi-api RPs are azure-mgmt-compute, azure-mgmt-network, azure-mgmt-storage, you can find their readme files to have a reference for multi-api.
@@ -171,7 +171,7 @@ output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compu
 
 
 ## Run codegen
-After configure all the readme files, autorest can be used to generate SDK.
+After configuring all the readme files, autorest can be used to generate SDK.
 
 ```
 autorest --use=@autorest/python@latest --python --python-sdk-folder=/path/to/azure-sdk-for-python /path/to/azure-rest-api-specs/specification/agrifood/resource-manager/readme.md --version-tolerant=false
