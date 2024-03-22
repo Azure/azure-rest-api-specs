@@ -620,7 +620,7 @@
             "type": "string"
           },
           {
-            "name": "proofOfPossessionNonceRequest",
+            "name": "body",
             "in": "body",
             "description": "Proof of possession nonce request body ",
             "required": true,
@@ -1062,7 +1062,7 @@
             "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
-            "name": "listDeviceGroupsRequest",
+            "name": "body",
             "in": "body",
             "description": "List device groups for catalog.",
             "required": true,
@@ -2039,7 +2039,7 @@
             "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$"
           },
           {
-            "name": "claimDevicesRequest",
+            "name": "body",
             "in": "body",
             "description": "Bulk claim devices request body.",
             "required": true,
@@ -2776,10 +2776,6 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -2938,7 +2934,7 @@
             "pattern": "^[a-zA-Z0-9-]{128}$"
           },
           {
-            "name": "generateDeviceCapabilityRequest",
+            "name": "body",
             "in": "body",
             "description": "Generate capability image request body.",
             "required": true,
@@ -3071,7 +3067,7 @@
             "pattern": "^[A-Za-z0-9_-]{1,50}$"
           },
           {
-            "name": "uploadImageRequest",
+            "name": "body",
             "in": "body",
             "description": "Image upload request body.",
             "required": true,

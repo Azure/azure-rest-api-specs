@@ -44,7 +44,7 @@ interface Devices {
    * Update a Device. Use '.unassigned' or '.default' for the device group and product names to move a device to the catalog level.
    */
   @parameterVisibility("read")
-  update is ArmCustomPatchAsync<Device, DeviceUpdate>;
+  update is ArmCustomPatchAsync<Device, DeviceUpdate, LroHeaders = {}>;
 
   /**
    * Delete a Device
@@ -68,10 +68,6 @@ interface Devices {
 
 @@doc(Devices.generateCapabilityImage::parameters.body,
   "Generate capability image request body."
-);
-@@encodedName(Devices.generateCapabilityImage::parameters.body,
-  "application/json",
-  "generateDeviceCapabilityRequest"
 );
 @@extension(Devices.generateCapabilityImage::parameters.body,
   "x-ms-client-name",
