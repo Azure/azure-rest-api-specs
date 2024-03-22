@@ -1518,6 +1518,14 @@
         "usersViewersCanEdit": {
           "description": "Set to true so viewers can access and use explore and perform temporary edits on panels in dashboards they have access to. They cannot save their changes.",
           "type": "boolean"
+        },
+        "otherRequestedConfigs": {
+          "description": "These configs are added by acis actions, users cannot edit them directly",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       }
     },
