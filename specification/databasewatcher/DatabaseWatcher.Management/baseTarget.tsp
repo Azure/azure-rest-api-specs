@@ -65,10 +65,12 @@ model VaultSecret {
 }
 
 @doc("The type of authentication to use when connecting to a target.")
-enum TargetAuthenticationType {
+union TargetAuthenticationType {
+  string,
+
   @doc("The Azure Active Directory authentication.")
-  Aad,
+  Aad: "Aad",
 
   @doc("The SQL password authentication.")
-  Sql,
+  Sql: "Sql",
 }

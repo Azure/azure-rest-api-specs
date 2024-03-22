@@ -35,9 +35,11 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("Provisioning state")
 @lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+
+  ResourceProvisioningState,
 
   @doc("Resource is being deleted.")
-  Deleting,
+  Deleting: "Deleting",
 }

@@ -84,9 +84,11 @@ model ContainerGroupProfile {
 
 @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
 @doc("Refill policy of standby pool")
-enum RefillPolicy {
+union RefillPolicy {
+  string,
+
   @doc("A refill policy that standby pool is automatically refilled to maintain maxReadyCapacity.")
-  always,
+  always: "always",
 }
 
 @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
