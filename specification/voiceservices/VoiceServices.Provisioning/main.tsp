@@ -303,12 +303,14 @@ model TeamsCapabilityPlans {
  */
 
 @doc("The possible validation status of Teams Civic Addresses.")
-enum ValidationStatus {
+union ValidationStatus {
+  string,
+
   @doc("The civic address is not validated.")
-  notValidated,
+  notValidated: "notValidated",
 
   @doc("The civic address is validated.")
-  validated,
+  validated: "validated",
 }
 
 @doc("A location used by Team Operator Connect or Teams Phone Mobile telephone numbers.")
