@@ -90,7 +90,6 @@ suppressions:
       - $.definitions.ServicePrincipalAuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
   - code: GuidUsage
     reason: This property has always been a GUID, we just didn't mark its format before, this can't be change without breaking the customer.
-    from: workspaceRP.json    
     where:
       - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
 ```
