@@ -2925,6 +2925,145 @@
       ],
       "description": "Diagnostic Entity Properties"
     },
+    "DiagnosticUpdateContract": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DiagnosticContractUpdateProperties",
+          "description": "Diagnostic entity contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Diagnostic details."
+    },
+    "DiagnosticContractUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "alwaysLog": {
+          "type": "string",
+          "enum": [
+            "allErrors"
+          ],
+          "x-ms-enum": {
+            "name": "AlwaysLog",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "allErrors",
+                "description": "Always log all erroneous request regardless of sampling settings."
+              }
+            ]
+          },
+          "description": "Specifies for what type of messages sampling settings should not apply."
+        },
+        "loggerId": {
+          "type": "string",
+          "description": "Resource Id of a target logger."
+        },
+        "sampling": {
+          "$ref": "#/definitions/SamplingSettings",
+          "description": "Sampling settings for Diagnostic."
+        },
+        "frontend": {
+          "$ref": "#/definitions/PipelineDiagnosticSettings",
+          "description": "Diagnostic settings for incoming/outgoing HTTP messages to the Gateway."
+        },
+        "backend": {
+          "$ref": "#/definitions/PipelineDiagnosticSettings",
+          "description": "Diagnostic settings for incoming/outgoing HTTP messages to the Backend"
+        },
+        "logClientIp": {
+          "type": "boolean",
+          "description": "Log the ClientIP. Default is false."
+        },
+        "httpCorrelationProtocol": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Legacy",
+            "W3C"
+          ],
+          "x-ms-enum": {
+            "name": "HttpCorrelationProtocol",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "Do not read and inject correlation headers."
+              },
+              {
+                "value": "Legacy",
+                "description": "Inject Request-Id and Request-Context headers with request correlation data. See https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/HttpCorrelationProtocol.md."
+              },
+              {
+                "value": "W3C",
+                "description": "Inject Trace Context headers. See https://w3c.github.io/trace-context."
+              }
+            ]
+          },
+          "description": "Sets correlation protocol to use for Application Insights diagnostics."
+        },
+        "verbosity": {
+          "type": "string",
+          "enum": [
+            "verbose",
+            "information",
+            "error"
+          ],
+          "x-ms-enum": {
+            "name": "Verbosity",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "verbose",
+                "description": "All the traces emitted by trace policies will be sent to the logger attached to this diagnostic instance."
+              },
+              {
+                "value": "information",
+                "description": "Traces with 'severity' set to 'information' and 'error' will be sent to the logger attached to this diagnostic instance."
+              },
+              {
+                "value": "error",
+                "description": "Only traces with 'severity' set to 'error' will be sent to the logger attached to this diagnostic instance."
+              }
+            ]
+          },
+          "description": "The verbosity level applied to traces emitted by trace policies."
+        },
+        "operationNameFormat": {
+          "type": "string",
+          "enum": [
+            "Name",
+            "Url"
+          ],
+          "x-ms-enum": {
+            "name": "OperationNameFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Name",
+                "description": "API_NAME;rev=API_REVISION - OPERATION_NAME"
+              },
+              {
+                "value": "Url",
+                "description": "HTTP_VERB URL"
+              }
+            ]
+          },
+          "description": "The format of the Operation Name for Application Insights telemetries. Default is Name."
+        },
+        "metrics": {
+          "type": "boolean",
+          "description": "Emit custom metrics via emit-metric policy. Applicable only to Application Insights diagnostic settings."
+        }
+      },
+      "description": "Diagnostic Entity Properties"
+    },
     "EmailTemplateCollection": {
       "type": "object",
       "properties": {
