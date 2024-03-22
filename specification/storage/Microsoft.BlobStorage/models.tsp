@@ -21,6 +21,121 @@ model StorageError {
 
 /// Parameters
 
+/** The range required put page from URL parameter. */
+model RangeRequiredPutPageFromUrlParameter {
+  /** Bytes of source data in the specified range. The length of this range should match the ContentLength header and x-ms-range/Range destination range header. */
+  @header
+  @clientName("range")
+  `x-ms-range`: string;
+}
+
+/** The source range required put page from URL parameter. */
+model SourceRangeRequiredPutPageFromUrlParameter {
+  /** Bytes of source data in the specified range. The length of this range should match the ContentLength header and x-ms-range/Range destination range header. */
+  @header
+  @clientName("sourceRange")
+  `x-ms-source-range`: string;
+}
+
+/** The if seuqnce number equal to parameter. */
+model IfSequenceNumberEqualToParameter {
+  /** Specify this header value to operate only on a blob if it has the specified sequence number. */
+  @header
+  @clientName("ifSequenceNumberEqualTo")
+  `x-ms-if-sequence-number-eq`?: int64;
+}
+
+/** THe if sequence number less than parameter. */
+model IfSequenceNumberLessThanParameter {
+  /** Specify this header value to operate only on a blob if it has a sequence number less than the specified. */
+  @header
+  @clientName("ifSequenceNumberLessThan")
+  `x-ms-if-sequence-number-lt`?: int64;
+}
+
+/** The if sequence number less than or equal to parameter. */
+model IfSequenceNumberLessThanOrEqualToParameter {
+  /** Specify this header value to operate only on a blob if it has a sequence number less than or equal to the specified. */
+  @header
+  @clientName("ifSequenceNumberLessThanOrEqualTo")
+  `x-ms-if-sequence-number-le`?: int64;
+}
+
+/** The blob content-length response header. */
+model BlobContentLengthResponseHeader {
+  /** The size of the blob in bytes. */
+  @header
+  @clientName("blobContentLength")
+  `x-ms-blob-content-length`: int64;
+}
+
+/** The block list type parameter. */
+model BlockListTypeParameter {
+  /** Specifies whether to return the list of committed blocks, the list of uncommitted blocks, or both lists together. */
+  @query
+  @clientName("listType")
+  blocklisttype: BlockListType;
+}
+
+/** The block list types. */
+enum BlockListType {
+  /** The list of committed blocks. */
+  committed,
+  /** The list of uncommitted blocks. */
+  uncommitted,
+  /** Both lists together. */
+  all
+}
+
+/** The blob blocks body parameter. */
+model BlobBlocksParameter {
+  /** Blob Blocks. */
+  @body blocks: BlockLookupList;
+}
+
+/** The Block lookup list. */
+model BlockLookupList {
+  // TODO: XML
+  /** The committed blocks */
+  Committed: string[];
+  /** The uncommitted blocks */
+  Uncommitted: string[];
+  /** The latest blocks */
+  Latest: string[];
+}
+
+/** The source content CRC64 parameter. */
+model SourceContentCrc64Parameter {
+  /** Specify the crc64 calculated for the range of bytes that must be read from the copy source. */
+  @header
+  @clientName("sourceContentCrc64")
+  `x-ms-source-content-crc64`?: string;
+}
+
+/** The source range parameter. */
+model SourceRangeParameter {
+  /** Bytes of source data in the specified range. */
+  @header
+  @clientName("sourceRange")
+  `x-ms-source-range`: string;
+}
+
+/** The source URL parameter. */
+model SourceUrlParameter {
+  /** Specify a URL to the copy source. */
+  @header
+  @clientName("sourceUrl")
+  `x-ms-source-url`: string;
+}
+
+/** The Block ID parameter. */
+model BlockIdParameter {
+  /** A valid Base64 string value that identifies the block. Prior to encoding, the string must be less than or equal to 64 bytes in size. For a given blob, the length of the value specified for the blockid parameter must be the same size for each block. */
+  @query
+  @clientName("blockId")
+  blockid: string;
+}
+
 /** The is hierarchical namespace enabled response header. */
 model IsHierarchicalNamespaceEnabledResponseHeader {
   /** Version 2019-07-07 and newer. Indicates if the account has a hierarchical namespace enabled. */

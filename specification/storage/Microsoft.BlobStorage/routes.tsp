@@ -1832,3 +1832,307 @@ interface BlobAccountPropertiesService {
     ...SkuNameResponseHeader;
   } | StorageError;
 }
+
+@route("/{containerName}/{blob}?comp=block")
+interface BlobBlockStageService {
+  /** The Stage Block operation creates a new block to be committed as part of a blob */
+  @put
+  @operationId("BlockBlob_StageBlock")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  stageBlock(
+    /** The data to upload. */
+    @body body: bytes;
+
+    ...ContainerNameParameter;
+    ...BlobNameParameter;
+    ...BlockIdParameter;
+    ...ContentLengthHeader;
+    ...ContentMD5Parameter;
+    ...TimeoutParameter;
+    ...ContentCrc64Parameter;
+    ...LeaseIdOptional;
+    ...EncryptionKeyParameter;
+    ...EncryptionKeySha256Parameter;
+    ...EncryptionAlgorithmParameter;
+    ...EncryptionScopeParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
+  ): {
+    @statusCode statusCode: 201;
+    ...ClientRequestIdResponseHeader;
+    ...RequestIdResponseHeader;
+    ...VersionResponseHeader;
+    ...DateResponseHeader;
+    ...ContentMD5ResponseHeader;
+    ...ContentCrc64ResponseHeader;
+    ...IsServerEncryptedResponseHeader;
+    ...EncryptionKeySha256ResponseHeader;
+    ...EncryptionScopeResponseHeader
+  } | StorageError;
+}
+
+@route("/{containerName}/{blob}?comp=block&fromURL")
+interface BlobBlockStageFromUrlService {
+  /** The Stage Block From URL operation creates a new block to be committed as part of a blob where the contents are read from a URL. */
+  @put
+  @operationId("BlockBlob_StageBlockFromURL")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  stageBlockFromUrl(
+    ...ContainerNameParameter;
+    ...BlobNameParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
+    ...BlockIdParameter;
+    ...ContentLengthHeader;
+    ...SourceUrlParameter;
+    ...SourceRangeParameter;
+    ...SourceContentMD5Parameter;
+    ...SourceContentCrc64Parameter;
+    ...TimeoutParameter;
+    ...EncryptionKeyParameter;
+    ...EncryptionKeySha256Parameter;
+    ...EncryptionAlgorithmParameter;
+    ...EncryptionScopeParameter;
+    ...LeaseIdOptional;
+    ...SourceIfModifiedSinceParameter;
+    ...SourceIfUnmodifiedSinceParameter;
+    ...SourceIfMatchParameter;
+    ...SourceIfNoneMatchParameter;
+    ...CopySourceAuthorizationParameter;
+  ): {
+    @statusCode statusCode: 201;
+    ...ClientRequestIdResponseHeader;
+    ...RequestIdResponseHeader;
+    ...VersionResponseHeader;
+    ...DateResponseHeader;
+    ...ContentMD5ResponseHeader;
+    ...ContentCrc64ResponseHeader;
+    ...IsServerEncryptedResponseHeader;
+    ...EncryptionKeySha256ResponseHeader;
+    ...EncryptionScopeResponseHeader;
+  } | StorageError;
+}
+
+@route("/{containerName}/{blob}?comp=blocklist")
+interface BlobBlockListService {
+  /** The Commit Block List operation writes a blob by specifying the list of block IDs that make up the blob. In order to be written as part of a blob, a block must have been successfully written to the server in a prior Put Block operation. You can call Put Block List to update a blob by uploading only those blocks that have changed, then committing the new and existing blocks together. You can do this by specifying whether to commit a block from the committed block list or from the uncommitted block list, or to commit the most recently uploaded version of the block, whichever list it may belong to. */
+  @put
+  @operationId("BlockBlob_CommitBlockList")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  commitBlockList(
+    // TODO: XML with the body
+    ...BlobBlocksParameter;
+    ...ContainerNameParameter;
+    ...BlobNameParameter;
+    ...TimeoutParameter;
+    ...BlobCacheControlParameter;
+    ...BlobContentTypeParameter;
+    ...BlobContentEncodingParameter;
+    ...BlobContentLanguageParameter;
+    ...BlobContentMD5Parameter;
+    ...ContentMD5Parameter;
+    ...ContentCrc64Parameter;
+    // TODO: ...MetadataParameter;
+    ...BlobContentDispositionParameter;
+    ...EncryptionKeyParameter;
+    ...EncryptionKeySha256Parameter;
+    ...EncryptionAlgorithmParameter;
+    ...EncryptionScopeParameter;
+    ...AccessTierOptionalParameter;
+    ...IfModifiedSince;
+    ...IfUnmodifiedSince;
+    ...IfMatchParameter;
+    ...IfNoneMatchParameter;
+    ...IfTagsParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
+    ...BlobTagsHeaderParameter;
+    ...ImmutabilityPolicyExpiryParameter;
+    ...ImmutabilityPolicyModeParameter;
+    ...LegalHoldOptionalParameter;
+  ): {
+    @statusCode statusCode: 201;
+    ...ETagResponseHeader;
+    ...LastModifiedResponseHeader;
+    ...ContentMD5ResponseHeader;
+    ...ContentCrc64ResponseHeader;
+    ...ClientRequestIdResponseHeader;
+    ...RequestIdResponseHeader;
+    ...VersionResponseHeader;
+    ...DateResponseHeader;
+    ...IsServerEncryptedResponseHeader;
+    ...EncryptionKeySha256ResponseHeader;
+    ...EncryptionScopeResponseHeader;
+  } | StorageError;
+
+  /** The Get Block List operation retrieves the list of blocks that have been uploaded as part of a block blob. */
+  @get
+  @operationId("BlockBlob_GetBlockList")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  getBlockList(
+    ...ContainerNameParameter;
+    ...BlobNameParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
+    ...SnapshotParameter;
+    ...BlockListTypeParameter;
+    ...LeaseIdOptional;
+    ...IfTagsParameter;
+  ): {
+    @statusCode statusCode: 200;
+    @body body: BlockLookupList; // TODO: XML
+
+    ...LastModifiedResponseHeader;
+    ...ETagResponseHeader;
+    ...ContentTypeResponseHeader;
+    ...BlobContentLengthResponseHeader;
+    ...ClientRequestIdResponseHeader;
+    ...RequestIdResponseHeader;
+    ...VersionResponseHeader;
+    ...DateResponseHeader;
+  } | StorageError;
+}
+
+@route("/{containerName}/{blob}?comp=page&update")
+interface PageBlobUpdateService {
+  /** The Upload Pages operation writes a range of pages to a page blob */
+  @put
+  @operationId("PageBlob_UploadPages")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  uploadPages(
+    /** The data to upload. */
+    @body body: bytes;
+
+    ...ContainerNameParameter;
+    ...BlobNameParameter;
+    ...ContentLengthHeader;
+    ...ContentMD5Parameter;
+    ...ContentCrc64Parameter;
+    ...TimeoutParameter;
+    ...RangeParameter;
+    ...LeaseIdOptional;
+    ...EncryptionKeyParameter;
+    ...EncryptionKeySha256Parameter;
+    ...EncryptionAlgorithmParameter;
+    ...EncryptionScopeParameter;
+    ...IfSequenceNumberLessThanOrEqualToParameter;
+    ...IfSequenceNumberLessThanParameter;
+    ...IfSequenceNumberEqualToParameter;
+    ...IfModifiedSince;
+    ...IfUnmodifiedSince;
+    ...IfMatchParameter;
+    ...IfNoneMatchParameter;
+    ...IfTagsParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
+  ): {
+    @statusCode statusCode: 201;
+    ...ETagResponseHeader;
+    ...LastModifiedResponseHeader;
+    ...ContentMD5ResponseHeader;
+    ...ContentCrc64ResponseHeader;
+    ...BlobSequenceNumberResponseHeader;
+    ...ClientRequestIdResponseHeader;
+    ...RequestIdResponseHeader;
+    ...VersionResponseHeader;
+    ...DateResponseHeader;
+    ...IsServerEncryptedResponseHeader;
+    ...EncryptionKeySha256ResponseHeader;
+    ...EncryptionScopeResponseHeader;
+  } | StorageError;
+}
+
+@route("/{containerName}/{blob}?comp=page&clear")
+interface PageBlobClearService {
+  /** The Clear Pages operation clears a range of pages from a page blob */
+  @put
+  @operationId("PageBlob_ClearPages")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  clearPages(
+    ...ContainerNameParameter;
+    ...BlobNameParameter;
+    ...ContentLengthHeader;
+    ...TimeoutParameter;
+    ...RangeParameter;
+    ...LeaseIdOptional;
+    ...IfSequenceNumberLessThanOrEqualToParameter;
+    ...IfSequenceNumberLessThanParameter;
+    ...IfSequenceNumberEqualToParameter;
+    ...IfModifiedSince;
+    ...IfUnmodifiedSince;
+    ...IfMatchParameter;
+    ...IfNoneMatchParameter;
+    ...IfTagsParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
+  ): {
+    @statusCode statusCode: 201;
+    ...ETagResponseHeader;
+    ...LastModifiedResponseHeader;
+    ...BlobSequenceNumberResponseHeader;
+    ...ClientRequestIdResponseHeader;
+    ...RequestIdResponseHeader;
+    ...VersionResponseHeader;
+    ...DateResponseHeader;
+  } | StorageError;
+}
+
+@route("/{containerName}/{blob}?comp=page&update&fromUrl")
+interface BlobPageUpdateFromUrlService {
+  /** The Upload Pages operation writes a range of pages to a page blob where the contents are read from a URL. */
+  @put
+  @operationId("PageBlob_UploadPagesFromURL")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  uploadPagesFromUrl(
+    ...ContainerNameParameter;
+    ...BlobNameParameter;
+    ...TimeoutParameter;
+    ...ContentLengthHeader;
+    ...SourceUrlParameter;
+    ...SourceRangeRequiredPutPageFromUrlParameter;
+    ...SourceContentMD5Parameter;
+    ...SourceContentCrc64Parameter;
+    ...RangeRequiredPutPageFromUrlParameter;
+    ...EncryptionKeyParameter;
+    ...EncryptionKeySha256Parameter;
+    ...EncryptionAlgorithmParameter;
+    ...EncryptionScopeParameter;
+    ...LeaseIdOptional;
+    ...IfSequenceNumberLessThanOrEqualToParameter;
+    ...IfSequenceNumberLessThanParameter;
+    ...IfSequenceNumberEqualToParameter;
+    ...IfModifiedSince;
+    ...IfUnmodifiedSince;
+    ...IfMatchParameter;
+    ...IfNoneMatchParameter;
+    ...IfTagsParameter;
+    ...SourceIfModifiedSinceParameter;
+    ...SourceIfUnmodifiedSinceParameter;
+    ...SourceIfMatchParameter;
+    ...SourceIfNoneMatchParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
+    ...CopySourceAuthorizationParameter;
+  ): {
+    @statusCode statusCode: 202;
+    ...ETagResponseHeader;
+    ...LastModifiedResponseHeader;
+    ...ClientRequestIdResponseHeader;
+    ...RequestIdResponseHeader;
+    ...VersionResponseHeader;
+    ...DateResponseHeader;
+    ...ContentMD5ResponseHeader;
+    ...ContentCrc64ResponseHeader;
+    ...BlobSequenceNumberResponseHeader;
+    ...IsServerEncryptedResponseHeader;
+    ...EncryptionKeySha256ResponseHeader;
+    ...EncryptionScopeResponseHeader;
+  } | StorageError;
+}
