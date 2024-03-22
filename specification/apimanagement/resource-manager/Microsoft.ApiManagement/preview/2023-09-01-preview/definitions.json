@@ -2449,8 +2449,8 @@
         "weight": {
           "type": "integer",
           "format": "int32",
-          "description": "The weight of the backend entity in the backend pool. Must be between 1 and 100.",
-          "minimum": 1,
+          "description": "The weight of the backend entity in the backend pool. Must be between 0 and 100. It can be also null if the value not specified.",
+          "minimum": 0,
           "maximum": 100,
           "example": {
             "weight": 1
@@ -2459,8 +2459,8 @@
         "priority": {
           "type": "integer",
           "format": "int32",
-          "description": "The priority of the backend entity in the backend pool. Must be between 1 and 100.",
-          "minimum": 1,
+          "description": "The priority of the backend entity in the backend pool. Must be between 0 and 100. It can be also null if the value not specified.",
+          "minimum": 0,
           "maximum": 100,
           "example": {
             "priority": 1
