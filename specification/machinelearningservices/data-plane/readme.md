@@ -48,6 +48,15 @@ directive:
     reason: Existing service; would be a breaking change
 ```
 
+### Tag: package-2024-04-01-preview
+
+These settings apply only when `--tag=package-2024-04-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04-01-preview'
+input-file:
+  - Microsoft.MachineLearningServices\preview\2024-04-01-preview\azure-ai-assets.json
+```
+
 ### Tag: package-2019-09-preview
 
 These settings apply only when `--tag=package-2019-09-preview` is specified on the command line.
