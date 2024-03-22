@@ -49,10 +49,6 @@ model QuantumComputingData {
 }
 
 /** A job to be run in the workspace. */
-// Notes:
-// - The generated Swagger is not automatically adding the x-ms-discriminator-value
-//   so we are adding it manually.
-@extension("x-ms-discriminator-value", ItemType.Job)
 @resource("jobs")
 @parentResource(QuantumWorkspace)
 model JobDetails extends ItemDetails {
@@ -130,7 +126,11 @@ namespace Quantum.Workspace.Operations {
     create is CreateOperation<JobDetails>;
 
     /** Update job properties. */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The Azure.Core.ResourceUpdate does not support NoContentResponse and the JsonPatchDocument request body"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
+    There is no support for JsonPatch in Azure.Core.
+    The Azure.Core.ResourceUpdate does not support NoContentResponse and the JsonPatchDocument request body.
+    See https://github.com/Azure/typespec-azure/issues/475
+    """
     update is PatchOperation<JobDetails>;
 
     /** Request the cancellation of an existing job. */
@@ -140,7 +140,10 @@ namespace Quantum.Workspace.Operations {
     get is GetOperation<JobDetails>;
 
     /** List all jobs. */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs."
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
+    We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs.
+    See https://github.com/Azure/typespec-azure/issues/494
+    """
     list is CustomListOperation<
       Resource = JobDetails,
       Response = PagedJobDetails

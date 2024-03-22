@@ -41,11 +41,7 @@ enum SessionStatus {
   TimedOut,
 }
 
-// Notes:
-// - The generated Swagger is not automatically adding the x-ms-discriminator-value
-//   so we are adding it manually.
 /** Session, a logical grouping of jobs. */
-@extension("x-ms-discriminator-value", ItemType.Session)
 @resource("sessions")
 @parentResource(QuantumWorkspace)
 model SessionDetails extends ItemDetails {
@@ -80,9 +76,15 @@ namespace Quantum.Workspace.Operations {
     /** Get Session by its id. */
     get is GetOperation<SessionDetails>;
 
+    /** List all Sessions. */
+    list is ListOperation<SessionDetails>;
+
     /** List jobs in a session. */
     #suppress "@azure-tools/typespec-azure-core/no-operation-id" "The nesting of Jobs under a Session makes the auto-generated ID to be Sessions_JobsList, which is not in a Noun_Verb format."
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs."
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
+    We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs.
+    See https://github.com/Azure/typespec-azure/issues/494
+    """
     @operationId("SessionsJobs_List")
     jobsList is CustomListOperation<
       Resource = JobDetails,
@@ -94,8 +96,5 @@ namespace Quantum.Workspace.Operations {
         sessionId: string;
       }
     >;
-
-    /** List all Sessions. */
-    list is ListOperation<SessionDetails>;
   }
 }

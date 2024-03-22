@@ -40,6 +40,11 @@ namespace Quantum.Workspace.BaseOperations {
   alias CreateOperation<Resource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceCreateOrReplace<Resource>;
 
   /** Operation to patch a resource. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
+  There is no support for JsonPatch in Azure.Core.
+  The Azure.Core.ResourceUpdate does not support NoContentResponse and the JsonPatchDocument request body.
+  See https://github.com/Azure/typespec-azure/issues/475
+  """
   @updatesResource(Resource)
   @patch
   @Azure.Core.Foundations.Private.ensureVerb("PatchOperation", "PATCH")
