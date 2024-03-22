@@ -87,15 +87,16 @@ model LivenessSessionCreationResult {
 }
 
 @doc("The current status of the session.")
-enum FaceSessionStatus {
+union FaceSessionStatus {
+  string,
   @doc("Session has not started.")
-  NotStarted,
+  "NotStarted",
 
   @doc("Session has started.")
-  Started,
+  "Started",
 
   @doc("Session has available result.")
-  ResultAvailable,
+  "ResultAvailable",
 }
 
 @doc("Audit entry for a request in the session.")

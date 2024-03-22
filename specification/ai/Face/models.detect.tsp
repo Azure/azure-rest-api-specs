@@ -231,18 +231,19 @@ model FacialHair {
 }
 
 @doc("Glasses type of the face.")
-enum GlassesType {
+union GlassesType {
+  string,
   @doc("No glasses on the face.")
-  noGlasses,
+  "noGlasses",
 
   @doc("Normal glasses on the face.")
-  readingGlasses,
+  "readingGlasses",
 
   @doc("Sunglasses on the face.")
-  sunglasses,
+  "sunglasses",
 
   @doc("Swimming goggles on the face.")
-  swimmingGoggles,
+  "swimmingGoggles",
 }
 
 @doc("3-D roll/yaw/pitch angles for face direction.")
@@ -283,30 +284,31 @@ model HairColor {
 }
 
 @doc("Name of the hair color.")
-enum HairColorType {
+union HairColorType {
+  string,
   @doc("Unknown")
   unknownHairColor: "unknown",
 
   @doc("White")
-  white,
+  "white",
 
   @doc("Gray")
-  gray,
+  "gray",
 
   @doc("Blond")
-  blond,
+  "blond",
 
   @doc("Brown")
-  brown,
+  "brown",
 
   @doc("Red")
-  red,
+  "red",
 
   @doc("Black")
-  black,
+  "black",
 
   @doc("Other")
-  other,
+  "other",
 }
 
 @doc("Properties describing occlusions on a given face.")
@@ -333,15 +335,16 @@ model AccessoryItem {
 }
 
 @doc("Type of the accessory.")
-enum AccessoryType {
+union AccessoryType {
+  string,
   @doc("Head wear")
-  headwear,
+  "headwear",
 
   @doc("Glasses")
-  glasses,
+  "glasses",
 
   @doc("Mask")
-  mask,
+  "mask",
 }
 
 @doc("Properties describing any presence of blur within the image.")
@@ -356,15 +359,16 @@ model BlurProperties {
 }
 
 @doc("Indicates level of blurriness.")
-enum BlurLevel {
+union BlurLevel {
+  string,
   @doc("Low blur level.")
-  low,
+  "low",
 
   @doc("Medium blur level.")
-  medium,
+  "medium",
 
   @doc("High blur level.")
-  high,
+  "high",
 }
 
 @doc("Properties describing exposure level of the image.")
@@ -379,15 +383,16 @@ model ExposureProperties {
 }
 
 @doc("Indicates level of exposure.")
-enum ExposureLevel {
+union ExposureLevel {
+  string,
   @doc("Low exposure level.")
-  underExposure,
+  "underExposure",
 
   @doc("Good exposure level.")
-  goodExposure,
+  "goodExposure",
 
   @doc("High exposure level.")
-  overExposure,
+  "overExposure",
 }
 
 @doc("Properties describing noise level of the image.")
@@ -402,15 +407,16 @@ model NoiseProperties {
 }
 
 @doc("Indicates level of noise.")
-enum NoiseLevel {
+union NoiseLevel {
+  string,
   @doc("Low noise level.")
-  low,
+  "low",
 
   @doc("Medium noise level.")
-  medium,
+  "medium",
 
   @doc("High noise level.")
-  high,
+  "high",
 }
 
 @doc("Properties describing the presence of a mask on a given face.")
@@ -423,28 +429,30 @@ model MaskProperties {
 }
 
 @doc("Mask type if any of the face")
-enum MaskType {
+union MaskType {
+  string,
   @doc("Face mask.")
-  faceMask,
+  "faceMask",
 
   @doc("No mask.")
-  noMask,
+  "noMask",
 
   @doc("Other types of mask or occlusion.")
-  otherMaskOrOcclusion,
+  "otherMaskOrOcclusion",
 
   @doc("Uncertain")
-  uncertain,
+  "uncertain",
 }
 
 @doc("Indicates quality of image for recognition.")
-enum QualityForRecognition {
+union QualityForRecognition {
+  string,
   @doc("Low quality.")
-  low,
+  "low",
 
   @doc("Medium quality.")
-  medium,
+  "medium",
 
   @doc("High quality.")
-  high,
+  "high",
 }

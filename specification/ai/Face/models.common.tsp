@@ -30,30 +30,32 @@ model ListRequestOptions {
 }
 
 @doc("The recognition model for the face.")
-enum RecognitionModel {
+union RecognitionModel {
+  string,
   @doc("The default recognition model for Face - Detect. All those faceIds created before 2019 March are bonded with this recognition model.")
-  recognition_01,
+  "recognition_01",
 
   @doc("Recognition model released in 2019 March.")
-  recognition_02,
+  "recognition_02",
 
   @doc("Recognition model released in 2020 May.")
-  recognition_03,
+  "recognition_03",
 
   @doc("Recognition model released in 2021 February. It's recommended to use this recognition model for better recognition accuracy.")
-  recognition_04,
+  "recognition_04",
 }
 
 @doc("The detection model for the face.")
-enum DetectionModel {
+union DetectionModel {
+  string,
   @doc("The default detection model for Face - Detect. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.")
-  detection_01,
+  "detection_01",
 
   @doc("Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.")
-  detection_02,
+  "detection_02",
 
   @doc("Detection model released in 2021 February with improved accuracy especially on small faces.")
-  detection_03,
+  "detection_03",
 }
 
 @doc("Model for object name and user data.")
@@ -165,12 +167,13 @@ model FaceVerificationResult {
 }
 
 @doc("Similar face searching mode.")
-enum FindSimilarMatchMode {
+union FindSimilarMatchMode {
+  string,
   @doc("Match person.")
-  matchPerson,
+  "matchPerson",
 
   @doc("Match face.")
-  matchFace,
+  "matchFace",
 }
 
 @doc("Response body for find similar face operation.")
