@@ -26,7 +26,6 @@ op documentTranslate is RpcOperation<
 
 interface DocumentTranslationOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @added(DocumentTranslation.Versions.v2024_05_01)
   @summary("Submit a document translation request to the Document Translation service")
   @doc("""
 Use this API to submit a bulk (batch) translation request to the Document
@@ -57,7 +56,6 @@ must be unique.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @added(DocumentTranslation.Versions.v2024_05_01)
   @summary("Returns a list of batch requests submitted and the status for each request")
   @doc("""
 Returns a list of batch requests submitted and the status for each
@@ -202,7 +200,6 @@ if the specified page size is smaller than the server's default page size.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @added(DocumentTranslation.Versions.v2024_05_01)
   @summary("Returns the status for a specific document")
   @doc("""
 Returns the translation status for a specific document based on the request Id
@@ -224,7 +221,6 @@ and document Id.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @added(DocumentTranslation.Versions.v2024_05_01)
   @summary("Returns the status for a document translation request")
   @doc("""
 Returns the status for a document translation request.
@@ -244,7 +240,6 @@ translated as part of that request.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @added(DocumentTranslation.Versions.v2024_05_01)
   @summary("Cancel a currently processing or queued translation")
   @doc("""
 Cancel a currently processing or queued translation.
@@ -268,7 +263,6 @@ possible.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @added(DocumentTranslation.Versions.v2024_05_01)
   @summary("Returns the status for all documents in a batch document translation request")
   @doc("""
 Returns the status for all documents in a batch document translation request.
@@ -411,7 +405,6 @@ if the specified page size is smaller than the server's default page size.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @added(DocumentTranslation.Versions.v2024_05_01)
   @summary("Returns a list of supported document formats")
   @doc("""
 The list of supported document formats supported by the Document Translation
@@ -427,7 +420,6 @@ content-type if using the upload API.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @added(DocumentTranslation.Versions.v2024_05_01)
   @summary("Returns the list of supported glossary formats")
   @doc("""
 The list of supported glossary formats supported by the Document Translation

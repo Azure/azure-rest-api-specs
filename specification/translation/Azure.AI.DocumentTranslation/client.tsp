@@ -11,7 +11,6 @@ using TypeSpec.Versioning;
 @TypeSpec.Versioning.useDependency(DocumentTranslation.Versions.v2024_05_01)
 namespace ClientCustomizations;
 
-@added(DocumentTranslation.Versions.v2024_05_01)
 @client({
   name: "DocumentTranslationClient",
   service: DocumentTranslation,
