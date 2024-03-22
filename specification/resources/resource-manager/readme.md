@@ -81,6 +81,18 @@ tag: package-changes-2022-05
 tag: package-snapshots-2022-11
 ```
 
+``` yaml $(package-bicep)
+tag: package-bicep-2023-11
+```
+
+### Tag: package-bicep-2023-11
+
+These settings apply only when `--tag=package-bicep-2023-11` is specified on the command line.
+
+```yaml $(tag) == 'package-bicep-2023-11'
+input-file:
+  - Microsoft.Resources/stable/2023-11-01/bicepClient.json
+```
 ### Tag: package-policy-2023-04
 
 These settings apply only when `--tag=package-policy-2023-04` is specified on the command line.
@@ -148,6 +160,23 @@ suppressions:
     from: policySetDefinitionVersions.json
     reason: Using common types for management group name
 
+```
+
+### Tag: package-policy-2023-04-only
+
+These settings apply only when `--tag=package-policy-2023-04-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2023-04-only'
+input-file:
+  - Microsoft.Authorization/stable/2023-04-01/policyDefinitions.json
+  - Microsoft.Authorization/stable/2023-04-01/policyDefinitionVersions.json
+  - Microsoft.Authorization/stable/2023-04-01/policySetDefinitions.json
+  - Microsoft.Authorization/stable/2023-04-01/policySetDefinitionVersions.json
+  - Microsoft.Authorization/stable/2023-04-01/policyAssignments.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
 ```
 
 ### Tag: package-deploymentscripts-2023-08
@@ -1374,6 +1403,7 @@ batch:
   - package-deploymentstacks: true
   - package-changes: true
   - package-snapshots: true
+  - package-bicep: true
 ```
 
 ### Tag: profile-hybrid-2019-03-01
