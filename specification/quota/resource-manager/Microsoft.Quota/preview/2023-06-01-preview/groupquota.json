@@ -1080,7 +1080,7 @@
         "tags": [
           "SubscriptionQuotaAllocationRequest"
         ],
-        "operationId": "GroupQuotaSubscriptionAllocationRequests_Get",
+        "operationId": "GroupQuotaSubscriptionAllocationRequest_Get",
         "summary": "Get the status of the quota allocation request for the subscriptionId.",
         "description": "Get the quota allocation request status for the subscriptionId by allocationId.",
         "x-ms-examples": {
@@ -1131,7 +1131,7 @@
         ],
         "summary": "Get all the quotaAllocationRequests for a resourceProvider/location.",
         "description": "Get all the quotaAllocationRequests for a resourceProvider/location. The filter paramter for location is required.",
-        "operationId": "GroupQuotaSubscriptionAllocationRequests_List",
+        "operationId": "GroupQuotaSubscriptionAllocationRequest_List",
         "x-ms-examples": {
           "SubscriptionQuotaAllocation_List_Request_ForCompute": {
             "$ref": "./examples/SubscriptionQuotaAllocationRequests/SubscriptionQuotaAllocationRequests_List-Compute.json"
@@ -1180,7 +1180,7 @@
         ],
         "summary": "Request to assign quota from group quota to a specific Subscription. This request will use Asynchronous pattern to check the status using Async polling as standards defined at - https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#asynchronous-operations.",
         "description": "Request to assign quota from group quota to a specific Subscription. The assign GroupQuota to subscriptions or reduce the quota allocated to subscription to give back the unused quota ( quota >= usages) to the groupQuota. So, this API can be used to assign Quota to subscriptions and assign back unused quota to group quota, which can be assigned to another subscriptions in the GroupQuota.",
-        "operationId": "GroupQuotaSubscriptionAllocation_CreateOrUpdate",
+        "operationId": "GroupQuotaSubscriptionAllocationRequest_CreateOrUpdate",
         "x-ms-examples": {
           "SubscriptionQuotaAllocation_Put_Request_ForCompute": {
             "$ref": "./examples/SubscriptionQuotaAllocationRequests/PutSubscriptionQuotaAllocationRequest-Compute.json"
@@ -1261,7 +1261,7 @@
         ],
         "summary": "Request to assign quota from group quota to a specific Subscription. This request will use Asynchronous pattern with 202 response and status polling API.",
         "description": "Request to assign quota from group quota to a specific Subscription. The assign GroupQuota to subscriptions or reduce the quota allocated to subscription to give back the unused quota ( quota >= usages) to the groupQuota. So, this API can be used to assign Quota to subscriptions and assign back unused quota to group quota, which can be assigned to another subscriptions in the GroupQuota. User can collect unused quotas from multiple subscriptions within the groupQuota and assign the groupQuota to the subscription, where it's needed.",
-        "operationId": "GroupQuotaSubscriptionAllocation_Update",
+        "operationId": "GroupQuotaSubscriptionAllocationRequest_Update",
         "x-ms-examples": {
           "SubscriptionQuotaAllocation_Patch_Request_ForCompute": {
             "$ref": "./examples/SubscriptionQuotaAllocationRequests/PatchSubscriptionQuotaAllocationRequest-Compute.json"
