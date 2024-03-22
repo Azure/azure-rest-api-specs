@@ -90,6 +90,7 @@ These settings apply only when `--tag=package-2024-06` is specified on the comma
 ``` yaml $(tag) == 'package-2024-06'
 input-file:
   - Microsoft.HardwareSecurityModules/stable/2024-06-30/cloudhsm.json
+  - Microsoft.HardwareSecurityModules/stable/2024-06-30/dedicatedhsm.json
   - Microsoft.HardwareSecurityModules/stable/2024-06-30/operations.json
 ```
 
