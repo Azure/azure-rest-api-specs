@@ -17,9 +17,7 @@ using Azure.ClientGenerator.Core;
 
 @route("/?restype=service&comp=properties")
 interface BlobServiceProperties {
-  /**
-  Get the properties of a storage account's Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.
-  */
+  /** Get the properties of a storage account's Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. */
   @put
   @operationId("Service_SetProperties")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
@@ -243,32 +241,15 @@ interface BlobServiceContainer {
     ...RequestIdResponseHeader;
     ...VersionResponseHeader;
     ...DateResponseHeader;
-    /** When a blob is leased, specifies whether the lease is of infinite or fixed duration. */
-    @clientName("LeaseDuration")
-    @header `x-ms-lease-duration`: LeaseDuration;
-    /** Lease state of the container. */
-    @clientName("LeaseState")
-    @header `x-ms-lease-state`: LeaseState;
-    /** The lease status of the container. */
-    @clientName("LeaseStatus")
-    @header `x-ms-lease-status`: LeaseStatus;
-    /** The public access setting for the container. */
-    @header `x-ms-blob-public-access`: PublicAccessType;
-    /** Indicates whether the container has an immutability policy set on it. */
-    @clientName("HasImmutabilityPolicy")
-    @header `x-ms-has-immutability-policy`: boolean;
-    /** Indicates whether the container has a legal hold. */
-    @clientName("HasLegalHold")
-    @header `x-ms-has-legal-hold`: boolean;
-    /** The default encryption scope for the container. */
-    @clientName("DefaultEncryptionScope")
-    @header `x-ms-default-encryption-scope`: string;
-    /** Indicates whether the container's default encryption scope can be overriden. */
-    @clientName("DenyEncryptionScopeOverride")
-    @header `x-ms-deny-encryption-scope-override`: boolean;
-    /** Indicates whether version level worm is enabled on a container */
-    @clientName("IsImmutableStorageWithVersioningEnabled")
-    @header `x-ms-immutable-storage-with-versioning-enabled`: boolean;
+    ...LeaseDurationResponseHeader;
+    ...LeaseStateResponseHeader;
+    ...LeaseStatusResponseHeader;
+    ...PublicAccessResponseHeader;
+    ...HasImmutabilityPolicyResponseHeader;
+    ...HasLegalHoldResponseHeader;
+    ...DefaultEncryptionScopeResponseHeader;
+    ...DenyEncryptionScopeOverrideResponseHeader;
+    ...IsImmutableStorageWithVersioningEnabledResponseHeader;
   } | StorageError;
 
   /** operation marks the specified container for deletion. The container and any blobs contained within it are later deleted during garbage collection */
@@ -337,8 +318,7 @@ interface BlobServiceContainerAccessPolicy {
     @statusCode statusCode: 200;
     @body body: SignedIdentifiers; // TODO: XML
 
-    /** Indicated whether data in the container may be accessed publicly and the level of access */
-    @header `x-ms-blob-public-access`: PublicAccessType;
+    ...PublicAccessResponseHeader;
     ...ETagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ClientRequestIdResponseHeader;
@@ -493,8 +473,7 @@ interface ContainerLeaseService {
   ): {
     @statusCode statusCode: 201;
 
-    /** The lease ID specified in the request or a generated one if not specified. */
-    @header `x-ms-lease-id`: string;
+    ...LeaseIdResponseHeader;
     ...ETagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ClientRequestIdResponseHeader;
@@ -548,8 +527,7 @@ interface ContainerRenewLeaseService {
     ...IfUnmodifiedSince;
   ): {
     @statusCode statusCode: 200;
-    /** The lease ID specified in the request or a generated one if not specified. */
-    @header `x-ms-lease-id`: string;
+    ...LeaseIdResponseHeader;
     ...ETagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ClientRequestIdResponseHeader;
@@ -576,12 +554,10 @@ interface ConatinerBreakLeaseService {
     ...LeaseBreakPeriod;
   ): {
     @statusCode statusCode: 202;
-    /** The lease time remaining on the container. */
-    @header `x-ms-lease-time`: int32;
+    ...LeaseTimeResponseHeader;
     ...ETagResponseHeader;
     ...LastModifiedResponseHeader;
-    /** The lease ID specified in the request or a generated one if not specified. */
-    @header `x-ms-lease-id`: string;
+    ...LeaseIdResponseHeader;
     ...VersionResponseHeader;
     ...DateResponseHeader;
   } | StorageError;
@@ -605,12 +581,10 @@ interface ContainerChangeLeaseService {
     ...IfUnmodifiedSince;
   ): {
     @statusCode statusCode: 200;
-    /** The lease ID specified in the request or a generated one if not specified. */
-    @header `x-ms-lease-id`: string;
+    ...LeaseIdResponseHeader;
     ...ETagResponseHeader;
     ...LastModifiedResponseHeader;
-    /** The lease time remaining on the container. */
-    @header `x-ms-lease-time`: int64;
+    ...LeaseTimeResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...VersionResponseHeader;
     ...DateResponseHeader;
@@ -687,12 +661,8 @@ interface ContainerAccountInfoService {
     ...RequestIdResponseHeader;
     ...VersionResponseHeader;
     ...DateResponseHeader;
-    /** Identifies the sku name of the account. */
-    @clientName("SkuName")
-    @header `x-ms-sku-name`: SkuName;
-    /** Identifies the account kind. */
-    @clientName("AccountKind")
-    @header `x-ms-account-kind`: AccountKind;
+    ...SkuNameResponseHeader;
+    ...AccountKindResponseHeader;
   } | StorageError;
 }
 
@@ -731,9 +701,7 @@ interface BlobService {
     // TODO: x-ms-or headers
     ...LastModifiedResponseHeader;
     ...CreationTimeResponseHeader;
-    /** Optional. Only valid when Object Replication is enabled for the storage container and on the destination blob of the replication. */
-    @clientName("ObjectReplicationPolicyId")
-    @header `x-ms-or-policy-id`: string;
+    ...ObjectReplicationPolicyIdResponseHeader;
     ...ContentRangeResponseHeader;
     ...ContentMD5ResponseHeader;
     ...ContentEncodingResponseParameter;
@@ -741,66 +709,30 @@ interface BlobService {
     ...ContentDispositionResponseHeader;
     ...ContentLanguageResponseHeader;
     ...BlobSequenceNumberResponseHeader;
-    /** The type of the blob. */
-    @clientName("BlobType")
-    @header `x-ms-blob-type`: BlobType;
-    /** Conclusion time of the last attempted Copy Blob operation where this blob was the destination blob. This value can specify the time of a completed, aborted, or failed copy attempt. This header does not appear if a copy is pending, if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List. */
-    @clientName("CopyCompletionTime")
-    @encode("date-time-rfc1123")
-    @header `x-ms-copy-completion-time`: utcDateTime;
-    /** Only appears when x-ms-copy-status is failed or pending. Describes the cause of the last fatal or non-fatal copy operation failure. This header does not appear if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List */
-    @clientName("CopyStatusDescription")
-    @header `x-ms-copy-status-description`: string;
+    ...BlobTypeResponseHeader;
+    ...CopyCompletionTimeResponseHeader;
+    ...CopyStatusDescriptionResponseHeader;
     ...CopyIdResponseHeader;
-    /** Contains the number of bytes copied and the total bytes in the source in the last attempted Copy Blob operation where this blob was the destination blob. Can show between 0 and Content-Length bytes copied. This header does not appear if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List */
-    @clientName("CopyProgress")
-    @header `x-ms-copy-progress`: string;
+    ...CopyProgressResponseHeader;
     ...CopyStatusResponseHeader;
-    /** URL up to 2 KB in length that specifies the source blob or file used in the last attempted Copy Blob operation where this blob was the destination blob. This header does not appear if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List. */
-    @clientName("CopySource")
-    @header `x-ms-copy-source`: string;
-    /** When a blob is leased, specifies whether the lease is of infinite or fixed duration. */
-    @clientName("LeaseDuration")
-    @header `x-ms-lease-duration`: LeaseDuration;
-    /** Lease state of the blob. */
-    @clientName("LeaseState")
-    @header `x-ms-lease-state`: LeaseState;
-    /** The lease status of the blob. */
-    @clientName("LeaseStatus")
-    @header `x-ms-lease-status`: LeaseStatus;
+    ...CopySourceResponseHeader;
+    ...LeaseDurationResponseHeader;
+    ...LeaseStateResponseHeader;
+    ...LeaseStatusResponseHeader;
     ...VersionResponseHeader;
     ...VersionIdResponseHeader;
-    /** The value of this header indicates whether version of this blob is a current version, see also x-ms-version-id header. */
-    @clientName("IsCurrentVersion")
-    @header `x-ms-is-current-version`: boolean;
-    /** Indicates that the service supports requests for partial blob content. */
-    @header `Accept-Ranges`: string;
-    /** The number of committed blocks present in the blob. This header is returned only for append blobs. */
-    @clientName("BlobCommittedBlockCount")
-    @header `x-ms-blob-committed-block-count`: int32;
+    ...IsCurrentVersionResponseHeader;
+    ...AcceptRangesResponseHeader;
+    ...BlobCommittedBlockCountResponseHeader;
     ...IsServerEncryptedResponseHeader;
     ...EncryptionKeySha256ResponseHeader;
     ...EncryptionScopeResponseHeader;
-    /** The number of tags associated with the blob */
-    @clientName("TagCount")
-    @header `x-ms-tag-count`: int64;
-    /** If this blob has been sealed */
-    @clientName("IsSealed")
-    @header `x-ms-blob-sealed`: boolean;
-    /** UTC date/time value generated by the service that indicates the time at which the blob was last read or written to */
-    @clientName("LastAccessed")
-    @encode("date-time-rfc1123")
-    @header `x-ms-last-access-time`: utcDateTime;
-    /** UTC date/time value generated by the service that indicates the time at which the blob immutability policy will expire. */
-    @clientName("ImmutabilityPolicyExpiresOn")
-    @encode("date-time-rfc1123")
-    @header `x-ms-immutability-policy-until-date`: utcDateTime;
-    /** Indicates immutability policy mode. */
-    @clientName("ImmutabilityPolicyMode")
-    @header `x-ms-immutability-policy-mode`: BlobImmutabilityPolicyMode;
-    /** Indicates if a legal hold is present on the blob. */
-    @clientName("LegalHold")
-    @header `x-ms-legal-hold`: boolean;
+    ...TagCountResponseHeader;
+    ...IsSealedResponseHeader;
+    ...LastAccessedResponseHeader;
+    ...ImmutabilityPolicyExpiresOnResponseHeader;
+    ...ImmutabilityPolicyModeResponseHeader;
+    ...LegalHoldResponseHeader;
     ...ContentTypeResponseHeader;
     ...ContentLengthResponseHeader;
     ...ETagResponseHeader;
@@ -812,9 +744,7 @@ interface BlobService {
     // TODO: x-ms-or headers
     ...LastModifiedResponseHeader;
     ...CreationTimeResponseHeader;
-    /** Optional. Only valid when Object Replication is enabled for the storage container and on the destination blob of the replication. */
-    @clientName("ObjectReplicationPolicyId")
-    @header `x-ms-or-policy-id`: string;
+    ...ObjectReplicationPolicyIdResponseHeader;
     ...ContentRangeResponseHeader;
     ...ContentMD5ResponseHeader;
     ...ContentEncodingResponseParameter;
@@ -822,66 +752,30 @@ interface BlobService {
     ...ContentDispositionResponseHeader;
     ...ContentLanguageResponseHeader;
     ...BlobSequenceNumberResponseHeader;
-    /** The type of the blob. */
-    @clientName("BlobType")
-    @header `x-ms-blob-type`: BlobType;
-    /** Conclusion time of the last attempted Copy Blob operation where this blob was the destination blob. This value can specify the time of a completed, aborted, or failed copy attempt. This header does not appear if a copy is pending, if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List. */
-    @clientName("CopyCompletionTime")
-    @encode("date-time-rfc1123")
-    @header `x-ms-copy-completion-time`: utcDateTime;
-    /** Only appears when x-ms-copy-status is failed or pending. Describes the cause of the last fatal or non-fatal copy operation failure. This header does not appear if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List */
-    @clientName("CopyStatusDescription")
-    @header `x-ms-copy-status-description`: string;
+    ...BlobTypeResponseHeader;
+    ...CopyCompletionTimeResponseHeader;
+    ...CopyStatusDescriptionResponseHeader;
     ...CopyIdResponseHeader;
-    /** Contains the number of bytes copied and the total bytes in the source in the last attempted Copy Blob operation where this blob was the destination blob. Can show between 0 and Content-Length bytes copied. This header does not appear if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List */
-    @clientName("CopyProgress")
-    @header `x-ms-copy-progress`: string;
+    ...CopyProgressResponseHeader;
     ...CopyStatusResponseHeader;
-    /** URL up to 2 KB in length that specifies the source blob or file used in the last attempted Copy Blob operation where this blob was the destination blob. This header does not appear if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List. */
-    @clientName("CopySource")
-    @header `x-ms-copy-source`: string;
-    /** When a blob is leased, specifies whether the lease is of infinite or fixed duration. */
-    @clientName("LeaseDuration")
-    @header `x-ms-lease-duration`: LeaseDuration;
-    /** Lease state of the blob. */
-    @clientName("LeaseState")
-    @header `x-ms-lease-state`: LeaseState;
-    /** The lease status of the blob. */
-    @clientName("LeaseStatus")
-    @header `x-ms-lease-status`: LeaseStatus;
+    ...CopySourceResponseHeader;
+    ...LeaseDurationResponseHeader;
+    ...LeaseStateResponseHeader;
+    ...LeaseStatusResponseHeader;
     ...VersionResponseHeader;
     ...VersionIdResponseHeader;
-    /** The value of this header indicates whether version of this blob is a current version, see also x-ms-version-id header. */
-    @clientName("IsCurrentVersion")
-    @header `x-ms-is-current-version`: boolean;
-    /** Indicates that the service supports requests for partial blob content. */
-    @header `Accept-Ranges`: string;
-    /** The number of committed blocks present in the blob. This header is returned only for append blobs. */
-    @clientName("BlobCommittedBlockCount")
-    @header `x-ms-blob-committed-block-count`: int32;
+    ...IsCurrentVersionResponseHeader;
+    ...AcceptRangesResponseHeader;
+    ...BlobCommittedBlockCountResponseHeader;
     ...IsServerEncryptedResponseHeader;
     ...EncryptionKeySha256ResponseHeader;
     ...EncryptionScopeResponseHeader;
-    /** The number of tags associated with the blob */
-    @clientName("TagCount")
-    @header `x-ms-tag-count`: int64;
-    /** If this blob has been sealed */
-    @clientName("IsSealed")
-    @header `x-ms-blob-sealed`: boolean;
-    /** UTC date/time value generated by the service that indicates the time at which the blob was last read or written to */
-    @clientName("LastAccessed")
-    @encode("date-time-rfc1123")
-    @header `x-ms-last-access-time`: utcDateTime;
-    /** UTC date/time value generated by the service that indicates the time at which the blob immutability policy will expire. */
-    @clientName("ImmutabilityPolicyExpiresOn")
-    @encode("date-time-rfc1123")
-    @header `x-ms-immutability-policy-until-date`: utcDateTime;
-    /** Indicates immutability policy mode. */
-    @clientName("ImmutabilityPolicyMode")
-    @header `x-ms-immutability-policy-mode`: BlobImmutabilityPolicyMode;
-    /** Indicates if a legal hold is present on the blob. */
-    @clientName("LegalHold")
-    @header `x-ms-legal-hold`: boolean;
+    ...TagCountResponseHeader;
+    ...IsSealedResponseHeader;
+    ...LastAccessedResponseHeader;
+    ...ImmutabilityPolicyExpiresOnResponseHeader;
+    ...ImmutabilityPolicyModeResponseHeader;
+    ...LegalHoldResponseHeader;
     ...ContentTypeResponseHeader;
     ...ContentLengthResponseHeader;
     ...ETagResponseHeader;
@@ -915,42 +809,19 @@ interface BlobService {
 
     ...LastModifiedResponseHeader;
     ...CreationTimeResponseHeader;
-    /** Optional. Only valid when Object Replication is enabled for the storage container and on the destination blob of the replication. */
-    @clientName("ObjectReplicationPolicyId")
-    @header `x-ms-or-policy-id`: string;
-    /** The type of the blob. */
-    @clientName("BlobType")
-    @header `x-ms-blob-type`: BlobType;
-    /** Conclusion time of the last attempted Copy Blob operation where this blob was the destination blob. This value can specify the time of a completed, aborted, or failed copy attempt. This header does not appear if a copy is pending, if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List. */
-    @clientName("CopyCompletionTime")
-    @encode("date-time-rfc1123")
-    @header `x-ms-copy-completion-time`: utcDateTime;
-    /** Only appears when x-ms-copy-status is failed or pending. Describes the cause of the last fatal or non-fatal copy operation failure. This header does not appear if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List */
-    @clientName("CopyStatusDescription")
-    @header `x-ms-copy-status-description`: string;
+    ...ObjectReplicationPolicyIdResponseHeader;
+    ...BlobTypeResponseHeader;
+    ...CopyCompletionTimeResponseHeader;
+    ...CopyStatusDescriptionResponseHeader;
     ...CopyIdResponseHeader;
-    /** Contains the number of bytes copied and the total bytes in the source in the last attempted Copy Blob operation where this blob was the destination blob. Can show between 0 and Content-Length bytes copied. This header does not appear if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List */
-    @clientName("CopyProgress")
-    @header `x-ms-copy-progress`: string;
+    ...CopyProgressResponseHeader;
     ...CopyStatusResponseHeader;
-    /** URL up to 2 KB in length that specifies the source blob or file used in the last attempted Copy Blob operation where this blob was the destination blob. This header does not appear if this blob has never been the destination in a Copy Blob operation, or if this blob has been modified after a concluded Copy Blob operation using Set Blob Properties, Put Blob, or Put Block List. */
-    @clientName("CopySource")
-    @header `x-ms-copy-source`: string;
-    /** Included if the blob is incremental copy blob. */
-    @clientName("IsIncrementalCopy")
-    @header `x-ms-incremental-copy`: boolean;
-    /** Included if the blob is incremental copy blob or incremental copy snapshot, if x-ms-copy-status is success. Snapshot time of the last successful incremental copy snapshot for this blob. */
-    @clientName("DestinationSnapshot")
-    @header `x-ms-copy-destination-snapshot`: string;
-    /** When a blob is leased, specifies whether the lease is of infinite or fixed duration. */
-    @clientName("LeaseDuration")
-    @header `x-ms-lease-duration`: LeaseDuration;
-    /** Lease state of the container. */
-    @clientName("LeaseState")
-    @header `x-ms-lease-state`: LeaseState;
-    /** The lease status of the container. */
-    @clientName("LeaseStatus")
-    @header `x-ms-lease-status`: LeaseStatus;
+    ...CopySourceResponseHeader;
+    ...IsIncrementalCopyResponseHeader;
+    ...DestinationSnapshotResponseHeader;
+    ...LeaseDurationResponseHeader;
+    ...LeaseStateResponseHeader;
+    ...LeaseStatusResponseHeader;
     ...ContentTypeResponseHeader;
     ...ContentLengthResponseHeader;
     ...ETagResponseHeader;
@@ -964,58 +835,25 @@ interface BlobService {
     ...RequestIdResponseHeader;
     ...VersionResponseHeader;
     ...DateResponseHeader;
-    /** Indicates that the service supports requests for partial blob content. */
-    @header `Accept-Ranges`: string;
-    /** The number of committed blocks present in the blob. This header is returned only for append blobs. */
-    @clientName("BlobCommittedBlockCount")
-    @header `x-ms-blob-committed-block-count`: int32;
+    ...AcceptRangesResponseHeader;
+    ...BlobCommittedBlockCountResponseHeader;
     ...IsServerEncryptedResponseHeader;
     ...EncryptionKeySha256ResponseHeader;
     ...EncryptionScopeResponseHeader;
-    /** The tier of page blob on a premium storage account or tier of block blob on blob storage LRS accounts. For a list of allowed premium page blob tiers, see https://docs.microsoft.com/en-us/azure/virtual-machines/windows/premium-storage#features. For blob storage LRS accounts, valid values are Hot/Cool/Archive. */
-    @clientName("AccessTier")
-    @header `x-ms-access-tier`: AccessTier;
-    /** For page blobs on a premium storage account only. If the access tier is not explicitly set on the blob, the tier is inferred based on its content length and this header will be returned with true value. */
-    @clientName("AccessTierInferred")
-    @header `x-ms-access-tier-inferred`: boolean;
-    /** For blob storage LRS accounts, valid values are rehydrate-pending-to-hot/rehydrate-pending-to-cool. If the blob is being rehydrated and is not complete then this header is returned indicating that rehydrate is pending and also tells the destination tier. */
-    @clientName("ArchiveStatus")
-    @header `x-ms-archive-status`: ArchiveStatus;
-    /** The time the tier was changed on the object. This is only returned if the tier on the block blob was ever set. */
-    @encode("date-time-rfc1123")
-    @clientName("AccessTierChangeTime")
-    @header `x-ms-access-tier-change-time`: utcDateTime;
+    ...AccessTierResponseHeader;
+    ...AccessTierInferredResponseHeader;
+    ...ArchiveStatusResponseHeader;
+    ...AccessTierChangeTimeResponseHeader;
     ...VersionIdResponseHeader;
-    /** The value of this header indicates whether version of this blob is a current version, see also x-ms-version-id header. */
-    @clientName("IsCurrentVersion")
-    @header `x-ms-is-current-version`: boolean;
-    /** The number of tags associated with the blob */
-    @clientName("TagCount")
-    @header `x-ms-tag-count`: int64;
-    /** The time this blob will expire. */
-    @clientName("ExpiresOn")
-    @encode("date-time-rfc1123")
-    @header `x-ms-expiry-time`: utcDateTime;
-    /** If this blob has been sealed */
-    @clientName("IsSealed")
-    @header `x-ms-blob-sealed`: boolean;
-    /** If an object is in rehydrate pending state then this header is returned with priority of rehydrate. Valid values are High and Standard. */
-    @clientName("RehydratePriority")
-    @header `x-ms-rehydrate-priority`: RehydratePriority;
-    /** UTC date/time value generated by the service that indicates the time at which the blob was last read or written to */
-    @clientName("LastAccessed")
-    @encode("date-time-rfc1123")
-    @header `x-ms-last-access-time`: utcDateTime;
-    /** UTC date/time value generated by the service that indicates the time at which the blob immutability policy will expire. */
-    @clientName("ImmutabilityPolicyExpiresOn")
-    @encode("date-time-rfc1123")
-    @header `x-ms-immutability-policy-until-date`: utcDateTime;
-    /** Indicates immutability policy mode. */
-    @clientName("ImmutabilityPolicyMode")
-    @header `x-ms-immutability-policy-mode`: BlobImmutabilityPolicyMode;
-    /** Indicates if a legal hold is present on the blob. */
-    @clientName("LegalHold")
-    @header `x-ms-legal-hold`: boolean;
+    ...IsCurrentVersionResponseHeader;
+    ...TagCountResponseHeader;
+    ...ExpiresOnResponseHeader;
+    ...IsSealedResponseHeader;
+    ...RehydratePriorityResponseHeader;
+    ...LastAccessedResponseHeader;
+    ...ImmutabilityPolicyExpiresOnResponseHeader;
+    ...ImmutabilityPolicyModeResponseHeader;
+    ...LegalHoldResponseHeader;
   } | StorageError;
 
   @delete
