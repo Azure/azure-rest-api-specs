@@ -319,18 +319,6 @@
         "x-ms-examples": {
           "Update resource": {
             "$ref": "./examples/communicationServicesGccm/update.json"
-          },
-          "Update resource to remove identity": {
-            "$ref": "./examples/communicationServicesGccm/updateRemoveSystemIdentity.json"
-          },
-          "Update resource to add a System Assigned managed identity": {
-            "$ref": "./examples/communicationServicesGccm/updateWithSystemAssignedIdentity.json"
-          },
-          "Update resource to add a User Assigned managed identity": {
-            "$ref": "./examples/communicationServicesGccm/updateWithUserAssignedIdentity.json"
-          },
-          "Update resource to add System and User managed identities": {
-            "$ref": "./examples/communicationServicesGccm/updateWithSystemAndUserIdentity.json"
           }
         }
       },
@@ -447,9 +435,6 @@
         "x-ms-examples": {
           "Create or update resource": {
             "$ref": "./examples/communicationServicesGccm/createOrUpdate.json"
-          },
-          "Create or update resource with managed identity": {
-            "$ref": "./examples/communicationServicesGccm/createOrUpdateWithSystemAssignedIdentity.json"
           }
         }
       },
@@ -681,14 +666,6 @@
           "$ref": "#/definitions/CommunicationServicesGccmProperties",
           "description": "The properties of the service.",
           "x-ms-client-flatten": true
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "x-ms-mutability": [
-            "create",
-            "read",
-            "update"
-          ]
         }
       }
     },
@@ -810,7 +787,7 @@
     "CommunicationServicesGccmUpdateProperties": {
       "description": "A class that describes the properties that can be updated for CommunicationService resource.",
       "type": "object",
-      "properties": { }
+      "properties": {}
     },
     "CommunicationServicesGccmResourceUpdate": {
       "description": "A class representing update parameters for CommunicationService resource.",
@@ -825,9 +802,6 @@
           "$ref": "#/definitions/CommunicationServicesGccmUpdateProperties",
           "description": "The properties of the service.",
           "x-ms-client-flatten": true
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
         }
       }
     }
