@@ -475,8 +475,17 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The delete operation was successful."
+          "202": {
+            "description": "The delete operation is being performed in the background.",
+            "headers": {
+              "location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The resource did not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -484,6 +493,10 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Delete resource": {
