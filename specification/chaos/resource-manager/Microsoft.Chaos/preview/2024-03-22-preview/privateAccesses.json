@@ -235,6 +235,59 @@
           }
         }
       },
+      "patch": {
+        "tags": [
+          "PrivateAccesses"
+        ],
+        "operationId": "PrivateAccesses_Patch",
+        "description": "Patch a private access tags",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/PrivateAccessName"
+          },
+          {
+            "name": "privateAccess",
+            "description": "private access resource's tags to be updated.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./types/privateAccesses.json#/definitions/privateAccessPatch"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request to update the tags for the Private Access resource has been accepted for processing.",
+            "schema": {
+              "$ref": "./types/privateAccesses.json#/definitions/PrivateAccess"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a private access resource's tags": {
+            "$ref": "./examples/UpdateAPrivateAccessTags.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
       "delete": {
         "tags": [
           "PrivateAccesses"
