@@ -37,7 +37,6 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @lroStatus
 union ProvisioningState {
   string,
-
   ResourceProvisioningState,
 
   @doc("Resource is being deleted.")
