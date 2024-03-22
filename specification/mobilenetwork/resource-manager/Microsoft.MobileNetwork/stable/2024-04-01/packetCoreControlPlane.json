@@ -743,6 +743,10 @@
           "readOnly": true,
           "$ref": "#/definitions/homeNetworkPrivateKeysProvisioning",
           "description": "The provisioning state of the secret containing private keys and keyIds for SUPI concealment."
+        },
+        "userConsent": {
+          "$ref": "#/definitions/UserConsentConfiguration",
+          "description": "The user consent configuration for the packet core."
         }
       },
       "required": [
@@ -1248,6 +1252,15 @@
       "required": [
         "state"
       ]
+    },
+    "UserConsentConfiguration": {
+      "type": "object",
+      "properties": {
+        "allowSupportTelemetryAccess": {
+          "type": "boolean",
+          "description": "Allow Microsoft to access non-PII telemetry information from the packet core."
+        }
+      }
     },
     "PacketCoreControlPlaneCollectDiagnosticsPackage": {
       "description": "Packet core control plane collect diagnostics package options",
