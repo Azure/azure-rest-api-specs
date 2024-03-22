@@ -67,22 +67,8 @@ model SessionDetails extends ItemDetails {
   status?: SessionStatus;
 }
 
-/** A Session Job. */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
-@resource("jobs")
-@parentResource(SessionDetails)
-@withVisibility("read")
-model SessionJobDetails extends JobDetails {}
-
 @useDependency(DefaultAzureCoreVersion)
 namespace Quantum.Workspace.Operations {
-  /** A Paged List of JobDetails. */
-  // This is used in the session.listJobs workaround
-  @encodedName("application/json", "PagedJobDetails")
-  model PagedSessionJobDetails {
-    ...Azure.Core.Page<JobDetails>;
-  }
-
   using Quantum.Workspace.BaseOperations;
   interface SessionOperations {
     /** Open a new session. */
@@ -96,17 +82,17 @@ namespace Quantum.Workspace.Operations {
 
     /** List jobs in a session. */
     #suppress "@azure-tools/typespec-azure-core/no-operation-id" "The nesting of Jobs under a Session makes the auto-generated ID to be Sessions_JobsList, which is not in a Noun_Verb format."
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "When using Azure.Core.ResourceList<>, the autoroute is not adding the parent resource id to the path"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs."
     @operationId("SessionsJobs_List")
-    jobsList is Azure.Core.Foundations.ResourceList<
+    jobsList is CustomListOperation<
       Resource = JobDetails,
+      Response = PagedJobDetails,
       Parameters = {
         /** The Azure subscription ID. */
         @path
         @segment("sessions")
         sessionId: string;
-      },
-      Response = PagedSessionJobDetails
+      }
     >;
 
     /** List all Sessions. */

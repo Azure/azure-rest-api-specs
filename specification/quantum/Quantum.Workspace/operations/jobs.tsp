@@ -119,6 +119,9 @@ model JobDetails extends ItemDetails {
   outputDataFormat?: string;
 }
 
+/** A Paged List of JobDetails. */ // Used by workspace/jobs and sesssions/{sessionId}/jobs
+alias PagedJobDetails = Azure.Core.Page<JobDetails>;
+
 @useDependency(DefaultAzureCoreVersion)
 namespace Quantum.Workspace.Operations {
   using Quantum.Workspace.BaseOperations;
@@ -137,6 +140,10 @@ namespace Quantum.Workspace.Operations {
     get is GetOperation<JobDetails>;
 
     /** List all jobs. */
-    list is ListOperation<JobDetails>;
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs."
+    list is CustomListOperation<
+      Resource = JobDetails,
+      Response = PagedJobDetails
+    >;
   }
 }

@@ -9,12 +9,12 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
 /** A key-value pair. */
-model KeyValue<TValue = string> {
+model KeyValue<Value = string> {
   /** Key. */
   key: string;
 
   /** Value. */
-  value: TValue;
+  value: Value;
 }
 
 /** The type of the workspace item. */

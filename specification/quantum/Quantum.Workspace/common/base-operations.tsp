@@ -37,7 +37,7 @@ namespace Quantum.Workspace.BaseOperations {
   >;
 
   /** Operation to create a resource. */
-  alias CreateOperation<TResource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceCreateOrReplace<TResource>;
+  alias CreateOperation<Resource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceCreateOrReplace<Resource>;
 
   /** Operation to patch a resource. */
   @updatesResource(Resource)
@@ -68,18 +68,29 @@ namespace Quantum.Workspace.BaseOperations {
   >;
 
   /** Operation to cancel a resource. */
-  alias CancelOperation<TResource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceDelete<TResource>;
+  alias CancelOperation<Resource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceDelete<Resource>;
 
   /** Operation to get a resource. */
-  alias GetOperation<TResource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceRead<TResource>;
+  alias GetOperation<Resource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceRead<Resource>;
 
   /** Operation to act on a resource. */
-  op ActionOperation<TResource extends TypeSpec.Reflection.Model> is AzureCoreOperations.ResourceAction<
-    Resource = TResource,
+  op ActionOperation<Resource extends TypeSpec.Reflection.Model> is AzureCoreOperations.ResourceAction<
+    Resource = Resource,
     Parameters = {},
-    Response = TResource
+    Response = Resource
   >;
 
   /** Operation to list a resource. */
-  alias ListOperation<TResource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceList<TResource>;
+  alias ListOperation<Resource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceList<Resource>;
+
+  /** Operation to list a resource. */
+  op CustomListOperation<
+    Resource extends TypeSpec.Reflection.Model,
+    Parameters extends TypeSpec.Reflection.Model = {},
+    Response extends TypeSpec.Reflection.Model = Page<Resource>
+  > is Azure.Core.Foundations.ResourceList<
+    Resource = Resource,
+    Parameters = Parameters,
+    Response = Response
+  >;
 }

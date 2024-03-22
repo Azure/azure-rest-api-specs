@@ -52,9 +52,10 @@ using OpenAPI;
 })
 namespace Quantum.Workspace.Services {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The Azure.Core.ResourceUpdate does not support NoContentResponse and the JsonPatchDocument request body"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs."
   interface Jobs extends Quantum.Workspace.Operations.JobOperations {}
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "When using Azure.Core.ResourceList<> for /sessions/{sessionId}/jobs, the autoroute is not adding the parent resource id to the path"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We had to use a custom ResourceList to avoid an autoroute bug for workspace/jobs and sesssions/{sessionId}/jobs."
   interface Sessions extends Quantum.Workspace.Operations.SessionOperations {}
 
   interface Providers extends Quantum.Workspace.Operations.ProviderOperations {}

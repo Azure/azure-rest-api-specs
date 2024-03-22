@@ -993,7 +993,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Quantum.Workspace.Operations.PagedSessionJobDetails"
+              "$ref": "#/definitions/PagedJobDetails"
             }
           },
           "default": {
@@ -1013,6 +1013,9 @@
           "List jobs in a workspace.": {
             "$ref": "./examples/SessionsJobs_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1902,28 +1905,6 @@
         "targets"
       ]
     },
-    "Quantum.Workspace.Operations.PagedSessionJobDetails": {
-      "type": "object",
-      "description": "A Paged List of JobDetails.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The JobDetails items on this page",
-          "items": {
-            "$ref": "#/definitions/JobDetails"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "QuantumComputingData": {
       "type": "object",
       "description": "Quantum computing data.",
@@ -2039,15 +2020,6 @@
         }
       ],
       "x-ms-discriminator-value": "Session"
-    },
-    "SessionJobDetails": {
-      "type": "object",
-      "description": "A Session Job.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobDetails"
-        }
-      ]
     },
     "SessionJobFailurePolicy": {
       "type": "string",
