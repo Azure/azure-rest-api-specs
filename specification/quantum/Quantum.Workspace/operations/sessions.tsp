@@ -90,7 +90,7 @@ namespace Quantum.Workspace.Operations {
       Resource = JobDetails,
       Response = PagedJobDetails,
       Parameters = {
-        /** The Azure subscription ID. */
+        /** Id of the session to list jobs from. */
         @path
         @segment("sessions")
         sessionId: WorkspaceItemId;
