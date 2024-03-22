@@ -61,5 +61,5 @@ op listEntryIds is Foundations.Operation<
   TransactionsRange,
   EntryIds,
   ServiceTraits,
-  ServiceUnavailableError
+  ServiceUnavailableError | Foundations.ErrorResponse
 >;
