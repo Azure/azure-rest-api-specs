@@ -24,7 +24,7 @@ namespace Microsoft.Monitor;
 enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @doc("API Version 2023-10-01-preview")
-  "2023-10-01-preview",
+  `2023-10-01-preview`,
 }
 
 @doc("The provisioning state of a resource.")
