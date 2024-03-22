@@ -75,6 +75,7 @@ interface DeviceGroups
     ...ResourceInstanceParameters<DeviceGroup>,
   ): ArmResponse<CountDevicesResponse> | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API"
   @autoRoute
   @sharedRoute
   @armResourceAction(DeviceGroup)

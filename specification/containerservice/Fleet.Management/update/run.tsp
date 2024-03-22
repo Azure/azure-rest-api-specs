@@ -359,6 +359,7 @@ interface UpdateRuns {
 
   listByParent is ArmResourceListByParent<UpdateRun>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API"
   @doc("Starts an UpdateRun.")
   start is ArmResourceNoRequestBodyActionAsync<
     UpdateRun,
@@ -366,6 +367,7 @@ interface UpdateRuns {
     BaseParameters<UpdateRun> & IfMatchParameters<UpdateRun>
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API"
   @doc("Stops an UpdateRun.")
   stop is ArmResourceNoRequestBodyActionAsync<
     UpdateRun,
