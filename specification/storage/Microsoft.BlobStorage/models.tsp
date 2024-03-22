@@ -21,6 +21,61 @@ model StorageError {
 
 /// Parameters
 
+/** The blob append offset response header. */
+model BlobAppendOffsetResponseHeader {
+  /** This response header is returned only for append operations. It returns the offset at which the block was committed, in bytes. */
+  @header
+  @clientName("BlobAppendOffset")
+  `x-ms-blob-append-offset`: int64;
+}
+
+/** The blob condition append position parameter. */
+model BlobConditionAppendPosParameter {
+  /** Optional conditional header, used only for the Append Block operation. A number indicating the byte offset to compare. Append Block will succeed only if the append position is equal to this number. If it is not, the request will fail with the AppendPositionConditionNotMet error (HTTP status code 412 - Precondition Failed). */
+  @header
+  @clientName("appendPosition")
+  `x-ms-blob-condition-appendpos`: int64;
+}
+
+/** The blob condition max size parameter. */
+model BlobConditionMaxSizeParameter {
+  /** Optional conditional header. The max length in bytes permitted for the append blob. If the Append Block operation would cause the blob to exceed that limit or if the blob size is already greater than the value specified in this header, the request will fail with MaxBlobSizeConditionNotMet error (HTTP status code 412 - Precondition Failed). */
+  @header
+  @clientName("maxSize")
+  `x-ms-blob-condition-maxsize`: int64;
+}
+
+/** The sequence number action parameter. */
+model SequenceNumberActionParameter {
+  /** Required if the x-ms-blob-sequence-number header is set for the request. This property applies to page blobs only. This property indicates how the service should modify the blob's sequence number */
+  @clientName("sequenceNumberAction")
+  @header `x-ms-sequence-number-action`: SequenceNumberActionType;
+}
+
+/** The sequence number actions. */
+enum SequenceNumberActionType {
+  /** Increment the sequence number. */
+  increment,
+  /** Set the maximum for the sequence number. */
+  max,
+  /** Update the sequence number. */
+  update
+}
+
+/** The sequence number parameter. */
+model SequenceNumberParameter {
+  /** Set for page blobs only. The sequence number is a user-controlled value that you can use to track requests. The value of the sequence number must be between 0 and 2^63 - 1. */
+  @clientName("blobSequenceNumber")
+  @header `x-ms-blob-sequence-number`: int64;
+}
+
+/** The blob content length required parameter. */
+model BlobContentLengthRequired {
+  /** This header specifies the maximum size for the page blob, up to 1 TB. The page blob size must be aligned to a 512-byte boundary. */
+  @clientName("blobContentLength")
+  @header `x-ms-blob-content-length`: int64;
+}
+
 /** The previous snapshot parameter. */
 model PrevSnapshotParameter {
   /** Optional in version 2015-07-08 and newer. The prevsnapshot parameter is a DateTime value that specifies that the response will contain only pages that were changed between target blob and previous snapshot. Changed pages include both updated and cleared pages. The target blob may be a snapshot, as long as the snapshot specified by prevsnapshot is the older of the two. Note that incremental snapshots are currently supported only for blobs created on or after January 1, 2016. */

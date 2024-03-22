@@ -2049,3 +2049,235 @@ interface PageBlobDiffService {
     ...DateResponseHeader;
   } | StorageError;
 }
+
+@route("/{containerName}/{blob}?comp=properties&Resize")
+interface PageBlobResizeService {
+  /** The Resize operation increases the size of the page blob to the specified size. */
+  @put
+  @operationId("PageBlob_Resize")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  resize(
+    ...ContainerNameParameter;
+    ...BlobNameParameter;
+    ...TimeoutParameter;
+    ...LeaseIdOptional;
+    ...EncryptionKeyParameter;
+    ...EncryptionKeySha256Parameter;
+    ...EncryptionAlgorithmParameter;
+    ...EncryptionScopeParameter;
+    ...IfModifiedSince;
+    ...IfUnmodifiedSince;
+    ...IfMatchParameter;
+    ...IfNoneMatchParameter;
+    ...IfTagsParameter;
+    ...BlobContentLengthRequiredParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
+  ): {
+    @statusCode statusCode: 200;
+    ...ETagResponseHeader;
+    ...LastModifiedResponseHeader;
+    ...BlobSequenceNumberResponseHeader;
+    ...ClientRequestIdResponseHeader;
+    ...RequestIdResponseHeader;
+    ...VersionResponseHeader;
+    ...DateResponseHeader;
+  } | StorageError;
+}
+
+@route("/{containerName}/{blob}?comp=properties&UpdateSequenceNumber")
+interface PageBlobUpdateSequenceNumberService {
+  /** The Update Sequence Number operation sets the blob's sequence number. The operation will fail if the specified sequence number is less than the current sequence number of the blob. */
+  @put
+  @operationId("PageBlob_UpdateSequenceNumber")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  updateSequenceNumber(
+    ...ContainerNameParameter;
+    ...BlobNameParameter;
+    ...TimeoutParameter;
+    ...LeaseIdOptional;
+    ...IfModifiedSince;
+    ...IfUnmodifiedSince;
+    ...IfMatchParameter;
+    ...IfNoneMatchParameter;
+    ...IfTagsParameter;
+    ...SequenceNumberActionParameter;
+    ...SequenceNumberParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
+  ): {
+    @statusCode statusCode: 200;
+    ...ETagResponseHeader;
+    ...LastModifiedResponseHeader;
+    ...BlobSequenceNumberResponseHeader;
+    ...ClientRequestIdResponseHeader;
+    ...RequestIdResponseHeader;
+    ...VersionResponseHeader;
+    ...DateResponseHeader;
+  } | StorageError;
+}
+
+@route("/{containerName}/{blob}?comp=incrementalcopy")
+interface PageBlobIncrementalCopyService {
+  /** The Copy Incremental operation copies a snapshot of the source page blob to a destination page blob. The snapshot is copied such that only the differential changes between the previously copied snapshot are transferred to the destination. The copied snapshots are complete copies of the original snapshot and can be read or copied from as usual. This API is supported since REST version 2016-05-31. */
+  @put
+  @operationId("PageBlob_CopyIncremental")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  incrementalCopy(
+    ...ContainerNameParameter;
+    ...BlobNameParameter;
+    ...TimeoutParameter;
+    ...IfModifiedSince;
+    ...IfUnmodifiedSince;
+    ...IfMatchParameter;
+    ...IfNoneMatchParameter;
+    ...IfTagsParameter;
+    ...LeaseIdOptional;
+    ...CopySourceParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
+  ): {
+    @statusCode statusCode: 202;
+    ...ETagResponseHeader;
+    ...LastModifiedResponseHeader;
+    ...ClientRequestIdResponseHeader;
+    ...RequestIdResponseHeader;
+    ...VersionResponseHeader;
+    ...DateResponseHeader;
+    ...CopyIdResponseHeader;
+    ...CopyStatusResponseHeader;
+  } | StorageError;
+}
+
+@route("/{containerName}/{blob}?comp=appendblock")
+interface AppendBlobAppendBlockService {
+  /** The Append Block operation commits a new block of data to the end of an append blob. */
+  @put
+  @operationId("AppendBlob_AppendBlock")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  appendBlock(
+    /** The data to upload. */
+    @body body: bytes;
+    ...ContainerNameParameter;
+    ...BlobNameParameter;
+    ...TimeoutParameter;
+    ...ContentLengthHeader;
+    ...ContentMD5Parameter;
+    ...ContentCrc64Parameter;
+    ...LeaseIdOptional;
+    ...BlobConditionMaxSizeParameter;
+    ...BlobConditionAppendPosParameter;
+    ...EncryptionKeyParameter;
+    ...EncryptionKeySha256Parameter;
+    ...EncryptionAlgorithmParameter;
+    ...EncryptionScopeParameter;
+    ...IfModifiedSince;
+    ...IfUnmodifiedSince;
+    ...IfMatchParameter;
+    ...IfNoneMatchParameter;
+    ...IfTagsParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
+  ): {
+    @statusCode statusCode: 201;
+    ...ETagResponseHeader;
+    ...LastModifiedResponseHeader;
+    ...BlobSequenceNumberResponseHeader;
+    ...ClientRequestIdResponseHeader;
+    ...RequestIdResponseHeader;
+    ...VersionResponseHeader;
+    ...DateResponseHeader;
+    ...ContentMD5ResponseHeader;
+    ...ContentCrc64ResponseHeader;
+    ...BlobAppendOffsetResponseHeader;
+    ...BlobCommittedBlockCountResponseHeader;
+    ...IsServerEncryptedResponseHeader;
+    ...EncryptionKeySha256ResponseHeader;
+    ...EncryptionScopeResponseHeader;
+  } | StorageError;
+}
+
+@route("/{containerName}/{blob}?comp=appendblock&fromUrl")
+interface AppendBlockAppendBlockFromUrlService {
+  /** The Append Block From URL operation creates a new block to be committed as part of an append blob where the contents are read from a URL. */
+  @put
+  @operationId("AppendBlob_AppendBlockFromURL")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  appendBlockFromUrl(
+    ...ContainerNameParameter;
+    ...BlobNameParameter;
+    ...TimeoutParameter;
+    ...ContentLengthHeader;
+    ...SourceUrlParameter;
+    ...SourceRangeParameter;
+    ...SourceContentMD5Parameter;
+    ...SourceContentCrc64Parameter;
+    ...LeaseIdOptional;
+    ...BlobConditionMaxSizeParameter;
+    ...BlobConditionAppendPosParameter;
+    ...EncryptionKeyParameter;
+    ...EncryptionKeySha256Parameter;
+    ...EncryptionAlgorithmParameter;
+    ...EncryptionScopeParameter;
+    ...IfModifiedSince;
+    ...IfUnmodifiedSince;
+    ...IfMatchParameter;
+    ...IfNoneMatchParameter;
+    ...IfTagsParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
+    ...CopySourceAuthorizationParameter;
+  ): {
+    @statusCode statusCode: 201;
+    ...ETagResponseHeader;
+    ...LastModifiedResponseHeader;
+    ...ClientRequestIdResponseHeader;
+    ...RequestIdResponseHeader;
+    ...VersionResponseHeader;
+    ...DateResponseHeader;
+    ...ContentMD5ResponseHeader;
+    ...ContentCrc64ResponseHeader;
+    ...BlobAppendOffsetResponseHeader;
+    ...BlobCommittedBlockCountResponseHeader;
+    ...IsServerEncryptedResponseHeader;
+    ...EncryptionKeySha256ResponseHeader;
+    ...EncryptionScopeResponseHeader;
+  } | StorageError;
+}
+
+@route("/{containerName}/{blob}?comp=seal")
+interface AppendBlobSealService {
+  /** The Seal operation seals the Append Blob to make it read-only. Seal is supported only on version 2019-12-12 version or later.*/
+  @put
+  @operationId("AppendBlob_Seal")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  seal(
+    ...ContainerNameParameter;
+    ...BlobNameParameter;
+    ...TimeoutParameter;
+    ...LeaseIdOptional;
+    ...BlobConditionAppendPosParameter;
+    ...IfModifiedSince;
+    ...IfUnmodifiedSince;
+    ...IfMatchParameter;
+    ...IfNoneMatchParameter;
+    ...IfTagsParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
+  ): {
+    @statusCode statusCode: 200;
+    ...ETagResponseHeader;
+    ...LastModifiedResponseHeader;
+    ...ClientRequestIdResponseHeader;
+    ...RequestIdResponseHeader;
+    ...VersionResponseHeader;
+    ...DateResponseHeader;
+    ...IsSealedResponseHeader;
+  } | StorageError;
+}
