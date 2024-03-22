@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Monitor Data Collection Rule Associations API",
+    "title": "Azure Monitor Data Collection Control Plane API",
     "description": "Provides operations for working with Azure Monitor data collection rule associations",
     "version": "2023-03-11",
     "x-ms-code-generation-settings": {
@@ -19,7 +19,7 @@
     "application/json"
   ],
   "paths": {
-    "/{resourceUri}/providers/Microsoft.Insights/dataCollectionRuleAssociations": {
+	  "/{resourceUri}/providers/Microsoft.Insights/dataCollectionRuleAssociations": {
       "get": {
         "tags": [
           "DataCollectionRuleAssociations"
@@ -252,6 +252,9 @@
         "x-ms-examples": {
           "Create or update association": {
             "$ref": "./examples/DataCollectionRuleAssociationsCreate.json"
+          },
+          "Create or update association with a data collection endpoint": {
+            "$ref": "./examples/DataCollectionRuleAssociationsCreateA.json"
           }
         }
       },
@@ -298,7 +301,7 @@
     }
   },
   "definitions": {
-    "Metadata": {
+	  "Metadata": {
       "description": "Metadata about the resource",
       "type": "object",
       "properties": {
@@ -319,10 +322,19 @@
           "x-ms-mutability": [
             "read"
           ]
+        },
+        "provisionedByImmutableId": {
+          "description": "Immutable Id of azure offering managing this resource on-behalf-of customer.",
+          "type": "string",
+          "readOnly": true,
+          "example": "baeea43c-db35-4d6f-9d3b-26d3a5e792e2",
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       }
     },
-    "DataCollectionRuleAssociation": {
+	  "DataCollectionRuleAssociation": {
       "description": "Definition of association of a data collection rule with a monitored Azure resource.",
       "type": "object",
       "properties": {
@@ -347,7 +359,6 @@
             "Updating",
             "Deleting",
             "Succeeded",
-            "Canceled",
             "Failed"
           ],
           "type": "string",
