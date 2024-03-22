@@ -4,7 +4,7 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 
 @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
-@TypeSpec.Versioning.useDependency(Easm.Versions.v2023_03_01_preview)
+@TypeSpec.Versioning.useDependency(Easm.Versions.v2024_03_01_preview)
 namespace Customizations;
 
 @client({
@@ -39,8 +39,6 @@ interface EasmClient {
   listRuns is Easm.DiscoveryGroups.listRuns;
   getAssetChainSummary is Easm.DiscoveryGroups.getAssetChainSummary;
   dismissSeedChain is Easm.DiscoveryGroups.dismissSeedChain;
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  deleteDiscoGroup is Easm.DiscoveryGroups.deleteDiscoGroup;
 
   listDiscoTemplate is Easm.DiscoveryTemplates.listDiscoTemplate;
   getDiscoTemplate is Easm.DiscoveryTemplates.getDiscoTemplate;

@@ -965,50 +965,6 @@
             "$ref": "./examples/DiscoveryGroups_CreateOrReplaceDiscoGroup_MaximumSet_Gen.json"
           }
         }
-      },
-      "delete": {
-        "operationId": "DiscoveryGroups_DeleteDiscoGroup",
-        "tags": [
-          "Discovery Groups"
-        ],
-        "description": "deletes a discovery group",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "groupName",
-            "in": "path",
-            "description": "The caller provided unique name for the resource.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Task"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DiscoveryGroups_DeleteDiscoGroup": {
-            "$ref": "./examples/DiscoveryGroups_DeleteDiscoGroup.json"
-          }
-        }
       }
     },
     "/discoGroups/{groupName}:run": {
@@ -6194,7 +6150,6 @@
       "properties": {
         "assetSummaries": {
           "type": "array",
-          "description": "Shows the breakdown by asset type for a range of days.",
           "items": {
             "$ref": "#/definitions/ReportBillableAssetSnapshotResult"
           },

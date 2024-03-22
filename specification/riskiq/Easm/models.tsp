@@ -21,6 +21,16 @@ model PageResultBodyFields<TResultFields, Context = TraitContext.List> {
   };
 }
 
+@trait
+@traitAdded(Versions.v2024_03_01_preview)
+model AssetsListQueryParametersTrait<Parameters, Contexts = unknown> {
+  @traitContext(Contexts)
+  queryParameters: {
+    @traitLocation(TraitLocation.Parameters)
+    parameters: Parameters;
+  };
+}
+
 alias AssetsListTrait = {
   ...PageResultBodyFields<{
     @doc("The total number of items available in the full result set.")
@@ -35,6 +45,8 @@ alias AssetsListTrait = {
     ...SkipQueryParameter;
     ...MaxPageSizeQueryParameter;
     ...MarkParameter;
+  }>;
+  ...AssetsListQueryParametersTrait<{
     ...ResponseTypeParameter;
     ...ResponseIncludesParameter;
     ...RecentOnlyParameter;
@@ -1187,7 +1199,6 @@ model ReportBillableAssetSnapshotResult {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 model ReportBillableAssetSummaryResult {
-  @doc("Shows the breakdown by asset type for a range of days.")
   assetSummaries?: ReportBillableAssetSnapshotResult[];
 }
 
@@ -1416,6 +1427,7 @@ model ObservedValue {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@Versioning.added(Versions.v2024_03_01_preview)
 model DeltaResponse {
   @doc("Shows the asset kind")
   kind: GlobalAssetType;
@@ -1434,6 +1446,7 @@ model DeltaResponse {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@Versioning.added(Versions.v2024_03_01_preview)
 @pagedResult
 model DeltaPageResponse {
   @doc("The total number of items available in the full result set.")
@@ -1449,6 +1462,7 @@ model DeltaPageResponse {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@Versioning.added(Versions.v2024_03_01_preview)
 model DeltaSummaryResponse {
   @doc("Contains added, removed, and difference values for the whole range either 7 or 30 days")
   summary: DeltaRangeResponse;
@@ -1458,6 +1472,7 @@ model DeltaSummaryResponse {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@Versioning.added(Versions.v2024_03_01_preview)
 model DeltaRangeResponse {
   @doc("The range of dates requested")
   range: int64;
@@ -1476,6 +1491,7 @@ model DeltaRangeResponse {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@Versioning.added(Versions.v2024_03_01_preview)
 model DeltaTypeResponse {
   @doc("The kind of asset")
   kind: GlobalAssetType;
@@ -1491,6 +1507,7 @@ model DeltaTypeResponse {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@Versioning.added(Versions.v2024_03_01_preview)
 model DeltaDateResponse {
   @doc("The date that is being requested")
   date: utcDateTime;
@@ -1500,6 +1517,7 @@ model DeltaDateResponse {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@Versioning.added(Versions.v2024_03_01_preview)
 model DailyDeltaTypeResponse extends DeltaTypeResponse {
   @doc("The current number of assets for one asset kind")
   count: int64;
@@ -1527,6 +1545,7 @@ enum ReportBillableAssetBreakdownKind {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@Versioning.added(Versions.v2024_03_01_preview)
 enum GlobalInventoryState {
   candidate,
   candidateInvestigate,
@@ -1540,6 +1559,7 @@ enum GlobalInventoryState {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@Versioning.added(Versions.v2024_03_01_preview)
 enum AssetResponseType {
   @doc("Return only the asset id.")
   id,
@@ -1555,12 +1575,14 @@ enum AssetResponseType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@Versioning.added(Versions.v2024_03_01_preview)
 enum DeltaDetailType {
   added,
   removed,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@Versioning.added(Versions.v2024_03_01_preview)
 enum GlobalAssetType {
   page,
   resource,
@@ -1710,12 +1732,14 @@ enum SslCertAssetValidationType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@Versioning.added(Versions.v2024_03_01_preview)
 enum ObservationType {
   cve,
   insight,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@Versioning.added(Versions.v2024_03_01_preview)
 enum ObservationPriority {
   high: 3,
   medium: 2,
@@ -1724,6 +1748,7 @@ enum ObservationPriority {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@Versioning.added(Versions.v2024_03_01_preview)
 model ObservationResponse {
   name: string;
   type: ObservationType[];
@@ -1733,6 +1758,7 @@ model ObservationResponse {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@Versioning.added(Versions.v2024_03_01_preview)
 model ObservationPageResponse {
   totalElements: int64;
   prioritySummary: Record<int32>;
@@ -1740,6 +1766,7 @@ model ObservationPageResponse {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@Versioning.added(Versions.v2024_03_01_preview)
 enum AssetChainSource {
   DISCO_GROUP,
   DISCO_SEED,
@@ -1879,12 +1906,14 @@ model MarkParameter {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@Versioning.added(Versions.v2024_03_01_preview)
 model FileNameParameter {
   @query("fileName")
   fileName?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@Versioning.added(Versions.v2024_03_01_preview)
 model ColumnsParameter {
   @query({
     format: "csv",
@@ -1893,21 +1922,25 @@ model ColumnsParameter {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@Versioning.added(Versions.v2024_03_01_preview)
 model DeltaDetailTypeParameter {
   @query("deltaDetailType")
   deltaDetailType?: DeltaDetailType;
 }
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@Versioning.added(Versions.v2024_03_01_preview)
 model DaysPriorParameter {
   @query("daysPrior")
   daysPrior?: int32;
 }
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@Versioning.added(Versions.v2024_03_01_preview)
 model KindParameter {
   @query("kind")
   kind?: GlobalAssetType;
 }
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@Versioning.added(Versions.v2024_03_01_preview)
 model DateParameter {
   @doc("expected format to be: yyyy-MM-dd")
   @query("date")
@@ -1915,6 +1948,7 @@ model DateParameter {
 }
 
 @doc("Specify the response type.")
+@Versioning.added(Versions.v2024_03_01_preview)
 model ResponseTypeParameter {
   @doc("Specify the response type. The possible values are: ID, STANDARD, FULL, REDUCED")
   @query("responseType")
@@ -1922,6 +1956,7 @@ model ResponseTypeParameter {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@Versioning.added(Versions.v2024_03_01_preview)
 model ResponseIncludesParameter {
   @query({
     format: "csv",
@@ -1930,6 +1965,7 @@ model ResponseIncludesParameter {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@Versioning.added(Versions.v2024_03_01_preview)
 model RecentOnlyParameter {
   @query("recentOnly")
   recentOnly?: boolean;
@@ -1945,6 +1981,7 @@ model RequiredFilterParameter {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @resource("cisaCves")
 @doc("cisa cve in a given workspace.")
+@Versioning.added(Versions.v2024_03_01_preview)
 model CisaCveResponse {
   @key("cveId")
   @visibility("read")
@@ -1983,6 +2020,7 @@ model CisaCveResponse {
 }
 
 @doc("AssetChainRequest containing information needed for the retrieval of the asset chain summary.")
+@Versioning.added(Versions.v2024_03_01_preview)
 model AssetChainRequest {
   @doc("Asset chain source.")
   assetChainSource?: AssetChainSource;
@@ -1992,6 +2030,7 @@ model AssetChainRequest {
 }
 
 @doc("Response for the asset chain summary.")
+@Versioning.added(Versions.v2024_03_01_preview)
 model AssetChainSummaryResponse {
   @doc("A list of asset chain summaries per asset kind")
   affectedAssetsSummary: AssetChainKindSummaryResponse[];
@@ -2004,6 +2043,7 @@ model AssetChainSummaryResponse {
 }
 
 @doc("A list of asset chain summaries per asset kind")
+@Versioning.added(Versions.v2024_03_01_preview)
 model AssetChainKindSummaryResponse {
   @doc("The kind of asset")
   kind: AssetKind;
@@ -2013,6 +2053,7 @@ model AssetChainKindSummaryResponse {
 }
 
 @doc("A list of disco group summaries")
+@Versioning.added(Versions.v2024_03_01_preview)
 model DiscoGroupSummaryResponse {
   @doc("The system generated unique id for the resource.")
   id: string;
