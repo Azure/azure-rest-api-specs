@@ -38,7 +38,6 @@ union QuotaEnabled {
 @doc("private cloud provisioning state")
 union PrivateCloudProvisioningState {
   string,
-
   ResourceProvisioningState,
 
   @doc("is cancelled")
@@ -71,7 +70,6 @@ union NsxPublicIpQuotaRaisedEnum {
 @doc("Cluster provisioning state")
 union ClusterProvisioningState {
   string,
-
   ResourceProvisioningState,
 
   @doc("is cancelled")
@@ -153,7 +151,6 @@ union EncryptionVersionType {
 @doc("datastore provisioning state")
 union DatastoreProvisioningState {
   string,
-
   ResourceProvisioningState,
 
   @doc("is cancelled")
@@ -229,7 +226,6 @@ union HcxEnterpriseSiteStatus {
 @doc("Express Route Circuit Authorization provisioning state")
 union ExpressRouteAuthorizationProvisioningState {
   string,
-
   ResourceProvisioningState,
 
   @doc("is updating")
@@ -239,7 +235,6 @@ union ExpressRouteAuthorizationProvisioningState {
 @doc("Global Reach Connection provisioning state")
 union GlobalReachConnectionProvisioningState {
   string,
-
   ResourceProvisioningState,
 
   @doc("is updating")
@@ -274,14 +269,12 @@ union SegmentStatusEnum {
 @doc("Workload Network Segment provisioning state")
 union WorkloadNetworkSegmentProvisioningState {
   string,
-
   WorkloadNetworkProvisioningState,
 }
 
 @doc("Workload Network DHCP provisioning state")
 union WorkloadNetworkDhcpProvisioningState {
   string,
-
   WorkloadNetworkProvisioningState,
 }
 
@@ -313,7 +306,6 @@ union PortMirroringStatusEnum {
 @doc("Workload Network Port Mirroring provisioning state")
 union WorkloadNetworkPortMirroringProvisioningState {
   string,
-
   WorkloadNetworkProvisioningState,
 }
 
@@ -331,7 +323,6 @@ union VMGroupStatusEnum {
 @doc("Workload Network VM Group provisioning state")
 union WorkloadNetworkVMGroupProvisioningState {
   string,
-
   WorkloadNetworkProvisioningState,
 }
 
@@ -383,21 +374,18 @@ union DnsServiceStatusEnum {
 @doc("Workload Network DNS Service provisioning state")
 union WorkloadNetworkDnsServiceProvisioningState {
   string,
-
   WorkloadNetworkProvisioningState,
 }
 
 @doc("Workload Network DNS Zone provisioning state")
 union WorkloadNetworkDnsZoneProvisioningState {
   string,
-
   WorkloadNetworkProvisioningState,
 }
 
 @doc("Workload Network Public IP provisioning state")
 union WorkloadNetworkPublicIPProvisioningState {
   string,
-
   WorkloadNetworkProvisioningState,
 }
 
@@ -424,7 +412,6 @@ union CloudLinkStatus {
 @doc("Addon provisioning state")
 union AddonProvisioningState {
   string,
-
   ResourceProvisioningState,
 
   @doc("is cancelled")
@@ -465,7 +452,6 @@ union PlacementPolicyState {
 @doc("Placement Policy provisioning state")
 union PlacementPolicyProvisioningState {
   string,
-
   WorkloadNetworkProvisioningState,
 }
 
@@ -539,7 +525,6 @@ union OptionalParamEnum {
 @doc("Script Execution provisioning state")
 union ScriptExecutionProvisioningState {
   string,
-
   ResourceProvisioningState,
 
   @doc("is pending")
@@ -626,7 +611,6 @@ model Location is ProxyResource<LocationProperties> {
 @doc("location provisioning state")
 union LocationProvisioningState {
   string,
-
   ResourceProvisioningState,
 }
 
@@ -1125,7 +1109,6 @@ model HcxEnterpriseSite is ProxyResource<HcxEnterpriseSiteProperties> {
 @doc("HCX Enterprise Site provisioning state")
 union HcxEnterpriseSiteProvisioningState {
   string,
-
   ResourceProvisioningState,
 }
 
@@ -1235,7 +1218,6 @@ model WorkloadNetwork is ProxyResource<WorkloadNetworkProperties> {
 @doc("base Workload Network provisioning state")
 union WorkloadNetworkProvisioningState {
   string,
-
   ResourceProvisioningState,
 
   @doc("is building")
@@ -1714,7 +1696,6 @@ model CloudLink is ProxyResource<CloudLinkProperties> {
 @doc("cloud link provisioning state")
 union CloudLinkProvisioningState {
   string,
-
   ResourceProvisioningState,
 }
 
@@ -1777,7 +1758,6 @@ model VirtualMachine is ProxyResource<VirtualMachineProperties> {
 @doc("Virtual Machine provisioning state")
 union VirtualMachineProvisioningState {
   string,
-
   ResourceProvisioningState,
 }
 
@@ -1885,7 +1865,6 @@ model ScriptPackage is ProxyResource<ScriptPackageProperties> {
 @doc("Script Package provisioning state")
 union ScriptPackageProvisioningState {
   string,
-
   ResourceProvisioningState,
 }
 
@@ -1926,7 +1905,6 @@ model ScriptCmdlet is ProxyResource<ScriptCmdletProperties> {
 @doc("A script cmdlet provisioning state")
 union ScriptCmdletProvisioningState {
   string,
-
   ResourceProvisioningState,
 }
 
@@ -2225,7 +2203,6 @@ model IscsiPathProperties {
 @doc("private cloud provisioning state")
 union IscsiPathProvisioningState {
   string,
-
   ResourceProvisioningState,
 
   @doc("is pending")
