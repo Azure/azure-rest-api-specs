@@ -57,14 +57,13 @@ suppressions:
     reason: Service already using 202 response code for the below APIs in preview version.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments/{deploymentName}].put
-      - $.paths["subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiPolicies/{raiPolicyName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiPolicies/{raiPolicyName}"].put
   - code: PutResponseCodes
     reason: Service already using 202 response code for the below APIs, got exceptions from ARM reviewer from previous preview version already.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments/{deploymentName}"].put
   - code: AvoidAdditionalProperties
     reason: These schemas are already in production use,.
-    from: workspaceRP.json
     where:
       - $.definitions.WorkspaceUpdateParameters.properties.properties.properties.managedNetwork.properties.outboundRules
       - $.definitions.WorkspacePropertiesUpdateParameters.properties.managedNetwork.properties.outboundRules
@@ -75,6 +74,25 @@ suppressions:
       - $.definitions.CustomKeysWorkspaceConnectionProperties.properties.credentials.properties.keys
       - $.definitions.CustomKeys.properties.keys
       - $.definitions.WorkspaceConnectionPropertiesV2.properties.metadata
+      - $.definitions.PATAuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.SASAuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.UsernamePasswordAuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.NoneAuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.ManagedIdentityAuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.WorkspaceConnectionPropertiesV2BasicResource.properties.properties.properties.metadata
+      - $.definitions.WorkspaceConnectionPropertiesV2BasicResourceArmPaginatedResult.properties.value.items.properties.properties.properties.metadata
+      - $.definitions.AADAuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.AccessKeyAuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.AccountKeyAuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.ApiKeyAuthWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.CustomKeysWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.OAuth2AuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+      - $.definitions.ServicePrincipalAuthTypeWorkspaceConnectionProperties.allOf[0].properties.metadata
+  - code: GuidUsage
+    reason: This property has always been a GUID, we just didn't mark its format before, this can't be change without breaking the customer.
+    from: workspaceRP.json    
+    where:
+      - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
 ```
 ### Tag: package-preview-2024-01
 
