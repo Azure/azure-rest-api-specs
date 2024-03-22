@@ -93,7 +93,7 @@ namespace Quantum.Workspace.Operations {
         /** The Azure subscription ID. */
         @path
         @segment("sessions")
-        sessionId: string;
+        sessionId: WorkspaceItemId;
       }
     >;
   }
