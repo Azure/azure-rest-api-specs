@@ -8,10 +8,11 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
-@TypeSpec.Versioning.useDependency(DocumentTranslation.Versions.v1_0)
+@TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
+@TypeSpec.Versioning.useDependency(DocumentTranslation.Versions.v2024_05_01)
 namespace ClientCustomizations;
 
-@added(DocumentTranslation.Versions.v1_0)
+@added(DocumentTranslation.Versions.v2024_05_01)
 @client({
   name: "DocumentTranslationClient",
   service: DocumentTranslation,
@@ -43,5 +44,5 @@ interface DocumentTranslationClient {
 })
 interface SingleDocumentTranslationClient {
   #suppress "@azure-tools/typespec-azure-core/byos"
-  singleDocumentTranslate is DocumentTranslation.SingleDocumentTranslationOperations.singleDocumentTranslate;
+  documentTranslate is DocumentTranslation.documentTranslate;
 }

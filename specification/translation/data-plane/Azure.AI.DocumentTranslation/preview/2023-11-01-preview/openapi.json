@@ -62,9 +62,8 @@
   "paths": {
     "/document:translate": {
       "post": {
-        "operationId": "SingleDocumentTranslationOperations_SingleDocumentTranslate",
-        "summary": "Translate a single document",
-        "description": "API to translate single document",
+        "operationId": "DocumentTranslate",
+        "description": "API to translate a document.",
         "produces": [
           "application/octet-stream",
           "application/json"
@@ -77,25 +76,25 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SingleDocumentTranslateContent.sourceLanguage"
+            "$ref": "#/parameters/DocumentTranslateContent.sourceLanguage"
           },
           {
-            "$ref": "#/parameters/SingleDocumentTranslateContent.targetLanguage"
+            "$ref": "#/parameters/DocumentTranslateContent.targetLanguage"
           },
           {
-            "$ref": "#/parameters/SingleDocumentTranslateContent.category"
+            "$ref": "#/parameters/DocumentTranslateContent.category"
           },
           {
-            "$ref": "#/parameters/SingleDocumentTranslateContent.allowFallback"
+            "$ref": "#/parameters/DocumentTranslateContent.allowFallback"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
           },
           {
-            "$ref": "#/parameters/SingleDocumentTranslateContent.document"
+            "$ref": "#/parameters/DocumentTranslateContent.document"
           },
           {
-            "$ref": "#/parameters/SingleDocumentTranslateContent.glossary"
+            "$ref": "#/parameters/DocumentTranslateContent.glossary"
           }
         ],
         "responses": {
@@ -219,7 +218,7 @@
         }
       }
     },
-    "SingleDocumentTranslateContent": {
+    "DocumentTranslateContent": {
       "type": "object",
       "description": "Document Translate Request Content",
       "properties": {
@@ -241,7 +240,7 @@
         "document"
       ]
     },
-    "SingleDocumentTranslateResult": {
+    "DocumentTranslateResult": {
       "type": "object",
       "description": "Document Translate Result / Response.",
       "properties": {
@@ -409,7 +408,7 @@
       "type": "string",
       "enum": [
         "2023-11-01-preview",
-        "v1.0"
+        "2024-05-01"
       ],
       "x-ms-enum": {
         "name": "Versions",
@@ -420,8 +419,8 @@
             "value": "2023-11-01-preview"
           },
           {
-            "name": "v1_0",
-            "value": "v1.0"
+            "name": "v2024_05_01",
+            "value": "2024-05-01"
           }
         ]
       }
@@ -448,7 +447,7 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
     },
-    "SingleDocumentTranslateContent.allowFallback": {
+    "DocumentTranslateContent.allowFallback": {
       "name": "allowFallback",
       "in": "query",
       "description": "Specifies that the service is allowed to fall back to a general system when a custom system doesn't exist. \nPossible values are: true (default) or false.",
@@ -456,7 +455,7 @@
       "type": "boolean",
       "x-ms-parameter-location": "method"
     },
-    "SingleDocumentTranslateContent.category": {
+    "DocumentTranslateContent.category": {
       "name": "category",
       "in": "query",
       "description": "A string specifying the category (domain) of the translation. This parameter is used to get translations \nfrom a customized system built with Custom Translator. Add the Category ID from your Custom Translator \nproject details to this parameter to use your deployed customized system. Default value is: general.",
@@ -465,7 +464,7 @@
       "default": "general",
       "x-ms-parameter-location": "method"
     },
-    "SingleDocumentTranslateContent.document": {
+    "DocumentTranslateContent.document": {
       "name": "document",
       "in": "formData",
       "description": "Document to be translated in the form",
@@ -473,7 +472,7 @@
       "type": "file",
       "x-ms-parameter-location": "method"
     },
-    "SingleDocumentTranslateContent.glossary": {
+    "DocumentTranslateContent.glossary": {
       "name": "glossary",
       "in": "formData",
       "description": "Glossary-translation memory will be used during translation in the form. ",
@@ -485,7 +484,7 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "SingleDocumentTranslateContent.sourceLanguage": {
+    "DocumentTranslateContent.sourceLanguage": {
       "name": "sourceLanguage",
       "in": "query",
       "description": "Specifies source language of the input document.\nIf this parameter isn't specified, automatic language detection is applied to determine the source language.\nFor example if the source document is written in English, then use sourceLanguage=en",
@@ -493,7 +492,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "SingleDocumentTranslateContent.targetLanguage": {
+    "DocumentTranslateContent.targetLanguage": {
       "name": "targetLanguage",
       "in": "query",
       "description": "Specifies the language of the output document.\nThe target language must be one of the supported languages included in the translation scope.\nFor example if you want to translate the document in German language, then use targetLanguage=de ",

@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 
 namespace DocumentTranslation;
 @doc("Document Translate Request Content")
-model SingleDocumentTranslateContent {
+model DocumentTranslateContent {
   @doc("""
   Specifies source language of the input document.
   If this parameter isn't specified, automatic language detection is applied to determine the source language.
@@ -53,7 +53,7 @@ model SingleDocumentTranslateContent {
 }
 
 @doc("Document Translate Result / Response.")
-model SingleDocumentTranslateResult {
+model DocumentTranslateResult {
   @doc("response content type")
   @header
   contentType: "application/octet-stream";
@@ -135,14 +135,14 @@ enum Status {
   ValidationFailed,
 }
 
-@added(DocumentTranslation.Versions.v1_0)
+@added(DocumentTranslation.Versions.v2024_05_01)
 @doc("Translation job submission batch request")
 model StartTranslationDetails {
   @doc("The input list of documents or folders containing documents")
   inputs: BatchRequest[];
 }
 
-@added(DocumentTranslation.Versions.v1_0)
+@added(DocumentTranslation.Versions.v2024_05_01)
 @doc("Definition for the input batch translation request")
 model BatchRequest {
   @doc("Source of the input documents")
@@ -155,7 +155,7 @@ model BatchRequest {
   storageType?: StorageInputType;
 }
 
-@added(DocumentTranslation.Versions.v1_0)
+@added(DocumentTranslation.Versions.v2024_05_01)
 @doc("Source of the input documents")
 model SourceInput {
   @doc("Location of the folder / container or single file with your documents")
@@ -174,7 +174,7 @@ If none is specified, we will perform auto detect on the document
   storageSource?: StorageSource;
 }
 
-@added(DocumentTranslation.Versions.v1_0)
+@added(DocumentTranslation.Versions.v2024_05_01)
 @doc("Document filter")
 model DocumentFilter {
   @doc("""
@@ -193,7 +193,7 @@ This is most often use for file extensions
   suffix?: string;
 }
 
-@added(DocumentTranslation.Versions.v1_0)
+@added(DocumentTranslation.Versions.v2024_05_01)
 @doc("Destination for the finished translated documents")
 model TargetInput {
   @doc("Location of the folder / container with your documents")
@@ -212,7 +212,7 @@ model TargetInput {
   storageSource?: StorageSource;
 }
 
-@added(DocumentTranslation.Versions.v1_0)
+@added(DocumentTranslation.Versions.v2024_05_01)
 @doc("Glossary / translation memory for the request")
 model Glossary {
   @doc("""
@@ -235,7 +235,7 @@ language pair is not present in the glossary, it will not be applied
   storageSource?: StorageSource;
 }
 
-@added(DocumentTranslation.Versions.v1_0)
+@added(DocumentTranslation.Versions.v2024_05_01)
 @doc("""
 Contains unified error information used for HTTP responses across any Cognitive
 Service. Instances
@@ -253,7 +253,7 @@ inner error with more descriptive details.
   error?: TranslationError;
 }
 
-@added(DocumentTranslation.Versions.v1_0)
+@added(DocumentTranslation.Versions.v2024_05_01)
 @doc("""
 This contains an outer error with error code, message, details, target and an
 inner error with more descriptive details.
@@ -284,7 +284,7 @@ details(key value pair), inner error(this can be nested).
   innerError?: InnerTranslationError;
 }
 
-@added(DocumentTranslation.Versions.v1_0)
+@added(DocumentTranslation.Versions.v2024_05_01)
 @doc("""
 New Inner Error format which conforms to Cognitive Services API Guidelines
 which is available at
@@ -319,7 +319,7 @@ details(key value pair), inner error(this can be nested).
   innerError?: InnerTranslationError;
 }
 
-@added(DocumentTranslation.Versions.v1_0)
+@added(DocumentTranslation.Versions.v2024_05_01)
 @doc("Translation job Status Response")
 @pagedResult
 model TranslationsStatus {
@@ -332,7 +332,7 @@ model TranslationsStatus {
   nextLink?: string;
 }
 
-@added(DocumentTranslation.Versions.v1_0)
+@added(DocumentTranslation.Versions.v2024_05_01)
 @doc("Translation job status response")
 model TranslationStatus {
   @doc("Id of the operation.")
@@ -359,7 +359,7 @@ inner error with more descriptive details.
   summary: StatusSummary;
 }
 
-@added(DocumentTranslation.Versions.v1_0)
+@added(DocumentTranslation.Versions.v2024_05_01)
 @doc("Status Summary")
 model StatusSummary {
   @doc("Total count")
@@ -384,7 +384,7 @@ model StatusSummary {
   totalCharacterCharged: int64;
 }
 
-@added(DocumentTranslation.Versions.v1_0)
+@added(DocumentTranslation.Versions.v2024_05_01)
 @doc("Document Status Response")
 model DocumentStatus {
   @doc("Location of the document or folder")
@@ -424,7 +424,7 @@ inner error with more descriptive details.
   characterCharged?: int32;
 }
 
-@added(DocumentTranslation.Versions.v1_0)
+@added(DocumentTranslation.Versions.v2024_05_01)
 @doc("Documents Status Response")
 @pagedResult
 model DocumentsStatus {
@@ -437,14 +437,14 @@ model DocumentsStatus {
   nextLink?: string;
 }
 
-@added(DocumentTranslation.Versions.v1_0)
+@added(DocumentTranslation.Versions.v2024_05_01)
 @doc("List of supported file formats")
 model SupportedFileFormats {
   @doc("list of objects")
   value: FileFormat[];
 }
 
-@added(DocumentTranslation.Versions.v1_0)
+@added(DocumentTranslation.Versions.v2024_05_01)
 @doc("File Format")
 model FileFormat {
   @doc("Name of the format")
@@ -463,7 +463,7 @@ model FileFormat {
   versions?: string[];
 }
 
-@added(DocumentTranslation.Versions.v1_0)
+@added(DocumentTranslation.Versions.v2024_05_01)
 @doc("List of supported storage sources")
 model SupportedStorageSources {
   @doc("list of objects")

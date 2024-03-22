@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "DocumentTranslation Service",
-    "version": "v1.0",
+    "version": "2024-05-01",
     "description": "Document translation service",
     "x-typespec-generated": [
       {
@@ -60,79 +60,7 @@
   },
   "tags": [],
   "paths": {
-    "/document:translate": {
-      "post": {
-        "operationId": "SingleDocumentTranslationOperations_SingleDocumentTranslate",
-        "summary": "Translate a single document",
-        "description": "API to translate single document",
-        "produces": [
-          "application/octet-stream",
-          "application/json"
-        ],
-        "consumes": [
-          "multipart/form-data"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SingleDocumentTranslateContent.sourceLanguage"
-          },
-          {
-            "$ref": "#/parameters/SingleDocumentTranslateContent.targetLanguage"
-          },
-          {
-            "$ref": "#/parameters/SingleDocumentTranslateContent.category"
-          },
-          {
-            "$ref": "#/parameters/SingleDocumentTranslateContent.allowFallback"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "$ref": "#/parameters/SingleDocumentTranslateContent.document"
-          },
-          {
-            "$ref": "#/parameters/SingleDocumentTranslateContent.glossary"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "type": "file"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Translate a single document": {
-            "$ref": "./examples/DocumentTranslate_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/text/batch/v1.0/batches": {
+    "/document/batches": {
       "get": {
         "operationId": "DocumentTranslationOperations_GetTranslationsStatus",
         "summary": "Returns a list of batch requests submitted and the status for each request",
@@ -295,7 +223,7 @@
         }
       }
     },
-    "/text/batch/v1.0/batches/{id}": {
+    "/document/batches/{id}": {
       "get": {
         "operationId": "DocumentTranslationOperations_GetTranslationStatus",
         "summary": "Returns the status for a document translation request",
@@ -383,7 +311,7 @@
         }
       }
     },
-    "/text/batch/v1.0/batches/{id}/documents": {
+    "/document/batches/{id}/documents": {
       "get": {
         "operationId": "DocumentTranslationOperations_GetDocumentsStatus",
         "summary": "Returns the status for all documents in a batch document translation request",
@@ -514,7 +442,7 @@
         }
       }
     },
-    "/text/batch/v1.0/batches/{id}/documents/{documentId}": {
+    "/document/batches/{id}/documents/{documentId}": {
       "get": {
         "operationId": "DocumentTranslationOperations_GetDocumentStatus",
         "summary": "Returns the status for a specific document",
@@ -567,7 +495,7 @@
         }
       }
     },
-    "/text/batch/v1.0/documents/formats": {
+    "/document/formats&type=document": {
       "get": {
         "operationId": "DocumentTranslationOperations_GetSupportedDocumentFormats",
         "summary": "Returns a list of supported document formats",
@@ -604,7 +532,7 @@
         }
       }
     },
-    "/text/batch/v1.0/glossaries/formats": {
+    "/document/formats&type=glossary": {
       "get": {
         "operationId": "DocumentTranslationOperations_GetSupportedGlossaryFormats",
         "summary": "Returns the list of supported glossary formats",
@@ -641,21 +569,55 @@
         }
       }
     },
-    "/text/batch/v1.0/storagesources": {
-      "get": {
-        "operationId": "DocumentTranslationOperations_GetSupportedStorageSources",
-        "summary": "Returns a list of supported storage sources",
-        "description": "Returns a list of storage sources/options supported by the Document Translation\nservice.",
+    "/document:translate": {
+      "post": {
+        "operationId": "DocumentTranslate",
+        "description": "API to translate a document.",
+        "produces": [
+          "application/octet-stream",
+          "application/json"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DocumentTranslateContent.sourceLanguage"
+          },
+          {
+            "$ref": "#/parameters/DocumentTranslateContent.targetLanguage"
+          },
+          {
+            "$ref": "#/parameters/DocumentTranslateContent.category"
+          },
+          {
+            "$ref": "#/parameters/DocumentTranslateContent.allowFallback"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "$ref": "#/parameters/DocumentTranslateContent.document"
+          },
+          {
+            "$ref": "#/parameters/DocumentTranslateContent.glossary"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/SupportedStorageSources"
+              "type": "file"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
             }
           },
           "default": {
@@ -672,8 +634,8 @@
           }
         },
         "x-ms-examples": {
-          "Returns a list of supported storage sources": {
-            "$ref": "./examples/storage.json"
+          "Translate a single document": {
+            "$ref": "./examples/DocumentTranslate_MaximumSet_Gen.json"
           }
         }
       }
@@ -870,6 +832,42 @@
         "id"
       ]
     },
+    "DocumentTranslateContent": {
+      "type": "object",
+      "description": "Document Translate Request Content",
+      "properties": {
+        "document": {
+          "type": "string",
+          "format": "byte",
+          "description": "Document to be translated in the form"
+        },
+        "glossary": {
+          "type": "array",
+          "description": "Glossary-translation memory will be used during translation in the form. ",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
+        }
+      },
+      "required": [
+        "document"
+      ]
+    },
+    "DocumentTranslateResult": {
+      "type": "object",
+      "description": "Document Translate Result / Response.",
+      "properties": {
+        "document": {
+          "type": "string",
+          "format": "byte",
+          "description": "Request response, response is a translated document."
+        }
+      },
+      "required": [
+        "document"
+      ]
+    },
     "DocumentsStatus": {
       "type": "object",
       "description": "Documents Status Response",
@@ -981,42 +979,6 @@
       "required": [
         "code",
         "message"
-      ]
-    },
-    "SingleDocumentTranslateContent": {
-      "type": "object",
-      "description": "Document Translate Request Content",
-      "properties": {
-        "document": {
-          "type": "string",
-          "format": "byte",
-          "description": "Document to be translated in the form"
-        },
-        "glossary": {
-          "type": "array",
-          "description": "Glossary-translation memory will be used during translation in the form. ",
-          "items": {
-            "type": "string",
-            "format": "byte"
-          }
-        }
-      },
-      "required": [
-        "document"
-      ]
-    },
-    "SingleDocumentTranslateResult": {
-      "type": "object",
-      "description": "Document Translate Result / Response.",
-      "properties": {
-        "document": {
-          "type": "string",
-          "format": "byte",
-          "description": "Request response, response is a translated document."
-        }
-      },
-      "required": [
-        "document"
       ]
     },
     "SourceInput": {
@@ -1428,7 +1390,7 @@
       "type": "string",
       "enum": [
         "2023-11-01-preview",
-        "v1.0"
+        "2024-05-01"
       ],
       "x-ms-enum": {
         "name": "Versions",
@@ -1439,8 +1401,8 @@
             "value": "2023-11-01-preview"
           },
           {
-            "name": "v1_0",
-            "value": "v1.0"
+            "name": "v2024_05_01",
+            "value": "2024-05-01"
           }
         ]
       }
@@ -1467,7 +1429,7 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
     },
-    "SingleDocumentTranslateContent.allowFallback": {
+    "DocumentTranslateContent.allowFallback": {
       "name": "allowFallback",
       "in": "query",
       "description": "Specifies that the service is allowed to fall back to a general system when a custom system doesn't exist. \nPossible values are: true (default) or false.",
@@ -1475,7 +1437,7 @@
       "type": "boolean",
       "x-ms-parameter-location": "method"
     },
-    "SingleDocumentTranslateContent.category": {
+    "DocumentTranslateContent.category": {
       "name": "category",
       "in": "query",
       "description": "A string specifying the category (domain) of the translation. This parameter is used to get translations \nfrom a customized system built with Custom Translator. Add the Category ID from your Custom Translator \nproject details to this parameter to use your deployed customized system. Default value is: general.",
@@ -1484,7 +1446,7 @@
       "default": "general",
       "x-ms-parameter-location": "method"
     },
-    "SingleDocumentTranslateContent.document": {
+    "DocumentTranslateContent.document": {
       "name": "document",
       "in": "formData",
       "description": "Document to be translated in the form",
@@ -1492,7 +1454,7 @@
       "type": "file",
       "x-ms-parameter-location": "method"
     },
-    "SingleDocumentTranslateContent.glossary": {
+    "DocumentTranslateContent.glossary": {
       "name": "glossary",
       "in": "formData",
       "description": "Glossary-translation memory will be used during translation in the form. ",
@@ -1504,7 +1466,7 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "SingleDocumentTranslateContent.sourceLanguage": {
+    "DocumentTranslateContent.sourceLanguage": {
       "name": "sourceLanguage",
       "in": "query",
       "description": "Specifies source language of the input document.\nIf this parameter isn't specified, automatic language detection is applied to determine the source language.\nFor example if the source document is written in English, then use sourceLanguage=en",
@@ -1512,7 +1474,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "SingleDocumentTranslateContent.targetLanguage": {
+    "DocumentTranslateContent.targetLanguage": {
       "name": "targetLanguage",
       "in": "query",
       "description": "Specifies the language of the output document.\nThe target language must be one of the supported languages included in the translation scope.\nFor example if you want to translate the document in German language, then use targetLanguage=de ",

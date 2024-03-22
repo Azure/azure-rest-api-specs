@@ -14,22 +14,19 @@ alias ServiceTraits = SupportsRepeatableRequests &
   SupportsConditionalRequests &
   SupportsClientRequestId;
 
-interface SingleDocumentTranslationOperations {
-  #suppress "@azure-tools/typespec-azure-core/byos"
-  @summary("Translate a single document")
-  @doc("API to translate single document")
-  @post
-  @route("document:translate")
-  singleDocumentTranslate is RpcOperation<
-    SingleDocumentTranslateContent,
-    SingleDocumentTranslateResult,
-    ServiceTraits
-  >;
-}
+/** API to translate a document. */
+#suppress "@azure-tools/typespec-azure-core/byos"
+@post
+@route("document:translate")
+op documentTranslate is RpcOperation<
+  DocumentTranslateContent,
+  DocumentTranslateResult,
+  ServiceTraits
+>;
 
 interface DocumentTranslationOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @added(DocumentTranslation.Versions.v1_0)
+  @added(DocumentTranslation.Versions.v2024_05_01)
   @summary("Submit a document translation request to the Document Translation service")
   @doc("""
 Use this API to submit a bulk (batch) translation request to the Document
@@ -52,7 +49,7 @@ If a file with the same name already exists at the
 destination, it will be overwritten. The targetUrl for each target language
 must be unique.
 """)
-  @route("/text/batch/v1.0/batches")
+  @route("/document/batches")
   @post
   startTranslation is Azure.Core.Foundations.Operation<
     StartTranslationDetails,
@@ -60,7 +57,7 @@ must be unique.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @added(DocumentTranslation.Versions.v1_0)
+  @added(DocumentTranslation.Versions.v2024_05_01)
   @summary("Returns a list of batch requests submitted and the status for each request")
   @doc("""
 Returns a list of batch requests submitted and the status for each
@@ -116,7 +113,7 @@ instead of just ignoring the query options.
 This reduces the risk of the client
 making assumptions about the data returned.
 """)
-  @route("/text/batch/v1.0/batches")
+  @route("/document/batches")
   @get
   getTranslationsStatus is Azure.Core.Foundations.Operation<
     {
@@ -205,13 +202,13 @@ if the specified page size is smaller than the server's default page size.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @added(DocumentTranslation.Versions.v1_0)
+  @added(DocumentTranslation.Versions.v2024_05_01)
   @summary("Returns the status for a specific document")
   @doc("""
 Returns the translation status for a specific document based on the request Id
 and document Id.
 """)
-  @route("/text/batch/v1.0/batches/{id}/documents/{documentId}")
+  @route("/document/batches/{id}/documents/{documentId}")
   @get
   getDocumentStatus is Azure.Core.Foundations.Operation<
     {
@@ -227,7 +224,7 @@ and document Id.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @added(DocumentTranslation.Versions.v1_0)
+  @added(DocumentTranslation.Versions.v2024_05_01)
   @summary("Returns the status for a document translation request")
   @doc("""
 Returns the status for a document translation request.
@@ -235,7 +232,7 @@ The status includes the
 overall request status, as well as the status for documents that are being
 translated as part of that request.
 """)
-  @route("/text/batch/v1.0/batches/{id}")
+  @route("/document/batches/{id}")
   @get
   getTranslationStatus is Azure.Core.Foundations.Operation<
     {
@@ -247,7 +244,7 @@ translated as part of that request.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @added(DocumentTranslation.Versions.v1_0)
+  @added(DocumentTranslation.Versions.v2024_05_01)
   @summary("Cancel a currently processing or queued translation")
   @doc("""
 Cancel a currently processing or queued translation.
@@ -259,7 +256,7 @@ cancelled and will be charged.
 All pending documents will be cancelled if
 possible.
 """)
-  @route("/text/batch/v1.0/batches/{id}")
+  @route("/document/batches/{id}")
   @delete
   cancelTranslation is Azure.Core.Foundations.Operation<
     {
@@ -271,7 +268,7 @@ possible.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @added(DocumentTranslation.Versions.v1_0)
+  @added(DocumentTranslation.Versions.v2024_05_01)
   @summary("Returns the status for all documents in a batch document translation request")
   @doc("""
 Returns the status for all documents in a batch document translation request.
@@ -321,7 +318,7 @@ the query options.
 This reduces the risk of the client making assumptions about
 the data returned.
 """)
-  @route("/text/batch/v1.0/batches/{id}/documents")
+  @route("/document/batches/{id}/documents")
   @get
   getDocumentsStatus is Azure.Core.Foundations.Operation<
     {
@@ -414,7 +411,7 @@ if the specified page size is smaller than the server's default page size.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @added(DocumentTranslation.Versions.v1_0)
+  @added(DocumentTranslation.Versions.v2024_05_01)
   @summary("Returns a list of supported document formats")
   @doc("""
 The list of supported document formats supported by the Document Translation
@@ -422,7 +419,7 @@ service.
 The list includes the common file extension, as well as the
 content-type if using the upload API.
 """)
-  @route("/text/batch/v1.0/documents/formats")
+  @route("/document/formats&type=document")
   @get
   getSupportedDocumentFormats is Azure.Core.Foundations.Operation<
     {},
@@ -430,31 +427,17 @@ content-type if using the upload API.
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @added(DocumentTranslation.Versions.v1_0)
+  @added(DocumentTranslation.Versions.v2024_05_01)
   @summary("Returns the list of supported glossary formats")
   @doc("""
 The list of supported glossary formats supported by the Document Translation
 service.
 The list includes the common file extension used.
 """)
-  @route("/text/batch/v1.0/glossaries/formats")
+  @route("/document/formats&type=glossary")
   @get
   getSupportedGlossaryFormats is Azure.Core.Foundations.Operation<
     {},
     SupportedFileFormats
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @added(DocumentTranslation.Versions.v1_0)
-  @summary("Returns a list of supported storage sources")
-  @doc("""
-Returns a list of storage sources/options supported by the Document Translation
-service.
-""")
-  @route("/text/batch/v1.0/storagesources")
-  @get
-  getSupportedStorageSources is Azure.Core.Foundations.Operation<
-    {},
-    SupportedStorageSources
   >;
 }
