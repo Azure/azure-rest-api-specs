@@ -14,7 +14,7 @@ model BasePersonGroup {
   ...UserDefinedFields;
 
   @doc("Name of recognition model. Recognition model is used when the face features are extracted and associated with detected faceIds. The default value is 'recognition_01', if latest model needed, please explicitly specify the model you need.")
-  recognitionModel?: RecognitionModel;
+  recognitionModel?: RecognitionModel = "recognition_01";
 }
 
 @resource("persons")

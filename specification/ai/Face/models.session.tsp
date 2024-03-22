@@ -29,7 +29,7 @@ model LivenessSessionData {
   deviceCorrelationId: string;
 
   @doc("Session length in seconds. Range is 60 to 86400 seconds.")
-  authTokenTimeToLiveInSeconds?: int32;
+  authTokenTimeToLiveInSeconds?: int32 = 600;
 }
 
 @doc("Session data returned for enumeration.")
@@ -89,6 +89,7 @@ model LivenessSessionCreationResult {
 @doc("The current status of the session.")
 union FaceSessionStatus {
   string,
+
   @doc("Session has not started.")
   "NotStarted",
 

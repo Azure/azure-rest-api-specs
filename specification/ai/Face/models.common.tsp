@@ -26,12 +26,13 @@ model ListRequestOptions {
   @query
   @minValue(1)
   @maxValue(1000)
-  top?: int32;
+  top?: int32 = 1000;
 }
 
 @doc("The recognition model for the face.")
 union RecognitionModel {
   string,
+
   @doc("The default recognition model for Face - Detect. All those faceIds created before 2019 March are bonded with this recognition model.")
   "recognition_01",
 
@@ -48,6 +49,7 @@ union RecognitionModel {
 @doc("The detection model for the face.")
 union DetectionModel {
   string,
+
   @doc("The default detection model for Face - Detect. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.")
   "detection_01",
 
@@ -90,7 +92,7 @@ model AddFaceOptions {
 
   @query
   @doc("The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.")
-  detectionModel?: DetectionModel;
+  detectionModel?: DetectionModel = "detection_01";
 
   @query
   @doc("User-provided data attached to the face. The size limit is 1KB.")
@@ -113,7 +115,7 @@ model CreatePersonResult {
 model ReturnRecognitionModelOptions {
   @query
   @doc("Return 'recognitionModel' or not. The default value is false.")
-  returnRecognitionModel?: boolean;
+  returnRecognitionModel?: boolean = false;
 }
 
 @doc("Training status of a container")
@@ -169,6 +171,7 @@ model FaceVerificationResult {
 @doc("Similar face searching mode.")
 union FindSimilarMatchMode {
   string,
+
   @doc("Match person.")
   "matchPerson",
 

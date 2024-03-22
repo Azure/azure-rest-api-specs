@@ -6344,8 +6344,41 @@
           "maxLength": 16384
         },
         "recognitionModel": {
-          "$ref": "#/definitions/RecognitionModel",
-          "description": "The 'recognitionModel' associated with this face list. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02, 'recognition_03', and 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'."
+          "type": "string",
+          "description": "The 'recognitionModel' associated with this face list. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02, 'recognition_03', and 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.",
+          "default": "recognition_01",
+          "enum": [
+            "recognition_01",
+            "recognition_02",
+            "recognition_03",
+            "recognition_04"
+          ],
+          "x-ms-enum": {
+            "name": "RecognitionModel",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "recognition_01",
+                "value": "recognition_01",
+                "description": "The default recognition model for Face - Detect. All those faceIds created before 2019 March are bonded with this recognition model."
+              },
+              {
+                "name": "recognition_02",
+                "value": "recognition_02",
+                "description": "Recognition model released in 2019 March."
+              },
+              {
+                "name": "recognition_03",
+                "value": "recognition_03",
+                "description": "Recognition model released in 2020 May."
+              },
+              {
+                "name": "recognition_04",
+                "value": "recognition_04",
+                "description": "Recognition model released in 2021 February. It's recommended to use this recognition model for better recognition accuracy."
+              }
+            ]
+          }
         },
         "faceListId": {
           "type": "string",
@@ -6401,8 +6434,41 @@
           "maxLength": 16384
         },
         "recognitionModel": {
-          "$ref": "#/definitions/RecognitionModel",
-          "description": "The 'recognitionModel' associated with this face list. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02, 'recognition_03', and 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'."
+          "type": "string",
+          "description": "The 'recognitionModel' associated with this face list. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02, 'recognition_03', and 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.",
+          "default": "recognition_01",
+          "enum": [
+            "recognition_01",
+            "recognition_02",
+            "recognition_03",
+            "recognition_04"
+          ],
+          "x-ms-enum": {
+            "name": "RecognitionModel",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "recognition_01",
+                "value": "recognition_01",
+                "description": "The default recognition model for Face - Detect. All those faceIds created before 2019 March are bonded with this recognition model."
+              },
+              {
+                "name": "recognition_02",
+                "value": "recognition_02",
+                "description": "Recognition model released in 2019 March."
+              },
+              {
+                "name": "recognition_03",
+                "value": "recognition_03",
+                "description": "Recognition model released in 2020 May."
+              },
+              {
+                "name": "recognition_04",
+                "value": "recognition_04",
+                "description": "Recognition model released in 2021 February. It's recommended to use this recognition model for better recognition accuracy."
+              }
+            ]
+          }
         },
         "faceListId": {
           "type": "string",
@@ -6795,8 +6861,41 @@
           "maxLength": 16384
         },
         "recognitionModel": {
-          "$ref": "#/definitions/RecognitionModel",
-          "description": "The 'recognitionModel' associated with this face list. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02, 'recognition_03', and 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'."
+          "type": "string",
+          "description": "The 'recognitionModel' associated with this face list. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02, 'recognition_03', and 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.",
+          "default": "recognition_01",
+          "enum": [
+            "recognition_01",
+            "recognition_02",
+            "recognition_03",
+            "recognition_04"
+          ],
+          "x-ms-enum": {
+            "name": "RecognitionModel",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "recognition_01",
+                "value": "recognition_01",
+                "description": "The default recognition model for Face - Detect. All those faceIds created before 2019 March are bonded with this recognition model."
+              },
+              {
+                "name": "recognition_02",
+                "value": "recognition_02",
+                "description": "Recognition model released in 2019 March."
+              },
+              {
+                "name": "recognition_03",
+                "value": "recognition_03",
+                "description": "Recognition model released in 2020 May."
+              },
+              {
+                "name": "recognition_04",
+                "value": "recognition_04",
+                "description": "Recognition model released in 2021 February. It's recommended to use this recognition model for better recognition accuracy."
+              }
+            ]
+          }
         },
         "largeFaceListId": {
           "type": "string",
@@ -6854,8 +6953,41 @@
           "maxLength": 16384
         },
         "recognitionModel": {
-          "$ref": "#/definitions/RecognitionModel",
-          "description": "Name of recognition model. Recognition model is used when the face features are extracted and associated with detected faceIds. The default value is 'recognition_01', if latest model needed, please explicitly specify the model you need."
+          "type": "string",
+          "description": "Name of recognition model. Recognition model is used when the face features are extracted and associated with detected faceIds. The default value is 'recognition_01', if latest model needed, please explicitly specify the model you need.",
+          "default": "recognition_01",
+          "enum": [
+            "recognition_01",
+            "recognition_02",
+            "recognition_03",
+            "recognition_04"
+          ],
+          "x-ms-enum": {
+            "name": "RecognitionModel",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "recognition_01",
+                "value": "recognition_01",
+                "description": "The default recognition model for Face - Detect. All those faceIds created before 2019 March are bonded with this recognition model."
+              },
+              {
+                "name": "recognition_02",
+                "value": "recognition_02",
+                "description": "Recognition model released in 2019 March."
+              },
+              {
+                "name": "recognition_03",
+                "value": "recognition_03",
+                "description": "Recognition model released in 2020 May."
+              },
+              {
+                "name": "recognition_04",
+                "value": "recognition_04",
+                "description": "Recognition model released in 2021 February. It's recommended to use this recognition model for better recognition accuracy."
+              }
+            ]
+          }
         },
         "largePersonGroupId": {
           "type": "string",
@@ -7017,7 +7149,8 @@
         "authTokenTimeToLiveInSeconds": {
           "type": "integer",
           "format": "int32",
-          "description": "Session length in seconds. Range is 60 to 86400 seconds."
+          "description": "Session length in seconds. Range is 60 to 86400 seconds.",
+          "default": 600
         },
         "status": {
           "$ref": "#/definitions/FaceSessionStatus",
@@ -7111,7 +7244,8 @@
         "authTokenTimeToLiveInSeconds": {
           "type": "integer",
           "format": "int32",
-          "description": "Session length in seconds. Range is 60 to 86400 seconds."
+          "description": "Session length in seconds. Range is 60 to 86400 seconds.",
+          "default": 600
         }
       },
       "required": [
@@ -7142,7 +7276,8 @@
         "authTokenTimeToLiveInSeconds": {
           "type": "integer",
           "format": "int32",
-          "description": "Session length in seconds. Range is 60 to 86400 seconds."
+          "description": "Session length in seconds. Range is 60 to 86400 seconds.",
+          "default": 600
         }
       },
       "required": [
@@ -7201,7 +7336,8 @@
         "authTokenTimeToLiveInSeconds": {
           "type": "integer",
           "format": "int32",
-          "description": "Session length in seconds. Range is 60 to 86400 seconds."
+          "description": "Session length in seconds. Range is 60 to 86400 seconds.",
+          "default": 600
         }
       },
       "required": [
@@ -7263,7 +7399,8 @@
         "authTokenTimeToLiveInSeconds": {
           "type": "integer",
           "format": "int32",
-          "description": "Session length in seconds. Range is 60 to 86400 seconds."
+          "description": "Session length in seconds. Range is 60 to 86400 seconds.",
+          "default": 600
         },
         "status": {
           "$ref": "#/definitions/FaceSessionStatus",
@@ -7482,8 +7619,41 @@
           "maxLength": 16384
         },
         "recognitionModel": {
-          "$ref": "#/definitions/RecognitionModel",
-          "description": "Name of recognition model. Recognition model is used when the face features are extracted and associated with detected faceIds. The default value is 'recognition_01', if latest model needed, please explicitly specify the model you need."
+          "type": "string",
+          "description": "Name of recognition model. Recognition model is used when the face features are extracted and associated with detected faceIds. The default value is 'recognition_01', if latest model needed, please explicitly specify the model you need.",
+          "default": "recognition_01",
+          "enum": [
+            "recognition_01",
+            "recognition_02",
+            "recognition_03",
+            "recognition_04"
+          ],
+          "x-ms-enum": {
+            "name": "RecognitionModel",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "recognition_01",
+                "value": "recognition_01",
+                "description": "The default recognition model for Face - Detect. All those faceIds created before 2019 March are bonded with this recognition model."
+              },
+              {
+                "name": "recognition_02",
+                "value": "recognition_02",
+                "description": "Recognition model released in 2019 March."
+              },
+              {
+                "name": "recognition_03",
+                "value": "recognition_03",
+                "description": "Recognition model released in 2020 May."
+              },
+              {
+                "name": "recognition_04",
+                "value": "recognition_04",
+                "description": "Recognition model released in 2021 February. It's recommended to use this recognition model for better recognition accuracy."
+              }
+            ]
+          }
         },
         "personGroupId": {
           "type": "string",
@@ -7756,6 +7926,7 @@
       "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
       "required": false,
       "type": "string",
+      "default": "detection_01",
       "enum": [
         "detection_01",
         "detection_02",
@@ -7814,6 +7985,7 @@
       "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
       "required": false,
       "type": "string",
+      "default": "detection_01",
       "enum": [
         "detection_01",
         "detection_02",
@@ -7849,6 +8021,7 @@
       "required": false,
       "type": "integer",
       "format": "int32",
+      "default": 86400,
       "minimum": 60,
       "maximum": 86400,
       "x-ms-parameter-location": "method"
@@ -7859,6 +8032,7 @@
       "description": "The 'recognitionModel' associated with the detected faceIds. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02', 'recognition_03' or 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.",
       "required": false,
       "type": "string",
+      "default": "recognition_01",
       "enum": [
         "recognition_01",
         "recognition_02",
@@ -7907,6 +8081,7 @@
       "description": "Return faceIds of the detected faces or not. The default value is true.",
       "required": false,
       "type": "boolean",
+      "default": true,
       "x-ms-parameter-location": "method"
     },
     "FaceDetectionOptions.returnFaceLandmarks": {
@@ -7915,6 +8090,7 @@
       "description": "Return face landmarks of the detected faces or not. The default value is false.",
       "required": false,
       "type": "boolean",
+      "default": false,
       "x-ms-parameter-location": "method"
     },
     "FaceDetectionOptions.returnRecognitionModel": {
@@ -7923,6 +8099,7 @@
       "description": "Return 'recognitionModel' or not. The default value is false.",
       "required": false,
       "type": "boolean",
+      "default": false,
       "x-ms-parameter-location": "method"
     },
     "ListRequestOptions.start": {
@@ -7940,6 +8117,7 @@
       "required": false,
       "type": "integer",
       "format": "int32",
+      "default": 1000,
       "minimum": 1,
       "maximum": 1000,
       "x-ms-parameter-location": "method"
@@ -7966,6 +8144,7 @@
       "description": "Return 'recognitionModel' or not. The default value is false.",
       "required": false,
       "type": "boolean",
+      "default": false,
       "x-ms-parameter-location": "method"
     }
   }

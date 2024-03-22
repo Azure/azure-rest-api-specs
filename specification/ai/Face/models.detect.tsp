@@ -13,11 +13,11 @@ namespace Face;
 model FaceDetectionOptions {
   @doc("Return faceIds of the detected faces or not. The default value is true.")
   @query
-  returnFaceId?: boolean;
+  returnFaceId?: boolean = true;
 
   @doc("Return face landmarks of the detected faces or not. The default value is false.")
   @query
-  returnFaceLandmarks?: boolean;
+  returnFaceLandmarks?: boolean = false;
 
   @doc("Analyze and return the one or more specified face attributes in the comma-separated string like 'returnFaceAttributes=headPose,glasses'. Supported face attributes include headPose, glasses, occlusion, accessories, blur, exposure, noise, mask, and qualityForRecognition. Face attribute analysis has additional computational and time cost.")
   @query
@@ -25,21 +25,21 @@ model FaceDetectionOptions {
 
   @doc("The 'recognitionModel' associated with the detected faceIds. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02', 'recognition_03' or 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.")
   @query
-  recognitionModel?: RecognitionModel;
+  recognitionModel?: RecognitionModel = "recognition_01";
 
   @doc("Return 'recognitionModel' or not. The default value is false.")
   @query
-  returnRecognitionModel?: boolean;
+  returnRecognitionModel?: boolean = false;
 
   @doc("The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.")
   @query
-  detectionModel?: DetectionModel;
+  detectionModel?: DetectionModel = "detection_01";
 
   @doc("The number of seconds for the face ID being cached. Supported range from 60 seconds up to 86400 seconds. The default value is 86400 (24 hours).")
   @query
   @minValue(60)
   @maxValue(86400)
-  faceIdTimeToLive?: int32;
+  faceIdTimeToLive?: int32 = 86400;
 }
 
 @doc("Response for detect API.")
@@ -233,6 +233,7 @@ model FacialHair {
 @doc("Glasses type of the face.")
 union GlassesType {
   string,
+
   @doc("No glasses on the face.")
   "noGlasses",
 
@@ -286,6 +287,7 @@ model HairColor {
 @doc("Name of the hair color.")
 union HairColorType {
   string,
+
   @doc("Unknown")
   unknownHairColor: "unknown",
 
@@ -337,6 +339,7 @@ model AccessoryItem {
 @doc("Type of the accessory.")
 union AccessoryType {
   string,
+
   @doc("Head wear")
   "headwear",
 
@@ -361,6 +364,7 @@ model BlurProperties {
 @doc("Indicates level of blurriness.")
 union BlurLevel {
   string,
+
   @doc("Low blur level.")
   "low",
 
@@ -385,6 +389,7 @@ model ExposureProperties {
 @doc("Indicates level of exposure.")
 union ExposureLevel {
   string,
+
   @doc("Low exposure level.")
   "underExposure",
 
@@ -409,6 +414,7 @@ model NoiseProperties {
 @doc("Indicates level of noise.")
 union NoiseLevel {
   string,
+
   @doc("Low noise level.")
   "low",
 
@@ -431,6 +437,7 @@ model MaskProperties {
 @doc("Mask type if any of the face")
 union MaskType {
   string,
+
   @doc("Face mask.")
   "faceMask",
 
@@ -447,6 +454,7 @@ union MaskType {
 @doc("Indicates quality of image for recognition.")
 union QualityForRecognition {
   string,
+
   @doc("Low quality.")
   "low",
 
