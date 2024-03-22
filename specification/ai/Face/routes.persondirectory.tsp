@@ -12,7 +12,7 @@ using Foundations;
 namespace Face;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Doesn't fit in generated long-running operation"
+#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "This is a template, polling operation should be defined in the operation instance."
 @summary("Add a face to a person (see PersonDirectory Person - Create) for face identification or verification.")
 @doc(
   """
@@ -57,7 +57,7 @@ op FaceResourceDeleteLongRunningOperation<TResource extends TypeSpec.Reflection.
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Doesn't fit in generated long-running operation"
 op DynamicPersonGroupLongRunningOperation<TParams extends TypeSpec.Reflection.Model> is Foundations.ResourceOperation<
   DynamicPersonGroup,
-  Foundations.ResourceBody<TParams>,
+  TParams,
   TypeSpec.Http.OkResponse | Foundations.AcceptedResponse<{
     @header("operation-Location")
     operationLocation: ResourceLocation<FaceOperationStatus>;
@@ -78,7 +78,7 @@ interface PersonDirectoryOperations {
   @createsResource(PersonDirectoryPerson)
   createPerson is Foundations.ResourceCollectionOperation<
     PersonDirectoryPerson,
-    Foundations.ResourceBody<PersonDirectoryPerson>,
+    UserDefinedFields,
     CreatePersonResult &
       TypeSpec.Http.AcceptedResponse & {
         @header("operation-Location")
@@ -171,7 +171,7 @@ interface PersonDirectoryOperations {
   @updatesResource(PersonDirectoryFace)
   updatePersonFace is FaceResourceUpdateOperation<
     PersonDirectoryFace,
-    Foundations.ResourceBody<PersonDirectoryFace>
+    FaceUserData
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -196,7 +196,7 @@ interface PersonDirectoryOperations {
   """)
   @returnsDoc(DynamicPersonGroupModificationAccepted)
   @put
-  createDynamicPersonGroup is DynamicPersonGroupLongRunningOperation<CreateDynamicPersonGroupContent>;
+  createDynamicPersonGroup is DynamicPersonGroupLongRunningOperation<CreateDynamicPersonGroupOptions>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @summary("Deletes an existing dynamic person group with specified dynamicPersonGroupId.")
@@ -221,7 +221,7 @@ interface PersonDirectoryOperations {
   """)
   @returnsDoc(DynamicPersonGroupModificationAccepted)
   @patch
-  updateDynamicPersonGroup is DynamicPersonGroupLongRunningOperation<UpdateDynamicPersonGroupContent>;
+  updateDynamicPersonGroup is DynamicPersonGroupLongRunningOperation<UpdateDynamicPersonGroupOptions>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @summary("List all existing dynamic person groups by dynamicPersonGroupId along with name and userData.")

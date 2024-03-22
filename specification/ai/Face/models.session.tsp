@@ -8,11 +8,19 @@ using TypeSpec.Rest;
 
 namespace Face;
 
+@doc("The operation mode for the liveness modal.")
+union LivenessOperationMode {
+  string,
+
+  @doc("The operation mode for the liveness modal.")
+  "Passive",
+}
+
 #suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "Provide convenient interface for multipart/form-data in SDK"
 @doc("Request for creating liveness session.")
 model LivenessSessionCreationContent {
   @doc("The operation mode for the liveness modal.")
-  livenessOperationMode: string;
+  livenessOperationMode: LivenessOperationMode;
 
   @doc("Whether or not send back the operation response to client.")
   sendResultsToClient?: boolean;
@@ -29,7 +37,9 @@ model LivenessSessionData {
   deviceCorrelationId: string;
 
   @doc("Session length in seconds. Range is 60 to 86400 seconds.")
-  authTokenTimeToLiveInSeconds?: int32;
+  @minValue(60)
+  @maxValue(86400)
+  authTokenTimeToLiveInSeconds?: int32 = 600;
 }
 
 @doc("Session data returned for enumeration.")
@@ -87,15 +97,17 @@ model LivenessSessionCreationResult {
 }
 
 @doc("The current status of the session.")
-enum FaceSessionStatus {
+union FaceSessionStatus {
+  string,
+
   @doc("Session has not started.")
-  NotStarted,
+  "NotStarted",
 
   @doc("Session has started.")
-  Started,
+  "Started",
 
   @doc("Session has available result.")
-  ResultAvailable,
+  "ResultAvailable",
 }
 
 @doc("Audit entry for a request in the session.")

@@ -40,7 +40,7 @@ interface FaceListOperations {
   Find Similar is used for scenario like finding celebrity-like faces, similar face filtering, or as a light way face identification. But if the actual use is to identify person, please use PersonGroup / LargePersonGroup and Face - Identify.
   Please consider LargeFaceList when the face number is large. It can support up to 1,000,000 faces.
   """)
-  createFaceList is FaceResourceCreateOperation<FaceList>;
+  createFaceList is FaceCollectionResourceCreateOperation<FaceList>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Delete response with 200 while standard op requires 204"
   @doc("Delete a specified face list.")
@@ -92,7 +92,7 @@ interface FaceListOperations {
   > * Free-tier subscription quota: 64 large face lists.
   > * S0-tier subscription quota: 1,000,000 large face lists.
   """)
-  createLargeFaceList is FaceResourceCreateOperation<LargeFaceList>;
+  createLargeFaceList is FaceCollectionResourceCreateOperation<LargeFaceList>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Delete response with 200 while standard op requires 204"
   @summary("Delete a face from a large face list by specified largeFaceListId and persistedFaceId.")
@@ -159,7 +159,7 @@ interface FaceListOperations {
   @doc("Update a specified face's userData field in a large face list by its persistedFaceId.")
   updateLargeFaceListFace is FaceResourceUpdateOperation<
     LargeFaceListFace,
-    Foundations.ResourceBody<LargeFaceListFace>
+    FaceUserData
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "List doesn't support Azure paging"

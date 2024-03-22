@@ -22,7 +22,7 @@ alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 @createsResource(TResource)
 op FaceResourceCreateWithServiceProvidedName<
   TResource extends TypeSpec.Reflection.Model,
-  TParams extends TypeSpec.Reflection.Model = Foundations.ResourceBody<TResource>,
+  TParams extends TypeSpec.Reflection.Model,
   TResponse extends TypeSpec.Reflection.Model = TResource
 > is Foundations.ResourceCollectionOperation<
   TResource,
@@ -32,9 +32,9 @@ op FaceResourceCreateWithServiceProvidedName<
 >;
 
 @createsOrReplacesResource(TResource)
-op FaceResourceCreateOperation<TResource extends TypeSpec.Reflection.Model> is Foundations.ResourceOperation<
+op FaceCollectionResourceCreateOperation<TResource extends TypeSpec.Reflection.Model> is Foundations.ResourceOperation<
   TResource,
-  Foundations.ResourceBody<TResource>,
+  CreateCollectionOptions,
   TypeSpec.Http.OkResponse,
   ServiceTraits
 >;
@@ -104,12 +104,16 @@ op FaceResourceReadOperationWithReturnRecognitionModelOptions<TResource extends 
   QueryParametersTrait<ReturnRecognitionModelOptions>
 >;
 
+#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "This is a template, polling operation should be defined in the operation instance."
 @action("train")
 @actionSeparator("/")
 op FaceResourceTrain<TResource extends TypeSpec.Reflection.Model> is Operations.ResourceAction<
   TResource,
   {},
-  TypeSpec.Http.AcceptedResponse
+  TypeSpec.Http.AcceptedResponse & {
+    @header("operation-Location")
+    operationLocation: ResourceLocation<TrainingStatus>;
+  }
 >;
 
 @get
@@ -118,6 +122,6 @@ op FaceResourceTrain<TResource extends TypeSpec.Reflection.Model> is Operations.
 op FaceResourceGetTrainingStatus<TResource extends TypeSpec.Reflection.Model> is Foundations.ResourceOperation<
   TResource,
   {},
-  CollectionTrainingStatus,
+  TrainingStatus,
   ServiceTraits
 >;

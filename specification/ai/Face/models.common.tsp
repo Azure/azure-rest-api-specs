@@ -1,12 +1,23 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 
 namespace Face;
+
+@pattern("^[a-z0-9-_]+$")
+@maxLength(64)
+scalar uuid extends Azure.Core.uuid;
+
+@pattern("^[a-z0-9-_]+$")
+@maxLength(64)
+@minLength(1)
+scalar groupId extends string;
 
 @doc("The ApiVersion path parameter.")
 model ApiVersionPathParameter {
@@ -16,8 +27,7 @@ model ApiVersionPathParameter {
   apiVersion: string;
 }
 
-@doc("The request for list resources.")
-model ListRequestOptions {
+alias ListRequestOptions = {
   @doc("List resources greater than the \"start\". It contains no more than 64 characters. Default is empty.")
   @query
   start?: string;
@@ -26,46 +36,73 @@ model ListRequestOptions {
   @query
   @minValue(1)
   @maxValue(1000)
-  top?: int32;
-}
+  top?: int32 = 1000;
+};
 
 @doc("The recognition model for the face.")
-enum RecognitionModel {
+@clientName("FaceRecognitionModel")
+union RecognitionModel {
+  string,
+
   @doc("The default recognition model for Face - Detect. All those faceIds created before 2019 March are bonded with this recognition model.")
-  recognition_01,
+  "recognition_01",
 
   @doc("Recognition model released in 2019 March.")
-  recognition_02,
+  "recognition_02",
 
   @doc("Recognition model released in 2020 May.")
-  recognition_03,
+  "recognition_03",
 
   @doc("Recognition model released in 2021 February. It's recommended to use this recognition model for better recognition accuracy.")
-  recognition_04,
+  "recognition_04",
 }
 
 @doc("The detection model for the face.")
-enum DetectionModel {
+@clientName("FaceDetectionModel")
+union DetectionModel {
+  string,
+
   @doc("The default detection model for Face - Detect. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.")
-  detection_01,
+  "detection_01",
 
   @doc("Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.")
-  detection_02,
+  "detection_02",
 
   @doc("Detection model released in 2021 February with improved accuracy especially on small faces.")
-  detection_03,
+  "detection_03",
 }
 
-@doc("Model for object name and user data.")
-model UserDefinedFields {
+alias UserDefinedFields = {
   @doc("User defined name, maximum length is 128.")
   @maxLength(128)
+  @minLength(1)
   name: string;
 
   @doc("Optional user defined data. Length should not exceed 16K.")
   @maxLength(16384)
   userData?: string;
+};
+
+@doc("Common model for face list and person group.")
+model BaseCollection {
+  ...UserDefinedFields;
+
+  @doc("Name of recognition model. Recognition model is used when the face features are extracted and associated with detected faceIds.")
+  recognitionModel?: RecognitionModel;
 }
+
+alias CreateCollectionOptions = {
+  ...UserDefinedFields;
+
+  @doc("The 'recognitionModel' associated with this face list. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02, 'recognition_03', and 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.")
+  recognitionModel?: RecognitionModel = "recognition_01";
+};
+
+alias FaceUserData = {
+  @doc("User-provided data attached to the face. The length limit is 1K.")
+  @maxLength(1024)
+  userData?: string;
+};
 
 @doc("Common model for persisted face.")
 @resource("persistedfaces")
@@ -73,52 +110,73 @@ model BaseFace {
   @key
   @visibility("read")
   @doc("Face ID of the face.")
-  persistedFaceId: string;
+  persistedFaceId: uuid;
 
-  @doc("User-provided data attached to the face. The length limit is 1K.")
-  @maxLength(1024)
-  userData?: string;
+  ...FaceUserData;
 }
 
-@doc("Query parameter for adding face to person.")
-model AddFaceOptions {
-  @query
+alias AddFaceOptions = {
   @doc("A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.")
-  targetFace?: string;
+  @query({
+    format: "csv",
+  })
+  @maxItems(4)
+  @minItems(4)
+  targetFace?: int32[];
 
   @query
   @doc("The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.")
-  detectionModel?: DetectionModel;
+  detectionModel?: DetectionModel = "detection_01";
 
   @query
-  @doc("User-provided data attached to the face. The size limit is 1KB.")
+  @doc("User-provided data attached to the face. The size limit is 1K.")
+  @maxLength(1024)
   userData?: string;
-}
+};
 
 @doc("Response body for adding face.")
 model AddFaceResult {
   @doc("persistedFaceId of the added face, which is persisted and will not expire. Different from faceId which is created in Face - Detect and will expire in 24 hours after the detection call.")
-  persistedFaceId: string;
+  persistedFaceId: uuid;
 }
 
 @doc("Response of create person.")
 model CreatePersonResult {
   @doc("Person ID of the person.")
-  personId: string;
+  personId: uuid;
 }
 
-@doc("Query parameters for whether response resource should include recognition model.")
-model ReturnRecognitionModelOptions {
+alias ReturnRecognitionModelOptions = {
   @query
   @doc("Return 'recognitionModel' or not. The default value is false.")
-  returnRecognitionModel?: boolean;
+  returnRecognitionModel?: boolean = false;
+};
+
+@doc("The status of long running operation.")
+@lroStatus
+union FaceOperationState {
+  string,
+
+  @doc("The operation is not started.")
+  "notStarted",
+
+  @doc("The operation is still running.")
+  "running",
+
+  @doc("The operation is succeeded.")
+  @lroSucceeded
+  "succeeded",
+
+  @doc("The operation is failed.")
+  @lroFailed
+  "failed",
 }
 
 @doc("Training status of a container")
-model CollectionTrainingStatus {
+@clientName("FaceCollectionTrainingStatus")
+model TrainingStatus {
   @doc("Training status of the container.")
-  @lroStatus
-  status: Foundations.OperationState;
+  status: FaceOperationState;
 
   @doc("A combined UTC date and time string that describes the created time of the person group, large person group or large face list.")
   createdDateTime: utcDateTime;
@@ -134,18 +192,20 @@ model CollectionTrainingStatus {
 }
 
 @doc("Identify result.")
-model FaceIdentificationResult {
+@clientName("FaceIdentificationResult")
+model IdentificationResult {
   @doc("faceId of the query face.")
-  faceId: string;
+  faceId: uuid;
 
   @doc("Identified person candidates for that face (ranked by confidence). Array size should be no larger than input maxNumOfCandidatesReturned. If no person is identified, will return an empty array.")
-  candidates: FaceIdentificationCandidate[];
+  candidates: IdentificationCandidate[];
 }
 
 @doc("Candidate for identify call.")
-model FaceIdentificationCandidate {
+@clientName("FaceIdentificationCandidate")
+model IdentificationCandidate {
   @doc("personId of candidate person.")
-  personId: string;
+  personId: uuid;
 
   @doc("Confidence value of the candidate. The higher confidence, the more similar. Range between [0,1].")
   @minValue(0)
@@ -154,46 +214,51 @@ model FaceIdentificationCandidate {
 }
 
 @doc("Verify result.")
-model FaceVerificationResult {
+@clientName("FaceVerificationResult")
+model VerificationResult {
   @doc("True if the two faces belong to the same person or the face belongs to the person, otherwise false.")
   isIdentical: boolean;
 
-  @doc("	A number indicates the similarity confidence of whether two faces belong to the same person, or whether the face belongs to the person. By default, isIdentical is set to True if similarity confidence is greater than or equal to 0.5. This is useful for advanced users to override 'isIdentical' and fine-tune the result on their own data.")
+  @doc("A number indicates the similarity confidence of whether two faces belong to the same person, or whether the face belongs to the person. By default, isIdentical is set to True if similarity confidence is greater than or equal to 0.5. This is useful for advanced users to override 'isIdentical' and fine-tune the result on their own data.")
   @minValue(0)
   @maxValue(1)
   confidence: float32;
 }
 
 @doc("Similar face searching mode.")
-enum FindSimilarMatchMode {
+union FindSimilarMatchMode {
+  string,
+
   @doc("Match person.")
-  matchPerson,
+  "matchPerson",
 
   @doc("Match face.")
-  matchFace,
+  "matchFace",
 }
 
 @doc("Response body for find similar face operation.")
-model FaceFindSimilarResult {
+@clientName("FaceFindSimilarResult")
+model FindSimilarResult {
   @doc("Confidence value of the candidate. The higher confidence, the more similar. Range between [0,1].")
   @minValue(0)
   @maxValue(1)
   confidence: float32;
 
   @doc("faceId of candidate face when find by faceIds. faceId is created by Face - Detect and will expire 24 hours after the detection call.")
-  faceId?: string;
+  faceId?: uuid;
 
   @doc("persistedFaceId of candidate face when find by faceListId or largeFaceListId. persistedFaceId in face list/large face list is persisted and will not expire.")
-  persistedFaceId?: string;
+  persistedFaceId?: uuid;
 }
 
 @doc("Response body for group face operation.")
-model FaceGroupingResult {
+@clientName("FaceGroupingResult")
+model GroupingResult {
   @doc("A partition of the original faces based on face similarity. Groups are ranked by number of faces.")
-  groups: string[][];
+  groups: uuid[][];
 
   @doc("Face ids array of faces that cannot find any similar faces from original faces.")
-  messyGroup: string[];
+  messyGroup: uuid[];
 }
 
 alias AddFaceDescription = """

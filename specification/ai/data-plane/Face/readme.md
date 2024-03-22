@@ -40,4 +40,11 @@ These settings apply only when `--tag=v1.1-preview.1` is specified on the comman
 ``` yaml $(tag) == 'v1.1-preview.1'
 input-file:
   - preview/v1.1-preview.1/Face.json
+suppressions:
+  - code: LroExtension
+    from: Face.json
+    reason: Our LRO behavior does not fit the default generated poller
+  - code: AvoidAnonymousParameter
+    from: Face.json
+    reason: Use anonymous parameter to provide interface with flatten parameters
 ```

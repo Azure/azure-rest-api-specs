@@ -74,25 +74,186 @@
             "$ref": "#/parameters/ApiVersionPathParameter"
           },
           {
-            "$ref": "#/parameters/FaceDetectionOptions.returnFaceId"
+            "name": "returnFaceId",
+            "in": "query",
+            "description": "Return faceIds of the detected faces or not. The default value is true.",
+            "required": false,
+            "type": "boolean",
+            "default": true
           },
           {
-            "$ref": "#/parameters/FaceDetectionOptions.returnFaceLandmarks"
+            "name": "returnFaceLandmarks",
+            "in": "query",
+            "description": "Return face landmarks of the detected faces or not. The default value is false.",
+            "required": false,
+            "type": "boolean",
+            "default": false
           },
           {
-            "$ref": "#/parameters/FaceDetectionOptions.returnFaceAttributes"
+            "name": "returnFaceAttributes",
+            "in": "query",
+            "description": "Analyze and return the one or more specified face attributes in the comma-separated string like 'returnFaceAttributes=headPose,glasses'. Face attribute analysis has additional computational and time cost.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "headPose",
+                "glasses",
+                "occlusion",
+                "accessories",
+                "blur",
+                "exposure",
+                "noise",
+                "mask",
+                "qualityForRecognition"
+              ],
+              "x-ms-enum": {
+                "name": "FaceAttributeType",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "headPose",
+                    "value": "headPose",
+                    "description": "3-D roll/yaw/pitch angles for face direction."
+                  },
+                  {
+                    "name": "glasses",
+                    "value": "glasses",
+                    "description": "Glasses type. Values include 'NoGlasses', 'ReadingGlasses', 'Sunglasses', 'SwimmingGoggles'."
+                  },
+                  {
+                    "name": "occlusion",
+                    "value": "occlusion",
+                    "description": "Whether each facial area is occluded, including forehead, eyes and mouth."
+                  },
+                  {
+                    "name": "accessories",
+                    "value": "accessories",
+                    "description": "Accessories around face, including 'headwear', 'glasses' and 'mask'. Empty array means no accessories detected. Note this is after a face is detected. Large mask could result in no face to be detected."
+                  },
+                  {
+                    "name": "blur",
+                    "value": "blur",
+                    "description": "Face is blurry or not. Level returns 'Low', 'Medium' or 'High'. Value returns a number between [0,1], the larger the blurrier."
+                  },
+                  {
+                    "name": "exposure",
+                    "value": "exposure",
+                    "description": "Face exposure level. Level returns 'GoodExposure', 'OverExposure' or 'UnderExposure'."
+                  },
+                  {
+                    "name": "noise",
+                    "value": "noise",
+                    "description": "Noise level of face pixels. Level returns 'Low', 'Medium' and 'High'. Value returns a number between [0,1], the larger the noisier"
+                  },
+                  {
+                    "name": "mask",
+                    "value": "mask",
+                    "description": "Whether each face is wearing a mask. Mask type returns 'noMask', 'faceMask', 'otherMaskOrOcclusion', or 'uncertain'. Value returns a boolean 'noseAndMouthCovered' indicating whether nose and mouth are covered."
+                  },
+                  {
+                    "name": "qualityForRecognition",
+                    "value": "qualityForRecognition",
+                    "description": "The overall image quality regarding whether the image being used in the detection is of sufficient quality to attempt face recognition on. The value is an informal rating of low, medium, or high. Only 'high' quality images are recommended for person enrollment and quality at or above 'medium' is recommended for identification scenarios. The attribute is only available when using any combinations of detection models detection_01 or detection_03, and recognition models recognition_03 or recognition_04."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv"
           },
           {
-            "$ref": "#/parameters/FaceDetectionOptions.recognitionModel"
+            "name": "recognitionModel",
+            "in": "query",
+            "description": "The 'recognitionModel' associated with the detected faceIds. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02', 'recognition_03' or 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.",
+            "required": false,
+            "type": "string",
+            "default": "recognition_01",
+            "enum": [
+              "recognition_01",
+              "recognition_02",
+              "recognition_03",
+              "recognition_04"
+            ],
+            "x-ms-enum": {
+              "name": "RecognitionModel",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "recognition_01",
+                  "value": "recognition_01",
+                  "description": "The default recognition model for Face - Detect. All those faceIds created before 2019 March are bonded with this recognition model."
+                },
+                {
+                  "name": "recognition_02",
+                  "value": "recognition_02",
+                  "description": "Recognition model released in 2019 March."
+                },
+                {
+                  "name": "recognition_03",
+                  "value": "recognition_03",
+                  "description": "Recognition model released in 2020 May."
+                },
+                {
+                  "name": "recognition_04",
+                  "value": "recognition_04",
+                  "description": "Recognition model released in 2021 February. It's recommended to use this recognition model for better recognition accuracy."
+                }
+              ]
+            }
           },
           {
-            "$ref": "#/parameters/FaceDetectionOptions.returnRecognitionModel"
+            "name": "returnRecognitionModel",
+            "in": "query",
+            "description": "Return 'recognitionModel' or not. The default value is false.",
+            "required": false,
+            "type": "boolean",
+            "default": false
           },
           {
-            "$ref": "#/parameters/FaceDetectionOptions.detectionModel"
+            "name": "detectionModel",
+            "in": "query",
+            "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
+            "required": false,
+            "type": "string",
+            "default": "detection_01",
+            "enum": [
+              "detection_01",
+              "detection_02",
+              "detection_03"
+            ],
+            "x-ms-enum": {
+              "name": "DetectionModel",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "detection_01",
+                  "value": "detection_01",
+                  "description": "The default detection model for Face - Detect. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected."
+                },
+                {
+                  "name": "detection_02",
+                  "value": "detection_02",
+                  "description": "Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces."
+                },
+                {
+                  "name": "detection_03",
+                  "value": "detection_03",
+                  "description": "Detection model released in 2021 February with improved accuracy especially on small faces."
+                }
+              ]
+            }
           },
           {
-            "$ref": "#/parameters/FaceDetectionOptions.faceIdTimeToLive"
+            "name": "faceIdTimeToLive",
+            "in": "query",
+            "description": "The number of seconds for the face ID being cached. Supported range from 60 seconds up to 86400 seconds. The default value is 86400 (24 hours).",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 86400,
+            "minimum": 60,
+            "maximum": 86400
           },
           {
             "name": "imageContent",
@@ -146,10 +307,22 @@
             "$ref": "#/parameters/ApiVersionPathParameter"
           },
           {
-            "$ref": "#/parameters/ListRequestOptions.start"
+            "name": "start",
+            "in": "query",
+            "description": "List resources greater than the \"start\". It contains no more than 64 characters. Default is empty.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/ListRequestOptions.top"
+            "name": "top",
+            "in": "query",
+            "description": "The number of items to list, ranging in [1, 1000]. Default is 1000.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000,
+            "minimum": 1,
+            "maximum": 1000
           }
         ],
         "responses": {
@@ -323,10 +496,22 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ListRequestOptions.start"
+            "name": "start",
+            "in": "query",
+            "description": "List resources greater than the \"start\". It contains no more than 64 characters. Default is empty.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/ListRequestOptions.top"
+            "name": "top",
+            "in": "query",
+            "description": "The number of items to list, ranging in [1, 1000]. Default is 1000.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000,
+            "minimum": 1,
+            "maximum": 1000
           }
         ],
         "responses": {
@@ -369,10 +554,22 @@
             "$ref": "#/parameters/ApiVersionPathParameter"
           },
           {
-            "$ref": "#/parameters/ListRequestOptions.start"
+            "name": "start",
+            "in": "query",
+            "description": "List resources greater than the \"start\". It contains no more than 64 characters. Default is empty.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/ListRequestOptions.top"
+            "name": "top",
+            "in": "query",
+            "description": "The number of items to list, ranging in [1, 1000]. Default is 1000.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000,
+            "minimum": 1,
+            "maximum": 1000
           }
         ],
         "responses": {
@@ -547,10 +744,22 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ListRequestOptions.start"
+            "name": "start",
+            "in": "query",
+            "description": "List resources greater than the \"start\". It contains no more than 64 characters. Default is empty.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/ListRequestOptions.top"
+            "name": "top",
+            "in": "query",
+            "description": "The number of items to list, ranging in [1, 1000]. Default is 1000.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000,
+            "minimum": 1,
+            "maximum": 1000
           }
         ],
         "responses": {
@@ -593,10 +802,22 @@
             "$ref": "#/parameters/ApiVersionPathParameter"
           },
           {
-            "$ref": "#/parameters/ListRequestOptions.start"
+            "name": "start",
+            "in": "query",
+            "description": "List resources greater than the \"start\". It contains no more than 64 characters. Default is empty.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/ListRequestOptions.top"
+            "name": "top",
+            "in": "query",
+            "description": "The number of items to list, ranging in [1, 1000]. Default is 1000.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000,
+            "minimum": 1,
+            "maximum": 1000
           }
         ],
         "responses": {
@@ -644,7 +865,10 @@
             "in": "path",
             "description": "ID of the dynamic person group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -686,15 +910,40 @@
             "in": "path",
             "description": "ID of the dynamic person group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
-            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateDynamicPersonGroupContent"
+              "type": "object",
+              "properties": {
+                "addPersonIds": {
+                  "type": "array",
+                  "description": "Array of personIds created by PersonDirectory Person - Create to add.",
+                  "items": {
+                    "$ref": "#/definitions/uuid"
+                  }
+                },
+                "name": {
+                  "type": "string",
+                  "description": "User defined name, maximum length is 128.",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "userData": {
+                  "type": "string",
+                  "description": "Optional user defined data. Length should not exceed 16K.",
+                  "maxLength": 16384
+                }
+              },
+              "required": [
+                "name"
+              ]
             }
           }
         ],
@@ -744,15 +993,44 @@
             "in": "path",
             "description": "ID of the dynamic person group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
-            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateDynamicPersonGroupContent"
+              "type": "object",
+              "properties": {
+                "addPersonIds": {
+                  "type": "array",
+                  "description": "Array of personIds created by PersonDirectory Person - Create to add.",
+                  "items": {
+                    "$ref": "#/definitions/uuid"
+                  }
+                },
+                "removePersonIds": {
+                  "type": "array",
+                  "description": "Array of personIds created by PersonDirectory Person - Create to remove.",
+                  "items": {
+                    "$ref": "#/definitions/uuid"
+                  }
+                },
+                "name": {
+                  "type": "string",
+                  "description": "User defined name, maximum length is 128.",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "userData": {
+                  "type": "string",
+                  "description": "Optional user defined data. Length should not exceed 16K.",
+                  "maxLength": 16384
+                }
+              }
             }
           }
         ],
@@ -802,7 +1080,10 @@
             "in": "path",
             "description": "ID of the dynamic person group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -851,13 +1132,28 @@
             "in": "path",
             "description": "ID of the dynamic person group.",
             "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "List resources greater than the \"start\". It contains no more than 64 characters. Default is empty.",
+            "required": false,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ListRequestOptions.start"
-          },
-          {
-            "$ref": "#/parameters/ListRequestOptions.top"
+            "name": "top",
+            "in": "query",
+            "description": "The number of items to list, ranging in [1, 1000]. Default is 1000.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000,
+            "minimum": 1,
+            "maximum": 1000
           }
         ],
         "responses": {
@@ -896,7 +1192,12 @@
             "$ref": "#/parameters/ApiVersionPathParameter"
           },
           {
-            "$ref": "#/parameters/ReturnRecognitionModelOptions"
+            "name": "returnRecognitionModel",
+            "in": "query",
+            "description": "Return 'recognitionModel' or not. The default value is false.",
+            "required": false,
+            "type": "boolean",
+            "default": false
           }
         ],
         "responses": {
@@ -943,10 +1244,18 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
-            "$ref": "#/parameters/ReturnRecognitionModelOptions"
+            "name": "returnRecognitionModel",
+            "in": "query",
+            "description": "Return 'recognitionModel' or not. The default value is false.",
+            "required": false,
+            "type": "boolean",
+            "default": false
           }
         ],
         "responses": {
@@ -988,15 +1297,70 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
-            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FaceList"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "User defined name, maximum length is 128.",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "userData": {
+                  "type": "string",
+                  "description": "Optional user defined data. Length should not exceed 16K.",
+                  "maxLength": 16384
+                },
+                "recognitionModel": {
+                  "type": "string",
+                  "description": "The 'recognitionModel' associated with this face list. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02, 'recognition_03', and 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.",
+                  "default": "recognition_01",
+                  "enum": [
+                    "recognition_01",
+                    "recognition_02",
+                    "recognition_03",
+                    "recognition_04"
+                  ],
+                  "x-ms-enum": {
+                    "name": "RecognitionModel",
+                    "modelAsString": true,
+                    "values": [
+                      {
+                        "name": "recognition_01",
+                        "value": "recognition_01",
+                        "description": "The default recognition model for Face - Detect. All those faceIds created before 2019 March are bonded with this recognition model."
+                      },
+                      {
+                        "name": "recognition_02",
+                        "value": "recognition_02",
+                        "description": "Recognition model released in 2019 March."
+                      },
+                      {
+                        "name": "recognition_03",
+                        "value": "recognition_03",
+                        "description": "Recognition model released in 2020 May."
+                      },
+                      {
+                        "name": "recognition_04",
+                        "value": "recognition_04",
+                        "description": "Recognition model released in 2021 February. It's recommended to use this recognition model for better recognition accuracy."
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "name"
+              ]
             }
           }
         ],
@@ -1035,14 +1399,30 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UserDefinedFieldsUpdate"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "User defined name, maximum length is 128.",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "userData": {
+                  "type": "string",
+                  "description": "Optional user defined data. Length should not exceed 16K.",
+                  "maxLength": 16384
+                }
+              }
             }
           }
         ],
@@ -1081,7 +1461,10 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -1125,16 +1508,66 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.targetFace"
+            "name": "targetFace",
+            "in": "query",
+            "description": "A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "collectionFormat": "csv",
+            "minItems": 4,
+            "maxItems": 4
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.detectionModel"
+            "name": "detectionModel",
+            "in": "query",
+            "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
+            "required": false,
+            "type": "string",
+            "default": "detection_01",
+            "enum": [
+              "detection_01",
+              "detection_02",
+              "detection_03"
+            ],
+            "x-ms-enum": {
+              "name": "DetectionModel",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "detection_01",
+                  "value": "detection_01",
+                  "description": "The default detection model for Face - Detect. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected."
+                },
+                {
+                  "name": "detection_02",
+                  "value": "detection_02",
+                  "description": "Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces."
+                },
+                {
+                  "name": "detection_03",
+                  "value": "detection_03",
+                  "description": "Detection model released in 2021 February with improved accuracy especially on small faces."
+                }
+              ]
+            }
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.userData"
+            "name": "userData",
+            "in": "query",
+            "description": "User-provided data attached to the face. The size limit is 1K.",
+            "required": false,
+            "type": "string",
+            "maxLength": 1024
           },
           {
             "name": "imageContent",
@@ -1188,14 +1621,20 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "persistedFaceId",
             "in": "path",
             "description": "Face ID of the face.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -1239,7 +1678,7 @@
               "type": "object",
               "properties": {
                 "faceId": {
-                  "type": "string",
+                  "$ref": "#/definitions/uuid",
                   "description": "faceId of the query face. User needs to call Face - Detect first to get a valid faceId. Note that this faceId is not persisted and will expire 24 hours after the detection call."
                 },
                 "maxNumOfCandidatesReturned": {
@@ -1255,7 +1694,7 @@
                   "type": "array",
                   "description": "An array of candidate faceIds. All of them are created by Face - Detect and the faceIds will expire 24 hours after the detection call. The number of faceIds is limited to 1000.",
                   "items": {
-                    "type": "string"
+                    "$ref": "#/definitions/uuid"
                   }
                 }
               },
@@ -1272,7 +1711,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/FaceFindSimilarResult"
+                "$ref": "#/definitions/FindSimilarResult"
               },
               "x-ms-identifiers": []
             }
@@ -1317,7 +1756,7 @@
                   "type": "array",
                   "description": "Array of candidate faceId created by Face - Detect. The maximum is 1000 faces.",
                   "items": {
-                    "type": "string"
+                    "$ref": "#/definitions/uuid"
                   }
                 }
               },
@@ -1331,7 +1770,7 @@
           "200": {
             "description": "A successful call returns one or more groups of similar faces (rank by group size) and a messyGroup.",
             "schema": {
-              "$ref": "#/definitions/FaceGroupingResult"
+              "$ref": "#/definitions/GroupingResult"
             }
           },
           "default": {
@@ -1376,12 +1815,12 @@
                   "minItems": 1,
                   "maxItems": 10,
                   "items": {
-                    "type": "string"
+                    "$ref": "#/definitions/uuid"
                   }
                 },
                 "personGroupId": {
                   "type": "string",
-                  "description": "\tpersonGroupId of the target person group, created by PersonGroup - Create. Parameter personGroupId and largePersonGroupId should not be provided at the same time."
+                  "description": "personGroupId of the target person group, created by PersonGroup - Create. Parameter personGroupId and largePersonGroupId should not be provided at the same time."
                 },
                 "maxNumOfCandidatesReturned": {
                   "type": "integer",
@@ -1411,7 +1850,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/FaceIdentificationResult"
+                "$ref": "#/definitions/IdentificationResult"
               },
               "x-ms-identifiers": []
             }
@@ -1446,13 +1885,30 @@
             "$ref": "#/parameters/ApiVersionPathParameter"
           },
           {
-            "$ref": "#/parameters/ListRequestOptions.start"
+            "name": "start",
+            "in": "query",
+            "description": "List resources greater than the \"start\". It contains no more than 64 characters. Default is empty.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/ListRequestOptions.top"
+            "name": "top",
+            "in": "query",
+            "description": "The number of items to list, ranging in [1, 1000]. Default is 1000.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000,
+            "minimum": 1,
+            "maximum": 1000
           },
           {
-            "$ref": "#/parameters/ReturnRecognitionModelOptions"
+            "name": "returnRecognitionModel",
+            "in": "query",
+            "description": "Return 'recognitionModel' or not. The default value is false.",
+            "required": false,
+            "type": "boolean",
+            "default": false
           }
         ],
         "responses": {
@@ -1499,10 +1955,18 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
-            "$ref": "#/parameters/ReturnRecognitionModelOptions"
+            "name": "returnRecognitionModel",
+            "in": "query",
+            "description": "Return 'recognitionModel' or not. The default value is false.",
+            "required": false,
+            "type": "boolean",
+            "default": false
           }
         ],
         "responses": {
@@ -1544,15 +2008,70 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
-            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LargeFaceList"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "User defined name, maximum length is 128.",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "userData": {
+                  "type": "string",
+                  "description": "Optional user defined data. Length should not exceed 16K.",
+                  "maxLength": 16384
+                },
+                "recognitionModel": {
+                  "type": "string",
+                  "description": "The 'recognitionModel' associated with this face list. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02, 'recognition_03', and 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.",
+                  "default": "recognition_01",
+                  "enum": [
+                    "recognition_01",
+                    "recognition_02",
+                    "recognition_03",
+                    "recognition_04"
+                  ],
+                  "x-ms-enum": {
+                    "name": "RecognitionModel",
+                    "modelAsString": true,
+                    "values": [
+                      {
+                        "name": "recognition_01",
+                        "value": "recognition_01",
+                        "description": "The default recognition model for Face - Detect. All those faceIds created before 2019 March are bonded with this recognition model."
+                      },
+                      {
+                        "name": "recognition_02",
+                        "value": "recognition_02",
+                        "description": "Recognition model released in 2019 March."
+                      },
+                      {
+                        "name": "recognition_03",
+                        "value": "recognition_03",
+                        "description": "Recognition model released in 2020 May."
+                      },
+                      {
+                        "name": "recognition_04",
+                        "value": "recognition_04",
+                        "description": "Recognition model released in 2021 February. It's recommended to use this recognition model for better recognition accuracy."
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "name"
+              ]
             }
           }
         ],
@@ -1591,14 +2110,30 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UserDefinedFieldsUpdate"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "User defined name, maximum length is 128.",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "userData": {
+                  "type": "string",
+                  "description": "Optional user defined data. Length should not exceed 16K.",
+                  "maxLength": 16384
+                }
+              }
             }
           }
         ],
@@ -1638,7 +2173,10 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -1679,13 +2217,28 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "List resources greater than the \"start\". It contains no more than 64 characters. Default is empty.",
+            "required": false,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ListRequestOptions.start"
-          },
-          {
-            "$ref": "#/parameters/ListRequestOptions.top"
+            "name": "top",
+            "in": "query",
+            "description": "The number of items to list, ranging in [1, 1000]. Default is 1000.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000,
+            "minimum": 1,
+            "maximum": 1000
           }
         ],
         "responses": {
@@ -1734,16 +2287,66 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.targetFace"
+            "name": "targetFace",
+            "in": "query",
+            "description": "A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "collectionFormat": "csv",
+            "minItems": 4,
+            "maxItems": 4
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.detectionModel"
+            "name": "detectionModel",
+            "in": "query",
+            "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
+            "required": false,
+            "type": "string",
+            "default": "detection_01",
+            "enum": [
+              "detection_01",
+              "detection_02",
+              "detection_03"
+            ],
+            "x-ms-enum": {
+              "name": "DetectionModel",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "detection_01",
+                  "value": "detection_01",
+                  "description": "The default detection model for Face - Detect. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected."
+                },
+                {
+                  "name": "detection_02",
+                  "value": "detection_02",
+                  "description": "Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces."
+                },
+                {
+                  "name": "detection_03",
+                  "value": "detection_03",
+                  "description": "Detection model released in 2021 February with improved accuracy especially on small faces."
+                }
+              ]
+            }
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.userData"
+            "name": "userData",
+            "in": "query",
+            "description": "User-provided data attached to the face. The size limit is 1K.",
+            "required": false,
+            "type": "string",
+            "maxLength": 1024
           },
           {
             "name": "imageContent",
@@ -1796,14 +2399,20 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "persistedFaceId",
             "in": "path",
             "description": "Face ID of the face.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -1844,22 +2453,34 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "persistedFaceId",
             "in": "path",
             "description": "Face ID of the face.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
-            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LargeFaceListFaceUpdate"
+              "type": "object",
+              "properties": {
+                "userData": {
+                  "type": "string",
+                  "description": "User-provided data attached to the face. The length limit is 1K.",
+                  "maxLength": 1024
+                }
+              }
             }
           }
         ],
@@ -1898,14 +2519,20 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "persistedFaceId",
             "in": "path",
             "description": "Face ID of the face.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -1946,12 +2573,22 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
           "202": {
-            "description": "A successful call returns an empty response body."
+            "description": "A successful call returns an empty response body.",
+            "headers": {
+              "operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of TrainingStatus"
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1987,14 +2624,17 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CollectionTrainingStatus"
+              "$ref": "#/definitions/TrainingStatus"
             }
           },
           "default": {
@@ -2027,13 +2667,30 @@
             "$ref": "#/parameters/ApiVersionPathParameter"
           },
           {
-            "$ref": "#/parameters/ListRequestOptions.start"
+            "name": "start",
+            "in": "query",
+            "description": "List resources greater than the \"start\". It contains no more than 64 characters. Default is empty.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/ListRequestOptions.top"
+            "name": "top",
+            "in": "query",
+            "description": "The number of items to list, ranging in [1, 1000]. Default is 1000.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000,
+            "minimum": 1,
+            "maximum": 1000
           },
           {
-            "$ref": "#/parameters/ReturnRecognitionModelOptions"
+            "name": "returnRecognitionModel",
+            "in": "query",
+            "description": "Return 'recognitionModel' or not. The default value is false.",
+            "required": false,
+            "type": "boolean",
+            "default": false
           }
         ],
         "responses": {
@@ -2080,10 +2737,18 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
-            "$ref": "#/parameters/ReturnRecognitionModelOptions"
+            "name": "returnRecognitionModel",
+            "in": "query",
+            "description": "Return 'recognitionModel' or not. The default value is false.",
+            "required": false,
+            "type": "boolean",
+            "default": false
           }
         ],
         "responses": {
@@ -2125,15 +2790,70 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
-            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LargePersonGroup"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "User defined name, maximum length is 128.",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "userData": {
+                  "type": "string",
+                  "description": "Optional user defined data. Length should not exceed 16K.",
+                  "maxLength": 16384
+                },
+                "recognitionModel": {
+                  "type": "string",
+                  "description": "The 'recognitionModel' associated with this face list. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02, 'recognition_03', and 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.",
+                  "default": "recognition_01",
+                  "enum": [
+                    "recognition_01",
+                    "recognition_02",
+                    "recognition_03",
+                    "recognition_04"
+                  ],
+                  "x-ms-enum": {
+                    "name": "RecognitionModel",
+                    "modelAsString": true,
+                    "values": [
+                      {
+                        "name": "recognition_01",
+                        "value": "recognition_01",
+                        "description": "The default recognition model for Face - Detect. All those faceIds created before 2019 March are bonded with this recognition model."
+                      },
+                      {
+                        "name": "recognition_02",
+                        "value": "recognition_02",
+                        "description": "Recognition model released in 2019 March."
+                      },
+                      {
+                        "name": "recognition_03",
+                        "value": "recognition_03",
+                        "description": "Recognition model released in 2020 May."
+                      },
+                      {
+                        "name": "recognition_04",
+                        "value": "recognition_04",
+                        "description": "Recognition model released in 2021 February. It's recommended to use this recognition model for better recognition accuracy."
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "name"
+              ]
             }
           }
         ],
@@ -2172,14 +2892,30 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UserDefinedFieldsUpdate"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "User defined name, maximum length is 128.",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "userData": {
+                  "type": "string",
+                  "description": "Optional user defined data. Length should not exceed 16K.",
+                  "maxLength": 16384
+                }
+              }
             }
           }
         ],
@@ -2218,7 +2954,10 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -2259,13 +2998,28 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "List resources greater than the \"start\". It contains no more than 64 characters. Default is empty.",
+            "required": false,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ListRequestOptions.start"
-          },
-          {
-            "$ref": "#/parameters/ListRequestOptions.top"
+            "name": "top",
+            "in": "query",
+            "description": "The number of items to list, ranging in [1, 1000]. Default is 1000.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000,
+            "minimum": 1,
+            "maximum": 1000
           }
         ],
         "responses": {
@@ -2311,14 +3065,33 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UserDefinedFields"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "User defined name, maximum length is 128.",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "userData": {
+                  "type": "string",
+                  "description": "Optional user defined data. Length should not exceed 16K.",
+                  "maxLength": 16384
+                }
+              },
+              "required": [
+                "name"
+              ]
             }
           }
         ],
@@ -2362,14 +3135,20 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -2410,21 +3189,40 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UserDefinedFieldsUpdate"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "User defined name, maximum length is 128.",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "userData": {
+                  "type": "string",
+                  "description": "Optional user defined data. Length should not exceed 16K.",
+                  "maxLength": 16384
+                }
+              }
             }
           }
         ],
@@ -2463,14 +3261,20 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -2514,23 +3318,76 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.targetFace"
+            "name": "targetFace",
+            "in": "query",
+            "description": "A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "collectionFormat": "csv",
+            "minItems": 4,
+            "maxItems": 4
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.detectionModel"
+            "name": "detectionModel",
+            "in": "query",
+            "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
+            "required": false,
+            "type": "string",
+            "default": "detection_01",
+            "enum": [
+              "detection_01",
+              "detection_02",
+              "detection_03"
+            ],
+            "x-ms-enum": {
+              "name": "DetectionModel",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "detection_01",
+                  "value": "detection_01",
+                  "description": "The default detection model for Face - Detect. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected."
+                },
+                {
+                  "name": "detection_02",
+                  "value": "detection_02",
+                  "description": "Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces."
+                },
+                {
+                  "name": "detection_03",
+                  "value": "detection_03",
+                  "description": "Detection model released in 2021 February with improved accuracy especially on small faces."
+                }
+              ]
+            }
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.userData"
+            "name": "userData",
+            "in": "query",
+            "description": "User-provided data attached to the face. The size limit is 1K.",
+            "required": false,
+            "type": "string",
+            "maxLength": 1024
           },
           {
             "name": "imageContent",
@@ -2583,21 +3440,30 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "persistedFaceId",
             "in": "path",
             "description": "Face ID of the face.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -2638,29 +3504,44 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "persistedFaceId",
             "in": "path",
             "description": "Face ID of the face.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
-            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LargePersonGroupPersonFaceUpdate"
+              "type": "object",
+              "properties": {
+                "userData": {
+                  "type": "string",
+                  "description": "User-provided data attached to the face. The length limit is 1K.",
+                  "maxLength": 1024
+                }
+              }
             }
           }
         ],
@@ -2700,21 +3581,30 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "persistedFaceId",
             "in": "path",
             "description": "Face ID of the face.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -2755,12 +3645,22 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed."
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of TrainingStatus"
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2797,14 +3697,17 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CollectionTrainingStatus"
+              "$ref": "#/definitions/TrainingStatus"
             }
           },
           "default": {
@@ -2840,7 +3743,10 @@
             "in": "path",
             "description": "Operation ID of the operation.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -2880,13 +3786,30 @@
             "$ref": "#/parameters/ApiVersionPathParameter"
           },
           {
-            "$ref": "#/parameters/ListRequestOptions.start"
+            "name": "start",
+            "in": "query",
+            "description": "List resources greater than the \"start\". It contains no more than 64 characters. Default is empty.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/ListRequestOptions.top"
+            "name": "top",
+            "in": "query",
+            "description": "The number of items to list, ranging in [1, 1000]. Default is 1000.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000,
+            "minimum": 1,
+            "maximum": 1000
           },
           {
-            "$ref": "#/parameters/ReturnRecognitionModelOptions"
+            "name": "returnRecognitionModel",
+            "in": "query",
+            "description": "Return 'recognitionModel' or not. The default value is false.",
+            "required": false,
+            "type": "boolean",
+            "default": false
           }
         ],
         "responses": {
@@ -2933,10 +3856,18 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
-            "$ref": "#/parameters/ReturnRecognitionModelOptions"
+            "name": "returnRecognitionModel",
+            "in": "query",
+            "description": "Return 'recognitionModel' or not. The default value is false.",
+            "required": false,
+            "type": "boolean",
+            "default": false
           }
         ],
         "responses": {
@@ -2978,15 +3909,70 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
-            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PersonGroup"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "User defined name, maximum length is 128.",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "userData": {
+                  "type": "string",
+                  "description": "Optional user defined data. Length should not exceed 16K.",
+                  "maxLength": 16384
+                },
+                "recognitionModel": {
+                  "type": "string",
+                  "description": "The 'recognitionModel' associated with this face list. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02, 'recognition_03', and 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.",
+                  "default": "recognition_01",
+                  "enum": [
+                    "recognition_01",
+                    "recognition_02",
+                    "recognition_03",
+                    "recognition_04"
+                  ],
+                  "x-ms-enum": {
+                    "name": "RecognitionModel",
+                    "modelAsString": true,
+                    "values": [
+                      {
+                        "name": "recognition_01",
+                        "value": "recognition_01",
+                        "description": "The default recognition model for Face - Detect. All those faceIds created before 2019 March are bonded with this recognition model."
+                      },
+                      {
+                        "name": "recognition_02",
+                        "value": "recognition_02",
+                        "description": "Recognition model released in 2019 March."
+                      },
+                      {
+                        "name": "recognition_03",
+                        "value": "recognition_03",
+                        "description": "Recognition model released in 2020 May."
+                      },
+                      {
+                        "name": "recognition_04",
+                        "value": "recognition_04",
+                        "description": "Recognition model released in 2021 February. It's recommended to use this recognition model for better recognition accuracy."
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "name"
+              ]
             }
           }
         ],
@@ -3025,14 +4011,30 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UserDefinedFieldsUpdate"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "User defined name, maximum length is 128.",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "userData": {
+                  "type": "string",
+                  "description": "Optional user defined data. Length should not exceed 16K.",
+                  "maxLength": 16384
+                }
+              }
             }
           }
         ],
@@ -3071,7 +4073,10 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -3112,13 +4117,28 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "List resources greater than the \"start\". It contains no more than 64 characters. Default is empty.",
+            "required": false,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ListRequestOptions.start"
-          },
-          {
-            "$ref": "#/parameters/ListRequestOptions.top"
+            "name": "top",
+            "in": "query",
+            "description": "The number of items to list, ranging in [1, 1000]. Default is 1000.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000,
+            "minimum": 1,
+            "maximum": 1000
           }
         ],
         "responses": {
@@ -3164,14 +4184,33 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UserDefinedFields"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "User defined name, maximum length is 128.",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "userData": {
+                  "type": "string",
+                  "description": "Optional user defined data. Length should not exceed 16K.",
+                  "maxLength": 16384
+                }
+              },
+              "required": [
+                "name"
+              ]
             }
           }
         ],
@@ -3215,14 +4254,20 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -3263,21 +4308,40 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UserDefinedFieldsUpdate"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "User defined name, maximum length is 128.",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "userData": {
+                  "type": "string",
+                  "description": "Optional user defined data. Length should not exceed 16K.",
+                  "maxLength": 16384
+                }
+              }
             }
           }
         ],
@@ -3316,14 +4380,20 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -3367,23 +4437,76 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.targetFace"
+            "name": "targetFace",
+            "in": "query",
+            "description": "A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "collectionFormat": "csv",
+            "minItems": 4,
+            "maxItems": 4
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.detectionModel"
+            "name": "detectionModel",
+            "in": "query",
+            "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
+            "required": false,
+            "type": "string",
+            "default": "detection_01",
+            "enum": [
+              "detection_01",
+              "detection_02",
+              "detection_03"
+            ],
+            "x-ms-enum": {
+              "name": "DetectionModel",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "detection_01",
+                  "value": "detection_01",
+                  "description": "The default detection model for Face - Detect. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected."
+                },
+                {
+                  "name": "detection_02",
+                  "value": "detection_02",
+                  "description": "Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces."
+                },
+                {
+                  "name": "detection_03",
+                  "value": "detection_03",
+                  "description": "Detection model released in 2021 February with improved accuracy especially on small faces."
+                }
+              ]
+            }
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.userData"
+            "name": "userData",
+            "in": "query",
+            "description": "User-provided data attached to the face. The size limit is 1K.",
+            "required": false,
+            "type": "string",
+            "maxLength": 1024
           },
           {
             "name": "imageContent",
@@ -3436,21 +4559,30 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "persistedFaceId",
             "in": "path",
             "description": "Face ID of the face.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -3491,29 +4623,44 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "persistedFaceId",
             "in": "path",
             "description": "Face ID of the face.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
-            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PersonGroupPersonFaceUpdate"
+              "type": "object",
+              "properties": {
+                "userData": {
+                  "type": "string",
+                  "description": "User-provided data attached to the face. The length limit is 1K.",
+                  "maxLength": 1024
+                }
+              }
             }
           }
         ],
@@ -3553,21 +4700,30 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "persistedFaceId",
             "in": "path",
             "description": "Face ID of the face.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -3608,12 +4764,22 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed."
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of TrainingStatus"
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -3649,14 +4815,17 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CollectionTrainingStatus"
+              "$ref": "#/definitions/TrainingStatus"
             }
           },
           "default": {
@@ -3689,10 +4858,22 @@
             "$ref": "#/parameters/ApiVersionPathParameter"
           },
           {
-            "$ref": "#/parameters/ListRequestOptions.start"
+            "name": "start",
+            "in": "query",
+            "description": "List resources greater than the \"start\". It contains no more than 64 characters. Default is empty.",
+            "required": false,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/ListRequestOptions.top"
+            "name": "top",
+            "in": "query",
+            "description": "The number of items to list, ranging in [1, 1000]. Default is 1000.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000,
+            "minimum": 1,
+            "maximum": 1000
           }
         ],
         "responses": {
@@ -3733,12 +4914,27 @@
             "$ref": "#/parameters/ApiVersionPathParameter"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
-            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PersonDirectoryPerson"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "User defined name, maximum length is 128.",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "userData": {
+                  "type": "string",
+                  "description": "Optional user defined data. Length should not exceed 16K.",
+                  "maxLength": 16384
+                }
+              },
+              "required": [
+                "name"
+              ]
             }
           }
         ],
@@ -3749,15 +4945,15 @@
               "$ref": "#/definitions/CreatePersonResult"
             },
             "headers": {
-              "operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location of an instance of FaceOperationStatus"
-              },
               "Location": {
                 "type": "string",
                 "format": "uri",
                 "description": "The location of an instance of PersonDirectoryPerson"
+              },
+              "operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of FaceOperationStatus"
               }
             }
           },
@@ -3794,7 +4990,10 @@
             "in": "path",
             "description": "Person ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -3835,14 +5034,30 @@
             "in": "path",
             "description": "Person ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "body",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UserDefinedFieldsUpdate"
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "User defined name, maximum length is 128.",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "userData": {
+                  "type": "string",
+                  "description": "Optional user defined data. Length should not exceed 16K.",
+                  "maxLength": 16384
+                }
+              }
             }
           }
         ],
@@ -3881,7 +5096,10 @@
             "in": "path",
             "description": "Person ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -3930,13 +5148,28 @@
             "in": "path",
             "description": "Person ID of the person.",
             "required": true,
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "List resources greater than the \"start\". It contains no more than 64 characters. Default is empty.",
+            "required": false,
             "type": "string"
           },
           {
-            "$ref": "#/parameters/ListRequestOptions.start"
-          },
-          {
-            "$ref": "#/parameters/ListRequestOptions.top"
+            "name": "top",
+            "in": "query",
+            "description": "The number of items to list, ranging in [1, 1000]. Default is 1000.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1000,
+            "minimum": 1,
+            "maximum": 1000
           }
         ],
         "responses": {
@@ -3979,7 +5212,10 @@
             "in": "path",
             "description": "Person ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "recognitionModel",
@@ -4063,7 +5299,10 @@
             "in": "path",
             "description": "Person ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "recognitionModel",
@@ -4105,13 +5344,60 @@
             }
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.targetFace"
+            "name": "targetFace",
+            "in": "query",
+            "description": "A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "collectionFormat": "csv",
+            "minItems": 4,
+            "maxItems": 4
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.detectionModel"
+            "name": "detectionModel",
+            "in": "query",
+            "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
+            "required": false,
+            "type": "string",
+            "default": "detection_01",
+            "enum": [
+              "detection_01",
+              "detection_02",
+              "detection_03"
+            ],
+            "x-ms-enum": {
+              "name": "DetectionModel",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "detection_01",
+                  "value": "detection_01",
+                  "description": "The default detection model for Face - Detect. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected."
+                },
+                {
+                  "name": "detection_02",
+                  "value": "detection_02",
+                  "description": "Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces."
+                },
+                {
+                  "name": "detection_03",
+                  "value": "detection_03",
+                  "description": "Detection model released in 2021 February with improved accuracy especially on small faces."
+                }
+              ]
+            }
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.userData"
+            "name": "userData",
+            "in": "query",
+            "description": "User-provided data attached to the face. The size limit is 1K.",
+            "required": false,
+            "type": "string",
+            "maxLength": 1024
           },
           {
             "name": "imageContent",
@@ -4131,15 +5417,15 @@
               "$ref": "#/definitions/AddFaceResult"
             },
             "headers": {
-              "operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location of an instance of FaceOperationStatus"
-              },
               "Location": {
                 "type": "string",
                 "format": "uri",
                 "description": "The location of an instance of PersonDirectoryPerson"
+              },
+              "operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of FaceOperationStatus"
               }
             }
           },
@@ -4176,7 +5462,10 @@
             "in": "path",
             "description": "Person ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "recognitionModel",
@@ -4222,7 +5511,10 @@
             "in": "path",
             "description": "Face ID of the face.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -4263,7 +5555,10 @@
             "in": "path",
             "description": "Person ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "recognitionModel",
@@ -4309,15 +5604,24 @@
             "in": "path",
             "description": "Face ID of the face.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
-            "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PersonDirectoryFaceUpdate"
+              "type": "object",
+              "properties": {
+                "userData": {
+                  "type": "string",
+                  "description": "User-provided data attached to the face. The length limit is 1K.",
+                  "maxLength": 1024
+                }
+              }
             }
           }
         ],
@@ -4357,7 +5661,10 @@
             "in": "path",
             "description": "Person ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "recognitionModel",
@@ -4403,7 +5710,10 @@
             "in": "path",
             "description": "Face ID of the face.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -4455,11 +5765,11 @@
               "type": "object",
               "properties": {
                 "faceId1": {
-                  "type": "string",
+                  "$ref": "#/definitions/uuid",
                   "description": "faceId of one face, comes from Face - Detect."
                 },
                 "faceId2": {
-                  "type": "string",
+                  "$ref": "#/definitions/uuid",
                   "description": "faceId of another face, comes from Face - Detect."
                 }
               },
@@ -4474,7 +5784,7 @@
           "200": {
             "description": "A successful call returns the verification result.",
             "schema": {
-              "$ref": "#/definitions/FaceVerificationResult"
+              "$ref": "#/definitions/VerificationResult"
             }
           },
           "default": {
@@ -4509,25 +5819,186 @@
             "$ref": "#/parameters/ApiVersionPathParameter"
           },
           {
-            "$ref": "#/parameters/FaceDetectionOptions.returnFaceId"
+            "name": "returnFaceId",
+            "in": "query",
+            "description": "Return faceIds of the detected faces or not. The default value is true.",
+            "required": false,
+            "type": "boolean",
+            "default": true
           },
           {
-            "$ref": "#/parameters/FaceDetectionOptions.returnFaceLandmarks"
+            "name": "returnFaceLandmarks",
+            "in": "query",
+            "description": "Return face landmarks of the detected faces or not. The default value is false.",
+            "required": false,
+            "type": "boolean",
+            "default": false
           },
           {
-            "$ref": "#/parameters/FaceDetectionOptions.returnFaceAttributes"
+            "name": "returnFaceAttributes",
+            "in": "query",
+            "description": "Analyze and return the one or more specified face attributes in the comma-separated string like 'returnFaceAttributes=headPose,glasses'. Face attribute analysis has additional computational and time cost.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "headPose",
+                "glasses",
+                "occlusion",
+                "accessories",
+                "blur",
+                "exposure",
+                "noise",
+                "mask",
+                "qualityForRecognition"
+              ],
+              "x-ms-enum": {
+                "name": "FaceAttributeType",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "headPose",
+                    "value": "headPose",
+                    "description": "3-D roll/yaw/pitch angles for face direction."
+                  },
+                  {
+                    "name": "glasses",
+                    "value": "glasses",
+                    "description": "Glasses type. Values include 'NoGlasses', 'ReadingGlasses', 'Sunglasses', 'SwimmingGoggles'."
+                  },
+                  {
+                    "name": "occlusion",
+                    "value": "occlusion",
+                    "description": "Whether each facial area is occluded, including forehead, eyes and mouth."
+                  },
+                  {
+                    "name": "accessories",
+                    "value": "accessories",
+                    "description": "Accessories around face, including 'headwear', 'glasses' and 'mask'. Empty array means no accessories detected. Note this is after a face is detected. Large mask could result in no face to be detected."
+                  },
+                  {
+                    "name": "blur",
+                    "value": "blur",
+                    "description": "Face is blurry or not. Level returns 'Low', 'Medium' or 'High'. Value returns a number between [0,1], the larger the blurrier."
+                  },
+                  {
+                    "name": "exposure",
+                    "value": "exposure",
+                    "description": "Face exposure level. Level returns 'GoodExposure', 'OverExposure' or 'UnderExposure'."
+                  },
+                  {
+                    "name": "noise",
+                    "value": "noise",
+                    "description": "Noise level of face pixels. Level returns 'Low', 'Medium' and 'High'. Value returns a number between [0,1], the larger the noisier"
+                  },
+                  {
+                    "name": "mask",
+                    "value": "mask",
+                    "description": "Whether each face is wearing a mask. Mask type returns 'noMask', 'faceMask', 'otherMaskOrOcclusion', or 'uncertain'. Value returns a boolean 'noseAndMouthCovered' indicating whether nose and mouth are covered."
+                  },
+                  {
+                    "name": "qualityForRecognition",
+                    "value": "qualityForRecognition",
+                    "description": "The overall image quality regarding whether the image being used in the detection is of sufficient quality to attempt face recognition on. The value is an informal rating of low, medium, or high. Only 'high' quality images are recommended for person enrollment and quality at or above 'medium' is recommended for identification scenarios. The attribute is only available when using any combinations of detection models detection_01 or detection_03, and recognition models recognition_03 or recognition_04."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv"
           },
           {
-            "$ref": "#/parameters/FaceDetectionOptions.recognitionModel"
+            "name": "recognitionModel",
+            "in": "query",
+            "description": "The 'recognitionModel' associated with the detected faceIds. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02', 'recognition_03' or 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.",
+            "required": false,
+            "type": "string",
+            "default": "recognition_01",
+            "enum": [
+              "recognition_01",
+              "recognition_02",
+              "recognition_03",
+              "recognition_04"
+            ],
+            "x-ms-enum": {
+              "name": "RecognitionModel",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "recognition_01",
+                  "value": "recognition_01",
+                  "description": "The default recognition model for Face - Detect. All those faceIds created before 2019 March are bonded with this recognition model."
+                },
+                {
+                  "name": "recognition_02",
+                  "value": "recognition_02",
+                  "description": "Recognition model released in 2019 March."
+                },
+                {
+                  "name": "recognition_03",
+                  "value": "recognition_03",
+                  "description": "Recognition model released in 2020 May."
+                },
+                {
+                  "name": "recognition_04",
+                  "value": "recognition_04",
+                  "description": "Recognition model released in 2021 February. It's recommended to use this recognition model for better recognition accuracy."
+                }
+              ]
+            }
           },
           {
-            "$ref": "#/parameters/FaceDetectionOptions.returnRecognitionModel"
+            "name": "returnRecognitionModel",
+            "in": "query",
+            "description": "Return 'recognitionModel' or not. The default value is false.",
+            "required": false,
+            "type": "boolean",
+            "default": false
           },
           {
-            "$ref": "#/parameters/FaceDetectionOptions.detectionModel"
+            "name": "detectionModel",
+            "in": "query",
+            "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
+            "required": false,
+            "type": "string",
+            "default": "detection_01",
+            "enum": [
+              "detection_01",
+              "detection_02",
+              "detection_03"
+            ],
+            "x-ms-enum": {
+              "name": "DetectionModel",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "detection_01",
+                  "value": "detection_01",
+                  "description": "The default detection model for Face - Detect. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected."
+                },
+                {
+                  "name": "detection_02",
+                  "value": "detection_02",
+                  "description": "Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces."
+                },
+                {
+                  "name": "detection_03",
+                  "value": "detection_03",
+                  "description": "Detection model released in 2021 February with improved accuracy especially on small faces."
+                }
+              ]
+            }
           },
           {
-            "$ref": "#/parameters/FaceDetectionOptions.faceIdTimeToLive"
+            "name": "faceIdTimeToLive",
+            "in": "query",
+            "description": "The number of seconds for the face ID being cached. Supported range from 60 seconds up to 86400 seconds. The default value is 86400 (24 hours).",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 86400,
+            "minimum": 60,
+            "maximum": 86400
           },
           {
             "name": "body",
@@ -4638,16 +6109,66 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.targetFace"
+            "name": "targetFace",
+            "in": "query",
+            "description": "A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "collectionFormat": "csv",
+            "minItems": 4,
+            "maxItems": 4
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.detectionModel"
+            "name": "detectionModel",
+            "in": "query",
+            "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
+            "required": false,
+            "type": "string",
+            "default": "detection_01",
+            "enum": [
+              "detection_01",
+              "detection_02",
+              "detection_03"
+            ],
+            "x-ms-enum": {
+              "name": "DetectionModel",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "detection_01",
+                  "value": "detection_01",
+                  "description": "The default detection model for Face - Detect. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected."
+                },
+                {
+                  "name": "detection_02",
+                  "value": "detection_02",
+                  "description": "Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces."
+                },
+                {
+                  "name": "detection_03",
+                  "value": "detection_03",
+                  "description": "Detection model released in 2021 February with improved accuracy especially on small faces."
+                }
+              ]
+            }
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.userData"
+            "name": "userData",
+            "in": "query",
+            "description": "User-provided data attached to the face. The size limit is 1K.",
+            "required": false,
+            "type": "string",
+            "maxLength": 1024
           },
           {
             "name": "body",
@@ -4712,7 +6233,7 @@
               "type": "object",
               "properties": {
                 "faceId": {
-                  "type": "string",
+                  "$ref": "#/definitions/uuid",
                   "description": "faceId of the query face. User needs to call Face - Detect first to get a valid faceId. Note that this faceId is not persisted and will expire 24 hours after the detection call."
                 },
                 "maxNumOfCandidatesReturned": {
@@ -4742,7 +6263,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/FaceFindSimilarResult"
+                "$ref": "#/definitions/FindSimilarResult"
               },
               "x-ms-identifiers": []
             }
@@ -4784,7 +6305,7 @@
               "type": "object",
               "properties": {
                 "faceId": {
-                  "type": "string",
+                  "$ref": "#/definitions/uuid",
                   "description": "faceId of the query face. User needs to call Face - Detect first to get a valid faceId. Note that this faceId is not persisted and will expire 24 hours after the detection call."
                 },
                 "maxNumOfCandidatesReturned": {
@@ -4814,7 +6335,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/FaceFindSimilarResult"
+                "$ref": "#/definitions/FindSimilarResult"
               },
               "x-ms-identifiers": []
             }
@@ -4861,7 +6382,7 @@
                   "minItems": 1,
                   "maxItems": 10,
                   "items": {
-                    "type": "string"
+                    "$ref": "#/definitions/uuid"
                   }
                 },
                 "dynamicPersonGroupId": {
@@ -4896,7 +6417,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/FaceIdentificationResult"
+                "$ref": "#/definitions/IdentificationResult"
               },
               "x-ms-identifiers": []
             }
@@ -4943,7 +6464,7 @@
                   "minItems": 1,
                   "maxItems": 10,
                   "items": {
-                    "type": "string"
+                    "$ref": "#/definitions/uuid"
                   }
                 },
                 "largePersonGroupId": {
@@ -4978,7 +6499,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/FaceIdentificationResult"
+                "$ref": "#/definitions/IdentificationResult"
               },
               "x-ms-identifiers": []
             }
@@ -5025,7 +6546,7 @@
                   "minItems": 1,
                   "maxItems": 10,
                   "items": {
-                    "type": "string"
+                    "$ref": "#/definitions/uuid"
                   }
                 },
                 "personIds": {
@@ -5034,7 +6555,7 @@
                   "minItems": 1,
                   "maxItems": 30,
                   "items": {
-                    "type": "string"
+                    "$ref": "#/definitions/uuid"
                   }
                 },
                 "maxNumOfCandidatesReturned": {
@@ -5065,7 +6586,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/FaceIdentificationResult"
+                "$ref": "#/definitions/IdentificationResult"
               },
               "x-ms-identifiers": []
             }
@@ -5104,16 +6625,66 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.targetFace"
+            "name": "targetFace",
+            "in": "query",
+            "description": "A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "collectionFormat": "csv",
+            "minItems": 4,
+            "maxItems": 4
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.detectionModel"
+            "name": "detectionModel",
+            "in": "query",
+            "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
+            "required": false,
+            "type": "string",
+            "default": "detection_01",
+            "enum": [
+              "detection_01",
+              "detection_02",
+              "detection_03"
+            ],
+            "x-ms-enum": {
+              "name": "DetectionModel",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "detection_01",
+                  "value": "detection_01",
+                  "description": "The default detection model for Face - Detect. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected."
+                },
+                {
+                  "name": "detection_02",
+                  "value": "detection_02",
+                  "description": "Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces."
+                },
+                {
+                  "name": "detection_03",
+                  "value": "detection_03",
+                  "description": "Detection model released in 2021 February with improved accuracy especially on small faces."
+                }
+              ]
+            }
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.userData"
+            "name": "userData",
+            "in": "query",
+            "description": "User-provided data attached to the face. The size limit is 1K.",
+            "required": false,
+            "type": "string",
+            "maxLength": 1024
           },
           {
             "name": "body",
@@ -5175,23 +6746,76 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.targetFace"
+            "name": "targetFace",
+            "in": "query",
+            "description": "A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "collectionFormat": "csv",
+            "minItems": 4,
+            "maxItems": 4
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.detectionModel"
+            "name": "detectionModel",
+            "in": "query",
+            "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
+            "required": false,
+            "type": "string",
+            "default": "detection_01",
+            "enum": [
+              "detection_01",
+              "detection_02",
+              "detection_03"
+            ],
+            "x-ms-enum": {
+              "name": "DetectionModel",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "detection_01",
+                  "value": "detection_01",
+                  "description": "The default detection model for Face - Detect. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected."
+                },
+                {
+                  "name": "detection_02",
+                  "value": "detection_02",
+                  "description": "Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces."
+                },
+                {
+                  "name": "detection_03",
+                  "value": "detection_03",
+                  "description": "Detection model released in 2021 February with improved accuracy especially on small faces."
+                }
+              ]
+            }
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.userData"
+            "name": "userData",
+            "in": "query",
+            "description": "User-provided data attached to the face. The size limit is 1K.",
+            "required": false,
+            "type": "string",
+            "maxLength": 1024
           },
           {
             "name": "body",
@@ -5253,23 +6877,76 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.targetFace"
+            "name": "targetFace",
+            "in": "query",
+            "description": "A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "collectionFormat": "csv",
+            "minItems": 4,
+            "maxItems": 4
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.detectionModel"
+            "name": "detectionModel",
+            "in": "query",
+            "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
+            "required": false,
+            "type": "string",
+            "default": "detection_01",
+            "enum": [
+              "detection_01",
+              "detection_02",
+              "detection_03"
+            ],
+            "x-ms-enum": {
+              "name": "DetectionModel",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "detection_01",
+                  "value": "detection_01",
+                  "description": "The default detection model for Face - Detect. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected."
+                },
+                {
+                  "name": "detection_02",
+                  "value": "detection_02",
+                  "description": "Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces."
+                },
+                {
+                  "name": "detection_03",
+                  "value": "detection_03",
+                  "description": "Detection model released in 2021 February with improved accuracy especially on small faces."
+                }
+              ]
+            }
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.userData"
+            "name": "userData",
+            "in": "query",
+            "description": "User-provided data attached to the face. The size limit is 1K.",
+            "required": false,
+            "type": "string",
+            "maxLength": 1024
           },
           {
             "name": "body",
@@ -5331,7 +7008,10 @@
             "in": "path",
             "description": "Person ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "recognitionModel",
@@ -5373,13 +7053,60 @@
             }
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.targetFace"
+            "name": "targetFace",
+            "in": "query",
+            "description": "A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "collectionFormat": "csv",
+            "minItems": 4,
+            "maxItems": 4
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.detectionModel"
+            "name": "detectionModel",
+            "in": "query",
+            "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
+            "required": false,
+            "type": "string",
+            "default": "detection_01",
+            "enum": [
+              "detection_01",
+              "detection_02",
+              "detection_03"
+            ],
+            "x-ms-enum": {
+              "name": "DetectionModel",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "detection_01",
+                  "value": "detection_01",
+                  "description": "The default detection model for Face - Detect. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected."
+                },
+                {
+                  "name": "detection_02",
+                  "value": "detection_02",
+                  "description": "Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces."
+                },
+                {
+                  "name": "detection_03",
+                  "value": "detection_03",
+                  "description": "Detection model released in 2021 February with improved accuracy especially on small faces."
+                }
+              ]
+            }
           },
           {
-            "$ref": "#/parameters/AddFaceOptions.userData"
+            "name": "userData",
+            "in": "query",
+            "description": "User-provided data attached to the face. The size limit is 1K.",
+            "required": false,
+            "type": "string",
+            "maxLength": 1024
           },
           {
             "name": "body",
@@ -5407,15 +7134,15 @@
               "$ref": "#/definitions/AddFaceResult"
             },
             "headers": {
-              "operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location of an instance of FaceOperationStatus"
-              },
               "Location": {
                 "type": "string",
                 "format": "uri",
                 "description": "The location of an instance of PersonDirectoryPerson"
+              },
+              "operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of FaceOperationStatus"
               }
             }
           },
@@ -5456,7 +7183,7 @@
               "type": "object",
               "properties": {
                 "faceId": {
-                  "type": "string",
+                  "$ref": "#/definitions/uuid",
                   "description": "faceId of the face, comes from Face - Detect."
                 },
                 "largePersonGroupId": {
@@ -5464,7 +7191,7 @@
                   "description": "Using existing largePersonGroupId and personId for fast loading a specified person. largePersonGroupId is created in LargePersonGroup - Create."
                 },
                 "personId": {
-                  "type": "string",
+                  "$ref": "#/definitions/uuid",
                   "description": "Specify a certain person in large person group."
                 }
               },
@@ -5480,7 +7207,7 @@
           "200": {
             "description": "A successful call returns the verification result.",
             "schema": {
-              "$ref": "#/definitions/FaceVerificationResult"
+              "$ref": "#/definitions/VerificationResult"
             }
           },
           "default": {
@@ -5520,7 +7247,7 @@
               "type": "object",
               "properties": {
                 "faceId": {
-                  "type": "string",
+                  "$ref": "#/definitions/uuid",
                   "description": "faceId of the face, comes from Face - Detect."
                 },
                 "personId": {
@@ -5539,7 +7266,7 @@
           "200": {
             "description": "A successful call returns the verification result.",
             "schema": {
-              "$ref": "#/definitions/FaceVerificationResult"
+              "$ref": "#/definitions/VerificationResult"
             }
           },
           "default": {
@@ -5579,7 +7306,7 @@
               "type": "object",
               "properties": {
                 "faceId": {
-                  "type": "string",
+                  "$ref": "#/definitions/uuid",
                   "description": "faceId of the face, comes from Face - Detect."
                 },
                 "personGroupId": {
@@ -5587,7 +7314,7 @@
                   "description": "Using existing personGroupId and personId for fast loading a specified person. personGroupId is created in PersonGroup - Create."
                 },
                 "personId": {
-                  "type": "string",
+                  "$ref": "#/definitions/uuid",
                   "description": "Specify a certain person in person group."
                 }
               },
@@ -5603,7 +7330,7 @@
           "200": {
             "description": "A successful call returns the verification result.",
             "schema": {
-              "$ref": "#/definitions/FaceVerificationResult"
+              "$ref": "#/definitions/VerificationResult"
             }
           },
           "default": {
@@ -5684,7 +7411,7 @@
       "description": "Response body for adding face.",
       "properties": {
         "persistedFaceId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "persistedFaceId of the added face, which is persisted and will not expire. Different from faceId which is created in Face - Detect and will expire in 24 hours after the detection call."
         }
       },
@@ -5753,48 +7480,6 @@
         }
       }
     },
-    "Azure.Core.Foundations.OperationState": {
-      "type": "string",
-      "description": "Enum describing allowed operation states.",
-      "enum": [
-        "NotStarted",
-        "Running",
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "OperationState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotStarted",
-            "value": "NotStarted",
-            "description": "The operation has not started."
-          },
-          {
-            "name": "Running",
-            "value": "Running",
-            "description": "The operation is in progress."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The operation has completed successfully."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The operation has failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "The operation has been canceled by the user."
-          }
-        ]
-      }
-    },
     "BlurLevel": {
       "type": "string",
       "description": "Indicates level of blurriness.",
@@ -5846,73 +7531,12 @@
         "value"
       ]
     },
-    "CollectionTrainingStatus": {
-      "type": "object",
-      "description": "Training status of a container",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-          "description": "Training status of the container."
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "A combined UTC date and time string that describes the created time of the person group, large person group or large face list."
-        },
-        "lastActionDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "A combined UTC date and time string that describes the last modify time of the person group, large person group or large face list, could be null value when the group is not successfully trained."
-        },
-        "lastSuccessfulTrainingDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "A combined UTC date and time string that describes the last successful training time of the person group, large person group or large face list."
-        },
-        "message": {
-          "type": "string",
-          "description": "Show failure message when training failed (omitted when training succeed)."
-        }
-      },
-      "required": [
-        "status",
-        "createdDateTime",
-        "lastActionDateTime",
-        "lastSuccessfulTrainingDateTime"
-      ]
-    },
-    "CreateDynamicPersonGroupContent": {
-      "type": "object",
-      "description": "Request of create dynamic person group.",
-      "properties": {
-        "addPersonIds": {
-          "type": "array",
-          "description": "Array of personIds created by PersonDirectory Person - Create to add.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "User defined name, maximum length is 128.",
-          "maxLength": 128
-        },
-        "userData": {
-          "type": "string",
-          "description": "Optional user defined data. Length should not exceed 16K.",
-          "maxLength": 16384
-        }
-      },
-      "required": [
-        "name"
-      ]
-    },
     "CreatePersonResult": {
       "type": "object",
       "description": "Response of create person.",
       "properties": {
         "personId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "Person ID of the person."
         }
       },
@@ -5925,13 +7549,14 @@
       "description": "A container that references PersonDirectory Person - Create.",
       "properties": {
         "dynamicPersonGroupId": {
-          "type": "string",
+          "$ref": "#/definitions/groupId",
           "description": "ID of the dynamic person group.",
           "readOnly": true
         },
         "name": {
           "type": "string",
           "description": "User defined name, maximum length is 128.",
+          "minLength": 1,
           "maxLength": 128
         },
         "userData": {
@@ -6001,8 +7626,8 @@
       "description": "Face attributes for the detected face.",
       "properties": {
         "age": {
-          "type": "integer",
-          "format": "int32",
+          "type": "number",
+          "format": "float",
           "description": "Age in years"
         },
         "smile": {
@@ -6067,7 +7692,7 @@
       "description": "Response for detect API.",
       "properties": {
         "faceId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "Unique faceId of the detected face, created by detection API and it will expire 24 hours after the detection call. To return this, it requires 'returnFaceId' parameter to be true."
         },
         "recognitionModel": {
@@ -6089,101 +7714,6 @@
       },
       "required": [
         "faceId"
-      ]
-    },
-    "FaceFindSimilarResult": {
-      "type": "object",
-      "description": "Response body for find similar face operation.",
-      "properties": {
-        "confidence": {
-          "type": "number",
-          "format": "float",
-          "description": "Confidence value of the candidate. The higher confidence, the more similar. Range between [0,1].",
-          "minimum": 0,
-          "maximum": 1
-        },
-        "faceId": {
-          "type": "string",
-          "description": "faceId of candidate face when find by faceIds. faceId is created by Face - Detect and will expire 24 hours after the detection call."
-        },
-        "persistedFaceId": {
-          "type": "string",
-          "description": "persistedFaceId of candidate face when find by faceListId or largeFaceListId. persistedFaceId in face list/large face list is persisted and will not expire."
-        }
-      },
-      "required": [
-        "confidence"
-      ]
-    },
-    "FaceGroupingResult": {
-      "type": "object",
-      "description": "Response body for group face operation.",
-      "properties": {
-        "groups": {
-          "type": "array",
-          "description": "A partition of the original faces based on face similarity. Groups are ranked by number of faces.",
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "x-ms-identifiers": []
-        },
-        "messyGroup": {
-          "type": "array",
-          "description": "Face ids array of faces that cannot find any similar faces from original faces.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "groups",
-        "messyGroup"
-      ]
-    },
-    "FaceIdentificationCandidate": {
-      "type": "object",
-      "description": "Candidate for identify call.",
-      "properties": {
-        "personId": {
-          "type": "string",
-          "description": "personId of candidate person."
-        },
-        "confidence": {
-          "type": "number",
-          "format": "float",
-          "description": "Confidence value of the candidate. The higher confidence, the more similar. Range between [0,1].",
-          "minimum": 0,
-          "maximum": 1
-        }
-      },
-      "required": [
-        "personId",
-        "confidence"
-      ]
-    },
-    "FaceIdentificationResult": {
-      "type": "object",
-      "description": "Identify result.",
-      "properties": {
-        "faceId": {
-          "type": "string",
-          "description": "faceId of the query face."
-        },
-        "candidates": {
-          "type": "array",
-          "description": "Identified person candidates for that face (ranked by confidence). Array size should be no larger than input maxNumOfCandidatesReturned. If no person is identified, will return an empty array.",
-          "items": {
-            "$ref": "#/definitions/FaceIdentificationCandidate"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "faceId",
-        "candidates"
       ]
     },
     "FaceLandmarks": {
@@ -6336,6 +7866,7 @@
         "name": {
           "type": "string",
           "description": "User defined name, maximum length is 128.",
+          "minLength": 1,
           "maxLength": 128
         },
         "userData": {
@@ -6345,10 +7876,10 @@
         },
         "recognitionModel": {
           "$ref": "#/definitions/RecognitionModel",
-          "description": "The 'recognitionModel' associated with this face list. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02, 'recognition_03', and 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'."
+          "description": "Name of recognition model. Recognition model is used when the face features are extracted and associated with detected faceIds."
         },
         "faceListId": {
-          "type": "string",
+          "$ref": "#/definitions/groupId",
           "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
           "readOnly": true
         },
@@ -6358,7 +7889,6 @@
           "items": {
             "$ref": "#/definitions/FaceListFace"
           },
-          "readOnly": true,
           "x-ms-identifiers": []
         }
       },
@@ -6372,7 +7902,7 @@
       "description": "Face resource for face list.",
       "properties": {
         "persistedFaceId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "Face ID of the face.",
           "readOnly": true
         },
@@ -6393,6 +7923,7 @@
         "name": {
           "type": "string",
           "description": "User defined name, maximum length is 128.",
+          "minLength": 1,
           "maxLength": 128
         },
         "userData": {
@@ -6402,10 +7933,10 @@
         },
         "recognitionModel": {
           "$ref": "#/definitions/RecognitionModel",
-          "description": "The 'recognitionModel' associated with this face list. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02, 'recognition_03', and 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'."
+          "description": "Name of recognition model. Recognition model is used when the face features are extracted and associated with detected faceIds."
         },
         "faceListId": {
-          "type": "string",
+          "$ref": "#/definitions/groupId",
           "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64."
         }
       },
@@ -6414,17 +7945,53 @@
         "faceListId"
       ]
     },
+    "FaceOperationState": {
+      "type": "string",
+      "description": "The status of long running operation.",
+      "enum": [
+        "notStarted",
+        "running",
+        "succeeded",
+        "failed"
+      ],
+      "x-ms-enum": {
+        "name": "FaceOperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "notStarted",
+            "value": "notStarted",
+            "description": "The operation is not started."
+          },
+          {
+            "name": "running",
+            "value": "running",
+            "description": "The operation is still running."
+          },
+          {
+            "name": "succeeded",
+            "value": "succeeded",
+            "description": "The operation is succeeded."
+          },
+          {
+            "name": "failed",
+            "value": "failed",
+            "description": "The operation is failed."
+          }
+        ]
+      }
+    },
     "FaceOperationStatus": {
       "type": "object",
       "description": "Long running operation resource for person directory.",
       "properties": {
         "operationId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "Operation ID of the operation.",
           "readOnly": true
         },
         "status": {
-          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "$ref": "#/definitions/FaceOperationState",
           "description": "Current status of the operation."
         },
         "createdDateTime": {
@@ -6510,27 +8077,6 @@
         ]
       }
     },
-    "FaceVerificationResult": {
-      "type": "object",
-      "description": "Verify result.",
-      "properties": {
-        "isIdentical": {
-          "type": "boolean",
-          "description": "True if the two faces belong to the same person or the face belongs to the person, otherwise false."
-        },
-        "confidence": {
-          "type": "number",
-          "format": "float",
-          "description": "\tA number indicates the similarity confidence of whether two faces belong to the same person, or whether the face belongs to the person. By default, isIdentical is set to True if similarity confidence is greater than or equal to 0.5. This is useful for advanced users to override 'isIdentical' and fine-tune the result on their own data.",
-          "minimum": 0,
-          "maximum": 1
-        }
-      },
-      "required": [
-        "isIdentical",
-        "confidence"
-      ]
-    },
     "FacialHair": {
       "type": "object",
       "description": "Properties describing facial hair attributes.",
@@ -6587,6 +8133,30 @@
         ]
       }
     },
+    "FindSimilarResult": {
+      "type": "object",
+      "description": "Response body for find similar face operation.",
+      "properties": {
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "description": "Confidence value of the candidate. The higher confidence, the more similar. Range between [0,1].",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "faceId": {
+          "$ref": "#/definitions/uuid",
+          "description": "faceId of candidate face when find by faceIds. faceId is created by Face - Detect and will expire 24 hours after the detection call."
+        },
+        "persistedFaceId": {
+          "$ref": "#/definitions/uuid",
+          "description": "persistedFaceId of candidate face when find by faceListId or largeFaceListId. persistedFaceId in face list/large face list is persisted and will not expire."
+        }
+      },
+      "required": [
+        "confidence"
+      ]
+    },
     "GlassesType": {
       "type": "string",
       "description": "Glasses type of the face.",
@@ -6622,6 +8192,34 @@
           }
         ]
       }
+    },
+    "GroupingResult": {
+      "type": "object",
+      "description": "Response body for group face operation.",
+      "properties": {
+        "groups": {
+          "type": "array",
+          "description": "A partition of the original faces based on face similarity. Groups are ranked by number of faces.",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/uuid"
+            }
+          },
+          "x-ms-identifiers": []
+        },
+        "messyGroup": {
+          "type": "array",
+          "description": "Face ids array of faces that cannot find any similar faces from original faces.",
+          "items": {
+            "$ref": "#/definitions/uuid"
+          }
+        }
+      },
+      "required": [
+        "groups",
+        "messyGroup"
+      ]
     },
     "HairColor": {
       "type": "object",
@@ -6760,6 +8358,49 @@
         "yaw"
       ]
     },
+    "IdentificationCandidate": {
+      "type": "object",
+      "description": "Candidate for identify call.",
+      "properties": {
+        "personId": {
+          "$ref": "#/definitions/uuid",
+          "description": "personId of candidate person."
+        },
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "description": "Confidence value of the candidate. The higher confidence, the more similar. Range between [0,1].",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "personId",
+        "confidence"
+      ]
+    },
+    "IdentificationResult": {
+      "type": "object",
+      "description": "Identify result.",
+      "properties": {
+        "faceId": {
+          "$ref": "#/definitions/uuid",
+          "description": "faceId of the query face."
+        },
+        "candidates": {
+          "type": "array",
+          "description": "Identified person candidates for that face (ranked by confidence). Array size should be no larger than input maxNumOfCandidatesReturned. If no person is identified, will return an empty array.",
+          "items": {
+            "$ref": "#/definitions/IdentificationCandidate"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "faceId",
+        "candidates"
+      ]
+    },
     "LandmarkCoordinate": {
       "type": "object",
       "description": "Coordinates within an image.",
@@ -6787,6 +8428,7 @@
         "name": {
           "type": "string",
           "description": "User defined name, maximum length is 128.",
+          "minLength": 1,
           "maxLength": 128
         },
         "userData": {
@@ -6796,10 +8438,10 @@
         },
         "recognitionModel": {
           "$ref": "#/definitions/RecognitionModel",
-          "description": "The 'recognitionModel' associated with this face list. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02, 'recognition_03', and 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'."
+          "description": "Name of recognition model. Recognition model is used when the face features are extracted and associated with detected faceIds."
         },
         "largeFaceListId": {
-          "type": "string",
+          "$ref": "#/definitions/groupId",
           "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
           "readOnly": true
         }
@@ -6814,7 +8456,7 @@
       "description": "Face resource for large face list.",
       "properties": {
         "persistedFaceId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "Face ID of the face.",
           "readOnly": true
         },
@@ -6828,17 +8470,6 @@
         "persistedFaceId"
       ]
     },
-    "LargeFaceListFaceUpdate": {
-      "type": "object",
-      "description": "Face resource for large face list.",
-      "properties": {
-        "userData": {
-          "type": "string",
-          "description": "User-provided data attached to the face. The length limit is 1K.",
-          "maxLength": 1024
-        }
-      }
-    },
     "LargePersonGroup": {
       "type": "object",
       "description": "The container of the uploaded person data, including face recognition feature, and up to 1,000,000 people.",
@@ -6846,6 +8477,7 @@
         "name": {
           "type": "string",
           "description": "User defined name, maximum length is 128.",
+          "minLength": 1,
           "maxLength": 128
         },
         "userData": {
@@ -6855,10 +8487,10 @@
         },
         "recognitionModel": {
           "$ref": "#/definitions/RecognitionModel",
-          "description": "Name of recognition model. Recognition model is used when the face features are extracted and associated with detected faceIds. The default value is 'recognition_01', if latest model needed, please explicitly specify the model you need."
+          "description": "Name of recognition model. Recognition model is used when the face features are extracted and associated with detected faceIds."
         },
         "largePersonGroupId": {
-          "type": "string",
+          "$ref": "#/definitions/groupId",
           "description": "ID of the container.",
           "readOnly": true
         }
@@ -6873,13 +8505,14 @@
       "description": "The person in a specified large person group. To add face to this person, please call LargePersonGroup PersonFace - Add.",
       "properties": {
         "personId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "ID of the person.",
           "readOnly": true
         },
         "name": {
           "type": "string",
           "description": "User defined name, maximum length is 128.",
+          "minLength": 1,
           "maxLength": 128
         },
         "userData": {
@@ -6891,7 +8524,7 @@
           "type": "array",
           "description": "Face ids of registered faces in the person.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/uuid"
           },
           "readOnly": true
         }
@@ -6906,7 +8539,7 @@
       "description": "Face resource for large person group person.",
       "properties": {
         "persistedFaceId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "Face ID of the face.",
           "readOnly": true
         },
@@ -6920,30 +8553,19 @@
         "persistedFaceId"
       ]
     },
-    "LargePersonGroupPersonFaceUpdate": {
-      "type": "object",
-      "description": "Face resource for large person group person.",
-      "properties": {
-        "userData": {
-          "type": "string",
-          "description": "User-provided data attached to the face. The length limit is 1K.",
-          "maxLength": 1024
-        }
-      }
-    },
     "ListFaceResult": {
       "type": "object",
       "description": "Response of list face of person.",
       "properties": {
         "personId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "Id of person."
         },
         "persistedFaceIds": {
           "type": "array",
           "description": "Array of persisted face ids.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/uuid"
           }
         }
       },
@@ -6960,7 +8582,7 @@
           "type": "array",
           "description": "Array of PersonDirectory DynamicPersonGroup ids.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/groupId"
           }
         }
       },
@@ -6976,13 +8598,31 @@
           "type": "array",
           "description": "Array of PersonDirectory Person ids.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/uuid"
           }
         }
       },
       "required": [
         "personIds"
       ]
+    },
+    "LivenessOperationMode": {
+      "type": "string",
+      "description": "The operation mode for the liveness modal.",
+      "enum": [
+        "Passive"
+      ],
+      "x-ms-enum": {
+        "name": "LivenessOperationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Passive",
+            "value": "Passive",
+            "description": "The operation mode for the liveness modal."
+          }
+        ]
+      }
     },
     "LivenessSession": {
       "type": "object",
@@ -7017,7 +8657,10 @@
         "authTokenTimeToLiveInSeconds": {
           "type": "integer",
           "format": "int32",
-          "description": "Session length in seconds. Range is 60 to 86400 seconds."
+          "description": "Session length in seconds. Range is 60 to 86400 seconds.",
+          "default": 600,
+          "minimum": 60,
+          "maximum": 86400
         },
         "status": {
           "$ref": "#/definitions/FaceSessionStatus",
@@ -7093,7 +8736,7 @@
       "description": "Request for creating liveness session.",
       "properties": {
         "livenessOperationMode": {
-          "type": "string",
+          "$ref": "#/definitions/LivenessOperationMode",
           "description": "The operation mode for the liveness modal."
         },
         "sendResultsToClient": {
@@ -7111,7 +8754,10 @@
         "authTokenTimeToLiveInSeconds": {
           "type": "integer",
           "format": "int32",
-          "description": "Session length in seconds. Range is 60 to 86400 seconds."
+          "description": "Session length in seconds. Range is 60 to 86400 seconds.",
+          "default": 600,
+          "minimum": 60,
+          "maximum": 86400
         }
       },
       "required": [
@@ -7124,7 +8770,7 @@
       "description": "Dedicated parameter model for multipart/form-data.",
       "properties": {
         "livenessOperationMode": {
-          "type": "string",
+          "$ref": "#/definitions/LivenessOperationMode",
           "description": "The operation mode for the liveness modal."
         },
         "sendResultsToClient": {
@@ -7142,7 +8788,10 @@
         "authTokenTimeToLiveInSeconds": {
           "type": "integer",
           "format": "int32",
-          "description": "Session length in seconds. Range is 60 to 86400 seconds."
+          "description": "Session length in seconds. Range is 60 to 86400 seconds.",
+          "default": 600,
+          "minimum": 60,
+          "maximum": 86400
         }
       },
       "required": [
@@ -7201,7 +8850,10 @@
         "authTokenTimeToLiveInSeconds": {
           "type": "integer",
           "format": "int32",
-          "description": "Session length in seconds. Range is 60 to 86400 seconds."
+          "description": "Session length in seconds. Range is 60 to 86400 seconds.",
+          "default": 600,
+          "minimum": 60,
+          "maximum": 86400
         }
       },
       "required": [
@@ -7263,7 +8915,10 @@
         "authTokenTimeToLiveInSeconds": {
           "type": "integer",
           "format": "int32",
-          "description": "Session length in seconds. Range is 60 to 86400 seconds."
+          "description": "Session length in seconds. Range is 60 to 86400 seconds.",
+          "default": 600,
+          "minimum": 60,
+          "maximum": 86400
         },
         "status": {
           "$ref": "#/definitions/FaceSessionStatus",
@@ -7417,7 +9072,7 @@
       "description": "Face resource for person directory person.",
       "properties": {
         "persistedFaceId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "Face ID of the face.",
           "readOnly": true
         },
@@ -7431,29 +9086,19 @@
         "persistedFaceId"
       ]
     },
-    "PersonDirectoryFaceUpdate": {
-      "type": "object",
-      "description": "Face resource for person directory person.",
-      "properties": {
-        "userData": {
-          "type": "string",
-          "description": "User-provided data attached to the face. The length limit is 1K.",
-          "maxLength": 1024
-        }
-      }
-    },
     "PersonDirectoryPerson": {
       "type": "object",
       "description": "Person resource for person directory",
       "properties": {
         "personId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "Person ID of the person.",
           "readOnly": true
         },
         "name": {
           "type": "string",
           "description": "User defined name, maximum length is 128.",
+          "minLength": 1,
           "maxLength": 128
         },
         "userData": {
@@ -7474,6 +9119,7 @@
         "name": {
           "type": "string",
           "description": "User defined name, maximum length is 128.",
+          "minLength": 1,
           "maxLength": 128
         },
         "userData": {
@@ -7483,10 +9129,10 @@
         },
         "recognitionModel": {
           "$ref": "#/definitions/RecognitionModel",
-          "description": "Name of recognition model. Recognition model is used when the face features are extracted and associated with detected faceIds. The default value is 'recognition_01', if latest model needed, please explicitly specify the model you need."
+          "description": "Name of recognition model. Recognition model is used when the face features are extracted and associated with detected faceIds."
         },
         "personGroupId": {
-          "type": "string",
+          "$ref": "#/definitions/groupId",
           "description": "ID of the container.",
           "readOnly": true
         }
@@ -7501,13 +9147,14 @@
       "description": "The person in a specified person group. To add face to this person, please call LargePersonGroup PersonFace - Add.",
       "properties": {
         "personId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "ID of the person.",
           "readOnly": true
         },
         "name": {
           "type": "string",
           "description": "User defined name, maximum length is 128.",
+          "minLength": 1,
           "maxLength": 128
         },
         "userData": {
@@ -7519,7 +9166,7 @@
           "type": "array",
           "description": "Face ids of registered faces in the person.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/uuid"
           },
           "readOnly": true
         }
@@ -7534,7 +9181,7 @@
       "description": "Face resource for person group person.",
       "properties": {
         "persistedFaceId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "Face ID of the face.",
           "readOnly": true
         },
@@ -7547,17 +9194,6 @@
       "required": [
         "persistedFaceId"
       ]
-    },
-    "PersonGroupPersonFaceUpdate": {
-      "type": "object",
-      "description": "Face resource for person group person.",
-      "properties": {
-        "userData": {
-          "type": "string",
-          "description": "User-provided data attached to the face. The length limit is 1K.",
-          "maxLength": 1024
-        }
-      }
     },
     "QualityForRecognition": {
       "type": "string",
@@ -7683,265 +9319,83 @@
         "latencyInMilliseconds"
       ]
     },
-    "UpdateDynamicPersonGroupContent": {
+    "TrainingStatus": {
       "type": "object",
-      "description": "Request of update dynamic person group.",
+      "description": "Training status of a container",
       "properties": {
-        "addPersonIds": {
-          "type": "array",
-          "description": "Array of personIds created by PersonDirectory Person - Create to add.",
-          "items": {
-            "type": "string"
-          }
+        "status": {
+          "$ref": "#/definitions/FaceOperationState",
+          "description": "Training status of the container."
         },
-        "removePersonIds": {
-          "type": "array",
-          "description": "Array of personIds created by PersonDirectory Person - Create to remove.",
-          "items": {
-            "type": "string"
-          }
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A combined UTC date and time string that describes the created time of the person group, large person group or large face list."
         },
-        "name": {
+        "lastActionDateTime": {
           "type": "string",
-          "description": "User defined name, maximum length is 128.",
-          "maxLength": 128
+          "format": "date-time",
+          "description": "A combined UTC date and time string that describes the last modify time of the person group, large person group or large face list, could be null value when the group is not successfully trained."
         },
-        "userData": {
+        "lastSuccessfulTrainingDateTime": {
           "type": "string",
-          "description": "Optional user defined data. Length should not exceed 16K.",
-          "maxLength": 16384
-        }
-      }
-    },
-    "UserDefinedFields": {
-      "type": "object",
-      "description": "Model for object name and user data.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "User defined name, maximum length is 128.",
-          "maxLength": 128
+          "format": "date-time",
+          "description": "A combined UTC date and time string that describes the last successful training time of the person group, large person group or large face list."
         },
-        "userData": {
+        "message": {
           "type": "string",
-          "description": "Optional user defined data. Length should not exceed 16K.",
-          "maxLength": 16384
+          "description": "Show failure message when training failed (omitted when training succeed)."
         }
       },
       "required": [
-        "name"
+        "status",
+        "createdDateTime",
+        "lastActionDateTime",
+        "lastSuccessfulTrainingDateTime"
       ]
     },
-    "UserDefinedFieldsUpdate": {
+    "VerificationResult": {
       "type": "object",
-      "description": "Model for object name and user data.",
+      "description": "Verify result.",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "User defined name, maximum length is 128.",
-          "maxLength": 128
+        "isIdentical": {
+          "type": "boolean",
+          "description": "True if the two faces belong to the same person or the face belongs to the person, otherwise false."
         },
-        "userData": {
-          "type": "string",
-          "description": "Optional user defined data. Length should not exceed 16K.",
-          "maxLength": 16384
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "description": "A number indicates the similarity confidence of whether two faces belong to the same person, or whether the face belongs to the person. By default, isIdentical is set to True if similarity confidence is greater than or equal to 0.5. This is useful for advanced users to override 'isIdentical' and fine-tune the result on their own data.",
+          "minimum": 0,
+          "maximum": 1
         }
-      }
+      },
+      "required": [
+        "isIdentical",
+        "confidence"
+      ]
+    },
+    "groupId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[a-z0-9-_]+$"
+    },
+    "uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier",
+      "maxLength": 64,
+      "pattern": "^[a-z0-9-_]+$"
     }
   },
   "parameters": {
-    "AddFaceOptions.detectionModel": {
-      "name": "detectionModel",
-      "in": "query",
-      "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
-      "required": false,
-      "type": "string",
-      "enum": [
-        "detection_01",
-        "detection_02",
-        "detection_03"
-      ],
-      "x-ms-enum": {
-        "name": "DetectionModel",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "detection_01",
-            "value": "detection_01",
-            "description": "The default detection model for Face - Detect. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected."
-          },
-          {
-            "name": "detection_02",
-            "value": "detection_02",
-            "description": "Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces."
-          },
-          {
-            "name": "detection_03",
-            "value": "detection_03",
-            "description": "Detection model released in 2021 February with improved accuracy especially on small faces."
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "AddFaceOptions.targetFace": {
-      "name": "targetFace",
-      "in": "query",
-      "description": "A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "AddFaceOptions.userData": {
-      "name": "userData",
-      "in": "query",
-      "description": "User-provided data attached to the face. The size limit is 1KB.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "ApiVersionPathParameter": {
       "name": "apiVersion",
       "in": "path",
       "description": "The API version to use for this operation.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "FaceDetectionOptions.detectionModel": {
-      "name": "detectionModel",
-      "in": "query",
-      "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.",
-      "required": false,
-      "type": "string",
-      "enum": [
-        "detection_01",
-        "detection_02",
-        "detection_03"
-      ],
-      "x-ms-enum": {
-        "name": "DetectionModel",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "detection_01",
-            "value": "detection_01",
-            "description": "The default detection model for Face - Detect. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected."
-          },
-          {
-            "name": "detection_02",
-            "value": "detection_02",
-            "description": "Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces."
-          },
-          {
-            "name": "detection_03",
-            "value": "detection_03",
-            "description": "Detection model released in 2021 February with improved accuracy especially on small faces."
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "FaceDetectionOptions.faceIdTimeToLive": {
-      "name": "faceIdTimeToLive",
-      "in": "query",
-      "description": "The number of seconds for the face ID being cached. Supported range from 60 seconds up to 86400 seconds. The default value is 86400 (24 hours).",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "minimum": 60,
-      "maximum": 86400,
-      "x-ms-parameter-location": "method"
-    },
-    "FaceDetectionOptions.recognitionModel": {
-      "name": "recognitionModel",
-      "in": "query",
-      "description": "The 'recognitionModel' associated with the detected faceIds. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02', 'recognition_03' or 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.",
-      "required": false,
-      "type": "string",
-      "enum": [
-        "recognition_01",
-        "recognition_02",
-        "recognition_03",
-        "recognition_04"
-      ],
-      "x-ms-enum": {
-        "name": "RecognitionModel",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "recognition_01",
-            "value": "recognition_01",
-            "description": "The default recognition model for Face - Detect. All those faceIds created before 2019 March are bonded with this recognition model."
-          },
-          {
-            "name": "recognition_02",
-            "value": "recognition_02",
-            "description": "Recognition model released in 2019 March."
-          },
-          {
-            "name": "recognition_03",
-            "value": "recognition_03",
-            "description": "Recognition model released in 2020 May."
-          },
-          {
-            "name": "recognition_04",
-            "value": "recognition_04",
-            "description": "Recognition model released in 2021 February. It's recommended to use this recognition model for better recognition accuracy."
-          }
-        ]
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "FaceDetectionOptions.returnFaceAttributes": {
-      "name": "returnFaceAttributes",
-      "in": "query",
-      "description": "Analyze and return the one or more specified face attributes in the comma-separated string like 'returnFaceAttributes=headPose,glasses'. Supported face attributes include headPose, glasses, occlusion, accessories, blur, exposure, noise, mask, and qualityForRecognition. Face attribute analysis has additional computational and time cost.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "FaceDetectionOptions.returnFaceId": {
-      "name": "returnFaceId",
-      "in": "query",
-      "description": "Return faceIds of the detected faces or not. The default value is true.",
-      "required": false,
-      "type": "boolean",
-      "x-ms-parameter-location": "method"
-    },
-    "FaceDetectionOptions.returnFaceLandmarks": {
-      "name": "returnFaceLandmarks",
-      "in": "query",
-      "description": "Return face landmarks of the detected faces or not. The default value is false.",
-      "required": false,
-      "type": "boolean",
-      "x-ms-parameter-location": "method"
-    },
-    "FaceDetectionOptions.returnRecognitionModel": {
-      "name": "returnRecognitionModel",
-      "in": "query",
-      "description": "Return 'recognitionModel' or not. The default value is false.",
-      "required": false,
-      "type": "boolean",
-      "x-ms-parameter-location": "method"
-    },
-    "ListRequestOptions.start": {
-      "name": "start",
-      "in": "query",
-      "description": "List resources greater than the \"start\". It contains no more than 64 characters. Default is empty.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ListRequestOptions.top": {
-      "name": "top",
-      "in": "query",
-      "description": "The number of items to list, ranging in [1, 1000]. Default is 1000.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "minimum": 1,
-      "maximum": 1000,
       "x-ms-parameter-location": "method"
     },
     "LivenessSessionWithVerifyImageCreationContent.Parameters": {
@@ -7958,14 +9412,6 @@
       "description": "The image stream for verify.",
       "required": true,
       "type": "file",
-      "x-ms-parameter-location": "method"
-    },
-    "ReturnRecognitionModelOptions": {
-      "name": "returnRecognitionModel",
-      "in": "query",
-      "description": "Return 'recognitionModel' or not. The default value is false.",
-      "required": false,
-      "type": "boolean",
       "x-ms-parameter-location": "method"
     }
   }

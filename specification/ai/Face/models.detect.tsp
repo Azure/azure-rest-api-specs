@@ -9,43 +9,77 @@ using TypeSpec.Rest;
 
 namespace Face;
 
-@doc("Query parameters for detect API.")
-model FaceDetectionOptions {
+alias FaceDetectionOptions = {
   @doc("Return faceIds of the detected faces or not. The default value is true.")
   @query
-  returnFaceId?: boolean;
+  returnFaceId?: boolean = true;
 
   @doc("Return face landmarks of the detected faces or not. The default value is false.")
   @query
-  returnFaceLandmarks?: boolean;
+  returnFaceLandmarks?: boolean = false;
 
-  @doc("Analyze and return the one or more specified face attributes in the comma-separated string like 'returnFaceAttributes=headPose,glasses'. Supported face attributes include headPose, glasses, occlusion, accessories, blur, exposure, noise, mask, and qualityForRecognition. Face attribute analysis has additional computational and time cost.")
-  @query
-  returnFaceAttributes?: string;
+  @doc("Analyze and return the one or more specified face attributes in the comma-separated string like 'returnFaceAttributes=headPose,glasses'. Face attribute analysis has additional computational and time cost.")
+  @query({
+    format: "csv",
+  })
+  returnFaceAttributes?: FaceAttributeType[];
 
   @doc("The 'recognitionModel' associated with the detected faceIds. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02', 'recognition_03' or 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.")
   @query
-  recognitionModel?: RecognitionModel;
+  recognitionModel?: RecognitionModel = "recognition_01";
 
   @doc("Return 'recognitionModel' or not. The default value is false.")
   @query
-  returnRecognitionModel?: boolean;
+  returnRecognitionModel?: boolean = false;
 
   @doc("The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.")
   @query
-  detectionModel?: DetectionModel;
+  detectionModel?: DetectionModel = "detection_01";
 
   @doc("The number of seconds for the face ID being cached. Supported range from 60 seconds up to 86400 seconds. The default value is 86400 (24 hours).")
   @query
   @minValue(60)
   @maxValue(86400)
-  faceIdTimeToLive?: int32;
+  faceIdTimeToLive?: int32 = 86400;
+};
+
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Use fixed enum to represent modelAsString = false"
+@doc("Available options for detect face with attribute.")
+union FaceAttributeType {
+  string,
+
+  @doc("3-D roll/yaw/pitch angles for face direction.")
+  "headPose",
+
+  @doc("Glasses type. Values include 'NoGlasses', 'ReadingGlasses', 'Sunglasses', 'SwimmingGoggles'.")
+  "glasses",
+
+  @doc("Whether each facial area is occluded, including forehead, eyes and mouth.")
+  "occlusion",
+
+  @doc("Accessories around face, including 'headwear', 'glasses' and 'mask'. Empty array means no accessories detected. Note this is after a face is detected. Large mask could result in no face to be detected.")
+  "accessories",
+
+  @doc("Face is blurry or not. Level returns 'Low', 'Medium' or 'High'. Value returns a number between [0,1], the larger the blurrier.")
+  "blur",
+
+  @doc("Face exposure level. Level returns 'GoodExposure', 'OverExposure' or 'UnderExposure'.")
+  "exposure",
+
+  @doc("Noise level of face pixels. Level returns 'Low', 'Medium' and 'High'. Value returns a number between [0,1], the larger the noisier")
+  "noise",
+
+  @doc("Whether each face is wearing a mask. Mask type returns 'noMask', 'faceMask', 'otherMaskOrOcclusion', or 'uncertain'. Value returns a boolean 'noseAndMouthCovered' indicating whether nose and mouth are covered.")
+  "mask",
+
+  @doc("The overall image quality regarding whether the image being used in the detection is of sufficient quality to attempt face recognition on. The value is an informal rating of low, medium, or high. Only 'high' quality images are recommended for person enrollment and quality at or above 'medium' is recommended for identification scenarios. The attribute is only available when using any combinations of detection models detection_01 or detection_03, and recognition models recognition_03 or recognition_04.")
+  "qualityForRecognition",
 }
 
 @doc("Response for detect API.")
 model FaceDetectionResult {
   @doc("Unique faceId of the detected face, created by detection API and it will expire 24 hours after the detection call. To return this, it requires 'returnFaceId' parameter to be true.")
-  faceId: string;
+  faceId: uuid;
 
   @doc("The 'recognitionModel' associated with this faceId. This is only returned when 'returnRecognitionModel' is explicitly set as true.")
   recognitionModel?: RecognitionModel;
@@ -171,7 +205,7 @@ model LandmarkCoordinate {
 @doc("Face attributes for the detected face.")
 model FaceAttributes {
   @doc("Age in years")
-  age?: int32;
+  age?: float32;
 
   @doc("Smile intensity, a number between [0,1]")
   @minValue(0)
@@ -231,18 +265,20 @@ model FacialHair {
 }
 
 @doc("Glasses type of the face.")
-enum GlassesType {
+union GlassesType {
+  string,
+
   @doc("No glasses on the face.")
-  noGlasses,
+  "noGlasses",
 
   @doc("Normal glasses on the face.")
-  readingGlasses,
+  "readingGlasses",
 
   @doc("Sunglasses on the face.")
-  sunglasses,
+  "sunglasses",
 
   @doc("Swimming goggles on the face.")
-  swimmingGoggles,
+  "swimmingGoggles",
 }
 
 @doc("3-D roll/yaw/pitch angles for face direction.")
@@ -283,30 +319,32 @@ model HairColor {
 }
 
 @doc("Name of the hair color.")
-enum HairColorType {
+union HairColorType {
+  string,
+
   @doc("Unknown")
   unknownHairColor: "unknown",
 
   @doc("White")
-  white,
+  "white",
 
   @doc("Gray")
-  gray,
+  "gray",
 
   @doc("Blond")
-  blond,
+  "blond",
 
   @doc("Brown")
-  brown,
+  "brown",
 
   @doc("Red")
-  red,
+  "red",
 
   @doc("Black")
-  black,
+  "black",
 
   @doc("Other")
-  other,
+  "other",
 }
 
 @doc("Properties describing occlusions on a given face.")
@@ -333,15 +371,17 @@ model AccessoryItem {
 }
 
 @doc("Type of the accessory.")
-enum AccessoryType {
+union AccessoryType {
+  string,
+
   @doc("Head wear")
-  headwear,
+  "headwear",
 
   @doc("Glasses")
-  glasses,
+  "glasses",
 
   @doc("Mask")
-  mask,
+  "mask",
 }
 
 @doc("Properties describing any presence of blur within the image.")
@@ -356,15 +396,17 @@ model BlurProperties {
 }
 
 @doc("Indicates level of blurriness.")
-enum BlurLevel {
+union BlurLevel {
+  string,
+
   @doc("Low blur level.")
-  low,
+  "low",
 
   @doc("Medium blur level.")
-  medium,
+  "medium",
 
   @doc("High blur level.")
-  high,
+  "high",
 }
 
 @doc("Properties describing exposure level of the image.")
@@ -379,15 +421,17 @@ model ExposureProperties {
 }
 
 @doc("Indicates level of exposure.")
-enum ExposureLevel {
+union ExposureLevel {
+  string,
+
   @doc("Low exposure level.")
-  underExposure,
+  "underExposure",
 
   @doc("Good exposure level.")
-  goodExposure,
+  "goodExposure",
 
   @doc("High exposure level.")
-  overExposure,
+  "overExposure",
 }
 
 @doc("Properties describing noise level of the image.")
@@ -402,15 +446,17 @@ model NoiseProperties {
 }
 
 @doc("Indicates level of noise.")
-enum NoiseLevel {
+union NoiseLevel {
+  string,
+
   @doc("Low noise level.")
-  low,
+  "low",
 
   @doc("Medium noise level.")
-  medium,
+  "medium",
 
   @doc("High noise level.")
-  high,
+  "high",
 }
 
 @doc("Properties describing the presence of a mask on a given face.")
@@ -423,28 +469,32 @@ model MaskProperties {
 }
 
 @doc("Mask type if any of the face")
-enum MaskType {
+union MaskType {
+  string,
+
   @doc("Face mask.")
-  faceMask,
+  "faceMask",
 
   @doc("No mask.")
-  noMask,
+  "noMask",
 
   @doc("Other types of mask or occlusion.")
-  otherMaskOrOcclusion,
+  "otherMaskOrOcclusion",
 
   @doc("Uncertain")
-  uncertain,
+  "uncertain",
 }
 
 @doc("Indicates quality of image for recognition.")
-enum QualityForRecognition {
+union QualityForRecognition {
+  string,
+
   @doc("Low quality.")
-  low,
+  "low",
 
   @doc("Medium quality.")
-  medium,
+  "medium",
 
   @doc("High quality.")
-  high,
+  "high",
 }
