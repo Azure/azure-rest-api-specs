@@ -21,6 +21,48 @@ model StorageError {
 
 /// Parameters
 
+/** The previous snapshot parameter. */
+model PrevSnapshotParameter {
+  /** Optional in version 2015-07-08 and newer. The prevsnapshot parameter is a DateTime value that specifies that the response will contain only pages that were changed between target blob and previous snapshot. Changed pages include both updated and cleared pages. The target blob may be a snapshot, as long as the snapshot specified by prevsnapshot is the older of the two. Note that incremental snapshots are currently supported only for blobs created on or after January 1, 2016. */
+  @query
+  prevsnapshot: string;
+}
+
+/** The previous snapshot URL parameter. */
+model PrevSnapshotUrlParameter {
+  /** Optional. This header is only supported in service versions 2019-04-19 and after and specifies the URL of a previous snapshot of the target blob. The response will only contain pages that were changed between the target blob and its previous snapshot. */
+  @header
+  @clientName("prevSnapshotUrl")
+  `x-ms-previous-snapshot-url`: string;
+}
+
+/** Represnets a page list. */
+model PageList {
+  /** The page ranges. */
+  PageRange: PageRange[];
+
+  /** The clear ranges. */
+  ClearRange: ClearRange[];
+}
+
+/** The page range. */
+model PageRange {
+  /** The start of the byte range. */
+  Start: int64;
+
+  /** The end of the byte range. */
+  End: int64;
+}
+
+/** The clear range. */
+model ClearRange {
+  /** The start of the byte range. */
+  Start: int64;
+
+  /** The end of the byte range. */
+  End: int64;
+}
+
 /** The is immutable storage with versioning enable response header. */
 model IsImmutableStorageWithVersioningEnabledResponseHeader {
   /** Indicates whether version level worm is enabled on a container */

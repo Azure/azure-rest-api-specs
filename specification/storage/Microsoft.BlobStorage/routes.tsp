@@ -1974,3 +1974,78 @@ interface BlobPageUpdateFromUrlService {
     ...EncryptionScopeResponseHeader;
   } | StorageError;
 }
+
+@route("/{containerName}/{blob}?comp=pagelist")
+interface PageBlobListService {
+  /** The Get Page Ranges operation returns the list of valid page ranges for a page blob or snapshot of a page blob. */
+  @get
+  @operationId("PageBlob_GetPageRanges")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  getPageRanges(
+    ...ContainerNameParameter;
+    ...BlobNameParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
+    ...SnapshotParameter;
+    ...RangeParameter;
+    ...LeaseIdOptional;
+    ...IfModifiedSince;
+    ...IfUnmodifiedSince;
+    ...IfMatchParameter;
+    ...IfNoneMatchParameter;
+    ...IfTagsParameter;
+    ...MarkerParameter;
+    ...MaxResultsParameter;
+  ): {
+    @statusCode statusCode: 200;
+    @body body: PageList; // TODO: XML
+
+    ...LastModifiedResponseHeader;
+    ...ETagResponseHeader;
+    ...BlobContentLengthResponseHeader;
+    ...ClientRequestIdResponseHeader;
+    ...RequestIdResponseHeader;
+    ...VersionResponseHeader;
+    ...DateResponseHeader;
+  } | StorageError;
+}
+
+@route("/{containerName}/{blob}?comp=pagelist&diff")
+interface PageBlobDiffService {
+  /** The Get Page Ranges Diff operation returns the list of valid page ranges for a page blob or snapshot of a page blob. */
+  @get
+  @operationId("PageBlob_GetPageRangesDiff")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  getPageRangesDiff(
+    ...ContainerNameParameter;
+    ...BlobNameParameter;
+    ...ApiVersionParameter;
+    ...ClientRequestIdParameter;
+    ...SnapshotParameter;
+    ...TimeoutParameter;
+    ...PrevSnapshotParameter;
+    ...PrevSnapshotUrlParameter;
+    ...RangeParameter;
+    ...LeaseIdOptional;
+    ...IfModifiedSince;
+    ...IfUnmodifiedSince;
+    ...IfMatchParameter;
+    ...IfNoneMatchParameter;
+    ...IfTagsParameter;
+    ...MarkerParameter;
+    ...MaxResultsParameter;
+  ): {
+    @statusCode statusCode: 200;
+    @body body: PageList; // TODO: XML
+
+    ...LastModifiedResponseHeader;
+    ...ETagResponseHeader;
+    ...BlobContentLengthResponseHeader;
+    ...ClientRequestIdResponseHeader;
+    ...RequestIdResponseHeader;
+    ...VersionResponseHeader;
+    ...DateResponseHeader;
+  } | StorageError;
+}
