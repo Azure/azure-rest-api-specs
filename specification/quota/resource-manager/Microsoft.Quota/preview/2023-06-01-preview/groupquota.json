@@ -977,7 +977,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocations/resources": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocations": {
       "get": {
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -989,7 +989,7 @@
         "description": "Gets all the quota allocated to a subscription for the specific Resource Provider, Location. This will include the GroupQuota and total quota allocated to the subscription. Only the Group quota allocated to the subscription can be allocated back to the MG Group Quota. Use the $filter parameter to filter out the specific resource based on the ResourceProvider/Location. $filter is a required parameter. ",
         "operationId": "GroupQuotaSubscriptionQuotaAllocation_List",
         "x-ms-examples": {
-          "SubscriptionQuotaAllocation_List_Request_ForCompute": {
+          "SubscriptionQuotaAllocation_List_ForCompute": {
             "$ref": "./examples/SubscriptionQuotaAllocation/SubscriptionQuotaAllocation_List-Compute.json"
           }
         },
@@ -1343,7 +1343,7 @@
         "description": "Gets the GroupQuotas usages and limits(quota). Location is required paramter.",
         "operationId": "GroupQuotaUsages_Get",
         "x-ms-examples": {
-          "GroupQuotasEnforcement_Get": {
+          "GroupQuotasUsages_Get": {
             "$ref": "./examples/GroupQuotaUsages/GetGroupQuotaUsages.json"
           }
         },
@@ -1745,8 +1745,8 @@
                 }
               }
             },
-            "location": {
-              "$ref": "#/definitions/LocationScope"
+            "region": {
+              "$ref": "#/definitions/RegionScope"
             },
             "comments": {
               "description": "GroupQuota Request comments and details for request. This is optional paramter to provide more details related to the requested resource.",
@@ -1787,7 +1787,7 @@
                 }
               }
             },
-            "location": {
+            "region": {
               "type": "string",
               "description": "The location for which the subscription is allocated"
             }
@@ -1834,7 +1834,7 @@
         }
       }
     },
-    "LocationScope": {
+    "RegionScope": {
       "description": "Location/Azure region for the quota requested for resource.",
       "type": "string"
     },
@@ -1842,8 +1842,8 @@
       "type": "object",
       "description": "Group Quota details.",
       "properties": {
-        "location": {
-          "$ref": "#/definitions/LocationScope"
+        "region": {
+          "$ref": "#/definitions/RegionScope"
         },
         "limit": {
           "type": "integer",
@@ -2051,8 +2051,8 @@
       "type": "object",
       "description": "Subscription Quota details.",
       "properties": {
-        "location": {
-          "$ref": "#/definitions/LocationScope"
+        "region": {
+          "$ref": "#/definitions/RegionScope"
         },
         "limit": {
           "type": "integer",
@@ -2435,6 +2435,19 @@
         }
       }
     },
+    "EnforcementState": {
+      "description": "Enforcement status.",
+      "enum": [
+        "Enabled",
+        "Disabled",
+        "NotAvailable"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "EnforcementState",
+        "modelAsString": true
+      }
+    },
     "GroupQuotasEnforcementResponse": {
       "type": "object",
       "description": "The GroupQuota Enforcement status for a Azure Location/Region.",
@@ -2448,7 +2461,7 @@
           "type": "object",
           "properties": {
             "enforcementEnabled": {
-              "type": "boolean",
+              "$ref": "#/definitions/EnforcementState",
               "description": "Is the GroupQuota Enforcement enabled for the Azure region."
             },
             "provisioningState": {

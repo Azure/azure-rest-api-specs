@@ -82,6 +82,7 @@ suppressions:
     reason: This API is a Management Group level API.
   - code: TenantLevelAPIsNotAllowed 
     from: groupquota.json
+    where: $.paths["/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}"]
     reason: This API is a Management Group level API.
   - code: AllProxyResourcesShouldHaveDelete
     from: groupquota.json
