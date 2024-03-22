@@ -31,28 +31,6 @@ model PortalTenantCompileFile
   @visibility("read")
   name: string;
 }
-// alias ProviderAction<
-//   Request extends {} | void,
-//   Response extends {} | void,
-//   Parameters extends {} = {}
-// > = ArmResourceActionSync<
-//   {
-//     ...Azure.ResourceManager.Foundations.ArmResource;
-//   },
-//   Request,
-//   Response,
-//   Parameters = Parameters,
-//   BaseParameters = ApiVersionParameter
-// >;
-
-// @armResourceOperations
-// interface PortalTenant {
-//   @doc("compiles a file using inline content.")
-//   compilefile is ProviderAction<
-//     PortalTenantCompileFile,
-//     PortalTenantCompileFileResult
-//   >;
-// }
 
 @armResourceOperations
 interface PortalTenant {
