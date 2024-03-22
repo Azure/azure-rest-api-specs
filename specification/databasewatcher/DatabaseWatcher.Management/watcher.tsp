@@ -83,15 +83,17 @@ model Datastore {
 }
 
 @doc("The type of Kusto offering.")
-enum KustoOfferingType {
+union KustoOfferingType {
+  string,
+
   @doc("The Azure Data Explorer cluster Kusto offering.")
-  adx,
+  adx: "adx",
 
   @doc("The free Azure Data Explorer cluster Kusto offering.")
-  free,
+  free: "free",
 
   @doc("The Fabric Real-Time Analytics Kusto offering.")
-  fabric,
+  fabric: "fabric",
 }
 
 // Currently ProviderHub library for TypeSpec does not support
@@ -139,24 +141,27 @@ interface Watchers {
 }
 
 @doc("The monitoring collection status of a watcher.")
-enum WatcherStatus {
+union WatcherStatus {
+  string,
+
   @doc("Denotes the watcher is in a starting state.")
-  Starting,
+  Starting: "Starting",
 
   @doc("Denotes the watcher is in a running state.")
-  Running,
+  Running: "Running",
 
   @doc("Denotes the watcher is in a stopping state.")
-  Stopping,
+  Stopping: "Stopping",
 
   @doc("Denotes the watcher is in a stopped state.")
-  Stopped,
+  Stopped: "Stopped",
 
   @doc("Denotes the watcher is in a deleting state.")
-  Deleting,
+  Deleting: "Deleting",
 }
 
 @doc("The status of the last provisioning operation performed on the resource.")
-enum DatabaseWatcherProvisioningState {
-  ...ResourceProvisioningState,
+union DatabaseWatcherProvisioningState {
+  string,
+  ResourceProvisioningState,
 }
