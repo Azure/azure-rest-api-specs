@@ -127,6 +127,13 @@
             "$ref": "#/parameters/DataCollectionEndpointNameParameter"
           },
           {
+            "in": "query",
+            "name": "expandPrivateLinkScope",
+            "description": "If set to 'true', it will include all Azure Monitor Private Link Scoped Resources through which this DCR is associated with any AMPLS.",
+            "type": "boolean",
+            "default": false
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -173,6 +180,11 @@
             "$ref": "#/parameters/DataCollectionEndpointNameParameter"
           },
           {
+            "in": "header",
+            "name": "x-ms-skip-dns-provisioning",
+            "type": "boolean"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -191,12 +203,6 @@
               "$ref": "#/definitions/DataCollectionEndpointResource"
             }
           },
-          "201": {
-            "description": "Data collection endpoint was successfully created",
-            "schema": {
-              "$ref": "#/definitions/DataCollectionEndpointResource"
-            }
-          },
           "default": {
             "description": "Error",
             "schema": {
@@ -205,8 +211,11 @@
           }
         },
         "x-ms-examples": {
-          "Create or update data collection endpoint": {
+          "Create a data collection endpoint": {
             "$ref": "./examples/DataCollectionEndpointsCreate.json"
+          },
+          "Update a data collection endpoint": {
+            "$ref": "./examples/DataCollectionEndpointsUpdate.json"
           }
         }
       },
@@ -260,7 +269,7 @@
         },
         "x-ms-examples": {
           "Update data collection endpoint": {
-            "$ref": "./examples/DataCollectionEndpointsUpdate.json"
+            "$ref": "./examples/DataCollectionEndpointsPatch.json"
           }
         }
       },
@@ -284,6 +293,13 @@
             "$ref": "#/parameters/DataCollectionEndpointNameParameter"
           },
           {
+            "in": "query",
+            "name": "deleteAssociations",
+            "description": "If set to 'true' then all associations of this data collection endpoint will also be deleted",
+            "type": "boolean",
+            "default": false
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -304,6 +320,47 @@
         "x-ms-examples": {
           "Delete data collection endpoint": {
             "$ref": "./examples/DataCollectionEndpointsDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/dataCollectionEndpoints/{dataCollectionEndpointName}/triggerFailover": {
+      "post": {
+        "tags": [
+          "DataCollectionEndpoints"
+        ],
+        "operationId": "DataCollectionEndpoints_TriggerFailover",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataCollectionEndpointNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./dataCollectionRules_API.json#/definitions/ErrorResponseCommonV2"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Trigger failover on data collection endpoint": {
+            "$ref": "./examples/DataCollectionEndpointsTriggerFailover.json"
           }
         }
       }
@@ -333,7 +390,7 @@
           "description": "The endpoint. This property is READ-ONLY.",
           "type": "string",
           "readOnly": true,
-          "example": "https://mydce-abcd.eastus-1.ingest.monitor.azure.com",
+          "example": "https://mydce-abcd.eastus-1.control.monitor.azure.com",
           "x-ms-mutability": [
             "read"
           ]
@@ -348,7 +405,7 @@
           "description": "The endpoint. This property is READ-ONLY.",
           "type": "string",
           "readOnly": true,
-          "example": "https://mydce-abcd.eastus-1.ingest.monitor.azure.com",
+          "example": "https://mydce-abcd.eastus-1.control.monitor.azure.com",
           "x-ms-mutability": [
             "read"
           ]
@@ -368,7 +425,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "KnownPublicNetworkAccessOptions",
+            "name": "KnownNetworkRuleSetPublicNetworkAccess",
             "modelAsString": true
           }
         }
@@ -404,7 +461,6 @@
             "Updating",
             "Deleting",
             "Succeeded",
-            "Canceled",
             "Failed"
           ],
           "type": "string",
@@ -422,7 +478,11 @@
         "activeLocation": {
           "description": "Active location where data flow will occur.",
           "type": "string",
-          "example": "East US"
+          "readOnly": true,
+          "example": "East US",
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "locations": {
           "description": "Locations that are configured for failover.",
@@ -430,8 +490,9 @@
           "items": {
             "$ref": "#/definitions/LocationSpec"
           },
-          "x-ms-identifiers": [
-            "location"
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
           ]
         }
       }
@@ -454,6 +515,15 @@
           "type": "string",
           "readOnly": true,
           "example": "/subscriptions/da58aca0-2082-4f5a-85ba-27344286c17c/resourceGroups/ws-rg/providers/Microsoft.OperationalInsights/workspaces/ws-name1",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "provisionedByImmutableId": {
+          "description": "Immutable Id of azure offering managing this resource on-behalf-of customer.",
+          "type": "string",
+          "readOnly": true,
+          "example": "baeea43c-db35-4d6f-9d3b-26d3a5e792e2",
           "x-ms-mutability": [
             "read"
           ]
@@ -512,7 +582,6 @@
             "Updating",
             "Deleting",
             "Succeeded",
-            "Canceled",
             "Failed"
           ],
           "type": "string",
@@ -535,8 +604,7 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ],
-          "x-ms-identifiers": []
+          ]
         },
         "failoverConfiguration": {
           "description": "Failover configuration on this endpoint. This property is READ-ONLY.",
@@ -620,7 +688,7 @@
           "description": "Fully qualified ID of the resource.",
           "type": "string",
           "readOnly": true,
-          "example": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionEndpoints/myCollectionEndpoint",
+          "example": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionRules/myCollectionRule",
           "x-ms-mutability": [
             "read"
           ]
@@ -629,7 +697,7 @@
           "description": "The name of the resource.",
           "type": "string",
           "readOnly": true,
-          "example": "myCollectionEndpoint",
+          "example": "myCollectionRule",
           "x-ms-mutability": [
             "read"
           ]
@@ -686,7 +754,7 @@
         }
       }
     },
-    "ResourceForUpdate": {
+	 "ResourceForUpdate": {
       "description": "Definition of ARM tracked top level resource properties for update operation.",
       "type": "object",
       "properties": {
@@ -704,6 +772,26 @@
               "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
             }
           ]
+        },
+        "failoverConfiguration": {
+          "description": "Failover configuration",
+          "allOf": [
+            {
+              "$ref": "#/definitions/FailoverConfigurationSpec"
+            }
+          ]
+        },
+        "metadata": {
+          "description": "Payload for Data Collection Endpoint",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Metadata"
+            }
+          ]
+        },
+        "kind": {
+          "description": "Kind of Data Collection Endpoint",
+          "type": "string"
         }
       }
     }
