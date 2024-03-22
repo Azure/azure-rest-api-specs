@@ -10,14 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.CodeSigning
-  output-folder: $(csharp-sdks-folder)/codeSigning/Microsoft.Azure.Management.CodeSigning/src/Generated
-directive: 
-  - reason: Altering the incorrect null check for required fields in an optional body in listClusterUserCredentials
-    where: $
-    transform: > 
-      if( /AuthenticationDetails clientAuthenticationDetails/g.exec( $ ) ) {
-        $ = $.replace( /(if \(value == null\)[\s]+{[\s]+throw new ValidationException\(ValidationRules.CannotBeNull, "value"\);[\s]+}[\s]+)AuthenticationDetails/g, "AuthenticationDetails" );
-      } 
-  
+  namespace: Azure.ResourceManager.TrustedSigning
+  output-folder: $(csharp-sdks-folder)/trustedsigning/management/Azure.ResourceManager.TrustedSigning/GeneratedProtocol
 ```
