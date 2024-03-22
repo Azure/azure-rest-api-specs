@@ -1589,31 +1589,6 @@ Account on a Compute Node only when it is in the idle or running state.
     AcceptedProcessingResponseHeaders
   >;
 
-  @summary("Reinstalls the operating system on the specified Compute Node.")
-  @doc("""
-You can reinstall the operating system on a Compute Node only if it is in an
-idle or running state. This API can be invoked only on Pools created with the
-cloud service configuration property.
-""")
-  @route("/pools/{poolId}/nodes/{nodeId}/reimage")
-  @clientName("reimageNodeInternal", "java")
-  reimageNode is BatchOps.PostOperation<
-    MinimalMetadata & {
-      @doc("The ID of the Pool that contains the Compute Node.")
-      @path
-      poolId: string;
-
-      @doc("The ID of the Compute Node that you want to restart.")
-      @path
-      nodeId: string;
-
-      @doc("The options to use for reimaging the Compute Node.")
-      @body
-      parameters?: BatchNodeReimageContent;
-    },
-    AcceptedProcessingResponseHeaders
-  >;
-
   @summary("Disables Task scheduling on the specified Compute Node.")
   @doc("""
 You can disable Task scheduling on a Compute Node only if its current
@@ -1663,8 +1638,6 @@ state is disabled
 Before you can remotely login to a Compute Node using the remote login
 settings, you must create a user Account on the Compute Node. This API can be
 invoked only on Pools created with the virtual machine configuration property.
-For Pools created with a cloud service configuration, see the GetRemoteDesktop
-API.
 """)
   @route("/pools/{poolId}/nodes/{nodeId}/remoteloginsettings")
   @clientName("getNodeRemoteLoginSettingsInternal", "java")
@@ -1679,39 +1652,6 @@ API.
       nodeId: string;
     },
     BatchNodeRemoteLoginSettings
-  >;
-
-  @summary("Gets the Remote Desktop Protocol file for the specified Compute Node.")
-  @doc("""
-Before you can access a Compute Node by using the RDP file, you must create a
-user Account on the Compute Node. This API can only be invoked on Pools created
-with a cloud service configuration. For Pools created with a virtual machine
-configuration, see the GetRemoteLoginSettings API.
-""")
-  @route("/pools/{poolId}/nodes/{nodeId}/rdp")
-  @clientName("getNodeRemoteDesktopFileInternal", "java")
-  getNodeRemoteDesktopFile is BatchOps.ReadOperation<
-    {
-      @doc("The ID of the Pool that contains the Compute Node.")
-      @path
-      poolId: string;
-
-      @doc("""
-The ID of the Compute Node for which you want to get the Remote Desktop
-Protocol file.
-""")
-      @path
-      nodeId: string;
-    },
-    {
-      @doc("Type of content")
-      @header("content-type")
-      contentType: "application/octet-stream";
-
-      @body
-      @doc("A response containing the file content.")
-      file: bytes;
-    }
   >;
 
   @summary("""
