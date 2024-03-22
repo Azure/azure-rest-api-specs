@@ -42,9 +42,7 @@ directive:
   - suppress: ResourceNameRestriction
     from: sqlServerAvailabilityGroups.json
     reason: No Unicode support for attribute pattern regex on sqlServerInstanceName and others. This should be fixed by tooling.
-tag: package-preview-2024-04
 ```
-
 
 ### Tag: package-preview-2024-04
 
