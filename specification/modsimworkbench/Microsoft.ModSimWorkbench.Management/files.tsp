@@ -46,7 +46,7 @@ enum FileActionForce {
 @doc("Parameters for managing a file.")
 model FileManageParameters {
   @doc("The chamber data pipeline direction.")
-  dataPipeline: DataPipelineDirection;
+  dataPipeline?: DataPipelineDirection;
 
   @doc("Action to be performed on data pipeline file.")
   action: FileAction;
@@ -107,6 +107,6 @@ interface Files extends ProxyResourceOperations<File> {
   downloadRequest is ArmResourceActionAsync<
     File,
     FileDownloadRequestParameters,
-    ResultProperty // TODO: Document meaning of result.
+    ResultProperty
   >;
 }
