@@ -80,9 +80,11 @@ interface PrivateClouds {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
   delete is ArmResourceDeleteAsync<PrivateCloud>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API"
   @doc("Rotate the vCenter password")
   rotateVcenterPassword is ArmResourceActionNoContentAsyncNoRequestBody<PrivateCloud>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API"
   @doc("Rotate the NSX-T Manager password")
   rotateNsxtPassword is ArmResourceActionNoContentAsyncNoRequestBody<PrivateCloud>;
 

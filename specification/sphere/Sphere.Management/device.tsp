@@ -48,6 +48,7 @@ interface ProxyResourceOperationsDevice<
 
 @armResourceOperations
 interface Devices extends ProxyResourceOperationsDevice<Device> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API"
   @autoRoute
   @sharedRoute
   @removed(Versions.v2024_04_01)
