@@ -170,7 +170,6 @@ model CheckQuotaAvailabilityResponseProperties {
   availabilityStatus?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "QuotaBucketRequest has a allOf relationship with Resource"
 @doc("Request object of new quota for a quota bucket.")
 model QuotaBucketRequest {
   @extension("x-ms-client-flatten", true)

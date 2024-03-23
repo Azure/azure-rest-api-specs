@@ -55,12 +55,6 @@ interface LoadTests {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "OperationID already published."
   @operationId("LoadTests_ListOutboundNetworkDependenciesEndpoints")
   @doc("Lists the endpoints that agents may call as part of load testing.")
-  @extension(
-    "x-ms-pageable",
-    {
-      nextLinkName: "nextLink",
-    }
-  )
   outboundNetworkDependenciesEndpoints is CustomOperations.ArmResourceActionSyncCustomGet<
     LoadTestResource,
     void,
