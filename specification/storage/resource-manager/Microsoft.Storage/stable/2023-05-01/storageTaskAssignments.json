@@ -80,6 +80,70 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         }
+      },
+      "patch": {
+        "tags": [
+          "StorageTaskAssignments"
+        ],
+        "description": "Update storage task assignment properties",
+        "operationId": "StorageTaskAssignments_Update",
+        "x-ms-examples": {
+          "PatchStorageTaskAssignment": {
+            "$ref": "./examples/storageTaskAssignmentsCrud/PatchStorageTaskAssignment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./storage.json#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "#/parameters/StorageTaskAssignmentName"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageTaskAssignment"
+            },
+            "description": "The parameters to update a Storage Task Assignment."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- returned when the update request body had no changes.",
+            "schema": {
+              "$ref": "#/definitions/StorageTaskAssignment"
+            }
+          },
+          "202": {
+            "description": "Accepted -- update request accepted; operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     }
   },
