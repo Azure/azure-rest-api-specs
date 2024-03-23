@@ -46,8 +46,6 @@ input-file:
   - Microsoft.Chaos/preview/2024-03-22-preview/privateAccesses.json
   - Microsoft.Chaos/preview/2024-03-22-preview/targetTypes.json
   - Microsoft.Chaos/preview/2024-03-22-preview/targets.json
-<<<<<<< HEAD
-=======
 directive:
   - from: swagger-document
     where: "$.definitions.action"
@@ -85,7 +83,6 @@ directive:
     where: "$.definitions.querySelector"
     transform: >
       $["x-ms-client-name"] = "ChaosTargetQuerySelector";
->>>>>>> 9917e4d0ce5a43e0a8cd23fcc2a3b191f097409d
 ```
 ### Tag: package-2024-01
 
