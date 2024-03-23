@@ -1,0 +1,247 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "StorageTaskAssignmentsManagementClient",
+    "description": "The Azure Storage Task Assignments Management API.",
+    "version": "2023-05-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/storageTaskAssignments/{storageTaskAssignmentName}": {
+      "put": {
+        "tags": [
+          "StorageTaskAssignments"
+        ],
+        "description": "Asynchronously creates a new storage task assignment sub-resource with the specified parameters. If a storage task assignment is already created and a subsequent create request is issued with different properties, the storage task assignment properties will be updated. If a storage task assignment is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.",
+        "operationId": "StorageTaskAssignments_Create",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./storage.json#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "#/parameters/StorageTaskAssignmentName"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageTaskAssignment"
+            },
+            "description": "The parameters to create a Storage Task Assignment."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Update storage task assignment with the same properties specified in the request body.",
+            "schema": {
+              "$ref": "#/definitions/StorageTaskAssignment"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Create or update request accepted; operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "StorageTaskAssignment": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/StorageTaskAssignmentProperties",
+          "description": "Properties of the storage task assignment."
+        }
+      },
+      "description": "Represents Storage Task Assignment."
+    },
+    "StorageTaskAssignmentProperties": {
+      "type": "object",
+      "properties": {
+        "taskId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Id of the corresponding storage task"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the storage task assignment is enabled or not"
+        },
+        "description": {
+          "type": "string",
+          "description": "Text that describes the purpose of the storage task assignment"
+        },
+        "executionContext": {
+          "$ref": "#/definitions/StorageTaskAssignmentExecutionContext",
+          "description": "The storage task assignment execution context"
+        },
+        "report": {
+          "$ref": "#/definitions/StorageTaskAssignmentReport",
+          "description": "The storage task assignment report"
+        }
+      },
+      "description": "Properties of the storage task assignment."
+    },
+    "StorageTaskAssignmentExecutionContext": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "$ref": "#/definitions/ExecutionTarget",
+          "description": "Execution target of the storage task assignment"
+        },
+        "trigger": {
+          "$ref": "#/definitions/ExecutionTrigger",
+          "description": "Execution trigger of the storage task assignment"
+        },
+        "constraints": {
+          "$ref": "#/definitions/ExecutionConstraints",
+          "description": "Execution constraints of the storage task assignment"
+        }
+      },
+      "description": "Execution context of the storage task assignment."
+    },
+    "ExecutionTarget": {
+      "type": "object",
+      "properties": {
+        "prefix": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of target prefixes"
+        },
+        "excludePrefix": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of target prefixes to exclude"
+        },
+        "reservedPathPrefix": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of reserved path prefixes"
+        }
+      },
+      "description": "Target for storage task assignment execution"
+    },
+    "ExecutionTrigger": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "RunOnce",
+            "OnSchedule"
+          ],
+          "description": "The trigger type of the storage task assignment execution"
+        },
+        "parameters": {
+          "$ref": "#/definitions/TriggerParameters",
+          "description": "The trigger parameters of the storage task assignment execution"
+        }
+      },
+      "description": "Trigger for storage task assignment execution"
+    },
+    "TriggerParameters": {
+      "type": "object",
+      "properties": {
+        "startFrom": {
+          "type": "string",
+          "description": "When to start task execution"
+        },
+        "interval": {
+          "type": "integer",
+          "description": "Run interval of task execution"
+        },
+        "intervalUnit": {
+          "type": "string",
+          "enum": [
+            "days"
+          ],
+          "description": "Run interval unit of task execution"
+        },
+        "endBy": {
+          "type": "string",
+          "description": "When to end task execution"
+        },
+        "startOn": {
+          "type": "string",
+          "description": "startOn for task execution"
+        }
+      },
+      "description": "The trigger parameters of the storage task assignment execution"
+    },
+    "ExecutionConstraints": {
+      "type": "object",
+      "properties": {
+        "abortOnFailures": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "abortOnFailures constraint for storage task assignment execution"
+        }
+      },
+      "description": "Constraints for storage task assignment execution"
+    },
+    "StorageTaskAssignmentReport": {
+      "type": "object",
+      "properties": {
+        "prefix": {
+          "type": "string",
+          "description": "The prefix of the storage task assignment report"
+        }
+      },
+      "description": "The storage task assignment report"
+    }
+  },
+  "parameters": {
+    "StorageTaskAssignmentName": {
+      "name": "storageTaskAssignmentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the storage task assignment within the specified storage account. Storage task assignment names must be between 3 and 18 characters in length and use numbers and lower-case letters only.",
+      "pattern": "^[a-z0-9]{3,18}$",
+      "maxLength": 18,
+      "minLength": 3,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
