@@ -23,6 +23,11 @@
         ],
         "description": "Asynchronously creates a new storage task assignment sub-resource with the specified parameters. If a storage task assignment is already created and a subsequent create request is issued with different properties, the storage task assignment properties will be updated. If a storage task assignment is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed.",
         "operationId": "StorageTaskAssignments_Create",
+        "x-ms-examples": {
+          "PutStorageTaskAssignment": {
+            "$ref": "./examples/storageTaskAssignmentsCrud/PutStorageTaskAssignment.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -94,7 +99,6 @@
       "type": "object",
       "properties": {
         "taskId": {
-          "readOnly": true,
           "type": "string",
           "description": "Id of the corresponding storage task"
         },
