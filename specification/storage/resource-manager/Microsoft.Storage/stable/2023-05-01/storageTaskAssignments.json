@@ -144,6 +144,49 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         }
+      },
+      "get": {
+        "tags": [
+          "StorageTaskAssignments"
+        ],
+        "description": "Get the storage task assignment properties",
+        "operationId": "StorageTaskAssignments_Get",
+        "x-ms-examples": {
+          "GetStorageTaskAssignment": {
+            "$ref": "./examples/storageTaskAssignmentsCrud/GetStorageTaskAssignment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./storage.json#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "#/parameters/StorageTaskAssignmentName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- properties retrieved successfully for the storage task assignment.",
+            "schema": {
+              "$ref": "#/definitions/StorageTaskAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     }
   },
