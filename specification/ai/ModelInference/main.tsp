@@ -2,6 +2,8 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 
+import "./routes/completions.tsp";
+
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -20,59 +22,13 @@ using Azure.Core;
   title: "Azure.AI.Inference service",
 })
 @versioned(Azure.AI.Inference.Versions)
+#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Namespace types must use PascalCase"
 namespace Azure.AI.Inference;
 
 @doc("The Azure.AI.Inference service versions.")
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @doc("The 2022-11-01-preview version of the Azure.AI.Inference service.")
-  `2022-11-01-preview`,
+  @doc("The 2024-04-01-preview version of the Azure.AI.Inference service.")
+  v2024_04_01_Preview: "2024-04-01-preview",
 }
 
-@doc("A widget.")
-@resource("widgets")
-model Widget {
-  @key("widgetName")
-  @doc("The widget name.")
-  @visibility("read")
-  name: string;
-
-  @doc("The ID of the manufacturer.")
-  manufacturerId: string;
-
-  @doc("The faked shared model.")
-  sharedModel?: FakedSharedModel;
-}
-
-@doc("Faked shared model")
-model FakedSharedModel {
-  @doc("The tag.")
-  tag: string;
-
-  @doc("The created date.")
-  createdDate: utcDateTime;
-}
-
-interface Widgets {
-  @doc("Fetch a Widget by name.")
-  getWidget is ResourceRead<Widget>;
-
-  @doc("Gets status of a Widget operation.")
-  getWidgetOperationStatus is GetResourceOperationStatus<Widget>;
-
-  @doc("Creates or updates a Widget asynchronously.")
-  @pollingOperation(Widgets.getWidgetOperationStatus)
-  createOrUpdateWidget is LongRunningResourceCreateOrUpdate<Widget>;
-
-  @doc("Delete a Widget asynchronously.")
-  @pollingOperation(Widgets.getWidgetOperationStatus)
-  deleteWidget is LongRunningResourceDelete<Widget>;
-
-  @doc("List Widget resources")
-  listWidgets is ResourceList<
-    Widget,
-    {
-      parameters: StandardListQueryParameters;
-    }
-  >;
-}
