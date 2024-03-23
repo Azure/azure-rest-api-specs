@@ -46,6 +46,46 @@ input-file:
   - Microsoft.Chaos/preview/2024-03-22-preview/privateAccesses.json
   - Microsoft.Chaos/preview/2024-03-22-preview/targetTypes.json
   - Microsoft.Chaos/preview/2024-03-22-preview/targets.json
+<<<<<<< HEAD
+=======
+directive:
+  - from: swagger-document
+    where: "$.definitions.action"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentAction";
+  - from: swagger-document
+    where: "$.definitions.branch"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentBranch";
+  - from: swagger-document
+    where: "$.definitions.step"
+    transform: >
+      $["x-ms-client-name"] = "ChaosExperimentStep";
+  - from: swagger-document
+    where: "$.definitions.filter"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetFilter";
+  - from: swagger-document
+    where: "$.definitions.simpleFilter"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSimpleFilter";
+  - from: swagger-document
+    where: "$.definitions.simpleFilterParameters"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSimpleFilterParameters";
+  - from: swagger-document
+    where: "$.definitions.selector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetSelector";
+  - from: swagger-document
+    where: "$.definitions.listSelector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetListSelector";
+  - from: swagger-document
+    where: "$.definitions.querySelector"
+    transform: >
+      $["x-ms-client-name"] = "ChaosTargetQuerySelector";
+>>>>>>> 9917e4d0ce5a43e0a8cd23fcc2a3b191f097409d
 ```
 ### Tag: package-2024-01
 
@@ -355,7 +395,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js

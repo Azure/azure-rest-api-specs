@@ -222,6 +222,7 @@ model ErrorDefinition {
    * Internal error details.
    */
   @visibility("read")
+  @extension("x-ms-identifiers", [])
   details?: ErrorDefinition[];
 }
 

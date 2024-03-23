@@ -204,7 +204,11 @@
         ],
         "responses": {
           "201": {
+<<<<<<< HEAD
             "description": "Private access resource created successfully.",
+=======
+            "description": "Long running Private access resource created successfully.",
+>>>>>>> 9917e4d0ce5a43e0a8cd23fcc2a3b191f097409d
             "schema": {
               "$ref": "./types/privateAccesses.json#/definitions/PrivateAccess"
             }
@@ -222,6 +226,13 @@
             }
           }
         },
+<<<<<<< HEAD
+=======
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+>>>>>>> 9917e4d0ce5a43e0a8cd23fcc2a3b191f097409d
         "x-ms-examples": {
           "Create or Update a private access resource": {
             "$ref": "./examples/CreateOrUpdateAPrivateAccess.json"
@@ -231,6 +242,62 @@
           }
         }
       },
+<<<<<<< HEAD
+=======
+      "patch": {
+        "tags": [
+          "PrivateAccesses"
+        ],
+        "operationId": "PrivateAccesses_Patch",
+        "description": "Patch a private access tags",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/PrivateAccessName"
+          },
+          {
+            "name": "privateAccess",
+            "description": "private access resource's tags to be updated.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./types/privateAccesses.json#/definitions/privateAccessPatch"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request to update the tags for the Private Access resource has been accepted for processing.",
+            "schema": {
+              "$ref": "./types/privateAccesses.json#/definitions/PrivateAccess"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a private access resource's tags": {
+            "$ref": "./examples/UpdateAPrivateAccessTags.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+>>>>>>> 9917e4d0ce5a43e0a8cd23fcc2a3b191f097409d
       "delete": {
         "tags": [
           "PrivateAccesses"
@@ -252,11 +319,16 @@
           }
         ],
         "responses": {
+<<<<<<< HEAD
           "200": {
             "description": "OK"
           },
           "204": {
             "description": "Resource deleted successfully."
+=======
+          "202": {
+            "description": "Asynchronous delete operation."
+>>>>>>> 9917e4d0ce5a43e0a8cd23fcc2a3b191f097409d
           },
           "default": {
             "description": "An unexpected error response.",
@@ -265,6 +337,13 @@
             }
           }
         },
+<<<<<<< HEAD
+=======
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+>>>>>>> 9917e4d0ce5a43e0a8cd23fcc2a3b191f097409d
         "x-ms-examples": {
           "Delete a private access resource": {
             "$ref": "./examples/DeleteAPrivateAccess.json"
@@ -468,7 +547,11 @@
       "type": "string",
       "pattern": "^[^<>%&:?#/\\\\]+$",
       "minLength": 1,
+<<<<<<< HEAD
       "description": "The name of the private access resource that is being created. Supported characters for the name are a-z, A-Z, 0-9 , _ and -. The maximum name length is 80 characters.",
+=======
+      "description": "The name of the private access resource that is being created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.",
+>>>>>>> 9917e4d0ce5a43e0a8cd23fcc2a3b191f097409d
       "x-ms-parameter-location": "method"
     },
     "PrivateEndpointConnectionName": {

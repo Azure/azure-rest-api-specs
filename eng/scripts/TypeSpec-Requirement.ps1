@@ -3,8 +3,9 @@ param (
   [Parameter(Position = 0)]
   [string] $BaseCommitish = "HEAD^",
   [Parameter(Position = 1)]
-  [string] $TargetCommitish = "HEAD"
-
+  [string] $TargetCommitish = "HEAD",
+  [Parameter(Position = 2)]
+  [string] $SpecType = "data-plane|resource-manager"
 )
 Set-StrictMode -Version 3
 
@@ -21,14 +22,10 @@ function Find-Suppressions-Yaml {
   $currentDirectory = Get-Item (Split-Path -Path $fileInSpecFolder)
 
   while ($currentDirectory) {
-    # Support both .yaml and .yml, preferring the former
-    $suppressionsFileYaml = Join-Path -Path $currentDirectory.FullName -ChildPath "suppressions.yaml"
-    $suppressionsFileYml = Join-Path -Path $currentDirectory.FullName -ChildPath "suppressions.yml"
+    $suppressionsFile = Join-Path -Path $currentDirectory.FullName -ChildPath "suppressions.yaml"
 
-    if (Test-Path $suppressionsFileYaml) {
-      return $suppressionsFileYaml
-    } elseif (Test-Path $suppressionsFileYml) {
-      return $suppressionsFileYml
+    if (Test-Path $suppressionsFile) {
+      return $suppressionsFile
     } else {
       $currentDirectory = $currentDirectory.Parent
     }
@@ -69,7 +66,7 @@ $pathsWithErrors = @()
 
 $filesToCheck = (Get-ChangedSwaggerFiles (Get-ChangedFiles $BaseCommitish $TargetCommitish)).Where({
   ($_ -notmatch "/(examples|scenarios|restler|common|common-types)/") -and
-  ($_ -match "specification/[^/]+/(data-plane|resource-manager).*?/(preview|stable)/[^/]+/[^/]+\.json$")
+  ($_ -match "specification/[^/]+/($SpecType).*?/(preview|stable)/[^/]+/[^/]+\.json$")
 })
 
 if (!$filesToCheck) {
@@ -117,7 +114,7 @@ else {
     }
 
     # Extract path between "specification/" and "/(preview|stable)"
-    if ($file -match "specification/(?<servicePath>[^/]+/(data-plane|resource-manager).*?)/(preview|stable)/[^/]+/[^/]+\.json$") {
+    if ($file -match "specification/(?<servicePath>[^/]+/($SpecType).*?)/(preview|stable)/[^/]+/[^/]+\.json$") {
       $servicePath = $Matches["servicePath"]
     }
     else {
