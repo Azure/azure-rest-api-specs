@@ -1,6 +1,6 @@
 parameters:  
   "service-dir":
-    default: "sdk/modelinference"
+    default: "sdk/machinelearning"
   "dependencies":
     "additionalDirectories": []
     default: ""
@@ -16,21 +16,6 @@ options:
     package-dir: "azure-ai-inference"
     package-name: "{package-dir}"
     package-mode: dataplane
-  "@azure-tools/typespec-csharp":
-    package-dir: "Azure.AI.Inference"
-    namespace: "{package-dir}"
-    clear-output-folder: true
-    model-namespace: false
-  "@azure-tools/typespec-ts":
-    package-dir: "azure-ai-inference-rest"
-    generateMetadata: true
-    generateTest: true
-    packageDetails:
-      name: "@azure-rest/azure-ai-inference-rest"
-      description: "Azure.AI.Inference Service"
-  "@azure-tools/typespec-java":
-    package-dir: "azure-ai-inference"
-    namespace: com.azure.ai.inference
 linter:
   extends:
     - "@azure-tools/typespec-azure-core/all"

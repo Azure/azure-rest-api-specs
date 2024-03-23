@@ -13,6 +13,7 @@ namespace Client;
   name: "ModelClient",
   service: Azure.AI.Inference,
 })
+
 interface ModelClient {
   getChatCompletions is Azure.AI.Inference.getChatCompletions;
 }
