@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "subscriptionId": "703362b3-f278-4e4b-9179-c76eaf41ffc2",
+    "resourceGroupName": "myResourceGroup",
+    "dataCollectionEndpointName": "myCollectionEndpoint",
+    "api-version": "2019-11-01-preview",
+    "body": {
+      "tags": {
+        "tag1": "A",
+        "tag2": "B",
+        "tag3": "C"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionEndpoints/myCollectionEndpoint",
+        "name": "myCollectionEndpoint",
+        "type": "Microsoft.Insights/dataCollectionEndpoints",
+        "location": "eastus",
+        "tags": {
+          "tag1": "A",
+          "tag2": "B",
+          "tag3": "C"
+        },
+        "properties": {
+          "configurationAccess": {
+            "endpoint": "https://mycollectionendpoint-abcd.eastus-1.control.monitor.azure.com"
+          },
+          "logsIngestion": {
+            "endpoint": "https://mycollectionendpoint-abcd.eastus-1.ingest.monitor.azure.com"
+          },
+          "networkAcls": {
+            "publicNetworkAccess": "Enabled"
+          }
+        },
+        "etag": "070057da-0000-0000-0000-5ba70d6c0000"
+      }
+    }
+  }
+}
