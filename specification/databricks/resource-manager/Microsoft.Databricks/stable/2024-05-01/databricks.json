@@ -94,8 +94,8 @@
           "Delete a workspace": {
             "$ref": "./examples/WorkspaceDelete.json"
           },
-          "Delete a workspace with retainUcData parameter": {
-            "$ref": "./examples/WorkspaceDeleteRetainUcData.json"
+          "Delete a workspace with forceDeletion parameter": {
+            "$ref": "./examples/WorkspaceDeleteForceDeletion.json"
           }
         },
         "parameters": [
@@ -112,10 +112,11 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "retainUcData",
+            "name": "forceDeletion",
             "in": "query",
             "required": false,
             "type": "boolean",
+            "default": false,
             "description": "Optional parameter to retain default unity catalog data. By default the data will retained if Uc is enabled on the workspace."
           }
         ],
