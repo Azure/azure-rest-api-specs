@@ -260,6 +260,12 @@
           },
           "Create a scale set with Security Posture Reference": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithSecurityPostureReference.json"
+          },
+          "Create a scale set with Resilient VM Creation enabled": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithResilientVMCreationPolicy.json"
+          },
+          "Create a scale set with Resilient VM Deletion enabled": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithResilientVMDeletionPolicy.json"
           }
         }
       },
@@ -3644,6 +3650,37 @@
       },
       "description": "Describes an upgrade policy - automatic, manual, or rolling."
     },
+    "ResiliencyPolicy": {
+      "properties": {
+        "resilientVMCreationPolicy": {
+          "$ref": "#/definitions/ResilientVMCreationPolicy",
+          "description": "The configuration parameters used while performing resilient VM creation."
+        },
+        "resilientVMDeletionPolicy": {
+          "$ref": "#/definitions/ResilientVMDeletionPolicy",
+          "description": "The configuration parameters used while performing resilient VM deletion."
+        }
+      },
+      "description": "Describes an resiliency policy - resilientVMCreationPolicy and/or resilientVMDeletionPolicy."
+    },
+    "ResilientVMCreationPolicy": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether resilient VM creation should be enabled on the virtual machine scale set. The default value is false."
+        }
+      },
+      "description": "The configuration parameters used while performing resilient VM creation."
+    },
+    "ResilientVMDeletionPolicy": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether resilient VM deletion should be enabled on the virtual machine scale set. The default value is false."
+        }
+      },
+      "description": "The configuration parameters used while performing resilient VM deletion."
+    },
     "RollingUpgradePolicy": {
       "properties": {
         "maxBatchInstancePercent": {
@@ -4937,6 +4974,10 @@
           "$ref": "#/definitions/AutomaticRepairsPolicy",
           "description": "Policy for automatic repairs."
         },
+        "resiliencyPolicy": {
+          "$ref": "#/definitions/ResiliencyPolicy",
+          "description": "Policy for Resiliency"
+        },
         "virtualMachineProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetVMProfile",
           "description": "The virtual machine profile."
@@ -5022,6 +5063,10 @@
         "automaticRepairsPolicy": {
           "$ref": "#/definitions/AutomaticRepairsPolicy",
           "description": "Policy for automatic repairs."
+        },
+        "resiliencyPolicy": {
+          "$ref": "#/definitions/ResiliencyPolicy",
+          "description": "Policy for Resiliency"
         },
         "virtualMachineProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetUpdateVMProfile",
