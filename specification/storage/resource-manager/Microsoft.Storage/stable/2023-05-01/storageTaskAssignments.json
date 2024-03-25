@@ -354,6 +354,66 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/storageTaskAssignments/{storageTaskAssignmentName}/reports": {
+      "get": {
+        "tags": [
+          "StorageTaskAssignments"
+        ],
+        "description": "Fetch the report summary of a single storage task assignment's instances",
+        "operationId": "StorageTaskAssignmentReport_List",
+        "x-ms-examples": {
+          "ListStorageTaskAssignmentInstancesReportSummary": {
+            "$ref": "./examples/storageTaskAssignmentsList/ListStorageTaskAssignmentInstancesReportSummary.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./storage.json#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "#/parameters/StorageTaskAssignmentName"
+          },
+          {
+            "name": "$maxpagesize",
+            "in": "query",
+            "type": "string",
+            "description": "Optional, specifies the maximum number of storage task assignment instances to be included in the list response."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string",
+            "description": "Optional. When specified, it can be used to query using reporting properties."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- storage task assignment's instances report summary retrieved and returned successfully",
+            "schema": {
+              "$ref": "../../../../../storageactions/resource-manager/Microsoft.StorageActions/stable/2023-01-01/storageactions.json#/definitions/StorageTaskReportSummary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
