@@ -167,11 +167,6 @@
           "x-nullable": true,
           "x-ms-client-name": "finishReason"
         },
-        "finish_details": {
-          "$ref": "#/definitions/ChatFinishDetails",
-          "description": "The reason the model stopped generating tokens, together with any applicable details.\nThis structured representation replaces 'finish_reason' for some models.",
-          "x-ms-client-name": "finishDetails"
-        },
         "delta": {
           "$ref": "#/definitions/ChatResponseMessage",
           "description": "The delta message content for a streaming response."
@@ -203,21 +198,26 @@
           },
           "x-ms-identifiers": []
         },
-        "system_fingerprint": {
-          "type": "string",
-          "description": "Can be used in conjunction with the `seed` request parameter to understand when backend changes have been made that\nmight impact determinism.",
-          "x-ms-client-name": "systemFingerprint"
-        },
         "usage": {
           "$ref": "#/definitions/CompletionsUsage",
           "description": "Usage information for tokens processed and generated as part of this completions operation."
+        },
+        "object": {
+          "type": "string",
+          "description": "The response object type, which is always `chat.completion`."
+        },
+        "model": {
+          "type": "string",
+          "description": "The model used for the chat completion."
         }
       },
       "required": [
         "id",
         "created",
         "choices",
-        "usage"
+        "usage",
+        "object",
+        "model"
       ]
     },
     "ChatCompletionsJsonResponseFormat": {
@@ -259,24 +259,6 @@
           "description": "An alternative to sampling with temperature called nucleus sampling. This value causes the\nmodel to consider the results of tokens with the provided probability mass. As an example, a\nvalue of 0.15 will cause only the tokens comprising the top 15% of probability mass to be\nconsidered.\nIt is not recommended to modify temperature and top_p for the same completions request as the\ninteraction of these two settings is difficult to predict.",
           "x-ms-client-name": "topP"
         },
-        "logit_bias": {
-          "type": "object",
-          "description": "A map between GPT token IDs and bias scores that influences the probability of specific tokens\nappearing in a completions response. Token IDs are computed via external tokenizer tools, while\nbias scores reside in the range of -100 to 100 with minimum and maximum values corresponding to\na full ban or exclusive selection of a token, respectively. The exact behavior of a given bias\nscore varies by model.",
-          "additionalProperties": {
-            "format": "int32",
-            "type": "integer"
-          },
-          "x-ms-client-name": "logitBias"
-        },
-        "user": {
-          "type": "string",
-          "description": "An identifier for the caller or end user of the operation. This may be used for tracking\nor rate-limiting purposes."
-        },
-        "n": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of chat completions choices that should be generated for a chat completions\nresponse.\nBecause this setting can generate many completions, it may quickly consume your token quota.\nUse carefully and ensure reasonable settings for max_tokens and stop."
-        },
         "stop": {
           "type": "array",
           "description": "A collection of textual sequences that will end completions generation.",
@@ -299,10 +281,6 @@
         "stream": {
           "type": "boolean",
           "description": "A value indicating whether chat completions should be streamed for this request."
-        },
-        "model": {
-          "type": "string",
-          "description": "The model name to provide as part of this completions request.\nNot applicable to Azure OpenAI, where deployment information should be included in the Azure\nresource URI that's connected to."
         },
         "seed": {
           "type": "integer",
@@ -342,20 +320,6 @@
         }
       ],
       "x-ms-discriminator-value": "text"
-    },
-    "ChatFinishDetails": {
-      "type": "object",
-      "description": "An abstract representation of structured information about why a chat completions response terminated.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The object type."
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ]
     },
     "ChatMessageContentItem": {
       "type": "object",
@@ -580,35 +544,6 @@
         "prompt_tokens",
         "total_tokens"
       ]
-    },
-    "MaxTokensFinishDetails": {
-      "type": "object",
-      "description": "A structured representation of a stop reason that signifies a token limit was reached before the model could naturally\ncomplete.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChatFinishDetails"
-        }
-      ],
-      "x-ms-discriminator-value": "max_tokens"
-    },
-    "StopFinishDetails": {
-      "type": "object",
-      "description": "A structured representation of a stop reason that signifies natural termination by the model.",
-      "properties": {
-        "stop": {
-          "type": "string",
-          "description": "The token sequence that the model terminated with."
-        }
-      },
-      "required": [
-        "stop"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChatFinishDetails"
-        }
-      ],
-      "x-ms-discriminator-value": "stop"
     },
     "Versions": {
       "type": "string",

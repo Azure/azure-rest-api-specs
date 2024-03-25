@@ -126,32 +126,6 @@ model ChatCompletionsOptions {
   topP?: float32;
 
   @doc("""
-    A map between GPT token IDs and bias scores that influences the probability of specific tokens
-    appearing in a completions response. Token IDs are computed via external tokenizer tools, while
-    bias scores reside in the range of -100 to 100 with minimum and maximum values corresponding to
-    a full ban or exclusive selection of a token, respectively. The exact behavior of a given bias
-    score varies by model.
-    """)
-  @projectedName("json", "logit_bias")
-  logitBias?: Record<int32>;
-
-  @doc("""
-    An identifier for the caller or end user of the operation. This may be used for tracking
-    or rate-limiting purposes.
-    """)
-  @projectedName("json", "user")
-  user?: string;
-
-  @doc("""
-    The number of chat completions choices that should be generated for a chat completions
-    response.
-    Because this setting can generate many completions, it may quickly consume your token quota.
-    Use carefully and ensure reasonable settings for max_tokens and stop.
-    """)
-  @projectedName("json", "n")
-  n?: int32;
-
-  @doc("""
     A collection of textual sequences that will end completions generation.
     """)
   @projectedName("json", "stop")
@@ -180,14 +154,6 @@ model ChatCompletionsOptions {
     """)
   @projectedName("json", "stream")
   stream?: boolean;
-
-  @doc("""
-    The model name to provide as part of this completions request.
-    Not applicable to Azure OpenAI, where deployment information should be included in the Azure
-    resource URI that's connected to.
-    """)
-  @projectedName("json", "model")
-  `model`?: string;
 
   @doc("""
   If specified, the system will make a best effort to sample deterministically such that repeated requests with the
@@ -221,14 +187,6 @@ model ChatChoice {
   @projectedName("json", "finish_reason")
   finishReason: CompletionsFinishReason | null;
 
-  // Note: this property is currently speculative via observation and not yet documented anywhere.
-  @doc("""
-  The reason the model stopped generating tokens, together with any applicable details.
-  This structured representation replaces 'finish_reason' for some models.
-  """)
-  @projectedName("json", "finish_details")
-  finishDetails?: ChatFinishDetails;
-
   @doc("The delta message content for a streaming response.")
   @projectedName("json", "delta")
   delta?: ChatResponseMessage;
@@ -249,7 +207,6 @@ model ChatCompletions {
     represented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970.
     """)
   @projectedName("json", "created")
-  @projectedName("java", "createdAt")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   created: utcDateTime;
 
@@ -261,41 +218,17 @@ model ChatCompletions {
   @projectedName("json", "choices")
   choices: ChatChoice[];
 
-  @projectedName("json", "system_fingerprint")
   @doc("""
-  Can be used in conjunction with the `seed` request parameter to understand when backend changes have been made that
-  might impact determinism.
+  Usage information for tokens processed and generated as part of this completions operation.
   """)
-  systemFingerprint?: string;
-
-  @doc("""
-    Usage information for tokens processed and generated as part of this completions operation.
-    """)
   @projectedName("json", "usage")
   usage: CompletionsUsage;
-}
 
-@discriminator("type")
-@doc("An abstract representation of structured information about why a chat completions response terminated.")
-model ChatFinishDetails {
-  @doc("The object type.")
-  type: string;
-}
+  @doc("The response object type, which is always `chat.completion`.")
+  @projectedName("json", "object")
+  object: string;
 
-@doc("A structured representation of a stop reason that signifies natural termination by the model.")
-model StopFinishDetails extends ChatFinishDetails {
-  @doc("The object type, which is always 'stop' for this object.")
-  type: "stop";
-
-  @doc("The token sequence that the model terminated with.")
-  stop: string;
-}
-
-@doc("""
-A structured representation of a stop reason that signifies a token limit was reached before the model could naturally
-complete.
-""")
-model MaxTokensFinishDetails extends ChatFinishDetails {
-  @doc("The object type, which is always 'max_tokens' for this object.")
-  type: "max_tokens";
+  @doc("The model used for the chat completion.")
+  @projectedName("json", "model")
+  `model`: string;
 }
