@@ -154,9 +154,9 @@ interface BlobServiceBatch {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   submitBatch(
     /** The batch request content */
-    @body body: bytes; // TODO: Investigate this type
-    ...ContentLengthHeader;
-    ...MultipartContentType;
+    ...BodyParameter; // TODO: Investigate this type
+    ...ContentLengthParameter;
+    ...MultipartContentTypeParameter;
     ...TimeoutParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
@@ -204,15 +204,15 @@ interface BlobServiceContainer {
   createContainer(
     ...ContainerNameParameter;
     ...MetadataParameter;
-    ...BlobPublicAccess;
-    ...DefaultEncryptionScope;
-    ...DenyEncryptionScopeOverride;
+    ...BlobPublicAccessParameter;
+    ...DefaultEncryptionScopeParameter;
+    ...DenyEncryptionScopeOverrideParameter;
     ...TimeoutParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
   ): {
     @statusCode statusCode: 201;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -230,12 +230,12 @@ interface BlobServiceContainer {
     ...TimeoutParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
-    ...LeaseIdOptional;
+    ...LeaseIdOptionalParameter;
   ): {
     @statusCode statusCode: 200;
     
     // TODO: x-ms-meta headers
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -262,9 +262,9 @@ interface BlobServiceContainer {
     ...TimeoutParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
-    ...LeaseIdOptional;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...LeaseIdOptionalParameter;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
   ): {
     @statusCode statusCode: 202;
 
@@ -288,11 +288,11 @@ interface BlobServiceContainerMetadata {
     ...TimeoutParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
-    ...IfModifiedSince;
-    ...LeaseIdOptional;
+    ...IfModifiedSinceParameter;
+    ...LeaseIdOptionalParameter;
   ): {
     @statusCode statusCode: 200;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -313,13 +313,13 @@ interface BlobServiceContainerAccessPolicy {
     ...TimeoutParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
-    ...LeaseIdOptional;
+    ...LeaseIdOptionalParameter;
   ): {
     @statusCode statusCode: 200;
     @body body: SignedIdentifiers; // TODO: XML
 
     ...PublicAccessResponseHeader;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -334,19 +334,19 @@ interface BlobServiceContainerAccessPolicy {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   setContainerAccessPolicy(
     ...ContainerNameParameter;
-    ...ContainerAcl;
+    ...ContainerAclParameter;
     ...TimeoutParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
-    ...LeaseIdOptional;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
+    ...LeaseIdOptionalParameter;
     /** The signed identifiers. */
     @body body: SignedIdentifiers;
   ): {
     @statusCode statusCode: 200;
 
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -364,8 +364,8 @@ interface ContainerRestoreService {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   undeleteContainer(
     ...ContainerNameParameter;
-    ...DeletedContainerName;
-    ...DeletedContainerVersion;
+    ...DeletedContainerNameParameter;
+    ...DeletedContainerVersionParameter;
     ...TimeoutParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
@@ -388,8 +388,8 @@ interface ContainerRenameService {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   renameContainer(
     ...ContainerNameParameter;
-    ...SourceContainerName;
-    ...SourceLeaseId;
+    ...SourceContainerNameParameter;
+    ...SourceLeaseIdParameter;
     ...TimeoutParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
@@ -412,10 +412,10 @@ interface ContainerBatchService {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   submitBatch(
     /** The batch request content */
-    @body body: bytes; // TODO: Investigate this type
+    ...BodyParameter;
     ...ContainerNameParameter;
-    ...ContentLengthHeader;
-    ...MultipartContentType;
+    ...ContentLengthParameter;
+    ...MultipartContentTypeParameter;
     ...TimeoutParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
@@ -468,13 +468,13 @@ interface ContainerLeaseService {
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
     ...ProposedLeaseIdOptional;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
   ): {
     @statusCode statusCode: 201;
 
     ...LeaseIdResponseHeader;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -496,12 +496,12 @@ interface ContainerReleaseLeaseService {
     ...TimeoutParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
   ): {
     @statusCode statusCode: 200;
 
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -523,12 +523,12 @@ interface ContainerRenewLeaseService {
     ...TimeoutParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
   ): {
     @statusCode statusCode: 200;
     ...LeaseIdResponseHeader;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -549,13 +549,13 @@ interface ConatinerBreakLeaseService {
     ...TimeoutParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
-    ...LeaseBreakPeriod;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
+    ...LeaseBreakPeriodParameter;
   ): {
     @statusCode statusCode: 202;
     ...LeaseTimeResponseHeader;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...LeaseIdResponseHeader;
     ...VersionResponseHeader;
@@ -577,12 +577,12 @@ interface ContainerChangeLeaseService {
     ...TimeoutParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
   ): {
     @statusCode statusCode: 200;
     ...LeaseIdResponseHeader;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...LeaseTimeResponseHeader;
     ...ClientRequestIdResponseHeader;
@@ -680,22 +680,22 @@ interface BlobService {
     ...VersionIdParameter;
     ...TimeoutParameter;
     ...RangeParameter;
-    ...LeaseIdOptional;
-    ...GetRangeContentMD5;
-    ...GetRangeContentCRC64;
+    ...LeaseIdOptionalParameter;
+    ...GetRangeContentMd5Parameter;
+    ...GetRangeContentCrc64Parameter;
     ...EncryptionKeyParameter;
     ...EncryptionKeySha256Parameter;
     ...EncryptionAlgorithmParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...ClientRequestIdParameter;
     ...ApiVersionParameter;
   ): {
     @statusCode statusCode: 200;
-    @body body: bytes;
+    ...BodyParameter;
 
     // TODO: x-ms-meta headers
     // TODO: x-ms-or headers
@@ -703,7 +703,7 @@ interface BlobService {
     ...CreationTimeResponseHeader;
     ...ObjectReplicationPolicyIdResponseHeader;
     ...ContentRangeResponseHeader;
-    ...ContentMD5ResponseHeader;
+    ...ContentMd5ResponseHeader;
     ...ContentEncodingResponseParameter;
     ...CacheControlResponseHeader;
     ...ContentDispositionResponseHeader;
@@ -735,10 +735,10 @@ interface BlobService {
     ...LegalHoldResponseHeader;
     ...ContentTypeResponseHeader;
     ...ContentLengthResponseHeader;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
   } | {
     @statusCode statusCode: 206;
-    @body body: bytes;
+    ...BodyParameter;
 
     // TODO: x-ms-meta headers
     // TODO: x-ms-or headers
@@ -746,7 +746,7 @@ interface BlobService {
     ...CreationTimeResponseHeader;
     ...ObjectReplicationPolicyIdResponseHeader;
     ...ContentRangeResponseHeader;
-    ...ContentMD5ResponseHeader;
+    ...ContentMd5ResponseHeader;
     ...ContentEncodingResponseParameter;
     ...CacheControlResponseHeader;
     ...ContentDispositionResponseHeader;
@@ -778,7 +778,7 @@ interface BlobService {
     ...LegalHoldResponseHeader;
     ...ContentTypeResponseHeader;
     ...ContentLengthResponseHeader;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
   } | StorageError;
 
   /** The Get Properties operation returns all user-defined metadata, standard HTTP properties, and system properties for the blob. It does not return the content of the blob. */
@@ -791,12 +791,12 @@ interface BlobService {
     ...BlobNameParameter;
     ...SnapshotParameter;
     ...VersionIdParameter;
-    ...LeaseIdOptional;
+    ...LeaseIdOptionalParameter;
     ...EncryptionKeyParameter;
     ...EncryptionKeySha256Parameter;
     ...EncryptionAlgorithmParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
@@ -824,8 +824,8 @@ interface BlobService {
     ...LeaseStatusResponseHeader;
     ...ContentTypeResponseHeader;
     ...ContentLengthResponseHeader;
-    ...ETagResponseHeader;
-    ...ContentMD5ResponseHeader;
+    ...EtagResponseHeader;
+    ...ContentMd5ResponseHeader;
     ...ContentEncodingResponseParameter;
     ...CacheControlResponseHeader;
     ...ContentDispositionResponseHeader;
@@ -867,10 +867,10 @@ interface BlobService {
     ...SnapshotParameter;
     ...VersionIdParameter;
     ...TimeoutParameter;
-    ...LeaseIdOptional;
+    ...LeaseIdOptionalParameter;
     ...DeleteSnapshotsParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
@@ -898,21 +898,21 @@ interface PageBlobService {
     ...ContainerNameParameter;
     ...BlobNameParameter;
     ...TimeoutParameter;
-    ...ContentLengthHeader;
+    ...ContentLengthParameter;
     ...PremiumPageBlobAccessTierOptional;
     ...BlobContentTypeParameter;
     ...BlobContentEncodingParameter;
     ...BlobContentLanguageParameter;
-    ...BlobContentMD5Parameter;
+    ...BlobContentMd5Parameter;
     ...BlobCacheControlParameter;
-    ...LeaseIdOptional;
+    ...LeaseIdOptionalParameter;
     ...BlobContentDispositionParameter;
     ...EncryptionKeyParameter;
     ...EncryptionKeySha256Parameter;
     ...EncryptionAlgorithmParameter;
     ...EncryptionScopeParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
@@ -926,9 +926,9 @@ interface PageBlobService {
   ): {
     @statusCode statusCode: 201;
 
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
-    ...ContentMD5ResponseHeader;
+    ...ContentMd5ResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
     ...VersionResponseHeader;
@@ -952,20 +952,20 @@ interface AppendBlobService {
     ...ContainerNameParameter;
     ...BlobNameParameter;
     ...TimeoutParameter;
-    ...ContentLengthHeader;
+    ...ContentLengthParameter;
     ...BlobContentTypeParameter;
     ...BlobContentEncodingParameter;
     ...BlobContentLanguageParameter;
-    ...BlobContentMD5Parameter;
+    ...BlobContentMd5Parameter;
     ...BlobCacheControlParameter;
-    ...LeaseIdOptional;
+    ...LeaseIdOptionalParameter;
     ...BlobContentDispositionParameter;
     ...EncryptionKeyParameter;
     ...EncryptionKeySha256Parameter;
     ...EncryptionAlgorithmParameter;
     ...EncryptionScopeParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
@@ -978,9 +978,9 @@ interface AppendBlobService {
   ): {
     @statusCode statusCode: 201;
 
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
-    ...ContentMD5ResponseHeader;
+    ...ContentMd5ResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
     ...VersionResponseHeader;
@@ -1007,24 +1007,24 @@ interface BlockBlobService {
 
     // TODO: body
     /** The bytes to upload to the block blob. */
-    @body body: bytes;
+    ...BodyParameter;
 
     ...TimeoutParameter;
-    ...ContentMD5Parameter;
+    ...ContentMd5Parameter;
     ...BlobContentTypeParameter;
     ...BlobContentEncodingParameter;
     ...BlobContentLanguageParameter;
-    ...BlobContentMD5Parameter;
+    ...BlobContentMd5Parameter;
     ...BlobCacheControlParameter;
-    ...LeaseIdOptional;
+    ...LeaseIdOptionalParameter;
     ...BlobContentDispositionParameter;
     ...EncryptionKeyParameter;
     ...EncryptionKeySha256Parameter;
     ...EncryptionAlgorithmParameter;
     ...EncryptionScopeParameter;
     ...AccessTierOptionalParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
@@ -1038,9 +1038,9 @@ interface BlockBlobService {
   ): {
     @statusCode statusCode: 201;
 
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
-    ...ContentMD5ResponseHeader;
+    ...ContentMd5ResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
     ...VersionResponseHeader;
@@ -1065,22 +1065,22 @@ interface BlockBlobFromUrlService{
     ...ContainerNameParameter;
     ...BlobNameParameter;
     ...TimeoutParameter;
-    ...ContentMD5Parameter;
-    ...ContentLengthHeader;
+    ...ContentMd5Parameter;
+    ...ContentLengthParameter;
     ...BlobContentTypeParameter;
     ...BlobContentEncodingParameter;
     ...BlobContentLanguageParameter;
-    ...BlobContentMD5Parameter;
+    ...BlobContentMd5Parameter;
     ...BlobCacheControlParameter;
-    ...LeaseIdOptional;
+    ...LeaseIdOptionalParameter;
     ...BlobContentDispositionParameter;
     ...EncryptionKeyParameter;
     ...EncryptionKeySha256Parameter;
     ...EncryptionAlgorithmParameter;
     ...EncryptionScopeParameter;
     ...AccessTierOptionalParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
@@ -1090,7 +1090,7 @@ interface BlockBlobFromUrlService{
     ...SourceIfTagsParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
-    ...SourceContentMD5Parameter;
+    ...SourceContentMd5Parameter;
     ...BlobTagsHeaderParameter;
     ...CopySourceParameter;
     ...CopySourceBlobPropertiesParameter;
@@ -1099,9 +1099,9 @@ interface BlockBlobFromUrlService{
   ): {
     @statusCode statusCode: 201;
 
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
-    ...ContentMD5ResponseHeader;
+    ...ContentMd5ResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
     ...IsServerEncryptedResponseHeader;
@@ -1147,7 +1147,7 @@ interface BlobExpirationService {
     ...BlobExpiryTimeParameter;
   ): {
     @statusCode statusCode: 200;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -1169,13 +1169,13 @@ interface BlobSetHttpHeadersService {
     ...TimeoutParameter;
     ...BlobCacheControlParameter;
     ...BlobContentTypeParameter;
-    ...BlobContentMD5Parameter;
+    ...BlobContentMd5Parameter;
     ...BlobContentEncodingParameter;
     ...BlobContentLanguageParameter;
-    ...LeaseIdOptional;
+    ...LeaseIdOptionalParameter;
     ...BlobContentDispositionParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
@@ -1183,7 +1183,7 @@ interface BlobSetHttpHeadersService {
     ...ClientRequestIdParameter;
   ): {
     @statusCode statusCode: 200;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...BlobSequenceNumberResponseHeader;
     ...ClientRequestIdResponseHeader;
@@ -1204,14 +1204,14 @@ interface BlobSetImmutabilityPolicyService {
     ...ContainerNameParameter;
     ...BlobNameParameter;
     ...TimeoutParameter;
-    ...IfUnmodifiedSince;
+    ...IfUnmodifiedSinceParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
     ...ImmutabilityPolicyExpiryParameter;
     ...ImmutabilityPolicyModeParameter;
   ): {
     @statusCode statusCode: 200;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -1279,19 +1279,19 @@ interface BlobSetMetadataService {
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
     // TODO: Metadata ...MetadataParameter; 
-    ...LeaseIdOptional;
+    ...LeaseIdOptionalParameter;
     ...EncryptionKeyParameter;
     ...EncryptionKeySha256Parameter;
     ...EncryptionAlgorithmParameter;
     ...EncryptionScopeParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
   ): {
     @statusCode statusCode: 200;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -1318,14 +1318,14 @@ interface BlobLeaseAcquireService {
     ...ClientRequestIdParameter;
     ...LeaseDurationParameter;
     ...ProposedLeaseIdOptional;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
   ): {
     @statusCode statusCode: 201;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -1349,14 +1349,14 @@ interface BlobLeaseReleaseService {
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
     ...LeaseIdRequiredParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
   ): {
     @statusCode statusCode: 200;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -1379,14 +1379,14 @@ interface BlobLeaseRenewService {
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
     ...LeaseIdRequiredParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
   ): {
     @statusCode statusCode: 200;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -1411,14 +1411,14 @@ interface BlobLeaseChangeService {
     ...ClientRequestIdParameter;
     ...LeaseIdRequiredParameter;
     ...ProposedLeaseIdOptional;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
   ): {
     @statusCode statusCode: 200;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -1442,14 +1442,14 @@ interface BlobLeaseBreakService {
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
     ...LeaseBreakPeriodParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
   ): {
     @statusCode statusCode: 202;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -1471,13 +1471,13 @@ interface BlobSnapshotService {
     ...BlobNameParameter;
     ...TimeoutParameter;
     // TODO: ...MetadataParameter;
-    ...LeaseIdOptional;
+    ...LeaseIdOptionalParameter;
     ...EncryptionKeyParameter;
     ...EncryptionKeySha256Parameter;
     ...EncryptionAlgorithmParameter;
     ...EncryptionScopeParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
@@ -1485,7 +1485,7 @@ interface BlobSnapshotService {
     ...ClientRequestIdParameter;
   ): {
     @statusCode statusCode: 201;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -1515,13 +1515,13 @@ interface BlobCopyService {
     ...SourceIfMatchParameter;
     ...SourceIfNoneMatchParameter;
     ...SourceIfTagsParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
     ...CopySourceParameter;
-    ...LeaseIdOptional;
+    ...LeaseIdOptionalParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
     ...BlobTagsHeaderParameter;
@@ -1531,7 +1531,7 @@ interface BlobCopyService {
     ...LegalHoldOptionalParameter;
   ): {
     @statusCode statusCode: 202;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -1560,16 +1560,16 @@ interface BlobCopySyncService {
     ...SourceIfUnmodifiedSinceParameter;
     ...SourceIfMatchParameter;
     ...SourceIfNoneMatchParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
     ...CopySourceParameter;
-    ...LeaseIdOptional;
+    ...LeaseIdOptionalParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
-    ...SourceContentMD5Parameter;
+    ...SourceContentMd5Parameter;
     ...BlobTagsHeaderParameter;
     ...ImmutabilityPolicyExpiryParameter;
     ...ImmutabilityPolicyModeParameter;
@@ -1579,7 +1579,7 @@ interface BlobCopySyncService {
     ...CopySourceTagsParameter;
   ): {
     @statusCode statusCode: 202;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -1587,7 +1587,7 @@ interface BlobCopySyncService {
     ...DateResponseHeader;
     ...CopyIdResponseHeader;
     ...CopyStatusResponseHeader;
-    ...ContentMD5ResponseHeader;
+    ...ContentMd5ResponseHeader;
     ...ContentCrc64ResponseHeader;
     ...EncryptionScopeResponseHeader;
   } | StorageError;
@@ -1605,7 +1605,7 @@ interface BlobCopyAbortService {
     ...BlobNameParameter;
     ...TimeoutParameter;
     ...CopyIdParameter;
-    ...LeaseIdOptional;
+    ...LeaseIdOptionalParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
   ): {
@@ -1632,7 +1632,7 @@ interface BlobTierService {
     ...RehydratePriorityParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
-    ...LeaseIdOptional;
+    ...LeaseIdOptionalParameter;
     ...IfTagsParameter;
 
   ): {
@@ -1680,16 +1680,16 @@ interface BlobBlockStageService {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   stageBlock(
     /** The data to upload. */
-    @body body: bytes;
+    ...BodyParameter;
 
     ...ContainerNameParameter;
     ...BlobNameParameter;
     ...BlockIdParameter;
-    ...ContentLengthHeader;
-    ...ContentMD5Parameter;
+    ...ContentLengthParameter;
+    ...ContentMd5Parameter;
     ...TimeoutParameter;
     ...ContentCrc64Parameter;
-    ...LeaseIdOptional;
+    ...LeaseIdOptionalParameter;
     ...EncryptionKeyParameter;
     ...EncryptionKeySha256Parameter;
     ...EncryptionAlgorithmParameter;
@@ -1702,7 +1702,7 @@ interface BlobBlockStageService {
     ...RequestIdResponseHeader;
     ...VersionResponseHeader;
     ...DateResponseHeader;
-    ...ContentMD5ResponseHeader;
+    ...ContentMd5ResponseHeader;
     ...ContentCrc64ResponseHeader;
     ...IsServerEncryptedResponseHeader;
     ...EncryptionKeySha256ResponseHeader;
@@ -1723,17 +1723,17 @@ interface BlobBlockStageFromUrlService {
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
     ...BlockIdParameter;
-    ...ContentLengthHeader;
+    ...ContentLengthParameter;
     ...SourceUrlParameter;
     ...SourceRangeParameter;
-    ...SourceContentMD5Parameter;
+    ...SourceContentMd5Parameter;
     ...SourceContentCrc64Parameter;
     ...TimeoutParameter;
     ...EncryptionKeyParameter;
     ...EncryptionKeySha256Parameter;
     ...EncryptionAlgorithmParameter;
     ...EncryptionScopeParameter;
-    ...LeaseIdOptional;
+    ...LeaseIdOptionalParameter;
     ...SourceIfModifiedSinceParameter;
     ...SourceIfUnmodifiedSinceParameter;
     ...SourceIfMatchParameter;
@@ -1745,7 +1745,7 @@ interface BlobBlockStageFromUrlService {
     ...RequestIdResponseHeader;
     ...VersionResponseHeader;
     ...DateResponseHeader;
-    ...ContentMD5ResponseHeader;
+    ...ContentMd5ResponseHeader;
     ...ContentCrc64ResponseHeader;
     ...IsServerEncryptedResponseHeader;
     ...EncryptionKeySha256ResponseHeader;
@@ -1761,7 +1761,6 @@ interface BlobBlockListService {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   commitBlockList(
-    // TODO: XML with the body
     ...BlobBlocksParameter;
     ...ContainerNameParameter;
     ...BlobNameParameter;
@@ -1770,8 +1769,8 @@ interface BlobBlockListService {
     ...BlobContentTypeParameter;
     ...BlobContentEncodingParameter;
     ...BlobContentLanguageParameter;
-    ...BlobContentMD5Parameter;
-    ...ContentMD5Parameter;
+    ...BlobContentMd5Parameter;
+    ...ContentMd5Parameter;
     ...ContentCrc64Parameter;
     // TODO: ...MetadataParameter;
     ...BlobContentDispositionParameter;
@@ -1780,8 +1779,8 @@ interface BlobBlockListService {
     ...EncryptionAlgorithmParameter;
     ...EncryptionScopeParameter;
     ...AccessTierOptionalParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
@@ -1793,9 +1792,9 @@ interface BlobBlockListService {
     ...LegalHoldOptionalParameter;
   ): {
     @statusCode statusCode: 201;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
-    ...ContentMD5ResponseHeader;
+    ...ContentMd5ResponseHeader;
     ...ContentCrc64ResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -1818,14 +1817,14 @@ interface BlobBlockListService {
     ...ClientRequestIdParameter;
     ...SnapshotParameter;
     ...BlockListTypeParameter;
-    ...LeaseIdOptional;
+    ...LeaseIdOptionalParameter;
     ...IfTagsParameter;
   ): {
     @statusCode statusCode: 200;
     @body body: BlockLookupList; // TODO: XML
 
     ...LastModifiedResponseHeader;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...ContentTypeResponseHeader;
     ...BlobContentLengthResponseHeader;
     ...ClientRequestIdResponseHeader;
@@ -1844,16 +1843,16 @@ interface PageBlobUpdateService {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   uploadPages(
     /** The data to upload. */
-    @body body: bytes;
+    ...BodyParameter;
 
     ...ContainerNameParameter;
     ...BlobNameParameter;
-    ...ContentLengthHeader;
-    ...ContentMD5Parameter;
+    ...ContentLengthParameter;
+    ...ContentMd5Parameter;
     ...ContentCrc64Parameter;
     ...TimeoutParameter;
     ...RangeParameter;
-    ...LeaseIdOptional;
+    ...LeaseIdOptionalParameter;
     ...EncryptionKeyParameter;
     ...EncryptionKeySha256Parameter;
     ...EncryptionAlgorithmParameter;
@@ -1861,8 +1860,8 @@ interface PageBlobUpdateService {
     ...IfSequenceNumberLessThanOrEqualToParameter;
     ...IfSequenceNumberLessThanParameter;
     ...IfSequenceNumberEqualToParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
@@ -1870,9 +1869,9 @@ interface PageBlobUpdateService {
     ...ClientRequestIdParameter;
   ): {
     @statusCode statusCode: 201;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
-    ...ContentMD5ResponseHeader;
+    ...ContentMd5ResponseHeader;
     ...ContentCrc64ResponseHeader;
     ...BlobSequenceNumberResponseHeader;
     ...ClientRequestIdResponseHeader;
@@ -1895,15 +1894,15 @@ interface PageBlobClearService {
   clearPages(
     ...ContainerNameParameter;
     ...BlobNameParameter;
-    ...ContentLengthHeader;
+    ...ContentLengthParameter;
     ...TimeoutParameter;
     ...RangeParameter;
-    ...LeaseIdOptional;
+    ...LeaseIdOptionalParameter;
     ...IfSequenceNumberLessThanOrEqualToParameter;
     ...IfSequenceNumberLessThanParameter;
     ...IfSequenceNumberEqualToParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
@@ -1911,7 +1910,7 @@ interface PageBlobClearService {
     ...ClientRequestIdParameter;
   ): {
     @statusCode statusCode: 201;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...BlobSequenceNumberResponseHeader;
     ...ClientRequestIdResponseHeader;
@@ -1932,22 +1931,22 @@ interface BlobPageUpdateFromUrlService {
     ...ContainerNameParameter;
     ...BlobNameParameter;
     ...TimeoutParameter;
-    ...ContentLengthHeader;
+    ...ContentLengthParameter;
     ...SourceUrlParameter;
     ...SourceRangeRequiredPutPageFromUrlParameter;
-    ...SourceContentMD5Parameter;
+    ...SourceContentMd5Parameter;
     ...SourceContentCrc64Parameter;
     ...RangeRequiredPutPageFromUrlParameter;
     ...EncryptionKeyParameter;
     ...EncryptionKeySha256Parameter;
     ...EncryptionAlgorithmParameter;
     ...EncryptionScopeParameter;
-    ...LeaseIdOptional;
+    ...LeaseIdOptionalParameter;
     ...IfSequenceNumberLessThanOrEqualToParameter;
     ...IfSequenceNumberLessThanParameter;
     ...IfSequenceNumberEqualToParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
@@ -1960,13 +1959,13 @@ interface BlobPageUpdateFromUrlService {
     ...CopySourceAuthorizationParameter;
   ): {
     @statusCode statusCode: 202;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
     ...VersionResponseHeader;
     ...DateResponseHeader;
-    ...ContentMD5ResponseHeader;
+    ...ContentMd5ResponseHeader;
     ...ContentCrc64ResponseHeader;
     ...BlobSequenceNumberResponseHeader;
     ...IsServerEncryptedResponseHeader;
@@ -1989,9 +1988,9 @@ interface PageBlobListService {
     ...ClientRequestIdParameter;
     ...SnapshotParameter;
     ...RangeParameter;
-    ...LeaseIdOptional;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...LeaseIdOptionalParameter;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
@@ -1999,10 +1998,10 @@ interface PageBlobListService {
     ...MaxResultsParameter;
   ): {
     @statusCode statusCode: 200;
-    @body body: PageList; // TODO: XML
+    @body body: PageList;
 
     ...LastModifiedResponseHeader;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...BlobContentLengthResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -2028,9 +2027,9 @@ interface PageBlobDiffService {
     ...PrevSnapshotParameter;
     ...PrevSnapshotUrlParameter;
     ...RangeParameter;
-    ...LeaseIdOptional;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...LeaseIdOptionalParameter;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
@@ -2041,7 +2040,7 @@ interface PageBlobDiffService {
     @body body: PageList; // TODO: XML
 
     ...LastModifiedResponseHeader;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...BlobContentLengthResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -2061,13 +2060,13 @@ interface PageBlobResizeService {
     ...ContainerNameParameter;
     ...BlobNameParameter;
     ...TimeoutParameter;
-    ...LeaseIdOptional;
+    ...LeaseIdOptionalParameter;
     ...EncryptionKeyParameter;
     ...EncryptionKeySha256Parameter;
     ...EncryptionAlgorithmParameter;
     ...EncryptionScopeParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
@@ -2076,7 +2075,7 @@ interface PageBlobResizeService {
     ...ClientRequestIdParameter;
   ): {
     @statusCode statusCode: 200;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...BlobSequenceNumberResponseHeader;
     ...ClientRequestIdResponseHeader;
@@ -2097,9 +2096,9 @@ interface PageBlobUpdateSequenceNumberService {
     ...ContainerNameParameter;
     ...BlobNameParameter;
     ...TimeoutParameter;
-    ...LeaseIdOptional;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...LeaseIdOptionalParameter;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
@@ -2109,7 +2108,7 @@ interface PageBlobUpdateSequenceNumberService {
     ...ClientRequestIdParameter;
   ): {
     @statusCode statusCode: 200;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...BlobSequenceNumberResponseHeader;
     ...ClientRequestIdResponseHeader;
@@ -2130,18 +2129,18 @@ interface PageBlobIncrementalCopyService {
     ...ContainerNameParameter;
     ...BlobNameParameter;
     ...TimeoutParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
-    ...LeaseIdOptional;
+    ...LeaseIdOptionalParameter;
     ...CopySourceParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
   ): {
     @statusCode statusCode: 202;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -2161,22 +2160,22 @@ interface AppendBlobAppendBlockService {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   appendBlock(
     /** The data to upload. */
-    @body body: bytes;
+    ...BodyParameter;
     ...ContainerNameParameter;
     ...BlobNameParameter;
     ...TimeoutParameter;
-    ...ContentLengthHeader;
-    ...ContentMD5Parameter;
+    ...ContentLengthParameter;
+    ...ContentMd5Parameter;
     ...ContentCrc64Parameter;
-    ...LeaseIdOptional;
+    ...LeaseIdOptionalParameter;
     ...BlobConditionMaxSizeParameter;
     ...BlobConditionAppendPosParameter;
     ...EncryptionKeyParameter;
     ...EncryptionKeySha256Parameter;
     ...EncryptionAlgorithmParameter;
     ...EncryptionScopeParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
@@ -2184,14 +2183,14 @@ interface AppendBlobAppendBlockService {
     ...ClientRequestIdParameter;
   ): {
     @statusCode statusCode: 201;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...BlobSequenceNumberResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
     ...VersionResponseHeader;
     ...DateResponseHeader;
-    ...ContentMD5ResponseHeader;
+    ...ContentMd5ResponseHeader;
     ...ContentCrc64ResponseHeader;
     ...BlobAppendOffsetResponseHeader;
     ...BlobCommittedBlockCountResponseHeader;
@@ -2212,20 +2211,20 @@ interface AppendBlockAppendBlockFromUrlService {
     ...ContainerNameParameter;
     ...BlobNameParameter;
     ...TimeoutParameter;
-    ...ContentLengthHeader;
+    ...ContentLengthParameter;
     ...SourceUrlParameter;
     ...SourceRangeParameter;
-    ...SourceContentMD5Parameter;
+    ...SourceContentMd5Parameter;
     ...SourceContentCrc64Parameter;
-    ...LeaseIdOptional;
+    ...LeaseIdOptionalParameter;
     ...BlobConditionMaxSizeParameter;
     ...BlobConditionAppendPosParameter;
     ...EncryptionKeyParameter;
     ...EncryptionKeySha256Parameter;
     ...EncryptionAlgorithmParameter;
     ...EncryptionScopeParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
@@ -2234,13 +2233,13 @@ interface AppendBlockAppendBlockFromUrlService {
     ...CopySourceAuthorizationParameter;
   ): {
     @statusCode statusCode: 201;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
     ...VersionResponseHeader;
     ...DateResponseHeader;
-    ...ContentMD5ResponseHeader;
+    ...ContentMd5ResponseHeader;
     ...ContentCrc64ResponseHeader;
     ...BlobAppendOffsetResponseHeader;
     ...BlobCommittedBlockCountResponseHeader;
@@ -2261,10 +2260,10 @@ interface AppendBlobSealService {
     ...ContainerNameParameter;
     ...BlobNameParameter;
     ...TimeoutParameter;
-    ...LeaseIdOptional;
+    ...LeaseIdOptionalParameter;
     ...BlobConditionAppendPosParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
@@ -2272,7 +2271,7 @@ interface AppendBlobSealService {
     ...ClientRequestIdParameter;
   ): {
     @statusCode statusCode: 200;
-    ...ETagResponseHeader;
+    ...EtagResponseHeader;
     ...LastModifiedResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -2295,12 +2294,12 @@ interface BlobQueryService {
     ...BlobNameParameter;
     ...SnapshotParameter;
     ...TimeoutParameter;
-    ...LeaseIdOptional;
+    ...LeaseIdOptionalParameter;
     ...EncryptionKeyParameter;
     ...EncryptionKeySha256Parameter;
     ...EncryptionAlgorithmParameter;
-    ...IfModifiedSince;
-    ...IfUnmodifiedSince;
+    ...IfModifiedSinceParameter;
+    ...IfUnmodifiedSinceParameter;
     ...IfMatchParameter;
     ...IfNoneMatchParameter;
     ...IfTagsParameter;
@@ -2308,15 +2307,15 @@ interface BlobQueryService {
     ...ClientRequestIdParameter;
   ): {
     @statusCode statusCode: 200 | 206;
-    @body body: bytes;
+    ...BodyParameter;
     // TODO: MetadataResponseHeader;
 
     ...LastModifiedResponseHeader;
     ...ContentLengthResponseHeader;
     ...ContentTypeResponseHeader;
     ...ContentRangeResponseHeader;
-    ...ETagResponseHeader;
-    ...ContentMD5ResponseHeader;
+    ...EtagResponseHeader;
+    ...ContentMd5ResponseHeader;
     ...ContentEncodingResponseParameter;
     ...CacheControlResponseHeader;
     ...ContentLanguageResponseHeader;
@@ -2340,7 +2339,7 @@ interface BlobQueryService {
     ...IsServerEncryptedResponseHeader;
     ...EncryptionKeySha256ResponseHeader;
     ...EncryptionScopeResponseHeader;
-    ...BlobContentMD5ResponseHeader;
+    ...BlobContentMd5ResponseHeader;
   } | StorageError;
 }
 
@@ -2360,11 +2359,11 @@ interface BlobTagsService {
     ...ClientRequestIdParameter;
     ...SnapshotParameter;
     ...VersionIdParameter;
-    ...LeaseIdOptional;
+    ...LeaseIdOptionalParameter;
     ...IfTagsParameter;
   ): {
     @statusCode statusCode: 200;
-    @body body: BlobTags; // TODO: XML
+    @body body: BlobTags;
 
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -2384,8 +2383,8 @@ interface BlobTagsService {
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
     ...VersionIdParameter;
-    ...LeaseIdOptional;
-    ...ContentMD5Parameter;
+    ...LeaseIdOptionalParameter;
+    ...ContentMd5Parameter;
     ...ContentCrc64Parameter;
     ...IfTagsParameter;
     ...BlobTagsBodyParameter;
