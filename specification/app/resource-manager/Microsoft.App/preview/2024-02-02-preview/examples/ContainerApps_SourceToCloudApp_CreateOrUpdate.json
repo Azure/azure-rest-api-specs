@@ -1,4 +1,6 @@
 {
+  "operationId": "ContainerApps_CreateOrUpdate",
+  "title": "ContainerApps_SourceToCloudApp_CreateOrUpdate",
   "parameters": {
     "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "resourceGroupName": "rg",
@@ -6,12 +8,9 @@
     "api-version": "2024-02-02-preview",
     "containerAppEnvelope": {
       "location": "East US",
-      "extendedLocation": {
-        "name": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation",
-        "type": "CustomLocation"
-      },
       "properties": {
-        "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/connectedEnvironments/demokube",
+        "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+        "workloadProfileName": "My-GP-01",
         "configuration": {
           "ingress": {
             "external": true,
@@ -20,12 +19,12 @@
               {
                 "name": "www.my-name.com",
                 "bindingType": "SniEnabled",
-                "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/connectedEnvironments/demokube/certificates/my-certificate-for-my-name-dot-com"
+                "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube/certificates/my-certificate-for-my-name-dot-com"
               },
               {
                 "name": "www.my-other-name.com",
                 "bindingType": "SniEnabled",
-                "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/connectedEnvironments/demokube/certificates/my-certificate-for-my-other-name-dot-com"
+                "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube/certificates/my-certificate-for-my-other-name-dot-com"
               }
             ],
             "traffic": [
@@ -94,29 +93,19 @@
             "logLevel": "debug",
             "enableApiLogging": true
           },
-          "runtime": {
-            "java": {
-              "enableMetrics": true,
-              "javaAgent": {
-                "enabled": true,
-                "logLevelSettings": [
-                  {
-                    "logger": "org.springframework.boot",
-                    "level": "debug"
-                  }
-                ]
-              }
-            },
-            "dotnet": {
-              "autoConfigureDataProtection": true
-            }
-          },
-          "maxInactiveRevisions": 10
+          "maxInactiveRevisions": 10,
+          "service": {
+            "type": "redis"
+          }
+        },
+        "patchingConfiguration": {
+          "patchingMode": "Automatic"
         },
         "template": {
           "containers": [
             {
-              "image": "repo/testcontainerApp0:v1",
+              "image": "",
+              "imageType": "CloudBuild",
               "name": "testcontainerApp0",
               "probes": [
                 {
@@ -133,6 +122,18 @@
                   },
                   "initialDelaySeconds": 3,
                   "periodSeconds": 3
+                }
+              ],
+              "volumeMounts": [
+                {
+                  "volumeName": "azurefile",
+                  "mountPath": "/mnt/path1",
+                  "subPath": "subPath1"
+                },
+                {
+                  "volumeName": "nfsazurefile",
+                  "mountPath": "/mnt/path2",
+                  "subPath": "subPath2"
                 }
               ]
             }
@@ -168,7 +169,29 @@
                 }
               }
             ]
-          }
+          },
+          "serviceBinds": [
+            {
+              "serviceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/redisService",
+              "name": "redisService",
+              "clientType": "dotnet",
+              "customizedKeys": {
+                "DesiredKey": "defaultKey"
+              }
+            }
+          ],
+          "volumes": [
+            {
+              "name": "azurefile",
+              "storageType": "AzureFile",
+              "storageName": "storage"
+            },
+            {
+              "name": "nfsazurefile",
+              "storageType": "NfsAzureFile",
+              "storageName": "nfsStorage"
+            }
+          ]
         }
       }
     }
@@ -181,13 +204,10 @@
         "name": "testcontainerApp0",
         "type": "Microsoft.App/containerApps",
         "location": "East US",
-        "extendedLocation": {
-          "name": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation",
-          "type": "CustomLocation"
-        },
         "properties": {
           "provisioningState": "Succeeded",
-          "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/connectedEnvironments/demokube",
+          "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "workloadProfileName": "My-GP-01",
           "latestRevisionFqdn": "testcontainerApp0-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
           "latestReadyRevisionName": "testcontainerApp0-pjxhsye",
           "configuration": {
@@ -200,12 +220,12 @@
                 {
                   "name": "www.my-name.com",
                   "bindingType": "SniEnabled",
-                  "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/connectedEnvironments/demokube/certificates/my-certificate-for-my-name-dot-com"
+                  "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube/certificates/my-certificate-for-my-name-dot-com"
                 },
                 {
                   "name": "www.my-other-name.com",
                   "bindingType": "SniEnabled",
-                  "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/connectedEnvironments/demokube/certificates/my-certificate-for-my-other-name-dot-com"
+                  "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube/certificates/my-certificate-for-my-other-name-dot-com"
                 }
               ],
               "traffic": [
@@ -243,29 +263,16 @@
               "appPort": 3000,
               "appProtocol": "http",
               "httpReadBufferSize": 30
-            },
-            "runtime": {
-              "java": {
-                "enableMetrics": true,
-                "javaAgent": {
-                  "enabled": true,
-                  "logLevelSettings": [
-                    {
-                      "logger": "org.springframework.boot",
-                      "level": "debug"
-                    }
-                  ]
-                }
-              },
-              "dotnet": {
-                "autoConfigureDataProtection": true
-              }
             }
+          },
+          "patchingConfiguration": {
+            "patchingMode": "Automatic"
           },
           "template": {
             "containers": [
               {
-                "image": "repo/testcontainerApp0:v4",
+                "image": "mcr.microsoft.com/k8se/cloudbuild-waiting-upload:latest",
+                "imageType": "CloudBuild",
                 "name": "testcontainerApp0",
                 "resources": {
                   "cpu": 0.2,
@@ -286,6 +293,18 @@
                     },
                     "initialDelaySeconds": 3,
                     "periodSeconds": 3
+                  }
+                ],
+                "volumeMounts": [
+                  {
+                    "volumeName": "azurefile",
+                    "mountPath": "/mnt/path1",
+                    "subPath": "subPath1"
+                  },
+                  {
+                    "volumeName": "nfsazurefile",
+                    "mountPath": "/mnt/path2",
+                    "subPath": "subPath2"
                   }
                 ]
               }
@@ -320,7 +339,19 @@
                   }
                 }
               ]
-            }
+            },
+            "volumes": [
+              {
+                "name": "azurefile",
+                "storageType": "AzureFile",
+                "storageName": "storage"
+              },
+              {
+                "name": "nfsazurefile",
+                "storageType": "NfsAzureFile",
+                "storageName": "nfsStorage"
+              }
+            ]
           },
           "eventStreamEndpoint": "testEndpoint"
         }
@@ -333,13 +364,9 @@
         "name": "testcontainerApp0",
         "type": "Microsoft.App/containerApps",
         "location": "East US",
-        "extendedLocation": {
-          "name": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation",
-          "type": "CustomLocation"
-        },
         "properties": {
           "provisioningState": "InProgress",
-          "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/connectedEnvironments/demokube",
+          "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
           "latestRevisionFqdn": "testcontainerApp0-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
           "configuration": {
             "ingress": {
@@ -365,29 +392,16 @@
               "appPort": 3000,
               "appProtocol": "http",
               "httpReadBufferSize": 30
-            },
-            "runtime": {
-              "java": {
-                "enableMetrics": true,
-                "javaAgent": {
-                  "enabled": true,
-                  "logLevelSettings": [
-                    {
-                      "logger": "org.springframework.boot",
-                      "level": "debug"
-                    }
-                  ]
-                }
-              },
-              "dotnet": {
-                "autoConfigureDataProtection": true
-              }
             }
+          },
+          "patchingConfiguration": {
+            "patchingMode": "Automatic"
           },
           "template": {
             "containers": [
               {
-                "image": "repo/testcontainerApp0:v4",
+                "image": "mcr.microsoft.com/k8se/cloudbuild-waiting-upload:latest",
+                "imageType": "CloudBuild",
                 "name": "testcontainerApp0",
                 "resources": {
                   "cpu": 0.2,
@@ -408,6 +422,18 @@
                     },
                     "initialDelaySeconds": 3,
                     "periodSeconds": 3
+                  }
+                ],
+                "volumeMounts": [
+                  {
+                    "volumeName": "azurefile",
+                    "mountPath": "/mnt/path1",
+                    "subPath": "subPath1"
+                  },
+                  {
+                    "volumeName": "nfsazurefile",
+                    "mountPath": "/mnt/path2",
+                    "subPath": "subPath2"
                   }
                 ]
               }
@@ -442,7 +468,19 @@
                   }
                 }
               ]
-            }
+            },
+            "volumes": [
+              {
+                "name": "azurefile",
+                "storageType": "AzureFile",
+                "storageName": "storage"
+              },
+              {
+                "name": "nfsazurefile",
+                "storageType": "NfsAzureFile",
+                "storageName": "nfsStorage"
+              }
+            ]
           },
           "eventStreamEndpoint": "testEndpoint"
         }
