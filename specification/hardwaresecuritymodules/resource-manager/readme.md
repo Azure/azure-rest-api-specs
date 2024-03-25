@@ -28,13 +28,12 @@ These are the global settings for the Hardware Security Modules API.
 title: Azure HSM Resource Provider
 description: The Azure management API provides a RESTful set of web services that interact with Azure HSM RP.
 openapi-type: arm
-tag: package-2023-12-preview
+tag: package-2024-06
 ```
 
 ``` yaml !$(typescript)
 modelerfour:
   flatten-models: false
-tag: package-2024-06
 ```
 
 
@@ -82,6 +81,17 @@ These settings apply only when `--tag=package-2023-12-preview` is specified on t
 input-file:
   - Microsoft.HardwareSecurityModules/preview/2023-12-10-preview/cloudhsm.json
   - Microsoft.HardwareSecurityModules/stable/2021-11-30/dedicatedhsm.json
+```
+
+### Tag: package-2024-06
+
+These settings apply only when `--tag=package-2024-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-06'
+input-file:
+  - Microsoft.HardwareSecurityModules/stable/2024-06-30/cloudhsm.json
+  - Microsoft.HardwareSecurityModules/stable/2024-06-30/dedicatedhsm.json
+  - Microsoft.HardwareSecurityModules/stable/2024-06-30/operations.json
 ```
 
 # Code Generation
