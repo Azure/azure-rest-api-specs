@@ -2086,8 +2086,7 @@ model ContainerAclParameter {
 /** The container name header */
 model ContainerNameParameter {
   /** The name of the container. */
-  @header
-  @path
+  @path("containerName")
   containerName: string;
 }
 

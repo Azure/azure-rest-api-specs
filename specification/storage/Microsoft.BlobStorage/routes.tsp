@@ -652,6 +652,7 @@ interface ContainerAccountInfoService {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   getAccountInfo(
+    ...ContainerNameParameter;
     ...ApiVersionParameter;
   ): {
     @statusCode statusCode: 200;
