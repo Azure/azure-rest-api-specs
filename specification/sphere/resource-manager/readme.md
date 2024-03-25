@@ -31,7 +31,7 @@ openapi-subtype: rpaas
 tag: package-2024-04-01
 ```
 
-``` yaml
+``` yaml !$(csharp)
 modelerfour:
   flatten-models: false
 ```
