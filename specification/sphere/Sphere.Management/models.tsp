@@ -407,11 +407,13 @@ model ProofOfPossessionNonceRequest {
 /**
  * Result of the action to generate a proof of possession nonce
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatible"
 model ProofOfPossessionNonceResponse extends CertificateProperties {}
 
 /**
  * Response to the action call for count devices in a catalog.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatible"
 model CountDevicesResponse extends CountElementsResponse {}
 
 /**
@@ -799,6 +801,7 @@ model SignedCapabilityImageResponse {
 /**
  * Response to the action call for count devices in a catalog (preview API).
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatible"
 model CountDeviceResponse extends CountElementsResponse {}
 
 /**

@@ -42,6 +42,8 @@ interface Deployments {
   /**
    * Delete a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
    */
+  #suppress "deprecated" "For backward compatible"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatible"
   delete is ArmResourceDeleteAsync<Deployment>;
 
   /**

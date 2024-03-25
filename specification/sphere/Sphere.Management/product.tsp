@@ -49,6 +49,8 @@ interface Products {
   /**
    * Delete a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name'
    */
+  #suppress "deprecated" "For backward compatible"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatible"
   delete is ArmResourceDeleteAsync<Product>;
 
   /**

@@ -49,6 +49,8 @@ interface Devices {
   /**
    * Delete a Device
    */
+  #suppress "deprecated" "For backward compatible"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatible"
   delete is ArmResourceDeleteAsync<Device>;
 
   /**
