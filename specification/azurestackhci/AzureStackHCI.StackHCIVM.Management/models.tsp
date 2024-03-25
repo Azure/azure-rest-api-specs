@@ -3,7 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
-
+import "../Operations.Management/models.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
@@ -12,8 +12,6 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.AzureStackHCI;
-
-interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("Datasource for the gallery image when provisioning with cloud-init [NoCloud, Azure]")
 enum CloudInitDataSource {
@@ -671,7 +669,6 @@ model IPPoolInfo {
 
 @doc("Network Security Group resource.")
 model NetworkSecurityGroupProperties {
-
   @doc("A collection of references to network interfaces that are currently using this NSG.")
   @visibility("read")
   networkInterfaces?: NetworkInterfaceReference[]; //TODO REF ID
