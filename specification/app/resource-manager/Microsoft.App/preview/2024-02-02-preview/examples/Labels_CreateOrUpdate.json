@@ -7,16 +7,18 @@
     "api-version": "2024-02-02-preview",
     "labelsEnvelope": {
       "properties": {
-        "labels": {
-          "production": {
+        "labels": [
+          {
+            "name": "production",
             "revisionName": "myapp-ab1234",
             "trafficWeight": 100
           },
-          "canary": {
+          {
+            "name": "canary",
             "revisionName": "myapp-cd5678",
             "trafficWeight": 0
           }
-        }
+        ]
       }
     }
   },
@@ -29,8 +31,9 @@
         "type": "Microsoft.App/containerapps/labels",
         "properties": {
           "provisioningState": "Succeeded",
-          "labels": {
-            "production": {
+          "labels": [
+            {
+              "name" : "production",
               "revisionName": "myapp-ab1234",
               "trafficWeight": 100,
               "template": {
@@ -46,7 +49,8 @@
                 ]
               }
             },
-            "canary": {
+            {
+              "name" : "canary",
               "revisionName": "myapp-cd5678",
               "trafficWeight": 0,
               "template": {
@@ -62,10 +66,11 @@
                 ]
               }
             }
-          }
+          ]
         }
       }
-    },
+    }
+    ,
     "201": {
       "headers": {
         "location": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/providers/Microsoft.App/locations/eastus/operationstatuses/5a7f31af-8ae5-489b-a67e-f0a2d11df796?api-version=2024-02-02-preview"

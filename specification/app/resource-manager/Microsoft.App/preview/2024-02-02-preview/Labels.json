@@ -300,10 +300,13 @@
             },
             "labels": {
               "description": "Labels for the Container App.",
-              "type": "object",
-              "additionalProperties": {
+              "type": "array",
+              "items": {
                 "$ref": "#/definitions/Label"
-              }
+              },
+              "x-ms-identifiers" : [
+                "name"
+              ]
             }
           },
           "x-ms-client-flatten": true
@@ -314,6 +317,10 @@
       "description": "Label for the Container App.",
       "type": "object",
       "properties": {
+        "name" : {
+          "description": "Name of the label.",
+          "type": "string"
+        },
         "revisionName": {
           "description": "Name of the revision associated with the label.",
           "type": "string"

@@ -16,8 +16,9 @@
             "type": "Microsoft.App/containerapps/labels",
             "properties": {
               "provisioningState": "Succeeded",
-              "labels": {
-                "production": {
+              "labels": [
+                {
+                  "name": "production",
                   "revisionName": "myapp-ab1234",
                   "trafficWeight": 100,
                   "template": {
@@ -33,7 +34,8 @@
                     ]
                   }
                 },
-                "canary": {
+                {
+                  "name": "canary",
                   "revisionName": "myapp-cd5678",
                   "trafficWeight": 0,
                   "template": {
@@ -49,7 +51,7 @@
                     ]
                   }
                 }
-              }
+              ]
             }
           }
         ]
