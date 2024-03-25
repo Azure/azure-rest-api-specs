@@ -5,6 +5,27 @@
     "version": "2024-03-22-preview"
   },
   "paths": {},
+  "parameters": {
+    "PrivateAccessName": {
+      "name": "privateAccessName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[^<>%&:?#/\\\\]+$",
+      "minLength": 1,
+      "description": "The name of the private access resource that is being created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.",
+      "x-ms-parameter-location": "method"
+    },
+    "PrivateEndpointConnectionName": {
+      "name": "privateEndpointConnectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[^<>%&:?#/\\\\]+$",
+      "description": "The name of the private endpoint connection.",
+      "x-ms-parameter-location": "method"
+    }
+  },
   "definitions": {
     "PrivateAccess": {
       "type": "object",
