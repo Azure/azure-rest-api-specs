@@ -11,7 +11,7 @@ using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 
 @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-namespace Microsoft.BlobStorage;
+namespace Azure.Storage.Blob;
 
 @error
 /** The error response. */
