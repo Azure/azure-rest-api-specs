@@ -167,6 +167,7 @@ model StorageProfile {
   osDiskStorageAccountType?: OsDiskStorageAccountType;
 
   @doc("A list of empty data disks to attach.")
+  @extension("x-ms-identifiers", [])
   dataDisks?: DataDisk[];
 }
 
