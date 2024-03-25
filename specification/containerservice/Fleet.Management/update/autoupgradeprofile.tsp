@@ -85,6 +85,12 @@ enum UpgradeChannel {
   NodeImage,
 }
 
+@doc("GenerateUpdateRunsRequest is the HTTP body of a generate updateruns request.")
+model GenerateUpdateRunRequest {
+  @doc("The update spec that will be applied to managed clusters in the generating update runs.")
+  updateSpecification: ManagedClusterUpdate;
+}
+
 @added(Versions.v2024_05_02_preview)
 @armResourceOperations
 interface AutoUpgradeProfiles {
@@ -103,4 +109,11 @@ interface AutoUpgradeProfiles {
   >;
 
   listByParent is ArmResourceListByParent<AutoUpgradeProfile>;
+
+  generateUpdateRuns is ArmResourceActionSync<
+    AutoUpgradeProfile,
+    GenerateUpdateRunRequest,
+    AutoUpgradeProfile,
+    BaseParameters<AutoUpgradeProfile> & IfMatchParameters<AutoUpgradeProfile>
+  >;
 }
