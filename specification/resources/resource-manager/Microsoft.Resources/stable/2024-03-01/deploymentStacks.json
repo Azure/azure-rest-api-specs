@@ -1002,6 +1002,14 @@
           "$ref": "#/definitions/DeploymentStacksDebugSetting",
           "description": "The debug setting of the deployment."
         },
+        "bypassStackOutOfSyncError": {
+          "type": "boolean",
+          "description": "Allows the user to bypass service errors that indicate the stack resource list is not correctly synchronized.",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
         "deploymentScope": {
           "type": "string",
           "description": "The scope at which the initial deployment should be created. If a scope is not specified, it will default to the scope of the deployment stack. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroupId}'), subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}')."
