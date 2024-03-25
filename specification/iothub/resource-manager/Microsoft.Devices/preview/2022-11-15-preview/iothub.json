@@ -3318,21 +3318,7 @@
         },
         "source": {
           "description": "The source that the routing rule is to be applied to, such as DeviceMessages.",
-          "enum": [
-            "Invalid",
-            "DeviceMessages",
-            "TwinChangeEvents",
-            "DeviceLifecycleEvents",
-            "DeviceJobLifecycleEvents",
-            "DigitalTwinChangeEvents",
-            "DeviceConnectionStateEvents",
-            "MqttBrokerMessages"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RoutingSource",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/RoutingSource"
         },
         "condition": {
           "description": "The condition that is evaluated to apply the routing rule. If no condition is provided, it evaluates to true by default. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language",
@@ -3359,6 +3345,23 @@
         "isEnabled"
       ]
     },
+    "RoutingSource": {
+      "enum": [
+        "Invalid",
+        "DeviceMessages",
+        "TwinChangeEvents",
+        "DeviceLifecycleEvents",
+        "DeviceJobLifecycleEvents",
+        "DigitalTwinChangeEvents",
+        "DeviceConnectionStateEvents",
+        "MqttBrokerMessages"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RoutingSource",
+        "modelAsString": true
+      }
+    },
     "FallbackRouteProperties": {
       "description": "The properties of the fallback route. IoT Hub uses these properties when it routes messages to the fallback endpoint.",
       "type": "object",
@@ -3374,7 +3377,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "RoutingSource",
+            "name": "FallbackRoutingSource",
             "modelAsString": true
           }
         },
@@ -4113,21 +4116,7 @@
       "properties": {
         "routingSource": {
           "description": "Routing source",
-          "enum": [
-            "Invalid",
-            "DeviceMessages",
-            "TwinChangeEvents",
-            "DeviceLifecycleEvents",
-            "DeviceJobLifecycleEvents",
-            "DigitalTwinChangeEvents",
-            "DeviceConnectionStateEvents",
-            "MqttBrokerMessages"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RoutingSource",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/RoutingSource"
         },
         "message": {
           "description": "Routing message",
