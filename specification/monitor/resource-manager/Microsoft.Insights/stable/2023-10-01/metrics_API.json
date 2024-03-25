@@ -295,7 +295,7 @@
           "type": "string"
         },
         "metricNames": {
-          "description": "The names of the metrics (comma separated) to retrieve.",
+          "description": "The names of the metrics (comma separated) to retrieve. Special case: If a metricname itself has a comma in it then use %2 to indicate it. Eg: 'Metric,Name1' should be **'Metric%2Name1'**. At most 20 metric names can be specified.",
           "type": "string"
         },
         "aggregation": {
@@ -407,7 +407,7 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "The names of the metrics (comma separated) to retrieve.",
+      "description": "The names of the metrics (comma separated) to retrieve. Special case: If a metricname itself has a comma in it then use %2 to indicate it. Eg: 'Metric,Name1' should be **'Metric%2Name1'**. At most 20 metric names can be specified.",
       "x-ms-parameter-location": "method"
     },
     "FilterParameter": {
