@@ -26,17 +26,17 @@ These are the global settings for the Azure Programmable Connectivity.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2024-02-09-preview
+tag: package-2024-03-25-preview
 title: AzureProgrammableConnectivity
 ```
 
-### Tag: package-2024-02-09-preview
+### Tag: package-2024-03-25-preview
 
-These settings apply only when `--tag=package-2024-02-09-preview` is specified on the command line.
+These settings apply only when `--tag=package-2024-03-25-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-02-09-preview'
+```yaml $(tag) == 'package-2024-03-25-preview'
 input-file:
-  - Azure.ProgrammableConnectivity/preview/2024-02-09-preview/openapi.json
+  - Azure.ProgrammableConnectivity/preview/2024-03-25-preview/openapi.json
 suppressions:
   - code: ValidResponseCodeRequired
     reason: APC must return a 302 as part of a non-standard frontend authentication flow
