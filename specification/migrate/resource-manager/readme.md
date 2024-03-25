@@ -20,11 +20,20 @@ batch:
   - tag: package-migrateengine-2022-05
 ```
 
+
+### Tag: package-preview-2023-05
+
+These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-05'
+input-file:
+  - Microsoft.Migrate/AssessmentProjects/preview/2023-05-01-preview/migrate.json
+```
 ### Tag: package-migrate-2023-04
 
 These settings apply only when `--tag=package-migrate-2023-04` is specified on the command line.
 
-```yaml $(tag) == 'package-migrate-2023-04'
+``` yaml $(tag) == 'package-migrate-2023-04'
 input-file:
   - Microsoft.Migrate/AssessmentProjects/preview/2023-04-01-preview/migrate.json
 suppressions:
@@ -36,15 +45,16 @@ suppressions:
 
 These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-10'
+``` yaml $(tag) == 'package-preview-2023-10'
 input-file:
   - Microsoft.OffAzure/preview/2023-10-01-preview/migrate.json
 ```
+
 ### Tag: package-2023-06
 
 These settings apply only when `--tag=package-2023-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-06'
+``` yaml $(tag) == 'package-2023-06'
 input-file:
   - Microsoft.OffAzure/stable/2023-06-06/migrate.json
 ```
@@ -53,7 +63,7 @@ input-file:
 
 These settings apply only when `--tag=package-migrate-2023-03` is specified on the command line.
 
-```yaml $(tag) == 'package-migrate-2023-03'
+``` yaml $(tag) == 'package-migrate-2023-03'
 input-file:
   - Microsoft.Migrate/AssessmentProjects/stable/2023-03-15/migrate.json
 ```
@@ -62,7 +72,7 @@ input-file:
 
 These settings apply only when `--tag=package-migrate-2023-04` is specified on the command line.
 
-```yaml $(tag) == 'package-migrate-2023-04'
+``` yaml $(tag) == 'package-migrate-2023-04'
 input-file:
   - Microsoft.Migrate/AssessmentProjects/preview/2023-04-01-preview/migrate.json
 ```
@@ -191,14 +201,14 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-10
+tag: package-preview-2023-05
 ```
 
 ### Tag: package-preview-2023-10
 
 These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-10'
+``` yaml $(tag) == 'package-preview-2023-10'
 input-file:
   - Microsoft.OffAzure/preview/2023-10-01-preview/migrate.json
 ```
@@ -207,7 +217,7 @@ input-file:
 
 These settings apply only when `--tag=package-migrate-2023-03` is specified on the command line.
 
-```yaml $(tag) == 'package-migrate-2023-03'
+``` yaml $(tag) == 'package-migrate-2023-03'
 input-file:
   - Microsoft.Migrate/AssessmentProjects/stable/2023-03-15/migrate.json
 ```
@@ -216,7 +226,7 @@ input-file:
 
 These settings apply only when `--tag=package-migrate-2023-04` is specified on the command line.
 
-```yaml $(tag) == 'package-migrate-2023-04'
+``` yaml $(tag) == 'package-migrate-2023-04'
 input-file:
   - Microsoft.Migrate/AssessmentProjects/preview/2023-04-01-preview/migrate.json
 ```
