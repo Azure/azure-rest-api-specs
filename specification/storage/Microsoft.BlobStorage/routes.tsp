@@ -152,17 +152,14 @@ interface BlobServiceBatch {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
   submitBatch(
-    /** The batch request content */
-    ...BodyParameter; // TODO: Investigate this type
     ...ContentLengthParameter;
-    ...MultipartContentTypeParameter;
     ...TimeoutParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
   ): {
     @statusCode statusCode: 200;
 
-    ...ContentTypeResponseHeader;
+    
     ...RequestIdResponseHeader;
     ...VersionResponseHeader;
   } | StorageError;
@@ -340,8 +337,6 @@ interface BlobServiceContainerAccessPolicy {
     ...IfModifiedSinceParameter;
     ...IfUnmodifiedSinceParameter;
     ...LeaseIdOptionalParameter;
-    /** The signed identifiers. */
-    @body body: SignedIdentifiers;
   ): {
     @statusCode statusCode: 200;
 
@@ -414,13 +409,12 @@ interface ContainerBatchService {
     ...BodyParameter;
     ...ContainerNameParameter;
     ...ContentLengthParameter;
-    ...MultipartContentTypeParameter;
     ...TimeoutParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
   ): {
     @statusCode statusCode: 202;
-    ...ContentTypeResponseHeader;
+    
     ...RequestIdResponseHeader;
     ...VersionResponseHeader;
   } | StorageError;
@@ -733,7 +727,7 @@ interface BlobService {
     ...ImmutabilityPolicyExpiresOnResponseHeader;
     ...ImmutabilityPolicyModeResponseHeader;
     ...LegalHoldResponseHeader;
-    ...ContentTypeResponseHeader;
+    
     ...ContentLengthResponseHeader;
     ...EtagResponseHeader;
   } | {
@@ -776,7 +770,7 @@ interface BlobService {
     ...ImmutabilityPolicyExpiresOnResponseHeader;
     ...ImmutabilityPolicyModeResponseHeader;
     ...LegalHoldResponseHeader;
-    ...ContentTypeResponseHeader;
+    
     ...ContentLengthResponseHeader;
     ...EtagResponseHeader;
   } | StorageError;
@@ -822,7 +816,7 @@ interface BlobService {
     ...LeaseDurationResponseHeader;
     ...LeaseStateResponseHeader;
     ...LeaseStatusResponseHeader;
-    ...ContentTypeResponseHeader;
+    
     ...ContentLengthResponseHeader;
     ...EtagResponseHeader;
     ...ContentMd5ResponseHeader;
@@ -1825,7 +1819,7 @@ interface BlobBlockListService {
 
     ...LastModifiedResponseHeader;
     ...EtagResponseHeader;
-    ...ContentTypeResponseHeader;
+    
     ...BlobContentLengthResponseHeader;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -2312,7 +2306,7 @@ interface BlobQueryService {
 
     ...LastModifiedResponseHeader;
     ...ContentLengthResponseHeader;
-    ...ContentTypeResponseHeader;
+    
     ...ContentRangeResponseHeader;
     ...EtagResponseHeader;
     ...ContentMd5ResponseHeader;

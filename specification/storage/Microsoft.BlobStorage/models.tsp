@@ -1534,12 +1534,6 @@ model ContentMd5ResponseHeader {
   @header("Content-MD5") contentMd5: string;
 }
 
-/** The Content-Type response header. */
-model ContentTypeResponseHeader {
-  /** The media type of the body of the response. For batch requests, this is multipart/mixed; boundary=batchresponse_GUID */
-  @header("Content-Type") contentType: string;
-}
-
 /** The Content-Length response header. */
 model ContentLengthResponseHeader {
   /** The number of bytes present in the response body. */
@@ -2157,13 +2151,6 @@ model FilterBlobsWhere {
 model ContentLengthParameter {
   /** The length of the request. */
   @header("Content-Length") contentLength: int64;
-}
-
-/** The Content-Type header for multi-part requests. */
-model MultipartContentTypeParameter {
-  /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
-  @clientName("multipartContentType")
-  @header("Content-Type") contentType: string;
 }
 
 /** The max results parameter. */
