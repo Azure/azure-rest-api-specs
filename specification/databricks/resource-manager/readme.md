@@ -118,7 +118,7 @@ These are the global settings for the Databricks API.
 title: AzureDatabricksManagementClient
 description: The Microsoft Azure management APIs allow end users to operate on Azure Databricks Workspace / Access Connector resources.
 openapi-type: arm
-tag: package-preview-2023-09
+tag: package-2023-09-15-preview
 ```
 
 ### Tag: package-2018-04-01
@@ -176,7 +176,7 @@ input-file:
 
 ### Tag: package-2023-09-15-preview
 
-These settings apply only when `--tag=package-2023-05-01` is specified on the command line.
+These settings apply only when `--tag=package-2023-09-15-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2023-09-15-preview'
 input-file:
@@ -210,7 +210,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
