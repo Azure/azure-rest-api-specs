@@ -309,17 +309,19 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          },
-          "x-ms-long-running-operation": true,
-          "x-ms-long-running-operation-options": {
-            "final-state-via": "location"
-          },
-          "x-ms-examples": {
-            "Update an Experiment in a resource group.": {
-              "$ref": "./examples/UpdateExperiment.json"
-            }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Update an Experiment in a resource group.": {
+            "$ref": "./examples/UpdateExperiment.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/cancel": {
       "post": {
         "description": "Cancel a running Experiment resource.",
