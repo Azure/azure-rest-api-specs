@@ -171,7 +171,7 @@ model LandmarkCoordinate {
 @doc("Face attributes for the detected face.")
 model FaceAttributes {
   @doc("Age in years")
-  age?: int32;
+  age?: float32;
 
   @doc("Smile intensity, a number between [0,1]")
   @minValue(0)
