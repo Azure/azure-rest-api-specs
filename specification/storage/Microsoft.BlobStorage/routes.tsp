@@ -21,6 +21,7 @@ interface BlobServiceProperties {
   @operationId("Service_SetProperties")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   setServiceProperties(
     /** The storage service properties that specifies the analytics and CORS rules to set on the Blob service. */
     @body body: StorageServiceProperties;
@@ -82,7 +83,7 @@ interface BlobServiceListContainerSegments {
   @operationId("Service_ListContainersSegment")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
-  listContainers(
+  getContainers(
     ...PrefixParameter;
     ...TimeoutParameter;
     ...MarkerParameter;
@@ -91,7 +92,7 @@ interface BlobServiceListContainerSegments {
     ...ClientRequestIdParameter;
   ): {
     @statusCode statusCode: 200;
-    @body body: ListContainersSegmentResponse; // TODO: XML
+    @body body: ListContainersSegmentResponse;
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
     ...VersionResponseHeader;
@@ -114,7 +115,7 @@ interface BlobServiceUserDelegationKey {
   ): {
     @statusCode statusCode: 200;
     /** The user delegation key. */
-    @body body: UserDelegationKey; // TODO: XML
+    @body body: UserDelegationKey;
 
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -129,6 +130,7 @@ interface BlobServiceAccountProperties {
   @operationId("Service_GetAccountInfo")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   getAccountInfo(
     ...ApiVersionParameter;
   ): {
@@ -151,6 +153,7 @@ interface BlobServiceBatch {
   @operationId("Service_SubmitBatch")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   submitBatch(
     ...ContentLengthParameter;
     ...TimeoutParameter;
@@ -172,7 +175,7 @@ interface FilterBlobsService {
   @operationId("Service_FilterBlobs")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
-  listBlobs(
+  getBlobs(
     ...FilterBlobsWhere;
     ...FilterBlobsInclude;
     ...TimeoutParameter;
@@ -197,9 +200,10 @@ interface BlobServiceContainer {
   @operationId("Container_Create")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   createContainer(
     ...ContainerNameParameter;
-    ...MetadataParameter;
+    // TODO: ...MetadataParameter;
     ...BlobPublicAccessParameter;
     ...DefaultEncryptionScopeParameter;
     ...DenyEncryptionScopeOverrideParameter;
@@ -221,6 +225,7 @@ interface BlobServiceContainer {
   @operationId("Container_GetProperties")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   getContainerProperties(
     ...ContainerNameParameter;
     ...TimeoutParameter;
@@ -253,6 +258,7 @@ interface BlobServiceContainer {
   @operationId("Container_Delete")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   deleteContainer(
     ...ContainerNameParameter;
     ...TimeoutParameter;
@@ -278,9 +284,11 @@ interface BlobServiceContainerMetadata {
   @operationId("Container_SetMetadata")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   setContainerMetadata(
     ...ContainerNameParameter;
-    ...MetadataParameter;
+    // TODO: ...MetadataParameter;
     ...TimeoutParameter;
     ...ApiVersionParameter;
     ...ClientRequestIdParameter;
@@ -328,6 +336,8 @@ interface BlobServiceContainerAccessPolicy {
   @operationId("Container_SetAccessPolicy")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   setContainerAccessPolicy(
     ...ContainerNameParameter;
     ...ContainerAclParameter;
@@ -356,6 +366,8 @@ interface ContainerRestoreService {
   @operationId("Container_Undelete")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   undeleteContainer(
     ...ContainerNameParameter;
     ...DeletedContainerNameParameter;
@@ -380,6 +392,8 @@ interface ContainerRenameService {
   @operationId("Container_Rename")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   renameContainer(
     ...ContainerNameParameter;
     ...SourceContainerNameParameter;
@@ -404,6 +418,7 @@ interface ContainerBatchService {
   @operationId("Container_SubmitBatch")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   submitBatch(
     /** The batch request content */
     ...BodyParameter;
@@ -414,6 +429,7 @@ interface ContainerBatchService {
     ...ClientRequestIdParameter;
   ): {
     @statusCode statusCode: 202;
+    @body body: bytes;
     
     ...RequestIdResponseHeader;
     ...VersionResponseHeader;
@@ -427,7 +443,7 @@ interface BlobListService {
   @operationId("Container_FilterBlobs")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
-  filterBlobs(
+  getBlobs(
     ...ContainerNameParameter;
     ...MarkerParameter;
     ...MaxResultsParameter;
@@ -454,6 +470,8 @@ interface ContainerLeaseService {
   @operationId("Container_AcquireLease")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   acquireLease(
     ...ContainerNameParameter;
     ...LeaseDurationParameter;
@@ -483,6 +501,8 @@ interface ContainerReleaseLeaseService {
   @operationId("Container_ReleaseLease")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   releaseLease(
     ...ContainerNameParameter;
     ...LeaseIdRequired;
@@ -510,6 +530,8 @@ interface ContainerRenewLeaseService {
   @operationId("Container_RenewLease")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   renewLease(
     ...ContainerNameParameter;
     ...LeaseIdRequired;
@@ -537,6 +559,7 @@ interface ConatinerBreakLeaseService {
   @operationId("Container_BreakLease")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   breakLease(
     ...ContainerNameParameter;
     ...TimeoutParameter;
@@ -563,6 +586,8 @@ interface ContainerChangeLeaseService {
   @operationId("Container_ChangeLease")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   changeLease(
     ...ContainerNameParameter;
     ...LeaseIdRequired;
@@ -591,7 +616,7 @@ interface ContainerListBlobsService {
   @operationId("Container_ListBlobFlatSegment")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
-  listBlobs(
+  getBlobs(
     ...ContainerNameParameter;
     ...PrefixParameter;
     ...MarkerParameter;
@@ -617,7 +642,7 @@ interface ContainerListBlobsHierarchyService {
   @operationId("Container_ListBlobHierarchySegment")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
-  listBlobs(
+  getBlobs(
     ...ContainerNameParameter;
     ...DelimiterParameter;
     ...PrefixParameter;
@@ -629,7 +654,7 @@ interface ContainerListBlobsHierarchyService {
     ...ClientRequestIdParameter;
   ): {
     @statusCode statusCode: 200;
-    @body body: ListBlobsHierarchySegmentResponse; // TODO: XML
+    @body body: ListBlobsHierarchySegmentResponse;
 
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
@@ -645,12 +670,12 @@ interface ContainerAccountInfoService {
   @operationId("Container_GetAccountInfo")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   getAccountInfo(
     ...ContainerNameParameter;
     ...ApiVersionParameter;
   ): {
     @statusCode statusCode: 200;
-
     ...ClientRequestIdResponseHeader;
     ...RequestIdResponseHeader;
     ...VersionResponseHeader;
@@ -667,6 +692,8 @@ interface BlobService {
   @operationId("Blob_Download")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   downloadBlob(
     ...ContainerNameParameter;
     ...BlobNameParameter;
@@ -688,50 +715,7 @@ interface BlobService {
     ...ClientRequestIdParameter;
     ...ApiVersionParameter;
   ): {
-    @statusCode statusCode: 200;
-    ...BodyParameter;
-
-    // TODO: x-ms-meta headers
-    // TODO: x-ms-or headers
-    ...LastModifiedResponseHeader;
-    ...CreationTimeResponseHeader;
-    ...ObjectReplicationPolicyIdResponseHeader;
-    ...ContentRangeResponseHeader;
-    ...ContentMd5ResponseHeader;
-    ...ContentEncodingResponseParameter;
-    ...CacheControlResponseHeader;
-    ...ContentDispositionResponseHeader;
-    ...ContentLanguageResponseHeader;
-    ...BlobSequenceNumberResponseHeader;
-    ...BlobTypeResponseHeader;
-    ...CopyCompletionTimeResponseHeader;
-    ...CopyStatusDescriptionResponseHeader;
-    ...CopyIdResponseHeader;
-    ...CopyProgressResponseHeader;
-    ...CopyStatusResponseHeader;
-    ...CopySourceResponseHeader;
-    ...LeaseDurationResponseHeader;
-    ...LeaseStateResponseHeader;
-    ...LeaseStatusResponseHeader;
-    ...VersionResponseHeader;
-    ...VersionIdResponseHeader;
-    ...IsCurrentVersionResponseHeader;
-    ...AcceptRangesResponseHeader;
-    ...BlobCommittedBlockCountResponseHeader;
-    ...IsServerEncryptedResponseHeader;
-    ...EncryptionKeySha256ResponseHeader;
-    ...EncryptionScopeResponseHeader;
-    ...TagCountResponseHeader;
-    ...IsSealedResponseHeader;
-    ...LastAccessedResponseHeader;
-    ...ImmutabilityPolicyExpiresOnResponseHeader;
-    ...ImmutabilityPolicyModeResponseHeader;
-    ...LegalHoldResponseHeader;
-    
-    ...ContentLengthResponseHeader;
-    ...EtagResponseHeader;
-  } | {
-    @statusCode statusCode: 206;
+    @statusCode statusCode: 200 | 206;
     ...BodyParameter;
 
     // TODO: x-ms-meta headers
@@ -780,6 +764,7 @@ interface BlobService {
   @operationId("Blob_GetProperties")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   getBlobProperties(
     ...ContainerNameParameter;
     ...BlobNameParameter;
@@ -816,7 +801,6 @@ interface BlobService {
     ...LeaseDurationResponseHeader;
     ...LeaseStateResponseHeader;
     ...LeaseStatusResponseHeader;
-    
     ...ContentLengthResponseHeader;
     ...EtagResponseHeader;
     ...ContentMd5ResponseHeader;
@@ -855,6 +839,7 @@ interface BlobService {
   @operationId("Blob_Delete")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   deleteBlob(
     ...ContainerNameParameter;
     ...BlobNameParameter;
@@ -887,6 +872,7 @@ interface PageBlobService {
   @operationId("PageBlob_Create")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   createPageBlob(
     // TODO: Metadata
     ...ContainerNameParameter;
@@ -941,6 +927,7 @@ interface AppendBlobService {
   @operationId("AppendBlob_Create")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   createAppendBlob(
     // TODO: Metadata
     ...ContainerNameParameter;
@@ -993,16 +980,14 @@ interface BlockBlobService {
   @operationId("BlockBlob_Upload")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   uploadBlockBlob(
     // TODO: Metadata
 
     ...ContainerNameParameter;
     ...BlobNameParameter;
-
-    // TODO: body
-    /** The bytes to upload to the block blob. */
     ...BodyParameter;
-
     ...TimeoutParameter;
     ...ContentMd5Parameter;
     ...BlobContentTypeParameter;
@@ -1053,6 +1038,8 @@ interface BlockBlobFromUrlService{
   @operationId("BlockBlob_PutBlobFromUrl")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   putBlockBlobFromUrl(
     // TODO: Metadata
 
@@ -1111,6 +1098,7 @@ interface BlobUndeleteService {
   @operationId("Blob_Undelete")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   undeleteBlob(
     ...ContainerNameParameter;
     ...BlobNameParameter;
@@ -1132,6 +1120,7 @@ interface BlobExpirationService {
   @operationId("Blob_SetExpiry")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   setBlobExpiry(
     ...ContainerNameParameter;
     ...BlobNameParameter;
@@ -1157,6 +1146,8 @@ interface BlobSetHttpHeadersService {
   @operationId("Blob_SetHTTPHeaders")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   setHttpHeaders(
     ...ContainerNameParameter;
     ...BlobNameParameter;
@@ -1194,6 +1185,8 @@ interface BlobSetImmutabilityPolicyService {
   @operationId("Blob_SetImmutabilityPolicy")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   setImmutabilityPolicy(
     ...ContainerNameParameter;
     ...BlobNameParameter;
@@ -1220,6 +1213,7 @@ interface BlobSetImmutabilityPolicyService {
   @operationId("Blob_DeleteImmutabilityPolicy")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   deleteImmutabilityPolicy(
     ...ContainerNameParameter;
     ...BlobNameParameter;
@@ -1242,6 +1236,8 @@ interface BlobLegalHoldService {
   @operationId("Blob_SetLegalHold")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   setLegalHold(
     ...ContainerNameParameter;
     ...BlobNameParameter;
@@ -1266,6 +1262,8 @@ interface BlobSetMetadataService {
   @operationId("Blob_SetMetadata")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   setMetadata(
     ...ContainerNameParameter;
     ...BlobNameParameter;
@@ -1304,6 +1302,8 @@ interface BlobLeaseAcquireService {
   @operationId("Blob_AcquireLease")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   acquireLease(
     ...ContainerNameParameter;
     ...BlobNameParameter;
@@ -1336,6 +1336,8 @@ interface BlobLeaseReleaseService {
   @operationId("Blob_ReleaseLease")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   releaseLease(
     ...ContainerNameParameter;
     ...BlobNameParameter;
@@ -1366,6 +1368,8 @@ interface BlobLeaseRenewService {
   @operationId("Blob_RenewLease")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   renewLease(
     ...ContainerNameParameter;
     ...BlobNameParameter;
@@ -1397,6 +1401,8 @@ interface BlobLeaseChangeService {
   @operationId("Blob_ChangeLease")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   changeLease(
     ...ContainerNameParameter;
     ...BlobNameParameter;
@@ -1429,6 +1435,7 @@ interface BlobLeaseBreakService {
   @operationId("Blob_BreakLease")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   breakLease(
     ...ContainerNameParameter;
     ...BlobNameParameter;
@@ -1460,6 +1467,7 @@ interface BlobSnapshotService {
   @operationId("Blob_CreateSnapshot")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   createSnapshot(
     ...ContainerNameParameter;
     ...BlobNameParameter;
@@ -1497,6 +1505,7 @@ interface BlobCopyService {
   @operationId("Blob_StartCopyFromURL")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   startCopyFromUrl(
     ...ContainerNameParameter;
     ...BlobNameParameter;
@@ -1544,6 +1553,7 @@ interface BlobCopySyncService {
   @operationId("Blob_AbortCopyFromURL")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   copyFromUrl(
     ...ContainerNameParameter;
     ...BlobNameParameter;
@@ -1618,6 +1628,8 @@ interface BlobTierService {
   @operationId("Blob_SetTier")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   setTier(
     ...ContainerNameParameter;
     ...BlobNameParameter;
@@ -1649,6 +1661,7 @@ interface BlobAccountPropertiesService {
   @operationId("Blob_GetAccountInfo")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   getAccountInfo(
     ...ContainerNameParameter;
     ...BlobNameParameter;
@@ -1672,10 +1685,10 @@ interface BlobBlockStageService {
   @operationId("BlockBlob_StageBlock")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   stageBlock(
-    /** The data to upload. */
     ...BodyParameter;
-
     ...ContainerNameParameter;
     ...BlobNameParameter;
     ...BlockIdParameter;
@@ -1711,6 +1724,8 @@ interface BlobBlockStageFromUrlService {
   @operationId("BlockBlob_StageBlockFromURL")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   stageBlockFromUrl(
     ...ContainerNameParameter;
     ...BlobNameParameter;
@@ -1754,6 +1769,8 @@ interface BlobBlockListService {
   @operationId("BlockBlob_CommitBlockList")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   commitBlockList(
     ...BlobBlocksParameter;
     ...ContainerNameParameter;
@@ -1835,6 +1852,8 @@ interface PageBlobUpdateService {
   @operationId("PageBlob_UploadPages")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   uploadPages(
     /** The data to upload. */
     ...BodyParameter;
@@ -1885,6 +1904,8 @@ interface PageBlobClearService {
   @operationId("PageBlob_ClearPages")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   clearPages(
     ...ContainerNameParameter;
     ...BlobNameParameter;
@@ -1921,6 +1942,7 @@ interface BlobPageUpdateFromUrlService {
   @operationId("PageBlob_UploadPagesFromURL")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   uploadPagesFromUrl(
     ...ContainerNameParameter;
     ...BlobNameParameter;
@@ -2050,6 +2072,8 @@ interface PageBlobResizeService {
   @operationId("PageBlob_Resize")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   resize(
     ...ContainerNameParameter;
     ...BlobNameParameter;
@@ -2086,6 +2110,8 @@ interface PageBlobUpdateSequenceNumberService {
   @operationId("PageBlob_UpdateSequenceNumber")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   updateSequenceNumber(
     ...ContainerNameParameter;
     ...BlobNameParameter;
@@ -2119,6 +2145,7 @@ interface PageBlobIncrementalCopyService {
   @operationId("PageBlob_CopyIncremental")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   incrementalCopy(
     ...ContainerNameParameter;
     ...BlobNameParameter;
@@ -2152,6 +2179,8 @@ interface AppendBlobAppendBlockService {
   @operationId("AppendBlob_AppendBlock")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   appendBlock(
     /** The data to upload. */
     ...BodyParameter;
@@ -2201,6 +2230,8 @@ interface AppendBlockAppendBlockFromUrlService {
   @operationId("AppendBlob_AppendBlockFromURL")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   appendBlockFromUrl(
     ...ContainerNameParameter;
     ...BlobNameParameter;
@@ -2250,6 +2281,8 @@ interface AppendBlobSealService {
   @operationId("AppendBlob_Seal")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   seal(
     ...ContainerNameParameter;
     ...BlobNameParameter;

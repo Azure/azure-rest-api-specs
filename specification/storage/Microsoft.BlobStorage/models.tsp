@@ -2080,7 +2080,7 @@ model ContainerAclParameter {
 /** The container name header */
 model ContainerNameParameter {
   /** The name of the container. */
-  @path("containerName")
+  @path
   containerName: string;
 }
 
@@ -2129,6 +2129,7 @@ model BlobPublicAccessParameter {
 
 // TODO: Figure out how to better represent this
 /** The metadata parameter. */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Existing API"
 model MetadataParameter is Record<string> {
   /** Optional. Specifies a user-defined name-value pair associated with the blob. If no name-value pairs are specified, the operation will copy the metadata from the source blob or file to the destination blob. If one or more name-value pairs are specified, the destination blob is created with the specified metadata, and metadata is not copied from the source blob or file. Note that beginning with version 2009-09-19, metadata names must adhere to the naming rules for C# identifiers. See Naming and Referencing Containers, Blobs, and Metadata for more information. */
   @header("x-ms-meta") meta?: string; 
