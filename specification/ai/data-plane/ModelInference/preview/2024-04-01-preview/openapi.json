@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure.AI.Inference service",
+    "title": "AI Model Inference",
     "version": "2024-04-01-preview",
     "x-typespec-generated": [
       {
@@ -45,7 +45,7 @@
   },
   "tags": [],
   "paths": {
-    "/chat/completions": {
+    "/v1/chat/completions": {
       "post": {
         "operationId": "GetChatCompletions",
         "description": "Gets chat completions for the provided chat messages.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
@@ -81,6 +81,14 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetChatCompletions_MaximumSet_Gen": {
+            "$ref": "./examples/GetChatCompletions_MaximumSet_Gen.json"
+          },
+          "GetChatCompletions_MinimumSet_Gen": {
+            "$ref": "./examples/GetChatCompletions_MinimumSet_Gen.json"
           }
         }
       }
@@ -547,7 +555,7 @@
     },
     "Versions": {
       "type": "string",
-      "description": "The Azure.AI.Inference service versions.",
+      "description": "The ModelInference service versions.",
       "enum": [
         "2024-04-01-preview"
       ],
@@ -558,7 +566,7 @@
           {
             "name": "v2024_04_01_Preview",
             "value": "2024-04-01-preview",
-            "description": "The 2024-04-01-preview version of the Azure.AI.Inference service."
+            "description": "The 2024-04-01-preview version of the ModelInference service."
           }
         ]
       }

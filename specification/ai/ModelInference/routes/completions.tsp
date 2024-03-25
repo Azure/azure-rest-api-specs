@@ -11,7 +11,7 @@ using TypeSpec.Versioning;
 
 using Azure.Core;
 
-namespace Azure.AI.Inference;
+namespace ModelInference;
 
 @doc("""
 Gets chat completions for the provided chat messages.

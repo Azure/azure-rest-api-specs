@@ -8,7 +8,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace Azure.AI.Inference;
+namespace ModelInference;
 
 @doc("""
 Representation of the token counts processed for a completions request.

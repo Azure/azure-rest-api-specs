@@ -19,16 +19,16 @@ using Azure.Core;
   ]>
 )
 @service({
-  title: "Azure.AI.Inference service",
+  title: "AI Model Inference",
 })
-@versioned(Azure.AI.Inference.Versions)
+@versioned(ModelInference.Versions)
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Namespace types must use PascalCase"
-namespace Azure.AI.Inference;
+namespace ModelInference;
 
-@doc("The Azure.AI.Inference service versions.")
+@doc("The ModelInference service versions.")
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @doc("The 2024-04-01-preview version of the Azure.AI.Inference service.")
+  @doc("The 2024-04-01-preview version of the ModelInference service.")
   v2024_04_01_Preview: "2024-04-01-preview",
 }
 

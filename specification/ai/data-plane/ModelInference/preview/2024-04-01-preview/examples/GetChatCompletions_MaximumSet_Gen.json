@@ -1,0 +1,56 @@
+{
+  "title": "GetChatCompletions",
+  "operationId": "GetChatCompletions",
+  "parameters": {
+    "api-version": "2024-04-01-preview",
+    "chatCompletionOptions": {
+      "messages": [
+        {
+          "role": "ChatRequestMessage"
+        }
+      ],
+      "max_tokens": 3,
+      "temperature": 17,
+      "top_p": 11,
+      "stop": [
+        "tdznlwkqqkwpfwhfzgrnadcprfnwh"
+      ],
+      "presence_penalty": 27,
+      "frequency_penalty": 20,
+      "stream": true,
+      "seed": 29,
+      "response_format": {
+        "type": "ChatCompletionsResponseFormat"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "guxpnhvgeseixtlwsz",
+        "created": 16,
+        "choices": [
+          {
+            "message": {
+              "role": "system",
+              "content": "ldwtcers"
+            },
+            "index": 12,
+            "finish_reason": "stop",
+            "delta": {
+              "role": "system",
+              "content": "ldwtcers"
+            }
+          }
+        ],
+        "usage": {
+          "completion_tokens": 24,
+          "prompt_tokens": 13,
+          "total_tokens": 30
+        },
+        "object": "foqibnwknavndujrtsqlb",
+        "model": "ssioolygavmebvstrmucaulzdpocqa"
+      }
+    }
+  }
+}
