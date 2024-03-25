@@ -246,8 +246,8 @@
         "tags": [
           "StorageTaskAssignments"
         ],
-        "description": "List all the storage task assignments for an account",
-        "operationId": "StorageTaskAssignments_ListByAccount",
+        "description": "List all the storage task assignments in an account",
+        "operationId": "StorageTaskAssignments_List",
         "x-ms-examples": {
           "ListStorageTaskAssignmentsForAccount": {
             "$ref": "./examples/storageTaskAssignmentsList/ListStorageTaskAssignmentsForAccount.json"
@@ -268,6 +268,12 @@
             "in": "query",
             "type": "string",
             "description": "Optional, specifies the maximum number of storage task assignment Ids to be included in the list response."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string",
+            "description": "Optional. When specified, it can be used to query using reporting properties."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
