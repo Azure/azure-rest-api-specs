@@ -17,10 +17,10 @@ alias ServiceTraits = SupportsRepeatableRequests &
 interface DocumentTranslationOperations {
   #suppress "@azure-tools/typespec-azure-core/byos"
   @summary("Submit a single document translation request to the Document Translation service")
-  @doc("Use this API to submit a single translation request to the Document Translation Service.")  
+  @doc("Use this API to submit a single translation request to the Document Translation Service.")
   @route("document:translate")
   @post
-  op documentTranslate is RpcOperation<
+  documentTranslate is RpcOperation<
     DocumentTranslateContent,
     DocumentTranslateResult,
     ServiceTraits
@@ -432,5 +432,18 @@ The list includes the common file extension used.
   getSupportedGlossaryFormats is Azure.Core.Foundations.Operation<
     {},
     SupportedFileFormats
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  @summary("Returns a list of supported storage sources")
+  @doc("""
+Returns a list of storage sources/options supported by the Document Translation
+service.
+""")
+  @route("/storagesources")
+  @get
+  getSupportedStorageSources is Azure.Core.Foundations.Operation<
+    {},
+    SupportedStorageSources
   >;
 }

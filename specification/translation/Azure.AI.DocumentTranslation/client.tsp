@@ -32,6 +32,8 @@ interface DocumentTranslationClient {
   getSupportedDocumentFormats is DocumentTranslation.DocumentTranslationOperations.getSupportedDocumentFormats;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   getSupportedGlossaryFormats is DocumentTranslation.DocumentTranslationOperations.getSupportedGlossaryFormats;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  getSupportedStorageSources is DocumentTranslation.DocumentTranslationOperations.getSupportedStorageSources;
 }
 
 @client({
