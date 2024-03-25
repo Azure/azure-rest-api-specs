@@ -30,10 +30,6 @@ openapi-subtype: rpaas
 tag: package-2024-01
 ```
 
-``` yaml
-modelerfour:
-  flatten-models: false
-```
 
 ### Tag: package-2024-01
 
@@ -41,8 +37,7 @@ These settings apply only when `--tag=package-2024-01` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-01'
 input-file:
-  - Microsoft.HybridContainerService/stable/2024-01-01/provisionedClusterInstances.json
-  - Microsoft.HybridContainerService/stable/2024-01-01/virtualNetworks.json
+  - Microsoft.HybridContainerService/stable/2024-01-01/openapi.json
 ```
 ### Tag: package-preview-2023-11
 
