@@ -14,17 +14,18 @@ alias ServiceTraits = SupportsRepeatableRequests &
   SupportsConditionalRequests &
   SupportsClientRequestId;
 
-/** API to translate a document. */
-#suppress "@azure-tools/typespec-azure-core/byos"
-@post
-@route("document:translate")
-op documentTranslate is RpcOperation<
-  DocumentTranslateContent,
-  DocumentTranslateResult,
-  ServiceTraits
->;
-
 interface DocumentTranslationOperations {
+  #suppress "@azure-tools/typespec-azure-core/byos"
+  @summary("Submit a single document translation request to the Document Translation service")
+  @doc("Use this API to submit a single translation request to the Document Translation Service.")  
+  @route("document:translate")
+  @post
+  op documentTranslate is RpcOperation<
+    DocumentTranslateContent,
+    DocumentTranslateResult,
+    ServiceTraits
+  >;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @summary("Submit a document translation request to the Document Translation service")
   @doc("""

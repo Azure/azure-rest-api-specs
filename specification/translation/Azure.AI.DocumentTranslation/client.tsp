@@ -40,5 +40,5 @@ interface DocumentTranslationClient {
 })
 interface SingleDocumentTranslationClient {
   #suppress "@azure-tools/typespec-azure-core/byos"
-  documentTranslate is DocumentTranslation.documentTranslate;
+  documentTranslate is DocumentTranslation.DocumentTranslationOperations.documentTranslate;
 }
