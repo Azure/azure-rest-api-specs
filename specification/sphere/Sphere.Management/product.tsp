@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./Catalog.tsp";
+import "./catalog.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
