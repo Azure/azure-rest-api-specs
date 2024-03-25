@@ -1,156 +1,37 @@
 {
   "parameters": {
     "api-version": "2024-02-01-preview",
-    "networkSecurityGroupName": "nsg1",
+    "networkSecurityGroupName": "testnsg",
+    "resource": {
+      "location": "eastus"
+    },
     "resourceGroupName": "testrg",
     "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b"
   },
   "responses": {
     "200": {
       "body": {
-        "value": [
-          {
-            "name": "AllowVnetInBound",
-            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.AzureStackHCI/networkSecurityGroups/nsg1/defaultSecurityRules/AllowVnetInBound",
-            "properties": {
-              "description": "Allow inbound traffic from all VMs in VNET",
-              "access": "Allow",
-              "destinationAddressPrefixes": [
-                "VirtualNetwork"
-              ],
-              "destinationPortRanges": [
-                "*"
-              ],
-              "direction": "Inbound",
-              "priority": 65000,
-              "sourceAddressPrefixes": [
-                "VirtualNetwork"
-              ],
-              "sourcePortRanges": [
-                "*"
-              ],
-              "protocol": "*"
-            }
-          },
-          {
-            "name": "AllowAzureLoadBalancerInBound",
-            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.AzureStackHCI/networkSecurityGroups/nsg1/defaultSecurityRules/AllowAzureLoadBalancerInBound",
-            "properties": {
-              "description": "Allow inbound traffic from azure load balancer",
-              "access": "Allow",
-              "destinationAddressPrefixes": [
-                "*"
-              ],
-              "destinationPortRanges": [
-                "*"
-              ],
-              "direction": "Inbound",
-              "priority": 65001,
-              "sourceAddressPrefixes": [
-                "AzureLoadBalancer"
-              ],
-              "sourcePortRanges": [
-                "*"
-              ],
-              "protocol": "*"
-            }
-          },
-          {
-            "name": "DenyAllInBound",
-            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.AzureStackHCI/networkSecurityGroups/nsg1/defaultSecurityRules/DenyAllInBound",
-            "properties": {
-              "description": "Deny all inbound traffic",
-              "access": "Deny",
-              "destinationAddressPrefixes": [
-                "*"
-              ],
-              "destinationPortRanges": [
-                "*"
-              ],
-              "direction": "Inbound",
-              "priority": 65500,
-              "sourceAddressPrefixes": [
-                "*"
-              ],
-              "sourcePortRanges": [
-                "*"
-              ],
-              "protocol": "*"
-            }
-          },
-          {
-            "name": "AllowVnetOutBound",
-            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.AzureStackHCI/networkSecurityGroups/nsg1/defaultSecurityRules/AllowVnetOutBound",
-            "properties": {
-              "description": "Allow outbound traffic from all VMs to all VMs in VNET",
-              "access": "Allow",
-              "destinationAddressPrefixes": [
-                "VirtualNetwork"
-              ],
-              "destinationPortRanges": [
-                "*"
-              ],
-              "direction": "Outbound",
-              "priority": 65000,
-              "sourceAddressPrefixes": [
-                "VirtualNetwork"
-              ],
-              "sourcePortRanges": [
-                "*"
-              ],
-              "protocol": "*"
-            }
-          },
-          {
-            "name": "AllowInternetOutBound",
-            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.AzureStackHCI/networkSecurityGroups/nsg1/defaultSecurityRules/AllowInternetOutBound",
-            "properties": {
-              "description": "Allow outbound traffic from all VMs to Internet",
-              "access": "Allow",
-              "destinationAddressPrefixes": [
-                "Internet"
-              ],
-              "destinationPortRanges": [
-                "*"
-              ],
-              "direction": "Outbound",
-              "priority": 65001,
-              "sourceAddressPrefixes": [
-                "*"
-              ],
-              "sourcePortRanges": [
-                "*"
-              ],
-              "protocol": "*"
-            }
-          },
-          {
-            "name": "DenyAllOutBound",
-            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.AzureStackHCI/networkSecurityGroups/nsg1/defaultSecurityRules/DenyAllOutBound",
-            "properties": {
-              "description": "Deny all outbound traffic",
-              "access": "Deny",
-              "destinationAddressPrefixes": [
-                "*"
-              ],
-              "destinationPortRanges": [
-                "*"
-              ],
-              "direction": "Outbound",
-              "priority": 65500,
-              "sourceAddressPrefixes": [
-                "*"
-              ],
-              "sourcePortRanges": [
-                "*"
-              ],
-              "protocol": "*"
-            }
-          }
-        ]
+        "name": "testnsg",
+        "type": "Microsoft.AzureStackHCI/networkSecurityGroups",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.AzureStackHCI/networkSecurityGroups/testnsg",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testnsg",
+        "type": "Microsoft.AzureStackHCI/networkSecurityGroups",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.AzureStackHCI/networkSecurityGroups/testnsg",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded"
+        }
       }
     }
   },
-  "operationId": "DefaultSecurityRules_ListByNetworkSecurityGroup",
-  "title": "DefaultSecurityRuleListByNetworkSecurityGroup"
+  "operationId": "NetworkSecurityGroups_CreateOrUpdate",
+  "title": "Create network security group"
 }
