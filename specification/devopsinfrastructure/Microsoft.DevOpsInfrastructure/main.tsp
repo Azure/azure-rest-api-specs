@@ -165,6 +165,59 @@ model DevOpsAzureSku {
 model StorageProfile {
   @doc("The Azure SKU name of the machines in the pool.")
   osDiskStorageAccountType?: OsDiskStorageAccountType;
+
+  @doc("A list of empty data disks to attach.")
+  @extension("x-ms-identifiers", [])
+  dataDisks?: DataDisk[];
+}
+
+@doc("The data disk of the VMSS.")
+model DataDisk {
+  @doc("The type of caching to be enabled for the data disks. The default value for caching is readwrite. For information about the caching options see: https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.")
+  caching?: CachingType;
+
+  @doc("The initial disk size in gigabytes.")
+  diskSizeGiB?: int32;
+
+  @doc("The storage Account type to be used for the data disk. If omitted, the default is \"standard_lrs\".")
+  storageAccountType?: StorageAccountType;
+
+  @doc("The drive letter for the empty data disk. If not specified, it will be the first available letter.")
+  driveLetter?: string;
+}
+
+@doc("The type of caching in a data disk.")
+union CachingType {
+  string,
+
+  @doc("None.")
+  "None",
+
+  @doc("ReadOnly.")
+  "ReadOnly",
+
+  @doc("ReadWrite.")
+  "ReadWrite",
+}
+
+@doc("StorageAccountType enums")
+union StorageAccountType {
+  string,
+
+  @doc("The data disk should use standard locally redundant storage.")
+  StandardLRS: "standard_lrs",
+
+  @doc("The data disk should use premium locally redundant storage.")
+  PremiumLRS: "premium_lrs",
+
+  @doc("The data disk should use standard SSD locally redundant storage.")
+  StandardSSDLRS: "standardssd_lrs",
+
+  @doc("The data disk should use premium SSD zonal redundant storage.")
+  PremiumZRS: "premium_zrs",
+
+  @doc("The data disk should use standard SSD zonal redundant storage.")
+  StandardSSDZRS: "standardssd_zrs",
 }
 
 @doc("The storage account type of the OS disk.")
@@ -184,7 +237,10 @@ union OsDiskStorageAccountType {
 @doc("The VM image of the machines in the pool.")
 model PoolImage {
   @doc("The resource id of the image.")
-  resourceId: string;
+  resourceId?: string;
+
+  @doc("The image to use from a well-known set of images made available to customers.")
+  wellKnownImageName?: string;
 
   @doc("List of aliases to reference the image by.")
   aliases?: string[];
