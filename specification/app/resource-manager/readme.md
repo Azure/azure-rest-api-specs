@@ -65,7 +65,7 @@ input-file:
   - Microsoft.App/preview/2024-02-02-preview/Subscriptions.json
   - Microsoft.App/preview/2024-02-02-preview/Usages.json
   - Microsoft.App/preview/2024-02-02-preview/FunctionsExtension.json
-  - Microsoft.App/preview/2023-11-02-preview/Labels.json
+  - Microsoft.App/preview/2024-02-02-preview/Labels.json
 directive:
   - suppress: PatchBodyParametersSchema
     from: JavaComponents.json
