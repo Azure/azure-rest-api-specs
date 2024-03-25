@@ -50,12 +50,6 @@
             "$ref": "#/parameters/DedicatedHsmName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "parameters",
             "in": "body",
             "required": true,
@@ -63,6 +57,12 @@
               "$ref": "#/definitions/DedicatedHsm"
             },
             "description": "Parameters to create or update the dedicated hsm"
+          }
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -112,12 +112,6 @@
             "$ref": "#/parameters/DedicatedHsmName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "parameters",
             "in": "body",
             "required": true,
@@ -126,6 +120,12 @@
               "$ref": "#/definitions/DedicatedHsmPatchParameters"
             },
             "description": "Parameters to patch the dedicated HSM"
+          }
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -848,7 +848,6 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9-]{3,24}$",
       "description": "Name of the dedicated Hsm"
     }
   }
