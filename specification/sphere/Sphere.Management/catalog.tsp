@@ -76,6 +76,7 @@ interface Catalogs
       CatalogProperties
     > {
   @removed(Versions.v2024_04_01)
+  @sharedRoute
   @autoRoute
   @doc("Counts devices in catalog.")
   @armResourceAction(Catalog)
