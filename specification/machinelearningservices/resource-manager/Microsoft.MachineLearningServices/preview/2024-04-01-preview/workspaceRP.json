@@ -530,9 +530,6 @@
             "$ref": "#/parameters/ConnectionName"
           },
           {
-            "$ref": "#/parameters/AOAIModelsToDeployParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -671,6 +668,251 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments": {
+      "get": {
+        "tags": [
+          "V2WorkspaceConnectionResource"
+        ],
+        "summary": "Get all the deployments under the Azure OpenAI connection.",
+        "operationId": "Connection_ListDeployments",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/EndpointDeploymentResourcePropertiesBasicResourceArmPaginatedResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Azure OpenAI Connection Deployments": {
+            "$ref": "./examples/WorkspaceConnection/listDeployments.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments/{deploymentName}": {
+      "delete": {
+        "tags": [
+          "V2WorkspaceConnectionResource"
+        ],
+        "summary": "Delete Azure OpenAI connection deployment resource by name",
+        "operationId": "Connection_DeleteDeployment",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Azure OpenAI Connection Deployment": {
+            "$ref": "./examples/WorkspaceConnection/deleteDeployment.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "V2WorkspaceConnectionResource"
+        ],
+        "summary": "Get deployments under the Azure OpenAI connection by name.",
+        "operationId": "Connection_GetDeployment",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/EndpointDeploymentResourcePropertiesBasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Azure OpenAI Connection Deployment": {
+            "$ref": "./examples/WorkspaceConnection/getDeployment.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "V2WorkspaceConnectionResource"
+        ],
+        "summary": "Create or update Azure OpenAI connection deployment resource with the specified parameters",
+        "operationId": "Connection_CreateOrUpdateDeployment",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "deployment object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EndpointDeploymentResourcePropertiesBasicResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/EndpointDeploymentResourcePropertiesBasicResource"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Azure OpenAI Connection Deployment": {
+            "$ref": "./examples/WorkspaceConnection/createDeployment.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/listsecrets": {
       "post": {
         "tags": [
@@ -696,9 +938,6 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/AOAIModelsToDeployParameter"
           }
         ],
         "responses": {
@@ -719,6 +958,293 @@
           "GetWorkspaceConnection": {
             "$ref": "./examples/WorkspaceConnection/listSecrets.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/models": {
+      "get": {
+        "tags": [
+          "V2WorkspaceConnectionResource"
+        ],
+        "summary": "Get available models under the Azure OpenAI connection.",
+        "operationId": "Connection_GetModels",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/EndpointModels"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Azure OpenAI Connection Models": {
+            "$ref": "./examples/WorkspaceConnection/getModels.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiPolicies": {
+      "get": {
+        "tags": [
+          "V2WorkspaceConnectionResource"
+        ],
+        "summary": "List the specified Content Filters associated with the Azure OpenAI connection.",
+        "operationId": "ConnectionRaiPolicies_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/RaiPolicyPropertiesBasicResourceArmPaginatedResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Rai policy": {
+            "$ref": "./examples/WorkspaceConnection/RaiPolicy/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiPolicies/{raiPolicyName}": {
+      "delete": {
+        "tags": [
+          "V2WorkspaceConnectionResource"
+        ],
+        "summary": "Deletes the specified Content Filters associated with the Azure OpenAI connection.",
+        "operationId": "ConnectionRaiPolicy_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "#/parameters/RaiPolicyNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Rai policy": {
+            "$ref": "./examples/WorkspaceConnection/RaiPolicy/delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "V2WorkspaceConnectionResource"
+        ],
+        "summary": "Gets the specified Content Filters associated with the Azure OpenAI connection.",
+        "operationId": "ConnectionRaiPolicy_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "#/parameters/RaiPolicyNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/RaiPolicyPropertiesBasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Rai policy": {
+            "$ref": "./examples/WorkspaceConnection/RaiPolicy/get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "V2WorkspaceConnectionResource"
+        ],
+        "summary": "Update the state of specified Content Filters associated with the Azure OpenAI connection.",
+        "operationId": "ConnectionRaiPolicy_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "#/parameters/RaiPolicyNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RaiPolicyPropertiesBasicResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/RaiPolicyPropertiesBasicResource"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/RaiPolicyPropertiesBasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Rai policy": {
+            "$ref": "./examples/WorkspaceConnection/RaiPolicy/create.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -948,7 +1474,18 @@
             "$ref": "#/parameters/EndpointTypeParameter"
           },
           {
+            "in": "query",
+            "name": "includeInferenceEndpoints",
+            "type": "boolean",
+            "default": false
+          },
+          {
             "$ref": "#/parameters/PaginationParameter"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
           }
         ],
         "responses": {
@@ -1440,6 +1977,242 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/raiPolicies": {
+      "get": {
+        "tags": [
+          "Endpoint"
+        ],
+        "summary": "List the specified Content Filters associated with the Azure OpenAI account.",
+        "operationId": "RaiPolicies_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/RaiPolicyPropertiesBasicResourceArmPaginatedResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Rai policies": {
+            "$ref": "./examples/Endpoint/RaiPolicy/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/raiPolicies/{raiPolicyName}": {
+      "delete": {
+        "tags": [
+          "Endpoint"
+        ],
+        "summary": "Deletes the specified Content Filters associated with the Azure OpenAI account.",
+        "operationId": "RaiPolicy_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RaiPolicyNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Rai policy": {
+            "$ref": "./examples/Endpoint/RaiPolicy/delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "Endpoint"
+        ],
+        "summary": "Gets the specified Content Filters associated with the Azure OpenAI account.",
+        "operationId": "RaiPolicy_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RaiPolicyNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/RaiPolicyPropertiesBasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Rai policy": {
+            "$ref": "./examples/Endpoint/RaiPolicy/get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Endpoint"
+        ],
+        "summary": "Update the state of specified Content Filters associated with the Azure OpenAI account.",
+        "operationId": "RaiPolicy_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RaiPolicyNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RaiPolicyPropertiesBasicResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/RaiPolicyPropertiesBasicResource"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/RaiPolicyPropertiesBasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Rai policy": {
+            "$ref": "./examples/Endpoint/RaiPolicy/create.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -2530,6 +3303,19 @@
         }
       ]
     },
+    "AllowedContentLevel": {
+      "description": "Level at which content is filtered.",
+      "enum": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AllowedContentLevel",
+        "modelAsString": true
+      }
+    },
     "ApiKeyAuthWorkspaceConnectionProperties": {
       "description": "This connection type covers the generic ApiKey auth connection categories, for examples:\r\nAzureOpenAI:\r\n    Category:= AzureOpenAI\r\n    AuthType:= ApiKey (as type discriminator)\r\n    Credentials:= {ApiKey} as Microsoft.MachineLearning.AccountRP.Contracts.WorkspaceConnection.ApiKey\r\n    Target:= {ApiBase}\r\n            \r\nCognitiveService:\r\n    Category:= CognitiveService\r\n    AuthType:= ApiKey (as type discriminator)\r\n    Credentials:= {SubscriptionKey} as Microsoft.MachineLearning.AccountRP.Contracts.WorkspaceConnection.ApiKey\r\n    Target:= ServiceRegion={serviceRegion}\r\n            \r\nCognitiveSearch:\r\n    Category:= CognitiveSearch\r\n    AuthType:= ApiKey (as type discriminator)\r\n    Credentials:= {Key} as Microsoft.MachineLearning.AccountRP.Contracts.WorkspaceConnection.ApiKey\r\n    Target:= {Endpoint}\r\n            \r\nUse Metadata property bag for ApiType, ApiVersion, Kind and other metadata fields",
       "type": "object",
@@ -2784,7 +3570,11 @@
         "WebTable",
         "Xero",
         "Zoho",
-        "GenericContainerRegistry"
+        "GenericContainerRegistry",
+        "OpenAI",
+        "Serp",
+        "BingLLMSearch",
+        "Serverless"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -2875,6 +3665,7 @@
         "Updating",
         "Succeeded",
         "Deleting",
+        "Accepted",
         "Canceled"
       ],
       "type": "string",
@@ -3321,6 +4112,10 @@
         "provisioningState": {
           "description": "Read-only provision state status property.",
           "$ref": "#/definitions/DefaultResourceProvisioningState"
+        },
+        "shouldCreateAiServicesEndpoint": {
+          "description": "Whether the proxy (non-byo) endpoint is a regular endpoint or a OneKeyV2 AI services account endpoint.",
+          "type": "boolean"
         }
       },
       "discriminator": "endpointType"
@@ -4056,6 +4851,14 @@
         "destination": {
           "description": "Private Endpoint destination for a Private Endpoint Outbound Rule for the managed network of a machine learning workspace.",
           "$ref": "#/definitions/PrivateEndpointDestination"
+        },
+        "parentRuleName": {
+          "description": "The dependency rule name.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "x-ms-discriminator-value": "PrivateEndpoint"
@@ -4190,6 +4993,141 @@
         "modelAsString": true
       }
     },
+    "RaiBlocklistConfig": {
+      "description": "Azure OpenAI blocklist config.",
+      "type": "object",
+      "properties": {
+        "blocking": {
+          "type": "boolean"
+        },
+        "blocklistName": {
+          "type": "string"
+        }
+      }
+    },
+    "RaiPolicyContentFilter": {
+      "description": "Azure OpenAI Content Filter.",
+      "type": "object",
+      "properties": {
+        "allowedContentLevel": {
+          "$ref": "#/definitions/AllowedContentLevel"
+        },
+        "blocking": {
+          "type": "boolean"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/definitions/RaiPolicyContentSource"
+        }
+      }
+    },
+    "RaiPolicyContentSource": {
+      "description": "Content source to apply the Content Filters.",
+      "enum": [
+        "Prompt",
+        "Completion"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RaiPolicyContentSource",
+        "modelAsString": true
+      }
+    },
+    "RaiPolicyMode": {
+      "description": "Content Filters mode.",
+      "enum": [
+        "Default",
+        "Deferred",
+        "Blocking"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RaiPolicyMode",
+        "modelAsString": true
+      }
+    },
+    "RaiPolicyProperties": {
+      "description": "Azure OpenAI Content Filters properties.",
+      "type": "object",
+      "properties": {
+        "basePolicyName": {
+          "type": "string"
+        },
+        "completionBlocklists": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RaiBlocklistConfig"
+          }
+        },
+        "contentFilters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RaiPolicyContentFilter"
+          }
+        },
+        "mode": {
+          "$ref": "#/definitions/RaiPolicyMode"
+        },
+        "type": {
+          "$ref": "#/definitions/RaiPolicyType"
+        },
+        "promptBlocklists": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RaiBlocklistConfig"
+          }
+        }
+      }
+    },
+    "RaiPolicyPropertiesBasicResource": {
+      "description": "Azure OpenAI Content Filters resource.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RaiPolicyProperties"
+        }
+      }
+    },
+    "RaiPolicyPropertiesBasicResourceArmPaginatedResult": {
+      "description": "Azure OpenAI Content Filters resource list.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RaiPolicyPropertiesBasicResource"
+          }
+        }
+      }
+    },
+    "RaiPolicyType": {
+      "description": "Content Filters policy type.",
+      "enum": [
+        "UserManaged",
+        "SystemManaged"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RaiPolicyType",
+        "modelAsString": true
+      }
+    },
     "RegenerateServiceAccountKeyContent": {
       "type": "object",
       "properties": {
@@ -4256,7 +5194,8 @@
       "enum": [
         "Required",
         "Recommended",
-        "UserDefined"
+        "UserDefined",
+        "Dependency"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -4644,7 +5583,11 @@
           "type": "boolean"
         },
         "metadata": {
-          "type": "object"
+          "description": "Store user metadata for this connection",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "sharedUserList": {
           "type": "array",
@@ -4831,7 +5774,7 @@
           "type": "boolean"
         },
         "enableSoftwareBillOfMaterials": {
-          "description": "Flag to tell if SoftwareBillOfMaterial should be enabled for this workspace",
+          "description": "Flag to tell if SoftwareBillOfMaterials should be enabled for this workspace",
           "type": "boolean"
         },
         "encryption": {
@@ -5036,7 +5979,7 @@
           "type": "boolean"
         },
         "enableSoftwareBillOfMaterials": {
-          "description": "Flag to tell if SoftwareBillOfMaterial should be enabled for this workspace",
+          "description": "Flag to tell if SoftwareBillOfMaterials should be enabled for this workspace",
           "type": "boolean"
         },
         "encryption": {
@@ -5172,12 +6115,23 @@
       "x-ms-parameter-location": "method",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
     },
-    "AOAIModelsToDeployParameter": {
-      "in": "query",
-      "name": "aoaiModelsToDeploy",
-      "description": "query parameter for which AOAI mode should be deployed",
+    "DeploymentNameParameter": {
+      "in": "path",
+      "name": "deploymentName",
+      "description": "Name of the deployment resource",
+      "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+    },
+    "RaiPolicyNameParameter": {
+      "in": "path",
+      "name": "raiPolicyName",
+      "description": "Name of the Rai Policy.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
     },
     "EndpointTypeParameter": {
       "in": "query",
@@ -5205,15 +6159,6 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]{2,32}$"
-    },
-    "DeploymentNameParameter": {
-      "in": "path",
-      "name": "deploymentName",
-      "description": "Name of the deployment resource",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
     },
     "RuleName": {
       "in": "path",
