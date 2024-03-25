@@ -240,6 +240,57 @@
           "final-state-via": "location"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/storageTaskAssignments": {
+      "get": {
+        "tags": [
+          "StorageTaskAssignments"
+        ],
+        "description": "List all the storage task assignments for an account",
+        "operationId": "StorageTaskAssignments_ListByAccount",
+        "x-ms-examples": {
+          "ListStorageTaskAssignmentsForAccount": {
+            "$ref": "./examples/storageTaskAssignmentsList/ListStorageTaskAssignmentsForAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./storage.json#/parameters/StorageAccountName"
+          },
+          {
+            "name": "$maxpagesize",
+            "in": "query",
+            "type": "string",
+            "description": "Optional, specifies the maximum number of storage task assignment Ids to be included in the list response."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- list of storage task assignments was retrieved and returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/StorageTaskAssignmentsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -437,6 +488,26 @@
         }
       },
       "description": "The storage task assignment report"
+    },
+    "StorageTaskAssignmentsList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageTaskAssignment"
+          },
+          "x-ms-identifiers": [],
+          "description": "Gets the list of storage task assignments and their properties."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Request URL that can be used to query next page of storage task assignments. Returned when total number of requested storage task assignments exceed maximum page size.",
+          "readOnly": true
+        }
+      },
+      "description": "List of storage task assignments for the storage account"
     }
   },
   "parameters": {
