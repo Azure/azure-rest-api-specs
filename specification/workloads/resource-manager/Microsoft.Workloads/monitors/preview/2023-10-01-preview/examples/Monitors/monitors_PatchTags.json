@@ -9,7 +9,7 @@
         "testkey": "testvalue"
       },
       "identity": {
-        "type": "None"
+        "type": "SystemAssigned"
       }
     }
   },
@@ -32,7 +32,9 @@
           "lastModifiedAt": "2021-08-19T15:10:46.196Z"
         },
         "identity": {
-          "type": "None"
+          "type": "SystemAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000"
         },
         "properties": {
           "provisioningState": "Succeeded",
@@ -56,6 +58,11 @@
           "msiArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myMsi",
           "storageAccountArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount"
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-AsyncOperation": "https://eastus2euap.management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Workloads/locations/NORTHEUROPE/operationStatuses/sample-op-status?api-version=2021-12-01-preview"
       }
     }
   }

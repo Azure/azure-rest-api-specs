@@ -270,6 +270,10 @@
           "Monitors"
         ],
         "operationId": "monitors_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "summary": "Patches the Tags field of a SAP monitor.",
         "description": "Patches the Tags field of a SAP monitor for the specified subscription, resource group, and SAP monitor name.",
         "x-ms-examples": {
@@ -308,6 +312,19 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Monitor"
+            }
+          },
+          "202": {
+            "description": "Updating SAP monitor",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
@@ -372,9 +389,6 @@
         ],
         "operationId": "ProviderInstances_Get",
         "summary": "Gets properties of a provider instance.",
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
         "description": "Gets properties of a provider instance for the specified subscription, resource group, SAP monitor name, and resource name.",
         "x-ms-examples": {
           "Get properties of a SAP monitor Hana provider": {
