@@ -85,7 +85,7 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudHsmClusterError"
             }
           }
         },
@@ -148,7 +148,7 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudHsmClusterError"
             }
           }
         },
@@ -188,7 +188,7 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudHsmClusterError"
             }
           }
         },
@@ -238,7 +238,7 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudHsmClusterError"
             }
           }
         },
@@ -284,7 +284,7 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudHsmClusterError"
             }
           }
         },
@@ -330,7 +330,7 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudHsmClusterError"
             }
           }
         },
@@ -375,7 +375,7 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudHsmClusterError"
             }
           }
         },
@@ -432,7 +432,7 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudHsmClusterError"
             }
           }
         },
@@ -485,7 +485,7 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudHsmClusterError"
             }
           }
         },
@@ -528,7 +528,7 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudHsmClusterError"
             }
           }
         },
@@ -570,7 +570,7 @@
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudHsmClusterError"
             }
           }
         },
@@ -813,6 +813,31 @@
           "description": "Azure Blob storage container Uri"
         }
       }
+    },
+    "CloudHsmClusterError": {
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ChsmError"
+        }
+      },
+      "description": "The Cloud HSM Cluster error details",
+      "type": "object"
+    },
+    "ChsmError": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The error message."
+        }
+      },
+      "type": "object",
+      "description": "Error details"
     },
     "CloudHsmClusterListResult": {
       "properties": {
