@@ -20,7 +20,7 @@ provided prompt data.
 """)
 @actionSeparator("/")
 @actionSeparator("/")
-@route("chat/completions")
+@route("v1/chat/completions")
 op getChatCompletions is Azure.Core.RpcOperation<
   {
     @doc("The format of the HTTP payload.")
