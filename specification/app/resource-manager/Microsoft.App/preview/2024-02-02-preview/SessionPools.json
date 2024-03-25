@@ -358,6 +358,17 @@
     }
   },
   "definitions": {
+    "ScaleConfiguration": {
+      "description": "Scale configuration.",
+      "type": "object",
+      "properties": {
+        "readySessionInstances": {
+          "description": "The minimum count of ready session instances.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
     "Secret": {
       "description": "Secret definition.",
       "type": "object",
@@ -535,16 +546,6 @@
                 "read"
               ]
             },
-            "minWarmPoolSize": {
-              "description": "The minimum count of Sessions warmed up at the same time.",
-              "type": "integer",
-              "format": "int32"
-            },
-            "maxConcurrentSessions": {
-              "description": "The max count of Sessions at the same time.",
-              "type": "integer",
-              "format": "int32"
-            },
             "containerType": {
               "description": "The container type of the Sessions.",
               "enum": [
@@ -569,6 +570,15 @@
                 "name": "PoolManagementType",
                 "modelAsString": true
               }
+            },
+            "maxConcurrentSessions": {
+              "description": "The max count of Sessions at the same time.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "scaleConfiguration": {
+              "description": "The scale configuration of the Session Pool.",
+              "$ref": "#/definitions/ScaleConfiguration"
             },
             "secrets": {
               "description": "The secrets of the Session Pool.",
@@ -619,15 +629,14 @@
           "description": "SessionPool resource specific patchable properties.",
           "type": "object",
           "properties": {
-            "minWarmPoolSize": {
-              "description": "The minimum count of Sessions warmed up at the same time.",
-              "type": "integer",
-              "format": "int32"
-            },
             "maxConcurrentSessions": {
               "description": "The max count of Sessions at the same time.",
               "type": "integer",
               "format": "int32"
+            },
+            "scaleConfiguration": {
+              "description": "The scale configuration of the Session Pool.",
+              "$ref": "#/definitions/ScaleConfiguration"
             },
             "secrets": {
               "description": "The secrets of the Session Pool.",

@@ -18,8 +18,10 @@
               "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
               "poolManagementType": "Dynamic",
               "containerType": "CustomContainer",
-              "minWarmPoolSize": 100,
               "maxConcurrentSessions": 500,
+              "scaleConfiguration": {
+                "readySessionInstances": 100
+              },
               "dynamicPoolConfiguration": {
                 "executionType": "Timed",
                 "coolDownPeriod": 600
