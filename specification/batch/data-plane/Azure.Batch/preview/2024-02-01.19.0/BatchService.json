@@ -9239,11 +9239,13 @@
         },
         "accountKey": {
           "type": "string",
-          "description": "The Azure Storage Account key. This property is mutually exclusive with both sasKey and identity; exactly one must be specified."
+          "description": "The Azure Storage Account key. This property is mutually exclusive with both sasKey and identity; exactly one must be specified.",
+          "x-ms-secret": true
         },
         "sasKey": {
           "type": "string",
-          "description": "The Azure Storage SAS token. This property is mutually exclusive with both accountKey and identity; exactly one must be specified."
+          "description": "The Azure Storage SAS token. This property is mutually exclusive with both accountKey and identity; exactly one must be specified.",
+          "x-ms-secret": true
         },
         "blobfuseOptions": {
           "type": "string",
@@ -9278,7 +9280,8 @@
         },
         "accountKey": {
           "type": "string",
-          "description": "The Azure Storage account key."
+          "description": "The Azure Storage account key.",
+          "x-ms-secret": true
         },
         "relativeMountPath": {
           "type": "string",
@@ -12159,7 +12162,8 @@
         },
         "password": {
           "type": "string",
-          "description": "The password of the Account. The password is required for Windows Compute Nodes (those created with 'virtualMachineConfiguration' using a Windows Image reference). For Linux Compute Nodes, the password can optionally be specified along with the sshPublicKey property."
+          "description": "The password of the Account. The password is required for Windows Compute Nodes (those created with 'virtualMachineConfiguration' using a Windows Image reference). For Linux Compute Nodes, the password can optionally be specified along with the sshPublicKey property.",
+          "x-ms-secret": true
         },
         "sshPublicKey": {
           "type": "string",
@@ -12176,7 +12180,8 @@
       "properties": {
         "password": {
           "type": "string",
-          "description": "The password of the Account. The password is required for Windows Compute Nodes (those created with 'virtualMachineConfiguration' using a Windows Image reference). For Linux Compute Nodes, the password can optionally be specified along with the sshPublicKey property. If omitted, any existing password is removed."
+          "description": "The password of the Account. The password is required for Windows Compute Nodes (those created with 'virtualMachineConfiguration' using a Windows Image reference). For Linux Compute Nodes, the password can optionally be specified along with the sshPublicKey property. If omitted, any existing password is removed.",
+          "x-ms-secret": true
         },
         "expiryTime": {
           "type": "string",
@@ -14558,7 +14563,8 @@
         },
         "password": {
           "type": "string",
-          "description": "The password to use for authentication against the CIFS file system."
+          "description": "The password to use for authentication against the CIFS file system.",
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -14631,7 +14637,8 @@
         },
         "password": {
           "type": "string",
-          "description": "The password to log into the registry server."
+          "description": "The password to log into the registry server.",
+          "x-ms-secret": true
         },
         "registryServer": {
           "type": "string",
@@ -15371,7 +15378,8 @@
         },
         "sshPrivateKey": {
           "type": "string",
-          "description": "The SSH private key for the user Account. The private key must not be password protected. The private key is used to automatically configure asymmetric-key based authentication for SSH between Compute Nodes in a Linux Pool when the Pool's enableInterNodeCommunication property is true (it is ignored if enableInterNodeCommunication is false). It does this by placing the key pair into the user's .ssh directory. If not specified, password-less SSH is not configured between Compute Nodes (no modification of the user's .ssh directory is done)."
+          "description": "The SSH private key for the user Account. The private key must not be password protected. The private key is used to automatically configure asymmetric-key based authentication for SSH between Compute Nodes in a Linux Pool when the Pool's enableInterNodeCommunication property is true (it is ignored if enableInterNodeCommunication is false). It does this by placing the key pair into the user's .ssh directory. If not specified, password-less SSH is not configured between Compute Nodes (no modification of the user's .ssh directory is done).",
+          "x-ms-secret": true
         }
       }
     },
@@ -16298,7 +16306,8 @@
         },
         "password": {
           "type": "string",
-          "description": "The password for the user Account."
+          "description": "The password for the user Account.",
+          "x-ms-secret": true
         },
         "elevationLevel": {
           "$ref": "#/definitions/ElevationLevel",
@@ -16391,6 +16400,7 @@
           }
         },
         "protectedSettings": {
+          "x-ms-secret": true,
           "type": "object",
           "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.",
           "additionalProperties": {
