@@ -1548,13 +1548,14 @@
           "type": "string"
         },
         "channelType": {
-          "description": "The The messaged received channel type",
+          "description": "The The messaged received channel Kind",
           "type": "string",
+          "x-ms-client-name": "channelKind",
           "enum": [
             "whatsapp"
           ],
           "x-ms-enum": {
-            "name": "AcsMessageChannelType",
+            "name": "AcsMessageChannelKind",
             "modelAsString": true,
             "values": [
               {
@@ -1567,7 +1568,8 @@
         "media": {
           "description": "The messaged received media content",
           "$ref": "#/definitions/AcsAdvancedMessageMediaContent",
-          "type": "object"
+          "type": "object",
+          "x-ms-client-name": "mediaContent"
         },
         "context": {
           "description": "The The messaged received context",
@@ -1582,7 +1584,8 @@
         "interactive": {
           "description": "The The messaged received interactive content",
           "$ref": "#/definitions/AcsAdvancedMessageInteractiveContent",
-          "type": "object"
+          "type": "object",
+          "x-ms-client-name": "interactiveContent"
         }
       },
       "x-ms-examples": {
@@ -1609,16 +1612,49 @@
         },
         "status": {
           "description": "The updated message status",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Read",
+            "Delivered",
+            "Failed",
+            "Sent",
+            "Warning",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "AcsAdvanceMessageDeliveryStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "read"
+              },
+              {
+                "value": "delivered"
+              },
+              {
+                "value": "failed"
+              },
+              {
+                "value": "sent"
+              },
+              {
+                "value": "warning"
+              },
+              {
+                "value": "unknown"
+              }
+            ]
+          }
         },
         "channelType": {
           "description": "The updated message channel type",
+          "x-ms-client-name": "channelKind",
           "type": "string",
           "enum": [
             "whatsapp"
           ],
           "x-ms-enum": {
-            "name": "AcsMessageChannelType",
+            "name": "AcsMessageChannelKind",
             "modelAsString": true,
             "values": [
               {
@@ -2239,7 +2275,7 @@
             "unknown"
           ],
           "x-ms-enum": {
-            "name": "AcsInteractiveReplyType",
+            "name": "AcsInteractiveReplyKind",
             "modelAsString": true,
             "values": [
               {
