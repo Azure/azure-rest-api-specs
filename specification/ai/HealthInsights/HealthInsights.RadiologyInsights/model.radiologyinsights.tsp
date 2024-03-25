@@ -94,7 +94,9 @@ An inference made by the Radiology Insights model regarding a patient.
   - FollowupCommunication
 """)
 @discriminator("kind")
-model RadiologyInsightsInference is Fhir.R4.Extendible;
+model RadiologyInsightsInference {
+  ...Fhir.R4.Extendible;
+}
 
 @doc("A notification for age mismatch is displayed when the age mentioned in a document for a specific patient does not match the age specified in the patient information.")
 model AgeMismatchInference extends RadiologyInsightsInference {
