@@ -2339,7 +2339,6 @@ interface BlobQueryService {
 
 @route("/{containerName}/{blob}?comp=tags")
 interface BlobTagsService {
-
   /** The Get Blob Tags operation enables users to get tags on a blob. */
   @get
   @operationId("Blob_GetTags")
