@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "api-version": "2023-01-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "string",
+        "value": [
+          {
+            "id": "providers/Microsoft.Advisor/metadata/recommendationType",
+            "name": "recommendationType",
+            "type": "Microsoft.Advisor/metadata",
+            "properties": {
+              "displayName": "Recommendation Type",
+              "dependsOn": [
+                "category",
+                "impact"
+              ],
+              "applicableScenarios": [
+                "Alerts"
+              ],
+              "supportedValues": [
+                {
+                  "id": "6a2b1e70-bd4c-4163-86de-5243d7ac05ee",
+                  "displayName": "Upgrade your SKU or add more instances to ensure fault tolerance"
+                },
+                {
+                  "id": "da6630fb-4286-4996-92a3-a43f5f26dd34",
+                  "displayName": "Delete ExpressRoute circuits in the provider status of Not Provisioned"
+                }
+              ]
+            }
+          },
+          {
+            "id": "providers/Microsoft.Advisor/metadata/recommendationCategory",
+            "name": "recommendationCategory",
+            "type": "Microsoft.Advisor/metadata",
+            "properties": {
+              "displayName": "Category",
+              "dependsOn": null,
+              "applicableScenarios": [
+                "Alerts"
+              ],
+              "supportedValues": [
+                {
+                  "id": "Cost",
+                  "displayName": "Cost"
+                },
+                {
+                  "id": "Performance",
+                  "displayName": "Performance"
+                }
+              ]
+            }
+          },
+          {
+            "id": "providers/Microsoft.Advisor/metadata/recommendationImpact",
+            "name": "recommendationImpact",
+            "type": "Microsoft.Advisor/metadata",
+            "properties": {
+              "displayName": "Impact",
+              "dependsOn": null,
+              "applicableScenarios": null,
+              "supportedValues": [
+                {
+                  "id": "High",
+                  "displayName": "High"
+                },
+                {
+                  "id": "Medium",
+                  "displayName": "Medium"
+                },
+                {
+                  "id": "Low",
+                  "displayName": "Low"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

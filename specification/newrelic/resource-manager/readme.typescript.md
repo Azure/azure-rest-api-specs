@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-newrelic"
-  output-folder: "$(typescript-sdks-folder)/sdk/newrelic/arm-newrelic"
+  package-name: "@azure/arm-newrelicobservability"
+  output-folder: "$(typescript-sdks-folder)/sdk/newrelicobservability/arm-newrelicobservability"
   payload-flattening-threshold: 1
   clear-output-folder: true
   generate-metadata: true

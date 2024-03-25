@@ -47,15 +47,6 @@ input-file:
   - Microsoft.Orbital/stable/2022-03-01/orbital.json
 ```
 
-### Tag: package-2021-04-04-preview
-
-These settings apply only when `--tag=package-2021-04-04-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2021-04-04-preview'
-input-file:
-  - Microsoft.Orbital/preview/2021-04-04-preview/orbital.json
-```
-
 ---
 
 # Code Generation
@@ -67,7 +58,7 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js

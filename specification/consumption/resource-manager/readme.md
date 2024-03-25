@@ -26,18 +26,57 @@ These are the global settings for the Consumption API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-10
+tag: package-2023-11
 ```
 
+
+### Tag: package-2023-11
+
+These settings apply only when `--tag=package-2023-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-11'
+input-file:
+  - Microsoft.Consumption/stable/2023-11-01/consumption.json
+  - Microsoft.Consumption/stable/2023-11-01/consumption_pricesheet.json
+```
+### Tag: package-2023-05
+
+These settings apply only when `--tag=package-2023-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-05'
+input-file:
+  - Microsoft.Consumption/stable/2023-05-01/consumption.json
+  - Microsoft.Consumption/stable/2023-05-01/consumption_pricesheet.json
+```
+
+### Tag: package-2023-03
+
+These settings apply only when `--tag=package-2023-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-03'
+input-file:
+  - Microsoft.Consumption/stable/2023-03-01/consumption.json
+  - Microsoft.Consumption/stable/2023-03-01/consumption_pricesheet.json
+```
+
+### Tag: package-2022-09
+
+These settings apply only when `--tag=package-2022-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-09'
+input-file:
+  - Microsoft.Consumption/stable/2022-09-01/consumption.json
+```
 
 ### Tag: package-2021-10
 
 These settings apply only when `--tag=package-2021-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-10'
+``` yaml $(tag) == 'package-2021-10'
 input-file:
   - Microsoft.Consumption/stable/2021-10-01/consumption.json
 ```
+
 ### Tag: package-2021-05
 
 These settings apply only when `--tag=package-2021-05` is specified on the command line.
@@ -202,6 +241,12 @@ directive:
     from: consumption.json
     reason: it's not actually a resource path; the validator is confused because the Billing namespace is in the URI path.
     approved-by: "@fearthecowboy"
+
+  - suppress: ValidFormats
+    from: consumption.json
+    reason: Our APIs take decimal parameters and return decimal properties.
+    approved-by: "@jianyexi"
+    
 ```
 
 ---
@@ -239,7 +284,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node

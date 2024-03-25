@@ -697,6 +697,7 @@
         "storageAccountResourceId": {
           "description": "The resource id for the storage account used to store BACPAC file. If set, private endpoint connection will be created for the storage account. Must match storage account used for StorageUri parameter.",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "create"
           ]
@@ -704,6 +705,7 @@
         "sqlServerResourceId": {
           "description": "The resource id for the SQL server which is the target of this request. If set, private endpoint connection will be created for the SQL server. Must match server which is target of the operation.",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "create"
           ]
@@ -1026,7 +1028,7 @@
           "readOnly": true
         },
         "minimalTlsVersion": {
-          "description": "Minimal TLS version. Allowed values: '1.0', '1.1', '1.2'",
+          "description": "Minimal TLS version. Allowed values: 'None', '1.0', '1.1', '1.2'",
           "type": "string"
         },
         "publicNetworkAccess": {
@@ -1057,7 +1059,15 @@
         },
         "primaryUserAssignedIdentityId": {
           "description": "The resource id of a user assigned identity to be used by default.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
         },
         "federatedClientId": {
           "format": "uuid",

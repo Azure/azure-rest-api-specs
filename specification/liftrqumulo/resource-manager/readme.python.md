@@ -6,6 +6,7 @@ Use `--python-mode=update` if you already have a setup.py and just want to updat
 
 
 ``` yaml $(python)
+title: QumuloMgmtClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-qumulo

@@ -1,0 +1,215 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2023-08-01-preview",
+    "title": "DevCenter",
+    "description": "DevCenter Management API"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "Capability": {
+      "description": "A name/value pair to describe a capability.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the capability.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "Value of the capability.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TrackedResourceUpdate": {
+      "description": "Base tracked resource type for PATCH updates",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "$ref": "#/definitions/Tags",
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        }
+      }
+    },
+    "Tags": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "x-ms-mutability": [
+        "read",
+        "create",
+        "update"
+      ],
+      "description": "Resource tags."
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Error body",
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "description": "An error response from the DevCenter service.",
+      "required": [
+        "error"
+      ]
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error. For example, the name of the property in error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "x-ms-identifiers": [],
+          "description": "A list of additional details about the error."
+        }
+      },
+      "description": "An error response from the DevCenter service.",
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "DevCenterSku": {
+      "description": "The resource model definition representing SKU for DevCenter resources",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku"
+        }
+      ],
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The name of the resource type",
+          "readOnly": true
+        },
+        "locations": {
+          "description": "SKU supported locations.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "capabilities": {
+          "description": "Collection of name/value pairs to describe the SKU capabilities.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Capability"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the resource.",
+      "enum": [
+        "NotSpecified",
+        "Accepted",
+        "Running",
+        "Creating",
+        "Created",
+        "Updating",
+        "Updated",
+        "Deleting",
+        "Deleted",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "MovingResources",
+        "TransientFailure",
+        "RolloutInProgress",
+        "StorageProvisioningFailed"
+      ],
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "ProjectNameParameter": {
+      "name": "projectName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the project.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+      "minLength": 3,
+      "maxLength": 63
+    },
+    "TopParameter": {
+      "name": "$top",
+      "in": "query",
+      "description": "The maximum number of resources to return from the operation. Example: '$top=10'.",
+      "type": "integer",
+      "format": "int32",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

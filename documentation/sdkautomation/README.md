@@ -26,9 +26,9 @@ SDK Automation is launched with matrix in azure pipeline. For each language conf
           - repo: azure-sdk-for-js
         ``` <EOL>
         ```
-    2. For CADL PR, filter the list of cadl-project.yaml: find the `options` config in cadl-project.yaml, and see if the specified language is configure for that cadl-location.yaml.
+    2. For TypeSpec PR, filter the list of tspconfig.yaml: find the `options` config in tspconfig.yaml, and see if the specified language is configure for that tsp-location.yaml.
     
-    If the configured language is not found here, generation for this cadl project will be skipped.
+    If the configured language is not found here, generation for this typespec project will be skipped.
 
 4. Get `specificationRepositoryConfiguration.json` from spec repo default branch. See [SpecRepoConfig](#specrepoconfig). Get the repo and branch config in the file.
 

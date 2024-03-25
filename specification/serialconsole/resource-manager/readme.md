@@ -22,7 +22,17 @@ These are the global settings for the Serial Console API.
 ``` yaml
 openapi-type: arm
 azure-arm: true
-tag: package-2018-05
+tag: package-2023-01
+```
+
+### Tag: package-2023-01
+
+These settings apply only when `--tag=package-2023-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-01'
+input-file:
+- Microsoft.SerialConsole/stable/2023-01-01/serialconsole.json
+- Microsoft.SerialConsole/stable/2023-01-01/serialport.json
 ```
 
 ### Tag: package-2018-05
@@ -45,7 +55,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas

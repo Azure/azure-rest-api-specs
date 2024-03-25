@@ -6474,7 +6474,6 @@
     "snapshot": {
       "description": "Snapshot of a Volume",
       "type": "object",
-      "x-ms-azure-resource": true,
       "required": [
         "location"
       ],
@@ -6502,7 +6501,6 @@
     "snapshotPatch": {
       "description": "Snapshot patch",
       "type": "object",
-      "x-ms-azure-resource": true,
       "properties": {}
     },
     "snapshotProperties": {
@@ -6908,7 +6906,6 @@
     "backup": {
       "description": "Backup of a Volume",
       "type": "object",
-      "x-ms-azure-resource": true,
       "required": [
         "location",
         "properties"
@@ -6937,7 +6934,6 @@
     "backupPatch": {
       "description": "Backup patch",
       "type": "object",
-      "x-ms-azure-resource": true,
       "properties": {
         "tags": {
           "description": "Resource tags",
@@ -7117,22 +7113,6 @@
           "items": {
             "$ref": "#/definitions/backupPolicy"
           }
-        }
-      }
-    },
-    "backupPolicyDetails": {
-      "description": "Backup policy properties",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Backup policy Properties",
-          "$ref": "#/definitions/backupPolicyProperties",
-          "x-ms-client-flatten": true
         }
       }
     },

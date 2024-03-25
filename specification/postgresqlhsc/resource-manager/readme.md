@@ -27,15 +27,23 @@ These are the global settings for the Cosmos DB for PostgreSQL API.
 ``` yaml
 title: Cosmos DB for PostgreSQL
 openapi-type: arm
-tag: package-2022-11-08
+tag: package-preview-2023-03
 ```
 
 
+### Tag: package-preview-2023-03
+
+These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-03'
+input-file:
+  - Microsoft.DBforPostgreSQL/preview/2023-03-02-preview/postgresqlhsc.json
+```
 ### Tag: package-2022-11-08
 
 These settings apply only when `--tag=package-2022-11-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-11-08'
+``` yaml $(tag) == 'package-2022-11-08'
 input-file:
   - Microsoft.DBforPostgreSQL/stable/2022-11-08/postgresqlhsc.json
 ```
@@ -44,12 +52,13 @@ input-file:
 
 These settings apply only when `--tag=package-2020-10-05-privatepreview` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-10-05-privatepreview'
+``` yaml $(tag) == 'package-2020-10-05-privatepreview'
 input-file:
   - Microsoft.DBforPostgreSQL/preview/2020-10-05-privatepreview/postgresqlhsc.json
 ```
 
 ## Suppression
+
 ``` yaml
 directive:
 - suppress: PathResourceProviderNamePascalCase
@@ -58,6 +67,11 @@ directive:
 - suppress: EnumInsteadOfBoolean
   from: postgresqlhsc.json
   reason: It's been used as boolean since 2019 by internal teams and also private preview customers like Azure Portal and we have no plans to use any values other than true/false.
+- suppress: PutInOperationName
+  where:
+    - $..paths[($..operationId["Configurations_Update*"])]
+  from: postgresqlhsc.json
+  reason: Configurations have preset default values and customers can only update them, they can't create. So we don't need "Create" in operation id.
 ```
 
 ---
@@ -72,7 +86,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js

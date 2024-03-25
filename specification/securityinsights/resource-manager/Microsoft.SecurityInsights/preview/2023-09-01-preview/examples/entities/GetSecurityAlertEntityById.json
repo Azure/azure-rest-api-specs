@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "entityId": "4aa486e0-6f85-41af-99ea-7acdce7be6c8"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/4aa486e0-6f85-41af-99ea-7acdce7be6c8",
+        "name": "e1d3d618-e11f-478b-98e3-bb381539a8e1",
+        "type": "Microsoft.SecurityInsights/entities",
+        "kind": "SecurityAlert",
+        "properties": {
+          "systemAlertId": "4aa486e0-6f85-41af-99ea-7acdce7be6c8",
+          "intent": "Unknown",
+          "alertDisplayName": "Suspicious account detected",
+          "description": "",
+          "confidenceLevel": "Unknown",
+          "severity": "Medium",
+          "vendorName": "Microsoft",
+          "productName": "Azure Sentinel",
+          "productComponentName": "Scheduled Alerts",
+          "alertType": "c8c99641-985d-4e4e-8e91-fb3466cd0e5b_46c7b6c0-ff43-44dd-8b4d-ceffff7aa7df",
+          "providerAlertId": "c2bafff9-fb31-41d0-a177-ecbff7a02ffe",
+          "processingEndTime": "2019-07-06T13:56:53.5392366Z",
+          "status": "New",
+          "endTimeUtc": "2021-09-01T13:21:45.926185Z",
+          "startTimeUtc": "2021-09-01T08:21:45.926185Z",
+          "timeGenerated": "2021-09-01T13:56:53.5392366Z",
+          "tactics": [
+            "Persistence",
+            "LateralMovement"
+          ],
+          "additionalData": {
+            "Query": "Heartbeat \n| extend AccountCustomEntity = \"administrator\"",
+            "Query Period": "05:00:00",
+            "Trigger Operator": "GreaterThan",
+            "Trigger Threshold": "200",
+            "Search Query Results Overall Count": "203",
+            "Total Account Entities": "1"
+          },
+          "friendlyName": "Suspicious account detected",
+          "alertLink": "https://portal.azure.com/#blade/Microsoft_Azure_Security/AlertBlade/alertId/2518119885989999999_4aa486e0-6f85-41af-99ea-7acdce7be6c8/subscriptionId/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/myRg/myWorkspace/referencedFrom/alertDeepLink/location/centralus"
+        }
+      }
+    }
+  }
+}
