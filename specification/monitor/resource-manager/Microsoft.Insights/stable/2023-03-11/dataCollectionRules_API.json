@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Monitor Data Collection Rules API",
+    "title": "Azure Monitor Data Collection Control Plane API",
     "description": "Provides operations for working with Azure Monitor data collection rules",
     "version": "2023-03-11",
     "x-ms-code-generation-settings": {
@@ -284,6 +284,13 @@
             "$ref": "#/parameters/DataCollectionRuleNameParameter"
           },
           {
+            "in": "query",
+            "name": "deleteAssociations",
+            "description": "If set to 'true' then all associations of this data collection rule will also be deleted",
+            "type": "boolean",
+            "default": false
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -310,7 +317,7 @@
     }
   },
   "definitions": {
-    "Metadata": {
+	  "Metadata": {
       "description": "Metadata about the resource",
       "type": "object",
       "properties": {
@@ -331,10 +338,113 @@
           "x-ms-mutability": [
             "read"
           ]
+        },
+        "provisionedByImmutableId": {
+          "description": "Immutable Id of azure offering managing this resource on-behalf-of customer.",
+          "type": "string",
+          "readOnly": true,
+          "example": "baeea43c-db35-4d6f-9d3b-26d3a5e792e2",
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       }
     },
-    "ColumnDefinition": {
+    "StorageBlob": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "Resource Id of the storage account that hosts the blob",
+          "type": "string",
+          "example": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/amcs/providers/Microsoft.Storage/storageAccounts/storage01"
+        },
+        "blobUrl": {
+          "description": "Url of the storage blob",
+          "type": "string",
+          "example": "https://storage01.blob.core.windows.net/folder/blob.csv"
+        },
+        "lookupType": {
+          "description": "The type of lookup to perform on the blob",
+          "enum": [
+            "String",
+            "Cidr"
+          ],
+          "type": "string",
+          "example": "Text",
+          "x-ms-enum": {
+            "name": "KnownStorageBlobLookupType",
+            "modelAsString": true
+          }
+        },
+        "name": {
+          "description": "The name of the enrichment data source used as an alias when referencing this data source in data flows",
+          "type": "string"
+        }
+      }
+    },
+    "EnrichmentData": {
+      "description": "All the enrichment data sources referenced in data flows",
+      "type": "object",
+      "properties": {
+        "storageBlobs": {
+          "description": "All the storage blobs used as enrichment data sources",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageBlob"
+          }
+        }
+      }
+    },
+    "ReferencesSpec": {
+      "description": "This section defines all the references that may be used in other sections of the DCR",
+      "type": "object",
+      "properties": {
+        "enrichmentData": {
+          "description": "All the enrichment data sources referenced in data flows",
+          "allOf": [
+            {
+              "$ref": "#/definitions/EnrichmentData"
+            }
+          ]
+        }
+      }
+    },
+	  "AgentSetting": {
+      "description": "A setting used to control an agent behavior on a host machine",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the setting. \r\nMust be part of the list of supported settings",
+          "enum": [
+            "MaxDiskQuotaInMB",
+            "UseTimeReceivedForForwardedEvents"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "KnownAgentSettingName",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "description": "The value of the setting",
+          "type": "string"
+        }
+      }
+    },
+    "AgentSettingsSpec": {
+      "description": "An agent setting",
+      "type": "object",
+      "properties": {
+        "logs": {
+          "description": "All the settings that are applicable to the logs agent (AMA)",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentSetting"
+          }
+        }
+      }
+    },
+	  "ColumnDefinition": {
       "description": "Definition of custom data column.",
       "type": "object",
       "properties": {
@@ -370,10 +480,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ColumnDefinition"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          }
         }
       }
     },
@@ -409,8 +516,13 @@
             "type": "string"
           }
         },
+        "transformKql": {
+          "description": "The KQL query to transform the data source.",
+          "type": "string",
+          "example": "source"
+        },
         "name": {
-          "description": "A friendly name for the data source. \r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
+          "description": "A friendly name for the data source.\r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
           "type": "string",
           "example": "myDataSource1"
         }
@@ -442,8 +554,13 @@
             "type": "string"
           }
         },
+        "transformKql": {
+          "description": "The KQL query to transform the data source.",
+          "type": "string",
+          "example": "source"
+        },
         "name": {
-          "description": "A friendly name for the data source. \r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
+          "description": "A friendly name for the data source.\r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
           "type": "string",
           "example": "myDataSource1"
         }
@@ -472,6 +589,7 @@
           "type": "array",
           "items": {
             "enum": [
+              "*",
               "alert",
               "audit",
               "auth",
@@ -481,15 +599,6 @@
               "daemon",
               "ftp",
               "kern",
-              "lpr",
-              "mail",
-              "mark",
-              "news",
-              "nopri",
-              "ntp",
-              "syslog",
-              "user",
-              "uucp",
               "local0",
               "local1",
               "local2",
@@ -498,7 +607,15 @@
               "local5",
               "local6",
               "local7",
-              "*"
+              "lpr",
+              "mail",
+              "mark",
+              "news",
+              "nopri",
+              "ntp",
+              "syslog",
+              "user",
+              "uucp"
             ],
             "type": "string",
             "x-ms-enum": {
@@ -530,7 +647,7 @@
           }
         },
         "name": {
-          "description": "A friendly name for the data source. \r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
+          "description": "A friendly name for the data source.\r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
           "type": "string",
           "example": "myDataSource1"
         }
@@ -578,7 +695,7 @@
           }
         },
         "name": {
-          "description": "A friendly name for the data source. \r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
+          "description": "A friendly name for the data source.\r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
           "type": "string",
           "example": "myDataSource1"
         }
@@ -653,6 +770,7 @@
         "format": {
           "description": "The data format of the log files",
           "enum": [
+            "json",
             "text"
           ],
           "type": "string",
@@ -670,8 +788,13 @@
             }
           ]
         },
+        "transformKql": {
+          "description": "The KQL query to transform the data source.",
+          "type": "string",
+          "example": "source"
+        },
         "name": {
-          "description": "A friendly name for the data source. \r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
+          "description": "A friendly name for the data source.\r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
           "type": "string",
           "example": "myDataSource1"
         }
@@ -698,8 +821,13 @@
             "type": "string"
           }
         },
+        "transformKql": {
+          "description": "The KQL query to transform the data source.",
+          "type": "string",
+          "example": "source"
+        },
         "name": {
-          "description": "A friendly name for the data source. \r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
+          "description": "A friendly name for the data source.\r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
           "type": "string",
           "example": "myDataSource1"
         }
@@ -719,8 +847,24 @@
             "type": "string"
           }
         },
+        "profileFilter": {
+          "description": "Firewall logs profile filter",
+          "type": "array",
+          "items": {
+            "enum": [
+              "Domain",
+              "Private",
+              "Public"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "KnownWindowsFirewallLogsDataSourceProfileFilter",
+              "modelAsString": true
+            }
+          }
+        },
         "name": {
-          "description": "A friendly name for the data source. \r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
+          "description": "A friendly name for the data source.\r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
           "type": "string",
           "example": "myDataSource1"
         }
@@ -752,7 +896,7 @@
           }
         },
         "name": {
-          "description": "A friendly name for the data source. \r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
+          "description": "A friendly name for the data source.\r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
           "type": "string",
           "example": "myDataSource1"
         }
@@ -773,7 +917,7 @@
           }
         },
         "name": {
-          "description": "A friendly name for the data source. \r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
+          "description": "A friendly name for the data source.\r\nThis name should be unique across all data sources (regardless of type) within the data collection rule.",
           "type": "string",
           "example": "myDataSource1"
         }
@@ -820,7 +964,7 @@
           "items": {
             "$ref": "#/definitions/PerfCounterDataSource"
           },
-          "x-ms-identifiers": [
+		      "x-ms-identifiers": [
             "name"
           ]
         },
@@ -830,7 +974,7 @@
           "items": {
             "$ref": "#/definitions/WindowsEventLogDataSource"
           },
-          "x-ms-identifiers": [
+		       "x-ms-identifiers": [
             "name"
           ]
         },
@@ -840,7 +984,7 @@
           "items": {
             "$ref": "#/definitions/SyslogDataSource"
           },
-          "x-ms-identifiers": [
+		      "x-ms-identifiers": [
             "name"
           ]
         },
@@ -850,7 +994,7 @@
           "items": {
             "$ref": "#/definitions/ExtensionDataSource"
           },
-          "x-ms-identifiers": [
+		      "x-ms-identifiers": [
             "name"
           ]
         },
@@ -860,7 +1004,7 @@
           "items": {
             "$ref": "#/definitions/LogFilesDataSource"
           },
-          "x-ms-identifiers": [
+		      "x-ms-identifiers": [
             "name"
           ]
         },
@@ -870,7 +1014,7 @@
           "items": {
             "$ref": "#/definitions/IisLogsDataSource"
           },
-          "x-ms-identifiers": [
+		      "x-ms-identifiers": [
             "name"
           ]
         },
@@ -880,7 +1024,7 @@
           "items": {
             "$ref": "#/definitions/WindowsFirewallLogsDataSource"
           },
-          "x-ms-identifiers": [
+		      "x-ms-identifiers": [
             "name"
           ]
         },
@@ -890,7 +1034,7 @@
           "items": {
             "$ref": "#/definitions/PrometheusForwarderDataSource"
           },
-          "x-ms-identifiers": [
+		      "x-ms-identifiers": [
             "name"
           ]
         },
@@ -900,7 +1044,7 @@
           "items": {
             "$ref": "#/definitions/PlatformTelemetryDataSource"
           },
-          "x-ms-identifiers": [
+		      "x-ms-identifiers": [
             "name"
           ]
         },
@@ -911,13 +1055,13 @@
               "$ref": "#/definitions/DataImportSources"
             }
           ],
-          "x-ms-identifiers": [
+		      "x-ms-identifiers": [
             "name"
           ]
         }
       }
     },
-    "LogAnalyticsDestination": {
+	  "LogAnalyticsDestination": {
       "description": "Log Analytics destination.",
       "type": "object",
       "properties": {
@@ -967,7 +1111,7 @@
         }
       }
     },
-    "AzureMonitorMetricsDestination": {
+	  "AzureMonitorMetricsDestination": {
       "description": "Azure Monitor Metrics destination.",
       "type": "object",
       "properties": {
@@ -1040,6 +1184,67 @@
           "description": "The resource ID of the storage account.",
           "type": "string",
           "example": "/subscriptions/ee63c5dc-9b88-42e3-8070-944a5226aea3/resourceGroups/foo/providers/Microsoft.Storage/storageAccounts/bar"
+        },
+        "name": {
+          "description": "A friendly name for the destination. \r\nThis name should be unique across all destinations (regardless of type) within the data collection rule.",
+          "type": "string",
+          "example": "myDest1"
+        }
+      }
+    },
+    "MicrosoftFabricDestination": {
+      "description": "Microsoft Fabric destination (non-Azure).",
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "description": "The tenant id of the Microsoft Fabric resource.",
+          "type": "string",
+          "example": "984ff517-3441-4eb8-bb25-8e4c0e1334e9"
+        },
+        "artifactId": {
+          "description": "The artifact id of the Microsoft Fabric resource.",
+          "type": "string",
+          "example": "da58aca0-2082-4f5a-85ba-27344286c17c"
+        },
+        "databaseName": {
+          "description": "The name of the database to which data will be ingested.",
+          "type": "string",
+          "example": "MyDatabase"
+        },
+        "ingestionUri": {
+          "description": "The ingestion uri of the Microsoft Fabric resource.",
+          "type": "string",
+          "example": "https://ingest-azcore1.southeastasia.kusto.windows.net"
+        },
+        "name": {
+          "description": "A friendly name for the destination. \r\nThis name should be unique across all destinations (regardless of type) within the data collection rule.",
+          "type": "string",
+          "example": "myDest1"
+        }
+      }
+    },
+    "AdxDestination": {
+      "description": "Azure Data Explorer (Adx) destination.",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "The ARM resource id of the Adx resource.",
+          "type": "string",
+          "example": "/subscriptions/6f1b91a9-5242-4017-bc01-e262558ddab7/resourceGroups/myrg/providers/Microsoft.Kusto/clusters/myAdx"
+        },
+        "databaseName": {
+          "description": "The name of the database to which data will be ingested.",
+          "type": "string",
+          "example": "MyDatabase"
+        },
+        "ingestionUri": {
+          "description": "The ingestion uri of the Adx resource.",
+          "type": "string",
+          "readOnly": true,
+          "example": "https://ingest-azcore1.southeastasia.kusto.windows.net",
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "name": {
           "description": "A friendly name for the destination. \r\nThis name should be unique across all destinations (regardless of type) within the data collection rule.",
@@ -1129,6 +1334,26 @@
           "x-ms-identifiers": [
             "name"
           ]
+        },
+		    "microsoftFabric": {
+          "description": "List of Microsoft Fabric destinations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MicrosoftFabricDestination"
+          },
+		      "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "azureDataExplorer": {
+          "description": "List of Azure Data Explorer destinations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdxDestination"
+          },
+		      "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1174,6 +1399,10 @@
           "description": "The builtIn transform to transform stream data",
           "type": "string",
           "example": "\"Syslog-CRON\""
+        },
+        "captureOverflow": {
+          "description": "Flag to enable overflow column in LA destinations",
+          "type": "boolean"
         }
       }
     },
@@ -1211,6 +1440,34 @@
             "read"
           ]
         },
+        "endpoints": {
+          "description": "Defines the ingestion endpoints to send data to via this rule.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/EndpointsSpec"
+            }
+          ],
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "references": {
+          "description": "Defines all the references that may be used in other sections of the DCR",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ReferencesSpec"
+            }
+          ]
+        },
+        "agentSettings": {
+          "description": "Agent settings used to modify agent behavior on a given host",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AgentSettingsSpec"
+            }
+          ]
+        },
         "streamDeclarations": {
           "description": "Declaration of custom streams used in this rule.",
           "type": "object",
@@ -1239,8 +1496,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataFlow"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "provisioningState": {
           "description": "The resource provisioning state.",
@@ -1249,7 +1505,6 @@
             "Updating",
             "Deleting",
             "Succeeded",
-            "Canceled",
             "Failed"
           ],
           "type": "string",
@@ -1408,7 +1663,7 @@
         }
       }
     },
-    "ErrorResponseCommonV2": {
+	"ErrorResponseCommonV2": {
       "title": "Error response",
       "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
       "type": "object",
@@ -1421,7 +1676,7 @@
     }
   },
   "parameters": {
-    "DataCollectionRuleNameParameter": {
+	"DataCollectionRuleNameParameter": {
       "in": "path",
       "name": "dataCollectionRuleName",
       "description": "The name of the data collection rule. The name is case insensitive.",
