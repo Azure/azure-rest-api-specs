@@ -5112,6 +5112,16 @@
         }
       }
     },
+    "NetworkInterfaceReference": {
+      "type": "object",
+      "description": "Subnet - Name of NIC bound to the NSG.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID - The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/..."
+        }
+      }
+    },
     "NetworkInterfaceStatus": {
       "type": "object",
       "description": "The observed state of network interfaces",
@@ -5247,26 +5257,11 @@
       "type": "object",
       "description": "Network Security Group resource.",
       "properties": {
-        "securityRules": {
-          "type": "array",
-          "description": "A collection of security rules of the network security group.",
-          "items": {
-            "$ref": "#/definitions/SecurityRule"
-          }
-        },
-        "defaultSecurityRules": {
-          "type": "array",
-          "description": "The default security rules of network security group.",
-          "items": {
-            "$ref": "#/definitions/DefaultSecurityRule"
-          },
-          "readOnly": true
-        },
         "networkInterfaces": {
           "type": "array",
           "description": "A collection of references to network interfaces that are currently using this NSG.",
           "items": {
-            "$ref": "#/definitions/NetworkInterface"
+            "$ref": "#/definitions/NetworkInterfaceReference"
           },
           "readOnly": true
         },
@@ -5274,10 +5269,9 @@
           "type": "array",
           "description": "A collection of references to subnets that are currently using this NSG",
           "items": {
-            "$ref": "#/definitions/Subnet"
+            "$ref": "#/definitions/SubnetReference"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "resourceGuid": {
           "type": "string",
@@ -5288,6 +5282,16 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the network security group resource.",
           "readOnly": true
+        }
+      }
+    },
+    "NetworkSecurityGroupResourceReference": {
+      "type": "object",
+      "description": "IPConfigurationReference - Describes a IPConfiguration under the virtual network",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "TODO"
         }
       }
     },
@@ -5597,7 +5601,7 @@
       "description": "Route - Route resource.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/RoutePropertiesFormat",
+          "$ref": "#/definitions/RouteProperties",
           "description": "Properties of the route.",
           "x-ms-client-flatten": true
         },
@@ -5608,7 +5612,7 @@
         }
       }
     },
-    "RoutePropertiesFormat": {
+    "RouteProperties": {
       "type": "object",
       "description": "RoutePropertiesFormat - Route resource.",
       "properties": {
@@ -5642,13 +5646,13 @@
           "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/RouteTablePropertiesFormat",
+          "$ref": "#/definitions/RouteTableProperties",
           "description": "Properties of the route table.",
           "x-ms-client-flatten": true
         }
       }
     },
-    "RouteTablePropertiesFormat": {
+    "RouteTableProperties": {
       "type": "object",
       "description": "RouteTablePropertiesFormat - Route Table resource.",
       "properties": {
@@ -5810,7 +5814,7 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningStateEnum",
-          "description": "Provisioning state of the network security group.",
+          "description": "Provisioning state of the SR",
           "readOnly": true
         }
       },
@@ -6165,7 +6169,7 @@
       "description": "Properties of the subnet.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SubnetPropertiesFormat",
+          "$ref": "#/definitions/SubnetProperties",
           "description": "Properties of the subnet.",
           "x-ms-client-flatten": true
         },
@@ -6176,7 +6180,7 @@
         }
       }
     },
-    "SubnetPropertiesFormat": {
+    "SubnetProperties": {
       "type": "object",
       "description": "Properties of the subnet.",
       "properties": {
@@ -6201,6 +6205,10 @@
           "items": {
             "$ref": "#/definitions/SubnetPropertiesFormatIpConfigurationReferencesItem"
           }
+        },
+        "networkSecurityGroup": {
+          "$ref": "#/definitions/NetworkSecurityGroupResourceReference",
+          "description": "NetworkSecurityGroup - Network Security Group attached to the logical network."
         },
         "routeTable": {
           "$ref": "#/definitions/RouteTable",
@@ -6228,6 +6236,16 @@
         "id": {
           "type": "string",
           "description": "IPConfigurationID"
+        }
+      }
+    },
+    "SubnetReference": {
+      "type": "object",
+      "description": "Subnet - Name of Subnet bound to the NSG.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID - The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/..."
         }
       }
     },

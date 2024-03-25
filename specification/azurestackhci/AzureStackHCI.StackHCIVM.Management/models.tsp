@@ -545,7 +545,7 @@ model LogicalNetworkPropertiesDhcpOptions {
 model Subnet {
   @doc("Properties of the subnet.")
   @extension("x-ms-client-flatten", true)
-  properties?: SubnetPropertiesFormat;
+  properties?: SubnetProperties;
 
   @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$")
@@ -553,7 +553,7 @@ model Subnet {
 }
 
 @doc("Properties of the subnet.")
-model SubnetPropertiesFormat {
+model SubnetProperties {
   @doc("The address prefix for the subnet: Cidr for this subnet - IPv4, IPv6.")
   addressPrefix?: string;
 
@@ -565,6 +565,9 @@ model SubnetPropertiesFormat {
 
   @doc("IPConfigurationReferences - list of IPConfigurationReferences")
   ipConfigurationReferences?: SubnetPropertiesFormatIpConfigurationReferencesItem[];
+
+  @doc("NetworkSecurityGroup - Network Security Group attached to the logical network.")
+  networkSecurityGroup?: NetworkSecurityGroupResourceReference;
 
   @doc("Route table resource.")
   routeTable?: RouteTable;
@@ -579,6 +582,12 @@ model SubnetPropertiesFormat {
 @doc("IPConfigurationReference - Describes a IPConfiguration under the virtual network")
 model SubnetPropertiesFormatIpConfigurationReferencesItem {
   @doc("IPConfigurationID")
+  id?: string;
+}
+
+@doc("IPConfigurationReference - Describes a IPConfiguration under the virtual network")
+model NetworkSecurityGroupResourceReference { //TODO - Split resource references or keep generic?
+  @doc("TODO")
   id?: string;
 }
 
@@ -598,11 +607,11 @@ model RouteTable {
 
   @doc("Properties of the route table.")
   @extension("x-ms-client-flatten", true)
-  properties?: RouteTablePropertiesFormat;
+  properties?: RouteTableProperties;
 }
 
 @doc("RouteTablePropertiesFormat - Route Table resource.")
-model RouteTablePropertiesFormat {
+model RouteTableProperties {
   @doc("Collection of routes contained within a route table.")
   routes?: Route[];
 }
@@ -611,7 +620,7 @@ model RouteTablePropertiesFormat {
 model Route {
   @doc("Properties of the route.")
   @extension("x-ms-client-flatten", true)
-  properties?: RoutePropertiesFormat;
+  properties?: RouteProperties;
 
   @doc("Name - name of the subnet")
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$")
@@ -619,7 +628,7 @@ model Route {
 }
 
 @doc("RoutePropertiesFormat - Route resource.")
-model RoutePropertiesFormat {
+model RouteProperties {
   @doc("The destination CIDR to which the route applies.")
   addressPrefix?: string;
 
@@ -662,20 +671,14 @@ model IPPoolInfo {
 
 @doc("Network Security Group resource.")
 model NetworkSecurityGroupProperties {
-  @doc("A collection of security rules of the network security group.")
-  securityRules?: SecurityRule[];
-
-  @doc("The default security rules of network security group.")
-  @visibility("read")
-  defaultSecurityRules?: DefaultSecurityRule[];
 
   @doc("A collection of references to network interfaces that are currently using this NSG.")
   @visibility("read")
-  networkInterfaces?: NetworkInterface[];
+  networkInterfaces?: NetworkInterfaceReference[]; //TODO REF ID
 
   @doc("A collection of references to subnets that are currently using this NSG")
   @visibility("read")
-  subnets?: Subnet[];
+  subnets?: SubnetReference[]; //TODO REF ID
 
   @doc("The resource GUID property of the network security group resource.")
   @visibility("read")
@@ -684,6 +687,18 @@ model NetworkSecurityGroupProperties {
   @doc("The provisioning state of the network security group resource.")
   @visibility("read")
   provisioningState?: ProvisioningState;
+}
+
+@doc("Subnet - Name of Subnet bound to the NSG.")
+model SubnetReference {
+  @doc("ID - The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/...")
+  id?: string;
+}
+
+@doc("Subnet - Name of NIC bound to the NSG.")
+model NetworkInterfaceReference {
+  @doc("ID - The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/...")
+  id?: string;
 }
 
 @doc("Security rule resource.")
@@ -715,7 +730,7 @@ model SecurityRuleProperties {
   @doc("The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic.")
   direction: SecurityRuleDirection;
 
-  @doc("Provisioning state of the network security group.")
+  @doc("Provisioning state of the SR") //TODO - Find accurate provision status
   @visibility("read")
   provisioningState?: ProvisioningStateEnum;
 }
