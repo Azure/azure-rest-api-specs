@@ -1423,6 +1423,22 @@
                   "$ref": "#/definitions/Mtls"
                 }
               }
+            },
+            "peerTrafficConfiguration": {
+              "description": "Peer traffic settings for the Managed Environment",
+              "type": "object",
+              "properties": {
+                "encryption": {
+                  "description": "Peer traffic encryption settings for the Managed Environment",
+                  "type": "object",
+                  "properties": {
+                    "enabled": {
+                      "type": "boolean",
+                      "description": "Boolean indicating whether the peer traffic encryption is enabled"
+                    }
+                  }
+                }
+              }
             }
           },
           "x-ms-client-flatten": true

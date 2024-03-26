@@ -211,6 +211,9 @@
           },
           "Create or Update App On A Connected Environment": {
             "$ref": "./examples/ContainerApps_CreateOrUpdate_ConnectedEnvironment.json"
+          },
+          "Create or Update SourceToCloud App": {
+            "$ref": "./examples/ContainerApps_SourceToCloudApp_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -652,6 +655,10 @@
           "$ref": "#/definitions/Dapr",
           "description": "Dapr configuration for the Container App."
         },
+        "runtime": {
+          "$ref": "#/definitions/Runtime",
+          "description": "App runtime configuration for the Container App."
+        },
         "maxInactiveRevisions": {
           "format": "int32",
           "description": "Optional. Max inactive revisions a Container App can have.",
@@ -727,6 +734,25 @@
             "workloadProfileName": {
               "$ref": "./CommonDefinitions.json#/definitions/WorkloadProfileName",
               "description": "Workload profile name to pin for container app execution."
+            },
+            "patchingConfiguration": {
+              "description": "Container App auto patch configuration.",
+              "type": "object",
+              "properties": {
+                "patchingMode": {
+                  "description": "Patching mode for the container app. Null or default in this field will be interpreted as Automatic by RP. Automatic mode will automatically apply available patches. Manual mode will require the user to manually apply patches. Disabled mode will stop patch detection and auto patching.",
+                  "type": "string",
+                  "enum": [
+                    "Automatic",
+                    "Manual",
+                    "Disabled"
+                  ],
+                  "x-ms-enum": {
+                    "name": "patchingMode",
+                    "modelAsString": true
+                  }
+                }
+              }
             },
             "latestRevisionName": {
               "description": "Name of the latest revision of the Container App.",
@@ -853,6 +879,71 @@
         "enableApiLogging": {
           "description": "Enables API logging for the Dapr sidecar",
           "type": "boolean"
+        }
+      }
+    },
+    "Runtime": {
+      "description": "Container App Runtime configuration.",
+      "type": "object",
+      "properties": {
+        "java": {
+          "description": "Java app configuration",
+          "type": "object",
+          "properties": {
+            "enableMetrics": {
+              "description": "Enable jmx core metrics for the java app",
+              "type": "boolean"
+            },
+            "javaAgent": {
+              "description": "Diagnostic capabilities achieved by java agent",
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "description": "Enable java agent injection for the java app.",
+                  "type": "boolean"
+                },
+                "logLevelSettings": {
+                  "description": "Settings of the log level for the java app.",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/LogLevelSetting"
+                  },
+                  "x-ms-identifiers": [
+                    "logger",
+                    "level"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "dotnet": {
+          "description": ".NET app configuration",
+          "type": "object",
+          "properties": {
+            "autoConfigureDataProtection": {
+              "description": "Auto configure the ASP.NET Core Data Protection feature",
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "LogLevelSetting": {
+      "description": "Log level settings for java workloads.",
+      "type": "object",
+      "required": [
+        "logger",
+        "level"
+      ],
+      "properties": {
+        "logger": {
+          "description": "Logger name.",
+          "type": "string"
+        },
+        "level": {
+          "description": "The specified logger's log level.",
+          "type": "string"
         }
       }
     },
