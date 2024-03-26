@@ -610,6 +610,59 @@
         ]
       }
     },
+    "CachingType": {
+      "type": "string",
+      "description": "The type of caching in a data disk.",
+      "enum": [
+        "None",
+        "ReadOnly",
+        "ReadWrite"
+      ],
+      "x-ms-enum": {
+        "name": "CachingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Don't use host caching."
+          },
+          {
+            "name": "ReadOnly",
+            "value": "ReadOnly",
+            "description": "For workloads that only do read operations."
+          },
+          {
+            "name": "ReadWrite",
+            "value": "ReadWrite",
+            "description": "For workloads that do a balance of read and write operations."
+          }
+        ]
+      }
+    },
+    "DataDisk": {
+      "type": "object",
+      "description": "The data disk of the VMSS.",
+      "properties": {
+        "caching": {
+          "$ref": "#/definitions/CachingType",
+          "description": "The type of caching to be enabled for the data disks. The default value for caching is readwrite. For information about the caching options see: https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/."
+        },
+        "diskSizeGiB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The initial disk size in gigabytes."
+        },
+        "storageAccountType": {
+          "$ref": "#/definitions/StorageAccountType",
+          "description": "The storage Account type to be used for the data disk. If omitted, the default is \"standard_lrs\"."
+        },
+        "driveLetter": {
+          "type": "string",
+          "description": "The drive letter for the empty data disk. If not specified, it will be the first available letter."
+        }
+      }
+    },
     "DevOpsAzureSku": {
       "type": "object",
       "description": "The Azure SKU of the machines in the pool.",
@@ -830,7 +883,11 @@
       "properties": {
         "resourceId": {
           "type": "string",
-          "description": "The resource id of the image instead of using a well known image name"
+          "description": "The resource id of the image."
+        },
+        "wellKnownImageName": {
+          "type": "string",
+          "description": "The image to use from a well-known set of images made available to customers."
         },
         "aliases": {
           "type": "array",
@@ -843,10 +900,6 @@
           "type": "string",
           "description": "The percentage of the buffer to be allocated to this image.",
           "default": "*"
-        },
-        "wellKnownImageName": {
-          "type": "string",
-          "description": "The well known image name to use instead of resource ID"
         }
       }
     },
@@ -1461,6 +1514,48 @@
       ],
       "x-ms-discriminator-value": "Stateless"
     },
+    "StorageAccountType": {
+      "type": "string",
+      "description": "StorageAccountType enums",
+      "enum": [
+        "standard_lrs",
+        "premium_lrs",
+        "standardssd_lrs",
+        "premium_zrs",
+        "standardssd_zrs"
+      ],
+      "x-ms-enum": {
+        "name": "StorageAccountType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "StandardLRS",
+            "value": "standard_lrs",
+            "description": "The data disk should use standard locally redundant storage."
+          },
+          {
+            "name": "PremiumLRS",
+            "value": "premium_lrs",
+            "description": "The data disk should use premium locally redundant storage."
+          },
+          {
+            "name": "StandardSSDLRS",
+            "value": "standardssd_lrs",
+            "description": "The data disk should use standard SSD locally redundant storage."
+          },
+          {
+            "name": "PremiumZRS",
+            "value": "premium_zrs",
+            "description": "The data disk should use premium SSD zonal redundant storage."
+          },
+          {
+            "name": "StandardSSDZRS",
+            "value": "standardssd_zrs",
+            "description": "The data disk should use standard SSD zonal redundant storage."
+          }
+        ]
+      }
+    },
     "StorageProfile": {
       "type": "object",
       "description": "The storage profile of the VMSS.",
@@ -1468,6 +1563,14 @@
         "osDiskStorageAccountType": {
           "$ref": "#/definitions/OsDiskStorageAccountType",
           "description": "The Azure SKU name of the machines in the pool."
+        },
+        "dataDisks": {
+          "type": "array",
+          "description": "A list of empty data disks to attach.",
+          "items": {
+            "$ref": "#/definitions/DataDisk"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
