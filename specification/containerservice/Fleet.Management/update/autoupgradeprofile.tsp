@@ -87,7 +87,7 @@ enum UpgradeChannel {
 
 @doc("GenerateUpdateRunsRequest is the HTTP body of a generate updateruns request.")
 model GenerateUpdateRunRequest {
-  @doc("The update spec that will be applied to managed clusters in the generating update runs.")
+  @doc("The update spec that will be applied to managed clusters when generating update runs.")
   updateSpecification: ManagedClusterUpdate;
 }
 
