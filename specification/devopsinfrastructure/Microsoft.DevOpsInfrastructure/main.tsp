@@ -466,10 +466,10 @@ union ResourceSkuRestrictionsType {
 
 @doc("Describes an available Compute SKU Restriction Information.")
 model ResourceSkuRestrictionInfo {
-  @doc("locations where the SKU is restricted")
+  @doc("Locations where the SKU is restricted")
   locations: string[];
 
-  @doc("list of availability zones where the SKU is restricted.")
+  @doc("List of availability zones where the SKU is restricted.")
   zones: string[];
 }
 
