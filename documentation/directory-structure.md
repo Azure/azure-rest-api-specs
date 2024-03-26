@@ -26,7 +26,6 @@ This article described the directory structure / folder layout of the `specifica
 The layout described in this article is strictly enforced. There exist
 some exceptions for historical reasons. These exceptions are not allowed going forward.
 
-
 ## `specification` folder
 
 The `specification` folder is the root folder for all TypeSpec and OpenAPI specs 
