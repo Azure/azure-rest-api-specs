@@ -117,14 +117,14 @@ else {
             LogInfo "  Folder 'specification/$specFamily' contains $($tspConfigs.Count) file(s) named 'tspconfig.yaml'"
           }
           else {
-            LogError ("  OpenAPI was generated from TypeSpec, but folder 'specification/$specFamily' contains no files name 'tspconfig.yaml'." `
+            LogError ("OpenAPI was generated from TypeSpec, but folder 'specification/$specFamily' contains no files name 'tspconfig.yaml'.\n" `
               + "  The TypeSpec used to generate OpenAPI must be added to this folder.")
             LogJobFailure
             exit 1
           }
         }
         else {
-          LogError "  Path to OpenAPI did not match expected regex.  Unable to extract spec family."
+          LogError "Path to OpenAPI did not match expected regex.  Unable to extract spec family."
           LogJobFailure
           exit 1
         }
@@ -142,7 +142,7 @@ else {
       $servicePath = $Matches["servicePath"]
     }
     else {
-      LogError "  Path to OpenAPI did not match expected regex.  Unable to extract service path."
+      LogError "Path to OpenAPI did not match expected regex.  Unable to extract service path."
       LogJobFailure
       exit 1
     }
@@ -166,7 +166,7 @@ else {
         $responseCache[$urlToStableFolder] = $responseStatus
       }
       catch {
-        LogError "  Exception making web request to ${logUrlToStableFolder}: $_"
+        LogError "Exception making web request to ${logUrlToStableFolder}: $_"
         LogJobFailure
         exit 1
       }
