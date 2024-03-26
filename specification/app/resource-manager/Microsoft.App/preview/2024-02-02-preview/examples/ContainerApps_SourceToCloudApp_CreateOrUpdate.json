@@ -1,4 +1,6 @@
 {
+  "operationId": "ContainerApps_CreateOrUpdate",
+  "title": "ContainerApps_SourceToCloudApp_CreateOrUpdate",
   "parameters": {
     "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "resourceGroupName": "rg",
@@ -91,32 +93,19 @@
             "logLevel": "debug",
             "enableApiLogging": true
           },
-          "runtime": {
-            "java": {
-              "enableMetrics": true,
-              "javaAgent": {
-                "enabled": true,
-                "logLevelSettings": [
-                  {
-                    "logger": "org.springframework.boot",
-                    "level": "debug"
-                  }
-                ]
-              }
-            },
-            "dotnet": {
-              "autoConfigureDataProtection": true
-            }
-          },
           "maxInactiveRevisions": 10,
           "service": {
             "type": "redis"
           }
         },
+        "patchingConfiguration": {
+          "patchingMode": "Automatic"
+        },
         "template": {
           "containers": [
             {
-              "image": "repo/testcontainerApp0:v1",
+              "image": "",
+              "imageType": "CloudBuild",
               "name": "testcontainerApp0",
               "probes": [
                 {
@@ -177,18 +166,6 @@
                   "metadata": {
                     "concurrentRequests": "50"
                   }
-                }
-              },
-              {
-                "name": "servicebus",
-                "custom": {
-                  "type": "azure-servicebus",
-                  "metadata": {
-                    "queueName": "myqueue",
-                    "namespace": "mynamespace",
-                    "messageCount": "5"
-                  },
-                  "identity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity"
                 }
               }
             ]
@@ -286,29 +263,16 @@
               "appPort": 3000,
               "appProtocol": "http",
               "httpReadBufferSize": 30
-            },
-            "runtime": {
-              "java": {
-                "enableMetrics": true,
-                "javaAgent": {
-                  "enabled": true,
-                  "logLevelSettings": [
-                    {
-                      "logger": "org.springframework.boot",
-                      "level": "debug"
-                    }
-                  ]
-                }
-              },
-              "dotnet": {
-                "autoConfigureDataProtection": true
-              }
             }
+          },
+          "patchingConfiguration": {
+            "patchingMode": "Automatic"
           },
           "template": {
             "containers": [
               {
-                "image": "repo/testcontainerApp0:v4",
+                "image": "mcr.microsoft.com/k8se/cloudbuild-waiting-upload:latest",
+                "imageType": "CloudBuild",
                 "name": "testcontainerApp0",
                 "resources": {
                   "cpu": 0.2,
@@ -373,18 +337,6 @@
                       "concurrentRequests": "50"
                     }
                   }
-                },
-                {
-                  "name": "servicebus",
-                  "custom": {
-                    "type": "azure-servicebus",
-                    "metadata": {
-                      "queueName": "myqueue",
-                      "namespace": "mynamespace",
-                      "messageCount": "5"
-                    },
-                    "identity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity"
-                  }
                 }
               ]
             },
@@ -440,29 +392,16 @@
               "appPort": 3000,
               "appProtocol": "http",
               "httpReadBufferSize": 30
-            },
-            "runtime": {
-              "java": {
-                "enableMetrics": true,
-                "javaAgent": {
-                  "enabled": true,
-                  "logLevelSettings": [
-                    {
-                      "logger": "org.springframework.boot",
-                      "level": "debug"
-                    }
-                  ]
-                }
-              },
-              "dotnet": {
-                "autoConfigureDataProtection": true
-              }
             }
+          },
+          "patchingConfiguration": {
+            "patchingMode": "Automatic"
           },
           "template": {
             "containers": [
               {
-                "image": "repo/testcontainerApp0:v4",
+                "image": "mcr.microsoft.com/k8se/cloudbuild-waiting-upload:latest",
+                "imageType": "CloudBuild",
                 "name": "testcontainerApp0",
                 "resources": {
                   "cpu": 0.2,

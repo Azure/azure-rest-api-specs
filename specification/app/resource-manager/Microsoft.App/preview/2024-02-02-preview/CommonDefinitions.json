@@ -50,6 +50,18 @@
           "description": "Container image tag.",
           "type": "string"
         },
+        "imageType": {
+          "description": "The type of the image. Set to CloudBuild to let the system manages the image, where user will not be able to update image through image field. Set to ContainerImage for user provided image.",
+          "type": "string",
+          "enum": [
+            "CloudBuild",
+            "ContainerImage"
+          ],
+          "x-ms-enum": {
+            "name": "imageType",
+            "modelAsString": true
+          }
+        },
         "name": {
           "description": "Custom container name.",
           "type": "string"
@@ -294,6 +306,10 @@
           "x-ms-identifiers": [
             "triggerParameter"
           ]
+        },
+        "identity": {
+          "description": "The resource ID of a user-assigned managed identity that is assigned to the Container App, or 'system' for system-assigned identity.",
+          "type": "string"
         }
       }
     },
@@ -429,6 +445,10 @@
           "x-ms-identifiers": [
             "triggerParameter"
           ]
+        },
+        "identity": {
+          "description": "The resource ID of a user-assigned managed identity that is assigned to the Container App, or 'system' for system-assigned identity.",
+          "type": "string"
         }
       }
     },
@@ -452,6 +472,10 @@
           "x-ms-identifiers": [
             "triggerParameter"
           ]
+        },
+        "identity": {
+          "description": "The resource ID of a user-assigned managed identity that is assigned to the Container App, or 'system' for system-assigned identity.",
+          "type": "string"
         }
       }
     },
@@ -477,6 +501,10 @@
           "x-ms-identifiers": [
             "triggerParameter"
           ]
+        },
+        "identity": {
+          "description": "The resource ID of a user-assigned managed identity that is assigned to the Container App, or 'system' for system-assigned identity.",
+          "type": "string"
         }
       }
     },
