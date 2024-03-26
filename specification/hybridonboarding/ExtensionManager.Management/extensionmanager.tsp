@@ -64,10 +64,23 @@ model ExtensionManagerProperties {
   @visibility("read")
   hostResourceId?: string;
 
+  @doc("Scenario profile of the extension manager resource.")
+  @extension("x-ms-identifiers", [])
+  scenarioProfile?: ScenarioProfileObject[];
+
   @doc("Extension profile of the extension manager resource")
   @visibility("read")
   @extension("x-ms-identifiers", ["name"])
   extensionProfile?: ExtensionObject[];
+}
+
+@doc("Scenario profile object of the extension manager resource.")
+model ScenarioProfileObject {
+  @doc("Infrastructure associated with extension manager resource.")
+  infrastructure: string;
+
+  @doc("Scenario associated with extension manager resource.")
+  scenario: string;
 }
 
 @doc("Extension object inside the extension profile.")
