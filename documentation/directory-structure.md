@@ -185,16 +185,13 @@ It depends on the following considerations:
 - Specification files and AutoRest configuration files in one rp folder are better to refer to files in the same rp folder. Note: Entity type definition that needs to be referred cross rp folders should be placed and maintained under the folder [**common-types**](https://github.com/Azure/azure-rest-api-specs#common-types).
 - For more considerations, you may consult the reviewer in API design review. To initiate the review, Please submit an [Azure SDK intake questionnaire](https://aka.ms/sdk-apex).
 
-[`specification/containerservice`]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/containerservice
-[`specification/confidentialledger`]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/confidentialledger
+[aka.ms/azsdk/pr-api-versions]: https://aka.ms/azsdk/pr-api-versions
 [aka.ms/azsdk/typespec]: https://aka.ms/azsdk/typespec
 [aka.ms/typespec]: https://aka.ms/typespec
-[TypeSpec directory structure]: https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/typespec-structure-guidelines.md
 [RP Onboarding]: https://armwiki.azurewebsites.net/rp_onboarding/process/onboarding.html#0-on-boarding-meeting
-
-[aka.ms/azsdk/pr-api-versions]: https://aka.ms/azsdk/pr-api-versions
-[`x-ms-examples`]: https://azure.github.io/autorest/extensions/#x-ms-examples
-
-[`specification/workloads`]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/workloads/resource-manager/Microsoft.Workloads
-
+[TypeSpec directory structure]: https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/typespec-structure-guidelines.md
 [`specification/compute`]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/compute/resource-manager/Microsoft.Compute
+[`specification/confidentialledger`]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/confidentialledger
+[`specification/containerservice`]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/containerservice
+[`specification/workloads`]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/workloads/resource-manager/Microsoft.Workloads
+[`x-ms-examples`]: https://azure.github.io/autorest/extensions/#x-ms-examples
