@@ -915,6 +915,20 @@
             "$ref": "#/definitions/VirtualApplianceNicProperties"
           }
         },
+        "networkProfile": {
+          "type": "object",
+          "readOnly": false,
+          "description": "Network Profile containing configurations for Public and Private NIC.",
+          "properties": {
+            "networkInterfaceConfigurations": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/VirtualApplianceNetworkInterfaceConfiguration"
+              },
+              "x-ms-identifiers": []
+            }
+          }
+        },
         "additionalNics": {
           "type": "array",
           "readOnly": false,
@@ -1000,6 +1014,20 @@
     },
     "VirtualApplianceNicProperties": {
       "properties": {
+        "nicType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "NIC type - PublicNic, PrivateNic, or AdditionalNic.",
+          "enum": [
+            "PublicNic",
+            "PrivateNic",
+            "AdditionalNic"
+          ],
+          "x-ms-enum": {
+            "name": "NicTypeInResponse",
+            "modelAsString": true
+          }
+        },
         "name": {
           "type": "string",
           "readOnly": true,
@@ -1022,6 +1050,68 @@
         }
       },
       "description": "Network Virtual Appliance NIC properties."
+    },
+    "VirtualApplianceNetworkInterfaceConfiguration": {
+      "type": "object",
+      "readOnly": false,
+      "description": "Represents a single NIC configuration.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "NIC type. This should be either PublicNic or PrivateNic.",
+          "enum": [
+            "PublicNic",
+            "PrivateNic"
+          ],
+          "x-ms-enum": {
+            "name": "NicTypeInRequest",
+            "modelAsString": true
+          },
+          "x-ms-client-name": "NicType"
+        },
+        "properties": {
+          "$ref": "#/definitions/VirtualApplianceNetworkInterfaceConfigurationProperties"
+        }
+      }
+    },
+    "VirtualApplianceNetworkInterfaceConfigurationProperties": {
+      "type": "object",
+      "readOnly": false,
+      "description": "Represents a single NIC configuration properties.",
+      "properties": {
+        "ipConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualApplianceIPConfiguration"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "VirtualApplianceIPConfiguration": {
+      "type": "object",
+      "readOnly": false,
+      "description": "Represents a single IP configuration.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the IP configuration."
+        },
+        "properties": {
+          "$ref": "#/definitions/VirtualApplianceIPConfigurationProperties"
+        }
+      }
+    },
+    "VirtualApplianceIPConfigurationProperties": {
+      "type": "object",
+      "readOnly": false,
+      "description": "Represents a single IP configuration properties.",
+      "properties": {
+        "primary": {
+          "type": "boolean",
+          "description": "Whether or not this is primary IP configuration of the NIC."
+        }
+      }
     },
     "VirtualApplianceAdditionalNicProperties": {
       "type": "object",
