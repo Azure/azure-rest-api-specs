@@ -15,7 +15,7 @@ https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one
   - [API version (`api_version`) folders layout](#api-version-api_version-folders-layout)
     - [`examples` folder](#examples-folder)
   - [Naming guidelines for `specification` folder contents](#naming-guidelines-for-specification-folder-contents)
-  - [Example layout of a `specification` folder](#example-layout-of-a-specification-folder)
+  - [Example layout of the `specification` folder](#example-layout-of-the-specification-folder)
   - [Folder Structure for service groups](#folder-structure-for-service-groups)
   - [common-types](#common-types)
   - [FAQ](#faq)
@@ -104,7 +104,7 @@ Each `api_version/examples` folder contains [`x-ms-examples`] files.
 - Namespace (`rpnamespace`) folders can be PascalCased (e.g. `KeyVault`).
 - Files are whatever case you think is good for your soul.
 
-## Example layout of a `specification` folder
+## Example layout of the `specification` folder
 
 ```bash
 .
