@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "DocumentTranslation Service",
-    "version": "2024-05-01",
+    "version": "v1.0",
     "description": "Document translation service",
     "x-typespec-generated": [
       {
@@ -60,7 +60,79 @@
   },
   "tags": [],
   "paths": {
-    "/document/batches": {
+    "/document:translate": {
+      "post": {
+        "operationId": "DocumentTranslationOperations_DocumentTranslate",
+        "summary": "Submit a single document translation request to the Document Translation service",
+        "description": "Use this API to submit a single translation request to the Document Translation Service.",
+        "produces": [
+          "application/octet-stream",
+          "application/json"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DocumentTranslateContent.sourceLanguage"
+          },
+          {
+            "$ref": "#/parameters/DocumentTranslateContent.targetLanguage"
+          },
+          {
+            "$ref": "#/parameters/DocumentTranslateContent.category"
+          },
+          {
+            "$ref": "#/parameters/DocumentTranslateContent.allowFallback"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "$ref": "#/parameters/DocumentTranslateContent.document"
+          },
+          {
+            "$ref": "#/parameters/DocumentTranslateContent.glossary"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Translate a single document": {
+            "$ref": "./examples/DocumentTranslate_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/text/batch/v1.0/batches": {
       "get": {
         "operationId": "DocumentTranslationOperations_GetTranslationsStatus",
         "summary": "Returns a list of batch requests submitted and the status for each request",
@@ -223,7 +295,7 @@
         }
       }
     },
-    "/document/batches/{id}": {
+    "/text/batch/v1.0/batches/{id}": {
       "get": {
         "operationId": "DocumentTranslationOperations_GetTranslationStatus",
         "summary": "Returns the status for a document translation request",
@@ -311,7 +383,7 @@
         }
       }
     },
-    "/document/batches/{id}/documents": {
+    "/text/batch/v1.0/batches/{id}/documents": {
       "get": {
         "operationId": "DocumentTranslationOperations_GetDocumentsStatus",
         "summary": "Returns the status for all documents in a batch document translation request",
@@ -442,7 +514,7 @@
         }
       }
     },
-    "/document/batches/{id}/documents/{documentId}": {
+    "/text/batch/v1.0/batches/{id}/documents/{documentId}": {
       "get": {
         "operationId": "DocumentTranslationOperations_GetDocumentStatus",
         "summary": "Returns the status for a specific document",
@@ -495,7 +567,7 @@
         }
       }
     },
-    "/document/formats&type=document": {
+    "/text/batch/v1.0/documents/formats": {
       "get": {
         "operationId": "DocumentTranslationOperations_GetSupportedDocumentFormats",
         "summary": "Returns a list of supported document formats",
@@ -532,7 +604,7 @@
         }
       }
     },
-    "/document/formats&type=glossary": {
+    "/text/batch/v1.0/glossaries/formats": {
       "get": {
         "operationId": "DocumentTranslationOperations_GetSupportedGlossaryFormats",
         "summary": "Returns the list of supported glossary formats",
@@ -569,79 +641,7 @@
         }
       }
     },
-    "/document:translate": {
-      "post": {
-        "operationId": "DocumentTranslationOperations_DocumentTranslate",
-        "summary": "Submit a single document translation request to the Document Translation service",
-        "description": "Use this API to submit a single translation request to the Document Translation Service.",
-        "produces": [
-          "application/octet-stream",
-          "application/json"
-        ],
-        "consumes": [
-          "multipart/form-data"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/DocumentTranslateContent.sourceLanguage"
-          },
-          {
-            "$ref": "#/parameters/DocumentTranslateContent.targetLanguage"
-          },
-          {
-            "$ref": "#/parameters/DocumentTranslateContent.category"
-          },
-          {
-            "$ref": "#/parameters/DocumentTranslateContent.allowFallback"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "$ref": "#/parameters/DocumentTranslateContent.document"
-          },
-          {
-            "$ref": "#/parameters/DocumentTranslateContent.glossary"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "type": "file"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Translate a single document": {
-            "$ref": "./examples/DocumentTranslate_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/storagesources": {
+    "/text/batch/v1.0/storagesources": {
       "get": {
         "operationId": "DocumentTranslationOperations_GetSupportedStorageSources",
         "summary": "Returns a list of supported storage sources",
@@ -1427,15 +1427,15 @@
     "Versions": {
       "type": "string",
       "enum": [
-        "2024-05-01"
+        "v1.0"
       ],
       "x-ms-enum": {
         "name": "Versions",
         "modelAsString": true,
         "values": [
           {
-            "name": "v2024_05_01",
-            "value": "2024-05-01"
+            "name": "v1_0",
+            "value": "v1.0"
           }
         ]
       }
