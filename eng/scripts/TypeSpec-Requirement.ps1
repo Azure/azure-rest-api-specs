@@ -114,11 +114,11 @@ else {
             | Where-Object { $_.Name -eq "tspconfig.yaml" })
 
           if ($tspConfigs) {
-            LogInfo "  Spec family '$specFamily' contains $($tspConfigs.Count) file(s) named 'tspconfig.yaml'"
+            LogInfo "  Folder 'specification/$specFamily' contains $($tspConfigs.Count) file(s) named 'tspconfig.yaml'"
           }
           else {
-            LogError ("  OpenAPI was generated from TypeSpec, but spec family '$specFamily' contains no files name 'tspconfig.yaml'." `
-              + "  The TypeSpec used to generate OpenAPI must be added to the spec family.")
+            LogError ("  OpenAPI was generated from TypeSpec, but folder 'specification/$specFamily' contains no files name 'tspconfig.yaml'." `
+              + "  The TypeSpec used to generate OpenAPI must be added to this folder.")
             LogJobFailure
             exit 1
           }
