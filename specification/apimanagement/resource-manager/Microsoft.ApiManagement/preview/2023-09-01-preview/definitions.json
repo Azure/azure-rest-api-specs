@@ -2349,6 +2349,10 @@
           "type": "string",
           "format": "duration",
           "description": "The duration for which the circuit will be tripped."
+        },
+        "acceptRetryAfter": {
+          "type": "boolean",
+          "description": "flag to accept Retry-After header from the backend."
         }
       }
     },
@@ -2440,6 +2444,26 @@
           "description": "The unique ARM id of the backend entity. The ARM id should refer to an already existing backend entity.",
           "example": {
             "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/proxybackend"
+          }
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The weight of the backend entity in the backend pool. Must be between 0 and 100. It can be also null if the value not specified.",
+          "minimum": 0,
+          "maximum": 100,
+          "example": {
+            "weight": 1
+          }
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority of the backend entity in the backend pool. Must be between 0 and 100. It can be also null if the value not specified.",
+          "minimum": 0,
+          "maximum": 100,
+          "example": {
+            "priority": 1
           }
         }
       },
