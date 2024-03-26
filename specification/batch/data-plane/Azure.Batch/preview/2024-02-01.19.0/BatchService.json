@@ -9239,11 +9239,13 @@
         },
         "accountKey": {
           "type": "string",
+          "format": "password",
           "description": "The Azure Storage Account key. This property is mutually exclusive with both sasKey and identity; exactly one must be specified.",
           "x-ms-secret": true
         },
         "sasKey": {
           "type": "string",
+          "format": "password",
           "description": "The Azure Storage SAS token. This property is mutually exclusive with both accountKey and identity; exactly one must be specified.",
           "x-ms-secret": true
         },
@@ -9280,6 +9282,7 @@
         },
         "accountKey": {
           "type": "string",
+          "format": "password",
           "description": "The Azure Storage account key.",
           "x-ms-secret": true
         },
@@ -10915,12 +10918,12 @@
         },
         "readIOps": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The total number of disk read operations made by all Tasks in all Jobs created under the schedule."
         },
         "writeIOps": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The total number of disk write operations made by all Tasks in all Jobs created under the schedule."
         },
         "readIOGiB": {
@@ -10935,17 +10938,17 @@
         },
         "numSucceededTasks": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The total number of Tasks successfully completed during the given time range in Jobs created under the schedule. A Task completes successfully if it returns exit code 0."
         },
         "numFailedTasks": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The total number of Tasks that failed during the given time range in Jobs created under the schedule. A Task fails if it exhausts its maximum retry count without returning exit code 0."
         },
         "numTaskRetries": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The total number of retries during the given time range on all Tasks in all Jobs created under the schedule."
         },
         "waitTime": {
@@ -11268,12 +11271,12 @@
         },
         "readIOps": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The total number of disk read operations made by all Tasks in the Job."
         },
         "writeIOps": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The total number of disk write operations made by all Tasks in the Job."
         },
         "readIOGiB": {
@@ -11288,17 +11291,17 @@
         },
         "numSucceededTasks": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The total number of Tasks successfully completed in the Job during the given time range. A Task completes successfully if it returns exit code 0."
         },
         "numFailedTasks": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The total number of Tasks in the Job that failed during the given time range. A Task fails if it exhausts its maximum retry count without returning exit code 0."
         },
         "numTaskRetries": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The total number of retries on all the Tasks in the Job during the given time range."
         },
         "waitTime": {
@@ -12162,6 +12165,7 @@
         },
         "password": {
           "type": "string",
+          "format": "password",
           "description": "The password of the Account. The password is required for Windows Compute Nodes (those created with 'virtualMachineConfiguration' using a Windows Image reference). For Linux Compute Nodes, the password can optionally be specified along with the sshPublicKey property.",
           "x-ms-secret": true
         },
@@ -12180,6 +12184,7 @@
       "properties": {
         "password": {
           "type": "string",
+          "format": "password",
           "description": "The password of the Account. The password is required for Windows Compute Nodes (those created with 'virtualMachineConfiguration' using a Windows Image reference). For Linux Compute Nodes, the password can optionally be specified along with the sshPublicKey property. If omitted, any existing password is removed.",
           "x-ms-secret": true
         },
@@ -12933,12 +12938,12 @@
         },
         "diskReadIOps": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The total number of disk read operations across all Compute Nodes in the Pool."
         },
         "diskWriteIOps": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The total number of disk write operations across all Compute Nodes in the Pool."
         },
         "diskReadGiB": {
@@ -14473,12 +14478,12 @@
         },
         "readIOps": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The total number of disk read operations made by the Task."
         },
         "writeIOps": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The total number of disk write operations made by the Task."
         },
         "readIOGiB": {
@@ -14563,6 +14568,7 @@
         },
         "password": {
           "type": "string",
+          "format": "password",
           "description": "The password to use for authentication against the CIFS file system.",
           "x-ms-secret": true
         }
@@ -14637,6 +14643,7 @@
         },
         "password": {
           "type": "string",
+          "format": "password",
           "description": "The password to log into the registry server.",
           "x-ms-secret": true
         },
@@ -15066,7 +15073,7 @@
         },
         "contentLength": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The length of the file."
         },
         "contentType": {
@@ -15378,6 +15385,7 @@
         },
         "sshPrivateKey": {
           "type": "string",
+          "format": "password",
           "description": "The SSH private key for the user Account. The private key must not be password protected. The private key is used to automatically configure asymmetric-key based authentication for SSH between Compute Nodes in a Linux Pool when the Pool's enableInterNodeCommunication property is true (it is ignored if enableInterNodeCommunication is false). It does this by placing the key pair into the user's .ssh directory. If not specified, password-less SSH is not configured between Compute Nodes (no modification of the user's .ssh directory is done).",
           "x-ms-secret": true
         }
@@ -16306,6 +16314,7 @@
         },
         "password": {
           "type": "string",
+          "format": "password",
           "description": "The password for the user Account.",
           "x-ms-secret": true
         },
@@ -16400,7 +16409,6 @@
           }
         },
         "protectedSettings": {
-          "x-ms-secret": true,
           "type": "object",
           "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.",
           "additionalProperties": {

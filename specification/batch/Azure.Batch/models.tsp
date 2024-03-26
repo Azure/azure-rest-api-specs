@@ -1486,6 +1486,7 @@ model ContainerRegistry {
   @doc("The user name to log into the registry server.")
   username?: string;
 
+  @secret
   @doc("The password to log into the registry server.")
   password?: string;
 
@@ -2173,6 +2174,7 @@ model UserAccount {
   @doc("The name of the user Account. Names can contain any Unicode characters up to a maximum length of 20.")
   name: string;
 
+  @secret
   @doc("The password for the user Account.")
   password: string;
 
@@ -2194,6 +2196,7 @@ model LinuxUserConfiguration {
   @doc("The group ID for the user Account. The uid and gid properties must be specified together or not at all. If not specified the underlying operating system picks the gid.")
   gid?: int32;
 
+  @secret
   @doc("The SSH private key for the user Account. The private key must not be password protected. The private key is used to automatically configure asymmetric-key based authentication for SSH between Compute Nodes in a Linux Pool when the Pool's enableInterNodeCommunication property is true (it is ignored if enableInterNodeCommunication is false). It does this by placing the key pair into the user's .ssh directory. If not specified, password-less SSH is not configured between Compute Nodes (no modification of the user's .ssh directory is done).")
   sshPrivateKey?: string;
 }
@@ -2245,9 +2248,11 @@ model AzureBlobFileSystemConfiguration {
   @doc("The Azure Blob Storage Container name.")
   containerName: string;
 
+  @secret
   @doc("The Azure Storage Account key. This property is mutually exclusive with both sasKey and identity; exactly one must be specified.")
   accountKey?: string;
 
+  @secret
   @doc("The Azure Storage SAS token. This property is mutually exclusive with both accountKey and identity; exactly one must be specified.")
   sasKey?: string;
 
@@ -2288,6 +2293,7 @@ model CifsMountConfiguration {
   @doc("Additional command line options to pass to the mount command. These are 'net use' options in Windows and 'mount' options in Linux.")
   mountOptions?: string;
 
+  @secret
   @doc("The password to use for authentication against the CIFS file system.")
   password: string;
 }
@@ -2300,6 +2306,7 @@ model AzureFileShareConfiguration {
   @doc("The Azure Files URL. This is of the form 'https://{account}.file.core.windows.net/'.")
   azureFileUrl: string;
 
+  @secret
   @doc("The Azure Storage account key.")
   accountKey: string;
 
@@ -3739,6 +3746,7 @@ model BatchNodeUserCreateContent {
   @doc("The time at which the Account should expire. If omitted, the default is 1 day from the current time. For Linux Compute Nodes, the expiryTime has a precision up to a day.")
   expiryTime?: utcDateTime;
 
+  @secret
   @doc("The password of the Account. The password is required for Windows Compute Nodes (those created with 'virtualMachineConfiguration' using a Windows Image reference). For Linux Compute Nodes, the password can optionally be specified along with the sshPublicKey property.")
   password?: string;
 
@@ -3748,6 +3756,7 @@ model BatchNodeUserCreateContent {
 
 @doc("Parameters for updating a user account for RDP or SSH access on an Azure Batch Compute Node.")
 model BatchNodeUserUpdateContent {
+  @secret
   @doc("The password of the Account. The password is required for Windows Compute Nodes (those created with 'virtualMachineConfiguration' using a Windows Image reference). For Linux Compute Nodes, the password can optionally be specified along with the sshPublicKey property. If omitted, any existing password is removed.")
   password?: string;
 
