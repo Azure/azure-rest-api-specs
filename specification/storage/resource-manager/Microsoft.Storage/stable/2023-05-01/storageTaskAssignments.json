@@ -61,6 +61,12 @@
               "$ref": "#/definitions/StorageTaskAssignment"
             }
           },
+          "201": {
+            "description": "OK -- Create storage task assignment with the same properties specified in the request body.",
+            "schema": {
+              "$ref": "#/definitions/StorageTaskAssignment"
+            }
+          },
           "202": {
             "description": "Accepted -- Create or update request accepted; operation will complete asynchronously.",
             "headers": {
@@ -598,6 +604,7 @@
         "interval": {
           "type": "integer",
           "minimum": 1,
+          "format": "int32",
           "description": "Run interval of task execution"
         },
         "intervalUnit": {
@@ -628,6 +635,7 @@
         "abortOnFailures": {
           "type": "integer",
           "minimum": 0,
+          "format": "int32",
           "description": "abortOnFailures constraint for storage task assignment execution"
         }
       },
