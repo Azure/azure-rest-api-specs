@@ -10930,7 +10930,7 @@
       "enum": [
         "None",
         "Provisioned",
-        "Serverles"
+        "Serverless"
       ],
       "x-ms-enum": {
         "name": "CapacityMode",
@@ -10941,7 +10941,7 @@
       "description": "The transition state information related capacity mode change with update request.",
       "type": "object",
       "properties": {
-        "CapacityModeTransitionStatus": {
+        "capacityModeTransitionStatus": {
           "type": "string",
           "description": "The transition status of capacity mode.",
           "enum": [
@@ -10956,45 +10956,45 @@
             "modelAsString": true
           }
         },
-        "CurrentCapacityMode": {
+        "currentCapacityMode": {
           "description": "Indicates the current capacity mode of the account.",
           "type": "string",
           "enum": [
             "None",
             "Provisioned",
-            "Serverles"
+            "Serverless"
           ],
           "x-ms-enum": {
             "name": "CapacityMode",
             "modelAsString": true
           }
         },
-        "PreviousCapacityMode": {
+        "previousCapacityMode": {
           "description": "Indicates the previous capacity mode of the account before successful transition.",
           "type": "string",
           "enum": [
             "None",
             "Provisioned",
-            "Serverles"
+            "Serverless"
           ],
           "x-ms-enum": {
             "name": "CapacityMode",
             "modelAsString": true
           }
         },
-        "CapacityModeTransitionBeginTimestamp": {
+        "capacityModeTransitionBeginTimestamp": {
           "readOnly": true,
           "type": "string",
           "format": "date-time",
           "description": "Begin time in UTC of the capacity mode change."
         },
-        "CapacityModeTransitionEndTimestamp": {
+        "capacityModeTransitionEndTimestamp": {
           "readOnly": true,
           "type": "string",
           "format": "date-time",
           "description": "End time in UTC of the capacity mode change."
         },
-        "CapacityModeLastSuccessfulTransitionEndTimestamp": {
+        "capacityModeLastSuccessfulTransitionEndTimestamp": {
           "readOnly": true,
           "type": "string",
           "format": "date-time",
