@@ -68,6 +68,7 @@ model NumberVerificationWithoutCodeContent {
 
   ...NumberDevice;
 
+  @added(APCVersions.v2024_03_25_preview)
   @doc("Redirect URI to backend application.")
   redirectUri: url;
 }
