@@ -875,7 +875,7 @@ then you can try again to delete the Certificate.
       @path
       thumbprint: string;
     },
-    NoContentSuccesResponseHeaders
+    NoContentSuccessResponseHeaders
   >;
 
   #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
