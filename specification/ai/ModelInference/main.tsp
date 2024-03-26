@@ -22,7 +22,6 @@ using Azure.Core;
   title: "AI Model Inference",
 })
 @versioned(ModelInference.Versions)
-#suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Namespace types must use PascalCase"
 namespace ModelInference;
 
 @doc("The ModelInference service versions.")

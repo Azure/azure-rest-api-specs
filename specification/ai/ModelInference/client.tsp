@@ -4,9 +4,7 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@TypeSpec.Versioning.useDependency(
-  ModelInference.Versions.v2024_04_01_Preview
-)
+@TypeSpec.Versioning.useDependency(ModelInference.Versions.v2024_04_01_Preview)
 namespace Client;
 
 @client({
