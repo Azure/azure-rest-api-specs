@@ -255,7 +255,7 @@
             "$ref": "#/parameters/PrivateAccessName"
           },
           {
-            "name": "privateAccess",
+            "name": "privateAccessPatch",
             "description": "private access resource's tags to be updated.",
             "in": "body",
             "required": true,
@@ -271,6 +271,12 @@
               "$ref": "./types/privateAccesses.json#/definitions/PrivateAccess"
             }
           },
+          "200": {
+            "description": "The request to update the tags for the Private Access resource has been completed successfully.",
+            "schema": {
+              "$ref": "./types/privateAccesses.json#/definitions/PrivateAccess"
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -278,15 +284,15 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Update a private access resource's tags": {
             "$ref": "./examples/UpdateAPrivateAccessTags.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "tags": [
