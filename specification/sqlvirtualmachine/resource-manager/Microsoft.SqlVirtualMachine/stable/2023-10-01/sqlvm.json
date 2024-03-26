@@ -754,11 +754,12 @@
             "$ref": "#/parameters/SqlVirtualMachineNameParameter"
           },
           {
-            "name": "runDiskConfigRules",
-            "in": "query",
-            "description": "Boolean to run disk config Assessment. Use false to fetch past Assessment.",
-            "required": false,
-            "type": "boolean"
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiskConfigAssessmentRequest"
+            }
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -1029,7 +1030,7 @@
         "tags": [
           "SqlVirtualMachines"
         ],
-        "description": "Updates a SQL virtual machine.",
+        "description": "Updates SQL virtual machine tags.",
         "operationId": "SqlVirtualMachines_Update",
         "parameters": [
           {
@@ -2688,15 +2689,20 @@
         }
       }
     },
+    "DiskConfigAssessmentRequest": {
+      "description": "Configure disk config assessment for databases in your SQL virtual machine.",
+      "type": "object",
+      "properties": {
+        "runDiskConfigRules": {
+          "description": "Boolean to run disk config Assessment. Use false to fetch past Assessment.",
+          "type": "boolean"
+        }
+      }
+    },
     "SqlVirtualMachineUpdate": {
       "description": "An update to a SQL virtual machine.",
       "type": "object",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/SqlVirtualMachineUpdateProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        },
         "tags": {
           "description": "Resource tags.",
           "type": "object",
@@ -2705,11 +2711,6 @@
           }
         }
       }
-    },
-    "SqlVirtualMachineUpdateProperties": {
-      "description": "The SQL virtual machine PATCH properties.",
-      "type": "object",
-      "properties": {}
     },
     "SqlVmTroubleshooting": {
       "description": "Details required for SQL VM troubleshooting",
