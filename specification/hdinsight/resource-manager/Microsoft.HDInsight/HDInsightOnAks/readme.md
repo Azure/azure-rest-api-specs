@@ -58,6 +58,8 @@ suppressions:
     reason: This is a false positive, and there is ClusterPatch defined for patching cluster.
   - code: PatchBodyParametersSchema
     reason: We refers to the same models in PUT operation, and the errors checked are allowed by our service.
+  - code: DeleteResponseCodes
+    reason: If the resource only exist in arm, and doesn't have backend resources, we return 200 in delete operation.
   - code: EnumInsteadOfBoolean
     where:
       - $.definitions.ClusterAccessProfile.properties.enableInternalIngress
@@ -90,6 +92,8 @@ suppressions:
     where: 
     - $.definitions.Cluster
     reason: This is a false positive, and there is ClusterPatch defined for patching cluster.
+  - code: DeleteResponseCodes
+    reason: If the resource only exist in arm, and doesn't have backend resources, we return 200 in delete operation.
   - code: EnumInsteadOfBoolean
     where: 
     - $.definitions.ClusterAccessProfile.properties.enableInternalIngress
@@ -137,7 +141,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas
