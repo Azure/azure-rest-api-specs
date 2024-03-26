@@ -1,10 +1,21 @@
 # Directory Structure
 
+- [Directory Structure](#directory-structure)
+  - [specification](#specification)
+  - [resource provider](#resource-provider)
+  - [`resource-manager` and `data-plane` folders](#resource-manager-and-data-plane-folders)
+  - [Resource provider namespace (`rpnamespace`) folders](#resource-provider-namespace-rpnamespace-folders)
+  - [Resource provider namespace (`rpnamespace`) folders layout](#resource-provider-namespace-rpnamespace-folders-layout)
+  - [API version (`api_version`) folders layout](#api-version-api_version-folders-layout)
+    - [`examples` folder](#examples-folder)
+  - [General folder naming guidance for contents of `specification` folder](#general-folder-naming-guidance-for-contents-of-specification-folder)
+  - [Folder Structure for Service Group](#folder-structure-for-service-group)
+  - [common-types](#common-types)
+  - [FAQ](#faq)
+    - [Are multiple RP folders required?](#are-multiple-rp-folders-required)
+
+
 The the directory structure (aka folder layout) of this repository should strictly follow these rules:
-
-## profile
-
-The `profile` folder contains the profiles' definition files. The profile definition targets for hybrid applications that could run on Azure Stack general availability versions and Azure Cloud.
 
 ## specification
 
@@ -56,7 +67,7 @@ For ARM Namespace and ARM onboarding, please refer to the ARM wiki of [RP Onboar
 
 ## Resource provider namespace (`rpnamespace`) folders layout
 
-Each `rpnamespace` folder within `resource-manager` and `data-plane` may contain the following:
+Each `rpnamespace` folder within `resource-manager` and `data-plane` may contain the following, for multiple values of `api_version`:
 
 `rpnamespace/stable/api_version`  
 `rpnamespace/preview/api_version`
@@ -65,25 +76,23 @@ If the contents of `data-plane` folder are not organized by `rpnamespace`, we tr
 the `data-plane` folder itself as the "default namespace" for the purposes of describing
 the required layout.
 
+Here `api_version` is an versioned set of OpenAPI specs. `stable` and `preview` correspond to the lifecycle stages of the API versions within. Learn more about API version and their lifecycle
+stages at [aka.ms/azsdk/pr-api-versions].
 
-2. **'preview' and 'stable' Folders**: This maps to the service/component lifecycle stage: Preview and GA. For example, if a service is in Preview stage, no matter Private Preview or Public Preview, the API specs of the service should be placed in the `preview` folder. If the service is GAed, but a component is in preview, then the API version contains the preview component entity should be placed in the `preview` folder as well.  The `stable` folder should contain API versions of a GAed service and all GAed components.
+## API version (`api_version`) folders layout
 
-    > How's the Azure Breaking Change Policy apply to API specs in `preview` and `stable` folders? In fact, it is more relevant to if the repo is public or private.
-    > - API specs with components or resource types in Private Preview, or Limited Public Preview (behind [AFEC](https://armwiki.azurewebsites.net/rp_onboarding/afec/FeatureExposureControl.html) or managing visible subscriptions) are better to launch PR review in the private repository, aka., [azure-rest-api-specs-pr](https://github.com/Azure/azure-rest-api-specs-pr). And these API specs are free of breaking changes.
-    >
-    > - On the other hand, everything public in the main branch of the public repository, aka., [azure-rest-api-specs](https://github.com/Azure/azure-rest-api-specs), no matter in the `preview` folder or in the `stable` folder, should be treated as contract with Azure customers, must follow [Azure Breaking Changes Policy](http://aka.ms/AzBreakingChangesPolicy).
+Each `api_version` folder is the direct child of the `preview` or `stable` folder. This folder contains the REST OpenAPI Specs `.json` files, and the `examples` folder.
 
-3. **API Versions Folders**: this folder is the direct child of the `preview` or `stable` folder. This folder contains the REST API Specs, and the `examples` folder.
+### `examples` folder
 
-4. **'examples' Folders**: the example folder will contain the x-ms-examples files. it will reside under the APIs or Resources' version folders as different APIs or Resource types version can have different examples.
+Each `api_version/examples` folder contains the `x-ms-examples` files.
 
-> Note:  some general guidance for folder names, and file names under `specification`:
->
-> - Folder names should be singular (ie, 'profile' not 'profiles' ) -- this removes ambiguity for some non-english speakers.
-> - Generic folder names should be lower-case
-> - Namespace folders can be PascalCased (ie, "KeyVault")
-> - Files are whatever case you think is good for your soul.
+## General folder naming guidance for contents of `specification` folder
 
+- Folder names should be singular (e.g. `keyvault` not `keyvaults` ) -- this removes ambiguity for some non-english speakers.
+- Generic folder names should be lower-case
+- Namespace (`rpnamespace`) folders can be PascalCased (e.g. `KeyVault`)
+- Files are whatever case you think is good for your soul.
 
 The structure should appear like so:
 ```bash
@@ -214,3 +223,5 @@ If multiple folders are required? It depends on the following considerations:
 [aka.ms/typespec]: https://aka.ms/typespec
 [TypeSpec directory structure]: https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/typespec-structure-guidelines.md
 [RP Onboarding]: https://armwiki.azurewebsites.net/rp_onboarding/process/onboarding.html#0-on-boarding-meeting
+
+[aka.ms/azsdk/pr-api-versions]: https://aka.ms/azsdk/pr-api-versions
