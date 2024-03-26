@@ -22,21 +22,23 @@
   ],
   "security": [
     {
-      "AadOauth2Auth": [
-        "user_impersonation"
+      "AADToken": [
+        "https://management.azure.com/read",
+        "https://management.azure.com/write"
       ]
     }
   ],
   "securityDefinitions": {
-    "AadOauth2Auth": {
+    "AADToken": {
       "type": "oauth2",
       "description": "The Azure Active Directory OAuth2 Flow",
       "flow": "accessCode",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "authorizationUrl": "https://api.example.com/oauth2/authorize",
       "scopes": {
-        "user_impersonation": ""
+        "https://management.azure.com/read": "",
+        "https://management.azure.com/write": ""
       },
-      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+      "tokenUrl": "https://api.example.com/oauth2/token"
     }
   },
   "tags": [
@@ -98,11 +100,17 @@
           "type": "array",
           "description": "Supported OAuth2 flows",
           "items": {}
+        },
+        "defaultScopes": {
+          "type": "array",
+          "description": "Oauth2 scopes of every flow. Overridden by scope definitions in specific flows",
+          "items": {}
         }
       },
       "required": [
         "type",
-        "flows"
+        "flows",
+        "defaultScopes"
       ]
     },
     "Versions": {

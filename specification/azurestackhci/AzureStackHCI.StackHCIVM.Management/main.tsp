@@ -34,7 +34,6 @@ using TypeSpec.Versioning;
 })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-@useAuth(AADToken)
 namespace Microsoft.AzureStackHCI;
 
 /**

@@ -516,6 +516,7 @@ model LogicalNetworkProperties {
   dhcpOptions?: LogicalNetworkPropertiesDhcpOptions;
 
   @doc("Subnet - list of subnets under the logical network")
+  @extension("x-ms-identifiers", ["properties", "name"])
   subnets?: Subnet[];
 
   @doc("Provisioning state of the logical network.")
@@ -568,6 +569,7 @@ model SubnetProperties {
   routeTable?: RouteTable;
 
   @doc("network associated pool of IP Addresses")
+  @extension("x-ms-identifiers", ["ipPoolType", "name", "start", "end", "info"])
   ipPools?: IPPool[];
 
   @doc("Vlan to use for the subnet")
@@ -608,6 +610,7 @@ model RouteTable {
 @doc("RouteTablePropertiesFormat - Route Table resource.")
 model RouteTableProperties {
   @doc("Collection of routes contained within a route table.")
+  @extension("x-ms-identifiers", ["properties", "name"])
   routes?: Route[];
 }
 
@@ -732,6 +735,7 @@ model SecurityRuleProperties {
 @doc("Properties under the network interface resource")
 model NetworkInterfaceProperties {
   @doc("IPConfigurations - A list of IPConfigurations of the network interface.")
+  @extension("x-ms-identifiers", ["name", "properties"])
   ipConfigurations?: IPConfiguration[];
 
   @doc("MacAddress - The MAC address of the network interface.")
@@ -1175,6 +1179,7 @@ model VirtualMachineInstancePropertiesOsProfileLinuxConfiguration {
 @doc("SSH configuration for Linux based VMs running on Azure")
 model SshConfiguration {
   @doc("The list of SSH public keys used to authenticate with linux based VMs.")
+  @extension("x-ms-identifiers", ["path", "keyData"])
   publicKeys?: SshPublicKey[];
 }
 
@@ -1293,6 +1298,10 @@ model VirtualMachineConfigAgentInstanceView {
   vmConfigAgentVersion?: string;
 
   @doc("The resource status information.")
+  @extension(
+    "x-ms-identifiers",
+    ["code", "level", "displayStatus", "message", "time"]
+  )
   statuses?: InstanceViewStatus[];
 }
 

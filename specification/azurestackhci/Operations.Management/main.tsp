@@ -15,7 +15,6 @@ using TypeSpec.Versioning;
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "HCI itself is a short form."
 @armProviderNamespace
-@useAuth(AadOauth2Auth<["user_impersonation"]>)
 @service({
   title: "Microsoft.AzureStackHCI",
 })

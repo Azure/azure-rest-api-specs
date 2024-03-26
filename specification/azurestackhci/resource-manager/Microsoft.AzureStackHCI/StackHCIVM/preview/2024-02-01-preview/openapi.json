@@ -3457,11 +3457,17 @@
           "type": "array",
           "description": "Supported OAuth2 flows",
           "items": {}
+        },
+        "defaultScopes": {
+          "type": "array",
+          "description": "Oauth2 scopes of every flow. Overridden by scope definitions in specific flows",
+          "items": {}
         }
       },
       "required": [
         "type",
-        "flows"
+        "flows",
+        "defaultScopes"
       ]
     },
     "AttestBootIntegrityPropertyEnum": {
@@ -3923,7 +3929,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -4183,7 +4190,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -4311,7 +4319,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -4617,7 +4626,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -4638,7 +4648,10 @@
           "items": {
             "$ref": "#/definitions/Subnet"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "properties",
+            "name"
+          ]
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningStateEnum",
@@ -4752,7 +4765,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -4926,7 +4940,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -4943,7 +4958,10 @@
           "items": {
             "$ref": "#/definitions/IPConfiguration"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "name",
+            "properties"
+          ]
         },
         "macAddress": {
           "type": "string",
@@ -5099,7 +5117,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -5515,7 +5534,10 @@
           "items": {
             "$ref": "#/definitions/Route"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "properties",
+            "name"
+          ]
         }
       }
     },
@@ -5605,7 +5627,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -5748,7 +5771,10 @@
           "items": {
             "$ref": "#/definitions/SshPublicKey"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "path",
+            "keyData"
+          ]
         }
       }
     },
@@ -5896,7 +5922,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -6073,7 +6100,13 @@
           "items": {
             "$ref": "#/definitions/IPPool"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "ipPoolType",
+            "name",
+            "start",
+            "end",
+            "info"
+          ]
         },
         "vlan": {
           "type": "integer",
@@ -6171,7 +6204,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -6310,7 +6344,13 @@
           "items": {
             "$ref": "#/definitions/InstanceViewStatus"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "code",
+            "level",
+            "displayStatus",
+            "message",
+            "time"
+          ]
         }
       }
     },
@@ -6356,7 +6396,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
