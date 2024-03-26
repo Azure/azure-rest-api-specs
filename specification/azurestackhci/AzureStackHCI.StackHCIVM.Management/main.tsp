@@ -9,7 +9,6 @@ import "./MarketplaceGalleryImages.tsp";
 import "./NetworkInterfaces.tsp";
 import "./NetworkSecurityGroups.tsp";
 import "./SecurityRules.tsp";
-import "./DefaultSecurityRules.tsp";
 import "./StorageContainers.tsp";
 import "./VirtualHardDisks.tsp";
 import "./VirtualMachineInstance.tsp";
