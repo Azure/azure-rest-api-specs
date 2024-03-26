@@ -125,6 +125,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Sku_ListByLocation": {
+            "$ref": "./examples/Sku_ListByLocation.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -499,6 +504,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ResourceDetails_ListByPool": {
+            "$ref": "./examples/ResourceDetails_ListByPool.json"
           }
         },
         "x-ms-pageable": {
@@ -1180,46 +1190,6 @@
         "value"
       ]
     },
-    "ResourceSkuCapacity": {
-      "type": "object",
-      "description": "Describes scaling information of a SKU.",
-      "properties": {
-        "minimum": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The minimum capacity of the SKU."
-        },
-        "maximum": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum capacity of the SKU."
-        },
-        "default": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The default capacity of the SKU."
-        },
-        "scaleType": {
-          "$ref": "#/definitions/ResourceSkuCapacityScaleType",
-          "description": "The scale type of the SKU."
-        }
-      },
-      "required": [
-        "scaleType"
-      ]
-    },
-    "ResourceSkuCapacityScaleType": {
-      "type": "string",
-      "enum": [
-        "Automatic",
-        "Manual",
-        "None"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceSkuCapacityScaleType",
-        "modelAsString": true
-      }
-    },
     "ResourceSkuListResult": {
       "type": "object",
       "description": "The response of a ResourceSku list operation.",
@@ -1242,6 +1212,36 @@
         "value"
       ]
     },
+    "ResourceSkuLocationInfo": {
+      "type": "object",
+      "description": "Describes an available Compute SKU Location Information.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Location of the SKU"
+        },
+        "zones": {
+          "type": "array",
+          "description": "List of availability zones where the SKU is supported.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "zoneDetails": {
+          "type": "array",
+          "description": "Gets details of capabilities available to a SKU in specific zones.",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuZoneDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "location",
+        "zones",
+        "zoneDetails"
+      ]
+    },
     "ResourceSkuProperties": {
       "type": "object",
       "description": "Properties of a ResourceSku",
@@ -1262,20 +1262,16 @@
           "type": "string",
           "description": "The family of the SKU."
         },
-        "kind": {
-          "type": "string",
-          "description": "The kind of resources that are supported in this SKU."
-        },
-        "capacity": {
-          "$ref": "#/definitions/ResourceSkuCapacity",
-          "description": "The number of virtual machines in the scale set."
-        },
         "locations": {
           "type": "array",
           "description": "The set of locations that the SKU is available.",
           "items": {
             "type": "string"
           }
+        },
+        "locationInfo": {
+          "$ref": "#/definitions/ResourceSkuLocationInfo",
+          "description": "A list of locations and availability zones in those locations where the SKU is available"
         },
         "capabilities": {
           "type": "array",
@@ -1299,9 +1295,8 @@
         "tier",
         "size",
         "family",
-        "kind",
-        "capacity",
         "locations",
+        "locationInfo",
         "capabilities",
         "restrictions"
       ]
@@ -1380,6 +1375,31 @@
         "name": "ResourceSkuRestrictionsType",
         "modelAsString": true
       }
+    },
+    "ResourceSkuZoneDetails": {
+      "type": "object",
+      "description": "Describes The zonal capabilities of a SKU.",
+      "properties": {
+        "name": {
+          "type": "array",
+          "description": "Gets the set of zones that the SKU is available in with the specified capabilities.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "A list of capabilities that are available for the SKU in the specified list of zones.",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuCapabilities"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "name",
+        "capabilities"
+      ]
     },
     "ResourceStatus": {
       "type": "string",

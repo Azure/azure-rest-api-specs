@@ -479,6 +479,29 @@ union ResourceSkuRestrictionsReasonCode {
   "NotAvailableForSubscription",
 }
 
+@doc("Describes an available Compute SKU Location Information.")
+model ResourceSkuLocationInfo {
+  @doc("Location of the SKU")
+  location: string;
+
+  @doc("List of availability zones where the SKU is supported.")
+  zones: string[];
+
+  @doc("Gets details of capabilities available to a SKU in specific zones.")
+  @extension("x-ms-identifiers", [])
+  zoneDetails: ResourceSkuZoneDetails[];
+}
+
+@doc("Describes The zonal capabilities of a SKU.")
+model ResourceSkuZoneDetails {
+  @doc("Gets the set of zones that the SKU is available in with the specified capabilities.")
+  name: string[];
+
+  @doc("A list of capabilities that are available for the SKU in the specified list of zones.")
+  @extension("x-ms-identifiers", [])
+  capabilities: ResourceSkuCapabilities[];
+}
+
 @doc("A ResourceSku")
 @parentResource(Location)
 model ResourceSku is ProxyResource<ResourceSkuProperties> {
@@ -505,14 +528,11 @@ model ResourceSkuProperties {
   @doc("The family of the SKU.")
   family: string;
 
-  @doc("The kind of resources that are supported in this SKU.")
-  kind: string;
-
-  @doc("The number of virtual machines in the scale set.")
-  capacity: ResourceSkuCapacity;
-
   @doc("The set of locations that the SKU is available.")
   locations: string[];
+
+  @doc("A list of locations and availability zones in those locations where the SKU is available")
+  locationInfo: ResourceSkuLocationInfo;
 
   @doc("Name value pairs to describe the capability.")
   @extension("x-ms-identifiers", [])
