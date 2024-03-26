@@ -12,7 +12,7 @@ Please look to the files `Microsoft.ConfidentialLedger/preview/2023-01-18-previe
 > see https://aka.ms/autorest
 
 ``` yaml
-tag: package-2023-01-18-preview-identity
+tag: package-2024-01-26-preview-identity
 openapi-type: data-plane
 ```
 
