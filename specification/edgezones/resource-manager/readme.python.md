@@ -16,7 +16,3 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/edgezones/azure-mgmt-edgezones/azure/mgmt/edgezones
 ```
-
-``` yaml $(python)
-flatten-models: false
-```
