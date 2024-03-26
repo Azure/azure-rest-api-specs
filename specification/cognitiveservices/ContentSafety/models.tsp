@@ -424,11 +424,8 @@ model AutoReviewerVersion {
   @doc("The name of the auto reviewer.")
   autoReviewerName: string;
 
-  @doc("The labels defined in the auto reviewer.")
+  @doc("The labels defined in the auto reviewer. There should be a label named 'Other' in the list. The 'Other' label is used to represent the content that does not belong to any other label.")
   labels: AutoReviewerLabelDetails[];
-
-  @doc("Whether let system add an otherwise label to the auto reviewer. Default value is true.")
-  enableOtherwiseLabel?: boolean;
 
   @doc("URL of example jsonl blob. Read & write access to the last layer virtual directory is required.")
   @visibility("create", "read", "update")
@@ -450,12 +447,9 @@ model AutoReviewerVersion {
   @visibility("read")
   createdTime: utcDateTime;
 
-  @doc("Build status of the auto reviewer.")
+  @doc("Status of the auto reviewer version.")
   @visibility("read")
-  status: AutoReviewerStatus;
-
-  @doc("Error when building the auto reviewer.")
-  error?: Azure.Core.Foundations.ErrorResponse;
+  status: string;
 }
 
 @added(ContentSafety.Versions.v2024_04_15_Preview)
@@ -469,9 +463,10 @@ model AutoReviewerLabelDetails {
 }
 
 @added(ContentSafety.Versions.v2024_04_15_Preview)
-union AutoReviewerStatus {
+union AutoReviewerOpeationStatus {
   string,
-  "Building",
+  "NotStarted",
+  "Running",
   "Succeeded",
   "Failed",
 }
@@ -504,6 +499,23 @@ model AutoReviewTextResult {
 
   @doc("The reasoning of output label.")
   reasoning: string;
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The auto reviewer operation.")
+@resource("text/autoReviewers/operations")
+model AutoReviewerOperationDetail {
+  @doc("The id of auto reviewer operation.")
+  @key("operationId")
+  @visibility("read", "create", "query")
+  @maxLength(64)
+  id: string;
+
+  @doc("The status of the auto reviewer operation.")
+  status: AutoReviewerOpeationStatus;
+
+  @doc("Return error detail when the operation failed.")
+  error?: Azure.Core.Foundations.Error;
 }
 
 @added(ContentSafety.Versions.v2024_04_15_Preview)

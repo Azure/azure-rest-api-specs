@@ -242,7 +242,7 @@ interface AutoReviewerOps
 interface AutoReviewerOperations {
   @summary("Create a new version of auto reviewer.")
   @doc("Create new auto reviewer or a new version of exisiting auto reviewer.")
-  createOrUpdateAutoReviewer is AutoReviewerOps.ResourceCreateOrReplace<AutoReviewerVersion>;
+  createOrReplaceAutoReviewer is AutoReviewerOps.LongRunningResourceCreateOrReplace<AutoReviewerVersion>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Get a auto reviewer or a specific version of it.")
@@ -276,6 +276,10 @@ interface AutoReviewerOperations {
       version?: int32;
     }>
   >;
+
+  @summary("Get An Auto Reviewer Operation.")
+  @doc("Get an auto reviewer operation.")
+  getAutoReviewerOperation is Azure.Core.ResourceRead<AutoReviewerOperationDetail>;
 }
 
 interface TextIncidentOps
