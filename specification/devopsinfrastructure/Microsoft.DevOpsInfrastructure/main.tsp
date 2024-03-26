@@ -20,9 +20,9 @@ namespace Microsoft.DevOpsInfrastructure;
 
 /** Api versions */
 enum Versions {
-  /** 2023-12-13-preview preview version */
+  /** 2024-03-26-preview preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2023-12-13-preview`,
+  `2024-03-26-preview`,
 }
 
 model Pool is TrackedResource<PoolProperties> {
@@ -183,15 +183,19 @@ union OsDiskStorageAccountType {
 
 @doc("The VM image of the machines in the pool.")
 model PoolImage {
-  @doc("The resource id of the image.")
-  resourceId: string;
+  @doc("The resource id of the image instead of using a well known image name")
+  resourceId?: string;
 
   @doc("List of aliases to reference the image by.")
   aliases?: string[];
 
   @doc("The percentage of the buffer to be allocated to this image.")
   buffer?: string = "*";
+
+  @doc("The well known image name to use instead of resource ID")
+  wellKnownImageName?: string;
 }
+
 @doc("The OS profile of the machines in the pool.")
 model OsProfile {
   @doc("The secret management settings of the machines in the pool.")
@@ -286,4 +290,205 @@ interface Pools {
   delete is ArmResourceDeleteWithoutOkAsync<Pool>;
   listByResourceGroup is ArmResourceListByParent<Pool>;
   listBySubscription is ArmListBySubscription<Pool>;
+}
+
+@parentResource(Pool)
+@doc("A ResourceDetailsResource")
+model ResourceDetailsResource
+  is ProxyResource<ResourceDetailsResourceProperties> {
+  @doc("The name of the resource.")
+  @key("resourceName")
+  @segment("resources")
+  @visibility("read")
+  @path
+  name: string;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
+@doc("Details of the ResourceDetailsResource.")
+model ResourceDetailsResourceProperties {
+  @doc("The status of the resource.")
+  status: ResourceStatus;
+
+  @doc("The image name of the resource.")
+  image: string;
+
+  @doc("The version of the image running on the resource.")
+  imageVersion: string;
+}
+
+@doc("The status of the machine resource.")
+union ResourceStatus {
+  string,
+
+  /** Represents a machine resource that is ready. */
+  Ready: "Ready",
+
+  /** Represents a machine resource that is not ready. */
+  NotReady: "NotReady",
+
+  /** Represents a machine resource that is allocated. */
+  Allocated: "Allocated",
+
+  /** Represents a machine resource that is pending return. */
+  PendingReturn: "PendingReturn",
+
+  /** Represents a machine resource that is returned. */
+  Returned: "Returned",
+
+  /** Represents a machine resource that is leased. */
+  Leased: "Leased",
+
+  /** Represents a machine resource that is provisioning. */
+  Provisioning: "Provisioning",
+
+  /** Represents a machine resource that is updating. */
+  Updating: "Updating",
+
+  /** Represents a machine resource that is starting. */
+  Starting: "Starting",
+
+  /** Represents a machine resource that is pending reimage. */
+  PendingReimage: "PendingReimage",
+
+  /** Represents a machine resource that is reimaging. */
+  Reimaging: "Reimaging",
+}
+
+@armResourceOperations
+interface ResourceDetails {
+  listByPool is ArmResourceListByParent<ResourceDetailsResource>;
+}
+
+union ResourceSkuCapacityScaleType {
+  string,
+  "Automatic",
+  "Manual",
+  "None",
+}
+
+@doc("Describes scaling information of a SKU.")
+model ResourceSkuCapacity {
+  @doc("The minimum capacity of the SKU.")
+  minimum?: int32;
+
+  @doc("The maximum capacity of the SKU.")
+  maximum?: int32;
+
+  @doc("The default capacity of the SKU.")
+  default?: int32;
+
+  @doc("The scale type of the SKU.")
+  scaleType: ResourceSkuCapacityScaleType;
+}
+
+@doc("Describes The SKU capabilities object.")
+model ResourceSkuCapabilities {
+  @doc("The name of the SKU capability.")
+  name: string;
+
+  @doc("The value of the SKU capability.")
+  value: string;
+}
+
+@doc("The restrictions of the SKU.")
+model ResourceSkuRestrictions {
+  @doc("the type of restrictions.")
+  type?: ResourceSkuRestrictionsType;
+
+  @doc("The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted.")
+  values: string[];
+
+  @doc("The information about the restriction where the SKU cannot be used.")
+  restrictionInfo: ResourceSkuRestrictionInfo;
+
+  @doc("the reason for restriction.")
+  reasonCode?: ResourceSkuRestrictionsReasonCode;
+}
+
+union ResourceSkuRestrictionsType {
+  string,
+  "Location",
+  "Zone",
+}
+
+@doc("Describes an available Compute SKU Restriction Information.")
+model ResourceSkuRestrictionInfo {
+  @doc("locations where the SKU is restricted")
+  locations: string[];
+
+  @doc("list of availability zones where the SKU is restricted.")
+  zones: string[];
+}
+
+union ResourceSkuRestrictionsReasonCode {
+  string,
+  "QuotaId",
+  "NotAvailableForSubscription",
+}
+
+@doc("A ResourceSku")
+@parentResource(Location)
+model ResourceSku is ProxyResource<ResourceSkuProperties> {
+  @doc("The name of the SKU.")
+  @key("skuName")
+  @segment("skus")
+  @visibility("read")
+  @path
+  name: string;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
+@doc("Properties of a ResourceSku")
+model ResourceSkuProperties {
+  @doc("The type of resource the SKU applies to.")
+  resourceType: string;
+
+  @doc("The tier of virtual machines in a scale set")
+  tier: string;
+
+  @doc("The size of the SKU.")
+  size: string;
+
+  @doc("The family of the SKU.")
+  family: string;
+
+  @doc("The kind of resources that are supported in this SKU.")
+  kind: string;
+
+  @doc("The number of virtual machines in the scale set.")
+  capacity: ResourceSkuCapacity;
+
+  @doc("The set of locations that the SKU is available.")
+  locations: string[];
+
+  @doc("Name value pairs to describe the capability.")
+  @extension("x-ms-identifiers", [])
+  capabilities: ResourceSkuCapabilities[];
+
+  @doc("The restrictions of the SKU.")
+  @extension("x-ms-identifiers", [])
+  restrictions: ResourceSkuRestrictions[];
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-property" "No Identity"
+@doc("An Azure location.")
+model Location is ProxyResource<LocationProperties> {
+  @key("locationName")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-.]*$")
+  @path
+  @segment("locations")
+  @doc("Name of the location.")
+  @visibility("public")
+  name: string;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
+@doc("Properties of a location.")
+model LocationProperties {}
+
+@armResourceOperations
+interface Sku {
+  listByLocation is ArmListBySubscription<ResourceSku>;
 }
