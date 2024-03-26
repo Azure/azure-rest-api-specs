@@ -12,10 +12,21 @@ azure-arm: true
 
 ``` yaml $(ruby) && $(multiapi)
 batch:
+  - tag: package-2024-04
   - tag: package-2021-10
   - tag: package-2020-05
   - tag: package-2017-04-preview
   - tag: package-2017-02-preview
+```
+
+### Tag: package-2024-04 and ruby
+
+These settings apply only when `--tag=package-2024-04 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-2024-04' && $(ruby)
+namespace: "Azure::Billing::Mgmt::V2024_04_01"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_billing/lib
 ```
 
 ### Tag: package-2021-10 and ruby
