@@ -98,19 +98,43 @@ else {
 
     try {
       $jsonContent = Get-Content $fullPath | ConvertFrom-Json -AsHashtable
+    }
+    catch {
+      LogWarning "  OpenAPI cannot be parsed as JSON, so assuming not generated from TypeSpec"
+      LogWarning "    $_"
+    }
 
+    if ($jsonContent) {
       if ($null -ne ${jsonContent}?["info"]?["x-typespec-generated"]) {
         LogInfo "  OpenAPI was generated from TypeSpec (contains '/info/x-typespec-generated')"
+
+        if ($file -match "specification/(?<specFamily>[^/]+)/") {
+          $specFamily = $Matches["specFamily"];
+          $tspConfigs = @(Get-ChildItem -Path (Join-Path $repoPath "specification" $specFamily) -Recurse -File
+            | Where-Object { $_.Name -eq "tspconfig.yaml" })
+
+          if ($tspConfigs) {
+            LogInfo "  Spec family '$specFamily' contains $($tspConfigs.Count) file(s) named 'tspconfig.yaml'"
+          }
+          else {
+            LogError ("  OpenAPI was generated from TypeSpec, but spec family '$specFamily' contains no files name 'tspconfig.yaml'." `
+              + "  The TypeSpec used to generate OpenAPI must be added to the spec family.")
+            LogJobFailure
+            exit 1
+          }
+        }
+        else {
+          LogError "  Path to OpenAPI did not match expected regex.  Unable to extract spec family."
+          LogJobFailure
+          exit 1
+        }
+
         # Skip further checks, since spec is already using TypeSpec
         continue
       }
       else {
         LogInfo "  OpenAPI was not generated from TypeSpec (missing '/info/x-typespec-generated')"
       }
-    }
-    catch {
-      LogWarning "  OpenAPI cannot be parsed as JSON, so assuming not generated from TypeSpec"
-      LogWarning "    $_"
     }
 
     # Extract path between "specification/" and "/(preview|stable)"
