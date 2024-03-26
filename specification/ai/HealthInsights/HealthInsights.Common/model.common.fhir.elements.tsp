@@ -370,7 +370,7 @@ union ContactPointSystem {
 
 @doc("""
 Contact Point Use
-See: 	http://hl7.org/fhir/ValueSet/contact-point-use
+See: http://hl7.org/fhir/ValueSet/contact-point-use
 """)
 union ContactPointUse {
   string,
