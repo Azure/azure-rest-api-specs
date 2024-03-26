@@ -4408,7 +4408,7 @@
           "description": "Subnet - Name of Subnet bound to the IP configuration."
         },
         "networkSecurityGroup": {
-          "$ref": "#/definitions/NetworkSecurityGroup",
+          "$ref": "#/definitions/NetworkSecurityGroupResourceReference",
           "description": "NetworkSecurityGroup - Network Security Group attached to the network interface."
         }
       }
@@ -4631,10 +4631,6 @@
         "dhcpOptions": {
           "$ref": "#/definitions/LogicalNetworkPropertiesDhcpOptions",
           "description": "DhcpOptions contains an array of DNS servers available to VMs deployed in the logical network. Standard DHCP option for a subnet overrides logical network DHCP options."
-        },
-        "networkSecurityGroup": {
-          "$ref": "#/definitions/NetworkSecurityGroup",
-          "description": "NetworkSecurityGroup - Network Security Group attached to the logical network."
         },
         "subnets": {
           "type": "array",
@@ -5144,11 +5140,11 @@
     },
     "NetworkSecurityGroupResourceReference": {
       "type": "object",
-      "description": "IPConfigurationReference - Describes a IPConfiguration under the virtual network",
+      "description": "Network Security Group attached to the logical network",
       "properties": {
         "id": {
           "type": "string",
-          "description": "TODO"
+          "description": "The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/..."
         }
       }
     },

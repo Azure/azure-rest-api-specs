@@ -515,9 +515,6 @@ model LogicalNetworkProperties {
   @doc("DhcpOptions contains an array of DNS servers available to VMs deployed in the logical network. Standard DHCP option for a subnet overrides logical network DHCP options.")
   dhcpOptions?: LogicalNetworkPropertiesDhcpOptions;
 
-  @doc("NetworkSecurityGroup - Network Security Group attached to the logical network.")
-  networkSecurityGroup?: NetworkSecurityGroup;
-
   @doc("Subnet - list of subnets under the logical network")
   subnets?: Subnet[];
 
@@ -583,9 +580,9 @@ model SubnetPropertiesFormatIpConfigurationReferencesItem {
   id?: string;
 }
 
-@doc("IPConfigurationReference - Describes a IPConfiguration under the virtual network")
-model NetworkSecurityGroupResourceReference { //TODO - Split resource references or keep generic?
-  @doc("TODO")
+@doc("Network Security Group attached to the logical network")
+model NetworkSecurityGroupResourceReference {
+  @doc("The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/...")
   id?: string;
 }
 
@@ -671,11 +668,11 @@ model IPPoolInfo {
 model NetworkSecurityGroupProperties {
   @doc("A collection of references to network interfaces that are currently using this NSG.")
   @visibility("read")
-  networkInterfaces?: NetworkInterfaceReference[]; //TODO REF ID
+  networkInterfaces?: NetworkInterfaceReference[];
 
   @doc("A collection of references to subnets that are currently using this NSG")
   @visibility("read")
-  subnets?: SubnetReference[]; //TODO REF ID
+  subnets?: SubnetReference[];
 
   @doc("The resource GUID property of the network security group resource.")
   @visibility("read")
@@ -727,7 +724,7 @@ model SecurityRuleProperties {
   @doc("The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic.")
   direction: SecurityRuleDirection;
 
-  @doc("Provisioning state of the SR") //TODO - Find accurate provision status
+  @doc("Provisioning state of the SR")
   @visibility("read")
   provisioningState?: ProvisioningStateEnum;
 }
@@ -786,7 +783,7 @@ model IPConfigurationProperties {
   subnet?: IPConfigurationPropertiesSubnet;
 
   @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
-  networkSecurityGroup?: NetworkSecurityGroup;
+  networkSecurityGroup?: NetworkSecurityGroupResourceReference;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
