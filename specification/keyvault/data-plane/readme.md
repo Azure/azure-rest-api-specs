@@ -33,7 +33,7 @@ tag: package-preview-7.6-preview.1
 
 These settings apply only when `--tag=package-preview-7.6-preview.1` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-7.6-preview.1'
+``` yaml $(tag) == 'package-preview-7.6-preview.1'
 input-file:
   - Microsoft.KeyVault/preview/7.6-preview.1/backuprestore.json
   - Microsoft.KeyVault/preview/7.6-preview.1/certificates.json
@@ -46,11 +46,27 @@ input-file:
   - Microsoft.KeyVault/preview/7.6-preview.1/storage.json
 ```
 
+### Tag: package-7.5
+
+These settings apply only when `--tag=package-7.5` is specified on the command line.
+
+``` yaml $(tag) == 'package-7.5'
+input-file:
+  - Microsoft.KeyVault/stable/7.5/backuprestore.json
+  - Microsoft.KeyVault/stable/7.5/certificates.json
+  - Microsoft.KeyVault/stable/7.5/common.json
+  - Microsoft.KeyVault/stable/7.5/keys.json
+  - Microsoft.KeyVault/stable/7.5/rbac.json
+  - Microsoft.KeyVault/stable/7.5/secrets.json
+  - Microsoft.KeyVault/stable/7.5/securitydomain.json
+  - Microsoft.KeyVault/stable/7.5/settings.json
+  - Microsoft.KeyVault/stable/7.5/storage.json
+```
 ### Tag: package-preview-7.5-preview.1
 
 These settings apply only when `--tag=package-preview-7.5-preview.1` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-7.5-preview.1'
+``` yaml $(tag) == 'package-preview-7.5-preview.1'
 input-file:
   - Microsoft.KeyVault/preview/7.5-preview.1/backuprestore.json
   - Microsoft.KeyVault/preview/7.5-preview.1/certificates.json
