@@ -11,7 +11,6 @@ namespace Client;
   name: "ModelClient",
   service: ModelInference,
 })
-
 interface ModelClient {
   getChatCompletions is ModelInference.getChatCompletions;
 }

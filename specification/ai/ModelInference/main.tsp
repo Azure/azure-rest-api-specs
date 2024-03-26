@@ -30,4 +30,3 @@ enum Versions {
   @doc("The 2024-04-01-preview version of the ModelInference service.")
   v2024_04_01_Preview: "2024-04-01-preview",
 }
-
