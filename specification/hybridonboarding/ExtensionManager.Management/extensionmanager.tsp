@@ -88,7 +88,7 @@ model ExtensionObject {
   @doc("Name of the extension")
   name: string;
 
-  @doc("List of custom locations associated with the extension.")
+  @doc("List of custom locations associated with the extension. All entries will be unique.")
   @visibility("read")
   customLocations?: string[];
 
