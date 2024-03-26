@@ -180,11 +180,6 @@
             "$ref": "#/parameters/DataCollectionEndpointNameParameter"
           },
           {
-            "in": "header",
-            "name": "x-ms-skip-dns-provisioning",
-            "type": "boolean"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -199,6 +194,12 @@
         "responses": {
           "200": {
             "description": "Data collection endpoint was successfully updated",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionEndpointResource"
+            }
+          },
+          "201": {
+            "description": "Data collection endpoint was successfully created",
             "schema": {
               "$ref": "#/definitions/DataCollectionEndpointResource"
             }
@@ -425,7 +426,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "KnownNetworkRuleSetPublicNetworkAccess",
+            "name": "KnownPublicNetworkAccessOptions",
             "modelAsString": true
           }
         }
@@ -461,6 +462,7 @@
             "Updating",
             "Deleting",
             "Succeeded",
+            "Canceled",
             "Failed"
           ],
           "type": "string",
@@ -478,22 +480,14 @@
         "activeLocation": {
           "description": "Active location where data flow will occur.",
           "type": "string",
-          "readOnly": true,
-          "example": "East US",
-          "x-ms-mutability": [
-            "read"
-          ]
+          "example": "East US"
         },
         "locations": {
           "description": "Locations that are configured for failover.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/LocationSpec"
-          },
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+          }
         }
       }
     },
@@ -582,6 +576,7 @@
             "Updating",
             "Deleting",
             "Succeeded",
+            "Canceled",
             "Failed"
           ],
           "type": "string",
