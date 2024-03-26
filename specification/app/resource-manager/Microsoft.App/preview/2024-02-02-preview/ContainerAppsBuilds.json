@@ -209,7 +209,7 @@
         "preBuildSteps": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PreBuildStep"
+            "$ref": "./CommonDefinitions.json#/definitions/PreBuildStep"
           },
           "x-ms-identifiers": [],
           "description": "List of steps to perform before the build.",
@@ -232,7 +232,7 @@
           "readOnly": true
         },
         "destinationContainerRegistry": {
-          "$ref": "#/definitions/ContainerRegistryWithCustomImage",
+          "$ref": "./CommonDefinitions.json#/definitions/ContainerRegistryWithCustomImage",
           "description": "Container registry that the final image will be uploaded to.",
           "readOnly": true
         },
@@ -305,76 +305,6 @@
       },
       "readOnly": true
     },
-    "ContainerRegistryWithCustomImage": {
-      "type": "object",
-      "properties": {
-        "server": {
-          "type": "string",
-          "description": "Login server of the container registry that the final image should be uploaded to.",
-          "readOnly": true
-        },
-        "image": {
-          "type": "string",
-          "description": "Full name that the final image should be uploaded as, including both image name and tag.",
-          "readOnly": true
-        }
-      },
-      "description": "Container registry that the final image will be uploaded to.",
-      "required": [
-        "server"
-      ]
-    },
-    "HttpGet": {
-      "type": "object",
-      "properties": {
-        "url": {
-          "type": "string",
-          "description": "URL to make HTTP GET request against.",
-          "readOnly": true
-        },
-        "fileName": {
-          "type": "string",
-          "description": "Name of the file that the request should be saved to.",
-          "readOnly": true
-        },
-        "headers": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "List of headers to send with the request.",
-          "readOnly": true
-        }
-      },
-      "description": "Model representing a http get request.",
-      "required": [
-        "url"
-      ]
-    },
-    "PreBuildStep": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Description of the pre-build step.",
-          "readOnly": true
-        },
-        "scripts": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "List of custom commands to run.",
-          "readOnly": true
-        },
-        "httpGet": {
-          "$ref": "#/definitions/HttpGet",
-          "description": "Http get request to send before the build.",
-          "x-ms-identifiers": []
-        }
-      },
-      "description": "Model representing a pre-build step."
-    },
     "BuildProvisioningState": {
       "type": "string",
       "description": "Resource instance provisioning state.",
@@ -411,7 +341,8 @@
       "description": "Name of the Container App the Build is associated.",
       "required": true,
       "type": "string",
-      "pattern": "^[-\\w\\._\\(\\)]+$"
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "x-ms-parameter-location": "method"
     }
   }
 }
