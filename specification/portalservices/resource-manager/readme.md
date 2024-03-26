@@ -27,15 +27,44 @@ These are the global settings for the portal.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-01-01-preview
+tag: package-2024-03-01-preview
 ```
-### Tag: package-2022-04-01-preview
 
-These settings apply only when `--tag=package-2022-04-01-preview` is specified on the command line.
+### Tag: package-2024-03-01-preview
 
-``` yaml $(tag) == 'package-2022-04-01-preview'
+These settings apply only when `--tag=package-2024-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-03-01-preview'
 input-file:
-  - Microsoft.PortalServices/extensions/preview/2022-04-01-preview/extensions.json
+  - Microsoft.PortalServices/dashboards/preview/2024-01-01-preview/dashboards.json
+  - Microsoft.PortalServices/extensions/preview/2024-03-01-preview/extensions.json
+```
+
+### Tag: package-2024-01-01-preview
+
+These settings apply only when `--tag=package-2024-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-01-01-preview'
+input-file:
+  - Microsoft.PortalServices/dashboards/preview/2024-01-01-preview/dashboards.json
+```
+
+### Tag: package-2023-10-01-preview
+
+These settings apply only when `--tag=package-2023-10-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-10-01-preview'
+input-file:
+  - Microsoft.PortalServices/dashboards/preview/2023-10-01-preview/dashboards.json
+```
+
+### Tag: package-2023-08-01-preview
+
+These settings apply only when `--tag=package-2023-08-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-08-01-preview'
+input-file:
+  - Microsoft.PortalServices/dashboards/preview/2023-08-01-preview/dashboards.json
 ```
 
 ### Tag: package-2023-01-01-preview
@@ -47,34 +76,13 @@ input-file:
   - Microsoft.PortalServices/extensions/preview/2023-01-01-preview/extensions.json
 ```
 
-### Tag: package-2023-08-01-preview
+### Tag: package-2022-04-01-preview
 
-These settings apply only when `--tag=package-2023-08-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2022-04-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-08-01-preview'
+``` yaml $(tag) == 'package-2022-04-01-preview'
 input-file:
-  - Microsoft.PortalServices/dashboards/preview/2023-08-01-preview/dashboards.json
-  - Microsoft.PortalServices/extensions/preview/2023-01-01-preview/extensions.json
-```
-
-### Tag: package-2023-10-01-preview
-
-These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
-
-``` yaml $(tag) == 'package-2023-10-01-preview'
-input-file:
-  - Microsoft.PortalServices/dashboards/preview/2023-10-01-preview/dashboards.json
-  - Microsoft.PortalServices/extensions/preview/2023-01-01-preview/extensions.json
-```
-
-### Tag: package-2024-01-01-preview
-
-These settings apply only when `--tag=package-2024-01-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-01-01-preview'
-input-file:
-  - Microsoft.PortalServices/dashboards/preview/2024-01-01-preview/dashboards.json
-  - Microsoft.PortalServices/extensions/preview/2023-01-01-preview/extensions.json
+  - Microsoft.PortalServices/extensions/preview/2022-04-01-preview/extensions.json
 ```
 
 ---
