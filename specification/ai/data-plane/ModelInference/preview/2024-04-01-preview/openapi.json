@@ -329,39 +329,6 @@
       ],
       "x-ms-discriminator-value": "text"
     },
-    "ChatMessageContentItem": {
-      "type": "object",
-      "description": "An abstract representation of a structured content item within a chat message.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The discriminated object type."
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ]
-    },
-    "ChatMessageTextContentItem": {
-      "type": "object",
-      "description": "A structured chat content item containing plain text.",
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "The content of the message."
-        }
-      },
-      "required": [
-        "text"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChatMessageContentItem"
-        }
-      ],
-      "x-ms-discriminator-value": "text"
-    },
     "ChatRequestAssistantMessage": {
       "type": "object",
       "description": "A request chat message representing response or action from the assistant.",
@@ -428,6 +395,7 @@
       "description": "A request chat message representing user input to the assistant.",
       "properties": {
         "content": {
+          "type": "string",
           "description": "The contents of the user message, with available input types varying by selected model."
         },
         "name": {

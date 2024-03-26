@@ -8,25 +8,6 @@ using TypeSpec.Versioning;
 
 namespace ModelInference;
 
-#suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
-alias ChatMessageContent = string | ChatMessageContentItem[];
-
-@doc("An abstract representation of a structured content item within a chat message.")
-@discriminator("type")
-model ChatMessageContentItem {
-  @doc("The discriminated object type.")
-  type: string;
-}
-
-@doc("A structured chat content item containing plain text.")
-model ChatMessageTextContentItem extends ChatMessageContentItem {
-  @doc("The discriminated object type: always 'text' for this type.")
-  type: "text";
-
-  @doc("The content of the message.")
-  text: string;
-}
-
 @discriminator("role")
 @doc("An abstract representation of a chat message as provided in a request.")
 model ChatRequestMessage {
@@ -55,7 +36,7 @@ model ChatRequestUserMessage extends ChatRequestMessage {
   role: ChatRole.user;
 
   @doc("The contents of the user message, with available input types varying by selected model.")
-  content: ChatMessageContent;
+  content: string;
 
   @doc("An optional name for the participant.")
   name?: string;

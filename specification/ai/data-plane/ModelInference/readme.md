@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2024-04-01-preview` is specified o
 input-file:
   - preview/2024-04-01-preview/openapi.json
 ```
-
+<!--
 ---
 
 # Code Generation
@@ -80,3 +80,4 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+-->
