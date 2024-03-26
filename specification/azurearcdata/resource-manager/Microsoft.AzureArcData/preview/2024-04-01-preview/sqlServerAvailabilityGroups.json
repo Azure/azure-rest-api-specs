@@ -493,24 +493,7 @@
           "description": "Mirroring endpoint URL of availability group replica"
         },
         "endpointAuthenticationMode": {
-          "type": "string",
-          "description": "Permitted authentication modes for the mirroring endpoint.",
-          "enum": [
-            "WINDOWS_NTLM",
-            "WINDOWS_KERBEROS",
-            "WINDOWS_NEGOTIATE",
-            "CERTIFICATE",
-            "WINDOWS_NTLM_CERTIFICATE",
-            "WINDOWS_KERBEROS_CERTIFICATE",
-            "WINDOWS_NEGOTIATE_CERTIFICATE",
-            "CERTIFICATE_WINDOWS_NTLM",
-            "CERTIFICATE_WINDOWS_KERBEROS",
-            "CERTIFICATE_WINDOWS_NEGOTIATE"
-          ],
-          "x-ms-enum": {
-            "name": "arcSqlServerEndpointAuthMode",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ArcSqlEndpointAuthenticationMode"
         },
         "certificateName": {
           "type": "string",
@@ -900,24 +883,7 @@
           "description": "Database mirroring endpoint URL of availability group replica"
         },
         "endpointAuthenticationMode": {
-          "type": "string",
-          "description": "Permitted authentication modes for the mirroring endpoint.",
-          "enum": [
-            "WINDOWS_NTLM",
-            "WINDOWS_KERBEROS",
-            "WINDOWS_NEGOTIATE",
-            "CERTIFICATE",
-            "WINDOWS_NTLM_CERTIFICATE",
-            "WINDOWS_KERBEROS_CERTIFICATE",
-            "WINDOWS_NEGOTIATE_CERTIFICATE",
-            "CERTIFICATE_WINDOWS_NTLM",
-            "CERTIFICATE_WINDOWS_KERBEROS",
-            "CERTIFICATE_WINDOWS_NEGOTIATE"
-          ],
-          "x-ms-enum": {
-            "name": "arcSqlServerEndpointAuthMode",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ArcSqlEndpointAuthenticationMode"
         },
         "certificateName": {
           "type": "string",
@@ -1292,6 +1258,26 @@
           "description": "Network port for the listener. Default is 1433.",
           "format": "int32"
         }
+      }
+    },
+    "ArcSqlEndpointAuthenticationMode": {
+      "type": "string",
+      "description": "Permitted authentication modes for the mirroring endpoint.",
+      "enum": [
+        "WINDOWS_NTLM",
+        "WINDOWS_KERBEROS",
+        "WINDOWS_NEGOTIATE",
+        "CERTIFICATE",
+        "WINDOWS_NTLM_CERTIFICATE",
+        "WINDOWS_KERBEROS_CERTIFICATE",
+        "WINDOWS_NEGOTIATE_CERTIFICATE",
+        "CERTIFICATE_WINDOWS_NTLM",
+        "CERTIFICATE_WINDOWS_KERBEROS",
+        "CERTIFICATE_WINDOWS_NEGOTIATE"
+      ],
+      "x-ms-enum": {
+        "name": "arcSqlServerEndpointAuthMode",
+        "modelAsString": true
       }
     }
   },
