@@ -36,7 +36,7 @@ union SpeechVoice {
 @added(ServiceApiVersions.v2024_02_15_Preview)
 union SpeechGenerationResponseFormat {
   string,
-  
+
   @doc("Use MP3 as the audio output format. MP3 is the default, general-purpose format.")
   mp3: "mp3",
 
