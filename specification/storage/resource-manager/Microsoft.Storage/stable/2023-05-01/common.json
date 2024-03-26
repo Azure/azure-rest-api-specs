@@ -207,6 +207,156 @@
           "description": "List of abbreviated permissions."
         }
       }
+    },
+    "StorageTaskReportSummary": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageTaskReportInstance"
+          },
+          "x-ms-identifiers": [],
+          "description": "Gets storage tasks run result summary."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Request URL that can be used to query next page of storage task run results summary. Returned when the number of run instances and summary reports exceed maximum page size.",
+          "readOnly": true
+        }
+      },
+      "description": "Fetch Storage Tasks Run Summary."
+    },
+    "StorageTaskReportInstance": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageTaskReportProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Storage Tasks run report instance"
+    },
+    "StorageTaskReportProperties": {
+      "type": "object",
+      "properties": {
+        "taskAssignmentId": {
+          "readOnly": true,
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts/storageTaskAssignments"
+              }
+            ]
+          },
+          "description": "Represents the Storage Task Assignment Id associated with the storage task that provided an execution context."
+        },
+        "storageAccountId": {
+          "readOnly": true,
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
+          },
+          "description": "Represents the Storage Account Id where the storage task definition was applied and executed."
+        },
+        "startTime": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Start time of the run instance. Filter options such as startTime gt '2023-06-26T20:51:24.4494016Z' and other comparison operators can be used as described for DateTime properties in https://learn.microsoft.com/en-us/rest/api/storageservices/querying-tables-and-entities#supported-comparison-operators"
+        },
+        "finishTime": {
+          "readOnly": true,
+          "type": "string",
+          "description": "End time of the run instance. Filter options such as startTime gt '2023-06-26T20:51:24.4494016Z' and other comparison operators can be used as described for DateTime properties in https://learn.microsoft.com/en-us/rest/api/storageservices/querying-tables-and-entities#supported-comparison-operators"
+        },
+        "objectsTargetedCount": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Total number of objects that meet the condition as defined in the storage task assignment execution context. Filter options such as objectsTargetedCount gt 50 and other comparison operators can be used as described for Numerical properties in https://learn.microsoft.com/en-us/rest/api/storageservices/querying-tables-and-entities#supported-comparison-operators"
+        },
+        "objectsOperatedOnCount": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Total number of objects that meet the storage tasks condition and were operated upon. Filter options such as objectsOperatedOnCount ge 100 and other comparison operators can be used as described for Numerical properties in https://learn.microsoft.com/en-us/rest/api/storageservices/querying-tables-and-entities#supported-comparison-operators"
+        },
+        "objectFailedCount": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Total number of objects where task operation failed when was attempted. Filter options such as objectFailedCount eq 0 and other comparison operators can be used as described for Numerical properties in https://learn.microsoft.com/en-us/rest/api/storageservices/querying-tables-and-entities#supported-comparison-operators"
+        },
+        "objectsSucceededCount": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Total number of objects where task operation succeeded when was attempted.Filter options such as objectsSucceededCount gt 150 and other comparison operators can be used as described for Numerical properties in https://learn.microsoft.com/en-us/rest/api/storageservices/querying-tables-and-entities#supported-comparison-operators"
+        },
+        "runStatusError": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Well known Azure Storage error code that represents the error encountered during execution of the run instance."
+        },
+        "runStatusEnum": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "InProgress",
+            "Finished"
+          ],
+          "x-ms-enum": {
+            "name": "RunStatusEnum",
+            "modelAsString": true
+          },
+          "description": "Represents the status of the execution."
+        },
+        "summaryReportPath": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Full path to the verbose report stored in the reporting container as specified in the assignment execution context for the storage account. "
+        },
+        "taskId": {
+          "readOnly": true,
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.StorageActions/storageTasks"
+              }
+            ]
+          },
+          "description": "Storage Task Arm Id."
+        },
+        "taskVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Storage Task Version"
+        },
+        "runResult": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "RunResult",
+            "modelAsString": true
+          },
+          "description": "Represents the overall result of the execution for the run instance"
+        }
+      },
+      "description": "Storage task execution report for a run instance."
     }
   }
 }
