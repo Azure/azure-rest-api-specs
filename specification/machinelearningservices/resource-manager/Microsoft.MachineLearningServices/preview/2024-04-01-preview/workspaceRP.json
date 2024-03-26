@@ -1484,6 +1484,8 @@
           },
           {
             "in": "query",
+            "description": "Whether the endpoint resource will be expand to include deployment information, e.g. $expand=deployments",
+            "required": false,
             "name": "$expand",
             "type": "string"
           }
@@ -4998,9 +5000,11 @@
       "type": "object",
       "properties": {
         "blocking": {
+          "description": "If blocking would occur.",
           "type": "boolean"
         },
         "blocklistName": {
+          "description": "Name of ContentFilter.",
           "type": "string"
         }
       }
@@ -5013,12 +5017,15 @@
           "$ref": "#/definitions/AllowedContentLevel"
         },
         "blocking": {
+          "description": "If blocking would occur.",
           "type": "boolean"
         },
         "enabled": {
+          "description": "If the ContentFilter is enabled.",
           "type": "boolean"
         },
         "name": {
+          "description": "Name of ContentFilter.",
           "type": "string"
         },
         "source": {
@@ -5056,6 +5063,7 @@
       "type": "object",
       "properties": {
         "basePolicyName": {
+          "description": "Name of the base Content Filters.",
           "type": "string"
         },
         "completionBlocklists": {
