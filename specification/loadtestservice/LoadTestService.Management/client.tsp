@@ -11,14 +11,16 @@ using Azure.ResourceManager;
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Customizations;
 
-@@clientName(LoadTests.update::parameters.properties,
+@@clientName(LoadTests.updateLoadtest::parameters.properties,
   "LoadTestResourcePatchRequestBody"
 );
 @@clientName(Quotas.checkAvailability::parameters.body, "QuotaBucketRequest");
-@@clientName(LoadTests.createOrUpdate::parameters.resource, "LoadTestResource");
+@@clientName(LoadTests.createOrUpdateLoadtest::parameters.resource,
+  "LoadTestResource"
+);
 
 @client({
-  name: "LoadTestClient",
+  name: "LoadTestMgmtClient",
   service: Microsoft.LoadTestService,
 })
 @armResourceOperations
@@ -27,36 +29,20 @@ interface LoadTests {
 
   listByResourceGroup is Microsoft.LoadTestService.LoadTests.listByResourceGroup;
 
-  get is Microsoft.LoadTestService.LoadTests.get;
+  getLoadtest is Microsoft.LoadTestService.LoadTests.get;
 
-  createOrUpdate is Microsoft.LoadTestService.LoadTests.createOrUpdate;
+  createOrUpdateLoadtest is Microsoft.LoadTestService.LoadTests.createOrUpdate;
 
-  update is Microsoft.LoadTestService.LoadTests.update;
+  updateLoadtest is Microsoft.LoadTestService.LoadTests.update;
 
-  delete is Microsoft.LoadTestService.LoadTests.delete;
+  deleteLoadtest is Microsoft.LoadTestService.LoadTests.delete;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Operation id already published"
   outboundNetworkDependenciesEndpoints is Microsoft.LoadTestService.LoadTests.outboundNetworkDependenciesEndpoints;
-}
 
-@client({
-  name: "QuotasClient",
-  service: Microsoft.LoadTestService,
-})
-@armResourceOperations
-interface Quotas {
-  get is Microsoft.LoadTestService.Quotas.get;
+  getQuota is Microsoft.LoadTestService.Quotas.get;
 
-  list is Microsoft.LoadTestService.Quotas.list;
+  listQuota is Microsoft.LoadTestService.Quotas.list;
 
-  checkAvailability is Microsoft.LoadTestService.Quotas.checkAvailability;
-}
-
-@client({
-  name: "OperationsClient",
-  service: Microsoft.LoadTestService,
-})
-@armResourceOperations
-interface Operations {
-  list is Microsoft.LoadTestService.Operations.list;
+  checkAvailabilityQuota is Microsoft.LoadTestService.Quotas.checkAvailability;
 }

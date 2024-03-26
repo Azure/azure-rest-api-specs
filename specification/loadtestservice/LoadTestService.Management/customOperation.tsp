@@ -1,5 +1,4 @@
 import "./models.tsp";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;

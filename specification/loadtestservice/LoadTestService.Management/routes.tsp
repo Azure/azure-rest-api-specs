@@ -1,6 +1,5 @@
 import "./models.tsp";
 import "./customOperation.tsp";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
