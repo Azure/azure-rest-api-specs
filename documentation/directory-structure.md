@@ -9,46 +9,73 @@ The `profile` folder contains the profiles' definition files. The profile defini
 ## specification
 
 The `specification` folder is the root folder for all TypeSpec and OpenAPI specs 
-and related documents. Each child of `specification` corresponds to a `specification family`.
+and related documents. Each child of `specification` corresponds to a `resource provider`.
 
-## specification family
+## resource provider
 
-Each child folder of a `specification` folder is root of given `specification family`.
+Each child folder of a `specification` folder is a root of given `resource provider`.
 
-Example specification family root folder: [`specification/containerservice`].
+Example resource provider families root folders:
 
-Given specification family may have the following sub-folders:
+- [`specification/containerservice`]
+- [`specification/confidentialledger`]
 
-- `resource-provider`: TODO
-- `data-plane`: TODO
+Given resource provider `rp` has following structure,
+for multiple values of `rpnamespace` (`rpnamespace` stands for **resource provider namespace**, see relevant section):
+
+- `specification/rp/rpnamespace`
+- `specification/rp/data-plane/rpnamespace`
+- `specification/rp/resource-manager/rpnamespace`
+
+The `specification/rp/rpnamespace` directories contain TypeSpec sources.  
+To learn about TypeSpec, see [aka.ms/azsdk/typespec] and [aka.ms/typespec].  
+To learn these directories structure, see [TypeSpec directory structure] article.  
+The rest of this article pertains to the `specficiation` directory structure 
+**excluding** the contents of `specification/rp/rpnamespace`.
 
 
-1. **{RP-Name} Folders** - each resource provider should have at least one separate folder.
-    > If multiple folders are required? It depends on the following considerations:
-    >
-    > - An RP folder leads to a separate SDK package. Is it expected to have separate SDK packages for different service/component entities?
-    > - Service/component entities in one folder share the same versioning cycle. Can service/component entities in one folder share the same version label, and upgrade together in the future?
-    > - Specification files and AutoRest configuration files in one RP folder are better to refer to files in the same RP folder. Note: Entity type definition that needs to be referred cross RP folders should be placed and maintained under the folder [**common-types**](https://github.com/Azure/azure-rest-api-specs#common-types).
-    > - For more considerations, you may consult the reviewer in API design review. To initiate the review, Please submit an [Azure SDK intake questionnaire](https://aka.ms/sdk-apex).
+## `resource-manager` and `data-plane` folders
 
-    RP folders may contain resource manager or data plane TypeSpec "specs". TypeSpec is a language for describing cloud service APIs and generating other API description languages, client and service code, documentation, and other assets. Explore more by visiting the tutorial in the TypeSpec repo: [TypeSpec tutorial](http://aka.ms/cadlTutorial). You can also ask questions for providing feedback in the internal Teams channel [TypeSpec Discussion](https://teams.microsoft.com/l/channel/19%3a906c1efbbec54dc8949ac736633e6bdf%40thread.skype/Cadl%2520Discussion%2520%25F0%259F%2590%25AE?groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47).
+The OpenAPI specs in `specification/rp/resource-manager` pertain to ARM resources while
+the OpenAPI specs in `specification/rp/data-plane` pertain to everything else.
 
-    For more information about the structure of TypeSpec files in the repo see [TypeSpec repo structure](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/typespec-structure-guidelines.md).
-   
-2. **'resource-manager' and 'data-plane' Folders**: the RPs can put specs in one of two categories: `resource-manager` (for ARM resources) and `data-plane` (for everything else). There should be an AutoRest configuration file (`readme.md`) for the RP inside both of these folders when present.
+There should be an AutoRest configuration file (`readme.md`) at the root of each
+of these directories when present.
 
-3. **'Microsoft.{ARMNamespace}' Folders**: the folders are only required under the 'resource-manager' folder, which means only management-plane API specs require to have ARM Namespace in the file path. For ARM Namespace and ARM onboarding, please refer to the ARM wiki of [RP Onboarding](https://armwiki.azurewebsites.net/rp_onboarding/process/onboarding.html#0-on-boarding-meeting).
+If TypeSpec sources are present, OpenAPI specs in the `resource-manager`
+and `data-plane` folders are generated from TypeSpec sources.
 
-4. **'preview' and 'stable' Folders**: This maps to the service/component lifecycle stage: Preview and GA. For example, if a service is in Preview stage, no matter Private Preview or Public Preview, the API specs of the service should be placed in the `preview` folder. If the service is GAed, but a component is in preview, then the API version contains the preview component entity should be placed in the `preview` folder as well.  The `stable` folder should contain API versions of a GAed service and all GAed components.
+## Resource provider namespace (`rpnamespace`) folders
+
+Each `rpnamespace` folder (whether in `specification/rp`, in `specification/rp/data-plane` or `specification/rp/resource-manager`) corresponds to a resource provider namespace. 
+
+Its name is of form `Microsoft.<ARMNamespace>`. Strictly speaking specs in `data-plane`
+folder are not required to be organized by `rpnamespace`.
+
+For ARM Namespace and ARM onboarding, please refer to the ARM wiki of [RP Onboarding].
+
+## Resource provider namespace (`rpnamespace`) folders layout
+
+Each `rpnamespace` folder within `resource-manager` and `data-plane` may contain the following:
+
+`rpnamespace/stable/api_version`  
+`rpnamespace/preview/api_version`
+
+If the contents of `data-plane` folder are not organized by `rpnamespace`, we treat
+the `data-plane` folder itself as the "default namespace" for the purposes of describing
+the required layout.
+
+
+2. **'preview' and 'stable' Folders**: This maps to the service/component lifecycle stage: Preview and GA. For example, if a service is in Preview stage, no matter Private Preview or Public Preview, the API specs of the service should be placed in the `preview` folder. If the service is GAed, but a component is in preview, then the API version contains the preview component entity should be placed in the `preview` folder as well.  The `stable` folder should contain API versions of a GAed service and all GAed components.
 
     > How's the Azure Breaking Change Policy apply to API specs in `preview` and `stable` folders? In fact, it is more relevant to if the repo is public or private.
     > - API specs with components or resource types in Private Preview, or Limited Public Preview (behind [AFEC](https://armwiki.azurewebsites.net/rp_onboarding/afec/FeatureExposureControl.html) or managing visible subscriptions) are better to launch PR review in the private repository, aka., [azure-rest-api-specs-pr](https://github.com/Azure/azure-rest-api-specs-pr). And these API specs are free of breaking changes.
     >
     > - On the other hand, everything public in the main branch of the public repository, aka., [azure-rest-api-specs](https://github.com/Azure/azure-rest-api-specs), no matter in the `preview` folder or in the `stable` folder, should be treated as contract with Azure customers, must follow [Azure Breaking Changes Policy](http://aka.ms/AzBreakingChangesPolicy).
 
-5. **API Versions Folders**: this folder is the direct child of the `preview` or `stable` folder. This folder contains the REST API Specs, and the `examples` folder.
+3. **API Versions Folders**: this folder is the direct child of the `preview` or `stable` folder. This folder contains the REST API Specs, and the `examples` folder.
 
-6. **'examples' Folders**: the example folder will contain the x-ms-examples files. it will reside under the APIs or Resources' version folders as different APIs or Resource types version can have different examples.
+4. **'examples' Folders**: the example folder will contain the x-ms-examples files. it will reside under the APIs or Resources' version folders as different APIs or Resource types version can have different examples.
 
 > Note:  some general guidance for folder names, and file names under `specification`:
 >
@@ -169,4 +196,21 @@ Specification files and AutoRest configuration files in one RP folder are better
 
 Refer to [Resource-Management](https://github.com/Azure/azure-rest-api-specs/tree/main/specification/common-types/resource-management) common types for example.
 
+## FAQ
+
+### Are multiple RP folders required?
+
+If multiple folders are required? It depends on the following considerations:
+    
+- An RP folder leads to a separate SDK package. Is it expected to have separate SDK packages for different service/component entities?
+- Service/component entities in one folder share the same versioning cycle. Can service/component entities in one folder share the same version label, and upgrade together in the future?
+- Specification files and AutoRest configuration files in one RP folder are better to refer to files in the same RP folder. Note: Entity type definition that needs to be referred cross RP folders should be placed and maintained under the folder [**common-types**](https://github.com/Azure/azure-rest-api-specs#common-types).
+- For more considerations, you may consult the reviewer in API design review. To initiate the review, Please submit an [Azure SDK intake questionnaire](https://aka.ms/sdk-apex).
+
+
 [`specification/containerservice`]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/containerservice
+[`specification/confidentialledger`]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/confidentialledger
+[aka.ms/azsdk/typespec]: https://aka.ms/azsdk/typespec
+[aka.ms/typespec]: https://aka.ms/typespec
+[TypeSpec directory structure]: https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/typespec-structure-guidelines.md
+[RP Onboarding]: https://armwiki.azurewebsites.net/rp_onboarding/process/onboarding.html#0-on-boarding-meeting

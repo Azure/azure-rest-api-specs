@@ -20,7 +20,7 @@ External Contributors can read [Getting Started with OpenAPI Specifications](htt
 
 ## Directory Structure
 
-See [DirectoryStructure.md](./DirectoryStructure.md) for details on the directory structure of this repository.
+See [directory-structure.md](./documentation/directory-structure.md) for details on the directory structure of this repository.
 
 ## Next steps
 
