@@ -34,7 +34,7 @@ tag: package-preview-2024-05
 
 These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-02'
+```yaml $(tag) == 'package-preview-2024-05'
 input-file:
   - Microsoft.DocumentDB/preview/2024-05-15-preview/cosmos-db.json
   - Microsoft.DocumentDB/preview/2024-05-15-preview/dataTransferService.json
