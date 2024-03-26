@@ -108,23 +108,23 @@ else {
       if ($null -ne ${jsonContent}?["info"]?["x-typespec-generated"]) {
         LogInfo "  OpenAPI was generated from TypeSpec (contains '/info/x-typespec-generated')"
 
-        if ($file -match "specification/(?<specFamily>[^/]+)/") {
-          $specFamily = $Matches["specFamily"];
-          $tspConfigs = @(Get-ChildItem -Path (Join-Path $repoPath "specification" $specFamily) -Recurse -File
+        if ($file -match "specification/(?<rpFolder>[^/]+)/") {
+          $rpFolder = $Matches["rpFolder"];
+          $tspConfigs = @(Get-ChildItem -Path (Join-Path $repoPath "specification" $rpFolder) -Recurse -File
             | Where-Object { $_.Name -eq "tspconfig.yaml" })
 
           if ($tspConfigs) {
-            LogInfo "  Folder 'specification/$specFamily' contains $($tspConfigs.Count) file(s) named 'tspconfig.yaml'"
+            LogInfo "  Folder 'specification/$rpFolder' contains $($tspConfigs.Count) file(s) named 'tspconfig.yaml'"
           }
           else {
-            LogError ("OpenAPI was generated from TypeSpec, but folder 'specification/$specFamily' contains no files named 'tspconfig.yaml'." `
+            LogError ("OpenAPI was generated from TypeSpec, but folder 'specification/$rpFolder' contains no files named 'tspconfig.yaml'." `
               + "  The TypeSpec used to generate OpenAPI must be added to this folder.")
             LogJobFailure
             exit 1
           }
         }
         else {
-          LogError "Path to OpenAPI did not match expected regex.  Unable to extract spec family."
+          LogError "Path to OpenAPI did not match expected regex.  Unable to extract RP folder."
           LogJobFailure
           exit 1
         }
