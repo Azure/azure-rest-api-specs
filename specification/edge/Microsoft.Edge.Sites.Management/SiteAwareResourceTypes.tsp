@@ -11,30 +11,24 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Edge;
-/**
- * Displays all the resource types which support Sites.
- */
+
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+@doc("Displays all the resource types which support Sites.")
 @singleton("default")
 @tenantResource
 @includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  SiteAwareResourceTypesProperties
-)
+@Azure.ResourceManager.Private.armResourceInternal(SiteAwareResourceTypesProperties)
 model SiteAwareResourceTypes extends ProxyResourceBase {
-  /**
-   * Name of the resource
-   */
+  // TODO - There shouldn't be name field in here, it should contain
+  @doc("Name of the resource")
   @path
   @key("siteAwareResourceType")
   @segment("siteAwareResourceTypes")
   @visibility("read")
   name: string;
 
-  /**
-   * The properties for this resource type.
-   */
+  @doc("The properties for this resource type.")
   @extension("x-ms-client-flatten", true)
   properties?: SiteAwareResourceTypesProperties;
 }
@@ -42,15 +36,11 @@ model SiteAwareResourceTypes extends ProxyResourceBase {
 @armResourceOperations
 @projectedName("client", "SiteAwareResourceTypes")
 interface SiteAwareResourceTypesOperationGroup {
-  /**
-   * Get Site Aware Resource Types
-   */
+  @doc("Get operation on SiteAwareResourceTypes resource")
   get is ArmResourceRead<SiteAwareResourceTypes>;
 
-  /**
-   * List Singleton SiteAwareResourceTypes Object.
-   */
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
+  @doc("List operation on SiteAwareresourceTypes resource")
   @operationId("SiteAwareResourceTypes_List")
   list is ArmResourceListByParent<SiteAwareResourceTypes>;
 }
