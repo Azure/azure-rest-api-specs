@@ -1642,7 +1642,8 @@
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "#/definitions/AccountSku"
+          "$ref": "#/definitions/AccountSku",
+          "readOnly": true
         }
       }
     },
@@ -1741,7 +1742,8 @@
       "type": "object",
       "properties": {
         "accountStatus": {
-          "$ref": "#/definitions/AccountStatus"
+          "$ref": "#/definitions/AccountStatus",
+          "readOnly": true
         },
         "cloudConnectors": {
           "$ref": "#/definitions/CloudConnectors"
@@ -1768,7 +1770,8 @@
           "readOnly": true
         },
         "endpoints": {
-          "$ref": "#/definitions/AccountEndpoints"
+          "$ref": "#/definitions/AccountEndpoints",
+          "readOnly": true
         },
         "friendlyName": {
           "description": "Gets or sets the friendly name.",
@@ -1801,10 +1804,12 @@
           ]
         },
         "managedResources": {
-          "$ref": "#/definitions/ManagedResources"
+          "$ref": "#/definitions/ManagedResources",
+          "readOnly": true
         },
         "managedResourcesPublicNetworkAccess": {
           "description": "Gets or sets the public network access for managed resources",
+          "default": "NotSpecified",
           "enum": [
             "NotSpecified",
             "Enabled",
@@ -1977,8 +1982,7 @@
           "type": "object",
           "additionalProperties": {
             "type": "boolean"
-          },
-          "readOnly": true
+          }
         }
       }
     },
@@ -2345,7 +2349,8 @@
       "type": "object",
       "properties": {
         "error": {
-          "$ref": "#/definitions/ErrorModel"
+          "$ref": "#/definitions/ErrorModel",
+          "readOnly": true
         }
       }
     },
@@ -2954,7 +2959,8 @@
           "readOnly": true
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData"
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true
         },
         "type": {
           "description": "Gets or sets the type.",
@@ -3073,7 +3079,8 @@
           "readOnly": true
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData"
+          "$ref": "#/definitions/SystemData",
+          "readOnly": true
         },
         "tags": {
           "description": "Tags on the azure resource.",
@@ -3135,7 +3142,6 @@
           "items": {
             "$ref": "#/definitions/Usage"
           },
-          "readOnly": true,
           "x-ms-identifiers": []
         }
       }
