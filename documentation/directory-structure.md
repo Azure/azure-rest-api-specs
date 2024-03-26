@@ -56,7 +56,6 @@ To learn these directories structure, see [TypeSpec directory structure] article
 The rest of this article pertains to the `specification` directory structure 
 **excluding** the contents of `specification/rp/rpnamespace`.
 
-
 ## `resource-manager` and `data-plane` folders
 
 The OpenAPI specs in `specification/rp/resource-manager` pertain to ARM resources while
@@ -168,7 +167,6 @@ Examples of an existing services groups:
 - [`specification/compute`]
 - [`specification/workloads`]
 
-
 ## common-types
 
 Specification files and AutoRest configuration files in one resource provider folder are better to refer to files in the same resource provider folder. Entity type definition that can be shared cross resource providers or services should to be placed and maintained either under the folder [**common-types**](https://github.com/Azure/azure-rest-api-specs#common-types) under specification, or under **common-types** folder of service group folder structure. The former supports the entity type sharing cross rp folders, while the latter supports the entity type sharing cross components or services under the same rp folder.
@@ -186,7 +184,6 @@ It depends on the following considerations:
 - Service in one folder share the same versioning cycle. Can service in one folder share the same version label, and upgrade together in the future?
 - Specification files and AutoRest configuration files in one rp folder are better to refer to files in the same rp folder. Note: Entity type definition that needs to be referred cross rp folders should be placed and maintained under the folder [**common-types**](https://github.com/Azure/azure-rest-api-specs#common-types).
 - For more considerations, you may consult the reviewer in API design review. To initiate the review, Please submit an [Azure SDK intake questionnaire](https://aka.ms/sdk-apex).
-
 
 [`specification/containerservice`]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/containerservice
 [`specification/confidentialledger`]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/confidentialledger
