@@ -15,25 +15,17 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
-/**
- * Azure Edge Sites Resource Provider management API.
- */
+@doc("Azure Edge Sites Resource Provider management API.")
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is published as part of same RP in edge folder."
 @armProviderNamespace
-@service({
-  title: "Edge Sites",
-})
+@service({title: "Edge Sites"})
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Edge;
 
-/**
- * The available API versions.
- */
+@doc("Supported API Versions")
 enum Versions {
-  /**
-   * The 2024-02-01-preview API version.
-   */
+  @doc("API Version - 2024-02-01-preview")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_02_01_preview: "2024-02-01-preview",

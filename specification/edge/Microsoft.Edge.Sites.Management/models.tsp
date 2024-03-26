@@ -11,139 +11,47 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Edge;
 
-/**
- * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).
- */
-enum ManagedServiceIdentityType {
-  /**
-   * None.
-   */
-  None,
-
-  /**
-   * SystemAssigned.
-   */
-  SystemAssigned,
-
-  /**
-   * UserAssigned.
-   */
-  UserAssigned,
-
-  /**
-   * SystemAssigned,UserAssigned.
-   */
-  `SystemAssigned,UserAssigned`,
-}
-
-/**
- * Distinguishes whether RP is already supported or coming soon.
- */
-enum AvailabilityStatus {
-  /**
-   * RP is coming soon
-   */
-  ComingSoon,
-
-  /**
-   * RP is already supported
-   */
-  Supported,
-}
-
-/**
- * Site properties
- */
+@doc("Site properties")
 model SiteProperties {
-  /**
-   * Friendly name of site
-   */
+  @doc("displayName of Site resource")
   displayName?: string;
 
-  /**
-   * Description of site
-   */
+  @doc("Description of Site resource")
   description?: string;
 
-  /**
-   * AddressResourceId for site
-   */
+  @doc("AddressResource ArmId of Site resource")
   addressResourceId?: ResourceIdentifier<[
     {
       type: "Microsoft.EdgeOrder/addresses";
     }
   ]>;
 
-  /**
-   * The status of the last operation.
-   */
+  @doc("Provisioning state of last operation")
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
-/**
- * Common fields that are returned in the response for all Azure Resource Manager resources
- */
-model Resource {
-  /**
-   * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-   */
-  @visibility("read")
-  id?: ResourceIdentifier;
-
-  /**
-   * The name of the resource
-   */
-  @visibility("read")
-  name?: string;
-
-  /**
-   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
-   */
-  @visibility("read")
-  type?: string;
-
-  /**
-   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
-   */
-  @visibility("read")
-  systemData?: SystemData;
-}
-
-/**
- * The type used for update operations of the Site.
- */
+@doc("Site properties for Update operation")
 model SiteUpdate {
-  /**
-   * Identity of Sites resource
-   */
+  @doc("Identity of Sites resource")
   @extension("x-ms-client-flatten", true)
   identity?: ManagedServiceIdentity;
 
-  /**
-   * The updatable properties of the Site.
-   */
+  @doc("updatable properties of the Sites resource")
   @extension("x-ms-client-flatten", true)
   properties?: SiteUpdateProperties;
 }
 
-/**
- * The updatable properties of the Site.
- */
+
+@doc("updatable properties of the Sites resource")
 model SiteUpdateProperties {
-  /**
-   * Friendly name of site
-   */
+  @doc("displayName of Site resource")
   displayName?: string;
 
-  /**
-   * Description of site
-   */
+  @doc("Description of Site resource")
   description?: string;
 
-  /**
-   * AddressResourceId for site
-   */
+  @doc("AddressResource ArmId of Site resource")
   addressResourceId?: ResourceIdentifier<[
     {
       type: "Microsoft.EdgeOrder/addresses";
@@ -151,47 +59,40 @@ model SiteUpdateProperties {
   ]>;
 }
 
-/**
- * Properties of the SiteAwareResourceTypes resource type.
- */
+@doc("Properties of the SiteAwareResourceTypes resource type.")
 model SiteAwareResourceTypesProperties {
-  /**
-   * Details for each SiteAwareResourceType
-   */
+  @doc("Details for each SiteAwareResourceType")
   supportedResourceTypes?: SiteAwareResourceTypesDetails[];
 
-  /**
-   * The status of the last operation.
-   */
+  @doc("Provisioning state of last operation")
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
 
-/**
- * The properties and availability status of each resource type which recognizes Sites as an aggregation concept.
- */
+@doc("The properties and availability status of each resource type on which aggregations will be performed over Site.")
 model SiteAwareResourceTypesDetails {
-  /**
-   * Name to be displayed on portal.
-   */
+  @doc("Name of the resource-type")
   @visibility("read")
   displayName?: string;
 
-  /**
-   * Fully qualified name of the resource type.
-   */
+  @doc("fully qualified name of the resource-type")
   @visibility("read")
   resourceType?: string;
 
-  /**
-   * Distinguishes whether RP is already supported or coming soon.
-   */
+  @doc("Distinguishes whether RP is already Supported or ComingSoon")
   @visibility("read")
   availabilityStatus?: AvailabilityStatus;
 
-  /**
-   * Aggregation properties which are currently supported.
-   */
+  @doc("Aggregation properties for the resource-type")
   @visibility("read")
   supportedCapabilities?: string[];
+}
+
+@doc("ResourceType availability status")
+enum AvailabilityStatus {
+  @doc("Coming soon")
+  ComingSoon,
+
+  @doc("Supported")
+  Supported,
 }

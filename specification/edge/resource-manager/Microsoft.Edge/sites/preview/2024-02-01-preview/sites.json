@@ -631,7 +631,7 @@
   "definitions": {
     "AvailabilityStatus": {
       "type": "string",
-      "description": "Distinguishes whether RP is already supported or coming soon.",
+      "description": "ResourceType availability status",
       "enum": [
         "ComingSoon",
         "Supported"
@@ -643,12 +643,12 @@
           {
             "name": "ComingSoon",
             "value": "ComingSoon",
-            "description": "RP is coming soon"
+            "description": "Coming soon"
           },
           {
             "name": "Supported",
             "value": "Supported",
-            "description": "RP is already supported"
+            "description": "Supported"
           }
         ]
       }
@@ -734,42 +734,6 @@
         }
       }
     },
-    "ManagedServiceIdentityType": {
-      "type": "string",
-      "description": "Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).",
-      "enum": [
-        "None",
-        "SystemAssigned",
-        "UserAssigned",
-        "SystemAssigned,UserAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "ManagedServiceIdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "None."
-          },
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned",
-            "description": "SystemAssigned."
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned",
-            "description": "UserAssigned."
-          },
-          {
-            "name": "SystemAssigned,UserAssigned",
-            "value": "SystemAssigned,UserAssigned",
-            "description": "SystemAssigned,UserAssigned."
-          }
-        ]
-      }
-    },
     "ProvisioningState": {
       "type": "string",
       "description": "The ProvisioningState",
@@ -800,36 +764,6 @@
         ]
       },
       "readOnly": true
-    },
-    "Resource": {
-      "type": "object",
-      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\"",
-          "readOnly": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": []
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        }
-      }
     },
     "Site": {
       "type": "object",
@@ -873,26 +807,26 @@
     },
     "SiteAwareResourceTypesDetails": {
       "type": "object",
-      "description": "The properties and availability status of each resource type which recognizes Sites as an aggregation concept.",
+      "description": "The properties and availability status of each resource type on which aggregations will be performed over Site.",
       "properties": {
         "displayName": {
           "type": "string",
-          "description": "Name to be displayed on portal.",
+          "description": "Name of the resource-type",
           "readOnly": true
         },
         "resourceType": {
           "type": "string",
-          "description": "Fully qualified name of the resource type.",
+          "description": "fully qualified name of the resource-type",
           "readOnly": true
         },
         "availabilityStatus": {
           "$ref": "#/definitions/AvailabilityStatus",
-          "description": "Distinguishes whether RP is already supported or coming soon.",
+          "description": "Distinguishes whether RP is already Supported or ComingSoon",
           "readOnly": true
         },
         "supportedCapabilities": {
           "type": "array",
-          "description": "Aggregation properties which are currently supported.",
+          "description": "Aggregation properties for the resource-type",
           "items": {
             "type": "string"
           },
@@ -935,7 +869,7 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
+          "description": "Provisioning state of last operation",
           "readOnly": true
         }
       }
@@ -967,16 +901,16 @@
       "properties": {
         "displayName": {
           "type": "string",
-          "description": "Friendly name of site"
+          "description": "displayName of Site resource"
         },
         "description": {
           "type": "string",
-          "description": "Description of site"
+          "description": "Description of Site resource"
         },
         "addressResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "AddressResourceId for site",
+          "description": "AddressResource ArmId of Site resource",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -987,14 +921,14 @@
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation.",
+          "description": "Provisioning state of last operation",
           "readOnly": true
         }
       }
     },
     "SiteUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Site.",
+      "description": "Site properties for Update operation",
       "properties": {
         "identity": {
           "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentity",
@@ -1003,27 +937,27 @@
         },
         "properties": {
           "$ref": "#/definitions/SiteUpdateProperties",
-          "description": "The updatable properties of the Site.",
+          "description": "updatable properties of the Sites resource",
           "x-ms-client-flatten": true
         }
       }
     },
     "SiteUpdateProperties": {
       "type": "object",
-      "description": "The updatable properties of the Site.",
+      "description": "updatable properties of the Sites resource",
       "properties": {
         "displayName": {
           "type": "string",
-          "description": "Friendly name of site"
+          "description": "displayName of Site resource"
         },
         "description": {
           "type": "string",
-          "description": "Description of site"
+          "description": "Description of Site resource"
         },
         "addressResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "AddressResourceId for site",
+          "description": "AddressResource ArmId of Site resource",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -1036,7 +970,7 @@
     },
     "SiteUpdateUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Site.",
+      "description": "Site properties for Update operation",
       "properties": {
         "identity": {
           "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentityUpdate",
@@ -1045,14 +979,14 @@
         },
         "properties": {
           "$ref": "#/definitions/SiteUpdateProperties",
-          "description": "The updatable properties of the Site.",
+          "description": "updatable properties of the Sites resource",
           "x-ms-client-flatten": true
         }
       }
     },
     "Versions": {
       "type": "string",
-      "description": "The available API versions.",
+      "description": "Supported API Versions",
       "enum": [
         "2024-02-01-preview"
       ],
@@ -1063,7 +997,7 @@
           {
             "name": "v2024_02_01_preview",
             "value": "2024-02-01-preview",
-            "description": "The 2024-02-01-preview API version."
+            "description": "API Version - 2024-02-01-preview"
           }
         ]
       }
