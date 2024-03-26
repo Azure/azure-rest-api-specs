@@ -48,6 +48,9 @@ for multiple values of `rpnamespace` (`rpnamespace` stands for **resource provid
 - `specification/rp/data-plane/rpnamespace`
 - `specification/rp/resource-manager/rpnamespace`
 
+For a list of existing resource providers and their corresponding Azure services,
+consult the [resource provider list].
+
 ### TypeSpec sources
 
 The `specification/rp/rpnamespace` directories contain TypeSpec sources.  
@@ -188,6 +191,7 @@ It depends on the following considerations:
 [aka.ms/azsdk/pr-api-versions]: https://aka.ms/azsdk/pr-api-versions
 [aka.ms/azsdk/typespec]: https://aka.ms/azsdk/typespec
 [aka.ms/typespec]: https://aka.ms/typespec
+[resource provider list]: https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-services-resource-providers#match-resource-provider-to-service
 [RP Onboarding]: https://armwiki.azurewebsites.net/rp_onboarding/process/onboarding.html#0-on-boarding-meeting
 [TypeSpec directory structure]: https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/typespec-structure-guidelines.md
 [`specification/compute`]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/compute/resource-manager/Microsoft.Compute
