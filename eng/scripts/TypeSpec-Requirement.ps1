@@ -82,6 +82,7 @@ else {
   #   - specification/foo/data-plane/Foo/stable/2023-01-01/Foo.json
   #   - specification/foo/data-plane/Foo/bar/stable/2023-01-01/Foo.json
   #   - specification/foo/resource-manager/Microsoft.Foo/stable/2023-01-01/Foo.json
+  # - Doc: https://github.com/Azure/azure-rest-api-specs/blob/main/README.md#directory-structure
   foreach ($file in $filesToCheck) {
     LogInfo "Checking $file"
 
