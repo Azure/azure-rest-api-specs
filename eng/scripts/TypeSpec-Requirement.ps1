@@ -117,7 +117,7 @@ else {
             LogInfo "  Folder 'specification/$specFamily' contains $($tspConfigs.Count) file(s) named 'tspconfig.yaml'"
           }
           else {
-            LogError ("OpenAPI was generated from TypeSpec, but folder 'specification/$specFamily' contains no files name 'tspconfig.yaml'.\n" `
+            LogError ("OpenAPI was generated from TypeSpec, but folder 'specification/$specFamily' contains no files name 'tspconfig.yaml'." `
               + "  The TypeSpec used to generate OpenAPI must be added to this folder.")
             LogJobFailure
             exit 1
