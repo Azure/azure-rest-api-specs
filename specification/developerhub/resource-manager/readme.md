@@ -36,6 +36,13 @@ These settings apply only when `--tag=package-preview-2024-04` is specified on t
 ``` yaml $(tag) == 'package-preview-2024-04'
 input-file:
   - Microsoft.DevHub/preview/2024-04-01-preview/workflow.json
+suppressions:
+  - code: XmsPageableForListCalls
+    reason: False positive error for singleton resource Get API.
+    from: workflow.json
+  - code: AvoidAdditionalProperties
+    reason: Removing additionalProperties from the models will result in breaking changes.
+    from: workflow.json
 ```
 
 ### Tag: package-2023-08
@@ -95,3 +102,7 @@ See configuration in [readme.java.md](./readme.java.md)
 ## TypeScript
 
 See configuration in [readme.typescript.md](./readme.typescript.md)
+
+code: XmsPageableForListCalls
+    reason: False positive error as API Path does not match ARM Lint check formatting, requesting to suppress due to approval from reviewer.
+    from: diagnostic.json
