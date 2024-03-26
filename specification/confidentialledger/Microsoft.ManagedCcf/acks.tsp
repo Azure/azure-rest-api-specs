@@ -12,13 +12,14 @@ namespace Microsoft.ManagedCcf.Acks;
 @TypeSpec.Rest.resource("state-digests")
 model StateDigest {
   @doc("Identifier for member this stateDigest applies to.")
-  @visibility("query")
+  @visibility("read", "query")
   @key
   memberId: memberId;
 
   @doc("Hex-encoding of SHA-256 hash of the root of the service's merkle tree. This should be signed by a new member and submitted as an ACK to mark that member as Active.")
   @pattern("^[a-f0-9]{64}$")
-  digest: string;
+  @projectedName("csharp", "digest")
+  stateDigest: string;
 }
 
 interface StateDigests {
