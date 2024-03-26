@@ -467,7 +467,7 @@
         "tags": [
           "ResourceDetails"
         ],
-        "description": "List ResourceDetailsResource resources by Pool",
+        "description": "List ResourceDetailsObject resources by Pool",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -491,7 +491,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ResourceDetailsResourceListResult"
+              "$ref": "#/definitions/ResourceDetailsObjectListResult"
             }
           },
           "default": {
@@ -1020,12 +1020,12 @@
         ]
       }
     },
-    "ResourceDetailsResource": {
+    "ResourceDetailsObject": {
       "type": "object",
-      "description": "A ResourceDetailsResource",
+      "description": "A ResourceDetailsObject",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ResourceDetailsResourceProperties",
+          "$ref": "#/definitions/ResourceDetailsObjectProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -1040,15 +1040,15 @@
         }
       ]
     },
-    "ResourceDetailsResourceListResult": {
+    "ResourceDetailsObjectListResult": {
       "type": "object",
-      "description": "The response of a ResourceDetailsResource list operation.",
+      "description": "The response of a ResourceDetailsObject list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The ResourceDetailsResource items on this page",
+          "description": "The ResourceDetailsObject items on this page",
           "items": {
-            "$ref": "#/definitions/ResourceDetailsResource"
+            "$ref": "#/definitions/ResourceDetailsObject"
           }
         },
         "nextLink": {
@@ -1062,9 +1062,9 @@
         "value"
       ]
     },
-    "ResourceDetailsResourceProperties": {
+    "ResourceDetailsObjectProperties": {
       "type": "object",
-      "description": "Details of the ResourceDetailsResource.",
+      "description": "Details of the ResourceDetailsObject.",
       "properties": {
         "status": {
           "$ref": "#/definitions/ResourceStatus",

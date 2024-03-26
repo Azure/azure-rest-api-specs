@@ -293,9 +293,8 @@ interface Pools {
 }
 
 @parentResource(Pool)
-@doc("A ResourceDetailsResource")
-model ResourceDetailsResource
-  is ProxyResource<ResourceDetailsResourceProperties> {
+@doc("A ResourceDetailsObject")
+model ResourceDetailsObject is ProxyResource<ResourceDetailsObjectProperties> {
   @doc("The name of the resource.")
   @key("resourceName")
   @segment("resources")
@@ -305,8 +304,8 @@ model ResourceDetailsResource
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
-@doc("Details of the ResourceDetailsResource.")
-model ResourceDetailsResourceProperties {
+@doc("Details of the ResourceDetailsObject.")
+model ResourceDetailsObjectProperties {
   @doc("The status of the resource.")
   status: ResourceStatus;
 
@@ -357,7 +356,7 @@ union ResourceStatus {
 
 @armResourceOperations
 interface ResourceDetails {
-  listByPool is ArmResourceListByParent<ResourceDetailsResource>;
+  listByPool is ArmResourceListByParent<ResourceDetailsObject>;
 }
 
 union ResourceSkuCapacityScaleType {
