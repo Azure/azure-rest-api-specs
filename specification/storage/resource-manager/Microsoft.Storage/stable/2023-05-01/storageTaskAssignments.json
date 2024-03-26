@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/storageTaskAssignments/{storageTaskAssignmentName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/storageTaskAssignments/{storageTaskAssignmentName}": {
       "put": {
         "tags": [
           "StorageTaskAssignments"
@@ -241,7 +241,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/storageTaskAssignments": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/storageTaskAssignments": {
       "get": {
         "tags": [
           "StorageTaskAssignments"
@@ -298,7 +298,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/reports": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/reports": {
       "get": {
         "tags": [
           "StorageTaskAssignments"
@@ -355,7 +355,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/storageTaskAssignments/{storageTaskAssignmentName}/reports": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/storageTaskAssignments/{storageTaskAssignmentName}/reports": {
       "get": {
         "tags": [
           "StorageTaskAssignments"
@@ -575,6 +575,10 @@
             "RunOnce",
             "OnSchedule"
           ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": false
+          },
           "description": "The trigger type of the storage task assignment execution"
         },
         "parameters": {
@@ -593,6 +597,7 @@
         },
         "interval": {
           "type": "integer",
+          "minimum": 1,
           "description": "Run interval of task execution"
         },
         "intervalUnit": {
@@ -600,6 +605,10 @@
           "enum": [
             "days"
           ],
+          "x-ms-enum": {
+            "name": "IntervalUnit",
+            "modelAsString": false
+          },
           "description": "Run interval unit of task execution"
         },
         "endBy": {
@@ -662,6 +671,7 @@
       "required": true,
       "type": "string",
       "description": "The name of the storage task assignment within the specified resource group. Storage task assignment names must be between 3 and 24 characters in length and use numbers and lower-case letters only.",
+      "pattern": "^[a-z0-9]{3,24}$",
       "maxLength": 24,
       "minLength": 3,
       "x-ms-parameter-location": "method"
