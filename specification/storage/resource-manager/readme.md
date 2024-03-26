@@ -43,13 +43,6 @@ directive:
     approved-by: "@fearthecowboy"
 
   - where:
-    - $.paths["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Storage/storageAccounts/{accountName}/storageTaskAssignmentsExecutionSummary"].post.operationId
-    - $.paths["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Storage/storageAccounts/{accountName}/storageTaskAssignments/{storageTaskAssignmentName}/executionSummary"].post.operationId
-    suppress: R1003
-    reason: APIs return array of values, is not actually a 'list' operation
-    approved-by: "@fearthecowboy"
-
-  - where:
     - $.paths["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Storage/storageAccounts/{accountName}/storageTaskAssignments/{storageTaskAssignmentName}"].patch
     - $.paths["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Storage/storageAccounts/{accountName}/storageTaskAssignments/{storageTaskAssignmentName}"].put
     - $.paths["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.Storage/storageAccounts/{accountName}/storageTaskAssignments/{storageTaskAssignmentName}"].get
