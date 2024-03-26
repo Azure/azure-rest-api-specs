@@ -362,6 +362,11 @@
       "description": "Scale configuration.",
       "type": "object",
       "properties": {
+        "maxConcurrentSessions": {
+          "description": "The max count of Sessions at the same time.",
+          "type": "integer",
+          "format": "int32"
+        },
         "readySessionInstances": {
           "description": "The minimum count of ready session instances.",
           "type": "integer",
@@ -571,11 +576,6 @@
                 "modelAsString": true
               }
             },
-            "maxConcurrentSessions": {
-              "description": "The max count of Sessions at the same time.",
-              "type": "integer",
-              "format": "int32"
-            },
             "scaleConfiguration": {
               "description": "The scale configuration of the Session Pool.",
               "$ref": "#/definitions/ScaleConfiguration"
@@ -629,11 +629,6 @@
           "description": "SessionPool resource specific patchable properties.",
           "type": "object",
           "properties": {
-            "maxConcurrentSessions": {
-              "description": "The max count of Sessions at the same time.",
-              "type": "integer",
-              "format": "int32"
-            },
             "scaleConfiguration": {
               "description": "The scale configuration of the Session Pool.",
               "$ref": "#/definitions/ScaleConfiguration"
