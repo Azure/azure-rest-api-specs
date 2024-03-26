@@ -765,10 +765,7 @@ default is false.
   @route("/atlas/v2/entity/businessmetadata/import")
   @post
   importBusinessMetadata is AtlasImportOperation<
-    {
-      @doc("InputStream of file")
-      file: bytes;
-    },
+    BusinessMetadataOptions,
     BulkImportResult,
     MultipartFormDataRequestHeadersTraits
   >;

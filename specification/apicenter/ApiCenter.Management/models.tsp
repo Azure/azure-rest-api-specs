@@ -1,8 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ApiCenter;
 
@@ -231,6 +234,10 @@ model ServiceProperties {
   @doc("Provisioning state of the service.")
   @visibility("read")
   provisioningState?: ProvisioningState;
+
+  @added(Versions.v2024_03_15_preview)
+  @doc("Flag used to restore soft-deleted API Center service. If specified and set to 'true' all other properties will be ignored.")
+  restore?: boolean = false;
 }
 
 @doc("The metadata schema export request.")
@@ -255,6 +262,7 @@ model MetadataSchemaProperties {
   schema: string;
 
   @doc("The assignees")
+  @extension("x-ms-identifiers", [])
   assignedTo?: MetadataAssignment[];
 }
 
@@ -310,9 +318,11 @@ model ApiProperties {
 
   @doc("The set of external documentation")
   @maxItems(20)
+  @extension("x-ms-identifiers", [])
   externalDocumentation?: ExternalDocumentation[];
 
   @doc("The set of contacts")
+  @extension("x-ms-identifiers", [])
   contacts?: Contact[];
 
   @doc("The license information for the API.")
@@ -534,4 +544,15 @@ model Onboarding {
   @maxItems(1)
   @doc("The location of the development portal")
   developerPortalUri?: string[];
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing service"
+@added(Versions.v2024_03_15_preview)
+@doc("Deleted service properties.")
+model DeletedServiceProperties {
+  @doc("UTC date and time when the service will be automatically purged. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.")
+  scheduledPurgeDate?: utcDateTime;
+
+  @doc("UTC date and time when the service was soft-deleted. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.")
+  softDeletionDate?: utcDateTime;
 }

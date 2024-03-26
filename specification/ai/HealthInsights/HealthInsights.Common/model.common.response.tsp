@@ -62,11 +62,17 @@ model Inference {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next version"
 @doc("The status of the processing job.")
 @lroStatus
-enum JobStatus {
+union JobStatus {
+  string,
   NotStarted: "notStarted",
   Running: "running",
+
+  @lroSucceeded
   Succeeded: "succeeded",
+
+  @lroFailed
   Failed: "failed",
+
   Canceled: "canceled",
 }
 

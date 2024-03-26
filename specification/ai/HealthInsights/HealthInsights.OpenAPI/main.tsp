@@ -4,6 +4,7 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "./service.tsp";
 
 import "../HealthInsights.RadiologyInsights/route.radiologyinsights.tsp";
