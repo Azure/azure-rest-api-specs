@@ -1,0 +1,1142 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.HybridOnboarding management service",
+    "version": "2024-06-01-preview",
+    "description": "Microsoft.HybridOnboarding Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "ExtensionManagers"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.HybridOnboarding/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridOnboarding/extensionManagers": {
+      "get": {
+        "operationId": "ExtensionManagers_ListBySubscription",
+        "tags": [
+          "ExtensionManagers"
+        ],
+        "description": "List ExtensionManager resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionManagerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ExtensionManagers_ListBySubscription": {
+            "$ref": "./examples/ExtensionManagers_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridOnboarding/extensionManagers": {
+      "get": {
+        "operationId": "ExtensionManagers_ListByResourceGroup",
+        "tags": [
+          "ExtensionManagers"
+        ],
+        "description": "List ExtensionManager resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionManagerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ExtensionManagers_ListByResourceGroup": {
+            "$ref": "./examples/ExtensionManagers_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridOnboarding/extensionManagers/{extensionManagerName}": {
+      "get": {
+        "operationId": "ExtensionManagers_Get",
+        "tags": [
+          "ExtensionManagers"
+        ],
+        "description": "Get a ExtensionManager",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "extensionManagerName",
+            "in": "path",
+            "description": "Extension Manager resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionManager"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExtensionManagers_Get": {
+            "$ref": "./examples/ExtensionManagers_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ExtensionManagers_CreateOrUpdate",
+        "tags": [
+          "ExtensionManagers"
+        ],
+        "description": "Create a ExtensionManager",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "extensionManagerName",
+            "in": "path",
+            "description": "Extension Manager resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExtensionManager"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ExtensionManager' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExtensionManager"
+            }
+          },
+          "201": {
+            "description": "Resource 'ExtensionManager' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExtensionManager"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ExtensionManagers_CreateOrUpdate": {
+            "$ref": "./examples/ExtensionManagers_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "ExtensionManagers_Update",
+        "tags": [
+          "ExtensionManagers"
+        ],
+        "description": "Update a ExtensionManager",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "extensionManagerName",
+            "in": "path",
+            "description": "Extension Manager resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExtensionManagerPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionManager"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ExtensionManagers_Update": {
+            "$ref": "./examples/ExtensionManagers_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ExtensionManagers_Delete",
+        "tags": [
+          "ExtensionManagers"
+        ],
+        "description": "Delete a ExtensionManager",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "extensionManagerName",
+            "in": "path",
+            "description": "Extension Manager resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ExtensionManagers_Delete": {
+            "$ref": "./examples/ExtensionManagers_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridOnboarding/extensionManagers/{extensionManagerName}/addCustomLocation": {
+      "post": {
+        "operationId": "ExtensionManagers_AddCustomLocation",
+        "tags": [
+          "ExtensionManagers"
+        ],
+        "description": "Add a new custom location on extension(s)",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "extensionManagerName",
+            "in": "path",
+            "description": "Extension Manager resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AddCustomLocationDetails"
+              },
+              "x-ms-identifiers": []
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionManager"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ExtensionManagers_AddCustomLocation": {
+            "$ref": "./examples/ExtensionManagers_AddCustomLocation_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridOnboarding/extensionManagers/{extensionManagerName}/disableExtensions": {
+      "post": {
+        "operationId": "ExtensionManagers_DisableExtensions",
+        "tags": [
+          "ExtensionManagers"
+        ],
+        "description": "Disable extension(s) on the extension manager resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "extensionManagerName",
+            "in": "path",
+            "description": "Extension Manager resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DisableExtensionsRequestDetails"
+              },
+              "x-ms-identifiers": []
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionManager"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ExtensionManagers_DisableExtensions": {
+            "$ref": "./examples/ExtensionManagers_DisableExtensions_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridOnboarding/extensionManagers/{extensionManagerName}/enableExtensions": {
+      "post": {
+        "operationId": "ExtensionManagers_EnableExtensions",
+        "tags": [
+          "ExtensionManagers"
+        ],
+        "description": "Enable extension(s) on the extension manager resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "extensionManagerName",
+            "in": "path",
+            "description": "Extension Manager resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EnableExtensionsRequestDetails"
+              },
+              "x-ms-identifiers": []
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionManager"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ExtensionManagers_EnableExtensions": {
+            "$ref": "./examples/ExtensionManagers_EnableExtensions_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridOnboarding/extensionManagers/{extensionManagerName}/removeCustomLocation": {
+      "post": {
+        "operationId": "ExtensionManagers_RemoveCustomLocation",
+        "tags": [
+          "ExtensionManagers"
+        ],
+        "description": "Remove a custom location from extension(s)",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "extensionManagerName",
+            "in": "path",
+            "description": "Extension Manager resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RemoveCustomLocationDetails"
+              },
+              "x-ms-identifiers": []
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionManager"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ExtensionManagers_RemoveCustomLocation": {
+            "$ref": "./examples/ExtensionManagers_RemoveCustomLocation_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AddCustomLocationDetails": {
+      "type": "object",
+      "description": "Request body for adding new custom location to an extension.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the extension"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "DisableExtensionsRequestDetails": {
+      "type": "object",
+      "description": "Request body details for disabling extension POST action",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the extension"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "EnableExtensionsRequestDetails": {
+      "type": "object",
+      "description": "Request body details for enabling extension POST action",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the extension"
+        },
+        "configurationSettings": {
+          "type": "object",
+          "description": "Configuration settings, as name-value pairs for configuring this extension.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "configurationProtectedSettings": {
+          "type": "object",
+          "description": "Configuration settings that are sensitive, as name-value pairs for configuring this extension.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "ExtensionManager": {
+      "type": "object",
+      "description": "Extension Manager Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExtensionManagerProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedIdentity",
+          "description": "Managed Identity of extension manager resource"
+        }
+      },
+      "required": [
+        "identity"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ExtensionManagerListResult": {
+      "type": "object",
+      "description": "The response of a ExtensionManager list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ExtensionManager items on this page",
+          "items": {
+            "$ref": "#/definitions/ExtensionManager"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExtensionManagerPatch": {
+      "type": "object",
+      "description": "Properties of a Extension Manager that can be patched.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedIdentityUpdate",
+          "description": "Managed Identity of extension manager resource"
+        }
+      }
+    },
+    "ExtensionManagerProperties": {
+      "type": "object",
+      "description": "The properties of Extension Manager resource",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of Extension Manager resource.",
+          "readOnly": true
+        },
+        "extendedLocation": {
+          "type": "string",
+          "description": "ARM ID of the custom location resource deployed on the Onboarding Appliance"
+        },
+        "hostResourceId": {
+          "type": "string",
+          "description": "ARM ID of the host associated with the extended location",
+          "readOnly": true
+        },
+        "scenarioProfile": {
+          "type": "array",
+          "description": "Scenario profile of the extension manager resource.",
+          "items": {
+            "$ref": "#/definitions/ScenarioProfileObject"
+          },
+          "x-ms-identifiers": []
+        },
+        "extensionProfile": {
+          "type": "array",
+          "description": "Extension profile of the extension manager resource",
+          "items": {
+            "$ref": "#/definitions/ExtensionObject"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "extendedLocation"
+      ]
+    },
+    "ExtensionObject": {
+      "type": "object",
+      "description": "Extension object inside the extension profile.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the extension"
+        },
+        "customLocations": {
+          "type": "array",
+          "description": "List of custom locations associated with the extension. All entries will be unique.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/ExtensionState",
+          "description": "Flag to enable/disable the extension"
+        },
+        "configurationSettings": {
+          "type": "object",
+          "description": "Configuration settings, as name-value pairs for configuring this extension.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "configurationProtectedSettings": {
+          "type": "object",
+          "description": "Configuration settings that are sensitive, as name-value pairs for configuring this extension.",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "name",
+        "state"
+      ]
+    },
+    "ExtensionState": {
+      "type": "string",
+      "description": "State of the extension",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ExtensionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Extension is enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Extension is disabled"
+          }
+        ]
+      }
+    },
+    "ManagedIdentity": {
+      "type": "object",
+      "description": "Managed Identity of extension manager resource",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/ManagedIdentityType",
+          "description": "Type of managed service identity"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "ManagedIdentityType": {
+      "type": "string",
+      "description": "Type of managed service identity",
+      "enum": [
+        "SystemAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System Assigned Managed Identity"
+          }
+        ]
+      }
+    },
+    "ManagedIdentityUpdate": {
+      "type": "object",
+      "description": "Managed Identity of extension manager resource",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ManagedIdentityType",
+          "description": "Type of managed service identity"
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the resource",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "creating provisioning state"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "updating provisioning state"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "deleting provisioning state"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "accepted provisioning state"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RemoveCustomLocationDetails": {
+      "type": "object",
+      "description": "Request body for removing custom location from extension.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the extension"
+        },
+        "customLocationId": {
+          "type": "string",
+          "description": "ARM ID of the custom location"
+        }
+      },
+      "required": [
+        "name",
+        "customLocationId"
+      ]
+    },
+    "ScenarioProfileObject": {
+      "type": "object",
+      "description": "Scenario profile object of the extension manager resource.",
+      "properties": {
+        "infrastructure": {
+          "type": "string",
+          "description": "Infrastructure associated with extension manager resource."
+        },
+        "scenario": {
+          "type": "string",
+          "description": "Scenario associated with extension manager resource."
+        }
+      },
+      "required": [
+        "infrastructure",
+        "scenario"
+      ]
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2024-06-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2024_06_01_preview",
+            "value": "2024-06-01-preview",
+            "description": "2024-06-01-preview version"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}
