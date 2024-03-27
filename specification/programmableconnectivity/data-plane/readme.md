@@ -30,12 +30,6 @@ tag: package-2024-02-09-preview
 title: AzureProgrammableConnectivity
 ```
 
-```yaml
-openapi-type: data-plane
-tag: package-2024-03-25-preview
-title: AzureProgrammableConnectivity
-```
-
 ### Tag: package-2024-02-09-preview
 
 These settings apply only when `--tag=package-2024-02-09-preview` is specified on the command line.
@@ -43,19 +37,6 @@ These settings apply only when `--tag=package-2024-02-09-preview` is specified o
 ```yaml $(tag) == 'package-2024-02-09-preview'
 input-file:
   - Azure.ProgrammableConnectivity/preview/2024-02-09-preview/openapi.json
-suppressions:
-  - code: ValidResponseCodeRequired
-    reason: APC must return a 302 as part of a non-standard frontend authentication flow
-    where: $.paths./number-verification/number:verify.post.responses
-```
-
-### Tag: package-2024-03-25-preview
-
-These settings apply only when `--tag=package-2024-03-25-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-03-25-preview'
-input-file:
-  - Azure.ProgrammableConnectivity/preview/2024-03-25-preview/openapi.json
 suppressions:
   - code: ValidResponseCodeRequired
     reason: APC must return a 302 as part of a non-standard frontend authentication flow
