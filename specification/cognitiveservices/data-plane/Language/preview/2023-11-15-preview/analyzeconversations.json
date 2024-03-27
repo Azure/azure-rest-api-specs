@@ -83,17 +83,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulAnalyzeConversations": {
-            "$ref": "./examples/SuccessfulAnalyzeConversations.json"
-          },
-          "SuccessfulAnalyzeConversationsArbitration": {
-            "$ref": "./examples/SuccessfulAnalyzeConversationsArbitration.json"
-          },
-          "SuccessfulAnalyzeConversationsArbitrationDirectTarget": {
-            "$ref": "./examples/SuccessfulAnalyzeConversationsArbitrationDirectTarget.json"
-          }
         }
       }
     },
@@ -210,11 +199,6 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulAnalyzeConversationsJobsCancelRequest": {
-            "$ref": "./examples/SuccessfulAnalyzeConversationsJobsCancelRequest.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -3102,7 +3086,10 @@
       "properties": {
         "enable": {
           "type": "boolean",
-          "description": "Enable or disable Answer Span prediction."
+          "description": "Enable or disable Answer Span prediction.",
+          "enum": [
+            true
+          ]
         },
         "confidenceScoreThreshold": {
           "type": "number",

@@ -3,7 +3,7 @@ import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
-import "@azure-tools/typespec-autorest";
+// import "@azure-tools/typespec-autorest"; examples are not working with autorest https://github.com/Azure/autorest.csharp/issues/4495
 import "./common.tsp";
 
 using TypeSpec.Http;
@@ -12,7 +12,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
-using Autorest;
+// using Autorest;
 
 @useAuth(
   TypeSpec.Http.ApiKeyAuth<
@@ -1761,18 +1761,9 @@ alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 @post
 @doc("Analyzes the input conversation utterance.")
 @route("/:analyze-conversations")
-@example(
-  "./examples/SuccessfulAnalyzeConversations.json",
-  "SuccessfulAnalyzeConversations"
-)
-@example(
-  "./examples/SuccessfulAnalyzeConversationsArbitration.json",
-  "SuccessfulAnalyzeConversationsArbitration"
-)
-@example(
-  "./examples/SuccessfulAnalyzeConversationsArbitrationDirectTarget.json",
-  "SuccessfulAnalyzeConversationsArbitrationDirectTarget"
-)
+// @example("./examples/SuccessfulAnalyzeConversations.json", "SuccessfulAnalyzeConversations")
+// @example("./examples/SuccessfulAnalyzeConversationsArbitration.json", "SuccessfulAnalyzeConversationsArbitration")
+// @example("./examples/SuccessfulAnalyzeConversationsArbitrationDirectTarget.json", "SuccessfulAnalyzeConversationsArbitrationDirectTarget")
 op analyzeConversations(
   @doc("Collection of conversations to analyze and a single task to execute.")
   @body
@@ -1821,8 +1812,5 @@ op analyzeConversationsSubmitJob is LanguageLongRunningOperation<
 @pollingOperation(analyzeConversationsJobStatus)
 @actionSeparator(":")
 @action("cancel")
-@example(
-  "./examples/SuccessfulAnalyzeConversationsJobsCancelRequest.json",
-  "SuccessfulAnalyzeConversationsJobsCancelRequest"
-)
+// @example("./examples/SuccessfulAnalyzeConversationsJobsCancelRequest.json", "SuccessfulAnalyzeConversationsJobsCancelRequest")
 op analyzeConversationsCancelJob is LanguageLongRunningResourceCancel<AnalyzeConversationJobState>;

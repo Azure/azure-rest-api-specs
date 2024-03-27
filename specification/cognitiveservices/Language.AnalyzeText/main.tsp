@@ -3,7 +3,7 @@ import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
-import "@azure-tools/typespec-autorest";
+// import "@azure-tools/typespec-autorest"; Examples are not working with autorest https://github.com/Azure/autorest.csharp/issues/4495
 import "./common.tsp";
 import "./models/common.models.tsp";
 import "./models/custom.text.tsp";
@@ -23,7 +23,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
-using Autorest;
+// using Autorest;
 
 @useAuth(
   TypeSpec.Http.ApiKeyAuth<
@@ -75,30 +75,12 @@ alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 @post
 @route("/:analyze-text")
 @doc("Request text analysis over a collection of documents.")
-@example(
-  "./examples/SuccessfulEntityLinkingRequest.json",
-  "SuccessfulEntityLinkingRequest"
-)
-@example(
-  "./examples/SuccessfulEntityRecognitionRequest.json",
-  "SuccessfulEntityRecognitionRequest"
-)
-@example(
-  "./examples/SuccessfulKeyPhraseExtractionRequest.json",
-  "SuccessfulKeyPhraseExtractionRequest"
-)
-@example(
-  "./examples/SuccessfulLanguageDetectionRequest.json",
-  "SuccessfulLanguageDetectionRequest"
-)
-@example(
-  "./examples/SuccessfulPiiEntityRecognitionRequest.json",
-  "SuccessfulPiiEntityRecognitionRequest"
-)
-@example(
-  "./examples/SuccessfulSentimentAnalysisRequest.json",
-  "SuccessfulSentimentAnalysisRequest"
-)
+// @example( "./examples/SuccessfulEntityLinkingRequest.json", "SuccessfulEntityLinkingRequest")
+// @example( "./examples/SuccessfulEntityRecognitionRequest.json", "SuccessfulEntityRecognitionRequest")
+// @example( "./examples/SuccessfulKeyPhraseExtractionRequest.json", "SuccessfulKeyPhraseExtractionRequest")
+// @example( "./examples/SuccessfulLanguageDetectionRequest.json", "SuccessfulLanguageDetectionRequest")
+// @example( "./examples/SuccessfulPiiEntityRecognitionRequest.json", "SuccessfulPiiEntityRecognitionRequest")
+// @example( "./examples/SuccessfulSentimentAnalysisRequest.json", "SuccessfulSentimentAnalysisRequest")
 // @example("./SuccessfulDynamicClassificationRequest.json", "SuccessfulDynamicClassificationRequest")
 // @example("./SuccessfulEntityRecognitionExclusionRequest.json", "SuccessfulEntityRecognitionExclusionRequest")
 // @example("./SuccessfulEntityRecognitionInclusionRequest.json", "SuccessfulEntityRecognitionInclusionRequest")
@@ -117,10 +99,7 @@ op analyzeText(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.")
 @summary("Get analysis status and results")
-@example(
-  "./examples/SuccessfulAnalyzeTextJobsMultipleTaskStatusRequest.json",
-  "SuccessfulAnalyzeTextJobsMultipleTaskStatusRequest"
-)
+// @example( "./examples/SuccessfulAnalyzeTextJobsMultipleTaskStatusRequest.json", "SuccessfulAnalyzeTextJobsMultipleTaskStatusRequest")
 // @example("./SuccessfulAbstractiveSummarizationTaskResult.json", "SuccessfulAbstractiveSummarizationTaskResult")
 // @example("./SuccessfulCustomAbstractiveSummarizationTaskResult.json", "SuccessfulCustomAbstractiveSummarizationTaskResult")
 // @example("./SuccessfulCustomHealthcareTaskStatusRequest.json", "SuccessfulCustomHealthcareTaskStatusRequest")
@@ -136,10 +115,7 @@ op analyzeTextJobStatus is LanguageLongRunningResourceRead<
 @doc("Submit a collection of text documents for analysis. Specify one or more unique tasks to be executed as a long-running operation.")
 @route("/analyze-text/jobs")
 @pollingOperation(analyzeTextJobStatus)
-@example(
-  "./examples/SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest.json",
-  "SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest"
-)
+// @example( "./examples/SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest.json", "SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest")
 // @example("./SuccessfulAbstractiveSummarizationTaskSubmit.json", "SuccessfulAbstractiveSummarizationTaskSubmit")
 // @example("./SuccessfulCustomAbstractiveSummarizationTaskSubmit.json", "SuccessfulCustomAbstractiveSummarizationTaskSubmit")
 // @example("./SuccessfulCustomHealthcarePostRequest.json", "SuccessfulCustomHealthcarePostRequest")
@@ -157,8 +133,5 @@ op analyzeTextSubmitJob is LanguageLongRunningOperation<
 @pollingOperation(analyzeTextJobStatus)
 @actionSeparator(":")
 @action("cancel")
-@example(
-  "./examples/SuccessfulAnalyzeTextJobsCancelRequest.json",
-  "SuccessfulAnalyzeTextJobsCancelRequest"
-)
+// @example("./examples/SuccessfulAnalyzeTextJobsCancelRequest.json", "SuccessfulAnalyzeTextJobsCancelRequest")
 op analyzeTextCancelJob is LanguageLongRunningResourceCancel<AnalyzeTextJobState>;

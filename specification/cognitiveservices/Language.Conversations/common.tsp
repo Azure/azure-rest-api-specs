@@ -2,7 +2,9 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -238,11 +240,11 @@ model KnowledgeBaseAnswer {
   @doc("Answer confidence score, value ranges from 0 to 1.")
   @minValue(0)
   @maxValue(1)
-  @projectedName("client", "confidence")
+  @clientName("confidence")
   confidenceScore?: float64;
 
   @doc("ID of the QnA result.")
-  @projectedName("client", "qnaId")
+  @clientName("qnaId")
   id?: int32;
 
   @doc("Source of QnA result.")
@@ -256,7 +258,7 @@ model KnowledgeBaseAnswer {
   dialog?: KnowledgeBaseAnswerDialog;
 
   @doc("Answer span object of QnA with respect to user's question.")
-  @projectedName("client", "shortAnswer")
+  @clientName("shortAnswer")
   answerSpan?: AnswerSpan;
 }
 
@@ -317,22 +319,22 @@ model AnswersOptions {
   @doc("Minimum threshold score for answers, value ranges from 0 to 1.")
   @maxValue(1)
   @minValue(0)
-  @projectedName("client", "confidenceThreshold")
+  @clientName("confidenceThreshold")
   confidenceScoreThreshold?: float64;
 
   @doc("Context object with previous QnA's information.")
-  @projectedName("client", "answerContext")
+  @clientName("answerContext")
   context?: KnowledgeBaseAnswerContext;
 
   @doc("Type of ranker to be used.")
-  @projectedName("client", "rankerKind")
+  @clientName("rankerKind")
   rankerType?: RankerKind;
 
   @doc("Filter QnAs based on given metadata list and knowledge base sources.")
   filters?: QueryFilters;
 
   @doc("To configure Answer span prediction feature.")
-  @projectedName("client", "shortAnswerOptions")
+  @clientName("shortAnswerOptions")
   answerSpanRequest?: ShortAnswerOptions;
 
   @doc("(Optional) Flag to enable Query over Unstructured Sources.")
@@ -354,7 +356,7 @@ model KnowledgeBaseAnswerContext {
   previousQnaId: int32;
 
   @doc("Previous user query.")
-  @projectedName("client", "previousQuestion")
+  @clientName("previousQuestion")
   previousUserQuery?: string;
 }
 
@@ -403,18 +405,18 @@ enum LogicalOperationKind {
 @doc("To configure Answer span prediction feature.")
 model ShortAnswerOptions {
   @doc("Enable or disable Answer Span prediction.")
-  enable: boolean;
+  enable: true;
 
   @doc("Minimum threshold score required to include an answer span, value ranges from 0 to 1.")
   @maxValue(1)
   @minValue(0)
-  @projectedName("client", "confidenceThreshold")
+  @clientName("confidenceThreshold")
   confidenceScoreThreshold?: float64;
 
   @doc("Number of Top answers to be considered for span prediction from 1 to 10.")
   @maxValue(10)
   @minValue(1)
-  @projectedName("client", "top")
+  @clientName("top")
   topAnswersWithSpan?: int32;
 }
 
