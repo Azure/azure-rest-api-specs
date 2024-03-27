@@ -69,7 +69,18 @@
               ],
               "maxAge": 1234,
               "allowCredentials": true
-            }
+            },
+            "additionalPortMappings": [
+              {
+                "external": true,
+                "targetPort": 1234
+              },
+              {
+                "external": false,
+                "targetPort": 2345,
+                "exposedPort": 3456
+              }
+            ]
           },
           "dapr": {
             "enabled": true,
