@@ -31,20 +31,21 @@ title: MonitorClient
 ``` yaml
 description: Monitor Management Client
 openapi-type: arm
-tag: package-2023-12
+tag: package-2024-02
 directive:
   - suppress: Example Validations
     reason: 'There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.'
 ```
 
+### Tag: package-2024-02
 
-### Tag: package-2023-12
+These settings apply only when `--tag=package-2024-02` is specified on the command line.
 
-These settings apply only when `--tag=package-2023-12` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-12'
+```yaml $(tag) == 'package-2024-02'
 input-file:
-  - Microsoft.Insights/stable/2023-12-01/scheduledQueryRule_API.json
+  - Microsoft.Insights/stable/2024-02-01/metricNamespaces_API.json
+  - Microsoft.Insights/stable/2024-02-01/metricDefinitions_API.json
+  - Microsoft.Insights/stable/2024-02-01/metrics_API.json
   - Microsoft.Monitor/stable/2023-04-03/monitoringAccounts_API.json
   - Microsoft.Monitor/stable/2023-04-03/operations_API.json
   - Microsoft.Insights/stable/2022-10-01/autoscale_API.json
@@ -59,11 +60,9 @@ input-file:
   - Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
   - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
   - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
-  - Microsoft.Insights/stable/2023-10-01/metricDefinitions_API.json
-  - Microsoft.Insights/stable/2023-10-01/metrics_API.json
   - Microsoft.Insights/stable/2019-03-01/metricBaselines_API.json
   - Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
-  - Microsoft.Insights/preview/2017-12-01-preview/metricNamespaces_API.json
+  - Microsoft.Insights/stable/2023-12-01/scheduledQueryRule_API.json
   - Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
   - Microsoft.Insights/preview/2021-07-01-preview/privateLinkScopes_API.json
   - Microsoft.Insights/stable/2020-10-01/activityLogAlerts_API.json
@@ -1278,7 +1277,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
