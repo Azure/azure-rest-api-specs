@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/openai/assistants"
+    default: "sdk/openai"
   "dependencies":
     default: ""
 emit:
@@ -37,6 +37,7 @@ options:
     custom-types-subpackage: "implementation.models"
     custom-types: "FileListResponse,OpenAIPageableListOfAssistant,OpenAIPageableListOfAssistantFile,OpenAIPageableListOfMessageFile,OpenAIPageableListOfRunStep,OpenAIPageableListOfThreadMessage,OpenAIPageableListOfThreadRun"
     flavor: azure
+    stream-style-serialization: false
   "@azure-tools/typespec-ts":
     package-dir: "openai"
     generateMetadata: false
