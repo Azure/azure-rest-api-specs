@@ -99,12 +99,72 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: package-composite-v3
+tag: package-preview-2024-05
 ```
 
 ### Composite packages
 
 The following packages may be composed from multiple api-versions.
+
+### Tag: package-preview-2024-05
+
+These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-05'
+input-file:
+- Microsoft.Security/preview/2024-05-01-preview/adaptiveNetworkHardenings.json
+- Microsoft.Security/preview/2024-05-01-preview/advancedThreatProtectionSettings.json
+- Microsoft.Security/preview/2024-05-01-preview/alerts.json
+- Microsoft.Security/preview/2024-05-01-preview/alertsSuppressionRules.json
+- Microsoft.Security/preview/2024-05-01-preview/allowedConnections.json
+- Microsoft.Security/preview/2024-05-01-preview/apiCollections.json
+- Microsoft.Security/preview/2024-05-01-preview/applications.json
+- Microsoft.Security/preview/2024-05-01-preview/applicationWhitelistings.json
+- Microsoft.Security/preview/2024-05-01-preview/assessmentMetadata.json
+- Microsoft.Security/preview/2024-05-01-preview/assessments.json
+- Microsoft.Security/preview/2024-05-01-preview/automations.json
+- Microsoft.Security/preview/2024-05-01-preview/autoProvisioningSettings.json
+- Microsoft.Security/preview/2024-05-01-preview/complianceResults.json
+- Microsoft.Security/preview/2024-05-01-preview/compliances.json
+- Microsoft.Security/preview/2024-05-01-preview/connectors.json
+- Microsoft.Security/preview/2024-05-01-preview/customAssessmentAutomation.json
+- Microsoft.Security/preview/2024-05-01-preview/customEntityStoreAssignment.json
+- Microsoft.Security/preview/2024-05-01-preview/defenderForStorageSettings.json
+- Microsoft.Security/preview/2024-05-01-preview/deviceSecurityGroups.json
+- Microsoft.Security/preview/2024-05-01-preview/discoveredSecuritySolutions.json
+- Microsoft.Security/preview/2024-05-01-preview/externalSecuritySolutions.json
+- Microsoft.Security/preview/2024-05-01-preview/governanceAssignments.json
+- Microsoft.Security/preview/2024-05-01-preview/governanceRules.json
+- Microsoft.Security/preview/2024-05-01-preview/healthReports.json
+- Microsoft.Security/preview/2024-05-01-preview/informationProtectionPolicies.json
+- Microsoft.Security/preview/2024-05-01-preview/iotSecuritySolutionAnalytics.json
+- Microsoft.Security/preview/2024-05-01-preview/iotSecuritySolutions.json
+- Microsoft.Security/preview/2024-05-01-preview/jitNetworkAccessPolicies.json
+- Microsoft.Security/preview/2024-05-01-preview/locations.json
+- Microsoft.Security/preview/2024-05-01-preview/mdeOnboardings.json
+- Microsoft.Security/preview/2024-05-01-preview/operations.json
+- Microsoft.Security/preview/2024-05-01-preview/pricings.json
+- Microsoft.Security/preview/2024-05-01-preview/regulatoryCompliance.json
+- Microsoft.Security/preview/2024-05-01-preview/secureScore.json
+- Microsoft.Security/preview/2024-05-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2024-05-01-preview/securityConnectorsDevOps.json
+- Microsoft.Security/preview/2024-05-01-preview/securityContacts.json
+- Microsoft.Security/preview/2024-05-01-preview/securityOperators.json
+- Microsoft.Security/preview/2024-05-01-preview/SecuritySolutions.json
+- Microsoft.Security/preview/2024-05-01-preview/securitySolutionsReferenceData.json
+- Microsoft.Security/preview/2024-05-01-preview/sensitivitySettings.json
+- Microsoft.Security/preview/2024-05-01-preview/serverVulnerabilityAssessments.json
+- Microsoft.Security/preview/2024-05-01-preview/ServerVulnerabilityAssessmentsSettings.json
+- Microsoft.Security/preview/2024-05-01-preview/settings.json
+- Microsoft.Security/preview/2024-05-01-preview/softwareInventories.json
+- Microsoft.Security/preview/2024-05-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
+- Microsoft.Security/preview/2024-05-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
+- Microsoft.Security/preview/2024-05-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
+- Microsoft.Security/preview/2024-05-01-preview/subAssessments.json
+- Microsoft.Security/preview/2024-05-01-preview/tasks.json
+- Microsoft.Security/preview/2024-05-01-preview/topologies.json
+- Microsoft.Security/preview/2024-05-01-preview/workspaceSettings.json
+```
 
 ### Tag: package-2024-04
 
