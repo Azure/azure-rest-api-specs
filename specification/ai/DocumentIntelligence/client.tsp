@@ -55,10 +55,16 @@ interface DocumentIntelligenceAdministrationClient {
 
 @@clientName(AnalyzeDocumentRequest, "AnalyzeDocumentContent", "csharp");
 @@clientName(AuthorizeCopyRequest, "AuthorizeCopyContent", "csharp");
-@@clientName(BuildDocumentClassifierRequest, "BuildDocumentClassifierContent", "csharp");
+@@clientName(BuildDocumentClassifierRequest,
+  "BuildDocumentClassifierContent",
+  "csharp"
+);
 @@clientName(BuildDocumentModelRequest, "BuildDocumentModelContent", "csharp");
 @@clientName(ClassifyDocumentRequest, "ClassifyDocumentContent", "csharp");
-@@clientName(ComposeDocumentModelRequest, "ComposeDocumentModelContent", "csharp");
+@@clientName(ComposeDocumentModelRequest,
+  "ComposeDocumentModelContent",
+  "csharp"
+);
 @@clientName(DocumentBarcodeKind.EAN13, "Ean13", "csharp");
 @@clientName(DocumentBarcodeKind.EAN8, "Ean8", "csharp");
 @@clientName(DocumentBarcodeKind.ITF, "Itf", "csharp");
@@ -68,7 +74,10 @@ interface DocumentIntelligenceAdministrationClient {
 @@clientName(DocumentBarcodeKind.UPCA, "Upca", "csharp");
 @@clientName(DocumentBarcodeKind.UPCE, "Upce", "csharp");
 @@clientName(DocumentClassifierDetails.createdDateTime, "CreatedOn", "csharp");
-@@clientName(DocumentClassifierDetails.expirationDateTime, "ExpiresOn", "csharp");
+@@clientName(DocumentClassifierDetails.expirationDateTime,
+  "ExpiresOn",
+  "csharp"
+);
 @@clientName(DocumentField.valueArray, "ValueList", "csharp");
 @@clientName(DocumentField.valueInteger, "ValueLong", "csharp");
 @@clientName(DocumentField.valueNumber, "ValueDouble", "csharp");
