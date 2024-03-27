@@ -1,0 +1,57 @@
+{
+  "title": "CryptoKeys_ListByFirmware",
+  "operationId": "CryptoKeys_ListByFirmware",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "FirmwareAnalysisRG",
+    "workspaceName": "default",
+    "firmwareId": "109a9886-50bf-85a8-9d75-000000000000",
+    "api-version": "2024-01-10"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "cryptoKeyId": "cd1bdece-0576-4ff5-8039-000000000000",
+              "keyType": "Private",
+              "keySize": 256,
+              "usage": [],
+              "keyAlgorithm": "ECDsa",
+              "filePaths": [
+                "/path/to/keys-certs/ntgr_ra_aws"
+              ],
+              "pairedKey": {
+                "type": "Public",
+                "id": "95f41328-cc3b-41a1-bd70-000000000000"
+              },
+              "isShortKeySize": false
+            },
+            "id": "/subscriptions/07aed47b-60ad-4d6e-a07a-000000000000/resourceGroups/FirmwareAnalysisRG/providers/Microsoft.IoTFirmwareDefense/workspaces/default/firmwares/109a9886-50bf-85a8-9d75-000000000000/cryptoKeys/cd1bdece-0576-4ff5-8039-000000000000",
+            "name": "cd1bdece-0576-4ff5-8039-000000000000",
+            "type": "Microsoft.IoTFirmwareDefense/workspaces/firmwares/cryptoKeys"
+          },
+          {
+            "properties": {
+              "cryptoKeyId": "5adeaa85-f30a-4295-9b4a-000000000000",
+              "keyType": "Public",
+              "keySize": 1024,
+              "usage": [],
+              "keyAlgorithm": "RSA",
+              "filePaths": [
+                "/path/to/keys-certs/addon.key"
+              ],
+              "pairedKey": {},
+              "isShortKeySize": true
+            },
+            "id": "/subscriptions/07aed47b-60ad-4d6e-a07a-000000000000/resourceGroups/FirmwareAnalysisRG/providers/Microsoft.IoTFirmwareDefense/workspaces/default/firmwares/109a9886-50bf-85a8-9d75-000000000000/cryptoKeys/5adeaa85-f30a-4295-9b4a-000000000000",
+            "name": "5adeaa85-f30a-4295-9b4a-000000000000",
+            "type": "Microsoft.IoTFirmwareDefense/workspaces/firmwares/cryptoKeys"
+          }
+        ],
+        "nextLink": ""
+      }
+    }
+  }
+}

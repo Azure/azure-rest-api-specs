@@ -25,17 +25,88 @@ These are the global settings for the Azure Device Registry.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2023-11
+tag: package-preview-2023-10
 ```
 
 
-### Tag: package-preview-2023-11
+### Tag: package-preview-2023-10
 
-These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
+These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-11'
+```yaml $(tag) == 'package-preview-2023-10'
 input-file:
-  - Microsoft.DeviceRegistry/preview/2023-11-01-preview/asset.json
-  - Microsoft.DeviceRegistry/preview/2023-11-01-preview/assetendpointprofile.json
-  - Microsoft.DeviceRegistry/preview/2023-11-01-preview/operations.json
+  - Microsoft.DeviceRegistry/preview/2023-10-01-preview/deviceregistry.json
+
+suppressions:
+  - code: AvoidAdditionalProperties
+    from:
+      - deviceregistry.json
+    where:
+      - $.definitions.Asset.properties.properties.properties.attributes
+      - $.definitions.AssetListResult.properties.value.items.properties.properties.properties.attributes
+      - $.definitions.AssetProperties.properties.attributes
+      - $.definitions.AssetUpdate.properties.properties.properties.attributes
+      - $.definitions.AssetUpdateProperties.properties.attributes
+      - $.definitions.Device.properties.properties.properties.attributes
+      - $.definitions.DeviceListResult.properties.value.items.properties.properties.properties.attributes
+      - $.definitions.DeviceProperties.properties.attributes
+      - $.definitions.DeviceUpdate.properties.properties.properties.attributes
+      - $.definitions.DeviceUpdateProperties.properties.attributes
+    reason: attributes is a customer-defined property of any shape
+  - code: PropertiesTypeObjectNoDefinition
+    from:
+      - deviceregistry.json
+    where:
+      - $.definitions.Asset.properties.properties.properties.attributes
+      - $.definitions.AssetListResult.properties.value.items.properties.properties.properties.attributes
+      - $.definitions.AssetProperties.properties.attributes
+      - $.definitions.AssetUpdate.properties.properties.properties.attributes
+      - $.definitions.AssetUpdateProperties.properties.attributes
+      - $.definitions.Device.properties.properties.properties.attributes
+      - $.definitions.DeviceListResult.properties.value.items.properties.properties.properties.attributes
+      - $.definitions.DeviceProperties.properties.attributes
+      - $.definitions.DeviceUpdate.properties.properties.properties.attributes
+      - $.definitions.DeviceUpdateProperties.properties.attributes
+    reason: attributes is a customer-defined property of any shape
+```
+### Tag: package-preview-2023-09
+
+These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-09'
+input-file:
+  - Microsoft.DeviceRegistry/preview/2023-09-01-preview/asset.json
+  - Microsoft.DeviceRegistry/preview/2023-09-01-preview/assetendpointprofile.json
+  - Microsoft.DeviceRegistry/preview/2023-09-01-preview/deviceregistry.json
+```
+
+### Tag: package-2023-08-01-preview
+
+These settings apply only when `--tag=package-2023-08-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-08-01-preview'
+input-file:
+  - Microsoft.DeviceRegistry/preview/2023-08-01-preview/asset.json
+  - Microsoft.DeviceRegistry/preview/2023-08-01-preview/assetendpointprofile.json
+  - Microsoft.DeviceRegistry/preview/2023-08-01-preview/deviceregistry.json
+```
+
+### Tag: package-2023-06-21-preview
+
+These settings apply only when `--tag=package-2023-06-21-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-06-21-preview'
+input-file:
+  - Microsoft.DeviceRegistry/preview/2023-06-21-preview/asset.json
+  - Microsoft.DeviceRegistry/preview/2023-06-21-preview/assetendpointprofile.json
+  - Microsoft.DeviceRegistry/preview/2023-06-21-preview/deviceregistry.json
+```
+
+### Tag: package-2022-05-21-preview
+
+These settings apply only when `--tag=package-2022-05-21-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-05-21-preview'
+input-file:
+  - Microsoft.DeviceRegistry/preview/2022-05-21-preview/deviceregistry.json
 ```

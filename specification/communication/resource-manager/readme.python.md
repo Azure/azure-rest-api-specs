@@ -17,4 +17,3 @@ package-version: 1.0.0
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/communication/azure-mgmt-communication/azure/mgmt/communication
 ```
-

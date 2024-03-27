@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "subscriptionId": "e73e18cb-d985-4729-b5d6-92235543acc8",
+    "resourceGroupName": "MyResourceGroup",
+    "communicationServiceName": "MyCommunicationResource",
+    "api-version": "2022-03-29-preview",
+    "linkNotificationHubParameters": {
+      "resourceId": "/subscriptions/e73e18cb-d985-4729-b5d6-92235543acc8/resourceGroups/MyOtherResourceGroup/providers/Microsoft.NotificationHubs/namespaces/MyNamespace/notificationHubs/MyHub",
+      "connectionString": "Endpoint=sb://MyNamespace.servicebus.windows.net/;SharedAccessKey=abcd1234"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "resourceId": "/subscriptions/e73e18cb-d985-4729-b5d6-92235543acc8/resourceGroups/MyOtherResourceGroup/providers/Microsoft.NotificationHubs/namespaces/MyNamespace/notificationHubs/MyHub"
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "WrongSubscription",
+          "message": "The notification hub must be in the same subscription as the communication service"
+        }
+      }
+    }
+  }
+}

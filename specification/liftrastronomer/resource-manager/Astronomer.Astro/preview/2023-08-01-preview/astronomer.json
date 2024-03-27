@@ -60,7 +60,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
@@ -99,7 +99,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/OrganizationResourceListResult"
             }
@@ -141,7 +141,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/OrganizationResourceListResult"
             }
@@ -193,7 +193,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/OrganizationResource"
             }
@@ -249,13 +249,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'OrganizationResource' update operation succeeded",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/OrganizationResource"
             }
           },
           "201": {
-            "description": "Resource 'OrganizationResource' create operation succeeded",
+            "description": "ARM create operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/OrganizationResource"
             },
@@ -322,7 +322,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/OrganizationResource"
             }
@@ -386,6 +386,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -401,7 +404,7 @@
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "Resource deleted successfully."
           },
           "default": {
             "description": "An unexpected error response.",

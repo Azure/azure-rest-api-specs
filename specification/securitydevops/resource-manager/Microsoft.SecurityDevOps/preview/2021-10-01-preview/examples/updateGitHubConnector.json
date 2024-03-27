@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "westusrg",
+    "gitHubConnectorName": "testconnector",
+    "api-version": "2021-10-01-preview",
+    "gitHubConnectorPatchResource": {
+      "tags": {
+        "env": "dev",
+        "client": "dev-client"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.SecurityDevOps/gitHubConnectors",
+        "name": "testconnector1",
+        "type": "microsoft.securitydevops/githubconnectors",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "Environment": "Dev"
+        }
+      }
+    }
+  }
+}

@@ -14,9 +14,7 @@ To see additional help and options, run:
 
 > `autorest --help`
 
-For other options on installation see [Installing AutoRest](https://aka.ms/autorest/install) on the AutoRest github page.
----
-
+## For other options on installation see [Installing AutoRest](https://aka.ms/autorest/install) on the AutoRest github page.
 
 ## Configuration
 
@@ -27,7 +25,16 @@ These are the global settings for the Mobile Packet Core Network Function servic
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-05-15-preview
+tag: package-2023-10-15
+```
+
+### Tag: package-2023-10-15
+
+These settings apply only when `--tag=package-2023-10-15` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-10-15'
+input-file:
+  - Microsoft.MobilePacketCore/stable/2023-10-15/networkfunction.json
 ```
 
 ### Tag: package-2023-05-15-preview
@@ -38,7 +45,6 @@ These settings apply only when `--tag=package-2023-05-15-preview` is specified o
 input-file:
   - Microsoft.MobilePacketCore/preview/2023-05-15-preview/networkfunction.json
 ```
-
 
 # Code Generation
 

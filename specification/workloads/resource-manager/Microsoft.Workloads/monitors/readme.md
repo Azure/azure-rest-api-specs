@@ -27,22 +27,60 @@ These are the global settings for the workloads.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2023-10-01-preview
+tag: package-preview-2024-02-01-preview
 ```
 
+### Tag: package-preview-2024-02-01-preview
 
+These settings apply only when `--tag=package-preview-2024-02-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-02-01-preview'
+input-file:
+  - preview/2024-02-01-preview/monitors.json
+  - ../common-types/v2/commonTypes.json
+  - ../operations/preview/2024-02-01-preview/operations.json
+```
+### Tag: package-preview-2023-12-01-preview
+
+These settings apply only when `--tag=package-preview-2023-12-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-12-01-preview'
+input-file:
+  - preview/2023-12-01-preview/monitors.json
+  - ../common-types/v2/commonTypes.json
+  - ../operations/preview/2023-12-01-preview/operations.json
+```
 ### Tag: package-preview-2023-10-01-preview
 
 These settings apply only when `--tag=package-preview-2023-10-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-10-01-preview'
+``` yaml $(tag) == 'package-preview-2023-10-01-preview'
 input-file:
   - preview/2023-10-01-preview/monitors.json
   - ../common-types/v2/commonTypes.json
   - ../operations/preview/2023-10-01-preview/operations.json
-suppressions:
-  - code: GuidUsage
-    reason: GUIDs are used for principalId and tenantId under MSI properties.
+```
+
+### Tag: package-preview-2023-06-01-preview
+
+These settings apply only when `--tag=package-preview-2023-06-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-06-01-preview'
+input-file:
+  - preview/2023-06-01-preview/monitors.json
+  - ../common-types/v1/commonTypes.json
+
+```
+
+### Tag: package-preview-2022-10-15-preview
+
+These settings apply only when `--tag=package-preview-2022-10-15-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-10-15-preview'
+input-file:
+  - preview/2022-10-01-preview/monitors.json
+  - ../common-types/v1/commonTypes.json
+  - ../operations/preview/2022-10-01-preview/operations.json
 ```
 
 ---

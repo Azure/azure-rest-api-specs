@@ -35,6 +35,7 @@ These are the global settings for the edgesites.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
+<<<<<<< HEAD
 tag: package-2024-02-01-preview
 ```
 
@@ -45,6 +46,9 @@ These settings apply only when `--tag=package-2024-02-01-preview` is specified o
 ```yaml $(tag) == 'package-2024-02-01-preview'
 input-file:
   - preview/2024-02-01-preview/sites.json
+=======
+tag: package-2023-08-01-preview
+>>>>>>> 35d104a3830db5e744b5cedb7c9c69f24b264db1
 ```
 
 ### Tag: package-2023-08-01-preview

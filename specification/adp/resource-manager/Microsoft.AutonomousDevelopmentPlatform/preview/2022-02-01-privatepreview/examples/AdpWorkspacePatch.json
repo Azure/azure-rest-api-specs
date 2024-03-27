@@ -1,0 +1,34 @@
+{
+  "operationId": "workspaces_Update",
+  "title": "Update a workspace",
+  "parameters": {
+    "workspaceName": "sample-workspace",
+    "resourceGroupName": "sample-rg",
+    "api-version": "2022-02-01-privatepreview",
+    "subscriptionId": "sample-subscription-id",
+    "resource": {
+      "properties": {
+        "storageAccountCount": 10
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/sample-subscription-id/resourceGroups/sample-rg/providers/Microsoft.AutonomousDevelopmentPlatform/workspaces/sample-workspace",
+        "name": "sample-workspace",
+        "type": "Microsoft.AutonomousDevelopmentPlatform/workspaces",
+        "location": "westeurope",
+        "properties": {
+          "provisioningState": "Success",
+          "endpoint": "https://sample-workspace.kqw2e.westeurope.adp.azure.com/"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/providers/Microsoft.AutonomousDevelopmentPlatform/locations/westeurope/operationStatuses/d4700f7a-c44e-4857-98dd-3b7fb0434a12?api-version=2022-03-01-preview"
+      }
+    }
+  }
+}

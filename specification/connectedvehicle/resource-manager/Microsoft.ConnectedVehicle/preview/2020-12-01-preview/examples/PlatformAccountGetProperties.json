@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "subscriptionId": "sample-subscription-id",
+    "resourceGroupName": "sample-resource-group-name",
+    "accountName": "sample-account-name",
+    "api-version": "2020-12-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/sample-subscription-id/resourceGroups/sample-resource-group-name/providers/Microsoft.ConnectedVehicle/platformAccounts/sample-account-name",
+        "identity": {
+          "principalId": "b5cf119e-a5c2-42c7-802f-592e0efb169f",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "type": "SystemAssigned"
+        },
+        "location": "eastus2",
+        "name": "sample-account-name",
+        "properties": {
+          "analytics": {
+            "storageAccountResourceId": "sample-storage-account-id"
+          },
+          "extensions": [
+            {
+              "resourceId": "sample-extensions-id"
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "claimsProvider": {
+            "baseUrl": "sample-endpoint"
+          },
+          "platformUri": "sample-account-name.azure-connectedvehicle.net"
+        },
+        "sku": {
+          "name": "D0"
+        },
+        "systemData": {
+          "createdBy": "sample-user1",
+          "createdByType": "User",
+          "createdAt": "2020-10-20T05:37:46.404Z",
+          "lastModifiedBy": "sample-user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-10-21T05:37:46.404Z"
+        },
+        "tags": {
+          "sample-key1": "sample-value1",
+          "sample-key2": "sample-value2"
+        },
+        "type": "Microsoft.ConnectedVehicle/platformAccounts"
+      }
+    }
+  }
+}

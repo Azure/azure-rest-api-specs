@@ -30,10 +30,6 @@ openapi-subtype: rpaas
 tag: package-2024-01
 ```
 
-``` yaml
-modelerfour:
-  flatten-models: false
-```
 
 ### Tag: package-2024-01
 
@@ -66,6 +62,24 @@ suppressions:
     reason: This is a false alarm for the /default APIs, as they return a singleton resource and not a collection of resources
 ```
 
+### Tag: package-2023-11
+
+These settings apply only when `--tag=package-2023-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-11'
+input-file:
+  - Microsoft.HybridContainerService/stable/2023-11-01/provisionedClusters.json
+suppressions:
+  - code: TopLevelResourcesListBySubscription
+    where: $.definitions.KubernetesVersionProfile
+    reason: Since kubernetesVersions/default resource is defined as an extension resource to the custom location, this rule does not apply. The kubernetesVersions can vary from one custom location to another and we can't really have a ListBySubscription operation for kubernetesVersions.
+  - code: TopLevelResourcesListBySubscription
+    where: $.definitions.VmSkuProfile
+    reason: Since skus/default resource is defined as an extension resource to the custom location, this rule does not apply. The skus can vary from one custom location to another and we can't really have a ListBySubscription operation for skus.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    reason: This is a false alarm for the /default APIs, as they return a singleton resource and not a collection of resources
+```
+
 ### Tag: package-preview-2022-09
 
 These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
@@ -86,6 +100,33 @@ input-file:
   - Microsoft.HybridContainerService/preview/2022-05-01-preview/provisionedClusters.json
   - Microsoft.HybridContainerService/preview/2022-05-01-preview/virtualNetworks.json
   - Microsoft.HybridContainerService/preview/2022-05-01-preview/storageSpaces.json
+```
+
+### Tag: package-2022-01-01-preview
+
+These settings apply only when `--tag=package-2022-01-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-01-01-preview'
+input-file:
+  - Microsoft.HybridContainerService/preview/2022-01-01-preview/provisionedClusters.json
+```
+
+### Tag: package-2021-09-01-preview
+
+These settings apply only when `--tag=package-2021-09-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-09-01-preview'
+input-file:
+  - Microsoft.HybridContainerService/preview/2021-09-01-preview/provisionedClusters.json
+```
+
+### Tag: package-2021-08-01-preview
+
+These settings apply only when `--tag=package-2021-08-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-08-01-preview'
+input-file:
+  - Microsoft.HybridContainerService/preview/2021-08-01-preview/provisionedClusters.json
 ```
 
 ---

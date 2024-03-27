@@ -31,44 +31,17 @@ title: MonitorClient
 ``` yaml
 description: Monitor Management Client
 openapi-type: arm
-tag: package-2023-10
-directive:
-  - suppress: Example Validations
-    reason: 'There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.'
+openapi-subtype: providerHub
+tag: package-2023-10-01-preview
 ```
 
-### Tag: package-2023-10
+### Tag: package-2023-10-01-preview
 
-These settings apply only when `--tag=package-2023-10` is specified on the command line.
+These settings apply only when `--tag=package-2023-10-01-preview` is specified on the command line
 
-```yaml $(tag) == 'package-2023-10'
+``` yaml $(tag) == 'package-2023-10-01-preview'
 input-file:
-  - Microsoft.Monitor/stable/2023-04-03/monitoringAccounts_API.json
-  - Microsoft.Monitor/stable/2023-04-03/operations_API.json
-  - Microsoft.Insights/stable/2022-10-01/autoscale_API.json
-  - Microsoft.Insights/stable/2015-04-01/operations_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
-  - Microsoft.Insights/stable/2016-03-01/alertRules_API.json
-  - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
-  - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettings_API.json
-  - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
-  - Microsoft.Insights/stable/2023-01-01/actionGroups_API.json
-  - Microsoft.Insights/preview/2023-05-01-preview/tenantActionGroups_API.json
-  - Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
-  - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
-  - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
-  - Microsoft.Insights/stable/2023-10-01/metricDefinitions_API.json
-  - Microsoft.Insights/stable/2023-10-01/metrics_API.json
-  - Microsoft.Insights/stable/2019-03-01/metricBaselines_API.json
-  - Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
-  - Microsoft.Insights/preview/2022-08-01-preview/scheduledQueryRule_API.json
-  - Microsoft.Insights/preview/2017-12-01-preview/metricNamespaces_API.json
-  - Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
-  - Microsoft.Insights/preview/2021-07-01-preview/privateLinkScopes_API.json
-  - Microsoft.Insights/stable/2020-10-01/activityLogAlerts_API.json
-  - Microsoft.Insights/stable/2022-06-01/dataCollectionEndpoints_API.json
-  - Microsoft.Insights/stable/2022-06-01/dataCollectionRuleAssociations_API.json
-  - Microsoft.Insights/stable/2022-06-01/dataCollectionRules_API.json
+- Microsoft.Monitor\preview\2023-10-01-preview\azuremonitor.json
 ```
 
 ### Tag: package-2023-05-01-preview-only
@@ -1267,140 +1240,6 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
-
-# Validation
-
-## Suppression
-
-``` yaml
-directive:
-  - suppress: R4009
-    from: privateLinkScopes_API.json
-    reason: 'Contract is defined in the Network RP private endpoint spec, can be updated by internal calls from Network RP. '
-  - suppress: R3018
-    from: privateLinkScopes_API.json
-    where: $.definitions.PrivateEndpointConnectionProperties.properties.queryOnlyPrivateLinkResources
-    reason: 'This property indicates whether data coming through this private endpoint should restrict itself only to resources in the scope - it has only ''''true'''' or ''''false'''' options, so it fits boolean type.'
-  - suppress: R3018
-    from: privateLinkScopes_API.json
-    where: $.definitions.PrivateEndpointConnectionProperties.properties.ingestOnlyToPrivateLinkResources
-    reason: 'This property indicates whether data coming through this private endpoint should restrict itself only to resources in the scope - it has only ''''true'''' or ''''false'''' options, so it fits boolean type.'
-  - suppress: OperationsAPIImplementation
-    from: privateLinkScopes_API.json
-    where: $.paths
-    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
-  - suppress: R3016
-    reason: The feature (polymorphic types) is in the process of deprecation and fixing this will require changes in the backend.
-  - suppress: OperationsAPIImplementation
-    from: dataCollectionEndpoints_API.json
-    where: $.paths
-    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
-  - suppress: OperationsAPIImplementation
-    from: dataCollectionRules_API.json
-    where: $.paths
-    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
-  - suppress: OperationsAPIImplementation
-    from: dataCollectionRuleAssociations_API.json
-    where: $.paths
-    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
-  - suppress: MissingTypeObject
-    from: metrics_API.json
-    where: $.definitions.LocalizableString
-    reason: 'LocalizableString exists in other swaggers my team can not modify'
-  - suppress: MissingTypeObject
-    from: metricDefinitions_API.json
-    where: $.definitions.LocalizableString
-    reason: 'LocalizableString exists in other swaggers my team can not modify'
-  - suppress: OperationsAPIImplementation
-    where: $.paths
-    from: activityLogAlerts_API.json
-    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
-  - suppress: OperationsAPIImplementation
-    where: $.paths
-    from: scheduledQueryRule_API.json
-    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
-  - suppress: R4005
-    where: $.definitions.Dimension.properties.operator
-    from: scheduledQueryRule_API.json
-    reason: 'The discrepancy in the enum values is with an enum which is defined for a different service of a different team'
-  - suppress: R3016
-    where: $.definitions.Action.properties["odata.type"]
-    reason: 'This is an old field in a stable api version which is not camel cased'
-  - suppress: EnumInsteadOfBoolean
-    where: $.definitions.AlertRuleProperties.properties.enabled
-    from: activityLogAlerts_API.json
-    reason: 'This property indicates whether the alert rule is enabled or not  - it has only ''''true'''' or ''''false'''' options, so it fits boolean type.'
-  - suppress: EnumInsteadOfBoolean
-    where: $.definitions.AlertRulePatchProperties.properties.enabled
-    from: activityLogAlerts_API.json
-    reason: 'This property indicates whether the alert rule is enabled or not  - it has only ''''true'''' or ''''false'''' options, so it fits boolean type.'
-  - suppress: DefaultErrorResponseSchema
-    from: activityLogAlerts_API.json
-    reason: 'Updating the error response to the new format would be a breaking change.'
-  - suppress: DefaultErrorResponseSchema
-    from: metricNamespaces_API.json
-    reason: 'Updating the error response to the new format would be a breaking change.'
-  - suppress: DefaultErrorResponseSchema
-    from: metrics_API.json
-    reason: 'Updating the error response to the new format would be a breaking change.'
-  - suppress: DefaultErrorResponseSchema
-    from: metricDefinitions_API.json
-    reason: 'Updating the error response to the new format would be a breaking change.'
-  - suppress: DefaultErrorResponseSchema
-    from: actionGroups_API.json
-    reason: 'Updating the error response to the new format would be a breaking change.'
-  - suppress: OperationsAPIImplementation
-    from: operations_API.json
-    where: $.paths
-    reason: 'The operations API is implemented however the tool is still firing due to the casing being different'
-  - suppress: OperationsAPIImplementation
-    from: serviceDiagnosticsSettings_API.json
-    where: $.paths
-    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
-  - suppress: OperationsAPIImplementation
-    from: subscriptionDiagnosticsSettings_API.json
-    where: $.paths
-    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
-  - suppress: OperationsAPIImplementation
-    from: autoscale_API.json
-    where: $.paths
-    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
-  - suppress: OperationsAPIImplementation
-    from: actionGroups_API.json
-    where: $.paths
-    reason: 'Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/stable/2015-04-01/operations_API.json)'
-  - suppress: GetCollectionOnlyHasValueAndNextLink
-    from: metricDefinitions_API.json
-    reason: 'Breaking change to modify metricDefinitions now'
-  - suppress: GetCollectionOnlyHasValueAndNextLink
-    from: metrics_API.json
-    reason: 'Due to the ability to sort and order the list, this is incompatible with paging. It would also be a breaking change to modify this now'
-  - suppress: ParametersInPost
-    from: metrics_API.json
-    reason: 'metrics API is really a GET action that allows some parameters to be in the body due to length concerns. It would also be a breaking change to modify this now'
-```
-
-This section is a temporary solution to resolve the failure in those pipeline that is still using modeler v1.
-
-``` yaml ($(go) && !$(track2) && ($(tag) == 'package-2021-07' || $(tag) == 'package-2021-09') || $(csharp) || $(validation)
-directive:
-- from: activityLogAlerts_API.json
-  where: $.definitions
-  transform: delete $["Resource"]
-  reason: Missing kind, etag
-- from: activityLogAlerts_API.json
-  where: $.definitions
-  transform: delete $["ErrorResponse"]
-  reason: Incompatible values (2020-10-01)
-- from: activityLogAlerts_API.json
-  where: $.definitions
-  transform: delete $["AzureResource"]
-  reason: Incompatible values (2020-10-01)
-- from: activityLogAlerts_API.json
-  where: $.definitions
-  transform: delete $["ActionGroup"]
-  reason: Incompatible values (2020-10-01)
-```
 
 ### Tag: profile-hybrid-2019-03-01
 

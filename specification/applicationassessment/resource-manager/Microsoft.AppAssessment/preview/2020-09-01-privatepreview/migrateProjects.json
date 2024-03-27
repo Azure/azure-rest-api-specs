@@ -1,0 +1,390 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-09-01-privatepreview",
+    "title": "ApplicationAssessment",
+    "description": "Application assessments when migrating to Azure or upgrading to new OS versions"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AppAssessment/migrateProjects": {
+      "get": {
+        "tags": [
+          "migrateProjects"
+        ],
+        "operationId": "migrateProjects_listBySubscription",
+        "description": "Creates a new migrate project",
+        "x-ms-examples": {
+          "migrateProject_listBySubscription": {
+            "$ref": "./examples/migrateProjects_listBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "value",
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project was found.",
+            "schema": {
+              "$ref": "#/definitions/migrateProjectsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppAssessment/migrateProjects": {
+      "get": {
+        "tags": [
+          "migrateProjects"
+        ],
+        "operationId": "migrateProjects_listByResourceGroup",
+        "description": "Creates a new migrate project",
+        "x-ms-examples": {
+          "migrateProject_listByResourceGroup": {
+            "$ref": "./examples/migrateProjects_list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "value",
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project was found.",
+            "schema": {
+              "$ref": "#/definitions/migrateProjectsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppAssessment/migrateProjects/{projectName}": {
+      "put": {
+        "tags": [
+          "migrateProjects"
+        ],
+        "operationId": "migrateProjects_create",
+        "description": "Creates a new migrate project",
+        "x-ms-examples": {
+          "migrateProject_create": {
+            "$ref": "./examples/migrateProjects_create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the project"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "Request body. Properties to define the project",
+            "schema": {
+              "$ref": "#/definitions/migrateProject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project details updated.",
+            "schema": {
+              "$ref": "#/definitions/migrateProject"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "migrateProjects"
+        ],
+        "operationId": "migrateProjects_get",
+        "description": "Creates a new migrate project",
+        "x-ms-examples": {
+          "migrateProject_get": {
+            "$ref": "./examples/migrateProjects_get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the project"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project was found.",
+            "schema": {
+              "$ref": "#/definitions/migrateProject"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "migrateProjects"
+        ],
+        "operationId": "migrateProjects_delete",
+        "description": "Deletes a migrate project",
+        "x-ms-examples": {
+          "migrateProject_delete": {
+            "$ref": "./examples/migrateProjects_delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the project"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project was deleted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "migrateProjects"
+        ],
+        "operationId": "migrateProjects_update",
+        "description": "Updates details of project with name {projectName}",
+        "x-ms-examples": {
+          "migrateProject_update": {
+            "$ref": "./examples/migrateProjects_patch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the project"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "Body of the patch request",
+            "schema": {
+              "$ref": "#/definitions/migrateProjectUpdateModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Site details were updated",
+            "schema": {
+              "$ref": "#/definitions/migrateProject"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "migrateProject": {
+      "type": "object",
+      "description": "Object result of creating a migrate project resource",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "ARM resource properties",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "migrateHubProjectId": {
+              "type": "string",
+              "description": "The ARM id of the Azure Migrate Hub project that this project is linked to. The name of the project to create MUST much that of the migrate hub project"
+            },
+            "numberOfAssessments": {
+              "type": "number",
+              "format": "int32",
+              "description": "The number of assessments in the project",
+              "readOnly": true
+            },
+            "provisioningState": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The provisioning state of the resource in Azure"
+            }
+          },
+          "required": [
+            "migrateHubProjectId"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "definitions.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "migrateProjectsList": {
+      "type": "object",
+      "description": "List of migrate projects in the resource group",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of items where items are of type migrateProjects",
+          "items": {
+            "$ref": "#/definitions/migrateProject"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results in a paged request. If null we are at the last page"
+        }
+      }
+    },
+    "migrateProjectUpdateModel": {
+      "type": "object",
+      "description": "Update model for updating migrate projects",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgcluster",
+    "clustersName": "testCluster",
+    "api-version": "2020-01-01-preview",
+    "clusters": {
+      "properties": {
+        "cluster": "test-cluster",
+        "datacenter": "dc1",
+        "dummyVolume": {
+          "sizeLimit": "1Gi",
+          "medium": "aaaaaaaaaaaa"
+        },
+        "serviceAccountName": "cassandra",
+        "nodes": 5,
+        "provisioningState": "Succeeded"
+      },
+      "tags": {
+        "key9239": "aaa",
+        "key9193": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "East US",
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/"
+        },
+        "properties": {
+          "cluster": "test-cluster",
+          "datacenter": "dc1",
+          "dummyVolume": {
+            "sizeLimit": "1Gi",
+            "medium": "aaaaaaaaaaaa"
+          },
+          "serviceAccountName": "cassandra",
+          "nodes": 5,
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Contoso/clusters/testCluster",
+        "name": "testCluster",
+        "type": "microsoft.contoso/clusters",
+        "tags": {
+          "key9239": "aaa",
+          "key9193": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://foo.com/operationstatus"
+      },
+      "body": {
+        "location": "East US",
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/"
+        },
+        "properties": {
+          "cluster": "test-cluster",
+          "datacenter": "dc1",
+          "dummyVolume": {
+            "sizeLimit": "1Gi",
+            "medium": "aaaaaaaaaaaa"
+          },
+          "serviceAccountName": "cassandra",
+          "nodes": 5,
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Contoso/clusters/testCluster",
+        "name": "testCluster",
+        "type": "microsoft.contoso/clusters",
+        "tags": {
+          "key9239": "aaa",
+          "key9193": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      }
+    }
+  }
+}

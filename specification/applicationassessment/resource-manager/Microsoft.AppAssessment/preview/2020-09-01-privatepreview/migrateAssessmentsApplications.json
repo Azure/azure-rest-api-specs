@@ -1,0 +1,403 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-09-01-privatepreview",
+    "title": "ApplicationAssessment",
+    "description": "Application assessments when migrating to Azure or upgrading to new OS versions"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppAssessment/migrateProjects/{projectName}/assessments/{assessmentName}/assessedApplications": {
+      "get": {
+        "tags": [
+          "migrateProjectsAssessment"
+        ],
+        "operationId": "assessedApplications_listByMigrateAssessment",
+        "description": "Gets the applications that were assessed in an assessment",
+        "x-ms-examples": {
+          "migrateAssessment_listAssessedApplications": {
+            "$ref": "./examples/migrateAssessment_listAssessedApplications.json"
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "value",
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the project"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the assessment"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Assessment was found",
+            "schema": {
+              "$ref": "#/definitions/assessedApplicationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppAssessment/migrateProjects/{projectName}/assessments/{assessmentName}/assessedMachines/{machineId}/applications": {
+      "get": {
+        "tags": [
+          "migrateProjectsAssessment"
+        ],
+        "operationId": "assessedApplications_listByAssessedMachine",
+        "description": "Gets the applications that were assessed in an assessment for a particular machine",
+        "x-ms-examples": {
+          "migrateAssessment_listAssessedApplicationsForMachine": {
+            "$ref": "./examples/migrateAssessment_listMachineAssessedApplications.json"
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "value",
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the project"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the assessment"
+          },
+          {
+            "name": "machineId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the machine"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Machine in assessment was found",
+            "schema": {
+              "$ref": "#/definitions/assessedApplicationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppAssessment/migrateProjects/{projectName}/assessments/{assessmentName}/assessedApplications/{applicationId}": {
+      "get": {
+        "tags": [
+          "migrateProjectsAssessment"
+        ],
+        "operationId": "migrateProjectsAssessment_getAssessedApplication",
+        "description": "Gets the application that was assessed in an assessment",
+        "x-ms-examples": {
+          "migrateAssessment_getAssessedApplication": {
+            "$ref": "./examples/migrateAssessment_getAssessedApplication.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the project"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the assessment"
+          },
+          {
+            "name": "applicationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the program"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Assessed application was found",
+            "schema": {
+              "$ref": "#/definitions/assessedApplication"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "migrateProjectsAssessment"
+        ],
+        "operationId": "migrateProjectsAssessment_updateAssessedApplication",
+        "description": "Updates the annotations on an assessed application",
+        "x-ms-examples": {
+          "migrateAssessment_updateAssessedApplicationAnnotations": {
+            "$ref": "./examples/migrateAssessment_updateAssessedApplication.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the project"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the assessment"
+          },
+          {
+            "name": "applicationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The id of the program"
+          },
+          {
+            "$ref": "definitions.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "Annotations for the assessment",
+            "schema": {
+              "$ref": "#/definitions/applicationAnnotation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Annotation applied successfully",
+            "schema": {
+              "$ref": "#/definitions/assessedApplication"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "assessedApplication": {
+      "type": "object",
+      "description": "Info for application that was part of the assessment",
+      "allOf": [
+        {
+          "$ref": "definitions.json#/definitions/AzureEntityResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "The properties of the assessed application",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "version": {
+              "type": "string",
+              "description": "The version of the program",
+              "readOnly": true
+            },
+            "source": {
+              "type": "string",
+              "description": "The source of the program for example 'Add Remove Programs', 'AppX package'",
+              "readOnly": true
+            },
+            "publisher": {
+              "type": "string",
+              "description": "The publisher of the program e.g. Microsoft, Adobe",
+              "readOnly": true
+            },
+            "installCount": {
+              "type": "integer",
+              "format": "int32",
+              "description": "The total number of installations of this program across all the machines in the assessment",
+              "readOnly": true
+            },
+            "readinessAcrossMachines": {
+              "type": "object",
+              "description": "The readiness count of the program across all the machines where the program is install for the machines in the assessment",
+              "$ref": "migrateAssessments.json#/definitions/readiness"
+            },
+            "annotations": {
+              "type": "object",
+              "description": "The default or user applied annotations for this application",
+              "$ref": "#/definitions/applicationAnnotation"
+            },
+            "provisioningState": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The provisioning state of the resource in Azure"
+            }
+          }
+        }
+      }
+    },
+    "assessedApplicationList": {
+      "type": "object",
+      "description": "The result object for listing assessed applications in an assessment",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/assessedApplication"
+          },
+          "description": "Array of the applications"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to next page of results, null if at end of results"
+        }
+      }
+    },
+    "applicationAnnotation": {
+      "type": "object",
+      "description": "User annotations for this application instance",
+      "properties": {
+        "importance": {
+          "type": "string",
+          "description": "User defined importance of the application",
+          "enum": [
+            "NotReviewed",
+            "NotImportant",
+            "Important"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "ApplicationImportance"
+          }
+        },
+        "migrateDecision": {
+          "type": "string",
+          "description": "User defined migration decision for this application",
+          "enum": [
+            "NotReviewed",
+            "NotToBeMigrated",
+            "ToBeMigrated"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "MigrationDecision"
+          }
+        }
+      }
+    }
+  }
+}

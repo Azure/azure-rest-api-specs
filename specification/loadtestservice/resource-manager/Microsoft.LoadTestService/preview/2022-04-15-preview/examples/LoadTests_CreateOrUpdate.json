@@ -9,21 +9,8 @@
       "tags": {
         "Team": "Dev Exp"
       },
-      "identity": {
-        "type": "SystemAssigned,UserAssigned",
-        "userAssignedIdentities": {
-          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {}
-        }
-      },
       "properties": {
-        "description": "This is new load test resource",
-        "encryption": {
-          "identity": {
-            "type": "UserAssigned",
-            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1"
-          },
-          "keyUrl": "https://dummy.vault.azure.net/keys/dummykey1"
-        }
+        "description": "This is new load test resource"
       }
     }
   },
@@ -31,28 +18,10 @@
     "200": {
       "body": {
         "location": "westus",
-        "identity": {
-          "type": "SystemAssigned,UserAssigned",
-          "principalId": "12345678-1234-1234-1234-123456789012",
-          "tenantId": "12345678-1234-1234-4321-123456789012",
-          "userAssignedIdentities": {
-            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
-              "principalId": "12345678-1234-4321-1234-123456789012",
-              "clientId": "12345678-4321-1234-1234-123456789012"
-            }
-          }
-        },
         "properties": {
           "description": "This is new load test resource",
           "dataPlaneURI": "https://myLoadTest.00000000-0000-0000-0000-000000000000.cnt-dp.domain.com",
-          "provisioningState": "Succeeded",
-          "encryption": {
-            "identity": {
-              "type": "UserAssigned",
-              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1"
-            },
-            "keyUrl": "https://dummy.vault.azure.net/keys/dummykey1"
-          }
+          "provisioningState": "Succeeded"
         },
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.LoadTestService/loadTests/myLoadTest",
         "name": "myLoadTest",
@@ -73,28 +42,10 @@
     "201": {
       "body": {
         "location": "westus",
-        "identity": {
-          "type": "SystemAssigned,UserAssigned",
-          "principalId": "12345678-1234-1234-1234-123456789012",
-          "tenantId": "12345678-1234-1234-4321-123456789012",
-          "userAssignedIdentities": {
-            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
-              "principalId": "12345678-1234-4321-1234-123456789012",
-              "clientId": "12345678-4321-1234-1234-123456789012"
-            }
-          }
-        },
         "properties": {
           "description": "This is new load test resource",
           "dataPlaneURI": "https://myLoadTest.00000000-0000-0000-0000-000000000000.cnt-dp.domain.com",
-          "provisioningState": "Succeeded",
-          "encryption": {
-            "identity": {
-              "type": "UserAssigned",
-              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1"
-            },
-            "keyUrl": "https://dummy.vault.azure.net/keys/dummykey1"
-          }
+          "provisioningState": "Succeeded"
         },
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.LoadTestService/loadTests/myLoadTest",
         "name": "myLoadTest",

@@ -10,9 +10,6 @@ namespace: azure.mgmt.quantum
 package-name: azure-mgmt-quantum
 package-version: 1.0.0b1
 clear-output-folder: true
-generate-metadata: false
-models-mode: msrest
-version-tolerant: true
 ```
 
 ``` yaml $(python)

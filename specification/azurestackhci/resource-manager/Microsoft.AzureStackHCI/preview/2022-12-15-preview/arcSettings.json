@@ -704,9 +704,42 @@
         "enabled": {
           "type": "boolean",
           "description": "True indicates ARC connectivity is enabled"
+        },
+        "serviceConfigurations": {
+          "type": "array",
+          "description": "Service configurations associated with the connectivity resource",
+          "items": {
+            "$ref": "#/definitions/ServiceConfiguration"
+          }
         }
       },
       "additionalProperties": false
+    },
+    "ServiceConfiguration": {
+      "type": "object",
+      "description": "Service configuration details",
+      "required": [
+        "serviceName",
+        "port"
+      ],
+      "properties": {
+        "serviceName": {
+          "type": "string",
+          "description": "Name of the service.",
+          "enum": [
+            "WAC"
+          ],
+          "x-ms-enum": {
+            "name": "serviceName",
+            "modelAsString": true
+          }
+        },
+        "port": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The port on which service is enabled."
+        }
+      }
     },
     "PasswordCredential": {
       "type": "object",

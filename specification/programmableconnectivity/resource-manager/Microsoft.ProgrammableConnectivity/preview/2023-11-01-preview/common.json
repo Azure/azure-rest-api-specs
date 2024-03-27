@@ -1,0 +1,118 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ProgrammableConnectivity",
+    "version": "2023-11-01-preview",
+    "description": "Azure Programmable Connectivity Provider management API",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create or update request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "GatewayResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "Azure Programmable Connectivity Gateway resource ID.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ProgrammableConnectivity/gateways"
+          }
+        ]
+      }
+    },
+    "OpenApiGatewayResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "Open API Gateway resource Id.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ProgrammableConnectivity/openApiGateways"
+          }
+        ]
+      }
+    },
+    "OpenApiGatewayOfferingResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "Open API Gateway Offering resource ID.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ProgrammableConnectivity/openApiGatewayOfferings"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

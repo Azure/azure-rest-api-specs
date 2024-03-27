@@ -1,0 +1,312 @@
+{
+  "parameters": {
+    "api-version": "2020-06-10"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Microsoft.Bing/accounts/read",
+            "display": {
+              "provider": "Microsoft Bing",
+              "resource": "Bing API Account",
+              "operation": "Read API Account",
+              "description": "Reads API accounts."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Bing/accounts/write",
+            "display": {
+              "provider": "Microsoft Bing",
+              "resource": "Bing API Account",
+              "operation": "Write API Account",
+              "description": "Writes API Accounts."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Bing/accounts/delete",
+            "display": {
+              "provider": "Microsoft Bing",
+              "resource": "Bing API Account",
+              "operation": "Delete API Account",
+              "description": "Deletes API accounts"
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Bing/accounts/listKeys/action",
+            "display": {
+              "provider": "Microsoft Bing",
+              "resource": "Bing API Account",
+              "operation": "List Keys",
+              "description": "List Keys"
+            },
+            "origin": "user"
+          },
+          {
+            "name": "Microsoft.Bing/accounts/regenerateKey/action",
+            "display": {
+              "provider": "Microsoft Bing",
+              "resource": "Bing API Account",
+              "operation": "Regenerate Key",
+              "description": "Regenerate Key"
+            },
+            "origin": "user"
+          },
+          {
+            "name": "Microsoft.Bing/accounts/usages/read",
+            "display": {
+              "provider": "Microsoft Bing",
+              "resource": "Bing API Account",
+              "operation": "Get the quota usage for an existing resource",
+              "description": "Get the quota usage for an existing resource."
+            },
+            "origin": "user"
+          },
+          {
+            "name": "Microsoft.Bing/accounts/skus/read",
+            "display": {
+              "provider": "Microsoft Bing",
+              "resource": "Bing API Account",
+              "operation": "Read available SKUs for an existing resource",
+              "description": "Reads available SKUs for an existing resource."
+            },
+            "origin": "user"
+          },
+          {
+            "name": "Microsoft.Bing/accounts/providers/Microsoft.Insights/diagnosticSettings/read",
+            "display": {
+              "provider": "Microsoft Bing",
+              "resource": "Bing API Account",
+              "operation": "Read diagnostic setting",
+              "description": "Gets the diagnostic setting for the resource."
+            },
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.Bing/accounts/providers/Microsoft.Insights/diagnosticSettings/write",
+            "display": {
+              "provider": "Microsoft Bing",
+              "resource": "Bing API Account",
+              "operation": "Write diagnostic setting",
+              "description": "Creates or updates the diagnostic setting for the resource."
+            },
+            "origin": "system"
+          },
+          {
+            "properties": {
+              "serviceSpecification": {
+                "metricSpecifications": [
+                  {
+                    "name": "TotalCalls",
+                    "displayName": "Total Calls",
+                    "displayDescription": "Total number of calls.",
+                    "unit": "Count",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      },
+                      {
+                        "timeGrain": "PT1H",
+                        "blobDuration": "P1D"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "SuccessfulCalls",
+                    "displayName": "Successful Calls",
+                    "displayDescription": "Number of successful calls.",
+                    "unit": "Count",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      },
+                      {
+                        "timeGrain": "PT1H",
+                        "blobDuration": "P1D"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "TotalErrors",
+                    "displayName": "Total Errors",
+                    "displayDescription": "Total number of calls with error response (HTTP response code 4xx or 5xx).",
+                    "unit": "Count",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      },
+                      {
+                        "timeGrain": "PT1H",
+                        "blobDuration": "P1D"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "BlockedCalls",
+                    "displayName": "Blocked Calls",
+                    "displayDescription": "Number of calls that exceeded rate or quota limit.",
+                    "unit": "Count",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      },
+                      {
+                        "timeGrain": "PT1H",
+                        "blobDuration": "P1D"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "ServerErrors",
+                    "displayName": "Server Errors",
+                    "displayDescription": "Number of calls with service internal error (HTTP response code 5xx).",
+                    "unit": "Count",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      },
+                      {
+                        "timeGrain": "PT1H",
+                        "blobDuration": "P1D"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "ClientErrors",
+                    "displayName": "Client Errors",
+                    "displayDescription": "Number of calls with client side error (HTTP response code 4xx).",
+                    "unit": "Count",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      },
+                      {
+                        "timeGrain": "PT1H",
+                        "blobDuration": "P1D"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "DataIn",
+                    "displayName": "Data In",
+                    "displayDescription": "Size of incoming data in bytes.",
+                    "unit": "Bytes",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      },
+                      {
+                        "timeGrain": "PT1H",
+                        "blobDuration": "P1D"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "DataOut",
+                    "displayName": "Data Out",
+                    "displayDescription": "Size of outgoing data in bytes.",
+                    "unit": "Bytes",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      },
+                      {
+                        "timeGrain": "PT1H",
+                        "blobDuration": "P1D"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "Latency",
+                    "displayName": "Latency",
+                    "displayDescription": "Latency in milliseconds.",
+                    "unit": "MilliSeconds",
+                    "aggregationType": "Average",
+                    "availabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "blobDuration": "PT1H"
+                      },
+                      {
+                        "timeGrain": "PT1H",
+                        "blobDuration": "P1D"
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            "name": "Microsoft.Bing/accounts/providers/Microsoft.Insights/metricDefinitions/read",
+            "display": {
+              "provider": "Microsoft Bing",
+              "resource": "The metric definition of Bing",
+              "operation": "Read Bing metric definitions",
+              "description": "Gets the available metrics for Bing."
+            },
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.Bing/Operations/read",
+            "display": {
+              "provider": "Resource Provider display name.",
+              "resource": "Resource type display name.",
+              "operation": "Operation display name.",
+              "description": "Description of the operation."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Bing/checkSkuAvailabilityaction",
+            "display": {
+              "provider": "Microsoft Bing",
+              "resource": "Bing API Account",
+              "operation": "Reads avaible SKUs for an subscription.",
+              "description": "Reads avaible SKUs for an subscription."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Bing/updateAccountsCreationSettingswrite",
+            "display": {
+              "provider": "Microsoft Bing",
+              "resource": "Bing API Account",
+              "operation": "Allow to create Bing account for an given subscription/ApiKind/location.",
+              "description": "Allow to create Bing account for an given subscription/ApiKind/location."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Bing/accountsCreationSettingsread",
+            "display": {
+              "provider": "Microsoft Bing",
+              "resource": "Bing API Account",
+              "operation": "Get settings for given subscription/ApiKind/location.",
+              "description": "Get settings for given subscription/ApiKind/location."
+            },
+            "origin": "user,system"
+          }
+        ]
+      }
+    }
+  }
+}

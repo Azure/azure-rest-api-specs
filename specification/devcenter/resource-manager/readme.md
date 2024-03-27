@@ -27,19 +27,51 @@ These are the global settings for devcenter.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2023-10
+tag: package-2024-02
 ```
 
+
+### Tag: package-2024-02
+
+These settings apply only when `--tag=package-2024-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-02'
+input-file:
+  - Microsoft.DevCenter/stable/2024-02-01/commonDefinitions.json
+  - Microsoft.DevCenter/stable/2024-02-01/devcenter.json
+  - Microsoft.DevCenter/stable/2024-02-01/vdi.json
+```
+### Tag: package-preview-2023-11
+
+These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-11'
+input-file:
+  - Microsoft.DevCenter/preview/2023-11-01-preview/commonDefinitions.json
+  - Microsoft.DevCenter/preview/2023-11-01-preview/devcenter.json
+  - Microsoft.DevCenter/preview/2023-11-01-preview/vdi.json
+```
 
 ### Tag: package-preview-2023-10
 
 These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-10'
+``` yaml $(tag) == 'package-preview-2023-10'
 input-file:
   - Microsoft.DevCenter/preview/2023-10-01-preview/commonDefinitions.json
   - Microsoft.DevCenter/preview/2023-10-01-preview/devcenter.json
   - Microsoft.DevCenter/preview/2023-10-01-preview/vdi.json
+```
+
+### Tag: package-preview-2023-09
+
+These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-09'
+input-file:
+  - Microsoft.DevCenter/preview/2023-09-01-preview/commonDefinitions.json
+  - Microsoft.DevCenter/preview/2023-09-01-preview/devcenter.json
+  - Microsoft.DevCenter/preview/2023-09-01-preview/vdi.json
 ```
 
 ### Tag: package-preview-2023-08
@@ -51,6 +83,17 @@ input-file:
   - Microsoft.DevCenter/preview/2023-08-01-preview/commonDefinitions.json
   - Microsoft.DevCenter/preview/2023-08-01-preview/devcenter.json
   - Microsoft.DevCenter/preview/2023-08-01-preview/vdi.json
+```
+
+### Tag: package-preview-2023-06
+
+These settings apply only when `--tag=package-preview-2023-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-06'
+input-file:
+  - Microsoft.DevCenter/preview/2023-06-01-preview/commonDefinitions.json
+  - Microsoft.DevCenter/preview/2023-06-01-preview/devcenter.json
+  - Microsoft.DevCenter/preview/2023-06-01-preview/vdi.json
 ```
 
 ### Tag: package-2023-04

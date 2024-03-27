@@ -4,11 +4,11 @@
 
 Configuration for generating EASM SDK.
 
-The current release is `2023-03-01-preview`.
+The current release is `2022-09-01-preview`.
 
 ``` yaml
 
-tag: 2023-03-01-preview
+tag: 2022-09-01-preview
 add-credentials: true
 openapi-type: data-plane
 openapi-subtype: providerHub
@@ -34,20 +34,12 @@ input-file:
   - Microsoft.Easm/preview/2022-09-01-preview/easm.json
 ```
 
-### Release 2022-11-01-preview
-These settings apply only when `--tag=2022-11-01-preview` is specified on the command line.
-
-``` yaml $(tag) == '2022-11-01-preview'
-input-file:
-  - Microsoft.Easm/preview/2022-11-01-preview/easm.json
-```
-
-### Release 2023-03-01-preview
-These settings apply only when `--tag=2023-03-01-preview` is specified on the command line.
-
-``` yaml $(tag) == '2023-03-01-preview'
-input-file:
-  - Microsoft.Easm/preview/2023-03-01-preview/easm.json
+## CSharp Settings
+These settings apply only when `--csharp` is specified on the command line.
+``` yaml $(csharp)
+sync-methods: None
+namespace: Azure.Security.Easm
+output-folder: $(csharp-sdks-folder)/Security/Easm/src/Generated
 ```
 
 ## Python
@@ -61,8 +53,8 @@ May need to supply `--version=V2` on the command line.
 python-mode: create
 add-credentials: true
 payload-flattening-threshold: 2
-namespace: azure.defender.easm
-package-name: azure-defender-easm
+namespace: azure.security.easm
+package-name: azure-security-easm
 package-version: 0.9.0
 use: "@microsoft.azure/autorest.python@~4.0.71"
 version: V2
@@ -72,24 +64,23 @@ client-side-validation: false
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/defender/azure-defender-easm/azure/defender/easm
+output-folder: $(python-sdks-folder)/security/azure-security-easm/azure/security/easm
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 basic-setup-py: true
-output-folder: $(python-sdks-folder)/defender/azure-defender-easm
+output-folder: $(python-sdks-folder)/security/azure-security-easm
 ```
 
-### Suppress non-TypeSpec SDK related linting rules
+## Java
 
-These set of linting rules aren't applicable to the new TypeSpec SDK code generators so suppressing them here. Eventually we will
-opt-out these rules from running in the linting tools for TypeSpec generated swagger files.
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
-``` yaml
-suppressions:
-  - code: AvoidAnonymousTypes
-  - code: PatchInOperationName
-  - code: OperationIdNounVerb
-  - code: RequiredReadOnlyProperties
-  - code: SchemaNamesConvention
-  - code: SchemaDescriptionOrTitle
+``` yaml $(java)
+namespace: com.azure.security.easm
+payload-flattening-threshold: 1
+output-folder: $(azure-libraries-for-java-folder)/security/data-plane/easm
+with-optional-parameters: true
+with-single-async-method: true
+with-default-group-name: Easm
 ```

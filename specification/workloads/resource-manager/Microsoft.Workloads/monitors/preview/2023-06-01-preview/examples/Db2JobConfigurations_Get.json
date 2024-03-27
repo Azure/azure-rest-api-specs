@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "api-version": "2023-06-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "monitorName": "mySapMonitor",
+    "jobConfigurationName": "mydb2JobConfigurations"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/monitors/mySAPMonitor/db2JobConfigurations/mydb2JobConfigurations",
+        "name": "default",
+        "type": "Microsoft.Workloads/monitors/db2JobConfigurations",
+        "systemData": {
+          "createdBy": "user@xyz.com",
+          "createdByType": "User",
+          "createdAt": "2021-08-19T15:10:46.196Z",
+          "lastModifiedBy": "user@xyz.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-08-19T15:10:46.196Z"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "metricName": "DB2_SystemInfo",
+          "metricDimensions": [
+            "dimension1"
+          ],
+          "customLogTable": "DB2_SystemInfo",
+          "defaultFrequencyInSecs": 180,
+          "type": "BuiltIn",
+          "parameters": [
+            {
+              "name": "laws_timeout",
+              "value": "5"
+            }
+          ],
+          "actions": [
+            {
+              "functionName": "execute_sql",
+              "parameters": [
+                {
+                  "name": "sql",
+                  "value": "SELECT * FROM DUMMY.DUMMY"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

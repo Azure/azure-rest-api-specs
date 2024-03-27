@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2021-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "accountName": "myAccount",
+    "deviceName": "myDevice",
+    "sensorName": "mySensor",
+    "sensor": {
+      "properties": {
+        "metadata": {
+          "manufacturer": "Microsoft"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AzurePercept/accounts/myAccount/devices/myDevice/sensors/myNewSensor",
+        "name": "myNewSensor",
+        "type": "Microsoft.AzurePercept/accounts/devices/sensors",
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "properties": {
+          "url": "rtsp:///profile1/media.smp",
+          "sensorLocation": "frontdesk",
+          "userName": "myUsername",
+          "kind": "Camera",
+          "metadata": {
+            "manufacturer": "Microsoft"
+          }
+        }
+      }
+    }
+  }
+}

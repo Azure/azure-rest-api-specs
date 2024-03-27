@@ -1,0 +1,156 @@
+{
+  "title": "Jobs_Update",
+  "operationId": "Jobs_Update",
+  "parameters": {
+    "api-version": "2023-01-31-preview",
+    "subscriptionId": "BC7AE30F-7480-4B55-86CA-F243AF924107",
+    "resourceGroupName": "rgazurelinuxtestingservice",
+    "jobName": "Job_Six",
+    "properties": {
+      "tags": {
+        "test-type": "functional"
+      },
+      "properties": {
+        "jobTemplateInstance": {
+          "provisioningState": "Succeeded",
+          "templateTags": [
+            "functional-test"
+          ],
+          "region": [
+            "westus3"
+          ],
+          "vmSize": [
+            "Standard_D4_V4"
+          ],
+          "selections": [
+            {
+              "caseName": [
+                "check_floppy_module"
+              ],
+              "caseArea": [
+                "core"
+              ],
+              "caseCategory": [
+                "functional"
+              ],
+              "casePriority": [
+                3
+              ],
+              "caseTags": [],
+              "action": "Include",
+              "testIterations": 2,
+              "retryCount": 0,
+              "useNewEnvironment": true,
+              "ignoreFailure": false
+            }
+          ],
+          "concurrency": 2
+        },
+        "resourceGroupNamePrefix": "alts-rg-",
+        "repos": [
+          "gwiqzxymfdpnpeyjeir"
+        ],
+        "image": {
+          "type": "vhd",
+          "vhdUrl": "www.azure.com/vhd-url",
+          "vhdGeneration": 1,
+          "vhdArchitecture": "x64"
+        },
+        "keepFailedEnvironment": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "jobTemplateInstance": {
+            "provisioningState": "Succeeded",
+            "templateTags": [
+              "functional-test"
+            ],
+            "region": [
+              "westus3"
+            ],
+            "vmSize": [
+              "Standard_D4_V4"
+            ],
+            "selections": [
+              {
+                "caseName": [
+                  "check_floppy_module"
+                ],
+                "caseArea": [
+                  "core"
+                ],
+                "caseCategory": [
+                  "functional"
+                ],
+                "casePriority": [
+                  3
+                ],
+                "caseTags": [],
+                "action": "Include",
+                "testIterations": 2,
+                "retryCount": 0,
+                "useNewEnvironment": true,
+                "ignoreFailure": false
+              }
+            ],
+            "concurrency": 2
+          },
+          "resourceGroupNamePrefix": "alts-rg-",
+          "repos": [
+            "gwiqzxymfdpnpeyjeir"
+          ],
+          "image": {
+            "type": "vhd",
+            "vhdUrl": "www.azure.com/vhd-url",
+            "vhdGeneration": 1,
+            "vhdArchitecture": "x64"
+          },
+          "keepFailedEnvironment": true,
+          "results": [
+            {
+              "provisioningState": "Succeeded",
+              "jobName": "Job_Six",
+              "caseName": "check_floppy_module",
+              "status": "Passed",
+              "message": "spuq",
+              "logUrl": "www.azure.com/log-url",
+              "image": "microsoft-dsvm aml-workstation ubuntu-20-gen2 22.11.09",
+              "vmSize": "Standard_D32pds_v5",
+              "location": "westus3",
+              "kernelVersion": "5.4.155-200_ol001.el7.aarch64",
+              "distroVersion": "CentOS Linux release 7.9.2009 (AltArch",
+              "vhdGeneration": "1",
+              "walaVersion": "WALinuxAgent-2.2.20",
+              "extraFields": {},
+              "duration": "2 hours",
+              "startTime": "2023-01-31T17:32:28Z",
+              "endTime": "2023-01-31T19:32:28Z"
+            }
+          ],
+          "duration": "2 hours",
+          "logUrl": "www.azure.com/log-url"
+        },
+        "tags": {
+          "test-type": "functional"
+        },
+        "location": "westus3",
+        "id": "nddfdglrsnasnmbnxkmyrhrt",
+        "name": "vhsjderu",
+        "type": "Microsoft.AzureLinuxTestingService/jobTemplates",
+        "systemData": {
+          "createdBy": "oqxy",
+          "createdByType": "User",
+          "createdAt": "2023-01-31T21:52:10.285Z",
+          "lastModifiedBy": "qhlfaiiouwppdvipxhlcn",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-01-31T21:52:10.286Z"
+        }
+      }
+    }
+  }
+}

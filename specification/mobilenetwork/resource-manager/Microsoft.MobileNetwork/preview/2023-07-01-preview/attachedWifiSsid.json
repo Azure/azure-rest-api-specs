@@ -1,0 +1,374 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MobileNetworkManagementClient",
+    "description": "The resources in this API specification will be used to manage attached Wi-Fi SSID resources in mobile network attached to a particular packet core instance",
+    "version": "2023-07-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/{packetCoreControlPlaneName}/packetCoreDataPlanes/{packetCoreDataPlaneName}/attachedWifiSsids/{attachedWifiSsidName}": {
+      "delete": {
+        "tags": [
+          "AttachedWifiSSID"
+        ],
+        "operationId": "AttachedWifiSSIDs_Delete",
+        "description": "Deletes the specified Wi-Fi Attached SSID.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreDataPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/AttachedWifiSsidNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Sets 'Deleting' provisioningState until the operation completes. Returns an operation URI that can be queried to find the current state of the operation.",
+            "headers": {
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Wi-Fi Attached SSID resource": {
+            "$ref": "./examples/AttachedWifiSsidDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "AttachedWifiSSID"
+        ],
+        "operationId": "AttachedWifiSSIDs_Get",
+        "description": "Gets information about the specified Wi-Fi Attached SSID.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreDataPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/AttachedWifiSsidNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting Wi-Fi Attached SSID resource.",
+            "schema": {
+              "$ref": "#/definitions/AttachedWifiSsid"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Wi-Fi Attached SSID": {
+            "$ref": "./examples/AttachedWifiSsidGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WifiAttachedSSID"
+        ],
+        "operationId": "AttachedWifiSSIDs_CreateOrUpdate",
+        "description": "Creates or updates an Wi-Fi Attached SSID. Must be created in the same location as its parent packet core data plane.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreDataPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/AttachedWifiSsidNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AttachedWifiSsid"
+            },
+            "description": "Parameters supplied to the create or update Wi-Fi Attached SSID operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting Wi-Fi Attached SSID resource.",
+            "schema": {
+              "$ref": "#/definitions/AttachedWifiSsid"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting Wi-Fi Attached SSID resource.",
+            "schema": {
+              "$ref": "#/definitions/AttachedWifiSsid"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Wi-Fi Attached SSID": {
+            "$ref": "./examples/AttachedWifiSsidCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "WifiAttachedSSID"
+        ],
+        "operationId": "AttachedWifiSSIDs_Update",
+        "description": "Updates an Wi-Fi Attached SSID.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreDataPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/AttachedWifiSsidNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update Wi-Fi Attached SSID tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting Wi-Fi Attached SSID resource.",
+            "schema": {
+              "$ref": "#/definitions/AttachedWifiSsid"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Wi-Fi Attached SSID": {
+            "$ref": "./examples/AttachedWifiSsidUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileNetwork/packetCoreControlPlanes/{packetCoreControlPlaneName}/packetCoreDataPlanes/{packetCoreDataPlaneName}/attachedWifiSsids": {
+      "get": {
+        "tags": [
+          "WifiAttachedSSIDs"
+        ],
+        "operationId": "AttachedWifiSSIDs_ListByPacketCoreDataPlane",
+        "description": "Gets all the Wi-Fi Attached SSIDs associated with a packet core data plane.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreControlPlaneNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PacketCoreDataPlaneNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of Wi-Fi Attached SSID resources.",
+            "schema": {
+              "$ref": "#/definitions/AttachedWifiSsidListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Wi-Fi Attached SSIDs in a data plane": {
+            "$ref": "./examples/AttachedWifiSsidListByPacketCoreDataPlane.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AttachedWifiSsid": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AttachedWifiSsidPropertiesFormat",
+          "description": "Wi-Fi Attached SSID properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "description": "Wi-Fi Attached SSID resource. Must be created in the same location as its parent packet core data plane."
+    },
+    "AttachedWifiSsidPropertiesFormat": {
+      "description": "Wi-Fi Attached SSID properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the Wi-Fi Attached SSID resource."
+        },
+        "accessInterface": {
+          "description": "The interface on the access side which receives traffic for this SSID.",
+          "$ref": "./common.json#/definitions/EdgeNetworkInterface"
+        },
+        "wifiUserEquipmentAddressPoolSubnet": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/UserEquipmentAddressPool"
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "x-ms-identifiers": [],
+          "description": "The address pool used by the Wi-Fi Access Point for this SSID when allocating an IP address to a UE."
+        }
+      }
+    },
+    "AttachedWifiSsidListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AttachedWifiSsid"
+          },
+          "description": "A list of Wi-Fi Attached SSIDs in a resource group."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for Wi-Fi Attached SSID API service call."
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "subscriptionId": "12345",
+    "resourceGroupName": "MyResourceGroup",
+    "spoolName": "MySpoolResource",
+    "api-version": "2019-10-10-preview",
+    "parameters": {
+      "location": "West US",
+      "properties": {}
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/12345/providers/Microsoft.SpoolService/operations/67890"
+      },
+      "body": {
+        "id": "/subscriptions/12345/resourceGroups/MyResourceGroup/providers/Microsoft.SpoolService/spools/MySpoolResource",
+        "name": "MySpoolResource",
+        "type": "Microsoft.SpoolService/spools",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "hostName": "myspoolservice.service.spool.net",
+          "version": "0.2.0",
+          "optionalFeatures": []
+        }
+      }
+    }
+  }
+}

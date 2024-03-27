@@ -1000,7 +1000,7 @@
           {
             "name": "nrfDeploymentName",
             "in": "path",
-            "description": "The name of the NrfDeployment",
+            "description": "The name of the NRF Deployment",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1047,7 +1047,7 @@
           {
             "name": "nrfDeploymentName",
             "in": "path",
-            "description": "The name of the NrfDeployment",
+            "description": "The name of the NRF Deployment",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1120,7 +1120,7 @@
           {
             "name": "nrfDeploymentName",
             "in": "path",
-            "description": "The name of the NrfDeployment",
+            "description": "The name of the NRF Deployment",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1176,7 +1176,7 @@
           {
             "name": "nrfDeploymentName",
             "in": "path",
-            "description": "The name of the NrfDeployment",
+            "description": "The name of the NRF Deployment",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1282,7 +1282,7 @@
           {
             "name": "nssfDeploymentName",
             "in": "path",
-            "description": "The name of the NssfDeployment",
+            "description": "The name of the NSSF Deployment",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1329,7 +1329,7 @@
           {
             "name": "nssfDeploymentName",
             "in": "path",
-            "description": "The name of the NssfDeployment",
+            "description": "The name of the NSSF Deployment",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1402,7 +1402,7 @@
           {
             "name": "nssfDeploymentName",
             "in": "path",
-            "description": "The name of the NssfDeployment",
+            "description": "The name of the NSSF Deployment",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1458,7 +1458,7 @@
           {
             "name": "nssfDeploymentName",
             "in": "path",
-            "description": "The name of the NssfDeployment",
+            "description": "The name of the NSSF Deployment",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1846,7 +1846,7 @@
           {
             "name": "smfDeploymentName",
             "in": "path",
-            "description": "The name of the SmfDeployment",
+            "description": "The name of the SMF Deployment",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1893,7 +1893,7 @@
           {
             "name": "smfDeploymentName",
             "in": "path",
-            "description": "The name of the SmfDeployment",
+            "description": "The name of the SMF Deployment",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -1966,7 +1966,7 @@
           {
             "name": "smfDeploymentName",
             "in": "path",
-            "description": "The name of the SmfDeployment",
+            "description": "The name of the SMF Deployment",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -2022,7 +2022,7 @@
           {
             "name": "smfDeploymentName",
             "in": "path",
-            "description": "The name of the SmfDeployment",
+            "description": "The name of the SMF Deployment",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -2128,7 +2128,7 @@
           {
             "name": "upfDeploymentName",
             "in": "path",
-            "description": "The name of the UpfDeployment",
+            "description": "The name of the UPF Deployment",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -2175,7 +2175,7 @@
           {
             "name": "upfDeploymentName",
             "in": "path",
-            "description": "The name of the UpfDeployment",
+            "description": "The name of the UPF Deployment",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -2248,7 +2248,7 @@
           {
             "name": "upfDeploymentName",
             "in": "path",
-            "description": "The name of the UpfDeployment",
+            "description": "The name of the UPF Deployment",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -2304,7 +2304,7 @@
           {
             "name": "upfDeploymentName",
             "in": "path",
-            "description": "The name of the UpfDeployment",
+            "description": "The name of the UPF Deployment",
             "required": true,
             "type": "string",
             "minLength": 1,
@@ -2408,6 +2408,10 @@
           "$ref": "#/definitions/ComponentDeploymentSecrets",
           "format": "password",
           "description": "Azure for Operators 5G Core AMF secrets parameters",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
           "x-ms-secret": true
         },
         "clusterService": {
@@ -2756,6 +2760,10 @@
           "$ref": "#/definitions/ComponentDeploymentSecrets",
           "format": "password",
           "description": "Azure for Operators 5G Core NRF secrets parameters",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
           "x-ms-secret": true
         },
         "clusterService": {
@@ -2852,6 +2860,10 @@
           "$ref": "#/definitions/ComponentDeploymentSecrets",
           "format": "password",
           "description": "Azure for Operators 5G Core NSSF secrets parameters",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
           "x-ms-secret": true
         },
         "clusterService": {
@@ -3064,7 +3076,7 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/ComponentDeploymentType",
-          "description": "Federation Type"
+          "description": "Component Type"
         },
         "parameters": {
           "$ref": "#/definitions/ComponentDeploymentParameters",
@@ -3074,6 +3086,10 @@
           "$ref": "#/definitions/ComponentDeploymentSecrets",
           "format": "password",
           "description": "Deployment secrets",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
           "x-ms-secret": true
         }
       },
@@ -3167,6 +3183,10 @@
           "$ref": "#/definitions/ComponentDeploymentSecrets",
           "format": "password",
           "description": "Azure for Operators 5G Core SMF secrets parameters",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
           "x-ms-secret": true
         },
         "clusterService": {
@@ -3263,6 +3283,10 @@
           "$ref": "#/definitions/ComponentDeploymentSecrets",
           "format": "password",
           "description": "Azure for Operators 5G Core F secrets parameters",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
           "x-ms-secret": true
         },
         "clusterService": {

@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2022-04-01-preview",
+    "portalExtensionName": "storage",
+    "resourceGroupName": "testRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "deploymentName": "deploySourceSlot",
+    "parameters": {
+      "properties": {
+        "source": {
+          "kind": "CopySlot",
+          "value": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/storage/slots/sourceSlot"
+        },
+        "waitDuration": "PT24H"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/storage/deployments/deploySourceSlot",
+        "name": "deploySourceSlot",
+        "type": "Microsoft.PortalServices/extensions/deployment",
+        "tags": {},
+        "properties": {
+          "provisioningState": "InProgress",
+          "waitDuration": "PT24H",
+          "nextStage": "stage1",
+          "source": {
+            "kind": "CopySlot",
+            "value": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.PortalServices/extensions/storage/slots/sourceSlot"
+          }
+        }
+      }
+    }
+  }
+}

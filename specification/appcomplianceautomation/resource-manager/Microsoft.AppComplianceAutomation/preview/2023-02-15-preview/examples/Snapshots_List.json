@@ -1,0 +1,195 @@
+{
+  "parameters": {
+    "api-version": "2023-02-15-preview",
+    "$skipToken": "1",
+    "$top": "100",
+    "reportName": "testReportName",
+    "reportCreatorTenantId": "00000000-0000-0000-0000-000000000000",
+    "offerGuid": "00000000-0000-0000-0000-000000000001"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/provider/Microsfot.AppComplianceAutomation/reports/testReportName/snapshots/testSnapshot",
+            "name": "testSnapshot",
+            "type": "Microsfot.AppComplianceAutomation/reports/snapshots",
+            "properties": {
+              "id": "00000000-0000-0000-0000-000000000000",
+              "snapshotName": "testSnapshot",
+              "createdAt": "2022-03-04T15:33:59.160Z",
+              "provisioningState": "Succeeded",
+              "reportProperties": {
+                "id": "00000000-0000-0000-0000-000000000000",
+                "status": "Active",
+                "errors": [],
+                "tenantId": "00000000-0000-0000-0000-000000000000",
+                "reportName": "testReportName",
+                "offerGuid": "00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002",
+                "timeZone": "GMT Standard Time",
+                "triggerTime": "2022-03-04T15:00:00.000Z",
+                "nextTriggerTime": "2022-03-04T15:00:00.000Z",
+                "lastTriggerTime": "2022-03-04T15:00:00.000Z",
+                "subscriptions": [
+                  "00000000-0000-0000-0000-000000000000"
+                ],
+                "resources": [
+                  {
+                    "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService",
+                    "resourceType": "Microsoft.SignalRService/SignalR",
+                    "resourceOrigin": "Azure"
+                  },
+                  {
+                    "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/acat-aws/providers/microsoft.security/securityconnectors/acatawsconnector/securityentitydata/aws-iam-user-testuser",
+                    "resourceType": "iam.user",
+                    "resourceOrigin": "AWS",
+                    "accountId": "000000000000"
+                  }
+                ],
+                "complianceStatus": {
+                  "m365": {
+                    "passedCount": 0,
+                    "failedCount": 0,
+                    "manualCount": 0,
+                    "notApplicableCount": 0,
+                    "pendingCount": 0
+                  }
+                },
+                "storageInfo": {
+                  "subscriptionId": "00000000-0000-0000-0000-000000000000",
+                  "resourceGroup": "testResourceGroup",
+                  "accountName": "testStorageAccount",
+                  "location": "East US"
+                },
+                "certRecords": [
+                  {
+                    "offerGuid": "00000000-0000-0000-0000-000000000001",
+                    "certificationStatus": "CertIngestion",
+                    "ingestionStatus": "EvidenceResubmitted",
+                    "controls": [
+                      {
+                        "controlId": "Operational_Security_10",
+                        "controlStatus": "Approved"
+                      }
+                    ]
+                  }
+                ],
+                "provisioningState": "Succeeded"
+              },
+              "reportSystemData": {
+                "createdBy": "00000000-0000-0000-0000-000000000000",
+                "createdByType": "User",
+                "createdAt": "2021-05-14T22:34:55.4499903Z",
+                "lastModifiedBy": "00000000-0000-0000-0000-000000000000",
+                "lastModifiedByType": "User",
+                "lastModifiedAt": "2021-05-14T22:34:55.4499903Z"
+              },
+              "complianceResults": [
+                {
+                  "complianceName": "M365",
+                  "categories": [
+                    {
+                      "categoryName": "Operational Security",
+                      "categoryStatus": "Passed",
+                      "controlFamilies": [
+                        {
+                          "controlFamilyName": "Incident Response",
+                          "controlFamilyStatus": "Passed",
+                          "controls": [
+                            {
+                              "controlId": "Operational_Security_75",
+                              "controlName": "Provide demonstrable evidence that all member of the incident response team have completed annual training or a table top exercise",
+                              "controlFullName": "Provide demonstrable evidence that all member of the incident response team have completed annual training or a table top exercise",
+                              "controlDescription": "Provide demonstrable evidence that all member of the incident response team have completed annual training or a table top exercise",
+                              "controlDescriptionHyperLink": "https://aka.ms/acat/m365cert/operational/control73",
+                              "controlStatus": "Passed",
+                              "responsibilities": [
+                                {
+                                  "responsibilityId": "authorized_ip_ranges_should_be_defined_on_kubernetes_services",
+                                  "responsibilityTitle": "Authorized IP ranges should be defined on Kubernetes Services",
+                                  "responsibilityDescription": "Restrict access to the Kubernetes Service Management API by granting API access only to IP addresses in specific ranges. It is recommended to limit access to authorized IP ranges to ensure that only applications from allowed networks can access the cluster.",
+                                  "responsibilityType": "Automated",
+                                  "responsibilitySeverity": "High",
+                                  "responsibilityStatus": "Passed",
+                                  "responsibilityEnvironment": "Azure",
+                                  "failedResourceCount": 0,
+                                  "totalResourceCount": 1,
+                                  "resourceList": [
+                                    {
+                                      "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService",
+                                      "resourceType": "Microsoft.SignalRService/SignalR",
+                                      "resourceOrigin": "Azure",
+                                      "resourceStatus": "Unhealthy",
+                                      "resourceStatusChangeDate": "2023-01-12T16:17:20.150Z",
+                                      "recommendationIds": [
+                                        "failed_reason_1"
+                                      ]
+                                    },
+                                    {
+                                      "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/acat-aws/providers/microsoft.security/securityconnectors/acatawsconnector/securityentitydata/aws-iam-user-testuser",
+                                      "resourceType": "iam.user",
+                                      "resourceOrigin": "AWS",
+                                      "accountId": "000000000000",
+                                      "resourceStatus": "Unhealthy",
+                                      "resourceStatusChangeDate": "2023-01-12T16:17:20.150Z",
+                                      "recommendationIds": [
+                                        "failed_reason_2"
+                                      ]
+                                    }
+                                  ],
+                                  "recommendationList": [
+                                    {
+                                      "recommendationId": "failed_reason_1",
+                                      "recommendationShortName": "Invalid TLS Config",
+                                      "recommendationSolutions": [
+                                        {
+                                          "recommendationSolutionIndex": "1",
+                                          "recommendationSolutionContent": "Setting minimal TLS version to 1.2 improves security by ensuring your SQL Managed Instance can only be accessed from clients using TLS 1.2. Using versions of TLS less than 1.2 is not recommended since they have well documented security vulnerabilities",
+                                          "isRecommendSolution": "true"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "recommendationId": "failed_reason_2",
+                                      "recommendationShortName": "Invalid AWS TLS Config",
+                                      "recommendationSolutions": [
+                                        {
+                                          "recommendationSolutionIndex": "1",
+                                          "recommendationSolutionContent": "Open the AWS related service, and set its TLS version to 1.2 or higher version.",
+                                          "isRecommendSolution": "true"
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "guidance": "Please upload the screen capture file to ACAT service.",
+                                  "justification": "Here is my evidence files",
+                                  "evidenceFiles": [
+                                    "https://management.azure.com/providers/Microsoft.AppComplianceAutomation/reports/reportABC/fileName?api-version=2023-02-15-preview"
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "systemData": {
+              "createdBy": "00000000-0000-0000-0000-000000000000",
+              "createdByType": "User",
+              "createdAt": "2021-05-14T22:34:55.4499903Z",
+              "lastModifiedBy": "00000000-0000-0000-0000-000000000000",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-05-14T22:34:55.4499903Z"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/providers/Microsoft.AppComplianceAutomation/reports/testReportName/snapshots?api-version=2023-02-15-preview&skipToken=1&top=100"
+      }
+    }
+  }
+}

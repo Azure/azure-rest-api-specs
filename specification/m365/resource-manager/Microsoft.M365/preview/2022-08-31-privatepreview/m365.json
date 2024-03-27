@@ -1,0 +1,603 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-08-31-privatepreview",
+    "title": "M365ResourcesClient",
+    "description": "M365 resources client provides lifecycle management features to M365 resources."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.M365/m365Resources": {
+      "get": {
+        "tags": [
+          "M365Resources"
+        ],
+        "operationId": "M365Resources_ListBySubscription",
+        "description": "Lists the M365 resources under the subscription.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/m365/"
+        },
+        "x-ms-examples": {
+          "ListM365ResourcesBySubscription": {
+            "$ref": "./examples/M365Resource_List_BySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ListM365ResourcesResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.M365/m365Resources/{m365ResourceName}": {
+      "get": {
+        "tags": [
+          "M365Resources"
+        ],
+        "operationId": "M365Resources_Get",
+        "description": "Gets a M365 resource by its ID. The operation is supported for billing accounts with agreement type Microsoft Customer Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/m365/"
+        },
+        "x-ms-examples": {
+          "GetM365Resource": {
+            "$ref": "./examples/M365Resource_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/m365ResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/M365Resource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "M365Resources"
+        ],
+        "operationId": "M365Resources_Create",
+        "description": "Creates or updates a M365 resource.",
+        "x-ms-examples": {
+          "CreateM365Resource": {
+            "$ref": "./examples/M365Resource_Put.json"
+          },
+          "CreateM365ResourceWithBillingFrequency": {
+            "$ref": "./examples/M365Resource_Put_WithBillingFrequency.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/m365ResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/M365Resource"
+            },
+            "description": "Request parameters that are provided to the create M365 resource operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/M365Resource"
+            }
+          },
+          "201": {
+            "description": "Created. The resource has been created.",
+            "schema": {
+              "$ref": "#/definitions/M365Resource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "M365Resources"
+        ],
+        "operationId": "M365Resources_Update",
+        "description": "Updates the properties of a M365 resource.",
+        "x-ms-examples": {
+          "AutoRenewOn": {
+            "$ref": "./examples/M365Resource_Patch_AutoRenew_On.json"
+          },
+          "AutoRenewOff": {
+            "$ref": "./examples/M365Resource_Patch_AutoRenew_Off.json"
+          },
+          "AutoRenewOnUpdateRenewalTermDetails": {
+            "$ref": "./examples/M365Resource_Patch_AutoRenew_On_UpdateRenewalTermDetails.json"
+          },
+          "AutoRenewOnUpdateRenewalTermDetailsWithBillingFrequency": {
+            "$ref": "./examples/M365Resource_Patch_AutoRenew_On_UpdateRenewalTermDetails_WithBillingFrequency.json"
+          },
+          "ChangeQuantity": {
+            "$ref": "./examples/M365Resource_Patch_ChangeQuantity.json"
+          },
+          "ConvertImmediate": {
+            "$ref": "./examples/M365Resource_Patch_ConvertImmediate.json"
+          },
+          "ConvertImmediateWithBillingFrequency": {
+            "$ref": "./examples/M365Resource_Patch_ConvertImmediate_WithBillingFrequency.json"
+          },
+          "NextBillingFrequencyUpdate": {
+            "$ref": "./examples/M365Resource_Patch_NextBillingFrequencyUpdate.json"
+          },
+          "TermUpdate": {
+            "$ref": "./examples/M365Resource_Patch_TermUpdate.json"
+          },
+          "TermUpdateWithBillingFrequency": {
+            "$ref": "./examples/M365Resource_Patch_TermUpdate_WithBillingFrequency.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/m365ResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/M365Resource"
+            },
+            "description": "Request parameters that are provided to the update M365 resource operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/M365Resource"
+            }
+          },
+          "202": {
+            "description": "Accepted. Method completes asynchronously",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "M365Resources"
+        ],
+        "operationId": "M365Resources_Delete",
+        "description": "Cancels a M365 resource.",
+        "x-ms-examples": {
+          "DeleteM365Resource": {
+            "$ref": "./examples/M365Resource_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/m365ResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/M365Resource"
+            }
+          },
+          "202": {
+            "description": "Accepted. Method completes asynchronously",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Recommended time to wait before making another request to check the status of the operation. The time is specified in seconds.",
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content. The resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ListM365ResourcesResult": {
+      "description": "The list of M365 resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of M365 resources.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/M365Resource"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "M365Resource": {
+      "description": "A M365 resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/M365ResourceProperties",
+          "title": "M365 resource properties"
+        }
+      }
+    },
+    "M365ResourceProperties": {
+      "description": "The billing properties of a M365 resource.",
+      "type": "object",
+      "properties": {
+        "autoRenew": {
+          "description": "Indicates whether auto renewal is turned on or off for a resource.",
+          "type": "string",
+          "enum": [
+            "Off",
+            "On"
+          ],
+          "x-ms-enum": {
+            "name": "AutoRenew",
+            "modelAsString": true
+          }
+        },
+        "billingAccountId": {
+          "description": "The ID of the billing account to which the resource is billed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingAccountDisplayName": {
+          "description": "The name of the billing account to which the resource is billed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileId": {
+          "description": "The ID of the billing profile to which the resource is billed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileDisplayName": {
+          "description": "The name of the billing profile to which the resource is billed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingFrequency": {
+          "description": "The billing frequency in ISO8601 format of product in the resource. Example: P1M, P3M, P1Y",
+          "type": "string"
+        },
+        "systemOverrides": {
+          "description": "System imposed policies that regulate behavior of the resource.",
+          "type": "object",
+          "properties": {
+            "cancellation": {
+              "description": "The policy override for the resource indicates whether the self-serve cancellation or seat reduction is allowed.",
+              "type": "string",
+              "x-nullable": true,
+              "readOnly": true,
+              "enum": [
+                "Allowed",
+                "NotAllowed"
+              ],
+              "x-ms-enum": {
+                "name": "Cancellation",
+                "modelAsString": true
+              }
+            },
+            "cancellationAllowedEndDate": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The end date in UTC time by when the self-serve cancellation ends.",
+              "readOnly": true
+            }
+          }
+        },
+        "displayName": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSectionId": {
+          "description": "The ID of the invoice section to which the resource is billed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSectionDisplayName": {
+          "description": "The name of the invoice section to which the resource is billed.",
+          "type": "string",
+          "readOnly": true
+        },
+        "nextBillingCycleDetails": {
+          "description": "Next billing cycle details of the resource.",
+          "$ref": "#/definitions/NextBillingCycleDetails"
+        },
+        "productCategory": {
+          "description": "Category of the resource. Possible values include: Consumption, SaaS, AzureSupport, AzureReservationOrder, AzureSavingsPlan, Hardware, M365",
+          "type": "string",
+          "readOnly": true
+        },
+        "productType": {
+          "description": "Type of the product for which the resource is purchased",
+          "type": "string",
+          "readOnly": true
+        },
+        "productTypeId": {
+          "description": "Id of the product for which the resource is purchased",
+          "type": "string"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gets the status of the M365Resource at the time the operation was called.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Accepted",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "purchaseDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Purchase date of the product in UTC time.",
+          "readOnly": true
+        },
+        "quantity": {
+          "description": "The number of licenses purchased for the resource",
+          "type": "integer",
+          "format": "int64"
+        },
+        "renewalTermDetails": {
+          "description": "Renewal term details of the resource.",
+          "$ref": "#/definitions/RenewalTermDetails"
+        },
+        "skuDescription": {
+          "description": "The SKU description of the product for which the resource is purchased.",
+          "type": "string",
+          "readOnly": true
+        },
+        "skuId": {
+          "description": "The SKU ID of the product for which the resource is purchased.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the resource.",
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Active",
+            "Disabled",
+            "Deleted",
+            "PastDue",
+            "Expiring",
+            "Expired",
+            "AutoRenew",
+            "Cancelled",
+            "Suspended"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "M365ResourceStatus",
+            "modelAsString": true
+          }
+        },
+        "suspensionReasons": {
+          "description": "The suspension reason for a resource.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "termDuration": {
+          "description": "The duration for which you can use the resource. Example P1Y and P1M",
+          "type": "string"
+        },
+        "termStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start date of the term in UTC time.",
+          "readOnly": true
+        },
+        "termEndDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End date of the term in UTC time.",
+          "readOnly": true
+        }
+      }
+    },
+    "NextBillingCycleDetails": {
+      "description": "Billing cycle details of the resource.",
+      "type": "object",
+      "properties": {
+        "billingFrequency": {
+          "description": "Billing frequency of the product under the resource.",
+          "type": "string"
+        }
+      }
+    },
+    "RenewalTermDetails": {
+      "description": "Renewal term details of the resource.",
+      "type": "object",
+      "properties": {
+        "billingFrequency": {
+          "description": "Billing frequency of the product under the resource.",
+          "type": "string"
+        },
+        "productId": {
+          "description": "Id of the product for which the resource is purchased",
+          "type": "string"
+        },
+        "quantity": {
+          "description": "The number of licenses purchased for the resource",
+          "type": "integer",
+          "format": "int64"
+        },
+        "skuId": {
+          "description": "The SKU ID of the product for which the resource is purchased.",
+          "type": "string"
+        },
+        "termDuration": {
+          "description": "The duration for which you can use the resource. Example P1Y and P1M",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "m365ResourceNameParameter": {
+      "name": "m365ResourceName",
+      "in": "path",
+      "description": "The name that uniquely identifies a M365 resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[-_0-9a-zA-Z]{1,50}$",
+      "minLength": 1,
+      "maxLength": 50
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

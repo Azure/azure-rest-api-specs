@@ -13,7 +13,7 @@ using Azure.ResourceManager;
 @armProviderNamespace("Microsoft.Community")
 @service({
   title: "Microsoft.Community",
-  version: "2023-11-01",
+  version: "2023-08-01-preview",
 })
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.Community;
@@ -101,10 +101,6 @@ model CommunityTrainingProperties {
   @visibility("read", "create")
   @doc("The email address of the portal admin")
   portalAdminEmailAddress: string;
-
-  @visibility("read", "create")
-  @doc("The organization name of the portal owner")
-  portalOwnerOrganizationName: string;
 
   @visibility("read", "create")
   @doc("The email address of the portal owner. Will be used as the primary contact")

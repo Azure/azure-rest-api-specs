@@ -1,0 +1,39 @@
+{
+  "operationId": "ArcNwLoadBalancer_ListBySubscription",
+  "title": "ArcNwLoadBalancer_ListBySubscription",
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "api-version": "2023-07-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/example/providers/Microsoft.ArcNetworking/arcNwLoadBalancers/testanlb",
+            "name": "testanlb",
+            "type": "Microsoft.ArcNetworking/arcNwLoadBalancers",
+            "location": "westus",
+            "extendedLocation": {
+              "name": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/example/providers/Microsoft.ExtendedLocation/customLocations/example",
+              "type": "CustomLocation"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "addresses": [
+                "192.168.50.51"
+              ],
+              "serviceSelector": {
+                "app": "frontend"
+              },
+              "advertiseMode": "ARP",
+              "status": {
+                "state": "OK"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

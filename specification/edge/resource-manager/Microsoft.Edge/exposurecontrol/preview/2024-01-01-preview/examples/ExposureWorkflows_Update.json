@@ -1,0 +1,71 @@
+{
+  "title": "ExposureWorkflows_Update",
+  "operationId": "ExposureWorkflows_Update",
+  "parameters": {
+    "api-version": "2024-01-01-preview",
+    "subscriptionId": "dc4ac3fc-8889-44d6-a8f8-a8fa229c659e",
+    "resourceGroupName": "azstec-global-test",
+    "featureName": "TestFeature",
+    "exposureWorkflowName": "TestWorkflow",
+    "properties": {
+      "properties": {
+        "currentRingStatus": "Cancelled"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "manifestDiscriminator": "ubuntu:offer:sku:*",
+          "exposureWorkflowManifestId": "/subscriptions/dc4ac3fc-8889-44d6-a8f8-a8fa229c659e/resourcegroups/azstec-global-test/providers/Microsoft.Edge/ExposureFeatures/TestFeature/ExposureWorkflowManifests/TestManifest",
+          "rings": [
+            {
+              "ringName": "Ring1",
+              "exposureGroupProperties": [
+                {
+                  "filterConditions": [
+                    {
+                      "type": "Subscription",
+                      "conditions": [
+                        "dc4ac3fc-8889-44d6-a8f8-a8fa229c659e"
+                      ]
+                    }
+                  ],
+                  "provisioningState": "Succeeded"
+                }
+              ],
+              "status": "Cancelled",
+              "retryAttempts": 28,
+              "progressionSetting": {
+                "method": {
+                  "operationType": "TimeBased",
+                  "gateDelay": "PT40M",
+                  "statusPollingInterval": "PT40M"
+                },
+                "gateStatus": "Open",
+                "onSuccessRing": "",
+                "onFailureRing": ""
+              }
+            }
+          ],
+          "currentRingStatus": "Cancelled",
+          "overrideDefaultStartRing": "Ring1",
+          "workflowStatus": "Cancelled",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/dc4ac3fc-8889-44d6-a8f8-a8fa229c659e/resourcegroups/azstec-global-test/providers/Microsoft.Edge/ExposureFeatures/TestFeature/ExposureWorkflows/TestWorkflow",
+        "name": "TestWorkflow",
+        "type": "Microsoft.Edge/ExposureWorkflow",
+        "systemData": {
+          "createdBy": "gtnobmt",
+          "createdByType": "User",
+          "createdAt": "2024-01-22T22:40:16.487Z",
+          "lastModifiedBy": "wwsmzkhomqr",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-01-22T22:40:16.487Z"
+        }
+      }
+    }
+  }
+}
