@@ -35,6 +35,51 @@ interface Assets {
   >;
   @doc("Retrieve an asset by assetId.")
   getAssetResource is Operations.ResourceRead<AssetResource>;
+
+  @doc("Dismiss discovery chain for a given asset")
+  @action("dismissAssetChain")
+  @Versioning.added(Versions.v2024_03_01_preview)
+  dismissAssetChain is Operations.ResourceAction<AssetResource, {}, Task>;
+
+  @doc("Export a list of assets for the provided search parameters.")
+  @action("export")
+  @Versioning.added(Versions.v2024_03_01_preview)
+  getAssetsExport is Operations.ResourceCollectionAction<
+    AssetResource,
+    {},
+    Task,
+    AssetsExportTrait
+  >;
+
+  @doc("Retrieve observations on an asset")
+  @action("getObservations")
+  @Versioning.added(Versions.v2024_03_01_preview)
+  getObservations is Operations.ResourceAction<
+    AssetResource,
+    {},
+    ObservationPageResponse,
+    ObservationsParameters
+  >;
+
+  @doc("Retrieve a list of deltas for the provided time range.")
+  @action("getDeltaDetails")
+  @Versioning.added(Versions.v2024_03_01_preview)
+  getDeltaDetails is Operations.ResourceCollectionAction<
+    AssetResource,
+    {},
+    DeltaPageResponse,
+    DeltaDetailsTrait
+  >;
+
+  @doc("Retrieve a list of deltas with overall summary changes for the provided time range.")
+  @action("getDeltaSummary")
+  @Versioning.added(Versions.v2024_03_01_preview)
+  getDeltaSummary is Operations.ResourceCollectionAction<
+    AssetResource,
+    {},
+    DeltaSummaryResponse,
+    DeltaSummaryTrait
+  >;
 }
 
 @tag("Data Connections")
@@ -74,26 +119,26 @@ interface DataConnections {
 @doc("Provides access to discovery resources.")
 interface DiscoveryGroups {
   @doc("Retrieve a list of discovery group for the provided search parameters.")
-  @clientName("GetDiscoveryGroups", "csharp")
+  @projectedName("csharp", "GetDiscoveryGroups")
   listDiscoGroup is Operations.ResourceList<DiscoGroup, DiscoGroupsListTrait>;
 
   @doc("Validate a discovery group with a given groupName.")
   @action("validate")
-  @clientName("ValidateDiscoveryGroup", "csharp")
+  @projectedName("csharp", "ValidateDiscoveryGroup")
   validateDiscoGroup is Operations.ResourceCollectionAction<
     DiscoGroup,
     DiscoGroupData,
     ValidateResult
   >;
   @doc("Retrieve a discovery group with a given groupName.")
-  @clientName("GetDiscoveryGroup", "csharp")
+  @projectedName("csharp", "GetDiscoveryGroup")
   getDiscoGroup is Operations.ResourceRead<DiscoGroup>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Create a discovery group with a given groupName.")
   @createsOrReplacesResource(DiscoGroup)
   @put
-  @clientName("CreateOrReplaceDiscoveryGroup", "csharp")
+  @projectedName("csharp", "CreateOrReplaceDiscoveryGroup")
   createOrReplaceDiscoGroup is Foundations.ResourceOperation<
     DiscoGroup,
     DiscoGroupData,
@@ -101,16 +146,34 @@ interface DiscoveryGroups {
   >;
   @doc("Run a discovery group with a given groupName.")
   @action("run")
-  @clientName("RunDiscoveryGroup", "csharp")
+  @projectedName("csharp", "RunDiscoveryGroup")
   runDiscoGroup is Operations.ResourceAction<DiscoGroup, {}, NoContentResponse>;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Retrieve a collection of discovery run results for a discovery group with a given groupName.")
   @route("/discoGroups/{groupName}/runs")
   @get
-  @clientName("GetDiscoveryGroupRuns", "csharp")
+  @projectedName("csharp", "GetDiscoveryGroupRuns")
   listRuns is Foundations.Operation<
     DiscoGroupsListRunsParameter,
     DiscoRunPageResult
+  >;
+
+  @doc("Retrieve an asset chain summary.")
+  @action("getAssetChainSummary")
+  @Versioning.added(Versions.v2024_03_01_preview)
+  getAssetChainSummary is Operations.ResourceCollectionAction<
+    DiscoGroup,
+    AssetChainRequest,
+    AssetChainSummaryResponse
+  >;
+
+  @doc("Dismiss a discovery seed chain for given seed identifiers.")
+  @action("dismissSeedChain")
+  @Versioning.added(Versions.v2024_03_01_preview)
+  dismissSeedChain is Operations.ResourceCollectionAction<
+    DiscoGroup,
+    AssetChainRequest,
+    Task
   >;
 }
 
@@ -118,13 +181,13 @@ interface DiscoveryGroups {
 @doc("Provides access to disco template resources.")
 interface DiscoveryTemplates {
   @doc("Retrieve a list of disco templates for the provided search parameters.")
-  @clientName("GetDiscoveryTemplates", "csharp")
+  @projectedName("csharp", "GetDiscoveryTemplates")
   listDiscoTemplate is Operations.ResourceList<
     DiscoTemplate,
     DiscoTemplatesListTrait
   >;
   @doc("Retrieve a disco template with a given templateId.")
-  @clientName("GetDiscoveryTemplate", "csharp")
+  @projectedName("csharp", "GetDiscoveryTemplate")
   getDiscoTemplate is Operations.ResourceRead<DiscoTemplate>;
 }
 
@@ -151,6 +214,16 @@ interface Reports {
   getSummary is Foundations.Operation<
     ReportAssetSummaryRequest,
     ReportAssetSummaryResult
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Get the most recent snapshot of asset summary values for the snapshot request exported to a file.")
+  @Versioning.added(Versions.v2024_03_01_preview)
+  @route("/reports/assets:getSnapshotExport")
+  @post
+  getSnapshotExport is Foundations.Operation<
+    ReportAssetSnapshotExportRequest,
+    Task
   >;
 }
 
@@ -187,4 +260,26 @@ interface Tasks {
   @doc("Cancel a task by taskId.")
   @action("cancel")
   cancelTask is Operations.ResourceAction<Task, {}, Task>;
+
+  @doc("Run a task by taskId.")
+  @Versioning.added(Versions.v2024_03_01_preview)
+  @action("run")
+  runTask is Operations.ResourceAction<Task, {}, Task>;
+
+  @doc("Download a task.")
+  @Versioning.added(Versions.v2024_03_01_preview)
+  @action("download")
+  downloadTask is Operations.ResourceAction<Task, {}, Task>;
+}
+
+@tag("CisaCves")
+@doc("Provides access to cisa cves.")
+interface CisaCves {
+  @doc("Retrieve a list of CisaCves for the provided search parameters.")
+  @Versioning.added(Versions.v2024_03_01_preview)
+  getCisaCves is Operations.ResourceList<CisaCveResponse, CisaCveListTrait>;
+
+  @doc("Retrieve details of CisaCve by cveId")
+  @Versioning.added(Versions.v2024_03_01_preview)
+  getCisaCve is Operations.ResourceRead<CisaCveResponse>;
 }

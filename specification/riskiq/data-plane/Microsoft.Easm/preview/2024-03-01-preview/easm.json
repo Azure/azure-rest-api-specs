@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Defender EASM",
-    "version": "2023-03-01-preview",
+    "version": "2024-03-01-preview",
     "description": "Defender EASM discovers and maps your digital attack surface to provide an \"outside-in\" perspective using probes to discover assets. The assets are provided with detailed metadata associated, including vulnerabilities, configurations and web components, allowing customers to view and prioritize external risk. The EASM REST API enables you to develop clients that integrate with your application.",
     "x-typespec-generated": [
       {
@@ -70,6 +70,9 @@
     },
     {
       "name": "Tasks"
+    },
+    {
+      "name": "CisaCves"
     }
   ],
   "paths": {
@@ -98,6 +101,15 @@
           },
           {
             "$ref": "#/parameters/MarkParameter"
+          },
+          {
+            "$ref": "#/parameters/ResponseTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/ResponseIncludesParameter"
+          },
+          {
+            "$ref": "#/parameters/RecentOnlyParameter"
           }
         ],
         "responses": {
@@ -220,6 +232,354 @@
         "x-ms-examples": {
           "Assets_GetAssetResource": {
             "$ref": "./examples/Assets_GetAssetResource_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/assets/{assetId}:dismissAssetChain": {
+      "post": {
+        "operationId": "Assets_DismissAssetChain",
+        "tags": [
+          "Assets"
+        ],
+        "description": "Dismiss discovery chain for a given asset",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "assetId",
+            "in": "path",
+            "description": "The system generated unique id for the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Assets_DismissAssetChain": {
+            "$ref": "./examples/Assets_DismissAssetChain.json"
+          }
+        }
+      }
+    },
+    "/assets/{assetId}:getObservations": {
+      "post": {
+        "operationId": "Assets_GetObservations",
+        "tags": [
+          "Assets"
+        ],
+        "description": "Retrieve observations on an asset",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "assetId",
+            "in": "path",
+            "description": "The system generated unique id for the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/OrderByParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ObservationPageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Assets_GetObservations": {
+            "$ref": "./examples/Assets_GetObservations.json"
+          }
+        }
+      }
+    },
+    "/assets:export": {
+      "post": {
+        "operationId": "Assets_GetAssetsExport",
+        "tags": [
+          "Assets"
+        ],
+        "description": "Export a list of assets for the provided search parameters.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/OrderByParameter"
+          },
+          {
+            "$ref": "#/parameters/FileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ColumnsParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Assets_GetAssetsExport": {
+            "$ref": "./examples/Assets_GetAssetsExport.json"
+          }
+        }
+      }
+    },
+    "/assets:getDeltaDetails": {
+      "post": {
+        "operationId": "Assets_GetDeltaDetails",
+        "tags": [
+          "Assets"
+        ],
+        "description": "Retrieve a list of deltas for the provided time range.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DeltaDetailTypeParameter"
+          },
+          {
+            "$ref": "#/parameters/DaysPriorParameter"
+          },
+          {
+            "$ref": "#/parameters/KindParameter"
+          },
+          {
+            "$ref": "#/parameters/DateParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeltaPageResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Assets_GetDeltaDetails": {
+            "$ref": "./examples/Assets_GetDeltaDetails.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/assets:getDeltaSummary": {
+      "post": {
+        "operationId": "Assets_GetDeltaSummary",
+        "tags": [
+          "Assets"
+        ],
+        "description": "Retrieve a list of deltas with overall summary changes for the provided time range.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DaysPriorParameter"
+          },
+          {
+            "$ref": "#/parameters/DateParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeltaSummaryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Assets_GetDeltaSummary": {
+            "$ref": "./examples/Assets_GetDeltaSummary.json"
+          }
+        }
+      }
+    },
+    "/cisaCves": {
+      "get": {
+        "operationId": "CisaCves_GetCisaCves",
+        "tags": [
+          "CisaCves"
+        ],
+        "description": "Retrieve a list of CisaCves for the provided search parameters.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedCisaCveResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CisaCves_GetCisaCves": {
+            "$ref": "./examples/CisaCves_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/cisaCves/{cveId}": {
+      "get": {
+        "operationId": "CisaCves_GetCisaCve",
+        "tags": [
+          "CisaCves"
+        ],
+        "description": "Retrieve details of CisaCve by cveId",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "cveId",
+            "in": "path",
+            "description": "The CVE ID of the vulnerability in the format CVE-YYYY-NNNN, note that the number portion can have more than 4 digits.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CisaCveResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CisaCves_GetCisaCve": {
+            "$ref": "./examples/CisaCves_Get.json"
           }
         }
       }
@@ -704,6 +1064,100 @@
         }
       }
     },
+    "/discoGroups:dismissSeedChain": {
+      "post": {
+        "operationId": "DiscoveryGroups_DismissSeedChain",
+        "tags": [
+          "Discovery Groups"
+        ],
+        "description": "Dismiss a discovery seed chain for given seed identifiers.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssetChainRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DiscoveryGroups_DismissSeedChain": {
+            "$ref": "./examples/DiscoveryGroups_DismissSeedChain.json"
+          }
+        }
+      }
+    },
+    "/discoGroups:getAssetChainSummary": {
+      "post": {
+        "operationId": "DiscoveryGroups_GetAssetChainSummary",
+        "tags": [
+          "Discovery Groups"
+        ],
+        "description": "Retrieve an asset chain summary.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssetChainRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AssetChainSummaryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DiscoveryGroups_GetAssetChainSummary": {
+            "$ref": "./examples/DiscoveryGroups_GetAssetChainSummary.json"
+          }
+        }
+      }
+    },
     "/discoGroups:validate": {
       "post": {
         "operationId": "DiscoveryGroups_ValidateDiscoGroup",
@@ -930,6 +1384,53 @@
         "x-ms-examples": {
           "Reports_GetSnapshot": {
             "$ref": "./examples/Reports_GetSnapshot_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/reports/assets:getSnapshotExport": {
+      "post": {
+        "operationId": "Reports_GetSnapshotExport",
+        "tags": [
+          "Reports"
+        ],
+        "description": "Get the most recent snapshot of asset summary values for the snapshot request exported to a file.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportAssetSnapshotExportRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reports_GetSnapshotExport": {
+            "$ref": "./examples/Reports_GetReportAssetSnapshotExport.json"
           }
         }
       }
@@ -1316,6 +1817,98 @@
           }
         }
       }
+    },
+    "/tasks/{taskId}:run": {
+      "post": {
+        "operationId": "Tasks_RunTask",
+        "tags": [
+          "Tasks"
+        ],
+        "description": "Run a task by taskId.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "taskId",
+            "in": "path",
+            "description": "The unique identifier of the task.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Tasks_RunTask": {
+            "$ref": "./examples/Tasks_RunTask.json"
+          }
+        }
+      }
+    },
+    "/tasks/{taskId}:download": {
+      "post": {
+        "operationId": "Tasks_DownloadTask",
+        "tags": [
+          "Tasks"
+        ],
+        "description": "Download a task.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "taskId",
+            "in": "path",
+            "description": "The unique identifier of the task.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Tasks_DownloadTask": {
+            "$ref": "./examples/Tasks_DownloadTask.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1534,6 +2127,87 @@
       ],
       "x-ms-discriminator-value": "as"
     },
+    "AssetChainKindSummaryResponse": {
+      "type": "object",
+      "description": "A list of asset chain summaries per asset kind",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AssetKind",
+          "description": "The kind of asset"
+        },
+        "affectedCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The amount of assets affected for a given asset kind"
+        }
+      },
+      "required": [
+        "kind",
+        "affectedCount"
+      ]
+    },
+    "AssetChainRequest": {
+      "type": "object",
+      "description": "AssetChainRequest containing information needed for the retrieval of the asset chain summary.",
+      "properties": {
+        "assetChainSource": {
+          "$ref": "#/definitions/AssetChainSource",
+          "description": "Asset chain source."
+        },
+        "sourceIds": {
+          "type": "array",
+          "description": "A collection of asset chain source ids.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AssetChainSource": {
+      "type": "string",
+      "enum": [
+        "DISCO_GROUP",
+        "DISCO_SEED",
+        "ASSET_CHAIN"
+      ],
+      "x-ms-enum": {
+        "name": "AssetChainSource",
+        "modelAsString": true
+      }
+    },
+    "AssetChainSummaryResponse": {
+      "type": "object",
+      "description": "Response for the asset chain summary.",
+      "properties": {
+        "affectedAssetsSummary": {
+          "type": "array",
+          "description": "A list of asset chain summaries per asset kind",
+          "items": {
+            "$ref": "#/definitions/AssetChainKindSummaryResponse"
+          },
+          "x-ms-identifiers": []
+        },
+        "affectedGroupsSummary": {
+          "type": "array",
+          "description": "A list of disco group summaries",
+          "items": {
+            "$ref": "#/definitions/DiscoGroupSummaryResponse"
+          }
+        },
+        "errors": {
+          "type": "array",
+          "description": "The list of exceptions",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponseItem"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "affectedAssetsSummary",
+        "affectedGroupsSummary"
+      ]
+    },
     "AssetKind": {
       "type": "string",
       "description": "The kind of asset.",
@@ -1651,6 +2325,41 @@
         "kind",
         "id"
       ]
+    },
+    "AssetResponseType": {
+      "type": "string",
+      "enum": [
+        "id",
+        "standard",
+        "full",
+        "reduced"
+      ],
+      "x-ms-enum": {
+        "name": "AssetResponseType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "id",
+            "value": "id",
+            "description": "Return only the asset id."
+          },
+          {
+            "name": "standard",
+            "value": "standard",
+            "description": "Return the standard set of asset fields."
+          },
+          {
+            "name": "full",
+            "value": "full",
+            "description": "Return the full set of asset fields."
+          },
+          {
+            "name": "reduced",
+            "value": "reduced",
+            "description": "Return a reduced set of fields."
+          }
+        ]
+      }
     },
     "AssetSecurityPolicy": {
       "type": "object",
@@ -1940,6 +2649,23 @@
         "error"
       ]
     },
+    "Azure.Core.Foundations.ErrorResponseItem": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "String error code indicating what went wrong."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
       "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
@@ -2059,6 +2785,74 @@
           "x-ms-identifiers": []
         }
       }
+    },
+    "CisaCveResponse": {
+      "type": "object",
+      "description": "cisa cve in a given workspace.",
+      "properties": {
+        "cveId": {
+          "type": "string",
+          "description": "The CVE ID of the vulnerability in the format CVE-YYYY-NNNN, note that the number portion can have more than 4 digits.",
+          "readOnly": true
+        },
+        "vendorProject": {
+          "type": "string",
+          "description": "The vendor or project name for the vulnerability."
+        },
+        "product": {
+          "type": "string",
+          "description": "The vulnerability product"
+        },
+        "vulnerabilityName": {
+          "type": "string",
+          "description": "The name of the vulnerability"
+        },
+        "shortDescription": {
+          "type": "string",
+          "description": "A short description of the vulnerability"
+        },
+        "requiredAction": {
+          "type": "string",
+          "description": "The required action to address the vulnerability"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Any additional notes about the vulnerability"
+        },
+        "dateAdded": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date the vulnerability was added to the catalog in the format YYYY-MM-DD"
+        },
+        "dueDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date the required action is due in the format YYYY-MM-DD"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date the vulnerability was updated"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of assets affected by the vulnerability"
+        }
+      },
+      "required": [
+        "cveId",
+        "vendorProject",
+        "product",
+        "vulnerabilityName",
+        "shortDescription",
+        "requiredAction",
+        "notes",
+        "dateAdded",
+        "dueDate",
+        "updatedAt",
+        "count"
+      ]
     },
     "ContactAsset": {
       "type": "object",
@@ -2231,6 +3025,24 @@
         }
       }
     },
+    "DailyDeltaTypeResponse": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The current number of assets for one asset kind"
+        }
+      },
+      "required": [
+        "count"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeltaTypeResponse"
+        }
+      ]
+    },
     "DataConnection": {
       "type": "object",
       "properties": {
@@ -2368,6 +3180,186 @@
     "DataConnectionProperties": {
       "type": "object",
       "description": "The properties required to establish connection to a particular service"
+    },
+    "DeltaDateResponse": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date that is being requested"
+        },
+        "deltas": {
+          "type": "array",
+          "description": "A list of summary counts per day",
+          "items": {
+            "$ref": "#/definitions/DailyDeltaTypeResponse"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "date",
+        "deltas"
+      ]
+    },
+    "DeltaDetailType": {
+      "type": "string",
+      "enum": [
+        "added",
+        "removed"
+      ],
+      "x-ms-enum": {
+        "name": "DeltaDetailType",
+        "modelAsString": true
+      }
+    },
+    "DeltaPageResponse": {
+      "type": "object",
+      "properties": {
+        "totalElements": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total number of items available in the full result set."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to access the next page of results.  Not set if at the end of the result set."
+        },
+        "value": {
+          "type": "array",
+          "description": "The items in the current page of results.",
+          "items": {
+            "$ref": "#/definitions/DeltaResponse"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "DeltaRangeResponse": {
+      "type": "object",
+      "properties": {
+        "range": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The range of dates requested"
+        },
+        "removed": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total amount of assets removed over a date range"
+        },
+        "added": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total amount of assets added over a date range"
+        },
+        "difference": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total amount of assets changed removed over a date range"
+        },
+        "kindSummaries": {
+          "type": "array",
+          "description": "A list of summary changes per asset kind",
+          "items": {
+            "$ref": "#/definitions/DeltaTypeResponse"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "range",
+        "removed",
+        "added",
+        "difference",
+        "kindSummaries"
+      ]
+    },
+    "DeltaResponse": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/GlobalAssetType",
+          "description": "Shows the asset kind"
+        },
+        "name": {
+          "type": "string",
+          "description": "Shows the asset name"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Shows the date when the asset was originally created"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Shows the date when the asset was last updated, usually the date the we trying to pull up the results for"
+        },
+        "state": {
+          "$ref": "#/definitions/GlobalInventoryState",
+          "description": "Shows the inventory state"
+        }
+      },
+      "required": [
+        "kind",
+        "name",
+        "createdAt",
+        "updatedAt",
+        "state"
+      ]
+    },
+    "DeltaSummaryResponse": {
+      "type": "object",
+      "properties": {
+        "summary": {
+          "$ref": "#/definitions/DeltaRangeResponse",
+          "description": "Contains added, removed, and difference values for the whole range either 7 or 30 days"
+        },
+        "daily": {
+          "type": "array",
+          "description": "Contains added, removed, count, and difference values for each day",
+          "items": {
+            "$ref": "#/definitions/DeltaDateResponse"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "summary",
+        "daily"
+      ]
+    },
+    "DeltaTypeResponse": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/GlobalAssetType",
+          "description": "The kind of asset"
+        },
+        "removed": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The amount of assets removed for one asset kind"
+        },
+        "added": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The amount of assets added for one asset kind"
+        },
+        "difference": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The amount of assets changed for one asset kind"
+        }
+      },
+      "required": [
+        "kind",
+        "removed",
+        "added",
+        "difference"
+      ]
     },
     "DependentResource": {
       "type": "object",
@@ -2580,6 +3572,29 @@
           "description": "The unique identifier for the disco template used for the disco group creation."
         }
       }
+    },
+    "DiscoGroupSummaryResponse": {
+      "type": "object",
+      "description": "A list of disco group summaries",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The system generated unique id for the resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "The caller provided unique name for the resource."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The name that can be used for display purposes."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "displayName"
+      ]
     },
     "DiscoRunPageResult": {
       "type": "object",
@@ -3015,6 +4030,44 @@
         "code",
         "message"
       ]
+    },
+    "GlobalAssetType": {
+      "type": "string",
+      "enum": [
+        "page",
+        "resource",
+        "mailServer",
+        "nameServer",
+        "host",
+        "domain",
+        "ipAddress",
+        "ipBlock",
+        "as",
+        "contact",
+        "sslCert"
+      ],
+      "x-ms-enum": {
+        "name": "GlobalAssetType",
+        "modelAsString": true
+      }
+    },
+    "GlobalInventoryState": {
+      "type": "string",
+      "enum": [
+        "candidate",
+        "candidateInvestigate",
+        "confirmed",
+        "associated",
+        "associatedPartner",
+        "associatedThirdParty",
+        "archived",
+        "dismissed",
+        "autoconfirmed"
+      ],
+      "x-ms-enum": {
+        "name": "GlobalInventoryState",
+        "modelAsString": true
+      }
     },
     "GuidPair": {
       "type": "object",
@@ -3961,6 +5014,108 @@
         }
       ]
     },
+    "ObservationPageResponse": {
+      "type": "object",
+      "properties": {
+        "totalElements": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "prioritySummary": {
+          "type": "object",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ObservationResponse"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "totalElements",
+        "prioritySummary",
+        "value"
+      ]
+    },
+    "ObservationPriority": {
+      "type": "number",
+      "enum": [
+        3,
+        2,
+        1,
+        0
+      ],
+      "x-ms-enum": {
+        "name": "ObservationPriority",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "high",
+            "value": 3
+          },
+          {
+            "name": "medium",
+            "value": 2
+          },
+          {
+            "name": "low",
+            "value": 1
+          },
+          {
+            "name": "none",
+            "value": 0
+          }
+        ]
+      }
+    },
+    "ObservationResponse": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ObservationType"
+          }
+        },
+        "priority": {
+          "$ref": "#/definitions/ObservationPriority"
+        },
+        "cvssScoreV2": {
+          "type": "number",
+          "format": "double"
+        },
+        "cvssScoreV3": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "priority",
+        "cvssScoreV2",
+        "cvssScoreV3"
+      ]
+    },
+    "ObservationType": {
+      "type": "string",
+      "enum": [
+        "cve",
+        "insight"
+      ],
+      "x-ms-enum": {
+        "name": "ObservationType",
+        "modelAsString": true
+      }
+    },
     "ObservedBoolean": {
       "type": "object",
       "properties": {
@@ -4621,6 +5776,34 @@
         "mark": {
           "type": "string",
           "description": "The cursor mark to be used on the next request.  Not set if using paging."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedCisaCveResponse": {
+      "type": "object",
+      "description": "Paged collection of CisaCveResponse items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CisaCveResponse items on this page",
+          "items": {
+            "$ref": "#/definitions/CisaCveResponse"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        },
+        "totalElements": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total number of items available in the full result set."
         }
       },
       "required": [
@@ -5696,12 +6879,85 @@
       "default": 0,
       "x-ms-parameter-location": "method"
     },
+    "ColumnsParameter": {
+      "name": "columns",
+      "in": "query",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method"
+    },
+    "DateParameter": {
+      "name": "date",
+      "in": "query",
+      "description": "expected format to be: yyyy-MM-dd",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DaysPriorParameter": {
+      "name": "daysPrior",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "DeltaDetailTypeParameter": {
+      "name": "deltaDetailType",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "added",
+        "removed"
+      ],
+      "x-ms-enum": {
+        "name": "DeltaDetailType",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "method"
+    },
     "DiscoGroupNameParameter": {
       "name": "groupName",
       "in": "path",
       "description": "The unique identifier for the discovery group.",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "FileNameParameter": {
+      "name": "fileName",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "KindParameter": {
+      "name": "kind",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "page",
+        "resource",
+        "mailServer",
+        "nameServer",
+        "host",
+        "domain",
+        "ipAddress",
+        "ipBlock",
+        "as",
+        "contact",
+        "sslCert"
+      ],
+      "x-ms-enum": {
+        "name": "GlobalAssetType",
+        "modelAsString": true
+      },
       "x-ms-parameter-location": "method"
     },
     "MarkParameter": {
@@ -5720,12 +6976,70 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
+    "RecentOnlyParameter": {
+      "name": "recentOnly",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
+    },
     "RequiredFilterParameter": {
       "name": "filter",
       "in": "query",
       "description": "An expression on the resource type that selects the resources to be returned.",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ResponseIncludesParameter": {
+      "name": "responseIncludes",
+      "in": "query",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method"
+    },
+    "ResponseTypeParameter": {
+      "name": "responseType",
+      "in": "query",
+      "description": "Specify the response type. The possible values are: ID, STANDARD, FULL, REDUCED",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "id",
+        "standard",
+        "full",
+        "reduced"
+      ],
+      "x-ms-enum": {
+        "name": "AssetResponseType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "id",
+            "value": "id",
+            "description": "Return only the asset id."
+          },
+          {
+            "name": "standard",
+            "value": "standard",
+            "description": "Return the standard set of asset fields."
+          },
+          {
+            "name": "full",
+            "value": "full",
+            "description": "Return the full set of asset fields."
+          },
+          {
+            "name": "reduced",
+            "value": "reduced",
+            "description": "Return a reduced set of fields."
+          }
+        ]
+      },
       "x-ms-parameter-location": "method"
     }
   }
