@@ -713,10 +713,10 @@ model SecurityRuleProperties {
   @doc("The destination address prefixes. CIDR or destination IP ranges.")
   destinationAddressPrefixes?: string[];
 
-  @doc("The source port ranges. Integer or range between 0 and 65535. Asterisk '' can also be used to match all ports.")
+  @doc("The source port ranges. Integer or range between 0 and 65535. Asterisk '*' can also be used to match all ports.")
   sourcePortRanges?: string[];
 
-  @doc("The destination port ranges. Integer or range between 0 and 65535. Asterisk '' can also be used to match all ports.")
+  @doc("The destination port ranges. Integer or range between 0 and 65535. Asterisk '*' can also be used to match all ports.")
   destinationPortRanges?: string[];
 
   @doc("The network traffic is allowed or denied.")
@@ -755,7 +755,7 @@ model NetworkInterfaceProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
-@doc("InterfaceIPConfiguration I  PConfiguration in a network interface.")
+@doc("InterfaceIPConfiguration IPConfiguration in a network interface.")
 model IPConfiguration {
   @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
   @visibility("read", "create")
