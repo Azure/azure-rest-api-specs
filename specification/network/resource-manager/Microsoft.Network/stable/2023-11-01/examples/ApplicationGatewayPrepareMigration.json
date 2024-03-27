@@ -5,11 +5,11 @@
     "resourceGroupName": "rg1",
     "applicationGatewayName": "appgw",
     "migrationRequest": {
-      "MigrationType": "UpgradeDeploymentToV2Sku",
-      "SubnetId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/appgwV2Subnet",
-      "PrivateIp": "10.0.0.154",
-      "WafPolicyName": "waf",
-      "Zones": [
+      "migrationType": "UpgradeDeploymentToV2Sku",
+      "subnetId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/appgwV2Subnet",
+      "privateIp": "10.0.0.154",
+      "wafPolicyName": "waf",
+      "zones": [
         "1",
         "2",
         "3"
@@ -17,12 +17,7 @@
     }
   },
   "responses": {
-    "200": {
-      "body": {
-        "V2PrivateIP": "10.0.0.154",
-        "V2PublicIP": "192.0.56.154"
-      }
-    },
+    "200": {},
     "202": {
       "headers": {
         "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus2/operationResults/00000000-0000-0000-0000-000000000000?api-version=2023-11-01"
