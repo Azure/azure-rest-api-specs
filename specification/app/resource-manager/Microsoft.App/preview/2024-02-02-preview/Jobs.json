@@ -1078,15 +1078,15 @@
             },
             "detailedStatus": {
               "description": "Detailed status of the job execution.",
-              "$ref": "#/definitions/ExecutionJobStatus"
+              "$ref": "#/definitions/ExecutionStatus"
             }
           },
           "x-ms-client-flatten": true
         }
       }
     },
-    "ExecutionJobStatus": {
-      "description": "Container Apps Job execution.",
+    "ExecutionStatus": {
+      "description": "Container Apps Job execution status.",
       "type": "object",
       "properties": {
         "pods": {
@@ -1102,7 +1102,7 @@
       }
     },
     "ExecutionPodStatus": {
-      "description": "Container Apps Job execution.",
+      "description": "Container Apps Job execution pod status.",
       "type": "object",
       "properties": {
         "name": {
@@ -1122,7 +1122,7 @@
       }
     },
     "ExecutionContainerStatus": {
-      "description": "Container Apps Job execution.",
+      "description": "Container Apps Job execution container status. Contains status code and reason",
       "type": "object",
       "properties": {
         "name": {
