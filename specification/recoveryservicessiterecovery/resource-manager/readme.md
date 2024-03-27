@@ -54,7 +54,7 @@ These are the global settings for the RecoveryServicesSiteRecovery API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-01
+tag: package-2024-02
 directive:
   - where:
       - $.paths
@@ -63,11 +63,19 @@ directive:
 ```
 
 
+### Tag: package-2024-02
+
+These settings apply only when `--tag=package-2024-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-02'
+input-file:
+  - Microsoft.RecoveryServices/stable/2024-02-01/service.json
+```
 ### Tag: package-2024-01
 
 These settings apply only when `--tag=package-2024-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-01'
+``` yaml $(tag) == 'package-2024-01'
 input-file:
   - Microsoft.RecoveryServices/stable/2024-01-01/service.json
 ```
@@ -76,7 +84,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-08'
+``` yaml $(tag) == 'package-2023-08'
 input-file:
   - Microsoft.RecoveryServices/stable/2023-08-01/service.json
 ```
