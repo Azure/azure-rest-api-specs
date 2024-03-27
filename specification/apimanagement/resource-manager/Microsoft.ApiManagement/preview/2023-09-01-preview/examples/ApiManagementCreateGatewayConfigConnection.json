@@ -3,8 +3,14 @@
     "resourceGroupName": "rg1",
     "api-version": "2023-09-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "gatewayId": "standard-gw-01",
-    "configConnectionId": "gcc-01"
+    "gatewayName": "standard-gw-01",
+    "configConnectionId": "gcc-01",
+    "parameters": {
+      "name": "gcc-01",
+      "properties": {
+        "sourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/services/apim-service-1/workspaces/ws-001"
+      }
+    }
   },
   "responses": {
     "201": {
@@ -16,7 +22,7 @@
         "properties": {
           "provisioningState": "Succeeded",
           "sourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/services/apim-service-1/workspaces/ws-001",
-          "hostName": [ "gcc-1-amf2h5hpf7gafbeu.standard-gw-1.gateway.eastus.azure-api.net" ]
+          "hostname": [ "gcc-1-amf2h5hpf7gafbeu.standard-gw-1.gateway.eastus.azure-api.net" ]
         }
       }
     },
@@ -29,7 +35,7 @@
         "properties": {
           "provisioningState": "Succeeded",
           "sourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/services/apim-service-1/workspaces/ws-001",
-          "hostName": [ "gcc-1-amf2h5hpf7gafbeu.standard-gw-1.gateway.eastus.azure-api.net" ]
+          "hostname": [ "gcc-1-amf2h5hpf7gafbeu.standard-gw-1.gateway.eastus.azure-api.net" ]
         }
       }
     }
