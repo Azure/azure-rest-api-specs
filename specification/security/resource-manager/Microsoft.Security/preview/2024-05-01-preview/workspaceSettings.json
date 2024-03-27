@@ -1,0 +1,306 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2017-08-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/workspaceSettings": {
+      "get": {
+        "x-ms-examples": {
+          "Get workspace settings on subscription": {
+            "$ref": "./examples/WorkspaceSettings/GetWorkspaceSettings_example.json"
+          }
+        },
+        "tags": [
+          "Workspace Settings"
+        ],
+        "description": "Settings about where we should store your security data and logs. If the result is empty, it means that no custom-workspace configuration was set",
+        "operationId": "WorkspaceSettings_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceSettingList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/workspaceSettings/{workspaceSettingName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a workspace setting on subscription": {
+            "$ref": "./examples/WorkspaceSettings/GetWorkspaceSetting_example.json"
+          }
+        },
+        "tags": [
+          "Workspace Settings"
+        ],
+        "description": "Settings about where we should store your security data and logs. If the result is empty, it means that no custom-workspace configuration was set",
+        "operationId": "WorkspaceSettings_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceSettingName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create a workspace setting data for subscription": {
+            "$ref": "./examples/WorkspaceSettings/CreateWorkspaceSetting_example.json"
+          }
+        },
+        "tags": [
+          "Workspace Settings"
+        ],
+        "description": "creating settings about where we should store your security data and logs",
+        "operationId": "WorkspaceSettings_Create",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceSettingName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceSetting"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "x-ms-examples": {
+          "Update a workspace setting data for subscription": {
+            "$ref": "./examples/WorkspaceSettings/UpdateWorkspaceSetting_example.json"
+          }
+        },
+        "tags": [
+          "Workspace Settings"
+        ],
+        "description": "Settings about where we should store your security data and logs",
+        "operationId": "WorkspaceSettings_Update",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceSettingName"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceSetting"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a workspace setting data for resource group": {
+            "$ref": "./examples/WorkspaceSettings/DeleteWorkspaceSetting_example.json"
+          }
+        },
+        "tags": [
+          "Workspace Settings"
+        ],
+        "description": "Deletes the custom workspace settings for this subscription. new VMs will report to the default workspace",
+        "operationId": "WorkspaceSettings_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceSettingName"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "WorkspaceSettingList": {
+      "description": "List of workspace settings response",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of workspace settings",
+          "items": {
+            "$ref": "#/definitions/WorkspaceSetting"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "WorkspaceSetting": {
+      "type": "object",
+      "description": "Configures where to store the OMS agent data for workspaces under a scope",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Workspace setting data",
+          "$ref": "#/definitions/WorkspaceSettingProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "WorkspaceSettingProperties": {
+      "type": "object",
+      "description": "Workspace setting data",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "description": "The full Azure ID of the workspace to save the data in"
+        },
+        "scope": {
+          "type": "string",
+          "description": "All the VMs in this scope will send their security data to the mentioned workspace unless overridden by a setting with more specific scope"
+        }
+      },
+      "required": [
+        "workspaceId",
+        "scope"
+      ]
+    }
+  },
+  "parameters": {
+    "WorkspaceSettingName": {
+      "name": "workspaceSettingName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the security setting",
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspaceSetting": {
+      "name": "workspaceSetting",
+      "in": "body",
+      "required": true,
+      "description": "Security data setting object",
+      "schema": {
+        "$ref": "#/definitions/WorkspaceSetting"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

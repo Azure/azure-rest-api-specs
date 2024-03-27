@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "api-version": "2017-08-01-preview",
+    "scope": "providers/Microsoft.Management/managementGroups/148059f7-faf3-49a6-ba35-85122112291e",
+    "informationProtectionPolicyName": "custom"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/148059f7-faf3-49a6-ba35-85122112291e/providers/Microsoft.Security/informationProtectionPolicies/custom",
+        "name": "custom",
+        "type": "Microsoft.Security/informationProtectionPolicies",
+        "properties": {
+          "labels": {
+            "1345da73-bc5a-4a8f-b7dd-3820eb713da8": {
+              "displayName": "Public",
+              "order": 100,
+              "enabled": true
+            },
+            "7aa516c7-5a53-4857-bc6e-6808c6acd542": {
+              "displayName": "General",
+              "order": 200,
+              "enabled": true
+            },
+            "575739d2-3d53-4df0-9042-4c7772d5c7b1": {
+              "displayName": "Confidential",
+              "order": 300,
+              "enabled": true
+            }
+          },
+          "informationTypes": {
+            "7fb9419d-2473-4ad8-8e11-b25cc8cf6a07": {
+              "displayName": "Networking",
+              "order": 100,
+              "recommendedLabelId": "575739d2-3d53-4df0-9042-4c7772d5c7b1",
+              "enabled": true,
+              "custom": false,
+              "keywords": [
+                {
+                  "pattern": "%networking%",
+                  "custom": true,
+                  "canBeNumeric": false
+                }
+              ]
+            },
+            "3bf35491-99b8-41f2-86d5-c1200a7df658": {
+              "displayName": "Custom",
+              "order": 1400,
+              "recommendedLabelId": "7aa516c7-5a53-4857-bc6e-6808c6acd542",
+              "enabled": true,
+              "custom": true,
+              "keywords": [
+                {
+                  "pattern": "%custom%",
+                  "custom": true,
+                  "canBeNumeric": true
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

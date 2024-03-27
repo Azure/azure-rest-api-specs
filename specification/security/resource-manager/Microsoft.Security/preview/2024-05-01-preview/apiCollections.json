@@ -1,0 +1,474 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Defender for Cloud",
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
+    "version": "2023-11-15"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/apiCollections": {
+      "get": {
+        "x-ms-examples": {
+          "Gets a list of API collections within a subscription that have been onboarded to Microsoft Defender for APIs": {
+            "$ref": "./examples/ApiCollections/APICollections_ListBySubscription_example.json"
+          }
+        },
+        "tags": [
+          "D4APICollectionList"
+        ],
+        "description": "Gets a list of API collections within a subscription that have been onboarded to Microsoft Defender for APIs.",
+        "summary": "Gets a list of API collections within a subscription",
+        "operationId": "APICollections_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This indicates a successful response. The response contains the list of API collections.",
+            "schema": {
+              "$ref": "#/definitions/ApiCollectionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/apiCollections": {
+      "get": {
+        "x-ms-examples": {
+          "Gets a list of API collections within a resource group that have been onboarded to Microsoft Defender for APIs": {
+            "$ref": "./examples/ApiCollections/APICollections_ListByResourceGroup_example.json"
+          }
+        },
+        "tags": [
+          "D4APICollectionList"
+        ],
+        "description": "Gets a list of API collections within a resource group that have been onboarded to Microsoft Defender for APIs.",
+        "summary": "Gets a list of API collections within a resource group",
+        "operationId": "APICollections_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This indicates a successful response. The response contains the list of API collections.",
+            "schema": {
+              "$ref": "#/definitions/ApiCollectionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/providers/Microsoft.Security/apiCollections": {
+      "get": {
+        "x-ms-examples": {
+          "Gets a list of Azure API Management APIs that have been onboarded to Microsoft Defender for APIs": {
+            "$ref": "./examples/ApiCollections/APICollections_ListByAzureApiManagementService_example.json"
+          }
+        },
+        "tags": [
+          "D4APICollectionList",
+          "APIMConfig"
+        ],
+        "description": "Gets a list of Azure API Management APIs that have been onboarded to Microsoft Defender for APIs. If an Azure API Management API is onboarded to Microsoft Defender for APIs, the system will monitor the operations within the Azure API Management API for intrusive behaviors and provide alerts for attacks that have been detected.",
+        "summary": "Gets a list of onboarded Azure API Management APIs",
+        "operationId": "APICollections_ListByAzureApiManagementService",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiManagementServiceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This indicates a successful response. The response contains the list of API collections.",
+            "schema": {
+              "$ref": "#/definitions/ApiCollectionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/providers/Microsoft.Security/apiCollections/{apiId}": {
+      "get": {
+        "x-ms-examples": {
+          "Gets an Azure API Management API if it has been onboarded to Microsoft Defender for APIs": {
+            "$ref": "./examples/ApiCollections/APICollections_GetByAzureApiManagementService_example.json"
+          }
+        },
+        "tags": [
+          "D4APICollection",
+          "APIMConfig"
+        ],
+        "description": "Gets an Azure API Management API if it has been onboarded to Microsoft Defender for APIs. If an Azure API Management API is onboarded to Microsoft Defender for APIs, the system will monitor the operations within the Azure API Management API for intrusive behaviors and provide alerts for attacks that have been detected.",
+        "summary": "Gets an onboarded Azure API Management API",
+        "operationId": "APICollections_GetByAzureApiManagementService",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiManagementServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiManagementApiIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This indicates a successful response. The response contains the properties of the API collection.",
+            "schema": {
+              "$ref": "#/definitions/ApiCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Onboard an Azure API Management API to Microsoft Defender for APIs": {
+            "$ref": "./examples/ApiCollections/APICollections_OnboardAzureApiManagementApi_example.json"
+          }
+        },
+        "tags": [
+          "OnboardToD4API",
+          "APIMConfig"
+        ],
+        "description": "Onboard an Azure API Management API to Microsoft Defender for APIs. The system will start monitoring the operations within the Azure Management API for intrusive behaviors and provide alerts for attacks that have been detected.",
+        "summary": "Onboard an Azure API Management API to Microsoft Defender for APIs",
+        "operationId": "APICollections_OnboardAzureApiManagementApi",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiManagementServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiManagementApiIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This indicates a successful response for the create or update operation. The response contains the properties of the API collection.",
+            "schema": {
+              "$ref": "#/definitions/ApiCollection"
+            }
+          },
+          "201": {
+            "description": "This indicates a successful response for the create or update operation. The response contains the properties of the API collection.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ApiCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Offboard an Azure API Management API from Microsoft Defender for APIs": {
+            "$ref": "./examples/ApiCollections/APICollections_OffboardAzureApiManagementApi_example.json"
+          }
+        },
+        "tags": [
+          "OffboardFromD4API",
+          "APIMConfig"
+        ],
+        "description": "Offboard an Azure API Management API from Microsoft Defender for APIs. The system will stop monitoring the operations within the Azure API Management API for intrusive behaviors.",
+        "summary": "Offboard an Azure API Management API from Microsoft Defender for APIs",
+        "operationId": "APICollections_OffboardAzureApiManagementApi",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiManagementServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiManagementApiIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This indicates a successful response for the delete operation."
+          },
+          "204": {
+            "description": "This indicates a successful response for the delete operation."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApiCollectionList": {
+      "type": "object",
+      "description": "Page of a list of API collections as represented by Microsoft Defender for APIs.",
+      "properties": {
+        "value": {
+          "description": "API collections in this page.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiCollection"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "ApiCollection": {
+      "type": "object",
+      "description": "An API collection as represented by Microsoft Defender for APIs.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApiCollectionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ApiCollectionProperties": {
+      "type": "object",
+      "description": "Describes the properties of an API collection.",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the provisioning state of the API collection.",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "InProgress"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Succeeded"
+              },
+              {
+                "value": "Failed"
+              },
+              {
+                "value": "Canceled"
+              },
+              {
+                "value": "InProgress"
+              }
+            ]
+          }
+        },
+        "displayName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The display name of the API collection."
+        },
+        "discoveredVia": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource Id of the resource from where this API collection was discovered.",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ApiManagement/service"
+              }
+            ]
+          }
+        },
+        "baseUrl": {
+          "readOnly": true,
+          "type": "string",
+          "format": "uri",
+          "description": "The base URI for this API collection. All endpoints of this API collection extend this base URI."
+        },
+        "numberOfApiEndpoints": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of API endpoints discovered in this API collection."
+        },
+        "numberOfInactiveApiEndpoints": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of API endpoints in this API collection that have not received any API traffic in the last 30 days."
+        },
+        "numberOfUnauthenticatedApiEndpoints": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of API endpoints in this API collection that are unauthenticated."
+        },
+        "numberOfExternalApiEndpoints": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of API endpoints in this API collection for which API traffic from the internet was observed."
+        },
+        "numberOfApiEndpointsWithSensitiveDataExposed": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of API endpoints in this API collection which are exposing sensitive data in their requests and/or responses."
+        },
+        "sensitivityLabel": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The highest priority sensitivity label from Microsoft Purview in this API collection."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiManagementServiceNameParameter": {
+      "name": "serviceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the API Management service.",
+      "minLength": 1,
+      "maxLength": 50,
+      "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiManagementApiIdParameter": {
+      "name": "apiId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "API revision identifier. Must be unique in the API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

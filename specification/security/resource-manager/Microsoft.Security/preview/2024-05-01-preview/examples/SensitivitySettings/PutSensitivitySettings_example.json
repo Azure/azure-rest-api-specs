@@ -1,0 +1,92 @@
+{
+  "parameters": {
+    "api-version": "2023-02-15-preview",
+    "sensitivitySettings": {
+      "sensitiveInfoTypesIds": [
+        "f2f8a7a1-28c0-404b-9ab4-30a0a7af18cb",
+        "b452f22b-f87d-4f48-8490-ecf0873325b5",
+        "d59ee8b6-2618-404b-a5e7-aa377cd67543"
+      ],
+      "sensitivityThresholdLabelOrder": 2,
+      "sensitivityThresholdLabelId": "f2f8a7a1-28c0-404b-9ab4-30a0a7af18cb"
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "OK",
+      "body": {
+        "id": "/providers/Microsoft.Security/sensitivitySettings",
+        "name": "current",
+        "type": "Microsoft.Security/sensitivitySettings",
+        "properties": {
+          "sensitiveInfoTypesIds": [
+            "a98fde82-45b6-4b2c-afd0-ad579cd9f826",
+            "4d0d3eb6-619f-4c8c-810c-c16150c95278",
+            "0e9b3178-9678-47dd-a509-37222ca96b42",
+            "c5f9b9a1-2b9a-4a3a-8c5b-1f3d1d9d9c9b"
+          ],
+          "sensitivityThresholdLabelOrder": 2,
+          "mipInformation": {
+            "mipIntegrationStatus": "Ok",
+            "labels": [
+              {
+                "name": "Public",
+                "id": "fdfb5435-124d-4651-a889-a4210fec6a77",
+                "order": 0
+              },
+              {
+                "name": "Confidential",
+                "id": "4c5447ec-f7f3-4345-a160-6a5850f2bf0c",
+                "order": 1
+              },
+              {
+                "name": "Highly Confidential",
+                "id": "f38ac75c-f42a-4c89-aa37-9c4e74101414",
+                "order": 2
+              }
+            ],
+            "customInfoTypes": [
+              {
+                "name": "User created custom info type 1",
+                "id": "c5f9b9a1-2b9a-4a3a-8c5b-1f3d1d9d9c9b",
+                "description": "Custom info type description"
+              },
+              {
+                "name": "User created custom info type 2",
+                "id": "a4fee2b6-5618-404b-a5e7-aa377cd67543",
+                "description": "Custom info type description"
+              },
+              {
+                "name": "User created custom info type 3",
+                "id": "a355f11e-f87d-4f48-8490-ecf0873325b5",
+                "description": "Custom info type description"
+              }
+            ],
+            "builtInInfoTypes": [
+              {
+                "name": "Http Authorization Header",
+                "type": "Credentials",
+                "id": "4d0d3eb6-619f-4c8c-810c-c16150c95278"
+              },
+              {
+                "name": "User Login Credentials",
+                "type": "Credentials",
+                "id": "a98fde82-45b6-4b2c-afd0-ad579cd9f826"
+              },
+              {
+                "name": "Credit card number",
+                "type": "Finance",
+                "id": "50842eb7-edc8-4019-85dd-5a5c1f2bb085"
+              },
+              {
+                "name": "EU debit card number",
+                "type": "Finance",
+                "id": "0e9b3178-9678-47dd-a509-37222ca96b42"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

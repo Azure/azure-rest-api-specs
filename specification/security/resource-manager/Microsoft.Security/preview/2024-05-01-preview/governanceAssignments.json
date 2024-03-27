@@ -1,0 +1,369 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Defender for Cloud",
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
+    "version": "2022-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{scope}/providers/Microsoft.Security/assessments/{assessmentName}/governanceAssignments": {
+      "get": {
+        "x-ms-examples": {
+          "List governance assignments": {
+            "$ref": "./examples/GovernanceAssignments/ListGovernanceAssignments_example.json"
+          }
+        },
+        "tags": [
+          "GovernanceAssignments"
+        ],
+        "description": "Get governance assignments on all of your resources inside a scope",
+        "operationId": "GovernanceAssignments_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/Scope"
+          },
+          {
+            "$ref": "#/parameters/AssessmentName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GovernanceAssignmentsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Security/assessments/{assessmentName}/governanceAssignments/{assignmentKey}": {
+      "get": {
+        "x-ms-examples": {
+          "Get governanceAssignment by specific governanceAssignmentKey": {
+            "$ref": "./examples/GovernanceAssignments/GetGovernanceAssignment_example.json"
+          }
+        },
+        "tags": [
+          "GovernanceAssignments"
+        ],
+        "description": "Get a specific governanceAssignment for the requested scope by AssignmentKey",
+        "operationId": "GovernanceAssignments_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/Scope"
+          },
+          {
+            "$ref": "#/parameters/AssessmentName"
+          },
+          {
+            "$ref": "#/parameters/AssignmentKey"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GovernanceAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create Governance assignment": {
+            "$ref": "./examples/GovernanceAssignments/PutGovernanceAssignment_example.json"
+          }
+        },
+        "tags": [
+          "GovernanceAssignments"
+        ],
+        "description": "Creates or updates a governance assignment on the given subscription.",
+        "operationId": "GovernanceAssignments_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/Scope"
+          },
+          {
+            "$ref": "#/parameters/AssessmentName"
+          },
+          {
+            "$ref": "#/parameters/AssignmentKey"
+          },
+          {
+            "$ref": "#/parameters/GovernanceAssignmentBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Updated",
+            "schema": {
+              "$ref": "#/definitions/GovernanceAssignment"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/GovernanceAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete security assignment": {
+            "$ref": "./examples/GovernanceAssignments/DeleteGovernanceAssignment_example.json"
+          }
+        },
+        "tags": [
+          "GovernanceAssignments"
+        ],
+        "description": "Delete a GovernanceAssignment over a given scope",
+        "operationId": "GovernanceAssignments_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/Scope"
+          },
+          {
+            "$ref": "#/parameters/AssessmentName"
+          },
+          {
+            "$ref": "#/parameters/AssignmentKey"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Governance assignment was deleted"
+          },
+          "204": {
+            "description": "No Content - Governance assignment does not exist"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "GovernanceAssignmentsList": {
+      "type": "object",
+      "description": "Page of a governance assignments list",
+      "properties": {
+        "value": {
+          "description": "Collection of governance assignments in this page",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GovernanceAssignment"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page"
+        }
+      }
+    },
+    "GovernanceAssignment": {
+      "type": "object",
+      "description": "Governance assignment over a given scope",
+      "properties": {
+        "properties": {
+          "description": "The properties of a governance assignment",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GovernanceAssignmentProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "GovernanceAssignmentProperties": {
+      "type": "object",
+      "description": "Describes properties of an governance assignment",
+      "properties": {
+        "owner": {
+          "description": "The Owner for the governance assignment - e.g. user@contoso.com - see example",
+          "type": "string"
+        },
+        "remediationDueDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The remediation due-date - after this date Secure Score will be affected (in case of  active grace-period)"
+        },
+        "remediationEta": {
+          "description": "The ETA (estimated time of arrival) for remediation (optional), see example",
+          "$ref": "#/definitions/RemediationEta"
+        },
+        "isGracePeriod": {
+          "description": "Defines whether there is a grace period on the governance assignment",
+          "type": "boolean"
+        },
+        "governanceEmailNotification": {
+          "description": "The email notifications settings for the governance rule, states whether to disable notifications for mangers and owners",
+          "$ref": "#/definitions/GovernanceEmailNotification"
+        },
+        "additionalData": {
+          "description": "The additional data for the governance assignment - e.g. links to ticket (optional), see example",
+          "$ref": "#/definitions/GovernanceAssignmentAdditionalData"
+        }
+      },
+      "required": [
+        "remediationDueDate"
+      ]
+    },
+    "GovernanceEmailNotification": {
+      "type": "object",
+      "description": "The governance email weekly notification configuration.",
+      "properties": {
+        "disableManagerEmailNotification": {
+          "description": "Exclude manager from weekly email notification.",
+          "type": "boolean"
+        },
+        "disableOwnerEmailNotification": {
+          "description": "Exclude  owner from weekly email notification.",
+          "type": "boolean"
+        }
+      }
+    },
+    "GovernanceAssignmentAdditionalData": {
+      "type": "object",
+      "description": "Describe the additional data of governance assignment - optional",
+      "properties": {
+        "ticketNumber": {
+          "description": "Ticket number associated with this governance assignment",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "ticketLink": {
+          "description": "Ticket link associated with this governance assignment - for example: https://snow.com",
+          "type": "string"
+        },
+        "ticketStatus": {
+          "description": "The ticket status associated with this governance assignment - for example: Active",
+          "type": "string"
+        }
+      }
+    },
+    "RemediationEta": {
+      "type": "object",
+      "description": "The ETA (estimated time of arrival) for remediation",
+      "properties": {
+        "eta": {
+          "description": "ETA for remediation.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "justification": {
+          "description": "Justification for change of Eta.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "eta",
+        "justification"
+      ]
+    }
+  },
+  "parameters": {
+    "AssignmentKey": {
+      "name": "assignmentKey",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The governance assignment key - the assessment key of the required governance assignment",
+      "x-ms-parameter-location": "method"
+    },
+    "AssessmentName": {
+      "name": "assessmentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "description": "The Assessment Key - A unique key for the assessment type",
+      "x-ms-parameter-location": "method"
+    },
+    "GovernanceAssignmentBody": {
+      "name": "governanceAssignment",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/GovernanceAssignment"
+      },
+      "description": "Governance assignment over a subscription scope",
+      "x-ms-parameter-location": "method"
+    },
+    "Scope": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope of the Governance assignments. Valid scopes are: subscription (format: 'subscriptions/{subscriptionId}'), or security connector (format: 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName})'",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
