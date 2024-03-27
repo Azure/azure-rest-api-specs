@@ -38,6 +38,10 @@ suppressions:
     reason: OperationId "StandbyVirtualMachines_ListByStandbyVirtualMachinePoolResource" does seem to be a Noun_Verb
 ```
 
+``` yaml
+modelerfour:
+  flatten-models: false
+```
 
 ### Tag: package-preview-2023-12
 

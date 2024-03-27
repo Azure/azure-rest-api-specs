@@ -73,9 +73,9 @@ interface TextOperations {
     {
       @body
       @doc("The text prompt injection attacks analysis request.")
-      @projectedName("csharp", "options")
-      @projectedName("python", "options")
-      @projectedName("java", "options")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
       body: AnalyzeTextPromptInjectionOptions;
     },
     AnalyzeTextPromptInjectionResult
