@@ -1,8 +1,8 @@
 {
-  "title": "Cancel a currently processing or queued translation",
-  "operationId": "DocumentTranslationOperations_CancelTranslation",
+  "title": "Returns the status for a batch document translation request",
+  "operationId": "DocumentTranslationOperations_GetTranslationStatus",
   "parameters": {
-    "api-version": "v1.0",
+    "api-version": "2024-05-01",
     "subscriptionId": "EA19050C-51FC-4B55-84E5-9EA7283601DA",
     "resourceGroupName": "TestResourceGroup",
     "endpoint": "{endpoint}",
@@ -11,7 +11,10 @@
   },
   "responses": {
     "200": {
-      "headers": {},
+      "headers": {
+        "retry-after": "30",
+        "ETag": "686897696a7c876b7e"
+      },
       "body": {
         "id": "727bf148-f327-47a0-9481-abae6362f11e",
         "createdDateTimeUtc": "2020-03-26T00:00:00Z",

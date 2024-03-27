@@ -37,5 +37,5 @@ namespace DocumentTranslation;
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "https://github.com/Azure/typespec-azure/issues/3107"
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v1_0: "v1.0",
+  v2024_05_01: "2024-05-01",
 }

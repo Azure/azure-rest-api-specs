@@ -49,7 +49,7 @@ If a file with the same name already exists at the
 destination, it will be overwritten. The targetUrl for each target language
 must be unique.
 """)
-  @route("/text/batch/v1.0/batches")
+  @route("/document/batches")
   @post
   startTranslation is Azure.Core.Foundations.Operation<
     StartTranslationDetails,
@@ -112,7 +112,7 @@ instead of just ignoring the query options.
 This reduces the risk of the client
 making assumptions about the data returned.
 """)
-  @route("/text/batch/v1.0/batches")
+  @route("/document/batches")
   @get
   getTranslationsStatus is Azure.Core.Foundations.Operation<
     {
@@ -206,7 +206,7 @@ if the specified page size is smaller than the server's default page size.
 Returns the translation status for a specific document based on the request Id
 and document Id.
 """)
-  @route("/text/batch/v1.0/batches/{id}/documents/{documentId}")
+  @route("/document/batches/{id}/documents/{documentId}")
   @get
   getDocumentStatus is Azure.Core.Foundations.Operation<
     {
@@ -229,7 +229,7 @@ The status includes the
 overall request status, as well as the status for documents that are being
 translated as part of that request.
 """)
-  @route("/text/batch/v1.0/batches/{id}")
+  @route("/document/batches/{id}")
   @get
   getTranslationStatus is Azure.Core.Foundations.Operation<
     {
@@ -252,7 +252,7 @@ cancelled and will be charged.
 All pending documents will be cancelled if
 possible.
 """)
-  @route("/text/batch/v1.0/batches/{id}")
+  @route("/document/batches/{id}")
   @delete
   cancelTranslation is Azure.Core.Foundations.Operation<
     {
@@ -313,7 +313,7 @@ the query options.
 This reduces the risk of the client making assumptions about
 the data returned.
 """)
-  @route("/text/batch/v1.0/batches/{id}/documents")
+  @route("/document/batches/{id}/documents")
   @get
   getDocumentsStatus is Azure.Core.Foundations.Operation<
     {
@@ -413,7 +413,7 @@ service.
 The list includes the common file extension, as well as the
 content-type if using the upload API.
 """)
-  @route("/text/batch/v1.0/documents/formats")
+  @route("/document/formats&type=document")
   @get
   getSupportedDocumentFormats is Azure.Core.Foundations.Operation<
     {},
@@ -427,7 +427,7 @@ The list of supported glossary formats supported by the Document Translation
 service.
 The list includes the common file extension used.
 """)
-  @route("/text/batch/v1.0/glossaries/formats")
+  @route("/document/formats&type=glossary")
   @get
   getSupportedGlossaryFormats is Azure.Core.Foundations.Operation<
     {},
@@ -440,7 +440,7 @@ The list includes the common file extension used.
 Returns a list of storage sources/options supported by the Document Translation
 service.
 """)
-  @route("/text/batch/v1.0/storagesources")
+  @route("/storagesources")
   @get
   getSupportedStorageSources is Azure.Core.Foundations.Operation<
     {},
