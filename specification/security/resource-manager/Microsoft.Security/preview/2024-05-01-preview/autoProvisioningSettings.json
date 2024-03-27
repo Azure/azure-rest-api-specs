@@ -1,0 +1,243 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2017-08-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/autoProvisioningSettings": {
+      "get": {
+        "x-ms-examples": {
+          "Get auto provisioning settings for subscription": {
+            "$ref": "./examples/AutoProvisioningSettings/GetAutoProvisioningSettingsSubscription_example.json"
+          }
+        },
+        "tags": [
+          "AutoProvisioningSettings"
+        ],
+        "description": "Exposes the auto provisioning settings of the subscriptions",
+        "operationId": "AutoProvisioningSettings_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AutoProvisioningSettingList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/autoProvisioningSettings/{settingName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an auto provisioning setting for subscription": {
+            "$ref": "./examples/AutoProvisioningSettings/GetAutoProvisioningSettingSubscription_example.json"
+          }
+        },
+        "tags": [
+          "AutoProvisioningSettings"
+        ],
+        "description": "Details of a specific setting",
+        "operationId": "AutoProvisioningSettings_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/AutoProvisioningSettingName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AutoProvisioningSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create auto provisioning settings for subscription": {
+            "$ref": "./examples/AutoProvisioningSettings/CreateAutoProvisioningSettingsSubscription_example.json"
+          }
+        },
+        "tags": [
+          "AutoProvisioningSettings"
+        ],
+        "description": "Details of a specific setting",
+        "operationId": "AutoProvisioningSettings_Create",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/AutoProvisioningSettingName"
+          },
+          {
+            "$ref": "#/parameters/AutoProvisioningSetting"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AutoProvisioningSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AutoProvisioningSettingList": {
+      "type": "object",
+      "description": "List of all the auto provisioning settings response",
+      "properties": {
+        "value": {
+          "description": "List of all the auto provisioning settings",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AutoProvisioningSetting"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "AutoProvisioningSetting": {
+      "type": "object",
+      "description": "Auto provisioning setting",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Auto provisioning setting data",
+          "$ref": "#/definitions/AutoProvisioningSettingProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "AutoProvisioningSettingProperties": {
+      "type": "object",
+      "description": "describes properties of an auto provisioning setting",
+      "properties": {
+        "autoProvision": {
+          "type": "string",
+          "description": "Describes what kind of security agent provisioning action to take",
+          "enum": [
+            "On",
+            "Off"
+          ],
+          "x-ms-enum": {
+            "name": "autoProvision",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "On",
+                "description": "Install missing security agent on VMs automatically"
+              },
+              {
+                "value": "Off",
+                "description": "Do not install security agent on the VMs automatically"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "autoProvision"
+      ]
+    }
+  },
+  "parameters": {
+    "AutoProvisioningSettingName": {
+      "name": "settingName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Auto provisioning setting key",
+      "x-ms-parameter-location": "method"
+    },
+    "AutoProvisioningSetting": {
+      "name": "setting",
+      "in": "body",
+      "required": true,
+      "description": "Auto provisioning setting key",
+      "schema": {
+        "$ref": "#/definitions/AutoProvisioningSetting"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
