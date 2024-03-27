@@ -118,11 +118,8 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/sites": {
       "get": {
-        "operationId": "listSitesAtSubscription",
-        "tags": [
-          "Sites"
-        ],
-        "description": "List Site resources by Subscription",
+        "operationId": "SitesBySubscriptions_List",
+        "description": "List Site resources by subscription ID",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -152,11 +149,8 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/sites/{siteName}": {
       "get": {
-        "operationId": "sitesGetAtSubscription",
-        "tags": [
-          "Sites"
-        ],
-        "description": "Get a Site at Subscription scope",
+        "operationId": "SitesBySubscriptions_Get",
+        "description": "Get a Site",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -189,11 +183,8 @@
         }
       },
       "put": {
-        "operationId": "sitesCreateAtSubscription",
-        "tags": [
-          "Sites"
-        ],
-        "description": "Create a Site at Subscription scope",
+        "operationId": "SitesBySubscriptions_CreateOrUpdate",
+        "description": "Create a Site",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -236,10 +227,6 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
               }
             }
           },
@@ -256,11 +243,8 @@
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "sitesUpdateAtSubscription",
-        "tags": [
-          "Sites"
-        ],
-        "description": "Update a Site at Subscription Scope",
+        "operationId": "SitesBySubscriptions_Update",
+        "description": "Update a Site",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -302,11 +286,8 @@
         }
       },
       "delete": {
-        "operationId": "sitesDeleteAtSubscription",
-        "tags": [
-          "Sites"
-        ],
-        "description": "Delete a Site at Subscription scope",
+        "operationId": "SitesBySubscriptions_Delete",
+        "description": "Delete a Site",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -324,8 +305,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -336,37 +328,34 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/sites": {
       "get": {
-        "operationId": "SitesOperations_ListByResourceGroup",
-        "description": "List Site resources by ResourceGroup",
+        "operationId": "Sites_ListByResourceGroup",
+        "tags": [
+          "Sites"
+        ],
+        "description": "List Site resources by resource group",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription. The value must be an UUID.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group. The name is case insensitive.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 90
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SiteListResult"
             }
@@ -374,13 +363,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -391,32 +374,25 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/sites/{siteName}": {
       "get": {
-        "operationId": "SitesOperations_GetByResourceGroup",
-        "description": "Get a Site at Resource Group scope",
+        "operationId": "Sites_Get",
+        "tags": [
+          "Sites"
+        ],
+        "description": "Get a Site",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription. The value must be an UUID.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group. The name is case insensitive.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 90
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "siteName",
             "in": "path",
-            "description": "Name of Site",
+            "description": "Name of Site resource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
@@ -424,7 +400,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Site"
             }
@@ -432,59 +408,37 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "put": {
-        "operationId": "SitesOperations_CreateOrUpdateByResourceGroup",
-        "description": "Create a Site at Resource Group scope",
+        "operationId": "Sites_CreateOrUpdate",
+        "tags": [
+          "Sites"
+        ],
+        "description": "Create a Site",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription. The value must be an UUID.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group. The name is case insensitive.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 90
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "siteName",
             "in": "path",
-            "description": "Name of Site",
+            "description": "Name of Site resource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "site",
+            "name": "resource",
             "in": "body",
             "description": "Resource create parameters.",
             "required": true,
@@ -495,69 +449,73 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Resource 'Site' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/Site"
+            }
+          },
+          "201": {
+            "description": "Resource 'Site' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Site"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "SitesOperations_UpdateByResourceGroup",
-        "description": "Update a Site at Resource Group scope",
+        "operationId": "Sites_Update",
+        "tags": [
+          "Sites"
+        ],
+        "description": "Update a Site",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription. The value must be an UUID.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group. The name is case insensitive.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 90
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "siteName",
             "in": "path",
-            "description": "Name of Site",
+            "description": "Name of Site resource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "site",
+            "name": "properties",
             "in": "body",
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SiteUpdateUpdate"
+              "$ref": "#/definitions/SiteUpdate"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Site"
             }
@@ -565,66 +523,65 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "delete": {
-        "operationId": "SitesOperations_DeleteByResourceGroup",
-        "description": "Delete a Site at ResourceGroup scope",
+        "operationId": "Sites_Delete",
+        "tags": [
+          "Sites"
+        ],
+        "description": "Delete a Site",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The ID of the target subscription. The value must be an UUID.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group. The name is case insensitive.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 90
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "siteName",
             "in": "path",
-            "description": "Name of Site",
+            "description": "Name of Site resource",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           }
         ],
         "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -653,97 +610,16 @@
         ]
       }
     },
-    "Azure.Core.Foundations.Error": {
-      "type": "object",
-      "description": "The error object.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "One of a server-defined set of error codes."
-        },
-        "message": {
-          "type": "string",
-          "description": "A human-readable representation of the error."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the error."
-        },
-        "details": {
-          "type": "array",
-          "description": "An array of details about specific errors that led to this reported error.",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
-        },
-        "innererror": {
-          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
-          "description": "An object containing more specific information than the current object about the error."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "Azure.Core.Foundations.ErrorResponse": {
-      "type": "object",
-      "description": "A response containing error details.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "The error object."
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "Azure.Core.Foundations.InnerError": {
-      "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "One of a server-defined set of error codes."
-        },
-        "innererror": {
-          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
-          "description": "Inner error."
-        }
-      }
-    },
-    "Azure.ResourceManager.ManagedServiceIdentity": {
-      "type": "object",
-      "description": "The managed service identities envelope.",
-      "properties": {
-        "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        }
-      }
-    },
-    "Azure.ResourceManager.ManagedServiceIdentityUpdate": {
-      "type": "object",
-      "description": "The managed service identities envelope.",
-      "properties": {
-        "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        }
-      }
-    },
-    "ProvisioningState": {
+    "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
-      "description": "The ProvisioningState",
+      "description": "The provisioning state of a resource type.",
       "enum": [
         "Succeeded",
         "Failed",
         "Canceled"
       ],
       "x-ms-enum": {
-        "name": "ProvisioningState",
+        "name": "ResourceProvisioningState",
         "modelAsString": true,
         "values": [
           {
@@ -868,7 +744,7 @@
           "x-ms-identifiers": []
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "Provisioning state of last operation",
           "readOnly": true
         }
@@ -920,7 +796,7 @@
           }
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "Provisioning state of last operation",
           "readOnly": true
         }
@@ -928,23 +804,21 @@
     },
     "SiteUpdate": {
       "type": "object",
-      "description": "Site properties for Update operation",
+      "description": "The type used for update operations of the Site.",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentity",
-          "description": "Identity of Sites resource",
-          "x-ms-client-flatten": true
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         },
         "properties": {
           "$ref": "#/definitions/SiteUpdateProperties",
-          "description": "updatable properties of the Sites resource",
           "x-ms-client-flatten": true
         }
       }
     },
     "SiteUpdateProperties": {
       "type": "object",
-      "description": "updatable properties of the Sites resource",
+      "description": "The updatable properties of the Site.",
       "properties": {
         "displayName": {
           "type": "string",
@@ -968,22 +842,6 @@
         }
       }
     },
-    "SiteUpdateUpdate": {
-      "type": "object",
-      "description": "Site properties for Update operation",
-      "properties": {
-        "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.ManagedServiceIdentityUpdate",
-          "description": "Identity of Sites resource",
-          "x-ms-client-flatten": true
-        },
-        "properties": {
-          "$ref": "#/definitions/SiteUpdateProperties",
-          "description": "updatable properties of the Sites resource",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "Versions": {
       "type": "string",
       "description": "Supported API Versions",
@@ -1003,44 +861,5 @@
       }
     }
   },
-  "parameters": {
-    "Azure.Core.Foundations.ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "description": "The API version to use for this operation.",
-      "required": true,
-      "type": "string",
-      "minLength": 1,
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "apiVersion"
-    },
-    "Azure.Core.MaxPageSizeQueryParameter": {
-      "name": "maxpagesize",
-      "in": "query",
-      "description": "The maximum number of result items per page.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
-    },
-    "Azure.Core.SkipQueryParameter": {
-      "name": "skip",
-      "in": "query",
-      "description": "The number of result items to skip.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "default": 0,
-      "x-ms-parameter-location": "method"
-    },
-    "Azure.Core.TopQueryParameter": {
-      "name": "top",
-      "in": "query",
-      "description": "The number of result items to return.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }

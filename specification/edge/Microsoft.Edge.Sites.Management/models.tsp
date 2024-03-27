@@ -28,35 +28,7 @@ model SiteProperties {
 
   @doc("Provisioning state of last operation")
   @visibility("read")
-  provisioningState?: ProvisioningState;
-}
-
-@doc("Site properties for Update operation")
-model SiteUpdate {
-  @doc("Identity of Sites resource")
-  @extension("x-ms-client-flatten", true)
-  identity?: ManagedServiceIdentity;
-
-  @doc("updatable properties of the Sites resource")
-  @extension("x-ms-client-flatten", true)
-  properties?: SiteUpdateProperties;
-}
-
-
-@doc("updatable properties of the Sites resource")
-model SiteUpdateProperties {
-  @doc("displayName of Site resource")
-  displayName?: string;
-
-  @doc("Description of Site resource")
-  description?: string;
-
-  @doc("AddressResource ArmId of Site resource")
-  addressResourceId?: ResourceIdentifier<[
-    {
-      type: "Microsoft.EdgeOrder/addresses";
-    }
-  ]>;
+  provisioningState?: ResourceProvisioningState;
 }
 
 @doc("Properties of the SiteAwareResourceTypes resource type.")
@@ -66,7 +38,7 @@ model SiteAwareResourceTypesProperties {
 
   @doc("Provisioning state of last operation")
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: ResourceProvisioningState;
 }
 
 @doc("The properties and availability status of each resource type on which aggregations will be performed over Site.")

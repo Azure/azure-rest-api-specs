@@ -13,7 +13,6 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.Edge;
 
 @doc("Site as ARM Resource")
-@subscriptionResource
 model Site is ProxyResource<SiteProperties> {
   @doc("Name of Site resource")
   @pattern("^[a-zA-Z0-9-]{3,24}$")
@@ -28,29 +27,18 @@ model Site is ProxyResource<SiteProperties> {
 
 @armResourceOperations
 interface Sites {
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("List Site resources by Subscription")
-  @operationId("listSitesAtSubscription")
-  listSitesAtSubscription is ArmResourceListByParent<Site>;
+  get is ArmResourceRead<Site>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Site>;
+  update is ArmResourcePatchSync<Site, SiteProperties>;
+  delete is ArmResourceDeleteWithoutOkAsync<Site>;
+  listByResourceGroup is ArmResourceListByParent<Site>;
+}
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Get a Site at Subscription scope")
-  @operationId("sitesGetAtSubscription")
-  sitesGetAtSubscription is ArmResourceRead<Site>;
-
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Create a Site at Subscription scope")
-  @operationId("sitesCreateAtSubscription")
-  sitesCreateAtSubscription is ArmResourceCreateOrReplaceAsync<Site, BaseParameters<Site>, ArmAsyncOperationHeader>;
-
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Update a Site at Subscription Scope")
-  @parameterVisibility("read")
-  @operationId("sitesUpdateAtSubscription")
-  sitesUpdateAtSubscription is ArmCustomPatchSync<Site, SiteUpdate>;
-
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("Delete a Site at Subscription scope")
-  @operationId("sitesDeleteAtSubscription")
-  sitesDeleteAtSubscription is ArmResourceDeleteSync<Site>;
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom operation on the scope of subscription"
+interface SitesBySubscriptions {
+  list is ArmListBySubscription<Site>;
+  get is ArmResourceRead<Site, BaseParameters = SubscriptionBaseParameters>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Site, BaseParameters = SubscriptionBaseParameters>;
+  update is ArmResourcePatchSync<Site, SiteProperties, BaseParameters = SubscriptionBaseParameters>;
+  delete is ArmResourceDeleteWithoutOkAsync<Site, BaseParameters = SubscriptionBaseParameters>;
 }

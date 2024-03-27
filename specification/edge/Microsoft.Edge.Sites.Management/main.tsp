@@ -5,8 +5,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./Site.tsp";
 import "./SiteAwareResourceTypes.tsp";
-import "./routes.tsp";
-import "../Microsoft.Edge.Shared";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
