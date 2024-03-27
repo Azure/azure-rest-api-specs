@@ -3457,17 +3457,11 @@
           "type": "array",
           "description": "Supported OAuth2 flows",
           "items": {}
-        },
-        "defaultScopes": {
-          "type": "array",
-          "description": "Oauth2 scopes of every flow. Overridden by scope definitions in specific flows",
-          "items": {}
         }
       },
       "required": [
         "type",
-        "flows",
-        "defaultScopes"
+        "flows"
       ]
     },
     "AttestBootIntegrityPropertyEnum": {
@@ -3929,8 +3923,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -4190,8 +4183,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -4319,8 +4311,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -4373,6 +4364,16 @@
             "description": "Generation 2 (V2) hypervisor"
           }
         ]
+      }
+    },
+    "IPConfigReference": {
+      "type": "object",
+      "description": "IpConfig - Name of NIC bound to the NSG.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID - The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/..."
+        }
       }
     },
     "IPConfiguration": {
@@ -4626,8 +4627,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -4765,8 +4765,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -4940,8 +4939,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -4980,16 +4978,6 @@
           "$ref": "#/definitions/NetworkInterfaceStatus",
           "description": "The observed state of network interfaces",
           "readOnly": true
-        }
-      }
-    },
-    "NetworkInterfaceReference": {
-      "type": "object",
-      "description": "Subnet - Name of NIC bound to the NSG.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "ID - The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/..."
         }
       }
     },
@@ -5117,8 +5105,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -5129,11 +5116,11 @@
       "type": "object",
       "description": "Network Security Group resource.",
       "properties": {
-        "networkInterfaces": {
+        "ipConfigurations": {
           "type": "array",
           "description": "A collection of references to network interfaces that are currently using this NSG.",
           "items": {
-            "$ref": "#/definitions/NetworkInterfaceReference"
+            "$ref": "#/definitions/IPConfigReference"
           },
           "readOnly": true
         },
@@ -5627,8 +5614,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -5922,8 +5908,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -6204,8 +6189,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -6396,8 +6380,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [

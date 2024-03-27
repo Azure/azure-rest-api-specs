@@ -671,7 +671,7 @@ model IPPoolInfo {
 model NetworkSecurityGroupProperties {
   @doc("A collection of references to network interfaces that are currently using this NSG.")
   @visibility("read")
-  networkInterfaces?: NetworkInterfaceReference[];
+  ipConfigurations?: IPConfigReference[];
 
   @doc("A collection of references to subnets that are currently using this NSG")
   @visibility("read")
@@ -692,8 +692,9 @@ model SubnetReference {
   id?: string;
 }
 
-@doc("Subnet - Name of NIC bound to the NSG.")
-model NetworkInterfaceReference {
+@doc("IpConfig - Name of NIC bound to the NSG.")
+#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+model IPConfigReference {
   @doc("ID - The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/...")
   id?: string;
 }
