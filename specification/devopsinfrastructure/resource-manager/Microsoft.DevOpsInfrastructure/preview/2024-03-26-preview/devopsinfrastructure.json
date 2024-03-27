@@ -1270,8 +1270,12 @@
           }
         },
         "locationInfo": {
-          "$ref": "#/definitions/ResourceSkuLocationInfo",
-          "description": "A list of locations and availability zones in those locations where the SKU is available"
+          "type": "array",
+          "description": "A list of locations and availability zones in those locations where the SKU is available",
+          "items": {
+            "$ref": "#/definitions/ResourceSkuLocationInfo"
+          },
+          "x-ms-identifiers": []
         },
         "capabilities": {
           "type": "array",
@@ -1319,11 +1323,7 @@
             "type": "string"
           }
         }
-      },
-      "required": [
-        "locations",
-        "zones"
-      ]
+      }
     },
     "ResourceSkuRestrictions": {
       "type": "object",

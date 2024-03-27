@@ -467,10 +467,10 @@ union ResourceSkuRestrictionsType {
 @doc("Describes an available Compute SKU Restriction Information.")
 model ResourceSkuRestrictionInfo {
   @doc("Locations where the SKU is restricted")
-  locations: string[];
+  locations?: string[];
 
   @doc("List of availability zones where the SKU is restricted.")
-  zones: string[];
+  zones?: string[];
 }
 
 union ResourceSkuRestrictionsReasonCode {
@@ -532,7 +532,8 @@ model ResourceSkuProperties {
   locations: string[];
 
   @doc("A list of locations and availability zones in those locations where the SKU is available")
-  locationInfo: ResourceSkuLocationInfo;
+  @extension("x-ms-identifiers", [])
+  locationInfo: ResourceSkuLocationInfo[];
 
   @doc("Name value pairs to describe the capability.")
   @extension("x-ms-identifiers", [])
