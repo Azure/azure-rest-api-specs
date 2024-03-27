@@ -320,7 +320,7 @@
         "preBuildSteps": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PreBuildStep"
+            "$ref": "./CommonDefinitions.json#/definitions/PreBuildStep"
           },
           "x-ms-identifiers": [],
           "description": "List of steps to perform before the build."
@@ -342,7 +342,7 @@
           "readOnly": true
         },
         "destinationContainerRegistry": {
-          "$ref": "#/definitions/ContainerRegistryWithCustomImage",
+          "$ref": "./CommonDefinitions.json#/definitions/ContainerRegistryWithCustomImage",
           "description": "Container registry that the final image will be uploaded to."
         },
         "configuration": {
@@ -383,7 +383,7 @@
       "description": "Information pertaining to an individual build.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -423,23 +423,6 @@
         "modelAsString": true
       }
     },
-    "ContainerRegistryWithCustomImage": {
-      "type": "object",
-      "properties": {
-        "server": {
-          "type": "string",
-          "description": "Login server of the container registry that the final image should be uploaded to. Builder resource needs to have this container registry defined along with an identity to use to access it."
-        },
-        "image": {
-          "type": "string",
-          "description": "Full name that the final image should be uploaded as, including both image name and tag."
-        }
-      },
-      "description": "Container registry that the final image will be uploaded to.",
-      "required": [
-        "server"
-      ]
-    },
     "BuildToken": {
       "description": "Build Auth Token.",
       "type": "object",
@@ -457,52 +440,6 @@
           "readOnly": true
         }
       }
-    },
-    "HttpGet": {
-      "type": "object",
-      "properties": {
-        "url": {
-          "type": "string",
-          "description": "URL to make HTTP GET request against."
-        },
-        "fileName": {
-          "type": "string",
-          "description": "Name of the file that the request should be saved to."
-        },
-        "headers": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "List of headers to send with the request."
-        }
-      },
-      "description": "Model representing a http get request.",
-      "required": [
-        "url"
-      ]
-    },
-    "PreBuildStep": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Description of the pre-build step."
-        },
-        "scripts": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "List of custom commands to run."
-        },
-        "httpGet": {
-          "$ref": "#/definitions/HttpGet",
-          "description": "Http get request to send before the build.",
-          "x-ms-identifiers": []
-        }
-      },
-      "description": "Model representing a pre-build step."
     },
     "BuildProvisioningState": {
       "type": "string",
