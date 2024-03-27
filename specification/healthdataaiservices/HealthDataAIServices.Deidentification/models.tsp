@@ -29,7 +29,7 @@ model Job {
   dataType: DocumentDataType = DocumentDataType.PlainText;
 
   @doc("Operation to perform on the input documents.")
-  operation: OperationType = OperationType.Redact;
+  operation: OperationType = OperationType.Surrogate;
 
   @maxLength(16)
   @minLength(1)
@@ -156,9 +156,6 @@ model TargetStorageLocation {
 
 @doc("Enum of supported Data Types.")
 enum DocumentDataType {
-  @doc("Unknown data type.")
-  Unknown,
-
   @doc("Plain text data type.")
   PlainText,
 }

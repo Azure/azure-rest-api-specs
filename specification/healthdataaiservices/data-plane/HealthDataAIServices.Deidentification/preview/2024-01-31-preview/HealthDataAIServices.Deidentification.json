@@ -636,18 +636,12 @@
       "type": "string",
       "description": "Enum of supported Data Types.",
       "enum": [
-        "Unknown",
         "PlainText"
       ],
       "x-ms-enum": {
         "name": "DocumentDataType",
         "modelAsString": true,
         "values": [
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "Unknown data type."
-          },
           {
             "name": "PlainText",
             "value": "PlainText",
@@ -736,7 +730,7 @@
         "operation": {
           "$ref": "#/definitions/OperationType",
           "description": "Operation to perform on the input documents.",
-          "default": "Redact"
+          "default": "Surrogate"
         },
         "redactionFormat": {
           "type": "string",
@@ -808,7 +802,7 @@
         "operation": {
           "$ref": "#/definitions/OperationType",
           "description": "Operation to perform on the input documents.",
-          "default": "Redact"
+          "default": "Surrogate"
         },
         "redactionFormat": {
           "type": "string",
