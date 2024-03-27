@@ -1,30 +1,32 @@
 parameters:
-  "service-dir":
-    default: "sdk/eventgrid"
-  "service-directory-name":
-    default: "eventgrid"
+  service-dir:
+    default: sdk/eventgrid
+  service-directory-name:
+    default: eventgrid
 emit:
-  - "@azure-tools/typespec-autorest"
-linter:
-  extends:
-    - "@azure-tools/typespec-azure-core/all"
+  - D:/Go/src/github.com/Azure/autorest.go/packages/typespec-go
 options:
-  "@azure-tools/typespec-autorest":
-    emitter-output-dir: "{project-root}/.."
+  '@azure-tools/typespec-autorest':
+    azure-resource-provider-folder: data-plane
+    emitter-output-dir: '{project-root}/..'
     examples-directory: examples
     omit-unreachable-types: false
-    output-file: "{azure-resource-provider-folder}/Microsoft.EventGrid/{version-status}/{version}/SystemEvents.json"
-    azure-resource-provider-folder: "data-plane"
-  "@azure-tools/typespec-python":
-    package-pprint-name: '"Azure Event Grid System Events"'
-    package-version: 4.12.0b1
-    package-dir: "azure-eventgrid"
-    package-name: "{package-dir}"
-    emitter-output-dir: "{project-root}/{service-dir}/{package-name}"
+    output-file: '{azure-resource-provider-folder}/Microsoft.EventGrid/{version-status}/{version}/SystemEvents.json'
+  '@azure-tools/typespec-csharp':
     flavor: azure
-  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
-  "@azure-tools/typespec-csharp":
-    package-dir: Azure.Messaging.EventGrid.SystemEvents
     model-namespace: false
     namespace: Azure.Messaging.EventGrid.SystemEvents
+    package-dir: Azure.Messaging.EventGrid.SystemEvents
+  '@azure-tools/typespec-go':
+    module: github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/eventgrid/armeventgrid
+    module-version: 0.1.0
+  '@azure-tools/typespec-python':
+    emitter-output-dir: '{project-root}/{service-dir}/{package-name}'
     flavor: azure
+    package-dir: azure-eventgrid
+    package-name: '{package-dir}'
+    package-pprint-name: '"Azure Event Grid System Events"'
+    package-version: 4.12.0b1
+linter:
+  extends:
+    - '@azure-tools/typespec-azure-core/all'

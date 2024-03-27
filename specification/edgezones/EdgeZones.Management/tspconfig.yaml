@@ -1,12 +1,15 @@
 emit:
-  - "@azure-tools/typespec-autorest"
+  - D:/Go/src/github.com/Azure/autorest.go/packages/typespec-go
+options:
+  '@azure-tools/typespec-autorest':
+    azure-resource-provider-folder: resource-manager
+    emitter-output-dir: '{project-root}/..'
+    examples-directory: examples
+    output-file: '{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/edgezones.json'
+    use-read-only-status-schema: true
+  '@azure-tools/typespec-go':
+    module: github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/edgezones/armedgezones
+    module-version: 0.1.0
 linter:
   extends:
-    - "@azure-tools/typespec-azure-resource-manager/all"
-options:
-  "@azure-tools/typespec-autorest":
-    azure-resource-provider-folder: "resource-manager"
-    use-read-only-status-schema: true
-    emitter-output-dir: "{project-root}/.."
-    examples-directory: "examples"
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/edgezones.json"
+    - '@azure-tools/typespec-azure-resource-manager/all'

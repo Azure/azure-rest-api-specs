@@ -1,50 +1,51 @@
 parameters:
-  "python-sdk-folder":
-    default: "{project-root}/azure-sdk-for-python/"
-  "java-sdk-folder":
-    default: "{project-root}/azure-sdk-for-java/"
-  "js-sdk-folder":
-    default: "{project-root}/azure-sdk-for-js/"
-  "csharp-sdk-folder":
-    default: "{project-root}/azure-sdk-for-net/"
-  "service-directory-name":
-    default: "anomalydetector"
+  csharp-sdk-folder:
+    default: '{project-root}/azure-sdk-for-net/'
+  java-sdk-folder:
+    default: '{project-root}/azure-sdk-for-java/'
+  js-sdk-folder:
+    default: '{project-root}/azure-sdk-for-js/'
+  python-sdk-folder:
+    default: '{project-root}/azure-sdk-for-python/'
+  service-directory-name:
+    default: anomalydetector
 emit:
-  - "@azure-tools/typespec-autorest"
-linter:
-  extends:
-    - "@azure-tools/typespec-azure-core/all"
+  - D:/Go/src/github.com/Azure/autorest.go/packages/typespec-go
 options:
-  "@azure-tools/typespec-autorest":
-    azure-resource-provider-folder: "data-plane"
+  '@azure-tools/typespec-autorest':
+    azure-resource-provider-folder: data-plane
+    emitter-output-dir: '{project-root}/../'
     examples-directory: examples
     omit-unreachable-types: true
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
-    emitter-output-dir: "{project-root}/../"
-  "@azure-tools/typespec-python":
-    "package-pprint-name": '"Cognitive Services Anomaly Detector"'
-    "package-mode": "dataplane"
-    "package-version": 3.0.0
-    "package-name": "azure-ai-anomalydetector"
-    "emitter-output-dir": "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
+    output-file: '{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json'
+  '@azure-tools/typespec-csharp':
+    clear-output-folder: true
     flavor: azure
-  # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
-  "@azure-tools/typespec-java":
+    model-namespace: false
+    namespace: Azure.AI.AnomalyDetector
+    save-inputs: false
+  '@azure-tools/typespec-go':
+    module: github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/cognitiveservices/armcognitiveservices
+    module-version: 0.1.0
+  '@azure-tools/typespec-java':
+    emitter-output-dir: '{java-sdk-folder}/sdk/{service-directory-name}/azure-ai-anomalydetector'
+    flavor: azure
     namespace: com.azure.ai.anomalydetector
     partial-update: true
-    emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-ai-anomalydetector"
+  '@azure-tools/typespec-python':
+    emitter-output-dir: '{python-sdk-folder}/sdk/{service-directory-name}/{package-name}'
     flavor: azure
-  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
-  "@azure-tools/typespec-csharp":
-    save-inputs: false
-    clear-output-folder: true
-    namespace: Azure.AI.AnomalyDetector
-    model-namespace: false
+    package-mode: dataplane
+    package-name: azure-ai-anomalydetector
+    package-pprint-name: '"Cognitive Services Anomaly Detector"'
+    package-version: 3.0.0
+  '@azure-tools/typespec-ts':
+    emitter-output-dir: '{js-sdk-folder}/sdk/{service-directory-name}/ai-anomaly-detector-rest'
     flavor: azure
-  "@azure-tools/typespec-ts":
-    emitter-output-dir: "{js-sdk-folder}/sdk/{service-directory-name}/ai-anomaly-detector-rest"
     generateMetadata: true
     generateTest: true
     packageDetails:
-      name: "@azure-rest/ai-anomaly-detector"
-    flavor: azure
+      name: '@azure-rest/ai-anomaly-detector'
+linter:
+  extends:
+    - '@azure-tools/typespec-azure-core/all'
