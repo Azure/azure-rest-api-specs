@@ -745,7 +745,15 @@
         },
         "kind": {
           "description": "Kind of Data Collection Endpoint",
-          "type": "string"
+          "enum": [
+            "SystemManaged"
+          ],
+          "type": "string",
+          "example": "SystemManaged",
+          "x-ms-enum": {
+            "name": "KnownDataCollectionEndpointResourceKind",
+            "modelAsString": true
+          }
         }
       }
     }
