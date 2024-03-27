@@ -1,10 +1,12 @@
 import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
 import "./../../azure_chat_extensions.tsp";
 import "./common_options.tsp";
 
 namespace Azure.OpenAI;
 
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 @added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("""
@@ -29,19 +31,19 @@ model AzureMachineLearningIndexChatExtensionParameters {
   ...OnYourDataCommonChatExtensionConfiguration;
 
   @doc("The resource ID of the Azure Machine Learning project.")
-  @projectedName("csharp", "ProjectResourceId")
+  @clientName("ProjectResourceId", "csharp")
   @encodedName("application/json", "project_resource_id")
   projectResourceId: string;
 
   @doc("The Azure Machine Learning vector index name.")
-  @projectedName("csharp", "Name")
+  @clientName("Name", "csharp")
   name: string;
 
   @doc("The version of the Azure Machine Learning vector index.")
-  @projectedName("csharp", "Version")
+  @clientName("Version", "csharp")
   version: string;
 
   @doc("Search filter. Only supported if the Azure Machine Learning vector index is of type AzureSearch.")
-  @projectedName("csharp", "Filter")
+  @clientName("Filter", "csharp")
   filter?: string;
 }

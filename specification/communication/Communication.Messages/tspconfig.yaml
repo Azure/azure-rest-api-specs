@@ -13,9 +13,8 @@ parameters:
     default: "sdk/communication"
   "python-output-dir":
     default: "azure/communication/messages/_generated"
-emit: [
-  "@azure-tools/typespec-autorest"
-]
+emit:
+  - "@azure-tools/typespec-autorest"
 
 linter:
   extends:
@@ -35,12 +34,14 @@ options:
     namespace: Azure.Communication.Messages
     package-dir: "Azure.Communication.Messages"
     save-inputs: true
+    flavor: azure
   "@azure-tools/typespec-python":
-    package-pprint-name: "\"Communication Messages\""
+    package-pprint-name: '"Communication Messages"'
     emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
     package-dir: "azure-communication-messages"
     package-name: "{package-dir}"
     package-version: 1.0.0
+    flavor: azure
   "@azure-tools/typespec-java":
     package-dir: "azure-communication-messages"
     namespace: com.azure.communication.messages
@@ -49,9 +50,12 @@ options:
     custom-types-subpackage: "models.channels"
     custom-types: "WhatsAppMessageButtonSubType,WhatsAppMessageTemplateBindings,WhatsAppMessageTemplateBindingsButton,WhatsAppMessageTemplateBindingsComponent,WhatsAppMessageTemplateItem"
     customization-class: customization/src/main/java/MessagesSdkCustomization.java
+    flavor: azure
+    stream-style-serialization: false
   "@azure-tools/typespec-ts":
     package-dir: "communication-messages-rest"
     packageDetails:
       name: "@azure-rest/communication-messages"
       description: "Azure client library for Azure Communication Messages services"
       version: "1.0.0-beta.2"
+    flavor: azure

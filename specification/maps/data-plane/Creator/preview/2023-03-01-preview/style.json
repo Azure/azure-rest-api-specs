@@ -101,7 +101,8 @@
   "paths": {
     "/styles": {
       "post": {
-        "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Style Create request allows the caller to create an Azure Maps style.\n\n## Submit Create Request\n\nTo create your style you will make a `POST` request with an azure maps style. \n\nThe Create Style API is a [long-running operation](https://aka.ms/am-creator-lrt-v2).",
+        "summary": "Use to create an Azure Maps style.",
+        "description": "\n\n## Submit Create Request\n\n The `Style Create` API is an HTTP `POST` request used to create an Azure Maps style by passing in either a JSON or ZIP file containing the style information. \n\nThe Create Style API is a [long-running operation](https://aka.ms/am-creator-lrt-v2).",
         "operationId": "Style_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -149,7 +150,8 @@
         }
       },
       "get": {
-        "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Style List request allows the caller to fetch a list of all styles created. The default indoor style `microsoft-maps:indoor_2022-01-01` and `microsoft-maps:indoor_dark_2022-01-01` will not show in the list response. But you can still use it as your own style by the predefined alias.\n<br>",
+        "summary": "Use to get a list of styles.",
+        "description": "\n\nThe `List` API is an HTTP `GET` request that allows the caller to fetch a list of all styles in the current Azure Maps Creator account. The default indoor style `microsoft-maps:indoor_2022-01-01` and `microsoft-maps:indoor_dark_2022-01-01` will not show in the list response. But you can still use it as your own style by the predefined alias.\n\n### Submit List Request",
         "operationId": "Style_List",
         "x-ms-examples": {
           "Get a list of all styles": {
@@ -183,7 +185,8 @@
     },
     "/styles/{styleId}": {
       "get": {
-        "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Style Get request allows the caller to get a style. Customers can get two predefined default styles using alias `microsoft-maps:indoor_2022-01-01` for indoor light and `microsoft-maps:indoor_dark_2022-01-01` for indoor dark.",
+        "summary": "Use to get details of a style.",
+        "description": "\n\n### Submit Get Request\n\nThe `Get` API is an HTTP `GET` request that allows the caller to fetch the details of an existing style by passing in the `styleId` or its [alias](). Get the two predefined default styles using the alias `microsoft-maps:indoor_2022-01-01` for indoor light and `microsoft-maps:indoor_dark_2022-01-01` for indoor dark.",
         "operationId": "Style_Get",
         "x-ms-examples": {
           "Get the details for a single style": {
@@ -225,7 +228,8 @@
         }
       },
       "delete": {
-        "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Style Delete request allows the caller to remove a style from their Azure Maps account.<br> \n\n### Submit Delete Request\n\nAn `HTTP DELETE` request with the `styleId` in the path of the request is required to remove an existing style from your Azure Maps account.<br>    \n\n#### Delete request \"Successful\"\n\nThe Style Delete API returns a HTTP `204 No Content` response with an empty body, if the style was deleted successfully.<br>    \n\n#### Delete request \"Failed\"\n\nA HTTP `400 Bad Request` error response will be returned if the style with the passed-in `styleId` is not found. \n\nHere is a sample error response:\n\n<br>\n\n```json\n{\n  \"error\": {\n      \"code\": \"400 BadRequest\",\n      \"message\": \"Bad request - Style Id: d85b5b27-5fc4-4599-8b50-47160e90f8ce does not exist.\"\n  }\n}\n```",
+        "summary": "Use to delete a style.",
+        "description": "\n\n### Submit Delete Request\n\n\n\nThe `Delete` API is an HTTP `DELETE` request that is used to delete the specified style, where the path will contain the `styleId` of the style to delete. \n\n#### Delete request \"Successful\"\n\nThe Style Delete API returns a HTTP `204 No Content` response with an empty body, if the style was deleted successfully. \n\n#### Delete request \"Failed\"\n\nA HTTP `400 Bad Request` error response will be returned if the style with the passed-in `styleId` is not found. \n\nHere is a sample error response:\n\n<br>\n\n```json\n{\n  \"error\": {\n      \"code\": \"400 BadRequest\",\n      \"message\": \"Bad request - Style Id: d85b5b27-5fc4-4599-8b50-47160e90f8ce does not exist.\"\n  }\n}\n```",
         "operationId": "Style_Delete",
         "x-ms-examples": {
           "Delete a created style": {
@@ -255,7 +259,8 @@
     },
     "/styles/operations/{operationId}": {
       "get": {
-        "description": "The Style Get Operation request is obtained from the call to create a style. It is returned in the response headers Resource-Location key once the creation process has completed successfully.",
+        "summary": "Use to check the status of the style creation process.",
+        "description": "\n\nThe `Get Operation` API is an HTTP `GET` request used to check the status of the style creation process and retrieve the `styletId`.\n\n### Submit Operations Request\n\nTo view the current progress of a style operation, you will use a `GET` request where the `operationId` given the path is the ID that represents the operation.\n\n### Operation Response\n\nWhile in progress, a `200-OK` http status code is returned with no extra headers. If the operation succeeds, a `200-OK` http status code is returned with the `Resource-Location` in the header.",
         "operationId": "Style_GetOperation",
         "x-ms-examples": {
           "Get the status of an operation which is still running": {
