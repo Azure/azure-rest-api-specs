@@ -15,13 +15,10 @@ using Azure.Core;
 })
 @versioned(ImageAnalysis.Versions)
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
-    {
-      type: OAuth2FlowType.implicit,
-      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-      scopes: ["https://cognitiveservices.azure.com/.default"],
-    }
-  ]>
+  ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | AadTokenAuthFlow<
+  ["https://cognitiveservices.azure.com/.default"],
+  "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+  "https://login.microsoftonline.com/common/oauth2/v2.0/token">
 )
 @server(
   "{endpoint}/computervision",
