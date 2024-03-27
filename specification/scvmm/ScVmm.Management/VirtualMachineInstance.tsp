@@ -38,6 +38,17 @@ model VirtualMachineInstanceUpdate
   properties?: VirtualMachineInstanceUpdateProperties;
 }
 
+/** Delete From Host */
+union DeleteFromHost {
+  /** Enable delete from host. */
+  `true`: "true",
+
+  /** Disable delete from host. */
+  `false`: "false",
+
+  string,
+}
+
 @armResourceOperations
 interface VirtualMachineInstances {
   /** Retrieves information about a virtual machine instance. */
@@ -74,7 +85,7 @@ interface VirtualMachineInstances {
 
       /** Whether to disable the VM from azure and also delete it from Vmm. */
       @query("deleteFromHost")
-      deleteFromHost?: boolean;
+      deleteFromHost?: DeleteFromHost;
     }
   >;
   /** Lists all of the virtual machine instances within the specified parent resource. */

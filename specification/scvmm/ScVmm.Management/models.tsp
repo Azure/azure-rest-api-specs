@@ -28,7 +28,7 @@ alias VirtualNetworkId = ResourceIdentifier<[
 model QueryForceDelete {
   /** Forces the resource to be deleted. */
   @query("force")
-  force?: boolean;
+  force?: ForceDelete;
 }
 
 /** The provisioning state of the resource. */
@@ -52,90 +52,119 @@ enum ResourceProvisioningState {
 }
 
 /** Virtual machine operating system type. */
-enum OsType {
+union OsType {
   /** Windows operating system. */
-  Windows,
+  Windows: "Windows",
 
   /** Linux operating system. */
-  Linux,
+  Linux: "Linux",
 
   /** Other operating system. */
-  Other,
+  Other: "Other",
+
+  string,
 }
 
 /** Network address allocation method. */
-enum AllocationMethod {
+union AllocationMethod {
   /** Dynamically allocated address. */
-  Dynamic,
+  Dynamic: "Dynamic",
 
   /** Statically allocated address. */
-  Static,
+  Static: "Static",
+
+  string,
 }
 
 /** Guest agent provisioning action. */
-enum ProvisioningAction {
+union ProvisioningAction {
   /** Install guest agent. */
-  install,
+  install: "install",
 
   /** Uninstall guest agent. */
-  uninstall,
+  uninstall: "uninstall",
 
   /** Repair guest agent. */
-  repair,
+  repair: "repair",
+
+  string,
 }
 
 /** Limit CPU for migration. */
-enum LimitCpuForMigration {
+union LimitCpuForMigration {
   /** Enable limit CPU for migration. */
-  `true`,
+  `true`: "true",
 
   /** Disable limit CPU for migration. */
-  `false`,
+  `false`: "false",
+
+  string,
 }
 
 /** Dynamic memory enabled. */
-enum DynamicMemoryEnabled {
+union DynamicMemoryEnabled {
   /** Enable dynamic memory. */
-  `true`,
+  `true`: "true",
 
   /** Disable dynamic memory. */
-  `false`,
+  `false`: "false",
+
+  string,
 }
 
 /** Highly available. */
-enum IsHighlyAvailable {
+union IsHighlyAvailable {
   /** Enable highly available. */
-  `true`,
+  `true`: "true",
 
   /** Disable highly available. */
-  `false`,
+  `false`: "false",
+
+  string,
 }
 
 /** Create diff disk. */
-enum CreateDiffDisk {
+union CreateDiffDisk {
   /** Enable create diff disk. */
-  `true`,
+  `true`: "true",
 
   /** Disable create diff disk. */
-  `false`,
+  `false`: "false",
+
+  string,
 }
 
 /** Customizable. */
-enum IsCustomizable {
+union IsCustomizable {
   /** Enable customizable. */
-  `true`,
+  `true`: "true",
 
   /** Disable customizable. */
-  `false`,
+  `false`: "false",
+
+  string,
 }
 
 /** Skip shutdown. */
-enum SkipShutdown {
+union SkipShutdown {
   /** Enable skip shutdown. */
-  `true`,
+  `true`: "true",
 
   /** Disable skip shutdown. */
-  `false`,
+  `false`: "false",
+
+  string,
+}
+
+/** Force Delete */
+union ForceDelete {
+  /** Enable force delete. */
+  `true`: "true",
+
+  /** Disable force delete. */
+  `false`: "false",
+
+  string,
 }
 
 /** Defines the resource properties. */
@@ -480,7 +509,7 @@ model AvailabilitySetProperties {
 }
 
 /** The inventory type */
-enum InventoryType {
+union InventoryType {
   /** Cloud inventory type */
   Cloud: "Cloud",
 
@@ -492,6 +521,8 @@ enum InventoryType {
 
   /** VirtualMachineTemplate inventory type */
   VirtualMachineTemplate: "VirtualMachineTemplate",
+
+  string,
 }
 
 /** Defines the resource properties. */

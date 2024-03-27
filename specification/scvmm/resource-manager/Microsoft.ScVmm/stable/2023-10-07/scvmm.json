@@ -304,7 +304,27 @@
             "in": "query",
             "description": "Whether to disable the VM from azure and also delete it from Vmm.",
             "required": false,
-            "type": "boolean"
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "x-ms-enum": {
+              "name": "DeleteFromHost",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "true",
+                  "value": "true",
+                  "description": "Enable delete from host."
+                },
+                {
+                  "name": "false",
+                  "value": "false",
+                  "description": "Disable delete from host."
+                }
+              ]
+            }
           }
         ],
         "responses": {
@@ -5282,7 +5302,27 @@
       "in": "query",
       "description": "Forces the resource to be deleted.",
       "required": false,
-      "type": "boolean",
+      "type": "string",
+      "enum": [
+        "true",
+        "false"
+      ],
+      "x-ms-enum": {
+        "name": "ForceDelete",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "true",
+            "value": "true",
+            "description": "Enable force delete."
+          },
+          {
+            "name": "false",
+            "value": "false",
+            "description": "Disable force delete."
+          }
+        ]
+      },
       "x-ms-parameter-location": "method"
     }
   }
