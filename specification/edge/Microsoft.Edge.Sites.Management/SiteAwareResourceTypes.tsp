@@ -40,7 +40,7 @@ interface SiteAwareResourceTypesOperationGroup {
   get is ArmResourceRead<SiteAwareResourceTypes>;
 
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @doc("List operation on SiteAwareresourceTypes resource")
+  @doc("List operation on SiteAwareResourceTypes resource")
   @operationId("SiteAwareResourceTypes_List")
   list is ArmResourceListByParent<SiteAwareResourceTypes>;
 }
