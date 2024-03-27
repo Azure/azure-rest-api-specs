@@ -9308,15 +9308,22 @@
         }
       }
     },
+	"PatchRecoveryPointInput": {
+      "description": "Recovery Point Contract for Update Recovery Point API.",
+      "type": "object",
+      "properties": {
+        "recoveryPointProperties": {
+          "description": "Properties of Recovery Point",
+          "$ref": "#/definitions/PatchRecoveryPointPropertiesInput"
+        }
+      },
     "UpdateRecoveryPointRequest": {
       "description": "Patch Request content to update recovery point for given RecoveryPointId",
       "type": "object",
       "properties": {
         "properties": {
-          "recoveryPointProperties": {
-            "description": "Properties of Recovery Point to be updated",
-            "$ref": "#/definitions/PatchRecoveryPointPropertiesInput"
-          }
+          "$ref": "#/definitions/PatchRecoveryPointInput",
+          "description": "Resource properties."
         }
       }
     },
