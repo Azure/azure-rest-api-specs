@@ -18,6 +18,7 @@ describe("npm-prefix", function () {
         status: () => {
           return Promise.resolve({
             modified: [],
+            not_added: [],
             isClean: () => true,
           });
         },
@@ -49,6 +50,7 @@ describe("npm-prefix", function () {
         status: () => {
           return Promise.resolve({
             modified: [],
+            not_added: [],
             isClean: () => true,
           });
         },
