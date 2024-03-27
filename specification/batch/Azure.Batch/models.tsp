@@ -700,7 +700,7 @@ union SecurityTypes {
   string,
 
   @doc("Trusted launch protects against advanced and persistent attack techniques.")
-  trustedLaunch: "trustedLaunch",
+  "trustedLaunch",
 }
 
 @doc("The result of listing the applications available in an Account.")
