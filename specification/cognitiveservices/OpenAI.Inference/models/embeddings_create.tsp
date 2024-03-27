@@ -56,7 +56,9 @@ model EmbeddingsOptions {
 
 @doc("Represents the available formats for embeddings data on responses.")
 @added(ServiceApiVersions.v2024_03_01_Preview)
-enum EmbeddingEncodingFormat {
+union EmbeddingEncodingFormat {
+  string,
+
   @doc("Specifies that responses should provide arrays of floats for each embedding.")
   float: "float",
 
