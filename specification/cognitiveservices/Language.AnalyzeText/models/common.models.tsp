@@ -158,11 +158,11 @@ model AnalyzeTextTask {
   @doc("The kind of task to perform.")
   kind: AnalyzeTextTaskKind;
 }
-
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @discriminator("kind")
-model AnalyzeTextLROTask is TaskIdentifier {
+model AnalyzeTextLROTask extends TaskIdentifier {
   @doc("The kind of task to perform.")
   kind: AnalyzeTextLROTaskKind;
 }
@@ -267,7 +267,8 @@ enum Status {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @discriminator("kind")
-model AnalyzeTextLROResult is TaskState {
+model AnalyzeTextLROResult {
+  ...TaskState;
   ...TaskIdentifier;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   kind: AnalyzeTextLROResultsKind;
@@ -431,9 +432,9 @@ model TaskParameters {
   @doc("logging opt out")
   loggingOptOut?: boolean = false;
 }
-
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("Parameters object for a text analysis task using pre-built models.")
-model PreBuiltTaskParameters is TaskParameters {
+model PreBuiltTaskParameters extends TaskParameters {
   @doc("model version")
   modelVersion?: string = "latest";
 }
@@ -523,10 +524,10 @@ model InputWarning {
   @doc("A JSON pointer reference indicating the target object.")
   targetRef?: string;
 }
-
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("if showStats=true was specified in the request this field will contain information about the request payload.")
-model RequestStatistics is Record<unknown> {
+model RequestStatistics extends Record<unknown> {
   @doc("Number of documents submitted in the request.")
   documentsCount: int32;
 
@@ -888,11 +889,9 @@ model SummaryContext {
   @doc("The length of the context. Use of different 'stringIndexType' values can affect the length returned.")
   length: int32;
 }
-
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("Parameters object for a text analysis task using custom models.")
-model CustomTaskParameters {
-  ...TaskParameters;
-
+model CustomTaskParameters extends TaskParameters {
   @doc("This field indicates the project name for the model.")
   projectName: string;
 
@@ -948,9 +947,10 @@ enum redactionCharacter {
   tilde: "~",
 }
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("The error object.")
-model Error is Record<unknown> {
+model Error extends Record<unknown> {
   @doc("One of a server-defined set of error codes.")
   code: ErrorCode;
 

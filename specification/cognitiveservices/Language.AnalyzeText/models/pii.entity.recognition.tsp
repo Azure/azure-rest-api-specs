@@ -14,10 +14,10 @@ model AnalyzeTextPiiEntitiesRecognitionInput extends AnalyzeTextTask {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   parameters?: PiiTaskParameters;
 }
-
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Supported parameters for a PII Entities Recognition task.")
-model PiiTaskParameters is PreBuiltTaskParameters {
+model PiiTaskParameters extends PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   domain?: PiiDomain = PiiDomain.none;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -51,10 +51,10 @@ model PiiTaskResult extends AnalyzeTextTaskResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: PiiResult;
 }
-
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-model PiiResult is PreBuiltResult {
+model PiiResult extends PreBuiltResult {
   @doc("Response by document")
   @typeChangedFrom(
     Versions.v2023_04_15_preview,
@@ -71,10 +71,10 @@ enum PiiDomain {
   @doc("Indicates that no domain is specified.")
   none,
 }
-
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-model PiiEntitiesDocumentResult is DocumentResult {
+model PiiEntitiesDocumentResult extends DocumentResult {
   @doc("Returns redacted text.")
   redactedText: string;
 
@@ -84,7 +84,8 @@ model PiiEntitiesDocumentResult is DocumentResult {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-model PiiResultWithDetectedLanguage is PiiEntitiesDocumentResult {
+model PiiResultWithDetectedLanguage {
+  ...PiiEntitiesDocumentResult;
   ...DocumentDetectedLanguage;
 }
 

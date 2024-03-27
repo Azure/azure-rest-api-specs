@@ -18,10 +18,10 @@ model ErrorResponse {
   @doc("The error object.")
   error: Error;
 }
-
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("The error object.")
-model Error is Record<unknown> {
+model Error extends Record<unknown> {
   @doc("One of a server-defined set of error codes.")
   code: ErrorCode;
 
@@ -120,10 +120,10 @@ model TaskParameters {
   @doc("logging opt out")
   loggingOptOut?: boolean = false;
 }
-
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("Parameters object for a text analysis task using pre-built models.")
 @added(Versions.v2023_04_01)
-model PreBuiltTaskParameters is TaskParameters {
+model PreBuiltTaskParameters extends TaskParameters {
   @doc("model version")
   modelVersion?: string = "latest";
 }
@@ -191,10 +191,10 @@ model InputWarning {
   @doc("A JSON pointer reference indicating the target object.")
   targetRef?: string;
 }
-
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("if showStats=true was specified in the request this field will contain information about the request payload.")
-model RequestStatistics is Record<unknown> {
+model RequestStatistics extends Record<unknown> {
   @doc("Number of documents submitted in the request.")
   documentsCount: int32;
 

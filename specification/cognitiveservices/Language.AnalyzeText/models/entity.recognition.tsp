@@ -13,19 +13,19 @@ model AnalyzeTextEntityRecognitionInput extends AnalyzeTextTask {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   parameters?: EntitiesTaskParameters;
 }
-
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("Supported parameters for an Entity Recognition task.")
-model EntitiesTaskParameters is PreBuiltTaskParameters {
+model EntitiesTaskParameters extends PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   @added(Versions.v2023_04_15_preview)
   @doc("(Optional) request parameter that limits the output to the requested entity types included in this list. We will apply inclusionList before exclusionList")
-  inclusionList?: EntityList;
+  inclusionList?: Array<EntityCategory>;
 
   @added(Versions.v2023_04_15_preview)
   @doc("(Optional) request parameter that filters out any entities that are included the excludeList. When a user specifies an excludeList, they cannot get a prediction returned with an entity in that list. We will apply inclusionList before exclusionList")
-  exclusionList?: EntityList;
+  exclusionList?: Array<EntityCategory>;
 
   @added(Versions.v2023_04_15_preview)
   @doc("(Optional) describes the type of overlap policy to apply to the ner output.")
@@ -52,23 +52,24 @@ model EntitiesTaskResult extends AnalyzeTextTaskResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: EntitiesResult;
 }
-
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model EntitiesResult is PreBuiltResult {
+model EntitiesResult extends PreBuiltResult {
   @doc("Response by document")
   @typeChangedFrom(Versions.v2023_04_15_preview, Array<EntitiesDocumentResult>)
   documents: Array<EntitiesDocumentResultWithMetadataDetectedLanguage>;
 }
-
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model EntitiesDocumentResult is DocumentResult {
+model EntitiesDocumentResult extends DocumentResult {
   @doc("Recognized entities in the document.")
   entities: Array<Entity>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_15_preview)
-model EntitiesDocumentResultWithDetectedLanguage is EntitiesDocumentResult {
+model EntitiesDocumentResultWithDetectedLanguage {
+  ...EntitiesDocumentResult;
   ...DocumentDetectedLanguage;
 }
 
@@ -269,8 +270,6 @@ enum EntityCategory {
   Skill,
 }
 
-alias EntityList = Array<EntityCategory>;
-
 @added(Versions.v2023_11_15_preview)
 @doc("The class that houses the inference options allowed for named entity recognition.")
 model EntityInferenceOptions {
@@ -309,10 +308,10 @@ model AllowOverlapEntityPolicyType extends BaseEntityOverlapPolicy {
   @doc("The entity OverlapPolicy object kind.")
   policyKind: policyKind.allowOverlap;
 }
-
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_15_preview)
-model EntitiesDocumentResultWithMetadata is DocumentResult {
+model EntitiesDocumentResultWithMetadata extends DocumentResult {
   @doc("Recognized entities in the document.")
   entities: Array<EntityWithMetadata>;
 }
@@ -326,20 +325,20 @@ model EntityTag {
   @doc("Detection score between 0 and 1 of the extracted entity.")
   confidenceScore?: float64;
 }
-
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_15_preview)
-model EntityWithTags is Entity {
+model EntityWithTags extends Entity {
   @doc("An entity type is the lowest (or finest) granularity at which the entity has been detected. The type maps to the specific metadata attributes associated with the entity detected.")
   type: string;
 
   @doc("List of entity tags. Tags are to express some similarities/affinity between entities.")
   tags: Array<EntityTag>;
 }
-
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_15_preview)
-model EntityWithMetadata is EntityWithTags {
+model EntityWithMetadata extends EntityWithTags {
   @doc("The entity metadata object.")
   metadata?: BaseMetadata;
 }

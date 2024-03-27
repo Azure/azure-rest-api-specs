@@ -572,7 +572,12 @@
         "id",
         "participantId"
       ],
-      "additionalProperties": {}
+      "allOf": [
+        {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      ]
     },
     "ConversationParameters": {
       "type": "object",
@@ -897,7 +902,12 @@
         "code",
         "message"
       ],
-      "additionalProperties": {}
+      "allOf": [
+        {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      ]
     },
     "ErrorCode": {
       "type": "string",
@@ -1616,6 +1626,44 @@
         "modelAsString": true
       }
     },
+    "RequestStatistics": {
+      "type": "object",
+      "description": "if showStats=true was specified in the request this field will contain information about the request payload.",
+      "properties": {
+        "documentsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of documents submitted in the request."
+        },
+        "validDocumentsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of valid documents. This excludes empty, over-size limit or non-supported languages documents."
+        },
+        "erroneousDocumentsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents."
+        },
+        "transactionsCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of transactions for the request."
+        }
+      },
+      "required": [
+        "documentsCount",
+        "validDocumentsCount",
+        "erroneousDocumentsCount",
+        "transactionsCount"
+      ],
+      "allOf": [
+        {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      ]
+    },
     "ResolutionKind": {
       "type": "string",
       "description": "The entity resolution object kind.",
@@ -1848,6 +1896,24 @@
         }
       ],
       "x-ms-discriminator-value": "TemporalSpanResolution"
+    },
+    "TextConversationItem": {
+      "type": "object",
+      "description": "The text modality of an input conversation.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text input"
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationItemBase"
+        }
+      ]
     },
     "VolumeResolution": {
       "type": "object",

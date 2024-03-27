@@ -19,9 +19,9 @@ model AnalyzeTextLanguageDetectionInput extends AnalyzeTextTask {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   parameters?: LanguageDetectionTaskParameters;
 }
-
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("Supported parameters for a Language Detection task.")
-model LanguageDetectionTaskParameters is PreBuiltTaskParameters;
+model LanguageDetectionTaskParameters extends PreBuiltTaskParameters {}
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model LanguageDetectionTaskResult extends AnalyzeTextTaskResult {
@@ -30,15 +30,15 @@ model LanguageDetectionTaskResult extends AnalyzeTextTaskResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: LanguageDetectionResult;
 }
-
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model LanguageDetectionResult is PreBuiltResult {
+model LanguageDetectionResult extends PreBuiltResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   documents: Array<LanguageDetectionDocumentResult>;
 }
-
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model LanguageDetectionDocumentResult is DocumentResult {
+model LanguageDetectionDocumentResult extends DocumentResult {
   @doc("Detected Language.")
   detectedLanguage: DetectedLanguage;
 }
