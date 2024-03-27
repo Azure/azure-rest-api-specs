@@ -897,7 +897,7 @@
     },
     "/search/address/{format}": {
       "get": {
-        "summary": "Use to get latitude and longitude coordinates of a street address or name of a place.",
+        "summary": "Use to get latitude and longitude coordinates of a street address in an unstructured or query input format.",
         "description": "\n\nThe `Get Search Address` API is an HTTP `GET` request returns the latitude and longitude coordinates when passed in a street address or name of a place as the search criteria. \n\nIn many cases, the complete search service might be too much, for instance if you are only interested in traditional geocoding. Search can also be accessed for address look up exclusively. The geocoding is performed by hitting the geocode endpoint with just the address or partial address in question. The geocoding search index will be queried for everything above the street level data. No POIs will be returned. Note that the geocoder is very tolerant of typos and incomplete addresses. It will also handle everything from exact street addresses or street or intersections as well as higher level geographies such as city centers, counties, states etc.",
         "operationId": "Search_GetSearchAddress",
         "x-ms-client-name": "SearchAddress",
@@ -1149,7 +1149,7 @@
     "/search/address/structured/{format}": {
       "get": {
         "summary": "Use to get latitude and longitude coordinates of a street address in an unstructured or query input format.",
-        "description": "The `Get Search Address Structured` (**Structured Address Geocoding**) API is an HTTP `GET` request that returns latitude and longitude coordinates of a street address in an unstructured or query input format. \n\nAzure Address Geocoding can also be accessed for structured address look up exclusively. The geocoding search index will be queried for everything above the street level data. No POIs will be returned. Note that the geocoder is very tolerant of typos and incomplete  addresses. It will also handle everything from exact  street addresses or street or intersections as well as higher level geographies such as city centers, counties, states etc.",
+        "description": "The `Get Search Address Structured` (**Structured Address Geocoding**) API is an HTTP `GET` request that returns latitude and longitude coordinates of a street address in an unstructured or query input format. \n\n The geocoding search index will be queried for everything above the street level data. No POIs will be returned. Note that the geocoder is very tolerant of typos and incomplete  addresses. It will also handle everything from exact  street addresses or street or intersections as well as higher level geographies such as city centers, counties, states etc.",
         "operationId": "Search_GetSearchAddressStructured",
         "x-ms-client-name": "SearchStructuredAddress",
         "x-ms-examples": {
