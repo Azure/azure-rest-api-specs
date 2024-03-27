@@ -1726,7 +1726,7 @@
           "Lots"
         ],
         "operationId": "Lots_ListByBillingAccount",
-        "description": "Lists all Microsoft Azure consumption commitments for a billing account. The API is only supported for Microsoft Customer Agreements (MCA) and Direct Enterprise Agreement (EA)  billing accounts.",
+        "description": "Lists all Microsoft Azure consumption commitments for a billing account. The API is only supported for Microsoft Customer Agreements (MCA) and Enterprise Agreement (EA) billing accounts.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -1748,6 +1748,9 @@
           },
           "LotsListByBillingAccountWithStatusFilter": {
             "$ref": "./examples/LotsListByBillingAccountWithFilters.json"
+          },
+          "LotsListByBillingAccountWithExtendedProperties": {
+            "$ref": "./examples/LotsListByBillingAccountWithExtendedProperties.json"
           }
         },
         "parameters": [
@@ -1763,6 +1766,9 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/extendedPropertiesParameter"
           }
         ],
         "responses": {
@@ -5337,6 +5343,11 @@
           "readOnly": true,
           "$ref": "#/definitions/amount"
         },
+        "usedAmount": {
+          "description": "The used amount from the lot.",
+          "readOnly": true,
+          "$ref": "#/definitions/amount"
+        },
         "closedBalance": {
           "description": "The balance as of the last invoice.",
           "readOnly": true,
@@ -5352,6 +5363,41 @@
           ],
           "x-ms-enum": {
             "name": "LotSource",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "lotSource": {
+          "description": "The source of the lot.",
+          "type": "string",
+          "enum": [
+            "PurchasedCredit",
+            "PromotionalCredit",
+            "ConsumptionCommitment",
+            "AwardedCredit",
+            "ServiceSpecificCredit"
+          ],
+          "x-ms-enum": {
+            "name": "LotSource",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "lotType": {
+          "description": "The type of the lot.",
+          "type": "string",
+          "enum": [
+            "MACC",
+            "MonetaryCommitment",
+            "OutageCredit",
+            "GoodwillCredit",
+            "SubscriptionInterruptionCredit",
+            "BillingCorrectionCredit",
+            "FreeTrial",
+            "SSC"
+          ],
+          "x-ms-enum": {
+            "name": "LotType",
             "modelAsString": true
           },
           "readOnly": true
@@ -5456,10 +5502,10 @@
             ]
           }
         },
-        "usedAmount": {
-          "description": "Amount consumed from the commitment.",
-          "readOnly": true,
-          "$ref": "#/definitions/amount"
+        "extendedProperties": {
+          "description": "The extended properties of the lot returned as a json string. This is only returned when extendedProperties=true in query string params",
+          "type": "object",
+          "readOnly": true
         }
       }
     },
@@ -6112,6 +6158,14 @@
       "required": false,
       "type": "number",
       "format": "decimal",
+      "x-ms-parameter-location": "method"
+    },
+    "extendedPropertiesParameter": {
+      "name": "extendedProperties",
+      "in": "query",
+      "description": "Includes the extendedProperties in the response.",
+      "required": false,
+      "type": "boolean",
       "x-ms-parameter-location": "method"
     }
   }
