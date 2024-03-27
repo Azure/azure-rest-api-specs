@@ -13,10 +13,12 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
-@doc("Azure Edge Sites Resource Provider management API.")
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Operations API is published as part of same RP in edge folder."
+@doc("Azure Edge Sites Resource Provider management API.")
 @armProviderNamespace
-@service({title: "Edge Sites"})
+@service({
+  title: "Edge Sites",
+})
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Edge;

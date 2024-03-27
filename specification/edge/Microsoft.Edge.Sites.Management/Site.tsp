@@ -38,7 +38,17 @@ interface Sites {
 interface SitesBySubscriptions {
   list is ArmListBySubscription<Site>;
   get is ArmResourceRead<Site, BaseParameters = SubscriptionBaseParameters>;
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Site, BaseParameters = SubscriptionBaseParameters>;
-  update is ArmResourcePatchSync<Site, SiteProperties, BaseParameters = SubscriptionBaseParameters>;
-  delete is ArmResourceDeleteWithoutOkAsync<Site, BaseParameters = SubscriptionBaseParameters>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    Site,
+    BaseParameters = SubscriptionBaseParameters
+  >;
+  update is ArmResourcePatchSync<
+    Site,
+    SiteProperties,
+    BaseParameters = SubscriptionBaseParameters
+  >;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Site,
+    BaseParameters = SubscriptionBaseParameters
+  >;
 }

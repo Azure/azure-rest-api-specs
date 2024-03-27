@@ -18,7 +18,9 @@ namespace Microsoft.Edge;
 @singleton("default")
 @tenantResource
 @includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(SiteAwareResourceTypesProperties)
+@Azure.ResourceManager.Private.armResourceInternal(
+  SiteAwareResourceTypesProperties
+)
 model SiteAwareResourceTypes extends ProxyResourceBase {
   // TODO - There shouldn't be name field in here, it should contain
   @doc("Name of the resource")
