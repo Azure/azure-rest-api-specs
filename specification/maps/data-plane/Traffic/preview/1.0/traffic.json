@@ -18,7 +18,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "These are the [Microsoft Entra OAuth 2.0](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a  built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management API](https://aka.ms/amauthdetails).\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Microsoft Entra ID configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* For more information on Microsoft identity platform, see [Microsoft identity platform overview](https://learn.microsoft.com/entra/identity-platform/v2-overview).",
+      "description": "These are the [Microsoft Entra OAuth 2.0](https://docs.microsoft.com/azure/active-directory/develop/v1-overview) Flows. When paired with [Azure role-based access](https://docs.microsoft.com/azure/role-based-access-control/overview) control it can be used to control access to Azure Maps REST APIs. Azure role-based access controls are used to designate access to one or more Azure Maps resource account or sub-resources. Any user, group, or service principal can be granted access via a built-in role or a custom role composed of one or more permissions to Azure Maps REST APIs.\n\nTo implement scenarios, we recommend viewing [authentication concepts](https://aka.ms/amauth). In summary, this security definition provides a solution for modeling application(s) via objects capable of access control on specific APIs and scopes.\n\n#### Notes\n* This security definition **requires** the use of the `x-ms-client-id` header to indicate which Azure Maps resource the application is requesting access to. This can be acquired from the [Maps management](https://aka.ms/amauthdetails) API.\n* \nThe `Authorization URL` is specific to the Azure public cloud instance. Sovereign clouds have unique Authorization URLs and Microsoft Entra ID configurations. \n* \nThe Azure role-based access control is configured from the [Azure management plane](https://aka.ms/amrbac) via Azure portal, PowerShell, CLI, Azure SDKs, or REST APIs.\n* \nUsage of the [Azure Maps Web SDK](https://aka.ms/amaadmc) allows for configuration based setup of an application for multiple use cases.\n* For more information on Microsoft identity platform, see [Microsoft identity platform overview](https://learn.microsoft.com/entra/identity-platform/v2-overview).",
       "scopes": {
         "https://atlas.microsoft.com/.default": "https://atlas.microsoft.com/.default"
       }
@@ -108,7 +108,8 @@
   "paths": {
     "/traffic/flow/tile/{format}": {
       "get": {
-        "description": "__Traffic Flow Tile__\n\n\n**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nThe Azure Flow Tile API serves 256 x 256 pixel tiles showing traffic flow. All tiles use the same grid system. Because the traffic tiles use transparent images, they can be layered on top of map tiles to create a compound  display. The Flow tiles use colors to indicate either the speed of traffic on different road segments, or the difference between that speed and the free-flow speed on the road segment in question.",
+        "summary": "Use to get 256 x 256 pixel tiles showing traffic flow.",
+        "description": "\n\nThe `Traffic Flow Tile` API is an HTTP `GET` request that returns real-time information about traffic conditions in 256 x 256 pixel tiles that show traffic flow. All tiles use the same grid system. Because the traffic tiles use transparent images, they can be layered on top of map tiles to create a compound display. The Flow tiles use colors to indicate either the speed of traffic on different road segments, or the difference between that speed and the free-flow speed on the road segment in question.",
         "operationId": "Traffic_GetTrafficFlowTile",
         "x-ms-examples": {
           "Request tile depicting the traffic flow": {
@@ -209,7 +210,8 @@
     },
     "/traffic/flow/segment/{format}": {
       "get": {
-        "description": "__Traffic Flow Segment__\n\n\n**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nThis service provides information about the speeds and travel times of the road fragment closest to the given coordinates. It is designed to work alongside the Flow layer of the Render Service to support clickable  flow data visualizations. With this API, the client side can connect any place in the map with flow data on the  closest road and present it to the user.",
+        "summary": "Use to get information about the speeds and travel times of the specified section of road.",
+        "description": "\n\nThe `Traffic Flow Segment` API is an HTTP `GET` request that provides information about the speeds and travel times of the road fragment closest to the given coordinates. It is designed to work alongside the Flow layer of the [Render](/rest/api/maps/render) Service to support clickable flow data visualizations. With the `Traffic Flow Segment` API, the client side can connect any place in the map with flow data on the closest road and present it to the user.",
         "operationId": "Traffic_GetTrafficFlowSegment",
         "x-ms-examples": {
           "Request traffic flow segment information": {
@@ -315,7 +317,8 @@
     },
     "/traffic/incident/tile/{format}": {
       "get": {
-        "description": "__Traffic Incident Tile__\n\n\n**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nThis service serves 256 x 256 pixel tiles showing traffic incidents. All tiles use the same grid system. Because the traffic tiles use transparent images, they can be layered on top of map tiles to create a compound display. Traffic tiles render graphics to indicate traffic on the roads in the specified area.",
+        "summary": "Use to get 256 x 256 pixel tiles showing traffic incidents.",
+        "description": "\n\nThe `Traffic Incident Tile` API is an HTTP `GET` request that returns 256 x 256 pixel tiles showing traffic incidents. All tiles use the same grid system. Because the traffic tiles use transparent images, they can be layered on top of map tiles to create a compound display. Traffic tiles render graphics to indicate traffic on the roads in the specified area.",
         "operationId": "Traffic_GetTrafficIncidentTile",
         "x-ms-examples": {
           "Request a tile depicting a traffic incident": {
@@ -380,7 +383,7 @@
             "name": "t",
             "x-ms-client-name": "trafficState",
             "in": "query",
-            "description": "Reference value for the state of traffic at a particular time, obtained from the Viewport API call, trafficModelId attribute in trafficState field. It is updated every minute, and is valid for two minutes before it times out. Use -1 to  get the most recent traffic information. Default: most recent traffic information.",
+            "description": "Reference value for the state of traffic at a particular time, obtained from the Viewport API call, trafficModelId attribute in trafficState field. It is updated every minute, and is valid for two minutes before it times out. Use -1 to get the most recent traffic information. Default: most recent traffic information.",
             "type": "string"
           }
         ],
@@ -414,7 +417,8 @@
     },
     "/traffic/incident/detail/{format}": {
       "get": {
-        "description": "__Traffic Incident Detail__ \n\n\n\n**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nThis API provides information on traffic incidents inside a given bounding box, based on the current Traffic  Model ID. The Traffic Model ID is available to grant synchronization of data between calls and API's. The  Traffic Model ID is a key value for determining the currency of traffic incidents. It is updated every minute,  and is valid for two minutes before it times out. It is used in rendering  [incident tiles](https://docs.microsoft.com/rest/api/maps/traffic/gettrafficincidenttile). It can be  obtained from the [Viewport API](https://docs.microsoft.com/rest/api/maps/traffic/gettrafficincidentviewport).",
+        "summary": "Use to get information on traffic incidents inside a given bounding box.",
+        "description": "\n\nThe `Traffic Incident Detail` API is an HTTP `GET` request that provides information on traffic incidents inside a given bounding box, based on the current [Traffic Model ID](#uri-parameters). The Traffic Model ID is available to grant synchronization of data between calls and API's. The Traffic Model ID is a key value for determining the currency of traffic incidents. It is updated every minute, and is valid for two minutes before it times out. It is used in rendering [incident tiles](https://docs.microsoft.com/rest/api/maps/traffic/gettrafficincidenttile). It can be obtained from the [Viewport](https://docs.microsoft.com/rest/api/maps/traffic/gettrafficincidentviewport) API.",
         "operationId": "Traffic_GetTrafficIncidentDetail",
         "x-ms-examples": {
           "Request information about a traffic incident": {
@@ -434,7 +438,7 @@
           {
             "name": "style",
             "in": "query",
-            "description": "The style that will be used to render the tile in Traffic [Incident Tile API](https://docs.microsoft.com/rest/api/maps/traffic/gettrafficincidenttile).  This will have an effect on the coordinates of traffic incidents in the reply.",
+            "description": "The style that will be used to render the tile in Traffic [Incident Tile](https://docs.microsoft.com/rest/api/maps/traffic/gettrafficincidenttile) API. This will have an effect on the coordinates of traffic incidents in the reply.",
             "required": true,
             "type": "string",
             "enum": [
@@ -493,7 +497,7 @@
           {
             "name": "trafficmodelid",
             "in": "query",
-            "description": "Number referencing traffic model. This can be obtained from the [Viewport API](https://docs.microsoft.com/rest/api/maps/traffic/gettrafficincidentviewport). It is updated every minute, and is valid for two minutes before it times out. If the wrong Traffic Model ID is specified, the correct one will be returned by the interface. A value of -1 will always invoke the most recent traffic model",
+            "description": "Number referencing traffic model. This can be obtained from the [Viewport](https://docs.microsoft.com/rest/api/maps/traffic/gettrafficincidentviewport) API. It is updated every minute, and is valid for two minutes before it times out. If the wrong Traffic Model ID is specified, the correct one will be returned by the interface. A value of -1 will always invoke the most recent traffic model",
             "required": true,
             "type": "string"
           },
@@ -579,7 +583,8 @@
     },
     "/traffic/incident/viewport/{format}": {
       "get": {
-        "description": "__Traffic Incident Viewport__\n\n\n**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nThis API returns legal and technical information for the viewport described in the request. It should be called  by client applications whenever the viewport changes (for instance, through zooming, panning, going to a  location, or displaying a route). The request should contain the bounding box and zoom level of the viewport  whose information is needed. The return will contain map version information, as well as the current Traffic  Model ID and copyright IDs. The Traffic Model ID returned by the Viewport Description is used by other APIs to  retrieve last traffic information for further processing.",
+        "summary": "Use to get legal and technical information for a viewport.",
+        "description": "\n\nThe `Traffic Incident Viewport` API is an HTTP `GET` request that returns legal and technical information for the viewport described in the request. It should be called by client applications whenever the viewport changes (for instance, through zooming, panning, going to a location, or displaying a route). The request should contain the bounding box and zoom level of the viewport whose information is needed. The return will contain map version information, as well as the current Traffic Model ID and copyright IDs. The Traffic Model ID returned by the Viewport Description is used by other APIs to retrieve last traffic information for further processing.",
         "operationId": "Traffic_GetTrafficIncidentViewport",
         "x-ms-examples": {
           "Request traffic incident information for the selected viewport": {
@@ -707,7 +712,7 @@
               "readOnly": true
             },
             "confidence": {
-              "description": "The confidence is a measure of the quality of the provided travel time and speed. A value of 1 means full confidence, that the response contains the highest quality data.  Lower values indicate the degree that the response may vary from the actual conditions on the road. Any value greater than 0.6 means the information was based on real-time probe input. A value of 0.5 means the reported speed is based on historical info.   A value between 0.5 and 0.6 has a calculated weighted average between historical and live speeds.",
+              "description": "The confidence is a measure of the quality of the provided travel time and speed. A value of 1 means full confidence, that the response contains the highest quality data. Lower values indicate the degree that the response may vary from the actual conditions on the road. Any value greater than 0.6 means the information was based on real-time probe input. A value of 0.5 means the reported speed is based on historical info. A value between 0.5 and 0.6 has a calculated weighted average between historical and live speeds.",
               "type": "number",
               "readOnly": true
             },
