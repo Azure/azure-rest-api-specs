@@ -38,8 +38,4 @@ enum APCVersions {
   @doc("Version 2024-02-09-preview")
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_02_09_preview: "2024-02-09-preview",
-
-  @doc("Version 2024-03-25-preview")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2024_03_25_preview: "2024-03-25-preview",
 }

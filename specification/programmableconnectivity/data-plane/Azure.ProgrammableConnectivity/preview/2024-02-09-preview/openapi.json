@@ -203,7 +203,8 @@
             "description": "Redirection",
             "headers": {
               "location": {
-                "type": "string"
+                "type": "string",
+                "description": "The URI of the network's authorization endpoint, which should be followed by the front-end application."
               },
               "x-ms-request-id": {
                 "type": "string",
@@ -431,8 +432,7 @@
       "type": "string",
       "description": "APC Versions",
       "enum": [
-        "2024-02-09-preview",
-        "2024-03-25-preview"
+        "2024-02-09-preview"
       ],
       "x-ms-enum": {
         "name": "APCVersions",
@@ -442,11 +442,6 @@
             "name": "v2024_02_09_preview",
             "value": "2024-02-09-preview",
             "description": "Version 2024-02-09-preview"
-          },
-          {
-            "name": "v2024_03_25_preview",
-            "value": "2024-03-25-preview",
-            "description": "Version 2024-03-25-preview"
           }
         ]
       }
@@ -834,26 +829,12 @@
       "type": "object",
       "description": "Request to verify number of device - second call",
       "properties": {
-        "networkIdentifier": {
-          "$ref": "#/definitions/NetworkIdentifier",
-          "description": "Identifier for the network to query for this device."
-        },
-        "phoneNumber": {
-          "type": "string",
-          "description": "Phone number in E.164 format (starting with country code), and optionally prefixed with '+'",
-          "pattern": "^\\+?[0-9]{5,15}$"
-        },
-        "hashedPhoneNumber": {
-          "type": "string",
-          "description": "Hashed phone number. SHA-256 (in hexadecimal representation) of the mobile phone number in **E.164 format (starting with country code)**. Optionally prefixed with '+'."
-        },
         "apcCode": {
           "type": "string",
           "description": "The code provided by APC in exchange for the operator code."
         }
       },
       "required": [
-        "networkIdentifier",
         "apcCode"
       ]
     },
@@ -873,10 +854,16 @@
         "hashedPhoneNumber": {
           "type": "string",
           "description": "Hashed phone number. SHA-256 (in hexadecimal representation) of the mobile phone number in **E.164 format (starting with country code)**. Optionally prefixed with '+'."
+        },
+        "redirectUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "Redirect URI to backend application."
         }
       },
       "required": [
-        "networkIdentifier"
+        "networkIdentifier",
+        "redirectUri"
       ]
     },
     "PhoneNumberModel": {

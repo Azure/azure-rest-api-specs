@@ -32,7 +32,9 @@ interface NumberVerification {
     NumberVerificationWithoutCodeContent,
     TypeSpec.Http.Response<302> & {},
     TraitOverride<ResponseHeadersTrait<{
-      @header location: string;
+      @doc("The URI of the network's authorization endpoint, which should be followed by the front-end application.")
+      @header
+      location: string;
     } & RequestIdResponseHeader>>
   >;
 
@@ -66,26 +68,12 @@ model NumberVerificationWithoutCodeContent {
 
   ...NumberDevice;
 
-  @added(APCVersions.v2024_03_25_preview)
   @doc("Redirect URI to backend application.")
   redirectUri: url;
 }
 
 @doc("Request to verify number of device - second call")
 model NumberVerificationWithCodeContent {
-  @removed(APCVersions.v2024_03_25_preview)
-  @doc("Identifier for the network to query for this device.")
-  networkIdentifier: NetworkIdentifier;
-
-  @removed(APCVersions.v2024_03_25_preview)
-  @doc("Phone number in E.164 format (starting with country code), and optionally prefixed with '+'")
-  @pattern("^\\+?[0-9]{5,15}$")
-  phoneNumber?: string;
-
-  @removed(APCVersions.v2024_03_25_preview)
-  @doc("Hashed phone number. SHA-256 (in hexadecimal representation) of the mobile phone number in **E.164 format (starting with country code)**. Optionally prefixed with '+'.")
-  hashedPhoneNumber?: string;
-
   @doc("The code provided by APC in exchange for the operator code.")
   apcCode: string;
 }
