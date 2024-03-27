@@ -9312,9 +9312,11 @@
       "description": "Patch Request content to update recovery point for given RecoveryPointId",
       "type": "object",
       "properties": {
-        "recoveryPointProperties": {
-          "$ref": "#/definitions/PatchRecoveryPointPropertiesInput",
-          "description": "Resource properties."
+        "properties": {
+          "recoveryPointProperties": {
+            "description": "Properties of Recovery Point to be updated",
+            "$ref": "#/definitions/PatchRecoveryPointPropertiesInput"
+          }
         }
       }
     },
