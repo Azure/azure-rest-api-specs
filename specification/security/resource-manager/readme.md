@@ -87,7 +87,7 @@ These are the global settings for the Security API.
 title: SecurityCenter
 description: API spec for Microsoft.Security (Azure Security Center) resource provider
 openapi-type: arm
-tag: package-composite-v3
+tag: package-preview-2024-05
 ```
 
 ### Composite packages
@@ -95,15 +95,34 @@ tag: package-composite-v3
 The following packages may be composed from multiple api-versions.
 
 
+### Tag: package-preview-2024-05
+
+These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-05'
+input-file:
+  - Microsoft.Security/preview/2024-05-01-preview/adaptiveNetworkHardenings.json
+  - Microsoft.Security/preview/2024-05-01-preview/alerts.json
+  - Microsoft.Security/preview/2024-05-01-preview/allowedConnections.json
+  - Microsoft.Security/preview/2024-05-01-preview/applicationWhitelistings.json
+  - Microsoft.Security/preview/2024-05-01-preview/discoveredSecuritySolutions.json
+  - Microsoft.Security/preview/2024-05-01-preview/externalSecuritySolutions.json
+  - Microsoft.Security/preview/2024-05-01-preview/jitNetworkAccessPolicies.json
+  - Microsoft.Security/preview/2024-05-01-preview/locations.json
+  - Microsoft.Security/preview/2024-05-01-preview/operations.json
+  - Microsoft.Security/preview/2024-05-01-preview/tasks.json
+  - Microsoft.Security/preview/2024-05-01-preview/topologies.json
+```
 ### Tag: package-preview-2023-12
 
 These settings apply only when `--tag=package-preview-2023-12` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-12'
+``` yaml $(tag) == 'package-preview-2023-12'
 input-file:
   - Microsoft.Security/preview/2023-12-01-preview/securityContacts.json
   - Microsoft.Security/preview/2023-12-01-preview/automations.json
 ```
+
 ### Tag: package-2023-11-15
 
 These settings apply only when `--tag=package-2023-11-15` is specified on the command line.
@@ -147,7 +166,7 @@ suppressions:
 
 These settings apply only when `--tag=package-2024-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-01'
+``` yaml $(tag) == 'package-2024-01'
 input-file:
   - Microsoft.Security/stable/2024-01-01/pricings.json
 ```
