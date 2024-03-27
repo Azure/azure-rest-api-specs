@@ -28,7 +28,7 @@ These are the global settings for the RecoveryServicesBackup API.
 title: Recovery Services Backup Client
 description: Open API 2.0 Specs for Azure RecoveryServices Backup service
 openapi-type: arm
-tag: package-2024-01
+tag: package-2024-04
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
@@ -484,5 +484,10 @@ directive:
   - suppress: LroErrorContent  
     from: bms.json
     reason: The azure backup service's API infra handles the conversation from execptions to custom error CloudError. Changing this would be breaking change for our service.
-  
+  - suppress: ConsistentPatchProperties  
+    from: bms.json
+    where: 
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}"].patch.parameters[8]["schema"]
+    reason: Known false alarm for the discriminator pattern that causes ConsistentPatchProperties rule to fail.
+
 ```
