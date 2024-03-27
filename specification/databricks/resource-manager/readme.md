@@ -207,7 +207,7 @@ These settings apply only when `--tag=package-2024-05-01` is specified on the co
 input-file:
   - Microsoft.Databricks/stable/2024-05-01/databricks.json
   - Microsoft.Databricks/stable/2024-05-01/vnetpeering.json
-  - Microsoft.Databricks/stable/2023-05-01/accessconnector.json
+  - Microsoft.Databricks/stable/2024-05-01/accessconnector.json
 ```
 
 ---
