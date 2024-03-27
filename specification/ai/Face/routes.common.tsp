@@ -118,6 +118,6 @@ op FaceResourceTrain<TResource extends TypeSpec.Reflection.Model> is Operations.
 op FaceResourceGetTrainingStatus<TResource extends TypeSpec.Reflection.Model> is Foundations.ResourceOperation<
   TResource,
   {},
-  CollectionTrainingStatus,
+  TrainingStatus,
   ServiceTraits
 >;

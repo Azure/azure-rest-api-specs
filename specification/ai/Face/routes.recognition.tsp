@@ -46,7 +46,7 @@ op IdentifyOperation<T extends TypeSpec.Reflection.Model> is Azure.Core.RpcOpera
     @maxValue(1)
     confidenceThreshold?: float32;
   },
-  Body<FaceIdentificationResult[]>,
+  Body<IdentificationResult[]>,
   ServiceTraits
 >;
 
@@ -62,7 +62,7 @@ op IdentifyOperation<T extends TypeSpec.Reflection.Model> is Azure.Core.RpcOpera
 @route("/face/{apiVersion}/verify")
 op VerifyOperation<T extends TypeSpec.Reflection.Model> is Azure.Core.RpcOperation<
   T,
-  FaceVerificationResult,
+  VerificationResult,
   ServiceTraits
 >;
 
@@ -90,7 +90,7 @@ op FindSimilarOperation<T extends TypeSpec.Reflection.Model> is Azure.Core.RpcOp
 
     ...T;
   },
-  Body<FaceFindSimilarResult[]>,
+  Body<FindSimilarResult[]>,
   ServiceTraits
 >;
 
@@ -208,7 +208,7 @@ interface FaceRecognitionOperations {
       @doc("Array of candidate faceId created by Face - Detect. The maximum is 1000 faces.")
       faceIds: string[];
     },
-    FaceGroupingResult,
+    GroupingResult,
     ServiceTraits
   >;
 }

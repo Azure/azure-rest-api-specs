@@ -1,8 +1,10 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 
@@ -30,6 +32,7 @@ model ListRequestOptions {
 }
 
 @doc("The recognition model for the face.")
+@clientName("FaceRecognitionModel")
 union RecognitionModel {
   string,
 
@@ -47,6 +50,7 @@ union RecognitionModel {
 }
 
 @doc("The detection model for the face.")
+@clientName("FaceDetectionModel")
 union DetectionModel {
   string,
 
@@ -119,7 +123,8 @@ model ReturnRecognitionModelOptions {
 }
 
 @doc("Training status of a container")
-model CollectionTrainingStatus {
+@clientName("FaceCollectionTrainingStatus")
+model TrainingStatus {
   @doc("Training status of the container.")
   @lroStatus
   status: Foundations.OperationState;
@@ -138,16 +143,18 @@ model CollectionTrainingStatus {
 }
 
 @doc("Identify result.")
-model FaceIdentificationResult {
+@clientName("FaceIdentificationResult")
+model IdentificationResult {
   @doc("faceId of the query face.")
   faceId: string;
 
   @doc("Identified person candidates for that face (ranked by confidence). Array size should be no larger than input maxNumOfCandidatesReturned. If no person is identified, will return an empty array.")
-  candidates: FaceIdentificationCandidate[];
+  candidates: IdentificationCandidate[];
 }
 
 @doc("Candidate for identify call.")
-model FaceIdentificationCandidate {
+@clientName("FaceIdentificationCandidate")
+model IdentificationCandidate {
   @doc("personId of candidate person.")
   personId: string;
 
@@ -158,7 +165,8 @@ model FaceIdentificationCandidate {
 }
 
 @doc("Verify result.")
-model FaceVerificationResult {
+@clientName("FaceVerificationResult")
+model VerificationResult {
   @doc("True if the two faces belong to the same person or the face belongs to the person, otherwise false.")
   isIdentical: boolean;
 
@@ -180,7 +188,8 @@ union FindSimilarMatchMode {
 }
 
 @doc("Response body for find similar face operation.")
-model FaceFindSimilarResult {
+@clientName("FaceFindSimilarResult")
+model FindSimilarResult {
   @doc("Confidence value of the candidate. The higher confidence, the more similar. Range between [0,1].")
   @minValue(0)
   @maxValue(1)
@@ -194,7 +203,8 @@ model FaceFindSimilarResult {
 }
 
 @doc("Response body for group face operation.")
-model FaceGroupingResult {
+@clientName("FaceGroupingResult")
+model GroupingResult {
   @doc("A partition of the original faces based on face similarity. Groups are ranked by number of faces.")
   groups: string[][];
 

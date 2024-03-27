@@ -1272,7 +1272,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/FaceFindSimilarResult"
+                "$ref": "#/definitions/FindSimilarResult"
               },
               "x-ms-identifiers": []
             }
@@ -1331,7 +1331,7 @@
           "200": {
             "description": "A successful call returns one or more groups of similar faces (rank by group size) and a messyGroup.",
             "schema": {
-              "$ref": "#/definitions/FaceGroupingResult"
+              "$ref": "#/definitions/GroupingResult"
             }
           },
           "default": {
@@ -1411,7 +1411,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/FaceIdentificationResult"
+                "$ref": "#/definitions/IdentificationResult"
               },
               "x-ms-identifiers": []
             }
@@ -1994,7 +1994,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CollectionTrainingStatus"
+              "$ref": "#/definitions/TrainingStatus"
             }
           },
           "default": {
@@ -2804,7 +2804,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CollectionTrainingStatus"
+              "$ref": "#/definitions/TrainingStatus"
             }
           },
           "default": {
@@ -3656,7 +3656,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CollectionTrainingStatus"
+              "$ref": "#/definitions/TrainingStatus"
             }
           },
           "default": {
@@ -4474,7 +4474,7 @@
           "200": {
             "description": "A successful call returns the verification result.",
             "schema": {
-              "$ref": "#/definitions/FaceVerificationResult"
+              "$ref": "#/definitions/VerificationResult"
             }
           },
           "default": {
@@ -4742,7 +4742,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/FaceFindSimilarResult"
+                "$ref": "#/definitions/FindSimilarResult"
               },
               "x-ms-identifiers": []
             }
@@ -4814,7 +4814,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/FaceFindSimilarResult"
+                "$ref": "#/definitions/FindSimilarResult"
               },
               "x-ms-identifiers": []
             }
@@ -4896,7 +4896,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/FaceIdentificationResult"
+                "$ref": "#/definitions/IdentificationResult"
               },
               "x-ms-identifiers": []
             }
@@ -4978,7 +4978,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/FaceIdentificationResult"
+                "$ref": "#/definitions/IdentificationResult"
               },
               "x-ms-identifiers": []
             }
@@ -5065,7 +5065,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/FaceIdentificationResult"
+                "$ref": "#/definitions/IdentificationResult"
               },
               "x-ms-identifiers": []
             }
@@ -5480,7 +5480,7 @@
           "200": {
             "description": "A successful call returns the verification result.",
             "schema": {
-              "$ref": "#/definitions/FaceVerificationResult"
+              "$ref": "#/definitions/VerificationResult"
             }
           },
           "default": {
@@ -5539,7 +5539,7 @@
           "200": {
             "description": "A successful call returns the verification result.",
             "schema": {
-              "$ref": "#/definitions/FaceVerificationResult"
+              "$ref": "#/definitions/VerificationResult"
             }
           },
           "default": {
@@ -5603,7 +5603,7 @@
           "200": {
             "description": "A successful call returns the verification result.",
             "schema": {
-              "$ref": "#/definitions/FaceVerificationResult"
+              "$ref": "#/definitions/VerificationResult"
             }
           },
           "default": {
@@ -5846,41 +5846,6 @@
         "value"
       ]
     },
-    "CollectionTrainingStatus": {
-      "type": "object",
-      "description": "Training status of a container",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-          "description": "Training status of the container."
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "A combined UTC date and time string that describes the created time of the person group, large person group or large face list."
-        },
-        "lastActionDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "A combined UTC date and time string that describes the last modify time of the person group, large person group or large face list, could be null value when the group is not successfully trained."
-        },
-        "lastSuccessfulTrainingDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "A combined UTC date and time string that describes the last successful training time of the person group, large person group or large face list."
-        },
-        "message": {
-          "type": "string",
-          "description": "Show failure message when training failed (omitted when training succeed)."
-        }
-      },
-      "required": [
-        "status",
-        "createdDateTime",
-        "lastActionDateTime",
-        "lastSuccessfulTrainingDateTime"
-      ]
-    },
     "CreateDynamicPersonGroupContent": {
       "type": "object",
       "description": "Request of create dynamic person group.",
@@ -6089,101 +6054,6 @@
       },
       "required": [
         "faceId"
-      ]
-    },
-    "FaceFindSimilarResult": {
-      "type": "object",
-      "description": "Response body for find similar face operation.",
-      "properties": {
-        "confidence": {
-          "type": "number",
-          "format": "float",
-          "description": "Confidence value of the candidate. The higher confidence, the more similar. Range between [0,1].",
-          "minimum": 0,
-          "maximum": 1
-        },
-        "faceId": {
-          "type": "string",
-          "description": "faceId of candidate face when find by faceIds. faceId is created by Face - Detect and will expire 24 hours after the detection call."
-        },
-        "persistedFaceId": {
-          "type": "string",
-          "description": "persistedFaceId of candidate face when find by faceListId or largeFaceListId. persistedFaceId in face list/large face list is persisted and will not expire."
-        }
-      },
-      "required": [
-        "confidence"
-      ]
-    },
-    "FaceGroupingResult": {
-      "type": "object",
-      "description": "Response body for group face operation.",
-      "properties": {
-        "groups": {
-          "type": "array",
-          "description": "A partition of the original faces based on face similarity. Groups are ranked by number of faces.",
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "x-ms-identifiers": []
-        },
-        "messyGroup": {
-          "type": "array",
-          "description": "Face ids array of faces that cannot find any similar faces from original faces.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "groups",
-        "messyGroup"
-      ]
-    },
-    "FaceIdentificationCandidate": {
-      "type": "object",
-      "description": "Candidate for identify call.",
-      "properties": {
-        "personId": {
-          "type": "string",
-          "description": "personId of candidate person."
-        },
-        "confidence": {
-          "type": "number",
-          "format": "float",
-          "description": "Confidence value of the candidate. The higher confidence, the more similar. Range between [0,1].",
-          "minimum": 0,
-          "maximum": 1
-        }
-      },
-      "required": [
-        "personId",
-        "confidence"
-      ]
-    },
-    "FaceIdentificationResult": {
-      "type": "object",
-      "description": "Identify result.",
-      "properties": {
-        "faceId": {
-          "type": "string",
-          "description": "faceId of the query face."
-        },
-        "candidates": {
-          "type": "array",
-          "description": "Identified person candidates for that face (ranked by confidence). Array size should be no larger than input maxNumOfCandidatesReturned. If no person is identified, will return an empty array.",
-          "items": {
-            "$ref": "#/definitions/FaceIdentificationCandidate"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "faceId",
-        "candidates"
       ]
     },
     "FaceLandmarks": {
@@ -6576,27 +6446,6 @@
         ]
       }
     },
-    "FaceVerificationResult": {
-      "type": "object",
-      "description": "Verify result.",
-      "properties": {
-        "isIdentical": {
-          "type": "boolean",
-          "description": "True if the two faces belong to the same person or the face belongs to the person, otherwise false."
-        },
-        "confidence": {
-          "type": "number",
-          "format": "float",
-          "description": "\tA number indicates the similarity confidence of whether two faces belong to the same person, or whether the face belongs to the person. By default, isIdentical is set to True if similarity confidence is greater than or equal to 0.5. This is useful for advanced users to override 'isIdentical' and fine-tune the result on their own data.",
-          "minimum": 0,
-          "maximum": 1
-        }
-      },
-      "required": [
-        "isIdentical",
-        "confidence"
-      ]
-    },
     "FacialHair": {
       "type": "object",
       "description": "Properties describing facial hair attributes.",
@@ -6653,6 +6502,30 @@
         ]
       }
     },
+    "FindSimilarResult": {
+      "type": "object",
+      "description": "Response body for find similar face operation.",
+      "properties": {
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "description": "Confidence value of the candidate. The higher confidence, the more similar. Range between [0,1].",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "faceId": {
+          "type": "string",
+          "description": "faceId of candidate face when find by faceIds. faceId is created by Face - Detect and will expire 24 hours after the detection call."
+        },
+        "persistedFaceId": {
+          "type": "string",
+          "description": "persistedFaceId of candidate face when find by faceListId or largeFaceListId. persistedFaceId in face list/large face list is persisted and will not expire."
+        }
+      },
+      "required": [
+        "confidence"
+      ]
+    },
     "GlassesType": {
       "type": "string",
       "description": "Glasses type of the face.",
@@ -6688,6 +6561,34 @@
           }
         ]
       }
+    },
+    "GroupingResult": {
+      "type": "object",
+      "description": "Response body for group face operation.",
+      "properties": {
+        "groups": {
+          "type": "array",
+          "description": "A partition of the original faces based on face similarity. Groups are ranked by number of faces.",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "x-ms-identifiers": []
+        },
+        "messyGroup": {
+          "type": "array",
+          "description": "Face ids array of faces that cannot find any similar faces from original faces.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "groups",
+        "messyGroup"
+      ]
     },
     "HairColor": {
       "type": "object",
@@ -6824,6 +6725,49 @@
         "pitch",
         "roll",
         "yaw"
+      ]
+    },
+    "IdentificationCandidate": {
+      "type": "object",
+      "description": "Candidate for identify call.",
+      "properties": {
+        "personId": {
+          "type": "string",
+          "description": "personId of candidate person."
+        },
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "description": "Confidence value of the candidate. The higher confidence, the more similar. Range between [0,1].",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "personId",
+        "confidence"
+      ]
+    },
+    "IdentificationResult": {
+      "type": "object",
+      "description": "Identify result.",
+      "properties": {
+        "faceId": {
+          "type": "string",
+          "description": "faceId of the query face."
+        },
+        "candidates": {
+          "type": "array",
+          "description": "Identified person candidates for that face (ranked by confidence). Array size should be no larger than input maxNumOfCandidatesReturned. If no person is identified, will return an empty array.",
+          "items": {
+            "$ref": "#/definitions/IdentificationCandidate"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "faceId",
+        "candidates"
       ]
     },
     "LandmarkCoordinate": {
@@ -7853,6 +7797,41 @@
         "latencyInMilliseconds"
       ]
     },
+    "TrainingStatus": {
+      "type": "object",
+      "description": "Training status of a container",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "Training status of the container."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A combined UTC date and time string that describes the created time of the person group, large person group or large face list."
+        },
+        "lastActionDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A combined UTC date and time string that describes the last modify time of the person group, large person group or large face list, could be null value when the group is not successfully trained."
+        },
+        "lastSuccessfulTrainingDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A combined UTC date and time string that describes the last successful training time of the person group, large person group or large face list."
+        },
+        "message": {
+          "type": "string",
+          "description": "Show failure message when training failed (omitted when training succeed)."
+        }
+      },
+      "required": [
+        "status",
+        "createdDateTime",
+        "lastActionDateTime",
+        "lastSuccessfulTrainingDateTime"
+      ]
+    },
     "UpdateDynamicPersonGroupContent": {
       "type": "object",
       "description": "Request of update dynamic person group.",
@@ -7917,6 +7896,27 @@
           "maxLength": 16384
         }
       }
+    },
+    "VerificationResult": {
+      "type": "object",
+      "description": "Verify result.",
+      "properties": {
+        "isIdentical": {
+          "type": "boolean",
+          "description": "True if the two faces belong to the same person or the face belongs to the person, otherwise false."
+        },
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "description": "\tA number indicates the similarity confidence of whether two faces belong to the same person, or whether the face belongs to the person. By default, isIdentical is set to True if similarity confidence is greater than or equal to 0.5. This is useful for advanced users to override 'isIdentical' and fine-tune the result on their own data.",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "required": [
+        "isIdentical",
+        "confidence"
+      ]
     }
   },
   "parameters": {
