@@ -925,8 +925,8 @@ model BatchNodeCounts {
   total: int32;
 
   @doc("The number of Compute Nodes in the upgradingOS state.")
-  @clientName("upgradingOS")
-  upgradingOs: int32;
+  @clientName("upgradingOs")
+  upgradingOS: int32;
 }
 
 @doc("Contains utilization and resource usage statistics for the lifetime of a Pool.")
@@ -3725,8 +3725,8 @@ model UpgradePolicy {
   mode: UpgradeMode;
 
   @doc("Configuration parameters used for performing automatic OS Upgrade. The configuration parameters used for performing automatic OS upgrade.")
-  @clientName("automaticOSUpgradePolicy")
-  automaticOsUpgradePolicy?: AutomaticOsUpgradePolicy;
+  @clientName("automaticOsUpgradePolicy")
+  automaticOSUpgradePolicy?: AutomaticOsUpgradePolicy;
 
   @doc("The configuration parameters used while performing a rolling upgrade. This property is only supported on Pools with the virtualMachineConfiguration property.")
   rollingUpgradePolicy?: RollingUpgradePolicy;
@@ -3738,8 +3738,8 @@ model AutomaticOsUpgradePolicy {
   disableAutomaticRollback?: boolean;
 
   @doc("Indicates whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the OS image becomes available. <br /><br /> If this is set to true for Windows based pools, [WindowsConfiguration.enableAutomaticUpdates](https://learn.microsoft.com/en-us/rest/api/batchservice/pool/add?tabs=HTTP#windowsconfiguration) cannot be set to true.")
-  @clientName("enableAutomaticOSUpgrade")
-  enableAutomaticOsUpgrade?: boolean;
+  @clientName("enableAutomaticOsUpgrade")
+  enableAutomaticOSUpgrade?: boolean;
 
   @doc("Indicates whether rolling upgrade policy should be used during Auto OS Upgrade. Auto OS Upgrade will fallback to the default policy if no policy is defined on the VMSS.")
   useRollingUpgradePolicy?: boolean;
