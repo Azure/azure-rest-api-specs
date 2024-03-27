@@ -9298,13 +9298,23 @@
         }
       }
     },
+    "PatchRecoveryPointPropertiesInput": {
+      "description": "Recovery Point Properties Contract for Update Recovery Point API.",
+      "type": "object",
+      "properties": {
+        "expiryTime": {
+          "description": "Expiry time of Recovery Point in UTC.",
+          "type": "string"
+        }
+      }
+    },
     "PatchRecoveryPointInput": {
       "description": "Recovery Point Contract for Update Recovery Point API.",
       "type": "object",
       "properties": {
         "recoveryPointProperties": {
-          "description": "Properties of Recovery Point",
-          "$ref": "#/definitions/RecoveryPointProperties"
+          "description": "Properties of Recovery Point to be updated",
+          "$ref": "#/definitions/PatchRecoveryPointPropertiesInput"
         }
       }
     },
