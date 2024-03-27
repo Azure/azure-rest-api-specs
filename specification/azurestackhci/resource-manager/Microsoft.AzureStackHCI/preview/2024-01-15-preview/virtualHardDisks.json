@@ -387,6 +387,19 @@
         },
         "status": {
           "$ref": "#/definitions/VirtualHardDiskStatus"
+        },
+        "vmReferenceId": {
+          "type": "string",
+          "description": "ID of the attached VM.",
+          "readOnly": true,
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureStackHCI/virtualMachineInstances"
+              }
+            ]
+          }
         }
       },
       "description": "Properties under the virtual hard disk resource"

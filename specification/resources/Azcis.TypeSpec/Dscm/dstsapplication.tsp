@@ -4,6 +4,7 @@ import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -73,6 +74,7 @@ model ApplicationAccount {
   isProduction?: boolean = true;
 
   @doc("The claim rule which apply to this Application. Optional.")
+  @extension("x-ms-identifiers", [])
   claimRules?: Array<ApplicationClaimRule>;
 
   @doc("Client identity when using the application as a client. Optional.")
@@ -109,6 +111,7 @@ model ApplicationGroup {
   sawDeviceEnforcement?: string;
 
   @doc("Change.Remove client token ip range.")
+  @extension("x-ms-identifiers", [])
   clientTokenIpRangeRestrictions?: Array<IpRange>;
 
   @doc("Optional. If it is null, full SAW enforcement will apply to the application.")
@@ -121,6 +124,7 @@ model ApplicationGroup {
   regions?: Array<string>;
 
   @doc("The claim rules that apply to this Application Group. Optional.")
+  @extension("x-ms-identifiers", [])
   claimRules?: Array<ApplicationClaimRule>;
 
   @doc("Client identity when using the application as a client. Optional.")
@@ -166,6 +170,7 @@ model ApplicationClientIdentity {
   type: string;
 
   @doc("Provide a list IP address ranges to restrict where this application's client token can be requested. Optional.")
+  @extension("x-ms-identifiers", [])
   clientTokenIpRangeRestrictions?: Array<IpRange>;
 }
 
@@ -184,6 +189,7 @@ model DmsiInfo {
 @doc("Represents certificate based authentication.")
 model CertificateBasedIdentity {
   @doc("Certificate")
+  @extension("x-ms-identifiers", [])
   certificates: Array<CertificateInfo>;
 }
 

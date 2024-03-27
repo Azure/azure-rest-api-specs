@@ -1,3 +1,4 @@
+import "../versions.tsp";
 import "./aadapplication.tsp";
 
 using TypeSpec.Versioning;
@@ -7,10 +8,9 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service({
   title: "Foundational ARM Client",
-  version: "2023-08-22-preview",
 })
 @doc("https://eng.ms/docs/products/azcis-resource-provisioning/template-user-guide/resources/aad-application")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@versioned(Microsoft.AzureCIS.Versions)
 namespace Microsoft.AzureCIS;
 
 interface Operations extends Azure.ResourceManager.Operations {}
