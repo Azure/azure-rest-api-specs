@@ -559,9 +559,16 @@
     },
     "DedicatedHsm": {
       "properties": {
-        "systemData": {
-          "description": "Metadata pertaining to creation and last modification of the resource",
-          "$ref": "#/definitions/SystemData"
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "SKU details"
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The Dedicated Hsm zones."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -571,7 +578,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/DedicatedHsmResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
       "required": [
@@ -610,23 +617,6 @@
         }
       },
       "description": "List of dedicated HSMs",
-      "type": "object"
-    },
-    "ResourceListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DedicatedHsmResource"
-          },
-          "description": "The list of dedicated HSM resources."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to get the next set of dedicated HSM resources."
-        }
-      },
-      "description": "List of dedicated HSM resources.",
       "type": "object"
     },
     "DedicatedHsmError": {
