@@ -36,6 +36,11 @@
   "security": [
     {
       "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "https://cognitiveservices.azure.com/.default"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -43,6 +48,14 @@
       "type": "apiKey",
       "name": "Ocp-Apim-Subscription-Key",
       "in": "header"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      }
     }
   },
   "tags": [],
@@ -165,7 +178,7 @@
             "x-ms-client-name": "modelVersion"
           },
           {
-            "name": "imageContent",
+            "name": "imageData",
             "in": "body",
             "description": "The image to be analyzed",
             "required": true,
@@ -193,11 +206,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "AnalyzeFromImageData": {
-            "$ref": "./examples/AnalyzeFromImageData_MaximumSet.json"
           }
         }
       }
@@ -319,7 +327,7 @@
             "x-ms-client-name": "modelVersion"
           },
           {
-            "name": "imageContent",
+            "name": "imageUrl",
             "in": "body",
             "description": "The image to be analyzed",
             "required": true,
@@ -346,11 +354,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "AnalyzeFromUrl": {
-            "$ref": "./examples/AnalyzeFromUrl_MaximumSet.json"
           }
         }
       }
