@@ -29,7 +29,6 @@ model ClusterServiceResource
   @visibility("create", "read")
   name: string;
 }
-@@doc(ClusterServiceResource.properties, "FOOBAR");
 
 @doc("Cluster Service Properties.")
 model ClusterServiceResourceProperties {
