@@ -37,7 +37,9 @@ directive:
       - $.definitions.ManagedResource
   - suppress: TopLevelResourcesListBySubscription
     reason: The list by scope includes also list by subscription, this is an extension resource.
-    from: AlertsManagement.json    
+    from: AlertsManagement.json
+  - suppress: OperationsAPIImplementation
+    reason: The API is implemented in Operation API - false positive
 ```
 
 ``` yaml
@@ -48,9 +50,6 @@ tag: package-2023-03
 ```
 
 
-
-
-
 ### Tag: package-preview-2024-01
 
 These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
@@ -58,6 +57,14 @@ These settings apply only when `--tag=package-preview-2024-01` is specified on t
 ```yaml $(tag) == 'package-preview-2024-01'
 input-file:
   - Microsoft.AlertsManagement/preview/2024-01-01-preview/AlertsManagement.json  
+```
+### Tag: package-preview-2023-09
+
+These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-09'
+input-file:
+  - Microsoft.AlertsManagement/preview/2023-09-01-preview/PrometheusRuleGroups.json
 ```
 ### Tag: package-preview-2023-08
 
