@@ -140,7 +140,7 @@ alias Created<T> = {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Operation 'Exists' should be defined using a signature from the Azure.Core namespace."
 #suppress "@azure-tools/typespec-azure-core/rpc-operation-request-body" "BatchOperation with '@get' cannot have a body."
-@clientName("BatchClient")
+@clientName("Batch2")
 interface BatchApi {
   @summary("Lists all of the applications available in the specified Account.")
   @doc("""
