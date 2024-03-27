@@ -215,6 +215,7 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2024-02-15-preview/updateSummaries.json
   - Microsoft.AzureStackHCI/preview/2024-02-15-preview/updates.json
   - Microsoft.AzureStackHCI/preview/2024-02-15-preview/securitySettings.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/hciCommon.json
 ```
 
 ### Tag: package-preview-2023-12
