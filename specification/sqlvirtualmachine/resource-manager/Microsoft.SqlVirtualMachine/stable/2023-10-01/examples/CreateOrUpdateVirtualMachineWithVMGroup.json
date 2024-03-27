@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "sqlVirtualMachineName": "testvm",
+    "api-version": "2023-10-01",
+    "parameters": {
+      "location": "northeurope",
+      "properties": {
+        "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm2",
+        "sqlVirtualMachineGroupResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/testvmgroup",
+        "wsfcDomainCredentials": {
+          "clusterBootstrapAccountPassword": "<Password>",
+          "clusterOperatorAccountPassword": "<Password>",
+          "sqlServiceAccountPassword": "<Password>"
+        },
+        "wsfcStaticIp": "10.0.0.7"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm2",
+          "provisioningState": "Updating",
+          "sqlServerLicenseType": "PAYG",
+          "sqlImageSku": "Enterprise",
+          "sqlImageOffer": "SQL2022-WS2022",
+          "sqlManagement": "Full",
+          "leastPrivilegeMode": "Enabled",
+          "enableAutomaticUpgrade": false,
+          "additionalVmPatch": "WU",
+          "osType": "Windows",
+          "virtualMachineIdentitySettings": {
+            "type": "SystemAssigned"
+          },
+          "sqlVirtualMachineGroupResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/testvmgroup",
+          "wsfcStaticIp": "10.0.0.7"
+        },
+        "location": "northeurope",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm2",
+        "name": "testvm2",
+        "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachines"
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "virtualMachineResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm2",
+          "provisioningState": "Provisioning",
+          "sqlImageSku": "Unknown",
+          "leastPrivilegeMode": "NotSet",
+          "enableAutomaticUpgrade": true,
+          "sqlServerLicenseType": "PAYG",
+          "sqlVirtualMachineGroupResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/testvmgroup",
+          "wsfcStaticIp": "10.0.0.7"
+        },
+        "location": "northeurope",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm2",
+        "name": "testvm2",
+        "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachines"
+      }
+    }
+  }
+}
