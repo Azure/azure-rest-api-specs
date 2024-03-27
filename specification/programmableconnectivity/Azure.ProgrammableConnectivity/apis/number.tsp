@@ -34,7 +34,7 @@ interface NumberVerification {
     TraitOverride<ResponseHeadersTrait<{
       @doc("The URI of the network's authorization endpoint, which should be followed by the front-end application.")
       @header
-      location: string;
+      location: url;
     } & RequestIdResponseHeader>>
   >;
 
