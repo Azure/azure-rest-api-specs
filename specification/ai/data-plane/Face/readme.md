@@ -47,11 +47,4 @@ suppressions:
   - code: AvoidAnonymousParameter
     from: Face.json
     reason: Use anonymous parameter to provide interface with flatten parameters
-  - code: LRO_RESPONSE_HEADER
-    from: Face.json
-    reason: Our legacy LRO API does not reply with required headers
-  - code: INVALID_TYPE
-    from: Face.json
-    reason: Adding JSON in multipart/form-data to reuse the request body for multiple operations
-
 ```

@@ -12,7 +12,7 @@ using Foundations;
 namespace Face;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Doesn't fit in generated long-running operation"
+#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "This is a template, polling operation should be defined in the operation instance."
 @summary("Add a face to a person (see PersonDirectory Person - Create) for face identification or verification.")
 @doc(
   """

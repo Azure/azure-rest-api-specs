@@ -104,12 +104,16 @@ op FaceResourceReadOperationWithReturnRecognitionModelOptions<TResource extends 
   QueryParametersTrait<ReturnRecognitionModelOptions>
 >;
 
+#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "This is a template, polling operation should be defined in the operation instance."
 @action("train")
 @actionSeparator("/")
 op FaceResourceTrain<TResource extends TypeSpec.Reflection.Model> is Operations.ResourceAction<
   TResource,
   {},
-  TypeSpec.Http.AcceptedResponse
+  TypeSpec.Http.AcceptedResponse & {
+    @header("operation-Location")
+    operationLocation: ResourceLocation<TrainingStatus>;
+  }
 >;
 
 @get
