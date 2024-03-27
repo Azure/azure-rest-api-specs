@@ -1,6 +1,48 @@
+using TypeSpec.Http;
 using TypeSpec.Rest;
+using Azure.Core;
 
 namespace AzureHealthInsights;
+
+/**
+ * Provides HealthInsights resource details for long running operations.
+ * @template TRequest The type of the operation request data.
+ * @template TResult The type of the operation result.
+ * @template TStatusError The type of the operation status error. If not provided, the default error is used.
+ */
+// @TypeSpec.Versioning.added(AzureHealthInsights.ApiVersion.v2024_04_01)
+@doc("Provides status details for long running operations.")
+model HealthInsightsJobBase {
+  @key("id")
+  @doc("The unique ID of the job.")
+  @visibility("read")
+  @maxLength(36)
+  @minLength(3)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$")
+  @path
+  id: string;
+
+  @doc("The status of the job.")
+  @visibility("read")
+  @lroStatus
+  status: JobStatus;
+
+  @doc("The date and time when the processing job was created.")
+  @visibility("read")
+  createdAt?: utcDateTime;
+
+  @doc("The date and time when the processing job is set to expire.")
+  @visibility("read")
+  expiresAt?: utcDateTime;
+
+  @doc("The date and time when the processing job was last updated.")
+  @visibility("read")
+  updatedAt?: utcDateTime;
+
+  @doc("Error object that describes the error when status is \"Failed\".")
+  @visibility("read")
+  error?: Foundations.Error;
+}
 
 @doc("ConditionStage")
 model ConditionStage {
@@ -195,12 +237,14 @@ model TimePeriod {
 }
 
 @doc("Procedure information")
-model OrderedProcedure is Fhir.R4.Extendible {
+model OrderedProcedure {
   @doc("Procedure code")
   code?: Fhir.R4.CodeableConcept;
 
   @doc("Procedure description")
   description?: string;
+
+  ...Fhir.R4.Extendible;
 }
 
 @doc("""

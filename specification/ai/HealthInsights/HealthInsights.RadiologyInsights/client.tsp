@@ -7,9 +7,7 @@ import "../HealthInsights.OpenAPI/service.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@TypeSpec.Versioning.useDependency(
-  AzureHealthInsights.ApiVersion.v2023_09_01_Preview
-)
+@TypeSpec.Versioning.useDependency(AzureHealthInsights.ApiVersion.v2024_04_01)
 namespace ClientForAzureHealthInsights;
 
 @client({
@@ -84,5 +82,3 @@ interface RadiologyInsightsClient {
 );
 @@clientName(Fhir.R4.ResearchStudy, "Fhir_R4_ResearchStudy", "java");
 @@clientName(Fhir.R4.ResearchStudy, "Fhir_R4_ResearchStudy", "csharp");
-@@clientName(AzureHealthInsights.PatientInfoSex, "PatientSex");
-@@clientName(AzureHealthInsights.PatientInfo, "PatientDetails");
