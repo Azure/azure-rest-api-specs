@@ -57,7 +57,7 @@ swagger-to-sdk:
 
 ### Suppressions
 
-``` yaml
+```yaml
 suppressions:
   - code: AvoidAnonymousTypes
 ```

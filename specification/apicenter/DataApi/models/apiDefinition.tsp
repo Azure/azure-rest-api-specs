@@ -2,7 +2,7 @@ namespace ApiCenter.DataApi.Models;
 
 using TypeSpec.Rest;
 
-@doc("API definition.")
+@doc("API definition resource model.")
 @resource("definitions")
 @parentResource(ApiVersion)
 model ApiDefinition {

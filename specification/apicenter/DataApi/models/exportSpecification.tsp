@@ -2,7 +2,7 @@ namespace ApiCenter.DataApi.Models;
 
 using TypeSpec.Rest;
 
-@doc("Export specification")
+@doc("Export specification resource model.")
 @resource("definitions")
 @parentResource(ApiVersion)
 model ExportSpecification {
@@ -20,9 +20,6 @@ model ExportSpecification {
 
 @doc("Export specification format")
 enum SpecFormat {
-  @doc("Inline format")
-  Inline: "inline",
-
   @doc("Link format")
   Link: "link",
 }

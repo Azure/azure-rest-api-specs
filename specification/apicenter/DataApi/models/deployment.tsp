@@ -2,9 +2,9 @@ namespace ApiCenter.DataApi.Models;
 
 using TypeSpec.Rest;
 
-@doc("API Deployment resource model.")
+@doc("API deployment resource model.")
 @resource("deployments")
-@parentResource(Api)
+@parentResource(ApiWithWorkspace)
 model ApiDeployment {
   @doc("Deployment identifier.")
   @key("deploymentName")

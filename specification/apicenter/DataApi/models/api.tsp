@@ -1,11 +1,13 @@
-using TypeSpec.Rest;
+import "./workspace.tsp";
 
 namespace ApiCenter.DataApi.Models;
+
+using TypeSpec.Rest;
 
 @doc("API resource model.")
 @resource("apis")
 model Api {
-  @doc("The resource name.")
+  @doc("Api identifier.")
   @maxLength(50)
   @key("apiName")
   @visibility
@@ -49,6 +51,10 @@ model Api {
   @visibility("read")
   lastUpdated?: utcDateTime;
 }
+
+@doc("API resource model (with full workspace route).")
+@parentResource(Workspace)
+model ApiWithWorkspace is Api;
 
 @doc("Api External Documentation Model")
 model ApiExternalDocumentation {

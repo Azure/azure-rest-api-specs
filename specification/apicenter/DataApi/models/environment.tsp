@@ -1,3 +1,5 @@
+import "./workspace.tsp";
+
 namespace ApiCenter.DataApi.Models;
 
 using TypeSpec.Rest;
@@ -31,6 +33,10 @@ model Environment {
   @doc("The custom metadata defined for environment entities.")
   customProperties?: {};
 }
+
+@doc("Environment resource model (with full workspace route).")
+@parentResource(Workspace)
+model EnvironmentWithWorkspace is Environment;
 
 @doc("Environment Server")
 model EnvironmentServer {

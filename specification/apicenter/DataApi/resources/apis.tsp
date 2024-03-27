@@ -12,12 +12,18 @@ using ApiCenter.DataApi.Models;
 namespace ApiCenter.DataApi;
 
 interface Apis {
-  @doc("List a collection of APIs.")
-  list is Operations.ResourceList<
+  @doc("List a collection of all APIs.")
+  listAll is Operations.ResourceList<
     Api,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
+  @doc("List a collection of APIs in a workspace.")
+  list is Operations.ResourceList<
+    ApiWithWorkspace,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
+
   @doc("Get an API.")
-  get is Operations.ResourceRead<Api>;
+  get is Operations.ResourceRead<ApiWithWorkspace>;
 }

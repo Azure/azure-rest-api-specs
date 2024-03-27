@@ -4,9 +4,9 @@ namespace ApiCenter.DataApi.Models;
 
 using TypeSpec.Rest;
 
-@doc("API version")
+@doc("API version resource model.")
 @resource("versions")
-@parentResource(Api)
+@parentResource(ApiWithWorkspace)
 model ApiVersion {
   @doc("Version identifier.")
   @key("versionName")
