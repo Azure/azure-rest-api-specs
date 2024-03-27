@@ -186,10 +186,6 @@ model ChatChoice {
   @doc("The reason that this chat completions choice completed its generated.")
   @projectedName("json", "finish_reason")
   finishReason: CompletionsFinishReason | null;
-
-  @doc("The delta message content for a streaming response.")
-  @projectedName("json", "delta")
-  delta?: ChatResponseMessage;
 }
 
 @doc("""

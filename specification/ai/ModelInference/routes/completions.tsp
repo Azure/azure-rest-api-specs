@@ -19,14 +19,9 @@ Completions support a wide variety of tasks and generate text that continues fro
 provided prompt data.
 """)
 @actionSeparator("/")
-@actionSeparator("/")
 @route("v1/chat/completions")
 op getChatCompletions is Azure.Core.RpcOperation<
   {
-    @doc("The format of the HTTP payload.")
-    @header
-    contentType: "application/json";
-
     @doc("The JSON payload containing chat completion options.")
     @body
     chatCompletionsOptions: ChatCompletionsOptions;
