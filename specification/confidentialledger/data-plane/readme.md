@@ -12,7 +12,7 @@ Please look to the files `Microsoft.ConfidentialLedger/preview/2023-01-18-previe
 > see https://aka.ms/autorest
 
 ``` yaml
-tag: package-2023-01-18-preview-identity
+tag: package-2024-01-26-preview-identity
 openapi-type: data-plane
 ```
 
@@ -123,3 +123,20 @@ suppressions:
     from: cts.json
     reason: Defined as in the RFC
 ```
+
+### Tag: package-2024-01-26-preview-ledger
+
+These settings apply only when `--tag=package-2024-01-26-preview-ledger` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-01-26-preview-ledger'
+input-file:
+  - Microsoft.ConfidentialLedger/preview/2024-01-26-preview/confidentialledger.json
+```
+
+### Tag: package-2024-01-26-preview-identity
+
+These settings apply only when `--tag=package-2024-01-26-preview-identity` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-01-26-preview-identity'
+input-file:
+  - Microsoft.ConfidentialLedger/preview/2024-01-26-preview/identityservice.json
