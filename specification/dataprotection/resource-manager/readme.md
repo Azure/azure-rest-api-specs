@@ -28,7 +28,7 @@ These are the global settings for the DataProtection API.
 title: Data Protection Client
 description: Open API 2.0 Specs for Azure Data Protection service
 openapi-type: arm
-tag: package-2023-12
+tag: package-2024-03
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
@@ -65,14 +65,23 @@ suppressions:
       reason: Seems like a tool bug, as the flagged contract satisfies the given condition.
 ```
 
+### Tag: package-2024-03
+
+These settings apply only when `--tag=package-2024-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-03'
+input-file:
+  - Microsoft.DataProtection/stable/2024-03-01/dataprotection.json
+```
 ### Tag: package-2023-12
 
 These settings apply only when `--tag=package-2023-12` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-12'
+``` yaml $(tag) == 'package-2023-12'
 input-file:
   - Microsoft.DataProtection/stable/2023-12-01/dataprotection.json
 ```
+
 ### Tag: package-2023-11
 
 These settings apply only when `--tag=package-2023-11` is specified on the command line.
@@ -283,7 +292,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
