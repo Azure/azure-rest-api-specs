@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "api-version": "2024-04-01-preview",
+    "billingAccountId": "5678",
+    "extendedProperties": "true"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/5678/providers/Microsoft.Consumption/lots/lot1",
+            "name": "lot1",
+            "type": "Microsoft.Consumption/lots",
+            "properties": {
+              "originalAmount": {
+                "currency": "USD",
+                "value": 1000.00
+              },
+              "usedAmount": {
+                "currency": "USD",
+                "value": 600.00
+              },
+              "closedBalance": {
+                "currency": "USD",
+                "value": 400.00
+              },
+              "lotType": "OutageCredit",
+              "lotSource": "AwardedCredit",
+              "startDate": "2023-11-01T00:00:00Z",
+              "expirationDate": "2024-10-31T00:00:00Z",
+              "status": "Active",
+              "extendedProperties": {
+                "resourceUri": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgName1/providers/Microsoft.BillingBenefits/credits/credit123"
+              }
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/5678/providers/Microsoft.Consumption/lots/lot2",
+            "name": "lot2",
+            "type": "Microsoft.Consumption/lots",
+            "properties": {
+              "originalAmount": {
+                "currency": "USD",
+                "value": 5000.00
+              },
+              "usedAmount": {
+                "currency": "USD",
+                "value": 200.00
+              },
+              "closedBalance": {
+                "currency": "USD",
+                "value": 4800.00
+              },
+              "lotType": "MACC",
+              "lotSource": "ConsumptionCommitment",
+              "startDate": "2023-11-01T00:00:00Z",
+              "expirationDate": "2024-12-31T00:00:00Z",
+              "purchasedDate": "2023-09-01T00:00:00Z",
+              "status": "Active",
+              "extendedProperties": {
+                "resourceUri": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgName1/providers/Microsoft.BillingBenefits/credits/credit456"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
