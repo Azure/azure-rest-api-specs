@@ -57,6 +57,7 @@ input-file:
   - Microsoft.ApiManagement/preview/2023-09-01-preview/apimdocumentations.json
   - Microsoft.ApiManagement/preview/2023-09-01-preview/apimemailtemplates.json
   - Microsoft.ApiManagement/preview/2023-09-01-preview/apimgateways.json
+  - Microsoft.ApiManagement/preview/2023-09-01-preview/apimgatewayConfigConnections.json
   - Microsoft.ApiManagement/preview/2023-09-01-preview/apimgroups.json
   - Microsoft.ApiManagement/preview/2023-09-01-preview/apimidentityprovider.json
   - Microsoft.ApiManagement/preview/2023-09-01-preview/apimissues.json
