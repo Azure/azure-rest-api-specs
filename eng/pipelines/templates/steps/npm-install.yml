@@ -14,6 +14,7 @@ steps:
   - script: npm install --force --no-package-lock
     displayName: npm ci
 
-  # - script: npm ls -a
-  #   displayName: npm ls -a
-  #   condition: succeededOrFailed()
+  - script: npm ls -a
+    displayName: npm ls -a
+    condition: succeededOrFailed()
+    continueOnError: true
