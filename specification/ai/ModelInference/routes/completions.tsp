@@ -29,7 +29,7 @@ op getChatCompletions is Azure.Core.RpcOperation<
 
     @doc("The JSON payload containing chat completion options.")
     @body
-    chatCompletionOptions: ChatCompletionsOptions;
+    chatCompletionsOptions: ChatCompletionsOptions;
   },
   ChatCompletions
 >;
