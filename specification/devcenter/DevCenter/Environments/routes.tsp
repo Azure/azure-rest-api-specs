@@ -44,7 +44,7 @@ interface Environments {
     EnvironmentListResult
   >;
 
-  @doc("Gets an environment")
+  @doc("Gets an environment.")
   getEnvironmentByUser is StandardResourceOperations.ResourceRead<Environment>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
@@ -84,6 +84,10 @@ interface Environments {
     }
   >;
 
+  @doc("Partially updates an environment.")
+  @added(APIVersions.v2024_02_01)
+  patchEnvironment is StandardResourceOperations.ResourceUpdate<Environment>;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
   //Can not use LongRunningResourceDelete because response is 202 or error, but we also accept 204 response"
   @doc("Deletes an environment and all its associated resources")
@@ -122,10 +126,309 @@ interface Environments {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Missing key"
+  @doc("Gets Outputs from the environment.")
+  @route("/projects/{projectName}/users/{userId}/environments/{environmentName}/outputs")
+  @get
+  @added(APIVersions.v2024_02_01)
+  getOutputs is Azure.Core.Foundations.Operation<
+    {
+      @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      projectName: string;
+
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+      @maxLength(36)
+      @minLength(2)
+      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
+      @path
+      userId: string;
+
+      @doc("The name of the environment.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      environmentName: string;
+    },
+    EnvironmentOutputs
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Missing key"
+  @doc("Lists operations on the environment which have occurred within the past 90 days")
+  @route("/projects/{projectName}/users/{userId}/environments/{environmentName}/operations")
+  @get
+  @added(APIVersions.v2024_02_01)
+  listOperations is Azure.Core.Foundations.Operation<
+    {
+      @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
+      @query("top")
+      top?: int32;
+
+      @doc("An OData filter clause to apply to the operation.")
+      @query("filter")
+      filter?: string;
+
+      @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      projectName: string;
+
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+      @maxLength(36)
+      @minLength(2)
+      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
+      @path
+      userId: string;
+
+      @doc("The name of the environment.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      environmentName: string;
+    },
+    EnvironmentOperationListResult
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Missing key"
+  @doc("Gets an environment action result.")
+  @route("/projects/{projectName}/users/{userId}/environments/{environmentName}/operations/{operationId}")
+  @get
+  @added(APIVersions.v2024_02_01)
+  getOperation is Azure.Core.Foundations.Operation<
+    {
+      @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      projectName: string;
+
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+      @maxLength(36)
+      @minLength(2)
+      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
+      @path
+      userId: string;
+
+      @doc("The name of the environment.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      environmentName: string;
+
+      @doc("The id of the operation on an environment.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      operationId: string;
+    },
+    EnvironmentOperation
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Missing key"
+  @doc("Gets the logs for an operation on an environment.")
+  @route("/projects/{projectName}/users/{userId}/environments/{environmentName}/operations/{operationId}/logs")
+  @get
+  @added(APIVersions.v2024_02_01)
+  getLogsByOperation is Azure.Core.Foundations.Operation<
+    {
+      @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      projectName: string;
+
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+      @maxLength(36)
+      @minLength(2)
+      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
+      @path
+      userId: string;
+
+      @doc("The name of the environment.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      environmentName: string;
+
+      @doc("The id of the operation on an environment.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      operationId: string;
+
+      @doc("Accept header")
+      @header
+      accept: "text/plain";
+    },
+    void
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Missing key"
+  @doc("Get all scheduled actions for a user within an environment.")
+  @route("/projects/{projectName}/users/{userId}/environments/{environmentName}/actions")
+  @get
+  @added(APIVersions.v2024_02_01)
+  listActions is Azure.Core.Foundations.Operation<
+    {
+      @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      projectName: string;
+
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+      @maxLength(36)
+      @minLength(2)
+      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
+      @path
+      userId: string;
+
+      @doc("The name of the environment.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      environmentName: string;
+    },
+    EnvironmentActionsListResult
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Missing key"
+  @doc("Retrieve a specific environment action.")
+  @route("/projects/{projectName}/users/{userId}/environments/{environmentName}/actions/{actionName}")
+  @get
+  @added(APIVersions.v2024_02_01)
+  getAction is Azure.Core.Foundations.Operation<
+    {
+      @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      projectName: string;
+
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+      @maxLength(36)
+      @minLength(2)
+      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
+      @path
+      userId: string;
+
+      @doc("The name of the environment.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      environmentName: string;
+
+      @doc("The name of an action that will take place on an Environment.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      actionName: string;
+    },
+    EnvironmentAction
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Missing key"
+  @doc("Skips an occurrence of an action.")
+  @route("/projects/{projectName}/users/{userId}/environments/{environmentName}/actions/{actionName}:skip")
+  @post
+  @added(APIVersions.v2024_02_01)
+  skipAction is Azure.Core.Foundations.Operation<
+    {
+      @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      projectName: string;
+
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+      @maxLength(36)
+      @minLength(2)
+      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
+      @path
+      userId: string;
+
+      @doc("The name of the environment.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      environmentName: string;
+
+      @doc("The name of an action that will take place on an Environment.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      actionName: string;
+    },
+    void
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Missing key"
+  @doc("Delays the occurrence of an action.")
+  @route("/projects/{projectName}/users/{userId}/environments/{environmentName}/actions/{actionName}:delay")
+  @post
+  @added(APIVersions.v2024_02_01)
+  delayAction is Azure.Core.Foundations.Operation<
+    {
+      @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      projectName: string;
+
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+      @maxLength(36)
+      @minLength(2)
+      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
+      @path
+      userId: string;
+
+      @doc("The name of the environment.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      environmentName: string;
+
+      @doc("The name of an action that will take place on an Environment.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @path
+      actionName: string;
+
+      @doc("The time to delay the Environment action until.")
+      @query("until")
+      until: utcDateTime;
+    },
+    EnvironmentAction
+  >;
+
   @doc("Lists all of the catalogs available for a project.")
   listCatalogsByProject is StandardResourceOperations.ResourceList<Catalog>;
 
-  @doc("Gets the specified catalog within the project")
+  @doc("Gets the specified catalog within the project.")
   getCatalog is StandardResourceOperations.ResourceRead<Catalog>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern since EnvironmentDefinition has a different path"

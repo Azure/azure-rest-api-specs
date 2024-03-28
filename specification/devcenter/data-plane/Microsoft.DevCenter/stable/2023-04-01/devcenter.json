@@ -227,7 +227,7 @@
     "/projects/{projectName}/catalogs/{catalogName}": {
       "get": {
         "operationId": "Environments_GetCatalog",
-        "description": "Gets the specified catalog within the project",
+        "description": "Gets the specified catalog within the project.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -593,7 +593,7 @@
     "/projects/{projectName}/pools": {
       "get": {
         "operationId": "DevBoxes_ListPools",
-        "description": "Lists available pools",
+        "description": "Lists available pools.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -642,7 +642,7 @@
     "/projects/{projectName}/pools/{poolName}": {
       "get": {
         "operationId": "DevBoxes_GetPool",
-        "description": "Gets a pool",
+        "description": "Gets a pool.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -695,7 +695,7 @@
     "/projects/{projectName}/pools/{poolName}/schedules": {
       "get": {
         "operationId": "DevBoxes_ListSchedulesByPool",
-        "description": "Lists available schedules for a pool.",
+        "description": "Lists all schedules within a pool that are configured by your project administrator.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -703,7 +703,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "Name of the project",
+            "description": "The DevCenter Project upon which to execute operations.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -713,9 +713,12 @@
           {
             "name": "poolName",
             "in": "path",
-            "description": "Pool name",
+            "description": "The DevCenter Project upon which to execute operations.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           }
         ],
         "responses": {
@@ -864,7 +867,7 @@
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}": {
       "get": {
         "operationId": "DevBoxes_GetDevBoxByUser",
-        "description": "Gets a Dev Box",
+        "description": "Gets a Dev Box.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1078,7 +1081,7 @@
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:start": {
       "post": {
         "operationId": "DevBoxes_StartDevBox",
-        "description": "Starts a Dev Box",
+        "description": "Starts a Dev Box.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1152,7 +1155,7 @@
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:stop": {
       "post": {
         "operationId": "DevBoxes_StopDevBox",
-        "description": "Stops a Dev Box",
+        "description": "Stops a Dev Box.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1233,7 +1236,7 @@
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:restart": {
       "post": {
         "operationId": "DevBoxes_RestartDevBox",
-        "description": "Restarts a Dev Box",
+        "description": "Restarts a Dev Box.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1688,7 +1691,7 @@
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/remoteConnection": {
       "get": {
         "operationId": "DevBoxes_GetRemoteConnection",
-        "description": "Gets RDP Connection info",
+        "description": "Gets RDP Connection info.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1798,7 +1801,7 @@
     "/projects/{projectName}/users/{userId}/environments/{environmentName}": {
       "get": {
         "operationId": "Environments_GetEnvironmentByUser",
-        "description": "Gets an environment",
+        "description": "Gets an environment.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2050,7 +2053,8 @@
       "type": "string",
       "description": "DevCenter API versions",
       "enum": [
-        "2023-04-01"
+        "2023-04-01",
+        "2024-02-01"
       ],
       "x-ms-enum": {
         "name": "APIVersions",
@@ -2060,6 +2064,11 @@
             "name": "v2023_04_01",
             "value": "2023-04-01",
             "description": "The 2023-04-01 service API version"
+          },
+          {
+            "name": "v2024_02_01",
+            "value": "2024-02-01",
+            "description": "The 2024-02-01 service API version"
           }
         ]
       }
@@ -2277,7 +2286,7 @@
         },
         "sourceId": {
           "type": "string",
-          "description": "The id of the resource which triggered this action"
+          "description": "The id of the resource which triggered this action."
         },
         "suspendedUntil": {
           "type": "string",
@@ -2622,6 +2631,10 @@
         "type",
         "required"
       ]
+    },
+    "EnvironmentPatchProperties": {
+      "type": "object",
+      "description": "Properties of an environment. These properties can be updated via PATCH after\nthe resource has been created."
     },
     "EnvironmentProvisioningState": {
       "type": "string",
@@ -3205,7 +3218,7 @@
     },
     "PagedSchedule": {
       "type": "object",
-      "description": "Paged collection of Schedule items",
+      "description": "The Schedule list result",
       "properties": {
         "value": {
           "type": "array",

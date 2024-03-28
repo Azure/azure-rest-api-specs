@@ -6,6 +6,7 @@ import "../main.tsp";
 using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace DevCenterService;
 
@@ -60,12 +61,50 @@ model OperationStatus {
   properties?: unknown;
 
   @doc("Operation Error message")
-  error?: Azure.Core.Foundations.Error;
+  @typeChangedFrom(APIVersions.v2024_02_01, Azure.Core.Foundations.Error)
+  error?: OperationStatusError;
+}
+
+@doc("Operation Error message")
+@added(APIVersions.v2024_02_01)
+model OperationStatusError{ 
+  @doc("The error code.")
+  code?: string;
+
+  @doc("The error message.")
+  message?: string;
+}
+
+@doc("An error response from the service.")
+@added(APIVersions.v2024_02_01)
+model CloudError{ 
+  @doc("Error body.")
+  error: CloudErrorBody
+}
+
+@doc("An error response from the service.")
+@added(APIVersions.v2024_02_01)
+model CloudErrorBody {
+  @doc("An identifier for the error. Codes are invariant and are intended to be consumed programmatically.")
+  code: string;
+
+  @doc("A message describing the error, intended to be suitable for display in a user interface.")
+  message: string;
+
+  @doc("The target of the particular error. For example, the name of the property in error.")
+  target?: string;
+
+  @doc("A list of additional details about the error.")
+  details?: CloudErrorBody[];
 }
 
 @doc("Project details.")
 @resource("projects")
 model Project {
+  @doc("The unique URI of the project.")
+  @added(APIVersions.v2024_02_01)
+  uri: string;
+
   @key("projectName")
   @doc("Name of the project")
   @minLength(3)
@@ -83,6 +122,10 @@ create across all pools in the project.
 """)
   @minValue(0)
   maxDevBoxesPerUser?: int32;
+
+  @doc("Display name of the pool.")
+  @added(APIVersions.v2024_02_01)
+  displayName?: string;
 }
 
 @doc("Project user")

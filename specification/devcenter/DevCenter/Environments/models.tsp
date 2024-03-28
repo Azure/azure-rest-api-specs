@@ -9,6 +9,69 @@ using TypeSpec.Http;
 
 namespace DevCenterService;
 
+@doc("Type of the output value")
+@added(APIVersions.v2024_02_01)
+union EnvironmentOutputType {
+  @doc("The output is an array of values.") 
+  array: "array",
+
+  @doc("The output is a boolean value.") 
+  boolean: "boolean",
+
+  @doc("The output is a number value.") 
+  number: "number",
+
+  @doc("The output is an object value.") 
+  object: "object",
+
+  @doc("The output is a string value.") 
+  string: "string",
+
+  string,
+}
+
+@doc("The type of environment operation.")
+@added(APIVersions.v2024_02_01)
+union EnvironmentOperationKind {
+  @doc("The operation represents a deployment.") 
+  Deploy: "Deploy",
+
+  @doc("The operation represents a delete.") 
+  Delete: "Delete",
+
+  string,
+}
+
+@doc("The status of an environment operation.")
+@added(APIVersions.v2024_02_01)
+union EnvironmentOperationStatus {
+  @doc("The operation has not started.") 
+  NotStarted: "NotStarted",
+
+  @doc("The operation is running.") 
+  Running: "Running",
+
+  @doc("The operation succeeded.") 
+  Succeeded: "Succeeded",
+
+  @doc("The operation was canceled.") 
+  Canceled: "Canceled",
+
+  @doc("he operation failed.") 
+  Failed: "Failed",
+
+  string,
+}
+
+@doc("The scheduled action types.")
+@added(APIVersions.v2024_02_01)
+union EnvironmentActionType {
+  @doc("The action will delete the environment and associated resources.") 
+  Delete: "Delete",
+
+  string,
+}
+
 @doc("The type of data a parameter accepts.")
 union ParameterType {
   @doc("The parameter accepts an array of values.") array: "array",
@@ -84,6 +147,10 @@ model EnvironmentListResult is Azure.Core.Page<Environment>;
 model Environment {
   ...EnvironmentUpdateProperties;
 
+  @doc("The unique URI of the environment")
+  @added(APIVersions.v2024_02_01)
+  uri: string;
+
   @doc("Environment name.")
   @key("environmentName")
   @minLength(3)
@@ -118,23 +185,130 @@ model Environment {
 
   @doc("Provisioning error details. Populated only for error states.")
   @visibility("read")
-  error?: Azure.Core.Foundations.Error;
+  @typeChangedFrom(APIVersions.v2024_02_01, Azure.Core.Foundations.Error)
+  error?: CloudErrorBody;
 }
 
 @doc("""
 Properties of an environment. These properties can be updated after the
 resource has been created.
 """)
-model EnvironmentUpdateProperties {
+model EnvironmentUpdateProperties is EnvironmentPatchProperties {
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "there is no build in type to describe object"
   @doc("Parameters object for the environment.")
   parameters?: Record<unknown>;
+}
+
+@doc("""
+Properties of an environment. These properties can be updated via PATCH after
+the resource has been created.
+""")
+model EnvironmentPatchProperties {
+  @added(APIVersions.v2024_02_01)
+  @doc("""
+  The time the expiration date will be triggered (UTC), after which the
+  environment and associated resources will be deleted.
+  """)
+  @added(APIVersions.v2024_02_01)
+  expirationDate?: utcDateTime;
+}
+
+@doc("Outputs from environment deployment.")
+@added(APIVersions.v2024_02_01)
+model EnvironmentOutputs {
+  @doc("The outputs Names and Values.")
+  outputs?: Record<EnvironmentOutput>;
+}
+
+@doc("Output from environment deployment.")
+@added(APIVersions.v2024_02_01)
+model EnvironmentOutput {
+  @doc("Type of the output value")
+  type?: EnvironmentOutputType;
+
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "there is no build in type to describe object"
+  @doc("The output value")
+  value?: Record<unknown>;
+
+  @doc("Indicates if the value is sensitive.")
+  sensitive?: boolean;
+}
+
+@doc("The action results list result.")
+@added(APIVersions.v2024_02_01)
+model EnvironmentOperationListResult is Azure.Core.Page<EnvironmentOperation>;
+
+@doc("Information about an operation on an environment.")
+@discriminator("kind")
+@added(APIVersions.v2024_02_01)
+model EnvironmentOperation {
+  @doc("The unique URI for the environment operation.")
+  uri: string;
+
+  @doc("Unique identifier for the environment operation.")
+  operationId: string;
+
+  @doc("The operation status.")
+  status: EnvironmentOperationStatus;
+
+  @doc("The object ID of the actor which initiated the operation.")
+  createdByObjectId?: string;
+
+  @doc("The time the operation started.")
+  startTime?: utcDateTime;
+
+  @doc("The time the operation finished.")
+  endTime?: utcDateTime;
+
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "there is no build in type to describe object"
+  @doc("Parameters object for the environment at the time of the operation.")
+  environmentParameters?: Record<unknown>;
+
+  @doc("Provisioning or operation error details. Populated only for error states.")
+  error?: CloudErrorBody;
+}
+
+@doc("The actions list result.")
+@added(APIVersions.v2024_02_01)
+model EnvironmentActionsListResult is Azure.Core.Page<EnvironmentAction>;
+
+@doc("An upcoming Environment Action.")
+@added(APIVersions.v2024_02_01)
+model EnvironmentAction {
+  @doc("Uniquely identifies the action.")
+  name?: string;
+
+  @doc("Uri of the action resource.")
+  uri?: string;
+
+  @doc("The action that will be taken.")
+  actionType: EnvironmentActionType;
+
+  @doc("Details about the next run of this action.")
+  next?: EnvironmentNextAction;
+
+  @doc("Object Id of the user who last modified the action.")
+  lastModifiedBy?: string;
+
+  @doc("Time the object was last modified.")
+  lastModifiedAt?: utcDateTime;
+}
+
+@doc("Details about the next run of an action.")
+@added(APIVersions.v2024_02_01)
+model EnvironmentNextAction {
+  @doc("The time the action will be triggered (UTC).")
+  scheduledTime?: utcDateTime;
 }
 
 @doc("A catalog.")
 @resource("catalogs")
 @parentResource(Project)
 model Catalog {
+  @doc("The unique URI of the catalog")
+  @added(APIVersions.v2024_02_01)
+  uri: string;
+
   @doc("Name of the catalog.")
   @key("catalogName")
   @minLength(3)
@@ -151,6 +325,10 @@ model EnvironmentDefinitionListResult is Azure.Core.Page<EnvironmentDefinition>;
 @resource("environmentDefinitions")
 @parentResource(Catalog)
 model EnvironmentDefinition {
+  @doc("The unique URI of the environment definition")
+  @added(APIVersions.v2024_02_01)
+  uri: string;
+
   @doc("The ID of the environment definition.")
   id: string;
 
@@ -218,6 +396,10 @@ model EnvironmentTypeListResult is Azure.Core.Page<EnvironmentType>;
 
 @doc("Properties of an environment type.")
 model EnvironmentType {
+  @doc("The unique URI of the environment type.")
+  @added(APIVersions.v2024_02_01)
+  uri: string;
+
   @doc("Name of the environment type")
   name: string;
 
@@ -230,4 +412,22 @@ or management group.
 
   @doc("Indicates whether this environment type is enabled for use in this project.")
   status: EnvironmentTypeEnableStatus;
+
+  @doc("Display name of the environment type.")
+  @added(APIVersions.v2024_02_01)
+  displayName?: string;
+}
+
+@doc("Information about a deploy operation on an environment.")
+@added(APIVersions.v2024_02_01)
+model EnvironmentDeployOperation extends EnvironmentOperation {
+  @doc("The kind of operation that occurred.")
+  kind: "Deploy";
+}
+
+@doc("Information about a delete operation on an environment.")
+@added(APIVersions.v2024_02_01)
+model EnvironmentDeleteOperation extends EnvironmentOperation {
+  @doc("The kind of operation that occurred.")
+  kind: "Delete";
 }
