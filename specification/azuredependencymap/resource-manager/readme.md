@@ -26,6 +26,7 @@ These are the global settings for the Dependency Map RP.
 
 ```yaml
 openapi-type: [[OpenApiType]]
+openapi-subtype: providerHub
 tag: package-[[Version]]
 ```
 
