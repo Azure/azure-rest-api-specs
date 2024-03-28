@@ -31,7 +31,7 @@ interface Sites {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Site>;
   update is ArmResourcePatchSync<Site, SiteProperties>;
   delete is ArmResourceDeleteSync<Site>;
-  listByResourceGroup is ArmResourceListByParent<Site>;
+  list is ArmResourceListByParent<Site>;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom operation on the scope of subscription"
