@@ -25,18 +25,18 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 These are the global settings for the Dependency Map RP.
 
 ```yaml
-openapi-type: [[OpenApiType]]
+openapi-type: arm
 openapi-subtype: providerHub
-tag: package-[[Version]]
+tag: package-2024-06-01-preview
 ```
 
-### Tag: package-[[Version]]
+### Tag: package-2024-06-01-preview
 
-These settings apply only when `--tag=package-[[Version]]` is specified on the command line.
+These settings apply only when `--tag=package-2024-06-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-[[Version]]'
+```yaml $(tag) == 'package-2024-06-01-preview'
 input-file:
-  - [[ResourceProviderName]]/[[ReleaseState]]/[[Version]]/[[ServiceName]].json
+  - Microsoft.DependencyMap/preview/2024-06-01-preview/dependencyMap.json
 ```
 
 ---
