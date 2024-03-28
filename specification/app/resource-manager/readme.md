@@ -65,6 +65,8 @@ input-file:
   - Microsoft.App/preview/2024-02-02-preview/Subscriptions.json
   - Microsoft.App/preview/2024-02-02-preview/Usages.json
   - Microsoft.App/preview/2024-02-02-preview/FunctionsExtension.json
+  - Microsoft.App/preview/2024-02-02-preview/SessionPools.json
+  - Microsoft.App/preview/2024-02-02-preview/Sessions.json
 directive:
   - suppress: PatchBodyParametersSchema
     from: JavaComponents.json
