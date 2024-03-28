@@ -15,10 +15,8 @@ using Azure.Core;
 })
 @versioned(ImageAnalysis.Versions)
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | AadTokenAuthFlow<
-  ["https://cognitiveservices.azure.com/.default"],
-  "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-  "https://login.microsoftonline.com/common/oauth2/v2.0/token">
+  ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | AadOauth2Auth<
+  ["https://cognitiveservices.azure.com/.default"]>
 )
 @server(
   "{endpoint}/computervision",
