@@ -2,34 +2,80 @@
   "title": "Registrations_CreateOrUpdateRegistration",
   "operationId": "Registrations_CreateOrUpdateRegistration",
   "parameters": {
-    "widgetName": "name1",
     "api-version": "2024-05-15-preview",
     "body": {
-      "manufacturerId": "manufacturer id1",
-      "sharedModel": {
-        "tag": "tag1",
-        "createdDate": "2023-01-09T02:12:25.689Z"
+      "name": "registration1",
+      "storage": {
+          "blobStorageEndpoint": "https://{storage-name}.blob.core.windows.net",
+          "inputContainerName": "input",
+          "outputContainerName": "output",
+          "processedContainerName": "processed",
+          "errorOutputContainerName": "errored"
+      },
+      "processing": {
+          "deliveryMode": "Push",
+          "subjectEndsWith": ".wav",
+          "systemTopicResourceId": "/subscriptions/{azure-subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.EventGrid/systemTopics/{system-topic-resource-name}"
+      },
+      "batchTranscription": {
+          "locale": "en-US",
+          "model": null,
+          "customDomain": "https://{custom-domain-name}.cognitiveservices.azure.com",
+          "transcriptionProperties": {
+              "wordLevelTimestampsEnabled": true,
+              "displayFormWordLevelTimestampsEnabled": false,
+              "channels": [
+                  0,
+                  1
+              ],
+              "punctuationMode": "DictatedAndAutomatic",
+              "profanityFilterMode": "Removed",
+              "diarizationEnabled": false,
+              "diarization": null,
+              "languageIdentification": null
+          }
+      },
+      "analytics": {
+          "endpoint": "https://{promptflow-online-endpoint}.westus.inference.ml.azure.com/score"
       }
     }
   },
   "responses": {
-    "200": {
-      "body": {
-        "name": "name1",
-        "manufacturerId": "manufacturer id1",
-        "sharedModel": {
-          "tag": "tag1",
-          "createdDate": "2023-01-09T02:12:25.689Z"
-        }
-      }
-    },
     "201": {
       "body": {
-        "name": "name1",
-        "manufacturerId": "manufacturer id1",
-        "sharedModel": {
-          "tag": "tag1",
-          "createdDate": "2023-01-09T02:12:25.689Z"
+        "name": "registration1",
+        "storage": {
+            "blobStorageEndpoint": "https://{storage-name}.blob.core.windows.net",
+            "inputContainerName": "input",
+            "outputContainerName": "output",
+            "processedContainerName": "processed",
+            "errorOutputContainerName": "errored"
+        },
+        "processing": {
+            "deliveryMode": "Push",
+            "subjectEndsWith": ".wav",
+            "systemTopicResourceId": "/subscriptions/{azure-subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.EventGrid/systemTopics/{system-topic-resource-name}"
+        },
+        "batchTranscription": {
+            "locale": "en-US",
+            "model": null,
+            "customDomain": "https://{custom-domain-name}.cognitiveservices.azure.com",
+            "transcriptionProperties": {
+                "wordLevelTimestampsEnabled": true,
+                "displayFormWordLevelTimestampsEnabled": false,
+                "channels": [
+                    0,
+                    1
+                ],
+                "punctuationMode": "DictatedAndAutomatic",
+                "profanityFilterMode": "Removed",
+                "diarizationEnabled": false,
+                "diarization": null,
+                "languageIdentification": null
+            }
+        },
+        "analytics": {
+            "endpoint": "https://{promptflow-online-endpoint}.westus.inference.ml.azure.com/score"
         }
       }
     }
