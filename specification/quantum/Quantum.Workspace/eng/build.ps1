@@ -109,6 +109,10 @@ Copying examples from $source to $newVersionExamples
         }
     }
 
+    RunAndCheck "prettify-tspconfig" $logDirectory {
+        npx prettier --write "tspconfig.yaml"
+    }
+
     RunAndCheck "tsp-compile" $logDirectory {
         tsp compile . --pretty --debug
     }
