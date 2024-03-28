@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "my-resource-group",
+    "api-version": "2024-03-01",
+    "parameters": {
+      "resources": [
+        "*"
+      ],
+      "options": "IncludeParameterDefaultValue,IncludeComments",
+      "outputFormat": "Bicep"
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/operationresults/c9bbccf4-e16a-4eb7-befb-2e2e5195c347?api-version=2018-08-01"
+      }
+    },
+    "200": {
+      "body": {
+        "output": "\nparam myResourceType_myFirstResource_name string = 'myFirstResource'\nparam myResourceType_mySecondResource_name string = 'mySecondResource'\n\n@secure()\nparam myResourceType_myFirstResource_secret string = null\n\nresource myResourceType_myFirstResource_name_resource 'My.RP/myResourceType@2019-01-01' = {\n  name: myResourceType_myFirstResource_name\n  location: 'West US'\n  properties: {\n    secret: myResourceType_myFirstResource_secret\n  }\n}\n\nresource myResourceType_mySecondResource_name_resource 'My.RP/myResourceType@2019-01-01' = {\n  name: myResourceType_mySecondResource_name\n  location: 'West US'\n  properties: {\n    customProperty: 'hello!'\n  }\n}\n",
+        "error": {
+          "code": "ExportTemplateCompletedWithErrors",
+          "message": "Export template operation completed with errors. Some resources were not exported. Please see details for more information.",
+          "details": []
+        }
+      }
+    }
+  }
+}

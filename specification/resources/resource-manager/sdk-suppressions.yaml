@@ -1,0 +1,9 @@
+suppressions:
+  azure-sdk-for-go:
+    - package: sdk/resourcemanager/resources/armresources
+      breaking-changes:
+        - Operation `*TagsClient.CreateOrUpdateAtScope` has been changed to LRO, use `*TagsClient.BeginCreateOrUpdateAtScope` instead.
+        - Operation `*TagsClient.DeleteAtScope` has been changed to LRO, use `*TagsClient.BeginDeleteAtScope` instead.
+        - Operation `*TagsClient.UpdateAtScope` has been changed to LRO, use `*TagsClient.BeginUpdateAtScope` instead.
+        - Type of `DeploymentProperties.Parameters` has been changed from `any` to `map[string]*DeploymentParameter`
+        - Type of `DeploymentWhatIfProperties.Parameters` has been changed from `any` to `map[string]*DeploymentParameter`
