@@ -4,15 +4,15 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 
 // operation overrides
-@@access(Azure.Batch.ListOperation, Access.internal, "java");
-@@access(Azure.Batch.ReadOperation, Access.internal, "java");
-@@access(Azure.Batch.DeleteOperation, Access.internal, "java");
-@@access(Azure.Batch.CreateOperation, Access.internal, "java");
-@@access(Azure.Batch.UpdateOperation, Access.internal, "java");
-@@access(Azure.Batch.ReplaceOperation, Access.internal, "java");
-@@access(Azure.Batch.PostOperation, Access.internal, "java");
-@@access(Azure.Batch.ResourceInfoOperation, Access.internal, "java");
-@@access(Azure.Batch.ResourceInfoOperationWithAdditionalResponse,
+@@access(Azure.Batch.BatchApi.ListOperation, Access.internal, "java");
+@@access(Azure.Batch.BatchApi.ReadOperation, Access.internal, "java");
+@@access(Azure.Batch.BatchApi.DeleteOperation, Access.internal, "java");
+@@access(Azure.Batch.BatchApi.CreateOperation, Access.internal, "java");
+@@access(Azure.Batch.BatchApi.UpdateOperation, Access.internal, "java");
+@@access(Azure.Batch.BatchApi.ReplaceOperation, Access.internal, "java");
+@@access(Azure.Batch.BatchApi.PostOperation, Access.internal, "java");
+@@access(Azure.Batch.BatchApi.ResourceInfoOperation, Access.internal, "java");
+@@access(Azure.Batch.BatchApi.ResourceInfoOperationWithAdditionalResponse,
   Access.internal,
   "java"
 );
