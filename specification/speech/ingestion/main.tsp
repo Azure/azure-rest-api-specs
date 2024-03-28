@@ -19,8 +19,8 @@ using Azure.Core;
 @service({
   title: "Speech Ingestion service",
 })
-@versioned(SpeechIngestion.Versions)
-namespace SpeechIngestion;
+@versioned(Microsoft.CognitiveServices.Speech.Ingestion.Versions)
+namespace Microsoft.CognitiveServices.Speech.Ingestion;
 
 @doc("The SpeechIngestion service versions.")
 enum Versions {
