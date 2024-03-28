@@ -52,15 +52,12 @@ model AutoUpgradeProfileProperties {
   @doc("The resource id of the UpdateStrategy resource to reference. If not specified, the auto upgrade will run on all clusters which are members of the fleet.")
   updateStrategyId?: FleetUpdateStrategyResourceId;
 
-  @visibility("create", "read")
   @doc("Configures how auto-upgrade will be run.")
   channel: UpgradeChannel;
 
-  @visibility("create", "read")
   @doc("The node image upgrade to be applied to the target clusters in auto upgrade.")
   nodeImageSelection?: NodeImageSelection;
 
-  @visibility("create", "read")
   @doc("""
     If set to False: the auto upgrade has effect - target managed clusters will be upgraded on schedule.
     If set to True: the auto upgrade has no effect - no upgrade will be run on the target managed clusters.
