@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "Endpoint": "https://eastus.api.cognitive.microsoft.com/",
+    "Ocp-Apim-Subscription-Key": "{API Key}",
+    "api-version": "2024-04-01",
+    "id": "my-batch-synthesis-job-text-input-1",
+    "Operation-Id": "06c7f835-e07b-4ac8-b33c-5b6df4a4eeef",
+    "definition": {
+      "inputKind": "PlainText",
+      "synthesisConfig": {
+        "voice": "en-US-JennyNeural"
+      },
+      "inputs": [
+        {
+          "content": "The rainbow has seven colors."
+        }
+      ]
+    },
+    "Content-Type": "application/json"
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "operation-location": "https://eastus.api.cognitive.microsoft.com/texttospeech/operations/06c7f835-e07b-4ac8-b33c-5b6df4a4eeef?api-version=2024-04-01",
+        "operation-id": "06c7f835-e07b-4ac8-b33c-5b6df4a4eeef"
+      },
+      "body": {
+        "id": "my-batch-synthesis-job-text-input-1",
+        "status": "NotStarted",
+        "createdDateTime": "2024-03-15T06:19:18.0059236Z",
+        "lastActionDateTime": "2024-03-15T06:19:18.0059238Z",
+        "inputKind": "PlainText",
+        "customVoices": {},
+        "properties": {
+          "timeToLiveInHours": 744,
+          "outputFormat": "riff-24khz-16bit-mono-pcm",
+          "concatenateResult": false,
+          "decompressOutputFiles": false,
+          "wordBoundaryEnabled": false,
+          "sentenceBoundaryEnabled": false
+        },
+        "synthesisConfig": {
+          "voice": "en-US-JennyNeural"
+        }
+      }
+    }
+  }
+}
