@@ -1,19 +1,27 @@
-function Get-NewTagSection($apiVersion, $resourceProvider, $apiVersionStatus, $specFiles) {
-    return @"
-### Tag: package-$apiVersion
+function Get-NewTagSection($apiVersion, $resourceProvider, $apiVersionStatus, $specFiles, $resourceProviderInnerFolder = $null) {
 
-These settings apply only when ``--tag=package-$apiVersion`` is specified on the command line.
+    $tagVersion = $apiVersion -match '(?<date>\d{4}-\d{2})-\d{2}' 
+    $tagVersion = $Matches['date']
+    $baseDir = if ($resourceProviderInnerFolder) 
+    { "$resourceProvider/$resourceProviderInnerFolder/$apiVersionStatus/$apiVersion" } 
+    else { "$resourceProvider/$apiVersionStatus/$apiVersion" }
+    
+    $content = @"
+### Tag: package-$(If($apiVersionStatus -eq "preview"){"preview-"})$tagVersion
 
-```````yaml `$(tag) == 'package-$apiVersion'
+These settings apply only when ``--tag=package-$(If($apiVersionStatus -eq "preview"){"preview-"})$tagVersion`` is specified on the command line.
+
+```````yaml `$(tag) == 'package-$(If($apiVersionStatus -eq "preview"){"preview-"})$tagVersion'`
 input-file:
-$(
-foreach ($specFile in $specFiles) {
-    "  - $resourceProvider/$apiVersionStatus/$apiVersion/$specFile"
-}
-)
-```````
-
 "@
+
+    foreach ($specFile in $specFiles) {
+        $content += "`n  - $baseDir/$specFile"
+    }
+
+    $content += "`n```````n"
+
+    return $content
 }
 
 function Get-ReadmeWithNewTag($readmeContent, $tagContent) {
@@ -22,7 +30,7 @@ function Get-ReadmeWithNewTag($readmeContent, $tagContent) {
 
 function Get-ReadmeWithLatestTag($readmeContent, $newApiVersion ) {
     # Get the current tag date
-    $currentTag = $readmeContent -match '(openapi-type:.*\n+tag:\s*)(?<version>package-.*)'
+    $currentTag = $readmeContent -match '(openapi-type:.*\s+tag:\s*)(?<version>package-.*)'
     $currentTag = $Matches['version']
     $latestVersionDate = if ($currentTag -match '(\d{4})-(\d{2})-?(\d{0,2}).*') { 
         if ($Matches[3] -eq '') { $Matches[3] = '01' }
@@ -46,7 +54,10 @@ function Get-ReadmeWithLatestTag($readmeContent, $newApiVersion ) {
     # Compare two dates
     if ( $newVersionDate -gt $latestVersionDate) {    
         if ($readmeFile) {
-            return $readmeContent -replace '(openapi-type:.*\n+tag:\s*)(package-.*)', "`$1package-$newApiVersion" 
+            $tagVersion = $newApiVersion -match '(?<date>\d{4}-\d{2})-\d{2}(-(?<preview>preview))?'
+            $tagVersion = $Matches['date']
+            $isPreview = $Matches['preview']
+            return $readmeContent -replace '(openapi-type:.*\n+tag:\s*)(package-.*)', "`$1package-$(if($isPreview -eq "preview"){"preview-"})$tagVersion" 
         }
     }
     return ""
