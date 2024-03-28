@@ -206,6 +206,12 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
           }
         ],
         "responses": {
@@ -472,6 +478,12 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
           }
         ],
         "responses": {
@@ -513,6 +525,12 @@
           "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
         },
         {
+          "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
+        },
+        {
+          "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+        },
+        {
           "in": "path",
           "name": "agentResourceName",
           "description": "Business Application Agent Name",
@@ -538,7 +556,7 @@
           "SystemsActions"
         ],
         "operationId": "Systems_ListActions",
-        "description": "List of pending actions for a business application system.",
+        "description": "List of actions for a business application system.",
         "responses": {
           "200": {
             "description": "List actions for a business application system",
@@ -900,7 +918,7 @@
       }
     },
     "ListActionsResponse": {
-      "description": "List all pending actions for a system to perform.",
+      "description": "List all actions for a system to perform.",
       "properties": {
         "value": {
           "description": "Array of actions.",
