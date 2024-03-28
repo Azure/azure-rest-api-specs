@@ -39,6 +39,11 @@ model EmbeddingsOptions {
     """)
   input: string[];
 
+  @encodedName("application/json", "encoding_format")
+  @added(ServiceApiVersions.v2024_03_01_Preview)
+  @doc("The response encoding format to use for embedding data.")
+  encodingFormat?: EmbeddingEncodingFormat = EmbeddingEncodingFormat.float;
+
   @added(ServiceApiVersions.v2024_03_01_Preview)
   @doc("The number of dimensions the resulting output embeddings should have. Only supported in `text-embedding-3` and later models.")
   dimensions?: int32;
