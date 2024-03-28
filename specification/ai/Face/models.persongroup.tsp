@@ -23,13 +23,13 @@ model BasePersonGroupPerson {
   @key
   @visibility("read")
   @doc("ID of the person.")
-  personId: string;
+  personId: uuid;
 
   ...UserDefinedFields;
 
   @doc("Face ids of registered faces in the person.")
   @visibility("read")
-  persistedFaceIds?: string[];
+  persistedFaceIds?: uuid[];
 }
 
 @resource("persongroups")
@@ -38,7 +38,7 @@ model PersonGroup is BasePersonGroup {
   @key
   @visibility("read")
   @doc("ID of the container.")
-  personGroupId: string;
+  personGroupId: groupId;
 }
 
 @parentResource(PersonGroup)
@@ -55,7 +55,7 @@ model LargePersonGroup is BasePersonGroup {
   @key
   @visibility("read")
   @doc("ID of the container.")
-  largePersonGroupId: string;
+  largePersonGroupId: groupId;
 }
 
 @parentResource(LargePersonGroup)

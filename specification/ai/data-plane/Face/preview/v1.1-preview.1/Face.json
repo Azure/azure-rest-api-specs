@@ -644,7 +644,10 @@
             "in": "path",
             "description": "ID of the dynamic person group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           }
         ],
         "responses": {
@@ -686,7 +689,10 @@
             "in": "path",
             "description": "ID of the dynamic person group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "resource",
@@ -744,7 +750,10 @@
             "in": "path",
             "description": "ID of the dynamic person group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "resource",
@@ -802,7 +811,10 @@
             "in": "path",
             "description": "ID of the dynamic person group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           }
         ],
         "responses": {
@@ -851,7 +863,10 @@
             "in": "path",
             "description": "ID of the dynamic person group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "$ref": "#/parameters/ListRequestOptions.start"
@@ -943,7 +958,10 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "$ref": "#/parameters/ReturnRecognitionModelOptions"
@@ -988,7 +1006,10 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "resource",
@@ -1035,7 +1056,10 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "body",
@@ -1081,7 +1105,10 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           }
         ],
         "responses": {
@@ -1125,7 +1152,10 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "$ref": "#/parameters/AddFaceOptions.targetFace"
@@ -1188,14 +1218,20 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "persistedFaceId",
             "in": "path",
             "description": "Face ID of the face.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -1239,7 +1275,7 @@
               "type": "object",
               "properties": {
                 "faceId": {
-                  "type": "string",
+                  "$ref": "#/definitions/uuid",
                   "description": "faceId of the query face. User needs to call Face - Detect first to get a valid faceId. Note that this faceId is not persisted and will expire 24 hours after the detection call."
                 },
                 "maxNumOfCandidatesReturned": {
@@ -1255,7 +1291,7 @@
                   "type": "array",
                   "description": "An array of candidate faceIds. All of them are created by Face - Detect and the faceIds will expire 24 hours after the detection call. The number of faceIds is limited to 1000.",
                   "items": {
-                    "type": "string"
+                    "$ref": "#/definitions/uuid"
                   }
                 }
               },
@@ -1317,7 +1353,7 @@
                   "type": "array",
                   "description": "Array of candidate faceId created by Face - Detect. The maximum is 1000 faces.",
                   "items": {
-                    "type": "string"
+                    "$ref": "#/definitions/uuid"
                   }
                 }
               },
@@ -1376,7 +1412,7 @@
                   "minItems": 1,
                   "maxItems": 10,
                   "items": {
-                    "type": "string"
+                    "$ref": "#/definitions/uuid"
                   }
                 },
                 "personGroupId": {
@@ -1499,7 +1535,10 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "$ref": "#/parameters/ReturnRecognitionModelOptions"
@@ -1544,7 +1583,10 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "resource",
@@ -1591,7 +1633,10 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "body",
@@ -1638,7 +1683,10 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           }
         ],
         "responses": {
@@ -1679,7 +1727,10 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "$ref": "#/parameters/ListRequestOptions.start"
@@ -1734,7 +1785,10 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "$ref": "#/parameters/AddFaceOptions.targetFace"
@@ -1796,14 +1850,20 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "persistedFaceId",
             "in": "path",
             "description": "Face ID of the face.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -1844,14 +1904,20 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "persistedFaceId",
             "in": "path",
             "description": "Face ID of the face.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "resource",
@@ -1898,14 +1964,20 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "persistedFaceId",
             "in": "path",
             "description": "Face ID of the face.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -1946,7 +2018,10 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           }
         ],
         "responses": {
@@ -1994,7 +2069,10 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           }
         ],
         "responses": {
@@ -2087,7 +2165,10 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "$ref": "#/parameters/ReturnRecognitionModelOptions"
@@ -2132,7 +2213,10 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "resource",
@@ -2179,7 +2263,10 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "body",
@@ -2225,7 +2312,10 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           }
         ],
         "responses": {
@@ -2266,7 +2356,10 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "$ref": "#/parameters/ListRequestOptions.start"
@@ -2318,7 +2411,10 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "body",
@@ -2369,14 +2465,20 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -2417,14 +2519,20 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "body",
@@ -2470,14 +2578,20 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -2521,14 +2635,20 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "$ref": "#/parameters/AddFaceOptions.targetFace"
@@ -2590,21 +2710,30 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "persistedFaceId",
             "in": "path",
             "description": "Face ID of the face.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -2645,21 +2774,30 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "persistedFaceId",
             "in": "path",
             "description": "Face ID of the face.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "resource",
@@ -2707,21 +2845,30 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "persistedFaceId",
             "in": "path",
             "description": "Face ID of the face.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -2762,7 +2909,10 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           }
         ],
         "responses": {
@@ -2811,7 +2961,10 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           }
         ],
         "responses": {
@@ -2854,7 +3007,10 @@
             "in": "path",
             "description": "Operation ID of the operation.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -2947,7 +3103,10 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "$ref": "#/parameters/ReturnRecognitionModelOptions"
@@ -2992,7 +3151,10 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "resource",
@@ -3039,7 +3201,10 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "body",
@@ -3085,7 +3250,10 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           }
         ],
         "responses": {
@@ -3126,7 +3294,10 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "$ref": "#/parameters/ListRequestOptions.start"
@@ -3178,7 +3349,10 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "body",
@@ -3229,14 +3403,20 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -3277,14 +3457,20 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "body",
@@ -3330,14 +3516,20 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -3381,14 +3573,20 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "$ref": "#/parameters/AddFaceOptions.targetFace"
@@ -3450,21 +3648,30 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "persistedFaceId",
             "in": "path",
             "description": "Face ID of the face.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -3505,21 +3712,30 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "persistedFaceId",
             "in": "path",
             "description": "Face ID of the face.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "resource",
@@ -3567,21 +3783,30 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "persistedFaceId",
             "in": "path",
             "description": "Face ID of the face.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -3622,7 +3847,10 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           }
         ],
         "responses": {
@@ -3670,7 +3898,10 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           }
         ],
         "responses": {
@@ -3815,7 +4046,10 @@
             "in": "path",
             "description": "Person ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -3856,7 +4090,10 @@
             "in": "path",
             "description": "Person ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "body",
@@ -3902,7 +4139,10 @@
             "in": "path",
             "description": "Person ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -3951,7 +4191,10 @@
             "in": "path",
             "description": "Person ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "$ref": "#/parameters/ListRequestOptions.start"
@@ -4000,7 +4243,10 @@
             "in": "path",
             "description": "Person ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "recognitionModel",
@@ -4084,7 +4330,10 @@
             "in": "path",
             "description": "Person ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "recognitionModel",
@@ -4197,7 +4446,10 @@
             "in": "path",
             "description": "Person ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "recognitionModel",
@@ -4243,7 +4495,10 @@
             "in": "path",
             "description": "Face ID of the face.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -4284,7 +4539,10 @@
             "in": "path",
             "description": "Person ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "recognitionModel",
@@ -4330,7 +4588,10 @@
             "in": "path",
             "description": "Face ID of the face.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "resource",
@@ -4378,7 +4639,10 @@
             "in": "path",
             "description": "Person ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "recognitionModel",
@@ -4424,7 +4688,10 @@
             "in": "path",
             "description": "Face ID of the face.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           }
         ],
         "responses": {
@@ -4476,11 +4743,11 @@
               "type": "object",
               "properties": {
                 "faceId1": {
-                  "type": "string",
+                  "$ref": "#/definitions/uuid",
                   "description": "faceId of one face, comes from Face - Detect."
                 },
                 "faceId2": {
-                  "type": "string",
+                  "$ref": "#/definitions/uuid",
                   "description": "faceId of another face, comes from Face - Detect."
                 }
               },
@@ -4659,7 +4926,10 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "$ref": "#/parameters/AddFaceOptions.targetFace"
@@ -4733,7 +5003,7 @@
               "type": "object",
               "properties": {
                 "faceId": {
-                  "type": "string",
+                  "$ref": "#/definitions/uuid",
                   "description": "faceId of the query face. User needs to call Face - Detect first to get a valid faceId. Note that this faceId is not persisted and will expire 24 hours after the detection call."
                 },
                 "maxNumOfCandidatesReturned": {
@@ -4805,7 +5075,7 @@
               "type": "object",
               "properties": {
                 "faceId": {
-                  "type": "string",
+                  "$ref": "#/definitions/uuid",
                   "description": "faceId of the query face. User needs to call Face - Detect first to get a valid faceId. Note that this faceId is not persisted and will expire 24 hours after the detection call."
                 },
                 "maxNumOfCandidatesReturned": {
@@ -4882,7 +5152,7 @@
                   "minItems": 1,
                   "maxItems": 10,
                   "items": {
-                    "type": "string"
+                    "$ref": "#/definitions/uuid"
                   }
                 },
                 "dynamicPersonGroupId": {
@@ -4964,7 +5234,7 @@
                   "minItems": 1,
                   "maxItems": 10,
                   "items": {
-                    "type": "string"
+                    "$ref": "#/definitions/uuid"
                   }
                 },
                 "largePersonGroupId": {
@@ -5046,7 +5316,7 @@
                   "minItems": 1,
                   "maxItems": 10,
                   "items": {
-                    "type": "string"
+                    "$ref": "#/definitions/uuid"
                   }
                 },
                 "personIds": {
@@ -5055,7 +5325,7 @@
                   "minItems": 1,
                   "maxItems": 30,
                   "items": {
-                    "type": "string"
+                    "$ref": "#/definitions/uuid"
                   }
                 },
                 "maxNumOfCandidatesReturned": {
@@ -5125,7 +5395,10 @@
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "$ref": "#/parameters/AddFaceOptions.targetFace"
@@ -5196,14 +5469,20 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "$ref": "#/parameters/AddFaceOptions.targetFace"
@@ -5274,14 +5553,20 @@
             "in": "path",
             "description": "ID of the container.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+"
           },
           {
             "name": "personId",
             "in": "path",
             "description": "ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "$ref": "#/parameters/AddFaceOptions.targetFace"
@@ -5352,7 +5637,10 @@
             "in": "path",
             "description": "Person ID of the person.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 64,
+            "pattern": "^[a-z0-9-_]+$"
           },
           {
             "name": "recognitionModel",
@@ -5477,7 +5765,7 @@
               "type": "object",
               "properties": {
                 "faceId": {
-                  "type": "string",
+                  "$ref": "#/definitions/uuid",
                   "description": "faceId of the face, comes from Face - Detect."
                 },
                 "largePersonGroupId": {
@@ -5485,7 +5773,7 @@
                   "description": "Using existing largePersonGroupId and personId for fast loading a specified person. largePersonGroupId is created in LargePersonGroup - Create."
                 },
                 "personId": {
-                  "type": "string",
+                  "$ref": "#/definitions/uuid",
                   "description": "Specify a certain person in large person group."
                 }
               },
@@ -5541,7 +5829,7 @@
               "type": "object",
               "properties": {
                 "faceId": {
-                  "type": "string",
+                  "$ref": "#/definitions/uuid",
                   "description": "faceId of the face, comes from Face - Detect."
                 },
                 "personId": {
@@ -5600,7 +5888,7 @@
               "type": "object",
               "properties": {
                 "faceId": {
-                  "type": "string",
+                  "$ref": "#/definitions/uuid",
                   "description": "faceId of the face, comes from Face - Detect."
                 },
                 "personGroupId": {
@@ -5608,7 +5896,7 @@
                   "description": "Using existing personGroupId and personId for fast loading a specified person. personGroupId is created in PersonGroup - Create."
                 },
                 "personId": {
-                  "type": "string",
+                  "$ref": "#/definitions/uuid",
                   "description": "Specify a certain person in person group."
                 }
               },
@@ -5705,7 +5993,7 @@
       "description": "Response body for adding face.",
       "properties": {
         "persistedFaceId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "persistedFaceId of the added face, which is persisted and will not expire. Different from faceId which is created in Face - Detect and will expire in 24 hours after the detection call."
         }
       },
@@ -5875,12 +6163,13 @@
           "type": "array",
           "description": "Array of personIds created by PersonDirectory Person - Create to add.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/uuid"
           }
         },
         "name": {
           "type": "string",
           "description": "User defined name, maximum length is 128.",
+          "minLength": 1,
           "maxLength": 128
         },
         "userData": {
@@ -5898,7 +6187,7 @@
       "description": "Response of create person.",
       "properties": {
         "personId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "Person ID of the person."
         }
       },
@@ -5911,13 +6200,14 @@
       "description": "A container that references PersonDirectory Person - Create.",
       "properties": {
         "dynamicPersonGroupId": {
-          "type": "string",
+          "$ref": "#/definitions/groupId",
           "description": "ID of the dynamic person group.",
           "readOnly": true
         },
         "name": {
           "type": "string",
           "description": "User defined name, maximum length is 128.",
+          "minLength": 1,
           "maxLength": 128
         },
         "userData": {
@@ -6053,7 +6343,7 @@
       "description": "Response for detect API.",
       "properties": {
         "faceId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "Unique faceId of the detected face, created by detection API and it will expire 24 hours after the detection call. To return this, it requires 'returnFaceId' parameter to be true."
         },
         "recognitionModel": {
@@ -6227,6 +6517,7 @@
         "name": {
           "type": "string",
           "description": "User defined name, maximum length is 128.",
+          "minLength": 1,
           "maxLength": 128
         },
         "userData": {
@@ -6272,7 +6563,7 @@
           }
         },
         "faceListId": {
-          "type": "string",
+          "$ref": "#/definitions/groupId",
           "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
           "readOnly": true
         },
@@ -6296,7 +6587,7 @@
       "description": "Face resource for face list.",
       "properties": {
         "persistedFaceId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "Face ID of the face.",
           "readOnly": true
         },
@@ -6317,6 +6608,7 @@
         "name": {
           "type": "string",
           "description": "User defined name, maximum length is 128.",
+          "minLength": 1,
           "maxLength": 128
         },
         "userData": {
@@ -6362,7 +6654,7 @@
           }
         },
         "faceListId": {
-          "type": "string",
+          "$ref": "#/definitions/groupId",
           "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64."
         }
       },
@@ -6376,7 +6668,7 @@
       "description": "Long running operation resource for person directory.",
       "properties": {
         "operationId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "Operation ID of the operation.",
           "readOnly": true
         },
@@ -6535,11 +6827,11 @@
           "maximum": 1
         },
         "faceId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "faceId of candidate face when find by faceIds. faceId is created by Face - Detect and will expire 24 hours after the detection call."
         },
         "persistedFaceId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "persistedFaceId of candidate face when find by faceListId or largeFaceListId. persistedFaceId in face list/large face list is persisted and will not expire."
         }
       },
@@ -6593,7 +6885,7 @@
           "items": {
             "type": "array",
             "items": {
-              "type": "string"
+              "$ref": "#/definitions/uuid"
             }
           },
           "x-ms-identifiers": []
@@ -6602,7 +6894,7 @@
           "type": "array",
           "description": "Face ids array of faces that cannot find any similar faces from original faces.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/uuid"
           }
         }
       },
@@ -6753,7 +7045,7 @@
       "description": "Candidate for identify call.",
       "properties": {
         "personId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "personId of candidate person."
         },
         "confidence": {
@@ -6774,7 +7066,7 @@
       "description": "Identify result.",
       "properties": {
         "faceId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "faceId of the query face."
         },
         "candidates": {
@@ -6818,6 +7110,7 @@
         "name": {
           "type": "string",
           "description": "User defined name, maximum length is 128.",
+          "minLength": 1,
           "maxLength": 128
         },
         "userData": {
@@ -6863,7 +7156,7 @@
           }
         },
         "largeFaceListId": {
-          "type": "string",
+          "$ref": "#/definitions/groupId",
           "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
           "readOnly": true
         }
@@ -6878,7 +7171,7 @@
       "description": "Face resource for large face list.",
       "properties": {
         "persistedFaceId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "Face ID of the face.",
           "readOnly": true
         },
@@ -6910,6 +7203,7 @@
         "name": {
           "type": "string",
           "description": "User defined name, maximum length is 128.",
+          "minLength": 1,
           "maxLength": 128
         },
         "userData": {
@@ -6955,7 +7249,7 @@
           }
         },
         "largePersonGroupId": {
-          "type": "string",
+          "$ref": "#/definitions/groupId",
           "description": "ID of the container.",
           "readOnly": true
         }
@@ -6970,13 +7264,14 @@
       "description": "The person in a specified large person group. To add face to this person, please call LargePersonGroup PersonFace - Add.",
       "properties": {
         "personId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "ID of the person.",
           "readOnly": true
         },
         "name": {
           "type": "string",
           "description": "User defined name, maximum length is 128.",
+          "minLength": 1,
           "maxLength": 128
         },
         "userData": {
@@ -6988,7 +7283,7 @@
           "type": "array",
           "description": "Face ids of registered faces in the person.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/uuid"
           },
           "readOnly": true
         }
@@ -7003,7 +7298,7 @@
       "description": "Face resource for large person group person.",
       "properties": {
         "persistedFaceId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "Face ID of the face.",
           "readOnly": true
         },
@@ -7033,14 +7328,14 @@
       "description": "Response of list face of person.",
       "properties": {
         "personId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "Id of person."
         },
         "persistedFaceIds": {
           "type": "array",
           "description": "Array of persisted face ids.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/uuid"
           }
         }
       },
@@ -7057,7 +7352,7 @@
           "type": "array",
           "description": "Array of PersonDirectory DynamicPersonGroup ids.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/groupId"
           }
         }
       },
@@ -7073,7 +7368,7 @@
           "type": "array",
           "description": "Array of PersonDirectory Person ids.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/uuid"
           }
         }
       },
@@ -7115,7 +7410,9 @@
           "type": "integer",
           "format": "int32",
           "description": "Session length in seconds. Range is 60 to 86400 seconds.",
-          "default": 600
+          "default": 600,
+          "minimum": 60,
+          "maximum": 86400
         },
         "status": {
           "$ref": "#/definitions/FaceSessionStatus",
@@ -7210,7 +7507,9 @@
           "type": "integer",
           "format": "int32",
           "description": "Session length in seconds. Range is 60 to 86400 seconds.",
-          "default": 600
+          "default": 600,
+          "minimum": 60,
+          "maximum": 86400
         }
       },
       "required": [
@@ -7242,7 +7541,9 @@
           "type": "integer",
           "format": "int32",
           "description": "Session length in seconds. Range is 60 to 86400 seconds.",
-          "default": 600
+          "default": 600,
+          "minimum": 60,
+          "maximum": 86400
         }
       },
       "required": [
@@ -7302,7 +7603,9 @@
           "type": "integer",
           "format": "int32",
           "description": "Session length in seconds. Range is 60 to 86400 seconds.",
-          "default": 600
+          "default": 600,
+          "minimum": 60,
+          "maximum": 86400
         }
       },
       "required": [
@@ -7365,7 +7668,9 @@
           "type": "integer",
           "format": "int32",
           "description": "Session length in seconds. Range is 60 to 86400 seconds.",
-          "default": 600
+          "default": 600,
+          "minimum": 60,
+          "maximum": 86400
         },
         "status": {
           "$ref": "#/definitions/FaceSessionStatus",
@@ -7519,7 +7824,7 @@
       "description": "Face resource for person directory person.",
       "properties": {
         "persistedFaceId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "Face ID of the face.",
           "readOnly": true
         },
@@ -7549,13 +7854,14 @@
       "description": "Person resource for person directory",
       "properties": {
         "personId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "Person ID of the person.",
           "readOnly": true
         },
         "name": {
           "type": "string",
           "description": "User defined name, maximum length is 128.",
+          "minLength": 1,
           "maxLength": 128
         },
         "userData": {
@@ -7576,6 +7882,7 @@
         "name": {
           "type": "string",
           "description": "User defined name, maximum length is 128.",
+          "minLength": 1,
           "maxLength": 128
         },
         "userData": {
@@ -7621,7 +7928,7 @@
           }
         },
         "personGroupId": {
-          "type": "string",
+          "$ref": "#/definitions/groupId",
           "description": "ID of the container.",
           "readOnly": true
         }
@@ -7636,13 +7943,14 @@
       "description": "The person in a specified person group. To add face to this person, please call LargePersonGroup PersonFace - Add.",
       "properties": {
         "personId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "ID of the person.",
           "readOnly": true
         },
         "name": {
           "type": "string",
           "description": "User defined name, maximum length is 128.",
+          "minLength": 1,
           "maxLength": 128
         },
         "userData": {
@@ -7654,7 +7962,7 @@
           "type": "array",
           "description": "Face ids of registered faces in the person.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/uuid"
           },
           "readOnly": true
         }
@@ -7669,7 +7977,7 @@
       "description": "Face resource for person group person.",
       "properties": {
         "persistedFaceId": {
-          "type": "string",
+          "$ref": "#/definitions/uuid",
           "description": "Face ID of the face.",
           "readOnly": true
         },
@@ -7861,19 +8169,20 @@
           "type": "array",
           "description": "Array of personIds created by PersonDirectory Person - Create to add.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/uuid"
           }
         },
         "removePersonIds": {
           "type": "array",
           "description": "Array of personIds created by PersonDirectory Person - Create to remove.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/uuid"
           }
         },
         "name": {
           "type": "string",
           "description": "User defined name, maximum length is 128.",
+          "minLength": 1,
           "maxLength": 128
         },
         "userData": {
@@ -7890,6 +8199,7 @@
         "name": {
           "type": "string",
           "description": "User defined name, maximum length is 128.",
+          "minLength": 1,
           "maxLength": 128
         },
         "userData": {
@@ -7909,6 +8219,7 @@
         "name": {
           "type": "string",
           "description": "User defined name, maximum length is 128.",
+          "minLength": 1,
           "maxLength": 128
         },
         "userData": {
@@ -7929,7 +8240,7 @@
         "confidence": {
           "type": "number",
           "format": "float",
-          "description": "\tA number indicates the similarity confidence of whether two faces belong to the same person, or whether the face belongs to the person. By default, isIdentical is set to True if similarity confidence is greater than or equal to 0.5. This is useful for advanced users to override 'isIdentical' and fine-tune the result on their own data.",
+          "description": "A number indicates the similarity confidence of whether two faces belong to the same person, or whether the face belongs to the person. By default, isIdentical is set to True if similarity confidence is greater than or equal to 0.5. This is useful for advanced users to override 'isIdentical' and fine-tune the result on their own data.",
           "minimum": 0,
           "maximum": 1
         }
@@ -7938,6 +8249,19 @@
         "isIdentical",
         "confidence"
       ]
+    },
+    "groupId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[a-z0-9-_]+"
+    },
+    "uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier",
+      "maxLength": 64,
+      "pattern": "^[a-z0-9-_]+$"
     }
   },
   "parameters": {
@@ -7987,9 +8311,10 @@
     "AddFaceOptions.userData": {
       "name": "userData",
       "in": "query",
-      "description": "User-provided data attached to the face. The size limit is 1KB.",
+      "description": "User-provided data attached to the face. The size limit is 1K.",
       "required": false,
       "type": "string",
+      "maxLength": 1024,
       "x-ms-parameter-location": "method"
     },
     "ApiVersionPathParameter": {

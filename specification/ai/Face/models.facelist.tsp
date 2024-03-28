@@ -23,7 +23,7 @@ model FaceList is BaseFaceList {
   @key
   @visibility("read")
   @doc("Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.")
-  faceListId: string;
+  faceListId: groupId;
 
   @doc("Face ids of registered faces in the face list.")
   @visibility("read")
@@ -33,7 +33,7 @@ model FaceList is BaseFaceList {
 @doc("Face list item for list face list.")
 model FaceListItem is BaseFaceList {
   @doc("Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.")
-  faceListId: string;
+  faceListId: groupId;
 }
 
 @parentResource(FaceList)
@@ -46,7 +46,7 @@ model LargeFaceList is BaseFaceList {
   @key
   @visibility("read")
   @doc("Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.")
-  largeFaceListId: string;
+  largeFaceListId: groupId;
 }
 
 @parentResource(LargeFaceList)

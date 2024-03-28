@@ -15,7 +15,7 @@ model PersonDirectoryPerson {
   @key
   @visibility("read")
   @doc("Person ID of the person.")
-  personId: string;
+  personId: uuid;
 
   ...UserDefinedFields;
 }
@@ -26,7 +26,7 @@ model FaceOperationStatus {
   @key
   @visibility("read")
   @doc("Operation ID of the operation.")
-  operationId: string;
+  operationId: uuid;
 
   @doc("Current status of the operation.")
   status: Foundations.OperationState;
@@ -62,7 +62,7 @@ model DynamicPersonGroup {
   @key
   @visibility("read")
   @doc("ID of the dynamic person group.")
-  dynamicPersonGroupId: string;
+  dynamicPersonGroupId: groupId;
 
   ...UserDefinedFields;
 }
@@ -70,7 +70,7 @@ model DynamicPersonGroup {
 @doc("Request of create dynamic person group.")
 model CreateDynamicPersonGroupContent {
   @doc("Array of personIds created by PersonDirectory Person - Create to add.")
-  addPersonIds?: string[];
+  addPersonIds?: uuid[];
 
   ...UserDefinedFields;
 }
@@ -78,10 +78,10 @@ model CreateDynamicPersonGroupContent {
 @doc("Request of update dynamic person group.")
 model UpdateDynamicPersonGroupContent {
   @doc("Array of personIds created by PersonDirectory Person - Create to add.")
-  addPersonIds?: string[];
+  addPersonIds?: uuid[];
 
   @doc("Array of personIds created by PersonDirectory Person - Create to remove.")
-  removePersonIds?: string[];
+  removePersonIds?: uuid[];
 
   ...UserDefinedFields;
 }
@@ -89,20 +89,20 @@ model UpdateDynamicPersonGroupContent {
 @doc("Response of list dynamic person group of person.")
 model ListGroupReferenceResult {
   @doc("Array of PersonDirectory DynamicPersonGroup ids.")
-  dynamicPersonGroupIds: string[];
+  dynamicPersonGroupIds: groupId[];
 }
 
 @doc("Response of list face of person.")
 model ListFaceResult {
   @doc("Id of person.")
-  personId: string;
+  personId: uuid;
 
   @doc("Array of persisted face ids.")
-  persistedFaceIds: string[];
+  persistedFaceIds: uuid[];
 }
 
 @doc("Response of list dynamic person group person.")
 model ListPersonResult {
   @doc("Array of PersonDirectory Person ids.")
-  personIds: string[];
+  personIds: uuid[];
 }

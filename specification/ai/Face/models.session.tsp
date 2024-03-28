@@ -29,6 +29,8 @@ model LivenessSessionData {
   deviceCorrelationId: string;
 
   @doc("Session length in seconds. Range is 60 to 86400 seconds.")
+  @minValue(60)
+  @maxValue(86400)
   authTokenTimeToLiveInSeconds?: int32 = 600;
 }
 

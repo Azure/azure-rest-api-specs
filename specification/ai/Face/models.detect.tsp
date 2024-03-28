@@ -45,7 +45,7 @@ model FaceDetectionOptions {
 @doc("Response for detect API.")
 model FaceDetectionResult {
   @doc("Unique faceId of the detected face, created by detection API and it will expire 24 hours after the detection call. To return this, it requires 'returnFaceId' parameter to be true.")
-  faceId: string;
+  faceId: uuid;
 
   @doc("The 'recognitionModel' associated with this faceId. This is only returned when 'returnRecognitionModel' is explicitly set as true.")
   recognitionModel?: RecognitionModel;

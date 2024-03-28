@@ -10,6 +10,15 @@ using TypeSpec.Rest;
 
 namespace Face;
 
+@pattern("^[a-z0-9-_]+$")
+@maxLength(64)
+scalar uuid extends Azure.Core.uuid;
+
+@pattern("^[a-z0-9-_]+")
+@maxLength(64)
+@minLength(1)
+scalar groupId extends string;
+
 @doc("The ApiVersion path parameter.")
 model ApiVersionPathParameter {
   @segment("face")
@@ -68,6 +77,7 @@ union DetectionModel {
 model UserDefinedFields {
   @doc("User defined name, maximum length is 128.")
   @maxLength(128)
+  @minLength(1)
   name: string;
 
   @doc("Optional user defined data. Length should not exceed 16K.")
@@ -81,7 +91,7 @@ model BaseFace {
   @key
   @visibility("read")
   @doc("Face ID of the face.")
-  persistedFaceId: string;
+  persistedFaceId: uuid;
 
   @doc("User-provided data attached to the face. The length limit is 1K.")
   @maxLength(1024)
@@ -99,20 +109,21 @@ model AddFaceOptions {
   detectionModel?: DetectionModel = "detection_01";
 
   @query
-  @doc("User-provided data attached to the face. The size limit is 1KB.")
+  @doc("User-provided data attached to the face. The size limit is 1K.")
+  @maxLength(1024)
   userData?: string;
 }
 
 @doc("Response body for adding face.")
 model AddFaceResult {
   @doc("persistedFaceId of the added face, which is persisted and will not expire. Different from faceId which is created in Face - Detect and will expire in 24 hours after the detection call.")
-  persistedFaceId: string;
+  persistedFaceId: uuid;
 }
 
 @doc("Response of create person.")
 model CreatePersonResult {
   @doc("Person ID of the person.")
-  personId: string;
+  personId: uuid;
 }
 
 @doc("Query parameters for whether response resource should include recognition model.")
@@ -146,7 +157,7 @@ model TrainingStatus {
 @clientName("FaceIdentificationResult")
 model IdentificationResult {
   @doc("faceId of the query face.")
-  faceId: string;
+  faceId: uuid;
 
   @doc("Identified person candidates for that face (ranked by confidence). Array size should be no larger than input maxNumOfCandidatesReturned. If no person is identified, will return an empty array.")
   candidates: IdentificationCandidate[];
@@ -156,7 +167,7 @@ model IdentificationResult {
 @clientName("FaceIdentificationCandidate")
 model IdentificationCandidate {
   @doc("personId of candidate person.")
-  personId: string;
+  personId: uuid;
 
   @doc("Confidence value of the candidate. The higher confidence, the more similar. Range between [0,1].")
   @minValue(0)
@@ -170,7 +181,7 @@ model VerificationResult {
   @doc("True if the two faces belong to the same person or the face belongs to the person, otherwise false.")
   isIdentical: boolean;
 
-  @doc("	A number indicates the similarity confidence of whether two faces belong to the same person, or whether the face belongs to the person. By default, isIdentical is set to True if similarity confidence is greater than or equal to 0.5. This is useful for advanced users to override 'isIdentical' and fine-tune the result on their own data.")
+  @doc("A number indicates the similarity confidence of whether two faces belong to the same person, or whether the face belongs to the person. By default, isIdentical is set to True if similarity confidence is greater than or equal to 0.5. This is useful for advanced users to override 'isIdentical' and fine-tune the result on their own data.")
   @minValue(0)
   @maxValue(1)
   confidence: float32;
@@ -196,20 +207,20 @@ model FindSimilarResult {
   confidence: float32;
 
   @doc("faceId of candidate face when find by faceIds. faceId is created by Face - Detect and will expire 24 hours after the detection call.")
-  faceId?: string;
+  faceId?: uuid;
 
   @doc("persistedFaceId of candidate face when find by faceListId or largeFaceListId. persistedFaceId in face list/large face list is persisted and will not expire.")
-  persistedFaceId?: string;
+  persistedFaceId?: uuid;
 }
 
 @doc("Response body for group face operation.")
 @clientName("FaceGroupingResult")
 model GroupingResult {
   @doc("A partition of the original faces based on face similarity. Groups are ranked by number of faces.")
-  groups: string[][];
+  groups: uuid[][];
 
   @doc("Face ids array of faces that cannot find any similar faces from original faces.")
-  messyGroup: string[];
+  messyGroup: uuid[];
 }
 
 alias AddFaceDescription = """
