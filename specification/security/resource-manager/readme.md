@@ -77,6 +77,18 @@ suppressions:
   - code: GetCollectionOnlyHasValueAndNextLink
     from: Microsoft.Security\stable\2024-01-01\pricings.json
     reason: The collections is limited to 13 items maximum. No need for paging. Also old versions did not have these fields as well.
+  - code: ResourceNameRestriction
+    from: Microsoft.Security\preview\2024-03-01\securityConnectors.json
+    reason: Old versions do not have pattern as well, and if I add a pattern to this version, I get another error about breaking the last version's pattern.
+  - code: PatchBodyParametersSchema
+    from: Microsoft.Security\preview\2024-03-01\securityConnectors.json
+    reason: Patch uses a complex composable object model which cannot be easily split. it will be addressed in a future PR, as this occurs in previous API versions as well.
+  - code: UnSupportedPatchProperties
+    from: Microsoft.Security\preview\2024-03-01\securityConnectors.json
+    reason: Patch uses a complex composable object model which cannot be easily split. it will be addressed in a future PR, as this occurs in previous API versions as well.
+  - code: AvoidAdditionalProperties
+    from: Microsoft.Security\preview\2024-03-01\securityConnectors.json
+    reason: This is a property used across all API versions. changing it would be a breaking change, and is required for 
 ```
 
 ### Basic Information
@@ -101,19 +113,6 @@ These settings apply only when `--tag=package-preview-2024-03` is specified on t
 ```yaml $(tag) == 'package-preview-2024-03'
 input-file:
   - Microsoft.Security/preview/2024-03-01-preview/securityConnectors.json
-suppressions:
-  - code: ResourceNameRestriction
-    from: securityConnectors.json
-    reason: Old versions do not have pattern as well, and if I add a pattern to this version, I get another error about breaking the last version's pattern.
-  - code: PatchBodyParametersSchema
-    from: securityConnectors.json
-    reason: Patch uses a complex composable object model which cannot be easily split. it will be addressed in a future PR, as this occurs in previous API versions as well.
-  - code: UnSupportedPatchProperties
-    from: securityConnectors.json
-    reason: Patch uses a complex composable object model which cannot be easily split. it will be addressed in a future PR, as this occurs in previous API versions as well.
-  - code: AvoidAdditionalProperties
-    from: securityConnectors.json
-    reason: This is a property used across all API versions. changing it would be a breaking change, and is required for 
 ```
 
 ### Tag: package-preview-2023-12
