@@ -42,6 +42,7 @@ enum AutoUpgradeProfileProvisioningState {
 }
 
 @doc("The properties of the AutoUpgradeProfile.")
+@added(Versions.v2024_05_02_preview)
 model AutoUpgradeProfileProperties {
   @visibility("read")
   @doc("The provisioning state of the AutoUpgradeProfile resource.")
@@ -57,7 +58,6 @@ model AutoUpgradeProfileProperties {
 
   @visibility("create", "read")
   @doc("The node image upgrade to be applied to the target clusters in auto upgrade.")
-  @added(Versions.v2024_05_02_preview)
   nodeImageSelection?: NodeImageSelection;
 
   @visibility("create", "read")
