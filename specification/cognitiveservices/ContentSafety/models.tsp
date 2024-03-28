@@ -67,11 +67,11 @@ model AnalyzeTextOptions {
   outputType?: AnalyzeTextOutputType = AnalyzeTextOutputType.FourSeverityLevels;
 
   @doc("Customized categories will be analyzed if they are assigned. If no customized categories are assigned, no analysis on them will be returned.")
-  @added(ContentSafety.Versions.v2024_03_30_Preview)
+  @added(ContentSafety.Versions.v2024_05_15_Preview)
   customizedCategories?: CustomizedCategoryOption[];
 }
 
-@added(ContentSafety.Versions.v2024_03_30_Preview)
+@added(ContentSafety.Versions.v2024_05_15_Preview)
 @doc("The customized category option for text.")
 model CustomizedCategoryOption {
   @doc("Name")
@@ -89,12 +89,12 @@ model AnalyzeTextResult {
   @doc("Analysis result for categories.")
   categoriesAnalysis: TextCategoriesAnalysis[];
 
-  @added(ContentSafety.Versions.v2024_03_30_Preview)
+  @added(ContentSafety.Versions.v2024_05_15_Preview)
   @doc("Analysis result for text customized categories")
   textCustomizedCategoriesAnalysis?: TextCustomizedCategoriesAnalysis[];
 }
 
-@added(ContentSafety.Versions.v2024_03_30_Preview)
+@added(ContentSafety.Versions.v2024_05_15_Preview)
 @doc("Analysis result for text customized categories.")
 model TextCustomizedCategoriesAnalysis {
   @doc("Name of the custom category.")
@@ -437,7 +437,7 @@ model TextPromptInjectionResult {
   attackDetected: boolean;
 }
 
-@added(ContentSafety.Versions.v2024_03_30_Preview)
+@added(ContentSafety.Versions.v2024_05_15_Preview)
 @resource("text/categories")
 @doc("Text customized category")
 model TextCustomizedCategoryVersion {
@@ -517,7 +517,7 @@ enum CategoryStatus {
 //   ...TextCustomizedCategory;
 // }
 
-@added(ContentSafety.Versions.v2024_03_30_Preview)
+@added(ContentSafety.Versions.v2024_05_15_Preview)
 @doc("List of customized category versions.")
 model TextCustomizedCategoryVersionList {
   @doc("List of customized category versions.")
