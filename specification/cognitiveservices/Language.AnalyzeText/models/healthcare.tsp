@@ -1,6 +1,8 @@
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 using Azure.Core;
 
@@ -381,6 +383,7 @@ enum Certainty {
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-extensible-enum"
+@clientName("HealthcareAssertionAssociation", "csharp")
 @doc("Describes if the entity is the subject of the text or if it describes someone else.")
 @fixed
 enum Association {
