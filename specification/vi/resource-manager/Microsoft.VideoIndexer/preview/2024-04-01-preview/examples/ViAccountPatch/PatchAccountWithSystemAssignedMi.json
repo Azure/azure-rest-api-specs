@@ -1,12 +1,15 @@
 {
   "parameters": {
     "accountName": "contosto-videoanalyzer",
-    "resourceGroupName": "contosto-videoanalyzer-rg",
-    "api-version": "2024-01-01",
+    "resourceGroupName": "contoso-videoanalyzer-rg",
+    "api-version": "2024-04-01-preview",
     "subscriptionId": "b04775c3-63fa-40f3-9430-139d2e5522d3",
     "parameters": {
       "properties": {
-        "storageServices": {}
+        "storageServices": {},
+        "openAiServices": {
+          "resourceId": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.CognitiveServices/accounts/contoso-viopenai-ms"
+        }
       },
       "identity": {
         "type": "SystemAssigned"
@@ -16,7 +19,7 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/586d4f48-8f08-4a4e-96b7-e1892d6dba9e/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.VideoIndexer/accounts/contosto-videoanalyzer",
+        "id": "/subscriptions/586d4f48-8f08-4a4e-96b7-e1892d6dba9e/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.VideoIndexer/accounts/contoso-videoanalyzer",
         "name": "contosto-videoanalyzer",
         "location": "NorthEurope",
         "type": "Microsoft.VideoIndexer/accounts",
@@ -27,6 +30,9 @@
           "accountName": "contosto-videoanalyzer",
           "storageServices": {
             "resourceId": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.Storage/storageAccounts/contoso-videoanalyzer-ms"
+          },
+          "openAiServices": {
+            "resourceId": "/subscriptions/xxx/resourceGroups/contoso-videoanalyzer-rg/providers/Microsoft.CognitiveServices/accounts/contoso-viopenai-ms"
           },
           "totalSecondsIndexed": 0,
           "provisioningState": "Succeeded"
