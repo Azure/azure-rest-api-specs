@@ -6,6 +6,12 @@
     "api-version": "2024-02-02-preview",
     "JobEnvelope": {
       "location": "East US",
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity": {}
+        }
+      },
       "properties": {
         "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
         "configuration": {
@@ -24,7 +30,8 @@
                   "type": "azure-servicebus",
                   "metadata": {
                     "topicName": "my-topic"
-                  }
+                  },
+                  "identity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity"
                 }
               ]
             }
@@ -67,6 +74,15 @@
         "name": "testcontainerAppsJob0",
         "type": "Microsoft.App/jobs",
         "location": "East US",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity": {
+              "principalId": "74adfa4f-dedf-8dc0-ca29-b6d1a69ab312",
+              "clientId": "14adfa4f-eedf-1dc0-ba29-a6d1a69ab3df"
+            }
+          }
+        },
         "properties": {
           "provisioningState": "InProgress",
           "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
@@ -82,11 +98,12 @@
                 "maxExecutions": 5,
                 "rules": [
                   {
-                    "name": "githubscalingrule",
-                    "type": "github-runner",
+                    "name": "servicebuscalingrule",
+                    "type": "azure-servicebus",
                     "metadata": {
-                      "githubAPIURL": "https://api.github.com"
-                    }
+                      "topicName": "my-topic"
+                    },
+                    "identity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity"
                   }
                 ]
               }
@@ -135,6 +152,15 @@
         "name": "testcontainerAppsJob0",
         "type": "Microsoft.App/jobs",
         "location": "East US",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity": {
+              "principalId": "74adfa4f-dedf-8dc0-ca29-b6d1a69ab312",
+              "clientId": "14adfa4f-eedf-1dc0-ba29-a6d1a69ab3df"
+            }
+          }
+        },
         "properties": {
           "provisioningState": "InProgress",
           "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
@@ -155,7 +181,8 @@
                     "metadata": {
                       "queueName": "my-queue",
                       "messageCount": "50"
-                    }
+                    },
+                    "identity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myidentity"
                   }
                 ]
               }
