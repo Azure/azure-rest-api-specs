@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 ``` yaml
 directive:
   - suppress: TopLevelResourcesListBySubscription
-    from: siteAwareResourceTypes.json
+    from: sites.json
     reason: This is an tenant-level resource
 ```
 

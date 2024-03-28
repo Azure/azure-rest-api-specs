@@ -63,9 +63,9 @@ model SiteAwareResourceTypesDetails {
 
 @doc("ResourceType availability status")
 enum AvailabilityStatus {
-  @doc("Coming soon")
+  @doc("Coming soon if aggregation is going to come in future for the resource-type")
   ComingSoon,
 
-  @doc("Supported")
+  @doc("Supported if aggregation is supported for the resource-type")
   Supported,
 }
