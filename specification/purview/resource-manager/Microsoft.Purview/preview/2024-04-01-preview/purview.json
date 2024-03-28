@@ -1615,7 +1615,7 @@
   },
   "definitions": {
     "AccessKeys": {
-      "description": "The Account access keys.",
+      "description": "The Purview Account access keys.",
       "type": "object",
       "properties": {
         "atlasKafkaPrimaryEndpoint": {
@@ -1642,8 +1642,12 @@
           "x-ms-client-flatten": true
         },
         "sku": {
-          "$ref": "#/definitions/AccountSku",
-          "readOnly": true
+          "description": "Gets or sets the Sku.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AccountSku"
+            }
+          ]
         }
       }
     },
@@ -1742,7 +1746,12 @@
       "type": "object",
       "properties": {
         "accountStatus": {
-          "$ref": "#/definitions/AccountStatus",
+          "description": "Gets or sets the status of the account.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AccountStatus"
+            }
+          ],
           "readOnly": true
         },
         "cloudConnectors": {
@@ -1770,7 +1779,12 @@
           "readOnly": true
         },
         "endpoints": {
-          "$ref": "#/definitions/AccountEndpoints",
+          "description": "The URIs that are the public endpoints of the account.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AccountEndpoints"
+            }
+          ],
           "readOnly": true
         },
         "friendlyName": {
@@ -1804,11 +1818,16 @@
           ]
         },
         "managedResources": {
-          "$ref": "#/definitions/ManagedResources",
+          "description": "Gets the resource identifiers of the managed resources.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ManagedResources"
+            }
+          ],
           "readOnly": true
         },
         "managedResourcesPublicNetworkAccess": {
-          "description": "Gets or sets the public network access for managed resources",
+          "description": "Gets or sets the public network access for managed resources.",
           "default": "NotSpecified",
           "enum": [
             "NotSpecified",
@@ -1934,7 +1953,13 @@
           }
         },
         "errorDetails": {
-          "$ref": "#/definitions/ErrorModel"
+          "description": "Gets the account error details.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          ],
+          "readOnly": true
         }
       }
     },
@@ -1946,8 +1971,7 @@
           "$ref": "#/definitions/Identity"
         },
         "properties": {
-          "$ref": "#/definitions/AccountProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/AccountProperties"
         },
         "tags": {
           "description": "Tags on the azure resource.",
@@ -2349,7 +2373,12 @@
       "type": "object",
       "properties": {
         "error": {
-          "$ref": "#/definitions/ErrorModel",
+          "description": "Gets or sets the error.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          ],
           "readOnly": true
         }
       }
@@ -2492,8 +2521,15 @@
           "type": "string"
         },
         "eventHubResourceId": {
-          "description": "The event hub namespace identifier.\r\nFor example: /subscriptions/{subscription}/resourceGroups/{resourceGroup}/providers/Microsoft.EventHub/namespaces/{eventHubNamespaceName}/eventhubs/{eventhubName}",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.EventHub/namespaces/eventHubs"
+              }
+            ]
+          }
         },
         "eventHubType": {
           "description": "The event hub type.",
@@ -2777,11 +2813,6 @@
       ],
       "type": "object",
       "properties": {
-        "count": {
-          "format": "int64",
-          "description": "Total item count.",
-          "type": "integer"
-        },
         "nextLink": {
           "description": "The Url of next result page.",
           "type": "string"
@@ -2847,19 +2878,23 @@
       "properties": {
         "id": {
           "description": "The private link resource identifier.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "name": {
           "description": "The private link resource name.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "x-ms-client-flatten": true
+          "description": "The private link resource properties.",
+          "readOnly": true
         },
         "type": {
           "description": "The private link resource type.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -2870,11 +2905,6 @@
       ],
       "type": "object",
       "properties": {
-        "count": {
-          "format": "int64",
-          "description": "Total item count.",
-          "type": "integer"
-        },
         "nextLink": {
           "description": "The Url of next result page.",
           "type": "string"
@@ -2895,7 +2925,8 @@
       "properties": {
         "groupId": {
           "description": "The private link resource group identifier.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "requiredMembers": {
           "description": "This translates to how many Private IPs should be created for each privately linkable resource.",
@@ -2903,7 +2934,7 @@
           "items": {
             "type": "string"
           },
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "requiredZoneNames": {
           "description": "The required zone names for private link resource.",
@@ -2911,7 +2942,7 @@
           "items": {
             "type": "string"
           },
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       }
     },
@@ -2959,7 +2990,12 @@
           "readOnly": true
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemData"
+            }
+          ],
           "readOnly": true
         },
         "type": {
@@ -3079,7 +3115,12 @@
           "readOnly": true
         },
         "systemData": {
-          "$ref": "#/definitions/SystemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SystemData"
+            }
+          ],
           "readOnly": true
         },
         "tags": {
@@ -3119,7 +3160,13 @@
           "readOnly": true
         },
         "name": {
-          "$ref": "#/definitions/QuotaName"
+          "description": "Quota name",
+          "allOf": [
+            {
+              "$ref": "#/definitions/QuotaName"
+            }
+          ],
+          "readOnly": true
         },
         "unit": {
           "description": "Quota usage unit.",
@@ -3142,7 +3189,7 @@
           "items": {
             "$ref": "#/definitions/Usage"
           },
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       }
     },
