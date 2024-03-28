@@ -8,7 +8,7 @@ using TypeSpec.Versioning;
 @service({
   title: "Azure Batch",
 })
-@useDependency(Azure.Core.Versions.v1_0_Preview_2)
+@versioned(Azure.Batch.Versions)
 @doc("Azure Batch provides Cloud-scale job scheduling and compute management.")
 @server(
   "{endpoint}",
@@ -29,3 +29,9 @@ using TypeSpec.Versioning;
 )
 namespace Azure.Batch;
 
+@doc("The Azure Batch service version.")
+enum Versions {
+  @doc("API Version 2024-02-01.19.0")
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  `2024-02-01.19.0`,
+}
