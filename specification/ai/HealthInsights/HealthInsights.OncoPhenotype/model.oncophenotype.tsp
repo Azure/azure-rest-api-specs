@@ -73,8 +73,7 @@ An indication whether to perform a preliminary step on the patient's documents t
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("The type of the Onco Phenotype inference.")
-union OncoPhenotypeInferenceType {
-  string,
+enum OncoPhenotypeInferenceType {
   TumorSite: "tumorSite",
   Histology: "histology",
   ClinicalStageT: "clinicalStageT",

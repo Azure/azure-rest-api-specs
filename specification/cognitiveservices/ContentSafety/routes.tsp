@@ -1,7 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/http";
 import "@typespec/rest";
-import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
 
 using TypeSpec.Http;
@@ -9,7 +8,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
-using Azure.ClientGenerator.Core;
 
 namespace ContentSafety;
 
@@ -22,9 +20,9 @@ interface TextOperations {
     {
       @body
       @doc("The text analysis request.")
-      @clientName("options", "csharp")
-      @clientName("options", "python")
-      @clientName("options", "java")
+      @projectedName("csharp", "options")
+      @projectedName("python", "options")
+      @projectedName("java", "options")
       body: AnalyzeTextOptions;
     },
     AnalyzeTextResult
@@ -39,9 +37,9 @@ interface TextOperations {
     {
       @body
       @doc("The text jailbreak analysis request.")
-      @clientName("options", "csharp")
-      @clientName("options", "python")
-      @clientName("options", "java")
+      @projectedName("csharp", "options")
+      @projectedName("python", "options")
+      @projectedName("java", "options")
       body: AnalyzeTextJailbreakOptions;
     },
     AnalyzeTextJailbreakResult
@@ -56,29 +54,12 @@ interface TextOperations {
     {
       @body
       @doc("The text protected material analysis request.")
-      @clientName("options", "csharp")
-      @clientName("options", "python")
-      @clientName("options", "java")
+      @projectedName("csharp", "options")
+      @projectedName("python", "options")
+      @projectedName("java", "options")
       body: AnalyzeTextProtectedMaterialOptions;
     },
     AnalyzeTextProtectedMaterialResult
-  >;
-
-  @added(ContentSafety.Versions.v2024_02_15_Preview)
-  @summary("Analyze text prompt injection attacks")
-  @doc("A synchronous API for the analysis of text prompt injection attacks.")
-  @route("/text:shieldPrompt")
-  @post
-  detectTextPromptInjectionOptions is Azure.Core.RpcOperation<
-    {
-      @body
-      @doc("The text prompt injection attacks analysis request.")
-      @clientName("options", "csharp")
-      @clientName("options", "python")
-      @clientName("options", "java")
-      body: AnalyzeTextPromptInjectionOptions;
-    },
-    AnalyzeTextPromptInjectionResult
   >;
 }
 
@@ -91,9 +72,9 @@ interface ImageOperations {
     {
       @doc("The image analysis request.")
       @body
-      @clientName("options", "csharp")
-      @clientName("options", "python")
-      @clientName("options", "java")
+      @projectedName("csharp", "options")
+      @projectedName("python", "options")
+      @projectedName("java", "options")
       body: AnalyzeImageOptions;
     },
     AnalyzeImageResult
@@ -105,7 +86,10 @@ interface BlockOps
       NoConditionalRequests &
       NoClientRequestId> {}
 
-@@clientName(Azure.Core.Foundations.ResourceBody.resource, "options");
+@@projectedName(Azure.Core.Foundations.ResourceBody.resource,
+  "client",
+  "options"
+);
 
 interface TextBlocklists {
   @summary("Get Text Blocklist By blocklistName")
@@ -131,9 +115,9 @@ interface TextBlocklists {
     {
       @doc("Options for adding or updating blocklist items.")
       @body
-      @clientName("options", "csharp")
-      @clientName("options", "python")
-      @clientName("options", "java")
+      @projectedName("csharp", "options")
+      @projectedName("python", "options")
+      @projectedName("java", "options")
       body: AddOrUpdateTextBlocklistItemsOptions;
     },
     AddOrUpdateTextBlocklistItemsResult
@@ -146,9 +130,9 @@ interface TextBlocklists {
     {
       @doc("Options for removing blocklist items.")
       @body
-      @clientName("options", "csharp")
-      @clientName("options", "python")
-      @clientName("options", "java")
+      @projectedName("csharp", "options")
+      @projectedName("python", "options")
+      @projectedName("java", "options")
       body: RemoveTextBlocklistItemsOptions;
     },
     NoContentResponse
@@ -163,24 +147,5 @@ interface TextBlocklists {
   listTextBlocklistItems is BlockOps.ResourceList<
     TextBlocklistItem,
     ListQueryParametersTrait<StandardListQueryParameters>
-  >;
-}
-
-@added(Versions.v2024_02_15_Preview)
-interface TextGroundednessDetectionOperations {
-  @summary("Detect Groundedness")
-  @doc("A synchronous API for the analysis of language model outputs to determine alignment with user-provided information or identify fictional content.")
-  @route("/text:detectGroundedness")
-  @post
-  detectGroundednessOptions is Azure.Core.RpcOperation<
-    {
-      @body
-      @doc("The text groundedness detection request.")
-      @clientName("options", "csharp")
-      @clientName("options", "python")
-      @clientName("options", "java")
-      body: AnalyzeTextGroundednessOptions;
-    },
-    AnalyzeTextGroundednessResult
   >;
 }

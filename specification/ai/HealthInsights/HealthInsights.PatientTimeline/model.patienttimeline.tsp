@@ -62,9 +62,7 @@ model PatientTimelineInference is Fhir.R4.Extendible {
 }
 
 @doc("The type of the Patient Timeline inference.")
-union PatientTimelineInferenceType {
-  string,
-
+enum PatientTimelineInferenceType {
   @doc("The inference is a timeline event.")
   TimelineEvent: "timelineEvent",
 

@@ -7,32 +7,12 @@ export class FormatRule implements Rule {
   readonly description = "Format TypeSpec";
 
   async execute(host: TsvHost, folder: string): Promise<RuleResult> {
-    let success = true;
-    let stdOutput = "";
-    let errorOutput = "";
+    // Format parent folder to include shared files
 
-    let [err, stdout, stderr] = await host.runCmd(
-      'npm exec --no -- tsp format "../**/*.tsp"', // Format parent folder to include shared files
-      folder,
-    );
-    if (err) {
-      success = false;
-      errorOutput += err.message;
-    }
-    stdOutput += stdout;
-    errorOutput += stderr;
-
-    [err, stdout, stderr] = await host.runCmd(
-      "npm exec --no -- prettier --write tspconfig.yaml",
-      folder,
-    );
-    if (err) {
-      success = false;
-      errorOutput += err.message;
-    }
-    stdOutput += stdout;
-    errorOutput += stderr;
-
+    let [err, stdOutput, errorOutput] = await host.runCmd(`npx tsp format "../**/*.tsp"`, folder);
+    // Failing on both err and errorOutput because of known bug in tsp format where it returns 0 on failed formatting
+    // https://github.com/microsoft/typespec/issues/2323
+    let success = !err && !errorOutput;
     return {
       success: success,
       stdOutput: stdOutput,

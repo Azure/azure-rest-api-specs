@@ -343,9 +343,7 @@ model ContactPoint {
 Contact Point System
 see https://www.hl7.org/fhir/R4/valueset-contact-point-system.html
 """)
-union ContactPointSystem {
-  string,
-
+enum ContactPointSystem {
   @doc("Phone")
   Phone: "phone",
 
@@ -372,9 +370,7 @@ union ContactPointSystem {
 Contact Point Use
 See: 	http://hl7.org/fhir/ValueSet/contact-point-use
 """)
-union ContactPointUse {
-  string,
-
+enum ContactPointUse {
   @doc("Home")
   Home: "home",
 

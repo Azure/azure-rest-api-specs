@@ -53,8 +53,7 @@ model PatientInfo {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("The patient's sex.")
-union PatientInfoSex {
-  string,
+enum PatientInfoSex {
   Female: "female",
   Male: "male",
   Unspecified: "unspecified",
@@ -62,8 +61,7 @@ union PatientInfoSex {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("The type of the patient document, such as 'note' (text document) or 'fhirBundle' (FHIR JSON document).")
-union DocumentType {
-  string,
+enum DocumentType {
   Note: "note",
   FhirBundle: "fhirBundle",
   Dicom: "dicom",
@@ -72,8 +70,7 @@ union DocumentType {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("The type of the clinical document.")
-union ClinicalDocumentType {
-  string,
+enum ClinicalDocumentType {
   Consultation: "consultation",
   DischargeSummary: "dischargeSummary",
   HistoryAndPhysical: "historyAndPhysical",
@@ -86,13 +83,11 @@ union ClinicalDocumentType {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("""
-The type of the content's source.
-In case the source type is 'inline', the content is given as a string (for instance, text).
+The type of the content's source. 
+In case the source type is 'inline', the content is given as a string (for instance, text). 
 In case the source type is 'reference', the content is given as a URI.
 """)
-union DocumentContentSourceType {
-  string,
-
+enum DocumentContentSourceType {
   @doc("The content is given as a string (for instance, text).")
   Inline: "inline",
 
@@ -157,9 +152,7 @@ model Encounter {
 }
 
 @doc("Known values codes that can be used to indicate the class of encounter (TODO://Based on FHIR value set--http://....).")
-union EncounterClass {
-  string,
-
+enum EncounterClass {
   @doc("""
   A patient encounter where a patient is admitted by a hospital or equivalent facility, assigned to a location where patients generally stay at least overnight and provided with room, board, and continuous nursing service.
   """)
@@ -171,7 +164,7 @@ union EncounterClass {
   Ambulatory: "ambulatory",
 
   @doc("""
-  An encounter where the patient usually will start in different encounter, such as one in the emergency department but then transition to this type of encounter because they require a significant period of treatment and monitoring to determine whether or not their condition warrants an inpatient admission or discharge.
+  An encounter where the patient usually will start in different encounter, such as one in the emergency department but then transition to this type of encounter because they require a significant period of treatment and monitoring to determine whether or not their condition warrants an inpatient admission or discharge. 
   """)
   Observation: "observation",
 
@@ -192,9 +185,7 @@ union EncounterClass {
 }
 
 @doc("Known values codes that can be used to indicate the type of the Specialty.")
-union SpecialtyType {
-  string,
-
+enum SpecialtyType {
   @doc("pathology")
   Pathology: "pathology",
 

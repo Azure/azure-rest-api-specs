@@ -27,26 +27,9 @@ These are the global settings for the Batch API.
 ``` yaml
 title: BatchServiceClient
 openapi-type: data-plane
-tag: package-2024-02
+tag: package-2023-11
 ```
 
-### Tag: package-2024-02.19.0-preview
-
-These settings apply only when `--tag=package-2024-02.19.0-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-02.19.0-preview'
-input-file:
-  - Azure.Batch/preview/2024-02-01.19.0/BatchService.json
-```
-
-### Tag: package-2024-02
-
-These settings apply only when `--tag=package-2024-02` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-02'
-input-file:
-  - Microsoft.Batch/stable/2024-02-01.19.0/BatchService.json
-```
 
 ### Tag: package-2023-11
 
@@ -56,7 +39,6 @@ These settings apply only when `--tag=package-2023-11` is specified on the comma
 input-file:
   - Microsoft.Batch/stable/2023-11-01.18.0/BatchService.json
 ```
-
 ### Tag: package-2023-05.17.0
 
 These settings apply only when `--tag=package-2023-05.17.0` is specified on the command line.
@@ -241,11 +223,6 @@ directive:
       - $.paths["/jobs/{jobId}/tasks/{taskId}"].put
       - $.paths["/pools/{poolId}/nodes/{nodeId}/users/{userName}"].put
     reason: Matching service response.
-
-  - suppress: R2018 # XmsEnumValidation
-    where:
-      - $.definitions.AADToken.properties.type
-    reason: Single-value enums are expressed to force the values to be used for de/serialization but should not be exposed or settable by the a client.
 
   - suppress: R2029
     where:

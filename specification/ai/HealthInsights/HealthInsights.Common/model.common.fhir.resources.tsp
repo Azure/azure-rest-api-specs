@@ -281,9 +281,7 @@ model ObservationComponent extends Element {
 Observation Status
 Based on [FHIR ObservationStatus](https://www.hl7.org/fhir/R4/valueset-observation-status.html)
 """)
-union ObservationStatusCodeType {
-  string,
-
+enum ObservationStatusCodeType {
   @doc("The existence of the observation is registered, but there is no result yet available.")
   Registered: "registered",
 
@@ -311,7 +309,7 @@ union ObservationStatusCodeType {
 
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
 @doc("""
-Detailed information about Research Study
+Detailed information about Research Study 
 Based on [FHIR ResearchStudy](https://www.hl7.org/fhir/R4/researchstudy.html)
 """)
 model ResearchStudy extends DomainResource {
@@ -410,9 +408,7 @@ alias ResearchStudyObjective = {
 @doc("""
 https://www.hl7.org/fhir/R4/codesystem-research-study-status.html
 """)
-union ResearchStudyStatusCodeType {
-  string,
-
+enum ResearchStudyStatusCodeType {
   @doc("The study is open for accrual.")
   Active: "active",
 

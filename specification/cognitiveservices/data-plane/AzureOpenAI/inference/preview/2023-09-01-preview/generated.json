@@ -63,13 +63,6 @@
       "post": {
         "operationId": "GetAudioTranscriptionAsPlainText",
         "description": "Gets transcribed text and associated metadata from provided spoken audio data. Audio will be transcribed in the\nwritten language corresponding to the language it was spoken in.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
-        "consumes": [
-          "multipart/form-data"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -82,25 +75,12 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranscriptionOptions.file"
-          },
-          {
-            "$ref": "#/parameters/AudioTranscriptionOptions.filename"
-          },
-          {
-            "$ref": "#/parameters/AudioTranscriptionOptions.responseFormat"
-          },
-          {
-            "$ref": "#/parameters/AudioTranscriptionOptions.language"
-          },
-          {
-            "$ref": "#/parameters/AudioTranscriptionOptions.prompt"
-          },
-          {
-            "$ref": "#/parameters/AudioTranscriptionOptions.temperature"
-          },
-          {
-            "$ref": "#/parameters/AudioTranscriptionOptions.model"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AudioTranscriptionOptions"
+            }
           }
         ],
         "responses": {
@@ -134,13 +114,6 @@
       "post": {
         "operationId": "GetAudioTranslationAsPlainText",
         "description": "Gets English language transcribed text and associated metadata from provided spoken audio data.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
-        "consumes": [
-          "multipart/form-data"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -153,22 +126,12 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/AudioTranslationOptions.file"
-          },
-          {
-            "$ref": "#/parameters/AudioTranslationOptions.filename"
-          },
-          {
-            "$ref": "#/parameters/AudioTranslationOptions.responseFormat"
-          },
-          {
-            "$ref": "#/parameters/AudioTranslationOptions.prompt"
-          },
-          {
-            "$ref": "#/parameters/AudioTranslationOptions.temperature"
-          },
-          {
-            "$ref": "#/parameters/AudioTranslationOptions.model"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AudioTranslationOptions"
+            }
           }
         ],
         "responses": {

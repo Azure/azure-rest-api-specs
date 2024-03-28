@@ -1438,8 +1438,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -1485,8 +1484,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -1568,8 +1566,7 @@
             "description": "The provisioning state of a member being updated."
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "FleetMemberUpdate": {
       "type": "object",
@@ -1668,8 +1665,7 @@
             "description": "The provisioning state of a fleet being deleted."
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "KubernetesVersion": {
       "type": "string"
@@ -1693,7 +1689,7 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/ManagedClusterUpgradeType",
-          "description": "ManagedClusterUpgradeType is the type of upgrade to be applied."
+          "description": "The upgrade type.\nFull requires the KubernetesVersion property to be set.\nNodeImageOnly requires the KubernetesVersion property not to be set."
         },
         "kubernetesVersion": {
           "$ref": "#/definitions/KubernetesVersion",
@@ -1718,12 +1714,12 @@
           {
             "name": "Full",
             "value": "Full",
-            "description": "Full upgrades the control plane and all agent pools of the target ManagedClusters. Requires the ManagedClusterUpgradeSpec.KubernetesVersion property to be set."
+            "description": "Full upgrades the control plane and all agent pools of the target ManagedClusters."
           },
           {
             "name": "NodeImageOnly",
             "value": "NodeImageOnly",
-            "description": "NodeImageOnly upgrades only the node images of the target ManagedClusters. Requires the ManagedClusterUpgradeSpec.KubernetesVersion property to NOT be set."
+            "description": "NodeImageOnly upgrades only the node images of the target ManagedClusters."
           }
         ]
       }
@@ -1836,8 +1832,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items",
-          "readOnly": true
+          "description": "The link to the next page of items"
         }
       },
       "required": [
@@ -1899,8 +1894,7 @@
             "description": "Resource creation was canceled."
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "UpdateRunStatus": {
       "type": "object",

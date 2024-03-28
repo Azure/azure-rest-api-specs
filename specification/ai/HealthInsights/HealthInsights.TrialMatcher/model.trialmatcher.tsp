@@ -109,7 +109,7 @@ model TrialMatcherInference {
 }
 
 @doc("""
-The clinical trials that the patient(s) should be matched to.
+The clinical trials that the patient(s) should be matched to. 
 The trial selection can be given as a list of custom clinical trials and/or a list of filters to known clinical trial registries.
 In case both are given, the resulting trial set is a union of the two sets.
 """)
@@ -289,8 +289,7 @@ model ClinicalTrialResearchFacility {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("Possible phases of a clinical trial.")
-union ClinicalTrialPhase {
-  string,
+enum ClinicalTrialPhase {
   NotApplicable: "notApplicable",
   EarlyPhase1: "earlyPhase1",
   Phase1: "phase1",
@@ -301,8 +300,7 @@ union ClinicalTrialPhase {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("Possible study types of a clinical trial.")
-union ClinicalTrialStudyType {
-  string,
+enum ClinicalTrialStudyType {
   Interventional: "interventional",
   Observational: "observational",
   ExpandedAccess: "expandedAccess",
@@ -311,8 +309,7 @@ union ClinicalTrialStudyType {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("Possible recruitment status of a clinical trial.")
-union ClinicalTrialRecruitmentStatus {
-  string,
+enum ClinicalTrialRecruitmentStatus {
   UnknownStatus: "unknownStatus",
   NotYetRecruiting: "notYetRecruiting",
   Recruiting: "recruiting",
@@ -321,8 +318,7 @@ union ClinicalTrialRecruitmentStatus {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("Possible purposes of a clinical trial.")
-union ClinicalTrialPurpose {
-  string,
+enum ClinicalTrialPurpose {
   NotApplicable: "notApplicable",
   Screening: "screening",
   Diagnostic: "diagnostic",
@@ -337,36 +333,31 @@ union ClinicalTrialPurpose {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("Possible sources of a clinical trial.")
-union ClinicalTrialSource {
-  string,
+enum ClinicalTrialSource {
   Custom: "custom",
   ClinicaltrialsGov: "clinicaltrials.gov",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("`GeoJSON` type.")
-union GeoJsonType {
-  string,
+enum GeoJsonType {
   Feature: "Feature",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("`GeoJSON` geometry type.")
-union GeoJsonGeometryType {
-  string,
+enum GeoJsonGeometryType {
   Point: "Point",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("`GeoJSON` object sub-type.")
-union GeoJsonPropertiesSubType {
-  string,
+enum GeoJsonPropertiesSubType {
   Circle: "Circle",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
 @doc("The type of the Trial Matcher inference.")
-union TrialMatcherInferenceType {
-  string,
+enum TrialMatcherInferenceType {
   TrialEligibility: "trialEligibility",
 }

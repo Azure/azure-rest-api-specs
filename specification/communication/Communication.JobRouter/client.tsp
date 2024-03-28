@@ -7,7 +7,7 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
-@useDependency(AzureCommunicationRoutingService.Versions.c2024_01_18_Preview)
+@useDependency(AzureCommunicationRoutingService.Versions.c2023_11_01)
 namespace ClientForAcsJobRouter;
 
 // Your customizations here

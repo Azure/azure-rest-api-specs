@@ -1,11 +1,9 @@
 import "@typespec/http";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
@@ -14,16 +12,10 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service({
   title: "Managed DevOps Infrastructure",
+  version: "2023-12-13-preview",
 })
-@versioned(Versions)
+@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.DevOpsInfrastructure;
-
-/** Api versions */
-enum Versions {
-  /** 2023-12-13-preview preview version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2023-12-13-preview`,
-}
 
 model Pool is TrackedResource<PoolProperties> {
   @key("poolName")
@@ -38,7 +30,6 @@ model Pool is TrackedResource<PoolProperties> {
 
 @doc("Pool properties")
 model PoolProperties {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Existing SDK"
   @doc("The status of the current operation.")
   provisioningState?: ProvisioningState;
 
@@ -70,7 +61,6 @@ model GitHubOrganizationProfile extends OrganizationProfile {
   kind: "GitHub";
 
   @doc("The list of GitHub organizations/repositories the pool should be present in.")
-  @extension("x-ms-identifiers", [])
   organizations: GitHubOrganization[];
 }
 @doc("Defines a GitHub organization")
@@ -88,7 +78,6 @@ model AzureDevOpsOrganizationProfile extends OrganizationProfile {
   kind: "AzureDevOps";
 
   @doc("The list of Azure DevOps organizations the pool should be present in.")
-  @extension("x-ms-identifiers", [])
   organizations: Organization[];
 
   @doc("The type of permission which determines which accounts are admins on the Azure DevOps pool.")
@@ -142,7 +131,6 @@ model VmssFabricProfile extends FabricProfile {
   sku: DevOpsAzureSku;
 
   @doc("The VM images of the machines in the pool.")
-  @extension("x-ms-identifiers", [])
   images: PoolImage[];
 
   @doc("The OS profile of the machines in the pool.")

@@ -13,11 +13,11 @@ namespace DocumentIntelligence;
 
 alias ServiceTraits = NoConditionalRequests &
   NoRepeatableRequests &
-  SupportsClientRequestId;
+  NoClientRequestId;
 
 op DocumentIntelligenceOperation<
   TParams extends TypeSpec.Reflection.Model,
-  TResponse extends TypeSpec.Reflection.Model & Foundations.RetryAfterHeader
+  TResponse extends TypeSpec.Reflection.Model
 > is Foundations.Operation<TParams, TResponse, ServiceTraits, ErrorResponse>;
 
 alias DIResourceOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
@@ -28,12 +28,11 @@ op DocumentIntelligenceLongRunningOperation<
   TResponse extends TypeSpec.Reflection.Model
 > is Foundations.Operation<
   TParams,
-  AcceptedResponse &
-    Foundations.RetryAfterHeader & {
-      @pollingLocation
-      @header("Operation-Location")
-      operationLocation: ResourceLocation<TResponse>;
-    },
+  AcceptedResponse & {
+    @pollingLocation
+    @header("Operation-Location")
+    operationLocation: ResourceLocation<TResponse>;
+  },
   ServiceTraits,
   ErrorResponse
 >;

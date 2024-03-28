@@ -39,15 +39,6 @@ directive:
   - suppress: INVALID_TYPE
 ```
 
-### Tag: package-jobrouter-2024-01-18-preview
-
-These settings apply only when `--tag=package-jobrouter-2024-01-18-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-jobrouter-2024-01-18-preview'
-input-file:
-  - preview/2024-01-18-preview/communicationservicejobrouter.json
-```
-
 ### Tag: package-jobrouter-2023-11-01
 
 These settings apply only when `--tag=package-jobrouter-2023-11-01` is specified on the command line.

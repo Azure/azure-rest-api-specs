@@ -2,7 +2,6 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
-import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
 
 using Azure.Core;
@@ -11,15 +10,11 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using OpenAPI;
-using Azure.ClientGenerator.Core;
 
 namespace Microsoft.LoadTestService;
 
-@@encodedName(Azure.Core.Foundations.ResourceBody.resource,
-  "application/json",
-  "body"
-);
-@@clientName(Azure.Core.Foundations.ResourceBody.resource, "body");
+@@projectedName(Azure.Core.Foundations.ResourceBody.resource, "json", "body");
+@@projectedName(Azure.Core.Foundations.ResourceBody.resource, "client", "body");
 
 @tag("Test")
 interface LoadTestAdministration {

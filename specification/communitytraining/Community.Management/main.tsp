@@ -1,6 +1,7 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
+import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -12,16 +13,10 @@ using Azure.ResourceManager;
 @armProviderNamespace("Microsoft.Community")
 @service({
   title: "Microsoft.Community",
+  version: "2023-11-01",
 })
-@versioned(Versions)
+@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.Community;
-
-/** Api versions */
-enum Versions {
-  /** 2023-11-01 api version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2023-11-01`,
-}
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -133,8 +128,6 @@ model CommunityTrainingProperties {
   provisioningState?: ProvisioningState;
 }
 
-#suppress "deprecated" "Existing API"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
 @armResourceOperations
 interface CommunityTrainings {
   get is ArmResourceRead<CommunityTraining>;

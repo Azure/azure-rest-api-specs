@@ -2,7 +2,6 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "./models.tsp";
 import "./Service.tsp";
@@ -20,7 +19,6 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-using Azure.ClientGenerator.Core;
 @armProviderNamespace
 @service({
   title: "Azure API Center",
@@ -38,74 +36,95 @@ enum Versions {
   v2024_03_01: "2024-03-01",
 }
 
-@@encodedName(Apis.createOrUpdate::parameters.resource,
-  "application/json",
+@@projectedName(Apis.createOrUpdate::parameters.resource, "json", "payload");
+@@projectedName(Apis.createOrUpdate::parameters.resource, "client", "payload");
+
+@@projectedName(ApiDefinitions.createOrUpdate::parameters.resource,
+  "json",
   "payload"
 );
-@@clientName(Apis.createOrUpdate::parameters.resource, "payload");
-
-@@encodedName(ApiDefinitions.createOrUpdate::parameters.resource,
-  "application/json",
-  "payload"
-);
-@@clientName(ApiDefinitions.createOrUpdate::parameters.resource, "payload");
-
-@@encodedName(ApiVersions.createOrUpdate::parameters.resource,
-  "application/json",
-  "payload"
-);
-@@clientName(ApiVersions.createOrUpdate::parameters.resource, "payload");
-
-@@encodedName(Deployments.createOrUpdate::parameters.resource,
-  "application/json",
-  "payload"
-);
-@@clientName(Deployments.createOrUpdate::parameters.resource, "payload");
-
-@@encodedName(Environments.createOrUpdate::parameters.resource,
-  "application/json",
-  "payload"
-);
-@@clientName(Environments.createOrUpdate::parameters.resource, "payload");
-
-@@encodedName(MetadataSchemas.createOrUpdate::parameters.resource,
-  "application/json",
-  "payload"
-);
-@@clientName(MetadataSchemas.createOrUpdate::parameters.resource, "payload");
-
-@@encodedName(Services.update::parameters.properties,
-  "application/json",
-  "payload"
-);
-@@clientName(Services.update::parameters.properties, "payload");
-
-@@encodedName(Workspaces.createOrUpdate::parameters.resource,
-  "application/json",
-  "payload"
-);
-@@clientName(Workspaces.createOrUpdate::parameters.resource, "payload");
-
-@@encodedName(ApiDefinitions.importSpecification::parameters.body,
-  "application/json",
+@@projectedName(ApiDefinitions.createOrUpdate::parameters.resource,
+  "client",
   "payload"
 );
 
-@@clientName(ApiDefinitions.importSpecification::parameters.body, "payload");
-
-@@encodedName(ApiDefinitions.exportSpecification::parameters.body,
-  "application/json",
+@@projectedName(ApiVersions.createOrUpdate::parameters.resource,
+  "json",
+  "payload"
+);
+@@projectedName(ApiVersions.createOrUpdate::parameters.resource,
+  "client",
   "payload"
 );
 
-@@clientName(ApiDefinitions.exportSpecification::parameters.body, "payload");
-
-@@encodedName(Services.exportMetadataSchema::parameters.body,
-  "application/json",
+@@projectedName(Deployments.createOrUpdate::parameters.resource,
+  "json",
+  "payload"
+);
+@@projectedName(Deployments.createOrUpdate::parameters.resource,
+  "client",
   "payload"
 );
 
-@@clientName(Services.exportMetadataSchema::parameters.body, "payload");
+@@projectedName(Environments.createOrUpdate::parameters.resource,
+  "json",
+  "payload"
+);
+@@projectedName(Environments.createOrUpdate::parameters.resource,
+  "client",
+  "payload"
+);
+
+@@projectedName(MetadataSchemas.createOrUpdate::parameters.resource,
+  "json",
+  "payload"
+);
+@@projectedName(MetadataSchemas.createOrUpdate::parameters.resource,
+  "client",
+  "payload"
+);
+
+@@projectedName(Services.update::parameters.properties, "json", "payload");
+@@projectedName(Services.update::parameters.properties, "client", "payload");
+
+@@projectedName(Workspaces.createOrUpdate::parameters.resource,
+  "json",
+  "payload"
+);
+@@projectedName(Workspaces.createOrUpdate::parameters.resource,
+  "client",
+  "payload"
+);
+
+@@projectedName(ApiDefinitions.importSpecification::parameters.body,
+  "json",
+  "payload"
+);
+
+@@projectedName(ApiDefinitions.importSpecification::parameters.body,
+  "client",
+  "payload"
+);
+
+@@projectedName(ApiDefinitions.exportSpecification::parameters.body,
+  "json",
+  "payload"
+);
+
+@@projectedName(ApiDefinitions.exportSpecification::parameters.body,
+  "client",
+  "payload"
+);
+
+@@projectedName(Services.exportMetadataSchema::parameters.body,
+  "json",
+  "payload"
+);
+
+@@projectedName(Services.exportMetadataSchema::parameters.body,
+  "client",
+  "payload"
+);
 
 @@visibility(Azure.Core.Page.nextLink, "read");
 @@visibility(Azure.Core.Page.value, "read");

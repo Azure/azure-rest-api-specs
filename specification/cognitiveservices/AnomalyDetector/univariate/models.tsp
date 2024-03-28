@@ -9,8 +9,7 @@ using Azure.Core;
 namespace AnomalyDetector.Univariate;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-union ImputeMode {
-  string,
+enum ImputeMode {
   Auto: "auto",
   Previous: "previous",
   Linear: "linear",
@@ -20,24 +19,22 @@ union ImputeMode {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-union AnomalyDetectorErrorCodes {
-  string,
-  "InvalidCustomInterval",
-  "BadArgument",
-  "InvalidGranularity",
-  "InvalidPeriod",
-  "InvalidModelArgument",
-  "InvalidSeries",
-  "InvalidJsonFormat",
-  "RequiredGranularity",
-  "RequiredSeries",
-  "InvalidImputeMode",
-  "InvalidImputeFixedValue",
+enum AnomalyDetectorErrorCodes {
+  InvalidCustomInterval,
+  BadArgument,
+  InvalidGranularity,
+  InvalidPeriod,
+  InvalidModelArgument,
+  InvalidSeries,
+  InvalidJsonFormat,
+  RequiredGranularity,
+  RequiredSeries,
+  InvalidImputeMode,
+  InvalidImputeFixedValue,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-union TimeGranularity {
-  string,
+enum TimeGranularity {
   Yearly: "yearly",
   Monthly: "monthly",
   Weekly: "weekly",

@@ -1,6 +1,7 @@
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-providerhub";
 import "./baseTarget.tsp";
 
 namespace Microsoft.DatabaseWatcher;
@@ -15,7 +16,7 @@ model SqlMiTargetProperties extends TargetProperties {
   @doc("The Azure SQL Managed Instance target.")
   targetType: "SqlMi";
 
-  @doc("The Azure ResourceId of an Azure SQL Managed Instance target.")
+  @doc("The ARM ResourceId of an Azure SQL Managed Instance target.")
   sqlMiResourceId: ResourceIdentifier<[
     {
       type: "Microsoft.Sql/managedInstances";

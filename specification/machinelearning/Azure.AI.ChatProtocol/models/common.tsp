@@ -5,9 +5,7 @@ namespace Azure.AI.ChatProtocol;
 using TypeSpec.Http;
 
 @doc("Representation of the reason why a chat session has finished processing.")
-union FinishReason {
-  string,
-
+enum FinishReason {
   @doc("Completion ended normally.")
   stopped: "stop",
 
@@ -16,9 +14,7 @@ union FinishReason {
 }
 
 @doc("A representation of the intended purpose of a message.")
-union ChatRole {
-  string,
-
+enum ChatRole {
   @doc("The role that provides input to the completion.")
   user: "user",
 
@@ -52,9 +48,7 @@ model StateProperty {
 }
 
 @doc("Identifies the type of a message.")
-union MessageKind {
-  string,
-
+enum MessageKind {
   @doc("The message context is text.")
   text: "text",
 }

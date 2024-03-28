@@ -1,13 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
-import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.OpenAI.Assistants;
 
@@ -44,7 +42,7 @@ op listFiles(@query purpose?: FilePurpose): FileListResponse;
 @route("/files")
 op uploadFile(
   @header contentType: "multipart/form-data",
-  @clientName("Data", "csharp") file: bytes,
+  @projectedName("csharp", "Data") file: bytes,
   purpose: FilePurpose,
 
   /*
@@ -83,15 +81,3 @@ op getFile(
   @encodedName("application/json", "file_id")
   fileId: string,
 ): OpenAIFile;
-
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
-#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-@get
-@route("/files/{fileId}/content")
-@doc("Returns information about a specific file. Does not retrieve file content.")
-op getFileContent(
-  @doc("The ID of the file to retrieve.")
-  @path
-  @encodedName("application/json", "file_id")
-  fileId: string,
-): bytes;

@@ -91,6 +91,7 @@ input-file:
   - preview/2022-09-01-preview/routeset.json
   - preview/2022-09-01-preview/wayfind.json
   - preview/2.0/alias.json
+  - preview/2.0/data.json
   - preview/2.0/dwgconversion.json
   - preview/2.0/featurestate.json
   - preview/2.0/wfs.json

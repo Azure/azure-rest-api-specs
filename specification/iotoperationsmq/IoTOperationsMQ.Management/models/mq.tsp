@@ -1,5 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
+import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-resource-manager";
 
 import "./base.tsp";

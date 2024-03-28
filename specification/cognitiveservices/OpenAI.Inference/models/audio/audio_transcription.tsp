@@ -1,17 +1,13 @@
 import "@typespec/versioning";
-import "@azure-tools/typespec-client-generator-core";
 import "./common.tsp";
 
 namespace Azure.OpenAI;
 
 using TypeSpec.Versioning;
-using Azure.ClientGenerator.Core;
 
 @doc("Defines available options for the underlying response format of output transcription information.")
-@added(ServiceApiVersions.v2024_02_15_Preview)
-union AudioTranscriptionFormat {
-  string,
-
+@added(ServiceApiVersions.v2023_09_01_Preview)
+enum AudioTranscriptionFormat {
   @doc("Use a response body that is a JSON object containing a single 'text' field for the transcription.")
   json: "json",
 
@@ -36,13 +32,13 @@ union AudioTranscriptionFormat {
 @doc("""
 The configuration information for an audio transcription request.
 """)
-@added(ServiceApiVersions.v2024_02_15_Preview)
+@added(ServiceApiVersions.v2023_09_01_Preview)
 model AudioTranscriptionOptions {
   @doc("""
   The audio data to transcribe. This must be the binary content of a file in one of the supported media formats:
    flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm.
   """)
-  @clientName("AudioData", "csharp")
+  @projectedName("csharp", "AudioData")
   file: bytes;
 
   @doc("""
@@ -84,7 +80,7 @@ model AudioTranscriptionOptions {
   // Implementation note: developer-facing specification of deployment or model by clients should be controlled either
   // via an operation parameter or by this request body field -- but only one of those. This field should be hidden by
   // clients if operation parameters are used and populated into the request body on an as-needed basis.
-  @clientName("DeploymentName", "csharp")
+  @projectedName("csharp", "DeploymentName")
   `model`?: string;
 }
 
@@ -93,7 +89,7 @@ Extended information about a single segment of transcribed audio data.
 Segments generally represent roughly 5-10 seconds of speech. Segment boundaries typically occur between words but not
 necessarily sentences.
 """)
-@added(ServiceApiVersions.v2024_02_15_Preview)
+@added(ServiceApiVersions.v2023_09_01_Preview)
 model AudioTranscriptionSegment {
   @doc("The 0-based index of this segment within a transcription.")
   id: int32;
@@ -114,7 +110,7 @@ model AudioTranscriptionSegment {
 
   @doc("The average log probability associated with this audio segment.")
   @encodedName("application/json", "avg_logprob")
-  @clientName("AverageLogProbability", "csharp")
+  @projectedName("csharp", "AverageLogProbability")
   avgLogprob: float32;
 
   @doc("The compression ratio of this audio segment.")
@@ -123,7 +119,7 @@ model AudioTranscriptionSegment {
 
   @doc("The probability of no speech detection within this audio segment.")
   @encodedName("application/json", "no_speech_prob")
-  @clientName("NoSpeechProbability", "csharp")
+  @projectedName("csharp", "NoSpeechProbability")
   noSpeechProb: float32;
 
   @doc("The token IDs matching the transcribed text in this audio segment.")
@@ -140,13 +136,13 @@ model AudioTranscriptionSegment {
 }
 
 @doc("Result information for an operation that transcribed spoken audio into written text.")
-@added(ServiceApiVersions.v2024_02_15_Preview)
+@added(ServiceApiVersions.v2023_09_01_Preview)
 model AudioTranscription {
   @doc("The transcribed text for the provided audio data.")
   text: string;
 
   @doc("The label that describes which operation type generated the accompanying response data.")
-  @clientName("InternalAudioTaskLabel", "csharp")
+  @projectedName("csharp", "InternalAudioTaskLabel")
   task?: AudioTaskLabel;
 
   @doc("""

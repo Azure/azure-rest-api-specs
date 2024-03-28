@@ -1,6 +1,7 @@
 import "@typespec/rest";
 import "@typespec/openapi";
 import "@typespec/versioning";
+import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./../helpers.tsp";
@@ -63,8 +64,6 @@ interface FleetUpdateStrategies {
       IfNoneMatchParameters<FleetUpdateStrategy>
   >;
 
-  #suppress "deprecated" "Existing API"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
   delete is FleetArmResourceDeleteAsync<
     FleetUpdateStrategy,
     BaseParameters<FleetUpdateStrategy> & IfMatchParameters<FleetUpdateStrategy>

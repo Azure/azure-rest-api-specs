@@ -18,9 +18,7 @@ model ConditionStage {
 }
 
 @doc("InterpretationType ")
-union InterpretationType {
-  string,
-
+enum InterpretationType {
   @doc("Normal")
   Normal: "normal",
 
@@ -56,9 +54,7 @@ union InterpretationType {
 ObservationStatusType based on FHIR valueset observation-status
 see: https://www.hl7.org/fhir/codesystem-observation-status.html
 """)
-union ObservationStatusType {
-  string,
-
+enum ObservationStatusType {
   @doc("The existence of the observation is registered, but there is no result yet available.")
   Registered: "registered",
 
@@ -91,9 +87,7 @@ union ObservationStatusType {
 ConditionDiagnosisSeverityType based on SNOMED CT International edition 31-July 2022
 see: http://snomed.info/sct
 """)
-union ConditionDiagnosisSeverityType {
-  string,
-
+enum ConditionDiagnosisSeverityType {
   @doc("Severe ( http://snomed.info/sct#24484000 ))")
   Severe: "severe",
 
@@ -107,9 +101,7 @@ union ConditionDiagnosisSeverityType {
 @doc("""
 ConditionCategoryType based on FHIR valueset condition-category
 """)
-union ConditionCategoryType {
-  string,
-
+enum ConditionCategoryType {
   @doc("An item on a problem list that can be managed over time and can be expressed by a practitioner (e.g. physician, nurse), patient or related person.")
   ProblemListItem: "problemListItem",
 
@@ -121,9 +113,7 @@ union ConditionCategoryType {
 VerificationStatusType based of FHIR valueset condition-ver-status.
 see: https://terminology.hl7.org/5.1.0/CodeSystem-condition-ver-status.html
 """)
-union VerificationStatusType {
-  string,
-
+enum VerificationStatusType {
   @doc("There is not sufficient diagnostic and/or clinical evidence to treat this as a confirmed condition.")
   Unconfirmed: "unconfirmed",
 
@@ -147,9 +137,7 @@ union VerificationStatusType {
 // ClinicalStatusType based on FHIR ValueSet condition-clinical.
 // See: https://terminology.hl7.org/5.1.0/CodeSystem-condition-clinical.html
 // """)
-// union ClinicalStatusType {
-//  string,
-//
+// enum ClinicalStatusType {
 //   @doc("The subject is currently experiencing the condition or situation, there is evidence of the condition or situation, or considered to be a significant risk.")
 //   Active: "active";
 //   @doc("The subject is experiencing a reoccurrence or repeating of a previously resolved condition or situation, e.g. urinary tract infection, food insecurity.")

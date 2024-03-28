@@ -2,350 +2,287 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-client-generator-core";
 
 using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using OpenAPI;
-using Azure.ClientGenerator.Core;
 
 namespace DocumentIntelligence;
 
 @doc("Method used to compute string offset and length.")
-union StringIndexType {
-  string,
-
+enum StringIndexType {
   @doc("""
   User-perceived display character, or grapheme cluster, as defined by Unicode
   8.0.0.
   """)
-  textElements: "textElements",
+  textElements,
 
   @doc("Character unit represented by a single unicode code point.  Used by Python 3.")
-  unicodeCodePoint: "unicodeCodePoint",
+  unicodeCodePoint,
 
   @doc("""
   Character unit represented by a 16-bit Unicode code unit.  Used by JavaScript,
   Java, and .NET.
   """)
-  utf16CodeUnit: "utf16CodeUnit",
+  utf16CodeUnit,
 }
 
 @doc("Format of the content in analyzed result.")
-union ContentFormat {
-  string,
-
+enum ContentFormat {
   @doc("Plain text representation of the document content without any formatting.")
-  text: "text",
+  text,
 
   @doc("""
   Markdown representation of the document content with section headings, tables,
   etc.
   """)
-  markdown: "markdown",
+  markdown,
 }
 
 @doc("Document analysis features to enable.")
-union DocumentAnalysisFeature {
-  string,
-
+enum DocumentAnalysisFeature {
   @doc("Perform OCR at a higher resolution to handle documents with fine print.")
-  "ocrHighResolution",
+  ocrHighResolution,
 
   @doc("Enable the detection of the text content language.")
-  "languages",
+  languages,
 
   @doc("Enable the detection of barcodes in the document.")
-  "barcodes",
+  barcodes,
 
   @doc("Enable the detection of mathematical expressions in the document.")
-  "formulas",
+  formulas,
 
   @doc("Enable the detection of general key value pairs (form fields) in the document.")
-  "keyValuePairs",
+  keyValuePairs,
 
   @doc("Enable the recognition of various font styles.")
-  "styleFont",
+  styleFont,
 
   @doc("Enable the extraction of additional fields via the queryFields query parameter.")
-  "queryFields",
+  queryFields,
 }
 
 @doc("The unit used by the width, height, and polygon properties. For images, the unit is \"pixel\". For PDF, the unit is \"inch\".")
-union LengthUnit {
-  string,
-  @doc("Length unit for image files.") "pixel",
-  @doc("Length unit for PDF files.") "inch",
+enum LengthUnit {
+  @doc("Length unit for image files.") pixel,
+  @doc("Length unit for PDF files.") inch,
 }
 
 @doc("State of the selection mark.")
-union DocumentSelectionMarkState {
-  string,
-
+enum DocumentSelectionMarkState {
   @doc("""
   The selection mark is selected, often indicated by a check ✓ or cross X inside
   the selection mark.
   """)
-  "selected",
+  selected,
 
   @doc("The selection mark is not selected.")
-  "unselected",
+  unselected,
 }
 
 @doc("Barcode kind.")
-union DocumentBarcodeKind {
-  string,
-
+enum DocumentBarcodeKind {
   @doc("QR code, as defined in ISO/IEC 18004:2015.")
-  "QRCode",
+  QRCode,
 
   @doc("PDF417, as defined in ISO 15438.")
-  "PDF417",
+  PDF417,
 
   @doc("GS1 12-digit Universal Product Code.")
-  "UPCA",
+  UPCA,
 
   @doc("GS1 6-digit Universal Product Code.")
-  "UPCE",
+  UPCE,
 
   @doc("Code 39 barcode, as defined in ISO/IEC 16388:2007.")
-  "Code39",
+  Code39,
 
   @doc("Code 128 barcode, as defined in ISO/IEC 15417:2007.")
-  "Code128",
+  Code128,
 
   @doc("GS1 8-digit International Article Number (European Article Number).")
-  "EAN8",
+  EAN8,
 
   @doc("GS1 13-digit International Article Number (European Article Number).")
-  "EAN13",
+  EAN13,
 
   @doc("GS1 DataBar barcode.")
-  "DataBar",
+  DataBar,
 
   @doc("Code 93 barcode, as defined in ANSI/AIM BC5-1995.")
-  "Code93",
+  Code93,
 
   @doc("Codabar barcode, as defined in ANSI/AIM BC3-1995.")
-  "Codabar",
+  Codabar,
 
   @doc("GS1 DataBar Expanded barcode.")
-  "DataBarExpanded",
+  DataBarExpanded,
 
   @doc("Interleaved 2 of 5 barcode, as defined in ANSI/AIM BC2-1995.")
-  "ITF",
+  ITF,
 
   @doc("Micro QR code, as defined in ISO/IEC 23941:2022.")
-  "MicroQRCode",
+  MicroQRCode,
 
   @doc("Aztec code, as defined in ISO/IEC 24778:2008.")
-  "Aztec",
+  Aztec,
 
   @doc("Data matrix code, as defined in ISO/IEC 16022:2006.")
-  "DataMatrix",
+  DataMatrix,
 
   @doc("MaxiCode, as defined in ISO/IEC 16023:2000.")
-  "MaxiCode",
+  MaxiCode,
 }
 
 @doc("Formula kind.")
-union DocumentFormulaKind {
-  string,
-  @doc("A formula embedded within the content of a paragraph.") "inline",
-  @doc("A formula in display mode that takes up an entire line.") "display",
+enum DocumentFormulaKind {
+  @doc("A formula embedded within the content of a paragraph.") inline,
+  @doc("A formula in display mode that takes up an entire line.") display,
 }
 
 @doc("Semantic role of the paragraph.")
-union ParagraphRole {
-  string,
-  @doc("Text near the top edge of the page.") "pageHeader",
-  @doc("Text near the bottom edge of the page.") "pageFooter",
-  @doc("Page number.") "pageNumber",
-  @doc("Top-level title describing the entire document.") "title",
-  @doc("Sub heading describing a section of the document.") "sectionHeading",
-  @doc("A note usually placed after the main content on a page.") "footnote",
-  @doc("A block of formulas, often with shared alignment.") "formulaBlock",
+enum ParagraphRole {
+  @doc("Text near the top edge of the page.") pageHeader,
+  @doc("Text near the bottom edge of the page.") pageFooter,
+  @doc("Page number.") pageNumber,
+  @doc("Top-level title describing the entire document.") title,
+  @doc("Sub heading describing a section of the document.") sectionHeading,
+  @doc("A note usually placed after the main content on a page.") footnote,
+  @doc("A block of formulas, often with shared alignment.") formulaBlock,
 }
 
 @doc("Table cell kind.")
-union DocumentTableCellKind {
-  string,
-
-  @doc("Contains the main content/data.")
-  content: "content",
-
-  @doc("Describes the content of the row.")
-  rowHeader: "rowHeader",
-
-  @doc("Describes the content of the column.")
-  columnHeader: "columnHeader",
+enum DocumentTableCellKind {
+  @doc("Contains the main content/data.") content,
+  @doc("Describes the content of the row.") rowHeader,
+  @doc("Describes the content of the column.") columnHeader,
 
   @doc("Describes the row headers, usually located at the top left corner of a table.")
-  stubHead: "stubHead",
+  stubHead,
 
-  @doc("Describes the content in (parts of) the table.")
-  description: "description",
+  @doc("Describes the content in (parts of) the table.") description,
 }
 
 @doc("Font style.")
-union FontStyle {
-  string,
-  @doc("Characters are represented normally.") "normal",
-  @doc("Characters are visually slanted to the right.") "italic",
+enum FontStyle {
+  @doc("Characters are represented normally.") normal,
+  @doc("Characters are visually slanted to the right.") italic,
 }
 
 @doc("Font weight.")
-union FontWeight {
-  string,
-  @doc("Characters are represented normally.") "normal",
-  @doc("Characters are represented with thicker strokes.") "bold",
+enum FontWeight {
+  @doc("Characters are represented normally.") normal,
+  @doc("Characters are represented with thicker strokes.") bold,
 }
 
 @doc("Semantic data type of the field value.")
-union DocumentFieldType {
+enum DocumentFieldType {
+  @doc("Plain text.")
   string,
 
-  @doc("Plain text.")
-  "string",
-
   @doc("Date, normalized to ISO 8601 (YYYY-MM-DD) format.")
-  "date",
+  date,
 
   @doc("Time, normalized to ISO 8601 (hh:mm:ss) format.")
-  "time",
+  time,
 
   @doc("Phone number, normalized to E.164 (+{CountryCode}{SubscriberNumber}) format.")
-  "phoneNumber",
+  phoneNumber,
 
   @doc("Floating point number, normalized to double precision floating point.")
-  "number",
+  number,
 
   @doc("Integer number, normalized to 64-bit signed integer.")
-  "integer",
+  integer,
 
   @doc("Is field selected?")
-  "selectionMark",
+  selectionMark,
 
   @doc("Country/region, normalized to ISO 3166-1 alpha-3 format (ex. USA).")
-  "countryRegion",
+  countryRegion,
 
   @doc("Is signature present?")
-  "signature",
+  signature,
 
   @doc("List of subfields of the same type.")
-  "array",
+  array,
 
   @doc("Named list of subfields of potentially different types.")
-  "object",
+  object,
 
   @doc("Currency amount with optional currency symbol and unit.")
-  "currency",
+  currency,
 
   @doc("Parsed address.")
-  "address",
+  address,
 
   @doc("Boolean value, normalized to true or false.")
-  "boolean",
-
-  @added(Versions.v2024_02_29_preview)
-  @doc("Array of selected string values.")
-  "selectionGroup",
+  boolean,
 }
 
 @doc("Presence of signature.")
-union DocumentSignatureType {
-  string,
-  @doc("A signature is detected.") "signed",
-  @doc("No signatures are detected.") "unsigned",
+enum DocumentSignatureType {
+  @doc("A signature is detected.") signed,
+  @doc("No signatures are detected.") unsigned,
 }
 
 @doc("Custom document model build mode.")
-union DocumentBuildMode {
-  string,
-  @doc("Target documents with similar visual templates.") "template",
-  @doc("Support documents with diverse visual templates.") "neural",
+enum DocumentBuildMode {
+  @doc("Target documents with similar visual templates.") template,
+  @doc("Support documents with diverse visual templates.") neural,
 }
 
 @doc("Type of operation.")
-union OperationKind {
-  string,
-
+enum OperationKind {
   @doc("Build a new custom document model.")
-  documentModelBuild: "documentModelBuild",
+  documentModelBuild,
 
   @doc("Compose a new custom document model from existing models.")
-  documentModelCompose: "documentModelCompose",
+  documentModelCompose,
 
   @doc("""
   Copy an existing document model to potentially a different resource, region, or
   subscription.
   """)
-  documentModelCopyTo: "documentModelCopyTo",
+  documentModelCopyTo,
 
   @doc("Build a new custom classifier model.")
-  documentClassifierBuild: "documentClassifierBuild",
+  documentClassifierBuild,
 }
 
 @doc("Document splitting mode.")
-union SplitMode {
-  string,
-
-  @doc("Automatically split file into documents.")
-  auto: "auto",
-
-  @doc("Treat the entire file as a single document.")
-  none: "none",
-
-  @doc("Treat each page in the file as a separate document.")
-  perPage: "perPage",
+enum SplitMode {
+  @doc("Automatically split file into documents.") auto,
+  @doc("Treat the entire file as a single document.") none,
+  @doc("Treat each page in the file as a separate document.") perPage,
 }
 
 @lroStatus
 @doc("Operation status.")
-union OperationStatus {
-  string,
-
-  @doc("The operation has not started yet.")
-  notStarted: "notStarted",
-
-  @doc("The operation is in progress.")
-  running: "running",
-
-  @doc("The operation has failed.")
-  @lroFailed
-  failed: "failed",
-
-  @doc("The operation has succeeded.")
-  @lroSucceeded
-  succeeded: "succeeded",
-
-  @added(Versions.v2024_02_29_preview)
-  @doc("The operation has completed.")
-  @lroSucceeded
-  completed: "completed",
-
-  @doc("The operation has been canceled.")
-  @lroCanceled
-  canceled: "canceled",
+enum OperationStatus {
+  @doc("The operation has not started yet.") notStarted,
+  @doc("The operation is in progress.") running,
+  @doc("The operation has failed.") @lroFailed failed,
+  @doc("The operation has succeeded.") @lroSucceeded succeeded,
+  @doc("The operation has been canceled.") @lroCanceled canceled,
 }
 
 @doc("Type of content source.")
-union ContentSourceKind {
-  string,
-
+enum ContentSourceKind {
   @doc("Content at a specific URL.")
-  "url",
+  url,
 
   @doc("Content represented via Base64 encoding.")
-  "base64",
+  base64,
 
   @doc("Files in a path within an Azure Blob Storage container.")
-  "azureBlob",
+  azureBlob,
 
   @doc("A file list specifying individual files in an Azure Blob Storage container.")
-  "azureBlobFileList",
+  azureBlobFileList,
 }
 
 @doc("Document analysis parameters.")
@@ -368,7 +305,7 @@ model ErrorResponse {
 }
 
 @doc("The error object.")
-@clientName("DocumentIntelligenceError", "csharp")
+@projectedName("csharp", "DocumentIntelligenceError")
 model Error {
   @doc("One of a server-defined set of error codes.")
   code: string;
@@ -394,28 +331,14 @@ model InnerError {
   @doc("A human-readable representation of the error.")
   message?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "https://github.com/Azure/typespec-azure/issues/417"
   @doc("Inner error.")
-  @clientName("InnerErrorObject", "csharp")
+  @projectedName("csharp", "InnerErrorObject")
   innererror?: InnerError;
-}
-
-@doc("The error object.")
-@clientName("DocumentIntelligenceWarning", "csharp")
-model Warning {
-  @doc("One of a server-defined set of warning codes.")
-  code: string;
-
-  @doc("A human-readable representation of the warning.")
-  message: string;
-
-  @doc("The target of the error.")
-  target?: string;
 }
 
 @doc("Status and result of the analyze operation.")
 model AnalyzeResultOperation {
-  @doc("Operation status.  notStarted, running, succeeded, or failed")
+  @doc("Operation status.")
   status: OperationStatus;
 
   @doc("Date and time (UTC) when the analyze operation was submitted.")
@@ -937,7 +860,7 @@ model DocumentLanguage {
 }
 
 @doc("An object describing the location and semantic content of a document.")
-@clientName("AnalyzedDocument", "csharp")
+@projectedName("csharp", "AnalyzedDocument")
 model Document {
   @doc("Document type.")
   @minLength(2)
@@ -1005,10 +928,6 @@ model DocumentField {
 
   @doc("Boolean value.")
   valueBoolean?: boolean;
-
-  @added(Versions.v2024_02_29_preview)
-  @doc("Selection group value.")
-  valueSelectionGroup?: string[];
 
   @doc("Field content.")
   content?: string;
@@ -1207,9 +1126,9 @@ model OperationDetails {
   @doc("Operation ID")
   @key
   @visibility("read", "create")
-  operationId: string;
+  operationId: uuid;
 
-  @doc("Operation status.  notStarted, running, completed, or failed")
+  @doc("Operation status.")
   status: OperationStatus;
 
   @doc("Operation progress (0-100).")
@@ -1281,10 +1200,6 @@ model DocumentModelDetails {
 
   @doc("Supported document types.")
   docTypes?: Record<DocumentTypeDetails>;
-
-  @added(Versions.v2024_02_29_preview)
-  @doc("List of warnings encountered while building the model.")
-  warnings?: Warning[];
 }
 
 @doc("Document type info.")
@@ -1333,11 +1248,6 @@ model BuildDocumentClassifierRequest {
   @maxLength(4096)
   description?: string;
 
-  @added(Versions.v2024_02_29_preview)
-  @doc("Base classifierId on top of which to train the classifier.")
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
-  baseClassifierId?: string;
-
   @doc("List of document types to classify against.")
   docTypes: Record<ClassifierDocumentTypeDetails>;
 }
@@ -1385,17 +1295,8 @@ model DocumentClassifierDetails {
   @doc("API version used to create this document classifier.")
   apiVersion: string;
 
-  @added(Versions.v2024_02_29_preview)
-  @doc("Base classifierId on top of which the classifier was trained.")
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._~-]{1,63}$")
-  baseClassifierId?: string;
-
   @doc("List of document types to classify against.")
   docTypes: Record<ClassifierDocumentTypeDetails>;
-
-  @added(Versions.v2024_02_29_preview)
-  @doc("List of warnings encountered while building the classifier.")
-  warnings?: Warning[];
 }
 
 @doc("Document classification parameters.")
