@@ -2010,78 +2010,6 @@
         }
       }
     },
-    "Capacity": {
-      "description": "Capacity resource",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/TrackedResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/CapacityProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "CapacityProperties": {
-      "description": "The capacity properties",
-      "type": "object",
-      "properties": {
-        "crossGeoCompute": {
-          "description": "Gets or sets the Cross Geo compute options.",
-          "enum": [
-            "Allowed",
-            "NotAllowed"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "IsAllowed",
-            "modelAsString": true
-          }
-        },
-        "expiresAt": {
-          "format": "date-time",
-          "description": "Gets or sets resource expiry. Not set for Capacity ARM resource.",
-          "type": "string"
-        },
-        "geo": {
-          "description": "Gets or sets the geo where compute is used",
-          "type": "string"
-        },
-        "internalMetadata": {
-          "$ref": "#/definitions/InternalMetadata"
-        },
-        "numberOfUnits": {
-          "format": "int32",
-          "description": "Gets or sets the number of units.",
-          "type": "integer"
-        },
-        "provisioningState": {
-          "description": "Gets or sets the provisioning state.",
-          "enum": [
-            "Unknown",
-            "Creating",
-            "Moving",
-            "Deleting",
-            "SoftDeleting",
-            "SoftDeleted",
-            "Failed",
-            "Succeeded",
-            "Canceled",
-            "Updating",
-            "Accepted",
-            "Suspended"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "CapacityProvisioningState",
-            "modelAsString": true
-          }
-        }
-      }
-    },
     "CheckNameAvailabilityRequest": {
       "description": "The request payload for CheckNameAvailability API",
       "type": "object",
@@ -2445,27 +2373,6 @@
             "name": "PublicNetworkAccess",
             "modelAsString": true
           }
-        }
-      }
-    },
-    "InternalMetadata": {
-      "description": "Internal Metadata",
-      "type": "object",
-      "properties": {
-        "accountId": {
-          "format": "uuid",
-          "description": "Gets or sets account Id.",
-          "type": "string"
-        },
-        "capacityId": {
-          "format": "uuid",
-          "description": "Gets or sets capacity Id.",
-          "type": "string"
-        },
-        "tenantId": {
-          "format": "uuid",
-          "description": "Gets or sets tenant Id.",
-          "type": "string"
         }
       }
     },
