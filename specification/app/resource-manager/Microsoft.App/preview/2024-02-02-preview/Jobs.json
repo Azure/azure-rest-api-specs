@@ -1093,7 +1093,7 @@
           "description": "Pods in the execution.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ExecutionPodStatus"
+            "$ref": "#/definitions/PodExecutionStatus"
           },
           "x-ms-identifiers": [
             "name"
@@ -1101,7 +1101,7 @@
         }
       }
     },
-    "ExecutionPodStatus": {
+    "PodExecutionStatus": {
       "description": "Container Apps Job execution pod status.",
       "type": "object",
       "properties": {
@@ -1113,7 +1113,7 @@
           "description": "Containers in the execution",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ExecutionContainerStatus"
+            "$ref": "#/definitions/ContainerExecutionStatus"
           },
           "x-ms-identifiers": [
             "name"
@@ -1121,7 +1121,7 @@
         }
       }
     },
-    "ExecutionContainerStatus": {
+    "ContainerExecutionStatus": {
       "description": "Container Apps Job execution container status. Contains status code and reason",
       "type": "object",
       "properties": {
