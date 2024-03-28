@@ -38,24 +38,26 @@
       "ApiKeyAuth": []
     },
     {
-      "OAuth2Auth": [
+      "AadOauth2Auth": [
         "https://cognitiveservices.azure.com/.default"
       ]
     }
   ],
   "securityDefinitions": {
+    "AadOauth2Auth": {
+      "type": "oauth2",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://cognitiveservices.azure.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    },
     "ApiKeyAuth": {
       "type": "apiKey",
       "name": "Ocp-Apim-Subscription-Key",
       "in": "header"
-    },
-    "OAuth2Auth": {
-      "type": "oauth2",
-      "flow": "implicit",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-      "scopes": {
-        "https://cognitiveservices.azure.com/.default": ""
-      }
     }
   },
   "tags": [],
@@ -207,6 +209,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "AnalyzeFromImageData": {
+            "$ref": "./examples/AnalyzeFromImageData_MaximumSet.json"
+          }
         }
       }
     }
@@ -354,6 +361,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "AnalyzeFromUrl": {
+            "$ref": "./examples/AnalyzeFromUrl_MaximumSet.json"
           }
         }
       }
