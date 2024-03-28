@@ -1,8 +1,8 @@
-### Tag: package-2024-04-01-preview
+### Tag: package-preview-2024-01
 
-These settings apply only when `--tag=package-2024-04-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-04-01-preview'
+```yaml $(tag) == 'package-preview-2024-01'
 input-file:
-  - Microsoft.AgFoodPlatform/preview/2024-04-01-preview/agfood.json
+  - Microsoft.AgFoodPlatform/preview/2024-01-01-preview/agfood.json
 ```
