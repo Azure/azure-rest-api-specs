@@ -313,7 +313,6 @@ model ChatRequestToolMessage extends ChatRequestMessage {
   toolCallId: string;
 }
 
-
 @doc("A representation of a chat message as received in a response.")
 model ChatResponseMessage {
   @doc("The chat role associated with the message.")
