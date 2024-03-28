@@ -24,22 +24,22 @@
     },
     {
       "OAuth2Auth": [
-        "https://registration.contoso.com/.default"
+        "https://cognitiveservices.azure.com/.default"
       ]
     }
   ],
   "securityDefinitions": {
     "ApiKeyAuth": {
       "type": "apiKey",
-      "name": "api-key",
+      "name": "Ocp-Apim-Subscription-Key",
       "in": "header"
     },
     "OAuth2Auth": {
       "type": "oauth2",
       "flow": "implicit",
-      "authorizationUrl": "https://login.contoso.com/common/oauth2/v2.0/authorize",
+      "authorizationUrl": "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize",
       "scopes": {
-        "https://registration.contoso.com/.default": ""
+        "https://cognitiveservices.azure.com/.default": ""
       }
     }
   },
@@ -126,12 +126,9 @@
           }
         }
       },
-      "patch": {
-        "operationId": "Registrations_CreateOrUpdateRegistration",
+      "put": {
+        "operationId": "Registrations_CreateOrReplaceRegistration",
         "description": "Creates or updates a Registration.",
-        "consumes": [
-          "application/merge-patch+json"
-        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -149,7 +146,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RegistrationCreateOrUpdate"
+              "$ref": "#/definitions/Registration"
             }
           }
         ],
@@ -177,11 +174,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Registrations_CreateOrUpdateRegistration": {
-            "$ref": "./examples/Registrations_CreateOrUpdateRegistrationSample.json"
           }
         }
       },
@@ -232,22 +224,12 @@
       "properties": {
         "endpoint": {
           "type": "string",
-          "description": "The analytics endpoint to run."
+          "description": "The analytics endpoint to call."
         }
       },
       "required": [
         "endpoint"
       ]
-    },
-    "AnalyticsModelCreateOrUpdate": {
-      "type": "object",
-      "description": "Analytics model",
-      "properties": {
-        "endpoint": {
-          "type": "string",
-          "description": "The analytics endpoint to run."
-        }
-      }
     },
     "Azure.Core.Foundations.Error": {
       "type": "object",
@@ -335,50 +317,18 @@
         "customDomain"
       ]
     },
-    "BatchTranscriptionPropertiesModelCreateOrUpdate": {
-      "type": "object",
-      "description": "Batch Transcription Properties model",
-      "properties": {
-        "locale": {
-          "type": "string",
-          "description": "The expected locale of the audio data to transcribe. For example, 'en-US', 'fr-FR', 'zh-CN', etc. For a full list of supported locales, see [Supported languages and regions](https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=stt)."
-        },
-        "modelX": {
-          "$ref": "#/definitions/EntityReferenceModelCreateOrUpdate",
-          "description": "The model property to use a specific base model or Custom Speech model. If you don't specify the model, the default base model for the locale is used."
-        },
-        "customDomain": {
-          "type": "string",
-          "description": "Custom domain name for batch transcription."
-        },
-        "transcriptionProperties": {
-          "$ref": "#/definitions/TranscriptionPropertiesModelCreateOrUpdate",
-          "description": "The transcription batch API properties that allow you to customize the transcription process. For more information, see [Request configuration options](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/batch-transcription-create?pivots=rest-api#request-configuration-options)."
-        }
-      }
-    },
     "DiarizationPropertiesModel": {
       "type": "object",
       "description": "DiarizationProperties model",
       "properties": {
         "speakers": {
           "$ref": "#/definitions/DiarizationSpeakersPropertiesModel",
-          "description": "The analytics endpoint to run."
+          "description": "speakers properties."
         }
       },
       "required": [
         "speakers"
       ]
-    },
-    "DiarizationPropertiesModelCreateOrUpdate": {
-      "type": "object",
-      "description": "DiarizationProperties model",
-      "properties": {
-        "speakers": {
-          "$ref": "#/definitions/DiarizationSpeakersPropertiesModel",
-          "description": "The analytics endpoint to run."
-        }
-      }
     },
     "DiarizationSpeakersPropertiesModel": {
       "type": "object",
@@ -387,12 +337,12 @@
         "minCount": {
           "type": "integer",
           "format": "int8",
-          "description": "minCount"
+          "description": "Minumum count of speakers"
         },
         "maxCount": {
           "type": "integer",
           "format": "int8",
-          "description": "maxCount"
+          "description": "Maximum count of speakers"
         }
       }
     },
@@ -408,16 +358,6 @@
       "required": [
         "self"
       ]
-    },
-    "EntityReferenceModelCreateOrUpdate": {
-      "type": "object",
-      "description": "Entity ReferenceModel model",
-      "properties": {
-        "self": {
-          "type": "string",
-          "description": "self."
-        }
-      }
     },
     "LanguageIdentificationPropertiesModel": {
       "type": "object",
@@ -446,30 +386,6 @@
         "mode",
         "candidateLocales"
       ]
-    },
-    "LanguageIdentificationPropertiesModelCreateOrUpdate": {
-      "type": "object",
-      "description": "LanguageIdentificationProperties model",
-      "properties": {
-        "mode": {
-          "type": "string",
-          "description": "mode"
-        },
-        "candidateLocales": {
-          "type": "array",
-          "description": "candidateLocales.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "speechModelMapping": {
-          "type": "object",
-          "description": "speechModelMapping",
-          "additionalProperties": {
-            "$ref": "#/definitions/EntityReferenceModelCreateOrUpdate"
-          }
-        }
-      }
     },
     "PagedRegistration": {
       "type": "object",
@@ -515,24 +431,6 @@
         "deliveryMode"
       ]
     },
-    "ProcessingModelCreateOrUpdate": {
-      "type": "object",
-      "description": "Processing model",
-      "properties": {
-        "deliveryMode": {
-          "type": "string",
-          "description": "deliveryMode."
-        },
-        "subjectEndsWith": {
-          "type": "string",
-          "description": "Extensions of input files."
-        },
-        "systemTopicResourceId": {
-          "type": "string",
-          "description": "ResourceId for System Topic."
-        }
-      }
-    },
     "Registration": {
       "type": "object",
       "description": "A registration.",
@@ -544,23 +442,23 @@
         },
         "storageModel": {
           "$ref": "#/definitions/StorageModel",
-          "description": "The storage configuration."
+          "description": "Storage configuration."
         },
         "processingModel": {
           "$ref": "#/definitions/ProcessingModel",
-          "description": "The processing configuration."
+          "description": "Processing configuration."
         },
         "batchTranscriptionModel": {
           "$ref": "#/definitions/BatchTranscriptionPropertiesModel",
-          "description": "The batch transcription configuration."
+          "description": "Batch transcription configuration."
         },
         "analyticsModel": {
           "$ref": "#/definitions/AnalyticsModel",
-          "description": "The analytics configuration."
+          "description": "Analytics configuration."
         },
         "statusModel": {
           "$ref": "#/definitions/StatusModel",
-          "description": "The status of the registration."
+          "description": "Status of the registration."
         }
       },
       "required": [
@@ -570,32 +468,6 @@
         "batchTranscriptionModel",
         "statusModel"
       ]
-    },
-    "RegistrationCreateOrUpdate": {
-      "type": "object",
-      "description": "A registration.",
-      "properties": {
-        "storageModel": {
-          "$ref": "#/definitions/StorageModelCreateOrUpdate",
-          "description": "The storage configuration."
-        },
-        "processingModel": {
-          "$ref": "#/definitions/ProcessingModelCreateOrUpdate",
-          "description": "The processing configuration."
-        },
-        "batchTranscriptionModel": {
-          "$ref": "#/definitions/BatchTranscriptionPropertiesModelCreateOrUpdate",
-          "description": "The batch transcription configuration."
-        },
-        "analyticsModel": {
-          "$ref": "#/definitions/AnalyticsModelCreateOrUpdate",
-          "description": "The analytics configuration."
-        },
-        "statusModel": {
-          "$ref": "#/definitions/StatusModelCreateOrUpdate",
-          "description": "The status of the registration."
-        }
-      }
     },
     "StatusModel": {
       "type": "object",
@@ -613,20 +485,6 @@
       "required": [
         "code"
       ]
-    },
-    "StatusModelCreateOrUpdate": {
-      "type": "object",
-      "description": "Status model",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Status code."
-        },
-        "message": {
-          "type": "string",
-          "description": "Message."
-        }
-      }
     },
     "StorageModel": {
       "type": "object",
@@ -660,32 +518,6 @@
         "processedContainerName",
         "errorOutputContainerName"
       ]
-    },
-    "StorageModelCreateOrUpdate": {
-      "type": "object",
-      "description": "Storage model",
-      "properties": {
-        "blobStorageEndpoint": {
-          "type": "string",
-          "description": "The Uri of the blob storage account in the form of 'https://<accountname>.blob.core.windows.net'."
-        },
-        "inputContainerName": {
-          "type": "string",
-          "description": "The name of the container that holds the audio files to be processed."
-        },
-        "outputContainerName": {
-          "type": "string",
-          "description": "The name of the container that stores the transcription and analytics results."
-        },
-        "processedContainerName": {
-          "type": "string",
-          "description": "The name of the container that archives the audio files that have been transcribed."
-        },
-        "errorOutputContainerName": {
-          "type": "string",
-          "description": "The name of the container that saves the error messages during processing."
-        }
-      }
     },
     "TranscriptionPropertiesModel": {
       "type": "object",
@@ -734,57 +566,6 @@
         },
         "languageIdentification": {
           "$ref": "#/definitions/LanguageIdentificationPropertiesModel",
-          "description": "Language identification is used to identify languages spoken in audio when compared against a list of supported languages. https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=language-identification"
-        }
-      }
-    },
-    "TranscriptionPropertiesModelCreateOrUpdate": {
-      "type": "object",
-      "description": "Batch Transcription Properties model",
-      "properties": {
-        "wordLevelTimestampsEnabled": {
-          "type": "boolean",
-          "description": "Specifies if word level timestamps should be included in the output. The default value is false.",
-          "default": false
-        },
-        "displayFormWordLevelTimestampsEnabled": {
-          "type": "boolean",
-          "description": "Specifies whether to include word-level timestamps on the display form of the transcription results. The results are returned in the displayWords property of the transcription file. The default value is false.",
-          "default": false
-        },
-        "channels": {
-          "type": "array",
-          "description": "An array of channel numbers to process. Channels 0 and 1 are transcribed by default.",
-          "default": [
-            0,
-            1
-          ],
-          "items": {
-            "type": "integer",
-            "format": "int8"
-          }
-        },
-        "punctuationMode": {
-          "type": "string",
-          "description": "Specifies how to handle punctuation in recognition results. Accepted values are None to disable punctuation, Dictated to imply explicit (spoken) punctuation, Automatic to let the decoder deal with punctuation, or DictatedAndAutomatic to use dictated and automatic punctuation. The default value is DictatedAndAutomatic.",
-          "default": "DictatedAndAutomatic"
-        },
-        "profanityFilterMode": {
-          "type": "string",
-          "description": "Specifies how to handle profanity in recognition results. Accepted values are None to disable profanity filtering, Masked to replace profanity with asterisks, Removed to remove all profanity from the result, or Tags to add profanity tags. The default value is Masked.",
-          "default": "Masked"
-        },
-        "diarizationEnabled": {
-          "type": "boolean",
-          "description": "Specifies that the Speech service should attempt diarization analysis on the input, which is expected to be a mono channel that contains two voices. The default value is false.",
-          "default": false
-        },
-        "diarization": {
-          "$ref": "#/definitions/DiarizationPropertiesModelCreateOrUpdate",
-          "description": "Indicates that the Speech service should attempt diarization analysis on the input, which is expected to be a mono channel that contains multiple voices. The feature isn't available with stereo recordings."
-        },
-        "languageIdentification": {
-          "$ref": "#/definitions/LanguageIdentificationPropertiesModelCreateOrUpdate",
           "description": "Language identification is used to identify languages spoken in audio when compared against a list of supported languages. https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=language-identification"
         }
       }

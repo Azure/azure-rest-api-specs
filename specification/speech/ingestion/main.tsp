@@ -8,11 +8,11 @@ using TypeSpec.Versioning;
 using Azure.Core;
 
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "api-key"> | OAuth2Auth<[
+  ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
     {
       type: OAuth2FlowType.implicit,
-      authorizationUrl: "https://login.contoso.com/common/oauth2/v2.0/authorize",
-      scopes: ["https://registration.contoso.com/.default"],
+      authorizationUrl: "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize",
+      scopes: ["https://cognitiveservices.azure.com/.default"],
     }
   ]>
 )
@@ -37,19 +37,19 @@ model Registration {
   @visibility("read")
   name: string;
 
-  @doc("The storage configuration.")
+  @doc("Storage configuration.")
   storageModel: StorageModel;
 
-  @doc("The processing configuration.")
+  @doc("Processing configuration.")
   processingModel: ProcessingModel;
 
-  @doc("The batch transcription configuration.")
+  @doc("Batch transcription configuration.")
   batchTranscriptionModel: BatchTranscriptionPropertiesModel;
 
-  @doc("The analytics configuration.")
+  @doc("Analytics configuration.")
   analyticsModel?: AnalyticsModel;
 
-  @doc("The status of the registration.")
+  @doc("Status of the registration.")
   statusModel: StatusModel;
 }
 
@@ -128,15 +128,15 @@ model TranscriptionPropertiesModel {
 
 @doc("DiarizationProperties model")
 model DiarizationPropertiesModel {
-  @doc("The analytics endpoint to run.")
+  @doc("speakers properties.")
   speakers: DiarizationSpeakersPropertiesModel;
 }
 
 @doc("DiarizationSpeakersProperties model")
 model DiarizationSpeakersPropertiesModel {
-  @doc("minCount")
+  @doc("Minumum count of speakers")
   minCount?: int8;
-  @doc("maxCount")
+  @doc("Maximum count of speakers")
   maxCount?: int8;
 }
 
@@ -154,7 +154,7 @@ model LanguageIdentificationPropertiesModel {
 
 @doc("Analytics model")
 model AnalyticsModel {
-  @doc("The analytics endpoint to run.")
+  @doc("The analytics endpoint to call.")
   endpoint: string;
 }
 
@@ -178,16 +178,11 @@ interface Registrations {
   getRegistration is ResourceRead<Registration>;
 
   @doc("Creates or updates a Registration.")
-  createOrUpdateRegistration is ResourceCreateOrUpdate<Registration>;
+  createOrReplaceRegistration is ResourceCreateOrReplace<Registration>;
 
   @doc("Delete a Registration.")
   deleteRegistration is ResourceDelete<Registration>;
 
   @doc("List Registration resources")
-  listRegistrations is ResourceList<
-    Registration,
-    {
-      parameters: StandardListQueryParameters;
-    }
-  >;
+  listRegistrations is ResourceList<Registration>;
 }
