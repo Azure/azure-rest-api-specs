@@ -31,6 +31,31 @@
   "consumes": [
     "application/json"
   ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    },
+    {
+      "OAuth2Auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    },
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": ""
+      }
+    }
+  },
   "tags": [],
   "paths": {
     "/keys": {
@@ -108,7 +133,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "NextLink"
+          "nextLinkName": "nextLink"
         }
       },
       "head": {
@@ -237,7 +262,49 @@
               ],
               "x-ms-enum": {
                 "name": "KeyValueFields",
-                "modelAsString": true
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "key",
+                    "value": "key",
+                    "description": "Key field."
+                  },
+                  {
+                    "name": "label",
+                    "value": "label",
+                    "description": "Label field."
+                  },
+                  {
+                    "name": "content_type",
+                    "value": "content_type",
+                    "description": "Content type field."
+                  },
+                  {
+                    "name": "value",
+                    "value": "value",
+                    "description": "Value field."
+                  },
+                  {
+                    "name": "last_modified",
+                    "value": "last_modified",
+                    "description": "Last modified field."
+                  },
+                  {
+                    "name": "tags",
+                    "value": "tags",
+                    "description": "Tags field."
+                  },
+                  {
+                    "name": "locked",
+                    "value": "locked",
+                    "description": "Locked field."
+                  },
+                  {
+                    "name": "etag",
+                    "value": "etag",
+                    "description": "Etag field."
+                  }
+                ]
               }
             },
             "collectionFormat": "csv",
@@ -312,7 +379,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "NextLink"
+          "nextLinkName": "nextLink"
         }
       },
       "head": {
@@ -381,7 +448,49 @@
               ],
               "x-ms-enum": {
                 "name": "KeyValueFields",
-                "modelAsString": true
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "key",
+                    "value": "key",
+                    "description": "Key field."
+                  },
+                  {
+                    "name": "label",
+                    "value": "label",
+                    "description": "Label field."
+                  },
+                  {
+                    "name": "content_type",
+                    "value": "content_type",
+                    "description": "Content type field."
+                  },
+                  {
+                    "name": "value",
+                    "value": "value",
+                    "description": "Value field."
+                  },
+                  {
+                    "name": "last_modified",
+                    "value": "last_modified",
+                    "description": "Last modified field."
+                  },
+                  {
+                    "name": "tags",
+                    "value": "tags",
+                    "description": "Tags field."
+                  },
+                  {
+                    "name": "locked",
+                    "value": "locked",
+                    "description": "Locked field."
+                  },
+                  {
+                    "name": "etag",
+                    "value": "etag",
+                    "description": "Etag field."
+                  }
+                ]
               }
             },
             "collectionFormat": "csv",
@@ -516,7 +625,49 @@
               ],
               "x-ms-enum": {
                 "name": "KeyValueFields",
-                "modelAsString": true
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "key",
+                    "value": "key",
+                    "description": "Key field."
+                  },
+                  {
+                    "name": "label",
+                    "value": "label",
+                    "description": "Label field."
+                  },
+                  {
+                    "name": "content_type",
+                    "value": "content_type",
+                    "description": "Content type field."
+                  },
+                  {
+                    "name": "value",
+                    "value": "value",
+                    "description": "Value field."
+                  },
+                  {
+                    "name": "last_modified",
+                    "value": "last_modified",
+                    "description": "Last modified field."
+                  },
+                  {
+                    "name": "tags",
+                    "value": "tags",
+                    "description": "Tags field."
+                  },
+                  {
+                    "name": "locked",
+                    "value": "locked",
+                    "description": "Locked field."
+                  },
+                  {
+                    "name": "etag",
+                    "value": "etag",
+                    "description": "Etag field."
+                  }
+                ]
               }
             },
             "collectionFormat": "csv",
@@ -797,7 +948,49 @@
               ],
               "x-ms-enum": {
                 "name": "KeyValueFields",
-                "modelAsString": true
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "key",
+                    "value": "key",
+                    "description": "Key field."
+                  },
+                  {
+                    "name": "label",
+                    "value": "label",
+                    "description": "Label field."
+                  },
+                  {
+                    "name": "content_type",
+                    "value": "content_type",
+                    "description": "Content type field."
+                  },
+                  {
+                    "name": "value",
+                    "value": "value",
+                    "description": "Value field."
+                  },
+                  {
+                    "name": "last_modified",
+                    "value": "last_modified",
+                    "description": "Last modified field."
+                  },
+                  {
+                    "name": "tags",
+                    "value": "tags",
+                    "description": "Tags field."
+                  },
+                  {
+                    "name": "locked",
+                    "value": "locked",
+                    "description": "Locked field."
+                  },
+                  {
+                    "name": "etag",
+                    "value": "etag",
+                    "description": "Etag field."
+                  }
+                ]
               }
             },
             "collectionFormat": "csv",
@@ -876,7 +1069,14 @@
               ],
               "x-ms-enum": {
                 "name": "LabelFields",
-                "modelAsString": true
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "name",
+                    "value": "name",
+                    "description": "Name field."
+                  }
+                ]
               }
             },
             "collectionFormat": "csv",
@@ -917,7 +1117,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "NextLink"
+          "nextLinkName": "nextLink"
         }
       },
       "head": {
@@ -972,7 +1172,14 @@
               ],
               "x-ms-enum": {
                 "name": "LabelFields",
-                "modelAsString": true
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "name",
+                    "value": "name",
+                    "description": "Name field."
+                  }
+                ]
               }
             },
             "collectionFormat": "csv",
@@ -1268,7 +1475,49 @@
               ],
               "x-ms-enum": {
                 "name": "KeyValueFields",
-                "modelAsString": true
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "key",
+                    "value": "key",
+                    "description": "Key field."
+                  },
+                  {
+                    "name": "label",
+                    "value": "label",
+                    "description": "Label field."
+                  },
+                  {
+                    "name": "content_type",
+                    "value": "content_type",
+                    "description": "Content type field."
+                  },
+                  {
+                    "name": "value",
+                    "value": "value",
+                    "description": "Value field."
+                  },
+                  {
+                    "name": "last_modified",
+                    "value": "last_modified",
+                    "description": "Last modified field."
+                  },
+                  {
+                    "name": "tags",
+                    "value": "tags",
+                    "description": "Tags field."
+                  },
+                  {
+                    "name": "locked",
+                    "value": "locked",
+                    "description": "Locked field."
+                  },
+                  {
+                    "name": "etag",
+                    "value": "etag",
+                    "description": "Etag field."
+                  }
+                ]
               }
             },
             "collectionFormat": "csv",
@@ -1320,7 +1569,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "NextLink"
+          "nextLinkName": "nextLink"
         }
       },
       "head": {
@@ -1389,7 +1638,49 @@
               ],
               "x-ms-enum": {
                 "name": "KeyValueFields",
-                "modelAsString": true
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "key",
+                    "value": "key",
+                    "description": "Key field."
+                  },
+                  {
+                    "name": "label",
+                    "value": "label",
+                    "description": "Label field."
+                  },
+                  {
+                    "name": "content_type",
+                    "value": "content_type",
+                    "description": "Content type field."
+                  },
+                  {
+                    "name": "value",
+                    "value": "value",
+                    "description": "Value field."
+                  },
+                  {
+                    "name": "last_modified",
+                    "value": "last_modified",
+                    "description": "Last modified field."
+                  },
+                  {
+                    "name": "tags",
+                    "value": "tags",
+                    "description": "Tags field."
+                  },
+                  {
+                    "name": "locked",
+                    "value": "locked",
+                    "description": "Locked field."
+                  },
+                  {
+                    "name": "etag",
+                    "value": "etag",
+                    "description": "Etag field."
+                  }
+                ]
               }
             },
             "collectionFormat": "csv",
@@ -1481,7 +1772,64 @@
               ],
               "x-ms-enum": {
                 "name": "SnapshotFields",
-                "modelAsString": true
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "name",
+                    "value": "name",
+                    "description": "Name field."
+                  },
+                  {
+                    "name": "status",
+                    "value": "status",
+                    "description": "Status field."
+                  },
+                  {
+                    "name": "filters",
+                    "value": "filters",
+                    "description": "Filters field."
+                  },
+                  {
+                    "name": "composition_type",
+                    "value": "composition_type",
+                    "description": "Composition type field."
+                  },
+                  {
+                    "name": "created",
+                    "value": "created",
+                    "description": "Created field."
+                  },
+                  {
+                    "name": "expires",
+                    "value": "expires",
+                    "description": "Expires field."
+                  },
+                  {
+                    "name": "retention_period",
+                    "value": "retention_period",
+                    "description": "Retention period field."
+                  },
+                  {
+                    "name": "size",
+                    "value": "size",
+                    "description": "Size field."
+                  },
+                  {
+                    "name": "items_count",
+                    "value": "items_count",
+                    "description": "Items count field."
+                  },
+                  {
+                    "name": "tags",
+                    "value": "tags",
+                    "description": "Tags field."
+                  },
+                  {
+                    "name": "etag",
+                    "value": "etag",
+                    "description": "Etag field."
+                  }
+                ]
               }
             },
             "collectionFormat": "csv",
@@ -1503,7 +1851,29 @@
               ],
               "x-ms-enum": {
                 "name": "SnapshotStatus",
-                "modelAsString": true
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "provisioning",
+                    "value": "provisioning",
+                    "description": "Provisioning"
+                  },
+                  {
+                    "name": "ready",
+                    "value": "ready",
+                    "description": "Ready"
+                  },
+                  {
+                    "name": "archived",
+                    "value": "archived",
+                    "description": "Archived"
+                  },
+                  {
+                    "name": "failed",
+                    "value": "failed",
+                    "description": "Failed"
+                  }
+                ]
               }
             },
             "collectionFormat": "csv"
@@ -1543,7 +1913,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "NextLink"
+          "nextLinkName": "nextLink"
         }
       },
       "head": {
@@ -1653,7 +2023,64 @@
               ],
               "x-ms-enum": {
                 "name": "SnapshotFields",
-                "modelAsString": true
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "name",
+                    "value": "name",
+                    "description": "Name field."
+                  },
+                  {
+                    "name": "status",
+                    "value": "status",
+                    "description": "Status field."
+                  },
+                  {
+                    "name": "filters",
+                    "value": "filters",
+                    "description": "Filters field."
+                  },
+                  {
+                    "name": "composition_type",
+                    "value": "composition_type",
+                    "description": "Composition type field."
+                  },
+                  {
+                    "name": "created",
+                    "value": "created",
+                    "description": "Created field."
+                  },
+                  {
+                    "name": "expires",
+                    "value": "expires",
+                    "description": "Expires field."
+                  },
+                  {
+                    "name": "retention_period",
+                    "value": "retention_period",
+                    "description": "Retention period field."
+                  },
+                  {
+                    "name": "size",
+                    "value": "size",
+                    "description": "Size field."
+                  },
+                  {
+                    "name": "items_count",
+                    "value": "items_count",
+                    "description": "Items count field."
+                  },
+                  {
+                    "name": "tags",
+                    "value": "tags",
+                    "description": "Tags field."
+                  },
+                  {
+                    "name": "etag",
+                    "value": "etag",
+                    "description": "Etag field."
+                  }
+                ]
               }
             },
             "collectionFormat": "csv",
@@ -2011,13 +2438,26 @@
     },
     "CompositionType": {
       "type": "string",
+      "description": "Composition types.",
       "enum": [
         "key",
         "key_label"
       ],
       "x-ms-enum": {
         "name": "CompositionType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "key",
+            "value": "key",
+            "description": "The 'key' composition type."
+          },
+          {
+            "name": "key_label",
+            "value": "key_label",
+            "description": "The 'key_label' composition type."
+          }
+        ]
       }
     },
     "Error": {
@@ -2047,52 +2487,9 @@
         }
       }
     },
-    "ErrorDetail": {
-      "type": "object",
-      "description": "The details of an error.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "One of a server-defined set of error codes."
-        },
-        "message": {
-          "type": "string",
-          "description": "A human-readable representation of the error."
-        },
-        "details": {
-          "type": "array",
-          "description": "An array of details about specific errors that led to this reported error.",
-          "items": {
-            "$ref": "#/definitions/ErrorDetail"
-          },
-          "x-ms-identifiers": []
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerError",
-          "description": "An object containing more specific information than the current object about\nthe error."
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "InnerError": {
-      "type": "object",
-      "description": "An object containing specific information about an error.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "One of a server-defined set of error codes."
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerError",
-          "description": "An object containing more specific information than the current object about\nthe error."
-        }
-      }
-    },
     "Key": {
       "type": "object",
+      "description": "Keys serve as identifiers for key-values and are used to store and retrieve corresponding values.",
       "properties": {
         "name": {
           "type": "string",
@@ -2116,12 +2513,13 @@
         "@nextLink": {
           "type": "string",
           "description": "The URI that can be used to request the next set of paged results.",
-          "x-ms-client-name": "NextLink"
+          "x-ms-client-name": "nextLink"
         }
       }
     },
     "KeyValue": {
       "type": "object",
+      "description": "A key-value pair representing application settings.",
       "properties": {
         "key": {
           "type": "string",
@@ -2165,6 +2563,7 @@
     },
     "KeyValueFields": {
       "type": "string",
+      "description": "Key-value fields.",
       "enum": [
         "key",
         "label",
@@ -2177,7 +2576,49 @@
       ],
       "x-ms-enum": {
         "name": "KeyValueFields",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "key",
+            "value": "key",
+            "description": "Key field."
+          },
+          {
+            "name": "label",
+            "value": "label",
+            "description": "Label field."
+          },
+          {
+            "name": "content_type",
+            "value": "content_type",
+            "description": "Content type field."
+          },
+          {
+            "name": "value",
+            "value": "value",
+            "description": "Value field."
+          },
+          {
+            "name": "last_modified",
+            "value": "last_modified",
+            "description": "Last modified field."
+          },
+          {
+            "name": "tags",
+            "value": "tags",
+            "description": "Tags field."
+          },
+          {
+            "name": "locked",
+            "value": "locked",
+            "description": "Locked field."
+          },
+          {
+            "name": "etag",
+            "value": "etag",
+            "description": "Etag field."
+          }
+        ]
       }
     },
     "KeyValueFilter": {
@@ -2223,12 +2664,13 @@
         "@nextLink": {
           "type": "string",
           "description": "The URI that can be used to request the next set of paged results.",
-          "x-ms-client-name": "NextLink"
+          "x-ms-client-name": "nextLink"
         }
       }
     },
     "Label": {
       "type": "object",
+      "description": "Labels are used to group key-values.",
       "properties": {
         "name": {
           "type": "string",
@@ -2239,12 +2681,20 @@
     },
     "LabelFields": {
       "type": "string",
+      "description": "Label fields.",
       "enum": [
         "name"
       ],
       "x-ms-enum": {
         "name": "LabelFields",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "name",
+            "value": "name",
+            "description": "Name field."
+          }
+        ]
       }
     },
     "LabelListResult": {
@@ -2262,7 +2712,7 @@
         "@nextLink": {
           "type": "string",
           "description": "The URI that can be used to request the next set of paged results.",
-          "x-ms-client-name": "NextLink"
+          "x-ms-client-name": "nextLink"
         }
       }
     },
@@ -2279,7 +2729,7 @@
           "description": "The current status of the operation"
         },
         "error": {
-          "$ref": "#/definitions/ErrorDetail",
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "An error, available when the status is `Failed`, describing why the operation\nfailed."
         }
       },
@@ -2290,6 +2740,7 @@
     },
     "Snapshot": {
       "type": "object",
+      "description": "A snapshot is a named, immutable subset of an App Configuration store's key-values.",
       "properties": {
         "name": {
           "type": "string",
@@ -2366,6 +2817,7 @@
     },
     "SnapshotFields": {
       "type": "string",
+      "description": "Snapshot fields.",
       "enum": [
         "name",
         "status",
@@ -2381,7 +2833,64 @@
       ],
       "x-ms-enum": {
         "name": "SnapshotFields",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "name",
+            "value": "name",
+            "description": "Name field."
+          },
+          {
+            "name": "status",
+            "value": "status",
+            "description": "Status field."
+          },
+          {
+            "name": "filters",
+            "value": "filters",
+            "description": "Filters field."
+          },
+          {
+            "name": "composition_type",
+            "value": "composition_type",
+            "description": "Composition type field."
+          },
+          {
+            "name": "created",
+            "value": "created",
+            "description": "Created field."
+          },
+          {
+            "name": "expires",
+            "value": "expires",
+            "description": "Expires field."
+          },
+          {
+            "name": "retention_period",
+            "value": "retention_period",
+            "description": "Retention period field."
+          },
+          {
+            "name": "size",
+            "value": "size",
+            "description": "Size field."
+          },
+          {
+            "name": "items_count",
+            "value": "items_count",
+            "description": "Items count field."
+          },
+          {
+            "name": "tags",
+            "value": "tags",
+            "description": "Tags field."
+          },
+          {
+            "name": "etag",
+            "value": "etag",
+            "description": "Etag field."
+          }
+        ]
       }
     },
     "SnapshotListResult": {
@@ -2399,12 +2908,13 @@
         "@nextLink": {
           "type": "string",
           "description": "The URI that can be used to request the next set of paged results.",
-          "x-ms-client-name": "NextLink"
+          "x-ms-client-name": "nextLink"
         }
       }
     },
     "SnapshotStatus": {
       "type": "string",
+      "description": "Snapshot status.",
       "enum": [
         "provisioning",
         "ready",
@@ -2413,7 +2923,29 @@
       ],
       "x-ms-enum": {
         "name": "SnapshotStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "provisioning",
+            "value": "provisioning",
+            "description": "Provisioning"
+          },
+          {
+            "name": "ready",
+            "value": "ready",
+            "description": "Ready"
+          },
+          {
+            "name": "archived",
+            "value": "archived",
+            "description": "Archived"
+          },
+          {
+            "name": "failed",
+            "value": "failed",
+            "description": "Failed"
+          }
+        ]
       }
     },
     "SnapshotUpdateParameters": {

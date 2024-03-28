@@ -11,6 +11,14 @@ using TypeSpec.Versioning;
   title: "Azure App Configuration",
 })
 @versioned(Versions)
+// FIXME: Check API key header name and find service scope
+@useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
+  {
+    type: OAuth2FlowType.implicit;
+    authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
+    scopes: ["user_impersonation"];
+  }
+]>)
 @server(
   "{endpoint}",
   "App Configuration service endpoint",
