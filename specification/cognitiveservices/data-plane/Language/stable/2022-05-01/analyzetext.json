@@ -2,140 +2,120 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Cognitive Language Service - Text Analysis",
-    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>.0",
-    "version": "2022-05-01"
+    "version": "2022-05-01",
+    "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/azure/cognitive-services/language-service/overview</a>.0",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "securityDefinitions": {
-    "apim_key": {
-      "type": "apiKey",
-      "description": "A subscription key for a Language service resource.",
-      "name": "Ocp-Apim-Subscription-Key",
-      "in": "header"
-    }
-  },
-  "security": [
-    {
-      "apim_key": []
-    }
+  "schemes": [
+    "https"
   ],
   "x-ms-parameterized-host": {
     "hostTemplate": "{Endpoint}/language",
     "useSchemePrefix": false,
     "parameters": [
       {
-        "$ref": "common.json#/parameters/Endpoint"
+        "name": "Endpoint",
+        "in": "path",
+        "description": "Supported Cognitive Services endpoint (e.g., https://<resource-name>.api.cognitiveservices.azure.com).",
+        "required": true,
+        "type": "string"
       }
     ]
   },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "tags": [],
   "paths": {
     "/:analyze-text": {
       "post": {
-        "summary": "Request text analysis over a collection of documents.",
-        "description": "Submit a collection of text documents for analysis.  Specify a single unique task to be executed immediately.",
         "operationId": "AnalyzeText",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "description": "Request text analysis over a collection of documents.",
         "parameters": [
           {
-            "$ref": "common.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ShowStats"
+            "$ref": "#/parameters/AnalyzeTextQueryParameters.showStats"
           },
           {
-            "description": "Collection of documents to analyze and a single task to execute.",
-            "in": "body",
             "name": "body",
+            "in": "body",
+            "description": "Collection of documents to analyze and a single task to execute.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/AnalyzeTextTask"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "A successful call result",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/AnalyzeTextTaskResult"
             }
           },
           "default": {
-            "description": "Unexpected error",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "common.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Entity Linking Request": {
-            "$ref": "./examples/SuccessfulEntityLinkingRequest.json"
-          },
-          "Successful Entity Recognition Request": {
-            "$ref": "./examples/SuccessfulEntityRecognitionRequest.json"
-          },
-          "Successful Key Phrase Extraction Request": {
-            "$ref": "./examples/SuccessfulKeyPhraseExtractionRequest.json"
-          },
-          "Successful PII Entity Recognition Request": {
-            "$ref": "./examples/SuccessfulPiiEntityRecognitionRequest.json"
-          },
-          "Successful Language Detection Request": {
-            "$ref": "./examples/SuccessfulLanguageDetectionRequest.json"
-          },
-          "Successful Sentiment Analysis Request": {
-            "$ref": "./examples/SuccessfulSentimentAnalysisRequest.json"
           }
         }
       }
     },
     "/analyze-text/jobs": {
       "post": {
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "AnalyzeTextSubmitJob",
         "description": "Submit a collection of text documents for analysis. Specify one or more unique tasks to be executed as a long-running operation.",
-        "operationId": "AnalyzeText_SubmitJob",
-        "summary": "Submit text analysis job",
         "parameters": [
           {
-            "$ref": "common.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "description": "Collection of documents to analyze and one or more tasks to execute.",
-            "in": "body",
             "name": "body",
+            "in": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/AnalyzeTextJobsInput"
-            },
-            "required": true
+            }
           }
         ],
         "responses": {
           "202": {
-            "description": "A successful call results with an Operation-Location header used to check the status of the analysis job.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Operation-Location": {
-                "type": "string"
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
               }
             }
           },
           "default": {
-            "description": "Error response.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "common.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Submit Analysis Job Request": {
-            "$ref": "./examples/SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -143,85 +123,95 @@
     },
     "/analyze-text/jobs/{jobId}": {
       "get": {
-        "produces": [
-          "application/json"
-        ],
-        "description": "Get the status of an analysis job.  A job may consist of one or more tasks.  Once all tasks are succeeded, the job will transition to the succeeded state and results will be available for each task.",
-        "operationId": "AnalyzeText_JobStatus",
+        "operationId": "AnalyzeTextJobStatus",
         "summary": "Get analysis status and results",
+        "description": "Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.",
         "parameters": [
           {
-            "$ref": "common.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/JobId"
+            "name": "jobId",
+            "in": "path",
+            "description": "job ID",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
           },
           {
-            "$ref": "#/parameters/ShowStats"
+            "name": "showStats",
+            "in": "query",
+            "description": "(Optional) if set to true, response will contain request and document level statistics.",
+            "required": false,
+            "type": "boolean"
           },
           {
-            "$ref": "common.json#/parameters/TopParameter"
+            "name": "top",
+            "in": "query",
+            "description": "The maximum number of resources to return from the collection.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "$ref": "common.json#/parameters/SkipParameter"
+            "name": "skip",
+            "in": "query",
+            "description": "An offset into the collection of the first resource to be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
           "200": {
-            "description": "Analysis job status and metadata.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/AnalyzeTextJobState"
             }
           },
           "default": {
-            "description": "Unexpected error",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "common.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Get Text Analysis Job Status Request": {
-            "$ref": "./examples/SuccessfulAnalyzeTextJobsMultipleTaskStatusRequest.json"
           }
         }
       }
     },
     "/analyze-text/jobs/{jobId}:cancel": {
       "post": {
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "AnalyzeTextCancelJob",
+        "summary": "Cancel a long-running Text Analysis job.",
         "description": "Cancel a long-running Text Analysis job.",
-        "operationId": "AnalyzeText_CancelJob",
-        "summary": "Cancel a long-running Text Analysis job",
         "parameters": [
           {
-            "$ref": "common.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/JobId"
+            "name": "jobId",
+            "in": "path",
+            "description": "job ID",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
           "202": {
-            "description": "Cancel Job request has been received.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "Operation-Location": {
-                "type": "string"
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
               }
             }
           },
           "default": {
-            "description": "Unexpected error",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "common.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Job Delete Request": {
-            "$ref": ".//examples//SuccessfulAnalyzeTextJobsCancelRequest.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -229,135 +219,8 @@
     }
   },
   "definitions": {
-    "AnalyzeTextTaskKind": {
-      "type": "string",
-      "description": "Enumeration of supported Text Analysis tasks.",
-      "enum": [
-        "SentimentAnalysis",
-        "EntityRecognition",
-        "PiiEntityRecognition",
-        "KeyPhraseExtraction",
-        "LanguageDetection",
-        "EntityLinking"
-      ],
-      "x-ms-enum": {
-        "name": "AnalyzeTextTaskKind",
-        "modelAsString": true
-      }
-    },
-    "AnalyzeTextLROTaskKind": {
-      "type": "string",
-      "description": "Enumeration of supported long-running Text Analysis tasks.",
-      "enum": [
-        "SentimentAnalysis",
-        "EntityRecognition",
-        "PiiEntityRecognition",
-        "KeyPhraseExtraction",
-        "EntityLinking",
-        "Healthcare",
-        "CustomEntityRecognition",
-        "CustomSingleLabelClassification",
-        "CustomMultiLabelClassification"
-      ],
-      "x-ms-enum": {
-        "name": "AnalyzeTextLROTaskKind",
-        "modelAsString": true
-      }
-    },
-    "AnalyzeTextTaskResultsKind": {
-      "type": "string",
-      "description": "Enumeration of supported Text Analysis task results.",
-      "enum": [
-        "SentimentAnalysisResults",
-        "EntityRecognitionResults",
-        "PiiEntityRecognitionResults",
-        "KeyPhraseExtractionResults",
-        "LanguageDetectionResults",
-        "EntityLinkingResults"
-      ],
-      "x-ms-enum": {
-        "name": "AnalyzeTextTaskResultsKind",
-        "modelAsString": true
-      }
-    },
-    "AnalyzeTextLROResultsKind": {
-      "type": "string",
-      "description": "Enumeration of supported Text Analysis long-running operation task results.",
-      "enum": [
-        "SentimentAnalysisLROResults",
-        "EntityRecognitionLROResults",
-        "PiiEntityRecognitionLROResults",
-        "KeyPhraseExtractionLROResults",
-        "EntityLinkingLROResults",
-        "HealthcareLROResults",
-        "CustomEntityRecognitionLROResults",
-        "CustomSingleLabelClassificationLROResults",
-        "CustomMultiLabelClassificationLROResults"
-      ],
-      "x-ms-enum": {
-        "name": "AnalyzeTextLROResultsKind",
-        "modelAsString": true
-      }
-    },
-    "MultiLanguageAnalysisInput": {
-      "properties": {
-        "documents": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MultiLanguageInput"
-          }
-        }
-      }
-    },
-    "LanguageDetectionAnalysisInput": {
-      "properties": {
-        "documents": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LanguageInput"
-          }
-        }
-      }
-    },
-    "AnalyzeTextTask": {
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ],
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/AnalyzeTextTaskKind"
-        }
-      }
-    },
-    "AnalyzeTextLROTask": {
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ],
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/AnalyzeTextLROTaskKind"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TaskIdentifier"
-        }
-      ]
-    },
-    "AnalyzeTextTaskResult": {
-      "discriminator": "kind",
-      "required": [
-        "kind"
-      ],
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/AnalyzeTextTaskResultsKind"
-        }
-      }
-    },
     "AnalyzeTextEntityLinkingInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -374,6 +237,7 @@
       "x-ms-discriminator-value": "EntityLinking"
     },
     "AnalyzeTextEntityRecognitionInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -389,7 +253,89 @@
       ],
       "x-ms-discriminator-value": "EntityRecognition"
     },
+    "AnalyzeTextJobState": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "display name"
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time job created"
+        },
+        "expirationDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time job expires"
+        },
+        "jobId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "job ID",
+          "readOnly": true
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "last updated date and time"
+        },
+        "status": {
+          "$ref": "#/definitions/State",
+          "description": "status"
+        },
+        "errors": {
+          "type": "array",
+          "description": "errors",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "next link"
+        },
+        "tasks": {
+          "$ref": "#/definitions/Tasks"
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+        }
+      },
+      "required": [
+        "createdDateTime",
+        "jobId",
+        "lastUpdatedDateTime",
+        "status",
+        "tasks"
+      ]
+    },
+    "AnalyzeTextJobsInput": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string"
+        },
+        "analysisInput": {
+          "$ref": "#/definitions/MultiLanguageAnalysisInput"
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnalyzeTextLROTask"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "analysisInput",
+        "tasks"
+      ]
+    },
     "AnalyzeTextKeyPhraseExtractionInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -405,23 +351,89 @@
       ],
       "x-ms-discriminator-value": "KeyPhraseExtraction"
     },
-    "AnalyzeTextPiiEntitiesRecognitionInput": {
+    "AnalyzeTextLROResult": {
+      "type": "object",
       "properties": {
-        "analysisInput": {
-          "$ref": "#/definitions/MultiLanguageAnalysisInput"
+        "lastUpdateDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last updated time in UTC for the task."
         },
-        "parameters": {
-          "$ref": "#/definitions/PiiTaskParameters"
+        "status": {
+          "$ref": "#/definitions/State",
+          "description": "The status of the task at the mentioned last update time."
+        },
+        "taskName": {
+          "type": "string",
+          "description": "task name"
+        },
+        "kind": {
+          "$ref": "#/definitions/AnalyzeTextLROResultsKind"
         }
       },
+      "discriminator": "kind",
+      "required": [
+        "lastUpdateDateTime",
+        "status",
+        "kind"
+      ]
+    },
+    "AnalyzeTextLROResultsKind": {
+      "type": "string",
+      "enum": [
+        "SentimentAnalysisLROResults",
+        "EntityRecognitionLROResults",
+        "PiiEntityRecognitionLROResults",
+        "KeyPhraseExtractionLROResults",
+        "EntityLinkingLROResults",
+        "HealthcareLROResults",
+        "CustomEntityRecognitionLROResults",
+        "CustomSingleLabelClassificationLROResults",
+        "CustomMultiLabelClassificationLROResults"
+      ],
+      "x-ms-enum": {
+        "name": "AnalyzeTextLROResultsKind",
+        "modelAsString": true
+      }
+    },
+    "AnalyzeTextLROTask": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AnalyzeTextLROTaskKind",
+          "description": "The kind of task to perform."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextTask"
+          "$ref": "#/definitions/TaskIdentifier"
         }
+      ]
+    },
+    "AnalyzeTextLROTaskKind": {
+      "type": "string",
+      "enum": [
+        "SentimentAnalysis",
+        "EntityRecognition",
+        "PiiEntityRecognition",
+        "KeyPhraseExtraction",
+        "EntityLinking",
+        "Healthcare",
+        "CustomEntityRecognition",
+        "CustomSingleLabelClassification",
+        "CustomMultiLabelClassification"
       ],
-      "x-ms-discriminator-value": "PiiEntityRecognition"
+      "x-ms-enum": {
+        "name": "AnalyzeTextLROTaskKind",
+        "modelAsString": true
+      }
     },
     "AnalyzeTextLanguageDetectionInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/LanguageDetectionAnalysisInput"
@@ -437,7 +449,25 @@
       ],
       "x-ms-discriminator-value": "LanguageDetection"
     },
+    "AnalyzeTextPiiEntitiesRecognitionInput": {
+      "type": "object",
+      "properties": {
+        "analysisInput": {
+          "$ref": "#/definitions/MultiLanguageAnalysisInput"
+        },
+        "parameters": {
+          "$ref": "#/definitions/PiiTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextTask"
+        }
+      ],
+      "x-ms-discriminator-value": "PiiEntityRecognition"
+    },
     "AnalyzeTextSentimentAnalysisInput": {
+      "type": "object",
       "properties": {
         "analysisInput": {
           "$ref": "#/definitions/MultiLanguageAnalysisInput"
@@ -453,151 +483,171 @@
       ],
       "x-ms-discriminator-value": "SentimentAnalysis"
     },
-    "AnalyzeTextJobsInput": {
+    "AnalyzeTextTask": {
+      "type": "object",
+      "description": "Collection of documents to analyze and a single task to execute.",
       "properties": {
-        "displayName": {
-          "description": "Optional display name for the analysis job.",
-          "type": "string"
-        },
-        "analysisInput": {
-          "$ref": "#/definitions/MultiLanguageAnalysisInput"
-        },
-        "tasks": {
-          "description": "The set of tasks to execute on the input documents.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AnalyzeTextLROTask"
-          }
+        "kind": {
+          "$ref": "#/definitions/AnalyzeTextTaskKind",
+          "description": "The kind of task to perform."
         }
       },
+      "discriminator": "kind",
       "required": [
-        "analysisInput",
-        "tasks"
+        "kind"
       ]
     },
-    "TaskIdentifier": {
-      "type": "object",
-      "description": "Base task object.",
-      "properties": {
-        "taskName": {
-          "type": "string"
-        }
-      }
-    },
-    "TaskParameters": {
-      "type": "object",
-      "description": "Base parameters object for a text analysis task.",
-      "properties": {
-        "loggingOptOut": {
-          "type": "boolean",
-          "default": false
-        }
-      }
-    },
-    "PreBuiltTaskParameters": {
-      "type": "object",
-      "description": "Parameters object for a text analysis task using pre-built models.",
-      "properties": {
-        "modelVersion": {
-          "type": "string",
-          "default": "latest"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TaskParameters"
-        }
-      ]
-    },
-    "PreBuiltResult": {
-      "properties": {
-        "errors": {
-          "type": "array",
-          "description": "Errors by document id.",
-          "items": {
-            "$ref": "#/definitions/DocumentError"
-          }
-        },
-        "statistics": {
-          "$ref": "#/definitions/RequestStatistics"
-        },
-        "modelVersion": {
-          "type": "string",
-          "description": "This field indicates which model is used for scoring."
-        }
-      },
-      "required": [
-        "errors",
-        "modelVersion"
-      ]
-    },
-    "CustomTaskParameters": {
-      "type": "object",
-      "description": "Parameters object for a text analysis task using custom models.",
-      "properties": {
-        "projectName": {
-          "type": "string",
-          "description": "This field indicates the project name for the model."
-        },
-        "deploymentName": {
-          "type": "string",
-          "description": "This field indicates the deployment name for the model."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TaskParameters"
-        }
+    "AnalyzeTextTaskKind": {
+      "type": "string",
+      "enum": [
+        "SentimentAnalysis",
+        "EntityRecognition",
+        "PiiEntityRecognition",
+        "KeyPhraseExtraction",
+        "LanguageDetection",
+        "EntityLinking"
       ],
-      "required": [
-        "projectName",
-        "deploymentName"
-      ]
+      "x-ms-enum": {
+        "name": "AnalyzeTextTaskKind",
+        "modelAsString": true
+      }
     },
-    "CustomResult": {
-      "properties": {
-        "errors": {
-          "type": "array",
-          "description": "Errors by document id.",
-          "items": {
-            "$ref": "#/definitions/DocumentError"
-          }
-        },
-        "statistics": {
-          "$ref": "#/definitions/RequestStatistics"
-        },
-        "projectName": {
-          "type": "string",
-          "description": "This field indicates the project name for the model."
-        },
-        "deploymentName": {
-          "type": "string",
-          "description": "This field indicates the deployment name for the model."
-        }
-      },
-      "required": [
-        "errors",
-        "projectName",
-        "deploymentName"
-      ]
-    },
-    "CustomEntitiesTaskParameters": {
+    "AnalyzeTextTaskResult": {
       "type": "object",
-      "description": "Supported parameters for a Custom Entities task.",
       "properties": {
-        "stringIndexType": {
-          "$ref": "common.json#/definitions/StringIndexType"
+        "kind": {
+          "$ref": "#/definitions/AnalyzeTextTaskResultsKind",
+          "description": "The kind of task result."
         }
       },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "AnalyzeTextTaskResultsKind": {
+      "type": "string",
+      "enum": [
+        "SentimentAnalysisResults",
+        "EntityRecognitionResults",
+        "PiiEntityRecognitionResults",
+        "KeyPhraseExtractionResults",
+        "LanguageDetectionResults",
+        "EntityLinkingResults"
+      ],
+      "x-ms-enum": {
+        "name": "AnalyzeTextTaskResultsKind",
+        "modelAsString": true
+      }
+    },
+    "Association": {
+      "type": "string",
+      "description": "Describes if the entity is the subject of the text or if it describes someone else.",
+      "enum": [
+        "subject",
+        "other"
+      ],
+      "x-ms-enum": {
+        "name": "Association",
+        "modelAsString": false
+      }
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
+    "Certainty": {
+      "type": "string",
+      "description": "Describes the entities certainty and polarity.",
+      "enum": [
+        "positive",
+        "positivePossible",
+        "neutralPossible",
+        "negativePossible",
+        "negative"
+      ],
+      "x-ms-enum": {
+        "name": "Certainty",
+        "modelAsString": false
+      }
+    },
+    "ClassificationDocumentResult": {
+      "type": "object",
+      "properties": {
+        "class": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClassificationResult"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "class"
+      ],
       "allOf": [
         {
-          "$ref": "#/definitions/CustomTaskParameters"
+          "$ref": "#/definitions/DocumentResult"
         }
       ]
+    },
+    "ClassificationDocumentResultWithDetectedLanguage": {
+      "type": "object",
+      "properties": {
+        "class": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClassificationResult"
+          },
+          "x-ms-identifiers": []
+        },
+        "detectedLanguage": {
+          "$ref": "#/definitions/DetectedLanguage",
+          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
+        }
+      },
+      "required": [
+        "class"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentResult"
+        }
+      ]
+    },
+    "ClassificationResult": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "Classification type."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score between 0 and 1 of the recognized class."
+        }
+      },
+      "required": [
+        "category",
+        "confidenceScore"
+      ]
+    },
+    "Conditionality": {
+      "type": "string",
+      "description": "Describes any conditionality on the entity.",
+      "enum": [
+        "hypothetical",
+        "conditional"
+      ],
+      "x-ms-enum": {
+        "name": "Conditionality",
+        "modelAsString": false
+      }
     },
     "CustomEntitiesLROTask": {
       "type": "object",
-      "description": "Use custom models to ease the process of information extraction from unstructured documents like contracts or financial documents",
       "properties": {
         "parameters": {
           "$ref": "#/definitions/CustomEntitiesTaskParameters"
@@ -615,11 +665,51 @@
       "properties": {
         "documents": {
           "type": "array",
-          "description": "Response by document",
           "items": {
-            "allOf": [
+            "$ref": "#/definitions/EntitiesDocumentResult"
+          }
+        }
+      },
+      "required": [
+        "documents"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomResult"
+        }
+      ]
+    },
+    "CustomEntitiesTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for a Custom Entities task.",
+      "properties": {
+        "stringIndexType": {
+          "type": "string",
+          "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.",
+          "default": "TextElements_v8",
+          "enum": [
+            "TextElements_v8",
+            "UnicodeCodePoint",
+            "Utf16CodeUnit"
+          ],
+          "x-ms-enum": {
+            "name": "StringIndexType",
+            "modelAsString": true,
+            "values": [
               {
-                "$ref": "#/definitions/EntitiesDocumentResult"
+                "name": "TextElements_v8",
+                "value": "TextElements_v8",
+                "description": "Returned offset and length values will correspond to TextElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo."
+              },
+              {
+                "name": "UnicodeCodePoint",
+                "value": "UnicodeCodePoint",
+                "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that support Unicode, for example Python."
+              },
+              {
+                "name": "Utf16CodeUnit",
+                "value": "Utf16CodeUnit",
+                "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
               }
             ]
           }
@@ -627,36 +717,26 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/CustomResult"
-        }
-      ],
-      "required": [
-        "documents"
-      ]
-    },
-    "CustomSingleLabelClassificationTaskParameters": {
-      "type": "object",
-      "description": "Supported parameters for a Custom Single Classification task.",
-      "allOf": [
-        {
           "$ref": "#/definitions/CustomTaskParameters"
         }
       ]
     },
-    "CustomSingleLabelClassificationLROTask": {
+    "CustomEntityRecognitionLROResult": {
       "type": "object",
-      "description": "Use custom models to classify text into single label taxonomy",
       "properties": {
-        "parameters": {
-          "$ref": "#/definitions/CustomSingleLabelClassificationTaskParameters"
+        "results": {
+          "$ref": "#/definitions/CustomEntitiesResult"
         }
       },
+      "required": [
+        "results"
+      ],
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextLROTask"
+          "$ref": "#/definitions/AnalyzeTextLROResult"
         }
       ],
-      "x-ms-discriminator-value": "CustomSingleLabelClassification"
+      "x-ms-discriminator-value": "CustomEntityRecognitionLROResults"
     },
     "CustomLabelClassificationResult": {
       "type": "object",
@@ -665,49 +745,35 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/ClassificationDocumentResult"
-              }
-            ]
+            "$ref": "#/definitions/ClassificationDocumentResult"
           }
         }
       },
+      "required": [
+        "documents"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/CustomResult"
         }
-      ],
-      "required": [
-        "documents"
       ]
     },
-    "ClassificationResult": {
+    "CustomMultiLabelClassificationLROResult": {
       "type": "object",
-      "required": [
-        "category",
-        "confidenceScore"
-      ],
       "properties": {
-        "category": {
-          "type": "string",
-          "description": "Classification type."
-        },
-        "confidenceScore": {
-          "type": "number",
-          "format": "double",
-          "description": "Confidence score between 0 and 1 of the recognized class."
+        "results": {
+          "$ref": "#/definitions/CustomLabelClassificationResult"
         }
-      }
-    },
-    "CustomMultiLabelClassificationTaskParameters": {
-      "type": "object",
-      "description": "Supported parameters for a Custom Multi Classification task.",
+      },
+      "required": [
+        "results"
+      ],
       "allOf": [
         {
-          "$ref": "#/definitions/CustomTaskParameters"
+          "$ref": "#/definitions/AnalyzeTextLROResult"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "CustomMultiLabelClassificationLROResults"
     },
     "CustomMultiLabelClassificationLROTask": {
       "type": "object",
@@ -724,44 +790,68 @@
       ],
       "x-ms-discriminator-value": "CustomMultiLabelClassification"
     },
-    "ClassificationDocumentResult": {
+    "CustomMultiLabelClassificationTaskParameters": {
       "type": "object",
-      "properties": {
-        "class": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ClassificationResult"
-          }
-        }
-      },
+      "description": "Supported parameters for a Custom Multi Classification task.",
       "allOf": [
         {
-          "$ref": "#/definitions/DocumentResult"
+          "$ref": "#/definitions/CustomTaskParameters"
+        }
+      ]
+    },
+    "CustomResult": {
+      "type": "object",
+      "description": "Custom Task Results",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+        },
+        "projectName": {
+          "type": "string",
+          "description": "This field indicates the project name for the model."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
+        }
+      },
+      "required": [
+        "errors",
+        "projectName",
+        "deploymentName"
+      ]
+    },
+    "CustomSingleLabelClassificationLROResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/CustomLabelClassificationResult"
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
         }
       ],
-      "required": [
-        "class"
-      ]
+      "x-ms-discriminator-value": "CustomSingleLabelClassificationLROResults"
     },
-    "HealthcareTaskParameters": {
+    "CustomSingleLabelClassificationLROTask": {
       "type": "object",
-      "description": "Supported parameters for a Healthcare task.",
-      "properties": {
-        "stringIndexType": {
-          "$ref": "common.json#/definitions/StringIndexType"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
-        }
-      ]
-    },
-    "HealthcareLROTask": {
-      "type": "object",
+      "description": "Use custom models to classify text into single label taxonomy",
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/HealthcareTaskParameters"
+          "$ref": "#/definitions/CustomSingleLabelClassificationTaskParameters"
         }
       },
       "allOf": [
@@ -769,623 +859,200 @@
           "$ref": "#/definitions/AnalyzeTextLROTask"
         }
       ],
-      "x-ms-discriminator-value": "Healthcare"
+      "x-ms-discriminator-value": "CustomSingleLabelClassification"
     },
-    "HealthcareResult": {
+    "CustomSingleLabelClassificationTaskParameters": {
       "type": "object",
-      "properties": {
-        "documents": {
-          "type": "array",
-          "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/HealthcareEntitiesDocumentResult"
-              }
-            ]
-          }
-        }
-      },
+      "description": "Supported parameters for a Custom Single Classification task.",
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltResult"
+          "$ref": "#/definitions/CustomTaskParameters"
         }
-      ],
-      "required": [
-        "documents"
       ]
     },
-    "HealthcareEntitiesDocumentResult": {
+    "CustomTaskParameters": {
       "type": "object",
+      "description": "Parameters object for a text analysis task using custom models.",
       "properties": {
-        "entities": {
-          "description": "Healthcare entities.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HealthcareEntity"
-          }
+        "projectName": {
+          "type": "string",
+          "description": "This field indicates the project name for the model."
         },
-        "relations": {
-          "type": "array",
-          "description": "Healthcare entity relations.",
-          "items": {
-            "$ref": "#/definitions/HealthcareRelation"
-          }
+        "deploymentName": {
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
         }
       },
+      "required": [
+        "projectName",
+        "deploymentName"
+      ],
       "allOf": [
         {
-          "$ref": "#/definitions/DocumentResult"
+          "$ref": "#/definitions/TaskParameters"
         }
-      ],
-      "required": [
-        "entities",
-        "relations"
       ]
     },
-    "HealthcareEntity": {
+    "DetectedLanguage": {
       "type": "object",
       "properties": {
-        "text": {
+        "name": {
           "type": "string",
-          "description": "Entity text as appears in the request."
+          "description": "Long name of a detected language (e.g. English, French)."
         },
-        "category": {
-          "x-ms-enum": {
-            "name": "healthcareEntityCategory",
-            "modelAsString": true
-          },
+        "iso6391Name": {
           "type": "string",
-          "description": "Healthcare Entity Category.",
-          "enum": [
-            "BodyStructure",
-            "Age",
-            "Gender",
-            "ExaminationName",
-            "Date",
-            "Direction",
-            "Frequency",
-            "MeasurementValue",
-            "MeasurementUnit",
-            "RelationalOperator",
-            "Time",
-            "GeneOrProtein",
-            "Variant",
-            "AdministrativeEvent",
-            "CareEnvironment",
-            "HealthcareProfession",
-            "Diagnosis",
-            "SymptomOrSign",
-            "ConditionQualifier",
-            "MedicationClass",
-            "MedicationName",
-            "Dosage",
-            "MedicationForm",
-            "MedicationRoute",
-            "FamilyRelation",
-            "TreatmentName"
-          ]
-        },
-        "subcategory": {
-          "type": "string",
-          "description": "(Optional) Entity sub type."
-        },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned."
-        },
-        "length": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
+          "description": "A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr)."
         },
         "confidenceScore": {
           "type": "number",
           "format": "double",
-          "description": "Confidence score between 0 and 1 of the extracted entity."
-        },
-        "assertion": {
-          "type": "object",
-          "$ref": "#/definitions/HealthcareAssertion"
-        },
-        "name": {
-          "description": "Preferred name for the entity. Example: 'histologically' would have a 'name' of 'histologic'.",
-          "type": "string"
-        },
-        "links": {
-          "description": "Entity references in known data sources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HealthcareEntityLink"
-          }
+          "description": "A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true."
         }
       },
       "required": [
-        "text",
-        "category",
-        "offset",
-        "length",
+        "name",
+        "iso6391Name",
         "confidenceScore"
       ]
     },
-    "HealthcareRelation": {
+    "DocumentError": {
       "type": "object",
-      "description": "Every relation is an entity graph of a certain relationType, where all entities are connected and have specific roles within the relation context.",
+      "description": "Contains details of errors encountered during a job execution.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the input document."
+        },
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "Error encountered."
+        }
+      },
       "required": [
-        "relationType",
+        "id",
+        "error"
+      ]
+    },
+    "DocumentResult": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        }
+      },
+      "required": [
+        "id",
+        "warnings"
+      ]
+    },
+    "DocumentSentimentValue": {
+      "type": "string",
+      "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).",
+      "enum": [
+        "positive",
+        "neutral",
+        "negative",
+        "mixed"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentSentimentValue",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "positive",
+            "value": "positive",
+            "description": "Positive statement"
+          },
+          {
+            "name": "neutral",
+            "value": "neutral",
+            "description": "Neutral statement"
+          },
+          {
+            "name": "negative",
+            "value": "negative",
+            "description": "Negative statement"
+          },
+          {
+            "name": "mixed",
+            "value": "mixed",
+            "description": "Mixed statement"
+          }
+        ]
+      }
+    },
+    "DocumentStatistics": {
+      "type": "object",
+      "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
+      "properties": {
+        "charactersCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of text elements recognized in the document."
+        },
+        "transactionsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of transactions for the document."
+        }
+      },
+      "required": [
+        "charactersCount",
+        "transactionsCount"
+      ]
+    },
+    "DocumentWarning": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/WarningCodeValue"
+        },
+        "message": {
+          "type": "string",
+          "description": "Warning message."
+        },
+        "targetRef": {
+          "type": "string",
+          "description": "A JSON pointer reference indicating the target object."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "EntitiesDocumentResult": {
+      "type": "object",
+      "properties": {
+        "entities": {
+          "type": "array",
+          "description": "Recognized entities in the document.",
+          "items": {
+            "$ref": "#/definitions/Entity"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
         "entities"
       ],
-      "properties": {
-        "relationType": {
-          "description": "Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc.",
-          "type": "string",
-          "enum": [
-            "Abbreviation",
-            "DirectionOfBodyStructure",
-            "DirectionOfCondition",
-            "DirectionOfExamination",
-            "DirectionOfTreatment",
-            "DosageOfMedication",
-            "FormOfMedication",
-            "FrequencyOfMedication",
-            "FrequencyOfTreatment",
-            "QualifierOfCondition",
-            "RelationOfExamination",
-            "RouteOfMedication",
-            "TimeOfCondition",
-            "TimeOfEvent",
-            "TimeOfExamination",
-            "TimeOfMedication",
-            "TimeOfTreatment",
-            "UnitOfCondition",
-            "UnitOfExamination",
-            "ValueOfCondition",
-            "ValueOfExamination"
-          ],
-          "x-ms-enum": {
-            "name": "relationType",
-            "modelAsString": true
-          }
-        },
-        "entities": {
-          "description": "The entities in the relation.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HealthcareRelationEntity"
-          }
-        }
-      }
-    },
-    "HealthcareAssertion": {
-      "type": "object",
-      "properties": {
-        "conditionality": {
-          "description": "Describes any conditionality on the entity.",
-          "type": "string",
-          "enum": [
-            "hypothetical",
-            "conditional"
-          ],
-          "x-ms-enum": {
-            "name": "Conditionality",
-            "modelAsString": false
-          }
-        },
-        "certainty": {
-          "description": "Describes the entities certainty and polarity.",
-          "type": "string",
-          "enum": [
-            "positive",
-            "positivePossible",
-            "neutralPossible",
-            "negativePossible",
-            "negative"
-          ],
-          "x-ms-enum": {
-            "name": "Certainty",
-            "modelAsString": false
-          }
-        },
-        "association": {
-          "description": "Describes if the entity is the subject of the text or if it describes someone else.",
-          "type": "string",
-          "enum": [
-            "subject",
-            "other"
-          ],
-          "x-ms-enum": {
-            "name": "Association",
-            "modelAsString": false
-          }
-        }
-      }
-    },
-    "HealthcareRelationEntity": {
-      "type": "object",
-      "required": [
-        "ref",
-        "role"
-      ],
-      "properties": {
-        "ref": {
-          "description": "Reference link object, using a JSON pointer RFC 6901 (URI Fragment Identifier Representation), pointing to the entity .",
-          "type": "string"
-        },
-        "role": {
-          "description": "Role of entity in the relationship. For example: 'CD20-positive diffuse large B-cell lymphoma' has the following entities with their roles in parenthesis:  CD20 (GeneOrProtein), Positive (Expression), diffuse large B-cell lymphoma (Diagnosis).",
-          "type": "string"
-        }
-      }
-    },
-    "HealthcareEntityLink": {
-      "type": "object",
-      "required": [
-        "dataSource",
-        "id"
-      ],
-      "properties": {
-        "dataSource": {
-          "description": "Entity Catalog. Examples include: UMLS, CHV, MSH, etc.",
-          "type": "string"
-        },
-        "id": {
-          "description": "Entity id in the given source catalog.",
-          "type": "string"
-        }
-      }
-    },
-    "SentimentAnalysisTaskParameters": {
-      "type": "object",
-      "description": "Supported parameters for a Sentiment Analysis task.",
-      "properties": {
-        "opinionMining": {
-          "type": "boolean",
-          "default": false
-        },
-        "stringIndexType": {
-          "$ref": "common.json#/definitions/StringIndexType"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
-        }
-      ]
-    },
-    "SentimentAnalysisLROTask": {
-      "type": "object",
-      "description": "An object representing the task definition for a Sentiment Analysis task.",
-      "properties": {
-        "parameters": {
-          "$ref": "#/definitions/SentimentAnalysisTaskParameters"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextLROTask"
-        }
-      ],
-      "x-ms-discriminator-value": "SentimentAnalysis"
-    },
-    "SentimentTaskResult": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/SentimentResponse"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextTaskResult"
-        }
-      ],
-      "required": [
-        "results"
-      ],
-      "x-ms-discriminator-value": "SentimentAnalysisResults"
-    },
-    "SentimentResponse": {
-      "type": "object",
-      "properties": {
-        "documents": {
-          "type": "array",
-          "description": "Sentiment analysis per document.",
-          "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/SentimentDocumentResult"
-              }
-            ]
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltResult"
-        }
-      ],
-      "required": [
-        "documents"
-      ]
-    },
-    "SentimentDocumentResult": {
-      "type": "object",
-      "properties": {
-        "sentiment": {
-          "type": "string",
-          "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).",
-          "enum": [
-            "positive",
-            "neutral",
-            "negative",
-            "mixed"
-          ],
-          "x-ms-enum": {
-            "name": "DocumentSentimentValue",
-            "modelAsString": false
-          }
-        },
-        "confidenceScores": {
-          "description": "Document level sentiment confidence scores between 0 and 1 for each sentiment class.",
-          "$ref": "#/definitions/SentimentConfidenceScorePerLabel"
-        },
-        "sentences": {
-          "type": "array",
-          "description": "Sentence level sentiment analysis.",
-          "items": {
-            "$ref": "#/definitions/SentenceSentiment"
-          }
-        }
-      },
       "allOf": [
         {
           "$ref": "#/definitions/DocumentResult"
-        }
-      ],
-      "required": [
-        "sentiment",
-        "confidenceScores",
-        "sentences"
-      ]
-    },
-    "SentimentConfidenceScorePerLabel": {
-      "type": "object",
-      "required": [
-        "positive",
-        "neutral",
-        "negative"
-      ],
-      "properties": {
-        "positive": {
-          "type": "number",
-          "format": "double",
-          "description": "Confidence score for positive sentiment"
-        },
-        "neutral": {
-          "type": "number",
-          "format": "double",
-          "description": "Confidence score for neutral sentiment"
-        },
-        "negative": {
-          "type": "number",
-          "format": "double",
-          "description": "Confidence score for negative sentiment"
-        }
-      },
-      "description": "Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative."
-    },
-    "SentenceSentiment": {
-      "type": "object",
-      "required": [
-        "text",
-        "sentiment",
-        "confidenceScores",
-        "offset",
-        "length"
-      ],
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "The sentence text."
-        },
-        "sentiment": {
-          "type": "string",
-          "description": "The predicted Sentiment for the sentence.",
-          "enum": [
-            "positive",
-            "neutral",
-            "negative"
-          ],
-          "x-ms-enum": {
-            "name": "SentenceSentimentValue",
-            "modelAsString": false
-          }
-        },
-        "confidenceScores": {
-          "description": "The sentiment confidence score between 0 and 1 for the sentence for all classes.",
-          "$ref": "#/definitions/SentimentConfidenceScorePerLabel"
-        },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The sentence offset from the start of the document."
-        },
-        "length": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The length of the sentence."
-        },
-        "targets": {
-          "type": "array",
-          "description": "The array of sentence targets for the sentence.",
-          "items": {
-            "$ref": "#/definitions/SentenceTarget"
-          }
-        },
-        "assessments": {
-          "type": "array",
-          "description": "The array of assessments for the sentence.",
-          "items": {
-            "$ref": "#/definitions/SentenceAssessment"
-          }
-        }
-      }
-    },
-    "SentenceTarget": {
-      "type": "object",
-      "required": [
-        "confidenceScores",
-        "length",
-        "offset",
-        "relations",
-        "sentiment",
-        "text"
-      ],
-      "properties": {
-        "sentiment": {
-          "type": "string",
-          "enum": [
-            "positive",
-            "mixed",
-            "negative"
-          ],
-          "x-ms-enum": {
-            "name": "TokenSentimentValue",
-            "modelAsString": false
-          },
-          "description": "Targeted sentiment in the sentence."
-        },
-        "confidenceScores": {
-          "description": "Target sentiment confidence scores for the target in the sentence.",
-          "$ref": "#/definitions/TargetConfidenceScoreLabel"
-        },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The target offset from the start of the sentence."
-        },
-        "length": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The length of the target."
-        },
-        "text": {
-          "type": "string",
-          "description": "The target text detected."
-        },
-        "relations": {
-          "type": "array",
-          "description": "The array of either assessment or target objects which is related to the target.",
-          "items": {
-            "$ref": "#/definitions/TargetRelation"
-          }
-        }
-      }
-    },
-    "SentenceAssessment": {
-      "type": "object",
-      "required": [
-        "confidenceScores",
-        "isNegated",
-        "length",
-        "offset",
-        "sentiment",
-        "text"
-      ],
-      "properties": {
-        "sentiment": {
-          "type": "string",
-          "enum": [
-            "positive",
-            "mixed",
-            "negative"
-          ],
-          "x-ms-enum": {
-            "name": "TokenSentimentValue",
-            "modelAsString": false
-          },
-          "description": "Assessment sentiment in the sentence."
-        },
-        "confidenceScores": {
-          "description": "Assessment sentiment confidence scores in the sentence.",
-          "$ref": "#/definitions/TargetConfidenceScoreLabel"
-        },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The assessment offset from the start of the sentence."
-        },
-        "length": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The length of the assessment."
-        },
-        "text": {
-          "type": "string",
-          "description": "The assessment text detected."
-        },
-        "isNegated": {
-          "type": "boolean",
-          "description": "The indicator representing if the assessment is negated."
-        }
-      }
-    },
-    "TargetRelation": {
-      "type": "object",
-      "required": [
-        "ref",
-        "relationType"
-      ],
-      "properties": {
-        "relationType": {
-          "type": "string",
-          "enum": [
-            "assessment",
-            "target"
-          ],
-          "x-ms-enum": {
-            "name": "TargetRelationType",
-            "modelAsString": false
-          },
-          "description": "The type related to the target."
-        },
-        "ref": {
-          "type": "string",
-          "description": "The JSON pointer indicating the linked object."
-        }
-      }
-    },
-    "TargetConfidenceScoreLabel": {
-      "type": "object",
-      "required": [
-        "negative",
-        "positive"
-      ],
-      "properties": {
-        "positive": {
-          "type": "number",
-          "format": "double",
-          "description": "Confidence score for positive sentiment"
-        },
-        "negative": {
-          "type": "number",
-          "format": "double",
-          "description": "Confidence score for negative sentiment"
-        }
-      },
-      "description": "Represents the confidence scores across all sentiment classes: positive and negative."
-    },
-    "EntitiesTaskParameters": {
-      "type": "object",
-      "description": "Supported parameters for an Entity Recognition task.",
-      "properties": {
-        "stringIndexType": {
-          "$ref": "common.json#/definitions/StringIndexType"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
         }
       ]
     },
@@ -1404,23 +1071,6 @@
       ],
       "x-ms-discriminator-value": "EntityRecognition"
     },
-    "EntitiesTaskResult": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/EntitiesResult"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextTaskResult"
-        }
-      ],
-      "required": [
-        "results"
-      ],
-      "x-ms-discriminator-value": "EntityRecognitionResults"
-    },
     "EntitiesResult": {
       "type": "object",
       "properties": {
@@ -1428,9 +1078,50 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "allOf": [
+            "$ref": "#/definitions/EntitiesDocumentResult"
+          }
+        }
+      },
+      "required": [
+        "documents"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PreBuiltResult"
+        }
+      ]
+    },
+    "EntitiesTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for an Entity Recognition task.",
+      "properties": {
+        "stringIndexType": {
+          "type": "string",
+          "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.",
+          "default": "TextElements_v8",
+          "enum": [
+            "TextElements_v8",
+            "UnicodeCodePoint",
+            "Utf16CodeUnit"
+          ],
+          "x-ms-enum": {
+            "name": "StringIndexType",
+            "modelAsString": true,
+            "values": [
               {
-                "$ref": "#/definitions/EntitiesDocumentResult"
+                "name": "TextElements_v8",
+                "value": "TextElements_v8",
+                "description": "Returned offset and length values will correspond to TextElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo."
+              },
+              {
+                "name": "UnicodeCodePoint",
+                "value": "UnicodeCodePoint",
+                "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that support Unicode, for example Python."
+              },
+              {
+                "name": "Utf16CodeUnit",
+                "value": "Utf16CodeUnit",
+                "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
               }
             ]
           }
@@ -1438,42 +1129,29 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltResult"
+          "$ref": "#/definitions/PreBuiltTaskParameters"
         }
-      ],
-      "required": [
-        "documents"
       ]
     },
-    "EntitiesDocumentResult": {
+    "EntitiesTaskResult": {
       "type": "object",
       "properties": {
-        "entities": {
-          "type": "array",
-          "description": "Recognized entities in the document.",
-          "items": {
-            "$ref": "#/definitions/Entity"
-          }
+        "results": {
+          "$ref": "#/definitions/EntitiesResult"
         }
       },
+      "required": [
+        "results"
+      ],
       "allOf": [
         {
-          "$ref": "#/definitions/DocumentResult"
+          "$ref": "#/definitions/AnalyzeTextTaskResult"
         }
       ],
-      "required": [
-        "entities"
-      ]
+      "x-ms-discriminator-value": "EntityRecognitionResults"
     },
     "Entity": {
       "type": "object",
-      "required": [
-        "text",
-        "category",
-        "offset",
-        "length",
-        "confidenceScore"
-      ],
       "properties": {
         "text": {
           "type": "string",
@@ -1502,25 +1180,34 @@
           "format": "double",
           "description": "Confidence score between 0 and 1 of the extracted entity."
         }
-      }
+      },
+      "required": [
+        "text",
+        "category",
+        "offset",
+        "length",
+        "confidenceScore"
+      ]
     },
-    "EntityLinkingTaskParameters": {
+    "EntityLinkingLROResult": {
       "type": "object",
-      "description": "Supported parameters for an Entity Linking task.",
       "properties": {
-        "stringIndexType": {
-          "$ref": "common.json#/definitions/StringIndexType"
+        "results": {
+          "$ref": "#/definitions/EntityLinkingResult"
         }
       },
+      "required": [
+        "results"
+      ],
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
+          "$ref": "#/definitions/AnalyzeTextLROResult"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "EntityLinkingLROResults"
     },
     "EntityLinkingLROTask": {
       "type": "object",
-      "description": "An object representing the task definition for an Entity Linking task.",
       "properties": {
         "parameters": {
           "$ref": "#/definitions/EntityLinkingTaskParameters"
@@ -1533,23 +1220,6 @@
       ],
       "x-ms-discriminator-value": "EntityLinking"
     },
-    "EntityLinkingTaskResult": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/EntityLinkingResult"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextTaskResult"
-        }
-      ],
-      "required": [
-        "results"
-      ],
-      "x-ms-discriminator-value": "EntityLinkingResults"
-    },
     "EntityLinkingResult": {
       "type": "object",
       "properties": {
@@ -1557,9 +1227,50 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "allOf": [
+            "$ref": "#/definitions/LinkedEntitiesDocumentResult"
+          }
+        }
+      },
+      "required": [
+        "documents"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PreBuiltResult"
+        }
+      ]
+    },
+    "EntityLinkingTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for an Entity Linking task.",
+      "properties": {
+        "stringIndexType": {
+          "type": "string",
+          "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.",
+          "default": "TextElements_v8",
+          "enum": [
+            "TextElements_v8",
+            "UnicodeCodePoint",
+            "Utf16CodeUnit"
+          ],
+          "x-ms-enum": {
+            "name": "StringIndexType",
+            "modelAsString": true,
+            "values": [
               {
-                "$ref": "#/definitions/LinkedEntitiesDocumentResult"
+                "name": "TextElements_v8",
+                "value": "TextElements_v8",
+                "description": "Returned offset and length values will correspond to TextElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo."
+              },
+              {
+                "name": "UnicodeCodePoint",
+                "value": "UnicodeCodePoint",
+                "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that support Unicode, for example Python."
+              },
+              {
+                "name": "Utf16CodeUnit",
+                "value": "Utf16CodeUnit",
+                "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
               }
             ]
           }
@@ -1567,18 +1278,623 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PreBuiltResult"
+          "$ref": "#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
+    "EntityLinkingTaskResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/EntityLinkingResult"
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextTaskResult"
         }
       ],
+      "x-ms-discriminator-value": "EntityLinkingResults"
+    },
+    "EntityRecognitionLROResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/EntitiesResult"
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        }
+      ],
+      "x-ms-discriminator-value": "EntityRecognitionLROResults"
+    },
+    "Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/ErrorCode",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerErrorModel",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "allOf": [
+        {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      ]
+    },
+    "ErrorCode": {
+      "type": "string",
+      "description": "Human-readable error code.",
+      "enum": [
+        "InvalidRequest",
+        "InvalidArgument",
+        "Unauthorized",
+        "Forbidden",
+        "NotFound",
+        "ProjectNotFound",
+        "OperationNotFound",
+        "AzureCognitiveSearchNotFound",
+        "AzureCognitiveSearchIndexNotFound",
+        "TooManyRequests",
+        "AzureCognitiveSearchThrottling",
+        "AzureCognitiveSearchIndexLimitReached",
+        "InternalServerError",
+        "ServiceUnavailable",
+        "Timeout",
+        "QuotaExceeded",
+        "Conflict",
+        "Warning"
+      ],
+      "x-ms-enum": {
+        "name": "ErrorCode",
+        "modelAsString": true
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "HealthcareAssertion": {
+      "type": "object",
+      "properties": {
+        "conditionality": {
+          "$ref": "#/definitions/Conditionality",
+          "description": "Describes any conditionality on the entity."
+        },
+        "certainty": {
+          "$ref": "#/definitions/Certainty",
+          "description": "Describes the entities certainty and polarity."
+        },
+        "association": {
+          "$ref": "#/definitions/Association",
+          "description": "Describes if the entity is the subject of the text or if it describes someone else."
+        }
+      }
+    },
+    "HealthcareEntitiesDocumentResult": {
+      "type": "object",
+      "properties": {
+        "entities": {
+          "type": "array",
+          "description": "Healthcare entities.",
+          "items": {
+            "$ref": "#/definitions/HealthcareEntity"
+          },
+          "x-ms-identifiers": []
+        },
+        "relations": {
+          "type": "array",
+          "description": "Healthcare entity relations.",
+          "items": {
+            "$ref": "#/definitions/HealthcareRelation"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "entities",
+        "relations"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentResult"
+        }
+      ]
+    },
+    "HealthcareEntity": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Entity text as appears in the request."
+        },
+        "category": {
+          "$ref": "#/definitions/healthcareEntityCategory",
+          "description": "Healthcare Entity Category."
+        },
+        "subcategory": {
+          "type": "string",
+          "description": "(Optional) Entity sub type."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score between 0 and 1 of the extracted entity."
+        },
+        "assertion": {
+          "$ref": "#/definitions/HealthcareAssertion"
+        },
+        "name": {
+          "type": "string",
+          "description": "Preferred name for the entity. Example: 'histologically' would have a 'name' of 'histologic'."
+        },
+        "links": {
+          "type": "array",
+          "description": "Entity references in known data sources.",
+          "items": {
+            "$ref": "#/definitions/HealthcareEntityLink"
+          }
+        }
+      },
+      "required": [
+        "text",
+        "category",
+        "offset",
+        "length",
+        "confidenceScore"
+      ]
+    },
+    "HealthcareEntityLink": {
+      "type": "object",
+      "properties": {
+        "dataSource": {
+          "type": "string",
+          "description": "Entity Catalog. Examples include: UMLS, CHV, MSH, etc."
+        },
+        "id": {
+          "type": "string",
+          "description": "Entity id in the given source catalog."
+        }
+      },
+      "required": [
+        "dataSource",
+        "id"
+      ]
+    },
+    "HealthcareLROResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/HealthcareResult"
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        }
+      ],
+      "x-ms-discriminator-value": "HealthcareLROResults"
+    },
+    "HealthcareLROTask": {
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/HealthcareTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "Healthcare"
+    },
+    "HealthcareRelation": {
+      "type": "object",
+      "description": "Every relation is an entity graph of a certain relationType, where all entities are connected and have specific roles within the relation context.",
+      "properties": {
+        "relationType": {
+          "$ref": "#/definitions/relationType",
+          "description": "Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc."
+        },
+        "entities": {
+          "type": "array",
+          "description": "The entities in the relation.",
+          "items": {
+            "$ref": "#/definitions/HealthcareRelationEntity"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "relationType",
+        "entities"
+      ]
+    },
+    "HealthcareRelationEntity": {
+      "type": "object",
+      "properties": {
+        "ref": {
+          "type": "string",
+          "description": "Reference link object, using a JSON pointer RFC 6901 (URI Fragment Identifier Representation), pointing to the entity ."
+        },
+        "role": {
+          "type": "string",
+          "description": "Role of entity in the relationship. For example: 'CD20-positive diffuse large B-cell lymphoma' has the following entities with their roles in parenthesis:  CD20 (GeneOrProtein), Positive (Expression), diffuse large B-cell lymphoma (Diagnosis)."
+        }
+      },
+      "required": [
+        "ref",
+        "role"
+      ]
+    },
+    "HealthcareResult": {
+      "type": "object",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthcareEntitiesDocumentResult"
+          }
+        }
+      },
       "required": [
         "documents"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PreBuiltResult"
+        }
+      ]
+    },
+    "HealthcareTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for a Healthcare task.",
+      "properties": {
+        "stringIndexType": {
+          "type": "string",
+          "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.",
+          "default": "TextElements_v8",
+          "enum": [
+            "TextElements_v8",
+            "UnicodeCodePoint",
+            "Utf16CodeUnit"
+          ],
+          "x-ms-enum": {
+            "name": "StringIndexType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "TextElements_v8",
+                "value": "TextElements_v8",
+                "description": "Returned offset and length values will correspond to TextElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo."
+              },
+              {
+                "name": "UnicodeCodePoint",
+                "value": "UnicodeCodePoint",
+                "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that support Unicode, for example Python."
+              },
+              {
+                "name": "Utf16CodeUnit",
+                "value": "Utf16CodeUnit",
+                "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
+    "InnerErrorCode": {
+      "type": "string",
+      "description": "Human-readable error code.",
+      "enum": [
+        "InvalidRequest",
+        "InvalidParameterValue",
+        "KnowledgeBaseNotFound",
+        "AzureCognitiveSearchNotFound",
+        "AzureCognitiveSearchThrottling",
+        "ExtractionFailure",
+        "InvalidRequestBodyFormat",
+        "EmptyRequest",
+        "MissingInputDocuments",
+        "InvalidDocument",
+        "ModelVersionIncorrect",
+        "InvalidDocumentBatch",
+        "UnsupportedLanguageCode",
+        "InvalidCountryHint"
+      ],
+      "x-ms-enum": {
+        "name": "InnerErrorCode",
+        "modelAsString": true
+      }
+    },
+    "InnerErrorModel": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/InnerErrorCode",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        },
+        "details": {
+          "type": "object",
+          "description": "Error details.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "target": {
+          "type": "string",
+          "description": "Error target."
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerErrorModel",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "KeyPhraseExtractionLROResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/KeyPhraseResult"
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        }
+      ],
+      "x-ms-discriminator-value": "KeyPhraseExtractionLROResults"
+    },
+    "KeyPhraseLROTask": {
+      "type": "object",
+      "description": "An object representing the task definition for a Key Phrase Extraction task.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/KeyPhraseTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "KeyPhraseExtraction"
+    },
+    "KeyPhraseResult": {
+      "type": "object",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Response by document",
+          "items": {
+            "$ref": "#/definitions/KeyPhrasesDocumentResult"
+          }
+        }
+      },
+      "required": [
+        "documents"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PreBuiltResult"
+        }
+      ]
+    },
+    "KeyPhraseTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for a Key Phrase Extraction task.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
+    "KeyPhraseTaskResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/KeyPhraseResult"
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextTaskResult"
+        }
+      ],
+      "x-ms-discriminator-value": "KeyPhraseExtractionResults"
+    },
+    "KeyPhrasesDocumentResult": {
+      "type": "object",
+      "properties": {
+        "keyPhrases": {
+          "type": "array",
+          "description": "A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "keyPhrases"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentResult"
+        }
+      ]
+    },
+    "LanguageDetectionAnalysisInput": {
+      "type": "object",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LanguageInput"
+          }
+        }
+      }
+    },
+    "LanguageDetectionDocumentResult": {
+      "type": "object",
+      "properties": {
+        "detectedLanguage": {
+          "$ref": "#/definitions/DetectedLanguage",
+          "description": "Detected Language."
+        }
+      },
+      "required": [
+        "detectedLanguage"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentResult"
+        }
+      ]
+    },
+    "LanguageDetectionResult": {
+      "type": "object",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LanguageDetectionDocumentResult"
+          }
+        }
+      },
+      "required": [
+        "documents"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PreBuiltResult"
+        }
+      ]
+    },
+    "LanguageDetectionTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for a Language Detection task.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
+    "LanguageDetectionTaskResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/LanguageDetectionResult"
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextTaskResult"
+        }
+      ],
+      "x-ms-discriminator-value": "LanguageDetectionResults"
+    },
+    "LanguageInput": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique, non-empty document identifier."
+        },
+        "text": {
+          "type": "string",
+          "description": "The input text to process."
+        },
+        "countryHint": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "text"
       ]
     },
     "LinkedEntitiesDocumentResult": {
       "type": "object",
-      "required": [
-        "entities"
-      ],
       "properties": {
         "entities": {
           "type": "array",
@@ -1588,6 +1904,9 @@
           }
         }
       },
+      "required": [
+        "entities"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/DocumentResult"
@@ -1596,13 +1915,6 @@
     },
     "LinkedEntity": {
       "type": "object",
-      "required": [
-        "name",
-        "matches",
-        "language",
-        "url",
-        "dataSource"
-      ],
       "properties": {
         "name": {
           "type": "string",
@@ -1613,7 +1925,8 @@
           "description": "List of instances this entity appears in the text.",
           "items": {
             "$ref": "#/definitions/Match"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "language": {
           "type": "string",
@@ -1635,16 +1948,17 @@
           "type": "string",
           "description": "Bing Entity Search API unique identifier of the recognized entity."
         }
-      }
+      },
+      "required": [
+        "name",
+        "matches",
+        "language",
+        "url",
+        "dataSource"
+      ]
     },
     "Match": {
       "type": "object",
-      "required": [
-        "confidenceScore",
-        "text",
-        "offset",
-        "length"
-      ],
       "properties": {
         "confidenceScore": {
           "type": "number",
@@ -1665,107 +1979,229 @@
           "format": "int32",
           "description": "Length for the entity match text."
         }
-      }
-    },
-    "PiiTaskParameters": {
-      "type": "object",
-      "description": "Supported parameters for a PII Entities Recognition task.",
-      "properties": {
-        "domain": {
-          "$ref": "#/definitions/PiiDomain"
-        },
-        "piiCategories": {
-          "$ref": "#/definitions/PiiCategories"
-        },
-        "stringIndexType": {
-          "$ref": "common.json#/definitions/StringIndexType"
-        }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
-        }
+      "required": [
+        "confidenceScore",
+        "text",
+        "offset",
+        "length"
       ]
     },
-    "PiiLROTask": {
-      "type": "object",
-      "description": "An object representing the task definition for a PII Entities Recognition task.",
-      "properties": {
-        "parameters": {
-          "$ref": "#/definitions/PiiTaskParameters"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextLROTask"
-        }
-      ],
-      "x-ms-discriminator-value": "PiiEntityRecognition"
-    },
-    "PiiTaskResult": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/PiiResult"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextTaskResult"
-        }
-      ],
-      "required": [
-        "results"
-      ],
-      "x-ms-discriminator-value": "PiiEntityRecognitionResults"
-    },
-    "PiiResult": {
+    "MultiLanguageAnalysisInput": {
       "type": "object",
       "properties": {
         "documents": {
           "type": "array",
-          "description": "Response by document",
+          "description": "The input documents to be analyzed.",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/PiiEntitiesDocumentResult"
-              }
-            ]
+            "$ref": "#/definitions/MultiLanguageInput"
           }
+        }
+      }
+    },
+    "MultiLanguageInput": {
+      "type": "object",
+      "description": "Contains an input document to be analyzed by the service.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique, non-empty document identifier."
+        },
+        "text": {
+          "type": "string",
+          "description": "The input text to process."
+        },
+        "language": {
+          "type": "string",
+          "description": "(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default. (Following only applies to 2023-04-15-preview and above) For Auto Language Detection, use \"auto\". If not set, use \"en\" for English as default."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltResult"
-        }
-      ],
       "required": [
-        "documents"
+        "id",
+        "text"
       ]
     },
-    "PiiDomain": {
+    "PiiCategory": {
       "type": "string",
-      "description": "The PII domain used for PII Entity Recognition.",
-      "default": "none",
+      "description": "(Optional) describes the PII categories to return",
       "enum": [
-        "phi",
-        "none"
+        "ABARoutingNumber",
+        "ARNationalIdentityNumber",
+        "AUBankAccountNumber",
+        "AUDriversLicenseNumber",
+        "AUMedicalAccountNumber",
+        "AUPassportNumber",
+        "AUTaxFileNumber",
+        "AUBusinessNumber",
+        "AUCompanyNumber",
+        "ATIdentityCard",
+        "ATTaxIdentificationNumber",
+        "ATValueAddedTaxNumber",
+        "AzureDocumentDBAuthKey",
+        "AzureIAASDatabaseConnectionAndSQLString",
+        "AzureIoTConnectionString",
+        "AzurePublishSettingPassword",
+        "AzureRedisCacheString",
+        "AzureSAS",
+        "AzureServiceBusString",
+        "AzureStorageAccountKey",
+        "AzureStorageAccountGeneric",
+        "BENationalNumber",
+        "BENationalNumberV2",
+        "BEValueAddedTaxNumber",
+        "BRCPFNumber",
+        "BRLegalEntityNumber",
+        "BRNationalIDRG",
+        "BGUniformCivilNumber",
+        "CABankAccountNumber",
+        "CADriversLicenseNumber",
+        "CAHealthServiceNumber",
+        "CAPassportNumber",
+        "CAPersonalHealthIdentification",
+        "CASocialInsuranceNumber",
+        "CLIdentityCardNumber",
+        "CNResidentIdentityCardNumber",
+        "CreditCardNumber",
+        "HRIdentityCardNumber",
+        "HRNationalIDNumber",
+        "HRPersonalIdentificationNumber",
+        "HRPersonalIdentificationOIBNumberV2",
+        "CYIdentityCard",
+        "CYTaxIdentificationNumber",
+        "CZPersonalIdentityNumber",
+        "CZPersonalIdentityV2",
+        "DKPersonalIdentificationNumber",
+        "DKPersonalIdentificationV2",
+        "DrugEnforcementAgencyNumber",
+        "EEPersonalIdentificationCode",
+        "EUDebitCardNumber",
+        "EUDriversLicenseNumber",
+        "EUGPSCoordinates",
+        "EUNationalIdentificationNumber",
+        "EUPassportNumber",
+        "EUSocialSecurityNumber",
+        "EUTaxIdentificationNumber",
+        "FIEuropeanHealthNumber",
+        "FINationalID",
+        "FINationalIDV2",
+        "FIPassportNumber",
+        "FRDriversLicenseNumber",
+        "FRHealthInsuranceNumber",
+        "FRNationalID",
+        "FRPassportNumber",
+        "FRSocialSecurityNumber",
+        "FRTaxIdentificationNumber",
+        "FRValueAddedTaxNumber",
+        "DEDriversLicenseNumber",
+        "DEPassportNumber",
+        "DEIdentityCardNumber",
+        "DETaxIdentificationNumber",
+        "DEValueAddedNumber",
+        "GRNationalIDCard",
+        "GRNationalIDV2",
+        "GRTaxIdentificationNumber",
+        "HKIdentityCardNumber",
+        "HUValueAddedNumber",
+        "HUPersonalIdentificationNumber",
+        "HUTaxIdentificationNumber",
+        "INPermanentAccount",
+        "INUniqueIdentificationNumber",
+        "IDIdentityCardNumber",
+        "InternationalBankingAccountNumber",
+        "IEPersonalPublicServiceNumber",
+        "IEPersonalPublicServiceNumberV2",
+        "ILBankAccountNumber",
+        "ILNationalID",
+        "ITDriversLicenseNumber",
+        "ITFiscalCode",
+        "ITValueAddedTaxNumber",
+        "JPBankAccountNumber",
+        "JPDriversLicenseNumber",
+        "JPPassportNumber",
+        "JPResidentRegistrationNumber",
+        "JPSocialInsuranceNumber",
+        "JPMyNumberCorporate",
+        "JPMyNumberPersonal",
+        "JPResidenceCardNumber",
+        "LVPersonalCode",
+        "LTPersonalCode",
+        "LUNationalIdentificationNumberNatural",
+        "LUNationalIdentificationNumberNonNatural",
+        "MYIdentityCardNumber",
+        "MTIdentityCardNumber",
+        "MTTaxIDNumber",
+        "NLCitizensServiceNumber",
+        "NLCitizensServiceNumberV2",
+        "NLTaxIdentificationNumber",
+        "NLValueAddedTaxNumber",
+        "NZBankAccountNumber",
+        "NZDriversLicenseNumber",
+        "NZInlandRevenueNumber",
+        "NZMinistryOfHealthNumber",
+        "NZSocialWelfareNumber",
+        "NOIdentityNumber",
+        "PHUnifiedMultiPurposeIDNumber",
+        "PLIdentityCard",
+        "PLNationalID",
+        "PLNationalIDV2",
+        "PLPassportNumber",
+        "PLTaxIdentificationNumber",
+        "PLREGONNumber",
+        "PTCitizenCardNumber",
+        "PTCitizenCardNumberV2",
+        "PTTaxIdentificationNumber",
+        "ROPersonalNumericalCode",
+        "RUPassportNumberDomestic",
+        "RUPassportNumberInternational",
+        "SANationalID",
+        "SGNationalRegistrationIdentityCardNumber",
+        "SKPersonalNumber",
+        "SITaxIdentificationNumber",
+        "SIUniqueMasterCitizenNumber",
+        "ZAIdentificationNumber",
+        "KRResidentRegistrationNumber",
+        "ESDNI",
+        "ESSocialSecurityNumber",
+        "ESTaxIdentificationNumber",
+        "SQLServerConnectionString",
+        "SENationalID",
+        "SENationalIDV2",
+        "SEPassportNumber",
+        "SETaxIdentificationNumber",
+        "SWIFTCode",
+        "CHSocialSecurityNumber",
+        "TWNationalID",
+        "TWPassportNumber",
+        "TWResidentCertificate",
+        "THPopulationIdentificationCode",
+        "TRNationalIdentificationNumber",
+        "UKDriversLicenseNumber",
+        "UKElectoralRollNumber",
+        "UKNationalHealthNumber",
+        "UKNationalInsuranceNumber",
+        "UKUniqueTaxpayerNumber",
+        "USUKPassportNumber",
+        "USBankAccountNumber",
+        "USDriversLicenseNumber",
+        "USIndividualTaxpayerIdentification",
+        "USSocialSecurityNumber",
+        "UAPassportNumberDomestic",
+        "UAPassportNumberInternational",
+        "Organization",
+        "Email",
+        "URL",
+        "Age",
+        "PhoneNumber",
+        "IPAddress",
+        "Date",
+        "Person",
+        "Address",
+        "All",
+        "Default"
       ],
       "x-ms-enum": {
-        "name": "PiiDomain",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "phi",
-            "description": "Indicates that entities in the Personal Health Information domain should be redacted.",
-            "value": "phi"
-          },
-          {
-            "name": "none",
-            "description": "Indicates that no domain is specified.",
-            "value": "none"
-          }
-        ]
+        "name": "PiiCategory",
+        "modelAsString": true
       }
     },
     "PiiEntitiesDocumentResult": {
@@ -1780,638 +2216,19 @@
           "description": "Recognized entities in the document.",
           "items": {
             "$ref": "#/definitions/Entity"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DocumentResult"
-        }
-      ],
       "required": [
         "redactedText",
         "entities"
-      ]
-    },
-    "PiiCategories": {
-      "description": "(Optional) describes the PII categories to return",
-      "items": {
-        "type": "string",
-        "x-ms-enum": {
-          "name": "PiiCategory",
-          "modelAsString": true
-        },
-        "enum": [
-          "ABARoutingNumber",
-          "ARNationalIdentityNumber",
-          "AUBankAccountNumber",
-          "AUDriversLicenseNumber",
-          "AUMedicalAccountNumber",
-          "AUPassportNumber",
-          "AUTaxFileNumber",
-          "AUBusinessNumber",
-          "AUCompanyNumber",
-          "ATIdentityCard",
-          "ATTaxIdentificationNumber",
-          "ATValueAddedTaxNumber",
-          "AzureDocumentDBAuthKey",
-          "AzureIAASDatabaseConnectionAndSQLString",
-          "AzureIoTConnectionString",
-          "AzurePublishSettingPassword",
-          "AzureRedisCacheString",
-          "AzureSAS",
-          "AzureServiceBusString",
-          "AzureStorageAccountKey",
-          "AzureStorageAccountGeneric",
-          "BENationalNumber",
-          "BENationalNumberV2",
-          "BEValueAddedTaxNumber",
-          "BRCPFNumber",
-          "BRLegalEntityNumber",
-          "BRNationalIDRG",
-          "BGUniformCivilNumber",
-          "CABankAccountNumber",
-          "CADriversLicenseNumber",
-          "CAHealthServiceNumber",
-          "CAPassportNumber",
-          "CAPersonalHealthIdentification",
-          "CASocialInsuranceNumber",
-          "CLIdentityCardNumber",
-          "CNResidentIdentityCardNumber",
-          "CreditCardNumber",
-          "HRIdentityCardNumber",
-          "HRNationalIDNumber",
-          "HRPersonalIdentificationNumber",
-          "HRPersonalIdentificationOIBNumberV2",
-          "CYIdentityCard",
-          "CYTaxIdentificationNumber",
-          "CZPersonalIdentityNumber",
-          "CZPersonalIdentityV2",
-          "DKPersonalIdentificationNumber",
-          "DKPersonalIdentificationV2",
-          "DrugEnforcementAgencyNumber",
-          "EEPersonalIdentificationCode",
-          "EUDebitCardNumber",
-          "EUDriversLicenseNumber",
-          "EUGPSCoordinates",
-          "EUNationalIdentificationNumber",
-          "EUPassportNumber",
-          "EUSocialSecurityNumber",
-          "EUTaxIdentificationNumber",
-          "FIEuropeanHealthNumber",
-          "FINationalID",
-          "FINationalIDV2",
-          "FIPassportNumber",
-          "FRDriversLicenseNumber",
-          "FRHealthInsuranceNumber",
-          "FRNationalID",
-          "FRPassportNumber",
-          "FRSocialSecurityNumber",
-          "FRTaxIdentificationNumber",
-          "FRValueAddedTaxNumber",
-          "DEDriversLicenseNumber",
-          "DEPassportNumber",
-          "DEIdentityCardNumber",
-          "DETaxIdentificationNumber",
-          "DEValueAddedNumber",
-          "GRNationalIDCard",
-          "GRNationalIDV2",
-          "GRTaxIdentificationNumber",
-          "HKIdentityCardNumber",
-          "HUValueAddedNumber",
-          "HUPersonalIdentificationNumber",
-          "HUTaxIdentificationNumber",
-          "INPermanentAccount",
-          "INUniqueIdentificationNumber",
-          "IDIdentityCardNumber",
-          "InternationalBankingAccountNumber",
-          "IEPersonalPublicServiceNumber",
-          "IEPersonalPublicServiceNumberV2",
-          "ILBankAccountNumber",
-          "ILNationalID",
-          "ITDriversLicenseNumber",
-          "ITFiscalCode",
-          "ITValueAddedTaxNumber",
-          "JPBankAccountNumber",
-          "JPDriversLicenseNumber",
-          "JPPassportNumber",
-          "JPResidentRegistrationNumber",
-          "JPSocialInsuranceNumber",
-          "JPMyNumberCorporate",
-          "JPMyNumberPersonal",
-          "JPResidenceCardNumber",
-          "LVPersonalCode",
-          "LTPersonalCode",
-          "LUNationalIdentificationNumberNatural",
-          "LUNationalIdentificationNumberNonNatural",
-          "MYIdentityCardNumber",
-          "MTIdentityCardNumber",
-          "MTTaxIDNumber",
-          "NLCitizensServiceNumber",
-          "NLCitizensServiceNumberV2",
-          "NLTaxIdentificationNumber",
-          "NLValueAddedTaxNumber",
-          "NZBankAccountNumber",
-          "NZDriversLicenseNumber",
-          "NZInlandRevenueNumber",
-          "NZMinistryOfHealthNumber",
-          "NZSocialWelfareNumber",
-          "NOIdentityNumber",
-          "PHUnifiedMultiPurposeIDNumber",
-          "PLIdentityCard",
-          "PLNationalID",
-          "PLNationalIDV2",
-          "PLPassportNumber",
-          "PLTaxIdentificationNumber",
-          "PLREGONNumber",
-          "PTCitizenCardNumber",
-          "PTCitizenCardNumberV2",
-          "PTTaxIdentificationNumber",
-          "ROPersonalNumericalCode",
-          "RUPassportNumberDomestic",
-          "RUPassportNumberInternational",
-          "SANationalID",
-          "SGNationalRegistrationIdentityCardNumber",
-          "SKPersonalNumber",
-          "SITaxIdentificationNumber",
-          "SIUniqueMasterCitizenNumber",
-          "ZAIdentificationNumber",
-          "KRResidentRegistrationNumber",
-          "ESDNI",
-          "ESSocialSecurityNumber",
-          "ESTaxIdentificationNumber",
-          "SQLServerConnectionString",
-          "SENationalID",
-          "SENationalIDV2",
-          "SEPassportNumber",
-          "SETaxIdentificationNumber",
-          "SWIFTCode",
-          "CHSocialSecurityNumber",
-          "TWNationalID",
-          "TWPassportNumber",
-          "TWResidentCertificate",
-          "THPopulationIdentificationCode",
-          "TRNationalIdentificationNumber",
-          "UKDriversLicenseNumber",
-          "UKElectoralRollNumber",
-          "UKNationalHealthNumber",
-          "UKNationalInsuranceNumber",
-          "UKUniqueTaxpayerNumber",
-          "USUKPassportNumber",
-          "USBankAccountNumber",
-          "USDriversLicenseNumber",
-          "USIndividualTaxpayerIdentification",
-          "USSocialSecurityNumber",
-          "UAPassportNumberDomestic",
-          "UAPassportNumberInternational",
-          "Organization",
-          "Email",
-          "URL",
-          "Age",
-          "PhoneNumber",
-          "IPAddress",
-          "Date",
-          "Person",
-          "Address",
-          "All",
-          "Default"
-        ]
-      },
-      "type": "array",
-      "uniqueItems": true
-    },
-    "KeyPhraseTaskParameters": {
-      "type": "object",
-      "description": "Supported parameters for a Key Phrase Extraction task.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
-        }
-      ]
-    },
-    "KeyPhraseLROTask": {
-      "type": "object",
-      "description": "An object representing the task definition for a Key Phrase Extraction task.",
-      "properties": {
-        "parameters": {
-          "$ref": "#/definitions/KeyPhraseTaskParameters"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextLROTask"
-        }
       ],
-      "x-ms-discriminator-value": "KeyPhraseExtraction"
-    },
-    "KeyPhraseTaskResult": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/KeyPhraseResult"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextTaskResult"
-        }
-      ],
-      "required": [
-        "results"
-      ],
-      "x-ms-discriminator-value": "KeyPhraseExtractionResults"
-    },
-    "KeyPhraseResult": {
-      "type": "object",
-      "properties": {
-        "documents": {
-          "type": "array",
-          "description": "Response by document",
-          "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/KeyPhrasesDocumentResult"
-              }
-            ]
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltResult"
-        }
-      ],
-      "required": [
-        "documents"
-      ]
-    },
-    "KeyPhrasesDocumentResult": {
-      "type": "object",
-      "properties": {
-        "keyPhrases": {
-          "type": "array",
-          "description": "A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
       "allOf": [
         {
           "$ref": "#/definitions/DocumentResult"
         }
-      ],
-      "required": [
-        "keyPhrases"
       ]
-    },
-    "LanguageDetectionTaskParameters": {
-      "type": "object",
-      "description": "Supported parameters for a Language Detection task.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
-        }
-      ]
-    },
-    "LanguageDetectionTaskResult": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/LanguageDetectionResult"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextTaskResult"
-        }
-      ],
-      "required": [
-        "results"
-      ],
-      "x-ms-discriminator-value": "LanguageDetectionResults"
-    },
-    "LanguageDetectionResult": {
-      "type": "object",
-      "properties": {
-        "documents": {
-          "type": "array",
-          "description": "Response by document",
-          "items": {
-            "$ref": "#/definitions/LanguageDetectionDocumentResult"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltResult"
-        }
-      ],
-      "required": [
-        "documents"
-      ]
-    },
-    "LanguageDetectionDocumentResult": {
-      "type": "object",
-      "properties": {
-        "detectedLanguage": {
-          "description": "Detected Language.",
-          "$ref": "#/definitions/DetectedLanguage"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DocumentResult"
-        }
-      ],
-      "required": [
-        "detectedLanguage"
-      ]
-    },
-    "DetectedLanguage": {
-      "type": "object",
-      "required": [
-        "name",
-        "iso6391Name",
-        "confidenceScore"
-      ],
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Long name of a detected language (e.g. English, French)."
-        },
-        "iso6391Name": {
-          "type": "string",
-          "description": "A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr)."
-        },
-        "confidenceScore": {
-          "type": "number",
-          "format": "double",
-          "description": "A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true."
-        }
-      }
-    },
-    "AnalyzeTextJobState": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobState"
-        },
-        {
-          "$ref": "#/definitions/TasksState"
-        },
-        {
-          "$ref": "#/definitions/AnalyzeTextJobStatistics"
-        }
-      ]
-    },
-    "Pagination": {
-      "properties": {
-        "nextLink": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "JobState": {
-      "properties": {
-        "displayName": {
-          "type": "string"
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "expirationDateTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "jobId": {
-          "type": "string"
-        },
-        "lastUpdatedDateTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "status": {
-          "enum": [
-            "notStarted",
-            "running",
-            "succeeded",
-            "partiallyCompleted",
-            "failed",
-            "cancelled",
-            "cancelling"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "State"
-          }
-        },
-        "errors": {
-          "items": {
-            "$ref": "common.json#/definitions/Error"
-          },
-          "type": "array"
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "jobId",
-        "lastUpdatedDateTime",
-        "createdDateTime",
-        "status"
-      ]
-    },
-    "JobErrors": {
-      "properties": {
-        "errors": {
-          "items": {
-            "$ref": "common.json#/definitions/Error"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "AnalyzeTextJobStatistics": {
-      "properties": {
-        "statistics": {
-          "$ref": "#/definitions/RequestStatistics"
-        }
-      },
-      "type": "object"
-    },
-    "TasksState": {
-      "properties": {
-        "tasks": {
-          "properties": {
-            "completed": {
-              "type": "integer"
-            },
-            "failed": {
-              "type": "integer"
-            },
-            "inProgress": {
-              "type": "integer"
-            },
-            "total": {
-              "type": "integer"
-            },
-            "items": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/AnalyzeTextLROResult"
-              }
-            }
-          },
-          "required": [
-            "total",
-            "completed",
-            "failed",
-            "inProgress"
-          ],
-          "type": "object"
-        }
-      },
-      "required": [
-        "tasks"
-      ],
-      "type": "object"
-    },
-    "TaskState": {
-      "properties": {
-        "lastUpdateDateTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "status": {
-          "enum": [
-            "notStarted",
-            "running",
-            "succeeded",
-            "failed",
-            "cancelled",
-            "cancelling"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "State"
-          }
-        }
-      },
-      "required": [
-        "status",
-        "lastUpdateDateTime"
-      ],
-      "type": "object"
-    },
-    "AnalyzeTextLROResult": {
-      "type": "object",
-      "discriminator": "kind",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/AnalyzeTextLROResultsKind"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TaskState"
-        },
-        {
-          "$ref": "#/definitions/TaskIdentifier"
-        }
-      ],
-      "required": [
-        "kind"
-      ]
-    },
-    "EntityRecognitionLROResult": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/EntitiesResult"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextLROResult"
-        }
-      ],
-      "required": [
-        "results"
-      ],
-      "x-ms-discriminator-value": "EntityRecognitionLROResults"
-    },
-    "CustomEntityRecognitionLROResult": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/CustomEntitiesResult"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextLROResult"
-        }
-      ],
-      "required": [
-        "results"
-      ],
-      "x-ms-discriminator-value": "CustomEntityRecognitionLROResults"
-    },
-    "CustomSingleLabelClassificationLROResult": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/CustomLabelClassificationResult"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextLROResult"
-        }
-      ],
-      "required": [
-        "results"
-      ],
-      "x-ms-discriminator-value": "CustomSingleLabelClassificationLROResults"
-    },
-    "CustomMultiLabelClassificationLROResult": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/CustomLabelClassificationResult"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextLROResult"
-        }
-      ],
-      "required": [
-        "results"
-      ],
-      "x-ms-discriminator-value": "CustomMultiLabelClassificationLROResults"
-    },
-    "EntityLinkingLROResult": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/EntityLinkingResult"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextLROResult"
-        }
-      ],
-      "required": [
-        "results"
-      ],
-      "x-ms-discriminator-value": "EntityLinkingLROResults"
     },
     "PiiEntityRecognitionLROResult": {
       "type": "object",
@@ -2420,170 +2237,183 @@
           "$ref": "#/definitions/PiiResult"
         }
       },
+      "required": [
+        "results"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/AnalyzeTextLROResult"
         }
-      ],
-      "required": [
-        "results"
       ],
       "x-ms-discriminator-value": "PiiEntityRecognitionLROResults"
     },
-    "HealthcareLROResult": {
+    "PiiLROTask": {
       "type": "object",
       "properties": {
-        "results": {
-          "$ref": "#/definitions/HealthcareResult"
+        "parameters": {
+          "$ref": "#/definitions/PiiTaskParameters"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/AnalyzeTextLROResult"
+          "$ref": "#/definitions/AnalyzeTextLROTask"
         }
       ],
-      "required": [
-        "results"
-      ],
-      "x-ms-discriminator-value": "HealthcareLROResults"
+      "x-ms-discriminator-value": "PiiEntityRecognition"
     },
-    "SentimentLROResult": {
+    "PiiResult": {
       "type": "object",
       "properties": {
-        "results": {
-          "$ref": "#/definitions/SentimentResponse"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextLROResult"
-        }
-      ],
-      "required": [
-        "results"
-      ],
-      "x-ms-discriminator-value": "SentimentAnalysisLROResults"
-    },
-    "KeyPhraseExtractionLROResult": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/KeyPhraseResult"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextLROResult"
-        }
-      ],
-      "required": [
-        "results"
-      ],
-      "x-ms-discriminator-value": "KeyPhraseExtractionLROResults"
-    },
-    "DocumentResponse": {
-      "type": "object",
-      "properties": {}
-    },
-    "DocumentResult": {
-      "type": "object",
-      "required": [
-        "id",
-        "warnings"
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique, non-empty document identifier."
-        },
-        "warnings": {
+        "documents": {
           "type": "array",
-          "description": "Warnings encountered while processing document.",
+          "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/DocumentWarning"
+            "$ref": "#/definitions/PiiEntitiesDocumentResult"
+          }
+        }
+      },
+      "required": [
+        "documents"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PreBuiltResult"
+        }
+      ]
+    },
+    "PiiTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for a PII Entities Recognition task.",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "default": "none",
+          "enum": [
+            "phi",
+            "none"
+          ],
+          "x-ms-enum": {
+            "name": "PiiDomain",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "phi",
+                "value": "phi",
+                "description": "Indicates that entities in the Personal Health Information domain should be redacted."
+              },
+              {
+                "name": "none",
+                "value": "none",
+                "description": "Indicates that no domain is specified."
+              }
+            ]
+          }
+        },
+        "piiCategories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PiiCategory"
+          }
+        },
+        "stringIndexType": {
+          "type": "string",
+          "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.",
+          "default": "TextElements_v8",
+          "enum": [
+            "TextElements_v8",
+            "UnicodeCodePoint",
+            "Utf16CodeUnit"
+          ],
+          "x-ms-enum": {
+            "name": "StringIndexType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "TextElements_v8",
+                "value": "TextElements_v8",
+                "description": "Returned offset and length values will correspond to TextElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo."
+              },
+              {
+                "name": "UnicodeCodePoint",
+                "value": "UnicodeCodePoint",
+                "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that support Unicode, for example Python."
+              },
+              {
+                "name": "Utf16CodeUnit",
+                "value": "Utf16CodeUnit",
+                "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
+    "PiiTaskResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/PiiResult"
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextTaskResult"
+        }
+      ],
+      "x-ms-discriminator-value": "PiiEntityRecognitionResults"
+    },
+    "PreBuiltResult": {
+      "type": "object",
+      "description": "Pre built result",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
           }
         },
         "statistics": {
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
-          "$ref": "#/definitions/DocumentStatistics"
-        }
-      }
-    },
-    "DocumentError": {
-      "type": "object",
-      "required": [
-        "id",
-        "error"
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Document Id."
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
         },
-        "error": {
-          "type": "object",
-          "description": "Document Error.",
-          "$ref": "common.json#/definitions/Error"
-        }
-      }
-    },
-    "DocumentWarning": {
-      "type": "object",
-      "required": [
-        "code",
-        "message"
-      ],
-      "properties": {
-        "code": {
+        "modelVersion": {
           "type": "string",
-          "enum": [
-            "LongWordsInDocument",
-            "DocumentTruncated"
-          ],
-          "x-ms-enum": {
-            "name": "WarningCodeValue",
-            "modelAsString": true
-          },
-          "description": "Error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "Warning message."
-        },
-        "targetRef": {
-          "type": "string",
-          "description": "A JSON pointer reference indicating the target object."
-        }
-      }
-    },
-    "DocumentStatistics": {
-      "type": "object",
-      "required": [
-        "charactersCount",
-        "transactionsCount"
-      ],
-      "properties": {
-        "charactersCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of text elements recognized in the document."
-        },
-        "transactionsCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of transactions for the document."
+          "description": "This field indicates which model is used for scoring."
         }
       },
-      "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+      "required": [
+        "errors",
+        "modelVersion"
+      ]
+    },
+    "PreBuiltTaskParameters": {
+      "type": "object",
+      "description": "Parameters object for a text analysis task using pre-built models.",
+      "properties": {
+        "modelVersion": {
+          "type": "string",
+          "description": "model version",
+          "default": "latest"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskParameters"
+        }
+      ]
     },
     "RequestStatistics": {
       "type": "object",
-      "required": [
-        "documentsCount",
-        "validDocumentsCount",
-        "erroneousDocumentsCount",
-        "transactionsCount"
-      ],
+      "description": "if showStats=true was specified in the request this field will contain information about the request payload.",
       "properties": {
         "documentsCount": {
           "type": "integer",
@@ -2606,67 +2436,562 @@
           "description": "Number of transactions for the request."
         }
       },
-      "description": "if showStats=true was specified in the request this field will contain information about the request payload."
-    },
-    "MultiLanguageInput": {
-      "type": "object",
-      "description": "Contains an input document to be analyzed by the service.",
       "required": [
-        "id",
-        "text"
+        "documentsCount",
+        "validDocumentsCount",
+        "erroneousDocumentsCount",
+        "transactionsCount"
       ],
+      "allOf": [
+        {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      ]
+    },
+    "SentenceAssessment": {
+      "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "A unique, non-empty document identifier."
+        "sentiment": {
+          "$ref": "#/definitions/TokenSentimentValue"
+        },
+        "confidenceScores": {
+          "$ref": "#/definitions/TargetConfidenceScoreLabel"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The target offset from the start of the sentence."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of the target."
         },
         "text": {
           "type": "string",
-          "description": "The input text to process."
+          "description": "The target text detected."
         },
-        "language": {
+        "isNegated": {
+          "type": "boolean",
+          "description": "The indicator representing if the assessment is negated."
+        }
+      },
+      "required": [
+        "sentiment",
+        "confidenceScores",
+        "offset",
+        "length",
+        "text",
+        "isNegated"
+      ]
+    },
+    "SentenceSentiment": {
+      "type": "object",
+      "properties": {
+        "text": {
           "type": "string",
-          "description": "(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default."
+          "description": "The sentence text."
+        },
+        "sentiment": {
+          "$ref": "#/definitions/SentenceSentimentValue",
+          "description": "The predicted Sentiment for the sentence."
+        },
+        "confidenceScores": {
+          "$ref": "#/definitions/SentimentConfidenceScores",
+          "description": "The sentiment confidence score between 0 and 1 for the sentence for all classes."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The target offset from the start of the sentence."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of the target."
+        },
+        "targets": {
+          "type": "array",
+          "description": "The array of sentence targets for the sentence.",
+          "items": {
+            "$ref": "#/definitions/SentenceTarget"
+          },
+          "x-ms-identifiers": []
+        },
+        "assessments": {
+          "type": "array",
+          "description": "The array of assessments for the sentence.",
+          "items": {
+            "$ref": "#/definitions/SentenceAssessment"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "text",
+        "sentiment",
+        "confidenceScores",
+        "offset",
+        "length"
+      ]
+    },
+    "SentenceSentimentValue": {
+      "type": "string",
+      "description": "The predicted Sentiment for the sentence.",
+      "enum": [
+        "positive",
+        "neutral",
+        "negative"
+      ],
+      "x-ms-enum": {
+        "name": "SentenceSentimentValue",
+        "modelAsString": false
+      }
+    },
+    "SentenceTarget": {
+      "type": "object",
+      "properties": {
+        "sentiment": {
+          "$ref": "#/definitions/TokenSentimentValue"
+        },
+        "confidenceScores": {
+          "$ref": "#/definitions/TargetConfidenceScoreLabel"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The target offset from the start of the sentence."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of the target."
+        },
+        "text": {
+          "type": "string",
+          "description": "The target text detected."
+        },
+        "relations": {
+          "type": "array",
+          "description": "The array of either assessment or target objects which is related to the target.",
+          "items": {
+            "$ref": "#/definitions/TargetRelation"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "sentiment",
+        "confidenceScores",
+        "offset",
+        "length",
+        "text",
+        "relations"
+      ]
+    },
+    "SentimentAnalysisLROTask": {
+      "type": "object",
+      "description": "An object representing the task definition for a Sentiment Analysis task.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/SentimentAnalysisTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "SentimentAnalysis"
+    },
+    "SentimentAnalysisTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for a Sentiment Analysis task.",
+      "properties": {
+        "opinionMining": {
+          "type": "boolean",
+          "default": false
+        },
+        "stringIndexType": {
+          "type": "string",
+          "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.",
+          "default": "TextElements_v8",
+          "enum": [
+            "TextElements_v8",
+            "UnicodeCodePoint",
+            "Utf16CodeUnit"
+          ],
+          "x-ms-enum": {
+            "name": "StringIndexType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "TextElements_v8",
+                "value": "TextElements_v8",
+                "description": "Returned offset and length values will correspond to TextElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo."
+              },
+              {
+                "name": "UnicodeCodePoint",
+                "value": "UnicodeCodePoint",
+                "description": "Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that support Unicode, for example Python."
+              },
+              {
+                "name": "Utf16CodeUnit",
+                "value": "Utf16CodeUnit",
+                "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PreBuiltTaskParameters"
+        }
+      ]
+    },
+    "SentimentConfidenceScores": {
+      "type": "object",
+      "description": "Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative.",
+      "properties": {
+        "positive": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score for positive sentiment"
+        },
+        "neutral": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score for neutral sentiment"
+        },
+        "negative": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score for negative sentiment"
+        }
+      },
+      "required": [
+        "positive",
+        "neutral",
+        "negative"
+      ]
+    },
+    "SentimentDocumentResult": {
+      "type": "object",
+      "properties": {
+        "sentiment": {
+          "$ref": "#/definitions/DocumentSentimentValue",
+          "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed)."
+        },
+        "confidenceScores": {
+          "$ref": "#/definitions/SentimentConfidenceScores"
+        },
+        "sentences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SentenceSentiment"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "sentiment",
+        "confidenceScores",
+        "sentences"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentResult"
+        }
+      ]
+    },
+    "SentimentLROResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/SentimentResponse"
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        }
+      ],
+      "x-ms-discriminator-value": "SentimentAnalysisLROResults"
+    },
+    "SentimentResponse": {
+      "type": "object",
+      "description": "Sentiment analysis per document.",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "The sentiment analysis results for each document in the input.",
+          "items": {
+            "$ref": "#/definitions/SentimentDocumentResult"
+          }
+        }
+      },
+      "required": [
+        "documents"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PreBuiltResult"
+        }
+      ]
+    },
+    "SentimentTaskResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/SentimentResponse"
+        }
+      },
+      "required": [
+        "results"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextTaskResult"
+        }
+      ],
+      "x-ms-discriminator-value": "SentimentAnalysisResults"
+    },
+    "State": {
+      "type": "string",
+      "description": "The status of the task at the mentioned last update time.",
+      "enum": [
+        "notStarted",
+        "running",
+        "succeeded",
+        "partiallyCompleted",
+        "failed",
+        "cancelled",
+        "cancelling"
+      ],
+      "x-ms-enum": {
+        "name": "State",
+        "modelAsString": true
+      }
+    },
+    "TargetConfidenceScoreLabel": {
+      "type": "object",
+      "description": "Represents the confidence scores across all sentiment classes: positive and negative.",
+      "properties": {
+        "positive": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score for positive sentiment"
+        },
+        "negative": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score for negative sentiment"
+        }
+      },
+      "required": [
+        "positive",
+        "negative"
+      ]
+    },
+    "TargetRelation": {
+      "type": "object",
+      "properties": {
+        "ref": {
+          "type": "string",
+          "description": "The JSON pointer indicating the linked object."
+        },
+        "relationType": {
+          "$ref": "#/definitions/TargetRelationType",
+          "description": "The type related to the target."
+        }
+      },
+      "required": [
+        "ref",
+        "relationType"
+      ]
+    },
+    "TargetRelationType": {
+      "type": "string",
+      "description": "The type related to the target.",
+      "enum": [
+        "assessment",
+        "target"
+      ],
+      "x-ms-enum": {
+        "name": "TargetRelationType",
+        "modelAsString": false
+      }
+    },
+    "TaskIdentifier": {
+      "type": "object",
+      "description": "Base task object.",
+      "properties": {
+        "taskName": {
+          "type": "string",
+          "description": "task name"
         }
       }
     },
-    "LanguageInput": {
+    "TaskParameters": {
       "type": "object",
-      "required": [
-        "id",
-        "text"
-      ],
+      "description": "Base parameters object for a text analysis task.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique, non-empty document identifier."
-        },
-        "text": {
-          "type": "string"
-        },
-        "countryHint": {
-          "type": "string"
+        "loggingOptOut": {
+          "type": "boolean",
+          "description": "logging opt out",
+          "default": false
         }
+      }
+    },
+    "Tasks": {
+      "type": "object",
+      "properties": {
+        "completed": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "failed": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "inProgress": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnalyzeTextLROResult"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "completed",
+        "failed",
+        "inProgress",
+        "total"
+      ]
+    },
+    "TokenSentimentValue": {
+      "type": "string",
+      "description": "The predicted Sentiment for the sentence.",
+      "enum": [
+        "positive",
+        "mixed",
+        "negative"
+      ],
+      "x-ms-enum": {
+        "name": "TokenSentimentValue",
+        "modelAsString": false
+      }
+    },
+    "WarningCodeValue": {
+      "type": "string",
+      "enum": [
+        "LongWordsInDocument",
+        "DocumentTruncated"
+      ],
+      "x-ms-enum": {
+        "name": "WarningCodeValue",
+        "modelAsString": true
+      }
+    },
+    "healthcareEntityCategory": {
+      "type": "string",
+      "description": "Healthcare Entity Category.",
+      "enum": [
+        "BodyStructure",
+        "Age",
+        "Gender",
+        "ExaminationName",
+        "Date",
+        "Direction",
+        "Frequency",
+        "MeasurementValue",
+        "MeasurementUnit",
+        "RelationalOperator",
+        "Time",
+        "GeneOrProtein",
+        "Variant",
+        "AdministrativeEvent",
+        "CareEnvironment",
+        "HealthcareProfession",
+        "Diagnosis",
+        "SymptomOrSign",
+        "ConditionQualifier",
+        "MedicationClass",
+        "MedicationName",
+        "Dosage",
+        "MedicationForm",
+        "MedicationRoute",
+        "FamilyRelation",
+        "TreatmentName"
+      ],
+      "x-ms-enum": {
+        "name": "healthcareEntityCategory",
+        "modelAsString": true
+      }
+    },
+    "relationType": {
+      "type": "string",
+      "description": "Type of relation. Examples include: `DosageOfMedication` or 'FrequencyOfMedication', etc.",
+      "enum": [
+        "Abbreviation",
+        "DirectionOfBodyStructure",
+        "DirectionOfCondition",
+        "DirectionOfExamination",
+        "DirectionOfTreatment",
+        "DosageOfMedication",
+        "FormOfMedication",
+        "FrequencyOfMedication",
+        "FrequencyOfTreatment",
+        "QualifierOfCondition",
+        "RelationOfExamination",
+        "RouteOfMedication",
+        "TimeOfCondition",
+        "TimeOfEvent",
+        "TimeOfExamination",
+        "TimeOfMedication",
+        "TimeOfTreatment",
+        "UnitOfCondition",
+        "UnitOfExamination",
+        "ValueOfCondition",
+        "ValueOfExamination"
+      ],
+      "x-ms-enum": {
+        "name": "relationType",
+        "modelAsString": true
       }
     }
   },
   "parameters": {
-    "ShowStats": {
+    "AnalyzeTextQueryParameters.showStats": {
       "name": "showStats",
       "in": "query",
       "description": "(Optional) if set to true, response will contain request and document level statistics.",
-      "type": "boolean",
       "required": false,
+      "type": "boolean",
       "x-ms-parameter-location": "method"
     },
-    "JobId": {
-      "description": "Job ID",
-      "format": "uuid",
-      "in": "path",
-      "name": "jobId",
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
     }
   }
 }
