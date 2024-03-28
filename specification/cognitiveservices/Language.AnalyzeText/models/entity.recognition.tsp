@@ -950,7 +950,7 @@ model TemporalSpanMetadata extends BaseMetadata {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   metadataKind: MetadataKind.TemporalSpanMetadata;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  spanValues?: TemporalSpanValues;
+  spanValues?: TemporalSpanValues[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
