@@ -318,10 +318,12 @@
           "$ref": "#/definitions/BatchSynthesisProperties"
         },
         "outputs": {
-          "$ref": "#/definitions/BatchSynthesisOutputs"
+          "$ref": "#/definitions/BatchSynthesisOutputs",
+          "readOnly": true
         },
         "status": {
-          "$ref": "#/definitions/Status"
+          "$ref": "#/definitions/Status",
+          "readOnly": true
         },
         "lastActionDateTime": {
           "description": "The time-stamp when the current status was entered.",
@@ -353,22 +355,22 @@
       "properties": {
         "src": {
           "format": "uri",
-          "description": "Source of audio file. Reference https://learn.microsoft.com/en-us/azure/ai-services/speech-service/speech-synthesis-markup-voice#add-background-audio.",
+          "description": "Source of audio file. Reference https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#add-background-audio.",
           "type": "string"
         },
         "fadein": {
           "format": "int64",
-          "description": "The fadein value of background audio. Reference https://learn.microsoft.com/en-us/azure/ai-services/speech-service/speech-synthesis-markup-voice#add-background-audio.",
+          "description": "The fadein value of background audio. Reference https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#add-background-audio.",
           "type": "integer"
         },
         "fadeout": {
           "format": "int64",
-          "description": "The fadeout value of background audio. Reference https://learn.microsoft.com/en-us/azure/ai-services/speech-service/speech-synthesis-markup-voice#add-background-audio.",
+          "description": "The fadeout value of background audio. Reference https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#add-background-audio.",
           "type": "integer"
         },
         "volume": {
           "format": "double",
-          "description": "The volume value of background audio. Reference https://learn.microsoft.com/en-us/azure/ai-services/speech-service/speech-synthesis-markup-voice#add-background-audio.",
+          "description": "The volume value of background audio. Reference https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#add-background-audio.",
           "type": "number"
         }
       }
@@ -402,8 +404,7 @@
           "description": "The number of billable characters for personal voices in the input file.",
           "type": "integer"
         }
-      },
-      "readOnly": true
+      }
     },
     "BatchSynthesisConfig": {
       "description": "Text-to-speech configuration for plain text input.",
@@ -413,7 +414,7 @@
       "type": "object",
       "properties": {
         "voice": {
-          "description": "Voice name for PlainText input. You can find platform voice list here https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=tts.",
+          "description": "Voice name for PlainText input. You can find platform voice list here https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=tts.",
           "minLength": 1,
           "type": "string"
         },
@@ -422,15 +423,15 @@
           "type": "string"
         },
         "rate": {
-          "description": "Speaking rate for PlainText input. For supported values, see https://learn.microsoft.com/en-us/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody.",
+          "description": "Speaking rate for PlainText input. For supported values, see https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody.",
           "type": "string"
         },
         "pitch": {
-          "description": "Pitch for PlainText input. For supported values, see https://learn.microsoft.com/en-us/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody.",
+          "description": "Pitch for PlainText input. For supported values, see https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody.",
           "type": "string"
         },
         "volume": {
-          "description": "Volume for PlainText input. For supported values, see https://learn.microsoft.com/en-us/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody.",
+          "description": "Volume for PlainText input. For supported values, see https://learn.microsoft.com/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody.",
           "type": "string"
         },
         "backgroundAudio": {
@@ -450,8 +451,7 @@
           "description": "Error message",
           "type": "string"
         }
-      },
-      "readOnly": true
+      }
     },
     "BatchSynthesisInput": {
       "description": "Batch Synthesis input.",
@@ -479,8 +479,7 @@
           "description": "When BatchSynthesisProperties.decompressOutputFiles is true, job summary file path will be provided here.",
           "type": "string"
         }
-      },
-      "readOnly": true
+      }
     },
     "BatchSynthesisProperties": {
       "description": "Detailed properties of batch synthesis task.",
@@ -492,7 +491,7 @@
           "format": "int32"
         },
         "outputFormat": {
-          "description": "The requested audio output format.",
+          "description": "The requested audio output format. Reference https://learn.microsoft.com/en-us/azure/ai-services/speech-service/batch-synthesis-properties#batch-synthesis-properties.",
           "type": "string"
         },
         "concatenateResult": {
@@ -545,10 +544,12 @@
           "readOnly": true
         },
         "billingDetails": {
-          "$ref": "#/definitions/BatchSynthesisBillingDetails"
+          "$ref": "#/definitions/BatchSynthesisBillingDetails",
+          "readOnly": true
         },
         "error": {
-          "$ref": "#/definitions/BatchSynthesisError"
+          "$ref": "#/definitions/BatchSynthesisError",
+          "readOnly": true
         }
       }
     },
@@ -650,7 +651,8 @@
           "$ref": "#/definitions/OperationId"
         },
         "status": {
-          "$ref": "#/definitions/OperationStatus"
+          "$ref": "#/definitions/OperationStatus",
+          "readOnly": true
         }
       }
     },
@@ -666,8 +668,7 @@
       "x-ms-enum": {
         "name": "OperationStatus",
         "modelAsString": true
-      },
-      "readOnly": true
+      }
     },
     "PaginatedBatchSynthesis": {
       "description": "Paginated batch synthesis task list",
@@ -709,8 +710,7 @@
       "x-ms-enum": {
         "name": "Status",
         "modelAsString": true
-      },
-      "readOnly": true
+      }
     },
     "InputKind": {
       "description": "Input text kind.",
