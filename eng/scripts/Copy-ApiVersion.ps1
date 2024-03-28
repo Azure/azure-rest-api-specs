@@ -64,6 +64,8 @@ param (
         })]
     [string] $BaseVersion,
 
+    [string] $ProviderInnerFolder = $null,
+    
     [bool] $testMode = $false
 )
 
@@ -74,8 +76,15 @@ $newApiVersionStatus, $newApiVersion = Get-Version $NewVersion
 
 $repoDirectory = Resolve-Path "$PSScriptRoot/../.."
 $readmeDirectory = Join-Path $repoDirectory "specification/$ServiceDirectory/$ServiceType" -Resolve
-$oldDirectory = Join-Path $repoDirectory "specification/$ServiceDirectory/$ServiceType/$Provider/$oldApiVersionStatus/$oldApiVersion" -Resolve
-$newDirectory = Join-Path $repoDirectory "specification/$ServiceDirectory/$ServiceType/$Provider/$newApiVersionStatus/$newApiVersion"
+
+if ($ProviderInnerFolder){
+    $oldDirectory = Join-Path $repoDirectory "specification/$ServiceDirectory/$ServiceType/$Provider/$ProviderInnerFolder/$oldApiVersionStatus/$oldApiVersion" -Resolve
+    $newDirectory = Join-Path $repoDirectory "specification/$ServiceDirectory/$ServiceType/$Provider/$ProviderInnerFolder/$newApiVersionStatus/$newApiVersion"
+}
+else{
+    $oldDirectory = Join-Path $repoDirectory "specification/$ServiceDirectory/$ServiceType/$Provider/$oldApiVersionStatus/$oldApiVersion" -Resolve
+    $newDirectory = Join-Path $repoDirectory "specification/$ServiceDirectory/$ServiceType/$Provider/$newApiVersionStatus/$newApiVersion"
+}
 
 Write-Host "----------------------------------------" 
 Write-Host "Service Directory: $ServiceDirectory"
@@ -115,8 +124,7 @@ Updated the API version from $BaseVersion to $NewVersion.
 $readmeFile = Get-ChildItem $readmeDirectory -Filter 'readme.md'
 if ($readmeFile) {
     $jsonFiles = Get-ChildItem $newDirectory -Filter '*.json' | Select-Object -ExpandProperty Name
-    Write-Host $jsonFiles
-    $newReadmeTagBlock = Get-NewTagSection $newApiVersion $Provider $newApiVersionStatus $jsonFiles
+    $newReadmeTagBlock = Get-NewTagSection $newApiVersion $Provider $newApiVersionStatus $jsonFiles $ProviderInnerFolder
     
     $readmeContent = $readmeFile | Get-Content -Raw
     $readmeContent = Get-ReadmeWithNewTag $readmeContent $newReadmeTagBlock
