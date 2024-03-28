@@ -240,93 +240,6 @@
             }
           },
           {
-            "name": "semanticQuery",
-            "in": "query",
-            "type": "string",
-            "description": "Allows setting a separate search query that will be solely used for semantic reranking, semantic captions and semantic answers. Is useful for scenarios where there is a need to use different queries between the base retrieval and ranking phase, and the L2 semantic phase.",
-            "x-ms-parameter-grouping": {
-              "name": "SearchOptions"
-            }
-          },
-          {
-            "name": "semanticConfiguration",
-            "in": "query",
-            "type": "string",
-            "description": "The name of the semantic configuration that lists which fields should be used for semantic ranking, captions, highlights, and answers",
-            "x-ms-parameter-grouping": {
-              "name": "SearchOptions"
-            }
-          },
-          {
-            "name": "semanticErrorHandling",
-            "in": "query",
-            "type": "string",
-            "enum": [
-              "partial",
-              "fail"
-            ],
-            "x-ms-enum": {
-              "name": "SemanticErrorMode",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "partial",
-                  "name": "Partial",
-                  "description": "If the semantic processing fails, partial results still return. The definition of partial results depends on what semantic step failed and what was the reason for failure."
-                },
-                {
-                  "value": "fail",
-                  "name": "Fail",
-                  "description": "If there is an exception during the semantic processing step, the query will fail and return the appropriate HTTP code depending on the error."
-                }
-              ]
-            },
-            "description": "Allows the user to choose whether a semantic call should fail completely, or to return partial results (default).",
-            "x-ms-parameter-grouping": {
-              "name": "SearchOptions"
-            }
-          },
-          {
-            "name": "semanticMaxWaitInMilliseconds",
-            "in": "query",
-            "type": "integer",
-            "format": "int32",
-            "minimum": 700,
-            "description": "Allows the user to set an upper bound on the amount of time it takes for semantic enrichment to finish processing before the request fails.",
-            "x-ms-parameter-grouping": {
-              "name": "SearchOptions"
-            }
-          },
-          {
-            "name": "debug",
-            "in": "query",
-            "type": "string",
-            "enum": [
-              "disabled",
-              "semantic"
-            ],
-            "x-ms-enum": {
-              "name": "QueryDebugMode",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "disabled",
-                  "name": "Disabled",
-                  "description": "No query debugging information will be returned."
-                },
-                {
-                  "value": "semantic",
-                  "name": "Semantic",
-                  "description": "Allows the user to further explore their reranked results."
-                }
-              ]
-            },
-            "description": "Enables a debugging tool that can be used to further explore your search results.",
-            "x-ms-parameter-grouping": {
-              "name": "SearchOptions"
-            }
-          },
-          {
             "name": "searchFields",
             "in": "query",
             "type": "array",
@@ -334,93 +247,6 @@
               "type": "string"
             },
             "description": "The list of field names to which to scope the full-text search. When using fielded search (fieldName:searchExpression) in a full Lucene query, the field names of each fielded search expression take precedence over any field names listed in this parameter.",
-            "x-ms-parameter-grouping": {
-              "name": "SearchOptions"
-            }
-          },
-          {
-            "name": "queryLanguage",
-            "in": "query",
-            "type": "string",
-            "enum": [
-              "none",
-              "en-us"
-            ],
-            "x-ms-enum": {
-              "name": "QueryLanguage",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "none",
-                  "name": "None",
-                  "description": "Query language not specified."
-                },
-                {
-                  "value": "en-us",
-                  "name": "EnUs",
-                  "description": "English (US)"
-                }
-              ]
-            },
-            "description": "The language of the query.",
-            "x-ms-parameter-grouping": {
-              "name": "SearchOptions"
-            }
-          },
-          {
-            "name": "speller",
-            "in": "query",
-            "type": "string",
-            "enum": [
-              "none",
-              "lexicon"
-            ],
-            "x-ms-enum": {
-              "name": "Speller",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "none",
-                  "name": "None",
-                  "description": "Speller not enabled."
-                },
-                {
-                  "value": "lexicon",
-                  "name": "Lexicon",
-                  "description": "Speller corrects individual query terms using a static lexicon for the language specified by the queryLanguage parameter."
-                }
-              ]
-            },
-            "description": "Improve search recall by spell-correcting individual search query terms.",
-            "x-ms-parameter-grouping": {
-              "name": "SearchOptions"
-            }
-          },
-          {
-            "name": "answers",
-            "in": "query",
-            "type": "string",
-            "enum": [
-              "none",
-              "extractive"
-            ],
-            "x-ms-enum": {
-              "name": "QueryAnswerType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "none",
-                  "name": "None",
-                  "description": "Do not return answers for the query."
-                },
-                {
-                  "value": "extractive",
-                  "name": "Extractive",
-                  "description": "Extracts answer candidates from the contents of the documents returned in response to a query expressed as a question in natural language."
-                }
-              ]
-            },
-            "description": "This parameter is only valid if the query type is `semantic`. If set, the query returns answers extracted from key passages in the highest ranked documents. The number of answers returned can be configured by appending the pipe character `|` followed by the `count-<number of answers>` option after the answers parameter value, such as `extractive|count-3`. Default count is 1. The confidence threshold can be configured by appending the pipe character `|` followed by the `threshold-<confidence threshold>` option after the answers parameter value, such as `extractive|threshold-0.9`. Default threshold is 0.7.",
             "x-ms-parameter-grouping": {
               "name": "SearchOptions"
             }
@@ -527,6 +353,90 @@
             }
           },
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "name": "semanticConfiguration",
+            "in": "query",
+            "type": "string",
+            "description": "The name of the semantic configuration that lists which fields should be used for semantic ranking, captions, highlights, and answers",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "semanticErrorHandling",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "partial",
+              "fail"
+            ],
+            "x-ms-enum": {
+              "name": "SemanticErrorMode",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "partial",
+                  "name": "Partial",
+                  "description": "If the semantic processing fails, partial results still return. The definition of partial results depends on what semantic step failed and what was the reason for failure."
+                },
+                {
+                  "value": "fail",
+                  "name": "Fail",
+                  "description": "If there is an exception during the semantic processing step, the query will fail and return the appropriate HTTP code depending on the error."
+                }
+              ]
+            },
+            "description": "Allows the user to choose whether a semantic call should fail completely, or to return partial results (default).",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "semanticMaxWaitInMilliseconds",
+            "in": "query",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 700,
+            "description": "Allows the user to set an upper bound on the amount of time it takes for semantic enrichment to finish processing before the request fails.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "answers",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "none",
+              "extractive"
+            ],
+            "x-ms-enum": {
+              "name": "QueryAnswerType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "none",
+                  "name": "None",
+                  "description": "Do not return answers for the query."
+                },
+                {
+                  "value": "extractive",
+                  "name": "Extractive",
+                  "description": "Extracts answer candidates from the contents of the documents returned in response to a query expressed as a question in natural language."
+                }
+              ]
+            },
+            "description": "This parameter is only valid if the query type is `semantic`. If set, the query returns answers extracted from key passages in the highest ranked documents. The number of answers returned can be configured by appending the pipe character `|` followed by the `count-<number of answers>` option after the answers parameter value, such as `extractive|count-3`. Default count is 1. The confidence threshold can be configured by appending the pipe character `|` followed by the `threshold-<confidence threshold>` option after the answers parameter value, such as `extractive|threshold-0.9`. Default threshold is 0.7.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
             "name": "captions",
             "in": "query",
             "type": "string",
@@ -556,6 +466,102 @@
             }
           },
           {
+            "name": "semanticQuery",
+            "in": "query",
+            "type": "string",
+            "description": "Allows setting a separate search query that will be solely used for semantic reranking, semantic captions and semantic answers. Is useful for scenarios where there is a need to use different queries between the base retrieval and ranking phase, and the L2 semantic phase.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "debug",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "disabled",
+              "semantic"
+            ],
+            "x-ms-enum": {
+              "name": "QueryDebugMode",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "disabled",
+                  "name": "Disabled",
+                  "description": "No query debugging information will be returned."
+                },
+                {
+                  "value": "semantic",
+                  "name": "Semantic",
+                  "description": "Allows the user to further explore their reranked results."
+                }
+              ]
+            },
+            "description": "Enables a debugging tool that can be used to further explore your search results.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "queryLanguage",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "none",
+              "en-us"
+            ],
+            "x-ms-enum": {
+              "name": "QueryLanguage",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "none",
+                  "name": "None",
+                  "description": "Query language not specified."
+                },
+                {
+                  "value": "en-us",
+                  "name": "EnUs",
+                  "description": "English (US)"
+                }
+              ]
+            },
+            "description": "The language of the query.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },
+          {
+            "name": "speller",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "none",
+              "lexicon"
+            ],
+            "x-ms-enum": {
+              "name": "Speller",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "none",
+                  "name": "None",
+                  "description": "Speller not enabled."
+                },
+                {
+                  "value": "lexicon",
+                  "name": "Lexicon",
+                  "description": "Speller corrects individual query terms using a static lexicon for the language specified by the queryLanguage parameter."
+                }
+              ]
+            },
+            "description": "Improve search recall by spell-correcting individual search query terms.",
+            "x-ms-parameter-grouping": {
+              "name": "SearchOptions"
+            }
+          },         
+          {
             "name": "semanticFields",
             "in": "query",
             "type": "array",
@@ -566,12 +572,6 @@
             "x-ms-parameter-grouping": {
               "name": "SearchOptions"
             }
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClientRequestIdParameter"
           }
         ],
         "x-ms-request-id": "request-id",
