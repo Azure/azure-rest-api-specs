@@ -2523,6 +2523,114 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiBlocklists/{raiBlocklistName}/addRaiBlocklistItems": {
+      "post": {
+        "tags": [
+          "RaiBlocklists"
+        ],
+        "operationId": "RaiBlocklistItems_Add",
+        "description": "Batch operation to add blocklist items.",
+        "x-ms-examples": {
+          "AddRaiBlocklistItems": {
+            "$ref": "./examples/AddRaiBlocklistItems.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/raiBlocklistNameParameter"
+          },
+          {
+            "name": "raiBlocklistItems",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RaiBlocklistItems"
+            },
+            "description": "Properties describing the custom blocklist items."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Added the blocklist Items successfully.",
+            "schema": {
+              "$ref": "#/definitions/RaiBlockListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiBlocklists/{raiBlocklistName}/deleteRaiBlocklistItems": {
+      "post": {
+        "tags": [
+          "RaiBlocklists"
+        ],
+        "operationId": "RaiBlocklistItems_Delete",
+        "description": "Batch operation to delete blocklist items.",
+        "x-ms-examples": {
+          "DeleteRaiBlocklistItems": {
+            "$ref": "./examples/DeleteRaiBlocklistItems.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/raiBlocklistNameParameter"
+          },
+          {
+            "name": "raiBlocklistItemsNames",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RaiBlocklistItemsRequestBody"
+            },
+            "description": "List of RAI Blocklist Items Names."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Added the blocklist Items successfully.",
+            "schema": {
+              "$ref": "#/definitions/RaiBlockListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/raiContentFilters": {
       "get": {
         "tags": [
@@ -3064,6 +3172,167 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/defenderForAISettings/{defenderForAISettingName}": {
+      "get": {
+        "tags": [
+          "DefenderForAISettings"
+        ],
+        "operationId": "DefenderForAISettings_Get",
+        "description": "Gets the specified Defender for AI setting by name.",
+        "x-ms-examples": {
+          "GetDefenderForAISetting": {
+            "$ref": "./examples/GetDefenderForAISetting.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/defenderForAISettingNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Get the defender setting name successfully.",
+            "schema": {
+              "$ref": "#/definitions/DefinderForAISetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DefenderForAISettings"
+        ],
+        "operationId": "DefenderForAISettings_CreateOrUpdate",
+        "description": "Creates or Updates the specified Defender for AI setting.",
+        "x-ms-examples": {
+          "PutDefenderForAISetting": {
+            "$ref": "./examples/PutDefenderForAISetting.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/defenderForAISettingNameParameter"
+          },
+          {
+            "name": "defenderForAISettings",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DefinderForAISetting"
+            },
+            "description": "Properties describing the Defender for AI setting."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created/updated the Defender for AI setting successfully.",
+            "schema": {
+              "$ref": "#/definitions/DefinderForAISetting"
+            }
+          },
+          "201": {
+            "description": "Created/updated the Defender for AI setting successfully.",
+            "schema": {
+              "$ref": "#/definitions/DefinderForAISetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DefenderForAISettings"
+        ],
+        "operationId": "DefenderForAISettings_Update",
+        "description": "Updates the specified Defender for AI setting.",
+        "x-ms-examples": {
+          "UpdateDefenderForAISetting": {
+            "$ref": "./examples/UpdateDefenderForAISetting.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/defenderForAISettingNameParameter"
+          },
+          {
+            "name": "defenderForAISettings",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DefinderForAISetting"
+            },
+            "description": "Properties describing the Defender for AI setting."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated the Defender for AI setting successfully.",
+            "schema": {
+              "$ref": "#/definitions/DefinderForAISetting"
+            }
+          },
+          "201": {
+            "description": "Updated the Defender for AI setting successfully.",
+            "schema": {
+              "$ref": "#/definitions/DefinderForAISetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
         }
       }
     }
@@ -5445,6 +5714,23 @@
       },
       "description": "The list of cognitive services RAI Blocklist Items."
     },
+    "RaiBlocklistItems": {
+      "description": "The list of Cognitive Services RaiBlocklist Items.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/RaiBlocklistItem"
+      },
+      "x-ms-identifiers": [
+        "name"
+      ]
+    },
+    "RaiBlocklistItemsRequestBody": {
+      "description": "The list of Cognitive Services RaiBlocklist Items Names.",
+      "type": "object",
+      "items": {
+        "type": "string"
+      }
+    },
     "RaiBlocklistItem": {
       "description": "Cognitive Services RaiBlocklist Item.",
       "type": "object",
@@ -5652,6 +5938,60 @@
           }
         }
       }
+    },
+    "DefinderForAISetting": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Etag."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DefenderForAISettingProperties"
+        }
+      },
+      "description": "The Defender for AI resource."
+    },
+    "DefenderForAISettingProperties": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "DefenderForAISettingState",
+            "modelAsString": true
+          },
+          "description": "Defender for AI state on the AI resource."
+        }
+      },
+      "description": "The Defender for AI resource properties."
     }
   },
   "parameters": {
@@ -5758,6 +6098,15 @@
       "type": "string",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
       "description": "The name of the encryptionScope associated with the Cognitive Services Account",
+      "x-ms-parameter-location": "method"
+    },
+    "defenderForAISettingNameParameter": {
+      "name": "defenderForAISettingName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the defender for AI setting.",
       "x-ms-parameter-location": "method"
     }
   }

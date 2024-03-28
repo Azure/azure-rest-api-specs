@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2024-04-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "accountName": "accountName",
+    "raiBlocklistName": "myblocklist",
+    "raiBlocklistItems": [
+      {
+        "name": "myblocklistitem1",
+        "properties": {
+          "pattern": "block item1",
+          "isRegex": false
+        }
+      },
+      {
+        "name": "myblocklistitem2",
+        "properties": {
+          "pattern": "block item2",
+          "isRegex": false
+        }
+      }
+    ]
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myblocklist",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/raiBlocklists/myblocklist",
+        "displayName": "my blocklist",
+        "properties": {
+          "description": "Brief description of the blocklist",
+          "language": "en-US"
+        },
+        "etag": "\"00000000-0000-0000-0000-000000000000\"",
+        "systemData": {
+          "createdBy": "xxx@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2022-04-03T04:41:33.937Z",
+          "lastModifiedBy": "xxx@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-04-03T04:41:33.937Z"
+        }
+      }
+    }
+  }
+}
