@@ -67,8 +67,13 @@ swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-cli-extensions
   - repo: azure-powershell
+  - repo: azure-sdk-for-go
 ```
 
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
