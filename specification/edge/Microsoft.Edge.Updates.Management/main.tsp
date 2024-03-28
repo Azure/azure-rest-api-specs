@@ -33,3 +33,5 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_02_01_preview: "2024-02-01-preview",
 }
+
+@@visibility(Azure.Core.Page.nextLink);
