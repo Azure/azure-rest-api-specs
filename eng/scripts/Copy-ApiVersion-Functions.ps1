@@ -53,12 +53,10 @@ function Get-ReadmeWithLatestTag($readmeContent, $newApiVersion ) {
 
     # Compare two dates
     if ( $newVersionDate -gt $latestVersionDate) {    
-        if ($readmeFile) {
-            $tagVersion = $newApiVersion -match '(?<date>\d{4}-\d{2})-\d{2}(-(?<preview>preview))?'
-            $tagVersion = $Matches['date']
-            $isPreview = $Matches['preview']
-            return $readmeContent -replace '(openapi-type:.*\n+tag:\s*)(package-.*)', "`$1package-$(if($isPreview -eq "preview"){"preview-"})$tagVersion" 
-        }
+        $tagVersion = $newApiVersion -match '(?<date>\d{4}-\d{2})-\d{2}(-(?<preview>preview))?'
+        $tagVersion = $Matches['date']
+        $isPreview = $Matches['preview']
+        return $readmeContent -replace '(openapi-type:.*\s+tag:\s*)(package-.*)', "`$1package-$(if($isPreview -eq "preview"){"preview-"})$tagVersion" 
     }
     return ""
 }
