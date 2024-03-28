@@ -75,13 +75,13 @@ input-file:
   - Qumulo.Storage/preview/2024-01-30-preview/Qumulo.Storage.json
 ```
 
-### Tag: package-2024-02-01
+### Tag: package-2024-02-01-preview
 
-These settings apply only when `--tag=package-2024-02-01` is specified on the command line.
+These settings apply only when `--tag=package-2024-02-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2024-02-01'
+``` yaml $(tag) == 'package-2024-02-01-preview'
 input-file:
-  - Qumulo.Storage/preview/2024-02-01/Qumulo.Storage.json
+  - Qumulo.Storage/preview/2024-02-01-preview/Qumulo.Storage.json
 ```
 
 ### Tag: package-2024-02-01
