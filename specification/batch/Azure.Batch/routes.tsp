@@ -332,7 +332,7 @@ a StartTask element, then the Pool keeps the existing StartTask.
       @body
       pool: BatchPoolUpdateContent;
     },
-    RequestSuccesResponseHeaders
+    RequestSuccessResponseHeaders
   >;
 
   @summary("Disables automatic scaling for a Pool.")
@@ -345,7 +345,7 @@ a StartTask element, then the Pool keeps the existing StartTask.
       @path
       poolId: string;
     },
-    RequestSuccesResponseHeaders
+    RequestSuccessResponseHeaders
   >;
 
   @summary("Enables automatic scaling for a Pool.")
@@ -366,7 +366,7 @@ more than once every 30 seconds.
         @body
         content: BatchPoolEnableAutoScaleContent;
       },
-    RequestSuccesResponseHeaders
+    RequestSuccessResponseHeaders
   >;
 
   @summary("Gets the result of evaluating an automatic scaling formula on the Pool.")
@@ -387,7 +387,7 @@ scaling enabled in order to evaluate a formula.
       @body
       content: BatchPoolEvaluateAutoScaleContent;
     },
-    AutoScaleRun & RequestSuccesResponseHeaders
+    AutoScaleRun & RequestSuccessResponseHeaders
   >;
 
   @summary("Changes the number of Compute Nodes that are assigned to a Pool.")
@@ -447,7 +447,7 @@ with this request, then the Batch service will remove the existing StartTask.
       @body
       pool: BatchPoolReplaceContent;
     },
-    NoContentSuccesResponseHeaders
+    NoContentSuccessResponseHeaders
   >;
 
   @summary("Removes Compute Nodes from the specified Pool.")
@@ -572,7 +572,7 @@ element, then the Job keeps the existing constraints.
       @body
       job: BatchJobUpdateContent;
     },
-    RequestSuccesResponseHeaders
+    RequestSuccessResponseHeaders
   >;
 
   @summary("Updates the properties of the specified Job.")
@@ -593,7 +593,7 @@ with this request, then the Batch service will remove the existing constraints.
       @body
       job: BatchJob;
     },
-    RequestSuccesResponseHeaders
+    RequestSuccessResponseHeaders
   >;
 
   @summary("Disables the specified Job, preventing new Tasks from running.")
@@ -875,7 +875,7 @@ then you can try again to delete the Certificate.
       @path
       thumbprint: string;
     },
-    NoContentSuccesResponseHeaders
+    NoContentSuccessResponseHeaders
   >;
 
   #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
@@ -1014,7 +1014,7 @@ running Jobs are unaffected.
       @body
       jobSchedule: BatchJobScheduleUpdateContent;
     },
-    RequestSuccesResponseHeaders
+    RequestSuccessResponseHeaders
   >;
 
   @summary("Updates the properties of the specified Job Schedule.")
@@ -1037,7 +1037,7 @@ running Jobs are unaffected.
       @body
       jobSchedule: BatchJobSchedule;
     },
-    RequestSuccesResponseHeaders
+    RequestSuccessResponseHeaders
   >;
 
   @summary("Disables a Job Schedule.")
@@ -1050,7 +1050,7 @@ running Jobs are unaffected.
       @path
       jobScheduleId: string;
     },
-    NoContentSuccesResponseHeaders
+    NoContentSuccessResponseHeaders
   >;
 
   @summary("Enables a Job Schedule.")
@@ -1063,7 +1063,7 @@ running Jobs are unaffected.
       @path
       jobScheduleId: string;
     },
-    NoContentSuccesResponseHeaders
+    NoContentSuccessResponseHeaders
   >;
 
   @summary("Terminates a Job Schedule.")
@@ -1294,7 +1294,7 @@ information about subtasks.
       @body
       task: BatchTask;
     },
-    RequestSuccesResponseHeaders
+    RequestSuccessResponseHeaders
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "GET operations that return single objects should start with 'get'"
@@ -1541,7 +1541,7 @@ Account on a Compute Node only when it is in the idle or running state.
       @body
       content: BatchNodeUserUpdateContent;
     },
-    RequestSuccesResponseHeaders
+    RequestSuccessResponseHeaders
   >;
 
   @summary("Gets information about the specified Compute Node.")
@@ -1589,31 +1589,6 @@ Account on a Compute Node only when it is in the idle or running state.
     AcceptedProcessingResponseHeaders
   >;
 
-  @summary("Reinstalls the operating system on the specified Compute Node.")
-  @doc("""
-You can reinstall the operating system on a Compute Node only if it is in an
-idle or running state. This API can be invoked only on Pools created with the
-cloud service configuration property.
-""")
-  @route("/pools/{poolId}/nodes/{nodeId}/reimage")
-  @clientName("reimageNodeInternal", "java")
-  reimageNode is BatchOps.PostOperation<
-    MinimalMetadata & {
-      @doc("The ID of the Pool that contains the Compute Node.")
-      @path
-      poolId: string;
-
-      @doc("The ID of the Compute Node that you want to restart.")
-      @path
-      nodeId: string;
-
-      @doc("The options to use for reimaging the Compute Node.")
-      @body
-      parameters?: BatchNodeReimageContent;
-    },
-    AcceptedProcessingResponseHeaders
-  >;
-
   @summary("Disables Task scheduling on the specified Compute Node.")
   @doc("""
 You can disable Task scheduling on a Compute Node only if its current
@@ -1635,7 +1610,7 @@ scheduling state is enabled.
       @body
       parameters?: BatchNodeDisableSchedulingContent;
     },
-    RequestSuccesResponseHeaders
+    RequestSuccessResponseHeaders
   >;
 
   @summary("Enables Task scheduling on the specified Compute Node.")
@@ -1655,7 +1630,7 @@ state is disabled
       @path
       nodeId: string;
     },
-    RequestSuccesResponseHeaders
+    RequestSuccessResponseHeaders
   >;
 
   @summary("Gets the settings required for remote login to a Compute Node.")
@@ -1663,8 +1638,6 @@ state is disabled
 Before you can remotely login to a Compute Node using the remote login
 settings, you must create a user Account on the Compute Node. This API can be
 invoked only on Pools created with the virtual machine configuration property.
-For Pools created with a cloud service configuration, see the GetRemoteDesktop
-API.
 """)
   @route("/pools/{poolId}/nodes/{nodeId}/remoteloginsettings")
   @clientName("getNodeRemoteLoginSettingsInternal", "java")
@@ -1679,39 +1652,6 @@ API.
       nodeId: string;
     },
     BatchNodeRemoteLoginSettings
-  >;
-
-  @summary("Gets the Remote Desktop Protocol file for the specified Compute Node.")
-  @doc("""
-Before you can access a Compute Node by using the RDP file, you must create a
-user Account on the Compute Node. This API can only be invoked on Pools created
-with a cloud service configuration. For Pools created with a virtual machine
-configuration, see the GetRemoteLoginSettings API.
-""")
-  @route("/pools/{poolId}/nodes/{nodeId}/rdp")
-  @clientName("getNodeRemoteDesktopFileInternal", "java")
-  getNodeRemoteDesktopFile is BatchOps.ReadOperation<
-    {
-      @doc("The ID of the Pool that contains the Compute Node.")
-      @path
-      poolId: string;
-
-      @doc("""
-The ID of the Compute Node for which you want to get the Remote Desktop
-Protocol file.
-""")
-      @path
-      nodeId: string;
-    },
-    {
-      @doc("Type of content")
-      @header("content-type")
-      contentType: "application/octet-stream";
-
-      @body
-      @doc("A response containing the file content.")
-      file: bytes;
-    }
   >;
 
   @summary("""
@@ -1922,7 +1862,7 @@ alias AcceptedProcessingResponseHeaders = {
   ...DataServiceResponseHeaders;
 };
 
-alias NoContentSuccesResponseHeaders = {
+alias NoContentSuccessResponseHeaders = {
   @doc("A process exit code.")
   @statusCode
   code: "204";
@@ -1930,7 +1870,7 @@ alias NoContentSuccesResponseHeaders = {
   ...DataServiceResponseHeaders;
 };
 
-alias RequestSuccesResponseHeaders = {
+alias RequestSuccessResponseHeaders = {
   @doc("A process exit code.")
   @statusCode
   code: "200";

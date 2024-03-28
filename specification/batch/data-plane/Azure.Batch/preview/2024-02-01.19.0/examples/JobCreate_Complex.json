@@ -52,10 +52,15 @@
           "autoPoolIdPrefix": "mypool",
           "poolLifetimeOption": "job",
           "pool": {
-            "vmSize": "small",
-            "cloudServiceConfiguration": {
-              "osFamily": "4",
-              "osVersion": "*"
+            "vmSize": "Standard_D1_v2",
+            "virtualMachineConfiguration": {
+              "imageReference": {
+                "publisher": "MicrosoftWindowsServer",
+                "offer": "WindowsServer",
+                "sku": "2016-datacenter-smalldisk",
+                "version": "latest"
+              },
+              "nodeAgentSKUId": "batch.node.windows amd64"
             },
             "resizeTimeout": "PT15M",
             "targetDedicatedNodes": 3,

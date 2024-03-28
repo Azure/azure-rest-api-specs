@@ -985,10 +985,10 @@ model BatchPoolResourceStatistics {
   peakDiskGiB: float32;
 
   @doc("The total number of disk read operations across all Compute Nodes in the Pool.")
-  diskReadIOps: int32;
+  diskReadIOps: int64;
 
   @doc("The total number of disk write operations across all Compute Nodes in the Pool.")
-  diskWriteIOps: int32;
+  diskWriteIOps: int64;
 
   @doc("The total amount of data in GiB of disk reads across all Compute Nodes in the Pool.")
   diskReadGiB: float32;
@@ -1027,10 +1027,10 @@ model BatchJobStatistics {
   wallClockTime: duration;
 
   @doc("The total number of disk read operations made by all Tasks in the Job.")
-  readIOps: int32;
+  readIOps: int64;
 
   @doc("The total number of disk write operations made by all Tasks in the Job.")
-  writeIOps: int32;
+  writeIOps: int64;
 
   @doc("The total amount of data in GiB read from disk by all Tasks in the Job.")
   readIOGiB: float32;
@@ -1039,13 +1039,13 @@ model BatchJobStatistics {
   writeIOGiB: float32;
 
   @doc("The total number of Tasks successfully completed in the Job during the given time range. A Task completes successfully if it returns exit code 0.")
-  numSucceededTasks: int32;
+  numSucceededTasks: int64;
 
   @doc("The total number of Tasks in the Job that failed during the given time range. A Task fails if it exhausts its maximum retry count without returning exit code 0.")
-  numFailedTasks: int32;
+  numFailedTasks: int64;
 
   @doc("The total number of retries on all the Tasks in the Job during the given time range.")
-  numTaskRetries: int32;
+  numTaskRetries: int64;
 
   @doc("The total wait time of all Tasks in the Job. The wait time for a Task is defined as the elapsed time between the creation of the Task and the start of Task execution. (If the Task is retried due to failures, the wait time is the time to the most recent Task execution.) This value is only reported in the Account lifetime statistics; it is not included in the Job statistics.")
   waitTime: duration;
@@ -1177,7 +1177,7 @@ model FileProperties {
   lastModified: utcDateTime;
 
   @doc("The length of the file.")
-  contentLength: int32;
+  contentLength: int64;
 
   @doc("The content type of the file.")
   contentType?: string;
@@ -1486,6 +1486,7 @@ model ContainerRegistry {
   @doc("The user name to log into the registry server.")
   username?: string;
 
+  @secret
   @doc("The password to log into the registry server.")
   password?: string;
 
@@ -1786,10 +1787,7 @@ model BatchPoolSpecification {
   @doc("The size of the virtual machines in the Pool. All virtual machines in a Pool are the same size. For information about available sizes of virtual machines in Pools, see Choose a VM size for Compute Nodes in an Azure Batch Pool (https://docs.microsoft.com/azure/batch/batch-pool-vm-sizes).")
   vmSize: string;
 
-  @doc("The cloud service configuration for the Pool. This property must be specified if the Pool needs to be created with Azure PaaS VMs. This property and virtualMachineConfiguration are mutually exclusive and one of the properties must be specified. If neither is specified then the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). This property cannot be specified if the Batch Account was created with its poolAllocationMode property set to 'UserSubscription'.")
-  cloudServiceConfiguration?: CloudServiceConfiguration;
-
-  @doc("The virtual machine configuration for the Pool. This property must be specified if the Pool needs to be created with Azure IaaS VMs. This property and cloudServiceConfiguration are mutually exclusive and one of the properties must be specified. If neither is specified then the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
+  @doc("The virtual machine configuration for the Pool. This property must be specified if the Pool needs to be created with Azure IaaS VMs. If it is not specified then the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
   virtualMachineConfiguration?: VirtualMachineConfiguration;
 
   @doc("The number of task slots that can be used to run concurrent tasks on a single compute node in the pool. The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.")
@@ -1838,9 +1836,6 @@ Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batc
   @doc("The list of Packages to be installed on each Compute Node in the Pool. When creating a pool, the package's application ID must be fully qualified (/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}). Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Package references on any given Pool.")
   applicationPackageReferences?: BatchApplicationPackageReference[];
 
-  @doc("The list of application licenses the Batch service will make available on each Compute Node in the Pool. The list of application licenses must be a subset of available Batch service application licenses. If a license is requested which is not supported, Pool creation will fail. The permitted licenses available on the Pool are 'maya', 'vray', '3dsmax', 'arnold'. An additional charge applies for each application license added to the Pool.")
-  applicationLicenses?: string[];
-
   @doc("The list of user Accounts to be created on each Compute Node in the Pool.")
   userAccounts?: UserAccount[];
 
@@ -1855,30 +1850,6 @@ Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batc
 
   @doc("The upgrade policy for the Pool. Describes an upgrade policy - automatic, manual, or rolling.")
   upgradePolicy?: UpgradePolicy;
-}
-
-@doc("""
-The configuration for Compute Nodes in a Pool based on the Azure Cloud Services
-platform.
-""")
-model CloudServiceConfiguration {
-  @doc("""
-Possible values are:
-2 - OS Family 2, equivalent to Windows Server 2008 R2
-SP1.
-3 - OS Family 3, equivalent to Windows Server 2012.
-4 - OS Family 4,
-equivalent to Windows Server 2012 R2.
-5 - OS Family 5, equivalent to Windows
-Server 2016.
-6 - OS Family 6, equivalent to Windows Server 2019. For more
-information, see Azure Guest OS Releases
-(https://azure.microsoft.com/documentation/articles/cloud-services-guestos-update-matrix/#releases).
-""")
-  osFamily: string;
-
-  @doc("The Azure Guest OS version to be installed on the virtual machines in the Pool. The default value is * which specifies the latest operating system version for the specified OS family.")
-  osVersion?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
@@ -2063,7 +2034,7 @@ model BatchTaskSchedulingPolicy {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Property types must use camelCase"
 @doc("The network configuration for a Pool.")
 model NetworkConfiguration {
-  @doc("The ARM resource identifier of the virtual network subnet which the Compute Nodes of the Pool will join. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}. The virtual network must be in the same region and subscription as the Azure Batch Account. The specified subnet should have enough free IP addresses to accommodate the number of Compute Nodes in the Pool. If the subnet doesn't have enough free IP addresses, the Pool will partially allocate Nodes and a resize error will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule Tasks on the Nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the Nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the Compute Nodes to unusable. For Pools created with virtualMachineConfiguration only ARM virtual networks ('Microsoft.Network/virtualNetworks') are supported, but for Pools created with cloudServiceConfiguration both ARM and classic virtual networks are supported. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication. For Pools created with a virtual machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows. For Pools created with a cloud service configuration, enable ports 10100, 20100, and 30100. Also enable outbound connections to Azure Storage on port 443. For more details see: https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration.")
+  @doc("The ARM resource identifier of the virtual network subnet which the Compute Nodes of the Pool will join. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}. The virtual network must be in the same region and subscription as the Azure Batch Account. The specified subnet should have enough free IP addresses to accommodate the number of Compute Nodes in the Pool. If the subnet doesn't have enough free IP addresses, the Pool will partially allocate Nodes and a resize error will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule Tasks on the Nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the Nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the Compute Nodes to unusable. For Pools created with virtualMachineConfiguration only ARM virtual networks ('Microsoft.Network/virtualNetworks') are supported. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication. For Pools created with a virtual machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows. Also enable outbound connections to Azure Storage on port 443. For more details see: https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration.")
   subnetId?: string;
 
   @doc("The scope of dynamic vnet assignment.")
@@ -2203,6 +2174,7 @@ model UserAccount {
   @doc("The name of the user Account. Names can contain any Unicode characters up to a maximum length of 20.")
   name: string;
 
+  @secret
   @doc("The password for the user Account.")
   password: string;
 
@@ -2224,13 +2196,14 @@ model LinuxUserConfiguration {
   @doc("The group ID for the user Account. The uid and gid properties must be specified together or not at all. If not specified the underlying operating system picks the gid.")
   gid?: int32;
 
+  @secret
   @doc("The SSH private key for the user Account. The private key must not be password protected. The private key is used to automatically configure asymmetric-key based authentication for SSH between Compute Nodes in a Linux Pool when the Pool's enableInterNodeCommunication property is true (it is ignored if enableInterNodeCommunication is false). It does this by placing the key pair into the user's .ssh directory. If not specified, password-less SSH is not configured between Compute Nodes (no modification of the user's .ssh directory is done).")
   sshPrivateKey?: string;
 }
 
 @doc("Properties used to create a user Account on a Windows Compute Node.")
 model WindowsUserConfiguration {
-  @doc("The login mode for the user. The default value for VirtualMachineConfiguration Pools is 'batch' and for CloudServiceConfiguration Pools is 'interactive'.")
+  @doc("The login mode for the user. The default value for VirtualMachineConfiguration Pools is 'batch'.")
   loginMode?: LoginMode;
 }
 
@@ -2275,9 +2248,11 @@ model AzureBlobFileSystemConfiguration {
   @doc("The Azure Blob Storage Container name.")
   containerName: string;
 
+  @secret
   @doc("The Azure Storage Account key. This property is mutually exclusive with both sasKey and identity; exactly one must be specified.")
   accountKey?: string;
 
+  @secret
   @doc("The Azure Storage SAS token. This property is mutually exclusive with both accountKey and identity; exactly one must be specified.")
   sasKey?: string;
 
@@ -2318,6 +2293,7 @@ model CifsMountConfiguration {
   @doc("Additional command line options to pass to the mount command. These are 'net use' options in Windows and 'mount' options in Linux.")
   mountOptions?: string;
 
+  @secret
   @doc("The password to use for authentication against the CIFS file system.")
   password: string;
 }
@@ -2330,6 +2306,7 @@ model AzureFileShareConfiguration {
   @doc("The Azure Files URL. This is of the form 'https://{account}.file.core.windows.net/'.")
   azureFileUrl: string;
 
+  @secret
   @doc("The Azure Storage account key.")
   accountKey: string;
 
@@ -2388,10 +2365,10 @@ model BatchJobScheduleStatistics {
   wallClockTime: duration;
 
   @doc("The total number of disk read operations made by all Tasks in all Jobs created under the schedule.")
-  readIOps: int32;
+  readIOps: int64;
 
   @doc("The total number of disk write operations made by all Tasks in all Jobs created under the schedule.")
-  writeIOps: int32;
+  writeIOps: int64;
 
   @doc("The total gibibytes read from disk by all Tasks in all Jobs created under the schedule.")
   readIOGiB: float32;
@@ -2400,13 +2377,13 @@ model BatchJobScheduleStatistics {
   writeIOGiB: float32;
 
   @doc("The total number of Tasks successfully completed during the given time range in Jobs created under the schedule. A Task completes successfully if it returns exit code 0.")
-  numSucceededTasks: int32;
+  numSucceededTasks: int64;
 
   @doc("The total number of Tasks that failed during the given time range in Jobs created under the schedule. A Task fails if it exhausts its maximum retry count without returning exit code 0.")
-  numFailedTasks: int32;
+  numFailedTasks: int64;
 
   @doc("The total number of retries during the given time range on all Tasks in all Jobs created under the schedule.")
-  numTaskRetries: int32;
+  numTaskRetries: int64;
 
   @doc("The total wait time of all Tasks in all Jobs created under the schedule. The wait time for a Task is defined as the elapsed time between the creation of the Task and the start of Task execution. (If the Task is retried due to failures, the wait time is the time to the most recent Task execution.). This value is only reported in the Account lifetime statistics; it is not included in the Job statistics.")
   waitTime: duration;
@@ -2884,11 +2861,7 @@ model BatchPool {
   @visibility("read")
   vmSize?: string;
 
-  @doc("The cloud service configuration for the Pool. This property and virtualMachineConfiguration are mutually exclusive and one of the properties must be specified. This property cannot be specified if the Batch Account was created with its poolAllocationMode property set to 'UserSubscription'.")
-  @visibility("read")
-  cloudServiceConfiguration?: CloudServiceConfiguration;
-
-  @doc("The virtual machine configuration for the Pool. This property and cloudServiceConfiguration are mutually exclusive and one of the properties must be specified.")
+  @doc("The virtual machine configuration for the Pool. This property must be specified.")
   @visibility("read")
   virtualMachineConfiguration?: VirtualMachineConfiguration;
 
@@ -2960,10 +2933,6 @@ Warning: This property is deprecated and will be removed after February, 2024. P
   @visibility("read")
   applicationPackageReferences?: BatchApplicationPackageReference[];
 
-  @doc("The list of application licenses the Batch service will make available on each Compute Node in the Pool. The list of application licenses must be a subset of available Batch service application licenses. If a license is requested which is not supported, Pool creation will fail.")
-  @visibility("read")
-  applicationLicenses?: string[];
-
   @doc("The number of task slots that can be used to run concurrent tasks on a single compute node in the pool. The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.")
   @visibility("read")
   taskSlotsPerNode?: int32;
@@ -3011,13 +2980,10 @@ model BatchPoolCreateContent {
   @doc("The display name for the Pool. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024.")
   displayName?: string;
 
-  @doc("The size of virtual machines in the Pool. All virtual machines in a Pool are the same size. For information about available sizes of virtual machines for Cloud Services Pools (pools created with cloudServiceConfiguration), see Sizes for Cloud Services (https://azure.microsoft.com/documentation/articles/cloud-services-sizes-specs/). Batch supports all Cloud Services VM sizes except ExtraSmall, A1V2 and A2V2. For information about available VM sizes for Pools using Images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration) see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series).")
+  @doc("The size of virtual machines in the Pool. All virtual machines in a Pool are the same size. For information about available VM sizes for Pools using Images from the Virtual Machines Marketplace (pools created with virtualMachineConfiguration), see Sizes for Virtual Machines (Linux) (https://azure.microsoft.com/documentation/articles/virtual-machines-linux-sizes/) or Sizes for Virtual Machines (Windows) (https://azure.microsoft.com/documentation/articles/virtual-machines-windows-sizes/). Batch supports all Azure VM sizes except STANDARD_A0 and those with premium storage (STANDARD_GS, STANDARD_DS, and STANDARD_DSV2 series).")
   vmSize: string;
 
-  @doc("The cloud service configuration for the Pool. This property and virtualMachineConfiguration are mutually exclusive and one of the properties must be specified. This property cannot be specified if the Batch Account was created with its poolAllocationMode property set to 'UserSubscription'.")
-  cloudServiceConfiguration?: CloudServiceConfiguration;
-
-  @doc("The virtual machine configuration for the Pool. This property and cloudServiceConfiguration are mutually exclusive and one of the properties must be specified.")
+  @doc("The virtual machine configuration for the Pool. This property must be specified.")
   virtualMachineConfiguration?: VirtualMachineConfiguration;
 
   @doc("The timeout for allocation of Compute Nodes to the Pool. This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
@@ -3060,9 +3026,6 @@ Warning: This property is deprecated and will be removed after February, 2024. P
 
   @doc("The list of Packages to be installed on each Compute Node in the Pool. When creating a pool, the package's application ID must be fully qualified (/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}). Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Package references on any given Pool.")
   applicationPackageReferences?: BatchApplicationPackageReference[];
-
-  @doc("The list of application licenses the Batch service will make available on each Compute Node in the Pool. The list of application licenses must be a subset of available Batch service application licenses. If a license is requested which is not supported, Pool creation will fail.")
-  applicationLicenses?: string[];
 
   @doc("The number of task slots that can be used to run concurrent tasks on a single compute node in the pool. The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.")
   taskSlotsPerNode?: int32;
@@ -3581,10 +3544,10 @@ model BatchTaskStatistics {
   wallClockTime: duration;
 
   @doc("The total number of disk read operations made by the Task.")
-  readIOps: int32;
+  readIOps: int64;
 
   @doc("The total number of disk write operations made by the Task.")
-  writeIOps: int32;
+  writeIOps: int64;
 
   @doc("The total gibibytes read from disk by the Task.")
   readIOGiB: float32;
@@ -3783,7 +3746,8 @@ model BatchNodeUserCreateContent {
   @doc("The time at which the Account should expire. If omitted, the default is 1 day from the current time. For Linux Compute Nodes, the expiryTime has a precision up to a day.")
   expiryTime?: utcDateTime;
 
-  @doc("The password of the Account. The password is required for Windows Compute Nodes (those created with 'cloudServiceConfiguration', or created with 'virtualMachineConfiguration' using a Windows Image reference). For Linux Compute Nodes, the password can optionally be specified along with the sshPublicKey property.")
+  @secret
+  @doc("The password of the Account. The password is required for Windows Compute Nodes (those created with 'virtualMachineConfiguration' using a Windows Image reference). For Linux Compute Nodes, the password can optionally be specified along with the sshPublicKey property.")
   password?: string;
 
   @doc("The SSH public key that can be used for remote login to the Compute Node. The public key should be compatible with OpenSSH encoding and should be base 64 encoded. This property can be specified only for Linux Compute Nodes. If this is specified for a Windows Compute Node, then the Batch service rejects the request; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).")
@@ -3792,7 +3756,8 @@ model BatchNodeUserCreateContent {
 
 @doc("Parameters for updating a user account for RDP or SSH access on an Azure Batch Compute Node.")
 model BatchNodeUserUpdateContent {
-  @doc("The password of the Account. The password is required for Windows Compute Nodes (those created with 'cloudServiceConfiguration', or created with 'virtualMachineConfiguration' using a Windows Image reference). For Linux Compute Nodes, the password can optionally be specified along with the sshPublicKey property. If omitted, any existing password is removed.")
+  @secret
+  @doc("The password of the Account. The password is required for Windows Compute Nodes (those created with 'virtualMachineConfiguration' using a Windows Image reference). For Linux Compute Nodes, the password can optionally be specified along with the sshPublicKey property. If omitted, any existing password is removed.")
   password?: string;
 
   @doc("The time at which the Account should expire. If omitted, the default is 1 day from the current time. For Linux Compute Nodes, the expiryTime has a precision up to a day.")
@@ -3996,12 +3961,6 @@ model VirtualMachineInfo {
 model BatchNodeRebootContent {
   @doc("When to reboot the Compute Node and what to do with currently running Tasks. The default value is requeue.")
   nodeRebootOption?: BatchNodeRebootOption;
-}
-
-@doc("Parameters for reimaging an Azure Batch Compute Node.")
-model BatchNodeReimageContent {
-  @doc("When to reimage the Compute Node and what to do with currently running Tasks. The default value is requeue.")
-  nodeReimageOption?: BatchNodeReimageOption;
 }
 
 @doc("Parameters for disabling scheduling on an Azure Batch Compute Node.")
