@@ -192,58 +192,36 @@ interface TextCustomizedCategoryOps
 
 @added(ContentSafety.Versions.v2024_05_15_Preview)
 interface TextCustomizedCategoryOperations {
-  @summary("Create a new version of text customized category.")
+  @summary("Create a new version of text custom category.")
   @doc("Create new category version.")
-  createOrUpdateTextCustomizedCategory is TextCustomizedCategoryOps.ResourceCreateOrReplace<TextCustomizedCategoryVersion>;
-
-  // getCustomizedCategory is TextCustomizedCategoryOps.ResourceRead<
-  //   TextCustomizedCategory,
-  //   QueryParametersTrait<{
-  //     @query
-  //     @doc("If not provided, it will return the latest version.")
-  //     version?: int32;
-  //   }>
-  // >;
+  createTextCustomCategoryVersion is TextCustomizedCategoryOps.ResourceCreateOrReplace<TextCustomCategoryVersion>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Get a customized category or a specific version of it.")
+  @doc("Get a custom category or a specific version of it.")
   @get
   @route("/text/categories/{categoryName}")
   getCustomizedCategory is Azure.Core.Foundations.Operation<
     {
       @path
-      @doc("Name of the customized category.")
+      @doc("Name of the custom category.")
       categoryName: string;
 
       @query
       @doc("If not provided, it will return the latest version.")
       version?: int32;
     },
-    TextCustomizedCategoryVersionList
+    TextCustomCategoryVersionList
   >;
 
   @doc("List categories of their latest versions.")
   listCustomizedCategory is TextCustomizedCategoryOps.ResourceList<
-    TextCustomizedCategoryVersion,
+    TextCustomCategoryVersion,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
-  // @doc("List all versions of the category.")
-  // listVersions is TextCustomizedCategoryOps.ResourceAction<
-  //   TextCustomizedCategory,
-  //   {
-  //     ...ListQueryParametersTrait<StandardListQueryParameters>;
-  //     @query
-  //     @doc("Versions of the specified status will be returned. If not provided, all versions will be returned.")
-  //     buildStatus?: CategoryBuildStatus;
-  //   },
-  //   Foundations.CustomPage<TextCustomizedCategoryVersion>
-  //   // ListQueryParametersTrait<StandardListQueryParameters>
-  // >;
-
-  @doc("Delete a customized category or a specific version of it.")
+  @doc("Delete a custom category or a specific version of it.")
   deleteCustomizedCategory is TextCustomizedCategoryOps.LongRunningResourceDelete<
-    TextCustomizedCategoryVersion,
+    TextCustomCategoryVersion,
     QueryParametersTrait<{
       @query
       @doc("If not provided, it will delete the category")
@@ -252,8 +230,8 @@ interface TextCustomizedCategoryOperations {
   >;
 
   @doc("Trigger the category build process.")
-  build is TextCustomizedCategoryOps.ResourceAction<
-    TextCustomizedCategoryVersion,
+  build is TextCustomizedCategoryOps.LongRunningResourceAction<
+    TextCustomCategoryVersion,
     {
       @query
       @doc("The build will target on the specicied category version")
@@ -262,32 +240,7 @@ interface TextCustomizedCategoryOperations {
     AcceptedResponse
   >;
 
-  // @doc("Trigger the category deploy process.")
-  // deploy is TextCustomizedCategoryOps.ResourceAction<
-  //   TextCustomizedCategory,
-  //   {
-  //     @query
-  //     @doc("The deploy will target on the specicied category version")
-  //     version: int32;
-  //   },
-  //   AcceptedResponse
-  // >;
-
-  // @doc("List all versions of the category.")
-  // @route("text/categories/{categoryName}:listVersion")
-  // @action
-  // @post
-  // listVersion is  Azure.Core.RpcOperation<
-  //   {
-  //     ...StandardListQueryParameters;
-  //     @path
-  //     @doc("Name of the customized category.")
-  //     categoryName: string;
-
-  //     @query
-  //     @doc("Versions of the specified status will be returned. If not provided, all versions will be returned.")
-  //     buildStatus?: CategoryBuildStatus;
-  //   },
-  //   Foundations.CustomPage<TextCustomizedCategoryVersion>
-  // >;
+  @summary("Get An Custom Category Operation.")
+  @doc("Get an custom category operation.")
+  getCustomCategoryOperation is Azure.Core.ResourceRead<CustomCategoryOperationDetail>;
 }

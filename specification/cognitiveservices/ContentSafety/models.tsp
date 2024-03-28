@@ -72,12 +72,12 @@ model AnalyzeTextOptions {
 }
 
 @added(ContentSafety.Versions.v2024_05_15_Preview)
-@doc("The customized category option for text.")
+@doc("The custom category option for text.")
 model CustomizedCategoryOption {
   @doc("Name")
   categoryName: string;
 
-  @doc("Customized category version for inference")
+  @doc("custom category version for inference")
   version: int32;
 }
 
@@ -100,7 +100,7 @@ model TextCustomizedCategoriesAnalysis {
   @doc("Name of the custom category.")
   categoryName: string;
 
-  @doc("Whether the customized category is detected.")
+  @doc("Whether the custom category is detected.")
   detected: boolean;
 }
 
@@ -439,14 +439,14 @@ model TextPromptInjectionResult {
 
 @added(ContentSafety.Versions.v2024_05_15_Preview)
 @resource("text/categories")
-@doc("Text customized category")
-model TextCustomizedCategoryVersion {
+@doc("Text custom category")
+model TextCustomCategoryVersion {
   @key
   @visibility("read", "create", "update")
-  @doc("Name of the customized category")
+  @doc("Name of the custom category")
   categoryName: string;
 
-  @doc("Definition or description of the customized category.")
+  @doc("Definition or description of the custom category.")
   @visibility("read", "create", "update")
   definition: string;
 
@@ -462,64 +462,86 @@ model TextCustomizedCategoryVersion {
   @visibility("read")
   sampleBlobCopyUrl: string;
 
-  @doc("Version number of the customized category.")
+  @doc("Version number of the custom category.")
   @visibility("read")
   version: int32;
 
-  @doc("Creation time of the customized category.")
+  @doc("Creation time of the custom category.")
   @visibility("read")
   createdTime: utcDateTime;
 
-  @doc("Build status of the customized category")
+  @doc("Status of the custom category")
   @visibility("read")
   status: CategoryStatus;
 
-  @doc("Build information for the customized category.")
+  @doc("Build information for the custom category.")
   @visibility("read")
   buildInfo?: TextCustomizedCategoryBuildInfo;
 
-  @doc("Build information for the customized category.")
+  @doc("Delete information for the custom category.")
   @visibility("read")
   deleteInfo?: TextCustomizedCategoryDeleteInfo;
 }
 
-@doc("Detailed information of the customized category build.")
+@doc("Detailed information of the custom category build.")
 model TextCustomizedCategoryBuildInfo {
   @doc("Last build trigger time.")
   lastBuildTriggeredTime: utcDateTime;
 
   @doc("Error when building the category.")
-  buildError?: Azure.Core.Foundations.ErrorResponse;
+  buildError?: string;
 }
 
-@doc("Detailed information of the customized category build.")
+@doc("Detailed information of the custom category build.")
 model TextCustomizedCategoryDeleteInfo {
   @doc("Last build trigger time.")
   deleteTriggeredTime: utcDateTime;
 
   @doc("Error when building the category.")
-  deleteError?: Azure.Core.Foundations.ErrorResponse;
+  deleteError?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-@doc("Status of the customized category build.")
-enum CategoryStatus {
-  BuildNotStarted,
-  Building,
-  BuildSucceeded,
-  BuildFailed,
-  Deleting,
-  DeleteFailed,
+@doc("Status of the custom category build.")
+union CategoryStatus {
+  string,
+  "BuildNotStarted",
+  "BuildRunning",
+  "BuildSucceeded",
+  "BuildFailed",
+  "DeleteRunning",
+  "DeleteFailed",
 }
 
-// @doc("Alias of TextCustomizedCategory")
-// model TextCustomizedCategoryVersion {
-//   ...TextCustomizedCategory;
-// }
+@added(ContentSafety.Versions.v2024_05_15_Preview)
+@doc("List of custom category versions.")
+model TextCustomCategoryVersionList {
+  @doc("List of custom category versions.")
+  value: TextCustomCategoryVersion[];
+}
 
 @added(ContentSafety.Versions.v2024_05_15_Preview)
-@doc("List of customized category versions.")
-model TextCustomizedCategoryVersionList {
-  @doc("List of customized category versions.")
-  value: TextCustomizedCategoryVersion[];
+union CustomCategoryOperationStatus {
+  string,
+  "NotStarted",
+  "Running",
+  "Succeeded",
+  "Failed",
+}
+
+@added(ContentSafety.Versions.v2024_05_15_Preview)
+@resource("text/categories/operations")
+model CustomCategoryOperationDetail {
+  @doc("The ID of the custom category operation.")
+  @key("operationId")
+  @visibility("read", "create", "query")
+  @maxLength(64)
+  id: string;
+
+  @doc("The status of the custom category operation.")
+  @visibility("read")
+  status: CustomCategoryOperationStatus;
+
+  @doc("Return error detail when the operation failed.")
+  error?: Azure.Core.Foundations.Error;
 }
