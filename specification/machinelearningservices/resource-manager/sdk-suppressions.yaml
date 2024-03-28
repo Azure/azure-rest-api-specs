@@ -1,0 +1,12 @@
+suppressions:
+  azure-sdk-for-go:
+    - package: 'sdk/resourcemanager/machinelearning/armmachinelearning'
+      breaking-changes:
+        - Field `AmlOperationListResult` of struct `OperationsClientListResponse` has been removed
+        - Field `SubnetArmID` of struct `PrivateEndpoint` has been removed
+        - Struct `AmlOperationDisplay` has been removed
+        - Struct `AmlOperationListResult` has been removed
+        - Struct `AmlOperation` has been removed
+        - Type of `ComputeStartStopSchedule.Cron` has been changed from `*CronTrigger` to `*Cron`
+        - Type of `ComputeStartStopSchedule.Recurrence` has been changed from `*RecurrenceTrigger` to `*Recurrence`
+        - Type of `ComputeStartStopSchedule.TriggerType` has been changed from `*TriggerType` to `*ComputeTriggerType`
