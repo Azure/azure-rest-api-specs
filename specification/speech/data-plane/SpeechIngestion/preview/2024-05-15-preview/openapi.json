@@ -84,7 +84,7 @@
         }
       }
     },
-    "/registrations/{registrationName}": {
+    "/registrations/{name}": {
       "get": {
         "operationId": "Registrations_GetRegistration",
         "description": "Fetch a Registration by name.",
@@ -93,9 +93,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "registrationName",
+            "name": "name",
             "in": "path",
-            "description": "The unique name of the batch analytics registration.",
+            "description": "The unique name of the registration resource.",
             "required": true,
             "type": "string"
           }
@@ -134,9 +134,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "registrationName",
+            "name": "name",
             "in": "path",
-            "description": "The unique name of the batch analytics registration.",
+            "description": "The unique name of the registration resource.",
             "required": true,
             "type": "string"
           },
@@ -185,9 +185,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "registrationName",
+            "name": "name",
             "in": "path",
-            "description": "The unique name of the batch analytics registration.",
+            "description": "The unique name of the registration resource.",
             "required": true,
             "type": "string"
           }
@@ -437,7 +437,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The unique name of the batch analytics registration.",
+          "description": "The unique name of the registration resource.",
           "readOnly": true
         },
         "storageModel": {
@@ -458,7 +458,8 @@
         },
         "statusModel": {
           "$ref": "#/definitions/StatusModel",
-          "description": "Status of the registration."
+          "description": "Status of the registration.",
+          "readOnly": true
         }
       },
       "required": [

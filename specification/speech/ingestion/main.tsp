@@ -32,9 +32,9 @@ enum Versions {
 @doc("A registration.")
 @resource("registrations")
 model Registration {
-  @key("registrationName")
-  @doc("The unique name of the batch analytics registration.")
+  @key("name")
   @visibility("read")
+  @doc("The unique name of the registration resource.")
   name: string;
 
   @doc("Storage configuration.")
@@ -50,6 +50,7 @@ model Registration {
   analyticsModel?: AnalyticsModel;
 
   @doc("Status of the registration.")
+  @visibility("read")
   statusModel: StatusModel;
 }
 
