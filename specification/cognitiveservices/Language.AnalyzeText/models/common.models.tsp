@@ -1,7 +1,9 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -235,6 +237,7 @@ model TasksState {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+@clientName("TasksStatus", "csharp")
 model Tasks {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   completed: int32;
@@ -395,6 +398,7 @@ model TaskState {
 }
 
 @doc("The status of the task at the mentioned last update time.")
+@clientName("CurrentState", "csharp")
 @lroStatus
 enum State {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'notStarted' should have a documentation or description, please use decorator @doc to add it."
@@ -427,12 +431,15 @@ model TaskIdentifier {
   taskName?: string;
 }
 
+@clientName("TaskContent", "csharp")
 @doc("Base parameters object for a text analysis task.")
 model TaskParameters {
   @doc("logging opt out")
   loggingOptOut?: boolean = false;
 }
+
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+@clientName("PreBuiltTaskContent", "csharp")
 @doc("Parameters object for a text analysis task using pre-built models.")
 model PreBuiltTaskParameters extends TaskParameters {
   @doc("model version")
@@ -868,6 +875,7 @@ enum SummaryLengthBucket {
 }
 
 @added(Versions.v2023_04_01)
+@clientName("AbstractiveSummarizationTaskContentBase", "csharp")
 @doc("Supported parameters for an Abstractive Summarization task.")
 model AbstractiveSummarizationTaskParametersBase {
   @doc("Controls the approximate number of sentences in the output summaries.")
@@ -890,6 +898,7 @@ model SummaryContext {
   length: int32;
 }
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+@clientName("CustomTaskContent", "csharp")
 @doc("Parameters object for a text analysis task using custom models.")
 model CustomTaskParameters extends TaskParameters {
   @doc("This field indicates the project name for the model.")

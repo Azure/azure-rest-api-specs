@@ -1,5 +1,7 @@
 import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
 namespace Language.AnalyzeText;
@@ -14,6 +16,7 @@ model AnalyzeTextEntityRecognitionInput extends AnalyzeTextTask {
   parameters?: EntitiesTaskParameters;
 }
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+@clientName("EntitiesTaskContent", "csharp")
 @doc("Supported parameters for an Entity Recognition task.")
 model EntitiesTaskParameters extends PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -81,6 +84,7 @@ model EntitiesDocumentResultWithMetadataDetectedLanguage
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+@clientName("NamedEntity", "csharp")
 model Entity {
   @doc("Entity text as appears in the request.")
   text: string;

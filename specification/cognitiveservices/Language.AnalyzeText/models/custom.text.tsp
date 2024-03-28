@@ -1,13 +1,16 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
 namespace Language.AnalyzeText;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+@clientName("CustomEntitiesTaskContent", "csharp")
 @doc("Supported parameters for a Custom Entities task.")
 model CustomEntitiesTaskParameters extends CustomTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -36,6 +39,7 @@ model CustomEntitiesResultWithDocumentDetectedLanguage extends CustomResult {
   documents: Array<EntitiesDocumentResultWithDetectedLanguage>;
 }
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+@clientName("CustomSingleLabelClassificationTaskContent", "csharp")
 @doc("Supported parameters for a Custom Single Classification task.")
 model CustomSingleLabelClassificationTaskParameters
   extends CustomTaskParameters {}
@@ -72,6 +76,7 @@ model ClassificationResult {
   confidenceScore: float64;
 }
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+@clientName("CustomMultiLabelClassificationTaskContent", "csharp")
 @doc("Supported parameters for a Custom Multi Classification task.")
 model CustomMultiLabelClassificationTaskParameters
   extends CustomTaskParameters {}
@@ -204,6 +209,7 @@ model ListComponent extends EntityComponentInformation {
 }
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @added(Versions.v2023_04_15_preview)
+@clientName("DynamicClassificationTaskContent", "csharp")
 @doc("Supported parameters for a Dynamic Classification task.")
 model DynamicClassificationTaskParameters extends PreBuiltTaskParameters {
   @doc("Specifies either one or multiple categories per document. Defaults to multi classification which may return more than one class for each document.")

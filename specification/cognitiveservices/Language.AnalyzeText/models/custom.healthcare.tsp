@@ -1,10 +1,13 @@
 import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
 namespace Language.AnalyzeText;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @added(Versions.v2023_04_15_preview)
+@clientName("CustomHealthcareTaskContent", "csharp")
 @doc("Supported parameters for a custom Healthcare task.")
 model CustomHealthcareTaskParameters extends CustomTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"

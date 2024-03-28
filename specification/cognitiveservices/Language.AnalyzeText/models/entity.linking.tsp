@@ -1,5 +1,7 @@
 import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
 namespace Language.AnalyzeText;
@@ -15,6 +17,7 @@ model AnalyzeTextEntityLinkingInput extends AnalyzeTextTask {
 }
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("Supported parameters for an Entity Linking task.")
+@clientName("EntityLinkingTaskContent", "csharp")
 model EntityLinkingTaskParameters extends PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
@@ -83,6 +86,7 @@ model LinkedEntity {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
+@clientName("EntityLinkingMatch", "csharp")
 model Match {
   @doc("If a well known item is recognized, a decimal number denoting the confidence level between 0 and 1 will be returned.")
   confidenceScore: float64;

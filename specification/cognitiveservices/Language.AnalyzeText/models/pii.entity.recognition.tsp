@@ -1,5 +1,7 @@
 import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
 namespace Language.AnalyzeText;
@@ -16,6 +18,7 @@ model AnalyzeTextPiiEntitiesRecognitionInput extends AnalyzeTextTask {
 }
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@clientName("PiiTaskContent", "csharp")
 @doc("Supported parameters for a PII Entities Recognition task.")
 model PiiTaskParameters extends PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"

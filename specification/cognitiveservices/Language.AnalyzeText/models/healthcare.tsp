@@ -9,6 +9,7 @@ using Azure.Core;
 namespace Language.AnalyzeText;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("Supported parameters for a Healthcare task.")
+@clientName("HealthcareTaskContent", "csharp")
 model HealthcareTaskParameters extends PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
@@ -345,6 +346,7 @@ model HealthcareAssertion {
 
 #suppress "@azure-tools/typespec-azure-core/use-extensible-enum"
 @added(Versions.v2023_04_15_preview)
+@clientName("HealthcareAssertionTemporality", "csharp")
 @fixed
 @doc("Describes temporal information regarding the entity.")
 enum Temporality {
@@ -367,6 +369,7 @@ enum Conditionality {
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-extensible-enum"
+@clientName("HealthcareAssertionCertainty", "csharp")
 @doc("Describes the entities certainty and polarity.")
 @fixed
 enum Certainty {

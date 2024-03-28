@@ -1,6 +1,8 @@
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 using Azure.Core;
 
@@ -17,6 +19,7 @@ model AnalyzeTextSentimentAnalysisInput extends AnalyzeTextTask {
 }
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @doc("Supported parameters for a Sentiment Analysis task.")
+@clientName("SentimentAnalysisTaskContent", "csharp")
 model SentimentAnalysisTaskParameters extends PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   opinionMining?: boolean = false;
@@ -222,6 +225,7 @@ model CustomSentimentDocumentResult extends DocumentResult {
 }
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @added(Versions.v2023_04_15_preview)
+@clientName("CustomSentimentAnalysisTaskContent", "csharp")
 @doc("Supported parameters for a Custom Sentiment Analysis task.")
 model CustomSentimentAnalysisTaskParameters extends CustomTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"

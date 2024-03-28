@@ -1,10 +1,13 @@
 import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
 namespace Language.AnalyzeText;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @added(Versions.v2023_04_01)
+@clientName("ExtractiveSummarizationTaskContent", "csharp")
 @doc("Supported parameters for an Extractive Summarization task.")
 model ExtractiveSummarizationTaskParameters extends PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -102,6 +105,7 @@ model AbstractiveSummarizationLROTask extends AnalyzeTextLROTask {
 }
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @added(Versions.v2023_04_01)
+@clientName("AbstractiveSummarizationTaskContent", "csharp")
 @doc("Supported parameters for the pre-build Abstractive Summarization task.")
 model AbstractiveSummarizationTaskParameters extends PreBuiltTaskParameters {
   ...AbstractiveSummarizationTaskParametersBase;
@@ -174,6 +178,7 @@ model CustomAbstractiveSummarizationLROTask extends AnalyzeTextLROTask {
 }
 
 @added(Versions.v2023_04_15_preview)
+@clientName("CustomAbstractiveSummarizationTaskContent", "csharp")
 @doc("Supported parameters for the Custom Abstractive Summarization task.")
 model CustomAbstractiveSummarizationTaskParameters
   is AbstractiveSummarizationTaskParametersBase {

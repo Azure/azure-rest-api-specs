@@ -1,5 +1,7 @@
 import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
 namespace Language.AnalyzeText;
@@ -14,6 +16,7 @@ model AnalyzeTextKeyPhraseExtractionInput extends AnalyzeTextTask {
   parameters?: KeyPhraseTaskParameters;
 }
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+@clientName("KeyPhraseTaskContent", "csharp")
 @doc("Supported parameters for a Key Phrase Extraction task.")
 model KeyPhraseTaskParameters extends PreBuiltTaskParameters {}
 

@@ -1,5 +1,7 @@
 import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
 namespace Language.AnalyzeText;
@@ -20,6 +22,7 @@ model AnalyzeTextLanguageDetectionInput extends AnalyzeTextTask {
   parameters?: LanguageDetectionTaskParameters;
 }
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+@clientName("LanguageDetectionTaskContent", "csharp")
 @doc("Supported parameters for a Language Detection task.")
 model LanguageDetectionTaskParameters extends PreBuiltTaskParameters {}
 
