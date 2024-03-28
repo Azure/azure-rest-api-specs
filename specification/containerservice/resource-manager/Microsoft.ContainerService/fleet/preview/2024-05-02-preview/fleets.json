@@ -762,77 +762,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/autoUpgradeProfiles/{autoUpgradeProfileName}/generateUpdateRuns": {
-      "post": {
-        "operationId": "AutoUpgradeProfiles_GenerateUpdateRuns",
-        "tags": [
-          "AutoUpgradeProfiles"
-        ],
-        "description": "A synchronous resource action.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "description": "The request should only proceed if an entity matches this string.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
-          },
-          {
-            "name": "fleetName",
-            "in": "path",
-            "description": "The name of the Fleet resource.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
-          },
-          {
-            "name": "autoUpgradeProfileName",
-            "in": "path",
-            "description": "The name of the AutoUpgradeProfile resource.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 50,
-            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GenerateUpdateRunRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AutoUpgradeProfile"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/fleets/{fleetName}/listCredentials": {
       "post": {
         "operationId": "Fleets_ListCredentials",
@@ -2760,19 +2689,6 @@
         ]
       }
     },
-    "GenerateUpdateRunRequest": {
-      "type": "object",
-      "description": "GenerateUpdateRunsRequest is the HTTP body of a generate updateruns request.",
-      "properties": {
-        "updateSpecification": {
-          "$ref": "#/definitions/ManagedClusterUpdate",
-          "description": "The update spec that will be applied to managed clusters when generating update runs."
-        }
-      },
-      "required": [
-        "updateSpecification"
-      ]
-    },
     "KubernetesVersion": {
       "type": "string"
     },
@@ -2880,20 +2796,6 @@
             "read",
             "create"
           ]
-        },
-        "customNodeImageVersions": {
-          "type": "array",
-          "description": "Custom node image versions to upgrade the nodes to. This field is required if node image selection type is Custom. Otherwise, it must be empty. For each node image family (e.g., 'AKSUbuntu-1804gen2containerd'), this field can contain at most one version (e.g., only one of 'AKSUbuntu-1804gen2containerd-2023.01.12' or 'AKSUbuntu-1804gen2containerd-2023.02.12', not both). If the nodes belong to a family without a matching image version in this field, they are not upgraded.",
-          "items": {
-            "$ref": "#/definitions/NodeImageVersion"
-          },
-          "x-ms-identifiers": [
-            "version"
-          ],
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
         }
       },
       "required": [
@@ -2922,8 +2824,7 @@
       "description": "The node image upgrade type.",
       "enum": [
         "Latest",
-        "Consistent",
-        "Custom"
+        "Consistent"
       ],
       "x-ms-enum": {
         "name": "NodeImageSelectionType",
@@ -2938,11 +2839,6 @@
             "name": "Consistent",
             "value": "Consistent",
             "description": "The image versions to upgrade nodes to are selected as described below: for each node pool in managed clusters affected by the update run, the system selects the latest image version such that it is available across all other node pools (in all other clusters) of the same image type. As a result, all node pools of the same image type will be upgraded to the same image version. For example, if the latest image version for image type 'AKSUbuntu-1804gen2containerd' is 'AKSUbuntu-1804gen2containerd-2021.10.12' for a node pool in cluster A in region X, and is 'AKSUbuntu-1804gen2containerd-2021.10.17' for a node pool in cluster B in region Y, the system will upgrade both node pools to image version 'AKSUbuntu-1804gen2containerd-2021.10.12'."
-          },
-          {
-            "name": "Custom",
-            "value": "Custom",
-            "description": "Upgrade the nodes to the custom image versions. When set, update run will use node image versions provided in customNodeImageVersions to upgrade the nodes. If set, customNodeImageVersions must not be empty."
           }
         ]
       }
