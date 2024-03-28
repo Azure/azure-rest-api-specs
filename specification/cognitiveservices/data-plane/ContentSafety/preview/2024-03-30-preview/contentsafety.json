@@ -776,6 +776,47 @@
         }
       }
     },
+    "/text:detectGroundedness": {
+      "post": {
+        "operationId": "TextGroundednessDetectionOperations_DetectGroundednessOptions",
+        "summary": "Detect Groundedness",
+        "description": "A synchronous API for the analysis of language model outputs to determine alignment with user-provided information or identify fictional content.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The text groundedness detection request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextGroundednessOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextGroundednessResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/text:detectJailbreak": {
       "post": {
         "operationId": "TextOperations_DetectTextJailbreak",
@@ -857,6 +898,47 @@
           }
         }
       }
+    },
+    "/text:shieldPrompt": {
+      "post": {
+        "operationId": "TextOperations_DetectTextPromptInjectionOptions",
+        "summary": "Analyze text prompt injection attacks",
+        "description": "A synchronous API for the analysis of text prompt injection attacks.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The text prompt injection attacks analysis request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextPromptInjectionOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextPromptInjectionResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -910,32 +992,28 @@
           }
         },
         "outputType": {
-          "$ref": "#/definitions/AnalyzeImageOutputType",
+          "type": "string",
           "description": "This refers to the type of image analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".",
-          "default": "FourSeverityLevels"
+          "default": "FourSeverityLevels",
+          "enum": [
+            "FourSeverityLevels"
+          ],
+          "x-ms-enum": {
+            "name": "AnalyzeImageOutputType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "FourSeverityLevels",
+                "value": "FourSeverityLevels",
+                "description": "Output severities in four levels, the value could be 0,2,4,6."
+              }
+            ]
+          }
         }
       },
       "required": [
         "image"
       ]
-    },
-    "AnalyzeImageOutputType": {
-      "type": "string",
-      "description": "The type of image analysis output.",
-      "enum": [
-        "FourSeverityLevels"
-      ],
-      "x-ms-enum": {
-        "name": "AnalyzeImageOutputType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "FourSeverityLevels",
-            "value": "FourSeverityLevels",
-            "description": "Output severities in four levels, the value could be 0,2,4,6."
-          }
-        ]
-      }
     },
     "AnalyzeImageResult": {
       "type": "object",
@@ -952,6 +1030,114 @@
       },
       "required": [
         "categoriesAnalysis"
+      ]
+    },
+    "AnalyzeTextGroundednessOptions": {
+      "type": "object",
+      "description": "The request of groundedness detection.",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "description": "The domain of the text for analysis. Allowed values: Medical, Generic.\nThis field is optional, with a default value of Generic.",
+          "default": "Generic",
+          "enum": [
+            "Generic",
+            "Medical"
+          ],
+          "x-ms-enum": {
+            "name": "GroundednessDomain",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Generic",
+                "value": "Generic"
+              },
+              {
+                "name": "Medical",
+                "value": "Medical"
+              }
+            ]
+          }
+        },
+        "task": {
+          "type": "string",
+          "description": "The task type for the text analysis. Type of task: QnA, Summarization.\nThis field is optional, with a default value of Summarization.",
+          "default": "Summarization",
+          "enum": [
+            "Summarization",
+            "QnA"
+          ],
+          "x-ms-enum": {
+            "name": "GroundednessTask",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Summarization",
+                "value": "Summarization"
+              },
+              {
+                "name": "QnA",
+                "value": "QnA"
+              }
+            ]
+          }
+        },
+        "qna": {
+          "$ref": "#/definitions/QnAOptions",
+          "description": "The user's question input in a QnA scenario.\nThis field is optional, but if the task type is set to QnA, it becomes required."
+        },
+        "text": {
+          "type": "string",
+          "description": "The specific text that needs to be checked.",
+          "maxLength": 7500
+        },
+        "groundingSources": {
+          "type": "array",
+          "description": "Leverages a vast array of grounding sources to validate AI-generated text.\nLimit: Restrictions on the total amount of grounding sources that can be analyzed in a single request are 55K characters.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "reasoning": {
+          "type": "boolean",
+          "description": "A value indicating if the output includes an explanation for the identified groundedness.\nThis field is optional, with a default value of false."
+        },
+        "llmResource": {
+          "$ref": "#/definitions/LLMResource",
+          "description": "Connection details for the LLM resource. \nThis field will be used only when the 'reasoning' field is set to true; otherwise, it will be ignored."
+        }
+      },
+      "required": [
+        "text",
+        "groundingSources"
+      ]
+    },
+    "AnalyzeTextGroundednessResult": {
+      "type": "object",
+      "description": "The response of groundedness detection.",
+      "properties": {
+        "ungroundedDetected": {
+          "type": "boolean",
+          "description": "Indicates whether the text exhibits ungroundedness."
+        },
+        "ungroundedPercentage": {
+          "type": "number",
+          "format": "float",
+          "description": "Specifies the proportion of the text identified as ungrounded, \nexpressed as a decimal between 0 and 1,\nwhere 0 indicates no grounded content and 1 indicates entirely grounded content.."
+        },
+        "ungroundedDetails": {
+          "type": "array",
+          "description": "Provides insights into ungrounded content with specific examples and percentages.",
+          "items": {
+            "$ref": "#/definitions/UngroundednessDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "ungroundedDetected",
+        "ungroundedPercentage",
+        "ungroundedDetails"
       ]
     },
     "AnalyzeTextJailbreakOptions": {
@@ -1009,9 +1195,29 @@
           "description": "When set to true, further analyses of harmful content will not be performed in cases where blocklists are hit. When set to false, all analyses of harmful content will be performed, whether or not blocklists are hit."
         },
         "outputType": {
-          "$ref": "#/definitions/AnalyzeTextOutputType",
+          "type": "string",
           "description": "This refers to the type of text analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".",
-          "default": "FourSeverityLevels"
+          "default": "FourSeverityLevels",
+          "enum": [
+            "FourSeverityLevels",
+            "EightSeverityLevels"
+          ],
+          "x-ms-enum": {
+            "name": "AnalyzeTextOutputType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "FourSeverityLevels",
+                "value": "FourSeverityLevels",
+                "description": "Output severities in four levels, the value could be 0,2,4,6."
+              },
+              {
+                "name": "EightSeverityLevels",
+                "value": "EightSeverityLevels",
+                "description": "Output severities in eight levels, the value could be 0,1,2,3,4,5,6,7."
+              }
+            ]
+          }
         },
         "customizedCategories": {
           "type": "array",
@@ -1026,28 +1232,39 @@
         "text"
       ]
     },
-    "AnalyzeTextOutputType": {
-      "type": "string",
-      "description": "The type of text analysis output.",
-      "enum": [
-        "FourSeverityLevels",
-        "EightSeverityLevels"
-      ],
-      "x-ms-enum": {
-        "name": "AnalyzeTextOutputType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "FourSeverityLevels",
-            "value": "FourSeverityLevels",
-            "description": "Output severities in four levels, the value could be 0,2,4,6."
-          },
-          {
-            "name": "EightSeverityLevels",
-            "value": "EightSeverityLevels",
-            "description": "Output severities in eight levels, the value could be 0,1,2,3,4,5,6,7."
+    "AnalyzeTextPromptInjectionOptions": {
+      "type": "object",
+      "description": "The text prompt injection attacks analysis request.",
+      "properties": {
+        "userPrompt": {
+          "type": "string",
+          "description": "The user prompt needs to be analyzed if it attempts to do direct injection attacks."
+        },
+        "documents": {
+          "type": "array",
+          "description": "The documents needs to be analyzed if they attempt to do direct or indirect injection attacks.",
+          "items": {
+            "type": "string"
           }
-        ]
+        }
+      }
+    },
+    "AnalyzeTextPromptInjectionResult": {
+      "type": "object",
+      "description": "The text injection attacks analysis response.",
+      "properties": {
+        "userPromptAnalysis": {
+          "$ref": "#/definitions/TextPromptInjectionResult",
+          "description": "Direct injection analysis result for user prompt input."
+        },
+        "documentsAnalysis": {
+          "type": "array",
+          "description": "Direct and indirect injection attacks analysis result for documents input.",
+          "items": {
+            "$ref": "#/definitions/TextPromptInjectionResult"
+          },
+          "x-ms-identifiers": []
+        }
       }
     },
     "AnalyzeTextProtectedMaterialOptions": {
@@ -1313,6 +1530,32 @@
         }
       }
     },
+    "IndexDetails": {
+      "type": "object",
+      "description": "The index details.",
+      "properties": {
+        "utf8": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Indicate the index when encoding is UTF-8."
+        },
+        "utf16": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Indicate the index when encoding is UTF-16."
+        },
+        "codePoint": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Indicate the index with code point format."
+        }
+      },
+      "required": [
+        "utf8",
+        "utf16",
+        "codePoint"
+      ]
+    },
     "JailbreakAnalysisResult": {
       "type": "object",
       "description": "The text jailbreak analysis response.",
@@ -1324,6 +1567,43 @@
       },
       "required": [
         "detected"
+      ]
+    },
+    "LLMResource": {
+      "type": "object",
+      "description": "Connection details for the LLM resource.",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "LLM resource type. The default value is AzureOpenAI.",
+          "default": "AzureOpenAI",
+          "enum": [
+            "AzureOpenAI"
+          ],
+          "x-ms-enum": {
+            "name": "LLMResourceType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "AzureOpenAI",
+                "value": "AzureOpenAI",
+                "description": "Azure OpenAI resource type."
+              }
+            ]
+          }
+        },
+        "azureOpenAIEndpoint": {
+          "type": "string",
+          "description": "Endpoint for Azure OpenAI resource."
+        },
+        "azureOpenAIDeploymentName": {
+          "type": "string",
+          "description": "Deployment model name."
+        }
+      },
+      "required": [
+        "azureOpenAIEndpoint",
+        "azureOpenAIDeploymentName"
       ]
     },
     "PagedTextBlocklist": {
@@ -1341,7 +1621,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -1363,7 +1644,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -1385,7 +1667,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -1403,6 +1686,20 @@
       },
       "required": [
         "detected"
+      ]
+    },
+    "QnAOptions": {
+      "type": "object",
+      "description": "The request of QnA options.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The user's question input in a QnA scenario.",
+          "maxLength": 7500
+        }
+      },
+      "required": [
+        "query"
       ]
     },
     "RemoveTextBlocklistItemsOptions": {
@@ -1848,6 +2145,46 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "TextPromptInjectionResult": {
+      "type": "object",
+      "description": "The text injection attacks analysis response.",
+      "properties": {
+        "attackDetected": {
+          "type": "boolean",
+          "description": "Analysis result for whether the prompt is classified as an injection attack."
+        }
+      },
+      "required": [
+        "attackDetected"
+      ]
+    },
+    "UngroundednessDetails": {
+      "type": "object",
+      "description": "The detailed information about a text identified as ungroundedness.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The grounded text."
+        },
+        "offset": {
+          "$ref": "#/definitions/IndexDetails",
+          "description": "The offset when grounded text starts."
+        },
+        "length": {
+          "$ref": "#/definitions/IndexDetails",
+          "description": "The length of the grounded text."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The explanation for detected ungroundedness, enhancing understanding.\nOnly when the 'reasoning' field in the input is set to true 'reason' field will be returned."
+        }
+      },
+      "required": [
+        "text",
+        "offset",
+        "length"
       ]
     }
   },
