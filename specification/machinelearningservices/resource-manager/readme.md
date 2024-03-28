@@ -26,15 +26,35 @@ These are the global settings for the Machine Learning Services API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-01
+tag: package-2024-04
 ```
 
 
+### Tag: package-2024-04
+
+These settings apply only when `--tag=package-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2024-04-01/machineLearningServices.json
+  - Microsoft.MachineLearningServices/stable/2024-04-01/mfe.json
+  - Microsoft.MachineLearningServices/stable/2024-04-01/registries.json
+  - Microsoft.MachineLearningServices/stable/2024-04-01/workspaceFeatures.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    reason: As discussed In office hour this conf property is string dictionary and passed by user as per there requirements depending on runtime version. This passed to downstream and we have multiple validation on all required configuration before passing it downstream, All optional property passed as user wants and any failure due to that considered as user error.
+    where:
+      - $.definitions["SparkJob"].properties["conf"]
+  - code: AvoidAdditionalProperties
+    reason: This is for feature parity with other job type like commandjob, sweepjob etc. We have one interface for all type of job and other job take environment variable like this to match with them we also pass environment variable in this format. please check existing "CommandJob" in same file.
+    where:
+      - $.definitions["SparkJob"].properties["environmentVariables"]
+```
 ### Tag: package-preview-2024-01
 
 These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-01'
+``` yaml $(tag) == 'package-preview-2024-01'
 input-file:
   - Microsoft.MachineLearningServices/preview/2024-01-01-preview/machineLearningServices.json
   - Microsoft.MachineLearningServices/preview/2024-01-01-preview/mfe.json
@@ -86,6 +106,7 @@ suppressions:
     where:
       - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
 ```
+
 ### Tag: package-preview-2023-08
 
 These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
