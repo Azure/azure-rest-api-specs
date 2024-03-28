@@ -360,6 +360,7 @@ enum Temporality {
 
 #suppress "@azure-tools/typespec-azure-core/use-extensible-enum"
 @doc("Describes any conditionality on the entity.")
+@clientName("HealthcareAssertionConditionality", "csharp")
 @fixed
 enum Conditionality {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"

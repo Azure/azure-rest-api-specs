@@ -958,6 +958,7 @@ enum redactionCharacter {
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
+@clientName("AnalyzeTextError", "csharp")
 @doc("The error object.")
 model Error extends Record<unknown> {
   @doc("One of a server-defined set of error codes.")

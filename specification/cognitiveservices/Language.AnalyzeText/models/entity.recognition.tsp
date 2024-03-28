@@ -275,6 +275,7 @@ enum EntityCategory {
 }
 
 @added(Versions.v2023_11_15_preview)
+@clientName("EntityInferenceConfig", "csharp")
 @doc("The class that houses the inference options allowed for named entity recognition.")
 model EntityInferenceOptions {
   @doc("Option to include/exclude the detected entity values to be normalized and included in the metadata. The numeric and temporal entity types support value normalization.")

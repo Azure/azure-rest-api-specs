@@ -68,6 +68,7 @@ enum TokenSentimentValue {
   negative,
 }
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+@clientName("SentimentResult", "csharp")
 @doc("Sentiment analysis per document.")
 model SentimentResponse extends PreBuiltResult {
   @typeChangedFrom(Versions.v2023_04_15_preview, Array<SentimentDocumentResult>)
