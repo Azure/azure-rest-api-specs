@@ -135,14 +135,14 @@
       "type": "object",
       "description": "The representation of a single prompt completion as part of an overall chat completions request.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
       "properties": {
-        "message": {
-          "$ref": "#/definitions/ChatResponseMessage",
-          "description": "The chat message for a given chat completions prompt."
-        },
         "index": {
           "type": "integer",
           "format": "int32",
           "description": "The ordered index associated with this chat completions choice."
+        },
+        "message": {
+          "$ref": "#/definitions/ChatResponseMessage",
+          "description": "The chat message for a given chat completions prompt."
         },
         "finish_reason": {
           "$ref": "#/definitions/CompletionsFinishReason",
@@ -153,6 +153,7 @@
       },
       "required": [
         "index",
+        "message",
         "finish_reason"
       ]
     },
@@ -164,14 +165,23 @@
           "type": "string",
           "description": "A unique identifier associated with this chat completions response."
         },
+        "object": {
+          "type": "string",
+          "description": "The response object type, which is always `chat.completion`."
+        },
         "created": {
           "type": "integer",
           "format": "unixtime",
           "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
         },
+        "model": {
+          "type": "string",
+          "description": "The model used for the chat completion."
+        },
         "choices": {
           "type": "array",
           "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/ChatChoice"
           },
@@ -180,24 +190,54 @@
         "usage": {
           "$ref": "#/definitions/CompletionsUsage",
           "description": "Usage information for tokens processed and generated as part of this completions operation."
-        },
-        "object": {
-          "type": "string",
-          "description": "The response object type, which is always `chat.completion`."
-        },
-        "model": {
-          "type": "string",
-          "description": "The model used for the chat completion."
         }
       },
       "required": [
         "id",
-        "created",
-        "choices",
-        "usage",
         "object",
-        "model"
+        "created",
+        "model",
+        "choices",
+        "usage"
       ]
+    },
+    "ChatCompletionsFunctionToolCall": {
+      "type": "object",
+      "description": "A tool call to a function tool, issued by the model in evaluation of a configured function tool, that represents\na function invocation needed for a subsequent chat completions request to resolve.",
+      "properties": {
+        "function": {
+          "$ref": "#/definitions/FunctionCall",
+          "description": "The details of the function invocation requested by the tool call."
+        }
+      },
+      "required": [
+        "function"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatCompletionsToolCall"
+        }
+      ],
+      "x-ms-discriminator-value": "function"
+    },
+    "ChatCompletionsFunctionToolDefinition": {
+      "type": "object",
+      "description": "The definition information for a chat completions function tool that can call a function in response to a tool call.",
+      "properties": {
+        "function": {
+          "$ref": "#/definitions/FunctionDefinition",
+          "description": "The function definition details for the function tool."
+        }
+      },
+      "required": [
+        "function"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatCompletionsToolDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "function"
     },
     "ChatCompletionsJsonResponseFormat": {
       "type": "object",
@@ -209,6 +249,20 @@
       ],
       "x-ms-discriminator-value": "json_object"
     },
+    "ChatCompletionsNamedToolSelection": {
+      "type": "object",
+      "description": "An abstract representation of an explicit, named tool selection to use for a chat completions request.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The object type."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
     "ChatCompletionsOptions": {
       "type": "object",
       "description": "The configuration information for a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
@@ -216,60 +270,89 @@
         "messages": {
           "type": "array",
           "description": "The collection of context messages associated with this chat completions request.\nTypical usage begins with a chat message for the System role that provides instructions for\nthe behavior of the assistant, followed by alternating messages between the User and\nAssistant roles.",
+          "minItems": 1,
           "items": {
             "$ref": "#/definitions/ChatRequestMessage"
           },
           "x-ms-identifiers": []
         },
-        "max_tokens": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of tokens to generate.",
-          "x-ms-client-name": "maxTokens"
-        },
-        "temperature": {
+        "frequency_penalty": {
           "type": "number",
           "format": "float",
-          "description": "The sampling temperature to use that controls the apparent creativity of generated completions.\nHigher values will make output more random while lower values will make results more focused\nand deterministic.\nIt is not recommended to modify temperature and top_p for the same completions request as the\ninteraction of these two settings is difficult to predict."
-        },
-        "top_p": {
-          "type": "number",
-          "format": "float",
-          "description": "An alternative to sampling with temperature called nucleus sampling. This value causes the\nmodel to consider the results of tokens with the provided probability mass. As an example, a\nvalue of 0.15 will cause only the tokens comprising the top 15% of probability mass to be\nconsidered.\nIt is not recommended to modify temperature and top_p for the same completions request as the\ninteraction of these two settings is difficult to predict.",
-          "x-ms-client-name": "topP"
-        },
-        "stop": {
-          "type": "array",
-          "description": "A collection of textual sequences that will end completions generation.",
-          "items": {
-            "type": "string"
-          }
+          "description": "A value that influences the probability of generated tokens appearing based on their cumulative\nfrequency in generated text.\nPositive values will make tokens less likely to appear as their frequency increases and\ndecrease the likelihood of the model repeating the same statements verbatim.",
+          "default": 0,
+          "minimum": -2,
+          "maximum": 2,
+          "x-ms-client-name": "frequencyPenalty"
         },
         "presence_penalty": {
           "type": "number",
           "format": "float",
           "description": "A value that influences the probability of generated tokens appearing based on their existing\npresence in generated text.\nPositive values will make tokens less likely to appear when they already exist and increase the\nmodel's likelihood to output new topics.",
+          "default": 0,
+          "minimum": -2,
+          "maximum": 2,
           "x-ms-client-name": "presencePenalty"
         },
-        "frequency_penalty": {
+        "temperature": {
           "type": "number",
           "format": "float",
-          "description": "A value that influences the probability of generated tokens appearing based on their cumulative\nfrequency in generated text.\nPositive values will make tokens less likely to appear as their frequency increases and\ndecrease the likelihood of the model repeating the same statements verbatim.",
-          "x-ms-client-name": "frequencyPenalty"
+          "description": "The sampling temperature to use that controls the apparent creativity of generated completions.\nHigher values will make output more random while lower values will make results more focused\nand deterministic.\nIt is not recommended to modify temperature and top_p for the same completions request as the\ninteraction of these two settings is difficult to predict.",
+          "default": 0.7,
+          "minimum": 0,
+          "maximum": 1
         },
-        "stream": {
-          "type": "boolean",
-          "description": "A value indicating whether chat completions should be streamed for this request."
+        "top_p": {
+          "type": "number",
+          "format": "float",
+          "description": "An alternative to sampling with temperature called nucleus sampling. This value causes the\nmodel to consider the results of tokens with the provided probability mass. As an example, a\nvalue of 0.15 will cause only the tokens comprising the top 15% of probability mass to be\nconsidered.\nIt is not recommended to modify temperature and top_p for the same completions request as the\ninteraction of these two settings is difficult to predict.",
+          "default": 1,
+          "minimum": 0,
+          "maximum": 1,
+          "x-ms-client-name": "topP"
         },
-        "seed": {
+        "max_tokens": {
           "type": "integer",
-          "format": "int64",
-          "description": "If specified, the system will make a best effort to sample deterministically such that repeated requests with the\nsame seed and parameters should return the same result. Determinism is not guaranteed, and you should refer to the\nsystem_fingerprint response parameter to monitor changes in the backend.\""
+          "format": "int32",
+          "description": "The maximum number of tokens to generate.",
+          "minimum": 0,
+          "x-ms-client-name": "maxTokens"
         },
         "response_format": {
           "$ref": "#/definitions/ChatCompletionsResponseFormat",
           "description": "An object specifying the format that the model must output. Used to enable JSON mode.",
           "x-ms-client-name": "responseFormat"
+        },
+        "stop": {
+          "type": "array",
+          "description": "A collection of textual sequences that will end completions generation.",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "stream": {
+          "type": "boolean",
+          "description": "A value indicating whether chat completions should be streamed for this request.",
+          "default": false
+        },
+        "tools": {
+          "type": "array",
+          "description": "The available tool definitions that the chat completions request can use, including caller-defined functions.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/ChatCompletionsToolDefinition"
+          },
+          "x-ms-identifiers": []
+        },
+        "tool_choice": {
+          "description": "If specified, the model will configure which of the provided tools it can use for the chat completions response.",
+          "x-ms-client-name": "toolChoice"
+        },
+        "seed": {
+          "type": "integer",
+          "format": "int64",
+          "description": "If specified, the system will make a best effort to sample deterministically such that repeated requests with the\nsame seed and parameters should return the same result. Determinism is not guaranteed, and you should refer to the\nsystem_fingerprint response parameter to monitor changes in the backend.\""
         }
       },
       "required": [
@@ -299,6 +382,63 @@
         }
       ],
       "x-ms-discriminator-value": "text"
+    },
+    "ChatCompletionsToolCall": {
+      "type": "object",
+      "description": "An abstract representation of a tool call that must be resolved in a subsequent request to perform the requested\nchat completion.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The object type."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of the tool call."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type",
+        "id"
+      ]
+    },
+    "ChatCompletionsToolDefinition": {
+      "type": "object",
+      "description": "An abstract representation of a tool that can be used by the model to improve a chat completions response.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The object type."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ChatCompletionsToolSelectionPreset": {
+      "type": "string",
+      "description": "Represents a generic policy for how a chat completions tool may be selected.",
+      "enum": [
+        "auto",
+        "none"
+      ],
+      "x-ms-enum": {
+        "name": "ChatCompletionsToolSelectionPreset",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "auto",
+            "value": "auto",
+            "description": "Specifies that the model may either use any of the tools provided in this chat completions request or\ninstead return a standard chat completions response as if no tools were provided."
+          },
+          {
+            "name": "none",
+            "value": "none",
+            "description": "Specifies that the model should not respond with a tool call and should instead provide a standard chat\ncompletions response. Response content may still be influenced by the provided tool definitions."
+          }
+        ]
+      }
     },
     "ChatRequestAssistantMessage": {
       "type": "object",
@@ -361,6 +501,32 @@
       ],
       "x-ms-discriminator-value": "system"
     },
+    "ChatRequestToolMessage": {
+      "type": "object",
+      "description": "A request chat message representing requested output from a configured tool.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The content of the message.",
+          "x-nullable": true
+        },
+        "tool_call_id": {
+          "type": "string",
+          "description": "The ID of the tool call resolved by the provided content.",
+          "x-ms-client-name": "toolCallId"
+        }
+      },
+      "required": [
+        "content",
+        "tool_call_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "tool"
+    },
     "ChatRequestUserMessage": {
       "type": "object",
       "description": "A request chat message representing user input to the assistant.",
@@ -396,6 +562,14 @@
           "type": "string",
           "description": "The content of the message.",
           "x-nullable": true
+        },
+        "tool_calls": {
+          "type": "array",
+          "description": "The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat\ncompletions request to resolve as configured.",
+          "items": {
+            "$ref": "#/definitions/ChatCompletionsToolCall"
+          },
+          "x-ms-client-name": "toolCalls"
         }
       },
       "required": [
@@ -496,6 +670,44 @@
         "completion_tokens",
         "prompt_tokens",
         "total_tokens"
+      ]
+    },
+    "FunctionCall": {
+      "type": "object",
+      "description": "The name and arguments of a function that should be called, as generated by the model.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the function to call."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The arguments to call the function with, as generated by the model in JSON format.\nNote that the model does not always generate valid JSON, and may hallucinate parameters\nnot defined by your function schema. Validate the arguments in your code before calling\nyour function."
+        }
+      },
+      "required": [
+        "name",
+        "arguments"
+      ]
+    },
+    "FunctionDefinition": {
+      "type": "object",
+      "description": "The definition of a caller-specified function that chat completions may invoke in response to matching user input.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the function to be called."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of what the function does. The model will use this description when selecting the function and\ninterpreting its parameters."
+        },
+        "parameters": {
+          "description": "The parameters the function accepts, described as a JSON Schema object."
+        }
+      },
+      "required": [
+        "name"
       ]
     },
     "Versions": {

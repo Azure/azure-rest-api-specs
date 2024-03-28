@@ -9,6 +9,151 @@ using TypeSpec.Versioning;
 namespace ModelInference;
 
 @doc("""
+The configuration information for a chat completions request.
+Completions support a wide variety of tasks and generate text that continues from or "completes"
+provided prompt data.
+""")
+model ChatCompletionsOptions {
+  @doc("""
+    The collection of context messages associated with this chat completions request.
+    Typical usage begins with a chat message for the System role that provides instructions for
+    the behavior of the assistant, followed by alternating messages between the User and
+    Assistant roles.
+    """)
+  @projectedName("json", "messages")
+  @minItems(1)
+  messages: ChatRequestMessage[];
+
+  @doc("""
+  A value that influences the probability of generated tokens appearing based on their cumulative
+  frequency in generated text.
+  Positive values will make tokens less likely to appear as their frequency increases and
+  decrease the likelihood of the model repeating the same statements verbatim.
+  """)
+  @maxValue(2.0)
+  @minValue(-2.0)
+  @projectedName("json", "frequency_penalty")
+  frequencyPenalty?: float32 = 0.0;
+
+  @doc("""
+  A value that influences the probability of generated tokens appearing based on their existing
+  presence in generated text.
+  Positive values will make tokens less likely to appear when they already exist and increase the
+  model's likelihood to output new topics.
+  """)
+  @maxValue(2.0)
+  @minValue(-2.0)
+  @projectedName("json", "presence_penalty")
+  presencePenalty?: float32 = 0.0;
+
+  @doc("""
+  The sampling temperature to use that controls the apparent creativity of generated completions.
+  Higher values will make output more random while lower values will make results more focused
+  and deterministic.
+  It is not recommended to modify temperature and top_p for the same completions request as the
+  interaction of these two settings is difficult to predict.
+  """)
+  @maxValue(1.0)
+  @minValue(0.0)
+  @projectedName("json", "temperature")
+  temperature?: float32 = 0.7;
+
+  @doc("""
+  An alternative to sampling with temperature called nucleus sampling. This value causes the
+  model to consider the results of tokens with the provided probability mass. As an example, a
+  value of 0.15 will cause only the tokens comprising the top 15% of probability mass to be
+  considered.
+  It is not recommended to modify temperature and top_p for the same completions request as the
+  interaction of these two settings is difficult to predict.
+  """)
+  @maxValue(1.0)
+  @minValue(0.0)
+  @projectedName("json", "top_p")
+  topP?: float32 = 1.0;
+
+  @doc("The maximum number of tokens to generate.")
+  @projectedName("json", "max_tokens")
+  @minValue(0.0)
+  maxTokens?: int32;
+
+  @projectedName("json", "response_format")
+  @doc("An object specifying the format that the model must output. Used to enable JSON mode.")
+  responseFormat?: ChatCompletionsResponseFormat;
+
+  @doc("""
+    A collection of textual sequences that will end completions generation.
+    """)
+  @projectedName("json", "stop")
+  @minItems(1)
+  stop?: string[];
+
+  @doc("""
+  A value indicating whether chat completions should be streamed for this request.
+  """)
+  @projectedName("json", "stream")
+  stream?: boolean = false;
+
+  @doc("The available tool definitions that the chat completions request can use, including caller-defined functions.")
+  @minItems(1)
+  tools?: ChatCompletionsToolDefinition[];
+
+  @encodedName("application/json", "tool_choice")
+  @doc("""
+  If specified, the model will configure which of the provided tools it can use for the chat completions response.
+  """)
+  toolChoice?: ChatCompletionsToolSelection;
+
+  @doc("""
+  If specified, the system will make a best effort to sample deterministically such that repeated requests with the
+  same seed and parameters should return the same result. Determinism is not guaranteed, and you should refer to the
+  system_fingerprint response parameter to monitor changes in the backend."
+  """)
+  seed?: int64;
+}
+
+@doc("""
+Representation of the response data from a chat completions request.
+Completions support a wide variety of tasks and generate text that continues from or "completes"
+provided prompt data.
+""")
+model ChatCompletions {
+  @doc("A unique identifier associated with this chat completions response.")
+  @projectedName("json", "id")
+  id: string;
+
+  @doc("The response object type, which is always `chat.completion`.")
+  @projectedName("json", "object")
+  object: string;
+
+  @doc("""
+    The first timestamp associated with generation activity for this completions response,
+    represented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970.
+    """)
+  @projectedName("json", "created")
+  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
+  created: utcDateTime;
+
+  @doc("The model used for the chat completion.")
+  @projectedName("json", "model")
+  `model`: string;
+
+  @doc("""
+    The collection of completions choices associated with this completions response.
+    Generally, `n` choices are generated per provided prompt with a default value of 1.
+    Token limits and other settings may limit the number of choices generated.
+    """)
+  @projectedName("json", "choices")
+  @minItems(1)
+  choices: ChatChoice[];
+
+  @doc("""
+  Usage information for tokens processed and generated as part of this completions operation.
+  """)
+  @projectedName("json", "usage")
+  usage: CompletionsUsage;
+}
+
+@doc("""
 Representation of the token counts processed for a completions request.
 Counts consider all tokens across prompts, choices, choice alternates, best_of generations, and
 other consumers.
@@ -87,147 +232,24 @@ model ChatCompletionsJsonResponseFormat extends ChatCompletionsResponseFormat {
 }
 
 @doc("""
-The configuration information for a chat completions request.
-Completions support a wide variety of tasks and generate text that continues from or "completes"
-provided prompt data.
-""")
-model ChatCompletionsOptions {
-  @doc("""
-    The collection of context messages associated with this chat completions request.
-    Typical usage begins with a chat message for the System role that provides instructions for
-    the behavior of the assistant, followed by alternating messages between the User and
-    Assistant roles.
-    """)
-  @projectedName("json", "messages")
-  messages: ChatRequestMessage[];
-
-  @doc("The maximum number of tokens to generate.")
-  @projectedName("json", "max_tokens")
-  maxTokens?: int32;
-
-  @doc("""
-    The sampling temperature to use that controls the apparent creativity of generated completions.
-    Higher values will make output more random while lower values will make results more focused
-    and deterministic.
-    It is not recommended to modify temperature and top_p for the same completions request as the
-    interaction of these two settings is difficult to predict.
-    """)
-  @projectedName("json", "temperature")
-  temperature?: float32;
-
-  @doc("""
-    An alternative to sampling with temperature called nucleus sampling. This value causes the
-    model to consider the results of tokens with the provided probability mass. As an example, a
-    value of 0.15 will cause only the tokens comprising the top 15% of probability mass to be
-    considered.
-    It is not recommended to modify temperature and top_p for the same completions request as the
-    interaction of these two settings is difficult to predict.
-    """)
-  @projectedName("json", "top_p")
-  topP?: float32;
-
-  @doc("""
-    A collection of textual sequences that will end completions generation.
-    """)
-  @projectedName("json", "stop")
-  stop?: string[];
-
-  @doc("""
-    A value that influences the probability of generated tokens appearing based on their existing
-    presence in generated text.
-    Positive values will make tokens less likely to appear when they already exist and increase the
-    model's likelihood to output new topics.
-    """)
-  @projectedName("json", "presence_penalty")
-  presencePenalty?: float32;
-
-  @doc("""
-    A value that influences the probability of generated tokens appearing based on their cumulative
-    frequency in generated text.
-    Positive values will make tokens less likely to appear as their frequency increases and
-    decrease the likelihood of the model repeating the same statements verbatim.
-    """)
-  @projectedName("json", "frequency_penalty")
-  frequencyPenalty?: float32;
-
-  @doc("""
-    A value indicating whether chat completions should be streamed for this request.
-    """)
-  @projectedName("json", "stream")
-  stream?: boolean;
-
-  @doc("""
-  If specified, the system will make a best effort to sample deterministically such that repeated requests with the
-  same seed and parameters should return the same result. Determinism is not guaranteed, and you should refer to the
-  system_fingerprint response parameter to monitor changes in the backend."
-  """)
-  seed?: int64;
-
-  @projectedName("json", "response_format")
-  @doc("An object specifying the format that the model must output. Used to enable JSON mode.")
-  responseFormat?: ChatCompletionsResponseFormat;
-}
-
-@doc("""
 The representation of a single prompt completion as part of an overall chat completions request.
 Generally, `n` choices are generated per provided prompt with a default value of 1.
 Token limits and other settings may limit the number of choices generated.
 """)
 model ChatChoice {
-  @doc("The chat message for a given chat completions prompt.")
-  @projectedName("json", "message")
-  message?: ChatResponseMessage;
-
   @doc("The ordered index associated with this chat completions choice.")
   @projectedName("json", "index")
   index: int32;
+
+  @doc("The chat message for a given chat completions prompt.")
+  @projectedName("json", "message")
+  message: ChatResponseMessage;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
   @doc("The reason that this chat completions choice completed its generated.")
   @projectedName("json", "finish_reason")
   finishReason: CompletionsFinishReason | null;
-}
-
-@doc("""
-Representation of the response data from a chat completions request.
-Completions support a wide variety of tasks and generate text that continues from or "completes"
-provided prompt data.
-""")
-model ChatCompletions {
-  @doc("A unique identifier associated with this chat completions response.")
-  @projectedName("json", "id")
-  id: string;
-
-  @doc("""
-    The first timestamp associated with generation activity for this completions response,
-    represented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970.
-    """)
-  @projectedName("json", "created")
-  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
-  created: utcDateTime;
-
-  @doc("""
-    The collection of completions choices associated with this completions response.
-    Generally, `n` choices are generated per provided prompt with a default value of 1.
-    Token limits and other settings may limit the number of choices generated.
-    """)
-  @projectedName("json", "choices")
-  choices: ChatChoice[];
-
-  @doc("""
-  Usage information for tokens processed and generated as part of this completions operation.
-  """)
-  @projectedName("json", "usage")
-  usage: CompletionsUsage;
-
-  @doc("The response object type, which is always `chat.completion`.")
-  @projectedName("json", "object")
-  object: string;
-
-  @doc("The model used for the chat completion.")
-  @projectedName("json", "model")
-  `model`: string;
 }
 
 @discriminator("role")
@@ -277,6 +299,21 @@ model ChatRequestAssistantMessage extends ChatRequestMessage {
   name?: string;
 }
 
+@doc("A request chat message representing requested output from a configured tool.")
+model ChatRequestToolMessage extends ChatRequestMessage {
+  @doc("The chat role associated with this message, which is always 'tool' for tool messages.")
+  role: ChatRole.tool;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
+  @doc("The content of the message.")
+  content: string | null;
+
+  @encodedName("application/json", "tool_call_id")
+  @doc("The ID of the tool call resolved by the provided content.")
+  toolCallId: string;
+}
+
+
 @doc("A representation of a chat message as received in a response.")
 model ChatResponseMessage {
   @doc("The chat role associated with the message.")
@@ -285,4 +322,116 @@ model ChatResponseMessage {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
   @doc("The content of the message.")
   content: string | null;
+
+  @encodedName("application/json", "tool_calls")
+  @doc("""
+  The tool calls that must be resolved and have their outputs appended to subsequent input messages for the chat
+  completions request to resolve as configured.
+  """)
+  toolCalls?: ChatCompletionsToolCall[];
+}
+
+// tool_choice: "auto" | "none" | { "type": "function", "name": string }
+
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
+alias ChatCompletionsToolSelection = ChatCompletionsToolSelectionPreset | ChatCompletionsNamedToolSelection;
+
+@doc("Represents a generic policy for how a chat completions tool may be selected.")
+union ChatCompletionsToolSelectionPreset {
+  string,
+
+  @doc("""
+  Specifies that the model may either use any of the tools provided in this chat completions request or
+  instead return a standard chat completions response as if no tools were provided.
+  """)
+  auto: "auto",
+
+  @doc("""
+  Specifies that the model should not respond with a tool call and should instead provide a standard chat
+  completions response. Response content may still be influenced by the provided tool definitions.
+  """)
+  none: "none",
+}
+
+@discriminator("type")
+@doc("An abstract representation of an explicit, named tool selection to use for a chat completions request.")
+model ChatCompletionsNamedToolSelection {
+  @doc("The object type.")
+  type: string;
+}
+
+@discriminator("type")
+@doc("An abstract representation of a tool that can be used by the model to improve a chat completions response.")
+model ChatCompletionsToolDefinition {
+  @doc("The object type.")
+  type: string;
+}
+
+@doc("""
+The definition information for a chat completions function tool that can call a function in response to a tool call.
+""")
+model ChatCompletionsFunctionToolDefinition
+  extends ChatCompletionsToolDefinition {
+  @doc("The object name, which is always 'function'.")
+  type: "function";
+
+  @doc("The function definition details for the function tool.")
+  function: FunctionDefinition;
+}
+
+@doc("""
+The definition of a caller-specified function that chat completions may invoke in response to matching user input.
+""")
+model FunctionDefinition {
+  @doc("The name of the function to be called.")
+  name: string;
+
+  @doc("""
+  A description of what the function does. The model will use this description when selecting the function and
+  interpreting its parameters.
+  """)
+  description?: string;
+
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "External API shape takes an arbitrary json"
+  @doc("The parameters the function accepts, described as a JSON Schema object.")
+  parameters?: unknown;
+}
+
+@discriminator("type")
+@doc("""
+An abstract representation of a tool call that must be resolved in a subsequent request to perform the requested
+chat completion.
+""")
+model ChatCompletionsToolCall {
+  @doc("The object type.")
+  type: string;
+
+  @doc("The ID of the tool call.")
+  id: string;
+}
+
+@doc("""
+A tool call to a function tool, issued by the model in evaluation of a configured function tool, that represents
+a function invocation needed for a subsequent chat completions request to resolve.
+""")
+model ChatCompletionsFunctionToolCall extends ChatCompletionsToolCall {
+  @doc("The type of tool call, in this case always 'function'.")
+  type: "function";
+
+  @doc("The details of the function invocation requested by the tool call.")
+  function: FunctionCall;
+}
+
+@doc("The name and arguments of a function that should be called, as generated by the model.")
+model FunctionCall {
+  @doc("The name of the function to call.")
+  name: string;
+
+  @doc("""
+  The arguments to call the function with, as generated by the model in JSON format.
+  Note that the model does not always generate valid JSON, and may hallucinate parameters
+  not defined by your function schema. Validate the arguments in your code before calling
+  your function.
+  """)
+  arguments: string;
 }

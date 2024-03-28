@@ -9,43 +9,54 @@
           "role": "ChatRequestMessage"
         }
       ],
-      "max_tokens": 25,
-      "temperature": 19,
-      "top_p": 5,
-      "stop": [
-        "rtavfjfyhnzl"
-      ],
-      "presence_penalty": 15,
-      "frequency_penalty": 19,
-      "stream": true,
-      "seed": 19,
+      "frequency_penalty": -2,
+      "presence_penalty": -1,
+      "temperature": 0,
+      "top_p": 0,
+      "max_tokens": 0,
       "response_format": {
         "type": "ChatCompletionsResponseFormat"
-      }
+      },
+      "stop": [
+        "zlkrxijvazqium"
+      ],
+      "stream": true,
+      "tools": [
+        {
+          "type": "ChatCompletionsToolDefinition"
+        }
+      ],
+      "seed": 30
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "sxmyscekvlsxqpsegdwnzyal",
+        "id": "vxckegxkfctjdqjitcawjna",
+        "object": "wepdkxpkuzhs",
         "created": 30,
+        "model": "ekoksbbgcjzskssaxefhmkrmnpfopm",
         "choices": [
           {
+            "index": 30,
             "message": {
               "role": "system",
-              "content": "mdhccqpdhwbiohjsm"
+              "content": "bfeykwwialisszlizvbiu",
+              "tool_calls": [
+                {
+                  "type": "ChatCompletionsToolCall",
+                  "id": "pxokpajzlccgcbaz"
+                }
+              ]
             },
-            "index": 6,
             "finish_reason": "stop"
           }
         ],
         "usage": {
-          "completion_tokens": 14,
-          "prompt_tokens": 3,
-          "total_tokens": 11
-        },
-        "object": "uuxdaqxswkk",
-        "model": "zaacxtgyugjfid"
+          "completion_tokens": 19,
+          "prompt_tokens": 29,
+          "total_tokens": 29
+        }
       }
     }
   }
