@@ -14,11 +14,11 @@ openapi-type: data-plane
 
 # Releases
 
-## BatchAvatar 2024-04-01
+## BatchAvatar 2024-04-15
 
 These settings apply only when `--tag=release_2024_04_01_preview` is specified on the command line.
 
 ```yaml $(tag) == 'release_2024_04_01_preview'
 input-file:
-  - preview/2024-04-01-preview/batchavatar.json
+  - preview/2024-04-15-preview/batchavatar.json
 ```
