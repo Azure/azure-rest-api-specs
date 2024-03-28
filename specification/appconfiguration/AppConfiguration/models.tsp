@@ -8,44 +8,75 @@ using Azure.Core;
 
 namespace AzureAppConfiguration;
 
+@doc("Key-value fields.")
 enum KeyValueFields {
+  @doc("Key field.")
   key,
+  @doc("Label field.")
   label,
+  @doc("Content type field.")
   content_type,
+  @doc("Value field.")
   value,
+  @doc("Last modified field.")
   last_modified,
+  @doc("Tags field.")
   tags,
+  @doc("Locked field.")
   locked,
+  @doc("Etag field.")
   etag,
 }
 
+@doc("Snapshot fields.")
 enum SnapshotFields {
+  @doc("Name field.")
   name,
+  @doc("Status field.")
   status,
+  @doc("Filters field.")
   filters,
+  @doc("Composition type field.")
   composition_type,
+  @doc("Created field.")
   created,
+  @doc("Expires field.")
   expires,
+  @doc("Retention period field.")
   retention_period,
+  @doc("Size field.")
   size,
+  @doc("Items count field.")
   items_count,
+  @doc("Tags field.")
   tags,
+  @doc("Etag field.")
   etag,
 }
 
+@doc("Snapshot status.")
 enum SnapshotStatus {
+  @doc("Provisioning")
   provisioning,
+  @doc("Ready")
   ready,
+  @doc("Archived")
   archived,
+  @doc("Failed")
   failed,
 }
 
+@doc("Composition types.")
 enum CompositionType {
+  @doc("The 'key' composition type.")
   key,
+  @doc("The 'key_label' composition type.")
   key_label,
 }
 
+@doc("Label fields.")
 enum LabelFields {
+  @doc("Name field.")
   name,
 }
 
@@ -59,9 +90,10 @@ model KeyListResult {
   @doc("The URI that can be used to request the next set of paged results.")
   @nextLink
   @projectedName("json", "@nextLink")
-  NextLink?: string;
+  nextLink?: string;
 }
 
+@doc("Keys serve as identifiers for key-values and are used to store and retrieve corresponding values.")
 model Key {
   @doc("The name of the key.")
   @visibility("read")
@@ -100,9 +132,10 @@ model KeyValueListResult {
   @doc("The URI that can be used to request the next set of paged results.")
   @nextLink
   @projectedName("json", "@nextLink")
-  NextLink?: string;
+  nextLink?: string;
 }
 
+@doc("A key-value pair representing application settings.")
 model KeyValue {
   @doc("The key of the key-value.")
   key?: string;
@@ -142,9 +175,10 @@ model SnapshotListResult {
   @doc("The URI that can be used to request the next set of paged results.")
   @nextLink
   @projectedName("json", "@nextLink")
-  NextLink?: string;
+  nextLink?: string;
 }
 
+@doc("A snapshot is a named, immutable subset of an App Configuration store's key-values.")
 model Snapshot {
   @doc("The name of the snapshot.")
   @visibility("read")
@@ -235,9 +269,10 @@ model LabelListResult {
   @doc("The URI that can be used to request the next set of paged results.")
   @nextLink
   @projectedName("json", "@nextLink")
-  NextLink?: string;
+  nextLink?: string;
 }
 
+@doc("Labels are used to group key-values.")
 model Label {
   @doc("The name of the label.")
   @visibility("read")
@@ -256,35 +291,5 @@ model OperationDetails {
 An error, available when the status is `Failed`, describing why the operation
 failed.
 """)
-  error?: ErrorDetail;
-}
-
-@doc("The details of an error.")
-model ErrorDetail {
-  @doc("One of a server-defined set of error codes.")
-  code: string;
-
-  @doc("A human-readable representation of the error.")
-  message: string;
-
-  @doc("An array of details about specific errors that led to this reported error.")
-  details?: ErrorDetail[];
-
-  @doc("""
-An object containing more specific information than the current object about
-the error.
-""")
-  innererror?: InnerError;
-}
-
-@doc("An object containing specific information about an error.")
-model InnerError {
-  @doc("One of a server-defined set of error codes.")
-  code?: string;
-
-  @doc("""
-An object containing more specific information than the current object about
-the error.
-""")
-  innererror?: InnerError;
+  error?: Azure.Core.Foundations.Error;
 }
