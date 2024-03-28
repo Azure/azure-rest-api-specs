@@ -12,12 +12,12 @@ using Azure.Core;
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.contoso.com/common/oauth2/v2.0/authorize",
-      scopes: ["https://widget.contoso.com/.default"],
+      scopes: ["https://registration.contoso.com/.default"],
     }
   ]>
 )
 @service({
-  title: "SpeechIngestion service",
+  title: "Speech Ingestion service",
 })
 @versioned(SpeechIngestion.Versions)
 namespace SpeechIngestion;
@@ -25,52 +25,167 @@ namespace SpeechIngestion;
 @doc("The SpeechIngestion service versions.")
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @doc("The 2022-11-01-preview version of the SpeechIngestion service.")
-  `2022-11-01-preview`,
+  @doc("The 2024-05-15-preview version of the SpeechIngestion service.")
+  `2024-05-15-preview`,
 }
 
-@doc("A widget.")
-@resource("widgets")
-model Widget {
-  @key("widgetName")
-  @doc("The widget name.")
+@doc("A registration.")
+@resource("registrations")
+model Registration {
+  @key("registrationName")
+  @doc("The unique name of the batch analytics registration.")
   @visibility("read")
   name: string;
 
-  @doc("The ID of the manufacturer.")
-  manufacturerId: string;
+  @doc("The storage configuration.")
+  storageModel: StorageModel;
 
-  @doc("The faked shared model.")
-  sharedModel?: FakedSharedModel;
+  @doc("The processing configuration.")
+  processingModel: ProcessingModel;
+
+  @doc("The batch transcription configuration.")
+  batchTranscriptionModel: BatchTranscriptionPropertiesModel;
+
+  @doc("The analytics configuration.")
+  analyticsModel?: AnalyticsModel;
+
+  @doc("The status of the registration.")
+  statusModel: StatusModel;
 }
 
-@doc("Faked shared model")
-model FakedSharedModel {
-  @doc("The tag.")
-  tag: string;
-
-  @doc("The created date.")
-  createdDate: utcDateTime;
+@doc("Storage model")
+model StorageModel {
+  @doc("The Uri of the blob storage account in the form of 'https://<accountname>.blob.core.windows.net'.")
+  blobStorageEndpoint: string;
+  
+  @doc("The name of the container that holds the audio files to be processed.")
+  inputContainerName: string;
+  
+  @doc("The name of the container that stores the transcription and analytics results.")
+  outputContainerName: string;
+  
+  @doc("The name of the container that archives the audio files that have been transcribed.")
+  processedContainerName: string;
+  
+  @doc("The name of the container that saves the error messages during processing.")
+  errorOutputContainerName: string;
 }
 
-interface Widgets {
-  @doc("Fetch a Widget by name.")
-  getWidget is ResourceRead<Widget>;
+@doc("Processing model")
+model ProcessingModel {
+  @doc("deliveryMode.")
+  deliveryMode: string;
+  
+  @doc("Extensions of input files.")
+  subjectEndsWith?: string;
+  
+  @doc("ResourceId for System Topic.")
+  systemTopicResourceId?: string;
+}
 
-  @doc("Gets status of a Widget operation.")
-  getWidgetOperationStatus is GetResourceOperationStatus<Widget>;
+@doc("Batch Transcription Properties model")
+model BatchTranscriptionPropertiesModel {
 
-  @doc("Creates or updates a Widget asynchronously.")
-  @pollingOperation(Widgets.getWidgetOperationStatus)
-  createOrUpdateWidget is LongRunningResourceCreateOrUpdate<Widget>;
+  @doc("The expected locale of the audio data to transcribe. For example, 'en-US', 'fr-FR', 'zh-CN', etc. For a full list of supported locales, see [Supported languages and regions](https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=stt).")
+  locale?: string;
 
-  @doc("Delete a Widget asynchronously.")
-  @pollingOperation(Widgets.getWidgetOperationStatus)
-  deleteWidget is LongRunningResourceDelete<Widget>;
+  @doc("The model property to use a specific base model or Custom Speech model. If you don't specify the model, the default base model for the locale is used.")
+  modelX?: EntityReferenceModel;
 
-  @doc("List Widget resources")
-  listWidgets is ResourceList<
-    Widget,
+  @doc("Custom domain name for batch transcription.")
+  customDomain: string;
+
+  @doc("The transcription batch API properties that allow you to customize the transcription process. For more information, see [Request configuration options](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/batch-transcription-create?pivots=rest-api#request-configuration-options).")
+  transcriptionProperties?: TranscriptionPropertiesModel;
+}
+
+@doc("Batch Transcription Properties model")
+model TranscriptionPropertiesModel {
+  @doc("Specifies if word level timestamps should be included in the output. The default value is false.")
+  wordLevelTimestampsEnabled?: boolean = false; 
+
+  @doc("Specifies whether to include word-level timestamps on the display form of the transcription results. The results are returned in the displayWords property of the transcription file. The default value is false.")
+  displayFormWordLevelTimestampsEnabled?: boolean = false; 
+
+  @doc("An array of channel numbers to process. Channels 0 and 1 are transcribed by default.")
+  channels?: int8[] = [0, 1];
+
+  @doc("Specifies how to handle punctuation in recognition results. Accepted values are None to disable punctuation, Dictated to imply explicit (spoken) punctuation, Automatic to let the decoder deal with punctuation, or DictatedAndAutomatic to use dictated and automatic punctuation. The default value is DictatedAndAutomatic.")
+  punctuationMode?: string = "DictatedAndAutomatic";
+
+  @doc("Specifies how to handle profanity in recognition results. Accepted values are None to disable profanity filtering, Masked to replace profanity with asterisks, Removed to remove all profanity from the result, or Tags to add profanity tags. The default value is Masked.")
+  profanityFilterMode?: string = "Masked";
+
+  @doc("Specifies that the Speech service should attempt diarization analysis on the input, which is expected to be a mono channel that contains two voices. The default value is false.")
+  diarizationEnabled?: boolean = false;
+
+  @doc("Indicates that the Speech service should attempt diarization analysis on the input, which is expected to be a mono channel that contains multiple voices. The feature isn't available with stereo recordings.")
+  diarization?: DiarizationPropertiesModel;
+
+  @doc("Language identification is used to identify languages spoken in audio when compared against a list of supported languages. https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=language-identification")
+  languageIdentification?: LanguageIdentificationPropertiesModel;
+}
+
+@doc("DiarizationProperties model")
+model DiarizationPropertiesModel {
+  @doc("The analytics endpoint to run.")
+  speakers: DiarizationSpeakersPropertiesModel;
+}
+
+@doc("DiarizationSpeakersProperties model")
+model DiarizationSpeakersPropertiesModel {
+  @doc("minCount")
+  minCount?: int8;
+  @doc("maxCount")
+  maxCount?: int8;
+}
+
+@doc("LanguageIdentificationProperties model")
+model LanguageIdentificationPropertiesModel {
+  @doc("mode")
+  mode: string;
+
+  @doc("candidateLocales.")
+  candidateLocales: string[];
+
+  @doc("speechModelMapping")
+  speechModelMapping?: Record<EntityReferenceModel>;
+}
+
+@doc("Analytics model")
+model AnalyticsModel {
+  @doc("The analytics endpoint to run.")
+  endpoint: string;
+}
+
+@doc("Status model")
+model StatusModel {
+  @doc("Status code.")
+  code: string;
+
+  @doc("Message.")
+  message?: string;
+}
+
+@doc("Entity ReferenceModel model")
+model EntityReferenceModel {
+  @doc("self.")
+  self: string;
+}
+
+interface Registrations {
+  @doc("Fetch a Registration by name.")
+  getRegistration is ResourceRead<Registration>;
+
+  @doc("Creates or updates a Registration.")
+  createOrUpdateRegistration is ResourceCreateOrUpdate<Registration>;
+
+  @doc("Delete a Registration.")
+  deleteRegistration is ResourceDelete<Registration>;
+
+  @doc("List Registration resources")
+  listRegistrations is ResourceList<
+    Registration,
     {
       parameters: StandardListQueryParameters;
     }
