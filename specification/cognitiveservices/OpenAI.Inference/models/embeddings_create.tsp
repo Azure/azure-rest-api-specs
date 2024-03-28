@@ -49,6 +49,18 @@ model EmbeddingsOptions {
   inputType?: string;
 }
 
+@doc("Represents the available formats for embeddings data on responses.")
+@added(ServiceApiVersions.v2024_03_01_Preview)
+union EmbeddingEncodingFormat {
+  string,
+
+  @doc("Specifies that responses should provide arrays of floats for each embedding.")
+  float: "float",
+
+  @doc("Specifies that responses should provide a base64-encoded string for each embedding.")
+  base64: "base64",
+}
+
 @doc("""
 Representation of the response data from an embeddings request.
 Embeddings measure the relatedness of text strings and are commonly used for search, clustering,
@@ -65,10 +77,10 @@ model Embeddings {
 @doc("Representation of a single embeddings relatedness comparison.")
 model EmbeddingItem {
   @doc("""
-    List of embeddings value for the input prompt in base64 encoded string format. These represent 
-    a measurement of the vector-based relatedness of the provided input.
+    List of embeddings value for the input prompt. These represent a measurement of the
+    vector-based relatedness of the provided input.
     """)
-  embedding: string;
+  embedding: float32[] | string;
 
   @doc("Index of the prompt to which the EmbeddingItem corresponds.")
   @clientName("promptIndex", "java")
