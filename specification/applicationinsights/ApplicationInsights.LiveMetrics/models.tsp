@@ -301,7 +301,7 @@ model Request extends DocumentIngress {
 
   @doc("Request URL with all query string parameters.")
   @maxLength(2048)
-  Url?: url;
+  Url?: string;
 
   @doc("Result of a request execution. For http requests, it could be some HTTP status code.")
   @maxLength(1024)
@@ -386,7 +386,7 @@ model KeyValuePairStringString {
   key: string;
 
   @doc("Value of the key-value pair.")
-  value: string;
+  value?: string;
 }
 
 /**
