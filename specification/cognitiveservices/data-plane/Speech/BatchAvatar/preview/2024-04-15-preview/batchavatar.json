@@ -310,10 +310,12 @@
           "$ref": "#/definitions/BatchAvatarConfig"
         },
         "outputs": {
-          "$ref": "#/definitions/BatchSynthesisOutputs"
+          "$ref": "#/definitions/BatchSynthesisOutputs",
+          "readOnly": true
         },
         "status": {
-          "$ref": "#/definitions/Status"
+          "$ref": "#/definitions/Status",
+          "readOnly": true
         },
         "lastActionDateTime": {
           "description": "The time-stamp when the current status was entered.",
@@ -363,11 +365,9 @@
         "talkingAvatarDurationSeconds": {
           "format": "int64",
           "description": "The duration of the talking avatar generated video.",
-          "type": "integer",
-          "readOnly": true
+          "type": "integer"
         }
-      },
-      "readOnly": true
+      }
     },
     "BatchSynthesisConfig": {
       "description": "Text-to-speech configuration for plain text input.",
@@ -411,8 +411,7 @@
           "description": "Error message",
           "type": "string"
         }
-      },
-      "readOnly": true
+      }
     },
     "BatchSynthesisInput": {
       "description": "Batch Synthesis input.",
@@ -440,8 +439,7 @@
           "description": "Job summary file path will be provided here.",
           "type": "string"
         }
-      },
-      "readOnly": true
+      }
     },
     "BatchSynthesisProperties": {
       "description": "Detailed properties of batch synthesis task.",
@@ -486,10 +484,12 @@
           "readOnly": true
         },
         "billingDetails": {
-          "$ref": "#/definitions/BatchSynthesisBillingDetails"
+          "$ref": "#/definitions/BatchSynthesisBillingDetails",
+          "readOnly": true
         },
         "error": {
-          "$ref": "#/definitions/BatchSynthesisError"
+          "$ref": "#/definitions/BatchSynthesisError",
+          "readOnly": true
         }
       }
     },
@@ -682,7 +682,8 @@
           "$ref": "#/definitions/OperationId"
         },
         "status": {
-          "$ref": "#/definitions/OperationStatus"
+          "$ref": "#/definitions/OperationStatus",
+          "readOnly": true
         }
       }
     },
@@ -698,8 +699,7 @@
       "x-ms-enum": {
         "name": "OperationStatus",
         "modelAsString": true
-      },
-      "readOnly": true
+      }
     },
     "PaginatedBatchSynthesis": {
       "description": "Paginated batch synthesis task list",
@@ -741,8 +741,7 @@
       "x-ms-enum": {
         "name": "Status",
         "modelAsString": true
-      },
-      "readOnly": true
+      }
     },
     "InputKind": {
       "description": "Input kind.",
