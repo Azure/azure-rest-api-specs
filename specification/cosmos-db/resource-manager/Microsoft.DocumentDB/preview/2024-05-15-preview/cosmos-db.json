@@ -8560,6 +8560,16 @@
           "type": "object",
           "$ref": "#/definitions/Capacity"
         },
+        "capacityMode": {
+          "description": "Indicates the capacityMode of the Cosmos DB account.",
+          "type": "string",
+          "$ref": "#/definitions/CapacityMode"
+        },
+        "capacityModeChangeTransitionState": {
+          "description": "The object that represents the migration state for the CapacityMode of the Cosmos DB account.",
+          "type": "object",
+          "$ref": "#/definitions/CapacityModeChangeTransitionState"
+        },
         "enableMaterializedViews": {
           "description": "Flag to indicate whether to enable MaterializedViews on the Cosmos DB account",
           "type": "boolean"
@@ -8739,6 +8749,11 @@
           "description": "The object that represents all properties related to capacity enforcement on an account.",
           "type": "object",
           "$ref": "#/definitions/Capacity"
+        },
+        "capacityMode": {
+          "description": "Indicates the capacityMode of the Cosmos DB account.",
+          "type": "string",
+          "$ref": "#/definitions/CapacityMode"
         },
         "enableMaterializedViews": {
           "description": "Flag to indicate whether to enable MaterializedViews on the Cosmos DB account",
@@ -8943,6 +8958,11 @@
           "description": "The object that represents all properties related to capacity enforcement on an account.",
           "type": "object",
           "$ref": "#/definitions/Capacity"
+        },
+        "capacityMode": {
+          "description": "Indicates the capacityMode of the Cosmos DB account.",
+          "type": "string",
+          "$ref": "#/definitions/CapacityMode"
         },
         "enableMaterializedViews": {
           "description": "Flag to indicate whether to enable MaterializedViews on the Cosmos DB account",
@@ -10901,6 +10921,84 @@
           "minimum": -1,
           "format": "int32",
           "description": "The total throughput limit imposed on the account. A totalThroughputLimit of 2000 imposes a strict limit of max throughput that can be provisioned on that account to be 2000. A totalThroughputLimit of -1 indicates no limits on provisioning of throughput."
+        }
+      }
+    },
+    "CapacityMode": {
+      "description": "Indicates the capacity mode of the account.",
+      "type": "string",
+      "enum": [
+        "None",
+        "Provisioned",
+        "Serverless"
+      ],
+      "x-ms-enum": {
+        "name": "CapacityMode",
+        "modelAsString": true
+      }
+    },
+    "CapacityModeChangeTransitionState": {
+      "description": "The transition state information related capacity mode change with update request.",
+      "type": "object",
+      "properties": {
+        "capacityModeTransitionStatus": {
+          "type": "string",
+          "description": "The transition status of capacity mode.",
+          "enum": [
+            "Invalid",
+            "Initialized",
+            "InProgress",
+            "Completed",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "CapacityModeTransitionStatus",
+            "modelAsString": true
+          }
+        },
+        "currentCapacityMode": {
+          "description": "Indicates the current capacity mode of the account.",
+          "type": "string",
+          "enum": [
+            "None",
+            "Provisioned",
+            "Serverless"
+          ],
+          "x-ms-enum": {
+            "name": "CapacityMode",
+            "modelAsString": true
+          }
+        },
+        "previousCapacityMode": {
+          "description": "Indicates the previous capacity mode of the account before successful transition.",
+          "type": "string",
+          "enum": [
+            "None",
+            "Provisioned",
+            "Serverless"
+          ],
+          "x-ms-enum": {
+            "name": "CapacityMode",
+            "modelAsString": true
+          }
+        },
+        "capacityModeTransitionBeginTimestamp": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Begin time in UTC of the capacity mode change."
+        },
+        "capacityModeTransitionEndTimestamp": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "End time in UTC of the capacity mode change."
+        },
+        "capacityModeLastSuccessfulTransitionEndTimestamp": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "End time in UTC of the last successful capacity mode change."
         }
       }
     },
