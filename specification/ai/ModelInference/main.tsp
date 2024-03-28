@@ -9,15 +9,8 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 
-@useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "api-key"> | OAuth2Auth<[
-    {
-      type: OAuth2FlowType.implicit,
-      authorizationUrl: "https://login.contoso.com/common/oauth2/v2.0/authorize",
-      scopes: ["https://widget.contoso.com/.default"],
-    }
-  ]>
-)
+#suppress "@azure-tools/typespec-autorest/unsupported-http-auth-scheme"
+@useAuth(BearerAuth)
 @service({
   title: "AI Model Inference",
 })

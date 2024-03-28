@@ -3,7 +3,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 
-import "../models/completions/chat_completions.tsp";
+import "../models/chat_completions.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

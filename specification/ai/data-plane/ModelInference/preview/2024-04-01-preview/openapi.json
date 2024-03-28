@@ -18,31 +18,6 @@
   "consumes": [
     "application/json"
   ],
-  "security": [
-    {
-      "ApiKeyAuth": []
-    },
-    {
-      "OAuth2Auth": [
-        "https://widget.contoso.com/.default"
-      ]
-    }
-  ],
-  "securityDefinitions": {
-    "ApiKeyAuth": {
-      "type": "apiKey",
-      "name": "api-key",
-      "in": "header"
-    },
-    "OAuth2Auth": {
-      "type": "oauth2",
-      "flow": "implicit",
-      "authorizationUrl": "https://login.contoso.com/common/oauth2/v2.0/authorize",
-      "scopes": {
-        "https://widget.contoso.com/.default": ""
-      }
-    }
-  },
   "tags": [],
   "paths": {
     "/v1/chat/completions": {
@@ -433,8 +408,9 @@
       "description": "A description of the intended purpose of a message within a chat completions interaction.",
       "enum": [
         "system",
+        "user",
         "assistant",
-        "user"
+        "tool"
       ],
       "x-ms-enum": {
         "name": "ChatRole",
@@ -446,14 +422,19 @@
             "description": "The role that instructs or sets the behavior of the assistant."
           },
           {
+            "name": "user",
+            "value": "user",
+            "description": "The role that provides input for chat completions."
+          },
+          {
             "name": "assistant",
             "value": "assistant",
             "description": "The role that provides responses to system-instructed, user-prompted input."
           },
           {
-            "name": "user",
-            "value": "user",
-            "description": "The role that provides input for chat completions."
+            "name": "tool",
+            "value": "tool",
+            "description": "The role that represents extension tool activity within a chat completions operation."
           }
         ]
       }
