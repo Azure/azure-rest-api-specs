@@ -49,6 +49,7 @@ enum Versions {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "AADToken is the correct case."
+#suppress "@azure-tools/typespec-azure-core/x-ms-enum extension" "type is correct"
 @doc("The Azure Active Directory OAuth2 Flow")
 model AADToken
   is OAuth2Auth<[

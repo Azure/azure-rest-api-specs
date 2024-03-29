@@ -692,8 +692,8 @@ model SubnetReference {
   id?: string;
 }
 
-@doc("IpConfig - Name of NIC bound to the NSG.")
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+@doc("IpConfig - Name of NIC bound to the NSG.")
 model IPConfigReference {
   @doc("ID - The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/...")
   id?: string;
