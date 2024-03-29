@@ -2,12 +2,14 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
 using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using OpenAPI;
+using Azure.ClientGenerator.Core;
 
 namespace DocumentIntelligence;
 
@@ -97,55 +99,55 @@ union DocumentBarcodeKind {
   string,
 
   @doc("QR code, as defined in ISO/IEC 18004:2015.")
-  "QRCode",
+  QRCode: "QRCode",
 
   @doc("PDF417, as defined in ISO 15438.")
-  "PDF417",
+  PDF417: "PDF417",
 
   @doc("GS1 12-digit Universal Product Code.")
-  "UPCA",
+  UPCA: "UPCA",
 
   @doc("GS1 6-digit Universal Product Code.")
-  "UPCE",
+  UPCE: "UPCE",
 
   @doc("Code 39 barcode, as defined in ISO/IEC 16388:2007.")
-  "Code39",
+  Code39: "Code39",
 
   @doc("Code 128 barcode, as defined in ISO/IEC 15417:2007.")
-  "Code128",
+  Code128: "Code128",
 
   @doc("GS1 8-digit International Article Number (European Article Number).")
-  "EAN8",
+  EAN8: "EAN8",
 
   @doc("GS1 13-digit International Article Number (European Article Number).")
-  "EAN13",
+  EAN13: "EAN13",
 
   @doc("GS1 DataBar barcode.")
-  "DataBar",
+  DataBar: "DataBar",
 
   @doc("Code 93 barcode, as defined in ANSI/AIM BC5-1995.")
-  "Code93",
+  Code93: "Code93",
 
   @doc("Codabar barcode, as defined in ANSI/AIM BC3-1995.")
-  "Codabar",
+  Codabar: "Codabar",
 
   @doc("GS1 DataBar Expanded barcode.")
-  "DataBarExpanded",
+  DataBarExpanded: "DataBarExpanded",
 
   @doc("Interleaved 2 of 5 barcode, as defined in ANSI/AIM BC2-1995.")
-  "ITF",
+  ITF: "ITF",
 
   @doc("Micro QR code, as defined in ISO/IEC 23941:2022.")
-  "MicroQRCode",
+  MicroQRCode: "MicroQRCode",
 
   @doc("Aztec code, as defined in ISO/IEC 24778:2008.")
-  "Aztec",
+  Aztec: "Aztec",
 
   @doc("Data matrix code, as defined in ISO/IEC 16022:2006.")
-  "DataMatrix",
+  DataMatrix: "DataMatrix",
 
   @doc("MaxiCode, as defined in ISO/IEC 16023:2000.")
-  "MaxiCode",
+  MaxiCode: "MaxiCode",
 }
 
 @doc("Formula kind.")
@@ -206,50 +208,50 @@ union DocumentFieldType {
   string,
 
   @doc("Plain text.")
-  "string",
+  string: "string",
 
   @doc("Date, normalized to ISO 8601 (YYYY-MM-DD) format.")
-  "date",
+  date: "date",
 
   @doc("Time, normalized to ISO 8601 (hh:mm:ss) format.")
-  "time",
+  time: "time",
 
   @doc("Phone number, normalized to E.164 (+{CountryCode}{SubscriberNumber}) format.")
-  "phoneNumber",
+  phoneNumber: "phoneNumber",
 
   @doc("Floating point number, normalized to double precision floating point.")
-  "number",
+  number: "number",
 
   @doc("Integer number, normalized to 64-bit signed integer.")
-  "integer",
+  integer: "integer",
 
   @doc("Is field selected?")
-  "selectionMark",
+  selectionMark: "selectionMark",
 
   @doc("Country/region, normalized to ISO 3166-1 alpha-3 format (ex. USA).")
-  "countryRegion",
+  countryRegion: "countryRegion",
 
   @doc("Is signature present?")
-  "signature",
+  signature: "signature",
 
   @doc("List of subfields of the same type.")
-  "array",
+  array: "array",
 
   @doc("Named list of subfields of potentially different types.")
-  "object",
+  object: "object",
 
   @doc("Currency amount with optional currency symbol and unit.")
-  "currency",
+  currency: "currency",
 
   @doc("Parsed address.")
-  "address",
+  address: "address",
 
   @doc("Boolean value, normalized to true or false.")
-  "boolean",
+  boolean: "boolean",
 
   @added(Versions.v2024_02_29_preview)
   @doc("Array of selected string values.")
-  "selectionGroup",
+  selectionGroup: "selectionGroup",
 }
 
 @doc("Presence of signature.")
@@ -366,7 +368,7 @@ model ErrorResponse {
 }
 
 @doc("The error object.")
-@projectedName("csharp", "DocumentIntelligenceError")
+@clientName("DocumentIntelligenceError", "csharp")
 model Error {
   @doc("One of a server-defined set of error codes.")
   code: string;
@@ -392,13 +394,14 @@ model InnerError {
   @doc("A human-readable representation of the error.")
   message?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "https://github.com/Azure/typespec-azure/issues/417"
   @doc("Inner error.")
-  @projectedName("csharp", "InnerErrorObject")
+  @clientName("InnerErrorObject", "csharp")
   innererror?: InnerError;
 }
 
 @doc("The error object.")
-@projectedName("csharp", "DocumentIntelligenceWarning")
+@clientName("DocumentIntelligenceWarning", "csharp")
 model Warning {
   @doc("One of a server-defined set of warning codes.")
   code: string;
@@ -934,7 +937,7 @@ model DocumentLanguage {
 }
 
 @doc("An object describing the location and semantic content of a document.")
-@projectedName("csharp", "AnalyzedDocument")
+@clientName("AnalyzedDocument", "csharp")
 model Document {
   @doc("Document type.")
   @minLength(2)
