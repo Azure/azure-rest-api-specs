@@ -731,11 +731,25 @@
         },
         "properties": {
           "description": "Resource properties.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DataCollectionEndpoint"
+          "type": "object",
+          "properties": {
+            "failoverConfiguration": {
+              "description": "Failover configuration on this endpoint. This property is READ-ONLY.",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/FailoverConfigurationSpec"
+                }
+              ]
+            },
+            "metadata": {
+              "description": "Metadata for the resource. This property is READ-ONLY.",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/Metadata"
+                }
+              ]
             }
-          ],
+          },
           "x-ms-client-flatten": true
         }
       }
