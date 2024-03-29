@@ -38,6 +38,9 @@ These settings apply only when `--tag=package-preview-2024-06` is specified on t
 ```yaml $(tag) == 'package-preview-2024-06'
 input-file:
   - Microsoft.HybridOnboarding/preview/2024-06-01-preview/openapi.json
+suppressions:
+  - code: GuidUsage
+    reason: GUIDs are used for principalId and tenantId under MSI properties.
 ```
 
 ---
