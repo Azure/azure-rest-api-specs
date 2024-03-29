@@ -15,11 +15,6 @@ using Azure.ClientGenerator.Core;
 namespace Azure.Batch;
 
 // Templates
-
-
- 
-
-
 alias NoFilter = {};
 alias MinimalMetadata = {
   @doc("Type of content")
@@ -47,7 +42,10 @@ alias Created<T> = {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use camelCase"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Operation 'Exists' should be defined using a signature from the Azure.Core namespace."
 #suppress "@azure-tools/typespec-azure-core/rpc-operation-request-body" "BatchOperation with '@get' cannot have a body."
-@clientName("Batch","java")
+@client({
+  name: "BatchClient",
+  service: Batch
+})
 interface BatchApi {
 
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
