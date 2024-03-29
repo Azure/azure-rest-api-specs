@@ -1,45 +1,42 @@
 parameters:
-  dependencies:
-    additionalDirectories: []
+  "service-dir":
+    default: "sdk/confidentialledger"
+  "dependencies":
+    "additionalDirectories": []
     default: ""
-  service-dir:
-    default: sdk/confidentialledger
 emit:
-  - D:/Go/src/github.com/Azure/autorest.go/packages/typespec-go
+  - "@azure-tools/typespec-autorest"
 options:
-  '@azure-tools/typespec-autorest':
-    azure-resource-provider-folder: ./data-plane
-    emitter-output-dir: '{project-root}/..'
-    examples-directory: '{project-root}/examples'
-    output-file: '{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/cts.json'
-  '@azure-tools/typespec-csharp':
-    clear-output-folder: true
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "./data-plane"
+    emitter-output-dir: "{project-root}/.."
+    examples-directory: "{project-root}/examples"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/cts.json"
+  "@azure-tools/typespec-python":
     flavor: azure
-    model-namespace: false
-    namespace: '{package-dir}'
-    package-dir: Azure.Security.CodeTransparency
-  '@azure-tools/typespec-go':
-    module: github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/confidentialledger/armconfidentialledger
-    module-version: 0.1.0
-  '@azure-tools/typespec-java':
-    flavor: azure
-    namespace: com.azure.security.codetransparency
-    package-dir: azure-security-codetransparency
-  '@azure-tools/typespec-python':
-    flavor: azure
+    package-dir: "azure-codetransparency"
+    package-name: "{package-dir}"
+    package-mode: "dataplane"
+    package-pprint-name: "Code Transparency Service"
     models-mode: none
-    package-dir: azure-codetransparency
-    package-mode: dataplane
-    package-name: '{package-dir}'
-    package-pprint-name: Code Transparency Service
-  '@azure-tools/typespec-ts':
+  "@azure-tools/typespec-csharp":
     flavor: azure
+    package-dir: "Azure.Security.CodeTransparency"
+    namespace: "{package-dir}"
+    clear-output-folder: true
+    model-namespace: false
+  "@azure-tools/typespec-ts":
+    flavor: azure
+    package-dir: "codetransparency-rest"
     generateMetadata: true
     generateTest: true
-    package-dir: codetransparency-rest
     packageDetails:
-      description: Code Transparency Service
-      name: '@azure-rest/codetransparency-rest'
+      name: "@azure-rest/codetransparency-rest"
+      description: "Code Transparency Service"
+  "@azure-tools/typespec-java":
+    flavor: azure
+    package-dir: "azure-security-codetransparency"
+    namespace: com.azure.security.codetransparency
 linter:
   extends:
-    - '@azure-tools/typespec-azure-core/all'
+    - "@azure-tools/typespec-azure-core/all"
