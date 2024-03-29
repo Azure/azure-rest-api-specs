@@ -178,7 +178,7 @@ interface Registrations {
   @doc("Fetch a Registration by name.")
   getRegistration is ResourceRead<Registration>;
 
-  @doc("Creates or updates a Registration.")
+  @doc("Creates or replaces a Registration.")
   createOrReplaceRegistration is ResourceCreateOrReplace<Registration>;
 
   @doc("Delete a Registration.")
