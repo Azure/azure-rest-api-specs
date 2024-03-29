@@ -816,8 +816,8 @@
         "tags": [
           "discoverSolutions"
         ],
-        "description": "Solution discovery using natural language processing.",
-        "operationId": "DiscoverySolutionNlpTenantScope_Post",
+        "description": "Search for relevant Azure diagnostics and solutions using a natural language issue summary.",
+        "operationId": "DiscoverySolutionNLPTenantScope_Post",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -857,8 +857,8 @@
         "tags": [
           "discoverSolutions"
         ],
-        "description": "Solution discovery using natural language processing.",
-        "operationId": "DiscoverySolutionNlpSubscriptionScope_Post",
+        "description": "Search for relevant Azure diagnostics and solutions using a natural language issue summary and subscription.",
+        "operationId": "DiscoverySolutionNLPSubscriptionScope_Post",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -2358,15 +2358,16 @@
       "type": "object",
       "properties": {
         "issueSummary": {
-          "description": "Describe the issue with the affected resource.",
+          "description": "Natural language description of the issue.",
+          "required": true,
           "type": "string"
         },
         "resourceId": {
-          "description": "Provide resourceId of affected resource",
+          "description": "ARM resource Id of the resource that is having the issue.",
           "type": "string"
         },
         "serviceId": {
-          "description": "Service Classification id for the resource. You can find required serviceId from Services API: https://learn.microsoft.com/rest/api/support/services/list?tabs=HTTP Service Id is the GUID which can be found under name field in Services List response",
+          "description": "ARM service Id of the service that is having the issue. For more information on service Id see https://learn.microsoft.com/rest/api/support/services/list?tabs=HTTP.",
           "type": "string"
         },
         "additionalContext": {
@@ -2376,7 +2377,7 @@
       }
     },
     "DiscoveryNlpResponse": {
-      "description": "Discovery Nlp response.",
+      "description": "Successfully fetched list of solution metadata.",
       "type": "object",
       "properties": {
         "value": {
