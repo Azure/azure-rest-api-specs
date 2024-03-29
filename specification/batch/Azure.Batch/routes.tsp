@@ -27,7 +27,7 @@ namespace Azure.Batch;
   name: "BatchClient",
   service: Azure.Batch,
 })
-interface BatchClient {
+interface Batch {
   @summary("Lists all of the applications available in the specified Account.")
   @doc("""
 This operation returns only Applications and versions that are available for
