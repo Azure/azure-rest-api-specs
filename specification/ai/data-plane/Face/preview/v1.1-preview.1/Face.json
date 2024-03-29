@@ -7370,6 +7370,24 @@
         "personIds"
       ]
     },
+    "LivenessOperationMode": {
+      "type": "string",
+      "description": "The operation mode for the liveness modal.",
+      "enum": [
+        "Passive"
+      ],
+      "x-ms-enum": {
+        "name": "LivenessOperationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Passive",
+            "value": "Passive",
+            "description": "The operation mode for the liveness modal."
+          }
+        ]
+      }
+    },
     "LivenessSession": {
       "type": "object",
       "description": "Session result of detect liveness.",
@@ -7482,7 +7500,7 @@
       "description": "Request for creating liveness session.",
       "properties": {
         "livenessOperationMode": {
-          "type": "string",
+          "$ref": "#/definitions/LivenessOperationMode",
           "description": "The operation mode for the liveness modal."
         },
         "sendResultsToClient": {
@@ -7516,7 +7534,7 @@
       "description": "Dedicated parameter model for multipart/form-data.",
       "properties": {
         "livenessOperationMode": {
-          "type": "string",
+          "$ref": "#/definitions/LivenessOperationMode",
           "description": "The operation mode for the liveness modal."
         },
         "sendResultsToClient": {

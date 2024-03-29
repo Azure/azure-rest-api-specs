@@ -8,11 +8,19 @@ using TypeSpec.Rest;
 
 namespace Face;
 
+@doc("The operation mode for the liveness modal.")
+union LivenessOperationMode {
+  string,
+
+  @doc("The operation mode for the liveness modal.")
+  "Passive",
+}
+
 #suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "Provide convenient interface for multipart/form-data in SDK"
 @doc("Request for creating liveness session.")
 model LivenessSessionCreationContent {
   @doc("The operation mode for the liveness modal.")
-  livenessOperationMode: string;
+  livenessOperationMode: LivenessOperationMode;
 
   @doc("Whether or not send back the operation response to client.")
   sendResultsToClient?: boolean;
