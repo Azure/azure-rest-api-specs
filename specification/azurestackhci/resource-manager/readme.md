@@ -96,10 +96,11 @@ suppressions:
       - common.json
       - edgeNodePool.json
       - openapi.json
+
   
- - code:  XmsPageableForListCalls
-   reason: XmsPageable not needed for GET calls
-   from:
+  - code:  XmsPageableForListCalls
+    reason: XmsPageable not needed for GET calls
+    from:
       - openapi.json
 
   - code: EvenSegmentedPathForPutOperation
