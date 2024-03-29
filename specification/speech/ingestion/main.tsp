@@ -10,8 +10,9 @@ using Azure.Core;
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
     {
-      type: OAuth2FlowType.implicit,
-      authorizationUrl: "https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize",
+      type: OAuth2FlowType.clientCredentials,
+      tokenUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+      refreshUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
       scopes: ["https://cognitiveservices.azure.com/.default"],
     }
   ]>
@@ -187,3 +188,4 @@ interface Registrations {
   @doc("List Registration resources")
   listRegistrations is ResourceList<Registration>;
 }
+
