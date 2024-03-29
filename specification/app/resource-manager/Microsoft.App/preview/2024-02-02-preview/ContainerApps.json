@@ -209,6 +209,9 @@
           "Create or Update ManagedBy App": {
             "$ref": "./examples/ContainerApps_ManagedBy_CreateOrUpdate.json"
           },
+          "Create or Update App Kind": {
+            "$ref": "./examples/ContainerApps_Kind_CreateOrUpdate.json"
+          },
           "Create or Update App On A Connected Environment": {
             "$ref": "./examples/ContainerApps_CreateOrUpdate_ConnectedEnvironment.json"
           },
@@ -694,6 +697,21 @@
             "update"
           ],
           "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource."
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "workflowapp"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-enum": {
+            "name": "kind",
+            "modelAsString": true
+          },
+          "description": "Metadata used to render different experiences for resources of the same type; e.g. WorkflowApp is a kind of Microsoft.App/ContainerApps type. If supported, the resource provider must validate and persist this value."
         },
         "properties": {
           "description": "ContainerApp resource specific properties",
