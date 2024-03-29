@@ -19,8 +19,7 @@ input-file:
         $content += "`n  - $baseDir/$specFile"
     }
 
-    $content += "`n```````n"
-
+    $content += "`n" + '```' + "`n"
     return $content
 }
 
