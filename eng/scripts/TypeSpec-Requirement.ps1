@@ -1,66 +1,189 @@
 [CmdletBinding()]
 param (
+  [Parameter(Position = 0)]
+  [string] $BaseCommitish = "HEAD^",
+  [Parameter(Position = 1)]
+  [string] $TargetCommitish = "HEAD",
+  [Parameter(Position = 2)]
+  [string] $SpecType = "data-plane|resource-manager"
 )
 Set-StrictMode -Version 3
+
+Install-Module -Name powershell-yaml -RequiredVersion 0.4.7 -Force -Scope CurrentUser
 
 . $PSScriptRoot/ChangedFiles-Functions.ps1
 . $PSScriptRoot/Logging-Functions.ps1
 
+function Find-Suppressions-Yaml {
+  param (
+    [string]$fileInSpecFolder
+  )
+
+  $currentDirectory = Get-Item (Split-Path -Path $fileInSpecFolder)
+
+  while ($currentDirectory) {
+    $suppressionsFile = Join-Path -Path $currentDirectory.FullName -ChildPath "suppressions.yaml"
+
+    if (Test-Path $suppressionsFile) {
+      return $suppressionsFile
+    } else {
+      $currentDirectory = $currentDirectory.Parent
+    }
+  }
+
+  return $null
+}
+
+function Get-Suppression {
+  param (
+    [string]$fileInSpecFolder
+  )
+
+  $suppressionsFile = Find-Suppressions-Yaml $fileInSpecFolder
+  if ($suppressionsFile) {
+    $suppressions = Get-Content -Path $suppressionsFile -Raw | ConvertFrom-Yaml
+    foreach ($suppression in $suppressions) {
+      $tool = $suppression["tool"]
+      $path = $suppression["path"]
+
+      if ($tool -eq "TypeSpecRequirement") {
+        # Paths in suppressions.yml are relative to the file itself
+        $fullPath = Join-Path -Path (Split-Path -Path $suppressionsFile) -ChildPath $path
+
+        # If path is not specified, suppression applies to all files
+        if (!$path -or ($fileInSpecFolder -like $fullPath)) {
+          return $suppression
+        }
+      }
+    }
+  }
+
+  return $null
+}
+
 $repoPath = Resolve-Path "$PSScriptRoot/../.."
 $pathsWithErrors = @()
 
-$filesToCheck = @(Get-ChangedSwaggerFiles).Where({
+$filesToCheck = (Get-ChangedSwaggerFiles (Get-ChangedFiles $BaseCommitish $TargetCommitish)).Where({
   ($_ -notmatch "/(examples|scenarios|restler|common|common-types)/") -and
-  ($_ -match "specification/(?<relSpecPath>[^/]+/(data-plane|resource-manager).*?/(preview|stable)/([^/]+))/[^/]+\.json$")
+  ($_ -match "specification/[^/]+/($SpecType).*?/(preview|stable)/[^/]+/[^/]+\.json$")
 })
 
 if (!$filesToCheck) {
   LogInfo "No OpenAPI files found to check"
 }
 else {
-  # Example: specification/foo/resource-manager/Microsoft.Foo/stable/2023-01-01/Foo.json
+  # Cache responses to GitHub web requests, for efficiency and to prevent rate limiting
+  $responseCache = @{}
+
   # - Forward slashes on both Linux and Windows
+  # - May be nested 4 or 5 levels deep, perhaps even deeper
+  # - Examples
+  #   - specification/foo/data-plane/Foo/stable/2023-01-01/Foo.json
+  #   - specification/foo/data-plane/Foo/bar/stable/2023-01-01/Foo.json
+  #   - specification/foo/resource-manager/Microsoft.Foo/stable/2023-01-01/Foo.json
+  # - Doc: https://github.com/Azure/azure-rest-api-specs/blob/main/README.md#directory-structure
   foreach ($file in $filesToCheck) {
     LogInfo "Checking $file"
 
-    $jsonContent = Get-Content (Join-Path $repoPath $file) | ConvertFrom-Json -AsHashtable
+    $fullPath = (Join-Path $repoPath $file)
 
-    if ($null -ne ${jsonContent}?["info"]?["x-typespec-generated"]) {
-      LogInfo "  OpenAPI was generated from TypeSpec (contains '/info/x-typespec-generated')"
+    $suppression = Get-Suppression $fullPath
+    if ($suppression) {
+      $reason = $suppression["reason"] ?? "<no reason specified>"
 
-      # ToDo: Verify spec folder includes *.tsp and tspconfig.yaml, to prevent spec authors committing
-      # openapi generated from TypeSpec, without also including the TypeSpec sources.
-
-      # Skip further checks, since spec is already using TypeSpec
+      LogInfo "  Suppressed: $reason"
+      # Skip further checks, to avoid potential errors on files already suppressed
       continue
     }
-    else {
-      LogInfo "  OpenAPI was not generated from TypeSpec (missing '/info/x-typespec-generated')"
-    }
-
-    # Example: specification/foo/resource-manager/Microsoft.Foo
-    $pathToServiceName = ($file -split '/')[0..3] -join '/'
-
-    # ToDo: Fetch main and query local git repo to prevent issues with rate limiting
-    $urlToStableFolder = "https://github.com/Azure/azure-rest-api-specs/tree/main/$pathToServiceName/stable"
 
     try {
-      $response = Invoke-WebRequest -Uri $urlToStableFolder -Method Head -SkipHttpErrorCheck
-      if ($response.StatusCode -eq 200) {
-        LogInfo "  Branch 'main' contains path '$pathToServiceName/stable', so spec already exists and is not required to use TypeSpec"
-      }
-      elseif ($response.StatusCode -eq 404) {
-        LogInfo "  Branch 'main' does not contain path '$pathToServiceName/stable', so spec is new and must use TypeSpec"
-        $pathsWithErrors += $file
+      $jsonContent = Get-Content $fullPath | ConvertFrom-Json -AsHashtable
+    }
+    catch {
+      LogWarning "  OpenAPI cannot be parsed as JSON, so assuming not generated from TypeSpec"
+      LogWarning "    $_"
+    }
+
+    if ($jsonContent) {
+      if ($null -ne ${jsonContent}?["info"]?["x-typespec-generated"]) {
+        LogInfo "  OpenAPI was generated from TypeSpec (contains '/info/x-typespec-generated')"
+
+        if ($file -match "specification/(?<rpFolder>[^/]+)/") {
+          $rpFolder = $Matches["rpFolder"];
+          $tspConfigs = @(Get-ChildItem -Path (Join-Path $repoPath "specification" $rpFolder) -Recurse -File
+            | Where-Object { $_.Name -eq "tspconfig.yaml" })
+
+          if ($tspConfigs) {
+            LogInfo "  Folder 'specification/$rpFolder' contains $($tspConfigs.Count) file(s) named 'tspconfig.yaml'"
+          }
+          else {
+            LogError ("OpenAPI was generated from TypeSpec, but folder 'specification/$rpFolder' contains no files named 'tspconfig.yaml'." `
+              + "  The TypeSpec used to generate OpenAPI must be added to this folder.")
+            LogJobFailure
+            exit 1
+          }
+        }
+        else {
+          LogError "Path to OpenAPI did not match expected regex.  Unable to extract RP folder."
+          LogJobFailure
+          exit 1
+        }
+
+        # Skip further checks, since spec is already using TypeSpec
+        continue
       }
       else {
-        LogError "Unexpected response from ${urlToStableFolder}: ${response.StatusCode}"
+        LogInfo "  OpenAPI was not generated from TypeSpec (missing '/info/x-typespec-generated')"
+      }
+    }
+
+    # Extract path between "specification/" and "/(preview|stable)"
+    if ($file -match "specification/(?<servicePath>[^/]+/($SpecType).*?)/(preview|stable)/[^/]+/[^/]+\.json$") {
+      $servicePath = $Matches["servicePath"]
+    }
+    else {
+      LogError "Path to OpenAPI did not match expected regex.  Unable to extract service path."
+      LogJobFailure
+      exit 1
+    }
+
+    $urlToStableFolder = "https://github.com/Azure/azure-rest-api-specs/tree/main/specification/$servicePath/stable"
+
+    # Avoid conflict with pipeline secret
+    $logUrlToStableFolder = $urlToStableFolder -replace '^https://',''
+
+    LogInfo "  Checking $logUrlToStableFolder"
+
+    $responseStatus = $responseCache[$urlToStableFolder];
+    if ($null -ne $responseStatus) {
+      LogInfo "    Found in cache"
+    }
+    else {
+      LogInfo "    Not found in cache, making web request"
+      try {
+        $response = Invoke-WebRequest -Uri $urlToStableFolder -Method Head -SkipHttpErrorCheck
+        $responseStatus = $response.StatusCode
+        $responseCache[$urlToStableFolder] = $responseStatus
+      }
+      catch {
+        LogError "Exception making web request to ${logUrlToStableFolder}: $_"
         LogJobFailure
         exit 1
       }
     }
-    catch {
-      LogError "  Exception making web request to ${urlToStableFolder}: $_"
+
+    LogInfo "    Status: $responseStatus"
+
+    if ($responseStatus -eq 200) {
+      LogInfo "  Branch 'main' contains path '$servicePath/stable', so spec already exists and is not required to use TypeSpec"
+    }
+    elseif ($response.StatusCode -eq 404) {
+      LogInfo "  Branch 'main' does not contain path '$servicePath/stable', so spec is new and must use TypeSpec"
+      $pathsWithErrors += $file
+    }
+    else {
+      LogError "Unexpected response from ${logUrlToStableFolder}: ${response.StatusCode}"
       LogJobFailure
       exit 1
     }

@@ -1,72 +1,74 @@
-import "@typespec/rest";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./catalog.tsp";
 
-using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureSphere;
-
-//Products
-@doc("An product resource belonging to a catalog resource.")
+/**
+ * An product resource belonging to a catalog resource.
+ */
 @parentResource(Catalog)
 model Product is ProxyResource<ProductProperties> {
-  @doc("Name of product.")
+  /**
+   * Name of product.
+   */
   @pattern("^[\\w][\\w\\s]{1,48}[\\w]$|^\\.default$|^\\.unassigned$")
-  @key("productName")
   @path
+  @key("productName")
   @segment("products")
+  @visibility("read")
   name: string;
 }
 
-interface ProxyResourceOperationsProducts<
-  TResource extends ArmResource,
-  TListParameters extends {} = {}
->
-  extends ResourceListByParent<
-      TResource,
-      TListParameters & BaseParameters<TResource>
-    > {
-  @doc("Get a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
-  get is ArmResourceRead<Product>;
-  @doc("Create a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Product>;
-  @doc("Delete a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name'")
-  delete is ArmResourceDeleteAsync<Product>;
-  @doc("Update a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
-  update is ArmResourcePatchAsync<Product, ProductProperties>;
-}
-
 @armResourceOperations
-interface Products extends ProxyResourceOperationsProducts<Product> {
-  @autoRoute
-  @doc("Generates default device groups for the product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
-  @armResourceAction(Product)
-  @post
-  generateDefaultDeviceGroups(
-    ...ResourceInstanceParameters<Product>,
-  ): ArmResponse<ResourceListResult<DeviceGroup>> | ErrorResponse;
+interface Products {
+  /**
+   * Get a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
+   */
+  get is ArmResourceRead<Product>;
 
-  @autoRoute
-  @doc("Counts devices in product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
-  @armResourceAction(Product)
-  @post
-  countDevices(
-    ...ResourceInstanceParameters<Product>,
-  ): ArmResponse<CountDeviceResponse> | ErrorResponse;
-}
+  /**
+   * Create a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Product>;
 
-@doc("The properties of product")
-model ProductProperties {
-  @doc("Description of the product")
-  description: string;
+  /**
+   * Update a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
+   */
+  @parameterVisibility("read")
+  update is ArmCustomPatchAsync<Product, ProductUpdate>;
 
-  @visibility("read")
-  @doc("The status of the last operation.")
-  provisioningState?: ProvisioningState;
+  /**
+   * Delete a Product. '.default' and '.unassigned' are system defined values and cannot be used for product name'
+   */
+  #suppress "deprecated" "For backward compatible"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatible"
+  delete is ArmResourceDeleteAsync<Product>;
+
+  /**
+   * List Product resources by Catalog
+   */
+  listByCatalog is ArmResourceListByParent<Product>;
+
+  /**
+   * Counts devices in product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
+   */
+  countDevices is ArmResourceActionSync<Product, void, CountDevicesResponse>;
+
+  /**
+   * Generates default device groups for the product. '.default' and '.unassigned' are system defined values and cannot be used for product name.
+   */
+  generateDefaultDeviceGroups is ArmResourceActionSync<
+    Product,
+    void,
+    ResourceListResult<DeviceGroup>
+  >;
 }

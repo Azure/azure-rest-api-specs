@@ -22,6 +22,7 @@ default-api-version: "2023-11-01"
 clear-output-folder: true
 batch:
   - tag: package-2023-11
+  - tag: package-2023-09
   - tag: package-2023-06
   - tag: package-2023-05
   - tag: package-2023-04
