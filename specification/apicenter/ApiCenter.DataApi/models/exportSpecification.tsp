@@ -1,11 +1,11 @@
-namespace ApiCenter.DataApi.Models;
+namespace ApiCenter.DataApi;
 
 using TypeSpec.Rest;
 
-@doc("Export specification resource model.")
+@doc("Export specification result model.")
 @resource("definitions")
 @parentResource(ApiVersion)
-model ExportSpecification {
+model ApiSpecExportResult {
   @doc("API definition identifier.")
   @key("definitionName")
   @visibility("query")
@@ -14,12 +14,12 @@ model ExportSpecification {
   @doc("The result of the specification export.")
   value: string;
 
-  @doc("The result format of the specification export.")
-  format: SpecFormat;
+  @doc("The format of the specification export result.")
+  format: ApiSpecExportResultFormat;
 }
 
-@doc("Export specification format")
-enum SpecFormat {
+@doc("Export specification result format")
+enum ApiSpecExportResultFormat {
   @doc("Link format")
   Link: "link",
 }

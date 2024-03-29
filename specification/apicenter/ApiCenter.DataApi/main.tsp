@@ -9,6 +9,7 @@ import "./resources/ApiDefinition.tsp";
 import "./resources/Deployment.tsp";
 import "./resources/Environment.tsp";
 import "./resources/ApiVersion.tsp";
+import "./resources/Workspace.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;

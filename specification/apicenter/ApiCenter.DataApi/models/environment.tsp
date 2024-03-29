@@ -1,11 +1,17 @@
 import "./workspace.tsp";
 
-namespace ApiCenter.DataApi.Models;
+namespace ApiCenter.DataApi;
 
 using TypeSpec.Rest;
 
+@doc("Paged collection of Environment items across workspaces")
+model PagedEnvironmentAll {
+  ...Azure.Core.Page<Environment>;
+}
+
 @doc("Environment resource model.")
 @resource("environments")
+@parentResource(Workspace)
 model Environment {
   @doc("Environment identifier.")
   @key("environmentName")
@@ -33,10 +39,6 @@ model Environment {
   @doc("The custom metadata defined for environment entities.")
   customProperties?: {};
 }
-
-@doc("Environment resource model (with full workspace route).")
-@parentResource(Workspace)
-model EnvironmentInWorkspace is Environment;
 
 @doc("Environment Server")
 model EnvironmentServer {

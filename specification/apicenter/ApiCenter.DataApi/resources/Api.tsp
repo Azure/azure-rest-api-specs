@@ -10,24 +10,26 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
-using ApiCenter.DataApi.Models;
+using ApiCenter.DataApi;
 
 @versioned(ApiCenter.DataApi.Versions)
 namespace ApiCenter.DataApi;
 
 interface Apis {
-  @doc("List a collection of all APIs.")
+  @doc("List a collection of APIs.")
   list is Operations.ResourceList<
     Api,
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
-  @doc("List a collection of APIs in a workspace.")
-  listByWorkspace is Operations.ResourceList<
-    ApiInWorkspace,
-    ListQueryParametersTrait<StandardListQueryParameters>
+  @doc("List a collection of APIs across workspaces.")
+  @route("/apis")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Cannot model with standard operations"
+  listAll is Azure.Core.Foundations.Operation<
+    StandardListQueryParameters,
+    PagedApiAll
   >;
 
   @doc("Get an API.")
-  get is Operations.ResourceRead<ApiInWorkspace>;
+  get is Operations.ResourceRead<Api>;
 }

@@ -8,7 +8,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
-using ApiCenter.DataApi.Models;
+using ApiCenter.DataApi;
 
 @versioned(ApiCenter.DataApi.Versions)
 namespace ApiCenter.DataApi;
@@ -24,13 +24,13 @@ interface ApiDefinitions {
   getDefinition is Operations.ResourceRead<ApiDefinition>;
 
   @doc("Gets status of a an API specification export operation.")
-  getExportSpecificationOperationStatus is Operations.GetResourceOperationStatus<ExportSpecification>;
+  getExportSpecificationOperationStatus is Operations.GetResourceOperationStatus<ApiSpecExportResult>;
 
   @doc("Export an API specification asynchronously.")
   @pollingOperation(ApiDefinitions.getExportSpecificationOperationStatus)
   exportSpecification is Operations.LongRunningResourceAction<
-    ExportSpecification,
+    ApiSpecExportResult,
     {},
-    ExportSpecification
+    ApiSpecExportResult
   >;
 }

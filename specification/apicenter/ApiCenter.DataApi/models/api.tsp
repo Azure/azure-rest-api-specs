@@ -1,10 +1,16 @@
 import "./workspace.tsp";
 
-namespace ApiCenter.DataApi.Models;
+namespace ApiCenter.DataApi;
 
 using TypeSpec.Rest;
 
+@doc("Paged collection of API items across workspaces.")
+model PagedApiAll {
+  ...Azure.Core.Page<Api>;
+}
+
 @doc("API resource model.")
+@parentResource(Workspace)
 @resource("apis")
 model Api {
   @doc("Api identifier.")
@@ -30,16 +36,16 @@ model Api {
 
   @doc("Current lifecycle stage of the API.")
   @visibility("read")
-  lifecycleStage?: ApiLifecycleStage;
+  lifecycleStage?: LifecycleStage;
 
   @doc("Terms of service for the API.")
-  termsOfService?: ApiTermsOfService;
+  termsOfService?: TermsOfService;
 
   @doc("The license information for the API.")
-  license?: ApiLicenseModel;
+  license?: License;
 
   @doc("External documentation")
-  externalDocumentation?: ApiExternalDocumentation[];
+  externalDocumentation?: ExternalDocumentation[];
 
   @doc("Points of contact for the API.")
   contacts?: Array<Contact>;
@@ -52,12 +58,8 @@ model Api {
   lastUpdated?: utcDateTime;
 }
 
-@doc("API resource model (with full workspace route).")
-@parentResource(Workspace)
-model ApiInWorkspace is Api;
-
 @doc("Api External Documentation Model")
-model ApiExternalDocumentation {
+model ExternalDocumentation {
   @doc("Title of the documentation.")
   @maxLength(50)
   title: string;
@@ -92,7 +94,7 @@ enum ApiKind {
 }
 
 @doc("API Lifecycle Stage")
-enum ApiLifecycleStage {
+enum LifecycleStage {
   @doc("API is in the design stage")
   Design: "design",
 
@@ -130,13 +132,13 @@ model Contact {
 }
 
 @doc("API Terms of Service")
-model ApiTermsOfService {
+model TermsOfService {
   @doc("URL pointing to the terms of service.")
   url: url;
 }
 
 @doc("API License Model")
-model ApiLicenseModel {
+model License {
   @doc("Name of the license.")
   @maxLength(50)
   name: string;

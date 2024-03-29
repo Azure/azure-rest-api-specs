@@ -1,4 +1,4 @@
-namespace ApiCenter.DataApi.Models;
+namespace ApiCenter.DataApi;
 
 using TypeSpec.Rest;
 
