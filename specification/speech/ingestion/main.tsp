@@ -39,20 +39,20 @@ model Registration {
   name: string;
 
   @doc("Storage configuration.")
-  storageModel: StorageModel;
+  storage: StorageModel;
 
   @doc("Processing configuration.")
-  processingModel: ProcessingModel;
+  processing: ProcessingModel;
 
   @doc("Batch transcription configuration.")
-  batchTranscriptionModel: BatchTranscriptionPropertiesModel;
+  batchTranscription: BatchTranscriptionPropertiesModel;
 
   @doc("Analytics configuration.")
-  analyticsModel?: AnalyticsModel;
+  analytics?: AnalyticsModel;
 
   @doc("Status of the registration.")
   @visibility("read")
-  statusModel: StatusModel;
+  status: StatusModel;
 }
 
 @doc("Storage model")
