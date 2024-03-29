@@ -729,11 +729,14 @@
         "kind": {
           "description": "The kind of the resource.",
           "enum": [
-            "Linux",
-            "Windows"
+            "SystemManaged"
           ],
           "type": "string",
-          "example": "Linux"
+          "example": "SystemManaged",
+          "x-ms-enum": {
+            "name": "KnownDataCollectionEndpointResourceUpdateKind",
+            "modelAsString": true
+          }
         },
         "properties": {
           "description": "Resource properties.",
