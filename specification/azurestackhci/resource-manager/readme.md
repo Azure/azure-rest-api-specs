@@ -63,6 +63,7 @@ directive:
       - jobs.json
       - hciCommon.json
       - edgeNodePool.json
+      - openapi.json
 
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 suppressions:
@@ -94,6 +95,13 @@ suppressions:
       - jobs.json
       - common.json
       - edgeNodePool.json
+      - openapi.json
+
+  - code: EvenSegmentedPathForPutOperation
+    reason: resourceUri in virtualmachineinstances is the parent resource. It consists of an even number of segmented paths. 
+    from: 
+        - openapi.json
+        - virtualmachineinstances.json
 
   - code: ResourceNameRestriction
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
@@ -102,6 +110,7 @@ suppressions:
       - jobs.json
       - clusters.json
       - securitySettings.json
+      - openapi.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings/{deploymentSettingsName}"]
@@ -121,6 +130,7 @@ suppressions:
     from:
       - clusters.json
 
+
   - code: DeleteResponseCodes
     reason: already used in GA api version, fixing it will cause breaking change
     from:
@@ -131,12 +141,14 @@ suppressions:
     from:
       - edgeDevices.json
       - jobs.json
+      - openapi.json
       
   - code: DefinitionsPropertiesNamesCamelCase
     reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility
     from:
       - deploymentSettings.json
       - jobs.json
+      - openapi.json
     where:
       - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_Cluster
       - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_SMB
