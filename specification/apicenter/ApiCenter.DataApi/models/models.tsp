@@ -15,7 +15,6 @@ using ApiCenter.DataApi.Models;
 @doc("Data API introduces endpoints to manage your API Center resources.")
 namespace ApiCenter.DataApi;
 
-
 alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
   NoClientRequestId;

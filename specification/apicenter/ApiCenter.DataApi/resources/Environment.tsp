@@ -12,7 +12,6 @@ using ApiCenter.DataApi.Models;
 @versioned(ApiCenter.DataApi.Versions)
 namespace ApiCenter.DataApi;
 
-
 interface Environments {
   @doc("List a collection of all environments.")
   list is Operations.ResourceList<

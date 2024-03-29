@@ -12,10 +12,8 @@ using Azure.Core;
 using Azure.Core.Traits;
 using ApiCenter.DataApi.Models;
 
-
 @versioned(ApiCenter.DataApi.Versions)
 namespace ApiCenter.DataApi;
-
 
 interface Apis {
   @doc("List a collection of all APIs.")
