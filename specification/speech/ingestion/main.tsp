@@ -135,7 +135,7 @@ model DiarizationPropertiesModel {
 
 @doc("DiarizationSpeakersProperties model")
 model DiarizationSpeakersPropertiesModel {
-  @doc("Minumum count of speakers")
+  @doc("Minimum count of speakers")
   minCount?: int8;
   @doc("Maximum count of speakers")
   maxCount?: int8;
