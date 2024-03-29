@@ -2413,19 +2413,19 @@
       "type": "object",
       "properties": {
         "problemTitle": {
-          "description": "Title for given ProblemClassificationId",
+          "description": "Title of the problem classification.",
           "type": "string"
         },
         "problemDescription": {
-          "description": "Description for given ProblemClassificationId",
+          "description": "Description of the problem classification.",
           "type": "string"
         },
         "serviceId": {
-          "description": "Service resource id that is having the problem",
+          "description": "Id of the service (https://learn.microsoft.com/en-us/rest/api/support/services?view=rest-support-2020-04-01) that may be used to create a support ticket.",
           "type": "string"
         },
         "problemClassificationId": {
-          "description": "Problem Classification Id that is having the issue",
+          "description": "Id of the ProblemClassification (https://learn.microsoft.com/en-us/rest/api/support/problem-classifications?view=rest-support-2020-04-01) that may be used to create a support ticket.",
           "type": "string"
         },
         "solutions": {
@@ -2437,7 +2437,7 @@
           "x-ms-identifiers": []
         },
         "relatedServices": {
-          "description": "The list of solution metadata.",
+          "description": "The set of services that are most likely related to the request. If relatedServices is included in the response then solutions may not be discovered until the client calls a second time specifying one of the service Ids in the relatedServices object.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ClassificationService"
