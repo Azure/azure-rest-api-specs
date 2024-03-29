@@ -21,6 +21,7 @@ namespace Microsoft.AzureStackHCI;
 model HybridIdentityMetadata
   is ProxyResource<HybridIdentityMetadataProperties> {
   @doc("Name of the hybrididentitymetadata")
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   @key("hybridIdentityMetadatum")
   @segment("hybridIdentityMetadata")
   @visibility("read")

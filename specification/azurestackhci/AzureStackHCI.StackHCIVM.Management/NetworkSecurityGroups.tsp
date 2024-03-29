@@ -16,6 +16,7 @@ namespace Microsoft.AzureStackHCI;
 @includeInapplicableMetadataInPayload(false)
 model NetworkSecurityGroup is TrackedResource<NetworkSecurityGroupProperties> {
   @doc("Name of the network security group")
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   @path
   @key("networkSecurityGroupName")
   @segment("networkSecurityGroups")

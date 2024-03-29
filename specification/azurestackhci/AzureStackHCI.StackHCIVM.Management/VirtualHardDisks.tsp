@@ -17,6 +17,7 @@ namespace Microsoft.AzureStackHCI;
 @includeInapplicableMetadataInPayload(false)
 model VirtualHardDisk is TrackedResource<VirtualHardDiskProperties> {
   @doc("Name of the virtual hard disk")
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   @path
   @key("virtualHardDiskName")
   @segment("virtualHardDisks")

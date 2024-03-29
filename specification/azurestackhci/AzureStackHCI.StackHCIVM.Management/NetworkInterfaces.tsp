@@ -17,6 +17,7 @@ namespace Microsoft.AzureStackHCI;
 @includeInapplicableMetadataInPayload(false)
 model NetworkInterface is TrackedResource<NetworkInterfaceProperties> {
   @doc("Name of the network interface")
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   @path
   @key("networkInterfaceName")
   @segment("networkInterfaces")

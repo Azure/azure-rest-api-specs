@@ -17,6 +17,7 @@ namespace Microsoft.AzureStackHCI;
 @parentResource(NetworkSecurityGroup)
 model SecurityRule is ProxyResource<SecurityRuleProperties> {
   @doc("Name of the security rule.")
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   @path
   @key("securityRuleName")
   @segment("securityRules")

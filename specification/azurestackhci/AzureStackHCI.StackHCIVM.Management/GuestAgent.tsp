@@ -19,6 +19,7 @@ namespace Microsoft.AzureStackHCI;
 @includeInapplicableMetadataInPayload(false)
 model GuestAgent is ProxyResource<GuestAgentProperties> {
   @doc("guestAgent name")
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   @key("guestAgent")
   @segment("guestAgents")
   @visibility("read")

@@ -18,6 +18,7 @@ namespace Microsoft.AzureStackHCI;
 model VirtualMachineInstance
   is ExtensionResource<VirtualMachineInstanceProperties> {
   @doc("name of virtual machine")
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   @key("virtualMachineInstance")
   @segment("virtualMachineInstances")
   @visibility("read")
