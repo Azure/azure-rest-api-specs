@@ -133,31 +133,32 @@ model ReturnRecognitionModelOptions {
   returnRecognitionModel?: boolean = false;
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Use fixed enum to represent modelAsString = false"
 @doc("The status of long running operation.")
 @lroStatus
-union FaceOperationState {
-  string,
-
+@clientName("FaceOperationState")
+@fixed
+enum OperationState {
   @doc("The operation is not started.")
-  "notStarted",
+  notStarted,
 
   @doc("The operation is still running.")
-  "running",
+  running,
 
   @doc("The operation is succeeded.")
   @lroSucceeded
-  "succeeded",
+  succeeded,
 
   @doc("The operation is failed.")
   @lroFailed
-  "failed",
+  failed,
 }
 
 @doc("Training status of a container")
 @clientName("FaceCollectionTrainingStatus")
 model TrainingStatus {
   @doc("Training status of the container.")
-  status: FaceOperationState;
+  status: OperationState;
 
   @doc("A combined UTC date and time string that describes the created time of the person group, large person group or large face list.")
   createdDateTime: utcDateTime;

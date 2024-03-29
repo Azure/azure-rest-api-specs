@@ -5968,7 +5968,7 @@
       ],
       "x-ms-enum": {
         "name": "AccessoryType",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "headwear",
@@ -6072,7 +6072,7 @@
       ],
       "x-ms-enum": {
         "name": "BlurLevel",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "low",
@@ -6189,7 +6189,7 @@
       ],
       "x-ms-enum": {
         "name": "ExposureLevel",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "underExposure",
@@ -6621,42 +6621,6 @@
         "faceListId"
       ]
     },
-    "FaceOperationState": {
-      "type": "string",
-      "description": "The status of long running operation.",
-      "enum": [
-        "notStarted",
-        "running",
-        "succeeded",
-        "failed"
-      ],
-      "x-ms-enum": {
-        "name": "FaceOperationState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "notStarted",
-            "value": "notStarted",
-            "description": "The operation is not started."
-          },
-          {
-            "name": "running",
-            "value": "running",
-            "description": "The operation is still running."
-          },
-          {
-            "name": "succeeded",
-            "value": "succeeded",
-            "description": "The operation is succeeded."
-          },
-          {
-            "name": "failed",
-            "value": "failed",
-            "description": "The operation is failed."
-          }
-        ]
-      }
-    },
     "FaceOperationStatus": {
       "type": "object",
       "description": "Long running operation resource for person directory.",
@@ -6667,7 +6631,7 @@
           "readOnly": true
         },
         "status": {
-          "$ref": "#/definitions/FaceOperationState",
+          "$ref": "#/definitions/OperationState",
           "description": "Current status of the operation."
         },
         "createdDateTime": {
@@ -6844,7 +6808,7 @@
       ],
       "x-ms-enum": {
         "name": "GlassesType",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "noGlasses",
@@ -6933,7 +6897,7 @@
       ],
       "x-ms-enum": {
         "name": "HairColorType",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "unknownHairColor",
@@ -7732,7 +7696,7 @@
       ],
       "x-ms-enum": {
         "name": "MaskType",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "faceMask",
@@ -7767,7 +7731,7 @@
       ],
       "x-ms-enum": {
         "name": "NoiseLevel",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "low",
@@ -7830,6 +7794,42 @@
         "eyeOccluded",
         "mouthOccluded"
       ]
+    },
+    "OperationState": {
+      "type": "string",
+      "description": "The status of long running operation.",
+      "enum": [
+        "notStarted",
+        "running",
+        "succeeded",
+        "failed"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "notStarted",
+            "value": "notStarted",
+            "description": "The operation is not started."
+          },
+          {
+            "name": "running",
+            "value": "running",
+            "description": "The operation is still running."
+          },
+          {
+            "name": "succeeded",
+            "value": "succeeded",
+            "description": "The operation is succeeded."
+          },
+          {
+            "name": "failed",
+            "value": "failed",
+            "description": "The operation is failed."
+          }
+        ]
+      }
     },
     "PersonDirectoryFace": {
       "type": "object",
@@ -8024,7 +8024,7 @@
       ],
       "x-ms-enum": {
         "name": "QualityForRecognition",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "low",
@@ -8143,7 +8143,7 @@
       "description": "Training status of a container",
       "properties": {
         "status": {
-          "$ref": "#/definitions/FaceOperationState",
+          "$ref": "#/definitions/OperationState",
           "description": "Training status of the container."
         },
         "createdDateTime": {

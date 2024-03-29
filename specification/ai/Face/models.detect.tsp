@@ -230,21 +230,21 @@ model FacialHair {
   sideburns: float32;
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Use fixed enum to represent modelAsString = false"
 @doc("Glasses type of the face.")
-union GlassesType {
-  string,
-
+@fixed
+enum GlassesType {
   @doc("No glasses on the face.")
-  "noGlasses",
+  noGlasses,
 
   @doc("Normal glasses on the face.")
-  "readingGlasses",
+  readingGlasses,
 
   @doc("Sunglasses on the face.")
-  "sunglasses",
+  sunglasses,
 
   @doc("Swimming goggles on the face.")
-  "swimmingGoggles",
+  swimmingGoggles,
 }
 
 @doc("3-D roll/yaw/pitch angles for face direction.")
@@ -284,33 +284,33 @@ model HairColor {
   confidence: float32;
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Use fixed enum to represent modelAsString = false"
 @doc("Name of the hair color.")
-union HairColorType {
-  string,
-
+@fixed
+enum HairColorType {
   @doc("Unknown")
   unknownHairColor: "unknown",
 
   @doc("White")
-  "white",
+  white,
 
   @doc("Gray")
-  "gray",
+  gray,
 
   @doc("Blond")
-  "blond",
+  blond,
 
   @doc("Brown")
-  "brown",
+  brown,
 
   @doc("Red")
-  "red",
+  red,
 
   @doc("Black")
-  "black",
+  black,
 
   @doc("Other")
-  "other",
+  other,
 }
 
 @doc("Properties describing occlusions on a given face.")
@@ -336,18 +336,18 @@ model AccessoryItem {
   confidence: float32;
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Use fixed enum to represent modelAsString = false"
 @doc("Type of the accessory.")
-union AccessoryType {
-  string,
-
+@fixed
+enum AccessoryType {
   @doc("Head wear")
-  "headwear",
+  headwear,
 
   @doc("Glasses")
-  "glasses",
+  glasses,
 
   @doc("Mask")
-  "mask",
+  mask,
 }
 
 @doc("Properties describing any presence of blur within the image.")
@@ -361,18 +361,18 @@ model BlurProperties {
   value: float32;
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Use fixed enum to represent modelAsString = false"
 @doc("Indicates level of blurriness.")
-union BlurLevel {
-  string,
-
+@fixed
+enum BlurLevel {
   @doc("Low blur level.")
-  "low",
+  low,
 
   @doc("Medium blur level.")
-  "medium",
+  medium,
 
   @doc("High blur level.")
-  "high",
+  high,
 }
 
 @doc("Properties describing exposure level of the image.")
@@ -386,18 +386,18 @@ model ExposureProperties {
   value: float32;
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Use fixed enum to represent modelAsString = false"
 @doc("Indicates level of exposure.")
-union ExposureLevel {
-  string,
-
+@fixed
+enum ExposureLevel {
   @doc("Low exposure level.")
-  "underExposure",
+  underExposure,
 
   @doc("Good exposure level.")
-  "goodExposure",
+  goodExposure,
 
   @doc("High exposure level.")
-  "overExposure",
+  overExposure,
 }
 
 @doc("Properties describing noise level of the image.")
@@ -411,18 +411,18 @@ model NoiseProperties {
   value: float32;
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Use fixed enum to represent modelAsString = false"
 @doc("Indicates level of noise.")
-union NoiseLevel {
-  string,
-
+@fixed
+enum NoiseLevel {
   @doc("Low noise level.")
-  "low",
+  low,
 
   @doc("Medium noise level.")
-  "medium",
+  medium,
 
   @doc("High noise level.")
-  "high",
+  high,
 }
 
 @doc("Properties describing the presence of a mask on a given face.")
@@ -434,33 +434,33 @@ model MaskProperties {
   type: MaskType;
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Use fixed enum to represent modelAsString = false"
 @doc("Mask type if any of the face")
-union MaskType {
-  string,
-
+@fixed
+enum MaskType {
   @doc("Face mask.")
-  "faceMask",
+  faceMask,
 
   @doc("No mask.")
-  "noMask",
+  noMask,
 
   @doc("Other types of mask or occlusion.")
-  "otherMaskOrOcclusion",
+  otherMaskOrOcclusion,
 
   @doc("Uncertain")
-  "uncertain",
+  uncertain,
 }
 
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Use fixed enum to represent modelAsString = false"
 @doc("Indicates quality of image for recognition.")
-union QualityForRecognition {
-  string,
-
+@fixed
+enum QualityForRecognition {
   @doc("Low quality.")
-  "low",
+  low,
 
   @doc("Medium quality.")
-  "medium",
+  medium,
 
   @doc("High quality.")
-  "high",
+  high,
 }
