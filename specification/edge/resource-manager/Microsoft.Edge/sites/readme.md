@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for edgesites.
+This is the AutoRest configuration file for edge sites.
 
 ## Getting Started
 
