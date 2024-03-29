@@ -112,6 +112,7 @@ model Quota is ProxyResource<QuotaProperties> {
   @key("quotaName")
   @path
   @segment("quotas")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: QuotaNames;
 }
 
@@ -151,6 +152,7 @@ model AccountQuota is ProxyResource<AccountQuotaProperties> {
   @key("quotaName")
   @path
   @segment("quotas")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: QuotaNames;
 }
 

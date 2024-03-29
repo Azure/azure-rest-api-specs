@@ -464,6 +464,7 @@ model DataProductsCatalog is ProxyResource<DataProductsCatalogProperties> {
   @key("dataProductsCatalogName")
   @segment("dataProductsCatalogs")
   @path
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 

@@ -1,4 +1,3 @@
-REMOVE
 # Azure REST API Specifications
 
 ## Description

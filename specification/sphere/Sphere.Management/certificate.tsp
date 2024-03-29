@@ -24,6 +24,7 @@ model Certificate is ProxyResource<CertificateProperties> {
   @key("serialNumber")
   @segment("certificates")
   @visibility("read")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
