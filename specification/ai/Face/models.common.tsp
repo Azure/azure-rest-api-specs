@@ -135,8 +135,7 @@ model ReturnRecognitionModelOptions {
 
 @doc("The status of long running operation.")
 @lroStatus
-union FaceOperationState
-{
+union FaceOperationState {
   string,
 
   @doc("The operation is not started.")
