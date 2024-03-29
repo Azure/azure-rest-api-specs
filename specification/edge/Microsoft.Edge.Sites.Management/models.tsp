@@ -31,6 +31,31 @@ model SiteProperties {
   provisioningState?: ResourceProvisioningState;
 }
 
+@doc("The updatable properties of the Site.")
+model SiteUpdateProperties {
+  @doc("displayName of Site resource")
+  displayName?: string;
+
+  @doc("Description of Site resource")
+  description?: string;
+
+  @doc("AddressResource ArmId of Site resource")
+  addressResourceId?: ResourceIdentifier<[
+    {
+      type: "Microsoft.EdgeOrder/addresses";
+    }
+  ]>;
+}
+
+@doc("The type used for update operations of the Site.")
+model SiteUpdate {
+  @doc("The managed service identities assigned to this resource.")
+  identity?: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
+ 
+  @doc("The updatable properties of the Site.")
+  properties?: SiteUpdateProperties;
+}
+
 @doc("Properties of the SiteAwareResourceTypes resource type.")
 model SiteAwareResourceTypesProperties {
   @doc("Details for each SiteAwareResourceType")
