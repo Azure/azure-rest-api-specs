@@ -74,26 +74,26 @@ interface DataConnections {
 @doc("Provides access to discovery resources.")
 interface DiscoveryGroups {
   @doc("Retrieve a list of discovery group for the provided search parameters.")
-  @projectedName("csharp", "GetDiscoveryGroups")
+  @clientName("GetDiscoveryGroups", "csharp")
   listDiscoGroup is Operations.ResourceList<DiscoGroup, DiscoGroupsListTrait>;
 
   @doc("Validate a discovery group with a given groupName.")
   @action("validate")
-  @projectedName("csharp", "ValidateDiscoveryGroup")
+  @clientName("ValidateDiscoveryGroup", "csharp")
   validateDiscoGroup is Operations.ResourceCollectionAction<
     DiscoGroup,
     DiscoGroupData,
     ValidateResult
   >;
   @doc("Retrieve a discovery group with a given groupName.")
-  @projectedName("csharp", "GetDiscoveryGroup")
+  @clientName("GetDiscoveryGroup", "csharp")
   getDiscoGroup is Operations.ResourceRead<DiscoGroup>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Create a discovery group with a given groupName.")
   @createsOrReplacesResource(DiscoGroup)
   @put
-  @projectedName("csharp", "CreateOrReplaceDiscoveryGroup")
+  @clientName("CreateOrReplaceDiscoveryGroup", "csharp")
   createOrReplaceDiscoGroup is Foundations.ResourceOperation<
     DiscoGroup,
     DiscoGroupData,
@@ -101,13 +101,13 @@ interface DiscoveryGroups {
   >;
   @doc("Run a discovery group with a given groupName.")
   @action("run")
-  @projectedName("csharp", "RunDiscoveryGroup")
+  @clientName("RunDiscoveryGroup", "csharp")
   runDiscoGroup is Operations.ResourceAction<DiscoGroup, {}, NoContentResponse>;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Retrieve a collection of discovery run results for a discovery group with a given groupName.")
   @route("/discoGroups/{groupName}/runs")
   @get
-  @projectedName("csharp", "GetDiscoveryGroupRuns")
+  @clientName("GetDiscoveryGroupRuns", "csharp")
   listRuns is Foundations.Operation<
     DiscoGroupsListRunsParameter,
     DiscoRunPageResult
@@ -118,13 +118,13 @@ interface DiscoveryGroups {
 @doc("Provides access to disco template resources.")
 interface DiscoveryTemplates {
   @doc("Retrieve a list of disco templates for the provided search parameters.")
-  @projectedName("csharp", "GetDiscoveryTemplates")
+  @clientName("GetDiscoveryTemplates", "csharp")
   listDiscoTemplate is Operations.ResourceList<
     DiscoTemplate,
     DiscoTemplatesListTrait
   >;
   @doc("Retrieve a disco template with a given templateId.")
-  @projectedName("csharp", "GetDiscoveryTemplate")
+  @clientName("GetDiscoveryTemplate", "csharp")
   getDiscoTemplate is Operations.ResourceRead<DiscoTemplate>;
 }
 
