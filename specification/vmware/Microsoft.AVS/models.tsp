@@ -1212,6 +1212,7 @@ model WorkloadNetwork is ProxyResource<WorkloadNetworkProperties> {
   @key("workloadNetworkName")
   @path
   @segment("workloadNetworks")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -2186,6 +2187,7 @@ model IscsiPath is ProxyResource<IscsiPathProperties> {
   @key("iscsiPathName")
   @path
   @segment("iscsiPaths")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 

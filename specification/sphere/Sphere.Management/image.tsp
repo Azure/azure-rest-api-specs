@@ -24,6 +24,7 @@ model Image is ProxyResource<ImageProperties> {
   @key("imageName")
   @segment("images")
   @visibility("read")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 

@@ -353,6 +353,7 @@ model ResourceDetailsObject is ProxyResource<ResourceDetailsObjectProperties> {
   @segment("resources")
   @visibility("read")
   @path
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -510,6 +511,7 @@ model ResourceSku is ProxyResource<ResourceSkuProperties> {
   @segment("skus")
   @visibility("read")
   @path
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 

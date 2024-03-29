@@ -24,6 +24,7 @@ model Deployment is ProxyResource<DeploymentProperties> {
   @key("deploymentName")
   @segment("deployments")
   @visibility("read")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
