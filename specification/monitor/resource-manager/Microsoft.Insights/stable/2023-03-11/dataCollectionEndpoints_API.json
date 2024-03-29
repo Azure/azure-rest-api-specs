@@ -313,6 +313,19 @@
     }
   },
   "definitions": {
+    "ResourceKind": {
+      "description": "The kind of the resource.",
+      "enum": [
+        "Linux",
+        "Windows"
+      ],
+      "type": "string",
+      "example": "Linux",
+      "x-ms-enum": {
+        "name": "KnownDataCollectionEndpointResourceKind",
+        "modelAsString": true
+      }
+    },
     "ConfigurationAccessEndpointSpec": {
       "description": "Definition of the endpoint used for accessing configuration.",
       "type": "object",
@@ -605,16 +618,11 @@
         },
         "kind": {
           "description": "The kind of the resource.",
-          "enum": [
-            "Linux",
-            "Windows"
-          ],
-          "type": "string",
-          "example": "Linux",
-          "x-ms-enum": {
-            "name": "KnownDataCollectionEndpointResourceKind",
-            "modelAsString": true
-          }
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceKind"
+            }
+          ]
         },
         "identity": {
           "description": "Managed service identity of the resource.",
@@ -710,6 +718,14 @@
           "allOf": [
             {
               "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
+            }
+          ]
+        },
+        "kind": {
+          "description": "The kind of the resource.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceKind"
             }
           ]
         },
