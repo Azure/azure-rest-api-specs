@@ -1042,6 +1042,7 @@ These settings apply only when `--tag=package-2019-11-01-preview-only` is specif
 
 ``` yaml $(tag) == 'package-2019-11-01-preview-only'
 input-file:
+  - Microsoft.Insights/preview/2019-11-01-preview/dataCollectionEndpoints_API.json
   - Microsoft.Insights/preview/2019-11-01-preview/dataCollectionRuleAssociations_API.json
   - Microsoft.Insights/preview/2019-11-01-preview/dataCollectionRules_API.json
 ```
