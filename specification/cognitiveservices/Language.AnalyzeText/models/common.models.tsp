@@ -160,11 +160,10 @@ model AnalyzeTextTask {
   @doc("The kind of task to perform.")
   kind: AnalyzeTextTaskKind;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @discriminator("kind")
-model AnalyzeTextLROTask extends TaskIdentifier {
+model AnalyzeTextLROTask is TaskIdentifier {
   @doc("The kind of task to perform.")
   kind: AnalyzeTextLROTaskKind;
 }
@@ -438,10 +437,9 @@ model TaskParameters {
   loggingOptOut?: boolean = false;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @clientName("PreBuiltTaskContent", "csharp")
 @doc("Parameters object for a text analysis task using pre-built models.")
-model PreBuiltTaskParameters extends TaskParameters {
+model PreBuiltTaskParameters is TaskParameters {
   @doc("model version")
   modelVersion?: string = "latest";
 }
@@ -531,10 +529,9 @@ model InputWarning {
   @doc("A JSON pointer reference indicating the target object.")
   targetRef?: string;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("if showStats=true was specified in the request this field will contain information about the request payload.")
-model RequestStatistics extends Record<unknown> {
+model RequestStatistics is Record<unknown> {
   @doc("Number of documents submitted in the request.")
   documentsCount: int32;
 
@@ -897,10 +894,9 @@ model SummaryContext {
   @doc("The length of the context. Use of different 'stringIndexType' values can affect the length returned.")
   length: int32;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @clientName("CustomTaskContent", "csharp")
 @doc("Parameters object for a text analysis task using custom models.")
-model CustomTaskParameters extends TaskParameters {
+model CustomTaskParameters is TaskParameters {
   @doc("This field indicates the project name for the model.")
   projectName: string;
 
@@ -956,11 +952,10 @@ enum redactionCharacter {
   tilde: "~",
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @clientName("AnalyzeTextError", "csharp")
 @doc("The error object.")
-model Error extends Record<unknown> {
+model Error is Record<unknown> {
   @doc("One of a server-defined set of error codes.")
   code: ErrorCode;
 

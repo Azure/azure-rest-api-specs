@@ -17,10 +17,10 @@ model AnalyzeTextSentimentAnalysisInput extends AnalyzeTextTask {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   parameters?: SentimentAnalysisTaskParameters;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 @doc("Supported parameters for a Sentiment Analysis task.")
 @clientName("SentimentAnalysisTaskContent", "csharp")
-model SentimentAnalysisTaskParameters extends PreBuiltTaskParameters {
+model SentimentAnalysisTaskParameters is PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   opinionMining?: boolean = false;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -67,10 +67,10 @@ enum TokenSentimentValue {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   negative,
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 @clientName("SentimentResult", "csharp")
 @doc("Sentiment analysis per document.")
-model SentimentResponse extends PreBuiltResult {
+model SentimentResponse is PreBuiltResult {
   @typeChangedFrom(Versions.v2023_04_15_preview, Array<SentimentDocumentResult>)
   @doc("The sentiment analysis results for each document in the input.")
   documents: Array<SentimentDocumentResultWithDetectedLanguage>;
@@ -81,9 +81,9 @@ model SentimentDocumentResultWithDetectedLanguage {
   ...SentimentDocumentResult;
   ...DocumentDetectedLanguage;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model SentimentDocumentResult extends DocumentResult {
+model SentimentDocumentResult is DocumentResult {
   @doc("Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).")
   sentiment: DocumentSentimentValue;
 
@@ -212,10 +212,10 @@ model CustomSentenceSentiment {
   @doc("The length of the target.")
   length: int32;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_15_preview)
-model CustomSentimentDocumentResult extends DocumentResult {
+model CustomSentimentDocumentResult is DocumentResult {
   @doc("Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).")
   sentiment: DocumentSentimentValue;
 
@@ -224,11 +224,11 @@ model CustomSentimentDocumentResult extends DocumentResult {
 
   sentences: Array<CustomSentenceSentiment>;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 @added(Versions.v2023_04_15_preview)
 @clientName("CustomSentimentAnalysisTaskContent", "csharp")
 @doc("Supported parameters for a Custom Sentiment Analysis task.")
-model CustomSentimentAnalysisTaskParameters extends CustomTaskParameters {
+model CustomSentimentAnalysisTaskParameters is CustomTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 }
@@ -242,10 +242,10 @@ model CustomSentimentAnalysisLROTask extends AnalyzeTextLROTask {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   parameters?: CustomSentimentAnalysisTaskParameters;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_15_preview)
-model CustomSentimentAnalysisResult extends CustomResult {
+model CustomSentimentAnalysisResult is CustomResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   documents: Array<CustomSentimentAnalysisResultDocument>;
 }

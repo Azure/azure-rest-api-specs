@@ -259,6 +259,21 @@
       "type": "object",
       "description": "An object representing the pre-build summarization results of each document.",
       "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
+        },
         "documents": {
           "type": "array",
           "description": "Response by document",
@@ -268,18 +283,25 @@
         }
       },
       "required": [
+        "errors",
+        "modelVersion",
         "documents"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltResult"
-        }
       ]
     },
     "AbstractiveSummarizationTaskParameters": {
       "type": "object",
       "description": "Supported parameters for the pre-build Abstractive Summarization task.",
       "properties": {
+        "loggingOptOut": {
+          "type": "boolean",
+          "description": "logging opt out",
+          "default": false
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "model version",
+          "default": "latest"
+        },
         "sentenceCount": {
           "type": "integer",
           "format": "int32",
@@ -316,12 +338,7 @@
             ]
           }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
-        }
-      ]
+      }
     },
     "AbstractiveSummary": {
       "type": "object",
@@ -344,32 +361,26 @@
         "text"
       ]
     },
-    "AbstractiveSummaryDocumentResult": {
-      "type": "object",
-      "description": "An object representing the pre-build summarization results of each document.",
-      "properties": {
-        "summaries": {
-          "type": "array",
-          "description": "A list of abstractive summaries.",
-          "items": {
-            "$ref": "#/definitions/AbstractiveSummary"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "summaries"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DocumentResult"
-        }
-      ]
-    },
     "AbstractiveSummaryDocumentResultWithDetectedLanguage": {
       "type": "object",
       "description": "An object representing the summarization result of a single document with detected language.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
         "summaries": {
           "type": "array",
           "description": "A list of abstractive summaries.",
@@ -384,12 +395,9 @@
         }
       },
       "required": [
+        "id",
+        "warnings",
         "summaries"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DocumentResult"
-        }
       ]
     },
     "AgeMetadata": {
@@ -646,7 +654,12 @@
     },
     "AnalyzeTextLROTask": {
       "type": "object",
+      "description": "Base task object.",
       "properties": {
+        "taskName": {
+          "type": "string",
+          "description": "task name"
+        },
         "kind": {
           "$ref": "#/definitions/AnalyzeTextLROTaskKind",
           "description": "The kind of task to perform."
@@ -655,11 +668,6 @@
       "discriminator": "kind",
       "required": [
         "kind"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TaskIdentifier"
-        }
       ]
     },
     "AnalyzeTextLROTaskKind": {
@@ -922,29 +930,25 @@
         "modelAsString": false
       }
     },
-    "ClassificationDocumentResult": {
-      "type": "object",
-      "properties": {
-        "class": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ClassificationResult"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "class"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DocumentResult"
-        }
-      ]
-    },
     "ClassificationDocumentResultWithDetectedLanguage": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
         "class": {
           "type": "array",
           "items": {
@@ -958,12 +962,9 @@
         }
       },
       "required": [
+        "id",
+        "warnings",
         "class"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DocumentResult"
-        }
       ]
     },
     "ClassificationResult": {
@@ -1138,6 +1139,11 @@
             ]
           }
         },
+        "loggingOptOut": {
+          "type": "boolean",
+          "description": "logging opt out",
+          "default": false
+        },
         "projectName": {
           "type": "string",
           "description": "This field indicates the project name for the model."
@@ -1145,11 +1151,6 @@
         "deploymentName": {
           "type": "string",
           "description": "This field indicates the deployment name for the model."
-        },
-        "loggingOptOut": {
-          "type": "boolean",
-          "description": "logging opt out",
-          "default": false
         }
       },
       "required": [
@@ -1171,28 +1172,29 @@
       ],
       "x-ms-discriminator-value": "CustomEntityRecognition"
     },
-    "CustomEntitiesResult": {
-      "type": "object",
-      "properties": {
-        "documents": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EntitiesDocumentResult"
-          }
-        }
-      },
-      "required": [
-        "documents"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/CustomResult"
-        }
-      ]
-    },
     "CustomEntitiesResultWithDocumentDetectedLanguage": {
       "type": "object",
+      "description": "Custom Task Results",
       "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+        },
+        "projectName": {
+          "type": "string",
+          "description": "This field indicates the project name for the model."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
+        },
         "documents": {
           "type": "array",
           "items": {
@@ -1201,18 +1203,29 @@
         }
       },
       "required": [
+        "errors",
+        "projectName",
+        "deploymentName",
         "documents"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/CustomResult"
-        }
       ]
     },
     "CustomEntitiesTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a Custom Entities task.",
       "properties": {
+        "loggingOptOut": {
+          "type": "boolean",
+          "description": "logging opt out",
+          "default": false
+        },
+        "projectName": {
+          "type": "string",
+          "description": "This field indicates the project name for the model."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
+        },
         "stringIndexType": {
           "type": "string",
           "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.",
@@ -1245,10 +1258,9 @@
           }
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/CustomTaskParameters"
-        }
+      "required": [
+        "projectName",
+        "deploymentName"
       ]
     },
     "CustomEntityRecognitionLROResult": {
@@ -1268,39 +1280,25 @@
       ],
       "x-ms-discriminator-value": "CustomEntityRecognitionLROResults"
     },
-    "CustomHealthcareEntitiesDocumentResult": {
-      "type": "object",
-      "properties": {
-        "entities": {
-          "type": "array",
-          "description": "Healthcare entities.",
-          "items": {
-            "$ref": "#/definitions/CustomHealthcareEntity"
-          },
-          "x-ms-identifiers": []
-        },
-        "relations": {
-          "type": "array",
-          "description": "Healthcare entity relations.",
-          "items": {
-            "$ref": "#/definitions/HealthcareRelation"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "entities",
-        "relations"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DocumentResult"
-        }
-      ]
-    },
     "CustomHealthcareEntitiesDocumentResultWithDocumentDetectedLanguage": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
         "entities": {
           "type": "array",
           "description": "Healthcare entities.",
@@ -1323,18 +1321,56 @@
         }
       },
       "required": [
+        "id",
+        "warnings",
         "entities",
         "relations"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DocumentResult"
-        }
       ]
     },
     "CustomHealthcareEntity": {
       "type": "object",
       "properties": {
+        "text": {
+          "type": "string",
+          "description": "Entity text as appears in the request."
+        },
+        "category": {
+          "$ref": "#/definitions/healthcareEntityCategory",
+          "description": "Healthcare Entity Category."
+        },
+        "subcategory": {
+          "type": "string",
+          "description": "(Optional) Entity sub type."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score between 0 and 1 of the extracted entity."
+        },
+        "assertion": {
+          "$ref": "#/definitions/HealthcareAssertion"
+        },
+        "name": {
+          "type": "string",
+          "description": "Preferred name for the entity. Example: 'histologically' would have a 'name' of 'histologic'."
+        },
+        "links": {
+          "type": "array",
+          "description": "Entity references in known data sources.",
+          "items": {
+            "$ref": "#/definitions/HealthcareEntityLink"
+          }
+        },
         "entityComponentInformation": {
           "type": "array",
           "description": "(Optional) Entity component information listing fired components of the extracted entity. This object only applies for custom healthcare.",
@@ -1344,10 +1380,12 @@
           "x-ms-identifiers": []
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/HealthcareEntity"
-        }
+      "required": [
+        "text",
+        "category",
+        "offset",
+        "length",
+        "confidenceScore"
       ]
     },
     "CustomHealthcareLROResult": {
@@ -1383,7 +1421,27 @@
     },
     "CustomHealthcareResult": {
       "type": "object",
+      "description": "Custom Task Results",
       "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+        },
+        "projectName": {
+          "type": "string",
+          "description": "This field indicates the project name for the model."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
+        },
         "documents": {
           "type": "array",
           "items": {
@@ -1392,18 +1450,29 @@
         }
       },
       "required": [
+        "errors",
+        "projectName",
+        "deploymentName",
         "documents"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/CustomResult"
-        }
       ]
     },
     "CustomHealthcareTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a custom Healthcare task.",
       "properties": {
+        "loggingOptOut": {
+          "type": "boolean",
+          "description": "logging opt out",
+          "default": false
+        },
+        "projectName": {
+          "type": "string",
+          "description": "This field indicates the project name for the model."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
+        },
         "stringIndexType": {
           "type": "string",
           "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.",
@@ -1436,35 +1505,34 @@
           }
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/CustomTaskParameters"
-        }
-      ]
-    },
-    "CustomLabelClassificationResult": {
-      "type": "object",
-      "properties": {
-        "documents": {
-          "type": "array",
-          "description": "Response by document",
-          "items": {
-            "$ref": "#/definitions/ClassificationDocumentResult"
-          }
-        }
-      },
       "required": [
-        "documents"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/CustomResult"
-        }
+        "projectName",
+        "deploymentName"
       ]
     },
     "CustomLabelClassificationResultWithDocumentDetectedLanguage": {
       "type": "object",
+      "description": "Custom Task Results",
       "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+        },
+        "projectName": {
+          "type": "string",
+          "description": "This field indicates the project name for the model."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
+        },
         "documents": {
           "type": "array",
           "description": "Response by document",
@@ -1474,12 +1542,10 @@
         }
       },
       "required": [
+        "errors",
+        "projectName",
+        "deploymentName",
         "documents"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/CustomResult"
-        }
       ]
     },
     "CustomMultiLabelClassificationLROResult": {
@@ -1517,26 +1583,11 @@
     "CustomMultiLabelClassificationTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a Custom Multi Classification task.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CustomTaskParameters"
-        }
-      ]
-    },
-    "CustomResult": {
-      "type": "object",
-      "description": "Custom Task Results",
       "properties": {
-        "errors": {
-          "type": "array",
-          "description": "Errors by document id.",
-          "items": {
-            "$ref": "#/definitions/DocumentError"
-          }
-        },
-        "statistics": {
-          "$ref": "#/definitions/RequestStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+        "loggingOptOut": {
+          "type": "boolean",
+          "description": "logging opt out",
+          "default": false
         },
         "projectName": {
           "type": "string",
@@ -1548,7 +1599,6 @@
         }
       },
       "required": [
-        "errors",
         "projectName",
         "deploymentName"
       ]
@@ -1621,7 +1671,27 @@
     },
     "CustomSentimentAnalysisResult": {
       "type": "object",
+      "description": "Custom Task Results",
       "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+        },
+        "projectName": {
+          "type": "string",
+          "description": "This field indicates the project name for the model."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
+        },
         "documents": {
           "type": "array",
           "items": {
@@ -1630,32 +1700,15 @@
         }
       },
       "required": [
+        "errors",
+        "projectName",
+        "deploymentName",
         "documents"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/CustomResult"
-        }
       ]
     },
     "CustomSentimentAnalysisResultDocument": {
       "type": "object",
       "properties": {
-        "sentiment": {
-          "$ref": "#/definitions/DocumentSentimentValue",
-          "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed)."
-        },
-        "confidenceScores": {
-          "$ref": "#/definitions/SentimentConfidenceScores",
-          "description": "The sentiment confidence score between 0 and 1 for the sentence for all classes."
-        },
-        "sentences": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CustomSentenceSentiment"
-          },
-          "x-ms-identifiers": []
-        },
         "id": {
           "type": "string",
           "description": "Unique, non-empty document identifier."
@@ -1672,23 +1725,51 @@
           "$ref": "#/definitions/DocumentStatistics",
           "description": "if showStats=true was specified in the request this field will contain information about the document payload."
         },
+        "sentiment": {
+          "$ref": "#/definitions/DocumentSentimentValue",
+          "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed)."
+        },
+        "confidenceScores": {
+          "$ref": "#/definitions/SentimentConfidenceScores",
+          "description": "The sentiment confidence score between 0 and 1 for the sentence for all classes."
+        },
+        "sentences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomSentenceSentiment"
+          },
+          "x-ms-identifiers": []
+        },
         "detectedLanguage": {
           "$ref": "#/definitions/DetectedLanguage",
           "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
       "required": [
+        "id",
+        "warnings",
         "sentiment",
         "confidenceScores",
-        "sentences",
-        "id",
-        "warnings"
+        "sentences"
       ]
     },
     "CustomSentimentAnalysisTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a Custom Sentiment Analysis task.",
       "properties": {
+        "loggingOptOut": {
+          "type": "boolean",
+          "description": "logging opt out",
+          "default": false
+        },
+        "projectName": {
+          "type": "string",
+          "description": "This field indicates the project name for the model."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
+        },
         "stringIndexType": {
           "type": "string",
           "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.",
@@ -1721,40 +1802,9 @@
           }
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/CustomTaskParameters"
-        }
-      ]
-    },
-    "CustomSentimentDocumentResult": {
-      "type": "object",
-      "properties": {
-        "sentiment": {
-          "$ref": "#/definitions/DocumentSentimentValue",
-          "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed)."
-        },
-        "confidenceScores": {
-          "$ref": "#/definitions/SentimentConfidenceScores",
-          "description": "The sentiment confidence score between 0 and 1 for the sentence for all classes."
-        },
-        "sentences": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CustomSentenceSentiment"
-          },
-          "x-ms-identifiers": []
-        }
-      },
       "required": [
-        "sentiment",
-        "confidenceScores",
-        "sentences"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DocumentResult"
-        }
+        "projectName",
+        "deploymentName"
       ]
     },
     "CustomSingleLabelClassificationLROResult": {
@@ -1792,16 +1842,12 @@
     "CustomSingleLabelClassificationTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a Custom Single Classification task.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CustomTaskParameters"
-        }
-      ]
-    },
-    "CustomTaskParameters": {
-      "type": "object",
-      "description": "Parameters object for a text analysis task using custom models.",
       "properties": {
+        "loggingOptOut": {
+          "type": "boolean",
+          "description": "logging opt out",
+          "default": false
+        },
         "projectName": {
           "type": "string",
           "description": "This field indicates the project name for the model."
@@ -1814,11 +1860,6 @@
       "required": [
         "projectName",
         "deploymentName"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/TaskParameters"
-        }
       ]
     },
     "DateMetadata": {
@@ -1925,31 +1966,6 @@
         "error"
       ]
     },
-    "DocumentResult": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique, non-empty document identifier."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "Warnings encountered while processing document.",
-          "items": {
-            "$ref": "#/definitions/DocumentWarning"
-          },
-          "x-ms-identifiers": []
-        },
-        "statistics": {
-          "$ref": "#/definitions/DocumentStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
-        }
-      },
-      "required": [
-        "id",
-        "warnings"
-      ]
-    },
     "DocumentSentimentValue": {
       "type": "string",
       "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).",
@@ -2029,6 +2045,22 @@
     "DynamicClassificationDocumentResult": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
         "classifications": {
           "type": "array",
           "items": {
@@ -2038,17 +2070,30 @@
         }
       },
       "required": [
+        "id",
+        "warnings",
         "classifications"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DocumentResult"
-        }
       ]
     },
     "DynamicClassificationResult": {
       "type": "object",
+      "description": "Pre built result",
       "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
+        },
         "documents": {
           "type": "array",
           "description": "Response by document",
@@ -2058,18 +2103,25 @@
         }
       },
       "required": [
+        "errors",
+        "modelVersion",
         "documents"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltResult"
-        }
       ]
     },
     "DynamicClassificationTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a Dynamic Classification task.",
       "properties": {
+        "loggingOptOut": {
+          "type": "boolean",
+          "description": "logging opt out",
+          "default": false
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "model version",
+          "default": "latest"
+        },
         "classificationType": {
           "type": "string",
           "description": "Specifies either one or multiple categories per document. Defaults to multi classification which may return more than one class for each document.",
@@ -2093,11 +2145,6 @@
       },
       "required": [
         "categories"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
-        }
       ]
     },
     "DynamicClassificationTaskResult": {
@@ -2119,38 +2166,9 @@
       ],
       "x-ms-discriminator-value": "DynamicClassificationResults"
     },
-    "EntitiesDocumentResult": {
-      "type": "object",
-      "properties": {
-        "entities": {
-          "type": "array",
-          "description": "Recognized entities in the document.",
-          "items": {
-            "$ref": "#/definitions/Entity"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "entities"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DocumentResult"
-        }
-      ]
-    },
     "EntitiesDocumentResultWithDetectedLanguage": {
       "type": "object",
       "properties": {
-        "entities": {
-          "type": "array",
-          "description": "Recognized entities in the document.",
-          "items": {
-            "$ref": "#/definitions/Entity"
-          },
-          "x-ms-identifiers": []
-        },
         "id": {
           "type": "string",
           "description": "Unique, non-empty document identifier."
@@ -2167,41 +2185,44 @@
           "$ref": "#/definitions/DocumentStatistics",
           "description": "if showStats=true was specified in the request this field will contain information about the document payload."
         },
+        "entities": {
+          "type": "array",
+          "description": "Recognized entities in the document.",
+          "items": {
+            "$ref": "#/definitions/Entity"
+          },
+          "x-ms-identifiers": []
+        },
         "detectedLanguage": {
           "$ref": "#/definitions/DetectedLanguage",
           "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
       "required": [
-        "entities",
         "id",
-        "warnings"
-      ]
-    },
-    "EntitiesDocumentResultWithMetadata": {
-      "type": "object",
-      "properties": {
-        "entities": {
-          "type": "array",
-          "description": "Recognized entities in the document.",
-          "items": {
-            "$ref": "#/definitions/EntityWithMetadata"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
+        "warnings",
         "entities"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DocumentResult"
-        }
       ]
     },
     "EntitiesDocumentResultWithMetadataDetectedLanguage": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
         "entities": {
           "type": "array",
           "description": "Recognized entities in the document.",
@@ -2216,12 +2237,9 @@
         }
       },
       "required": [
+        "id",
+        "warnings",
         "entities"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DocumentResult"
-        }
       ]
     },
     "EntitiesLROTask": {
@@ -2241,7 +2259,23 @@
     },
     "EntitiesResult": {
       "type": "object",
+      "description": "Pre built result",
       "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
+        },
         "documents": {
           "type": "array",
           "description": "Response by document",
@@ -2251,18 +2285,25 @@
         }
       },
       "required": [
+        "errors",
+        "modelVersion",
         "documents"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltResult"
-        }
       ]
     },
     "EntitiesTaskParameters": {
       "type": "object",
       "description": "Supported parameters for an Entity Recognition task.",
       "properties": {
+        "loggingOptOut": {
+          "type": "boolean",
+          "description": "logging opt out",
+          "default": false
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "model version",
+          "default": "latest"
+        },
         "stringIndexType": {
           "type": "string",
           "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.",
@@ -2312,12 +2353,7 @@
           "$ref": "#/definitions/BaseEntityOverlapPolicy",
           "description": "(Optional) describes the type of overlap policy to apply to the ner output."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
-        }
-      ]
+      }
     },
     "EntitiesTaskResult": {
       "type": "object",
@@ -2744,7 +2780,23 @@
     },
     "EntityLinkingResult": {
       "type": "object",
+      "description": "Pre built result",
       "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
+        },
         "documents": {
           "type": "array",
           "description": "Response by document",
@@ -2754,24 +2806,14 @@
         }
       },
       "required": [
+        "errors",
+        "modelVersion",
         "documents"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltResult"
-        }
       ]
     },
     "EntityLinkingResultWithDetectedLanguage": {
       "type": "object",
       "properties": {
-        "entities": {
-          "type": "array",
-          "description": "Recognized well known entities in the document.",
-          "items": {
-            "$ref": "#/definitions/LinkedEntity"
-          }
-        },
         "id": {
           "type": "string",
           "description": "Unique, non-empty document identifier."
@@ -2788,21 +2830,38 @@
           "$ref": "#/definitions/DocumentStatistics",
           "description": "if showStats=true was specified in the request this field will contain information about the document payload."
         },
+        "entities": {
+          "type": "array",
+          "description": "Recognized well known entities in the document.",
+          "items": {
+            "$ref": "#/definitions/LinkedEntity"
+          }
+        },
         "detectedLanguage": {
           "$ref": "#/definitions/DetectedLanguage",
           "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
       "required": [
-        "entities",
         "id",
-        "warnings"
+        "warnings",
+        "entities"
       ]
     },
     "EntityLinkingTaskParameters": {
       "type": "object",
       "description": "Supported parameters for an Entity Linking task.",
       "properties": {
+        "loggingOptOut": {
+          "type": "boolean",
+          "description": "logging opt out",
+          "default": false
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "model version",
+          "default": "latest"
+        },
         "stringIndexType": {
           "type": "string",
           "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.",
@@ -2834,12 +2893,7 @@
             ]
           }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
-        }
-      ]
+      }
     },
     "EntityLinkingTaskResult": {
       "type": "object",
@@ -2895,20 +2949,33 @@
     "EntityWithMetadata": {
       "type": "object",
       "properties": {
-        "metadata": {
-          "$ref": "#/definitions/BaseMetadata",
-          "description": "The entity metadata object."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/EntityWithTags"
-        }
-      ]
-    },
-    "EntityWithTags": {
-      "type": "object",
-      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Entity text as appears in the request."
+        },
+        "category": {
+          "type": "string",
+          "description": "Entity type."
+        },
+        "subcategory": {
+          "type": "string",
+          "description": "(Optional) Entity sub type."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score between 0 and 1 of the extracted entity."
+        },
         "type": {
           "type": "string",
           "description": "An entity type is the lowest (or finest) granularity at which the entity has been detected. The type maps to the specific metadata attributes associated with the entity detected."
@@ -2920,16 +2987,20 @@
             "$ref": "#/definitions/EntityTag"
           },
           "x-ms-identifiers": []
+        },
+        "metadata": {
+          "$ref": "#/definitions/BaseMetadata",
+          "description": "The entity metadata object."
         }
       },
       "required": [
+        "text",
+        "category",
+        "offset",
+        "length",
+        "confidenceScore",
         "type",
         "tags"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Entity"
-        }
       ]
     },
     "Error": {
@@ -2965,12 +3036,7 @@
         "code",
         "message"
       ],
-      "allOf": [
-        {
-          "type": "object",
-          "additionalProperties": {}
-        }
-      ]
+      "additionalProperties": {}
     },
     "ErrorCode": {
       "type": "string",
@@ -3013,31 +3079,26 @@
         "error"
       ]
     },
-    "ExtractedSummaryDocumentResult": {
-      "type": "object",
-      "description": "A ranked list of sentences representing the extracted summary.",
-      "properties": {
-        "sentences": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExtractedSummarySentence"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "sentences"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DocumentResult"
-        }
-      ]
-    },
     "ExtractedSummaryDocumentResultWithDetectedLanguage": {
       "type": "object",
       "description": "A ranked list of sentences representing the extracted summary.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
         "sentences": {
           "type": "array",
           "items": {
@@ -3051,12 +3112,9 @@
         }
       },
       "required": [
+        "id",
+        "warnings",
         "sentences"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DocumentResult"
-        }
       ]
     },
     "ExtractedSummarySentence": {
@@ -3123,7 +3181,23 @@
     },
     "ExtractiveSummarizationResult": {
       "type": "object",
+      "description": "Pre built result",
       "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
+        },
         "documents": {
           "type": "array",
           "description": "Response by document",
@@ -3133,18 +3207,25 @@
         }
       },
       "required": [
+        "errors",
+        "modelVersion",
         "documents"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltResult"
-        }
       ]
     },
     "ExtractiveSummarizationTaskParameters": {
       "type": "object",
       "description": "Supported parameters for an Extractive Summarization task.",
       "properties": {
+        "loggingOptOut": {
+          "type": "boolean",
+          "description": "logging opt out",
+          "default": false
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "model version",
+          "default": "latest"
+        },
         "sentenceCount": {
           "type": "integer",
           "format": "int64",
@@ -3206,12 +3287,7 @@
             ]
           }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
-        }
-      ]
+      }
     },
     "HealthcareAssertion": {
       "type": "object",
@@ -3234,44 +3310,25 @@
         }
       }
     },
-    "HealthcareEntitiesDocumentResult": {
-      "type": "object",
-      "properties": {
-        "entities": {
-          "type": "array",
-          "description": "Healthcare entities.",
-          "items": {
-            "$ref": "#/definitions/HealthcareEntity"
-          },
-          "x-ms-identifiers": []
-        },
-        "relations": {
-          "type": "array",
-          "description": "Healthcare entity relations.",
-          "items": {
-            "$ref": "#/definitions/HealthcareRelation"
-          },
-          "x-ms-identifiers": []
-        },
-        "fhirBundle": {
-          "type": "object",
-          "description": "JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html.",
-          "additionalProperties": {}
-        }
-      },
-      "required": [
-        "entities",
-        "relations"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DocumentResult"
-        }
-      ]
-    },
     "HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
         "entities": {
           "type": "array",
           "description": "Healthcare entities.",
@@ -3299,13 +3356,10 @@
         }
       },
       "required": [
+        "id",
+        "warnings",
         "entities",
         "relations"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DocumentResult"
-        }
       ]
     },
     "HealthcareEntity": {
@@ -3455,7 +3509,23 @@
     },
     "HealthcareResult": {
       "type": "object",
+      "description": "Pre built result",
       "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
+        },
         "documents": {
           "type": "array",
           "items": {
@@ -3464,18 +3534,25 @@
         }
       },
       "required": [
+        "errors",
+        "modelVersion",
         "documents"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltResult"
-        }
       ]
     },
     "HealthcareTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a Healthcare task.",
       "properties": {
+        "loggingOptOut": {
+          "type": "boolean",
+          "description": "logging opt out",
+          "default": false
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "model version",
+          "default": "latest"
+        },
         "stringIndexType": {
           "type": "string",
           "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.",
@@ -3515,12 +3592,7 @@
           "$ref": "#/definitions/healthcareDocumentType",
           "description": "Document type that can be provided as input for Fhir Documents. Expect to have fhirVersion provided when used. Behavior of using None enum is the same as not using the documentType parameter."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
-        }
-      ]
+      }
     },
     "InformationMetadata": {
       "type": "object",
@@ -3660,7 +3732,23 @@
     },
     "KeyPhraseResult": {
       "type": "object",
+      "description": "Pre built result",
       "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
+        },
         "documents": {
           "type": "array",
           "description": "Response by document",
@@ -3670,22 +3758,26 @@
         }
       },
       "required": [
+        "errors",
+        "modelVersion",
         "documents"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltResult"
-        }
       ]
     },
     "KeyPhraseTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a Key Phrase Extraction task.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
+      "properties": {
+        "loggingOptOut": {
+          "type": "boolean",
+          "description": "logging opt out",
+          "default": false
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "model version",
+          "default": "latest"
         }
-      ]
+      }
     },
     "KeyPhraseTaskResult": {
       "type": "object",
@@ -3704,30 +3796,26 @@
       ],
       "x-ms-discriminator-value": "KeyPhraseExtractionResults"
     },
-    "KeyPhrasesDocumentResult": {
-      "type": "object",
-      "properties": {
-        "keyPhrases": {
-          "type": "array",
-          "description": "A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "keyPhrases"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DocumentResult"
-        }
-      ]
-    },
     "KeyPhrasesDocumentResultWithDetectedLanguage": {
       "type": "object",
       "description": "A ranked list of sentences representing the extracted summary.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          },
+          "x-ms-identifiers": []
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
         "keyPhrases": {
           "type": "array",
           "description": "A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document.",
@@ -3735,6 +3823,31 @@
             "type": "string"
           }
         },
+        "detectedLanguage": {
+          "$ref": "#/definitions/DetectedLanguage",
+          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
+        }
+      },
+      "required": [
+        "id",
+        "warnings",
+        "keyPhrases"
+      ]
+    },
+    "LanguageDetectionAnalysisInput": {
+      "type": "object",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LanguageInput"
+          }
+        }
+      }
+    },
+    "LanguageDetectionDocumentResult": {
+      "type": "object",
+      "properties": {
         "id": {
           "type": "string",
           "description": "Unique, non-empty document identifier."
@@ -3753,46 +3866,34 @@
         },
         "detectedLanguage": {
           "$ref": "#/definitions/DetectedLanguage",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
-        }
-      },
-      "required": [
-        "keyPhrases",
-        "id",
-        "warnings"
-      ]
-    },
-    "LanguageDetectionAnalysisInput": {
-      "type": "object",
-      "properties": {
-        "documents": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LanguageInput"
-          }
-        }
-      }
-    },
-    "LanguageDetectionDocumentResult": {
-      "type": "object",
-      "properties": {
-        "detectedLanguage": {
-          "$ref": "#/definitions/DetectedLanguage",
           "description": "Detected Language."
         }
       },
       "required": [
+        "id",
+        "warnings",
         "detectedLanguage"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DocumentResult"
-        }
       ]
     },
     "LanguageDetectionResult": {
       "type": "object",
+      "description": "Pre built result",
       "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
+        },
         "documents": {
           "type": "array",
           "items": {
@@ -3801,22 +3902,26 @@
         }
       },
       "required": [
+        "errors",
+        "modelVersion",
         "documents"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltResult"
-        }
       ]
     },
     "LanguageDetectionTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a Language Detection task.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
+      "properties": {
+        "loggingOptOut": {
+          "type": "boolean",
+          "description": "logging opt out",
+          "default": false
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "model version",
+          "default": "latest"
         }
-      ]
+      }
     },
     "LanguageDetectionTaskResult": {
       "type": "object",
@@ -3921,26 +4026,6 @@
         "name": "LengthUnit",
         "modelAsString": true
       }
-    },
-    "LinkedEntitiesDocumentResult": {
-      "type": "object",
-      "properties": {
-        "entities": {
-          "type": "array",
-          "description": "Recognized well known entities in the document.",
-          "items": {
-            "$ref": "#/definitions/LinkedEntity"
-          }
-        }
-      },
-      "required": [
-        "entities"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DocumentResult"
-        }
-      ]
     },
     "LinkedEntity": {
       "type": "object",
@@ -4568,32 +4653,6 @@
         "modelAsString": true
       }
     },
-    "PiiEntitiesDocumentResult": {
-      "type": "object",
-      "properties": {
-        "redactedText": {
-          "type": "string",
-          "description": "Returns redacted text."
-        },
-        "entities": {
-          "type": "array",
-          "description": "Recognized entities in the document.",
-          "items": {
-            "$ref": "#/definitions/Entity"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "redactedText",
-        "entities"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DocumentResult"
-        }
-      ]
-    },
     "PiiEntityRecognitionLROResult": {
       "type": "object",
       "properties": {
@@ -4627,7 +4686,23 @@
     },
     "PiiResult": {
       "type": "object",
+      "description": "Pre built result",
       "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
+        },
         "documents": {
           "type": "array",
           "description": "Response by document",
@@ -4637,29 +4712,14 @@
         }
       },
       "required": [
+        "errors",
+        "modelVersion",
         "documents"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltResult"
-        }
       ]
     },
     "PiiResultWithDetectedLanguage": {
       "type": "object",
       "properties": {
-        "redactedText": {
-          "type": "string",
-          "description": "Returns redacted text."
-        },
-        "entities": {
-          "type": "array",
-          "description": "Recognized entities in the document.",
-          "items": {
-            "$ref": "#/definitions/Entity"
-          },
-          "x-ms-identifiers": []
-        },
         "id": {
           "type": "string",
           "description": "Unique, non-empty document identifier."
@@ -4676,22 +4736,44 @@
           "$ref": "#/definitions/DocumentStatistics",
           "description": "if showStats=true was specified in the request this field will contain information about the document payload."
         },
+        "redactedText": {
+          "type": "string",
+          "description": "Returns redacted text."
+        },
+        "entities": {
+          "type": "array",
+          "description": "Recognized entities in the document.",
+          "items": {
+            "$ref": "#/definitions/Entity"
+          },
+          "x-ms-identifiers": []
+        },
         "detectedLanguage": {
           "$ref": "#/definitions/DetectedLanguage",
           "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
       "required": [
-        "redactedText",
-        "entities",
         "id",
-        "warnings"
+        "warnings",
+        "redactedText",
+        "entities"
       ]
     },
     "PiiTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a PII Entities Recognition task.",
       "properties": {
+        "loggingOptOut": {
+          "type": "boolean",
+          "description": "logging opt out",
+          "default": false
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "model version",
+          "default": "latest"
+        },
         "domain": {
           "type": "string",
           "default": "none",
@@ -4839,12 +4921,7 @@
             ]
           }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
-        }
-      ]
+      }
     },
     "PiiTaskResult": {
       "type": "object",
@@ -4862,47 +4939,6 @@
         }
       ],
       "x-ms-discriminator-value": "PiiEntityRecognitionResults"
-    },
-    "PreBuiltResult": {
-      "type": "object",
-      "description": "Pre built result",
-      "properties": {
-        "errors": {
-          "type": "array",
-          "description": "Errors by document id.",
-          "items": {
-            "$ref": "#/definitions/DocumentError"
-          }
-        },
-        "statistics": {
-          "$ref": "#/definitions/RequestStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
-        },
-        "modelVersion": {
-          "type": "string",
-          "description": "This field indicates which model is used for scoring."
-        }
-      },
-      "required": [
-        "errors",
-        "modelVersion"
-      ]
-    },
-    "PreBuiltTaskParameters": {
-      "type": "object",
-      "description": "Parameters object for a text analysis task using pre-built models.",
-      "properties": {
-        "modelVersion": {
-          "type": "string",
-          "description": "model version",
-          "default": "latest"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/TaskParameters"
-        }
-      ]
     },
     "PrebuiltComponent": {
       "type": "object",
@@ -4997,12 +5033,7 @@
         "erroneousDocumentsCount",
         "transactionsCount"
       ],
-      "allOf": [
-        {
-          "type": "object",
-          "additionalProperties": {}
-        }
-      ]
+      "additionalProperties": {}
     },
     "ScriptKind": {
       "type": "string",
@@ -5182,6 +5213,16 @@
       "type": "object",
       "description": "Supported parameters for a Sentiment Analysis task.",
       "properties": {
+        "loggingOptOut": {
+          "type": "boolean",
+          "description": "logging opt out",
+          "default": false
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "model version",
+          "default": "latest"
+        },
         "opinionMining": {
           "type": "boolean",
           "default": false
@@ -5217,12 +5258,7 @@
             ]
           }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltTaskParameters"
-        }
-      ]
+      }
     },
     "SentimentConfidenceScores": {
       "type": "object",
@@ -5250,53 +5286,10 @@
         "negative"
       ]
     },
-    "SentimentDocumentResult": {
-      "type": "object",
-      "properties": {
-        "sentiment": {
-          "$ref": "#/definitions/DocumentSentimentValue",
-          "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed)."
-        },
-        "confidenceScores": {
-          "$ref": "#/definitions/SentimentConfidenceScores"
-        },
-        "sentences": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SentenceSentiment"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "sentiment",
-        "confidenceScores",
-        "sentences"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DocumentResult"
-        }
-      ]
-    },
     "SentimentDocumentResultWithDetectedLanguage": {
       "type": "object",
       "description": "Sentiment analysis per document.",
       "properties": {
-        "sentiment": {
-          "$ref": "#/definitions/DocumentSentimentValue",
-          "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed)."
-        },
-        "confidenceScores": {
-          "$ref": "#/definitions/SentimentConfidenceScores"
-        },
-        "sentences": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SentenceSentiment"
-          },
-          "x-ms-identifiers": []
-        },
         "id": {
           "type": "string",
           "description": "Unique, non-empty document identifier."
@@ -5313,17 +5306,31 @@
           "$ref": "#/definitions/DocumentStatistics",
           "description": "if showStats=true was specified in the request this field will contain information about the document payload."
         },
+        "sentiment": {
+          "$ref": "#/definitions/DocumentSentimentValue",
+          "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed)."
+        },
+        "confidenceScores": {
+          "$ref": "#/definitions/SentimentConfidenceScores"
+        },
+        "sentences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SentenceSentiment"
+          },
+          "x-ms-identifiers": []
+        },
         "detectedLanguage": {
           "$ref": "#/definitions/DetectedLanguage",
           "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
       "required": [
+        "id",
+        "warnings",
         "sentiment",
         "confidenceScores",
-        "sentences",
-        "id",
-        "warnings"
+        "sentences"
       ]
     },
     "SentimentLROResult": {
@@ -5347,6 +5354,21 @@
       "type": "object",
       "description": "Sentiment analysis per document.",
       "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/RequestStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
+        },
+        "modelVersion": {
+          "type": "string",
+          "description": "This field indicates which model is used for scoring."
+        },
         "documents": {
           "type": "array",
           "description": "The sentiment analysis results for each document in the input.",
@@ -5356,12 +5378,9 @@
         }
       },
       "required": [
+        "errors",
+        "modelVersion",
         "documents"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/PreBuiltResult"
-        }
       ]
     },
     "SentimentTaskResult": {
@@ -5513,27 +5532,6 @@
       "x-ms-enum": {
         "name": "TargetRelationType",
         "modelAsString": false
-      }
-    },
-    "TaskIdentifier": {
-      "type": "object",
-      "description": "Base task object.",
-      "properties": {
-        "taskName": {
-          "type": "string",
-          "description": "task name"
-        }
-      }
-    },
-    "TaskParameters": {
-      "type": "object",
-      "description": "Base parameters object for a text analysis task.",
-      "properties": {
-        "loggingOptOut": {
-          "type": "boolean",
-          "description": "logging opt out",
-          "default": false
-        }
       }
     },
     "Tasks": {

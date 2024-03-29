@@ -5,11 +5,11 @@ using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
 namespace Language.AnalyzeText;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 @added(Versions.v2023_04_01)
 @clientName("ExtractiveSummarizationTaskContent", "csharp")
 @doc("Supported parameters for an Extractive Summarization task.")
-model ExtractiveSummarizationTaskParameters extends PreBuiltTaskParameters {
+model ExtractiveSummarizationTaskParameters is PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   sentenceCount?: int64 = 3;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -31,10 +31,10 @@ model ExtractiveSummarizationLROTask extends AnalyzeTextLROTask {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   parameters?: ExtractiveSummarizationTaskParameters;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_01)
-model ExtractiveSummarizationResult extends PreBuiltResult {
+model ExtractiveSummarizationResult is PreBuiltResult {
   @added(Versions.v2023_04_01)
   @doc("Response by document")
   @typeChangedFrom(
@@ -53,10 +53,10 @@ enum ExtractiveSummarizationSortingCriteria {
   @doc("Indicates that results should be sorted in order of importance (i.e. rank score) according to the model.")
   Rank,
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 @added(Versions.v2023_04_01)
 @doc("A ranked list of sentences representing the extracted summary.")
-model ExtractedSummaryDocumentResult extends DocumentResult {
+model ExtractedSummaryDocumentResult is DocumentResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   sentences: Array<ExtractedSummarySentence>;
 }
@@ -103,11 +103,11 @@ model AbstractiveSummarizationLROTask extends AnalyzeTextLROTask {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   parameters: AbstractiveSummarizationTaskParameters;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 @added(Versions.v2023_04_01)
 @clientName("AbstractiveSummarizationTaskContent", "csharp")
 @doc("Supported parameters for the pre-build Abstractive Summarization task.")
-model AbstractiveSummarizationTaskParameters extends PreBuiltTaskParameters {
+model AbstractiveSummarizationTaskParameters is PreBuiltTaskParameters {
   ...AbstractiveSummarizationTaskParametersBase;
 
   @added(Versions.v2023_11_15_preview)
@@ -136,16 +136,16 @@ model AbstractiveSummarizationResultBase {
   )
   documents: Array<AbstractiveSummaryDocumentResultWithDetectedLanguage>;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 @added(Versions.v2023_04_01)
 @doc("An object representing the pre-build summarization results of each document.")
-model AbstractiveSummarizationResult extends PreBuiltResult {
+model AbstractiveSummarizationResult is PreBuiltResult {
   ...AbstractiveSummarizationResultBase;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 @added(Versions.v2023_04_01)
 @doc("An object representing the pre-build summarization results of each document.")
-model AbstractiveSummaryDocumentResult extends DocumentResult {
+model AbstractiveSummaryDocumentResult is DocumentResult {
   @doc("A list of abstractive summaries.")
   summaries: Array<AbstractiveSummary>;
 }

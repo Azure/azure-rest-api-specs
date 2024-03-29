@@ -7,10 +7,10 @@ using TypeSpec.Versioning;
 using Azure.Core;
 
 namespace Language.AnalyzeText;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 @doc("Supported parameters for a Healthcare task.")
 @clientName("HealthcareTaskContent", "csharp")
-model HealthcareTaskParameters extends PreBuiltTaskParameters {
+model HealthcareTaskParameters is PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
@@ -62,9 +62,9 @@ model HealthcareLROTask extends AnalyzeTextLROTask {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   parameters?: HealthcareTaskParameters;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model HealthcareResult extends PreBuiltResult {
+model HealthcareResult is PreBuiltResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   @typeChangedFrom(
     Versions.v2023_04_15_preview,
@@ -72,9 +72,9 @@ model HealthcareResult extends PreBuiltResult {
   )
   documents: Array<HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage>;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model HealthcareEntitiesDocumentResult extends DocumentResult {
+model HealthcareEntitiesDocumentResult is DocumentResult {
   @doc("Healthcare entities.")
   entities: Array<HealthcareEntity>;
 

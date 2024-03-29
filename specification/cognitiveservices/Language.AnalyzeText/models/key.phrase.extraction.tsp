@@ -15,10 +15,10 @@ model AnalyzeTextKeyPhraseExtractionInput extends AnalyzeTextTask {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   parameters?: KeyPhraseTaskParameters;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 @clientName("KeyPhraseTaskContent", "csharp")
 @doc("Supported parameters for a Key Phrase Extraction task.")
-model KeyPhraseTaskParameters extends PreBuiltTaskParameters {}
+model KeyPhraseTaskParameters is PreBuiltTaskParameters;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("An object representing the task definition for a Key Phrase Extraction task.")
@@ -36,9 +36,9 @@ model KeyPhraseTaskResult extends AnalyzeTextTaskResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: KeyPhraseResult;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model KeyPhraseResult extends PreBuiltResult {
+model KeyPhraseResult is PreBuiltResult {
   @doc("Response by document")
   @typeChangedFrom(
     Versions.v2023_04_15_preview,
@@ -46,9 +46,9 @@ model KeyPhraseResult extends PreBuiltResult {
   )
   documents: Array<KeyPhrasesDocumentResultWithDetectedLanguage>;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model KeyPhrasesDocumentResult extends DocumentResult {
+model KeyPhrasesDocumentResult is DocumentResult {
   @doc("A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document.")
   keyPhrases: Array<string>;
 }

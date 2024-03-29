@@ -5,11 +5,10 @@ using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
 namespace Language.AnalyzeText;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 @added(Versions.v2023_04_15_preview)
 @clientName("CustomHealthcareTaskContent", "csharp")
 @doc("Supported parameters for a custom Healthcare task.")
-model CustomHealthcareTaskParameters extends CustomTaskParameters {
+model CustomHealthcareTaskParameters is CustomTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 }
@@ -23,10 +22,10 @@ model CustomHealthcareLROTask extends AnalyzeTextLROTask {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   parameters?: CustomHealthcareTaskParameters;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_15_preview)
-model CustomHealthcareResult extends CustomResult {
+model CustomHealthcareResult is CustomResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   documents: Array<CustomHealthcareEntitiesDocumentResultWithDocumentDetectedLanguage>;
 }
@@ -37,20 +36,20 @@ model CustomHealthcareEntitiesDocumentResultWithDocumentDetectedLanguage
   is CustomHealthcareEntitiesDocumentResult {
   ...DocumentDetectedLanguage;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_15_preview)
-model CustomHealthcareEntitiesDocumentResult extends DocumentResult {
+model CustomHealthcareEntitiesDocumentResult is DocumentResult {
   @doc("Healthcare entities.")
   entities: Array<CustomHealthcareEntity>;
 
   @doc("Healthcare entity relations.")
   relations: Array<HealthcareRelation>;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_15_preview)
-model CustomHealthcareEntity extends HealthcareEntity {
+model CustomHealthcareEntity is HealthcareEntity {
   @doc("(Optional) Entity component information listing fired components of the extracted entity. This object only applies for custom healthcare.")
   entityComponentInformation?: Array<EntityComponentInformation>;
 }

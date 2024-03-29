@@ -9,10 +9,10 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
 namespace Language.AnalyzeText;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 @clientName("CustomEntitiesTaskContent", "csharp")
 @doc("Supported parameters for a Custom Entities task.")
-model CustomEntitiesTaskParameters extends CustomTaskParameters {
+model CustomEntitiesTaskParameters is CustomTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 }
@@ -25,24 +25,23 @@ model CustomEntitiesLROTask extends AnalyzeTextLROTask {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   parameters?: CustomEntitiesTaskParameters;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model CustomEntitiesResult extends CustomResult {
+model CustomEntitiesResult is CustomResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   documents: Array<EntitiesDocumentResult>;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_15_preview)
-model CustomEntitiesResultWithDocumentDetectedLanguage extends CustomResult {
+model CustomEntitiesResultWithDocumentDetectedLanguage is CustomResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   documents: Array<EntitiesDocumentResultWithDetectedLanguage>;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 @clientName("CustomSingleLabelClassificationTaskContent", "csharp")
 @doc("Supported parameters for a Custom Single Classification task.")
-model CustomSingleLabelClassificationTaskParameters
-  extends CustomTaskParameters {}
+model CustomSingleLabelClassificationTaskParameters is CustomTaskParameters;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Use custom models to classify text into single label taxonomy")
@@ -52,17 +51,17 @@ model CustomSingleLabelClassificationLROTask extends AnalyzeTextLROTask {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   parameters?: CustomSingleLabelClassificationTaskParameters;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model CustomLabelClassificationResult extends CustomResult {
+model CustomLabelClassificationResult is CustomResult {
   @doc("Response by document")
   documents: Array<ClassificationDocumentResult>;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_15_preview)
 model CustomLabelClassificationResultWithDocumentDetectedLanguage
-  extends CustomResult {
+  is CustomResult {
   @doc("Response by document")
   documents: Array<ClassificationDocumentResultWithDetectedLanguage>;
 }
@@ -75,11 +74,10 @@ model ClassificationResult {
   @doc("Confidence score between 0 and 1 of the recognized class.")
   confidenceScore: float64;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 @clientName("CustomMultiLabelClassificationTaskContent", "csharp")
 @doc("Supported parameters for a Custom Multi Classification task.")
-model CustomMultiLabelClassificationTaskParameters
-  extends CustomTaskParameters {}
+model CustomMultiLabelClassificationTaskParameters is CustomTaskParameters;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Use custom models to classify text into multi label taxonomy")
@@ -89,9 +87,9 @@ model CustomMultiLabelClassificationLROTask extends AnalyzeTextLROTask {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   parameters?: CustomMultiLabelClassificationTaskParameters;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model ClassificationDocumentResult extends DocumentResult {
+model ClassificationDocumentResult is DocumentResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   class: Array<ClassificationResult>;
 }
@@ -151,10 +149,10 @@ model AnalyzeTextDynamicClassificationInput extends AnalyzeTextTask {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   parameters?: DynamicClassificationTaskParameters;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_15_preview)
-model DynamicClassificationDocumentResult extends DocumentResult {
+model DynamicClassificationDocumentResult is DocumentResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   classifications: Array<ClassificationResult>;
 }
@@ -207,11 +205,11 @@ model ListComponent extends EntityComponentInformation {
   @doc("The list key of an extracted entity type.")
   value?: string;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 @added(Versions.v2023_04_15_preview)
 @clientName("DynamicClassificationTaskContent", "csharp")
 @doc("Supported parameters for a Dynamic Classification task.")
-model DynamicClassificationTaskParameters extends PreBuiltTaskParameters {
+model DynamicClassificationTaskParameters is PreBuiltTaskParameters {
   @doc("Specifies either one or multiple categories per document. Defaults to multi classification which may return more than one class for each document.")
   classificationType?: ClassificationType = ClassificationType.Multi;
 
@@ -227,10 +225,10 @@ enum ClassificationType {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   Single,
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_15_preview)
-model DynamicClassificationResult extends PreBuiltResult {
+model DynamicClassificationResult is PreBuiltResult {
   @doc("Response by document")
   documents: Array<DynamicClassificationDocumentResult>;
 }

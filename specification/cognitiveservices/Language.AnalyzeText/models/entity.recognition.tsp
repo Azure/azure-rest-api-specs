@@ -15,10 +15,10 @@ model AnalyzeTextEntityRecognitionInput extends AnalyzeTextTask {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   parameters?: EntitiesTaskParameters;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 @clientName("EntitiesTaskContent", "csharp")
 @doc("Supported parameters for an Entity Recognition task.")
-model EntitiesTaskParameters extends PreBuiltTaskParameters {
+model EntitiesTaskParameters is PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
@@ -55,16 +55,16 @@ model EntitiesTaskResult extends AnalyzeTextTaskResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: EntitiesResult;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model EntitiesResult extends PreBuiltResult {
+model EntitiesResult is PreBuiltResult {
   @doc("Response by document")
   @typeChangedFrom(Versions.v2023_04_15_preview, Array<EntitiesDocumentResult>)
   documents: Array<EntitiesDocumentResultWithMetadataDetectedLanguage>;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model EntitiesDocumentResult extends DocumentResult {
+model EntitiesDocumentResult is DocumentResult {
   @doc("Recognized entities in the document.")
   entities: Array<Entity>;
 }
@@ -313,10 +313,10 @@ model AllowOverlapEntityPolicyType extends BaseEntityOverlapPolicy {
   @doc("The entity OverlapPolicy object kind.")
   policyKind: policyKind.allowOverlap;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_15_preview)
-model EntitiesDocumentResultWithMetadata extends DocumentResult {
+model EntitiesDocumentResultWithMetadata is DocumentResult {
   @doc("Recognized entities in the document.")
   entities: Array<EntityWithMetadata>;
 }
@@ -330,20 +330,20 @@ model EntityTag {
   @doc("Detection score between 0 and 1 of the extracted entity.")
   confidenceScore?: float64;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_15_preview)
-model EntityWithTags extends Entity {
+model EntityWithTags is Entity {
   @doc("An entity type is the lowest (or finest) granularity at which the entity has been detected. The type maps to the specific metadata attributes associated with the entity detected.")
   type: string;
 
   @doc("List of entity tags. Tags are to express some similarities/affinity between entities.")
   tags: Array<EntityTag>;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_15_preview)
-model EntityWithMetadata extends EntityWithTags {
+model EntityWithMetadata is EntityWithTags {
   @doc("The entity metadata object.")
   metadata?: BaseMetadata;
 }

@@ -15,10 +15,10 @@ model AnalyzeTextEntityLinkingInput extends AnalyzeTextTask {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   parameters?: EntityLinkingTaskParameters;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 @doc("Supported parameters for an Entity Linking task.")
 @clientName("EntityLinkingTaskContent", "csharp")
-model EntityLinkingTaskParameters extends PreBuiltTaskParameters {
+model EntityLinkingTaskParameters is PreBuiltTaskParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 }
@@ -37,9 +37,9 @@ model EntityLinkingTaskResult extends AnalyzeTextTaskResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: EntityLinkingResult;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model EntityLinkingResult extends PreBuiltResult {
+model EntityLinkingResult is PreBuiltResult {
   @doc("Response by document")
   @typeChangedFrom(
     Versions.v2023_04_15_preview,
@@ -47,9 +47,9 @@ model EntityLinkingResult extends PreBuiltResult {
   )
   documents: Array<EntityLinkingResultWithDetectedLanguage>;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-model LinkedEntitiesDocumentResult extends DocumentResult {
+model LinkedEntitiesDocumentResult is DocumentResult {
   @doc("Recognized well known entities in the document.")
   entities: Array<LinkedEntity>;
 }
