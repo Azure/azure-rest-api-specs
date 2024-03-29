@@ -1,5 +1,5 @@
 import "@azure-tools/typespec-client-generator-core";
-import "./route.trialmatcher.tsp";
+import "./route.patienttimeline.tsp";
 
 import "@typespec/rest";
 import "@typespec/http";
@@ -13,13 +13,13 @@ using Azure.ClientGenerator.Core;
 namespace ClientForAzureHealthInsights;
 
 @client({
-  name: "ClinicalMatchingClient",
+  name: "PatientTimelineClient",
   service: AzureHealthInsights,
 })
-interface ClinicalMatchingClient {
+interface PatientTimelineClient {
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling through operation-location"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "https://github.com/microsoft/typespec/issues/2037"
-  matchTrials is AzureHealthInsights.TrialMatcher.createJob;
+  inferPatientTimeline is AzureHealthInsights.PatientTimeline.createJob;
 }
 
 @@clientName(Fhir.R4.Extension, "Fhir_R4_Extension", "java");
