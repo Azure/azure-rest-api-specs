@@ -51,7 +51,7 @@ model SiteUpdateProperties {
 model SiteUpdate {
   @doc("The managed service identities assigned to this resource.")
   identity?: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
- 
+
   @doc("The updatable properties of the Site.")
   properties?: SiteUpdateProperties;
 }
