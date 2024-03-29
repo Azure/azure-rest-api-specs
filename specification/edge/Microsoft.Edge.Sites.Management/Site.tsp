@@ -35,7 +35,7 @@ interface Sites {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom operation on the scope of subscription"
-interface SitesBySubscriptions {
+interface SitesBySubscription {
   list is ArmListBySubscription<Site>;
   get is ArmResourceRead<Site, BaseParameters = SubscriptionBaseParameters>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<

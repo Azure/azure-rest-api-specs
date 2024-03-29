@@ -118,7 +118,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/sites": {
       "get": {
-        "operationId": "SitesBySubscriptions_List",
+        "operationId": "SitesBySubscription_List",
         "description": "List Site resources by subscription ID",
         "parameters": [
           {
@@ -142,11 +142,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List by Subscription": {
-            "$ref": "./examples/SitesBySubscriptions_List.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -154,7 +149,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/sites/{siteName}": {
       "get": {
-        "operationId": "SitesBySubscriptions_Get",
+        "operationId": "SitesBySubscription_Get",
         "description": "Get a Site",
         "parameters": [
           {
@@ -185,15 +180,10 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Get Site Subscription": {
-            "$ref": "./examples/SitesBySubscriptions_Get.json"
-          }
         }
       },
       "put": {
-        "operationId": "SitesBySubscriptions_CreateOrUpdate",
+        "operationId": "SitesBySubscription_CreateOrUpdate",
         "description": "Create a Site",
         "parameters": [
           {
@@ -247,18 +237,13 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Create Site Subscription": {
-            "$ref": "./examples/SitesBySubscriptions_CreateOrUpdate.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "operationId": "SitesBySubscriptions_Update",
+        "operationId": "SitesBySubscription_Update",
         "description": "Update a Site",
         "parameters": [
           {
@@ -298,15 +283,10 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Patch Site Subscription": {
-            "$ref": "./examples/SitesBySubscriptions_Update.json"
-          }
         }
       },
       "delete": {
-        "operationId": "SitesBySubscriptions_Delete",
+        "operationId": "SitesBySubscription_Delete",
         "description": "Delete a Site",
         "parameters": [
           {
@@ -336,11 +316,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete Site Subscription": {
-            "$ref": "./examples/SitesBySubscriptions_Delete.json"
           }
         }
       }
