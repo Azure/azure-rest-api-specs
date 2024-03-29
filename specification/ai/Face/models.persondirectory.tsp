@@ -29,7 +29,7 @@ model FaceOperationStatus {
   operationId: uuid;
 
   @doc("Current status of the operation.")
-  status: Foundations.OperationState;
+  status: FaceOperationState;
 
   @doc("Date and time the operation was created.")
   createdDateTime: utcDateTime;

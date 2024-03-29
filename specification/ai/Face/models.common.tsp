@@ -133,12 +133,32 @@ model ReturnRecognitionModelOptions {
   returnRecognitionModel?: boolean = false;
 }
 
+@doc("The status of long running operation.")
+@lroStatus
+union FaceOperationState
+{
+  string,
+
+  @doc("The operation is not started.")
+  "notStarted",
+
+  @doc("The operation is still running.")
+  "running",
+
+  @doc("The operation is succeeded.")
+  @lroSucceeded
+  "succeeded",
+
+  @doc("The operation is failed.")
+  @lroFailed
+  "failed",
+}
+
 @doc("Training status of a container")
 @clientName("FaceCollectionTrainingStatus")
 model TrainingStatus {
   @doc("Training status of the container.")
-  @lroStatus
-  status: Foundations.OperationState;
+  status: FaceOperationState;
 
   @doc("A combined UTC date and time string that describes the created time of the person group, large person group or large face list.")
   createdDateTime: utcDateTime;
