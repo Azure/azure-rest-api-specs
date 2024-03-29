@@ -101,6 +101,7 @@ union JobStatus {
 
   @lroFailed
   Failed: "failed",
+
   PartiallyCompleted: "partiallyCompleted",
 }
 
