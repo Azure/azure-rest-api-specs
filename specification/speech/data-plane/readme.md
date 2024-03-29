@@ -35,5 +35,5 @@ These settings apply only when `--tag=package-2024-05-15-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-05-15-preview'
 input-file:
-  - Microsoft.CognitiveServices.Speech.Ingestion/preview/2024-05-15-preview/openapi.json
+  - Microsoft.CognitiveServices.Speech.Ingestion/preview/2024-05-15-preview/ingestion.json
 ```
