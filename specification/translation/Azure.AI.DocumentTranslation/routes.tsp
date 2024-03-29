@@ -57,6 +57,9 @@ must be unique.
       @doc("Request has been accepted successfully.")
       @statusCode
       code: 202;
+
+      @header
+      location: string;
     }
   >;
 
