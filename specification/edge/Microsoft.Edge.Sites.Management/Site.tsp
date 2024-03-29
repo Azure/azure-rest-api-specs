@@ -29,7 +29,7 @@ model Site is ProxyResource<SiteProperties> {
 interface Sites {
   get is ArmResourceRead<Site>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Site>;
-  update is ArmResourcePatchSync<Site, SiteProperties>;
+  update is ArmCustomPatchSync<Site, SiteUpdate>;
   delete is ArmResourceDeleteSync<Site>;
   list is ArmResourceListByParent<Site>;
 }
@@ -42,9 +42,9 @@ interface SitesBySubscription {
     Site,
     BaseParameters = SubscriptionBaseParameters
   >;
-  update is ArmResourcePatchSync<
+  update is ArmCustomPatchSync<
     Site,
-    SiteProperties,
+    SiteUpdate,
     BaseParameters = SubscriptionBaseParameters
   >;
   delete is ArmResourceDeleteSync<
