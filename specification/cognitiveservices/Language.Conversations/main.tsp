@@ -114,10 +114,10 @@ model ConversationAnalysisOptions {
   @doc("The abstract base for a user input formatted conversation (e.g., Text, Transcript).")
   conversationItem: ConversationItemBase;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("The abstract base for a user input formatted conversation (e.g., Text, Transcript).")
-model ConversationItemBase extends Record<unknown> {
+model ConversationItemBase is Record<unknown> {
   @doc("The ID of a conversation item.")
   id: string;
 
@@ -151,10 +151,9 @@ enum role {
   generic,
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("The text modality of an input conversation.")
-model TextConversationItem extends ConversationItemBase {
+model TextConversationItem is ConversationItemBase {
   @doc("The text input")
   text: string;
 }
@@ -624,12 +623,12 @@ model AnalyzeConversationJobsInput {
   @doc("Set of tasks to execute on the input conversation.")
   tasks: Array<AnalyzeConversationLROTask>;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Model types must use PascalCase"
 @doc("Base class for a long-running conversation input task.")
 @discriminator("kind")
 @added(Versions.v2023_04_01)
-model AnalyzeConversationLROTask extends TaskIdentifier {
+model AnalyzeConversationLROTask is TaskIdentifier {
   @doc("Enumeration of supported analysis tasks on a collection of conversations.")
   kind: AnalyzeConversationLROTaskKind;
 }
@@ -784,11 +783,11 @@ model TranscriptConversation extends Conversation {
   @doc("Ordered list of transcript conversation items in the conversation.")
   conversationItems: Array<TranscriptConversationItem>;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("Additional properties for supporting transcript conversation.")
 @added(Versions.v2023_04_01)
-model TranscriptConversationItem extends ConversationItemBase {
+model TranscriptConversationItem is ConversationItemBase {
   @doc("Inverse text normalization (ITN) representation of input. The inverse-text-normalized form is the recognized text from Microsoft's speech-to-text API, with phone numbers, numbers, abbreviations, and other transformations applied.")
   itn: string;
 
@@ -826,10 +825,10 @@ model RedactedTranscriptContent {
   @doc("List of redacted audio segments.")
   audioTimings?: Array<AudioTiming>;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 @doc("Word-level timing information that the speech-to-text API generates. The words in this object should have 1:1 correspondence with the lexical input to allow for audio redaction.")
 @added(Versions.v2023_04_01)
-model WordLevelTiming extends AudioTiming {
+model WordLevelTiming is AudioTiming {
   @doc("Recognized word.")
   word?: string;
 }
@@ -863,11 +862,11 @@ model ConversationStatistics {
   @doc("Number of text units for the request.")
   transactionsCount: int32;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("if showStats=true was specified in the request, this field contains information about the request payload.")
 @added(Versions.v2023_04_01)
-model ConversationRequestStatistics extends RequestStatistics {
+model ConversationRequestStatistics is RequestStatistics {
   @doc("Number of conversations submitted in the request.")
   conversationsCount: int32;
 
@@ -877,10 +876,10 @@ model ConversationRequestStatistics extends RequestStatistics {
   @doc("Number of invalid documents. This includes documents that are empty, over the size limit, or in unsupported languages.")
   erroneousConversationsCount: int32;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 @doc("Audio timing at the conversation item level.")
 @added(Versions.v2023_04_01)
-model ConversationItemLevelTiming extends AudioTiming {}
+model ConversationItemLevelTiming is AudioTiming;
 
 @added(Versions.v2023_04_15_preview)
 @doc("Task definition for conversational sentiment.")
@@ -891,10 +890,10 @@ model AnalyzeConversationalSentimentTask extends AnalyzeConversationLROTask {
   @doc("Supported parameters for a conversational sentiment task.")
   parameters?: ConversationalSentimentTaskParameters;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 @added(Versions.v2023_04_15_preview)
 @doc("Supported parameters for a conversational sentiment task.")
-model ConversationalSentimentTaskParameters extends PreBuiltTaskParameters {
+model ConversationalSentimentTaskParameters is PreBuiltTaskParameters {
   @added(Versions.v2023_04_15_preview)
   @doc("For transcript conversations, this parameter provides information regarding which content type should be used for sentiment analysis. The details of the sentiment analysis - like the offset, length and the text itself - will correspond to the text type selected here.")
   predictionSource?: TranscriptContentType;
@@ -909,10 +908,10 @@ model AnalyzeConversationSentimentResult extends AnalyzeConversationJobResult {
   @doc("The result from sentiment analysis operation for each conversation.")
   results: ConversationSentimentResults;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 @added(Versions.v2023_04_15_preview)
 @doc("The result from sentiment analysis operation for each conversation.")
-model ConversationSentimentResults extends PreBuiltResult {
+model ConversationSentimentResults is PreBuiltResult {
   @doc("Array of ConversationSentimentResults")
   conversations: Array<ConversationSentimentResultsConversation>;
 }
@@ -979,10 +978,10 @@ model AnalyzeConversationConversationPiiResult
   @doc("results")
   results: ConversationPiiResults;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 @added(Versions.v2023_04_15_preview)
 @doc("The result from PII detection and redaction operation for each conversation.")
-model ConversationPiiResults extends PreBuiltResult {
+model ConversationPiiResults is PreBuiltResult {
   @doc("array of conversations")
   conversations: Array<ConversationalPiiResultWithResultBase>;
 }
@@ -1023,10 +1022,10 @@ model AnalyzeConversationPiiTask extends AnalyzeConversationLROTask {
   @doc("parameters")
   parameters?: ConversationPiiTaskParameters;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 @added(Versions.v2023_04_15_preview)
 @doc("Supported parameters for a conversational pii task.")
-model ConversationPiiTaskParameters extends PreBuiltTaskParameters {
+model ConversationPiiTaskParameters is PreBuiltTaskParameters {
   @added(Versions.v2023_04_15_preview)
   @doc("Array of ConversationPIICategories")
   piiCategories?: Array<ConversationPiiCategories>;
@@ -1132,17 +1131,16 @@ model ConversationSummarizationTaskParametersBase
   @doc("Array of Summary Aspects")
   summaryAspects: Array<SummaryAspect>;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 @doc("Supported parameters for pre-build conversational summarization task.")
 @added(Versions.v2023_04_01)
-model ConversationSummarizationTaskParameters extends PreBuiltTaskParameters {
+model ConversationSummarizationTaskParameters is PreBuiltTaskParameters {
   ...ConversationSummarizationTaskParametersBase;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 @doc("Supported parameters for a custom conversation summarization task.")
 @added(Versions.v2023_04_15_preview)
-model CustomConversationSummarizationTaskParameters
-  extends CustomTaskParameters {
+model CustomConversationSummarizationTaskParameters is CustomTaskParameters {
   ...ConversationSummarizationTaskParametersBase;
 }
 
@@ -1234,10 +1232,10 @@ model SummaryResultItem {
   @doc("Context list of the summary.")
   contexts?: Array<ItemizedSummaryContext>;
 }
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance"
+
 @doc("Context of the summary with a conversation item ID.")
 @added(Versions.v2023_04_01)
-model ItemizedSummaryContext extends SummaryContext {
+model ItemizedSummaryContext is SummaryContext {
   @doc("Reference to the ID of ConversationItem.")
   conversationItemId: string;
 }
