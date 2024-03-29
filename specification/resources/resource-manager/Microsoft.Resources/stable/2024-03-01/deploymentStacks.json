@@ -289,6 +289,9 @@
             "$ref": "#/parameters/DeleteManagementGroupParameter"
           },
           {
+            "$ref": "#/parameters/BypassStackOutOfSyncErrorParameter"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -442,6 +445,9 @@
             "$ref": "#/parameters/DeleteManagementGroupParameter"
           },
           {
+            "$ref": "#/parameters/BypassStackOutOfSyncErrorParameter"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -593,6 +599,9 @@
           },
           {
             "$ref": "#/parameters/DeleteManagementGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/BypassStackOutOfSyncErrorParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1502,6 +1511,14 @@
       },
       "x-ms-parameter-location": "method",
       "description": "Flag to indicate delete rather than detach for unmanaged management groups."
+    },
+    "BypassStackOutOfSyncErrorParameter": {
+      "name": "bypassStackOutOfSyncError",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method",
+      "description": "Flag to bypass service errors that indicate the stack resource list is not correctly synchronized."
     }
   }
 }
