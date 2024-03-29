@@ -2373,6 +2373,14 @@
           "description": "Display name to help differentiate multiple instances of the same task.",
           "type": "string"
         },
+        "timeout": {
+          "type": "integer",
+          "description": "Timeout, in seconds. Overrides any timeout provided on the task definition."
+        },
+        "runAs": {
+          "description": "What account to run the task as.",
+          "$ref": "#/definitions/CustomizationTaskExecutionAccount"
+        },
         "id": {
           "description": "ID of the task instance.",
           "type": "string",
@@ -2405,6 +2413,25 @@
         "name"
       ]
     },
+    "CustomizationTaskExecutionAccount": {
+      "description": "What account to run the task as.",
+      "enum": ["System", "User"],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CustomizationTaskExecutionAccount",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "System",
+            "description": "The SYSTEM account."
+          },
+          {
+            "value": "User",
+            "description": "The account of the signed in user."
+          }
+        ]
+      }
+    },
     "CustomizationTaskStatus": {
       "description": "Status of a customization task.",
       "enum": [
@@ -2414,7 +2441,9 @@
         "FailedValidation",
         "Skipped",
         "TimedOut",
-        "Failed"
+        "Failed",
+        "WaitingForUserInputUac",
+        "WaitingForUserSession"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -2448,6 +2477,14 @@
           {
             "value": "Failed",
             "description": "The task failed to execute."
+          },
+          {
+            "value": "WaitingForUserInputUac",
+            "description": "The task is awaiting the UAC prompt to be approved."
+          },
+          {
+            "value": "WaitingForUserSession",
+            "description": "The task is awaiting the user to connect to the Dev Box to execute."
           }
         ]
       }
@@ -2571,6 +2608,10 @@
         },
         "rdpConnectionUrl": {
           "description": "Link to open a Remote Desktop session.",
+          "type": "string"
+        },
+        "cloudPcConnectionUrl": {
+          "description": "Link to open a remote desktop session via a dev box's underlying Cloud PC. (This will default to Windows App)",
           "type": "string"
         }
       }

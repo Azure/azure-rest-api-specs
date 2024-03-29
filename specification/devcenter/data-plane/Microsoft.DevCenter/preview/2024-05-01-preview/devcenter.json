@@ -118,6 +118,46 @@
           }
         }
       }
+    },
+    "/projects/{projectName}/users/{userId}/abilities": {
+      "get": {
+        "tags": [
+          "Projects",
+          "Abilities"
+        ],
+        "description": "Gets the signed-in user's permitted abilities in a project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ProjectNameMethodParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "operationId": "DevCenter_GetProjectAbilities",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProjectAbilities"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevCenter_GetProjectAbilities": {
+            "$ref": "./examples/Projects_GetAbilities.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -172,6 +212,184 @@
         "uri",
         "name"
       ]
+    },
+    "ProjectAbilities": {
+      "description": "Abilities a user has on a project.",
+      "type": "object",
+      "properties": {
+        "abilitiesAsAdmin": {
+          "description": "The abilities the user has to perform actions on the project as an admin.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProjectAbilityAsAdmin"
+          }
+        },
+        "abilitiesAsDeveloper": {
+          "description": "The abilities the user has to perform actions on the project as a developer.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProjectAbilityAsDeveloper"
+          }
+        }
+      },
+      "required": [
+        "abilitiesAsAdmin",
+        "abilitiesAsDeveloper"
+      ]
+    },
+    "ProjectAbilityAsAdmin": {
+      "type": "string",
+      "enum": [
+        "DeleteDevBoxes",
+        "DeleteEnvironments",
+        "ManageEnvironmentActions",
+        "ReadDevBoxes",
+        "ReadEnvironmentActions",
+        "ReadEnvironmentOutputs",
+        "ReadEnvironments",
+        "StartDevBoxes",
+        "StopDevBoxes",
+        "WriteDevBoxes",
+        "WriteEnvironments"
+      ],
+      "description": "An ability the user has to perform an action on the project as an admin.",
+      "x-ms-enum": {
+        "name": "ProjectAbilityAsAdmin",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "DeleteDevBoxes",
+            "description": "User can delete dev boxes."
+          },
+          {
+            "value": "DeleteEnvironments",
+            "description": "User can delete environments."
+          },
+          {
+            "value": "ManageEnvironmentActions",
+            "description": "User can delay and skip actions on environments."
+          },
+          {
+            "value": "ReadDevBoxes",
+            "description": "User can read dev boxes."
+          },
+          {
+            "value": "ReadEnvironmentActions",
+            "description": "User can read actions on environments."
+          },
+          {
+            "value": "ReadEnvironmentOutputs",
+            "description": "User can read outputs on environments."
+          },
+          {
+            "value": "ReadEnvironments",
+            "description": "User can read environments."
+          },
+          {
+            "value": "StartDevBoxes",
+            "description": "User can start dev boxes."
+          },
+          {
+            "value": "StopDevBoxes",
+            "description": "User can stop dev boxes."
+          },
+          {
+            "value": "WriteDevBoxes",
+            "description": "User can create dev boxes."
+          },
+          {
+            "value": "WriteEnvironments",
+            "description": "User can create new environments or replace and update existing ones"
+          }
+        ]
+      }
+    },
+    "ProjectAbilityAsDeveloper": {
+      "type": "string",
+      "enum": [
+        "CustomizeDevBoxes",
+        "DeleteDevBoxes",
+        "DeleteEnvironments",
+        "ManageDevBoxActions",
+        "ManageEnvironmentActions",
+        "ReadDevBoxActions",
+        "ReadDevBoxes",
+        "ReadEnvironmentActions",
+        "ReadEnvironmentOutputs",
+        "ReadEnvironments",
+        "ReadRemoteConnections",
+        "StartDevBoxes",
+        "StopDevBoxes",
+        "WriteDevBoxes",
+        "WriteEnvironments"
+      ],
+      "description": "An ability the user has to perform an action on the project as a developer.",
+      "x-ms-enum": {
+        "name": "ProjectAbilityAsDeveloper",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "CustomizeDevBoxes",
+            "description": "User can customize their own dev boxes."
+          },
+          {
+            "value": "DeleteDevBoxes",
+            "description": "User can delete their own dev boxes."
+          },
+          {
+            "value": "DeleteEnvironments",
+            "description": "User can delete environments."
+          },
+          {
+            "value": "ManageDevBoxActions",
+            "description": "User can delay and skip actions on their own dev boxes."
+          },
+          {
+            "value": "ManageEnvironmentActions",
+            "description": "User can delay and skip actions on environments."
+          },
+          {
+            "value": "ReadDevBoxActions",
+            "description": "User can read actions on their own dev boxes."
+          },
+          {
+            "value": "ReadDevBoxes",
+            "description": "User can read their own dev boxes."
+          },
+          {
+            "value": "ReadEnvironmentActions",
+            "description": "User can read actions on environments."
+          },
+          {
+            "value": "ReadEnvironmentOutputs",
+            "description": "User can read outputs on environments."
+          },
+          {
+            "value": "ReadEnvironments",
+            "description": "User can read environments."
+          },
+          {
+            "value": "ReadRemoteConnections",
+            "description": "User can read remote connections on their own dev boxes."
+          },
+          {
+            "value": "StartDevBoxes",
+            "description": "User can start their own dev boxes."
+          },
+          {
+            "value": "StopDevBoxes",
+            "description": "User can stop their own dev boxes."
+          },
+          {
+            "value": "WriteDevBoxes",
+            "description": "User can create dev boxes."
+          },
+          {
+            "value": "WriteEnvironments",
+            "description": "User can create new environments or replace and update existing ones."
+          }
+        ]
+      }
     },
     "CloudError": {
       "x-ms-external": true,

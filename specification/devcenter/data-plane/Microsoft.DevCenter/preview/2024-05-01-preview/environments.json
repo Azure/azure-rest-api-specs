@@ -1073,6 +1073,106 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/projects/{projectName}/environmentTypes/{environmentTypeName}": {
+      "get": {
+        "tags": [
+          "Environment Types"
+        ],
+        "description": "Get an environment type configured for a project.",
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentTypeNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/TopParameter"
+          }
+        ],
+        "operationId": "Environments_GetEnvironmentType",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentType"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_GetEnvironmentType": {
+            "$ref": "./examples/EnvironmentTypes_Get.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/environmentTypes/{environmentTypeName}/users/{userId}/abilities": {
+      "get": {
+        "tags": [
+          "Environment Types",
+          "Abilities"
+        ],
+        "description": "Gets the signed-in user's permitted abilities in an environment type.",
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/EnvironmentTypeNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/TopParameter"
+          }
+        ],
+        "operationId": "Environments_GetEnvironmentTypeAbilities",
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentTypeAbilities"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_GetEnvironmentTypeAbilities": {
+            "$ref": "./examples/EnvironmentTypes_GetAbilities.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1555,6 +1655,114 @@
         "status"
       ]
     },
+    "EnvironmentTypeAbilities": {
+      "description": "Abilities a user has on an environment type.",
+      "type": "object",
+      "properties": {
+        "abilitiesAsAdmin": {
+          "description": "The abilities the user has to perform actions on the environment type as an admin.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentTypeAbilityAsAdmin"
+          }
+        },
+        "abilitiesAsDeveloper": {
+          "description": "The abilities the user has to perform actions on the environment type as a developer.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentTypeAbilityAsDeveloper"
+          }
+        }
+      },
+      "required": [
+        "abilitiesAsAdmin",
+        "abilitiesAsDeveloper"
+      ]
+    },
+    "EnvironmentTypeAbilityAsAdmin": {
+      "type": "string",
+      "enum": [
+        "DeleteEnvironments",
+        "ManageEnvironmentActions",
+        "ReadEnvironmentActions",
+        "ReadEnvironmentOutputs",
+        "ReadEnvironments",
+        "WriteEnvironments"
+      ],
+      "description": "An ability the user has to perform an action on the environment type as an admin.",
+      "x-ms-enum": {
+        "name": "EnvironmentTypeAbilityAsAdmin",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "DeleteEnvironments",
+            "description": "User can delete environments."
+          },
+          {
+            "value": "ManageEnvironmentActions",
+            "description": "User can delay and skip actions on environments."
+          },
+          {
+            "value": "ReadEnvironmentActions",
+            "description": "User can read actions on environments."
+          },
+          {
+            "value": "ReadEnvironmentOutputs",
+            "description": "User can read outputs on environments."
+          },
+          {
+            "value": "ReadEnvironments",
+            "description": "User can read environments."
+          },
+          {
+            "value": "WriteEnvironments",
+            "description": "User can create new environments or replace and update existing ones"
+          }
+        ]
+      }
+    },
+    "EnvironmentTypeAbilityAsDeveloper": {
+      "type": "string",
+      "enum": [
+        "DeleteEnvironments",
+        "ManageEnvironmentActions",
+        "ReadEnvironmentActions",
+        "ReadEnvironmentOutputs",
+        "ReadEnvironments",
+        "WriteEnvironments"
+      ],
+      "description": "An ability the user has to perform an action on the environment type as a developer.",
+      "x-ms-enum": {
+        "name": "EnvironmentTypeAbilityAsDeveloper",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "DeleteEnvironments",
+            "description": "User can delete environments."
+          },
+          {
+            "value": "ManageEnvironmentActions",
+            "description": "User can delay and skip actions on environments."
+          },
+          {
+            "value": "ReadEnvironmentActions",
+            "description": "User can read actions on environments."
+          },
+          {
+            "value": "ReadEnvironmentOutputs",
+            "description": "User can read outputs on environments."
+          },
+          {
+            "value": "ReadEnvironments",
+            "description": "User can read environments."
+          },
+          {
+            "value": "WriteEnvironments",
+            "description": "User can create new environments or replace and update existing ones."
+          }
+        ]
+      }
+    },
     "EnvironmentTypeEnableStatus": {
       "description": "Indicates whether an environment type is enabled for use in a project.",
       "enum": [
@@ -1791,6 +1999,17 @@
       "minLength": 3,
       "maxLength": 63,
       "description": "The name of the environment definition",
+      "x-ms-parameter-location": "method"
+    },
+    "EnvironmentTypeNameParameter": {
+      "name": "environmentTypeName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+      "minLength": 3,
+      "maxLength": 63,
+      "description": "The name of the environment type",
       "x-ms-parameter-location": "method"
     },
     "EnvironmentOperationIdParameter": {
