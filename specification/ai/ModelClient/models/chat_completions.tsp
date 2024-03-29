@@ -6,7 +6,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
-namespace ModelInference;
+namespace ModelClient;
 
 @doc("""
 The configuration information for a chat completions request.
@@ -269,9 +269,6 @@ model ChatRequestSystemMessage extends ChatRequestMessage {
 
   @doc("The contents of the system message.")
   content: string;
-
-  @doc("An optional name for the participant.")
-  name?: string;
 }
 
 @doc("A request chat message representing user input to the assistant.")
@@ -281,9 +278,6 @@ model ChatRequestUserMessage extends ChatRequestMessage {
 
   @doc("The contents of the user message, with available input types varying by selected model.")
   content: string;
-
-  @doc("An optional name for the participant.")
-  name?: string;
 }
 
 @doc("A request chat message representing response or action from the assistant.")
@@ -294,9 +288,6 @@ model ChatRequestAssistantMessage extends ChatRequestMessage {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "explicitly nullable in mirrored API"
   @doc("The content of the message.")
   content: string | null;
-
-  @doc("An optional name for the participant.")
-  name?: string;
 }
 
 @doc("A request chat message representing requested output from a configured tool.")

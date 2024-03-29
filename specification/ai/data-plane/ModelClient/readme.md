@@ -1,8 +1,8 @@
-# Azure AI Model Inference
+# Azure AI Model Client
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Azure AI Model Inference.
+This is the AutoRest configuration file for Azure AI Model Client.
 
 ## Getting Started
 

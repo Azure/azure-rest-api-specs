@@ -1,8 +1,7 @@
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-
-import "./routes/completions.tsp";
+import "./routes.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -14,12 +13,12 @@ using Azure.Core;
 @service({
   title: "AI Model Inference",
 })
-@versioned(ModelInference.Versions)
-namespace ModelInference;
+@versioned(ModelClient.Versions)
+namespace ModelClient;
 
-@doc("The ModelInference service versions.")
+@doc("The ModelClient service versions.")
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @doc("The 2024-04-01-preview version of the ModelInference service.")
+  @doc("The 2024-04-01-preview version of the ModelClient service.")
   v2024_04_01_Preview: "2024-04-01-preview",
 }

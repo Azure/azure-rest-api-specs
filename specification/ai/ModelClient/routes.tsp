@@ -3,7 +3,8 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 
-import "../models/chat_completions.tsp";
+import "./models/chat_completions.tsp";
+import "./models/embeddings.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -11,7 +12,7 @@ using TypeSpec.Versioning;
 
 using Azure.Core;
 
-namespace ModelInference;
+namespace ModelClient;
 
 @doc("""
 Gets chat completions for the provided chat messages.
@@ -27,4 +28,16 @@ op getChatCompletions is Azure.Core.RpcOperation<
     chatCompletionsOptions: ChatCompletionsOptions;
   },
   ChatCompletions
+>;
+
+@doc("Return the embeddings for a given prompt.")
+@actionSeparator("/")
+@route("v1/embeddings")
+op getEmbeddings is Azure.Core.RpcOperation<
+  {
+    @doc("The JSON payload containing embedding options.")
+    @body
+    embeddingOptions: EmbeddingsOptions;
+  },
+  Embeddings
 >;

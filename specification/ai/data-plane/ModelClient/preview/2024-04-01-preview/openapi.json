@@ -59,11 +59,59 @@
           }
         },
         "x-ms-examples": {
-          "[Maximum Set] Creates a completion for the provided prompt, parameters and chosen model.": {
+          "maximum set chat completion": {
             "$ref": "./examples/GetChatCompletions_MaximumSet_Gen.json"
           },
-          "[Minimum Set] Creates a completion for the provided prompt, parameters and chosen model.": {
+          "minimum set chat completion": {
             "$ref": "./examples/GetChatCompletions_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/v1/embeddings": {
+      "post": {
+        "operationId": "GetEmbeddings",
+        "description": "Return the embeddings for a given prompt.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "embeddingOptions",
+            "in": "body",
+            "description": "The JSON payload containing embedding options.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmbeddingsOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Embeddings"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "maximum set embeddings": {
+            "$ref": "./examples/GetEmbeddings_MaximumSet_Gen.json"
+          },
+          "minimum set embeddings": {
+            "$ref": "./examples/GetEmbeddings_MinimumSet_Gen.json"
           }
         }
       }
@@ -448,10 +496,6 @@
           "type": "string",
           "description": "The content of the message.",
           "x-nullable": true
-        },
-        "name": {
-          "type": "string",
-          "description": "An optional name for the participant."
         }
       },
       "required": [
@@ -485,10 +529,6 @@
         "content": {
           "type": "string",
           "description": "The contents of the system message."
-        },
-        "name": {
-          "type": "string",
-          "description": "An optional name for the participant."
         }
       },
       "required": [
@@ -534,10 +574,6 @@
         "content": {
           "type": "string",
           "description": "The contents of the user message, with available input types varying by selected model."
-        },
-        "name": {
-          "type": "string",
-          "description": "An optional name for the participant."
         }
       },
       "required": [
@@ -672,6 +708,201 @@
         "total_tokens"
       ]
     },
+    "EmbeddingEncodingFormat": {
+      "type": "string",
+      "description": "Represents the available formats for embeddings data on responses.",
+      "enum": [
+        "float",
+        "base64"
+      ],
+      "x-ms-enum": {
+        "name": "EmbeddingEncodingFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "float",
+            "value": "float",
+            "description": "Specifies that responses should provide arrays of floats for each embedding."
+          },
+          {
+            "name": "base64",
+            "value": "base64",
+            "description": "Specifies that responses should provide a base64-encoded string for each embedding."
+          }
+        ]
+      }
+    },
+    "EmbeddingInputType": {
+      "type": "string",
+      "description": "Represents the input types used for embedding search.",
+      "enum": [
+        "text",
+        "query",
+        "document"
+      ],
+      "x-ms-enum": {
+        "name": "EmbeddingInputType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "text",
+            "value": "text",
+            "description": "fill me."
+          },
+          {
+            "name": "query",
+            "value": "query",
+            "description": "fill me."
+          },
+          {
+            "name": "document",
+            "value": "document",
+            "description": "fill me."
+          }
+        ]
+      }
+    },
+    "EmbeddingItem": {
+      "type": "object",
+      "description": "Representation of a single embeddings relatedness comparison.",
+      "properties": {
+        "embedding": {
+          "type": "array",
+          "description": "List of embeddings value for the input prompt. These represent a measurement of the\nvector-based relatedness of the provided input.",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Index of the prompt to which the EmbeddingItem corresponds."
+        }
+      },
+      "required": [
+        "embedding",
+        "index"
+      ]
+    },
+    "Embeddings": {
+      "type": "object",
+      "description": "Representation of the response data from an embeddings request.\nEmbeddings measure the relatedness of text strings and are commonly used for search, clustering,\nrecommendations, and other similar scenarios.",
+      "properties": {
+        "data": {
+          "type": "array",
+          "description": "Embedding values for the prompts submitted in the request.",
+          "items": {
+            "$ref": "#/definitions/EmbeddingItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "usage": {
+          "$ref": "#/definitions/EmbeddingsUsage",
+          "description": "Usage counts for tokens input using the embeddings API."
+        }
+      },
+      "required": [
+        "data",
+        "usage"
+      ]
+    },
+    "EmbeddingsOptions": {
+      "type": "object",
+      "description": "The configuration information for an embeddings request.\nEmbeddings measure the relatedness of text strings and are commonly used for search, clustering,\nrecommendations, and other similar scenarios.",
+      "properties": {
+        "input": {
+          "type": "array",
+          "description": "Input texts to get embeddings for, encoded as a an array of strings.\nEach input must not exceed 2048 tokens in length.\n\nUnless you are embedding code, we suggest replacing newlines (\\n) in your input with a single space,\nas we have observed inferior results when newlines are present.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "encoding_format": {
+          "type": "string",
+          "description": "The response encoding format to use for embedding data.",
+          "default": "float",
+          "enum": [
+            "float",
+            "base64"
+          ],
+          "x-ms-enum": {
+            "name": "EmbeddingEncodingFormat",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "float",
+                "value": "float",
+                "description": "Specifies that responses should provide arrays of floats for each embedding."
+              },
+              {
+                "name": "base64",
+                "value": "base64",
+                "description": "Specifies that responses should provide a base64-encoded string for each embedding."
+              }
+            ]
+          },
+          "x-ms-client-name": "encodingFormat"
+        },
+        "input_type": {
+          "type": "string",
+          "description": "Specifies the input type to use for embedding search.",
+          "default": "text",
+          "enum": [
+            "text",
+            "query",
+            "document"
+          ],
+          "x-ms-enum": {
+            "name": "EmbeddingInputType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "text",
+                "value": "text",
+                "description": "fill me."
+              },
+              {
+                "name": "query",
+                "value": "query",
+                "description": "fill me."
+              },
+              {
+                "name": "document",
+                "value": "document",
+                "description": "fill me."
+              }
+            ]
+          },
+          "x-ms-client-name": "inputType"
+        }
+      },
+      "required": [
+        "input"
+      ]
+    },
+    "EmbeddingsUsage": {
+      "type": "object",
+      "description": "Measurement of the amount of tokens used in this request and response.",
+      "properties": {
+        "prompt_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of tokens sent in the original request.",
+          "x-ms-client-name": "promptTokens"
+        },
+        "total_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of tokens transacted in this request/response.",
+          "x-ms-client-name": "totalTokens"
+        }
+      },
+      "required": [
+        "prompt_tokens",
+        "total_tokens"
+      ]
+    },
     "FunctionCall": {
       "type": "object",
       "description": "The name and arguments of a function that should be called, as generated by the model.",
@@ -712,7 +943,7 @@
     },
     "Versions": {
       "type": "string",
-      "description": "The ModelInference service versions.",
+      "description": "The ModelClient service versions.",
       "enum": [
         "2024-04-01-preview"
       ],
@@ -723,7 +954,7 @@
           {
             "name": "v2024_04_01_Preview",
             "value": "2024-04-01-preview",
-            "description": "The 2024-04-01-preview version of the ModelInference service."
+            "description": "The 2024-04-01-preview version of the ModelClient service."
           }
         ]
       }
