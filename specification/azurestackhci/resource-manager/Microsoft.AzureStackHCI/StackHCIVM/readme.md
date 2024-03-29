@@ -55,6 +55,15 @@ suppressions:
     reason: publisherName, publisherName etc didn't have a pattern initially, adding the constraint now will cause a breaking change.
   - code: DefinitionsPropertiesNamesCamelCase
     reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility.
+  - code:  XmsPageableForListCalls
+    reason: XmsPageable not needed for GET calls
+    from:
+      - openapi.json
+  - code: EvenSegmentedPathForPutOperation
+    reason: resourceUri in virtualmachineinstances is the parent resource. It consists of an even number of segmented paths. 
+    from: 
+      - openapi.json
+      - virtualmachineinstances.json
 ```
 
 ### Tag: package-preview-2024-02
