@@ -791,6 +791,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK - The validation operation result.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentStackValidateResult"
+            }
+          },
           "202": {
             "description": "Accepted - The validation request has been accepted for processing and the operation will complete asynchronously.",
             "headers": {
@@ -849,6 +855,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK - The validation operation result.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentStackValidateResult"
+            }
+          },
           "202": {
             "description": "Accepted - The validation request has been accepted for processing and the operation will complete asynchronously.",
             "headers": {
@@ -907,6 +919,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK - The validation operation result.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentStackValidateResult"
+            }
+          },
           "202": {
             "description": "Accepted - The validation request has been accepted for processing and the operation will complete asynchronously.",
             "headers": {
@@ -1002,22 +1020,8 @@
           "description": "The URI of parameters file. Use this element to link to an existing parameters file. Use either the parametersLink property or the parameters property, but not both."
         },
         "actionOnUnmanage": {
-          "type": "object",
-          "description": "Defines the behavior of resources that are no longer managed after the stack is updated or deleted.",
-          "required": [
-            "resources"
-          ],
-          "properties": {
-            "resources": {
-              "$ref": "#/definitions/DeploymentStacksDeleteDetachEnum"
-            },
-            "resourceGroups": {
-              "$ref": "#/definitions/DeploymentStacksDeleteDetachEnum"
-            },
-            "managementGroups": {
-              "$ref": "#/definitions/DeploymentStacksDeleteDetachEnum"
-            }
-          }
+          "$ref": "#/definitions/ActionOnUnmanage",
+          "description": "Defines the behavior of resources that are no longer managed after the Deployment stack is updated or deleted."
         },
         "debugSetting": {
           "$ref": "#/definitions/DeploymentStacksDebugSetting",
@@ -1069,7 +1073,7 @@
         "correlationId": {
           "type": "string",
           "readOnly": true,
-          "description": "The correlation id of the last stack upsert or delete operation. It is in GUID format and is used for tracing.",
+          "description": "The correlation id of the last Deployment stack upsert or delete operation. It is in GUID format and is used for tracing.",
           "example": "01234567-89ab-cdef-0000-000000000000"
         },
         "detachedResources": {
@@ -1242,6 +1246,24 @@
         }
       ],
       "description": "The resourceId extended model. This is used to document failed resources with a resourceId and a corresponding error."
+    },
+    "ActionOnUnmanage": {
+      "type": "object",
+      "description": "Defines the behavior of resources that are no longer managed after the stack is updated or deleted.",
+      "required": [
+        "resources"
+      ],
+      "properties": {
+        "resources": {
+          "$ref": "#/definitions/DeploymentStacksDeleteDetachEnum"
+        },
+        "resourceGroups": {
+          "$ref": "#/definitions/DeploymentStacksDeleteDetachEnum"
+        },
+        "managementGroups": {
+          "$ref": "#/definitions/DeploymentStacksDeleteDetachEnum"
+        }
+      }
     },
     "DenySettings": {
       "description": "Defines how resources deployed by the Deployment stack are locked.",
@@ -1450,6 +1472,77 @@
       "x-ms-enum": {
         "name": "DeploymentStacksDeleteDetachEnum",
         "modelAsString": true
+      }
+    },
+    "DeploymentStackValidateResult": {
+      "type": "object",
+      "description": "Deployment stack validation result.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeploymentStackValidateProperties",
+          "description": "The validation result details."
+        },
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The HTTP status code of the validation operation."
+        }
+      }
+    },
+    "DeploymentStackValidateProperties": {
+      "type": "object",
+      "description": "Deployment stack validation result details.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+        }
+      ],
+      "properties": {
+        "actionOnUnmanage": {
+          "$ref": "#/definitions/ActionOnUnmanage",
+          "description": "Defines the behavior of resources that are no longer managed after the Deployment stack is updated or deleted."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "The correlation id of the Deployment stack validate operation. It is in GUID format and is used for tracing.",
+          "example": "01234567-89ab-cdef-0000-000000000000"
+        },
+        "denySettings": {
+          "$ref": "#/definitions/DenySettings",
+          "description": "The Deployment stack deny settings."
+        },
+        "deploymentId": {
+          "type": "string",
+          "description": "The resourceId of the deployment resource of the Deployment stack."
+        },
+        "deploymentScope": {
+          "type": "string",
+          "description": "The Deployment stack deployment scope."
+        },
+        "name": {
+          "type": "string",
+          "description": "The Deployment stack name."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Deployment parameters."
+        },
+        "templateLink": {
+          "$ref": "#/definitions/DeploymentStacksTemplateLink",
+          "description": "The URI of the template."
+        },
+        "validatedResources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceReference"
+          },
+          "description": "The array of resources that were validated."
+        }
       }
     }
   },
