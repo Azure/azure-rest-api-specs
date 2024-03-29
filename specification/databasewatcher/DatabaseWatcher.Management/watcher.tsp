@@ -1,5 +1,4 @@
 import "@typespec/rest";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./sqlDbDatabaseTarget.tsp";
@@ -57,7 +56,7 @@ model WatcherProperties {
 
 @doc("The properties of a data store.")
 model Datastore {
-  @doc("The ARM ResourceId of an Azure Data Explorer cluster.")
+  @doc("The Azure ResourceId of an Azure Data Explorer cluster.")
   adxClusterResourceId?: ResourceIdentifier<[
     {
       type: "Microsoft.Kusto/clusters";

@@ -140,36 +140,27 @@ model TranslationResult {
   meteredUsage: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-enum TextTypeKnownValues {
+@doc("Translation text type")
+union TextType {
+  string,
   Plain: "Plain",
   Html: "Html",
 }
 
-@doc("Translation text type")
-@knownValues(TextTypeKnownValues)
-scalar TextType extends string;
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-enum ProfanityActionKnownValues {
+@doc("Translator profanity actions")
+union ProfanityAction {
+  string,
   NoAction: "NoAction",
   Marked: "Marked",
   Deleted: "Deleted",
 }
 
-@doc("Translator profanity actions")
-@knownValues(ProfanityActionKnownValues)
-scalar ProfanityAction extends string;
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
-enum ProfanityMarkerKnownValues {
+@doc("Translator profanity markers")
+union ProfanityMarker {
+  string,
   Asterisk: "Asterisk",
   Tag: "Tag",
 }
-
-@doc("Translator profanity markers")
-@knownValues(ProfanityMarkerKnownValues)
-scalar ProfanityMarker extends string;
 
 @doc("Element containing the translated text")
 model TranslatedTextItem {

@@ -2296,6 +2296,22 @@
         }
       }
     },
+    "PostgreSqlV2Source": {
+      "description": "A copy activity source for PostgreSQL databases.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TabularSource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "SybaseSource": {
       "description": "A copy activity source for Sybase databases.",
       "type": "object",
@@ -7151,7 +7167,7 @@
           "type": "object",
           "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string).",
           "additionalProperties": {
-            "type": "string",
+            "type": "object",
             "x-ms-format": "dfe-string"
           }
         },
@@ -8192,7 +8208,7 @@
           "type": "object",
           "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string).",
           "additionalProperties": {
-            "type": "string",
+            "type": "object",
             "x-ms-format": "dfe-string"
           }
         },
@@ -8261,7 +8277,7 @@
           "type": "object",
           "description": "Represents the headers that will be sent to the request. For example, to set the language and type on a request: \"headers\" : { \"Accept-Language\": \"en-us\", \"Content-Type\": \"application/json\" }. Type: string (or Expression with resultType string).",
           "additionalProperties": {
-            "type": "string",
+            "type": "object",
             "x-ms-format": "dfe-string"
           }
         },
