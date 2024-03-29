@@ -1,0 +1,109 @@
+suppressions:
+  azure-sdk-for -js:
+    - package: '@azure/arm-changes'
+      breaking-changes:
+        - Interface ChangesListNextOptionalParams no longer has parameter skipToken
+        - Interface ChangesListNextOptionalParams no longer has parameter top
+
+    - package: '@azure/arm-locks'
+      breaking-changes:
+        - Class ManagementLockClient has a new signature
+        - Interface ManagementLocksListAtResourceGroupLevelNextOptionalParams no longer has parameter filter
+        - Interface ManagementLocksListAtResourceLevelNextOptionalParams no longer has parameter filter
+        - Interface ManagementLocksListAtSubscriptionLevelNextOptionalParams no longer has parameter filter
+        - Interface ManagementLocksListByScopeNextOptionalParams no longer has parameter filter
+
+    - package: '@azure/arm-managedapplications'
+      breaking-changes:
+        - Removed operation group JitRequests
+        - Removed operation ApplicationDefinitions.createOrUpdate
+        - Removed operation ApplicationDefinitions.createOrUpdateById
+        - Removed operation ApplicationDefinitions.delete
+        - Removed operation ApplicationDefinitions.deleteById
+        - Removed operation ApplicationDefinitions.listBySubscription
+        - Removed operation ApplicationDefinitions.update
+        - Removed operation ApplicationDefinitions.updateById
+        - Removed operation Applications.beginRefreshPermissions
+        - Removed operation Applications.beginRefreshPermissionsAndWait
+        - Removed operation Applications.beginUpdate
+        - Removed operation Applications.beginUpdateAccess
+        - Removed operation Applications.beginUpdateAccessAndWait
+        - Removed operation Applications.beginUpdateAndWait
+        - Removed operation Applications.beginUpdateById
+        - Removed operation Applications.beginUpdateByIdAndWait
+        - Removed operation Applications.listAllowedUpgradePlans
+        - Removed operation Applications.listTokens
+        - Interface Application no longer has parameter artifacts
+        - Interface Application no longer has parameter authorizations
+        - Interface Application no longer has parameter billingDetails
+        - Interface Application no longer has parameter createdBy
+        - Interface Application no longer has parameter customerSupport
+        - Interface Application no longer has parameter jitAccessPolicy
+        - Interface Application no longer has parameter managementMode
+        - Interface Application no longer has parameter publisherTenantId
+        - Interface Application no longer has parameter supportUrls
+        - Interface Application no longer has parameter updatedBy
+        - Interface ApplicationDefinition no longer has parameter deploymentPolicy
+        - Interface ApplicationDefinition no longer has parameter lockingPolicy
+        - Interface ApplicationDefinition no longer has parameter managementPolicy
+        - Interface ApplicationDefinition no longer has parameter notificationPolicy
+        - Interface ApplicationDefinition no longer has parameter policies
+        - Interface ApplicationDefinition no longer has parameter storageAccountId
+        - Interface ApplicationPatchable no longer has parameter artifacts
+        - Interface ApplicationPatchable no longer has parameter authorizations
+        - Interface ApplicationPatchable no longer has parameter billingDetails
+        - Interface ApplicationPatchable no longer has parameter createdBy
+        - Interface ApplicationPatchable no longer has parameter customerSupport
+        - Interface ApplicationPatchable no longer has parameter jitAccessPolicy
+        - Interface ApplicationPatchable no longer has parameter managementMode
+        - Interface ApplicationPatchable no longer has parameter publisherTenantId
+        - Interface ApplicationPatchable no longer has parameter supportUrls
+        - Interface ApplicationPatchable no longer has parameter updatedBy
+        - Interface ApplicationsUpdateByIdOptionalParams no longer has parameter resumeFrom
+        - Interface ApplicationsUpdateByIdOptionalParams no longer has parameter updateIntervalInMs
+        - Interface ApplicationsUpdateOptionalParams no longer has parameter resumeFrom
+        - Interface ApplicationsUpdateOptionalParams no longer has parameter updateIntervalInMs
+        - Interface ErrorResponse no longer has parameter error
+        - Interface Identity no longer has parameter userAssignedIdentities
+        - Interface Operation no longer has parameter actionType
+        - Interface Operation no longer has parameter isDataAction
+        - Interface Operation no longer has parameter origin
+        - Interface OperationDisplay no longer has parameter description
+        - Interface Resource no longer has parameter systemData
+        - Parameter managedResourceGroupId of interface Application is now required
+        - Parameter authorizations of interface ApplicationDefinition is now required
+        - Type of parameter name of interface ApplicationArtifact is changed from ApplicationArtifactName to string
+        - Type of parameter artifacts of interface ApplicationDefinition is changed from ApplicationDefinitionArtifact[] to ApplicationArtifact[]
+        - Type of parameter authorizations of interface ApplicationDefinition is changed from ApplicationAuthorization[] to ApplicationProviderAuthorization[]
+        - Type of parameter isEnabled of interface ApplicationDefinition is changed from boolean to string
+        - Type of parameter parameters of interface ApplicationsUpdateByIdOptionalParams is changed from ApplicationPatchable to Application
+        - Type of parameter type of interface Identity is changed from ResourceIdentityType to "SystemAssigned"
+        - Class ApplicationClient no longer has parameter jitRequests
+        - Removed Enum KnownActionType
+        - Removed Enum KnownApplicationArtifactName
+        - Removed Enum KnownApplicationDefinitionArtifactName
+        - Removed Enum KnownApplicationManagementMode
+        - Removed Enum KnownCreatedByType
+        - Removed Enum KnownDeploymentMode
+        - Removed Enum KnownJitApprovalMode
+        - Removed Enum KnownJitApproverType
+        - Removed Enum KnownJitRequestState
+        - Removed Enum KnownJitSchedulingType
+        - Removed Enum KnownOrigin
+        - Removed Enum KnownStatus
+        - Removed Enum KnownSubstatus
+        - Enum KnownProvisioningState no longer has value NotSpecified
+
+    - package: '@azure/arm-resources'
+      breaking-changes:
+        - Class ResourceManagementClient has a new signature
+        - Removed operation TagsOperations.createOrUpdateAtScope
+        - Removed operation TagsOperations.deleteAtScope
+        - Removed operation TagsOperations.updateAtScope
+        - Type of parameter parameters of interface DeploymentProperties is changed from Record<string, unknown> to {        [propertyName: string]: DeploymentParameter;    }
+
+    - package: '@azure/arm-templatespecs'
+      breaking-changes:
+        - Class TemplateSpecsClient has a new signature
+        - Interface TemplateSpecsListByResourceGroupNextOptionalParams no longer has parameter expand
+        - Interface TemplateSpecsListBySubscriptionNextOptionalParams no longer has parameter expand
