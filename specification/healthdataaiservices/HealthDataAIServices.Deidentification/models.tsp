@@ -29,7 +29,7 @@ model Job {
   dataType: DocumentDataType = DocumentDataType.PlainText;
 
   @doc("Operation to perform on the input documents.")
-  operation: OperationType = OperationType.Redact;
+  operation: OperationType = OperationType.Surrogate;
 
   @maxLength(16)
   @minLength(1)
@@ -42,13 +42,13 @@ model Job {
   @visibility("read")
   status: JobStatus;
 
-  @doc("Date and time when the job was created.")
-  @visibility("read")
-  createdAt: utcDateTime;
-
   @doc("Error when job fails in it's entirety.")
   @visibility("read")
   error?: Azure.Core.Foundations.Error;
+
+  @doc("Date and time when the job was created.")
+  @visibility("read")
+  createdAt: utcDateTime;
 
   @doc("Date and time when the job was started.")
   @visibility("read")
@@ -62,7 +62,7 @@ model Job {
   If the job failed, this is the time when the job failed.
   """)
   @visibility("read")
-  completedAt?: utcDateTime;
+  lastUpdatedAt?: utcDateTime;
 
   @doc("Summary of a job. Exists only when the job is completed.")
   @visibility("read")
@@ -74,16 +74,28 @@ model Job {
 @parentResource(Job)
 model File {
   @key
-  @doc("Relative path to file from location prefix.")
+  @doc("Id of the file report.")
   @visibility("read")
-  @maxLength(1024)
-  path: string;
+  id: string;
+
+  @doc("File Location for the input.")
+  input: FileLocation;
+
+  @doc("File Location for the output.")
+  output?: FileLocation;
 
   @doc("Status of the file.")
   status: Azure.Core.Foundations.OperationState;
 
   @doc("Error when file fails.")
   error?: Azure.Core.Foundations.Error;
+}
+
+@doc("Location of a file.")
+model FileLocation {
+  @doc("Absolute path to the file in storage.")
+  @maxLength(1024)
+  path: string;
 
   ...EtagProperty;
 }
@@ -144,9 +156,6 @@ model TargetStorageLocation {
 
 @doc("Enum of supported Data Types.")
 enum DocumentDataType {
-  @doc("Unknown data type.")
-  Unknown,
-
   @doc("Plain text data type.")
   PlainText,
 }

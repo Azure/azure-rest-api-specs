@@ -636,18 +636,12 @@
       "type": "string",
       "description": "Enum of supported Data Types.",
       "enum": [
-        "Unknown",
         "PlainText"
       ],
       "x-ms-enum": {
         "name": "DocumentDataType",
         "modelAsString": true,
         "values": [
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "Unknown data type."
-          },
           {
             "name": "PlainText",
             "value": "PlainText",
@@ -660,11 +654,18 @@
       "type": "object",
       "description": "File report once job has completed.",
       "properties": {
-        "path": {
+        "id": {
           "type": "string",
-          "description": "Relative path to file from location prefix.",
-          "maxLength": 1024,
+          "description": "Id of the file report.",
           "readOnly": true
+        },
+        "input": {
+          "$ref": "#/definitions/FileLocation",
+          "description": "File Location for the input."
+        },
+        "output": {
+          "$ref": "#/definitions/FileLocation",
+          "description": "File Location for the output."
         },
         "status": {
           "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
@@ -673,6 +674,22 @@
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "Error when file fails."
+        }
+      },
+      "required": [
+        "id",
+        "input",
+        "status"
+      ]
+    },
+    "FileLocation": {
+      "type": "object",
+      "description": "Location of a file.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Absolute path to the file in storage.",
+          "maxLength": 1024
         },
         "etag": {
           "$ref": "#/definitions/Azure.Core.eTag",
@@ -682,7 +699,6 @@
       },
       "required": [
         "path",
-        "status",
         "etag"
       ]
     },
@@ -714,7 +730,7 @@
         "operation": {
           "$ref": "#/definitions/OperationType",
           "description": "Operation to perform on the input documents.",
-          "default": "Redact"
+          "default": "Surrogate"
         },
         "redactionFormat": {
           "type": "string",
@@ -727,15 +743,15 @@
           "description": "Current status of a job.",
           "readOnly": true
         },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error when job fails in it's entirety.",
+          "readOnly": true
+        },
         "createdAt": {
           "type": "string",
           "format": "date-time",
           "description": "Date and time when the job was created.",
-          "readOnly": true
-        },
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "Error when job fails in it's entirety.",
           "readOnly": true
         },
         "startedAt": {
@@ -744,7 +760,7 @@
           "description": "Date and time when the job was started.",
           "readOnly": true
         },
-        "completedAt": {
+        "lastUpdatedAt": {
           "type": "string",
           "format": "date-time",
           "description": "Date and time when the job was completed.\n\nIf the job is canceled, this is the time when the job was canceled.\n\nIf the job failed, this is the time when the job failed.",
@@ -786,7 +802,7 @@
         "operation": {
           "$ref": "#/definitions/OperationType",
           "description": "Operation to perform on the input documents.",
-          "default": "Redact"
+          "default": "Surrogate"
         },
         "redactionFormat": {
           "type": "string",
@@ -927,8 +943,7 @@
           "description": "The File items on this page",
           "items": {
             "$ref": "#/definitions/File"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
