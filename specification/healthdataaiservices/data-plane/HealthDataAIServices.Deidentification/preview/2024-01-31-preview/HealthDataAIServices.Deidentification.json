@@ -169,7 +169,7 @@
             "description": "The name of a job.",
             "required": true,
             "type": "string",
-            "minLength": 1,
+            "minLength": 3,
             "maxLength": 36,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$"
           },
@@ -224,7 +224,7 @@
             "description": "The name of a job.",
             "required": true,
             "type": "string",
-            "minLength": 1,
+            "minLength": 3,
             "maxLength": 36,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$"
           },
@@ -312,7 +312,7 @@
             "description": "The name of a job.",
             "required": true,
             "type": "string",
-            "minLength": 1,
+            "minLength": 3,
             "maxLength": 36,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$"
           },
@@ -366,7 +366,7 @@
             "description": "The name of a job.",
             "required": true,
             "type": "string",
-            "minLength": 1,
+            "minLength": 3,
             "maxLength": 36,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$"
           },
@@ -423,7 +423,7 @@
             "description": "The name of a job.",
             "required": true,
             "type": "string",
-            "minLength": 1,
+            "minLength": 3,
             "maxLength": 36,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$"
           },
@@ -590,16 +590,17 @@
         "inputText": {
           "type": "string",
           "description": "Input text to deidentify.",
-          "minLength": 1,
           "maxLength": 100000
         },
         "dataType": {
           "$ref": "#/definitions/DocumentDataType",
-          "description": "Data type of the input."
+          "description": "Data type of the input.",
+          "default": "PlainText"
         },
         "operation": {
           "$ref": "#/definitions/OperationType",
-          "description": "Operation to perform on the input."
+          "description": "Operation to perform on the input.",
+          "default": "Surrogate"
         },
         "stringIndexType": {
           "$ref": "#/definitions/StringIndexType",
@@ -615,7 +616,8 @@
       "required": [
         "inputText",
         "dataType",
-        "operation"
+        "operation",
+        "stringIndexType"
       ]
     },
     "DeidResponse": {
@@ -709,7 +711,7 @@
         "name": {
           "type": "string",
           "description": "The name of a job.",
-          "minLength": 1,
+          "minLength": 3,
           "maxLength": 36,
           "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$",
           "readOnly": true
@@ -1219,14 +1221,16 @@
           "description": "Path to the file in the storage container.",
           "maxLength": 1024
         },
-        "checksum": {
-          "type": "string",
-          "description": "Checksum of the file."
+        "etag": {
+          "$ref": "#/definitions/Azure.Core.eTag",
+          "description": "The entity tag for this resource.",
+          "readOnly": true
         }
       },
       "required": [
         "entities",
-        "stringIndexType"
+        "stringIndexType",
+        "etag"
       ]
     },
     "SourceStorageLocation": {
@@ -1240,7 +1244,9 @@
         },
         "prefix": {
           "type": "string",
-          "description": "Prefix to filter blobs by."
+          "description": "Prefix to filter blobs by.",
+          "minLength": 1,
+          "maxLength": 1024
         },
         "extensions": {
           "type": "array",
@@ -1256,7 +1262,8 @@
       },
       "required": [
         "location",
-        "prefix"
+        "prefix",
+        "extensions"
       ]
     },
     "StringIndexType": {
@@ -1300,7 +1307,9 @@
         },
         "prefix": {
           "type": "string",
-          "description": "Prefix to filter blobs by."
+          "description": "Prefix to filter blobs by.",
+          "minLength": 1,
+          "maxLength": 1024
         }
       },
       "required": [

@@ -14,7 +14,7 @@ model Job {
   @doc("The name of a job.")
   @visibility("read")
   @maxLength(36)
-  @minLength(1)
+  @minLength(3) // Must be 3 to match regex
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]+[a-zA-Z0-9]$")
   @path
   name: string;
@@ -138,11 +138,13 @@ model SourceStorageLocation {
   location: url;
 
   @doc("Prefix to filter blobs by.")
+  @minLength(1)
+  @maxLength(1024)
   prefix: string;
 
   @doc("List of extensions to filter blobs by.")
   @minItems(1)
-  extensions?: Array<string> = ["*"];
+  extensions: Array<string> = ["*"];
 }
 
 @doc("Storage location.")
@@ -151,6 +153,8 @@ model TargetStorageLocation {
   location: url;
 
   @doc("Prefix to filter blobs by.")
+  @minLength(1)
+  @maxLength(1024)
   prefix: string;
 }
 
@@ -189,17 +193,16 @@ enum StringIndexType {
 model DeidRequest {
   @doc("Input text to deidentify.")
   @maxLength(100000) // 100KB
-  @minLength(1)
   inputText: string;
 
   @doc("Data type of the input.")
-  dataType: DocumentDataType;
+  dataType: DocumentDataType = DocumentDataType.PlainText;
 
   @doc("Operation to perform on the input.")
-  operation: OperationType;
+  operation: OperationType = OperationType.Surrogate;
 
   @doc("Requested Encoding of the tag response indices.")
-  stringIndexType?: StringIndexType = StringIndexType.TextElement_v8;
+  stringIndexType: StringIndexType = StringIndexType.TextElement_v8;
 
   @maxLength(16)
   @doc("Format of the redacted output. Only valid when OperationType is Redact.")
@@ -227,8 +230,7 @@ model PhiTaggerResult {
   @maxLength(1024) // Max length for Blob Name
   path?: string;
 
-  @doc("Checksum of the file.")
-  checksum?: string;
+  ...EtagProperty;
 }
 
 @doc("List of PHI Entities.")
