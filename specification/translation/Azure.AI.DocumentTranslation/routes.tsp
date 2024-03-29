@@ -53,7 +53,11 @@ must be unique.
   @post
   startTranslation is Azure.Core.Foundations.Operation<
     StartTranslationDetails,
-    void
+    {
+      @doc("Request has been accepted successfully.")
+      @statusCode
+      code: 202;
+    }
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -408,42 +412,19 @@ if the specified page size is smaller than the server's default page size.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @summary("Returns a list of supported document formats")
   @doc("""
-The list of supported document formats supported by the Document Translation
+The list of supported formats supported by the Document Translation
 service.
 The list includes the common file extension, as well as the
 content-type if using the upload API.
 """)
-  @route("/document/formats&type=document")
+  @route("/document/formats")
   @get
-  getSupportedDocumentFormats is Azure.Core.Foundations.Operation<
-    {},
+  getSupportedFormats is Azure.Core.Foundations.Operation<
+    {
+      @doc("the type of format like document or glossary ")
+      @query("type")
+      type: string = "document";
+    },
     SupportedFileFormats
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @summary("Returns the list of supported glossary formats")
-  @doc("""
-The list of supported glossary formats supported by the Document Translation
-service.
-The list includes the common file extension used.
-""")
-  @route("/document/formats&type=glossary")
-  @get
-  getSupportedGlossaryFormats is Azure.Core.Foundations.Operation<
-    {},
-    SupportedFileFormats
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @summary("Returns a list of supported storage sources")
-  @doc("""
-Returns a list of storage sources/options supported by the Document Translation
-service.
-""")
-  @route("/storagesources")
-  @get
-  getSupportedStorageSources is Azure.Core.Foundations.Operation<
-    {},
-    SupportedStorageSources
   >;
 }

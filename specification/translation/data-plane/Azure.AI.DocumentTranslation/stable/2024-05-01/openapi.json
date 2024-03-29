@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "DocumentTranslation Service",
+    "title": "Azure.AI.DocumentTranslation",
     "version": "2024-05-01",
     "description": "Document translation service",
     "x-typespec-generated": [
@@ -200,8 +200,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -495,14 +495,22 @@
         }
       }
     },
-    "/document/formats&type=document": {
+    "/document/formats": {
       "get": {
-        "operationId": "DocumentTranslationOperations_GetSupportedDocumentFormats",
+        "operationId": "DocumentTranslationOperations_GetSupportedFormats",
         "summary": "Returns a list of supported document formats",
-        "description": "The list of supported document formats supported by the Document Translation\nservice.\nThe list includes the common file extension, as well as the\ncontent-type if using the upload API.",
+        "description": "The list of supported formats supported by the Document Translation\nservice.\nThe list includes the common file extension, as well as the\ncontent-type if using the upload API.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "the type of format like document or glossary ",
+            "required": true,
+            "type": "string",
+            "default": "document"
           }
         ],
         "responses": {
@@ -528,43 +536,6 @@
         "x-ms-examples": {
           "Returns a list of supported document formats": {
             "$ref": "./examples/format.json"
-          }
-        }
-      }
-    },
-    "/document/formats&type=glossary": {
-      "get": {
-        "operationId": "DocumentTranslationOperations_GetSupportedGlossaryFormats",
-        "summary": "Returns the list of supported glossary formats",
-        "description": "The list of supported glossary formats supported by the Document Translation\nservice.\nThe list includes the common file extension used.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/SupportedFileFormats"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Returns a list of supported glossary formats": {
-            "$ref": "./examples/glossary.json"
           }
         }
       }
@@ -637,43 +608,6 @@
         "x-ms-examples": {
           "Translate a single document": {
             "$ref": "./examples/DocumentTranslate_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/storagesources": {
-      "get": {
-        "operationId": "DocumentTranslationOperations_GetSupportedStorageSources",
-        "summary": "Returns a list of supported storage sources",
-        "description": "Returns a list of storage sources/options supported by the Document Translation\nservice.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/SupportedStorageSources"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Returns a list of supported storage sources": {
-            "$ref": "./examples/storage.json"
           }
         }
       }

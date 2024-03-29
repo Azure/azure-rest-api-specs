@@ -29,11 +29,7 @@ interface DocumentTranslationClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   getDocumentsStatus is DocumentTranslation.DocumentTranslationOperations.getDocumentsStatus;
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  getSupportedDocumentFormats is DocumentTranslation.DocumentTranslationOperations.getSupportedDocumentFormats;
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  getSupportedGlossaryFormats is DocumentTranslation.DocumentTranslationOperations.getSupportedGlossaryFormats;
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  getSupportedStorageSources is DocumentTranslation.DocumentTranslationOperations.getSupportedStorageSources;
+  getSupportedFormats is DocumentTranslation.DocumentTranslationOperations.getSupportedFormats;
 }
 
 @client({
