@@ -12,24 +12,16 @@ using TypeSpec.Http;
 namespace AzureHealthInsights;
 
 interface OncoPhenotype {
-  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Service uses a jobId in the path"
   @summary("Get Onco Phenotype job details")
   @tag("OncoPhenotype")
   @doc("Gets the status and details of the Onco Phenotype job.")
-  @get
-  @route("/onco-phenotype/jobs/{id}")
-  getJob is HealthInsightsLongRunningPollOperation<OncoPhenotypeResult>;
+  getJob is Azure.Core.ResourceRead<OncoPhenotypeResult>;
 
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Polling through operation-location"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no long-running RPC template in Azure.Core"
   @summary("Create Onco Phenotype job")
   @tag("OncoPhenotype")
   @doc("Creates an Onco Phenotype job with the given request body.")
   @pollingOperation(OncoPhenotype.getJob)
-  @route("/onco-phenotype/jobs")
-  createJob is HealthInsightsLongRunningRpcOperation<
-    OncoPhenotypeData,
-    OncoPhenotypeResult,
-    OncoPhenotypeInferenceResult
-  >;
+  @route("/oncophenotype/jobs")
+  createJob is LongRunningRpcOperation<OncoPhenotypeData, OncoPhenotypeResult>;
 }
