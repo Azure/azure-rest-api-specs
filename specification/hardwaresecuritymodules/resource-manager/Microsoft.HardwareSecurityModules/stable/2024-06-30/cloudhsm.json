@@ -76,12 +76,6 @@
               "$ref": "#/definitions/CloudHsmCluster"
             }
           },
-          "201": {
-            "description": "Created or Update Cloud HSM Cluster",
-            "schema": {
-              "$ref": "#/definitions/CloudHsmCluster"
-            }
-          },
           "default": {
             "description": "The error response describing why the operation failed.",
             "schema": {
@@ -134,15 +128,6 @@
             "description": "Patched Cloud HSM Cluster",
             "schema": {
               "$ref": "#/definitions/CloudHsmCluster"
-            }
-          },
-          "202": {
-            "description": "Accepted and the operation will complete asynchronously.",
-            "headers": {
-              "Location": {
-                "description": "The URI to poll for completion status.",
-                "type": "string"
-              }
             }
           },
           "default": {
@@ -223,6 +208,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK Response."
+          },
           "202": {
             "description": "Accepted",
             "headers": {
