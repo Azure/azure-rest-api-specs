@@ -31,17 +31,20 @@ options:
     package-dir: "azure-healthinsights-patienttimeline"
     package-name: "{package-dir}"
     emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
+    flavor: azure
   "@azure-tools/typespec-java":
     package-dir: "azure-health-insights-patienttimeline"
     namespace: com.azure.health.insights.patienttimeline
     partial-update: true
     emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-health-insights-patienttimeline"
+    flavor: azure
   "@azure-tools/typespec-csharp":
     save-inputs: false
     clear-output-folder: true
     package-dir: "Azure.Health.Insights.PatientTimeline"
     namespace: "{package-dir}"
     model-namespace: false
+    flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "azurehealthinsightspatienttimeline-rest"
     emitter-output-dir: "{js-sdk-folder}/sdk/{service-directory-name}/health-insights-patienttimeline-rest"
@@ -49,3 +52,4 @@ options:
     generateTest: true
     packageDetails:
       name: "@azure-rest/health-insights-patienttimeline"
+    flavor: azure
