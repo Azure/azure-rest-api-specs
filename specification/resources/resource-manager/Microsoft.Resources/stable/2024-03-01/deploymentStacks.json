@@ -756,7 +756,7 @@
         "tags": [
           "DeploymentStacks"
         ],
-        "operationId": "DeploymentStacks_PreflightValidateStackAtResourceGroup",
+        "operationId": "DeploymentStacks_ValidateStackAtResourceGroup",
         "description": "Runs preflight validation on the Resource Group scoped Deployment stack template to verify its acceptance to Azure Resource Manager.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -823,7 +823,7 @@
         "tags": [
           "DeploymentStacks"
         ],
-        "operationId": "DeploymentStacks_PreflightValidateStackAtSubscription",
+        "operationId": "DeploymentStacks_ValidateStackAtSubscription",
         "description": "Runs preflight validation on the Subscription scoped Deployment stack template to verify its acceptance to Azure Resource Manager.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -887,7 +887,7 @@
         "tags": [
           "DeploymentStacks"
         ],
-        "operationId": "DeploymentStacks_PreflightValidateStackAtManagementGroup",
+        "operationId": "DeploymentStacks_ValidateStackAtManagementGroup",
         "description": "Runs preflight validation on the Management Group scoped Deployment stack template to verify its acceptance to Azure Resource Manager.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -1029,7 +1029,7 @@
         },
         "bypassStackOutOfSyncError": {
           "type": "boolean",
-          "description": "Allows the user to bypass service errors that indicate the stack resource list is not correctly synchronized.",
+          "description": "Flag to bypass service errors that indicate the stack resource list is not correctly synchronized.",
           "x-ms-mutability": [
             "create",
             "update"
@@ -1476,7 +1476,7 @@
     },
     "DeploymentStackValidateResult": {
       "type": "object",
-      "description": "Deployment stack validation result.",
+      "description": "The Deployment stack validation result.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
@@ -1496,7 +1496,7 @@
     },
     "DeploymentStackValidateProperties": {
       "type": "object",
-      "description": "Deployment stack validation result details.",
+      "description": "The Deployment stack validation result details.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
