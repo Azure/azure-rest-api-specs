@@ -6337,8 +6337,7 @@
       "enum": [
         "cosine",
         "euclidean",
-        "dotProduct",
-        "hamming"
+        "dotProduct"
       ],
       "x-ms-enum": {
         "name": "VectorSearchAlgorithmMetric",
@@ -6346,27 +6345,19 @@
         "values": [
           {
             "value": "cosine",
-            "name": "Cosine",
-            "description": "Measures the angle between vectors to quantify their similarity, disregarding magnitude. The smaller the angle, the closer the similarity."
+            "name": "Cosine"
           },
           {
             "value": "euclidean",
-            "name": "Euclidean",
-            "description": "Computes the straight-line distance between vectors in a multi-dimensional space. The smaller the distance, the closer the similarity."
+            "name": "Euclidean"
           },
           {
             "value": "dotProduct",
-            "name": "DotProduct",
-            "description": "Calculates the sum of element-wise products to gauge alignment and magnitude similarity. The larger and more positive, the closer the similarity."
-          },
-          {
-            "value": "hamming",
-            "name": "Hamming",
-            "description": "Only applicable to binary-derived data types. Determines dissimilarity by counting differing positions in binary vectors. The fewer differences, the closer the similarity."
+            "name": "DotProduct"
           }
         ]
       },
-      "description": "The similarity metric to use for vector comparisons. It is recommended to choose the same similarity metric as the embedding model was trained on."
+      "description": "The similarity metric to use for vector comparisons."
     },
     "VectorSearchAlgorithmKind": {
       "type": "string",
