@@ -777,7 +777,7 @@ Public IP count raised from 64 to 1024
 
   @doc("Azure resource ID of the virtual network")
   @visibility("create", "read")
-  virtualNetworkId?: ResourceIdentifier<[
+  virtualNetworkId?: Azure.Core.armResourceIdentifier<[
     {
       type: "\\Microsoft.Network\\vnet";
     }
@@ -1058,7 +1058,7 @@ attached as a LUN
 }
 
 scalar ClusterResourceId
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ContainerService/managedClusters",
     }
@@ -1067,7 +1067,7 @@ scalar ClusterResourceId
 @doc("An Elastic SAN volume from Microsoft.ElasticSan provider")
 model ElasticSanVolume {
   @doc("Azure resource ID of the Elastic SAN Volume")
-  targetId: ResourceIdentifier<[
+  targetId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ElasticSan/elasticSans/volumeGroups/volumes";
     }

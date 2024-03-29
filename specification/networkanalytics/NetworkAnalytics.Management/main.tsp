@@ -25,6 +25,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 enum Versions {
   @doc("The 2023-11-15 stable version.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_11_15: "2023-11-15",
 }
 
@@ -272,7 +273,7 @@ model ConsumptionEndpointsProperties {
 
   @doc("Resource Id of ingestion endpoint.")
   @visibility("read")
-  ingestionResourceId?: ResourceIdentifier<[
+  ingestionResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Storage/storageAccounts";
     }
@@ -284,7 +285,7 @@ model ConsumptionEndpointsProperties {
 
   @doc("Resource Id of file access endpoint.")
   @visibility("read")
-  fileAccessResourceId?: ResourceIdentifier<[
+  fileAccessResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Storage/storageAccounts";
     }
@@ -296,7 +297,7 @@ model ConsumptionEndpointsProperties {
 
   @doc("Resource Id of query endpoint.")
   @visibility("read")
-  queryResourceId?: ResourceIdentifier<[
+  queryResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Kusto/clusters";
     }
