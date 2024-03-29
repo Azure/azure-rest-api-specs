@@ -4,11 +4,11 @@ import "@azure-tools/typespec-azure-core";
 
 //Resources
 import "./models/models.tsp";
-import "./resources/api.tsp";
-import "./resources/apiDefinition.tsp";
-import "./resources/deployment.tsp";
-import "./resources/environment.tsp";
-import "./resources/apiVersion.tsp";
+import "./resources/Api.tsp";
+import "./resources/ApiDefinition.tsp";
+import "./resources/Deployment.tsp";
+import "./resources/Environment.tsp";
+import "./resources/ApiVersion.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
