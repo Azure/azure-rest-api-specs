@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -21,11 +20,17 @@ using Azure.ResourceManager;
 @armProviderNamespace
 @service({
   title: "Microsoft.IoTOperationsMQ management service",
-  version: "2023-10-04-preview",
 })
+@versioned(Versions)
 @doc("Microsoft.IoTOperationsMQ Resource Provider management API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.IoTOperationsMQ;
+
+/** Api versions */
+enum Versions {
+  /** 2023-10-04-preview preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  `2023-10-04-preview`,
+}
 
 interface Operations extends Azure.ResourceManager.Operations {}
 

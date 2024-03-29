@@ -1,11 +1,11 @@
 parameters:
   "service-dir":
-    default: "sdk/openai/assistants"
+    default: "sdk/openai"
   "dependencies":
     default: ""
 emit:
- - "@azure-tools/typespec-autorest"
- - "@typespec/openapi3"
+  - "@azure-tools/typespec-autorest"
+  - "@typespec/openapi3"
 # - "@azure-tools/typespec-java"
 # - "@azure-tools/typespec-csharp"
 linter:
@@ -27,6 +27,7 @@ options:
     clear-output-folder: true
     model-namespace: false
     generate-protocol-methods: false
+    flavor: azure
   "@azure-tools/typespec-java":
     package-dir: "azure-ai-openai-assistants"
     namespace: "com.azure.ai.openai.assistants"
@@ -35,6 +36,8 @@ options:
     generate-tests: false
     custom-types-subpackage: "implementation.models"
     custom-types: "FileListResponse,OpenAIPageableListOfAssistant,OpenAIPageableListOfAssistantFile,OpenAIPageableListOfMessageFile,OpenAIPageableListOfRunStep,OpenAIPageableListOfThreadMessage,OpenAIPageableListOfThreadRun"
+    flavor: azure
+    stream-style-serialization: false
   "@azure-tools/typespec-ts":
     package-dir: "openai"
     generateMetadata: false
@@ -42,3 +45,4 @@ options:
     isModularLibrary: true
     packageDetails:
       name: "@azure/openai-assistants"
+    flavor: azure
