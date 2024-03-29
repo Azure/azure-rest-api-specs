@@ -1,10 +1,9 @@
 import "../HealthInsights.Common/model.common.request.tsp";
 import "../HealthInsights.Common/model.common.response.tsp";
 import "../HealthInsights.Common/model.common.shared.tsp";
-import "@azure-tools/typespec-azure-core";
+import "../HealthInsights.Common/model.common.fhir.elements.tsp";
 
 using TypeSpec.Rest;
-using Azure.Core;
 
 namespace AzureHealthInsights;
 
@@ -16,21 +15,15 @@ model OncoPhenotypeData {
   configuration?: OncoPhenotypeModelConfiguration;
 }
 
-@resource("oncophenotype/jobs")
 @doc("The response for the Onco Phenotype request.")
-model OncoPhenotypeResult {
-  ...Response;
-
-  @doc("The inference results for the Onco Phenotype request.")
-  @visibility("read")
-  @lroResult
-  results?: OncoPhenotypeResults;
-}
+@resource("onco-phenotype/jobs")
+model OncoPhenotypeResult
+  is HealthInsightsOperationStatus<OncoPhenotypeInferenceResult>;
 
 @doc("The inference results for the Onco Phenotype request.")
-model OncoPhenotypeResults {
+model OncoPhenotypeInferenceResult {
   @doc("Results for the patients given in the request.")
-  patients: OncoPhenotypePatientResult[];
+  patientResults: OncoPhenotypePatientResult[];
 
   @doc("The version of the model used for inference, expressed as the model date.")
   modelVersion: ModelVersion;
@@ -39,10 +32,10 @@ model OncoPhenotypeResults {
 @doc("The results of the model's work for a single patient.")
 model OncoPhenotypePatientResult {
   @doc("The identifier given for the patient in the request.")
-  id: string;
+  patientId: string;
 
   @doc("The model's inferences for the given patient.")
-  inferences: OncoPhenotypeInference[];
+  inferences: Array<OncoPhenotypeInference>;
 }
 
 @doc("An inference made by the Onco Phenotype model regarding a patient.")
@@ -90,4 +83,5 @@ union OncoPhenotypeInferenceType {
   PathologicStageT: "pathologicStageT",
   PathologicStageN: "pathologicStageN",
   PathologicStageM: "pathologicStageM",
+  DiagnosisDate: "diagnosisDate",
 }

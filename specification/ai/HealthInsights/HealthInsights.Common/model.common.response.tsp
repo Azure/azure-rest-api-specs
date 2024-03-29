@@ -5,34 +5,46 @@ using TypeSpec.Rest;
 
 namespace AzureHealthInsights;
 
-alias Response = {
-  #suppress "@azure-tools/typespec-azure-core/no-format" "This is an old spec"
-  @doc("A processing job identifier.")
+/**
+ * Provides status details for long running operations.
+ * @template TStatusResult The type of the operation status result.
+ * @template TStatusError The type of the operation status error. If not provided, the default error is used.
+ */
+@doc("Provides status details for long running operations.")
+model HealthInsightsOperationStatus<
+  TStatusResult = never,
+  TStatusError = Foundations.Error
+> {
+  @key("operationId")
+  @doc("The unique ID of the operation.")
   @visibility("read")
-  @key
-  jobId: Azure.Core.uuid;
+  id: Azure.Core.uuid;
+
+  @doc("The status of the operation")
+  @visibility("read")
+  @lroStatus
+  status: JobStatus;
 
   @doc("The date and time when the processing job was created.")
   @visibility("read")
-  createdDateTime: utcDateTime;
+  createdDateTime?: utcDateTime;
 
   @doc("The date and time when the processing job is set to expire.")
   @visibility("read")
-  expirationDateTime: utcDateTime;
+  expirationDateTime?: utcDateTime;
 
   @doc("The date and time when the processing job was last updated.")
   @visibility("read")
-  lastUpdateDateTime: utcDateTime;
+  lastUpdateDateTime?: utcDateTime;
 
-  @doc("The status of the processing job.")
-  @visibility("read")
-  status: JobStatus;
+  @doc("Error object that describes the error when status is \"Failed\".")
+  error?: TStatusError;
 
-  @doc("An array of errors, if any errors occurred during the processing job.")
-  @visibility("read")
-  errors?: Azure.Core.Foundations.Error[];
-};
-
+  @doc("The result of the operation.")
+  @lroResult
+  result?: TStatusResult;
+}
+////////////////// Inference //////////////////
 @doc("An inference made by the model regarding a patient.")
 model Inference {
   @doc("The value of the inference, as relevant for the given inference type.")
@@ -46,6 +58,26 @@ model Inference {
   @maxValue(1)
   confidenceScore?: float32;
 }
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next version"
+@doc("The status of the processing job.")
+@lroStatus
+union JobStatus {
+  string,
+  NotStarted: "notStarted",
+  Running: "running",
+
+  @lroSucceeded
+  Succeeded: "succeeded",
+
+  @lroFailed
+  Failed: "failed",
+
+  Canceled: "canceled",
+}
+
+@doc("The version of the model used for inference, expressed as the model date.")
+scalar ModelVersion extends string;
 
 @doc("A piece of evidence from a clinical note (text document).")
 model ClinicalNoteEvidence {
@@ -80,30 +112,3 @@ system.
   @maxValue(1)
   importance?: float32;
 }
-
-@doc("A piece of evidence corresponding to a Trial Matcher inference.")
-model TrialMatcherInferenceEvidence {
-  @doc("A piece of evidence from the eligibility criteria text of a clinical trial.")
-  eligibilityCriteriaEvidence?: string;
-
-  ...InferenceEvidence;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next version"
-@doc("The status of the processing job.")
-union JobStatus {
-  string,
-  NotStarted: "notStarted",
-  Running: "running",
-
-  @lroSucceeded
-  Succeeded: "succeeded",
-
-  @lroFailed
-  Failed: "failed",
-
-  PartiallyCompleted: "partiallyCompleted",
-}
-
-@doc("The version of the model used for inference, expressed as the model date.")
-scalar ModelVersion extends string;
