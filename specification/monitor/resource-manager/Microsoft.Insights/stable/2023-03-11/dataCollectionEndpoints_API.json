@@ -606,11 +606,10 @@
         "kind": {
           "description": "The kind of the resource.",
           "enum": [
-            "Linux",
-            "Windows"
+            "SystemManaged"
           ],
           "type": "string",
-          "example": "Linux",
+          "example": "SystemManaged",
           "x-ms-enum": {
             "name": "KnownDataCollectionEndpointResourceKind",
             "modelAsString": true
@@ -694,27 +693,6 @@
         }
       }
     },
-    "ResourceForUpdateProperties": {
-      "type": "object",
-      "properties": {
-        "failoverConfiguration": {
-          "description": "Failover configuration",
-          "allOf": [
-            {
-              "$ref": "#/definitions/FailoverConfigurationSpec"
-            }
-          ]
-        },
-        "metadata": {
-          "description": "Metadata",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Metadata"
-            }
-          ]
-        }
-      }
-    },
     "ResourceForUpdate": {
       "description": "Definition of ARM tracked top level resource properties for update operation.",
       "type": "object",
@@ -735,22 +713,23 @@
           ]
         },
         "properties": {
-          "description": "Properties of the resource to be updated.",
+          "description": "Resource properties.",
           "allOf": [
             {
-              "$ref": "#/definitions/ResourceForUpdateProperties"
+              "$ref": "#/definitions/DataCollectionEndpoint"
             }
-          ]
+          ],
+          "x-ms-client-flatten": true
         },
         "kind": {
-          "description": "Kind of Data Collection Endpoint",
+          "description": "The kind of the resource.",
           "enum": [
             "SystemManaged"
           ],
           "type": "string",
           "example": "SystemManaged",
           "x-ms-enum": {
-            "name": "KnownDataCollectionEndpointResourceForUpdateKind",
+            "name": "KnownDataCollectionEndpointResourceKind",
             "modelAsString": true
           }
         }
