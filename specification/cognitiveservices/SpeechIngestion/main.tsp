@@ -59,16 +59,16 @@ model Registration {
 model StorageModel {
   @doc("The Uri of the blob storage account in the form of 'https://<accountname>.blob.core.windows.net'.")
   blobStorageEndpoint: string;
-  
+
   @doc("The name of the container that holds the audio files to be processed.")
   inputContainerName: string;
-  
+
   @doc("The name of the container that stores the transcription and analytics results.")
   outputContainerName: string;
-  
+
   @doc("The name of the container that archives the audio files that have been transcribed.")
   processedContainerName: string;
-  
+
   @doc("The name of the container that saves the error messages during processing.")
   errorOutputContainerName: string;
 }
@@ -77,17 +77,16 @@ model StorageModel {
 model ProcessingModel {
   @doc("deliveryMode.")
   deliveryMode: string;
-  
+
   @doc("Extensions of input files.")
   subjectEndsWith?: string;
-  
+
   @doc("ResourceId for System Topic.")
   systemTopicResourceId?: string;
 }
 
 @doc("Batch Transcription Properties model")
 model BatchTranscriptionPropertiesModel {
-
   @doc("The expected locale of the audio data to transcribe. For example, 'en-US', 'fr-FR', 'zh-CN', etc. For a full list of supported locales, see [Supported languages and regions](https://learn.microsoft.com/azure/ai-services/speech-service/language-support?tabs=stt).")
   locale?: string;
 
@@ -104,10 +103,10 @@ model BatchTranscriptionPropertiesModel {
 @doc("Batch Transcription Properties model")
 model TranscriptionPropertiesModel {
   @doc("Specifies if word level timestamps should be included in the output. The default value is false.")
-  wordLevelTimestampsEnabled?: boolean = false; 
+  wordLevelTimestampsEnabled?: boolean = false;
 
   @doc("Specifies whether to include word-level timestamps on the display form of the transcription results. The results are returned in the displayWords property of the transcription file. The default value is false.")
-  displayFormWordLevelTimestampsEnabled?: boolean = false; 
+  displayFormWordLevelTimestampsEnabled?: boolean = false;
 
   @doc("An array of channel numbers to process. Channels 0 and 1 are transcribed by default.")
   channels?: int8[] = [0, 1];
@@ -138,6 +137,7 @@ model DiarizationPropertiesModel {
 model DiarizationSpeakersPropertiesModel {
   @doc("Minimum count of speakers")
   minCount?: int8;
+
   @doc("Maximum count of speakers")
   maxCount?: int8;
 }
@@ -188,4 +188,3 @@ interface Registrations {
   @doc("List Registration resources")
   listRegistrations is ResourceList<Registration>;
 }
-
