@@ -12,12 +12,12 @@ using Azure.Core;
 using Azure.Core.Traits;
 using ApiCenter.DataApi;
 
-
 @versioned(ApiCenter.DataApi.Versions)
 namespace ApiCenter.DataApi;
 
 alias WorkSpaceIdParameter = {
   @doc("Workspace identifier.")
   @maxLength(50)
-  @path workspaceName: string;
+  @path
+  workspaceName: string;
 };

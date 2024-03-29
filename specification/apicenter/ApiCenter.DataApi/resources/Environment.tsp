@@ -19,10 +19,9 @@ interface Environments {
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 
-  
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Cannot model with standard operations"
   @doc("List a collection of environments across workspaces.")
   @route("/environments")
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Cannot model with standard operations"
   listAll is Azure.Core.Foundations.Operation<
     StandardListQueryParameters,
     PagedEnvironmentAll
