@@ -694,6 +694,27 @@
         }
       }
     },
+    "ResourceForUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "failoverConfiguration": {
+          "description": "Failover configuration",
+          "allOf": [
+            {
+              "$ref": "#/definitions/FailoverConfigurationSpec"
+            }
+          ]
+        },
+        "metadata": {
+          "description": "Metadata",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Metadata"
+            }
+          ]
+        }
+      }
+    },
     "ResourceForUpdate": {
       "description": "Definition of ARM tracked top level resource properties for update operation.",
       "type": "object",
@@ -713,19 +734,11 @@
             }
           ]
         },
-        "failoverConfiguration": {
-          "description": "Failover configuration",
+        "properties": {
+          "description": "Properties of the resource to be updated.",
           "allOf": [
             {
-              "$ref": "#/definitions/FailoverConfigurationSpec"
-            }
-          ]
-        },
-        "metadata": {
-          "description": "Payload for Data Collection Endpoint",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Metadata"
+              "$ref": "#/definitions/ResourceForUpdateProperties"
             }
           ]
         },
