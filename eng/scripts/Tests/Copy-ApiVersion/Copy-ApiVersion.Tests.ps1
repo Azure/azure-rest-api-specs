@@ -50,8 +50,6 @@ Describe "Copy-ApiVersion" {
             $contents = Get-ReadmeWithNewTag $readmeContent $tagContent
             $output = Get-ReadmeWithLatestTag $contents $apiVersion
             $expectedOutput = Get-Content "$PSScriptRoot\$expectedReadme" -Raw
-            # Write output to file for manual inspection
-            $output | Set-Content "$PSScriptRoot\OUTPUT-$saveName.md"
             $output | Should be $expectedOutput
         }
     }
