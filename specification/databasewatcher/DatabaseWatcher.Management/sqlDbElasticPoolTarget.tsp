@@ -16,14 +16,14 @@ model SqlDbElasticPoolTargetProperties extends TargetProperties {
   targetType: "SqlEp";
 
   @doc("The Azure ResourceId of an Azure SQL DB elastic pool target.")
-  sqlEpResourceId: ResourceIdentifier<[
+  sqlEpResourceId: armResourceIdentifier<[
     {
       type: "Microsoft.Sql/servers/elasticPools";
     }
   ]>;
 
   @doc("The Azure ResourceId of the anchor database used to connect to an elastic pool.")
-  anchorDatabaseResourceId: ResourceIdentifier<[
+  anchorDatabaseResourceId: armResourceIdentifier<[
     {
       type: "Microsoft.Sql/servers/databases";
     }

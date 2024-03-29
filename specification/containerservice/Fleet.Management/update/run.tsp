@@ -40,7 +40,7 @@ union UpdateRunProvisioningState {
 }
 
 scalar FleetUpdateStrategyResourceId
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ContainerService/fleets/updateStrategies",
     }

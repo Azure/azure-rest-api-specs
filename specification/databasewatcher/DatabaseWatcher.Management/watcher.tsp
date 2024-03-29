@@ -57,7 +57,7 @@ model WatcherProperties {
 @doc("The properties of a data store.")
 model Datastore {
   @doc("The Azure ResourceId of an Azure Data Explorer cluster.")
-  adxClusterResourceId?: ResourceIdentifier<[
+  adxClusterResourceId?: armResourceIdentifier<[
     {
       type: "Microsoft.Kusto/clusters";
     }

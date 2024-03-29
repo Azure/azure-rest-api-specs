@@ -272,7 +272,7 @@ model ConsumptionEndpointsProperties {
 
   @doc("Resource Id of ingestion endpoint.")
   @visibility("read")
-  ingestionResourceId?: ResourceIdentifier<[
+  ingestionResourceId?: armResourceIdentifier<[
     {
       type: "Microsoft.Storage/storageAccounts";
     }
@@ -284,7 +284,7 @@ model ConsumptionEndpointsProperties {
 
   @doc("Resource Id of file access endpoint.")
   @visibility("read")
-  fileAccessResourceId?: ResourceIdentifier<[
+  fileAccessResourceId?: armResourceIdentifier<[
     {
       type: "Microsoft.Storage/storageAccounts";
     }
@@ -296,7 +296,7 @@ model ConsumptionEndpointsProperties {
 
   @doc("Resource Id of query endpoint.")
   @visibility("read")
-  queryResourceId?: ResourceIdentifier<[
+  queryResourceId?: armResourceIdentifier<[
     {
       type: "Microsoft.Kusto/clusters";
     }

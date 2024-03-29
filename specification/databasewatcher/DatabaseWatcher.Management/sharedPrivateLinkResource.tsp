@@ -31,7 +31,7 @@ model SharedPrivateLinkResource
 @doc("The generic properties of a Shared Private Link resource.")
 model SharedPrivateLinkResourceProperties {
   @doc("The resource id of the resource the shared private link resource is for.")
-  privateLinkResourceId: ResourceIdentifier;
+  privateLinkResourceId: armResourceIdentifier;
 
   @doc("The group id from the provider of resource the shared private link resource is for.")
   groupId: string;

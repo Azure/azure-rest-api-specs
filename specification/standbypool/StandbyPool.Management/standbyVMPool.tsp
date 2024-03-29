@@ -43,7 +43,7 @@ model StandbyVirtualMachinePoolResourceProperties {
 
   @doc("Specifies the fully qualified resource ID of a virtual machine scale set the pool is attached to.")
   @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
-  attachedVirtualMachineScaleSetId?: ResourceIdentifier<[
+  attachedVirtualMachineScaleSetId?: armResourceIdentifier<[
     {
       type: "Microsoft.Compute/virtualMachineScaleSet";
     }
