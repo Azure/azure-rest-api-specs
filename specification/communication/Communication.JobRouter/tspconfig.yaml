@@ -1,60 +1,62 @@
 parameters:
-  "python-sdk-folder":
-    default: "{project-root}/azure-sdk-for-python/"
-  "java-sdk-folder":
-    default: "{project-root}/azure-sdk-for-java/"
-  "js-sdk-folder":
-    default: "{project-root}/azure-sdk-for-js/"
-  "csharp-sdk-folder":
-    default: "{project-root}/azure-sdk-for-net/"
-  "service-directory-name":
-    default: "communication"
-  "service-dir":
-    default: "sdk/communication"
-  "python-output-dir":
-    default: "azure/communication/jobrouter/_generated"
+  csharp-sdk-folder:
+    default: '{project-root}/azure-sdk-for-net/'
+  java-sdk-folder:
+    default: '{project-root}/azure-sdk-for-java/'
+  js-sdk-folder:
+    default: '{project-root}/azure-sdk-for-js/'
+  python-output-dir:
+    default: azure/communication/jobrouter/_generated
+  python-sdk-folder:
+    default: '{project-root}/azure-sdk-for-python/'
+  service-dir:
+    default: sdk/communication
+  service-directory-name:
+    default: communication
 emit:
-  - "@azure-tools/typespec-autorest"
-
-linter:
-  extends:
-    - "@azure-tools/typespec-azure-core/all"
-
+  - D:/Go/src/github.com/Azure/autorest.go/packages/typespec-go
 options:
-  "@azure-tools/typespec-autorest":
-    azure-resource-provider-folder: "data-plane"
-    output-file: "{azure-resource-provider-folder}/JobRouter/{version-status}/{version}/communicationservicejobrouter.json"
-    emitter-output-dir: "{project-root}/.."
+  '@azure-tools/typespec-autorest':
+    azure-resource-provider-folder: data-plane
+    emitter-output-dir: '{project-root}/..'
+    examples-directory: '{project-root}/examples'
     omit-unreachable-types: true
-    examples-directory: "{project-root}/examples"
-  "@azure-tools/typespec-csharp":
+    output-file: '{azure-resource-provider-folder}/JobRouter/{version-status}/{version}/communicationservicejobrouter.json'
+  '@azure-tools/typespec-csharp':
     clear-output-folder: true
+    emitter-output-dir: '{csharp-sdk-folder}/sdk/{service-directory-name}/{namespace}/src'
+    flavor: azure
     model-namespace: false
-    emitter-output-dir: "{csharp-sdk-folder}/sdk/{service-directory-name}/{namespace}/src"
     namespace: Azure.Communication.JobRouter
-    package-dir: "Azure.Communication.JobRouter"
+    package-dir: Azure.Communication.JobRouter
+  '@azure-tools/typespec-go':
+    emitter-output-dir: '{project-root}/go/sdk/resourcemanager/communication/armcommunication'
+    module: github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/communication/armcommunication
+    module-version: 0.1.0
+  '@azure-tools/typespec-java':
+    custom-types: BestWorkerModeInternal,CancelExceptionActionInternal,ClassificationPolicyInternal,ConditionalQueueSelectorAttachmentInternal,ConditionalWorkerSelectorAttachmentInternal,DirectMapRouterRuleInternal,DistributionModeInternal,DistributionPolicyInternal,ExceptionActionInternal,ExceptionPolicyInternal,ExceptionRuleInternal,ExceptionTriggerInternal,ExpressionRouterRuleInternal,FunctionRouterRuleInternal,LongestIdleModeInternal,ManualReclassifyExceptionActionInternal,PassThroughQueueSelectorAttachmentInternal,PassThroughWorkerSelectorAttachmentInternal,QueueLengthExceptionTriggerInternal,QueueSelectorAttachmentInternal,QueueWeightedAllocationInternal,ReclassifyExceptionActionInternal,RoundRobinModeInternal,RouterJobInternal,RouterQueueInternal,RouterQueueSelectorInternal,RouterQueueStatisticsInternal,RouterRuleInternal,RouterWorkerInternal,RouterWorkerSelectorInternal,RuleEngineQueueSelectorAttachmentInternal,RuleEngineWorkerSelectorAttachmentInternal,StaticQueueSelectorAttachmentInternal,StaticRouterRuleInternal,StaticWorkerSelectorAttachmentInternal,WaitTimeExceptionTriggerInternal,WebhookRouterRuleInternal,WeightedAllocationQueueSelectorAttachmentInternal,WeightedAllocationWorkerSelectorAttachmentInternal,WorkerSelectorAttachmentInternal,WorkerWeightedAllocationInternal,CancelJobOptionsInternal,CancelJobResultInternal,CloseJobOptionsInternal,CloseJobResultInternal,CompleteJobOptionsInternal,CompleteJobResultInternal,DeclineJobOfferOptionsInternal,DeclineJobOfferResultInternal,ReclassifyJobOptionsInternal,ReclassifyJobResultInternal,JobMatchingModeInternal,SuspendModeInternal,QueueAndMatchModeInternal,ScheduleAndSuspendModeInternal
+    custom-types-subpackage: implementation.models
+    customization-class: customization/src/main/java/JobRouterSdkCustomization.java
+    emitter-output-dir: '{java-sdk-folder}/sdk/{service-directory-name}/azure-communication-jobrouter'
     flavor: azure
-  "@azure-tools/typespec-python":
-    package-pprint-name: '"Communication JobRouter"'
-    emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
-    package-dir: "azure-communication-jobrouter"
-    package-name: "{package-dir}"
-    package-version: 1.1.0b1
-    flavor: azure
-  "@azure-tools/typespec-java":
-    emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-communication-jobrouter"
-    package-dir: "azure-communication-jobrouter"
     namespace: com.azure.communication.jobrouter
+    package-dir: azure-communication-jobrouter
     partial-update: true
     service-name: JobRouter
-    custom-types-subpackage: "implementation.models"
-    custom-types: "BestWorkerModeInternal,CancelExceptionActionInternal,ClassificationPolicyInternal,ConditionalQueueSelectorAttachmentInternal,ConditionalWorkerSelectorAttachmentInternal,DirectMapRouterRuleInternal,DistributionModeInternal,DistributionPolicyInternal,ExceptionActionInternal,ExceptionPolicyInternal,ExceptionRuleInternal,ExceptionTriggerInternal,ExpressionRouterRuleInternal,FunctionRouterRuleInternal,LongestIdleModeInternal,ManualReclassifyExceptionActionInternal,PassThroughQueueSelectorAttachmentInternal,PassThroughWorkerSelectorAttachmentInternal,QueueLengthExceptionTriggerInternal,QueueSelectorAttachmentInternal,QueueWeightedAllocationInternal,ReclassifyExceptionActionInternal,RoundRobinModeInternal,RouterJobInternal,RouterQueueInternal,RouterQueueSelectorInternal,RouterQueueStatisticsInternal,RouterRuleInternal,RouterWorkerInternal,RouterWorkerSelectorInternal,RuleEngineQueueSelectorAttachmentInternal,RuleEngineWorkerSelectorAttachmentInternal,StaticQueueSelectorAttachmentInternal,StaticRouterRuleInternal,StaticWorkerSelectorAttachmentInternal,WaitTimeExceptionTriggerInternal,WebhookRouterRuleInternal,WeightedAllocationQueueSelectorAttachmentInternal,WeightedAllocationWorkerSelectorAttachmentInternal,WorkerSelectorAttachmentInternal,WorkerWeightedAllocationInternal,CancelJobOptionsInternal,CancelJobResultInternal,CloseJobOptionsInternal,CloseJobResultInternal,CompleteJobOptionsInternal,CompleteJobResultInternal,DeclineJobOfferOptionsInternal,DeclineJobOfferResultInternal,ReclassifyJobOptionsInternal,ReclassifyJobResultInternal,JobMatchingModeInternal,SuspendModeInternal,QueueAndMatchModeInternal,ScheduleAndSuspendModeInternal"
-    customization-class: customization/src/main/java/JobRouterSdkCustomization.java
+  '@azure-tools/typespec-python':
+    emitter-output-dir: '{python-sdk-folder}/sdk/{service-directory-name}/{package-name}'
     flavor: azure
-  "@azure-tools/typespec-ts":
-    emitter-output-dir: "{js-sdk-folder}/sdk/{service-directory-name}/communication-job-router-rest"
-    package-dir: "communication-job-router-rest"
+    package-dir: azure-communication-jobrouter
+    package-name: '{package-dir}'
+    package-pprint-name: '"Communication JobRouter"'
+    package-version: 1.1.0b1
+  '@azure-tools/typespec-ts':
+    emitter-output-dir: '{js-sdk-folder}/sdk/{service-directory-name}/communication-job-router-rest'
+    flavor: azure
+    package-dir: communication-job-router-rest
     packageDetails:
-      name: "@azure-rest/communication-job-router"
-      description: "Azure client library for Azure Communication Job Router services"
-    flavor: azure
+      description: Azure client library for Azure Communication Job Router services
+      name: '@azure-rest/communication-job-router'
+linter:
+  extends:
+    - '@azure-tools/typespec-azure-core/all'

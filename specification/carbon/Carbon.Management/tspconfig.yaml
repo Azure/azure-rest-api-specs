@@ -1,11 +1,15 @@
 emit:
-  - "@azure-tools/typespec-autorest"
+  - D:/Go/src/github.com/Azure/autorest.go/packages/typespec-go
 options:
-  "@azure-tools/typespec-autorest":
-    emitter-output-dir: "{project-root}/.."
-    azure-resource-provider-folder: "resource-manager"
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/main.json"
-    examples-directory: "{project-root}/examples"
+  '@azure-tools/typespec-autorest':
+    azure-resource-provider-folder: resource-manager
+    emitter-output-dir: '{project-root}/..'
+    examples-directory: '{project-root}/examples'
+    output-file: '{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/main.json'
+  '@azure-tools/typespec-go':
+    emitter-output-dir: '{project-root}/go/sdk/resourcemanager/carbonoptimization/armcarbonoptimization'
+    module: github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/carbonoptimization/armcarbonoptimization
+    module-version: 0.1.0
 linter:
   extends:
-    - "@azure-tools/typespec-azure-resource-manager/all"
+    - '@azure-tools/typespec-azure-resource-manager/all'

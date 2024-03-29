@@ -1,39 +1,43 @@
 parameters:
-  "service-dir":
-    default: "sdk/batch"
+  service-dir:
+    default: sdk/batch
 emit:
-  - "@azure-tools/typespec-autorest"
-linter:
-  extends:
-    - "@azure-tools/typespec-azure-core/all"
+  - D:/Go/src/github.com/Azure/autorest.go/packages/typespec-go
 options:
-  "@azure-tools/typespec-autorest":
-    azure-resource-provider-folder: "./data-plane"
-    emitter-output-dir: "{project-root}/.."
-    examples-directory: "{project-root}/examples"
-    output-file: "{azure-resource-provider-folder}/Azure.Batch/preview/{version}/BatchService.json"
-  "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Batch"
+  '@azure-tools/typespec-autorest':
+    azure-resource-provider-folder: ./data-plane
+    emitter-output-dir: '{project-root}/..'
+    examples-directory: '{project-root}/examples'
+    output-file: '{azure-resource-provider-folder}/Azure.Batch/preview/{version}/BatchService.json'
+  '@azure-tools/typespec-csharp':
     clear-output-folder: true
-    model-namespace: false
-    head-as-boolean: true
-    namespace: Azure.Compute.Batch
     flavor: azure
-  "@azure-tools/typespec-java":
-    namespace: "com.azure.compute.batch"
-    package-dir: "azure-compute-batch"
+    head-as-boolean: true
+    model-namespace: false
+    namespace: Azure.Compute.Batch
+    package-dir: Azure.Batch
+  '@azure-tools/typespec-go':
+    emitter-output-dir: '{project-root}/go/sdk/resourcemanager/batch/armbatch'
+    module: github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/batch/armbatch
+    module-version: 0.1.0
+  '@azure-tools/typespec-java':
+    flavor: azure
+    namespace: com.azure.compute.batch
+    package-dir: azure-compute-batch
     partial-update: true
     skip-special-headers:
-      - "ocp-date"
+      - ocp-date
+  '@azure-tools/typespec-python':
     flavor: azure
-  "@azure-tools/typespec-python":
-    package-dir: "azure-batch"
-    package-name: "{package-dir}"
+    package-dir: azure-batch
+    package-name: '{package-dir}'
+  '@azure-tools/typespec-ts':
     flavor: azure
-  "@azure-tools/typespec-ts":
-    package-dir: "batch-rest"
+    package-dir: batch-rest
     packageDetails:
-      name: "@azure-rest/batch"
-      description: "Batch Service Rest Level Client"
-      version: "1.0.0-beta.1"
-    flavor: azure
+      description: Batch Service Rest Level Client
+      name: '@azure-rest/batch'
+      version: 1.0.0-beta.1
+linter:
+  extends:
+    - '@azure-tools/typespec-azure-core/all'

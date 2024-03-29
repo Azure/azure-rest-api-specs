@@ -1,23 +1,27 @@
+emit:
+  - D:/Go/src/github.com/Azure/autorest.go/packages/typespec-go
+options:
+  '@azure-tools/cadl-csharp':
+    clear-output-folder: true
+    model-namespace: false
+    namespace: Microsoft.DevOpsInfrastructure
+    save-inputs: false
+  '@azure-tools/cadl-python':
+    basic-setup-py: true
+    package-name: azure-mgmt-devopsinfrastructure
+    package-version: 1.0.0b1
+  '@azure-tools/typespec-autorest':
+    azure-resource-provider-folder: resource-manager
+    emitter-output-dir: '{project-root}/..'
+    examples-directory: '{project-root}/examples'
+    omit-unreachable-types: true
+    output-file: '{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/devopsinfrastructure.json'
+  '@azure-tools/typespec-go':
+    emitter-output-dir: '{project-root}/go/sdk/resourcemanager/devopsinfrastructure/armdevopsinfrastructure'
+    module: github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/devopsinfrastructure/armdevopsinfrastructure
+    module-version: 0.1.0
 linter:
   extends:
-    - "@azure-tools/typespec-azure-resource-manager/all"
+    - '@azure-tools/typespec-azure-resource-manager/all'
   disable:
-    "@azure-tools/typespec-azure-resource-manager/arm-common-types-version": "New rule"
-emit:
-  - "@azure-tools/typespec-autorest"
-options:
-  "@azure-tools/typespec-autorest":
-    emitter-output-dir: "{project-root}/.."
-    azure-resource-provider-folder: "resource-manager"
-    examples-directory: "{project-root}/examples"
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/devopsinfrastructure.json"
-    omit-unreachable-types: true
-  "@azure-tools/cadl-python":
-    "basic-setup-py": true
-    "package-version": 1.0.0b1
-    "package-name": azure-mgmt-devopsinfrastructure
-  "@azure-tools/cadl-csharp":
-    save-inputs: false
-    clear-output-folder: true
-    namespace: Microsoft.DevOpsInfrastructure
-    model-namespace: false
+    '@azure-tools/typespec-azure-resource-manager/arm-common-types-version': New rule
