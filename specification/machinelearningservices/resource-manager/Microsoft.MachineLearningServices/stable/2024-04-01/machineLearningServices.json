@@ -1604,6 +1604,48 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listConnectionModels": {
+      "post": {
+        "tags": [
+          "Workspaces"
+        ],
+        "operationId": "Workspaces_ListConnectionModels",
+        "description": "List available models from all connections.",
+        "x-ms-examples": {
+          "List Connection Models": {
+            "$ref": "./examples/Workspace/listConnectionModels.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/EndpointModels"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/listStorageAccountKeys": {
       "post": {
         "tags": [
@@ -8319,6 +8361,13 @@
           "description": "Base Model Identifier.",
           "$ref": "#/definitions/DeploymentModel"
         },
+        "connectionIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of connection ids."
+        },
         "isDefaultVersion": {
           "type": "boolean",
           "description": "If the model is default version."
@@ -8628,12 +8677,15 @@
           "$ref": "#/definitions/AllowedContentLevel"
         },
         "blocking": {
+          "description": "If blocking would occur.",
           "type": "boolean"
         },
         "enabled": {
+          "description": "If the ContentFilter is enabled.",
           "type": "boolean"
         },
         "name": {
+          "description": "Name of ContentFilter.",
           "type": "string"
         },
         "source": {
@@ -8642,6 +8694,7 @@
       }
     },
     "AllowedContentLevel": {
+      "description": "Level at which content is filtered.",
       "enum": [
         "Low",
         "Medium",
@@ -8654,6 +8707,7 @@
       }
     },
     "RaiPolicyContentSource": {
+      "description": "Content source to apply the Content Filters.",
       "enum": [
         "Prompt",
         "Completion"
@@ -8665,6 +8719,7 @@
       }
     },
     "RaiPolicyMode": {
+      "description": "Content Filters mode.",
       "enum": [
         "Default",
         "Deferred",
@@ -8677,6 +8732,7 @@
       }
     },
     "RaiPolicyType": {
+      "description": "Content Filters policy type.",
       "enum": [
         "UserManaged",
         "SystemManaged"
