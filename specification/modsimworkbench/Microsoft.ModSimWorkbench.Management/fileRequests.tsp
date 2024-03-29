@@ -9,11 +9,12 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
+@armProviderNamespace("Microsoft.ModSimWorkbench")
 @service({
   title: "ModSimWorkbench Control Plane API",
-  version: "2021-03-01-preview",
 })
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@armProviderNamespace
+@versioned(Microsoft.ModSimWorkbench.Versions)
 namespace Microsoft.ModSimWorkbench;
 
 @doc("File request approval details.")
@@ -60,10 +61,10 @@ model FileRequestInternalMetadata {
 @doc("File request approval.")
 enum FileRequestAction {
   @doc("Approve request.")
-  Approve, // TODO: This should be lowercase
+  Approve,
 
   @doc("Reject request.")
-  Reject, // TODO: This should be lowercase
+  Reject,
 }
 
 @doc("Parameters for managing file request.")
@@ -82,7 +83,11 @@ model FileRequestProperties {
 
   @visibility("read")
   @doc("The unique identifier if the file associated with this request.")
-  fileId: string;
+  fileId: ResourceIdentifier<[
+    {
+      type: "Microsoft.ModSimWorkbench/files";
+    }
+  ]>;
 
   @visibility("read")
   @doc("Principal ID of Azure Active Directory User who approved to download.")
