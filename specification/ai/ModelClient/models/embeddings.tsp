@@ -68,7 +68,7 @@ model EmbeddingItem {
   index: int32;
 
   @doc("The object type of this embeddings item. Will always be `embedding`.")
-  object: string
+  object: string;
 }
 
 @doc("Measurement of the amount of tokens used in this request and response.")
