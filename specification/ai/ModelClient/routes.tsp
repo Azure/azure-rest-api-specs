@@ -37,7 +37,7 @@ op getEmbeddings is Azure.Core.RpcOperation<
   {
     @doc("The JSON payload containing embedding options.")
     @body
-    embeddingOptions: EmbeddingsOptions;
+    embeddingsOptions: EmbeddingsOptions;
   },
-  Embeddings
+  EmbeddingsResult
 >;

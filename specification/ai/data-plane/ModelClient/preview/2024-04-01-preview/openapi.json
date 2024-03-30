@@ -59,10 +59,10 @@
           }
         },
         "x-ms-examples": {
-          "maximum set chat completion": {
+          "GetChatCompletions_MaximumSet_Gen": {
             "$ref": "./examples/GetChatCompletions_MaximumSet_Gen.json"
           },
-          "minimum set chat completion": {
+          "GetChatCompletions_MinimumSet_Gen": {
             "$ref": "./examples/GetChatCompletions_MinimumSet_Gen.json"
           }
         }
@@ -77,7 +77,7 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "embeddingOptions",
+            "name": "embeddingsOptions",
             "in": "body",
             "description": "The JSON payload containing embedding options.",
             "required": true,
@@ -90,7 +90,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Embeddings"
+              "$ref": "#/definitions/EmbeddingsResult"
             }
           },
           "default": {
@@ -107,10 +107,10 @@
           }
         },
         "x-ms-examples": {
-          "maximum set embeddings": {
+          "GetEmbeddings_MaximumSet_Gen": {
             "$ref": "./examples/GetEmbeddings_MaximumSet_Gen.json"
           },
-          "minimum set embeddings": {
+          "GetEmbeddings_MinimumSet_Gen": {
             "$ref": "./examples/GetEmbeddings_MinimumSet_Gen.json"
           }
         }
@@ -708,30 +708,6 @@
         "total_tokens"
       ]
     },
-    "EmbeddingEncodingFormat": {
-      "type": "string",
-      "description": "Represents the available formats for embeddings data on responses.",
-      "enum": [
-        "float",
-        "base64"
-      ],
-      "x-ms-enum": {
-        "name": "EmbeddingEncodingFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "float",
-            "value": "float",
-            "description": "Specifies that responses should provide arrays of floats for each embedding."
-          },
-          {
-            "name": "base64",
-            "value": "base64",
-            "description": "Specifies that responses should provide a base64-encoded string for each embedding."
-          }
-        ]
-      }
-    },
     "EmbeddingInputType": {
       "type": "string",
       "description": "Represents the input types used for embedding search.",
@@ -747,17 +723,17 @@
           {
             "name": "text",
             "value": "text",
-            "description": "fill me."
+            "description": "to do"
           },
           {
             "name": "query",
             "value": "query",
-            "description": "fill me."
+            "description": "to do"
           },
           {
             "name": "document",
             "value": "document",
-            "description": "fill me."
+            "description": "to do"
           }
         ]
       }
@@ -778,33 +754,16 @@
           "type": "integer",
           "format": "int32",
           "description": "Index of the prompt to which the EmbeddingItem corresponds."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type of this embeddings item. Will always be `embedding`."
         }
       },
       "required": [
         "embedding",
-        "index"
-      ]
-    },
-    "Embeddings": {
-      "type": "object",
-      "description": "Representation of the response data from an embeddings request.\nEmbeddings measure the relatedness of text strings and are commonly used for search, clustering,\nrecommendations, and other similar scenarios.",
-      "properties": {
-        "data": {
-          "type": "array",
-          "description": "Embedding values for the prompts submitted in the request.",
-          "items": {
-            "$ref": "#/definitions/EmbeddingItem"
-          },
-          "x-ms-identifiers": []
-        },
-        "usage": {
-          "$ref": "#/definitions/EmbeddingsUsage",
-          "description": "Usage counts for tokens input using the embeddings API."
-        }
-      },
-      "required": [
-        "data",
-        "usage"
+        "index",
+        "object"
       ]
     },
     "EmbeddingsOptions": {
@@ -813,36 +772,10 @@
       "properties": {
         "input": {
           "type": "array",
-          "description": "Input texts to get embeddings for, encoded as a an array of strings.\nEach input must not exceed 2048 tokens in length.\n\nUnless you are embedding code, we suggest replacing newlines (\\n) in your input with a single space,\nas we have observed inferior results when newlines are present.",
+          "description": "Input texts to get embeddings for, encoded as a an array of strings.",
           "items": {
             "type": "string"
           }
-        },
-        "encoding_format": {
-          "type": "string",
-          "description": "The response encoding format to use for embedding data.",
-          "default": "float",
-          "enum": [
-            "float",
-            "base64"
-          ],
-          "x-ms-enum": {
-            "name": "EmbeddingEncodingFormat",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "float",
-                "value": "float",
-                "description": "Specifies that responses should provide arrays of floats for each embedding."
-              },
-              {
-                "name": "base64",
-                "value": "base64",
-                "description": "Specifies that responses should provide a base64-encoded string for each embedding."
-              }
-            ]
-          },
-          "x-ms-client-name": "encodingFormat"
         },
         "input_type": {
           "type": "string",
@@ -860,17 +793,17 @@
               {
                 "name": "text",
                 "value": "text",
-                "description": "fill me."
+                "description": "to do"
               },
               {
                 "name": "query",
                 "value": "query",
-                "description": "fill me."
+                "description": "to do"
               },
               {
                 "name": "document",
                 "value": "document",
-                "description": "fill me."
+                "description": "to do"
               }
             ]
           },
@@ -879,6 +812,43 @@
       },
       "required": [
         "input"
+      ]
+    },
+    "EmbeddingsResult": {
+      "type": "object",
+      "description": "Representation of the response data from an embeddings request.\nEmbeddings measure the relatedness of text strings and are commonly used for search, clustering,\nrecommendations, and other similar scenarios.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the embeddings result."
+        },
+        "data": {
+          "type": "array",
+          "description": "Embedding values for the prompts submitted in the request.",
+          "items": {
+            "$ref": "#/definitions/EmbeddingItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "usage": {
+          "$ref": "#/definitions/EmbeddingsUsage",
+          "description": "Usage counts for tokens input using the embeddings API."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type of the embeddings result. Will always be `list`."
+        },
+        "model": {
+          "type": "string",
+          "description": "The model ID used to generate this result."
+        }
+      },
+      "required": [
+        "id",
+        "data",
+        "usage",
+        "object",
+        "model"
       ]
     },
     "EmbeddingsUsage": {
