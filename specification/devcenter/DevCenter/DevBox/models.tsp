@@ -637,6 +637,9 @@ model DevBoxOperation {
   @doc("Unique identifier for the Dev Box operation.")
   operationId: string;
 
+  @doc("The kind of operation that occurred.")
+  kind: DevBoxOperationKind;
+
   @doc("The operation status.")
   status: DevBoxOperationStatus;
 

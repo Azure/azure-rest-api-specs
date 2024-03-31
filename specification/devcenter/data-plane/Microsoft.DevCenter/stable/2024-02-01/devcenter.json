@@ -3262,10 +3262,6 @@
       "type": "object",
       "description": "Information about an operation on a Dev Box.",
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Discriminator property for DevBoxOperation."
-        },
         "uri": {
           "type": "string",
           "description": "The unique URI for the Dev Box operation."
@@ -3273,6 +3269,10 @@
         "operationId": {
           "type": "string",
           "description": "Unique identifier for the Dev Box operation."
+        },
+        "kind": {
+          "$ref": "#/definitions/DevBoxOperationKind",
+          "description": "The kind of operation that occurred."
         },
         "status": {
           "$ref": "#/definitions/DevBoxOperationStatus",
@@ -3299,9 +3299,9 @@
       },
       "discriminator": "kind",
       "required": [
-        "kind",
         "uri",
         "operationId",
+        "kind",
         "status"
       ]
     },
