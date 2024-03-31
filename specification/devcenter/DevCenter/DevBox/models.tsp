@@ -690,7 +690,7 @@ model DevBoxRepairOperation extends DevBoxOperation {
 @doc("Information about the result of a repair operation on a Dev Box.")
 @added(APIVersions.v2024_02_01)
 model DevBoxRepairOperationResult {
-  @doc("he outcome of the repair operation.")
+  @doc("The outcome of the repair operation.")
   repairOutcome?: DevBoxRepairOutcome;
 
   @doc("The result code associated with the repair operation.")
