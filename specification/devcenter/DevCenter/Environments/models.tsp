@@ -276,10 +276,14 @@ model EnvironmentOperation {
 model EnvironmentActionsListResult is Azure.Core.Page<EnvironmentAction>;
 
 @doc("An upcoming Environment Action.")
+@resource("actions")
+@parentResource(Environment)
 @added(APIVersions.v2024_02_01)
 model EnvironmentAction {
   @doc("Uniquely identifies the action.")
-  name?: string;
+  @visibility("read")
+  @key("actionName")
+  name: string;
 
   @doc("Uri of the action resource.")
   uri?: string;
