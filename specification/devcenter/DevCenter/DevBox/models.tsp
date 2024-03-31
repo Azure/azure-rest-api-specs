@@ -509,7 +509,7 @@ A unique identifier for the Dev Box. This is a GUID-formatted string (e.g.
   @doc("Provisioning or action error details. Populated only for error states.")
   @visibility("read")
   @typeChangedFrom(APIVersions.v2024_02_01, Azure.Core.Foundations.Error)
-  error?: CloudErrorBody;
+  error?: Azure.Core.Foundations.Error;
 
   @doc("""
 Azure region where this Dev Box is located. This will be the same region as the
@@ -619,8 +619,7 @@ model DevBoxActionDelayResult {
   action?: DevBoxAction;
 
   @doc("Information about the error that occurred. Only populated on error.")
-  @typeChangedFrom(APIVersions.v2024_02_01, Azure.Core.Foundations.Error)
-  error?: CloudErrorBody;
+  error?: Azure.Core.Foundations.Error;
 }
 
 @doc("The result of listing operations on a Dev Box.")
@@ -653,7 +652,7 @@ model DevBoxOperation {
   endTime?: utcDateTime;
 
   @doc("Provisioning or operation error details. Populated only for error states.")
-  error?: CloudErrorBody;
+  error?: Azure.Core.Foundations.Error;
 }
 
 @doc("Information about a start operation on a Dev Box.")

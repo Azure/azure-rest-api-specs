@@ -75,29 +75,6 @@ model OperationStatusError{
   message?: string;
 }
 
-@doc("An error response from the service.")
-@added(APIVersions.v2024_02_01)
-model CloudError{ 
-  @doc("Error body.")
-  error: CloudErrorBody
-}
-
-@doc("An error response from the service.")
-@added(APIVersions.v2024_02_01)
-model CloudErrorBody {
-  @doc("An identifier for the error. Codes are invariant and are intended to be consumed programmatically.")
-  code: string;
-
-  @doc("A message describing the error, intended to be suitable for display in a user interface.")
-  message: string;
-
-  @doc("The target of the particular error. For example, the name of the property in error.")
-  target?: string;
-
-  @doc("A list of additional details about the error.")
-  details?: CloudErrorBody[];
-}
-
 @doc("Project details.")
 @resource("projects")
 model Project {

@@ -185,8 +185,7 @@ model Environment {
 
   @doc("Provisioning error details. Populated only for error states.")
   @visibility("read")
-  @typeChangedFrom(APIVersions.v2024_02_01, Azure.Core.Foundations.Error)
-  error?: CloudErrorBody;
+  error?: Azure.Core.Foundations.Error;
 }
 
 @doc("""
@@ -265,7 +264,7 @@ model EnvironmentOperation {
   environmentParameters?: Record<unknown>;
 
   @doc("Provisioning or operation error details. Populated only for error states.")
-  error?: CloudErrorBody;
+  error?: Azure.Core.Foundations.Error;
 }
 
 @doc("The actions list result.")

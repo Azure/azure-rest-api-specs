@@ -2943,49 +2943,6 @@
         "name"
       ]
     },
-    "CloudError": {
-      "type": "object",
-      "description": "An error response from the service.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/CloudErrorBody",
-          "description": "Error body."
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
-    "CloudErrorBody": {
-      "type": "object",
-      "description": "An error response from the service.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
-        },
-        "message": {
-          "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user interface."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error. For example, the name of the property in error."
-        },
-        "details": {
-          "type": "array",
-          "description": "A list of additional details about the error.",
-          "items": {
-            "$ref": "#/definitions/CloudErrorBody"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
     "DevBox": {
       "type": "object",
       "description": "A Dev Box",
@@ -3044,7 +3001,7 @@
           "readOnly": true
         },
         "error": {
-          "$ref": "#/definitions/CloudErrorBody",
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "Provisioning or action error details. Populated only for error states.",
           "readOnly": true
         },
@@ -3169,7 +3126,7 @@
           "description": "The delayed action"
         },
         "error": {
-          "$ref": "#/definitions/CloudErrorBody",
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "Information about the error that occurred. Only populated on error."
         }
       },
@@ -3293,7 +3250,7 @@
           "description": "The time the operation finished."
         },
         "error": {
-          "$ref": "#/definitions/CloudErrorBody",
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "Provisioning or operation error details. Populated only for error states."
         }
       },
@@ -3627,7 +3584,7 @@
           ]
         },
         "error": {
-          "$ref": "#/definitions/CloudErrorBody",
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "Provisioning error details. Populated only for error states.",
           "readOnly": true
         }
@@ -3861,7 +3818,7 @@
           "additionalProperties": {}
         },
         "error": {
-          "$ref": "#/definitions/CloudErrorBody",
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "Provisioning or operation error details. Populated only for error states."
         }
       },
