@@ -1776,7 +1776,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
+            "description": "Name of the project",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1786,7 +1786,7 @@
           {
             "name": "userId",
             "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context",
             "required": true,
             "type": "string",
             "minLength": 2,
@@ -1796,7 +1796,7 @@
           {
             "name": "devBoxName",
             "in": "path",
-            "description": "The name of a Dev Box.",
+            "description": "Display name for the Dev Box",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1806,12 +1806,9 @@
           {
             "name": "operationId",
             "in": "path",
-            "description": "The id of the operation on a Dev Box.",
+            "description": "Unique identifier for the Dev Box operation.",
             "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            "type": "string"
           }
         ],
         "responses": {
