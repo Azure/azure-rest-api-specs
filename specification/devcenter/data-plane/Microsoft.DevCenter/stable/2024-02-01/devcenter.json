@@ -2319,7 +2319,7 @@
         }
       }
     },
-    "/projects/{projectName}/users/{userId}/environments/{environmentName}/actions/{actionName}:skip": {
+    "/projects/{projectName}/users/{userId}/environments/{environmentName}/actions/{actionName}:skipAction": {
       "post": {
         "operationId": "Environments_SkipAction",
         "description": "Skips an occurrence of an action.",
@@ -2330,7 +2330,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
+            "description": "Name of the project",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2340,7 +2340,7 @@
           {
             "name": "userId",
             "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context",
             "required": true,
             "type": "string",
             "minLength": 2,
@@ -2350,7 +2350,7 @@
           {
             "name": "environmentName",
             "in": "path",
-            "description": "The name of the environment.",
+            "description": "Environment name.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2360,12 +2360,9 @@
           {
             "name": "actionName",
             "in": "path",
-            "description": "The name of an action that will take place on an Environment.",
+            "description": "Uniquely identifies the action.",
             "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -2387,7 +2384,7 @@
         }
       }
     },
-    "/projects/{projectName}/users/{userId}/environments/{environmentName}/actions/{actionName}:delay": {
+    "/projects/{projectName}/users/{userId}/environments/{environmentName}/actions/{actionName}:delayAction": {
       "post": {
         "operationId": "Environments_DelayAction",
         "description": "Delays the occurrence of an action.",
@@ -2398,7 +2395,7 @@
           {
             "name": "projectName",
             "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
+            "description": "Name of the project",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2408,7 +2405,7 @@
           {
             "name": "userId",
             "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context",
             "required": true,
             "type": "string",
             "minLength": 2,
@@ -2418,7 +2415,7 @@
           {
             "name": "environmentName",
             "in": "path",
-            "description": "The name of the environment.",
+            "description": "Environment name.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -2428,12 +2425,9 @@
           {
             "name": "actionName",
             "in": "path",
-            "description": "The name of an action that will take place on an Environment.",
+            "description": "Uniquely identifies the action.",
             "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            "type": "string"
           },
           {
             "name": "until",

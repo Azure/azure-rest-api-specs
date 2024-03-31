@@ -215,79 +215,19 @@ interface Environments {
   @added(APIVersions.v2024_02_01)
   getAction is StandardResourceOperations.ResourceRead<EnvironmentAction>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Missing key"
   @doc("Skips an occurrence of an action.")
-  @route("/projects/{projectName}/users/{userId}/environments/{environmentName}/actions/{actionName}:skip")
-  @post
   @added(APIVersions.v2024_02_01)
-  skipAction is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @maxLength(36)
-      @minLength(2)
-      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
-      @path
-      userId: string;
-
-      @doc("The name of the environment.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      environmentName: string;
-
-      @doc("The name of an action that will take place on an Environment.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      actionName: string;
-    },
-    void
+  skipAction is StandardResourceOperations.ResourceAction<
+    EnvironmentAction,
+    {},
+    NoContentResponse
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Missing key"
   @doc("Delays the occurrence of an action.")
-  @route("/projects/{projectName}/users/{userId}/environments/{environmentName}/actions/{actionName}:delay")
-  @post
   @added(APIVersions.v2024_02_01)
-  delayAction is Azure.Core.Foundations.Operation<
+  delayAction is StandardResourceOperations.ResourceAction<
+    EnvironmentAction,
     {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @maxLength(36)
-      @minLength(2)
-      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
-      @path
-      userId: string;
-
-      @doc("The name of the environment.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      environmentName: string;
-
-      @doc("The name of an action that will take place on an Environment.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      actionName: string;
-
       @doc("The time to delay the Environment action until.")
       @query("until")
       until: utcDateTime;
