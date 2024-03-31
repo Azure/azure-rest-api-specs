@@ -267,10 +267,6 @@ model EnvironmentOperation {
   error?: Azure.Core.Foundations.Error;
 }
 
-@doc("The actions list result.")
-@added(APIVersions.v2024_02_01)
-model EnvironmentActionsListResult is Azure.Core.Page<EnvironmentAction>;
-
 @doc("An upcoming Environment Action.")
 @resource("actions")
 @parentResource(Environment)

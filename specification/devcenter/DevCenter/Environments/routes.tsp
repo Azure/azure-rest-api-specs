@@ -207,74 +207,13 @@ interface Environments {
     void
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Missing key"
   @doc("Get all scheduled actions for a user within an environment.")
-  @route("/projects/{projectName}/users/{userId}/environments/{environmentName}/actions")
-  @get
   @added(APIVersions.v2024_02_01)
-  listActions is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      projectName: string;
+  listActions is StandardResourceOperations.ResourceList<EnvironmentAction>;
 
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @maxLength(36)
-      @minLength(2)
-      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
-      @path
-      userId: string;
-
-      @doc("The name of the environment.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      environmentName: string;
-    },
-    EnvironmentActionsListResult
-  >;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Missing key"
   @doc("Retrieve a specific environment action.")
-  @route("/projects/{projectName}/users/{userId}/environments/{environmentName}/actions/{actionName}")
-  @get
   @added(APIVersions.v2024_02_01)
-  getAction is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @maxLength(36)
-      @minLength(2)
-      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
-      @path
-      userId: string;
-
-      @doc("The name of the environment.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      environmentName: string;
-
-      @doc("The name of an action that will take place on an Environment.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      actionName: string;
-    },
-    EnvironmentAction
-  >;
+  getAction is StandardResourceOperations.ResourceRead<EnvironmentAction>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Missing key"
   @doc("Skips an occurrence of an action.")
