@@ -634,6 +634,8 @@ model DevBoxOperation {
   uri: string;
 
   @doc("Unique identifier for the Dev Box operation.")
+  @visibility("read")
+  @key("operationId")
   operationId: string;
 
   @doc("The kind of operation that occurred.")
