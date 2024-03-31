@@ -233,10 +233,6 @@ model EnvironmentOutput {
   sensitive?: boolean;
 }
 
-@doc("The action results list result.")
-@added(APIVersions.v2024_02_01)
-model EnvironmentOperationListResult is Azure.Core.Page<EnvironmentOperation>;
-
 @doc("Information about an operation on an environment.")
 @discriminator("kind")
 @resource("operations")
