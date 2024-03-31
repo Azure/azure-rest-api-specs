@@ -645,7 +645,7 @@ model DevBoxOperation {
   status: DevBoxOperationStatus;
 
   @doc("The object ID of the actor which initiated the operation.")
-  createdByObjectId?: string;
+  createdByObjectId?: Azure.Core.uuid;
 
   @doc("he time the operation started.")
   startTime?: utcDateTime;
