@@ -161,43 +161,9 @@ interface Environments {
   @added(APIVersions.v2024_02_01)
   listOperations is StandardResourceOperations.ResourceList<EnvironmentOperation>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Missing key"
   @doc("Gets an environment action result.")
-  @route("/projects/{projectName}/users/{userId}/environments/{environmentName}/operations/{operationId}")
-  @get
   @added(APIVersions.v2024_02_01)
-  getOperation is Azure.Core.Foundations.Operation<
-    {
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @maxLength(36)
-      @minLength(2)
-      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
-      @path
-      userId: string;
-
-      @doc("The name of the environment.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      environmentName: string;
-
-      @doc("The id of the operation on an environment.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      operationId: string;
-    },
-    EnvironmentOperation
-  >;
+  getOperation is StandardResourceOperations.ResourceRead<EnvironmentOperation>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Missing key"
   @doc("Gets the logs for an operation on an environment.")
