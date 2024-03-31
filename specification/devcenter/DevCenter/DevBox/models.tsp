@@ -248,10 +248,10 @@ union DevBoxOperationKind {
   Stop: "Stop",
 
   @doc("The operation represents a Dev Box restart.") 
-  Restart: "Stop",
+  Restart: "Restart",
 
   @doc("The operation represents a Dev Box repair.") 
-  Repair: "Stop",
+  Repair: "Repair",
   
   string,
 }
