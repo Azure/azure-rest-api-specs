@@ -627,6 +627,8 @@ model DevBoxActionDelayResult {
 model DevBoxOperationListResult is Azure.Core.Page<DevBoxOperation>;
 
 @doc("Information about an operation on a Dev Box.")
+@resource("operations")
+@parentResource(DevBox)
 @added(APIVersions.v2024_02_01)
 @discriminator("kind")
 model DevBoxOperation {
