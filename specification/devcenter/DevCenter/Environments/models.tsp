@@ -239,12 +239,16 @@ model EnvironmentOperationListResult is Azure.Core.Page<EnvironmentOperation>;
 
 @doc("Information about an operation on an environment.")
 @discriminator("kind")
+@resource("operations")
+@parentResource(Environment)
 @added(APIVersions.v2024_02_01)
 model EnvironmentOperation {
   @doc("The unique URI for the environment operation.")
   uri: string;
 
   @doc("Unique identifier for the environment operation.")
+  @visibility("read")
+  @key("operationId")
   operationId: string;
 
   @doc("The operation status.")
