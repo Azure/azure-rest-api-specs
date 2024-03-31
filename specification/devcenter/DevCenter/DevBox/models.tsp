@@ -622,10 +622,6 @@ model DevBoxActionDelayResult {
   error?: Azure.Core.Foundations.Error;
 }
 
-@doc("The result of listing operations on a Dev Box.")
-@added(APIVersions.v2024_02_01)
-model DevBoxOperationListResult is Azure.Core.Page<DevBoxOperation>;
-
 @doc("Information about an operation on a Dev Box.")
 @resource("operations")
 @parentResource(DevBox)

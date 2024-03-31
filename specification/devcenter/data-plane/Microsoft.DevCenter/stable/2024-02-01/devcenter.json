@@ -1695,24 +1695,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "description": "The maximum number of resources to return from the operation. Example: 'top=10'.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "filter",
-            "in": "query",
-            "description": "An OData filter clause to apply to the operation.",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "projectName",
             "in": "path",
-            "description": "The DevCenter Project upon which to execute operations.",
+            "description": "Name of the project",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -1722,7 +1707,7 @@
           {
             "name": "userId",
             "in": "path",
-            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context",
             "required": true,
             "type": "string",
             "minLength": 2,
@@ -1732,7 +1717,7 @@
           {
             "name": "devBoxName",
             "in": "path",
-            "description": "The name of a Dev Box.",
+            "description": "Display name for the Dev Box",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -4484,7 +4469,7 @@
     },
     "PagedDevBoxOperation": {
       "type": "object",
-      "description": "The result of listing operations on a Dev Box.",
+      "description": "Paged collection of DevBoxOperation items",
       "properties": {
         "value": {
           "type": "array",

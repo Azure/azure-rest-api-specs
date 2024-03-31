@@ -301,45 +301,9 @@ interface DevBoxes {
     DevBoxActionsDelayMultipleResult
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "can not be represeted by using stand operations"
-  //There is no @key for RemoteConnection model
   @doc("Lists operations on the Dev Box which have occurred within the past 90 days.")
-  @route("/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/operations")
-  @get
   @added(APIVersions.v2024_02_01)
-  listOperations is Azure.Core.Foundations.Operation<
-    {
-      @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
-      @query("top")
-      top?: int32;
-
-      @doc("An OData filter clause to apply to the operation.")
-      @query("filter")
-      filter?: string;
-
-      @doc("The DevCenter Project upon which to execute operations.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      projectName: string;
-
-      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-      @maxLength(36)
-      @minLength(2)
-      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
-      @path
-      userId: string;
-
-      @doc("The name of a Dev Box.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
-      @path
-      devBoxName: string;
-    },
-    DevBoxOperationListResult
-  >;
+  listOperations is StandardResourceOperations.ResourceList<DevBoxOperation>;
 
   @doc("Gets an operation on a Dev Box.")
   @added(APIVersions.v2024_02_01)
