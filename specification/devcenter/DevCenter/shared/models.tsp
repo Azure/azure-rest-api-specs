@@ -62,17 +62,7 @@ model OperationStatus {
 
   @doc("Operation Error message")
   @typeChangedFrom(APIVersions.v2024_02_01, Azure.Core.Foundations.Error)
-  error?: OperationStatusError;
-}
-
-@doc("Operation Error message")
-@added(APIVersions.v2024_02_01)
-model OperationStatusError{ 
-  @doc("The error code.")
-  code?: string;
-
-  @doc("The error message.")
-  message?: string;
+  error?: Azure.Core.Foundations.Error;
 }
 
 @doc("Project details.")

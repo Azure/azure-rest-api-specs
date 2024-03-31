@@ -4315,7 +4315,7 @@
           "description": "Custom operation properties, populated only for a successful operation."
         },
         "error": {
-          "$ref": "#/definitions/OperationStatusError",
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "Operation Error message"
         }
       },
@@ -4323,20 +4323,6 @@
         "id",
         "status"
       ]
-    },
-    "OperationStatusError": {
-      "type": "object",
-      "description": "Operation Error message",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        }
-      }
     },
     "OperationStatusValue": {
       "type": "string",
