@@ -485,25 +485,6 @@ model ExtendedLocation {
   type?: ExtendedLocationTypes;
 }
 
-@doc("Common fields that are returned in the response for all Azure Resource Manager resources")
-model Resource {
-  @doc("Fully qualified resource ID for the resource.")
-  @visibility("read")
-  id?: ResourceIdentifier;
-
-  @doc("The name of the resource")
-  @visibility("read")
-  name?: string;
-
-  @doc("The type of the resource")
-  @visibility("read")
-  type?: string;
-
-  @doc("Azure Resource Manager metadata containing createdBy and modifiedBy information.")
-  @visibility("read")
-  systemData?: SystemData;
-}
-
 @doc("The gallery images resource patch definition.")
 model GalleryImagesUpdateRequest {
   @doc("Resource tags")
