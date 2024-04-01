@@ -18,7 +18,8 @@ namespace Microsoft.Edge;
 @singleton("default")
 @tenantResource
 @includeInapplicableMetadataInPayload(false)
-model SiteAwareResourceTypes is ProxyResource<SiteAwareResourceTypesProperties> {
+model SiteAwareResourceTypes
+  is ProxyResource<SiteAwareResourceTypesProperties> {
   // TODO - There shouldn't be name field in here, it should contain
   @doc("Name of the resource")
   @path
@@ -26,7 +27,6 @@ model SiteAwareResourceTypes is ProxyResource<SiteAwareResourceTypesProperties> 
   @segment("siteAwareResourceTypes")
   @visibility("read")
   name: string;
-
 }
 
 @armResourceOperations

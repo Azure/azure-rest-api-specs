@@ -98,4 +98,3 @@ enum AvailabilityStatus {
 @doc("Updatable managed service identity")
 model ManagedServiceIdentityUpdate
   is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedIdentityProperties>>;
-
