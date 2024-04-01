@@ -508,7 +508,6 @@ A unique identifier for the Dev Box. This is a GUID-formatted string (e.g.
 
   @doc("Provisioning or action error details. Populated only for error states.")
   @visibility("read")
-  @typeChangedFrom(APIVersions.v2024_02_01, Azure.Core.Foundations.Error)
   error?: Azure.Core.Foundations.Error;
 
   @doc("""
