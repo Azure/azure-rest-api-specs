@@ -43,18 +43,12 @@ directive:
 suppressions:
   - code: PathResourceProviderNamePascalCase
     reason: We had already gone to production with "HCI" in our namespace, so changing it to "Hci" now would be disruptive.
-  - code: TopLevelResourcesListBySubscription
-    reason: It is reporting issue for proxy extension resource which doesn't have use case to ListBySubscription as this resource will always tied to one parent resource only. Additionally, there is a 1:1 relationship between HybridCompute Machines and AzureStackHCI VirtualMachineInstances.
-  - code: PropertiesTypeObjectNoDefinition
-    reason: These are existing properties already supported as part of PUT extensions call. Same properties are being supported for extensions Patch now.
-    from: extensions.json
+    from: 
+      - openapi.json
   - code: DefinitionsPropertiesNamesCamelCase
     reason: There is a false positive reporting the two letter acronym ID should be lower camel case. The property is correctly capitalized according to guidance.
-    from: logicalNetworks.json
-  - code: ResourceNameRestriction
-    reason: publisherName, publisherName etc didn't have a pattern initially, adding the constraint now will cause a breaking change.
-  - code: DefinitionsPropertiesNamesCamelCase
-    reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility.
+    from: 
+      - openapi.json
   - code:  XmsPageableForListCalls
     reason: XmsPageable not needed for GET calls
     from:
@@ -63,7 +57,6 @@ suppressions:
     reason: resourceUri in virtualmachineinstances is the parent resource. It consists of an even number of segmented paths. 
     from: 
       - openapi.json
-      - virtualmachineinstances.json
 ```
 
 ### Tag: package-preview-2024-02

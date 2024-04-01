@@ -63,7 +63,6 @@ directive:
       - jobs.json
       - hciCommon.json
       - edgeNodePool.json
-      - openapi.json
 
     reason: Microsoft.AzureStackHCI is the correct name for our RP.
 suppressions:
@@ -95,19 +94,6 @@ suppressions:
       - jobs.json
       - common.json
       - edgeNodePool.json
-      - openapi.json
-
-  
-  - code:  XmsPageableForListCalls
-    reason: XmsPageable not needed for GET calls
-    from:
-      - openapi.json
-
-  - code: EvenSegmentedPathForPutOperation
-    reason: resourceUri in virtualmachineinstances is the parent resource. It consists of an even number of segmented paths. 
-    from: 
-      - openapi.json
-      - virtualmachineinstances.json
 
   - code: ResourceNameRestriction
     reason: ClusterName didn't have a pattern initially, adding the constraint now will cause a breaking change
@@ -116,7 +102,6 @@ suppressions:
       - jobs.json
       - clusters.json
       - securitySettings.json
-      - openapi.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings/{deploymentSettingsName}"]
@@ -136,7 +121,6 @@ suppressions:
     from:
       - clusters.json
 
-
   - code: DeleteResponseCodes
     reason: already used in GA api version, fixing it will cause breaking change
     from:
@@ -147,14 +131,12 @@ suppressions:
     from:
       - edgeDevices.json
       - jobs.json
-      - openapi.json
       
   - code: DefinitionsPropertiesNamesCamelCase
     reason: We have a dependency on other team which is already using these values, changing it will break backward compatibility
     from:
       - deploymentSettings.json
       - jobs.json
-      - openapi.json
     where:
       - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_Cluster
       - $.definitions.QosPolicyOverrides.properties.priorityValue8021Action_SMB
@@ -165,16 +147,6 @@ suppressions:
 
   - code: TopLevelResourcesListBySubscription
     reason: It is reporting issue for proxy extension resource which doesn't have use case to ListBySubscription as this resource will always tied to one parent resource only. Additionally, there is a 1:1 relationship between HybridCompute Machines and AzureStackHCI VirtualMachineInstances.
-```
-
-### Tag: package-preview-2024-02-01
-
-These settings apply only when `--tag=package-preview-2024-02-01` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2024-02-01'
-
-input-file:
- - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/openapi.json
 ```
 
 ### Tag: package-preview-2024-03
@@ -197,9 +169,15 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2024-03-15-preview/updateRuns.json
   - Microsoft.AzureStackHCI/preview/2024-03-15-preview/updateSummaries.json
   - Microsoft.AzureStackHCI/preview/2024-03-15-preview/updates.json
-  - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/openapi.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/common.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/galleryImages.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/logicalNetworks.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/marketplaceGalleryImages.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/networkInterfaces.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/storageContainers.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/virtualHardDisks.json
+  - Microsoft.AzureStackHCI/preview/2024-01-15-preview/virtualMachineInstances.json
 ```
-
 
 ### Tag: package-preview-2024-01-15
 
@@ -237,6 +215,7 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2024-02-15-preview/updateSummaries.json
   - Microsoft.AzureStackHCI/preview/2024-02-15-preview/updates.json
   - Microsoft.AzureStackHCI/preview/2024-02-15-preview/securitySettings.json
+  - Microsoft.AzureStackHCI/preview/2024-02-15-preview/hciCommon.json
 ```
 
 ### Tag: package-preview-2023-12
