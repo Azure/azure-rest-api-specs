@@ -269,7 +269,7 @@ union DevBoxOperationStatus {
   Succeeded: "Succeeded",
 
   @doc("The operation was canceled.") 
-  Canceled: "Stop",
+  Canceled: "Canceled",
 
   @doc("The operation failed.") 
   Failed: "Failed",
