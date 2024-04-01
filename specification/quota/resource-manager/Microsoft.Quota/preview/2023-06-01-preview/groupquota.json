@@ -219,6 +219,10 @@
         "summary": "Deletes GroupQuotas for the name passed.",
         "description": "Deletes the GroupQuotas for the name passed. All the remaining shareQuota in the GroupQuotas will be lost.",
         "operationId": "GroupQuotas_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "GroupQuotas_Delete_Request_ForCompute": {
             "$ref": "./examples/GroupQuotas/DeleteGroupQuotas.json"
@@ -238,6 +242,24 @@
         "responses": {
           "200": {
             "description": "OK."
+          },
+          "202": {
+            "description": "Request Accepted",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int64"
+              },
+              "Location": {
+                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content."
@@ -428,6 +450,10 @@
         "summary": "Removes the subscription from GroupQuotas.",
         "description": "Removes the subscription from GroupQuotas. The request's TenantId is validated against the subscription's TenantId.",
         "operationId": "GroupQuotaSubscriptions_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "GroupQuotaSubscriptions_Delete_Subscriptions": {
             "$ref": "./examples/GroupQuotasSubscriptions/DeleteGroupQuotaSubscriptions.json"
@@ -450,6 +476,24 @@
         "responses": {
           "200": {
             "description": "OK."
+          },
+          "202": {
+            "description": "Request Accepted",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer",
+                "format": "int64"
+              },
+              "Location": {
+                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\nThe URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL for checking the ongoing status of the operation.\nTo get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content."
