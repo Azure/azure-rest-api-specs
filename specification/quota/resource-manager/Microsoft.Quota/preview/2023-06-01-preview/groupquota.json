@@ -1625,6 +1625,33 @@
     }
   },
   "definitions": {
+    "ARMTopLevelProperties": {
+      "description": "The core properties of ARM resources.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Fully qualified resource Id for the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "The Azure region/location.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
     "RequestState": {
       "description": "Request status.",
       "enum": [
@@ -1648,7 +1675,7 @@
       "description": "The subscription quota allocation status.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ARMTopLevelProperties"
         }
       ],
       "properties": {
@@ -1827,7 +1854,7 @@
       "description": "Group Quota limit.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ARMTopLevelProperties"
         }
       ],
       "properties": {
@@ -2040,7 +2067,7 @@
       "description": "Quota allocated to a subscription for the specific Resource Provider, Location, ResourceName. This will include the GroupQuota and total quota allocated to the subscription. Only the Group quota allocated to the subscription can be allocated back to the MG Group Quota.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ARMTopLevelProperties"
         }
       ],
       "properties": {
@@ -2094,7 +2121,7 @@
       "description": "Status of a single GroupQuota request.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ARMTopLevelProperties"
         }
       ],
       "properties": {
@@ -2202,7 +2229,12 @@
     },
     "ResourceUsageList": {
       "type": "object",
-      "description": "List of resource usages and quotas for groupQUOTA.",
+      "description": "List of resource usages and quotas for GroupQuota.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMTopLevelProperties"
+        }
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -2456,7 +2488,7 @@
       "description": "The GroupQuota Enforcement status for a Azure Location/Region.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ARMTopLevelProperties"
         }
       ],
       "properties": {
