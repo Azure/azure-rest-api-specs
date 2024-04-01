@@ -3723,6 +3723,70 @@
         }
       }
     },
+    "VirtualDiskInventory": {
+      "description": "Virtual disk model",
+      "type": "object",
+      "properties": {
+        "label": {
+          "description": "Gets or sets the label of the virtual disk in vCenter.",
+          "type": "string",
+          "readOnly": true
+        },
+        "diskSizeGB": {
+          "format": "int32",
+          "description": "Gets or sets the disk total size.",
+          "type": "integer"
+        },
+        "deviceKey": {
+          "format": "int32",
+          "description": "Gets or sets the device key value.",
+          "type": "integer"
+        },
+        "diskMode": {
+          "description": "Gets or sets the disk mode.",
+          "$ref": "#/definitions/DiskMode"
+        },
+        "controllerKey": {
+          "description": "Gets or sets the controller id.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "unitNumber": {
+          "description": "Gets or sets the unit number of the disk on the controller.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "deviceName": {
+          "description": "Gets or sets the device name.",
+          "type": "string"
+        },
+        "filename": {
+          "description": "Gets or sets the disk file name.",
+          "type": "string"
+        },
+        "diskType": {
+          "description": "Gets or sets the disk backing type.",
+          "$ref": "#/definitions/DiskType"
+        },
+        "eagerlyScrub": {
+          "description": "Gets or sets the eagerly scrub property of disk.",
+          "type": "boolean"
+        },
+        "thinProvisioned": {
+          "description": "Gets or sets the thin provisioning property of disk.",
+          "type": "boolean"
+        },
+        "controllerType": {
+          "description": "Gets or sets the controller type.",
+          "type": "string"
+        },
+        "uuid": {
+          "description": "Gets or sets a unique identifier for this resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "Condition": {
       "description": "Condition defines an extension to status.",
       "type": "object",
@@ -4005,6 +4069,19 @@
         }
       }
     },
+    "NetworkProfileInventory": {
+      "description": "Specifies the network interfaces of the virtual machine.",
+      "type": "object",
+      "properties": {
+        "networkInterfaces": {
+          "description": "Gets or sets the list of network interfaces associated with the virtual machine.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkInterfaceInventory"
+          }
+        }
+      }
+    },
     "SCSIControllerType": {
       "description": "Defines the different types of SCSI controllers.",
       "enum": [
@@ -4079,6 +4156,19 @@
             "$ref": "#/definitions/VirtualSCSIController"
           },
           "readOnly": true
+        }
+      }
+    },
+    "StorageProfileInventory": {
+      "description": "Specifies the storage settings for the virtual machine disks.",
+      "type": "object",
+      "properties": {
+        "disks": {
+          "description": "Gets or sets the list of virtual disks associated with the virtual machine.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualDiskInventory"
+          }
         }
       }
     },
@@ -5239,6 +5329,49 @@
         }
       }
     },
+    "NetworkInterfaceInventory": {
+      "description": "Inventory Network Interface model",
+      "type": "object",
+      "properties": {
+        "label": {
+          "description": "Gets or sets the label of the virtual network in vCenter that the nic is connected to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "ipAddresses": {
+          "description": "Gets or sets the nic ip addresses.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "macAddress": {
+          "description": "Gets or sets the NIC MAC address.",
+          "type": "string",
+          "readOnly": true
+        },
+        "nicType": {
+          "description": "NIC type",
+          "$ref": "#/definitions/NICType"
+        },
+        "networkMoRefId": {
+          "description": "Gets or sets the vCenter MoRef (Managed Object Reference) ID of the virtual network\r\nthat the nic is connected to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "networkMoName": {
+          "description": "Gets or sets the name of the virtual network in vCenter that the nic is connected to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "deviceKey": {
+          "format": "int32",
+          "description": "Gets or sets the device key value.",
+          "type": "integer"
+        }
+      }
+    },
     "PowerOnBootOption": {
       "description": "Defines the options for power on boot.",
       "enum": [
@@ -5612,6 +5745,50 @@
           "description": "Gets or sets the current version of VMware Tools.",
           "type": "string",
           "readOnly": true
+        },
+        "changeTrackingSupported": {
+          "type": "boolean",
+          "description": "Gets a value indicating whether changeTrackingSupported is enabled."
+        },
+        "changeTrackingEnabled": {
+          "type": "boolean",
+          "description": "Gets a value indicating whether changeTrackingEnabled is enabled."
+        },
+        "maxSnapshots": {
+          "type": "int",
+          "description": "Gets a value indicating the maximum possible number of snapshots.",
+          "readOnly": true
+        },
+        "numberOfSnapshots": {
+          "type": "int",
+          "description": "Gets a value indicating the number of snapshots on the vm."
+        },
+        "diskEnabledUuid": {
+          "type": "string",
+          "description": "Gets or sets the disk Enabled UUID of the vm."
+        },
+        "computerName": {
+          "type": "string",
+          "description": "Gets the computer name.",
+          "readOnly": true
+        },
+        "memorySizeMB": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Gets or sets memory size in MBs for the vm."
+        },
+        "numCPUs": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Gets or sets the number of vCPU for the vm."
+        },
+        "storageProfile": {
+          "description": "Storage properties.",
+          "$ref": "#/definitions/StorageProfileInventory"
+        },
+        "networkProfile": {
+          "description": "Network properties.",
+          "$ref": "#/definitions/NetworkProfileInventory"
         }
       },
       "x-ms-discriminator-value": "VirtualMachine"
@@ -5719,6 +5896,26 @@
         "parent": {
           "description": "Parent host inventory resource details.",
           "$ref": "#/definitions/InventoryItemDetails"
+        },
+        "numCoresPerSocket": {
+          "type": "int",
+          "description": "Gets or sets the number of cores per socket on the host."
+        },
+        "numSockets": {
+          "type": "int",
+          "description": "Gets or sets the number of sockets on the host."
+        },
+        "version": {
+          "description": "Gets or sets the version of the host.",
+          "type": "string"
+        },
+        "cpuModel": {
+          "description": "Gets or sets the name of the host.",
+          "type": "string"
+        },
+        "powerState": {
+          "description": "Gets or sets the power state of the host.",
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "Host"
