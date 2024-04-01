@@ -40,3 +40,14 @@ type PoolsClientUpdateOptions struct {
 	ResumeToken string
 }
 
+// ResourceDetailsClientListByPoolOptions contains the optional parameters for the ResourceDetailsClient.NewListByPoolPager
+// method.
+type ResourceDetailsClientListByPoolOptions struct {
+	// placeholder for future optional parameters
+}
+
+// SkuClientListByLocationOptions contains the optional parameters for the SkuClient.NewListByLocationPager method.
+type SkuClientListByLocationOptions struct {
+	// placeholder for future optional parameters
+}
+

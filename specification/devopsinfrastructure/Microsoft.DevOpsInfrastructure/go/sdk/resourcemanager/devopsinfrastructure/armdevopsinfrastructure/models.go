@@ -90,6 +90,22 @@ type AzureDevOpsPermissionProfile struct {
 	Users []*string
 }
 
+// The data disk of the VMSS.
+type DataDisk struct {
+	// The type of caching to be enabled for the data disks. The default value for caching is readwrite. For information about
+// the caching options see: https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.
+	Caching *CachingType
+
+	// The initial disk size in gigabytes.
+	DiskSizeGiB *int32
+
+	// The drive letter for the empty data disk. If not specified, it will be the first available letter.
+	DriveLetter *string
+
+	// The storage Account type to be used for the data disk. If omitted, the default is "standard_lrs".
+	StorageAccountType *StorageAccountType
+}
+
 // The Azure SKU of the machines in the pool.
 type DevOpsAzureSKU struct {
 	// REQUIRED; The Azure SKU name of the machines in the pool.
@@ -293,14 +309,17 @@ type Pool struct {
 
 // The VM image of the machines in the pool.
 type PoolImage struct {
-	// REQUIRED; The resource id of the image.
-	ResourceID *string
-
 	// List of aliases to reference the image by.
 	Aliases []*string
 
 	// The percentage of the buffer to be allocated to this image.
 	Buffer *string
+
+	// The resource id of the image.
+	ResourceID *string
+
+	// The image to use from a well-known set of images made available to customers.
+	WellKnownImageName *string
 }
 
 // The response of a Pool list operation.
@@ -364,8 +383,168 @@ type PoolUpdateProperties struct {
 	ProvisioningState *ProvisioningState
 }
 
+// The base proxy resource.
+type ProxyResourceBase struct {
+	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+	ID *string
+
+	// REQUIRED; The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
+	Type *string
+
+	// Azure Resource Manager metadata containing createdBy and modifiedBy information.
+	SystemData *SystemData
+}
+
+// A ResourceDetailsObject
+type ResourceDetailsObject struct {
+	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+	ID *string
+
+	// REQUIRED; The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
+	Type *string
+
+	// The resource-specific properties for this resource.
+	Properties *ResourceDetailsObjectProperties
+
+	// Azure Resource Manager metadata containing createdBy and modifiedBy information.
+	SystemData *SystemData
+
+	// READ-ONLY; The name of the resource.
+	Name *string
+}
+
+// The response of a ResourceDetailsObject list operation.
+type ResourceDetailsObjectListResult struct {
+	// REQUIRED; The ResourceDetailsObject items on this page
+	Value []*ResourceDetailsObject
+
+	// The link to the next page of items
+	NextLink *string
+}
+
+// Details of the ResourceDetailsObject.
+type ResourceDetailsObjectProperties struct {
+	// REQUIRED; The image name of the resource.
+	Image *string
+
+	// REQUIRED; The version of the image running on the resource.
+	ImageVersion *string
+
+	// REQUIRED; The status of the resource.
+	Status *ResourceStatus
+}
+
 // Defines pool buffer.
 type ResourcePredictions struct {
+}
+
+// A ResourceSku
+type ResourceSKU struct {
+	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+	ID *string
+
+	// REQUIRED; The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
+	Type *string
+
+	// The resource-specific properties for this resource.
+	Properties *ResourceSKUProperties
+
+	// Azure Resource Manager metadata containing createdBy and modifiedBy information.
+	SystemData *SystemData
+
+	// READ-ONLY; The name of the SKU.
+	Name *string
+}
+
+// Describes The SKU capabilities object.
+type ResourceSKUCapabilities struct {
+	// REQUIRED; The name of the SKU capability.
+	Name *string
+
+	// REQUIRED; The value of the SKU capability.
+	Value *string
+}
+
+// The response of a ResourceSku list operation.
+type ResourceSKUListResult struct {
+	// REQUIRED; The ResourceSku items on this page
+	Value []*ResourceSKU
+
+	// The link to the next page of items
+	NextLink *string
+}
+
+// Describes an available Compute SKU Location Information.
+type ResourceSKULocationInfo struct {
+	// REQUIRED; Location of the SKU
+	Location *string
+
+	// REQUIRED; Gets details of capabilities available to a SKU in specific zones.
+	ZoneDetails []*ResourceSKUZoneDetails
+
+	// REQUIRED; List of availability zones where the SKU is supported.
+	Zones []*string
+}
+
+// Properties of a ResourceSku
+type ResourceSKUProperties struct {
+	// REQUIRED; Name value pairs to describe the capability.
+	Capabilities []*ResourceSKUCapabilities
+
+	// REQUIRED; The family of the SKU.
+	Family *string
+
+	// REQUIRED; A list of locations and availability zones in those locations where the SKU is available
+	LocationInfo []*ResourceSKULocationInfo
+
+	// REQUIRED; The set of locations that the SKU is available.
+	Locations []*string
+
+	// REQUIRED; The type of resource the SKU applies to.
+	ResourceType *string
+
+	// REQUIRED; The restrictions of the SKU.
+	Restrictions []*ResourceSKURestrictions
+
+	// REQUIRED; The size of the SKU.
+	Size *string
+
+	// REQUIRED; The tier of virtual machines in a scale set
+	Tier *string
+}
+
+// Describes an available Compute SKU Restriction Information.
+type ResourceSKURestrictionInfo struct {
+	// Locations where the SKU is restricted
+	Locations []*string
+
+	// List of availability zones where the SKU is restricted.
+	Zones []*string
+}
+
+// The restrictions of the SKU.
+type ResourceSKURestrictions struct {
+	// REQUIRED; The information about the restriction where the SKU cannot be used.
+	RestrictionInfo *ResourceSKURestrictionInfo
+
+	// REQUIRED; The value of restrictions. If the restriction type is set to location. This would be different locations where
+// the SKU is restricted.
+	Values []*string
+
+	// the reason for restriction.
+	ReasonCode *ResourceSKURestrictionsReasonCode
+
+	// the type of restrictions.
+	Type *ResourceSKURestrictionsType
+}
+
+// Describes The zonal capabilities of a SKU.
+type ResourceSKUZoneDetails struct {
+	// REQUIRED; A list of capabilities that are available for the SKU in the specified list of zones.
+	Capabilities []*ResourceSKUCapabilities
+
+	// REQUIRED; Gets the set of zones that the SKU is available in with the specified capabilities.
+	Name []*string
 }
 
 // The secret management settings of the machines in the pool.
@@ -421,6 +600,9 @@ func (s *StatelessAgentProfile) GetAgentProfile() *AgentProfile {
 
 // The storage profile of the VMSS.
 type StorageProfile struct {
+	// A list of empty data disks to attach.
+	DataDisks []*DataDisk
+
 	// The Azure SKU name of the machines in the pool.
 	OSDiskStorageAccountType *OsDiskStorageAccountType
 }

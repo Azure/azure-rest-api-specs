@@ -43,3 +43,17 @@ func (client *DevOpsInfrastructureClient) NewPoolsClient() *PoolsClient {
 	}
 }
 
+// NewResourceDetailsClient creates a new instance of [ResourceDetailsClient].
+func (client *DevOpsInfrastructureClient) NewResourceDetailsClient() *ResourceDetailsClient {
+	return &ResourceDetailsClient{
+		internal: client.internal,
+	}
+}
+
+// NewSkuClient creates a new instance of [SkuClient].
+func (client *DevOpsInfrastructureClient) NewSkuClient() *SkuClient {
+	return &SkuClient{
+		internal: client.internal,
+	}
+}
+

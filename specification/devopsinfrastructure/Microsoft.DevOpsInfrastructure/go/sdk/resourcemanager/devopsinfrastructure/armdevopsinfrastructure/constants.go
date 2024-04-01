@@ -47,6 +47,27 @@ func PossibleAzureDevOpsPermissionTypeValues() []AzureDevOpsPermissionType {
 	}
 }
 
+// CachingType - The type of caching in a data disk.
+type CachingType string
+
+const (
+	// CachingTypeNone - Don't use host caching.
+	CachingTypeNone CachingType = "None"
+	// CachingTypeReadOnly - For workloads that only do read operations.
+	CachingTypeReadOnly CachingType = "ReadOnly"
+	// CachingTypeReadWrite - For workloads that do a balance of read and write operations.
+	CachingTypeReadWrite CachingType = "ReadWrite"
+)
+
+// PossibleCachingTypeValues returns the possible values for the CachingType const type.
+func PossibleCachingTypeValues() []CachingType {
+	return []CachingType{	
+		CachingTypeNone,
+		CachingTypeReadOnly,
+		CachingTypeReadWrite,
+	}
+}
+
 // CreatedByType - The kind of entity that created the resource.
 type CreatedByType string
 
@@ -207,6 +228,108 @@ func PossibleResourceProvisioningStateValues() []ResourceProvisioningState {
 		ResourceProvisioningStateCanceled,
 		ResourceProvisioningStateFailed,
 		ResourceProvisioningStateSucceeded,
+	}
+}
+
+type ResourceSKURestrictionsReasonCode string
+
+const (
+	ResourceSKURestrictionsReasonCodeNotAvailableForSubscription ResourceSKURestrictionsReasonCode = "NotAvailableForSubscription"
+	ResourceSKURestrictionsReasonCodeQuotaID ResourceSKURestrictionsReasonCode = "QuotaId"
+)
+
+// PossibleResourceSKURestrictionsReasonCodeValues returns the possible values for the ResourceSKURestrictionsReasonCode const type.
+func PossibleResourceSKURestrictionsReasonCodeValues() []ResourceSKURestrictionsReasonCode {
+	return []ResourceSKURestrictionsReasonCode{	
+		ResourceSKURestrictionsReasonCodeNotAvailableForSubscription,
+		ResourceSKURestrictionsReasonCodeQuotaID,
+	}
+}
+
+type ResourceSKURestrictionsType string
+
+const (
+	ResourceSKURestrictionsTypeLocation ResourceSKURestrictionsType = "Location"
+	ResourceSKURestrictionsTypeZone ResourceSKURestrictionsType = "Zone"
+)
+
+// PossibleResourceSKURestrictionsTypeValues returns the possible values for the ResourceSKURestrictionsType const type.
+func PossibleResourceSKURestrictionsTypeValues() []ResourceSKURestrictionsType {
+	return []ResourceSKURestrictionsType{	
+		ResourceSKURestrictionsTypeLocation,
+		ResourceSKURestrictionsTypeZone,
+	}
+}
+
+// ResourceStatus - The status of the machine resource.
+type ResourceStatus string
+
+const (
+	// ResourceStatusAllocated - Represents a machine resource that is allocated.
+	ResourceStatusAllocated ResourceStatus = "Allocated"
+	// ResourceStatusLeased - Represents a machine resource that is leased.
+	ResourceStatusLeased ResourceStatus = "Leased"
+	// ResourceStatusNotReady - Represents a machine resource that is not ready.
+	ResourceStatusNotReady ResourceStatus = "NotReady"
+	// ResourceStatusPendingReimage - Represents a machine resource that is pending reimage.
+	ResourceStatusPendingReimage ResourceStatus = "PendingReimage"
+	// ResourceStatusPendingReturn - Represents a machine resource that is pending return.
+	ResourceStatusPendingReturn ResourceStatus = "PendingReturn"
+	// ResourceStatusProvisioning - Represents a machine resource that is provisioning.
+	ResourceStatusProvisioning ResourceStatus = "Provisioning"
+	// ResourceStatusReady - Represents a machine resource that is ready.
+	ResourceStatusReady ResourceStatus = "Ready"
+	// ResourceStatusReimaging - Represents a machine resource that is reimaging.
+	ResourceStatusReimaging ResourceStatus = "Reimaging"
+	// ResourceStatusReturned - Represents a machine resource that is returned.
+	ResourceStatusReturned ResourceStatus = "Returned"
+	// ResourceStatusStarting - Represents a machine resource that is starting.
+	ResourceStatusStarting ResourceStatus = "Starting"
+	// ResourceStatusUpdating - Represents a machine resource that is updating.
+	ResourceStatusUpdating ResourceStatus = "Updating"
+)
+
+// PossibleResourceStatusValues returns the possible values for the ResourceStatus const type.
+func PossibleResourceStatusValues() []ResourceStatus {
+	return []ResourceStatus{	
+		ResourceStatusAllocated,
+		ResourceStatusLeased,
+		ResourceStatusNotReady,
+		ResourceStatusPendingReimage,
+		ResourceStatusPendingReturn,
+		ResourceStatusProvisioning,
+		ResourceStatusReady,
+		ResourceStatusReimaging,
+		ResourceStatusReturned,
+		ResourceStatusStarting,
+		ResourceStatusUpdating,
+	}
+}
+
+// StorageAccountType - StorageAccountType enums
+type StorageAccountType string
+
+const (
+	// StorageAccountTypePremiumLRS - The data disk should use premium locally redundant storage.
+	StorageAccountTypePremiumLRS StorageAccountType = "premium_lrs"
+	// StorageAccountTypePremiumZRS - The data disk should use premium SSD zonal redundant storage.
+	StorageAccountTypePremiumZRS StorageAccountType = "premium_zrs"
+	// StorageAccountTypeStandardLRS - The data disk should use standard locally redundant storage.
+	StorageAccountTypeStandardLRS StorageAccountType = "standard_lrs"
+	// StorageAccountTypeStandardSSDLRS - The data disk should use standard SSD locally redundant storage.
+	StorageAccountTypeStandardSSDLRS StorageAccountType = "standardssd_lrs"
+	// StorageAccountTypeStandardSSDZRS - The data disk should use standard SSD zonal redundant storage.
+	StorageAccountTypeStandardSSDZRS StorageAccountType = "standardssd_zrs"
+)
+
+// PossibleStorageAccountTypeValues returns the possible values for the StorageAccountType const type.
+func PossibleStorageAccountTypeValues() []StorageAccountType {
+	return []StorageAccountType{	
+		StorageAccountTypePremiumLRS,
+		StorageAccountTypePremiumZRS,
+		StorageAccountTypeStandardLRS,
+		StorageAccountTypeStandardSSDLRS,
+		StorageAccountTypeStandardSSDZRS,
 	}
 }
 

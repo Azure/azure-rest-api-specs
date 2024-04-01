@@ -55,3 +55,15 @@ type PoolsClientUpdateResponse struct {
 	RetryAfter *int32
 }
 
+// ResourceDetailsClientListByPoolResponse contains the response from method ResourceDetailsClient.NewListByPoolPager.
+type ResourceDetailsClientListByPoolResponse struct {
+	// The response of a ResourceDetailsObject list operation.
+	ResourceDetailsObjectListResult
+}
+
+// SkuClientListByLocationResponse contains the response from method SkuClient.NewListByLocationPager.
+type SkuClientListByLocationResponse struct {
+	// The response of a ResourceSku list operation.
+	ResourceSKUListResult
+}
+
