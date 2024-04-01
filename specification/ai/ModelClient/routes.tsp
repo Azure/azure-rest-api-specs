@@ -26,8 +26,7 @@ enum UnknownParameters {
   allow: "allow",
 }
 
-@doc("Additional request headers")
-model AdditionalRequestHeaders {
+alias AdditionalRequestHeaders = {
   @doc("Controls what happens if unknown parameters are passed as extra properties in the request payload.")
   @header("unknown-parameters")
   unknownParameters?: UnknownParameters;
@@ -38,7 +37,7 @@ model AdditionalRequestHeaders {
   """)
   @header("azureml-model-deployment")
   modelDeployment?: string;
-}
+};
 
 @doc("""
 Gets chat completions for the provided chat messages.
