@@ -13,21 +13,21 @@ namespace DevCenterService;
 @doc("Indicates whether operation status is running, completed, canceled or failed.")
 @lroStatus
 enum OperationStatusValue {
-  @doc("Operation is in progress")
+  @doc("Operation is in progress.")
   Running,
 
-  @doc("Operation is completed with success")
+  @doc("Operation is completed with success.")
   @lroSucceeded
   Completed,
 
-  @doc("Operation was canceled")
+  @doc("Operation was canceled.")
   Canceled,
 
-  @doc("Operation failed")
+  @doc("Operation failed.")
   Failed,
 }
 
-@doc("The current status of an async operation")
+@doc("The current status of an async operation.")
 @resource("operationstatuses")
 @parentResource(Project)
 model OperationStatus {
@@ -36,7 +36,7 @@ model OperationStatus {
   @visibility("read")
   id: string;
 
-  @doc("The operation id name")
+  @doc("The operation id name.")
   name?: string;
 
   @doc("Provisioning state of the resource.")
@@ -45,13 +45,13 @@ model OperationStatus {
   @doc("The id of the resource.")
   resourceId?: string;
 
-  @doc("The start time of the operation")
+  @doc("The start time of the operation.")
   startTime?: utcDateTime;
 
-  @doc("The end time of the operation")
+  @doc("The end time of the operation.")
   endTime?: utcDateTime;
 
-  @doc("Percent of the operation that is complete")
+  @doc("Percent of the operation that is complete.")
   @minValue(0.0)
   @maxValue(100.0)
   percentComplete?: float64;
@@ -60,7 +60,7 @@ model OperationStatus {
   @doc("Custom operation properties, populated only for a successful operation.")
   properties?: unknown;
 
-  @doc("Operation Error message")
+  @doc("Operation Error message.")
   @typeChangedFrom(APIVersions.v2024_02_01, Azure.Core.Foundations.Error)
   error?: Azure.Core.Foundations.Error;
 }
@@ -73,7 +73,7 @@ model Project {
   uri: url;
 
   @key("projectName")
-  @doc("Name of the project")
+  @doc("Name of the project.")
   @minLength(3)
   @maxLength(63)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
@@ -95,12 +95,12 @@ create across all pools in the project.
   displayName?: string;
 }
 
-@doc("Project user")
+@doc("Project user.")
 @resource("users")
 @parentResource(Project)
 model User {
   @key("userId")
-  @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context")
+  @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
   @minLength(2)
   @maxLength(36)
   @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")

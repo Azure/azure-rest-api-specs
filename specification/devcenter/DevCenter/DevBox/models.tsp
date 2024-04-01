@@ -42,90 +42,90 @@ union LocalAdminStatus {
 
 @doc("Indicates the provisioning state of the Dev Box.")
 union DevBoxProvisioningState {
-  @doc("Dev Box was successfully provisioned") Succeeded: "Succeeded",
-  @doc("Dev Box failed to provision") Failed: "Failed",
-  @doc("Dev Box provision was canceled") Canceled: "Canceled",
-  @doc("Dev Box is being created") Creating: "Creating",
-  @doc("Dev Box is being deleted") Deleting: "Deleting",
-  @doc("Dev Box is updating") Updating: "Updating",
-  @doc("Dev Box is starting") Starting: "Starting",
-  @doc("Dev Box is stopping") Stopping: "Stopping",
-  @doc("Dev Box is provisioning") Provisioning: "Provisioning",
+  @doc("Dev Box was successfully provisioned.") Succeeded: "Succeeded",
+  @doc("Dev Box failed to provision.") Failed: "Failed",
+  @doc("Dev Box provision was canceled.") Canceled: "Canceled",
+  @doc("Dev Box is being created.") Creating: "Creating",
+  @doc("Dev Box is being deleted.") Deleting: "Deleting",
+  @doc("Dev Box is updating.") Updating: "Updating",
+  @doc("Dev Box is starting.") Starting: "Starting",
+  @doc("Dev Box is stopping.") Stopping: "Stopping",
+  @doc("Dev Box is provisioning.") Provisioning: "Provisioning",
 
-  @doc("Dev Box was provisioned with warning")
+  @doc("Dev Box was provisioned with warning.")
   ProvisionedWithWarning: "ProvisionedWithWarning",
 
-  @doc("Dev Box is in grace period") InGracePeriod: "InGracePeriod",
-  @doc("Dev Box is not provisioned") NotProvisioned: "NotProvisioned",
+  @doc("Dev Box is in grace period.") InGracePeriod: "InGracePeriod",
+  @doc("Dev Box is not provisioned.") NotProvisioned: "NotProvisioned",
   string,
 }
 
 @doc("Indicates the Dev Box compute.")
 union SkuName {
-  @doc("Intel, 8 vCPU, 32 GB RAM, 256 GB Storage")
+  @doc("Intel, 8 vCPU, 32 GB RAM, 256 GB Storage.")
   general_i_8c32gb256ssd_v2: "general_i_8c32gb256ssd_v2",
 
-  @doc("Intel, 8 vCPU, 32 GB RAM, 512 GB Storage")
+  @doc("Intel, 8 vCPU, 32 GB RAM, 512 GB Storage.")
   general_i_8c32gb512ssd_v2: "general_i_8c32gb512ssd_v2",
 
-  @doc("Intel, 8 vCPU, 32 GB RAM, 1024 GB Storage")
+  @doc("Intel, 8 vCPU, 32 GB RAM, 1024 GB Storage.")
   general_i_8c32gb1024ssd_v2: "general_i_8c32gb1024ssd_v2",
 
-  @doc("Intel, 8 vCPU, 32 GB RAM, 2048 GB Storage")
+  @doc("Intel, 8 vCPU, 32 GB RAM, 2048 GB Storage.")
   general_i_8c32gb2048ssd_v2: "general_i_8c32gb2048ssd_v2",
 
-  @doc("Intel, 16 vCPU, 64 GB RAM, 256 GB Storage")
+  @doc("Intel, 16 vCPU, 64 GB RAM, 256 GB Storage.")
   general_i_16c64gb256ssd_v2: "general_i_16c64gb256ssd_v2",
 
-  @doc("Intel, 16 vCPU, 64 GB RAM, 512 GB Storage")
+  @doc("Intel, 16 vCPU, 64 GB RAM, 512 GB Storage.")
   general_i_16c64gb512ssd_v2: "general_i_16c64gb512ssd_v2",
 
-  @doc("Intel, 16 vCPU, 64 GB RAM, 1024 GB Storage")
+  @doc("Intel, 16 vCPU, 64 GB RAM, 1024 GB Storage.")
   general_i_16c64gb1024ssd_v2: "general_i_16c64gb1024ssd_v2",
 
-  @doc("Intel, 16 vCPU, 64 GB RAM, 2048 GB Storage")
+  @doc("Intel, 16 vCPU, 64 GB RAM, 2048 GB Storage.")
   general_i_16c64gb2048ssd_v2: "general_i_16c64gb2048ssd_v2",
 
-  @doc("Intel, 32 vCPU, 128 GB RAM, 512 GB Storage")
+  @doc("Intel, 32 vCPU, 128 GB RAM, 512 GB Storage.")
   general_i_32c128gb512ssd_v2: "general_i_32c128gb512ssd_v2",
 
-  @doc("Intel, 32 vCPU, 128 GB RAM, 1024 GB Storage")
+  @doc("Intel, 32 vCPU, 128 GB RAM, 1024 GB Storage.")
   general_i_32c128gb1024ssd_v2: "general_i_32c128gb1024ssd_v2",
 
-  @doc("Intel, 32 vCPU, 128 GB RAM, 2048 GB Storage")
+  @doc("Intel, 32 vCPU, 128 GB RAM, 2048 GB Storage.")
   general_i_32c128gb2048ssd_v2: "general_i_32c128gb2048ssd_v2",
 
-  @doc("AMD, 8 vCPU, 32 GB RAM, 256 GB Storage")
+  @doc("AMD, 8 vCPU, 32 GB RAM, 256 GB Storage.")
   general_a_8c32gb256ssd_v2: "general_a_8c32gb256ssd_v2",
 
-  @doc("AMD, 8 vCPU, 32 GB RAM, 512 GB Storage")
+  @doc("AMD, 8 vCPU, 32 GB RAM, 512 GB Storage.")
   general_a_8c32gb512ssd_v2: "general_a_8c32gb512ssd_v2",
 
-  @doc("AMD, 8 vCPU, 32 GB RAM, 1024 GB Storage")
+  @doc("AMD, 8 vCPU, 32 GB RAM, 1024 GB Storage.")
   general_a_8c32gb1024ssd_v2: "general_a_8c32gb1024ssd_v2",
 
-  @doc("AMD, 8 vCPU, 32 GB RAM, 2048 GB Storage")
+  @doc("AMD, 8 vCPU, 32 GB RAM, 2048 GB Storage.")
   general_a_8c32gb2048ssd_v2: "general_a_8c32gb2048ssd_v2",
 
-  @doc("AMD, 16 vCPU, 64 GB RAM, 256 GB Storage")
+  @doc("AMD, 16 vCPU, 64 GB RAM, 256 GB Storage.")
   general_a_16c64gb256ssd_v2: "general_a_16c64gb256ssd_v2",
 
-  @doc("AMD, 16 vCPU, 64 GB RAM, 512 GB Storage")
+  @doc("AMD, 16 vCPU, 64 GB RAM, 512 GB Storage.")
   general_a_16c64gb512ssd_v2: "general_a_16c64gb512ssd_v2",
 
-  @doc("AMD, 16 vCPU, 64 GB RAM, 1024 GB Storage")
+  @doc("AMD, 16 vCPU, 64 GB RAM, 1024 GB Storage.")
   general_a_16c64gb1024ssd_v2: "general_a_16c64gb1024ssd_v2",
 
-  @doc("AMD, 16 vCPU, 64 GB RAM, 2048 GB Storage")
+  @doc("AMD, 16 vCPU, 64 GB RAM, 2048 GB Storage.")
   general_a_16c64gb2048ssd_v2: "general_a_16c64gb2048ssd_v2",
 
-  @doc("AMD, 32 vCPU, 128 GB RAM, 512 GB Storage")
+  @doc("AMD, 32 vCPU, 128 GB RAM, 512 GB Storage.")
   general_a_32c128gb512ssd_v2: "general_a_32c128gb512ssd_v2",
 
-  @doc("AMD, 32 vCPU, 128 GB RAM, 1024 GB Storage")
+  @doc("AMD, 32 vCPU, 128 GB RAM, 1024 GB Storage.")
   general_a_32c128gb1024ssd_v2: "general_a_32c128gb1024ssd_v2",
 
-  @doc("AMD, 32 vCPU, 128 GB RAM, 2048 GB Storage")
+  @doc("AMD, 32 vCPU, 128 GB RAM, 2048 GB Storage.")
   general_a_32c128gb2048ssd_v2: "general_a_32c128gb2048ssd_v2",
 
   string,
@@ -296,31 +296,31 @@ union DevBoxRepairOutcome {
 @resource("pools")
 @parentResource(Project)
 model Pool {
-  @doc("The unique URI of the pool")
+  @doc("The unique URI of the pool.")
   @added(APIVersions.v2024_02_01)
   uri: url;
 
   @key("poolName")
   @visibility("read")
-  @doc("Pool name")
+  @doc("Pool name.")
   name: string;
 
-  @doc("Azure region where Dev Boxes in the pool are located")
+  @doc("Azure region where Dev Boxes in the pool are located.")
   location: Azure.Core.azureLocation;
 
-  @doc("The operating system type of Dev Boxes in this pool")
+  @doc("The operating system type of Dev Boxes in this pool.")
   osType?: OsType;
 
-  @doc("Hardware settings for the Dev Boxes created in this pool")
+  @doc("Hardware settings for the Dev Boxes created in this pool.")
   hardwareProfile?: HardwareProfile;
 
   @doc("Indicates whether hibernate is enabled/disabled or unknown.")
   hibernateSupport?: HibernateSupport;
 
-  @doc("Storage settings for Dev Box created in this pool")
+  @doc("Storage settings for Dev Box created in this pool.")
   storageProfile?: StorageProfile;
 
-  @doc("Image settings for Dev Boxes create in this pool")
+  @doc("Image settings for Dev Boxes create in this pool.")
   imageReference?: ImageReference;
 
   @doc("""
@@ -345,7 +345,7 @@ available to create Dev Boxes.
 
 @doc("Hardware specifications for the Dev Box.")
 model HardwareProfile {
-  @doc("The name of the SKU")
+  @doc("The name of the SKU.")
   @visibility("read")
   skuName?: SkuName;
 
@@ -360,7 +360,7 @@ model HardwareProfile {
   memoryGB?: int32;
 }
 
-@doc("Storage settings for the Dev Box's disks")
+@doc("Storage settings for the Dev Box's disks.")
 model StorageProfile {
   @doc("Settings for the operating system disk.")
   osDisk?: OsDisk;
@@ -374,7 +374,7 @@ model OsDisk {
   diskSizeGB?: int32;
 }
 
-@doc("Specifies information about the image used")
+@doc("Specifies information about the image used.")
 model ImageReference {
   @doc("The name of the image used.")
   @visibility("read")
@@ -412,7 +412,7 @@ is detected.
   gracePeriodMinutes?: int32;
 }
 
-@doc("The Schedule list result")
+@doc("The Schedule list result.")
 model ScheduleListResult is Azure.Core.Page<Schedule>;
 
 @doc("A Schedule to execute action.")
@@ -425,14 +425,14 @@ model Schedule {
 
   @key("scheduleName")
   @visibility("read")
-  @doc("Display name for the Schedule")
+  @doc("Display name for the Schedule.")
   name: string;
 
   @doc("The URI of the resource that this schedule belongs to.")
   @added(APIVersions.v2024_02_01)
   sourceUri: url;
 
-  @doc("The type of the resource that this schedule belongs to")
+  @doc("The type of the resource that this schedule belongs to.")
   @added(APIVersions.v2024_02_01)
   sourceType: ScheduleSourceType;
 
@@ -450,10 +450,10 @@ model Schedule {
   timeZone: string;
 }
 
-@doc("The Dev Box list result")
+@doc("The Dev Box list result.")
 model DevBoxListResult is Azure.Core.Page<DevBox>;
 
-@doc("A Dev Box")
+@doc("A Dev Box.")
 @resource("devboxes")
 @parentResource(User)
 model DevBox {
@@ -462,14 +462,14 @@ model DevBox {
   uri?: url;
 
   @key("devBoxName")
-  @doc("Display name for the Dev Box")
+  @doc("Display name for the Dev Box.")
   @minLength(3)
   @maxLength(63)
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
   @visibility("read")
   name: string;
 
-  @doc("Name of the project this Dev Box belongs to")
+  @doc("Name of the project this Dev Box belongs to.")
   @visibility("read")
   projectName?: string;
 
@@ -525,19 +525,19 @@ Virtual Network it is attached to.
   @visibility("read")
   user?: Azure.Core.uuid;
 
-  @doc("Information about the Dev Box's hardware resources")
+  @doc("Information about the Dev Box's hardware resources.")
   @visibility("read")
   hardwareProfile?: HardwareProfile;
 
-  @doc("Storage settings for this Dev Box")
+  @doc("Storage settings for this Dev Box.")
   @visibility("read")
   storageProfile?: StorageProfile;
 
-  @doc("Information about the image used for this Dev Box")
+  @doc("Information about the image used for this Dev Box.")
   @visibility("read")
   imageReference?: ImageReference;
 
-  @doc("Creation time of this Dev Box")
+  @doc("Creation time of this Dev Box.")
   @visibility("read")
   createdTime?: utcDateTime;
 
@@ -598,11 +598,11 @@ model DevBoxNextAction {
   scheduledTime: utcDateTime;
 }
 
-@doc("The actions list result")
+@doc("The actions list result.")
 model DevBoxActionsDelayMultipleResult
   is Azure.Core.Page<DevBoxActionDelayResult>;
 
-@doc("The action delay result")
+@doc("The action delay result.")
 model DevBoxActionDelayResult {
   @doc("The unique URI of the action.")
   @added(APIVersions.v2024_02_01)
@@ -614,7 +614,7 @@ model DevBoxActionDelayResult {
   @doc("The result of the delay operation on this action.")
   result: DevBoxActionDelayResultStatus;
 
-  @doc("The delayed action")
+  @doc("The delayed action.")
   action?: DevBoxAction;
 
   @doc("Information about the error that occurred. Only populated on error.")

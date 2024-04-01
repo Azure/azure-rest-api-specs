@@ -9,7 +9,7 @@ using TypeSpec.Http;
 
 namespace DevCenterService;
 
-@doc("Type of the output value")
+@doc("Type of the output value.")
 @added(APIVersions.v2024_02_01)
 union EnvironmentOutputType {
   @doc("The output is an array of values.") 
@@ -147,7 +147,7 @@ model EnvironmentListResult is Azure.Core.Page<Environment>;
 model Environment {
   ...EnvironmentUpdateProperties;
 
-  @doc("The unique URI of the environment")
+  @doc("The unique URI of the environment.")
   @added(APIVersions.v2024_02_01)
   uri: url;
 
@@ -222,11 +222,11 @@ model EnvironmentOutputs {
 @doc("Output from environment deployment.")
 @added(APIVersions.v2024_02_01)
 model EnvironmentOutput {
-  @doc("Type of the output value")
+  @doc("Type of the output value.")
   type?: EnvironmentOutputType;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "there is no build in type to describe object"
-  @doc("The output value")
+  @doc("The output value.")
   value?: Record<unknown>;
 
   @doc("Indicates if the value is sensitive.")
@@ -304,7 +304,7 @@ model EnvironmentNextAction {
 @resource("catalogs")
 @parentResource(Project)
 model Catalog {
-  @doc("The unique URI of the catalog")
+  @doc("The unique URI of the catalog.")
   @added(APIVersions.v2024_02_01)
   uri: url;
 
@@ -324,7 +324,7 @@ model EnvironmentDefinitionListResult is Azure.Core.Page<EnvironmentDefinition>;
 @resource("environmentDefinitions")
 @parentResource(Catalog)
 model EnvironmentDefinition {
-  @doc("The unique URI of the environment definition")
+  @doc("The unique URI of the environment definition.")
   @added(APIVersions.v2024_02_01)
   uri: url;
 
@@ -358,21 +358,21 @@ model EnvironmentDefinition {
 
 @doc("Properties of an Environment Definition parameter")
 model EnvironmentDefinitionParameter {
-  @doc("Unique ID of the parameter")
+  @doc("Unique ID of the parameter.")
   id: string;
 
-  @doc("Display name of the parameter")
+  @doc("Display name of the parameter.")
   name?: string;
 
-  @doc("Description of the parameter")
+  @doc("Description of the parameter.")
   description?: string;
 
-  @doc("Default value of the parameter")
+  @doc("Default value of the parameter.")
   default?: string;
 
   @doc("""
 A string of one of the basic JSON types (number, integer, array, object,
-boolean, string)
+boolean, string).
 """)
   type: ParameterType;
 
@@ -382,10 +382,10 @@ value.
 """)
   readOnly?: boolean;
 
-  @doc("Whether or not this parameter is required")
+  @doc("Whether or not this parameter is required.")
   required: boolean;
 
-  @doc("An array of allowed values")
+  @doc("An array of allowed values.")
   @minItems(1)
   allowed?: string[];
 }
@@ -399,7 +399,7 @@ model EnvironmentType {
   @added(APIVersions.v2024_02_01)
   uri: url;
 
-  @doc("Name of the environment type")
+  @doc("Name of the environment type.")
   name: string;
 
   @doc("""
