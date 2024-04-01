@@ -279,8 +279,7 @@
         "finish_reason": {
           "$ref": "#/definitions/CompletionsFinishReason",
           "description": "The reason that this chat completions choice completed its generated.",
-          "x-nullable": true,
-          "x-ms-client-name": "finishReason"
+          "x-nullable": true
         }
       },
       "required": [
@@ -414,8 +413,7 @@
           "description": "A value that influences the probability of generated tokens appearing based on their cumulative\nfrequency in generated text.\nPositive values will make tokens less likely to appear as their frequency increases and\ndecrease the likelihood of the model repeating the same statements verbatim.",
           "default": 0,
           "minimum": -2,
-          "maximum": 2,
-          "x-ms-client-name": "frequencyPenalty"
+          "maximum": 2
         },
         "presence_penalty": {
           "type": "number",
@@ -423,8 +421,7 @@
           "description": "A value that influences the probability of generated tokens appearing based on their existing\npresence in generated text.\nPositive values will make tokens less likely to appear when they already exist and increase the\nmodel's likelihood to output new topics.",
           "default": 0,
           "minimum": -2,
-          "maximum": 2,
-          "x-ms-client-name": "presencePenalty"
+          "maximum": 2
         },
         "temperature": {
           "type": "number",
@@ -440,20 +437,17 @@
           "description": "An alternative to sampling with temperature called nucleus sampling. This value causes the\nmodel to consider the results of tokens with the provided probability mass. As an example, a\nvalue of 0.15 will cause only the tokens comprising the top 15% of probability mass to be\nconsidered.\nIt is not recommended to modify temperature and top_p for the same completions request as the\ninteraction of these two settings is difficult to predict.",
           "default": 1,
           "minimum": 0,
-          "maximum": 1,
-          "x-ms-client-name": "topP"
+          "maximum": 1
         },
         "max_tokens": {
           "type": "integer",
           "format": "int32",
           "description": "The maximum number of tokens to generate.",
-          "minimum": 0,
-          "x-ms-client-name": "maxTokens"
+          "minimum": 0
         },
         "response_format": {
           "$ref": "#/definitions/ChatCompletionsResponseFormat",
-          "description": "An object specifying the format that the model must output. Used to enable JSON mode.",
-          "x-ms-client-name": "responseFormat"
+          "description": "An object specifying the format that the model must output. Used to enable JSON mode."
         },
         "stop": {
           "type": "array",
@@ -770,20 +764,17 @@
         "completion_tokens": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of tokens generated across all completions emissions.",
-          "x-ms-client-name": "completionTokens"
+          "description": "The number of tokens generated across all completions emissions."
         },
         "prompt_tokens": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of tokens in the provided prompts for the completions request.",
-          "x-ms-client-name": "promptTokens"
+          "description": "The number of tokens in the provided prompts for the completions request."
         },
         "total_tokens": {
           "type": "integer",
           "format": "int32",
-          "description": "The total number of tokens processed for the completions request and response.",
-          "x-ms-client-name": "totalTokens"
+          "description": "The total number of tokens processed for the completions request and response."
         }
       },
       "required": [

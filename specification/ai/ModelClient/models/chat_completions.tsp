@@ -20,7 +20,6 @@ model ChatCompletionsOptions {
     the behavior of the assistant, followed by alternating messages between the User and
     Assistant roles.
     """)
-  @projectedName("json", "messages")
   @minItems(1)
   messages: ChatRequestMessage[];
 
@@ -32,8 +31,7 @@ model ChatCompletionsOptions {
   """)
   @maxValue(2.0)
   @minValue(-2.0)
-  @projectedName("json", "frequency_penalty")
-  frequencyPenalty?: float32 = 0.0;
+  frequency_penalty?: float32 = 0.0;
 
   @doc("""
   A value that influences the probability of generated tokens appearing based on their existing
@@ -43,8 +41,7 @@ model ChatCompletionsOptions {
   """)
   @maxValue(2.0)
   @minValue(-2.0)
-  @projectedName("json", "presence_penalty")
-  presencePenalty?: float32 = 0.0;
+  presence_penalty?: float32 = 0.0;
 
   @doc("""
   The sampling temperature to use that controls the apparent creativity of generated completions.
@@ -55,7 +52,6 @@ model ChatCompletionsOptions {
   """)
   @maxValue(1.0)
   @minValue(0.0)
-  @projectedName("json", "temperature")
   temperature?: float32 = 0.7;
 
   @doc("""
@@ -68,29 +64,24 @@ model ChatCompletionsOptions {
   """)
   @maxValue(1.0)
   @minValue(0.0)
-  @projectedName("json", "top_p")
-  topP?: float32 = 1.0;
+  top_p?: float32 = 1.0;
 
   @doc("The maximum number of tokens to generate.")
-  @projectedName("json", "max_tokens")
   @minValue(0.0)
-  maxTokens?: int32;
+  max_tokens?: int32;
 
-  @projectedName("json", "response_format")
   @doc("An object specifying the format that the model must output. Used to enable JSON mode.")
-  responseFormat?: ChatCompletionsResponseFormat;
+  response_format?: ChatCompletionsResponseFormat;
 
   @doc("""
     A collection of textual sequences that will end completions generation.
     """)
-  @projectedName("json", "stop")
   @minItems(1)
   stop?: string[];
 
   @doc("""
   A value indicating whether chat completions should be streamed for this request.
   """)
-  @projectedName("json", "stream")
   stream?: boolean = false;
 
   @doc("The available tool definitions that the chat completions request can use, including caller-defined functions.")
@@ -118,23 +109,19 @@ provided prompt data.
 """)
 model ChatCompletions {
   @doc("A unique identifier associated with this chat completions response.")
-  @projectedName("json", "id")
   id: string;
 
   @doc("The response object type, which is always `chat.completion`.")
-  @projectedName("json", "object")
   object: string;
 
   @doc("""
     The first timestamp associated with generation activity for this completions response,
     represented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970.
     """)
-  @projectedName("json", "created")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   created: utcDateTime;
 
   @doc("The model used for the chat completion.")
-  @projectedName("json", "model")
   `model`: string;
 
   @doc("""
@@ -142,14 +129,12 @@ model ChatCompletions {
     Generally, `n` choices are generated per provided prompt with a default value of 1.
     Token limits and other settings may limit the number of choices generated.
     """)
-  @projectedName("json", "choices")
   @minItems(1)
   choices: ChatChoice[];
 
   @doc("""
   Usage information for tokens processed and generated as part of this completions operation.
   """)
-  @projectedName("json", "usage")
   usage: CompletionsUsage;
 }
 
@@ -160,16 +145,13 @@ other consumers.
 """)
 model CompletionsUsage {
   @doc("The number of tokens generated across all completions emissions.")
-  @projectedName("json", "completion_tokens")
-  completionTokens: int32;
+  completion_tokens: int32;
 
   @doc("The number of tokens in the provided prompts for the completions request.")
-  @projectedName("json", "prompt_tokens")
-  promptTokens: int32;
+  prompt_tokens: int32;
 
   @doc("The total number of tokens processed for the completions request and response.")
-  @projectedName("json", "total_tokens")
-  totalTokens: int32;
+  total_tokens: int32;
 }
 
 @doc("""
@@ -238,18 +220,15 @@ Token limits and other settings may limit the number of choices generated.
 """)
 model ChatChoice {
   @doc("The ordered index associated with this chat completions choice.")
-  @projectedName("json", "index")
   index: int32;
 
   @doc("The chat message for a given chat completions prompt.")
-  @projectedName("json", "message")
   message: ChatResponseMessage;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
   @doc("The reason that this chat completions choice completed its generated.")
-  @projectedName("json", "finish_reason")
-  finishReason: CompletionsFinishReason | null;
+  finish_reason: CompletionsFinishReason | null;
 }
 
 @discriminator("role")
