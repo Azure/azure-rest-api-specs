@@ -1089,11 +1089,11 @@
       "description": "Container Apps Job execution status.",
       "type": "object",
       "properties": {
-        "pods": {
-          "description": "Pods in the execution.",
+        "replicas": {
+          "description": "Replicas in the execution.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PodExecutionStatus"
+            "$ref": "#/definitions/ReplicaExecutionStatus"
           },
           "x-ms-identifiers": [
             "name"
@@ -1101,16 +1101,16 @@
         }
       }
     },
-    "PodExecutionStatus": {
-      "description": "Container Apps Job execution pod status.",
+    "ReplicaExecutionStatus": {
+      "description": "Container Apps Job execution replica status.",
       "type": "object",
       "properties": {
         "name": {
-          "description": "Pod Name.",
+          "description": "Replica Name.",
           "type": "string"
         },
         "containers": {
-          "description": "Containers in the execution",
+          "description": "Containers in the execution replica",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ContainerExecutionStatus"
@@ -1134,8 +1134,8 @@
           "type": "integer",
           "format": "int32"
         },
-        "reason": {
-          "description": "Container reason",
+        "additionalInformation": {
+          "description": "Additional information for the container status",
           "type": "string"
         },
         "status": {
