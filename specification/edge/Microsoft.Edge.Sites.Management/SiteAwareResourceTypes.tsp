@@ -18,10 +18,7 @@ namespace Microsoft.Edge;
 @singleton("default")
 @tenantResource
 @includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(
-  SiteAwareResourceTypesProperties
-)
-model SiteAwareResourceTypes extends ProxyResourceBase {
+model SiteAwareResourceTypes is ProxyResource<SiteAwareResourceTypesProperties> {
   // TODO - There shouldn't be name field in here, it should contain
   @doc("Name of the resource")
   @path
@@ -30,9 +27,6 @@ model SiteAwareResourceTypes extends ProxyResourceBase {
   @visibility("read")
   name: string;
 
-  @doc("The properties for this resource type.")
-  @extension("x-ms-client-flatten", true)
-  properties?: SiteAwareResourceTypesProperties;
 }
 
 @armResourceOperations

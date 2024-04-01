@@ -758,8 +758,12 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/SiteAwareResourceTypesProperties",
-          "description": "The properties for this resource type.",
-          "x-ms-client-flatten": true
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
