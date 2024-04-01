@@ -22,15 +22,19 @@ options:
     clear-output-folder: true
     model-namespace: false
     namespace: Azure.AI.Translation.Text
+    flavor: azure
   "@azure-tools/typespec-python":
     package-name: "azure-ai-translation-text"
     package-dir: "azure-ai-translation-text"
+    flavor: azure
   "@azure-tools/typespec-java":
     package-dir: "azure-ai-translation-text"
     namespace: com.azure.ai.translation.text
     partial-update: true
     generate-tests: false
     customization-class: customization/src/main/java/TextTranslationClientBuilderCustomization.java
+    flavor: azure
+    stream-style-serialization: false
   "@azure-tools/typespec-ts":
     package-dir: "ai-translation-text-rest"
     generateMetadata: false
@@ -38,3 +42,4 @@ options:
     packageDetails:
       name: "@azure-rest/ai-translation-text"
       description: "Microsoft Translation Text"
+    flavor: azure

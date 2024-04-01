@@ -3,8 +3,9 @@ param (
   [Parameter(Position = 0)]
   [string] $BaseCommitish = "HEAD^",
   [Parameter(Position = 1)]
-  [string] $TargetCommitish = "HEAD"
-
+  [string] $TargetCommitish = "HEAD",
+  [Parameter(Position = 2)]
+  [string] $SpecType = "data-plane|resource-manager"
 )
 Set-StrictMode -Version 3
 
@@ -21,14 +22,10 @@ function Find-Suppressions-Yaml {
   $currentDirectory = Get-Item (Split-Path -Path $fileInSpecFolder)
 
   while ($currentDirectory) {
-    # Support both .yaml and .yml, preferring the former
-    $suppressionsFileYaml = Join-Path -Path $currentDirectory.FullName -ChildPath "suppressions.yaml"
-    $suppressionsFileYml = Join-Path -Path $currentDirectory.FullName -ChildPath "suppressions.yml"
+    $suppressionsFile = Join-Path -Path $currentDirectory.FullName -ChildPath "suppressions.yaml"
 
-    if (Test-Path $suppressionsFileYaml) {
-      return $suppressionsFileYaml
-    } elseif (Test-Path $suppressionsFileYml) {
-      return $suppressionsFileYml
+    if (Test-Path $suppressionsFile) {
+      return $suppressionsFile
     } else {
       $currentDirectory = $currentDirectory.Parent
     }
@@ -69,7 +66,7 @@ $pathsWithErrors = @()
 
 $filesToCheck = (Get-ChangedSwaggerFiles (Get-ChangedFiles $BaseCommitish $TargetCommitish)).Where({
   ($_ -notmatch "/(examples|scenarios|restler|common|common-types)/") -and
-  ($_ -match "specification/[^/]+/(data-plane|resource-manager).*?/(preview|stable)/[^/]+/[^/]+\.json$")
+  ($_ -match "specification/[^/]+/($SpecType).*?/(preview|stable)/[^/]+/[^/]+\.json$")
 })
 
 if (!$filesToCheck) {
@@ -85,6 +82,7 @@ else {
   #   - specification/foo/data-plane/Foo/stable/2023-01-01/Foo.json
   #   - specification/foo/data-plane/Foo/bar/stable/2023-01-01/Foo.json
   #   - specification/foo/resource-manager/Microsoft.Foo/stable/2023-01-01/Foo.json
+  # - Doc: https://github.com/Azure/azure-rest-api-specs/blob/main/README.md#directory-structure
   foreach ($file in $filesToCheck) {
     LogInfo "Checking $file"
 
@@ -101,9 +99,37 @@ else {
 
     try {
       $jsonContent = Get-Content $fullPath | ConvertFrom-Json -AsHashtable
+    }
+    catch {
+      LogWarning "  OpenAPI cannot be parsed as JSON, so assuming not generated from TypeSpec"
+      LogWarning "    $_"
+    }
 
+    if ($jsonContent) {
       if ($null -ne ${jsonContent}?["info"]?["x-typespec-generated"]) {
         LogInfo "  OpenAPI was generated from TypeSpec (contains '/info/x-typespec-generated')"
+
+        if ($file -match "specification/(?<rpFolder>[^/]+)/") {
+          $rpFolder = $Matches["rpFolder"];
+          $tspConfigs = @(Get-ChildItem -Path (Join-Path $repoPath "specification" $rpFolder) -Recurse -File
+            | Where-Object { $_.Name -eq "tspconfig.yaml" })
+
+          if ($tspConfigs) {
+            LogInfo "  Folder 'specification/$rpFolder' contains $($tspConfigs.Count) file(s) named 'tspconfig.yaml'"
+          }
+          else {
+            LogError ("OpenAPI was generated from TypeSpec, but folder 'specification/$rpFolder' contains no files named 'tspconfig.yaml'." `
+              + "  The TypeSpec used to generate OpenAPI must be added to this folder.")
+            LogJobFailure
+            exit 1
+          }
+        }
+        else {
+          LogError "Path to OpenAPI did not match expected regex.  Unable to extract RP folder."
+          LogJobFailure
+          exit 1
+        }
+
         # Skip further checks, since spec is already using TypeSpec
         continue
       }
@@ -111,17 +137,13 @@ else {
         LogInfo "  OpenAPI was not generated from TypeSpec (missing '/info/x-typespec-generated')"
       }
     }
-    catch {
-      LogWarning "  OpenAPI cannot be parsed as JSON, so assuming not generated from TypeSpec"
-      LogWarning "    $_"
-    }
 
     # Extract path between "specification/" and "/(preview|stable)"
-    if ($file -match "specification/(?<servicePath>[^/]+/(data-plane|resource-manager).*?)/(preview|stable)/[^/]+/[^/]+\.json$") {
+    if ($file -match "specification/(?<servicePath>[^/]+/($SpecType).*?)/(preview|stable)/[^/]+/[^/]+\.json$") {
       $servicePath = $Matches["servicePath"]
     }
     else {
-      LogError "  Path to OpenAPI did not match expected regex.  Unable to extract service path."
+      LogError "Path to OpenAPI did not match expected regex.  Unable to extract service path."
       LogJobFailure
       exit 1
     }
@@ -145,7 +167,7 @@ else {
         $responseCache[$urlToStableFolder] = $responseStatus
       }
       catch {
-        LogError "  Exception making web request to ${logUrlToStableFolder}: $_"
+        LogError "Exception making web request to ${logUrlToStableFolder}: $_"
         LogJobFailure
         exit 1
       }

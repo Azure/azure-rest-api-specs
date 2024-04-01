@@ -2,11 +2,13 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.AzureLargeInstance;
 
@@ -389,8 +391,9 @@ model NetworkProfile {
 
 @doc("Specifies the IP address of the network interface.")
 model IpAddress {
+  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "https://github.com/Azure/typespec-azure/issues/417"
   @doc("Specifies the IP address of the network interface.")
-  @projectedName("csharp", "ipAddressValue")
+  @clientName("ipAddressValue", "csharp")
   ipAddress?: string;
 }
 
@@ -399,15 +402,17 @@ The active state empowers the server with the ability to forcefully terminate
 and halt any existing processes that may be running on the server
 """)
 model ForceState {
+  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "https://github.com/Azure/typespec-azure/issues/417"
   @doc("Whether to force restart by shutting all processes.")
-  @projectedName("csharp", "forceStateValue")
+  @clientName("forceStateValue", "csharp")
   forceState?: AzureLargeInstanceForcePowerState;
 }
 
 @doc("Tags field of the AzureLargeInstance instance.")
 model Tags {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags is an acceptable use."
-  @projectedName("csharp", "tagsValue")
+  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "https://github.com/Azure/typespec-azure/issues/417"
+  @clientName("tagsValue", "csharp")
   @doc("Tags field of the AzureLargeInstance instance.")
   tags?: Record<string>;
 }
