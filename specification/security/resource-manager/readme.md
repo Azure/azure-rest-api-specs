@@ -177,7 +177,6 @@ These settings apply only when `--tag=package-preview-2023-01-only` is specified
 ``` yaml $(tag) == 'package-preview-2023-01-only'
 input-file:
   - Microsoft.Security/preview/2023-01-01-preview/securityOperators.json
-  - Microsoft.Security/preview/2023-01-01-preview/datascanners.json
 ```
 
 ### Tag: package-preview-2023-03
@@ -188,7 +187,6 @@ These settings apply only when `--tag=package-preview-2023-03` is specified on t
 input-file:
   - Microsoft.Security/preview/2023-01-01-preview/securityOperators.json
   - Microsoft.Security/preview/2023-03-01-preview/securityConnectors.json
-  - Microsoft.Security/preview/2023-01-01-preview/datascanners.json
 ```
 
 ### Tag: package-preview-2023-02-15-only
@@ -451,7 +449,6 @@ input-file:
 - Microsoft.Security/preview/2022-07-01-preview/applications.json
 - Microsoft.Security/preview/2022-12-01-preview/defenderForStorageSettings.json
 - Microsoft.Security/preview/2023-01-01-preview/securityOperators.json
-- Microsoft.Security/preview/2023-01-01-preview/datascanners.json
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
@@ -459,6 +456,7 @@ input-file:
 - Microsoft.Security/preview/2023-05-01-preview/healthReports.json
 - Microsoft.Security/preview/2023-09-01-preview/securityConnectorsDevOps.json
 - Microsoft.Security/preview/2023-10-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2024-01-01-preview/datascanners.json
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
 - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
@@ -530,7 +528,6 @@ input-file:
 - Microsoft.Security/preview/2022-07-01-preview/applications.json
 - Microsoft.Security/preview/2022-12-01-preview/defenderForStorageSettings.json
 - Microsoft.Security/preview/2023-01-01-preview/securityOperators.json
-- Microsoft.Security/preview/2023-01-01-preview/datascanners.json
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
@@ -538,6 +535,7 @@ input-file:
 - Microsoft.Security/preview/2023-05-01-preview/healthReports.json
 - Microsoft.Security/preview/2023-09-01-preview/securityConnectorsDevOps.json
 - Microsoft.Security/preview/2023-10-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2024-01-01-preview/datascanners.json
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
 - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
