@@ -31,7 +31,7 @@ interface DevBoxes {
       @path
       projectName: string;
 
-      @doc("The DevCenter Project upon which to execute operations.")
+      @doc("The name of a pool of Dev Boxes.")
       @maxLength(63)
       @minLength(3)
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
