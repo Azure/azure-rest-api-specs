@@ -50,7 +50,7 @@ model SiteUpdateProperties {
 @doc("The type used for update operations of the Site.")
 model SiteUpdate {
   @doc("The managed service identities assigned to this resource.")
-  identity?: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
+  identity?: ManagedServiceIdentityUpdate;
 
   @doc("The updatable properties of the Site.")
   properties?: SiteUpdateProperties;
@@ -94,3 +94,8 @@ enum AvailabilityStatus {
   @doc("Supported if aggregation is supported for the resource-type")
   Supported,
 }
+
+@doc("Updatable managed service identity")
+model ManagedServiceIdentityUpdate
+  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedIdentityProperties>>;
+
