@@ -1841,8 +1841,17 @@
       }
     },
     "AllocatedQuotaToSubscriptionList": {
-      "type": "array",
-      "x-ms-identifiers": []
+      "description": "Quota allocated to subscriptions",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Group Quota Limit details.",
+          "items": {
+            "$ref": "#/definitions/AllocatedToSubscription"
+          }
+        }
+      }
     },
     "GroupQuotaLimit": {
       "type": "object",
@@ -2062,7 +2071,7 @@
       "description": "Quota allocated to a subscription for the specific Resource Provider, Location, ResourceName. This will include the GroupQuota and total quota allocated to the subscription. Only the Group quota allocated to the subscription can be allocated back to the MG Group Quota.",
       "allOf": [
         {
-          "$ref": "#/definitions/ARMTopLevelProperties"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
