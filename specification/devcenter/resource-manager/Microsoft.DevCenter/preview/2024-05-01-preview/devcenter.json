@@ -913,7 +913,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/encryptionsets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/encryptionSets": {
       "get": {
         "tags": [
           "EncryptionSets"
@@ -961,7 +961,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/encryptionsets/{encryptionSetName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevCenter/devcenters/{devCenterName}/encryptionSets/{encryptionSetName}": {
       "get": {
         "tags": [
           "EncryptionSets"
@@ -4777,6 +4777,11 @@
         "tags": {
           "$ref": "commonDefinitions.json#/definitions/Tags",
           "description": "Resource tags."
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the resource.",
+          "$ref": "commonDefinitions.json#/definitions/ProvisioningState",
+          "readOnly": true
         }
       }
     },
