@@ -51,14 +51,6 @@ interface DevBoxes {
   @added(APIVersions.v2024_02_01)
   listSchedulesByProject is Azure.Core.Foundations.Operation<
     {
-      @doc("The maximum number of resources to return from the operation. Example: 'top=10'.")
-      @query("top")
-      top?: int32;
-
-      @doc("An OData filter clause to apply to the operation.")
-      @query("filter")
-      filter?: string;
-
       @doc("The DevCenter Project upon which to execute operations.")
       @maxLength(63)
       @minLength(3)
