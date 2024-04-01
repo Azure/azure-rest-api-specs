@@ -4,43 +4,33 @@
     "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58ffff",
     "resourceGroupName": "rg1",
     "devCenterName": "Contoso",
-    "catalogName": "CentralCatalog",
+    "encryptionSetName": "EncryptionWestUs",
     "body": {
       "properties": {
-        "gitHub": {
-          "path": "/environments"
-        },
-        "syncType": "Scheduled"
+        "devboxDisksEncryptionEnableStatus": "Enabled"
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/devcenters/Contoso/catalogs/CentralCatalog",
-        "name": "CentralCatalog",
-        "type": "Microsoft.DevCenter/devcenters/catalogs",
+        "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/devcenters/Contoso/encryptionsets/EncryptionWestUs",
+        "name": "EncryptionWestUs",
+        "type": "Microsoft.DevCenter/devcenters/encryptionsets",
         "properties": {
-          "gitHub": {
-            "uri": "https://github.com/Contoso/centralrepo-fake.git",
-            "branch": "main",
-            "secretIdentifier": "https://contosokv.vault.azure.net/secrets/CentralRepoPat",
-            "path": "/environments"
-          },
-          "lastSyncStats": {
-            "added": 1,
-            "updated": 1,
-            "unchanged": 1,
-            "removed": 1,
-            "validationErrors": 1,
-            "synchronizationErrors": 1
-          },
-          "lastConnectionTime": "2020-11-18T18:28:00.314Z",
-          "lastSyncTime": "2020-11-18T18:28:00.314Z",
-          "provisioningState": "Succeeded",
-          "connectionState": "Connected",
-          "syncState": "Succeeded",
-          "syncType": "Scheduled"
+          "devboxDisksEncryptionEnableStatus": "Enabled",
+          "keyEncryptionKeyUrl": "https://contosovault.vault.azure.net/keys/contosokekwestus",
+          "provisioningState": "Accepted"
+        },
+        "location": "westus",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/identityGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testidentity1": {
+              "clientId": "e35621a5-f615-4a20-940e-de8a84b15abc",
+              "principalId": "2111b8fc-e123-485a-b408-bf1153189494"
+            }
+          }
         },
         "systemData": {
           "createdBy": "User1",

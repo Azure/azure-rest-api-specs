@@ -3,36 +3,35 @@
     "api-version": "2024-05-01-preview",
     "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58ffff",
     "resourceGroupName": "rg1",
-    "projectName": "TestProject",
-    "poolName": "DevPool",
-    "scheduleName": "autoShutdown",
+    "planName": "ContosoPlan",
+    "memberName": "d702f662-b3f2-4796-9e8c-13c22378ced3",
     "body": {
-      "properties": {
-        "time": "18:00"
+      "tags": {
+        "CostCode": "12345"
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/projects/TestProject/pools/DevPool/schedules/autoShutdown",
-        "name": "autoShutdown",
-        "type": "Microsoft.DevCenter/pools/schedules",
+        "name": "d702f662-b3f2-4796-9e8c-13c22378ced3",
+        "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/plans/ContosoPlan/members/d702f662-b3f2-4796-9e8c-13c22378ced3",
+        "memberId": "d702f662-b3f2-4796-9e8c-13c22378ced3",
+        "type": "Microsoft.DevCenter/plans/members",
+        "memberType": "User",
+        "tags": {
+          "CostCode": "12345"
+        },
         "properties": {
-          "state": "Enabled",
-          "type": "StopDevBox",
-          "timeZone": "America/Los_Angeles",
-          "frequency": "Daily",
-          "time": "17:30",
           "provisioningState": "Succeeded"
         },
         "systemData": {
           "createdBy": "user1",
           "createdByType": "User",
-          "createdAt": "2020-11-18T18:00:36.993Z",
-          "lastModifiedBy": "user1",
+          "createdAt": "2020-11-11T22:00:08.896Z",
+          "lastModifiedBy": "user2",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2020-11-18T18:30:36.993Z"
+          "lastModifiedAt": "2020-11-11T22:00:10.896Z"
         }
       }
     },
