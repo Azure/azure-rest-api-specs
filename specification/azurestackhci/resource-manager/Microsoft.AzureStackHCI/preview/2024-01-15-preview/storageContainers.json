@@ -335,6 +335,75 @@
         },
         "status": {
           "$ref": "#/definitions/StorageContainerStatus"
+        },
+        "vmReferences": {
+          "readOnly": true,
+          "type": "array",
+          "description": "Reference IDs of VMs which use this storage container.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Reference ID of VM which uses this storage container.",
+                "format": "arm-id",
+                "x-ms-arm-id-details": {
+                  "allowedResources": [
+                    {
+                      "type": "Microsoft.AzureStackHCI/virtualMachineInstances"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "vhdReferences": {
+          "readOnly": true,
+          "type": "array",
+          "description": "Reference IDs of VHDs which use this storage container.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Reference ID of VHD which uses this storage container.",
+                "format": "arm-id",
+                "x-ms-arm-id-details": {
+                  "allowedResources": [
+                    {
+                      "type": "Microsoft.AzureStackHCI/virtualHardDisks"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "imageReferences": {
+          "readOnly": true,
+          "type": "array",
+          "description": "Reference IDs of Images which use this storage container.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Reference ID of Image which uses this storage container.",
+                "format": "arm-id",
+                "x-ms-arm-id-details": {
+                  "allowedResources": [
+                    {
+                      "type": "Microsoft.AzureStackHCI/galleryImages"
+                    },
+                    {
+                      "type": "Microsoft.AzureStackHCI/marketplaceGalleryImages"
+                    }
+                  ]
+                }
+              }
+            }
+          }
         }
       },
       "required": [
