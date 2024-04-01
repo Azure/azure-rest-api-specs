@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2024-02-01
+tag: package-preview-2024-03
 ```
 
 ## Suppression
@@ -197,6 +197,7 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2024-03-15-preview/updateRuns.json
   - Microsoft.AzureStackHCI/preview/2024-03-15-preview/updateSummaries.json
   - Microsoft.AzureStackHCI/preview/2024-03-15-preview/updates.json
+  - Microsoft.AzureStackHCI/StackHCIVM/preview/2024-02-01-preview/openapi.json
 ```
 
 
