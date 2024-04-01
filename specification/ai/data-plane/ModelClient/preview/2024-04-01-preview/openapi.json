@@ -29,6 +29,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "$ref": "#/parameters/AdditionalRequestHeaders.unknownParameters"
+          },
+          {
+            "$ref": "#/parameters/AdditionalRequestHeaders.modelDeployment"
+          },
+          {
             "name": "chatCompletionsOptions",
             "in": "body",
             "description": "The JSON payload containing chat completion options.",
@@ -75,6 +81,12 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AdditionalRequestHeaders.unknownParameters"
+          },
+          {
+            "$ref": "#/parameters/AdditionalRequestHeaders.modelDeployment"
           },
           {
             "name": "embeddingsOptions",
@@ -911,6 +923,36 @@
         "name"
       ]
     },
+    "UnknownParameters": {
+      "type": "string",
+      "description": "Defines the service behaviour when unknown parameters are passed as extra properties in the request payload.",
+      "enum": [
+        "error",
+        "ignore",
+        "allow"
+      ],
+      "x-ms-enum": {
+        "name": "UnknownParameters",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "error",
+            "value": "error",
+            "description": "The service should error when it sees unknown parameters in the request payload. This is the default behaviour if the service."
+          },
+          {
+            "name": "ignore",
+            "value": "ignore",
+            "description": "The service should ignore unknown parameters in the request payload. They will not be passed to the back-end AI model."
+          },
+          {
+            "name": "allow",
+            "value": "allow",
+            "description": "The service should pass unknown parameters to the back-end AI model."
+          }
+        ]
+      }
+    },
     "Versions": {
       "type": "string",
       "description": "The ModelClient service versions.",
@@ -931,6 +973,50 @@
     }
   },
   "parameters": {
+    "AdditionalRequestHeaders.modelDeployment": {
+      "name": "azureml-model-deployment",
+      "in": "header",
+      "description": "Name of the deployment to which you would like to route the request. Relevant only to Model-as-a-Platform (MaaP) deployments.\nTypically used when you want to target a test enviroment instead of production enviroment.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "modelDeployment"
+    },
+    "AdditionalRequestHeaders.unknownParameters": {
+      "name": "unknown-parameters",
+      "in": "header",
+      "description": "Controls what happens if unknown parameters are passed as extra properties in the request payload.",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "error",
+        "ignore",
+        "allow"
+      ],
+      "x-ms-enum": {
+        "name": "UnknownParameters",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "error",
+            "value": "error",
+            "description": "The service should error when it sees unknown parameters in the request payload. This is the default behaviour if the service."
+          },
+          {
+            "name": "ignore",
+            "value": "ignore",
+            "description": "The service should ignore unknown parameters in the request payload. They will not be passed to the back-end AI model."
+          },
+          {
+            "name": "allow",
+            "value": "allow",
+            "description": "The service should pass unknown parameters to the back-end AI model."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "unknownParameters"
+    },
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
