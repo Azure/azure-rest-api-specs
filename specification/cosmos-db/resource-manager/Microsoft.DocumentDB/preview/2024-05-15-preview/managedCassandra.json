@@ -601,7 +601,7 @@
           "200": {
             "description": "Successfully triggered Restore.",
             "schema": {
-              "$ref": "#/definitions/BackupResource"
+              "$ref": "#/definitions/CassandraClusterRestoreResult"
             }
           },
           "default": {
@@ -641,8 +641,7 @@
           "200": {
             "description": "The following restore operation is in progress.",
             "schema": {
-
-              "$ref": "#/definitions/BackupResource"
+              "$ref": "#/definitions/CassandraClusterRestoreInfo"
             }
           },
           "default": {
@@ -1815,6 +1814,45 @@
           "description": "The retention period (hours) of the backups. If you want to retain data forever, set retention to 0.",
           "type": "integer",
           "format": "int32"
+        }
+      }
+    },
+    "CassandraClusterRestoreResult": {
+      "type": "object",
+      "properties": {
+        "exitCode": {
+          "description": "The exit code returned by the command.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "commandOutput": {
+          "description": "The output from the command.",
+          "type": "string"
+        },
+        "commandErrorOutput": {
+          "description": "The error generated from the command.",
+          "type": "string"
+        },
+        "backupId": {
+          "description": "Backup Id to restore.",
+          "type": "string"
+        },
+        "startTimestamp": {
+          "description": "Starting time of restore.",
+          "type": "string"
+        }
+      }
+    },
+    "CassandraClusterRestoreInfo": {
+      "type": "object",
+      "properties": {
+        "backupId": {
+          "description": "Restore's Backup Id.",
+          "type": "string"
+        },
+        "startTimestamp": {
+          "description": "Time that the restore started.",
+          "type": "string"
         }
       }
     },
