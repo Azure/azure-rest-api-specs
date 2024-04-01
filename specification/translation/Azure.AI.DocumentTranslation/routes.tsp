@@ -56,12 +56,6 @@ must be unique.
 """)
   @route("/document/batches")
   @OpenAPI.extension("x-ms-long-running-operation", true)
-  @OpenAPI.extension(
-    "x-ms-long-running-operation-options",
-    {
-      `final-state-via`: "azure-async-operation",
-    }
-  )
   @post
   startTranslation is Azure.Core.Foundations.Operation<
     StartTranslationDetails,
