@@ -1,12 +1,17 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Versioning;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.Core.Traits;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using Azure.ClientGenerator.Core;
 
 namespace DocumentTranslation;
 
@@ -50,6 +55,14 @@ destination, it will be overwritten. The targetUrl for each target language
 must be unique.
 """)
   @route("/document/batches")
+  @autoRoute
+  @OpenAPI.extension("x-ms-long-running-operation", true)
+  @OpenAPI.extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "location",
+    }
+  )
   @post
   startTranslation is Azure.Core.Foundations.Operation<
     StartTranslationDetails,
