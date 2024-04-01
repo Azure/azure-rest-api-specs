@@ -1879,7 +1879,7 @@
       }
     },
     "AllocatedQuotaToSubscriptionList": {
-      "type" : "object",
+      "type": "object",
       "description": "Quota allocated to subscriptions",
       "properties": {
         "value": {
@@ -2272,11 +2272,6 @@
     "ResourceUsageList": {
       "type": "object",
       "description": "List of resource usages and quotas for GroupQuota.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ARMTopLevelProperties"
-        }
-      ],
       "properties": {
         "value": {
           "type": "array",
@@ -2293,6 +2288,20 @@
       }
     },
     "ResourceUsages": {
+      "type": "object",
+      "description": "Resource details with usages and GroupQuota.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMTopLevelProperties"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GroupQuotaUsagesBase"
+        }
+      }
+    },
+    "GroupQuotaUsagesBase": {
       "type": "object",
       "description": "Resource details with usages and GroupQuota.",
       "properties": {
