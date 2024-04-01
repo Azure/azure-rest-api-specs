@@ -70,7 +70,7 @@ model OperationStatus {
 model Project {
   @doc("The unique URI of the project.")
   @added(APIVersions.v2024_02_01)
-  uri: string;
+  uri: url;
 
   @key("projectName")
   @doc("Name of the project")

@@ -149,7 +149,7 @@ model Environment {
 
   @doc("The unique URI of the environment")
   @added(APIVersions.v2024_02_01)
-  uri: string;
+  uri: url;
 
   @doc("Environment name.")
   @key("environmentName")
@@ -240,7 +240,7 @@ model EnvironmentOutput {
 @added(APIVersions.v2024_02_01)
 model EnvironmentOperation {
   @doc("The unique URI for the environment operation.")
-  uri: string;
+  uri: url;
 
   @doc("Unique identifier for the environment operation.")
   @visibility("read")
@@ -278,7 +278,7 @@ model EnvironmentAction {
   name: string;
 
   @doc("Uri of the action resource.")
-  uri?: string;
+  uri?: url;
 
   @doc("The action that will be taken.")
   actionType: EnvironmentActionType;
@@ -306,7 +306,7 @@ model EnvironmentNextAction {
 model Catalog {
   @doc("The unique URI of the catalog")
   @added(APIVersions.v2024_02_01)
-  uri: string;
+  uri: url;
 
   @doc("Name of the catalog.")
   @key("catalogName")
@@ -326,7 +326,7 @@ model EnvironmentDefinitionListResult is Azure.Core.Page<EnvironmentDefinition>;
 model EnvironmentDefinition {
   @doc("The unique URI of the environment definition")
   @added(APIVersions.v2024_02_01)
-  uri: string;
+  uri: url;
 
   @doc("The ID of the environment definition.")
   id: string;
@@ -397,7 +397,7 @@ model EnvironmentTypeListResult is Azure.Core.Page<EnvironmentType>;
 model EnvironmentType {
   @doc("The unique URI of the environment type.")
   @added(APIVersions.v2024_02_01)
-  uri: string;
+  uri: url;
 
   @doc("Name of the environment type")
   name: string;

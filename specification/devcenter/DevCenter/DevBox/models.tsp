@@ -298,7 +298,7 @@ union DevBoxRepairOutcome {
 model Pool {
   @doc("The unique URI of the pool")
   @added(APIVersions.v2024_02_01)
-  uri: string;
+  uri: url;
 
   @key("poolName")
   @visibility("read")
@@ -421,7 +421,7 @@ model ScheduleListResult is Azure.Core.Page<Schedule>;
 model Schedule {
   @doc("The unique URI of the schedule.")
   @added(APIVersions.v2024_02_01)
-  uri: string;
+  uri: url;
 
   @key("scheduleName")
   @visibility("read")
@@ -430,7 +430,7 @@ model Schedule {
 
   @doc("The URI of the resource that this schedule belongs to.")
   @added(APIVersions.v2024_02_01)
-  sourceUri: string;
+  sourceUri: url;
 
   @doc("The type of the resource that this schedule belongs to")
   @added(APIVersions.v2024_02_01)
@@ -459,7 +459,7 @@ model DevBoxListResult is Azure.Core.Page<DevBox>;
 model DevBox {
   @doc("The unique URI of the dev box.")
   @added(APIVersions.v2024_02_01)
-  uri?: string;
+  uri?: url;
 
   @key("devBoxName")
   @doc("Display name for the Dev Box")
@@ -561,7 +561,7 @@ model RemoteConnection {
 model DevBoxAction {
   @doc("The unique URI for the Dev Box action.")
   @added(APIVersions.v2024_02_01)
-  uri?: string;
+  uri?: url;
 
   @key("actionName")
   @doc("The name of the action.")
@@ -579,7 +579,7 @@ model DevBoxAction {
 
   @doc("The URI of the resource which triggered this action.")
   @added(APIVersions.v2024_02_01)
-  sourceUri: string;
+  sourceUri: url;
 
   @doc("The type of the resource which triggered this action.")
   @added(APIVersions.v2024_02_01)
@@ -606,7 +606,7 @@ model DevBoxActionsDelayMultipleResult
 model DevBoxActionDelayResult {
   @doc("The unique URI of the action.")
   @added(APIVersions.v2024_02_01)
-  uri?: string;
+  uri?: url;
 
   @doc("The name of the action.")
   name: string;
@@ -628,7 +628,7 @@ model DevBoxActionDelayResult {
 @discriminator("kind")
 model DevBoxOperation {
   @doc("The unique URI for the Dev Box operation.")
-  uri: string;
+  uri: url;
 
   @doc("Unique identifier for the Dev Box operation.")
   @visibility("read")
