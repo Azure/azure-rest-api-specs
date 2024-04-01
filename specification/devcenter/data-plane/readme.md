@@ -40,6 +40,10 @@ input-file:
   - Microsoft.DevCenter/preview/2024-05-01-preview/devbox.json
   - Microsoft.DevCenter/preview/2024-05-01-preview/devcenter.json
   - Microsoft.DevCenter/preview/2024-05-01-preview/environments.json
+
+directive:
+  - suppress: HostParametersValidation
+    reason: Requires URL format for endpoint params, which violates R2003 and causes problems with codegen
 ```
 ### Tag: 2024-02-01
 
