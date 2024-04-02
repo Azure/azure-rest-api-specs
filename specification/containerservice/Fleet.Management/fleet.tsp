@@ -1,7 +1,6 @@
 import "@typespec/rest";
 import "@typespec/openapi";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./helpers.tsp";
@@ -50,7 +49,12 @@ model FleetProperties {
 
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "https://github.com/Azure/typespec-azure/issues/3558"
   @doc("The FleetHubProfile configures the Fleet's hub.")
+  @added(Versions.v2022_09_02_preview)
+  @added(Versions.v2023_03_15_preview)
+  @added(Versions.v2023_06_15_preview)
+  @added(Versions.v2023_08_15_preview)
   @removed(Versions.v2023_10_15)
+  @added(Versions.v2024_02_02_preview)
   hubProfile?: FleetHubProfile;
 }
 
@@ -198,6 +202,12 @@ interface Fleets {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Use operationId to keep same name as deprecated sync operation"
   @added(Versions.v2023_06_15_preview)
   @operationId("Fleets_Update")
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "original-uri",
+    }
+  )
   @sharedRoute
   updateAsync is ArmCustomPatchAsync<
     Fleet,

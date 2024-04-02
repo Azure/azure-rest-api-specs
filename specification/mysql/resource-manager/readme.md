@@ -381,7 +381,7 @@ input-file:
 - Microsoft.DBforMySQL/FlexibleServers/stable/2023-12-30/FlexibleServers.json
 - Microsoft.DBforMySQL/FlexibleServers/stable/2023-12-30/AdvancedThreatProtectionSettings.json
 - Microsoft.DBforMySQL/LogFiles/preview/2023-06-01-preview/LogFiles.json
-- Microsoft.DBforMySQL/ServiceOperations/preview/2023-12-01-preview/ServiceOperations.json
+- Microsoft.DBforMySQL/ServiceOperations/stable/2023-12-30/ServiceOperations.json
 - Microsoft.DBforMySQL/Maintenance/preview/2023-10-01-preview/Maintenances.json
 suppressions:
   - code: PostOperationAsyncResponseValidation
@@ -427,7 +427,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
