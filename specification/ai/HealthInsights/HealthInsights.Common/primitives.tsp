@@ -4,7 +4,10 @@ using Azure.Core.Traits;
 
 namespace AzureHealthInsights;
 
-alias HealthInsightsRetryAfterTrait = ResponseHeadersTrait<Foundations.RetryAfterHeader, TraitContext.Read>;
+alias HealthInsightsRetryAfterTrait = ResponseHeadersTrait<
+  Foundations.RetryAfterHeader,
+  TraitContext.Read
+>;
 
 //   Note: I cannot use the following alias because of a bug in the compiler
 //   Using it return: "error intersect-duplicate-property: Intersection contains duplicate property definitions for responseHeaders"

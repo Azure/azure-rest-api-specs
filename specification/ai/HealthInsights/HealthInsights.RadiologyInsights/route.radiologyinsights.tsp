@@ -11,7 +11,6 @@ using TypeSpec.Http;
 
 namespace AzureHealthInsights;
 
-@route("radiology-insights")  
 interface RadiologyInsights {
   @summary("Get Radiology Insights job details")
   @tag("RadiologyInsights")

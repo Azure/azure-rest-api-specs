@@ -177,7 +177,6 @@ union VerificationStatusType {
   EnteredInError: "enteredInError",
 }
 
-
 @doc("""
 A location given as a combination of city, state and country/region. It could specify a city, a state or a country/region.
 In case a city is specified, either state +country/region or country/region (for countries/regions where there are no states) should be added.
