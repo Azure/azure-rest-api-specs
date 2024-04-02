@@ -4,13 +4,6 @@ using Azure.Core;
 
 namespace AzureHealthInsights;
 
-/**
- * Provides HealthInsights resource details for long running operations.
- * @template TRequest The type of the operation request data.
- * @template TResult The type of the operation result.
- * @template TStatusError The type of the operation status error. If not provided, the default error is used.
- */
-// @TypeSpec.Versioning.added(AzureHealthInsights.ApiVersion.v2024_04_01)
 @doc("Provides status details for long running operations.")
 model HealthInsightsJobBase {
   @key("id")
@@ -184,31 +177,6 @@ union VerificationStatusType {
   EnteredInError: "enteredInError",
 }
 
-// @doc("""
-// ClinicalStatusType based on FHIR ValueSet condition-clinical.
-// See: https://terminology.hl7.org/5.1.0/CodeSystem-condition-clinical.html
-// """)
-// union ClinicalStatusType {
-//  string,
-//
-//   @doc("The subject is currently experiencing the condition or situation, there is evidence of the condition or situation, or considered to be a significant risk.")
-//   Active: "active";
-//   @doc("The subject is experiencing a reoccurrence or repeating of a previously resolved condition or situation, e.g. urinary tract infection, food insecurity.")
-//   Recurrence: "recurrence";
-//   @doc("The subject is experiencing a return of a condition or situation after a period of improvement or remission, e.g. relapse of cancer, alcoholism.")
-//   Relapse: "relapse";
-//   @doc("The subject is no longer experiencing the condition or situation and there is no longer evidence or appreciable risk of the condition or situation.")
-//   Inactive: "inactive";
-//   @doc("The subject is not presently experiencing the condition or situation, but there is a risk of the condition or situation returning.")
-//   Remission: "remission";
-//   @doc("The subject is not presently experiencing the condition or situation and there is a negligible perceived risk of the condition or situation returning.")
-//   Resolved: "resolved";
-//   @doc("""
-//   The authoring/source system does not know which of the status values currently applies for this condition.
-//   Note: This concept is not to be used for 'other' - one of the listed statuses is presumed to apply, but the authoring/source system does not know which.
-//   """)
-//   Unknown: "unknown";
-// }
 
 @doc("""
 A location given as a combination of city, state and country/region. It could specify a city, a state or a country/region.

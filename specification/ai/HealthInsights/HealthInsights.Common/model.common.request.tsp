@@ -119,7 +119,7 @@ model PatientDocument {
   createdAt?: utcDateTime;
 
   @doc("Document author(s)")
-  @maxItems(1)
+  @minItems(1)
   authors?: Array<DocumentAuthor>;
 
   @doc("specialty type the document")
