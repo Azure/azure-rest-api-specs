@@ -29,3 +29,11 @@ suppressions:
         - Struct `LoadTestResourcePatchRequestBody` has been removed
         - Struct `OutboundEnvironmentEndpointCollection` has been removed
         - Struct `QuotaResourceList` has been removed
+  azure-sdk-for-js:
+  - package: '@azure/arm-loadtesting'
+    breaking-changes:
+        - Interface CheckQuotaAvailabilityResponse has a new required parameter id
+        - Interface CheckQuotaAvailabilityResponse has a new required parameter type
+        - Operation LoadTests.beginUpdate has a new signature
+        - Operation LoadTests.beginUpdateAndWait has a new signature
+        - Parameter domainName of interface EndpointDependency is now required
