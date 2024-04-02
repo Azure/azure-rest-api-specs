@@ -37,14 +37,18 @@ These settings apply only when `--tag=package-preview-2024-03` is specified on t
 ``` yaml $(tag) == 'package-preview-2024-03'
 input-file:
   - Microsoft.MobileNetwork/preview/2024-03-01-preview/attachedDataNetwork.json
+  - Microsoft.MobileNetwork/preview/2024-03-01-preview/attachedWifiSsid.json
   - Microsoft.MobileNetwork/preview/2024-03-01-preview/common.json
   - Microsoft.MobileNetwork/preview/2024-03-01-preview/dataNetwork.json
   - Microsoft.MobileNetwork/preview/2024-03-01-preview/diagnosticsPackage.json
+  - Microsoft.MobileNetwork/preview/2024-03-01-preview/edgeNetworkSecurityGroup.json
+  - Microsoft.MobileNetwork/preview/2024-03-01-preview/edgeVirtualNetwork.json
   - Microsoft.MobileNetwork/preview/2024-03-01-preview/mobileNetwork.json
   - Microsoft.MobileNetwork/preview/2024-03-01-preview/operation.json
   - Microsoft.MobileNetwork/preview/2024-03-01-preview/packetCapture.json
   - Microsoft.MobileNetwork/preview/2024-03-01-preview/packetCoreControlPlane.json
   - Microsoft.MobileNetwork/preview/2024-03-01-preview/packetCoreDataPlane.json
+  - Microsoft.MobileNetwork/preview/2024-03-01-preview/radioAccessNetwork.json
   - Microsoft.MobileNetwork/preview/2024-03-01-preview/service.json
   - Microsoft.MobileNetwork/preview/2024-03-01-preview/sim.json
   - Microsoft.MobileNetwork/preview/2024-03-01-preview/simGroup.json
@@ -53,6 +57,7 @@ input-file:
   - Microsoft.MobileNetwork/preview/2024-03-01-preview/slice.json
   - Microsoft.MobileNetwork/preview/2024-03-01-preview/ts29571.json
   - Microsoft.MobileNetwork/preview/2024-03-01-preview/ueInfo.json
+  - Microsoft.MobileNetwork/preview/2024-03-01-preview/wifiSsid.json
 ```
 ### Tag: package-2024-02
 

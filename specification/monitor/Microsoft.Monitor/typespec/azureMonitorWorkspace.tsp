@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -95,7 +94,7 @@ interface AzureMonitorWorkspaces {
     AzureMonitorWorkspaceProperties
   >;
   @doc("Delete a workspace")
-  delete is ArmResourceDeleteAsync<AzureMonitorWorkspace>;
+  delete is ArmResourceDeleteWithoutOkAsync<AzureMonitorWorkspace>;
   @doc("Lists all workspaces in the specified resource group")
   listByResourceGroup is ArmResourceListByParent<AzureMonitorWorkspace>;
   @doc("Lists all workspaces in the specified subscription")

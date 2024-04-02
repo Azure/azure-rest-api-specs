@@ -18,9 +18,9 @@ model SyslogReceiver {
 
 @doc("The syslog protocol to parse messages.")
 enum SyslogProtocol {
-  @doc("rfc3164.")
+  @doc("rfc3164 protocol.")
   rfc3164,
 
-  @doc("rfc5424.")
+  @doc("rfc5424 protocol.")
   rfc5424,
 }

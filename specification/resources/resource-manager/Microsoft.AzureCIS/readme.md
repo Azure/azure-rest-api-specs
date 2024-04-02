@@ -15,6 +15,8 @@ openapi-subtype: rpaas
 input-file:
   - preview/2023-08-22-preview/aad.json
   - preview/2023-08-22-preview/dscm.json
+  - preview/2023-08-22-preview/environment.json
+  - preview/2023-08-22-preview/genevaActions.json
   - preview/2023-08-22-preview/plannedQuota.json
 ```
 
@@ -32,13 +34,6 @@ input-file:
 input-file:
   - stable/2021-02-01/environment.json
   - stable/2021-02-01/dstsServiceAccount.json
-```
-
-```yaml $(tag) == '2023-08-22-preview'
-input-file:
-  - preview/2023-08-22-preview/genevaActions.json
-  - preview/2023-08-22-preview/dscm.json
-  - preview/2023-08-22-preview/plannedQuota.json
 ```
 
 ```yaml

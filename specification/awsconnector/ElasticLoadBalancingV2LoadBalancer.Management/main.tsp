@@ -55,8 +55,8 @@ model AwsElasticLoadBalancingV2LoadBalancerProperties {
   @doc("Gets and sets the property canonicalHostedZoneID. The ID of the Amazon Route 53 hosted zone associated with the load balancer.")
   canonicalHostedZoneID?: string;
 
-  @doc("Gets and sets the property dNSName. The public DNS name of the load balancer.")
-  dNSName?: string;
+  @doc("Gets and sets the property dnsName. The public DNS name of the load balancer.")
+  dnsName?: string;
 
   @doc("Gets and sets the property enforceSecurityGroupInboundRulesOnPrivateLinkTraffic. Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through PrivateLink")
   enforceSecurityGroupInboundRulesOnPrivateLinkTraffic?: string;

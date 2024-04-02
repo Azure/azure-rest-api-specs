@@ -6,8 +6,8 @@
     "jobsName": "repairnode",
     "api-version": "2023-12-01-preview",
     "resource": {
+      "kind": "RepairServer",
       "properties": {
-        "jobType": "RepairServer",
         "arcNodeResourceIds": [
           "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2"
         ],
@@ -31,9 +31,10 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/3ebebf5a-a1ad-46e4-a920-77f05b858001/resourceGroups/bhukumar-pvtrp-rg/providers/Private.AzureStackHCI/clusters/hciclu3/jobs/repairnode",
+        "id": "/subscriptions/3ebebf5a-a1ad-46e4-a920-77f05b858001/resourceGroups/bhukumar-pvtrp-rg/providers/Microsoft.AzureStackHCI/clusters/hciclu3/jobs/repairnode",
         "name": "repairnode",
-        "type": "private.azurestackhci/clusters/jobs",
+        "type": "Microsoft.AzureStackHCI/clusters/jobs",
+        "kind": "RepairServer",
         "systemData": {
           "createdBy": "bhukumar@microsoft.com",
           "createdByType": "User",
@@ -57,69 +58,70 @@
               "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-AzureStackLCMUserCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4c"
             }
           ],
-          "validationStatus": {
-            "status": "Error",
-            "steps": [
-              {
-                "fullStepIndex": "0",
-                "name": "Repair Server Deployment",
-                "description": "Repair Server.",
-                "startTimeUtc": "2023-06-09T00:08:19",
-                "endTimeUtc": "2023-06-09T04:01:47",
-                "status": "Error",
-                "exception": [
-                  "exception1",
-                  "exception2"
-                ],
-                "steps": [
-                  {
-                    "fullStepIndex": "0.1",
-                    "name": "Before Cloud Deployment",
-                    "description": "Before Cloud Deployment",
-                    "startTimeUtc": "2023-06-09T00:08:23",
-                    "endTimeUtc": "2023-06-09T01:10:10",
-                    "exception": [
-                      "exception1",
-                      "exception2"
-                    ],
-                    "steps": []
-                  }
-                ]
-              }
-            ]
+          "reportedProperties": {
+            "validationStatus": {
+              "status": "Error",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "Repair Server Deployment",
+                  "description": "Repair Server.",
+                  "startTimeUtc": "2023-06-09T00:08:19",
+                  "endTimeUtc": "2023-06-09T04:01:47",
+                  "status": "Error",
+                  "exception": [
+                    "exception1",
+                    "exception2"
+                  ],
+                  "steps": [
+                    {
+                      "fullStepIndex": "0.1",
+                      "name": "Before Cloud Deployment",
+                      "description": "Before Cloud Deployment",
+                      "startTimeUtc": "2023-06-09T00:08:23",
+                      "endTimeUtc": "2023-06-09T01:10:10",
+                      "exception": [
+                        "exception1",
+                        "exception2"
+                      ],
+                      "steps": []
+                    }
+                  ]
+                }
+              ]
+            },
+            "deploymentStatus": {
+              "status": "Error",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "Repair Server Deployment",
+                  "description": "Repair Server.",
+                  "startTimeUtc": "2023-06-09T00:08:19",
+                  "endTimeUtc": "2023-06-09T04:01:47",
+                  "status": "Error",
+                  "exception": [
+                    "exception1",
+                    "exception2"
+                  ],
+                  "steps": [
+                    {
+                      "fullStepIndex": "0.1",
+                      "name": "Before Cloud Deployment",
+                      "description": "Before Cloud Deployment",
+                      "startTimeUtc": "2023-06-09T00:08:23",
+                      "endTimeUtc": "2023-06-09T01:10:10",
+                      "exception": [
+                        "exception1",
+                        "exception2"
+                      ],
+                      "steps": []
+                    }
+                  ]
+                }
+              ]
+            }
           },
-          "deploymentStatus": {
-            "status": "Error",
-            "steps": [
-              {
-                "fullStepIndex": "0",
-                "name": "Repair Server Deployment",
-                "description": "Repair Server.",
-                "startTimeUtc": "2023-06-09T00:08:19",
-                "endTimeUtc": "2023-06-09T04:01:47",
-                "status": "Error",
-                "exception": [
-                  "exception1",
-                  "exception2"
-                ],
-                "steps": [
-                  {
-                    "fullStepIndex": "0.1",
-                    "name": "Before Cloud Deployment",
-                    "description": "Before Cloud Deployment",
-                    "startTimeUtc": "2023-06-09T00:08:23",
-                    "endTimeUtc": "2023-06-09T01:10:10",
-                    "exception": [
-                      "exception1",
-                      "exception2"
-                    ],
-                    "steps": []
-                  }
-                ]
-              }
-            ]
-          },
-          "jobType": "RepairServer",
           "provisioningState": "Succeeded",
           "percentComplete": 0,
           "arcNodeResourceIds": [
@@ -131,9 +133,10 @@
     },
     "201": {
       "body": {
-        "id": "/subscriptions/3ebebf5a-a1ad-46e4-a920-77f05b858001/resourceGroups/bhukumar-pvtrp-rg/providers/Private.AzureStackHCI/clusters/hciclu3/jobs/repairnode",
+        "id": "/subscriptions/3ebebf5a-a1ad-46e4-a920-77f05b858001/resourceGroups/bhukumar-pvtrp-rg/providers/Microsoft.AzureStackHCI/clusters/hciclu3/jobs/repairnode",
         "name": "repairnode",
-        "type": "private.azurestackhci/clusters/jobs",
+        "type": "Microsoft.AzureStackHCI/clusters/jobs",
+        "kind": "RepairServer",
         "systemData": {
           "createdBy": "bhukumar@microsoft.com",
           "createdByType": "User",
@@ -157,69 +160,70 @@
               "secretLocation": "https://sclusterkvnirhci35.vault.azure.net/secrets/cluster-34232342-AzureStackLCMUserCredential-f5bcc1d9-23af-4ae9-aca1-041d0f593a63/9276354aabfc492fa9b2cdbefb54ae4c"
             }
           ],
-          "validationStatus": {
-            "status": "Error",
-            "steps": [
-              {
-                "fullStepIndex": "0",
-                "name": "Repair Server Deployment",
-                "description": "Repair Server.",
-                "startTimeUtc": "2023-06-09T00:08:19",
-                "endTimeUtc": "2023-06-09T04:01:47",
-                "status": "Error",
-                "exception": [
-                  "exception1",
-                  "exception2"
-                ],
-                "steps": [
-                  {
-                    "fullStepIndex": "0.1",
-                    "name": "Before Cloud Deployment",
-                    "description": "Before Cloud Deployment",
-                    "startTimeUtc": "2023-06-09T00:08:23",
-                    "endTimeUtc": "2023-06-09T01:10:10",
-                    "exception": [
-                      "exception1",
-                      "exception2"
-                    ],
-                    "steps": []
-                  }
-                ]
-              }
-            ]
+          "reportedProperties": {
+            "validationStatus": {
+              "status": "Error",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "Repair Server Deployment",
+                  "description": "Repair Server.",
+                  "startTimeUtc": "2023-06-09T00:08:19",
+                  "endTimeUtc": "2023-06-09T04:01:47",
+                  "status": "Error",
+                  "exception": [
+                    "exception1",
+                    "exception2"
+                  ],
+                  "steps": [
+                    {
+                      "fullStepIndex": "0.1",
+                      "name": "Before Cloud Deployment",
+                      "description": "Before Cloud Deployment",
+                      "startTimeUtc": "2023-06-09T00:08:23",
+                      "endTimeUtc": "2023-06-09T01:10:10",
+                      "exception": [
+                        "exception1",
+                        "exception2"
+                      ],
+                      "steps": []
+                    }
+                  ]
+                }
+              ]
+            },
+            "deploymentStatus": {
+              "status": "Error",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "Repair Server Deployment",
+                  "description": "Repair Server.",
+                  "startTimeUtc": "2023-06-09T00:08:19",
+                  "endTimeUtc": "2023-06-09T04:01:47",
+                  "status": "Error",
+                  "exception": [
+                    "exception1",
+                    "exception2"
+                  ],
+                  "steps": [
+                    {
+                      "fullStepIndex": "0.1",
+                      "name": "Before Cloud Deployment",
+                      "description": "Before Cloud Deployment",
+                      "startTimeUtc": "2023-06-09T00:08:23",
+                      "endTimeUtc": "2023-06-09T01:10:10",
+                      "exception": [
+                        "exception1",
+                        "exception2"
+                      ],
+                      "steps": []
+                    }
+                  ]
+                }
+              ]
+            }
           },
-          "deploymentStatus": {
-            "status": "Error",
-            "steps": [
-              {
-                "fullStepIndex": "0",
-                "name": "Repair Server Deployment",
-                "description": "Repair Server.",
-                "startTimeUtc": "2023-06-09T00:08:19",
-                "endTimeUtc": "2023-06-09T04:01:47",
-                "status": "Error",
-                "exception": [
-                  "exception1",
-                  "exception2"
-                ],
-                "steps": [
-                  {
-                    "fullStepIndex": "0.1",
-                    "name": "Before Cloud Deployment",
-                    "description": "Before Cloud Deployment",
-                    "startTimeUtc": "2023-06-09T00:08:23",
-                    "endTimeUtc": "2023-06-09T01:10:10",
-                    "exception": [
-                      "exception1",
-                      "exception2"
-                    ],
-                    "steps": []
-                  }
-                ]
-              }
-            ]
-          },
-          "jobType": "RepairServer",
           "provisioningState": "Succeeded",
           "percentComplete": 0,
           "arcNodeResourceIds": [

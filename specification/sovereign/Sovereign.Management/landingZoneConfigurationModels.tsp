@@ -253,8 +253,11 @@ enum InfrastructureAsCodeOutputOptions {
   @doc("Value when generating Landing Zone code in Bicep.")
   Bicep: "Bicep",
 
+  @added(Versions.Preview20240331)
+  @doc("Value when generating landing zone code in Arm.")
+  ARM: "ARM",
+
   // values to be added in the future.
-  //arm: "ARM",
   //terraform: "Terraform",
 }
 

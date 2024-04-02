@@ -9,14 +9,10 @@
     label: Approved-OkToMerge
     onLabeledComments: >-
       Hi @${PRAuthor}! Your PR is approved. Congratulations. :partying_face::rocket: </br>
-      <li>
       If this PR is targeting `main` branch, then it cannot be merged, as `azure-rest-api-specs-pr` repo `main` branch 
-      is mirrored from `azure-rest-api-specs` `main`` branch. <br/>
-      If you want to publish the PR to the public repo (`Azure/azure-rest-api-specs`) `main` branch, 
-      please use [OpenAPIHub Publish PR](${openapiHub}/tools/publishpullrequest?pr=${owner}/${repo}/${PRNumber}&to=${to}).
-      </li><li>
-      For further guidance see [Spec Repos](https://eng.ms/docs/products/azure-developer-experience/design/api-specs-pr/api-repos).
-      </li>
+      is mirrored from `azure-rest-api-specs` `main` branch.<br/>
+      If you want to publish the PR to the public repo (`Azure/azure-rest-api-specs`) `main` branch,
+      see [aka.ms/azsdk/move-pr](https://aka.ms/azsdk/move-pr).
 
 - rule:
     type: label
@@ -82,7 +78,21 @@
 - rule:
     type: label
     label: Approved-BreakingChange
-    booleanFilterExpression: "!(ARMSignedOff||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit)&&ARMReview"
+    booleanFilterExpression: "!(ARMSignedOff||WaitForARMFeedback||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit)&&ARMReview"
+    onLabeledAddLabels:
+        - WaitForARMFeedback
+
+- rule:
+    type: label
+    label: BreakingChange-Approved-*
+    booleanFilterExpression: "!(ARMSignedOff||WaitForARMFeedback||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit)&&ARMReview"
+    onLabeledAddLabels:
+        - WaitForARMFeedback
+
+- rule:
+    type: label
+    label: Versioning-Approved-*
+    booleanFilterExpression: "!(ARMSignedOff||WaitForARMFeedback||ARMChangesRequested||Approved-OkToMerge||WaitForARMRevisit)&&ARMReview"
     onLabeledAddLabels:
         - WaitForARMFeedback
 

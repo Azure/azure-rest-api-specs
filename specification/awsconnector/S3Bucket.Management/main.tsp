@@ -854,11 +854,11 @@ model DataExport {
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of ServerSideEncryptionByDefault")
 model ServerSideEncryptionByDefault {
-  @doc("Gets and sets the property kMSMasterKeyID. 'KMSMasterKeyID' can only be used when you set the value of SSEAlgorithm as aws:kms or aws:kms:dsse.")
-  kMSMasterKeyID?: string;
+  @doc("Gets and sets the property kmsMasterKeyID. 'KMSMasterKeyID' can only be used when you set the value of SSEAlgorithm as aws:kms or aws:kms:dsse.")
+  kmsMasterKeyID?: string;
 
-  @doc("Gets and sets the property sSEAlgorithm.")
-  sSEAlgorithm?: ServerSideEncryptionByDefaultSSEAlgorithm;
+  @doc("Gets and sets the property sseAlgorithm.")
+  sseAlgorithm?: ServerSideEncryptionByDefaultSSEAlgorithm;
 }
 
 @doc("ServerSideEncryptionByDefaultSSEAlgorithm enum")

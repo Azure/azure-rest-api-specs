@@ -1,0 +1,1030 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Network Fabric Management Service API",
+    "description": "Self service experience for Azure Network Fabric API.",
+    "version": "2024-02-15-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "ProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Accepted",
+        "Succeeded",
+        "Updating",
+        "Deleting",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "ConfigurationState": {
+      "type": "string",
+      "description": "Configuration state for the resource.",
+      "readOnly": true,
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Rejected",
+        "Accepted",
+        "Provisioned",
+        "ErrorProvisioning",
+        "Deprovisioning",
+        "Deprovisioned",
+        "ErrorDeprovisioning",
+        "DeferredControl",
+        "Provisioning",
+        "PendingCommit"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ConfigurationState"
+      }
+    },
+    "AdministrativeState": {
+      "type": "string",
+      "description": "State defined to represent administrative actions or post actions on a particular resource.",
+      "enum": [
+        "Enabled",
+        "Disabled",
+        "MAT",
+        "RMA",
+        "UnderMaintenance"
+      ],
+      "readOnly": true,
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "AdministrativeState"
+      }
+    },
+    "AnnotationResource": {
+      "type": "object",
+      "description": "Switch configuration entries require a description to discern between configuration groups.",
+      "properties": {
+        "annotation": {
+          "type": "string",
+          "description": "Switch configuration description."
+        }
+      }
+    },
+    "ExtendedLocation": {
+      "type": "object",
+      "description": "The extended location.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The extended location type."
+        },
+        "name": {
+          "type": "string",
+          "description": "The extended location name."
+        }
+      }
+    },
+    "UpdateAdministrativeState": {
+      "type": "object",
+      "description": "Update administrative state on list of resources.",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "Administrative state.",
+          "enum": [
+            "Enable",
+            "Disable",
+            "UnderMaintenance"
+          ],
+          "x-ms-enum": {
+            "name": "EnableDisableState",
+            "modelAsString": true
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnableDisableOnResources"
+        }
+      ]
+    },
+    "UpdateVersion": {
+      "type": "object",
+      "description": "Update version properties.",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Specify the version."
+        }
+      }
+    },
+    "EnableDisableOnResources": {
+      "type": "object",
+      "description": "Update administrative state on list of resources.",
+      "properties": {
+        "resourceIds": {
+          "type": "array",
+          "description": "Network Fabrics or Network Rack resource Id.",
+          "items": {
+            "description": "Network Fabrics or Network Rack resource Id.",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CommonPostActionResponseForDeviceUpdate": {
+      "type": "object",
+      "description": "Common response for device updates.",
+      "properties": {
+        "configurationState": {
+          "description": "Gets the configuration state.",
+          "$ref": "#/definitions/ConfigurationState"
+        },
+        "successfulDevices": {
+          "type": "array",
+          "description": "List of ARM Resource IDs for which the given action applied successfully.",
+          "items": {
+            "description": "ARM Resource ID.",
+            "type": "string"
+          }
+        },
+        "failedDevices": {
+          "type": "array",
+          "description": "List of ARM Resource IDs for which the given action failed to apply.",
+          "items": {
+            "description": "ARM Resource ID.",
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "description": "The error message.",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+        }
+      ]
+    },
+    "CommonPostActionResponseForStateUpdate": {
+      "type": "object",
+      "description": "Common response for the state updates.",
+      "properties": {
+        "configurationState": {
+          "description": "Gets the configuration state.",
+          "$ref": "#/definitions/ConfigurationState"
+        }
+      },
+      "allOf": [
+        {
+          "description": "The error message.",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+        }
+      ]
+    },
+    "ValidateConfigurationResponse": {
+      "type": "object",
+      "description": "The response of the action validate configuration.",
+      "properties": {
+        "configurationState": {
+          "description": "Gets the configuration state.",
+          "$ref": "#/definitions/ConfigurationState"
+        },
+        "url": {
+          "type": "string",
+          "description": "URL for the details of the response."
+        }
+      },
+      "allOf": [
+        {
+          "description": "The error message.",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+        }
+      ]
+    },
+    "BooleanEnumProperty": {
+      "type": "string",
+      "description": "Boolean Enum. Example- True/False",
+      "enum": [
+        "True",
+        "False"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "BooleanEnumProperty"
+      }
+    },
+    "PeeringOption": {
+      "type": "string",
+      "description": "Peering option list.",
+      "enum": [
+        "OptionA",
+        "OptionB"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "PeeringOption"
+      }
+    },
+    "CommunityActionTypes": {
+      "type": "string",
+      "description": "community action types. Example: Permit | Deny.",
+      "enum": [
+        "Permit",
+        "Deny"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "communityActionTypes"
+      }
+    },
+    "TagsUpdate": {
+      "description": "Base tracked resource type for PATCH updates.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      }
+    },
+    "BfdConfiguration": {
+      "type": "object",
+      "description": "BFD configuration properties",
+      "properties": {
+        "administrativeState": {
+          "type": "string",
+          "description": "Administrative state of the BfdConfiguration. Example: Enabled | Disabled.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled",
+            "MAT",
+            "RMA"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "BfdAdministrativeState"
+          }
+        },
+        "intervalInMilliSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "default": 300,
+          "description": "Interval in milliseconds. Example: 300."
+        },
+        "multiplier": {
+          "type": "integer",
+          "format": "int32",
+          "default": 5,
+          "description": "Multiplier for the Bfd Configuration. Example: 5."
+        }
+      }
+    },
+    "StaticRouteProperties": {
+      "type": "object",
+      "description": "Route Properties.",
+      "properties": {
+        "prefix": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Prefix of the route."
+        },
+        "nextHop": {
+          "type": "array",
+          "minItems": 1,
+          "description": "List of next hop addresses.",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Next Hop address."
+          }
+        }
+      },
+      "required": [
+        "prefix",
+        "nextHop"
+      ]
+    },
+    "Layer3IpPrefixProperties": {
+      "type": "object",
+      "description": "Layer 3 primary and secondary IP Address prefixes.",
+      "properties": {
+        "primaryIpv4Prefix": {
+          "type": "string",
+          "description": "IPv4 Address Prefix."
+        },
+        "primaryIpv6Prefix": {
+          "type": "string",
+          "description": "IPv6 Address Prefix."
+        },
+        "secondaryIpv4Prefix": {
+          "type": "string",
+          "description": "Secondary IPv4 Address Prefix."
+        },
+        "secondaryIpv6Prefix": {
+          "type": "string",
+          "description": "Secondary IPv6 Address Prefix."
+        }
+      }
+    },
+    "RouteTargetInformation": {
+      "description": "Route Target Configuration.",
+      "type": "object",
+      "properties": {
+        "importIpv4RouteTargets": {
+          "type": "array",
+          "description": "Route Targets to be applied for incoming routes into CE.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Import IPv4 route target. Example: 65541:2001, 65542:2001."
+          }
+        },
+        "importIpv6RouteTargets": {
+          "type": "array",
+          "description": "Route Targets to be applied for incoming routes from CE.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Import IPv6 route target. Example: 65531, 65532."
+          }
+        },
+        "exportIpv4RouteTargets": {
+          "type": "array",
+          "description": "Route Targets to be applied for outgoing routes into CE.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Export IPV4 route target. Example: 65541:2001, 65542:2001."
+          }
+        },
+        "exportIpv6RouteTargets": {
+          "type": "array",
+          "description": "Route Targets to be applied for outgoing routes from CE.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Export IPV6 route target. Example: 65531, 65532."
+          }
+        }
+      }
+    },
+    "ImportRoutePolicyInformation": {
+      "type": "object",
+      "description": "Import Route Policy Configuration.",
+      "properties": {
+        "importIpv4RoutePolicyId": {
+          "description": "Import IPv4 Route Policy Id.",
+          "$ref": "#/definitions/RoutePolicyIdProperty"
+        },
+        "importIpv6RoutePolicyId": {
+          "description": "Import IPv6 Route Policy Id.",
+          "$ref": "#/definitions/RoutePolicyIdProperty"
+        }
+      }
+    },
+    "ExportRoutePolicyInformation": {
+      "type": "object",
+      "description": "Export Route Policy Configuration.",
+      "properties": {
+        "exportIpv4RoutePolicyId": {
+          "description": "Export IPv4 Route Policy Id.",
+          "$ref": "#/definitions/RoutePolicyIdProperty"
+        },
+        "exportIpv6RoutePolicyId": {
+          "description": "Export IPv6 Route Policy Id.",
+          "$ref": "#/definitions/RoutePolicyIdProperty"
+        }
+      }
+    },
+    "CommonMatchConditions": {
+      "type": "object",
+      "description": "Defines the common match conditions of the ACL and Network Tap Rule.",
+      "properties": {
+        "protocolTypes": {
+          "type": "array",
+          "minItems": 1,
+          "description": "List of the protocols that need to be matched.",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Specify the protocol that to needs to matched. Inputs can be <protocol-name> or <protocol-number> or <range of protocol numbers>."
+          }
+        },
+        "vlanMatchCondition": {
+          "description": "Vlan match condition that needs to be matched.",
+          "$ref": "#/definitions/VlanMatchCondition"
+        },
+        "ipCondition": {
+          "description": "IP condition that needs to be matched.",
+          "$ref": "#/definitions/IpMatchCondition"
+        }
+      }
+    },
+    "PortCondition": {
+      "type": "object",
+      "description": "Port condition that needs to be matched.",
+      "properties": {
+        "portType": {
+          "type": "string",
+          "description": "Port type that needs to be matched.",
+          "minLength": 1,
+          "enum": [
+            "SourcePort",
+            "DestinationPort"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "PortType"
+          }
+        },
+        "layer4Protocol": {
+          "type": "string",
+          "description": "Layer4 protocol type that needs to be matched.",
+          "minLength": 1,
+          "enum": [
+            "TCP",
+            "UDP"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "Layer4Protocol"
+          }
+        },
+        "ports": {
+          "type": "array",
+          "description": "List of the Ports that need to be matched.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Port number that needs to be matched. Inputs can be <port-number> or <range-of-ports>"
+          }
+        },
+        "portGroupNames": {
+          "type": "array",
+          "description": "List of the port Group Names that need to be matched.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Port Group Name."
+          }
+        }
+      },
+      "required": [
+        "layer4Protocol"
+      ]
+    },
+    "VlanMatchCondition": {
+      "type": "object",
+      "description": "The vlan match conditions that need to be matched.",
+      "properties": {
+        "vlans": {
+          "type": "array",
+          "description": "List of vlans that need to be matched.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Specify the Vlan. Inputs can be single vlan or the range of vlans.",
+            "example": "10-20"
+          }
+        },
+        "innerVlans": {
+          "type": "array",
+          "description": "List of inner vlans that need to be matched.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Specify the inner vlan. Inputs can be single vlan or the range of vlans.",
+            "example": "20-30"
+          }
+        },
+        "vlanGroupNames": {
+          "type": "array",
+          "description": "List of vlan group names that need to be matched.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Vlan group name."
+          }
+        }
+      }
+    },
+    "IpMatchCondition": {
+      "type": "object",
+      "description": "Defines the condition that can be filtered using the selected IPs.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "IP Address type that needs to be matched.",
+          "minLength": 1,
+          "enum": [
+            "SourceIP",
+            "DestinationIP"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "SourceDestinationType"
+          }
+        },
+        "prefixType": {
+          "type": "string",
+          "description": "IP Prefix Type that needs to be matched.",
+          "minLength": 1,
+          "enum": [
+            "Prefix",
+            "LongestPrefix"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "PrefixType"
+          }
+        },
+        "ipPrefixValues": {
+          "type": "array",
+          "description": "The list of IP Prefixes that need to be matched.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The valid IP Prefix."
+          }
+        },
+        "ipGroupNames": {
+          "type": "array",
+          "description": "The List of IP Group Names that need to be matched.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "description": "IP Group Name."
+          }
+        }
+      }
+    },
+    "CommonDynamicMatchConfiguration": {
+      "type": "object",
+      "description": "Dynamic match configuration object.",
+      "properties": {
+        "ipGroups": {
+          "type": "array",
+          "description": "List of IP Groups.",
+          "minItems": 1,
+          "items": {
+            "description": "IP Group",
+            "$ref": "#/definitions/IpGroupProperties"
+          }
+        },
+        "vlanGroups": {
+          "type": "array",
+          "description": "List of vlan groups.",
+          "minItems": 1,
+          "items": {
+            "description": "Vlan group",
+            "$ref": "#/definitions/VlanGroupProperties"
+          }
+        },
+        "portGroups": {
+          "type": "array",
+          "description": "List of the port groups.",
+          "minItems": 1,
+          "items": {
+            "description": "Port Group",
+            "$ref": "#/definitions/PortGroupProperties"
+          }
+        }
+      }
+    },
+    "IpGroupProperties": {
+      "type": "object",
+      "description": "IP Group properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "IP Group name."
+        },
+        "ipAddressType": {
+          "description": "IP Address type.",
+          "$ref": "#/definitions/IPAddressTypeEnumProperty"
+        },
+        "ipPrefixes": {
+          "type": "array",
+          "description": "List of IP Prefixes.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "description": "IP Prefix."
+          }
+        }
+      }
+    },
+    "VlanGroupProperties": {
+      "type": "object",
+      "description": "Vlan group properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Vlan group name."
+        },
+        "vlans": {
+          "type": "array",
+          "description": "List of vlans.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Vlan. It may be a single vlan or the range of the vlans.",
+            "example": "10-20"
+          }
+        }
+      }
+    },
+    "PortGroupProperties": {
+      "type": "object",
+      "description": "Port Group properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The name of the port group."
+        },
+        "ports": {
+          "type": "array",
+          "description": "List of the ports that need to be matched.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Port Number. Inputs can be single port or the range of ports.",
+            "example": "10-20"
+          }
+        }
+      }
+    },
+    "NetworkFabricControllerIdProperty": {
+      "type": "string",
+      "description": "ARM resource ID of the Network Fabric Controller.",
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ManagedNetworkFabric/networkFabricControllers"
+          }
+        ]
+      },
+      "example": "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkFabricControllers/example-controller"
+    },
+    "NetworkFabricIdProperty": {
+      "type": "string",
+      "description": "ARM resource ID of the Network Fabric.",
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ManagedNetworkFabric/networkFabrics"
+          }
+        ]
+      },
+      "example": "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkFabrics/example-networkFabric"
+    },
+    "NetworkToNetworkInterconnectIdProperty": {
+      "type": "string",
+      "description": "ARM resource ID of the Network To network Interconnects.",
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ManagedNetworkFabric/networkFabrics/networkToNetworkInterconnects"
+          }
+        ]
+      },
+      "example": "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkFabrics/example-networkFabric/networkTonetworkInterconnects/example-nni"
+    },
+    "L3IsolationDomainIdProperty": {
+      "type": "string",
+      "description": "ARM resource ID of the L3 Isolation Domain.",
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ManagedNetworkFabric/l3IsolationDomains"
+          }
+        ]
+      },
+      "example": "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomains/example-l3Domain"
+    },
+    "InternalNetworkIdProperty": {
+      "type": "string",
+      "description": "ARM resource ID of the Internal Networks.",
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ManagedNetworkFabric/l3IsolationDomains/internalNetworks"
+          }
+        ]
+      },
+      "example": "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomain/example-l3Domain/internalNetworks/example-internalNetwork"
+    },
+    "ExternalNetworkIdProperty": {
+      "type": "string",
+      "description": "ARM resource ID of the External Networks.",
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ManagedNetworkFabric/l3IsolationDomains/externalNetworks"
+          }
+        ]
+      },
+      "example": "/subscriptions/xxxx-xxxx-xxxx-xxxx/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/l3IsolationDomain/example-l3Domain/externalNetworks/example-externalNetwork"
+    },
+    "NetworkDeviceIdProperty": {
+      "type": "string",
+      "description": "ARM resource ID of the NetworkDevice.",
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ManagedNetworkFabric/networkDevices"
+          }
+        ]
+      },
+      "example": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkDevices/{networkDeviceName}"
+    },
+    "NetworkInterfaceIdProperty": {
+      "type": "string",
+      "description": "ARM resource ID of the NetworkDevice/networkInterface.",
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ManagedNetworkFabric/networkDevices/networkInterfaces"
+          }
+        ]
+      },
+      "example": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkDevices/{networkDeviceName}/networkInterfaces/{networkInterfaceName}"
+    },
+    "RoutePolicyIdProperty": {
+      "type": "string",
+      "description": "ARM resource ID of Route Policy.",
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ManagedNetworkFabric/routePolicies"
+          }
+        ]
+      },
+      "example": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/routePolicies/{routePolicyName}"
+    },
+    "IpCommunityIdProperty": {
+      "type": "string",
+      "description": "ARM resource ID of IP Community.",
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ManagedNetworkFabric/ipCommunities"
+          }
+        ]
+      },
+      "example": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/ipCommunities/{ipCommunityName}"
+    },
+    "IpExtendedCommunityIdProperty": {
+      "type": "string",
+      "description": "ARM resource ID of IP Extended Community.",
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ManagedNetworkFabric/ipExtendedCommunities"
+          }
+        ]
+      },
+      "example": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/ipExtendedCommunities/{ipExtendedCommunityName}"
+    },
+    "IpPrefixIdProperty": {
+      "type": "string",
+      "description": "ARM resource ID of IP Prefix.",
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ManagedNetworkFabric/ipPrefixes"
+          }
+        ]
+      },
+      "example": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/ipPrefixes/{ipPrefixName}"
+    },
+    "NetworkPacketBrokerIdProperty": {
+      "type": "string",
+      "description": "ARM resource ID of Network Packet Broker.",
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ManagedNetworkFabric/networkPacketBrokers"
+          }
+        ]
+      },
+      "example": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkPacketBrokers/{networkPacketBrokerName}"
+    },
+    "NetworkTapIdProperty": {
+      "type": "string",
+      "description": "ARM resource ID of Network Tap.",
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ManagedNetworkFabric/networkTaps"
+          }
+        ]
+      },
+      "example": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkTaps/{networkTapName}"
+    },
+    "NetworkTapRuleIdProperty": {
+      "type": "string",
+      "description": "ARM resource ID of Network Tap Rule.",
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ManagedNetworkFabric/networkTapRules"
+          }
+        ]
+      },
+      "example": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/networkTapRules/{networkTapRuleName}"
+    },
+    "NeighborGroupIdProperty": {
+      "type": "string",
+      "description": "ARM resource ID of Neighbor Group.",
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ManagedNetworkFabric/neighborGroups"
+          }
+        ]
+      },
+      "example": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/neighborGroups/{neighborGroupName}"
+    },
+    "AccessControlListIdProperty": {
+      "type": "string",
+      "description": "ARM resource ID of Access Control Lists.",
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ManagedNetworkFabric/accessControlLists"
+          }
+        ]
+      },
+      "example": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/accessControlLists/{accessControlListName}"
+    },
+    "InternetGatewayIdProperty": {
+      "type": "string",
+      "description": "ARM resource ID of Internet Gateway.",
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ManagedNetworkFabric/internetGateways"
+          }
+        ]
+      },
+      "example": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/internetGateways/{internetGatewayName}"
+    },
+    "InternetGatewayRuleIdProperty": {
+      "type": "string",
+      "description": "ARM resource ID of Internet Gateway Rule.",
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ManagedNetworkFabric/internetGatewayRules"
+          }
+        ]
+      },
+      "example": "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/internetGatewayRules/{internetGatewayRuleName}"
+    },
+    "IPAddressTypeEnumProperty": {
+      "type": "string",
+      "description": "IP Address type.",
+      "minLength": 1,
+      "enum": [
+        "IPv4",
+        "IPv6"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "IPAddressType"
+      }
+    },
+    "DeviceRoCommand": {
+      "type": "object",
+      "description": "Provide the RO command",
+      "properties": {
+        "command": {
+          "type": "string",
+          "description": "Specify the command."
+        }
+      }
+    },
+    "DeviceRwCommand": {
+      "type": "object",
+      "description": "Provide the Rw command",
+      "properties": {
+        "command": {
+          "type": "string",
+          "description": "Specify the command."
+        }
+      }
+    },
+    "CommonPostActionResponseForDeviceROCommands": {
+      "type": "object",
+      "description": "Common response for device Ro Commands.",
+      "properties": {
+        "configurationState": {
+          "description": "Gets the configuration state.",
+          "$ref": "#/definitions/ConfigurationState"
+        },
+        "outputUrl": {
+          "description": "Predefined link containing Device RO Command output.",
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+        }
+      ]
+    },
+    "CommonPostActionResponseForDeviceRWCommands": {
+      "type": "object",
+      "description": "Common response for device Rw Commands.",
+      "properties": {
+        "configurationState": {
+          "description": "Gets the configuration state.",
+          "$ref": "#/definitions/ConfigurationState"
+        },
+        "outputUrl": {
+          "description": "Predefined link containing Device Rw Command output.",
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "description": "The error message.",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+        }
+      ]
+    }
+  },
+  "parameters": {}
+}

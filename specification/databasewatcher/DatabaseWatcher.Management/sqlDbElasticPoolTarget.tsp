@@ -16,11 +16,19 @@ model SqlDbElasticPoolTargetProperties extends TargetProperties {
   @doc("The Azure SQL DB elastic pool target.")
   targetType: "SqlEp";
 
-  @doc("The ARM ResourceId of an Azure SQL DB elastic pool target.")
-  sqlEpResourceId: string;
+  @doc("The Azure ResourceId of an Azure SQL DB elastic pool target.")
+  sqlEpResourceId: ResourceIdentifier<[
+    {
+      type: "Microsoft.Sql/servers/elasticPools";
+    }
+  ]>;
 
-  @doc("The ARM ResourceId of the anchor database used to connect to an elastic pool.")
-  anchorDatabaseResourceId: string;
+  @doc("The Azure ResourceId of the anchor database used to connect to an elastic pool.")
+  anchorDatabaseResourceId: ResourceIdentifier<[
+    {
+      type: "Microsoft.Sql/servers/databases";
+    }
+  ]>;
 
   @doc("Set to true to monitor a high availability replica of specified target, if any.")
   readIntent?: boolean = false;

@@ -91,8 +91,8 @@ model AwsDynamoDBTableProperties {
   @doc("Gets and sets the property provisionedThroughput.")
   provisionedThroughput?: ProvisionedThroughput;
 
-  @doc("Gets and sets the property sSESpecification.")
-  sSESpecification?: SSESpecification;
+  @doc("Gets and sets the property sseSpecification.")
+  sseSpecification?: SSESpecification;
 
   @doc("Gets and sets the property streamArn.")
   streamArn?: string;
@@ -240,14 +240,14 @@ model ProvisionedThroughput {
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
 @doc("Definition of SSESpecification")
 model SSESpecification {
-  @doc("Gets and sets the property kMSMasterKeyId.")
-  kMSMasterKeyId?: string;
+  @doc("Gets and sets the property kmsMasterKeyId.")
+  kmsMasterKeyId?: string;
 
-  @doc("Gets and sets the property sSEEnabled.")
-  sSEEnabled?: boolean;
+  @doc("Gets and sets the property sseEnabled.")
+  sseEnabled?: boolean;
 
-  @doc("Gets and sets the property sSEType.")
-  sSEType?: string;
+  @doc("Gets and sets the property sseType.")
+  sseType?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."

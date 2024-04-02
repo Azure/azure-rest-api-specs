@@ -19,7 +19,7 @@ namespace Microsoft.MobilePacketCore;
 @resource("nrfDeployments")
 model NrfDeploymentResource
   is TrackedResource<NrfDeploymentResourceProperties> {
-  @doc("The name of the NrfDeployment")
+  @doc("The name of the NRF Deployment")
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]$")
   @minLength(1)
   @maxLength(63)
@@ -41,6 +41,7 @@ model NrfDeploymentResourceProperties {
 
   @doc("Azure for Operators 5G Core NRF secrets parameters")
   @secret
+  @visibility("create", "update")
   secretsParameters?: ComponentDeploymentSecrets;
 
   @doc("Reference to cluster where the Network Function is deployed")
@@ -62,6 +63,8 @@ interface NrfDeployments {
   createOrUpdate is ArmResourceCreateOrUpdate2Async<NrfDeploymentResource>;
   updateTags is ArmTagsPatchSync<NrfDeploymentResource>;
   delete is ArmResourceDeleteWithoutOkAsync<NrfDeploymentResource>;
+  @doc("List all Network Repository Function Deployments by Resource Group.")
   listByResourceGroup is ArmResourceListByParent<NrfDeploymentResource>;
+  @doc("List all Network Repository Function Deployments by Subscription ID.")
   listBySubscription is ArmListBySubscription<NrfDeploymentResource>;
 }

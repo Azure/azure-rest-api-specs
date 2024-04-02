@@ -32,16 +32,16 @@ title: MonitorClient
 description: Monitor Management Client
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2023-04
+tag: package-2023-10-01-preview
 ```
 
 ### Tag: package-2023-10-01-preview
 
 These settings apply only when `--tag=package-2023-10-01-preview` is specified on the command line
 
-``` yaml $(tag) == 'package-2023-2023-10-01-preview'
+``` yaml $(tag) == 'package-2023-10-01-preview'
 input-file:
-- Microsoft.Monitor\stable\2023-10-01-preview\azuremonitor.json
+- Microsoft.Monitor\preview\2023-10-01-preview\azuremonitor.json
 ```
 
 ### Tag: package-2023-05-01-preview-only
@@ -86,6 +86,7 @@ input-file:
   - Microsoft.Insights/stable/2022-06-01/dataCollectionRuleAssociations_API.json
   - Microsoft.Insights/stable/2022-06-01/dataCollectionRules_API.json
 ```
+
 ### Tag: package-preview-2023-04
 
 These settings apply only when `--tag=package-preview-2023-04` is specified on the command line.

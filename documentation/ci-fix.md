@@ -26,9 +26,11 @@
   - [`Swagger ApiDocPreview`](#swagger-apidocpreview)
   - [`TypeSpec Validation`](#typespec-validation)
     - [Run `tsv` locally](#run-tsv-locally)
+  - [APIView Failures: troubleshooting guides](#apiview-failures-troubleshooting-guides)
   - [Suppression Process](#suppression-process)
   - [Checks not covered by this guide](#checks-not-covered-by-this-guide)
   - [Obsolete checks](#obsolete-checks)
+
 
 # CI Fix Guide
 
@@ -109,7 +111,6 @@ npm install -g oav
 oav validate-example <openapi-spec-path>
 ```
 Please see [readme](https://github.com/Azure/oav/blob/bd04e228b4181c53769ed88e561dec5212e77253/README.md) for how to install or run tool in details.
-Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/static-validation/static/errors/default).
 Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Semantic-and-Model-Violations-Reference.md) for detailed description of validations and how-to-fix guidance.
 Refer to [Swagger-Example-Generation](https://github.com/Azure/oav/blob/develop/documentation/example-generation.md) for example automatic generation.
 
@@ -121,31 +122,20 @@ npm install -g oav
 oav validate-spec <openapi-spec-path>
 ```
 Please see [readme](https://github.com/Azure/oav/blob/bd04e228b4181c53769ed88e561dec5212e77253/README.md) for how to install or run tool in details.
-Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/static-validation/static/errors/default)
 Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Semantic-and-Model-Violations-Reference.md) for detailed description of validations and how-to-fix guidance.
 
 ## `Swagger BreakingChange` and `BreakingChange(Cross-Version)`
 
-- An API contract is identified by its api-version value. Once published, no changes to this API contract are allowed. This applies regardless of whether the API contract is for private preview, public preview, or GA (stable).
-    - The same-version breaking change linter rules check for changes to an existing api-version OpenAPI spec.
-        - When introducing a new API contract (preview or not), the new API contract must be backwards compatible with the previous GA’s API contract.
-            - However, during a (private or public) preview cycle, a new preview API contract does not have to be backwards compatible with the previous preview API contract although it must still be backwards compatible with the latest GA API contract.
-            - The cross version breaking change linter rules checks for this by comparing the new OpenAPI spec with the latest GA OpenAPI spec. If there is no latest GA OpenAPI spec, then the latest preview if it > 1 year old. If nether a GA or preview > 1 year old exists, then the OpenAPI spec is considered good.
-
-### Adding label on PR automatically
-
-The breaking change check has two types of violations: one is breaking change in the same version but not breaking change in a new version, the other is breaking change even in a new version.
-For the former, a label 'NewApiVersionRequired' will be added automatically; For the latter, a label 'BreakingChangeReviewRequired' will be added automatically. Adding each label will trigger a github comment with guldance on how to fix.
+See [aka.ms/azsdk/pr-brch-deep](https://aka.ms/azsdk/pr-brch-deep). If you want a quick read, see only [the `summary` section](https://aka.ms/azsdk/pr-brch-deep#summary).
 
 ### Run `oad` locally
 
-To repro issues with "breaking changes" checks, you can locally run the tool that powers them [Azure/openapi-diff](https://github.com/Azure/openapi-diff) aka `oad`:
+To repro issues with "breaking changes" checks, you can locally run the tool that powers them: [Azure/openapi-diff](https://github.com/Azure/openapi-diff), aka `oad`:
 ```
 npm install -g @azure/oad
 oad compare <old-spec-path> <new-spec-path>
 ```
 Please see [readme](https://github.com/Azure/openapi-diff/blob/main/README.md) for how to install or run tool in details.
-Or you can run it in [OpenAPI Hub](https://portal.azure-devex-tools.com/tools/diff).
 Refer to [Oad Docs](https://github.com/Azure/openapi-diff/tree/main/docs) for detailed description of all oad rules.
 
 ## `Swagger LintDiff` and `Swagger Lint(RPaaS)`
@@ -265,6 +255,25 @@ that the generated OpenAPI spec files were not in-sync with the TypeSpec project
 
 If none of the above helped, please reach out on [TypeSpec Discussions Teams channel].
 
+## APIView Failures: troubleshooting guides
+Various APIViews are generated as part of the Azure REST API specs PR build. Among these are TypeSpec and Swagger as well as any other language that is being generated in the run. When everything is successful you should see a comment box similar to the picture below showing the APIViews generated for TypeSpec or Swagger, plus all other languages being generated.
+
+![alt text](image-3.png)
+
+#### If an expected APIView was not generated, follow the step below to troubleshoot.
+
+- On the CI check click on `details` > `View Azure DevOps build log for more details` to view the devOps logs.
+- Investigate the CI job for the languge with error. TypeSpec and Swagger APIViews are generated as part of the `AzureRestApiSpecsPipeline` stage in the `TypeSpecAPIView` and `SwaggerAPIView` jobs respectively, while APIViews for other SDK languges are generated in their respective language jobs in the `SDK Automation` stage.
+- Ensure that all previous checks in the job are green before proceeding. 
+
+#### Diagnosing APIView failure for SDK Language (not Swagger or TypeSpec)
+1. Check for an unexpected skip of the `Publish SDK APIView Artifact to Pipeline Artifacts` and `Generate SDK APIView` step.
+2. Look in `SDK Automation` step to verify that the API token generation completed successfully.
+3. Search logs for `Read Temp File`
+4. Below `Read Temp File` find the .json object and search within to locate the `apiViewArtifact` property.
+5. If not present, the APIView parser for the language failed to generate the `APIView Token Artifacts`.
+6. Please contact [APIView Support Teams Channel] for assistance.
+
 ## Suppression Process
 
 In case there are validation errors reported against your service that you believe do not apply, we have a suppression process you can follow to permanently remove these reported errors for your specs. Refer to the [suppression guide](https://aka.ms/pr-suppressions) for detailed guidance.
@@ -288,3 +297,4 @@ Following checks have been removed from the validation toolchain as of August 20
 [aka.ms/azsdk/support/specreview-channel]: https://aka.ms/azsdk/support/specreview-channel
 [aka.ms/azsdk/support]: https://aka.ms/azsdk/support
 [TypeSpec Discussions Teams channel]: https://teams.microsoft.com/l/channel/19%3A906c1efbbec54dc8949ac736633e6bdf%40thread.skype/TypeSpec%20Discussion%20%F0%9F%90%AE?groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47
+[APIView Support Teams Channel]: https://teams.microsoft.com/l/channel/19%3A3adeba4aa1164f1c889e148b1b3e3ddd%40thread.skype/APIView?groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47

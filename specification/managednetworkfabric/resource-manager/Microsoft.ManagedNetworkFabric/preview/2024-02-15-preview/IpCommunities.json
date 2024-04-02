@@ -1,0 +1,519 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Network Fabric Management Service API",
+    "description": "Self service experience for Azure Network Fabric API.",
+    "version": "2024-02-15-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/ipCommunities/{ipCommunityName}": {
+      "put": {
+        "tags": [
+          "IpCommunities"
+        ],
+        "operationId": "IpCommunities_Create",
+        "summary": "Create an IP Community.",
+        "description": "Implements an IP Community PUT method.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IpCommunityNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "Request payload.",
+            "schema": {
+              "$ref": "#/definitions/IpCommunity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/IpCommunity"
+            }
+          },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/IpCommunity"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "IpCommunities_Create_MaximumSet_Gen": {
+            "$ref": "./examples/IpCommunities_Create_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "IpCommunities"
+        ],
+        "operationId": "IpCommunities_Get",
+        "summary": "Gets an IP Community.",
+        "description": "Implements an IP Community GET method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IpCommunityNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IpCommunity"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IpCommunities_Get_MaximumSet_Gen": {
+            "$ref": "./examples/IpCommunities_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "IpCommunities"
+        ],
+        "operationId": "IpCommunities_Update",
+        "summary": "Updates an IP Community.",
+        "description": "API to update certain properties of the IP Community resource.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IpCommunityNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "IP Community properties to update.",
+            "schema": {
+              "$ref": "#/definitions/IpCommunityPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/IpCommunity"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "The URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "IpCommunities_Update_MaximumSet_Gen": {
+            "$ref": "./examples/IpCommunities_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "IpCommunities"
+        ],
+        "operationId": "IpCommunities_Delete",
+        "summary": "Deletes an IP Community.",
+        "description": "Implements IP Community DELETE method.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/IpCommunityNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "IpCommunities_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/IpCommunities_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/ipCommunities": {
+      "get": {
+        "operationId": "IpCommunities_ListByResourceGroup",
+        "summary": "List IP Communities by resource group.",
+        "description": "Implements IP Communities list by resource group GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all IP Communities under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/IpCommunitiesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "IpCommunities_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/IpCommunities_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetworkFabric/ipCommunities": {
+      "get": {
+        "operationId": "IpCommunities_ListBySubscription",
+        "summary": "List IP Communities by subscription.",
+        "description": "Implements IP Communities list by subscription GET method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all IP Communities under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/IpCommunitiesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "IpCommunities_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/IpCommunities_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "IpCommunityProperties": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/AnnotationResource",
+          "description": "Common properties for annotated type."
+        },
+        {
+          "description": "IP Community patchable properties.",
+          "$ref": "#/definitions/IpCommunityPatchableProperties"
+        }
+      ],
+      "required": [
+        "ipCommunityRules"
+      ],
+      "properties": {
+        "configurationState": {
+          "description": "Configuration state of the resource.",
+          "$ref": "./common.json#/definitions/ConfigurationState"
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the resource.",
+          "$ref": "./common.json#/definitions/ProvisioningState"
+        },
+        "administrativeState": {
+          "description": "Administrative state of the resource.",
+          "$ref": "./common.json#/definitions/AdministrativeState"
+        }
+      },
+      "description": "IP Community Properties defines the resource properties."
+    },
+    "IpCommunity": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/IpCommunityProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The IP Community resource definition."
+    },
+    "IpCommunitiesListResult": {
+      "type": "object",
+      "description": "List of IP Communities.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of IP Community resources.",
+          "items": {
+            "$ref": "#/definitions/IpCommunity"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "IpCommunityPatch": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "IP Community patchable properties.",
+          "$ref": "#/definitions/IpCommunityPatchableProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/TagsUpdate"
+        }
+      ],
+      "description": "The IP Community patch resource definition."
+    },
+    "IpCommunityPatchableProperties": {
+      "type": "object",
+      "description": "IP Community patchable properties.",
+      "properties": {
+        "ipCommunityRules": {
+          "type": "array",
+          "description": "List of IP Community Rules.",
+          "items": {
+            "$ref": "#/definitions/IpCommunityRule"
+          }
+        }
+      }
+    },
+    "IpCommunityRule": {
+      "type": "object",
+      "description": "IP Community patchable properties.",
+      "properties": {
+        "action": {
+          "description": "Action to be taken on the configuration. Example: Permit | Deny.",
+          "$ref": "./common.json#/definitions/CommunityActionTypes"
+        },
+        "sequenceNumber": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 1,
+          "maximum": 4294967295,
+          "description": "Sequence to insert to/delete from existing route. Prefix lists are evaluated starting with the lowest sequence number and continue down the list until a match is made. Once a match is made, the permit or deny statement is applied to that network and the rest of the list is ignored."
+        },
+        "wellKnownCommunities": {
+          "type": "array",
+          "description": "Supported well known Community List.",
+          "uniqueItems": true,
+          "items": {
+            "description": "\n`Internet` - Advertise routes to internet community.\n `LocalAS` - Advertise routes to only localAS peers.\n `NoAdvertise` - Don't advertise routes to any peer.\n`NoExport` - Don't export to next AS.\n`GShut` - Graceful Shutdown (GSHUT) withdraw routes before terminating BGP connection.\n",
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "Internet",
+              "LocalAS",
+              "NoAdvertise",
+              "NoExport",
+              "GShut"
+            ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "wellKnownCommunities"
+            }
+          }
+        },
+        "communityMembers": {
+          "type": "array",
+          "minItems": 1,
+          "description": "List the community members of IP Community.",
+          "items": {
+            "minLength": 1,
+            "description": "Community member of the IP Community. The expected formats are AA:NN >> example 65535:65535, <integer32> >> example 4294967040. The possible values of AA, NN are 0-65535 and <integer32> are 1-4294967040.",
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "action",
+        "sequenceNumber",
+        "communityMembers"
+      ]
+    }
+  },
+  "parameters": {
+    "IpCommunityNameParameter": {
+      "type": "string",
+      "description": "Name of the IP Community.",
+      "in": "path",
+      "name": "ipCommunityName",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

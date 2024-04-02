@@ -1,0 +1,974 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Deployment Settings",
+    "version": "2024-02-15-preview",
+    "description": "Azure Stack HCI Deployment Settings."
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "DeploymentSettings"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings": {
+      "get": {
+        "operationId": "DeploymentSettings_ListByClusters",
+        "tags": [
+          "DeploymentSettings"
+        ],
+        "description": "List DeploymentSetting resources by Clusters",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentSettingListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Deployment Settings": {
+            "$ref": "./examples/ListDeploymentSettingsByCluster.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/deploymentSettings/{deploymentSettingsName}": {
+      "get": {
+        "operationId": "DeploymentSettings_Get",
+        "tags": [
+          "DeploymentSettings"
+        ],
+        "description": "Get a DeploymentSetting",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "deploymentSettingsName",
+            "in": "path",
+            "description": "Name of Deployment Setting",
+            "required": true,
+            "type": "string",
+            "default": "default",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentSetting"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Deployment Settings": {
+            "$ref": "./examples/GetDeploymentSettings.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DeploymentSettings_CreateOrUpdate",
+        "tags": [
+          "DeploymentSettings"
+        ],
+        "description": "Create a DeploymentSetting",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "deploymentSettingsName",
+            "in": "path",
+            "description": "Name of Deployment Setting",
+            "required": true,
+            "type": "string",
+            "default": "default",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeploymentSetting"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DeploymentSetting' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DeploymentSetting"
+            }
+          },
+          "201": {
+            "description": "Resource 'DeploymentSetting' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DeploymentSetting"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Deployment Settings": {
+            "$ref": "./examples/PutDeploymentSettings.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "DeploymentSettings_Delete",
+        "tags": [
+          "DeploymentSettings"
+        ],
+        "description": "Delete a DeploymentSetting",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "deploymentSettingsName",
+            "in": "path",
+            "description": "Name of Deployment Setting",
+            "required": true,
+            "type": "string",
+            "default": "default",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Deployment Settings": {
+            "$ref": "./examples/DeleteDeploymentSettings.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AdapterPropertyOverrides": {
+      "type": "object",
+      "description": "The AdapterPropertyOverrides of a cluster.",
+      "properties": {
+        "jumboPacket": {
+          "type": "string",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
+        },
+        "networkDirect": {
+          "type": "string",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
+        },
+        "networkDirectTechnology": {
+          "type": "string",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation. Expected values are 'iWARP', 'RoCEv2', 'RoCE'"
+        }
+      }
+    },
+    "DeploymentCluster": {
+      "type": "object",
+      "description": "AzureStackHCI Cluster deployment properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The cluster name provided when preparing Active Directory."
+        },
+        "witnessType": {
+          "type": "string",
+          "description": "Use a cloud witness if you have internet access and if you use an Azure Storage account to provide a vote on cluster quorum. A cloud witness uses Azure Blob Storage to read or write a blob file and then uses it to arbitrate in split-brain resolution. Only allowed values are 'Cloud', 'FileShare'. "
+        },
+        "witnessPath": {
+          "type": "string",
+          "description": "Specify the fileshare path for the local witness for your Azure Stack HCI cluster."
+        },
+        "cloudAccountName": {
+          "type": "string",
+          "description": "Specify the Azure Storage account name for cloud witness for your Azure Stack HCI cluster."
+        },
+        "azureServiceEndpoint": {
+          "type": "string",
+          "description": "For Azure blob service endpoint type, select either Default or Custom domain. If you selected **Custom domain, enter the domain for the blob service in this format core.windows.net."
+        }
+      }
+    },
+    "DeploymentConfiguration": {
+      "type": "object",
+      "description": "Deployment Configuration",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "deployment template version "
+        },
+        "scaleUnits": {
+          "type": "array",
+          "description": "Scale units will contains list of deployment data",
+          "items": {
+            "$ref": "#/definitions/ScaleUnits"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "scaleUnits"
+      ]
+    },
+    "DeploymentData": {
+      "type": "object",
+      "description": "The Deployment data of AzureStackHCI Cluster.",
+      "properties": {
+        "securitySettings": {
+          "$ref": "#/definitions/DeploymentSecuritySettings",
+          "description": "SecuritySettings to deploy AzureStackHCI Cluster."
+        },
+        "observability": {
+          "$ref": "#/definitions/Observability",
+          "description": "Observability config to deploy AzureStackHCI Cluster."
+        },
+        "cluster": {
+          "$ref": "#/definitions/DeploymentCluster",
+          "description": "Observability config to deploy AzureStackHCI Cluster."
+        },
+        "storage": {
+          "$ref": "#/definitions/Storage",
+          "description": "Storage config to deploy AzureStackHCI Cluster."
+        },
+        "namingPrefix": {
+          "type": "string",
+          "description": "naming prefix to deploy cluster.",
+          "pattern": "^[a-zA-Z0-9-]{1,8}$"
+        },
+        "domainFqdn": {
+          "type": "string",
+          "description": "FQDN to deploy cluster"
+        },
+        "infrastructureNetwork": {
+          "type": "array",
+          "description": "InfrastructureNetwork config to deploy AzureStackHCI Cluster.",
+          "items": {
+            "$ref": "#/definitions/InfrastructureNetwork"
+          },
+          "x-ms-identifiers": []
+        },
+        "physicalNodes": {
+          "type": "array",
+          "description": "list of physical nodes config to deploy AzureStackHCI Cluster.",
+          "items": {
+            "$ref": "#/definitions/PhysicalNodes"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "hostNetwork": {
+          "$ref": "#/definitions/HostNetwork",
+          "description": "HostNetwork config to deploy AzureStackHCI Cluster."
+        },
+        "sdnIntegration": {
+          "$ref": "#/definitions/SdnIntegration",
+          "description": "SDN Integration config to deploy AzureStackHCI Cluster."
+        },
+        "adouPath": {
+          "type": "string",
+          "description": "The path to the Active Directory Organizational Unit container object prepared for the deployment. "
+        },
+        "secretsLocation": {
+          "type": "string",
+          "description": "Azure keyvault endpoint. This property is deprecated from 2023-12-01-preview. Please use secrets property instead."
+        },
+        "secrets": {
+          "type": "array",
+          "description": "secrets used for cloud deployment.",
+          "items": {
+            "$ref": "./hciCommon.json#/definitions/EceDeploymentSecrets"
+          },
+          "x-ms-identifiers": [
+            "secretName"
+          ]
+        },
+        "optionalServices": {
+          "$ref": "#/definitions/OptionalServices",
+          "description": "OptionalServices config to deploy AzureStackHCI Cluster."
+        }
+      }
+    },
+    "DeploymentSetting": {
+      "type": "object",
+      "description": "Edge device resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeploymentSettingsProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DeploymentSettingListResult": {
+      "type": "object",
+      "description": "The response of a DeploymentSetting list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeploymentSetting items on this page",
+          "items": {
+            "$ref": "#/definitions/DeploymentSetting"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DeploymentSettingsProperties": {
+      "type": "object",
+      "description": "DeploymentSetting properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "./hciCommon.json#/definitions/ProvisioningState",
+          "description": "DeploymentSetting provisioning state",
+          "readOnly": true
+        },
+        "arcNodeResourceIds": {
+          "type": "array",
+          "description": "Azure resource ids of Arc machines to be part of cluster.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "deploymentMode": {
+          "$ref": "./hciCommon.json#/definitions/DeploymentMode",
+          "description": "The deployment mode for cluster deployment."
+        },
+        "deploymentConfiguration": {
+          "$ref": "#/definitions/DeploymentConfiguration",
+          "description": "Scale units will contains list of deployment data",
+          "x-ms-identifiers": []
+        },
+        "reportedProperties": {
+          "$ref": "./hciCommon.json#/definitions/EceReportedProperties",
+          "description": "Deployment Status reported from cluster.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "arcNodeResourceIds",
+        "deploymentMode",
+        "deploymentConfiguration"
+      ]
+    },
+    "HostNetwork": {
+      "type": "object",
+      "description": "The HostNetwork of a cluster.",
+      "properties": {
+        "intents": {
+          "type": "array",
+          "description": "The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.",
+          "items": {
+            "$ref": "#/definitions/Intents"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "storageNetworks": {
+          "type": "array",
+          "description": "List of StorageNetworks config to deploy AzureStackHCI Cluster.",
+          "items": {
+            "$ref": "#/definitions/StorageNetworks"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "storageConnectivitySwitchless": {
+          "type": "boolean",
+          "description": "Defines how the storage adapters between nodes are connected either switch or switch less..",
+          "default": false
+        },
+        "enableStorageAutoIp": {
+          "type": "boolean",
+          "description": "Optional parameter required only for 3 Nodes Switchless deployments. This allows users to specify IPs and Mask for Storage NICs when Network ATC is not assigning the IPs for storage automatically.",
+          "default": false
+        }
+      }
+    },
+    "InfrastructureNetwork": {
+      "type": "object",
+      "description": "The InfrastructureNetwork of a AzureStackHCI Cluster.",
+      "properties": {
+        "subnetMask": {
+          "type": "string",
+          "description": "Subnet mask that matches the provided IP address space."
+        },
+        "gateway": {
+          "type": "string",
+          "description": "Default gateway that should be used for the provided IP address space."
+        },
+        "ipPools": {
+          "type": "array",
+          "description": "Range of IP addresses from which addresses are allocated for nodes within a subnet.",
+          "items": {
+            "$ref": "#/definitions/IpPools"
+          },
+          "x-ms-identifiers": []
+        },
+        "dnsServers": {
+          "type": "array",
+          "description": "IPv4 address of the DNS servers in your environment.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "useDhcp": {
+          "type": "boolean",
+          "description": "Allows customers to use DHCP for Hosts and Cluster IPs. If not declared, the deployment will default to static IPs. When true, GW and DNS servers are not required"
+        }
+      }
+    },
+    "Intents": {
+      "type": "object",
+      "description": "The Intents of a cluster.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the network intent you wish to create."
+        },
+        "trafficType": {
+          "type": "array",
+          "description": "List of network traffic types. Only allowed values are 'Compute', 'Storage', 'Management'.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "adapter": {
+          "type": "array",
+          "description": "Array of network interfaces used for the network intent.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "overrideVirtualSwitchConfiguration": {
+          "type": "boolean",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.",
+          "default": false
+        },
+        "virtualSwitchConfigurationOverrides": {
+          "$ref": "#/definitions/VirtualSwitchConfigurationOverrides",
+          "description": "Set virtualSwitch ConfigurationOverrides for cluster."
+        },
+        "overrideQosPolicy": {
+          "type": "boolean",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.",
+          "default": false
+        },
+        "qosPolicyOverrides": {
+          "$ref": "#/definitions/QosPolicyOverrides",
+          "description": "Set QoS PolicyOverrides for cluster."
+        },
+        "overrideAdapterProperty": {
+          "type": "boolean",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation.",
+          "default": false
+        },
+        "adapterPropertyOverrides": {
+          "$ref": "#/definitions/AdapterPropertyOverrides",
+          "description": "Set Adapter PropertyOverrides for cluster."
+        }
+      }
+    },
+    "IpPools": {
+      "type": "object",
+      "description": "The dnsServers of a device.",
+      "properties": {
+        "startingAddress": {
+          "type": "string",
+          "description": "Starting IP address for the management network. A minimum of six free, contiguous IPv4 addresses (excluding your host IPs) are needed for infrastructure services such as clustering."
+        },
+        "endingAddress": {
+          "type": "string",
+          "description": "Ending IP address for the management network. A minimum of six free, contiguous IPv4 addresses (excluding your host IPs) are needed for infrastructure services such as clustering."
+        }
+      }
+    },
+    "NetworkController": {
+      "type": "object",
+      "description": "network controller config for SDN Integration to deploy AzureStackHCI Cluster.",
+      "properties": {
+        "macAddressPoolStart": {
+          "type": "string",
+          "description": "macAddressPoolStart of network controller used for SDN Integration."
+        },
+        "macAddressPoolStop": {
+          "type": "string",
+          "description": "macAddressPoolStop of network controller used for SDN Integration."
+        },
+        "networkVirtualizationEnabled": {
+          "type": "boolean",
+          "description": "NetworkVirtualizationEnabled of network controller used for SDN Integration."
+        }
+      }
+    },
+    "Observability": {
+      "type": "object",
+      "description": "The Observability of AzureStackHCI Cluster.",
+      "properties": {
+        "streamingDataClient": {
+          "type": "boolean",
+          "description": "Enables telemetry data to be sent to Microsoft",
+          "default": true
+        },
+        "euLocation": {
+          "type": "boolean",
+          "description": "Location of your cluster. The log and diagnostic data is sent to the appropriate diagnostics servers depending upon where your cluster resides. Setting this to false results in all data sent to Microsoft to be stored outside of the EU.",
+          "default": false
+        },
+        "episodicDataUpload": {
+          "type": "boolean",
+          "description": "When set to true, collects log data to facilitate quicker issue resolution.",
+          "default": true
+        }
+      }
+    },
+    "OptionalServices": {
+      "type": "object",
+      "description": "The OptionalServices of AzureStackHCI Cluster.",
+      "properties": {
+        "customLocation": {
+          "type": "string",
+          "description": "The name of custom location."
+        }
+      }
+    },
+    "PhysicalNodes": {
+      "type": "object",
+      "description": "The PhysicalNodes of a cluster.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "NETBIOS name of each physical server on your Azure Stack HCI cluster."
+        },
+        "ipv4Address": {
+          "type": "string",
+          "description": "The IPv4 address assigned to each physical server on your Azure Stack HCI cluster."
+        }
+      }
+    },
+    "QosPolicyOverrides": {
+      "type": "object",
+      "description": "The QoSPolicyOverrides of a cluster.",
+      "properties": {
+        "priorityValue8021Action_Cluster": {
+          "type": "string",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
+        },
+        "priorityValue8021Action_SMB": {
+          "type": "string",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
+        },
+        "bandwidthPercentage_SMB": {
+          "type": "string",
+          "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
+        }
+      }
+    },
+    "SbePartnerInfo": {
+      "type": "object",
+      "description": "The solution builder extension (SBE) partner deployment info for cluster.",
+      "properties": {
+        "sbeDeploymentInfo": {
+          "$ref": "#/definitions/SbeDeploymentInfo",
+          "description": "SBE package and manifest information for the solution Builder Extension staged for AzureStackHCI cluster deployment."
+        },
+        "partnerProperties": {
+          "type": "array",
+          "description": "List of SBE partner properties for AzureStackHCI cluster deployment.",
+          "items": {
+            "$ref": "#/definitions/SbePartnerProperties"
+          },
+          "x-ms-identifiers": []
+        },
+        "credentialList": {
+          "type": "array",
+          "description": "SBE credentials list for AzureStackHCI cluster deployment.",
+          "items": {
+            "$ref": "#/definitions/SbeCredentials"
+          },
+          "x-ms-identifiers": [
+            "secretName"
+          ]
+        }
+      }
+    },
+    "SbeDeploymentInfo": {
+      "type": "object",
+      "description": "Solution builder extension (SBE) package and manifest information for the solution builder extension staged for AzureStackHCI cluster deployment.",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "SBE package version."
+        },
+        "family": {
+          "type": "string",
+          "description": "SBE family name."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "SBE manifest publisher."
+        },
+        "sbeManifestSource": {
+          "type": "string",
+          "description": "SBE Manifest Source."
+        },
+        "sbeManifestCreationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "SBE Manifest Creation Date."
+        }
+      }
+    },
+    "SbePartnerProperties": {
+      "type": "object",
+      "description": "Solution builder extension (SBE) partner properties object.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "SBE partner property name."
+        },
+        "value": {
+          "type": "string",
+          "description": "SBE partner property value."
+        }
+      }
+    },
+    "SbeCredentials": {
+      "type": "object",
+      "description": "secrets used for solution builder extension (SBE) partner extensibility.",
+      "properties": {
+        "secretName": {
+          "type": "string",
+          "description": "secret name stored in keyvault."
+        },
+        "eceSecretName": {
+          "type": "string",
+          "description": "secret name expected for Enterprise Cloud Engine (ECE)."
+        },
+        "secretLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "secret URI stored in keyvault."
+        }
+      }
+    },
+    "ScaleUnits": {
+      "type": "object",
+      "description": "Scale units will contains list of deployment data",
+      "properties": {
+        "deploymentData": {
+          "$ref": "#/definitions/DeploymentData",
+          "description": "Deployment Data to deploy AzureStackHCI Cluster."
+        },
+        "sbePartnerInfo": {
+          "$ref": "#/definitions/SbePartnerInfo",
+          "description": "Solution builder extension (SBE) partner properties"
+        }
+      },
+      "required": [
+        "deploymentData"
+      ],
+      "externalDocs": {
+        "description": "Deploy Azure Stack HCI using an existing configuration file",
+        "url": "https://learn.microsoft.com/en-us/azure-stack/hci/deploy/deployment-tool-existing-file"
+      }
+    },
+    "SdnIntegration": {
+      "type": "object",
+      "description": "SDN Integration config to deploy AzureStackHCI Cluster.",
+      "properties": {
+        "networkController": {
+          "$ref": "#/definitions/NetworkController",
+          "description": "network controller config for SDN Integration to deploy AzureStackHCI Cluster."
+        }
+      }
+    },
+    "DeploymentSecuritySettings": {
+      "type": "object",
+      "description": "The SecuritySettings of AzureStackHCI Cluster.",
+      "properties": {
+        "hvciProtection": {
+          "type": "boolean",
+          "description": "By default, Hypervisor-protected Code Integrity is enabled on your Azure HCI cluster.",
+          "default": true
+        },
+        "drtmProtection": {
+          "type": "boolean",
+          "description": "By default, Secure Boot is enabled on your Azure HCI cluster. This setting is hardware dependent.",
+          "default": true
+        },
+        "driftControlEnforced": {
+          "type": "boolean",
+          "description": "When set to true, the security baseline is re-applied regularly.",
+          "default": true
+        },
+        "credentialGuardEnforced": {
+          "type": "boolean",
+          "description": "When set to true, Credential Guard is enabled.",
+          "default": false
+        },
+        "smbSigningEnforced": {
+          "type": "boolean",
+          "description": "When set to true, the SMB default instance requires sign in for the client and server services.",
+          "default": true
+        },
+        "smbClusterEncryption": {
+          "type": "boolean",
+          "description": "When set to true, cluster east-west traffic is encrypted.",
+          "default": false
+        },
+        "sideChannelMitigationEnforced": {
+          "type": "boolean",
+          "description": "When set to true, all the side channel mitigations are enabled",
+          "default": true
+        },
+        "bitlockerBootVolume": {
+          "type": "boolean",
+          "description": "When set to true, BitLocker XTS_AES 256-bit encryption is enabled for all data-at-rest on the OS volume of your Azure Stack HCI cluster. This setting is TPM-hardware dependent. ",
+          "default": true
+        },
+        "bitlockerDataVolumes": {
+          "type": "boolean",
+          "description": "When set to true, BitLocker XTS-AES 256-bit encryption is enabled for all data-at-rest on your Azure Stack HCI cluster shared volumes.",
+          "default": true
+        },
+        "wdacEnforced": {
+          "type": "boolean",
+          "description": "WDAC is enabled by default and limits the applications and the code that you can run on your Azure Stack HCI cluster.",
+          "default": true
+        }
+      }
+    },
+    "Storage": {
+      "type": "object",
+      "description": "The Storage config of AzureStackHCI Cluster.",
+      "properties": {
+        "configurationMode": {
+          "type": "string",
+          "description": "By default, this mode is set to Express and your storage is configured as per best practices based on the number of nodes in the cluster. Allowed values are 'Express','InfraOnly', 'KeepStorage'",
+          "default": "Express"
+        }
+      }
+    },
+    "StorageAdapterIPInfo": {
+      "type": "object",
+      "description": "The StorageAdapter physical nodes of a cluster.",
+      "properties": {
+        "physicalNode": {
+          "type": "string",
+          "description": "storage adapter physical node name."
+        },
+        "ipv4Address": {
+          "type": "string",
+          "description": "The IPv4 address assigned to each storage adapter physical node on your Azure Stack HCI cluster."
+        },
+        "subnetMask": {
+          "type": "string",
+          "description": "The SubnetMask address assigned to each storage adapter physical node on your Azure Stack HCI cluster."
+        }
+      }
+    },
+    "StorageNetworks": {
+      "type": "object",
+      "description": "The StorageNetworks of a cluster.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the storage network."
+        },
+        "networkAdapterName": {
+          "type": "string",
+          "description": "Name of the storage network adapter."
+        },
+        "vlanId": {
+          "type": "string",
+          "description": "ID specified for the VLAN storage network. This setting is applied to the network interfaces that route the storage and VM migration traffic. "
+        },
+        "storageAdapterIPInfo": {
+          "type": "array",
+          "description": "List of Storage adapter physical nodes config to deploy AzureStackHCI Cluster.",
+          "items": {
+            "$ref": "#/definitions/StorageAdapterIPInfo"
+          },
+          "x-ms-identifiers": [
+            "physicalNode"
+          ]
+        }
+      }
+    },
+    "VirtualSwitchConfigurationOverrides": {
+      "type": "object",
+      "description": "The VirtualSwitchConfigurationOverrides of a cluster.",
+      "properties": {
+        "enableIov": {
+          "type": "string",
+          "description": "Enable IoV for Virtual Switch"
+        },
+        "loadBalancingAlgorithm": {
+          "type": "string",
+          "description": "Load Balancing Algorithm for Virtual Switch"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ClusterNameParameter": {
+      "name": "clusterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the cluster.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

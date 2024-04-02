@@ -408,7 +408,7 @@
           "type": "array",
           "description": "secrets used for cloud deployment.",
           "items": {
-            "$ref": "./common.json#/definitions/EceDeploymentSecrets"
+            "$ref": "./hciCommon.json#/definitions/EceDeploymentSecrets"
           },
           "x-ms-identifiers": [
             "secretName"
@@ -466,7 +466,7 @@
       "description": "DeploymentSetting properties",
       "properties": {
         "provisioningState": {
-          "$ref": "./common.json#/definitions/ProvisioningState",
+          "$ref": "./hciCommon.json#/definitions/ProvisioningState",
           "description": "DeploymentSetting provisioning state",
           "readOnly": true
         },
@@ -479,7 +479,7 @@
           "x-ms-identifiers": []
         },
         "deploymentMode": {
-          "$ref": "./common.json#/definitions/DeploymentMode",
+          "$ref": "./hciCommon.json#/definitions/DeploymentMode",
           "description": "The deployment mode for cluster deployment."
         },
         "deploymentConfiguration": {
@@ -488,7 +488,7 @@
           "x-ms-identifiers": []
         },
         "reportedProperties": {
-          "$ref": "#/definitions/ReportedProperties",
+          "$ref": "./hciCommon.json#/definitions/EceReportedProperties",
           "description": "Deployment Status reported from cluster.",
           "readOnly": true
         }
@@ -711,22 +711,6 @@
         "bandwidthPercentage_SMB": {
           "type": "string",
           "description": "This parameter should only be modified based on your OEM guidance. Do not modify this parameter without OEM validation."
-        }
-      }
-    },
-    "ReportedProperties": {
-      "type": "object",
-      "description": "The DeploymentStatus of AzureStackHCI Cluster.",
-      "properties": {
-        "validationStatus": {
-          "$ref": "./common.json#/definitions/EceActionStatus",
-          "description": "validation status of AzureStackHCI Cluster Deployment.",
-          "readOnly": true
-        },
-        "deploymentStatus": {
-          "$ref": "./common.json#/definitions/EceActionStatus",
-          "description": "Deployment status of AzureStackHCI Cluster Deployment.",
-          "readOnly": true
         }
       }
     },

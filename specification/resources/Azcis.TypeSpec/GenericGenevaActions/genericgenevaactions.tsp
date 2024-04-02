@@ -4,6 +4,7 @@ import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -32,6 +33,7 @@ model GenericGenevaActionsResourceProperties {
   inputMode?: string;
 
   @doc("The parameter list for geneva action")
+  @extension("x-ms-identifiers", [])
   parameters?: Array<Parameter>;
 
   @doc("Provisioning state")
@@ -43,7 +45,7 @@ model GenericGenevaActionsResourceProperties {
 model GenericGenevaActionsResource
   is ProxyResource<GenericGenevaActionsResourceProperties> { // this can be TrackedResource based on resourcetype
   @doc("The name of resource.")
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @pattern("^[a-zA-Z0-9-]{3,80}$")
   @key("resourceName")
   @segment("genericGenevaActions") // start with lower case
   @visibility("read")

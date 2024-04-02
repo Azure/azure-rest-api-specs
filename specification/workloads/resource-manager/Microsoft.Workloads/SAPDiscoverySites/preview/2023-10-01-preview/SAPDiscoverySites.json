@@ -1,18 +1,23 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-10-01-preview",
     "title": "Workloads Client",
-    "description": "SAP Migration client provides access to various operations for SAP Migration."
+    "version": "2023-10-01-preview",
+    "description": "SAP Migration client provides access to various operations for SAP Migration.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -25,249 +30,118 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
+  "tags": [
+    {
+      "name": "SAPDiscoverySites"
+    },
+    {
+      "name": "SAPInstances"
+    },
+    {
+      "name": "ServerInstances"
+    }
+  ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapDiscoverySites/{sapDiscoverySiteName}": {
-      "put": {
-        "tags": [
-          "SAPDiscoverySites"
-        ],
-        "operationId": "SAPDiscoverySites_Create",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Create resource for Import based input.": {
-            "$ref": "./examples/SAPDiscoverySites/SAPDiscoverySites_Create_Import.json"
-          }
-        },
-        "description": "Creates a discovery site for SAP Migration.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SAPDiscoverySiteNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "description": "SAP Migration discovery site resource request body.",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/SAPDiscoverySite"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Describes the SAP Migration discovery site resource created.",
-            "schema": {
-              "$ref": "#/definitions/SAPDiscoverySite"
-            }
-          },
-          "200": {
-            "description": "Describes the SAP Migration discovery site resource which is created or updated successfully.",
-            "schema": {
-              "$ref": "#/definitions/SAPDiscoverySite"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/sapDiscoverySites": {
       "get": {
+        "operationId": "SapDiscoverySites_ListBySubscription",
         "tags": [
           "SAPDiscoverySites"
         ],
-        "operationId": "SAPDiscoverySites_Get",
-        "x-ms-examples": {
-          "GET a SAP Migration discovery site resource.": {
-            "$ref": "./examples/SAPDiscoverySites/SAPDiscoverySites_Get.json"
-          }
-        },
-        "description": "Gets a SAP Migration discovery site resource.",
+        "description": "Gets all SAP Migration discovery site resources in a Subscription.",
         "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SAPDiscoverySiteNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Describes the SAP Migration discovery site resource",
-            "schema": {
-              "$ref": "#/definitions/SAPDiscoverySite"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "SAPDiscoverySites"
-        ],
-        "operationId": "SAPDiscoverySites_Update",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "Updates a SAP Migration discovery site resource.": {
-            "$ref": "./examples/SAPDiscoverySites/SAPDiscoverySites_Update.json"
-          }
-        },
-        "description": "Updates a SAP Migration discovery site resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SAPDiscoverySiteNameParameter"
-          },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "in": "body",
-            "name": "body",
-            "description": "Request body to update a SAP Migration discovery site resource.",
-            "schema": {
-              "$ref": "#/definitions/UpdateSAPDiscoverySiteRequest"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Describes the SAP Migration discovery site resource which is being updated.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
-          "200": {
-            "description": "Describes the SAP Migration discovery site resource which is successfully updated.",
-            "schema": {
-              "$ref": "#/definitions/SAPDiscoverySite"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "SAPDiscoverySites"
-        ],
-        "operationId": "SAPDiscoverySites_Delete",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Deletes a SAP Migration discovery site resource.": {
-            "$ref": "./examples/SAPDiscoverySites/SAPDiscoverySites_Delete.json"
-          }
-        },
-        "description": "Deletes a SAP Migration discovery site resource and its child resources, that is the associated SAP Instances and Server Instances.",
-        "parameters": [
-          {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SAPDiscoverySiteNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SAPDiscoverySiteListResult"
             }
           },
-          "204": {
-            "description": "NoContent"
-          },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "List SAP Migration discovery site resources in a subscription.": {
+            "$ref": "./examples/SAPDiscoverySites_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapDiscoverySites": {
       "get": {
+        "operationId": "SapDiscoverySites_ListByResourceGroup",
         "tags": [
           "SAPDiscoverySites"
         ],
-        "operationId": "SAPDiscoverySites_ListByResourceGroup",
+        "description": "Gets all SAP Migration discovery site resources in a Resource Group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SAPDiscoverySiteListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
         "x-ms-examples": {
           "List SAP Migration discovery site resources by Resource group.": {
-            "$ref": "./examples/SAPDiscoverySites/SAPDiscoverySites_ListByResourceGroup.json"
+            "$ref": "./examples/SAPDiscoverySites_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "description": "Gets all SAP Migration discovery site resources in a Resource Group.",
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapDiscoverySites/{sapDiscoverySiteName}": {
+      "get": {
+        "operationId": "SapDiscoverySites_Get",
+        "tags": [
+          "SAPDiscoverySites"
+        ],
+        "description": "Gets a SAP Migration discovery site resource.",
         "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -275,84 +149,234 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "name": "sapDiscoverySiteName",
+            "in": "path",
+            "description": "The name of the discovery site resource for SAP Migration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           }
         ],
         "responses": {
           "200": {
-            "description": "The list of all SAP Migration discovery site resources.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SAPDiscoverySiteList"
+              "$ref": "#/definitions/SAPDiscoverySite"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "GET a SAP Migration discovery site resource.": {
+            "$ref": "./examples/SAPDiscoverySites_Get.json"
+          }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Workloads/sapDiscoverySites": {
-      "get": {
+      },
+      "put": {
+        "operationId": "SapDiscoverySites_Create",
         "tags": [
           "SAPDiscoverySites"
         ],
-        "operationId": "SAPDiscoverySites_ListBySubscription",
-        "x-ms-examples": {
-          "List SAP Migration discovery site resources in a subscription.": {
-            "$ref": "./examples/SAPDiscoverySites/SAPDiscoverySites_ListBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "description": "Gets all SAP Migration discovery site resources in a Subscription.",
+        "description": "Creates a discovery site for SAP Migration.",
         "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapDiscoverySiteName",
+            "in": "path",
+            "description": "The name of the discovery site resource for SAP Migration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SAPDiscoverySite"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "The list of all SAP Migration discovery site resources in the Subscription.",
+            "description": "Resource 'SAPDiscoverySite' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/SAPDiscoverySiteList"
+              "$ref": "#/definitions/SAPDiscoverySite"
+            }
+          },
+          "201": {
+            "description": "Resource 'SAPDiscoverySite' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SAPDiscoverySite"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Create resource for Import based input.": {
+            "$ref": "./examples/SAPDiscoverySites_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SapDiscoverySites_Update",
+        "tags": [
+          "SAPDiscoverySites"
+        ],
+        "description": "Updates a SAP Migration discovery site resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapDiscoverySiteName",
+            "in": "path",
+            "description": "The name of the discovery site resource for SAP Migration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SAPDiscoverySiteTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SAPDiscoverySite"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a SAP Migration discovery site resource.": {
+            "$ref": "./examples/SAPDiscoverySites_Update.json"
+          }
         }
+      },
+      "delete": {
+        "operationId": "SapDiscoverySites_Delete",
+        "tags": [
+          "SAPDiscoverySites"
+        ],
+        "description": "Deletes a SAP Migration discovery site resource and its child resources, that is the associated SAP Instances and Server Instances.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapDiscoverySiteName",
+            "in": "path",
+            "description": "The name of the discovery site resource for SAP Migration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a SAP Migration discovery site resource.": {
+            "$ref": "./examples/SAPDiscoverySites_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapDiscoverySites/{sapDiscoverySiteName}/importEntities": {
       "post": {
+        "operationId": "SapDiscoverySites_ImportEntities",
         "tags": [
           "SAPDiscoverySites"
         ],
-        "operationId": "SAPDiscoverySites_ImportEntities",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Import a SAP Migration discovery site resource and it's child resources.": {
-            "$ref": "./examples/SAPDiscoverySites/SAPDiscoverySites_ImportEntities.json"
-          }
-        },
         "description": "Import a SAP Migration discovery site resource and it's child resources, that is the SAP instances and Server instances.",
         "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -360,49 +384,114 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SAPDiscoverySiteNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "name": "sapDiscoverySiteName",
+            "in": "path",
+            "description": "The name of the discovery site resource for SAP Migration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
           "200": {
-            "description": "OK",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationStatusResult"
             }
           },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Import a SAP Migration discovery site resource and it's child resources.": {
+            "$ref": "./examples/SAPDiscoverySites_ImportEntities.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapDiscoverySites/{sapDiscoverySiteName}/sapInstances": {
+      "get": {
+        "operationId": "SapInstances_ListBySapDiscoverySite",
+        "tags": [
+          "SAPInstances"
+        ],
+        "description": "Lists the SAP Instance resources for the given SAP Migration discovery site resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapDiscoverySiteName",
+            "in": "path",
+            "description": "The name of the discovery site resource for SAP Migration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SAPInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the SAP Instance resources for the given SAP Migration discovery site resource.": {
+            "$ref": "./examples/SAPInstances_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapDiscoverySites/{sapDiscoverySiteName}/sapInstances/{sapInstanceName}": {
       "get": {
+        "operationId": "SapInstances_Get",
         "tags": [
           "SAPInstances"
         ],
-        "operationId": "SAPInstances_Get",
-        "x-ms-examples": {
-          "GET a SAP Instance resource.": {
-            "$ref": "./examples/SapInstances/SAPInstances_Get.json"
-          }
-        },
         "description": "Gets the SAP Instance resource.",
         "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -410,179 +499,193 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SAPDiscoverySiteNameParameter"
+            "name": "sapDiscoverySiteName",
+            "in": "path",
+            "description": "The name of the discovery site resource for SAP Migration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
-            "$ref": "#/parameters/SAPInstanceNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "name": "sapInstanceName",
+            "in": "path",
+            "description": "The name of SAP Instance resource for SAP Migration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           }
         ],
         "responses": {
           "200": {
-            "description": "Describes the SAP Instance resource.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SAPInstance"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GET a SAP Instance resource.": {
+            "$ref": "./examples/SAPInstances_Get.json"
           }
         }
       },
       "put": {
+        "operationId": "SapInstances_Create",
         "tags": [
           "SAPInstances"
         ],
-        "operationId": "SAPInstances_Create",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Creates the SAP Instance resource.": {
-            "$ref": "./examples/SapInstances/SAPInstances_Create.json"
-          }
-        },
         "description": "Creates the SAP Instance resource. <br><br>This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.",
         "parameters": [
           {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SAPDiscoverySiteNameParameter"
+            "name": "sapDiscoverySiteName",
+            "in": "path",
+            "description": "The name of the discovery site resource for SAP Migration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
-            "$ref": "#/parameters/SAPInstanceNameParameter"
+            "name": "sapInstanceName",
+            "in": "path",
+            "description": "The name of SAP Instance resource for SAP Migration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
+            "name": "resource",
             "in": "body",
-            "name": "body",
-            "description": "The SAP Instance request body.",
+            "description": "Resource create parameters.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/SAPInstance"
             }
           }
         ],
         "responses": {
-          "201": {
-            "description": "Describes the SAP Instance resource created.",
-            "schema": {
-              "$ref": "#/definitions/SAPInstance"
-            }
-          },
           "200": {
-            "description": "Describes the SAP Instance resource created or updated.",
+            "description": "Resource 'SAPInstance' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/SAPInstance"
             }
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
+          "201": {
+            "description": "Resource 'SAPInstance' create operation succeeded",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "SAPInstances"
-        ],
-        "operationId": "SAPInstances_Update",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Updates the SAP Instance resource.": {
-            "$ref": "./examples/SapInstances/SAPInstances_Update.json"
-          }
-        },
-        "description": "Updates the SAP Instance resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SAPDiscoverySiteNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SAPInstanceNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "The SAP Instance resource request body.",
-            "schema": {
-              "$ref": "#/definitions/UpdateSAPInstanceRequest"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Describes the SAP Instance resource created which is being updated.",
+              "$ref": "#/definitions/SAPInstance"
+            },
             "headers": {
-              "Location": {
-                "type": "string"
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates the SAP Instance resource.": {
+            "$ref": "./examples/SAPInstances_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SapInstances_Update",
+        "tags": [
+          "SAPInstances"
+        ],
+        "description": "Updates the SAP Instance resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapDiscoverySiteName",
+            "in": "path",
+            "description": "The name of the discovery site resource for SAP Migration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
+          },
+          {
+            "name": "sapInstanceName",
+            "in": "path",
+            "description": "The name of SAP Instance resource for SAP Migration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SAPInstanceTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
           "200": {
-            "description": "Describes the SAP Instance resource created which is successfully updated.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SAPInstance"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Updates the SAP Instance resource.": {
+            "$ref": "./examples/SAPInstances_Update.json"
           }
         }
       },
       "delete": {
+        "operationId": "SapInstances_Delete",
         "tags": [
           "SAPInstances"
         ],
-        "operationId": "SAPInstances_Delete",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Deletes the SAP Instance resource.": {
-            "$ref": "./examples/SapInstances/SAPInstances_Delete.json"
-          }
-        },
         "description": "Deletes the SAP Instance resource. <br><br>This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the SAP Migration discovery site resource, using the delete operation on it.",
         "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -590,55 +693,72 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SAPDiscoverySiteNameParameter"
+            "name": "sapDiscoverySiteName",
+            "in": "path",
+            "description": "The name of the discovery site resource for SAP Migration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
-            "$ref": "#/parameters/SAPInstanceNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "name": "sapInstanceName",
+            "in": "path",
+            "description": "The name of SAP Instance resource for SAP Migration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "Accepted",
+            "description": "Resource deletion accepted.",
             "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
               "Location": {
-                "type": "string"
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "NoContent"
+            "description": "Resource does not exist."
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapDiscoverySites/{sapDiscoverySiteName}/sapInstances": {
-      "get": {
-        "tags": [
-          "SAPInstances"
-        ],
-        "operationId": "SAPInstances_List",
+        },
         "x-ms-examples": {
-          "Lists the SAP Instance resources for the given SAP Migration discovery site resource.": {
-            "$ref": "./examples/SapInstances/SAPInstances_List.json"
+          "Deletes the SAP Instance resource.": {
+            "$ref": "./examples/SAPInstances_Delete.json"
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
-        "description": "Lists the SAP Instance resources for the given SAP Migration discovery site resource.",
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapDiscoverySites/{sapDiscoverySiteName}/sapInstances/{sapInstanceName}/serverInstances": {
+      "get": {
+        "operationId": "ServerInstances_ListBySapInstance",
+        "tags": [
+          "ServerInstances"
+        ],
+        "description": "Lists the Server Instance resources for the given SAP Instance resource.",
         "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -646,41 +766,57 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SAPDiscoverySiteNameParameter"
+            "name": "sapDiscoverySiteName",
+            "in": "path",
+            "description": "The name of the discovery site resource for SAP Migration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "name": "sapInstanceName",
+            "in": "path",
+            "description": "The name of SAP Instance resource for SAP Migration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           }
         ],
         "responses": {
           "200": {
-            "description": "Describes the SAP Instance resource.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SAPInstanceList"
+              "$ref": "#/definitions/ServerInstanceListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Lists the Server Instance resources for the given SAP Instance resource.": {
+            "$ref": "./examples/ServerInstances_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapDiscoverySites/{sapDiscoverySiteName}/sapInstances/{sapInstanceName}/serverInstances/{serverInstanceName}": {
       "get": {
+        "operationId": "ServerInstances_Get",
         "tags": [
           "ServerInstances"
         ],
-        "operationId": "ServerInstances_Get",
-        "x-ms-examples": {
-          "GET a Server Instance resource.": {
-            "$ref": "./examples/ServerInstances/ServerInstances_Get.json"
-          }
-        },
         "description": "Gets the Server Instance resource.",
         "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -688,119 +824,60 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SAPDiscoverySiteNameParameter"
+            "name": "sapDiscoverySiteName",
+            "in": "path",
+            "description": "The name of the discovery site resource for SAP Migration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
-            "$ref": "#/parameters/SAPInstanceNameParameter"
+            "name": "sapInstanceName",
+            "in": "path",
+            "description": "The name of SAP Instance resource for SAP Migration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
-            "$ref": "#/parameters/ServerInstanceNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "name": "serverInstanceName",
+            "in": "path",
+            "description": "The name of the Server instance resource for SAP Migration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           }
         ],
         "responses": {
           "200": {
-            "description": "Describes the Server Instance resource.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ServerInstance"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GET a Server Instance resource.": {
+            "$ref": "./examples/ServerInstances_Get.json"
           }
         }
       },
       "put": {
-        "tags": [
-          "ServerInstances"
-        ],
         "operationId": "ServerInstances_Create",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Creates the Server Instance resource.": {
-            "$ref": "./examples/ServerInstances/ServerInstances_Create.json"
-          }
-        },
-        "description": "Creates the Server Instance resource. <br><br>This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SAPDiscoverySiteNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SAPInstanceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerInstanceNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "The Server Instance request body.",
-            "schema": {
-              "$ref": "#/definitions/ServerInstance"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Describes the Server Instance resource created.",
-            "schema": {
-              "$ref": "#/definitions/ServerInstance"
-            }
-          },
-          "200": {
-            "description": "Describes the Server Instance resource created or updated.",
-            "schema": {
-              "$ref": "#/definitions/ServerInstance"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "patch": {
         "tags": [
           "ServerInstances"
         ],
-        "operationId": "ServerInstances_Update",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Updates the Server Instance resource.": {
-            "$ref": "./examples/ServerInstances/ServerInstances_Update.json"
-          }
-        },
-        "description": "Updates the Server Instance resource. This operation on a resource by end user will return a Bad Request error.",
+        "description": "Creates the Server Instance resource. <br><br>;This will be used by service only. PUT operation on this resource by end user will return a Bad Request error.",
         "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -808,21 +885,33 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SAPDiscoverySiteNameParameter"
+            "name": "sapDiscoverySiteName",
+            "in": "path",
+            "description": "The name of the discovery site resource for SAP Migration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
-            "$ref": "#/parameters/SAPInstanceNameParameter"
+            "name": "sapInstanceName",
+            "in": "path",
+            "description": "The name of SAP Instance resource for SAP Migration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
-            "$ref": "#/parameters/ServerInstanceNameParameter"
+            "name": "serverInstanceName",
+            "in": "path",
+            "description": "The name of the Server instance resource for SAP Migration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
+            "name": "resource",
             "in": "body",
-            "name": "body",
-            "description": "The Server Instance resource request body.",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ServerInstance"
@@ -830,47 +919,122 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Describes the Server Instance resource which is being updated.",
+          "200": {
+            "description": "Resource 'ServerInstance' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ServerInstance"
+            }
+          },
+          "201": {
+            "description": "Resource 'ServerInstance' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ServerInstance"
+            },
             "headers": {
-              "Location": {
-                "type": "string"
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates the Server Instance resource.": {
+            "$ref": "./examples/ServerInstances_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ServerInstances_Update",
+        "tags": [
+          "ServerInstances"
+        ],
+        "description": "Updates the Server Instance resource. This operation on a resource by end user will return a Bad Request error.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sapDiscoverySiteName",
+            "in": "path",
+            "description": "The name of the discovery site resource for SAP Migration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
+          },
+          {
+            "name": "sapInstanceName",
+            "in": "path",
+            "description": "The name of SAP Instance resource for SAP Migration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
+          },
+          {
+            "name": "serverInstanceName",
+            "in": "path",
+            "description": "The name of the Server instance resource for SAP Migration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateServerInstanceRequest"
+            }
+          }
+        ],
+        "responses": {
           "200": {
-            "description": "Describes the Server Instance resource which is successfully updated.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ServerInstance"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Updates the Server Instance resource.": {
+            "$ref": "./examples/ServerInstances_Update.json"
           }
         }
       },
       "delete": {
+        "operationId": "ServerInstances_Delete",
         "tags": [
           "ServerInstances"
         ],
-        "operationId": "ServerInstances_Delete",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Deletes the Server Instance resource.": {
-            "$ref": "./examples/ServerInstances/ServerInstances_Delete.json"
-          }
-        },
-        "description": "Deletes the Server Instance resource. <br><br>This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the SAP Migration discovery site resource, using the delete operation on it.",
+        "description": "Deletes the Server Instance resource. <br><br>;This will be used by service only. Delete operation on this resource by end user will return a Bad Request error. You can delete the parent resource, which is the SAP Migration discovery site resource, using the delete operation on it.",
         "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -878,231 +1042,482 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/SAPDiscoverySiteNameParameter"
+            "name": "sapDiscoverySiteName",
+            "in": "path",
+            "description": "The name of the discovery site resource for SAP Migration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
-            "$ref": "#/parameters/SAPInstanceNameParameter"
+            "name": "sapInstanceName",
+            "in": "path",
+            "description": "The name of SAP Instance resource for SAP Migration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           },
           {
-            "$ref": "#/parameters/ServerInstanceNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "name": "serverInstanceName",
+            "in": "path",
+            "description": "The name of the Server instance resource for SAP Migration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]$"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Resource deleted successfully."
           },
           "202": {
-            "description": "Accepted",
+            "description": "Resource deletion accepted.",
             "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
               "Location": {
-                "type": "string"
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
           "204": {
-            "description": "NoContent"
+            "description": "Resource does not exist."
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapDiscoverySites/{sapDiscoverySiteName}/sapInstances/{sapInstanceName}/serverInstances": {
-      "get": {
-        "tags": [
-          "ServerInstances"
-        ],
-        "operationId": "ServerInstances_List",
+        },
         "x-ms-examples": {
-          "Lists the Server Instance resources for the given SAP Instance resource.": {
-            "$ref": "./examples/ServerInstances/ServerInstances_List.json"
+          "Deletes the Server Instance resource.": {
+            "$ref": "./examples/ServerInstances_Delete.json"
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
-        "description": "Lists the Server Instance resources for the given SAP Instance resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SAPDiscoverySiteNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SAPInstanceNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Describes the Server Instance resource.",
-            "schema": {
-              "$ref": "#/definitions/ServerInstanceList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
+        "x-ms-long-running-operation": true
       }
     }
   },
   "definitions": {
-    "SAPDiscoverySite": {
-      "description": "Define the SAP Migration discovery site resource.",
+    "ConfigurationData": {
       "type": "object",
-      "x-ms-azure-resource": true,
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ],
+      "description": "The SAP instance specific configuration data.",
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SAPDiscoverySiteProperties",
-          "description": "The SAP Migration discovery site resource properties."
+        "saps": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Provide the SAPS for each server of the SAP system. This should be a non-zero value. For example, 1000.",
+          "readOnly": true
         },
-        "extendedLocation": {
-          "description": "The extended location definition.",
-          "$ref": "#/definitions/ExtendedLocation"
+        "cpu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Provide the CPU value of the server. For example, 16, 32 etc.",
+          "readOnly": true
+        },
+        "cpuType": {
+          "type": "string",
+          "description": "Provide the CPU architecture type of the server. For example, Xeon Platinum 8171M, Xeon E5-2673 v3.",
+          "readOnly": true
+        },
+        "cpuInMhz": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Provide the CPU clock speed of the server in MHz. This should be a non-zero value. For example, 2100.",
+          "readOnly": true
+        },
+        "ram": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Provide the RAM of the server. This should be a non-zero value. For example, 256.",
+          "readOnly": true
+        },
+        "hardwareManufacturer": {
+          "type": "string",
+          "description": "Provide the HW manufacturer company of the server.  For example, Microsoft Corporation.",
+          "readOnly": true
+        },
+        "model": {
+          "type": "string",
+          "description": "Specify if the Hardware is a physical server or virtual machine.",
+          "readOnly": true
+        },
+        "totalDiskSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Provide the total disk volume capacity in GB. Add the disk volume for each individual disks and provide the total sum in this field.",
+          "readOnly": true
+        },
+        "totalDiskIops": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Provide the total disk IOPS capacity. Add the disk volume for each individual disk and provide the sum total in this field.",
+          "readOnly": true
+        },
+        "databaseType": {
+          "$ref": "#/definitions/DatabaseType",
+          "description": "The database of this is a server instance. Applicable only if SAP instance type for this server instance is 'DB'.",
+          "readOnly": true
+        },
+        "targetHanaRamSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Provide the target HANA database size you need. Applicable only if SAP instance type for this server instance is 'DB' and you are migrating an AnyDb database to SAP S/4HANA.",
+          "readOnly": true
         }
       }
     },
-    "SAPDiscoverySiteList": {
-      "description": "Defines the collection of SAP Migration discovery site resources.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Gets the list of SAP Migration discovery site resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SAPDiscoverySite"
+    "DataSource": {
+      "type": "string",
+      "description": "The data source for this resource.",
+      "enum": [
+        "Excel",
+        "Native"
+      ],
+      "x-ms-enum": {
+        "name": "DataSource",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Excel",
+            "value": "Excel",
+            "description": "The type of DataSource- Excel."
           },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "description": "Gets the value of next link.",
-          "type": "string"
-        }
-      }
-    },
-    "UpdateSAPDiscoverySiteRequest": {
-      "description": "Defines the request body for updating SAP Discovery site resource.",
-      "type": "object",
-      "properties": {
-        "tags": {
-          "description": "Gets or sets the Resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
+          {
+            "name": "Native",
+            "value": "Native",
+            "description": "The type of DataSource- Native."
           }
+        ]
+      }
+    },
+    "DatabaseType": {
+      "type": "string",
+      "description": "Select the database if this is a database server. Leave blank or add Not Applicable for all other instances except the Database Instance.",
+      "enum": [
+        "Adabas",
+        "Oracle",
+        "SAPMaxDB",
+        "Db2",
+        "SAPASE",
+        "SQLServer",
+        "Informix",
+        "SAPDB",
+        "HANA"
+      ],
+      "x-ms-enum": {
+        "name": "DatabaseType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Adabas",
+            "value": "Adabas",
+            "description": "The type of Database- Adabas."
+          },
+          {
+            "name": "Oracle",
+            "value": "Oracle",
+            "description": "The type of Database- Oracle."
+          },
+          {
+            "name": "SAPMaxDB",
+            "value": "SAPMaxDB",
+            "description": "The type of Database- SAPMaxDB."
+          },
+          {
+            "name": "Db2",
+            "value": "Db2",
+            "description": "The type of Database- Db2."
+          },
+          {
+            "name": "SAPASE",
+            "value": "SAPASE",
+            "description": "The type of Database- SAPASE."
+          },
+          {
+            "name": "SQLServer",
+            "value": "SQLServer",
+            "description": "The type of Database- SQLServer."
+          },
+          {
+            "name": "Informix",
+            "value": "Informix",
+            "description": "The type of Database- Informix."
+          },
+          {
+            "name": "SAPDB",
+            "value": "SAPDB",
+            "description": "The type of Database- SAPDB."
+          },
+          {
+            "name": "HANA",
+            "value": "HANA",
+            "description": "The type of Database- HANA."
+          }
+        ]
+      }
+    },
+    "ErrorDefinition": {
+      "type": "object",
+      "description": "Error definition.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Description of the error.",
+          "readOnly": true
+        },
+        "recommendation": {
+          "type": "string",
+          "description": "Description of the recommendation.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "Internal error details.",
+          "items": {
+            "$ref": "#/definitions/ErrorDefinition"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
-    "SAPInstance": {
-      "description": "Define the SAP Instance resource.",
+    "ExcelPerformanceData": {
       "type": "object",
-      "x-ms-azure-resource": true,
+      "description": "The SAP instance specific performance data for Excel import.",
+      "properties": {
+        "maxCpuLoad": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Provide the max CPU percentage load on the server. Omit the percentage symbol while filling this value.",
+          "readOnly": true
+        },
+        "totalSourceDbSizeGB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Provide the source Database size in GB. Applicable only if SAP instance type for this server instance is 'DB'.",
+          "readOnly": true
+        }
+      },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "#/definitions/PerformanceData"
         }
       ],
+      "x-ms-discriminator-value": "Excel"
+    },
+    "ExtendedLocation": {
+      "type": "object",
+      "description": "The extended location definition.",
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SAPInstanceProperties",
-          "description": "The SAP Instance resource properties."
+        "type": {
+          "type": "string",
+          "description": "The extended location type."
+        },
+        "name": {
+          "type": "string",
+          "description": "The extended location name."
         }
       },
       "required": [
-        "properties"
+        "type",
+        "name"
       ]
     },
-    "SAPInstanceList": {
-      "description": "Defines the collection of SAP Instance resources.",
+    "NativePerformanceData": {
       "type": "object",
-      "properties": {
-        "value": {
-          "description": "Gets the list of SAP Instance resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SAPInstance"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "description": "Gets the value of next link.",
-          "type": "string"
-        }
-      }
-    },
-    "UpdateSAPInstanceRequest": {
-      "description": "Defines the request body for updating SAP Instance resource.",
-      "type": "object",
-      "properties": {
-        "tags": {
-          "description": "Gets or sets the Resource tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "ServerInstance": {
-      "description": "Define the Server Instance resource.",
-      "type": "object",
+      "description": "The SAP instance specific performance data for native discovery.",
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/PerformanceData"
         }
       ],
+      "x-ms-discriminator-value": "Native"
+    },
+    "OperatingSystem": {
+      "type": "string",
+      "description": "This is Operating System on which the host server is running.",
+      "enum": [
+        "IBMAIX",
+        "RedHat",
+        "SUSE",
+        "Solaris",
+        "Unix",
+        "WindowsServer"
+      ],
+      "x-ms-enum": {
+        "name": "OperatingSystem",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IBMAIX",
+            "value": "IBMAIX",
+            "description": "The type of Operating system- IBMAIX."
+          },
+          {
+            "name": "RedHat",
+            "value": "RedHat",
+            "description": "The type of Operating system- RedHat."
+          },
+          {
+            "name": "SUSE",
+            "value": "SUSE",
+            "description": "The type of Operating system- SUSE."
+          },
+          {
+            "name": "Solaris",
+            "value": "Solaris",
+            "description": "The type of Operating system- Solaris."
+          },
+          {
+            "name": "Unix",
+            "value": "Unix",
+            "description": "The type of Operating system- Unix."
+          },
+          {
+            "name": "WindowsServer",
+            "value": "WindowsServer",
+            "description": "The type of Operating system- WindowsServer."
+          }
+        ]
+      }
+    },
+    "PerformanceData": {
+      "type": "object",
+      "description": "The SAP instance specific performance data.",
+      "properties": {
+        "dataSource": {
+          "$ref": "#/definitions/DataSource",
+          "description": "The data source of the performance data."
+        }
+      },
+      "discriminator": "dataSource",
+      "required": [
+        "dataSource"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "Defines the provisioning states.",
+      "enum": [
+        "Succeeded",
+        "Updating",
+        "Failed",
+        "Creating",
+        "Canceled",
+        "Accepted",
+        "Deleting",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The provisioning state Succeeded."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The provisioning state Updating."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The provisioning state Failed."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The provisioning state Creating."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The provisioning state Cancelled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The provisioning state Accepted."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The provisioning state Deleting."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The provisioning state Unknown."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "SAPDiscoverySite": {
+      "type": "object",
+      "description": "Define the SAP Migration discovery site resource.",
       "properties": {
         "properties": {
+          "$ref": "#/definitions/SAPDiscoverySiteProperties",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ServerInstanceProperties"
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location definition."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
     },
-    "ServerInstanceList": {
-      "description": "Defines the collection of Server Instance resources.",
+    "SAPDiscoverySiteListResult": {
       "type": "object",
+      "description": "The response of a SAPDiscoverySite list operation.",
       "properties": {
         "value": {
-          "description": "Gets the list of Server Instance resources.",
           "type": "array",
+          "description": "The SAPDiscoverySite items on this page",
           "items": {
-            "$ref": "#/definitions/ServerInstance"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/SAPDiscoverySite"
+          }
         },
         "nextLink": {
-          "description": "Gets the value of next link.",
-          "type": "string"
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "SAPDiscoverySiteProperties": {
-      "description": "Defines the SAP Migration discovery site resource properties.",
       "type": "object",
+      "description": "Defines the SAP Migration discovery site resource properties.",
       "properties": {
         "masterSiteId": {
           "type": "string",
@@ -1113,17 +1528,74 @@
           "description": "The migrate project ID from Azure Migrate."
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState"
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Defines the provisioning states.",
+          "readOnly": true
         },
         "errors": {
+          "$ref": "#/definitions/SAPMigrateError",
           "description": "Indicates any errors on the SAP Migration discovery site resource.",
-          "$ref": "#/definitions/SAPMigrateError"
+          "readOnly": true
         }
       }
     },
-    "SAPInstanceProperties": {
-      "description": "Defines the SAP Instance properties.",
+    "SAPDiscoverySiteTagsUpdate": {
       "type": "object",
+      "description": "The type used for updating tags in SAPDiscoverySite resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SAPInstance": {
+      "type": "object",
+      "description": "Define the SAP Instance resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SAPInstanceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SAPInstanceListResult": {
+      "type": "object",
+      "description": "The response of a SAPInstance list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SAPInstance items on this page",
+          "items": {
+            "$ref": "#/definitions/SAPInstance"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SAPInstanceProperties": {
+      "type": "object",
+      "description": "Defines the SAP Instance properties.",
       "properties": {
         "systemSid": {
           "type": "string",
@@ -1131,7 +1603,9 @@
           "readOnly": true
         },
         "environment": {
-          "$ref": "#/definitions/SapInstanceEnvironment"
+          "$ref": "#/definitions/SapInstanceEnvironment",
+          "description": "The Environment; PRD, QA, DEV, etc to which SAP system belongs to. Select from the list of available dropdown values.",
+          "readOnly": true
         },
         "landscapeSid": {
           "type": "string",
@@ -1144,34 +1618,203 @@
           "readOnly": true
         },
         "serverCount": {
-          "description": "Server count for various SAP Instance type servers ('ASCS', 'DB', 'APP', 'SCS', 'WEBDISP') in this SAP Instance.",
           "type": "object",
+          "description": "Server count for various SAP Instance type servers ('ASCS', 'DB', 'APP', 'SCS', 'WEBDISP') in this SAP Instance.",
           "additionalProperties": {
-            "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "type": "integer"
           }
         },
         "assessmentReadinessIssues": {
-          "description": "List of issues blocking this Sap system to be assessment ready.",
           "type": "array",
+          "description": "List of issues blocking this Sap system to be assessment ready.",
           "items": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState"
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Defines the provisioning states.",
+          "readOnly": true
         },
         "errors": {
+          "$ref": "#/definitions/SAPMigrateError",
           "description": "Defines the errors related to SAP Instance resource.",
-          "$ref": "#/definitions/SAPMigrateError"
+          "readOnly": true
         }
       }
     },
-    "ServerInstanceProperties": {
-      "description": "Defines the SAP Instance properties.",
+    "SAPInstanceTagsUpdate": {
       "type": "object",
+      "description": "The type used for updating tags in SAPInstance resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SAPMigrateError": {
+      "type": "object",
+      "description": "An error response from the SAP migrate resources.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ErrorDefinition",
+          "description": "The SAP Discovery site resource error body.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SapInstanceEnvironment": {
+      "type": "string",
+      "description": "The Environment; PRD, QA, DEV, etc to which SAP system belongs to. Select from the list of available dropdown values.",
+      "enum": [
+        "Production",
+        "PreProduction",
+        "Test",
+        "QualityAssurance",
+        "Development",
+        "Sandbox",
+        "DisasterRecovery",
+        "Training"
+      ],
+      "x-ms-enum": {
+        "name": "SapInstanceEnvironment",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Production",
+            "value": "Production",
+            "description": "The type of Sap Instance Environment- Production."
+          },
+          {
+            "name": "PreProduction",
+            "value": "PreProduction",
+            "description": "The type of Sap Instance Environment- PreProduction."
+          },
+          {
+            "name": "Test",
+            "value": "Test",
+            "description": "The type of Sap Instance Environment- Test."
+          },
+          {
+            "name": "QualityAssurance",
+            "value": "QualityAssurance",
+            "description": "The type of Sap Instance Environment- QualityAssurance."
+          },
+          {
+            "name": "Development",
+            "value": "Development",
+            "description": "The type of Sap Instance Environment- Development."
+          },
+          {
+            "name": "Sandbox",
+            "value": "Sandbox",
+            "description": "The type of Sap Instance Environment- Sandbox."
+          },
+          {
+            "name": "DisasterRecovery",
+            "value": "DisasterRecovery",
+            "description": "The type of Sap Instance Environment- DisasterRecovery."
+          },
+          {
+            "name": "Training",
+            "value": "Training",
+            "description": "The type of Sap Instance Environment- Training."
+          }
+        ]
+      }
+    },
+    "SapInstanceType": {
+      "type": "string",
+      "description": "The SAP instance type running on this machine, e.g., App, ASCS, DB, etc. Select from the list of available dropdown values. Only single server and distributed architectures are supported.",
+      "enum": [
+        "ASCS",
+        "DB",
+        "APP",
+        "SCS",
+        "WEBDISP"
+      ],
+      "x-ms-enum": {
+        "name": "SapInstanceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ASCS",
+            "value": "ASCS",
+            "description": "The type of Sap Instance- ASCS."
+          },
+          {
+            "name": "DB",
+            "value": "DB",
+            "description": "The type of Sap Instance- DB."
+          },
+          {
+            "name": "APP",
+            "value": "APP",
+            "description": "The type of Sap Instance- APP."
+          },
+          {
+            "name": "SCS",
+            "value": "SCS",
+            "description": "The type of Sap Instance- SCS."
+          },
+          {
+            "name": "WEBDISP",
+            "value": "WEBDISP",
+            "description": "The type of Sap Instance- WEBDISP."
+          }
+        ]
+      }
+    },
+    "ServerInstance": {
+      "type": "object",
+      "description": "Define the Server Instance resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerInstanceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ServerInstanceListResult": {
+      "type": "object",
+      "description": "The response of a ServerInstance list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ServerInstance items on this page",
+          "items": {
+            "$ref": "#/definitions/ServerInstance"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ServerInstanceProperties": {
+      "type": "object",
+      "description": "Defines the SAP Instance properties.",
       "properties": {
         "serverName": {
           "type": "string",
@@ -1179,8 +1822,8 @@
           "readOnly": true
         },
         "sapInstanceType": {
-          "description": "Defines the type SAP instance on this server instance.",
           "$ref": "#/definitions/SapInstanceType",
+          "description": "Defines the type SAP instance on this server instance.",
           "readOnly": true
         },
         "instanceSid": {
@@ -1199,335 +1842,60 @@
           "readOnly": true
         },
         "operatingSystem": {
-          "$ref": "#/definitions/OperatingSystem"
+          "$ref": "#/definitions/OperatingSystem",
+          "description": "This is Operating System on which the host server is running.",
+          "readOnly": true
         },
         "configurationData": {
-          "description": "Configuration data for this server instance.",
           "$ref": "#/definitions/ConfigurationData",
+          "description": "Configuration data for this server instance.",
           "readOnly": true
         },
         "performanceData": {
-          "description": "Configuration data for this server instance.",
           "$ref": "#/definitions/PerformanceData",
+          "description": "Configuration data for this server instance.",
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState"
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Defines the provisioning states.",
+          "readOnly": true
         },
         "errors": {
+          "$ref": "#/definitions/SAPMigrateError",
           "description": "Defines the errors related to SAP Instance resource.",
-          "$ref": "#/definitions/SAPMigrateError"
-        }
-      }
-    },
-    "ConfigurationData": {
-      "description": "The SAP instance specific configuration data.",
-      "type": "object",
-      "properties": {
-        "saps": {
-          "description": "Provide the SAPS for each server of the SAP system. This should be a non-zero value. For example, 1000.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        },
-        "cpu": {
-          "description": "Provide the CPU value of the server. For example, 16, 32 etc.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        },
-        "cpuType": {
-          "type": "string",
-          "description": "Provide the CPU architecture type of the server. For example, Xeon Platinum 8171M, Xeon E5-2673 v3.",
-          "readOnly": true
-        },
-        "cpuInMhz": {
-          "description": "Provide the CPU clock speed of the server in MHz. This should be a non-zero value. For example, 2100.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        },
-        "ram": {
-          "description": "Provide the RAM of the server. This should be a non-zero value. For example, 256.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        },
-        "hardwareManufacturer": {
-          "type": "string",
-          "description": "Provide the HW manufacturer company of the server.  For example, Microsoft Corporation.",
-          "readOnly": true
-        },
-        "model": {
-          "type": "string",
-          "description": "Specify if the Hardware is a physical server or virtual machine.",
-          "readOnly": true
-        },
-        "totalDiskSizeGB": {
-          "description": "Provide the total disk volume capacity in GB. Add the disk volume for each individual disks and provide the total sum in this field.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        },
-        "totalDiskIops": {
-          "description": "Provide the total disk IOPS capacity. Add the disk volume for each individual disk and provide the sum total in this field.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        },
-        "databaseType": {
-          "description": "The database of this is a server instance. Applicable only if SAP instance type for this server instance is 'DB'.",
-          "$ref": "#/definitions/DatabaseType",
-          "readOnly": true
-        },
-        "targetHanaRamSizeGB": {
-          "description": " Provide the target HANA database size you need. Applicable only if SAP instance type for this server instance is 'DB' and you are migrating an AnyDb database to SAP S/4HANA.",
-          "type": "integer",
-          "format": "int32",
           "readOnly": true
         }
       }
     },
-    "PerformanceData": {
-      "description": "The SAP instance specific performance data.",
+    "UpdateServerInstanceRequest": {
       "type": "object",
-      "required": [
-        "dataSource"
-      ],
-      "properties": {
-        "dataSource": {
-          "$ref": "#/definitions/DataSource"
-        }
-      },
-      "discriminator": "dataSource"
-    },
-    "ExcelPerformanceData": {
-      "x-ms-discriminator-value": "Excel",
-      "description": "The SAP instance specific performance data for Excel import.",
-      "type": "object",
-      "x-ms-client-flatten": true,
-      "allOf": [
-        {
-          "$ref": "#/definitions/PerformanceData"
-        }
-      ],
-      "properties": {
-        "maxCpuLoad": {
-          "description": "Provide the max CPU percentage load on the server. Omit the percentage symbol while filling this value.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        },
-        "totalSourceDbSizeGB": {
-          "description": "Provide the source Database size in GB. Applicable only if SAP instance type for this server instance is 'DB'.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        }
-      }
-    },
-    "NativePerformanceData": {
-      "x-ms-discriminator-value": "Native",
-      "description": "The SAP instance specific performance data for native discovery.",
-      "type": "object",
-      "x-ms-client-flatten": true,
-      "allOf": [
-        {
-          "$ref": "#/definitions/PerformanceData"
-        }
-      ]
-    },
-    "ExtendedLocation": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The extended location type."
-        },
-        "name": {
-          "type": "string",
-          "description": "The extended location name."
-        }
-      },
-      "description": "The extended location definition.",
-      "required": [
-        "type",
-        "name"
-      ]
-    },
-    "SAPMigrateError": {
-      "type": "object",
+      "description": "Defines the request body for updating Server Instances resource.",
       "properties": {
         "properties": {
-          "x-ms-client-flatten": true,
-          "description": "The SAP Discovery site resource error body.",
-          "$ref": "#/definitions/ErrorDefinition"
-        }
-      },
-      "readOnly": true,
-      "description": "An error response from the SAP migrate resources."
-    },
-    "ErrorDefinition": {
-      "type": "object",
-      "description": "Error definition.",
-      "properties": {
-        "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Description of the error.",
-          "type": "string",
-          "readOnly": true
-        },
-        "recommendation": {
-          "description": "Description of the recommendation.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Internal error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDefinition"
-          },
-          "x-ms-identifiers": [],
-          "readOnly": true
+          "$ref": "#/definitions/ServerInstanceProperties",
+          "description": "Server instances properties."
         }
       }
     },
-    "ProvisioningState": {
-      "description": "Defines the provisioning states.",
-      "enum": [
-        "Succeeded",
-        "Updating",
-        "Failed",
-        "Creating",
-        "Canceled",
-        "Accepted",
-        "Deleting",
-        "Unknown"
-      ],
+    "Versions": {
       "type": "string",
-      "readOnly": true,
+      "description": "The available API versions.",
+      "enum": [
+        "2023-10-01-preview"
+      ],
       "x-ms-enum": {
-        "name": "ProvisioningState",
-        "modelAsString": true
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2023_10_01_preview",
+            "value": "2023-10-01-preview",
+            "description": "The 2023-10-01-preview API version."
+          }
+        ]
       }
-    },
-    "SapInstanceType": {
-      "description": "The SAP instance type running on this machine, e.g., App, ASCS, DB, etc. Select from the list of available dropdown values. Only single server and distributed architectures are supported.",
-      "enum": [
-        "ASCS",
-        "DB",
-        "APP",
-        "SCS",
-        "WEBDISP"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "SapInstanceType",
-        "modelAsString": true
-      }
-    },
-    "DataSource": {
-      "description": "The data source for this resource.",
-      "enum": [
-        "Excel",
-        "Native"
-      ],
-      "type": "string",
-      "readOnly": true,
-      "x-ms-enum": {
-        "name": "DataSource",
-        "modelAsString": true
-      }
-    },
-    "DatabaseType": {
-      "description": "Select the database if this is a database server. Leave blank or add Not Applicable for all other instances except the Database Instance.",
-      "enum": [
-        "Adabas",
-        "Oracle",
-        "SAPMaxDB",
-        "Db2",
-        "SAPASE",
-        "SQLServer",
-        "Informix",
-        "SAPDB",
-        "HANA"
-      ],
-      "type": "string",
-      "readOnly": true,
-      "x-ms-enum": {
-        "name": "DatabaseType",
-        "modelAsString": true
-      }
-    },
-    "OperatingSystem": {
-      "description": "This is Operating System on which the host server is running.",
-      "enum": [
-        "IBMAIX",
-        "RedHat",
-        "SUSE",
-        "Solaris",
-        "Unix",
-        "WindowsServer"
-      ],
-      "type": "string",
-      "readOnly": true,
-      "x-ms-enum": {
-        "name": "OperatingSystem",
-        "modelAsString": true
-      }
-    },
-    "SapInstanceEnvironment": {
-      "description": "The Environment; PRD, QA, DEV, etc to which SAP system belongs to. Select from the list of available dropdown values.",
-      "enum": [
-        "Production",
-        "PreProduction",
-        "Test",
-        "QualityAssurance",
-        "Development",
-        "Sandbox",
-        "DisasterRecovery",
-        "Training"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "SapInstanceEnvironment",
-        "modelAsString": true
-      },
-      "readOnly": true
     }
   },
-  "parameters": {
-    "SAPDiscoverySiteNameParameter": {
-      "name": "sapDiscoverySiteName",
-      "in": "path",
-      "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$",
-      "required": true,
-      "type": "string",
-      "description": "The name of the discovery site resource for SAP Migration.",
-      "x-ms-parameter-location": "method"
-    },
-    "ServerInstanceNameParameter": {
-      "name": "serverInstanceName",
-      "in": "path",
-      "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$",
-      "required": true,
-      "type": "string",
-      "description": "The name of the Server instance resource for SAP Migration.",
-      "x-ms-parameter-location": "method"
-    },
-    "SAPInstanceNameParameter": {
-      "name": "sapInstanceName",
-      "pattern": "^[A-Za-z][\\w-]*[A-Za-z0-9]$",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of SAP Instance resource for SAP Migration.",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }

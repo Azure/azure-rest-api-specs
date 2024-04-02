@@ -33,7 +33,9 @@ model Reservation<TProperties extends Model = ReservationProperties>
   @key("reservationName")
   @visibility("read")
   @path
-  @pattern("^[a-zA-Z0-9_]*$")
+  @minLength(1)
+  @maxLength(127)
+  @pattern("^[a-zA-Z0-9\\-_]{1,127}$")
   name: string;
 }
 
@@ -45,7 +47,7 @@ interface Reservations<
   get is ArmResourceRead<TReservation>;
   create is ArmResourceCreateOrUpdateAsync<TReservation>;
   update is ArmResourcePatchAsync<TReservation, TReservationProperties>;
-  delete is ArmResourceDeleteAsync<TReservation>;
+  delete is ArmResourceDeleteWithoutOkAsync<TReservation>;
   listByResourceGroup is ArmResourceListByParent<TReservation>;
   listBySubscription is ArmListBySubscription<TReservation>;
 }

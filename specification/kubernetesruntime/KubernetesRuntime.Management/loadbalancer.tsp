@@ -40,6 +40,10 @@ model LoadBalancerProperties {
   @doc("Advertise Mode")
   advertiseMode: AdvertiseMode;
 
+  @doc("The list of BGP peers it should advertise to. Null or empty means to advertise to all peers.")
+  @added(Microsoft.KubernetesRuntime.Versions.v2024_03_01)
+  bgpPeers?: string[];
+
   @visibility("read")
   @doc("Resource provision state")
   provisioningState?: ProvisioningState;
@@ -49,6 +53,13 @@ model LoadBalancerProperties {
 interface LoadBalancers {
   get is ArmResourceRead<LoadBalancer>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<LoadBalancer>;
-  delete is ArmResourceDeleteWithoutOkAsync<LoadBalancer>;
+  @sharedRoute
+  @added(Versions.v2024_03_01)
+  delete is ArmResourceDeleteSync<LoadBalancer>;
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "The intended way to change the delete operation from async to sync. Ref: https://github.com/Azure/typespec-azure/issues/312"
+  @sharedRoute
+  @renamedFrom(Versions.v2024_03_01, "delete")
+  @removed(Versions.v2024_03_01)
+  oldDelete is ArmResourceDeleteWithoutOkAsync<LoadBalancer>;
   listByParent is ArmResourceListByParent<LoadBalancer>;
 }

@@ -27,8 +27,18 @@ These are the global settings for the edge.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: connectivityStatuses-package-2023-07-01-preview
+tag: connectivityStatuses-package-2024-02-01-preview
 ```
+
+### Tag: connectivityStatuses-package-2024-02-01-preview
+
+These settings apply only when `--tag=connectivityStatuses-package-2024-02-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'connectivityStatuses-package-2024-02-01-preview'
+input-file:
+  - preview/2024-02-01-preview/connectivityStatuses.json
+```
+---
 
 ### Tag: connectivityStatuses-package-2023-07-01-preview
 
@@ -77,3 +87,11 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
 
+### Suppress Operations API Implemented exception
+
+ For operations API, we have defined it in a common folder "edge" under the RP. We don't have it in individual specs file for resources since we need partial manifest rollout. Hence the swagger has been split for each resource but operations API is at a common place here -- azure-rest-api-specs-pr\specification\edge\resource-manager\Microsoft.Edge\edge\preview\2023-07-01-preview\operations.json
+
+``` yaml
+suppressions:
+  - code: OperationsAPIImplementation
+    reason: Operations API for edge RP is already implemented in a common folder "edge" under the RP

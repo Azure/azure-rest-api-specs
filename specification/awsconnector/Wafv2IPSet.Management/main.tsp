@@ -61,8 +61,8 @@ model AwsWafv2IPSetProperties {
   @doc("Gets and sets the property description. Description of the entity.")
   description?: string;
 
-  @doc("Gets and sets the property iPAddressVersion. Type of addresses in the IPSet, use IPV4 for IPV4 IP addresses, IPV6 for IPV6 address.")
-  iPAddressVersion?: string;
+  @doc("Gets and sets the property ipAddressVersion. Type of addresses in the IPSet, use IPV4 for IPV4 IP addresses, IPV6 for IPV6 address.")
+  ipAddressVersion?: string;
 
   @doc("Gets and sets the property id. Id of the IPSet")
   id?: string;

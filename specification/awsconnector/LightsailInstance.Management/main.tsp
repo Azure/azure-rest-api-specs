@@ -233,8 +233,8 @@ model Disk {
   @doc("Gets and sets the property diskName. The names to use for your new Lightsail disk.")
   diskName?: string;
 
-  @doc("Gets and sets the property iOPS. IOPS of disk.")
-  iOPS?: int32;
+  @doc("Gets and sets the property iops. IOPS of disk.")
+  iops?: int32;
 
   @doc("Gets and sets the property isSystemDisk. Is the Attached disk is the system disk of the Instance.")
   isSystemDisk?: boolean;

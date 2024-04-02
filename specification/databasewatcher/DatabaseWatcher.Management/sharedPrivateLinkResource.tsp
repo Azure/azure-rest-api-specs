@@ -10,16 +10,14 @@ using TypeSpec.Versioning;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 
-@added(Versions.v2023_09_01_preview)
 @armResourceOperations
 interface SharedPrivateLinkResources {
   get is ArmResourceRead<SharedPrivateLinkResource>;
   create is ArmResourceCreateOrUpdateAsync<SharedPrivateLinkResource>;
-  delete is ArmResourceDeleteAsync<SharedPrivateLinkResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<SharedPrivateLinkResource>;
   listByParent is ArmResourceListByParent<SharedPrivateLinkResource>;
 }
 
-@added(Versions.v2023_09_01_preview)
 @parentResource(Watcher)
 model SharedPrivateLinkResource
   is ProxyResource<SharedPrivateLinkResourceProperties> {
@@ -31,7 +29,6 @@ model SharedPrivateLinkResource
   name: string;
 }
 
-@added(Versions.v2023_09_01_preview)
 @doc("The generic properties of a Shared Private Link resource.")
 model SharedPrivateLinkResourceProperties {
   @doc("The resource id of the resource the shared private link resource is for.")
@@ -43,8 +40,8 @@ model SharedPrivateLinkResourceProperties {
   @doc("The request message for requesting approval of the shared private link resource.")
   requestMessage: string;
 
-  @doc("Optional. Can be used to specify the Azure Resource Manager location of the resource to which a shared private link is to be created. This is only required for those resources whose DNS configuration are regional (such as Kusto).")
-  resourceRegion?: string;
+  @doc("The DNS zone to be included in the DNS name of the shared private link. Value is service-specific.")
+  dnsZone?: string;
 
   @visibility("read")
   @doc("Status of the shared private link resource. Can be Pending, Approved, Rejected or Disconnected.")
@@ -55,7 +52,6 @@ model SharedPrivateLinkResourceProperties {
   provisioningState?: ResourceProvisioningState;
 }
 
-@added(Versions.v2023_09_01_preview)
 @doc("Status of the shared private link resource. Can be Pending, Approved, Rejected or Disconnected.")
 enum SharedPrivateLinkResourceStatus {
   @doc("The shared private link connection request was not yet authorized by the resource owner.")

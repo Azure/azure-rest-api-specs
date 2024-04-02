@@ -414,9 +414,9 @@
           "format": "int32",
           "description": "Gets and sets the property backupRetentionPeriod. The number of days for which automated backups are retained. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups."
         },
-        "cACertificateIdentifier": {
+        "caCertificateIdentifier": {
           "type": "string",
-          "description": "Gets and sets the property cACertificateIdentifier. The identifier of the CA certificate for this DB instance."
+          "description": "Gets and sets the property caCertificateIdentifier. The identifier of the CA certificate for this DB instance."
         },
         "certificateDetails": {
           "$ref": "#/definitions/CertificateDetails",
@@ -438,53 +438,53 @@
           "type": "string",
           "description": "Gets and sets the property customIAMInstanceProfile. The instance profile associated with the underlying Amazon EC2 instance of an RDS Custom DB instance. The instance profile must meet the following requirements: * The profile must exist in your account. * The profile must have an IAM role that Amazon EC2 has permissions to assume. * The instance profile name and the associated IAM role name must start with the prefix AWSRDSCustom .For the list of permissions required for the IAM role, see Configure IAM and your VPC in the Amazon RDS User Guide .This setting is required for RDS Custom."
         },
-        "dBClusterIdentifier": {
+        "dbClusterIdentifier": {
           "type": "string",
-          "description": "Gets and sets the property dBClusterIdentifier. The identifier of the DB cluster that the instance will belong to."
+          "description": "Gets and sets the property dbClusterIdentifier. The identifier of the DB cluster that the instance will belong to."
         },
-        "dBClusterSnapshotIdentifier": {
+        "dbClusterSnapshotIdentifier": {
           "type": "string",
-          "description": "Gets and sets the property dBClusterSnapshotIdentifier. The identifier for the RDS for MySQL Multi-AZ DB cluster snapshot to restore from. For more information on Multi-AZ DB clusters, see Multi-AZ deployments with two readable standby DB instances in the Amazon RDS User Guide .Constraints: * Must match the identifier of an existing Multi-AZ DB cluster snapshot. * Can't be specified when DBSnapshotIdentifier is specified. * Must be specified when DBSnapshotIdentifier isn't specified. * If you are restoring from a shared manual Multi-AZ DB cluster snapshot, the DBClusterSnapshotIdentifier must be the ARN of the shared snapshot. * Can't be the identifier of an Aurora DB cluster snapshot. * Can't be the identifier of an RDS for PostgreSQL Multi-AZ DB cluster snapshot."
+          "description": "Gets and sets the property dbClusterSnapshotIdentifier. The identifier for the RDS for MySQL Multi-AZ DB cluster snapshot to restore from. For more information on Multi-AZ DB clusters, see Multi-AZ deployments with two readable standby DB instances in the Amazon RDS User Guide .Constraints: * Must match the identifier of an existing Multi-AZ DB cluster snapshot. * Can't be specified when DBSnapshotIdentifier is specified. * Must be specified when DBSnapshotIdentifier isn't specified. * If you are restoring from a shared manual Multi-AZ DB cluster snapshot, the DBClusterSnapshotIdentifier must be the ARN of the shared snapshot. * Can't be the identifier of an Aurora DB cluster snapshot. * Can't be the identifier of an RDS for PostgreSQL Multi-AZ DB cluster snapshot."
         },
-        "dBInstanceArn": {
+        "dbInstanceArn": {
           "type": "string",
-          "description": "Gets and sets the property dBInstanceArn. The Amazon Resource Name (ARN) for the DB instance."
+          "description": "Gets and sets the property dbInstanceArn. The Amazon Resource Name (ARN) for the DB instance."
         },
-        "dBInstanceClass": {
+        "dbInstanceClass": {
           "type": "string",
-          "description": "Gets and sets the property dBInstanceClass. The compute and memory capacity of the DB instance, for example, db.m4.large. Not all DB instance classes are available in all AWS Regions, or for all database engines."
+          "description": "Gets and sets the property dbInstanceClass. The compute and memory capacity of the DB instance, for example, db.m4.large. Not all DB instance classes are available in all AWS Regions, or for all database engines."
         },
-        "dBInstanceIdentifier": {
+        "dbInstanceIdentifier": {
           "type": "string",
-          "description": "Gets and sets the property dBInstanceIdentifier. A name for the DB instance. If you specify a name, AWS CloudFormation converts it to lowercase. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the DB instance."
+          "description": "Gets and sets the property dbInstanceIdentifier. A name for the DB instance. If you specify a name, AWS CloudFormation converts it to lowercase. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the DB instance."
         },
-        "dBName": {
+        "dbName": {
           "type": "string",
-          "description": "Gets and sets the property dBName. The meaning of this parameter differs according to the database engine you use."
+          "description": "Gets and sets the property dbName. The meaning of this parameter differs according to the database engine you use."
         },
-        "dBParameterGroupName": {
+        "dbParameterGroupName": {
           "type": "string",
-          "description": "Gets and sets the property dBParameterGroupName. The name of an existing DB parameter group or a reference to an AWS::RDS::DBParameterGroup resource created in the template."
+          "description": "Gets and sets the property dbParameterGroupName. The name of an existing DB parameter group or a reference to an AWS::RDS::DBParameterGroup resource created in the template."
         },
-        "dBSecurityGroups": {
+        "dbSecurityGroups": {
           "type": "array",
-          "description": "Gets and sets the property dBSecurityGroups. A list of the DB security groups to assign to the DB instance. The list can include both the name of existing DB security groups or references to AWS::RDS::DBSecurityGroup resources created in the template.",
+          "description": "Gets and sets the property dbSecurityGroups. A list of the DB security groups to assign to the DB instance. The list can include both the name of existing DB security groups or references to AWS::RDS::DBSecurityGroup resources created in the template.",
           "items": {
             "type": "string"
           },
           "x-ms-identifiers": []
         },
-        "dBSnapshotIdentifier": {
+        "dbSnapshotIdentifier": {
           "type": "string",
-          "description": "Gets and sets the property dBSnapshotIdentifier. The name or Amazon Resource Name (ARN) of the DB snapshot that's used to restore the DB instance. If you're restoring from a shared manual DB snapshot, you must specify the ARN of the snapshot."
+          "description": "Gets and sets the property dbSnapshotIdentifier. The name or Amazon Resource Name (ARN) of the DB snapshot that's used to restore the DB instance. If you're restoring from a shared manual DB snapshot, you must specify the ARN of the snapshot."
         },
-        "dBSubnetGroupName": {
+        "dbSubnetGroupName": {
           "type": "string",
-          "description": "Gets and sets the property dBSubnetGroupName. A DB subnet group to associate with the DB instance. If you update this value, the new subnet group must be a subnet group in a new VPC."
+          "description": "Gets and sets the property dbSubnetGroupName. A DB subnet group to associate with the DB instance. If you update this value, the new subnet group must be a subnet group in a new VPC."
         },
-        "dBSystemId": {
+        "dbSystemId": {
           "type": "string",
-          "description": "Gets and sets the property dBSystemId. The Oracle system ID (Oracle SID) for a container database (CDB). The Oracle SID is also the name of the CDB. This setting is valid for RDS Custom only."
+          "description": "Gets and sets the property dbSystemId. The Oracle system ID (Oracle SID) for a container database (CDB). The Oracle SID is also the name of the CDB. This setting is valid for RDS Custom only."
         },
         "dbiResourceId": {
           "type": "string",
@@ -724,9 +724,9 @@
           "type": "boolean",
           "description": "Gets and sets the property useLatestRestorableTime. A value that indicates whether the DB instance is restored from the latest backup time. By default, the DB instance isn't restored from the latest backup time."
         },
-        "vPCSecurityGroups": {
+        "vpcSecurityGroups": {
           "type": "array",
-          "description": "Gets and sets the property vPCSecurityGroups. A list of the VPC security group IDs to assign to the DB instance. The list can include both the physical IDs of existing VPC security groups and references to AWS::EC2::SecurityGroup resources created in the template.",
+          "description": "Gets and sets the property vpcSecurityGroups. A list of the VPC security group IDs to assign to the DB instance. The list can include both the physical IDs of existing VPC security groups and references to AWS::EC2::SecurityGroup resources created in the template.",
           "items": {
             "type": "string"
           },
@@ -738,9 +738,9 @@
       "type": "object",
       "description": "Definition of CertificateDetails",
       "properties": {
-        "cAIdentifier": {
+        "caIdentifier": {
           "type": "string",
-          "description": "Gets and sets the property cAIdentifier. The CA identifier of the CA certificate used for the DB instance's server certificate."
+          "description": "Gets and sets the property caIdentifier. The CA identifier of the CA certificate used for the DB instance's server certificate."
         },
         "validTill": {
           "type": "string",

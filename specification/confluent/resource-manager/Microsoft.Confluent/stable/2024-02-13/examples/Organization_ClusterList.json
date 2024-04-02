@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "api-version": "2024-02-13",
+    "pageSize": 10,
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "organizationName": "myOrganization",
+    "environmentId": "env-12132"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "kind": "Cluster",
+            "id": "dlz-f3a90de",
+            "properties": {
+              "metadata": {
+                "self": "https://api.confluent.cloud/cmk/v2/clusters/lkc-12345",
+                "resourceName": "crn://confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/cloud-cluster=lkc-12345",
+                "createdTimestamp": "2006-01-02T15:04:05-07:00",
+                "updatedTimestamp": "2006-01-02T15:04:05-07:00",
+                "deletedTimestamp": "2006-01-02T15:04:05-07:00"
+              },
+              "spec": {
+                "name": "ProdKafkaCluster",
+                "availability": "SINGLE_ZONE",
+                "cloud": "GCP",
+                "region": "us-east4",
+                "config": {
+                  "kind": "Basic"
+                },
+                "kafkaBootstrapEndpoint": "lkc-00000-00000.us-central1.gcp.glb.confluent.cloud:9092",
+                "httpEndpoint": "https://lkc-00000-00000.us-central1.gcp.glb.confluent.cloud",
+                "apiEndpoint": "https://pkac-00000.us-west-2.aws.confluent.cloud",
+                "environment": {
+                  "id": "env-00000",
+                  "environment": "string",
+                  "related": "https://api.confluent.cloud/v2/environments/env-00000",
+                  "resourceName": "https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-00000"
+                },
+                "network": {
+                  "id": "n-00000",
+                  "environment": "string",
+                  "related": "https://api.confluent.cloud/networking/v1/networks/n-00000",
+                  "resourceName": "https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/environment=env-abc123/network=n-00000"
+                },
+                "byok": {
+                  "id": "cck-00000",
+                  "related": "https://api.confluent.cloud/byok/v1/keys/cck-00000",
+                  "resourceName": "https://api.confluent.cloud/organization=9bb441c4-edef-46ac-8a41-c49e44a3fd9a/key=cck-00000"
+                }
+              },
+              "status": {
+                "phase": "PROVISIONED",
+                "cku": 2
+              }
+            }
+          }
+        ],
+        "nextLink": "nextLink?pageToken=xoi3753asdfe&pageSize=10"
+      }
+    }
+  }
+}

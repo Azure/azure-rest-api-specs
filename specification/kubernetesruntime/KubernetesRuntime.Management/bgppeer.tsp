@@ -37,6 +37,13 @@ model BgpPeerProperties {
 interface BgpPeers {
   get is ArmResourceRead<BgpPeer>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<BgpPeer>;
-  delete is ArmResourceDeleteWithoutOkAsync<BgpPeer>;
+  @sharedRoute
+  @added(Versions.v2024_03_01)
+  delete is ArmResourceDeleteSync<BgpPeer>;
+  #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "The intended way to change the delete operation from async to sync. Ref: https://github.com/Azure/typespec-azure/issues/312"
+  @sharedRoute
+  @renamedFrom(Versions.v2024_03_01, "delete")
+  @removed(Versions.v2024_03_01)
+  oldDelete is ArmResourceDeleteWithoutOkAsync<BgpPeer>;
   listByParent is ArmResourceListByParent<BgpPeer>;
 }

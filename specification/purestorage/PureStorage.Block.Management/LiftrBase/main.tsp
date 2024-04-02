@@ -1,7 +1,6 @@
 import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@azure-tools/typespec-providerhub";
 import "@typespec/rest";
 import "@typespec/versioning";
 
@@ -145,7 +144,7 @@ model BaseResourceProperties<TUserDetailsExtraProperties extends Model = UserDet
 
   @doc("Provisioning state of the resource.")
   @visibility("read")
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 }
 
 @doc("Properties specific to Single Sign On Resource")
@@ -164,7 +163,7 @@ model SingleSignOnProperties {
 
   @visibility("read")
   @doc("Provisioning State of the resource")
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 }
 
 @doc("Various states of the SSO resource")
@@ -177,4 +176,16 @@ enum SingleSignOnStates {
 
   @doc("State of the SSO resource when it is disabled")
   Disable,
+}
+
+@doc("The status of the current operation.")
+@Azure.Core.lroStatus
+enum ProvisioningState {
+  ...ResourceProvisioningState,
+
+  @doc("Deletion in progress")
+  Deleting,
+
+  @doc("Change accepted for processing")
+  Accepted,
 }

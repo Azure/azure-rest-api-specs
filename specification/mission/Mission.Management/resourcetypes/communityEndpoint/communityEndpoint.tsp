@@ -106,6 +106,10 @@ model CommunityEndpointProperties {
   @doc("Destination Rule Collection.")
   destinationRuleCollection: DestinationRule[];
 
+  @added(Microsoft.Mission.Versions.v2024_01_01_preview)
+  @doc("List of resource ids created by community endpoint.")
+  resourceCollection?: string[];
+
   @doc("Provisioning State.")
   @visibility("read")
   provisioningState?: ProvisioningState;

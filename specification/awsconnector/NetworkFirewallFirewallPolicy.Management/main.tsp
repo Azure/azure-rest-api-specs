@@ -106,8 +106,8 @@ model FirewallPolicy {
   @extension("x-ms-identifiers", [])
   statelessRuleGroupReferences?: StatelessRuleGroupReference[];
 
-  @doc("Gets and sets the property tLSInspectionConfigurationArn. A resource ARN.")
-  tLSInspectionConfigurationArn?: string;
+  @doc("Gets and sets the property tlsInspectionConfigurationArn. A resource ARN.")
+  tlsInspectionConfigurationArn?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
@@ -126,6 +126,7 @@ model Tag {
 @doc("Definition of RuleVariables")
 model RuleVariablesModel {
   @doc("Gets and sets the property ruleVariables.")
+  @projectedName("csharp", "ruleVariablescsharp")
   ruleVariables?: Record<IPSet>;
 }
 

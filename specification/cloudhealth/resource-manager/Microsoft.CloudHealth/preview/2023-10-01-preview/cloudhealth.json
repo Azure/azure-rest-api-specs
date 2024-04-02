@@ -75,7 +75,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
@@ -114,7 +114,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/HealthModelListResult"
             }
@@ -156,7 +156,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/HealthModelListResult"
             }
@@ -206,7 +206,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/HealthModel"
             }
@@ -331,7 +331,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/HealthModel"
             }
@@ -408,7 +408,7 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -456,7 +456,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AuthenticationSettingListResult"
             }
@@ -514,7 +514,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/AuthenticationSetting"
             }
@@ -638,7 +638,7 @@
             "description": "Resource deleted successfully."
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -690,7 +690,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DiscoveryRuleListResult"
             }
@@ -748,7 +748,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DiscoveryRule"
             }
@@ -872,7 +872,7 @@
             "description": "Resource deleted successfully."
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -924,7 +924,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/EntityListResult"
             }
@@ -982,7 +982,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Entity"
             }
@@ -1106,7 +1106,7 @@
             "description": "Resource deleted successfully."
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1158,7 +1158,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/RelationshipListResult"
             }
@@ -1216,7 +1216,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Relationship"
             }
@@ -1340,7 +1340,7 @@
             "description": "Resource deleted successfully."
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1392,7 +1392,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SignalDefinitionListResult"
             }
@@ -1450,7 +1450,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/SignalDefinition"
             }
@@ -1574,7 +1574,7 @@
             "description": "Resource deleted successfully."
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1672,7 +1672,7 @@
     "AzureMonitorWorkspaceResourceId": {
       "type": "string",
       "format": "arm-id",
-      "description": "A type definition that refers the id to an ARM resource.",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -1817,21 +1817,62 @@
           "$ref": "#/definitions/stringResourceName",
           "description": "Reference to the name of the authentication setting which is used for querying Azure Resource Graph. The same authentication setting will also be assigned to any discovered entities."
         },
-        "showEntity": {
-          "$ref": "#/definitions/DiscoveryRuleShowEntityBehavior",
-          "description": "Whether to create an entity for the discovery rule itself. If set, all discovered entities will be children of this entity."
-        },
         "discoverRelationships": {
           "$ref": "#/definitions/DiscoveryRuleRelationshipDiscoveryBehavior",
           "description": "Whether to create relationships between the discovered entities based on a set of built-in rules. These relationships cannot be manually deleted."
+        },
+        "addRecommendedSignals": {
+          "$ref": "#/definitions/DiscoveryRuleRecommendedSignalsBehavior",
+          "description": "Whether to add all recommended signals to the discovered entities."
+        },
+        "deletionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when the discovery rule was (soft-)deleted",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message if the last discovery operation failed.",
+          "readOnly": true
+        },
+        "numberOfDiscoveredEntities": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of discovered entities in the last discovery operation.",
+          "readOnly": true
         }
       },
       "required": [
         "resourceGraphQuery",
         "authenticationSetting",
-        "showEntity",
-        "discoverRelationships"
+        "discoverRelationships",
+        "addRecommendedSignals"
       ]
+    },
+    "DiscoveryRuleRecommendedSignalsBehavior": {
+      "type": "string",
+      "description": "Discovery rule recommended signal behavior",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "DiscoveryRuleRecommendedSignalsBehavior",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Automatically add recommended signals"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Do not automatically add recommended signals"
+          }
+        ]
+      }
     },
     "DiscoveryRuleRelationshipDiscoveryBehavior": {
       "type": "string",
@@ -1853,30 +1894,6 @@
             "name": "Disabled",
             "value": "Disabled",
             "description": "Do not automatically attempt to discover relationships"
-          }
-        ]
-      }
-    },
-    "DiscoveryRuleShowEntityBehavior": {
-      "type": "string",
-      "description": "Discovery rule show entity behavior",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "DiscoveryRuleShowEntityBehavior",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Create an entity for the discovery rule itself"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Do not create entity for discovery rule"
           }
         ]
       }
@@ -2074,17 +2091,43 @@
           "$ref": "#/definitions/IconDefinition",
           "description": "Visual icon definition. If not set, a default icon is used."
         },
-        "serviceLevelObjective": {
+        "healthObjective": {
           "type": "number",
           "format": "float",
-          "description": "Service level objective",
+          "description": "Health objective as a percentage of time the entity should be healthy.",
           "minimum": 0,
           "maximum": 100
         },
         "impact": {
-          "$ref": "#/definitions/EntityImpact",
+          "type": "string",
           "description": "Impact of the entity in health state propagation",
-          "default": "Standard"
+          "default": "Standard",
+          "enum": [
+            "Standard",
+            "Limited",
+            "Suppressed"
+          ],
+          "x-ms-enum": {
+            "name": "EntityImpact",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Standard",
+                "value": "Standard",
+                "description": "Standard impact"
+              },
+              {
+                "name": "Limited",
+                "value": "Limited",
+                "description": "Limited impact"
+              },
+              {
+                "name": "Suppressed",
+                "value": "Suppressed",
+                "description": "Suppressed impact"
+              }
+            ]
+          }
         },
         "labels": {
           "type": "object",
@@ -2106,6 +2149,11 @@
           "type": "string",
           "format": "date-time",
           "description": "Date when the entity was (soft-)deleted",
+          "readOnly": true
+        },
+        "healthState": {
+          "$ref": "#/definitions/HealthState",
+          "description": "Health state of this entity",
           "readOnly": true
         }
       }
@@ -2255,11 +2303,53 @@
         }
       }
     },
+    "HealthState": {
+      "type": "string",
+      "description": "Health state of an entity",
+      "enum": [
+        "Healthy",
+        "Degraded",
+        "Error",
+        "Unknown",
+        "Deleted"
+      ],
+      "x-ms-enum": {
+        "name": "HealthState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Healthy",
+            "value": "Healthy",
+            "description": "Healthy status"
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "Degraded status"
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "Error status (Unhealthy)"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown status"
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Deleted status"
+          }
+        ]
+      }
+    },
     "IconDefinition": {
       "type": "object",
       "description": "Visual icon definition of an entity",
       "properties": {
-        "icon": {
+        "iconName": {
           "type": "string",
           "description": "Name of the built-in icon, or 'Custom' to use customData",
           "minLength": 1,
@@ -2273,7 +2363,7 @@
         }
       },
       "required": [
-        "icon"
+        "iconName"
       ]
     },
     "LogAnalyticsQuerySignalDefinitionProperties": {
@@ -2351,7 +2441,7 @@
     "LogAnalyticsWorkspaceResourceId": {
       "type": "string",
       "format": "arm-id",
-      "description": "A type definition that refers the id to an ARM resource.",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
@@ -2727,9 +2817,53 @@
           "description": "Kind of the signal definition"
         },
         "refreshInterval": {
-          "$ref": "#/definitions/RefreshInterval",
+          "type": "string",
           "description": "Interval in which the signal is being evaluated. Defaults to PT1M.",
-          "default": "PT1M"
+          "default": "PT1M",
+          "enum": [
+            "PT1M",
+            "PT5M",
+            "PT10M",
+            "PT30M",
+            "PT1H",
+            "PT2H"
+          ],
+          "x-ms-enum": {
+            "name": "RefreshInterval",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "PT1M",
+                "value": "PT1M",
+                "description": "One Minute"
+              },
+              {
+                "name": "PT5M",
+                "value": "PT5M",
+                "description": "Five Minutes"
+              },
+              {
+                "name": "PT10M",
+                "value": "PT10M",
+                "description": "Ten Minutes"
+              },
+              {
+                "name": "PT30M",
+                "value": "PT30M",
+                "description": "Thirty Minutes"
+              },
+              {
+                "name": "PT1H",
+                "value": "PT1H",
+                "description": "One Hour"
+              },
+              {
+                "name": "PT2H",
+                "value": "PT2H",
+                "description": "Two Hours"
+              }
+            ]
+          }
         },
         "labels": {
           "type": "object",
@@ -2748,10 +2882,6 @@
           "$ref": "#/definitions/EvaluationRule",
           "description": "Evaluation rules for the signal definition"
         },
-        "enabledState": {
-          "$ref": "#/definitions/SignalEnabledState",
-          "description": "Signal definition enabled state"
-        },
         "deletionDate": {
           "type": "string",
           "format": "date-time",
@@ -2762,21 +2892,8 @@
       "discriminator": "signalKind",
       "required": [
         "signalKind",
-        "evaluationRules",
-        "enabledState"
+        "evaluationRules"
       ]
-    },
-    "SignalEnabledState": {
-      "type": "string",
-      "description": "Signal enabled state",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "SignalEnabledState",
-        "modelAsString": true
-      }
     },
     "SignalGroup": {
       "type": "object",
