@@ -52,7 +52,7 @@ model Registration {
 
   @doc("Status of the registration.")
   @visibility("read")
-  status: StatusModel;
+  status?: StatusModel;
 }
 
 @doc("Storage model")
