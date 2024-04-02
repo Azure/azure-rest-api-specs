@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@azure-tools/typespec-autorest";
 import "./models.tsp";
 import "../shared/routes.tsp";
 
@@ -7,6 +8,7 @@ using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Autorest;
 
 namespace DevCenterService;
 
@@ -283,6 +285,10 @@ interface DevBoxes {
 
   @doc("Delays all actions.")
   @action("delay")
+  @example(
+    "./examples/2024-02-01/DevBoxes_DelayActionsWithError.json",
+    "DevBoxes_DelayActionsWithError"
+  )
   delayActions is StandardResourceOperations.ResourceCollectionAction<
     DevBoxAction,
     {
