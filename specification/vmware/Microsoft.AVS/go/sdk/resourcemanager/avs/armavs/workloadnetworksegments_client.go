@@ -60,6 +60,7 @@ func (client *WorkloadNetworkSegmentsClient) BeginCreate(ctx context.Context, su
 // Create - Create a WorkloadNetworkSegment
 func (client *WorkloadNetworkSegmentsClient) create(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, segmentID string, resource WorkloadNetworkSegment, options *WorkloadNetworkSegmentsClientCreateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkSegmentsClient.BeginCreate")
 	req, err := client.createCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, segmentID, resource, options)
 	if err != nil {
 		return nil, err
@@ -132,6 +133,7 @@ func (client *WorkloadNetworkSegmentsClient) BeginDeleteSegment(ctx context.Cont
 // DeleteSegment - Delete a WorkloadNetworkSegment
 func (client *WorkloadNetworkSegmentsClient) deleteSegment(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, segmentID string, options *WorkloadNetworkSegmentsClientDeleteSegmentOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkSegmentsClient.BeginDeleteSegment")
 	req, err := client.deleteSegmentCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, segmentID, options)
 	if err != nil {
 		return nil, err
@@ -186,6 +188,7 @@ func (client *WorkloadNetworkSegmentsClient) deleteSegmentCreateRequest(ctx cont
 //     method.
 func (client *WorkloadNetworkSegmentsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, segmentID string, options *WorkloadNetworkSegmentsClientGetOptions) (WorkloadNetworkSegmentsClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkSegmentsClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, segmentID, options)
 	if err != nil {
 		return WorkloadNetworkSegmentsClientGetResponse{}, err
@@ -253,6 +256,7 @@ func (client *WorkloadNetworkSegmentsClient) NewListByWorkloadNetworkPager(subsc
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *WorkloadNetworkSegmentsClientListByWorkloadNetworkResponse) (WorkloadNetworkSegmentsClientListByWorkloadNetworkResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkSegmentsClient.NewListByWorkloadNetworkPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -327,6 +331,7 @@ func (client *WorkloadNetworkSegmentsClient) BeginUpdate(ctx context.Context, su
 // Update - Update a WorkloadNetworkSegment
 func (client *WorkloadNetworkSegmentsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, segmentID string, properties WorkloadNetworkSegmentUpdate, options *WorkloadNetworkSegmentsClientUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkSegmentsClient.BeginUpdate")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, segmentID, properties, options)
 	if err != nil {
 		return nil, err

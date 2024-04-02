@@ -14,18 +14,11 @@ type OperationsClientListResponse struct {
 type SharedPrivateLinkResourcesClientCreateResponse struct {
 	// Concrete proxy resource types can be created by aliasing this type using a specific property type.
 	SharedPrivateLinkResource
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // SharedPrivateLinkResourcesClientDeleteResponse contains the response from method SharedPrivateLinkResourcesClient.Delete.
 type SharedPrivateLinkResourcesClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // SharedPrivateLinkResourcesClientGetResponse contains the response from method SharedPrivateLinkResourcesClient.Get.
@@ -67,18 +60,11 @@ type TargetsClientListByWatcherResponse struct {
 type WatchersClientCreateOrUpdateResponse struct {
 	// The DatabaseWatcherProviderHub resource.
 	Watcher
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // WatchersClientDeleteResponse contains the response from method WatchersClient.Delete.
 type WatchersClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // WatchersClientGetResponse contains the response from method WatchersClient.Get.
@@ -101,28 +87,17 @@ type WatchersClientListBySubscriptionResponse struct {
 
 // WatchersClientStartResponse contains the response from method WatchersClient.Start.
 type WatchersClientStartResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // WatchersClientStopResponse contains the response from method WatchersClient.Stop.
 type WatchersClientStopResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // WatchersClientUpdateResponse contains the response from method WatchersClient.Update.
 type WatchersClientUpdateResponse struct {
 	// The DatabaseWatcherProviderHub resource.
 	Watcher
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 

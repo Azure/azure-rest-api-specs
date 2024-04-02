@@ -46,6 +46,7 @@ func NewObservabilityServicesClient(credential azcore.TokenCredential, options *
 //     method.
 func (client *ObservabilityServicesClient) CreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, observabilityServiceName string, resource ObservabilityServiceResource, options *ObservabilityServicesClientCreateOrUpdateOptions) (ObservabilityServicesClientCreateOrUpdateResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ObservabilityServicesClient.CreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, observabilityServiceName, resource, options)
 	if err != nil {
 		return ObservabilityServicesClientCreateOrUpdateResponse{}, err
@@ -131,6 +132,7 @@ func (client *ObservabilityServicesClient) BeginDelete(ctx context.Context, subs
 // Delete - Delete a ObservabilityServiceResource
 func (client *ObservabilityServicesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, observabilityServiceName string, options *ObservabilityServicesClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ObservabilityServicesClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, observabilityServiceName, options)
 	if err != nil {
 		return nil, err
@@ -180,6 +182,7 @@ func (client *ObservabilityServicesClient) deleteCreateRequest(ctx context.Conte
 //     method.
 func (client *ObservabilityServicesClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, observabilityServiceName string, options *ObservabilityServicesClientGetOptions) (ObservabilityServicesClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ObservabilityServicesClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, observabilityServiceName, options)
 	if err != nil {
 		return ObservabilityServicesClientGetResponse{}, err
@@ -242,6 +245,7 @@ func (client *ObservabilityServicesClient) NewListByResourceGroupPager(subscript
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *ObservabilityServicesClientListByResourceGroupResponse) (ObservabilityServicesClientListByResourceGroupResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ObservabilityServicesClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -298,6 +302,7 @@ func (client *ObservabilityServicesClient) NewListBySubscriptionPager(subscripti
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *ObservabilityServicesClientListBySubscriptionResponse) (ObservabilityServicesClientListBySubscriptionResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ObservabilityServicesClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -349,6 +354,7 @@ func (client *ObservabilityServicesClient) listBySubscriptionHandleResponse(resp
 //     method.
 func (client *ObservabilityServicesClient) UpdateTags(ctx context.Context, subscriptionID string, resourceGroupName string, observabilityServiceName string, properties ObservabilityServiceResourceTagsUpdate, options *ObservabilityServicesClientUpdateTagsOptions) (ObservabilityServicesClientUpdateTagsResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ObservabilityServicesClient.UpdateTags")
 	req, err := client.updateTagsCreateRequest(ctx, subscriptionID, resourceGroupName, observabilityServiceName, properties, options)
 	if err != nil {
 		return ObservabilityServicesClientUpdateTagsResponse{}, err

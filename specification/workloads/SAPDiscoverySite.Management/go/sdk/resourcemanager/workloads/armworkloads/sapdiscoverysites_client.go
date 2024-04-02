@@ -61,6 +61,7 @@ func (client *SAPDiscoverySitesClient) BeginCreate(ctx context.Context, subscrip
 // with Azure Migrate.
 func (client *SAPDiscoverySitesClient) create(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, resource SAPDiscoverySite, options *SAPDiscoverySitesClientCreateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SAPDiscoverySitesClient.BeginCreate")
 	req, err := client.createCreateRequest(ctx, subscriptionID, resourceGroupName, sapDiscoverySiteName, resource, options)
 	if err != nil {
 		return nil, err
@@ -130,6 +131,7 @@ func (client *SAPDiscoverySitesClient) BeginDelete(ctx context.Context, subscrip
 // and Server Instances.
 func (client *SAPDiscoverySitesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, options *SAPDiscoverySitesClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SAPDiscoverySitesClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, sapDiscoverySiteName, options)
 	if err != nil {
 		return nil, err
@@ -178,6 +180,7 @@ func (client *SAPDiscoverySitesClient) deleteCreateRequest(ctx context.Context, 
 //   - options - SAPDiscoverySitesClientGetOptions contains the optional parameters for the SAPDiscoverySitesClient.Get method.
 func (client *SAPDiscoverySitesClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, options *SAPDiscoverySitesClientGetOptions) (SAPDiscoverySitesClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SAPDiscoverySitesClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, sapDiscoverySiteName, options)
 	if err != nil {
 		return SAPDiscoverySitesClientGetResponse{}, err
@@ -254,6 +257,7 @@ func (client *SAPDiscoverySitesClient) BeginImportEntities(ctx context.Context, 
 // into your SAP Migration discovery site resource and it's child resources, the SAP instances and Server instances.
 func (client *SAPDiscoverySitesClient) importEntities(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, body any, options *SAPDiscoverySitesClientImportEntitiesOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SAPDiscoverySitesClient.BeginImportEntities")
 	req, err := client.importEntitiesCreateRequest(ctx, subscriptionID, resourceGroupName, sapDiscoverySiteName, body, options)
 	if err != nil {
 		return nil, err
@@ -310,6 +314,7 @@ func (client *SAPDiscoverySitesClient) NewListByResourceGroupPager(subscriptionI
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *SAPDiscoverySitesClientListByResourceGroupResponse) (SAPDiscoverySitesClientListByResourceGroupResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SAPDiscoverySitesClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -366,6 +371,7 @@ func (client *SAPDiscoverySitesClient) NewListBySubscriptionPager(subscriptionID
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *SAPDiscoverySitesClientListBySubscriptionResponse) (SAPDiscoverySitesClientListBySubscriptionResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SAPDiscoverySitesClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -417,6 +423,7 @@ func (client *SAPDiscoverySitesClient) listBySubscriptionHandleResponse(resp *ht
 //     method.
 func (client *SAPDiscoverySitesClient) Update(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, properties SAPDiscoverySiteTagsUpdate, options *SAPDiscoverySitesClientUpdateOptions) (SAPDiscoverySitesClientUpdateResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SAPDiscoverySitesClient.Update")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, sapDiscoverySiteName, properties, options)
 	if err != nil {
 		return SAPDiscoverySitesClientUpdateResponse{}, err

@@ -14,18 +14,11 @@ type OperationsClientListResponse struct {
 type PoolsClientCreateOrUpdateResponse struct {
 	// Pool resource
 	Pool
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // PoolsClientDeleteResponse contains the response from method PoolsClient.Delete.
 type PoolsClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // PoolsClientGetResponse contains the response from method PoolsClient.Get.
@@ -50,27 +43,17 @@ type PoolsClientListBySubscriptionResponse struct {
 type PoolsClientUpdateResponse struct {
 	// Pool resource
 	Pool
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // SnapshotsClientCreateOrUpdateResponse contains the response from method SnapshotsClient.CreateOrUpdate.
 type SnapshotsClientCreateOrUpdateResponse struct {
 	// Concrete proxy resource types can be created by aliasing this type using a specific property type.
 	Snapshot
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // SnapshotsClientDeleteResponse contains the response from method SnapshotsClient.Delete.
 type SnapshotsClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // SnapshotsClientGetResponse contains the response from method SnapshotsClient.Get.
@@ -89,18 +72,11 @@ type SnapshotsClientListByPoolResponse struct {
 type VolumesClientCreateOrUpdateResponse struct {
 	// Concrete proxy resource types can be created by aliasing this type using a specific property type.
 	Volume
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // VolumesClientDeleteResponse contains the response from method VolumesClient.Delete.
 type VolumesClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // VolumesClientGetResponse contains the response from method VolumesClient.Get.
@@ -119,8 +95,5 @@ type VolumesClientListByPoolResponse struct {
 type VolumesClientUpdateResponse struct {
 	// Concrete proxy resource types can be created by aliasing this type using a specific property type.
 	Volume
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 

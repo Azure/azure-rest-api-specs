@@ -29,16 +29,16 @@ func NewCommunityClient(credential azcore.TokenCredential, options *arm.ClientOp
 	return client, nil
 }
 
-// NewCommunityTrainingsClient creates a new instance of [CommunityTrainingsClient].
-func (client *CommunityClient) NewCommunityTrainingsClient() *CommunityTrainingsClient {
-	return &CommunityTrainingsClient{
+// NewCommunityCommunityTrainingsClient creates a new instance of [CommunityCommunityTrainingsClient].
+func (client *CommunityClient) NewCommunityCommunityTrainingsClient() *CommunityCommunityTrainingsClient {
+	return &CommunityCommunityTrainingsClient{
 		internal: client.internal,
 	}
 }
 
-// NewOperationsClient creates a new instance of [OperationsClient].
-func (client *CommunityClient) NewOperationsClient() *OperationsClient {
-	return &OperationsClient{
+// NewCommunityOperationsClient creates a new instance of [CommunityOperationsClient].
+func (client *CommunityClient) NewCommunityOperationsClient() *CommunityOperationsClient {
+	return &CommunityOperationsClient{
 		internal: client.internal,
 	}
 }

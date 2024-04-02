@@ -57,6 +57,7 @@ func (client *BgpPeersClient) BeginCreateOrUpdate(ctx context.Context, resourceU
 // CreateOrUpdate - Create a BgpPeer
 func (client *BgpPeersClient) createOrUpdate(ctx context.Context, resourceURI string, bgpPeerName string, resource BgpPeer, options *BgpPeersClientCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "BgpPeersClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, resourceURI, bgpPeerName, resource, options)
 	if err != nil {
 		return nil, err
@@ -104,6 +105,7 @@ func (client *BgpPeersClient) createOrUpdateCreateRequest(ctx context.Context, r
 //   - options - BgpPeersClientDeleteOptions contains the optional parameters for the BgpPeersClient.Delete method.
 func (client *BgpPeersClient) Delete(ctx context.Context, resourceURI string, bgpPeerName string, options *BgpPeersClientDeleteOptions) (BgpPeersClientDeleteResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "BgpPeersClient.Delete")
 	req, err := client.deleteCreateRequest(ctx, resourceURI, bgpPeerName, options)
 	if err != nil {
 		return BgpPeersClientDeleteResponse{}, err
@@ -147,6 +149,7 @@ func (client *BgpPeersClient) deleteCreateRequest(ctx context.Context, resourceU
 //   - options - BgpPeersClientGetOptions contains the optional parameters for the BgpPeersClient.Get method.
 func (client *BgpPeersClient) Get(ctx context.Context, resourceURI string, bgpPeerName string, options *BgpPeersClientGetOptions) (BgpPeersClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "BgpPeersClient.Get")
 	req, err := client.getCreateRequest(ctx, resourceURI, bgpPeerName, options)
 	if err != nil {
 		return BgpPeersClientGetResponse{}, err
@@ -203,6 +206,7 @@ func (client *BgpPeersClient) NewListPager(resourceURI string, options *BgpPeers
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *BgpPeersClientListResponse) (BgpPeersClientListResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "BgpPeersClient.NewListPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -265,6 +269,7 @@ func (client *BgpPeersClient) BeginOldDelete(ctx context.Context, resourceURI st
 // OldDelete - Delete a BgpPeer
 func (client *BgpPeersClient) oldDelete(ctx context.Context, resourceURI string, bgpPeerName string, options *BgpPeersClientOldDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "BgpPeersClient.BeginOldDelete")
 	req, err := client.oldDeleteCreateRequest(ctx, resourceURI, bgpPeerName, options)
 	if err != nil {
 		return nil, err

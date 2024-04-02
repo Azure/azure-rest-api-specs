@@ -8,18 +8,11 @@ package armavs
 type AddonsClientCreateOrUpdateResponse struct {
 	// An addon resource
 	Addon
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // AddonsClientDeleteResponse contains the response from method AddonsClient.Delete.
 type AddonsClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // AddonsClientGetResponse contains the response from method AddonsClient.Get.
@@ -38,18 +31,11 @@ type AddonsClientListByPrivateCloudResponse struct {
 type AuthorizationsClientCreateOrUpdateResponse struct {
 	// ExpressRoute Circuit Authorization
 	ExpressRouteAuthorization
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // AuthorizationsClientDeleteResponse contains the response from method AuthorizationsClient.Delete.
 type AuthorizationsClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // AuthorizationsClientGetResponse contains the response from method AuthorizationsClient.Get.
@@ -68,18 +54,11 @@ type AuthorizationsClientListByPrivateCloudResponse struct {
 type CloudLinksClientCreateOrUpdateResponse struct {
 	// A cloud link resource
 	CloudLink
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // CloudLinksClientDeleteResponse contains the response from method CloudLinksClient.Delete.
 type CloudLinksClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // CloudLinksClientGetResponse contains the response from method CloudLinksClient.Get.
@@ -98,18 +77,11 @@ type CloudLinksClientListByPrivateCloudResponse struct {
 type ClustersClientCreateOrUpdateResponse struct {
 	// A cluster resource
 	Cluster
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // ClustersClientDeleteResponse contains the response from method ClustersClient.Delete.
 type ClustersClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // ClustersClientGetResponse contains the response from method ClustersClient.Get.
@@ -146,18 +118,11 @@ type ClustersClientUpdateResponse struct {
 type DatastoresClientCreateOrUpdateResponse struct {
 	// A datastore resource
 	Datastore
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // DatastoresClientDeleteResponse contains the response from method DatastoresClient.Delete.
 type DatastoresClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // DatastoresClientGetResponse contains the response from method DatastoresClient.Get.
@@ -176,18 +141,11 @@ type DatastoresClientListByClusterResponse struct {
 type GlobalReachConnectionsClientCreateOrUpdateResponse struct {
 	// A global reach connection resource
 	GlobalReachConnection
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // GlobalReachConnectionsClientDeleteResponse contains the response from method GlobalReachConnectionsClient.Delete.
 type GlobalReachConnectionsClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // GlobalReachConnectionsClientGetResponse contains the response from method GlobalReachConnectionsClient.Get.
@@ -229,18 +187,11 @@ type HcxEnterpriseSitesClientListByPrivateCloudResponse struct {
 type IscsiPathsClientCreateOrUpdateResponse struct {
 	// An iSCSI path resource
 	IscsiPath
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // IscsiPathsClientDeleteResponse contains the response from method IscsiPathsClient.Delete.
 type IscsiPathsClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // IscsiPathsClientGetResponse contains the response from method IscsiPathsClient.Get.
@@ -277,18 +228,11 @@ type OperationsClientListResponse struct {
 type PlacementPoliciesClientCreateOrUpdateResponse struct {
 	// A vSphere Distributed Resource Scheduler (DRS) placement policy
 	PlacementPolicy
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // PlacementPoliciesClientDeleteResponse contains the response from method PlacementPoliciesClient.Delete.
 type PlacementPoliciesClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // PlacementPoliciesClientGetResponse contains the response from method PlacementPoliciesClient.Get.
@@ -319,18 +263,11 @@ type PlacementPoliciesClientUpdateResponse struct {
 type PrivateCloudsClientCreateOrUpdateResponse struct {
 	// A private cloud resource
 	PrivateCloud
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // PrivateCloudsClientDeleteResponse contains the response from method PrivateCloudsClient.Delete.
 type PrivateCloudsClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // PrivateCloudsClientGetResponse contains the response from method PrivateCloudsClient.Get.
@@ -359,20 +296,12 @@ type PrivateCloudsClientListInSubscriptionResponse struct {
 
 // PrivateCloudsClientRotateNsxtPasswordResponse contains the response from method PrivateCloudsClient.RotateNsxtPassword.
 type PrivateCloudsClientRotateNsxtPasswordResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // PrivateCloudsClientRotateVcenterPasswordResponse contains the response from method PrivateCloudsClient.RotateVcenterPassword.
 type PrivateCloudsClientRotateVcenterPasswordResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // PrivateCloudsClientUpdateResponse contains the response from method PrivateCloudsClient.Update.
@@ -403,18 +332,11 @@ type ScriptCmdletsClientListByScriptPackageResponse struct {
 type ScriptExecutionsClientCreateOrUpdateResponse struct {
 	// An instance of a script executed by a user - custom or AVS
 	ScriptExecution
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // ScriptExecutionsClientDeleteResponse contains the response from method ScriptExecutionsClient.Delete.
 type ScriptExecutionsClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // ScriptExecutionsClientGetExecutionLogsResponse contains the response from method ScriptExecutionsClient.GetExecutionLogs.
@@ -461,29 +383,18 @@ type VirtualMachinesClientListByClusterResponse struct {
 
 // VirtualMachinesClientRestrictMovementResponse contains the response from method VirtualMachinesClient.RestrictMovement.
 type VirtualMachinesClientRestrictMovementResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // WorkloadNetworkDhcpConfigurationsClientCreateResponse contains the response from method WorkloadNetworkDhcpConfigurationsClient.Create.
 type WorkloadNetworkDhcpConfigurationsClientCreateResponse struct {
 	// NSX DHCP
 	WorkloadNetworkDhcp
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // WorkloadNetworkDhcpConfigurationsClientDeleteResponse contains the response from method WorkloadNetworkDhcpConfigurationsClient.Delete.
 type WorkloadNetworkDhcpConfigurationsClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // WorkloadNetworkDhcpConfigurationsClientGetResponse contains the response from method WorkloadNetworkDhcpConfigurationsClient.Get.
@@ -502,27 +413,17 @@ type WorkloadNetworkDhcpConfigurationsClientListByWorkloadNetworkResponse struct
 type WorkloadNetworkDhcpConfigurationsClientUpdateResponse struct {
 	// NSX DHCP
 	WorkloadNetworkDhcp
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // WorkloadNetworkDnsServicesClientCreateResponse contains the response from method WorkloadNetworkDnsServicesClient.Create.
 type WorkloadNetworkDnsServicesClientCreateResponse struct {
 	// NSX DNS Service
 	WorkloadNetworkDNSService
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // WorkloadNetworkDnsServicesClientDeleteResponse contains the response from method WorkloadNetworkDnsServicesClient.Delete.
 type WorkloadNetworkDnsServicesClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // WorkloadNetworkDnsServicesClientGetResponse contains the response from method WorkloadNetworkDnsServicesClient.Get.
@@ -541,27 +442,17 @@ type WorkloadNetworkDnsServicesClientListByWorkloadNetworkResponse struct {
 type WorkloadNetworkDnsServicesClientUpdateResponse struct {
 	// NSX DNS Service
 	WorkloadNetworkDNSService
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // WorkloadNetworkDnsZonesClientCreateResponse contains the response from method WorkloadNetworkDnsZonesClient.Create.
 type WorkloadNetworkDnsZonesClientCreateResponse struct {
 	// NSX DNS Zone
 	WorkloadNetworkDNSZone
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // WorkloadNetworkDnsZonesClientDeleteResponse contains the response from method WorkloadNetworkDnsZonesClient.Delete.
 type WorkloadNetworkDnsZonesClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // WorkloadNetworkDnsZonesClientGetResponse contains the response from method WorkloadNetworkDnsZonesClient.Get.
@@ -580,9 +471,6 @@ type WorkloadNetworkDnsZonesClientListByWorkloadNetworkResponse struct {
 type WorkloadNetworkDnsZonesClientUpdateResponse struct {
 	// NSX DNS Zone
 	WorkloadNetworkDNSZone
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // WorkloadNetworkGatewaysClientGetResponse contains the response from method WorkloadNetworkGatewaysClient.Get.
@@ -601,18 +489,11 @@ type WorkloadNetworkGatewaysClientListByWorkloadNetworkResponse struct {
 type WorkloadNetworkPortMirroringProfilesClientCreateResponse struct {
 	// NSX Port Mirroring
 	WorkloadNetworkPortMirroring
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // WorkloadNetworkPortMirroringProfilesClientDeleteResponse contains the response from method WorkloadNetworkPortMirroringProfilesClient.Delete.
 type WorkloadNetworkPortMirroringProfilesClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // WorkloadNetworkPortMirroringProfilesClientGetResponse contains the response from method WorkloadNetworkPortMirroringProfilesClient.Get.
@@ -631,27 +512,17 @@ type WorkloadNetworkPortMirroringProfilesClientListByWorkloadNetworkResponse str
 type WorkloadNetworkPortMirroringProfilesClientUpdateResponse struct {
 	// NSX Port Mirroring
 	WorkloadNetworkPortMirroring
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // WorkloadNetworkPublicIpsClientCreateResponse contains the response from method WorkloadNetworkPublicIpsClient.Create.
 type WorkloadNetworkPublicIpsClientCreateResponse struct {
 	// NSX Public IP Block
 	WorkloadNetworkPublicIP
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // WorkloadNetworkPublicIpsClientDeleteResponse contains the response from method WorkloadNetworkPublicIpsClient.Delete.
 type WorkloadNetworkPublicIpsClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // WorkloadNetworkPublicIpsClientGetResponse contains the response from method WorkloadNetworkPublicIpsClient.Get.
@@ -670,18 +541,11 @@ type WorkloadNetworkPublicIpsClientListByWorkloadNetworkResponse struct {
 type WorkloadNetworkSegmentsClientCreateResponse struct {
 	// NSX Segment
 	WorkloadNetworkSegment
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // WorkloadNetworkSegmentsClientDeleteSegmentResponse contains the response from method WorkloadNetworkSegmentsClient.DeleteSegment.
 type WorkloadNetworkSegmentsClientDeleteSegmentResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // WorkloadNetworkSegmentsClientGetResponse contains the response from method WorkloadNetworkSegmentsClient.Get.
@@ -700,9 +564,6 @@ type WorkloadNetworkSegmentsClientListByWorkloadNetworkResponse struct {
 type WorkloadNetworkSegmentsClientUpdateResponse struct {
 	// NSX Segment
 	WorkloadNetworkSegment
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // WorkloadNetworkVirtualMachinesClientGetResponse contains the response from method WorkloadNetworkVirtualMachinesClient.Get.
@@ -721,18 +582,11 @@ type WorkloadNetworkVirtualMachinesClientListByWorkloadNetworkResponse struct {
 type WorkloadNetworkVmGroupsClientCreateResponse struct {
 	// NSX VM Group
 	WorkloadNetworkVMGroup
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // WorkloadNetworkVmGroupsClientDeleteResponse contains the response from method WorkloadNetworkVmGroupsClient.Delete.
 type WorkloadNetworkVmGroupsClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // WorkloadNetworkVmGroupsClientGetResponse contains the response from method WorkloadNetworkVmGroupsClient.Get.
@@ -751,9 +605,6 @@ type WorkloadNetworkVmGroupsClientListByWorkloadNetworkResponse struct {
 type WorkloadNetworkVmGroupsClientUpdateResponse struct {
 	// NSX VM Group
 	WorkloadNetworkVMGroup
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // WorkloadNetworksClientGetResponse contains the response from method WorkloadNetworksClient.Get.

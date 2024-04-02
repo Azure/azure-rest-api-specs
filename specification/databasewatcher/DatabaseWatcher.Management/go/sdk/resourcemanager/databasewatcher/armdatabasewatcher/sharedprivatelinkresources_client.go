@@ -60,6 +60,7 @@ func (client *SharedPrivateLinkResourcesClient) BeginCreate(ctx context.Context,
 // Create - Create a SharedPrivateLinkResource
 func (client *SharedPrivateLinkResourcesClient) create(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, sharedPrivateLinkResourceName string, resource SharedPrivateLinkResource, options *SharedPrivateLinkResourcesClientCreateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SharedPrivateLinkResourcesClient.BeginCreate")
 	req, err := client.createCreateRequest(ctx, subscriptionID, resourceGroupName, watcherName, sharedPrivateLinkResourceName, resource, options)
 	if err != nil {
 		return nil, err
@@ -132,6 +133,7 @@ func (client *SharedPrivateLinkResourcesClient) BeginDelete(ctx context.Context,
 // Delete - Delete a SharedPrivateLinkResource
 func (client *SharedPrivateLinkResourcesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, sharedPrivateLinkResourceName string, options *SharedPrivateLinkResourcesClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SharedPrivateLinkResourcesClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, watcherName, sharedPrivateLinkResourceName, options)
 	if err != nil {
 		return nil, err
@@ -186,6 +188,7 @@ func (client *SharedPrivateLinkResourcesClient) deleteCreateRequest(ctx context.
 //     method.
 func (client *SharedPrivateLinkResourcesClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, sharedPrivateLinkResourceName string, options *SharedPrivateLinkResourcesClientGetOptions) (SharedPrivateLinkResourcesClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SharedPrivateLinkResourcesClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, watcherName, sharedPrivateLinkResourceName, options)
 	if err != nil {
 		return SharedPrivateLinkResourcesClientGetResponse{}, err
@@ -253,6 +256,7 @@ func (client *SharedPrivateLinkResourcesClient) NewListByWatcherPager(subscripti
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *SharedPrivateLinkResourcesClientListByWatcherResponse) (SharedPrivateLinkResourcesClientListByWatcherResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SharedPrivateLinkResourcesClient.NewListByWatcherPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink

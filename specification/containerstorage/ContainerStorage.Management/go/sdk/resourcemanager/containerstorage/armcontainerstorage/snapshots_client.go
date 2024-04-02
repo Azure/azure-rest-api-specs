@@ -60,6 +60,7 @@ func (client *SnapshotsClient) BeginCreateOrUpdate(ctx context.Context, subscrip
 // CreateOrUpdate - Create a Snapshot
 func (client *SnapshotsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, snapshotName string, resource Snapshot, options *SnapshotsClientCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SnapshotsClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, poolName, snapshotName, resource, options)
 	if err != nil {
 		return nil, err
@@ -131,6 +132,7 @@ func (client *SnapshotsClient) BeginDelete(ctx context.Context, subscriptionID s
 // Delete - Delete a Snapshot
 func (client *SnapshotsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, snapshotName string, options *SnapshotsClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SnapshotsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, poolName, snapshotName, options)
 	if err != nil {
 		return nil, err
@@ -184,6 +186,7 @@ func (client *SnapshotsClient) deleteCreateRequest(ctx context.Context, subscrip
 //   - options - SnapshotsClientGetOptions contains the optional parameters for the SnapshotsClient.Get method.
 func (client *SnapshotsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, snapshotName string, options *SnapshotsClientGetOptions) (SnapshotsClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SnapshotsClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, poolName, snapshotName, options)
 	if err != nil {
 		return SnapshotsClientGetResponse{}, err
@@ -251,6 +254,7 @@ func (client *SnapshotsClient) NewListByPoolPager(subscriptionID string, resourc
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *SnapshotsClientListByPoolResponse) (SnapshotsClientListByPoolResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SnapshotsClient.NewListByPoolPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink

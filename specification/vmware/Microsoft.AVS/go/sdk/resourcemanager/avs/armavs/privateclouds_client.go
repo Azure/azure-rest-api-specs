@@ -60,6 +60,7 @@ func (client *PrivateCloudsClient) BeginCreateOrUpdate(ctx context.Context, subs
 // CreateOrUpdate - Create a PrivateCloud
 func (client *PrivateCloudsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, resource PrivateCloud, options *PrivateCloudsClientCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PrivateCloudsClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, resource, options)
 	if err != nil {
 		return nil, err
@@ -126,6 +127,7 @@ func (client *PrivateCloudsClient) BeginDelete(ctx context.Context, subscription
 // Delete - Delete a PrivateCloud
 func (client *PrivateCloudsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *PrivateCloudsClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PrivateCloudsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, options)
 	if err != nil {
 		return nil, err
@@ -174,6 +176,7 @@ func (client *PrivateCloudsClient) deleteCreateRequest(ctx context.Context, subs
 //   - options - PrivateCloudsClientGetOptions contains the optional parameters for the PrivateCloudsClient.Get method.
 func (client *PrivateCloudsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *PrivateCloudsClientGetOptions) (PrivateCloudsClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PrivateCloudsClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, options)
 	if err != nil {
 		return PrivateCloudsClientGetResponse{}, err
@@ -233,6 +236,7 @@ func (client *PrivateCloudsClient) getHandleResponse(resp *http.Response) (Priva
 //     method.
 func (client *PrivateCloudsClient) ListAdminCredentials(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *PrivateCloudsClientListAdminCredentialsOptions) (PrivateCloudsClientListAdminCredentialsResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PrivateCloudsClient.ListAdminCredentials")
 	req, err := client.listAdminCredentialsCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, options)
 	if err != nil {
 		return PrivateCloudsClientListAdminCredentialsResponse{}, err
@@ -295,6 +299,7 @@ func (client *PrivateCloudsClient) NewListByResourceGroupPager(subscriptionID st
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *PrivateCloudsClientListByResourceGroupResponse) (PrivateCloudsClientListByResourceGroupResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PrivateCloudsClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -351,6 +356,7 @@ func (client *PrivateCloudsClient) NewListInSubscriptionPager(subscriptionID str
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *PrivateCloudsClientListInSubscriptionResponse) (PrivateCloudsClientListInSubscriptionResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PrivateCloudsClient.NewListInSubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -415,6 +421,7 @@ func (client *PrivateCloudsClient) BeginRotateNsxtPassword(ctx context.Context, 
 // RotateNsxtPassword - Rotate the NSX-T Manager password
 func (client *PrivateCloudsClient) rotateNsxtPassword(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *PrivateCloudsClientRotateNsxtPasswordOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PrivateCloudsClient.BeginRotateNsxtPassword")
 	req, err := client.rotateNsxtPasswordCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, options)
 	if err != nil {
 		return nil, err
@@ -478,6 +485,7 @@ func (client *PrivateCloudsClient) BeginRotateVcenterPassword(ctx context.Contex
 // RotateVcenterPassword - Rotate the vCenter password
 func (client *PrivateCloudsClient) rotateVcenterPassword(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *PrivateCloudsClientRotateVcenterPasswordOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PrivateCloudsClient.BeginRotateVcenterPassword")
 	req, err := client.rotateVcenterPasswordCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, options)
 	if err != nil {
 		return nil, err
@@ -527,6 +535,7 @@ func (client *PrivateCloudsClient) rotateVcenterPasswordCreateRequest(ctx contex
 //   - options - PrivateCloudsClientUpdateOptions contains the optional parameters for the PrivateCloudsClient.Update method.
 func (client *PrivateCloudsClient) Update(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, privateCloudUpdate PrivateCloudUpdate, options *PrivateCloudsClientUpdateOptions) (PrivateCloudsClientUpdateResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PrivateCloudsClient.Update")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, privateCloudUpdate, options)
 	if err != nil {
 		return PrivateCloudsClientUpdateResponse{}, err

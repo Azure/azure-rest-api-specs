@@ -32,18 +32,11 @@ type DataProductsClientAddUserRoleResponse struct {
 type DataProductsClientCreateResponse struct {
 	// The data product resource.
 	DataProduct
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // DataProductsClientDeleteResponse contains the response from method DataProductsClient.Delete.
 type DataProductsClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // DataProductsClientGenerateStorageAccountSasTokenResponse contains the response from method DataProductsClient.GenerateStorageAccountSasToken.
@@ -90,36 +83,22 @@ type DataProductsClientRotateKeyResponse struct {
 type DataProductsClientUpdateResponse struct {
 	// The data product resource.
 	DataProduct
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // DataTypesClientCreateResponse contains the response from method DataTypesClient.Create.
 type DataTypesClientCreateResponse struct {
 	// The data type resource.
 	DataType
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // DataTypesClientDeleteDataResponse contains the response from method DataTypesClient.DeleteData.
 type DataTypesClientDeleteDataResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // DataTypesClientDeleteResponse contains the response from method DataTypesClient.Delete.
 type DataTypesClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // DataTypesClientGenerateStorageContainerSasTokenResponse contains the response from method DataTypesClient.GenerateStorageContainerSasToken.
@@ -144,9 +123,6 @@ type DataTypesClientListByDataProductResponse struct {
 type DataTypesClientUpdateResponse struct {
 	// The data type resource.
 	DataType
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // OperationsClientListResponse contains the response from method OperationsClient.NewListPager.

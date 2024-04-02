@@ -8,18 +8,11 @@ package armservicenetworking
 type AssociationsInterfaceClientCreateOrUpdateResponse struct {
 	// Association Subresource of Traffic Controller
 	Association
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // AssociationsInterfaceClientDeleteResponse contains the response from method AssociationsInterfaceClient.Delete.
 type AssociationsInterfaceClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // AssociationsInterfaceClientGetResponse contains the response from method AssociationsInterfaceClient.Get.
@@ -44,18 +37,11 @@ type AssociationsInterfaceClientUpdateResponse struct {
 type FrontendsInterfaceClientCreateOrUpdateResponse struct {
 	// Frontend Subresource of Traffic Controller.
 	Frontend
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // FrontendsInterfaceClientDeleteResponse contains the response from method FrontendsInterfaceClient.Delete.
 type FrontendsInterfaceClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // FrontendsInterfaceClientGetResponse contains the response from method FrontendsInterfaceClient.Get.
@@ -86,18 +72,11 @@ type OperationsClientListResponse struct {
 type TrafficControllerInterfaceClientCreateOrUpdateResponse struct {
 	// Concrete tracked resource types can be created by aliasing this type using a specific property type.
 	TrafficController
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // TrafficControllerInterfaceClientDeleteResponse contains the response from method TrafficControllerInterfaceClient.Delete.
 type TrafficControllerInterfaceClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // TrafficControllerInterfaceClientGetResponse contains the response from method TrafficControllerInterfaceClient.Get.

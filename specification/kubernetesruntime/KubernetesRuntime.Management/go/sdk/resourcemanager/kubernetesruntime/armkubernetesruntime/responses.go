@@ -8,9 +8,6 @@ package armkubernetesruntime
 type BgpPeersClientCreateOrUpdateResponse struct {
 	// A BgpPeer resource for an Arc connected cluster (Microsoft.Kubernetes/connectedClusters)
 	BgpPeer
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // BgpPeersClientDeleteResponse contains the response from method BgpPeersClient.Delete.
@@ -32,20 +29,13 @@ type BgpPeersClientListResponse struct {
 
 // BgpPeersClientOldDeleteResponse contains the response from method BgpPeersClient.OldDelete.
 type BgpPeersClientOldDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // LoadBalancersClientCreateOrUpdateResponse contains the response from method LoadBalancersClient.CreateOrUpdate.
 type LoadBalancersClientCreateOrUpdateResponse struct {
 	// A LoadBalancer resource for an Arc connected cluster (Microsoft.Kubernetes/connectedClusters)
 	LoadBalancer
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // LoadBalancersClientDeleteResponse contains the response from method LoadBalancersClient.Delete.
@@ -67,11 +57,7 @@ type LoadBalancersClientListResponse struct {
 
 // LoadBalancersClientOldDeleteResponse contains the response from method LoadBalancersClient.OldDelete.
 type LoadBalancersClientOldDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // OperationsClientListResponse contains the response from method OperationsClient.NewListPager.
@@ -107,18 +93,11 @@ type ServicesClientListResponse struct {
 type StorageClassClientCreateOrUpdateResponse struct {
 	// A StorageClass resource for an Arc connected cluster (Microsoft.Kubernetes/connectedClusters)
 	StorageClassResource
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // StorageClassClientDeleteResponse contains the response from method StorageClassClient.Delete.
 type StorageClassClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // StorageClassClientGetResponse contains the response from method StorageClassClient.Get.
@@ -137,8 +116,5 @@ type StorageClassClientListResponse struct {
 type StorageClassClientUpdateResponse struct {
 	// A StorageClass resource for an Arc connected cluster (Microsoft.Kubernetes/connectedClusters)
 	StorageClassResource
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 

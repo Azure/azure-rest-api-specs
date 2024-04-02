@@ -14,18 +14,11 @@ type OperationsClientListResponse struct {
 type OrganizationsClientCreateOrUpdateResponse struct {
 	// Organization Resource by Astronomer
 	OrganizationResource
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // OrganizationsClientDeleteResponse contains the response from method OrganizationsClient.Delete.
 type OrganizationsClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // OrganizationsClientGetResponse contains the response from method OrganizationsClient.Get.
@@ -50,8 +43,5 @@ type OrganizationsClientListBySubscriptionResponse struct {
 type OrganizationsClientUpdateResponse struct {
 	// Organization Resource by Astronomer
 	OrganizationResource
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 

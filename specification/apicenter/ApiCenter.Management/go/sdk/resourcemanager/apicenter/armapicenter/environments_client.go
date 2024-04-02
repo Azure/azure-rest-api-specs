@@ -47,6 +47,7 @@ func NewEnvironmentsClient(credential azcore.TokenCredential, options *arm.Clien
 //     method.
 func (client *EnvironmentsClient) CreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, environmentName string, payload Environment, options *EnvironmentsClientCreateOrUpdateOptions) (EnvironmentsClientCreateOrUpdateResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "EnvironmentsClient.CreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, serviceName, workspaceName, environmentName, payload, options)
 	if err != nil {
 		return EnvironmentsClientCreateOrUpdateResponse{}, err
@@ -122,6 +123,7 @@ func (client *EnvironmentsClient) createOrUpdateHandleResponse(resp *http.Respon
 //   - options - EnvironmentsClientDeleteOptions contains the optional parameters for the EnvironmentsClient.Delete method.
 func (client *EnvironmentsClient) Delete(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, environmentName string, options *EnvironmentsClientDeleteOptions) (EnvironmentsClientDeleteResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "EnvironmentsClient.Delete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, serviceName, workspaceName, environmentName, options)
 	if err != nil {
 		return EnvironmentsClientDeleteResponse{}, err
@@ -180,6 +182,7 @@ func (client *EnvironmentsClient) deleteCreateRequest(ctx context.Context, subsc
 //   - options - EnvironmentsClientGetOptions contains the optional parameters for the EnvironmentsClient.Get method.
 func (client *EnvironmentsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, environmentName string, options *EnvironmentsClientGetOptions) (EnvironmentsClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "EnvironmentsClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, serviceName, workspaceName, environmentName, options)
 	if err != nil {
 		return EnvironmentsClientGetResponse{}, err
@@ -251,6 +254,7 @@ func (client *EnvironmentsClient) getHandleResponse(resp *http.Response) (Enviro
 //   - options - EnvironmentsClientHeadOptions contains the optional parameters for the EnvironmentsClient.Head method.
 func (client *EnvironmentsClient) Head(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, environmentName string, options *EnvironmentsClientHeadOptions) (EnvironmentsClientHeadResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "EnvironmentsClient.Head")
 	req, err := client.headCreateRequest(ctx, subscriptionID, resourceGroupName, serviceName, workspaceName, environmentName, options)
 	if err != nil {
 		return EnvironmentsClientHeadResponse{}, err
@@ -312,6 +316,7 @@ func (client *EnvironmentsClient) NewListPager(subscriptionID string, resourceGr
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *EnvironmentsClientListResponse) (EnvironmentsClientListResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "EnvironmentsClient.NewListPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink

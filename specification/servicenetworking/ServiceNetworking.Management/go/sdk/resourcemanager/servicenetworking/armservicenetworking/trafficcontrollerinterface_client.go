@@ -59,6 +59,7 @@ func (client *TrafficControllerInterfaceClient) BeginCreateOrUpdate(ctx context.
 // CreateOrUpdate - Create a TrafficController
 func (client *TrafficControllerInterfaceClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, resource TrafficController, options *TrafficControllerInterfaceClientCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "TrafficControllerInterfaceClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, trafficControllerName, resource, options)
 	if err != nil {
 		return nil, err
@@ -126,6 +127,7 @@ func (client *TrafficControllerInterfaceClient) BeginDelete(ctx context.Context,
 // Delete - Delete a TrafficController
 func (client *TrafficControllerInterfaceClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, options *TrafficControllerInterfaceClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "TrafficControllerInterfaceClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, trafficControllerName, options)
 	if err != nil {
 		return nil, err
@@ -175,6 +177,7 @@ func (client *TrafficControllerInterfaceClient) deleteCreateRequest(ctx context.
 //     method.
 func (client *TrafficControllerInterfaceClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, options *TrafficControllerInterfaceClientGetOptions) (TrafficControllerInterfaceClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "TrafficControllerInterfaceClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, trafficControllerName, options)
 	if err != nil {
 		return TrafficControllerInterfaceClientGetResponse{}, err
@@ -237,6 +240,7 @@ func (client *TrafficControllerInterfaceClient) NewListByResourceGroupPager(subs
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *TrafficControllerInterfaceClientListByResourceGroupResponse) (TrafficControllerInterfaceClientListByResourceGroupResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "TrafficControllerInterfaceClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -293,6 +297,7 @@ func (client *TrafficControllerInterfaceClient) NewListBySubscriptionPager(subsc
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *TrafficControllerInterfaceClientListBySubscriptionResponse) (TrafficControllerInterfaceClientListBySubscriptionResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "TrafficControllerInterfaceClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -344,6 +349,7 @@ func (client *TrafficControllerInterfaceClient) listBySubscriptionHandleResponse
 //     method.
 func (client *TrafficControllerInterfaceClient) Update(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, properties TrafficControllerUpdate, options *TrafficControllerInterfaceClientUpdateOptions) (TrafficControllerInterfaceClientUpdateResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "TrafficControllerInterfaceClient.Update")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, trafficControllerName, properties, options)
 	if err != nil {
 		return TrafficControllerInterfaceClientUpdateResponse{}, err

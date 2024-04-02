@@ -29,16 +29,16 @@ func NewCarbonClient(credential azcore.TokenCredential, options *arm.ClientOptio
 	return client, nil
 }
 
-// NewCarbonServiceClient creates a new instance of [CarbonServiceClient].
-func (client *CarbonClient) NewCarbonServiceClient() *CarbonServiceClient {
-	return &CarbonServiceClient{
+// NewCarbonCarbonServiceClient creates a new instance of [CarbonCarbonServiceClient].
+func (client *CarbonClient) NewCarbonCarbonServiceClient() *CarbonCarbonServiceClient {
+	return &CarbonCarbonServiceClient{
 		internal: client.internal,
 	}
 }
 
-// NewOperationsClient creates a new instance of [OperationsClient].
-func (client *CarbonClient) NewOperationsClient() *OperationsClient {
-	return &OperationsClient{
+// NewCarbonOperationsClient creates a new instance of [CarbonOperationsClient].
+func (client *CarbonClient) NewCarbonOperationsClient() *CarbonOperationsClient {
+	return &CarbonOperationsClient{
 		internal: client.internal,
 	}
 }

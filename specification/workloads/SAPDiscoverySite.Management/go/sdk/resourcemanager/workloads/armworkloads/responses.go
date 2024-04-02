@@ -8,18 +8,11 @@ package armworkloads
 type SAPDiscoverySitesClientCreateResponse struct {
 	// Define the SAP Migration discovery site resource.
 	SAPDiscoverySite
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // SAPDiscoverySitesClientDeleteResponse contains the response from method SAPDiscoverySitesClient.Delete.
 type SAPDiscoverySitesClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // SAPDiscoverySitesClientGetResponse contains the response from method SAPDiscoverySitesClient.Get.
@@ -30,11 +23,7 @@ type SAPDiscoverySitesClientGetResponse struct {
 
 // SAPDiscoverySitesClientImportEntitiesResponse contains the response from method SAPDiscoverySitesClient.ImportEntities.
 type SAPDiscoverySitesClientImportEntitiesResponse struct {
-	// The current status of an async operation.
-	OperationStatusResult
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // SAPDiscoverySitesClientListByResourceGroupResponse contains the response from method SAPDiscoverySitesClient.NewListByResourceGroupPager.
@@ -59,18 +48,11 @@ type SAPDiscoverySitesClientUpdateResponse struct {
 type SAPInstancesClientCreateResponse struct {
 	// Define the SAP Instance resource.
 	SAPInstance
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // SAPInstancesClientDeleteResponse contains the response from method SAPInstancesClient.Delete.
 type SAPInstancesClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // SAPInstancesClientGetResponse contains the response from method SAPInstancesClient.Get.
@@ -95,18 +77,11 @@ type SAPInstancesClientUpdateResponse struct {
 type ServerInstancesClientCreateResponse struct {
 	// Define the Server Instance resource.
 	ServerInstance
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // ServerInstancesClientDeleteResponse contains the response from method ServerInstancesClient.Delete.
 type ServerInstancesClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // ServerInstancesClientGetResponse contains the response from method ServerInstancesClient.Get.

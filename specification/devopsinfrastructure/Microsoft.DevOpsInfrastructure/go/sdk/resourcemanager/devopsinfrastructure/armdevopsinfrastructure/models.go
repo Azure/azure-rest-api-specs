@@ -18,30 +18,6 @@ type AgentProfile struct {
 // GetAgentProfile implements the AgentProfileClassification interface for type AgentProfile.
 func (a *AgentProfile) GetAgentProfile() *AgentProfile { return a }
 
-// Standard Azure Resource Manager operation status response
-type ArmOperationStatus struct {
-	// REQUIRED; The operation status
-	Status *ResourceProvisioningState
-
-	// READ-ONLY; The unique identifier for the operationStatus resource
-	ID *string
-
-	// Operation complete time
-	EndTime *time.Time
-
-	// Errors that occurred if the operation ended with Canceled or Failed status
-	Error *ErrorDetail
-
-	// The name of the operationStatus resource
-	Name *string
-
-	// The progress made toward completing the operation
-	PercentComplete *float64
-
-	// Operation start time
-	StartTime *time.Time
-}
-
 // Common properties for all Azure Resource Manager resources.
 type ArmResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}

@@ -58,6 +58,7 @@ func (client *LoadBalancersClient) BeginCreateOrUpdate(ctx context.Context, reso
 // CreateOrUpdate - Create a LoadBalancer
 func (client *LoadBalancersClient) createOrUpdate(ctx context.Context, resourceURI string, loadBalancerName string, resource LoadBalancer, options *LoadBalancersClientCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "LoadBalancersClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, resourceURI, loadBalancerName, resource, options)
 	if err != nil {
 		return nil, err
@@ -105,6 +106,7 @@ func (client *LoadBalancersClient) createOrUpdateCreateRequest(ctx context.Conte
 //   - options - LoadBalancersClientDeleteOptions contains the optional parameters for the LoadBalancersClient.Delete method.
 func (client *LoadBalancersClient) Delete(ctx context.Context, resourceURI string, loadBalancerName string, options *LoadBalancersClientDeleteOptions) (LoadBalancersClientDeleteResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "LoadBalancersClient.Delete")
 	req, err := client.deleteCreateRequest(ctx, resourceURI, loadBalancerName, options)
 	if err != nil {
 		return LoadBalancersClientDeleteResponse{}, err
@@ -148,6 +150,7 @@ func (client *LoadBalancersClient) deleteCreateRequest(ctx context.Context, reso
 //   - options - LoadBalancersClientGetOptions contains the optional parameters for the LoadBalancersClient.Get method.
 func (client *LoadBalancersClient) Get(ctx context.Context, resourceURI string, loadBalancerName string, options *LoadBalancersClientGetOptions) (LoadBalancersClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "LoadBalancersClient.Get")
 	req, err := client.getCreateRequest(ctx, resourceURI, loadBalancerName, options)
 	if err != nil {
 		return LoadBalancersClientGetResponse{}, err
@@ -204,6 +207,7 @@ func (client *LoadBalancersClient) NewListPager(resourceURI string, options *Loa
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *LoadBalancersClientListResponse) (LoadBalancersClientListResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "LoadBalancersClient.NewListPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -266,6 +270,7 @@ func (client *LoadBalancersClient) BeginOldDelete(ctx context.Context, resourceU
 // OldDelete - Delete a LoadBalancer
 func (client *LoadBalancersClient) oldDelete(ctx context.Context, resourceURI string, loadBalancerName string, options *LoadBalancersClientOldDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "LoadBalancersClient.BeginOldDelete")
 	req, err := client.oldDeleteCreateRequest(ctx, resourceURI, loadBalancerName, options)
 	if err != nil {
 		return nil, err

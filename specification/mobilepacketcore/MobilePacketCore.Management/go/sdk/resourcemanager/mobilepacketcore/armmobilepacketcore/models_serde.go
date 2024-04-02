@@ -167,57 +167,6 @@ func (a *AmfDeploymentResourceTagsUpdate) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-// MarshalJSON implements the json.Marshaller interface for type ArmOperationStatus.
-func (a ArmOperationStatus) MarshalJSON() ([]byte, error) {
-	objectMap := make(map[string]any)
-	populateDateTimeRFC3339(objectMap, "endTime", a.EndTime)
-	populate(objectMap, "error", a.Error)
-	populate(objectMap, "id", a.ID)
-	populate(objectMap, "name", a.Name)
-	populate(objectMap, "percentComplete", a.PercentComplete)
-	populateDateTimeRFC3339(objectMap, "startTime", a.StartTime)
-	populate(objectMap, "status", a.Status)
-	return json.Marshal(objectMap)
-}
-
-// UnmarshalJSON implements the json.Unmarshaller interface for type ArmOperationStatus.
-func (a *ArmOperationStatus) UnmarshalJSON(data []byte) error {
-	var rawMsg map[string]json.RawMessage
-	if err := json.Unmarshal(data, &rawMsg); err != nil {
-		return fmt.Errorf("unmarshalling type %T: %v", a, err)
-	}
-	for key, val := range rawMsg {
-		var err error
-		switch key {
-		case "endTime":
-				err = unpopulateDateTimeRFC3339(val, "EndTime", &a.EndTime)
-			delete(rawMsg, key)
-		case "error":
-				err = unpopulate(val, "Error", &a.Error)
-			delete(rawMsg, key)
-		case "id":
-				err = unpopulate(val, "ID", &a.ID)
-			delete(rawMsg, key)
-		case "name":
-				err = unpopulate(val, "Name", &a.Name)
-			delete(rawMsg, key)
-		case "percentComplete":
-				err = unpopulate(val, "PercentComplete", &a.PercentComplete)
-			delete(rawMsg, key)
-		case "startTime":
-				err = unpopulateDateTimeRFC3339(val, "StartTime", &a.StartTime)
-			delete(rawMsg, key)
-		case "status":
-				err = unpopulate(val, "Status", &a.Status)
-			delete(rawMsg, key)
-		}
-		if err != nil {
-			return fmt.Errorf("unmarshalling type %T: %v", a, err)
-		}
-	}
-	return nil
-}
-
 // MarshalJSON implements the json.Marshaller interface for type ArmResource.
 func (a ArmResource) MarshalJSON() ([]byte, error) {
 	objectMap := make(map[string]any)

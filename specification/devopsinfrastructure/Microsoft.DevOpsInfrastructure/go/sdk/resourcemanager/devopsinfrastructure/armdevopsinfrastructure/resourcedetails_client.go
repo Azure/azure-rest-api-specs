@@ -48,6 +48,7 @@ func (client *ResourceDetailsClient) NewListByPoolPager(subscriptionID string, r
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *ResourceDetailsClientListByPoolResponse) (ResourceDetailsClientListByPoolResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ResourceDetailsClient.NewListByPoolPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink

@@ -46,6 +46,7 @@ func NewNrfDeploymentsClient(credential azcore.TokenCredential, options *arm.Cli
 //     method.
 func (client *NrfDeploymentsClient) CreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, nrfDeploymentName string, resource NrfDeploymentResource, options *NrfDeploymentsClientCreateOrUpdateOptions) (NrfDeploymentsClientCreateOrUpdateResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NrfDeploymentsClient.CreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, nrfDeploymentName, resource, options)
 	if err != nil {
 		return NrfDeploymentsClientCreateOrUpdateResponse{}, err
@@ -130,6 +131,7 @@ func (client *NrfDeploymentsClient) BeginDelete(ctx context.Context, subscriptio
 // Delete - Delete a NrfDeploymentResource
 func (client *NrfDeploymentsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, nrfDeploymentName string, options *NrfDeploymentsClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NrfDeploymentsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, nrfDeploymentName, options)
 	if err != nil {
 		return nil, err
@@ -178,6 +180,7 @@ func (client *NrfDeploymentsClient) deleteCreateRequest(ctx context.Context, sub
 //   - options - NrfDeploymentsClientGetOptions contains the optional parameters for the NrfDeploymentsClient.Get method.
 func (client *NrfDeploymentsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, nrfDeploymentName string, options *NrfDeploymentsClientGetOptions) (NrfDeploymentsClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NrfDeploymentsClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, nrfDeploymentName, options)
 	if err != nil {
 		return NrfDeploymentsClientGetResponse{}, err
@@ -240,6 +243,7 @@ func (client *NrfDeploymentsClient) NewListByResourceGroupPager(subscriptionID s
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *NrfDeploymentsClientListByResourceGroupResponse) (NrfDeploymentsClientListByResourceGroupResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NrfDeploymentsClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -296,6 +300,7 @@ func (client *NrfDeploymentsClient) NewListBySubscriptionPager(subscriptionID st
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *NrfDeploymentsClientListBySubscriptionResponse) (NrfDeploymentsClientListBySubscriptionResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NrfDeploymentsClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -347,6 +352,7 @@ func (client *NrfDeploymentsClient) listBySubscriptionHandleResponse(resp *http.
 //     method.
 func (client *NrfDeploymentsClient) UpdateTags(ctx context.Context, subscriptionID string, resourceGroupName string, nrfDeploymentName string, properties NrfDeploymentResourceTagsUpdate, options *NrfDeploymentsClientUpdateTagsOptions) (NrfDeploymentsClientUpdateTagsResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NrfDeploymentsClient.UpdateTags")
 	req, err := client.updateTagsCreateRequest(ctx, subscriptionID, resourceGroupName, nrfDeploymentName, properties, options)
 	if err != nil {
 		return NrfDeploymentsClientUpdateTagsResponse{}, err

@@ -46,6 +46,7 @@ func NewMetadataSchemasClient(credential azcore.TokenCredential, options *arm.Cl
 //     method.
 func (client *MetadataSchemasClient) CreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, metadataSchemaName string, payload MetadataSchema, options *MetadataSchemasClientCreateOrUpdateOptions) (MetadataSchemasClientCreateOrUpdateResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "MetadataSchemasClient.CreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, serviceName, metadataSchemaName, payload, options)
 	if err != nil {
 		return MetadataSchemasClientCreateOrUpdateResponse{}, err
@@ -116,6 +117,7 @@ func (client *MetadataSchemasClient) createOrUpdateHandleResponse(resp *http.Res
 //   - options - MetadataSchemasClientDeleteOptions contains the optional parameters for the MetadataSchemasClient.Delete method.
 func (client *MetadataSchemasClient) Delete(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, metadataSchemaName string, options *MetadataSchemasClientDeleteOptions) (MetadataSchemasClientDeleteResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "MetadataSchemasClient.Delete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, serviceName, metadataSchemaName, options)
 	if err != nil {
 		return MetadataSchemasClientDeleteResponse{}, err
@@ -169,6 +171,7 @@ func (client *MetadataSchemasClient) deleteCreateRequest(ctx context.Context, su
 //   - options - MetadataSchemasClientGetOptions contains the optional parameters for the MetadataSchemasClient.Get method.
 func (client *MetadataSchemasClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, metadataSchemaName string, options *MetadataSchemasClientGetOptions) (MetadataSchemasClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "MetadataSchemasClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, serviceName, metadataSchemaName, options)
 	if err != nil {
 		return MetadataSchemasClientGetResponse{}, err
@@ -235,6 +238,7 @@ func (client *MetadataSchemasClient) getHandleResponse(resp *http.Response) (Met
 //   - options - MetadataSchemasClientHeadOptions contains the optional parameters for the MetadataSchemasClient.Head method.
 func (client *MetadataSchemasClient) Head(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, metadataSchemaName string, options *MetadataSchemasClientHeadOptions) (MetadataSchemasClientHeadResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "MetadataSchemasClient.Head")
 	req, err := client.headCreateRequest(ctx, subscriptionID, resourceGroupName, serviceName, metadataSchemaName, options)
 	if err != nil {
 		return MetadataSchemasClientHeadResponse{}, err
@@ -292,6 +296,7 @@ func (client *MetadataSchemasClient) NewListPager(subscriptionID string, resourc
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *MetadataSchemasClientListResponse) (MetadataSchemasClientListResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "MetadataSchemasClient.NewListPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink

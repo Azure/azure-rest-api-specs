@@ -4,6 +4,44 @@
 
 package armcodesigning
 
+// AccountsClientCheckNameAvailabilityOptions contains the optional parameters for the AccountsClient.CheckNameAvailability
+// method.
+type AccountsClientCheckNameAvailabilityOptions struct {
+	// placeholder for future optional parameters
+}
+
+// AccountsClientCreateOptions contains the optional parameters for the AccountsClient.Create method.
+type AccountsClientCreateOptions struct {
+	ResumeToken string
+}
+
+// AccountsClientDeleteOptions contains the optional parameters for the AccountsClient.Delete method.
+type AccountsClientDeleteOptions struct {
+	ResumeToken string
+}
+
+// AccountsClientGetOptions contains the optional parameters for the AccountsClient.Get method.
+type AccountsClientGetOptions struct {
+	// placeholder for future optional parameters
+}
+
+// AccountsClientListByResourceGroupOptions contains the optional parameters for the AccountsClient.NewListByResourceGroupPager
+// method.
+type AccountsClientListByResourceGroupOptions struct {
+	// placeholder for future optional parameters
+}
+
+// AccountsClientListBySubscriptionOptions contains the optional parameters for the AccountsClient.NewListBySubscriptionPager
+// method.
+type AccountsClientListBySubscriptionOptions struct {
+	// placeholder for future optional parameters
+}
+
+// AccountsClientUpdateOptions contains the optional parameters for the AccountsClient.Update method.
+type AccountsClientUpdateOptions struct {
+	ResumeToken string
+}
+
 // CertificateProfilesClientCreateOptions contains the optional parameters for the CertificateProfilesClient.Create method.
 type CertificateProfilesClientCreateOptions struct {
 	ResumeToken string
@@ -29,44 +67,6 @@ type CertificateProfilesClientListByCodeSigningAccountOptions struct {
 // method.
 type CertificateProfilesClientRevokeCertificateOptions struct {
 	// placeholder for future optional parameters
-}
-
-// CodeSigningAccountsClientCheckNameAvailabilityOptions contains the optional parameters for the CodeSigningAccountsClient.CheckNameAvailability
-// method.
-type CodeSigningAccountsClientCheckNameAvailabilityOptions struct {
-	// placeholder for future optional parameters
-}
-
-// CodeSigningAccountsClientCreateOptions contains the optional parameters for the CodeSigningAccountsClient.Create method.
-type CodeSigningAccountsClientCreateOptions struct {
-	ResumeToken string
-}
-
-// CodeSigningAccountsClientDeleteOptions contains the optional parameters for the CodeSigningAccountsClient.Delete method.
-type CodeSigningAccountsClientDeleteOptions struct {
-	ResumeToken string
-}
-
-// CodeSigningAccountsClientGetOptions contains the optional parameters for the CodeSigningAccountsClient.Get method.
-type CodeSigningAccountsClientGetOptions struct {
-	// placeholder for future optional parameters
-}
-
-// CodeSigningAccountsClientListByResourceGroupOptions contains the optional parameters for the CodeSigningAccountsClient.NewListByResourceGroupPager
-// method.
-type CodeSigningAccountsClientListByResourceGroupOptions struct {
-	// placeholder for future optional parameters
-}
-
-// CodeSigningAccountsClientListBySubscriptionOptions contains the optional parameters for the CodeSigningAccountsClient.NewListBySubscriptionPager
-// method.
-type CodeSigningAccountsClientListBySubscriptionOptions struct {
-	// placeholder for future optional parameters
-}
-
-// CodeSigningAccountsClientUpdateOptions contains the optional parameters for the CodeSigningAccountsClient.Update method.
-type CodeSigningAccountsClientUpdateOptions struct {
-	ResumeToken string
 }
 
 // OperationsClientListOptions contains the optional parameters for the OperationsClient.NewListPager method.

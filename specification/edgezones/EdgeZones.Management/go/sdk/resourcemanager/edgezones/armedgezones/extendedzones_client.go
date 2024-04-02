@@ -42,6 +42,7 @@ func NewExtendedZonesClient(credential azcore.TokenCredential, options *arm.Clie
 //   - options - ExtendedZonesClientGetOptions contains the optional parameters for the ExtendedZonesClient.Get method.
 func (client *ExtendedZonesClient) Get(ctx context.Context, subscriptionID string, extendedZoneName string, options *ExtendedZonesClientGetOptions) (ExtendedZonesClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ExtendedZonesClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, extendedZoneName, options)
 	if err != nil {
 		return ExtendedZonesClientGetResponse{}, err
@@ -99,6 +100,7 @@ func (client *ExtendedZonesClient) NewListBySubscriptionPager(subscriptionID str
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *ExtendedZonesClientListBySubscriptionResponse) (ExtendedZonesClientListBySubscriptionResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ExtendedZonesClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -147,6 +149,7 @@ func (client *ExtendedZonesClient) listBySubscriptionHandleResponse(resp *http.R
 //   - options - ExtendedZonesClientRegisterOptions contains the optional parameters for the ExtendedZonesClient.Register method.
 func (client *ExtendedZonesClient) Register(ctx context.Context, subscriptionID string, extendedZoneName string, options *ExtendedZonesClientRegisterOptions) (ExtendedZonesClientRegisterResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ExtendedZonesClient.Register")
 	req, err := client.registerCreateRequest(ctx, subscriptionID, extendedZoneName, options)
 	if err != nil {
 		return ExtendedZonesClientRegisterResponse{}, err
@@ -201,6 +204,7 @@ func (client *ExtendedZonesClient) registerHandleResponse(resp *http.Response) (
 //     method.
 func (client *ExtendedZonesClient) Unregister(ctx context.Context, subscriptionID string, extendedZoneName string, options *ExtendedZonesClientUnregisterOptions) (ExtendedZonesClientUnregisterResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ExtendedZonesClient.Unregister")
 	req, err := client.unregisterCreateRequest(ctx, subscriptionID, extendedZoneName, options)
 	if err != nil {
 		return ExtendedZonesClientUnregisterResponse{}, err

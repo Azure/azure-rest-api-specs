@@ -43,6 +43,7 @@ func NewDeletedServicesClient(credential azcore.TokenCredential, options *arm.Cl
 //   - options - DeletedServicesClientDeleteOptions contains the optional parameters for the DeletedServicesClient.Delete method.
 func (client *DeletedServicesClient) Delete(ctx context.Context, subscriptionID string, resourceGroupName string, deletedServiceName string, options *DeletedServicesClientDeleteOptions) (DeletedServicesClientDeleteResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DeletedServicesClient.Delete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, deletedServiceName, options)
 	if err != nil {
 		return DeletedServicesClientDeleteResponse{}, err
@@ -91,6 +92,7 @@ func (client *DeletedServicesClient) deleteCreateRequest(ctx context.Context, su
 //   - options - DeletedServicesClientGetOptions contains the optional parameters for the DeletedServicesClient.Get method.
 func (client *DeletedServicesClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, deletedServiceName string, options *DeletedServicesClientGetOptions) (DeletedServicesClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DeletedServicesClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, deletedServiceName, options)
 	if err != nil {
 		return DeletedServicesClientGetResponse{}, err
@@ -156,6 +158,7 @@ func (client *DeletedServicesClient) NewListPager(subscriptionID string, resourc
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *DeletedServicesClientListResponse) (DeletedServicesClientListResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DeletedServicesClient.NewListPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -215,6 +218,7 @@ func (client *DeletedServicesClient) NewListBySubscriptionPager(subscriptionID s
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *DeletedServicesClientListBySubscriptionResponse) (DeletedServicesClientListBySubscriptionResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DeletedServicesClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink

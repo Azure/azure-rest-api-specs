@@ -60,6 +60,7 @@ func (client *GlobalReachConnectionsClient) BeginCreateOrUpdate(ctx context.Cont
 // CreateOrUpdate - Create a GlobalReachConnection
 func (client *GlobalReachConnectionsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, globalReachConnectionName string, resource GlobalReachConnection, options *GlobalReachConnectionsClientCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "GlobalReachConnectionsClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, globalReachConnectionName, resource, options)
 	if err != nil {
 		return nil, err
@@ -132,6 +133,7 @@ func (client *GlobalReachConnectionsClient) BeginDelete(ctx context.Context, sub
 // Delete - Delete a GlobalReachConnection
 func (client *GlobalReachConnectionsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, globalReachConnectionName string, options *GlobalReachConnectionsClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "GlobalReachConnectionsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, globalReachConnectionName, options)
 	if err != nil {
 		return nil, err
@@ -186,6 +188,7 @@ func (client *GlobalReachConnectionsClient) deleteCreateRequest(ctx context.Cont
 //     method.
 func (client *GlobalReachConnectionsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, globalReachConnectionName string, options *GlobalReachConnectionsClientGetOptions) (GlobalReachConnectionsClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "GlobalReachConnectionsClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, globalReachConnectionName, options)
 	if err != nil {
 		return GlobalReachConnectionsClientGetResponse{}, err
@@ -253,6 +256,7 @@ func (client *GlobalReachConnectionsClient) NewListByPrivateCloudPager(subscript
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *GlobalReachConnectionsClientListByPrivateCloudResponse) (GlobalReachConnectionsClientListByPrivateCloudResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "GlobalReachConnectionsClient.NewListByPrivateCloudPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink

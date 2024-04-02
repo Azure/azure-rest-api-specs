@@ -14,18 +14,11 @@ type OperationsClientListResponse struct {
 type PoolsClientCreateOrUpdateResponse struct {
 	// Concrete tracked resource types can be created by aliasing this type using a specific property type.
 	Pool
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // PoolsClientDeleteResponse contains the response from method PoolsClient.Delete.
 type PoolsClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // PoolsClientGetResponse contains the response from method PoolsClient.Get.
@@ -50,9 +43,6 @@ type PoolsClientListBySubscriptionResponse struct {
 type PoolsClientUpdateResponse struct {
 	// Concrete tracked resource types can be created by aliasing this type using a specific property type.
 	Pool
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // ResourceDetailsClientListByPoolResponse contains the response from method ResourceDetailsClient.NewListByPoolPager.

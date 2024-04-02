@@ -50,27 +50,6 @@ func PossibleCreatedByTypeValues() []CreatedByType {
 	}
 }
 
-// DatabaseWatcherProvisioningState - The status of the last provisioning operation performed on the resource.
-type DatabaseWatcherProvisioningState string
-
-const (
-	// DatabaseWatcherProvisioningStateCanceled - Resource creation was canceled.
-	DatabaseWatcherProvisioningStateCanceled DatabaseWatcherProvisioningState = "Canceled"
-	// DatabaseWatcherProvisioningStateFailed - Resource creation failed.
-	DatabaseWatcherProvisioningStateFailed DatabaseWatcherProvisioningState = "Failed"
-	// DatabaseWatcherProvisioningStateSucceeded - Resource has been created.
-	DatabaseWatcherProvisioningStateSucceeded DatabaseWatcherProvisioningState = "Succeeded"
-)
-
-// PossibleDatabaseWatcherProvisioningStateValues returns the possible values for the DatabaseWatcherProvisioningState const type.
-func PossibleDatabaseWatcherProvisioningStateValues() []DatabaseWatcherProvisioningState {
-	return []DatabaseWatcherProvisioningState{	
-		DatabaseWatcherProvisioningStateCanceled,
-		DatabaseWatcherProvisioningStateFailed,
-		DatabaseWatcherProvisioningStateSucceeded,
-	}
-}
-
 // KustoOfferingType - The type of Kusto offering.
 type KustoOfferingType string
 
@@ -135,6 +114,27 @@ func PossibleOriginValues() []Origin {
 		OriginSystem,
 		OriginUser,
 		OriginUserSystem,
+	}
+}
+
+// ProvisioningState - The status of the last provisioning operation performed on the resource.
+type ProvisioningState string
+
+const (
+	// ProvisioningStateCanceled - Resource creation was canceled.
+	ProvisioningStateCanceled ProvisioningState = "Canceled"
+	// ProvisioningStateFailed - Resource creation failed.
+	ProvisioningStateFailed ProvisioningState = "Failed"
+	// ProvisioningStateSucceeded - Resource has been created.
+	ProvisioningStateSucceeded ProvisioningState = "Succeeded"
+)
+
+// PossibleProvisioningStateValues returns the possible values for the ProvisioningState const type.
+func PossibleProvisioningStateValues() []ProvisioningState {
+	return []ProvisioningState{	
+		ProvisioningStateCanceled,
+		ProvisioningStateFailed,
+		ProvisioningStateSucceeded,
 	}
 }
 

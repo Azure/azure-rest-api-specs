@@ -60,6 +60,7 @@ func (client *ScriptExecutionsClient) BeginCreateOrUpdate(ctx context.Context, s
 // CreateOrUpdate - Create a ScriptExecution
 func (client *ScriptExecutionsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptExecutionName string, resource ScriptExecution, options *ScriptExecutionsClientCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ScriptExecutionsClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, scriptExecutionName, resource, options)
 	if err != nil {
 		return nil, err
@@ -131,6 +132,7 @@ func (client *ScriptExecutionsClient) BeginDelete(ctx context.Context, subscript
 // Delete - Delete a ScriptExecution
 func (client *ScriptExecutionsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptExecutionName string, options *ScriptExecutionsClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ScriptExecutionsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, scriptExecutionName, options)
 	if err != nil {
 		return nil, err
@@ -184,6 +186,7 @@ func (client *ScriptExecutionsClient) deleteCreateRequest(ctx context.Context, s
 //   - options - ScriptExecutionsClientGetOptions contains the optional parameters for the ScriptExecutionsClient.Get method.
 func (client *ScriptExecutionsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptExecutionName string, options *ScriptExecutionsClientGetOptions) (ScriptExecutionsClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ScriptExecutionsClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, scriptExecutionName, options)
 	if err != nil {
 		return ScriptExecutionsClientGetResponse{}, err
@@ -248,6 +251,7 @@ func (client *ScriptExecutionsClient) getHandleResponse(resp *http.Response) (Sc
 //     method.
 func (client *ScriptExecutionsClient) GetExecutionLogs(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptExecutionName string, options *ScriptExecutionsClientGetExecutionLogsOptions) (ScriptExecutionsClientGetExecutionLogsResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ScriptExecutionsClient.GetExecutionLogs")
 	req, err := client.getExecutionLogsCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, scriptExecutionName, options)
 	if err != nil {
 		return ScriptExecutionsClientGetExecutionLogsResponse{}, err
@@ -322,6 +326,7 @@ func (client *ScriptExecutionsClient) NewListByPrivateCloudPager(subscriptionID 
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *ScriptExecutionsClientListByPrivateCloudResponse) (ScriptExecutionsClientListByPrivateCloudResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ScriptExecutionsClient.NewListByPrivateCloudPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink

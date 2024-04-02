@@ -46,6 +46,7 @@ func NewNssfDeploymentsClient(credential azcore.TokenCredential, options *arm.Cl
 //     method.
 func (client *NssfDeploymentsClient) CreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, nssfDeploymentName string, resource NssfDeploymentResource, options *NssfDeploymentsClientCreateOrUpdateOptions) (NssfDeploymentsClientCreateOrUpdateResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NssfDeploymentsClient.CreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, nssfDeploymentName, resource, options)
 	if err != nil {
 		return NssfDeploymentsClientCreateOrUpdateResponse{}, err
@@ -130,6 +131,7 @@ func (client *NssfDeploymentsClient) BeginDelete(ctx context.Context, subscripti
 // Delete - Delete a NssfDeploymentResource
 func (client *NssfDeploymentsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, nssfDeploymentName string, options *NssfDeploymentsClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NssfDeploymentsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, nssfDeploymentName, options)
 	if err != nil {
 		return nil, err
@@ -178,6 +180,7 @@ func (client *NssfDeploymentsClient) deleteCreateRequest(ctx context.Context, su
 //   - options - NssfDeploymentsClientGetOptions contains the optional parameters for the NssfDeploymentsClient.Get method.
 func (client *NssfDeploymentsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, nssfDeploymentName string, options *NssfDeploymentsClientGetOptions) (NssfDeploymentsClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NssfDeploymentsClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, nssfDeploymentName, options)
 	if err != nil {
 		return NssfDeploymentsClientGetResponse{}, err
@@ -240,6 +243,7 @@ func (client *NssfDeploymentsClient) NewListByResourceGroupPager(subscriptionID 
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *NssfDeploymentsClientListByResourceGroupResponse) (NssfDeploymentsClientListByResourceGroupResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NssfDeploymentsClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -296,6 +300,7 @@ func (client *NssfDeploymentsClient) NewListBySubscriptionPager(subscriptionID s
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *NssfDeploymentsClientListBySubscriptionResponse) (NssfDeploymentsClientListBySubscriptionResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NssfDeploymentsClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -347,6 +352,7 @@ func (client *NssfDeploymentsClient) listBySubscriptionHandleResponse(resp *http
 //     method.
 func (client *NssfDeploymentsClient) UpdateTags(ctx context.Context, subscriptionID string, resourceGroupName string, nssfDeploymentName string, properties NssfDeploymentResourceTagsUpdate, options *NssfDeploymentsClientUpdateTagsOptions) (NssfDeploymentsClientUpdateTagsResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NssfDeploymentsClient.UpdateTags")
 	req, err := client.updateTagsCreateRequest(ctx, subscriptionID, resourceGroupName, nssfDeploymentName, properties, options)
 	if err != nil {
 		return NssfDeploymentsClientUpdateTagsResponse{}, err

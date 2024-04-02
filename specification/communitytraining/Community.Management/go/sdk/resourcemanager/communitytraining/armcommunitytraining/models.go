@@ -6,30 +6,6 @@ package armcommunitytraining
 
 import "time"
 
-// Standard Azure Resource Manager operation status response
-type ArmOperationStatus struct {
-	// REQUIRED; The operation status
-	Status *ResourceProvisioningState
-
-	// READ-ONLY; The unique identifier for the operationStatus resource
-	ID *string
-
-	// Operation complete time
-	EndTime *time.Time
-
-	// Errors that occurred if the operation ended with Canceled or Failed status
-	Error *ErrorDetail
-
-	// The name of the operationStatus resource
-	Name *string
-
-	// The progress made toward completing the operation
-	PercentComplete *float64
-
-	// Operation start time
-	StartTime *time.Time
-}
-
 // Common properties for all Azure Resource Manager resources.
 type ArmResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
@@ -58,7 +34,7 @@ type CommunityTraining struct {
 	Type *string
 
 	// The resource-specific properties for this resource.
-	Properties *CommunityTrainingProperties
+	Properties *Properties
 
 	// The SKU (Stock Keeping Unit) assigned to this resource.
 	SKU *ResourceSKUType
@@ -71,59 +47,6 @@ type CommunityTraining struct {
 
 	// READ-ONLY; The name of the Community Training Resource
 	Name *string
-}
-
-// The response of a CommunityTraining list operation.
-type CommunityTrainingListResult struct {
-	// REQUIRED; The CommunityTraining items on this page
-	Value []*CommunityTraining
-
-	// The link to the next page of items
-	NextLink *string
-}
-
-// Details of the Community CommunityTraining.
-type CommunityTrainingProperties struct {
-	// REQUIRED; To indicate whether the Community Training instance has Disaster Recovery enabled
-	DisasterRecoveryEnabled *bool
-
-	// REQUIRED; The identity configuration of the Community Training resource
-	IdentityConfiguration *IdentityConfigurationProperties
-
-	// REQUIRED; The email address of the portal admin
-	PortalAdminEmailAddress *string
-
-	// REQUIRED; The portal name (website name) of the Community Training instance
-	PortalName *string
-
-	// REQUIRED; The email address of the portal owner. Will be used as the primary contact
-	PortalOwnerEmailAddress *string
-
-	// REQUIRED; The organization name of the portal owner
-	PortalOwnerOrganizationName *string
-
-	// REQUIRED; To indicate whether the Community Training instance has Zone Redundancy enabled
-	ZoneRedundancyEnabled *bool
-
-	// The status of the last operation.
-	ProvisioningState *ProvisioningState
-}
-
-// The type used for update operations of the CommunityTraining.
-type CommunityTrainingUpdate struct {
-	Properties *CommunityTrainingUpdateProperties
-
-	// The SKU (Stock Keeping Unit) assigned to this resource.
-	SKU *ResourceSKUType
-
-	// Resource tags.
-	Tags map[string]*string
-}
-
-// The updatable properties of the CommunityTraining.
-type CommunityTrainingUpdateProperties struct {
-	// The identity configuration of the Community Training resource
-	IdentityConfiguration *IdentityConfigurationProperties
 }
 
 // The resource management error additional info.
@@ -193,6 +116,15 @@ type IdentityConfigurationProperties struct {
 	TeamsEnabled *bool
 }
 
+// The response of a CommunityTraining list operation.
+type ListResult struct {
+	// REQUIRED; The CommunityTraining items on this page
+	Value []*CommunityTraining
+
+	// The link to the next page of items
+	NextLink *string
+}
+
 // Details of a REST API operation, returned from the Resource Provider Operations API
 type Operation struct {
 	// Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
@@ -237,6 +169,33 @@ type PagedOperation struct {
 
 	// The link to the next page of items
 	NextLink *string
+}
+
+// Details of the Community CommunityTraining.
+type Properties struct {
+	// REQUIRED; To indicate whether the Community Training instance has Disaster Recovery enabled
+	DisasterRecoveryEnabled *bool
+
+	// REQUIRED; The identity configuration of the Community Training resource
+	IdentityConfiguration *IdentityConfigurationProperties
+
+	// REQUIRED; The email address of the portal admin
+	PortalAdminEmailAddress *string
+
+	// REQUIRED; The portal name (website name) of the Community Training instance
+	PortalName *string
+
+	// REQUIRED; The email address of the portal owner. Will be used as the primary contact
+	PortalOwnerEmailAddress *string
+
+	// REQUIRED; The organization name of the portal owner
+	PortalOwnerOrganizationName *string
+
+	// REQUIRED; To indicate whether the Community Training instance has Zone Redundancy enabled
+	ZoneRedundancyEnabled *bool
+
+	// The status of the last operation.
+	ProvisioningState *ProvisioningState
 }
 
 // The SKU (Stock Keeping Unit) assigned to this resource.
@@ -296,5 +255,22 @@ type TrackedResourceBase struct {
 
 	// Resource tags.
 	Tags map[string]*string
+}
+
+// The type used for update operations of the CommunityTraining.
+type Update struct {
+	Properties *UpdateProperties
+
+	// The SKU (Stock Keeping Unit) assigned to this resource.
+	SKU *ResourceSKUType
+
+	// Resource tags.
+	Tags map[string]*string
+}
+
+// The updatable properties of the CommunityTraining.
+type UpdateProperties struct {
+	// The identity configuration of the Community Training resource
+	IdentityConfiguration *IdentityConfigurationProperties
 }
 

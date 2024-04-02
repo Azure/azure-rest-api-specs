@@ -43,6 +43,7 @@ func NewLocationsClient(credential azcore.TokenCredential, options *arm.ClientOp
 //     method.
 func (client *LocationsClient) CheckQuotaAvailability(ctx context.Context, subscriptionID string, location string, options *LocationsClientCheckQuotaAvailabilityOptions) (LocationsClientCheckQuotaAvailabilityResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "LocationsClient.CheckQuotaAvailability")
 	req, err := client.checkQuotaAvailabilityCreateRequest(ctx, subscriptionID, location, options)
 	if err != nil {
 		return LocationsClientCheckQuotaAvailabilityResponse{}, err
@@ -97,6 +98,7 @@ func (client *LocationsClient) checkQuotaAvailabilityHandleResponse(resp *http.R
 //     method.
 func (client *LocationsClient) CheckTrialAvailability(ctx context.Context, subscriptionID string, location string, options *LocationsClientCheckTrialAvailabilityOptions) (LocationsClientCheckTrialAvailabilityResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "LocationsClient.CheckTrialAvailability")
 	req, err := client.checkTrialAvailabilityCreateRequest(ctx, subscriptionID, location, options)
 	if err != nil {
 		return LocationsClientCheckTrialAvailabilityResponse{}, err

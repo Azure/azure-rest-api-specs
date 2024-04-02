@@ -45,6 +45,7 @@ func NewDataProductsClient(credential azcore.TokenCredential, options *arm.Clien
 //     method.
 func (client *DataProductsClient) AddUserRole(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, body RoleAssignmentCommonProperties, options *DataProductsClientAddUserRoleOptions) (DataProductsClientAddUserRoleResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataProductsClient.AddUserRole")
 	req, err := client.addUserRoleCreateRequest(ctx, subscriptionID, resourceGroupName, dataProductName, body, options)
 	if err != nil {
 		return DataProductsClientAddUserRoleResponse{}, err
@@ -122,6 +123,7 @@ func (client *DataProductsClient) BeginCreate(ctx context.Context, subscriptionI
 // Create - Create data product resource.
 func (client *DataProductsClient) create(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, resource DataProduct, options *DataProductsClientCreateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataProductsClient.BeginCreate")
 	req, err := client.createCreateRequest(ctx, subscriptionID, resourceGroupName, dataProductName, resource, options)
 	if err != nil {
 		return nil, err
@@ -188,6 +190,7 @@ func (client *DataProductsClient) BeginDelete(ctx context.Context, subscriptionI
 // Delete - Delete data product resource.
 func (client *DataProductsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, options *DataProductsClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataProductsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, dataProductName, options)
 	if err != nil {
 		return nil, err
@@ -238,6 +241,7 @@ func (client *DataProductsClient) deleteCreateRequest(ctx context.Context, subsc
 //     method.
 func (client *DataProductsClient) GenerateStorageAccountSasToken(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, body AccountSas, options *DataProductsClientGenerateStorageAccountSasTokenOptions) (DataProductsClientGenerateStorageAccountSasTokenResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataProductsClient.GenerateStorageAccountSasToken")
 	req, err := client.generateStorageAccountSasTokenCreateRequest(ctx, subscriptionID, resourceGroupName, dataProductName, body, options)
 	if err != nil {
 		return DataProductsClientGenerateStorageAccountSasTokenResponse{}, err
@@ -300,6 +304,7 @@ func (client *DataProductsClient) generateStorageAccountSasTokenHandleResponse(r
 //   - options - DataProductsClientGetOptions contains the optional parameters for the DataProductsClient.Get method.
 func (client *DataProductsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, options *DataProductsClientGetOptions) (DataProductsClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataProductsClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, dataProductName, options)
 	if err != nil {
 		return DataProductsClientGetResponse{}, err
@@ -362,6 +367,7 @@ func (client *DataProductsClient) NewListByResourceGroupPager(subscriptionID str
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *DataProductsClientListByResourceGroupResponse) (DataProductsClientListByResourceGroupResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataProductsClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -418,6 +424,7 @@ func (client *DataProductsClient) NewListBySubscriptionPager(subscriptionID stri
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *DataProductsClientListBySubscriptionResponse) (DataProductsClientListBySubscriptionResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataProductsClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -469,6 +476,7 @@ func (client *DataProductsClient) listBySubscriptionHandleResponse(resp *http.Re
 //     method.
 func (client *DataProductsClient) ListRolesAssignments(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, body ListRolesAssignmentsRequest, options *DataProductsClientListRolesAssignmentsOptions) (DataProductsClientListRolesAssignmentsResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataProductsClient.ListRolesAssignments")
 	req, err := client.listRolesAssignmentsCreateRequest(ctx, subscriptionID, resourceGroupName, dataProductName, body, options)
 	if err != nil {
 		return DataProductsClientListRolesAssignmentsResponse{}, err
@@ -533,6 +541,7 @@ func (client *DataProductsClient) listRolesAssignmentsHandleResponse(resp *http.
 //     method.
 func (client *DataProductsClient) RemoveUserRole(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, body RoleAssignmentDetail, options *DataProductsClientRemoveUserRoleOptions) (DataProductsClientRemoveUserRoleResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataProductsClient.RemoveUserRole")
 	req, err := client.removeUserRoleCreateRequest(ctx, subscriptionID, resourceGroupName, dataProductName, body, options)
 	if err != nil {
 		return DataProductsClientRemoveUserRoleResponse{}, err
@@ -586,6 +595,7 @@ func (client *DataProductsClient) removeUserRoleCreateRequest(ctx context.Contex
 //   - options - DataProductsClientRotateKeyOptions contains the optional parameters for the DataProductsClient.RotateKey method.
 func (client *DataProductsClient) RotateKey(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, body KeyVaultInfo, options *DataProductsClientRotateKeyOptions) (DataProductsClientRotateKeyResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataProductsClient.RotateKey")
 	req, err := client.rotateKeyCreateRequest(ctx, subscriptionID, resourceGroupName, dataProductName, body, options)
 	if err != nil {
 		return DataProductsClientRotateKeyResponse{}, err
@@ -653,6 +663,7 @@ func (client *DataProductsClient) BeginUpdate(ctx context.Context, subscriptionI
 // Update - Update data product resource.
 func (client *DataProductsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, properties DataProductUpdate, options *DataProductsClientUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataProductsClient.BeginUpdate")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, dataProductName, properties, options)
 	if err != nil {
 		return nil, err

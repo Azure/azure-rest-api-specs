@@ -45,6 +45,7 @@ func NewScriptCmdletsClient(credential azcore.TokenCredential, options *arm.Clie
 //   - options - ScriptCmdletsClientGetOptions contains the optional parameters for the ScriptCmdletsClient.Get method.
 func (client *ScriptCmdletsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptPackageName string, scriptCmdletName string, options *ScriptCmdletsClientGetOptions) (ScriptCmdletsClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ScriptCmdletsClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, scriptPackageName, scriptCmdletName, options)
 	if err != nil {
 		return ScriptCmdletsClientGetResponse{}, err
@@ -117,6 +118,7 @@ func (client *ScriptCmdletsClient) NewListByScriptPackagePager(subscriptionID st
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *ScriptCmdletsClientListByScriptPackageResponse) (ScriptCmdletsClientListByScriptPackageResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ScriptCmdletsClient.NewListByScriptPackagePager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink

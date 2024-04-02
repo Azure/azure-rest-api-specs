@@ -61,6 +61,7 @@ func (client *DatastoresClient) BeginCreateOrUpdate(ctx context.Context, subscri
 // CreateOrUpdate - Create a Datastore
 func (client *DatastoresClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, datastoreName string, resource Datastore, options *DatastoresClientCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DatastoresClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, datastoreName, resource, options)
 	if err != nil {
 		return nil, err
@@ -137,6 +138,7 @@ func (client *DatastoresClient) BeginDelete(ctx context.Context, subscriptionID 
 // Delete - Delete a Datastore
 func (client *DatastoresClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, datastoreName string, options *DatastoresClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DatastoresClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, datastoreName, options)
 	if err != nil {
 		return nil, err
@@ -195,6 +197,7 @@ func (client *DatastoresClient) deleteCreateRequest(ctx context.Context, subscri
 //   - options - DatastoresClientGetOptions contains the optional parameters for the DatastoresClient.Get method.
 func (client *DatastoresClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, datastoreName string, options *DatastoresClientGetOptions) (DatastoresClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DatastoresClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, datastoreName, options)
 	if err != nil {
 		return DatastoresClientGetResponse{}, err
@@ -267,6 +270,7 @@ func (client *DatastoresClient) NewListByClusterPager(subscriptionID string, res
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *DatastoresClientListByClusterResponse) (DatastoresClientListByClusterResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DatastoresClient.NewListByClusterPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink

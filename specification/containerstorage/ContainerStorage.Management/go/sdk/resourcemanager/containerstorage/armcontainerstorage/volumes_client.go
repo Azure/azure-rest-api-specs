@@ -59,6 +59,7 @@ func (client *VolumesClient) BeginCreateOrUpdate(ctx context.Context, subscripti
 // CreateOrUpdate - Create a Volume
 func (client *VolumesClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, resource Volume, options *VolumesClientCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "VolumesClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, poolName, volumeName, resource, options)
 	if err != nil {
 		return nil, err
@@ -130,6 +131,7 @@ func (client *VolumesClient) BeginDelete(ctx context.Context, subscriptionID str
 // Delete - Delete a Volume
 func (client *VolumesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, options *VolumesClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "VolumesClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, poolName, volumeName, options)
 	if err != nil {
 		return nil, err
@@ -183,6 +185,7 @@ func (client *VolumesClient) deleteCreateRequest(ctx context.Context, subscripti
 //   - options - VolumesClientGetOptions contains the optional parameters for the VolumesClient.Get method.
 func (client *VolumesClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, options *VolumesClientGetOptions) (VolumesClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "VolumesClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, poolName, volumeName, options)
 	if err != nil {
 		return VolumesClientGetResponse{}, err
@@ -249,6 +252,7 @@ func (client *VolumesClient) NewListByPoolPager(subscriptionID string, resourceG
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *VolumesClientListByPoolResponse) (VolumesClientListByPoolResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "VolumesClient.NewListByPoolPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -322,6 +326,7 @@ func (client *VolumesClient) BeginUpdate(ctx context.Context, subscriptionID str
 // Update - Update a Volume
 func (client *VolumesClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, properties VolumeUpdate, options *VolumesClientUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "VolumesClient.BeginUpdate")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, poolName, volumeName, properties, options)
 	if err != nil {
 		return nil, err

@@ -15,11 +15,7 @@ type AmfDeploymentsClientCreateOrUpdateResponse struct {
 
 // AmfDeploymentsClientDeleteResponse contains the response from method AmfDeploymentsClient.Delete.
 type AmfDeploymentsClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // AmfDeploymentsClientGetResponse contains the response from method AmfDeploymentsClient.Get.
@@ -57,11 +53,7 @@ type ClusterServicesClientCreateOrUpdateResponse struct {
 
 // ClusterServicesClientDeleteResponse contains the response from method ClusterServicesClient.Delete.
 type ClusterServicesClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // ClusterServicesClientGetResponse contains the response from method ClusterServicesClient.Get.
@@ -99,11 +91,7 @@ type NrfDeploymentsClientCreateOrUpdateResponse struct {
 
 // NrfDeploymentsClientDeleteResponse contains the response from method NrfDeploymentsClient.Delete.
 type NrfDeploymentsClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // NrfDeploymentsClientGetResponse contains the response from method NrfDeploymentsClient.Get.
@@ -141,11 +129,7 @@ type NssfDeploymentsClientCreateOrUpdateResponse struct {
 
 // NssfDeploymentsClientDeleteResponse contains the response from method NssfDeploymentsClient.Delete.
 type NssfDeploymentsClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // NssfDeploymentsClientGetResponse contains the response from method NssfDeploymentsClient.Get.
@@ -183,11 +167,7 @@ type ObservabilityServicesClientCreateOrUpdateResponse struct {
 
 // ObservabilityServicesClientDeleteResponse contains the response from method ObservabilityServicesClient.Delete.
 type ObservabilityServicesClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // ObservabilityServicesClientGetResponse contains the response from method ObservabilityServicesClient.Get.
@@ -231,11 +211,7 @@ type SmfDeploymentsClientCreateOrUpdateResponse struct {
 
 // SmfDeploymentsClientDeleteResponse contains the response from method SmfDeploymentsClient.Delete.
 type SmfDeploymentsClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // SmfDeploymentsClientGetResponse contains the response from method SmfDeploymentsClient.Get.
@@ -273,11 +249,7 @@ type UpfDeploymentsClientCreateOrUpdateResponse struct {
 
 // UpfDeploymentsClientDeleteResponse contains the response from method UpfDeploymentsClient.Delete.
 type UpfDeploymentsClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // UpfDeploymentsClientGetResponse contains the response from method UpfDeploymentsClient.Get.

@@ -6,34 +6,70 @@ package armcodesigning
 
 import "time"
 
+// Trusted signing account resource.
+type Account struct {
+	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+	ID *string
+
+	// REQUIRED; The geo-location where the resource lives
+	Location *string
+
+	// REQUIRED; The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
+	Type *string
+
+	// The resource-specific properties for this resource.
+	Properties *AccountProperties
+
+	// Azure Resource Manager metadata containing createdBy and modifiedBy information.
+	SystemData *SystemData
+
+	// Resource tags.
+	Tags map[string]*string
+
+	// READ-ONLY; Trusted Signing account name.
+	Name *string
+}
+
+// The response of a CodeSigningAccount list operation.
+type AccountListResult struct {
+	// REQUIRED; The CodeSigningAccount items on this page
+	Value []*Account
+
+	// The link to the next page of items
+	NextLink *string
+}
+
+// Parameters for creating or updating a trusted signing account.
+type AccountPatch struct {
+	// Properties of the trusted signing account.
+	Properties *AccountPatchProperties
+
+	// Resource tags.
+	Tags map[string]*string
+}
+
+// Properties of the trusted signing account.
+type AccountPatchProperties struct {
+	// SKU of the trusted signing account.
+	SKU *AccountSKU
+}
+
+// Properties of the trusted signing account.
+type AccountProperties struct {
+	// The URI of the trusted signing account which is used during signing files.
+	AccountURI *string
+
+	// Status of the current operation on trusted signing account.
+	ProvisioningState *ProvisioningState
+
+	// SKU of the trusted signing account.
+	SKU *AccountSKU
+}
+
 // SKU of the trusted signing account.
 type AccountSKU struct {
 	// REQUIRED; Name of the SKU.
 	Name *SKUName
-}
-
-// Standard Azure Resource Manager operation status response
-type ArmOperationStatus struct {
-	// REQUIRED; The operation status
-	Status *ResourceProvisioningState
-
-	// READ-ONLY; The unique identifier for the operationStatus resource
-	ID *string
-
-	// Operation complete time
-	EndTime *time.Time
-
-	// Errors that occurred if the operation ended with Canceled or Failed status
-	Error *ErrorDetail
-
-	// The name of the operationStatus resource
-	Name *string
-
-	// The progress made toward completing the operation
-	PercentComplete *float64
-
-	// Operation start time
-	StartTime *time.Time
 }
 
 // Common properties for all Azure Resource Manager resources.
@@ -181,66 +217,6 @@ type CheckNameAvailabilityResult struct {
 	// The reason that a trusted signing account name could not be used. The Reason element is only returned if nameAvailable
 // is false.
 	Reason *NameUnavailabilityReason
-}
-
-// Trusted signing account resource.
-type CodeSigningAccount struct {
-	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
-	ID *string
-
-	// REQUIRED; The geo-location where the resource lives
-	Location *string
-
-	// REQUIRED; The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
-	Type *string
-
-	// The resource-specific properties for this resource.
-	Properties *CodeSigningAccountProperties
-
-	// Azure Resource Manager metadata containing createdBy and modifiedBy information.
-	SystemData *SystemData
-
-	// Resource tags.
-	Tags map[string]*string
-
-	// READ-ONLY; Trusted Signing account name.
-	Name *string
-}
-
-// The response of a CodeSigningAccount list operation.
-type CodeSigningAccountListResult struct {
-	// REQUIRED; The CodeSigningAccount items on this page
-	Value []*CodeSigningAccount
-
-	// The link to the next page of items
-	NextLink *string
-}
-
-// Parameters for creating or updating a trusted signing account.
-type CodeSigningAccountPatch struct {
-	// Properties of the trusted signing account.
-	Properties *CodeSigningAccountPatchProperties
-
-	// Resource tags.
-	Tags map[string]*string
-}
-
-// Properties of the trusted signing account.
-type CodeSigningAccountPatchProperties struct {
-	// SKU of the trusted signing account.
-	SKU *AccountSKU
-}
-
-// Properties of the trusted signing account.
-type CodeSigningAccountProperties struct {
-	// The URI of the trusted signing account which is used during signing files.
-	AccountURI *string
-
-	// Status of the current operation on trusted signing account.
-	ProvisioningState *ProvisioningState
-
-	// SKU of the trusted signing account.
-	SKU *AccountSKU
 }
 
 // The resource management error additional info.

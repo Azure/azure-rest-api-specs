@@ -46,6 +46,7 @@ func NewNetworkFunctionsClient(credential azcore.TokenCredential, options *arm.C
 //     method.
 func (client *NetworkFunctionsClient) CreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, networkFunctionName string, resource NetworkFunctionResource, options *NetworkFunctionsClientCreateOrUpdateOptions) (NetworkFunctionsClientCreateOrUpdateResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NetworkFunctionsClient.CreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, networkFunctionName, resource, options)
 	if err != nil {
 		return NetworkFunctionsClientCreateOrUpdateResponse{}, err
@@ -116,6 +117,7 @@ func (client *NetworkFunctionsClient) createOrUpdateHandleResponse(resp *http.Re
 //   - options - NetworkFunctionsClientDeleteOptions contains the optional parameters for the NetworkFunctionsClient.Delete method.
 func (client *NetworkFunctionsClient) Delete(ctx context.Context, subscriptionID string, resourceGroupName string, networkFunctionName string, options *NetworkFunctionsClientDeleteOptions) (NetworkFunctionsClientDeleteResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NetworkFunctionsClient.Delete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, networkFunctionName, options)
 	if err != nil {
 		return NetworkFunctionsClientDeleteResponse{}, err
@@ -164,6 +166,7 @@ func (client *NetworkFunctionsClient) deleteCreateRequest(ctx context.Context, s
 //   - options - NetworkFunctionsClientGetOptions contains the optional parameters for the NetworkFunctionsClient.Get method.
 func (client *NetworkFunctionsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, networkFunctionName string, options *NetworkFunctionsClientGetOptions) (NetworkFunctionsClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NetworkFunctionsClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, networkFunctionName, options)
 	if err != nil {
 		return NetworkFunctionsClientGetResponse{}, err
@@ -226,6 +229,7 @@ func (client *NetworkFunctionsClient) NewListByResourceGroupPager(subscriptionID
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *NetworkFunctionsClientListByResourceGroupResponse) (NetworkFunctionsClientListByResourceGroupResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NetworkFunctionsClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -282,6 +286,7 @@ func (client *NetworkFunctionsClient) NewListBySubscriptionPager(subscriptionID 
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *NetworkFunctionsClientListBySubscriptionResponse) (NetworkFunctionsClientListBySubscriptionResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NetworkFunctionsClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -333,6 +338,7 @@ func (client *NetworkFunctionsClient) listBySubscriptionHandleResponse(resp *htt
 //     method.
 func (client *NetworkFunctionsClient) UpdateTags(ctx context.Context, subscriptionID string, resourceGroupName string, networkFunctionName string, properties NetworkFunctionResourceTagsUpdate, options *NetworkFunctionsClientUpdateTagsOptions) (NetworkFunctionsClientUpdateTagsResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NetworkFunctionsClient.UpdateTags")
 	req, err := client.updateTagsCreateRequest(ctx, subscriptionID, resourceGroupName, networkFunctionName, properties, options)
 	if err != nil {
 		return NetworkFunctionsClientUpdateTagsResponse{}, err

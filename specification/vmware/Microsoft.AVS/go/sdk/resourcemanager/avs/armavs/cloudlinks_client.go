@@ -60,6 +60,7 @@ func (client *CloudLinksClient) BeginCreateOrUpdate(ctx context.Context, subscri
 // CreateOrUpdate - Create a CloudLink
 func (client *CloudLinksClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, cloudLinkName string, resource CloudLink, options *CloudLinksClientCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "CloudLinksClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, cloudLinkName, resource, options)
 	if err != nil {
 		return nil, err
@@ -131,6 +132,7 @@ func (client *CloudLinksClient) BeginDelete(ctx context.Context, subscriptionID 
 // Delete - Delete a CloudLink
 func (client *CloudLinksClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, cloudLinkName string, options *CloudLinksClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "CloudLinksClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, cloudLinkName, options)
 	if err != nil {
 		return nil, err
@@ -184,6 +186,7 @@ func (client *CloudLinksClient) deleteCreateRequest(ctx context.Context, subscri
 //   - options - CloudLinksClientGetOptions contains the optional parameters for the CloudLinksClient.Get method.
 func (client *CloudLinksClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, cloudLinkName string, options *CloudLinksClientGetOptions) (CloudLinksClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "CloudLinksClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, cloudLinkName, options)
 	if err != nil {
 		return CloudLinksClientGetResponse{}, err
@@ -251,6 +254,7 @@ func (client *CloudLinksClient) NewListByPrivateCloudPager(subscriptionID string
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *CloudLinksClientListByPrivateCloudResponse) (CloudLinksClientListByPrivateCloudResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "CloudLinksClient.NewListByPrivateCloudPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink

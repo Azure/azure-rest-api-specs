@@ -60,6 +60,7 @@ func (client *WorkloadNetworkDnsServicesClient) BeginCreate(ctx context.Context,
 // Create - Create a WorkloadNetworkDnsService
 func (client *WorkloadNetworkDnsServicesClient) create(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsServiceID string, resource WorkloadNetworkDNSService, options *WorkloadNetworkDnsServicesClientCreateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDnsServicesClient.BeginCreate")
 	req, err := client.createCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, dnsServiceID, resource, options)
 	if err != nil {
 		return nil, err
@@ -132,6 +133,7 @@ func (client *WorkloadNetworkDnsServicesClient) BeginDelete(ctx context.Context,
 // Delete - Delete a WorkloadNetworkDnsService
 func (client *WorkloadNetworkDnsServicesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, dnsServiceID string, privateCloudName string, options *WorkloadNetworkDnsServicesClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDnsServicesClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, dnsServiceID, privateCloudName, options)
 	if err != nil {
 		return nil, err
@@ -186,6 +188,7 @@ func (client *WorkloadNetworkDnsServicesClient) deleteCreateRequest(ctx context.
 //     method.
 func (client *WorkloadNetworkDnsServicesClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsServiceID string, options *WorkloadNetworkDnsServicesClientGetOptions) (WorkloadNetworkDnsServicesClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDnsServicesClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, dnsServiceID, options)
 	if err != nil {
 		return WorkloadNetworkDnsServicesClientGetResponse{}, err
@@ -253,6 +256,7 @@ func (client *WorkloadNetworkDnsServicesClient) NewListByWorkloadNetworkPager(su
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *WorkloadNetworkDnsServicesClientListByWorkloadNetworkResponse) (WorkloadNetworkDnsServicesClientListByWorkloadNetworkResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDnsServicesClient.NewListByWorkloadNetworkPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -327,6 +331,7 @@ func (client *WorkloadNetworkDnsServicesClient) BeginUpdate(ctx context.Context,
 // Update - Update a WorkloadNetworkDnsService
 func (client *WorkloadNetworkDnsServicesClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsServiceID string, properties WorkloadNetworkDNSServiceUpdate, options *WorkloadNetworkDnsServicesClientUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDnsServicesClient.BeginUpdate")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, dnsServiceID, properties, options)
 	if err != nil {
 		return nil, err

@@ -60,6 +60,7 @@ func (client *WorkloadNetworkPublicIpsClient) BeginCreate(ctx context.Context, s
 // Create - Create a WorkloadNetworkPublicIP
 func (client *WorkloadNetworkPublicIpsClient) create(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, publicIPID string, resource WorkloadNetworkPublicIP, options *WorkloadNetworkPublicIpsClientCreateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkPublicIpsClient.BeginCreate")
 	req, err := client.createCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, publicIPID, resource, options)
 	if err != nil {
 		return nil, err
@@ -132,6 +133,7 @@ func (client *WorkloadNetworkPublicIpsClient) BeginDelete(ctx context.Context, s
 // Delete - Delete a WorkloadNetworkPublicIP
 func (client *WorkloadNetworkPublicIpsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, publicIPID string, privateCloudName string, options *WorkloadNetworkPublicIpsClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkPublicIpsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, publicIPID, privateCloudName, options)
 	if err != nil {
 		return nil, err
@@ -186,6 +188,7 @@ func (client *WorkloadNetworkPublicIpsClient) deleteCreateRequest(ctx context.Co
 //     method.
 func (client *WorkloadNetworkPublicIpsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, publicIPID string, options *WorkloadNetworkPublicIpsClientGetOptions) (WorkloadNetworkPublicIpsClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkPublicIpsClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, publicIPID, options)
 	if err != nil {
 		return WorkloadNetworkPublicIpsClientGetResponse{}, err
@@ -253,6 +256,7 @@ func (client *WorkloadNetworkPublicIpsClient) NewListByWorkloadNetworkPager(subs
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *WorkloadNetworkPublicIpsClientListByWorkloadNetworkResponse) (WorkloadNetworkPublicIpsClientListByWorkloadNetworkResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkPublicIpsClient.NewListByWorkloadNetworkPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink

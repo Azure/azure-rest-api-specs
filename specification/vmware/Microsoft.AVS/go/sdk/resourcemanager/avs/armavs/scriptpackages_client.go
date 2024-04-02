@@ -44,6 +44,7 @@ func NewScriptPackagesClient(credential azcore.TokenCredential, options *arm.Cli
 //   - options - ScriptPackagesClientGetOptions contains the optional parameters for the ScriptPackagesClient.Get method.
 func (client *ScriptPackagesClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptPackageName string, options *ScriptPackagesClientGetOptions) (ScriptPackagesClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ScriptPackagesClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, scriptPackageName, options)
 	if err != nil {
 		return ScriptPackagesClientGetResponse{}, err
@@ -111,6 +112,7 @@ func (client *ScriptPackagesClient) NewListByPrivateCloudPager(subscriptionID st
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *ScriptPackagesClientListByPrivateCloudResponse) (ScriptPackagesClientListByPrivateCloudResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ScriptPackagesClient.NewListByPrivateCloudPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink

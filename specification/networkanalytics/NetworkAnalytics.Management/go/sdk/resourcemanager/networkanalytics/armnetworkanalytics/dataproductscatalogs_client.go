@@ -43,6 +43,7 @@ func NewDataProductsCatalogsClient(credential azcore.TokenCredential, options *a
 //     method.
 func (client *DataProductsCatalogsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, options *DataProductsCatalogsClientGetOptions) (DataProductsCatalogsClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataProductsCatalogsClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, options)
 	if err != nil {
 		return DataProductsCatalogsClientGetResponse{}, err
@@ -101,6 +102,7 @@ func (client *DataProductsCatalogsClient) NewListByResourceGroupPager(subscripti
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *DataProductsCatalogsClientListByResourceGroupResponse) (DataProductsCatalogsClientListByResourceGroupResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataProductsCatalogsClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -157,6 +159,7 @@ func (client *DataProductsCatalogsClient) NewListBySubscriptionPager(subscriptio
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *DataProductsCatalogsClientListBySubscriptionResponse) (DataProductsCatalogsClientListBySubscriptionResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataProductsCatalogsClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink

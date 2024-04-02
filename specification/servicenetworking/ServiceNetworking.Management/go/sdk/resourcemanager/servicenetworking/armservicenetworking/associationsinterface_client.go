@@ -60,6 +60,7 @@ func (client *AssociationsInterfaceClient) BeginCreateOrUpdate(ctx context.Conte
 // CreateOrUpdate - Create a Association
 func (client *AssociationsInterfaceClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, associationName string, resource Association, options *AssociationsInterfaceClientCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AssociationsInterfaceClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, trafficControllerName, associationName, resource, options)
 	if err != nil {
 		return nil, err
@@ -132,6 +133,7 @@ func (client *AssociationsInterfaceClient) BeginDelete(ctx context.Context, subs
 // Delete - Delete a Association
 func (client *AssociationsInterfaceClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, associationName string, options *AssociationsInterfaceClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AssociationsInterfaceClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, trafficControllerName, associationName, options)
 	if err != nil {
 		return nil, err
@@ -186,6 +188,7 @@ func (client *AssociationsInterfaceClient) deleteCreateRequest(ctx context.Conte
 //     method.
 func (client *AssociationsInterfaceClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, associationName string, options *AssociationsInterfaceClientGetOptions) (AssociationsInterfaceClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AssociationsInterfaceClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, trafficControllerName, associationName, options)
 	if err != nil {
 		return AssociationsInterfaceClientGetResponse{}, err
@@ -253,6 +256,7 @@ func (client *AssociationsInterfaceClient) NewListByTrafficControllerPager(subsc
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AssociationsInterfaceClientListByTrafficControllerResponse) (AssociationsInterfaceClientListByTrafficControllerResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AssociationsInterfaceClient.NewListByTrafficControllerPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -313,6 +317,7 @@ func (client *AssociationsInterfaceClient) listByTrafficControllerHandleResponse
 //     method.
 func (client *AssociationsInterfaceClient) Update(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, associationName string, properties AssociationUpdate, options *AssociationsInterfaceClientUpdateOptions) (AssociationsInterfaceClientUpdateResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AssociationsInterfaceClient.Update")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, trafficControllerName, associationName, properties, options)
 	if err != nil {
 		return AssociationsInterfaceClientUpdateResponse{}, err

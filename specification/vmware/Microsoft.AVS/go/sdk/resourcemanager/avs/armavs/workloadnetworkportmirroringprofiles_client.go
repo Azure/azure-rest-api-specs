@@ -60,6 +60,7 @@ func (client *WorkloadNetworkPortMirroringProfilesClient) BeginCreate(ctx contex
 // Create - Create a WorkloadNetworkPortMirroring
 func (client *WorkloadNetworkPortMirroringProfilesClient) create(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, portMirroringID string, resource WorkloadNetworkPortMirroring, options *WorkloadNetworkPortMirroringProfilesClientCreateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkPortMirroringProfilesClient.BeginCreate")
 	req, err := client.createCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, portMirroringID, resource, options)
 	if err != nil {
 		return nil, err
@@ -132,6 +133,7 @@ func (client *WorkloadNetworkPortMirroringProfilesClient) BeginDelete(ctx contex
 // Delete - Delete a WorkloadNetworkPortMirroring
 func (client *WorkloadNetworkPortMirroringProfilesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, portMirroringID string, privateCloudName string, options *WorkloadNetworkPortMirroringProfilesClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkPortMirroringProfilesClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, portMirroringID, privateCloudName, options)
 	if err != nil {
 		return nil, err
@@ -186,6 +188,7 @@ func (client *WorkloadNetworkPortMirroringProfilesClient) deleteCreateRequest(ct
 //     method.
 func (client *WorkloadNetworkPortMirroringProfilesClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, portMirroringID string, options *WorkloadNetworkPortMirroringProfilesClientGetOptions) (WorkloadNetworkPortMirroringProfilesClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkPortMirroringProfilesClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, portMirroringID, options)
 	if err != nil {
 		return WorkloadNetworkPortMirroringProfilesClientGetResponse{}, err
@@ -253,6 +256,7 @@ func (client *WorkloadNetworkPortMirroringProfilesClient) NewListByWorkloadNetwo
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *WorkloadNetworkPortMirroringProfilesClientListByWorkloadNetworkResponse) (WorkloadNetworkPortMirroringProfilesClientListByWorkloadNetworkResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkPortMirroringProfilesClient.NewListByWorkloadNetworkPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -327,6 +331,7 @@ func (client *WorkloadNetworkPortMirroringProfilesClient) BeginUpdate(ctx contex
 // Update - Update a WorkloadNetworkPortMirroring
 func (client *WorkloadNetworkPortMirroringProfilesClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, portMirroringID string, properties WorkloadNetworkPortMirroringUpdate, options *WorkloadNetworkPortMirroringProfilesClientUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkPortMirroringProfilesClient.BeginUpdate")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, portMirroringID, properties, options)
 	if err != nil {
 		return nil, err

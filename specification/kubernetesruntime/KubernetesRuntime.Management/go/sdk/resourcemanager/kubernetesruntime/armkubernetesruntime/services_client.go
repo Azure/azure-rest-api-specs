@@ -43,6 +43,7 @@ func NewServicesClient(credential azcore.TokenCredential, options *arm.ClientOpt
 //   - options - ServicesClientCreateOrUpdateOptions contains the optional parameters for the ServicesClient.CreateOrUpdate method.
 func (client *ServicesClient) CreateOrUpdate(ctx context.Context, resourceURI string, serviceName string, resource ServiceResource, options *ServicesClientCreateOrUpdateOptions) (ServicesClientCreateOrUpdateResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ServicesClient.CreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, resourceURI, serviceName, resource, options)
 	if err != nil {
 		return ServicesClientCreateOrUpdateResponse{}, err
@@ -100,6 +101,7 @@ func (client *ServicesClient) createOrUpdateHandleResponse(resp *http.Response) 
 //   - options - ServicesClientDeleteOptions contains the optional parameters for the ServicesClient.Delete method.
 func (client *ServicesClient) Delete(ctx context.Context, resourceURI string, serviceName string, options *ServicesClientDeleteOptions) (ServicesClientDeleteResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ServicesClient.Delete")
 	req, err := client.deleteCreateRequest(ctx, resourceURI, serviceName, options)
 	if err != nil {
 		return ServicesClientDeleteResponse{}, err
@@ -143,6 +145,7 @@ func (client *ServicesClient) deleteCreateRequest(ctx context.Context, resourceU
 //   - options - ServicesClientGetOptions contains the optional parameters for the ServicesClient.Get method.
 func (client *ServicesClient) Get(ctx context.Context, resourceURI string, serviceName string, options *ServicesClientGetOptions) (ServicesClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ServicesClient.Get")
 	req, err := client.getCreateRequest(ctx, resourceURI, serviceName, options)
 	if err != nil {
 		return ServicesClientGetResponse{}, err
@@ -199,6 +202,7 @@ func (client *ServicesClient) NewListPager(resourceURI string, options *Services
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *ServicesClientListResponse) (ServicesClientListResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ServicesClient.NewListPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink

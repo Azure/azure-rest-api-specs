@@ -60,6 +60,7 @@ func (client *FrontendsInterfaceClient) BeginCreateOrUpdate(ctx context.Context,
 // CreateOrUpdate - Create a Frontend
 func (client *FrontendsInterfaceClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, frontendName string, resource Frontend, options *FrontendsInterfaceClientCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "FrontendsInterfaceClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, trafficControllerName, frontendName, resource, options)
 	if err != nil {
 		return nil, err
@@ -132,6 +133,7 @@ func (client *FrontendsInterfaceClient) BeginDelete(ctx context.Context, subscri
 // Delete - Delete a Frontend
 func (client *FrontendsInterfaceClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, frontendName string, options *FrontendsInterfaceClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "FrontendsInterfaceClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, trafficControllerName, frontendName, options)
 	if err != nil {
 		return nil, err
@@ -185,6 +187,7 @@ func (client *FrontendsInterfaceClient) deleteCreateRequest(ctx context.Context,
 //   - options - FrontendsInterfaceClientGetOptions contains the optional parameters for the FrontendsInterfaceClient.Get method.
 func (client *FrontendsInterfaceClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, frontendName string, options *FrontendsInterfaceClientGetOptions) (FrontendsInterfaceClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "FrontendsInterfaceClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, trafficControllerName, frontendName, options)
 	if err != nil {
 		return FrontendsInterfaceClientGetResponse{}, err
@@ -252,6 +255,7 @@ func (client *FrontendsInterfaceClient) NewListByTrafficControllerPager(subscrip
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *FrontendsInterfaceClientListByTrafficControllerResponse) (FrontendsInterfaceClientListByTrafficControllerResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "FrontendsInterfaceClient.NewListByTrafficControllerPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -312,6 +316,7 @@ func (client *FrontendsInterfaceClient) listByTrafficControllerHandleResponse(re
 //     method.
 func (client *FrontendsInterfaceClient) Update(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, frontendName string, properties FrontendUpdate, options *FrontendsInterfaceClientUpdateOptions) (FrontendsInterfaceClientUpdateResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "FrontendsInterfaceClient.Update")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, trafficControllerName, frontendName, properties, options)
 	if err != nil {
 		return FrontendsInterfaceClientUpdateResponse{}, err

@@ -45,6 +45,7 @@ func NewWorkloadNetworkVirtualMachinesClient(credential azcore.TokenCredential, 
 //     method.
 func (client *WorkloadNetworkVirtualMachinesClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, virtualMachineID string, options *WorkloadNetworkVirtualMachinesClientGetOptions) (WorkloadNetworkVirtualMachinesClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkVirtualMachinesClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, virtualMachineID, options)
 	if err != nil {
 		return WorkloadNetworkVirtualMachinesClientGetResponse{}, err
@@ -112,6 +113,7 @@ func (client *WorkloadNetworkVirtualMachinesClient) NewListByWorkloadNetworkPage
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *WorkloadNetworkVirtualMachinesClientListByWorkloadNetworkResponse) (WorkloadNetworkVirtualMachinesClientListByWorkloadNetworkResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkVirtualMachinesClient.NewListByWorkloadNetworkPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink

@@ -46,6 +46,7 @@ func NewSmfDeploymentsClient(credential azcore.TokenCredential, options *arm.Cli
 //     method.
 func (client *SmfDeploymentsClient) CreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, smfDeploymentName string, resource SmfDeploymentResource, options *SmfDeploymentsClientCreateOrUpdateOptions) (SmfDeploymentsClientCreateOrUpdateResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SmfDeploymentsClient.CreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, smfDeploymentName, resource, options)
 	if err != nil {
 		return SmfDeploymentsClientCreateOrUpdateResponse{}, err
@@ -130,6 +131,7 @@ func (client *SmfDeploymentsClient) BeginDelete(ctx context.Context, subscriptio
 // Delete - Delete a SmfDeploymentResource
 func (client *SmfDeploymentsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, smfDeploymentName string, options *SmfDeploymentsClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SmfDeploymentsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, smfDeploymentName, options)
 	if err != nil {
 		return nil, err
@@ -178,6 +180,7 @@ func (client *SmfDeploymentsClient) deleteCreateRequest(ctx context.Context, sub
 //   - options - SmfDeploymentsClientGetOptions contains the optional parameters for the SmfDeploymentsClient.Get method.
 func (client *SmfDeploymentsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, smfDeploymentName string, options *SmfDeploymentsClientGetOptions) (SmfDeploymentsClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SmfDeploymentsClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, smfDeploymentName, options)
 	if err != nil {
 		return SmfDeploymentsClientGetResponse{}, err
@@ -240,6 +243,7 @@ func (client *SmfDeploymentsClient) NewListByResourceGroupPager(subscriptionID s
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *SmfDeploymentsClientListByResourceGroupResponse) (SmfDeploymentsClientListByResourceGroupResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SmfDeploymentsClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -296,6 +300,7 @@ func (client *SmfDeploymentsClient) NewListBySubscriptionPager(subscriptionID st
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *SmfDeploymentsClientListBySubscriptionResponse) (SmfDeploymentsClientListBySubscriptionResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SmfDeploymentsClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -347,6 +352,7 @@ func (client *SmfDeploymentsClient) listBySubscriptionHandleResponse(resp *http.
 //     method.
 func (client *SmfDeploymentsClient) UpdateTags(ctx context.Context, subscriptionID string, resourceGroupName string, smfDeploymentName string, properties SmfDeploymentResourceTagsUpdate, options *SmfDeploymentsClientUpdateTagsOptions) (SmfDeploymentsClientUpdateTagsResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SmfDeploymentsClient.UpdateTags")
 	req, err := client.updateTagsCreateRequest(ctx, subscriptionID, resourceGroupName, smfDeploymentName, properties, options)
 	if err != nil {
 		return SmfDeploymentsClientUpdateTagsResponse{}, err

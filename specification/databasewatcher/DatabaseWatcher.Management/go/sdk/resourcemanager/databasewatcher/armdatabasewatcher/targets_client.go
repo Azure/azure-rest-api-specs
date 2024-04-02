@@ -45,6 +45,7 @@ func NewTargetsClient(credential azcore.TokenCredential, options *arm.ClientOpti
 //   - options - TargetsClientCreateOrUpdateOptions contains the optional parameters for the TargetsClient.CreateOrUpdate method.
 func (client *TargetsClient) CreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, targetName string, resource Target, options *TargetsClientCreateOrUpdateOptions) (TargetsClientCreateOrUpdateResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "TargetsClient.CreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, watcherName, targetName, resource, options)
 	if err != nil {
 		return TargetsClientCreateOrUpdateResponse{}, err
@@ -112,6 +113,7 @@ func (client *TargetsClient) createOrUpdateHandleResponse(resp *http.Response) (
 //   - options - TargetsClientDeleteOptions contains the optional parameters for the TargetsClient.Delete method.
 func (client *TargetsClient) Delete(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, targetName string, options *TargetsClientDeleteOptions) (TargetsClientDeleteResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "TargetsClient.Delete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, watcherName, targetName, options)
 	if err != nil {
 		return TargetsClientDeleteResponse{}, err
@@ -165,6 +167,7 @@ func (client *TargetsClient) deleteCreateRequest(ctx context.Context, subscripti
 //   - options - TargetsClientGetOptions contains the optional parameters for the TargetsClient.Get method.
 func (client *TargetsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, targetName string, options *TargetsClientGetOptions) (TargetsClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "TargetsClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, watcherName, targetName, options)
 	if err != nil {
 		return TargetsClientGetResponse{}, err
@@ -232,6 +235,7 @@ func (client *TargetsClient) NewListByWatcherPager(subscriptionID string, resour
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *TargetsClientListByWatcherResponse) (TargetsClientListByWatcherResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "TargetsClient.NewListByWatcherPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink

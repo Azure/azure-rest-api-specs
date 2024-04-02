@@ -59,6 +59,7 @@ func (client *DataTypesClient) BeginCreate(ctx context.Context, subscriptionID s
 // Create - Create data type resource.
 func (client *DataTypesClient) create(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, dataTypeName string, resource DataType, options *DataTypesClientCreateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataTypesClient.BeginCreate")
 	req, err := client.createCreateRequest(ctx, subscriptionID, resourceGroupName, dataProductName, dataTypeName, resource, options)
 	if err != nil {
 		return nil, err
@@ -130,6 +131,7 @@ func (client *DataTypesClient) BeginDelete(ctx context.Context, subscriptionID s
 // Delete - Delete data type resource.
 func (client *DataTypesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, dataTypeName string, options *DataTypesClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataTypesClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, dataProductName, dataTypeName, options)
 	if err != nil {
 		return nil, err
@@ -198,6 +200,7 @@ func (client *DataTypesClient) BeginDeleteData(ctx context.Context, subscription
 // DeleteData - Delete data for data type.
 func (client *DataTypesClient) deleteData(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, dataTypeName string, body DeleteDataRequest, options *DataTypesClientDeleteDataOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataTypesClient.BeginDeleteData")
 	req, err := client.deleteDataCreateRequest(ctx, subscriptionID, resourceGroupName, dataProductName, dataTypeName, body, options)
 	if err != nil {
 		return nil, err
@@ -257,6 +260,7 @@ func (client *DataTypesClient) deleteDataCreateRequest(ctx context.Context, subs
 //     method.
 func (client *DataTypesClient) GenerateStorageContainerSasToken(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, dataTypeName string, body ContainerSaS, options *DataTypesClientGenerateStorageContainerSasTokenOptions) (DataTypesClientGenerateStorageContainerSasTokenResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataTypesClient.GenerateStorageContainerSasToken")
 	req, err := client.generateStorageContainerSasTokenCreateRequest(ctx, subscriptionID, resourceGroupName, dataProductName, dataTypeName, body, options)
 	if err != nil {
 		return DataTypesClientGenerateStorageContainerSasTokenResponse{}, err
@@ -324,6 +328,7 @@ func (client *DataTypesClient) generateStorageContainerSasTokenHandleResponse(re
 //   - options - DataTypesClientGetOptions contains the optional parameters for the DataTypesClient.Get method.
 func (client *DataTypesClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, dataTypeName string, options *DataTypesClientGetOptions) (DataTypesClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataTypesClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, dataProductName, dataTypeName, options)
 	if err != nil {
 		return DataTypesClientGetResponse{}, err
@@ -391,6 +396,7 @@ func (client *DataTypesClient) NewListByDataProductPager(subscriptionID string, 
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *DataTypesClientListByDataProductResponse) (DataTypesClientListByDataProductResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataTypesClient.NewListByDataProductPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -464,6 +470,7 @@ func (client *DataTypesClient) BeginUpdate(ctx context.Context, subscriptionID s
 // Update - Update data type resource.
 func (client *DataTypesClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, dataTypeName string, properties DataTypeUpdate, options *DataTypesClientUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataTypesClient.BeginUpdate")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, dataProductName, dataTypeName, properties, options)
 	if err != nil {
 		return nil, err

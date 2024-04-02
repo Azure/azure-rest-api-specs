@@ -6,30 +6,6 @@ package armlargeinstance
 
 import "time"
 
-// Standard Azure Resource Manager operation status response
-type ArmOperationStatus struct {
-	// REQUIRED; The operation status
-	Status *ResourceProvisioningState
-
-	// READ-ONLY; The unique identifier for the operationStatus resource
-	ID *string
-
-	// Operation complete time
-	EndTime *time.Time
-
-	// Errors that occurred if the operation ended with Canceled or Failed status
-	Error *ErrorDetail
-
-	// The name of the operationStatus resource
-	Name *string
-
-	// The progress made toward completing the operation
-	PercentComplete *float64
-
-	// Operation start time
-	StartTime *time.Time
-}
-
 // Common properties for all Azure Resource Manager resources.
 type ArmResource struct {
 	// REQUIRED; Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
@@ -285,33 +261,6 @@ type OperationDisplay struct {
 
 	// The localized friendly name of the resource type related to this operation. E.g. "Virtual Machines" or "Job Schedule Collections".
 	Resource *string
-}
-
-// The current status of an async operation.
-type OperationStatusResult struct {
-	// REQUIRED; The operations list.
-	Operations []*OperationStatusResult
-
-	// REQUIRED; Operation status.
-	Status *string
-
-	// The end time of the operation.
-	EndTime *time.Time
-
-	// If present, details of the operation error.
-	Error *ErrorDetail
-
-	// Fully qualified ID for the async operation.
-	ID *string
-
-	// Name of the async operation.
-	Name *string
-
-	// Percent of the operation that is complete.
-	PercentComplete *int32
-
-	// The start time of the operation.
-	StartTime *time.Time
 }
 
 // Specifies the operating system settings for the Azure Large Instance.

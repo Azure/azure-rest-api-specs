@@ -4,68 +4,75 @@
 
 package armplaywrighttesting
 
-// AccountQuotasClientGetOptions contains the optional parameters for the AccountQuotasClient.Get method.
-type AccountQuotasClientGetOptions struct {
-	// placeholder for future optional parameters
-}
-
-// AccountQuotasClientListByAccountOptions contains the optional parameters for the AccountQuotasClient.NewListByAccountPager
+// AzurePlaywrightServiceAccountQuotasClientGetOptions contains the optional parameters for the AzurePlaywrightServiceAccountQuotasClient.Get
 // method.
-type AccountQuotasClientListByAccountOptions struct {
+type AzurePlaywrightServiceAccountQuotasClientGetOptions struct {
 	// placeholder for future optional parameters
 }
 
-// AccountsClientCheckNameAvailabilityOptions contains the optional parameters for the AccountsClient.CheckNameAvailability
+// AzurePlaywrightServiceAccountQuotasClientListByAccountOptions contains the optional parameters for the AzurePlaywrightServiceAccountQuotasClient.NewListByAccountPager
 // method.
-type AccountsClientCheckNameAvailabilityOptions struct {
+type AzurePlaywrightServiceAccountQuotasClientListByAccountOptions struct {
 	// placeholder for future optional parameters
 }
 
-// AccountsClientCreateOrUpdateOptions contains the optional parameters for the AccountsClient.CreateOrUpdate method.
-type AccountsClientCreateOrUpdateOptions struct {
+// AzurePlaywrightServiceAccountsClientCheckNameAvailabilityOptions contains the optional parameters for the AzurePlaywrightServiceAccountsClient.CheckNameAvailability
+// method.
+type AzurePlaywrightServiceAccountsClientCheckNameAvailabilityOptions struct {
+	// placeholder for future optional parameters
+}
+
+// AzurePlaywrightServiceAccountsClientCreateOrUpdateOptions contains the optional parameters for the AzurePlaywrightServiceAccountsClient.CreateOrUpdate
+// method.
+type AzurePlaywrightServiceAccountsClientCreateOrUpdateOptions struct {
 	ResumeToken string
 }
 
-// AccountsClientDeleteOptions contains the optional parameters for the AccountsClient.Delete method.
-type AccountsClientDeleteOptions struct {
+// AzurePlaywrightServiceAccountsClientDeleteOptions contains the optional parameters for the AzurePlaywrightServiceAccountsClient.Delete
+// method.
+type AzurePlaywrightServiceAccountsClientDeleteOptions struct {
 	ResumeToken string
 }
 
-// AccountsClientGetOptions contains the optional parameters for the AccountsClient.Get method.
-type AccountsClientGetOptions struct {
-	// placeholder for future optional parameters
-}
-
-// AccountsClientListByResourceGroupOptions contains the optional parameters for the AccountsClient.NewListByResourceGroupPager
+// AzurePlaywrightServiceAccountsClientGetOptions contains the optional parameters for the AzurePlaywrightServiceAccountsClient.Get
 // method.
-type AccountsClientListByResourceGroupOptions struct {
+type AzurePlaywrightServiceAccountsClientGetOptions struct {
 	// placeholder for future optional parameters
 }
 
-// AccountsClientListBySubscriptionOptions contains the optional parameters for the AccountsClient.NewListBySubscriptionPager
+// AzurePlaywrightServiceAccountsClientListByResourceGroupOptions contains the optional parameters for the AzurePlaywrightServiceAccountsClient.NewListByResourceGroupPager
 // method.
-type AccountsClientListBySubscriptionOptions struct {
+type AzurePlaywrightServiceAccountsClientListByResourceGroupOptions struct {
 	// placeholder for future optional parameters
 }
 
-// AccountsClientUpdateOptions contains the optional parameters for the AccountsClient.Update method.
-type AccountsClientUpdateOptions struct {
-	// placeholder for future optional parameters
-}
-
-// OperationsClientListOptions contains the optional parameters for the OperationsClient.NewListPager method.
-type OperationsClientListOptions struct {
-	// placeholder for future optional parameters
-}
-
-// QuotasClientGetOptions contains the optional parameters for the QuotasClient.Get method.
-type QuotasClientGetOptions struct {
-	// placeholder for future optional parameters
-}
-
-// QuotasClientListBySubscriptionOptions contains the optional parameters for the QuotasClient.NewListBySubscriptionPager
+// AzurePlaywrightServiceAccountsClientListBySubscriptionOptions contains the optional parameters for the AzurePlaywrightServiceAccountsClient.NewListBySubscriptionPager
 // method.
-type QuotasClientListBySubscriptionOptions struct {
+type AzurePlaywrightServiceAccountsClientListBySubscriptionOptions struct {
+	// placeholder for future optional parameters
+}
+
+// AzurePlaywrightServiceAccountsClientUpdateOptions contains the optional parameters for the AzurePlaywrightServiceAccountsClient.Update
+// method.
+type AzurePlaywrightServiceAccountsClientUpdateOptions struct {
+	// placeholder for future optional parameters
+}
+
+// AzurePlaywrightServiceOperationsClientListOptions contains the optional parameters for the AzurePlaywrightServiceOperationsClient.NewListPager
+// method.
+type AzurePlaywrightServiceOperationsClientListOptions struct {
+	// placeholder for future optional parameters
+}
+
+// AzurePlaywrightServiceQuotasClientGetOptions contains the optional parameters for the AzurePlaywrightServiceQuotasClient.Get
+// method.
+type AzurePlaywrightServiceQuotasClientGetOptions struct {
+	// placeholder for future optional parameters
+}
+
+// AzurePlaywrightServiceQuotasClientListBySubscriptionOptions contains the optional parameters for the AzurePlaywrightServiceQuotasClient.NewListBySubscriptionPager
+// method.
+type AzurePlaywrightServiceQuotasClientListBySubscriptionOptions struct {
 	// placeholder for future optional parameters
 }
 

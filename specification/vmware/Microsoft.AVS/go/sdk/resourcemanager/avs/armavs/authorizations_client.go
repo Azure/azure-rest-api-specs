@@ -60,6 +60,7 @@ func (client *AuthorizationsClient) BeginCreateOrUpdate(ctx context.Context, sub
 // CreateOrUpdate - Create a ExpressRouteAuthorization
 func (client *AuthorizationsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, authorizationName string, resource ExpressRouteAuthorization, options *AuthorizationsClientCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AuthorizationsClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, authorizationName, resource, options)
 	if err != nil {
 		return nil, err
@@ -131,6 +132,7 @@ func (client *AuthorizationsClient) BeginDelete(ctx context.Context, subscriptio
 // Delete - Delete a ExpressRouteAuthorization
 func (client *AuthorizationsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, authorizationName string, options *AuthorizationsClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AuthorizationsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, authorizationName, options)
 	if err != nil {
 		return nil, err
@@ -184,6 +186,7 @@ func (client *AuthorizationsClient) deleteCreateRequest(ctx context.Context, sub
 //   - options - AuthorizationsClientGetOptions contains the optional parameters for the AuthorizationsClient.Get method.
 func (client *AuthorizationsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, authorizationName string, options *AuthorizationsClientGetOptions) (AuthorizationsClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AuthorizationsClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, authorizationName, options)
 	if err != nil {
 		return AuthorizationsClientGetResponse{}, err
@@ -251,6 +254,7 @@ func (client *AuthorizationsClient) NewListByPrivateCloudPager(subscriptionID st
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AuthorizationsClientListByPrivateCloudResponse) (AuthorizationsClientListByPrivateCloudResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AuthorizationsClient.NewListByPrivateCloudPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink

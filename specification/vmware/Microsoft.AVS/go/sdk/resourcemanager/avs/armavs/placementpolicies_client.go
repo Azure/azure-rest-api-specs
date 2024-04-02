@@ -62,6 +62,7 @@ func (client *PlacementPoliciesClient) BeginCreateOrUpdate(ctx context.Context, 
 // CreateOrUpdate - Create a PlacementPolicy
 func (client *PlacementPoliciesClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, placementPolicyName string, resource PlacementPolicy, options *PlacementPoliciesClientCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PlacementPoliciesClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, placementPolicyName, resource, options)
 	if err != nil {
 		return nil, err
@@ -139,6 +140,7 @@ func (client *PlacementPoliciesClient) BeginDelete(ctx context.Context, subscrip
 // Delete - Delete a PlacementPolicy
 func (client *PlacementPoliciesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, placementPolicyName string, options *PlacementPoliciesClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PlacementPoliciesClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, placementPolicyName, options)
 	if err != nil {
 		return nil, err
@@ -197,6 +199,7 @@ func (client *PlacementPoliciesClient) deleteCreateRequest(ctx context.Context, 
 //   - options - PlacementPoliciesClientGetOptions contains the optional parameters for the PlacementPoliciesClient.Get method.
 func (client *PlacementPoliciesClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, placementPolicyName string, options *PlacementPoliciesClientGetOptions) (PlacementPoliciesClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PlacementPoliciesClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, placementPolicyName, options)
 	if err != nil {
 		return PlacementPoliciesClientGetResponse{}, err
@@ -269,6 +272,7 @@ func (client *PlacementPoliciesClient) NewListByClusterPager(subscriptionID stri
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *PlacementPoliciesClientListByClusterResponse) (PlacementPoliciesClientListByClusterResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PlacementPoliciesClient.NewListByClusterPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -334,6 +338,7 @@ func (client *PlacementPoliciesClient) listByClusterHandleResponse(resp *http.Re
 //     method.
 func (client *PlacementPoliciesClient) Update(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, placementPolicyName string, placementPolicyUpdate PlacementPolicyUpdate, options *PlacementPoliciesClientUpdateOptions) (PlacementPoliciesClientUpdateResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PlacementPoliciesClient.Update")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, placementPolicyName, placementPolicyUpdate, options)
 	if err != nil {
 		return PlacementPoliciesClientUpdateResponse{}, err

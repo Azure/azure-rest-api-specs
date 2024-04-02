@@ -46,6 +46,7 @@ func (client *SkuClient) NewListByLocationPager(subscriptionID string, locationN
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *SkuClientListByLocationResponse) (SkuClientListByLocationResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SkuClient.NewListByLocationPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink

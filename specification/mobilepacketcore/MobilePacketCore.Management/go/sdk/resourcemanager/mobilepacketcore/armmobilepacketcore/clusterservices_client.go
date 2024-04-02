@@ -46,6 +46,7 @@ func NewClusterServicesClient(credential azcore.TokenCredential, options *arm.Cl
 //     method.
 func (client *ClusterServicesClient) CreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, clusterServiceName string, resource ClusterServiceResource, options *ClusterServicesClientCreateOrUpdateOptions) (ClusterServicesClientCreateOrUpdateResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ClusterServicesClient.CreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, clusterServiceName, resource, options)
 	if err != nil {
 		return ClusterServicesClientCreateOrUpdateResponse{}, err
@@ -130,6 +131,7 @@ func (client *ClusterServicesClient) BeginDelete(ctx context.Context, subscripti
 // Delete - Delete a ClusterServiceResource
 func (client *ClusterServicesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, clusterServiceName string, options *ClusterServicesClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ClusterServicesClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, clusterServiceName, options)
 	if err != nil {
 		return nil, err
@@ -178,6 +180,7 @@ func (client *ClusterServicesClient) deleteCreateRequest(ctx context.Context, su
 //   - options - ClusterServicesClientGetOptions contains the optional parameters for the ClusterServicesClient.Get method.
 func (client *ClusterServicesClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, clusterServiceName string, options *ClusterServicesClientGetOptions) (ClusterServicesClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ClusterServicesClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, clusterServiceName, options)
 	if err != nil {
 		return ClusterServicesClientGetResponse{}, err
@@ -240,6 +243,7 @@ func (client *ClusterServicesClient) NewListByResourceGroupPager(subscriptionID 
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *ClusterServicesClientListByResourceGroupResponse) (ClusterServicesClientListByResourceGroupResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ClusterServicesClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -296,6 +300,7 @@ func (client *ClusterServicesClient) NewListBySubscriptionPager(subscriptionID s
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *ClusterServicesClientListBySubscriptionResponse) (ClusterServicesClientListBySubscriptionResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ClusterServicesClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -347,6 +352,7 @@ func (client *ClusterServicesClient) listBySubscriptionHandleResponse(resp *http
 //     method.
 func (client *ClusterServicesClient) UpdateTags(ctx context.Context, subscriptionID string, resourceGroupName string, clusterServiceName string, properties ClusterServiceResourceTagsUpdate, options *ClusterServicesClientUpdateTagsOptions) (ClusterServicesClientUpdateTagsResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ClusterServicesClient.UpdateTags")
 	req, err := client.updateTagsCreateRequest(ctx, subscriptionID, resourceGroupName, clusterServiceName, properties, options)
 	if err != nil {
 		return ClusterServicesClientUpdateTagsResponse{}, err

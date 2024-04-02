@@ -59,6 +59,7 @@ func (client *AddonsClient) BeginCreateOrUpdate(ctx context.Context, subscriptio
 // CreateOrUpdate - Create a Addon
 func (client *AddonsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, addonName string, resource Addon, options *AddonsClientCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AddonsClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, addonName, resource, options)
 	if err != nil {
 		return nil, err
@@ -130,6 +131,7 @@ func (client *AddonsClient) BeginDelete(ctx context.Context, subscriptionID stri
 // Delete - Delete a Addon
 func (client *AddonsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, addonName string, options *AddonsClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AddonsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, addonName, options)
 	if err != nil {
 		return nil, err
@@ -183,6 +185,7 @@ func (client *AddonsClient) deleteCreateRequest(ctx context.Context, subscriptio
 //   - options - AddonsClientGetOptions contains the optional parameters for the AddonsClient.Get method.
 func (client *AddonsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, addonName string, options *AddonsClientGetOptions) (AddonsClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AddonsClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, addonName, options)
 	if err != nil {
 		return AddonsClientGetResponse{}, err
@@ -250,6 +253,7 @@ func (client *AddonsClient) NewListByPrivateCloudPager(subscriptionID string, re
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AddonsClientListByPrivateCloudResponse) (AddonsClientListByPrivateCloudResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AddonsClient.NewListByPrivateCloudPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink

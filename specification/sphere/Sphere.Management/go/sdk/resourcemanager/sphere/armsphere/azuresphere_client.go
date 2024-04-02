@@ -29,58 +29,58 @@ func NewAzureSphereClient(credential azcore.TokenCredential, options *arm.Client
 	return client, nil
 }
 
-// NewCatalogsClient creates a new instance of [CatalogsClient].
-func (client *AzureSphereClient) NewCatalogsClient() *CatalogsClient {
-	return &CatalogsClient{
+// NewAzureSphereCatalogsClient creates a new instance of [AzureSphereCatalogsClient].
+func (client *AzureSphereClient) NewAzureSphereCatalogsClient() *AzureSphereCatalogsClient {
+	return &AzureSphereCatalogsClient{
 		internal: client.internal,
 	}
 }
 
-// NewCertificatesClient creates a new instance of [CertificatesClient].
-func (client *AzureSphereClient) NewCertificatesClient() *CertificatesClient {
-	return &CertificatesClient{
+// NewAzureSphereCertificatesClient creates a new instance of [AzureSphereCertificatesClient].
+func (client *AzureSphereClient) NewAzureSphereCertificatesClient() *AzureSphereCertificatesClient {
+	return &AzureSphereCertificatesClient{
 		internal: client.internal,
 	}
 }
 
-// NewDeploymentsClient creates a new instance of [DeploymentsClient].
-func (client *AzureSphereClient) NewDeploymentsClient() *DeploymentsClient {
-	return &DeploymentsClient{
+// NewAzureSphereDeploymentsClient creates a new instance of [AzureSphereDeploymentsClient].
+func (client *AzureSphereClient) NewAzureSphereDeploymentsClient() *AzureSphereDeploymentsClient {
+	return &AzureSphereDeploymentsClient{
 		internal: client.internal,
 	}
 }
 
-// NewDeviceGroupsClient creates a new instance of [DeviceGroupsClient].
-func (client *AzureSphereClient) NewDeviceGroupsClient() *DeviceGroupsClient {
-	return &DeviceGroupsClient{
+// NewAzureSphereDeviceGroupsClient creates a new instance of [AzureSphereDeviceGroupsClient].
+func (client *AzureSphereClient) NewAzureSphereDeviceGroupsClient() *AzureSphereDeviceGroupsClient {
+	return &AzureSphereDeviceGroupsClient{
 		internal: client.internal,
 	}
 }
 
-// NewDevicesClient creates a new instance of [DevicesClient].
-func (client *AzureSphereClient) NewDevicesClient() *DevicesClient {
-	return &DevicesClient{
+// NewAzureSphereDevicesClient creates a new instance of [AzureSphereDevicesClient].
+func (client *AzureSphereClient) NewAzureSphereDevicesClient() *AzureSphereDevicesClient {
+	return &AzureSphereDevicesClient{
 		internal: client.internal,
 	}
 }
 
-// NewImagesClient creates a new instance of [ImagesClient].
-func (client *AzureSphereClient) NewImagesClient() *ImagesClient {
-	return &ImagesClient{
+// NewAzureSphereImagesClient creates a new instance of [AzureSphereImagesClient].
+func (client *AzureSphereClient) NewAzureSphereImagesClient() *AzureSphereImagesClient {
+	return &AzureSphereImagesClient{
 		internal: client.internal,
 	}
 }
 
-// NewOperationsClient creates a new instance of [OperationsClient].
-func (client *AzureSphereClient) NewOperationsClient() *OperationsClient {
-	return &OperationsClient{
+// NewAzureSphereOperationsClient creates a new instance of [AzureSphereOperationsClient].
+func (client *AzureSphereClient) NewAzureSphereOperationsClient() *AzureSphereOperationsClient {
+	return &AzureSphereOperationsClient{
 		internal: client.internal,
 	}
 }
 
-// NewProductsClient creates a new instance of [ProductsClient].
-func (client *AzureSphereClient) NewProductsClient() *ProductsClient {
-	return &ProductsClient{
+// NewAzureSphereProductsClient creates a new instance of [AzureSphereProductsClient].
+func (client *AzureSphereClient) NewAzureSphereProductsClient() *AzureSphereProductsClient {
+	return &AzureSphereProductsClient{
 		internal: client.internal,
 	}
 }

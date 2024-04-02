@@ -4,22 +4,56 @@
 
 package armcodesigning
 
+// AccountsClientCheckNameAvailabilityResponse contains the response from method AccountsClient.CheckNameAvailability.
+type AccountsClientCheckNameAvailabilityResponse struct {
+	// The CheckNameAvailability operation response.
+	CheckNameAvailabilityResult
+}
+
+// AccountsClientCreateResponse contains the response from method AccountsClient.Create.
+type AccountsClientCreateResponse struct {
+	// Trusted signing account resource.
+	Account
+}
+
+// AccountsClientDeleteResponse contains the response from method AccountsClient.Delete.
+type AccountsClientDeleteResponse struct {
+	// placeholder for future response values
+}
+
+// AccountsClientGetResponse contains the response from method AccountsClient.Get.
+type AccountsClientGetResponse struct {
+	// Trusted signing account resource.
+	Account
+}
+
+// AccountsClientListByResourceGroupResponse contains the response from method AccountsClient.NewListByResourceGroupPager.
+type AccountsClientListByResourceGroupResponse struct {
+	// The response of a CodeSigningAccount list operation.
+	AccountListResult
+}
+
+// AccountsClientListBySubscriptionResponse contains the response from method AccountsClient.NewListBySubscriptionPager.
+type AccountsClientListBySubscriptionResponse struct {
+	// The response of a CodeSigningAccount list operation.
+	AccountListResult
+}
+
+// AccountsClientUpdateResponse contains the response from method AccountsClient.Update.
+type AccountsClientUpdateResponse struct {
+	// Trusted signing account resource.
+	Account
+}
+
 // CertificateProfilesClientCreateResponse contains the response from method CertificateProfilesClient.Create.
 type CertificateProfilesClientCreateResponse struct {
 	// Certificate profile resource.
 	CertificateProfile
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // CertificateProfilesClientDeleteResponse contains the response from method CertificateProfilesClient.Delete.
 type CertificateProfilesClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+	// placeholder for future response values
 }
 
 // CertificateProfilesClientGetResponse contains the response from method CertificateProfilesClient.Get.
@@ -37,57 +71,6 @@ type CertificateProfilesClientListByCodeSigningAccountResponse struct {
 // CertificateProfilesClientRevokeCertificateResponse contains the response from method CertificateProfilesClient.RevokeCertificate.
 type CertificateProfilesClientRevokeCertificateResponse struct {
 	// placeholder for future response values
-}
-
-// CodeSigningAccountsClientCheckNameAvailabilityResponse contains the response from method CodeSigningAccountsClient.CheckNameAvailability.
-type CodeSigningAccountsClientCheckNameAvailabilityResponse struct {
-	// The CheckNameAvailability operation response.
-	CheckNameAvailabilityResult
-}
-
-// CodeSigningAccountsClientCreateResponse contains the response from method CodeSigningAccountsClient.Create.
-type CodeSigningAccountsClientCreateResponse struct {
-	// Trusted signing account resource.
-	CodeSigningAccount
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
-}
-
-// CodeSigningAccountsClientDeleteResponse contains the response from method CodeSigningAccountsClient.Delete.
-type CodeSigningAccountsClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
-}
-
-// CodeSigningAccountsClientGetResponse contains the response from method CodeSigningAccountsClient.Get.
-type CodeSigningAccountsClientGetResponse struct {
-	// Trusted signing account resource.
-	CodeSigningAccount
-}
-
-// CodeSigningAccountsClientListByResourceGroupResponse contains the response from method CodeSigningAccountsClient.NewListByResourceGroupPager.
-type CodeSigningAccountsClientListByResourceGroupResponse struct {
-	// The response of a CodeSigningAccount list operation.
-	CodeSigningAccountListResult
-}
-
-// CodeSigningAccountsClientListBySubscriptionResponse contains the response from method CodeSigningAccountsClient.NewListBySubscriptionPager.
-type CodeSigningAccountsClientListBySubscriptionResponse struct {
-	// The response of a CodeSigningAccount list operation.
-	CodeSigningAccountListResult
-}
-
-// CodeSigningAccountsClientUpdateResponse contains the response from method CodeSigningAccountsClient.Update.
-type CodeSigningAccountsClientUpdateResponse struct {
-	// Trusted signing account resource.
-	CodeSigningAccount
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // OperationsClientListResponse contains the response from method OperationsClient.NewListPager.

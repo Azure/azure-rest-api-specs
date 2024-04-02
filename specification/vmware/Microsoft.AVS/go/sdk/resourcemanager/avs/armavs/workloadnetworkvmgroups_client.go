@@ -60,6 +60,7 @@ func (client *WorkloadNetworkVmGroupsClient) BeginCreate(ctx context.Context, su
 // Create - Create a WorkloadNetworkVMGroup
 func (client *WorkloadNetworkVmGroupsClient) create(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, vmGroupID string, resource WorkloadNetworkVMGroup, options *WorkloadNetworkVmGroupsClientCreateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkVmGroupsClient.BeginCreate")
 	req, err := client.createCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, vmGroupID, resource, options)
 	if err != nil {
 		return nil, err
@@ -132,6 +133,7 @@ func (client *WorkloadNetworkVmGroupsClient) BeginDelete(ctx context.Context, su
 // Delete - Delete a WorkloadNetworkVMGroup
 func (client *WorkloadNetworkVmGroupsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, vmGroupID string, privateCloudName string, options *WorkloadNetworkVmGroupsClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkVmGroupsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, vmGroupID, privateCloudName, options)
 	if err != nil {
 		return nil, err
@@ -186,6 +188,7 @@ func (client *WorkloadNetworkVmGroupsClient) deleteCreateRequest(ctx context.Con
 //     method.
 func (client *WorkloadNetworkVmGroupsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, vmGroupID string, options *WorkloadNetworkVmGroupsClientGetOptions) (WorkloadNetworkVmGroupsClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkVmGroupsClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, vmGroupID, options)
 	if err != nil {
 		return WorkloadNetworkVmGroupsClientGetResponse{}, err
@@ -253,6 +256,7 @@ func (client *WorkloadNetworkVmGroupsClient) NewListByWorkloadNetworkPager(subsc
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *WorkloadNetworkVmGroupsClientListByWorkloadNetworkResponse) (WorkloadNetworkVmGroupsClientListByWorkloadNetworkResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkVmGroupsClient.NewListByWorkloadNetworkPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -327,6 +331,7 @@ func (client *WorkloadNetworkVmGroupsClient) BeginUpdate(ctx context.Context, su
 // Update - Update a WorkloadNetworkVMGroup
 func (client *WorkloadNetworkVmGroupsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, vmGroupID string, properties WorkloadNetworkVMGroupUpdate, options *WorkloadNetworkVmGroupsClientUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkVmGroupsClient.BeginUpdate")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, vmGroupID, properties, options)
 	if err != nil {
 		return nil, err

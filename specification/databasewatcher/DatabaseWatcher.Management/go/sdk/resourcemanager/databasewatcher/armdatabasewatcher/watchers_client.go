@@ -58,6 +58,7 @@ func (client *WatchersClient) BeginCreateOrUpdate(ctx context.Context, subscript
 // CreateOrUpdate - Create a Watcher
 func (client *WatchersClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, resource Watcher, options *WatchersClientCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WatchersClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, watcherName, resource, options)
 	if err != nil {
 		return nil, err
@@ -124,6 +125,7 @@ func (client *WatchersClient) BeginDelete(ctx context.Context, subscriptionID st
 // Delete - Delete a Watcher
 func (client *WatchersClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, options *WatchersClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WatchersClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, watcherName, options)
 	if err != nil {
 		return nil, err
@@ -172,6 +174,7 @@ func (client *WatchersClient) deleteCreateRequest(ctx context.Context, subscript
 //   - options - WatchersClientGetOptions contains the optional parameters for the WatchersClient.Get method.
 func (client *WatchersClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, options *WatchersClientGetOptions) (WatchersClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WatchersClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, watcherName, options)
 	if err != nil {
 		return WatchersClientGetResponse{}, err
@@ -234,6 +237,7 @@ func (client *WatchersClient) NewListByResourceGroupPager(subscriptionID string,
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *WatchersClientListByResourceGroupResponse) (WatchersClientListByResourceGroupResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WatchersClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -290,6 +294,7 @@ func (client *WatchersClient) NewListBySubscriptionPager(subscriptionID string, 
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *WatchersClientListBySubscriptionResponse) (WatchersClientListBySubscriptionResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WatchersClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -353,6 +358,7 @@ func (client *WatchersClient) BeginStart(ctx context.Context, subscriptionID str
 // Start - The action to start monitoring all targets configured for a database watcher.
 func (client *WatchersClient) start(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, options *WatchersClientStartOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WatchersClient.BeginStart")
 	req, err := client.startCreateRequest(ctx, subscriptionID, resourceGroupName, watcherName, options)
 	if err != nil {
 		return nil, err
@@ -415,6 +421,7 @@ func (client *WatchersClient) BeginStop(ctx context.Context, subscriptionID stri
 // Stop - The action to stop monitoring all targets configured for a database watcher.
 func (client *WatchersClient) stop(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, options *WatchersClientStopOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WatchersClient.BeginStop")
 	req, err := client.stopCreateRequest(ctx, subscriptionID, resourceGroupName, watcherName, options)
 	if err != nil {
 		return nil, err
@@ -478,6 +485,7 @@ func (client *WatchersClient) BeginUpdate(ctx context.Context, subscriptionID st
 // Update - Update a Watcher
 func (client *WatchersClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, properties WatcherUpdate, options *WatchersClientUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WatchersClient.BeginUpdate")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, watcherName, properties, options)
 	if err != nil {
 		return nil, err

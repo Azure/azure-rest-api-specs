@@ -29,23 +29,23 @@ func NewAzureLargeInstanceClient(credential azcore.TokenCredential, options *arm
 	return client, nil
 }
 
-// NewAzureLargeInstancesClient creates a new instance of [AzureLargeInstancesClient].
-func (client *AzureLargeInstanceClient) NewAzureLargeInstancesClient() *AzureLargeInstancesClient {
-	return &AzureLargeInstancesClient{
+// NewAzureLargeInstanceAzureLargeInstancesClient creates a new instance of [AzureLargeInstanceAzureLargeInstancesClient].
+func (client *AzureLargeInstanceClient) NewAzureLargeInstanceAzureLargeInstancesClient() *AzureLargeInstanceAzureLargeInstancesClient {
+	return &AzureLargeInstanceAzureLargeInstancesClient{
 		internal: client.internal,
 	}
 }
 
-// NewAzureLargeStorageInstancesClient creates a new instance of [AzureLargeStorageInstancesClient].
-func (client *AzureLargeInstanceClient) NewAzureLargeStorageInstancesClient() *AzureLargeStorageInstancesClient {
-	return &AzureLargeStorageInstancesClient{
+// NewAzureLargeInstanceAzureLargeStorageInstancesClient creates a new instance of [AzureLargeInstanceAzureLargeStorageInstancesClient].
+func (client *AzureLargeInstanceClient) NewAzureLargeInstanceAzureLargeStorageInstancesClient() *AzureLargeInstanceAzureLargeStorageInstancesClient {
+	return &AzureLargeInstanceAzureLargeStorageInstancesClient{
 		internal: client.internal,
 	}
 }
 
-// NewOperationsClient creates a new instance of [OperationsClient].
-func (client *AzureLargeInstanceClient) NewOperationsClient() *OperationsClient {
-	return &OperationsClient{
+// NewAzureLargeInstanceOperationsClient creates a new instance of [AzureLargeInstanceOperationsClient].
+func (client *AzureLargeInstanceClient) NewAzureLargeInstanceOperationsClient() *AzureLargeInstanceOperationsClient {
+	return &AzureLargeInstanceOperationsClient{
 		internal: client.internal,
 	}
 }

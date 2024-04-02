@@ -4,53 +4,43 @@
 
 package armcommunitytraining
 
-// CommunityTrainingsClientCreateResponse contains the response from method CommunityTrainingsClient.Create.
-type CommunityTrainingsClientCreateResponse struct {
-	// A CommunityProviderHub resource
-	CommunityTraining
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
-}
-
-// CommunityTrainingsClientDeleteResponse contains the response from method CommunityTrainingsClient.Delete.
-type CommunityTrainingsClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
-}
-
-// CommunityTrainingsClientGetResponse contains the response from method CommunityTrainingsClient.Get.
-type CommunityTrainingsClientGetResponse struct {
+// CommunityCommunityTrainingsClientCreateResponse contains the response from method CommunityCommunityTrainingsClient.Create.
+type CommunityCommunityTrainingsClientCreateResponse struct {
 	// A CommunityProviderHub resource
 	CommunityTraining
 }
 
-// CommunityTrainingsClientListByResourceGroupResponse contains the response from method CommunityTrainingsClient.NewListByResourceGroupPager.
-type CommunityTrainingsClientListByResourceGroupResponse struct {
+// CommunityCommunityTrainingsClientDeleteResponse contains the response from method CommunityCommunityTrainingsClient.Delete.
+type CommunityCommunityTrainingsClientDeleteResponse struct {
+	// placeholder for future response values
+}
+
+// CommunityCommunityTrainingsClientGetResponse contains the response from method CommunityCommunityTrainingsClient.Get.
+type CommunityCommunityTrainingsClientGetResponse struct {
+	// A CommunityProviderHub resource
+	CommunityTraining
+}
+
+// CommunityCommunityTrainingsClientListByResourceGroupResponse contains the response from method CommunityCommunityTrainingsClient.NewListByResourceGroupPager.
+type CommunityCommunityTrainingsClientListByResourceGroupResponse struct {
 	// The response of a CommunityTraining list operation.
-	CommunityTrainingListResult
+	ListResult
 }
 
-// CommunityTrainingsClientListBySubscriptionResponse contains the response from method CommunityTrainingsClient.NewListBySubscriptionPager.
-type CommunityTrainingsClientListBySubscriptionResponse struct {
+// CommunityCommunityTrainingsClientListBySubscriptionResponse contains the response from method CommunityCommunityTrainingsClient.NewListBySubscriptionPager.
+type CommunityCommunityTrainingsClientListBySubscriptionResponse struct {
 	// The response of a CommunityTraining list operation.
-	CommunityTrainingListResult
+	ListResult
 }
 
-// CommunityTrainingsClientUpdateResponse contains the response from method CommunityTrainingsClient.Update.
-type CommunityTrainingsClientUpdateResponse struct {
+// CommunityCommunityTrainingsClientUpdateResponse contains the response from method CommunityCommunityTrainingsClient.Update.
+type CommunityCommunityTrainingsClientUpdateResponse struct {
 	// A CommunityProviderHub resource
 	CommunityTraining
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
-// OperationsClientListResponse contains the response from method OperationsClient.NewListPager.
-type OperationsClientListResponse struct {
+// CommunityOperationsClientListResponse contains the response from method CommunityOperationsClient.NewListPager.
+type CommunityOperationsClientListResponse struct {
 	// A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
 	PagedOperation
 }

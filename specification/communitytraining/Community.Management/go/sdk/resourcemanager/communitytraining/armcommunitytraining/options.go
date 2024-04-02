@@ -4,40 +4,44 @@
 
 package armcommunitytraining
 
-// CommunityTrainingsClientCreateOptions contains the optional parameters for the CommunityTrainingsClient.Create method.
-type CommunityTrainingsClientCreateOptions struct {
-	ResumeToken string
-}
-
-// CommunityTrainingsClientDeleteOptions contains the optional parameters for the CommunityTrainingsClient.Delete method.
-type CommunityTrainingsClientDeleteOptions struct {
-	ResumeToken string
-}
-
-// CommunityTrainingsClientGetOptions contains the optional parameters for the CommunityTrainingsClient.Get method.
-type CommunityTrainingsClientGetOptions struct {
-	// placeholder for future optional parameters
-}
-
-// CommunityTrainingsClientListByResourceGroupOptions contains the optional parameters for the CommunityTrainingsClient.NewListByResourceGroupPager
+// CommunityCommunityTrainingsClientCreateOptions contains the optional parameters for the CommunityCommunityTrainingsClient.Create
 // method.
-type CommunityTrainingsClientListByResourceGroupOptions struct {
-	// placeholder for future optional parameters
-}
-
-// CommunityTrainingsClientListBySubscriptionOptions contains the optional parameters for the CommunityTrainingsClient.NewListBySubscriptionPager
-// method.
-type CommunityTrainingsClientListBySubscriptionOptions struct {
-	// placeholder for future optional parameters
-}
-
-// CommunityTrainingsClientUpdateOptions contains the optional parameters for the CommunityTrainingsClient.Update method.
-type CommunityTrainingsClientUpdateOptions struct {
+type CommunityCommunityTrainingsClientCreateOptions struct {
 	ResumeToken string
 }
 
-// OperationsClientListOptions contains the optional parameters for the OperationsClient.NewListPager method.
-type OperationsClientListOptions struct {
+// CommunityCommunityTrainingsClientDeleteOptions contains the optional parameters for the CommunityCommunityTrainingsClient.Delete
+// method.
+type CommunityCommunityTrainingsClientDeleteOptions struct {
+	ResumeToken string
+}
+
+// CommunityCommunityTrainingsClientGetOptions contains the optional parameters for the CommunityCommunityTrainingsClient.Get
+// method.
+type CommunityCommunityTrainingsClientGetOptions struct {
+	// placeholder for future optional parameters
+}
+
+// CommunityCommunityTrainingsClientListByResourceGroupOptions contains the optional parameters for the CommunityCommunityTrainingsClient.NewListByResourceGroupPager
+// method.
+type CommunityCommunityTrainingsClientListByResourceGroupOptions struct {
+	// placeholder for future optional parameters
+}
+
+// CommunityCommunityTrainingsClientListBySubscriptionOptions contains the optional parameters for the CommunityCommunityTrainingsClient.NewListBySubscriptionPager
+// method.
+type CommunityCommunityTrainingsClientListBySubscriptionOptions struct {
+	// placeholder for future optional parameters
+}
+
+// CommunityCommunityTrainingsClientUpdateOptions contains the optional parameters for the CommunityCommunityTrainingsClient.Update
+// method.
+type CommunityCommunityTrainingsClientUpdateOptions struct {
+	ResumeToken string
+}
+
+// CommunityOperationsClientListOptions contains the optional parameters for the CommunityOperationsClient.NewListPager method.
+type CommunityOperationsClientListOptions struct {
 	// placeholder for future optional parameters
 }
 

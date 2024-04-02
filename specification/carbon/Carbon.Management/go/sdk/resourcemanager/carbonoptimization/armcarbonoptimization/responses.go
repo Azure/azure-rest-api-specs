@@ -4,20 +4,20 @@
 
 package armcarbonoptimization
 
-// CarbonServiceClientListCarbonEmissionReportsResponse contains the response from method CarbonServiceClient.NewListCarbonEmissionReportsPager.
-type CarbonServiceClientListCarbonEmissionReportsResponse struct {
+// CarbonCarbonServiceClientListCarbonEmissionReportsResponse contains the response from method CarbonCarbonServiceClient.NewListCarbonEmissionReportsPager.
+type CarbonCarbonServiceClientListCarbonEmissionReportsResponse struct {
 	// List of carbon emission results
 	CarbonEmissionDataListResult
 }
 
-// CarbonServiceClientQueryCarbonEmissionDataAvailableDateRangeResponse contains the response from method CarbonServiceClient.QueryCarbonEmissionDataAvailableDateRange.
-type CarbonServiceClientQueryCarbonEmissionDataAvailableDateRangeResponse struct {
+// CarbonCarbonServiceClientQueryCarbonEmissionDataAvailableDateRangeResponse contains the response from method CarbonCarbonServiceClient.QueryCarbonEmissionDataAvailableDateRange.
+type CarbonCarbonServiceClientQueryCarbonEmissionDataAvailableDateRangeResponse struct {
 	// Response for available date range of carbon emission data
 	CarbonEmissionDataAvailableDateRange
 }
 
-// OperationsClientListResponse contains the response from method OperationsClient.NewListPager.
-type OperationsClientListResponse struct {
+// CarbonOperationsClientListResponse contains the response from method CarbonOperationsClient.NewListPager.
+type CarbonOperationsClientListResponse struct {
 	// A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
 	PagedOperation
 }

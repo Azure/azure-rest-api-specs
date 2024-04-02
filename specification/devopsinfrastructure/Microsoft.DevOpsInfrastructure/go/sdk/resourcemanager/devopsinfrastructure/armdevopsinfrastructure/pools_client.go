@@ -58,6 +58,7 @@ func (client *PoolsClient) BeginCreateOrUpdate(ctx context.Context, subscription
 // CreateOrUpdate - Create a Pool
 func (client *PoolsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, resource Pool, options *PoolsClientCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PoolsClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, poolName, resource, options)
 	if err != nil {
 		return nil, err
@@ -124,6 +125,7 @@ func (client *PoolsClient) BeginDelete(ctx context.Context, subscriptionID strin
 // Delete - Delete a Pool
 func (client *PoolsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, options *PoolsClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PoolsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, poolName, options)
 	if err != nil {
 		return nil, err
@@ -172,6 +174,7 @@ func (client *PoolsClient) deleteCreateRequest(ctx context.Context, subscription
 //   - options - PoolsClientGetOptions contains the optional parameters for the PoolsClient.Get method.
 func (client *PoolsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, options *PoolsClientGetOptions) (PoolsClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PoolsClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, poolName, options)
 	if err != nil {
 		return PoolsClientGetResponse{}, err
@@ -234,6 +237,7 @@ func (client *PoolsClient) NewListByResourceGroupPager(subscriptionID string, re
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *PoolsClientListByResourceGroupResponse) (PoolsClientListByResourceGroupResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PoolsClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -290,6 +294,7 @@ func (client *PoolsClient) NewListBySubscriptionPager(subscriptionID string, opt
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *PoolsClientListBySubscriptionResponse) (PoolsClientListBySubscriptionResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PoolsClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -354,6 +359,7 @@ func (client *PoolsClient) BeginUpdate(ctx context.Context, subscriptionID strin
 // Update - Update a Pool
 func (client *PoolsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, properties PoolUpdate, options *PoolsClientUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PoolsClient.BeginUpdate")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, poolName, properties, options)
 	if err != nil {
 		return nil, err

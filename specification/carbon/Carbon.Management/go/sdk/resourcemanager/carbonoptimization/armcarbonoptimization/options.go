@@ -4,20 +4,20 @@
 
 package armcarbonoptimization
 
-// CarbonServiceClientListCarbonEmissionReportsOptions contains the optional parameters for the CarbonServiceClient.NewListCarbonEmissionReportsPager
+// CarbonCarbonServiceClientListCarbonEmissionReportsOptions contains the optional parameters for the CarbonCarbonServiceClient.NewListCarbonEmissionReportsPager
 // method.
-type CarbonServiceClientListCarbonEmissionReportsOptions struct {
+type CarbonCarbonServiceClientListCarbonEmissionReportsOptions struct {
 	// placeholder for future optional parameters
 }
 
-// CarbonServiceClientQueryCarbonEmissionDataAvailableDateRangeOptions contains the optional parameters for the CarbonServiceClient.QueryCarbonEmissionDataAvailableDateRange
+// CarbonCarbonServiceClientQueryCarbonEmissionDataAvailableDateRangeOptions contains the optional parameters for the CarbonCarbonServiceClient.QueryCarbonEmissionDataAvailableDateRange
 // method.
-type CarbonServiceClientQueryCarbonEmissionDataAvailableDateRangeOptions struct {
+type CarbonCarbonServiceClientQueryCarbonEmissionDataAvailableDateRangeOptions struct {
 	// placeholder for future optional parameters
 }
 
-// OperationsClientListOptions contains the optional parameters for the OperationsClient.NewListPager method.
-type OperationsClientListOptions struct {
+// CarbonOperationsClientListOptions contains the optional parameters for the CarbonOperationsClient.NewListPager method.
+type CarbonOperationsClientListOptions struct {
 	// placeholder for future optional parameters
 }
 

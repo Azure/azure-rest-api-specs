@@ -45,6 +45,7 @@ func NewWorkloadNetworkGatewaysClient(credential azcore.TokenCredential, options
 //     method.
 func (client *WorkloadNetworkGatewaysClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, gatewayID string, options *WorkloadNetworkGatewaysClientGetOptions) (WorkloadNetworkGatewaysClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkGatewaysClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, gatewayID, options)
 	if err != nil {
 		return WorkloadNetworkGatewaysClientGetResponse{}, err
@@ -112,6 +113,7 @@ func (client *WorkloadNetworkGatewaysClient) NewListByWorkloadNetworkPager(subsc
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *WorkloadNetworkGatewaysClientListByWorkloadNetworkResponse) (WorkloadNetworkGatewaysClientListByWorkloadNetworkResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkGatewaysClient.NewListByWorkloadNetworkPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink

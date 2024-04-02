@@ -48,6 +48,7 @@ func NewDeploymentsClient(credential azcore.TokenCredential, options *arm.Client
 //     method.
 func (client *DeploymentsClient) CreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, deploymentName string, payload Deployment, options *DeploymentsClientCreateOrUpdateOptions) (DeploymentsClientCreateOrUpdateResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DeploymentsClient.CreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, serviceName, workspaceName, apiName, deploymentName, payload, options)
 	if err != nil {
 		return DeploymentsClientCreateOrUpdateResponse{}, err
@@ -128,6 +129,7 @@ func (client *DeploymentsClient) createOrUpdateHandleResponse(resp *http.Respons
 //   - options - DeploymentsClientDeleteOptions contains the optional parameters for the DeploymentsClient.Delete method.
 func (client *DeploymentsClient) Delete(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, deploymentName string, options *DeploymentsClientDeleteOptions) (DeploymentsClientDeleteResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DeploymentsClient.Delete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, serviceName, workspaceName, apiName, deploymentName, options)
 	if err != nil {
 		return DeploymentsClientDeleteResponse{}, err
@@ -191,6 +193,7 @@ func (client *DeploymentsClient) deleteCreateRequest(ctx context.Context, subscr
 //   - options - DeploymentsClientGetOptions contains the optional parameters for the DeploymentsClient.Get method.
 func (client *DeploymentsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, deploymentName string, options *DeploymentsClientGetOptions) (DeploymentsClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DeploymentsClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, serviceName, workspaceName, apiName, deploymentName, options)
 	if err != nil {
 		return DeploymentsClientGetResponse{}, err
@@ -267,6 +270,7 @@ func (client *DeploymentsClient) getHandleResponse(resp *http.Response) (Deploym
 //   - options - DeploymentsClientHeadOptions contains the optional parameters for the DeploymentsClient.Head method.
 func (client *DeploymentsClient) Head(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, deploymentName string, options *DeploymentsClientHeadOptions) (DeploymentsClientHeadResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DeploymentsClient.Head")
 	req, err := client.headCreateRequest(ctx, subscriptionID, resourceGroupName, serviceName, workspaceName, apiName, deploymentName, options)
 	if err != nil {
 		return DeploymentsClientHeadResponse{}, err
@@ -333,6 +337,7 @@ func (client *DeploymentsClient) NewListPager(subscriptionID string, resourceGro
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *DeploymentsClientListResponse) (DeploymentsClientListResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DeploymentsClient.NewListPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink

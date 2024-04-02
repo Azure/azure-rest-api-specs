@@ -60,6 +60,7 @@ func (client *WorkloadNetworkDhcpConfigurationsClient) BeginCreate(ctx context.C
 // Create - Create a WorkloadNetworkDhcp
 func (client *WorkloadNetworkDhcpConfigurationsClient) create(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, resource WorkloadNetworkDhcp, options *WorkloadNetworkDhcpConfigurationsClientCreateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDhcpConfigurationsClient.BeginCreate")
 	req, err := client.createCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, dhcpID, resource, options)
 	if err != nil {
 		return nil, err
@@ -132,6 +133,7 @@ func (client *WorkloadNetworkDhcpConfigurationsClient) BeginDelete(ctx context.C
 // Delete - Delete a WorkloadNetworkDhcp
 func (client *WorkloadNetworkDhcpConfigurationsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, options *WorkloadNetworkDhcpConfigurationsClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDhcpConfigurationsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, dhcpID, options)
 	if err != nil {
 		return nil, err
@@ -186,6 +188,7 @@ func (client *WorkloadNetworkDhcpConfigurationsClient) deleteCreateRequest(ctx c
 //     method.
 func (client *WorkloadNetworkDhcpConfigurationsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, dhcpID string, privateCloudName string, options *WorkloadNetworkDhcpConfigurationsClientGetOptions) (WorkloadNetworkDhcpConfigurationsClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDhcpConfigurationsClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, dhcpID, privateCloudName, options)
 	if err != nil {
 		return WorkloadNetworkDhcpConfigurationsClientGetResponse{}, err
@@ -253,6 +256,7 @@ func (client *WorkloadNetworkDhcpConfigurationsClient) NewListByWorkloadNetworkP
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *WorkloadNetworkDhcpConfigurationsClientListByWorkloadNetworkResponse) (WorkloadNetworkDhcpConfigurationsClientListByWorkloadNetworkResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDhcpConfigurationsClient.NewListByWorkloadNetworkPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -327,6 +331,7 @@ func (client *WorkloadNetworkDhcpConfigurationsClient) BeginUpdate(ctx context.C
 // Update - Update a WorkloadNetworkDhcp
 func (client *WorkloadNetworkDhcpConfigurationsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, properties WorkloadNetworkDhcpUpdate, options *WorkloadNetworkDhcpConfigurationsClientUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDhcpConfigurationsClient.BeginUpdate")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, dhcpID, properties, options)
 	if err != nil {
 		return nil, err

@@ -59,6 +59,7 @@ func (client *OrganizationsClient) BeginCreateOrUpdate(ctx context.Context, subs
 // CreateOrUpdate - Create a OrganizationResource
 func (client *OrganizationsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, resource OrganizationResource, options *OrganizationsClientCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "OrganizationsClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, organizationName, resource, options)
 	if err != nil {
 		return nil, err
@@ -125,6 +126,7 @@ func (client *OrganizationsClient) BeginDelete(ctx context.Context, subscription
 // Delete - Delete a OrganizationResource
 func (client *OrganizationsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, options *OrganizationsClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "OrganizationsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, organizationName, options)
 	if err != nil {
 		return nil, err
@@ -173,6 +175,7 @@ func (client *OrganizationsClient) deleteCreateRequest(ctx context.Context, subs
 //   - options - OrganizationsClientGetOptions contains the optional parameters for the OrganizationsClient.Get method.
 func (client *OrganizationsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, options *OrganizationsClientGetOptions) (OrganizationsClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "OrganizationsClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, organizationName, options)
 	if err != nil {
 		return OrganizationsClientGetResponse{}, err
@@ -235,6 +238,7 @@ func (client *OrganizationsClient) NewListByResourceGroupPager(subscriptionID st
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *OrganizationsClientListByResourceGroupResponse) (OrganizationsClientListByResourceGroupResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "OrganizationsClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -291,6 +295,7 @@ func (client *OrganizationsClient) NewListBySubscriptionPager(subscriptionID str
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *OrganizationsClientListBySubscriptionResponse) (OrganizationsClientListBySubscriptionResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "OrganizationsClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -355,6 +360,7 @@ func (client *OrganizationsClient) BeginUpdate(ctx context.Context, subscription
 // Update - Update a OrganizationResource
 func (client *OrganizationsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, properties OrganizationResourceUpdate, options *OrganizationsClientUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "OrganizationsClient.BeginUpdate")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, organizationName, properties, options)
 	if err != nil {
 		return nil, err

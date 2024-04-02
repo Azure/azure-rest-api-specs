@@ -46,6 +46,7 @@ func NewUpfDeploymentsClient(credential azcore.TokenCredential, options *arm.Cli
 //     method.
 func (client *UpfDeploymentsClient) CreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, upfDeploymentName string, resource UpfDeploymentResource, options *UpfDeploymentsClientCreateOrUpdateOptions) (UpfDeploymentsClientCreateOrUpdateResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "UpfDeploymentsClient.CreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, upfDeploymentName, resource, options)
 	if err != nil {
 		return UpfDeploymentsClientCreateOrUpdateResponse{}, err
@@ -130,6 +131,7 @@ func (client *UpfDeploymentsClient) BeginDelete(ctx context.Context, subscriptio
 // Delete - Delete a UpfDeploymentResource
 func (client *UpfDeploymentsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, upfDeploymentName string, options *UpfDeploymentsClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "UpfDeploymentsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, upfDeploymentName, options)
 	if err != nil {
 		return nil, err
@@ -178,6 +180,7 @@ func (client *UpfDeploymentsClient) deleteCreateRequest(ctx context.Context, sub
 //   - options - UpfDeploymentsClientGetOptions contains the optional parameters for the UpfDeploymentsClient.Get method.
 func (client *UpfDeploymentsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, upfDeploymentName string, options *UpfDeploymentsClientGetOptions) (UpfDeploymentsClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "UpfDeploymentsClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, upfDeploymentName, options)
 	if err != nil {
 		return UpfDeploymentsClientGetResponse{}, err
@@ -240,6 +243,7 @@ func (client *UpfDeploymentsClient) NewListByResourceGroupPager(subscriptionID s
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *UpfDeploymentsClientListByResourceGroupResponse) (UpfDeploymentsClientListByResourceGroupResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "UpfDeploymentsClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -296,6 +300,7 @@ func (client *UpfDeploymentsClient) NewListBySubscriptionPager(subscriptionID st
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *UpfDeploymentsClientListBySubscriptionResponse) (UpfDeploymentsClientListBySubscriptionResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "UpfDeploymentsClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -347,6 +352,7 @@ func (client *UpfDeploymentsClient) listBySubscriptionHandleResponse(resp *http.
 //     method.
 func (client *UpfDeploymentsClient) UpdateTags(ctx context.Context, subscriptionID string, resourceGroupName string, upfDeploymentName string, properties UpfDeploymentResourceTagsUpdate, options *UpfDeploymentsClientUpdateTagsOptions) (UpfDeploymentsClientUpdateTagsResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "UpfDeploymentsClient.UpdateTags")
 	req, err := client.updateTagsCreateRequest(ctx, subscriptionID, resourceGroupName, upfDeploymentName, properties, options)
 	if err != nil {
 		return UpfDeploymentsClientUpdateTagsResponse{}, err

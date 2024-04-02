@@ -29,30 +29,30 @@ func NewAzurePlaywrightServiceClient(credential azcore.TokenCredential, options 
 	return client, nil
 }
 
-// NewAccountQuotasClient creates a new instance of [AccountQuotasClient].
-func (client *AzurePlaywrightServiceClient) NewAccountQuotasClient() *AccountQuotasClient {
-	return &AccountQuotasClient{
+// NewAzurePlaywrightServiceAccountQuotasClient creates a new instance of [AzurePlaywrightServiceAccountQuotasClient].
+func (client *AzurePlaywrightServiceClient) NewAzurePlaywrightServiceAccountQuotasClient() *AzurePlaywrightServiceAccountQuotasClient {
+	return &AzurePlaywrightServiceAccountQuotasClient{
 		internal: client.internal,
 	}
 }
 
-// NewAccountsClient creates a new instance of [AccountsClient].
-func (client *AzurePlaywrightServiceClient) NewAccountsClient() *AccountsClient {
-	return &AccountsClient{
+// NewAzurePlaywrightServiceAccountsClient creates a new instance of [AzurePlaywrightServiceAccountsClient].
+func (client *AzurePlaywrightServiceClient) NewAzurePlaywrightServiceAccountsClient() *AzurePlaywrightServiceAccountsClient {
+	return &AzurePlaywrightServiceAccountsClient{
 		internal: client.internal,
 	}
 }
 
-// NewOperationsClient creates a new instance of [OperationsClient].
-func (client *AzurePlaywrightServiceClient) NewOperationsClient() *OperationsClient {
-	return &OperationsClient{
+// NewAzurePlaywrightServiceOperationsClient creates a new instance of [AzurePlaywrightServiceOperationsClient].
+func (client *AzurePlaywrightServiceClient) NewAzurePlaywrightServiceOperationsClient() *AzurePlaywrightServiceOperationsClient {
+	return &AzurePlaywrightServiceOperationsClient{
 		internal: client.internal,
 	}
 }
 
-// NewQuotasClient creates a new instance of [QuotasClient].
-func (client *AzurePlaywrightServiceClient) NewQuotasClient() *QuotasClient {
-	return &QuotasClient{
+// NewAzurePlaywrightServiceQuotasClient creates a new instance of [AzurePlaywrightServiceQuotasClient].
+func (client *AzurePlaywrightServiceClient) NewAzurePlaywrightServiceQuotasClient() *AzurePlaywrightServiceQuotasClient {
+	return &AzurePlaywrightServiceQuotasClient{
 		internal: client.internal,
 	}
 }

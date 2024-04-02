@@ -2080,8 +2080,7 @@ model PSCredentialExecutionParameter extends ScriptExecutionParameter {
   password?: string;
 
   @doc("The type of execution parameter")
-  // type: "Credential";
-  type: ScriptExecutionParameterType.Credential;
+  type: "Credential";
 }
 
 @doc("The type of DNS zone.")

@@ -49,6 +49,7 @@ func NewApiDefinitionsClient(credential azcore.TokenCredential, options *arm.Cli
 //     method.
 func (client *ApiDefinitionsClient) CreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, definitionName string, payload APIDefinition, options *ApiDefinitionsClientCreateOrUpdateOptions) (ApiDefinitionsClientCreateOrUpdateResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ApiDefinitionsClient.CreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, serviceName, workspaceName, apiName, versionName, definitionName, payload, options)
 	if err != nil {
 		return ApiDefinitionsClientCreateOrUpdateResponse{}, err
@@ -134,6 +135,7 @@ func (client *ApiDefinitionsClient) createOrUpdateHandleResponse(resp *http.Resp
 //   - options - ApiDefinitionsClientDeleteOptions contains the optional parameters for the ApiDefinitionsClient.Delete method.
 func (client *ApiDefinitionsClient) Delete(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, definitionName string, options *ApiDefinitionsClientDeleteOptions) (ApiDefinitionsClientDeleteResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ApiDefinitionsClient.Delete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, serviceName, workspaceName, apiName, versionName, definitionName, options)
 	if err != nil {
 		return ApiDefinitionsClientDeleteResponse{}, err
@@ -218,6 +220,7 @@ func (client *ApiDefinitionsClient) BeginExportSpecification(ctx context.Context
 // ExportSpecification - Exports the API specification.
 func (client *ApiDefinitionsClient) exportSpecification(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, definitionName string, payload any, options *ApiDefinitionsClientExportSpecificationOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ApiDefinitionsClient.BeginExportSpecification")
 	req, err := client.exportSpecificationCreateRequest(ctx, subscriptionID, resourceGroupName, serviceName, workspaceName, apiName, versionName, definitionName, payload, options)
 	if err != nil {
 		return nil, err
@@ -290,6 +293,7 @@ func (client *ApiDefinitionsClient) exportSpecificationCreateRequest(ctx context
 //   - options - ApiDefinitionsClientGetOptions contains the optional parameters for the ApiDefinitionsClient.Get method.
 func (client *ApiDefinitionsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, definitionName string, options *ApiDefinitionsClientGetOptions) (ApiDefinitionsClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ApiDefinitionsClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, serviceName, workspaceName, apiName, versionName, definitionName, options)
 	if err != nil {
 		return ApiDefinitionsClientGetResponse{}, err
@@ -371,6 +375,7 @@ func (client *ApiDefinitionsClient) getHandleResponse(resp *http.Response) (ApiD
 //   - options - ApiDefinitionsClientHeadOptions contains the optional parameters for the ApiDefinitionsClient.Head method.
 func (client *ApiDefinitionsClient) Head(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, definitionName string, options *ApiDefinitionsClientHeadOptions) (ApiDefinitionsClientHeadResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ApiDefinitionsClient.Head")
 	req, err := client.headCreateRequest(ctx, subscriptionID, resourceGroupName, serviceName, workspaceName, apiName, versionName, definitionName, options)
 	if err != nil {
 		return ApiDefinitionsClientHeadResponse{}, err
@@ -455,6 +460,7 @@ func (client *ApiDefinitionsClient) BeginImportSpecification(ctx context.Context
 // ImportSpecification - Imports the API specification.
 func (client *ApiDefinitionsClient) importSpecification(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, definitionName string, payload APISpecImportRequest, options *ApiDefinitionsClientImportSpecificationOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ApiDefinitionsClient.BeginImportSpecification")
 	req, err := client.importSpecificationCreateRequest(ctx, subscriptionID, resourceGroupName, serviceName, workspaceName, apiName, versionName, definitionName, payload, options)
 	if err != nil {
 		return nil, err
@@ -530,6 +536,7 @@ func (client *ApiDefinitionsClient) NewListPager(subscriptionID string, resource
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *ApiDefinitionsClientListResponse) (ApiDefinitionsClientListResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ApiDefinitionsClient.NewListPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink

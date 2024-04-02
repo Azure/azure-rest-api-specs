@@ -43,6 +43,7 @@ func NewWorkloadNetworksClient(credential azcore.TokenCredential, options *arm.C
 //   - options - WorkloadNetworksClientGetOptions contains the optional parameters for the WorkloadNetworksClient.Get method.
 func (client *WorkloadNetworksClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *WorkloadNetworksClientGetOptions) (WorkloadNetworksClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworksClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, options)
 	if err != nil {
 		return WorkloadNetworksClientGetResponse{}, err
@@ -106,6 +107,7 @@ func (client *WorkloadNetworksClient) NewListByPrivateCloudPager(subscriptionID 
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *WorkloadNetworksClientListByPrivateCloudResponse) (WorkloadNetworksClientListByPrivateCloudResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworksClient.NewListByPrivateCloudPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink

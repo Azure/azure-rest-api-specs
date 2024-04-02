@@ -46,6 +46,7 @@ func NewAmfDeploymentsClient(credential azcore.TokenCredential, options *arm.Cli
 //     method.
 func (client *AmfDeploymentsClient) CreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, amfDeploymentName string, resource AmfDeploymentResource, options *AmfDeploymentsClientCreateOrUpdateOptions) (AmfDeploymentsClientCreateOrUpdateResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AmfDeploymentsClient.CreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, amfDeploymentName, resource, options)
 	if err != nil {
 		return AmfDeploymentsClientCreateOrUpdateResponse{}, err
@@ -130,6 +131,7 @@ func (client *AmfDeploymentsClient) BeginDelete(ctx context.Context, subscriptio
 // Delete - Delete a AmfDeploymentResource
 func (client *AmfDeploymentsClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, amfDeploymentName string, options *AmfDeploymentsClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AmfDeploymentsClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, amfDeploymentName, options)
 	if err != nil {
 		return nil, err
@@ -178,6 +180,7 @@ func (client *AmfDeploymentsClient) deleteCreateRequest(ctx context.Context, sub
 //   - options - AmfDeploymentsClientGetOptions contains the optional parameters for the AmfDeploymentsClient.Get method.
 func (client *AmfDeploymentsClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, amfDeploymentName string, options *AmfDeploymentsClientGetOptions) (AmfDeploymentsClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AmfDeploymentsClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, amfDeploymentName, options)
 	if err != nil {
 		return AmfDeploymentsClientGetResponse{}, err
@@ -240,6 +243,7 @@ func (client *AmfDeploymentsClient) NewListByResourceGroupPager(subscriptionID s
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AmfDeploymentsClientListByResourceGroupResponse) (AmfDeploymentsClientListByResourceGroupResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AmfDeploymentsClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -296,6 +300,7 @@ func (client *AmfDeploymentsClient) NewListBySubscriptionPager(subscriptionID st
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AmfDeploymentsClientListBySubscriptionResponse) (AmfDeploymentsClientListBySubscriptionResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AmfDeploymentsClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -347,6 +352,7 @@ func (client *AmfDeploymentsClient) listBySubscriptionHandleResponse(resp *http.
 //     method.
 func (client *AmfDeploymentsClient) UpdateTags(ctx context.Context, subscriptionID string, resourceGroupName string, amfDeploymentName string, properties AmfDeploymentResourceTagsUpdate, options *AmfDeploymentsClientUpdateTagsOptions) (AmfDeploymentsClientUpdateTagsResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AmfDeploymentsClient.UpdateTags")
 	req, err := client.updateTagsCreateRequest(ctx, subscriptionID, resourceGroupName, amfDeploymentName, properties, options)
 	if err != nil {
 		return AmfDeploymentsClientUpdateTagsResponse{}, err

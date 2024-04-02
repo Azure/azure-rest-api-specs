@@ -58,6 +58,7 @@ func (client *StorageClassClient) BeginCreateOrUpdate(ctx context.Context, resou
 // CreateOrUpdate - Create a StorageClassResource
 func (client *StorageClassClient) createOrUpdate(ctx context.Context, resourceURI string, storageClassName string, resource StorageClassResource, options *StorageClassClientCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "StorageClassClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, resourceURI, storageClassName, resource, options)
 	if err != nil {
 		return nil, err
@@ -119,6 +120,7 @@ func (client *StorageClassClient) BeginDelete(ctx context.Context, resourceURI s
 // Delete - Delete a StorageClassResource
 func (client *StorageClassClient) deleteOperation(ctx context.Context, resourceURI string, storageClassName string, options *StorageClassClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "StorageClassClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, resourceURI, storageClassName, options)
 	if err != nil {
 		return nil, err
@@ -162,6 +164,7 @@ func (client *StorageClassClient) deleteCreateRequest(ctx context.Context, resou
 //   - options - StorageClassClientGetOptions contains the optional parameters for the StorageClassClient.Get method.
 func (client *StorageClassClient) Get(ctx context.Context, resourceURI string, storageClassName string, options *StorageClassClientGetOptions) (StorageClassClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "StorageClassClient.Get")
 	req, err := client.getCreateRequest(ctx, resourceURI, storageClassName, options)
 	if err != nil {
 		return StorageClassClientGetResponse{}, err
@@ -218,6 +221,7 @@ func (client *StorageClassClient) NewListPager(resourceURI string, options *Stor
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *StorageClassClientListResponse) (StorageClassClientListResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "StorageClassClient.NewListPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -281,6 +285,7 @@ func (client *StorageClassClient) BeginUpdate(ctx context.Context, resourceURI s
 // Update - Update a StorageClassResource
 func (client *StorageClassClient) update(ctx context.Context, resourceURI string, storageClassName string, properties StorageClassResourceUpdate, options *StorageClassClientUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "StorageClassClient.BeginUpdate")
 	req, err := client.updateCreateRequest(ctx, resourceURI, storageClassName, properties, options)
 	if err != nil {
 		return nil, err

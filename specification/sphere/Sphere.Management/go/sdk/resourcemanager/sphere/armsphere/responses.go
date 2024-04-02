@@ -4,236 +4,194 @@
 
 package armsphere
 
-// CatalogsClientCountDevicesResponse contains the response from method CatalogsClient.CountDevices.
-type CatalogsClientCountDevicesResponse struct {
+// AzureSphereCatalogsClientCountDevicesResponse contains the response from method AzureSphereCatalogsClient.CountDevices.
+type AzureSphereCatalogsClientCountDevicesResponse struct {
 	// Response to the action call for count devices in a catalog.
 	CountDevicesResponse
 }
 
-// CatalogsClientCreateOrUpdateResponse contains the response from method CatalogsClient.CreateOrUpdate.
-type CatalogsClientCreateOrUpdateResponse struct {
-	// An Azure Sphere catalog
-	Catalog
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
-}
-
-// CatalogsClientDeleteResponse contains the response from method CatalogsClient.Delete.
-type CatalogsClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
-}
-
-// CatalogsClientGetResponse contains the response from method CatalogsClient.Get.
-type CatalogsClientGetResponse struct {
+// AzureSphereCatalogsClientCreateOrUpdateResponse contains the response from method AzureSphereCatalogsClient.CreateOrUpdate.
+type AzureSphereCatalogsClientCreateOrUpdateResponse struct {
 	// An Azure Sphere catalog
 	Catalog
 }
 
-// CatalogsClientListByResourceGroupResponse contains the response from method CatalogsClient.NewListByResourceGroupPager.
-type CatalogsClientListByResourceGroupResponse struct {
+// AzureSphereCatalogsClientDeleteResponse contains the response from method AzureSphereCatalogsClient.Delete.
+type AzureSphereCatalogsClientDeleteResponse struct {
+	// placeholder for future response values
+}
+
+// AzureSphereCatalogsClientGetResponse contains the response from method AzureSphereCatalogsClient.Get.
+type AzureSphereCatalogsClientGetResponse struct {
+	// An Azure Sphere catalog
+	Catalog
+}
+
+// AzureSphereCatalogsClientListByResourceGroupResponse contains the response from method AzureSphereCatalogsClient.NewListByResourceGroupPager.
+type AzureSphereCatalogsClientListByResourceGroupResponse struct {
 	// The response of a Catalog list operation.
 	CatalogListResult
 }
 
-// CatalogsClientListBySubscriptionResponse contains the response from method CatalogsClient.NewListBySubscriptionPager.
-type CatalogsClientListBySubscriptionResponse struct {
+// AzureSphereCatalogsClientListBySubscriptionResponse contains the response from method AzureSphereCatalogsClient.NewListBySubscriptionPager.
+type AzureSphereCatalogsClientListBySubscriptionResponse struct {
 	// The response of a Catalog list operation.
 	CatalogListResult
 }
 
-// CatalogsClientListDeploymentsResponse contains the response from method CatalogsClient.NewListDeploymentsPager.
-type CatalogsClientListDeploymentsResponse struct {
+// AzureSphereCatalogsClientListDeploymentsResponse contains the response from method AzureSphereCatalogsClient.NewListDeploymentsPager.
+type AzureSphereCatalogsClientListDeploymentsResponse struct {
 	// The response of a Deployment list operation.
 	DeploymentListResult
 }
 
-// CatalogsClientListDeviceGroupsResponse contains the response from method CatalogsClient.NewListDeviceGroupsPager.
-type CatalogsClientListDeviceGroupsResponse struct {
+// AzureSphereCatalogsClientListDeviceGroupsResponse contains the response from method AzureSphereCatalogsClient.NewListDeviceGroupsPager.
+type AzureSphereCatalogsClientListDeviceGroupsResponse struct {
 	// The response of a DeviceGroup list operation.
 	DeviceGroupListResult
 }
 
-// CatalogsClientListDeviceInsightsResponse contains the response from method CatalogsClient.NewListDeviceInsightsPager.
-type CatalogsClientListDeviceInsightsResponse struct {
+// AzureSphereCatalogsClientListDeviceInsightsResponse contains the response from method AzureSphereCatalogsClient.NewListDeviceInsightsPager.
+type AzureSphereCatalogsClientListDeviceInsightsResponse struct {
 	// Paged collection of DeviceInsight items
 	PagedDeviceInsight
 }
 
-// CatalogsClientListDevicesResponse contains the response from method CatalogsClient.NewListDevicesPager.
-type CatalogsClientListDevicesResponse struct {
+// AzureSphereCatalogsClientListDevicesResponse contains the response from method AzureSphereCatalogsClient.NewListDevicesPager.
+type AzureSphereCatalogsClientListDevicesResponse struct {
 	// The response of a Device list operation.
 	DeviceListResult
 }
 
-// CatalogsClientUpdateResponse contains the response from method CatalogsClient.Update.
-type CatalogsClientUpdateResponse struct {
+// AzureSphereCatalogsClientUpdateResponse contains the response from method AzureSphereCatalogsClient.Update.
+type AzureSphereCatalogsClientUpdateResponse struct {
 	// An Azure Sphere catalog
 	Catalog
 }
 
-// CatalogsClientUploadImageResponse contains the response from method CatalogsClient.UploadImage.
-type CatalogsClientUploadImageResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+// AzureSphereCatalogsClientUploadImageResponse contains the response from method AzureSphereCatalogsClient.UploadImage.
+type AzureSphereCatalogsClientUploadImageResponse struct {
+	// placeholder for future response values
 }
 
-// CertificatesClientGetResponse contains the response from method CertificatesClient.Get.
-type CertificatesClientGetResponse struct {
+// AzureSphereCertificatesClientGetResponse contains the response from method AzureSphereCertificatesClient.Get.
+type AzureSphereCertificatesClientGetResponse struct {
 	// An certificate resource belonging to a catalog resource.
 	Certificate
 }
 
-// CertificatesClientListByCatalogResponse contains the response from method CertificatesClient.NewListByCatalogPager.
-type CertificatesClientListByCatalogResponse struct {
+// AzureSphereCertificatesClientListByCatalogResponse contains the response from method AzureSphereCertificatesClient.NewListByCatalogPager.
+type AzureSphereCertificatesClientListByCatalogResponse struct {
 	// The response of a Certificate list operation.
 	CertificateListResult
 }
 
-// CertificatesClientRetrieveCertChainResponse contains the response from method CertificatesClient.RetrieveCertChain.
-type CertificatesClientRetrieveCertChainResponse struct {
+// AzureSphereCertificatesClientRetrieveCertChainResponse contains the response from method AzureSphereCertificatesClient.RetrieveCertChain.
+type AzureSphereCertificatesClientRetrieveCertChainResponse struct {
 	// The certificate chain response.
 	CertificateChainResponse
 }
 
-// CertificatesClientRetrieveProofOfPossessionNonceResponse contains the response from method CertificatesClient.RetrieveProofOfPossessionNonce.
-type CertificatesClientRetrieveProofOfPossessionNonceResponse struct {
+// AzureSphereCertificatesClientRetrieveProofOfPossessionNonceResponse contains the response from method AzureSphereCertificatesClient.RetrieveProofOfPossessionNonce.
+type AzureSphereCertificatesClientRetrieveProofOfPossessionNonceResponse struct {
 	// Result of the action to generate a proof of possession nonce
 	ProofOfPossessionNonceResponse
 }
 
-// DeploymentsClientCreateOrUpdateResponse contains the response from method DeploymentsClient.CreateOrUpdate.
-type DeploymentsClientCreateOrUpdateResponse struct {
-	// An deployment resource belonging to a device group resource.
-	Deployment
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
-}
-
-// DeploymentsClientDeleteResponse contains the response from method DeploymentsClient.Delete.
-type DeploymentsClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
-}
-
-// DeploymentsClientGetResponse contains the response from method DeploymentsClient.Get.
-type DeploymentsClientGetResponse struct {
+// AzureSphereDeploymentsClientCreateOrUpdateResponse contains the response from method AzureSphereDeploymentsClient.CreateOrUpdate.
+type AzureSphereDeploymentsClientCreateOrUpdateResponse struct {
 	// An deployment resource belonging to a device group resource.
 	Deployment
 }
 
-// DeploymentsClientListByDeviceGroupResponse contains the response from method DeploymentsClient.NewListByDeviceGroupPager.
-type DeploymentsClientListByDeviceGroupResponse struct {
+// AzureSphereDeploymentsClientDeleteResponse contains the response from method AzureSphereDeploymentsClient.Delete.
+type AzureSphereDeploymentsClientDeleteResponse struct {
+	// placeholder for future response values
+}
+
+// AzureSphereDeploymentsClientGetResponse contains the response from method AzureSphereDeploymentsClient.Get.
+type AzureSphereDeploymentsClientGetResponse struct {
+	// An deployment resource belonging to a device group resource.
+	Deployment
+}
+
+// AzureSphereDeploymentsClientListByDeviceGroupResponse contains the response from method AzureSphereDeploymentsClient.NewListByDeviceGroupPager.
+type AzureSphereDeploymentsClientListByDeviceGroupResponse struct {
 	// The response of a Deployment list operation.
 	DeploymentListResult
 }
 
-// DeviceGroupsClientClaimDevicesResponse contains the response from method DeviceGroupsClient.ClaimDevices.
-type DeviceGroupsClientClaimDevicesResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+// AzureSphereDeviceGroupsClientClaimDevicesResponse contains the response from method AzureSphereDeviceGroupsClient.ClaimDevices.
+type AzureSphereDeviceGroupsClientClaimDevicesResponse struct {
+	// placeholder for future response values
 }
 
-// DeviceGroupsClientCountDevicesResponse contains the response from method DeviceGroupsClient.CountDevices.
-type DeviceGroupsClientCountDevicesResponse struct {
+// AzureSphereDeviceGroupsClientCountDevicesResponse contains the response from method AzureSphereDeviceGroupsClient.CountDevices.
+type AzureSphereDeviceGroupsClientCountDevicesResponse struct {
 	// Response to the action call for count devices in a catalog.
 	CountDevicesResponse
 }
 
-// DeviceGroupsClientCreateOrUpdateResponse contains the response from method DeviceGroupsClient.CreateOrUpdate.
-type DeviceGroupsClientCreateOrUpdateResponse struct {
-	// An device group resource belonging to a product resource.
-	DeviceGroup
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
-}
-
-// DeviceGroupsClientDeleteResponse contains the response from method DeviceGroupsClient.Delete.
-type DeviceGroupsClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
-}
-
-// DeviceGroupsClientGetResponse contains the response from method DeviceGroupsClient.Get.
-type DeviceGroupsClientGetResponse struct {
+// AzureSphereDeviceGroupsClientCreateOrUpdateResponse contains the response from method AzureSphereDeviceGroupsClient.CreateOrUpdate.
+type AzureSphereDeviceGroupsClientCreateOrUpdateResponse struct {
 	// An device group resource belonging to a product resource.
 	DeviceGroup
 }
 
-// DeviceGroupsClientListByProductResponse contains the response from method DeviceGroupsClient.NewListByProductPager.
-type DeviceGroupsClientListByProductResponse struct {
+// AzureSphereDeviceGroupsClientDeleteResponse contains the response from method AzureSphereDeviceGroupsClient.Delete.
+type AzureSphereDeviceGroupsClientDeleteResponse struct {
+	// placeholder for future response values
+}
+
+// AzureSphereDeviceGroupsClientGetResponse contains the response from method AzureSphereDeviceGroupsClient.Get.
+type AzureSphereDeviceGroupsClientGetResponse struct {
+	// An device group resource belonging to a product resource.
+	DeviceGroup
+}
+
+// AzureSphereDeviceGroupsClientListByProductResponse contains the response from method AzureSphereDeviceGroupsClient.NewListByProductPager.
+type AzureSphereDeviceGroupsClientListByProductResponse struct {
 	// The response of a DeviceGroup list operation.
 	DeviceGroupListResult
 }
 
-// DeviceGroupsClientUpdateResponse contains the response from method DeviceGroupsClient.Update.
-type DeviceGroupsClientUpdateResponse struct {
+// AzureSphereDeviceGroupsClientUpdateResponse contains the response from method AzureSphereDeviceGroupsClient.Update.
+type AzureSphereDeviceGroupsClientUpdateResponse struct {
 	// An device group resource belonging to a product resource.
 	DeviceGroup
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
-// DevicesClientCreateOrUpdateResponse contains the response from method DevicesClient.CreateOrUpdate.
-type DevicesClientCreateOrUpdateResponse struct {
+// AzureSphereDevicesClientCreateOrUpdateResponse contains the response from method AzureSphereDevicesClient.CreateOrUpdate.
+type AzureSphereDevicesClientCreateOrUpdateResponse struct {
 	// An device resource belonging to a device group resource.
 	Device
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
-// DevicesClientDeleteResponse contains the response from method DevicesClient.Delete.
-type DevicesClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+// AzureSphereDevicesClientDeleteResponse contains the response from method AzureSphereDevicesClient.Delete.
+type AzureSphereDevicesClientDeleteResponse struct {
+	// placeholder for future response values
 }
 
-// DevicesClientGenerateCapabilityImageResponse contains the response from method DevicesClient.GenerateCapabilityImage.
-type DevicesClientGenerateCapabilityImageResponse struct {
+// AzureSphereDevicesClientGenerateCapabilityImageResponse contains the response from method AzureSphereDevicesClient.GenerateCapabilityImage.
+type AzureSphereDevicesClientGenerateCapabilityImageResponse struct {
 	// Signed device capability image response
 	SignedCapabilityImageResponse
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
-// DevicesClientGetResponse contains the response from method DevicesClient.Get.
-type DevicesClientGetResponse struct {
+// AzureSphereDevicesClientGetResponse contains the response from method AzureSphereDevicesClient.Get.
+type AzureSphereDevicesClientGetResponse struct {
 	// An device resource belonging to a device group resource.
 	Device
 }
 
-// DevicesClientListByDeviceGroupResponse contains the response from method DevicesClient.NewListByDeviceGroupPager.
-type DevicesClientListByDeviceGroupResponse struct {
+// AzureSphereDevicesClientListByDeviceGroupResponse contains the response from method AzureSphereDevicesClient.NewListByDeviceGroupPager.
+type AzureSphereDevicesClientListByDeviceGroupResponse struct {
 	// The response of a Device list operation.
 	DeviceListResult
 }
 
-// DevicesClientUpdateResponse contains the response from method DevicesClient.Update.
-type DevicesClientUpdateResponse struct {
+// AzureSphereDevicesClientUpdateResponse contains the response from method AzureSphereDevicesClient.Update.
+type AzureSphereDevicesClientUpdateResponse struct {
 	// An device resource belonging to a device group resource.
 	Device
 
@@ -241,90 +199,73 @@ type DevicesClientUpdateResponse struct {
 	RetryAfter *int32
 }
 
-// ImagesClientCreateOrUpdateResponse contains the response from method ImagesClient.CreateOrUpdate.
-type ImagesClientCreateOrUpdateResponse struct {
-	// An image resource belonging to a catalog resource.
-	Image
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
-}
-
-// ImagesClientDeleteResponse contains the response from method ImagesClient.Delete.
-type ImagesClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
-}
-
-// ImagesClientGetResponse contains the response from method ImagesClient.Get.
-type ImagesClientGetResponse struct {
+// AzureSphereImagesClientCreateOrUpdateResponse contains the response from method AzureSphereImagesClient.CreateOrUpdate.
+type AzureSphereImagesClientCreateOrUpdateResponse struct {
 	// An image resource belonging to a catalog resource.
 	Image
 }
 
-// ImagesClientListByCatalogResponse contains the response from method ImagesClient.NewListByCatalogPager.
-type ImagesClientListByCatalogResponse struct {
+// AzureSphereImagesClientDeleteResponse contains the response from method AzureSphereImagesClient.Delete.
+type AzureSphereImagesClientDeleteResponse struct {
+	// placeholder for future response values
+}
+
+// AzureSphereImagesClientGetResponse contains the response from method AzureSphereImagesClient.Get.
+type AzureSphereImagesClientGetResponse struct {
+	// An image resource belonging to a catalog resource.
+	Image
+}
+
+// AzureSphereImagesClientListByCatalogResponse contains the response from method AzureSphereImagesClient.NewListByCatalogPager.
+type AzureSphereImagesClientListByCatalogResponse struct {
 	// The response of a Image list operation.
 	ImageListResult
 }
 
-// OperationsClientListResponse contains the response from method OperationsClient.NewListPager.
-type OperationsClientListResponse struct {
+// AzureSphereOperationsClientListResponse contains the response from method AzureSphereOperationsClient.NewListPager.
+type AzureSphereOperationsClientListResponse struct {
 	// A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
 	PagedOperation
 }
 
-// ProductsClientCountDevicesResponse contains the response from method ProductsClient.CountDevices.
-type ProductsClientCountDevicesResponse struct {
+// AzureSphereProductsClientCountDevicesResponse contains the response from method AzureSphereProductsClient.CountDevices.
+type AzureSphereProductsClientCountDevicesResponse struct {
 	// Response to the action call for count devices in a catalog.
 	CountDevicesResponse
 }
 
-// ProductsClientCreateOrUpdateResponse contains the response from method ProductsClient.CreateOrUpdate.
-type ProductsClientCreateOrUpdateResponse struct {
+// AzureSphereProductsClientCreateOrUpdateResponse contains the response from method AzureSphereProductsClient.CreateOrUpdate.
+type AzureSphereProductsClientCreateOrUpdateResponse struct {
 	// An product resource belonging to a catalog resource.
 	Product
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
-// ProductsClientDeleteResponse contains the response from method ProductsClient.Delete.
-type ProductsClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
+// AzureSphereProductsClientDeleteResponse contains the response from method AzureSphereProductsClient.Delete.
+type AzureSphereProductsClientDeleteResponse struct {
+	// placeholder for future response values
 }
 
-// ProductsClientGenerateDefaultDeviceGroupsResponse contains the response from method ProductsClient.NewGenerateDefaultDeviceGroupsPager.
-type ProductsClientGenerateDefaultDeviceGroupsResponse struct {
+// AzureSphereProductsClientGenerateDefaultDeviceGroupsResponse contains the response from method AzureSphereProductsClient.NewGenerateDefaultDeviceGroupsPager.
+type AzureSphereProductsClientGenerateDefaultDeviceGroupsResponse struct {
 	// The response of a DeviceGroup list operation.
 	DeviceGroupListResult
 }
 
-// ProductsClientGetResponse contains the response from method ProductsClient.Get.
-type ProductsClientGetResponse struct {
+// AzureSphereProductsClientGetResponse contains the response from method AzureSphereProductsClient.Get.
+type AzureSphereProductsClientGetResponse struct {
 	// An product resource belonging to a catalog resource.
 	Product
 }
 
-// ProductsClientListByCatalogResponse contains the response from method ProductsClient.NewListByCatalogPager.
-type ProductsClientListByCatalogResponse struct {
+// AzureSphereProductsClientListByCatalogResponse contains the response from method AzureSphereProductsClient.NewListByCatalogPager.
+type AzureSphereProductsClientListByCatalogResponse struct {
 	// The response of a Product list operation.
 	ProductListResult
 }
 
-// ProductsClientUpdateResponse contains the response from method ProductsClient.Update.
-type ProductsClientUpdateResponse struct {
+// AzureSphereProductsClientUpdateResponse contains the response from method AzureSphereProductsClient.Update.
+type AzureSphereProductsClientUpdateResponse struct {
 	// An product resource belonging to a catalog resource.
 	Product
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 

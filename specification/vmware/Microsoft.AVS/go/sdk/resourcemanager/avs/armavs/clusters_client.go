@@ -60,6 +60,7 @@ func (client *ClustersClient) BeginCreateOrUpdate(ctx context.Context, subscript
 // CreateOrUpdate - Create a Cluster
 func (client *ClustersClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, resource Cluster, options *ClustersClientCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ClustersClient.BeginCreateOrUpdate")
 	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, resource, options)
 	if err != nil {
 		return nil, err
@@ -131,6 +132,7 @@ func (client *ClustersClient) BeginDelete(ctx context.Context, subscriptionID st
 // Delete - Delete a Cluster
 func (client *ClustersClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, options *ClustersClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ClustersClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, options)
 	if err != nil {
 		return nil, err
@@ -184,6 +186,7 @@ func (client *ClustersClient) deleteCreateRequest(ctx context.Context, subscript
 //   - options - ClustersClientGetOptions contains the optional parameters for the ClustersClient.Get method.
 func (client *ClustersClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, options *ClustersClientGetOptions) (ClustersClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ClustersClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, options)
 	if err != nil {
 		return ClustersClientGetResponse{}, err
@@ -251,6 +254,7 @@ func (client *ClustersClient) NewListByPrivateCloudPager(subscriptionID string, 
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *ClustersClientListByPrivateCloudResponse) (ClustersClientListByPrivateCloudResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ClustersClient.NewListByPrivateCloudPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -309,6 +313,7 @@ func (client *ClustersClient) listByPrivateCloudHandleResponse(resp *http.Respon
 //   - options - ClustersClientListZonesOptions contains the optional parameters for the ClustersClient.ListZones method.
 func (client *ClustersClient) ListZones(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, options *ClustersClientListZonesOptions) (ClustersClientListZonesResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ClustersClient.ListZones")
 	req, err := client.listZonesCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, options)
 	if err != nil {
 		return ClustersClientListZonesResponse{}, err
@@ -373,6 +378,7 @@ func (client *ClustersClient) listZonesHandleResponse(resp *http.Response) (Clus
 //   - options - ClustersClientUpdateOptions contains the optional parameters for the ClustersClient.Update method.
 func (client *ClustersClient) Update(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, clusterUpdate ClusterUpdate, options *ClustersClientUpdateOptions) (ClustersClientUpdateResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ClustersClient.Update")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, clusterUpdate, options)
 	if err != nil {
 		return ClustersClientUpdateResponse{}, err

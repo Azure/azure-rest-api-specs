@@ -45,6 +45,7 @@ func NewVirtualMachinesClient(credential azcore.TokenCredential, options *arm.Cl
 //   - options - VirtualMachinesClientGetOptions contains the optional parameters for the VirtualMachinesClient.Get method.
 func (client *VirtualMachinesClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, virtualMachineID string, options *VirtualMachinesClientGetOptions) (VirtualMachinesClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "VirtualMachinesClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, virtualMachineID, options)
 	if err != nil {
 		return VirtualMachinesClientGetResponse{}, err
@@ -117,6 +118,7 @@ func (client *VirtualMachinesClient) NewListByClusterPager(subscriptionID string
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *VirtualMachinesClientListByClusterResponse) (VirtualMachinesClientListByClusterResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "VirtualMachinesClient.NewListByClusterPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -196,6 +198,7 @@ func (client *VirtualMachinesClient) BeginRestrictMovement(ctx context.Context, 
 // RestrictMovement - Enable or disable DRS-driven VM movement restriction
 func (client *VirtualMachinesClient) restrictMovement(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, virtualMachineID string, restrictMovement VirtualMachineRestrictMovement, options *VirtualMachinesClientRestrictMovementOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "VirtualMachinesClient.BeginRestrictMovement")
 	req, err := client.restrictMovementCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, virtualMachineID, restrictMovement, options)
 	if err != nil {
 		return nil, err

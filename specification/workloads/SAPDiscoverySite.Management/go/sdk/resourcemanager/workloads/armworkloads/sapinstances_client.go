@@ -61,6 +61,7 @@ func (client *SAPInstancesClient) BeginCreate(ctx context.Context, subscriptionI
 // end user will return a Bad Request error.
 func (client *SAPInstancesClient) create(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, sapInstanceName string, resource SAPInstance, options *SAPInstancesClientCreateOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SAPInstancesClient.BeginCreate")
 	req, err := client.createCreateRequest(ctx, subscriptionID, resourceGroupName, sapDiscoverySiteName, sapInstanceName, resource, options)
 	if err != nil {
 		return nil, err
@@ -136,6 +137,7 @@ func (client *SAPInstancesClient) BeginDelete(ctx context.Context, subscriptionI
 // resource, using the delete operation on it.
 func (client *SAPInstancesClient) deleteOperation(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, sapInstanceName string, options *SAPInstancesClientDeleteOptions) (*http.Response, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SAPInstancesClient.BeginDelete")
 	req, err := client.deleteCreateRequest(ctx, subscriptionID, resourceGroupName, sapDiscoverySiteName, sapInstanceName, options)
 	if err != nil {
 		return nil, err
@@ -189,6 +191,7 @@ func (client *SAPInstancesClient) deleteCreateRequest(ctx context.Context, subsc
 //   - options - SAPInstancesClientGetOptions contains the optional parameters for the SAPInstancesClient.Get method.
 func (client *SAPInstancesClient) Get(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, sapInstanceName string, options *SAPInstancesClientGetOptions) (SAPInstancesClientGetResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SAPInstancesClient.Get")
 	req, err := client.getCreateRequest(ctx, subscriptionID, resourceGroupName, sapDiscoverySiteName, sapInstanceName, options)
 	if err != nil {
 		return SAPInstancesClientGetResponse{}, err
@@ -256,6 +259,7 @@ func (client *SAPInstancesClient) NewListBySAPDiscoverySitePager(subscriptionID 
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *SAPInstancesClientListBySAPDiscoverySiteResponse) (SAPInstancesClientListBySAPDiscoverySiteResponse, error) {
+		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SAPInstancesClient.NewListBySAPDiscoverySitePager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -315,6 +319,7 @@ func (client *SAPInstancesClient) listBySAPDiscoverySiteHandleResponse(resp *htt
 //   - options - SAPInstancesClientUpdateOptions contains the optional parameters for the SAPInstancesClient.Update method.
 func (client *SAPInstancesClient) Update(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, sapInstanceName string, properties SAPInstanceTagsUpdate, options *SAPInstancesClientUpdateOptions) (SAPInstancesClientUpdateResponse, error) {
 	var err error
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SAPInstancesClient.Update")
 	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, sapDiscoverySiteName, sapInstanceName, properties, options)
 	if err != nil {
 		return SAPInstancesClientUpdateResponse{}, err

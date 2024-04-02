@@ -4,80 +4,73 @@
 
 package armplaywrighttesting
 
-// AccountQuotasClientGetResponse contains the response from method AccountQuotasClient.Get.
-type AccountQuotasClientGetResponse struct {
+// AzurePlaywrightServiceAccountQuotasClientGetResponse contains the response from method AzurePlaywrightServiceAccountQuotasClient.Get.
+type AzurePlaywrightServiceAccountQuotasClientGetResponse struct {
 	// A quota resource for a Playwright service account.
 	AccountQuota
 }
 
-// AccountQuotasClientListByAccountResponse contains the response from method AccountQuotasClient.NewListByAccountPager.
-type AccountQuotasClientListByAccountResponse struct {
+// AzurePlaywrightServiceAccountQuotasClientListByAccountResponse contains the response from method AzurePlaywrightServiceAccountQuotasClient.NewListByAccountPager.
+type AzurePlaywrightServiceAccountQuotasClientListByAccountResponse struct {
 	// The response of a AccountQuota list operation.
 	AccountQuotaListResult
 }
 
-// AccountsClientCheckNameAvailabilityResponse contains the response from method AccountsClient.CheckNameAvailability.
-type AccountsClientCheckNameAvailabilityResponse struct {
+// AzurePlaywrightServiceAccountsClientCheckNameAvailabilityResponse contains the response from method AzurePlaywrightServiceAccountsClient.CheckNameAvailability.
+type AzurePlaywrightServiceAccountsClientCheckNameAvailabilityResponse struct {
 	// The check availability result.
 	CheckNameAvailabilityResponse
 }
 
-// AccountsClientCreateOrUpdateResponse contains the response from method AccountsClient.CreateOrUpdate.
-type AccountsClientCreateOrUpdateResponse struct {
-	// A Playwright service account resource.
-	Account
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
-}
-
-// AccountsClientDeleteResponse contains the response from method AccountsClient.Delete.
-type AccountsClientDeleteResponse struct {
-	// Standard Azure Resource Manager operation status response
-	ArmOperationStatus
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
-}
-
-// AccountsClientGetResponse contains the response from method AccountsClient.Get.
-type AccountsClientGetResponse struct {
+// AzurePlaywrightServiceAccountsClientCreateOrUpdateResponse contains the response from method AzurePlaywrightServiceAccountsClient.CreateOrUpdate.
+type AzurePlaywrightServiceAccountsClientCreateOrUpdateResponse struct {
 	// A Playwright service account resource.
 	Account
 }
 
-// AccountsClientListByResourceGroupResponse contains the response from method AccountsClient.NewListByResourceGroupPager.
-type AccountsClientListByResourceGroupResponse struct {
+// AzurePlaywrightServiceAccountsClientDeleteResponse contains the response from method AzurePlaywrightServiceAccountsClient.Delete.
+type AzurePlaywrightServiceAccountsClientDeleteResponse struct {
+	// placeholder for future response values
+}
+
+// AzurePlaywrightServiceAccountsClientGetResponse contains the response from method AzurePlaywrightServiceAccountsClient.Get.
+type AzurePlaywrightServiceAccountsClientGetResponse struct {
+	// A Playwright service account resource.
+	Account
+}
+
+// AzurePlaywrightServiceAccountsClientListByResourceGroupResponse contains the response from method AzurePlaywrightServiceAccountsClient.NewListByResourceGroupPager.
+type AzurePlaywrightServiceAccountsClientListByResourceGroupResponse struct {
 	// The response of a Account list operation.
 	AccountListResult
 }
 
-// AccountsClientListBySubscriptionResponse contains the response from method AccountsClient.NewListBySubscriptionPager.
-type AccountsClientListBySubscriptionResponse struct {
+// AzurePlaywrightServiceAccountsClientListBySubscriptionResponse contains the response from method AzurePlaywrightServiceAccountsClient.NewListBySubscriptionPager.
+type AzurePlaywrightServiceAccountsClientListBySubscriptionResponse struct {
 	// The response of a Account list operation.
 	AccountListResult
 }
 
-// AccountsClientUpdateResponse contains the response from method AccountsClient.Update.
-type AccountsClientUpdateResponse struct {
+// AzurePlaywrightServiceAccountsClientUpdateResponse contains the response from method AzurePlaywrightServiceAccountsClient.Update.
+type AzurePlaywrightServiceAccountsClientUpdateResponse struct {
 	// A Playwright service account resource.
 	Account
 }
 
-// OperationsClientListResponse contains the response from method OperationsClient.NewListPager.
-type OperationsClientListResponse struct {
+// AzurePlaywrightServiceOperationsClientListResponse contains the response from method AzurePlaywrightServiceOperationsClient.NewListPager.
+type AzurePlaywrightServiceOperationsClientListResponse struct {
 	// A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
 	PagedOperation
 }
 
-// QuotasClientGetResponse contains the response from method QuotasClient.Get.
-type QuotasClientGetResponse struct {
+// AzurePlaywrightServiceQuotasClientGetResponse contains the response from method AzurePlaywrightServiceQuotasClient.Get.
+type AzurePlaywrightServiceQuotasClientGetResponse struct {
 	// A subscription quota resource.
 	Quota
 }
 
-// QuotasClientListBySubscriptionResponse contains the response from method QuotasClient.NewListBySubscriptionPager.
-type QuotasClientListBySubscriptionResponse struct {
+// AzurePlaywrightServiceQuotasClientListBySubscriptionResponse contains the response from method AzurePlaywrightServiceQuotasClient.NewListBySubscriptionPager.
+type AzurePlaywrightServiceQuotasClientListBySubscriptionResponse struct {
 	// The response of a Quota list operation.
 	QuotaListResult
 }

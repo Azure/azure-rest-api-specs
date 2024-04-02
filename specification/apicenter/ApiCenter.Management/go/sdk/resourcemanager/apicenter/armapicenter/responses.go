@@ -22,9 +22,6 @@ type ApiDefinitionsClientDeleteResponse struct {
 type ApiDefinitionsClientExportSpecificationResponse struct {
 	// The API specification export result.
 	APISpecExportResult
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // ApiDefinitionsClientGetResponse contains the response from method ApiDefinitionsClient.Get.
@@ -45,9 +42,6 @@ type ApiDefinitionsClientHeadResponse struct {
 type ApiDefinitionsClientImportSpecificationResponse struct {
 	// The API specification was successfully imported.
 	APIImportSuccess
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // ApiDefinitionsClientListResponse contains the response from method ApiDefinitionsClient.NewListPager.
@@ -273,9 +267,6 @@ type ServicesClientDeleteResponse struct {
 type ServicesClientExportMetadataSchemaResponse struct {
 	// The metadata schema export result.
 	MetadataSchemaExportResult
-
-	// The Retry-After header can indicate how long the client should wait before polling the operation status.
-	RetryAfter *int32
 }
 
 // ServicesClientGetResponse contains the response from method ServicesClient.Get.
