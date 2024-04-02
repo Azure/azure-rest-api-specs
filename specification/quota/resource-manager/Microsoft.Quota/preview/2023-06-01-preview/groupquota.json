@@ -671,7 +671,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/groupQuotaLimits/{resourceName}": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/providers/Mocrosoft.Quota/resourceProviders/{resourceProviderName}/locations/{location}/groupQuotaLimits/{resourceName}": {
       "get": {
         "tags": [
           "GroupQuotaLimits"
@@ -698,10 +698,10 @@
             "$ref": "#/parameters/ResourceName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "#/parameters/FilterLocationInQuery"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -720,7 +720,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/groupQuotaLimits": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/providers/Mocrosoft.Quota/resourceProviders/{resourceProviderName}/locations/{location}/groupQuotaLimits": {
       "get": {
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -747,10 +747,10 @@
             "$ref": "#/parameters/ResourceProviderName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "#/parameters/FilterLocationInQuery"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -769,7 +769,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/groupQuotaRequests/{resourceName}": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/providers/Mocrosoft.Quota/resourceProviders/{resourceProviderName}/locations/{location}/groupQuotaRequests/{resourceName}": {
       "put": {
         "tags": [
           "GroupQuotaLimitRequest"
@@ -796,6 +796,9 @@
           },
           {
             "$ref": "#/parameters/ResourceProviderName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "$ref": "#/parameters/ResourceName"
@@ -873,6 +876,9 @@
           },
           {
             "$ref": "#/parameters/ResourceProviderName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "$ref": "#/parameters/ResourceName"
@@ -966,7 +972,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/groupQuotaRequests": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/providers/Mocrosoft.Quota/resourceProviders/{resourceProviderName}/locations/{location}/groupQuotaRequests": {
       "get": {
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -993,10 +999,10 @@
             "$ref": "#/parameters/ResourceProviderName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "#/parameters/FilterResourceAndLocationInQuery"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1015,7 +1021,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocations": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/resourceProviders/{resourceProvider}/locations/{location}/quotaAllocations": {
       "get": {
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -1042,10 +1048,13 @@
             "$ref": "#/parameters/GroupQuotaName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ResourceProviderName"
           },
           {
-            "$ref": "#/parameters/FilterLocationInQuery"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1064,7 +1073,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocations/{resourceName}": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/subscriptions/{subscriptionId}/providers/Mocrosoft.Quota/resourceProviders/{resourceProviderName}/locations/{location}/quotaAllocations/{resourceName}": {
       "get": {
         "tags": [
           "SubscriptionQuotaAllocation"
@@ -1082,19 +1091,22 @@
             "$ref": "#/parameters/ManagementGroupId"
           },
           {
+            "$ref": "#/parameters/GroupQuotaName"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/GroupQuotaName"
+            "$ref": "#/parameters/ResourceProviderName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "$ref": "#/parameters/ResourceName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/FilterLocationInQuery"
           }
         ],
         "responses": {
@@ -1113,7 +1125,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/quotaAllocationRequests/{allocationId}": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/subscriptions/{subscriptionId}/quotaAllocationRequests/{allocationId}": {
       "get": {
         "tags": [
           "SubscriptionQuotaAllocationRequest"
@@ -1159,7 +1171,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/quotaAllocationRequests": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/subscriptions/{subscriptionId}/providers/Mocrosoft.Quota/resourceProviders/{resourceProviderName}/locations/{location}/quotaAllocationRequests": {
       "get": {
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -1189,10 +1201,10 @@
             "$ref": "#/parameters/ResourceProviderName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "#/parameters/FilterLocationInQuery"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1211,7 +1223,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/subscriptions/{subscriptionId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/quotaAllocationRequests/{resourceName}": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/subscriptions/{subscriptionId}/providers/Mocrosoft.Quota/resourceProviders/{resourceProviderName}/locations/{location}/quotaAllocationRequests/{resourceName}": {
       "put": {
         "tags": [
           "SubscriptionQuotaAllocationRequest"
@@ -1233,13 +1245,16 @@
             "$ref": "#/parameters/ManagementGroupId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/GroupQuotaName"
           },
           {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
             "$ref": "#/parameters/ResourceProviderName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "$ref": "#/parameters/ResourceName"
@@ -1314,13 +1329,16 @@
             "$ref": "#/parameters/ManagementGroupId"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "#/parameters/GroupQuotaName"
           },
           {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
             "$ref": "#/parameters/ResourceProviderName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "$ref": "#/parameters/ResourceName"
@@ -1615,7 +1633,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/locationSettings": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/providers/Microsoft.Quota/resourceProviders/{resourceProviderName}/locationSettings": {
       "get": {
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
