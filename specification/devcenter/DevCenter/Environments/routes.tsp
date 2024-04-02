@@ -90,29 +90,29 @@ interface Environments {
   @patch
   @added(APIVersions.v2024_02_01)
   patchEnvironment is Azure.Core.Foundations.Operation<
-  {
-    @doc("The DevCenter Project upon which to execute operations.")
-    @path
-    projectName: string;
+    {
+      @doc("The DevCenter Project upon which to execute operations.")
+      @path
+      projectName: string;
 
-    @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
-    @path
-    userId: string;
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+      @path
+      userId: string;
 
-    @doc("The name of the environment.")
-    @path
-    environmentName: string;
+      @doc("The name of the environment.")
+      @path
+      environmentName: string;
 
-    @doc("Represents an environment.")
-    @body
-    body: Environment;
-  },
-  {
-    @statusCode
-    statusCode: 200;
+      @doc("Represents an environment.")
+      @body
+      body: Environment;
+    },
+    {
+      @statusCode
+      statusCode: 200;
 
-    @body body: Environment;
-  }
+      @body body: Environment;
+    }
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
@@ -226,7 +226,8 @@ interface Environments {
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       operationId: string;
-    }, string | {
+    },
+    string | {
       @statusCode
       statusCode: 200;
     }
