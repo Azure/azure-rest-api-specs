@@ -268,15 +268,6 @@
           "204": {
             "description": "Successfully deleted web app."
           },
-          "202": {
-            "description": "Asynchronous operation in progress.",
-            "headers": {
-              "location": {
-                "description": "location header",
-                "type": "string"
-              }
-            }
-          },
           "404": {
             "description": "Web app not found.",
             "x-ms-error-response": true
@@ -292,8 +283,7 @@
           "Delete Web app": {
             "$ref": "./examples/DeleteWebApp.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "patch": {
         "tags": [
@@ -353,8 +343,7 @@
           "Update web app": {
             "$ref": "./examples/UpdateWebApp.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/analyzeCustomHostname": {
@@ -1145,15 +1134,6 @@
               "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
             }
           },
-          "202": {
-            "description": "Asynchronous operation in progress.",
-            "headers": {
-              "location": {
-                "description": "location header",
-                "type": "string"
-              }
-            }
-          },
           "default": {
             "description": "App Service error response.",
             "schema": {
@@ -1165,8 +1145,7 @@
           "Update App Settings": {
             "$ref": "./examples/UpdateAppSettings.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/appsettings/list": {
@@ -1934,23 +1913,13 @@
               "$ref": "#/definitions/ConnectionStringDictionary"
             }
           },
-          "202": {
-            "description": "Asynchronous operation in progress.",
-            "headers": {
-              "location": {
-                "description": "location header",
-                "type": "string"
-              }
-            }
-          },
           "default": {
             "description": "App Service error response.",
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/connectionstrings/list": {
@@ -2493,15 +2462,6 @@
               "$ref": "#/definitions/SiteConfigResource"
             }
           },
-          "202": {
-            "description": "Asynchronous operation in progress.",
-            "headers": {
-              "location": {
-                "description": "location header",
-                "type": "string"
-              }
-            }
-          },
           "default": {
             "description": "App Service error response.",
             "schema": {
@@ -2513,8 +2473,7 @@
           "Update Site Config": {
             "$ref": "./examples/UpdateSiteConfig.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "patch": {
         "tags": [
@@ -2557,23 +2516,13 @@
               "$ref": "#/definitions/SiteConfigResource"
             }
           },
-          "202": {
-            "description": "Asynchronous operation in progress.",
-            "headers": {
-              "location": {
-                "description": "location header",
-                "type": "string"
-              }
-            }
-          },
           "default": {
             "description": "App Service error response.",
             "schema": {
               "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/web/snapshots": {
