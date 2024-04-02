@@ -84,9 +84,36 @@ interface Environments {
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard operations produce wrong swagger"
   @doc("Partially updates an environment.")
+  @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
+  @patch
   @added(APIVersions.v2024_02_01)
-  patchEnvironment is StandardResourceOperations.ResourceUpdate<Environment>;
+  patchEnvironment is Azure.Core.Foundations.Operation<
+  {
+    @doc("The DevCenter Project upon which to execute operations.")
+    @path
+    projectName: string;
+
+    @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+    @path
+    userId: string;
+
+    @doc("The name of the environment.")
+    @path
+    environmentName: string;
+
+    @doc("Represents an environment.")
+    @body
+    body: Environment;
+  },
+  {
+    @statusCode
+    statusCode: 200;
+
+    @body body: Environment;
+  }
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
   //Can not use LongRunningResourceDelete because response is 202 or error, but we also accept 204 response"
