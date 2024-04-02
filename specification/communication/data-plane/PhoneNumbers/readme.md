@@ -26,15 +26,15 @@ These are the global settings for the communicationservices.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-preview-2024-04
+tag: package-phonenumber-2024-04-30-preview
 ```
 
 
-### Tag: package-preview-2024-04
+### Tag: package-phonenumber-2024-04-30-preview
 
-These settings apply only when `--tag=package-preview-2024-04` is specified on the command line.
+These settings apply only when `--tag=package-phonenumber-2024-04-30-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-04'
+```yaml $(tag) == 'package-phonenumber-2024-04-30-preview'
 input-file:
   - preview/2024-04-30-preview/phonenumbers.json
 ```
