@@ -199,7 +199,7 @@ interface Environments {
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       operationId: string;
-    }, | {
+    }, string | {
       @statusCode
       statusCode: 200;
     }

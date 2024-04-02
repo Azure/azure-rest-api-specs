@@ -903,6 +903,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Lists Dev Boxes in the project for a particular user.": {
+            "$ref": "./examples/DevBoxes_ListDevBoxesByUser.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2825,7 +2830,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
