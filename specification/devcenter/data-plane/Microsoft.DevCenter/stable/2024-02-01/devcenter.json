@@ -893,11 +893,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Lists Dev Boxes for a particular user.": {
-            "$ref": "./examples/DevBoxes_ListDevBoxesByUser.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1183,6 +1178,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Starts a Dev Box.": {
+            "$ref": "./examples/DevBoxes_StartDevBox.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -1259,6 +1259,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Stops a Dev Box.": {
+            "$ref": "./examples/DevBoxes_StopDevBox.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -1328,6 +1333,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Restarts a Dev Box.": {
+            "$ref": "./examples/DevBoxes_RestartDevBox.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -1395,6 +1405,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Attempts automated repair steps to resolve common problems on a Dev Box. The Dev Box may restart during this operation.": {
+            "$ref": "./examples/DevBoxes_RepairDevBox.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -3654,7 +3669,8 @@
         "uri": {
           "type": "string",
           "format": "uri",
-          "description": "The unique URI of the environment."
+          "description": "The unique URI of the environment.",
+          "readOnly": true
         },
         "name": {
           "type": "string",
@@ -4267,11 +4283,6 @@
           "type": "object",
           "description": "Parameters object for the environment.",
           "additionalProperties": {}
-        },
-        "uri": {
-          "type": "string",
-          "format": "uri",
-          "description": "The unique URI of the environment."
         }
       }
     },

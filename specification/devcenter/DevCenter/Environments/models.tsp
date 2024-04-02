@@ -148,6 +148,7 @@ model Environment {
   ...EnvironmentUpdateProperties;
 
   @doc("The unique URI of the environment.")
+  @visibility("read")
   @added(APIVersions.v2024_02_01)
   uri: url;
 

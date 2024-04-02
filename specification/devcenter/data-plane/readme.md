@@ -36,9 +36,7 @@ These settings apply only when `--tag=package-2024-02-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2024-02-01'
 input-file:
-  - Microsoft.DevCenter/stable/2024-02-01/devbox.json
   - Microsoft.DevCenter/stable/2024-02-01/devcenter.json
-  - Microsoft.DevCenter/stable/2024-02-01/environments.json
 
 directive:
   - suppress: HostParametersValidation
