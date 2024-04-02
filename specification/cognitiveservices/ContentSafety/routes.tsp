@@ -400,12 +400,17 @@ interface TextIncidentOperation {
   @summary("Deploy Text Incident Operation")
   @doc("Deploy text incident operation.")
   deploy is TextIncidentOperationsOps.LongRunningResourceAction<
-  TextIncident,
-  IncidentOperationIdOptions,
-  {
+    TextIncident,
+    IncidentOperationIdOptions,
+    {
       @statusCode
       statusCode: 202;
-  }
+
+      @doc("The operation id passed by the user, if not provided, will be automatically generated as a UUID.")
+      @header("Operation-Id")
+      @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
+      operationId?: string;
+    }
   >;
 
   @summary("Get Text Incident Operation By OperationId")
@@ -423,12 +428,17 @@ interface ImageIncidentOperation {
   @summary("Deploy Image incident Operation")
   @doc("Deploy image incident operation.")
   deploy is ImageIncidentOperationsOps.LongRunningResourceAction<
-  ImageIncident,
-  IncidentOperationIdOptions,
-  {
+    ImageIncident,
+    IncidentOperationIdOptions,
+    {
       @statusCode
       statusCode: 202;
-  }
+
+      @doc("The operation id passed by the user, if not provided, will be automatically generated as a UUID.")
+      @header("Operation-Id")
+      @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
+      operationId?: string;
+    }
   >;
 
   @summary("Get Image Incident Operation By OperationId")

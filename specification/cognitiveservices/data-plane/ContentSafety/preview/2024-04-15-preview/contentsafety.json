@@ -384,6 +384,11 @@
                 "type": "string",
                 "format": "uri",
                 "description": "The location for monitoring the operation state."
+              },
+              "Operation-Id": {
+                "type": "string",
+                "description": "The operation id passed by the user, if not provided, will be automatically generated as a UUID.",
+                "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
               }
             }
           },
@@ -1561,6 +1566,11 @@
                 "type": "string",
                 "format": "uri",
                 "description": "The location for monitoring the operation state."
+              },
+              "Operation-Id": {
+                "type": "string",
+                "description": "The operation id passed by the user, if not provided, will be automatically generated as a UUID.",
+                "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
               }
             }
           },
@@ -3662,6 +3672,7 @@
       "description": "The operation id passed by the user, if not provided, will be automatically generated as a UUID.",
       "required": false,
       "type": "string",
+      "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "operationId"
     }

@@ -550,7 +550,7 @@ union IncidentOperationStatus {
   "Running",
   "Succeeded",
   "Failed",
-  "Canceled"
+  "Canceled",
 }
 
 @added(ContentSafety.Versions.v2024_04_15_Preview)
@@ -758,7 +758,8 @@ model ImageIncidentOperationResult {
 @added(ContentSafety.Versions.v2024_04_15_Preview)
 @doc("Incident operation id options.")
 model IncidentOperationIdOptions {
-    @doc("The operation id passed by the user, if not provided, will be automatically generated as a UUID.")
-    @header("Operation-Id")
-    operationId?: string;
+  @doc("The operation id passed by the user, if not provided, will be automatically generated as a UUID.")
+  @header("Operation-Id")
+  @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
+  operationId?: string;
 }
