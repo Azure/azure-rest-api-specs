@@ -8,19 +8,14 @@ using TypeSpec.Versioning;
 
 namespace ModelClient;
 
-@doc("""
-The configuration information for an embeddings request.
-Embeddings measure the relatedness of text strings and are commonly used for search, clustering,
-recommendations, and other similar scenarios.
-""")
-model EmbeddingsOptions {
+alias EmbeddingsOptions = {
   @doc("Input texts to get embeddings for, encoded as a an array of strings.")
   input: string[];
 
   @doc("Specifies the input type to use for embedding search.")
   @encodedName("application/json", "input_type")
   inputType?: EmbeddingInputType = EmbeddingInputType.text;
-}
+};
 
 @doc("""
 Representation of the response data from an embeddings request.

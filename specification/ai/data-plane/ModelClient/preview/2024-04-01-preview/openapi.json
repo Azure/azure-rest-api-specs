@@ -46,7 +46,7 @@
                 {
                   "name": "error",
                   "value": "error",
-                  "description": "The service should error when it sees unknown parameters in the request payload. This is the default behaviour if the service."
+                  "description": "The service should error when it sees unknown parameters in the request payload. This is the default behavior if the service."
                 },
                 {
                   "name": "ignore",
@@ -65,18 +65,104 @@
           {
             "name": "azureml-model-deployment",
             "in": "header",
-            "description": "Name of the deployment to which you would like to route the request. Relevant only to Model-as-a-Platform (MaaP) deployments.\nTypically used when you want to target a test enviroment instead of production enviroment.",
+            "description": "Name of the deployment to which you would like to route the request. Relevant only to Model-as-a-Platform (MaaP) deployments.\nTypically used when you want to target a test environment instead of production environment.",
             "required": false,
             "type": "string",
             "x-ms-client-name": "modelDeployment"
           },
           {
-            "name": "chatCompletionsOptions",
+            "name": "body",
             "in": "body",
-            "description": "The JSON payload containing chat completion options.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ChatCompletionsOptions"
+              "type": "object",
+              "properties": {
+                "messages": {
+                  "type": "array",
+                  "description": "The collection of context messages associated with this chat completions request.\nTypical usage begins with a chat message for the System role that provides instructions for\nthe behavior of the assistant, followed by alternating messages between the User and\nAssistant roles.",
+                  "minItems": 1,
+                  "items": {
+                    "$ref": "#/definitions/ChatRequestMessage"
+                  },
+                  "x-ms-identifiers": []
+                },
+                "frequency_penalty": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "A value that influences the probability of generated tokens appearing based on their cumulative\nfrequency in generated text.\nPositive values will make tokens less likely to appear as their frequency increases and\ndecrease the likelihood of the model repeating the same statements verbatim.",
+                  "default": 0,
+                  "minimum": -2,
+                  "maximum": 2
+                },
+                "presence_penalty": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "A value that influences the probability of generated tokens appearing based on their existing\npresence in generated text.\nPositive values will make tokens less likely to appear when they already exist and increase the\nmodel's likelihood to output new topics.",
+                  "default": 0,
+                  "minimum": -2,
+                  "maximum": 2
+                },
+                "temperature": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "The sampling temperature to use that controls the apparent creativity of generated completions.\nHigher values will make output more random while lower values will make results more focused\nand deterministic.\nIt is not recommended to modify temperature and top_p for the same completions request as the\ninteraction of these two settings is difficult to predict.",
+                  "default": 0.7,
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "top_p": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "An alternative to sampling with temperature called nucleus sampling. This value causes the\nmodel to consider the results of tokens with the provided probability mass. As an example, a\nvalue of 0.15 will cause only the tokens comprising the top 15% of probability mass to be\nconsidered.\nIt is not recommended to modify temperature and top_p for the same completions request as the\ninteraction of these two settings is difficult to predict.",
+                  "default": 1,
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "max_tokens": {
+                  "type": "integer",
+                  "format": "int32",
+                  "description": "The maximum number of tokens to generate.",
+                  "minimum": 0
+                },
+                "response_format": {
+                  "$ref": "#/definitions/ChatCompletionsResponseFormat",
+                  "description": "An object specifying the format that the model must output. Used to enable JSON mode."
+                },
+                "stop": {
+                  "type": "array",
+                  "description": "A collection of textual sequences that will end completions generation.",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "stream": {
+                  "type": "boolean",
+                  "description": "A value indicating whether chat completions should be streamed for this request.",
+                  "default": false
+                },
+                "tools": {
+                  "type": "array",
+                  "description": "The available tool definitions that the chat completions request can use, including caller-defined functions.",
+                  "minItems": 1,
+                  "items": {
+                    "$ref": "#/definitions/ChatCompletionsToolDefinition"
+                  },
+                  "x-ms-identifiers": []
+                },
+                "tool_choice": {
+                  "description": "If specified, the model will configure which of the provided tools it can use for the chat completions response.",
+                  "x-ms-client-name": "toolChoice"
+                },
+                "seed": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "If specified, the system will make a best effort to sample deterministically such that repeated requests with the\nsame seed and parameters should return the same result. Determinism is not guaranteed, and you should refer to the\nsystem_fingerprint response parameter to monitor changes in the backend.\""
+                }
+              },
+              "required": [
+                "messages"
+              ]
             }
           }
         ],
@@ -136,7 +222,7 @@
                 {
                   "name": "error",
                   "value": "error",
-                  "description": "The service should error when it sees unknown parameters in the request payload. This is the default behaviour if the service."
+                  "description": "The service should error when it sees unknown parameters in the request payload. This is the default behavior if the service."
                 },
                 {
                   "name": "ignore",
@@ -155,18 +241,61 @@
           {
             "name": "azureml-model-deployment",
             "in": "header",
-            "description": "Name of the deployment to which you would like to route the request. Relevant only to Model-as-a-Platform (MaaP) deployments.\nTypically used when you want to target a test enviroment instead of production enviroment.",
+            "description": "Name of the deployment to which you would like to route the request. Relevant only to Model-as-a-Platform (MaaP) deployments.\nTypically used when you want to target a test environment instead of production environment.",
             "required": false,
             "type": "string",
             "x-ms-client-name": "modelDeployment"
           },
           {
-            "name": "embeddingsOptions",
+            "name": "body",
             "in": "body",
-            "description": "The JSON payload containing embedding options.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EmbeddingsOptions"
+              "type": "object",
+              "properties": {
+                "input": {
+                  "type": "array",
+                  "description": "Input texts to get embeddings for, encoded as a an array of strings.",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "input_type": {
+                  "type": "string",
+                  "description": "Specifies the input type to use for embedding search.",
+                  "default": "text",
+                  "enum": [
+                    "text",
+                    "query",
+                    "document"
+                  ],
+                  "x-ms-enum": {
+                    "name": "EmbeddingInputType",
+                    "modelAsString": true,
+                    "values": [
+                      {
+                        "name": "text",
+                        "value": "text",
+                        "description": "to do"
+                      },
+                      {
+                        "name": "query",
+                        "value": "query",
+                        "description": "to do"
+                      },
+                      {
+                        "name": "document",
+                        "value": "document",
+                        "description": "to do"
+                      }
+                    ]
+                  },
+                  "x-ms-client-name": "inputType"
+                }
+              },
+              "required": [
+                "input"
+              ]
             }
           }
         ],
@@ -392,97 +521,6 @@
       "discriminator": "type",
       "required": [
         "type"
-      ]
-    },
-    "ChatCompletionsOptions": {
-      "type": "object",
-      "description": "The configuration information for a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
-      "properties": {
-        "messages": {
-          "type": "array",
-          "description": "The collection of context messages associated with this chat completions request.\nTypical usage begins with a chat message for the System role that provides instructions for\nthe behavior of the assistant, followed by alternating messages between the User and\nAssistant roles.",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/definitions/ChatRequestMessage"
-          },
-          "x-ms-identifiers": []
-        },
-        "frequency_penalty": {
-          "type": "number",
-          "format": "float",
-          "description": "A value that influences the probability of generated tokens appearing based on their cumulative\nfrequency in generated text.\nPositive values will make tokens less likely to appear as their frequency increases and\ndecrease the likelihood of the model repeating the same statements verbatim.",
-          "default": 0,
-          "minimum": -2,
-          "maximum": 2
-        },
-        "presence_penalty": {
-          "type": "number",
-          "format": "float",
-          "description": "A value that influences the probability of generated tokens appearing based on their existing\npresence in generated text.\nPositive values will make tokens less likely to appear when they already exist and increase the\nmodel's likelihood to output new topics.",
-          "default": 0,
-          "minimum": -2,
-          "maximum": 2
-        },
-        "temperature": {
-          "type": "number",
-          "format": "float",
-          "description": "The sampling temperature to use that controls the apparent creativity of generated completions.\nHigher values will make output more random while lower values will make results more focused\nand deterministic.\nIt is not recommended to modify temperature and top_p for the same completions request as the\ninteraction of these two settings is difficult to predict.",
-          "default": 0.7,
-          "minimum": 0,
-          "maximum": 1
-        },
-        "top_p": {
-          "type": "number",
-          "format": "float",
-          "description": "An alternative to sampling with temperature called nucleus sampling. This value causes the\nmodel to consider the results of tokens with the provided probability mass. As an example, a\nvalue of 0.15 will cause only the tokens comprising the top 15% of probability mass to be\nconsidered.\nIt is not recommended to modify temperature and top_p for the same completions request as the\ninteraction of these two settings is difficult to predict.",
-          "default": 1,
-          "minimum": 0,
-          "maximum": 1
-        },
-        "max_tokens": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of tokens to generate.",
-          "minimum": 0
-        },
-        "response_format": {
-          "$ref": "#/definitions/ChatCompletionsResponseFormat",
-          "description": "An object specifying the format that the model must output. Used to enable JSON mode."
-        },
-        "stop": {
-          "type": "array",
-          "description": "A collection of textual sequences that will end completions generation.",
-          "minItems": 1,
-          "items": {
-            "type": "string"
-          }
-        },
-        "stream": {
-          "type": "boolean",
-          "description": "A value indicating whether chat completions should be streamed for this request.",
-          "default": false
-        },
-        "tools": {
-          "type": "array",
-          "description": "The available tool definitions that the chat completions request can use, including caller-defined functions.",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/definitions/ChatCompletionsToolDefinition"
-          },
-          "x-ms-identifiers": []
-        },
-        "tool_choice": {
-          "description": "If specified, the model will configure which of the provided tools it can use for the chat completions response.",
-          "x-ms-client-name": "toolChoice"
-        },
-        "seed": {
-          "type": "integer",
-          "format": "int64",
-          "description": "If specified, the system will make a best effort to sample deterministically such that repeated requests with the\nsame seed and parameters should return the same result. Determinism is not guaranteed, and you should refer to the\nsystem_fingerprint response parameter to monitor changes in the backend.\""
-        }
-      },
-      "required": [
-        "messages"
       ]
     },
     "ChatCompletionsResponseFormat": {
@@ -841,54 +879,6 @@
         "object"
       ]
     },
-    "EmbeddingsOptions": {
-      "type": "object",
-      "description": "The configuration information for an embeddings request.\nEmbeddings measure the relatedness of text strings and are commonly used for search, clustering,\nrecommendations, and other similar scenarios.",
-      "properties": {
-        "input": {
-          "type": "array",
-          "description": "Input texts to get embeddings for, encoded as a an array of strings.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "input_type": {
-          "type": "string",
-          "description": "Specifies the input type to use for embedding search.",
-          "default": "text",
-          "enum": [
-            "text",
-            "query",
-            "document"
-          ],
-          "x-ms-enum": {
-            "name": "EmbeddingInputType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "text",
-                "value": "text",
-                "description": "to do"
-              },
-              {
-                "name": "query",
-                "value": "query",
-                "description": "to do"
-              },
-              {
-                "name": "document",
-                "value": "document",
-                "description": "to do"
-              }
-            ]
-          },
-          "x-ms-client-name": "inputType"
-        }
-      },
-      "required": [
-        "input"
-      ]
-    },
     "EmbeddingsResult": {
       "type": "object",
       "description": "Representation of the response data from an embeddings request.\nEmbeddings measure the relatedness of text strings and are commonly used for search, clustering,\nrecommendations, and other similar scenarios.",
@@ -988,7 +978,7 @@
     },
     "UnknownParameters": {
       "type": "string",
-      "description": "Defines the service behaviour when unknown parameters are passed as extra properties in the request payload.",
+      "description": "Defines the service behavior when unknown parameters are passed as extra properties in the request payload.",
       "enum": [
         "error",
         "ignore",
@@ -1001,7 +991,7 @@
           {
             "name": "error",
             "value": "error",
-            "description": "The service should error when it sees unknown parameters in the request payload. This is the default behaviour if the service."
+            "description": "The service should error when it sees unknown parameters in the request payload. This is the default behavior if the service."
           },
           {
             "name": "ignore",

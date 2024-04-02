@@ -8,18 +8,13 @@ using TypeSpec.Versioning;
 
 namespace ModelClient;
 
-@doc("""
-The configuration information for a chat completions request.
-Completions support a wide variety of tasks and generate text that continues from or "completes"
-provided prompt data.
-""")
-model ChatCompletionsOptions {
+alias ChatCompletionsOptions = {
   @doc("""
-    The collection of context messages associated with this chat completions request.
-    Typical usage begins with a chat message for the System role that provides instructions for
-    the behavior of the assistant, followed by alternating messages between the User and
-    Assistant roles.
-    """)
+  The collection of context messages associated with this chat completions request.
+  Typical usage begins with a chat message for the System role that provides instructions for
+  the behavior of the assistant, followed by alternating messages between the User and
+  Assistant roles.
+  """)
   @minItems(1)
   messages: ChatRequestMessage[];
 
@@ -100,7 +95,7 @@ model ChatCompletionsOptions {
   system_fingerprint response parameter to monitor changes in the backend."
   """)
   seed?: int64;
-}
+};
 
 @doc("""
 Representation of the response data from a chat completions request.
