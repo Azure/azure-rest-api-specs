@@ -4,16 +4,14 @@ using Azure.Core.Traits;
 
 namespace AzureHealthInsights;
 
-@trait("HealthInsightsRetryAfterTrait")
-@doc("Health Insights retry after trait")
-model HealthInsightsRetryAfterTrait {
-  @traitContext(TraitContext.Read)
-  @doc("The retry-after header.")
-  retryAfter: {
-    @traitLocation(TraitLocation.Response)
-    response: Foundations.RetryAfterHeader;
-  };
-}
+alias HealthInsightsRetryAfterTrait = ResponseHeadersTrait<Foundations.RetryAfterHeader, TraitContext.Read>;
+
+//   Note: I cannot use the following alias because of a bug in the compiler
+//   Using it return: "error intersect-duplicate-property: Intersection contains duplicate property definitions for responseHeaders"
+//   I can't use it like that: ResponseHeadersTrait<RequestIdResponseHeader & Foundations.RetryAfterHeader>;
+//   because then both traits will get the same context which is not the desired behavior.
+// alias RequestIdResponseHeaderTrait = ResponseHeadersTrait<RequestIdResponseHeader>;
+/////////////////////
 @doc("Provides the 'x-ms-request-id' header to enable request correlation in responses.")
 @trait("RequestIdResponseHeader")
 model RequestIdResponseHeaderTrait {
