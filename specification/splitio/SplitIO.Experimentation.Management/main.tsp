@@ -116,7 +116,7 @@ interface ExperimentationWorkspaces {
     ExperimentationWorkspace,
     ExperimentationWorkspaceProperties
   >;
-  delete is ArmResourceDeleteAsync<ExperimentationWorkspace>;
+  delete is ArmResourceDeleteWithoutOkAsync<ExperimentationWorkspace>;
   listByResourceGroup is ArmResourceListByParent<ExperimentationWorkspace>;
   listBySubscription is ArmListBySubscription<ExperimentationWorkspace>;
 }
