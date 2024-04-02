@@ -137,10 +137,6 @@ model ExchangeTokenResult {
   @visibility("read")
   @secret
   token: string;
-
-  @doc("The error message if exchange token fails.")
-  @visibility("read")
-  message?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Need to remove autoroute"
