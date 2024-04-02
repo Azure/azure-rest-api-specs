@@ -15,3 +15,17 @@ suppressions:
         - Parameter domain_name of model EndpointDependency is now required
         - Parameter id of model CheckQuotaAvailabilityResponse is now required
         - Parameter type of model CheckQuotaAvailabilityResponse is now required
+  azure-sdk-for-go:
+    - package: 'sdk/resourcemanager/loadtesting/armloadtesting'
+      breaking-changes:
+        - Field `ID`, `Name`, `SystemData`, `Type` of struct `QuotaBucketRequest` has been removed
+        - Field `LoadTestResourcePageList` of struct `LoadTestsClientListByResourceGroupResponse` has been removed
+        - Field `LoadTestResourcePageList` of struct `LoadTestsClientListBySubscriptionResponse` has been removed
+        - Field `OutboundEnvironmentEndpointCollection` of struct `LoadTestsClientListOutboundNetworkDependenciesEndpointsResponse` has been removed
+        - Field `QuotaResourceList` of struct `QuotasClientListResponse` has been removed
+        - Function `*LoadTestsClient.BeginUpdate` parameter(s) have been changed from `(context.Context, string, string, LoadTestResourcePatchRequestBody, *LoadTestsClientBeginUpdateOptions)` to `(context.Context, string, string, LoadTestResourceUpdate, *LoadTestsClientBeginUpdateOptions)`
+        - Struct `LoadTestResourcePageList` has been removed
+        - Struct `LoadTestResourcePatchRequestBodyProperties` has been removed
+        - Struct `LoadTestResourcePatchRequestBody` has been removed
+        - Struct `OutboundEnvironmentEndpointCollection` has been removed
+        - Struct `QuotaResourceList` has been removed
