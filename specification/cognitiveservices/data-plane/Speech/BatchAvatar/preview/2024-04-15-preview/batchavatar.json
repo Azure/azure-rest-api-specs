@@ -257,9 +257,15 @@
             }
           },
           "default": {
-            "description": "Error encountered.",
+            "description": "An error occurred.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
             }
           }
         },
