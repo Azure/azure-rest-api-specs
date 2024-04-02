@@ -17,7 +17,7 @@ using Azure.ResourceManager;
 })
 @doc("LoadTest client provides access to LoadTest Resource and it's status operations.")
 @versioned(APIVersions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.LoadTestService;
 
 @doc("The Loadtest service resource manager version.")
