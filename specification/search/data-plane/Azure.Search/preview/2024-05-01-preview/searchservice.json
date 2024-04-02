@@ -3134,6 +3134,24 @@
         "url": "http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html#field_summary"
       }
     },
+    "VectorEncodingFormat": {
+      "type": "string",
+      "enum": [
+        "packedBit"
+      ],
+      "x-ms-enum": {
+        "name": "VectorEncodingFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "packedBit",
+            "name": "PackedBit",
+            "description": "Encoding format representing bits packed into a wider data type."
+          }
+        ]
+      },
+      "description": "The encoding format for interpreting vector field contents."
+    },
     "SearchFieldDataType": {
       "type": "string",
       "enum": [
@@ -3148,7 +3166,8 @@
         "Edm.Single",
         "Edm.Half",
         "Edm.Int16",
-        "Edm.SByte"
+        "Edm.SByte",
+        "Edm.Byte"
       ],
       "x-ms-enum": {
         "name": "SearchFieldDataType",
@@ -3213,6 +3232,11 @@
             "value": "Edm.SByte",
             "name": "SByte",
             "description": "Indicates that a field contains a 8-bit signed integer. This is only valid when used with Collection(Edm.SByte)."
+          },
+          {
+            "value": "Edm.Byte",
+            "name": "Byte",
+            "description": "Indicates that a field contains a 8-bit unsigned integer. This is only valid when used with Collection(Edm.Byte)."
           }
         ]
       },
@@ -6337,7 +6361,8 @@
       "enum": [
         "cosine",
         "euclidean",
-        "dotProduct"
+        "dotProduct",
+        "hamming"
       ],
       "x-ms-enum": {
         "name": "VectorSearchAlgorithmMetric",
@@ -6345,19 +6370,27 @@
         "values": [
           {
             "value": "cosine",
-            "name": "Cosine"
+            "name": "Cosine",
+            "description": "Measures the angle between vectors to quantify their similarity, disregarding magnitude. The smaller the angle, the closer the similarity."
           },
           {
             "value": "euclidean",
-            "name": "Euclidean"
+            "name": "Euclidean",
+            "description": "Computes the straight-line distance between vectors in a multi-dimensional space. The smaller the distance, the closer the similarity."
           },
           {
             "value": "dotProduct",
-            "name": "DotProduct"
+            "name": "DotProduct",
+            "description": "Calculates the sum of element-wise products to gauge alignment and magnitude similarity. The larger and more positive, the closer the similarity."
+          },
+          {
+            "value": "hamming",
+            "name": "Hamming",
+            "description": "Only applicable to binary-derived data types. Determines dissimilarity by counting differing positions in binary vectors. The fewer differences, the closer the similarity."
           }
         ]
       },
-      "description": "The similarity metric to use for vector comparisons."
+      "description": "The similarity metric to use for vector comparisons. It is recommended to choose the same similarity metric as the embedding model was trained on."
     },
     "VectorSearchAlgorithmKind": {
       "type": "string",
@@ -7959,6 +7992,12 @@
           "type": "string",
           "x-nullable": true,
           "description": "The name of the vector search profile that specifies the algorithm and vectorizer to use when searching the vector field."
+        },
+        "vectorEncoding": {
+          "x-ms-client-name": "VectorEncodingFormat",
+          "$ref": "#/definitions/VectorEncodingFormat",
+          "description": "The encoding format to interpret the field contents.",
+          "x-nullable": true
         },
         "synonymMaps": {
           "externalDocs": {
