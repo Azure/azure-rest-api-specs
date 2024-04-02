@@ -119,7 +119,7 @@ model RunStepCodeInterpreterToolCall extends RunStepToolCall {
   @doc("The object type, which is always 'code_interpreter'.")
   type: "code_interpreter";
 
-  @projectedName("json", "code_interpreter")
+  @encodedName("application/json", "code_interpreter")
   @doc("The details of the tool call to the code interpreter tool.")
   codeInterpreter: RunStepCodeInterpreterToolCallDetails;
 }
@@ -195,7 +195,7 @@ model RunStepCodeInterpreterImageOutput
 @doc("An image reference emitted by a code interpreter tool in response to a tool call by the model.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model RunStepCodeInterpreterImageReference {
-  @projectedName("json", "file_id")
+  @encodedName("application/json", "file_id")
   @doc("The ID of the file associated with this image.")
   fileId: string;
 }
@@ -224,7 +224,7 @@ model RunStepFunctionToolCallDetails {
 @added(ServiceApiVersions.v2024_02_15_preview)
 model ToolOutput {
   @doc("The ID of the tool call being resolved, as provided in the tool calls of a required action from a run.")
-  @projectedName("json", "tool_call_id")
+  @encodedName("application/json", "tool_call_id")
   toolCallId?: string;
 
   @doc("The output from the tool to be submitted.")

@@ -9,18 +9,20 @@ import "./common.tsp";
 namespace Microsoft.ManagedCcf.Transactions;
 
 @doc("Possible states for a CCF transaction. See docs for details: https://microsoft.github.io/CCF/main/use_apps/verify_tx.html#checking-for-commit")
-enum TransactionStatus {
+union TransactionStatus {
+  string,
+
   @doc("This is not a transaction the current node knows, but could exist in future. This may be returned when a transaction is created on one node then immediately queried on another, before it has been replicated.")
-  Unknown,
+  "Unknown",
 
   @doc("This transaction is known on the current node, but has not yet been committed. This is expected to be a temporary state.")
-  Pending,
+  "Pending",
 
   @doc("This transaction is known on the current node, and known to be committed. This means it has been replicated to a quorum of nodes, so will persist through future elections. Committed is a terminal state of this state machine.")
-  Committed,
+  "Committed",
 
   @doc("This transaction ID will never commit in the current service, because it contains a different term than a known transaction with the same sequence number. This can occur for a transaction ID returned from the service (ie - which was previously Unknown or Pending), if that transaction is lost during a consensus election. This should be rare. Invalid is a terminal state of this state machine.")
-  Invalid,
+  "Invalid",
 }
 
 @doc("Common transaction information.")
