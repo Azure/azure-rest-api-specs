@@ -186,8 +186,9 @@
             "description": "The name of the ExperimentationWorkspace resource",
             "required": true,
             "type": "string",
+            "minLength": 5,
             "maxLength": 50,
-            "pattern": "^[^<>%&:\\?/#]*$"
+            "pattern": "^[a-zA-Z0-9-]*$"
           }
         ],
         "responses": {
@@ -232,8 +233,9 @@
             "description": "The name of the ExperimentationWorkspace resource",
             "required": true,
             "type": "string",
+            "minLength": 5,
             "maxLength": 50,
-            "pattern": "^[^<>%&:\\?/#]*$"
+            "pattern": "^[a-zA-Z0-9-]*$"
           },
           {
             "name": "resource",
@@ -304,8 +306,9 @@
             "description": "The name of the ExperimentationWorkspace resource",
             "required": true,
             "type": "string",
+            "minLength": 5,
             "maxLength": 50,
-            "pattern": "^[^<>%&:\\?/#]*$"
+            "pattern": "^[a-zA-Z0-9-]*$"
           },
           {
             "name": "properties",
@@ -377,8 +380,9 @@
             "description": "The name of the ExperimentationWorkspace resource",
             "required": true,
             "type": "string",
+            "minLength": 5,
             "maxLength": 50,
-            "pattern": "^[^<>%&:\\?/#]*$"
+            "pattern": "^[a-zA-Z0-9-]*$"
           }
         ],
         "responses": {
@@ -440,8 +444,9 @@
             "description": "The name of the ExperimentationWorkspace resource.",
             "required": true,
             "type": "string",
+            "minLength": 5,
             "maxLength": 50,
-            "pattern": "^[^<>%&:\\?/#]*$"
+            "pattern": "^[a-zA-Z0-9-]*$"
           },
           {
             "name": "applicationId",
@@ -491,6 +496,10 @@
           "type": "string",
           "description": "Application id used for access to the experimentation workspace."
         },
+        "defaultRole": {
+          "$ref": "#/definitions/DataPlaneRole",
+          "description": "Default roles required for data plane access."
+        },
         "dataPlaneEndpoint": {
           "type": "string",
           "description": "Endpoint used for access to the experimentation workspace.",
@@ -508,6 +517,10 @@
         "applicationId": {
           "type": "string",
           "description": "Application id used for access to the experimentation workspace."
+        },
+        "defaultRole": {
+          "$ref": "#/definitions/DataPlaneRole",
+          "description": "Default roles required for data plane access."
         }
       }
     },
@@ -537,6 +550,30 @@
             "name": "Canceled",
             "value": "Canceled",
             "description": "Resource creation was canceled."
+          }
+        ]
+      }
+    },
+    "DataPlaneRole": {
+      "type": "string",
+      "description": "Role required for data plane access.",
+      "enum": [
+        "None",
+        "ExperimentationDataOwner"
+      ],
+      "x-ms-enum": {
+        "name": "DataPlaneRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No role required for data plane access."
+          },
+          {
+            "name": "ExperimentationDataOwner",
+            "value": "ExperimentationDataOwner",
+            "description": "Owner of the experimentation data."
           }
         ]
       }

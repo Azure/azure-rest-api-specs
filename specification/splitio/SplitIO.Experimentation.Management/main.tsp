@@ -44,9 +44,20 @@ model AccessPolicy {
   @doc("Application id used for access to the experimentation workspace.")
   applicationId: string;
 
+  @doc("Default roles required for data plane access.")
+  defaultRole?: DataPlaneRole;
+
   @doc("Endpoint used for access to the experimentation workspace.")
   @visibility("read")
   dataPlaneEndpoint?: string;
+}
+
+@doc("Role required for data plane access.")
+enum DataPlaneRole {
+  @doc("No role required for data plane access.")
+  None,
+  @doc("Owner of the experimentation data.")
+  ExperimentationDataOwner
 }
 
 @doc("Data source that telemetry data required for experimentation will be retrieved from.")
@@ -85,8 +96,9 @@ model LogAnalytics {
 model ExperimentationWorkspace
   is TrackedResource<ExperimentationWorkspaceProperties> {
   @key("workspaceName")
-  @pattern("^[^<>%&:\\?/#]*$")
   @segment("experimentationWorkspaces")
+  @pattern("^[a-zA-Z0-9-]*$")
+  @minLength(5)
   @maxLength(50)
   @doc("The name of the ExperimentationWorkspace resource")
   @path
@@ -146,7 +158,8 @@ interface DataPlaneApplications {
 
     @doc("The name of the ExperimentationWorkspace resource.")
     @path
-    @pattern("^[^<>%&:\\?/#]*$")
+    @pattern("^[a-zA-Z0-9-]*$")
+    @minLength(5)
     @maxLength(50)
     workspaceName: string,
 
