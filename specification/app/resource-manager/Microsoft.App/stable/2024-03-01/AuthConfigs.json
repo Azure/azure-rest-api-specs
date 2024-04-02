@@ -285,6 +285,10 @@
             "httpSettings": {
               "$ref": "#/definitions/HttpSettings",
               "description": "The configuration settings of the HTTP requests for authentication and authorization requests made against ContainerApp Service Authentication/Authorization."
+            },
+            "encryptionSettings": {
+              "$ref": "#/definitions/EncryptionSettings",
+              "description": "The configuration settings of the secrets references of encryption key and signing key for ContainerApp Service Authentication/Authorization."
             }
           },
           "x-ms-client-flatten": true
@@ -354,6 +358,20 @@
         }
       }
     },
+    "EncryptionSettings": {
+      "description": "The configuration settings of the secrets references of encryption key and signing key for ContainerApp Service Authentication/Authorization.",
+      "type": "object",
+      "properties": {
+        "containerAppAuthEncryptionSecretName": {
+          "description": "The secret name which is referenced for EncryptionKey.",
+          "type": "string"
+        },
+        "containerAppAuthSigningSecretName": {
+          "description": "The secret name which is referenced for SigningKey.",
+          "type": "string"
+        }
+      }
+    },
     "HttpSettingsRoutes": {
       "description": "The configuration settings of the paths HTTP requests.",
       "type": "object",
@@ -399,6 +417,10 @@
           "$ref": "#/definitions/LoginRoutes",
           "description": "The routes that specify the endpoints used for login and logout requests."
         },
+        "tokenStore": {
+          "$ref": "#/definitions/TokenStore",
+          "description": "The configuration settings of the token store."
+        },
         "preserveUrlFragmentsForLogins": {
           "description": "<code>true</code> if the fragments from the request are preserved after the login request is made; otherwise, <code>false</code>.",
           "type": "boolean"
@@ -426,6 +448,38 @@
       "properties": {
         "logoutEndpoint": {
           "description": "The endpoint at which a logout request should be made.",
+          "type": "string"
+        }
+      }
+    },
+    "TokenStore": {
+      "description": "The configuration settings of the token store.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "<code>true</code> to durably store platform-specific security tokens that are obtained during login flows; otherwise, <code>false</code>.\n The default is <code>false</code>.",
+          "type": "boolean"
+        },
+        "tokenRefreshExtensionHours": {
+          "format": "double",
+          "description": "The number of hours after session token expiration that a session token can be used to\ncall the token refresh API. The default is 72 hours.",
+          "type": "number"
+        },
+        "azureBlobStorage": {
+          "$ref": "#/definitions/BlobStorageTokenStore",
+          "description": "The configuration settings of the storage of the tokens if blob storage is used."
+        }
+      }
+    },
+    "BlobStorageTokenStore": {
+      "description": "The configuration settings of the storage of the tokens if blob storage is used.",
+      "type": "object",
+      "required": [
+        "sasUrlSettingName"
+      ],
+      "properties": {
+        "sasUrlSettingName": {
+          "description": "The name of the app secrets containing the SAS URL of the blob storage containing the tokens.",
           "type": "string"
         }
       }

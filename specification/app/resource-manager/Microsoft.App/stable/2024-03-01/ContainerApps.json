@@ -961,6 +961,16 @@
         "corsPolicy": {
           "description": "CORS policy for container app",
           "$ref": "#/definitions/CorsPolicy"
+        },
+        "additionalPortMappings": {
+          "description": "Settings to expose additional ports on container app",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IngressPortMapping"
+          },
+          "x-ms-identifiers": [
+            "targetPort"
+          ]
         }
       }
     },
@@ -1163,6 +1173,30 @@
         "allowCredentials": {
           "description": "Specifies whether the resource allows credentials",
           "type": "boolean"
+        }
+      }
+    },
+    "IngressPortMapping": {
+      "description": "Port mappings of container app ingress",
+      "type": "object",
+      "required": [
+        "external",
+        "targetPort"
+      ],
+      "properties": {
+        "external": {
+          "description": "Specifies whether the app port is accessible outside of the environment",
+          "type": "boolean"
+        },
+        "targetPort": {
+          "format": "int32",
+          "description": "Specifies the port user's container listens on",
+          "type": "integer"
+        },
+        "exposedPort": {
+          "format": "int32",
+          "description": "Specifies the exposed port for the target port. If not specified, it defaults to target port",
+          "type": "integer"
         }
       }
     },
