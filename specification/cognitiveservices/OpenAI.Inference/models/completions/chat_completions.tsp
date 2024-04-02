@@ -305,9 +305,8 @@ model ChatCompletions {
   choices: ChatChoice[];
 
   @doc("""
-    The deployment name used for this completions request.
+    The model name used for this completions request.
   """)
-  @clientName("DeploymentName", "csharp")
   `model`?: string;
 
   @doc("""
