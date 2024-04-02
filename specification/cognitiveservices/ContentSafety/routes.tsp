@@ -389,3 +389,49 @@ interface ImageIncidents {
     ListQueryParametersTrait<StandardListQueryParameters>
   >;
 }
+
+interface TextIncidentOperationsOps
+  extends Azure.Core.ResourceOperations<NoRepeatableRequests &
+      NoConditionalRequests &
+      NoClientRequestId> {}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+interface TextIncidentOperation {
+  @summary("Deploy Text Incident Operation")
+  @doc("Deploy text incident operation.")
+  deploy is TextIncidentOperationsOps.LongRunningResourceAction<
+  TextIncident,
+  IncidentOperationIdOptions,
+  {
+      @statusCode
+      statusCode: 202;
+  }
+  >;
+
+  @summary("Get Text Incident Operation By OperationId")
+  @doc("Get a text incident operation.")
+  getTextIncidentOperation is TextIncidentOperationsOps.ResourceRead<TextIncidentOperationResult>;
+}
+
+interface ImageIncidentOperationsOps
+  extends Azure.Core.ResourceOperations<NoRepeatableRequests &
+      NoConditionalRequests &
+      NoClientRequestId> {}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+interface ImageIncidentOperation {
+  @summary("Deploy Image incident Operation")
+  @doc("Deploy image incident operation.")
+  deploy is ImageIncidentOperationsOps.LongRunningResourceAction<
+  ImageIncident,
+  IncidentOperationIdOptions,
+  {
+      @statusCode
+      statusCode: 202;
+  }
+  >;
+
+  @summary("Get Image Incident Operation By OperationId")
+  @doc("Get a image incident operation.")
+  getImageIncidentOperation is ImageIncidentOperationsOps.ResourceRead<ImageIncidentOperationResult>;
+}

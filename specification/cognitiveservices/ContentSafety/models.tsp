@@ -523,7 +523,7 @@ model AutoReviewerOperationDetail {
 @resource("text/incidents")
 model TextIncident {
   @doc("incident name.")
-  @pattern("^[0-9A-Za-z._~-]+$")
+  @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
   @key("incidentName")
   @visibility("read", "create", "query")
   @maxLength(64)
@@ -532,10 +532,6 @@ model TextIncident {
   @doc("Incident definition.")
   @maxLength(1024)
   incidentDefinition?: string;
-
-  @doc("Incident status.")
-  @visibility("read")
-  status: IncidentStatus;
 
   @doc("Incident created time.")
   @visibility("read", "query")
@@ -547,12 +543,14 @@ model TextIncident {
 }
 
 @added(ContentSafety.Versions.v2024_04_15_Preview)
-@doc("Incident status.")
-union IncidentStatus {
+@doc("Incident operation status.")
+union IncidentOperationStatus {
   string,
-  "InProgress",
-  "Completed",
+  "NotStarted",
+  "Running",
+  "Succeeded",
   "Failed",
+  "Canceled"
 }
 
 @added(ContentSafety.Versions.v2024_04_15_Preview)
@@ -597,15 +595,11 @@ model RemoveTextIncidentSamplesOptions {
 @resource("image/incidents")
 model ImageIncident {
   @doc("incident name.")
-  @pattern("^[0-9A-Za-z._~-]+$")
+  @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
   @key("incidentName")
   @visibility("read", "create", "query")
   @maxLength(64)
   incidentName: string;
-
-  @doc("Incident status.")
-  @visibility("read")
-  status: IncidentStatus;
 
   @doc("Incident created time.")
   @visibility("read", "query")
@@ -723,4 +717,48 @@ model AnalyzeImageDetectIncidentsOptions {
   @added(ContentSafety.Versions.v2024_04_15_Preview)
   @doc("The incidents to detect.")
   incidentNames: string[];
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The text incident operation result.")
+@resource("text/incidents/operations")
+model TextIncidentOperationResult {
+  @doc("The ID of the text incident operation.")
+  @key("operationId")
+  @visibility("read", "create", "query")
+  @maxLength(64)
+  id: string;
+
+  @doc("The status of the text incident operation.")
+  @visibility("read")
+  status: IncidentOperationStatus;
+
+  @doc("Return error detail when the operation failed.")
+  error?: Azure.Core.Foundations.Error;
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The image incident operation result.")
+@resource("image/incidents/operations")
+model ImageIncidentOperationResult {
+  @doc("The ID of the image incident operation.")
+  @key("operationId")
+  @visibility("read", "create", "query")
+  @maxLength(64)
+  id: string;
+
+  @doc("The status of the image incident operation.")
+  @visibility("read")
+  status: IncidentOperationStatus;
+
+  @doc("Return error detail when the operation failed.")
+  error?: Azure.Core.Foundations.Error;
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("Incident operation id options.")
+model IncidentOperationIdOptions {
+    @doc("The operation id passed by the user, if not provided, will be automatically generated as a UUID.")
+    @header("Operation-Id")
+    operationId?: string;
 }
