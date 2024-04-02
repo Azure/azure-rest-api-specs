@@ -89,7 +89,7 @@ input-file:
 
 These settings apply only when `--tag=package-2024-04-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-05-01'
+```yaml $(tag) == 'package-2024-04-01'
 input-file:
   - Microsoft.ServiceLinker/stable/2024-04-01/servicelinker.json
 ```
