@@ -14,7 +14,7 @@ namespace Face;
 @maxLength(64)
 scalar uuid extends Azure.Core.uuid;
 
-@pattern("^[a-z0-9-_]+")
+@pattern("^[a-z0-9-_]+$")
 @maxLength(64)
 @minLength(1)
 scalar groupId extends string;
