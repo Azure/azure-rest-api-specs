@@ -63,6 +63,13 @@ model DocumentTranslateResult {
   document: bytes;
 }
 
+@doc("Format types")
+union FormatType {
+  Document: "document",
+  Glossary: "glossary",
+  string,
+}
+
 @doc("Storage Source")
 enum StorageSource {
   @doc("Azure Blob")

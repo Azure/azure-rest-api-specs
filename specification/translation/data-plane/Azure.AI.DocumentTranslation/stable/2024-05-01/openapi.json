@@ -515,7 +515,25 @@
             "description": "the type of format like document or glossary ",
             "required": true,
             "type": "string",
-            "default": "document"
+            "default": "document",
+            "enum": [
+              "document",
+              "glossary"
+            ],
+            "x-ms-enum": {
+              "name": "FormatType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Document",
+                  "value": "document"
+                },
+                {
+                  "name": "Glossary",
+                  "value": "glossary"
+                }
+              ]
+            }
           }
         ],
         "responses": {
@@ -904,6 +922,28 @@
         "fileExtensions",
         "contentTypes"
       ]
+    },
+    "FormatType": {
+      "type": "string",
+      "description": "Format types",
+      "enum": [
+        "document",
+        "glossary"
+      ],
+      "x-ms-enum": {
+        "name": "FormatType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Document",
+            "value": "document"
+          },
+          {
+            "name": "Glossary",
+            "value": "glossary"
+          }
+        ]
+      }
     },
     "Glossary": {
       "type": "object",
