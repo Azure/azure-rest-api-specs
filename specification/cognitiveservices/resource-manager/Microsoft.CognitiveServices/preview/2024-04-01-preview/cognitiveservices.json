@@ -2528,7 +2528,7 @@
         "tags": [
           "RaiBlocklists"
         ],
-        "operationId": "RaiBlocklistItems_Add",
+        "operationId": "RaiBlocklistItems_BatchAdd",
         "description": "Batch operation to add blocklist items.",
         "x-ms-examples": {
           "AddRaiBlocklistItems": {
@@ -2565,7 +2565,7 @@
           "200": {
             "description": "Added the blocklist Items successfully.",
             "schema": {
-              "$ref": "#/definitions/RaiBlockListResult"
+              "$ref": "#/definitions/RaiBlocklist"
             }
           },
           "default": {
@@ -2582,7 +2582,7 @@
         "tags": [
           "RaiBlocklists"
         ],
-        "operationId": "RaiBlocklistItems_Delete",
+        "operationId": "RaiBlocklistItems_BatchDelete",
         "description": "Batch operation to delete blocklist items.",
         "x-ms-examples": {
           "DeleteRaiBlocklistItems": {
@@ -2617,10 +2617,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Added the blocklist Items successfully.",
-            "schema": {
-              "$ref": "#/definitions/RaiBlockListResult"
-            }
+            "description": "Added the blocklist Items successfully."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3220,7 +3217,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/networkSecurityPerimeterConfigurations/{NSPConfigurationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/networkSecurityPerimeterConfigurations/{nspConfigurationName}": {
       "get": {
         "tags": [
           "NetworkSecurityPerimeterConfigurations"
@@ -3246,9 +3243,8 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/NSPConfigurationNameParameter"
+            "$ref": "#/parameters/nspConfigurationNameParameter"
           }
-
         ],
         "responses": {
           "200": {
@@ -3266,7 +3262,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/networkSecurityPerimeterConfigurations/{NSPConfigurationName}/reconcile": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/networkSecurityPerimeterConfigurations/{nspConfigurationName}/reconcile": {
       "post": {
         "tags": [
           "NetworkSecurityPerimeterConfigurations"
@@ -3274,7 +3270,7 @@
         "operationId": "NetworkSecurityPerimeterConfigurations_Reconcile",
         "description": "Reconcile the NSP configuration for an account.",
         "x-ms-examples": {
-          "GetNetworkSecurityPerimeterConfigurations": {
+          "ReconcileNetworkSecurityPerimeterConfigurations": {
             "$ref": "./examples/ReconcileNetworkSecurityPerimeterConfigurations.json"
           }
         },
@@ -3292,16 +3288,12 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/NSPConfigurationNameParameter"
+            "$ref": "#/parameters/nspConfigurationNameParameter"
           }
-
         ],
         "responses": {
           "200": {
-            "description": "Successfully Reconciled the NSP configuration.",
-            "schema": {
-              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
-            }
+            "description": "Successfully Reconciled the NSP configuration."
           },
           "202": {
             "description": "Request to reconcile the NSP configuration accepted."
@@ -3312,6 +3304,10 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -3348,7 +3344,7 @@
           "200": {
             "description": "OK -- Get the defender setting name successfully.",
             "schema": {
-              "$ref": "#/definitions/DefinderForAISetting"
+              "$ref": "#/definitions/DefenderForAISetting"
             }
           },
           "default": {
@@ -3391,7 +3387,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DefinderForAISetting"
+              "$ref": "#/definitions/DefenderForAISetting"
             },
             "description": "Properties describing the Defender for AI setting."
           }
@@ -3400,13 +3396,13 @@
           "200": {
             "description": "Created/updated the Defender for AI setting successfully.",
             "schema": {
-              "$ref": "#/definitions/DefinderForAISetting"
+              "$ref": "#/definitions/DefenderForAISetting"
             }
           },
           "201": {
-            "description": "Created/updated the Defender for AI setting successfully.",
+            "description": "Created the Defender for AI setting successfully.",
             "schema": {
-              "$ref": "#/definitions/DefinderForAISetting"
+              "$ref": "#/definitions/DefenderForAISetting"
             }
           },
           "default": {
@@ -3449,7 +3445,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DefinderForAISetting"
+              "$ref": "#/definitions/DefenderForAISetting"
             },
             "description": "Properties describing the Defender for AI setting."
           }
@@ -3458,13 +3454,7 @@
           "200": {
             "description": "Updated the Defender for AI setting successfully.",
             "schema": {
-              "$ref": "#/definitions/DefinderForAISetting"
-            }
-          },
-          "201": {
-            "description": "Updated the Defender for AI setting successfully.",
-            "schema": {
-              "$ref": "#/definitions/DefinderForAISetting"
+              "$ref": "#/definitions/DefenderForAISetting"
             }
           },
           "default": {
@@ -6079,7 +6069,7 @@
         }
       }
     },
-    "DefinderForAISetting": {
+    "DefenderForAISetting": {
       "type": "object",
       "allOf": [
         {
@@ -6125,12 +6115,13 @@
           "items": {
             "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
           },
-          "readOnly": true
+          "x-ms-identifiers": [
+            "id"
+          ]
         },
         "nextLink": {
           "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
@@ -6145,8 +6136,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
-          "description": "NSP Configuration properties.",
-          "x-ms-client-flatten": true
+          "description": "NSP Configuration properties."
         }
       }
     },
@@ -6155,7 +6145,18 @@
       "type": "object",
       "properties": {
         "provisioningState": {
+          "description": "Provisioning state of NetworkSecurityPerimeter configuration",
           "type": "string"
+        },
+        "provisioningIssues": {
+          "description": "List of Provisioning Issues",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NSPProvisioningIssue"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "networkSecurityPerimeter": {
           "$ref": "#/definitions/NetworkSecurityPerimeter"
@@ -6165,6 +6166,50 @@
         },
         "profile": {
           "$ref": "#/definitions/NetworkSecurityPerimeterProfileInfo"
+        }
+      }
+    },
+    "NSPProvisioningIssue": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the NSP provisioning issue",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/NSPProvisioningIssueProperties"
+        }
+      }
+    },
+    "NSPProvisioningIssueProperties": {
+      "description": "Properties of Provisioning Issue",
+      "type": "object",
+      "properties": {
+        "issueType": {
+          "description": "Type of Issue",
+          "type": "string"
+        },
+        "severity": {
+          "description": "Severity of the issue",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the issue",
+          "type": "string"
+        },
+        "suggestedResourceIds": {
+          "description": "Optional array, suggested resource IDs",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "suggestedAccessRules": {
+          "description": "Optional array, suggested access rules",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -6215,13 +6260,13 @@
         "accessRules": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/NetworkSecurityPerimeterRule"
+            "$ref": "#/definitions/NetworkSecurityPerimeterAccessRule"
           },
           "x-ms-identifiers": []
         }
       }
     },
-    "NetworkSecurityPerimeterRule": {
+    "NetworkSecurityPerimeterAccessRule": {
       "description": "Network Security Perimeter Access Rule",
       "type": "object",
       "properties": {
@@ -6231,11 +6276,11 @@
         },
         "properties": {
           "description": "Properties of Network Security Perimeter Access Rule",
-          "$ref": "#/definitions/NetworkSecurityPerimeterRulePropeties"
+          "$ref": "#/definitions/NetworkSecurityPerimeterAccessRulePropeties"
         }
       }
     },
-    "NetworkSecurityPerimeterRulePropeties": {
+    "NetworkSecurityPerimeterAccessRulePropeties": {
       "description": "The Properties of Network Security Perimeter Rule",
       "type": "object",
       "properties": {
@@ -6247,7 +6292,7 @@
             "Outbound"
           ],
           "x-ms-enum": {
-            "name": "NetworkSecurityPerimeterRuleDirection",
+            "name": "NetworkSecurityPerimeterAccessRuleDirection",
             "modelAsString": true
           }
         },
@@ -6425,12 +6470,11 @@
       "description": "The name of the defender for AI setting.",
       "x-ms-parameter-location": "method"
     },
-    "NSPConfigurationNameParameter": {
-      "name": "NSPConfigurationName",
+    "nspConfigurationNameParameter": {
+      "name": "nspConfigurationName",
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
       "description": "The name of the NSP Configuration.",
       "x-ms-parameter-location": "method"
     }
