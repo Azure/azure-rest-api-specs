@@ -3175,6 +3175,146 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "operationId": "NetworkSecurityPerimeterConfigurations_List",
+        "description": "Gets a list of NSP configurations for an account.",
+        "x-ms-examples": {
+          "ListNetworkSecurityPerimeterConfigurations": {
+            "$ref": "./examples/ListNetworkSecurityPerimeterConfigurations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of configs.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/networkSecurityPerimeterConfigurations/{NSPConfigurationName}": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "operationId": "NetworkSecurityPerimeterConfigurations_Get",
+        "description": "Gets the specified NSP configurations for an account.",
+        "x-ms-examples": {
+          "GetNetworkSecurityPerimeterConfigurations": {
+            "$ref": "./examples/GetNetworkSecurityPerimeterConfigurations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/NSPConfigurationNameParameter"
+          }
+
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the config.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/networkSecurityPerimeterConfigurations/{NSPConfigurationName}/reconcile": {
+      "post": {
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "operationId": "NetworkSecurityPerimeterConfigurations_Reconcile",
+        "description": "Reconcile the NSP configuration for an account.",
+        "x-ms-examples": {
+          "GetNetworkSecurityPerimeterConfigurations": {
+            "$ref": "./examples/ReconcileNetworkSecurityPerimeterConfigurations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/NSPConfigurationNameParameter"
+          }
+
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully Reconciled the NSP configuration.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "202": {
+            "description": "Request to reconcile the NSP configuration accepted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/defenderForAISettings/{defenderForAISettingName}": {
       "get": {
         "tags": [
@@ -5975,6 +6115,182 @@
       },
       "description": "The Defender for AI resource."
     },
+    "NetworkSecurityPerimeterConfigurationListResult": {
+      "description": "A list of NSP configurations for an Cognitive Services account.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of NSP configurations List Result for an Cognitive Services account.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfiguration": {
+      "description": "NSP Configuration for an Cognitive Services account.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
+          "description": "NSP Configuration properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationProperties": {
+      "description": "The properties of an NSP Configuration.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string"
+        },
+        "networkSecurityPerimeter": {
+          "$ref": "#/definitions/NetworkSecurityPerimeter"
+        },
+        "resourceAssociation": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationAssociationInfo"
+        },
+        "profile": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterProfileInfo"
+        }
+      }
+    },
+    "NetworkSecurityPerimeter": {
+      "description": "Network Security Perimeter data",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Fully qualified identifier of the resource",
+          "type": "string"
+        },
+        "perimeterGuid": {
+          "description": "Guid of the resource",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location of the resource",
+          "type": "string"
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationAssociationInfo": {
+      "description": "Network Security Perimeter Configuration Association Information",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the resource association",
+          "type": "string"
+        },
+        "accessMode": {
+          "description": "Access Mode of the resource association",
+          "type": "string"
+        }
+      }
+    },
+    "NetworkSecurityPerimeterProfileInfo": {
+      "description": "Network Security Perimeter Profile Information",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the resource profile",
+          "type": "string"
+        },
+        "accessRulesVersion": {
+          "description": "Access rules version of the resource profile",
+          "type": "string"
+        },
+        "accessRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeterRule"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "NetworkSecurityPerimeterRule": {
+      "description": "Network Security Perimeter Access Rule",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Network Security Perimeter Access Rule Name",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Properties of Network Security Perimeter Access Rule",
+          "$ref": "#/definitions/NetworkSecurityPerimeterRulePropeties"
+        }
+      }
+    },
+    "NetworkSecurityPerimeterRulePropeties": {
+      "description": "The Properties of Network Security Perimeter Rule",
+      "type": "object",
+      "properties": {
+        "direction": {
+          "type": "string",
+          "description": "Direction of Access Rule",
+          "enum": [
+            "Inbound",
+            "Outbound"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkSecurityPerimeterRuleDirection",
+            "modelAsString": true
+          }
+        },
+        "addressPrefixes": {
+          "description": "Address prefixes for inbound rules",
+          "type": "array",
+          "items": {
+            "description": "IP Address",
+            "type": "string"
+          }
+        },
+        "subscriptions": {
+          "description": "Subscriptions for inbound rules",
+          "type": "array",
+          "items": {
+            "description": "Subscription for inbound rule",
+            "type": "object",
+            "readOnly": true,
+            "properties": {
+              "id": {
+                "description": "Fully qualified identifier of subscription",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "networkSecurityPerimeters": {
+          "description": "NetworkSecurityPerimeters for inbound rules",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeter"
+          }
+        },
+        "fullyQualifiedDomainNames": {
+          "description": "Fully qualified domain name for outbound rules",
+          "type": "array",
+          "items": {
+            "description": "Fully qualified domain name",
+            "type": "string"
+          }
+        }
+      }
+    },
     "DefenderForAISettingProperties": {
       "type": "object",
       "properties": {
@@ -6107,6 +6423,15 @@
       "type": "string",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
       "description": "The name of the defender for AI setting.",
+      "x-ms-parameter-location": "method"
+    },
+    "NSPConfigurationNameParameter": {
+      "name": "NSPConfigurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the NSP Configuration.",
       "x-ms-parameter-location": "method"
     }
   }
