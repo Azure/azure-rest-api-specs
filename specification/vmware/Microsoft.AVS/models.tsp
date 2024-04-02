@@ -547,7 +547,6 @@ model LocationProperties {
 
 @doc("A private cloud resource")
 model PrivateCloud is TrackedResource<PrivateCloudProperties> {
-  ...ArmTagsProperty;
   ...ResourceSkuRequired;
   ...ManagedSystemAssignedIdentity;
 
