@@ -27,6 +27,7 @@ interface DocumentTranslationOperations {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required"
   @summary("Submit a document translation request to the Document Translation service")
   @doc("""
 Use this API to submit a bulk (batch) translation request to the Document
@@ -49,6 +50,7 @@ If a file with the same name already exists at the
 destination, it will be overwritten. The targetUrl for each target language
 must be unique.
 """)
+  @pollingOperation(DocumentTranslationOperations.getTranslationStatus)
   @route("/document/batches")
   @post
   startTranslation is Azure.Core.Foundations.Operation<
@@ -58,8 +60,10 @@ must be unique.
       @statusCode
       code: 202;
 
-      @header
-      location: string;
+      @pollingLocation
+      @doc("Link to the translation operation status")
+      @header("Operation-Location")
+      operationLocation: string;
     }
   >;
 

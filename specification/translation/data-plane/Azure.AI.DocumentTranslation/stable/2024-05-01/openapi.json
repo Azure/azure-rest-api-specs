@@ -203,8 +203,9 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
-              "location": {
-                "type": "string"
+              "Operation-Location": {
+                "type": "string",
+                "description": "Link to the translation operation status"
               }
             }
           },
@@ -225,7 +226,8 @@
           "Submit a document translation request to the Document Translation service": {
             "$ref": "./examples/batch.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/document/batches/{id}": {
