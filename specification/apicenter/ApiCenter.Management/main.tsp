@@ -6,6 +6,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "./models.tsp";
 import "./Service.tsp";
+import "./DeletedService.tsp";
 import "./MetadataSchema.tsp";
 import "./Workspace.tsp";
 import "./Api.tsp";
@@ -36,6 +37,11 @@ enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_03_01: "2024-03-01",
+
+  @doc("Azure API Center 2024-03-15-preview")
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  v2024_03_15_preview: "2024-03-15-preview",
 }
 
 @@encodedName(Apis.createOrUpdate::parameters.resource,
