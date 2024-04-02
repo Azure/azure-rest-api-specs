@@ -192,7 +192,9 @@ model Environment {
 Properties of an environment. These properties can be updated after the
 resource has been created.
 """)
-model EnvironmentUpdateProperties is EnvironmentPatchProperties {
+model EnvironmentUpdateProperties {
+  ... EnvironmentPatchProperties;
+
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "there is no build in type to describe object"
   @doc("Parameters object for the environment.")
   parameters?: Record<unknown>;
@@ -202,8 +204,8 @@ model EnvironmentUpdateProperties is EnvironmentPatchProperties {
 Properties of an environment. These properties can be updated via PATCH after
 the resource has been created.
 """)
+@added(APIVersions.v2024_02_01)
 model EnvironmentPatchProperties {
-  @added(APIVersions.v2024_02_01)
   @doc("""
   The time the expiration date will be triggered (UTC), after which the
   environment and associated resources will be deleted.
