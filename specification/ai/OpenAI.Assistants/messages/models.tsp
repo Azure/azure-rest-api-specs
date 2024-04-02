@@ -41,6 +41,30 @@ model ThreadMessage {
   @doc("The ID of the thread that this message belongs to.")
   threadId: string;
 
+  /** The status of the message. */
+  @added(ServiceApiVersions.vFuturePlaceholder)
+  status: MessageStatus;
+
+  /** On an incomplete message, details about why the message is incomplete. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @encodedName("application/json", "incomplete_details")
+  @added(ServiceApiVersions.vFuturePlaceholder)
+  incompleteDetails: MessageIncompleteDetailsReason | null;
+
+  /** The Unix timestamp (in seconds) for when the message was completed. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
+  @encodedName("application/json", "completed_at")
+  @added(ServiceApiVersions.vFuturePlaceholder)
+  completedAt: utcDateTime | null;
+
+  /** The Unix timestamp (in seconds) for when the message was marked as incomplete. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
+  @encodedName("application/json", "incomplete_at")
+  @added(ServiceApiVersions.vFuturePlaceholder)
+  incompleteAt: utcDateTime | null;
+
   @doc("The role associated with the assistant thread message.")
   role: MessageRole;
 
@@ -206,4 +230,183 @@ model MessageFile {
   @encodedName("application/json", "message_id")
   @doc("The ID of the message that this file is attached to.")
   messageId: string;
+}
+
+/** The possible execution status values for a thread message. */
+@added(ServiceApiVersions.vFuturePlaceholder)
+enum MessageStatus {
+  /** A run is currently creating this message. */
+  inProgress: "in_progress",
+
+  /** This message is incomplete. See incomplete_details for more information. */
+  incomplete: "incomplete",
+
+  /** This message was successfully completed by a run. */
+  completed: "completed",
+}
+
+/** Information providing additional detail about a message entering an incomplete status. */
+@added(ServiceApiVersions.vFuturePlaceholder)
+model MessageIncompleteDetails {
+  /** The provided reason describing why the message was marked as incomplete. */
+  reason: MessageIncompleteDetailsReason;
+}
+
+/** A set of reasons describing why a message is marked as incomplete. */
+@added(ServiceApiVersions.vFuturePlaceholder)
+enum MessageIncompleteDetailsReason {
+  /** The run generating the message was terminated due to content filter flagging. */
+  contentFilter: "content_filter",
+
+  /** The run generating the message exhausted available tokens before completion. */
+  maxTokens: "max_tokens",
+
+  /** The run generating the message was cancelled before completion. */
+  runCancelled: "run_cancelled",
+
+  /** The run generating the message failed. */
+  runFailed: "run_failed",
+}
+
+//
+// These types are specifically used for streaming.
+//
+
+/** Represents a message delta i.e. any changed fields on a message during streaming. */
+@added(ServiceApiVersions.vFuturePlaceholder)
+model MessageDeltaChunk {
+  /** The identifier of the message, which can be referenced in API endpoints. */
+  id: string;
+
+  /** The object type, which is always `thread.message.delta`. */
+  object: "thread.message.delta";
+
+  /** The delta containing the fields that have changed on the Message. */
+  delta: MessageDelta;
+}
+
+/** Represents the typed 'delta' payload within a streaming message delta chunk. */
+@added(ServiceApiVersions.vFuturePlaceholder)
+model MessageDelta {
+  /** The entity that produced the message. */
+  role: MessageRole;
+
+  /** The content of the message as an array of text and/or images. */
+  content: MessageDeltaContent[];
+
+  /** A list of file IDs that the assistant can use. */
+  @encodedName("application/json", "file_ids")
+  fileIds?: string[] = [];
+}
+
+/** The abstract base representation of a partial streamed message content payload. */
+@discriminator("type")
+@added(ServiceApiVersions.vFuturePlaceholder)
+model MessageDeltaContent {
+  /** The index of the content part of the message. */
+  index: int32;
+
+  /** The type of content for this content part. */
+  type: string;
+}
+
+/** Represents a streamed image file content part within a streaming message delta chunk. */
+@added(ServiceApiVersions.vFuturePlaceholder)
+model MessageDeltaImageFileContent extends MessageDeltaContent {
+  /** The type of content for this content part, which is always "image_file." */
+  type: "image_file";
+
+  /** The image_file data. */
+  @encodedName("application/json", "image_file")
+  imageFile?: MessageDeltaImageFileContentObject;
+}
+
+/** Represents the 'image_file' payload within streaming image file content. */
+@added(ServiceApiVersions.vFuturePlaceholder)
+model MessageDeltaImageFileContentObject {
+  /** The file ID of the image in the message content. */
+  @encodedName("application/json", "file_id")
+  fileId?: string;
+}
+
+/** Represents a streamed text content part within a streaming message delta chunk. */
+@added(ServiceApiVersions.vFuturePlaceholder)
+model MessageDeltaTextContentObject extends MessageDeltaContent {
+  /** The type of content for this content part, which is always "text." */
+  type: "text";
+
+  /** The text content details. */
+  text: MessageDeltaTextContent;
+}
+
+/** Represents the data of a streamed text content part within a streaming message delta chunk. */
+@added(ServiceApiVersions.vFuturePlaceholder)
+model MessageDeltaTextContent {
+  /** The data that makes up the text. */
+  value?: string;
+
+  /** Annotations for the text. */
+  annotations?: MessageDeltaTextAnnotation[];
+}
+
+/** The abstract base representation of a streamed text content part's text annotation. */
+@discriminator("type")
+@added(ServiceApiVersions.vFuturePlaceholder)
+model MessageDeltaTextAnnotation {
+  /** The index of the annotation within a text content part. */
+  index: int32;
+
+  /** The type of the text content annotation. */
+  type: string;
+
+  /** The start index of this annotation in the content text. */
+  @encodedName("application/json", "start_index")
+  startIndex: int32;
+
+  /** The end index of this annotation in the content text. */
+  @encodedName("application/json", "end_index")
+  endIndex: int32;
+}
+
+/** Represents a streamed file citation applied to a streaming text content part. */
+@added(ServiceApiVersions.vFuturePlaceholder)
+model MessageDeltaTextFileCitationAnnotationObject
+  extends MessageDeltaTextAnnotation {
+  /** The type of the text content annotation, which is always "file_citation." */
+  type: "file_citation";
+
+  /** The file citation information. */
+  @encodedName("application/json", "file_citation")
+  fileCitation?: MessageDeltaTextFileCitationAnnotationObject;
+}
+
+/** Represents the data of a streamed file citation as applied to a streaming text content part. */
+@added(ServiceApiVersions.vFuturePlaceholder)
+model MessageDeltaTextFileCitationAnnotation {
+  /** The ID of the specific file the citation is from. */
+  @encodedName("application/json", "file_id")
+  fileId?: string;
+
+  /** The specific quote in the cited file. */
+  quote?: string;
+}
+
+/** Represents a streamed file path annotation applied to a streaming text content part. */
+@added(ServiceApiVersions.vFuturePlaceholder)
+model MessageDeltaTextFilePathAnnotationObject
+  extends MessageDeltaTextAnnotation {
+  /** The type of the text content annotation, which is always "file_path." */
+  type: "file_path";
+
+  /** The file path information. */
+  @encodedName("application/json", "file_path")
+  filePath?: MessageDeltaTextFilePathAnnotationObject;
+}
+
+/** Represents the data of a streamed file path annotation as applied to a streaming text content part. */
+@added(ServiceApiVersions.vFuturePlaceholder)
+model MessageDeltaTextFilePathAnnotation {
+  /** The file ID for the annotation. */
+  @encodedName("application/json", "file_id")
+  fileId?: string;
 }

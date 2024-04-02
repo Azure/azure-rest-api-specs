@@ -125,6 +125,13 @@ model CreateRunOptions {
   @doc("The overridden list of enabled tools that the assistant should use to run the thread.")
   tools?: ToolDefinition[] | null;
 
+  /**
+   * If `true`, returns a stream of events that happen during the Run as server-sent events,
+   * terminating when the Run enters a terminal state with a `data: [DONE]` message.
+   */
+  @added(ServiceApiVersions.vFuturePlaceholder)
+  stream?: boolean;
+
   ...OptionalNullableMetadata;
 }
 
@@ -216,6 +223,13 @@ model CreateAndRunThreadOptions {
   @doc("The overridden list of enabled tools the assistant should use to run the thread.")
   @clientName("overrideTools", "csharp")
   tools?: ToolDefinition[];
+
+  /**
+   * If `true`, returns a stream of events that happen during the Run as server-sent events,
+   * terminating when the Run enters a terminal state with a `data: [DONE]` message.
+   */
+  @added(ServiceApiVersions.vFuturePlaceholder)
+  stream?: boolean;
 
   ...OptionalNullableMetadata;
 }

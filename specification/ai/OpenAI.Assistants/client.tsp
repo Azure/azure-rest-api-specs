@@ -146,6 +146,17 @@ namespace Azure.AI.OpenAI.Assistants;
 @@usage(MessageTextFileCitationAnnotation, Usage.output);
 @@usage(MessageTextFilePathAnnotation, Usage.output);
 
+// Ensure generator inclusion of streaming "leaf" types not yet referenced by a route
+
+@@usage(MessageDeltaTextFileCitationAnnotation, Usage.output);
+@@usage(MessageDeltaTextFilePathAnnotation, Usage.output);
+@@usage(MessageDeltaImageFileContent, Usage.output);
+@@usage(MessageDeltaTextContent, Usage.output);
+@@usage(RunStepDeltaMessageCreationObject, Usage.output);
+@@usage(RunStepDeltaFunction, Usage.output);
+@@usage(RunStepDeltaCodeInterpreterLogOutput, Usage.output);
+@@usage(RunStepDeltaCodeInterpreterImageOutputObject, Usage.output);
+
 // Ensure some shared types remain public despite interaction with previously internalized details
 
 @@access(MessageTextFilePathAnnotation, Access.public);
