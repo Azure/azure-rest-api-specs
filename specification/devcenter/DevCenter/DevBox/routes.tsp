@@ -285,10 +285,6 @@ interface DevBoxes {
 
   @doc("Delays all actions.")
   @action("delay")
-  @example(
-    "./examples/2024-02-01/DevBoxes_DelayActionsWithError.json",
-    "DevBoxes_DelayActionsWithError"
-  )
   delayActions is StandardResourceOperations.ResourceCollectionAction<
     DevBoxAction,
     {
