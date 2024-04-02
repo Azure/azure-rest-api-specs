@@ -2196,6 +2196,15 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/StopProtectionRequest"
+            }
           }
         ],
         "responses": {
@@ -2260,6 +2269,15 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/SuspendBackupRequest"
+            }
           }
         ],
         "responses": {
@@ -4721,6 +4739,12 @@
           "description": "Fully qualified Azure Resource Manager ID of the datasource which is being recovered.",
           "type": "string"
         },
+        "resourceGuardOperationRequests":{
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "identityDetails": {
           "$ref": "#/definitions/IdentityDetails",
           "description": "Contains information of the Identity Details for the BI.\r\nIf it is null, default will be considered as System Assigned."
@@ -5015,6 +5039,12 @@
           "$ref": "#/definitions/PolicyInfo",
           "description": "Gets or sets the policy information."
         },
+        "resourceGuardOperationRequests":{
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "protectionStatus": {
           "$ref": "#/definitions/ProtectionStatusDetails",
           "description": "Specifies the protection status of the resource",
@@ -5273,6 +5303,12 @@
           "x-ms-enum": {
             "name": "BCDRSecurityLevel",
             "modelAsString": true
+          }
+        },
+        "resourceGuardOperationRequests":{
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         },
         "replicatedRegions": {
@@ -7810,6 +7846,30 @@
           "x-ms-enum": {
             "name": "SyncType",
             "modelAsString": true
+          }
+        }
+      }
+    },
+    "StopProtectionRequest": {
+      "description": "Request body of Stop protection when MUA is Enabled",
+      "type": "object",
+      "properties": {
+        "resourceGuardOperationRequests": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SuspendBackupRequest": {
+      "description": "Request body of Suspend backup when MUA is Enabled",
+      "type": "object",
+      "properties": {
+        "resourceGuardOperationRequests": {
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }
