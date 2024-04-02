@@ -108,11 +108,11 @@ model Location {
 @doc("A subscription quota resource.")
 @parentResource(Location)
 model Quota is ProxyResource<QuotaProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @doc("The quota name.")
   @key("quotaName")
   @path
   @segment("quotas")
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: QuotaNames;
 }
 
@@ -148,11 +148,11 @@ model FreeTrialProperties {
 @doc("A quota resource for a Playwright service account.")
 @parentResource(Account)
 model AccountQuota is ProxyResource<AccountQuotaProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @doc("The Playwright service account quota name.")
   @key("quotaName")
   @path
   @segment("quotas")
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: QuotaNames;
 }
 

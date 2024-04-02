@@ -348,12 +348,12 @@ interface Pools {
 @parentResource(Pool)
 @doc("A ResourceDetailsObject")
 model ResourceDetailsObject is ProxyResource<ResourceDetailsObjectProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @doc("The name of the resource.")
   @key("resourceName")
   @segment("resources")
   @visibility("read")
   @path
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -506,12 +506,12 @@ model ResourceSkuZoneDetails {
 @doc("A ResourceSku")
 @parentResource(Location)
 model ResourceSku is ProxyResource<ResourceSkuProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @doc("The name of the SKU.")
   @key("skuName")
   @segment("skus")
   @visibility("read")
   @path
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 

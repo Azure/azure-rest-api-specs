@@ -461,11 +461,11 @@ model RoleAssignmentCommonProperties {
 @singleton
 @added(Versions.v2023_11_15)
 model DataProductsCatalog is ProxyResource<DataProductsCatalogProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @doc("The data catalog name")
   @key("dataProductsCatalogName")
   @segment("dataProductsCatalogs")
   @path
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
