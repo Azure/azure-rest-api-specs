@@ -1896,7 +1896,8 @@
             "in": "path",
             "description": "Unique identifier for the Dev Box operation.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -2715,7 +2716,8 @@
             "in": "path",
             "description": "Unique identifier for the environment operation.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -3343,7 +3345,7 @@
           "description": "The unique URI for the Dev Box operation."
         },
         "operationId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Unique identifier for the Dev Box operation.",
           "readOnly": true
         },
@@ -3917,7 +3919,7 @@
           "description": "The unique URI for the environment operation."
         },
         "operationId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Unique identifier for the environment operation.",
           "readOnly": true
         },
@@ -3926,7 +3928,7 @@
           "description": "The operation status."
         },
         "createdByObjectId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The object ID of the actor which initiated the operation."
         },
         "startTime": {

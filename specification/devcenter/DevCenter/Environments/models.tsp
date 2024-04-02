@@ -245,13 +245,13 @@ model EnvironmentOperation {
   @doc("Unique identifier for the environment operation.")
   @visibility("read")
   @key("operationId")
-  operationId: string;
+  operationId: Azure.Core.uuid;
 
   @doc("The operation status.")
   status: EnvironmentOperationStatus;
 
   @doc("The object ID of the actor which initiated the operation.")
-  createdByObjectId?: string;
+  createdByObjectId?: Azure.Core.uuid;
 
   @doc("The time the operation started.")
   startTime?: utcDateTime;

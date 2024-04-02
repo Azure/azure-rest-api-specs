@@ -633,7 +633,7 @@ model DevBoxOperation {
   @doc("Unique identifier for the Dev Box operation.")
   @visibility("read")
   @key("operationId")
-  operationId: string;
+  operationId: Azure.Core.uuid;
 
   @doc("The kind of operation that occurred.")
   kind: DevBoxOperationKind;
