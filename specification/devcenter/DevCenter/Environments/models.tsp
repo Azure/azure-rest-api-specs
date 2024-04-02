@@ -12,19 +12,19 @@ namespace DevCenterService;
 @doc("Type of the output value.")
 @added(APIVersions.v2024_02_01)
 union EnvironmentOutputType {
-  @doc("The output is an array of values.") 
+  @doc("The output is an array of values.")
   array: "array",
 
-  @doc("The output is a boolean value.") 
+  @doc("The output is a boolean value.")
   boolean: "boolean",
 
-  @doc("The output is a number value.") 
+  @doc("The output is a number value.")
   number: "number",
 
-  @doc("The output is an object value.") 
+  @doc("The output is an object value.")
   object: "object",
 
-  @doc("The output is a string value.") 
+  @doc("The output is a string value.")
   string: "string",
 
   string,
@@ -33,10 +33,10 @@ union EnvironmentOutputType {
 @doc("The type of environment operation.")
 @added(APIVersions.v2024_02_01)
 union EnvironmentOperationKind {
-  @doc("The operation represents a deployment.") 
+  @doc("The operation represents a deployment.")
   Deploy: "Deploy",
 
-  @doc("The operation represents a delete.") 
+  @doc("The operation represents a delete.")
   Delete: "Delete",
 
   string,
@@ -45,19 +45,19 @@ union EnvironmentOperationKind {
 @doc("The status of an environment operation.")
 @added(APIVersions.v2024_02_01)
 union EnvironmentOperationStatus {
-  @doc("The operation has not started.") 
+  @doc("The operation has not started.")
   NotStarted: "NotStarted",
 
-  @doc("The operation is running.") 
+  @doc("The operation is running.")
   Running: "Running",
 
-  @doc("The operation succeeded.") 
+  @doc("The operation succeeded.")
   Succeeded: "Succeeded",
 
-  @doc("The operation was canceled.") 
+  @doc("The operation was canceled.")
   Canceled: "Canceled",
 
-  @doc("he operation failed.") 
+  @doc("he operation failed.")
   Failed: "Failed",
 
   string,
@@ -66,7 +66,7 @@ union EnvironmentOperationStatus {
 @doc("The scheduled action types.")
 @added(APIVersions.v2024_02_01)
 union EnvironmentActionType {
-  @doc("The action will delete the environment and associated resources.") 
+  @doc("The action will delete the environment and associated resources.")
   Delete: "Delete",
 
   string,
@@ -193,7 +193,7 @@ Properties of an environment. These properties can be updated after the
 resource has been created.
 """)
 model EnvironmentUpdateProperties {
-  ... EnvironmentPatchProperties;
+  ...EnvironmentPatchProperties;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "there is no build in type to describe object"
   @doc("Parameters object for the environment.")

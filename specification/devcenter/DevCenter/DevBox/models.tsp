@@ -17,10 +17,10 @@ union OsType {
 
 @doc("Indicates whether hibernate is supported and enabled, disabled, or unsupported by the operating system. Unknown hibernate support is represented as null.")
 union HibernateSupport {
-  @doc("Hibernate is enabled.") 
+  @doc("Hibernate is enabled.")
   Enabled: "Enabled",
-  
-  @doc("Hibernate is not enabled.") 
+
+  @doc("Hibernate is not enabled.")
   Disabled: "Disabled",
 
   @doc("Hibernate is not supported by the operating system.")
@@ -133,7 +133,7 @@ union SkuName {
 
 @doc("Indicates whether the feature to stop the devbox on disconnect once the grace period has lapsed is enabled.")
 union StopOnDisconnectEnableStatus {
-  @doc("Stop on disconnect is enabled on the Dev Box.") 
+  @doc("Stop on disconnect is enabled on the Dev Box.")
   Enabled: "Enabled",
 
   @doc("Stop on disconnect is not enabled on the Dev Box.")
@@ -144,19 +144,19 @@ union StopOnDisconnectEnableStatus {
 
 @doc("Pool status indicating whether a pool is available to create Dev Boxes.")
 union PoolHealthStatus {
-  @doc("The pool health status is not known.") 
+  @doc("The pool health status is not known.")
   Unknown: "Unknown",
 
   @doc("The pool health status waiting for health checks to run.")
   Pending: "Pending",
 
-  @doc("The pool health status is healthy.") 
+  @doc("The pool health status is healthy.")
   Healthy: "Healthy",
 
-  @doc("The pool health status has one or more warnings.") 
+  @doc("The pool health status has one or more warnings.")
   Warning: "Warning",
 
-  @doc("The pool health status is not healthy.") 
+  @doc("The pool health status is not healthy.")
   Unhealthy: "Unhealthy",
 
   string,
@@ -181,7 +181,7 @@ union ScheduledType {
 
 @doc("The frequency of task execution.")
 union ScheduledFrequency {
-  @doc("The scheduled task will run every day.") 
+  @doc("The scheduled task will run every day.")
   Daily: "Daily",
 
   string,
@@ -189,19 +189,19 @@ union ScheduledFrequency {
 
 @doc("The power states of a Dev Box.")
 union PowerState {
-  @doc("The Dev Box power state is not known.") 
+  @doc("The Dev Box power state is not known.")
   Unknown: "Unknown",
 
-  @doc("The Dev Box is running.") 
+  @doc("The Dev Box is running.")
   Running: "Running",
 
-  @doc("The Dev Box is deallocated.") 
+  @doc("The Dev Box is deallocated.")
   Deallocated: "Deallocated",
 
-  @doc("The Dev Box is powered off.") 
+  @doc("The Dev Box is powered off.")
   PoweredOff: "PoweredOff",
 
-  @doc("The Dev Box is hibernated.") 
+  @doc("The Dev Box is hibernated.")
   Hibernated: "Hibernated",
 
   string,
@@ -209,7 +209,7 @@ union PowerState {
 
 @doc("The type of action which will take place on a Dev Box.")
 union DevBoxActionType {
-  @doc("The action will stop the Dev Box.") 
+  @doc("The action will stop the Dev Box.")
   Stop: "Stop",
 
   string,
@@ -218,77 +218,77 @@ union DevBoxActionType {
 @doc("The type of the resource which triggered the action.")
 @added(APIVersions.v2024_02_01)
 union DevBoxActionSourceType {
-  @doc("The action was triggered by a Dev Box pool.") 
+  @doc("The action was triggered by a Dev Box pool.")
   Pool: "Pool",
 
-  @doc("The action was triggered by a Dev Box schedule.") 
+  @doc("The action was triggered by a Dev Box schedule.")
   Schedule: "Schedule",
-  
+
   string,
 }
 
 @doc("The result of the delay operation on this action.")
 union DevBoxActionDelayResultStatus {
-  @doc("The delay operation succeeded.") 
+  @doc("The delay operation succeeded.")
   Succeeded: "Succeeded",
 
-  @doc("The delay operation failed.") 
+  @doc("The delay operation failed.")
   Failed: "Failed",
-  
+
   string,
 }
 
 @doc("The type of Dev Box operation.")
 @added(APIVersions.v2024_02_01)
 union DevBoxOperationKind {
-  @doc("The operation represents a Dev Box start.") 
+  @doc("The operation represents a Dev Box start.")
   Start: "Start",
 
-  @doc("The operation represents a Dev Box stop.") 
+  @doc("The operation represents a Dev Box stop.")
   Stop: "Stop",
 
-  @doc("The operation represents a Dev Box restart.") 
+  @doc("The operation represents a Dev Box restart.")
   Restart: "Restart",
 
-  @doc("The operation represents a Dev Box repair.") 
+  @doc("The operation represents a Dev Box repair.")
   Repair: "Repair",
-  
+
   string,
 }
 
 @doc("The status of a Dev Box operation.")
 @added(APIVersions.v2024_02_01)
 union DevBoxOperationStatus {
-  @doc("The operation has not started.") 
+  @doc("The operation has not started.")
   NotStarted: "NotStarted",
 
-  @doc("The operation is running.") 
+  @doc("The operation is running.")
   Running: "Running",
 
-  @doc("The operation succeeded.") 
+  @doc("The operation succeeded.")
   Succeeded: "Succeeded",
 
-  @doc("The operation was canceled.") 
+  @doc("The operation was canceled.")
   Canceled: "Canceled",
 
-  @doc("The operation failed.") 
+  @doc("The operation failed.")
   Failed: "Failed",
-  
+
   string,
 }
 
 @doc("The action taken during a repair operation.")
 @added(APIVersions.v2024_02_01)
 union DevBoxRepairOutcome {
-  @doc("A fix for an issue was automatically applied to the Dev Box.") 
+  @doc("A fix for an issue was automatically applied to the Dev Box.")
   FixApplied: "FixApplied",
 
-  @doc("One or more issues was detected on the Dev Box, but they could not be fixed automatically.") 
+  @doc("One or more issues was detected on the Dev Box, but they could not be fixed automatically.")
   IssuesDetected: "IssuesDetected",
 
-  @doc("The service did not identify any issues on the Dev Box.") 
+  @doc("The service did not identify any issues on the Dev Box.")
   NoIssuesDetected: "NoIssuesDetected",
-  
+
   string,
 }
 
