@@ -33,6 +33,16 @@ export class FormatRule implements Rule {
     stdOutput += stdout;
     errorOutput += stderr;
 
+    if (success) {
+      const gitDiffResult = await host.gitDiffTopSpecFolder(host, folder);
+      stdOutput += gitDiffResult.stdOutput;
+      if (!gitDiffResult.success) {
+        success = false;
+        errorOutput += gitDiffResult.errorOutput;
+        errorOutput += `\nFiles has been gerenate/changed after tsp format, please run \`tsp format\` and ensure all files are included in the branch.`;
+      }
+    }
+
     return {
       success: success,
       stdOutput: stdOutput,
