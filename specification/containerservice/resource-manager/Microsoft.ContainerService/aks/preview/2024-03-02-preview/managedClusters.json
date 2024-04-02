@@ -6927,7 +6927,8 @@
           "type": "string",
           "description": "The name of a managed cluster SKU.",
           "enum": [
-            "Base"
+            "Base",
+            "Automatic"
           ],
           "x-ms-enum": {
             "name": "ManagedClusterSKUName",
@@ -6936,6 +6937,10 @@
               {
                 "value": "Base",
                 "description": "Base option for the AKS control plane."
+              },
+              {
+                "value": "Automatic",
+                "description": "Automatic clusters are optimized to run most production workloads with configuration that follows AKS best practices and recommendations for cluster and workload setup, scalability, and security. For more details about Automatic clusters see aka.ms/aks/automatic."
               }
             ]
           }
