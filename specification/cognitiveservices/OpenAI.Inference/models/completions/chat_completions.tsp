@@ -304,9 +304,7 @@ model ChatCompletions {
     """)
   choices: ChatChoice[];
 
-  @doc("""
-    The model name used for this completions request.
-  """)
+  @doc("The model name used for this completions request.")
   `model`?: string;
 
   @doc("""
