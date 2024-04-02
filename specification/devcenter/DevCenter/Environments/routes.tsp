@@ -199,12 +199,10 @@ interface Environments {
       @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       operationId: string;
-
-      @doc("Accept header")
-      @header
-      accept: "text/plain";
-    },
-    void
+    }, | {
+      @statusCode
+      statusCode: 200;
+    }
   >;
 
   @doc("Get all scheduled actions for a user within an environment.")

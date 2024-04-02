@@ -80,6 +80,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Lists Dev Boxes that the caller has access to in the DevCenter.": {
+            "$ref": "./examples/DevCenter_ListAllDevBoxes.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -576,6 +581,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get the status of an operation.": {
+            "$ref": "./examples/OperationStatuses_Get.json"
           }
         }
       }
@@ -2253,6 +2263,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Partially updates an environment.": {
+            "$ref": "./examples/Environments_PatchEnvironment.json"
+          }
         }
       },
       "delete": {
@@ -2806,24 +2821,11 @@
             "minLength": 3,
             "maxLength": 63,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
-          },
-          {
-            "name": "accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "text/plain"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            }
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "The request has succeeded."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2945,6 +2947,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Lists Dev Boxes in the project for a particular user.": {
+            "$ref": "./examples/DevCenter_ListAllDevBoxesByUser.json"
           }
         },
         "x-ms-pageable": {
