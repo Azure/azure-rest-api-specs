@@ -26,7 +26,7 @@ These are the global settings for the communicationservices.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2024-03-07
+tag: package-chat-2024-03-07
 ```
 
 ### Tag: package-2020-09-21-preview2
@@ -154,7 +154,7 @@ title:
 
 These settings apply only when `--tag=package-2023-11-15-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-11-15-preview'
+```yaml $(tag) == 'package-2023-11-15-preview'
 input-file:
   - preview/2023-11-15-preview/communicationserviceschat.json
 title:
