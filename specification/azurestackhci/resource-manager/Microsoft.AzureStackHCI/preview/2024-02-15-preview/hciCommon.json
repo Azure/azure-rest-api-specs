@@ -1,0 +1,286 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AzureStackHCI Common",
+    "version": "2024-02-15-preview",
+    "description": "Azure Stack HCI common Rest API spec definitions."
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [],
+  "paths": {},
+  "definitions": {
+    "DeploymentMode": {
+      "type": "string",
+      "description": "The deployment mode of ECE action for a cluster.",
+      "enum": [
+        "Validate",
+        "Deploy"
+      ],
+      "default": "Deploy",
+      "x-ms-enum": {
+        "name": "DeploymentMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Validate",
+            "value": "Validate",
+            "description": "Validate ECE action deployment for a cluster."
+          },
+          {
+            "name": "Deploy",
+            "value": "Deploy",
+            "description": "Deploy ECE action deployment for a cluster."
+          }
+        ]
+      }
+    },
+    "EceReportedProperties": {
+      "type": "object",
+      "description": "The DeploymentStatus of AzureStackHCI Cluster.",
+      "properties": {
+        "validationStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "description": "validation status of AzureStackHCI Cluster Deployment.",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "#/definitions/EceActionStatus",
+          "description": "Deployment status of AzureStackHCI Cluster Deployment.",
+          "readOnly": true
+        }
+      }
+    },
+    "EceActionStatus": {
+      "type": "object",
+      "description": "The ECE action plan deployment status for AzureStackHCI Cluster.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Status of ECE action AzureStackHCI Cluster Deployment.",
+          "readOnly": true
+        },
+        "steps": {
+          "type": "array",
+          "description": "List of steps of AzureStackHCI Cluster Deployment.",
+          "items": {
+            "$ref": "#/definitions/DeploymentStep"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Parameters": {
+      "type": "object",
+      "description": "Parameters Object.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "property name."
+        },
+        "value": {
+          "type": "string",
+          "description": "property value."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "NotSpecified",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "The resource provision state is not specified"
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      }
+    },
+    "EceDeploymentSecrets": {
+      "type": "object",
+      "description": "Protected parameters list stored in keyvault.",
+      "properties": {
+        "secretName": {
+          "type": "string",
+          "description": "Secret name stored in keyvault."
+        },
+        "eceSecretName": {
+          "$ref": "#/definitions/EceSecrets",
+          "description": "Secret name expected for Enterprise Cloud Engine (ECE) deployment."
+        },
+        "secretLocation": {
+          "type": "string",
+          "format": "uri",
+          "description": "Secret URI stored in keyvault."
+        }
+      }
+    },
+    "EceSecrets": {
+      "type": "string",
+      "description": "Secret names allowed for Enterprise Cloud Engine (ECE) deployment.",
+      "enum": [
+        "AzureStackLCMUserCredential",
+        "DefaultARBApplication",
+        "LocalAdminCredential",
+        "WitnessStorageKey"
+      ],
+      "x-ms-enum": {
+        "name": "EceSecrets",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureStackLCMUserCredential",
+            "value": "AzureStackLCMUserCredential",
+            "description": "AzureStackLCMUserCredential used for LCM operations for AzureStackHCI cluster."
+          },
+          {
+            "name": "DefaultARBApplication",
+            "value": "DefaultARBApplication",
+            "description": "DefaultARBApplication used to manage Azure Arc resource bridge (ARB) for AzureStackHCI cluster."
+          },
+          {
+            "name": "LocalAdminCredential",
+            "value": "LocalAdminCredential",
+            "description": "LocalAdminCredential used for admin operations for AzureStackHCI cluster."
+          },
+          {
+            "name": "WitnessStorageKey",
+            "value": "WitnessStorageKey",
+            "description": "WitnessStorageKey used for setting up a cloud witness for AzureStackHCI cluster."
+          }
+        ]
+      }
+    },
+    "DeploymentStep": {
+      "type": "object",
+      "description": "The Step of AzureStackHCI Cluster.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of step.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of step.",
+          "readOnly": true
+        },
+        "fullStepIndex": {
+          "type": "string",
+          "description": "FullStepIndex of step.",
+          "readOnly": true
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "description": "Start time of step.",
+          "readOnly": true
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "description": "End time of step.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of step. Allowed values are 'Error', 'Success', 'InProgress'",
+          "readOnly": true
+        },
+        "steps": {
+          "type": "array",
+          "description": "List of nested steps of AzureStackHCI Cluster Deployment.",
+          "items": {
+            "$ref": "#/definitions/DeploymentStep"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "exception": {
+          "type": "array",
+          "description": "List of exceptions in AzureStackHCI Cluster Deployment.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
