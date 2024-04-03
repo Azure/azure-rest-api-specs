@@ -962,7 +962,15 @@
         },
         "privateIPAddress": {
           "type": "string",
-          "description": "Private IP address of the IP configuration."
+          "description": "Private IP address of the IP configuration. It can be a single IP address or a CIDR block in the format <address>/<prefix-length>."
+        },
+        "privateIPAddressPrefixLength": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 128,
+          "x-nullable": true,
+          "description": "The private IP address prefix length. If specified and the allocation method is dynamic, the service will allocate a CIDR block instead of a single IP address."
         },
         "privateIPAllocationMethod": {
           "$ref": "./network.json#/definitions/IPAllocationMethod",
