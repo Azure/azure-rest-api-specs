@@ -73,7 +73,9 @@ model ExternalDocumentation {
 }
 
 @doc("API kind")
-enum ApiKind {
+union ApiKind {
+  string,
+
   @doc("REST API")
   Rest: "rest",
 
@@ -94,7 +96,9 @@ enum ApiKind {
 }
 
 @doc("API Lifecycle Stage")
-enum LifecycleStage {
+union LifecycleStage {
+  string,
+  
   @doc("API is in the design stage")
   Design: "design",
 

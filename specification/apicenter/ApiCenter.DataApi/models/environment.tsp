@@ -60,7 +60,9 @@ model EnvironmentOnboardingModel {
 }
 
 @doc("Environment kind")
-enum EnvironmentKind {
+union EnvironmentKind {
+  string,
+  
   @doc("Environment is in the development stage")
   Development: "development",
 
