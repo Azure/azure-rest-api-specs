@@ -15,7 +15,7 @@ namespace Microsoft.Edge;
 @doc("Site as ARM Resource")
 model Site is ProxyResource<SiteProperties> {
   @doc("Name of Site resource")
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
   @path
   @key("siteName")
   @segment("sites")
