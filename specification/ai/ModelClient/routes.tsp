@@ -6,6 +6,7 @@ import "@typespec/versioning";
 import "./models/common.tsp";
 import "./models/chat_completions.tsp";
 import "./models/embeddings.tsp";
+import "./models/image_generation.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -39,4 +40,15 @@ op getEmbeddings is Azure.Core.RpcOperation<
     ...AdditionalRequestHeaders;
   },
   EmbeddingsResult
+>;
+
+@doc("Creates images given a prompt.")
+@actionSeparator("/")
+@route("v1/images/generations")
+op getImageGenerations is Azure.Core.RpcOperation<
+  {
+    ...ImageGenerationOptions;
+    ...AdditionalRequestHeaders;
+  },
+  ImageGenerations
 >;
