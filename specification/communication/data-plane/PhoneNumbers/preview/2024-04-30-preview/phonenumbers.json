@@ -18,77 +18,31 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "countryCode",
-            "description": "The ISO 3166-2 country code, e.g. US.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/CountryCodeParameter"
           },
           {
-            "in": "query",
-            "name": "phoneNumberType",
-            "description": "Filter by numberType, e.g. Geographic, TollFree.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "geographic",
-              "tollFree"
-            ],
-            "x-ms-enum": {
-              "name": "PhoneNumberType",
-              "modelAsString": true
-            }
+            "$ref": "#/parameters/RequiredPhoneNumberTypeParameter"
           },
           {
-            "in": "query",
-            "name": "skip",
-            "description": "An optional parameter for how many entries to skip, for pagination purposes. The default value is 0.",
-            "type": "integer",
-            "format": "int32",
-            "default": 0
+            "$ref": "#/parameters/PaginationSkipParameter"
           },
           {
-            "in": "query",
-            "name": "maxPageSize",
-            "description": "An optional parameter for how many entries to return, for pagination purposes. The default value is 100.",
-            "type": "integer",
-            "format": "int32",
-            "default": 100
+            "$ref": "#/parameters/MaxPageSizeParameter"
           },
           {
-            "in": "query",
-            "name": "assignmentType",
-            "description": "Filter by assignmentType, e.g. Person, Application.",
-            "type": "string",
-            "enum": [
-              "person",
-              "application"
-            ],
-            "x-ms-enum": {
-              "name": "PhoneNumberAssignmentType",
-              "modelAsString": true
-            }
+            "$ref": "#/parameters/AssignmentTypeParameter"
           },
           {
-            "in": "query",
-            "name": "locality",
-            "description": "The name of locality or town in which to search for the area code. This is required if the number type is Geographic.",
-            "type": "string"
+            "$ref": "#/parameters/LocalityParameter"
           },
           {
-            "in": "query",
-            "name": "administrativeDivision",
-            "description": "The name of the state or province in which to search for the area code.",
-            "type": "string"
+            "$ref": "#/parameters/AdministrativeDivisionParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "in": "header",
-            "name": "accept-language",
-            "description": "The locale to display in the localized fields in the response. e.g. 'en-US'",
-            "type": "string"
+            "$ref": "#/parameters/AcceptLanguageHeaderParameter"
           }
         ],
         "responses": {
@@ -128,29 +82,16 @@
         ],
         "parameters": [
           {
-            "in": "query",
-            "name": "skip",
-            "description": "An optional parameter for how many entries to skip, for pagination purposes. The default value is 0.",
-            "type": "integer",
-            "format": "int32",
-            "default": 0
+            "$ref": "#/parameters/PaginationSkipParameter"
           },
           {
-            "in": "query",
-            "name": "maxPageSize",
-            "description": "An optional parameter for how many entries to return, for pagination purposes. The default value is 100.",
-            "type": "integer",
-            "format": "int32",
-            "default": 100
+            "$ref": "#/parameters/MaxPageSizeParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "in": "header",
-            "name": "accept-language",
-            "description": "The locale to display in the localized fields in the response. e.g. 'en-US'",
-            "type": "string"
+            "$ref": "#/parameters/AcceptLanguageHeaderParameter"
           }
         ],
         "responses": {
@@ -190,42 +131,22 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "countryCode",
-            "description": "The ISO 3166-2 country code, e.g. US.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/CountryCodeParameter"
           },
           {
-            "in": "query",
-            "name": "skip",
-            "description": "An optional parameter for how many entries to skip, for pagination purposes. The default value is 0.",
-            "type": "integer",
-            "format": "int32",
-            "default": 0
+            "$ref": "#/parameters/PaginationSkipParameter"
           },
           {
-            "in": "query",
-            "name": "maxPageSize",
-            "description": "An optional parameter for how many entries to return, for pagination purposes. The default value is 100.",
-            "type": "integer",
-            "format": "int32",
-            "default": 100
+            "$ref": "#/parameters/MaxPageSizeParameter"
           },
           {
-            "in": "query",
-            "name": "administrativeDivision",
-            "description": "An optional parameter for the name of the state or province in which to search for the area code.",
-            "type": "string"
+            "$ref": "#/parameters/AdministrativeDivisionParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "in": "header",
-            "name": "accept-language",
-            "description": "The locale to display in the localized fields in the response. e.g. 'en-US'",
-            "type": "string"
+            "$ref": "#/parameters/AcceptLanguageHeaderParameter"
           }
         ],
         "responses": {
@@ -265,64 +186,25 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "countryCode",
-            "description": "The ISO 3166-2 country code, e.g. US.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/CountryCodeParameter"
           },
           {
-            "in": "query",
-            "name": "skip",
-            "description": "An optional parameter for how many entries to skip, for pagination purposes. The default value is 0.",
-            "type": "integer",
-            "format": "int32",
-            "default": 0
+            "$ref": "#/parameters/PaginationSkipParameter"
           },
           {
-            "in": "query",
-            "name": "maxPageSize",
-            "description": "An optional parameter for how many entries to return, for pagination purposes. The default value is 100.",
-            "type": "integer",
-            "format": "int32",
-            "default": 100
+            "$ref": "#/parameters/MaxPageSizeParameter"
           },
           {
-            "in": "query",
-            "name": "phoneNumberType",
-            "description": "Filter by numberType, e.g. Geographic, TollFree.",
-            "type": "string",
-            "enum": [
-              "geographic",
-              "tollFree"
-            ],
-            "x-ms-enum": {
-              "name": "PhoneNumberType",
-              "modelAsString": true
-            }
+            "$ref": "#/parameters/PhoneNumberTypeParameter"
           },
           {
-            "in": "query",
-            "name": "assignmentType",
-            "description": "Filter by assignmentType, e.g. Person, Application.",
-            "type": "string",
-            "enum": [
-              "person",
-              "application"
-            ],
-            "x-ms-enum": {
-              "name": "PhoneNumberAssignmentType",
-              "modelAsString": true
-            }
+            "$ref": "#/parameters/AssignmentTypeParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "in": "header",
-            "name": "accept-language",
-            "description": "The locale to display in the localized fields in the response. e.g. 'en-US'",
-            "type": "string"
+            "$ref": "#/parameters/AcceptLanguageHeaderParameter"
           }
         ],
         "responses": {
@@ -365,11 +247,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "countryCode",
-            "description": "The ISO 3166-2 country code, e.g. US.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/CountryCodeParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -489,11 +367,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "searchId",
-            "description": "The search Id.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/SearchIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -819,11 +693,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "operationId",
-            "description": "The id of the operation",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/OperationIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -863,11 +733,7 @@
         "operationId": "PhoneNumbers_CancelOperation",
         "parameters": [
           {
-            "in": "path",
-            "name": "operationId",
-            "description": "The id of the operation",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/OperationIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -909,11 +775,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "phoneNumber",
-            "description": "The phone number id in E.164 format. The leading plus can be either + or encoded as %2B, e.g. +11234567890.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/PhoneNumberParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -982,11 +844,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "phoneNumber",
-            "description": "The purchased phone number whose details are to be fetched in E.164 format, e.g. +11234567890.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/PhoneNumberParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1020,11 +878,7 @@
         "operationId": "PhoneNumbers_ReleasePhoneNumber",
         "parameters": [
           {
-            "in": "path",
-            "name": "phoneNumber",
-            "description": "Phone number to be released, e.g. +11234567890.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/PhoneNumberParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1078,20 +932,10 @@
         ],
         "parameters": [
           {
-            "in": "query",
-            "name": "skip",
-            "description": "An optional parameter for how many entries to skip, for pagination purposes. The default value is 0.",
-            "type": "integer",
-            "format": "int32",
-            "default": 0
+            "$ref": "#/parameters/AssignmentTypeParameter"
           },
           {
-            "in": "query",
-            "name": "top",
-            "description": "An optional parameter for how many entries to return, for pagination purposes. The default value is 100.",
-            "type": "integer",
-            "format": "int32",
-            "default": 100
+            "$ref": "#/parameters/PaginationTopParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2166,7 +2010,7 @@
     "PhoneNumberParameter": {
       "in": "path",
       "name": "phoneNumber",
-      "description": "The purchased phone number whose details are to be fetched in E.164 format, e.g. +11234567890.",
+      "description": "The purchased phone number in E.164 format, e.g. +11234567890.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
