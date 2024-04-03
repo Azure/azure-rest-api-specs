@@ -9,14 +9,6 @@ using TypeSpec.Rest;
 
 namespace Face;
 
-@doc("Base model for person group.")
-model BasePersonGroup {
-  ...UserDefinedFields;
-
-  @doc("Name of recognition model. Recognition model is used when the face features are extracted and associated with detected faceIds. The default value is 'recognition_01', if latest model needed, please explicitly specify the model you need.")
-  recognitionModel?: RecognitionModel = "recognition_01";
-}
-
 @resource("persons")
 @doc("Base model for person.")
 model BasePersonGroupPerson {
@@ -34,7 +26,7 @@ model BasePersonGroupPerson {
 
 @resource("persongroups")
 @doc("The container of the uploaded person data, including face recognition feature, and up to 10,000 persons. To handle larger scale face identification problem, please consider using LargePersonGroup.")
-model PersonGroup is BasePersonGroup {
+model PersonGroup is BaseCollection {
   @key
   @visibility("read")
   @doc("ID of the container.")
@@ -51,7 +43,7 @@ model PersonGroupPersonFace is BaseFace;
 
 @doc("The container of the uploaded person data, including face recognition feature, and up to 1,000,000 people.")
 @resource("largepersongroups")
-model LargePersonGroup is BasePersonGroup {
+model LargePersonGroup is BaseCollection {
   @key
   @visibility("read")
   @doc("ID of the container.")

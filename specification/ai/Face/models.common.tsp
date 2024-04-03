@@ -85,6 +85,22 @@ model UserDefinedFields {
   userData?: string;
 }
 
+@doc("Common model for face list and person group.")
+model BaseCollection {
+  ...UserDefinedFields;
+
+  @doc("Name of recognition model. Recognition model is used when the face features are extracted and associated with detected faceIds.")
+  recognitionModel?: RecognitionModel;
+}
+
+@doc("Model for create face list and person group.")
+model CreateCollectionOptions {
+  ...UserDefinedFields;
+
+  @doc("The 'recognitionModel' associated with this face list. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02, 'recognition_03', and 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.")
+  recognitionModel?: RecognitionModel = "recognition_01";
+}
+
 @doc("Common model for persisted face.")
 @resource("persistedfaces")
 model BaseFace {

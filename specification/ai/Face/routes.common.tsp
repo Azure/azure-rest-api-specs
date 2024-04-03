@@ -32,9 +32,9 @@ op FaceResourceCreateWithServiceProvidedName<
 >;
 
 @createsOrReplacesResource(TResource)
-op FaceResourceCreateOperation<TResource extends TypeSpec.Reflection.Model> is Foundations.ResourceOperation<
+op FaceCollectionResourceCreateOperation<TResource extends TypeSpec.Reflection.Model> is Foundations.ResourceOperation<
   TResource,
-  Foundations.ResourceBody<TResource>,
+  CreateCollectionOptions,
   TypeSpec.Http.OkResponse,
   ServiceTraits
 >;

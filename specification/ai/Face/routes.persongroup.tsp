@@ -41,7 +41,7 @@ interface PersonGroupOperations {
   > * S0-tier subscription quota: 1,000,000 person groups. Each holds up to 10,000 persons.
   > * to handle larger scale face identification problem, please consider using LargePersonGroup.
   """)
-  createPersonGroup is FaceResourceCreateOperation<PersonGroup>;
+  createPersonGroup is FaceCollectionResourceCreateOperation<PersonGroup>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Delete response with 200 while standard op requires 204"
   @doc("Delete an existing person group with specified personGroupId. Persisted data in this person group will be deleted.")
@@ -159,7 +159,7 @@ interface PersonGroupOperations {
   > * Free-tier subscription quota: 1,000 large person groups.
   > * S0-tier subscription quota: 1,000,000 large person groups.
   """)
-  createLargePersonGroup is FaceResourceCreateOperation<LargePersonGroup>;
+  createLargePersonGroup is FaceCollectionResourceCreateOperation<LargePersonGroup>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Delete response with 200 while standard op requires 204"
   @doc("Delete an existing large person group with specified personGroupId. Persisted data in this large person group will be deleted.")
