@@ -20,6 +20,7 @@ model Certificate is ProxyResource<CertificateProperties> {
   /**
    * Serial number of the certificate. Use '.default' to get current active certificate.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @path
   @key("serialNumber")
   @segment("certificates")
