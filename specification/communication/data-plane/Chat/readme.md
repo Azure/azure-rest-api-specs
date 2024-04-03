@@ -168,6 +168,8 @@ These settings apply only when `--tag=package-2024-03-01-preview` is specified o
 ```yaml $(tag) == 'package-2024-03-01-preview'
 input-file:
   - preview/2024-03-01-preview/communicationserviceschat.json
+title:
+  Azure Communication Services
 ```
 
 ### Tag: package-chat-2024-03-07
