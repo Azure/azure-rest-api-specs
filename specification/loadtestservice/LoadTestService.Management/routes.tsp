@@ -40,14 +40,16 @@ interface LoadTests {
 
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     LoadTestResource,
-    LroHeaders = ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing API"
   update is ArmResourcePatchAsync<
     LoadTestResource,
     LoadTestProperties,
-    LroHeaders = ArmAsyncOperationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   delete is ArmResourceDeleteWithoutOkAsync<LoadTestResource>;
