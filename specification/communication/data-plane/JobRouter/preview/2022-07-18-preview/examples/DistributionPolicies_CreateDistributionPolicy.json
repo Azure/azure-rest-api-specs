@@ -10,7 +10,7 @@
         "maxConcurrentOffers": 5,
         "bypassSelectors": false
       },
-      "offerTtlSeconds": 300,
+      "offerExpiresAfterSeconds": 300,
       "name": "Main"
     }
   },
@@ -19,7 +19,20 @@
       "body": {
         "id": "d9033d56-659c-437a-b5b7-4f3b14301dd4",
         "name": "Main",
-        "offerTtlSeconds": 300,
+        "offerExpiresAfterSeconds": 300,
+        "mode": {
+          "kind": "longest-idle",
+          "minConcurrentOffers": 1,
+          "maxConcurrentOffers": 5,
+          "bypassSelectors": false
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "d9033d56-659c-437a-b5b7-4f3b14301dd4",
+        "name": "Main",
+        "offerExpiresAfterSeconds": 300,
         "mode": {
           "kind": "longest-idle",
           "minConcurrentOffers": 1,

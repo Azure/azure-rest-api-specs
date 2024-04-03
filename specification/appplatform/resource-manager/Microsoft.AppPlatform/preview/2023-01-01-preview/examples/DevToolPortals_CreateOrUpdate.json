@@ -14,7 +14,7 @@
             "openid"
           ],
           "clientSecret": "xxxxx",
-          "metadataUrl": "https://login.microsoft.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration"
+          "metadataUrl": "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration"
         },
         "features": {
           "applicationAccelerator": {
@@ -37,7 +37,7 @@
             "scopes": [
               "openid"
             ],
-            "metadataUrl": "https://login.microsoft.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration"
+            "metadataUrl": "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration"
           },
           "features": {
             "applicationAccelerator": {
@@ -51,15 +51,20 @@
           },
           "url": "aaa.com",
           "provisioningState": "Succeeded",
-          "resourceRequests": {
-            "cpu": "1",
-            "memory": "1Gi",
-            "instanceCount": 1
-          },
-          "instances": [
+          "components": [
             {
-              "name": "app-live-view-server-name",
-              "status": "Running"
+              "name": "server",
+              "resourceRequests": {
+                "cpu": "1",
+                "memory": "1Gi",
+                "instanceCount": 1
+              },
+              "instances": [
+                {
+                  "name": "dev-tool-portal-server-name",
+                  "status": "Running"
+                }
+              ]
             }
           ]
         },
@@ -85,7 +90,7 @@
             "scopes": [
               "openid"
             ],
-            "metadataUrl": "https://login.microsoft.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration"
+            "metadataUrl": "https://login.microsoftonline.com/00000000-0000-0000-0000-000000000000/v2.0/.well-known/openid-configuration"
           },
           "features": {
             "applicationAccelerator": {

@@ -1,0 +1,49 @@
+{
+  "operationId": "DataConnections_ListDataConnection",
+  "title": "DataConnections_ListDataConnection",
+  "parameters": {
+    "api-version": "2023-03-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "dummyrg",
+    "workspaceName": "ThisisaWorkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "totalElements": 2,
+        "nextLink": "https://eastus.easm.defender.microsoft.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/workspaces/ThisisaWorkspace/dataConnections?maxpagesize=25&api-version=2023-03-01-preview",
+        "value": [
+          {
+            "id": "ThisisaDataConnection",
+            "name": "ThisisaDataConnection",
+            "displayName": "ThisisaDataConnection",
+            "kind": "logAnalytics",
+            "frequency": "weekly",
+            "frequencyOffset": 1,
+            "properties": {
+              "apiKey": "ThisisApiKey",
+              "workspaceId": "ThisisWorkspaceId"
+            },
+            "createdDate": "2022-05-02T19:30:14.432+00:00",
+            "updatedDate": "2022-05-02T19:30:14.432+00:00"
+          },
+          {
+            "id": "ThisisaDataConnection2",
+            "name": "ThisisaDataConnection2",
+            "displayName": "ThisisaDataConnection2",
+            "kind": "azureDataExplorer",
+            "properties": {
+              "clusterName": "ThisisClusterName",
+              "region": "ThisisRegion",
+              "databaseName": "ThisisDatabaseName"
+            },
+            "frequency": "weekly",
+            "frequencyOffset": 1,
+            "createdDate": "2022-05-02T19:30:14.432+00:00",
+            "updatedDate": "2022-05-02T19:30:14.432+00:00"
+          }
+        ]
+      }
+    }
+  }
+}

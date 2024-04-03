@@ -416,6 +416,18 @@
         }
       ],
       "properties": {
+        "identity": {
+          "description": "The managed identity associated with Export",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/SystemAssignedServiceIdentity"
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the Export's managed identity. Only required when utilizing managed identity.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ExportProperties",

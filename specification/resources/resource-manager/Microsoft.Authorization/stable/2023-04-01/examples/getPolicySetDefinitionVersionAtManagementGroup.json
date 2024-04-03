@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "managementGroupName": "MyManagementGroup",
+    "policySetDefinitionName": "CostManagement",
+    "policyDefinitionVersion": "1.2.1",
+    "api-version": "2023-04-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/providers/Microsoft.Management/managementgroups/MyManagementGroup/providers/Microsoft.Authorization/policySetDefinitions/CostManagement/versions/1.2.1",
+        "type": "Microsoft.Authorization/policySetDefinitions/versions",
+        "name": "1.2.1",
+        "properties": {
+          "displayName": "Cost Management",
+          "description": "Policies to enforce low cost storage SKUs",
+          "metadata": {
+            "category": "Cost Management"
+          },
+          "version": "1.2.1",
+          "policyDefinitions": [
+            {
+              "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/7433c107-6db4-4ad1-b57a-a76dce0154a1",
+              "policyDefinitionReferenceId": "Limit_Skus",
+              "parameters": {
+                "listOfAllowedSKUs": {
+                  "value": [
+                    "Standard_GRS",
+                    "Standard_LRS"
+                  ]
+                }
+              }
+            },
+            {
+              "policyDefinitionId": "/providers/Microsoft.Management/managementgroups/MyManagementGroup/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
+              "policyDefinitionReferenceId": "Resource_Naming",
+              "parameters": {
+                "prefix": {
+                  "value": "DeptA"
+                },
+                "suffix": {
+                  "value": "-LC"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

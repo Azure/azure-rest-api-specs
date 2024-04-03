@@ -13,7 +13,10 @@ namespace TextTranslation;
 model TranslateParameters {
   ...CommonParameters;
 
-  @query({format: "multi"})
+  #suppress "@azure-tools/typespec-azure-core/prefer-csv-collection-format" "Existing Spec"
+  @query({
+    format: "multi",
+  })
   @doc("""
     Specifies the language of the output text. The target language must be one of the supported languages included 
     in the translation scope. For example, use to=de to translate to German.
@@ -137,33 +140,27 @@ model TranslationResult {
   meteredUsage: int32;
 }
 
-enum TextTypeKnownValues {
+@doc("Translation text type")
+union TextType {
+  string,
   Plain: "Plain",
   Html: "Html",
 }
 
-@doc("Translation text type")
-@knownValues(TextTypeKnownValues)
-scalar TextType extends string;
-
-enum ProfanityActionKnownValues {
+@doc("Translator profanity actions")
+union ProfanityAction {
+  string,
   NoAction: "NoAction",
   Marked: "Marked",
   Deleted: "Deleted",
 }
 
-@doc("Translator profanity actions")
-@knownValues(ProfanityActionKnownValues)
-scalar ProfanityAction extends string;
-
-enum ProfanityMarkerKnownValues {
+@doc("Translator profanity markers")
+union ProfanityMarker {
+  string,
   Asterisk: "Asterisk",
   Tag: "Tag",
 }
-
-@doc("Translator profanity markers")
-@knownValues(ProfanityMarkerKnownValues)
-scalar ProfanityMarker extends string;
 
 @doc("Element containing the translated text")
 model TranslatedTextItem {

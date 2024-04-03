@@ -30,6 +30,16 @@ tag: package-2023-02-01
 ```
 
 
+### Tag: package-2023-06-01-preview
+
+These settings apply only when `--tag=package-2023-06-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-06-01-preview'
+input-file:
+  - Microsoft.Quota/preview/2023-06-01-preview/groupquota.json
+  - Microsoft.Quota/stable/2023-02-01/quota.json
+```
+
 ### Tag: package-2023-02-01
 
 These settings apply only when `--tag=package-2023-02-01` is specified on the command line.
@@ -58,6 +68,16 @@ directive:
     - R4018 # The 'OperationsApiResponseSchema' It will be added later, if needed. The current API provides in this format.
 ```
 
+``` yaml
+suppressions:
+  - code: PathForPutOperation
+    reason: This API is a Management Group level API.
+  - code: PathForNestedResource
+    reason: This API is a Management Group level API.
+  - code: TopLevelResourcesListBySubscription
+    reason: This API is a Management Group level API.
+```
+
 ---
 
 ---
@@ -72,7 +92,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js

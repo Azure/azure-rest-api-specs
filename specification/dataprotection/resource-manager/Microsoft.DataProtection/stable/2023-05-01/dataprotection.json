@@ -1275,7 +1275,10 @@
             "$ref": "./examples/BackupInstanceOperations/TriggerBackup.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/validateForBackup": {
@@ -1348,7 +1351,10 @@
             "$ref": "./examples/BackupInstanceOperations/ValidateForBackup.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/operationResults/{operationId}": {
@@ -1670,6 +1676,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Trigger Restore": {
             "$ref": "./examples/BackupInstanceOperations/TriggerRestore.json"
@@ -2081,6 +2090,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "Validate Restore": {
             "$ref": "./examples/BackupInstanceOperations/ValidateRestore.json"
@@ -4063,6 +4075,11 @@
           "readOnly": true,
           "type": "string"
         },
+        "rehydrationPriority": {
+          "description": "Priority to be used for rehydration",
+          "readOnly": true,
+          "type": "string"
+        },
         "restoreType": {
           "description": "It indicates the sub type of operation i.e. in case of Restore it can be ALR/OLR",
           "readOnly": true,
@@ -4962,6 +4979,28 @@
       "title": "BasePolicyRule",
       "type": "object"
     },
+    "BaseResourceProperties": {
+      "description": "Properties which are specific to datasource/datasourceSets",
+      "required": [
+        "objectType"
+      ],
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "description": "Type of the specific object - used for deserializing",
+          "type": "string",
+          "readOnly": false,
+          "enum": [
+            "DefaultResourceProperties"
+          ],
+          "x-ms-enum": {
+            "name": "ResourcePropertiesObjectType",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "objectType"
+    },
     "CheckNameAvailabilityRequest": {
       "description": "CheckNameAvailability Request",
       "properties": {
@@ -5235,6 +5274,10 @@
         "resourceUri": {
           "description": "Uri of the resource.",
           "type": "string"
+        },
+        "resourceProperties": {
+          "$ref": "#/definitions/BaseResourceProperties",
+          "description": "Properties specific to data source"
         }
       },
       "required": [
@@ -5273,6 +5316,10 @@
         "resourceUri": {
           "description": "Uri of the resource.",
           "type": "string"
+        },
+        "resourceProperties": {
+          "$ref": "#/definitions/BaseResourceProperties",
+          "description": "Properties specific to data source set"
         }
       },
       "required": [
@@ -5390,6 +5437,19 @@
         }
       }
     },
+    "DefaultResourceProperties": {
+      "description": "Default source properties",
+      "required": [
+        "objectType"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "DefaultResourceProperties"
+    },
     "DeletedBackupInstanceResource": {
       "description": "Deleted Backup Instance",
       "type": "object",
@@ -5490,28 +5550,12 @@
           "description": "Gets or sets the user assigned identities.",
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/UserAssignedIdentityDetails"
+            "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/UserAssignedIdentity"
           }
         }
       },
       "title": "DppIdentityDetails",
       "type": "object"
-    },
-    "UserAssignedIdentityDetails": {
-      "description": "User Assigned Identity Details",
-      "type": "object",
-      "properties": {
-        "clientId": {
-          "description": "The Client Id of the User Assigned Managed Identity.",
-          "type": "string",
-          "readOnly": true
-        },
-        "principalId": {
-          "description": "The Object Id of the User Assigned Managed Identity.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
     },
     "DppBaseResourceList": {
       "description": "Base for all lists of V2 resources.",

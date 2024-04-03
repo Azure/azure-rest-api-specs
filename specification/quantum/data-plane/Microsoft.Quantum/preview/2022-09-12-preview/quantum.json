@@ -8,7 +8,14 @@
       "email": "azqengg@microsoft.com"
     }
   },
-  "host": "quantum.azure.com",
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{azureRegion}.quantum.azure.com",
+    "parameters": [
+      {
+        "$ref": "#/parameters/azureRegionParameter"
+      }
+    ]
+  },
   "schemes": [
     "https"
   ],
@@ -25,14 +32,14 @@
       "flow": "application",
       "description": "Azure Active Directory OAuth2 Authentication",
       "scopes": {
-        "<audience>/.default": "client credential scope"
+        "https://quantum.microsoft.com/.default": "client credential scope"
       }
     }
   },
   "security": [
     {
       "AzureAuth": [
-        "<audience>/.default"
+        "https://quantum.microsoft.com/.default"
       ]
     }
   ],
@@ -1252,6 +1259,15 @@
     }
   },
   "parameters": {
+    "azureRegionParameter": {
+      "name": "azureRegion",
+      "description": "Supported Azure regions for Azure Quantum Services. For example, \"eastus\"",
+      "required": true,
+      "x-ms-parameter-location": "client",
+      "x-ms-skip-url-encoding": true,
+      "type": "string",
+      "in": "path"
+    },
     "apiVersionParameter": {
       "name": "api-version",
       "in": "query",

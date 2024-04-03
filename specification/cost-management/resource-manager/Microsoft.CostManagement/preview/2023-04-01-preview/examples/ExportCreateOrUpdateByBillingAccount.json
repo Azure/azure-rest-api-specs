@@ -5,6 +5,10 @@
     "scope": "providers/Microsoft.Billing/billingAccounts/123456",
     "exportName": "TestExport",
     "parameters": {
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "location": "centralus",
       "properties": {
         "schedule": {
           "status": "Active",
@@ -47,6 +51,12 @@
         "id": "providers/Microsoft.Billing/billingAccounts/123456/providers/Microsoft.CostManagement/exports/TestExport",
         "name": "TestExport",
         "type": "Microsoft.CostManagement/exports",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000"
+        },
+        "location": "centralus",
         "properties": {
           "schedule": {
             "status": "Active",
@@ -88,6 +98,12 @@
         "id": "providers/Microsoft.Billing/billingAccounts/123456/providers/Microsoft.CostManagement/exports/TestExport",
         "name": "TestExport",
         "type": "Microsoft.CostManagement/exports",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000"
+        },
+        "location": "centralus",
         "properties": {
           "schedule": {
             "status": "Active",
