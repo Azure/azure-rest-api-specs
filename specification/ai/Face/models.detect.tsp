@@ -23,7 +23,7 @@ model FaceDetectionOptions {
   @query({
     format: "csv",
   })
-  returnFaceAttributes?: FaceAtrributeType[];
+  returnFaceAttributes?: FaceAttributeType[];
 
   @doc("The 'recognitionModel' associated with the detected faceIds. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02', 'recognition_03' or 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.")
   @query
@@ -47,7 +47,7 @@ model FaceDetectionOptions {
 #suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Use fixed enum to represent modelAsString = false"
 @doc("Available options for detect face with attribute.")
 @fixed
-enum FaceAtrributeType {
+enum FaceAttributeType {
   @doc("3-D roll/yaw/pitch angles for face direction.")
   headPose,
 

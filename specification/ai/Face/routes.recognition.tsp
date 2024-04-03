@@ -119,7 +119,7 @@ interface FaceRecognitionOperations {
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path."
   @summary("1-to-many identification to find the closest matches of the specific query person face from a person group.")
   identifyFromPersonGroup is IdentifyOperation<{
-    @doc("	personGroupId of the target person group, created by PersonGroup - Create. Parameter personGroupId and largePersonGroupId should not be provided at the same time.")
+    @doc("personGroupId of the target person group, created by PersonGroup - Create. Parameter personGroupId and largePersonGroupId should not be provided at the same time.")
     personGroupId: string;
   }>;
 
