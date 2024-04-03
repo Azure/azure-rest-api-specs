@@ -29,35 +29,38 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("The status of the current operation.")
 @Azure.Core.lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
 
   @doc("Provisioning State")
-  Provisioning,
+  Provisioning: "Provisioning",
 
   @doc("Updating State")
-  Updating,
+  Updating: "Updating",
 
   @doc("Deleting State")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("Accepted State")
-  Accepted,
+  Accepted: "Accepted",
 }
 
 @doc("The Azure Extended Zone registration status for a subscription")
-enum RegistrationState {
+union RegistrationState {
+  string,
+
   @doc("Subscription not registered for the Azure Extended Zone")
-  NotRegistered,
+  NotRegistered: "NotRegistered",
 
   @doc("Subscription pending registration for the Azure Extended Zone")
-  PendingRegister,
+  PendingRegister: "PendingRegister",
 
   @doc("Subscription is registered for the Azure Extended Zone")
-  Registered,
+  Registered: "Registered",
 
   @doc("Subscription is pending unregistering for the Azure Extended Zone")
-  PendingUnregister,
+  PendingUnregister: "PendingUnregister",
 }
 
 @doc("The properties of an Extended Zone resource.")

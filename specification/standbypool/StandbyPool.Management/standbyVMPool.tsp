@@ -43,7 +43,7 @@ model StandbyVirtualMachinePoolResourceProperties {
 
   @doc("Specifies the fully qualified resource ID of a virtual machine scale set the pool is attached to.")
   @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
-  attachedVirtualMachineScaleSetId?: ResourceIdentifier<[
+  attachedVirtualMachineScaleSetId?: armResourceIdentifier<[
     {
       type: "Microsoft.Compute/virtualMachineScaleSet";
     }
@@ -55,12 +55,14 @@ model StandbyVirtualMachinePoolResourceProperties {
 }
 
 @doc("State of standby virtual machines")
-enum VirtualMachineState {
+union VirtualMachineState {
+  string,
+
   @doc("The virtual machine is up and running.")
-  Running,
+  Running: "Running",
 
   @doc("The virtual machine has released the lease on the underlying hardware and is powered off.")
-  Deallocated,
+  Deallocated: "Deallocated",
 }
 
 @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)

@@ -11,19 +11,21 @@ namespace DevCenterService;
 
 @doc("Indicates whether operation status is running, completed, canceled or failed.")
 @lroStatus
-enum OperationStatusValue {
+union OperationStatusValue {
+  string,
+
   @doc("Operation is in progress")
-  Running,
+  Running: "Running",
 
   @doc("Operation is completed with success")
   @lroSucceeded
-  Completed,
+  Completed: "Completed",
 
   @doc("Operation was canceled")
-  Canceled,
+  Canceled: "Canceled",
 
   @doc("Operation failed")
-  Failed,
+  Failed: "Failed",
 }
 
 @doc("The current status of an async operation")
