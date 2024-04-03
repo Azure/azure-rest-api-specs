@@ -100,9 +100,13 @@ model BaseFace {
 
 @doc("Query parameter for adding face to person.")
 model AddFaceOptions {
-  @query
   @doc("A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.")
-  targetFace?: string;
+  @query({
+    format: "csv",
+  })
+  @maxItems(4)
+  @minItems(4)
+  targetFace?: int32[];
 
   @query
   @doc("The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include 'detection_01', 'detection_02' and 'detection_03'. The default value is 'detection_01'.")

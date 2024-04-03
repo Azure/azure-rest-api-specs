@@ -19,9 +19,11 @@ model FaceDetectionOptions {
   @query
   returnFaceLandmarks?: boolean = false;
 
-  @doc("Analyze and return the one or more specified face attributes in the comma-separated string like 'returnFaceAttributes=headPose,glasses'. Supported face attributes include headPose, glasses, occlusion, accessories, blur, exposure, noise, mask, and qualityForRecognition. Face attribute analysis has additional computational and time cost.")
-  @query
-  returnFaceAttributes?: string;
+  @doc("Analyze and return the one or more specified face attributes in the comma-separated string like 'returnFaceAttributes=headPose,glasses'. Face attribute analysis has additional computational and time cost.")
+  @query({
+    format: "csv",
+  })
+  returnFaceAttributes?: FaceAtrributeType[];
 
   @doc("The 'recognitionModel' associated with the detected faceIds. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02', 'recognition_03' or 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.")
   @query
@@ -40,6 +42,38 @@ model FaceDetectionOptions {
   @minValue(60)
   @maxValue(86400)
   faceIdTimeToLive?: int32 = 86400;
+}
+
+#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Use fixed enum to represent modelAsString = false"
+@doc("Available options for detect face with attribute.")
+@fixed
+enum FaceAtrributeType {
+  @doc("3-D roll/yaw/pitch angles for face direction.")
+  headPose,
+
+  @doc("Glasses type. Values include 'NoGlasses', 'ReadingGlasses', 'Sunglasses', 'SwimmingGoggles'.")
+  glasses,
+
+  @doc("Whether each facial area is occluded, including forehead, eyes and mouth.")
+  occlusion,
+
+  @doc("Accessories around face, including 'headwear', 'glasses' and 'mask'. Empty array means no accessories detected. Note this is after a face is detected. Large mask could result in no face to be detected.")
+  accessories,
+
+  @doc("Face is blurry or not. Level returns 'Low', 'Medium' or 'High'. Value returns a number between [0,1], the larger the blurrier.")
+  blur,
+
+  @doc("Face exposure level. Level returns 'GoodExposure', 'OverExposure' or 'UnderExposure'.")
+  exposure,
+
+  @doc("Noise level of face pixels. Level returns 'Low', 'Medium' and 'High'. Value returns a number between [0,1], the larger the noisier")
+  noise,
+
+  @doc("Whether each face is wearing a mask. Mask type returns 'noMask', 'faceMask', 'otherMaskOrOcclusion', or 'uncertain'. Value returns a boolean 'noseAndMouthCovered' indicating whether nose and mouth are covered.")
+  mask,
+
+  @doc("The overall image quality regarding whether the image being used in the detection is of sufficient quality to attempt face recognition on. The value is an informal rating of low, medium, or high. Only 'high' quality images are recommended for person enrollment and quality at or above 'medium' is recommended for identification scenarios. The attribute is only available when using any combinations of detection models detection_01 or detection_03, and recognition models recognition_03 or recognition_04.")
+  qualityForRecognition,
 }
 
 @doc("Response for detect API.")
