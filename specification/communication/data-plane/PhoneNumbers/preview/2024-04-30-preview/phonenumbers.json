@@ -1830,6 +1830,26 @@
         },
         "cost": {
           "$ref": "#/definitions/PhoneNumberCost"
+        },
+        "operatorId": {
+          "description": "Id of the operator that provided the number",
+          "type": "string"
+        },
+        "operatorName": {
+          "description": "Name of the operator that provided the number",
+          "type": "string"
+        },
+        "phoneNumberSource": {
+          "description": "Source of the number, e.g. Cloud or OperatorConnect",
+          "enum": [
+            "cloud",
+            "operatorConnect"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PhoneNumberSource",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -2118,6 +2138,54 @@
       "type": "string",
       "x-ms-parameter-location": "client"
     },
+    "Endpoint": {
+      "in": "path",
+      "name": "endpoint",
+      "description": "The communication resource, for example https://resourcename.communication.azure.com",
+      "required": true,
+      "type": "string",
+      "format": "url",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
+    "AcceptLanguageHeaderParameter": {
+      "in": "header",
+      "name": "accept-language",
+      "description": "The locale to display in the localized fields in the response. e.g. 'en-US'",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CountryCodeParameter": {
+      "in": "path",
+      "name": "countryCode",
+      "description": "The ISO 3166-2 country code, e.g. US.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "PhoneNumberParameter": {
+      "in": "path",
+      "name": "phoneNumber",
+      "description": "The purchased phone number whose details are to be fetched in E.164 format, e.g. +11234567890.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "OperationIdParameter": {
+      "in": "path",
+      "name": "operationId",
+      "description": "The id of the operation",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SearchIdParameter": {
+      "in": "path",
+      "name": "searchId",
+      "description": "The search Id.",
+      "required": true,
+      "type": "string"
+    },
     "PaginationSkipParameter": {
       "in": "query",
       "name": "skip",
@@ -2136,23 +2204,70 @@
       "default": 100,
       "x-ms-parameter-location": "method"
     },
-    "CountryCodeParameter": {
-      "in": "path",
-      "name": "countryCode",
-      "description": "The ISO 3166-2 country code, e.g. US.",
-      "required": true,
-      "type": "string",
+    "MaxPageSizeParameter": {
+      "in": "query",
+      "name": "maxPageSize",
+      "description": "An optional parameter for how many entries to return, for pagination purposes. The default value is 100.",
+      "type": "integer",
+      "format": "int32",
+      "default": 100,
       "x-ms-parameter-location": "method"
     },
-    "Endpoint": {
-      "in": "path",
-      "name": "endpoint",
-      "description": "The communication resource, for example https://resourcename.communication.azure.com",
+    "PhoneNumberTypeParameter": {
+      "in": "query",
+      "name": "phoneNumberType",
+      "description": "Filter by numberType, e.g. Geographic, TollFree.",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "geographic",
+        "tollFree"
+      ],
+      "x-ms-enum": {
+        "name": "PhoneNumberType",
+        "modelAsString": true
+      }
+    },
+    "RequiredPhoneNumberTypeParameter": {
+      "in": "query",
+      "name": "phoneNumberType",
+      "description": "Filter by numberType, e.g. Geographic, TollFree.",
       "required": true,
       "type": "string",
-      "x-ms-skip-url-encoding": true,
-      "x-ms-parameter-location": "client",
-      "format": "url"
+      "enum": [
+        "geographic",
+        "tollFree"
+      ],
+      "x-ms-enum": {
+        "name": "PhoneNumberType",
+        "modelAsString": true
+      }
+    },
+    "AssignmentTypeParameter": {
+      "in": "query",
+      "name": "assignmentType",
+      "description": "Filter by assignmentType, e.g. Person, Application.",
+      "type": "string",
+      "enum": [
+        "person",
+        "application"
+      ],
+      "x-ms-enum": {
+        "name": "PhoneNumberAssignmentType",
+        "modelAsString": true
+      }
+    },
+    "LocalityParameter": {
+      "in": "query",
+      "name": "locality",
+      "description": "The name of locality or town in which to search for the area code. This is required if the number type is Geographic.",
+      "type": "string"
+    },
+    "AdministrativeDivisionParameter": {
+      "in": "query",
+      "name": "administrativeDivision",
+      "description": "The name of the state or province in which to search for the area code.",
+      "type": "string"
     },
     "ReservationIdParameter": {
       "in": "path",
