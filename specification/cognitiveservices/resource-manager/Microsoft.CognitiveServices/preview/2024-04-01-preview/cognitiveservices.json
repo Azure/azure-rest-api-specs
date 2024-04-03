@@ -3296,6 +3296,11 @@
             "description": "Successfully Reconciled the NSP configuration."
           },
           "202": {
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            },
             "description": "Request to reconcile the NSP configuration accepted."
           },
           "default": {
@@ -5886,6 +5891,10 @@
           ],
           "description": "Resource tags."
         },
+        "displayName" :{
+          "type": "string",
+          "description": "Rai Blocklist Item Display Name."
+        },
         "properties": {
           "$ref": "#/definitions/RaiBlocklistItemProperties",
           "description": "Properties of Cognitive Services RaiBlocklist Item."
@@ -6145,6 +6154,7 @@
       "type": "object",
       "properties": {
         "provisioningState": {
+          "readOnly": true,
           "description": "Provisioning state of NetworkSecurityPerimeter configuration",
           "type": "string"
         },
@@ -6475,6 +6485,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
       "description": "The name of the NSP Configuration.",
       "x-ms-parameter-location": "method"
     }
