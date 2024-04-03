@@ -20,11 +20,11 @@ model Image is ProxyResource<ImageProperties> {
   /**
    * Image name. Use an image GUID for GA versions of the API.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @path
   @key("imageName")
   @segment("images")
   @visibility("read")
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 

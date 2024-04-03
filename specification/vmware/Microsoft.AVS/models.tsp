@@ -1208,11 +1208,11 @@ global reach connection
 @parentResource(PrivateCloud)
 @singleton
 model WorkloadNetwork is ProxyResource<WorkloadNetworkProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @doc("Name of the global reach connection")
   @key("workloadNetworkName")
   @path
   @segment("workloadNetworks")
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -2183,11 +2183,11 @@ union DnsZoneType {
 @parentResource(PrivateCloud)
 @singleton
 model IscsiPath is ProxyResource<IscsiPathProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @doc("Name of the iSCSI path resource")
   @key("iscsiPathName")
   @path
   @segment("iscsiPaths")
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
