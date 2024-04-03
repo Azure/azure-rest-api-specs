@@ -680,6 +680,14 @@ SECRET_VALUE.
   @visibility("read")
   kind?: TestKind;
 
+  @added(APIVersions.v2023_04_01_preview)
+  @doc("Request data collection level for test run")
+  requestDataLevel?: RequestDataLevel;
+
+  @added(APIVersions.v2023_04_01_preview)
+  @doc("Enable or disable debug level logging. True if debug logs are enabled for the test run. False otherwise")
+  debugLogsEnabled?: boolean;
+
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is an abbervation and should be all caps"
   @added(APIVersions.v2023_04_01_preview)
   @doc("Inject load test engines without deploying public IP for outbound access")
@@ -1132,3 +1140,10 @@ alias ResourceCreatedResponse<T extends TypeSpec.Reflection.Model> = TypeSpec.Ht
 
 alias ResourceCreatedOrOkResponse<T extends TypeSpec.Reflection.Model> = ResourceCreatedResponse<T> | (TypeSpec.Http.Response<200> &
   T);
+
+@added(APIVersions.v2023_04_01_preview)
+@doc("Request data collection level for test run")
+enum RequestDataLevel {
+  @doc("No request data will be collected") NONE: "NONE",
+  @doc("Request data will be collected in case of failed requests") ERRORS: "ERRORS",
+}
