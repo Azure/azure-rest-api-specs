@@ -18,15 +18,17 @@ model LoadBalancer is ExtensionResource<LoadBalancerProperties> {
 }
 
 @doc("Enum of advertise mode")
-enum AdvertiseMode {
+union AdvertiseMode {
+  string,
+
   @doc("ARP advertise mode")
-  ARP,
+  ARP: "ARP",
 
   @doc("BGP advertise mode")
-  BGP,
+  BGP: "BGP",
 
   @doc("both ARP and BGP advertise mode")
-  Both,
+  Both: "Both",
 }
 
 @doc("Details of the LoadBalancer.")
