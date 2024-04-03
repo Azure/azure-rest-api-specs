@@ -920,11 +920,11 @@
                   "description": "Enable java agent injection for the java app.",
                   "type": "boolean"
                 },
-                "logLevelSettings": {
-                  "description": "Settings of the log level for the java app.",
+                "loggerSettings": {
+                  "description": "Settings of the logger for the java app.",
                   "type": "array",
                   "items": {
-                    "$ref": "#/definitions/LogLevelSetting"
+                    "$ref": "#/definitions/LoggerSetting"
                   },
                   "x-ms-identifiers": [
                     "logger",
@@ -947,8 +947,8 @@
         }
       }
     },
-    "LogLevelSetting": {
-      "description": "Log level settings for java workloads.",
+    "LoggerSetting": {
+      "description": "Logger settings for java workloads.",
       "type": "object",
       "required": [
         "logger",
@@ -961,7 +961,19 @@
         },
         "level": {
           "description": "The specified logger's log level.",
-          "type": "string"
+          "enum": [
+            "off",
+            "error",
+            "info",
+            "debug",
+            "trace",
+            "warn"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "level",
+            "modelAsString": true
+          }
         }
       }
     },
