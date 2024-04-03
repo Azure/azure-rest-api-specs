@@ -3293,7 +3293,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully Reconciled the NSP configuration."
+            "description": "Successfully Reconciled the NSP configuration.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
           },
           "202": {
             "headers": {
@@ -3313,6 +3316,51 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/defenderForAISettings": {
+      "get": {
+        "tags": [
+          "DefenderForAISettings"
+        ],
+        "operationId": "DefenderForAISettings_List",
+        "description": "Lists the Defender for AI settings.",
+        "x-ms-examples": {
+          "GetDefenderForAISetting": {
+            "$ref": "./examples/ListDefenderForAISetting.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- List the defender setting name successfully.",
+            "schema": {
+              "$ref": "#/definitions/DefenderForAISettingResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3766,6 +3814,9 @@
         "abusePenalty": {
           "readOnly": true,
           "$ref": "#/definitions/AbusePenalty"
+        },
+        "raiMonitorConfig": {
+          "$ref": "#/definitions/RaiMonitorConfig"
         }
       },
       "description": "Properties of Cognitive Services account."
@@ -5693,6 +5744,20 @@
         }
       ]
     },
+    "RaiMonitorConfig": {
+      "description": "Cognitive Services Rai Monitor Config.",
+      "type": "object",
+      "properties": {
+        "adxStorageResourceId": {
+          "type": "string",
+          "description": "The storage resource Id."
+        },
+        "identityClientId": {
+          "type": "string",
+          "description": "The identity client Id to access the storage."
+        }
+      }
+    },
     "RaiPolicyListResult": {
       "type": "object",
       "properties": {
@@ -5891,9 +5956,9 @@
           ],
           "description": "Resource tags."
         },
-        "displayName" :{
+        "displayName": {
           "type": "string",
-          "description": "Rai Blocklist Item Display Name."
+          "description": "Rai Blocklist Item Name."
         },
         "properties": {
           "$ref": "#/definitions/RaiBlocklistItemProperties",
@@ -6077,42 +6142,6 @@
           }
         }
       }
-    },
-    "DefenderForAISetting": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true
-        },
-        "etag": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Etag."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Resource tags."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DefenderForAISettingProperties"
-        }
-      },
-      "description": "The Defender for AI resource."
     },
     "NetworkSecurityPerimeterConfigurationListResult": {
       "description": "A list of NSP configurations for an Cognitive Services account.",
@@ -6345,6 +6374,62 @@
           }
         }
       }
+    },
+    "DefenderForAISettingResult": {
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of Defender for AI Settings.",
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DefenderForAISetting"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The list of Defender for AI Settings."
+        }
+      },
+      "description": "The list of cognitive services Defender for AI Settings."
+    },
+    "DefenderForAISetting": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Etag."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DefenderForAISettingProperties"
+        }
+      },
+      "description": "The Defender for AI resource."
     },
     "DefenderForAISettingProperties": {
       "type": "object",
