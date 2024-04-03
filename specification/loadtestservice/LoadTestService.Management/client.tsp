@@ -33,6 +33,7 @@ interface LoadTests {
 
   createOrUpdateLoadtest is Microsoft.LoadTestService.LoadTests.createOrUpdate;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing API"
   updateLoadtest is Microsoft.LoadTestService.LoadTests.update;
 
   deleteLoadtest is Microsoft.LoadTestService.LoadTests.delete;
