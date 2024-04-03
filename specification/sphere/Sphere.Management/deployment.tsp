@@ -20,6 +20,7 @@ model Deployment is ProxyResource<DeploymentProperties> {
   /**
    * Deployment name. Use .default for deployment creation and to get the current deployment for the associated device group.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @path
   @key("deploymentName")
   @segment("deployments")

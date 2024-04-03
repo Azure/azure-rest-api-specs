@@ -29,7 +29,7 @@ model FleetMember is ProxyResource<FleetMemberProperties> {
 }
 
 scalar ClusterResourceId
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ContainerService/managedClusters",
     }

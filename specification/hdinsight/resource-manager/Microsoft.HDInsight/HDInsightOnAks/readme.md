@@ -33,6 +33,11 @@ azure-arm: true
 tag: package-2024-05
 ```
 
+``` yaml
+modelerfour:
+  flatten-models: false
+```
+
 ### Suppression
 
 

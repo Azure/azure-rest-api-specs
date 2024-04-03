@@ -11,31 +11,33 @@ using TypeSpec.Rest.Resource;
 using OpenAPI;
 
 /** The operation to be performed. */
-enum JsonPatchOperation {
+union JsonPatchOperation {
+  string,
+
   /** Add value operation. */
-  add,
+  add: "add",
 
   /** Remove value operation. */
-  remove,
+  remove: "remove",
 
   /** Replace value operation. */
-  replace,
+  replace: "replace",
 
   /** Move value operation. */
-  move,
+  move: "move",
 
   /** Copy value operation. */
-  copy,
+  copy: "copy",
 
   /** Test value operation. */
-  test,
+  test: "test",
 }
 
 /** A JSONPatch object as defined by RFC 6902. */
 model JsonPatchObject {
   /** The operation to be performed. */
   @visibility("create")
-  @projectedName("json", "op")
+  @encodedName("application/json", "op")
   operation: JsonPatchOperation;
 
   /** A JSON-Pointer. */

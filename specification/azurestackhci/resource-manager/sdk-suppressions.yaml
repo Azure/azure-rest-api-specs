@@ -1,0 +1,52 @@
+suppressions:
+  azure-sdk-for-go:
+    - package: 'sdk/resourcemanager/azurestackhci/armazurestackhci'
+      breaking-changes:
+        - Function `*ExtensionsClient.BeginUpdate` parameter(s) have been changed from `(context.Context, string, string, string, string, Extension, *ExtensionsClientBeginUpdateOptions)` to `(context.Context, string, string, string, string, ExtensionPatch, *ExtensionsClientBeginUpdateOptions)`
+
+  azure-sdk-for-python:
+    - package: 'azure-mgmt-azurestackhci'
+      breaking-changes:
+        - Model ArcSetting no longer has parameter created_at
+        - Model ArcSetting no longer has parameter created_by
+        - Model ArcSetting no longer has parameter created_by_type
+        - Model ArcSetting no longer has parameter last_modified_at
+        - Model ArcSetting no longer has parameter last_modified_by
+        - Model ArcSetting no longer has parameter last_modified_by_type
+        - Model Cluster no longer has parameter created_at
+        - Model Cluster no longer has parameter created_by
+        - Model Cluster no longer has parameter created_by_type
+        - Model Cluster no longer has parameter last_modified_at
+        - Model Cluster no longer has parameter last_modified_by
+        - Model Cluster no longer has parameter last_modified_by_type
+        - Model Extension no longer has parameter created_at
+        - Model Extension no longer has parameter created_by
+        - Model Extension no longer has parameter created_by_type
+        - Model Extension no longer has parameter last_modified_at
+        - Model Extension no longer has parameter last_modified_by
+        - Model Extension no longer has parameter last_modified_by_type
+
+  azure-sdk-for-js:
+    - package: '@azure/arm-azurestackhci'
+      breaking-changes:
+        - Class AzureStackHCIClient has a new signature
+        - Interface ArcSetting no longer has parameter createdAt
+        - Interface ArcSetting no longer has parameter createdBy
+        - Interface ArcSetting no longer has parameter createdByType
+        - Interface ArcSetting no longer has parameter lastModifiedAt
+        - Interface ArcSetting no longer has parameter lastModifiedBy
+        - Interface ArcSetting no longer has parameter lastModifiedByType
+        - Interface Cluster no longer has parameter createdAt
+        - Interface Cluster no longer has parameter createdBy
+        - Interface Cluster no longer has parameter createdByType
+        - Interface Cluster no longer has parameter lastModifiedAt
+        - Interface Cluster no longer has parameter lastModifiedBy
+        - Interface Cluster no longer has parameter lastModifiedByType
+        - Interface Extension no longer has parameter createdAt
+        - Interface Extension no longer has parameter createdBy
+        - Interface Extension no longer has parameter createdByType
+        - Interface Extension no longer has parameter lastModifiedAt
+        - Interface Extension no longer has parameter lastModifiedBy
+        - Interface Extension no longer has parameter lastModifiedByType
+        - Operation Extensions.beginUpdate has a new signature
+        - Operation Extensions.beginUpdateAndWait has a new signature

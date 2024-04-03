@@ -9,27 +9,31 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
 /** Provider availability. */
-enum ProviderAvailability {
+union ProviderAvailability {
+  string,
+
   /** Provider is available. */
-  Available,
+  Available: "Available",
 
   /** Provider is available with degraded experience. */
-  Degraded,
+  Degraded: "Degraded",
 
   /** Provider is unavailable. */
-  Unavailable,
+  Unavailable: "Unavailable",
 }
 
 /** Target availability. */
-enum TargetAvailability {
+union TargetAvailability {
+  string,
+
   /** Target is available. */
-  Available,
+  Available: "Available",
 
   /** Target is available with degraded experience. */
-  Degraded,
+  Degraded: "Degraded",
 
   /** Target is unavailable. */
-  Unavailable,
+  Unavailable: "Unavailable",
 }
 
 /** Provider status. */

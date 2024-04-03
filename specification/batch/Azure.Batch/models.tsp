@@ -457,10 +457,10 @@ union BatchPoolIdentityType {
   string,
 
   @doc("Batch pool has user assigned identities with it.")
-  "UserAssigned",
+  UserAssigned: "UserAssigned",
 
   @doc("Batch pool has no identity associated with it. Setting `None` in update pool will remove existing identities.")
-  "None",
+  None: "None",
 }
 
 @doc("BatchNodeDeallocationOption enums")
@@ -686,13 +686,13 @@ union StatusLevelTypes {
   string,
 
   @doc("Error")
-  "Error",
+  Error: "Error",
 
   @doc("Info")
-  "Info",
+  Info: "Info",
 
   @doc("Warning")
-  "Warning",
+  Warning: "Warning",
 }
 
 @doc("Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings.")

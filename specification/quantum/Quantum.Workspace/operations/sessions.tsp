@@ -12,33 +12,37 @@ using TypeSpec.Versioning;
 using OpenAPI;
 
 /** Policy controlling the behavior of the Session when a job in the session fails. */
-enum SessionJobFailurePolicy {
+union SessionJobFailurePolicy {
+  string,
+
   /** New jobs submitted after a job fails will be rejected. */
-  Abort,
+  Abort: "Abort",
 
   /** New jobs submitted after a job fails will be accepted. */
-  Continue,
+  Continue: "Continue",
 }
 
 /** The status of the session. */
-enum SessionStatus {
+union SessionStatus {
+  string,
+
   /** The session is waiting in the queue to be executed. */
-  Waiting,
+  Waiting: "Waiting",
 
   /** The session is being executed. */
-  Executing,
+  Executing: "Executing",
 
   /** The session completed with success. */
-  Succeeded,
+  Succeeded: "Succeeded",
 
   /** The session completed with failure. */
-  Failed,
+  Failed: "Failed",
 
   /** The session completed with some failures. */
-  `Failure(s)`,
+  `Failure(s)`: "Failure(s)",
 
   /** The session timed out. */
-  TimedOut,
+  TimedOut: "TimedOut",
 }
 
 /** Session, a logical grouping of jobs. */

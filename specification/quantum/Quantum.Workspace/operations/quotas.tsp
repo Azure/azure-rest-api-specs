@@ -9,21 +9,25 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
 /** The scope at which the quota is applied to. */
-enum DimensionScope {
+union DimensionScope {
+  string,
+
   /** The quota is applied to the Quantum Workspace. */
-  Workspace,
+  Workspace: "Workspace",
 
   /** The quota is applied to the Azure Subscription. */
-  Subscription,
+  Subscription: "Subscription",
 }
 
 /** The time period in which the quota's underlying meter is accumulated. Based on calendar year. 'None' is used for concurrent quotas. */
-enum MeterPeriod {
+union MeterPeriod {
+  string,
+
   /** The meter period is instantaneous. Used for concurrent quotas. */
-  None,
+  None: "None",
 
   /** The meter period is per month. */
-  Monthly,
+  Monthly: "Monthly",
 }
 
 /** Quota information. */
