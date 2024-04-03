@@ -57,10 +57,10 @@
           "readOnly": true
         },
         "error": {
-          "$ref": "#/definitions/ErrorDetail"
+          "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
         },
         "warning": {
-          "$ref": "#/definitions/ErrorDetail"
+          "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
         }
       }
     },
@@ -534,69 +534,6 @@
       "type": "string",
       "description": "The ontology version of this dataset.",
       "readOnly": true
-    },
-    "InnerError": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "readOnly": true,
-          "type": "string",
-          "description": "A more specific error code than was provided by the containing error."
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerError"
-        }
-      },
-      "description": "An object containing more specific information than the current object about the error."
-    },
-    "ErrorDetail": {
-      "type": "object",
-      "description": "The error detail.",
-      "properties": {
-        "code": {
-          "readOnly": true,
-          "type": "string",
-          "description": "One of a server-defined set of error codes."
-        },
-        "message": {
-          "readOnly": true,
-          "type": "string",
-          "description": "A human-readable representation of the error."
-        },
-        "target": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The target of the error."
-        },
-        "details": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDetail"
-          },
-          "description": "An array of details about specific errors that led to this reported error."
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerError"
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "description": "Common error response for all Azure APIs to return error details for failed operations.",
-      "properties": {
-        "error": {
-          "description": "The top-level error object whose code matches the `x-ms-error-code` response header",
-          "$ref": "#/definitions/ErrorDetail"
-        }
-      },
-      "required": [
-        "error"
-      ]
     }
   },
   "parameters": {
@@ -919,28 +856,28 @@
     "408": {
       "description": "Timeout: The request took longer to finish than the maximum amount of time defined in the api.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
       },
       "x-ms-error-response": true
     },
     "409": {
       "description": "The request could not be completed due to a conflict with the current state of the resource. Likely caused by a parallel update to the same resource.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
       },
       "x-ms-error-response": true
     },
     "409StorageLimit": {
       "description": "The [data storage limit](https://docs.microsoft.com/azure/azure-resource-manager/management/azure-subscription-service-limits#azure-maps-limits) is reached on the Azure Maps account. You can always use the [Data Delete API](https://docs.microsoft.com/rest/api/maps/data/deletepreview) to delete old/unused content and create space for new uploads.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
       },
       "x-ms-error-response": true
     },
     "default": {
       "description": "An unexpected error occurred.",
       "schema": {
-        "$ref": "#/definitions/ErrorResponse"
+        "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
       },
       "x-ms-error-response": true
     }
