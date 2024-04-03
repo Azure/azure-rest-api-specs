@@ -118,7 +118,7 @@
           "default": {
             "description": "An unexpected error occurred.",
             "schema": {
-              "$ref": "../../../Common/stable/2023-06-01/common.json#/definitions/ErrorResponse"
+              "$ref": "../../../Common/stable/2023-06-01/common.json#/responses/default"
             },
             "headers": {
               "x-ms-error-code": {
@@ -158,7 +158,7 @@
           "default": {
             "description": "An unexpected error occurred.",
             "schema": {
-              "$ref": "../../../Common/stable/2023-06-01/common.json#/definitions/ErrorResponse"
+              "$ref": "../../../Common/stable/2023-06-01/common.json#/responses/default"
             },
             "headers": {
               "x-ms-error-code": {
@@ -300,7 +300,20 @@
           "$ref": "#/definitions/AsyncBatchOperationResult"
         },
         "error": {
-          "$ref": "../../../Common/stable/2023-06-01/common.json#/definitions/ErrorDetail"
+          "type": "object",
+          "description": "The error detail.",
+          "properties": {
+            "code": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The error code."
+            },
+            "message": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The error message."
+            }
+          }
         }
       },
       "required": [
