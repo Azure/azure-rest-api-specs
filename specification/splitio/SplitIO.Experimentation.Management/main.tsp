@@ -56,8 +56,9 @@ model AccessPolicy {
 enum DataPlaneRole {
   @doc("No role required for data plane access.")
   None,
+
   @doc("Owner of the experimentation data.")
-  ExperimentationDataOwner
+  ExperimentationDataOwner,
 }
 
 @doc("Data source that telemetry data required for experimentation will be retrieved from.")
