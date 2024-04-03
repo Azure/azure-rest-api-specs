@@ -4410,16 +4410,6 @@
         ]
       }
     },
-    "IPConfigReference": {
-      "type": "object",
-      "description": "IpConfig - Name of NIC bound to the NSG.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "ID - The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/..."
-        }
-      }
-    },
     "IPConfiguration": {
       "type": "object",
       "description": "InterfaceIPConfiguration IPConfiguration in a network interface.",
@@ -4460,10 +4450,6 @@
         "subnet": {
           "$ref": "#/definitions/IPConfigurationPropertiesSubnet",
           "description": "Subnet - Name of Subnet bound to the IP configuration."
-        },
-        "networkSecurityGroup": {
-          "$ref": "#/definitions/NetworkSecurityGroupResourceReference",
-          "description": "NetworkSecurityGroup - Network Security Group attached to the network interface."
         }
       }
     },
@@ -5025,6 +5011,20 @@
           "$ref": "#/definitions/NetworkInterfaceStatus",
           "description": "The observed state of network interfaces",
           "readOnly": true
+        },
+        "networkSecurityGroup": {
+          "$ref": "#/definitions/NetworkSecurityGroupResourceReference",
+          "description": "NetworkSecurityGroup - Network Security Group attached to the network interface."
+        }
+      }
+    },
+    "NetworkInterfaceReference": {
+      "type": "object",
+      "description": "NetworkInterface - Name of NIC bound to the NSG.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID - The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/..."
         }
       }
     },
@@ -5164,11 +5164,11 @@
       "type": "object",
       "description": "Network Security Group resource.",
       "properties": {
-        "ipConfigurations": {
+        "networkInterfaceReferences": {
           "type": "array",
           "description": "A collection of references to network interfaces that are currently using this NSG.",
           "items": {
-            "$ref": "#/definitions/IPConfigReference"
+            "$ref": "#/definitions/NetworkInterfaceReference"
           },
           "readOnly": true
         },
