@@ -228,9 +228,9 @@ model EnvironmentOutput {
   @doc("Type of the output value.")
   type?: EnvironmentOutputType;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "there is no build in type to describe object"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "There is no built in type to describe object."
   @doc("The output value.")
-  value?: Record<unknown>;
+  value?: unknown;
 
   @doc("Indicates if the value is sensitive.")
   sensitive?: boolean;
