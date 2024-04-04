@@ -14,7 +14,6 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("The type used for update operation of the Namespace.")
 model NamespacePropertiesUpdate {
-	...ManagedServiceIdentity;
 
     @extension("x-ms-client-flatten", true)
     @doc("task hubs list for durable task service")

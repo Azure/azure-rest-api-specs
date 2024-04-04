@@ -77,6 +77,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -111,6 +116,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Namespaces_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/Namespaces_ListBySubscription_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -148,6 +158,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Namespaces_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/Namespaces_ListByResourceGroup_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -189,6 +204,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Namespaces_Get_MinimumSet_Gen": {
+            "$ref": "./examples/Namespaces_Get_MinimumSet_Gen.json"
           }
         }
       },
@@ -256,7 +276,12 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Namespaces_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/Namespaces_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
       },
       "patch": {
         "operationId": "Namespaces_Update",
@@ -305,6 +330,11 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Namespaces_Update_MinimumSet_Gen": {
+            "$ref": "./examples/Namespaces_Update_MinimumSet_Gen.json"
+          }
         }
       },
       "delete": {
@@ -344,6 +374,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Namespaces_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Namespaces_Delete_MinimumSet_Gen.json"
           }
         }
       }
@@ -390,6 +425,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TaskHubs_ListByNamespace_MinimumSet_Gen": {
+            "$ref": "./examples/TaskHubs_ListByNamespace_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -439,6 +479,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "TaskHubs_Get_MinimumSet_Gen": {
+            "$ref": "./examples/TaskHubs_Get_MinimumSet_Gen.json"
           }
         }
       },
@@ -503,6 +548,11 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "TaskHubs_Create_MinimumSet_Gen": {
+            "$ref": "./examples/TaskHubs_Create_MinimumSet_Gen.json"
+          }
         }
       },
       "delete": {
@@ -551,6 +601,11 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "TaskHubs_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/TaskHubs_Delete_MinimumSet_Gen.json"
+          }
         }
       }
     }
@@ -568,6 +623,10 @@
             "read",
             "create"
           ]
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -617,10 +676,6 @@
       "type": "object",
       "description": "The type used for update operation of the Namespace.",
       "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
         "taskHubs": {
           "type": "array",
           "description": "task hubs list for durable task service",
@@ -643,6 +698,10 @@
       "type": "object",
       "description": "The type used for update operations of the Namespace.",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
@@ -660,10 +719,6 @@
       "type": "object",
       "description": "The updatable properties of the Namespace.",
       "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
         "taskHubs": {
           "type": "array",
           "description": "task hubs list for durable task service",

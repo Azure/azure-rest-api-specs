@@ -22,6 +22,8 @@ model Namespace is TrackedResource<NamespaceProperties> {
 	@path
 	@visibility("read","create")
 	name: string;
+    
+    ...ManagedServiceIdentity;
 }
 
 @armResourceOperations(Namespace)
