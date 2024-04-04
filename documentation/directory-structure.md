@@ -213,10 +213,10 @@ violate some of the constraints presented in this article. This includes violati
 - More deeply nested subfolders than allowed
 - Incorrect lack of `-preview` suffix in `preview` API versions
 - Mixing of `stable` and `preview` API versions in the same folder subtree
-- Mixing of multiple API versions in given README.md package, including mixing of multiple API version lifecycle stages.
+- Mixing of multiple API versions in given `README.md` package, including mixing of multiple API version lifecycle stages.
 
-In addition, some `AzureTeamFolder` folders have OpenAPI specs that have been written manually instead of emitted from TypeSpec. In some cases
-the folders have mixture: some OpenAPI specs are written manually, while others are emitted from TypeSpec.
+In addition, some `AzureTeamFolder` folders have OpenAPI specs that have been written manually instead of emitted from TypeSpec. 
+In some cases the folders have mixture of manually-written and TypeSpec-emitted OpenAPI specs.
 
 All of the aforementioned cases are considered legacy and are not allowed going forward.
 
