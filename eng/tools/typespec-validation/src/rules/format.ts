@@ -39,7 +39,7 @@ export class FormatRule implements Rule {
       if (!gitDiffResult.success) {
         success = false;
         errorOutput += gitDiffResult.errorOutput;
-        errorOutput += `\nFiles has been gerenate/changed after tsp format, please run \`tsp format\` and ensure all files are included in the branch.`;
+        errorOutput += `\nFiles have been changed after \`tsp format\`. Run \`tsp format\` and ensure all files are included in your change.`;
       }
     }
 

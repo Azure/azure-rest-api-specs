@@ -27,9 +27,18 @@ These are the global settings for the mobilenetwork.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2024-03
+tag: package-preview-2024-05
 ```
 
+
+### Tag: package-preview-2024-05
+
+These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-05'
+input-file:
+  - Microsoft.MobileNetwork/preview/2024-05-01-preview/mobileNetwork.json
+```
 ### Tag: package-preview-2024-03
 
 These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
@@ -59,6 +68,7 @@ input-file:
   - Microsoft.MobileNetwork/preview/2024-03-01-preview/ueInfo.json
   - Microsoft.MobileNetwork/preview/2024-03-01-preview/wifiSsid.json
 ```
+
 ### Tag: package-2024-02
 
 These settings apply only when `--tag=package-2024-02` is specified on the command line.
@@ -83,11 +93,12 @@ input-file:
   - Microsoft.MobileNetwork/stable/2024-02-01/ts29571.json
   - Microsoft.MobileNetwork/stable/2024-02-01/ueInfo.json
 ```
+
 ### Tag: package-preview-2023-10
 
 These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-10'
+``` yaml $(tag) == 'package-preview-2023-10'
 input-file:
   - Microsoft.MobileNetwork/preview/2023-10-01-preview/attachedDataNetwork.json
   - Microsoft.MobileNetwork/preview/2023-10-01-preview/attachedWifiSsid.json
@@ -112,6 +123,7 @@ input-file:
   - Microsoft.MobileNetwork/preview/2023-10-01-preview/ueInfo.json
   - Microsoft.MobileNetwork/preview/2023-10-01-preview/wifiSsid.json
 ```
+
 ### Tag: package-2023-09
 
 These settings apply only when `--tag=package-2023-09` is specified on the command line.
