@@ -39,14 +39,48 @@
   },
   "tags": [
     {
-      "name": "TaskHubs"
+      "name": "Namespaces"
     },
     {
-      "name": "Namespaces"
+      "name": "Operations"
+    },
+    {
+      "name": "TaskHubs"
     }
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DurableTask/Namespaces": {
+    "/providers/Microsoft.DurableTask/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DurableTask/namespaces": {
       "get": {
         "operationId": "Namespaces_ListBySubscription",
         "tags": [
@@ -77,15 +111,10 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Namespaces_ListBySubscription": {
-            "$ref": "./examples/Namespaces_ListBySubscription.json"
-          }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/Namespaces": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/namespaces": {
       "get": {
         "operationId": "Namespaces_ListByResourceGroup",
         "tags": [
@@ -119,15 +148,10 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Namespaces_ListByResourceGroup": {
-            "$ref": "./examples/Namespaces_ListByResourceGroup.json"
-          }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/Namespaces/{namespaceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/namespaces/{namespaceName}": {
       "get": {
         "operationId": "Namespaces_Get",
         "tags": [
@@ -150,7 +174,7 @@
             "description": "The name of the service",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+            "pattern": "^[a-zA-Z0-9-]{3,128}$"
           }
         ],
         "responses": {
@@ -165,11 +189,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Namespaces_Get": {
-            "$ref": "./examples/Namespaces_Get.json"
           }
         }
       },
@@ -195,7 +214,7 @@
             "description": "The name of the service",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+            "pattern": "^[a-zA-Z0-9-]{3,128}$"
           },
           {
             "name": "resource",
@@ -237,12 +256,7 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Namespaces_CreateOrUpdate": {
-            "$ref": "./examples/Namespaces_CreateOrUpdate.json"
-          }
-        }
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "Namespaces_Update",
@@ -266,7 +280,7 @@
             "description": "The name of the service",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+            "pattern": "^[a-zA-Z0-9-]{3,128}$"
           },
           {
             "name": "properties",
@@ -290,11 +304,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Namespaces_Update": {
-            "$ref": "./examples/Namespaces_Update.json"
           }
         }
       },
@@ -320,7 +329,7 @@
             "description": "The name of the service",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+            "pattern": "^[a-zA-Z0-9-]{3,128}$"
           }
         ],
         "responses": {
@@ -336,15 +345,10 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Namespaces_Delete": {
-            "$ref": "./examples/Namespaces_Delete.json"
-          }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/Namespaces/{namespaceName}/TaskHubs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/namespaces/{namespaceName}/taskHubs": {
       "get": {
         "operationId": "TaskHubs_ListByNamespace",
         "tags": [
@@ -367,7 +371,7 @@
             "description": "The name of the service",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+            "pattern": "^[a-zA-Z0-9-]{3,128}$"
           }
         ],
         "responses": {
@@ -386,15 +390,10 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "TaskHubs_ListByNamespace": {
-            "$ref": "./examples/TaskHubs_ListByNamespace.json"
-          }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/Namespaces/{namespaceName}/TaskHubs/{taskHubName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/namespaces/{namespaceName}/taskHubs/{taskHubName}": {
       "get": {
         "operationId": "TaskHubs_Get",
         "tags": [
@@ -417,7 +416,7 @@
             "description": "The name of the service",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+            "pattern": "^[a-zA-Z0-9-]{3,128}$"
           },
           {
             "name": "taskHubName",
@@ -440,11 +439,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "TaskHubs_Get": {
-            "$ref": "./examples/TaskHubs_Get.json"
           }
         }
       },
@@ -470,7 +464,7 @@
             "description": "The name of the service",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+            "pattern": "^[a-zA-Z0-9-]{3,128}$"
           },
           {
             "name": "taskHubName",
@@ -509,73 +503,6 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "TaskHubs_Create": {
-            "$ref": "./examples/TaskHubs_Create.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "TaskHubs_Update",
-        "tags": [
-          "TaskHubs"
-        ],
-        "description": "Update a TaskHub",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The name of the service",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,64}$"
-          },
-          {
-            "name": "taskHubName",
-            "in": "path",
-            "description": "Task Hub name",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,128}$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TaskHubUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/TaskHub"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "TaskHubs_Update": {
-            "$ref": "./examples/TaskHubs_Update.json"
-          }
         }
       },
       "delete": {
@@ -600,7 +527,7 @@
             "description": "The name of the service",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+            "pattern": "^[a-zA-Z0-9-]{3,128}$"
           },
           {
             "name": "taskHubName",
@@ -624,11 +551,6 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "TaskHubs_Delete": {
-            "$ref": "./examples/TaskHubs_Delete.json"
-          }
         }
       }
     }
@@ -646,14 +568,6 @@
             "read",
             "create"
           ]
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "sku": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         }
       },
       "allOf": [
@@ -696,20 +610,32 @@
           "type": "string",
           "description": "url of the durable task service",
           "readOnly": true
+        }
+      }
+    },
+    "NamespacePropertiesUpdate": {
+      "type": "object",
+      "description": "The type used for update operation of the Namespace.",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         },
         "taskHubs": {
           "type": "array",
           "description": "task hubs list for durable task service",
           "items": {
             "$ref": "#/definitions/TaskHub"
-          }
+          },
+          "x-ms-client-flatten": true
         },
         "ipAllowlist": {
           "type": "array",
           "description": "IP allow list for durable task service",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -717,14 +643,6 @@
       "type": "object",
       "description": "The type used for update operations of the Namespace.",
       "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "sku": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
-        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
@@ -742,19 +660,25 @@
       "type": "object",
       "description": "The updatable properties of the Namespace.",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
         "taskHubs": {
           "type": "array",
           "description": "task hubs list for durable task service",
           "items": {
             "$ref": "#/definitions/TaskHub"
-          }
+          },
+          "x-ms-client-flatten": true
         },
         "ipAllowlist": {
           "type": "array",
           "description": "IP allow list for durable task service",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -792,22 +716,22 @@
           {
             "name": "Provisioning",
             "value": "Provisioning",
-            "description": "Initial provisioning in progress"
+            "description": "The resource is being provisioned"
           },
           {
             "name": "Updating",
             "value": "Updating",
-            "description": "Update in progress"
+            "description": "The resource is being updated"
           },
           {
             "name": "Deleting",
             "value": "Deleting",
-            "description": "Deletion in progress"
+            "description": "The resource is being deleted"
           },
           {
             "name": "Accepted",
             "value": "Accepted",
-            "description": "Change accepted for processing"
+            "description": "The resource create request has been accepted"
           }
         ]
       }
@@ -863,10 +787,6 @@
           "readOnly": true
         }
       }
-    },
-    "TaskHubUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the TaskHub."
     },
     "Versions": {
       "type": "string",
