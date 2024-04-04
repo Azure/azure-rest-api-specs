@@ -191,7 +191,7 @@ Note the most important directory structure difference of a `service group` scen
 - The `resource-manager/Microsoft.ContainerService` folder has multiple child service folders which contain `stable` and `preview` folders for each service,
   instead of directly containing `stable` and `preview` folders.
 - Each of the `aks` and `fleet` subfolders have their own `README.md` file, instead of there being one `README.md` in the `resource-manager` folder.
-  As a result, the SDKs of these serivces are separated.
+  As a result, the SDKs of these services are separate.
 
 ### Service group `common-types`
 
