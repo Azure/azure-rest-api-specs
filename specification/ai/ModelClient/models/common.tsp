@@ -33,7 +33,6 @@ alias AdditionalRequestHeaders = {
   modelDeployment?: string;
 };
 
-
 alias CapacityAlias = {
   @doc("Indicates whether your capacity has been affected by the usage amount (token count) reported here.")
   capacity_type: CapacityType;
