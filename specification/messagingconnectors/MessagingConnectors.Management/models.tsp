@@ -390,7 +390,7 @@ enum DataPreviewState {
   Failed,
 
   @doc("CompletedWithoutData State")
-  CompletedWithoutData
+  CompletedWithoutData,
 }
 
 @doc("Properties of one arm DataPreview resource")
@@ -421,5 +421,5 @@ model DataPreviewResults {
   count: int32;
 
   @doc("Content of DataPreview results")
-  results: string[]
+  results: string[];
 }
