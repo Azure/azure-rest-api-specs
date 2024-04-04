@@ -43,10 +43,9 @@ interface Assets {
 
   @doc("Export a list of assets for the provided search parameters.")
   @action("export")
-  @Versioning.added(Versions.v2024_03_01_preview)
   getAssetsExport is Operations.ResourceCollectionAction<
     AssetResource,
-    {},
+    AssetsExportRequestBody,
     Task,
     AssetsExportTrait
   >;
@@ -66,7 +65,7 @@ interface Assets {
   @Versioning.added(Versions.v2024_03_01_preview)
   getDeltaDetails is Operations.ResourceCollectionAction<
     AssetResource,
-    {},
+    DeltaDetailsRequestBody,
     DeltaPageResponse,
     DeltaDetailsTrait
   >;
@@ -76,9 +75,9 @@ interface Assets {
   @Versioning.added(Versions.v2024_03_01_preview)
   getDeltaSummary is Operations.ResourceCollectionAction<
     AssetResource,
-    {},
+    DeltaSummaryRequestBody,
     DeltaSummaryResponse,
-    DeltaSummaryTrait
+    {}
   >;
 }
 

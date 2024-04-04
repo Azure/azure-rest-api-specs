@@ -130,8 +130,6 @@ alias AssetsExportTrait = {
   ...QueryParametersTrait<{
     ...FilterQueryParameter;
     ...OrderByParameter;
-    ...FileNameParameter;
-    ...ColumnsParameter;
   }>;
 };
 alias ObservationsTrait = {
@@ -145,10 +143,6 @@ alias ObservationsTrait = {
 
 alias DeltaDetailsTrait = {
   ...QueryParametersTrait<{
-    ...DeltaDetailTypeParameter;
-    ...DaysPriorParameter;
-    ...KindParameter;
-    ...DateParameter;
     ...SkipQueryParameter;
     ...MaxPageSizeQueryParameter;
   }>;
@@ -158,13 +152,6 @@ alias CisaCveListTrait = {
   ...PageResultBodyFields<{
     @doc("The total number of items available in the full result set.")
     totalElements?: int64;
-  }>;
-};
-
-alias DeltaSummaryTrait = {
-  ...QueryParametersTrait<{
-    ...DaysPriorParameter;
-    ...DateParameter;
   }>;
 };
 
@@ -331,6 +318,35 @@ model AssetUpdateData {
 
   @doc("A list of asset types to cascade the updates to.")
   transfers?: AssetUpdateTransfers;
+}
+
+@doc("A request body used to export an asset.")
+@Versioning.added(Versions.v2024_03_01_preview)
+model AssetsExportRequestBody {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+  fileName: string;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+  columns: string[];
+}
+
+@doc("A request body used to retrieve a list of deltas.")
+@Versioning.added(Versions.v2024_03_01_preview)
+model DeltaDetailsRequestBody {
+  deltaDetailType?: DeltaDetailType;
+  daysPrior?: int32;
+  kind?: GlobalAssetType;
+
+  @doc("expected format to be: yyyy-MM-dd")
+  date?: string;
+}
+
+@doc("A request body used to retrieve a delta summary.")
+@Versioning.added(Versions.v2024_03_01_preview)
+model DeltaSummaryRequestBody {
+  daysPrior?: int32;
+
+  @doc("expected format to be: yyyy-MM-dd")
+  date?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
@@ -1903,48 +1919,6 @@ model MarkParameter {
   @doc("Specify this value instead of 'skip' to use cursor-based searching. Initial value is '*' and subsequent values are returned in the response.")
   @query("mark")
   mark?: string;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@Versioning.added(Versions.v2024_03_01_preview)
-model FileNameParameter {
-  @query("fileName")
-  fileName?: string;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@Versioning.added(Versions.v2024_03_01_preview)
-model ColumnsParameter {
-  @query({
-    format: "csv",
-  })
-  columns?: string[];
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@Versioning.added(Versions.v2024_03_01_preview)
-model DeltaDetailTypeParameter {
-  @query("deltaDetailType")
-  deltaDetailType?: DeltaDetailType;
-}
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@Versioning.added(Versions.v2024_03_01_preview)
-model DaysPriorParameter {
-  @query("daysPrior")
-  daysPrior?: int32;
-}
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@Versioning.added(Versions.v2024_03_01_preview)
-model KindParameter {
-  @query("kind")
-  kind?: GlobalAssetType;
-}
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
-@Versioning.added(Versions.v2024_03_01_preview)
-model DateParameter {
-  @doc("expected format to be: yyyy-MM-dd")
-  @query("date")
-  date?: string;
 }
 
 @doc("Specify the response type.")
