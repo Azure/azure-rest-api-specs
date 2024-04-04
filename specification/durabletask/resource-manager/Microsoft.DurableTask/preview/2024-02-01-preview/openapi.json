@@ -283,55 +283,6 @@
         },
         "x-ms-long-running-operation": true
       },
-      "patch": {
-        "operationId": "Namespaces_Update",
-        "tags": [
-          "Namespaces"
-        ],
-        "description": "Update a Namespace",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The name of the service",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,64}$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NamespaceUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Namespace"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
       "delete": {
         "operationId": "Namespaces_Delete",
         "tags": [
@@ -606,6 +557,73 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.Foundations.ManagedIdentityType": {
+      "type": "string",
+      "description": "The kind of managed identity assigned to this resource.",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned, UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No managed identity."
+          },
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System assigned managed identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User assigned managed identity."
+          },
+          {
+            "name": "SystemAndUserAssigned",
+            "value": "SystemAssigned, UserAssigned",
+            "description": "System and user assigned managed identity."
+          }
+        ]
+      }
+    },
+    "Azure.ResourceManager.Foundations.UserAssignedIdentity": {
+      "type": "object",
+      "description": "A managed identity assigned by the user.",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "The active directory client identifier for this principal."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The active directory identifier for this principal."
+        }
+      }
+    },
+    "ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "The template for adding optional properties.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ManagedIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "$ref": "#/definitions/Azure.ResourceManager.Foundations.UserAssignedIdentity"
+          }
+        }
+      }
+    },
     "Namespace": {
       "type": "object",
       "description": "A DurableTaskService resource",
@@ -685,12 +703,8 @@
     },
     "NamespaceUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the Namespace.",
+      "description": "Update namespace",
       "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
@@ -698,31 +712,13 @@
             "type": "string"
           }
         },
-        "properties": {
-          "$ref": "#/definitions/NamespaceUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "NamespaceUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Namespace.",
-      "properties": {
-        "taskHubs": {
-          "type": "array",
-          "description": "task hubs list for durable task service",
-          "items": {
-            "$ref": "#/definitions/TaskHub"
-          },
-          "x-ms-identifiers": []
+        "identity": {
+          "$ref": "#/definitions/ManagedServiceIdentityUpdate",
+          "description": "Updatable managed service identity"
         },
-        "ipAllowlist": {
-          "type": "array",
-          "description": "IP allow list for durable task service",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-identifiers": []
+        "properties": {
+          "$ref": "#/definitions/NamespaceProperties",
+          "description": "RP-specific properties"
         }
       }
     },

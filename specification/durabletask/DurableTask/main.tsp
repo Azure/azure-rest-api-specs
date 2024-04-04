@@ -44,6 +44,20 @@ model Namespace is TrackedResource<NamespaceProperties> {
   ...ManagedServiceIdentity;
 }
 
+@doc("Update namespace")
+model NamespaceUpdate {
+	...Azure.ResourceManager.Foundations.ArmTagsProperty;
+  
+	/** Updatable managed service identity */
+	identity?: ManagedServiceIdentityUpdate;
+  
+	/** RP-specific properties */
+	properties?: NamespaceProperties;
+  }
+
+model ManagedServiceIdentityUpdate
+  is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedIdentityProperties>>;
+
 @doc("Details of the Namespace.")
 model NamespaceProperties {
   @visibility("read")
@@ -105,7 +119,7 @@ union ProvisioningState {
 interface Namespaces {
   get is ArmResourceRead<Namespace>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Namespace>;
-  update is ArmResourcePatchSync<Namespace, NamespaceProperties>;
+  //update is ArmResourcePatchSync<Namespace, NamespaceProperties>;
   delete is ArmResourceDeleteSync<Namespace>;
   listByResourceGroup is ArmResourceListByParent<Namespace>;
   listBySubscription is ArmListBySubscription<Namespace>;
