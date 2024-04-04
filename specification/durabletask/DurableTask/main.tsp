@@ -55,10 +55,12 @@ model NamespaceProperties {
   url?: string;
 
   @doc("task hubs list for durable task service")
-  taskHubs?: TaskHub[] = [];
+  @extension("x-ms-identifiers", [])
+  taskHubs?: TaskHub[];
 
   @doc("IP allow list for durable task service")
-  ipAllowlist?: string[] = [];
+  @extension("x-ms-identifiers", [])
+  ipAllowlist?: string[];
 }
 
 @doc("An TaskHub resource belonging to the namespace.")
