@@ -39,10 +39,10 @@
   },
   "tags": [
     {
-      "name": "Namespaces"
+      "name": "Operations"
     },
     {
-      "name": "Operations"
+      "name": "Namespaces"
     },
     {
       "name": "TaskHubs"
@@ -189,7 +189,7 @@
             "description": "The name of the service",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,128}$"
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
           }
         ],
         "responses": {
@@ -234,7 +234,7 @@
             "description": "The name of the service",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,128}$"
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
           },
           {
             "name": "resource",
@@ -283,60 +283,6 @@
           }
         }
       },
-      "patch": {
-        "operationId": "Namespaces_Update",
-        "tags": [
-          "Namespaces"
-        ],
-        "description": "Update a Namespace",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "namespaceName",
-            "in": "path",
-            "description": "The name of the service",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,128}$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NamespaceUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Namespace"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Namespaces_Update_MinimumSet_Gen": {
-            "$ref": "./examples/Namespaces_Update_MinimumSet_Gen.json"
-          }
-        }
-      },
       "delete": {
         "operationId": "Namespaces_Delete",
         "tags": [
@@ -359,26 +305,12 @@
             "description": "The name of the service",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,128}$"
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
           }
         ],
         "responses": {
           "200": {
             "description": "Resource deleted successfully."
-          },
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
           },
           "204": {
             "description": "Resource does not exist."
@@ -390,10 +322,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Namespaces_Delete_MinimumSet_Gen": {
             "$ref": "./examples/Namespaces_Delete_MinimumSet_Gen.json"
@@ -424,7 +352,7 @@
             "description": "The name of the service",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,128}$"
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
           }
         ],
         "responses": {
@@ -474,7 +402,7 @@
             "description": "The name of the service",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,128}$"
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
           },
           {
             "name": "taskHubName",
@@ -482,7 +410,7 @@
             "description": "Task Hub name",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,128}$"
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
           }
         ],
         "responses": {
@@ -527,7 +455,7 @@
             "description": "The name of the service",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,128}$"
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
           },
           {
             "name": "taskHubName",
@@ -535,7 +463,7 @@
             "description": "Task Hub name",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,128}$"
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
           },
           {
             "name": "resource",
@@ -595,7 +523,7 @@
             "description": "The name of the service",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,128}$"
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
           },
           {
             "name": "taskHubName",
@@ -603,7 +531,7 @@
             "description": "Task Hub name",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,128}$"
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
           }
         ],
         "responses": {
@@ -688,47 +616,6 @@
           "description": "url of the durable task service",
           "readOnly": true
         },
-        "taskHubs": {
-          "type": "array",
-          "description": "task hubs list for durable task service",
-          "items": {
-            "$ref": "#/definitions/TaskHub"
-          }
-        },
-        "ipAllowlist": {
-          "type": "array",
-          "description": "IP allow list for durable task service",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "NamespaceUpdate": {
-      "type": "object",
-      "description": "The type used for update operations of the Namespace.",
-      "properties": {
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/NamespaceUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "NamespaceUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Namespace.",
-      "properties": {
         "taskHubs": {
           "type": "array",
           "description": "task hubs list for durable task service",

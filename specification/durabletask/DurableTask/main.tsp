@@ -3,13 +3,14 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./namespace.tsp";
-import "./taskHub.tsp";
-import "./models.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
+using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Can not change existing name."
@@ -20,6 +21,8 @@ using Azure.ResourceManager;
 @versioned(Versions)
 namespace Microsoft.DurableTask;
 
+interface Operations extends Azure.ResourceManager.Operations {}
+
 @doc("API Versions")
 enum Versions {
 	@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
@@ -27,4 +30,90 @@ enum Versions {
 	@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 	@doc("2024-02-01-preview")
 	v2024_02_01_Preview: "2024-02-01-preview",
+}
+
+@doc("A DurableTaskService resource")
+model Namespace is TrackedResource<NamespaceProperties> {
+	@doc("The name of the service")
+	@pattern("^[a-zA-Z0-9-]{3,64}$")
+	@key("namespaceName")
+	@segment("namespaces")
+	@path
+    @visibility("read", "create")
+	name: string;
+
+    ...ManagedServiceIdentity;
+}
+
+
+@doc("Details of the Namespace.")
+model NamespaceProperties {
+	@visibility("read")
+	@doc("The status of the last operation.")
+	provisioningState?: ProvisioningState;
+
+	@doc("url of the durable task service")
+	@visibility("read")
+	url?: string;
+
+    @doc("task hubs list for durable task service")
+    taskHubs?: TaskHub[];
+
+    @doc("IP allow list for durable task service")
+    ipAllowlist?: string[];
+}
+
+@doc("An TaskHub resource belonging to the namespace.")
+@parentResource(Namespace)
+model TaskHub is ProxyResource<TaskHubProperties> {
+	@doc("Task Hub name")
+	@key("taskHubName")
+	@pattern("^[a-zA-Z0-9-]{3,64}$")
+	@segment("taskHubs")
+	@path
+	@visibility("read", "create")
+	name: string;
+}
+
+@doc("The properties of TaskHub")
+model TaskHubProperties {
+	@visibility("read")
+	@doc("The status of the last operation.")
+	provisioningState?: ProvisioningState;
+}
+
+@doc("The status of the current operation.")
+@Azure.Core.lroStatus
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
+
+  @doc("The resource is being provisioned")
+  Provisioning: "Provisioning",
+
+  @doc("The resource is updating")
+  Updating: "Updating",
+
+  @doc("The resource is being deleted")
+  Deleting: "Deleting",
+
+  @doc("The resource create request has been accepted")
+  Accepted: "Accepted",
+}
+
+@armResourceOperations(Namespace)
+interface Namespaces {
+	get is ArmResourceRead<Namespace>;
+	createOrUpdate is ArmResourceCreateOrReplaceAsync<Namespace>;
+	delete is ArmResourceDeleteSync<Namespace>;
+	listByResourceGroup is ArmResourceListByParent<Namespace>;
+	listBySubscription is ArmListBySubscription<Namespace>;
+}
+
+@armResourceOperations(TaskHub)
+interface TaskHubs {
+	get is ArmResourceRead<TaskHub>;
+	createOrUpdate is ArmResourceCreateOrReplaceSync<TaskHub>;
+	delete is ArmResourceDeleteSync<TaskHub>;
+	listByParent is ArmResourceListByParent<TaskHub>;
 }
