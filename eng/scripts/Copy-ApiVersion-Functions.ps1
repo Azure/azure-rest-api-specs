@@ -31,7 +31,7 @@ function Get-ReadmeWithNewTag($readmeContent, $tagContent) {
 
 function Get-ReadmeWithLatestTag($readmeContent, $newApiVersion, $newApiVersionStatus ) {
     # Get the current tag date
-    $currentTag = $readmeContent -match '(openapi-type:.*\s+tag:\s*)(?<version>package-.*)'
+    $currentTag = $readmeContent -match '(?m)^(tag:\s*)(package-)(.*)(?<version>\d{4}-\d{2})(.*)'
     $currentTag = $Matches['version']
     $latestVersionDate = [datetime]($currentTag -replace '-preview','')
 
@@ -46,14 +46,15 @@ function Get-ReadmeWithLatestTag($readmeContent, $newApiVersion, $newApiVersionS
     }
 
     # Compare two dates
-    if ( $newVersionDate -gt $latestVersionDate) {
+    if ( $latestVersionDate -gt $newVersionDate) {
         Write-Warning "The new version is not newer than the current default version in the readme file."  
     }
-    $tagVersion = $newApiVersion -match '\d{4}-\d{2}?'
+    $tagVersion = $newApiVersion -match '\d{4}-\d{2}'
+    $tagVersion = $Matches[0]
     if($newApiVersionStatus -eq "preview"){
-        "preview-"+$tagVersion
+        $tagVersion= "preview-"+$tagVersion
     }
-    return $readmeContent -replace '^(tag:\s*)(package-.*)', "`$1package-$tagVersion" 
+    return $readmeContent -replace '(?m)^(tag:\s*)(package-.*)', "tag: package-$tagVersion" 
 }
 
 function New-GitAddAndCommit {
