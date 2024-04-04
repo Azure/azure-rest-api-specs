@@ -20,7 +20,7 @@ model Namespace is TrackedResource<NamespaceProperties> {
 	@key("namespaceName")
 	@segment("namespaces")
 	@path
-	@visibility("read","create")
+    @visibility("read")
 	name: string;
 
     ...ManagedServiceIdentity;

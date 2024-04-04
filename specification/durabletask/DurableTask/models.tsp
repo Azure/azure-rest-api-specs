@@ -24,9 +24,11 @@ model NamespaceProperties {
 	url?: string;
 
     @doc("task hubs list for durable task service")
+    @visibility("read","create")
     taskHubs?: TaskHub[];
 
     @doc("IP allow list for durable task service")
+    @visibility("read","create")
     ipAllowlist?: string[];
 }
 

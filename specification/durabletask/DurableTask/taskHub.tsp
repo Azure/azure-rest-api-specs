@@ -22,14 +22,14 @@ model TaskHub is ProxyResource<TaskHubProperties> {
 	@pattern("^[a-zA-Z0-9-]{3,128}$")
 	@segment("taskHubs")
 	@path
-	@visibility("read","create")
+	@visibility("read")
 	name: string;
 }
 
 @armResourceOperations(TaskHub)
 interface TaskHubs {
 	get is ArmResourceRead<TaskHub>;
-	create is ArmResourceCreateOrReplaceSync<TaskHub>;
+	createOrUpdate is ArmResourceCreateOrReplaceSync<TaskHub>;
 	delete is ArmResourceDeleteSync<TaskHub>;
 	listByParent is ArmResourceListByParent<TaskHub>;
 }

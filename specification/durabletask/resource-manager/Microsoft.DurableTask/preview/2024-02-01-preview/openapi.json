@@ -311,7 +311,7 @@
             "name": "properties",
             "in": "body",
             "description": "The resource properties to be updated.",
-            "required": false,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/NamespaceUpdate"
             }
@@ -488,7 +488,7 @@
         }
       },
       "put": {
-        "operationId": "TaskHubs_Create",
+        "operationId": "TaskHubs_CreateOrUpdate",
         "tags": [
           "TaskHubs"
         ],
@@ -550,8 +550,8 @@
           }
         },
         "x-ms-examples": {
-          "TaskHubs_Create_MinimumSet_Gen": {
-            "$ref": "./examples/TaskHubs_Create_MinimumSet_Gen.json"
+          "TaskHubs_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/TaskHubs_CreateOrUpdate_MinimumSet_Gen.json"
           }
         }
       },
@@ -675,14 +675,22 @@
           "description": "task hubs list for durable task service",
           "items": {
             "$ref": "#/definitions/TaskHub"
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "ipAllowlist": {
           "type": "array",
           "description": "IP allow list for durable task service",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },
@@ -698,30 +706,6 @@
           "type": "object",
           "description": "Resource tags.",
           "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/NamespaceUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "NamespaceUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the Namespace.",
-      "properties": {
-        "taskHubs": {
-          "type": "array",
-          "description": "task hubs list for durable task service",
-          "items": {
-            "$ref": "#/definitions/TaskHub"
-          }
-        },
-        "ipAllowlist": {
-          "type": "array",
-          "description": "IP allow list for durable task service",
-          "items": {
             "type": "string"
           }
         }
