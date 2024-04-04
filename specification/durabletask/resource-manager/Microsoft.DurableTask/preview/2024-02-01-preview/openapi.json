@@ -288,7 +288,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NamespaceTagsUpdate"
+              "$ref": "#/definitions/NamespaceUpdate"
             }
           }
         ],
@@ -618,6 +618,7 @@
         "taskHubs": {
           "type": "array",
           "description": "task hubs list for durable task service",
+          "default": [],
           "items": {
             "$ref": "#/definitions/TaskHub"
           }
@@ -625,20 +626,51 @@
         "ipAllowlist": {
           "type": "array",
           "description": "IP allow list for durable task service",
+          "default": [],
           "items": {
             "type": "string"
           }
         }
       }
     },
-    "NamespaceTagsUpdate": {
+    "NamespaceUpdate": {
       "type": "object",
-      "description": "The type used for updating tags in Namespace resources.",
+      "description": "The type used for update operations of the Namespace.",
       "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
           "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/NamespaceUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NamespaceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Namespace.",
+      "properties": {
+        "taskHubs": {
+          "type": "array",
+          "description": "task hubs list for durable task service",
+          "default": [],
+          "items": {
+            "$ref": "#/definitions/TaskHub"
+          }
+        },
+        "ipAllowlist": {
+          "type": "array",
+          "description": "IP allow list for durable task service",
+          "default": [],
+          "items": {
             "type": "string"
           }
         }
@@ -696,7 +728,8 @@
             "description": "The resource create request has been accepted"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "TaskHub": {
       "type": "object",

@@ -55,10 +55,10 @@ model NamespaceProperties {
   url?: string;
 
   @doc("task hubs list for durable task service")
-  taskHubs?: TaskHub[];
+  taskHubs?: TaskHub[] = [];
 
   @doc("IP allow list for durable task service")
-  ipAllowlist?: string[];
+  ipAllowlist?: string[] = [];
 }
 
 @doc("An TaskHub resource belonging to the namespace.")
@@ -103,7 +103,7 @@ union ProvisioningState {
 interface Namespaces {
   get is ArmResourceRead<Namespace>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Namespace>;
-  update is ArmTagsPatchSync<Namespace>;
+  update is ArmResourcePatchSync<Namespace, NamespaceProperties>;
   delete is ArmResourceDeleteSync<Namespace>;
   listByResourceGroup is ArmResourceListByParent<Namespace>;
   listBySubscription is ArmListBySubscription<Namespace>;
