@@ -317,7 +317,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ObservationPageResponse"
+              "$ref": "#/definitions/ObservationPageResult"
             }
           },
           "default": {
@@ -358,10 +358,12 @@
             "$ref": "#/parameters/OrderByParameter"
           },
           {
-            "$ref": "#/parameters/FileNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ColumnsParameter"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssetsExportRequestBody"
+            }
           }
         ],
         "responses": {
@@ -403,29 +405,25 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/DeltaDetailTypeParameter"
-          },
-          {
-            "$ref": "#/parameters/DaysPriorParameter"
-          },
-          {
-            "$ref": "#/parameters/KindParameter"
-          },
-          {
-            "$ref": "#/parameters/DateParameter"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
             "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeltaDetailsRequestBody"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DeltaPageResponse"
+              "$ref": "#/definitions/DeltaPageResult"
             }
           },
           "default": {
@@ -463,17 +461,19 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/DaysPriorParameter"
-          },
-          {
-            "$ref": "#/parameters/DateParameter"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeltaSummaryRequestBody"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DeltaSummaryResponse"
+              "$ref": "#/definitions/DeltaSummaryResult"
             }
           },
           "default": {
@@ -512,7 +512,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedCisaCveResponse"
+              "$ref": "#/definitions/PagedCisaCveResult"
             }
           },
           "default": {
@@ -561,7 +561,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CisaCveResponse"
+              "$ref": "#/definitions/CisaCveResult"
             }
           },
           "default": {
@@ -1135,7 +1135,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/AssetChainSummaryResponse"
+              "$ref": "#/definitions/AssetChainSummaryResult"
             }
           },
           "default": {
@@ -2127,7 +2127,7 @@
       ],
       "x-ms-discriminator-value": "as"
     },
-    "AssetChainKindSummaryResponse": {
+    "AssetChainKindSummaryResult": {
       "type": "object",
       "description": "A list of asset chain summaries per asset kind",
       "properties": {
@@ -2175,7 +2175,7 @@
         "modelAsString": true
       }
     },
-    "AssetChainSummaryResponse": {
+    "AssetChainSummaryResult": {
       "type": "object",
       "description": "Response for the asset chain summary.",
       "properties": {
@@ -2183,7 +2183,7 @@
           "type": "array",
           "description": "A list of asset chain summaries per asset kind",
           "items": {
-            "$ref": "#/definitions/AssetChainKindSummaryResponse"
+            "$ref": "#/definitions/AssetChainKindSummaryResult"
           },
           "x-ms-identifiers": []
         },
@@ -2191,7 +2191,7 @@
           "type": "array",
           "description": "A list of disco group summaries",
           "items": {
-            "$ref": "#/definitions/DiscoGroupSummaryResponse"
+            "$ref": "#/definitions/DiscoGroupSummaryResult"
           }
         },
         "errors": {
@@ -2525,6 +2525,25 @@
         "modelAsString": true
       }
     },
+    "AssetsExportRequestBody": {
+      "type": "object",
+      "description": "A request body used to export an asset.",
+      "properties": {
+        "fileName": {
+          "type": "string"
+        },
+        "columns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "fileName",
+        "columns"
+      ]
+    },
     "Attribute": {
       "type": "object",
       "properties": {
@@ -2786,7 +2805,7 @@
         }
       }
     },
-    "CisaCveResponse": {
+    "CisaCveResult": {
       "type": "object",
       "description": "cisa cve in a given workspace.",
       "properties": {
@@ -3181,7 +3200,7 @@
       "type": "object",
       "description": "The properties required to establish connection to a particular service"
     },
-    "DeltaDateResponse": {
+    "DeltaDateResult": {
       "type": "object",
       "properties": {
         "date": {
@@ -3214,7 +3233,27 @@
         "modelAsString": true
       }
     },
-    "DeltaPageResponse": {
+    "DeltaDetailsRequestBody": {
+      "type": "object",
+      "description": "A request body used to retrieve a list of deltas.",
+      "properties": {
+        "deltaDetailType": {
+          "$ref": "#/definitions/DeltaDetailType"
+        },
+        "daysPrior": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "kind": {
+          "$ref": "#/definitions/GlobalAssetType"
+        },
+        "date": {
+          "type": "string",
+          "description": "expected format to be: yyyy-MM-dd"
+        }
+      }
+    },
+    "DeltaPageResult": {
       "type": "object",
       "properties": {
         "totalElements": {
@@ -3230,13 +3269,13 @@
           "type": "array",
           "description": "The items in the current page of results.",
           "items": {
-            "$ref": "#/definitions/DeltaResponse"
+            "$ref": "#/definitions/DeltaResult"
           },
           "x-ms-identifiers": []
         }
       }
     },
-    "DeltaRangeResponse": {
+    "DeltaRangeResult": {
       "type": "object",
       "properties": {
         "range": {
@@ -3276,7 +3315,7 @@
         "kindSummaries"
       ]
     },
-    "DeltaResponse": {
+    "DeltaResult": {
       "type": "object",
       "properties": {
         "kind": {
@@ -3310,18 +3349,32 @@
         "state"
       ]
     },
-    "DeltaSummaryResponse": {
+    "DeltaSummaryRequestBody": {
+      "type": "object",
+      "description": "A request body used to retrieve a delta summary.",
+      "properties": {
+        "daysPrior": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "date": {
+          "type": "string",
+          "description": "expected format to be: yyyy-MM-dd"
+        }
+      }
+    },
+    "DeltaSummaryResult": {
       "type": "object",
       "properties": {
         "summary": {
-          "$ref": "#/definitions/DeltaRangeResponse",
+          "$ref": "#/definitions/DeltaRangeResult",
           "description": "Contains added, removed, and difference values for the whole range either 7 or 30 days"
         },
         "daily": {
           "type": "array",
           "description": "Contains added, removed, count, and difference values for each day",
           "items": {
-            "$ref": "#/definitions/DeltaDateResponse"
+            "$ref": "#/definitions/DeltaDateResult"
           },
           "x-ms-identifiers": []
         }
@@ -3573,7 +3626,7 @@
         }
       }
     },
-    "DiscoGroupSummaryResponse": {
+    "DiscoGroupSummaryResult": {
       "type": "object",
       "description": "A list of disco group summaries",
       "properties": {
@@ -5014,7 +5067,7 @@
         }
       ]
     },
-    "ObservationPageResponse": {
+    "ObservationPageResult": {
       "type": "object",
       "properties": {
         "totalElements": {
@@ -5031,7 +5084,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ObservationResponse"
+            "$ref": "#/definitions/ObservationResult"
           },
           "x-ms-identifiers": []
         }
@@ -5073,7 +5126,7 @@
         ]
       }
     },
-    "ObservationResponse": {
+    "ObservationResult": {
       "type": "object",
       "properties": {
         "name": {
@@ -5782,15 +5835,15 @@
         "value"
       ]
     },
-    "PagedCisaCveResponse": {
+    "PagedCisaCveResult": {
       "type": "object",
-      "description": "Paged collection of CisaCveResponse items",
+      "description": "Paged collection of CisaCveResult items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The CisaCveResponse items on this page",
+          "description": "The CisaCveResult items on this page",
           "items": {
-            "$ref": "#/definitions/CisaCveResponse"
+            "$ref": "#/definitions/CisaCveResult"
           },
           "x-ms-identifiers": []
         },
@@ -6879,85 +6932,12 @@
       "default": 0,
       "x-ms-parameter-location": "method"
     },
-    "ColumnsParameter": {
-      "name": "columns",
-      "in": "query",
-      "required": false,
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "collectionFormat": "csv",
-      "x-ms-parameter-location": "method"
-    },
-    "DateParameter": {
-      "name": "date",
-      "in": "query",
-      "description": "expected format to be: yyyy-MM-dd",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "DaysPriorParameter": {
-      "name": "daysPrior",
-      "in": "query",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
-    },
-    "DeltaDetailTypeParameter": {
-      "name": "deltaDetailType",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "enum": [
-        "added",
-        "removed"
-      ],
-      "x-ms-enum": {
-        "name": "DeltaDetailType",
-        "modelAsString": true
-      },
-      "x-ms-parameter-location": "method"
-    },
     "DiscoGroupNameParameter": {
       "name": "groupName",
       "in": "path",
       "description": "The unique identifier for the discovery group.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "FileNameParameter": {
-      "name": "fileName",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "KindParameter": {
-      "name": "kind",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "enum": [
-        "page",
-        "resource",
-        "mailServer",
-        "nameServer",
-        "host",
-        "domain",
-        "ipAddress",
-        "ipBlock",
-        "as",
-        "contact",
-        "sslCert"
-      ],
-      "x-ms-enum": {
-        "name": "GlobalAssetType",
-        "modelAsString": true
-      },
       "x-ms-parameter-location": "method"
     },
     "MarkParameter": {
