@@ -231,7 +231,14 @@ interface Environments {
       @path
       operationId: string;
     },
-    string | {
+    {
+      @doc("Set producer to text/plain")
+      @header
+      contentType: "text/plain";
+
+      @body
+      body: string;
+
       @statusCode
       statusCode: 200;
     }
