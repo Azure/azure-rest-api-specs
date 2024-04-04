@@ -1,6 +1,7 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "../shared/models.tsp";
+import "../DevBox/models.tsp";
 
 using Azure.Core;
 using TypeSpec.Rest;
