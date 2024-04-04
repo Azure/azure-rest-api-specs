@@ -1876,23 +1876,23 @@ components:
           format: unixtime
           description: The Unix timestamp, in seconds, representing when this object was created.
         expired_at:
-          type: string
-          format: date-time
+          type: integer
+          format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this item expired.
         completed_at:
-          type: string
-          format: date-time
+          type: integer
+          format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this completed.
         cancelled_at:
-          type: string
-          format: date-time
+          type: integer
+          format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this was cancelled.
         failed_at:
-          type: string
-          format: date-time
+          type: integer
+          format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this failed.
         metadata:
@@ -2080,7 +2080,6 @@ components:
           type: string
           enum:
             - message_creation
-            - tool_calls
           description: The object type, which is always 'message_creation'.
         message_creation:
           allOf:
@@ -2387,28 +2386,28 @@ components:
           format: unixtime
           description: The Unix timestamp, in seconds, representing when this object was created.
         expires_at:
-          type: string
-          format: date-time
+          type: integer
+          format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this item expires.
         started_at:
-          type: string
-          format: date-time
+          type: integer
+          format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this item was started.
         completed_at:
-          type: string
-          format: date-time
+          type: integer
+          format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this completed.
         cancelled_at:
-          type: string
-          format: date-time
+          type: integer
+          format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this was cancelled.
         failed_at:
-          type: string
-          format: date-time
+          type: integer
+          format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this failed.
         metadata:
