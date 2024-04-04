@@ -4,7 +4,7 @@ function Get-NewTagSection($apiVersion, $resourceProvider, $apiVersionStatus, $s
     $tagVersion = $Matches['date']
     $baseDir = "$resourceProvider/$apiVersionStatus/$apiVersion"
     
-    if($apiVersionStatus -eq "preview") { 
+    if ($apiVersionStatus -eq "preview") { 
         $tagVersion = "preview-" + $tagVersion  
     }  
 
@@ -33,41 +33,34 @@ function Get-ReadmeWithLatestTag($readmeContent, $newApiVersion, $newApiVersionS
     # Get the current tag date
     $currentTag = $readmeContent -match '(?m)^(tag:\s*)(package-)(.*)(?<version>\d{4}-\d{2})(.*)'
     $currentTag = $Matches['version']
-    $latestVersionDate = [datetime]($currentTag -replace '-preview','')
+    $latestVersionDate = [datetime]($currentTag -replace '-preview', '')
 
     # Convert the new OpenAPI version to a date
-    $newVersionDate = if ($newApiVersion -match '(\d{4})-(\d{2})-?(\d{0,2})') { 
-        if ($Matches[3] -eq '') { $Matches[3] = '01' }
-        [datetime]::ParseExact($Matches[1] + '-' + $Matches[2] + '-' + $Matches[3], 'yyyy-MM-dd', $null) 
-    } 
-    else { 
-        Write-Error "No date found in the new version: Tag $newVersionDate does not match the yyyy-MM-dd format"
-        Exit 1
-    }
+    $newVersionDate = [datetime]($newApiVersion -replace '-preview', '')
 
     # Compare two dates
-    if ( $latestVersionDate -gt $newVersionDate) {
+    if ($latestVersionDate -gt $newVersionDate) {
         Write-Warning "The new version is not newer than the current default version in the readme file."  
     }
     $tagVersion = $newApiVersion -match '\d{4}-\d{2}'
     $tagVersion = $Matches[0]
-    if($newApiVersionStatus -eq "preview"){
-        $tagVersion= "preview-"+$tagVersion
+    if ($newApiVersionStatus -eq "preview") {
+        $tagVersion = "preview-" + $tagVersion
     }
     return $readmeContent -replace '(?m)^(tag:\s*)(package-.*)', "tag: package-$tagVersion" 
 }
 
 function New-GitAddAndCommit {
-    [CmdletBinding(SupportsShouldProcess=$true)]
+    [CmdletBinding(SupportsShouldProcess = $true)]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [string]$directory,
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [string]$message
     )
 
-    if($PSCmdlet.ShouldProcess($directory, "Add and commit")){
-        git add $directory | Out-Null
-        $message | git commit --file=-
+    if ($PSCmdlet.ShouldProcess($directory, "Add and commit")) {
+        # git add $directory | Out-Null
+        # $message | git commit --file=-
     }
 }
