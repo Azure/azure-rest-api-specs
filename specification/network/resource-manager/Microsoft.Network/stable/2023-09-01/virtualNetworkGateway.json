@@ -3567,6 +3567,14 @@
         "enablePrivateLinkFastPath": {
           "type": "boolean",
           "description": "Bypass the ExpressRoute gateway when accessing private-links. ExpressRoute FastPath (expressRouteGatewayBypass) must be enabled."
+        },
+        "authenticationType": {
+          "$ref": "#/definitions/ConnectionAuthenticationType",
+          "description": "Gateway connection authentication type."
+        },
+        "certificateAuthentication": {
+          "$ref": "#/definitions/CertificateAuthentication",
+          "description": "Certificate Authentication information for a certificate based authentication connection."
         }
       },
       "required": [
