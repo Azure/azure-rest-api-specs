@@ -91,6 +91,10 @@ interface Environments {
   @added(APIVersions.v2024_02_01)
   patchEnvironment is Azure.Core.Foundations.Operation<
     {
+      @doc("Set consumer to JSON merge patch.")
+      @header
+      contentType: "application/merge-patch+json";
+
       @doc("The DevCenter Project upon which to execute operations.")
       @path
       projectName: string;
