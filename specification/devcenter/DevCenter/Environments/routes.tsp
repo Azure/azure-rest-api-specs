@@ -253,6 +253,7 @@ interface Environments {
   getAction is StandardResourceOperations.ResourceRead<EnvironmentAction>;
 
   @doc("Skips an occurrence of an action.")
+  @action("skip")
   @added(APIVersions.v2024_02_01)
   skipAction is StandardResourceOperations.ResourceAction<
     EnvironmentAction,
@@ -261,6 +262,7 @@ interface Environments {
   >;
 
   @doc("Delays the occurrence of an action.")
+  @action("delay")
   @added(APIVersions.v2024_02_01)
   delayAction is StandardResourceOperations.ResourceAction<
     EnvironmentAction,

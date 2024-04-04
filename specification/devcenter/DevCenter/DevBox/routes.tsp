@@ -19,6 +19,25 @@ interface DevBoxes {
   @doc("Gets a pool.")
   getPool is StandardResourceOperations.ResourceRead<Pool>;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern since DevBox has a different path"
+  @doc("Lists Dev Boxes that the caller has access to in the DevCenter.")
+  @route("/devboxes")
+  @get
+  listAllDevBoxes is Azure.Core.Foundations.Operation<{}, DevBoxListResult>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern since DevBox has a different path"
+  @doc("Lists Dev Boxes in the Dev Center for a particular user.")
+  @route("/users/{userId}/devboxes")
+  @get
+  listAllDevBoxesByUser is Azure.Core.Foundations.Operation<
+    {
+      @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+      @path
+      userId: string;
+    },
+    DevBoxListResult
+  >;
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need of reuse ScheduleListResult"
   // Alternate route to return same list response of Schedules
   @doc("Lists all schedules within a pool that are configured by your project administrator.")

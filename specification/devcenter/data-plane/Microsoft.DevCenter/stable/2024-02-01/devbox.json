@@ -51,6 +51,40 @@
   },
   "tags": [],
   "paths": {
+    "/devboxes": {
+      "get": {
+        "operationId": "DevBoxes_ListAllDevBoxes",
+        "description": "Lists Dev Boxes that the caller has access to in the DevCenter.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDevBox"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/projects/{projectName}/operationstatuses/{operationId}": {
       "get": {
         "operationId": "OperationStatuses_Get",
@@ -1522,6 +1556,47 @@
           "Gets RDP Connection info.": {
             "$ref": "./examples/DevBoxes_GetRemoteConnection.json"
           }
+        }
+      }
+    },
+    "/users/{userId}/devboxes": {
+      "get": {
+        "operationId": "DevBoxes_ListAllDevBoxesByUser",
+        "description": "Lists Dev Boxes in the Dev Center for a particular user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDevBox"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
