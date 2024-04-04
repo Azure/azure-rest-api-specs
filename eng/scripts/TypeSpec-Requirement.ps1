@@ -9,10 +9,19 @@ param (
 )
 Set-StrictMode -Version 3
 
-Install-Module -Name powershell-yaml -RequiredVersion 0.4.7 -Force -Scope CurrentUser
-
 . $PSScriptRoot/ChangedFiles-Functions.ps1
 . $PSScriptRoot/Logging-Functions.ps1
+
+$script:moduleInstalled = $false
+function Ensure-PowerShell-Yaml-Installed {
+  if (-not $script:moduleInstalled) {
+    $script:moduleInstalled = Get-Module -ListAvailable -Name powershell-yaml | Where-Object { $_.Version -eq "0.4.7" }
+    if (-not $script:moduleInstalled) {
+      Install-Module -Name powershell-yaml -RequiredVersion 0.4.7 -Force -Scope CurrentUser
+      $script:moduleInstalled = $true
+    }
+  }
+}
 
 function Find-Suppressions-Yaml {
   param (
@@ -41,6 +50,8 @@ function Get-Suppression {
 
   $suppressionsFile = Find-Suppressions-Yaml $fileInSpecFolder
   if ($suppressionsFile) {
+    Ensure-PowerShell-Yaml-Installed
+
     $suppressions = Get-Content -Path $suppressionsFile -Raw | ConvertFrom-Yaml
     foreach ($suppression in $suppressions) {
       $tool = $suppression["tool"]
