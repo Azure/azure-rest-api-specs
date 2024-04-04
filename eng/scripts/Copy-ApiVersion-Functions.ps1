@@ -60,7 +60,7 @@ function New-GitAddAndCommit {
     )
 
     if ($PSCmdlet.ShouldProcess($directory, "Add and commit")) {
-        # git add $directory | Out-Null
-        # $message | git commit --file=-
+        git add $directory | Out-Null
+        $message | git commit --file=-
     }
 }
