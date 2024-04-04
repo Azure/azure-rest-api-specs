@@ -40,7 +40,7 @@ alias CapacityAlias = {
   capacity_type: CapacityType;
 };
 
-@doc("Whether your capacity has been afected by the usage amount (token count) reported here.")
+@doc("Whether your capacity has been affected by the usage amount (token count) reported here.")
 union CapacityType {
   string,
 
