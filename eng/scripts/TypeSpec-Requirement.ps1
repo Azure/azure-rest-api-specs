@@ -12,17 +12,17 @@ Set-StrictMode -Version 3
 . $PSScriptRoot/ChangedFiles-Functions.ps1
 . $PSScriptRoot/Logging-Functions.ps1
 
-$script:moduleInstalled = $false
+$script:psYamlInstalled = $false
 function Ensure-PowerShell-Yaml-Installed {
-  if (-not $script:moduleInstalled) {
-    $script:moduleInstalled = [bool] (Get-Module -ListAvailable -Name powershell-yaml | Where-Object { $_.Version -eq "0.4.7" })
-    if ($script:moduleInstalled) {
+  if (-not $script:psYamlInstalled) {
+    $script:psYamlInstalled = [bool] (Get-Module -ListAvailable -Name powershell-yaml | Where-Object { $_.Version -eq "0.4.7" })
+    if ($script:psYamlInstalled) {
       LogInfo "Module powershell-yaml@0.4.7 already installed"
     }
     else {
       LogInfo "Installing module powershell-yaml@0.4.7"
       Install-Module -Name powershell-yaml -RequiredVersion 0.4.7 -Force -Scope CurrentUser
-      $script:moduleInstalled = $true
+      $script:psYamlInstalled = $true
     }
   }
 }
