@@ -56,7 +56,8 @@ model AccessPolicy {
 union DataPlaneRole {
   None: "None",
   ExperimentationDataOwner: "ExperimentationDataOwner",
-  string };
+  string,
+}
 
 @doc("Data source that telemetry data required for experimentation will be retrieved from.")
 model DataSource {
