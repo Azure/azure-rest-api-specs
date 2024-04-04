@@ -12,18 +12,6 @@ namespace Microsoft.DurableTask;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@doc("The type used for update operation of the Namespace.")
-model NamespacePropertiesUpdate {
-
-    @extension("x-ms-client-flatten", true)
-    @doc("task hubs list for durable task service")
-    taskHubs?: TaskHub[];
-
-    @extension("x-ms-client-flatten", true)
-    @doc("IP allow list for durable task service")
-    ipAllowlist?: string[];
-
-}
 
 @doc("Details of the Namespace.")
 model NamespaceProperties {
@@ -34,6 +22,12 @@ model NamespaceProperties {
 	@doc("url of the durable task service")
 	@visibility("read")
 	url?: string;
+
+    @doc("task hubs list for durable task service")
+    taskHubs?: TaskHub[];
+
+    @doc("IP allow list for durable task service")
+    ipAllowlist?: string[];
 }
 
 

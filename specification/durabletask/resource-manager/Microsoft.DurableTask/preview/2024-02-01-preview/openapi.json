@@ -669,28 +669,20 @@
           "type": "string",
           "description": "url of the durable task service",
           "readOnly": true
-        }
-      }
-    },
-    "NamespacePropertiesUpdate": {
-      "type": "object",
-      "description": "The type used for update operation of the Namespace.",
-      "properties": {
+        },
         "taskHubs": {
           "type": "array",
           "description": "task hubs list for durable task service",
           "items": {
             "$ref": "#/definitions/TaskHub"
-          },
-          "x-ms-client-flatten": true
+          }
         },
         "ipAllowlist": {
           "type": "array",
           "description": "IP allow list for durable task service",
           "items": {
             "type": "string"
-          },
-          "x-ms-client-flatten": true
+          }
         }
       }
     },
@@ -724,16 +716,14 @@
           "description": "task hubs list for durable task service",
           "items": {
             "$ref": "#/definitions/TaskHub"
-          },
-          "x-ms-client-flatten": true
+          }
         },
         "ipAllowlist": {
           "type": "array",
           "description": "IP allow list for durable task service",
           "items": {
             "type": "string"
-          },
-          "x-ms-client-flatten": true
+          }
         }
       }
     },

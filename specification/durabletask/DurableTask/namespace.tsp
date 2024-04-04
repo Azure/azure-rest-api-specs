@@ -22,7 +22,7 @@ model Namespace is TrackedResource<NamespaceProperties> {
 	@path
 	@visibility("read","create")
 	name: string;
-    
+
     ...ManagedServiceIdentity;
 }
 
@@ -32,7 +32,7 @@ interface Namespaces {
 	createOrUpdate is ArmResourceCreateOrReplaceAsync<Namespace>;
 	update is ArmResourcePatchSync<
 		Namespace,
-		NamespacePropertiesUpdate
+		NamespaceProperties
 	>;
 	delete is ArmResourceDeleteSync<Namespace>;
 	listByResourceGroup is ArmResourceListByParent<Namespace>;
