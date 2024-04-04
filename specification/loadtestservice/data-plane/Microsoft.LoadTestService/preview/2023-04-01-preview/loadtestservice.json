@@ -2622,30 +2622,6 @@
         }
       }
     },
-    "RequestDataLevel": {
-      "type": "string",
-      "description": "Request data collection level for test run",
-      "enum": [
-        "NONE",
-        "ERRORS"
-      ],
-      "x-ms-enum": {
-        "name": "RequestDataLevel",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NONE",
-            "value": "NONE",
-            "description": "No request data will be collected"
-          },
-          {
-            "name": "ERRORS",
-            "value": "ERRORS",
-            "description": "Request data will be collected in case of failed requests"
-          }
-        ]
-      }
-    },
     "ResourceMetric": {
       "type": "object",
       "description": "Associated metric definition for particular metrics of the azure resource (\nRefer :\nhttps://docs.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).",
@@ -3343,14 +3319,6 @@
           "description": "Type of test.",
           "readOnly": true
         },
-        "requestDataLevel": {
-          "$ref": "#/definitions/RequestDataLevel",
-          "description": "Request data collection level for test run"
-        },
-        "debugLogsEnabled": {
-          "type": "boolean",
-          "description": "Enable or disable debug level logging. True if debug logs are enabled for the test run. False otherwise"
-        },
         "publicIPDisabled": {
           "type": "boolean",
           "description": "Inject load test engines without deploying public IP for outbound access",
@@ -3504,14 +3472,6 @@
           "type": "string",
           "description": "The test run description.",
           "maxLength": 100
-        },
-        "requestDataLevel": {
-          "$ref": "#/definitions/RequestDataLevel",
-          "description": "Request data collection level for test run"
-        },
-        "debugLogsEnabled": {
-          "type": "boolean",
-          "description": "Enable or disable debug level logging. True if debug logs are enabled for the test run. False otherwise"
         }
       }
     },
