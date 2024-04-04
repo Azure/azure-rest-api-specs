@@ -43,6 +43,7 @@ interface Assets {
 
   @doc("Export a list of assets for the provided search parameters.")
   @action("export")
+  @Versioning.added(Versions.v2024_03_01_preview)
   getAssetsExport is Operations.ResourceCollectionAction<
     AssetResource,
     AssetsExportRequestBody,
@@ -56,7 +57,7 @@ interface Assets {
   getObservations is Operations.ResourceAction<
     AssetResource,
     {},
-    ObservationPageResponse,
+    ObservationPageResult,
     ObservationsParameters
   >;
 
@@ -66,7 +67,7 @@ interface Assets {
   getDeltaDetails is Operations.ResourceCollectionAction<
     AssetResource,
     DeltaDetailsRequestBody,
-    DeltaPageResponse,
+    DeltaPageResult,
     DeltaDetailsTrait
   >;
 
@@ -76,7 +77,7 @@ interface Assets {
   getDeltaSummary is Operations.ResourceCollectionAction<
     AssetResource,
     DeltaSummaryRequestBody,
-    DeltaSummaryResponse,
+    DeltaSummaryResult,
     {}
   >;
 }
@@ -163,7 +164,7 @@ interface DiscoveryGroups {
   getAssetChainSummary is Operations.ResourceCollectionAction<
     DiscoGroup,
     AssetChainRequest,
-    AssetChainSummaryResponse
+    AssetChainSummaryResult
   >;
 
   @doc("Dismiss a discovery seed chain for given seed identifiers.")
@@ -276,9 +277,9 @@ interface Tasks {
 interface CisaCves {
   @doc("Retrieve a list of CisaCves for the provided search parameters.")
   @Versioning.added(Versions.v2024_03_01_preview)
-  getCisaCves is Operations.ResourceList<CisaCveResponse, CisaCveListTrait>;
+  getCisaCves is Operations.ResourceList<CisaCveResult, CisaCveListTrait>;
 
   @doc("Retrieve details of CisaCve by cveId")
   @Versioning.added(Versions.v2024_03_01_preview)
-  getCisaCve is Operations.ResourceRead<CisaCveResponse>;
+  getCisaCve is Operations.ResourceRead<CisaCveResult>;
 }

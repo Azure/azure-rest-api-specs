@@ -332,8 +332,11 @@ model AssetsExportRequestBody {
 @doc("A request body used to retrieve a list of deltas.")
 @Versioning.added(Versions.v2024_03_01_preview)
 model DeltaDetailsRequestBody {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
   deltaDetailType?: DeltaDetailType;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
   daysPrior?: int32;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
   kind?: GlobalAssetType;
 
   @doc("expected format to be: yyyy-MM-dd")
@@ -343,6 +346,7 @@ model DeltaDetailsRequestBody {
 @doc("A request body used to retrieve a delta summary.")
 @Versioning.added(Versions.v2024_03_01_preview)
 model DeltaSummaryRequestBody {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
   daysPrior?: int32;
 
   @doc("expected format to be: yyyy-MM-dd")
@@ -1444,7 +1448,7 @@ model ObservedValue {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @Versioning.added(Versions.v2024_03_01_preview)
-model DeltaResponse {
+model DeltaResult {
   @doc("Shows the asset kind")
   kind: GlobalAssetType;
 
@@ -1464,7 +1468,7 @@ model DeltaResponse {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @Versioning.added(Versions.v2024_03_01_preview)
 @pagedResult
-model DeltaPageResponse {
+model DeltaPageResult {
   @doc("The total number of items available in the full result set.")
   totalElements?: int64;
 
@@ -1474,22 +1478,22 @@ model DeltaPageResponse {
 
   @doc("The items in the current page of results.")
   @items
-  value?: DeltaResponse[];
+  value?: DeltaResult[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @Versioning.added(Versions.v2024_03_01_preview)
-model DeltaSummaryResponse {
+model DeltaSummaryResult {
   @doc("Contains added, removed, and difference values for the whole range either 7 or 30 days")
-  summary: DeltaRangeResponse;
+  summary: DeltaRangeResult;
 
   @doc("Contains added, removed, count, and difference values for each day")
-  daily: DeltaDateResponse[];
+  daily: DeltaDateResult[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @Versioning.added(Versions.v2024_03_01_preview)
-model DeltaRangeResponse {
+model DeltaRangeResult {
   @doc("The range of dates requested")
   range: int64;
 
@@ -1524,7 +1528,7 @@ model DeltaTypeResponse {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @Versioning.added(Versions.v2024_03_01_preview)
-model DeltaDateResponse {
+model DeltaDateResult {
   @doc("The date that is being requested")
   date: utcDateTime;
 
@@ -1765,7 +1769,7 @@ enum ObservationPriority {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @Versioning.added(Versions.v2024_03_01_preview)
-model ObservationResponse {
+model ObservationResult {
   name: string;
   type: ObservationType[];
   priority: ObservationPriority;
@@ -1775,10 +1779,10 @@ model ObservationResponse {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @Versioning.added(Versions.v2024_03_01_preview)
-model ObservationPageResponse {
+model ObservationPageResult {
   totalElements: int64;
   prioritySummary: Record<int32>;
-  value: ObservationResponse[];
+  value: ObservationResult[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
@@ -1956,7 +1960,7 @@ model RequiredFilterParameter {
 @resource("cisaCves")
 @doc("cisa cve in a given workspace.")
 @Versioning.added(Versions.v2024_03_01_preview)
-model CisaCveResponse {
+model CisaCveResult {
   @key("cveId")
   @visibility("read")
   @doc("The CVE ID of the vulnerability in the format CVE-YYYY-NNNN, note that the number portion can have more than 4 digits.")
@@ -2005,12 +2009,12 @@ model AssetChainRequest {
 
 @doc("Response for the asset chain summary.")
 @Versioning.added(Versions.v2024_03_01_preview)
-model AssetChainSummaryResponse {
+model AssetChainSummaryResult {
   @doc("A list of asset chain summaries per asset kind")
-  affectedAssetsSummary: AssetChainKindSummaryResponse[];
+  affectedAssetsSummary: AssetChainKindSummaryResult[];
 
   @doc("A list of disco group summaries")
-  affectedGroupsSummary: DiscoGroupSummaryResponse[];
+  affectedGroupsSummary: DiscoGroupSummaryResult[];
 
   @doc("The list of exceptions")
   errors?: ErrorResponse[];
@@ -2018,7 +2022,7 @@ model AssetChainSummaryResponse {
 
 @doc("A list of asset chain summaries per asset kind")
 @Versioning.added(Versions.v2024_03_01_preview)
-model AssetChainKindSummaryResponse {
+model AssetChainKindSummaryResult {
   @doc("The kind of asset")
   kind: AssetKind;
 
@@ -2028,7 +2032,7 @@ model AssetChainKindSummaryResponse {
 
 @doc("A list of disco group summaries")
 @Versioning.added(Versions.v2024_03_01_preview)
-model DiscoGroupSummaryResponse {
+model DiscoGroupSummaryResult {
   @doc("The system generated unique id for the resource.")
   id: string;
 
