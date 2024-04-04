@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./common/extendedLocation.tsp";
@@ -135,7 +134,9 @@ model DataPoint {
 }
 
 @doc("Defines the data point observability mode.")
-enum DataPointsObservabilityMode {
+union DataPointsObservabilityMode {
+  string,
+
   @doc("No mapping to OpenTelemetry.")
   None: "none",
 
@@ -171,7 +172,9 @@ model Event {
 }
 
 @doc("Defines the event observability mode.")
-enum EventsObservabilityMode {
+union EventsObservabilityMode {
+  string,
+
   @doc("No mapping to OpenTelemetry.")
   None: "none",
 

@@ -44,6 +44,15 @@ export class CompileRule implements Rule {
       errorOutput += stderr;
     }
 
+    if (success) {
+      const gitDiffResult = await host.gitDiffTopSpecFolder(host, folder);
+      stdOutput += gitDiffResult.stdOutput;
+      if (!gitDiffResult.success) {
+        success = false;
+        errorOutput += gitDiffResult.errorOutput;
+        errorOutput += `\nFiles have been changed after \`tsp compile\`. Run \`tsp compile\` and ensure all files are included in your change.`;
+      }
+    }
     return {
       success: success,
       stdOutput: stdOutput,

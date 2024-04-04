@@ -1,7 +1,6 @@
 import "@typespec/rest";
 import "@typespec/openapi";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./../helpers.tsp";
@@ -41,7 +40,7 @@ union UpdateRunProvisioningState {
 }
 
 scalar FleetUpdateStrategyResourceId
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ContainerService/fleets/updateStrategies",
     }
@@ -360,6 +359,7 @@ interface UpdateRuns {
 
   listByParent is ArmResourceListByParent<UpdateRun>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API"
   @doc("Starts an UpdateRun.")
   start is ArmResourceNoRequestBodyActionAsync<
     UpdateRun,
@@ -367,6 +367,7 @@ interface UpdateRuns {
     BaseParameters<UpdateRun> & IfMatchParameters<UpdateRun>
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API"
   @doc("Stops an UpdateRun.")
   stop is ArmResourceNoRequestBodyActionAsync<
     UpdateRun,

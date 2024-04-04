@@ -1,11 +1,13 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Azure.ClientGenerator.Core;
 using OpenAPI;
 
 namespace Microsoft.AVS;
@@ -78,9 +80,11 @@ interface PrivateClouds {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
   delete is ArmResourceDeleteAsync<PrivateCloud>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API"
   @doc("Rotate the vCenter password")
   rotateVcenterPassword is ArmResourceActionNoContentAsyncNoRequestBody<PrivateCloud>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API"
   @doc("Rotate the NSX-T Manager password")
   rotateNsxtPassword is ArmResourceActionNoContentAsyncNoRequestBody<PrivateCloud>;
 
@@ -91,14 +95,15 @@ interface PrivateClouds {
   >;
 }
 
-@@projectedName(PrivateClouds.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(PrivateClouds.createOrUpdate::parameters.resource,
+  "application/json",
   "privateCloud"
 );
 @@OpenAPI.extension(PrivateClouds.createOrUpdate::parameters.resource,
   "x-ms-client-name",
   "privateCloud"
 );
+@@clientName(PrivateClouds.createOrUpdate::parameters.resource, "privateCloud");
 
 @armResourceOperations
 interface Clusters {
@@ -148,14 +153,15 @@ interface Clusters {
   listZones is ArmResourceActionSyncNoRequestBody<Cluster, ClusterZoneList>;
 }
 
-@@projectedName(Clusters.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(Clusters.createOrUpdate::parameters.resource,
+  "application/json",
   "cluster"
 );
 @@OpenAPI.extension(Clusters.createOrUpdate::parameters.resource,
   "x-ms-client-name",
   "cluster"
 );
+@@clientName(Clusters.createOrUpdate::parameters.resource, "cluster");
 
 @armResourceOperations
 interface Datastores {
@@ -172,10 +178,11 @@ interface Datastores {
   delete is ArmResourceDeleteAsync<Datastore>;
 }
 
-@@projectedName(Datastores.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(Datastores.createOrUpdate::parameters.resource,
+  "application/json",
   "datastore"
 );
+@@clientName(Datastores.createOrUpdate::parameters.resource, "datastore");
 @@OpenAPI.extension(Datastores.createOrUpdate::parameters.resource,
   "x-ms-client-name",
   "datastore"
@@ -194,8 +201,11 @@ interface HcxEnterpriseSites {
   delete is ArmResourceDeleteSync<HcxEnterpriseSite>;
 }
 
-@@projectedName(HcxEnterpriseSites.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(HcxEnterpriseSites.createOrUpdate::parameters.resource,
+  "application/json",
+  "hcxEnterpriseSite"
+);
+@@clientName(HcxEnterpriseSites.createOrUpdate::parameters.resource,
   "hcxEnterpriseSite"
 );
 @@OpenAPI.extension(HcxEnterpriseSites.createOrUpdate::parameters.resource,
@@ -221,8 +231,11 @@ interface Authorizations {
   delete is ArmResourceDeleteAsync<ExpressRouteAuthorization>;
 }
 
-@@projectedName(Authorizations.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(Authorizations.createOrUpdate::parameters.resource,
+  "application/json",
+  "authorization"
+);
+@@clientName(Authorizations.createOrUpdate::parameters.resource,
   "authorization"
 );
 @@OpenAPI.extension(Authorizations.createOrUpdate::parameters.resource,
@@ -245,8 +258,11 @@ interface GlobalReachConnections {
   delete is ArmResourceDeleteAsync<GlobalReachConnection>;
 }
 
-@@projectedName(GlobalReachConnections.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(GlobalReachConnections.createOrUpdate::parameters.resource,
+  "application/json",
+  "globalReachConnection"
+);
+@@clientName(GlobalReachConnections.createOrUpdate::parameters.resource,
   "globalReachConnection"
 );
 @@OpenAPI.extension(GlobalReachConnections.createOrUpdate::parameters.resource,
@@ -294,8 +310,11 @@ interface WorkloadNetworkSegments {
   deleteSegment is ArmResourceDeleteAsync<WorkloadNetworkSegment>;
 }
 
-@@projectedName(WorkloadNetworkSegments.create::parameters.resource,
-  "json",
+@@encodedName(WorkloadNetworkSegments.create::parameters.resource,
+  "application/json",
+  "workloadNetworkSegment"
+);
+@@clientName(WorkloadNetworkSegments.create::parameters.resource,
   "workloadNetworkSegment"
 );
 @@OpenAPI.extension(WorkloadNetworkSegments.create::parameters.resource,
@@ -303,8 +322,12 @@ interface WorkloadNetworkSegments {
   "workloadNetworkSegment"
 );
 
-@@projectedName(WorkloadNetworkSegments.update::parameters.properties,
-  "json",
+@@encodedName(WorkloadNetworkSegments.update::parameters.properties,
+  "application/json",
+  "workloadNetworkSegment"
+);
+@@clientName(WorkloadNetworkSegments.update::parameters.properties,
+  "application/json",
   "workloadNetworkSegment"
 );
 @@OpenAPI.extension(WorkloadNetworkSegments.update::parameters.properties,
@@ -347,8 +370,11 @@ interface WorkloadNetworkDhcpConfigurations {
   delete is ArmResourceDeleteAsync<WorkloadNetworkDhcp>;
 }
 
-@@projectedName(WorkloadNetworkDhcpConfigurations.create::parameters.resource,
-  "json",
+@@encodedName(WorkloadNetworkDhcpConfigurations.create::parameters.resource,
+  "application/json",
+  "workloadNetworkDhcp"
+);
+@@clientName(WorkloadNetworkDhcpConfigurations.create::parameters.resource,
   "workloadNetworkDhcp"
 );
 @@OpenAPI.extension(WorkloadNetworkDhcpConfigurations.create::parameters.resource,
@@ -356,8 +382,11 @@ interface WorkloadNetworkDhcpConfigurations {
   "workloadNetworkDhcp"
 );
 
-@@projectedName(WorkloadNetworkDhcpConfigurations.update::parameters.properties,
-  "json",
+@@encodedName(WorkloadNetworkDhcpConfigurations.update::parameters.properties,
+  "application/json",
+  "workloadNetworkDhcp"
+);
+@@clientName(WorkloadNetworkDhcpConfigurations.update::parameters.properties,
   "workloadNetworkDhcp"
 );
 @@OpenAPI.extension(WorkloadNetworkDhcpConfigurations.update::parameters.properties,
@@ -365,8 +394,11 @@ interface WorkloadNetworkDhcpConfigurations {
   "workloadNetworkDhcp"
 );
 
-@@projectedName(WorkloadNetworkDhcpConfigurations.update::parameters.properties,
-  "json",
+@@encodedName(WorkloadNetworkDhcpConfigurations.update::parameters.properties,
+  "application/json",
+  "workloadNetworkDhcp"
+);
+@@clientName(WorkloadNetworkDhcpConfigurations.update::parameters.properties,
   "workloadNetworkDhcp"
 );
 @@OpenAPI.extension(WorkloadNetworkDhcpConfigurations.update::parameters.properties,
@@ -435,8 +467,11 @@ interface WorkloadNetworkPortMirroringProfiles {
     | ErrorResponse;
 }
 
-@@projectedName(WorkloadNetworkPortMirroringProfiles.create::parameters.resource,
-  "json",
+@@encodedName(WorkloadNetworkPortMirroringProfiles.create::parameters.resource,
+  "application/json",
+  "workloadNetworkPortMirroring"
+);
+@@clientName(WorkloadNetworkPortMirroringProfiles.create::parameters.resource,
   "workloadNetworkPortMirroring"
 );
 @@OpenAPI.extension(WorkloadNetworkPortMirroringProfiles.create::parameters.resource,
@@ -444,8 +479,11 @@ interface WorkloadNetworkPortMirroringProfiles {
   "workloadNetworkPortMirroring"
 );
 
-@@projectedName(WorkloadNetworkPortMirroringProfiles.update::parameters.properties,
-  "json",
+@@encodedName(WorkloadNetworkPortMirroringProfiles.update::parameters.properties,
+  "application/json",
+  "workloadNetworkPortMirroring"
+);
+@@clientName(WorkloadNetworkPortMirroringProfiles.update::parameters.properties,
   "workloadNetworkPortMirroring"
 );
 @@OpenAPI.extension(WorkloadNetworkPortMirroringProfiles.update::parameters.properties,
@@ -503,8 +541,12 @@ interface WorkloadNetworkVmGroups {
     | ErrorResponse;
 }
 
-@@projectedName(WorkloadNetworkVmGroups.create::parameters.resource,
-  "json",
+@@encodedName(WorkloadNetworkVmGroups.create::parameters.resource,
+  "application/json",
+  "workloadNetworkVMGroup"
+);
+@@clientName(WorkloadNetworkVmGroups.create::parameters.resource,
+  "application/json",
   "workloadNetworkVMGroup"
 );
 @@OpenAPI.extension(WorkloadNetworkVmGroups.create::parameters.resource,
@@ -512,8 +554,11 @@ interface WorkloadNetworkVmGroups {
   "workloadNetworkVMGroup"
 );
 
-@@projectedName(WorkloadNetworkVmGroups.update::parameters.properties,
-  "json",
+@@encodedName(WorkloadNetworkVmGroups.update::parameters.properties,
+  "application/json",
+  "workloadNetworkVMGroup"
+);
+@@clientName(WorkloadNetworkVmGroups.update::parameters.properties,
   "workloadNetworkVMGroup"
 );
 @@OpenAPI.extension(WorkloadNetworkVmGroups.update::parameters.properties,
@@ -582,8 +627,11 @@ interface WorkloadNetworkDnsServices {
     | ErrorResponse;
 }
 
-@@projectedName(WorkloadNetworkDnsServices.create::parameters.resource,
-  "json",
+@@encodedName(WorkloadNetworkDnsServices.create::parameters.resource,
+  "application/json",
+  "workloadNetworkDnsService"
+);
+@@clientName(WorkloadNetworkDnsServices.create::parameters.resource,
   "workloadNetworkDnsService"
 );
 @@OpenAPI.extension(WorkloadNetworkDnsServices.create::parameters.resource,
@@ -591,8 +639,11 @@ interface WorkloadNetworkDnsServices {
   "workloadNetworkDnsService"
 );
 
-@@projectedName(WorkloadNetworkDnsServices.update::parameters.properties,
-  "json",
+@@encodedName(WorkloadNetworkDnsServices.update::parameters.properties,
+  "application/json",
+  "workloadNetworkDnsService"
+);
+@@clientName(WorkloadNetworkDnsServices.update::parameters.properties,
   "workloadNetworkDnsService"
 );
 @@OpenAPI.extension(WorkloadNetworkDnsServices.update::parameters.properties,
@@ -650,8 +701,11 @@ interface WorkloadNetworkDnsZones {
     | ErrorResponse;
 }
 
-@@projectedName(WorkloadNetworkDnsZones.create::parameters.resource,
-  "json",
+@@encodedName(WorkloadNetworkDnsZones.create::parameters.resource,
+  "application/json",
+  "workloadNetworkDnsZone"
+);
+@@clientName(WorkloadNetworkDnsZones.create::parameters.resource,
   "workloadNetworkDnsZone"
 );
 @@OpenAPI.extension(WorkloadNetworkDnsZones.create::parameters.resource,
@@ -659,8 +713,11 @@ interface WorkloadNetworkDnsZones {
   "workloadNetworkDnsZone"
 );
 
-@@projectedName(WorkloadNetworkDnsZones.update::parameters.properties,
-  "json",
+@@encodedName(WorkloadNetworkDnsZones.update::parameters.properties,
+  "application/json",
+  "workloadNetworkDnsZone"
+);
+@@clientName(WorkloadNetworkDnsZones.update::parameters.properties,
   "workloadNetworkDnsZone"
 );
 @@OpenAPI.extension(WorkloadNetworkDnsZones.update::parameters.properties,
@@ -709,8 +766,11 @@ interface WorkloadNetworkPublicIps {
     | ErrorResponse;
 }
 
-@@projectedName(WorkloadNetworkPublicIps.create::parameters.resource,
-  "json",
+@@encodedName(WorkloadNetworkPublicIps.create::parameters.resource,
+  "application/json",
+  "workloadNetworkPublicIP"
+);
+@@clientName(WorkloadNetworkPublicIps.create::parameters.resource,
   "workloadNetworkPublicIP"
 );
 @@OpenAPI.extension(WorkloadNetworkPublicIps.create::parameters.resource,
@@ -733,10 +793,11 @@ interface CloudLinks {
   delete is ArmResourceDeleteAsync<CloudLink>;
 }
 
-@@projectedName(CloudLinks.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(CloudLinks.createOrUpdate::parameters.resource,
+  "application/json",
   "cloudLink"
 );
+@@clientName(CloudLinks.createOrUpdate::parameters.resource, "cloudLink");
 @@OpenAPI.extension(CloudLinks.createOrUpdate::parameters.resource,
   "x-ms-client-name",
   "cloudLink"
@@ -757,7 +818,11 @@ interface Addons {
   delete is ArmResourceDeleteAsync<Addon>;
 }
 
-@@projectedName(Addons.createOrUpdate::parameters.resource, "json", "addon");
+@@encodedName(Addons.createOrUpdate::parameters.resource,
+  "application/json",
+  "addon"
+);
+@@clientName(Addons.createOrUpdate::parameters.resource, "addon");
 @@OpenAPI.extension(Addons.createOrUpdate::parameters.resource,
   "x-ms-client-name",
   "addon"
@@ -829,8 +894,11 @@ interface PlacementPolicies {
   delete is ArmResourceDeleteAsync<PlacementPolicy>;
 }
 
-@@projectedName(PlacementPolicies.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(PlacementPolicies.createOrUpdate::parameters.resource,
+  "application/json",
+  "placementPolicy"
+);
+@@clientName(PlacementPolicies.createOrUpdate::parameters.resource,
   "placementPolicy"
 );
 @@OpenAPI.extension(PlacementPolicies.createOrUpdate::parameters.resource,
@@ -884,8 +952,11 @@ interface ScriptExecutions {
   ): ArmResponse<ScriptExecution> | ErrorResponse;
 }
 
-@@projectedName(ScriptExecutions.createOrUpdate::parameters.resource,
-  "json",
+@@encodedName(ScriptExecutions.createOrUpdate::parameters.resource,
+  "application/json",
+  "scriptExecution"
+);
+@@clientName(ScriptExecutions.createOrUpdate::parameters.resource,
   "scriptExecution"
 );
 @@OpenAPI.extension(ScriptExecutions.createOrUpdate::parameters.resource,

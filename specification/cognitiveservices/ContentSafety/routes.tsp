@@ -63,6 +63,23 @@ interface TextOperations {
     },
     AnalyzeTextProtectedMaterialResult
   >;
+
+  @added(ContentSafety.Versions.v2024_02_15_Preview)
+  @summary("Analyze text prompt injection attacks")
+  @doc("A synchronous API for the analysis of text prompt injection attacks.")
+  @route("/text:shieldPrompt")
+  @post
+  detectTextPromptInjectionOptions is Azure.Core.RpcOperation<
+    {
+      @body
+      @doc("The text prompt injection attacks analysis request.")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
+      body: AnalyzeTextPromptInjectionOptions;
+    },
+    AnalyzeTextPromptInjectionResult
+  >;
 }
 
 interface ImageOperations {
@@ -146,5 +163,24 @@ interface TextBlocklists {
   listTextBlocklistItems is BlockOps.ResourceList<
     TextBlocklistItem,
     ListQueryParametersTrait<StandardListQueryParameters>
+  >;
+}
+
+@added(Versions.v2024_02_15_Preview)
+interface TextGroundednessDetectionOperations {
+  @summary("Detect Groundedness")
+  @doc("A synchronous API for the analysis of language model outputs to determine alignment with user-provided information or identify fictional content.")
+  @route("/text:detectGroundedness")
+  @post
+  detectGroundednessOptions is Azure.Core.RpcOperation<
+    {
+      @body
+      @doc("The text groundedness detection request.")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
+      body: AnalyzeTextGroundednessOptions;
+    },
+    AnalyzeTextGroundednessResult
   >;
 }

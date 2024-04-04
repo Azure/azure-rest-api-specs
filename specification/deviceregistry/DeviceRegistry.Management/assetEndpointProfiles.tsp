@@ -1,7 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./common/extendedLocation.tsp";
@@ -70,15 +69,17 @@ model UserAuthentication {
 }
 
 @doc("The mode to authenticate the user of the client at the server.")
-enum UserAuthenticationMode {
+union UserAuthenticationMode {
+  string,
+
   @doc("The user authentication mode is anonymous.")
-  Anonymous,
+  Anonymous: "Anonymous",
 
   @doc("The user authentication mode is an x509 certificate.")
-  Certificate,
+  Certificate: "Certificate",
 
   @doc("The user authentication mode is a username and password.")
-  UsernamePassword,
+  UsernamePassword: "UsernamePassword",
 }
 
 @doc("The credentials for authentication mode UsernamePassword.")
