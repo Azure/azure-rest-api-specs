@@ -13,7 +13,7 @@ alias ImageGenerationOptions = {
   prompt: string;
 
   @doc("""
-  The desired dimension in pixels of the generated images, in the format "WidthxHeight".
+  The desired dimension in pixels of the generated images, in the format "<Width>x<Hight>".
   For example: "1024x1024", "1792x1024".
   """)
   size: string;

@@ -13,8 +13,7 @@ alias EmbeddingsOptions = {
   input: string[];
 
   @doc("Specifies the input type to use for embedding search.")
-  @encodedName("application/json", "input_type")
-  inputType?: EmbeddingInputType = EmbeddingInputType.text;
+  input_type?: EmbeddingInputType;
 };
 
 @doc("""
@@ -68,11 +67,18 @@ model EmbeddingItem {
 
 @doc("Measurement of the amount of tokens used in this request and response.")
 model EmbeddingsUsage {
-  @doc("Number of tokens sent in the original request.")
-  @encodedName("application/json", "prompt_tokens")
-  promptTokens: int32;
+  ...CapacityAlias;
+
+  @doc("Number of tokens in the request prompt.")
+  input_tokens: int32;
+
+  @doc("""
+  Number of tokens used for the prompt sent to the AI model. Typically identical to`input_tokens`.
+  However, certain AI models may add extra tokens to the input hence the number can be higher.
+  (for example when input_type="query").
+  """)
+  prompt_tokens: int32;
 
   @doc("Total number of tokens transacted in this request/response.")
-  @encodedName("application/json", "total_tokens")
-  totalTokens: int32;
+  total_tokens: int32;
 }

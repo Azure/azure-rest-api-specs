@@ -32,3 +32,18 @@ alias AdditionalRequestHeaders = {
   @header("azureml-model-deployment")
   modelDeployment?: string;
 };
+
+
+alias CapacityAlias = {
+  @doc("Indicates whether your capacity has been affected by the usage amount (token count) reported here.")
+  capacity_type: CapacityType;
+};
+
+@doc("Whether your capacity has been afected by the usage amount (token count) reported here.")
+enum CapacityType {
+  @doc("Your capacity has been affected by the usage amount (token count) reported here.")
+  error: "usage",
+
+  @doc("Your capacity has not been affected by the usage amount (token count) reported here.")
+  ignore: "fixed",
+}

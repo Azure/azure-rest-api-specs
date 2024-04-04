@@ -261,36 +261,8 @@
                   }
                 },
                 "input_type": {
-                  "type": "string",
-                  "description": "Specifies the input type to use for embedding search.",
-                  "default": "text",
-                  "enum": [
-                    "text",
-                    "query",
-                    "document"
-                  ],
-                  "x-ms-enum": {
-                    "name": "EmbeddingInputType",
-                    "modelAsString": true,
-                    "values": [
-                      {
-                        "name": "text",
-                        "value": "text",
-                        "description": "to do"
-                      },
-                      {
-                        "name": "query",
-                        "value": "query",
-                        "description": "to do"
-                      },
-                      {
-                        "name": "document",
-                        "value": "document",
-                        "description": "to do"
-                      }
-                    ]
-                  },
-                  "x-ms-client-name": "inputType"
+                  "$ref": "#/definitions/EmbeddingInputType",
+                  "description": "Specifies the input type to use for embedding search."
                 }
               },
               "required": [
@@ -392,7 +364,7 @@
                 },
                 "size": {
                   "type": "string",
-                  "description": "The desired dimension in pixels of the generated images, in the format \"WidthxHeight\".\nFor example: \"1024x1024\", \"1792x1024\"."
+                  "description": "The desired dimension in pixels of the generated images, in the format \"<Width>x<Hight>\".\nFor example: \"1024x1024\", \"1792x1024\"."
                 },
                 "quality": {
                   "type": "string",
@@ -527,6 +499,30 @@
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
           "description": "Inner error."
         }
+      }
+    },
+    "CapacityType": {
+      "type": "string",
+      "description": "Whether your capacity has been afected by the usage amount (token count) reported here.",
+      "enum": [
+        "usage",
+        "fixed"
+      ],
+      "x-ms-enum": {
+        "name": "CapacityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "error",
+            "value": "usage",
+            "description": "Your capacity has been affected by the usage amount (token count) reported here."
+          },
+          {
+            "name": "ignore",
+            "value": "fixed",
+            "description": "Your capacity has not been affected by the usage amount (token count) reported here."
+          }
+        ]
       }
     },
     "ChatChoice": {
@@ -936,6 +932,10 @@
       "type": "object",
       "description": "Representation of the token counts processed for a completions request.\nCounts consider all tokens across prompts, choices, choice alternates, best_of generations, and\nother consumers.",
       "properties": {
+        "capacity_type": {
+          "$ref": "#/definitions/CapacityType",
+          "description": "Indicates whether your capacity has been affected by the usage amount (token count) reported here."
+        },
         "completion_tokens": {
           "type": "integer",
           "format": "int32",
@@ -953,6 +953,7 @@
         }
       },
       "required": [
+        "capacity_type",
         "completion_tokens",
         "prompt_tokens",
         "total_tokens"
@@ -1057,20 +1058,29 @@
       "type": "object",
       "description": "Measurement of the amount of tokens used in this request and response.",
       "properties": {
+        "capacity_type": {
+          "$ref": "#/definitions/CapacityType",
+          "description": "Indicates whether your capacity has been affected by the usage amount (token count) reported here."
+        },
+        "input_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of tokens in the request prompt."
+        },
         "prompt_tokens": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of tokens sent in the original request.",
-          "x-ms-client-name": "promptTokens"
+          "description": "Number of tokens used for the prompt sent to the AI model. Typically identical to`input_tokens`.\nHowever, certain AI models may add extra tokens to the input hence the number can be higher.\n(for example when input_type=\"query\")."
         },
         "total_tokens": {
           "type": "integer",
           "format": "int32",
-          "description": "Total number of tokens transacted in this request/response.",
-          "x-ms-client-name": "totalTokens"
+          "description": "Total number of tokens transacted in this request/response."
         }
       },
       "required": [
+        "capacity_type",
+        "input_tokens",
         "prompt_tokens",
         "total_tokens"
       ]
