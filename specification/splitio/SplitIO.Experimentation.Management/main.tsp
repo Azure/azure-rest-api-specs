@@ -53,13 +53,10 @@ model AccessPolicy {
 }
 
 @doc("Role required for data plane access.")
-enum DataPlaneRole {
-  @doc("No role required for data plane access.")
-  None,
-
-  @doc("Owner of the experimentation data.")
-  ExperimentationDataOwner,
-}
+union DataPlaneRole {
+  None: "None",
+  ExperimentationDataOwner: "ExperimentationDataOwner",
+  string };
 
 @doc("Data source that telemetry data required for experimentation will be retrieved from.")
 model DataSource {
@@ -68,14 +65,14 @@ model DataSource {
 }
 
 scalar LogAnalyticsWorkspaceResourceId
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.OperationalInsights/workspaces",
     }
   ]>;
 
 scalar StorageAccountResourceId
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Storage/storageAccounts",
     }
