@@ -20,9 +20,9 @@ namespace Microsoft.DevOpsInfrastructure;
 
 /** Api versions */
 enum Versions {
-  /** 2024-03-26-preview preview version */
+  /** 2024-04-04-preview preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2024-03-26-preview`,
+  `2024-04-04-preview`,
 }
 
 model Pool is TrackedResource<PoolProperties> {
@@ -288,8 +288,11 @@ model NetworkProfile {
 @doc("The agent profile of the machines in the pool.")
 @discriminator("kind")
 model AgentProfile {
-  @doc("Defines pool buffer.")
+  @doc("Defines pool buffer/standy-by agents.")
   resourcePredictions?: ResourcePredictions;
+
+  @doc("Defines how the pool buffer/standy-by agents is provided.")
+  resourcePredictionsType?: ResourcePredictionsType;
 }
 @doc("Stateless profile meaning that the machines will be cleaned up after running a job.")
 model StatelessAgentProfile extends AgentProfile {
@@ -302,10 +305,24 @@ model Stateful extends AgentProfile {
   kind: "Stateful";
 
   @doc("How long should stateful machines be kept around. The maximum is one week.")
-  maxAgentLifetime: string;
+  maxAgentLifetime?: string;
+
+  @doc("How long should the machine be kept around after it ran a workload when there are no stand-by agents. The maxium is one week.")
+  gracePeriod?: string;
 }
 @doc("Defines pool buffer.")
 model ResourcePredictions {}
+
+@doc("Determines how the stand-by scheme should be provided.")
+union ResourcePredictionsType {
+  string,
+
+  @doc("Customer provides the stand-by agents scheme.")
+  "Manual",
+
+  @doc("The service determines how many stand-by agents should be up based on past demand.")
+  "Automatic",
+}
 
 @doc("The status of the current operation.")
 union ProvisioningState {
@@ -567,3 +584,5 @@ model LocationProperties {}
 interface Sku {
   listByLocation is ArmListBySubscription<ResourceSku>;
 }
+
+@@usage(Azure.OpenAI.ImageGenerations, Usage.output);
