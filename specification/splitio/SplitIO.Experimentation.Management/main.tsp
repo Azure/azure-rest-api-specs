@@ -155,7 +155,7 @@ interface DataPlaneApplications {
 
     @doc("The name of the ExperimentationWorkspace resource.")
     @path
-    @pattern("^[a-zA-Z0-9-]*$")
+    @pattern("^[a-zA-Z0-9](?!.*--)[a-zA-Z0-9-]*[a-zA-Z0-9]$")
     @minLength(5)
     @maxLength(50)
     workspaceName: string,
