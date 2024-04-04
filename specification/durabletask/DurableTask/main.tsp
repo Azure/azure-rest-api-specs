@@ -119,7 +119,6 @@ union ProvisioningState {
 interface Namespaces {
   get is ArmResourceRead<Namespace>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Namespace>;
-  update is ArmTagsPatchAsync<Namespace, NamespaceUpdate>;
   //update is ArmResourcePatchSync<Namespace, NamespaceProperties>;
   delete is ArmResourceDeleteSync<Namespace>;
   listByResourceGroup is ArmResourceListByParent<Namespace>;
