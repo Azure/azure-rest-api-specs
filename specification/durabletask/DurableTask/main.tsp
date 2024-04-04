@@ -46,14 +46,14 @@ model Namespace is TrackedResource<NamespaceProperties> {
 
 @doc("Update namespace")
 model NamespaceUpdate {
-	...Azure.ResourceManager.Foundations.ArmTagsProperty;
-  
-	/** Updatable managed service identity */
-	identity?: ManagedServiceIdentityUpdate;
-  
-	/** RP-specific properties */
-	properties?: NamespaceProperties;
-  }
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** Updatable managed service identity */
+  identity?: ManagedServiceIdentityUpdate;
+
+  /** RP-specific properties */
+  properties?: NamespaceProperties;
+}
 
 model ManagedServiceIdentityUpdate
   is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedIdentityProperties>>;
