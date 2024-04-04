@@ -15,7 +15,7 @@ Set-StrictMode -Version 3
 $script:moduleInstalled = $false
 function Ensure-PowerShell-Yaml-Installed {
   if (-not $script:moduleInstalled) {
-    $script:moduleInstalled = Get-Module -ListAvailable -Name powershell-yaml | Where-Object { $_.Version -eq "0.4.7" }
+    $script:moduleInstalled = [bool] (Get-Module -ListAvailable -Name powershell-yaml | Where-Object { $_.Version -eq "0.4.7" })
     if (-not $script:moduleInstalled) {
       Install-Module -Name powershell-yaml -RequiredVersion 0.4.7 -Force -Scope CurrentUser
       $script:moduleInstalled = $true
