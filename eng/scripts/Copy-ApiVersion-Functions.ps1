@@ -1,17 +1,19 @@
-function Get-NewTagSection($apiVersion, $resourceProvider, $apiVersionStatus, $specFiles, $resourceProviderInnerFolder = $null) {
+function Get-NewTagSection($apiVersion, $resourceProvider, $apiVersionStatus, $specFiles) {
 
     $tagVersion = $apiVersion -match '(?<date>\d{4}-\d{2})-\d{2}' 
     $tagVersion = $Matches['date']
-    $baseDir = if ($resourceProviderInnerFolder) 
-    { "$resourceProvider/$resourceProviderInnerFolder/$apiVersionStatus/$apiVersion" } 
-    else { "$resourceProvider/$apiVersionStatus/$apiVersion" }
+    $baseDir = "$resourceProvider/$apiVersionStatus/$apiVersion"
     
+    if($apiVersionStatus -eq "preview") { 
+        $tagVersion = "preview-" + $tagVersion  
+    }  
+
     $content = @"
-### Tag: package-$(If($apiVersionStatus -eq "preview"){"preview-"})$tagVersion
+### Tag: package-$tagVersion
 
-These settings apply only when ``--tag=package-$(If($apiVersionStatus -eq "preview"){"preview-"})$tagVersion`` is specified on the command line.
+These settings apply only when ``--tag=package-$tagVersion`` is specified on the command line.
 
-```````yaml `$(tag) == 'package-$(If($apiVersionStatus -eq "preview"){"preview-"})$tagVersion'`
+```````yaml `$(tag) == 'package-$tagVersion'`
 input-file:
 "@
 
@@ -27,18 +29,11 @@ function Get-ReadmeWithNewTag($readmeContent, $tagContent) {
     return $readmeContent -replace '(?s)(### tag: package.*)', "$tagContent`n`$1"
 }
 
-function Get-ReadmeWithLatestTag($readmeContent, $newApiVersion ) {
+function Get-ReadmeWithLatestTag($readmeContent, $newApiVersion, $newApiVersionStatus ) {
     # Get the current tag date
     $currentTag = $readmeContent -match '(openapi-type:.*\s+tag:\s*)(?<version>package-.*)'
     $currentTag = $Matches['version']
-    $latestVersionDate = if ($currentTag -match '(\d{4})-(\d{2})-?(\d{0,2}).*') { 
-        if ($Matches[3] -eq '') { $Matches[3] = '01' }
-        [datetime]::ParseExact($Matches[1] + '-' + $Matches[2] + '-' + $Matches[3], 'yyyy-MM-dd', $null) 
-    } 
-    else { 
-        Write-Error "No date found in the readme tag: Tag $currentTag does not match the yyyy-MM-dd format"
-        Exit 1
-    }
+    $latestVersionDate = [datetime]($currentTag -replace '-preview','')
 
     # Convert the new OpenAPI version to a date
     $newVersionDate = if ($newApiVersion -match '(\d{4})-(\d{2})-?(\d{0,2})') { 
@@ -51,21 +46,26 @@ function Get-ReadmeWithLatestTag($readmeContent, $newApiVersion ) {
     }
 
     # Compare two dates
-    if ( $newVersionDate -gt $latestVersionDate) {    
-        $tagVersion = $newApiVersion -match '(?<date>\d{4}-\d{2})-\d{2}(-(?<preview>preview))?'
-        $tagVersion = $Matches['date']
-        $isPreview = $Matches['preview']
-        return $readmeContent -replace '(openapi-type:.*\s+tag:\s*)(package-.*)', "`$1package-$(if($isPreview -eq "preview"){"preview-"})$tagVersion" 
+    if ( $newVersionDate -gt $latestVersionDate) {
+        Write-Warning "The new version is not newer than the current default version in the readme file."  
     }
-    return ""
+    $tagVersion = $newApiVersion -match '\d{4}-\d{2}?'
+    if($newApiVersionStatus -eq "preview"){
+        "preview-"+$tagVersion
+    }
+    return $readmeContent -replace '^(tag:\s*)(package-.*)', "`$1package-$tagVersion" 
 }
 
-function New-GitAddAndCommit($directory, $message, $testMode = $false) {
-    if ($testMode) {
-        Write-Verbose "Test mode: git add $directory"
-        Write-Verbose "Test mode: git commit -m $message"
-    }
-    else {
+function New-GitAddAndCommit {
+    [CmdletBinding(SupportsShouldProcess=$true)]
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$directory,
+        [Parameter(Mandatory=$true)]
+        [string]$message
+    )
+
+    if($PSCmdlet.ShouldProcess($directory, "Add and commit")){
         git add $directory | Out-Null
         $message | git commit --file=-
     }

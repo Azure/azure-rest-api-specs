@@ -1,4 +1,4 @@
-[CmdletBinding()]
+[CmdletBinding(SupportsShouldProcess)]
 param (
     [Parameter(Mandatory = $true)]
     [ValidateScript({
@@ -62,11 +62,7 @@ param (
             ForEach-Object { "preview/$_" }
             return $stableVersions + $previewVersions
         })]
-    [string] $BaseVersion,
-
-    [string] $ProviderInnerFolder = $null,
-    
-    [bool] $testMode = $false
+    [string] $BaseVersion
 )
 
 . "$PSScriptRoot/Copy-ApiVersion-Functions.ps1"
@@ -77,14 +73,8 @@ $newApiVersionStatus, $newApiVersion = Get-Version $NewVersion
 $repoDirectory = Resolve-Path "$PSScriptRoot/../.."
 $readmeDirectory = Join-Path $repoDirectory "specification/$ServiceDirectory/$ServiceType" -Resolve
 
-if ($ProviderInnerFolder){
-    $oldDirectory = Join-Path $repoDirectory "specification/$ServiceDirectory/$ServiceType/$Provider/$ProviderInnerFolder/$oldApiVersionStatus/$oldApiVersion" -Resolve
-    $newDirectory = Join-Path $repoDirectory "specification/$ServiceDirectory/$ServiceType/$Provider/$ProviderInnerFolder/$newApiVersionStatus/$newApiVersion"
-}
-else{
-    $oldDirectory = Join-Path $repoDirectory "specification/$ServiceDirectory/$ServiceType/$Provider/$oldApiVersionStatus/$oldApiVersion" -Resolve
-    $newDirectory = Join-Path $repoDirectory "specification/$ServiceDirectory/$ServiceType/$Provider/$newApiVersionStatus/$newApiVersion"
-}
+$oldDirectory = Join-Path $repoDirectory "specification/$ServiceDirectory/$ServiceType/$Provider/$oldApiVersionStatus/$oldApiVersion" -Resolve
+$newDirectory = Join-Path $repoDirectory "specification/$ServiceDirectory/$ServiceType/$Provider/$newApiVersionStatus/$newApiVersion"
 
 Write-Host "----------------------------------------" 
 Write-Host "Service Directory: $ServiceDirectory"
@@ -104,7 +94,7 @@ Copy files from $BaseVersion
 
 Copied the files in a separate commit.
 This allows reviewers to easily diff subsequent changes against the previous spec.
-"@ $testMode
+"@
 
 # Replace the $oldApiVersion with the $newApiVersion within all files in $newDirectory.
 foreach ($file in Get-ChildItem $newDirectory -File -Recurse) {
@@ -118,13 +108,13 @@ New-GitAddAndCommit $newDirectory @"
 Update version to $NewVersion
 
 Updated the API version from $BaseVersion to $NewVersion.
-"@ $testMode
+"@
 
 # Add new version tag in the readme file
 $readmeFile = Get-ChildItem $readmeDirectory -Filter 'readme.md'
 if ($readmeFile) {
     $jsonFiles = Get-ChildItem $newDirectory -Filter '*.json' | Select-Object -ExpandProperty Name
-    $newReadmeTagBlock = Get-NewTagSection $newApiVersion $Provider $newApiVersionStatus $jsonFiles $ProviderInnerFolder
+    $newReadmeTagBlock = Get-NewTagSection $newApiVersion $Provider $newApiVersionStatus $jsonFiles
     
     $readmeContent = $readmeFile | Get-Content -Raw
     $readmeContent = Get-ReadmeWithNewTag $readmeContent $newReadmeTagBlock
@@ -136,7 +126,7 @@ else {
 }
 
 # Update the latest version tag in the readme file
-$val = Get-ReadmeWithLatestTag $readmeContent $newApiVersion
+$val = Get-ReadmeWithLatestTag $readmeContent $newApiVersion $newApiVersionStatus
 if ($val -ne "") {
     Write-Verbose "Updating the first tag in the first yaml code block in $readmeFile"
     $val | Set-Content $readmeFile.FullName -NoNewline
@@ -148,4 +138,4 @@ else {
 
 New-GitAddAndCommit $readmeDirectory @"
 Added tag for $newApiVersion in readme file
-"@ $testMode
+"@
