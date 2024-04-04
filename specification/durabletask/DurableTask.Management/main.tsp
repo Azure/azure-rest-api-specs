@@ -55,6 +55,9 @@ model NamespaceUpdate {
   properties?: NamespaceProperties;
 }
 
+model NamespacePropertiesUpdate
+  is OptionalProperties<UpdateableProperties<NamespaceProperties>>;
+
 model ManagedServiceIdentityUpdate
   is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedIdentityProperties>>;
 
@@ -69,11 +72,9 @@ model NamespaceProperties {
   url?: string;
 
   @doc("task hubs list for durable task service")
-  @extension("x-ms-identifiers", [])
   taskHubs?: TaskHub[];
 
   @doc("IP allow list for durable task service")
-  @extension("x-ms-identifiers", [])
   ipAllowlist?: string[];
 }
 
@@ -119,6 +120,7 @@ union ProvisioningState {
 interface Namespaces {
   get is ArmResourceRead<Namespace>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Namespace>;
+  update is ArmCustomPatchAsync<Namespace, NamespaceUpdate>;
   //update is ArmResourcePatchSync<Namespace, NamespaceProperties>;
   delete is ArmResourceDeleteSync<Namespace>;
   listByResourceGroup is ArmResourceListByParent<Namespace>;
