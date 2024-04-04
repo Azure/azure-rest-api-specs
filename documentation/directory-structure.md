@@ -203,7 +203,7 @@ shared across all services in given service group. For an example, see [`Microso
 The versioning policy for API and SDK packages applies independently to each service in the service group.
 This means that each service in the service group must obey the same versioning rules as it were a singular service.
 However, multiple separate services can have different versioning cycles, including different SDK packages. Refer to the aforementioned `aks` and `fleet`
-services for examples of different versioning cycles in a service group
+services for examples of different versioning cycles in a service group.
 
 ## Legacy layouts and OpenAPI specs
 
