@@ -366,6 +366,20 @@
           "200": {
             "description": "Resource deleted successfully."
           },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "204": {
             "description": "Resource does not exist."
           },
@@ -376,6 +390,10 @@
             }
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Namespaces_Delete_MinimumSet_Gen": {
             "$ref": "./examples/Namespaces_Delete_MinimumSet_Gen.json"
@@ -675,22 +693,14 @@
           "description": "task hubs list for durable task service",
           "items": {
             "$ref": "#/definitions/TaskHub"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          }
         },
         "ipAllowlist": {
           "type": "array",
           "description": "IP allow list for durable task service",
           "items": {
             "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          }
         }
       }
     },
@@ -706,6 +716,30 @@
           "type": "object",
           "description": "Resource tags.",
           "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/NamespaceUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NamespaceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Namespace.",
+      "properties": {
+        "taskHubs": {
+          "type": "array",
+          "description": "task hubs list for durable task service",
+          "items": {
+            "$ref": "#/definitions/TaskHub"
+          }
+        },
+        "ipAllowlist": {
+          "type": "array",
+          "description": "IP allow list for durable task service",
+          "items": {
             "type": "string"
           }
         }
@@ -750,7 +784,7 @@
           {
             "name": "Updating",
             "value": "Updating",
-            "description": "The resource is being updated"
+            "description": "The resource is updating"
           },
           {
             "name": "Deleting",

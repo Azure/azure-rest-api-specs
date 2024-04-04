@@ -24,13 +24,12 @@ model NamespaceProperties {
 	url?: string;
 
     @doc("task hubs list for durable task service")
-    @visibility("read","create")
     taskHubs?: TaskHub[];
 
     @doc("IP allow list for durable task service")
-    @visibility("read","create")
     ipAllowlist?: string[];
 }
+
 
 
 @doc("The properties of TaskHub")
@@ -41,41 +40,20 @@ model TaskHubProperties {
 }
 
 @doc("The status of the current operation.")
+@Azure.Core.lroStatus
 union ProvisioningState {
-    string,
-  
-    /**
-     * Resource has been created.
-     */
-    Succeeded: "Succeeded",
-  
-    /**
-     * Resource creation failed.
-     */
-    Failed: "Failed",
-  
-    /**
-     * Resource creation was canceled.
-     */
-    Canceled: "Canceled",
-  
-    /**
-     * The resource is being provisioned
-     */
-    Provisioning: "Provisioning",
-  
-    /**
-     * The resource is being updated
-     */
-    Updating: "Updating",
-  
-    /**
-     * The resource is being deleted
-     */
-    Deleting: "Deleting",
-  
-    /**
-     * The resource create request has been accepted
-     */
-    Accepted: "Accepted",
-  }
+  string,
+  ResourceProvisioningState,
+
+  @doc("The resource is being provisioned")
+  Provisioning: "Provisioning",
+
+  @doc("The resource is updating")
+  Updating: "Updating",
+
+  @doc("The resource is being deleted")
+  Deleting: "Deleting",
+
+  @doc("The resource create request has been accepted")
+  Accepted: "Accepted",
+}

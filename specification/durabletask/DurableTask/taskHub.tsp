@@ -22,7 +22,7 @@ model TaskHub is ProxyResource<TaskHubProperties> {
 	@pattern("^[a-zA-Z0-9-]{3,128}$")
 	@segment("taskHubs")
 	@path
-	@visibility("read")
+	@visibility("read", "create")
 	name: string;
 }
 

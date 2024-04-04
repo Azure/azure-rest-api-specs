@@ -20,22 +20,25 @@ model Namespace is TrackedResource<NamespaceProperties> {
 	@key("namespaceName")
 	@segment("namespaces")
 	@path
-    @visibility("read")
+    @visibility("read", "create")
 	name: string;
 
     ...ManagedServiceIdentity;
 }
 
-@armResourceOperations(Namespace)
-interface Namespaces {
-	get is ArmResourceRead<Namespace>;
-	createOrUpdate is ArmResourceCreateOrReplaceAsync<Namespace>;
-	update is ArmResourcePatchSync<
-		Namespace,
-		NamespaceProperties
-	>;
-	delete is ArmResourceDeleteSync<Namespace>;
-	listByResourceGroup is ArmResourceListByParent<Namespace>;
-	listBySubscription is ArmListBySubscription<Namespace>;
-}
+@armResourceOperations
+interface Namespaces extends TrackedResourceOperations<Namespace, NamespaceProperties> {}
+
+// @armResourceOperations(Namespace)
+// interface Namespaces {
+// 	get is ArmResourceRead<Namespace>;
+// 	createOrUpdate is ArmResourceCreateOrReplaceAsync<Namespace>;
+// 	update is ArmResourcePatchSync<
+// 		Namespace,
+// 		NamespaceProperties
+// 	>;
+// 	delete is ArmResourceDeleteSync<Namespace>;
+// 	listByResourceGroup is ArmResourceListByParent<Namespace>;
+// 	listBySubscription is ArmListBySubscription<Namespace>;
+// }
 
