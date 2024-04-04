@@ -23,7 +23,7 @@ model DataPreviewInstance is ProxyResource<DataPreviewProperties> {
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]")
   @path
   @key("name")
-  @segment("datapreview")
+  @segment("dataPreview")
   name: string;
 }
 
