@@ -49,7 +49,7 @@
       "name": "PipelineGroups"
     },
     {
-      "name": "InvestigationResources"
+      "name": "Investigations"
     }
   ],
   "paths": {
@@ -122,7 +122,7 @@
       "get": {
         "operationId": "Investigations_ListAtSubscription",
         "tags": [
-          "InvestigationResources"
+          "Investigations"
         ],
         "description": "Get all the Investigations at the given resource.",
         "parameters": [
@@ -131,6 +131,14 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of results to get. If null is passed, returns all Investigations.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
@@ -444,7 +452,7 @@
       "get": {
         "operationId": "Investigations_ListAtResource",
         "tags": [
-          "InvestigationResources"
+          "Investigations"
         ],
         "description": "Get all the Investigations at the given resource.",
         "parameters": [
@@ -494,9 +502,9 @@
       "get": {
         "operationId": "Investigations_GetAtResource",
         "tags": [
-          "InvestigationResources"
+          "Investigations"
         ],
-        "description": "Gets an investigation.",
+        "description": "Returns the specific investigation",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -538,7 +546,7 @@
       "put": {
         "operationId": "Investigations_CreateOrUpdateAtResource",
         "tags": [
-          "InvestigationResources"
+          "Investigations"
         ],
         "description": "You can provide the template and parameters directly in the request or link to JSON files.",
         "parameters": [
@@ -613,7 +621,7 @@
       "delete": {
         "operationId": "Investigations_DeleteAtResource",
         "tags": [
-          "InvestigationResources"
+          "Investigations"
         ],
         "description": "A template investigation that is currently running cannot be deleted.",
         "parameters": [
