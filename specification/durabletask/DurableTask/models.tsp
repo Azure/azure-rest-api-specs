@@ -22,16 +22,14 @@ model NamespaceProperties {
 	@doc("url of the durable task service")
 	@visibility("read")
 	url?: string;
-}
 
-@doc("The update properties of the Namespace.")
-model NamespacePropertiesUpdate {
     @doc("task hubs list for durable task service")
     taskHubs?: TaskHub[];
 
     @doc("IP allow list for durable task service")
     ipAllowlist?: string[];
 }
+
 
 @doc("The properties of TaskHub")
 model TaskHubProperties {
