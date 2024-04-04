@@ -14,16 +14,20 @@ Set-StrictMode -Version 3
 
 $script:psYamlInstalled = $false
 function Ensure-PowerShell-Yaml-Installed {
-  if (-not $script:psYamlInstalled) {
-    $script:psYamlInstalled = [bool] (Get-Module -ListAvailable -Name powershell-yaml | Where-Object { $_.Version -eq "0.4.7" })
-    if ($script:psYamlInstalled) {
-      LogInfo "Module powershell-yaml@0.4.7 already installed"
-    }
-    else {
-      LogInfo "Installing module powershell-yaml@0.4.7"
-      Install-Module -Name powershell-yaml -RequiredVersion 0.4.7 -Force -Scope CurrentUser
-      $script:psYamlInstalled = $true
-    }
+  if ($script:psYamlInstalled) {
+    # If already checked once in this script, don't log anything further
+    return;
+  }
+
+  $script:psYamlInstalled = [bool] (Get-Module -ListAvailable -Name powershell-yaml | Where-Object { $_.Version -eq "0.4.7" })
+
+  if ($script:psYamlInstalled) {
+    LogInfo "Module powershell-yaml@0.4.7 already installed"
+  }
+  else {
+    LogInfo "Installing module powershell-yaml@0.4.7"
+    Install-Module -Name powershell-yaml -RequiredVersion 0.4.7 -Force -Scope CurrentUser
+    $script:psYamlInstalled = $true
   }
 }
 
