@@ -20,6 +20,150 @@
   ],
   "tags": [],
   "paths": {
+    "/images/generations": {
+      "post": {
+        "operationId": "GetImageGenerations",
+        "description": "Creates images given a prompt.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "extra-parameters",
+            "in": "header",
+            "description": "Controls what happens if extra parameters are passed in the request payload.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "error",
+              "ignore",
+              "allow"
+            ],
+            "x-ms-enum": {
+              "name": "ExtraParameters",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "error",
+                  "value": "error",
+                  "description": "The service should error when it sees extra parameters in the request payload. This is the default behavior if the service."
+                },
+                {
+                  "name": "ignore",
+                  "value": "ignore",
+                  "description": "The service should ignore extra parameters in the request payload. They will not be passed to the back-end AI model."
+                },
+                {
+                  "name": "allow",
+                  "value": "allow",
+                  "description": "The service should pass extra parameters to the back-end AI model."
+                }
+              ]
+            },
+            "x-ms-client-name": "extra_parameters"
+          },
+          {
+            "name": "azureml-model-deployment",
+            "in": "header",
+            "description": "Name of the deployment to which you would like to route the request. Relevant only to Model-as-a-Platform (MaaP) deployments.\nTypically used when you want to target a test environment instead of production environment.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "model_deployemnt"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "extras": {
+                  "type": "object",
+                  "description": "Extra parameters (in the form of string key-value pairs) that are not in the standard request payload.\nThey will be passed to the service as-is in the root of the JSON request payload.\nHow the service handles these extra parameters depends on the value of the `extra-parameters`\nHTTP request header.",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "prompt": {
+                  "type": "string",
+                  "description": "A description of the desired images."
+                },
+                "size": {
+                  "type": "string",
+                  "description": "The desired dimension in pixels of the generated images, in the format \"<Width>x<Hight>\".\nFor example: \"1024x1024\", \"1792x1024\"."
+                },
+                "quality": {
+                  "type": "string",
+                  "description": "The desired image generation quality level to use.",
+                  "default": "standard",
+                  "enum": [
+                    "standard",
+                    "hd"
+                  ],
+                  "x-ms-enum": {
+                    "name": "ImageGenerationQuality",
+                    "modelAsString": true,
+                    "values": [
+                      {
+                        "name": "standard",
+                        "value": "standard",
+                        "description": "Requests image generation with standard, balanced characteristics of quality, cost, and speed."
+                      },
+                      {
+                        "name": "hd",
+                        "value": "hd",
+                        "description": "Requests image generation with higher quality, higher cost and lower speed relative to standard."
+                      }
+                    ]
+                  }
+                },
+                "response_format": {
+                  "$ref": "#/definitions/ImageGenerationResponseFormat",
+                  "description": "The format in which image generation response items should be presented."
+                },
+                "seed": {
+                  "type": "integer",
+                  "format": "int64",
+                  "description": "If specified, the system will make a best effort to sample deterministically such that repeated requests with the\nsame seed and parameters should return the same result. Determinism is not guaranteed.\""
+                }
+              },
+              "required": [
+                "prompt",
+                "size"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ImageGenerations"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "maximum set image generation": {
+            "$ref": "./examples/GetImageGenerations_MaximumSet_Gen.json"
+          },
+          "minimum set image generation": {
+            "$ref": "./examples/GetImageGenerations_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/v1/chat/completions": {
       "post": {
         "operationId": "GetChatCompletions",
@@ -29,9 +173,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "unknown-parameters",
+            "name": "extra-parameters",
             "in": "header",
-            "description": "Controls what happens if unknown parameters are passed as extra properties in the request payload.",
+            "description": "Controls what happens if extra parameters are passed in the request payload.",
             "required": false,
             "type": "string",
             "enum": [
@@ -40,27 +184,27 @@
               "allow"
             ],
             "x-ms-enum": {
-              "name": "UnknownParameters",
+              "name": "ExtraParameters",
               "modelAsString": true,
               "values": [
                 {
                   "name": "error",
                   "value": "error",
-                  "description": "The service should error when it sees unknown parameters in the request payload. This is the default behavior if the service."
+                  "description": "The service should error when it sees extra parameters in the request payload. This is the default behavior if the service."
                 },
                 {
                   "name": "ignore",
                   "value": "ignore",
-                  "description": "The service should ignore unknown parameters in the request payload. They will not be passed to the back-end AI model."
+                  "description": "The service should ignore extra parameters in the request payload. They will not be passed to the back-end AI model."
                 },
                 {
                   "name": "allow",
                   "value": "allow",
-                  "description": "The service should pass unknown parameters to the back-end AI model."
+                  "description": "The service should pass extra parameters to the back-end AI model."
                 }
               ]
             },
-            "x-ms-client-name": "unknownParameters"
+            "x-ms-client-name": "extra_parameters"
           },
           {
             "name": "azureml-model-deployment",
@@ -68,7 +212,7 @@
             "description": "Name of the deployment to which you would like to route the request. Relevant only to Model-as-a-Platform (MaaP) deployments.\nTypically used when you want to target a test environment instead of production environment.",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "modelDeployment"
+            "x-ms-client-name": "model_deployemnt"
           },
           {
             "name": "body",
@@ -77,6 +221,13 @@
             "schema": {
               "type": "object",
               "properties": {
+                "extras": {
+                  "type": "object",
+                  "description": "Extra parameters (in the form of string key-value pairs) that are not in the standard request payload.\nThey will be passed to the service as-is in the root of the JSON request payload.\nHow the service handles these extra parameters depends on the value of the `extra-parameters`\nHTTP request header.",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
                 "messages": {
                   "type": "array",
                   "description": "The collection of context messages associated with this chat completions request.\nTypical usage begins with a chat message for the System role that provides instructions for\nthe behavior of the assistant, followed by alternating messages between the User and\nAssistant roles.",
@@ -205,9 +356,9 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "unknown-parameters",
+            "name": "extra-parameters",
             "in": "header",
-            "description": "Controls what happens if unknown parameters are passed as extra properties in the request payload.",
+            "description": "Controls what happens if extra parameters are passed in the request payload.",
             "required": false,
             "type": "string",
             "enum": [
@@ -216,27 +367,27 @@
               "allow"
             ],
             "x-ms-enum": {
-              "name": "UnknownParameters",
+              "name": "ExtraParameters",
               "modelAsString": true,
               "values": [
                 {
                   "name": "error",
                   "value": "error",
-                  "description": "The service should error when it sees unknown parameters in the request payload. This is the default behavior if the service."
+                  "description": "The service should error when it sees extra parameters in the request payload. This is the default behavior if the service."
                 },
                 {
                   "name": "ignore",
                   "value": "ignore",
-                  "description": "The service should ignore unknown parameters in the request payload. They will not be passed to the back-end AI model."
+                  "description": "The service should ignore extra parameters in the request payload. They will not be passed to the back-end AI model."
                 },
                 {
                   "name": "allow",
                   "value": "allow",
-                  "description": "The service should pass unknown parameters to the back-end AI model."
+                  "description": "The service should pass extra parameters to the back-end AI model."
                 }
               ]
             },
-            "x-ms-client-name": "unknownParameters"
+            "x-ms-client-name": "extra_parameters"
           },
           {
             "name": "azureml-model-deployment",
@@ -244,7 +395,7 @@
             "description": "Name of the deployment to which you would like to route the request. Relevant only to Model-as-a-Platform (MaaP) deployments.\nTypically used when you want to target a test environment instead of production environment.",
             "required": false,
             "type": "string",
-            "x-ms-client-name": "modelDeployment"
+            "x-ms-client-name": "model_deployemnt"
           },
           {
             "name": "body",
@@ -253,6 +404,13 @@
             "schema": {
               "type": "object",
               "properties": {
+                "extras": {
+                  "type": "object",
+                  "description": "Extra parameters (in the form of string key-value pairs) that are not in the standard request payload.\nThey will be passed to the service as-is in the root of the JSON request payload.\nHow the service handles these extra parameters depends on the value of the `extra-parameters`\nHTTP request header.",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
                 "input": {
                   "type": "array",
                   "description": "Input texts to get embeddings for, encoded as a an array of strings.",
@@ -297,143 +455,6 @@
           },
           "minimum set embeddings": {
             "$ref": "./examples/GetEmbeddings_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/v1/images/generations": {
-      "post": {
-        "operationId": "GetImageGenerations",
-        "description": "Creates images given a prompt.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "unknown-parameters",
-            "in": "header",
-            "description": "Controls what happens if unknown parameters are passed as extra properties in the request payload.",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "error",
-              "ignore",
-              "allow"
-            ],
-            "x-ms-enum": {
-              "name": "UnknownParameters",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "error",
-                  "value": "error",
-                  "description": "The service should error when it sees unknown parameters in the request payload. This is the default behavior if the service."
-                },
-                {
-                  "name": "ignore",
-                  "value": "ignore",
-                  "description": "The service should ignore unknown parameters in the request payload. They will not be passed to the back-end AI model."
-                },
-                {
-                  "name": "allow",
-                  "value": "allow",
-                  "description": "The service should pass unknown parameters to the back-end AI model."
-                }
-              ]
-            },
-            "x-ms-client-name": "unknownParameters"
-          },
-          {
-            "name": "azureml-model-deployment",
-            "in": "header",
-            "description": "Name of the deployment to which you would like to route the request. Relevant only to Model-as-a-Platform (MaaP) deployments.\nTypically used when you want to target a test environment instead of production environment.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "modelDeployment"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "prompt": {
-                  "type": "string",
-                  "description": "A description of the desired images."
-                },
-                "size": {
-                  "type": "string",
-                  "description": "The desired dimension in pixels of the generated images, in the format \"<Width>x<Hight>\".\nFor example: \"1024x1024\", \"1792x1024\"."
-                },
-                "quality": {
-                  "type": "string",
-                  "description": "The desired image generation quality level to use.",
-                  "default": "standard",
-                  "enum": [
-                    "standard",
-                    "hd"
-                  ],
-                  "x-ms-enum": {
-                    "name": "ImageGenerationQuality",
-                    "modelAsString": true,
-                    "values": [
-                      {
-                        "name": "standard",
-                        "value": "standard",
-                        "description": "Requests image generation with standard, balanced characteristics of quality, cost, and speed."
-                      },
-                      {
-                        "name": "hd",
-                        "value": "hd",
-                        "description": "Requests image generation with higher quality, higher cost and lower speed relative to standard."
-                      }
-                    ]
-                  }
-                },
-                "response_format": {
-                  "$ref": "#/definitions/ImageGenerationResponseFormat",
-                  "description": "The format in which image generation response items should be presented."
-                },
-                "seed": {
-                  "type": "integer",
-                  "format": "int64",
-                  "description": "If specified, the system will make a best effort to sample deterministically such that repeated requests with the\nsame seed and parameters should return the same result. Determinism is not guaranteed.\""
-                }
-              },
-              "required": [
-                "prompt",
-                "size"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ImageGenerations"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "maximum set image generation": {
-            "$ref": "./examples/GetImageGenerations_MaximumSet_Gen.json"
-          },
-          "minimum set image generation": {
-            "$ref": "./examples/GetImageGenerations_MinimumSet_Gen.json"
           }
         }
       }
@@ -1085,6 +1106,36 @@
         "total_tokens"
       ]
     },
+    "ExtraParameters": {
+      "type": "string",
+      "description": "Defines the service behavior when extra parameters are passed in the request payload.",
+      "enum": [
+        "error",
+        "ignore",
+        "allow"
+      ],
+      "x-ms-enum": {
+        "name": "ExtraParameters",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "error",
+            "value": "error",
+            "description": "The service should error when it sees extra parameters in the request payload. This is the default behavior if the service."
+          },
+          {
+            "name": "ignore",
+            "value": "ignore",
+            "description": "The service should ignore extra parameters in the request payload. They will not be passed to the back-end AI model."
+          },
+          {
+            "name": "allow",
+            "value": "allow",
+            "description": "The service should pass extra parameters to the back-end AI model."
+          }
+        ]
+      }
+    },
     "FunctionCall": {
       "type": "object",
       "description": "The name and arguments of a function that should be called, as generated by the model.",
@@ -1218,36 +1269,6 @@
         "model",
         "data"
       ]
-    },
-    "UnknownParameters": {
-      "type": "string",
-      "description": "Defines the service behavior when unknown parameters are passed as extra properties in the request payload.",
-      "enum": [
-        "error",
-        "ignore",
-        "allow"
-      ],
-      "x-ms-enum": {
-        "name": "UnknownParameters",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "error",
-            "value": "error",
-            "description": "The service should error when it sees unknown parameters in the request payload. This is the default behavior if the service."
-          },
-          {
-            "name": "ignore",
-            "value": "ignore",
-            "description": "The service should ignore unknown parameters in the request payload. They will not be passed to the back-end AI model."
-          },
-          {
-            "name": "allow",
-            "value": "allow",
-            "description": "The service should pass unknown parameters to the back-end AI model."
-          }
-        ]
-      }
     },
     "Versions": {
       "type": "string",

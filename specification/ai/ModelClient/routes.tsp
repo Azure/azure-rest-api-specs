@@ -11,7 +11,6 @@ import "./models/image_generation.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-
 using Azure.Core;
 
 namespace ModelClient;
@@ -44,7 +43,7 @@ op getEmbeddings is Azure.Core.RpcOperation<
 
 @doc("Creates images given a prompt.")
 @actionSeparator("/")
-@route("v1/images/generations")
+@route("/images/generations")
 op getImageGenerations is Azure.Core.RpcOperation<
   {
     ...ImageGenerationOptions;

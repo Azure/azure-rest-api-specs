@@ -1,14 +1,14 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.Versioning;
 
 namespace ModelClient;
 
 alias ChatCompletionsOptions = {
+  ...ExtraRequestParameters;
+
   @doc("""
   The collection of context messages associated with this chat completions request.
   Typical usage begins with a chat message for the System role that provides instructions for

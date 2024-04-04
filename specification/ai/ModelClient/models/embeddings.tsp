@@ -1,14 +1,14 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.Versioning;
 
 namespace ModelClient;
 
 alias EmbeddingsOptions = {
+  ...ExtraRequestParameters;
+
   @doc("Input texts to get embeddings for, encoded as a an array of strings.")
   input: string[];
 

@@ -1,14 +1,14 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.Versioning;
 
 namespace ModelClient;
 
 alias ImageGenerationOptions = {
+  ...ExtraRequestParameters;
+
   @doc("A description of the desired images.")
   prompt: string;
 
