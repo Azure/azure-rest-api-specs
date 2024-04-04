@@ -16,7 +16,11 @@ $script:moduleInstalled = $false
 function Ensure-PowerShell-Yaml-Installed {
   if (-not $script:moduleInstalled) {
     $script:moduleInstalled = [bool] (Get-Module -ListAvailable -Name powershell-yaml | Where-Object { $_.Version -eq "0.4.7" })
-    if (-not $script:moduleInstalled) {
+    if ($script:moduleInstalled) {
+      LogInfo "Module powershell-yaml@0.4.7 already installed"
+    }
+    else {
+      LogInfo "Installing module powershell-yaml@0.4.7"
       Install-Module -Name powershell-yaml -RequiredVersion 0.4.7 -Force -Scope CurrentUser
       $script:moduleInstalled = $true
     }
