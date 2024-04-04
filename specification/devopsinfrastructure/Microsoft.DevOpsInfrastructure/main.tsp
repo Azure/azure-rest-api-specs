@@ -584,5 +584,3 @@ model LocationProperties {}
 interface Sku {
   listByLocation is ArmListBySubscription<ResourceSku>;
 }
-
-@@usage(Azure.OpenAI.ImageGenerations, Usage.output);
