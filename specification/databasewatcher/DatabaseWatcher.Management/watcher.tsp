@@ -1,5 +1,4 @@
 import "@typespec/rest";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./sqlDbDatabaseTarget.tsp";
@@ -18,6 +17,7 @@ namespace Microsoft.DatabaseWatcher;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
 using OpenAPI;
 
@@ -27,6 +27,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 enum Versions {
   @doc("The 2023-09-01-preview version.")
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_09_01_preview: "2023-09-01-preview",
 }
 @doc("The DatabaseWatcherProviderHub resource.")
@@ -57,8 +58,8 @@ model WatcherProperties {
 
 @doc("The properties of a data store.")
 model Datastore {
-  @doc("The ARM ResourceId of an Azure Data Explorer cluster.")
-  adxClusterResourceId?: ResourceIdentifier<[
+  @doc("The Azure ResourceId of an Azure Data Explorer cluster.")
+  adxClusterResourceId?: armResourceIdentifier<[
     {
       type: "Microsoft.Kusto/clusters";
     }
@@ -84,15 +85,17 @@ model Datastore {
 }
 
 @doc("The type of Kusto offering.")
-enum KustoOfferingType {
+union KustoOfferingType {
+  string,
+
   @doc("The Azure Data Explorer cluster Kusto offering.")
-  adx,
+  adx: "adx",
 
   @doc("The free Azure Data Explorer cluster Kusto offering.")
-  free,
+  free: "free",
 
   @doc("The Fabric Real-Time Analytics Kusto offering.")
-  fabric,
+  fabric: "fabric",
 }
 
 // Currently ProviderHub library for TypeSpec does not support
@@ -140,24 +143,27 @@ interface Watchers {
 }
 
 @doc("The monitoring collection status of a watcher.")
-enum WatcherStatus {
+union WatcherStatus {
+  string,
+
   @doc("Denotes the watcher is in a starting state.")
-  Starting,
+  Starting: "Starting",
 
   @doc("Denotes the watcher is in a running state.")
-  Running,
+  Running: "Running",
 
   @doc("Denotes the watcher is in a stopping state.")
-  Stopping,
+  Stopping: "Stopping",
 
   @doc("Denotes the watcher is in a stopped state.")
-  Stopped,
+  Stopped: "Stopped",
 
   @doc("Denotes the watcher is in a deleting state.")
-  Deleting,
+  Deleting: "Deleting",
 }
 
 @doc("The status of the last provisioning operation performed on the resource.")
-enum DatabaseWatcherProvisioningState {
-  ...ResourceProvisioningState,
+union DatabaseWatcherProvisioningState {
+  string,
+  ResourceProvisioningState,
 }

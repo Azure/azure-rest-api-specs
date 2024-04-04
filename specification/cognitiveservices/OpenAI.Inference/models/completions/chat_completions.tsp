@@ -1,6 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
 
 import "./azure_chat_extensions.tsp";
 import "./azure_content_filtering.tsp";
@@ -12,10 +13,11 @@ import "./tools.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 namespace Azure.OpenAI;
 
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 @doc("""
 An abstract representation of a response format configuration usable by Chat Completions. Can be used to enable JSON
 mode.
@@ -30,7 +32,7 @@ model ChatCompletionsResponseFormat {
 The standard Chat Completions response format that can freely generate text and is not guaranteed to produce response
 content that adheres to a specific schema.
 """)
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 model ChatCompletionsTextResponseFormat extends ChatCompletionsResponseFormat {
   @doc("The discriminated object type, which is always 'text' for this format.")
   type: "text";
@@ -39,7 +41,7 @@ model ChatCompletionsTextResponseFormat extends ChatCompletionsResponseFormat {
 @doc("""
 A response format for Chat Completions that restricts responses to emitting valid JSON objects.
 """)
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 model ChatCompletionsJsonResponseFormat extends ChatCompletionsResponseFormat {
   @doc("The discriminated object type, which is always 'json_object' for this format.")
   type: "json_object";
@@ -62,7 +64,6 @@ model ChatCompletionsOptions {
 
   @doc("A list of functions the model may generate JSON inputs for.")
   @added(ServiceApiVersions.v2023_07_01_Preview)
-  @removed(ServiceApiVersions.v2023_12_01_Preview)
   functions?: FunctionDefinition[];
 
   @doc("""
@@ -73,7 +74,6 @@ model ChatCompletionsOptions {
     """)
   @encodedName("application/json", "function_call")
   @added(ServiceApiVersions.v2023_07_01_Preview)
-  @removed(ServiceApiVersions.v2023_12_01_Preview)
   functionCall?: FunctionCallConfig;
 
   @doc("The maximum number of tokens to generate.")
@@ -98,7 +98,7 @@ model ChatCompletionsOptions {
     interaction of these two settings is difficult to predict.
     """)
   @encodedName("application/json", "top_p")
-  @projectedName("csharp", "NucleusSamplingFactor")
+  @clientName("NucleusSamplingFactor", "csharp")
   topP?: float32;
 
   @doc("""
@@ -109,7 +109,7 @@ model ChatCompletionsOptions {
     score varies by model.
     """)
   @encodedName("application/json", "logit_bias")
-  @projectedName("csharp", "TokenSelectionBiases")
+  @clientName("TokenSelectionBiases", "csharp")
   logitBias?: Record<int32>;
 
   @doc("""
@@ -124,13 +124,13 @@ model ChatCompletionsOptions {
     Because this setting can generate many completions, it may quickly consume your token quota.
     Use carefully and ensure reasonable settings for max_tokens and stop.
     """)
-  @projectedName("csharp", "ChoiceCount")
+  @clientName("ChoiceCount", "csharp")
   n?: int32;
 
   @doc("""
     A collection of textual sequences that will end completions generation.
     """)
-  @projectedName("csharp", "StopSequences")
+  @clientName("StopSequences", "csharp")
   stop?: string[];
 
   @doc("""
@@ -154,7 +154,7 @@ model ChatCompletionsOptions {
   @doc("""
     A value indicating whether chat completions should be streamed for this request.
     """)
-  @projectedName("csharp", "InternalShouldStreamResponse")
+  @clientName("InternalShouldStreamResponse", "csharp")
   stream?: boolean;
 
   @doc("""
@@ -162,7 +162,7 @@ model ChatCompletionsOptions {
     Not applicable to Azure OpenAI, where deployment information should be included in the Azure
     resource URI that's connected to.
     """)
-  @projectedName("csharp", "DeploymentName")
+  @clientName("DeploymentName", "csharp")
   `model`?: string;
 
   @doc("""
@@ -174,15 +174,16 @@ model ChatCompletionsOptions {
   //        the array were in an appropriate parent JSON object on the wire) and type/field names should converge on
   //        "extensions" instead of "data sources" for representing the additional configuration information. A future
   //        service API version will absorb these proposed changes and allow us to retire the extra complexity.
-  @added(ServiceApiVersions.v2023_08_01_Preview)
-  @projectedName("csharp", "InternalAzureExtensionsDataSources")
+  @added(ServiceApiVersions.v2024_02_15_Preview)
+  @encodedName("application/json", "data_sources")
+  @clientName("InternalAzureExtensionsDataSources", "csharp")
   dataSources?: AzureChatExtensionConfiguration[];
 
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   @doc("If provided, the configuration options for available Azure OpenAI chat enhancements.")
   enhancements?: AzureChatEnhancementConfiguration;
 
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   @doc("""
   If specified, the system will make a best effort to sample deterministically such that repeated requests with the
   same seed and parameters should return the same result. Determinism is not guaranteed, and you should refer to the
@@ -190,17 +191,32 @@ model ChatCompletionsOptions {
   """)
   seed?: int64;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly nullable types"
+  @added(ServiceApiVersions.v2024_02_15_Preview)
+  @doc("""
+  Whether to return log probabilities of the output tokens or not. If true, returns the log probabilities of each output token returned in the `content` of `message`. This option is currently not available on the `gpt-4-vision-preview` model.
+  """)
+  logprobs?: boolean | null = false;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI uses wire-format snake_casing"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
+  @added(ServiceApiVersions.v2024_02_15_Preview)
+  @doc("""
+  An integer between 0 and 5 specifying the number of most likely tokens to return at each token position, each with an associated log probability. `logprobs` must be set to `true` if this parameter is used.
+  """)
+  top_logprobs?: int32 | null;
+
   @encodedName("application/json", "response_format")
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   @doc("An object specifying the format that the model must output. Used to enable JSON mode.")
   responseFormat?: ChatCompletionsResponseFormat;
 
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   @doc("The available tool definitions that the chat completions request can use, including caller-defined functions.")
   tools?: ChatCompletionsToolDefinition[];
 
   @encodedName("application/json", "tool_choice")
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   @doc("""
   If specified, the model will configure which of the provided tools it can use for the chat completions response.
   """)
@@ -217,26 +233,32 @@ model ChatChoice {
   @doc("The chat message for a given chat completions prompt.")
   message?: ChatResponseMessage;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
+  @added(ServiceApiVersions.v2024_02_15_Preview)
+  @doc("The log probability information for this choice, as enabled via the 'logprobs' request option.")
+  logprobs: ChatChoiceLogProbabilityInfo | null;
+
   @doc("The ordered index associated with this chat completions choice.")
   index: int32;
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
   @doc("The reason that this chat completions choice completed its generated.")
   @encodedName("application/json", "finish_reason")
   finishReason: CompletionsFinishReason | null;
 
   // Note: this property is currently speculative via observation and not yet documented anywhere.
+
   @doc("""
   The reason the model stopped generating tokens, together with any applicable details.
   This structured representation replaces 'finish_reason' for some models.
   """)
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   @encodedName("application/json", "finish_details")
   finishDetails?: ChatFinishDetails;
 
   @doc("The delta message content for a streaming response.")
-  @projectedName("csharp", "InternalStreamingDeltaMessage")
+  @clientName("InternalStreamingDeltaMessage", "csharp")
   delta?: ChatResponseMessage;
 
   @doc("""
@@ -248,7 +270,7 @@ model ChatChoice {
   @encodedName("application/json", "content_filter_results")
   contentFilterResults?: ContentFilterResultsForChoice;
 
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   @doc("""
   Represents the output results of Azure OpenAI enhancements to chat completions, as configured via the matching input
   provided in the request. This supplementary information is only available when using Azure OpenAI and only when the
@@ -271,7 +293,7 @@ model ChatCompletions {
     The first timestamp associated with generation activity for this completions response,
     represented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970.
     """)
-  @projectedName("java", "createdAt")
+  @clientName("createdAt", "java")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   created: utcDateTime;
 
@@ -282,6 +304,9 @@ model ChatCompletions {
     """)
   choices: ChatChoice[];
 
+  @doc("The model name used for this completions request.")
+  `model`?: string;
+
   @doc("""
   Content filtering results for zero or more prompts in the request. In a streaming request,
   results for different prompts may arrive at different times or in different orders.
@@ -290,7 +315,7 @@ model ChatCompletions {
   @encodedName("application/json", "prompt_filter_results")
   promptFilterResults?: ContentFilterResultsForPrompt[];
 
-  @added(ServiceApiVersions.v2023_12_01_Preview)
+  @added(ServiceApiVersions.v2024_02_15_Preview)
   @encodedName("application/json", "system_fingerprint")
   @doc("""
   Can be used in conjunction with the `seed` request parameter to understand when backend changes have been made that
@@ -304,7 +329,7 @@ model ChatCompletions {
   usage: CompletionsUsage;
 }
 
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 @discriminator("type")
 @doc("An abstract representation of structured information about why a chat completions response terminated.")
 model ChatFinishDetails {
@@ -313,7 +338,7 @@ model ChatFinishDetails {
 }
 
 @doc("A structured representation of a stop reason that signifies natural termination by the model.")
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 model StopFinishDetails extends ChatFinishDetails {
   @doc("The object type, which is always 'stop' for this object.")
   type: "stop";
@@ -326,8 +351,51 @@ model StopFinishDetails extends ChatFinishDetails {
 A structured representation of a stop reason that signifies a token limit was reached before the model could naturally
 complete.
 """)
-@added(ServiceApiVersions.v2023_12_01_Preview)
+@added(ServiceApiVersions.v2024_02_15_Preview)
 model MaxTokensFinishDetails extends ChatFinishDetails {
   @doc("The object type, which is always 'max_tokens' for this object.")
   type: "max_tokens";
+}
+
+@added(ServiceApiVersions.v2024_02_15_Preview)
+@doc("""
+Log probability information for a choice, as requested via 'logprobs' and 'top_logprobs'.
+""")
+model ChatChoiceLogProbabilityInfo {
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
+  @doc("""
+  The list of log probability information entries for the choice's message content tokens, as requested via the 'logprobs' option.
+  """)
+  content: ChatTokenLogProbabilityResult[] | null;
+}
+
+@added(ServiceApiVersions.v2024_02_15_Preview)
+@doc("""
+A representation of the log probability information for a single content token, including a list of most likely tokens if 'top_logprobs' were requested.
+""")
+model ChatTokenLogProbabilityResult {
+  ...ChatTokenLogProbabilityInfo;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI uses wire-format snake_casing"
+  @doc("The list of most likely tokens and their log probability information, as requested via 'top_logprobs'.")
+  top_logprobs: ChatTokenLogProbabilityInfo[] | null;
+}
+
+@added(ServiceApiVersions.v2024_02_15_Preview)
+@doc("""
+A representation of the log probability information for a single message content token.
+""")
+model ChatTokenLogProbabilityInfo {
+  @doc("The message content token.")
+  token: string;
+
+  @doc("The log probability of the message content token.")
+  logprob: float32;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
+  @doc("""
+  A list of integers representing the UTF-8 bytes representation of the token. Useful in instances where characters are represented by multiple tokens and their byte representations must be combined to generate the correct text representation. Can be null if there is no bytes representation for the token.
+  """)
+  bytes: int32[] | null;
 }
