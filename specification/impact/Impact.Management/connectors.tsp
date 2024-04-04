@@ -44,7 +44,9 @@ model ConnectorProperties is ResourceProperties {
 }
 
 @doc("Enum for connector types")
-enum Platform {
+union Platform {
+  string,
+
   @doc("Type of Azure Monitor")
   AzureMonitor: "AzureMonitor",
 }

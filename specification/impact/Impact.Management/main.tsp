@@ -14,15 +14,17 @@ import "./connectors.tsp";
 // Various tooling enforces (or at least suggests) that all models should have a provisioning State field, as this means something special to ARM.
 
 @doc("Provisioning state of the resource.")
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   /** Provisioning Succeeded */
-  Succeeded,
+  Succeeded: "Succeeded",
 
   /** Provisioning Failed */
-  Failed,
+  Failed: "Failed",
 
   /** Provisioning Canceled */
-  Canceled,
+  Canceled: "Canceled",
 }
 
 @doc("General resource properties.")
