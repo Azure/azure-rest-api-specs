@@ -1585,6 +1585,7 @@ union GlobalInventoryState {
 @Versioning.added(Versions.v2024_03_01_preview)
 union AssetResponseType {
   string,
+
   @doc("Return only the asset id.")
   "id",
 
@@ -1762,7 +1763,6 @@ union PageAssetRedirectType {
   "final",
 }
 
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The validation type of a Ssl certificate")
 union SslCertAssetValidationType {
@@ -1784,10 +1784,10 @@ union ObservationType {
 @Versioning.added(Versions.v2024_03_01_preview)
 union ObservationPriority {
   string,
-  "high": 3,
-  "medium": 2,
-  "low": 1,
-  "none": 0,
+  "high",
+  "medium",
+  "low",
+  "none",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
