@@ -9,7 +9,9 @@ using TypeSpec.Versioning;
 namespace ModelClient;
 
 @doc("Defines the service behavior when unknown parameters are passed as extra properties in the request payload.")
-enum UnknownParameters {
+union UnknownParameters {
+  string,
+
   @doc("The service should error when it sees unknown parameters in the request payload. This is the default behavior if the service.")
   error: "error",
 
@@ -39,7 +41,9 @@ alias CapacityAlias = {
 };
 
 @doc("Whether your capacity has been afected by the usage amount (token count) reported here.")
-enum CapacityType {
+union CapacityType {
+  string,
+
   @doc("Your capacity has been affected by the usage amount (token count) reported here.")
   error: "usage",
 

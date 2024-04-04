@@ -39,7 +39,9 @@ model EmbeddingsResult {
 }
 
 @doc("Represents the input types used for embedding search.")
-enum EmbeddingInputType {
+union EmbeddingInputType {
+  string,
+
   @doc("to do")
   text: "text",
 

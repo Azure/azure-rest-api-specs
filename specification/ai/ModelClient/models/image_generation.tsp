@@ -55,7 +55,9 @@ model ImageGenerations {
 @doc("""
 An image generation configuration that specifies how the model should prioritize quality, cost, and speed.
 """)
-enum ImageGenerationQuality {
+union ImageGenerationQuality {
+  string,
+
   @doc("""
   Requests image generation with standard, balanced characteristics of quality, cost, and speed.
   """)
@@ -68,7 +70,9 @@ enum ImageGenerationQuality {
 }
 
 @doc("The format in which the generated images are returned.")
-enum ImageGenerationResponseFormat {
+union ImageGenerationResponseFormat {
+  string,
+
   @doc("Image generation response items should provide a URL from which the image may be retrieved.")
   url: "url",
 
