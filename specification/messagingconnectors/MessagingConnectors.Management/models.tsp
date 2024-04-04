@@ -150,7 +150,7 @@ model EventHubConfig {
   connectionString: string;
 }
 
-@doc("Properties of one arm resource")
+@doc("Properties of one arm connector resource")
 model ResourceProperties {
   @doc("Properties of one Connector")
   connectorProperties: ConnectorProperties;
@@ -176,7 +176,7 @@ model ConnectorProperties {
   connectorType: ConnectorType;
 
   @doc("connectionString of the EventHub.")
-  eventHubConfig: EventHubConfig;
+  eventHubConfig?: EventHubConfig;
 
   @doc("State of the MessagingConnector")
   connectorState?: ConnectorState;
@@ -376,4 +376,50 @@ model MySqlSourceConnectorProperties extends ConnectorProperties {
 
   @doc("Tables used as source.")
   tableNames: string;
+}
+
+@doc("State of DataPreview")
+enum DataPreviewState {
+  @doc("InProgress State")
+  InProgress,
+
+  @doc("Success State")
+  Success,
+
+  @doc("Failed State")
+  Failed,
+
+  @doc("CompletedWithoutData State")
+  CompletedWithoutData
+}
+
+@doc("Properties of one arm DataPreview resource")
+model DataPreviewProperties {
+  @doc("Properties of one Connector Source")
+  connectorProperties: ConnectorProperties;
+
+  @doc("start time of DataPreview")
+  startTime: int64;
+
+  @doc("end time of DataPreview")
+  endTime: int64;
+
+  @doc("max limit DataPreview records")
+  limit: int32;
+
+  @doc("State of provisioning of the MessagingConnector ARM Resource")
+  @visibility("read")
+  provisioningState?: ConnectorProvisioningState;
+}
+
+@doc("Properties of DataPreview results")
+model DataPreviewResults {
+  @doc("State of DataPreview")
+  state: DataPreviewState;
+
+  @doc("Count of DataPreview results")
+  count: int32;
+
+  @doc("Content of DataPreview results")
+  results: string[]
 }
