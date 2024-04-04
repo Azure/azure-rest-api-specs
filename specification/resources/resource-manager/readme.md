@@ -46,7 +46,7 @@ tag: package-policy-2023-04
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2023-07
+tag: package-resources-2024-03
 ```
 
 ``` yaml $(package-subscriptions)
@@ -162,6 +162,23 @@ suppressions:
 
 ```
 
+### Tag: package-policy-2023-04-only
+
+These settings apply only when `--tag=package-policy-2023-04-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2023-04-only'
+input-file:
+  - Microsoft.Authorization/stable/2023-04-01/policyDefinitions.json
+  - Microsoft.Authorization/stable/2023-04-01/policyDefinitionVersions.json
+  - Microsoft.Authorization/stable/2023-04-01/policySetDefinitions.json
+  - Microsoft.Authorization/stable/2023-04-01/policySetDefinitionVersions.json
+  - Microsoft.Authorization/stable/2023-04-01/policyAssignments.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
 ### Tag: package-deploymentscripts-2023-08
 
 These settings apply only when `--tag=package-deploymentscripts-2023-08` is specified on the command line.
@@ -181,6 +198,15 @@ These settings apply only when `--tag=package-resources-2023-07` is specified on
 ``` yaml $(tag) == 'package-resources-2023-07'
 input-file:
   - Microsoft.Resources/stable/2023-07-01/resources.json
+```
+
+### Tag: package-resources-2024-03
+
+These settings apply only when `--tag=package-resources-2024-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2024-03'
+input-file:
+  - Microsoft.Resources/stable/2024-03-01/resources.json
 ```
 
 ### Tag: package-2022-12
@@ -1333,6 +1359,36 @@ directive:
   - suppress: XmsParameterLocation
     from: resources.json
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: PathForTrackedResourceTypes
+    from: resources.json
+    reason: Not a tracked resource type. Cannot change anything due to design philosophy in ARM.
+  - suppress: PostResponseCodes
+    from: resources.json
+    reason: Breaking change in order to change the API response code.
+  - suppress: TenantLevelAPIsNotAllowed
+    from: resources.json
+    reason: Tenant level API's are allowed as an exception in ARM repo. It is a breaking change to modify it.
+  - suppress: XmsPageableForListCalls
+    from: resources.json
+    reason: Shared swagger with other teams. We cannot make changes to the API as we don't own it.
+  - suppress: EvenSegmentedPathForPutOperation
+    from: resources.json
+    reason: Linter rule limitation. The API has never been changed since inception. Would be a breaking change.
+  - suppress: DeleteResponseCodes
+    from: resources.json
+    reason: Breaking change in order to change the API response code.
+  - suppress: PutResponseCodes
+    from: resources.json
+    reason: Breaking change in order to change the API response code.
+  - suppress: AvoidAdditionalProperties
+    from: resources.json
+    reason: Breaking change in order to change the property names for multiple API's. Will fix in the future.
+  - suppress: XmsExamplesRequired
+    from: resources.json
+    reason: Xms Examples required is a pre-existing lint error. Not related to this version release. Will fix in the future.
+  - suppress: RequiredReadOnlySystemData
+    from: resources.json
+    reason: Pre-existing lint error. Not related to this version release. Will fix in the future
 ```
 
 ---
@@ -1347,7 +1403,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
