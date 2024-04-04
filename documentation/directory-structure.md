@@ -1,4 +1,5 @@
-# `specification` directory structure
+| Short Link: | [aka.ms/azsdk/spec-dirs](https://aka.ms/azsdk/spec-dirs) |
+|--|--|
 
 <!-- 
 Table of contents generated with VSCode Markdown All in One:
@@ -17,6 +18,9 @@ https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one
     - [Service group `common-types`](#service-group-common-types)
     - [Versioning services in a service group](#versioning-services-in-a-service-group)
   - [Legacy layouts and OpenAPI specs](#legacy-layouts-and-openapi-specs)
+  - 
+# `specification` directory structure
+
 
 This article describes the directory structure / folder layout of the `specification` folder.
 You may be also interested in following:
