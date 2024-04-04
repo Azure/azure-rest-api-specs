@@ -1545,226 +1545,249 @@ model DailyDeltaTypeResponse extends DeltaTypeResponse {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("A list of asset types to cascade the updates to.")
-enum AssetUpdateTransfers {
-  as,
-  contact,
-  domain,
-  host,
-  ipAddress,
-  ipBlock,
-  page,
-  sslCert,
+union AssetUpdateTransfers {
+  string,
+  "as",
+  "contact",
+  "domain",
+  "host",
+  "ipAddress",
+  "ipBlock",
+  "page",
+  "sslCert",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The kind of billable asset.")
-enum ReportBillableAssetBreakdownKind {
-  domain,
-  host,
-  ipAddress,
+union ReportBillableAssetBreakdownKind {
+  string,
+  "domain",
+  "host",
+  "ipAddress",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @Versioning.added(Versions.v2024_03_01_preview)
-enum GlobalInventoryState {
-  candidate,
-  candidateInvestigate,
-  confirmed,
-  associated,
-  associatedPartner,
-  associatedThirdParty,
-  archived,
-  dismissed,
-  autoconfirmed,
+union GlobalInventoryState {
+  string,
+  "candidate",
+  "candidateInvestigate",
+  "confirmed",
+  "associated",
+  "associatedPartner",
+  "associatedThirdParty",
+  "archived",
+  "dismissed",
+  "autoconfirmed",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @Versioning.added(Versions.v2024_03_01_preview)
-enum AssetResponseType {
+union AssetResponseType {
+  string,
   @doc("Return only the asset id.")
-  id,
+  "id",
 
   @doc("Return the standard set of asset fields.")
-  standard,
+  "standard",
 
   @doc("Return the full set of asset fields.")
-  full,
+  "full",
 
   @doc("Return a reduced set of fields.")
-  reduced,
+  "reduced",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @Versioning.added(Versions.v2024_03_01_preview)
-enum DeltaDetailType {
-  added,
-  removed,
+union DeltaDetailType {
+  string,
+  "added",
+  "removed",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @Versioning.added(Versions.v2024_03_01_preview)
-enum GlobalAssetType {
-  page,
-  resource,
-  mailServer,
-  nameServer,
-  host,
-  domain,
-  ipAddress,
-  ipBlock,
-  as,
-  contact,
-  sslCert,
+union GlobalAssetType {
+  string,
+  "page",
+  "resource",
+  "mailServer",
+  "nameServer",
+  "host",
+  "domain",
+  "ipAddress",
+  "ipBlock",
+  "as",
+  "contact",
+  "sslCert",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The state the task is in.")
 @clientName("TaskResourceState", "csharp")
-enum TaskState {
-  pending,
-  running,
-  paused,
-  complete,
-  incomplete,
-  failed,
-  warning,
+union TaskState {
+  string,
+  "pending",
+  "running",
+  "paused",
+  "complete",
+  "incomplete",
+  "failed",
+  "warning",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The phase the task is in.")
 @clientName("TaskResourcePhase", "csharp")
-enum TaskPhase {
-  running,
-  polling,
-  complete,
+union TaskPhase {
+  string,
+  "running",
+  "polling",
+  "complete",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The kind of data connection.")
-enum DataConnectionKind {
-  logAnalytics,
-  azureDataExplorer,
+union DataConnectionKind {
+  string,
+  "logAnalytics",
+  "azureDataExplorer",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The rate at which the data connection will receive updates.")
-enum DataConnectionFrequency {
-  daily,
-  weekly,
-  monthly,
+union DataConnectionFrequency {
+  string,
+  "daily",
+  "weekly",
+  "monthly",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The kind of asset.")
-enum AssetKind {
-  as,
-  contact,
-  domain,
-  host,
-  ipAddress,
-  ipBlock,
-  page,
-  sslCert,
+union AssetKind {
+  string,
+  "as",
+  "contact",
+  "domain",
+  "host",
+  "ipAddress",
+  "ipBlock",
+  "page",
+  "sslCert",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The State of the disco run.")
-enum DiscoRunState {
-  pending,
-  running,
-  completed,
-  failed,
+union DiscoRunState {
+  string,
+  "pending",
+  "running",
+  "completed",
+  "failed",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The type of data the data connection will transfer")
-enum DataConnectionContent {
-  assets,
-  attackSurfaceInsights,
+union DataConnectionContent {
+  string,
+  "assets",
+  "attackSurfaceInsights",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The kind of disco source.")
 @clientName("DiscoverySourceKind", "csharp")
-enum DiscoSourceKind {
-  as,
-  attribute,
-  contact,
-  domain,
-  host,
-  ipBlock,
+union DiscoSourceKind {
+  string,
+  "as",
+  "attribute",
+  "contact",
+  "domain",
+  "host",
+  "ipBlock",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("state of observed port")
-enum ObservedPortStateValue {
-  open,
-  closed,
-  filtered,
+union ObservedPortStateValue {
+  string,
+  "open",
+  "closed",
+  "filtered",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The state to update the asset to.")
-enum AssetUpdateState {
-  candidate,
-  confirmed,
-  dismissed,
-  candidateInvestigate,
-  associatedPartner,
-  associatedThirdparty,
+union AssetUpdateState {
+  string,
+  "candidate",
+  "confirmed",
+  "dismissed",
+  "candidateInvestigate",
+  "associatedPartner",
+  "associatedThirdparty",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The state of assets")
-enum AssetState {
-  ...AssetUpdateState,
-  archived,
+union AssetState {
+  string,
+  AssetUpdateState,
+  "archived",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The kind of asset.")
-enum AuditTrailItemKind {
-  as,
-  contact,
-  domain,
-  host,
-  ipAddress,
-  ipBlock,
-  page,
-  sslCert,
+union AuditTrailItemKind {
+  string,
+  "as",
+  "contact",
+  "domain",
+  "host",
+  "ipAddress",
+  "ipBlock",
+  "page",
+  "sslCert",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The redirect type of a page")
-enum PageAssetRedirectType {
-  httpHeader,
-  metaRefresh,
-  javascript,
-  final,
+union PageAssetRedirectType {
+  string,
+  "httpHeader",
+  "metaRefresh",
+  "javascript",
+  "final",
 }
+
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @doc("The validation type of a Ssl certificate")
-enum SslCertAssetValidationType {
-  domainValidation,
-  organizationValidation,
-  extendedValidation,
+union SslCertAssetValidationType {
+  string,
+  "domainValidation",
+  "organizationValidation",
+  "extendedValidation",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @Versioning.added(Versions.v2024_03_01_preview)
-enum ObservationType {
-  cve,
-  insight,
+union ObservationType {
+  string,
+  "cve",
+  "insight",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @Versioning.added(Versions.v2024_03_01_preview)
-enum ObservationPriority {
-  high: 3,
-  medium: 2,
-  low: 1,
-  none: 0,
+union ObservationPriority {
+  string,
+  "high": 3,
+  "medium": 2,
+  "low": 1,
+  "none": 0,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
@@ -1787,10 +1810,11 @@ model ObservationPageResult {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @Versioning.added(Versions.v2024_03_01_preview)
-enum AssetChainSource {
-  DISCO_GROUP,
-  DISCO_SEED,
-  ASSET_CHAIN,
+union AssetChainSource {
+  string,
+  "DISCO_GROUP",
+  "DISCO_SEED",
+  "ASSET_CHAIN",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
