@@ -30,7 +30,7 @@ alias AdditionalRequestHeaders = {
   Typically used when you want to target a test environment instead of production environment.
   """)
   @header("azureml-model-deployment")
-  model_deployemnt?: string;
+  model_deployment?: string;
 };
 
 alias CapacityAlias = {
