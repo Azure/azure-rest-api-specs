@@ -32,7 +32,7 @@ interface Namespaces {
 	createOrUpdate is ArmResourceCreateOrReplaceAsync<Namespace>;
 	update is ArmResourcePatchSync<
 		Namespace,
-		NamespaceProperties
+		NamespacePropertiesUpdate
 	>;
 	delete is ArmResourceDeleteSync<Namespace>;
 	listByResourceGroup is ArmResourceListByParent<Namespace>;
