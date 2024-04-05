@@ -192,7 +192,7 @@ which corresponds to [`specification/containerservice/resource-manager/Microsoft
 The doc for `fleet` is [Azure Kubernetes Fleet Manager]. It point to fleet REST reference, e.g. for [API version `2023-10-15`][fleet REST reference 2023-10-15],
 which corresponds to [`specification/containerservice/resource-manager/Microsoft.ContainerService/fleet/stable/2023-10-15`].
 
-Note the most important directory structure difference of a `service group` scenario as compared to singular `service`:
+Using our example, note the most important directory structure difference of a `service group` scenario as compared to singular `service`:
 
 - The `resource-manager/Microsoft.ContainerService` folder has multiple child service folders which contain `stable` and `preview` folders for each service,
   instead of directly containing `stable` and `preview` folders.
@@ -216,9 +216,9 @@ services for examples of different versioning cycles in a service group.
 As mentioned at the beginning of this article, for historical reasons, some `specification/<azureTeam>` folders may
 violate some of the constraints presented in this article. This includes violations like:
 
-- More deeply nested subfolders than allowed
-- Incorrect lack of `-preview` suffix in `preview` API versions
-- Mixing of `stable` and `preview` API versions in the same folder subtree
+- More deeply nested subfolders than allowed.
+- Incorrect lack of `-preview` suffix in `preview` API versions.
+- Mixing of `stable` and `preview` API versions in the same folder subtree.
 - Mixing of multiple API versions in given `README.md` package, including mixing of multiple API version lifecycle stages.
 
 In addition, some `<azureTeam>` folders have OpenAPI specs that have been written manually instead of emitted from TypeSpec. 
