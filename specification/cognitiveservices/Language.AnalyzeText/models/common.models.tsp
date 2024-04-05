@@ -23,7 +23,7 @@ model AADToken
     }
   ]>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("The kind of the analyze-text tasks supported.")
 enum AnalyzeTextTaskKind {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   SentimentAnalysis,
@@ -43,7 +43,7 @@ enum AnalyzeTextTaskKind {
   DynamicClassification,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("The kind of the long running analyze text tasks supported.")
 enum AnalyzeTextLROTaskKind {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   SentimentAnalysis,
@@ -85,7 +85,7 @@ enum AnalyzeTextLROTaskKind {
   CustomAbstractiveSummarization,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("The kind of the response object returned by the analyze-text task.")
 enum AnalyzeTextTaskResultsKind {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   SentimentAnalysisResults,
@@ -105,7 +105,7 @@ enum AnalyzeTextTaskResultsKind {
   DynamicClassificationResults,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("The kind of the response object returned by the analyze-text long running task.")
 enum AnalyzeTextLROResultsKind {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   SentimentAnalysisLROResults,
@@ -148,7 +148,7 @@ enum AnalyzeTextLROResultsKind {
   CustomAbstractiveSummarizationLROResults,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Collection of input documents to be analyzed by the service.")
 model MultiLanguageAnalysisInput {
   @doc("The input documents to be analyzed.")
   documents?: Array<MultiLanguageInput>;
@@ -160,28 +160,28 @@ model AnalyzeTextTask {
   @doc("The kind of task to perform.")
   kind: AnalyzeTextTaskKind;
 }
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @discriminator("kind")
+@doc("The long running task to be performed by the service on the input documents.")
 model AnalyzeTextLROTask is TaskIdentifier {
   @doc("The kind of task to perform.")
   kind: AnalyzeTextLROTaskKind;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
 @discriminator("kind")
+@doc("The result object for the analyze task.")
 model AnalyzeTextTaskResult {
   @doc("The kind of task result.")
   kind: AnalyzeTextTaskResultsKind;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("The input object for the analyze text LRO.")
 model AnalyzeTextJobsInput {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Name for the task.")
   displayName?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Contains the input to be analyzed.")
   analysisInput: MultiLanguageAnalysisInput;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("List of tasks to be peformed as part of the LRO.")
   tasks: Array<AnalyzeTextLROTask>;
 
   @added(Versions.v2023_04_15_preview)
@@ -189,7 +189,7 @@ model AnalyzeTextJobsInput {
   defaultLanguage?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("The input object for the prebuilt/default result.")
 model AnalyzeTextPreBuiltResult {
   @doc("Errors by document id.")
   errors: Array<AnalyzeTextDocumentError>;
@@ -198,11 +198,11 @@ model AnalyzeTextPreBuiltResult {
   @doc("if showStats=true was specified in the request this field will contain information about the request payload.")
   statistics?: RequestStatistics;
 
-  @doc("This field indicates which model is used for scoring.")
+  @doc("This field indicates which model is used for analysis.")
   modelVersion: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("The object containing the analyze job LRO job state.")
 @resource("analyze-text/jobs")
 model AnalyzeTextJobState {
   ...JobState;
@@ -210,39 +210,39 @@ model AnalyzeTextJobState {
   ...AnalyzeTextJobStatistics;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Contains the pagination information.")
 model Pagination {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("The nextLink for getting the next paginated response.")
   nextLink?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@docs("Contains the analyze text LRO errors")
 model AnalyzeTextJobErrors {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @docs("Collection of errors encountered during processing.")
   errors: Array<Error>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@docs("Contains the analyze text job statistics returned only when showStats=true.")
 model AnalyzeTextJobStatistics {
   #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("if showStats=true was specified in the request this field will contain information about the request payload.")
   statistics?: RequestStatistics;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@docs("Contains the analyze text job tasks.")
 model TasksState {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   tasks: Tasks;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Container for the tasks status for the LRO job.")
 @clientName("TasksStatus", "csharp")
 model Tasks {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Count of completed tasks.")
   completed: int32;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Count of failed tasks.")
   failed: int32;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Count of inprogress tasks.")
   inProgress: int32;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   total: int32;
@@ -250,7 +250,7 @@ model Tasks {
   items?: Array<AnalyzeTextLROResult>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("List of job statuses.")
 enum Status {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   notStarted,
@@ -266,20 +266,20 @@ enum Status {
   cancelling,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@doc("Contains the AnalyzeText long tunning opertion result object.")
 @discriminator("kind")
 model AnalyzeTextLROResult {
   ...TaskState;
   ...TaskIdentifier;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Kind of the task.")
   kind: AnalyzeTextLROResultsKind;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Base object defining the Analyze Text response.")
 model DocumentResponse {}
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Contains the result object for the processed document.")
 model DocumentResult {
   @doc("Unique, non-empty document identifier.")
   id: string;
@@ -291,7 +291,7 @@ model DocumentResult {
   statistics?: DocumentStatistics;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Contains the error object with errors encountered for the processed document.")
 model AnalyzeTextDocumentError {
   @doc("Document Id.")
   id: string;
@@ -301,7 +301,7 @@ model AnalyzeTextDocumentError {
   error: Error;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Contains the warnings object with warnings encountered for the processed document.")
 model DocumentWarning {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   code: WarningCodeValue;
@@ -313,7 +313,7 @@ model DocumentWarning {
   targetRef?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Defines the list of the warning codes.")
 enum WarningCodeValue {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   LongWordsInDocument,
@@ -342,7 +342,7 @@ model MultiLanguageInput {
   language?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Defines the detected language for the document.")
 @added(Versions.v2023_04_15_preview)
 model DocumentDetectedLanguage {
   @doc("If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document.")
