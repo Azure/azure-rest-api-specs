@@ -1,0 +1,3425 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "KubernetesConfigurationClient",
+    "version": "2024-06-01-preview",
+    "description": "KubernetesConfiguration Client",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "ClusterExtensions"
+    },
+    {
+      "name": "Extensions"
+    },
+    {
+      "name": "FluxConfigurations"
+    },
+    {
+      "name": "OperationStatus"
+    },
+    {
+      "name": "SourceControlConfigurations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.KubernetesConfiguration/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/OperationsList.json"
+          },
+          "Operations_List_Async": {
+            "$ref": "./examples/ListAsyncOperationStatus.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/provider/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions": {
+      "get": {
+        "operationId": "Extensions_ListByResourceGroup",
+        "tags": [
+          "ClusterExtensions",
+          "Extensions"
+        ],
+        "description": "List all Extensions in the cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterRp",
+            "in": "path",
+            "description": "clusterRp",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterResourceName",
+            "in": "path",
+            "description": "clusterResourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "clusterName",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExtensionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Extensions_ListByResourceGroup": {
+            "$ref": "./examples/ListExtensions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/provider/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}": {
+      "get": {
+        "operationId": "Extensions_Get",
+        "tags": [
+          "ClusterExtensions",
+          "Extensions"
+        ],
+        "description": "Gets Kubernetes Cluster Extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterRp",
+            "in": "path",
+            "description": "clusterRp",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterResourceName",
+            "in": "path",
+            "description": "clusterResourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "clusterName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "description": "Name of the Extension.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Extensions_Get": {
+            "$ref": "./examples/GetExtension.json"
+          },
+          "Extensions_Get_Async": {
+            "$ref": "./examples/GetExtensionAsyncOperationStatus.json"
+          },
+          "Extensions_Get_Plan": {
+            "$ref": "./examples/GetExtensionWithPlan.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Extensions_Create",
+        "tags": [
+          "ClusterExtensions",
+          "Extensions"
+        ],
+        "description": "Create a new Kubernetes Cluster Extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterRp",
+            "in": "path",
+            "description": "clusterRp",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterResourceName",
+            "in": "path",
+            "description": "clusterResourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "clusterName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "description": "Name of the Extension.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Properties necessary to Create an Extension.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Extension' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            }
+          },
+          "201": {
+            "description": "Resource 'Extension' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Extensions_Create": {
+            "$ref": "./examples/CreateExtension.json"
+          },
+          "Extensions_Create_Plan": {
+            "$ref": "./examples/CreateExtensionWithPlan.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Extensions_Update",
+        "tags": [
+          "ClusterExtensions",
+          "Extensions"
+        ],
+        "description": "Patch an existing Kubernetes Cluster Extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterRp",
+            "in": "path",
+            "description": "clusterRp",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterResourceName",
+            "in": "path",
+            "description": "clusterResourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "clusterName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "description": "Name of the Extension.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Properties to Patch in an existing Extension.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExtensionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Extension"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Extensions_Update": {
+            "$ref": "./examples/PatchExtension.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Extensions_Delete",
+        "tags": [
+          "ClusterExtensions",
+          "Extensions"
+        ],
+        "description": "Delete a Kubernetes Cluster Extension. This will cause the Agent to Uninstall the extension from the cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterRp",
+            "in": "path",
+            "description": "clusterRp",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterResourceName",
+            "in": "path",
+            "description": "clusterResourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "clusterName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "forceDelete",
+            "in": "query",
+            "description": "Delete the extension resource in Azure - not the normal asynchronous delete.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "description": "Name of the Extension.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Extensions_Delete": {
+            "$ref": "./examples/DeleteExtension.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/provider/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}/operations/{operationId}": {
+      "get": {
+        "operationId": "Extensions_OperationStatus",
+        "tags": [
+          "ClusterExtensions",
+          "Extensions"
+        ],
+        "description": "Get Async Operation status",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterRp",
+            "in": "path",
+            "description": "clusterRp",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterResourceName",
+            "in": "path",
+            "description": "clusterResourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "clusterName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "extensionName",
+            "in": "path",
+            "description": "Name of the Extension.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/OperationsParameter.operationId"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "Standard Azure Resource Manager operation status response",
+              "properties": {
+                "status": {
+                  "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+                  "description": "The operation status"
+                },
+                "id": {
+                  "$ref": "#/definitions/Azure.Core.uuid",
+                  "description": "The unique identifier for the operationStatus resource"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "The name of the  operationStatus resource",
+                  "readOnly": true
+                },
+                "startTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Operation start time",
+                  "readOnly": true
+                },
+                "endTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Operation complete time",
+                  "readOnly": true
+                },
+                "percentComplete": {
+                  "type": "number",
+                  "format": "double",
+                  "description": "The progress made toward completing the operation",
+                  "readOnly": true
+                },
+                "error": {
+                  "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+                  "description": "Errors that occurred if the operation ended with Canceled or Failed status",
+                  "readOnly": true
+                }
+              },
+              "required": [
+                "status",
+                "id"
+              ]
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/provider/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/fluxConfigurations": {
+      "get": {
+        "operationId": "FluxConfigurations_ListByResourceGroup",
+        "tags": [
+          "FluxConfigurations"
+        ],
+        "description": "List all Flux Configurations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterRp",
+            "in": "path",
+            "description": "clusterRp",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterResourceName",
+            "in": "path",
+            "description": "clusterResourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "clusterName",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FluxConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FluxConfigurations_List": {
+            "$ref": "./examples/ListFluxConfigurations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/provider/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/{fluxConfigurationName}": {
+      "get": {
+        "operationId": "FluxConfigurations_Get",
+        "tags": [
+          "FluxConfigurations"
+        ],
+        "description": "Gets details of the Flux Configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterRp",
+            "in": "path",
+            "description": "clusterRp",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterResourceName",
+            "in": "path",
+            "description": "clusterResourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "clusterName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fluxConfigurationName",
+            "in": "path",
+            "description": "Name of the Flux Configuration.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FluxConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FluxConfigurations_Get": {
+            "$ref": "./examples/GetFluxConfiguration.json"
+          },
+          "FluxConfigurations_Get_Async": {
+            "$ref": "./examples/GetFluxConfigurationAsyncOperationStatus.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "FluxConfigurations_Create",
+        "tags": [
+          "FluxConfigurations"
+        ],
+        "description": "Create a new Kubernetes Flux Configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterRp",
+            "in": "path",
+            "description": "clusterRp",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterResourceName",
+            "in": "path",
+            "description": "clusterResourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "clusterName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fluxConfigurationName",
+            "in": "path",
+            "description": "Name of the Flux Configuration.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Properties necessary to Create a FluxConfiguration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FluxConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'FluxConfiguration' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FluxConfiguration"
+            }
+          },
+          "201": {
+            "description": "Resource 'FluxConfiguration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FluxConfiguration"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FluxConfigurations_Create": {
+            "$ref": "./examples/CreateFluxConfiguration.json"
+          },
+          "FluxConfigurations_Create_Azure_Blob": {
+            "$ref": "./examples/CreateFluxConfigurationWithAzureBlob"
+          },
+          "FluxConfigurations_Create_With_Bucket": {
+            "$ref": "./examples/CreateFluxConfigurationWithBucket.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "FluxConfigurations_Update",
+        "tags": [
+          "FluxConfigurations"
+        ],
+        "description": "Update an existing Kubernetes Flux Configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterRp",
+            "in": "path",
+            "description": "clusterRp",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterResourceName",
+            "in": "path",
+            "description": "clusterResourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "clusterName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fluxConfigurationName",
+            "in": "path",
+            "description": "Name of the Flux Configuration.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "Properties to Patch in an existing Flux Configuration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FluxConfigurationUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FluxConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FluxConfigurations_Update": {
+            "$ref": "./examples/PatchFluxConfiguration.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "FluxConfigurations_Delete",
+        "tags": [
+          "FluxConfigurations"
+        ],
+        "description": "This will delete the YAML file used to set up the Flux Configuration, thus stopping future sync from the source repo.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterRp",
+            "in": "path",
+            "description": "clusterRp",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterResourceName",
+            "in": "path",
+            "description": "clusterResourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "clusterName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "forceDelete",
+            "in": "query",
+            "description": "Delete the extension resource in Azure - not the normal asynchronous delete.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "fluxConfigurationName",
+            "in": "path",
+            "description": "Name of the Flux Configuration.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/provider/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/{fluxConfigurationName}/operations/{operationId}": {
+      "get": {
+        "operationId": "FluxConfigurations_OperationStatus",
+        "tags": [
+          "FluxConfigurations"
+        ],
+        "description": "Get Async Operation status",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterRp",
+            "in": "path",
+            "description": "clusterRp",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterResourceName",
+            "in": "path",
+            "description": "clusterResourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "clusterName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fluxConfigurationName",
+            "in": "path",
+            "description": "Name of the Flux Configuration.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/OperationsParameter.operationId"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "Standard Azure Resource Manager operation status response",
+              "properties": {
+                "status": {
+                  "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+                  "description": "The operation status"
+                },
+                "id": {
+                  "$ref": "#/definitions/Azure.Core.uuid",
+                  "description": "The unique identifier for the operationStatus resource"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "The name of the  operationStatus resource",
+                  "readOnly": true
+                },
+                "startTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Operation start time",
+                  "readOnly": true
+                },
+                "endTime": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Operation complete time",
+                  "readOnly": true
+                },
+                "percentComplete": {
+                  "type": "number",
+                  "format": "double",
+                  "description": "The progress made toward completing the operation",
+                  "readOnly": true
+                },
+                "error": {
+                  "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+                  "description": "Errors that occurred if the operation ended with Canceled or Failed status",
+                  "readOnly": true
+                }
+              },
+              "required": [
+                "status",
+                "id"
+              ]
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/provider/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/operations": {
+      "get": {
+        "operationId": "OperationStatus_ListByResourceGroup",
+        "tags": [
+          "OperationStatus"
+        ],
+        "description": "List all operations in the cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterRp",
+            "in": "path",
+            "description": "clusterRp",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterResourceName",
+            "in": "path",
+            "description": "clusterResourceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "clusterName",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KubernetesConfiguration/sourceControlConfigurations": {
+      "get": {
+        "operationId": "SourceControlConfigurations_ListByResourceGroup",
+        "tags": [
+          "SourceControlConfigurations"
+        ],
+        "description": "List all Source Control Configurations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SourceControlConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SourceControlConfigurations_List": {
+            "$ref": "./examples/ListSourceControlConfiguration.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KubernetesConfiguration/sourceControlConfigurations/{sourceControlConfigurationName}": {
+      "get": {
+        "operationId": "SourceControlConfigurations_Get",
+        "tags": [
+          "SourceControlConfigurations"
+        ],
+        "description": "Gets details of the Source Control Configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sourceControlConfigurationName",
+            "in": "path",
+            "description": "Name of the Source Control Configuration.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SourceControlConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SourceControlConfigurations_Get": {
+            "$ref": "./examples/GetSourceControlConfiguration.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SourceControlConfigurations_CreateOrUpdate",
+        "tags": [
+          "SourceControlConfigurations"
+        ],
+        "description": "Create a new Kubernetes Source Control Configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sourceControlConfigurationName",
+            "in": "path",
+            "description": "Name of the Source Control Configuration.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Properties necessary to Create KubernetesConfiguration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SourceControlConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SourceControlConfiguration' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SourceControlConfiguration"
+            }
+          },
+          "201": {
+            "description": "Resource 'SourceControlConfiguration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SourceControlConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SourceControlConfigurations_Delete",
+        "tags": [
+          "SourceControlConfigurations"
+        ],
+        "description": "This will delete the YAML file used to set up the Source control configuration, thus stopping future sync from the source repo.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sourceControlConfigurationName",
+            "in": "path",
+            "description": "Name of the Source Control Configuration.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SourceControlConfigurations_Delete": {
+            "$ref": "./examples/DeleteSourceControlConfiguration.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AKSIdentityType": {
+      "type": "string",
+      "description": "IdentityType Enum",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "AKSIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System Assigned Identity"
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User Assigned Identity"
+          }
+        ]
+      }
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "AzureBlobDefinition": {
+      "type": "object",
+      "description": "Parameters to reconcile to the AzureBlob source kind type.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL to sync for the flux configuration Azure Blob storage account."
+        },
+        "containerName": {
+          "type": "string",
+          "description": "The Azure Blob container name to sync from the url endpoint for the flux configuration."
+        },
+        "timeoutInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum time to attempt to reconcile the cluster Azure Blob source with the remote.",
+          "default": 600
+        },
+        "syncIntervalInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The interval at which to re-reconcile the cluster Azure Blob source with the remote.",
+          "default": 600
+        },
+        "servicePrincipal": {
+          "$ref": "#/definitions/ServicePrincipalDefinition",
+          "description": "Parameters to authenticate using Service Principal."
+        },
+        "accountKey": {
+          "type": "string",
+          "description": "The account key (shared key) to access the storage account"
+        },
+        "sasToken": {
+          "type": "string",
+          "description": "The Shared Access token to access the storage container"
+        },
+        "managedIdentity": {
+          "$ref": "#/definitions/ManagedIdentityDefinition",
+          "description": "Parameters to authenticate using a Managed Identity."
+        },
+        "localAuthRef": {
+          "type": "string",
+          "description": "Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets."
+        }
+      }
+    },
+    "AzureBlobPatchDefinition": {
+      "type": "object",
+      "description": "Parameters to reconcile to the AzureBlob source kind type.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL to sync for the flux configuration Azure Blob storage account."
+        },
+        "containerName": {
+          "type": "string",
+          "description": "The Azure Blob container name to sync from the url endpoint for the flux configuration."
+        },
+        "timeoutInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum time to attempt to reconcile the cluster Azure Blob source with the remote."
+        },
+        "syncIntervalInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The interval at which to re-reconcile the cluster Azure Blob source with the remote."
+        },
+        "servicePrincipal": {
+          "$ref": "#/definitions/ServicePrincipalPatchDefinition",
+          "description": "Parameters to authenticate using Service Principal."
+        },
+        "accountKey": {
+          "type": "string",
+          "description": "The account key (shared key) to access the storage account"
+        },
+        "sasToken": {
+          "type": "string",
+          "description": "The Shared Access token to access the storage container"
+        },
+        "managedIdentity": {
+          "$ref": "#/definitions/ManagedIdentityPatchDefinition",
+          "description": "Parameters to authenticate using a Managed Identity."
+        },
+        "localAuthRef": {
+          "type": "string",
+          "description": "Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets."
+        }
+      }
+    },
+    "BucketDefinition": {
+      "type": "object",
+      "description": "Parameters to reconcile to the Bucket source kind type.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL to sync for the flux configuration S3 bucket."
+        },
+        "bucketName": {
+          "type": "string",
+          "description": "The bucket name to sync from the url endpoint for the flux configuration."
+        },
+        "insecure": {
+          "type": "boolean",
+          "description": "Specify whether to use insecure communication when puling data from the S3 bucket.",
+          "default": true
+        },
+        "timeoutInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum time to attempt to reconcile the cluster bucket source with the remote.",
+          "default": 600
+        },
+        "syncIntervalInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The interval at which to re-reconcile the cluster bucket source with the remote.",
+          "default": 600
+        },
+        "accessKey": {
+          "type": "string",
+          "description": "Plaintext access key used to securely access the S3 bucket"
+        },
+        "localAuthRef": {
+          "type": "string",
+          "description": "Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets."
+        }
+      }
+    },
+    "BucketPatchDefinition": {
+      "type": "object",
+      "description": "Parameters to reconcile to the Bucket source kind type.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL to sync for the flux configuration S3 bucket."
+        },
+        "bucketName": {
+          "type": "string",
+          "description": "The bucket name to sync from the url endpoint for the flux configuration."
+        },
+        "insecure": {
+          "type": "boolean",
+          "description": "Specify whether to use insecure communication when puling data from the S3 bucket."
+        },
+        "timeoutInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum time to attempt to reconcile the cluster bucket source with the remote."
+        },
+        "syncIntervalInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The interval at which to re-reconcile the cluster bucket source with the remote."
+        },
+        "accessKey": {
+          "type": "string",
+          "description": "Plaintext access key used to securely access the S3 bucket"
+        },
+        "localAuthRef": {
+          "type": "string",
+          "description": "Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets."
+        }
+      }
+    },
+    "ComplianceStateType": {
+      "type": "string",
+      "description": "The compliance state of the configuration.",
+      "enum": [
+        "Pending",
+        "Compliant",
+        "Noncompliant",
+        "Installed",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ComplianceStateType",
+        "modelAsString": true
+      }
+    },
+    "ComplianceStatus": {
+      "type": "object",
+      "description": "Compliance Status details",
+      "properties": {
+        "complianceState": {
+          "$ref": "#/definitions/ComplianceStateType",
+          "description": "The compliance state of the configuration.",
+          "readOnly": true
+        },
+        "lastConfigApplied": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Datetime the configuration was last applied."
+        },
+        "message": {
+          "type": "string",
+          "description": "Message from when the configuration was applied."
+        },
+        "messageLevel": {
+          "$ref": "#/definitions/MessageLevelType",
+          "description": "Level of the message."
+        }
+      }
+    },
+    "Extension": {
+      "type": "object",
+      "description": "The Extension object.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExtensionProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "plan": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Plan",
+          "description": "Details of the resource plan."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ExtensionListResult": {
+      "type": "object",
+      "description": "The response of a Extension list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Extension items on this page",
+          "items": {
+            "$ref": "#/definitions/Extension"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExtensionProperties": {
+      "type": "object",
+      "description": "Properties of an Extension resource",
+      "properties": {
+        "extensionType": {
+          "type": "string",
+          "description": "Type of the Extension, of which this resource is an instance of.  It must be one of the Extension Types registered with Microsoft.KubernetesConfiguration by the Extension publisher."
+        },
+        "autoUpgradeMinorVersion": {
+          "type": "boolean",
+          "description": "Flag to note if this extension participates in auto upgrade of minor version, or not.",
+          "default": true
+        },
+        "releaseTrain": {
+          "type": "string",
+          "description": "ReleaseTrain this extension participates in for auto-upgrade (e.g. Stable, Preview, etc.) - only if autoUpgradeMinorVersion is 'true'.",
+          "default": "Stable"
+        },
+        "version": {
+          "type": "string",
+          "description": "User-specified version of the extension for this extension to 'pin'. To use 'version', autoUpgradeMinorVersion must be 'false'."
+        },
+        "scope": {
+          "$ref": "#/definitions/Scope",
+          "description": "Scope at which the extension is installed."
+        },
+        "configurationSettings": {
+          "type": "object",
+          "description": "Configuration settings, as name-value pairs for configuring this extension.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "configurationProtectedSettings": {
+          "type": "object",
+          "description": "Configuration settings that are sensitive, as name-value pairs for configuring this extension.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "currentVersion": {
+          "type": "string",
+          "description": "Currently installed version of the extension.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Status of installation of this extension.",
+          "readOnly": true
+        },
+        "statuses": {
+          "type": "array",
+          "description": "Status from this extension.",
+          "items": {
+            "$ref": "#/definitions/ExtensionStatus"
+          },
+          "x-ms-identifiers": []
+        },
+        "errorInfo": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "Error information from the Agent - e.g. errors during installation.",
+          "readOnly": true
+        },
+        "customLocationSettings": {
+          "type": "object",
+          "description": "Custom Location settings properties.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "packageUri": {
+          "type": "string",
+          "description": "Uri of the Helm package",
+          "readOnly": true
+        },
+        "aksAssignedIdentity": {
+          "$ref": "#/definitions/ExtensionPropertiesAksAssignedIdentity",
+          "description": "Identity of the Extension resource in an AKS cluster"
+        },
+        "isSystemExtension": {
+          "type": "boolean",
+          "description": "Flag to note if this extension is a system extension",
+          "readOnly": true
+        },
+        "autoUpgradeChannel": {
+          "type": "string",
+          "description": "autoUpgrade value for autoUpgradeV2"
+        }
+      }
+    },
+    "ExtensionPropertiesAksAssignedIdentity": {
+      "type": "object",
+      "description": "Identity of the Extension resource in an AKS cluster",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of resource identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of resource.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/AKSIdentityType",
+          "description": "The identity type."
+        }
+      }
+    },
+    "ExtensionStatus": {
+      "type": "object",
+      "description": "Status from the extension.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Status code provided by the Extension"
+        },
+        "displayStatus": {
+          "type": "string",
+          "description": "Short description of status of the extension."
+        },
+        "level": {
+          "type": "string",
+          "description": "Level of the status.",
+          "default": "Information",
+          "enum": [
+            "Error",
+            "Warning",
+            "Information"
+          ],
+          "x-ms-enum": {
+            "name": "LevelType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Error",
+                "value": "Error",
+                "description": "Error"
+              },
+              {
+                "name": "Warning",
+                "value": "Warning",
+                "description": "Warning"
+              },
+              {
+                "name": "Information",
+                "value": "Information",
+                "description": "Information"
+              }
+            ]
+          }
+        },
+        "message": {
+          "type": "string",
+          "description": "Detailed message of the status from the Extension."
+        },
+        "time": {
+          "type": "string",
+          "description": "DateLiteral (per ISO8601) noting the time of installation status."
+        }
+      }
+    },
+    "ExtensionUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the Extension.",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "plan": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Plan",
+          "description": "Details of the resource plan."
+        },
+        "properties": {
+          "$ref": "#/definitions/ExtensionUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ExtensionUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Extension.",
+      "properties": {
+        "extensionType": {
+          "type": "string",
+          "description": "Type of the Extension, of which this resource is an instance of.  It must be one of the Extension Types registered with Microsoft.KubernetesConfiguration by the Extension publisher."
+        },
+        "autoUpgradeMinorVersion": {
+          "type": "boolean",
+          "description": "Flag to note if this extension participates in auto upgrade of minor version, or not.",
+          "default": true
+        },
+        "releaseTrain": {
+          "type": "string",
+          "description": "ReleaseTrain this extension participates in for auto-upgrade (e.g. Stable, Preview, etc.) - only if autoUpgradeMinorVersion is 'true'.",
+          "default": "Stable"
+        },
+        "version": {
+          "type": "string",
+          "description": "User-specified version of the extension for this extension to 'pin'. To use 'version', autoUpgradeMinorVersion must be 'false'."
+        },
+        "scope": {
+          "$ref": "#/definitions/Scope",
+          "description": "Scope at which the extension is installed."
+        },
+        "configurationSettings": {
+          "type": "object",
+          "description": "Configuration settings, as name-value pairs for configuring this extension.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "configurationProtectedSettings": {
+          "type": "object",
+          "description": "Configuration settings that are sensitive, as name-value pairs for configuring this extension.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "statuses": {
+          "type": "array",
+          "description": "Status from this extension.",
+          "items": {
+            "$ref": "#/definitions/ExtensionStatus"
+          },
+          "x-ms-identifiers": []
+        },
+        "aksAssignedIdentity": {
+          "$ref": "#/definitions/ExtensionPropertiesAksAssignedIdentity",
+          "description": "Identity of the Extension resource in an AKS cluster"
+        },
+        "autoUpgradeChannel": {
+          "type": "string",
+          "description": "autoUpgrade value for autoUpgradeV2"
+        }
+      }
+    },
+    "FluxComplianceState": {
+      "type": "string",
+      "description": "Compliance state of the cluster object.",
+      "enum": [
+        "Compliant",
+        "Non-Compliant",
+        "Pending",
+        "Suspended",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "FluxComplianceState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Compliant",
+            "value": "Compliant",
+            "description": "Compliant"
+          },
+          {
+            "name": "Non-Compliant",
+            "value": "Non-Compliant",
+            "description": "Non-Compliant"
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Pending"
+          },
+          {
+            "name": "Suspended",
+            "value": "Suspended",
+            "description": "Suspended"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown"
+          }
+        ]
+      }
+    },
+    "FluxConfiguration": {
+      "type": "object",
+      "description": "The Flux Configuration object returned in Get & Put response.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FluxConfigurationProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "FluxConfigurationListResult": {
+      "type": "object",
+      "description": "The response of a FluxConfiguration list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FluxConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/FluxConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "FluxConfigurationPatch": {
+      "type": "object",
+      "description": "The Flux Configuration Patch Request object.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FluxConfigurationPatchProperties",
+          "description": "Updatable properties of an Flux Configuration Patch Request"
+        }
+      }
+    },
+    "FluxConfigurationPatchProperties": {
+      "type": "object",
+      "description": "Updatable properties of an Flux Configuration Patch Request",
+      "properties": {
+        "sourceKind": {
+          "$ref": "#/definitions/SourceKindType",
+          "description": "Source Kind to pull the configuration data from."
+        },
+        "suspend": {
+          "type": "boolean",
+          "description": "Whether this configuration should suspend its reconciliation of its kustomizations and sources."
+        },
+        "gitRepository": {
+          "$ref": "#/definitions/GitRepositoryPatchDefinition",
+          "description": "Parameters to reconcile to the GitRepository source kind type."
+        },
+        "bucket": {
+          "$ref": "#/definitions/BucketPatchDefinition",
+          "description": "Parameters to reconcile to the Bucket source kind type."
+        },
+        "azureBlob": {
+          "$ref": "#/definitions/AzureBlobPatchDefinition",
+          "description": "Parameters to reconcile to the AzureBlob source kind type."
+        },
+        "kustomizations": {
+          "type": "object",
+          "description": "Array of kustomizations used to reconcile the artifact pulled by the source type on the cluster.",
+          "additionalProperties": {
+            "$ref": "#/definitions/KustomizationPatchDefinition"
+          }
+        },
+        "configurationProtectedSettings": {
+          "type": "object",
+          "description": "Key-value pairs of protected configuration settings for the configuration",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FluxConfigurationProperties": {
+      "type": "object",
+      "description": "Properties to create a Flux Configuration resource",
+      "properties": {
+        "scope": {
+          "type": "string",
+          "description": "Scope at which the operator will be installed.",
+          "default": "cluster",
+          "enum": [
+            "cluster",
+            "namespace"
+          ],
+          "x-ms-enum": {
+            "name": "ScopeType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "cluster",
+                "value": "cluster",
+                "description": "cluster"
+              },
+              {
+                "name": "namespace",
+                "value": "namespace",
+                "description": "namespace"
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "namespace": {
+          "type": "string",
+          "description": "The namespace to which this configuration is installed to. Maximum of 253 lower case alphanumeric characters, hyphen and period only.",
+          "default": "default",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "sourceKind": {
+          "$ref": "#/definitions/SourceKindType",
+          "description": "Source Kind to pull the configuration data from."
+        },
+        "suspend": {
+          "type": "boolean",
+          "description": "Whether this configuration should suspend its reconciliation of its kustomizations and sources.",
+          "default": false
+        },
+        "gitRepository": {
+          "$ref": "#/definitions/GitRepositoryDefinition",
+          "description": "Parameters to reconcile to the GitRepository source kind type."
+        },
+        "bucket": {
+          "$ref": "#/definitions/BucketDefinition",
+          "description": "Parameters to reconcile to the Bucket source kind type."
+        },
+        "azureBlob": {
+          "$ref": "#/definitions/AzureBlobDefinition",
+          "description": "Parameters to reconcile to the AzureBlob source kind type."
+        },
+        "kustomizations": {
+          "type": "object",
+          "description": "Array of kustomizations used to reconcile the artifact pulled by the source type on the cluster.",
+          "additionalProperties": {
+            "$ref": "#/definitions/KustomizationDefinition"
+          }
+        },
+        "configurationProtectedSettings": {
+          "type": "object",
+          "description": "Key-value pairs of protected configuration settings for the configuration",
+          "additionalProperties": {
+            "$ref": "#/definitions/protectedSettingValue"
+          }
+        },
+        "statuses": {
+          "type": "array",
+          "description": "Statuses of the Flux Kubernetes resources created by the fluxConfiguration or created by the managed objects provisioned by the fluxConfiguration.",
+          "items": {
+            "$ref": "#/definitions/ObjectStatusDefinition"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "repositoryPublicKey": {
+          "type": "string",
+          "description": "Public Key associated with this fluxConfiguration (either generated within the cluster or provided by the user).",
+          "readOnly": true
+        },
+        "sourceSyncedCommitId": {
+          "type": "string",
+          "description": "Branch and/or SHA of the source commit synced with the cluster.",
+          "readOnly": true
+        },
+        "sourceUpdatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Datetime the fluxConfiguration synced its source on the cluster.",
+          "readOnly": true
+        },
+        "statusUpdatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Datetime the fluxConfiguration synced its status on the cluster with Azure.",
+          "readOnly": true
+        },
+        "waitForReconciliation": {
+          "type": "boolean",
+          "description": "Whether flux configuration deployment should wait for cluster to reconcile the kustomizations."
+        },
+        "reconciliationWait": {
+          "type": "string",
+          "description": "Maximum duration to wait for flux configuration reconciliation. E.g PT1H, PT5M, P1D"
+        },
+        "complianceState": {
+          "type": "string",
+          "description": "Combined status of the Flux Kubernetes resources created by the fluxConfiguration or created by the managed objects.",
+          "default": "Unknown",
+          "enum": [
+            "Compliant",
+            "Non-Compliant",
+            "Pending",
+            "Suspended",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "FluxComplianceState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Compliant",
+                "value": "Compliant",
+                "description": "Compliant"
+              },
+              {
+                "name": "Non-Compliant",
+                "value": "Non-Compliant",
+                "description": "Non-Compliant"
+              },
+              {
+                "name": "Pending",
+                "value": "Pending",
+                "description": "Pending"
+              },
+              {
+                "name": "Suspended",
+                "value": "Suspended",
+                "description": "Suspended"
+              },
+              {
+                "name": "Unknown",
+                "value": "Unknown",
+                "description": "Unknown"
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Status of the creation of the fluxConfiguration.",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message returned to the user in the case of provisioning failure.",
+          "readOnly": true
+        }
+      }
+    },
+    "FluxConfigurationUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the FluxConfiguration.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FluxConfigurationUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "FluxConfigurationUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the FluxConfiguration.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FluxConfigurationPatchProperties",
+          "description": "Updatable properties of an Flux Configuration Patch Request"
+        }
+      }
+    },
+    "GitRepositoryDefinition": {
+      "type": "object",
+      "description": "Parameters to reconcile to the GitRepository source kind type.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL to sync for the flux configuration git repository."
+        },
+        "timeoutInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum time to attempt to reconcile the cluster git repository source with the remote.",
+          "default": 600
+        },
+        "syncIntervalInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The interval at which to re-reconcile the cluster git repository source with the remote.",
+          "default": 600
+        },
+        "repositoryRef": {
+          "$ref": "#/definitions/RepositoryRefDefinition",
+          "description": "The source reference for the GitRepository object."
+        },
+        "sshKnownHosts": {
+          "type": "string",
+          "description": "Base64-encoded known_hosts value containing public SSH keys required to access private git repositories over SSH"
+        },
+        "httpsUser": {
+          "type": "string",
+          "description": "Plaintext HTTPS username used to access private git repositories over HTTPS"
+        },
+        "httpsCaCert": {
+          "type": "string",
+          "description": "Base64-encoded HTTPS certificate authority contents used to access git private git repositories over HTTPS"
+        },
+        "localAuthRef": {
+          "type": "string",
+          "description": "Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets."
+        }
+      }
+    },
+    "GitRepositoryPatchDefinition": {
+      "type": "object",
+      "description": "Parameters to reconcile to the GitRepository source kind type.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL to sync for the flux configuration git repository."
+        },
+        "timeoutInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum time to attempt to reconcile the cluster git repository source with the remote."
+        },
+        "syncIntervalInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The interval at which to re-reconcile the cluster git repository source with the remote."
+        },
+        "repositoryRef": {
+          "$ref": "#/definitions/RepositoryRefDefinition",
+          "description": "The source reference for the GitRepository object."
+        },
+        "sshKnownHosts": {
+          "type": "string",
+          "description": "Base64-encoded known_hosts value containing public SSH keys required to access private git repositories over SSH"
+        },
+        "httpsUser": {
+          "type": "string",
+          "description": "Plaintext HTTPS username used to access private git repositories over HTTPS"
+        },
+        "httpsCaCert": {
+          "type": "string",
+          "description": "Base64-encoded HTTPS certificate authority contents used to access git private git repositories over HTTPS"
+        },
+        "localAuthRef": {
+          "type": "string",
+          "description": "Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets."
+        }
+      }
+    },
+    "HelmOperatorProperties": {
+      "type": "object",
+      "description": "Properties for Helm operator.",
+      "properties": {
+        "chartVersion": {
+          "type": "string",
+          "description": "Version of the operator Helm chart."
+        },
+        "chartValues": {
+          "type": "string",
+          "description": "Values override for the operator Helm chart."
+        }
+      }
+    },
+    "HelmReleasePropertiesDefinition": {
+      "type": "object",
+      "description": "Properties for HelmRelease objects",
+      "properties": {
+        "lastRevisionApplied": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The revision number of the last released object change"
+        },
+        "helmChartRef": {
+          "$ref": "#/definitions/ObjectReferenceDefinition",
+          "description": "The reference to the HelmChart object used as the source to this HelmRelease"
+        },
+        "failureCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of times that the HelmRelease failed to install or upgrade"
+        },
+        "installFailureCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of times that the HelmRelease failed to install"
+        },
+        "upgradeFailureCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of times that the HelmRelease failed to upgrade"
+        }
+      }
+    },
+    "Identity": {
+      "type": "object",
+      "description": "Identity for the resource.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal ID of resource identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The identity type.",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "KustomizationDefinition": {
+      "type": "object",
+      "description": "The Kustomization defining how to reconcile the artifact pulled by the source type on the cluster.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Kustomization, matching the key in the Kustomizations object map.",
+          "readOnly": true
+        },
+        "path": {
+          "type": "string",
+          "description": "The path in the source reference to reconcile on the cluster.",
+          "default": ""
+        },
+        "dependsOn": {
+          "type": "array",
+          "description": "Specifies other Kustomizations that this Kustomization depends on. This Kustomization will not reconcile until all dependencies have completed their reconciliation.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "timeoutInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum time to attempt to reconcile the Kustomization on the cluster.",
+          "default": 600
+        },
+        "syncIntervalInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The interval at which to re-reconcile the Kustomization on the cluster.",
+          "default": 600
+        },
+        "retryIntervalInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The interval at which to re-reconcile the Kustomization on the cluster in the event of failure on reconciliation."
+        },
+        "prune": {
+          "type": "boolean",
+          "description": "Enable/disable garbage collections of Kubernetes objects created by this Kustomization.",
+          "default": false
+        },
+        "force": {
+          "type": "boolean",
+          "description": "Enable/disable re-creating Kubernetes resources on the cluster when patching fails due to an immutable field change.",
+          "default": false
+        },
+        "wait": {
+          "type": "boolean",
+          "description": "Enable/disable health check for all Kubernetes objects created by this Kustomization.",
+          "default": true
+        },
+        "postBuild": {
+          "$ref": "#/definitions/PostBuildDefinition",
+          "description": "Used for variable substitution for this Kustomization after kustomize build."
+        }
+      }
+    },
+    "KustomizationPatchDefinition": {
+      "type": "object",
+      "description": "The Kustomization defining how to reconcile the artifact pulled by the source type on the cluster.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path in the source reference to reconcile on the cluster."
+        },
+        "dependsOn": {
+          "type": "array",
+          "description": "Specifies other Kustomizations that this Kustomization depends on. This Kustomization will not reconcile until all dependencies have completed their reconciliation.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "timeoutInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum time to attempt to reconcile the Kustomization on the cluster."
+        },
+        "syncIntervalInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The interval at which to re-reconcile the Kustomization on the cluster."
+        },
+        "retryIntervalInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The interval at which to re-reconcile the Kustomization on the cluster in the event of failure on reconciliation."
+        },
+        "prune": {
+          "type": "boolean",
+          "description": "Enable/disable garbage collections of Kubernetes objects created by this Kustomization."
+        },
+        "force": {
+          "type": "boolean",
+          "description": "Enable/disable re-creating Kubernetes resources on the cluster when patching fails due to an immutable field change."
+        },
+        "wait": {
+          "type": "boolean",
+          "description": "Enable/disable health check for all Kubernetes objects created by this Kustomization."
+        },
+        "postBuild": {
+          "$ref": "#/definitions/PostBuildDefinition",
+          "description": "Used for variable substitution for this Kustomization after kustomize build."
+        }
+      }
+    },
+    "KustomizationValidationType": {
+      "type": "string",
+      "description": "Specify whether to validate the Kubernetes objects referenced in the Kustomization before applying them to the cluster.",
+      "enum": [
+        "none",
+        "client",
+        "server"
+      ],
+      "x-ms-enum": {
+        "name": "KustomizationValidationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "none",
+            "value": "none",
+            "description": "No validation"
+          },
+          {
+            "name": "client",
+            "value": "client",
+            "description": "client side validation"
+          },
+          {
+            "name": "server",
+            "value": "server",
+            "description": "server side validation"
+          }
+        ]
+      }
+    },
+    "LevelType": {
+      "type": "string",
+      "description": "Level of the status.",
+      "enum": [
+        "Error",
+        "Warning",
+        "Information"
+      ],
+      "x-ms-enum": {
+        "name": "LevelType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "Error"
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "Warning"
+          },
+          {
+            "name": "Information",
+            "value": "Information",
+            "description": "Information"
+          }
+        ]
+      }
+    },
+    "ManagedIdentityDefinition": {
+      "type": "object",
+      "description": "Parameters to authenticate using a Managed Identity.",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "The client Id for authenticating a Managed Identity."
+        }
+      }
+    },
+    "ManagedIdentityPatchDefinition": {
+      "type": "object",
+      "description": "Parameters to authenticate using a Managed Identity.",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "The client Id for authenticating a Managed Identity."
+        }
+      }
+    },
+    "MessageLevelType": {
+      "type": "string",
+      "description": "Level of the message.",
+      "enum": [
+        "Error",
+        "Warning",
+        "Information"
+      ],
+      "x-ms-enum": {
+        "name": "MessageLevelType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "Message level : Error"
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "Message level : Warning"
+          },
+          {
+            "name": "Information",
+            "value": "Information",
+            "description": "Message level : Information"
+          }
+        ]
+      }
+    },
+    "ObjectReferenceDefinition": {
+      "type": "object",
+      "description": "Object reference to a Kubernetes object on a cluster",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the object"
+        },
+        "namespace": {
+          "type": "string",
+          "description": "Namespace of the object"
+        }
+      }
+    },
+    "ObjectStatusConditionDefinition": {
+      "type": "object",
+      "description": "Status condition of Kubernetes object",
+      "properties": {
+        "lastTransitionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time this status condition has changed"
+        },
+        "message": {
+          "type": "string",
+          "description": "A more verbose description of the object status condition"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason for the specified status condition type status"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the Kubernetes object condition type"
+        },
+        "type": {
+          "type": "string",
+          "description": "Object status condition type for this object"
+        }
+      }
+    },
+    "ObjectStatusDefinition": {
+      "type": "object",
+      "description": "Statuses of objects deployed by the user-specified kustomizations from the git repository.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the applied object"
+        },
+        "namespace": {
+          "type": "string",
+          "description": "Namespace of the applied object"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of the applied object"
+        },
+        "complianceState": {
+          "type": "string",
+          "description": "Compliance state of the applied object showing whether the applied object has come into a ready state on the cluster.",
+          "default": "Unknown",
+          "enum": [
+            "Compliant",
+            "Non-Compliant",
+            "Pending",
+            "Suspended",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "FluxComplianceState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Compliant",
+                "value": "Compliant",
+                "description": "Compliant"
+              },
+              {
+                "name": "Non-Compliant",
+                "value": "Non-Compliant",
+                "description": "Non-Compliant"
+              },
+              {
+                "name": "Pending",
+                "value": "Pending",
+                "description": "Pending"
+              },
+              {
+                "name": "Suspended",
+                "value": "Suspended",
+                "description": "Suspended"
+              },
+              {
+                "name": "Unknown",
+                "value": "Unknown",
+                "description": "Unknown"
+              }
+            ]
+          }
+        },
+        "appliedBy": {
+          "$ref": "#/definitions/ObjectReferenceDefinition",
+          "description": "Object reference to the Kustomization that applied this object"
+        },
+        "statusConditions": {
+          "type": "array",
+          "description": "List of Kubernetes object status conditions present on the cluster",
+          "items": {
+            "$ref": "#/definitions/ObjectStatusConditionDefinition"
+          },
+          "x-ms-identifiers": []
+        },
+        "helmReleaseProperties": {
+          "$ref": "#/definitions/HelmReleasePropertiesDefinition",
+          "description": "Additional properties that are provided from objects of the HelmRelease kind"
+        }
+      }
+    },
+    "Operation": {
+      "type": "object",
+      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OperationsParameter",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "OperationListResult": {
+      "type": "object",
+      "description": "The response of a Operation list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Operation items on this page",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OperationsParameter": {
+      "type": "object",
+      "description": "Operations path parameter",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "operationId value"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Status of installation of this extension.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "operationId"
+      ]
+    },
+    "OperatorScopeType": {
+      "type": "string",
+      "description": "Scope at which the operator will be installed.",
+      "enum": [
+        "cluster",
+        "namespace"
+      ],
+      "x-ms-enum": {
+        "name": "OperatorScopeType",
+        "modelAsString": true
+      }
+    },
+    "OperatorType": {
+      "type": "string",
+      "description": "Type of the operator",
+      "enum": [
+        "Flux"
+      ],
+      "x-ms-enum": {
+        "name": "OperatorType",
+        "modelAsString": true
+      }
+    },
+    "PagedOperationStatusResult": {
+      "type": "object",
+      "description": "The async operations in progress, in the cluster.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The OperationStatusResult items on this page",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PatchExtension": {
+      "type": "object",
+      "description": "The Extension Patch Request object.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PatchExtensionProperties",
+          "description": "Updatable properties of an Extension Patch Request"
+        }
+      }
+    },
+    "PatchExtensionProperties": {
+      "type": "object",
+      "description": "Updatable properties of an Extension Patch Request",
+      "properties": {
+        "autoUpgradeMinorVersion": {
+          "type": "boolean",
+          "description": "Flag to note if this extension participates in auto upgrade of minor version, or not.",
+          "default": true
+        },
+        "releaseTrain": {
+          "type": "string",
+          "description": "ReleaseTrain this extension participates in for auto-upgrade (e.g. Stable, Preview, etc.) - only if autoUpgradeMinorVersion is 'true'.",
+          "default": "Stable"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the extension for this extension, if it is 'pinned' to a specific version. autoUpgradeMinorVersion must be 'false'."
+        },
+        "configurationSettings": {
+          "type": "object",
+          "description": "Configuration settings, as name-value pairs for configuring this extension.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "configurationProtectedSettings": {
+          "type": "object",
+          "description": "Configuration settings that are sensitive, as name-value pairs for configuring this extension.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Plan": {
+      "type": "object",
+      "description": "Plan for the resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "A user defined name of the 3rd Party Artifact that is being procured."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The publisher of the 3rd Party Artifact that is being bought. E.g. NewRelic"
+        },
+        "product": {
+          "type": "string",
+          "description": "The 3rd Party artifact that is being procured. E.g. NewRelic. Product maps to the OfferID specified for the artifact at the time of Data Market onboarding."
+        },
+        "promotionCode": {
+          "type": "string",
+          "description": "A publisher provided promotion code as provisioned in Data Market for the said product/artifact."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the desired product/artifact."
+        }
+      },
+      "required": [
+        "name",
+        "publisher",
+        "product"
+      ]
+    },
+    "PostBuildDefinition": {
+      "type": "object",
+      "description": "The postBuild definitions defining variable substitutions for this Kustomization after kustomize build.",
+      "properties": {
+        "substitute": {
+          "type": "object",
+          "description": "Key/value pairs holding the variables to be substituted in this Kustomization.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "substituteFrom": {
+          "type": "array",
+          "description": "Array of ConfigMaps/Secrets from which the variables are substituted for this Kustomization.",
+          "items": {
+            "$ref": "#/definitions/SubstituteFromDefinition"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Canceled"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Creating"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deleting"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ProvisioningStateType": {
+      "type": "string",
+      "description": "The provisioning state of the resource provider.",
+      "enum": [
+        "Accepted",
+        "Deleting",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningStateType",
+        "modelAsString": true
+      },
+      "readOnly": true
+    },
+    "RepositoryRefDefinition": {
+      "type": "object",
+      "description": "The source reference for the GitRepository object.",
+      "properties": {
+        "branch": {
+          "type": "string",
+          "description": "The git repository branch name to checkout."
+        },
+        "tag": {
+          "type": "string",
+          "description": "The git repository tag name to checkout. This takes precedence over branch."
+        },
+        "semver": {
+          "type": "string",
+          "description": "The semver range used to match against git repository tags. This takes precedence over tag."
+        },
+        "commit": {
+          "type": "string",
+          "description": "The commit SHA to checkout. This value must be combined with the branch name to be valid. This takes precedence over semver."
+        }
+      }
+    },
+    "Resource": {
+      "type": "object",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceProviderOperation": {
+      "type": "object",
+      "description": "Supported operation of this resource provider.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation name, in format of {provider}/{resource}/{operation}"
+        },
+        "display": {
+          "$ref": "#/definitions/ResourceProviderOperationDisplay",
+          "description": "Display metadata associated with the operation."
+        },
+        "isDataAction": {
+          "type": "boolean",
+          "description": "The flag that indicates whether the operation applies to data plane.",
+          "readOnly": true
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin of the operation",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceProviderOperationDisplay": {
+      "type": "object",
+      "description": "Display metadata associated with the operation.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Resource provider: Microsoft KubernetesConfiguration."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Resource on which the operation is performed."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Type of operation: get, read, delete, etc."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of this operation."
+        }
+      }
+    },
+    "Scope": {
+      "type": "object",
+      "description": "Scope of the extension. It can be either Cluster or Namespace; but not both.",
+      "properties": {
+        "cluster": {
+          "$ref": "#/definitions/ScopeCluster",
+          "description": "Specifies that the scope of the extension is Cluster"
+        },
+        "namespace": {
+          "$ref": "#/definitions/ScopeNamespace",
+          "description": "Specifies that the scope of the extension is Namespace"
+        }
+      }
+    },
+    "ScopeCluster": {
+      "type": "object",
+      "description": "Specifies that the scope of the extension is Cluster",
+      "properties": {
+        "releaseNamespace": {
+          "type": "string",
+          "description": "Namespace where the extension Release must be placed, for a Cluster scoped extension.  If this namespace does not exist, it will be created"
+        }
+      }
+    },
+    "ScopeNamespace": {
+      "type": "object",
+      "description": "Specifies that the scope of the extension is Namespace",
+      "properties": {
+        "targetNamespace": {
+          "type": "string",
+          "description": "Namespace where the extension will be created for an Namespace scoped extension.  If this namespace does not exist, it will be created"
+        }
+      }
+    },
+    "ScopeType": {
+      "type": "string",
+      "description": "Scope at which the configuration will be installed.",
+      "enum": [
+        "cluster",
+        "namespace"
+      ],
+      "x-ms-enum": {
+        "name": "ScopeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "cluster",
+            "value": "cluster",
+            "description": "cluster"
+          },
+          {
+            "name": "namespace",
+            "value": "namespace",
+            "description": "namespace"
+          }
+        ]
+      }
+    },
+    "ServicePrincipalDefinition": {
+      "type": "object",
+      "description": "Parameters to authenticate using Service Principal.",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "The client Id for authenticating a Service Principal."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant Id for authenticating a Service Principal"
+        },
+        "clientSecret": {
+          "type": "string",
+          "format": "password",
+          "description": "The client secret for authenticating a Service Principal",
+          "x-ms-secret": true
+        },
+        "clientCertificate": {
+          "type": "string",
+          "format": "password",
+          "description": "Base64-encoded certificate used to authenticate a Service Principal",
+          "x-ms-secret": true
+        },
+        "clientCertificatePassword": {
+          "type": "string",
+          "format": "password",
+          "description": "The password for the certificate used to authenticate a Service Principal",
+          "x-ms-secret": true
+        },
+        "clientCertificateSendChain": {
+          "type": "boolean",
+          "description": "Specifies whether to include x5c header in client claims when acquiring a token to enable subject name / issuer based authentication for the Client Certificate",
+          "default": false
+        }
+      }
+    },
+    "ServicePrincipalPatchDefinition": {
+      "type": "object",
+      "description": "Parameters to authenticate using Service Principal.",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "The client Id for authenticating a Service Principal."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant Id for authenticating a Service Principal"
+        },
+        "clientSecret": {
+          "type": "string",
+          "format": "password",
+          "description": "The client secret for authenticating a Service Principal",
+          "x-ms-secret": true
+        },
+        "clientCertificate": {
+          "type": "string",
+          "format": "password",
+          "description": "Base64-encoded certificate used to authenticate a Service Principal",
+          "x-ms-secret": true
+        },
+        "clientCertificatePassword": {
+          "type": "string",
+          "format": "password",
+          "description": "The password for the certificate used to authenticate a Service Principal",
+          "x-ms-secret": true
+        },
+        "clientCertificateSendChain": {
+          "type": "boolean",
+          "description": "Specifies whether to include x5c header in client claims when acquiring a token to enable subject name / issuer based authentication for the Client Certificate"
+        }
+      }
+    },
+    "SourceControlConfiguration": {
+      "type": "object",
+      "description": "The SourceControl Configuration object returned in Get & Put response.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SourceControlConfigurationProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SourceControlConfigurationListResult": {
+      "type": "object",
+      "description": "The response of a SourceControlConfiguration list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SourceControlConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/SourceControlConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SourceControlConfigurationProperties": {
+      "type": "object",
+      "description": "Properties to create a Source Control Configuration resource",
+      "properties": {
+        "repositoryUrl": {
+          "type": "string",
+          "description": "Url of the SourceControl Repository."
+        },
+        "operatorNamespace": {
+          "type": "string",
+          "description": "The namespace to which this operator is installed to. Maximum of 253 lower case alphanumeric characters, hyphen and period only.",
+          "default": "default"
+        },
+        "operatorInstanceName": {
+          "type": "string",
+          "description": "Instance name of the operator - identifying the specific configuration."
+        },
+        "operatorType": {
+          "$ref": "#/definitions/OperatorType",
+          "description": "Type of the operator"
+        },
+        "operatorParams": {
+          "type": "string",
+          "description": "Any Parameters for the Operator instance in string format."
+        },
+        "configurationProtectedSettings": {
+          "type": "object",
+          "description": "Name-value pairs of protected configuration settings for the configuration",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "operatorScope": {
+          "type": "string",
+          "description": "Scope at which the operator will be installed.",
+          "default": "cluster",
+          "enum": [
+            "cluster",
+            "namespace"
+          ],
+          "x-ms-enum": {
+            "name": "OperatorScopeType",
+            "modelAsString": true
+          }
+        },
+        "repositoryPublicKey": {
+          "type": "string",
+          "description": "Public Key associated with this SourceControl configuration (either generated within the cluster or provided by the user).",
+          "readOnly": true
+        },
+        "sshKnownHostsContents": {
+          "type": "string",
+          "description": "Base64-encoded known_hosts contents containing public SSH keys required to access private Git instances"
+        },
+        "enableHelmOperator": {
+          "type": "boolean",
+          "description": "Option to enable Helm Operator for this git configuration."
+        },
+        "helmOperatorProperties": {
+          "$ref": "#/definitions/HelmOperatorProperties",
+          "description": "Properties for Helm operator."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningStateType",
+          "description": "The provisioning state of the resource provider.",
+          "readOnly": true
+        },
+        "complianceStatus": {
+          "$ref": "#/definitions/ComplianceStatus",
+          "description": "Compliance Status of the Configuration",
+          "readOnly": true
+        }
+      }
+    },
+    "SourceKindType": {
+      "type": "string",
+      "description": "Source Kind to pull the configuration data from.",
+      "enum": [
+        "GitRepository",
+        "Bucket",
+        "AzureBlob"
+      ],
+      "x-ms-enum": {
+        "name": "SourceKindType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GitRepository",
+            "value": "GitRepository",
+            "description": "GitRepository"
+          },
+          {
+            "name": "Bucket",
+            "value": "Bucket",
+            "description": "Bucket"
+          },
+          {
+            "name": "AzureBlob",
+            "value": "AzureBlob",
+            "description": "AzureBlob"
+          }
+        ]
+      }
+    },
+    "SubstituteFromDefinition": {
+      "type": "object",
+      "description": "Array of ConfigMaps/Secrets from which the variables are substituted for this Kustomization.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Define whether it is ConfigMap or Secret that holds the variables to be used in substitution."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the ConfigMap/Secret that holds the variables to be used in substitution."
+        },
+        "optional": {
+          "type": "boolean",
+          "description": "Set to True to proceed without ConfigMap/Secret, if it is not present.",
+          "default": false
+        }
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2024-06-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2024_06_01_preview",
+            "value": "2024-06-01-preview",
+            "description": "The 2024-06-01 API version."
+          }
+        ]
+      }
+    },
+    "protectedSettingValue": {
+      "type": "string",
+      "format": "password",
+      "x-ms-secret": true
+    }
+  },
+  "parameters": {
+    "OperationsParameter.operationId": {
+      "name": "operationId",
+      "in": "path",
+      "description": "operationId value",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
