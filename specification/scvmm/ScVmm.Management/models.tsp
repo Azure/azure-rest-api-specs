@@ -219,7 +219,11 @@ model ExtendedLocation {
   type?: string;
 
   /** The extended location name. */
-  name?: string;
+  name?: ResourceIdentifier<[
+    {
+      type: "Microsoft.ExtendedLocation/customLocations";
+    }
+  ]>;
 }
 
 /** Defines the resource properties. */

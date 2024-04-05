@@ -31,7 +31,7 @@ interface GuestAgents {
   @summary("Implements GuestAgent PUT method.")
   create is ArmResourceCreateOrReplaceAsync<GuestAgent>;
   /** Implements GuestAgent DELETE method. */
-  @summary("Deletes an GuestAgent.")
+  @summary("Deletes a GuestAgent resource.")
   delete is ArmResourceDeleteSync<GuestAgent>;
   /** Returns the list of GuestAgent of the given vm. */
   @summary("Implements GET GuestAgent in a vm.")

@@ -639,7 +639,7 @@
         "tags": [
           "GuestAgents"
         ],
-        "summary": "Deletes an GuestAgent.",
+        "summary": "Deletes a GuestAgent resource.",
         "description": "Implements GuestAgent DELETE method.",
         "parameters": [
           {
@@ -3476,7 +3476,15 @@
         },
         "name": {
           "type": "string",
-          "description": "The extended location name."
+          "format": "arm-id",
+          "description": "The extended location name.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ExtendedLocation/customLocations"
+              }
+            ]
+          }
         }
       }
     },
