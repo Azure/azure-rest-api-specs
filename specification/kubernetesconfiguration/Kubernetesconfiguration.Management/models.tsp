@@ -111,7 +111,6 @@ union FluxComplianceState {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 union OperatorType {
   string,
-
   Flux: "Flux",
 }
 
@@ -121,7 +120,6 @@ union OperatorType {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 union OperatorScopeType {
   string,
-
   cluster: "cluster",
   nameSpace: "namespace",
 }
@@ -132,7 +130,6 @@ union OperatorScopeType {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 union ProvisioningStateType {
   string,
-
   Accepted: "Accepted",
   Deleting: "Deleting",
   Running: "Running",
@@ -147,7 +144,6 @@ union ProvisioningStateType {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 union ComplianceStateType {
   string,
-
   Pending: "Pending",
   Compliant: "Compliant",
   Noncompliant: "Noncompliant",
@@ -274,16 +270,16 @@ model ExtensionProperties {
    */
   scope?: Scope;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   /**
    * Configuration settings, as name-value pairs for configuring this extension.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   configurationSettings?: Record<string>;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   /**
    * Configuration settings that are sensitive, as name-value pairs for configuring this extension.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   configurationProtectedSettings?: Record<string>;
 
   /**
@@ -298,10 +294,10 @@ model ExtensionProperties {
   @visibility("read")
   provisioningState?: ProvisioningState;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   /**
    * Status from this extension.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   statuses?: ExtensionStatus[];
 
   /**
@@ -310,10 +306,10 @@ model ExtensionProperties {
   @visibility("read")
   errorInfo?: ErrorDetail;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   /**
    * Custom Location settings properties.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   @visibility("read")
   customLocationSettings?: Record<string>;
 
@@ -583,22 +579,22 @@ model FluxConfigurationProperties {
    */
   azureBlob?: AzureBlobDefinition;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   /**
    * Array of kustomizations used to reconcile the artifact pulled by the source type on the cluster.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   kustomizations?: Record<KustomizationDefinition>;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   /**
    * Key-value pairs of protected configuration settings for the configuration
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   configurationProtectedSettings?: Record<protectedSettingValue>;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   /**
    * Statuses of the Flux Kubernetes resources created by the fluxConfiguration or created by the managed objects provisioned by the fluxConfiguration.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   @visibility("read")
   statuses?: ObjectStatusDefinition[];
 
@@ -928,10 +924,10 @@ model PostBuildDefinition {
    */
   substitute?: Record<string>;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   /**
    * Array of ConfigMaps/Secrets from which the variables are substituted for this Kustomization.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   substituteFrom?: SubstituteFromDefinition[];
 }
 
@@ -984,10 +980,10 @@ model ObjectStatusDefinition {
    */
   appliedBy?: ObjectReferenceDefinition;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   /**
    * List of Kubernetes object status conditions present on the cluster
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   statusConditions?: ObjectStatusConditionDefinition[];
 
   /**
@@ -1383,10 +1379,10 @@ model SourceControlConfigurationProperties {
    */
   operatorParams?: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   /**
    * Name-value pairs of protected configuration settings for the configuration
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   configurationProtectedSettings?: Record<string>;
 
   /**
