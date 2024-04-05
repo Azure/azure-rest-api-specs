@@ -19,121 +19,127 @@ enum ConnectorProvisioningState {
   ...ResourceProvisioningState,
 
   @doc("Accepted State")
-  Accepted,
+  Accepted: "Accepted",
 
   @doc("Creating State")
-  Creating,
+  Creating: "Creating",
 
   @doc("Updating State")
-  Updating,
+  Updating: "Updating",
 }
 
 @doc("Business State of Connector")
-enum ConnectorState {
+union ConnectorState {
   @doc("Unknown State")
-  Unknown,
+  Unknown: "Unknown",
 
   @doc("Creating State")
-  Creating,
+  Creating: "Creating",
 
   @doc("Initializing State")
-  Initializing,
+  Initializing: "Initializing",
 
   @doc("Running State")
-  Running,
+  Running: "Running",
 
   @doc("Updating State")
-  Updating,
+  Updating: "Updating",
 
   @doc("Degraded State")
-  Degraded,
+  Degraded: "Degraded",
 
   @doc("Stopped State")
-  Stopped,
+  Stopped: "Stopped",
 
   @doc("Paused State")
-  Paused,
+  Paused: "Paused",
 
   @doc("Deleting State")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("Failed State")
-  Failed,
+  Failed: "Failed",
 }
 
 @doc("Enum of Directions of Connector")
-enum Direction {
+union Direction {
   @doc("Unknown direction")
-  Unknown,
+  Unknown: "Unknown",
 
   @doc("Source Connector")
-  Source,
+  Source: "Source",
 
   @doc("Sink Connector")
-  Sink,
+  Sink: "Sink",
+
+  string,
 }
 
 @doc("Enum of the type of Connector")
-enum ConnectorType {
+union ConnectorType {
   @doc("Unknown source connector.")
-  Unknown,
+  Unknown: "Unknown",
 
   @doc("Google pub sub source connector.")
-  GooglePubSubSource,
+  GooglePubSubSource: "GooglePubSubSource",
 
   @doc("Amazon kinesis source connector.")
-  KinesisSource,
+  KinesisSource: "KinesisSource",
 
   @doc("Postgre sql source connector.")
-  PostgreSqlSource,
+  PostgreSqlSource: "PostgreSqlSource",
 
   @doc("Sql server source connector.")
-  SqlServerSource,
+  SqlServerSource: "SqlServerSource",
 
   @doc("Cosmos db source connector.")
-  CosmosDbSource,
+  CosmosDbSource: "CosmosDbSource",
 
   @doc("BitCoin source connector.")
-  BitCoinSource,
+  BitCoinSource: "BitCoinSource",
 
   @doc("Kafka source connector.")
-  KafkaSource,
+  KafkaSource: "KafkaSource",
 
   @doc("confluent source connector.")
-  ConfluentSource,
+  ConfluentSource: "ConfluentSource",
 
   @doc("mysql source connector.")
-  MySqlSource,
+  MySqlSource: "MySqlSource",
 }
 
 @doc("Enum of the type of Converter")
-enum ConverterType {
+union ConverterType {
   @doc("Unknown converter.")
-  Unknown,
+  Unknown: "Unknown",
 
   @doc("This represents a converter for byte arrays format.")
-  ByteArrayConverter,
+  ByteArrayConverter: "ByteArrayConverter",
 
   @doc("This represents a converter for string format.")
-  StringConverter,
+  StringConverter: "StringConverter",
 
   @doc("This represents a converter for json format.")
-  JsonConverter,
+  JsonConverter: "JsonConverter",
 
   @doc("This represents a converter for Avro format.")
-  AvroConverter,
+  AvroConverter: "AvroConverter",
 
   @doc("This represents a converter for csv format.")
-  CsvConverter,
+  CsvConverter: "CsvConverter",
+
+  string,
 }
 
 @doc("Enum of the OffsetPolicy for CosmosDB connector")
-enum OffsetPolicyForCosmosDB {
+union OffsetPolicyForCosmosDB {
   @doc("use the latest (most recent) source offset,")
-  UseLatestSourceOffset,
+  UseLatestSourceOffset: "UseLatestSourceOffset",
 
   @doc("use the earliest recorded offset")
-  UseEarliestRecordedOffset,
+  UseEarliestRecordedOffset: "UseEarliestRecordedOffset",
+
+  string,
 }
 
 @doc("Basic info for EventHub")
@@ -378,18 +384,20 @@ model MySqlSourceConnectorProperties extends ConnectorProperties {
 }
 
 @doc("State of DataPreview")
-enum DataPreviewState {
+union DataPreviewState {
   @doc("InProgress State")
-  InProgress,
+  InProgress: "InProgress",
 
   @doc("Success State")
-  Success,
+  Success: "Success",
 
   @doc("Failed State")
-  Failed,
+  Failed: "Failed",
 
   @doc("CompletedWithoutData State")
-  CompletedWithoutData,
+  CompletedWithoutData: "CompletedWithoutData",
+
+  string,
 }
 
 @doc("Properties of one arm DataPreview resource")
