@@ -27,13 +27,16 @@ You may be also interested in following:
 - [Resource Provider list]
 
 > [!IMPORTANT]
-> The layout described in this article is strictly enforced. There exist some exceptions for historical reasons. These exceptions are not allowed going forward.
+> The structure described in this article is strictly enforced. There exist some exceptions for historical reasons.
+> These exceptions are not allowed going forward.
 
 ## `specification` folder
 
 The `specification` folder is the root folder for all service specifications.
 
 Each child of the `specification` folder corresponds to a `service` specification for given Azure team. Here we denote such folder as `<azureTeam>`.
+In advanced cases for big teams the `<azureTeam>` folder can host multiple services, known as `service group`.
+Read [the relevant section](#advanced-scenario-service-group) for details.
 
 Given `<azureTeam>` has following structure:
 
@@ -41,7 +44,7 @@ Given `<azureTeam>` has following structure:
 - `<azureTeam>/resource-manager`
 - `<azureTeam>/data-plane`
 
-The `<azureTeam>/<typeSpecFolder>` folders contain the TypeSpec specification for the given `service`.
+The `<azureTeam>/<typeSpecFolder>` folders contain the TypeSpec specification for the given `service` or `service group`.
 You can find details on the name and contents of these folders in [TypeSpec directory structure].
 You can learn more about TypeSpec at [aka.ms/azsdk/typespec] and [aka.ms/typespec].
 
