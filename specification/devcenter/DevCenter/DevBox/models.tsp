@@ -606,7 +606,7 @@ model DevBoxActionsDelayMultipleResult
 model DevBoxActionDelayResult {
   @doc("The unique URI of the action.")
   @added(APIVersions.v2024_02_01)
-  uri?: url;
+  uri: url;
 
   @doc("The name of the action.")
   name: string;
