@@ -4,10 +4,10 @@ import "./impact.tsp";
 
 // Then import the resource API definitions
 import "./workloadImpacts.tsp";
-import "./ImpactCategories.tsp";
+//import "./ImpactCategories.tsp";
 import "./commonModels.tsp";
 import "./insights.tsp";
-import "./topologyImpacts.tsp";
+//import "./topologyImpacts.tsp";
 import "./connectors.tsp";
 
 // Common elements:
