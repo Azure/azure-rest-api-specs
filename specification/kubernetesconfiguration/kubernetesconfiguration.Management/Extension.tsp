@@ -25,8 +25,6 @@ model Extension is ProxyResource<ExtensionProperties> {
   name: string;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;
-  @doc("Top level metadata https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources")
-  systemData?: SystemData;
   ...Azure.ResourceManager.ResourcePlan;
 }
 
@@ -34,7 +32,6 @@ model Extension is ProxyResource<ExtensionProperties> {
 @tag("Extensions")
 @armResourceOperations
 interface Extensions {
-
   /**
    * Gets Kubernetes Cluster Extension.
    */
@@ -65,25 +62,26 @@ interface Extensions {
    * Delete a Kubernetes Cluster Extension. This will cause the Agent to Uninstall the extension from the cluster.
    */
   delete is ArmResourceDeleteWithoutOkAsync<
-  Extension,
-  {
-    ...CustomBaseParameters<Extension>,
-       /**
+    Extension,
+    {
+      ...CustomBaseParameters<Extension>;
+
+      /**
        * Delete the extension resource in Azure - not the normal asynchronous delete.
        */
-    @query("forceDelete")
-    forceDelete?: boolean;
-  }
+      @query("forceDelete")
+      forceDelete?: boolean;
+    }
   >;
 
   /**
    * List all Extensions in the cluster.
    */
   list is ArmResourceListByParent<
-  Extension,
-  BaseParameters = CustomBaseParameters<Extension>
+    Extension,
+    BaseParameters = CustomBaseParameters<Extension>
   >;
-  
+
   /**
    * Get Async Operation status
    */

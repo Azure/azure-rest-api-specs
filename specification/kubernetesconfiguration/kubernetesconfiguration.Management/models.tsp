@@ -17,11 +17,22 @@ interface Operations extends Azure.ResourceManager.Operations {}
  * The provisioning state of the resource.
  */
 enum ProvisioningState {
+  @doc("Succeeded")
   Succeeded,
+
+  @doc("Failed")
   Failed,
+
+  @doc("Canceled")
   Canceled,
+
+  @doc("Creating")
   Creating,
+
+  @doc("Updating")
   Updating,
+
+  @doc("Deleting")
   Deleting,
 }
 
@@ -29,8 +40,13 @@ enum ProvisioningState {
  * Level of the status.
  */
 enum LevelType {
+  @doc("Error")
   Error,
+
+  @doc("Warning")
   Warning,
+
+  @doc("Information")
   Information,
 }
 
@@ -38,7 +54,10 @@ enum LevelType {
  * Scope at which the configuration will be installed.
  */
 enum ScopeType {
+  @doc("cluster")
   cluster,
+
+  @doc("namespace")
   `namespace`,
 }
 
@@ -46,8 +65,13 @@ enum ScopeType {
  * Source Kind to pull the configuration data from.
  */
 enum SourceKindType {
+  @doc("GitRepository")
   GitRepository,
+
+  @doc("Bucket")
   Bucket,
+
+  @doc("AzureBlob")
   AzureBlob,
 }
 
@@ -55,16 +79,26 @@ enum SourceKindType {
  * Compliance state of the cluster object.
  */
 enum FluxComplianceState {
+  @doc("Compliant")
   Compliant,
+
+  @doc("Non-Compliant")
   `Non-Compliant`,
+
+  @doc("Pending")
   Pending,
+
+  @doc("Suspended")
   Suspended,
+
+  @doc("Unknown")
   Unknown,
 }
 
 /**
  * Type of the operator
  */
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
 enum OperatorType {
   Flux,
 }
@@ -72,6 +106,7 @@ enum OperatorType {
 /**
  * Scope at which the operator will be installed.
  */
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
 enum OperatorScopeType {
   cluster,
   `namespace`,
@@ -80,18 +115,20 @@ enum OperatorScopeType {
 /**
  * The provisioning state of the resource provider.
  */
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
 enum ProvisioningStateType {
   Accepted,
   Deleting,
   Running,
   Succeeded,
   Failed,
-  Canceled
+  Canceled,
 }
 
 /**
  * The compliance state of the configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/documentation-required"
 enum ComplianceStateType {
   Pending,
   Compliant,
@@ -104,8 +141,13 @@ enum ComplianceStateType {
  * Level of the message.
  */
 enum MessageLevelType {
+  @doc("Message level : Error")
   Error,
+
+  @doc("Message level : Warning")
   Warning,
+
+  @doc("Message level : Information")
   Information,
 }
 
@@ -113,17 +155,25 @@ enum MessageLevelType {
  * Specify whether to validate the Kubernetes objects referenced in the Kustomization before applying them to the cluster.
  */
 enum KustomizationValidationType {
+  @doc("No validation")
   none,
+
+  @doc("client side validation")
   client,
+
+  @doc("server side validation")
   server,
 }
 
 /**
  * The identity type.
  */
-@fixed
+@doc("IdentityType Enum")
 enum AKSIdentityType {
+  @doc("System Assigned Identity")
   SystemAssigned,
+
+  @doc("User Assigned Identity")
   UserAssigned,
 }
 
@@ -141,22 +191,34 @@ model CustomBaseParameters<Resource extends Azure.ResourceManager.Foundations.Ar
   ...ResourceGroupParameter;
 
   @path
+  @doc("providerName")
   providerName: "provider";
 
   @path
+  @doc("clusterRp")
   clusterRp: string;
 
   @path
+  @doc("clusterResourceName")
   clusterResourceName: string;
 
   @path
+  @doc("clusterName")
   clusterName: string;
 }
 
+@doc("Operations path parameter")
 model OperationsParameter {
   @segment("operations")
   @path
+  @doc("operationId value")
   operationId: string;
+
+  /**
+   * Status of installation of this extension.
+   */
+  @visibility("read")
+  provisioningState?: ProvisioningState;
 }
 
 /**
@@ -191,52 +253,52 @@ model ExtensionProperties {
   /**
    * Configuration settings, as name-value pairs for configuring this extension.
    */
-  configurationSettings?: Record<string> | null;
+  configurationSettings?: Record<string>;
 
   /**
    * Configuration settings that are sensitive, as name-value pairs for configuring this extension.
    */
-  configurationProtectedSettings?: Record<string> | null;
+  configurationProtectedSettings?: Record<string>;
 
   /**
    * Currently installed version of the extension.
    */
   @visibility("read")
-  currentVersion?: string | null;
+  currentVersion?: string;
 
   /**
    * Status of installation of this extension.
    */
   @visibility("read")
-  provisioningState?: ProvisioningState | null;
+  provisioningState?: ProvisioningState;
 
   /**
    * Status from this extension.
    */
-  statuses?: ExtensionStatus[] | null;
+  statuses?: ExtensionStatus[];
 
   /**
    * Error information from the Agent - e.g. errors during installation.
    */
   @visibility("read")
-  errorInfo?: ErrorDetail | null;
+  errorInfo?: ErrorDetail;
 
   /**
    * Custom Location settings properties.
    */
   @visibility("read")
-  customLocationSettings?: Record<string> | null;
+  customLocationSettings?: Record<string>;
 
   /**
    * Uri of the Helm package
    */
   @visibility("read")
-  packageUri?: string | null;
+  packageUri?: string;
 
   /**
    * Identity of the Extension resource in an AKS cluster
    */
-  aksAssignedIdentity?: ExtensionPropertiesAksAssignedIdentity | null;
+  aksAssignedIdentity?: ExtensionPropertiesAksAssignedIdentity;
 
   /**
    * Flag to note if this extension is a system extension
@@ -247,7 +309,7 @@ model ExtensionProperties {
   /**
    * autoUpgrade value for autoUpgradeV2
    */
-  autoUpgradeChannel? :string;
+  autoUpgradeChannel?: string;
 }
 
 /**
@@ -599,7 +661,7 @@ model GitRepositoryDefinition {
   /**
    * Base64-encoded HTTPS certificate authority contents used to access git private git repositories over HTTPS
    */
-  httpsCACert?: string;
+  httpsCaCert?: string;
 
   /**
    * Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.
@@ -1063,7 +1125,7 @@ model GitRepositoryPatchDefinition {
   /**
    * Base64-encoded HTTPS certificate authority contents used to access git private git repositories over HTTPS
    */
-  httpsCACert?: string;
+  httpsCaCert?: string;
 
   /**
    * Name of a local secret on the Kubernetes cluster to use as the authentication secret rather than the managed or user-provided configuration secrets.

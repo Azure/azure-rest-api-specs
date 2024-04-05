@@ -24,10 +24,10 @@ model FluxConfiguration is ProxyResource<FluxConfigurationProperties> {
   @visibility("read")
   name: string;
 
-  @doc("Top level metadata https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources")
-  @segment("fluxConfigurations")
-  @visibility("read")
-  systemData? : SystemData;
+  // @doc("Top level metadata https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources")
+  // @segment("fluxConfigurations")
+  // @visibility("read")
+  // systemData? : SystemData;
 }
 
 @armResourceOperations
@@ -81,15 +81,15 @@ interface FluxConfigurations {
     FluxConfiguration,
     BaseParameters = CustomBaseParameters<FluxConfiguration>
   >;
-     
+
   /**
    * Get Async Operation status
    */
   operationStatus is ArmResourceRead<
-  FluxConfiguration,
-  BaseParameters = CustomBaseParameters<FluxConfiguration>,
-  Parameters = OperationsParameter,
-  Response = ArmOperationStatus
+    FluxConfiguration,
+    BaseParameters = CustomBaseParameters<FluxConfiguration>,
+    Parameters = OperationsParameter,
+    Response = ArmOperationStatus
   >;
 }
 

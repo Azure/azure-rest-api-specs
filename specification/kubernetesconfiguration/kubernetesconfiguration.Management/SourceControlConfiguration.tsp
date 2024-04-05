@@ -14,7 +14,6 @@ namespace Microsoft.KubernetesConfiguration;
 /**
  * The SourceControl Configuration object returned in Get & Put response.
  */
-
 model SourceControlConfiguration
   is ProxyResource<SourceControlConfigurationProperties> {
   /**
@@ -25,11 +24,6 @@ model SourceControlConfiguration
   @segment("sourceControlConfigurations")
   @visibility("read")
   name: string;
-  
-  @doc("Top level metadata https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources")
-  @segment("fluxConfigurations")
-  @visibility("read")
-  systemData? : SystemData; 
 }
 
 @armResourceOperations

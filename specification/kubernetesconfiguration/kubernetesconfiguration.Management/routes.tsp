@@ -9,34 +9,24 @@ using Azure.ResourceManager;
 
 namespace Microsoft.KubernetesConfiguration;
 
+model Operation is ProxyResource<OperationsParameter> {
+  /**
+   * Name of the Extension.
+   */
+  @path
+  @key("operationName")
+  @segment("operations")
+  @visibility("read")
+  name: string;
+}
+
 @armResourceOperations
 interface OperationStatus {
   /**
-   * List Async Operations, currently in progress, in a cluster
+   * List all operations in the cluster.
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/operations")
-  @get
-  list(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /**
-     * The Kubernetes cluster RP - i.e. Microsoft.ContainerService, Microsoft.Kubernetes, Microsoft.HybridContainerService.
-     */
-    @path
-    clusterRp: string,
-
-    /**
-     * The Kubernetes cluster resource name - i.e. managedClusters, connectedClusters, provisionedClusters.
-     */
-    @path
-    clusterResourceName: string,
-
-    /**
-     * The name of the kubernetes cluster.
-     */
-    @path
-    clusterName: string,
-  ): ArmResponse<OperationStatusList> | ErrorResponse;
+  list is ArmResourceListByParent<
+    Operation,
+    BaseParameters = CustomBaseParameters<Operation>
+  >;
 }

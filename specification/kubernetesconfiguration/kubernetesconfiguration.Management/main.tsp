@@ -25,7 +25,6 @@ using TypeSpec.Versioning;
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.KubernetesConfiguration;
 
-
 /**
  * The available API versions.
  */
