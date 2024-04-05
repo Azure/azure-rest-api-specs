@@ -6761,12 +6761,48 @@
           "type": "string",
           "x-nullable": true,
           "description": "(Optional for token authentication). The region the AML service is deployed in."
+        },
+        "modelName": {
+          "$ref": "#/definitions/AIStudioModelCatalogName",
+          "description": "The name of the embedding model from the Azure AI Studio Catalog that is deployed at the provided endpoint."
         }
       },
       "required": [
         "uri"
       ],
       "description": "Specifies the properties for connecting to an AML vectorizer."
+    },
+    "AIStudioModelCatalogName": {
+      "type": "string",
+      "enum": [
+        "OpenAI-CLIP-Image-Text-Embeddings-vit-base-patch32",
+        "OpenAI-CLIP-Image-Text-Embeddings-ViT-Large-Patch14-336",
+        "Facebook-DinoV2-Image-Embeddings-ViT-Base",
+        "Facebook-DinoV2-Image-Embeddings-ViT-Giant"
+      ],
+      "x-ms-enum": {
+        "name": "AIStudioModelCatalogName",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "OpenAI-CLIP-Image-Text-Embeddings-vit-base-patch32",
+            "name": "OpenAI_CLIP_Image_Text_Embeddings_vit_base_patch32"
+          },
+          {
+            "value": "OpenAI-CLIP-Image-Text-Embeddings-ViT-Large-Patch14-336",
+            "name": "OpenAI_CLIP_Image_Text_Embeddings_ViT_Large_Patch14_336"
+          },
+          {
+            "value": "Facebook-DinoV2-Image-Embeddings-ViT-Base",
+            "name": "Facebook_DinoV2_Image_Embeddings_ViT_Base"
+          },
+          {
+            "value": "Facebook-DinoV2-Image-Embeddings-ViT-Giant",
+            "name": "Facebook_DinoV2_Image_Embeddings_ViT_Giant"
+          }
+        ]
+      },
+      "description": "The name of the embedding model from the Azure AI Studio Catalog that will be called."
     },
     "VectorSearchVectorizerKind": {
       "type": "string",
