@@ -281,6 +281,7 @@ model EnvironmentAction {
   name: string;
 
   @doc("Uri of the action resource.")
+  @visibility("read")
   uri?: url;
 
   @doc("The action that will be taken.")
