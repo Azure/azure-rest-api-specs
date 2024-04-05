@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2024-04-15-preview",
+    "api-version": "2023-07-01-preview",
     "billingAccountId": "12",
     "departmentId": "1234",
     "scope": "providers/Microsoft.Billing/billingAccounts/12/departments/1234",
@@ -37,16 +37,14 @@
             "dataSet": {
               "granularity": "Daily",
               "configuration": {
-                "columns": [
-                  "Date",
-                  "MeterId",
-                  "ResourceId",
-                  "ResourceLocation",
-                  "Quantity"
-                ]
+                "datasetVersion": "2023-05-01"
               }
             }
-          }
+          },
+          "partitionData": true,
+          "dataOverwriteBehavior": "OverwritePreviousReport",
+          "compressionMode": "gzip",
+          "exportDescription": "This is a test export."
         }
       }
     }

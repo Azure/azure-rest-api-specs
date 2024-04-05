@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2024-04-15-preview",
+    "api-version": "2023-07-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "scope": "subscriptions/00000000-0000-0000-0000-000000000000",
     "exportName": "TestExport"
@@ -36,16 +36,14 @@
             "dataSet": {
               "granularity": "Daily",
               "configuration": {
-                "columns": [
-                  "Date",
-                  "MeterId",
-                  "ResourceId",
-                  "ResourceLocation",
-                  "Quantity"
-                ]
+                "datasetVersion": "2023-05-01"
               }
             }
-          }
+          },
+          "partitionData": true,
+          "dataOverwriteBehavior": "OverwritePreviousReport",
+          "compressionMode": "gzip",
+          "exportDescription": "This is a test export."
         }
       }
     }

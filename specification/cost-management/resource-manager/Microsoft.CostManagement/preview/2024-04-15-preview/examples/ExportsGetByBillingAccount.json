@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2024-04-15-preview",
+    "api-version": "2023-07-01-preview",
     "billingAccountId": "123456",
     "scope": "providers/Microsoft.Billing/billingAccounts/123456"
   },
@@ -32,21 +32,19 @@
                 "timeframe": "Custom",
                 "timePeriod": {
                   "from": "2020-06-01T00:00:00Z",
-                  "to": "2020-10-31T00:00:00Z"
+                  "to": "2020-06-30T00:00:00Z"
                 },
                 "dataSet": {
                   "granularity": "Daily",
                   "configuration": {
-                    "columns": [
-                      "Date",
-                      "MeterId",
-                      "ResourceId",
-                      "ResourceLocation",
-                      "Quantity"
-                    ]
+                    "datasetVersion": "2023-05-01"
                   }
                 }
-              }
+              },
+              "partitionData": true,
+              "dataOverwriteBehavior": "OverwritePreviousReport",
+              "compressionMode": "gzip",
+              "exportDescription": "This is a test export."
             }
           },
           {
@@ -78,20 +76,22 @@
               },
               "definition": {
                 "type": "ActualCost",
-                "timeframe": "WeekToDate",
+                "timeframe": "Custom",
+                "timePeriod": {
+                  "from": "2020-06-01T00:00:00Z",
+                  "to": "2020-06-30T00:00:00Z"
+                },
                 "dataSet": {
                   "granularity": "Daily",
                   "configuration": {
-                    "columns": [
-                      "Date",
-                      "MeterId",
-                      "ResourceId",
-                      "ResourceLocation",
-                      "Quantity"
-                    ]
+                    "datasetVersion": "2023-05-01"
                   }
                 }
-              }
+              },
+              "partitionData": true,
+              "dataOverwriteBehavior": "OverwritePreviousReport",
+              "compressionMode": "gzip",
+              "exportDescription": "This is a test export."
             }
           }
         ]
