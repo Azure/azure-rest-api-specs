@@ -1,63 +1,63 @@
-import "@typespec/rest";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./deviceGroup.tsp";
 
-using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureSphere;
-
-// Deployment
-@doc("An deployment resource belonging to a device group resource.")
+/**
+ * An deployment resource belonging to a device group resource.
+ */
 @parentResource(DeviceGroup)
 model Deployment is ProxyResource<DeploymentProperties> {
-  @doc("Deployment name. Use .default for deployment creation and to get the current deployment for the associated device group.")
-  @key("deploymentName")
+  /**
+   * Deployment name. Use .default for deployment creation and to get the current deployment for the associated device group.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @path
+  @key("deploymentName")
   @segment("deployments")
+  @visibility("read")
   name: string;
 }
 
-interface ProxyResourceOperationsDeployments<
-  TResource extends ArmResource,
-  TListParameters extends {} = {}
-> {
-  @doc("Get a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
-  get is ArmResourceRead<Deployment>;
-  @doc("List Deployment resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
-  list is ArmResourceListByParent<
-    TResource,
-    ListQueryParameters & BaseParameters<TResource>
-  >;
-  @doc("Create a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<Deployment>;
-  @doc("Delete a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
-  delete is ArmResourceDeleteAsync<Deployment>;
-}
-
 @armResourceOperations
-interface Deployments extends ProxyResourceOperationsDeployments<Deployment> {}
+interface Deployments {
+  /**
+   * Get a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
+   */
+  get is ArmResourceRead<Deployment>;
 
-@doc("The properties of deployment")
-model DeploymentProperties {
-  @visibility("create", "read")
-  @doc("Deployment ID")
-  deploymentId?: string;
+  /**
+   * Create a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<Deployment>;
 
-  @doc("Images deployed")
-  @visibility("create", "read")
-  deployedImages?: Image[];
+  /**
+   * Delete a Deployment. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
+   */
+  #suppress "deprecated" "For backward compatible"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatible"
+  delete is ArmResourceDeleteAsync<Deployment>;
 
-  @doc("Deployment date UTC")
-  @visibility("read")
-  deploymentDateUtc?: utcDateTime;
-
-  @visibility("read")
-  @doc("The status of the last operation.")
-  provisioningState?: ProvisioningState;
+  /**
+   * List Deployment resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.
+   */
+  listByDeviceGroup is ArmResourceListByParent<
+    Deployment,
+    {
+      ...BaseParameters<Deployment>;
+      ...CustomFilterQueryParameter;
+      ...CustomTopQueryParameter;
+      ...CustomSkipQueryParameter;
+      ...CustomMaxPageSizeQueryParameter;
+    }
+  >;
 }

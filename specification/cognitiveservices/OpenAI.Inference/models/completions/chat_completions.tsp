@@ -1,6 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
 
 import "./azure_chat_extensions.tsp";
 import "./azure_content_filtering.tsp";
@@ -12,6 +13,7 @@ import "./tools.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 namespace Azure.OpenAI;
 
@@ -96,7 +98,7 @@ model ChatCompletionsOptions {
     interaction of these two settings is difficult to predict.
     """)
   @encodedName("application/json", "top_p")
-  @projectedName("csharp", "NucleusSamplingFactor")
+  @clientName("NucleusSamplingFactor", "csharp")
   topP?: float32;
 
   @doc("""
@@ -107,7 +109,7 @@ model ChatCompletionsOptions {
     score varies by model.
     """)
   @encodedName("application/json", "logit_bias")
-  @projectedName("csharp", "TokenSelectionBiases")
+  @clientName("TokenSelectionBiases", "csharp")
   logitBias?: Record<int32>;
 
   @doc("""
@@ -122,13 +124,13 @@ model ChatCompletionsOptions {
     Because this setting can generate many completions, it may quickly consume your token quota.
     Use carefully and ensure reasonable settings for max_tokens and stop.
     """)
-  @projectedName("csharp", "ChoiceCount")
+  @clientName("ChoiceCount", "csharp")
   n?: int32;
 
   @doc("""
     A collection of textual sequences that will end completions generation.
     """)
-  @projectedName("csharp", "StopSequences")
+  @clientName("StopSequences", "csharp")
   stop?: string[];
 
   @doc("""
@@ -152,7 +154,7 @@ model ChatCompletionsOptions {
   @doc("""
     A value indicating whether chat completions should be streamed for this request.
     """)
-  @projectedName("csharp", "InternalShouldStreamResponse")
+  @clientName("InternalShouldStreamResponse", "csharp")
   stream?: boolean;
 
   @doc("""
@@ -160,7 +162,7 @@ model ChatCompletionsOptions {
     Not applicable to Azure OpenAI, where deployment information should be included in the Azure
     resource URI that's connected to.
     """)
-  @projectedName("csharp", "DeploymentName")
+  @clientName("DeploymentName", "csharp")
   `model`?: string;
 
   @doc("""
@@ -174,7 +176,7 @@ model ChatCompletionsOptions {
   //        service API version will absorb these proposed changes and allow us to retire the extra complexity.
   @added(ServiceApiVersions.v2024_02_15_Preview)
   @encodedName("application/json", "data_sources")
-  @projectedName("csharp", "InternalAzureExtensionsDataSources")
+  @clientName("InternalAzureExtensionsDataSources", "csharp")
   dataSources?: AzureChatExtensionConfiguration[];
 
   @added(ServiceApiVersions.v2024_02_15_Preview)
@@ -246,6 +248,7 @@ model ChatChoice {
   finishReason: CompletionsFinishReason | null;
 
   // Note: this property is currently speculative via observation and not yet documented anywhere.
+
   @doc("""
   The reason the model stopped generating tokens, together with any applicable details.
   This structured representation replaces 'finish_reason' for some models.
@@ -255,7 +258,7 @@ model ChatChoice {
   finishDetails?: ChatFinishDetails;
 
   @doc("The delta message content for a streaming response.")
-  @projectedName("csharp", "InternalStreamingDeltaMessage")
+  @clientName("InternalStreamingDeltaMessage", "csharp")
   delta?: ChatResponseMessage;
 
   @doc("""
@@ -290,7 +293,7 @@ model ChatCompletions {
     The first timestamp associated with generation activity for this completions response,
     represented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970.
     """)
-  @projectedName("java", "createdAt")
+  @clientName("createdAt", "java")
   @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   created: utcDateTime;
 
@@ -300,6 +303,9 @@ model ChatCompletions {
     Token limits and other settings may limit the number of choices generated.
     """)
   choices: ChatChoice[];
+
+  @doc("The model name used for this completions request.")
+  `model`?: string;
 
   @doc("""
   Content filtering results for zero or more prompts in the request. In a streaming request,

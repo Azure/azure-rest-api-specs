@@ -53,6 +53,47 @@ interface DocumentIntelligenceAdministrationClient {
   deleteClassifier is DocumentClassifiers.deleteClassifier;
 }
 
+@@clientName(AnalyzeDocumentRequest, "AnalyzeDocumentContent", "csharp");
+@@clientName(AuthorizeCopyRequest, "AuthorizeCopyContent", "csharp");
+@@clientName(BuildDocumentClassifierRequest,
+  "BuildDocumentClassifierContent",
+  "csharp"
+);
+@@clientName(BuildDocumentModelRequest, "BuildDocumentModelContent", "csharp");
+@@clientName(ClassifyDocumentRequest, "ClassifyDocumentContent", "csharp");
+@@clientName(ComposeDocumentModelRequest,
+  "ComposeDocumentModelContent",
+  "csharp"
+);
+@@clientName(DocumentBarcodeKind.EAN13, "Ean13", "csharp");
+@@clientName(DocumentBarcodeKind.EAN8, "Ean8", "csharp");
+@@clientName(DocumentBarcodeKind.ITF, "Itf", "csharp");
+@@clientName(DocumentBarcodeKind.MicroQRCode, "MicroQrCode", "csharp");
+@@clientName(DocumentBarcodeKind.PDF417, "Pdf417", "csharp");
+@@clientName(DocumentBarcodeKind.QRCode, "QrCode", "csharp");
+@@clientName(DocumentBarcodeKind.UPCA, "Upca", "csharp");
+@@clientName(DocumentBarcodeKind.UPCE, "Upce", "csharp");
+@@clientName(DocumentClassifierDetails.createdDateTime, "CreatedOn", "csharp");
+@@clientName(DocumentClassifierDetails.expirationDateTime,
+  "ExpiresOn",
+  "csharp"
+);
+@@clientName(DocumentField.valueArray, "ValueList", "csharp");
+@@clientName(DocumentField.valueInteger, "ValueLong", "csharp");
+@@clientName(DocumentField.valueNumber, "ValueDouble", "csharp");
+@@clientName(DocumentField.valueObject, "ValueDictionary", "csharp");
+@@clientName(DocumentFieldType.array, "List", "csharp");
+@@clientName(DocumentFieldType.integer, "Long", "csharp");
+@@clientName(DocumentFieldType.number, "Double", "csharp");
+@@clientName(DocumentFieldType.object, "Dictionary", "csharp");
+@@clientName(DocumentModelDetails.createdDateTime, "CreatedOn", "csharp");
+@@clientName(DocumentModelDetails.expirationDateTime, "ExpiresOn", "csharp");
+@@clientName(FontStyle, "DocumentFontStyle", "csharp");
+@@clientName(FontWeight, "DocumentFontWeight", "csharp");
+@@clientName(OperationDetails.createdDateTime, "CreatedOn", "csharp");
+@@clientName(OperationDetails.lastUpdatedDateTime, "LastUpdatedOn", "csharp");
+@@clientName(QuotaDetails.quotaResetDateTime, "QuotaResetsOn", "csharp");
+
 @@usage(DocumentAnalysisFeature, Usage.output, "csharp");
 @@usage(LengthUnit, Usage.output, "csharp");
 @@usage(DocumentSelectionMarkState, Usage.output, "csharp");
@@ -95,5 +136,5 @@ interface DocumentIntelligenceAdministrationClient {
 @@usage(ComponentDocumentModelDetails, Usage.input, "csharp");
 @@usage(CopyAuthorization, Usage.input | Usage.output, "csharp");
 
-@@projectedName(AnalyzeDocumentRequest.base64Source, "python", "bytesSource");
-@@projectedName(ClassifyDocumentRequest.base64Source, "python", "bytesSource");
+@@clientName(AnalyzeDocumentRequest.base64Source, "bytesSource", "python");
+@@clientName(ClassifyDocumentRequest.base64Source, "bytesSource", "python");
