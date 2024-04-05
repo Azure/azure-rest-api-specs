@@ -32,6 +32,7 @@ azure-validator: false
 
 ---
 
+
 ### Tag: package-preview-2024-04
 
 These settings apply only when `--tag=package-preview-2024-04` is specified on the command line.
@@ -50,12 +51,11 @@ input-file:
   - Microsoft.CostManagement/preview/2024-04-15-preview/scheduledActions.json
   - Microsoft.CostManagement/preview/2024-04-15-preview/settings.json
 ```
-
 ### Tag: package-2023-11
 
 These settings apply only when `--tag=package-2023-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-11'
+``` yaml $(tag) == 'package-2023-11'
 input-file:
   - Microsoft.CostManagement/stable/2023-11-01/common-types.json
   - Microsoft.CostManagement/stable/2023-11-01/costallocation.json
@@ -74,7 +74,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-09'
+``` yaml $(tag) == 'package-2023-09'
 input-file:
   - Microsoft.CostManagement/stable/2023-09-01/common-types.json
   - Microsoft.CostManagement/stable/2023-09-01/costallocation.json
@@ -93,7 +93,7 @@ input-file:
 
 These settings apply only when `--tag=package-2023-08` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-08'
+``` yaml $(tag) == 'package-2023-08'
 input-file:
   - Microsoft.CostManagement/stable/2023-08-01/common-types.json
   - Microsoft.CostManagement/stable/2023-08-01/costmanagement.benefits.json
