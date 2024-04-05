@@ -219,6 +219,9 @@ model AssetPageResult {
 @discriminator("kind")
 @resource("assets")
 model AssetResource {
+  /** Discriminator property for AssetResource. */
+  kind: string;
+
   @doc("The system generated unique id for the resource.")
   @key("assetId")
   @visibility("read")
@@ -476,6 +479,9 @@ model DataConnectionProperties {}
 @discriminator("kind")
 @clientName("DataConnectionPayload", "csharp")
 model DataConnectionData {
+  /** Discriminator property for DataConnectionData. */
+  kind: string;
+
   @doc("The name of data connection")
   name?: string;
 
@@ -493,6 +499,9 @@ model DataConnectionData {
 @discriminator("kind")
 @resource("dataConnections")
 model DataConnection {
+  /** Discriminator property for DataConnection. */
+  kind: string;
+
   @doc("The system generated unique id for the resource.")
   id?: string;
 
