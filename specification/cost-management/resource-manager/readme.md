@@ -26,7 +26,7 @@ These are the global settings for the Cost Management API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-08
+tag: package-preview-2024-04
 azure-validator: false
 ```
 
@@ -39,6 +39,7 @@ These settings apply only when `--tag=package-preview-2024-04` is specified on t
 ```yaml $(tag) == 'package-preview-2024-04'
 input-file:
   - Microsoft.CostManagement/preview/2024-04-15-preview/common-types.json
+  - Microsoft.CostManagement/preview/2024-04-15-preview/costallocation.json
   - Microsoft.CostManagement/preview/2024-04-15-preview/costmanagement.benefits.json
   - Microsoft.CostManagement/preview/2024-04-15-preview/costmanagement.budgets.json
   - Microsoft.CostManagement/preview/2024-04-15-preview/costmanagement.exports.json
@@ -47,6 +48,45 @@ input-file:
   - Microsoft.CostManagement/preview/2024-04-15-preview/costmanagement.json
   - Microsoft.CostManagement/preview/2024-04-15-preview/costmanagement.pricesheets.json
   - Microsoft.CostManagement/preview/2024-04-15-preview/scheduledActions.json
+  - Microsoft.CostManagement/preview/2024-04-15-preview/settings.json
+```
+
+### Tag: package-2023-11
+
+These settings apply only when `--tag=package-2023-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-11'
+input-file:
+  - Microsoft.CostManagement/stable/2023-11-01/common-types.json
+  - Microsoft.CostManagement/stable/2023-11-01/costallocation.json
+  - Microsoft.CostManagement/stable/2023-11-01/costmanagement.benefits.json
+  - Microsoft.CostManagement/stable/2023-11-01/costmanagement.budgets.json
+  - Microsoft.CostManagement/stable/2023-11-01/costmanagement.exports.json
+  - Microsoft.CostManagement/stable/2023-11-01/costmanagement.generatecostdetailsreport.json
+  - Microsoft.CostManagement/stable/2023-11-01/costmanagement.generatedetailedcostreport.json
+  - Microsoft.CostManagement/stable/2023-11-01/costmanagement.json
+  - Microsoft.CostManagement/stable/2023-11-01/costmanagement.pricesheets.json
+  - Microsoft.CostManagement/stable/2023-11-01/scheduledActions.json
+  - Microsoft.CostManagement/stable/2023-11-01/settings.json
+```
+
+### Tag: package-2023-09
+
+These settings apply only when `--tag=package-2023-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-09'
+input-file:
+  - Microsoft.CostManagement/stable/2023-09-01/common-types.json
+  - Microsoft.CostManagement/stable/2023-09-01/costallocation.json
+  - Microsoft.CostManagement/stable/2023-09-01/costmanagement.benefits.json
+  - Microsoft.CostManagement/stable/2023-09-01/costmanagement.budgets.json
+  - Microsoft.CostManagement/stable/2023-09-01/costmanagement.exports.json
+  - Microsoft.CostManagement/stable/2023-09-01/costmanagement.generatecostdetailsreport.json
+  - Microsoft.CostManagement/stable/2023-09-01/costmanagement.generatedetailedcostreport.json
+  - Microsoft.CostManagement/stable/2023-09-01/costmanagement.json
+  - Microsoft.CostManagement/stable/2023-09-01/costmanagement.pricesheets.json
+  - Microsoft.CostManagement/stable/2023-09-01/scheduledActions.json
+  - Microsoft.CostManagement/stable/2023-09-01/settings.json
 ```
 
 ### Tag: package-2023-08
@@ -64,6 +104,8 @@ input-file:
   - Microsoft.CostManagement/stable/2023-08-01/costmanagement.json
   - Microsoft.CostManagement/stable/2023-08-01/costmanagement.pricesheets.json
   - Microsoft.CostManagement/stable/2023-08-01/scheduledActions.json
+  - Microsoft.CostManagement/stable/2023-08-01/costallocation.json
+  - Microsoft.CostManagement/stable/2023-08-01/settings.json
 ```
 
 ### Tag: package-2023-03
@@ -423,6 +465,42 @@ directive:
   - suppress: GetCollectionResponseSchema
     from: common-types.json
     reason: 'Operations does not contain a path for individual GET'
+  - suppress: TopLevelResourcesListBySubscription
+    from: costallocation.json
+    reason: 'List by subscription is not supported in cost allocation by desgin'
+  - suppress: PathForResourceAction
+    from: costallocation.json
+    reason: 'This is not a valid scenario for the checkNameAvailability API as the name itself represents an action.'
+  - suppress: PathForPutOperation
+    from: costallocation.json
+    reason: 'Subscripiton and ResourceGroup scope is not supported in cost allocation by desgin'
+  - suppress: RequiredReadOnlySystemData
+    from: costallocation.json
+    reason: 'cost allocation does not return system data and will consider adding it in the future or upcoming api version'
+  - suppress: EnumInsteadOfBoolean
+    from: costallocation.json
+    reason: 'Keeping it as boolean property as per the design'
+  - suppress: NoDuplicatePathsForScopeParameter
+    from: settings.json
+    reason: 'Settings does not use scope for List API'
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: settings.json
+    reason: 'Settings List designed to deliver very limited records'
+  - suppress: PageableOperation
+    from: settings.json
+    reason: 'Settings List designed to deliver very limited records'
+  - suppress: TopLevelResourcesListBySubscription
+    from: settings.json
+    reason: 'List by subscription is not supported in settings by desgin'
+  - suppress: EnumInsteadOfBoolean
+    from: settings.json
+    reason: 'Keeping it as boolean property as per the design'
+  - suppress: ParameterNotUsingCommonTypes
+    from: settings.json
+    reason: 'Settings does not support all the scopes to use it from common types, hence we have defined exclusively with custom description.'
+  - suppress: RequiredReadOnlySystemData
+    from: settings.json
+    reason: 'Settings does not return system data and will consider adding it in the future or upcoming api version'
         
 ```
 
@@ -466,7 +544,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
