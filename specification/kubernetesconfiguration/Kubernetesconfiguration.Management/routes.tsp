@@ -17,6 +17,7 @@ model Operation is ProxyResource<OperationsParameter> {
   @key("operationName")
   @segment("operations")
   @visibility("read")
+  @pattern("/^[a-zA-Z0-9-]{3,24}$/")
   name: string;
 }
 

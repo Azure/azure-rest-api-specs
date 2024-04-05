@@ -22,12 +22,8 @@ model FluxConfiguration is ProxyResource<FluxConfigurationProperties> {
   @key("fluxConfigurationName")
   @segment("fluxConfigurations")
   @visibility("read")
+  @pattern("/^[a-zA-Z0-9-]{3,24}$/")
   name: string;
-
-  // @doc("Top level metadata https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources")
-  // @segment("fluxConfigurations")
-  // @visibility("read")
-  // systemData? : SystemData;
 }
 
 @armResourceOperations

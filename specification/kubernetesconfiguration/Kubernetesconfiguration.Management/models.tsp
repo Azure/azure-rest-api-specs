@@ -16,165 +16,189 @@ interface Operations extends Azure.ResourceManager.Operations {}
 /**
  * The provisioning state of the resource.
  */
-enum ProvisioningState {
+union ProvisioningState {
+  string,
+
   @doc("Succeeded")
-  Succeeded,
+  Succeeded: "Succeeded",
 
   @doc("Failed")
-  Failed,
+  Failed: "Failed",
 
   @doc("Canceled")
-  Canceled,
+  Canceled: "Canceled",
 
   @doc("Creating")
-  Creating,
+  Creating: "Creating",
 
   @doc("Updating")
-  Updating,
+  Updating: "Updating",
 
   @doc("Deleting")
-  Deleting,
+  Deleting: "Deleting",
 }
 
 /**
  * Level of the status.
  */
-enum LevelType {
+union LevelType {
+  string,
+
   @doc("Error")
-  Error,
+  Error: "Error",
 
   @doc("Warning")
-  Warning,
+  Warning: "Warning",
 
   @doc("Information")
-  Information,
+  Information: "Information",
 }
 
 /**
  * Scope at which the configuration will be installed.
  */
-enum ScopeType {
+union ScopeType {
+  string,
+
   @doc("cluster")
-  cluster,
+  cluster: "cluster",
 
   @doc("namespace")
-  `namespace`,
+  nameSpace: "namespace",
 }
 
 /**
  * Source Kind to pull the configuration data from.
  */
-enum SourceKindType {
+union SourceKindType {
+  string,
+
   @doc("GitRepository")
-  GitRepository,
+  GitRepository: "GitRepository",
 
   @doc("Bucket")
-  Bucket,
+  Bucket: "Bucket",
 
   @doc("AzureBlob")
-  AzureBlob,
+  AzureBlob: "AzureBlob",
 }
 
 /**
  * Compliance state of the cluster object.
  */
-enum FluxComplianceState {
+union FluxComplianceState {
+  string,
+
   @doc("Compliant")
-  Compliant,
+  Compliant: "Compliant",
 
   @doc("Non-Compliant")
-  `Non-Compliant`,
+  NonCompliant: "Non-Compliant",
 
   @doc("Pending")
-  Pending,
+  Pending: "Pending",
 
   @doc("Suspended")
-  Suspended,
+  Suspended: "Suspended",
 
   @doc("Unknown")
-  Unknown,
+  Unknown: "Unknown",
 }
 
 /**
  * Type of the operator
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-enum OperatorType {
-  Flux,
+union OperatorType {
+  string,
+
+  Flux: "Flux",
 }
 
 /**
  * Scope at which the operator will be installed.
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-enum OperatorScopeType {
-  cluster,
-  `namespace`,
+union OperatorScopeType {
+  string,
+
+  cluster: "cluster",
+  nameSpace: "namespace",
 }
 
 /**
  * The provisioning state of the resource provider.
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-enum ProvisioningStateType {
-  Accepted,
-  Deleting,
-  Running,
-  Succeeded,
-  Failed,
-  Canceled,
+union ProvisioningStateType {
+  string,
+
+  Accepted: "Accepted",
+  Deleting: "Deleting",
+  Running: "Running",
+  Succeeded: "Succeeded",
+  Failed: "Failed",
+  Canceled: "Canceled",
 }
 
 /**
  * The compliance state of the configuration.
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-enum ComplianceStateType {
-  Pending,
-  Compliant,
-  Noncompliant,
-  Installed,
-  Failed,
+union ComplianceStateType {
+  string,
+
+  Pending: "Pending",
+  Compliant: "Compliant",
+  Noncompliant: "Noncompliant",
+  Installed: "Installed",
+  Failed: "Failed",
 }
 
 /**
  * Level of the message.
  */
-enum MessageLevelType {
+union MessageLevelType {
+  string,
+
   @doc("Message level : Error")
-  Error,
+  Error: "Error",
 
   @doc("Message level : Warning")
-  Warning,
+  Warning: "Warning",
 
   @doc("Message level : Information")
-  Information,
+  Information: "Information",
 }
 
 /**
  * Specify whether to validate the Kubernetes objects referenced in the Kustomization before applying them to the cluster.
  */
-enum KustomizationValidationType {
+union KustomizationValidationType {
+  string,
+
   @doc("No validation")
-  none,
+  none: "none",
 
   @doc("client side validation")
-  client,
+  client: "client",
 
   @doc("server side validation")
-  server,
+  server: "server",
 }
 
 /**
  * The identity type.
  */
 @doc("IdentityType Enum")
-enum AKSIdentityType {
+union AKSIdentityType {
+  string,
+
   @doc("System Assigned Identity")
-  SystemAssigned,
+  SystemAssigned: "SystemAssigned",
 
   @doc("User Assigned Identity")
-  UserAssigned,
+  UserAssigned: "UserAssigned",
 }
 
 @secret
@@ -250,11 +274,13 @@ model ExtensionProperties {
    */
   scope?: Scope;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   /**
    * Configuration settings, as name-value pairs for configuring this extension.
    */
   configurationSettings?: Record<string>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   /**
    * Configuration settings that are sensitive, as name-value pairs for configuring this extension.
    */
@@ -272,6 +298,7 @@ model ExtensionProperties {
   @visibility("read")
   provisioningState?: ProvisioningState;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   /**
    * Status from this extension.
    */
@@ -283,6 +310,7 @@ model ExtensionProperties {
   @visibility("read")
   errorInfo?: ErrorDetail;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   /**
    * Custom Location settings properties.
    */
@@ -555,16 +583,19 @@ model FluxConfigurationProperties {
    */
   azureBlob?: AzureBlobDefinition;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   /**
    * Array of kustomizations used to reconcile the artifact pulled by the source type on the cluster.
    */
   kustomizations?: Record<KustomizationDefinition>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   /**
    * Key-value pairs of protected configuration settings for the configuration
    */
   configurationProtectedSettings?: Record<protectedSettingValue>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   /**
    * Statuses of the Flux Kubernetes resources created by the fluxConfiguration or created by the managed objects provisioned by the fluxConfiguration.
    */
@@ -897,6 +928,7 @@ model PostBuildDefinition {
    */
   substitute?: Record<string>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   /**
    * Array of ConfigMaps/Secrets from which the variables are substituted for this Kustomization.
    */
@@ -952,6 +984,7 @@ model ObjectStatusDefinition {
    */
   appliedBy?: ObjectReferenceDefinition;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   /**
    * List of Kubernetes object status conditions present on the cluster
    */
@@ -1350,6 +1383,7 @@ model SourceControlConfigurationProperties {
    */
   operatorParams?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   /**
    * Name-value pairs of protected configuration settings for the configuration
    */
