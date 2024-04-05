@@ -59,6 +59,8 @@ union ConnectorState {
 
   @doc("Failed State")
   Failed: "Failed",
+
+  string,
 }
 
 @doc("Enum of Directions of Connector")
@@ -106,6 +108,8 @@ union ConnectorType {
 
   @doc("mysql source connector.")
   MySqlSource: "MySqlSource",
+
+  string,
 }
 
 @doc("Enum of the type of Converter")
