@@ -291,6 +291,7 @@ model EnvironmentAction {
   next?: EnvironmentNextAction;
 
   @doc("Object Id of the user who last modified the action.")
+  @visibility("read")
   lastModifiedBy?: Azure.Core.uuid;
 
   @doc("Time the object was last modified.")
