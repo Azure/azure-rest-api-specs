@@ -39,6 +39,16 @@ batch:
   - tag: package-2019-11-01-preview 
 ``` 
 
+### Tag: package-preview-2024-06 and go
+
+These settings apply only when `--tag=package-preview-2024-06 --go` is specified on the command line.
+Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+```yaml $(tag) == 'package-preview-2024-06' && $(go)
+namespace: kubernetesconfiguration
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2024-06-01-preview/$(namespace)
+```
+
 ### Tag: package-preview-2024-04 and go
 
 These settings apply only when `--tag=package-preview-2024-04 --go` is specified on the command line.

@@ -22,7 +22,7 @@ model Extension is ProxyResource<ExtensionProperties> {
   @key("extensionName")
   @segment("extensions")
   @visibility("read")
-  @pattern("/^[a-zA-Z0-9-]{3,24}$/")
+  @pattern("[^]*")
   name: string;
 
   ...Azure.ResourceManager.ManagedServiceIdentity;

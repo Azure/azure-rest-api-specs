@@ -23,7 +23,7 @@ model SourceControlConfiguration
   @key("sourceControlConfigurationName")
   @segment("sourceControlConfigurations")
   @visibility("read")
-  @pattern("/^[a-zA-Z0-9-]{3,24}$/")
+  @pattern("[^]*")
   name: string;
 }
 

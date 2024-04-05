@@ -22,7 +22,7 @@ model FluxConfiguration is ProxyResource<FluxConfigurationProperties> {
   @key("fluxConfigurationName")
   @segment("fluxConfigurations")
   @visibility("read")
-  @pattern("/^[a-zA-Z0-9-]{3,24}$/")
+  @pattern("[^]*")
   name: string;
 }
 
