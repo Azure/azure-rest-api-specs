@@ -11,14 +11,13 @@ https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one
   - [`resource-manager` and `data-plane` folders](#resource-manager-and-data-plane-folders)
   - [AutoRest configuration `README.md` files](#autorest-configuration-readmemd-files)
   - [`stable` and `preview` folders](#stable-and-preview-folders)
-  - [A complete example directory structure of `specification/AzureTeamFolder`](#a-complete-example-directory-structure-of-specificationazureteamfolder)
+  - [A complete example directory structure of `specification/<azureTeam>`](#a-complete-example-directory-structure-of-specificationazureteam)
   - [Naming guidelines for `specification` folder contents](#naming-guidelines-for-specification-folder-contents)
   - [`specification/common-types`](#specificationcommon-types)
   - [Advanced scenario: service group](#advanced-scenario-service-group)
     - [Service group `common-types`](#service-group-common-types)
     - [Versioning services in a service group](#versioning-services-in-a-service-group)
-  - [Legacy layouts and OpenAPI specs](#legacy-layouts-and-openapi-specs)
-  - 
+  - [Deprecated structure and hand-written OpenAPI specs](#deprecated-structure-and-hand-written-openapi-specs)
 # `specification` directory structure
 
 
@@ -34,34 +33,34 @@ You may be also interested in following:
 
 The `specification` folder is the root folder for all service specifications.
 
-Each child of the `specification` folder corresponds to a `service` specification for given Azure team. Here we denote such folder as `AzureTeamFolder`.
+Each child of the `specification` folder corresponds to a `service` specification for given Azure team. Here we denote such folder as `<azureTeam>`.
 
-Given `AzureTeamFolder` has following structure:
+Given `<azureTeam>` has following structure:
 
-- `AzureTeamFolder/TypeSpecFolder` (multiple folders)
-- `AzureTeamFolder/resource-manager`
-- `AzureTeamFolder/data-plane`
+- `<azureTeam>/<typeSpecFolder>` (multiple folders)
+- `<azureTeam>/resource-manager`
+- `<azureTeam>/data-plane`
 
-The `AzureTeamFolder/TypeSpecFolder` folders contain the TypeSpec specification for the given `service`.
+The `<azureTeam>/<typeSpecFolder>` folders contain the TypeSpec specification for the given `service`.
 You can find details on the name and contents of these folders in [TypeSpec directory structure].
 You can learn more about TypeSpec at [aka.ms/azsdk/typespec] and [aka.ms/typespec].
 
 ## `resource-manager` and `data-plane` folders
 
-The `AzureTeamFolder/resource-manager` contains the ARM OpenAPI specifications emitted from TypeSpec in `AzureTeamFolder/TypeSpecFolder`.
+The `<azureTeam>/resource-manager` contains the ARM OpenAPI specifications emitted from TypeSpec in `<azureTeam>/<typeSpecFolder>`.
 
-The `resource-manager` folder has exactly one child folder whose name matches the **Resource Provider (RP) Namespace** (`RPNS`), 
+The `resource-manager` folder has exactly one child folder whose name matches the **Resource Provider (RP) Namespace** (`<RPNS>`), 
 such as `Microsoft.Automation` (full list of namespaces is [here][Resource Provider list]).
 There is 1 to 1 correspondence between an RP and an RP namespace.
 There must be **exactly one** RP namespace folder under given `resource-manager` folder.
-We denote such folder as `resource-manager/RPNS`.
+We denote such folder as `resource-manager/<RPNS>`.
 
-The `AzureTeamFolder/data-plane` contains the data-plane OpenAPI specifications emitted from TypeSpec in `TypeSpecFolder`. 
-The `data-plane` folder has no child `RPNS` folder. However, it can have a set of  `dataPlaneSubfolder` folders.
+The `<azureTeam>/data-plane` contains the data-plane OpenAPI specifications emitted from TypeSpec in `<typeSpecFolder>`. 
+The `data-plane` folder has no child `<RPNS>` folder. However, it can have a set of `<dataPlaneSubfolder>` folders.
 
 ## AutoRest configuration `README.md` files
 
-Both the `AzureTeamFolder/resource-manager` and `AzureTeamFolder/data-plane` folders must contain an AutoRest configuration file, `README.md`.
+Both the `<azureTeam>/resource-manager` and `<azureTeam>/data-plane` folders must contain an AutoRest configuration file, `README.md`.
 Learn more about this file at [aka.ms/azsdk/autorest].
 
 <!-- This paragraph about README contents is a bit vague. We should improve it, eventually. -->
@@ -75,46 +74,46 @@ Inside the `README.md` file there are lists of paths to OpenAPI spec `.json` fil
 
 ## `stable` and `preview` folders
 
-Both `AzureTeamFolder/resource-manager/RPNS` and `AzureTeamFolder/data-plane/dataPlaneSubfolder` folders, in addition to containing `README.md`, also can contain
+Both `<azureTeam>/resource-manager/<RPNS>` and `<azureTeam>/data-plane/<dataPlaneSubfolder>` folders, in addition to containing `README.md`, also can contain
 `stable` and `preview` folders. These folders contain OpenAPI specs in the `stable` and `preview` [lifecycle stages][aka.ms/azsdk/api-versions]
-respectively, organized in `apiVersion` subfolders for each service API version. For example, `AzureTeamFolder/resource-manager/RPNS/stable/apiVersion` or
-`AzureTeamFolder/data-plane/dataPlaneSubfolder/preview/apiVersion-preview`.
+respectively, organized in `<apiVersion>` subfolders for each service API version. For example, `<azureTeam>/resource-manager/<RPNS>/stable/<apiVersion>` or
+`<azureTeam>/data-plane/<dataPlaneSubfolder>/preview/<apiVersion-preview>`.
 
 Each such API version folder directly contains a set of `.json` files containing OpenAPI specs emitted from TypeSpec, as well as an `examples` child folder
 with `.json` files having the contents of [`x-ms-examples`] referenced from the OpenAPI specs.
 
-## A complete example directory structure of `specification/AzureTeamFolder`
+## A complete example directory structure of `specification/<azureTeam>`
 
-Putting everything together discussed, the directory structure of a singular `specification/AzureTeamFolder/` is as follows:
+Putting everything together discussed, the directory structure of a singular `specification/<azureTeam>/` is as follows:
 
 ``` yaml
-/TypeSpecFolder1/...
-/TypeSpecFolder2/... # multiple 'TypeSpecFolder' folders
+/<typeSpecFolder>1/...
+/<typeSpecFolder>2/... # multiple '<typeSpecFolder>' folders
 
 /resource-manager/README.md
-/resource-manager/RPNS/stable/apiVersion1/*.json
-/resource-manager/RPNS/stable/apiVersion1/examples/*.json
-                             /apiVersion2/ ... # multiple 'apiVersion' folders
-/resource-manager/RPNS/preview/apiVersion3-preview/*.json
-/resource-manager/RPNS/preview/apiVersion3-preview/examples/*.json
-                              /apiVersion4-preview/ ... # multiple 'apiVersion-preview' folders
+/resource-manager/<RPNS>/stable/<apiVersion1>/*.json
+/resource-manager/<RPNS>/stable/<apiVersion1>/examples/*.json
+                             /<apiVersion2>/ ... # multiple 'apiVer' folders
+/resource-manager/<RPNS>/preview/<apiVersion3-preview>/*.json
+/resource-manager/<RPNS>/preview/<apiVersion3-preview>/examples/*.json
+                              /<apiVersion4-preview>/ ... # multiple 'apiVer-preview' folders
 
 /data-plane/README.md
-/data-plane/dataPlaneSubfolder1/stable/apiVersion5/*.json
-/data-plane/dataPlaneSubfolder1/stable/apiVersion5/examples/*.json
-                                      /apiVersion6/ ... # multiple 'apiVersion' folders
-/data-plane/dataPlaneSubfolder1/preview/apiVersion7-preview/*.json
-/data-plane/dataPlaneSubfolder1/preview/apiVersion7-preview/examples/*.json
-                                       /apiVersion8-preview/ ... # multiple 'apiVersion-preview' folders
-           /dataPlaneSubfolder2/ ... # multiple 'dataPlaneSubfolder' folders
+/data-plane/<dataPlaneSubfolder1>/stable/<apiVersion5>/*.json
+/data-plane/<dataPlaneSubfolder1>/stable/<apiVersion5>/examples/*.json
+                                      /<apiVersion6>/ ... # multiple 'apiVer' folders
+/data-plane/<dataPlaneSubfolder1>/preview/<apiVersion7-preview>/*.json
+/data-plane/<dataPlaneSubfolder1>/preview/<apiVersion7-preview>/examples/*.json
+                                       /<apiVersion8-preview>/ ... # multiple 'apiVer-preview' folders
+           /<dataPlaneSubfolder2>/ ... # multiple '<dataPlaneSubfolder>' folders
 
 ```
 
-As a specific example of the above, consider [`specification/confidentialledger`] `AzureTeamFolder` which has the following structure:
+As a specific example of the above, consider [`specification/confidentialledger`] `<azureTeam>` which has the following structure:
 
 ``` yaml
 
-# ===== TypeSpecFolders
+# ===== <typeSpecFolder>s
 
 /Microsoft.CodeTransparency/
 /Microsoft.ManagedCcf/
@@ -123,12 +122,12 @@ As a specific example of the above, consider [`specification/confidentialledger`
 
 /data-plane/README.md
 
-# ----- dataPlaneSubfolder: Microsoft.CodeTransparency
+# ----- <dataPlaneSubfolder>: Microsoft.CodeTransparency
 
 /data-plane/Microsoft.CodeTransparency/preview/2024-01-11-preview
 /data-plane/Microsoft.CodeTransparency/preview/2024-01-11-preview/examples
 
-# ----- dataPlaneSubfolder: Microsoft.ConfidentialLedger
+# ----- <dataPlaneSubfolder>: Microsoft.ConfidentialLedger
 
 /data-plane/Microsoft.ConfidentialLedger/stable
 /data-plane/Microsoft.ConfidentialLedger/stable/2022-05-13
@@ -139,7 +138,7 @@ As a specific example of the above, consider [`specification/confidentialledger`
 /data-plane/Microsoft.ConfidentialLedger/preview/2023-01-18-preview/examples
 # ... more previews here
 
-# ----- dataPlaneSubfolder: Microsoft.ManagedCcf
+# ----- <dataPlaneSubfolder>: Microsoft.ManagedCcf
 
 /data-plane/Microsoft.ManagedCcf/preview/2023-06-01-preview
 /data-plane/Microsoft.ManagedCcf/preview/2023-06-01-preview/examples
@@ -148,7 +147,7 @@ As a specific example of the above, consider [`specification/confidentialledger`
 
 /resource-manager/README.md
 
-# ----- resource-manager RP Namespace (RPNS): Microsoft.ConfidentialLedger
+# ----- resource-manager RP Namespace (<RPNS>): Microsoft.ConfidentialLedger
 
 /resource-manager/Microsoft.ConfidentialLedger/stable/2022-05-13
 /resource-manager/Microsoft.ConfidentialLedger/stable/2022-05-13/examples
@@ -167,7 +166,7 @@ For another example, see [`specification/eventgrid`].
 
 - Folder names should be singular (e.g. `keyvault` not `keyvaults` ) -- this removes ambiguity for some non-english speakers.
 - Generic folder names should be lower-case.
-- Resource Provider Namespace (`RPNS`) folders can be PascalCased (e.g. `KeyVault`).
+- Resource Provider Namespace (`<RPNS>`) folders can be PascalCased (e.g. `KeyVault`).
 - For file names, any casing is allowed.
 - When in doubt, mimic naming of the examples provided in this article.
 
@@ -178,7 +177,7 @@ The special directory of [`specification/common-types`] contains shared definiti
 
 ## Advanced scenario: service group
 
-In case of big Azure teams, their `specification/AzureTeamFolder` hosts multiple services, together known as `service group`.
+In case of big Azure teams, their `specification/<azureTeam>` hosts multiple services, together known as `service group`.
 The main difference between one service and a service group is how they are presented to Azure customers:
 One service has one SDK package and one documentation portal, while a service group has separate SDK package for each service and separate documentation.
 
@@ -209,9 +208,9 @@ This means that each service in the service group must obey the same versioning 
 However, multiple separate services can have different versioning cycles, including different SDK packages. Refer to the aforementioned `aks` and `fleet`
 services for examples of different versioning cycles in a service group.
 
-## Legacy layouts and OpenAPI specs
+## Deprecated structure and hand-written OpenAPI specs
 
-As mentioned at the beginning of this article, for historical reasons, some `specification/AzureTeamFolder` folders may
+As mentioned at the beginning of this article, for historical reasons, some `specification/<azureTeam>` folders may
 violate some of the constraints presented in this article. This includes violations like:
 
 - More deeply nested subfolders than allowed
@@ -219,11 +218,19 @@ violate some of the constraints presented in this article. This includes violati
 - Mixing of `stable` and `preview` API versions in the same folder subtree
 - Mixing of multiple API versions in given `README.md` package, including mixing of multiple API version lifecycle stages.
 
-In addition, some `AzureTeamFolder` folders have OpenAPI specs that have been written manually instead of emitted from TypeSpec. 
+In addition, some `<azureTeam>` folders have OpenAPI specs that have been written manually instead of emitted from TypeSpec. 
 In some cases the folders have mixture of manually-written and TypeSpec-emitted OpenAPI specs.
 
 All of the aforementioned cases are considered legacy and are not allowed going forward.
 
+[`Microsoft.Compute/common-types`]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/compute/resource-manager/Microsoft.Compute/common-types/
+[`specification/common-types`]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/common-types
+[`specification/confidentialledger`]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/confidentialledger
+[`specification/containerservice/resource-manager/Microsoft.ContainerService/aks/stable/2024-01-01`]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/containerservice/resource-manager/Microsoft.ContainerService/aks/stable/2024-01-01
+[`specification/containerservice/resource-manager/Microsoft.ContainerService/fleet/stable/2023-10-15`]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/containerservice/resource-manager/Microsoft.ContainerService/fleet/stable/2023-10-15
+[`specification/containerservice`]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/containerservice
+[`specification/eventgrid`]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/eventgrid
+[`x-ms-examples`]: https://azure.github.io/autorest/extensions/#x-ms-examples
 [aka.ms/azsdk/api-versions]: https://aka.ms/azsdk/api-versions
 [aka.ms/azsdk/autorest]: https://aka.ms/azsdk/autorest
 [aka.ms/azsdk/typespec]: https://aka.ms/azsdk/typespec
@@ -235,11 +242,3 @@ All of the aforementioned cases are considered legacy and are not allowed going 
 [Resource Provider list]: https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-services-resource-providers#match-resource-provider-to-service
 [Specification index]: https://azure.github.io/azure-sdk/releases/latest/all/specs.html
 [TypeSpec directory structure]: https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/typespec-structure-guidelines.md
-[`Microsoft.Compute/common-types`]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/compute/resource-manager/Microsoft.Compute/common-types/
-[`specification/common-types`]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/common-types
-[`specification/confidentialledger`]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/confidentialledger
-[`specification/containerservice/resource-manager/Microsoft.ContainerService/aks/stable/2024-01-01`]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/containerservice/resource-manager/Microsoft.ContainerService/aks/stable/2024-01-01
-[`specification/containerservice/resource-manager/Microsoft.ContainerService/fleet/stable/2023-10-15`]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/containerservice/resource-manager/Microsoft.ContainerService/fleet/stable/2023-10-15
-[`specification/containerservice`]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/containerservice
-[`specification/eventgrid`]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/eventgrid
-[`x-ms-examples`]: https://azure.github.io/autorest/extensions/#x-ms-examples
