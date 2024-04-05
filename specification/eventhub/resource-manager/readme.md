@@ -233,11 +233,11 @@ These settings apply only when `--tag=package-2024-05-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2024-05-preview'
 input-file:
-- Microsoft.EventHub/preview/2024-05-01-preview/AvailableClusterRegions.json
-- Microsoft.EventHub/preview/2024-05-01-preview/Clusters.json
+- Microsoft.EventHub/preview/2024-05-01-preview/AvailableClusterRegions-preview.json
+- Microsoft.EventHub/preview/2024-05-01-preview/Clusters-preview.json
 - Microsoft.EventHub/preview/2024-05-01-preview/namespaces.json
-- Microsoft.EventHub/preview/2024-05-01-preview/quotaConfiguration.json
-- Microsoft.EventHub/preview/2024-05-01-preview/networkrulessets.json
+- Microsoft.EventHub/preview/2024-05-01-preview/quotaConfiguration-preview.json
+- Microsoft.EventHub/preview/2024-05-01-preview/networkrulessets-preview.json
 - Microsoft.EventHub/preview/2024-05-01-preview/AuthorizationRules.json
 - Microsoft.EventHub/preview/2024-05-01-preview/CheckNameAvailability.json
 - Microsoft.EventHub/preview/2024-05-01-preview/consumergroups.json
