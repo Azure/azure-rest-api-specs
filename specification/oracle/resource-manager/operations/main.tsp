@@ -1,0 +1,15 @@
+import "./exadatainfrastructureOperations.tsp";
+import "./dbServersOperations.tsp";
+import "./vmclusterOperations.tsp";
+import "./virtualNetworkAddressOperations.tsp";
+import "./oracleSubscriptionOperations.tsp";
+import "./dbNodesOperations.tsp";
+import "./giVersionOperations.tsp";
+import "./dbSystemShapeOperations.tsp";
+import "./dnsPrivateViewsOperations.tsp";
+import "./dnsPrivateZonesOperations.tsp";
+import "./autonomousDatabaseOperations.tsp";
+import "./autonomousDatabaseBackupOperations.tsp";
+import "./autonomousDatabaseCharacterSetOperations.tsp";
+import "./autonomousDatabaseNationalCharacterSetOperations.tsp";
+import "./autonomousDatabaseVersionOperations.tsp";
