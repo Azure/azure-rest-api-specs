@@ -269,6 +269,11 @@
             "description": "The request to update the tags for the Private Access resource has been accepted for processing.",
             "schema": {
               "$ref": "./types/privateAccesses.json#/definitions/PrivateAccess"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "200": {
@@ -316,7 +321,12 @@
         ],
         "responses": {
           "202": {
-            "description": "Asynchronous delete operation."
+            "description": "Asynchronous delete operation.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Deletion was successful."
