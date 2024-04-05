@@ -29,7 +29,7 @@ model FleetMember is ProxyResource<FleetMemberProperties> {
 }
 
 scalar ClusterResourceId
-  extends Azure.ResourceManager.ResourceIdentifier<[
+  extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ContainerService/managedClusters",
     }
@@ -98,12 +98,20 @@ interface FleetMembers {
   @sharedRoute
   @added(Versions.v2023_06_15_preview)
   @operationId("FleetMembers_Update")
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      `final-state-via`: "original-uri",
+    }
+  )
   updateAsync is ArmResourcePatchAsync<
     FleetMember,
     FleetMemberProperties,
     BaseParameters<FleetMember> & IfMatchParameters<FleetMember>
   >;
 
+  #suppress "deprecated" "Existing API"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
   @sharedRoute // why do we need to set shared route on delete? compiler complains with an error
   // All shared routes must agree on the value of the shared parameter.TypeSpec(@typespec/http/shared-inconsistency)
   delete is ArmResourceDeleteAsync<

@@ -77,6 +77,18 @@ suppressions:
   - code: GetCollectionOnlyHasValueAndNextLink
     from: Microsoft.Security\stable\2024-01-01\pricings.json
     reason: The collections is limited to 13 items maximum. No need for paging. Also old versions did not have these fields as well.
+  - code: ResourceNameRestriction
+    from: Microsoft.Security\preview\2024-03-01\securityConnectors.json
+    reason: Old versions do not have pattern as well, and if I add a pattern to this version, I get another error about breaking the last version's pattern.
+  - code: PatchBodyParametersSchema
+    from: Microsoft.Security\preview\2024-03-01\securityConnectors.json
+    reason: Patch uses a complex composable object model which cannot be easily split. it will be addressed in a future PR, as this occurs in previous API versions as well.
+  - code: UnSupportedPatchProperties
+    from: Microsoft.Security\preview\2024-03-01\securityConnectors.json
+    reason: Patch uses a complex composable object model which cannot be easily split. it will be addressed in a future PR, as this occurs in previous API versions as well.
+  - code: AvoidAdditionalProperties
+    from: Microsoft.Security\preview\2024-03-01\securityConnectors.json
+    reason: This is a property used across all API versions. changing it would be a breaking change, and is required for 
 ```
 
 ### Basic Information
@@ -94,6 +106,45 @@ tag: package-composite-v3
 
 The following packages may be composed from multiple api-versions.
 
+### Tag: package-2024-04
+
+These settings apply only when `--tag=package-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04'
+input-file:
+  - Microsoft.Security/stable/2024-04-01/securityConnectorsDevOps.json
+suppressions:
+  - code: LroLocationHeader
+    from: securityConnectorsDevOps.json
+    reason: False positive. Per ResourceProvider specification SecurityConnectors DevOps uses Azure-AsyncOperation header instead of Location header
+  - code: ResourceNameRestriction
+    from: securityConnectorsDevOps.json
+    reason: SecurityConnectors DevOps collects data from thirdparty providers which do not always specify name patterns
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: securityConnectorsDevOps.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default"].get.responses["200"].schema.properties
+    reason: False positive. This check flags the the API which doesn't actually return collection but a singleton.
+```
+
+### Tag: package-preview-2024-03
+
+These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-03'
+input-file:
+  - Microsoft.Security/preview/2024-03-01-preview/securityConnectors.json
+```
+
+### Tag: package-preview-2023-12
+
+These settings apply only when `--tag=package-preview-2023-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-12'
+input-file:
+  - Microsoft.Security/preview/2023-12-01-preview/securityContacts.json
+  - Microsoft.Security/preview/2023-12-01-preview/automations.json
+```
 
 ### Tag: package-2023-11-15
 
@@ -108,7 +159,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-10'
+``` yaml $(tag) == 'package-preview-2023-10'
 input-file:
   - Microsoft.Security/preview/2023-10-01-preview/securityConnectors.json
 ```
@@ -117,7 +168,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-09'
+``` yaml $(tag) == 'package-preview-2023-09'
 input-file:
   - Microsoft.Security/preview/2023-09-01-preview/securityConnectorsDevOps.json
 suppressions:
@@ -138,7 +189,7 @@ suppressions:
 
 These settings apply only when `--tag=package-2024-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-01'
+``` yaml $(tag) == 'package-2024-01'
 input-file:
   - Microsoft.Security/stable/2024-01-01/pricings.json
 ```
@@ -426,11 +477,9 @@ input-file:
 - Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json
 - Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
 - Microsoft.Security/preview/2019-01-01-preview/alertsSuppressionRules.json
-- Microsoft.Security/preview/2019-01-01-preview/automations.json
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
 - Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
-- Microsoft.Security/preview/2020-01-01-preview/securityContacts.json
 - Microsoft.Security/preview/2021-05-01-preview/softwareInventories.json
 - Microsoft.Security/preview/2021-07-01-preview/customAssessmentAutomation.json
 - Microsoft.Security/preview/2021-07-01-preview/customEntityStoreAssignment.json
@@ -445,8 +494,9 @@ input-file:
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
 - Microsoft.Security/preview/2023-02-15-preview/sensitivitySettings.json
 - Microsoft.Security/preview/2023-05-01-preview/healthReports.json
-- Microsoft.Security/preview/2023-09-01-preview/securityConnectorsDevOps.json
-- Microsoft.Security/preview/2023-10-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2023-12-01-preview/automations.json
+- Microsoft.Security/preview/2023-12-01-preview/securityContacts.json
+- Microsoft.Security/preview/2024-03-01-preview/securityConnectors.json
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
 - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
@@ -470,6 +520,7 @@ input-file:
 - Microsoft.Security/stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
 - Microsoft.Security/stable/2023-11-15/apiCollections.json
 - Microsoft.Security/stable/2024-01-01/pricings.json
+- Microsoft.Security/stable/2024-04-01/securityConnectorsDevOps.json
 
 # Autorest suppressions
 suppressions:
@@ -523,7 +574,6 @@ input-file:
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
 - Microsoft.Security/preview/2023-02-15-preview/sensitivitySettings.json
 - Microsoft.Security/preview/2023-05-01-preview/healthReports.json
-- Microsoft.Security/preview/2023-09-01-preview/securityConnectorsDevOps.json
 - Microsoft.Security/preview/2023-10-01-preview/securityConnectors.json
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
 - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
@@ -548,6 +598,7 @@ input-file:
 - Microsoft.Security/stable/2023-01-01/pricings.json
 - Microsoft.Security/stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
 - Microsoft.Security/stable/2023-11-15/apiCollections.json
+- Microsoft.Security/stable/2024-04-01/securityConnectorsDevOps.json
 
 # Needed when there is more than one input file
 override-info:
@@ -984,7 +1035,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-java
