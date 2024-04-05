@@ -96,12 +96,7 @@ alias ChatCompletionsOptions = {
   seed?: int64;
 };
 
-@doc("""
-Representation of the response data from a chat completions request.
-Completions support a wide variety of tasks and generate text that continues from or "completes"
-provided prompt data.
-""")
-model ChatCompletions {
+alias ChatCompletionsCommon = {
   @doc("A unique identifier associated with this chat completions response.")
   id: string;
 
@@ -119,17 +114,44 @@ model ChatCompletions {
   `model`: string;
 
   @doc("""
+  Usage information for tokens processed and generated as part of this completions operation.
+  """)
+  usage: CompletionsUsage;
+};
+
+@doc("""
+Representation of the response data from a chat completions request.
+Completions support a wide variety of tasks and generate text that continues from or "completes"
+provided prompt data.
+""")
+model ChatCompletions {
+  ...ChatCompletionsCommon;
+
+  @doc("""
     The collection of completions choices associated with this completions response.
     Generally, `n` choices are generated per provided prompt with a default value of 1.
     Token limits and other settings may limit the number of choices generated.
     """)
   @minItems(1)
   choices: ChatChoice[];
+}
+
+@doc("""
+Represents a response update to a chat completions request, when the service is streaming updates 
+using Server Sent Events (SSE).
+Completions support a wide variety of tasks and generate text that continues from or "completes"
+provided prompt data.
+""")
+model ChatCompletionsDelta {
+  ...ChatCompletionsCommon;
 
   @doc("""
-  Usage information for tokens processed and generated as part of this completions operation.
-  """)
-  usage: CompletionsUsage;
+    An update to the collection of completion choices associated with this completions response.
+    Generally, `n` choices are generated per provided prompt with a default value of 1.
+    Token limits and other settings may limit the number of choices generated.
+    """)
+  @minItems(1)
+  choices: ChatChoiceDelta[];
 }
 
 @doc("""
@@ -213,22 +235,39 @@ model ChatCompletionsJsonResponseFormat extends ChatCompletionsResponseFormat {
   type: "json_object";
 }
 
+alias ChatChoiceCommon = {
+  @doc("The ordered index associated with this chat completions choice.")
+  index: int32;
+
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
+  @doc("The reason that this chat completions choice completed its generated.")
+  finish_reason: CompletionsFinishReason | null;
+};
+
 @doc("""
 The representation of a single prompt completion as part of an overall chat completions request.
 Generally, `n` choices are generated per provided prompt with a default value of 1.
 Token limits and other settings may limit the number of choices generated.
 """)
 model ChatChoice {
-  @doc("The ordered index associated with this chat completions choice.")
-  index: int32;
+  ...ChatChoiceCommon;
 
   @doc("The chat message for a given chat completions prompt.")
   message: ChatResponseMessage;
+}
 
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
-  #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
-  @doc("The reason that this chat completions choice completed its generated.")
-  finish_reason: CompletionsFinishReason | null;
+@doc("""
+Represents an update to a single prompt completion when the service is streaming updates 
+using Server Sent Events (SSE).
+Generally, `n` choices are generated per provided prompt with a default value of 1.
+Token limits and other settings may limit the number of choices generated.
+""")
+model ChatChoiceDelta {
+  ...ChatChoiceCommon;
+
+  @doc("An update to the chat message for a given chat completions prompt.")
+  delta: ChatResponseMessage;
 }
 
 @discriminator("role")

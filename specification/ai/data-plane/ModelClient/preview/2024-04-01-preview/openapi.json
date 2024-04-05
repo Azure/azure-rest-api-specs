@@ -153,14 +153,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "maximum set image generation": {
-            "$ref": "./examples/GetImageGenerations_MaximumSet_Gen.json"
-          },
-          "minimum set image generation": {
-            "$ref": "./examples/GetImageGenerations_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -336,14 +328,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "maximum set chat completion": {
-            "$ref": "./examples/GetChatCompletions_MaximumSet_Gen.json"
-          },
-          "minimum set chat completion": {
-            "$ref": "./examples/GetChatCompletions_MinimumSet_Gen.json"
-          }
         }
       }
     },
@@ -448,14 +432,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "maximum set embeddings": {
-            "$ref": "./examples/GetEmbeddings_MaximumSet_Gen.json"
-          },
-          "minimum set embeddings": {
-            "$ref": "./examples/GetEmbeddings_MinimumSet_Gen.json"
-          }
         }
       }
     }
@@ -555,20 +531,45 @@
           "format": "int32",
           "description": "The ordered index associated with this chat completions choice."
         },
+        "finish_reason": {
+          "$ref": "#/definitions/CompletionsFinishReason",
+          "description": "The reason that this chat completions choice completed its generated.",
+          "x-nullable": true
+        },
         "message": {
           "$ref": "#/definitions/ChatResponseMessage",
           "description": "The chat message for a given chat completions prompt."
+        }
+      },
+      "required": [
+        "index",
+        "finish_reason",
+        "message"
+      ]
+    },
+    "ChatChoiceDelta": {
+      "type": "object",
+      "description": "Represents an update to a single prompt completion when the service is streaming updates \nusing Server Sent Events (SSE).\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The ordered index associated with this chat completions choice."
         },
         "finish_reason": {
           "$ref": "#/definitions/CompletionsFinishReason",
           "description": "The reason that this chat completions choice completed its generated.",
           "x-nullable": true
+        },
+        "delta": {
+          "$ref": "#/definitions/ChatResponseMessage",
+          "description": "An update to the chat message for a given chat completions prompt."
         }
       },
       "required": [
         "index",
-        "message",
-        "finish_reason"
+        "finish_reason",
+        "delta"
       ]
     },
     "ChatCompletions": {
@@ -592,6 +593,10 @@
           "type": "string",
           "description": "The model used for the chat completion."
         },
+        "usage": {
+          "$ref": "#/definitions/CompletionsUsage",
+          "description": "Usage information for tokens processed and generated as part of this completions operation."
+        },
         "choices": {
           "type": "array",
           "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
@@ -600,10 +605,6 @@
             "$ref": "#/definitions/ChatChoice"
           },
           "x-ms-identifiers": []
-        },
-        "usage": {
-          "$ref": "#/definitions/CompletionsUsage",
-          "description": "Usage information for tokens processed and generated as part of this completions operation."
         }
       },
       "required": [
@@ -611,8 +612,52 @@
         "object",
         "created",
         "model",
-        "choices",
-        "usage"
+        "usage",
+        "choices"
+      ]
+    },
+    "ChatCompletionsDelta": {
+      "type": "object",
+      "description": "Represents a response update to a chat completions request, when the service is streaming updates \nusing Server Sent Events (SSE).\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier associated with this chat completions response."
+        },
+        "object": {
+          "type": "string",
+          "description": "The response object type, which is always `chat.completion`."
+        },
+        "created": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
+        },
+        "model": {
+          "type": "string",
+          "description": "The model used for the chat completion."
+        },
+        "usage": {
+          "$ref": "#/definitions/CompletionsUsage",
+          "description": "Usage information for tokens processed and generated as part of this completions operation."
+        },
+        "choices": {
+          "type": "array",
+          "description": "An update to the collection of completion choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/ChatChoiceDelta"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "id",
+        "object",
+        "created",
+        "model",
+        "usage",
+        "choices"
       ]
     },
     "ChatCompletionsFunctionToolCall": {
