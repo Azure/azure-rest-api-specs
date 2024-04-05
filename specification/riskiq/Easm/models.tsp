@@ -1820,7 +1820,7 @@ union AssetChainSource {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @clientName("LogAnalyticsDataConnectionPayload", "csharp")
 model LogAnalyticsDataConnectionData extends DataConnectionData {
-  @doc("The kind of DataConnectionData")
+  @doc("The kind of DataConnectionData ")
   kind: "logAnalytics";
 
   @doc("properties")
