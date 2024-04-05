@@ -2179,6 +2179,11 @@
               }
             ]
           }
+        },
+        "model": {
+          "$ref": "#/definitions/Sku/properties/model",
+          "description": "The model name.",
+          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "ValidateCreateOrderLimit"
@@ -3442,6 +3447,11 @@
               }
             ]
           }
+        },
+        "model": {
+          "$ref": "#/definitions/Sku/properties/model",
+          "description": "The model name.",
+          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "ValidateDataTransferDetails"
@@ -5645,6 +5655,11 @@
               }
             ]
           }
+        },
+        "model": {
+          "$ref": "#/definitions/Sku/properties/model",
+          "description": "The model name.",
+          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "ValidatePreferences"
@@ -5866,6 +5881,11 @@
         "country": {
           "description": "Country in which storage location should be supported.",
           "type": "string"
+        },
+        "model": {
+          "$ref": "#/definitions/Sku/properties/model",
+          "description": "The model name.",
+          "readOnly": true
         }
       },
       "discriminator": "skuName"
@@ -6158,7 +6178,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "ModelNames",
+            "name": "ModelName",
             "modelAsExtensible": true,
             "values": [
               {
@@ -6267,6 +6287,11 @@
         "location": {
           "description": "Location for data transfer. For locations check: https://management.azure.com/subscriptions/SUBSCRIPTIONID/locations?api-version=2018-01-01",
           "type": "string"
+        },
+        "model": {
+          "$ref": "#/definitions/Sku/properties/model",
+          "description": "The model name.",
+          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "ValidateSkuAvailability"
@@ -6995,6 +7020,11 @@
         "transportPreferences": {
           "$ref": "#/definitions/TransportPreferences",
           "description": "Preferences related to the shipment logistics of the sku."
+        },
+        "model": {
+          "$ref": "#/definitions/Sku/properties/model",
+          "description": "The model name.",
+          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "ValidateAddress"
