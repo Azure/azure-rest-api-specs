@@ -561,7 +561,7 @@ model RemoteConnection {
 model DevBoxAction {
   @doc("The unique URI for the Dev Box action.")
   @added(APIVersions.v2024_02_01)
-  uri?: url;
+  uri: url;
 
   @key("actionName")
   @doc("The name of the action.")
