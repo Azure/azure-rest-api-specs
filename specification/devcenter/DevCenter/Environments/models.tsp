@@ -250,6 +250,9 @@ model EnvironmentOperation {
   @key("operationId")
   operationId: Azure.Core.uuid;
 
+  @doc("The kind of operation that occurred.")
+  kind: EnvironmentOperationKind;
+
   @doc("The operation status.")
   status: EnvironmentOperationStatus;
 

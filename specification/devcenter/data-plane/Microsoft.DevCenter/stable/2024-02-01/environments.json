@@ -1751,10 +1751,6 @@
       "type": "object",
       "description": "Information about an operation on an environment.",
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Discriminator property for EnvironmentOperation."
-        },
         "uri": {
           "type": "string",
           "format": "uri",
@@ -1764,6 +1760,10 @@
           "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Unique identifier for the environment operation.",
           "readOnly": true
+        },
+        "kind": {
+          "$ref": "#/definitions/EnvironmentOperationKind",
+          "description": "The kind of operation that occurred."
         },
         "status": {
           "$ref": "#/definitions/EnvironmentOperationStatus",
@@ -1795,9 +1795,9 @@
       },
       "discriminator": "kind",
       "required": [
-        "kind",
         "uri",
         "operationId",
+        "kind",
         "status"
       ]
     },
