@@ -1,0 +1,657 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-08-01-preview",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "SqsQueues"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/sqsQueues": {
+      "get": {
+        "operationId": "SqsQueues_ListBySubscription",
+        "tags": [
+          "SqsQueues"
+        ],
+        "description": "List SqsQueue resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqsQueueListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SqsQueues_ListBySubscription": {
+            "$ref": "./examples/SqsQueues_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/sqsQueues": {
+      "get": {
+        "operationId": "SqsQueues_ListByResourceGroup",
+        "tags": [
+          "SqsQueues"
+        ],
+        "description": "List SqsQueue resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqsQueueListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SqsQueues_ListByResourceGroup": {
+            "$ref": "./examples/SqsQueues_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/sqsQueues/{name}": {
+      "get": {
+        "operationId": "SqsQueues_Get",
+        "tags": [
+          "SqsQueues"
+        ],
+        "description": "Get a SqsQueue",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of SqsQueue",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqsQueue"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SqsQueues_Get": {
+            "$ref": "./examples/SqsQueues_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SqsQueues_CreateOrUpdate",
+        "tags": [
+          "SqsQueues"
+        ],
+        "description": "Create a SqsQueue. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of SqsQueue",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqsQueue"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SqsQueue' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SqsQueue"
+            }
+          },
+          "201": {
+            "description": "Resource 'SqsQueue' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SqsQueue"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SqsQueues_CreateOrUpdate": {
+            "$ref": "./examples/SqsQueues_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SqsQueues_Update",
+        "tags": [
+          "SqsQueues"
+        ],
+        "description": "Update a SqsQueue",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of SqsQueue",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqsQueueTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqsQueue"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SqsQueues_Update": {
+            "$ref": "./examples/SqsQueues_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "SqsQueues_Delete",
+        "tags": [
+          "SqsQueues"
+        ],
+        "description": "Delete a SqsQueue",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of SqsQueue",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SqsQueues_Delete": {
+            "$ref": "./examples/SqsQueues_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsSqsQueueProperties": {
+      "type": "object",
+      "description": "Definition of awsSqsQueue",
+      "properties": {
+        "arn": {
+          "type": "string",
+          "description": "Gets and sets the property arn. Amazon Resource Name (ARN) of the queue."
+        },
+        "contentBasedDeduplication": {
+          "type": "boolean",
+          "description": "Gets and sets the property contentBasedDeduplication. For first-in-first-out (FIFO) queues, specifies whether to enable content-based deduplication. During the deduplication interval, Amazon SQS treats messages that are sent with identical content as duplicates and delivers only one copy of the message."
+        },
+        "deduplicationScope": {
+          "type": "string",
+          "description": "Gets and sets the property deduplicationScope. Specifies whether message deduplication occurs at the message group or queue level. Valid values are messageGroup and queue."
+        },
+        "delaySeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property delaySeconds. The time in seconds for which the delivery of all messages in the queue is delayed. You can specify an integer value of 0 to 900 (15 minutes). The default value is 0."
+        },
+        "fifoQueue": {
+          "type": "boolean",
+          "description": "Gets and sets the property fifoQueue. If set to true, creates a FIFO queue. If you don't specify this property, Amazon SQS creates a standard queue."
+        },
+        "fifoThroughputLimit": {
+          "type": "string",
+          "description": "Gets and sets the property fifoThroughputLimit. Specifies whether the FIFO queue throughput quota applies to the entire queue or per message group. Valid values are perQueue and perMessageGroupId. The perMessageGroupId value is allowed only when the value for DeduplicationScope is messageGroup."
+        },
+        "kmsDataKeyReusePeriodSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property kmsDataKeyReusePeriodSeconds. The length of time in seconds for which Amazon SQS can reuse a data key to encrypt or decrypt messages before calling AWS KMS again. The value must be an integer between 60 (1 minute) and 86,400 (24 hours). The default is 300 (5 minutes)."
+        },
+        "kmsMasterKeyId": {
+          "type": "string",
+          "description": "Gets and sets the property kmsMasterKeyId. The ID of an AWS managed customer master key (CMK) for Amazon SQS or a custom CMK. To use the AWS managed CMK for Amazon SQS, specify the (default) alias alias/aws/sqs."
+        },
+        "maximumMessageSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property maximumMessageSize. The limit of how many bytes that a message can contain before Amazon SQS rejects it. You can specify an integer value from 1,024 bytes (1 KiB) to 262,144 bytes (256 KiB). The default value is 262,144 (256 KiB)."
+        },
+        "messageRetentionPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property messageRetentionPeriod. The number of seconds that Amazon SQS retains a message. You can specify an integer value from 60 seconds (1 minute) to 1,209,600 seconds (14 days). The default value is 345,600 seconds (4 days)."
+        },
+        "queueName": {
+          "type": "string",
+          "description": "Gets and sets the property queueName. A name for the queue. To create a FIFO queue, the name of your FIFO queue must end with the .fifo suffix."
+        },
+        "queueUrl": {
+          "type": "string",
+          "description": "Gets and sets the property queueUrl. URL of the source queue."
+        },
+        "receiveMessageWaitTimeSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property receiveMessageWaitTimeSeconds. Specifies the duration, in seconds, that the ReceiveMessage action call waits until a message is in the queue in order to include it in the response, rather than returning an empty response if a message isn't yet available. You can specify an integer from 1 to 20. Short polling is used as the default or when you specify 0 for this property."
+        },
+        "redriveAllowPolicy": {
+          "type": "string",
+          "description": "Gets and sets the property redriveAllowPolicy. The string that includes the parameters for the permissions for the dead-letter queue redrive permission and which source queues can specify dead-letter queues as a JSON object."
+        },
+        "redrivePolicy": {
+          "type": "string",
+          "description": "Gets and sets the property redrivePolicy. A string that includes the parameters for the dead-letter queue functionality (redrive policy) of the source queue."
+        },
+        "sqsManagedSseEnabled": {
+          "type": "boolean",
+          "description": "Gets and sets the property sqsManagedSseEnabled. Enables server-side queue encryption using SQS owned encryption keys. Only one server-side encryption option is supported per queue (e.g. SSE-KMS or SSE-SQS )."
+        },
+        "tags": {
+          "type": "array",
+          "description": "Gets and sets the property tags. The tags that you attach to this queue.",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": []
+        },
+        "visibilityTimeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property visibilityTimeout. The length of time during which a message will be unavailable after a message is delivered from the queue. This blocks other components from receiving the same message and gives the initial component time to process and delete the message from the queue. Values must be from 0 to 43,200 seconds (12 hours). If you don't specify a value, AWS CloudFormation uses the default value of 30 seconds."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "SqsQueue": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqsQueueProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SqsQueueListResult": {
+      "type": "object",
+      "description": "The response of a SqsQueue list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SqsQueue items on this page",
+          "items": {
+            "$ref": "#/definitions/SqsQueue"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SqsQueueProperties": {
+      "type": "object",
+      "description": "Definition of SqsQueue",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsSqsQueueProperties",
+          "description": "Gets and sets the property awsProperties."
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "Gets and sets the property awsAccountId."
+        },
+        "awsResourceName": {
+          "type": "string",
+          "description": "Gets and sets the property awsResourceName."
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "Gets and sets the property awsSourceSchema."
+        },
+        "awsSdkVersion": {
+          "type": "string",
+          "description": "Gets and sets the property awsSdkVersion."
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "Gets and sets the property awsRegion."
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "Gets and sets the property awsTags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "SqsQueueTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in SqsQueue resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Gets and sets the property key. The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -."
+        },
+        "value": {
+          "type": "string",
+          "description": "Gets and sets the property value. The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -."
+        }
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Api versions",
+      "enum": [
+        "2024-08-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "2024-08-01-preview",
+            "value": "2024-08-01-preview",
+            "description": "2024-08-01-preview api version"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

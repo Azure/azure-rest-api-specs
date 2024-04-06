@@ -1,0 +1,675 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-08-01-preview",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ElasticBeanstalkEnvironments"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/elasticBeanstalkEnvironments": {
+      "get": {
+        "operationId": "ElasticBeanstalkEnvironments_ListBySubscription",
+        "tags": [
+          "ElasticBeanstalkEnvironments"
+        ],
+        "description": "List ElasticBeanstalkEnvironment resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ElasticBeanstalkEnvironmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticBeanstalkEnvironments_ListBySubscription": {
+            "$ref": "./examples/ElasticBeanstalkEnvironments_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/elasticBeanstalkEnvironments": {
+      "get": {
+        "operationId": "ElasticBeanstalkEnvironments_ListByResourceGroup",
+        "tags": [
+          "ElasticBeanstalkEnvironments"
+        ],
+        "description": "List ElasticBeanstalkEnvironment resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ElasticBeanstalkEnvironmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticBeanstalkEnvironments_ListByResourceGroup": {
+            "$ref": "./examples/ElasticBeanstalkEnvironments_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/elasticBeanstalkEnvironments/{name}": {
+      "get": {
+        "operationId": "ElasticBeanstalkEnvironments_Get",
+        "tags": [
+          "ElasticBeanstalkEnvironments"
+        ],
+        "description": "Get a ElasticBeanstalkEnvironment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ElasticBeanstalkEnvironment",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ElasticBeanstalkEnvironment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticBeanstalkEnvironments_Get": {
+            "$ref": "./examples/ElasticBeanstalkEnvironments_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ElasticBeanstalkEnvironments_CreateOrUpdate",
+        "tags": [
+          "ElasticBeanstalkEnvironments"
+        ],
+        "description": "Create a ElasticBeanstalkEnvironment. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ElasticBeanstalkEnvironment",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ElasticBeanstalkEnvironment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ElasticBeanstalkEnvironment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ElasticBeanstalkEnvironment"
+            }
+          },
+          "201": {
+            "description": "Resource 'ElasticBeanstalkEnvironment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ElasticBeanstalkEnvironment"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticBeanstalkEnvironments_CreateOrUpdate": {
+            "$ref": "./examples/ElasticBeanstalkEnvironments_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ElasticBeanstalkEnvironments_Update",
+        "tags": [
+          "ElasticBeanstalkEnvironments"
+        ],
+        "description": "Update a ElasticBeanstalkEnvironment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ElasticBeanstalkEnvironment",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ElasticBeanstalkEnvironmentTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ElasticBeanstalkEnvironment"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticBeanstalkEnvironments_Update": {
+            "$ref": "./examples/ElasticBeanstalkEnvironments_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ElasticBeanstalkEnvironments_Delete",
+        "tags": [
+          "ElasticBeanstalkEnvironments"
+        ],
+        "description": "Delete a ElasticBeanstalkEnvironment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of ElasticBeanstalkEnvironment",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticBeanstalkEnvironments_Delete": {
+            "$ref": "./examples/ElasticBeanstalkEnvironments_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsElasticBeanstalkEnvironmentProperties": {
+      "type": "object",
+      "description": "Definition of awsElasticBeanstalkEnvironment",
+      "properties": {
+        "applicationName": {
+          "type": "string",
+          "description": "Gets and sets the property applicationName. The name of the application that is associated with this environment."
+        },
+        "cnamePrefix": {
+          "type": "string",
+          "description": "Gets and sets the property cnamePrefix. If specified, the environment attempts to use this value as the prefix for the CNAME in your Elastic Beanstalk environment URL. If not specified, the CNAME is generated automatically by appending a random alphanumeric string to the environment name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets and sets the property description. Your description for this environment."
+        },
+        "endpointURL": {
+          "type": "string",
+          "description": "Gets and sets the property endpointURL."
+        },
+        "environmentName": {
+          "type": "string",
+          "description": "Gets and sets the property environmentName. A unique name for the environment."
+        },
+        "operationsRole": {
+          "type": "string",
+          "description": "Gets and sets the property operationsRole. The Amazon Resource Name (ARN) of an existing IAM role to be used as the environment's operations role."
+        },
+        "optionSettings": {
+          "type": "array",
+          "description": "Gets and sets the property optionSettings. Key-value pairs defining configuration options for this environment, such as the instance type.",
+          "items": {
+            "$ref": "#/definitions/OptionSetting"
+          },
+          "x-ms-identifiers": []
+        },
+        "platformArn": {
+          "type": "string",
+          "description": "Gets and sets the property platformArn. The Amazon Resource Name (ARN) of the custom platform to use with the environment."
+        },
+        "solutionStackName": {
+          "type": "string",
+          "description": "Gets and sets the property solutionStackName. The name of an Elastic Beanstalk solution stack (platform version) to use with the environment."
+        },
+        "tags": {
+          "type": "array",
+          "description": "Gets and sets the property tags. Specifies the tags applied to resources in the environment.",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": []
+        },
+        "templateName": {
+          "type": "string",
+          "description": "Gets and sets the property templateName. The name of the Elastic Beanstalk configuration template to use with the environment."
+        },
+        "tier": {
+          "$ref": "#/definitions/Tier",
+          "description": "Gets and sets the property tier. Specifies the tier to use in creating this environment. The environment tier that you choose determines whether Elastic Beanstalk provisions resources to support a web application that handles HTTP(S) requests or a web application that handles background-processing tasks."
+        },
+        "versionLabel": {
+          "type": "string",
+          "description": "Gets and sets the property versionLabel. The name of the application version to deploy."
+        }
+      }
+    },
+    "ElasticBeanstalkEnvironment": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ElasticBeanstalkEnvironmentProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ElasticBeanstalkEnvironmentListResult": {
+      "type": "object",
+      "description": "The response of a ElasticBeanstalkEnvironment list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ElasticBeanstalkEnvironment items on this page",
+          "items": {
+            "$ref": "#/definitions/ElasticBeanstalkEnvironment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ElasticBeanstalkEnvironmentProperties": {
+      "type": "object",
+      "description": "Definition of ElasticBeanstalkEnvironment",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsElasticBeanstalkEnvironmentProperties",
+          "description": "Gets and sets the property awsProperties."
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "Gets and sets the property awsAccountId."
+        },
+        "awsResourceName": {
+          "type": "string",
+          "description": "Gets and sets the property awsResourceName."
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "Gets and sets the property awsSourceSchema."
+        },
+        "awsSdkVersion": {
+          "type": "string",
+          "description": "Gets and sets the property awsSdkVersion."
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "Gets and sets the property awsRegion."
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "Gets and sets the property awsTags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "ElasticBeanstalkEnvironmentTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in ElasticBeanstalkEnvironment resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "OptionSetting": {
+      "type": "object",
+      "description": "Definition of OptionSetting",
+      "properties": {
+        "namespace": {
+          "type": "string",
+          "description": "Gets and sets the property `namespace`. A unique namespace that identifies the option's associated AWS resource."
+        },
+        "optionName": {
+          "type": "string",
+          "description": "Gets and sets the property optionName. The name of the configuration option."
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "Gets and sets the property resourceName. A unique resource name for the option setting. Use it for a time–based scaling configuration option."
+        },
+        "value": {
+          "type": "string",
+          "description": "Gets and sets the property value. The current value for the configuration option."
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Gets and sets the property key. The key name of the tag."
+        },
+        "value": {
+          "type": "string",
+          "description": "Gets and sets the property value. The value for the tag."
+        }
+      }
+    },
+    "Tier": {
+      "type": "object",
+      "description": "Definition of Tier",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets and sets the property name. The name of this environment tier."
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets and sets the property type. The type of this environment tier."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets and sets the property version. The version of this environment tier. When you don't set a value to it, Elastic Beanstalk uses the latest compatible worker tier version."
+        }
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Api versions",
+      "enum": [
+        "2024-08-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "2024-08-01-preview",
+            "value": "2024-08-01-preview",
+            "description": "2024-08-01-preview api version"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

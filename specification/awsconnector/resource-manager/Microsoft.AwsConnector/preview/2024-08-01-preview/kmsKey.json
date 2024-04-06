@@ -1,0 +1,776 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.AwsConnector",
+    "version": "2024-08-01-preview",
+    "description": "Microsoft.AwsConnector Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "KmsKeys"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AwsConnector/kmsKeys": {
+      "get": {
+        "operationId": "KmsKeys_ListBySubscription",
+        "tags": [
+          "KmsKeys"
+        ],
+        "description": "List KmsKey resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/KmsKeyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KmsKeys_ListBySubscription": {
+            "$ref": "./examples/KmsKeys_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/kmsKeys": {
+      "get": {
+        "operationId": "KmsKeys_ListByResourceGroup",
+        "tags": [
+          "KmsKeys"
+        ],
+        "description": "List KmsKey resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/KmsKeyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KmsKeys_ListByResourceGroup": {
+            "$ref": "./examples/KmsKeys_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AwsConnector/kmsKeys/{name}": {
+      "get": {
+        "operationId": "KmsKeys_Get",
+        "tags": [
+          "KmsKeys"
+        ],
+        "description": "Get a KmsKey",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of KmsKey",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/KmsKey"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KmsKeys_Get": {
+            "$ref": "./examples/KmsKeys_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "KmsKeys_CreateOrUpdate",
+        "tags": [
+          "KmsKeys"
+        ],
+        "description": "Create a KmsKey. Please note that end user resource creation is currently restricted, but it will be enabled in the future.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of KmsKey",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KmsKey"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'KmsKey' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/KmsKey"
+            }
+          },
+          "201": {
+            "description": "Resource 'KmsKey' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/KmsKey"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KmsKeys_CreateOrUpdate": {
+            "$ref": "./examples/KmsKeys_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "KmsKeys_Update",
+        "tags": [
+          "KmsKeys"
+        ],
+        "description": "Update a KmsKey",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of KmsKey",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KmsKeyTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/KmsKey"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KmsKeys_Update": {
+            "$ref": "./examples/KmsKeys_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "KmsKeys_Delete",
+        "tags": [
+          "KmsKeys"
+        ],
+        "description": "Delete a KmsKey",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of KmsKey",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{0,259}[^\\s.]$)(?!.*[<>%&\\?/#])"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KmsKeys_Delete": {
+            "$ref": "./examples/KmsKeys_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AwsKmsKeyProperties": {
+      "type": "object",
+      "description": "Definition of awsKmsKey",
+      "properties": {
+        "arn": {
+          "type": "string",
+          "description": "Gets and sets the property arn."
+        },
+        "bypassPolicyLockoutSafetyCheck": {
+          "type": "boolean",
+          "description": "Gets and sets the property bypassPolicyLockoutSafetyCheck. Skips ('bypasses') the key policy lockout safety check. The default value is false."
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets and sets the property description. A description of the AWS KMS key. Use a description that helps you to distinguish this AWS KMS key from others in the account, such as its intended use."
+        },
+        "enableKeyRotation": {
+          "type": "boolean",
+          "description": "Gets and sets the property enableKeyRotation. Enables automatic rotation of the key material for the specified AWS KMS key. By default, automation key rotation is not enabled."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Gets and sets the property enabled. Specifies whether the AWS KMS key is enabled. Disabled AWS KMS keys cannot be used in cryptographic operations."
+        },
+        "keyId": {
+          "type": "string",
+          "description": "Gets and sets the property keyId."
+        },
+        "keyPolicy": {
+          "type": "string",
+          "description": "Gets and sets the property keyPolicy. The key policy that authorizes use of the AWS KMS key. The key policy must observe the following rules."
+        },
+        "keySpec": {
+          "$ref": "#/definitions/KeySpec",
+          "description": "Gets and sets the property keySpec. Specifies the type of AWS KMS key to create. The default value is SYMMETRIC_DEFAULT. This property is required only for asymmetric AWS KMS keys. You can't change the KeySpec value after the AWS KMS key is created."
+        },
+        "keyUsage": {
+          "$ref": "#/definitions/KeyUsage",
+          "description": "Gets and sets the property keyUsage. Determines the cryptographic operations for which you can use the AWS KMS key. The default value is ENCRYPT_DECRYPT. This property is required only for asymmetric AWS KMS keys. You can't change the KeyUsage value after the AWS KMS key is created."
+        },
+        "multiRegion": {
+          "type": "boolean",
+          "description": "Gets and sets the property multiRegion. Specifies whether the AWS KMS key should be Multi-Region. You can't change the MultiRegion value after the AWS KMS key is created."
+        },
+        "origin": {
+          "$ref": "#/definitions/Origin",
+          "description": "Gets and sets the property origin. The source of the key material for the KMS key. You cannot change the origin after you create the KMS key. The default is AWS_KMS, which means that AWS KMS creates the key material."
+        },
+        "pendingWindowInDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets and sets the property pendingWindowInDays. Specifies the number of days in the waiting period before AWS KMS deletes an AWS KMS key that has been removed from a CloudFormation stack. Enter a value between 7 and 30 days. The default value is 30 days."
+        },
+        "tags": {
+          "type": "array",
+          "description": "Gets and sets the property tags. An array of key-value pairs to apply to this resource.",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "KeySpec": {
+      "type": "string",
+      "description": "KeySpec enum",
+      "enum": [
+        "ECC_NIST_P256",
+        "ECC_NIST_P384",
+        "ECC_NIST_P521",
+        "ECC_SECG_P256K1",
+        "HMAC_224",
+        "HMAC_256",
+        "HMAC_384",
+        "HMAC_512",
+        "RSA_2048",
+        "RSA_3072",
+        "RSA_4096",
+        "SM2",
+        "SYMMETRIC_DEFAULT"
+      ],
+      "x-ms-enum": {
+        "name": "KeySpec",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ECC_NIST_P256",
+            "value": "ECC_NIST_P256",
+            "description": "KeySpec enum ECC_NIST_P256"
+          },
+          {
+            "name": "ECC_NIST_P384",
+            "value": "ECC_NIST_P384",
+            "description": "KeySpec enum ECC_NIST_P384"
+          },
+          {
+            "name": "ECC_NIST_P521",
+            "value": "ECC_NIST_P521",
+            "description": "KeySpec enum ECC_NIST_P521"
+          },
+          {
+            "name": "ECC_SECG_P256K1",
+            "value": "ECC_SECG_P256K1",
+            "description": "KeySpec enum ECC_SECG_P256K1"
+          },
+          {
+            "name": "HMAC_224",
+            "value": "HMAC_224",
+            "description": "KeySpec enum HMAC_224"
+          },
+          {
+            "name": "HMAC_256",
+            "value": "HMAC_256",
+            "description": "KeySpec enum HMAC_256"
+          },
+          {
+            "name": "HMAC_384",
+            "value": "HMAC_384",
+            "description": "KeySpec enum HMAC_384"
+          },
+          {
+            "name": "HMAC_512",
+            "value": "HMAC_512",
+            "description": "KeySpec enum HMAC_512"
+          },
+          {
+            "name": "RSA_2048",
+            "value": "RSA_2048",
+            "description": "KeySpec enum RSA_2048"
+          },
+          {
+            "name": "RSA_3072",
+            "value": "RSA_3072",
+            "description": "KeySpec enum RSA_3072"
+          },
+          {
+            "name": "RSA_4096",
+            "value": "RSA_4096",
+            "description": "KeySpec enum RSA_4096"
+          },
+          {
+            "name": "SM2",
+            "value": "SM2",
+            "description": "KeySpec enum SM2"
+          },
+          {
+            "name": "SYMMETRIC_DEFAULT",
+            "value": "SYMMETRIC_DEFAULT",
+            "description": "KeySpec enum SYMMETRIC_DEFAULT"
+          }
+        ]
+      }
+    },
+    "KeyUsage": {
+      "type": "string",
+      "description": "KeyUsage enum",
+      "enum": [
+        "ENCRYPT_DECRYPT",
+        "GENERATE_VERIFY_MAC",
+        "SIGN_VERIFY"
+      ],
+      "x-ms-enum": {
+        "name": "KeyUsage",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ENCRYPT_DECRYPT",
+            "value": "ENCRYPT_DECRYPT",
+            "description": "KeyUsage enum ENCRYPT_DECRYPT"
+          },
+          {
+            "name": "GENERATE_VERIFY_MAC",
+            "value": "GENERATE_VERIFY_MAC",
+            "description": "KeyUsage enum GENERATE_VERIFY_MAC"
+          },
+          {
+            "name": "SIGN_VERIFY",
+            "value": "SIGN_VERIFY",
+            "description": "KeyUsage enum SIGN_VERIFY"
+          }
+        ]
+      }
+    },
+    "KmsKey": {
+      "type": "object",
+      "description": "A Microsoft.AwsConnector resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/KmsKeyProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "KmsKeyListResult": {
+      "type": "object",
+      "description": "The response of a KmsKey list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The KmsKey items on this page",
+          "items": {
+            "$ref": "#/definitions/KmsKey"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "KmsKeyProperties": {
+      "type": "object",
+      "description": "Definition of KmsKey",
+      "properties": {
+        "awsProperties": {
+          "$ref": "#/definitions/AwsKmsKeyProperties",
+          "description": "Gets and sets the property awsProperties."
+        },
+        "publicCloudConnectorsResourceId": {
+          "type": "string",
+          "description": "Gets and sets the property publicCloudConnectorsResourceId."
+        },
+        "awsAccountId": {
+          "type": "string",
+          "description": "Gets and sets the property awsAccountId."
+        },
+        "awsResourceName": {
+          "type": "string",
+          "description": "Gets and sets the property awsResourceName."
+        },
+        "awsSourceSchema": {
+          "type": "string",
+          "description": "Gets and sets the property awsSourceSchema."
+        },
+        "awsSdkVersion": {
+          "type": "string",
+          "description": "Gets and sets the property awsSdkVersion."
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "Gets and sets the property awsRegion."
+        },
+        "awsTags": {
+          "type": "object",
+          "description": "Gets and sets the property awsTags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Gets and sets the property provisioningState.The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "KmsKeyTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in KmsKey resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Origin": {
+      "type": "string",
+      "description": "Origin enum",
+      "enum": [
+        "AWS_KMS",
+        "EXTERNAL"
+      ],
+      "x-ms-enum": {
+        "name": "Origin",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AWS_KMS",
+            "value": "AWS_KMS",
+            "description": "Origin enum AWS_KMS"
+          },
+          {
+            "name": "EXTERNAL",
+            "value": "EXTERNAL",
+            "description": "Origin enum EXTERNAL"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "Tag": {
+      "type": "object",
+      "description": "Definition of Tag",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Gets and sets the property key. The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -."
+        },
+        "value": {
+          "type": "string",
+          "description": "Gets and sets the property value. The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -."
+        }
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "Api versions",
+      "enum": [
+        "2024-08-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "2024-08-01-preview",
+            "value": "2024-08-01-preview",
+            "description": "2024-08-01-preview api version"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

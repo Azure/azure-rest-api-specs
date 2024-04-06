@@ -1,9 +1,9 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "../shared/main.tsp";
 
@@ -12,18 +12,25 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using OpenAPI;
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "Supress missing operations endpoint as the same is defined ../operations/main.tsp."
 @armProviderNamespace
 @service({
   title: "Microsoft.AwsConnector",
-  version: "2024-08-01-preview",
 })
 @doc("Microsoft.AwsConnector Resource Provider management API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.AwsConnector;
+
+/** Api versions */
+enum Versions {
+  /** 2024-08-01-preview api version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  `2024-08-01-preview`,
+}
 
 //---------------------------------------------- S3Buckets ----------------------------------------------
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the name is defined in aws."
@@ -39,6 +46,8 @@ model S3Bucket is TrackedResource<S3BucketProperties> {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of S3Bucket")
 model S3BucketProperties {
   @doc("Gets and sets the property awsProperties.")
@@ -49,6 +58,8 @@ model S3BucketProperties {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of awsS3Bucket")
 model AwsS3BucketProperties {
   @doc("Gets and sets the property accelerateConfiguration. Configuration for the transfer acceleration state.")
@@ -133,7 +144,7 @@ model AwsS3BucketProperties {
 }
 
 @doc("AccessControl enum")
-enum AccessControl {
+union AccessControl {
   @doc("AccessControl enum AuthenticatedRead")
   AuthenticatedRead: "AuthenticatedRead",
 
@@ -157,10 +168,14 @@ enum AccessControl {
 
   @doc("AccessControl enum PublicReadWrite")
   PublicReadWrite: "PublicReadWrite",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of AccelerateConfiguration")
 model AccelerateConfiguration {
   @doc("Gets and sets the property accelerationStatus. Configures the transfer acceleration state for an Amazon S3 bucket.")
@@ -168,16 +183,20 @@ model AccelerateConfiguration {
 }
 
 @doc("AccelerateConfigurationAccelerationStatus enum")
-enum AccelerateConfigurationAccelerationStatus {
+union AccelerateConfigurationAccelerationStatus {
   @doc("AccelerateConfigurationAccelerationStatus enum Enabled")
   Enabled: "Enabled",
 
   @doc("AccelerateConfigurationAccelerationStatus enum Suspended")
   Suspended: "Suspended",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of AnalyticsConfiguration")
 model AnalyticsConfiguration {
   @doc("Gets and sets the property id. The ID that identifies the analytics configuration.")
@@ -196,6 +215,8 @@ model AnalyticsConfiguration {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of BucketEncryption")
 model BucketEncryption {
   @doc("Gets and sets the property serverSideEncryptionConfiguration. Specifies the default server-side-encryption configuration.")
@@ -205,6 +226,8 @@ model BucketEncryption {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CorsConfiguration")
 model CorsConfiguration {
   @doc("Gets and sets the property corsRules.")
@@ -214,6 +237,8 @@ model CorsConfiguration {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of IntelligentTieringConfiguration")
 model IntelligentTieringConfiguration {
   @doc("Gets and sets the property id. The ID used to identify the S3 Intelligent-Tiering configuration.")
@@ -235,16 +260,20 @@ model IntelligentTieringConfiguration {
 }
 
 @doc("IntelligentTieringConfigurationStatus enum")
-enum IntelligentTieringConfigurationStatus {
+union IntelligentTieringConfigurationStatus {
   @doc("IntelligentTieringConfigurationStatus enum Disabled")
   Disabled: "Disabled",
 
   @doc("IntelligentTieringConfigurationStatus enum Enabled")
   Enabled: "Enabled",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of InventoryConfiguration")
 model InventoryConfiguration {
   @doc("Gets and sets the property destination. Specifies information about where to publish analysis or configuration results for an Amazon S3 bucket and S3 Replication Time Control (S3 RTC).")
@@ -271,25 +300,31 @@ model InventoryConfiguration {
 }
 
 @doc("InventoryConfigurationIncludedObjectVersions enum")
-enum InventoryConfigurationIncludedObjectVersions {
+union InventoryConfigurationIncludedObjectVersions {
   @doc("InventoryConfigurationIncludedObjectVersions enum All")
   All: "All",
 
   @doc("InventoryConfigurationIncludedObjectVersions enum Current")
   Current: "Current",
+
+  string,
 }
 
 @doc("InventoryConfigurationScheduleFrequency enum")
-enum InventoryConfigurationScheduleFrequency {
+union InventoryConfigurationScheduleFrequency {
   @doc("InventoryConfigurationScheduleFrequency enum Daily")
   Daily: "Daily",
 
   @doc("InventoryConfigurationScheduleFrequency enum Weekly")
   Weekly: "Weekly",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of LifecycleConfiguration")
 model LifecycleConfiguration {
   @doc("Gets and sets the property rules. A lifecycle rule for individual objects in an Amazon S3 bucket.")
@@ -298,7 +333,7 @@ model LifecycleConfiguration {
 }
 
 @doc("InventoryConfigurationOptionalFields enum")
-enum InventoryConfigurationOptionalFields {
+union InventoryConfigurationOptionalFields {
   @doc("InventoryConfigurationOptionalFields enum BucketKeyStatus")
   BucketKeyStatus: "BucketKeyStatus",
 
@@ -343,10 +378,14 @@ enum InventoryConfigurationOptionalFields {
 
   @doc("InventoryConfigurationOptionalFields enum StorageClass")
   StorageClass: "StorageClass",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of LoggingConfiguration")
 model LoggingConfiguration {
   @doc("Gets and sets the property destinationBucketName. The name of an Amazon S3 bucket where Amazon S3 store server access log files. You can store log files in any bucket that you own. By default, logs are stored in the bucket where the LoggingConfiguration property is defined.")
@@ -361,6 +400,8 @@ model LoggingConfiguration {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of MetricsConfiguration")
 model MetricsConfiguration {
   @doc("Gets and sets the property accessPointArn.")
@@ -379,6 +420,8 @@ model MetricsConfiguration {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of NotificationConfiguration")
 model NotificationConfiguration {
   @doc("Gets and sets the property eventBridgeConfiguration. Describes the Amazon EventBridge notification configuration for an Amazon S3 bucket.")
@@ -399,6 +442,8 @@ model NotificationConfiguration {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ObjectLockConfiguration")
 model ObjectLockConfiguration {
   @doc("Gets and sets the property objectLockEnabled.")
@@ -410,6 +455,8 @@ model ObjectLockConfiguration {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of OwnershipControls")
 model OwnershipControls {
   @doc("Gets and sets the property rules.")
@@ -419,6 +466,8 @@ model OwnershipControls {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of PublicAccessBlockConfiguration")
 model PublicAccessBlockConfiguration {
   @doc("Gets and sets the property blockPublicAcls. Specifies whether Amazon S3 should block public access control lists (ACLs) for this bucket and objects in this bucket. Setting this element to TRUE causes the following behavior:- PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public. - PUT Object calls fail if the request includes a public ACL.Enabling this setting doesn't affect existing policies or ACLs.")
@@ -436,6 +485,8 @@ model PublicAccessBlockConfiguration {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ReplicationConfiguration")
 model ReplicationConfiguration {
   @doc("Gets and sets the property role. The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that Amazon S3 assumes when replicating objects.")
@@ -448,6 +499,8 @@ model ReplicationConfiguration {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tag")
 model Tag {
   @doc("Gets and sets the property key.")
@@ -459,6 +512,8 @@ model Tag {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of VersioningConfiguration")
 model VersioningConfiguration {
   @doc("Gets and sets the property status. The versioning state of the bucket.")
@@ -466,16 +521,20 @@ model VersioningConfiguration {
 }
 
 @doc("VersioningConfigurationStatus enum")
-enum VersioningConfigurationStatus {
+union VersioningConfigurationStatus {
   @doc("VersioningConfigurationStatus enum Enabled")
   Enabled: "Enabled",
 
   @doc("VersioningConfigurationStatus enum Suspended")
   Suspended: "Suspended",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of WebsiteConfiguration")
 model WebsiteConfiguration {
   @doc("Gets and sets the property errorDocument. The name of the error document for the website.")
@@ -494,6 +553,8 @@ model WebsiteConfiguration {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of StorageClassAnalysis")
 model StorageClassAnalysis {
   @doc("Gets and sets the property dataExport. Specifies how data related to the storage class analysis for an Amazon S3 bucket should be exported.")
@@ -502,6 +563,8 @@ model StorageClassAnalysis {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of TagFilter")
 model TagFilter {
   @doc("Gets and sets the property key.")
@@ -513,6 +576,8 @@ model TagFilter {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ServerSideEncryptionRule")
 model ServerSideEncryptionRule {
   @doc("Gets and sets the property bucketKeyEnabled. Specifies whether Amazon S3 should use an S3 Bucket Key with server-side encryption using KMS (SSE-KMS) for new objects in the bucket. Existing objects are not affected. Setting the BucketKeyEnabled element to true causes Amazon S3 to use an S3 Bucket Key. By default, S3 Bucket Key is not enabled.")
@@ -524,6 +589,8 @@ model ServerSideEncryptionRule {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of CorsRule")
 model CorsRule {
   @doc("Gets and sets the property allowedHeaders. Headers that are specified in the Access-Control-Request-Headers header.")
@@ -550,7 +617,7 @@ model CorsRule {
 }
 
 @doc("CorsRuleAllowedMethods enum")
-enum CorsRuleAllowedMethods {
+union CorsRuleAllowedMethods {
   @doc("CorsRuleAllowedMethods enum DELETE")
   DELETE: "DELETE",
 
@@ -565,10 +632,14 @@ enum CorsRuleAllowedMethods {
 
   @doc("CorsRuleAllowedMethods enum PUT")
   PUT: "PUT",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Tiering")
 model Tiering {
   @doc("Gets and sets the property accessTier. S3 Intelligent-Tiering access tier. See Storage class for automatically optimizing frequently and infrequently accessed objects for a list of access tiers in the S3 Intelligent-Tiering storage class.")
@@ -579,16 +650,20 @@ model Tiering {
 }
 
 @doc("TieringAccessTier enum")
-enum TieringAccessTier {
+union TieringAccessTier {
   @doc("TieringAccessTier enum ARCHIVE_ACCESS")
   ARCHIVE_ACCESS: "ARCHIVE_ACCESS",
 
   @doc("TieringAccessTier enum DEEP_ARCHIVE_ACCESS")
   DEEP_ARCHIVE_ACCESS: "DEEP_ARCHIVE_ACCESS",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Destination")
 model Destination {
   @doc("Gets and sets the property bucketAccountId. The account ID that owns the destination S3 bucket. ")
@@ -605,7 +680,7 @@ model Destination {
 }
 
 @doc("DestinationFormat enum")
-enum DestinationFormat {
+union DestinationFormat {
   @doc("DestinationFormat enum CSV")
   CSV: "CSV",
 
@@ -614,10 +689,14 @@ enum DestinationFormat {
 
   @doc("DestinationFormat enum Parquet")
   Parquet: "Parquet",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Rule")
 model Rule {
   @doc("Gets and sets the property abortIncompleteMultipartUpload. Specifies the days since the initiation of an incomplete multipart upload that Amazon S3 will wait before permanently removing all parts of the upload.")
@@ -673,16 +752,20 @@ model Rule {
 }
 
 @doc("RuleStatus enum")
-enum RuleStatus {
+union RuleStatus {
   @doc("RuleStatus enum Disabled")
   Disabled: "Disabled",
 
   @doc("RuleStatus enum Enabled")
   Enabled: "Enabled",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of TargetObjectKeyFormat")
 model TargetObjectKeyFormat {
   @doc("Gets and sets the property simplePrefix. This format defaults the prefix to the given log file prefix for delivering server access log file.")
@@ -694,6 +777,8 @@ model TargetObjectKeyFormat {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EventBridgeConfiguration")
 model EventBridgeConfiguration {
   @doc("Gets and sets the property eventBridgeEnabled. Specifies whether to send notifications to Amazon EventBridge when events occur in an Amazon S3 bucket.")
@@ -702,6 +787,8 @@ model EventBridgeConfiguration {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of LambdaConfiguration")
 model LambdaConfiguration {
   @doc("Gets and sets the property event. The Amazon S3 bucket event for which to invoke the AWS Lambda function.")
@@ -716,6 +803,8 @@ model LambdaConfiguration {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of QueueConfiguration")
 model QueueConfiguration {
   @doc("Gets and sets the property event. The Amazon S3 bucket event about which you want to publish messages to Amazon SQS.")
@@ -730,6 +819,8 @@ model QueueConfiguration {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of TopicConfiguration")
 model TopicConfiguration {
   @doc("Gets and sets the property event. The Amazon S3 bucket event about which to send notifications.")
@@ -744,6 +835,8 @@ model TopicConfiguration {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ObjectLockRule")
 model ObjectLockRule {
   @doc("Gets and sets the property defaultRetention. The default retention period that you want to apply to new objects placed in the specified bucket.")
@@ -752,6 +845,8 @@ model ObjectLockRule {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of OwnershipControlsRule")
 model OwnershipControlsRule {
   @doc("Gets and sets the property objectOwnership. Specifies an object ownership rule.")
@@ -759,7 +854,7 @@ model OwnershipControlsRule {
 }
 
 @doc("OwnershipControlsRuleObjectOwnership enum")
-enum OwnershipControlsRuleObjectOwnership {
+union OwnershipControlsRuleObjectOwnership {
   @doc("OwnershipControlsRuleObjectOwnership enum BucketOwnerEnforced")
   BucketOwnerEnforced: "BucketOwnerEnforced",
 
@@ -768,10 +863,14 @@ enum OwnershipControlsRuleObjectOwnership {
 
   @doc("OwnershipControlsRuleObjectOwnership enum ObjectWriter")
   ObjectWriter: "ObjectWriter",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ReplicationRule")
 model ReplicationRule {
   @doc("Gets and sets the property deleteMarkerReplication.")
@@ -800,16 +899,20 @@ model ReplicationRule {
 }
 
 @doc("ReplicationRuleStatus enum")
-enum ReplicationRuleStatus {
+union ReplicationRuleStatus {
   @doc("ReplicationRuleStatus enum Disabled")
   Disabled: "Disabled",
 
   @doc("ReplicationRuleStatus enum Enabled")
   Enabled: "Enabled",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RedirectAllRequestsTo")
 model RedirectAllRequestsTo {
   @doc("Gets and sets the property hostName. Name of the host where requests are redirected.")
@@ -820,16 +923,20 @@ model RedirectAllRequestsTo {
 }
 
 @doc("RedirectAllRequestsToProtocol enum")
-enum RedirectAllRequestsToProtocol {
+union RedirectAllRequestsToProtocol {
   @doc("RedirectAllRequestsToProtocol enum http")
   http: "http",
 
   @doc("RedirectAllRequestsToProtocol enum https")
   https: "https",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RoutingRule")
 model RoutingRule {
   @doc("Gets and sets the property redirectRule. Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can specify a different error code to return. Specifies how requests are redirected. In the event of an error, you can specify a different error code to return.")
@@ -841,6 +948,8 @@ model RoutingRule {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of DataExport")
 model DataExport {
   @doc("Gets and sets the property destination. Specifies information about where to publish analysis or configuration results for an Amazon S3 bucket and S3 Replication Time Control (S3 RTC).")
@@ -852,6 +961,8 @@ model DataExport {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ServerSideEncryptionByDefault")
 model ServerSideEncryptionByDefault {
   @doc("Gets and sets the property kmsMasterKeyID. 'KMSMasterKeyID' can only be used when you set the value of SSEAlgorithm as aws:kms or aws:kms:dsse.")
@@ -862,7 +973,7 @@ model ServerSideEncryptionByDefault {
 }
 
 @doc("ServerSideEncryptionByDefaultSSEAlgorithm enum")
-enum ServerSideEncryptionByDefaultSSEAlgorithm {
+union ServerSideEncryptionByDefaultSSEAlgorithm {
   @doc("ServerSideEncryptionByDefaultSSEAlgorithm enum AES256")
   AES256: "AES256",
 
@@ -871,10 +982,14 @@ enum ServerSideEncryptionByDefaultSSEAlgorithm {
 
   @doc("ServerSideEncryptionByDefaultSSEAlgorithm enum aws:kms:dsse")
   AwsKmsDsse: "aws:kms:dsse",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of AbortIncompleteMultipartUpload")
 model AbortIncompleteMultipartUpload {
   @doc("Gets and sets the property daysAfterInitiation. Specifies the number of days after which Amazon S3 aborts an incomplete multipart upload.")
@@ -883,6 +998,8 @@ model AbortIncompleteMultipartUpload {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of NoncurrentVersionExpiration")
 model NoncurrentVersionExpiration {
   @doc("Gets and sets the property newerNoncurrentVersions. Specified the number of newer noncurrent and current versions that must exists before performing the associated action")
@@ -894,6 +1011,8 @@ model NoncurrentVersionExpiration {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of NoncurrentVersionTransition")
 model NoncurrentVersionTransition {
   @doc("Gets and sets the property newerNoncurrentVersions. Specified the number of newer noncurrent and current versions that must exists before performing the associated action")
@@ -907,7 +1026,7 @@ model NoncurrentVersionTransition {
 }
 
 @doc("NoncurrentVersionTransitionStorageClass enum")
-enum NoncurrentVersionTransitionStorageClass {
+union NoncurrentVersionTransitionStorageClass {
   @doc("NoncurrentVersionTransitionStorageClass enum DEEP_ARCHIVE")
   DEEP_ARCHIVE: "DEEP_ARCHIVE",
 
@@ -925,10 +1044,14 @@ enum NoncurrentVersionTransitionStorageClass {
 
   @doc("NoncurrentVersionTransitionStorageClass enum STANDARD_IA")
   STANDARD_IA: "STANDARD_IA",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Transition")
 model Transition {
   @doc("Gets and sets the property storageClass.")
@@ -942,7 +1065,7 @@ model Transition {
 }
 
 @doc("TransitionStorageClass enum")
-enum TransitionStorageClass {
+union TransitionStorageClass {
   @doc("TransitionStorageClass enum DEEP_ARCHIVE")
   DEEP_ARCHIVE: "DEEP_ARCHIVE",
 
@@ -960,10 +1083,14 @@ enum TransitionStorageClass {
 
   @doc("TransitionStorageClass enum STANDARD_IA")
   STANDARD_IA: "STANDARD_IA",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of PartitionedPrefix")
 model PartitionedPrefix {
   @doc("Gets and sets the property partitionDateSource. Date Source for creating a partitioned prefix. This can be event time or delivery time.")
@@ -971,16 +1098,20 @@ model PartitionedPrefix {
 }
 
 @doc("PartitionedPrefixPartitionDateSource enum")
-enum PartitionedPrefixPartitionDateSource {
+union PartitionedPrefixPartitionDateSource {
   @doc("PartitionedPrefixPartitionDateSource enum DeliveryTime")
   DeliveryTime: "DeliveryTime",
 
   @doc("PartitionedPrefixPartitionDateSource enum EventTime")
   EventTime: "EventTime",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of NotificationFilter")
 model NotificationFilter {
   @doc("Gets and sets the property s3Key. A container for object key name prefix and suffix filtering rules.")
@@ -989,6 +1120,8 @@ model NotificationFilter {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of DefaultRetention")
 model DefaultRetention {
   @doc("Gets and sets the property days.")
@@ -1002,16 +1135,20 @@ model DefaultRetention {
 }
 
 @doc("DefaultRetentionMode enum")
-enum DefaultRetentionMode {
+union DefaultRetentionMode {
   @doc("DefaultRetentionMode enum COMPLIANCE")
   COMPLIANCE: "COMPLIANCE",
 
   @doc("DefaultRetentionMode enum GOVERNANCE")
   GOVERNANCE: "GOVERNANCE",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of DeleteMarkerReplication")
 model DeleteMarkerReplication {
   @doc("Gets and sets the property status.")
@@ -1019,16 +1156,20 @@ model DeleteMarkerReplication {
 }
 
 @doc("DeleteMarkerReplicationStatus enum")
-enum DeleteMarkerReplicationStatus {
+union DeleteMarkerReplicationStatus {
   @doc("DeleteMarkerReplicationStatus enum Disabled")
   Disabled: "Disabled",
 
   @doc("DeleteMarkerReplicationStatus enum Enabled")
   Enabled: "Enabled",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ReplicationDestination")
 model ReplicationDestination {
   @doc("Gets and sets the property accessControlTranslation. Specify this only in a cross-account scenario (where source and destination bucket owners are not the same), and you want to change replica ownership to the AWS account that owns the destination bucket. If this is not specified in the replication configuration, the replicas are owned by same AWS account that owns the source object.")
@@ -1054,7 +1195,7 @@ model ReplicationDestination {
 }
 
 @doc("ReplicationDestinationStorageClass enum")
-enum ReplicationDestinationStorageClass {
+union ReplicationDestinationStorageClass {
   @doc("ReplicationDestinationStorageClass enum DEEP_ARCHIVE")
   DEEP_ARCHIVE: "DEEP_ARCHIVE",
 
@@ -1078,10 +1219,14 @@ enum ReplicationDestinationStorageClass {
 
   @doc("ReplicationDestinationStorageClass enum STANDARD_IA")
   STANDARD_IA: "STANDARD_IA",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ReplicationRuleFilter")
 model ReplicationRuleFilter {
   @doc("Gets and sets the property and.")
@@ -1096,6 +1241,8 @@ model ReplicationRuleFilter {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of SourceSelectionCriteria")
 model SourceSelectionCriteria {
   @doc("Gets and sets the property replicaModifications. A filter that you can specify for selection for modifications on replicas.")
@@ -1107,6 +1254,8 @@ model SourceSelectionCriteria {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RedirectRule")
 model RedirectRule {
   @doc("Gets and sets the property hostName. The host name to use in the redirect request.")
@@ -1126,16 +1275,20 @@ model RedirectRule {
 }
 
 @doc("RedirectRuleProtocol enum")
-enum RedirectRuleProtocol {
+union RedirectRuleProtocol {
   @doc("RedirectRuleProtocol enum http")
   http: "http",
 
   @doc("RedirectRuleProtocol enum https")
   https: "https",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of RoutingRuleCondition")
 model RoutingRuleCondition {
   @doc("Gets and sets the property httpErrorCodeReturnedEquals. The HTTP error code when the redirect is applied. ")
@@ -1147,6 +1300,8 @@ model RoutingRuleCondition {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of S3KeyFilter")
 model S3KeyFilter {
   @doc("Gets and sets the property rules.")
@@ -1156,6 +1311,8 @@ model S3KeyFilter {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of AccessControlTranslation")
 model AccessControlTranslation {
   @doc("Gets and sets the property owner.")
@@ -1164,6 +1321,8 @@ model AccessControlTranslation {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of EncryptionConfiguration")
 model EncryptionConfiguration {
   @doc("Gets and sets the property replicaKmsKeyID. Specifies the ID (Key ARN or Alias ARN) of the customer managed customer master key (CMK) stored in AWS Key Management Service (KMS) for the destination bucket.")
@@ -1172,6 +1331,8 @@ model EncryptionConfiguration {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of Metrics")
 model Metrics {
   @doc("Gets and sets the property eventThreshold.")
@@ -1182,16 +1343,20 @@ model Metrics {
 }
 
 @doc("MetricsStatus enum")
-enum MetricsStatus {
+union MetricsStatus {
   @doc("MetricsStatus enum Disabled")
   Disabled: "Disabled",
 
   @doc("MetricsStatus enum Enabled")
   Enabled: "Enabled",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ReplicationTime")
 model ReplicationTime {
   @doc("Gets and sets the property status.")
@@ -1202,16 +1367,20 @@ model ReplicationTime {
 }
 
 @doc("ReplicationTimeStatus enum")
-enum ReplicationTimeStatus {
+union ReplicationTimeStatus {
   @doc("ReplicationTimeStatus enum Disabled")
   Disabled: "Disabled",
 
   @doc("ReplicationTimeStatus enum Enabled")
   Enabled: "Enabled",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ReplicationRuleAndOperator")
 model ReplicationRuleAndOperator {
   @doc("Gets and sets the property prefix.")
@@ -1224,6 +1393,8 @@ model ReplicationRuleAndOperator {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ReplicaModifications")
 model ReplicaModifications {
   @doc("Gets and sets the property status. Specifies whether Amazon S3 replicates modifications on replicas.")
@@ -1231,16 +1402,20 @@ model ReplicaModifications {
 }
 
 @doc("ReplicaModificationsStatus enum")
-enum ReplicaModificationsStatus {
+union ReplicaModificationsStatus {
   @doc("ReplicaModificationsStatus enum Disabled")
   Disabled: "Disabled",
 
   @doc("ReplicaModificationsStatus enum Enabled")
   Enabled: "Enabled",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of SseKmsEncryptedObjects")
 model SseKmsEncryptedObjects {
   @doc("Gets and sets the property status. Specifies whether Amazon S3 replicates objects created with server-side encryption using a customer master key (CMK) stored in AWS Key Management Service.")
@@ -1248,16 +1423,20 @@ model SseKmsEncryptedObjects {
 }
 
 @doc("SseKmsEncryptedObjectsStatus enum")
-enum SseKmsEncryptedObjectsStatus {
+union SseKmsEncryptedObjectsStatus {
   @doc("SseKmsEncryptedObjectsStatus enum Disabled")
   Disabled: "Disabled",
 
   @doc("SseKmsEncryptedObjectsStatus enum Enabled")
   Enabled: "Enabled",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of FilterRule")
 model FilterRule {
   @doc("Gets and sets the property name.")
@@ -1269,6 +1448,8 @@ model FilterRule {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Supress casing style as the property name is defined in aws."
 #suppress "@azure-tools/typespec-azure-core/no-unknown" "Supress no-unknown to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Supress arm-no-record to handle the datatype object used in aws"
+#suppress "@azure-tools/typespec-azure-core/property-name-conflict" "AWSConnector will not generate SDK. So, supressing this error"
 @doc("Definition of ReplicationTimeValue")
 model ReplicationTimeValue {
   @doc("Gets and sets the property minutes.")
