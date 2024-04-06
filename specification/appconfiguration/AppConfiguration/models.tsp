@@ -94,10 +94,12 @@ model KeyListResult {
 }
 
 @doc("Keys serve as identifiers for key-values and are used to store and retrieve corresponding values.")
+@resource("keys")
 model Key {
   @doc("The name of the key.")
+  @key
   @visibility("read")
-  name?: string;
+  name: string;
 }
 
 @doc("Azure App Configuration error object.")
@@ -136,9 +138,12 @@ model KeyValueListResult {
 }
 
 @doc("A key-value pair representing application settings.")
+@resource("kv")
 model KeyValue {
+  @key
+  @visibility("read")
   @doc("The key of the key-value.")
-  key?: string;
+  key: string;
 
   @doc("The label the key-value belongs to.")
   label?: string;
@@ -179,10 +184,12 @@ model SnapshotListResult {
 }
 
 @doc("A snapshot is a named, immutable subset of an App Configuration store's key-values.")
+@resource("snapshots")
 model Snapshot {
+  @key
   @doc("The name of the snapshot.")
   @visibility("read")
-  name?: string;
+  name: string;
 
   @doc("The current status of the snapshot.")
   @visibility("read")
@@ -273,10 +280,12 @@ model LabelListResult {
 }
 
 @doc("Labels are used to group key-values.")
+@resource("labels")
 model Label {
+  @key
   @doc("The name of the label.")
   @visibility("read")
-  name?: string;
+  name: string;
 }
 
 @doc("Details of a long running operation.")
