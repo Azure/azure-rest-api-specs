@@ -679,6 +679,11 @@
             "schema": {
               "$ref": "#/definitions/BackupResourceVaultConfigResource"
             }
+          },
+          {
+            "name": "x-ms-authorization-auxiliary",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -731,6 +736,11 @@
             "schema": {
               "$ref": "#/definitions/BackupResourceVaultConfigResource"
             }
+          },
+          {
+            "name": "x-ms-authorization-auxiliary",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -1421,6 +1431,11 @@
             "schema": {
               "$ref": "#/definitions/ProtectedItemResource"
             }
+          },
+          {
+            "name": "x-ms-authorization-auxiliary",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -1805,6 +1820,11 @@
             "schema": {
               "$ref": "#/definitions/RestoreRequestResource"
             }
+          },
+          {
+            "name": "x-ms-authorization-auxiliary",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -1994,6 +2014,11 @@
             "schema": {
               "$ref": "#/definitions/ProtectionPolicyResource"
             }
+          },
+          {
+            "name": "x-ms-authorization-auxiliary",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -4147,6 +4172,11 @@
             "schema": {
               "$ref": "#/definitions/SecurityPinBase"
             }
+          },
+          {
+            "name": "x-ms-authorization-auxiliary",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -9293,6 +9323,13 @@
         "objectType": {
           "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
+        },
+        "resourceGuardOperationRequests": {
+          "description": "ResourceGuardOperationRequests on which LAC check will be performed",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "discriminator": "objectType"
