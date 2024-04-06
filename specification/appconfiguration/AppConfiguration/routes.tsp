@@ -273,36 +273,37 @@ op getKeyValue is standardOps.ResourceRead<
       format: "csv",
     })
     select?: KeyValueFields[];
-  }> & RequestHeadersTrait<{
-    @doc("Used to guarantee real-time consistency between requests.")
-    @header("Sync-Token")
-    syncToken?: string;
+  }> &
+    RequestHeadersTrait<{
+      @doc("Used to guarantee real-time consistency between requests.")
+      @header("Sync-Token")
+      syncToken?: string;
 
-    @doc("""
+      @doc("""
 Requests the server to respond with the state of the resource at the specified
 time.
 """)
-    @header("Accept-Datetime")
-    acceptDatetime?: string;
+      @header("Accept-Datetime")
+      acceptDatetime?: string;
 
-    @doc("""
+      @doc("""
 Used to perform an operation only if the targeted resource's etag matches the
 value provided.
 """)
-    @header("If-Match")
-    ifMatch?: string;
+      @header("If-Match")
+      ifMatch?: string;
 
-    @doc("""
+      @doc("""
 Used to perform an operation only if the targeted resource's etag does not
 match the value provided.
 """)
-    @header("If-None-Match")
-    ifNoneMatch?: string;
+      @header("If-None-Match")
+      ifNoneMatch?: string;
 
-    @doc("Accept header")
-    @header
-    accept: "application/vnd.microsoft.appconfig.kv+json, application/problem+json";
-  }>
+      @doc("Accept header")
+      @header
+      accept: "application/vnd.microsoft.appconfig.kv+json, application/problem+json";
+    }>
 >;
 
 // FIXME: check is service returns 201 and/or 200?
@@ -381,8 +382,7 @@ value provided.
     @header
     accept: "application/vnd.microsoft.appconfig.kv+json, application/problem+json";
   },
-  (KeyValue & AppConfigResponseHeaders)| AppConfigResponseHeaders
-  
+  (KeyValue & AppConfigResponseHeaders) | AppConfigResponseHeaders
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
@@ -513,29 +513,30 @@ op getSnapshot is standardOps.ResourceRead<
       format: "csv",
     })
     select?: SnapshotFields[];
-  }> & RequestHeadersTrait<{
-    @doc("Used to guarantee real-time consistency between requests.")
-    @header("Sync-Token")
-    syncToken?: string;
+  }> &
+    RequestHeadersTrait<{
+      @doc("Used to guarantee real-time consistency between requests.")
+      @header("Sync-Token")
+      syncToken?: string;
 
-    @doc("""
+      @doc("""
 Used to perform an operation only if the targeted resource's etag matches the
 value provided.
 """)
-    @header("If-Match")
-    ifMatch?: string;
+      @header("If-Match")
+      ifMatch?: string;
 
-    @doc("""
+      @doc("""
 Used to perform an operation only if the targeted resource's etag does not
 match the value provided.
 """)
-    @header("If-None-Match")
-    ifNoneMatch?: string;
+      @header("If-None-Match")
+      ifNoneMatch?: string;
 
-    @doc("Accept header")
-    @header
-    accept: "application/vnd.microsoft.appconfig.snapshot+json, application/problem+json";
-  }>
+      @doc("Accept header")
+      @header
+      accept: "application/vnd.microsoft.appconfig.snapshot+json, application/problem+json";
+    }>
 >;
 
 // FIXME: check if the service also supports returning a 200, then can try to use LongRunningResourceCreateOrReplace template, if no SDKs rely on the body name
@@ -564,13 +565,14 @@ op createSnapshot is Foundations.LongRunningOperation<
     @header
     accept: "application/vnd.microsoft.appconfig.snapshot+json, application/problem+json";
   },
-  CreatedResponse & Snapshot & {
-    ...AppConfigResponseHeaders;
+  CreatedResponse &
+    Snapshot & {
+      ...AppConfigResponseHeaders;
 
-    @doc("Includes links to related resources.")
-    @header("Link")
-    link?: string;
-  }
+      @doc("Includes links to related resources.")
+      @header("Link")
+      link?: string;
+    }
 >;
 
 // FIXME: check if the service also supports returning a 201, then can try to use ResourceCreateOrUpdate template, if no SDKs rely on the body name

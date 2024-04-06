@@ -12,18 +12,25 @@ namespace AzureAppConfiguration;
 enum KeyValueFields {
   @doc("Key field.")
   key,
+
   @doc("Label field.")
   label,
+
   @doc("Content type field.")
   content_type,
+
   @doc("Value field.")
   value,
+
   @doc("Last modified field.")
   last_modified,
+
   @doc("Tags field.")
   tags,
+
   @doc("Locked field.")
   locked,
+
   @doc("Etag field.")
   etag,
 }
@@ -32,24 +39,34 @@ enum KeyValueFields {
 enum SnapshotFields {
   @doc("Name field.")
   name,
+
   @doc("Status field.")
   status,
+
   @doc("Filters field.")
   filters,
+
   @doc("Composition type field.")
   composition_type,
+
   @doc("Created field.")
   created,
+
   @doc("Expires field.")
   expires,
+
   @doc("Retention period field.")
   retention_period,
+
   @doc("Size field.")
   size,
+
   @doc("Items count field.")
   items_count,
+
   @doc("Tags field.")
   tags,
+
   @doc("Etag field.")
   etag,
 }
@@ -58,10 +75,13 @@ enum SnapshotFields {
 enum SnapshotStatus {
   @doc("Provisioning")
   provisioning,
+
   @doc("Ready")
   ready,
+
   @doc("Archived")
   archived,
+
   @doc("Failed")
   failed,
 }
@@ -70,6 +90,7 @@ enum SnapshotStatus {
 enum CompositionType {
   @doc("The 'key' composition type.")
   key,
+
   @doc("The 'key_label' composition type.")
   key_label,
 }
