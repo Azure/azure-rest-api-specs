@@ -75,20 +75,20 @@
             "type": "string"
           },
           {
-            "name": "Sync-Token",
-            "in": "header",
-            "description": "Used to guarantee real-time consistency between requests.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "syncToken"
-          },
-          {
             "name": "After",
             "in": "query",
             "description": "Instructs the server to return elements that appear after the element referred\nto by the specified token.",
             "required": false,
             "type": "string",
             "x-ms-client-name": "after"
+          },
+          {
+            "name": "Sync-Token",
+            "in": "header",
+            "description": "Used to guarantee real-time consistency between requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "syncToken"
           },
           {
             "name": "Accept-Datetime",
@@ -177,8 +177,14 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -532,8 +538,18 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              },
+              "ETag": {
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -562,7 +578,7 @@
           {
             "name": "key",
             "in": "path",
-            "description": "The key of the key-value to retrieve.",
+            "description": "The key of the key-value.",
             "required": true,
             "type": "string"
           },
@@ -572,38 +588,6 @@
             "description": "The label of the key-value to retrieve.",
             "required": false,
             "type": "string"
-          },
-          {
-            "name": "Sync-Token",
-            "in": "header",
-            "description": "Used to guarantee real-time consistency between requests.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "syncToken"
-          },
-          {
-            "name": "Accept-Datetime",
-            "in": "header",
-            "description": "Requests the server to respond with the state of the resource at the specified\ntime.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "acceptDatetime"
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag matches the\nvalue provided.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag does not\nmatch the value provided.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
           },
           {
             "name": "$Select",
@@ -672,6 +656,38 @@
             },
             "collectionFormat": "csv",
             "x-ms-client-name": "select"
+          },
+          {
+            "name": "Sync-Token",
+            "in": "header",
+            "description": "Used to guarantee real-time consistency between requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "syncToken"
+          },
+          {
+            "name": "Accept-Datetime",
+            "in": "header",
+            "description": "Requests the server to respond with the state of the resource at the specified\ntime.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "acceptDatetime"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Used to perform an operation only if the targeted resource's etag matches the\nvalue provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Used to perform an operation only if the targeted resource's etag does not\nmatch the value provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
             "name": "accept",
@@ -782,6 +798,16 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/KeyValue"
+            },
+            "headers": {
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              },
+              "ETag": {
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              }
             }
           },
           "default": {
@@ -855,10 +881,30 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/KeyValue"
+            },
+            "headers": {
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              },
+              "ETag": {
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              }
             }
           },
           "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              },
+              "ETag": {
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -998,8 +1044,18 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              },
+              "ETag": {
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1187,8 +1243,14 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1271,6 +1333,16 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/KeyValue"
+            },
+            "headers": {
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              },
+              "ETag": {
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              }
             }
           },
           "default": {
@@ -1352,6 +1424,16 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/KeyValue"
+            },
+            "headers": {
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              },
+              "ETag": {
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              }
             }
           },
           "default": {
@@ -1371,7 +1453,7 @@
     },
     "/operations": {
       "get": {
-        "operationId": "GetOperationDetails",
+        "operationId": "GetSnapshotOperationDetails",
         "summary": "Gets the state of a long running operation.",
         "description": "Gets the state of a long running operation.",
         "parameters": [
@@ -1553,6 +1635,16 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/KeyValueListResult"
+            },
+            "headers": {
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              },
+              "ETag": {
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              }
             }
           },
           "default": {
@@ -1699,8 +1791,18 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              },
+              "ETag": {
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1732,14 +1834,6 @@
             "description": "A filter for the name of the returned snapshots.",
             "required": false,
             "type": "string"
-          },
-          {
-            "name": "Sync-Token",
-            "in": "header",
-            "description": "Used to guarantee real-time consistency between requests.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "syncToken"
           },
           {
             "name": "After",
@@ -1879,6 +1973,14 @@
             "collectionFormat": "csv"
           },
           {
+            "name": "Sync-Token",
+            "in": "header",
+            "description": "Used to guarantee real-time consistency between requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "syncToken"
+          },
+          {
             "name": "accept",
             "in": "header",
             "description": "Accept header",
@@ -1942,8 +2044,14 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1970,35 +2078,11 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "Sync-Token",
-            "in": "header",
-            "description": "Used to guarantee real-time consistency between requests.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "syncToken"
-          },
-          {
             "name": "name",
             "in": "path",
-            "description": "The name of the key-value snapshot to retrieve.",
+            "description": "The name of the snapshot.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag matches the\nvalue provided.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "Used to perform an operation only if the targeted resource's etag does not\nmatch the value provided.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
           },
           {
             "name": "$Select",
@@ -2087,6 +2171,30 @@
             "x-ms-client-name": "select"
           },
           {
+            "name": "Sync-Token",
+            "in": "header",
+            "description": "Used to guarantee real-time consistency between requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "syncToken"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Used to perform an operation only if the targeted resource's etag matches the\nvalue provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Used to perform an operation only if the targeted resource's etag does not\nmatch the value provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
             "name": "accept",
             "in": "header",
             "description": "Accept header",
@@ -2169,10 +2277,29 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/Snapshot"
+            },
+            "headers": {
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              },
+              "ETag": {
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              },
+              "Link": {
+                "type": "string",
+                "description": "Includes links to related resources."
+              },
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
             }
           },
           "default": {
@@ -2187,7 +2314,8 @@
               }
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "UpdateSnapshot",
@@ -2256,6 +2384,20 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Snapshot"
+            },
+            "headers": {
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              },
+              "ETag": {
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              },
+              "Link": {
+                "type": "string",
+                "description": "Includes links to related resources."
+              }
             }
           },
           "default": {
@@ -2313,8 +2455,22 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              },
+              "ETag": {
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              },
+              "Link": {
+                "type": "string",
+                "description": "Includes links to related resources."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2496,7 +2652,10 @@
           "description": "The name of the key.",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "name"
+      ]
     },
     "KeyListResult": {
       "type": "object",
@@ -2523,7 +2682,8 @@
       "properties": {
         "key": {
           "type": "string",
-          "description": "The key of the key-value."
+          "description": "The key of the key-value.",
+          "readOnly": true
         },
         "label": {
           "type": "string",
@@ -2559,7 +2719,10 @@
           "type": "string",
           "description": "A value representing the current state of the resource."
         }
-      }
+      },
+      "required": [
+        "key"
+      ]
     },
     "KeyValueFields": {
       "type": "string",
@@ -2677,7 +2840,10 @@
           "description": "The name of the label.",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "name"
+      ]
     },
     "LabelFields": {
       "type": "string",
@@ -2812,6 +2978,7 @@
         }
       },
       "required": [
+        "name",
         "filters"
       ]
     },
