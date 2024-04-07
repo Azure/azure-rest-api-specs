@@ -7,6 +7,7 @@ import "./models/common.tsp";
 import "./models/chat_completions.tsp";
 import "./models/embeddings.tsp";
 import "./models/image_generation.tsp";
+import "./models/model_info.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -51,3 +52,9 @@ op getImageGenerations is Azure.Core.RpcOperation<
   },
   ImageGenerations
 >;
+
+@doc("Returns information about the AI model.")
+@actionSeparator("/")
+@route("info")
+@get
+op getModelInformation is Azure.Core.RpcOperation<{}, ModelInformation>;
