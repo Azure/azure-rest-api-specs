@@ -12,13 +12,13 @@ namespace Microsoft.ScVmm;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-alias VmmServerId = ResourceIdentifier<[
+alias VmmServerId = Azure.Core.armResourceIdentifier<[
   {
     type: "Microsoft.ScVmm/vmmServers";
   }
 ]>;
 
-alias VirtualNetworkId = ResourceIdentifier<[
+alias VirtualNetworkId = Azure.Core.armResourceIdentifier<[
   {
     type: "Microsoft.ScVmm/virtualNetwork";
   }
@@ -32,23 +32,24 @@ model QueryForceDelete {
 }
 
 /** The provisioning state of the resource. */
-enum ResourceProvisioningState {
-  ...Azure.ResourceManager.ResourceProvisioningState,
+union ResourceProvisioningState {
+  string,
+  Azure.ResourceManager.ResourceProvisioningState,
 
   /** The resource is provisioning. */
-  Provisioning,
+  Provisioning: "Provisioning",
 
   /** The resource is updating. */
-  Updating,
+  Updating: "Updating",
 
   /** The resource is being deleted. */
-  Deleting,
+  Deleting: "Deleting",
 
   /** The resource has been accepted. */
-  Accepted,
+  Accepted: "Accepted",
 
   /** The resource was created. */
-  Created,
+  Created: "Created",
 }
 
 /** Virtual machine operating system type. */
@@ -219,7 +220,7 @@ model ExtendedLocation {
   type?: string;
 
   /** The extended location name. */
-  name?: ResourceIdentifier<[
+  name?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ExtendedLocation/customLocations";
     }
@@ -608,7 +609,7 @@ model VirtualMachineInstanceUpdateProperties
 /** Availability Set model */
 model AvailabilitySetListItem {
   /** Gets the ARM Id of the microsoft.scvmm/availabilitySets resource. */
-  id?: ResourceIdentifier<[
+  id?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ScVmm/availabilitySets";
     }
@@ -714,7 +715,7 @@ model InfrastructureProfile {
 
   /** ARM Id of the cloud resource to use for deploying the vm. */
   @visibility("read", "create")
-  cloudId?: ResourceIdentifier<[
+  cloudId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ScVmm/clouds";
     }
@@ -722,7 +723,7 @@ model InfrastructureProfile {
 
   /** ARM Id of the template resource to use for deploying the vm. */
   @visibility("read", "create")
-  templateId?: ResourceIdentifier<[
+  templateId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ScVmm/virtualMachineTemplates";
     }
@@ -941,7 +942,7 @@ model VirtualMachineInventoryItem extends InventoryItemProperties {
 
   /** Gets the tracked resource id corresponding to the inventory resource. */
   @visibility("read")
-  managedMachineResourceId?: ResourceIdentifier<[]>;
+  managedMachineResourceId?: Azure.Core.armResourceIdentifier<[]>;
 
   /** They inventory type. */
   inventoryType: InventoryType.VirtualMachine;
