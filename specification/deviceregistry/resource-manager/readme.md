@@ -35,14 +35,11 @@ These settings apply only when `--tag=package-preview-2023-10` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-10'
 input-file:
-  - Microsoft.DeviceRegistry/preview/2023-10-01-preview/asset.json
-  - Microsoft.DeviceRegistry/preview/2023-10-01-preview/assetendpointprofile.json
   - Microsoft.DeviceRegistry/preview/2023-10-01-preview/deviceregistry.json
 
 suppressions:
   - code: AvoidAdditionalProperties
     from:
-      - asset.json
       - deviceregistry.json
     where:
       - $.definitions.Asset.properties.properties.properties.attributes
@@ -58,7 +55,6 @@ suppressions:
     reason: attributes is a customer-defined property of any shape
   - code: PropertiesTypeObjectNoDefinition
     from:
-      - asset.json
       - deviceregistry.json
     where:
       - $.definitions.Asset.properties.properties.properties.attributes

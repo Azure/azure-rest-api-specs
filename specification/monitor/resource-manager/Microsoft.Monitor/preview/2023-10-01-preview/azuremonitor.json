@@ -1058,6 +1058,24 @@
         ]
       }
     },
+    "ExternalNetworkingMode": {
+      "type": "string",
+      "description": "The mode of the external networking.",
+      "enum": [
+        "LoadBalancerOnly"
+      ],
+      "x-ms-enum": {
+        "name": "ExternalNetworkingMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LoadBalancerOnly",
+            "value": "LoadBalancerOnly",
+            "description": "Load balancer only."
+          }
+        ]
+      }
+    },
     "IngestionSettings": {
       "type": "object",
       "description": "Settings for data ingestion",
@@ -1094,6 +1112,10 @@
       "type": "object",
       "description": "Networking configuration for the pipeline group instance.",
       "properties": {
+        "externalNetworkingMode": {
+          "$ref": "#/definitions/ExternalNetworkingMode",
+          "description": "External networking mode."
+        },
         "host": {
           "type": "string",
           "description": "The address exposed on the cluster. Example: azuremonitorpipeline.contoso.com.",
@@ -1109,7 +1131,7 @@
         }
       },
       "required": [
-        "host",
+        "externalNetworkingMode",
         "routes"
       ]
     },
@@ -1190,6 +1212,10 @@
           "description": "Name of the pipeline.",
           "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
         },
+        "type": {
+          "$ref": "#/definitions/PipelineType",
+          "description": "The type of pipeline"
+        },
         "receivers": {
           "type": "array",
           "description": "Reference to receivers configured for the pipeline.",
@@ -1217,6 +1243,7 @@
       },
       "required": [
         "name",
+        "type",
         "receivers",
         "exporters"
       ]
@@ -1391,6 +1418,24 @@
           },
           "x-ms-identifiers": []
         }
+      }
+    },
+    "PipelineType": {
+      "type": "string",
+      "description": "The pipeline type.",
+      "enum": [
+        "logs"
+      ],
+      "x-ms-enum": {
+        "name": "PipelineType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Logs",
+            "value": "logs",
+            "description": "Pipeline for logs telemetry."
+          }
+        ]
       }
     },
     "Processor": {

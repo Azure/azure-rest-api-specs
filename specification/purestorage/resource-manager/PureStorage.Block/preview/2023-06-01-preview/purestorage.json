@@ -2803,7 +2803,8 @@
         "storageName": {
           "type": "string",
           "description": "Name of the storage used.",
-          "pattern": "^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$"
+          "pattern": "^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$",
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
@@ -2839,11 +2840,6 @@
       "type": "object",
       "description": "The updatable properties of the AvsStorageContainer.",
       "properties": {
-        "storageName": {
-          "type": "string",
-          "description": "Name of the storage used.",
-          "pattern": "^[a-zA-Z][a-zA-Z0-9\\-]{0,62}[a-zA-Z0-9]$"
-        },
         "provisionedLimit": {
           "type": "integer",
           "format": "int64",

@@ -4,6 +4,7 @@ import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -33,12 +34,15 @@ model DstsServiceAccountResourceProperties {
   groupName?: string;
 
   @doc("list of authentication requirements.")
+  @extension("x-ms-identifiers", [])
   authenticationRequirements?: Array<DstsAuthenticationRequirement>;
 
   @doc("list of realms.")
+  @extension("x-ms-identifiers", [])
   realms?: Array<DstsRealm>;
 
   @doc("list of claim mappings.")
+  @extension("x-ms-identifiers", [])
   claimMappings?: Array<DstsClaimMapping>;
 
   @doc("Tags to add to the account.")
