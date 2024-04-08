@@ -18,12 +18,14 @@ model KeyValue<Value = string> {
 }
 
 /** The type of the workspace item. */
-enum ItemType {
+union ItemType {
+  string,
+
   /** A program, problem, or application submitted for processing. */
-  Job,
+  Job: "Job",
 
   /** A logical grouping of jobs. */
-  Session,
+  Session: "Session",
 }
 
 /** Id of the workspace item. */
