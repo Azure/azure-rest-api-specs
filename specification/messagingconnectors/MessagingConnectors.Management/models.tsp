@@ -420,16 +420,16 @@ union DataPreviewStartMode {
 
   @doc("DataPreview from the earliest data")
   Earliest: "Earliest",
-  
+
   @doc("DataPreview from Now")
   Now: "Now",
-  
+
   @doc("DataPreview from custom time range")
   CustomTimeRange: "CustomTimeRange",
 
   @doc("DataPreview from last ack position")
   FromLastAckPosition: "FromLastAckPosition",
-  
+
   string,
 }
 
