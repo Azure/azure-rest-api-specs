@@ -35,7 +35,9 @@ union AudioTranscriptionFormat {
 
 @doc("Defines the timestamp granularities that can be requested on a verbose transcription response.")
 @added(ServiceApiVersions.v2024_04_01_Preview)
-enum AudioTranscriptionTimestampGranularity {
+union AudioTranscriptionTimestampGranularity {
+  string,
+
   @doc("""
   Indicates that responses should include timing information about each transcribed word. Note that generating word
   timestamp information will incur additional response latency.
