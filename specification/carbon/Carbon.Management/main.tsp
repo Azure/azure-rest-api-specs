@@ -18,6 +18,7 @@ using OpenAPI;
 })
 @versioned(Versions)
 @doc("Carbon Report Resource Provider query API.")
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.Carbon;
 
 /** Api versions */
