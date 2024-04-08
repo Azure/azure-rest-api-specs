@@ -18,6 +18,9 @@ model GuestAgent is ProxyResource<GuestAgentProperties> {
   @key("guestAgentName")
   @segment("guestAgents")
   @visibility("read")
+  @maxLength(54)
+  @minLength(1)
+  @pattern("[a-zA-Z0-9-_\\.]")
   @path
   name: string;
 }

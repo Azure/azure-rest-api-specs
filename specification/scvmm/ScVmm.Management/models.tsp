@@ -233,7 +233,7 @@ model CloudProperties {
   inventoryItemId?: string;
 
   /** Unique ID of the cloud. */
-  @minLength(1)
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
   uuid?: string;
 
   /** ARM Id of the vmmServer resource in which this resource resides. */
@@ -297,7 +297,7 @@ model VirtualNetworkProperties {
   inventoryItemId?: string;
 
   /** Unique ID of the virtual network. */
-  @minLength(1)
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
   uuid?: string;
 
   /** ARM Id of the vmmServer resource in which this resource resides. */
@@ -318,7 +318,7 @@ model VirtualMachineTemplateProperties {
   inventoryItemId?: string;
 
   /** Unique ID of the virtual machine template. */
-  @minLength(1)
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
   uuid?: string;
 
   /** ARM Id of the vmmServer resource in which this resource resides. */
