@@ -445,11 +445,6 @@
             "$ref": "#/parameters/VaultName"
           },
           {
-            "name": "x-ms-authorization-auxiliary",
-            "in": "header",
-            "type": "string"
-          },
-          {
             "name": "vault",
             "in": "body",
             "description": "Recovery Services Vault to be created.",
@@ -457,7 +452,12 @@
             "schema": {
               "$ref": "#/definitions/Vault"
             }
-          }
+          },
+          {
+            "name": "x-ms-authorization-auxiliary",
+            "in": "header",
+            "type": "string"
+          },
         ],
         "responses": {
           "200": {
@@ -575,11 +575,6 @@
             "$ref": "#/parameters/VaultName"
           },
           {
-            "name": "x-ms-authorization-auxiliary",
-            "in": "header",
-            "type": "string"
-          },
-          {
             "name": "vault",
             "in": "body",
             "description": "Recovery Services Vault to be created.",
@@ -587,7 +582,12 @@
             "schema": {
               "$ref": "#/definitions/PatchVault"
             }
-          }
+          },
+          {
+            "name": "x-ms-authorization-auxiliary",
+            "in": "header",
+            "type": "string"
+          },
         ],
         "responses": {
           "200": {
@@ -1887,6 +1887,7 @@
           }
         },
         "resourceGuardOperationRequests": {
+          "description": "ResourceGuardOperationRequests on which LAC check will be performed",
           "type": "array",
           "items": {
             "type": "string"
