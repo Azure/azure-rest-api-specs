@@ -12,6 +12,7 @@ import "./sharedPrivateLinkResource.tsp";
 })
 @versioned(Microsoft.DatabaseWatcher.Versions)
 @armProviderNamespace
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace Microsoft.DatabaseWatcher;
 
 using TypeSpec.Http;
