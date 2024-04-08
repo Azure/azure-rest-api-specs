@@ -447,7 +447,7 @@ model DataPreviewRecordLimit {
 model DataPreviewTimeRange extends DataPreviewRecordLimit {
   @doc("time type of dataPreviewRange")
   type: "timeRange";
-  
+
   @doc("start time of DataPreview")
   startTime: utcDateTime;
 
@@ -459,7 +459,7 @@ model DataPreviewTimeRange extends DataPreviewRecordLimit {
 model DataPreviewOffsetRange extends DataPreviewRecordLimit {
   @doc("offset type of dataPreviewRange")
   type: "offsetRange";
-  
+
   @doc("start time of DataPreview")
   startOffset: int64;
 
