@@ -1905,6 +1905,48 @@
         }
       }
     },
+    "/{resourceId}/providers/Microsoft.DataProtection/backupInstances": {
+      "get": {
+        "tags": [
+          "BackupInstancesExtensionRouting"
+        ],
+        "description": "Gets a list of backup instances associated with a tracked resource",
+        "operationId": "BackupInstancesExtensionRouting_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BackupInstanceResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List BackupInstances associated with an azure resource": {
+            "$ref": "./examples/BackupInstanceOperations/ListBackupInstancesExtensionRouting.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/rehydrate": {
       "post": {
         "description": "rehydrate recovery point for restore for a BackupInstance",
@@ -8336,6 +8378,15 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "ResourceId": {
+      "name": "resourceId",
+      "in": "path",
+      "description": "ARM path of the resource to be protected using Microsoft.DataProtection",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
     }
   },
   "securityDefinitions": {
