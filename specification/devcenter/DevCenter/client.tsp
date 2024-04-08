@@ -1,7 +1,4 @@
-import "./service.tsp";
-import "./Environments/routes.tsp";
-import "./DevCenter/routes.tsp";
-import "./DevBox/routes.tsp";
+import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.Core;
@@ -31,8 +28,8 @@ interface DevBoxesClientOperations {
   getPool is DevCenterService.DevBoxes.getPool;
   listSchedules is DevCenterService.DevBoxes.listSchedulesByPool;
   getSchedule is DevCenterService.DevBoxes.getScheduleByPool;
-  listAllDevBoxes is DevCenterService.DevCenter.listAllDevBoxes;
-  listAllDevBoxesByUser is DevCenterService.DevCenter.listAllDevBoxesByUser;
+  listAllDevBoxes is DevCenterService.DevBoxes.listAllDevBoxes;
+  listAllDevBoxesByUser is DevCenterService.DevBoxes.listAllDevBoxesByUser;
   listDevBoxes is DevCenterService.DevBoxes.listDevBoxesByUser;
   getDevBox is DevCenterService.DevBoxes.getDevBoxByUser;
   @convenientAPI(false, "csharp") // https://github.com/Azure/azure-rest-api-specs/issues/28083
