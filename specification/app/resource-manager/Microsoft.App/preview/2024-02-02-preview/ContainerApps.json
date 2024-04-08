@@ -920,16 +920,22 @@
                   "description": "Enable java agent injection for the java app.",
                   "type": "boolean"
                 },
-                "loggerSettings": {
-                  "description": "Settings of the logger for the java app.",
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/LoggerSetting"
-                  },
-                  "x-ms-identifiers": [
-                    "logger",
-                    "level"
-                  ]
+                "logging": {
+                  "description": "Capabilities on the java logging scenario.",
+                  "type": "object",
+                  "properties": {
+                    "loggerSettings": {
+                      "description": "Settings of the logger for the java app.",
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/LoggerSetting"
+                      },
+                      "x-ms-identifiers": [
+                        "logger",
+                        "level"
+                      ]
+                    }
+                  }
                 }
               }
             }
