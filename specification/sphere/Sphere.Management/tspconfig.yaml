@@ -1,21 +1,26 @@
 emit:
-  - "@azure-tools/typespec-autorest"
+  - D:/Go/src/github.com/Azure/autorest.go/packages/typespec-go
 options:
-  "@azure-tools/typespec-autorest":
-    omit-unreachable-types: true
-    emitter-output-dir: "{project-root}/.."
-    azure-resource-provider-folder: "resource-manager"
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/azuresphere.json"
-    examples-directory: "{project-root}/examples"
-  "@azure-tools/cadl-python":
-    "basic-setup-py": true
-    "package-version": 3.0.0b6
-    "package-name": azure-sphere
-  "@azure-tools/cadl-csharp":
-    save-inputs: false
+  '@azure-tools/cadl-csharp':
     clear-output-folder: true
-    namespace: Azure.Sphere
     model-namespace: false
+    namespace: Azure.Sphere
+    save-inputs: false
+  '@azure-tools/cadl-python':
+    basic-setup-py: true
+    package-name: azure-sphere
+    package-version: 3.0.0b6
+  '@azure-tools/typespec-autorest':
+    azure-resource-provider-folder: resource-manager
+    emitter-output-dir: '{project-root}/..'
+    examples-directory: '{project-root}/examples'
+    omit-unreachable-types: true
+    output-file: '{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/azuresphere.json'
+  '@azure-tools/typespec-go':
+    emitter-output-dir: '{project-root}/go/sdk/resourcemanager/sphere/armsphere'
+    generate-fakes: true
+    module: github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/sphere/armsphere
+    module-version: 0.1.0
 linter:
   extends:
-    - "@azure-tools/typespec-azure-resource-manager/all"
+    - '@azure-tools/typespec-azure-resource-manager/all'

@@ -1,43 +1,47 @@
 parameters:
-  "service-dir":
-    default: "sdk/openai"
-  "dependencies":
+  dependencies:
     default: ""
+  service-dir:
+    default: sdk/openai
 emit:
-  - "@azure-tools/typespec-autorest"
-linter:
-  extends:
-    - "@azure-tools/typespec-azure-core/all"
+  - D:/Go/src/github.com/Azure/autorest.go/packages/typespec-go
 options:
-  "@azure-tools/typespec-autorest":
-    emitter-output-dir: "{project-root}/../"
-    output-file: "{azure-resource-provider-folder}/AzureOpenAI/inference/{version-status}/{version}/generated.json"
-    azure-resource-provider-folder: "data-plane"
-    examples-directory: "{project-root}/examples"
+  '@azure-tools/typespec-autorest':
+    azure-resource-provider-folder: data-plane
+    emitter-output-dir: '{project-root}/../'
+    examples-directory: '{project-root}/examples'
     omit-unreachable-types: true
-  "@azure-tools/typespec-csharp":
-    package-dir: "Azure.AI.OpenAI"
-    namespace: "Azure.AI.OpenAI"
+    output-file: '{azure-resource-provider-folder}/AzureOpenAI/inference/{version-status}/{version}/generated.json'
+  '@azure-tools/typespec-csharp':
     clear-output-folder: true
-    model-namespace: false
+    flavor: azure
     generate-protocol-methods: false
-    flavor: azure
-  "@azure-tools/typespec-java":
-    package-dir: "azure-ai-openai"
-    namespace: "com.azure.ai.openai"
-    partial-update: true
-    enable-sync-stack: true
-    generate-tests: false
-    custom-types-subpackage: "implementation.models"
-    custom-types: "FunctionCallPreset"
+    model-namespace: false
+    namespace: Azure.AI.OpenAI
+    package-dir: Azure.AI.OpenAI
+  '@azure-tools/typespec-go':
+    emitter-output-dir: '{project-root}/go/sdk/resourcemanager/cognitiveservices/armcognitiveservices'
+    module: github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/cognitiveservices/armcognitiveservices
+    module-version: 0.1.0
+  '@azure-tools/typespec-java':
+    custom-types: FunctionCallPreset
+    custom-types-subpackage: implementation.models
     customization-class: customization/src/main/java/ChatCompletionsToolCallCustomizations.java
+    enable-sync-stack: true
     flavor: azure
+    generate-tests: false
+    namespace: com.azure.ai.openai
+    package-dir: azure-ai-openai
+    partial-update: true
     stream-style-serialization: false
-  "@azure-tools/typespec-ts":
-    package-dir: "openai"
+  '@azure-tools/typespec-ts':
+    flavor: azure
     generateMetadata: false
     generateTest: false
     isModularLibrary: true
+    package-dir: openai
     packageDetails:
-      name: "@azure/openai"
-    flavor: azure
+      name: '@azure/openai'
+linter:
+  extends:
+    - '@azure-tools/typespec-azure-core/all'
