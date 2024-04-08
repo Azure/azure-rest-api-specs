@@ -79,22 +79,26 @@ interface JobRouterRestClient {
   @access(Access.internal, "csharp")
   @access(Access.internal, "python")
   @access(Access.internal, "java")
-  reclassifyJob is AzureCommunicationRoutingService.JobRouterOperations.reclassify;
+  @clientName("reclassifyJob")
+  reclassify is AzureCommunicationRoutingService.JobRouterOperations.reclassify;
 
   @access(Access.internal, "csharp")
   @access(Access.internal, "python")
   @access(Access.internal, "java")
-  cancelJob is AzureCommunicationRoutingService.JobRouterOperations.cancel;
+  @clientName("cancelJob")
+  cancel is AzureCommunicationRoutingService.JobRouterOperations.cancel;
 
   @access(Access.internal, "csharp")
   @access(Access.internal, "python")
   @access(Access.internal, "java")
-  completeJob is AzureCommunicationRoutingService.JobRouterOperations.complete;
+  @clientName("completeJob")
+  complete is AzureCommunicationRoutingService.JobRouterOperations.complete;
 
   @access(Access.internal, "csharp")
   @access(Access.internal, "python")
   @access(Access.internal, "java")
-  closeJob is AzureCommunicationRoutingService.JobRouterOperations.close;
+  @clientName("closeJob")
+  close is AzureCommunicationRoutingService.JobRouterOperations.close;
 
   @access(Access.internal, "csharp")
   listJobs is AzureCommunicationRoutingService.JobRouterOperations.listJobs;
@@ -104,14 +108,17 @@ interface JobRouterRestClient {
   getQueuePosition is AzureCommunicationRoutingService.JobRouterOperations.getInQueuePosition;
 
   @access(Access.internal, "csharp")
-  unassignJob is AzureCommunicationRoutingService.JobRouterOperations.unassign;
+  @clientName("unassignJob")
+  unassign is AzureCommunicationRoutingService.JobRouterOperations.unassign;
 
-  acceptJobOffer is AzureCommunicationRoutingService.JobRouterOperations.accept;
+  @clientName("acceptJobOffer")
+  accept is AzureCommunicationRoutingService.JobRouterOperations.accept;
 
   @access(Access.internal, "csharp")
   @access(Access.internal, "python")
   @access(Access.internal, "java")
-  declineJobOffer is AzureCommunicationRoutingService.JobRouterOperations.decline;
+  @clientName("declineJobOffer")
+  decline is AzureCommunicationRoutingService.JobRouterOperations.decline;
 
   #suppress "@azure-tools/typespec-azure-core/no-explicit-routes-resource-ops" "Need to revist how to correctly define singletons https://github.com/Azure/azure-rest-api-specs/issues/25605#issuecomment-1736265997"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to revist how to correctly define singletons https://github.com/Azure/azure-rest-api-specs/issues/25605#issuecomment-1736265997"
