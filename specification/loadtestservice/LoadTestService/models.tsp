@@ -425,7 +425,8 @@ model LocustConfiguration {
   users?: int32;
 
   @doc("Test run duration in seconds.")
-  durationInSeconds?: int32;
+  @encode(DurationKnownEncoding.seconds, int32)
+  durationInSeconds?: duration;
 
   @doc("Number of users to spawn every second.")
   spawnRate?: float32;
