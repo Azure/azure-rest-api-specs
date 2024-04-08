@@ -9,7 +9,7 @@ namespace HealthDataAIServices.Deidentification;
 
 @doc("A job containing a batch of documents to deidentify.")
 @resource("jobs")
-model Job {
+model DeidentifyJob {
   @key("name")
   @doc("The name of a job.")
   @visibility("read")
@@ -71,8 +71,8 @@ model Job {
 
 @doc("File report once job has completed.")
 @resource("files")
-@parentResource(Job)
-model File {
+@parentResource(DeidentifyJob)
+model HealthFileDetails {
   @key
   @doc("Id of the file report.")
   @visibility("read")
@@ -189,8 +189,8 @@ enum StringIndexType {
   Utf16CodeUnit,
 }
 
-@doc("Request for synchronous DeID operation.")
-model DeidRequest {
+@doc("Request for synchronous De-Identify operation.")
+model DeidentifyOptions {
   @doc("Input text to deidentify.")
   @maxLength(100000) // 100KB
   inputText: string;
@@ -209,9 +209,9 @@ model DeidRequest {
   redactionFormat?: string;
 }
 
-@doc("Response for synchronous DeID operation.")
-model DeidResponse {
-  @doc("Output text after deidentification. Not available for Tag Operation.")
+@doc("Response for synchronous De-Identify operation.")
+model DeidentifyResult {
+  @doc("Output text after de-identifying. Not available for Tag Operation.")
   outputText?: string;
 
   @doc("Result of the tag operation. Only available for Tag Operation.")
@@ -245,6 +245,7 @@ enum PhiCategory {
   Age,
 
   @doc("Biological Identifier, such as a fingerprint or retinal scan")
+  @projectedName("python", "BIO_ID")
   BioID,
 
   @doc("City.")
@@ -275,9 +276,11 @@ enum PhiCategory {
   Hospital,
 
   @doc("Id Numbers. Such as a passport number.")
+  @projectedName("python", "ID_NUM")
   IDNum,
 
   @doc("IP Address.")
+  @projectedName("python", "IP_ADDRESS")
   IPAddress,
 
   @doc("License. Such as a driver's license or medical license")

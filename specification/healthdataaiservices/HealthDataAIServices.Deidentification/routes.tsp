@@ -15,32 +15,31 @@ alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
   SupportsClientRequestId;
 
-alias DeidOperations = ResourceOperations<
+alias DeidentifyOperations = ResourceOperations<
   ServiceTraits,
   Azure.Core.Foundations.ErrorResponse
 >;
 
-interface Jobs {
-  @summary("Create a DeID Job")
-  @pollingOperation(Jobs.get)
-  create is DeidOperations.LongRunningResourceCreateOrReplace<Job>;
+interface Deidentification {
+  @summary("Create a De-Identify Job")
+  createJob is DeidentifyOperations.LongRunningResourceCreateOrReplace<DeidentifyJob>;
 
-  @summary("Get a DeID Job")
-  get is DeidOperations.ResourceRead<Job>;
+  @summary("Get a De-Identify Job")
+  getJob is DeidentifyOperations.ResourceRead<DeidentifyJob>;
 
-  @summary("List DeID Jobs")
-  list is DeidOperations.ResourceList<
-    Job,
+  @summary("List De-Identify Jobs")
+  listJobs is DeidentifyOperations.ResourceList<
+    DeidentifyJob,
     ListQueryParametersTrait<PaginationByTokenQueryParameters>
   >;
 
   @summary("List processed files within a Job")
-  listFiles is DeidOperations.ResourceList<
-    File,
+  listJobFiles is DeidentifyOperations.ResourceList<
+    HealthFileDetails,
     ListQueryParametersTrait<PaginationByTokenQueryParameters>
   >;
 
-  @summary("Cancel a DeID Job")
+  @summary("Cancel a De-Identify Job")
   @doc("""
   Cancels a job that is in progress. 
   
@@ -48,26 +47,25 @@ interface Jobs {
 
   If the job is already complete, this will have no effect. 
   """)
-  cancel is DeidOperations.ResourceAction<Job, {}, Job>;
+  cancelJob is DeidentifyOperations.ResourceAction<
+    DeidentifyJob,
+    {},
+    DeidentifyJob
+  >;
 
-  @summary("Delete a DeID Job")
+  @summary("Delete a De-Identify Job")
   @doc("Removes the record of the job from the service. Does not delete any files.")
-  delete is DeidOperations.ResourceDelete<Job>;
-}
+  deleteJob is DeidentifyOperations.ResourceDelete<DeidentifyJob>;
 
-interface RealtimeOperations {
   @summary("Realtime Synchronous Deidentification.")
   @route("/deid")
   @post
-  deid is Azure.Core.RpcOperation<
+  deidentify is Azure.Core.RpcOperation<
     {
       @doc("The request body for realtime deidentification.")
       @body
-      @projectedName("csharp", "options")
-      @projectedName("python", "options")
-      @projectedName("java", "options")
-      body: DeidRequest;
+      body: DeidentifyOptions;
     },
-    DeidResponse
+    DeidentifyResult
   >;
 }

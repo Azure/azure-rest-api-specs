@@ -15,11 +15,11 @@ using Azure.Core.Traits;
   title: "HealthDataAIServices.Deidentification Service",
 })
 @server(
-  "https://{deid-service-uri}",
+  "https://{endpoint}",
   "Azure Health Deidentification Service",
   {
-    @doc("Uri of your Deid Service.")
-    `deid-service-uri`: string,
+    @doc("Url of your Deid Service.")
+    endpoint: string,
   }
 )
 @versioned(HealthDataAIServices.Deidentification.Versions)
