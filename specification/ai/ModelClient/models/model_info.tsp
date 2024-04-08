@@ -31,6 +31,9 @@ union ModelType {
   @doc("Chat completions")
   chat: "chat",
 
+  @doc("Text generation")
+  text_generation: "text_generation",
+
   @doc("Image generation")
   image_generation: "image_generation",
 }

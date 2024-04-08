@@ -21,10 +21,6 @@ union ExtraParameters {
 }
 
 alias AdditionalRequestHeaders = {
-  @doc("Controls what happens if extra parameters are passed in the request payload.")
-  @header("extra-parameters")
-  extra_parameters?: ExtraParameters;
-
   @doc("""
   Name of the deployment to which you would like to route the request. Relevant only to Model-as-a-Platform (MaaP) deployments.
   Typically used when you want to target a test environment instead of production environment.
@@ -56,5 +52,5 @@ alias ExtraRequestParameters = {
   How the service handles these extra parameters depends on the value of the `extra-parameters`
   HTTP request header.
   """)
-  extras?: Record<unknown>;
+  extras?: Record<string>;
 };
