@@ -41,7 +41,7 @@ tag: package-passivestamp-2023-01-15
 ```
 
 ``` yaml $(package-activestamp)
-tag: package-2024-02
+tag: package-preview-2024-03
 ```
 
 ### Validations
@@ -56,14 +56,23 @@ message-format: json
 ```
 
 
+### Tag: package-preview-2024-03
+
+These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-03'
+input-file:
+  - Microsoft.RecoveryServices/preview/2024-03-01-preview/bms.json
+```
 ### Tag: package-2024-02
 
 These settings apply only when `--tag=package-2024-02` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-02'
+``` yaml $(tag) == 'package-2024-02'
 input-file:
   - Microsoft.RecoveryServices/stable/2024-02-01/bms.json
 ```
+
 ### Tag: package-2024-01
 
 These settings apply only when `--tag=package-2024-01` is specified on the command line.
