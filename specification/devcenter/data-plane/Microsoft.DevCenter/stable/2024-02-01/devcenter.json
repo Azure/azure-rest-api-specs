@@ -2954,30 +2954,6 @@
     }
   },
   "definitions": {
-    "APIVersions": {
-      "type": "string",
-      "description": "DevCenter API versions",
-      "enum": [
-        "2023-04-01",
-        "2024-02-01"
-      ],
-      "x-ms-enum": {
-        "name": "APIVersions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2023_04_01",
-            "value": "2023-04-01",
-            "description": "The 2023-04-01 service API version"
-          },
-          {
-            "name": "v2024_02_01",
-            "value": "2024-02-01",
-            "description": "The 2024-02-01 service API version"
-          }
-        ]
-      }
-    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -4114,17 +4090,6 @@
         }
       }
     },
-    "EnvironmentPatchProperties": {
-      "type": "object",
-      "description": "Properties of an environment. These properties can be updated via PATCH after\nthe resource has been created.",
-      "properties": {
-        "expirationDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time the expiration date will be triggered (UTC), after which the\nenvironment and associated resources will be deleted."
-        }
-      }
-    },
     "EnvironmentProvisioningState": {
       "type": "string",
       "description": "The provisioning state of the environment.",
@@ -4275,22 +4240,6 @@
     "EnvironmentUpdate": {
       "type": "object",
       "description": "Properties of an environment.",
-      "properties": {
-        "expirationDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time the expiration date will be triggered (UTC), after which the\nenvironment and associated resources will be deleted."
-        },
-        "parameters": {
-          "type": "object",
-          "description": "Parameters object for the environment.",
-          "additionalProperties": {}
-        }
-      }
-    },
-    "EnvironmentUpdateProperties": {
-      "type": "object",
-      "description": "Properties of an environment. These properties can be updated after the\nresource has been created.",
       "properties": {
         "expirationDate": {
           "type": "string",
@@ -5362,23 +5311,6 @@
           "description": "Settings for the operating system disk."
         }
       }
-    },
-    "User": {
-      "type": "object",
-      "description": "Project user.",
-      "properties": {
-        "userId": {
-          "type": "string",
-          "description": "The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.",
-          "minLength": 2,
-          "maxLength": 36,
-          "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "userId"
-      ]
     }
   },
   "parameters": {
