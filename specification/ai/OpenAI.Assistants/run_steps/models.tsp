@@ -180,15 +180,15 @@ model RunStepDeltaChunk {
   object: "thread.run.step.delta";
 
   /** The delta containing the fields that have changed on the run step. */
-  delta: RunStepDeltaChunkObject;
+  delta: RunStepDelta;
 }
 
 /** Represents the delta payload in a streaming run step delta chunk. */
 @added(ServiceApiVersions.vFuturePlaceholder)
-model RunStepDeltaChunkObject {
+model RunStepDelta {
   /** The details of the run step. */
   @encodedName("application/json", "step_details")
-  stepDetails?: RunStepDeltaDetail[];
+  stepDetails?: RunStepDeltaDetail;
 }
 
 /** Represents a single run step detail item in a streaming run step's delta payload. */
@@ -207,7 +207,7 @@ model RunStepDeltaMessageCreation extends RunStepDeltaDetail {
 
   /** The message creation data. */
   @encodedName("application/json", "message_creation")
-  messageCreation: RunStepDeltaMessageCreationObject;
+  messageCreation?: RunStepDeltaMessageCreationObject;
 }
 
 /** Represents the data within a streaming run step message creation response object. */
@@ -260,8 +260,7 @@ model RunStepDeltaRetrievalToolCall extends RunStepDeltaToolCall {
   type: "retrieval";
 
   /** Reserved for future use. */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  retrieval?: Record<string> | null;
+  retrieval?: Record<string>;
 }
 
 /** Represents a Code Interpreter tool call within a streaming run step's tool call details. */
@@ -293,7 +292,7 @@ model RunStepDeltaFunction {
 @added(ServiceApiVersions.vFuturePlaceholder)
 model RunStepDeltaCodeInterpreterDetailItemObject {
   /** The input into the Code Interpreter tool call. */
-  input: string;
+  input?: string;
 
   /**
    * The outputs from the Code Interpreter tool call. Code Interpreter can output one or more

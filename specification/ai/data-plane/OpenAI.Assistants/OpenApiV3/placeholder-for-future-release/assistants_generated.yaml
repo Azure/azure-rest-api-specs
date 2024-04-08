@@ -1605,8 +1605,6 @@ components:
       required:
         - index
         - type
-        - start_index
-        - end_index
       properties:
         index:
           type: integer
@@ -1615,14 +1613,6 @@ components:
         type:
           type: string
           description: The type of the text content annotation.
-        start_index:
-          type: integer
-          format: int32
-          description: The start index of this annotation in the content text.
-        end_index:
-          type: integer
-          format: int32
-          description: The end index of this annotation in the content text.
       discriminator:
         propertyName: type
         mapping:
@@ -1645,7 +1635,6 @@ components:
       type: object
       required:
         - type
-        - text
       properties:
         type:
           type: string
@@ -1681,8 +1670,16 @@ components:
           description: The type of the text content annotation, which is always "file_citation."
         file_citation:
           allOf:
-            - $ref: '#/components/schemas/MessageDeltaTextFileCitationAnnotationObject'
+            - $ref: '#/components/schemas/MessageDeltaTextFileCitationAnnotation'
           description: The file citation information.
+        start_index:
+          type: integer
+          format: int32
+          description: The start index of this annotation in the content text.
+        end_index:
+          type: integer
+          format: int32
+          description: The end index of this annotation in the content text.
       allOf:
         - $ref: '#/components/schemas/MessageDeltaTextAnnotation'
       description: Represents a streamed file citation applied to a streaming text content part.
@@ -1705,8 +1702,16 @@ components:
           description: The type of the text content annotation, which is always "file_path."
         file_path:
           allOf:
-            - $ref: '#/components/schemas/MessageDeltaTextFilePathAnnotationObject'
+            - $ref: '#/components/schemas/MessageDeltaTextFilePathAnnotation'
           description: The file path information.
+        start_index:
+          type: integer
+          format: int32
+          description: The start index of this annotation in the content text.
+        end_index:
+          type: integer
+          format: int32
+          description: The end index of this annotation in the content text.
       allOf:
         - $ref: '#/components/schemas/MessageDeltaTextAnnotation'
       description: Represents a streamed file path annotation applied to a streaming text content part.
@@ -1772,12 +1777,14 @@ components:
           description: The provided reason describing why the message was marked as incomplete.
       description: Information providing additional detail about a message entering an incomplete status.
     MessageIncompleteDetailsReason:
-      type: string
-      enum:
-        - content_filter
-        - max_tokens
-        - run_cancelled
-        - run_failed
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - content_filter
+            - max_tokens
+            - run_cancelled
+            - run_failed
       description: A set of reasons describing why a message is marked as incomplete.
     MessageRole:
       anyOf:
@@ -1788,19 +1795,19 @@ components:
             - assistant
       description: The possible values for roles attributed to messages in a thread.
     MessageStatus:
-      type: string
-      enum:
-        - in_progress
-        - incomplete
-        - completed
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - in_progress
+            - incomplete
+            - completed
       description: The possible execution status values for a thread message.
     MessageTextAnnotation:
       type: object
       required:
         - type
         - text
-        - start_index
-        - end_index
       properties:
         type:
           type: string
@@ -1808,14 +1815,6 @@ components:
         text:
           type: string
           description: The textual content associated with this text annotation item.
-        start_index:
-          type: integer
-          format: int32
-          description: The first text index associated with this text annotation.
-        end_index:
-          type: integer
-          format: int32
-          description: The last text index associated with this text annotation.
       discriminator:
         propertyName: type
         mapping:
@@ -1872,6 +1871,14 @@ components:
           description: |-
             A citation within the message that points to a specific quote from a specific file.
             Generated when the assistant uses the "retrieval" tool to search files.
+        start_index:
+          type: integer
+          format: int32
+          description: The first text index associated with this text annotation.
+        end_index:
+          type: integer
+          format: int32
+          description: The last text index associated with this text annotation.
       allOf:
         - $ref: '#/components/schemas/MessageTextAnnotation'
       description: A citation within the message that points to a specific quote from a specific File associated with the assistant or the message. Generated when the assistant uses the 'retrieval' tool to search files.
@@ -1903,6 +1910,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/MessageTextFilePathDetails'
           description: A URL for the file that's generated when the assistant used the code_interpreter tool to generate a file.
+        start_index:
+          type: integer
+          format: int32
+          description: The first text index associated with this text annotation.
+        end_index:
+          type: integer
+          format: int32
+          description: The last text index associated with this text annotation.
       allOf:
         - $ref: '#/components/schemas/MessageTextAnnotation'
       description: A citation within the message that points to a file located at a specific path.
@@ -2109,23 +2124,23 @@ components:
           format: unixtime
           description: The Unix timestamp, in seconds, representing when this object was created.
         expired_at:
-          type: string
-          format: date-time
+          type: integer
+          format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this item expired.
         completed_at:
-          type: string
-          format: date-time
+          type: integer
+          format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this completed.
         cancelled_at:
-          type: string
-          format: date-time
+          type: integer
+          format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this was cancelled.
         failed_at:
-          type: string
-          format: date-time
+          type: integer
+          format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this failed.
         metadata:
@@ -2228,6 +2243,14 @@ components:
           logs: '#/components/schemas/RunStepCodeInterpreterLogOutput'
           image: '#/components/schemas/RunStepCodeInterpreterImageOutput'
       description: An abstract representation of an emitted output from a code interpreter tool.
+    RunStepDelta:
+      type: object
+      properties:
+        step_details:
+          allOf:
+            - $ref: '#/components/schemas/RunStepDeltaDetail'
+          description: The details of the run step.
+      description: Represents the delta payload in a streaming run step delta chunk.
     RunStepDeltaChunk:
       type: object
       required:
@@ -2245,22 +2268,11 @@ components:
           description: The object type, which is always `thread.run.step.delta`.
         delta:
           allOf:
-            - $ref: '#/components/schemas/RunStepDeltaChunkObject'
+            - $ref: '#/components/schemas/RunStepDelta'
           description: The delta containing the fields that have changed on the run step.
       description: Represents a run step delta i.e. any changed fields on a run step during streaming.
-    RunStepDeltaChunkObject:
-      type: object
-      properties:
-        step_details:
-          type: array
-          items:
-            $ref: '#/components/schemas/RunStepDeltaDetail'
-          description: The details of the run step.
-      description: Represents the delta payload in a streaming run step delta chunk.
     RunStepDeltaCodeInterpreterDetailItemObject:
       type: object
-      required:
-        - input
       properties:
         input:
           type: string
@@ -2403,13 +2415,11 @@ components:
       type: object
       required:
         - type
-        - message_creation
       properties:
         type:
           type: string
           enum:
             - message_creation
-            - tool_calls
           description: The object type, which is always "message_creation."
         message_creation:
           allOf:
@@ -2439,7 +2449,6 @@ components:
           type: object
           additionalProperties:
             type: string
-          nullable: true
           description: Reserved for future use.
       allOf:
         - $ref: '#/components/schemas/RunStepDeltaToolCall'
@@ -2571,7 +2580,6 @@ components:
           type: string
           enum:
             - message_creation
-            - tool_calls
           description: The object type, which is always 'message_creation'.
         message_creation:
           allOf:
@@ -2790,13 +2798,13 @@ components:
           nullable: true
           description: On an incomplete message, details about why the message is incomplete.
         completed_at:
-          type: string
-          format: date-time
+          type: integer
+          format: unixtime
           nullable: true
           description: The Unix timestamp (in seconds) for when the message was completed.
         incomplete_at:
-          type: string
-          format: date-time
+          type: integer
+          format: unixtime
           nullable: true
           description: The Unix timestamp (in seconds) for when the message was marked as incomplete.
         role:
@@ -2902,28 +2910,28 @@ components:
           format: unixtime
           description: The Unix timestamp, in seconds, representing when this object was created.
         expires_at:
-          type: string
-          format: date-time
+          type: integer
+          format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this item expires.
         started_at:
-          type: string
-          format: date-time
+          type: integer
+          format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this item was started.
         completed_at:
-          type: string
-          format: date-time
+          type: integer
+          format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this completed.
         cancelled_at:
-          type: string
-          format: date-time
+          type: integer
+          format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this was cancelled.
         failed_at:
-          type: string
-          format: date-time
+          type: integer
+          format: unixtime
           nullable: true
           description: The Unix timestamp, in seconds, representing when this failed.
         metadata:

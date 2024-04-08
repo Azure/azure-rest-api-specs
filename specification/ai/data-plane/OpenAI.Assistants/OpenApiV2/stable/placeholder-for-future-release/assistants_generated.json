@@ -2396,26 +2396,12 @@
         "text": {
           "type": "string",
           "description": "The textual content associated with this text annotation item."
-        },
-        "start_index": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The first text index associated with this text annotation.",
-          "x-ms-client-name": "startIndex"
-        },
-        "end_index": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The last text index associated with this text annotation.",
-          "x-ms-client-name": "endIndex"
         }
       },
       "discriminator": "type",
       "required": [
         "type",
-        "text",
-        "start_index",
-        "end_index"
+        "text"
       ]
     },
     "MessageTextContent": {
@@ -2467,6 +2453,18 @@
           "$ref": "#/definitions/MessageTextFileCitationDetails",
           "description": "A citation within the message that points to a specific quote from a specific file.\nGenerated when the assistant uses the \"retrieval\" tool to search files.",
           "x-ms-client-name": "fileCitation"
+        },
+        "start_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The first text index associated with this text annotation.",
+          "x-ms-client-name": "startIndex"
+        },
+        "end_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The last text index associated with this text annotation.",
+          "x-ms-client-name": "endIndex"
         }
       },
       "required": [
@@ -2506,6 +2504,18 @@
           "$ref": "#/definitions/MessageTextFilePathDetails",
           "description": "A URL for the file that's generated when the assistant used the code_interpreter tool to generate a file.",
           "x-ms-client-name": "filePath"
+        },
+        "start_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The first text index associated with this text annotation.",
+          "x-ms-client-name": "startIndex"
+        },
+        "end_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The last text index associated with this text annotation.",
+          "x-ms-client-name": "endIndex"
         }
       },
       "required": [
@@ -2801,29 +2811,29 @@
           "x-ms-client-name": "createdAt"
         },
         "expired_at": {
-          "type": "string",
-          "format": "date-time",
+          "type": "integer",
+          "format": "unixtime",
           "description": "The Unix timestamp, in seconds, representing when this item expired.",
           "x-nullable": true,
           "x-ms-client-name": "expiredAt"
         },
         "completed_at": {
-          "type": "string",
-          "format": "date-time",
+          "type": "integer",
+          "format": "unixtime",
           "description": "The Unix timestamp, in seconds, representing when this completed.",
           "x-nullable": true,
           "x-ms-client-name": "completedAt"
         },
         "cancelled_at": {
-          "type": "string",
-          "format": "date-time",
+          "type": "integer",
+          "format": "unixtime",
           "description": "The Unix timestamp, in seconds, representing when this was cancelled.",
           "x-nullable": true,
           "x-ms-client-name": "cancelledAt"
         },
         "failed_at": {
-          "type": "string",
-          "format": "date-time",
+          "type": "integer",
+          "format": "unixtime",
           "description": "The Unix timestamp, in seconds, representing when this failed.",
           "x-nullable": true,
           "x-ms-client-name": "failedAt"
@@ -3367,15 +3377,15 @@
           "x-ms-client-name": "incompleteDetails"
         },
         "completed_at": {
-          "type": "string",
-          "format": "date-time",
+          "type": "integer",
+          "format": "unixtime",
           "description": "The Unix timestamp (in seconds) for when the message was completed.",
           "x-nullable": true,
           "x-ms-client-name": "completedAt"
         },
         "incomplete_at": {
-          "type": "string",
-          "format": "date-time",
+          "type": "integer",
+          "format": "unixtime",
           "description": "The Unix timestamp (in seconds) for when the message was marked as incomplete.",
           "x-nullable": true,
           "x-ms-client-name": "incompleteAt"
@@ -3521,36 +3531,36 @@
           "x-ms-client-name": "createdAt"
         },
         "expires_at": {
-          "type": "string",
-          "format": "date-time",
+          "type": "integer",
+          "format": "unixtime",
           "description": "The Unix timestamp, in seconds, representing when this item expires.",
           "x-nullable": true,
           "x-ms-client-name": "expiresAt"
         },
         "started_at": {
-          "type": "string",
-          "format": "date-time",
+          "type": "integer",
+          "format": "unixtime",
           "description": "The Unix timestamp, in seconds, representing when this item was started.",
           "x-nullable": true,
           "x-ms-client-name": "startedAt"
         },
         "completed_at": {
-          "type": "string",
-          "format": "date-time",
+          "type": "integer",
+          "format": "unixtime",
           "description": "The Unix timestamp, in seconds, representing when this completed.",
           "x-nullable": true,
           "x-ms-client-name": "completedAt"
         },
         "cancelled_at": {
-          "type": "string",
-          "format": "date-time",
+          "type": "integer",
+          "format": "unixtime",
           "description": "The Unix timestamp, in seconds, representing when this was cancelled.",
           "x-nullable": true,
           "x-ms-client-name": "cancelledAt"
         },
         "failed_at": {
-          "type": "string",
-          "format": "date-time",
+          "type": "integer",
+          "format": "unixtime",
           "description": "The Unix timestamp, in seconds, representing when this failed.",
           "x-nullable": true,
           "x-ms-client-name": "failedAt"

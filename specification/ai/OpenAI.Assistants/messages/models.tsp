@@ -143,14 +143,6 @@ model MessageTextAnnotation {
 
   @doc("The textual content associated with this text annotation item.")
   text: string;
-
-  @encodedName("application/json", "start_index")
-  @doc("The first text index associated with this text annotation.")
-  startIndex: int32;
-
-  @encodedName("application/json", "end_index")
-  @doc("The last text index associated with this text annotation.")
-  endIndex: int32;
 }
 
 // File citation annotation + details
@@ -167,6 +159,14 @@ model MessageTextFileCitationAnnotation extends MessageTextAnnotation {
   Generated when the assistant uses the "retrieval" tool to search files.
   """)
   fileCitation: MessageTextFileCitationDetails;
+
+  @encodedName("application/json", "start_index")
+  @doc("The first text index associated with this text annotation.")
+  startIndex?: int32;
+
+  @encodedName("application/json", "end_index")
+  @doc("The last text index associated with this text annotation.")
+  endIndex?: int32;
 }
 
 @doc("A representation of a file-based text citation, as used in a file-based annotation of text thread message content.")
@@ -191,6 +191,14 @@ model MessageTextFilePathAnnotation extends MessageTextAnnotation {
   @encodedName("application/json", "file_path")
   @doc("A URL for the file that's generated when the assistant used the code_interpreter tool to generate a file.")
   filePath: MessageTextFilePathDetails;
+
+  @encodedName("application/json", "start_index")
+  @doc("The first text index associated with this text annotation.")
+  startIndex?: int32;
+
+  @encodedName("application/json", "end_index")
+  @doc("The last text index associated with this text annotation.")
+  endIndex?: int32;
 }
 
 @doc("An encapsulation of an image file ID, as used by message image content.")
@@ -234,7 +242,9 @@ model MessageFile {
 
 /** The possible execution status values for a thread message. */
 @added(ServiceApiVersions.vFuturePlaceholder)
-enum MessageStatus {
+union MessageStatus {
+  string,
+
   /** A run is currently creating this message. */
   inProgress: "in_progress",
 
@@ -254,7 +264,9 @@ model MessageIncompleteDetails {
 
 /** A set of reasons describing why a message is marked as incomplete. */
 @added(ServiceApiVersions.vFuturePlaceholder)
-enum MessageIncompleteDetailsReason {
+union MessageIncompleteDetailsReason {
+  string,
+
   /** The run generating the message was terminated due to content filter flagging. */
   contentFilter: "content_filter",
 
@@ -336,7 +348,7 @@ model MessageDeltaTextContentObject extends MessageDeltaContent {
   type: "text";
 
   /** The text content details. */
-  text: MessageDeltaTextContent;
+  text?: MessageDeltaTextContent;
 }
 
 /** Represents the data of a streamed text content part within a streaming message delta chunk. */
@@ -358,14 +370,6 @@ model MessageDeltaTextAnnotation {
 
   /** The type of the text content annotation. */
   type: string;
-
-  /** The start index of this annotation in the content text. */
-  @encodedName("application/json", "start_index")
-  startIndex: int32;
-
-  /** The end index of this annotation in the content text. */
-  @encodedName("application/json", "end_index")
-  endIndex: int32;
 }
 
 /** Represents a streamed file citation applied to a streaming text content part. */
@@ -377,7 +381,15 @@ model MessageDeltaTextFileCitationAnnotationObject
 
   /** The file citation information. */
   @encodedName("application/json", "file_citation")
-  fileCitation?: MessageDeltaTextFileCitationAnnotationObject;
+  fileCitation?: MessageDeltaTextFileCitationAnnotation;
+
+  /** The start index of this annotation in the content text. */
+  @encodedName("application/json", "start_index")
+  startIndex?: int32;
+
+  /** The end index of this annotation in the content text. */
+  @encodedName("application/json", "end_index")
+  endIndex?: int32;
 }
 
 /** Represents the data of a streamed file citation as applied to a streaming text content part. */
@@ -400,7 +412,15 @@ model MessageDeltaTextFilePathAnnotationObject
 
   /** The file path information. */
   @encodedName("application/json", "file_path")
-  filePath?: MessageDeltaTextFilePathAnnotationObject;
+  filePath?: MessageDeltaTextFilePathAnnotation;
+
+  /** The start index of this annotation in the content text. */
+  @encodedName("application/json", "start_index")
+  startIndex?: int32;
+
+  /** The end index of this annotation in the content text. */
+  @encodedName("application/json", "end_index")
+  endIndex?: int32;
 }
 
 /** Represents the data of a streamed file path annotation as applied to a streaming text content part. */
