@@ -1,11 +1,13 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/http";
 import "@typespec/rest";
+import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core.Traits;
+using Azure.ClientGenerator.Core;
 
 namespace AzureCommunicationRoutingService;
 
@@ -113,6 +115,7 @@ interface JobRouterOperations {
 
   @summary("Reclassify a job.")
   @doc("Reclassify a job.")
+  @clientName("reclassifyJob")
   reclassify is Operations.ResourceAction<
     RouterJob,
     {
@@ -125,6 +128,7 @@ interface JobRouterOperations {
 
   @summary("Submits request to cancel an existing job by Id while supplying free-form cancellation reason.")
   @doc("Submits request to cancel an existing job by Id while supplying free-form cancellation reason.")
+  @clientName("cancelJob")
   cancel is Operations.ResourceAction<
     RouterJob,
     {
@@ -137,6 +141,7 @@ interface JobRouterOperations {
 
   @summary("Completes an assigned job.")
   @doc("Completes an assigned job.")
+  @clientName("completeJob")
   complete is Operations.ResourceAction<
     RouterJobAssignment,
     {
@@ -149,6 +154,7 @@ interface JobRouterOperations {
 
   @summary("Closes a completed job.")
   @doc("Closes a completed job.")
+  @clientName("closeJob")
   close is Operations.ResourceAction<
     RouterJobAssignment,
     {
@@ -179,6 +185,7 @@ interface JobRouterOperations {
 
   @summary("Unassign a job.")
   @doc("Unassign a job.")
+  @clientName("unassignJob")
   unassign is Operations.ResourceAction<
     RouterJobAssignment,
     {
@@ -191,10 +198,12 @@ interface JobRouterOperations {
 
   @summary("Accepts an offer to work on a job and returns a 409/Conflict if another agent accepted the job already.")
   @doc("Accepts an offer to work on a job and returns a 409/Conflict if another agent accepted the job already.")
+  @clientName("acceptJobOffer")
   accept is Operations.ResourceAction<RouterJobOffer, {}, AcceptJobOfferResult>;
 
   @summary("Declines an offer to work on a job.")
   @doc("Declines an offer to work on a job.")
+  @clientName("declineJobOffer")
   decline is Operations.ResourceAction<
     RouterJobOffer,
     {

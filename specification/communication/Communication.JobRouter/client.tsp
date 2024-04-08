@@ -10,15 +10,6 @@ using TypeSpec.Versioning;
 @useDependency(AzureCommunicationRoutingService.Versions.c2024_01_18_Preview)
 namespace ClientForAcsJobRouter;
 
-// routes
-@@clientName(AzureCommunicationRoutingService.JobRouterOperations.reclassify, "reclassifyJob");
-@@clientName(AzureCommunicationRoutingService.JobRouterOperations.cancel, "cancelJob");
-@@clientName(AzureCommunicationRoutingService.JobRouterOperations.complete, "completeJob");
-@@clientName(AzureCommunicationRoutingService.JobRouterOperations.close, "closeJob");
-@@clientName(AzureCommunicationRoutingService.JobRouterOperations.unassign, "unassignJob");
-@@clientName(AzureCommunicationRoutingService.JobRouterOperations.accept, "acceptJobOffer");
-@@clientName(AzureCommunicationRoutingService.JobRouterOperations.decline, "declineJobOffer");
-
 // Your customizations here
 @client({
   name: "JobRouterAdministrationClient",
