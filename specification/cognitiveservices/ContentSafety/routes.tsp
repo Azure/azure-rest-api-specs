@@ -81,7 +81,7 @@ interface TextOperations {
     AnalyzeTextPromptInjectionResult
   >;
 
-  @added(ContentSafety.Versions.v2024_04_15_Preview)
+  @added(ContentSafety.Versions.v2024_02_15_Preview)
   @summary("Auto Review Text")
   @doc("A synchronous API for the automatic review of harmful content")
   @route("/text:autoReview")
@@ -95,7 +95,7 @@ interface TextOperations {
     AutoReviewTextResult
   >;
 
-  @added(ContentSafety.Versions.v2024_04_15_Preview)
+  @added(ContentSafety.Versions.v2024_02_15_Preview)
   @summary("Analyze Text Detect Incidents")
   @doc("A synchronous API for the analysis of text detect incidents.")
   @route("/text:detectIncidents")
@@ -130,7 +130,7 @@ interface ImageOperations {
     AnalyzeImageResult
   >;
 
-  @added(ContentSafety.Versions.v2024_04_15_Preview)
+  @added(ContentSafety.Versions.v2024_02_15_Preview)
   @summary("Analyze Image Detect Incidents")
   @doc("A synchronous API for the analysis of image detect incidents.")
   @route("/image:detectIncidents")
@@ -238,10 +238,10 @@ interface AutoReviewerOps
       NoConditionalRequests &
       NoClientRequestId> {}
 
-@added(ContentSafety.Versions.v2024_04_15_Preview)
+@added(ContentSafety.Versions.v2024_02_15_Preview)
 interface AutoReviewerOperations {
   @summary("Create a new version of auto reviewer.")
-  @doc("Create new auto reviewer or a new version of exisiting auto reviewer.")
+  @doc("Create new auto reviewer or a new version of existing auto reviewer.")
   createOrReplaceAutoReviewer is AutoReviewerOps.LongRunningResourceCreateOrReplace<AutoReviewerVersion>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -287,7 +287,7 @@ interface TextIncidentOps
       NoConditionalRequests &
       NoClientRequestId> {}
 
-@added(ContentSafety.Versions.v2024_04_15_Preview)
+@added(ContentSafety.Versions.v2024_02_15_Preview)
 interface TextIncidents {
   @summary("Get Text Incident By incidentName")
   @doc("Returns text incident details.")
@@ -341,7 +341,7 @@ interface ImageIncidentOps
       NoConditionalRequests &
       NoClientRequestId> {}
 
-@added(ContentSafety.Versions.v2024_04_15_Preview)
+@added(ContentSafety.Versions.v2024_02_15_Preview)
 interface ImageIncidents {
   @summary("Get Image Incident By incidentName")
   @doc("Returns image incident details.")
@@ -395,7 +395,7 @@ interface TextIncidentOperationsOps
       NoConditionalRequests &
       NoClientRequestId> {}
 
-@added(ContentSafety.Versions.v2024_04_15_Preview)
+@added(ContentSafety.Versions.v2024_02_15_Preview)
 interface TextIncidentOperation {
   @summary("Deploy Text Incident Operation")
   @doc("Deploy text incident operation.")
@@ -423,7 +423,7 @@ interface ImageIncidentOperationsOps
       NoConditionalRequests &
       NoClientRequestId> {}
 
-@added(ContentSafety.Versions.v2024_04_15_Preview)
+@added(ContentSafety.Versions.v2024_02_15_Preview)
 interface ImageIncidentOperation {
   @summary("Deploy Image incident Operation")
   @doc("Deploy image incident operation.")
