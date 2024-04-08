@@ -21,7 +21,7 @@ model ApiSpecExportResult {
 @doc("Export specification result format")
 union ApiSpecExportResultFormat {
   string,
-  
+
   @doc("Link format")
   Link: "link",
 }

@@ -98,7 +98,7 @@ union ApiKind {
 @doc("API Lifecycle Stage")
 union LifecycleStage {
   string,
-  
+
   @doc("API is in the design stage")
   Design: "design",
 
