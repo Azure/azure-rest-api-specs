@@ -185,7 +185,7 @@ model ContentFilterBlocklistIdResult {
   id: string;
 }
 
-@doc("Represents a stuctured collection of result details for content filtering.")
+@doc("Represents a structured collection of result details for content filtering.")
 @added(ServiceApiVersions.v2024_04_01_Preview)
 model ContentFilterDetailedResults {
   ...FilteredResultBase;
