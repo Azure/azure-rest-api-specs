@@ -96,7 +96,7 @@ Putting everything together discussed, the directory structure of a singular `sp
 /resource-manager/README.md
 /resource-manager/<RPNS>/stable/<apiVersion1>/*.json
 /resource-manager/<RPNS>/stable/<apiVersion1>/examples/*.json
-                                /<apiVersion2>/ ... # multiple '<apiVersion>' folders
+                               /<apiVersion2>/ ... # multiple '<apiVersion>' folders
 /resource-manager/<RPNS>/preview/<apiVersion3-preview>/*.json
 /resource-manager/<RPNS>/preview/<apiVersion3-preview>/examples/*.json
                                 /<apiVersion4-preview>/ ... # multiple '<apiVersion-preview>' folders
