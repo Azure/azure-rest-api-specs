@@ -41,7 +41,7 @@ tag: package-passivestamp-2023-01-15
 ```
 
 ``` yaml $(package-activestamp)
-tag: package-preview-2024-03
+tag: package-2024-02
 ```
 
 ### Validations
