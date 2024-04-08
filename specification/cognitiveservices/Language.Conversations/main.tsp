@@ -1197,8 +1197,6 @@ union SummaryAspect {
 
   /** Action items and tasks that arose during a meeting. */
   @added(Versions.v2024-05-15-preview)
-  @removed(Versions.v2024_05_01)
-  @added(Versions.v2023_11_15_preview)
   followUpTasks: "follow-up tasks",
 }
 
