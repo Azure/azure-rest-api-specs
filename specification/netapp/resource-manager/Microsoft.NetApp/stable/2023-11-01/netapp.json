@@ -350,6 +350,89 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/regionInfos": {
+      "get": {
+        "summary": "Describes region specific information.",
+        "description": "Provides region specific information.",
+        "tags": [
+          "NetApp Resource"
+        ],
+        "operationId": "NetAppResourceRegionInfos_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/regionInfosList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegionInfos_List": {
+            "$ref": "examples/RegionInfos_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/regionInfos/default": {
+      "get": {
+        "summary": "Describes region specific information.",
+        "description": "Provides storage to network proximity and logical zone mapping information.",
+        "tags": [
+          "NetApp Resource"
+        ],
+        "operationId": "NetAppResourceRegionInfos_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/regionInfoResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegionInfos_Get": {
+            "$ref": "examples/RegionInfos_Get.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/queryNetworkSiblingSet": {
       "post": {
         "tags": [
@@ -2995,55 +3078,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/restoreStatus": {
-      "get": {
-        "tags": [
-          "Restore"
-        ],
-        "summary": "Get volume's restore status",
-        "description": "Get the status of the restore for a volume",
-        "operationId": "Backups_GetVolumeRestoreStatus",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/PoolName"
-          },
-          {
-            "$ref": "#/parameters/VolumeName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/restoreStatus"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Volumes_RestoreStatus": {
-            "$ref": "examples/Volumes_RestoreStatus.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/backupPolicies": {
       "get": {
         "tags": [
@@ -3310,7 +3344,7 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Backups_Delete": {
+          "BackupPolicies_Delete": {
             "$ref": "examples/BackupPolicies_Delete.json"
           }
         }
@@ -4172,6 +4206,863 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/latestBackupStatus/current": {
+      "get": {
+        "tags": [
+          "Backups"
+        ],
+        "summary": "Get the latest backup status of a volume",
+        "description": "Get the latest status of the backup for a volume",
+        "operationId": "Backups_GetLatestStatus",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/backupStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_BackupStatus": {
+            "$ref": "examples/Volumes_LatestBackupStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/latestRestoreStatus/current": {
+      "get": {
+        "tags": [
+          "Restore"
+        ],
+        "summary": "Get the latest restore status of a volume",
+        "description": "Get the latest status of the restore for a volume",
+        "operationId": "Backups_GetVolumeLatestRestoreStatus",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/restoreStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Volumes_RestoreStatus": {
+            "$ref": "examples/Volumes_LatestRestoreStatus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/backupVaults/{backupVaultName}/backups": {
+      "get": {
+        "tags": [
+          "Backups"
+        ],
+        "summary": "List Backups",
+        "description": "List all backups Under a Backup Vault",
+        "operationId": "Backups_ListByVault",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/BackupVaultName"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string",
+            "description": "An option to specify the VolumeResourceId. If present, then only returns the backups under the specified volume",
+            "required": false
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/backupsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Backups_List": {
+            "$ref": "examples/BackupsUnderBackupVault_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/backupVaults/{backupVaultName}/backups/{backupName}": {
+      "get": {
+        "summary": "Describe the Backup under Backup Vault",
+        "description": "Get the specified Backup under Backup Vault.",
+        "tags": [
+          "Backups"
+        ],
+        "operationId": "Backups_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/BackupVaultName"
+          },
+          {
+            "$ref": "#/parameters/BackupName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/backup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BackupsUnderBackupVault_Get": {
+            "$ref": "examples/BackupsUnderBackupVault_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Backups"
+        ],
+        "summary": "Create a backup",
+        "description": "Create a backup under the Backup Vault",
+        "operationId": "Backups_Create",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/BackupVaultName"
+          },
+          {
+            "$ref": "#/parameters/BackupName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "Backup object supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/backup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - backup created updated",
+            "schema": {
+              "$ref": "#/definitions/backup"
+            }
+          },
+          "201": {
+            "description": "Backup created",
+            "schema": {
+              "$ref": "#/definitions/backup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "BackupsUnderBackupVault_Create": {
+            "$ref": "examples/BackupsUnderBackupVault_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Backups"
+        ],
+        "summary": "Patch a backup",
+        "description": "Patch a Backup under the Backup Vault",
+        "operationId": "Backups_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/BackupVaultName"
+          },
+          {
+            "$ref": "#/parameters/BackupName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "Backup object supplied in the body of the operation.",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/backupPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/backup"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Create or update request accepted; operation will complete asynchronously",
+            "schema": {
+              "$ref": "#/definitions/backup"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "BackupsUnderBackupVault_Update": {
+            "$ref": "examples/BackupsUnderBackupVault_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Backups"
+        ],
+        "summary": "Delete backup",
+        "description": "Delete a Backup under the Backup Vault",
+        "operationId": "Backups_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/BackupVaultName"
+          },
+          {
+            "$ref": "#/parameters/BackupName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted -- Create or update request accepted; operation will complete asynchronously",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent -- Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "BackupsUnderBackupVault_Delete": {
+            "$ref": "examples/BackupsUnderBackupVault_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/backupVaults": {
+      "get": {
+        "summary": "Describe all Backup Vaults",
+        "description": "List and describe all Backup Vaults in the NetApp account.",
+        "tags": [
+          "Backup Vaults"
+        ],
+        "operationId": "BackupVaults_ListByNetAppAccount",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/backupVaultsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BackupVaults_List": {
+            "$ref": "examples/BackupVaults_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/backupVaults/{backupVaultName}": {
+      "get": {
+        "summary": "Describe the Backup Vault",
+        "description": "Get the Backup Vault",
+        "tags": [
+          "Backup Vaults"
+        ],
+        "operationId": "BackupVaults_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/BackupVaultName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/backupVault"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BackupVaults_Get": {
+            "$ref": "examples/BackupVaults_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Backup Vaults"
+        ],
+        "summary": "Create or Update a Backup Vault",
+        "description": "Create or update the specified Backup Vault in the NetApp account",
+        "operationId": "BackupVaults_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/BackupVaultName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "BackupVault object supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/backupVault"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - backupVault updated",
+            "schema": {
+              "$ref": "#/definitions/backupVault"
+            }
+          },
+          "201": {
+            "description": "backupVault created",
+            "schema": {
+              "$ref": "#/definitions/backupVault"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "BackupVault_CreateOrUpdate": {
+            "$ref": "examples/BackupVaults_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update NetApp Backup Vault",
+        "description": "Patch the specified NetApp Backup Vault",
+        "tags": [
+          "Backup Vaults"
+        ],
+        "operationId": "BackupVaults_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/BackupVaultName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "Backup Vault object supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/backupVaultPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Backup Vault updated.",
+            "schema": {
+              "$ref": "#/definitions/backupVault"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/backupVault"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "BackupVaults_Update": {
+            "$ref": "examples/BackupVaults_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete NetApp Backup Vault",
+        "description": "Delete the specified Backup Vault",
+        "tags": [
+          "Backup Vaults"
+        ],
+        "operationId": "BackupVaults_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/BackupVaultName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted -- Delete request accepted; operation will complete asynchronously",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent -- Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "BackupVaults_Delete": {
+            "$ref": "examples/BackupVaults_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/backupVaults/{backupVaultName}/backups/{backupName}/restoreFiles": {
+      "post": {
+        "tags": [
+          "Backups"
+        ],
+        "operationId": "BackupsUnderBackupVault_RestoreFiles",
+        "summary": "Create a new Backup Restore Files request",
+        "description": "Restore the specified files from the specified backup to the active filesystem",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Restore payload supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/backupRestoreFiles"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/BackupVaultName"
+          },
+          {
+            "$ref": "#/parameters/BackupName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Backups_SingleFileRestore": {
+            "$ref": "examples/BackupsUnderBackupVault_SingleFileRestore.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/migrateBackups": {
+      "post": {
+        "tags": [
+          "Backups"
+        ],
+        "operationId": "BackupsUnderVolume_MigrateBackups",
+        "summary": "Create a new migrate request for backups under volume",
+        "description": "Migrate the backups under volume to backup vault",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Migrate backups under volume payload supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/backupsMigrationRequest"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "#/parameters/PoolName"
+          },
+          {
+            "$ref": "#/parameters/VolumeName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "BackupsUnderVolume_Migrate": {
+            "$ref": "examples/BackupsUnderVolume_Migrate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/migrateBackups": {
+      "post": {
+        "tags": [
+          "Backups"
+        ],
+        "operationId": "BackupsUnderAccount_MigrateBackups",
+        "summary": "Create a new migrate request for backups under account",
+        "description": "Migrate the backups under a NetApp account to backup vault",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Migrate backups under an account payload supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/backupsMigrationRequest"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "BackupsUnderAccount_Migrate": {
+            "$ref": "examples/BackupsUnderAccount_Migrate.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -4403,6 +5294,39 @@
         "message": {
           "description": "If reason == invalid, provide the user with the reason why the given name is invalid, and provide the resource naming requirements so that the user can select a valid name. If reason == AlreadyExists, explain that resource name is already in use, and direct them to select a different name.",
           "type": "string"
+        }
+      }
+    },
+    "regionInfosList": {
+      "description": "List of regionInfo resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of regionInfo resources",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/regionInfoResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
+        }
+      }
+    },
+    "regionInfoResource": {
+      "description": "Information regarding regionInfo Item.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "regionInfo properties",
+          "$ref": "#/definitions/regionInfo",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -5123,7 +6047,7 @@
           "title": "size",
           "type": "integer",
           "format": "int64",
-          "description": "Provisioned size of the pool (in bytes). Allowed values are in 1TiB chunks (value must be multiply of 4398046511104).",
+          "description": "Provisioned size of the pool (in bytes). Allowed values are in 1TiB chunks (value must be multiply of 1099511627776).",
           "default": 4398046511104
         },
         "serviceLevel": {
@@ -5253,7 +6177,7 @@
           "title": "size",
           "type": "integer",
           "format": "int64",
-          "description": "Provisioned size of the pool (in bytes). Allowed values are in 1TiB chunks (value must be multiply of 4398046511104).",
+          "description": "Provisioned size of the pool (in bytes). Allowed values are in 1TiB chunks (value must be multiply of 1099511627776).",
           "default": 4398046511104
         },
         "qosType": {
@@ -5454,8 +6378,8 @@
             "read",
             "create"
           ],
-          "description": "UUID v4 or resource identifier used to identify the Snapshot.",
-          "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
+          "description": "Resource identifier used to identify the Snapshot.",
+          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/volume1/snapshots/snapshot1"
         },
         "deleteBaseSnapshot": {
           "type": "boolean",
@@ -5469,8 +6393,8 @@
             "read",
             "create"
           ],
-          "description": "UUID v4 or resource identifier used to identify the Backup.",
-          "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
+          "description": "Resource identifier used to identify the Backup.",
+          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/backupVaults/backupVault1/backups/backup1"
         },
         "baremetalTenantId": {
           "title": "Baremetal Tenant ID",
@@ -5552,6 +6476,12 @@
           "title": "DataProtection",
           "description": "DataProtection type volumes include an object containing details of the replication",
           "properties": {
+            "backup": {
+              "title": "Backup",
+              "description": "Backup Properties",
+              "type": "object",
+              "$ref": "#/definitions/volumeBackupProperties"
+            },
             "replication": {
               "title": "Replication",
               "description": "Replication properties",
@@ -6215,6 +7145,12 @@
           "title": "DataProtection",
           "description": "DataProtection type volumes include an object containing details of the replication",
           "properties": {
+            "backup": {
+              "title": "Backup",
+              "description": "Backup Properties",
+              "type": "object",
+              "$ref": "#/definitions/volumeBackupProperties"
+            },
             "snapshot": {
               "title": "Snapshot",
               "description": "Snapshot properties.",
@@ -6259,7 +7195,7 @@
           "type": "integer",
           "description": "Specifies the number of days after which data that is not accessed by clients will be tiered.",
           "example": 7,
-          "minimum": 7,
+          "minimum": 2,
           "maximum": 183,
           "format": "int32"
         },
@@ -6928,6 +7864,18 @@
           "type": "string",
           "description": "Volume name"
         },
+        "volumeResourceId": {
+          "type": "string",
+          "description": "ResourceId used to identify the Volume",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes"
+              }
+            ]
+          }
+        },
         "backupsCount": {
           "type": "integer",
           "description": "Total count of backups for volume",
@@ -7497,7 +8445,7 @@
         },
         "networkFeatures": {
           "$ref": "#/definitions/networkFeatures",
-          "description": "Network features available to the volume, some such"
+          "description": "Network features available to the volume."
         }
       }
     },
@@ -7918,6 +8866,382 @@
         ]
       },
       "example": "Enabled"
+    },
+    "backupRestoreFiles": {
+      "description": "Restore payload for Single File Backup Restore",
+      "type": "object",
+      "required": [
+        "fileList",
+        "destinationVolumeId"
+      ],
+      "properties": {
+        "fileList": {
+          "description": "List of files to be restored",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "type": "string",
+            "maxLength": 1024,
+            "minLength": 1
+          },
+          "example": [
+            "/dir1/customer1.db",
+            "/dir1/customer2.db"
+          ]
+        },
+        "restoreFilePath": {
+          "description": "Destination folder where the files will be restored. The path name should start with a forward slash. If it is omitted from request then restore is done at the root folder of the destination volume by default",
+          "type": "string",
+          "pattern": "^\\/.*$",
+          "example": "/AVSdataStore"
+        },
+        "destinationVolumeId": {
+          "description": "Resource Id of the destination volume on which the files need to be restored",
+          "type": "string",
+          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/volume1"
+        }
+      }
+    },
+    "volumeBackupProperties": {
+      "description": "Volume Backup Properties",
+      "type": "object",
+      "properties": {
+        "backupPolicyId": {
+          "type": "string",
+          "description": "Backup Policy Resource ID"
+        },
+        "policyEnforced": {
+          "type": "boolean",
+          "description": "Policy Enforced"
+        },
+        "backupVaultId": {
+          "type": "string",
+          "description": "Backup Vault Resource ID"
+        }
+      }
+    },
+    "backupsList": {
+      "description": "List of Backups",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of Backups",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/backup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
+        }
+      }
+    },
+    "backup": {
+      "description": "Backup under a Backup Vault",
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Backup Properties",
+          "$ref": "#/definitions/backupProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "backupPatch": {
+      "description": "Backup patch",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Backup Patch Properties",
+          "$ref": "#/definitions/backupPatchProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "backupProperties": {
+      "description": "Backup properties",
+      "type": "object",
+      "required": [
+        "volumeResourceId"
+      ],
+      "properties": {
+        "backupId": {
+          "title": "backupId",
+          "type": "string",
+          "readOnly": true,
+          "description": "UUID v4 used to identify the Backup",
+          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+          "maxLength": 36,
+          "minLength": 36,
+          "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
+        },
+        "creationDate": {
+          "title": "creationDate",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The creation date of the backup",
+          "example": "2017-08-15 13:23:33"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure lifecycle management"
+        },
+        "size": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Size of backup in bytes",
+          "format": "int64"
+        },
+        "label": {
+          "type": "string",
+          "description": "Label for backup"
+        },
+        "backupType": {
+          "title": "backupType",
+          "type": "string",
+          "readOnly": true,
+          "description": "Type of backup Manual or Scheduled",
+          "enum": [
+            "Manual",
+            "Scheduled"
+          ],
+          "x-ms-enum": {
+            "name": "backupType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Manual",
+                "description": "Manual backup"
+              },
+              {
+                "value": "Scheduled",
+                "description": "Scheduled backup"
+              }
+            ]
+          },
+          "example": "Manual"
+        },
+        "failureReason": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Failure reason"
+        },
+        "volumeResourceId": {
+          "type": "string",
+          "description": "ResourceId used to identify the Volume",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes"
+              }
+            ]
+          }
+        },
+        "useExistingSnapshot": {
+          "type": "boolean",
+          "description": "Manual backup an already existing snapshot. This will always be false for scheduled backups and true/false for manual backups",
+          "example": true,
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "snapshotName": {
+          "type": "string",
+          "description": "The name of the snapshot",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "backupPolicyResourceId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "ResourceId used to identify the backup policy",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.NetApp/netAppAccounts/backupPolicies"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "backupPatchProperties": {
+      "description": "Backup patch properties",
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "description": "Label for backup"
+        }
+      }
+    },
+    "backupStatus": {
+      "description": "Backup status",
+      "type": "object",
+      "properties": {
+        "healthy": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Backup health status"
+        },
+        "relationshipStatus": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Status of the backup mirror relationship",
+          "enum": [
+            "Idle",
+            "Transferring",
+            "Failed",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "RelationshipStatus",
+            "modelAsString": true
+          }
+        },
+        "mirrorState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The status of the backup",
+          "enum": [
+            "Uninitialized",
+            "Mirrored",
+            "Broken"
+          ],
+          "x-ms-enum": {
+            "name": "MirrorState",
+            "modelAsString": true
+          }
+        },
+        "unhealthyReason": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Reason for the unhealthy backup relationship"
+        },
+        "errorMessage": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Displays error message if the backup is in an error state"
+        },
+        "lastTransferSize": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "Displays the last transfer size"
+        },
+        "lastTransferType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Displays the last transfer type"
+        },
+        "totalTransferBytes": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "Displays the total bytes transferred"
+        },
+        "transferProgressBytes": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "Displays the total number of bytes transferred for the ongoing operation"
+        }
+      }
+    },
+    "backupVaultsList": {
+      "description": "List of Backup Vaults",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of Backup Vaults",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/backupVault"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
+        }
+      }
+    },
+    "backupVault": {
+      "description": "Backup Vault information",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Backup Vault Properties",
+          "$ref": "#/definitions/backupVaultProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "backupVaultPatch": {
+      "description": "Backup Vault information",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "tags": {
+          "description": "Resource tags",
+          "$ref": "#/definitions/resourceTags"
+        }
+      }
+    },
+    "backupVaultProperties": {
+      "description": "Backup Vault properties",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure lifecycle management"
+        }
+      }
+    },
+    "backupsMigrationRequest": {
+      "description": "Migrate Backups Request",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "required": [
+        "backupVaultId"
+      ],
+      "properties": {
+        "backupVaultId": {
+          "type": "string",
+          "description": "The ResourceId of the Backup Vault",
+          "example": "/subscriptions/D633CC2E-722B-4AE1-B636-BBD9E4C60ED9/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/backupVaults/backupVault1"
+        }
+      }
     }
   },
   "parameters": {
@@ -8020,6 +9344,24 @@
       "in": "path",
       "required": true,
       "description": "The name of volume quota rule",
+      "x-ms-parameter-location": "method"
+    },
+    "BackupName": {
+      "name": "backupName",
+      "type": "string",
+      "in": "path",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_.]{0,255}$",
+      "required": true,
+      "description": "The name of the backup",
+      "x-ms-parameter-location": "method"
+    },
+    "BackupVaultName": {
+      "name": "backupVaultName",
+      "in": "path",
+      "required": true,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$",
+      "type": "string",
+      "description": "The name of the Backup Vault",
       "x-ms-parameter-location": "method"
     }
   }
