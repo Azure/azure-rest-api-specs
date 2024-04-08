@@ -15,241 +15,253 @@ namespace Microsoft.Workloads;
 /**
  * Defines the environment type - Production/Non Production.
  */
-enum EpicEnvironmentType {
-  /**
+union EpicEnvironmentType {
+  string,
+    /**
    * Environment is designated for non-production use.
    */
-  NonProduction,
+  NonProduction: "NonProduction",
 
   /**
    * Environment is designated for production use.
    */
-  Production,
+  Production: "Production",
 }
 
 /**
  * The configuration Type.
  */
-enum EpicConfigurationType {
+union EpicConfigurationType {
+  string,
   /**
    * Configuration for registration.
    */
-  Registration,
+  Registration: "Registration",
 }
 
 /**
  * Defines the Epic Instance status.
  */
-enum EpicVirtualInstanceStatus {
+union EpicVirtualInstanceStatus {
+  string,
   /**
    * Instance is currently running.
    */
-  Running,
+  Running: "Running",
 
   /**
    * Instance is offline.
    */
-  Offline,
+  Offline: "Offline",
 
   /**
    * Instance is unavailable.
    */
-  Unavailable,
+  Unavailable: "Unavailable",
 }
 
 /**
  * Defines the health of Epic Instances.
  */
-enum EpicHealthState {
+union EpicHealthState {
+  string,
   /**
    * Health state is available.
    */
-  Available,
+Available:  "Available",
 
   /**
    * Instance is unavailable.
    */
-  Unavailable,
+  Unavailable: "Unavailable",
 
   /**
    * Instance is unknown.
    */
-  Unknown,
+  Unknown: "Unknown",
 
   /**
    * Instance health is degraded.
    */
-  Degraded,
+  Degraded: "Degraded",
 }
 
 /**
  * Defines the Virtual Instance for Epic state.
  */
-enum EpicVirtualInstanceState {
+union EpicVirtualInstanceState {
+  string,
   /**
    * Registration of the instance is in progress.
    */
-  RegistrationInProgress,
+  RegistrationInProgress: "RegistrationInProgress",
 
   /**
    * Registration of the instance has failed.
    */
-  RegistrationFailed,
+  RegistrationFailed: "RegistrationFailed",
 
   /**
    * Registration of the instance is complete.
    */
-  RegistrationComplete,
+  RegistrationComplete: "RegistrationComplete",
 }
 
 /**
  * Defines the provisioning states.
  */
-enum EpicVirtualInstanceProvisioningState {
+union EpicVirtualInstanceProvisioningState {
+  string,
   /**
    * Provisioning has succeeded.
    */
-  Succeeded,
+  Succeeded: "Succeeded",
 
   /**
    * Provisioning is updating.
    */
-  Updating,
+  Updating: "Updating",
 
   /**
    * Provisioning is creating resources.
    */
-  Creating,
+  Creating: "Creating",
 
   /**
    * Provisioning has failed.
    */
-  Failed,
+  Failed: "Failed",
 
   /**
    * Provisioning is deleting resources.
    */
-  Deleting,
+  Deleting: "Deleting",
 
   /**
    * Provisioning has been canceled.
    */
-  Canceled,
+  Canceled: "Canceled",
 }
 
 /**
  * The role of the Wss VM.
  */
-enum WssRole {
+union WssRole {
+  string,
   /**
    * Role for WSS InterConnect.
    */
-  WSSInterConnect,
+  WSSInterConnect: "WSSInterConnect",
 
   /**
    * Role for WBS.
    */
-  WBS,
+  WBS: "WBS",
 
   /**
    * Role for EPS.
    */
-  EPS,
+  EPS: "EPS",
 
   /**
    * Role for MyChart.
    */
-  MyChart,
+  MyChart: "MyChart",
 
   /**
    * Role for BCA.
    */
-  BCA,
+  BCA: "BCA",
 }
 
 /**
  * The role of the database VM.
  */
-enum DatabaseVmRole {
+union DatabaseVmRole {
+  string,
+
   /**
    * Role for ODB.
    */
-  ODB,
+  ODB: "ODB",
 
   /**
    * Role for ECP.
    */
-  ECP,
+  ECP: "ECP",
 
   /**
    * Role for EMFI.
    */
-  EMFI,
+  EMFI: "EMFI",
 
   /**
    * Role for Reporting.
    */
-  Reporting,
+  Reporting: "Reporting",
 
   /**
    * Role for Clarity.
    */
-  Clarity,
+  Clarity: "Clarity",
 
   /**
    * Role for Caboodle.
    */
-  Caboodle,
+  Caboodle: "Caboodle",
 }
 
 /**
  * The role of the Presentation VM.
  */
-enum PresentationRole {
+union PresentationRole {
+  string,
   /**
    * Role for Hyperspace VDI.
    */
-  `Hyperspace VDI`,
+  `Hyperspace VDI`: "Hyperspace VDI",
 
   /**
    * Role for Hyperdrive VDI.
    */
-  `Hyperdrive VDI`,
+  `Hyperdrive VDI`: "Hyperdrive VDI",
 
   /**
    * Role for BCA Web.
    */
-  `BCA Web`,
+  `BCA Web`: "BCA Web",
 }
 
 /**
  * The role of the Shared VM.
  */
-enum SharedRole {
+union SharedRole {
+  string,
   /**
    * Role for Kuiper.
    */
-  Kuiper,
+  Kuiper: "Kuiper",
 
   /**
    * Role for System Pulse.
    */
-  `System Pulse`,
+  `System Pulse`: "System Pulse",
 
   /**
    * Role for MPSQL.
    */
-  MPSQL,
+  MPSQL: "MPSQL",
 }
 
 /**
  * The role of the Hyperspace Web VM.
  */
-enum HyperspaceWebRole {
+union HyperspaceWebRole {
+  string,
   /**
    * Role for Hyperspace Web.
    */
-  HyperSpaceWeb,
+  HyperSpaceWeb: "HyperSpaceWeb",
 }
 
 /**
