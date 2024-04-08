@@ -17,7 +17,7 @@ using Azure.Core;
   "{endpoint}",
   "An AI endpoint that does chat completions, embeddings or image-generation",
   {
-    @doc("The Document Intelligence service endpoint.")
+    @doc("The AI model service endpoint.")
     endpoint: string,
 
     @doc("Controls what happens if extra parameters are passed in the request payload.")
