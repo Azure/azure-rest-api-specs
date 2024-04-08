@@ -644,7 +644,7 @@ model ImageIncidentSampleResult {
   image?: ImageDataResult;
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
+@added(ContentSafety.Versions.v2024_04_15_Preview)
 @doc("The image result is base64 encoded bytes")
 @projectedName("csharp", "ContentSafetyImageDataResult")
 model ImageDataResult {
