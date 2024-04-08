@@ -44,4 +44,3 @@ type OrganizationsClientUpdateResponse struct {
 	// Organization Resource by Astronomer
 	OrganizationResource
 }
-

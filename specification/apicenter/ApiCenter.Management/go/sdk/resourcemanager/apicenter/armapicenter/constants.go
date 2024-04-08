@@ -7,7 +7,7 @@ package armapicenter
 const host = "https://management.azure.com"
 
 const (
-	moduleName = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/apicenter/armapicenter"
+	moduleName    = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/apicenter/armapicenter"
 	moduleVersion = "v0.1.0"
 )
 
@@ -31,7 +31,7 @@ const (
 
 // PossibleAPIKindValues returns the possible values for the APIKind const type.
 func PossibleAPIKindValues() []APIKind {
-	return []APIKind{	
+	return []APIKind{
 		APIKindGraphql,
 		APIKindGrpc,
 		APIKindRest,
@@ -53,7 +53,7 @@ const (
 
 // PossibleAPISpecExportResultFormatValues returns the possible values for the APISpecExportResultFormat const type.
 func PossibleAPISpecExportResultFormatValues() []APISpecExportResultFormat {
-	return []APISpecExportResultFormat{	
+	return []APISpecExportResultFormat{
 		APISpecExportResultFormatInline,
 		APISpecExportResultFormatLink,
 	}
@@ -66,13 +66,13 @@ const (
 	// APISpecImportSourceFormatInline - The inlined content of a specification document.
 	APISpecImportSourceFormatInline APISpecImportSourceFormat = "inline"
 	// APISpecImportSourceFormatLink - The link to a specification document hosted on a publicly accessible internet
-// address.
+	// address.
 	APISpecImportSourceFormatLink APISpecImportSourceFormat = "link"
 )
 
 // PossibleAPISpecImportSourceFormatValues returns the possible values for the APISpecImportSourceFormat const type.
 func PossibleAPISpecImportSourceFormatValues() []APISpecImportSourceFormat {
-	return []APISpecImportSourceFormat{	
+	return []APISpecImportSourceFormat{
 		APISpecImportSourceFormatInline,
 		APISpecImportSourceFormatLink,
 	}
@@ -88,7 +88,7 @@ const (
 
 // PossibleActionTypeValues returns the possible values for the ActionType const type.
 func PossibleActionTypeValues() []ActionType {
-	return []ActionType{	
+	return []ActionType{
 		ActionTypeInternal,
 	}
 }
@@ -109,7 +109,7 @@ const (
 
 // PossibleCreatedByTypeValues returns the possible values for the CreatedByType const type.
 func PossibleCreatedByTypeValues() []CreatedByType {
-	return []CreatedByType{	
+	return []CreatedByType{
 		CreatedByTypeApplication,
 		CreatedByTypeKey,
 		CreatedByTypeManagedIdentity,
@@ -129,7 +129,7 @@ const (
 
 // PossibleDeploymentStateValues returns the possible values for the DeploymentState const type.
 func PossibleDeploymentStateValues() []DeploymentState {
-	return []DeploymentState{	
+	return []DeploymentState{
 		DeploymentStateActive,
 		DeploymentStateInactive,
 	}
@@ -151,7 +151,7 @@ const (
 
 // PossibleEnvironmentKindValues returns the possible values for the EnvironmentKind const type.
 func PossibleEnvironmentKindValues() []EnvironmentKind {
-	return []EnvironmentKind{	
+	return []EnvironmentKind{
 		EnvironmentKindDevelopment,
 		EnvironmentKindProduction,
 		EnvironmentKindStaging,
@@ -181,7 +181,7 @@ const (
 
 // PossibleEnvironmentServerTypeValues returns the possible values for the EnvironmentServerType const type.
 func PossibleEnvironmentServerTypeValues() []EnvironmentServerType {
-	return []EnvironmentServerType{	
+	return []EnvironmentServerType{
 		EnvironmentServerTypeAWSAPIGateway,
 		EnvironmentServerTypeApigeeAPIManagement,
 		EnvironmentServerTypeAzureAPIManagement,
@@ -214,7 +214,7 @@ const (
 
 // PossibleLifecycleStageValues returns the possible values for the LifecycleStage const type.
 func PossibleLifecycleStageValues() []LifecycleStage {
-	return []LifecycleStage{	
+	return []LifecycleStage{
 		LifecycleStageDeprecated,
 		LifecycleStageDesign,
 		LifecycleStageDevelopment,
@@ -241,7 +241,7 @@ const (
 
 // PossibleManagedIdentityTypeValues returns the possible values for the ManagedIdentityType const type.
 func PossibleManagedIdentityTypeValues() []ManagedIdentityType {
-	return []ManagedIdentityType{	
+	return []ManagedIdentityType{
 		ManagedIdentityTypeNone,
 		ManagedIdentityTypeSystemAndUserAssigned,
 		ManagedIdentityTypeSystemAssigned,
@@ -263,7 +263,7 @@ const (
 
 // PossibleMetadataAssignmentEntityValues returns the possible values for the MetadataAssignmentEntity const type.
 func PossibleMetadataAssignmentEntityValues() []MetadataAssignmentEntity {
-	return []MetadataAssignmentEntity{	
+	return []MetadataAssignmentEntity{
 		MetadataAssignmentEntityAPI,
 		MetadataAssignmentEntityDeployment,
 		MetadataAssignmentEntityEnvironment,
@@ -282,7 +282,7 @@ const (
 
 // PossibleMetadataSchemaExportFormatValues returns the possible values for the MetadataSchemaExportFormat const type.
 func PossibleMetadataSchemaExportFormatValues() []MetadataSchemaExportFormat {
-	return []MetadataSchemaExportFormat{	
+	return []MetadataSchemaExportFormat{
 		MetadataSchemaExportFormatInline,
 		MetadataSchemaExportFormatLink,
 	}
@@ -303,7 +303,7 @@ const (
 
 // PossibleOriginValues returns the possible values for the Origin const type.
 func PossibleOriginValues() []Origin {
-	return []Origin{	
+	return []Origin{
 		OriginSystem,
 		OriginUser,
 		OriginUserSystem,
@@ -324,10 +324,9 @@ const (
 
 // PossibleProvisioningStateValues returns the possible values for the ProvisioningState const type.
 func PossibleProvisioningStateValues() []ProvisioningState {
-	return []ProvisioningState{	
+	return []ProvisioningState{
 		ProvisioningStateCanceled,
 		ProvisioningStateFailed,
 		ProvisioningStateSucceeded,
 	}
 }
-

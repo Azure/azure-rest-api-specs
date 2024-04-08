@@ -67,4 +67,3 @@ func unmarshalCarbonEmissionDataClassificationArray(rawMsg json.RawMessage) ([]C
 	}
 	return fArray, nil
 }
-

@@ -19,10 +19,10 @@ import (
 )
 
 // HcxEnterpriseSitesServer is a fake server for instances of the armavs.HcxEnterpriseSitesClient type.
-type HcxEnterpriseSitesServer struct{
+type HcxEnterpriseSitesServer struct {
 	// CreateOrUpdate is the fake for method HcxEnterpriseSitesClient.CreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	CreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, hcxEnterpriseSiteName string, resource armavs.HcxEnterpriseSite, options *armavs.HcxEnterpriseSitesClientCreateOrUpdateOptions) (resp azfake.Responder[armavs.HcxEnterpriseSitesClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	CreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, hcxEnterpriseSiteName string, hcxEnterpriseSite armavs.HcxEnterpriseSite, options *armavs.HcxEnterpriseSitesClientCreateOrUpdateOptions) (resp azfake.Responder[armavs.HcxEnterpriseSitesClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// Delete is the fake for method HcxEnterpriseSitesClient.Delete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusNoContent
@@ -35,7 +35,6 @@ type HcxEnterpriseSitesServer struct{
 	// NewListByPrivateCloudPager is the fake for method HcxEnterpriseSitesClient.NewListByPrivateCloudPager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListByPrivateCloudPager func(subscriptionID string, resourceGroupName string, privateCloudName string, options *armavs.HcxEnterpriseSitesClientListByPrivateCloudOptions) (resp azfake.PagerResponder[armavs.HcxEnterpriseSitesClientListByPrivateCloudResponse])
-
 }
 
 // NewHcxEnterpriseSitesServerTransport creates a new instance of HcxEnterpriseSitesServerTransport with the provided implementation.
@@ -43,7 +42,7 @@ type HcxEnterpriseSitesServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewHcxEnterpriseSitesServerTransport(srv *HcxEnterpriseSitesServer) *HcxEnterpriseSitesServerTransport {
 	return &HcxEnterpriseSitesServerTransport{
-		srv: srv,
+		srv:                        srv,
 		newListByPrivateCloudPager: newTracker[azfake.PagerResponder[armavs.HcxEnterpriseSitesClientListByPrivateCloudResponse]](),
 	}
 }
@@ -51,7 +50,7 @@ func NewHcxEnterpriseSitesServerTransport(srv *HcxEnterpriseSitesServer) *HcxEnt
 // HcxEnterpriseSitesServerTransport connects instances of armavs.HcxEnterpriseSitesClient to instances of HcxEnterpriseSitesServer.
 // Don't use this type directly, use NewHcxEnterpriseSitesServerTransport instead.
 type HcxEnterpriseSitesServerTransport struct {
-	srv *HcxEnterpriseSitesServer
+	srv                        *HcxEnterpriseSitesServer
 	newListByPrivateCloudPager *tracker[azfake.PagerResponder[armavs.HcxEnterpriseSitesClientListByPrivateCloudResponse]]
 }
 
@@ -219,25 +218,25 @@ func (h *HcxEnterpriseSitesServerTransport) dispatchNewListByPrivateCloudPager(r
 	}
 	newListByPrivateCloudPager := h.newListByPrivateCloudPager.get(req)
 	if newListByPrivateCloudPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/hcxEnterpriseSites`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-resp := h.srv.NewListByPrivateCloudPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/hcxEnterpriseSites`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := h.srv.NewListByPrivateCloudPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, nil)
 		newListByPrivateCloudPager = &resp
 		h.newListByPrivateCloudPager.add(req, newListByPrivateCloudPager)
 		server.PagerResponderInjectNextLinks(newListByPrivateCloudPager, req, func(page *armavs.HcxEnterpriseSitesClientListByPrivateCloudResponse, createLink func() string) {
@@ -257,4 +256,3 @@ resp := h.srv.NewListByPrivateCloudPager(subscriptionIDParam, resourceGroupNameP
 	}
 	return resp, nil
 }
-

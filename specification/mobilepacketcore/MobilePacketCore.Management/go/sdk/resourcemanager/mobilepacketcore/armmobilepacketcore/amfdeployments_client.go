@@ -32,7 +32,7 @@ func NewAmfDeploymentsClient(credential azcore.TokenCredential, options *arm.Cli
 		return nil, err
 	}
 	client := &AmfDeploymentsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -88,8 +88,8 @@ func (client *AmfDeploymentsClient) createOrUpdateCreateRequest(ctx context.Cont
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -237,13 +237,13 @@ func (client *AmfDeploymentsClient) getHandleResponse(resp *http.Response) (AmfD
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - options - AmfDeploymentsClientListByResourceGroupOptions contains the optional parameters for the AmfDeploymentsClient.NewListByResourceGroupPager
 //     method.
-func (client *AmfDeploymentsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *AmfDeploymentsClientListByResourceGroupOptions) (*runtime.Pager[AmfDeploymentsClientListByResourceGroupResponse]) {
+func (client *AmfDeploymentsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *AmfDeploymentsClientListByResourceGroupOptions) *runtime.Pager[AmfDeploymentsClientListByResourceGroupResponse] {
 	return runtime.NewPager(runtime.PagingHandler[AmfDeploymentsClientListByResourceGroupResponse]{
 		More: func(page AmfDeploymentsClientListByResourceGroupResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AmfDeploymentsClientListByResourceGroupResponse) (AmfDeploymentsClientListByResourceGroupResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AmfDeploymentsClient.NewListByResourceGroupPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AmfDeploymentsClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -255,7 +255,7 @@ func (client *AmfDeploymentsClient) NewListByResourceGroupPager(subscriptionID s
 				return AmfDeploymentsClientListByResourceGroupResponse{}, err
 			}
 			return client.listByResourceGroupHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -294,13 +294,13 @@ func (client *AmfDeploymentsClient) listByResourceGroupHandleResponse(resp *http
 //   - subscriptionID - The ID of the target subscription.
 //   - options - AmfDeploymentsClientListBySubscriptionOptions contains the optional parameters for the AmfDeploymentsClient.NewListBySubscriptionPager
 //     method.
-func (client *AmfDeploymentsClient) NewListBySubscriptionPager(subscriptionID string, options *AmfDeploymentsClientListBySubscriptionOptions) (*runtime.Pager[AmfDeploymentsClientListBySubscriptionResponse]) {
+func (client *AmfDeploymentsClient) NewListBySubscriptionPager(subscriptionID string, options *AmfDeploymentsClientListBySubscriptionOptions) *runtime.Pager[AmfDeploymentsClientListBySubscriptionResponse] {
 	return runtime.NewPager(runtime.PagingHandler[AmfDeploymentsClientListBySubscriptionResponse]{
 		More: func(page AmfDeploymentsClientListBySubscriptionResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AmfDeploymentsClientListBySubscriptionResponse) (AmfDeploymentsClientListBySubscriptionResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AmfDeploymentsClient.NewListBySubscriptionPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AmfDeploymentsClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -312,7 +312,7 @@ func (client *AmfDeploymentsClient) NewListBySubscriptionPager(subscriptionID st
 				return AmfDeploymentsClientListBySubscriptionResponse{}, err
 			}
 			return client.listBySubscriptionHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -394,8 +394,8 @@ func (client *AmfDeploymentsClient) updateTagsCreateRequest(ctx context.Context,
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -407,4 +407,3 @@ func (client *AmfDeploymentsClient) updateTagsHandleResponse(resp *http.Response
 	}
 	return result, nil
 }
-

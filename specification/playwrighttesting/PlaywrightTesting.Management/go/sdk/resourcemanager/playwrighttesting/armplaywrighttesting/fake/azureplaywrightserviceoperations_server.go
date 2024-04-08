@@ -16,11 +16,10 @@ import (
 )
 
 // AzurePlaywrightServiceOperationsServer is a fake server for instances of the armplaywrighttesting.AzurePlaywrightServiceOperationsClient type.
-type AzurePlaywrightServiceOperationsServer struct{
+type AzurePlaywrightServiceOperationsServer struct {
 	// NewListPager is the fake for method AzurePlaywrightServiceOperationsClient.NewListPager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListPager func(options *armplaywrighttesting.AzurePlaywrightServiceOperationsClientListOptions) (resp azfake.PagerResponder[armplaywrighttesting.AzurePlaywrightServiceOperationsClientListResponse])
-
 }
 
 // NewAzurePlaywrightServiceOperationsServerTransport creates a new instance of AzurePlaywrightServiceOperationsServerTransport with the provided implementation.
@@ -28,7 +27,7 @@ type AzurePlaywrightServiceOperationsServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewAzurePlaywrightServiceOperationsServerTransport(srv *AzurePlaywrightServiceOperationsServer) *AzurePlaywrightServiceOperationsServerTransport {
 	return &AzurePlaywrightServiceOperationsServerTransport{
-		srv: srv,
+		srv:          srv,
 		newListPager: newTracker[azfake.PagerResponder[armplaywrighttesting.AzurePlaywrightServiceOperationsClientListResponse]](),
 	}
 }
@@ -36,7 +35,7 @@ func NewAzurePlaywrightServiceOperationsServerTransport(srv *AzurePlaywrightServ
 // AzurePlaywrightServiceOperationsServerTransport connects instances of armplaywrighttesting.AzurePlaywrightServiceOperationsClient to instances of AzurePlaywrightServiceOperationsServer.
 // Don't use this type directly, use NewAzurePlaywrightServiceOperationsServerTransport instead.
 type AzurePlaywrightServiceOperationsServerTransport struct {
-	srv *AzurePlaywrightServiceOperationsServer
+	srv          *AzurePlaywrightServiceOperationsServer
 	newListPager *tracker[azfake.PagerResponder[armplaywrighttesting.AzurePlaywrightServiceOperationsClientListResponse]]
 }
 
@@ -71,7 +70,7 @@ func (a *AzurePlaywrightServiceOperationsServerTransport) dispatchNewListPager(r
 	}
 	newListPager := a.newListPager.get(req)
 	if newListPager == nil {
-resp := a.srv.NewListPager(nil)
+		resp := a.srv.NewListPager(nil)
 		newListPager = &resp
 		a.newListPager.add(req, newListPager)
 		server.PagerResponderInjectNextLinks(newListPager, req, func(page *armplaywrighttesting.AzurePlaywrightServiceOperationsClientListResponse, createLink func() string) {
@@ -91,4 +90,3 @@ resp := a.srv.NewListPager(nil)
 	}
 	return resp, nil
 }
-

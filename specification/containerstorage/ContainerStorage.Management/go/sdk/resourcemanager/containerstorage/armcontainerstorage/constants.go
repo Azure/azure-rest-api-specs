@@ -7,7 +7,7 @@ package armcontainerstorage
 const host = "https://management.azure.com"
 
 const (
-	moduleName = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/containerstorage/armcontainerstorage"
+	moduleName    = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/containerstorage/armcontainerstorage"
 	moduleVersion = "v0.1.0"
 )
 
@@ -21,7 +21,7 @@ const (
 
 // PossibleActionTypeValues returns the possible values for the ActionType const type.
 func PossibleActionTypeValues() []ActionType {
-	return []ActionType{	
+	return []ActionType{
 		ActionTypeInternal,
 	}
 }
@@ -42,7 +42,7 @@ const (
 
 // PossibleAssignmentStatusStateValues returns the possible values for the AssignmentStatusState const type.
 func PossibleAssignmentStatusStateValues() []AssignmentStatusState {
-	return []AssignmentStatusState{	
+	return []AssignmentStatusState{
 		AssignmentStatusStateAssigned,
 		AssignmentStatusStateAssigning,
 		AssignmentStatusStateFailed,
@@ -72,7 +72,7 @@ const (
 
 // PossibleAzureDiskSKUNameValues returns the possible values for the AzureDiskSKUName const type.
 func PossibleAzureDiskSKUNameValues() []AzureDiskSKUName {
-	return []AzureDiskSKUName{	
+	return []AzureDiskSKUName{
 		AzureDiskSKUNamePremiumLRS,
 		AzureDiskSKUNamePremiumV2LRS,
 		AzureDiskSKUNamePremiumZRS,
@@ -99,7 +99,7 @@ const (
 
 // PossibleCreatedByTypeValues returns the possible values for the CreatedByType const type.
 func PossibleCreatedByTypeValues() []CreatedByType {
-	return []CreatedByType{	
+	return []CreatedByType{
 		CreatedByTypeApplication,
 		CreatedByTypeKey,
 		CreatedByTypeManagedIdentity,
@@ -119,7 +119,7 @@ const (
 
 // PossibleElasticSanSKUNameValues returns the possible values for the ElasticSanSKUName const type.
 func PossibleElasticSanSKUNameValues() []ElasticSanSKUName {
-	return []ElasticSanSKUName{	
+	return []ElasticSanSKUName{
 		ElasticSanSKUNamePremiumLRS,
 		ElasticSanSKUNamePremiumZRS,
 	}
@@ -141,7 +141,7 @@ const (
 
 // PossibleManagedIdentityTypeValues returns the possible values for the ManagedIdentityType const type.
 func PossibleManagedIdentityTypeValues() []ManagedIdentityType {
-	return []ManagedIdentityType{	
+	return []ManagedIdentityType{
 		ManagedIdentityTypeNone,
 		ManagedIdentityTypeSystemAndUserAssigned,
 		ManagedIdentityTypeSystemAssigned,
@@ -164,7 +164,7 @@ const (
 
 // PossibleOriginValues returns the possible values for the Origin const type.
 func PossibleOriginValues() []Origin {
-	return []Origin{	
+	return []Origin{
 		OriginSystem,
 		OriginUser,
 		OriginUserSystem,
@@ -193,7 +193,7 @@ const (
 
 // PossibleProvisioningStateValues returns the possible values for the ProvisioningState const type.
 func PossibleProvisioningStateValues() []ProvisioningState {
-	return []ProvisioningState{	
+	return []ProvisioningState{
 		ProvisioningStateAccepted,
 		ProvisioningStateCanceled,
 		ProvisioningStateDeleting,
@@ -216,7 +216,7 @@ const (
 
 // PossibleReclaimPolicyValues returns the possible values for the ReclaimPolicy const type.
 func PossibleReclaimPolicyValues() []ReclaimPolicy {
-	return []ReclaimPolicy{	
+	return []ReclaimPolicy{
 		ReclaimPolicyDelete,
 		ReclaimPolicyRetain,
 	}
@@ -236,31 +236,10 @@ const (
 
 // PossibleResourceOperationStatusStateValues returns the possible values for the ResourceOperationStatusState const type.
 func PossibleResourceOperationStatusStateValues() []ResourceOperationStatusState {
-	return []ResourceOperationStatusState{	
+	return []ResourceOperationStatusState{
 		ResourceOperationStatusStateAvailable,
 		ResourceOperationStatusStatePending,
 		ResourceOperationStatusStateUnavailable,
-	}
-}
-
-// ResourceProvisioningState - The provisioning state of a resource type.
-type ResourceProvisioningState string
-
-const (
-	// ResourceProvisioningStateCanceled - Resource creation was canceled.
-	ResourceProvisioningStateCanceled ResourceProvisioningState = "Canceled"
-	// ResourceProvisioningStateFailed - Resource creation failed.
-	ResourceProvisioningStateFailed ResourceProvisioningState = "Failed"
-	// ResourceProvisioningStateSucceeded - Resource has been created.
-	ResourceProvisioningStateSucceeded ResourceProvisioningState = "Succeeded"
-)
-
-// PossibleResourceProvisioningStateValues returns the possible values for the ResourceProvisioningState const type.
-func PossibleResourceProvisioningStateValues() []ResourceProvisioningState {
-	return []ResourceProvisioningState{	
-		ResourceProvisioningStateCanceled,
-		ResourceProvisioningStateFailed,
-		ResourceProvisioningStateSucceeded,
 	}
 }
 
@@ -278,10 +257,9 @@ const (
 
 // PossibleZoneValues returns the possible values for the Zone const type.
 func PossibleZoneValues() []Zone {
-	return []Zone{	
+	return []Zone{
 		ZoneZone1,
 		ZoneZone2,
 		ZoneZone3,
 	}
 }
-

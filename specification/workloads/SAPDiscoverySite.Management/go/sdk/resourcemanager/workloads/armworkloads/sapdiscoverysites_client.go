@@ -31,7 +31,7 @@ func NewSAPDiscoverySitesClient(credential azcore.TokenCredential, options *arm.
 		return nil, err
 	}
 	client := &SAPDiscoverySitesClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -102,8 +102,8 @@ func (client *SAPDiscoverySitesClient) createCreateRequest(ctx context.Context, 
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -298,8 +298,8 @@ func (client *SAPDiscoverySitesClient) importEntitiesCreateRequest(ctx context.C
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, body); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -308,13 +308,13 @@ func (client *SAPDiscoverySitesClient) importEntitiesCreateRequest(ctx context.C
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - options - SAPDiscoverySitesClientListByResourceGroupOptions contains the optional parameters for the SAPDiscoverySitesClient.NewListByResourceGroupPager
 //     method.
-func (client *SAPDiscoverySitesClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *SAPDiscoverySitesClientListByResourceGroupOptions) (*runtime.Pager[SAPDiscoverySitesClientListByResourceGroupResponse]) {
+func (client *SAPDiscoverySitesClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *SAPDiscoverySitesClientListByResourceGroupOptions) *runtime.Pager[SAPDiscoverySitesClientListByResourceGroupResponse] {
 	return runtime.NewPager(runtime.PagingHandler[SAPDiscoverySitesClientListByResourceGroupResponse]{
 		More: func(page SAPDiscoverySitesClientListByResourceGroupResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *SAPDiscoverySitesClientListByResourceGroupResponse) (SAPDiscoverySitesClientListByResourceGroupResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SAPDiscoverySitesClient.NewListByResourceGroupPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SAPDiscoverySitesClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -326,7 +326,7 @@ func (client *SAPDiscoverySitesClient) NewListByResourceGroupPager(subscriptionI
 				return SAPDiscoverySitesClientListByResourceGroupResponse{}, err
 			}
 			return client.listByResourceGroupHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -365,13 +365,13 @@ func (client *SAPDiscoverySitesClient) listByResourceGroupHandleResponse(resp *h
 //   - subscriptionID - The ID of the target subscription.
 //   - options - SAPDiscoverySitesClientListBySubscriptionOptions contains the optional parameters for the SAPDiscoverySitesClient.NewListBySubscriptionPager
 //     method.
-func (client *SAPDiscoverySitesClient) NewListBySubscriptionPager(subscriptionID string, options *SAPDiscoverySitesClientListBySubscriptionOptions) (*runtime.Pager[SAPDiscoverySitesClientListBySubscriptionResponse]) {
+func (client *SAPDiscoverySitesClient) NewListBySubscriptionPager(subscriptionID string, options *SAPDiscoverySitesClientListBySubscriptionOptions) *runtime.Pager[SAPDiscoverySitesClientListBySubscriptionResponse] {
 	return runtime.NewPager(runtime.PagingHandler[SAPDiscoverySitesClientListBySubscriptionResponse]{
 		More: func(page SAPDiscoverySitesClientListBySubscriptionResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *SAPDiscoverySitesClientListBySubscriptionResponse) (SAPDiscoverySitesClientListBySubscriptionResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SAPDiscoverySitesClient.NewListBySubscriptionPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SAPDiscoverySitesClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -383,7 +383,7 @@ func (client *SAPDiscoverySitesClient) NewListBySubscriptionPager(subscriptionID
 				return SAPDiscoverySitesClientListBySubscriptionResponse{}, err
 			}
 			return client.listBySubscriptionHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -465,8 +465,8 @@ func (client *SAPDiscoverySitesClient) updateCreateRequest(ctx context.Context, 
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -478,4 +478,3 @@ func (client *SAPDiscoverySitesClient) updateHandleResponse(resp *http.Response)
 	}
 	return result, nil
 }
-

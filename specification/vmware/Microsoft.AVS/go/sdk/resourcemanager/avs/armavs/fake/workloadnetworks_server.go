@@ -19,7 +19,7 @@ import (
 )
 
 // WorkloadNetworksServer is a fake server for instances of the armavs.WorkloadNetworksClient type.
-type WorkloadNetworksServer struct{
+type WorkloadNetworksServer struct {
 	// Get is the fake for method WorkloadNetworksClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
 	Get func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, options *armavs.WorkloadNetworksClientGetOptions) (resp azfake.Responder[armavs.WorkloadNetworksClientGetResponse], errResp azfake.ErrorResponder)
@@ -27,7 +27,6 @@ type WorkloadNetworksServer struct{
 	// NewListByPrivateCloudPager is the fake for method WorkloadNetworksClient.NewListByPrivateCloudPager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListByPrivateCloudPager func(subscriptionID string, resourceGroupName string, privateCloudName string, options *armavs.WorkloadNetworksClientListByPrivateCloudOptions) (resp azfake.PagerResponder[armavs.WorkloadNetworksClientListByPrivateCloudResponse])
-
 }
 
 // NewWorkloadNetworksServerTransport creates a new instance of WorkloadNetworksServerTransport with the provided implementation.
@@ -35,7 +34,7 @@ type WorkloadNetworksServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewWorkloadNetworksServerTransport(srv *WorkloadNetworksServer) *WorkloadNetworksServerTransport {
 	return &WorkloadNetworksServerTransport{
-		srv: srv,
+		srv:                        srv,
 		newListByPrivateCloudPager: newTracker[azfake.PagerResponder[armavs.WorkloadNetworksClientListByPrivateCloudResponse]](),
 	}
 }
@@ -43,7 +42,7 @@ func NewWorkloadNetworksServerTransport(srv *WorkloadNetworksServer) *WorkloadNe
 // WorkloadNetworksServerTransport connects instances of armavs.WorkloadNetworksClient to instances of WorkloadNetworksServer.
 // Don't use this type directly, use NewWorkloadNetworksServerTransport instead.
 type WorkloadNetworksServerTransport struct {
-	srv *WorkloadNetworksServer
+	srv                        *WorkloadNetworksServer
 	newListByPrivateCloudPager *tracker[azfake.PagerResponder[armavs.WorkloadNetworksClientListByPrivateCloudResponse]]
 }
 
@@ -117,25 +116,25 @@ func (w *WorkloadNetworksServerTransport) dispatchNewListByPrivateCloudPager(req
 	}
 	newListByPrivateCloudPager := w.newListByPrivateCloudPager.get(req)
 	if newListByPrivateCloudPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-resp := w.srv.NewListByPrivateCloudPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := w.srv.NewListByPrivateCloudPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, nil)
 		newListByPrivateCloudPager = &resp
 		w.newListByPrivateCloudPager.add(req, newListByPrivateCloudPager)
 		server.PagerResponderInjectNextLinks(newListByPrivateCloudPager, req, func(page *armavs.WorkloadNetworksClientListByPrivateCloudResponse, createLink func() string) {
@@ -155,4 +154,3 @@ resp := w.srv.NewListByPrivateCloudPager(subscriptionIDParam, resourceGroupNameP
 	}
 	return resp, nil
 }
-

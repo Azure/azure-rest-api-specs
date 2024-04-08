@@ -31,7 +31,7 @@ func NewCommunityCommunityTrainingsClient(credential azcore.TokenCredential, opt
 		return nil, err
 	}
 	client := &CommunityCommunityTrainingsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -100,8 +100,8 @@ func (client *CommunityCommunityTrainingsClient) createCreateRequest(ctx context
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -234,13 +234,13 @@ func (client *CommunityCommunityTrainingsClient) getHandleResponse(resp *http.Re
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - options - CommunityCommunityTrainingsClientListByResourceGroupOptions contains the optional parameters for the CommunityCommunityTrainingsClient.NewListByResourceGroupPager
 //     method.
-func (client *CommunityCommunityTrainingsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *CommunityCommunityTrainingsClientListByResourceGroupOptions) (*runtime.Pager[CommunityCommunityTrainingsClientListByResourceGroupResponse]) {
+func (client *CommunityCommunityTrainingsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *CommunityCommunityTrainingsClientListByResourceGroupOptions) *runtime.Pager[CommunityCommunityTrainingsClientListByResourceGroupResponse] {
 	return runtime.NewPager(runtime.PagingHandler[CommunityCommunityTrainingsClientListByResourceGroupResponse]{
 		More: func(page CommunityCommunityTrainingsClientListByResourceGroupResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *CommunityCommunityTrainingsClientListByResourceGroupResponse) (CommunityCommunityTrainingsClientListByResourceGroupResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "CommunityCommunityTrainingsClient.NewListByResourceGroupPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "CommunityCommunityTrainingsClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -252,7 +252,7 @@ func (client *CommunityCommunityTrainingsClient) NewListByResourceGroupPager(sub
 				return CommunityCommunityTrainingsClientListByResourceGroupResponse{}, err
 			}
 			return client.listByResourceGroupHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -291,13 +291,13 @@ func (client *CommunityCommunityTrainingsClient) listByResourceGroupHandleRespon
 //   - subscriptionID - The ID of the target subscription.
 //   - options - CommunityCommunityTrainingsClientListBySubscriptionOptions contains the optional parameters for the CommunityCommunityTrainingsClient.NewListBySubscriptionPager
 //     method.
-func (client *CommunityCommunityTrainingsClient) NewListBySubscriptionPager(subscriptionID string, options *CommunityCommunityTrainingsClientListBySubscriptionOptions) (*runtime.Pager[CommunityCommunityTrainingsClientListBySubscriptionResponse]) {
+func (client *CommunityCommunityTrainingsClient) NewListBySubscriptionPager(subscriptionID string, options *CommunityCommunityTrainingsClientListBySubscriptionOptions) *runtime.Pager[CommunityCommunityTrainingsClientListBySubscriptionResponse] {
 	return runtime.NewPager(runtime.PagingHandler[CommunityCommunityTrainingsClientListBySubscriptionResponse]{
 		More: func(page CommunityCommunityTrainingsClientListBySubscriptionResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *CommunityCommunityTrainingsClientListBySubscriptionResponse) (CommunityCommunityTrainingsClientListBySubscriptionResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "CommunityCommunityTrainingsClient.NewListBySubscriptionPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "CommunityCommunityTrainingsClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -309,7 +309,7 @@ func (client *CommunityCommunityTrainingsClient) NewListBySubscriptionPager(subs
 				return CommunityCommunityTrainingsClientListBySubscriptionResponse{}, err
 			}
 			return client.listBySubscriptionHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -404,8 +404,7 @@ func (client *CommunityCommunityTrainingsClient) updateCreateRequest(ctx context
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
-

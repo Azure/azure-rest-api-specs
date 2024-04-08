@@ -19,7 +19,7 @@ import (
 )
 
 // MetadataSchemasServer is a fake server for instances of the armapicenter.MetadataSchemasClient type.
-type MetadataSchemasServer struct{
+type MetadataSchemasServer struct {
 	// CreateOrUpdate is the fake for method MetadataSchemasClient.CreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
 	CreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, metadataSchemaName string, payload armapicenter.MetadataSchema, options *armapicenter.MetadataSchemasClientCreateOrUpdateOptions) (resp azfake.Responder[armapicenter.MetadataSchemasClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
@@ -39,7 +39,6 @@ type MetadataSchemasServer struct{
 	// NewListPager is the fake for method MetadataSchemasClient.NewListPager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListPager func(subscriptionID string, resourceGroupName string, serviceName string, options *armapicenter.MetadataSchemasClientListOptions) (resp azfake.PagerResponder[armapicenter.MetadataSchemasClientListResponse])
-
 }
 
 // NewMetadataSchemasServerTransport creates a new instance of MetadataSchemasServerTransport with the provided implementation.
@@ -47,7 +46,7 @@ type MetadataSchemasServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewMetadataSchemasServerTransport(srv *MetadataSchemasServer) *MetadataSchemasServerTransport {
 	return &MetadataSchemasServerTransport{
-		srv: srv,
+		srv:          srv,
 		newListPager: newTracker[azfake.PagerResponder[armapicenter.MetadataSchemasClientListResponse]](),
 	}
 }
@@ -55,7 +54,7 @@ func NewMetadataSchemasServerTransport(srv *MetadataSchemasServer) *MetadataSche
 // MetadataSchemasServerTransport connects instances of armapicenter.MetadataSchemasClient to instances of MetadataSchemasServer.
 // Don't use this type directly, use NewMetadataSchemasServerTransport instead.
 type MetadataSchemasServerTransport struct {
-	srv *MetadataSchemasServer
+	srv          *MetadataSchemasServer
 	newListPager *tracker[azfake.PagerResponder[armapicenter.MetadataSchemasClientListResponse]]
 }
 
@@ -272,37 +271,37 @@ func (m *MetadataSchemasServerTransport) dispatchNewListPager(req *http.Request)
 	}
 	newListPager := m.newListPager.get(req)
 	if newListPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ApiCenter/services/(?P<serviceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/metadataSchemas`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	qp := req.URL.Query()
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	serviceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("serviceName")])
-	if err != nil {
-		return nil, err
-	}
-	filterUnescaped, err := url.QueryUnescape(qp.Get("$filter"))
-	if err != nil {
-		return nil, err
-	}
-	filterParam := getOptional(filterUnescaped)
-	var options *armapicenter.MetadataSchemasClientListOptions
-	if filterParam != nil {
-		options = &armapicenter.MetadataSchemasClientListOptions{
-			Filter: filterParam,
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ApiCenter/services/(?P<serviceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/metadataSchemas`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
 		}
-	}
-resp := m.srv.NewListPager(subscriptionIDParam, resourceGroupNameParam, serviceNameParam, options)
+		qp := req.URL.Query()
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		serviceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("serviceName")])
+		if err != nil {
+			return nil, err
+		}
+		filterUnescaped, err := url.QueryUnescape(qp.Get("$filter"))
+		if err != nil {
+			return nil, err
+		}
+		filterParam := getOptional(filterUnescaped)
+		var options *armapicenter.MetadataSchemasClientListOptions
+		if filterParam != nil {
+			options = &armapicenter.MetadataSchemasClientListOptions{
+				Filter: filterParam,
+			}
+		}
+		resp := m.srv.NewListPager(subscriptionIDParam, resourceGroupNameParam, serviceNameParam, options)
 		newListPager = &resp
 		m.newListPager.add(req, newListPager)
 		server.PagerResponderInjectNextLinks(newListPager, req, func(page *armapicenter.MetadataSchemasClientListResponse, createLink func() string) {
@@ -322,4 +321,3 @@ resp := m.srv.NewListPager(subscriptionIDParam, resourceGroupNameParam, serviceN
 	}
 	return resp, nil
 }
-

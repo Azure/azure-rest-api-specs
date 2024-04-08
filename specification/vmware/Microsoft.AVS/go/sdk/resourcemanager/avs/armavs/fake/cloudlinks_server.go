@@ -19,10 +19,10 @@ import (
 )
 
 // CloudLinksServer is a fake server for instances of the armavs.CloudLinksClient type.
-type CloudLinksServer struct{
+type CloudLinksServer struct {
 	// BeginCreateOrUpdate is the fake for method CloudLinksClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, cloudLinkName string, resource armavs.CloudLink, options *armavs.CloudLinksClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armavs.CloudLinksClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, cloudLinkName string, cloudLink armavs.CloudLink, options *armavs.CloudLinksClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armavs.CloudLinksClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method CloudLinksClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
@@ -35,7 +35,6 @@ type CloudLinksServer struct{
 	// NewListByPrivateCloudPager is the fake for method CloudLinksClient.NewListByPrivateCloudPager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListByPrivateCloudPager func(subscriptionID string, resourceGroupName string, privateCloudName string, options *armavs.CloudLinksClientListByPrivateCloudOptions) (resp azfake.PagerResponder[armavs.CloudLinksClientListByPrivateCloudResponse])
-
 }
 
 // NewCloudLinksServerTransport creates a new instance of CloudLinksServerTransport with the provided implementation.
@@ -43,9 +42,9 @@ type CloudLinksServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewCloudLinksServerTransport(srv *CloudLinksServer) *CloudLinksServerTransport {
 	return &CloudLinksServerTransport{
-		srv: srv,
-		beginCreateOrUpdate: newTracker[azfake.PollerResponder[armavs.CloudLinksClientCreateOrUpdateResponse]](),
-		beginDelete: newTracker[azfake.PollerResponder[armavs.CloudLinksClientDeleteResponse]](),
+		srv:                        srv,
+		beginCreateOrUpdate:        newTracker[azfake.PollerResponder[armavs.CloudLinksClientCreateOrUpdateResponse]](),
+		beginDelete:                newTracker[azfake.PollerResponder[armavs.CloudLinksClientDeleteResponse]](),
 		newListByPrivateCloudPager: newTracker[azfake.PagerResponder[armavs.CloudLinksClientListByPrivateCloudResponse]](),
 	}
 }
@@ -53,9 +52,9 @@ func NewCloudLinksServerTransport(srv *CloudLinksServer) *CloudLinksServerTransp
 // CloudLinksServerTransport connects instances of armavs.CloudLinksClient to instances of CloudLinksServer.
 // Don't use this type directly, use NewCloudLinksServerTransport instead.
 type CloudLinksServerTransport struct {
-	srv *CloudLinksServer
-	beginCreateOrUpdate *tracker[azfake.PollerResponder[armavs.CloudLinksClientCreateOrUpdateResponse]]
-	beginDelete *tracker[azfake.PollerResponder[armavs.CloudLinksClientDeleteResponse]]
+	srv                        *CloudLinksServer
+	beginCreateOrUpdate        *tracker[azfake.PollerResponder[armavs.CloudLinksClientCreateOrUpdateResponse]]
+	beginDelete                *tracker[azfake.PollerResponder[armavs.CloudLinksClientDeleteResponse]]
 	newListByPrivateCloudPager *tracker[azfake.PagerResponder[armavs.CloudLinksClientListByPrivateCloudResponse]]
 }
 
@@ -96,36 +95,36 @@ func (c *CloudLinksServerTransport) dispatchBeginCreateOrUpdate(req *http.Reques
 	}
 	beginCreateOrUpdate := c.beginCreateOrUpdate.get(req)
 	if beginCreateOrUpdate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/cloudLinks/(?P<cloudLinkName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armavs.CloudLink](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-	cloudLinkNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("cloudLinkName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := c.srv.BeginCreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, cloudLinkNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/cloudLinks/(?P<cloudLinkName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armavs.CloudLink](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		cloudLinkNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("cloudLinkName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := c.srv.BeginCreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, cloudLinkNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginCreateOrUpdate = &respr
 		c.beginCreateOrUpdate.add(req, beginCreateOrUpdate)
 	}
@@ -152,32 +151,32 @@ func (c *CloudLinksServerTransport) dispatchBeginDelete(req *http.Request) (*htt
 	}
 	beginDelete := c.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/cloudLinks/(?P<cloudLinkName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-	cloudLinkNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("cloudLinkName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := c.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, cloudLinkNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/cloudLinks/(?P<cloudLinkName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		cloudLinkNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("cloudLinkName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := c.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, cloudLinkNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		c.beginDelete.add(req, beginDelete)
 	}
@@ -245,25 +244,25 @@ func (c *CloudLinksServerTransport) dispatchNewListByPrivateCloudPager(req *http
 	}
 	newListByPrivateCloudPager := c.newListByPrivateCloudPager.get(req)
 	if newListByPrivateCloudPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/cloudLinks`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-resp := c.srv.NewListByPrivateCloudPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/cloudLinks`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := c.srv.NewListByPrivateCloudPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, nil)
 		newListByPrivateCloudPager = &resp
 		c.newListByPrivateCloudPager.add(req, newListByPrivateCloudPager)
 		server.PagerResponderInjectNextLinks(newListByPrivateCloudPager, req, func(page *armavs.CloudLinksClientListByPrivateCloudResponse, createLink func() string) {
@@ -283,4 +282,3 @@ resp := c.srv.NewListByPrivateCloudPager(subscriptionIDParam, resourceGroupNameP
 	}
 	return resp, nil
 }
-

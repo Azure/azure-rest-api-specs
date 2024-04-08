@@ -20,10 +20,10 @@ import (
 )
 
 // ClustersServer is a fake server for instances of the armavs.ClustersClient type.
-type ClustersServer struct{
+type ClustersServer struct {
 	// BeginCreateOrUpdate is the fake for method ClustersClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, resource armavs.Cluster, options *armavs.ClustersClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armavs.ClustersClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, cluster armavs.Cluster, options *armavs.ClustersClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armavs.ClustersClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method ClustersClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
@@ -44,7 +44,6 @@ type ClustersServer struct{
 	// Update is the fake for method ClustersClient.Update
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
 	Update func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, clusterUpdate armavs.ClusterUpdate, options *armavs.ClustersClientUpdateOptions) (resp azfake.Responder[armavs.ClustersClientUpdateResponse], errResp azfake.ErrorResponder)
-
 }
 
 // NewClustersServerTransport creates a new instance of ClustersServerTransport with the provided implementation.
@@ -52,9 +51,9 @@ type ClustersServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewClustersServerTransport(srv *ClustersServer) *ClustersServerTransport {
 	return &ClustersServerTransport{
-		srv: srv,
-		beginCreateOrUpdate: newTracker[azfake.PollerResponder[armavs.ClustersClientCreateOrUpdateResponse]](),
-		beginDelete: newTracker[azfake.PollerResponder[armavs.ClustersClientDeleteResponse]](),
+		srv:                        srv,
+		beginCreateOrUpdate:        newTracker[azfake.PollerResponder[armavs.ClustersClientCreateOrUpdateResponse]](),
+		beginDelete:                newTracker[azfake.PollerResponder[armavs.ClustersClientDeleteResponse]](),
 		newListByPrivateCloudPager: newTracker[azfake.PagerResponder[armavs.ClustersClientListByPrivateCloudResponse]](),
 	}
 }
@@ -62,9 +61,9 @@ func NewClustersServerTransport(srv *ClustersServer) *ClustersServerTransport {
 // ClustersServerTransport connects instances of armavs.ClustersClient to instances of ClustersServer.
 // Don't use this type directly, use NewClustersServerTransport instead.
 type ClustersServerTransport struct {
-	srv *ClustersServer
-	beginCreateOrUpdate *tracker[azfake.PollerResponder[armavs.ClustersClientCreateOrUpdateResponse]]
-	beginDelete *tracker[azfake.PollerResponder[armavs.ClustersClientDeleteResponse]]
+	srv                        *ClustersServer
+	beginCreateOrUpdate        *tracker[azfake.PollerResponder[armavs.ClustersClientCreateOrUpdateResponse]]
+	beginDelete                *tracker[azfake.PollerResponder[armavs.ClustersClientDeleteResponse]]
 	newListByPrivateCloudPager *tracker[azfake.PagerResponder[armavs.ClustersClientListByPrivateCloudResponse]]
 }
 
@@ -109,36 +108,36 @@ func (c *ClustersServerTransport) dispatchBeginCreateOrUpdate(req *http.Request)
 	}
 	beginCreateOrUpdate := c.beginCreateOrUpdate.get(req)
 	if beginCreateOrUpdate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/clusters/(?P<clusterName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armavs.Cluster](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-	clusterNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("clusterName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := c.srv.BeginCreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, clusterNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/clusters/(?P<clusterName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armavs.Cluster](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		clusterNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("clusterName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := c.srv.BeginCreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, clusterNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginCreateOrUpdate = &respr
 		c.beginCreateOrUpdate.add(req, beginCreateOrUpdate)
 	}
@@ -165,32 +164,32 @@ func (c *ClustersServerTransport) dispatchBeginDelete(req *http.Request) (*http.
 	}
 	beginDelete := c.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/clusters/(?P<clusterName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-	clusterNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("clusterName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := c.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, clusterNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/clusters/(?P<clusterName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		clusterNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("clusterName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := c.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, clusterNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		c.beginDelete.add(req, beginDelete)
 	}
@@ -258,25 +257,25 @@ func (c *ClustersServerTransport) dispatchNewListByPrivateCloudPager(req *http.R
 	}
 	newListByPrivateCloudPager := c.newListByPrivateCloudPager.get(req)
 	if newListByPrivateCloudPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/clusters`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-resp := c.srv.NewListByPrivateCloudPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/clusters`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := c.srv.NewListByPrivateCloudPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, nil)
 		newListByPrivateCloudPager = &resp
 		c.newListByPrivateCloudPager.add(req, newListByPrivateCloudPager)
 		server.PagerResponderInjectNextLinks(newListByPrivateCloudPager, req, func(page *armavs.ClustersClientListByPrivateCloudResponse, createLink func() string) {
@@ -388,4 +387,3 @@ func (c *ClustersServerTransport) dispatchUpdate(req *http.Request) (*http.Respo
 	}
 	return resp, nil
 }
-

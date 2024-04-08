@@ -31,7 +31,7 @@ func NewServerInstancesClient(credential azcore.TokenCredential, options *arm.Cl
 		return nil, err
 	}
 	client := &ServerInstancesClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -111,8 +111,8 @@ func (client *ServerInstancesClient) createCreateRequest(ctx context.Context, su
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -269,13 +269,13 @@ func (client *ServerInstancesClient) getHandleResponse(resp *http.Response) (Ser
 //   - sapInstanceName - The name of SAP Instance resource for SAP Migration.
 //   - options - ServerInstancesClientListBySAPInstanceOptions contains the optional parameters for the ServerInstancesClient.NewListBySAPInstancePager
 //     method.
-func (client *ServerInstancesClient) NewListBySAPInstancePager(subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, sapInstanceName string, options *ServerInstancesClientListBySAPInstanceOptions) (*runtime.Pager[ServerInstancesClientListBySAPInstanceResponse]) {
+func (client *ServerInstancesClient) NewListBySAPInstancePager(subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, sapInstanceName string, options *ServerInstancesClientListBySAPInstanceOptions) *runtime.Pager[ServerInstancesClientListBySAPInstanceResponse] {
 	return runtime.NewPager(runtime.PagingHandler[ServerInstancesClientListBySAPInstanceResponse]{
 		More: func(page ServerInstancesClientListBySAPInstanceResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *ServerInstancesClientListBySAPInstanceResponse) (ServerInstancesClientListBySAPInstanceResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ServerInstancesClient.NewListBySAPInstancePager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ServerInstancesClient.NewListBySAPInstancePager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -287,7 +287,7 @@ func (client *ServerInstancesClient) NewListBySAPInstancePager(subscriptionID st
 				return ServerInstancesClientListBySAPInstanceResponse{}, err
 			}
 			return client.listBySAPInstanceHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -390,8 +390,8 @@ func (client *ServerInstancesClient) updateCreateRequest(ctx context.Context, su
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -403,4 +403,3 @@ func (client *ServerInstancesClient) updateHandleResponse(resp *http.Response) (
 	}
 	return result, nil
 }
-

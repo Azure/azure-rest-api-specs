@@ -19,7 +19,7 @@ import (
 )
 
 // PoolsServer is a fake server for instances of the armdevopsinfrastructure.PoolsClient type.
-type PoolsServer struct{
+type PoolsServer struct {
 	// BeginCreateOrUpdate is the fake for method PoolsClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
 	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, resource armdevopsinfrastructure.Pool, options *armdevopsinfrastructure.PoolsClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armdevopsinfrastructure.PoolsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
@@ -43,7 +43,6 @@ type PoolsServer struct{
 	// BeginUpdate is the fake for method PoolsClient.BeginUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
 	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, properties armdevopsinfrastructure.PoolUpdate, options *armdevopsinfrastructure.PoolsClientUpdateOptions) (resp azfake.PollerResponder[armdevopsinfrastructure.PoolsClientUpdateResponse], errResp azfake.ErrorResponder)
-
 }
 
 // NewPoolsServerTransport creates a new instance of PoolsServerTransport with the provided implementation.
@@ -51,24 +50,24 @@ type PoolsServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewPoolsServerTransport(srv *PoolsServer) *PoolsServerTransport {
 	return &PoolsServerTransport{
-		srv: srv,
-		beginCreateOrUpdate: newTracker[azfake.PollerResponder[armdevopsinfrastructure.PoolsClientCreateOrUpdateResponse]](),
-		beginDelete: newTracker[azfake.PollerResponder[armdevopsinfrastructure.PoolsClientDeleteResponse]](),
+		srv:                         srv,
+		beginCreateOrUpdate:         newTracker[azfake.PollerResponder[armdevopsinfrastructure.PoolsClientCreateOrUpdateResponse]](),
+		beginDelete:                 newTracker[azfake.PollerResponder[armdevopsinfrastructure.PoolsClientDeleteResponse]](),
 		newListByResourceGroupPager: newTracker[azfake.PagerResponder[armdevopsinfrastructure.PoolsClientListByResourceGroupResponse]](),
-		newListBySubscriptionPager: newTracker[azfake.PagerResponder[armdevopsinfrastructure.PoolsClientListBySubscriptionResponse]](),
-		beginUpdate: newTracker[azfake.PollerResponder[armdevopsinfrastructure.PoolsClientUpdateResponse]](),
+		newListBySubscriptionPager:  newTracker[azfake.PagerResponder[armdevopsinfrastructure.PoolsClientListBySubscriptionResponse]](),
+		beginUpdate:                 newTracker[azfake.PollerResponder[armdevopsinfrastructure.PoolsClientUpdateResponse]](),
 	}
 }
 
 // PoolsServerTransport connects instances of armdevopsinfrastructure.PoolsClient to instances of PoolsServer.
 // Don't use this type directly, use NewPoolsServerTransport instead.
 type PoolsServerTransport struct {
-	srv *PoolsServer
-	beginCreateOrUpdate *tracker[azfake.PollerResponder[armdevopsinfrastructure.PoolsClientCreateOrUpdateResponse]]
-	beginDelete *tracker[azfake.PollerResponder[armdevopsinfrastructure.PoolsClientDeleteResponse]]
+	srv                         *PoolsServer
+	beginCreateOrUpdate         *tracker[azfake.PollerResponder[armdevopsinfrastructure.PoolsClientCreateOrUpdateResponse]]
+	beginDelete                 *tracker[azfake.PollerResponder[armdevopsinfrastructure.PoolsClientDeleteResponse]]
 	newListByResourceGroupPager *tracker[azfake.PagerResponder[armdevopsinfrastructure.PoolsClientListByResourceGroupResponse]]
-	newListBySubscriptionPager *tracker[azfake.PagerResponder[armdevopsinfrastructure.PoolsClientListBySubscriptionResponse]]
-	beginUpdate *tracker[azfake.PollerResponder[armdevopsinfrastructure.PoolsClientUpdateResponse]]
+	newListBySubscriptionPager  *tracker[azfake.PagerResponder[armdevopsinfrastructure.PoolsClientListBySubscriptionResponse]]
+	beginUpdate                 *tracker[azfake.PollerResponder[armdevopsinfrastructure.PoolsClientUpdateResponse]]
 }
 
 // Do implements the policy.Transporter interface for PoolsServerTransport.
@@ -112,32 +111,32 @@ func (p *PoolsServerTransport) dispatchBeginCreateOrUpdate(req *http.Request) (*
 	}
 	beginCreateOrUpdate := p.beginCreateOrUpdate.get(req)
 	if beginCreateOrUpdate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DevOpsInfrastructure/pools/(?P<poolName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armdevopsinfrastructure.Pool](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	poolNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("poolName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := p.srv.BeginCreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, poolNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DevOpsInfrastructure/pools/(?P<poolName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armdevopsinfrastructure.Pool](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		poolNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("poolName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := p.srv.BeginCreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, poolNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginCreateOrUpdate = &respr
 		p.beginCreateOrUpdate.add(req, beginCreateOrUpdate)
 	}
@@ -164,28 +163,28 @@ func (p *PoolsServerTransport) dispatchBeginDelete(req *http.Request) (*http.Res
 	}
 	beginDelete := p.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DevOpsInfrastructure/pools/(?P<poolName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	poolNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("poolName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := p.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, poolNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DevOpsInfrastructure/pools/(?P<poolName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		poolNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("poolName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := p.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, poolNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		p.beginDelete.add(req, beginDelete)
 	}
@@ -249,21 +248,21 @@ func (p *PoolsServerTransport) dispatchNewListByResourceGroupPager(req *http.Req
 	}
 	newListByResourceGroupPager := p.newListByResourceGroupPager.get(req)
 	if newListByResourceGroupPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DevOpsInfrastructure/pools`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 2 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-resp := p.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DevOpsInfrastructure/pools`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 2 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := p.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
 		newListByResourceGroupPager = &resp
 		p.newListByResourceGroupPager.add(req, newListByResourceGroupPager)
 		server.PagerResponderInjectNextLinks(newListByResourceGroupPager, req, func(page *armdevopsinfrastructure.PoolsClientListByResourceGroupResponse, createLink func() string) {
@@ -290,17 +289,17 @@ func (p *PoolsServerTransport) dispatchNewListBySubscriptionPager(req *http.Requ
 	}
 	newListBySubscriptionPager := p.newListBySubscriptionPager.get(req)
 	if newListBySubscriptionPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DevOpsInfrastructure/pools`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 1 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-resp := p.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DevOpsInfrastructure/pools`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 1 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resp := p.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
 		newListBySubscriptionPager = &resp
 		p.newListBySubscriptionPager.add(req, newListBySubscriptionPager)
 		server.PagerResponderInjectNextLinks(newListBySubscriptionPager, req, func(page *armdevopsinfrastructure.PoolsClientListBySubscriptionResponse, createLink func() string) {
@@ -327,32 +326,32 @@ func (p *PoolsServerTransport) dispatchBeginUpdate(req *http.Request) (*http.Res
 	}
 	beginUpdate := p.beginUpdate.get(req)
 	if beginUpdate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DevOpsInfrastructure/pools/(?P<poolName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armdevopsinfrastructure.PoolUpdate](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	poolNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("poolName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := p.srv.BeginUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, poolNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DevOpsInfrastructure/pools/(?P<poolName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armdevopsinfrastructure.PoolUpdate](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		poolNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("poolName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := p.srv.BeginUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, poolNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginUpdate = &respr
 		p.beginUpdate.add(req, beginUpdate)
 	}
@@ -372,4 +371,3 @@ func (p *PoolsServerTransport) dispatchBeginUpdate(req *http.Request) (*http.Res
 
 	return resp, nil
 }
-

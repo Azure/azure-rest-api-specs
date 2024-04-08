@@ -19,7 +19,7 @@ import (
 )
 
 // WatchersServer is a fake server for instances of the armdatabasewatcher.WatchersClient type.
-type WatchersServer struct{
+type WatchersServer struct {
 	// BeginCreateOrUpdate is the fake for method WatchersClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
 	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, resource armdatabasewatcher.Watcher, options *armdatabasewatcher.WatchersClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armdatabasewatcher.WatchersClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
@@ -51,7 +51,6 @@ type WatchersServer struct{
 	// BeginUpdate is the fake for method WatchersClient.BeginUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
 	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, properties armdatabasewatcher.WatcherUpdate, options *armdatabasewatcher.WatchersClientUpdateOptions) (resp azfake.PollerResponder[armdatabasewatcher.WatchersClientUpdateResponse], errResp azfake.ErrorResponder)
-
 }
 
 // NewWatchersServerTransport creates a new instance of WatchersServerTransport with the provided implementation.
@@ -59,28 +58,28 @@ type WatchersServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewWatchersServerTransport(srv *WatchersServer) *WatchersServerTransport {
 	return &WatchersServerTransport{
-		srv: srv,
-		beginCreateOrUpdate: newTracker[azfake.PollerResponder[armdatabasewatcher.WatchersClientCreateOrUpdateResponse]](),
-		beginDelete: newTracker[azfake.PollerResponder[armdatabasewatcher.WatchersClientDeleteResponse]](),
+		srv:                         srv,
+		beginCreateOrUpdate:         newTracker[azfake.PollerResponder[armdatabasewatcher.WatchersClientCreateOrUpdateResponse]](),
+		beginDelete:                 newTracker[azfake.PollerResponder[armdatabasewatcher.WatchersClientDeleteResponse]](),
 		newListByResourceGroupPager: newTracker[azfake.PagerResponder[armdatabasewatcher.WatchersClientListByResourceGroupResponse]](),
-		newListBySubscriptionPager: newTracker[azfake.PagerResponder[armdatabasewatcher.WatchersClientListBySubscriptionResponse]](),
-		beginStart: newTracker[azfake.PollerResponder[armdatabasewatcher.WatchersClientStartResponse]](),
-		beginStop: newTracker[azfake.PollerResponder[armdatabasewatcher.WatchersClientStopResponse]](),
-		beginUpdate: newTracker[azfake.PollerResponder[armdatabasewatcher.WatchersClientUpdateResponse]](),
+		newListBySubscriptionPager:  newTracker[azfake.PagerResponder[armdatabasewatcher.WatchersClientListBySubscriptionResponse]](),
+		beginStart:                  newTracker[azfake.PollerResponder[armdatabasewatcher.WatchersClientStartResponse]](),
+		beginStop:                   newTracker[azfake.PollerResponder[armdatabasewatcher.WatchersClientStopResponse]](),
+		beginUpdate:                 newTracker[azfake.PollerResponder[armdatabasewatcher.WatchersClientUpdateResponse]](),
 	}
 }
 
 // WatchersServerTransport connects instances of armdatabasewatcher.WatchersClient to instances of WatchersServer.
 // Don't use this type directly, use NewWatchersServerTransport instead.
 type WatchersServerTransport struct {
-	srv *WatchersServer
-	beginCreateOrUpdate *tracker[azfake.PollerResponder[armdatabasewatcher.WatchersClientCreateOrUpdateResponse]]
-	beginDelete *tracker[azfake.PollerResponder[armdatabasewatcher.WatchersClientDeleteResponse]]
+	srv                         *WatchersServer
+	beginCreateOrUpdate         *tracker[azfake.PollerResponder[armdatabasewatcher.WatchersClientCreateOrUpdateResponse]]
+	beginDelete                 *tracker[azfake.PollerResponder[armdatabasewatcher.WatchersClientDeleteResponse]]
 	newListByResourceGroupPager *tracker[azfake.PagerResponder[armdatabasewatcher.WatchersClientListByResourceGroupResponse]]
-	newListBySubscriptionPager *tracker[azfake.PagerResponder[armdatabasewatcher.WatchersClientListBySubscriptionResponse]]
-	beginStart *tracker[azfake.PollerResponder[armdatabasewatcher.WatchersClientStartResponse]]
-	beginStop *tracker[azfake.PollerResponder[armdatabasewatcher.WatchersClientStopResponse]]
-	beginUpdate *tracker[azfake.PollerResponder[armdatabasewatcher.WatchersClientUpdateResponse]]
+	newListBySubscriptionPager  *tracker[azfake.PagerResponder[armdatabasewatcher.WatchersClientListBySubscriptionResponse]]
+	beginStart                  *tracker[azfake.PollerResponder[armdatabasewatcher.WatchersClientStartResponse]]
+	beginStop                   *tracker[azfake.PollerResponder[armdatabasewatcher.WatchersClientStopResponse]]
+	beginUpdate                 *tracker[azfake.PollerResponder[armdatabasewatcher.WatchersClientUpdateResponse]]
 }
 
 // Do implements the policy.Transporter interface for WatchersServerTransport.
@@ -128,32 +127,32 @@ func (w *WatchersServerTransport) dispatchBeginCreateOrUpdate(req *http.Request)
 	}
 	beginCreateOrUpdate := w.beginCreateOrUpdate.get(req)
 	if beginCreateOrUpdate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DatabaseWatcher/watchers/(?P<watcherName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armdatabasewatcher.Watcher](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	watcherNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("watcherName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := w.srv.BeginCreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, watcherNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DatabaseWatcher/watchers/(?P<watcherName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armdatabasewatcher.Watcher](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		watcherNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("watcherName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := w.srv.BeginCreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, watcherNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginCreateOrUpdate = &respr
 		w.beginCreateOrUpdate.add(req, beginCreateOrUpdate)
 	}
@@ -180,28 +179,28 @@ func (w *WatchersServerTransport) dispatchBeginDelete(req *http.Request) (*http.
 	}
 	beginDelete := w.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DatabaseWatcher/watchers/(?P<watcherName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	watcherNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("watcherName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := w.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, watcherNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DatabaseWatcher/watchers/(?P<watcherName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		watcherNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("watcherName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := w.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, watcherNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		w.beginDelete.add(req, beginDelete)
 	}
@@ -265,21 +264,21 @@ func (w *WatchersServerTransport) dispatchNewListByResourceGroupPager(req *http.
 	}
 	newListByResourceGroupPager := w.newListByResourceGroupPager.get(req)
 	if newListByResourceGroupPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DatabaseWatcher/watchers`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 2 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-resp := w.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DatabaseWatcher/watchers`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 2 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := w.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
 		newListByResourceGroupPager = &resp
 		w.newListByResourceGroupPager.add(req, newListByResourceGroupPager)
 		server.PagerResponderInjectNextLinks(newListByResourceGroupPager, req, func(page *armdatabasewatcher.WatchersClientListByResourceGroupResponse, createLink func() string) {
@@ -306,17 +305,17 @@ func (w *WatchersServerTransport) dispatchNewListBySubscriptionPager(req *http.R
 	}
 	newListBySubscriptionPager := w.newListBySubscriptionPager.get(req)
 	if newListBySubscriptionPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DatabaseWatcher/watchers`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 1 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-resp := w.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DatabaseWatcher/watchers`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 1 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resp := w.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
 		newListBySubscriptionPager = &resp
 		w.newListBySubscriptionPager.add(req, newListBySubscriptionPager)
 		server.PagerResponderInjectNextLinks(newListBySubscriptionPager, req, func(page *armdatabasewatcher.WatchersClientListBySubscriptionResponse, createLink func() string) {
@@ -343,28 +342,28 @@ func (w *WatchersServerTransport) dispatchBeginStart(req *http.Request) (*http.R
 	}
 	beginStart := w.beginStart.get(req)
 	if beginStart == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DatabaseWatcher/watchers/(?P<watcherName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/start`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	watcherNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("watcherName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := w.srv.BeginStart(req.Context(), subscriptionIDParam, resourceGroupNameParam, watcherNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DatabaseWatcher/watchers/(?P<watcherName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/start`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		watcherNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("watcherName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := w.srv.BeginStart(req.Context(), subscriptionIDParam, resourceGroupNameParam, watcherNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginStart = &respr
 		w.beginStart.add(req, beginStart)
 	}
@@ -391,28 +390,28 @@ func (w *WatchersServerTransport) dispatchBeginStop(req *http.Request) (*http.Re
 	}
 	beginStop := w.beginStop.get(req)
 	if beginStop == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DatabaseWatcher/watchers/(?P<watcherName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/stop`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	watcherNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("watcherName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := w.srv.BeginStop(req.Context(), subscriptionIDParam, resourceGroupNameParam, watcherNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DatabaseWatcher/watchers/(?P<watcherName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/stop`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		watcherNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("watcherName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := w.srv.BeginStop(req.Context(), subscriptionIDParam, resourceGroupNameParam, watcherNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginStop = &respr
 		w.beginStop.add(req, beginStop)
 	}
@@ -439,32 +438,32 @@ func (w *WatchersServerTransport) dispatchBeginUpdate(req *http.Request) (*http.
 	}
 	beginUpdate := w.beginUpdate.get(req)
 	if beginUpdate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DatabaseWatcher/watchers/(?P<watcherName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armdatabasewatcher.WatcherUpdate](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	watcherNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("watcherName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := w.srv.BeginUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, watcherNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DatabaseWatcher/watchers/(?P<watcherName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armdatabasewatcher.WatcherUpdate](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		watcherNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("watcherName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := w.srv.BeginUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, watcherNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginUpdate = &respr
 		w.beginUpdate.add(req, beginUpdate)
 	}
@@ -484,4 +483,3 @@ func (w *WatchersServerTransport) dispatchBeginUpdate(req *http.Request) (*http.
 
 	return resp, nil
 }
-

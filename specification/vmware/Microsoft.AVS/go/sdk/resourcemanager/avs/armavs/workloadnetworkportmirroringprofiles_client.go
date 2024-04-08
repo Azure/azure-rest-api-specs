@@ -13,6 +13,7 @@ import (
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/runtime"
 	"net/http"
 	"net/url"
+	"strconv"
 	"strings"
 )
 
@@ -31,53 +32,40 @@ func NewWorkloadNetworkPortMirroringProfilesClient(credential azcore.TokenCreden
 		return nil, err
 	}
 	client := &WorkloadNetworkPortMirroringProfilesClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
 
-// BeginCreate - Create a WorkloadNetworkPortMirroring
+// Create - Create a WorkloadNetworkPortMirroring
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
 //   - portMirroringID - ID of the NSX port mirroring profile.
-//   - resource - Resource create parameters.
+//   - workloadNetworkPortMirroring - Resource create parameters.
 //   - options - WorkloadNetworkPortMirroringProfilesClientCreateOptions contains the optional parameters for the WorkloadNetworkPortMirroringProfilesClient.Create
 //     method.
-func (client *WorkloadNetworkPortMirroringProfilesClient) BeginCreate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, portMirroringID string, resource WorkloadNetworkPortMirroring, options *WorkloadNetworkPortMirroringProfilesClientCreateOptions) (*runtime.Poller[WorkloadNetworkPortMirroringProfilesClientCreateResponse], error) {
-	if options == nil || options.ResumeToken == "" {
-		resp, err := client.create(ctx, subscriptionID, resourceGroupName, privateCloudName, portMirroringID, resource, options)
-		if err != nil {
-			return nil, err
-		}
-		poller, err := runtime.NewPoller[WorkloadNetworkPortMirroringProfilesClientCreateResponse](resp, client.internal.Pipeline(), nil)
-		return poller, err
-	} else {
-		return runtime.NewPollerFromResumeToken[WorkloadNetworkPortMirroringProfilesClientCreateResponse](options.ResumeToken, client.internal.Pipeline(), nil)
-	}
-}
-
-// Create - Create a WorkloadNetworkPortMirroring
-func (client *WorkloadNetworkPortMirroringProfilesClient) create(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, portMirroringID string, resource WorkloadNetworkPortMirroring, options *WorkloadNetworkPortMirroringProfilesClientCreateOptions) (*http.Response, error) {
+func (client *WorkloadNetworkPortMirroringProfilesClient) Create(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, portMirroringID string, workloadNetworkPortMirroring WorkloadNetworkPortMirroring, options *WorkloadNetworkPortMirroringProfilesClientCreateOptions) (WorkloadNetworkPortMirroringProfilesClientCreateResponse, error) {
 	var err error
-	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkPortMirroringProfilesClient.BeginCreate")
-	req, err := client.createCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, portMirroringID, resource, options)
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkPortMirroringProfilesClient.Create")
+	req, err := client.createCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, portMirroringID, workloadNetworkPortMirroring, options)
 	if err != nil {
-		return nil, err
+		return WorkloadNetworkPortMirroringProfilesClientCreateResponse{}, err
 	}
 	httpResp, err := client.internal.Pipeline().Do(req)
 	if err != nil {
-		return nil, err
+		return WorkloadNetworkPortMirroringProfilesClientCreateResponse{}, err
 	}
 	if !runtime.HasStatusCode(httpResp, http.StatusOK, http.StatusCreated) {
 		err = runtime.NewResponseError(httpResp)
-		return nil, err
+		return WorkloadNetworkPortMirroringProfilesClientCreateResponse{}, err
 	}
-	return httpResp, nil
+	resp, err := client.createHandleResponse(httpResp)
+	return resp, err
 }
 
 // createCreateRequest creates the Create request.
-func (client *WorkloadNetworkPortMirroringProfilesClient) createCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, portMirroringID string, resource WorkloadNetworkPortMirroring, options *WorkloadNetworkPortMirroringProfilesClientCreateOptions) (*policy.Request, error) {
+func (client *WorkloadNetworkPortMirroringProfilesClient) createCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, portMirroringID string, workloadNetworkPortMirroring WorkloadNetworkPortMirroring, options *WorkloadNetworkPortMirroringProfilesClientCreateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/portMirroringProfiles/{portMirroringId}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -104,10 +92,27 @@ func (client *WorkloadNetworkPortMirroringProfilesClient) createCreateRequest(ct
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
-	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+	if err := runtime.MarshalAsJSON(req, workloadNetworkPortMirroring); err != nil {
+		return nil, err
+	}
 	return req, nil
+}
+
+// createHandleResponse handles the Create response.
+func (client *WorkloadNetworkPortMirroringProfilesClient) createHandleResponse(resp *http.Response) (WorkloadNetworkPortMirroringProfilesClientCreateResponse, error) {
+	result := WorkloadNetworkPortMirroringProfilesClientCreateResponse{}
+	if val := resp.Header.Get("Retry-After"); val != "" {
+		retryAfter32, err := strconv.ParseInt(val, 10, 32)
+		retryAfter := int32(retryAfter32)
+		if err != nil {
+			return WorkloadNetworkPortMirroringProfilesClientCreateResponse{}, err
+		}
+		result.RetryAfter = &retryAfter
+	}
+	if err := runtime.UnmarshalAsJSON(resp, &result.WorkloadNetworkPortMirroring); err != nil {
+		return WorkloadNetworkPortMirroringProfilesClientCreateResponse{}, err
+	}
+	return result, nil
 }
 
 // BeginDelete - Delete a WorkloadNetworkPortMirroring
@@ -250,13 +255,13 @@ func (client *WorkloadNetworkPortMirroringProfilesClient) getHandleResponse(resp
 //   - privateCloudName - Name of the private cloud
 //   - options - WorkloadNetworkPortMirroringProfilesClientListByWorkloadNetworkOptions contains the optional parameters for the
 //     WorkloadNetworkPortMirroringProfilesClient.NewListByWorkloadNetworkPager method.
-func (client *WorkloadNetworkPortMirroringProfilesClient) NewListByWorkloadNetworkPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *WorkloadNetworkPortMirroringProfilesClientListByWorkloadNetworkOptions) (*runtime.Pager[WorkloadNetworkPortMirroringProfilesClientListByWorkloadNetworkResponse]) {
+func (client *WorkloadNetworkPortMirroringProfilesClient) NewListByWorkloadNetworkPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *WorkloadNetworkPortMirroringProfilesClientListByWorkloadNetworkOptions) *runtime.Pager[WorkloadNetworkPortMirroringProfilesClientListByWorkloadNetworkResponse] {
 	return runtime.NewPager(runtime.PagingHandler[WorkloadNetworkPortMirroringProfilesClientListByWorkloadNetworkResponse]{
 		More: func(page WorkloadNetworkPortMirroringProfilesClientListByWorkloadNetworkResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *WorkloadNetworkPortMirroringProfilesClientListByWorkloadNetworkResponse) (WorkloadNetworkPortMirroringProfilesClientListByWorkloadNetworkResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkPortMirroringProfilesClient.NewListByWorkloadNetworkPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkPortMirroringProfilesClient.NewListByWorkloadNetworkPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -268,7 +273,7 @@ func (client *WorkloadNetworkPortMirroringProfilesClient) NewListByWorkloadNetwo
 				return WorkloadNetworkPortMirroringProfilesClientListByWorkloadNetworkResponse{}, err
 			}
 			return client.listByWorkloadNetworkHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -312,12 +317,12 @@ func (client *WorkloadNetworkPortMirroringProfilesClient) listByWorkloadNetworkH
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
 //   - portMirroringID - ID of the NSX port mirroring profile.
-//   - properties - The resource properties to be updated.
+//   - workloadNetworkPortMirroring - The resource properties to be updated.
 //   - options - WorkloadNetworkPortMirroringProfilesClientUpdateOptions contains the optional parameters for the WorkloadNetworkPortMirroringProfilesClient.Update
 //     method.
-func (client *WorkloadNetworkPortMirroringProfilesClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, portMirroringID string, properties WorkloadNetworkPortMirroringUpdate, options *WorkloadNetworkPortMirroringProfilesClientUpdateOptions) (*runtime.Poller[WorkloadNetworkPortMirroringProfilesClientUpdateResponse], error) {
+func (client *WorkloadNetworkPortMirroringProfilesClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, portMirroringID string, workloadNetworkPortMirroring WorkloadNetworkPortMirroringUpdate, options *WorkloadNetworkPortMirroringProfilesClientUpdateOptions) (*runtime.Poller[WorkloadNetworkPortMirroringProfilesClientUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
-		resp, err := client.update(ctx, subscriptionID, resourceGroupName, privateCloudName, portMirroringID, properties, options)
+		resp, err := client.update(ctx, subscriptionID, resourceGroupName, privateCloudName, portMirroringID, workloadNetworkPortMirroring, options)
 		if err != nil {
 			return nil, err
 		}
@@ -329,10 +334,10 @@ func (client *WorkloadNetworkPortMirroringProfilesClient) BeginUpdate(ctx contex
 }
 
 // Update - Update a WorkloadNetworkPortMirroring
-func (client *WorkloadNetworkPortMirroringProfilesClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, portMirroringID string, properties WorkloadNetworkPortMirroringUpdate, options *WorkloadNetworkPortMirroringProfilesClientUpdateOptions) (*http.Response, error) {
+func (client *WorkloadNetworkPortMirroringProfilesClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, portMirroringID string, workloadNetworkPortMirroring WorkloadNetworkPortMirroringUpdate, options *WorkloadNetworkPortMirroringProfilesClientUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkPortMirroringProfilesClient.BeginUpdate")
-	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, portMirroringID, properties, options)
+	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, portMirroringID, workloadNetworkPortMirroring, options)
 	if err != nil {
 		return nil, err
 	}
@@ -348,7 +353,7 @@ func (client *WorkloadNetworkPortMirroringProfilesClient) update(ctx context.Con
 }
 
 // updateCreateRequest creates the Update request.
-func (client *WorkloadNetworkPortMirroringProfilesClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, portMirroringID string, properties WorkloadNetworkPortMirroringUpdate, options *WorkloadNetworkPortMirroringProfilesClientUpdateOptions) (*policy.Request, error) {
+func (client *WorkloadNetworkPortMirroringProfilesClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, portMirroringID string, workloadNetworkPortMirroring WorkloadNetworkPortMirroringUpdate, options *WorkloadNetworkPortMirroringProfilesClientUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/portMirroringProfiles/{portMirroringId}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -375,9 +380,8 @@ func (client *WorkloadNetworkPortMirroringProfilesClient) updateCreateRequest(ct
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
-	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+	if err := runtime.MarshalAsJSON(req, workloadNetworkPortMirroring); err != nil {
+		return nil, err
+	}
 	return req, nil
 }
-

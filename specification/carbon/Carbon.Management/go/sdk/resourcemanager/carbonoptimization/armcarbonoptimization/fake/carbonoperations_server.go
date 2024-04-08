@@ -16,11 +16,10 @@ import (
 )
 
 // CarbonOperationsServer is a fake server for instances of the armcarbonoptimization.CarbonOperationsClient type.
-type CarbonOperationsServer struct{
+type CarbonOperationsServer struct {
 	// NewListPager is the fake for method CarbonOperationsClient.NewListPager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListPager func(options *armcarbonoptimization.CarbonOperationsClientListOptions) (resp azfake.PagerResponder[armcarbonoptimization.CarbonOperationsClientListResponse])
-
 }
 
 // NewCarbonOperationsServerTransport creates a new instance of CarbonOperationsServerTransport with the provided implementation.
@@ -28,7 +27,7 @@ type CarbonOperationsServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewCarbonOperationsServerTransport(srv *CarbonOperationsServer) *CarbonOperationsServerTransport {
 	return &CarbonOperationsServerTransport{
-		srv: srv,
+		srv:          srv,
 		newListPager: newTracker[azfake.PagerResponder[armcarbonoptimization.CarbonOperationsClientListResponse]](),
 	}
 }
@@ -36,7 +35,7 @@ func NewCarbonOperationsServerTransport(srv *CarbonOperationsServer) *CarbonOper
 // CarbonOperationsServerTransport connects instances of armcarbonoptimization.CarbonOperationsClient to instances of CarbonOperationsServer.
 // Don't use this type directly, use NewCarbonOperationsServerTransport instead.
 type CarbonOperationsServerTransport struct {
-	srv *CarbonOperationsServer
+	srv          *CarbonOperationsServer
 	newListPager *tracker[azfake.PagerResponder[armcarbonoptimization.CarbonOperationsClientListResponse]]
 }
 
@@ -71,7 +70,7 @@ func (c *CarbonOperationsServerTransport) dispatchNewListPager(req *http.Request
 	}
 	newListPager := c.newListPager.get(req)
 	if newListPager == nil {
-resp := c.srv.NewListPager(nil)
+		resp := c.srv.NewListPager(nil)
 		newListPager = &resp
 		c.newListPager.add(req, newListPager)
 		server.PagerResponderInjectNextLinks(newListPager, req, func(page *armcarbonoptimization.CarbonOperationsClientListResponse, createLink func() string) {
@@ -91,4 +90,3 @@ resp := c.srv.NewListPager(nil)
 	}
 	return resp, nil
 }
-

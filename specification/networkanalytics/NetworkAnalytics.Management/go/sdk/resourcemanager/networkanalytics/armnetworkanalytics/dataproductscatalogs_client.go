@@ -31,7 +31,7 @@ func NewDataProductsCatalogsClient(credential azcore.TokenCredential, options *a
 		return nil, err
 	}
 	client := &DataProductsCatalogsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -96,13 +96,13 @@ func (client *DataProductsCatalogsClient) getHandleResponse(resp *http.Response)
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - options - DataProductsCatalogsClientListByResourceGroupOptions contains the optional parameters for the DataProductsCatalogsClient.NewListByResourceGroupPager
 //     method.
-func (client *DataProductsCatalogsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *DataProductsCatalogsClientListByResourceGroupOptions) (*runtime.Pager[DataProductsCatalogsClientListByResourceGroupResponse]) {
+func (client *DataProductsCatalogsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *DataProductsCatalogsClientListByResourceGroupOptions) *runtime.Pager[DataProductsCatalogsClientListByResourceGroupResponse] {
 	return runtime.NewPager(runtime.PagingHandler[DataProductsCatalogsClientListByResourceGroupResponse]{
 		More: func(page DataProductsCatalogsClientListByResourceGroupResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *DataProductsCatalogsClientListByResourceGroupResponse) (DataProductsCatalogsClientListByResourceGroupResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataProductsCatalogsClient.NewListByResourceGroupPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataProductsCatalogsClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -114,7 +114,7 @@ func (client *DataProductsCatalogsClient) NewListByResourceGroupPager(subscripti
 				return DataProductsCatalogsClientListByResourceGroupResponse{}, err
 			}
 			return client.listByResourceGroupHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -153,13 +153,13 @@ func (client *DataProductsCatalogsClient) listByResourceGroupHandleResponse(resp
 //   - subscriptionID - The ID of the target subscription.
 //   - options - DataProductsCatalogsClientListBySubscriptionOptions contains the optional parameters for the DataProductsCatalogsClient.NewListBySubscriptionPager
 //     method.
-func (client *DataProductsCatalogsClient) NewListBySubscriptionPager(subscriptionID string, options *DataProductsCatalogsClientListBySubscriptionOptions) (*runtime.Pager[DataProductsCatalogsClientListBySubscriptionResponse]) {
+func (client *DataProductsCatalogsClient) NewListBySubscriptionPager(subscriptionID string, options *DataProductsCatalogsClientListBySubscriptionOptions) *runtime.Pager[DataProductsCatalogsClientListBySubscriptionResponse] {
 	return runtime.NewPager(runtime.PagingHandler[DataProductsCatalogsClientListBySubscriptionResponse]{
 		More: func(page DataProductsCatalogsClientListBySubscriptionResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *DataProductsCatalogsClientListBySubscriptionResponse) (DataProductsCatalogsClientListBySubscriptionResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataProductsCatalogsClient.NewListBySubscriptionPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataProductsCatalogsClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -171,7 +171,7 @@ func (client *DataProductsCatalogsClient) NewListBySubscriptionPager(subscriptio
 				return DataProductsCatalogsClientListBySubscriptionResponse{}, err
 			}
 			return client.listBySubscriptionHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -201,4 +201,3 @@ func (client *DataProductsCatalogsClient) listBySubscriptionHandleResponse(resp 
 	}
 	return result, nil
 }
-

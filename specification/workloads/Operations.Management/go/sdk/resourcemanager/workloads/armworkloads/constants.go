@@ -7,7 +7,7 @@ package armworkloads
 const host = "https://management.azure.com"
 
 const (
-	moduleName = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/workloads/armworkloads"
+	moduleName    = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/workloads/armworkloads"
 	moduleVersion = "v0.1.0"
 )
 
@@ -21,7 +21,7 @@ const (
 
 // PossibleActionTypeValues returns the possible values for the ActionType const type.
 func PossibleActionTypeValues() []ActionType {
-	return []ActionType{	
+	return []ActionType{
 		ActionTypeInternal,
 	}
 }
@@ -41,10 +41,9 @@ const (
 
 // PossibleOriginValues returns the possible values for the Origin const type.
 func PossibleOriginValues() []Origin {
-	return []Origin{	
+	return []Origin{
 		OriginSystem,
 		OriginUser,
 		OriginUserSystem,
 	}
 }
-

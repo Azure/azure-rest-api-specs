@@ -93,13 +93,13 @@ type CarbonEmissionItemDetailData struct {
 // GetCarbonEmissionData implements the CarbonEmissionDataClassification interface for type CarbonEmissionItemDetailData.
 func (c *CarbonEmissionItemDetailData) GetCarbonEmissionData() *CarbonEmissionData {
 	return &CarbonEmissionData{
-		ChangeRatioFor12Months: c.ChangeRatioFor12Months,
-		ChangeRatioForLastMonth: c.ChangeRatioForLastMonth,
-		ChangeValueMonthOverMonth: c.ChangeValueMonthOverMonth,
-		DataType: c.DataType,
-		TotalCarbonEmission: c.TotalCarbonEmission,
+		ChangeRatioFor12Months:         c.ChangeRatioFor12Months,
+		ChangeRatioForLastMonth:        c.ChangeRatioForLastMonth,
+		ChangeValueMonthOverMonth:      c.ChangeValueMonthOverMonth,
+		DataType:                       c.DataType,
+		TotalCarbonEmission:            c.TotalCarbonEmission,
 		TotalCarbonEmission12MonthsAgo: c.TotalCarbonEmission12MonthsAgo,
-		TotalCarbonEmissionLastMonth: c.TotalCarbonEmissionLastMonth,
+		TotalCarbonEmissionLastMonth:   c.TotalCarbonEmissionLastMonth,
 	}
 }
 
@@ -136,13 +136,13 @@ type CarbonEmissionMonthlySummaryData struct {
 // GetCarbonEmissionData implements the CarbonEmissionDataClassification interface for type CarbonEmissionMonthlySummaryData.
 func (c *CarbonEmissionMonthlySummaryData) GetCarbonEmissionData() *CarbonEmissionData {
 	return &CarbonEmissionData{
-		ChangeRatioFor12Months: c.ChangeRatioFor12Months,
-		ChangeRatioForLastMonth: c.ChangeRatioForLastMonth,
-		ChangeValueMonthOverMonth: c.ChangeValueMonthOverMonth,
-		DataType: c.DataType,
-		TotalCarbonEmission: c.TotalCarbonEmission,
+		ChangeRatioFor12Months:         c.ChangeRatioFor12Months,
+		ChangeRatioForLastMonth:        c.ChangeRatioForLastMonth,
+		ChangeValueMonthOverMonth:      c.ChangeValueMonthOverMonth,
+		DataType:                       c.DataType,
+		TotalCarbonEmission:            c.TotalCarbonEmission,
 		TotalCarbonEmission12MonthsAgo: c.TotalCarbonEmission12MonthsAgo,
-		TotalCarbonEmissionLastMonth: c.TotalCarbonEmissionLastMonth,
+		TotalCarbonEmissionLastMonth:   c.TotalCarbonEmissionLastMonth,
 	}
 }
 
@@ -173,13 +173,13 @@ type CarbonEmissionOverallSummaryData struct {
 // GetCarbonEmissionData implements the CarbonEmissionDataClassification interface for type CarbonEmissionOverallSummaryData.
 func (c *CarbonEmissionOverallSummaryData) GetCarbonEmissionData() *CarbonEmissionData {
 	return &CarbonEmissionData{
-		ChangeRatioFor12Months: c.ChangeRatioFor12Months,
-		ChangeRatioForLastMonth: c.ChangeRatioForLastMonth,
-		ChangeValueMonthOverMonth: c.ChangeValueMonthOverMonth,
-		DataType: c.DataType,
-		TotalCarbonEmission: c.TotalCarbonEmission,
+		ChangeRatioFor12Months:         c.ChangeRatioFor12Months,
+		ChangeRatioForLastMonth:        c.ChangeRatioForLastMonth,
+		ChangeValueMonthOverMonth:      c.ChangeValueMonthOverMonth,
+		DataType:                       c.DataType,
+		TotalCarbonEmission:            c.TotalCarbonEmission,
 		TotalCarbonEmission12MonthsAgo: c.TotalCarbonEmission12MonthsAgo,
-		TotalCarbonEmissionLastMonth: c.TotalCarbonEmissionLastMonth,
+		TotalCarbonEmissionLastMonth:   c.TotalCarbonEmissionLastMonth,
 	}
 }
 
@@ -219,13 +219,13 @@ type CarbonEmissionTopItemMonthlySummaryData struct {
 // GetCarbonEmissionData implements the CarbonEmissionDataClassification interface for type CarbonEmissionTopItemMonthlySummaryData.
 func (c *CarbonEmissionTopItemMonthlySummaryData) GetCarbonEmissionData() *CarbonEmissionData {
 	return &CarbonEmissionData{
-		ChangeRatioFor12Months: c.ChangeRatioFor12Months,
-		ChangeRatioForLastMonth: c.ChangeRatioForLastMonth,
-		ChangeValueMonthOverMonth: c.ChangeValueMonthOverMonth,
-		DataType: c.DataType,
-		TotalCarbonEmission: c.TotalCarbonEmission,
+		ChangeRatioFor12Months:         c.ChangeRatioFor12Months,
+		ChangeRatioForLastMonth:        c.ChangeRatioForLastMonth,
+		ChangeValueMonthOverMonth:      c.ChangeValueMonthOverMonth,
+		DataType:                       c.DataType,
+		TotalCarbonEmission:            c.TotalCarbonEmission,
 		TotalCarbonEmission12MonthsAgo: c.TotalCarbonEmission12MonthsAgo,
-		TotalCarbonEmissionLastMonth: c.TotalCarbonEmissionLastMonth,
+		TotalCarbonEmissionLastMonth:   c.TotalCarbonEmissionLastMonth,
 	}
 }
 
@@ -262,13 +262,13 @@ type CarbonEmissionTopItemsSummaryData struct {
 // GetCarbonEmissionData implements the CarbonEmissionDataClassification interface for type CarbonEmissionTopItemsSummaryData.
 func (c *CarbonEmissionTopItemsSummaryData) GetCarbonEmissionData() *CarbonEmissionData {
 	return &CarbonEmissionData{
-		ChangeRatioFor12Months: c.ChangeRatioFor12Months,
-		ChangeRatioForLastMonth: c.ChangeRatioForLastMonth,
-		ChangeValueMonthOverMonth: c.ChangeValueMonthOverMonth,
-		DataType: c.DataType,
-		TotalCarbonEmission: c.TotalCarbonEmission,
+		ChangeRatioFor12Months:         c.ChangeRatioFor12Months,
+		ChangeRatioForLastMonth:        c.ChangeRatioForLastMonth,
+		ChangeValueMonthOverMonth:      c.ChangeValueMonthOverMonth,
+		DataType:                       c.DataType,
+		TotalCarbonEmission:            c.TotalCarbonEmission,
 		TotalCarbonEmission12MonthsAgo: c.TotalCarbonEmission12MonthsAgo,
-		TotalCarbonEmissionLastMonth: c.TotalCarbonEmissionLastMonth,
+		TotalCarbonEmissionLastMonth:   c.TotalCarbonEmissionLastMonth,
 	}
 }
 
@@ -279,42 +279,6 @@ type DateRange struct {
 
 	// REQUIRED; Start date parameter, format is yyyy-MM-dd
 	Start *time.Time
-}
-
-// The resource management error additional info.
-type ErrorAdditionalInfo struct {
-	// The additional info.
-	Info *ErrorAdditionalInfoInfo
-
-	// The additional info type.
-	Type *string
-}
-
-type ErrorAdditionalInfoInfo struct {
-}
-
-// The error detail.
-type ErrorDetail struct {
-	// The error additional info.
-	AdditionalInfo []*ErrorAdditionalInfo
-
-	// The error code.
-	Code *string
-
-	// The error details.
-	Details []*ErrorDetail
-
-	// The error message.
-	Message *string
-
-	// The error target.
-	Target *string
-}
-
-// Common error response for all Azure Resource Manager APIs to return error details for failed operations.
-type ErrorResponse struct {
-	// The error object.
-	Error *ErrorDetail
 }
 
 // Query Parameters for Detailed carbon emissions by pageSize
@@ -338,7 +302,7 @@ type ItemDetailsQueryFilter struct {
 	PageSize *int32
 
 	// CONSTANT; Item pagination data report type name
-// Field has constant value "ItemDetailsReport", any specified value is ignored.
+	// Field has constant value "ItemDetailsReport", any specified value is ignored.
 	ReportType *string
 
 	// REQUIRED; Direction for sorting
@@ -363,13 +327,13 @@ type ItemDetailsQueryFilter struct {
 // GetQueryFilter implements the QueryFilterClassification interface for type ItemDetailsQueryFilter.
 func (i *ItemDetailsQueryFilter) GetQueryFilter() *QueryFilter {
 	return &QueryFilter{
-		CarbonScopeList: i.CarbonScopeList,
-		DateRange: i.DateRange,
-		LocationList: i.LocationList,
-		ReportType: i.ReportType,
+		CarbonScopeList:      i.CarbonScopeList,
+		DateRange:            i.DateRange,
+		LocationList:         i.LocationList,
+		ReportType:           i.ReportType,
 		ResourceGroupURLList: i.ResourceGroupURLList,
-		ResourceTypeList: i.ResourceTypeList,
-		SubscriptionList: i.SubscriptionList,
+		ResourceTypeList:     i.ResourceTypeList,
+		SubscriptionList:     i.SubscriptionList,
 	}
 }
 
@@ -382,7 +346,7 @@ type MonthlySummaryReportQueryFilter struct {
 	DateRange *DateRange
 
 	// CONSTANT; Monthly summary report type name
-// Field has constant value "MonthlySummaryReport", any specified value is ignored.
+	// Field has constant value "MonthlySummaryReport", any specified value is ignored.
 	ReportType *string
 
 	// REQUIRED; SubscriptionId list for carbon emissions data
@@ -401,13 +365,13 @@ type MonthlySummaryReportQueryFilter struct {
 // GetQueryFilter implements the QueryFilterClassification interface for type MonthlySummaryReportQueryFilter.
 func (m *MonthlySummaryReportQueryFilter) GetQueryFilter() *QueryFilter {
 	return &QueryFilter{
-		CarbonScopeList: m.CarbonScopeList,
-		DateRange: m.DateRange,
-		LocationList: m.LocationList,
-		ReportType: m.ReportType,
+		CarbonScopeList:      m.CarbonScopeList,
+		DateRange:            m.DateRange,
+		LocationList:         m.LocationList,
+		ReportType:           m.ReportType,
 		ResourceGroupURLList: m.ResourceGroupURLList,
-		ResourceTypeList: m.ResourceTypeList,
-		SubscriptionList: m.SubscriptionList,
+		ResourceTypeList:     m.ResourceTypeList,
+		SubscriptionList:     m.SubscriptionList,
 	}
 }
 
@@ -420,15 +384,15 @@ type Operation struct {
 	Display *OperationDisplay
 
 	// Whether the operation applies to data-plane. This is "true" for data-plane operations and "false" for Azure Resource Manager/control-plane
-// operations.
+	// operations.
 	IsDataAction *bool
 
 	// The name of the operation, as per Resource-Based Access Control (RBAC). Examples: "Microsoft.Compute/virtualMachines/write",
-// "Microsoft.Compute/virtualMachines/capture/action"
+	// "Microsoft.Compute/virtualMachines/capture/action"
 	Name *string
 
 	// The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is
-// "user,system"
+	// "user,system"
 	Origin *Origin
 }
 
@@ -438,7 +402,7 @@ type OperationDisplay struct {
 	Description *string
 
 	// The concise, localized friendly name for the operation; suitable for dropdowns. E.g. "Create or Update Virtual Machine",
-// "Restart Virtual Machine".
+	// "Restart Virtual Machine".
 	Operation *string
 
 	// The localized friendly form of the resource provider name, e.g. "Microsoft Monitoring Insights" or "Microsoft Compute".
@@ -457,7 +421,7 @@ type OverallSummaryReportQueryFilter struct {
 	DateRange *DateRange
 
 	// CONSTANT; Overall summary report type name
-// Field has constant value "OverallSummaryReport", any specified value is ignored.
+	// Field has constant value "OverallSummaryReport", any specified value is ignored.
 	ReportType *string
 
 	// REQUIRED; SubscriptionId list for carbon emissions data
@@ -476,13 +440,13 @@ type OverallSummaryReportQueryFilter struct {
 // GetQueryFilter implements the QueryFilterClassification interface for type OverallSummaryReportQueryFilter.
 func (o *OverallSummaryReportQueryFilter) GetQueryFilter() *QueryFilter {
 	return &QueryFilter{
-		CarbonScopeList: o.CarbonScopeList,
-		DateRange: o.DateRange,
-		LocationList: o.LocationList,
-		ReportType: o.ReportType,
+		CarbonScopeList:      o.CarbonScopeList,
+		DateRange:            o.DateRange,
+		LocationList:         o.LocationList,
+		ReportType:           o.ReportType,
 		ResourceGroupURLList: o.ResourceGroupURLList,
-		ResourceTypeList: o.ResourceTypeList,
-		SubscriptionList: o.SubscriptionList,
+		ResourceTypeList:     o.ResourceTypeList,
+		SubscriptionList:     o.SubscriptionList,
 	}
 }
 
@@ -579,13 +543,13 @@ type ResourceCarbonEmissionItemDetailData struct {
 // GetCarbonEmissionData implements the CarbonEmissionDataClassification interface for type ResourceCarbonEmissionItemDetailData.
 func (r *ResourceCarbonEmissionItemDetailData) GetCarbonEmissionData() *CarbonEmissionData {
 	return &CarbonEmissionData{
-		ChangeRatioFor12Months: r.ChangeRatioFor12Months,
-		ChangeRatioForLastMonth: r.ChangeRatioForLastMonth,
-		ChangeValueMonthOverMonth: r.ChangeValueMonthOverMonth,
-		DataType: r.DataType,
-		TotalCarbonEmission: r.TotalCarbonEmission,
+		ChangeRatioFor12Months:         r.ChangeRatioFor12Months,
+		ChangeRatioForLastMonth:        r.ChangeRatioForLastMonth,
+		ChangeValueMonthOverMonth:      r.ChangeValueMonthOverMonth,
+		DataType:                       r.DataType,
+		TotalCarbonEmission:            r.TotalCarbonEmission,
 		TotalCarbonEmission12MonthsAgo: r.TotalCarbonEmission12MonthsAgo,
-		TotalCarbonEmissionLastMonth: r.TotalCarbonEmissionLastMonth,
+		TotalCarbonEmissionLastMonth:   r.TotalCarbonEmissionLastMonth,
 	}
 }
 
@@ -631,13 +595,13 @@ type ResourceCarbonEmissionTopItemMonthlySummaryData struct {
 // GetCarbonEmissionData implements the CarbonEmissionDataClassification interface for type ResourceCarbonEmissionTopItemMonthlySummaryData.
 func (r *ResourceCarbonEmissionTopItemMonthlySummaryData) GetCarbonEmissionData() *CarbonEmissionData {
 	return &CarbonEmissionData{
-		ChangeRatioFor12Months: r.ChangeRatioFor12Months,
-		ChangeRatioForLastMonth: r.ChangeRatioForLastMonth,
-		ChangeValueMonthOverMonth: r.ChangeValueMonthOverMonth,
-		DataType: r.DataType,
-		TotalCarbonEmission: r.TotalCarbonEmission,
+		ChangeRatioFor12Months:         r.ChangeRatioFor12Months,
+		ChangeRatioForLastMonth:        r.ChangeRatioForLastMonth,
+		ChangeValueMonthOverMonth:      r.ChangeValueMonthOverMonth,
+		DataType:                       r.DataType,
+		TotalCarbonEmission:            r.TotalCarbonEmission,
 		TotalCarbonEmission12MonthsAgo: r.TotalCarbonEmission12MonthsAgo,
-		TotalCarbonEmissionLastMonth: r.TotalCarbonEmissionLastMonth,
+		TotalCarbonEmissionLastMonth:   r.TotalCarbonEmissionLastMonth,
 	}
 }
 
@@ -680,13 +644,13 @@ type ResourceCarbonEmissionTopItemsSummaryData struct {
 // GetCarbonEmissionData implements the CarbonEmissionDataClassification interface for type ResourceCarbonEmissionTopItemsSummaryData.
 func (r *ResourceCarbonEmissionTopItemsSummaryData) GetCarbonEmissionData() *CarbonEmissionData {
 	return &CarbonEmissionData{
-		ChangeRatioFor12Months: r.ChangeRatioFor12Months,
-		ChangeRatioForLastMonth: r.ChangeRatioForLastMonth,
-		ChangeValueMonthOverMonth: r.ChangeValueMonthOverMonth,
-		DataType: r.DataType,
-		TotalCarbonEmission: r.TotalCarbonEmission,
+		ChangeRatioFor12Months:         r.ChangeRatioFor12Months,
+		ChangeRatioForLastMonth:        r.ChangeRatioForLastMonth,
+		ChangeValueMonthOverMonth:      r.ChangeValueMonthOverMonth,
+		DataType:                       r.DataType,
+		TotalCarbonEmission:            r.TotalCarbonEmission,
 		TotalCarbonEmission12MonthsAgo: r.TotalCarbonEmission12MonthsAgo,
-		TotalCarbonEmissionLastMonth: r.TotalCarbonEmissionLastMonth,
+		TotalCarbonEmissionLastMonth:   r.TotalCarbonEmissionLastMonth,
 	}
 }
 
@@ -729,13 +693,13 @@ type ResourceGroupCarbonEmissionItemDetailData struct {
 // GetCarbonEmissionData implements the CarbonEmissionDataClassification interface for type ResourceGroupCarbonEmissionItemDetailData.
 func (r *ResourceGroupCarbonEmissionItemDetailData) GetCarbonEmissionData() *CarbonEmissionData {
 	return &CarbonEmissionData{
-		ChangeRatioFor12Months: r.ChangeRatioFor12Months,
-		ChangeRatioForLastMonth: r.ChangeRatioForLastMonth,
-		ChangeValueMonthOverMonth: r.ChangeValueMonthOverMonth,
-		DataType: r.DataType,
-		TotalCarbonEmission: r.TotalCarbonEmission,
+		ChangeRatioFor12Months:         r.ChangeRatioFor12Months,
+		ChangeRatioForLastMonth:        r.ChangeRatioForLastMonth,
+		ChangeValueMonthOverMonth:      r.ChangeValueMonthOverMonth,
+		DataType:                       r.DataType,
+		TotalCarbonEmission:            r.TotalCarbonEmission,
 		TotalCarbonEmission12MonthsAgo: r.TotalCarbonEmission12MonthsAgo,
-		TotalCarbonEmissionLastMonth: r.TotalCarbonEmissionLastMonth,
+		TotalCarbonEmissionLastMonth:   r.TotalCarbonEmissionLastMonth,
 	}
 }
 
@@ -778,13 +742,13 @@ type ResourceGroupCarbonEmissionTopItemMonthlySummaryData struct {
 // GetCarbonEmissionData implements the CarbonEmissionDataClassification interface for type ResourceGroupCarbonEmissionTopItemMonthlySummaryData.
 func (r *ResourceGroupCarbonEmissionTopItemMonthlySummaryData) GetCarbonEmissionData() *CarbonEmissionData {
 	return &CarbonEmissionData{
-		ChangeRatioFor12Months: r.ChangeRatioFor12Months,
-		ChangeRatioForLastMonth: r.ChangeRatioForLastMonth,
-		ChangeValueMonthOverMonth: r.ChangeValueMonthOverMonth,
-		DataType: r.DataType,
-		TotalCarbonEmission: r.TotalCarbonEmission,
+		ChangeRatioFor12Months:         r.ChangeRatioFor12Months,
+		ChangeRatioForLastMonth:        r.ChangeRatioForLastMonth,
+		ChangeValueMonthOverMonth:      r.ChangeValueMonthOverMonth,
+		DataType:                       r.DataType,
+		TotalCarbonEmission:            r.TotalCarbonEmission,
 		TotalCarbonEmission12MonthsAgo: r.TotalCarbonEmission12MonthsAgo,
-		TotalCarbonEmissionLastMonth: r.TotalCarbonEmissionLastMonth,
+		TotalCarbonEmissionLastMonth:   r.TotalCarbonEmissionLastMonth,
 	}
 }
 
@@ -824,13 +788,13 @@ type ResourceGroupCarbonEmissionTopItemsSummaryData struct {
 // GetCarbonEmissionData implements the CarbonEmissionDataClassification interface for type ResourceGroupCarbonEmissionTopItemsSummaryData.
 func (r *ResourceGroupCarbonEmissionTopItemsSummaryData) GetCarbonEmissionData() *CarbonEmissionData {
 	return &CarbonEmissionData{
-		ChangeRatioFor12Months: r.ChangeRatioFor12Months,
-		ChangeRatioForLastMonth: r.ChangeRatioForLastMonth,
-		ChangeValueMonthOverMonth: r.ChangeValueMonthOverMonth,
-		DataType: r.DataType,
-		TotalCarbonEmission: r.TotalCarbonEmission,
+		ChangeRatioFor12Months:         r.ChangeRatioFor12Months,
+		ChangeRatioForLastMonth:        r.ChangeRatioForLastMonth,
+		ChangeValueMonthOverMonth:      r.ChangeValueMonthOverMonth,
+		DataType:                       r.DataType,
+		TotalCarbonEmission:            r.TotalCarbonEmission,
 		TotalCarbonEmission12MonthsAgo: r.TotalCarbonEmission12MonthsAgo,
-		TotalCarbonEmissionLastMonth: r.TotalCarbonEmissionLastMonth,
+		TotalCarbonEmissionLastMonth:   r.TotalCarbonEmissionLastMonth,
 	}
 }
 
@@ -870,13 +834,13 @@ type ResourceTypeCarbonEmissionItemDetailData struct {
 // GetCarbonEmissionData implements the CarbonEmissionDataClassification interface for type ResourceTypeCarbonEmissionItemDetailData.
 func (r *ResourceTypeCarbonEmissionItemDetailData) GetCarbonEmissionData() *CarbonEmissionData {
 	return &CarbonEmissionData{
-		ChangeRatioFor12Months: r.ChangeRatioFor12Months,
-		ChangeRatioForLastMonth: r.ChangeRatioForLastMonth,
-		ChangeValueMonthOverMonth: r.ChangeValueMonthOverMonth,
-		DataType: r.DataType,
-		TotalCarbonEmission: r.TotalCarbonEmission,
+		ChangeRatioFor12Months:         r.ChangeRatioFor12Months,
+		ChangeRatioForLastMonth:        r.ChangeRatioForLastMonth,
+		ChangeValueMonthOverMonth:      r.ChangeValueMonthOverMonth,
+		DataType:                       r.DataType,
+		TotalCarbonEmission:            r.TotalCarbonEmission,
 		TotalCarbonEmission12MonthsAgo: r.TotalCarbonEmission12MonthsAgo,
-		TotalCarbonEmissionLastMonth: r.TotalCarbonEmissionLastMonth,
+		TotalCarbonEmissionLastMonth:   r.TotalCarbonEmissionLastMonth,
 	}
 }
 
@@ -901,7 +865,7 @@ type TopItemsMonthlySummaryReportQueryFilter struct {
 	DateRange *DateRange
 
 	// CONSTANT; Top items monthly summary report type name
-// Field has constant value "TopItemsMonthlySummaryReport", any specified value is ignored.
+	// Field has constant value "TopItemsMonthlySummaryReport", any specified value is ignored.
 	ReportType *string
 
 	// REQUIRED; SubscriptionId list for carbon emissions data
@@ -923,13 +887,13 @@ type TopItemsMonthlySummaryReportQueryFilter struct {
 // GetQueryFilter implements the QueryFilterClassification interface for type TopItemsMonthlySummaryReportQueryFilter.
 func (t *TopItemsMonthlySummaryReportQueryFilter) GetQueryFilter() *QueryFilter {
 	return &QueryFilter{
-		CarbonScopeList: t.CarbonScopeList,
-		DateRange: t.DateRange,
-		LocationList: t.LocationList,
-		ReportType: t.ReportType,
+		CarbonScopeList:      t.CarbonScopeList,
+		DateRange:            t.DateRange,
+		LocationList:         t.LocationList,
+		ReportType:           t.ReportType,
 		ResourceGroupURLList: t.ResourceGroupURLList,
-		ResourceTypeList: t.ResourceTypeList,
-		SubscriptionList: t.SubscriptionList,
+		ResourceTypeList:     t.ResourceTypeList,
+		SubscriptionList:     t.SubscriptionList,
 	}
 }
 
@@ -945,7 +909,7 @@ type TopItemsSummaryReportQueryFilter struct {
 	DateRange *DateRange
 
 	// CONSTANT; Top items summary report type name
-// Field has constant value "TopItemsSummaryReport", any specified value is ignored.
+	// Field has constant value "TopItemsSummaryReport", any specified value is ignored.
 	ReportType *string
 
 	// REQUIRED; SubscriptionId list for carbon emissions data
@@ -967,13 +931,12 @@ type TopItemsSummaryReportQueryFilter struct {
 // GetQueryFilter implements the QueryFilterClassification interface for type TopItemsSummaryReportQueryFilter.
 func (t *TopItemsSummaryReportQueryFilter) GetQueryFilter() *QueryFilter {
 	return &QueryFilter{
-		CarbonScopeList: t.CarbonScopeList,
-		DateRange: t.DateRange,
-		LocationList: t.LocationList,
-		ReportType: t.ReportType,
+		CarbonScopeList:      t.CarbonScopeList,
+		DateRange:            t.DateRange,
+		LocationList:         t.LocationList,
+		ReportType:           t.ReportType,
 		ResourceGroupURLList: t.ResourceGroupURLList,
-		ResourceTypeList: t.ResourceTypeList,
-		SubscriptionList: t.SubscriptionList,
+		ResourceTypeList:     t.ResourceTypeList,
+		SubscriptionList:     t.SubscriptionList,
 	}
 }
-

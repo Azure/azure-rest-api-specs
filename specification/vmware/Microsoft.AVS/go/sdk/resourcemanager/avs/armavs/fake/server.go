@@ -14,7 +14,7 @@ import (
 )
 
 // Server is a fake server for instances of the armavs.Client type.
-type Server struct{
+type Server struct {
 	// AddonsServer contains the fakes for client AddonsClient
 	AddonsServer AddonsServer
 
@@ -92,7 +92,6 @@ type Server struct{
 
 	// WorkloadNetworksServer contains the fakes for client WorkloadNetworksClient
 	WorkloadNetworksServer WorkloadNetworksServer
-
 }
 
 // NewServerTransport creates a new instance of ServerTransport with the provided implementation.
@@ -105,34 +104,34 @@ func NewServerTransport(srv *Server) *ServerTransport {
 // ServerTransport connects instances of armavs.Client to instances of Server.
 // Don't use this type directly, use NewServerTransport instead.
 type ServerTransport struct {
-	srv *Server
-	trMu sync.Mutex
-	trAddonsServer *AddonsServerTransport
-	trAuthorizationsServer *AuthorizationsServerTransport
-	trCloudLinksServer *CloudLinksServerTransport
-	trClustersServer *ClustersServerTransport
-	trDatastoresServer *DatastoresServerTransport
-	trGlobalReachConnectionsServer *GlobalReachConnectionsServerTransport
-	trHcxEnterpriseSitesServer *HcxEnterpriseSitesServerTransport
-	trIscsiPathsServer *IscsiPathsServerTransport
-	trLocationsServer *LocationsServerTransport
-	trOperationsServer *OperationsServerTransport
-	trPlacementPoliciesServer *PlacementPoliciesServerTransport
-	trPrivateCloudsServer *PrivateCloudsServerTransport
-	trScriptCmdletsServer *ScriptCmdletsServerTransport
-	trScriptExecutionsServer *ScriptExecutionsServerTransport
-	trScriptPackagesServer *ScriptPackagesServerTransport
-	trVirtualMachinesServer *VirtualMachinesServerTransport
-	trWorkloadNetworkDhcpConfigurationsServer *WorkloadNetworkDhcpConfigurationsServerTransport
-	trWorkloadNetworkDnsServicesServer *WorkloadNetworkDnsServicesServerTransport
-	trWorkloadNetworkDnsZonesServer *WorkloadNetworkDnsZonesServerTransport
-	trWorkloadNetworkGatewaysServer *WorkloadNetworkGatewaysServerTransport
+	srv                                          *Server
+	trMu                                         sync.Mutex
+	trAddonsServer                               *AddonsServerTransport
+	trAuthorizationsServer                       *AuthorizationsServerTransport
+	trCloudLinksServer                           *CloudLinksServerTransport
+	trClustersServer                             *ClustersServerTransport
+	trDatastoresServer                           *DatastoresServerTransport
+	trGlobalReachConnectionsServer               *GlobalReachConnectionsServerTransport
+	trHcxEnterpriseSitesServer                   *HcxEnterpriseSitesServerTransport
+	trIscsiPathsServer                           *IscsiPathsServerTransport
+	trLocationsServer                            *LocationsServerTransport
+	trOperationsServer                           *OperationsServerTransport
+	trPlacementPoliciesServer                    *PlacementPoliciesServerTransport
+	trPrivateCloudsServer                        *PrivateCloudsServerTransport
+	trScriptCmdletsServer                        *ScriptCmdletsServerTransport
+	trScriptExecutionsServer                     *ScriptExecutionsServerTransport
+	trScriptPackagesServer                       *ScriptPackagesServerTransport
+	trVirtualMachinesServer                      *VirtualMachinesServerTransport
+	trWorkloadNetworkDhcpConfigurationsServer    *WorkloadNetworkDhcpConfigurationsServerTransport
+	trWorkloadNetworkDnsServicesServer           *WorkloadNetworkDnsServicesServerTransport
+	trWorkloadNetworkDnsZonesServer              *WorkloadNetworkDnsZonesServerTransport
+	trWorkloadNetworkGatewaysServer              *WorkloadNetworkGatewaysServerTransport
 	trWorkloadNetworkPortMirroringProfilesServer *WorkloadNetworkPortMirroringProfilesServerTransport
-	trWorkloadNetworkPublicIpsServer *WorkloadNetworkPublicIpsServerTransport
-	trWorkloadNetworkSegmentsServer *WorkloadNetworkSegmentsServerTransport
-	trWorkloadNetworkVirtualMachinesServer *WorkloadNetworkVirtualMachinesServerTransport
-	trWorkloadNetworkVmGroupsServer *WorkloadNetworkVmGroupsServerTransport
-	trWorkloadNetworksServer *WorkloadNetworksServerTransport
+	trWorkloadNetworkPublicIpsServer             *WorkloadNetworkPublicIpsServerTransport
+	trWorkloadNetworkSegmentsServer              *WorkloadNetworkSegmentsServerTransport
+	trWorkloadNetworkVirtualMachinesServer       *WorkloadNetworkVirtualMachinesServerTransport
+	trWorkloadNetworkVmGroupsServer              *WorkloadNetworkVmGroupsServerTransport
+	trWorkloadNetworksServer                     *WorkloadNetworksServerTransport
 }
 
 // Do implements the policy.Transporter interface for ServerTransport.
@@ -153,107 +152,133 @@ func (s *ServerTransport) dispatchToClientFake(req *http.Request, client string)
 	switch client {
 	case "AddonsClient":
 		initServer(&s.trMu, &s.trAddonsServer, func() *AddonsServerTransport {
-		return NewAddonsServerTransport(&s.srv.AddonsServer) })
+			return NewAddonsServerTransport(&s.srv.AddonsServer)
+		})
 		resp, err = s.trAddonsServer.Do(req)
 	case "AuthorizationsClient":
 		initServer(&s.trMu, &s.trAuthorizationsServer, func() *AuthorizationsServerTransport {
-		return NewAuthorizationsServerTransport(&s.srv.AuthorizationsServer) })
+			return NewAuthorizationsServerTransport(&s.srv.AuthorizationsServer)
+		})
 		resp, err = s.trAuthorizationsServer.Do(req)
 	case "CloudLinksClient":
 		initServer(&s.trMu, &s.trCloudLinksServer, func() *CloudLinksServerTransport {
-		return NewCloudLinksServerTransport(&s.srv.CloudLinksServer) })
+			return NewCloudLinksServerTransport(&s.srv.CloudLinksServer)
+		})
 		resp, err = s.trCloudLinksServer.Do(req)
 	case "ClustersClient":
 		initServer(&s.trMu, &s.trClustersServer, func() *ClustersServerTransport {
-		return NewClustersServerTransport(&s.srv.ClustersServer) })
+			return NewClustersServerTransport(&s.srv.ClustersServer)
+		})
 		resp, err = s.trClustersServer.Do(req)
 	case "DatastoresClient":
 		initServer(&s.trMu, &s.trDatastoresServer, func() *DatastoresServerTransport {
-		return NewDatastoresServerTransport(&s.srv.DatastoresServer) })
+			return NewDatastoresServerTransport(&s.srv.DatastoresServer)
+		})
 		resp, err = s.trDatastoresServer.Do(req)
 	case "GlobalReachConnectionsClient":
 		initServer(&s.trMu, &s.trGlobalReachConnectionsServer, func() *GlobalReachConnectionsServerTransport {
-		return NewGlobalReachConnectionsServerTransport(&s.srv.GlobalReachConnectionsServer) })
+			return NewGlobalReachConnectionsServerTransport(&s.srv.GlobalReachConnectionsServer)
+		})
 		resp, err = s.trGlobalReachConnectionsServer.Do(req)
 	case "HcxEnterpriseSitesClient":
 		initServer(&s.trMu, &s.trHcxEnterpriseSitesServer, func() *HcxEnterpriseSitesServerTransport {
-		return NewHcxEnterpriseSitesServerTransport(&s.srv.HcxEnterpriseSitesServer) })
+			return NewHcxEnterpriseSitesServerTransport(&s.srv.HcxEnterpriseSitesServer)
+		})
 		resp, err = s.trHcxEnterpriseSitesServer.Do(req)
 	case "IscsiPathsClient":
 		initServer(&s.trMu, &s.trIscsiPathsServer, func() *IscsiPathsServerTransport {
-		return NewIscsiPathsServerTransport(&s.srv.IscsiPathsServer) })
+			return NewIscsiPathsServerTransport(&s.srv.IscsiPathsServer)
+		})
 		resp, err = s.trIscsiPathsServer.Do(req)
 	case "LocationsClient":
 		initServer(&s.trMu, &s.trLocationsServer, func() *LocationsServerTransport {
-		return NewLocationsServerTransport(&s.srv.LocationsServer) })
+			return NewLocationsServerTransport(&s.srv.LocationsServer)
+		})
 		resp, err = s.trLocationsServer.Do(req)
 	case "OperationsClient":
 		initServer(&s.trMu, &s.trOperationsServer, func() *OperationsServerTransport {
-		return NewOperationsServerTransport(&s.srv.OperationsServer) })
+			return NewOperationsServerTransport(&s.srv.OperationsServer)
+		})
 		resp, err = s.trOperationsServer.Do(req)
 	case "PlacementPoliciesClient":
 		initServer(&s.trMu, &s.trPlacementPoliciesServer, func() *PlacementPoliciesServerTransport {
-		return NewPlacementPoliciesServerTransport(&s.srv.PlacementPoliciesServer) })
+			return NewPlacementPoliciesServerTransport(&s.srv.PlacementPoliciesServer)
+		})
 		resp, err = s.trPlacementPoliciesServer.Do(req)
 	case "PrivateCloudsClient":
 		initServer(&s.trMu, &s.trPrivateCloudsServer, func() *PrivateCloudsServerTransport {
-		return NewPrivateCloudsServerTransport(&s.srv.PrivateCloudsServer) })
+			return NewPrivateCloudsServerTransport(&s.srv.PrivateCloudsServer)
+		})
 		resp, err = s.trPrivateCloudsServer.Do(req)
 	case "ScriptCmdletsClient":
 		initServer(&s.trMu, &s.trScriptCmdletsServer, func() *ScriptCmdletsServerTransport {
-		return NewScriptCmdletsServerTransport(&s.srv.ScriptCmdletsServer) })
+			return NewScriptCmdletsServerTransport(&s.srv.ScriptCmdletsServer)
+		})
 		resp, err = s.trScriptCmdletsServer.Do(req)
 	case "ScriptExecutionsClient":
 		initServer(&s.trMu, &s.trScriptExecutionsServer, func() *ScriptExecutionsServerTransport {
-		return NewScriptExecutionsServerTransport(&s.srv.ScriptExecutionsServer) })
+			return NewScriptExecutionsServerTransport(&s.srv.ScriptExecutionsServer)
+		})
 		resp, err = s.trScriptExecutionsServer.Do(req)
 	case "ScriptPackagesClient":
 		initServer(&s.trMu, &s.trScriptPackagesServer, func() *ScriptPackagesServerTransport {
-		return NewScriptPackagesServerTransport(&s.srv.ScriptPackagesServer) })
+			return NewScriptPackagesServerTransport(&s.srv.ScriptPackagesServer)
+		})
 		resp, err = s.trScriptPackagesServer.Do(req)
 	case "VirtualMachinesClient":
 		initServer(&s.trMu, &s.trVirtualMachinesServer, func() *VirtualMachinesServerTransport {
-		return NewVirtualMachinesServerTransport(&s.srv.VirtualMachinesServer) })
+			return NewVirtualMachinesServerTransport(&s.srv.VirtualMachinesServer)
+		})
 		resp, err = s.trVirtualMachinesServer.Do(req)
 	case "WorkloadNetworkDhcpConfigurationsClient":
 		initServer(&s.trMu, &s.trWorkloadNetworkDhcpConfigurationsServer, func() *WorkloadNetworkDhcpConfigurationsServerTransport {
-		return NewWorkloadNetworkDhcpConfigurationsServerTransport(&s.srv.WorkloadNetworkDhcpConfigurationsServer) })
+			return NewWorkloadNetworkDhcpConfigurationsServerTransport(&s.srv.WorkloadNetworkDhcpConfigurationsServer)
+		})
 		resp, err = s.trWorkloadNetworkDhcpConfigurationsServer.Do(req)
 	case "WorkloadNetworkDnsServicesClient":
 		initServer(&s.trMu, &s.trWorkloadNetworkDnsServicesServer, func() *WorkloadNetworkDnsServicesServerTransport {
-		return NewWorkloadNetworkDnsServicesServerTransport(&s.srv.WorkloadNetworkDnsServicesServer) })
+			return NewWorkloadNetworkDnsServicesServerTransport(&s.srv.WorkloadNetworkDnsServicesServer)
+		})
 		resp, err = s.trWorkloadNetworkDnsServicesServer.Do(req)
 	case "WorkloadNetworkDnsZonesClient":
 		initServer(&s.trMu, &s.trWorkloadNetworkDnsZonesServer, func() *WorkloadNetworkDnsZonesServerTransport {
-		return NewWorkloadNetworkDnsZonesServerTransport(&s.srv.WorkloadNetworkDnsZonesServer) })
+			return NewWorkloadNetworkDnsZonesServerTransport(&s.srv.WorkloadNetworkDnsZonesServer)
+		})
 		resp, err = s.trWorkloadNetworkDnsZonesServer.Do(req)
 	case "WorkloadNetworkGatewaysClient":
 		initServer(&s.trMu, &s.trWorkloadNetworkGatewaysServer, func() *WorkloadNetworkGatewaysServerTransport {
-		return NewWorkloadNetworkGatewaysServerTransport(&s.srv.WorkloadNetworkGatewaysServer) })
+			return NewWorkloadNetworkGatewaysServerTransport(&s.srv.WorkloadNetworkGatewaysServer)
+		})
 		resp, err = s.trWorkloadNetworkGatewaysServer.Do(req)
 	case "WorkloadNetworkPortMirroringProfilesClient":
 		initServer(&s.trMu, &s.trWorkloadNetworkPortMirroringProfilesServer, func() *WorkloadNetworkPortMirroringProfilesServerTransport {
-		return NewWorkloadNetworkPortMirroringProfilesServerTransport(&s.srv.WorkloadNetworkPortMirroringProfilesServer) })
+			return NewWorkloadNetworkPortMirroringProfilesServerTransport(&s.srv.WorkloadNetworkPortMirroringProfilesServer)
+		})
 		resp, err = s.trWorkloadNetworkPortMirroringProfilesServer.Do(req)
 	case "WorkloadNetworkPublicIpsClient":
 		initServer(&s.trMu, &s.trWorkloadNetworkPublicIpsServer, func() *WorkloadNetworkPublicIpsServerTransport {
-		return NewWorkloadNetworkPublicIpsServerTransport(&s.srv.WorkloadNetworkPublicIpsServer) })
+			return NewWorkloadNetworkPublicIpsServerTransport(&s.srv.WorkloadNetworkPublicIpsServer)
+		})
 		resp, err = s.trWorkloadNetworkPublicIpsServer.Do(req)
 	case "WorkloadNetworkSegmentsClient":
 		initServer(&s.trMu, &s.trWorkloadNetworkSegmentsServer, func() *WorkloadNetworkSegmentsServerTransport {
-		return NewWorkloadNetworkSegmentsServerTransport(&s.srv.WorkloadNetworkSegmentsServer) })
+			return NewWorkloadNetworkSegmentsServerTransport(&s.srv.WorkloadNetworkSegmentsServer)
+		})
 		resp, err = s.trWorkloadNetworkSegmentsServer.Do(req)
 	case "WorkloadNetworkVirtualMachinesClient":
 		initServer(&s.trMu, &s.trWorkloadNetworkVirtualMachinesServer, func() *WorkloadNetworkVirtualMachinesServerTransport {
-		return NewWorkloadNetworkVirtualMachinesServerTransport(&s.srv.WorkloadNetworkVirtualMachinesServer) })
+			return NewWorkloadNetworkVirtualMachinesServerTransport(&s.srv.WorkloadNetworkVirtualMachinesServer)
+		})
 		resp, err = s.trWorkloadNetworkVirtualMachinesServer.Do(req)
 	case "WorkloadNetworkVmGroupsClient":
 		initServer(&s.trMu, &s.trWorkloadNetworkVmGroupsServer, func() *WorkloadNetworkVmGroupsServerTransport {
-		return NewWorkloadNetworkVmGroupsServerTransport(&s.srv.WorkloadNetworkVmGroupsServer) })
+			return NewWorkloadNetworkVmGroupsServerTransport(&s.srv.WorkloadNetworkVmGroupsServer)
+		})
 		resp, err = s.trWorkloadNetworkVmGroupsServer.Do(req)
 	case "WorkloadNetworksClient":
 		initServer(&s.trMu, &s.trWorkloadNetworksServer, func() *WorkloadNetworksServerTransport {
-		return NewWorkloadNetworksServerTransport(&s.srv.WorkloadNetworksServer) })
+			return NewWorkloadNetworksServerTransport(&s.srv.WorkloadNetworksServer)
+		})
 		resp, err = s.trWorkloadNetworksServer.Do(req)
 	default:
 		err = fmt.Errorf("unhandled client %s", client)
@@ -261,4 +286,3 @@ func (s *ServerTransport) dispatchToClientFake(req *http.Request, client string)
 
 	return resp, err
 }
-

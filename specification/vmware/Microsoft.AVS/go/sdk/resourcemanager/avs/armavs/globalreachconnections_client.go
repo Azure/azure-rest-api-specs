@@ -31,7 +31,7 @@ func NewGlobalReachConnectionsClient(credential azcore.TokenCredential, options 
 		return nil, err
 	}
 	client := &GlobalReachConnectionsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -41,12 +41,12 @@ func NewGlobalReachConnectionsClient(credential azcore.TokenCredential, options 
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
 //   - globalReachConnectionName - Name of the global reach connection
-//   - resource - Resource create parameters.
+//   - globalReachConnection - Resource create parameters.
 //   - options - GlobalReachConnectionsClientCreateOrUpdateOptions contains the optional parameters for the GlobalReachConnectionsClient.CreateOrUpdate
 //     method.
-func (client *GlobalReachConnectionsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, globalReachConnectionName string, resource GlobalReachConnection, options *GlobalReachConnectionsClientCreateOrUpdateOptions) (*runtime.Poller[GlobalReachConnectionsClientCreateOrUpdateResponse], error) {
+func (client *GlobalReachConnectionsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, globalReachConnectionName string, globalReachConnection GlobalReachConnection, options *GlobalReachConnectionsClientCreateOrUpdateOptions) (*runtime.Poller[GlobalReachConnectionsClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
-		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, privateCloudName, globalReachConnectionName, resource, options)
+		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, privateCloudName, globalReachConnectionName, globalReachConnection, options)
 		if err != nil {
 			return nil, err
 		}
@@ -58,10 +58,10 @@ func (client *GlobalReachConnectionsClient) BeginCreateOrUpdate(ctx context.Cont
 }
 
 // CreateOrUpdate - Create a GlobalReachConnection
-func (client *GlobalReachConnectionsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, globalReachConnectionName string, resource GlobalReachConnection, options *GlobalReachConnectionsClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *GlobalReachConnectionsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, globalReachConnectionName string, globalReachConnection GlobalReachConnection, options *GlobalReachConnectionsClientCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "GlobalReachConnectionsClient.BeginCreateOrUpdate")
-	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, globalReachConnectionName, resource, options)
+	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, globalReachConnectionName, globalReachConnection, options)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ func (client *GlobalReachConnectionsClient) createOrUpdate(ctx context.Context, 
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *GlobalReachConnectionsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, globalReachConnectionName string, resource GlobalReachConnection, options *GlobalReachConnectionsClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *GlobalReachConnectionsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, globalReachConnectionName string, globalReachConnection GlobalReachConnection, options *GlobalReachConnectionsClientCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/globalReachConnections/{globalReachConnectionName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -104,9 +104,9 @@ func (client *GlobalReachConnectionsClient) createOrUpdateCreateRequest(ctx cont
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
-	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+	if err := runtime.MarshalAsJSON(req, globalReachConnection); err != nil {
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -250,13 +250,13 @@ func (client *GlobalReachConnectionsClient) getHandleResponse(resp *http.Respons
 //   - privateCloudName - Name of the private cloud
 //   - options - GlobalReachConnectionsClientListByPrivateCloudOptions contains the optional parameters for the GlobalReachConnectionsClient.NewListByPrivateCloudPager
 //     method.
-func (client *GlobalReachConnectionsClient) NewListByPrivateCloudPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *GlobalReachConnectionsClientListByPrivateCloudOptions) (*runtime.Pager[GlobalReachConnectionsClientListByPrivateCloudResponse]) {
+func (client *GlobalReachConnectionsClient) NewListByPrivateCloudPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *GlobalReachConnectionsClientListByPrivateCloudOptions) *runtime.Pager[GlobalReachConnectionsClientListByPrivateCloudResponse] {
 	return runtime.NewPager(runtime.PagingHandler[GlobalReachConnectionsClientListByPrivateCloudResponse]{
 		More: func(page GlobalReachConnectionsClientListByPrivateCloudResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *GlobalReachConnectionsClientListByPrivateCloudResponse) (GlobalReachConnectionsClientListByPrivateCloudResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "GlobalReachConnectionsClient.NewListByPrivateCloudPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "GlobalReachConnectionsClient.NewListByPrivateCloudPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -268,7 +268,7 @@ func (client *GlobalReachConnectionsClient) NewListByPrivateCloudPager(subscript
 				return GlobalReachConnectionsClientListByPrivateCloudResponse{}, err
 			}
 			return client.listByPrivateCloudHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -306,4 +306,3 @@ func (client *GlobalReachConnectionsClient) listByPrivateCloudHandleResponse(res
 	}
 	return result, nil
 }
-

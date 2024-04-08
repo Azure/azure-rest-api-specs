@@ -7,7 +7,7 @@ package armcarbonoptimization
 const host = "https://management.azure.com"
 
 const (
-	moduleName = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/carbonoptimization/armcarbonoptimization"
+	moduleName    = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/carbonoptimization/armcarbonoptimization"
 	moduleVersion = "v0.1.0"
 )
 
@@ -23,7 +23,7 @@ const (
 
 // PossibleAccessDecisionEnumValues returns the possible values for the AccessDecisionEnum const type.
 func PossibleAccessDecisionEnumValues() []AccessDecisionEnum {
-	return []AccessDecisionEnum{	
+	return []AccessDecisionEnum{
 		AccessDecisionEnumAllowed,
 		AccessDecisionEnumDenied,
 	}
@@ -39,7 +39,7 @@ const (
 
 // PossibleActionTypeValues returns the possible values for the ActionType const type.
 func PossibleActionTypeValues() []ActionType {
-	return []ActionType{	
+	return []ActionType{
 		ActionTypeInternal,
 	}
 }
@@ -64,7 +64,7 @@ const (
 
 // PossibleCategoryTypeEnumValues returns the possible values for the CategoryTypeEnum const type.
 func PossibleCategoryTypeEnumValues() []CategoryTypeEnum {
-	return []CategoryTypeEnum{	
+	return []CategoryTypeEnum{
 		CategoryTypeEnumLocation,
 		CategoryTypeEnumResource,
 		CategoryTypeEnumResourceGroup,
@@ -88,7 +88,7 @@ const (
 
 // PossibleEmissionScopeEnumValues returns the possible values for the EmissionScopeEnum const type.
 func PossibleEmissionScopeEnumValues() []EmissionScopeEnum {
-	return []EmissionScopeEnum{	
+	return []EmissionScopeEnum{
 		EmissionScopeEnumScope1,
 		EmissionScopeEnumScope2,
 		EmissionScopeEnumScope3,
@@ -110,10 +110,9 @@ const (
 
 // PossibleOriginValues returns the possible values for the Origin const type.
 func PossibleOriginValues() []Origin {
-	return []Origin{	
+	return []Origin{
 		OriginSystem,
 		OriginUser,
 		OriginUserSystem,
 	}
 }
-

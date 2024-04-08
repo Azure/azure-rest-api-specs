@@ -13,4 +13,3 @@ type TargetPropertiesClassification interface {
 	// GetTargetProperties returns the TargetProperties content of the underlying type.
 	GetTargetProperties() *TargetProperties
 }
-

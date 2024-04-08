@@ -31,7 +31,7 @@ func NewDeletedServicesClient(credential azcore.TokenCredential, options *arm.Cl
 		return nil, err
 	}
 	client := &DeletedServicesClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -152,13 +152,13 @@ func (client *DeletedServicesClient) getHandleResponse(resp *http.Response) (Del
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - options - DeletedServicesClientListOptions contains the optional parameters for the DeletedServicesClient.NewListPager
 //     method.
-func (client *DeletedServicesClient) NewListPager(subscriptionID string, resourceGroupName string, options *DeletedServicesClientListOptions) (*runtime.Pager[DeletedServicesClientListResponse]) {
+func (client *DeletedServicesClient) NewListPager(subscriptionID string, resourceGroupName string, options *DeletedServicesClientListOptions) *runtime.Pager[DeletedServicesClientListResponse] {
 	return runtime.NewPager(runtime.PagingHandler[DeletedServicesClientListResponse]{
 		More: func(page DeletedServicesClientListResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *DeletedServicesClientListResponse) (DeletedServicesClientListResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DeletedServicesClient.NewListPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DeletedServicesClient.NewListPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -170,7 +170,7 @@ func (client *DeletedServicesClient) NewListPager(subscriptionID string, resourc
 				return DeletedServicesClientListResponse{}, err
 			}
 			return client.listHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -212,13 +212,13 @@ func (client *DeletedServicesClient) listHandleResponse(resp *http.Response) (De
 //   - subscriptionID - The ID of the target subscription.
 //   - options - DeletedServicesClientListBySubscriptionOptions contains the optional parameters for the DeletedServicesClient.NewListBySubscriptionPager
 //     method.
-func (client *DeletedServicesClient) NewListBySubscriptionPager(subscriptionID string, options *DeletedServicesClientListBySubscriptionOptions) (*runtime.Pager[DeletedServicesClientListBySubscriptionResponse]) {
+func (client *DeletedServicesClient) NewListBySubscriptionPager(subscriptionID string, options *DeletedServicesClientListBySubscriptionOptions) *runtime.Pager[DeletedServicesClientListBySubscriptionResponse] {
 	return runtime.NewPager(runtime.PagingHandler[DeletedServicesClientListBySubscriptionResponse]{
 		More: func(page DeletedServicesClientListBySubscriptionResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *DeletedServicesClientListBySubscriptionResponse) (DeletedServicesClientListBySubscriptionResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DeletedServicesClient.NewListBySubscriptionPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DeletedServicesClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -230,7 +230,7 @@ func (client *DeletedServicesClient) NewListBySubscriptionPager(subscriptionID s
 				return DeletedServicesClientListBySubscriptionResponse{}, err
 			}
 			return client.listBySubscriptionHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -260,4 +260,3 @@ func (client *DeletedServicesClient) listBySubscriptionHandleResponse(resp *http
 	}
 	return result, nil
 }
-

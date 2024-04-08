@@ -7,7 +7,7 @@ package armkubernetesruntime
 const host = "https://management.azure.com"
 
 const (
-	moduleName = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/kubernetesruntime/armkubernetesruntime"
+	moduleName    = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/kubernetesruntime/armkubernetesruntime"
 	moduleVersion = "v0.1.0"
 )
 
@@ -23,7 +23,7 @@ const (
 
 // PossibleAccessModeValues returns the possible values for the AccessMode const type.
 func PossibleAccessModeValues() []AccessMode {
-	return []AccessMode{	
+	return []AccessMode{
 		AccessModeReadWriteMany,
 		AccessModeReadWriteOnce,
 	}
@@ -39,7 +39,7 @@ const (
 
 // PossibleActionTypeValues returns the possible values for the ActionType const type.
 func PossibleActionTypeValues() []ActionType {
-	return []ActionType{	
+	return []ActionType{
 		ActionTypeInternal,
 	}
 }
@@ -58,7 +58,7 @@ const (
 
 // PossibleAdvertiseModeValues returns the possible values for the AdvertiseMode const type.
 func PossibleAdvertiseModeValues() []AdvertiseMode {
-	return []AdvertiseMode{	
+	return []AdvertiseMode{
 		AdvertiseModeARP,
 		AdvertiseModeBGP,
 		AdvertiseModeBoth,
@@ -81,7 +81,7 @@ const (
 
 // PossibleCreatedByTypeValues returns the possible values for the CreatedByType const type.
 func PossibleCreatedByTypeValues() []CreatedByType {
-	return []CreatedByType{	
+	return []CreatedByType{
 		CreatedByTypeApplication,
 		CreatedByTypeKey,
 		CreatedByTypeManagedIdentity,
@@ -101,7 +101,7 @@ const (
 
 // PossibleDataResilienceTierValues returns the possible values for the DataResilienceTier const type.
 func PossibleDataResilienceTierValues() []DataResilienceTier {
-	return []DataResilienceTier{	
+	return []DataResilienceTier{
 		DataResilienceTierDataResilient,
 		DataResilienceTierNotDataResilient,
 	}
@@ -123,7 +123,7 @@ const (
 
 // PossibleFailoverTierValues returns the possible values for the FailoverTier const type.
 func PossibleFailoverTierValues() []FailoverTier {
-	return []FailoverTier{	
+	return []FailoverTier{
 		FailoverTierFast,
 		FailoverTierNotAvailable,
 		FailoverTierSlow,
@@ -143,7 +143,7 @@ const (
 
 // PossibleNfsDirectoryActionOnVolumeDeletionValues returns the possible values for the NfsDirectoryActionOnVolumeDeletion const type.
 func PossibleNfsDirectoryActionOnVolumeDeletionValues() []NfsDirectoryActionOnVolumeDeletion {
-	return []NfsDirectoryActionOnVolumeDeletion{	
+	return []NfsDirectoryActionOnVolumeDeletion{
 		NfsDirectoryActionOnVolumeDeletionDelete,
 		NfsDirectoryActionOnVolumeDeletionRetain,
 	}
@@ -164,7 +164,7 @@ const (
 
 // PossibleOriginValues returns the possible values for the Origin const type.
 func PossibleOriginValues() []Origin {
-	return []Origin{	
+	return []Origin{
 		OriginSystem,
 		OriginUser,
 		OriginUserSystem,
@@ -189,7 +189,7 @@ const (
 
 // PossiblePerformanceTierValues returns the possible values for the PerformanceTier const type.
 func PossiblePerformanceTierValues() []PerformanceTier {
-	return []PerformanceTier{	
+	return []PerformanceTier{
 		PerformanceTierBasic,
 		PerformanceTierPremium,
 		PerformanceTierStandard,
@@ -220,7 +220,7 @@ const (
 
 // PossibleProvisioningStateValues returns the possible values for the ProvisioningState const type.
 func PossibleProvisioningStateValues() []ProvisioningState {
-	return []ProvisioningState{	
+	return []ProvisioningState{
 		ProvisioningStateAccepted,
 		ProvisioningStateCanceled,
 		ProvisioningStateDeleting,
@@ -228,27 +228,6 @@ func PossibleProvisioningStateValues() []ProvisioningState {
 		ProvisioningStateProvisioning,
 		ProvisioningStateSucceeded,
 		ProvisioningStateUpdating,
-	}
-}
-
-// ResourceProvisioningState - The provisioning state of a resource type.
-type ResourceProvisioningState string
-
-const (
-	// ResourceProvisioningStateCanceled - Resource creation was canceled.
-	ResourceProvisioningStateCanceled ResourceProvisioningState = "Canceled"
-	// ResourceProvisioningStateFailed - Resource creation failed.
-	ResourceProvisioningStateFailed ResourceProvisioningState = "Failed"
-	// ResourceProvisioningStateSucceeded - Resource has been created.
-	ResourceProvisioningStateSucceeded ResourceProvisioningState = "Succeeded"
-)
-
-// PossibleResourceProvisioningStateValues returns the possible values for the ResourceProvisioningState const type.
-func PossibleResourceProvisioningStateValues() []ResourceProvisioningState {
-	return []ResourceProvisioningState{	
-		ResourceProvisioningStateCanceled,
-		ResourceProvisioningStateFailed,
-		ResourceProvisioningStateSucceeded,
 	}
 }
 
@@ -270,7 +249,7 @@ const (
 
 // PossibleSCTypeValues returns the possible values for the SCType const type.
 func PossibleSCTypeValues() []SCType {
-	return []SCType{	
+	return []SCType{
 		SCTypeBlob,
 		SCTypeNFS,
 		SCTypeNative,
@@ -291,7 +270,7 @@ const (
 
 // PossibleVolumeBindingModeValues returns the possible values for the VolumeBindingMode const type.
 func PossibleVolumeBindingModeValues() []VolumeBindingMode {
-	return []VolumeBindingMode{	
+	return []VolumeBindingMode{
 		VolumeBindingModeImmediate,
 		VolumeBindingModeWaitForFirstConsumer,
 	}
@@ -309,9 +288,8 @@ const (
 
 // PossibleVolumeExpansionValues returns the possible values for the VolumeExpansion const type.
 func PossibleVolumeExpansionValues() []VolumeExpansion {
-	return []VolumeExpansion{	
+	return []VolumeExpansion{
 		VolumeExpansionAllow,
 		VolumeExpansionDisallow,
 	}
 }
-

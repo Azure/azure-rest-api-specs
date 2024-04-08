@@ -74,4 +74,3 @@ type AzurePlaywrightServiceQuotasClientListBySubscriptionResponse struct {
 	// The response of a Quota list operation.
 	QuotaListResult
 }
-

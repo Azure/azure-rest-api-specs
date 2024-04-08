@@ -31,7 +31,7 @@ func NewApiDefinitionsClient(credential azcore.TokenCredential, options *arm.Cli
 		return nil, err
 	}
 	client := &ApiDefinitionsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -107,8 +107,8 @@ func (client *ApiDefinitionsClient) createOrUpdateCreateRequest(ctx context.Cont
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, payload); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -277,8 +277,8 @@ func (client *ApiDefinitionsClient) exportSpecificationCreateRequest(ctx context
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, payload); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -517,8 +517,8 @@ func (client *ApiDefinitionsClient) importSpecificationCreateRequest(ctx context
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, payload); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -530,13 +530,13 @@ func (client *ApiDefinitionsClient) importSpecificationCreateRequest(ctx context
 //   - apiName - The name of the API.
 //   - versionName - The name of the API version.
 //   - options - ApiDefinitionsClientListOptions contains the optional parameters for the ApiDefinitionsClient.NewListPager method.
-func (client *ApiDefinitionsClient) NewListPager(subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, options *ApiDefinitionsClientListOptions) (*runtime.Pager[ApiDefinitionsClientListResponse]) {
+func (client *ApiDefinitionsClient) NewListPager(subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, options *ApiDefinitionsClientListOptions) *runtime.Pager[ApiDefinitionsClientListResponse] {
 	return runtime.NewPager(runtime.PagingHandler[ApiDefinitionsClientListResponse]{
 		More: func(page ApiDefinitionsClientListResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *ApiDefinitionsClientListResponse) (ApiDefinitionsClientListResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ApiDefinitionsClient.NewListPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ApiDefinitionsClient.NewListPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -548,7 +548,7 @@ func (client *ApiDefinitionsClient) NewListPager(subscriptionID string, resource
 				return ApiDefinitionsClientListResponse{}, err
 			}
 			return client.listHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -601,4 +601,3 @@ func (client *ApiDefinitionsClient) listHandleResponse(resp *http.Response) (Api
 	}
 	return result, nil
 }
-

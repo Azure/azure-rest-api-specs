@@ -31,7 +31,7 @@ func NewIscsiPathsClient(credential azcore.TokenCredential, options *arm.ClientO
 		return nil, err
 	}
 	client := &IscsiPathsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -100,8 +100,8 @@ func (client *IscsiPathsClient) createOrUpdateCreateRequest(ctx context.Context,
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -233,13 +233,13 @@ func (client *IscsiPathsClient) getHandleResponse(resp *http.Response) (IscsiPat
 //   - privateCloudName - Name of the private cloud
 //   - options - IscsiPathsClientListByPrivateCloudOptions contains the optional parameters for the IscsiPathsClient.NewListByPrivateCloudPager
 //     method.
-func (client *IscsiPathsClient) NewListByPrivateCloudPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *IscsiPathsClientListByPrivateCloudOptions) (*runtime.Pager[IscsiPathsClientListByPrivateCloudResponse]) {
+func (client *IscsiPathsClient) NewListByPrivateCloudPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *IscsiPathsClientListByPrivateCloudOptions) *runtime.Pager[IscsiPathsClientListByPrivateCloudResponse] {
 	return runtime.NewPager(runtime.PagingHandler[IscsiPathsClientListByPrivateCloudResponse]{
 		More: func(page IscsiPathsClientListByPrivateCloudResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *IscsiPathsClientListByPrivateCloudResponse) (IscsiPathsClientListByPrivateCloudResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "IscsiPathsClient.NewListByPrivateCloudPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "IscsiPathsClient.NewListByPrivateCloudPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -251,7 +251,7 @@ func (client *IscsiPathsClient) NewListByPrivateCloudPager(subscriptionID string
 				return IscsiPathsClientListByPrivateCloudResponse{}, err
 			}
 			return client.listByPrivateCloudHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -289,4 +289,3 @@ func (client *IscsiPathsClient) listByPrivateCloudHandleResponse(resp *http.Resp
 	}
 	return result, nil
 }
-

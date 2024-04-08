@@ -16,11 +16,10 @@ import (
 )
 
 // AzureSphereOperationsServer is a fake server for instances of the armsphere.AzureSphereOperationsClient type.
-type AzureSphereOperationsServer struct{
+type AzureSphereOperationsServer struct {
 	// NewListPager is the fake for method AzureSphereOperationsClient.NewListPager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListPager func(options *armsphere.AzureSphereOperationsClientListOptions) (resp azfake.PagerResponder[armsphere.AzureSphereOperationsClientListResponse])
-
 }
 
 // NewAzureSphereOperationsServerTransport creates a new instance of AzureSphereOperationsServerTransport with the provided implementation.
@@ -28,7 +27,7 @@ type AzureSphereOperationsServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewAzureSphereOperationsServerTransport(srv *AzureSphereOperationsServer) *AzureSphereOperationsServerTransport {
 	return &AzureSphereOperationsServerTransport{
-		srv: srv,
+		srv:          srv,
 		newListPager: newTracker[azfake.PagerResponder[armsphere.AzureSphereOperationsClientListResponse]](),
 	}
 }
@@ -36,7 +35,7 @@ func NewAzureSphereOperationsServerTransport(srv *AzureSphereOperationsServer) *
 // AzureSphereOperationsServerTransport connects instances of armsphere.AzureSphereOperationsClient to instances of AzureSphereOperationsServer.
 // Don't use this type directly, use NewAzureSphereOperationsServerTransport instead.
 type AzureSphereOperationsServerTransport struct {
-	srv *AzureSphereOperationsServer
+	srv          *AzureSphereOperationsServer
 	newListPager *tracker[azfake.PagerResponder[armsphere.AzureSphereOperationsClientListResponse]]
 }
 
@@ -71,7 +70,7 @@ func (a *AzureSphereOperationsServerTransport) dispatchNewListPager(req *http.Re
 	}
 	newListPager := a.newListPager.get(req)
 	if newListPager == nil {
-resp := a.srv.NewListPager(nil)
+		resp := a.srv.NewListPager(nil)
 		newListPager = &resp
 		a.newListPager.add(req, newListPager)
 		server.PagerResponderInjectNextLinks(newListPager, req, func(page *armsphere.AzureSphereOperationsClientListResponse, createLink func() string) {
@@ -91,4 +90,3 @@ resp := a.srv.NewListPager(nil)
 	}
 	return resp, nil
 }
-

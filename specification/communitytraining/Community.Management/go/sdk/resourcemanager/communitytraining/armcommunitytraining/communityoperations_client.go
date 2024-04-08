@@ -28,7 +28,7 @@ func NewCommunityOperationsClient(credential azcore.TokenCredential, options *ar
 		return nil, err
 	}
 	client := &CommunityOperationsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -36,13 +36,13 @@ func NewCommunityOperationsClient(credential azcore.TokenCredential, options *ar
 // NewListPager - List the operations for the provider
 //   - options - CommunityOperationsClientListOptions contains the optional parameters for the CommunityOperationsClient.NewListPager
 //     method.
-func (client *CommunityOperationsClient) NewListPager(options *CommunityOperationsClientListOptions) (*runtime.Pager[CommunityOperationsClientListResponse]) {
+func (client *CommunityOperationsClient) NewListPager(options *CommunityOperationsClientListOptions) *runtime.Pager[CommunityOperationsClientListResponse] {
 	return runtime.NewPager(runtime.PagingHandler[CommunityOperationsClientListResponse]{
 		More: func(page CommunityOperationsClientListResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *CommunityOperationsClientListResponse) (CommunityOperationsClientListResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "CommunityOperationsClient.NewListPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "CommunityOperationsClient.NewListPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -54,7 +54,7 @@ func (client *CommunityOperationsClient) NewListPager(options *CommunityOperatio
 				return CommunityOperationsClientListResponse{}, err
 			}
 			return client.listHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -80,4 +80,3 @@ func (client *CommunityOperationsClient) listHandleResponse(resp *http.Response)
 	}
 	return result, nil
 }
-

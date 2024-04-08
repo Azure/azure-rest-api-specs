@@ -14,13 +14,12 @@ import (
 )
 
 // CarbonServer is a fake server for instances of the armcarbonoptimization.CarbonClient type.
-type CarbonServer struct{
+type CarbonServer struct {
 	// CarbonCarbonServiceServer contains the fakes for client CarbonCarbonServiceClient
 	CarbonCarbonServiceServer CarbonCarbonServiceServer
 
 	// CarbonOperationsServer contains the fakes for client CarbonOperationsClient
 	CarbonOperationsServer CarbonOperationsServer
-
 }
 
 // NewCarbonServerTransport creates a new instance of CarbonServerTransport with the provided implementation.
@@ -33,10 +32,10 @@ func NewCarbonServerTransport(srv *CarbonServer) *CarbonServerTransport {
 // CarbonServerTransport connects instances of armcarbonoptimization.CarbonClient to instances of CarbonServer.
 // Don't use this type directly, use NewCarbonServerTransport instead.
 type CarbonServerTransport struct {
-	srv *CarbonServer
-	trMu sync.Mutex
+	srv                         *CarbonServer
+	trMu                        sync.Mutex
 	trCarbonCarbonServiceServer *CarbonCarbonServiceServerTransport
-	trCarbonOperationsServer *CarbonOperationsServerTransport
+	trCarbonOperationsServer    *CarbonOperationsServerTransport
 }
 
 // Do implements the policy.Transporter interface for CarbonServerTransport.
@@ -57,11 +56,13 @@ func (c *CarbonServerTransport) dispatchToClientFake(req *http.Request, client s
 	switch client {
 	case "CarbonCarbonServiceClient":
 		initServer(&c.trMu, &c.trCarbonCarbonServiceServer, func() *CarbonCarbonServiceServerTransport {
-		return NewCarbonCarbonServiceServerTransport(&c.srv.CarbonCarbonServiceServer) })
+			return NewCarbonCarbonServiceServerTransport(&c.srv.CarbonCarbonServiceServer)
+		})
 		resp, err = c.trCarbonCarbonServiceServer.Do(req)
 	case "CarbonOperationsClient":
 		initServer(&c.trMu, &c.trCarbonOperationsServer, func() *CarbonOperationsServerTransport {
-		return NewCarbonOperationsServerTransport(&c.srv.CarbonOperationsServer) })
+			return NewCarbonOperationsServerTransport(&c.srv.CarbonOperationsServer)
+		})
 		resp, err = c.trCarbonOperationsServer.Do(req)
 	default:
 		err = fmt.Errorf("unhandled client %s", client)
@@ -69,4 +70,3 @@ func (c *CarbonServerTransport) dispatchToClientFake(req *http.Request, client s
 
 	return resp, err
 }
-

@@ -20,7 +20,7 @@ import (
 )
 
 // UpfDeploymentsServer is a fake server for instances of the armmobilepacketcore.UpfDeploymentsClient type.
-type UpfDeploymentsServer struct{
+type UpfDeploymentsServer struct {
 	// CreateOrUpdate is the fake for method UpfDeploymentsClient.CreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
 	CreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, upfDeploymentName string, resource armmobilepacketcore.UpfDeploymentResource, options *armmobilepacketcore.UpfDeploymentsClientCreateOrUpdateOptions) (resp azfake.Responder[armmobilepacketcore.UpfDeploymentsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
@@ -44,7 +44,6 @@ type UpfDeploymentsServer struct{
 	// UpdateTags is the fake for method UpfDeploymentsClient.UpdateTags
 	// HTTP status codes to indicate success: http.StatusOK
 	UpdateTags func(ctx context.Context, subscriptionID string, resourceGroupName string, upfDeploymentName string, properties armmobilepacketcore.UpfDeploymentResourceTagsUpdate, options *armmobilepacketcore.UpfDeploymentsClientUpdateTagsOptions) (resp azfake.Responder[armmobilepacketcore.UpfDeploymentsClientUpdateTagsResponse], errResp azfake.ErrorResponder)
-
 }
 
 // NewUpfDeploymentsServerTransport creates a new instance of UpfDeploymentsServerTransport with the provided implementation.
@@ -52,20 +51,20 @@ type UpfDeploymentsServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewUpfDeploymentsServerTransport(srv *UpfDeploymentsServer) *UpfDeploymentsServerTransport {
 	return &UpfDeploymentsServerTransport{
-		srv: srv,
-		beginDelete: newTracker[azfake.PollerResponder[armmobilepacketcore.UpfDeploymentsClientDeleteResponse]](),
+		srv:                         srv,
+		beginDelete:                 newTracker[azfake.PollerResponder[armmobilepacketcore.UpfDeploymentsClientDeleteResponse]](),
 		newListByResourceGroupPager: newTracker[azfake.PagerResponder[armmobilepacketcore.UpfDeploymentsClientListByResourceGroupResponse]](),
-		newListBySubscriptionPager: newTracker[azfake.PagerResponder[armmobilepacketcore.UpfDeploymentsClientListBySubscriptionResponse]](),
+		newListBySubscriptionPager:  newTracker[azfake.PagerResponder[armmobilepacketcore.UpfDeploymentsClientListBySubscriptionResponse]](),
 	}
 }
 
 // UpfDeploymentsServerTransport connects instances of armmobilepacketcore.UpfDeploymentsClient to instances of UpfDeploymentsServer.
 // Don't use this type directly, use NewUpfDeploymentsServerTransport instead.
 type UpfDeploymentsServerTransport struct {
-	srv *UpfDeploymentsServer
-	beginDelete *tracker[azfake.PollerResponder[armmobilepacketcore.UpfDeploymentsClientDeleteResponse]]
+	srv                         *UpfDeploymentsServer
+	beginDelete                 *tracker[azfake.PollerResponder[armmobilepacketcore.UpfDeploymentsClientDeleteResponse]]
 	newListByResourceGroupPager *tracker[azfake.PagerResponder[armmobilepacketcore.UpfDeploymentsClientListByResourceGroupResponse]]
-	newListBySubscriptionPager *tracker[azfake.PagerResponder[armmobilepacketcore.UpfDeploymentsClientListBySubscriptionResponse]]
+	newListBySubscriptionPager  *tracker[azfake.PagerResponder[armmobilepacketcore.UpfDeploymentsClientListBySubscriptionResponse]]
 }
 
 // Do implements the policy.Transporter interface for UpfDeploymentsServerTransport.
@@ -153,28 +152,28 @@ func (u *UpfDeploymentsServerTransport) dispatchBeginDelete(req *http.Request) (
 	}
 	beginDelete := u.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/upfDeployments/(?P<upfDeploymentName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	upfDeploymentNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("upfDeploymentName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := u.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, upfDeploymentNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/upfDeployments/(?P<upfDeploymentName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		upfDeploymentNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("upfDeploymentName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := u.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, upfDeploymentNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		u.beginDelete.add(req, beginDelete)
 	}
@@ -238,21 +237,21 @@ func (u *UpfDeploymentsServerTransport) dispatchNewListByResourceGroupPager(req 
 	}
 	newListByResourceGroupPager := u.newListByResourceGroupPager.get(req)
 	if newListByResourceGroupPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/upfDeployments`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 2 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-resp := u.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/upfDeployments`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 2 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := u.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
 		newListByResourceGroupPager = &resp
 		u.newListByResourceGroupPager.add(req, newListByResourceGroupPager)
 		server.PagerResponderInjectNextLinks(newListByResourceGroupPager, req, func(page *armmobilepacketcore.UpfDeploymentsClientListByResourceGroupResponse, createLink func() string) {
@@ -279,17 +278,17 @@ func (u *UpfDeploymentsServerTransport) dispatchNewListBySubscriptionPager(req *
 	}
 	newListBySubscriptionPager := u.newListBySubscriptionPager.get(req)
 	if newListBySubscriptionPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/upfDeployments`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 1 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-resp := u.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/upfDeployments`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 1 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resp := u.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
 		newListBySubscriptionPager = &resp
 		u.newListBySubscriptionPager.add(req, newListBySubscriptionPager)
 		server.PagerResponderInjectNextLinks(newListBySubscriptionPager, req, func(page *armmobilepacketcore.UpfDeploymentsClientListBySubscriptionResponse, createLink func() string) {
@@ -350,4 +349,3 @@ func (u *UpfDeploymentsServerTransport) dispatchUpdateTags(req *http.Request) (*
 	}
 	return resp, nil
 }
-

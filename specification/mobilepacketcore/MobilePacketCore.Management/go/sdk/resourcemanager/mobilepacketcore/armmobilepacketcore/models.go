@@ -88,7 +88,7 @@ type ClusterServiceAksClusterData struct {
 	CustomLocationID *string
 
 	// CONSTANT; Azure Kubernetes Service Properties.
-// Field has constant value ClusterTypeAks, any specified value is ignored.
+	// Field has constant value ClusterTypeAks, any specified value is ignored.
 	Type *ClusterType
 }
 
@@ -97,7 +97,7 @@ type ClusterServiceAksClusterData struct {
 func (c *ClusterServiceAksClusterData) GetClusterServiceClusterTypeSpecificData() *ClusterServiceClusterTypeSpecificData {
 	return &ClusterServiceClusterTypeSpecificData{
 		CustomLocationID: c.CustomLocationID,
-		Type: c.Type,
+		Type:             c.Type,
 	}
 }
 
@@ -112,7 +112,9 @@ type ClusterServiceClusterTypeSpecificData struct {
 
 // GetClusterServiceClusterTypeSpecificData implements the ClusterServiceClusterTypeSpecificDataClassification interface for
 // type ClusterServiceClusterTypeSpecificData.
-func (c *ClusterServiceClusterTypeSpecificData) GetClusterServiceClusterTypeSpecificData() *ClusterServiceClusterTypeSpecificData { return c }
+func (c *ClusterServiceClusterTypeSpecificData) GetClusterServiceClusterTypeSpecificData() *ClusterServiceClusterTypeSpecificData {
+	return c
+}
 
 // Nexus AKS Cluster specific data.
 type ClusterServiceNexusAksClusterData struct {
@@ -120,7 +122,7 @@ type ClusterServiceNexusAksClusterData struct {
 	CustomLocationID *string
 
 	// CONSTANT; Nexus Operator Kubenetes Service Properties.
-// Field has constant value ClusterTypeNexusAks, any specified value is ignored.
+	// Field has constant value ClusterTypeNexusAks, any specified value is ignored.
 	Type *ClusterType
 }
 
@@ -129,7 +131,7 @@ type ClusterServiceNexusAksClusterData struct {
 func (c *ClusterServiceNexusAksClusterData) GetClusterServiceClusterTypeSpecificData() *ClusterServiceClusterTypeSpecificData {
 	return &ClusterServiceClusterTypeSpecificData{
 		CustomLocationID: c.CustomLocationID,
-		Type: c.Type,
+		Type:             c.Type,
 	}
 }
 
@@ -178,7 +180,7 @@ type ClusterServiceResourceProperties struct {
 	DeploymentType *SKUDeploymentType
 
 	// REQUIRED; Azure for Operators 5G Core Release Version. This is applied to all platform as a service (PaaS) components and
-// running workloads in this cluster
+	// running workloads in this cluster
 	ReleaseVersion *string
 
 	// Operational status
@@ -192,42 +194,6 @@ type ClusterServiceResourceProperties struct {
 type ClusterServiceResourceTagsUpdate struct {
 	// Resource tags.
 	Tags map[string]*string
-}
-
-// The resource management error additional info.
-type ErrorAdditionalInfo struct {
-	// The additional info.
-	Info *ErrorAdditionalInfoInfo
-
-	// The additional info type.
-	Type *string
-}
-
-type ErrorAdditionalInfoInfo struct {
-}
-
-// The error detail.
-type ErrorDetail struct {
-	// The error additional info.
-	AdditionalInfo []*ErrorAdditionalInfo
-
-	// The error code.
-	Code *string
-
-	// The error details.
-	Details []*ErrorDetail
-
-	// The error message.
-	Message *string
-
-	// The error target.
-	Target *string
-}
-
-// Common error response for all Azure Resource Manager APIs to return error details for failed operations.
-type ErrorResponse struct {
-	// The error object.
-	Error *ErrorDetail
 }
 
 // Azure for Operators 5G Core Network Repository Function (NRF) Deployment Resource
@@ -416,15 +382,15 @@ type Operation struct {
 	Display *OperationDisplay
 
 	// Whether the operation applies to data-plane. This is "true" for data-plane operations and "false" for Azure Resource Manager/control-plane
-// operations.
+	// operations.
 	IsDataAction *bool
 
 	// The name of the operation, as per Resource-Based Access Control (RBAC). Examples: "Microsoft.Compute/virtualMachines/write",
-// "Microsoft.Compute/virtualMachines/capture/action"
+	// "Microsoft.Compute/virtualMachines/capture/action"
 	Name *string
 
 	// The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is
-// "user,system"
+	// "user,system"
 	Origin *Origin
 }
 
@@ -434,7 +400,7 @@ type OperationDisplay struct {
 	Description *string
 
 	// The concise, localized friendly name for the operation; suitable for dropdowns. E.g. "Create or Update Virtual Machine",
-// "Restart Virtual Machine".
+	// "Restart Virtual Machine".
 	Operation *string
 
 	// The localized friendly form of the resource provider name, e.g. "Microsoft Monitoring Insights" or "Microsoft Compute".
@@ -632,4 +598,3 @@ type UpfDeploymentResourceTagsUpdate struct {
 	// Resource tags.
 	Tags map[string]*string
 }
-

@@ -14,10 +14,9 @@ import (
 )
 
 // Server is a fake server for instances of the armworkloads.Client type.
-type Server struct{
+type Server struct {
 	// OperationsServer contains the fakes for client OperationsClient
 	OperationsServer OperationsServer
-
 }
 
 // NewServerTransport creates a new instance of ServerTransport with the provided implementation.
@@ -30,8 +29,8 @@ func NewServerTransport(srv *Server) *ServerTransport {
 // ServerTransport connects instances of armworkloads.Client to instances of Server.
 // Don't use this type directly, use NewServerTransport instead.
 type ServerTransport struct {
-	srv *Server
-	trMu sync.Mutex
+	srv                *Server
+	trMu               sync.Mutex
 	trOperationsServer *OperationsServerTransport
 }
 
@@ -53,7 +52,8 @@ func (s *ServerTransport) dispatchToClientFake(req *http.Request, client string)
 	switch client {
 	case "OperationsClient":
 		initServer(&s.trMu, &s.trOperationsServer, func() *OperationsServerTransport {
-		return NewOperationsServerTransport(&s.srv.OperationsServer) })
+			return NewOperationsServerTransport(&s.srv.OperationsServer)
+		})
 		resp, err = s.trOperationsServer.Do(req)
 	default:
 		err = fmt.Errorf("unhandled client %s", client)
@@ -61,4 +61,3 @@ func (s *ServerTransport) dispatchToClientFake(req *http.Request, client string)
 
 	return resp, err
 }
-

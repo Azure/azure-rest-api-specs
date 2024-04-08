@@ -275,4 +275,3 @@ type UpfDeploymentsClientUpdateTagsResponse struct {
 	// Azure for Operators 5G Core User Plane Function (UPF) Deployment Resource
 	UpfDeploymentResource
 }
-

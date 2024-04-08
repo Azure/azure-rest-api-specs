@@ -31,7 +31,7 @@ func NewAccountsClient(credential azcore.TokenCredential, options *arm.ClientOpt
 		return nil, err
 	}
 	client := &AccountsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -77,8 +77,8 @@ func (client *AccountsClient) checkNameAvailabilityCreateRequest(ctx context.Con
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, body); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -154,8 +154,8 @@ func (client *AccountsClient) createCreateRequest(ctx context.Context, subscript
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -286,13 +286,13 @@ func (client *AccountsClient) getHandleResponse(resp *http.Response) (AccountsCl
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - options - AccountsClientListByResourceGroupOptions contains the optional parameters for the AccountsClient.NewListByResourceGroupPager
 //     method.
-func (client *AccountsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *AccountsClientListByResourceGroupOptions) (*runtime.Pager[AccountsClientListByResourceGroupResponse]) {
+func (client *AccountsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *AccountsClientListByResourceGroupOptions) *runtime.Pager[AccountsClientListByResourceGroupResponse] {
 	return runtime.NewPager(runtime.PagingHandler[AccountsClientListByResourceGroupResponse]{
 		More: func(page AccountsClientListByResourceGroupResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AccountsClientListByResourceGroupResponse) (AccountsClientListByResourceGroupResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AccountsClient.NewListByResourceGroupPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AccountsClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -304,7 +304,7 @@ func (client *AccountsClient) NewListByResourceGroupPager(subscriptionID string,
 				return AccountsClientListByResourceGroupResponse{}, err
 			}
 			return client.listByResourceGroupHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -343,13 +343,13 @@ func (client *AccountsClient) listByResourceGroupHandleResponse(resp *http.Respo
 //   - subscriptionID - The ID of the target subscription.
 //   - options - AccountsClientListBySubscriptionOptions contains the optional parameters for the AccountsClient.NewListBySubscriptionPager
 //     method.
-func (client *AccountsClient) NewListBySubscriptionPager(subscriptionID string, options *AccountsClientListBySubscriptionOptions) (*runtime.Pager[AccountsClientListBySubscriptionResponse]) {
+func (client *AccountsClient) NewListBySubscriptionPager(subscriptionID string, options *AccountsClientListBySubscriptionOptions) *runtime.Pager[AccountsClientListBySubscriptionResponse] {
 	return runtime.NewPager(runtime.PagingHandler[AccountsClientListBySubscriptionResponse]{
 		More: func(page AccountsClientListBySubscriptionResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AccountsClientListBySubscriptionResponse) (AccountsClientListBySubscriptionResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AccountsClient.NewListBySubscriptionPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AccountsClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -361,7 +361,7 @@ func (client *AccountsClient) NewListBySubscriptionPager(subscriptionID string, 
 				return AccountsClientListBySubscriptionResponse{}, err
 			}
 			return client.listBySubscriptionHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -455,8 +455,7 @@ func (client *AccountsClient) updateCreateRequest(ctx context.Context, subscript
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
-

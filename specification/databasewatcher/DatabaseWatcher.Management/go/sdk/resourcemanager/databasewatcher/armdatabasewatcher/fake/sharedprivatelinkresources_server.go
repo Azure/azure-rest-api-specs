@@ -19,7 +19,7 @@ import (
 )
 
 // SharedPrivateLinkResourcesServer is a fake server for instances of the armdatabasewatcher.SharedPrivateLinkResourcesClient type.
-type SharedPrivateLinkResourcesServer struct{
+type SharedPrivateLinkResourcesServer struct {
 	// BeginCreate is the fake for method SharedPrivateLinkResourcesClient.BeginCreate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
 	BeginCreate func(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, sharedPrivateLinkResourceName string, resource armdatabasewatcher.SharedPrivateLinkResource, options *armdatabasewatcher.SharedPrivateLinkResourcesClientCreateOptions) (resp azfake.PollerResponder[armdatabasewatcher.SharedPrivateLinkResourcesClientCreateResponse], errResp azfake.ErrorResponder)
@@ -35,7 +35,6 @@ type SharedPrivateLinkResourcesServer struct{
 	// NewListByWatcherPager is the fake for method SharedPrivateLinkResourcesClient.NewListByWatcherPager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListByWatcherPager func(subscriptionID string, resourceGroupName string, watcherName string, options *armdatabasewatcher.SharedPrivateLinkResourcesClientListByWatcherOptions) (resp azfake.PagerResponder[armdatabasewatcher.SharedPrivateLinkResourcesClientListByWatcherResponse])
-
 }
 
 // NewSharedPrivateLinkResourcesServerTransport creates a new instance of SharedPrivateLinkResourcesServerTransport with the provided implementation.
@@ -43,9 +42,9 @@ type SharedPrivateLinkResourcesServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewSharedPrivateLinkResourcesServerTransport(srv *SharedPrivateLinkResourcesServer) *SharedPrivateLinkResourcesServerTransport {
 	return &SharedPrivateLinkResourcesServerTransport{
-		srv: srv,
-		beginCreate: newTracker[azfake.PollerResponder[armdatabasewatcher.SharedPrivateLinkResourcesClientCreateResponse]](),
-		beginDelete: newTracker[azfake.PollerResponder[armdatabasewatcher.SharedPrivateLinkResourcesClientDeleteResponse]](),
+		srv:                   srv,
+		beginCreate:           newTracker[azfake.PollerResponder[armdatabasewatcher.SharedPrivateLinkResourcesClientCreateResponse]](),
+		beginDelete:           newTracker[azfake.PollerResponder[armdatabasewatcher.SharedPrivateLinkResourcesClientDeleteResponse]](),
 		newListByWatcherPager: newTracker[azfake.PagerResponder[armdatabasewatcher.SharedPrivateLinkResourcesClientListByWatcherResponse]](),
 	}
 }
@@ -53,9 +52,9 @@ func NewSharedPrivateLinkResourcesServerTransport(srv *SharedPrivateLinkResource
 // SharedPrivateLinkResourcesServerTransport connects instances of armdatabasewatcher.SharedPrivateLinkResourcesClient to instances of SharedPrivateLinkResourcesServer.
 // Don't use this type directly, use NewSharedPrivateLinkResourcesServerTransport instead.
 type SharedPrivateLinkResourcesServerTransport struct {
-	srv *SharedPrivateLinkResourcesServer
-	beginCreate *tracker[azfake.PollerResponder[armdatabasewatcher.SharedPrivateLinkResourcesClientCreateResponse]]
-	beginDelete *tracker[azfake.PollerResponder[armdatabasewatcher.SharedPrivateLinkResourcesClientDeleteResponse]]
+	srv                   *SharedPrivateLinkResourcesServer
+	beginCreate           *tracker[azfake.PollerResponder[armdatabasewatcher.SharedPrivateLinkResourcesClientCreateResponse]]
+	beginDelete           *tracker[azfake.PollerResponder[armdatabasewatcher.SharedPrivateLinkResourcesClientDeleteResponse]]
 	newListByWatcherPager *tracker[azfake.PagerResponder[armdatabasewatcher.SharedPrivateLinkResourcesClientListByWatcherResponse]]
 }
 
@@ -96,36 +95,36 @@ func (s *SharedPrivateLinkResourcesServerTransport) dispatchBeginCreate(req *htt
 	}
 	beginCreate := s.beginCreate.get(req)
 	if beginCreate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DatabaseWatcher/watchers/(?P<watcherName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/sharedPrivateLinkResources/(?P<sharedPrivateLinkResourceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armdatabasewatcher.SharedPrivateLinkResource](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	watcherNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("watcherName")])
-	if err != nil {
-		return nil, err
-	}
-	sharedPrivateLinkResourceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("sharedPrivateLinkResourceName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := s.srv.BeginCreate(req.Context(), subscriptionIDParam, resourceGroupNameParam, watcherNameParam, sharedPrivateLinkResourceNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DatabaseWatcher/watchers/(?P<watcherName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/sharedPrivateLinkResources/(?P<sharedPrivateLinkResourceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armdatabasewatcher.SharedPrivateLinkResource](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		watcherNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("watcherName")])
+		if err != nil {
+			return nil, err
+		}
+		sharedPrivateLinkResourceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("sharedPrivateLinkResourceName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := s.srv.BeginCreate(req.Context(), subscriptionIDParam, resourceGroupNameParam, watcherNameParam, sharedPrivateLinkResourceNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginCreate = &respr
 		s.beginCreate.add(req, beginCreate)
 	}
@@ -152,32 +151,32 @@ func (s *SharedPrivateLinkResourcesServerTransport) dispatchBeginDelete(req *htt
 	}
 	beginDelete := s.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DatabaseWatcher/watchers/(?P<watcherName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/sharedPrivateLinkResources/(?P<sharedPrivateLinkResourceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	watcherNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("watcherName")])
-	if err != nil {
-		return nil, err
-	}
-	sharedPrivateLinkResourceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("sharedPrivateLinkResourceName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := s.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, watcherNameParam, sharedPrivateLinkResourceNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DatabaseWatcher/watchers/(?P<watcherName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/sharedPrivateLinkResources/(?P<sharedPrivateLinkResourceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		watcherNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("watcherName")])
+		if err != nil {
+			return nil, err
+		}
+		sharedPrivateLinkResourceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("sharedPrivateLinkResourceName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := s.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, watcherNameParam, sharedPrivateLinkResourceNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		s.beginDelete.add(req, beginDelete)
 	}
@@ -245,25 +244,25 @@ func (s *SharedPrivateLinkResourcesServerTransport) dispatchNewListByWatcherPage
 	}
 	newListByWatcherPager := s.newListByWatcherPager.get(req)
 	if newListByWatcherPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DatabaseWatcher/watchers/(?P<watcherName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/sharedPrivateLinkResources`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	watcherNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("watcherName")])
-	if err != nil {
-		return nil, err
-	}
-resp := s.srv.NewListByWatcherPager(subscriptionIDParam, resourceGroupNameParam, watcherNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DatabaseWatcher/watchers/(?P<watcherName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/sharedPrivateLinkResources`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		watcherNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("watcherName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := s.srv.NewListByWatcherPager(subscriptionIDParam, resourceGroupNameParam, watcherNameParam, nil)
 		newListByWatcherPager = &resp
 		s.newListByWatcherPager.add(req, newListByWatcherPager)
 		server.PagerResponderInjectNextLinks(newListByWatcherPager, req, func(page *armdatabasewatcher.SharedPrivateLinkResourcesClientListByWatcherResponse, createLink func() string) {
@@ -283,4 +282,3 @@ resp := s.srv.NewListByWatcherPager(subscriptionIDParam, resourceGroupNameParam,
 	}
 	return resp, nil
 }
-

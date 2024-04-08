@@ -19,7 +19,7 @@ import (
 )
 
 // ServicesServer is a fake server for instances of the armapicenter.ServicesClient type.
-type ServicesServer struct{
+type ServicesServer struct {
 	// CreateOrUpdate is the fake for method ServicesClient.CreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
 	CreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, resource armapicenter.Service, options *armapicenter.ServicesClientCreateOrUpdateOptions) (resp azfake.Responder[armapicenter.ServicesClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
@@ -47,7 +47,6 @@ type ServicesServer struct{
 	// Update is the fake for method ServicesClient.Update
 	// HTTP status codes to indicate success: http.StatusOK
 	Update func(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, payload armapicenter.ServiceUpdate, options *armapicenter.ServicesClientUpdateOptions) (resp azfake.Responder[armapicenter.ServicesClientUpdateResponse], errResp azfake.ErrorResponder)
-
 }
 
 // NewServicesServerTransport creates a new instance of ServicesServerTransport with the provided implementation.
@@ -55,20 +54,20 @@ type ServicesServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewServicesServerTransport(srv *ServicesServer) *ServicesServerTransport {
 	return &ServicesServerTransport{
-		srv: srv,
-		beginExportMetadataSchema: newTracker[azfake.PollerResponder[armapicenter.ServicesClientExportMetadataSchemaResponse]](),
+		srv:                         srv,
+		beginExportMetadataSchema:   newTracker[azfake.PollerResponder[armapicenter.ServicesClientExportMetadataSchemaResponse]](),
 		newListByResourceGroupPager: newTracker[azfake.PagerResponder[armapicenter.ServicesClientListByResourceGroupResponse]](),
-		newListBySubscriptionPager: newTracker[azfake.PagerResponder[armapicenter.ServicesClientListBySubscriptionResponse]](),
+		newListBySubscriptionPager:  newTracker[azfake.PagerResponder[armapicenter.ServicesClientListBySubscriptionResponse]](),
 	}
 }
 
 // ServicesServerTransport connects instances of armapicenter.ServicesClient to instances of ServicesServer.
 // Don't use this type directly, use NewServicesServerTransport instead.
 type ServicesServerTransport struct {
-	srv *ServicesServer
-	beginExportMetadataSchema *tracker[azfake.PollerResponder[armapicenter.ServicesClientExportMetadataSchemaResponse]]
+	srv                         *ServicesServer
+	beginExportMetadataSchema   *tracker[azfake.PollerResponder[armapicenter.ServicesClientExportMetadataSchemaResponse]]
 	newListByResourceGroupPager *tracker[azfake.PagerResponder[armapicenter.ServicesClientListByResourceGroupResponse]]
-	newListBySubscriptionPager *tracker[azfake.PagerResponder[armapicenter.ServicesClientListBySubscriptionResponse]]
+	newListBySubscriptionPager  *tracker[azfake.PagerResponder[armapicenter.ServicesClientListBySubscriptionResponse]]
 }
 
 // Do implements the policy.Transporter interface for ServicesServerTransport.
@@ -192,32 +191,32 @@ func (s *ServicesServerTransport) dispatchBeginExportMetadataSchema(req *http.Re
 	}
 	beginExportMetadataSchema := s.beginExportMetadataSchema.get(req)
 	if beginExportMetadataSchema == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ApiCenter/services/(?P<serviceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/exportMetadataSchema`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armapicenter.MetadataSchemaExportRequest](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	serviceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("serviceName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := s.srv.BeginExportMetadataSchema(req.Context(), subscriptionIDParam, resourceGroupNameParam, serviceNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ApiCenter/services/(?P<serviceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/exportMetadataSchema`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armapicenter.MetadataSchemaExportRequest](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		serviceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("serviceName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := s.srv.BeginExportMetadataSchema(req.Context(), subscriptionIDParam, resourceGroupNameParam, serviceNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginExportMetadataSchema = &respr
 		s.beginExportMetadataSchema.add(req, beginExportMetadataSchema)
 	}
@@ -281,21 +280,21 @@ func (s *ServicesServerTransport) dispatchNewListByResourceGroupPager(req *http.
 	}
 	newListByResourceGroupPager := s.newListByResourceGroupPager.get(req)
 	if newListByResourceGroupPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ApiCenter/services`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 2 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-resp := s.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ApiCenter/services`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 2 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := s.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
 		newListByResourceGroupPager = &resp
 		s.newListByResourceGroupPager.add(req, newListByResourceGroupPager)
 		server.PagerResponderInjectNextLinks(newListByResourceGroupPager, req, func(page *armapicenter.ServicesClientListByResourceGroupResponse, createLink func() string) {
@@ -322,17 +321,17 @@ func (s *ServicesServerTransport) dispatchNewListBySubscriptionPager(req *http.R
 	}
 	newListBySubscriptionPager := s.newListBySubscriptionPager.get(req)
 	if newListBySubscriptionPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ApiCenter/services`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 1 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-resp := s.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ApiCenter/services`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 1 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resp := s.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
 		newListBySubscriptionPager = &resp
 		s.newListBySubscriptionPager.add(req, newListBySubscriptionPager)
 		server.PagerResponderInjectNextLinks(newListBySubscriptionPager, req, func(page *armapicenter.ServicesClientListBySubscriptionResponse, createLink func() string) {
@@ -393,4 +392,3 @@ func (s *ServicesServerTransport) dispatchUpdate(req *http.Request) (*http.Respo
 	}
 	return resp, nil
 }
-

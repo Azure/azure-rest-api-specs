@@ -73,7 +73,7 @@ type BlobStorageClassTypeProperties struct {
 	AzureStorageAccountName *string
 
 	// CONSTANT; Blob StorageClass
-// Field has constant value SCTypeBlob, any specified value is ignored.
+	// Field has constant value SCTypeBlob, any specified value is ignored.
 	Type *SCType
 }
 
@@ -82,42 +82,6 @@ func (b *BlobStorageClassTypeProperties) GetStorageClassTypeProperties() *Storag
 	return &StorageClassTypeProperties{
 		Type: b.Type,
 	}
-}
-
-// The resource management error additional info.
-type ErrorAdditionalInfo struct {
-	// The additional info.
-	Info *ErrorAdditionalInfoInfo
-
-	// The additional info type.
-	Type *string
-}
-
-type ErrorAdditionalInfoInfo struct {
-}
-
-// The error detail.
-type ErrorDetail struct {
-	// The error additional info.
-	AdditionalInfo []*ErrorAdditionalInfo
-
-	// The error code.
-	Code *string
-
-	// The error details.
-	Details []*ErrorDetail
-
-	// The error message.
-	Message *string
-
-	// The error target.
-	Target *string
-}
-
-// Common error response for all Azure Resource Manager APIs to return error details for failed operations.
-type ErrorResponse struct {
-	// The error object.
-	Error *ErrorDetail
 }
 
 // The base extension resource.
@@ -174,14 +138,14 @@ type LoadBalancerProperties struct {
 	ProvisioningState *ProvisioningState
 
 	// A dynamic label mapping to select related services. For instance, if you want to create a load balancer only for services
-// with label "a=b", then please specify {"a": "b"} in the field.
+	// with label "a=b", then please specify {"a": "b"} in the field.
 	ServiceSelector map[string]*string
 }
 
 // The properties of Native StorageClass
 type NativeStorageClassTypeProperties struct {
 	// CONSTANT; Native StorageClass
-// Field has constant value SCTypeNative, any specified value is ignored.
+	// Field has constant value SCTypeNative, any specified value is ignored.
 	Type *SCType
 }
 
@@ -201,7 +165,7 @@ type NfsStorageClassTypeProperties struct {
 	Share *string
 
 	// CONSTANT; NFS StorageClass
-// Field has constant value SCTypeNFS, any specified value is ignored.
+	// Field has constant value SCTypeNFS, any specified value is ignored.
 	Type *SCType
 
 	// Mounted folder permissions. Default is 0. If set as non-zero, driver will perform `chmod` after mount
@@ -230,15 +194,15 @@ type Operation struct {
 	Display *OperationDisplay
 
 	// Whether the operation applies to data-plane. This is "true" for data-plane operations and "false" for Azure Resource Manager/control-plane
-// operations.
+	// operations.
 	IsDataAction *bool
 
 	// The name of the operation, as per Resource-Based Access Control (RBAC). Examples: "Microsoft.Compute/virtualMachines/write",
-// "Microsoft.Compute/virtualMachines/capture/action"
+	// "Microsoft.Compute/virtualMachines/capture/action"
 	Name *string
 
 	// The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is
-// "user,system"
+	// "user,system"
 	Origin *Origin
 }
 
@@ -248,7 +212,7 @@ type OperationDisplay struct {
 	Description *string
 
 	// The concise, localized friendly name for the operation; suitable for dropdowns. E.g. "Create or Update Virtual Machine",
-// "Restart Virtual Machine".
+	// "Restart Virtual Machine".
 	Operation *string
 
 	// The localized friendly form of the resource provider name, e.g. "Microsoft Monitoring Insights" or "Microsoft Compute".
@@ -273,7 +237,7 @@ type RwxStorageClassTypeProperties struct {
 	BackingStorageClassName *string
 
 	// CONSTANT; RWX StorageClass
-// Field has constant value SCTypeRWX, any specified value is ignored.
+	// Field has constant value SCTypeRWX, any specified value is ignored.
 	Type *SCType
 }
 
@@ -326,7 +290,7 @@ type SmbStorageClassTypeProperties struct {
 	Source *string
 
 	// CONSTANT; SMB StorageClass
-// Field has constant value SCTypeSMB, any specified value is ignored.
+	// Field has constant value SCTypeSMB, any specified value is ignored.
 	Type *SCType
 
 	// Server domain
@@ -458,7 +422,9 @@ type StorageClassTypeProperties struct {
 }
 
 // GetStorageClassTypeProperties implements the StorageClassTypePropertiesClassification interface for type StorageClassTypeProperties.
-func (s *StorageClassTypeProperties) GetStorageClassTypeProperties() *StorageClassTypeProperties { return s }
+func (s *StorageClassTypeProperties) GetStorageClassTypeProperties() *StorageClassTypeProperties {
+	return s
+}
 
 // The model for update a storageClass
 type StorageClassTypePropertiesUpdate struct {
@@ -519,4 +485,3 @@ type SystemData struct {
 	// The type of identity that last modified the resource.
 	LastModifiedByType *CreatedByType
 }
-

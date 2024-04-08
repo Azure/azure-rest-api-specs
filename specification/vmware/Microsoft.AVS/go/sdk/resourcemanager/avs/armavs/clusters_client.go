@@ -32,7 +32,7 @@ func NewClustersClient(credential azcore.TokenCredential, options *arm.ClientOpt
 		return nil, err
 	}
 	client := &ClustersClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -42,11 +42,11 @@ func NewClustersClient(credential azcore.TokenCredential, options *arm.ClientOpt
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
 //   - clusterName - Name of the cluster
-//   - resource - Resource create parameters.
+//   - cluster - Resource create parameters.
 //   - options - ClustersClientCreateOrUpdateOptions contains the optional parameters for the ClustersClient.CreateOrUpdate method.
-func (client *ClustersClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, resource Cluster, options *ClustersClientCreateOrUpdateOptions) (*runtime.Poller[ClustersClientCreateOrUpdateResponse], error) {
+func (client *ClustersClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, cluster Cluster, options *ClustersClientCreateOrUpdateOptions) (*runtime.Poller[ClustersClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
-		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, resource, options)
+		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, cluster, options)
 		if err != nil {
 			return nil, err
 		}
@@ -58,10 +58,10 @@ func (client *ClustersClient) BeginCreateOrUpdate(ctx context.Context, subscript
 }
 
 // CreateOrUpdate - Create a Cluster
-func (client *ClustersClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, resource Cluster, options *ClustersClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *ClustersClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, cluster Cluster, options *ClustersClientCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ClustersClient.BeginCreateOrUpdate")
-	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, resource, options)
+	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, cluster, options)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ func (client *ClustersClient) createOrUpdate(ctx context.Context, subscriptionID
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *ClustersClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, resource Cluster, options *ClustersClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *ClustersClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, cluster Cluster, options *ClustersClientCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -104,9 +104,9 @@ func (client *ClustersClient) createOrUpdateCreateRequest(ctx context.Context, s
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
-	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+	if err := runtime.MarshalAsJSON(req, cluster); err != nil {
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -248,13 +248,13 @@ func (client *ClustersClient) getHandleResponse(resp *http.Response) (ClustersCl
 //   - privateCloudName - Name of the private cloud
 //   - options - ClustersClientListByPrivateCloudOptions contains the optional parameters for the ClustersClient.NewListByPrivateCloudPager
 //     method.
-func (client *ClustersClient) NewListByPrivateCloudPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *ClustersClientListByPrivateCloudOptions) (*runtime.Pager[ClustersClientListByPrivateCloudResponse]) {
+func (client *ClustersClient) NewListByPrivateCloudPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *ClustersClientListByPrivateCloudOptions) *runtime.Pager[ClustersClientListByPrivateCloudResponse] {
 	return runtime.NewPager(runtime.PagingHandler[ClustersClientListByPrivateCloudResponse]{
 		More: func(page ClustersClientListByPrivateCloudResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *ClustersClientListByPrivateCloudResponse) (ClustersClientListByPrivateCloudResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ClustersClient.NewListByPrivateCloudPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ClustersClient.NewListByPrivateCloudPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -266,7 +266,7 @@ func (client *ClustersClient) NewListByPrivateCloudPager(subscriptionID string, 
 				return ClustersClientListByPrivateCloudResponse{}, err
 			}
 			return client.listByPrivateCloudHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -424,8 +424,8 @@ func (client *ClustersClient) updateCreateRequest(ctx context.Context, subscript
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, clusterUpdate); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -448,4 +448,3 @@ func (client *ClustersClient) updateHandleResponse(resp *http.Response) (Cluster
 	}
 	return result, nil
 }
-

@@ -32,7 +32,7 @@ func NewNrfDeploymentsClient(credential azcore.TokenCredential, options *arm.Cli
 		return nil, err
 	}
 	client := &NrfDeploymentsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -88,8 +88,8 @@ func (client *NrfDeploymentsClient) createOrUpdateCreateRequest(ctx context.Cont
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -237,13 +237,13 @@ func (client *NrfDeploymentsClient) getHandleResponse(resp *http.Response) (NrfD
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - options - NrfDeploymentsClientListByResourceGroupOptions contains the optional parameters for the NrfDeploymentsClient.NewListByResourceGroupPager
 //     method.
-func (client *NrfDeploymentsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *NrfDeploymentsClientListByResourceGroupOptions) (*runtime.Pager[NrfDeploymentsClientListByResourceGroupResponse]) {
+func (client *NrfDeploymentsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *NrfDeploymentsClientListByResourceGroupOptions) *runtime.Pager[NrfDeploymentsClientListByResourceGroupResponse] {
 	return runtime.NewPager(runtime.PagingHandler[NrfDeploymentsClientListByResourceGroupResponse]{
 		More: func(page NrfDeploymentsClientListByResourceGroupResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *NrfDeploymentsClientListByResourceGroupResponse) (NrfDeploymentsClientListByResourceGroupResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NrfDeploymentsClient.NewListByResourceGroupPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NrfDeploymentsClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -255,7 +255,7 @@ func (client *NrfDeploymentsClient) NewListByResourceGroupPager(subscriptionID s
 				return NrfDeploymentsClientListByResourceGroupResponse{}, err
 			}
 			return client.listByResourceGroupHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -294,13 +294,13 @@ func (client *NrfDeploymentsClient) listByResourceGroupHandleResponse(resp *http
 //   - subscriptionID - The ID of the target subscription.
 //   - options - NrfDeploymentsClientListBySubscriptionOptions contains the optional parameters for the NrfDeploymentsClient.NewListBySubscriptionPager
 //     method.
-func (client *NrfDeploymentsClient) NewListBySubscriptionPager(subscriptionID string, options *NrfDeploymentsClientListBySubscriptionOptions) (*runtime.Pager[NrfDeploymentsClientListBySubscriptionResponse]) {
+func (client *NrfDeploymentsClient) NewListBySubscriptionPager(subscriptionID string, options *NrfDeploymentsClientListBySubscriptionOptions) *runtime.Pager[NrfDeploymentsClientListBySubscriptionResponse] {
 	return runtime.NewPager(runtime.PagingHandler[NrfDeploymentsClientListBySubscriptionResponse]{
 		More: func(page NrfDeploymentsClientListBySubscriptionResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *NrfDeploymentsClientListBySubscriptionResponse) (NrfDeploymentsClientListBySubscriptionResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NrfDeploymentsClient.NewListBySubscriptionPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NrfDeploymentsClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -312,7 +312,7 @@ func (client *NrfDeploymentsClient) NewListBySubscriptionPager(subscriptionID st
 				return NrfDeploymentsClientListBySubscriptionResponse{}, err
 			}
 			return client.listBySubscriptionHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -394,8 +394,8 @@ func (client *NrfDeploymentsClient) updateTagsCreateRequest(ctx context.Context,
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -407,4 +407,3 @@ func (client *NrfDeploymentsClient) updateTagsHandleResponse(resp *http.Response
 	}
 	return result, nil
 }
-

@@ -20,4 +20,3 @@ type CarbonCarbonServiceClientQueryCarbonEmissionDataAvailableDateRangeOptions s
 type CarbonOperationsClientListOptions struct {
 	// placeholder for future optional parameters
 }
-

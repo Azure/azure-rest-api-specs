@@ -19,7 +19,7 @@ import (
 )
 
 // DeletedServicesServer is a fake server for instances of the armapicenter.DeletedServicesClient type.
-type DeletedServicesServer struct{
+type DeletedServicesServer struct {
 	// Delete is the fake for method DeletedServicesClient.Delete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusNoContent
 	Delete func(ctx context.Context, subscriptionID string, resourceGroupName string, deletedServiceName string, options *armapicenter.DeletedServicesClientDeleteOptions) (resp azfake.Responder[armapicenter.DeletedServicesClientDeleteResponse], errResp azfake.ErrorResponder)
@@ -35,7 +35,6 @@ type DeletedServicesServer struct{
 	// NewListBySubscriptionPager is the fake for method DeletedServicesClient.NewListBySubscriptionPager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListBySubscriptionPager func(subscriptionID string, options *armapicenter.DeletedServicesClientListBySubscriptionOptions) (resp azfake.PagerResponder[armapicenter.DeletedServicesClientListBySubscriptionResponse])
-
 }
 
 // NewDeletedServicesServerTransport creates a new instance of DeletedServicesServerTransport with the provided implementation.
@@ -43,8 +42,8 @@ type DeletedServicesServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewDeletedServicesServerTransport(srv *DeletedServicesServer) *DeletedServicesServerTransport {
 	return &DeletedServicesServerTransport{
-		srv: srv,
-		newListPager: newTracker[azfake.PagerResponder[armapicenter.DeletedServicesClientListResponse]](),
+		srv:                        srv,
+		newListPager:               newTracker[azfake.PagerResponder[armapicenter.DeletedServicesClientListResponse]](),
 		newListBySubscriptionPager: newTracker[azfake.PagerResponder[armapicenter.DeletedServicesClientListBySubscriptionResponse]](),
 	}
 }
@@ -52,8 +51,8 @@ func NewDeletedServicesServerTransport(srv *DeletedServicesServer) *DeletedServi
 // DeletedServicesServerTransport connects instances of armapicenter.DeletedServicesClient to instances of DeletedServicesServer.
 // Don't use this type directly, use NewDeletedServicesServerTransport instead.
 type DeletedServicesServerTransport struct {
-	srv *DeletedServicesServer
-	newListPager *tracker[azfake.PagerResponder[armapicenter.DeletedServicesClientListResponse]]
+	srv                        *DeletedServicesServer
+	newListPager               *tracker[azfake.PagerResponder[armapicenter.DeletedServicesClientListResponse]]
 	newListBySubscriptionPager *tracker[azfake.PagerResponder[armapicenter.DeletedServicesClientListBySubscriptionResponse]]
 }
 
@@ -171,33 +170,33 @@ func (d *DeletedServicesServerTransport) dispatchNewListPager(req *http.Request)
 	}
 	newListPager := d.newListPager.get(req)
 	if newListPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ApiCenter/deletedServices`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 2 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	qp := req.URL.Query()
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	filterUnescaped, err := url.QueryUnescape(qp.Get("$filter"))
-	if err != nil {
-		return nil, err
-	}
-	filterParam := getOptional(filterUnescaped)
-	var options *armapicenter.DeletedServicesClientListOptions
-	if filterParam != nil {
-		options = &armapicenter.DeletedServicesClientListOptions{
-			Filter: filterParam,
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ApiCenter/deletedServices`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 2 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
 		}
-	}
-resp := d.srv.NewListPager(subscriptionIDParam, resourceGroupNameParam, options)
+		qp := req.URL.Query()
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		filterUnescaped, err := url.QueryUnescape(qp.Get("$filter"))
+		if err != nil {
+			return nil, err
+		}
+		filterParam := getOptional(filterUnescaped)
+		var options *armapicenter.DeletedServicesClientListOptions
+		if filterParam != nil {
+			options = &armapicenter.DeletedServicesClientListOptions{
+				Filter: filterParam,
+			}
+		}
+		resp := d.srv.NewListPager(subscriptionIDParam, resourceGroupNameParam, options)
 		newListPager = &resp
 		d.newListPager.add(req, newListPager)
 		server.PagerResponderInjectNextLinks(newListPager, req, func(page *armapicenter.DeletedServicesClientListResponse, createLink func() string) {
@@ -224,17 +223,17 @@ func (d *DeletedServicesServerTransport) dispatchNewListBySubscriptionPager(req 
 	}
 	newListBySubscriptionPager := d.newListBySubscriptionPager.get(req)
 	if newListBySubscriptionPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ApiCenter/deletedServices`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 1 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-resp := d.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ApiCenter/deletedServices`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 1 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resp := d.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
 		newListBySubscriptionPager = &resp
 		d.newListBySubscriptionPager.add(req, newListBySubscriptionPager)
 		server.PagerResponderInjectNextLinks(newListBySubscriptionPager, req, func(page *armapicenter.DeletedServicesClientListBySubscriptionResponse, createLink func() string) {
@@ -254,4 +253,3 @@ resp := d.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
 	}
 	return resp, nil
 }
-

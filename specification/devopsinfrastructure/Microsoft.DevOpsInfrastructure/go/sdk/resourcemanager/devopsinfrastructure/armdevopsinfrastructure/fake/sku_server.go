@@ -18,11 +18,10 @@ import (
 )
 
 // SkuServer is a fake server for instances of the armdevopsinfrastructure.SkuClient type.
-type SkuServer struct{
+type SkuServer struct {
 	// NewListByLocationPager is the fake for method SkuClient.NewListByLocationPager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListByLocationPager func(subscriptionID string, locationName string, options *armdevopsinfrastructure.SkuClientListByLocationOptions) (resp azfake.PagerResponder[armdevopsinfrastructure.SkuClientListByLocationResponse])
-
 }
 
 // NewSkuServerTransport creates a new instance of SkuServerTransport with the provided implementation.
@@ -30,7 +29,7 @@ type SkuServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewSkuServerTransport(srv *SkuServer) *SkuServerTransport {
 	return &SkuServerTransport{
-		srv: srv,
+		srv:                    srv,
 		newListByLocationPager: newTracker[azfake.PagerResponder[armdevopsinfrastructure.SkuClientListByLocationResponse]](),
 	}
 }
@@ -38,7 +37,7 @@ func NewSkuServerTransport(srv *SkuServer) *SkuServerTransport {
 // SkuServerTransport connects instances of armdevopsinfrastructure.SkuClient to instances of SkuServer.
 // Don't use this type directly, use NewSkuServerTransport instead.
 type SkuServerTransport struct {
-	srv *SkuServer
+	srv                    *SkuServer
 	newListByLocationPager *tracker[azfake.PagerResponder[armdevopsinfrastructure.SkuClientListByLocationResponse]]
 }
 
@@ -73,21 +72,21 @@ func (s *SkuServerTransport) dispatchNewListByLocationPager(req *http.Request) (
 	}
 	newListByLocationPager := s.newListByLocationPager.get(req)
 	if newListByLocationPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DevOpsInfrastructure/locations/(?P<locationName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/skus`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 2 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	locationNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("locationName")])
-	if err != nil {
-		return nil, err
-	}
-resp := s.srv.NewListByLocationPager(subscriptionIDParam, locationNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DevOpsInfrastructure/locations/(?P<locationName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/skus`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 2 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		locationNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("locationName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := s.srv.NewListByLocationPager(subscriptionIDParam, locationNameParam, nil)
 		newListByLocationPager = &resp
 		s.newListByLocationPager.add(req, newListByLocationPager)
 		server.PagerResponderInjectNextLinks(newListByLocationPager, req, func(page *armdevopsinfrastructure.SkuClientListByLocationResponse, createLink func() string) {
@@ -107,4 +106,3 @@ resp := s.srv.NewListByLocationPager(subscriptionIDParam, locationNameParam, nil
 	}
 	return resp, nil
 }
-

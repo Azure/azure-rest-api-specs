@@ -32,7 +32,7 @@ func NewPrivateCloudsClient(credential azcore.TokenCredential, options *arm.Clie
 		return nil, err
 	}
 	client := &PrivateCloudsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -41,12 +41,12 @@ func NewPrivateCloudsClient(credential azcore.TokenCredential, options *arm.Clie
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
-//   - resource - Resource create parameters.
+//   - privateCloud - Resource create parameters.
 //   - options - PrivateCloudsClientCreateOrUpdateOptions contains the optional parameters for the PrivateCloudsClient.CreateOrUpdate
 //     method.
-func (client *PrivateCloudsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, resource PrivateCloud, options *PrivateCloudsClientCreateOrUpdateOptions) (*runtime.Poller[PrivateCloudsClientCreateOrUpdateResponse], error) {
+func (client *PrivateCloudsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, privateCloud PrivateCloud, options *PrivateCloudsClientCreateOrUpdateOptions) (*runtime.Poller[PrivateCloudsClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
-		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, privateCloudName, resource, options)
+		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, privateCloudName, privateCloud, options)
 		if err != nil {
 			return nil, err
 		}
@@ -58,10 +58,10 @@ func (client *PrivateCloudsClient) BeginCreateOrUpdate(ctx context.Context, subs
 }
 
 // CreateOrUpdate - Create a PrivateCloud
-func (client *PrivateCloudsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, resource PrivateCloud, options *PrivateCloudsClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *PrivateCloudsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, privateCloud PrivateCloud, options *PrivateCloudsClientCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PrivateCloudsClient.BeginCreateOrUpdate")
-	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, resource, options)
+	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, privateCloud, options)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ func (client *PrivateCloudsClient) createOrUpdate(ctx context.Context, subscript
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *PrivateCloudsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, resource PrivateCloud, options *PrivateCloudsClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *PrivateCloudsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, privateCloud PrivateCloud, options *PrivateCloudsClientCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -100,9 +100,9 @@ func (client *PrivateCloudsClient) createOrUpdateCreateRequest(ctx context.Conte
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
-	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+	if err := runtime.MarshalAsJSON(req, privateCloud); err != nil {
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -293,13 +293,13 @@ func (client *PrivateCloudsClient) listAdminCredentialsHandleResponse(resp *http
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - options - PrivateCloudsClientListByResourceGroupOptions contains the optional parameters for the PrivateCloudsClient.NewListByResourceGroupPager
 //     method.
-func (client *PrivateCloudsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *PrivateCloudsClientListByResourceGroupOptions) (*runtime.Pager[PrivateCloudsClientListByResourceGroupResponse]) {
+func (client *PrivateCloudsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *PrivateCloudsClientListByResourceGroupOptions) *runtime.Pager[PrivateCloudsClientListByResourceGroupResponse] {
 	return runtime.NewPager(runtime.PagingHandler[PrivateCloudsClientListByResourceGroupResponse]{
 		More: func(page PrivateCloudsClientListByResourceGroupResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *PrivateCloudsClientListByResourceGroupResponse) (PrivateCloudsClientListByResourceGroupResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PrivateCloudsClient.NewListByResourceGroupPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PrivateCloudsClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -311,7 +311,7 @@ func (client *PrivateCloudsClient) NewListByResourceGroupPager(subscriptionID st
 				return PrivateCloudsClientListByResourceGroupResponse{}, err
 			}
 			return client.listByResourceGroupHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -350,13 +350,13 @@ func (client *PrivateCloudsClient) listByResourceGroupHandleResponse(resp *http.
 //   - subscriptionID - The ID of the target subscription.
 //   - options - PrivateCloudsClientListInSubscriptionOptions contains the optional parameters for the PrivateCloudsClient.NewListInSubscriptionPager
 //     method.
-func (client *PrivateCloudsClient) NewListInSubscriptionPager(subscriptionID string, options *PrivateCloudsClientListInSubscriptionOptions) (*runtime.Pager[PrivateCloudsClientListInSubscriptionResponse]) {
+func (client *PrivateCloudsClient) NewListInSubscriptionPager(subscriptionID string, options *PrivateCloudsClientListInSubscriptionOptions) *runtime.Pager[PrivateCloudsClientListInSubscriptionResponse] {
 	return runtime.NewPager(runtime.PagingHandler[PrivateCloudsClientListInSubscriptionResponse]{
 		More: func(page PrivateCloudsClientListInSubscriptionResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *PrivateCloudsClientListInSubscriptionResponse) (PrivateCloudsClientListInSubscriptionResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PrivateCloudsClient.NewListInSubscriptionPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PrivateCloudsClient.NewListInSubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -368,7 +368,7 @@ func (client *PrivateCloudsClient) NewListInSubscriptionPager(subscriptionID str
 				return PrivateCloudsClientListInSubscriptionResponse{}, err
 			}
 			return client.listInSubscriptionHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -577,8 +577,8 @@ func (client *PrivateCloudsClient) updateCreateRequest(ctx context.Context, subs
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, privateCloudUpdate); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -601,4 +601,3 @@ func (client *PrivateCloudsClient) updateHandleResponse(resp *http.Response) (Pr
 	}
 	return result, nil
 }
-

@@ -31,7 +31,7 @@ func NewPoolsClient(credential azcore.TokenCredential, options *arm.ClientOption
 		return nil, err
 	}
 	client := &PoolsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -99,8 +99,8 @@ func (client *PoolsClient) createOrUpdateCreateRequest(ctx context.Context, subs
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -231,13 +231,13 @@ func (client *PoolsClient) getHandleResponse(resp *http.Response) (PoolsClientGe
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - options - PoolsClientListByResourceGroupOptions contains the optional parameters for the PoolsClient.NewListByResourceGroupPager
 //     method.
-func (client *PoolsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *PoolsClientListByResourceGroupOptions) (*runtime.Pager[PoolsClientListByResourceGroupResponse]) {
+func (client *PoolsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *PoolsClientListByResourceGroupOptions) *runtime.Pager[PoolsClientListByResourceGroupResponse] {
 	return runtime.NewPager(runtime.PagingHandler[PoolsClientListByResourceGroupResponse]{
 		More: func(page PoolsClientListByResourceGroupResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *PoolsClientListByResourceGroupResponse) (PoolsClientListByResourceGroupResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PoolsClient.NewListByResourceGroupPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PoolsClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -249,7 +249,7 @@ func (client *PoolsClient) NewListByResourceGroupPager(subscriptionID string, re
 				return PoolsClientListByResourceGroupResponse{}, err
 			}
 			return client.listByResourceGroupHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -288,13 +288,13 @@ func (client *PoolsClient) listByResourceGroupHandleResponse(resp *http.Response
 //   - subscriptionID - The ID of the target subscription.
 //   - options - PoolsClientListBySubscriptionOptions contains the optional parameters for the PoolsClient.NewListBySubscriptionPager
 //     method.
-func (client *PoolsClient) NewListBySubscriptionPager(subscriptionID string, options *PoolsClientListBySubscriptionOptions) (*runtime.Pager[PoolsClientListBySubscriptionResponse]) {
+func (client *PoolsClient) NewListBySubscriptionPager(subscriptionID string, options *PoolsClientListBySubscriptionOptions) *runtime.Pager[PoolsClientListBySubscriptionResponse] {
 	return runtime.NewPager(runtime.PagingHandler[PoolsClientListBySubscriptionResponse]{
 		More: func(page PoolsClientListBySubscriptionResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *PoolsClientListBySubscriptionResponse) (PoolsClientListBySubscriptionResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PoolsClient.NewListBySubscriptionPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PoolsClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -306,7 +306,7 @@ func (client *PoolsClient) NewListBySubscriptionPager(subscriptionID string, opt
 				return PoolsClientListBySubscriptionResponse{}, err
 			}
 			return client.listBySubscriptionHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -400,8 +400,7 @@ func (client *PoolsClient) updateCreateRequest(ctx context.Context, subscription
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
-

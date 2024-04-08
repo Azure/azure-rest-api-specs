@@ -25,4 +25,3 @@ type QueryFilterClassification interface {
 	// GetQueryFilter returns the QueryFilter content of the underlying type.
 	GetQueryFilter() *QueryFilter
 }
-

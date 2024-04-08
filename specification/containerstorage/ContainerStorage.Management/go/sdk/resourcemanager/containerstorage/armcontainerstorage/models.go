@@ -43,7 +43,7 @@ type AssignmentStatus struct {
 // Azure Disk Pool Properties
 type AzureDisk struct {
 	// Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying
-// multiple disks (same syntax as tags).
+	// multiple disks (same syntax as tags).
 	Disks []*Disk
 
 	// Encryption specifies the encryption configuration for the Azure Disk pool
@@ -59,7 +59,7 @@ type AzureDisk struct {
 // Model for disk for that pool is using
 type Disk struct {
 	// REQUIRED; ID is the disk identifier visible to the OS. It is typically the WWN or disk ID in formats such as eui.e8238fa6bf530001001b448b45263379
-// or 0x5002cf6cbc5dd460
+	// or 0x5002cf6cbc5dd460
 	ID *string
 
 	// REQUIRED; Reference is the location of the disk in an external system.
@@ -105,47 +105,11 @@ type Encryption struct {
 // Ephemeral Disk Pool Properties
 type EphemeralDisk struct {
 	// Only required if individual disk selection is desired. Path to disk, e.g. <nodename>:/dev/sda or WWN. Supports specifying
-// multiple disks (same syntax as tags).
+	// multiple disks (same syntax as tags).
 	Disks []*Disk
 
 	// The number of data copies. Default 3.
 	Replicas *int64
-}
-
-// The resource management error additional info.
-type ErrorAdditionalInfo struct {
-	// The additional info.
-	Info *ErrorAdditionalInfoInfo
-
-	// The additional info type.
-	Type *string
-}
-
-type ErrorAdditionalInfoInfo struct {
-}
-
-// The error detail.
-type ErrorDetail struct {
-	// The error additional info.
-	AdditionalInfo []*ErrorAdditionalInfo
-
-	// The error code.
-	Code *string
-
-	// The error details.
-	Details []*ErrorDetail
-
-	// The error message.
-	Message *string
-
-	// The error target.
-	Target *string
-}
-
-// Common error response for all Azure Resource Manager APIs to return error details for failed operations.
-type ErrorResponse struct {
-	// The error object.
-	Error *ErrorDetail
 }
 
 // The properties of the managed service identities assigned to this resource.
@@ -172,15 +136,15 @@ type Operation struct {
 	Display *OperationDisplay
 
 	// Whether the operation applies to data-plane. This is "true" for data-plane operations and "false" for Azure Resource Manager/control-plane
-// operations.
+	// operations.
 	IsDataAction *bool
 
 	// The name of the operation, as per Resource-Based Access Control (RBAC). Examples: "Microsoft.Compute/virtualMachines/write",
-// "Microsoft.Compute/virtualMachines/capture/action"
+	// "Microsoft.Compute/virtualMachines/capture/action"
 	Name *string
 
 	// The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is
-// "user,system"
+	// "user,system"
 	Origin *Origin
 }
 
@@ -190,7 +154,7 @@ type OperationDisplay struct {
 	Description *string
 
 	// The concise, localized friendly name for the operation; suitable for dropdowns. E.g. "Create or Update Virtual Machine",
-// "Restart Virtual Machine".
+	// "Restart Virtual Machine".
 	Operation *string
 
 	// The localized friendly form of the resource provider name, e.g. "Microsoft Monitoring Insights" or "Microsoft Compute".
@@ -248,7 +212,7 @@ type PoolProperties struct {
 	PoolType *PoolType
 
 	// List of resources that should have access to the pool. Typically ARM references to AKS clusters or ACI Container Groups.
-// For local and standard this must be a single reference. For ElasticSAN there can be many.
+	// For local and standard this must be a single reference. For ElasticSAN there can be many.
 	Assignments []*Assignment
 
 	// The status of the last operation.
@@ -290,7 +254,7 @@ type PoolUpdate struct {
 // The updatable properties of the Pool.
 type PoolUpdateProperties struct {
 	// List of resources that should have access to the pool. Typically ARM references to AKS clusters or ACI Container Groups.
-// For local and standard this must be a single reference. For ElasticSAN there can be many.
+	// For local and standard this must be a single reference. For ElasticSAN there can be many.
 	Assignments []*Assignment
 
 	// Type of the Pool: ephemeralDisk, azureDisk, or elasticsan.
@@ -484,4 +448,3 @@ type VolumeUpdateProperties struct {
 	// String KV pairs indicating labels
 	Labels map[string]*string
 }
-

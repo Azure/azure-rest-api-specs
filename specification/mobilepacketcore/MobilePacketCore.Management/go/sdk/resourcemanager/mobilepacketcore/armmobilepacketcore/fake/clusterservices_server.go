@@ -20,7 +20,7 @@ import (
 )
 
 // ClusterServicesServer is a fake server for instances of the armmobilepacketcore.ClusterServicesClient type.
-type ClusterServicesServer struct{
+type ClusterServicesServer struct {
 	// CreateOrUpdate is the fake for method ClusterServicesClient.CreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
 	CreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, clusterServiceName string, resource armmobilepacketcore.ClusterServiceResource, options *armmobilepacketcore.ClusterServicesClientCreateOrUpdateOptions) (resp azfake.Responder[armmobilepacketcore.ClusterServicesClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
@@ -44,7 +44,6 @@ type ClusterServicesServer struct{
 	// UpdateTags is the fake for method ClusterServicesClient.UpdateTags
 	// HTTP status codes to indicate success: http.StatusOK
 	UpdateTags func(ctx context.Context, subscriptionID string, resourceGroupName string, clusterServiceName string, properties armmobilepacketcore.ClusterServiceResourceTagsUpdate, options *armmobilepacketcore.ClusterServicesClientUpdateTagsOptions) (resp azfake.Responder[armmobilepacketcore.ClusterServicesClientUpdateTagsResponse], errResp azfake.ErrorResponder)
-
 }
 
 // NewClusterServicesServerTransport creates a new instance of ClusterServicesServerTransport with the provided implementation.
@@ -52,20 +51,20 @@ type ClusterServicesServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewClusterServicesServerTransport(srv *ClusterServicesServer) *ClusterServicesServerTransport {
 	return &ClusterServicesServerTransport{
-		srv: srv,
-		beginDelete: newTracker[azfake.PollerResponder[armmobilepacketcore.ClusterServicesClientDeleteResponse]](),
+		srv:                         srv,
+		beginDelete:                 newTracker[azfake.PollerResponder[armmobilepacketcore.ClusterServicesClientDeleteResponse]](),
 		newListByResourceGroupPager: newTracker[azfake.PagerResponder[armmobilepacketcore.ClusterServicesClientListByResourceGroupResponse]](),
-		newListBySubscriptionPager: newTracker[azfake.PagerResponder[armmobilepacketcore.ClusterServicesClientListBySubscriptionResponse]](),
+		newListBySubscriptionPager:  newTracker[azfake.PagerResponder[armmobilepacketcore.ClusterServicesClientListBySubscriptionResponse]](),
 	}
 }
 
 // ClusterServicesServerTransport connects instances of armmobilepacketcore.ClusterServicesClient to instances of ClusterServicesServer.
 // Don't use this type directly, use NewClusterServicesServerTransport instead.
 type ClusterServicesServerTransport struct {
-	srv *ClusterServicesServer
-	beginDelete *tracker[azfake.PollerResponder[armmobilepacketcore.ClusterServicesClientDeleteResponse]]
+	srv                         *ClusterServicesServer
+	beginDelete                 *tracker[azfake.PollerResponder[armmobilepacketcore.ClusterServicesClientDeleteResponse]]
 	newListByResourceGroupPager *tracker[azfake.PagerResponder[armmobilepacketcore.ClusterServicesClientListByResourceGroupResponse]]
-	newListBySubscriptionPager *tracker[azfake.PagerResponder[armmobilepacketcore.ClusterServicesClientListBySubscriptionResponse]]
+	newListBySubscriptionPager  *tracker[azfake.PagerResponder[armmobilepacketcore.ClusterServicesClientListBySubscriptionResponse]]
 }
 
 // Do implements the policy.Transporter interface for ClusterServicesServerTransport.
@@ -153,28 +152,28 @@ func (c *ClusterServicesServerTransport) dispatchBeginDelete(req *http.Request) 
 	}
 	beginDelete := c.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/clusterServices/(?P<clusterServiceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	clusterServiceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("clusterServiceName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := c.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, clusterServiceNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/clusterServices/(?P<clusterServiceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		clusterServiceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("clusterServiceName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := c.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, clusterServiceNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		c.beginDelete.add(req, beginDelete)
 	}
@@ -238,21 +237,21 @@ func (c *ClusterServicesServerTransport) dispatchNewListByResourceGroupPager(req
 	}
 	newListByResourceGroupPager := c.newListByResourceGroupPager.get(req)
 	if newListByResourceGroupPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/clusterServices`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 2 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-resp := c.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/clusterServices`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 2 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := c.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
 		newListByResourceGroupPager = &resp
 		c.newListByResourceGroupPager.add(req, newListByResourceGroupPager)
 		server.PagerResponderInjectNextLinks(newListByResourceGroupPager, req, func(page *armmobilepacketcore.ClusterServicesClientListByResourceGroupResponse, createLink func() string) {
@@ -279,17 +278,17 @@ func (c *ClusterServicesServerTransport) dispatchNewListBySubscriptionPager(req 
 	}
 	newListBySubscriptionPager := c.newListBySubscriptionPager.get(req)
 	if newListBySubscriptionPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/clusterServices`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 1 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-resp := c.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/clusterServices`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 1 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resp := c.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
 		newListBySubscriptionPager = &resp
 		c.newListBySubscriptionPager.add(req, newListBySubscriptionPager)
 		server.PagerResponderInjectNextLinks(newListBySubscriptionPager, req, func(page *armmobilepacketcore.ClusterServicesClientListBySubscriptionResponse, createLink func() string) {
@@ -350,4 +349,3 @@ func (c *ClusterServicesServerTransport) dispatchUpdateTags(req *http.Request) (
 	}
 	return resp, nil
 }
-

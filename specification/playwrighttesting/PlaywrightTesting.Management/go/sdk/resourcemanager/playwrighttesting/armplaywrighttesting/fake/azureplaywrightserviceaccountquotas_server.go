@@ -19,7 +19,7 @@ import (
 )
 
 // AzurePlaywrightServiceAccountQuotasServer is a fake server for instances of the armplaywrighttesting.AzurePlaywrightServiceAccountQuotasClient type.
-type AzurePlaywrightServiceAccountQuotasServer struct{
+type AzurePlaywrightServiceAccountQuotasServer struct {
 	// Get is the fake for method AzurePlaywrightServiceAccountQuotasClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
 	Get func(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, quotaName armplaywrighttesting.QuotaNames, options *armplaywrighttesting.AzurePlaywrightServiceAccountQuotasClientGetOptions) (resp azfake.Responder[armplaywrighttesting.AzurePlaywrightServiceAccountQuotasClientGetResponse], errResp azfake.ErrorResponder)
@@ -27,7 +27,6 @@ type AzurePlaywrightServiceAccountQuotasServer struct{
 	// NewListByAccountPager is the fake for method AzurePlaywrightServiceAccountQuotasClient.NewListByAccountPager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListByAccountPager func(subscriptionID string, resourceGroupName string, accountName string, options *armplaywrighttesting.AzurePlaywrightServiceAccountQuotasClientListByAccountOptions) (resp azfake.PagerResponder[armplaywrighttesting.AzurePlaywrightServiceAccountQuotasClientListByAccountResponse])
-
 }
 
 // NewAzurePlaywrightServiceAccountQuotasServerTransport creates a new instance of AzurePlaywrightServiceAccountQuotasServerTransport with the provided implementation.
@@ -35,7 +34,7 @@ type AzurePlaywrightServiceAccountQuotasServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewAzurePlaywrightServiceAccountQuotasServerTransport(srv *AzurePlaywrightServiceAccountQuotasServer) *AzurePlaywrightServiceAccountQuotasServerTransport {
 	return &AzurePlaywrightServiceAccountQuotasServerTransport{
-		srv: srv,
+		srv:                   srv,
 		newListByAccountPager: newTracker[azfake.PagerResponder[armplaywrighttesting.AzurePlaywrightServiceAccountQuotasClientListByAccountResponse]](),
 	}
 }
@@ -43,7 +42,7 @@ func NewAzurePlaywrightServiceAccountQuotasServerTransport(srv *AzurePlaywrightS
 // AzurePlaywrightServiceAccountQuotasServerTransport connects instances of armplaywrighttesting.AzurePlaywrightServiceAccountQuotasClient to instances of AzurePlaywrightServiceAccountQuotasServer.
 // Don't use this type directly, use NewAzurePlaywrightServiceAccountQuotasServerTransport instead.
 type AzurePlaywrightServiceAccountQuotasServerTransport struct {
-	srv *AzurePlaywrightServiceAccountQuotasServer
+	srv                   *AzurePlaywrightServiceAccountQuotasServer
 	newListByAccountPager *tracker[azfake.PagerResponder[armplaywrighttesting.AzurePlaywrightServiceAccountQuotasClientListByAccountResponse]]
 }
 
@@ -96,7 +95,7 @@ func (a *AzurePlaywrightServiceAccountQuotasServerTransport) dispatchGet(req *ht
 	if err != nil {
 		return nil, err
 	}
-	quotaNameParam, err := parseWithCast(matches[regex.SubexpIndex("quotaName")], func (v string) (armplaywrighttesting.QuotaNames, error) {
+	quotaNameParam, err := parseWithCast(matches[regex.SubexpIndex("quotaName")], func(v string) (armplaywrighttesting.QuotaNames, error) {
 		p, unescapeErr := url.PathUnescape(v)
 		if unescapeErr != nil {
 			return "", unescapeErr
@@ -127,25 +126,25 @@ func (a *AzurePlaywrightServiceAccountQuotasServerTransport) dispatchNewListByAc
 	}
 	newListByAccountPager := a.newListByAccountPager.get(req)
 	if newListByAccountPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzurePlaywrightService/accounts/(?P<accountName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/quotas`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	accountNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("accountName")])
-	if err != nil {
-		return nil, err
-	}
-resp := a.srv.NewListByAccountPager(subscriptionIDParam, resourceGroupNameParam, accountNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzurePlaywrightService/accounts/(?P<accountName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/quotas`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		accountNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("accountName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := a.srv.NewListByAccountPager(subscriptionIDParam, resourceGroupNameParam, accountNameParam, nil)
 		newListByAccountPager = &resp
 		a.newListByAccountPager.add(req, newListByAccountPager)
 		server.PagerResponderInjectNextLinks(newListByAccountPager, req, func(page *armplaywrighttesting.AzurePlaywrightServiceAccountQuotasClientListByAccountResponse, createLink func() string) {
@@ -165,4 +164,3 @@ resp := a.srv.NewListByAccountPager(subscriptionIDParam, resourceGroupNameParam,
 	}
 	return resp, nil
 }
-

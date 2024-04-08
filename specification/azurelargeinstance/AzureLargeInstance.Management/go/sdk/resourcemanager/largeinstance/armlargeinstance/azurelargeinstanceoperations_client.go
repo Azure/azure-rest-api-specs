@@ -28,7 +28,7 @@ func NewAzureLargeInstanceOperationsClient(credential azcore.TokenCredential, op
 		return nil, err
 	}
 	client := &AzureLargeInstanceOperationsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -36,13 +36,13 @@ func NewAzureLargeInstanceOperationsClient(credential azcore.TokenCredential, op
 // NewListPager - List the operations for the provider
 //   - options - AzureLargeInstanceOperationsClientListOptions contains the optional parameters for the AzureLargeInstanceOperationsClient.NewListPager
 //     method.
-func (client *AzureLargeInstanceOperationsClient) NewListPager(options *AzureLargeInstanceOperationsClientListOptions) (*runtime.Pager[AzureLargeInstanceOperationsClientListResponse]) {
+func (client *AzureLargeInstanceOperationsClient) NewListPager(options *AzureLargeInstanceOperationsClientListOptions) *runtime.Pager[AzureLargeInstanceOperationsClientListResponse] {
 	return runtime.NewPager(runtime.PagingHandler[AzureLargeInstanceOperationsClientListResponse]{
 		More: func(page AzureLargeInstanceOperationsClientListResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AzureLargeInstanceOperationsClientListResponse) (AzureLargeInstanceOperationsClientListResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureLargeInstanceOperationsClient.NewListPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureLargeInstanceOperationsClient.NewListPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -54,7 +54,7 @@ func (client *AzureLargeInstanceOperationsClient) NewListPager(options *AzureLar
 				return AzureLargeInstanceOperationsClientListResponse{}, err
 			}
 			return client.listHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -80,4 +80,3 @@ func (client *AzureLargeInstanceOperationsClient) listHandleResponse(resp *http.
 	}
 	return result, nil
 }
-

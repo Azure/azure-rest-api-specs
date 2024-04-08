@@ -122,4 +122,3 @@ func unmarshalWorkloadNetworkDhcpEntityClassification(rawMsg json.RawMessage) (W
 	}
 	return b, nil
 }
-

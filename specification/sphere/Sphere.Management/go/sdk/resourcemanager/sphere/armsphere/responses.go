@@ -268,4 +268,3 @@ type AzureSphereProductsClientUpdateResponse struct {
 	// An product resource belonging to a catalog resource.
 	Product
 }
-

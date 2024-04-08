@@ -30,13 +30,13 @@ func (a *ArmResource) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "id":
-				err = unpopulate(val, "ID", &a.ID)
+			err = unpopulate(val, "ID", &a.ID)
 			delete(rawMsg, key)
 		case "systemData":
-				err = unpopulate(val, "SystemData", &a.SystemData)
+			err = unpopulate(val, "SystemData", &a.SystemData)
 			delete(rawMsg, key)
 		case "type":
-				err = unpopulate(val, "Type", &a.Type)
+			err = unpopulate(val, "Type", &a.Type)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -67,19 +67,19 @@ func (b *BgpPeer) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "id":
-				err = unpopulate(val, "ID", &b.ID)
+			err = unpopulate(val, "ID", &b.ID)
 			delete(rawMsg, key)
 		case "name":
-				err = unpopulate(val, "Name", &b.Name)
+			err = unpopulate(val, "Name", &b.Name)
 			delete(rawMsg, key)
 		case "properties":
-				err = unpopulate(val, "Properties", &b.Properties)
+			err = unpopulate(val, "Properties", &b.Properties)
 			delete(rawMsg, key)
 		case "systemData":
-				err = unpopulate(val, "SystemData", &b.SystemData)
+			err = unpopulate(val, "SystemData", &b.SystemData)
 			delete(rawMsg, key)
 		case "type":
-				err = unpopulate(val, "Type", &b.Type)
+			err = unpopulate(val, "Type", &b.Type)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -107,10 +107,10 @@ func (b *BgpPeerListResult) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "nextLink":
-				err = unpopulate(val, "NextLink", &b.NextLink)
+			err = unpopulate(val, "NextLink", &b.NextLink)
 			delete(rawMsg, key)
 		case "value":
-				err = unpopulate(val, "Value", &b.Value)
+			err = unpopulate(val, "Value", &b.Value)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -140,16 +140,16 @@ func (b *BgpPeerProperties) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "myAsn":
-				err = unpopulate(val, "MyAsn", &b.MyAsn)
+			err = unpopulate(val, "MyAsn", &b.MyAsn)
 			delete(rawMsg, key)
 		case "peerAddress":
-				err = unpopulate(val, "PeerAddress", &b.PeerAddress)
+			err = unpopulate(val, "PeerAddress", &b.PeerAddress)
 			delete(rawMsg, key)
 		case "peerAsn":
-				err = unpopulate(val, "PeerAsn", &b.PeerAsn)
+			err = unpopulate(val, "PeerAsn", &b.PeerAsn)
 			delete(rawMsg, key)
 		case "provisioningState":
-				err = unpopulate(val, "ProvisioningState", &b.ProvisioningState)
+			err = unpopulate(val, "ProvisioningState", &b.ProvisioningState)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -178,118 +178,17 @@ func (b *BlobStorageClassTypeProperties) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "azureStorageAccountKey":
-				err = unpopulate(val, "AzureStorageAccountKey", &b.AzureStorageAccountKey)
+			err = unpopulate(val, "AzureStorageAccountKey", &b.AzureStorageAccountKey)
 			delete(rawMsg, key)
 		case "azureStorageAccountName":
-				err = unpopulate(val, "AzureStorageAccountName", &b.AzureStorageAccountName)
+			err = unpopulate(val, "AzureStorageAccountName", &b.AzureStorageAccountName)
 			delete(rawMsg, key)
 		case "type":
-				err = unpopulate(val, "Type", &b.Type)
+			err = unpopulate(val, "Type", &b.Type)
 			delete(rawMsg, key)
 		}
 		if err != nil {
 			return fmt.Errorf("unmarshalling type %T: %v", b, err)
-		}
-	}
-	return nil
-}
-
-// MarshalJSON implements the json.Marshaller interface for type ErrorAdditionalInfo.
-func (e ErrorAdditionalInfo) MarshalJSON() ([]byte, error) {
-	objectMap := make(map[string]any)
-	populate(objectMap, "info", e.Info)
-	populate(objectMap, "type", e.Type)
-	return json.Marshal(objectMap)
-}
-
-// UnmarshalJSON implements the json.Unmarshaller interface for type ErrorAdditionalInfo.
-func (e *ErrorAdditionalInfo) UnmarshalJSON(data []byte) error {
-	var rawMsg map[string]json.RawMessage
-	if err := json.Unmarshal(data, &rawMsg); err != nil {
-		return fmt.Errorf("unmarshalling type %T: %v", e, err)
-	}
-	for key, val := range rawMsg {
-		var err error
-		switch key {
-		case "info":
-				err = unpopulate(val, "Info", &e.Info)
-			delete(rawMsg, key)
-		case "type":
-				err = unpopulate(val, "Type", &e.Type)
-			delete(rawMsg, key)
-		}
-		if err != nil {
-			return fmt.Errorf("unmarshalling type %T: %v", e, err)
-		}
-	}
-	return nil
-}
-
-// MarshalJSON implements the json.Marshaller interface for type ErrorDetail.
-func (e ErrorDetail) MarshalJSON() ([]byte, error) {
-	objectMap := make(map[string]any)
-	populate(objectMap, "additionalInfo", e.AdditionalInfo)
-	populate(objectMap, "code", e.Code)
-	populate(objectMap, "details", e.Details)
-	populate(objectMap, "message", e.Message)
-	populate(objectMap, "target", e.Target)
-	return json.Marshal(objectMap)
-}
-
-// UnmarshalJSON implements the json.Unmarshaller interface for type ErrorDetail.
-func (e *ErrorDetail) UnmarshalJSON(data []byte) error {
-	var rawMsg map[string]json.RawMessage
-	if err := json.Unmarshal(data, &rawMsg); err != nil {
-		return fmt.Errorf("unmarshalling type %T: %v", e, err)
-	}
-	for key, val := range rawMsg {
-		var err error
-		switch key {
-		case "additionalInfo":
-				err = unpopulate(val, "AdditionalInfo", &e.AdditionalInfo)
-			delete(rawMsg, key)
-		case "code":
-				err = unpopulate(val, "Code", &e.Code)
-			delete(rawMsg, key)
-		case "details":
-				err = unpopulate(val, "Details", &e.Details)
-			delete(rawMsg, key)
-		case "message":
-				err = unpopulate(val, "Message", &e.Message)
-			delete(rawMsg, key)
-		case "target":
-				err = unpopulate(val, "Target", &e.Target)
-			delete(rawMsg, key)
-		}
-		if err != nil {
-			return fmt.Errorf("unmarshalling type %T: %v", e, err)
-		}
-	}
-	return nil
-}
-
-// MarshalJSON implements the json.Marshaller interface for type ErrorResponse.
-func (e ErrorResponse) MarshalJSON() ([]byte, error) {
-	objectMap := make(map[string]any)
-	populate(objectMap, "error", e.Error)
-	return json.Marshal(objectMap)
-}
-
-// UnmarshalJSON implements the json.Unmarshaller interface for type ErrorResponse.
-func (e *ErrorResponse) UnmarshalJSON(data []byte) error {
-	var rawMsg map[string]json.RawMessage
-	if err := json.Unmarshal(data, &rawMsg); err != nil {
-		return fmt.Errorf("unmarshalling type %T: %v", e, err)
-	}
-	for key, val := range rawMsg {
-		var err error
-		switch key {
-		case "error":
-				err = unpopulate(val, "Error", &e.Error)
-			delete(rawMsg, key)
-		}
-		if err != nil {
-			return fmt.Errorf("unmarshalling type %T: %v", e, err)
 		}
 	}
 	return nil
@@ -314,13 +213,13 @@ func (e *ExtensionResourceBase) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "id":
-				err = unpopulate(val, "ID", &e.ID)
+			err = unpopulate(val, "ID", &e.ID)
 			delete(rawMsg, key)
 		case "systemData":
-				err = unpopulate(val, "SystemData", &e.SystemData)
+			err = unpopulate(val, "SystemData", &e.SystemData)
 			delete(rawMsg, key)
 		case "type":
-				err = unpopulate(val, "Type", &e.Type)
+			err = unpopulate(val, "Type", &e.Type)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -351,19 +250,19 @@ func (l *LoadBalancer) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "id":
-				err = unpopulate(val, "ID", &l.ID)
+			err = unpopulate(val, "ID", &l.ID)
 			delete(rawMsg, key)
 		case "name":
-				err = unpopulate(val, "Name", &l.Name)
+			err = unpopulate(val, "Name", &l.Name)
 			delete(rawMsg, key)
 		case "properties":
-				err = unpopulate(val, "Properties", &l.Properties)
+			err = unpopulate(val, "Properties", &l.Properties)
 			delete(rawMsg, key)
 		case "systemData":
-				err = unpopulate(val, "SystemData", &l.SystemData)
+			err = unpopulate(val, "SystemData", &l.SystemData)
 			delete(rawMsg, key)
 		case "type":
-				err = unpopulate(val, "Type", &l.Type)
+			err = unpopulate(val, "Type", &l.Type)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -391,10 +290,10 @@ func (l *LoadBalancerListResult) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "nextLink":
-				err = unpopulate(val, "NextLink", &l.NextLink)
+			err = unpopulate(val, "NextLink", &l.NextLink)
 			delete(rawMsg, key)
 		case "value":
-				err = unpopulate(val, "Value", &l.Value)
+			err = unpopulate(val, "Value", &l.Value)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -425,19 +324,19 @@ func (l *LoadBalancerProperties) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "addresses":
-				err = unpopulate(val, "Addresses", &l.Addresses)
+			err = unpopulate(val, "Addresses", &l.Addresses)
 			delete(rawMsg, key)
 		case "advertiseMode":
-				err = unpopulate(val, "AdvertiseMode", &l.AdvertiseMode)
+			err = unpopulate(val, "AdvertiseMode", &l.AdvertiseMode)
 			delete(rawMsg, key)
 		case "bgpPeers":
-				err = unpopulate(val, "BgpPeers", &l.BgpPeers)
+			err = unpopulate(val, "BgpPeers", &l.BgpPeers)
 			delete(rawMsg, key)
 		case "provisioningState":
-				err = unpopulate(val, "ProvisioningState", &l.ProvisioningState)
+			err = unpopulate(val, "ProvisioningState", &l.ProvisioningState)
 			delete(rawMsg, key)
 		case "serviceSelector":
-				err = unpopulate(val, "ServiceSelector", &l.ServiceSelector)
+			err = unpopulate(val, "ServiceSelector", &l.ServiceSelector)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -464,7 +363,7 @@ func (n *NativeStorageClassTypeProperties) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "type":
-				err = unpopulate(val, "Type", &n.Type)
+			err = unpopulate(val, "Type", &n.Type)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -496,22 +395,22 @@ func (n *NfsStorageClassTypeProperties) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "mountPermissions":
-				err = unpopulate(val, "MountPermissions", &n.MountPermissions)
+			err = unpopulate(val, "MountPermissions", &n.MountPermissions)
 			delete(rawMsg, key)
 		case "onDelete":
-				err = unpopulate(val, "OnDelete", &n.OnDelete)
+			err = unpopulate(val, "OnDelete", &n.OnDelete)
 			delete(rawMsg, key)
 		case "server":
-				err = unpopulate(val, "Server", &n.Server)
+			err = unpopulate(val, "Server", &n.Server)
 			delete(rawMsg, key)
 		case "share":
-				err = unpopulate(val, "Share", &n.Share)
+			err = unpopulate(val, "Share", &n.Share)
 			delete(rawMsg, key)
 		case "subDir":
-				err = unpopulate(val, "SubDir", &n.SubDir)
+			err = unpopulate(val, "SubDir", &n.SubDir)
 			delete(rawMsg, key)
 		case "type":
-				err = unpopulate(val, "Type", &n.Type)
+			err = unpopulate(val, "Type", &n.Type)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -542,19 +441,19 @@ func (o *Operation) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "actionType":
-				err = unpopulate(val, "ActionType", &o.ActionType)
+			err = unpopulate(val, "ActionType", &o.ActionType)
 			delete(rawMsg, key)
 		case "display":
-				err = unpopulate(val, "Display", &o.Display)
+			err = unpopulate(val, "Display", &o.Display)
 			delete(rawMsg, key)
 		case "isDataAction":
-				err = unpopulate(val, "IsDataAction", &o.IsDataAction)
+			err = unpopulate(val, "IsDataAction", &o.IsDataAction)
 			delete(rawMsg, key)
 		case "name":
-				err = unpopulate(val, "Name", &o.Name)
+			err = unpopulate(val, "Name", &o.Name)
 			delete(rawMsg, key)
 		case "origin":
-				err = unpopulate(val, "Origin", &o.Origin)
+			err = unpopulate(val, "Origin", &o.Origin)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -584,16 +483,16 @@ func (o *OperationDisplay) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "description":
-				err = unpopulate(val, "Description", &o.Description)
+			err = unpopulate(val, "Description", &o.Description)
 			delete(rawMsg, key)
 		case "operation":
-				err = unpopulate(val, "Operation", &o.Operation)
+			err = unpopulate(val, "Operation", &o.Operation)
 			delete(rawMsg, key)
 		case "provider":
-				err = unpopulate(val, "Provider", &o.Provider)
+			err = unpopulate(val, "Provider", &o.Provider)
 			delete(rawMsg, key)
 		case "resource":
-				err = unpopulate(val, "Resource", &o.Resource)
+			err = unpopulate(val, "Resource", &o.Resource)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -621,10 +520,10 @@ func (p *PagedOperation) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "nextLink":
-				err = unpopulate(val, "NextLink", &p.NextLink)
+			err = unpopulate(val, "NextLink", &p.NextLink)
 			delete(rawMsg, key)
 		case "value":
-				err = unpopulate(val, "Value", &p.Value)
+			err = unpopulate(val, "Value", &p.Value)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -652,10 +551,10 @@ func (r *RwxStorageClassTypeProperties) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "backingStorageClassName":
-				err = unpopulate(val, "BackingStorageClassName", &r.BackingStorageClassName)
+			err = unpopulate(val, "BackingStorageClassName", &r.BackingStorageClassName)
 			delete(rawMsg, key)
 		case "type":
-				err = unpopulate(val, "Type", &r.Type)
+			err = unpopulate(val, "Type", &r.Type)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -683,10 +582,10 @@ func (s *ServiceProperties) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "provisioningState":
-				err = unpopulate(val, "ProvisioningState", &s.ProvisioningState)
+			err = unpopulate(val, "ProvisioningState", &s.ProvisioningState)
 			delete(rawMsg, key)
 		case "rpObjectId":
-				err = unpopulate(val, "RpObjectID", &s.RpObjectID)
+			err = unpopulate(val, "RpObjectID", &s.RpObjectID)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -717,19 +616,19 @@ func (s *ServiceResource) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "id":
-				err = unpopulate(val, "ID", &s.ID)
+			err = unpopulate(val, "ID", &s.ID)
 			delete(rawMsg, key)
 		case "name":
-				err = unpopulate(val, "Name", &s.Name)
+			err = unpopulate(val, "Name", &s.Name)
 			delete(rawMsg, key)
 		case "properties":
-				err = unpopulate(val, "Properties", &s.Properties)
+			err = unpopulate(val, "Properties", &s.Properties)
 			delete(rawMsg, key)
 		case "systemData":
-				err = unpopulate(val, "SystemData", &s.SystemData)
+			err = unpopulate(val, "SystemData", &s.SystemData)
 			delete(rawMsg, key)
 		case "type":
-				err = unpopulate(val, "Type", &s.Type)
+			err = unpopulate(val, "Type", &s.Type)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -757,10 +656,10 @@ func (s *ServiceResourceListResult) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "nextLink":
-				err = unpopulate(val, "NextLink", &s.NextLink)
+			err = unpopulate(val, "NextLink", &s.NextLink)
 			delete(rawMsg, key)
 		case "value":
-				err = unpopulate(val, "Value", &s.Value)
+			err = unpopulate(val, "Value", &s.Value)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -792,22 +691,22 @@ func (s *SmbStorageClassTypeProperties) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "domain":
-				err = unpopulate(val, "Domain", &s.Domain)
+			err = unpopulate(val, "Domain", &s.Domain)
 			delete(rawMsg, key)
 		case "password":
-				err = unpopulate(val, "Password", &s.Password)
+			err = unpopulate(val, "Password", &s.Password)
 			delete(rawMsg, key)
 		case "source":
-				err = unpopulate(val, "Source", &s.Source)
+			err = unpopulate(val, "Source", &s.Source)
 			delete(rawMsg, key)
 		case "subDir":
-				err = unpopulate(val, "SubDir", &s.SubDir)
+			err = unpopulate(val, "SubDir", &s.SubDir)
 			delete(rawMsg, key)
 		case "type":
-				err = unpopulate(val, "Type", &s.Type)
+			err = unpopulate(val, "Type", &s.Type)
 			delete(rawMsg, key)
 		case "username":
-				err = unpopulate(val, "Username", &s.Username)
+			err = unpopulate(val, "Username", &s.Username)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -845,40 +744,40 @@ func (s *StorageClassProperties) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "accessModes":
-				err = unpopulate(val, "AccessModes", &s.AccessModes)
+			err = unpopulate(val, "AccessModes", &s.AccessModes)
 			delete(rawMsg, key)
 		case "allowVolumeExpansion":
-				err = unpopulate(val, "AllowVolumeExpansion", &s.AllowVolumeExpansion)
+			err = unpopulate(val, "AllowVolumeExpansion", &s.AllowVolumeExpansion)
 			delete(rawMsg, key)
 		case "dataResilience":
-				err = unpopulate(val, "DataResilience", &s.DataResilience)
+			err = unpopulate(val, "DataResilience", &s.DataResilience)
 			delete(rawMsg, key)
 		case "failoverSpeed":
-				err = unpopulate(val, "FailoverSpeed", &s.FailoverSpeed)
+			err = unpopulate(val, "FailoverSpeed", &s.FailoverSpeed)
 			delete(rawMsg, key)
 		case "limitations":
-				err = unpopulate(val, "Limitations", &s.Limitations)
+			err = unpopulate(val, "Limitations", &s.Limitations)
 			delete(rawMsg, key)
 		case "mountOptions":
-				err = unpopulate(val, "MountOptions", &s.MountOptions)
+			err = unpopulate(val, "MountOptions", &s.MountOptions)
 			delete(rawMsg, key)
 		case "performance":
-				err = unpopulate(val, "Performance", &s.Performance)
+			err = unpopulate(val, "Performance", &s.Performance)
 			delete(rawMsg, key)
 		case "priority":
-				err = unpopulate(val, "Priority", &s.Priority)
+			err = unpopulate(val, "Priority", &s.Priority)
 			delete(rawMsg, key)
 		case "provisioner":
-				err = unpopulate(val, "Provisioner", &s.Provisioner)
+			err = unpopulate(val, "Provisioner", &s.Provisioner)
 			delete(rawMsg, key)
 		case "provisioningState":
-				err = unpopulate(val, "ProvisioningState", &s.ProvisioningState)
+			err = unpopulate(val, "ProvisioningState", &s.ProvisioningState)
 			delete(rawMsg, key)
 		case "typeProperties":
 			s.TypeProperties, err = unmarshalStorageClassTypePropertiesClassification(val)
 			delete(rawMsg, key)
 		case "volumeBindingMode":
-				err = unpopulate(val, "VolumeBindingMode", &s.VolumeBindingMode)
+			err = unpopulate(val, "VolumeBindingMode", &s.VolumeBindingMode)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -913,31 +812,31 @@ func (s *StorageClassPropertiesUpdate) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "accessModes":
-				err = unpopulate(val, "AccessModes", &s.AccessModes)
+			err = unpopulate(val, "AccessModes", &s.AccessModes)
 			delete(rawMsg, key)
 		case "allowVolumeExpansion":
-				err = unpopulate(val, "AllowVolumeExpansion", &s.AllowVolumeExpansion)
+			err = unpopulate(val, "AllowVolumeExpansion", &s.AllowVolumeExpansion)
 			delete(rawMsg, key)
 		case "dataResilience":
-				err = unpopulate(val, "DataResilience", &s.DataResilience)
+			err = unpopulate(val, "DataResilience", &s.DataResilience)
 			delete(rawMsg, key)
 		case "failoverSpeed":
-				err = unpopulate(val, "FailoverSpeed", &s.FailoverSpeed)
+			err = unpopulate(val, "FailoverSpeed", &s.FailoverSpeed)
 			delete(rawMsg, key)
 		case "limitations":
-				err = unpopulate(val, "Limitations", &s.Limitations)
+			err = unpopulate(val, "Limitations", &s.Limitations)
 			delete(rawMsg, key)
 		case "mountOptions":
-				err = unpopulate(val, "MountOptions", &s.MountOptions)
+			err = unpopulate(val, "MountOptions", &s.MountOptions)
 			delete(rawMsg, key)
 		case "performance":
-				err = unpopulate(val, "Performance", &s.Performance)
+			err = unpopulate(val, "Performance", &s.Performance)
 			delete(rawMsg, key)
 		case "priority":
-				err = unpopulate(val, "Priority", &s.Priority)
+			err = unpopulate(val, "Priority", &s.Priority)
 			delete(rawMsg, key)
 		case "typeProperties":
-				err = unpopulate(val, "TypeProperties", &s.TypeProperties)
+			err = unpopulate(val, "TypeProperties", &s.TypeProperties)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -968,19 +867,19 @@ func (s *StorageClassResource) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "id":
-				err = unpopulate(val, "ID", &s.ID)
+			err = unpopulate(val, "ID", &s.ID)
 			delete(rawMsg, key)
 		case "name":
-				err = unpopulate(val, "Name", &s.Name)
+			err = unpopulate(val, "Name", &s.Name)
 			delete(rawMsg, key)
 		case "properties":
-				err = unpopulate(val, "Properties", &s.Properties)
+			err = unpopulate(val, "Properties", &s.Properties)
 			delete(rawMsg, key)
 		case "systemData":
-				err = unpopulate(val, "SystemData", &s.SystemData)
+			err = unpopulate(val, "SystemData", &s.SystemData)
 			delete(rawMsg, key)
 		case "type":
-				err = unpopulate(val, "Type", &s.Type)
+			err = unpopulate(val, "Type", &s.Type)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -1008,10 +907,10 @@ func (s *StorageClassResourceListResult) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "nextLink":
-				err = unpopulate(val, "NextLink", &s.NextLink)
+			err = unpopulate(val, "NextLink", &s.NextLink)
 			delete(rawMsg, key)
 		case "value":
-				err = unpopulate(val, "Value", &s.Value)
+			err = unpopulate(val, "Value", &s.Value)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -1038,7 +937,7 @@ func (s *StorageClassResourceUpdate) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "properties":
-				err = unpopulate(val, "Properties", &s.Properties)
+			err = unpopulate(val, "Properties", &s.Properties)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -1065,7 +964,7 @@ func (s *StorageClassTypeProperties) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "type":
-				err = unpopulate(val, "Type", &s.Type)
+			err = unpopulate(val, "Type", &s.Type)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -1103,40 +1002,40 @@ func (s *StorageClassTypePropertiesUpdate) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "azureStorageAccountKey":
-				err = unpopulate(val, "AzureStorageAccountKey", &s.AzureStorageAccountKey)
+			err = unpopulate(val, "AzureStorageAccountKey", &s.AzureStorageAccountKey)
 			delete(rawMsg, key)
 		case "azureStorageAccountName":
-				err = unpopulate(val, "AzureStorageAccountName", &s.AzureStorageAccountName)
+			err = unpopulate(val, "AzureStorageAccountName", &s.AzureStorageAccountName)
 			delete(rawMsg, key)
 		case "backingStorageClassName":
-				err = unpopulate(val, "BackingStorageClassName", &s.BackingStorageClassName)
+			err = unpopulate(val, "BackingStorageClassName", &s.BackingStorageClassName)
 			delete(rawMsg, key)
 		case "domain":
-				err = unpopulate(val, "Domain", &s.Domain)
+			err = unpopulate(val, "Domain", &s.Domain)
 			delete(rawMsg, key)
 		case "mountPermissions":
-				err = unpopulate(val, "MountPermissions", &s.MountPermissions)
+			err = unpopulate(val, "MountPermissions", &s.MountPermissions)
 			delete(rawMsg, key)
 		case "onDelete":
-				err = unpopulate(val, "OnDelete", &s.OnDelete)
+			err = unpopulate(val, "OnDelete", &s.OnDelete)
 			delete(rawMsg, key)
 		case "password":
-				err = unpopulate(val, "Password", &s.Password)
+			err = unpopulate(val, "Password", &s.Password)
 			delete(rawMsg, key)
 		case "server":
-				err = unpopulate(val, "Server", &s.Server)
+			err = unpopulate(val, "Server", &s.Server)
 			delete(rawMsg, key)
 		case "share":
-				err = unpopulate(val, "Share", &s.Share)
+			err = unpopulate(val, "Share", &s.Share)
 			delete(rawMsg, key)
 		case "source":
-				err = unpopulate(val, "Source", &s.Source)
+			err = unpopulate(val, "Source", &s.Source)
 			delete(rawMsg, key)
 		case "subDir":
-				err = unpopulate(val, "SubDir", &s.SubDir)
+			err = unpopulate(val, "SubDir", &s.SubDir)
 			delete(rawMsg, key)
 		case "username":
-				err = unpopulate(val, "Username", &s.Username)
+			err = unpopulate(val, "Username", &s.Username)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -1168,22 +1067,22 @@ func (s *SystemData) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "createdAt":
-				err = unpopulateDateType(val, "CreatedAt", &s.CreatedAt)
+			err = unpopulateDateType(val, "CreatedAt", &s.CreatedAt)
 			delete(rawMsg, key)
 		case "createdBy":
-				err = unpopulate(val, "CreatedBy", &s.CreatedBy)
+			err = unpopulate(val, "CreatedBy", &s.CreatedBy)
 			delete(rawMsg, key)
 		case "createdByType":
-				err = unpopulate(val, "CreatedByType", &s.CreatedByType)
+			err = unpopulate(val, "CreatedByType", &s.CreatedByType)
 			delete(rawMsg, key)
 		case "lastModifiedAt":
-				err = unpopulateDateType(val, "LastModifiedAt", &s.LastModifiedAt)
+			err = unpopulateDateType(val, "LastModifiedAt", &s.LastModifiedAt)
 			delete(rawMsg, key)
 		case "lastModifiedBy":
-				err = unpopulate(val, "LastModifiedBy", &s.LastModifiedBy)
+			err = unpopulate(val, "LastModifiedBy", &s.LastModifiedBy)
 			delete(rawMsg, key)
 		case "lastModifiedByType":
-				err = unpopulate(val, "LastModifiedByType", &s.LastModifiedByType)
+			err = unpopulate(val, "LastModifiedByType", &s.LastModifiedByType)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -1212,4 +1111,3 @@ func unpopulate(data json.RawMessage, fn string, v any) error {
 	}
 	return nil
 }
-

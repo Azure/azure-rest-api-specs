@@ -30,4 +30,3 @@ type OrganizationProfileClassification interface {
 	// GetOrganizationProfile returns the OrganizationProfile content of the underlying type.
 	GetOrganizationProfile() *OrganizationProfile
 }
-

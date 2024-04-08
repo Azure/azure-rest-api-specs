@@ -31,7 +31,7 @@ func NewServicesClient(credential azcore.TokenCredential, options *arm.ClientOpt
 		return nil, err
 	}
 	client := &ServicesClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -81,8 +81,8 @@ func (client *ServicesClient) createOrUpdateCreateRequest(ctx context.Context, r
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -196,13 +196,13 @@ func (client *ServicesClient) getHandleResponse(resp *http.Response) (ServicesCl
 // NewListPager - List ServiceResource resources by parent
 //   - resourceURI - The fully qualified Azure Resource manager identifier of the resource.
 //   - options - ServicesClientListOptions contains the optional parameters for the ServicesClient.NewListPager method.
-func (client *ServicesClient) NewListPager(resourceURI string, options *ServicesClientListOptions) (*runtime.Pager[ServicesClientListResponse]) {
+func (client *ServicesClient) NewListPager(resourceURI string, options *ServicesClientListOptions) *runtime.Pager[ServicesClientListResponse] {
 	return runtime.NewPager(runtime.PagingHandler[ServicesClientListResponse]{
 		More: func(page ServicesClientListResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *ServicesClientListResponse) (ServicesClientListResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ServicesClient.NewListPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ServicesClient.NewListPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -214,7 +214,7 @@ func (client *ServicesClient) NewListPager(resourceURI string, options *Services
 				return ServicesClientListResponse{}, err
 			}
 			return client.listHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -244,4 +244,3 @@ func (client *ServicesClient) listHandleResponse(resp *http.Response) (ServicesC
 	}
 	return result, nil
 }
-

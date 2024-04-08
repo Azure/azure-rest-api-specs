@@ -7,7 +7,7 @@ package armcodesigning
 const host = "https://management.azure.com"
 
 const (
-	moduleName = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/codesigning/armcodesigning"
+	moduleName    = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/codesigning/armcodesigning"
 	moduleVersion = "v0.1.0"
 )
 
@@ -21,7 +21,7 @@ const (
 
 // PossibleActionTypeValues returns the possible values for the ActionType const type.
 func PossibleActionTypeValues() []ActionType {
-	return []ActionType{	
+	return []ActionType{
 		ActionTypeInternal,
 	}
 }
@@ -40,7 +40,7 @@ const (
 
 // PossibleCertificateProfileStatusValues returns the possible values for the CertificateProfileStatus const type.
 func PossibleCertificateProfileStatusValues() []CertificateProfileStatus {
-	return []CertificateProfileStatus{	
+	return []CertificateProfileStatus{
 		CertificateProfileStatusActive,
 		CertificateProfileStatusDisabled,
 		CertificateProfileStatusSuspended,
@@ -61,7 +61,7 @@ const (
 
 // PossibleCertificateStatusValues returns the possible values for the CertificateStatus const type.
 func PossibleCertificateStatusValues() []CertificateStatus {
-	return []CertificateStatus{	
+	return []CertificateStatus{
 		CertificateStatusActive,
 		CertificateStatusExpired,
 		CertificateStatusRevoked,
@@ -84,7 +84,7 @@ const (
 
 // PossibleCreatedByTypeValues returns the possible values for the CreatedByType const type.
 func PossibleCreatedByTypeValues() []CreatedByType {
-	return []CreatedByType{	
+	return []CreatedByType{
 		CreatedByTypeApplication,
 		CreatedByTypeKey,
 		CreatedByTypeManagedIdentity,
@@ -105,7 +105,7 @@ const (
 
 // PossibleNameUnavailabilityReasonValues returns the possible values for the NameUnavailabilityReason const type.
 func PossibleNameUnavailabilityReasonValues() []NameUnavailabilityReason {
-	return []NameUnavailabilityReason{	
+	return []NameUnavailabilityReason{
 		NameUnavailabilityReasonAccountNameInvalid,
 		NameUnavailabilityReasonAlreadyExists,
 	}
@@ -126,7 +126,7 @@ const (
 
 // PossibleOriginValues returns the possible values for the Origin const type.
 func PossibleOriginValues() []Origin {
-	return []Origin{	
+	return []Origin{
 		OriginSystem,
 		OriginUser,
 		OriginUserSystem,
@@ -151,7 +151,7 @@ const (
 
 // PossibleProfileTypeValues returns the possible values for the ProfileType const type.
 func PossibleProfileTypeValues() []ProfileType {
-	return []ProfileType{	
+	return []ProfileType{
 		ProfileTypePrivateTrust,
 		ProfileTypePrivateTrustCIPolicy,
 		ProfileTypePublicTrust,
@@ -180,34 +180,13 @@ const (
 
 // PossibleProvisioningStateValues returns the possible values for the ProvisioningState const type.
 func PossibleProvisioningStateValues() []ProvisioningState {
-	return []ProvisioningState{	
+	return []ProvisioningState{
 		ProvisioningStateAccepted,
 		ProvisioningStateCanceled,
 		ProvisioningStateDeleting,
 		ProvisioningStateFailed,
 		ProvisioningStateSucceeded,
 		ProvisioningStateUpdating,
-	}
-}
-
-// ResourceProvisioningState - The provisioning state of a resource type.
-type ResourceProvisioningState string
-
-const (
-	// ResourceProvisioningStateCanceled - Resource creation was canceled.
-	ResourceProvisioningStateCanceled ResourceProvisioningState = "Canceled"
-	// ResourceProvisioningStateFailed - Resource creation failed.
-	ResourceProvisioningStateFailed ResourceProvisioningState = "Failed"
-	// ResourceProvisioningStateSucceeded - Resource has been created.
-	ResourceProvisioningStateSucceeded ResourceProvisioningState = "Succeeded"
-)
-
-// PossibleResourceProvisioningStateValues returns the possible values for the ResourceProvisioningState const type.
-func PossibleResourceProvisioningStateValues() []ResourceProvisioningState {
-	return []ResourceProvisioningState{	
-		ResourceProvisioningStateCanceled,
-		ResourceProvisioningStateFailed,
-		ResourceProvisioningStateSucceeded,
 	}
 }
 
@@ -225,7 +204,7 @@ const (
 
 // PossibleRevocationStatusValues returns the possible values for the RevocationStatus const type.
 func PossibleRevocationStatusValues() []RevocationStatus {
-	return []RevocationStatus{	
+	return []RevocationStatus{
 		RevocationStatusFailed,
 		RevocationStatusInProgress,
 		RevocationStatusSucceeded,
@@ -244,9 +223,8 @@ const (
 
 // PossibleSKUNameValues returns the possible values for the SKUName const type.
 func PossibleSKUNameValues() []SKUName {
-	return []SKUName{	
+	return []SKUName{
 		SKUNameBasic,
 		SKUNamePremium,
 	}
 }
-

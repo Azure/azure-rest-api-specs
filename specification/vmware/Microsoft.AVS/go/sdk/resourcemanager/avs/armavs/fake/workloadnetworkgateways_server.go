@@ -19,7 +19,7 @@ import (
 )
 
 // WorkloadNetworkGatewaysServer is a fake server for instances of the armavs.WorkloadNetworkGatewaysClient type.
-type WorkloadNetworkGatewaysServer struct{
+type WorkloadNetworkGatewaysServer struct {
 	// Get is the fake for method WorkloadNetworkGatewaysClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
 	Get func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, gatewayID string, options *armavs.WorkloadNetworkGatewaysClientGetOptions) (resp azfake.Responder[armavs.WorkloadNetworkGatewaysClientGetResponse], errResp azfake.ErrorResponder)
@@ -27,7 +27,6 @@ type WorkloadNetworkGatewaysServer struct{
 	// NewListByWorkloadNetworkPager is the fake for method WorkloadNetworkGatewaysClient.NewListByWorkloadNetworkPager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListByWorkloadNetworkPager func(subscriptionID string, resourceGroupName string, privateCloudName string, options *armavs.WorkloadNetworkGatewaysClientListByWorkloadNetworkOptions) (resp azfake.PagerResponder[armavs.WorkloadNetworkGatewaysClientListByWorkloadNetworkResponse])
-
 }
 
 // NewWorkloadNetworkGatewaysServerTransport creates a new instance of WorkloadNetworkGatewaysServerTransport with the provided implementation.
@@ -35,7 +34,7 @@ type WorkloadNetworkGatewaysServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewWorkloadNetworkGatewaysServerTransport(srv *WorkloadNetworkGatewaysServer) *WorkloadNetworkGatewaysServerTransport {
 	return &WorkloadNetworkGatewaysServerTransport{
-		srv: srv,
+		srv:                           srv,
 		newListByWorkloadNetworkPager: newTracker[azfake.PagerResponder[armavs.WorkloadNetworkGatewaysClientListByWorkloadNetworkResponse]](),
 	}
 }
@@ -43,7 +42,7 @@ func NewWorkloadNetworkGatewaysServerTransport(srv *WorkloadNetworkGatewaysServe
 // WorkloadNetworkGatewaysServerTransport connects instances of armavs.WorkloadNetworkGatewaysClient to instances of WorkloadNetworkGatewaysServer.
 // Don't use this type directly, use NewWorkloadNetworkGatewaysServerTransport instead.
 type WorkloadNetworkGatewaysServerTransport struct {
-	srv *WorkloadNetworkGatewaysServer
+	srv                           *WorkloadNetworkGatewaysServer
 	newListByWorkloadNetworkPager *tracker[azfake.PagerResponder[armavs.WorkloadNetworkGatewaysClientListByWorkloadNetworkResponse]]
 }
 
@@ -121,25 +120,25 @@ func (w *WorkloadNetworkGatewaysServerTransport) dispatchNewListByWorkloadNetwor
 	}
 	newListByWorkloadNetworkPager := w.newListByWorkloadNetworkPager.get(req)
 	if newListByWorkloadNetworkPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/gateways`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-resp := w.srv.NewListByWorkloadNetworkPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/gateways`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := w.srv.NewListByWorkloadNetworkPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, nil)
 		newListByWorkloadNetworkPager = &resp
 		w.newListByWorkloadNetworkPager.add(req, newListByWorkloadNetworkPager)
 		server.PagerResponderInjectNextLinks(newListByWorkloadNetworkPager, req, func(page *armavs.WorkloadNetworkGatewaysClientListByWorkloadNetworkResponse, createLink func() string) {
@@ -159,4 +158,3 @@ resp := w.srv.NewListByWorkloadNetworkPager(subscriptionIDParam, resourceGroupNa
 	}
 	return resp, nil
 }
-

@@ -28,7 +28,7 @@ func NewCarbonOperationsClient(credential azcore.TokenCredential, options *arm.C
 		return nil, err
 	}
 	client := &CarbonOperationsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -36,13 +36,13 @@ func NewCarbonOperationsClient(credential azcore.TokenCredential, options *arm.C
 // NewListPager - List the operations for the provider
 //   - options - CarbonOperationsClientListOptions contains the optional parameters for the CarbonOperationsClient.NewListPager
 //     method.
-func (client *CarbonOperationsClient) NewListPager(options *CarbonOperationsClientListOptions) (*runtime.Pager[CarbonOperationsClientListResponse]) {
+func (client *CarbonOperationsClient) NewListPager(options *CarbonOperationsClientListOptions) *runtime.Pager[CarbonOperationsClientListResponse] {
 	return runtime.NewPager(runtime.PagingHandler[CarbonOperationsClientListResponse]{
 		More: func(page CarbonOperationsClientListResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *CarbonOperationsClientListResponse) (CarbonOperationsClientListResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "CarbonOperationsClient.NewListPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "CarbonOperationsClient.NewListPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -54,7 +54,7 @@ func (client *CarbonOperationsClient) NewListPager(options *CarbonOperationsClie
 				return CarbonOperationsClientListResponse{}, err
 			}
 			return client.listHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -80,4 +80,3 @@ func (client *CarbonOperationsClient) listHandleResponse(resp *http.Response) (C
 	}
 	return result, nil
 }
-

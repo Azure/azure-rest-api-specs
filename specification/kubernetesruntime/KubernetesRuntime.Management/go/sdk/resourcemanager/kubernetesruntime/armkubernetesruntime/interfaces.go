@@ -13,4 +13,3 @@ type StorageClassTypePropertiesClassification interface {
 	// GetStorageClassTypeProperties returns the StorageClassTypeProperties content of the underlying type.
 	GetStorageClassTypeProperties() *StorageClassTypeProperties
 }
-

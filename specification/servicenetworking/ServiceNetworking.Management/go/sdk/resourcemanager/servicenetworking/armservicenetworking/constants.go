@@ -7,7 +7,7 @@ package armservicenetworking
 const host = "https://management.azure.com"
 
 const (
-	moduleName = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/servicenetworking/armservicenetworking"
+	moduleName    = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/servicenetworking/armservicenetworking"
 	moduleVersion = "v0.1.0"
 )
 
@@ -21,7 +21,7 @@ const (
 
 // PossibleActionTypeValues returns the possible values for the ActionType const type.
 func PossibleActionTypeValues() []ActionType {
-	return []ActionType{	
+	return []ActionType{
 		ActionTypeInternal,
 	}
 }
@@ -34,7 +34,7 @@ const (
 
 // PossibleAssociationTypeValues returns the possible values for the AssociationType const type.
 func PossibleAssociationTypeValues() []AssociationType {
-	return []AssociationType{	
+	return []AssociationType{
 		AssociationTypeSubnets,
 	}
 }
@@ -55,7 +55,7 @@ const (
 
 // PossibleCreatedByTypeValues returns the possible values for the CreatedByType const type.
 func PossibleCreatedByTypeValues() []CreatedByType {
-	return []CreatedByType{	
+	return []CreatedByType{
 		CreatedByTypeApplication,
 		CreatedByTypeKey,
 		CreatedByTypeManagedIdentity,
@@ -78,7 +78,7 @@ const (
 
 // PossibleOriginValues returns the possible values for the Origin const type.
 func PossibleOriginValues() []Origin {
-	return []Origin{	
+	return []Origin{
 		OriginSystem,
 		OriginUser,
 		OriginUserSystem,
@@ -88,18 +88,18 @@ func PossibleOriginValues() []Origin {
 type ProvisioningState string
 
 const (
-	ProvisioningStateAccepted ProvisioningState = "Accepted"
-	ProvisioningStateCanceled ProvisioningState = "Canceled"
-	ProvisioningStateDeleting ProvisioningState = "Deleting"
-	ProvisioningStateFailed ProvisioningState = "Failed"
+	ProvisioningStateAccepted     ProvisioningState = "Accepted"
+	ProvisioningStateCanceled     ProvisioningState = "Canceled"
+	ProvisioningStateDeleting     ProvisioningState = "Deleting"
+	ProvisioningStateFailed       ProvisioningState = "Failed"
 	ProvisioningStateProvisioning ProvisioningState = "Provisioning"
-	ProvisioningStateSucceeded ProvisioningState = "Succeeded"
-	ProvisioningStateUpdating ProvisioningState = "Updating"
+	ProvisioningStateSucceeded    ProvisioningState = "Succeeded"
+	ProvisioningStateUpdating     ProvisioningState = "Updating"
 )
 
 // PossibleProvisioningStateValues returns the possible values for the ProvisioningState const type.
 func PossibleProvisioningStateValues() []ProvisioningState {
-	return []ProvisioningState{	
+	return []ProvisioningState{
 		ProvisioningStateAccepted,
 		ProvisioningStateCanceled,
 		ProvisioningStateDeleting,
@@ -109,25 +109,3 @@ func PossibleProvisioningStateValues() []ProvisioningState {
 		ProvisioningStateUpdating,
 	}
 }
-
-// ResourceProvisioningState - The provisioning state of a resource type.
-type ResourceProvisioningState string
-
-const (
-	// ResourceProvisioningStateCanceled - Resource creation was canceled.
-	ResourceProvisioningStateCanceled ResourceProvisioningState = "Canceled"
-	// ResourceProvisioningStateFailed - Resource creation failed.
-	ResourceProvisioningStateFailed ResourceProvisioningState = "Failed"
-	// ResourceProvisioningStateSucceeded - Resource has been created.
-	ResourceProvisioningStateSucceeded ResourceProvisioningState = "Succeeded"
-)
-
-// PossibleResourceProvisioningStateValues returns the possible values for the ResourceProvisioningState const type.
-func PossibleResourceProvisioningStateValues() []ResourceProvisioningState {
-	return []ResourceProvisioningState{	
-		ResourceProvisioningStateCanceled,
-		ResourceProvisioningStateFailed,
-		ResourceProvisioningStateSucceeded,
-	}
-}
-

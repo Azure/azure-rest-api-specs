@@ -56,4 +56,3 @@ type SkuClientListByLocationResponse struct {
 	// The response of a ResourceSku list operation.
 	ResourceSKUListResult
 }
-

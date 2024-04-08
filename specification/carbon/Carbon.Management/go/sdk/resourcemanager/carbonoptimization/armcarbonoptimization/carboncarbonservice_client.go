@@ -28,7 +28,7 @@ func NewCarbonCarbonServiceClient(credential azcore.TokenCredential, options *ar
 		return nil, err
 	}
 	client := &CarbonCarbonServiceClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -37,13 +37,13 @@ func NewCarbonCarbonServiceClient(credential azcore.TokenCredential, options *ar
 //   - queryParameters - Query parameters
 //   - options - CarbonCarbonServiceClientListCarbonEmissionReportsOptions contains the optional parameters for the CarbonCarbonServiceClient.NewListCarbonEmissionReportsPager
 //     method.
-func (client *CarbonCarbonServiceClient) NewListCarbonEmissionReportsPager(queryParameters QueryFilterClassification, options *CarbonCarbonServiceClientListCarbonEmissionReportsOptions) (*runtime.Pager[CarbonCarbonServiceClientListCarbonEmissionReportsResponse]) {
+func (client *CarbonCarbonServiceClient) NewListCarbonEmissionReportsPager(queryParameters QueryFilterClassification, options *CarbonCarbonServiceClientListCarbonEmissionReportsOptions) *runtime.Pager[CarbonCarbonServiceClientListCarbonEmissionReportsResponse] {
 	return runtime.NewPager(runtime.PagingHandler[CarbonCarbonServiceClientListCarbonEmissionReportsResponse]{
 		More: func(page CarbonCarbonServiceClientListCarbonEmissionReportsResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *CarbonCarbonServiceClientListCarbonEmissionReportsResponse) (CarbonCarbonServiceClientListCarbonEmissionReportsResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "CarbonCarbonServiceClient.NewListCarbonEmissionReportsPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "CarbonCarbonServiceClient.NewListCarbonEmissionReportsPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -55,7 +55,7 @@ func (client *CarbonCarbonServiceClient) NewListCarbonEmissionReportsPager(query
 				return CarbonCarbonServiceClientListCarbonEmissionReportsResponse{}, err
 			}
 			return client.listCarbonEmissionReportsHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -72,8 +72,8 @@ func (client *CarbonCarbonServiceClient) listCarbonEmissionReportsCreateRequest(
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, queryParameters); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -130,4 +130,3 @@ func (client *CarbonCarbonServiceClient) queryCarbonEmissionDataAvailableDateRan
 	}
 	return result, nil
 }
-

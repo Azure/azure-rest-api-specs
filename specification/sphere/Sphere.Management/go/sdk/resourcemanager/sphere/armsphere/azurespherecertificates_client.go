@@ -32,7 +32,7 @@ func NewAzureSphereCertificatesClient(credential azcore.TokenCredential, options
 		return nil, err
 	}
 	client := &AzureSphereCertificatesClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -108,13 +108,13 @@ func (client *AzureSphereCertificatesClient) getHandleResponse(resp *http.Respon
 //   - catalogName - Name of catalog
 //   - options - AzureSphereCertificatesClientListByCatalogOptions contains the optional parameters for the AzureSphereCertificatesClient.NewListByCatalogPager
 //     method.
-func (client *AzureSphereCertificatesClient) NewListByCatalogPager(subscriptionID string, resourceGroupName string, catalogName string, options *AzureSphereCertificatesClientListByCatalogOptions) (*runtime.Pager[AzureSphereCertificatesClientListByCatalogResponse]) {
+func (client *AzureSphereCertificatesClient) NewListByCatalogPager(subscriptionID string, resourceGroupName string, catalogName string, options *AzureSphereCertificatesClientListByCatalogOptions) *runtime.Pager[AzureSphereCertificatesClientListByCatalogResponse] {
 	return runtime.NewPager(runtime.PagingHandler[AzureSphereCertificatesClientListByCatalogResponse]{
 		More: func(page AzureSphereCertificatesClientListByCatalogResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AzureSphereCertificatesClientListByCatalogResponse) (AzureSphereCertificatesClientListByCatalogResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereCertificatesClient.NewListByCatalogPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereCertificatesClient.NewListByCatalogPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -126,7 +126,7 @@ func (client *AzureSphereCertificatesClient) NewListByCatalogPager(subscriptionI
 				return AzureSphereCertificatesClientListByCatalogResponse{}, err
 			}
 			return client.listByCatalogHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -233,8 +233,8 @@ func (client *AzureSphereCertificatesClient) retrieveCertChainCreateRequest(ctx 
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, body); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -303,8 +303,8 @@ func (client *AzureSphereCertificatesClient) retrieveProofOfPossessionNonceCreat
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, body); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -316,4 +316,3 @@ func (client *AzureSphereCertificatesClient) retrieveProofOfPossessionNonceHandl
 	}
 	return result, nil
 }
-

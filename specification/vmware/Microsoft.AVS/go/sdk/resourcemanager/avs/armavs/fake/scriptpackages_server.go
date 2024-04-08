@@ -19,7 +19,7 @@ import (
 )
 
 // ScriptPackagesServer is a fake server for instances of the armavs.ScriptPackagesClient type.
-type ScriptPackagesServer struct{
+type ScriptPackagesServer struct {
 	// Get is the fake for method ScriptPackagesClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
 	Get func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptPackageName string, options *armavs.ScriptPackagesClientGetOptions) (resp azfake.Responder[armavs.ScriptPackagesClientGetResponse], errResp azfake.ErrorResponder)
@@ -27,7 +27,6 @@ type ScriptPackagesServer struct{
 	// NewListByPrivateCloudPager is the fake for method ScriptPackagesClient.NewListByPrivateCloudPager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListByPrivateCloudPager func(subscriptionID string, resourceGroupName string, privateCloudName string, options *armavs.ScriptPackagesClientListByPrivateCloudOptions) (resp azfake.PagerResponder[armavs.ScriptPackagesClientListByPrivateCloudResponse])
-
 }
 
 // NewScriptPackagesServerTransport creates a new instance of ScriptPackagesServerTransport with the provided implementation.
@@ -35,7 +34,7 @@ type ScriptPackagesServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewScriptPackagesServerTransport(srv *ScriptPackagesServer) *ScriptPackagesServerTransport {
 	return &ScriptPackagesServerTransport{
-		srv: srv,
+		srv:                        srv,
 		newListByPrivateCloudPager: newTracker[azfake.PagerResponder[armavs.ScriptPackagesClientListByPrivateCloudResponse]](),
 	}
 }
@@ -43,7 +42,7 @@ func NewScriptPackagesServerTransport(srv *ScriptPackagesServer) *ScriptPackages
 // ScriptPackagesServerTransport connects instances of armavs.ScriptPackagesClient to instances of ScriptPackagesServer.
 // Don't use this type directly, use NewScriptPackagesServerTransport instead.
 type ScriptPackagesServerTransport struct {
-	srv *ScriptPackagesServer
+	srv                        *ScriptPackagesServer
 	newListByPrivateCloudPager *tracker[azfake.PagerResponder[armavs.ScriptPackagesClientListByPrivateCloudResponse]]
 }
 
@@ -121,25 +120,25 @@ func (s *ScriptPackagesServerTransport) dispatchNewListByPrivateCloudPager(req *
 	}
 	newListByPrivateCloudPager := s.newListByPrivateCloudPager.get(req)
 	if newListByPrivateCloudPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/scriptPackages`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-resp := s.srv.NewListByPrivateCloudPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/scriptPackages`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := s.srv.NewListByPrivateCloudPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, nil)
 		newListByPrivateCloudPager = &resp
 		s.newListByPrivateCloudPager.add(req, newListByPrivateCloudPager)
 		server.PagerResponderInjectNextLinks(newListByPrivateCloudPager, req, func(page *armavs.ScriptPackagesClientListByPrivateCloudResponse, createLink func() string) {
@@ -159,4 +158,3 @@ resp := s.srv.NewListByPrivateCloudPager(subscriptionIDParam, resourceGroupNameP
 	}
 	return resp, nil
 }
-

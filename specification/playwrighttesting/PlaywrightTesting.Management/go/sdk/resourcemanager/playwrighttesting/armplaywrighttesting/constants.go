@@ -7,7 +7,7 @@ package armplaywrighttesting
 const host = "https://management.azure.com"
 
 const (
-	moduleName = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/playwrighttesting/armplaywrighttesting"
+	moduleName    = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/playwrighttesting/armplaywrighttesting"
 	moduleVersion = "v0.1.0"
 )
 
@@ -21,7 +21,7 @@ const (
 
 // PossibleActionTypeValues returns the possible values for the ActionType const type.
 func PossibleActionTypeValues() []ActionType {
-	return []ActionType{	
+	return []ActionType{
 		ActionTypeInternal,
 	}
 }
@@ -38,7 +38,7 @@ const (
 
 // PossibleCheckNameAvailabilityReasonValues returns the possible values for the CheckNameAvailabilityReason const type.
 func PossibleCheckNameAvailabilityReasonValues() []CheckNameAvailabilityReason {
-	return []CheckNameAvailabilityReason{	
+	return []CheckNameAvailabilityReason{
 		CheckNameAvailabilityReasonAlreadyExists,
 		CheckNameAvailabilityReasonInvalid,
 	}
@@ -60,7 +60,7 @@ const (
 
 // PossibleCreatedByTypeValues returns the possible values for the CreatedByType const type.
 func PossibleCreatedByTypeValues() []CreatedByType {
-	return []CreatedByType{	
+	return []CreatedByType{
 		CreatedByTypeApplication,
 		CreatedByTypeKey,
 		CreatedByTypeManagedIdentity,
@@ -80,7 +80,7 @@ const (
 
 // PossibleEnablementStatusValues returns the possible values for the EnablementStatus const type.
 func PossibleEnablementStatusValues() []EnablementStatus {
-	return []EnablementStatus{	
+	return []EnablementStatus{
 		EnablementStatusDisabled,
 		EnablementStatusEnabled,
 	}
@@ -102,7 +102,7 @@ const (
 
 // PossibleFreeTrialStateValues returns the possible values for the FreeTrialState const type.
 func PossibleFreeTrialStateValues() []FreeTrialState {
-	return []FreeTrialState{	
+	return []FreeTrialState{
 		FreeTrialStateActive,
 		FreeTrialStateExpired,
 		FreeTrialStateNotEligible,
@@ -125,7 +125,7 @@ const (
 
 // PossibleOriginValues returns the possible values for the Origin const type.
 func PossibleOriginValues() []Origin {
-	return []Origin{	
+	return []Origin{
 		OriginSystem,
 		OriginUser,
 		OriginUserSystem,
@@ -152,7 +152,7 @@ const (
 
 // PossibleProvisioningStateValues returns the possible values for the ProvisioningState const type.
 func PossibleProvisioningStateValues() []ProvisioningState {
-	return []ProvisioningState{	
+	return []ProvisioningState{
 		ProvisioningStateAccepted,
 		ProvisioningStateCanceled,
 		ProvisioningStateCreating,
@@ -167,36 +167,14 @@ type QuotaNames string
 
 const (
 	// QuotaNamesScalableExecution - The quota details for scalable execution feature. When enabled, Playwright client workers
-// can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing
-// test completion durations.
+	// can connect to cloud-hosted browsers. This can increase the number of parallel workers for a test run, significantly minimizing
+	// test completion durations.
 	QuotaNamesScalableExecution QuotaNames = "ScalableExecution"
 )
 
 // PossibleQuotaNamesValues returns the possible values for the QuotaNames const type.
 func PossibleQuotaNamesValues() []QuotaNames {
-	return []QuotaNames{	
+	return []QuotaNames{
 		QuotaNamesScalableExecution,
 	}
 }
-
-// ResourceProvisioningState - The provisioning state of a resource type.
-type ResourceProvisioningState string
-
-const (
-	// ResourceProvisioningStateCanceled - Resource creation was canceled.
-	ResourceProvisioningStateCanceled ResourceProvisioningState = "Canceled"
-	// ResourceProvisioningStateFailed - Resource creation failed.
-	ResourceProvisioningStateFailed ResourceProvisioningState = "Failed"
-	// ResourceProvisioningStateSucceeded - Resource has been created.
-	ResourceProvisioningStateSucceeded ResourceProvisioningState = "Succeeded"
-)
-
-// PossibleResourceProvisioningStateValues returns the possible values for the ResourceProvisioningState const type.
-func PossibleResourceProvisioningStateValues() []ResourceProvisioningState {
-	return []ResourceProvisioningState{	
-		ResourceProvisioningStateCanceled,
-		ResourceProvisioningStateFailed,
-		ResourceProvisioningStateSucceeded,
-	}
-}
-

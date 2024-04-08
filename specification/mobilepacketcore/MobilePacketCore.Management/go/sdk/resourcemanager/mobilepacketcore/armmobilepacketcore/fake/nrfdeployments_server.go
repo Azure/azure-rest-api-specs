@@ -20,7 +20,7 @@ import (
 )
 
 // NrfDeploymentsServer is a fake server for instances of the armmobilepacketcore.NrfDeploymentsClient type.
-type NrfDeploymentsServer struct{
+type NrfDeploymentsServer struct {
 	// CreateOrUpdate is the fake for method NrfDeploymentsClient.CreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
 	CreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, nrfDeploymentName string, resource armmobilepacketcore.NrfDeploymentResource, options *armmobilepacketcore.NrfDeploymentsClientCreateOrUpdateOptions) (resp azfake.Responder[armmobilepacketcore.NrfDeploymentsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
@@ -44,7 +44,6 @@ type NrfDeploymentsServer struct{
 	// UpdateTags is the fake for method NrfDeploymentsClient.UpdateTags
 	// HTTP status codes to indicate success: http.StatusOK
 	UpdateTags func(ctx context.Context, subscriptionID string, resourceGroupName string, nrfDeploymentName string, properties armmobilepacketcore.NrfDeploymentResourceTagsUpdate, options *armmobilepacketcore.NrfDeploymentsClientUpdateTagsOptions) (resp azfake.Responder[armmobilepacketcore.NrfDeploymentsClientUpdateTagsResponse], errResp azfake.ErrorResponder)
-
 }
 
 // NewNrfDeploymentsServerTransport creates a new instance of NrfDeploymentsServerTransport with the provided implementation.
@@ -52,20 +51,20 @@ type NrfDeploymentsServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewNrfDeploymentsServerTransport(srv *NrfDeploymentsServer) *NrfDeploymentsServerTransport {
 	return &NrfDeploymentsServerTransport{
-		srv: srv,
-		beginDelete: newTracker[azfake.PollerResponder[armmobilepacketcore.NrfDeploymentsClientDeleteResponse]](),
+		srv:                         srv,
+		beginDelete:                 newTracker[azfake.PollerResponder[armmobilepacketcore.NrfDeploymentsClientDeleteResponse]](),
 		newListByResourceGroupPager: newTracker[azfake.PagerResponder[armmobilepacketcore.NrfDeploymentsClientListByResourceGroupResponse]](),
-		newListBySubscriptionPager: newTracker[azfake.PagerResponder[armmobilepacketcore.NrfDeploymentsClientListBySubscriptionResponse]](),
+		newListBySubscriptionPager:  newTracker[azfake.PagerResponder[armmobilepacketcore.NrfDeploymentsClientListBySubscriptionResponse]](),
 	}
 }
 
 // NrfDeploymentsServerTransport connects instances of armmobilepacketcore.NrfDeploymentsClient to instances of NrfDeploymentsServer.
 // Don't use this type directly, use NewNrfDeploymentsServerTransport instead.
 type NrfDeploymentsServerTransport struct {
-	srv *NrfDeploymentsServer
-	beginDelete *tracker[azfake.PollerResponder[armmobilepacketcore.NrfDeploymentsClientDeleteResponse]]
+	srv                         *NrfDeploymentsServer
+	beginDelete                 *tracker[azfake.PollerResponder[armmobilepacketcore.NrfDeploymentsClientDeleteResponse]]
 	newListByResourceGroupPager *tracker[azfake.PagerResponder[armmobilepacketcore.NrfDeploymentsClientListByResourceGroupResponse]]
-	newListBySubscriptionPager *tracker[azfake.PagerResponder[armmobilepacketcore.NrfDeploymentsClientListBySubscriptionResponse]]
+	newListBySubscriptionPager  *tracker[azfake.PagerResponder[armmobilepacketcore.NrfDeploymentsClientListBySubscriptionResponse]]
 }
 
 // Do implements the policy.Transporter interface for NrfDeploymentsServerTransport.
@@ -153,28 +152,28 @@ func (n *NrfDeploymentsServerTransport) dispatchBeginDelete(req *http.Request) (
 	}
 	beginDelete := n.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/nrfDeployments/(?P<nrfDeploymentName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	nrfDeploymentNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("nrfDeploymentName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := n.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, nrfDeploymentNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/nrfDeployments/(?P<nrfDeploymentName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		nrfDeploymentNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("nrfDeploymentName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := n.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, nrfDeploymentNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		n.beginDelete.add(req, beginDelete)
 	}
@@ -238,21 +237,21 @@ func (n *NrfDeploymentsServerTransport) dispatchNewListByResourceGroupPager(req 
 	}
 	newListByResourceGroupPager := n.newListByResourceGroupPager.get(req)
 	if newListByResourceGroupPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/nrfDeployments`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 2 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-resp := n.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/nrfDeployments`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 2 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := n.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
 		newListByResourceGroupPager = &resp
 		n.newListByResourceGroupPager.add(req, newListByResourceGroupPager)
 		server.PagerResponderInjectNextLinks(newListByResourceGroupPager, req, func(page *armmobilepacketcore.NrfDeploymentsClientListByResourceGroupResponse, createLink func() string) {
@@ -279,17 +278,17 @@ func (n *NrfDeploymentsServerTransport) dispatchNewListBySubscriptionPager(req *
 	}
 	newListBySubscriptionPager := n.newListBySubscriptionPager.get(req)
 	if newListBySubscriptionPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/nrfDeployments`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 1 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-resp := n.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/nrfDeployments`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 1 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resp := n.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
 		newListBySubscriptionPager = &resp
 		n.newListBySubscriptionPager.add(req, newListBySubscriptionPager)
 		server.PagerResponderInjectNextLinks(newListBySubscriptionPager, req, func(page *armmobilepacketcore.NrfDeploymentsClientListBySubscriptionResponse, createLink func() string) {
@@ -350,4 +349,3 @@ func (n *NrfDeploymentsServerTransport) dispatchUpdateTags(req *http.Request) (*
 	}
 	return resp, nil
 }
-

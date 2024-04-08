@@ -101,4 +101,3 @@ type ServerInstancesClientUpdateResponse struct {
 	// Define the Server Instance resource.
 	ServerInstance
 }
-

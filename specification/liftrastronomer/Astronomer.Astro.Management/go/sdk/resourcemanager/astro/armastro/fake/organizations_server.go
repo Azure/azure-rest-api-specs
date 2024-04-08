@@ -19,7 +19,7 @@ import (
 )
 
 // OrganizationsServer is a fake server for instances of the armastro.OrganizationsClient type.
-type OrganizationsServer struct{
+type OrganizationsServer struct {
 	// BeginCreateOrUpdate is the fake for method OrganizationsClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
 	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, resource armastro.OrganizationResource, options *armastro.OrganizationsClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armastro.OrganizationsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
@@ -43,7 +43,6 @@ type OrganizationsServer struct{
 	// BeginUpdate is the fake for method OrganizationsClient.BeginUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
 	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, organizationName string, properties armastro.OrganizationResourceUpdate, options *armastro.OrganizationsClientUpdateOptions) (resp azfake.PollerResponder[armastro.OrganizationsClientUpdateResponse], errResp azfake.ErrorResponder)
-
 }
 
 // NewOrganizationsServerTransport creates a new instance of OrganizationsServerTransport with the provided implementation.
@@ -51,24 +50,24 @@ type OrganizationsServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewOrganizationsServerTransport(srv *OrganizationsServer) *OrganizationsServerTransport {
 	return &OrganizationsServerTransport{
-		srv: srv,
-		beginCreateOrUpdate: newTracker[azfake.PollerResponder[armastro.OrganizationsClientCreateOrUpdateResponse]](),
-		beginDelete: newTracker[azfake.PollerResponder[armastro.OrganizationsClientDeleteResponse]](),
+		srv:                         srv,
+		beginCreateOrUpdate:         newTracker[azfake.PollerResponder[armastro.OrganizationsClientCreateOrUpdateResponse]](),
+		beginDelete:                 newTracker[azfake.PollerResponder[armastro.OrganizationsClientDeleteResponse]](),
 		newListByResourceGroupPager: newTracker[azfake.PagerResponder[armastro.OrganizationsClientListByResourceGroupResponse]](),
-		newListBySubscriptionPager: newTracker[azfake.PagerResponder[armastro.OrganizationsClientListBySubscriptionResponse]](),
-		beginUpdate: newTracker[azfake.PollerResponder[armastro.OrganizationsClientUpdateResponse]](),
+		newListBySubscriptionPager:  newTracker[azfake.PagerResponder[armastro.OrganizationsClientListBySubscriptionResponse]](),
+		beginUpdate:                 newTracker[azfake.PollerResponder[armastro.OrganizationsClientUpdateResponse]](),
 	}
 }
 
 // OrganizationsServerTransport connects instances of armastro.OrganizationsClient to instances of OrganizationsServer.
 // Don't use this type directly, use NewOrganizationsServerTransport instead.
 type OrganizationsServerTransport struct {
-	srv *OrganizationsServer
-	beginCreateOrUpdate *tracker[azfake.PollerResponder[armastro.OrganizationsClientCreateOrUpdateResponse]]
-	beginDelete *tracker[azfake.PollerResponder[armastro.OrganizationsClientDeleteResponse]]
+	srv                         *OrganizationsServer
+	beginCreateOrUpdate         *tracker[azfake.PollerResponder[armastro.OrganizationsClientCreateOrUpdateResponse]]
+	beginDelete                 *tracker[azfake.PollerResponder[armastro.OrganizationsClientDeleteResponse]]
 	newListByResourceGroupPager *tracker[azfake.PagerResponder[armastro.OrganizationsClientListByResourceGroupResponse]]
-	newListBySubscriptionPager *tracker[azfake.PagerResponder[armastro.OrganizationsClientListBySubscriptionResponse]]
-	beginUpdate *tracker[azfake.PollerResponder[armastro.OrganizationsClientUpdateResponse]]
+	newListBySubscriptionPager  *tracker[azfake.PagerResponder[armastro.OrganizationsClientListBySubscriptionResponse]]
+	beginUpdate                 *tracker[azfake.PollerResponder[armastro.OrganizationsClientUpdateResponse]]
 }
 
 // Do implements the policy.Transporter interface for OrganizationsServerTransport.
@@ -112,32 +111,32 @@ func (o *OrganizationsServerTransport) dispatchBeginCreateOrUpdate(req *http.Req
 	}
 	beginCreateOrUpdate := o.beginCreateOrUpdate.get(req)
 	if beginCreateOrUpdate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Astronomer\.Astro/organizations/(?P<organizationName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armastro.OrganizationResource](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	organizationNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("organizationName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := o.srv.BeginCreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, organizationNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Astronomer\.Astro/organizations/(?P<organizationName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armastro.OrganizationResource](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		organizationNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("organizationName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := o.srv.BeginCreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, organizationNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginCreateOrUpdate = &respr
 		o.beginCreateOrUpdate.add(req, beginCreateOrUpdate)
 	}
@@ -164,28 +163,28 @@ func (o *OrganizationsServerTransport) dispatchBeginDelete(req *http.Request) (*
 	}
 	beginDelete := o.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Astronomer\.Astro/organizations/(?P<organizationName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	organizationNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("organizationName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := o.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, organizationNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Astronomer\.Astro/organizations/(?P<organizationName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		organizationNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("organizationName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := o.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, organizationNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		o.beginDelete.add(req, beginDelete)
 	}
@@ -249,21 +248,21 @@ func (o *OrganizationsServerTransport) dispatchNewListByResourceGroupPager(req *
 	}
 	newListByResourceGroupPager := o.newListByResourceGroupPager.get(req)
 	if newListByResourceGroupPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Astronomer\.Astro/organizations`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 2 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-resp := o.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Astronomer\.Astro/organizations`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 2 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := o.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
 		newListByResourceGroupPager = &resp
 		o.newListByResourceGroupPager.add(req, newListByResourceGroupPager)
 		server.PagerResponderInjectNextLinks(newListByResourceGroupPager, req, func(page *armastro.OrganizationsClientListByResourceGroupResponse, createLink func() string) {
@@ -290,17 +289,17 @@ func (o *OrganizationsServerTransport) dispatchNewListBySubscriptionPager(req *h
 	}
 	newListBySubscriptionPager := o.newListBySubscriptionPager.get(req)
 	if newListBySubscriptionPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Astronomer\.Astro/organizations`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 1 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-resp := o.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Astronomer\.Astro/organizations`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 1 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resp := o.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
 		newListBySubscriptionPager = &resp
 		o.newListBySubscriptionPager.add(req, newListBySubscriptionPager)
 		server.PagerResponderInjectNextLinks(newListBySubscriptionPager, req, func(page *armastro.OrganizationsClientListBySubscriptionResponse, createLink func() string) {
@@ -327,32 +326,32 @@ func (o *OrganizationsServerTransport) dispatchBeginUpdate(req *http.Request) (*
 	}
 	beginUpdate := o.beginUpdate.get(req)
 	if beginUpdate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Astronomer\.Astro/organizations/(?P<organizationName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armastro.OrganizationResourceUpdate](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	organizationNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("organizationName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := o.srv.BeginUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, organizationNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Astronomer\.Astro/organizations/(?P<organizationName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armastro.OrganizationResourceUpdate](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		organizationNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("organizationName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := o.srv.BeginUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, organizationNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginUpdate = &respr
 		o.beginUpdate.add(req, beginUpdate)
 	}
@@ -372,4 +371,3 @@ func (o *OrganizationsServerTransport) dispatchBeginUpdate(req *http.Request) (*
 
 	return resp, nil
 }
-

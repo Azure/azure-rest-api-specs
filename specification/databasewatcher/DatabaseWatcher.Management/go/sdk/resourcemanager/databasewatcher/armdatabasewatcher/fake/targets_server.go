@@ -19,7 +19,7 @@ import (
 )
 
 // TargetsServer is a fake server for instances of the armdatabasewatcher.TargetsClient type.
-type TargetsServer struct{
+type TargetsServer struct {
 	// CreateOrUpdate is the fake for method TargetsClient.CreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
 	CreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, watcherName string, targetName string, resource armdatabasewatcher.Target, options *armdatabasewatcher.TargetsClientCreateOrUpdateOptions) (resp azfake.Responder[armdatabasewatcher.TargetsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
@@ -35,7 +35,6 @@ type TargetsServer struct{
 	// NewListByWatcherPager is the fake for method TargetsClient.NewListByWatcherPager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListByWatcherPager func(subscriptionID string, resourceGroupName string, watcherName string, options *armdatabasewatcher.TargetsClientListByWatcherOptions) (resp azfake.PagerResponder[armdatabasewatcher.TargetsClientListByWatcherResponse])
-
 }
 
 // NewTargetsServerTransport creates a new instance of TargetsServerTransport with the provided implementation.
@@ -43,7 +42,7 @@ type TargetsServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewTargetsServerTransport(srv *TargetsServer) *TargetsServerTransport {
 	return &TargetsServerTransport{
-		srv: srv,
+		srv:                   srv,
 		newListByWatcherPager: newTracker[azfake.PagerResponder[armdatabasewatcher.TargetsClientListByWatcherResponse]](),
 	}
 }
@@ -51,7 +50,7 @@ func NewTargetsServerTransport(srv *TargetsServer) *TargetsServerTransport {
 // TargetsServerTransport connects instances of armdatabasewatcher.TargetsClient to instances of TargetsServer.
 // Don't use this type directly, use NewTargetsServerTransport instead.
 type TargetsServerTransport struct {
-	srv *TargetsServer
+	srv                   *TargetsServer
 	newListByWatcherPager *tracker[azfake.PagerResponder[armdatabasewatcher.TargetsClientListByWatcherResponse]]
 }
 
@@ -219,25 +218,25 @@ func (t *TargetsServerTransport) dispatchNewListByWatcherPager(req *http.Request
 	}
 	newListByWatcherPager := t.newListByWatcherPager.get(req)
 	if newListByWatcherPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DatabaseWatcher/watchers/(?P<watcherName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/targets`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	watcherNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("watcherName")])
-	if err != nil {
-		return nil, err
-	}
-resp := t.srv.NewListByWatcherPager(subscriptionIDParam, resourceGroupNameParam, watcherNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DatabaseWatcher/watchers/(?P<watcherName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/targets`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		watcherNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("watcherName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := t.srv.NewListByWatcherPager(subscriptionIDParam, resourceGroupNameParam, watcherNameParam, nil)
 		newListByWatcherPager = &resp
 		t.newListByWatcherPager.add(req, newListByWatcherPager)
 		server.PagerResponderInjectNextLinks(newListByWatcherPager, req, func(page *armdatabasewatcher.TargetsClientListByWatcherResponse, createLink func() string) {
@@ -257,4 +256,3 @@ resp := t.srv.NewListByWatcherPager(subscriptionIDParam, resourceGroupNameParam,
 	}
 	return resp, nil
 }
-

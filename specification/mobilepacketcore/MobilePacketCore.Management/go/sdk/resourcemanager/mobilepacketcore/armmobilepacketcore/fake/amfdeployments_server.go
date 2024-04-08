@@ -20,7 +20,7 @@ import (
 )
 
 // AmfDeploymentsServer is a fake server for instances of the armmobilepacketcore.AmfDeploymentsClient type.
-type AmfDeploymentsServer struct{
+type AmfDeploymentsServer struct {
 	// CreateOrUpdate is the fake for method AmfDeploymentsClient.CreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
 	CreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, amfDeploymentName string, resource armmobilepacketcore.AmfDeploymentResource, options *armmobilepacketcore.AmfDeploymentsClientCreateOrUpdateOptions) (resp azfake.Responder[armmobilepacketcore.AmfDeploymentsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
@@ -44,7 +44,6 @@ type AmfDeploymentsServer struct{
 	// UpdateTags is the fake for method AmfDeploymentsClient.UpdateTags
 	// HTTP status codes to indicate success: http.StatusOK
 	UpdateTags func(ctx context.Context, subscriptionID string, resourceGroupName string, amfDeploymentName string, properties armmobilepacketcore.AmfDeploymentResourceTagsUpdate, options *armmobilepacketcore.AmfDeploymentsClientUpdateTagsOptions) (resp azfake.Responder[armmobilepacketcore.AmfDeploymentsClientUpdateTagsResponse], errResp azfake.ErrorResponder)
-
 }
 
 // NewAmfDeploymentsServerTransport creates a new instance of AmfDeploymentsServerTransport with the provided implementation.
@@ -52,20 +51,20 @@ type AmfDeploymentsServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewAmfDeploymentsServerTransport(srv *AmfDeploymentsServer) *AmfDeploymentsServerTransport {
 	return &AmfDeploymentsServerTransport{
-		srv: srv,
-		beginDelete: newTracker[azfake.PollerResponder[armmobilepacketcore.AmfDeploymentsClientDeleteResponse]](),
+		srv:                         srv,
+		beginDelete:                 newTracker[azfake.PollerResponder[armmobilepacketcore.AmfDeploymentsClientDeleteResponse]](),
 		newListByResourceGroupPager: newTracker[azfake.PagerResponder[armmobilepacketcore.AmfDeploymentsClientListByResourceGroupResponse]](),
-		newListBySubscriptionPager: newTracker[azfake.PagerResponder[armmobilepacketcore.AmfDeploymentsClientListBySubscriptionResponse]](),
+		newListBySubscriptionPager:  newTracker[azfake.PagerResponder[armmobilepacketcore.AmfDeploymentsClientListBySubscriptionResponse]](),
 	}
 }
 
 // AmfDeploymentsServerTransport connects instances of armmobilepacketcore.AmfDeploymentsClient to instances of AmfDeploymentsServer.
 // Don't use this type directly, use NewAmfDeploymentsServerTransport instead.
 type AmfDeploymentsServerTransport struct {
-	srv *AmfDeploymentsServer
-	beginDelete *tracker[azfake.PollerResponder[armmobilepacketcore.AmfDeploymentsClientDeleteResponse]]
+	srv                         *AmfDeploymentsServer
+	beginDelete                 *tracker[azfake.PollerResponder[armmobilepacketcore.AmfDeploymentsClientDeleteResponse]]
 	newListByResourceGroupPager *tracker[azfake.PagerResponder[armmobilepacketcore.AmfDeploymentsClientListByResourceGroupResponse]]
-	newListBySubscriptionPager *tracker[azfake.PagerResponder[armmobilepacketcore.AmfDeploymentsClientListBySubscriptionResponse]]
+	newListBySubscriptionPager  *tracker[azfake.PagerResponder[armmobilepacketcore.AmfDeploymentsClientListBySubscriptionResponse]]
 }
 
 // Do implements the policy.Transporter interface for AmfDeploymentsServerTransport.
@@ -153,28 +152,28 @@ func (a *AmfDeploymentsServerTransport) dispatchBeginDelete(req *http.Request) (
 	}
 	beginDelete := a.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/amfDeployments/(?P<amfDeploymentName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	amfDeploymentNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("amfDeploymentName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := a.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, amfDeploymentNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/amfDeployments/(?P<amfDeploymentName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		amfDeploymentNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("amfDeploymentName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := a.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, amfDeploymentNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		a.beginDelete.add(req, beginDelete)
 	}
@@ -238,21 +237,21 @@ func (a *AmfDeploymentsServerTransport) dispatchNewListByResourceGroupPager(req 
 	}
 	newListByResourceGroupPager := a.newListByResourceGroupPager.get(req)
 	if newListByResourceGroupPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/amfDeployments`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 2 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-resp := a.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/amfDeployments`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 2 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := a.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
 		newListByResourceGroupPager = &resp
 		a.newListByResourceGroupPager.add(req, newListByResourceGroupPager)
 		server.PagerResponderInjectNextLinks(newListByResourceGroupPager, req, func(page *armmobilepacketcore.AmfDeploymentsClientListByResourceGroupResponse, createLink func() string) {
@@ -279,17 +278,17 @@ func (a *AmfDeploymentsServerTransport) dispatchNewListBySubscriptionPager(req *
 	}
 	newListBySubscriptionPager := a.newListBySubscriptionPager.get(req)
 	if newListBySubscriptionPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/amfDeployments`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 1 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-resp := a.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/amfDeployments`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 1 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resp := a.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
 		newListBySubscriptionPager = &resp
 		a.newListBySubscriptionPager.add(req, newListBySubscriptionPager)
 		server.PagerResponderInjectNextLinks(newListBySubscriptionPager, req, func(page *armmobilepacketcore.AmfDeploymentsClientListBySubscriptionResponse, createLink func() string) {
@@ -350,4 +349,3 @@ func (a *AmfDeploymentsServerTransport) dispatchUpdateTags(req *http.Request) (*
 	}
 	return resp, nil
 }
-

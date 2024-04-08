@@ -14,7 +14,7 @@ import (
 )
 
 // Server is a fake server for instances of the armmobilepacketcore.Client type.
-type Server struct{
+type Server struct {
 	// AmfDeploymentsServer contains the fakes for client AmfDeploymentsClient
 	AmfDeploymentsServer AmfDeploymentsServer
 
@@ -38,7 +38,6 @@ type Server struct{
 
 	// UpfDeploymentsServer contains the fakes for client UpfDeploymentsClient
 	UpfDeploymentsServer UpfDeploymentsServer
-
 }
 
 // NewServerTransport creates a new instance of ServerTransport with the provided implementation.
@@ -51,16 +50,16 @@ func NewServerTransport(srv *Server) *ServerTransport {
 // ServerTransport connects instances of armmobilepacketcore.Client to instances of Server.
 // Don't use this type directly, use NewServerTransport instead.
 type ServerTransport struct {
-	srv *Server
-	trMu sync.Mutex
-	trAmfDeploymentsServer *AmfDeploymentsServerTransport
-	trClusterServicesServer *ClusterServicesServerTransport
-	trNrfDeploymentsServer *NrfDeploymentsServerTransport
-	trNssfDeploymentsServer *NssfDeploymentsServerTransport
+	srv                           *Server
+	trMu                          sync.Mutex
+	trAmfDeploymentsServer        *AmfDeploymentsServerTransport
+	trClusterServicesServer       *ClusterServicesServerTransport
+	trNrfDeploymentsServer        *NrfDeploymentsServerTransport
+	trNssfDeploymentsServer       *NssfDeploymentsServerTransport
 	trObservabilityServicesServer *ObservabilityServicesServerTransport
-	trOperationsServer *OperationsServerTransport
-	trSmfDeploymentsServer *SmfDeploymentsServerTransport
-	trUpfDeploymentsServer *UpfDeploymentsServerTransport
+	trOperationsServer            *OperationsServerTransport
+	trSmfDeploymentsServer        *SmfDeploymentsServerTransport
+	trUpfDeploymentsServer        *UpfDeploymentsServerTransport
 }
 
 // Do implements the policy.Transporter interface for ServerTransport.
@@ -81,35 +80,43 @@ func (s *ServerTransport) dispatchToClientFake(req *http.Request, client string)
 	switch client {
 	case "AmfDeploymentsClient":
 		initServer(&s.trMu, &s.trAmfDeploymentsServer, func() *AmfDeploymentsServerTransport {
-		return NewAmfDeploymentsServerTransport(&s.srv.AmfDeploymentsServer) })
+			return NewAmfDeploymentsServerTransport(&s.srv.AmfDeploymentsServer)
+		})
 		resp, err = s.trAmfDeploymentsServer.Do(req)
 	case "ClusterServicesClient":
 		initServer(&s.trMu, &s.trClusterServicesServer, func() *ClusterServicesServerTransport {
-		return NewClusterServicesServerTransport(&s.srv.ClusterServicesServer) })
+			return NewClusterServicesServerTransport(&s.srv.ClusterServicesServer)
+		})
 		resp, err = s.trClusterServicesServer.Do(req)
 	case "NrfDeploymentsClient":
 		initServer(&s.trMu, &s.trNrfDeploymentsServer, func() *NrfDeploymentsServerTransport {
-		return NewNrfDeploymentsServerTransport(&s.srv.NrfDeploymentsServer) })
+			return NewNrfDeploymentsServerTransport(&s.srv.NrfDeploymentsServer)
+		})
 		resp, err = s.trNrfDeploymentsServer.Do(req)
 	case "NssfDeploymentsClient":
 		initServer(&s.trMu, &s.trNssfDeploymentsServer, func() *NssfDeploymentsServerTransport {
-		return NewNssfDeploymentsServerTransport(&s.srv.NssfDeploymentsServer) })
+			return NewNssfDeploymentsServerTransport(&s.srv.NssfDeploymentsServer)
+		})
 		resp, err = s.trNssfDeploymentsServer.Do(req)
 	case "ObservabilityServicesClient":
 		initServer(&s.trMu, &s.trObservabilityServicesServer, func() *ObservabilityServicesServerTransport {
-		return NewObservabilityServicesServerTransport(&s.srv.ObservabilityServicesServer) })
+			return NewObservabilityServicesServerTransport(&s.srv.ObservabilityServicesServer)
+		})
 		resp, err = s.trObservabilityServicesServer.Do(req)
 	case "OperationsClient":
 		initServer(&s.trMu, &s.trOperationsServer, func() *OperationsServerTransport {
-		return NewOperationsServerTransport(&s.srv.OperationsServer) })
+			return NewOperationsServerTransport(&s.srv.OperationsServer)
+		})
 		resp, err = s.trOperationsServer.Do(req)
 	case "SmfDeploymentsClient":
 		initServer(&s.trMu, &s.trSmfDeploymentsServer, func() *SmfDeploymentsServerTransport {
-		return NewSmfDeploymentsServerTransport(&s.srv.SmfDeploymentsServer) })
+			return NewSmfDeploymentsServerTransport(&s.srv.SmfDeploymentsServer)
+		})
 		resp, err = s.trSmfDeploymentsServer.Do(req)
 	case "UpfDeploymentsClient":
 		initServer(&s.trMu, &s.trUpfDeploymentsServer, func() *UpfDeploymentsServerTransport {
-		return NewUpfDeploymentsServerTransport(&s.srv.UpfDeploymentsServer) })
+			return NewUpfDeploymentsServerTransport(&s.srv.UpfDeploymentsServer)
+		})
 		resp, err = s.trUpfDeploymentsServer.Do(req)
 	default:
 		err = fmt.Errorf("unhandled client %s", client)
@@ -117,4 +124,3 @@ func (s *ServerTransport) dispatchToClientFake(req *http.Request, client string)
 
 	return resp, err
 }
-

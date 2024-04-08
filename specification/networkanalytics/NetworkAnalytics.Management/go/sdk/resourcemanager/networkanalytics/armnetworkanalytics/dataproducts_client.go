@@ -31,7 +31,7 @@ func NewDataProductsClient(credential azcore.TokenCredential, options *arm.Clien
 		return nil, err
 	}
 	client := &DataProductsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -87,8 +87,8 @@ func (client *DataProductsClient) addUserRoleCreateRequest(ctx context.Context, 
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, body); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -164,8 +164,8 @@ func (client *DataProductsClient) createCreateRequest(ctx context.Context, subsc
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -283,8 +283,8 @@ func (client *DataProductsClient) generateStorageAccountSasTokenCreateRequest(ct
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, body); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -361,13 +361,13 @@ func (client *DataProductsClient) getHandleResponse(resp *http.Response) (DataPr
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - options - DataProductsClientListByResourceGroupOptions contains the optional parameters for the DataProductsClient.NewListByResourceGroupPager
 //     method.
-func (client *DataProductsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *DataProductsClientListByResourceGroupOptions) (*runtime.Pager[DataProductsClientListByResourceGroupResponse]) {
+func (client *DataProductsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *DataProductsClientListByResourceGroupOptions) *runtime.Pager[DataProductsClientListByResourceGroupResponse] {
 	return runtime.NewPager(runtime.PagingHandler[DataProductsClientListByResourceGroupResponse]{
 		More: func(page DataProductsClientListByResourceGroupResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *DataProductsClientListByResourceGroupResponse) (DataProductsClientListByResourceGroupResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataProductsClient.NewListByResourceGroupPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataProductsClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -379,7 +379,7 @@ func (client *DataProductsClient) NewListByResourceGroupPager(subscriptionID str
 				return DataProductsClientListByResourceGroupResponse{}, err
 			}
 			return client.listByResourceGroupHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -418,13 +418,13 @@ func (client *DataProductsClient) listByResourceGroupHandleResponse(resp *http.R
 //   - subscriptionID - The ID of the target subscription.
 //   - options - DataProductsClientListBySubscriptionOptions contains the optional parameters for the DataProductsClient.NewListBySubscriptionPager
 //     method.
-func (client *DataProductsClient) NewListBySubscriptionPager(subscriptionID string, options *DataProductsClientListBySubscriptionOptions) (*runtime.Pager[DataProductsClientListBySubscriptionResponse]) {
+func (client *DataProductsClient) NewListBySubscriptionPager(subscriptionID string, options *DataProductsClientListBySubscriptionOptions) *runtime.Pager[DataProductsClientListBySubscriptionResponse] {
 	return runtime.NewPager(runtime.PagingHandler[DataProductsClientListBySubscriptionResponse]{
 		More: func(page DataProductsClientListBySubscriptionResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *DataProductsClientListBySubscriptionResponse) (DataProductsClientListBySubscriptionResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataProductsClient.NewListBySubscriptionPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataProductsClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -436,7 +436,7 @@ func (client *DataProductsClient) NewListBySubscriptionPager(subscriptionID stri
 				return DataProductsClientListBySubscriptionResponse{}, err
 			}
 			return client.listBySubscriptionHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -518,8 +518,8 @@ func (client *DataProductsClient) listRolesAssignmentsCreateRequest(ctx context.
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, body); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -582,8 +582,8 @@ func (client *DataProductsClient) removeUserRoleCreateRequest(ctx context.Contex
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, body); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -636,8 +636,8 @@ func (client *DataProductsClient) rotateKeyCreateRequest(ctx context.Context, su
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, body); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -704,8 +704,7 @@ func (client *DataProductsClient) updateCreateRequest(ctx context.Context, subsc
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
-

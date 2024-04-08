@@ -31,7 +31,7 @@ func NewResourceDetailsClient(credential azcore.TokenCredential, options *arm.Cl
 		return nil, err
 	}
 	client := &ResourceDetailsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -42,13 +42,13 @@ func NewResourceDetailsClient(credential azcore.TokenCredential, options *arm.Cl
 //   - poolName - Name of the pool. It needs to be globally unique.
 //   - options - ResourceDetailsClientListByPoolOptions contains the optional parameters for the ResourceDetailsClient.NewListByPoolPager
 //     method.
-func (client *ResourceDetailsClient) NewListByPoolPager(subscriptionID string, resourceGroupName string, poolName string, options *ResourceDetailsClientListByPoolOptions) (*runtime.Pager[ResourceDetailsClientListByPoolResponse]) {
+func (client *ResourceDetailsClient) NewListByPoolPager(subscriptionID string, resourceGroupName string, poolName string, options *ResourceDetailsClientListByPoolOptions) *runtime.Pager[ResourceDetailsClientListByPoolResponse] {
 	return runtime.NewPager(runtime.PagingHandler[ResourceDetailsClientListByPoolResponse]{
 		More: func(page ResourceDetailsClientListByPoolResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *ResourceDetailsClientListByPoolResponse) (ResourceDetailsClientListByPoolResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ResourceDetailsClient.NewListByPoolPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ResourceDetailsClient.NewListByPoolPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -60,7 +60,7 @@ func (client *ResourceDetailsClient) NewListByPoolPager(subscriptionID string, r
 				return ResourceDetailsClientListByPoolResponse{}, err
 			}
 			return client.listByPoolHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -98,4 +98,3 @@ func (client *ResourceDetailsClient) listByPoolHandleResponse(resp *http.Respons
 	}
 	return result, nil
 }
-

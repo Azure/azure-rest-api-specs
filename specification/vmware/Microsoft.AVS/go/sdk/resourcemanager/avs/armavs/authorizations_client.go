@@ -31,7 +31,7 @@ func NewAuthorizationsClient(credential azcore.TokenCredential, options *arm.Cli
 		return nil, err
 	}
 	client := &AuthorizationsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -41,12 +41,12 @@ func NewAuthorizationsClient(credential azcore.TokenCredential, options *arm.Cli
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
 //   - authorizationName - Name of the ExpressRoute Circuit Authorization
-//   - resource - Resource create parameters.
+//   - authorization - Resource create parameters.
 //   - options - AuthorizationsClientCreateOrUpdateOptions contains the optional parameters for the AuthorizationsClient.CreateOrUpdate
 //     method.
-func (client *AuthorizationsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, authorizationName string, resource ExpressRouteAuthorization, options *AuthorizationsClientCreateOrUpdateOptions) (*runtime.Poller[AuthorizationsClientCreateOrUpdateResponse], error) {
+func (client *AuthorizationsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, authorizationName string, authorization ExpressRouteAuthorization, options *AuthorizationsClientCreateOrUpdateOptions) (*runtime.Poller[AuthorizationsClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
-		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, privateCloudName, authorizationName, resource, options)
+		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, privateCloudName, authorizationName, authorization, options)
 		if err != nil {
 			return nil, err
 		}
@@ -58,10 +58,10 @@ func (client *AuthorizationsClient) BeginCreateOrUpdate(ctx context.Context, sub
 }
 
 // CreateOrUpdate - Create a ExpressRouteAuthorization
-func (client *AuthorizationsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, authorizationName string, resource ExpressRouteAuthorization, options *AuthorizationsClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *AuthorizationsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, authorizationName string, authorization ExpressRouteAuthorization, options *AuthorizationsClientCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AuthorizationsClient.BeginCreateOrUpdate")
-	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, authorizationName, resource, options)
+	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, authorizationName, authorization, options)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ func (client *AuthorizationsClient) createOrUpdate(ctx context.Context, subscrip
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *AuthorizationsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, authorizationName string, resource ExpressRouteAuthorization, options *AuthorizationsClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *AuthorizationsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, authorizationName string, authorization ExpressRouteAuthorization, options *AuthorizationsClientCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/authorizations/{authorizationName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -104,9 +104,9 @@ func (client *AuthorizationsClient) createOrUpdateCreateRequest(ctx context.Cont
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
-	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+	if err := runtime.MarshalAsJSON(req, authorization); err != nil {
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -248,13 +248,13 @@ func (client *AuthorizationsClient) getHandleResponse(resp *http.Response) (Auth
 //   - privateCloudName - Name of the private cloud
 //   - options - AuthorizationsClientListByPrivateCloudOptions contains the optional parameters for the AuthorizationsClient.NewListByPrivateCloudPager
 //     method.
-func (client *AuthorizationsClient) NewListByPrivateCloudPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *AuthorizationsClientListByPrivateCloudOptions) (*runtime.Pager[AuthorizationsClientListByPrivateCloudResponse]) {
+func (client *AuthorizationsClient) NewListByPrivateCloudPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *AuthorizationsClientListByPrivateCloudOptions) *runtime.Pager[AuthorizationsClientListByPrivateCloudResponse] {
 	return runtime.NewPager(runtime.PagingHandler[AuthorizationsClientListByPrivateCloudResponse]{
 		More: func(page AuthorizationsClientListByPrivateCloudResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AuthorizationsClientListByPrivateCloudResponse) (AuthorizationsClientListByPrivateCloudResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AuthorizationsClient.NewListByPrivateCloudPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AuthorizationsClient.NewListByPrivateCloudPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -266,7 +266,7 @@ func (client *AuthorizationsClient) NewListByPrivateCloudPager(subscriptionID st
 				return AuthorizationsClientListByPrivateCloudResponse{}, err
 			}
 			return client.listByPrivateCloudHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -304,4 +304,3 @@ func (client *AuthorizationsClient) listByPrivateCloudHandleResponse(resp *http.
 	}
 	return result, nil
 }
-

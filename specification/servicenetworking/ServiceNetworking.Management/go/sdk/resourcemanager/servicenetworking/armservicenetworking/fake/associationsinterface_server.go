@@ -19,7 +19,7 @@ import (
 )
 
 // AssociationsInterfaceServer is a fake server for instances of the armservicenetworking.AssociationsInterfaceClient type.
-type AssociationsInterfaceServer struct{
+type AssociationsInterfaceServer struct {
 	// BeginCreateOrUpdate is the fake for method AssociationsInterfaceClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
 	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, associationName string, resource armservicenetworking.Association, options *armservicenetworking.AssociationsInterfaceClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armservicenetworking.AssociationsInterfaceClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
@@ -39,7 +39,6 @@ type AssociationsInterfaceServer struct{
 	// Update is the fake for method AssociationsInterfaceClient.Update
 	// HTTP status codes to indicate success: http.StatusOK
 	Update func(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, associationName string, properties armservicenetworking.AssociationUpdate, options *armservicenetworking.AssociationsInterfaceClientUpdateOptions) (resp azfake.Responder[armservicenetworking.AssociationsInterfaceClientUpdateResponse], errResp azfake.ErrorResponder)
-
 }
 
 // NewAssociationsInterfaceServerTransport creates a new instance of AssociationsInterfaceServerTransport with the provided implementation.
@@ -47,9 +46,9 @@ type AssociationsInterfaceServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewAssociationsInterfaceServerTransport(srv *AssociationsInterfaceServer) *AssociationsInterfaceServerTransport {
 	return &AssociationsInterfaceServerTransport{
-		srv: srv,
-		beginCreateOrUpdate: newTracker[azfake.PollerResponder[armservicenetworking.AssociationsInterfaceClientCreateOrUpdateResponse]](),
-		beginDelete: newTracker[azfake.PollerResponder[armservicenetworking.AssociationsInterfaceClientDeleteResponse]](),
+		srv:                             srv,
+		beginCreateOrUpdate:             newTracker[azfake.PollerResponder[armservicenetworking.AssociationsInterfaceClientCreateOrUpdateResponse]](),
+		beginDelete:                     newTracker[azfake.PollerResponder[armservicenetworking.AssociationsInterfaceClientDeleteResponse]](),
 		newListByTrafficControllerPager: newTracker[azfake.PagerResponder[armservicenetworking.AssociationsInterfaceClientListByTrafficControllerResponse]](),
 	}
 }
@@ -57,9 +56,9 @@ func NewAssociationsInterfaceServerTransport(srv *AssociationsInterfaceServer) *
 // AssociationsInterfaceServerTransport connects instances of armservicenetworking.AssociationsInterfaceClient to instances of AssociationsInterfaceServer.
 // Don't use this type directly, use NewAssociationsInterfaceServerTransport instead.
 type AssociationsInterfaceServerTransport struct {
-	srv *AssociationsInterfaceServer
-	beginCreateOrUpdate *tracker[azfake.PollerResponder[armservicenetworking.AssociationsInterfaceClientCreateOrUpdateResponse]]
-	beginDelete *tracker[azfake.PollerResponder[armservicenetworking.AssociationsInterfaceClientDeleteResponse]]
+	srv                             *AssociationsInterfaceServer
+	beginCreateOrUpdate             *tracker[azfake.PollerResponder[armservicenetworking.AssociationsInterfaceClientCreateOrUpdateResponse]]
+	beginDelete                     *tracker[azfake.PollerResponder[armservicenetworking.AssociationsInterfaceClientDeleteResponse]]
 	newListByTrafficControllerPager *tracker[azfake.PagerResponder[armservicenetworking.AssociationsInterfaceClientListByTrafficControllerResponse]]
 }
 
@@ -102,36 +101,36 @@ func (a *AssociationsInterfaceServerTransport) dispatchBeginCreateOrUpdate(req *
 	}
 	beginCreateOrUpdate := a.beginCreateOrUpdate.get(req)
 	if beginCreateOrUpdate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ServiceNetworking/trafficControllers/(?P<trafficControllerName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/associations/(?P<associationName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armservicenetworking.Association](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	trafficControllerNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("trafficControllerName")])
-	if err != nil {
-		return nil, err
-	}
-	associationNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("associationName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := a.srv.BeginCreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, trafficControllerNameParam, associationNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ServiceNetworking/trafficControllers/(?P<trafficControllerName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/associations/(?P<associationName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armservicenetworking.Association](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		trafficControllerNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("trafficControllerName")])
+		if err != nil {
+			return nil, err
+		}
+		associationNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("associationName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := a.srv.BeginCreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, trafficControllerNameParam, associationNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginCreateOrUpdate = &respr
 		a.beginCreateOrUpdate.add(req, beginCreateOrUpdate)
 	}
@@ -158,32 +157,32 @@ func (a *AssociationsInterfaceServerTransport) dispatchBeginDelete(req *http.Req
 	}
 	beginDelete := a.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ServiceNetworking/trafficControllers/(?P<trafficControllerName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/associations/(?P<associationName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	trafficControllerNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("trafficControllerName")])
-	if err != nil {
-		return nil, err
-	}
-	associationNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("associationName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := a.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, trafficControllerNameParam, associationNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ServiceNetworking/trafficControllers/(?P<trafficControllerName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/associations/(?P<associationName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		trafficControllerNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("trafficControllerName")])
+		if err != nil {
+			return nil, err
+		}
+		associationNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("associationName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := a.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, trafficControllerNameParam, associationNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		a.beginDelete.add(req, beginDelete)
 	}
@@ -251,25 +250,25 @@ func (a *AssociationsInterfaceServerTransport) dispatchNewListByTrafficControlle
 	}
 	newListByTrafficControllerPager := a.newListByTrafficControllerPager.get(req)
 	if newListByTrafficControllerPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ServiceNetworking/trafficControllers/(?P<trafficControllerName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/associations`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	trafficControllerNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("trafficControllerName")])
-	if err != nil {
-		return nil, err
-	}
-resp := a.srv.NewListByTrafficControllerPager(subscriptionIDParam, resourceGroupNameParam, trafficControllerNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ServiceNetworking/trafficControllers/(?P<trafficControllerName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/associations`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		trafficControllerNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("trafficControllerName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := a.srv.NewListByTrafficControllerPager(subscriptionIDParam, resourceGroupNameParam, trafficControllerNameParam, nil)
 		newListByTrafficControllerPager = &resp
 		a.newListByTrafficControllerPager.add(req, newListByTrafficControllerPager)
 		server.PagerResponderInjectNextLinks(newListByTrafficControllerPager, req, func(page *armservicenetworking.AssociationsInterfaceClientListByTrafficControllerResponse, createLink func() string) {
@@ -334,4 +333,3 @@ func (a *AssociationsInterfaceServerTransport) dispatchUpdate(req *http.Request)
 	}
 	return resp, nil
 }
-

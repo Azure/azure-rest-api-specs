@@ -19,7 +19,7 @@ import (
 )
 
 // AzurePlaywrightServiceAccountsServer is a fake server for instances of the armplaywrighttesting.AzurePlaywrightServiceAccountsClient type.
-type AzurePlaywrightServiceAccountsServer struct{
+type AzurePlaywrightServiceAccountsServer struct {
 	// CheckNameAvailability is the fake for method AzurePlaywrightServiceAccountsClient.CheckNameAvailability
 	// HTTP status codes to indicate success: http.StatusOK
 	CheckNameAvailability func(ctx context.Context, subscriptionID string, body armplaywrighttesting.CheckNameAvailabilityRequest, options *armplaywrighttesting.AzurePlaywrightServiceAccountsClientCheckNameAvailabilityOptions) (resp azfake.Responder[armplaywrighttesting.AzurePlaywrightServiceAccountsClientCheckNameAvailabilityResponse], errResp azfake.ErrorResponder)
@@ -47,7 +47,6 @@ type AzurePlaywrightServiceAccountsServer struct{
 	// Update is the fake for method AzurePlaywrightServiceAccountsClient.Update
 	// HTTP status codes to indicate success: http.StatusOK
 	Update func(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, properties armplaywrighttesting.AccountUpdate, options *armplaywrighttesting.AzurePlaywrightServiceAccountsClientUpdateOptions) (resp azfake.Responder[armplaywrighttesting.AzurePlaywrightServiceAccountsClientUpdateResponse], errResp azfake.ErrorResponder)
-
 }
 
 // NewAzurePlaywrightServiceAccountsServerTransport creates a new instance of AzurePlaywrightServiceAccountsServerTransport with the provided implementation.
@@ -55,22 +54,22 @@ type AzurePlaywrightServiceAccountsServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewAzurePlaywrightServiceAccountsServerTransport(srv *AzurePlaywrightServiceAccountsServer) *AzurePlaywrightServiceAccountsServerTransport {
 	return &AzurePlaywrightServiceAccountsServerTransport{
-		srv: srv,
-		beginCreateOrUpdate: newTracker[azfake.PollerResponder[armplaywrighttesting.AzurePlaywrightServiceAccountsClientCreateOrUpdateResponse]](),
-		beginDelete: newTracker[azfake.PollerResponder[armplaywrighttesting.AzurePlaywrightServiceAccountsClientDeleteResponse]](),
+		srv:                         srv,
+		beginCreateOrUpdate:         newTracker[azfake.PollerResponder[armplaywrighttesting.AzurePlaywrightServiceAccountsClientCreateOrUpdateResponse]](),
+		beginDelete:                 newTracker[azfake.PollerResponder[armplaywrighttesting.AzurePlaywrightServiceAccountsClientDeleteResponse]](),
 		newListByResourceGroupPager: newTracker[azfake.PagerResponder[armplaywrighttesting.AzurePlaywrightServiceAccountsClientListByResourceGroupResponse]](),
-		newListBySubscriptionPager: newTracker[azfake.PagerResponder[armplaywrighttesting.AzurePlaywrightServiceAccountsClientListBySubscriptionResponse]](),
+		newListBySubscriptionPager:  newTracker[azfake.PagerResponder[armplaywrighttesting.AzurePlaywrightServiceAccountsClientListBySubscriptionResponse]](),
 	}
 }
 
 // AzurePlaywrightServiceAccountsServerTransport connects instances of armplaywrighttesting.AzurePlaywrightServiceAccountsClient to instances of AzurePlaywrightServiceAccountsServer.
 // Don't use this type directly, use NewAzurePlaywrightServiceAccountsServerTransport instead.
 type AzurePlaywrightServiceAccountsServerTransport struct {
-	srv *AzurePlaywrightServiceAccountsServer
-	beginCreateOrUpdate *tracker[azfake.PollerResponder[armplaywrighttesting.AzurePlaywrightServiceAccountsClientCreateOrUpdateResponse]]
-	beginDelete *tracker[azfake.PollerResponder[armplaywrighttesting.AzurePlaywrightServiceAccountsClientDeleteResponse]]
+	srv                         *AzurePlaywrightServiceAccountsServer
+	beginCreateOrUpdate         *tracker[azfake.PollerResponder[armplaywrighttesting.AzurePlaywrightServiceAccountsClientCreateOrUpdateResponse]]
+	beginDelete                 *tracker[azfake.PollerResponder[armplaywrighttesting.AzurePlaywrightServiceAccountsClientDeleteResponse]]
 	newListByResourceGroupPager *tracker[azfake.PagerResponder[armplaywrighttesting.AzurePlaywrightServiceAccountsClientListByResourceGroupResponse]]
-	newListBySubscriptionPager *tracker[azfake.PagerResponder[armplaywrighttesting.AzurePlaywrightServiceAccountsClientListBySubscriptionResponse]]
+	newListBySubscriptionPager  *tracker[azfake.PagerResponder[armplaywrighttesting.AzurePlaywrightServiceAccountsClientListBySubscriptionResponse]]
 }
 
 // Do implements the policy.Transporter interface for AzurePlaywrightServiceAccountsServerTransport.
@@ -149,32 +148,32 @@ func (a *AzurePlaywrightServiceAccountsServerTransport) dispatchBeginCreateOrUpd
 	}
 	beginCreateOrUpdate := a.beginCreateOrUpdate.get(req)
 	if beginCreateOrUpdate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzurePlaywrightService/accounts/(?P<accountName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armplaywrighttesting.Account](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	accountNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("accountName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := a.srv.BeginCreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, accountNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzurePlaywrightService/accounts/(?P<accountName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armplaywrighttesting.Account](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		accountNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("accountName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := a.srv.BeginCreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, accountNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginCreateOrUpdate = &respr
 		a.beginCreateOrUpdate.add(req, beginCreateOrUpdate)
 	}
@@ -201,28 +200,28 @@ func (a *AzurePlaywrightServiceAccountsServerTransport) dispatchBeginDelete(req 
 	}
 	beginDelete := a.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzurePlaywrightService/accounts/(?P<accountName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	accountNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("accountName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := a.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, accountNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzurePlaywrightService/accounts/(?P<accountName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		accountNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("accountName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := a.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, accountNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		a.beginDelete.add(req, beginDelete)
 	}
@@ -286,21 +285,21 @@ func (a *AzurePlaywrightServiceAccountsServerTransport) dispatchNewListByResourc
 	}
 	newListByResourceGroupPager := a.newListByResourceGroupPager.get(req)
 	if newListByResourceGroupPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzurePlaywrightService/accounts`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 2 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-resp := a.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzurePlaywrightService/accounts`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 2 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := a.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
 		newListByResourceGroupPager = &resp
 		a.newListByResourceGroupPager.add(req, newListByResourceGroupPager)
 		server.PagerResponderInjectNextLinks(newListByResourceGroupPager, req, func(page *armplaywrighttesting.AzurePlaywrightServiceAccountsClientListByResourceGroupResponse, createLink func() string) {
@@ -327,17 +326,17 @@ func (a *AzurePlaywrightServiceAccountsServerTransport) dispatchNewListBySubscri
 	}
 	newListBySubscriptionPager := a.newListBySubscriptionPager.get(req)
 	if newListBySubscriptionPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzurePlaywrightService/accounts`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 1 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-resp := a.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzurePlaywrightService/accounts`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 1 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resp := a.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
 		newListBySubscriptionPager = &resp
 		a.newListBySubscriptionPager.add(req, newListBySubscriptionPager)
 		server.PagerResponderInjectNextLinks(newListBySubscriptionPager, req, func(page *armplaywrighttesting.AzurePlaywrightServiceAccountsClientListBySubscriptionResponse, createLink func() string) {
@@ -398,4 +397,3 @@ func (a *AzurePlaywrightServiceAccountsServerTransport) dispatchUpdate(req *http
 	}
 	return resp, nil
 }
-

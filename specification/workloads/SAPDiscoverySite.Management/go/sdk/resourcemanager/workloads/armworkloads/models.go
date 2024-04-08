@@ -49,14 +49,14 @@ type ConfigurationData struct {
 	Saps *int32
 
 	// Provide the target HANA database size you need. Applicable only if SAP instance type for this server instance is 'DB' and
-// you are migrating an AnyDb database to SAP S/4HANA.
+	// you are migrating an AnyDb database to SAP S/4HANA.
 	TargetHanaRAMSizeGB *int32
 
 	// Provide the total disk IOPS capacity. Add the disk volume for each individual disk and provide the sum total in this field.
 	TotalDiskIops *int32
 
 	// Provide the total disk volume capacity in GB. Add the disk volume for each individual disks and provide the total sum in
-// this field.
+	// this field.
 	TotalDiskSizeGB *int32
 }
 
@@ -105,16 +105,10 @@ type ErrorDetail struct {
 	Target *string
 }
 
-// Common error response for all Azure Resource Manager APIs to return error details for failed operations.
-type ErrorResponse struct {
-	// The error object.
-	Error *ErrorDetail
-}
-
 // The SAP instance specific performance data for Excel import.
 type ExcelPerformanceData struct {
 	// CONSTANT; The data source for this resource.
-// Field has constant value DataSourceExcel, any specified value is ignored.
+	// Field has constant value DataSourceExcel, any specified value is ignored.
 	DataSource *DataSource
 
 	// Provide the max CPU percentage load on the server. Omit the percentage symbol while filling this value.
@@ -143,7 +137,7 @@ type ExtendedLocation struct {
 // The SAP instance specific performance data for native discovery.
 type NativePerformanceData struct {
 	// CONSTANT; The data source for this resource.
-// Field has constant value DataSourceNative, any specified value is ignored.
+	// Field has constant value DataSourceNative, any specified value is ignored.
 	DataSource *DataSource
 }
 
@@ -277,8 +271,8 @@ type SAPInstanceProperties struct {
 	Errors *SAPMigrateError
 
 	// This is the SID of the production system in a landscape. An SAP system could itself be a production SID or a part of a
-// landscape with a different Production SID. This field can be used to relate non-prod SIDs, other components, SID (WEBDISP)
-// to the prod SID. Enter the value of Production SID.
+	// landscape with a different Production SID. This field can be used to relate non-prod SIDs, other components, SID (WEBDISP)
+	// to the prod SID. Enter the value of Production SID.
 	LandscapeSid *string
 
 	// Defines the provisioning states.
@@ -336,7 +330,7 @@ type ServerInstanceProperties struct {
 	Errors *SAPMigrateError
 
 	// This is the Instance SID for ASCS/AP/DB instance. An SAP system with HANA database for example could have a different SID
-// for database Instance than that of ASCS instance.
+	// for database Instance than that of ASCS instance.
 	InstanceSid *string
 
 	// This is Operating System on which the host server is running.
@@ -358,8 +352,8 @@ type ServerInstanceProperties struct {
 	SapProductVersion *string
 
 	// This is the Virtual Machine Name of the SAP system. Add all the virtual machines attached to an SAP system which you wish
-// to migrate to Azure. Keeping this not equal to ID as for single tier all InstanceTypes would be on same server, leading
-// to multiple resources with same servername.
+	// to migrate to Azure. Keeping this not equal to ID as for single tier all InstanceTypes would be on same server, leading
+	// to multiple resources with same servername.
 	ServerName *string
 }
 
@@ -407,4 +401,3 @@ type UpdateServerInstanceRequest struct {
 	// Server instances properties.
 	Properties *ServerInstanceProperties
 }
-

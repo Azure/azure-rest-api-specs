@@ -19,10 +19,10 @@ import (
 )
 
 // AuthorizationsServer is a fake server for instances of the armavs.AuthorizationsClient type.
-type AuthorizationsServer struct{
+type AuthorizationsServer struct {
 	// BeginCreateOrUpdate is the fake for method AuthorizationsClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, authorizationName string, resource armavs.ExpressRouteAuthorization, options *armavs.AuthorizationsClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armavs.AuthorizationsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, authorizationName string, authorization armavs.ExpressRouteAuthorization, options *armavs.AuthorizationsClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armavs.AuthorizationsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method AuthorizationsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
@@ -35,7 +35,6 @@ type AuthorizationsServer struct{
 	// NewListByPrivateCloudPager is the fake for method AuthorizationsClient.NewListByPrivateCloudPager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListByPrivateCloudPager func(subscriptionID string, resourceGroupName string, privateCloudName string, options *armavs.AuthorizationsClientListByPrivateCloudOptions) (resp azfake.PagerResponder[armavs.AuthorizationsClientListByPrivateCloudResponse])
-
 }
 
 // NewAuthorizationsServerTransport creates a new instance of AuthorizationsServerTransport with the provided implementation.
@@ -43,9 +42,9 @@ type AuthorizationsServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewAuthorizationsServerTransport(srv *AuthorizationsServer) *AuthorizationsServerTransport {
 	return &AuthorizationsServerTransport{
-		srv: srv,
-		beginCreateOrUpdate: newTracker[azfake.PollerResponder[armavs.AuthorizationsClientCreateOrUpdateResponse]](),
-		beginDelete: newTracker[azfake.PollerResponder[armavs.AuthorizationsClientDeleteResponse]](),
+		srv:                        srv,
+		beginCreateOrUpdate:        newTracker[azfake.PollerResponder[armavs.AuthorizationsClientCreateOrUpdateResponse]](),
+		beginDelete:                newTracker[azfake.PollerResponder[armavs.AuthorizationsClientDeleteResponse]](),
 		newListByPrivateCloudPager: newTracker[azfake.PagerResponder[armavs.AuthorizationsClientListByPrivateCloudResponse]](),
 	}
 }
@@ -53,9 +52,9 @@ func NewAuthorizationsServerTransport(srv *AuthorizationsServer) *Authorizations
 // AuthorizationsServerTransport connects instances of armavs.AuthorizationsClient to instances of AuthorizationsServer.
 // Don't use this type directly, use NewAuthorizationsServerTransport instead.
 type AuthorizationsServerTransport struct {
-	srv *AuthorizationsServer
-	beginCreateOrUpdate *tracker[azfake.PollerResponder[armavs.AuthorizationsClientCreateOrUpdateResponse]]
-	beginDelete *tracker[azfake.PollerResponder[armavs.AuthorizationsClientDeleteResponse]]
+	srv                        *AuthorizationsServer
+	beginCreateOrUpdate        *tracker[azfake.PollerResponder[armavs.AuthorizationsClientCreateOrUpdateResponse]]
+	beginDelete                *tracker[azfake.PollerResponder[armavs.AuthorizationsClientDeleteResponse]]
 	newListByPrivateCloudPager *tracker[azfake.PagerResponder[armavs.AuthorizationsClientListByPrivateCloudResponse]]
 }
 
@@ -96,36 +95,36 @@ func (a *AuthorizationsServerTransport) dispatchBeginCreateOrUpdate(req *http.Re
 	}
 	beginCreateOrUpdate := a.beginCreateOrUpdate.get(req)
 	if beginCreateOrUpdate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/authorizations/(?P<authorizationName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armavs.ExpressRouteAuthorization](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-	authorizationNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("authorizationName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := a.srv.BeginCreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, authorizationNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/authorizations/(?P<authorizationName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armavs.ExpressRouteAuthorization](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		authorizationNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("authorizationName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := a.srv.BeginCreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, authorizationNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginCreateOrUpdate = &respr
 		a.beginCreateOrUpdate.add(req, beginCreateOrUpdate)
 	}
@@ -152,32 +151,32 @@ func (a *AuthorizationsServerTransport) dispatchBeginDelete(req *http.Request) (
 	}
 	beginDelete := a.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/authorizations/(?P<authorizationName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-	authorizationNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("authorizationName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := a.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, authorizationNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/authorizations/(?P<authorizationName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		authorizationNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("authorizationName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := a.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, authorizationNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		a.beginDelete.add(req, beginDelete)
 	}
@@ -245,25 +244,25 @@ func (a *AuthorizationsServerTransport) dispatchNewListByPrivateCloudPager(req *
 	}
 	newListByPrivateCloudPager := a.newListByPrivateCloudPager.get(req)
 	if newListByPrivateCloudPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/authorizations`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-resp := a.srv.NewListByPrivateCloudPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/authorizations`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := a.srv.NewListByPrivateCloudPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, nil)
 		newListByPrivateCloudPager = &resp
 		a.newListByPrivateCloudPager.add(req, newListByPrivateCloudPager)
 		server.PagerResponderInjectNextLinks(newListByPrivateCloudPager, req, func(page *armavs.AuthorizationsClientListByPrivateCloudResponse, createLink func() string) {
@@ -283,4 +282,3 @@ resp := a.srv.NewListByPrivateCloudPager(subscriptionIDParam, resourceGroupNameP
 	}
 	return resp, nil
 }
-

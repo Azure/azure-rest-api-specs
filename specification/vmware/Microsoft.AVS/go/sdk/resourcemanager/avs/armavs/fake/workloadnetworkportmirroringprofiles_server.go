@@ -16,13 +16,14 @@ import (
 	"net/http"
 	"net/url"
 	"regexp"
+	"strconv"
 )
 
 // WorkloadNetworkPortMirroringProfilesServer is a fake server for instances of the armavs.WorkloadNetworkPortMirroringProfilesClient type.
-type WorkloadNetworkPortMirroringProfilesServer struct{
-	// BeginCreate is the fake for method WorkloadNetworkPortMirroringProfilesClient.BeginCreate
+type WorkloadNetworkPortMirroringProfilesServer struct {
+	// Create is the fake for method WorkloadNetworkPortMirroringProfilesClient.Create
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, portMirroringID string, resource armavs.WorkloadNetworkPortMirroring, options *armavs.WorkloadNetworkPortMirroringProfilesClientCreateOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkPortMirroringProfilesClientCreateResponse], errResp azfake.ErrorResponder)
+	Create func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, portMirroringID string, workloadNetworkPortMirroring armavs.WorkloadNetworkPortMirroring, options *armavs.WorkloadNetworkPortMirroringProfilesClientCreateOptions) (resp azfake.Responder[armavs.WorkloadNetworkPortMirroringProfilesClientCreateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method WorkloadNetworkPortMirroringProfilesClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
@@ -38,8 +39,7 @@ type WorkloadNetworkPortMirroringProfilesServer struct{
 
 	// BeginUpdate is the fake for method WorkloadNetworkPortMirroringProfilesClient.BeginUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
-	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, portMirroringID string, properties armavs.WorkloadNetworkPortMirroringUpdate, options *armavs.WorkloadNetworkPortMirroringProfilesClientUpdateOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkPortMirroringProfilesClientUpdateResponse], errResp azfake.ErrorResponder)
-
+	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, portMirroringID string, workloadNetworkPortMirroring armavs.WorkloadNetworkPortMirroringUpdate, options *armavs.WorkloadNetworkPortMirroringProfilesClientUpdateOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkPortMirroringProfilesClientUpdateResponse], errResp azfake.ErrorResponder)
 }
 
 // NewWorkloadNetworkPortMirroringProfilesServerTransport creates a new instance of WorkloadNetworkPortMirroringProfilesServerTransport with the provided implementation.
@@ -47,22 +47,20 @@ type WorkloadNetworkPortMirroringProfilesServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewWorkloadNetworkPortMirroringProfilesServerTransport(srv *WorkloadNetworkPortMirroringProfilesServer) *WorkloadNetworkPortMirroringProfilesServerTransport {
 	return &WorkloadNetworkPortMirroringProfilesServerTransport{
-		srv: srv,
-		beginCreate: newTracker[azfake.PollerResponder[armavs.WorkloadNetworkPortMirroringProfilesClientCreateResponse]](),
-		beginDelete: newTracker[azfake.PollerResponder[armavs.WorkloadNetworkPortMirroringProfilesClientDeleteResponse]](),
+		srv:                           srv,
+		beginDelete:                   newTracker[azfake.PollerResponder[armavs.WorkloadNetworkPortMirroringProfilesClientDeleteResponse]](),
 		newListByWorkloadNetworkPager: newTracker[azfake.PagerResponder[armavs.WorkloadNetworkPortMirroringProfilesClientListByWorkloadNetworkResponse]](),
-		beginUpdate: newTracker[azfake.PollerResponder[armavs.WorkloadNetworkPortMirroringProfilesClientUpdateResponse]](),
+		beginUpdate:                   newTracker[azfake.PollerResponder[armavs.WorkloadNetworkPortMirroringProfilesClientUpdateResponse]](),
 	}
 }
 
 // WorkloadNetworkPortMirroringProfilesServerTransport connects instances of armavs.WorkloadNetworkPortMirroringProfilesClient to instances of WorkloadNetworkPortMirroringProfilesServer.
 // Don't use this type directly, use NewWorkloadNetworkPortMirroringProfilesServerTransport instead.
 type WorkloadNetworkPortMirroringProfilesServerTransport struct {
-	srv *WorkloadNetworkPortMirroringProfilesServer
-	beginCreate *tracker[azfake.PollerResponder[armavs.WorkloadNetworkPortMirroringProfilesClientCreateResponse]]
-	beginDelete *tracker[azfake.PollerResponder[armavs.WorkloadNetworkPortMirroringProfilesClientDeleteResponse]]
+	srv                           *WorkloadNetworkPortMirroringProfilesServer
+	beginDelete                   *tracker[azfake.PollerResponder[armavs.WorkloadNetworkPortMirroringProfilesClientDeleteResponse]]
 	newListByWorkloadNetworkPager *tracker[azfake.PagerResponder[armavs.WorkloadNetworkPortMirroringProfilesClientListByWorkloadNetworkResponse]]
-	beginUpdate *tracker[azfake.PollerResponder[armavs.WorkloadNetworkPortMirroringProfilesClientUpdateResponse]]
+	beginUpdate                   *tracker[azfake.PollerResponder[armavs.WorkloadNetworkPortMirroringProfilesClientUpdateResponse]]
 }
 
 // Do implements the policy.Transporter interface for WorkloadNetworkPortMirroringProfilesServerTransport.
@@ -81,8 +79,8 @@ func (w *WorkloadNetworkPortMirroringProfilesServerTransport) dispatchToMethodFa
 	var err error
 
 	switch method {
-	case "WorkloadNetworkPortMirroringProfilesClient.BeginCreate":
-		resp, err = w.dispatchBeginCreate(req)
+	case "WorkloadNetworkPortMirroringProfilesClient.Create":
+		resp, err = w.dispatchCreate(req)
 	case "WorkloadNetworkPortMirroringProfilesClient.BeginDelete":
 		resp, err = w.dispatchBeginDelete(req)
 	case "WorkloadNetworkPortMirroringProfilesClient.Get":
@@ -98,12 +96,10 @@ func (w *WorkloadNetworkPortMirroringProfilesServerTransport) dispatchToMethodFa
 	return resp, err
 }
 
-func (w *WorkloadNetworkPortMirroringProfilesServerTransport) dispatchBeginCreate(req *http.Request) (*http.Response, error) {
-	if w.srv.BeginCreate == nil {
-		return nil, &nonRetriableError{errors.New("fake for method BeginCreate not implemented")}
+func (w *WorkloadNetworkPortMirroringProfilesServerTransport) dispatchCreate(req *http.Request) (*http.Response, error) {
+	if w.srv.Create == nil {
+		return nil, &nonRetriableError{errors.New("fake for method Create not implemented")}
 	}
-	beginCreate := w.beginCreate.get(req)
-	if beginCreate == nil {
 	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/portMirroringProfiles/(?P<portMirroringId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
 	regex := regexp.MustCompile(regexStr)
 	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
@@ -130,27 +126,21 @@ func (w *WorkloadNetworkPortMirroringProfilesServerTransport) dispatchBeginCreat
 	if err != nil {
 		return nil, err
 	}
-	respr, errRespr := w.srv.BeginCreate(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, portMirroringIDParam, body, nil)
+	respr, errRespr := w.srv.Create(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, portMirroringIDParam, body, nil)
 	if respErr := server.GetError(errRespr, req); respErr != nil {
 		return nil, respErr
 	}
-		beginCreate = &respr
-		w.beginCreate.add(req, beginCreate)
+	respContent := server.GetResponseContent(respr)
+	if !contains([]int{http.StatusOK, http.StatusCreated}, respContent.HTTPStatus) {
+		return nil, &nonRetriableError{fmt.Errorf("unexpected status code %d. acceptable values are http.StatusOK, http.StatusCreated", respContent.HTTPStatus)}
 	}
-
-	resp, err := server.PollerResponderNext(beginCreate, req)
+	resp, err := server.MarshalResponseAsJSON(respContent, server.GetResponse(respr).WorkloadNetworkPortMirroring, req)
 	if err != nil {
 		return nil, err
 	}
-
-	if !contains([]int{http.StatusOK, http.StatusCreated}, resp.StatusCode) {
-		w.beginCreate.remove(req)
-		return nil, &nonRetriableError{fmt.Errorf("unexpected status code %d. acceptable values are http.StatusOK, http.StatusCreated", resp.StatusCode)}
+	if val := server.GetResponse(respr).RetryAfter; val != nil {
+		resp.Header.Set("Retry-After", strconv.FormatInt(int64(*val), 10))
 	}
-	if !server.PollerResponderMore(beginCreate) {
-		w.beginCreate.remove(req)
-	}
-
 	return resp, nil
 }
 
@@ -160,32 +150,32 @@ func (w *WorkloadNetworkPortMirroringProfilesServerTransport) dispatchBeginDelet
 	}
 	beginDelete := w.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/portMirroringProfiles/(?P<portMirroringId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	portMirroringIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("portMirroringId")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := w.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, portMirroringIDParam, privateCloudNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/portMirroringProfiles/(?P<portMirroringId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		portMirroringIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("portMirroringId")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := w.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, portMirroringIDParam, privateCloudNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		w.beginDelete.add(req, beginDelete)
 	}
@@ -253,25 +243,25 @@ func (w *WorkloadNetworkPortMirroringProfilesServerTransport) dispatchNewListByW
 	}
 	newListByWorkloadNetworkPager := w.newListByWorkloadNetworkPager.get(req)
 	if newListByWorkloadNetworkPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/portMirroringProfiles`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-resp := w.srv.NewListByWorkloadNetworkPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/portMirroringProfiles`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := w.srv.NewListByWorkloadNetworkPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, nil)
 		newListByWorkloadNetworkPager = &resp
 		w.newListByWorkloadNetworkPager.add(req, newListByWorkloadNetworkPager)
 		server.PagerResponderInjectNextLinks(newListByWorkloadNetworkPager, req, func(page *armavs.WorkloadNetworkPortMirroringProfilesClientListByWorkloadNetworkResponse, createLink func() string) {
@@ -298,36 +288,36 @@ func (w *WorkloadNetworkPortMirroringProfilesServerTransport) dispatchBeginUpdat
 	}
 	beginUpdate := w.beginUpdate.get(req)
 	if beginUpdate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/portMirroringProfiles/(?P<portMirroringId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armavs.WorkloadNetworkPortMirroringUpdate](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-	portMirroringIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("portMirroringId")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := w.srv.BeginUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, portMirroringIDParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/portMirroringProfiles/(?P<portMirroringId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armavs.WorkloadNetworkPortMirroringUpdate](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		portMirroringIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("portMirroringId")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := w.srv.BeginUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, portMirroringIDParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginUpdate = &respr
 		w.beginUpdate.add(req, beginUpdate)
 	}
@@ -347,4 +337,3 @@ func (w *WorkloadNetworkPortMirroringProfilesServerTransport) dispatchBeginUpdat
 
 	return resp, nil
 }
-

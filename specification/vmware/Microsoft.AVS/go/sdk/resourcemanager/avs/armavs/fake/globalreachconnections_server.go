@@ -19,10 +19,10 @@ import (
 )
 
 // GlobalReachConnectionsServer is a fake server for instances of the armavs.GlobalReachConnectionsClient type.
-type GlobalReachConnectionsServer struct{
+type GlobalReachConnectionsServer struct {
 	// BeginCreateOrUpdate is the fake for method GlobalReachConnectionsClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, globalReachConnectionName string, resource armavs.GlobalReachConnection, options *armavs.GlobalReachConnectionsClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armavs.GlobalReachConnectionsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, globalReachConnectionName string, globalReachConnection armavs.GlobalReachConnection, options *armavs.GlobalReachConnectionsClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armavs.GlobalReachConnectionsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method GlobalReachConnectionsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
@@ -35,7 +35,6 @@ type GlobalReachConnectionsServer struct{
 	// NewListByPrivateCloudPager is the fake for method GlobalReachConnectionsClient.NewListByPrivateCloudPager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListByPrivateCloudPager func(subscriptionID string, resourceGroupName string, privateCloudName string, options *armavs.GlobalReachConnectionsClientListByPrivateCloudOptions) (resp azfake.PagerResponder[armavs.GlobalReachConnectionsClientListByPrivateCloudResponse])
-
 }
 
 // NewGlobalReachConnectionsServerTransport creates a new instance of GlobalReachConnectionsServerTransport with the provided implementation.
@@ -43,9 +42,9 @@ type GlobalReachConnectionsServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewGlobalReachConnectionsServerTransport(srv *GlobalReachConnectionsServer) *GlobalReachConnectionsServerTransport {
 	return &GlobalReachConnectionsServerTransport{
-		srv: srv,
-		beginCreateOrUpdate: newTracker[azfake.PollerResponder[armavs.GlobalReachConnectionsClientCreateOrUpdateResponse]](),
-		beginDelete: newTracker[azfake.PollerResponder[armavs.GlobalReachConnectionsClientDeleteResponse]](),
+		srv:                        srv,
+		beginCreateOrUpdate:        newTracker[azfake.PollerResponder[armavs.GlobalReachConnectionsClientCreateOrUpdateResponse]](),
+		beginDelete:                newTracker[azfake.PollerResponder[armavs.GlobalReachConnectionsClientDeleteResponse]](),
 		newListByPrivateCloudPager: newTracker[azfake.PagerResponder[armavs.GlobalReachConnectionsClientListByPrivateCloudResponse]](),
 	}
 }
@@ -53,9 +52,9 @@ func NewGlobalReachConnectionsServerTransport(srv *GlobalReachConnectionsServer)
 // GlobalReachConnectionsServerTransport connects instances of armavs.GlobalReachConnectionsClient to instances of GlobalReachConnectionsServer.
 // Don't use this type directly, use NewGlobalReachConnectionsServerTransport instead.
 type GlobalReachConnectionsServerTransport struct {
-	srv *GlobalReachConnectionsServer
-	beginCreateOrUpdate *tracker[azfake.PollerResponder[armavs.GlobalReachConnectionsClientCreateOrUpdateResponse]]
-	beginDelete *tracker[azfake.PollerResponder[armavs.GlobalReachConnectionsClientDeleteResponse]]
+	srv                        *GlobalReachConnectionsServer
+	beginCreateOrUpdate        *tracker[azfake.PollerResponder[armavs.GlobalReachConnectionsClientCreateOrUpdateResponse]]
+	beginDelete                *tracker[azfake.PollerResponder[armavs.GlobalReachConnectionsClientDeleteResponse]]
 	newListByPrivateCloudPager *tracker[azfake.PagerResponder[armavs.GlobalReachConnectionsClientListByPrivateCloudResponse]]
 }
 
@@ -96,36 +95,36 @@ func (g *GlobalReachConnectionsServerTransport) dispatchBeginCreateOrUpdate(req 
 	}
 	beginCreateOrUpdate := g.beginCreateOrUpdate.get(req)
 	if beginCreateOrUpdate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/globalReachConnections/(?P<globalReachConnectionName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armavs.GlobalReachConnection](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-	globalReachConnectionNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("globalReachConnectionName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := g.srv.BeginCreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, globalReachConnectionNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/globalReachConnections/(?P<globalReachConnectionName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armavs.GlobalReachConnection](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		globalReachConnectionNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("globalReachConnectionName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := g.srv.BeginCreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, globalReachConnectionNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginCreateOrUpdate = &respr
 		g.beginCreateOrUpdate.add(req, beginCreateOrUpdate)
 	}
@@ -152,32 +151,32 @@ func (g *GlobalReachConnectionsServerTransport) dispatchBeginDelete(req *http.Re
 	}
 	beginDelete := g.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/globalReachConnections/(?P<globalReachConnectionName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-	globalReachConnectionNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("globalReachConnectionName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := g.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, globalReachConnectionNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/globalReachConnections/(?P<globalReachConnectionName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		globalReachConnectionNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("globalReachConnectionName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := g.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, globalReachConnectionNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		g.beginDelete.add(req, beginDelete)
 	}
@@ -245,25 +244,25 @@ func (g *GlobalReachConnectionsServerTransport) dispatchNewListByPrivateCloudPag
 	}
 	newListByPrivateCloudPager := g.newListByPrivateCloudPager.get(req)
 	if newListByPrivateCloudPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/globalReachConnections`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-resp := g.srv.NewListByPrivateCloudPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/globalReachConnections`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := g.srv.NewListByPrivateCloudPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, nil)
 		newListByPrivateCloudPager = &resp
 		g.newListByPrivateCloudPager.add(req, newListByPrivateCloudPager)
 		server.PagerResponderInjectNextLinks(newListByPrivateCloudPager, req, func(page *armavs.GlobalReachConnectionsClientListByPrivateCloudResponse, createLink func() string) {
@@ -283,4 +282,3 @@ resp := g.srv.NewListByPrivateCloudPager(subscriptionIDParam, resourceGroupNameP
 	}
 	return resp, nil
 }
-

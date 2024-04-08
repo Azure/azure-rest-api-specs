@@ -32,7 +32,7 @@ func NewAzureSphereCatalogsClient(credential azcore.TokenCredential, options *ar
 		return nil, err
 	}
 	client := &AzureSphereCatalogsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -88,8 +88,8 @@ func (client *AzureSphereCatalogsClient) countDevicesCreateRequest(ctx context.C
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, body); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -166,8 +166,8 @@ func (client *AzureSphereCatalogsClient) createOrUpdateCreateRequest(ctx context
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -299,13 +299,13 @@ func (client *AzureSphereCatalogsClient) getHandleResponse(resp *http.Response) 
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - options - AzureSphereCatalogsClientListByResourceGroupOptions contains the optional parameters for the AzureSphereCatalogsClient.NewListByResourceGroupPager
 //     method.
-func (client *AzureSphereCatalogsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *AzureSphereCatalogsClientListByResourceGroupOptions) (*runtime.Pager[AzureSphereCatalogsClientListByResourceGroupResponse]) {
+func (client *AzureSphereCatalogsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *AzureSphereCatalogsClientListByResourceGroupOptions) *runtime.Pager[AzureSphereCatalogsClientListByResourceGroupResponse] {
 	return runtime.NewPager(runtime.PagingHandler[AzureSphereCatalogsClientListByResourceGroupResponse]{
 		More: func(page AzureSphereCatalogsClientListByResourceGroupResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AzureSphereCatalogsClientListByResourceGroupResponse) (AzureSphereCatalogsClientListByResourceGroupResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereCatalogsClient.NewListByResourceGroupPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereCatalogsClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -317,7 +317,7 @@ func (client *AzureSphereCatalogsClient) NewListByResourceGroupPager(subscriptio
 				return AzureSphereCatalogsClientListByResourceGroupResponse{}, err
 			}
 			return client.listByResourceGroupHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -356,13 +356,13 @@ func (client *AzureSphereCatalogsClient) listByResourceGroupHandleResponse(resp 
 //   - subscriptionID - The ID of the target subscription.
 //   - options - AzureSphereCatalogsClientListBySubscriptionOptions contains the optional parameters for the AzureSphereCatalogsClient.NewListBySubscriptionPager
 //     method.
-func (client *AzureSphereCatalogsClient) NewListBySubscriptionPager(subscriptionID string, options *AzureSphereCatalogsClientListBySubscriptionOptions) (*runtime.Pager[AzureSphereCatalogsClientListBySubscriptionResponse]) {
+func (client *AzureSphereCatalogsClient) NewListBySubscriptionPager(subscriptionID string, options *AzureSphereCatalogsClientListBySubscriptionOptions) *runtime.Pager[AzureSphereCatalogsClientListBySubscriptionResponse] {
 	return runtime.NewPager(runtime.PagingHandler[AzureSphereCatalogsClientListBySubscriptionResponse]{
 		More: func(page AzureSphereCatalogsClientListBySubscriptionResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AzureSphereCatalogsClientListBySubscriptionResponse) (AzureSphereCatalogsClientListBySubscriptionResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereCatalogsClient.NewListBySubscriptionPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereCatalogsClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -374,7 +374,7 @@ func (client *AzureSphereCatalogsClient) NewListBySubscriptionPager(subscription
 				return AzureSphereCatalogsClientListBySubscriptionResponse{}, err
 			}
 			return client.listBySubscriptionHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -412,13 +412,13 @@ func (client *AzureSphereCatalogsClient) listBySubscriptionHandleResponse(resp *
 //   - body - The content of the action request
 //   - options - AzureSphereCatalogsClientListDeploymentsOptions contains the optional parameters for the AzureSphereCatalogsClient.NewListDeploymentsPager
 //     method.
-func (client *AzureSphereCatalogsClient) NewListDeploymentsPager(subscriptionID string, resourceGroupName string, catalogName string, body any, options *AzureSphereCatalogsClientListDeploymentsOptions) (*runtime.Pager[AzureSphereCatalogsClientListDeploymentsResponse]) {
+func (client *AzureSphereCatalogsClient) NewListDeploymentsPager(subscriptionID string, resourceGroupName string, catalogName string, body any, options *AzureSphereCatalogsClientListDeploymentsOptions) *runtime.Pager[AzureSphereCatalogsClientListDeploymentsResponse] {
 	return runtime.NewPager(runtime.PagingHandler[AzureSphereCatalogsClientListDeploymentsResponse]{
 		More: func(page AzureSphereCatalogsClientListDeploymentsResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AzureSphereCatalogsClientListDeploymentsResponse) (AzureSphereCatalogsClientListDeploymentsResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereCatalogsClient.NewListDeploymentsPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereCatalogsClient.NewListDeploymentsPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -430,7 +430,7 @@ func (client *AzureSphereCatalogsClient) NewListDeploymentsPager(subscriptionID 
 				return AzureSphereCatalogsClientListDeploymentsResponse{}, err
 			}
 			return client.listDeploymentsHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -471,8 +471,8 @@ func (client *AzureSphereCatalogsClient) listDeploymentsCreateRequest(ctx contex
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, body); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -492,13 +492,13 @@ func (client *AzureSphereCatalogsClient) listDeploymentsHandleResponse(resp *htt
 //   - body - List device groups for catalog.
 //   - options - AzureSphereCatalogsClientListDeviceGroupsOptions contains the optional parameters for the AzureSphereCatalogsClient.NewListDeviceGroupsPager
 //     method.
-func (client *AzureSphereCatalogsClient) NewListDeviceGroupsPager(subscriptionID string, resourceGroupName string, catalogName string, body ListDeviceGroupsRequest, options *AzureSphereCatalogsClientListDeviceGroupsOptions) (*runtime.Pager[AzureSphereCatalogsClientListDeviceGroupsResponse]) {
+func (client *AzureSphereCatalogsClient) NewListDeviceGroupsPager(subscriptionID string, resourceGroupName string, catalogName string, body ListDeviceGroupsRequest, options *AzureSphereCatalogsClientListDeviceGroupsOptions) *runtime.Pager[AzureSphereCatalogsClientListDeviceGroupsResponse] {
 	return runtime.NewPager(runtime.PagingHandler[AzureSphereCatalogsClientListDeviceGroupsResponse]{
 		More: func(page AzureSphereCatalogsClientListDeviceGroupsResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AzureSphereCatalogsClientListDeviceGroupsResponse) (AzureSphereCatalogsClientListDeviceGroupsResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereCatalogsClient.NewListDeviceGroupsPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereCatalogsClient.NewListDeviceGroupsPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -510,7 +510,7 @@ func (client *AzureSphereCatalogsClient) NewListDeviceGroupsPager(subscriptionID
 				return AzureSphereCatalogsClientListDeviceGroupsResponse{}, err
 			}
 			return client.listDeviceGroupsHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -551,8 +551,8 @@ func (client *AzureSphereCatalogsClient) listDeviceGroupsCreateRequest(ctx conte
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, body); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -572,13 +572,13 @@ func (client *AzureSphereCatalogsClient) listDeviceGroupsHandleResponse(resp *ht
 //   - body - The content of the action request
 //   - options - AzureSphereCatalogsClientListDeviceInsightsOptions contains the optional parameters for the AzureSphereCatalogsClient.NewListDeviceInsightsPager
 //     method.
-func (client *AzureSphereCatalogsClient) NewListDeviceInsightsPager(subscriptionID string, resourceGroupName string, catalogName string, body any, options *AzureSphereCatalogsClientListDeviceInsightsOptions) (*runtime.Pager[AzureSphereCatalogsClientListDeviceInsightsResponse]) {
+func (client *AzureSphereCatalogsClient) NewListDeviceInsightsPager(subscriptionID string, resourceGroupName string, catalogName string, body any, options *AzureSphereCatalogsClientListDeviceInsightsOptions) *runtime.Pager[AzureSphereCatalogsClientListDeviceInsightsResponse] {
 	return runtime.NewPager(runtime.PagingHandler[AzureSphereCatalogsClientListDeviceInsightsResponse]{
 		More: func(page AzureSphereCatalogsClientListDeviceInsightsResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AzureSphereCatalogsClientListDeviceInsightsResponse) (AzureSphereCatalogsClientListDeviceInsightsResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereCatalogsClient.NewListDeviceInsightsPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereCatalogsClient.NewListDeviceInsightsPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -590,7 +590,7 @@ func (client *AzureSphereCatalogsClient) NewListDeviceInsightsPager(subscription
 				return AzureSphereCatalogsClientListDeviceInsightsResponse{}, err
 			}
 			return client.listDeviceInsightsHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -631,8 +631,8 @@ func (client *AzureSphereCatalogsClient) listDeviceInsightsCreateRequest(ctx con
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, body); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -652,13 +652,13 @@ func (client *AzureSphereCatalogsClient) listDeviceInsightsHandleResponse(resp *
 //   - body - The content of the action request
 //   - options - AzureSphereCatalogsClientListDevicesOptions contains the optional parameters for the AzureSphereCatalogsClient.NewListDevicesPager
 //     method.
-func (client *AzureSphereCatalogsClient) NewListDevicesPager(subscriptionID string, resourceGroupName string, catalogName string, body any, options *AzureSphereCatalogsClientListDevicesOptions) (*runtime.Pager[AzureSphereCatalogsClientListDevicesResponse]) {
+func (client *AzureSphereCatalogsClient) NewListDevicesPager(subscriptionID string, resourceGroupName string, catalogName string, body any, options *AzureSphereCatalogsClientListDevicesOptions) *runtime.Pager[AzureSphereCatalogsClientListDevicesResponse] {
 	return runtime.NewPager(runtime.PagingHandler[AzureSphereCatalogsClientListDevicesResponse]{
 		More: func(page AzureSphereCatalogsClientListDevicesResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AzureSphereCatalogsClientListDevicesResponse) (AzureSphereCatalogsClientListDevicesResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereCatalogsClient.NewListDevicesPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereCatalogsClient.NewListDevicesPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -670,7 +670,7 @@ func (client *AzureSphereCatalogsClient) NewListDevicesPager(subscriptionID stri
 				return AzureSphereCatalogsClientListDevicesResponse{}, err
 			}
 			return client.listDevicesHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -711,8 +711,8 @@ func (client *AzureSphereCatalogsClient) listDevicesCreateRequest(ctx context.Co
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, body); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -776,8 +776,8 @@ func (client *AzureSphereCatalogsClient) updateCreateRequest(ctx context.Context
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -854,8 +854,7 @@ func (client *AzureSphereCatalogsClient) uploadImageCreateRequest(ctx context.Co
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, body); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
-

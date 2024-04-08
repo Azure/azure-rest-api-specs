@@ -7,7 +7,7 @@ package armastro
 const host = "https://management.azure.com"
 
 const (
-	moduleName = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/astro/armastro"
+	moduleName    = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/astro/armastro"
 	moduleVersion = "v0.1.0"
 )
 
@@ -21,7 +21,7 @@ const (
 
 // PossibleActionTypeValues returns the possible values for the ActionType const type.
 func PossibleActionTypeValues() []ActionType {
-	return []ActionType{	
+	return []ActionType{
 		ActionTypeInternal,
 	}
 }
@@ -42,7 +42,7 @@ const (
 
 // PossibleCreatedByTypeValues returns the possible values for the CreatedByType const type.
 func PossibleCreatedByTypeValues() []CreatedByType {
-	return []CreatedByType{	
+	return []CreatedByType{
 		CreatedByTypeApplication,
 		CreatedByTypeKey,
 		CreatedByTypeManagedIdentity,
@@ -66,7 +66,7 @@ const (
 
 // PossibleManagedIdentityTypeValues returns the possible values for the ManagedIdentityType const type.
 func PossibleManagedIdentityTypeValues() []ManagedIdentityType {
-	return []ManagedIdentityType{	
+	return []ManagedIdentityType{
 		ManagedIdentityTypeNone,
 		ManagedIdentityTypeSystemAndUserAssigned,
 		ManagedIdentityTypeSystemAssigned,
@@ -83,7 +83,7 @@ const (
 	// MarketplaceSubscriptionStatusSubscribed - Marketplace subscription is activated
 	MarketplaceSubscriptionStatusSubscribed MarketplaceSubscriptionStatus = "Subscribed"
 	// MarketplaceSubscriptionStatusSuspended - This state indicates that a customer's payment for the Marketplace service was
-// not received
+	// not received
 	MarketplaceSubscriptionStatusSuspended MarketplaceSubscriptionStatus = "Suspended"
 	// MarketplaceSubscriptionStatusUnsubscribed - Customer has cancelled the subscription
 	MarketplaceSubscriptionStatusUnsubscribed MarketplaceSubscriptionStatus = "Unsubscribed"
@@ -91,7 +91,7 @@ const (
 
 // PossibleMarketplaceSubscriptionStatusValues returns the possible values for the MarketplaceSubscriptionStatus const type.
 func PossibleMarketplaceSubscriptionStatusValues() []MarketplaceSubscriptionStatus {
-	return []MarketplaceSubscriptionStatus{	
+	return []MarketplaceSubscriptionStatus{
 		MarketplaceSubscriptionStatusPendingFulfillmentStart,
 		MarketplaceSubscriptionStatusSubscribed,
 		MarketplaceSubscriptionStatusSuspended,
@@ -114,7 +114,7 @@ const (
 
 // PossibleOriginValues returns the possible values for the Origin const type.
 func PossibleOriginValues() []Origin {
-	return []Origin{	
+	return []Origin{
 		OriginSystem,
 		OriginUser,
 		OriginUserSystem,
@@ -135,7 +135,7 @@ const (
 
 // PossibleResourceProvisioningStateValues returns the possible values for the ResourceProvisioningState const type.
 func PossibleResourceProvisioningStateValues() []ResourceProvisioningState {
-	return []ResourceProvisioningState{	
+	return []ResourceProvisioningState{
 		ResourceProvisioningStateCanceled,
 		ResourceProvisioningStateFailed,
 		ResourceProvisioningStateSucceeded,
@@ -156,10 +156,9 @@ const (
 
 // PossibleSingleSignOnStatesValues returns the possible values for the SingleSignOnStates const type.
 func PossibleSingleSignOnStatesValues() []SingleSignOnStates {
-	return []SingleSignOnStates{	
+	return []SingleSignOnStates{
 		SingleSignOnStatesDisable,
 		SingleSignOnStatesEnable,
 		SingleSignOnStatesInitial,
 	}
 }
-

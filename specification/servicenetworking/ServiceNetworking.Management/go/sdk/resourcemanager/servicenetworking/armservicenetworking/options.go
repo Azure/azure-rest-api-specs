@@ -98,4 +98,3 @@ type TrafficControllerInterfaceClientListBySubscriptionOptions struct {
 type TrafficControllerInterfaceClientUpdateOptions struct {
 	// placeholder for future optional parameters
 }
-

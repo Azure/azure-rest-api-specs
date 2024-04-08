@@ -31,7 +31,7 @@ func NewVirtualMachinesClient(credential azcore.TokenCredential, options *arm.Cl
 		return nil, err
 	}
 	client := &VirtualMachinesClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -112,13 +112,13 @@ func (client *VirtualMachinesClient) getHandleResponse(resp *http.Response) (Vir
 //   - clusterName - Name of the cluster
 //   - options - VirtualMachinesClientListByClusterOptions contains the optional parameters for the VirtualMachinesClient.NewListByClusterPager
 //     method.
-func (client *VirtualMachinesClient) NewListByClusterPager(subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, options *VirtualMachinesClientListByClusterOptions) (*runtime.Pager[VirtualMachinesClientListByClusterResponse]) {
+func (client *VirtualMachinesClient) NewListByClusterPager(subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, options *VirtualMachinesClientListByClusterOptions) *runtime.Pager[VirtualMachinesClientListByClusterResponse] {
 	return runtime.NewPager(runtime.PagingHandler[VirtualMachinesClientListByClusterResponse]{
 		More: func(page VirtualMachinesClientListByClusterResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *VirtualMachinesClientListByClusterResponse) (VirtualMachinesClientListByClusterResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "VirtualMachinesClient.NewListByClusterPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "VirtualMachinesClient.NewListByClusterPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -130,7 +130,7 @@ func (client *VirtualMachinesClient) NewListByClusterPager(subscriptionID string
 				return VirtualMachinesClientListByClusterResponse{}, err
 			}
 			return client.listByClusterHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -247,8 +247,7 @@ func (client *VirtualMachinesClient) restrictMovementCreateRequest(ctx context.C
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, restrictMovement); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
-

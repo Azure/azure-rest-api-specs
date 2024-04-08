@@ -206,7 +206,7 @@ type OperationsClientListOptions struct {
 // PlacementPoliciesClientCreateOrUpdateOptions contains the optional parameters for the PlacementPoliciesClient.CreateOrUpdate
 // method.
 type PlacementPoliciesClientCreateOrUpdateOptions struct {
-	ResumeToken string
+	// placeholder for future optional parameters
 }
 
 // PlacementPoliciesClientDeleteOptions contains the optional parameters for the PlacementPoliciesClient.Delete method.
@@ -351,7 +351,7 @@ type VirtualMachinesClientRestrictMovementOptions struct {
 // WorkloadNetworkDhcpConfigurationsClientCreateOptions contains the optional parameters for the WorkloadNetworkDhcpConfigurationsClient.Create
 // method.
 type WorkloadNetworkDhcpConfigurationsClientCreateOptions struct {
-	ResumeToken string
+	// placeholder for future optional parameters
 }
 
 // WorkloadNetworkDhcpConfigurationsClientDeleteOptions contains the optional parameters for the WorkloadNetworkDhcpConfigurationsClient.Delete
@@ -381,7 +381,7 @@ type WorkloadNetworkDhcpConfigurationsClientUpdateOptions struct {
 // WorkloadNetworkDnsServicesClientCreateOptions contains the optional parameters for the WorkloadNetworkDnsServicesClient.Create
 // method.
 type WorkloadNetworkDnsServicesClientCreateOptions struct {
-	ResumeToken string
+	// placeholder for future optional parameters
 }
 
 // WorkloadNetworkDnsServicesClientDeleteOptions contains the optional parameters for the WorkloadNetworkDnsServicesClient.Delete
@@ -411,7 +411,7 @@ type WorkloadNetworkDnsServicesClientUpdateOptions struct {
 // WorkloadNetworkDnsZonesClientCreateOptions contains the optional parameters for the WorkloadNetworkDnsZonesClient.Create
 // method.
 type WorkloadNetworkDnsZonesClientCreateOptions struct {
-	ResumeToken string
+	// placeholder for future optional parameters
 }
 
 // WorkloadNetworkDnsZonesClientDeleteOptions contains the optional parameters for the WorkloadNetworkDnsZonesClient.Delete
@@ -451,7 +451,7 @@ type WorkloadNetworkGatewaysClientListByWorkloadNetworkOptions struct {
 // WorkloadNetworkPortMirroringProfilesClientCreateOptions contains the optional parameters for the WorkloadNetworkPortMirroringProfilesClient.Create
 // method.
 type WorkloadNetworkPortMirroringProfilesClientCreateOptions struct {
-	ResumeToken string
+	// placeholder for future optional parameters
 }
 
 // WorkloadNetworkPortMirroringProfilesClientDeleteOptions contains the optional parameters for the WorkloadNetworkPortMirroringProfilesClient.Delete
@@ -481,7 +481,7 @@ type WorkloadNetworkPortMirroringProfilesClientUpdateOptions struct {
 // WorkloadNetworkPublicIpsClientCreateOptions contains the optional parameters for the WorkloadNetworkPublicIpsClient.Create
 // method.
 type WorkloadNetworkPublicIpsClientCreateOptions struct {
-	ResumeToken string
+	// placeholder for future optional parameters
 }
 
 // WorkloadNetworkPublicIpsClientDeleteOptions contains the optional parameters for the WorkloadNetworkPublicIpsClient.Delete
@@ -504,7 +504,7 @@ type WorkloadNetworkPublicIpsClientListByWorkloadNetworkOptions struct {
 // WorkloadNetworkSegmentsClientCreateOptions contains the optional parameters for the WorkloadNetworkSegmentsClient.Create
 // method.
 type WorkloadNetworkSegmentsClientCreateOptions struct {
-	ResumeToken string
+	// placeholder for future optional parameters
 }
 
 // WorkloadNetworkSegmentsClientDeleteSegmentOptions contains the optional parameters for the WorkloadNetworkSegmentsClient.DeleteSegment
@@ -545,7 +545,7 @@ type WorkloadNetworkVirtualMachinesClientListByWorkloadNetworkOptions struct {
 // WorkloadNetworkVmGroupsClientCreateOptions contains the optional parameters for the WorkloadNetworkVmGroupsClient.Create
 // method.
 type WorkloadNetworkVmGroupsClientCreateOptions struct {
-	ResumeToken string
+	// placeholder for future optional parameters
 }
 
 // WorkloadNetworkVmGroupsClientDeleteOptions contains the optional parameters for the WorkloadNetworkVmGroupsClient.Delete
@@ -581,4 +581,3 @@ type WorkloadNetworksClientGetOptions struct {
 type WorkloadNetworksClientListByPrivateCloudOptions struct {
 	// placeholder for future optional parameters
 }
-

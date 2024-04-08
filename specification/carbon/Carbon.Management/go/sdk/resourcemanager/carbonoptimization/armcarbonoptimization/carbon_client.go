@@ -24,7 +24,7 @@ func NewCarbonClient(credential azcore.TokenCredential, options *arm.ClientOptio
 		return nil, err
 	}
 	client := &CarbonClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -42,4 +42,3 @@ func (client *CarbonClient) NewCarbonOperationsClient() *CarbonOperationsClient 
 		internal: client.internal,
 	}
 }
-

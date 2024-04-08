@@ -16,13 +16,14 @@ import (
 	"net/http"
 	"net/url"
 	"regexp"
+	"strconv"
 )
 
 // WorkloadNetworkDnsZonesServer is a fake server for instances of the armavs.WorkloadNetworkDnsZonesClient type.
-type WorkloadNetworkDnsZonesServer struct{
-	// BeginCreate is the fake for method WorkloadNetworkDnsZonesClient.BeginCreate
+type WorkloadNetworkDnsZonesServer struct {
+	// Create is the fake for method WorkloadNetworkDnsZonesClient.Create
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsZoneID string, resource armavs.WorkloadNetworkDNSZone, options *armavs.WorkloadNetworkDnsZonesClientCreateOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkDnsZonesClientCreateResponse], errResp azfake.ErrorResponder)
+	Create func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsZoneID string, workloadNetworkDNSZone armavs.WorkloadNetworkDNSZone, options *armavs.WorkloadNetworkDnsZonesClientCreateOptions) (resp azfake.Responder[armavs.WorkloadNetworkDnsZonesClientCreateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method WorkloadNetworkDnsZonesClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
@@ -38,8 +39,7 @@ type WorkloadNetworkDnsZonesServer struct{
 
 	// BeginUpdate is the fake for method WorkloadNetworkDnsZonesClient.BeginUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
-	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsZoneID string, properties armavs.WorkloadNetworkDNSZoneUpdate, options *armavs.WorkloadNetworkDnsZonesClientUpdateOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkDnsZonesClientUpdateResponse], errResp azfake.ErrorResponder)
-
+	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsZoneID string, workloadNetworkDNSZone armavs.WorkloadNetworkDNSZoneUpdate, options *armavs.WorkloadNetworkDnsZonesClientUpdateOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkDnsZonesClientUpdateResponse], errResp azfake.ErrorResponder)
 }
 
 // NewWorkloadNetworkDnsZonesServerTransport creates a new instance of WorkloadNetworkDnsZonesServerTransport with the provided implementation.
@@ -47,22 +47,20 @@ type WorkloadNetworkDnsZonesServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewWorkloadNetworkDnsZonesServerTransport(srv *WorkloadNetworkDnsZonesServer) *WorkloadNetworkDnsZonesServerTransport {
 	return &WorkloadNetworkDnsZonesServerTransport{
-		srv: srv,
-		beginCreate: newTracker[azfake.PollerResponder[armavs.WorkloadNetworkDnsZonesClientCreateResponse]](),
-		beginDelete: newTracker[azfake.PollerResponder[armavs.WorkloadNetworkDnsZonesClientDeleteResponse]](),
+		srv:                           srv,
+		beginDelete:                   newTracker[azfake.PollerResponder[armavs.WorkloadNetworkDnsZonesClientDeleteResponse]](),
 		newListByWorkloadNetworkPager: newTracker[azfake.PagerResponder[armavs.WorkloadNetworkDnsZonesClientListByWorkloadNetworkResponse]](),
-		beginUpdate: newTracker[azfake.PollerResponder[armavs.WorkloadNetworkDnsZonesClientUpdateResponse]](),
+		beginUpdate:                   newTracker[azfake.PollerResponder[armavs.WorkloadNetworkDnsZonesClientUpdateResponse]](),
 	}
 }
 
 // WorkloadNetworkDnsZonesServerTransport connects instances of armavs.WorkloadNetworkDnsZonesClient to instances of WorkloadNetworkDnsZonesServer.
 // Don't use this type directly, use NewWorkloadNetworkDnsZonesServerTransport instead.
 type WorkloadNetworkDnsZonesServerTransport struct {
-	srv *WorkloadNetworkDnsZonesServer
-	beginCreate *tracker[azfake.PollerResponder[armavs.WorkloadNetworkDnsZonesClientCreateResponse]]
-	beginDelete *tracker[azfake.PollerResponder[armavs.WorkloadNetworkDnsZonesClientDeleteResponse]]
+	srv                           *WorkloadNetworkDnsZonesServer
+	beginDelete                   *tracker[azfake.PollerResponder[armavs.WorkloadNetworkDnsZonesClientDeleteResponse]]
 	newListByWorkloadNetworkPager *tracker[azfake.PagerResponder[armavs.WorkloadNetworkDnsZonesClientListByWorkloadNetworkResponse]]
-	beginUpdate *tracker[azfake.PollerResponder[armavs.WorkloadNetworkDnsZonesClientUpdateResponse]]
+	beginUpdate                   *tracker[azfake.PollerResponder[armavs.WorkloadNetworkDnsZonesClientUpdateResponse]]
 }
 
 // Do implements the policy.Transporter interface for WorkloadNetworkDnsZonesServerTransport.
@@ -81,8 +79,8 @@ func (w *WorkloadNetworkDnsZonesServerTransport) dispatchToMethodFake(req *http.
 	var err error
 
 	switch method {
-	case "WorkloadNetworkDnsZonesClient.BeginCreate":
-		resp, err = w.dispatchBeginCreate(req)
+	case "WorkloadNetworkDnsZonesClient.Create":
+		resp, err = w.dispatchCreate(req)
 	case "WorkloadNetworkDnsZonesClient.BeginDelete":
 		resp, err = w.dispatchBeginDelete(req)
 	case "WorkloadNetworkDnsZonesClient.Get":
@@ -98,12 +96,10 @@ func (w *WorkloadNetworkDnsZonesServerTransport) dispatchToMethodFake(req *http.
 	return resp, err
 }
 
-func (w *WorkloadNetworkDnsZonesServerTransport) dispatchBeginCreate(req *http.Request) (*http.Response, error) {
-	if w.srv.BeginCreate == nil {
-		return nil, &nonRetriableError{errors.New("fake for method BeginCreate not implemented")}
+func (w *WorkloadNetworkDnsZonesServerTransport) dispatchCreate(req *http.Request) (*http.Response, error) {
+	if w.srv.Create == nil {
+		return nil, &nonRetriableError{errors.New("fake for method Create not implemented")}
 	}
-	beginCreate := w.beginCreate.get(req)
-	if beginCreate == nil {
 	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/dnsZones/(?P<dnsZoneId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
 	regex := regexp.MustCompile(regexStr)
 	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
@@ -130,27 +126,21 @@ func (w *WorkloadNetworkDnsZonesServerTransport) dispatchBeginCreate(req *http.R
 	if err != nil {
 		return nil, err
 	}
-	respr, errRespr := w.srv.BeginCreate(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, dnsZoneIDParam, body, nil)
+	respr, errRespr := w.srv.Create(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, dnsZoneIDParam, body, nil)
 	if respErr := server.GetError(errRespr, req); respErr != nil {
 		return nil, respErr
 	}
-		beginCreate = &respr
-		w.beginCreate.add(req, beginCreate)
+	respContent := server.GetResponseContent(respr)
+	if !contains([]int{http.StatusOK, http.StatusCreated}, respContent.HTTPStatus) {
+		return nil, &nonRetriableError{fmt.Errorf("unexpected status code %d. acceptable values are http.StatusOK, http.StatusCreated", respContent.HTTPStatus)}
 	}
-
-	resp, err := server.PollerResponderNext(beginCreate, req)
+	resp, err := server.MarshalResponseAsJSON(respContent, server.GetResponse(respr).WorkloadNetworkDNSZone, req)
 	if err != nil {
 		return nil, err
 	}
-
-	if !contains([]int{http.StatusOK, http.StatusCreated}, resp.StatusCode) {
-		w.beginCreate.remove(req)
-		return nil, &nonRetriableError{fmt.Errorf("unexpected status code %d. acceptable values are http.StatusOK, http.StatusCreated", resp.StatusCode)}
+	if val := server.GetResponse(respr).RetryAfter; val != nil {
+		resp.Header.Set("Retry-After", strconv.FormatInt(int64(*val), 10))
 	}
-	if !server.PollerResponderMore(beginCreate) {
-		w.beginCreate.remove(req)
-	}
-
 	return resp, nil
 }
 
@@ -160,32 +150,32 @@ func (w *WorkloadNetworkDnsZonesServerTransport) dispatchBeginDelete(req *http.R
 	}
 	beginDelete := w.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/dnsZones/(?P<dnsZoneId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	dnsZoneIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("dnsZoneId")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := w.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, dnsZoneIDParam, privateCloudNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/dnsZones/(?P<dnsZoneId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		dnsZoneIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("dnsZoneId")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := w.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, dnsZoneIDParam, privateCloudNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		w.beginDelete.add(req, beginDelete)
 	}
@@ -253,25 +243,25 @@ func (w *WorkloadNetworkDnsZonesServerTransport) dispatchNewListByWorkloadNetwor
 	}
 	newListByWorkloadNetworkPager := w.newListByWorkloadNetworkPager.get(req)
 	if newListByWorkloadNetworkPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/dnsZones`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-resp := w.srv.NewListByWorkloadNetworkPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/dnsZones`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := w.srv.NewListByWorkloadNetworkPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, nil)
 		newListByWorkloadNetworkPager = &resp
 		w.newListByWorkloadNetworkPager.add(req, newListByWorkloadNetworkPager)
 		server.PagerResponderInjectNextLinks(newListByWorkloadNetworkPager, req, func(page *armavs.WorkloadNetworkDnsZonesClientListByWorkloadNetworkResponse, createLink func() string) {
@@ -298,36 +288,36 @@ func (w *WorkloadNetworkDnsZonesServerTransport) dispatchBeginUpdate(req *http.R
 	}
 	beginUpdate := w.beginUpdate.get(req)
 	if beginUpdate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/dnsZones/(?P<dnsZoneId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armavs.WorkloadNetworkDNSZoneUpdate](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-	dnsZoneIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("dnsZoneId")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := w.srv.BeginUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, dnsZoneIDParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/dnsZones/(?P<dnsZoneId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armavs.WorkloadNetworkDNSZoneUpdate](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		dnsZoneIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("dnsZoneId")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := w.srv.BeginUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, dnsZoneIDParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginUpdate = &respr
 		w.beginUpdate.add(req, beginUpdate)
 	}
@@ -347,4 +337,3 @@ func (w *WorkloadNetworkDnsZonesServerTransport) dispatchBeginUpdate(req *http.R
 
 	return resp, nil
 }
-

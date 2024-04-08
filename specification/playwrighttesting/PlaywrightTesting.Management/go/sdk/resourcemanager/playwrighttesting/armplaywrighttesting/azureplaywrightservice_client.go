@@ -24,7 +24,7 @@ func NewAzurePlaywrightServiceClient(credential azcore.TokenCredential, options 
 		return nil, err
 	}
 	client := &AzurePlaywrightServiceClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -56,4 +56,3 @@ func (client *AzurePlaywrightServiceClient) NewAzurePlaywrightServiceQuotasClien
 		internal: client.internal,
 	}
 }
-

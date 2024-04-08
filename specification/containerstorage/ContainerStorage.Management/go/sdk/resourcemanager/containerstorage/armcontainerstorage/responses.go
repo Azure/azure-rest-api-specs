@@ -96,4 +96,3 @@ type VolumesClientUpdateResponse struct {
 	// Concrete proxy resource types can be created by aliasing this type using a specific property type.
 	Volume
 }
-

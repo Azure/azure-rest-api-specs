@@ -32,7 +32,7 @@ func NewUpfDeploymentsClient(credential azcore.TokenCredential, options *arm.Cli
 		return nil, err
 	}
 	client := &UpfDeploymentsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -88,8 +88,8 @@ func (client *UpfDeploymentsClient) createOrUpdateCreateRequest(ctx context.Cont
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -237,13 +237,13 @@ func (client *UpfDeploymentsClient) getHandleResponse(resp *http.Response) (UpfD
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - options - UpfDeploymentsClientListByResourceGroupOptions contains the optional parameters for the UpfDeploymentsClient.NewListByResourceGroupPager
 //     method.
-func (client *UpfDeploymentsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *UpfDeploymentsClientListByResourceGroupOptions) (*runtime.Pager[UpfDeploymentsClientListByResourceGroupResponse]) {
+func (client *UpfDeploymentsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *UpfDeploymentsClientListByResourceGroupOptions) *runtime.Pager[UpfDeploymentsClientListByResourceGroupResponse] {
 	return runtime.NewPager(runtime.PagingHandler[UpfDeploymentsClientListByResourceGroupResponse]{
 		More: func(page UpfDeploymentsClientListByResourceGroupResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *UpfDeploymentsClientListByResourceGroupResponse) (UpfDeploymentsClientListByResourceGroupResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "UpfDeploymentsClient.NewListByResourceGroupPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "UpfDeploymentsClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -255,7 +255,7 @@ func (client *UpfDeploymentsClient) NewListByResourceGroupPager(subscriptionID s
 				return UpfDeploymentsClientListByResourceGroupResponse{}, err
 			}
 			return client.listByResourceGroupHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -294,13 +294,13 @@ func (client *UpfDeploymentsClient) listByResourceGroupHandleResponse(resp *http
 //   - subscriptionID - The ID of the target subscription.
 //   - options - UpfDeploymentsClientListBySubscriptionOptions contains the optional parameters for the UpfDeploymentsClient.NewListBySubscriptionPager
 //     method.
-func (client *UpfDeploymentsClient) NewListBySubscriptionPager(subscriptionID string, options *UpfDeploymentsClientListBySubscriptionOptions) (*runtime.Pager[UpfDeploymentsClientListBySubscriptionResponse]) {
+func (client *UpfDeploymentsClient) NewListBySubscriptionPager(subscriptionID string, options *UpfDeploymentsClientListBySubscriptionOptions) *runtime.Pager[UpfDeploymentsClientListBySubscriptionResponse] {
 	return runtime.NewPager(runtime.PagingHandler[UpfDeploymentsClientListBySubscriptionResponse]{
 		More: func(page UpfDeploymentsClientListBySubscriptionResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *UpfDeploymentsClientListBySubscriptionResponse) (UpfDeploymentsClientListBySubscriptionResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "UpfDeploymentsClient.NewListBySubscriptionPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "UpfDeploymentsClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -312,7 +312,7 @@ func (client *UpfDeploymentsClient) NewListBySubscriptionPager(subscriptionID st
 				return UpfDeploymentsClientListBySubscriptionResponse{}, err
 			}
 			return client.listBySubscriptionHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -394,8 +394,8 @@ func (client *UpfDeploymentsClient) updateTagsCreateRequest(ctx context.Context,
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -407,4 +407,3 @@ func (client *UpfDeploymentsClient) updateTagsHandleResponse(resp *http.Response
 	}
 	return result, nil
 }
-

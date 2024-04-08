@@ -14,7 +14,7 @@ import (
 )
 
 // AzureLargeInstanceServer is a fake server for instances of the armlargeinstance.AzureLargeInstanceClient type.
-type AzureLargeInstanceServer struct{
+type AzureLargeInstanceServer struct {
 	// AzureLargeInstanceAzureLargeInstancesServer contains the fakes for client AzureLargeInstanceAzureLargeInstancesClient
 	AzureLargeInstanceAzureLargeInstancesServer AzureLargeInstanceAzureLargeInstancesServer
 
@@ -23,7 +23,6 @@ type AzureLargeInstanceServer struct{
 
 	// AzureLargeInstanceOperationsServer contains the fakes for client AzureLargeInstanceOperationsClient
 	AzureLargeInstanceOperationsServer AzureLargeInstanceOperationsServer
-
 }
 
 // NewAzureLargeInstanceServerTransport creates a new instance of AzureLargeInstanceServerTransport with the provided implementation.
@@ -36,11 +35,11 @@ func NewAzureLargeInstanceServerTransport(srv *AzureLargeInstanceServer) *AzureL
 // AzureLargeInstanceServerTransport connects instances of armlargeinstance.AzureLargeInstanceClient to instances of AzureLargeInstanceServer.
 // Don't use this type directly, use NewAzureLargeInstanceServerTransport instead.
 type AzureLargeInstanceServerTransport struct {
-	srv *AzureLargeInstanceServer
-	trMu sync.Mutex
-	trAzureLargeInstanceAzureLargeInstancesServer *AzureLargeInstanceAzureLargeInstancesServerTransport
+	srv                                                  *AzureLargeInstanceServer
+	trMu                                                 sync.Mutex
+	trAzureLargeInstanceAzureLargeInstancesServer        *AzureLargeInstanceAzureLargeInstancesServerTransport
 	trAzureLargeInstanceAzureLargeStorageInstancesServer *AzureLargeInstanceAzureLargeStorageInstancesServerTransport
-	trAzureLargeInstanceOperationsServer *AzureLargeInstanceOperationsServerTransport
+	trAzureLargeInstanceOperationsServer                 *AzureLargeInstanceOperationsServerTransport
 }
 
 // Do implements the policy.Transporter interface for AzureLargeInstanceServerTransport.
@@ -61,15 +60,18 @@ func (a *AzureLargeInstanceServerTransport) dispatchToClientFake(req *http.Reque
 	switch client {
 	case "AzureLargeInstanceAzureLargeInstancesClient":
 		initServer(&a.trMu, &a.trAzureLargeInstanceAzureLargeInstancesServer, func() *AzureLargeInstanceAzureLargeInstancesServerTransport {
-		return NewAzureLargeInstanceAzureLargeInstancesServerTransport(&a.srv.AzureLargeInstanceAzureLargeInstancesServer) })
+			return NewAzureLargeInstanceAzureLargeInstancesServerTransport(&a.srv.AzureLargeInstanceAzureLargeInstancesServer)
+		})
 		resp, err = a.trAzureLargeInstanceAzureLargeInstancesServer.Do(req)
 	case "AzureLargeInstanceAzureLargeStorageInstancesClient":
 		initServer(&a.trMu, &a.trAzureLargeInstanceAzureLargeStorageInstancesServer, func() *AzureLargeInstanceAzureLargeStorageInstancesServerTransport {
-		return NewAzureLargeInstanceAzureLargeStorageInstancesServerTransport(&a.srv.AzureLargeInstanceAzureLargeStorageInstancesServer) })
+			return NewAzureLargeInstanceAzureLargeStorageInstancesServerTransport(&a.srv.AzureLargeInstanceAzureLargeStorageInstancesServer)
+		})
 		resp, err = a.trAzureLargeInstanceAzureLargeStorageInstancesServer.Do(req)
 	case "AzureLargeInstanceOperationsClient":
 		initServer(&a.trMu, &a.trAzureLargeInstanceOperationsServer, func() *AzureLargeInstanceOperationsServerTransport {
-		return NewAzureLargeInstanceOperationsServerTransport(&a.srv.AzureLargeInstanceOperationsServer) })
+			return NewAzureLargeInstanceOperationsServerTransport(&a.srv.AzureLargeInstanceOperationsServer)
+		})
 		resp, err = a.trAzureLargeInstanceOperationsServer.Do(req)
 	default:
 		err = fmt.Errorf("unhandled client %s", client)
@@ -77,4 +79,3 @@ func (a *AzureLargeInstanceServerTransport) dispatchToClientFake(req *http.Reque
 
 	return resp, err
 }
-

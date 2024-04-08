@@ -34,25 +34,25 @@ func (c *CarbonEmissionData) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "changeRatioFor12Months":
-				err = unpopulate(val, "ChangeRatioFor12Months", &c.ChangeRatioFor12Months)
+			err = unpopulate(val, "ChangeRatioFor12Months", &c.ChangeRatioFor12Months)
 			delete(rawMsg, key)
 		case "changeRatioForLastMonth":
-				err = unpopulate(val, "ChangeRatioForLastMonth", &c.ChangeRatioForLastMonth)
+			err = unpopulate(val, "ChangeRatioForLastMonth", &c.ChangeRatioForLastMonth)
 			delete(rawMsg, key)
 		case "changeValueMonthOverMonth":
-				err = unpopulate(val, "ChangeValueMonthOverMonth", &c.ChangeValueMonthOverMonth)
+			err = unpopulate(val, "ChangeValueMonthOverMonth", &c.ChangeValueMonthOverMonth)
 			delete(rawMsg, key)
 		case "dataType":
-				err = unpopulate(val, "DataType", &c.DataType)
+			err = unpopulate(val, "DataType", &c.DataType)
 			delete(rawMsg, key)
 		case "totalCarbonEmission":
-				err = unpopulate(val, "TotalCarbonEmission", &c.TotalCarbonEmission)
+			err = unpopulate(val, "TotalCarbonEmission", &c.TotalCarbonEmission)
 			delete(rawMsg, key)
 		case "totalCarbonEmission12MonthsAgo":
-				err = unpopulate(val, "TotalCarbonEmission12MonthsAgo", &c.TotalCarbonEmission12MonthsAgo)
+			err = unpopulate(val, "TotalCarbonEmission12MonthsAgo", &c.TotalCarbonEmission12MonthsAgo)
 			delete(rawMsg, key)
 		case "totalCarbonEmissionLastMonth":
-				err = unpopulate(val, "TotalCarbonEmissionLastMonth", &c.TotalCarbonEmissionLastMonth)
+			err = unpopulate(val, "TotalCarbonEmissionLastMonth", &c.TotalCarbonEmissionLastMonth)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -80,10 +80,10 @@ func (c *CarbonEmissionDataAvailableDateRange) UnmarshalJSON(data []byte) error 
 		var err error
 		switch key {
 		case "endDate":
-				err = unpopulate(val, "EndDate", &c.EndDate)
+			err = unpopulate(val, "EndDate", &c.EndDate)
 			delete(rawMsg, key)
 		case "startDate":
-				err = unpopulate(val, "StartDate", &c.StartDate)
+			err = unpopulate(val, "StartDate", &c.StartDate)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -113,13 +113,13 @@ func (c *CarbonEmissionDataListResult) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "nextLink":
-				err = unpopulate(val, "NextLink", &c.NextLink)
+			err = unpopulate(val, "NextLink", &c.NextLink)
 			delete(rawMsg, key)
 		case "skipToken":
-				err = unpopulate(val, "SkipToken", &c.SkipToken)
+			err = unpopulate(val, "SkipToken", &c.SkipToken)
 			delete(rawMsg, key)
 		case "subscriptionAccessDecisionList":
-				err = unpopulate(val, "SubscriptionAccessDecisionList", &c.SubscriptionAccessDecisionList)
+			err = unpopulate(val, "SubscriptionAccessDecisionList", &c.SubscriptionAccessDecisionList)
 			delete(rawMsg, key)
 		case "value":
 			c.Value, err = unmarshalCarbonEmissionDataClassificationArray(val)
@@ -158,34 +158,34 @@ func (c *CarbonEmissionItemDetailData) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "categoryType":
-				err = unpopulate(val, "CategoryType", &c.CategoryType)
+			err = unpopulate(val, "CategoryType", &c.CategoryType)
 			delete(rawMsg, key)
 		case "changeRatioFor12Months":
-				err = unpopulate(val, "ChangeRatioFor12Months", &c.ChangeRatioFor12Months)
+			err = unpopulate(val, "ChangeRatioFor12Months", &c.ChangeRatioFor12Months)
 			delete(rawMsg, key)
 		case "changeRatioForLastMonth":
-				err = unpopulate(val, "ChangeRatioForLastMonth", &c.ChangeRatioForLastMonth)
+			err = unpopulate(val, "ChangeRatioForLastMonth", &c.ChangeRatioForLastMonth)
 			delete(rawMsg, key)
 		case "changeValueMonthOverMonth":
-				err = unpopulate(val, "ChangeValueMonthOverMonth", &c.ChangeValueMonthOverMonth)
+			err = unpopulate(val, "ChangeValueMonthOverMonth", &c.ChangeValueMonthOverMonth)
 			delete(rawMsg, key)
 		case "dataType":
-				err = unpopulate(val, "DataType", &c.DataType)
+			err = unpopulate(val, "DataType", &c.DataType)
 			delete(rawMsg, key)
 		case "groupName":
-				err = unpopulate(val, "GroupName", &c.GroupName)
+			err = unpopulate(val, "GroupName", &c.GroupName)
 			delete(rawMsg, key)
 		case "itemName":
-				err = unpopulate(val, "ItemName", &c.ItemName)
+			err = unpopulate(val, "ItemName", &c.ItemName)
 			delete(rawMsg, key)
 		case "totalCarbonEmission":
-				err = unpopulate(val, "TotalCarbonEmission", &c.TotalCarbonEmission)
+			err = unpopulate(val, "TotalCarbonEmission", &c.TotalCarbonEmission)
 			delete(rawMsg, key)
 		case "totalCarbonEmission12MonthsAgo":
-				err = unpopulate(val, "TotalCarbonEmission12MonthsAgo", &c.TotalCarbonEmission12MonthsAgo)
+			err = unpopulate(val, "TotalCarbonEmission12MonthsAgo", &c.TotalCarbonEmission12MonthsAgo)
 			delete(rawMsg, key)
 		case "totalCarbonEmissionLastMonth":
-				err = unpopulate(val, "TotalCarbonEmissionLastMonth", &c.TotalCarbonEmissionLastMonth)
+			err = unpopulate(val, "TotalCarbonEmissionLastMonth", &c.TotalCarbonEmissionLastMonth)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -220,31 +220,31 @@ func (c *CarbonEmissionMonthlySummaryData) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "carbonIntensity":
-				err = unpopulate(val, "CarbonIntensity", &c.CarbonIntensity)
+			err = unpopulate(val, "CarbonIntensity", &c.CarbonIntensity)
 			delete(rawMsg, key)
 		case "changeRatioFor12Months":
-				err = unpopulate(val, "ChangeRatioFor12Months", &c.ChangeRatioFor12Months)
+			err = unpopulate(val, "ChangeRatioFor12Months", &c.ChangeRatioFor12Months)
 			delete(rawMsg, key)
 		case "changeRatioForLastMonth":
-				err = unpopulate(val, "ChangeRatioForLastMonth", &c.ChangeRatioForLastMonth)
+			err = unpopulate(val, "ChangeRatioForLastMonth", &c.ChangeRatioForLastMonth)
 			delete(rawMsg, key)
 		case "changeValueMonthOverMonth":
-				err = unpopulate(val, "ChangeValueMonthOverMonth", &c.ChangeValueMonthOverMonth)
+			err = unpopulate(val, "ChangeValueMonthOverMonth", &c.ChangeValueMonthOverMonth)
 			delete(rawMsg, key)
 		case "dataType":
-				err = unpopulate(val, "DataType", &c.DataType)
+			err = unpopulate(val, "DataType", &c.DataType)
 			delete(rawMsg, key)
 		case "date":
-				err = unpopulate(val, "Date", &c.Date)
+			err = unpopulate(val, "Date", &c.Date)
 			delete(rawMsg, key)
 		case "totalCarbonEmission":
-				err = unpopulate(val, "TotalCarbonEmission", &c.TotalCarbonEmission)
+			err = unpopulate(val, "TotalCarbonEmission", &c.TotalCarbonEmission)
 			delete(rawMsg, key)
 		case "totalCarbonEmission12MonthsAgo":
-				err = unpopulate(val, "TotalCarbonEmission12MonthsAgo", &c.TotalCarbonEmission12MonthsAgo)
+			err = unpopulate(val, "TotalCarbonEmission12MonthsAgo", &c.TotalCarbonEmission12MonthsAgo)
 			delete(rawMsg, key)
 		case "totalCarbonEmissionLastMonth":
-				err = unpopulate(val, "TotalCarbonEmissionLastMonth", &c.TotalCarbonEmissionLastMonth)
+			err = unpopulate(val, "TotalCarbonEmissionLastMonth", &c.TotalCarbonEmissionLastMonth)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -277,25 +277,25 @@ func (c *CarbonEmissionOverallSummaryData) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "changeRatioFor12Months":
-				err = unpopulate(val, "ChangeRatioFor12Months", &c.ChangeRatioFor12Months)
+			err = unpopulate(val, "ChangeRatioFor12Months", &c.ChangeRatioFor12Months)
 			delete(rawMsg, key)
 		case "changeRatioForLastMonth":
-				err = unpopulate(val, "ChangeRatioForLastMonth", &c.ChangeRatioForLastMonth)
+			err = unpopulate(val, "ChangeRatioForLastMonth", &c.ChangeRatioForLastMonth)
 			delete(rawMsg, key)
 		case "changeValueMonthOverMonth":
-				err = unpopulate(val, "ChangeValueMonthOverMonth", &c.ChangeValueMonthOverMonth)
+			err = unpopulate(val, "ChangeValueMonthOverMonth", &c.ChangeValueMonthOverMonth)
 			delete(rawMsg, key)
 		case "dataType":
-				err = unpopulate(val, "DataType", &c.DataType)
+			err = unpopulate(val, "DataType", &c.DataType)
 			delete(rawMsg, key)
 		case "totalCarbonEmission":
-				err = unpopulate(val, "TotalCarbonEmission", &c.TotalCarbonEmission)
+			err = unpopulate(val, "TotalCarbonEmission", &c.TotalCarbonEmission)
 			delete(rawMsg, key)
 		case "totalCarbonEmission12MonthsAgo":
-				err = unpopulate(val, "TotalCarbonEmission12MonthsAgo", &c.TotalCarbonEmission12MonthsAgo)
+			err = unpopulate(val, "TotalCarbonEmission12MonthsAgo", &c.TotalCarbonEmission12MonthsAgo)
 			delete(rawMsg, key)
 		case "totalCarbonEmissionLastMonth":
-				err = unpopulate(val, "TotalCarbonEmissionLastMonth", &c.TotalCarbonEmissionLastMonth)
+			err = unpopulate(val, "TotalCarbonEmissionLastMonth", &c.TotalCarbonEmissionLastMonth)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -331,34 +331,34 @@ func (c *CarbonEmissionTopItemMonthlySummaryData) UnmarshalJSON(data []byte) err
 		var err error
 		switch key {
 		case "categoryType":
-				err = unpopulate(val, "CategoryType", &c.CategoryType)
+			err = unpopulate(val, "CategoryType", &c.CategoryType)
 			delete(rawMsg, key)
 		case "changeRatioFor12Months":
-				err = unpopulate(val, "ChangeRatioFor12Months", &c.ChangeRatioFor12Months)
+			err = unpopulate(val, "ChangeRatioFor12Months", &c.ChangeRatioFor12Months)
 			delete(rawMsg, key)
 		case "changeRatioForLastMonth":
-				err = unpopulate(val, "ChangeRatioForLastMonth", &c.ChangeRatioForLastMonth)
+			err = unpopulate(val, "ChangeRatioForLastMonth", &c.ChangeRatioForLastMonth)
 			delete(rawMsg, key)
 		case "changeValueMonthOverMonth":
-				err = unpopulate(val, "ChangeValueMonthOverMonth", &c.ChangeValueMonthOverMonth)
+			err = unpopulate(val, "ChangeValueMonthOverMonth", &c.ChangeValueMonthOverMonth)
 			delete(rawMsg, key)
 		case "dataType":
-				err = unpopulate(val, "DataType", &c.DataType)
+			err = unpopulate(val, "DataType", &c.DataType)
 			delete(rawMsg, key)
 		case "date":
-				err = unpopulate(val, "Date", &c.Date)
+			err = unpopulate(val, "Date", &c.Date)
 			delete(rawMsg, key)
 		case "itemName":
-				err = unpopulate(val, "ItemName", &c.ItemName)
+			err = unpopulate(val, "ItemName", &c.ItemName)
 			delete(rawMsg, key)
 		case "totalCarbonEmission":
-				err = unpopulate(val, "TotalCarbonEmission", &c.TotalCarbonEmission)
+			err = unpopulate(val, "TotalCarbonEmission", &c.TotalCarbonEmission)
 			delete(rawMsg, key)
 		case "totalCarbonEmission12MonthsAgo":
-				err = unpopulate(val, "TotalCarbonEmission12MonthsAgo", &c.TotalCarbonEmission12MonthsAgo)
+			err = unpopulate(val, "TotalCarbonEmission12MonthsAgo", &c.TotalCarbonEmission12MonthsAgo)
 			delete(rawMsg, key)
 		case "totalCarbonEmissionLastMonth":
-				err = unpopulate(val, "TotalCarbonEmissionLastMonth", &c.TotalCarbonEmissionLastMonth)
+			err = unpopulate(val, "TotalCarbonEmissionLastMonth", &c.TotalCarbonEmissionLastMonth)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -393,31 +393,31 @@ func (c *CarbonEmissionTopItemsSummaryData) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "categoryType":
-				err = unpopulate(val, "CategoryType", &c.CategoryType)
+			err = unpopulate(val, "CategoryType", &c.CategoryType)
 			delete(rawMsg, key)
 		case "changeRatioFor12Months":
-				err = unpopulate(val, "ChangeRatioFor12Months", &c.ChangeRatioFor12Months)
+			err = unpopulate(val, "ChangeRatioFor12Months", &c.ChangeRatioFor12Months)
 			delete(rawMsg, key)
 		case "changeRatioForLastMonth":
-				err = unpopulate(val, "ChangeRatioForLastMonth", &c.ChangeRatioForLastMonth)
+			err = unpopulate(val, "ChangeRatioForLastMonth", &c.ChangeRatioForLastMonth)
 			delete(rawMsg, key)
 		case "changeValueMonthOverMonth":
-				err = unpopulate(val, "ChangeValueMonthOverMonth", &c.ChangeValueMonthOverMonth)
+			err = unpopulate(val, "ChangeValueMonthOverMonth", &c.ChangeValueMonthOverMonth)
 			delete(rawMsg, key)
 		case "dataType":
-				err = unpopulate(val, "DataType", &c.DataType)
+			err = unpopulate(val, "DataType", &c.DataType)
 			delete(rawMsg, key)
 		case "itemName":
-				err = unpopulate(val, "ItemName", &c.ItemName)
+			err = unpopulate(val, "ItemName", &c.ItemName)
 			delete(rawMsg, key)
 		case "totalCarbonEmission":
-				err = unpopulate(val, "TotalCarbonEmission", &c.TotalCarbonEmission)
+			err = unpopulate(val, "TotalCarbonEmission", &c.TotalCarbonEmission)
 			delete(rawMsg, key)
 		case "totalCarbonEmission12MonthsAgo":
-				err = unpopulate(val, "TotalCarbonEmission12MonthsAgo", &c.TotalCarbonEmission12MonthsAgo)
+			err = unpopulate(val, "TotalCarbonEmission12MonthsAgo", &c.TotalCarbonEmission12MonthsAgo)
 			delete(rawMsg, key)
 		case "totalCarbonEmissionLastMonth":
-				err = unpopulate(val, "TotalCarbonEmissionLastMonth", &c.TotalCarbonEmissionLastMonth)
+			err = unpopulate(val, "TotalCarbonEmissionLastMonth", &c.TotalCarbonEmissionLastMonth)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -445,115 +445,14 @@ func (d *DateRange) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "end":
-				err = unpopulateDateType(val, "End", &d.End)
+			err = unpopulateDateType(val, "End", &d.End)
 			delete(rawMsg, key)
 		case "start":
-				err = unpopulateDateType(val, "Start", &d.Start)
+			err = unpopulateDateType(val, "Start", &d.Start)
 			delete(rawMsg, key)
 		}
 		if err != nil {
 			return fmt.Errorf("unmarshalling type %T: %v", d, err)
-		}
-	}
-	return nil
-}
-
-// MarshalJSON implements the json.Marshaller interface for type ErrorAdditionalInfo.
-func (e ErrorAdditionalInfo) MarshalJSON() ([]byte, error) {
-	objectMap := make(map[string]any)
-	populate(objectMap, "info", e.Info)
-	populate(objectMap, "type", e.Type)
-	return json.Marshal(objectMap)
-}
-
-// UnmarshalJSON implements the json.Unmarshaller interface for type ErrorAdditionalInfo.
-func (e *ErrorAdditionalInfo) UnmarshalJSON(data []byte) error {
-	var rawMsg map[string]json.RawMessage
-	if err := json.Unmarshal(data, &rawMsg); err != nil {
-		return fmt.Errorf("unmarshalling type %T: %v", e, err)
-	}
-	for key, val := range rawMsg {
-		var err error
-		switch key {
-		case "info":
-				err = unpopulate(val, "Info", &e.Info)
-			delete(rawMsg, key)
-		case "type":
-				err = unpopulate(val, "Type", &e.Type)
-			delete(rawMsg, key)
-		}
-		if err != nil {
-			return fmt.Errorf("unmarshalling type %T: %v", e, err)
-		}
-	}
-	return nil
-}
-
-// MarshalJSON implements the json.Marshaller interface for type ErrorDetail.
-func (e ErrorDetail) MarshalJSON() ([]byte, error) {
-	objectMap := make(map[string]any)
-	populate(objectMap, "additionalInfo", e.AdditionalInfo)
-	populate(objectMap, "code", e.Code)
-	populate(objectMap, "details", e.Details)
-	populate(objectMap, "message", e.Message)
-	populate(objectMap, "target", e.Target)
-	return json.Marshal(objectMap)
-}
-
-// UnmarshalJSON implements the json.Unmarshaller interface for type ErrorDetail.
-func (e *ErrorDetail) UnmarshalJSON(data []byte) error {
-	var rawMsg map[string]json.RawMessage
-	if err := json.Unmarshal(data, &rawMsg); err != nil {
-		return fmt.Errorf("unmarshalling type %T: %v", e, err)
-	}
-	for key, val := range rawMsg {
-		var err error
-		switch key {
-		case "additionalInfo":
-				err = unpopulate(val, "AdditionalInfo", &e.AdditionalInfo)
-			delete(rawMsg, key)
-		case "code":
-				err = unpopulate(val, "Code", &e.Code)
-			delete(rawMsg, key)
-		case "details":
-				err = unpopulate(val, "Details", &e.Details)
-			delete(rawMsg, key)
-		case "message":
-				err = unpopulate(val, "Message", &e.Message)
-			delete(rawMsg, key)
-		case "target":
-				err = unpopulate(val, "Target", &e.Target)
-			delete(rawMsg, key)
-		}
-		if err != nil {
-			return fmt.Errorf("unmarshalling type %T: %v", e, err)
-		}
-	}
-	return nil
-}
-
-// MarshalJSON implements the json.Marshaller interface for type ErrorResponse.
-func (e ErrorResponse) MarshalJSON() ([]byte, error) {
-	objectMap := make(map[string]any)
-	populate(objectMap, "error", e.Error)
-	return json.Marshal(objectMap)
-}
-
-// UnmarshalJSON implements the json.Unmarshaller interface for type ErrorResponse.
-func (e *ErrorResponse) UnmarshalJSON(data []byte) error {
-	var rawMsg map[string]json.RawMessage
-	if err := json.Unmarshal(data, &rawMsg); err != nil {
-		return fmt.Errorf("unmarshalling type %T: %v", e, err)
-	}
-	for key, val := range rawMsg {
-		var err error
-		switch key {
-		case "error":
-				err = unpopulate(val, "Error", &e.Error)
-			delete(rawMsg, key)
-		}
-		if err != nil {
-			return fmt.Errorf("unmarshalling type %T: %v", e, err)
 		}
 	}
 	return nil
@@ -588,43 +487,43 @@ func (i *ItemDetailsQueryFilter) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "carbonScopeList":
-				err = unpopulate(val, "CarbonScopeList", &i.CarbonScopeList)
+			err = unpopulate(val, "CarbonScopeList", &i.CarbonScopeList)
 			delete(rawMsg, key)
 		case "categoryType":
-				err = unpopulate(val, "CategoryType", &i.CategoryType)
+			err = unpopulate(val, "CategoryType", &i.CategoryType)
 			delete(rawMsg, key)
 		case "dateRange":
-				err = unpopulate(val, "DateRange", &i.DateRange)
+			err = unpopulate(val, "DateRange", &i.DateRange)
 			delete(rawMsg, key)
 		case "groupCategory":
-				err = unpopulate(val, "GroupCategory", &i.GroupCategory)
+			err = unpopulate(val, "GroupCategory", &i.GroupCategory)
 			delete(rawMsg, key)
 		case "locationList":
-				err = unpopulate(val, "LocationList", &i.LocationList)
+			err = unpopulate(val, "LocationList", &i.LocationList)
 			delete(rawMsg, key)
 		case "orderBy":
-				err = unpopulate(val, "OrderBy", &i.OrderBy)
+			err = unpopulate(val, "OrderBy", &i.OrderBy)
 			delete(rawMsg, key)
 		case "pageSize":
-				err = unpopulate(val, "PageSize", &i.PageSize)
+			err = unpopulate(val, "PageSize", &i.PageSize)
 			delete(rawMsg, key)
 		case "reportType":
-				err = unpopulate(val, "ReportType", &i.ReportType)
+			err = unpopulate(val, "ReportType", &i.ReportType)
 			delete(rawMsg, key)
 		case "resourceGroupUrlList":
-				err = unpopulate(val, "ResourceGroupURLList", &i.ResourceGroupURLList)
+			err = unpopulate(val, "ResourceGroupURLList", &i.ResourceGroupURLList)
 			delete(rawMsg, key)
 		case "resourceTypeList":
-				err = unpopulate(val, "ResourceTypeList", &i.ResourceTypeList)
+			err = unpopulate(val, "ResourceTypeList", &i.ResourceTypeList)
 			delete(rawMsg, key)
 		case "skipToken":
-				err = unpopulate(val, "SkipToken", &i.SkipToken)
+			err = unpopulate(val, "SkipToken", &i.SkipToken)
 			delete(rawMsg, key)
 		case "sortDirection":
-				err = unpopulate(val, "SortDirection", &i.SortDirection)
+			err = unpopulate(val, "SortDirection", &i.SortDirection)
 			delete(rawMsg, key)
 		case "subscriptionList":
-				err = unpopulate(val, "SubscriptionList", &i.SubscriptionList)
+			err = unpopulate(val, "SubscriptionList", &i.SubscriptionList)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -657,25 +556,25 @@ func (m *MonthlySummaryReportQueryFilter) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "carbonScopeList":
-				err = unpopulate(val, "CarbonScopeList", &m.CarbonScopeList)
+			err = unpopulate(val, "CarbonScopeList", &m.CarbonScopeList)
 			delete(rawMsg, key)
 		case "dateRange":
-				err = unpopulate(val, "DateRange", &m.DateRange)
+			err = unpopulate(val, "DateRange", &m.DateRange)
 			delete(rawMsg, key)
 		case "locationList":
-				err = unpopulate(val, "LocationList", &m.LocationList)
+			err = unpopulate(val, "LocationList", &m.LocationList)
 			delete(rawMsg, key)
 		case "reportType":
-				err = unpopulate(val, "ReportType", &m.ReportType)
+			err = unpopulate(val, "ReportType", &m.ReportType)
 			delete(rawMsg, key)
 		case "resourceGroupUrlList":
-				err = unpopulate(val, "ResourceGroupURLList", &m.ResourceGroupURLList)
+			err = unpopulate(val, "ResourceGroupURLList", &m.ResourceGroupURLList)
 			delete(rawMsg, key)
 		case "resourceTypeList":
-				err = unpopulate(val, "ResourceTypeList", &m.ResourceTypeList)
+			err = unpopulate(val, "ResourceTypeList", &m.ResourceTypeList)
 			delete(rawMsg, key)
 		case "subscriptionList":
-				err = unpopulate(val, "SubscriptionList", &m.SubscriptionList)
+			err = unpopulate(val, "SubscriptionList", &m.SubscriptionList)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -706,19 +605,19 @@ func (o *Operation) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "actionType":
-				err = unpopulate(val, "ActionType", &o.ActionType)
+			err = unpopulate(val, "ActionType", &o.ActionType)
 			delete(rawMsg, key)
 		case "display":
-				err = unpopulate(val, "Display", &o.Display)
+			err = unpopulate(val, "Display", &o.Display)
 			delete(rawMsg, key)
 		case "isDataAction":
-				err = unpopulate(val, "IsDataAction", &o.IsDataAction)
+			err = unpopulate(val, "IsDataAction", &o.IsDataAction)
 			delete(rawMsg, key)
 		case "name":
-				err = unpopulate(val, "Name", &o.Name)
+			err = unpopulate(val, "Name", &o.Name)
 			delete(rawMsg, key)
 		case "origin":
-				err = unpopulate(val, "Origin", &o.Origin)
+			err = unpopulate(val, "Origin", &o.Origin)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -748,16 +647,16 @@ func (o *OperationDisplay) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "description":
-				err = unpopulate(val, "Description", &o.Description)
+			err = unpopulate(val, "Description", &o.Description)
 			delete(rawMsg, key)
 		case "operation":
-				err = unpopulate(val, "Operation", &o.Operation)
+			err = unpopulate(val, "Operation", &o.Operation)
 			delete(rawMsg, key)
 		case "provider":
-				err = unpopulate(val, "Provider", &o.Provider)
+			err = unpopulate(val, "Provider", &o.Provider)
 			delete(rawMsg, key)
 		case "resource":
-				err = unpopulate(val, "Resource", &o.Resource)
+			err = unpopulate(val, "Resource", &o.Resource)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -790,25 +689,25 @@ func (o *OverallSummaryReportQueryFilter) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "carbonScopeList":
-				err = unpopulate(val, "CarbonScopeList", &o.CarbonScopeList)
+			err = unpopulate(val, "CarbonScopeList", &o.CarbonScopeList)
 			delete(rawMsg, key)
 		case "dateRange":
-				err = unpopulate(val, "DateRange", &o.DateRange)
+			err = unpopulate(val, "DateRange", &o.DateRange)
 			delete(rawMsg, key)
 		case "locationList":
-				err = unpopulate(val, "LocationList", &o.LocationList)
+			err = unpopulate(val, "LocationList", &o.LocationList)
 			delete(rawMsg, key)
 		case "reportType":
-				err = unpopulate(val, "ReportType", &o.ReportType)
+			err = unpopulate(val, "ReportType", &o.ReportType)
 			delete(rawMsg, key)
 		case "resourceGroupUrlList":
-				err = unpopulate(val, "ResourceGroupURLList", &o.ResourceGroupURLList)
+			err = unpopulate(val, "ResourceGroupURLList", &o.ResourceGroupURLList)
 			delete(rawMsg, key)
 		case "resourceTypeList":
-				err = unpopulate(val, "ResourceTypeList", &o.ResourceTypeList)
+			err = unpopulate(val, "ResourceTypeList", &o.ResourceTypeList)
 			delete(rawMsg, key)
 		case "subscriptionList":
-				err = unpopulate(val, "SubscriptionList", &o.SubscriptionList)
+			err = unpopulate(val, "SubscriptionList", &o.SubscriptionList)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -836,10 +735,10 @@ func (p *PagedOperation) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "nextLink":
-				err = unpopulate(val, "NextLink", &p.NextLink)
+			err = unpopulate(val, "NextLink", &p.NextLink)
 			delete(rawMsg, key)
 		case "value":
-				err = unpopulate(val, "Value", &p.Value)
+			err = unpopulate(val, "Value", &p.Value)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -872,25 +771,25 @@ func (q *QueryFilter) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "carbonScopeList":
-				err = unpopulate(val, "CarbonScopeList", &q.CarbonScopeList)
+			err = unpopulate(val, "CarbonScopeList", &q.CarbonScopeList)
 			delete(rawMsg, key)
 		case "dateRange":
-				err = unpopulate(val, "DateRange", &q.DateRange)
+			err = unpopulate(val, "DateRange", &q.DateRange)
 			delete(rawMsg, key)
 		case "locationList":
-				err = unpopulate(val, "LocationList", &q.LocationList)
+			err = unpopulate(val, "LocationList", &q.LocationList)
 			delete(rawMsg, key)
 		case "reportType":
-				err = unpopulate(val, "ReportType", &q.ReportType)
+			err = unpopulate(val, "ReportType", &q.ReportType)
 			delete(rawMsg, key)
 		case "resourceGroupUrlList":
-				err = unpopulate(val, "ResourceGroupURLList", &q.ResourceGroupURLList)
+			err = unpopulate(val, "ResourceGroupURLList", &q.ResourceGroupURLList)
 			delete(rawMsg, key)
 		case "resourceTypeList":
-				err = unpopulate(val, "ResourceTypeList", &q.ResourceTypeList)
+			err = unpopulate(val, "ResourceTypeList", &q.ResourceTypeList)
 			delete(rawMsg, key)
 		case "subscriptionList":
-				err = unpopulate(val, "SubscriptionList", &q.SubscriptionList)
+			err = unpopulate(val, "SubscriptionList", &q.SubscriptionList)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -933,55 +832,55 @@ func (r *ResourceCarbonEmissionItemDetailData) UnmarshalJSON(data []byte) error 
 		var err error
 		switch key {
 		case "categoryType":
-				err = unpopulate(val, "CategoryType", &r.CategoryType)
+			err = unpopulate(val, "CategoryType", &r.CategoryType)
 			delete(rawMsg, key)
 		case "changeRatioFor12Months":
-				err = unpopulate(val, "ChangeRatioFor12Months", &r.ChangeRatioFor12Months)
+			err = unpopulate(val, "ChangeRatioFor12Months", &r.ChangeRatioFor12Months)
 			delete(rawMsg, key)
 		case "changeRatioForLastMonth":
-				err = unpopulate(val, "ChangeRatioForLastMonth", &r.ChangeRatioForLastMonth)
+			err = unpopulate(val, "ChangeRatioForLastMonth", &r.ChangeRatioForLastMonth)
 			delete(rawMsg, key)
 		case "changeValueMonthOverMonth":
-				err = unpopulate(val, "ChangeValueMonthOverMonth", &r.ChangeValueMonthOverMonth)
+			err = unpopulate(val, "ChangeValueMonthOverMonth", &r.ChangeValueMonthOverMonth)
 			delete(rawMsg, key)
 		case "dataType":
-				err = unpopulate(val, "DataType", &r.DataType)
+			err = unpopulate(val, "DataType", &r.DataType)
 			delete(rawMsg, key)
 		case "groupName":
-				err = unpopulate(val, "GroupName", &r.GroupName)
+			err = unpopulate(val, "GroupName", &r.GroupName)
 			delete(rawMsg, key)
 		case "itemName":
-				err = unpopulate(val, "ItemName", &r.ItemName)
+			err = unpopulate(val, "ItemName", &r.ItemName)
 			delete(rawMsg, key)
 		case "location":
-				err = unpopulate(val, "Location", &r.Location)
+			err = unpopulate(val, "Location", &r.Location)
 			delete(rawMsg, key)
 		case "resourceGroup":
-				err = unpopulate(val, "ResourceGroup", &r.ResourceGroup)
+			err = unpopulate(val, "ResourceGroup", &r.ResourceGroup)
 			delete(rawMsg, key)
 		case "resourceId":
-				err = unpopulate(val, "ResourceID", &r.ResourceID)
+			err = unpopulate(val, "ResourceID", &r.ResourceID)
 			delete(rawMsg, key)
 		case "resourceProvider":
-				err = unpopulate(val, "ResourceProvider", &r.ResourceProvider)
+			err = unpopulate(val, "ResourceProvider", &r.ResourceProvider)
 			delete(rawMsg, key)
 		case "resourceType":
-				err = unpopulate(val, "ResourceType", &r.ResourceType)
+			err = unpopulate(val, "ResourceType", &r.ResourceType)
 			delete(rawMsg, key)
 		case "resourceTypeFriendlyName":
-				err = unpopulate(val, "ResourceTypeFriendlyName", &r.ResourceTypeFriendlyName)
+			err = unpopulate(val, "ResourceTypeFriendlyName", &r.ResourceTypeFriendlyName)
 			delete(rawMsg, key)
 		case "subscriptionId":
-				err = unpopulate(val, "SubscriptionID", &r.SubscriptionID)
+			err = unpopulate(val, "SubscriptionID", &r.SubscriptionID)
 			delete(rawMsg, key)
 		case "totalCarbonEmission":
-				err = unpopulate(val, "TotalCarbonEmission", &r.TotalCarbonEmission)
+			err = unpopulate(val, "TotalCarbonEmission", &r.TotalCarbonEmission)
 			delete(rawMsg, key)
 		case "totalCarbonEmission12MonthsAgo":
-				err = unpopulate(val, "TotalCarbonEmission12MonthsAgo", &r.TotalCarbonEmission12MonthsAgo)
+			err = unpopulate(val, "TotalCarbonEmission12MonthsAgo", &r.TotalCarbonEmission12MonthsAgo)
 			delete(rawMsg, key)
 		case "totalCarbonEmissionLastMonth":
-				err = unpopulate(val, "TotalCarbonEmissionLastMonth", &r.TotalCarbonEmissionLastMonth)
+			err = unpopulate(val, "TotalCarbonEmissionLastMonth", &r.TotalCarbonEmissionLastMonth)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -1019,40 +918,40 @@ func (r *ResourceCarbonEmissionTopItemMonthlySummaryData) UnmarshalJSON(data []b
 		var err error
 		switch key {
 		case "categoryType":
-				err = unpopulate(val, "CategoryType", &r.CategoryType)
+			err = unpopulate(val, "CategoryType", &r.CategoryType)
 			delete(rawMsg, key)
 		case "changeRatioFor12Months":
-				err = unpopulate(val, "ChangeRatioFor12Months", &r.ChangeRatioFor12Months)
+			err = unpopulate(val, "ChangeRatioFor12Months", &r.ChangeRatioFor12Months)
 			delete(rawMsg, key)
 		case "changeRatioForLastMonth":
-				err = unpopulate(val, "ChangeRatioForLastMonth", &r.ChangeRatioForLastMonth)
+			err = unpopulate(val, "ChangeRatioForLastMonth", &r.ChangeRatioForLastMonth)
 			delete(rawMsg, key)
 		case "changeValueMonthOverMonth":
-				err = unpopulate(val, "ChangeValueMonthOverMonth", &r.ChangeValueMonthOverMonth)
+			err = unpopulate(val, "ChangeValueMonthOverMonth", &r.ChangeValueMonthOverMonth)
 			delete(rawMsg, key)
 		case "dataType":
-				err = unpopulate(val, "DataType", &r.DataType)
+			err = unpopulate(val, "DataType", &r.DataType)
 			delete(rawMsg, key)
 		case "date":
-				err = unpopulate(val, "Date", &r.Date)
+			err = unpopulate(val, "Date", &r.Date)
 			delete(rawMsg, key)
 		case "itemName":
-				err = unpopulate(val, "ItemName", &r.ItemName)
+			err = unpopulate(val, "ItemName", &r.ItemName)
 			delete(rawMsg, key)
 		case "resourceGroup":
-				err = unpopulate(val, "ResourceGroup", &r.ResourceGroup)
+			err = unpopulate(val, "ResourceGroup", &r.ResourceGroup)
 			delete(rawMsg, key)
 		case "subscriptionId":
-				err = unpopulate(val, "SubscriptionID", &r.SubscriptionID)
+			err = unpopulate(val, "SubscriptionID", &r.SubscriptionID)
 			delete(rawMsg, key)
 		case "totalCarbonEmission":
-				err = unpopulate(val, "TotalCarbonEmission", &r.TotalCarbonEmission)
+			err = unpopulate(val, "TotalCarbonEmission", &r.TotalCarbonEmission)
 			delete(rawMsg, key)
 		case "totalCarbonEmission12MonthsAgo":
-				err = unpopulate(val, "TotalCarbonEmission12MonthsAgo", &r.TotalCarbonEmission12MonthsAgo)
+			err = unpopulate(val, "TotalCarbonEmission12MonthsAgo", &r.TotalCarbonEmission12MonthsAgo)
 			delete(rawMsg, key)
 		case "totalCarbonEmissionLastMonth":
-				err = unpopulate(val, "TotalCarbonEmissionLastMonth", &r.TotalCarbonEmissionLastMonth)
+			err = unpopulate(val, "TotalCarbonEmissionLastMonth", &r.TotalCarbonEmissionLastMonth)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -1089,37 +988,37 @@ func (r *ResourceCarbonEmissionTopItemsSummaryData) UnmarshalJSON(data []byte) e
 		var err error
 		switch key {
 		case "categoryType":
-				err = unpopulate(val, "CategoryType", &r.CategoryType)
+			err = unpopulate(val, "CategoryType", &r.CategoryType)
 			delete(rawMsg, key)
 		case "changeRatioFor12Months":
-				err = unpopulate(val, "ChangeRatioFor12Months", &r.ChangeRatioFor12Months)
+			err = unpopulate(val, "ChangeRatioFor12Months", &r.ChangeRatioFor12Months)
 			delete(rawMsg, key)
 		case "changeRatioForLastMonth":
-				err = unpopulate(val, "ChangeRatioForLastMonth", &r.ChangeRatioForLastMonth)
+			err = unpopulate(val, "ChangeRatioForLastMonth", &r.ChangeRatioForLastMonth)
 			delete(rawMsg, key)
 		case "changeValueMonthOverMonth":
-				err = unpopulate(val, "ChangeValueMonthOverMonth", &r.ChangeValueMonthOverMonth)
+			err = unpopulate(val, "ChangeValueMonthOverMonth", &r.ChangeValueMonthOverMonth)
 			delete(rawMsg, key)
 		case "dataType":
-				err = unpopulate(val, "DataType", &r.DataType)
+			err = unpopulate(val, "DataType", &r.DataType)
 			delete(rawMsg, key)
 		case "itemName":
-				err = unpopulate(val, "ItemName", &r.ItemName)
+			err = unpopulate(val, "ItemName", &r.ItemName)
 			delete(rawMsg, key)
 		case "resourceGroup":
-				err = unpopulate(val, "ResourceGroup", &r.ResourceGroup)
+			err = unpopulate(val, "ResourceGroup", &r.ResourceGroup)
 			delete(rawMsg, key)
 		case "subscriptionId":
-				err = unpopulate(val, "SubscriptionID", &r.SubscriptionID)
+			err = unpopulate(val, "SubscriptionID", &r.SubscriptionID)
 			delete(rawMsg, key)
 		case "totalCarbonEmission":
-				err = unpopulate(val, "TotalCarbonEmission", &r.TotalCarbonEmission)
+			err = unpopulate(val, "TotalCarbonEmission", &r.TotalCarbonEmission)
 			delete(rawMsg, key)
 		case "totalCarbonEmission12MonthsAgo":
-				err = unpopulate(val, "TotalCarbonEmission12MonthsAgo", &r.TotalCarbonEmission12MonthsAgo)
+			err = unpopulate(val, "TotalCarbonEmission12MonthsAgo", &r.TotalCarbonEmission12MonthsAgo)
 			delete(rawMsg, key)
 		case "totalCarbonEmissionLastMonth":
-				err = unpopulate(val, "TotalCarbonEmissionLastMonth", &r.TotalCarbonEmissionLastMonth)
+			err = unpopulate(val, "TotalCarbonEmissionLastMonth", &r.TotalCarbonEmissionLastMonth)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -1156,37 +1055,37 @@ func (r *ResourceGroupCarbonEmissionItemDetailData) UnmarshalJSON(data []byte) e
 		var err error
 		switch key {
 		case "categoryType":
-				err = unpopulate(val, "CategoryType", &r.CategoryType)
+			err = unpopulate(val, "CategoryType", &r.CategoryType)
 			delete(rawMsg, key)
 		case "changeRatioFor12Months":
-				err = unpopulate(val, "ChangeRatioFor12Months", &r.ChangeRatioFor12Months)
+			err = unpopulate(val, "ChangeRatioFor12Months", &r.ChangeRatioFor12Months)
 			delete(rawMsg, key)
 		case "changeRatioForLastMonth":
-				err = unpopulate(val, "ChangeRatioForLastMonth", &r.ChangeRatioForLastMonth)
+			err = unpopulate(val, "ChangeRatioForLastMonth", &r.ChangeRatioForLastMonth)
 			delete(rawMsg, key)
 		case "changeValueMonthOverMonth":
-				err = unpopulate(val, "ChangeValueMonthOverMonth", &r.ChangeValueMonthOverMonth)
+			err = unpopulate(val, "ChangeValueMonthOverMonth", &r.ChangeValueMonthOverMonth)
 			delete(rawMsg, key)
 		case "dataType":
-				err = unpopulate(val, "DataType", &r.DataType)
+			err = unpopulate(val, "DataType", &r.DataType)
 			delete(rawMsg, key)
 		case "groupName":
-				err = unpopulate(val, "GroupName", &r.GroupName)
+			err = unpopulate(val, "GroupName", &r.GroupName)
 			delete(rawMsg, key)
 		case "itemName":
-				err = unpopulate(val, "ItemName", &r.ItemName)
+			err = unpopulate(val, "ItemName", &r.ItemName)
 			delete(rawMsg, key)
 		case "subscriptionId":
-				err = unpopulate(val, "SubscriptionID", &r.SubscriptionID)
+			err = unpopulate(val, "SubscriptionID", &r.SubscriptionID)
 			delete(rawMsg, key)
 		case "totalCarbonEmission":
-				err = unpopulate(val, "TotalCarbonEmission", &r.TotalCarbonEmission)
+			err = unpopulate(val, "TotalCarbonEmission", &r.TotalCarbonEmission)
 			delete(rawMsg, key)
 		case "totalCarbonEmission12MonthsAgo":
-				err = unpopulate(val, "TotalCarbonEmission12MonthsAgo", &r.TotalCarbonEmission12MonthsAgo)
+			err = unpopulate(val, "TotalCarbonEmission12MonthsAgo", &r.TotalCarbonEmission12MonthsAgo)
 			delete(rawMsg, key)
 		case "totalCarbonEmissionLastMonth":
-				err = unpopulate(val, "TotalCarbonEmissionLastMonth", &r.TotalCarbonEmissionLastMonth)
+			err = unpopulate(val, "TotalCarbonEmissionLastMonth", &r.TotalCarbonEmissionLastMonth)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -1223,37 +1122,37 @@ func (r *ResourceGroupCarbonEmissionTopItemMonthlySummaryData) UnmarshalJSON(dat
 		var err error
 		switch key {
 		case "categoryType":
-				err = unpopulate(val, "CategoryType", &r.CategoryType)
+			err = unpopulate(val, "CategoryType", &r.CategoryType)
 			delete(rawMsg, key)
 		case "changeRatioFor12Months":
-				err = unpopulate(val, "ChangeRatioFor12Months", &r.ChangeRatioFor12Months)
+			err = unpopulate(val, "ChangeRatioFor12Months", &r.ChangeRatioFor12Months)
 			delete(rawMsg, key)
 		case "changeRatioForLastMonth":
-				err = unpopulate(val, "ChangeRatioForLastMonth", &r.ChangeRatioForLastMonth)
+			err = unpopulate(val, "ChangeRatioForLastMonth", &r.ChangeRatioForLastMonth)
 			delete(rawMsg, key)
 		case "changeValueMonthOverMonth":
-				err = unpopulate(val, "ChangeValueMonthOverMonth", &r.ChangeValueMonthOverMonth)
+			err = unpopulate(val, "ChangeValueMonthOverMonth", &r.ChangeValueMonthOverMonth)
 			delete(rawMsg, key)
 		case "dataType":
-				err = unpopulate(val, "DataType", &r.DataType)
+			err = unpopulate(val, "DataType", &r.DataType)
 			delete(rawMsg, key)
 		case "date":
-				err = unpopulate(val, "Date", &r.Date)
+			err = unpopulate(val, "Date", &r.Date)
 			delete(rawMsg, key)
 		case "itemName":
-				err = unpopulate(val, "ItemName", &r.ItemName)
+			err = unpopulate(val, "ItemName", &r.ItemName)
 			delete(rawMsg, key)
 		case "subscriptionId":
-				err = unpopulate(val, "SubscriptionID", &r.SubscriptionID)
+			err = unpopulate(val, "SubscriptionID", &r.SubscriptionID)
 			delete(rawMsg, key)
 		case "totalCarbonEmission":
-				err = unpopulate(val, "TotalCarbonEmission", &r.TotalCarbonEmission)
+			err = unpopulate(val, "TotalCarbonEmission", &r.TotalCarbonEmission)
 			delete(rawMsg, key)
 		case "totalCarbonEmission12MonthsAgo":
-				err = unpopulate(val, "TotalCarbonEmission12MonthsAgo", &r.TotalCarbonEmission12MonthsAgo)
+			err = unpopulate(val, "TotalCarbonEmission12MonthsAgo", &r.TotalCarbonEmission12MonthsAgo)
 			delete(rawMsg, key)
 		case "totalCarbonEmissionLastMonth":
-				err = unpopulate(val, "TotalCarbonEmissionLastMonth", &r.TotalCarbonEmissionLastMonth)
+			err = unpopulate(val, "TotalCarbonEmissionLastMonth", &r.TotalCarbonEmissionLastMonth)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -1289,34 +1188,34 @@ func (r *ResourceGroupCarbonEmissionTopItemsSummaryData) UnmarshalJSON(data []by
 		var err error
 		switch key {
 		case "categoryType":
-				err = unpopulate(val, "CategoryType", &r.CategoryType)
+			err = unpopulate(val, "CategoryType", &r.CategoryType)
 			delete(rawMsg, key)
 		case "changeRatioFor12Months":
-				err = unpopulate(val, "ChangeRatioFor12Months", &r.ChangeRatioFor12Months)
+			err = unpopulate(val, "ChangeRatioFor12Months", &r.ChangeRatioFor12Months)
 			delete(rawMsg, key)
 		case "changeRatioForLastMonth":
-				err = unpopulate(val, "ChangeRatioForLastMonth", &r.ChangeRatioForLastMonth)
+			err = unpopulate(val, "ChangeRatioForLastMonth", &r.ChangeRatioForLastMonth)
 			delete(rawMsg, key)
 		case "changeValueMonthOverMonth":
-				err = unpopulate(val, "ChangeValueMonthOverMonth", &r.ChangeValueMonthOverMonth)
+			err = unpopulate(val, "ChangeValueMonthOverMonth", &r.ChangeValueMonthOverMonth)
 			delete(rawMsg, key)
 		case "dataType":
-				err = unpopulate(val, "DataType", &r.DataType)
+			err = unpopulate(val, "DataType", &r.DataType)
 			delete(rawMsg, key)
 		case "itemName":
-				err = unpopulate(val, "ItemName", &r.ItemName)
+			err = unpopulate(val, "ItemName", &r.ItemName)
 			delete(rawMsg, key)
 		case "subscriptionId":
-				err = unpopulate(val, "SubscriptionID", &r.SubscriptionID)
+			err = unpopulate(val, "SubscriptionID", &r.SubscriptionID)
 			delete(rawMsg, key)
 		case "totalCarbonEmission":
-				err = unpopulate(val, "TotalCarbonEmission", &r.TotalCarbonEmission)
+			err = unpopulate(val, "TotalCarbonEmission", &r.TotalCarbonEmission)
 			delete(rawMsg, key)
 		case "totalCarbonEmission12MonthsAgo":
-				err = unpopulate(val, "TotalCarbonEmission12MonthsAgo", &r.TotalCarbonEmission12MonthsAgo)
+			err = unpopulate(val, "TotalCarbonEmission12MonthsAgo", &r.TotalCarbonEmission12MonthsAgo)
 			delete(rawMsg, key)
 		case "totalCarbonEmissionLastMonth":
-				err = unpopulate(val, "TotalCarbonEmissionLastMonth", &r.TotalCarbonEmissionLastMonth)
+			err = unpopulate(val, "TotalCarbonEmissionLastMonth", &r.TotalCarbonEmissionLastMonth)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -1352,34 +1251,34 @@ func (r *ResourceTypeCarbonEmissionItemDetailData) UnmarshalJSON(data []byte) er
 		var err error
 		switch key {
 		case "categoryType":
-				err = unpopulate(val, "CategoryType", &r.CategoryType)
+			err = unpopulate(val, "CategoryType", &r.CategoryType)
 			delete(rawMsg, key)
 		case "changeRatioFor12Months":
-				err = unpopulate(val, "ChangeRatioFor12Months", &r.ChangeRatioFor12Months)
+			err = unpopulate(val, "ChangeRatioFor12Months", &r.ChangeRatioFor12Months)
 			delete(rawMsg, key)
 		case "changeRatioForLastMonth":
-				err = unpopulate(val, "ChangeRatioForLastMonth", &r.ChangeRatioForLastMonth)
+			err = unpopulate(val, "ChangeRatioForLastMonth", &r.ChangeRatioForLastMonth)
 			delete(rawMsg, key)
 		case "changeValueMonthOverMonth":
-				err = unpopulate(val, "ChangeValueMonthOverMonth", &r.ChangeValueMonthOverMonth)
+			err = unpopulate(val, "ChangeValueMonthOverMonth", &r.ChangeValueMonthOverMonth)
 			delete(rawMsg, key)
 		case "dataType":
-				err = unpopulate(val, "DataType", &r.DataType)
+			err = unpopulate(val, "DataType", &r.DataType)
 			delete(rawMsg, key)
 		case "itemName":
-				err = unpopulate(val, "ItemName", &r.ItemName)
+			err = unpopulate(val, "ItemName", &r.ItemName)
 			delete(rawMsg, key)
 		case "resourceTypeFriendlyName":
-				err = unpopulate(val, "ResourceTypeFriendlyName", &r.ResourceTypeFriendlyName)
+			err = unpopulate(val, "ResourceTypeFriendlyName", &r.ResourceTypeFriendlyName)
 			delete(rawMsg, key)
 		case "totalCarbonEmission":
-				err = unpopulate(val, "TotalCarbonEmission", &r.TotalCarbonEmission)
+			err = unpopulate(val, "TotalCarbonEmission", &r.TotalCarbonEmission)
 			delete(rawMsg, key)
 		case "totalCarbonEmission12MonthsAgo":
-				err = unpopulate(val, "TotalCarbonEmission12MonthsAgo", &r.TotalCarbonEmission12MonthsAgo)
+			err = unpopulate(val, "TotalCarbonEmission12MonthsAgo", &r.TotalCarbonEmission12MonthsAgo)
 			delete(rawMsg, key)
 		case "totalCarbonEmissionLastMonth":
-				err = unpopulate(val, "TotalCarbonEmissionLastMonth", &r.TotalCarbonEmissionLastMonth)
+			err = unpopulate(val, "TotalCarbonEmissionLastMonth", &r.TotalCarbonEmissionLastMonth)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -1407,10 +1306,10 @@ func (s *SubscriptionAccessDecision) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "decision":
-				err = unpopulate(val, "Decision", &s.Decision)
+			err = unpopulate(val, "Decision", &s.Decision)
 			delete(rawMsg, key)
 		case "subscriptionId":
-				err = unpopulate(val, "SubscriptionID", &s.SubscriptionID)
+			err = unpopulate(val, "SubscriptionID", &s.SubscriptionID)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -1445,31 +1344,31 @@ func (t *TopItemsMonthlySummaryReportQueryFilter) UnmarshalJSON(data []byte) err
 		var err error
 		switch key {
 		case "carbonScopeList":
-				err = unpopulate(val, "CarbonScopeList", &t.CarbonScopeList)
+			err = unpopulate(val, "CarbonScopeList", &t.CarbonScopeList)
 			delete(rawMsg, key)
 		case "categoryType":
-				err = unpopulate(val, "CategoryType", &t.CategoryType)
+			err = unpopulate(val, "CategoryType", &t.CategoryType)
 			delete(rawMsg, key)
 		case "dateRange":
-				err = unpopulate(val, "DateRange", &t.DateRange)
+			err = unpopulate(val, "DateRange", &t.DateRange)
 			delete(rawMsg, key)
 		case "locationList":
-				err = unpopulate(val, "LocationList", &t.LocationList)
+			err = unpopulate(val, "LocationList", &t.LocationList)
 			delete(rawMsg, key)
 		case "reportType":
-				err = unpopulate(val, "ReportType", &t.ReportType)
+			err = unpopulate(val, "ReportType", &t.ReportType)
 			delete(rawMsg, key)
 		case "resourceGroupUrlList":
-				err = unpopulate(val, "ResourceGroupURLList", &t.ResourceGroupURLList)
+			err = unpopulate(val, "ResourceGroupURLList", &t.ResourceGroupURLList)
 			delete(rawMsg, key)
 		case "resourceTypeList":
-				err = unpopulate(val, "ResourceTypeList", &t.ResourceTypeList)
+			err = unpopulate(val, "ResourceTypeList", &t.ResourceTypeList)
 			delete(rawMsg, key)
 		case "subscriptionList":
-				err = unpopulate(val, "SubscriptionList", &t.SubscriptionList)
+			err = unpopulate(val, "SubscriptionList", &t.SubscriptionList)
 			delete(rawMsg, key)
 		case "topItems":
-				err = unpopulate(val, "TopItems", &t.TopItems)
+			err = unpopulate(val, "TopItems", &t.TopItems)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -1504,31 +1403,31 @@ func (t *TopItemsSummaryReportQueryFilter) UnmarshalJSON(data []byte) error {
 		var err error
 		switch key {
 		case "carbonScopeList":
-				err = unpopulate(val, "CarbonScopeList", &t.CarbonScopeList)
+			err = unpopulate(val, "CarbonScopeList", &t.CarbonScopeList)
 			delete(rawMsg, key)
 		case "categoryType":
-				err = unpopulate(val, "CategoryType", &t.CategoryType)
+			err = unpopulate(val, "CategoryType", &t.CategoryType)
 			delete(rawMsg, key)
 		case "dateRange":
-				err = unpopulate(val, "DateRange", &t.DateRange)
+			err = unpopulate(val, "DateRange", &t.DateRange)
 			delete(rawMsg, key)
 		case "locationList":
-				err = unpopulate(val, "LocationList", &t.LocationList)
+			err = unpopulate(val, "LocationList", &t.LocationList)
 			delete(rawMsg, key)
 		case "reportType":
-				err = unpopulate(val, "ReportType", &t.ReportType)
+			err = unpopulate(val, "ReportType", &t.ReportType)
 			delete(rawMsg, key)
 		case "resourceGroupUrlList":
-				err = unpopulate(val, "ResourceGroupURLList", &t.ResourceGroupURLList)
+			err = unpopulate(val, "ResourceGroupURLList", &t.ResourceGroupURLList)
 			delete(rawMsg, key)
 		case "resourceTypeList":
-				err = unpopulate(val, "ResourceTypeList", &t.ResourceTypeList)
+			err = unpopulate(val, "ResourceTypeList", &t.ResourceTypeList)
 			delete(rawMsg, key)
 		case "subscriptionList":
-				err = unpopulate(val, "SubscriptionList", &t.SubscriptionList)
+			err = unpopulate(val, "SubscriptionList", &t.SubscriptionList)
 			delete(rawMsg, key)
 		case "topItems":
-				err = unpopulate(val, "TopItems", &t.TopItems)
+			err = unpopulate(val, "TopItems", &t.TopItems)
 			delete(rawMsg, key)
 		}
 		if err != nil {
@@ -1557,4 +1456,3 @@ func unpopulate(data json.RawMessage, fn string, v any) error {
 	}
 	return nil
 }
-

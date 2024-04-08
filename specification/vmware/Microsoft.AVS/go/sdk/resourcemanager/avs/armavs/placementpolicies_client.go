@@ -32,54 +32,41 @@ func NewPlacementPoliciesClient(credential azcore.TokenCredential, options *arm.
 		return nil, err
 	}
 	client := &PlacementPoliciesClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
 
-// BeginCreateOrUpdate - Create a PlacementPolicy
+// CreateOrUpdate - Create a PlacementPolicy
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
 //   - clusterName - Name of the cluster
 //   - placementPolicyName - Name of the placement policy.
-//   - resource - Resource create parameters.
+//   - placementPolicy - Resource create parameters.
 //   - options - PlacementPoliciesClientCreateOrUpdateOptions contains the optional parameters for the PlacementPoliciesClient.CreateOrUpdate
 //     method.
-func (client *PlacementPoliciesClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, placementPolicyName string, resource PlacementPolicy, options *PlacementPoliciesClientCreateOrUpdateOptions) (*runtime.Poller[PlacementPoliciesClientCreateOrUpdateResponse], error) {
-	if options == nil || options.ResumeToken == "" {
-		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, placementPolicyName, resource, options)
-		if err != nil {
-			return nil, err
-		}
-		poller, err := runtime.NewPoller[PlacementPoliciesClientCreateOrUpdateResponse](resp, client.internal.Pipeline(), nil)
-		return poller, err
-	} else {
-		return runtime.NewPollerFromResumeToken[PlacementPoliciesClientCreateOrUpdateResponse](options.ResumeToken, client.internal.Pipeline(), nil)
-	}
-}
-
-// CreateOrUpdate - Create a PlacementPolicy
-func (client *PlacementPoliciesClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, placementPolicyName string, resource PlacementPolicy, options *PlacementPoliciesClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *PlacementPoliciesClient) CreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, placementPolicyName string, placementPolicy PlacementPolicy, options *PlacementPoliciesClientCreateOrUpdateOptions) (PlacementPoliciesClientCreateOrUpdateResponse, error) {
 	var err error
-	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PlacementPoliciesClient.BeginCreateOrUpdate")
-	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, placementPolicyName, resource, options)
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PlacementPoliciesClient.CreateOrUpdate")
+	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, placementPolicyName, placementPolicy, options)
 	if err != nil {
-		return nil, err
+		return PlacementPoliciesClientCreateOrUpdateResponse{}, err
 	}
 	httpResp, err := client.internal.Pipeline().Do(req)
 	if err != nil {
-		return nil, err
+		return PlacementPoliciesClientCreateOrUpdateResponse{}, err
 	}
 	if !runtime.HasStatusCode(httpResp, http.StatusOK, http.StatusCreated) {
 		err = runtime.NewResponseError(httpResp)
-		return nil, err
+		return PlacementPoliciesClientCreateOrUpdateResponse{}, err
 	}
-	return httpResp, nil
+	resp, err := client.createOrUpdateHandleResponse(httpResp)
+	return resp, err
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *PlacementPoliciesClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, placementPolicyName string, resource PlacementPolicy, options *PlacementPoliciesClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *PlacementPoliciesClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, placementPolicyName string, placementPolicy PlacementPolicy, options *PlacementPoliciesClientCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/placementPolicies/{placementPolicyName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -110,10 +97,27 @@ func (client *PlacementPoliciesClient) createOrUpdateCreateRequest(ctx context.C
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
-	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+	if err := runtime.MarshalAsJSON(req, placementPolicy); err != nil {
+		return nil, err
+	}
 	return req, nil
+}
+
+// createOrUpdateHandleResponse handles the CreateOrUpdate response.
+func (client *PlacementPoliciesClient) createOrUpdateHandleResponse(resp *http.Response) (PlacementPoliciesClientCreateOrUpdateResponse, error) {
+	result := PlacementPoliciesClientCreateOrUpdateResponse{}
+	if val := resp.Header.Get("Retry-After"); val != "" {
+		retryAfter32, err := strconv.ParseInt(val, 10, 32)
+		retryAfter := int32(retryAfter32)
+		if err != nil {
+			return PlacementPoliciesClientCreateOrUpdateResponse{}, err
+		}
+		result.RetryAfter = &retryAfter
+	}
+	if err := runtime.UnmarshalAsJSON(resp, &result.PlacementPolicy); err != nil {
+		return PlacementPoliciesClientCreateOrUpdateResponse{}, err
+	}
+	return result, nil
 }
 
 // BeginDelete - Delete a PlacementPolicy
@@ -266,13 +270,13 @@ func (client *PlacementPoliciesClient) getHandleResponse(resp *http.Response) (P
 //   - clusterName - Name of the cluster
 //   - options - PlacementPoliciesClientListByClusterOptions contains the optional parameters for the PlacementPoliciesClient.NewListByClusterPager
 //     method.
-func (client *PlacementPoliciesClient) NewListByClusterPager(subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, options *PlacementPoliciesClientListByClusterOptions) (*runtime.Pager[PlacementPoliciesClientListByClusterResponse]) {
+func (client *PlacementPoliciesClient) NewListByClusterPager(subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, options *PlacementPoliciesClientListByClusterOptions) *runtime.Pager[PlacementPoliciesClientListByClusterResponse] {
 	return runtime.NewPager(runtime.PagingHandler[PlacementPoliciesClientListByClusterResponse]{
 		More: func(page PlacementPoliciesClientListByClusterResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *PlacementPoliciesClientListByClusterResponse) (PlacementPoliciesClientListByClusterResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PlacementPoliciesClient.NewListByClusterPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "PlacementPoliciesClient.NewListByClusterPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -284,7 +288,7 @@ func (client *PlacementPoliciesClient) NewListByClusterPager(subscriptionID stri
 				return PlacementPoliciesClientListByClusterResponse{}, err
 			}
 			return client.listByClusterHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -388,8 +392,8 @@ func (client *PlacementPoliciesClient) updateCreateRequest(ctx context.Context, 
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, placementPolicyUpdate); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -412,4 +416,3 @@ func (client *PlacementPoliciesClient) updateHandleResponse(resp *http.Response)
 	}
 	return result, nil
 }
-

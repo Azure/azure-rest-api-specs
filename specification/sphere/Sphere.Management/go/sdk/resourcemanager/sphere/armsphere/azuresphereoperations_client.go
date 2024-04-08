@@ -28,7 +28,7 @@ func NewAzureSphereOperationsClient(credential azcore.TokenCredential, options *
 		return nil, err
 	}
 	client := &AzureSphereOperationsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -36,13 +36,13 @@ func NewAzureSphereOperationsClient(credential azcore.TokenCredential, options *
 // NewListPager - List the operations for the provider
 //   - options - AzureSphereOperationsClientListOptions contains the optional parameters for the AzureSphereOperationsClient.NewListPager
 //     method.
-func (client *AzureSphereOperationsClient) NewListPager(options *AzureSphereOperationsClientListOptions) (*runtime.Pager[AzureSphereOperationsClientListResponse]) {
+func (client *AzureSphereOperationsClient) NewListPager(options *AzureSphereOperationsClientListOptions) *runtime.Pager[AzureSphereOperationsClientListResponse] {
 	return runtime.NewPager(runtime.PagingHandler[AzureSphereOperationsClientListResponse]{
 		More: func(page AzureSphereOperationsClientListResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AzureSphereOperationsClientListResponse) (AzureSphereOperationsClientListResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereOperationsClient.NewListPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereOperationsClient.NewListPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -54,7 +54,7 @@ func (client *AzureSphereOperationsClient) NewListPager(options *AzureSphereOper
 				return AzureSphereOperationsClientListResponse{}, err
 			}
 			return client.listHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -80,4 +80,3 @@ func (client *AzureSphereOperationsClient) listHandleResponse(resp *http.Respons
 	}
 	return result, nil
 }
-

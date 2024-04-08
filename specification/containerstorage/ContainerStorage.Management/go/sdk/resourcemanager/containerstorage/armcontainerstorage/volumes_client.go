@@ -31,7 +31,7 @@ func NewVolumesClient(credential azcore.TokenCredential, options *arm.ClientOpti
 		return nil, err
 	}
 	client := &VolumesClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -104,8 +104,8 @@ func (client *VolumesClient) createOrUpdateCreateRequest(ctx context.Context, su
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -246,13 +246,13 @@ func (client *VolumesClient) getHandleResponse(resp *http.Response) (VolumesClie
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - poolName - Pool Object
 //   - options - VolumesClientListByPoolOptions contains the optional parameters for the VolumesClient.NewListByPoolPager method.
-func (client *VolumesClient) NewListByPoolPager(subscriptionID string, resourceGroupName string, poolName string, options *VolumesClientListByPoolOptions) (*runtime.Pager[VolumesClientListByPoolResponse]) {
+func (client *VolumesClient) NewListByPoolPager(subscriptionID string, resourceGroupName string, poolName string, options *VolumesClientListByPoolOptions) *runtime.Pager[VolumesClientListByPoolResponse] {
 	return runtime.NewPager(runtime.PagingHandler[VolumesClientListByPoolResponse]{
 		More: func(page VolumesClientListByPoolResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *VolumesClientListByPoolResponse) (VolumesClientListByPoolResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "VolumesClient.NewListByPoolPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "VolumesClient.NewListByPoolPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -264,7 +264,7 @@ func (client *VolumesClient) NewListByPoolPager(subscriptionID string, resourceG
 				return VolumesClientListByPoolResponse{}, err
 			}
 			return client.listByPoolHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -371,8 +371,7 @@ func (client *VolumesClient) updateCreateRequest(ctx context.Context, subscripti
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
-

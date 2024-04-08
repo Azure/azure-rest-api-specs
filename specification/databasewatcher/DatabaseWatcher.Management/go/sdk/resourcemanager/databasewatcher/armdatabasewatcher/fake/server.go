@@ -14,7 +14,7 @@ import (
 )
 
 // Server is a fake server for instances of the armdatabasewatcher.Client type.
-type Server struct{
+type Server struct {
 	// OperationsServer contains the fakes for client OperationsClient
 	OperationsServer OperationsServer
 
@@ -26,7 +26,6 @@ type Server struct{
 
 	// WatchersServer contains the fakes for client WatchersClient
 	WatchersServer WatchersServer
-
 }
 
 // NewServerTransport creates a new instance of ServerTransport with the provided implementation.
@@ -39,12 +38,12 @@ func NewServerTransport(srv *Server) *ServerTransport {
 // ServerTransport connects instances of armdatabasewatcher.Client to instances of Server.
 // Don't use this type directly, use NewServerTransport instead.
 type ServerTransport struct {
-	srv *Server
-	trMu sync.Mutex
-	trOperationsServer *OperationsServerTransport
+	srv                                *Server
+	trMu                               sync.Mutex
+	trOperationsServer                 *OperationsServerTransport
 	trSharedPrivateLinkResourcesServer *SharedPrivateLinkResourcesServerTransport
-	trTargetsServer *TargetsServerTransport
-	trWatchersServer *WatchersServerTransport
+	trTargetsServer                    *TargetsServerTransport
+	trWatchersServer                   *WatchersServerTransport
 }
 
 // Do implements the policy.Transporter interface for ServerTransport.
@@ -65,19 +64,23 @@ func (s *ServerTransport) dispatchToClientFake(req *http.Request, client string)
 	switch client {
 	case "OperationsClient":
 		initServer(&s.trMu, &s.trOperationsServer, func() *OperationsServerTransport {
-		return NewOperationsServerTransport(&s.srv.OperationsServer) })
+			return NewOperationsServerTransport(&s.srv.OperationsServer)
+		})
 		resp, err = s.trOperationsServer.Do(req)
 	case "SharedPrivateLinkResourcesClient":
 		initServer(&s.trMu, &s.trSharedPrivateLinkResourcesServer, func() *SharedPrivateLinkResourcesServerTransport {
-		return NewSharedPrivateLinkResourcesServerTransport(&s.srv.SharedPrivateLinkResourcesServer) })
+			return NewSharedPrivateLinkResourcesServerTransport(&s.srv.SharedPrivateLinkResourcesServer)
+		})
 		resp, err = s.trSharedPrivateLinkResourcesServer.Do(req)
 	case "TargetsClient":
 		initServer(&s.trMu, &s.trTargetsServer, func() *TargetsServerTransport {
-		return NewTargetsServerTransport(&s.srv.TargetsServer) })
+			return NewTargetsServerTransport(&s.srv.TargetsServer)
+		})
 		resp, err = s.trTargetsServer.Do(req)
 	case "WatchersClient":
 		initServer(&s.trMu, &s.trWatchersServer, func() *WatchersServerTransport {
-		return NewWatchersServerTransport(&s.srv.WatchersServer) })
+			return NewWatchersServerTransport(&s.srv.WatchersServer)
+		})
 		resp, err = s.trWatchersServer.Do(req)
 	default:
 		err = fmt.Errorf("unhandled client %s", client)
@@ -85,4 +88,3 @@ func (s *ServerTransport) dispatchToClientFake(req *http.Request, client string)
 
 	return resp, err
 }
-

@@ -31,7 +31,7 @@ func NewWorkloadNetworkVirtualMachinesClient(credential azcore.TokenCredential, 
 		return nil, err
 	}
 	client := &WorkloadNetworkVirtualMachinesClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -107,13 +107,13 @@ func (client *WorkloadNetworkVirtualMachinesClient) getHandleResponse(resp *http
 //   - privateCloudName - Name of the private cloud
 //   - options - WorkloadNetworkVirtualMachinesClientListByWorkloadNetworkOptions contains the optional parameters for the WorkloadNetworkVirtualMachinesClient.NewListByWorkloadNetworkPager
 //     method.
-func (client *WorkloadNetworkVirtualMachinesClient) NewListByWorkloadNetworkPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *WorkloadNetworkVirtualMachinesClientListByWorkloadNetworkOptions) (*runtime.Pager[WorkloadNetworkVirtualMachinesClientListByWorkloadNetworkResponse]) {
+func (client *WorkloadNetworkVirtualMachinesClient) NewListByWorkloadNetworkPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *WorkloadNetworkVirtualMachinesClientListByWorkloadNetworkOptions) *runtime.Pager[WorkloadNetworkVirtualMachinesClientListByWorkloadNetworkResponse] {
 	return runtime.NewPager(runtime.PagingHandler[WorkloadNetworkVirtualMachinesClientListByWorkloadNetworkResponse]{
 		More: func(page WorkloadNetworkVirtualMachinesClientListByWorkloadNetworkResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *WorkloadNetworkVirtualMachinesClientListByWorkloadNetworkResponse) (WorkloadNetworkVirtualMachinesClientListByWorkloadNetworkResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkVirtualMachinesClient.NewListByWorkloadNetworkPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkVirtualMachinesClient.NewListByWorkloadNetworkPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -125,7 +125,7 @@ func (client *WorkloadNetworkVirtualMachinesClient) NewListByWorkloadNetworkPage
 				return WorkloadNetworkVirtualMachinesClientListByWorkloadNetworkResponse{}, err
 			}
 			return client.listByWorkloadNetworkHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -163,4 +163,3 @@ func (client *WorkloadNetworkVirtualMachinesClient) listByWorkloadNetworkHandleR
 	}
 	return result, nil
 }
-

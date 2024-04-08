@@ -7,7 +7,7 @@ package armlargeinstance
 // AzureLargeInstanceAzureLargeInstancesClientGetResponse contains the response from method AzureLargeInstanceAzureLargeInstancesClient.Get.
 type AzureLargeInstanceAzureLargeInstancesClientGetResponse struct {
 	// Azure Large Instance info on Azure (ARM properties and AzureLargeInstance
-// properties)
+	// properties)
 	AzureLargeInstance
 }
 
@@ -41,14 +41,14 @@ type AzureLargeInstanceAzureLargeInstancesClientStartResponse struct {
 // AzureLargeInstanceAzureLargeInstancesClientUpdateResponse contains the response from method AzureLargeInstanceAzureLargeInstancesClient.Update.
 type AzureLargeInstanceAzureLargeInstancesClientUpdateResponse struct {
 	// Azure Large Instance info on Azure (ARM properties and AzureLargeInstance
-// properties)
+	// properties)
 	AzureLargeInstance
 }
 
 // AzureLargeInstanceAzureLargeStorageInstancesClientGetResponse contains the response from method AzureLargeInstanceAzureLargeStorageInstancesClient.Get.
 type AzureLargeInstanceAzureLargeStorageInstancesClientGetResponse struct {
 	// AzureLargeStorageInstance info on Azure (ARM properties and
-// AzureLargeStorageInstance properties)
+	// AzureLargeStorageInstance properties)
 	AzureLargeStorageInstance
 }
 
@@ -67,7 +67,7 @@ type AzureLargeInstanceAzureLargeStorageInstancesClientListBySubscriptionRespons
 // AzureLargeInstanceAzureLargeStorageInstancesClientUpdateResponse contains the response from method AzureLargeInstanceAzureLargeStorageInstancesClient.Update.
 type AzureLargeInstanceAzureLargeStorageInstancesClientUpdateResponse struct {
 	// AzureLargeStorageInstance info on Azure (ARM properties and
-// AzureLargeStorageInstance properties)
+	// AzureLargeStorageInstance properties)
 	AzureLargeStorageInstance
 }
 
@@ -76,4 +76,3 @@ type AzureLargeInstanceOperationsClientListResponse struct {
 	// A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
 	PagedOperation
 }
-

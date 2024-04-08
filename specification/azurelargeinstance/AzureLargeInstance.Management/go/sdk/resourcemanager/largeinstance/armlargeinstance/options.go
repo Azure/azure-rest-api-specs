@@ -28,7 +28,7 @@ type AzureLargeInstanceAzureLargeInstancesClientRestartOptions struct {
 	ResumeToken string
 
 	// When set to 'active', this parameter empowers the server with the ability to forcefully terminate and halt any existing
-// processes that may be running on the server
+	// processes that may be running on the server
 	ForceParameter *ForceState
 }
 
@@ -79,4 +79,3 @@ type AzureLargeInstanceAzureLargeStorageInstancesClientUpdateOptions struct {
 type AzureLargeInstanceOperationsClientListOptions struct {
 	// placeholder for future optional parameters
 }
-

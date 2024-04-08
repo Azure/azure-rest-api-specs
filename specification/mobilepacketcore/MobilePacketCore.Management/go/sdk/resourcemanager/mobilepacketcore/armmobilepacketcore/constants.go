@@ -7,7 +7,7 @@ package armmobilepacketcore
 const host = "https://management.azure.com"
 
 const (
-	moduleName = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/mobilepacketcore/armmobilepacketcore"
+	moduleName    = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/mobilepacketcore/armmobilepacketcore"
 	moduleVersion = "v0.1.0"
 )
 
@@ -21,7 +21,7 @@ const (
 
 // PossibleActionTypeValues returns the possible values for the ActionType const type.
 func PossibleActionTypeValues() []ActionType {
-	return []ActionType{	
+	return []ActionType{
 		ActionTypeInternal,
 	}
 }
@@ -38,7 +38,7 @@ const (
 
 // PossibleClusterTypeValues returns the possible values for the ClusterType const type.
 func PossibleClusterTypeValues() []ClusterType {
-	return []ClusterType{	
+	return []ClusterType{
 		ClusterTypeAks,
 		ClusterTypeNexusAks,
 	}
@@ -60,7 +60,7 @@ const (
 
 // PossibleCreatedByTypeValues returns the possible values for the CreatedByType const type.
 func PossibleCreatedByTypeValues() []CreatedByType {
-	return []CreatedByType{	
+	return []CreatedByType{
 		CreatedByTypeApplication,
 		CreatedByTypeKey,
 		CreatedByTypeManagedIdentity,
@@ -83,7 +83,7 @@ const (
 
 // PossibleOriginValues returns the possible values for the Origin const type.
 func PossibleOriginValues() []Origin {
-	return []Origin{	
+	return []Origin{
 		OriginSystem,
 		OriginUser,
 		OriginUserSystem,
@@ -112,7 +112,7 @@ const (
 
 // PossibleProvisioningStateValues returns the possible values for the ProvisioningState const type.
 func PossibleProvisioningStateValues() []ProvisioningState {
-	return []ProvisioningState{	
+	return []ProvisioningState{
 		ProvisioningStateAccepted,
 		ProvisioningStateCanceled,
 		ProvisioningStateDeleting,
@@ -120,27 +120,6 @@ func PossibleProvisioningStateValues() []ProvisioningState {
 		ProvisioningStateProvisioning,
 		ProvisioningStateSucceeded,
 		ProvisioningStateUpdating,
-	}
-}
-
-// ResourceProvisioningState - The provisioning state of a resource type.
-type ResourceProvisioningState string
-
-const (
-	// ResourceProvisioningStateCanceled - Resource creation was canceled.
-	ResourceProvisioningStateCanceled ResourceProvisioningState = "Canceled"
-	// ResourceProvisioningStateFailed - Resource creation failed.
-	ResourceProvisioningStateFailed ResourceProvisioningState = "Failed"
-	// ResourceProvisioningStateSucceeded - Resource has been created.
-	ResourceProvisioningStateSucceeded ResourceProvisioningState = "Succeeded"
-)
-
-// PossibleResourceProvisioningStateValues returns the possible values for the ResourceProvisioningState const type.
-func PossibleResourceProvisioningStateValues() []ResourceProvisioningState {
-	return []ResourceProvisioningState{	
-		ResourceProvisioningStateCanceled,
-		ResourceProvisioningStateFailed,
-		ResourceProvisioningStateSucceeded,
 	}
 }
 
@@ -156,9 +135,8 @@ const (
 
 // PossibleSKUDeploymentTypeValues returns the possible values for the SKUDeploymentType const type.
 func PossibleSKUDeploymentTypeValues() []SKUDeploymentType {
-	return []SKUDeploymentType{	
+	return []SKUDeploymentType{
 		SKUDeploymentTypeLab,
 		SKUDeploymentTypeProduction,
 	}
 }
-

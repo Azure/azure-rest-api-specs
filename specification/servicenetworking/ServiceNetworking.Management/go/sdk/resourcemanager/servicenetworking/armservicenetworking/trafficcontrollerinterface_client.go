@@ -31,7 +31,7 @@ func NewTrafficControllerInterfaceClient(credential azcore.TokenCredential, opti
 		return nil, err
 	}
 	client := &TrafficControllerInterfaceClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -100,8 +100,8 @@ func (client *TrafficControllerInterfaceClient) createOrUpdateCreateRequest(ctx 
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -234,13 +234,13 @@ func (client *TrafficControllerInterfaceClient) getHandleResponse(resp *http.Res
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - options - TrafficControllerInterfaceClientListByResourceGroupOptions contains the optional parameters for the TrafficControllerInterfaceClient.NewListByResourceGroupPager
 //     method.
-func (client *TrafficControllerInterfaceClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *TrafficControllerInterfaceClientListByResourceGroupOptions) (*runtime.Pager[TrafficControllerInterfaceClientListByResourceGroupResponse]) {
+func (client *TrafficControllerInterfaceClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *TrafficControllerInterfaceClientListByResourceGroupOptions) *runtime.Pager[TrafficControllerInterfaceClientListByResourceGroupResponse] {
 	return runtime.NewPager(runtime.PagingHandler[TrafficControllerInterfaceClientListByResourceGroupResponse]{
 		More: func(page TrafficControllerInterfaceClientListByResourceGroupResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *TrafficControllerInterfaceClientListByResourceGroupResponse) (TrafficControllerInterfaceClientListByResourceGroupResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "TrafficControllerInterfaceClient.NewListByResourceGroupPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "TrafficControllerInterfaceClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -252,7 +252,7 @@ func (client *TrafficControllerInterfaceClient) NewListByResourceGroupPager(subs
 				return TrafficControllerInterfaceClientListByResourceGroupResponse{}, err
 			}
 			return client.listByResourceGroupHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -291,13 +291,13 @@ func (client *TrafficControllerInterfaceClient) listByResourceGroupHandleRespons
 //   - subscriptionID - The ID of the target subscription.
 //   - options - TrafficControllerInterfaceClientListBySubscriptionOptions contains the optional parameters for the TrafficControllerInterfaceClient.NewListBySubscriptionPager
 //     method.
-func (client *TrafficControllerInterfaceClient) NewListBySubscriptionPager(subscriptionID string, options *TrafficControllerInterfaceClientListBySubscriptionOptions) (*runtime.Pager[TrafficControllerInterfaceClientListBySubscriptionResponse]) {
+func (client *TrafficControllerInterfaceClient) NewListBySubscriptionPager(subscriptionID string, options *TrafficControllerInterfaceClientListBySubscriptionOptions) *runtime.Pager[TrafficControllerInterfaceClientListBySubscriptionResponse] {
 	return runtime.NewPager(runtime.PagingHandler[TrafficControllerInterfaceClientListBySubscriptionResponse]{
 		More: func(page TrafficControllerInterfaceClientListBySubscriptionResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *TrafficControllerInterfaceClientListBySubscriptionResponse) (TrafficControllerInterfaceClientListBySubscriptionResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "TrafficControllerInterfaceClient.NewListBySubscriptionPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "TrafficControllerInterfaceClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -309,7 +309,7 @@ func (client *TrafficControllerInterfaceClient) NewListBySubscriptionPager(subsc
 				return TrafficControllerInterfaceClientListBySubscriptionResponse{}, err
 			}
 			return client.listBySubscriptionHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -391,8 +391,8 @@ func (client *TrafficControllerInterfaceClient) updateCreateRequest(ctx context.
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -404,4 +404,3 @@ func (client *TrafficControllerInterfaceClient) updateHandleResponse(resp *http.
 	}
 	return result, nil
 }
-

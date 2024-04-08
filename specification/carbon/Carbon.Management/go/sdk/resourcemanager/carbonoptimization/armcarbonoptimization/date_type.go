@@ -4,8 +4,6 @@
 
 package armcarbonoptimization
 
-
-
 import (
 	"encoding/json"
 	"fmt"
@@ -13,8 +11,6 @@ import (
 	"reflect"
 	"time"
 )
-
-
 
 const (
 	fullDateJSON = `"2006-01-02"`

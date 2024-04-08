@@ -7,7 +7,7 @@ package armworkloads
 const host = "https://management.azure.com"
 
 const (
-	moduleName = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/workloads/armworkloads"
+	moduleName    = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/workloads/armworkloads"
 	moduleVersion = "v0.1.0"
 )
 
@@ -27,7 +27,7 @@ const (
 
 // PossibleCreatedByTypeValues returns the possible values for the CreatedByType const type.
 func PossibleCreatedByTypeValues() []CreatedByType {
-	return []CreatedByType{	
+	return []CreatedByType{
 		CreatedByTypeApplication,
 		CreatedByTypeKey,
 		CreatedByTypeManagedIdentity,
@@ -47,7 +47,7 @@ const (
 
 // PossibleDataSourceValues returns the possible values for the DataSource const type.
 func PossibleDataSourceValues() []DataSource {
-	return []DataSource{	
+	return []DataSource{
 		DataSourceExcel,
 		DataSourceNative,
 	}
@@ -80,7 +80,7 @@ const (
 
 // PossibleDatabaseTypeValues returns the possible values for the DatabaseType const type.
 func PossibleDatabaseTypeValues() []DatabaseType {
-	return []DatabaseType{	
+	return []DatabaseType{
 		DatabaseTypeAdabas,
 		DatabaseTypeDb2,
 		DatabaseTypeHANA,
@@ -113,7 +113,7 @@ const (
 
 // PossibleOperatingSystemValues returns the possible values for the OperatingSystem const type.
 func PossibleOperatingSystemValues() []OperatingSystem {
-	return []OperatingSystem{	
+	return []OperatingSystem{
 		OperatingSystemIBMAIX,
 		OperatingSystemRedHat,
 		OperatingSystemSUSE,
@@ -147,7 +147,7 @@ const (
 
 // PossibleProvisioningStateValues returns the possible values for the ProvisioningState const type.
 func PossibleProvisioningStateValues() []ProvisioningState {
-	return []ProvisioningState{	
+	return []ProvisioningState{
 		ProvisioningStateAccepted,
 		ProvisioningStateCanceled,
 		ProvisioningStateCreating,
@@ -156,27 +156,6 @@ func PossibleProvisioningStateValues() []ProvisioningState {
 		ProvisioningStateSucceeded,
 		ProvisioningStateUnknown,
 		ProvisioningStateUpdating,
-	}
-}
-
-// ResourceProvisioningState - The provisioning state of a resource type.
-type ResourceProvisioningState string
-
-const (
-	// ResourceProvisioningStateCanceled - Resource creation was canceled.
-	ResourceProvisioningStateCanceled ResourceProvisioningState = "Canceled"
-	// ResourceProvisioningStateFailed - Resource creation failed.
-	ResourceProvisioningStateFailed ResourceProvisioningState = "Failed"
-	// ResourceProvisioningStateSucceeded - Resource has been created.
-	ResourceProvisioningStateSucceeded ResourceProvisioningState = "Succeeded"
-)
-
-// PossibleResourceProvisioningStateValues returns the possible values for the ResourceProvisioningState const type.
-func PossibleResourceProvisioningStateValues() []ResourceProvisioningState {
-	return []ResourceProvisioningState{	
-		ResourceProvisioningStateCanceled,
-		ResourceProvisioningStateFailed,
-		ResourceProvisioningStateSucceeded,
 	}
 }
 
@@ -205,7 +184,7 @@ const (
 
 // PossibleSapInstanceEnvironmentValues returns the possible values for the SapInstanceEnvironment const type.
 func PossibleSapInstanceEnvironmentValues() []SapInstanceEnvironment {
-	return []SapInstanceEnvironment{	
+	return []SapInstanceEnvironment{
 		SapInstanceEnvironmentDevelopment,
 		SapInstanceEnvironmentDisasterRecovery,
 		SapInstanceEnvironmentPreProduction,
@@ -236,7 +215,7 @@ const (
 
 // PossibleSapInstanceTypeValues returns the possible values for the SapInstanceType const type.
 func PossibleSapInstanceTypeValues() []SapInstanceType {
-	return []SapInstanceType{	
+	return []SapInstanceType{
 		SapInstanceTypeAPP,
 		SapInstanceTypeASCS,
 		SapInstanceTypeDB,
@@ -244,4 +223,3 @@ func PossibleSapInstanceTypeValues() []SapInstanceType {
 		SapInstanceTypeWEBDISP,
 	}
 }
-

@@ -16,13 +16,14 @@ import (
 	"net/http"
 	"net/url"
 	"regexp"
+	"strconv"
 )
 
 // WorkloadNetworkDhcpConfigurationsServer is a fake server for instances of the armavs.WorkloadNetworkDhcpConfigurationsClient type.
-type WorkloadNetworkDhcpConfigurationsServer struct{
-	// BeginCreate is the fake for method WorkloadNetworkDhcpConfigurationsClient.BeginCreate
+type WorkloadNetworkDhcpConfigurationsServer struct {
+	// Create is the fake for method WorkloadNetworkDhcpConfigurationsClient.Create
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, resource armavs.WorkloadNetworkDhcp, options *armavs.WorkloadNetworkDhcpConfigurationsClientCreateOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkDhcpConfigurationsClientCreateResponse], errResp azfake.ErrorResponder)
+	Create func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, workloadNetworkDhcp armavs.WorkloadNetworkDhcp, options *armavs.WorkloadNetworkDhcpConfigurationsClientCreateOptions) (resp azfake.Responder[armavs.WorkloadNetworkDhcpConfigurationsClientCreateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method WorkloadNetworkDhcpConfigurationsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
@@ -38,8 +39,7 @@ type WorkloadNetworkDhcpConfigurationsServer struct{
 
 	// BeginUpdate is the fake for method WorkloadNetworkDhcpConfigurationsClient.BeginUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
-	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, properties armavs.WorkloadNetworkDhcpUpdate, options *armavs.WorkloadNetworkDhcpConfigurationsClientUpdateOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkDhcpConfigurationsClientUpdateResponse], errResp azfake.ErrorResponder)
-
+	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, workloadNetworkDhcp armavs.WorkloadNetworkDhcpUpdate, options *armavs.WorkloadNetworkDhcpConfigurationsClientUpdateOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkDhcpConfigurationsClientUpdateResponse], errResp azfake.ErrorResponder)
 }
 
 // NewWorkloadNetworkDhcpConfigurationsServerTransport creates a new instance of WorkloadNetworkDhcpConfigurationsServerTransport with the provided implementation.
@@ -47,22 +47,20 @@ type WorkloadNetworkDhcpConfigurationsServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewWorkloadNetworkDhcpConfigurationsServerTransport(srv *WorkloadNetworkDhcpConfigurationsServer) *WorkloadNetworkDhcpConfigurationsServerTransport {
 	return &WorkloadNetworkDhcpConfigurationsServerTransport{
-		srv: srv,
-		beginCreate: newTracker[azfake.PollerResponder[armavs.WorkloadNetworkDhcpConfigurationsClientCreateResponse]](),
-		beginDelete: newTracker[azfake.PollerResponder[armavs.WorkloadNetworkDhcpConfigurationsClientDeleteResponse]](),
+		srv:                           srv,
+		beginDelete:                   newTracker[azfake.PollerResponder[armavs.WorkloadNetworkDhcpConfigurationsClientDeleteResponse]](),
 		newListByWorkloadNetworkPager: newTracker[azfake.PagerResponder[armavs.WorkloadNetworkDhcpConfigurationsClientListByWorkloadNetworkResponse]](),
-		beginUpdate: newTracker[azfake.PollerResponder[armavs.WorkloadNetworkDhcpConfigurationsClientUpdateResponse]](),
+		beginUpdate:                   newTracker[azfake.PollerResponder[armavs.WorkloadNetworkDhcpConfigurationsClientUpdateResponse]](),
 	}
 }
 
 // WorkloadNetworkDhcpConfigurationsServerTransport connects instances of armavs.WorkloadNetworkDhcpConfigurationsClient to instances of WorkloadNetworkDhcpConfigurationsServer.
 // Don't use this type directly, use NewWorkloadNetworkDhcpConfigurationsServerTransport instead.
 type WorkloadNetworkDhcpConfigurationsServerTransport struct {
-	srv *WorkloadNetworkDhcpConfigurationsServer
-	beginCreate *tracker[azfake.PollerResponder[armavs.WorkloadNetworkDhcpConfigurationsClientCreateResponse]]
-	beginDelete *tracker[azfake.PollerResponder[armavs.WorkloadNetworkDhcpConfigurationsClientDeleteResponse]]
+	srv                           *WorkloadNetworkDhcpConfigurationsServer
+	beginDelete                   *tracker[azfake.PollerResponder[armavs.WorkloadNetworkDhcpConfigurationsClientDeleteResponse]]
 	newListByWorkloadNetworkPager *tracker[azfake.PagerResponder[armavs.WorkloadNetworkDhcpConfigurationsClientListByWorkloadNetworkResponse]]
-	beginUpdate *tracker[azfake.PollerResponder[armavs.WorkloadNetworkDhcpConfigurationsClientUpdateResponse]]
+	beginUpdate                   *tracker[azfake.PollerResponder[armavs.WorkloadNetworkDhcpConfigurationsClientUpdateResponse]]
 }
 
 // Do implements the policy.Transporter interface for WorkloadNetworkDhcpConfigurationsServerTransport.
@@ -81,8 +79,8 @@ func (w *WorkloadNetworkDhcpConfigurationsServerTransport) dispatchToMethodFake(
 	var err error
 
 	switch method {
-	case "WorkloadNetworkDhcpConfigurationsClient.BeginCreate":
-		resp, err = w.dispatchBeginCreate(req)
+	case "WorkloadNetworkDhcpConfigurationsClient.Create":
+		resp, err = w.dispatchCreate(req)
 	case "WorkloadNetworkDhcpConfigurationsClient.BeginDelete":
 		resp, err = w.dispatchBeginDelete(req)
 	case "WorkloadNetworkDhcpConfigurationsClient.Get":
@@ -98,12 +96,10 @@ func (w *WorkloadNetworkDhcpConfigurationsServerTransport) dispatchToMethodFake(
 	return resp, err
 }
 
-func (w *WorkloadNetworkDhcpConfigurationsServerTransport) dispatchBeginCreate(req *http.Request) (*http.Response, error) {
-	if w.srv.BeginCreate == nil {
-		return nil, &nonRetriableError{errors.New("fake for method BeginCreate not implemented")}
+func (w *WorkloadNetworkDhcpConfigurationsServerTransport) dispatchCreate(req *http.Request) (*http.Response, error) {
+	if w.srv.Create == nil {
+		return nil, &nonRetriableError{errors.New("fake for method Create not implemented")}
 	}
-	beginCreate := w.beginCreate.get(req)
-	if beginCreate == nil {
 	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/dhcpConfigurations/(?P<dhcpId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
 	regex := regexp.MustCompile(regexStr)
 	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
@@ -130,27 +126,21 @@ func (w *WorkloadNetworkDhcpConfigurationsServerTransport) dispatchBeginCreate(r
 	if err != nil {
 		return nil, err
 	}
-	respr, errRespr := w.srv.BeginCreate(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, dhcpIDParam, body, nil)
+	respr, errRespr := w.srv.Create(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, dhcpIDParam, body, nil)
 	if respErr := server.GetError(errRespr, req); respErr != nil {
 		return nil, respErr
 	}
-		beginCreate = &respr
-		w.beginCreate.add(req, beginCreate)
+	respContent := server.GetResponseContent(respr)
+	if !contains([]int{http.StatusOK, http.StatusCreated}, respContent.HTTPStatus) {
+		return nil, &nonRetriableError{fmt.Errorf("unexpected status code %d. acceptable values are http.StatusOK, http.StatusCreated", respContent.HTTPStatus)}
 	}
-
-	resp, err := server.PollerResponderNext(beginCreate, req)
+	resp, err := server.MarshalResponseAsJSON(respContent, server.GetResponse(respr).WorkloadNetworkDhcp, req)
 	if err != nil {
 		return nil, err
 	}
-
-	if !contains([]int{http.StatusOK, http.StatusCreated}, resp.StatusCode) {
-		w.beginCreate.remove(req)
-		return nil, &nonRetriableError{fmt.Errorf("unexpected status code %d. acceptable values are http.StatusOK, http.StatusCreated", resp.StatusCode)}
+	if val := server.GetResponse(respr).RetryAfter; val != nil {
+		resp.Header.Set("Retry-After", strconv.FormatInt(int64(*val), 10))
 	}
-	if !server.PollerResponderMore(beginCreate) {
-		w.beginCreate.remove(req)
-	}
-
 	return resp, nil
 }
 
@@ -160,32 +150,32 @@ func (w *WorkloadNetworkDhcpConfigurationsServerTransport) dispatchBeginDelete(r
 	}
 	beginDelete := w.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/dhcpConfigurations/(?P<dhcpId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-	dhcpIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("dhcpId")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := w.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, dhcpIDParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/dhcpConfigurations/(?P<dhcpId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		dhcpIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("dhcpId")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := w.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, dhcpIDParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		w.beginDelete.add(req, beginDelete)
 	}
@@ -253,25 +243,25 @@ func (w *WorkloadNetworkDhcpConfigurationsServerTransport) dispatchNewListByWork
 	}
 	newListByWorkloadNetworkPager := w.newListByWorkloadNetworkPager.get(req)
 	if newListByWorkloadNetworkPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/dhcpConfigurations`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-resp := w.srv.NewListByWorkloadNetworkPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/dhcpConfigurations`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := w.srv.NewListByWorkloadNetworkPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, nil)
 		newListByWorkloadNetworkPager = &resp
 		w.newListByWorkloadNetworkPager.add(req, newListByWorkloadNetworkPager)
 		server.PagerResponderInjectNextLinks(newListByWorkloadNetworkPager, req, func(page *armavs.WorkloadNetworkDhcpConfigurationsClientListByWorkloadNetworkResponse, createLink func() string) {
@@ -298,36 +288,36 @@ func (w *WorkloadNetworkDhcpConfigurationsServerTransport) dispatchBeginUpdate(r
 	}
 	beginUpdate := w.beginUpdate.get(req)
 	if beginUpdate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/dhcpConfigurations/(?P<dhcpId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armavs.WorkloadNetworkDhcpUpdate](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-	dhcpIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("dhcpId")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := w.srv.BeginUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, dhcpIDParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/dhcpConfigurations/(?P<dhcpId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armavs.WorkloadNetworkDhcpUpdate](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		dhcpIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("dhcpId")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := w.srv.BeginUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, dhcpIDParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginUpdate = &respr
 		w.beginUpdate.add(req, beginUpdate)
 	}
@@ -347,4 +337,3 @@ func (w *WorkloadNetworkDhcpConfigurationsServerTransport) dispatchBeginUpdate(r
 
 	return resp, nil
 }
-

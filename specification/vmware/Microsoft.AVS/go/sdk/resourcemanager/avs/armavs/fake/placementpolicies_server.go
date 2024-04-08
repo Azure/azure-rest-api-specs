@@ -20,10 +20,10 @@ import (
 )
 
 // PlacementPoliciesServer is a fake server for instances of the armavs.PlacementPoliciesClient type.
-type PlacementPoliciesServer struct{
-	// BeginCreateOrUpdate is the fake for method PlacementPoliciesClient.BeginCreateOrUpdate
+type PlacementPoliciesServer struct {
+	// CreateOrUpdate is the fake for method PlacementPoliciesClient.CreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, placementPolicyName string, resource armavs.PlacementPolicy, options *armavs.PlacementPoliciesClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armavs.PlacementPoliciesClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
+	CreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, placementPolicyName string, placementPolicy armavs.PlacementPolicy, options *armavs.PlacementPoliciesClientCreateOrUpdateOptions) (resp azfake.Responder[armavs.PlacementPoliciesClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method PlacementPoliciesClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
@@ -40,7 +40,6 @@ type PlacementPoliciesServer struct{
 	// Update is the fake for method PlacementPoliciesClient.Update
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
 	Update func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, placementPolicyName string, placementPolicyUpdate armavs.PlacementPolicyUpdate, options *armavs.PlacementPoliciesClientUpdateOptions) (resp azfake.Responder[armavs.PlacementPoliciesClientUpdateResponse], errResp azfake.ErrorResponder)
-
 }
 
 // NewPlacementPoliciesServerTransport creates a new instance of PlacementPoliciesServerTransport with the provided implementation.
@@ -48,9 +47,8 @@ type PlacementPoliciesServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewPlacementPoliciesServerTransport(srv *PlacementPoliciesServer) *PlacementPoliciesServerTransport {
 	return &PlacementPoliciesServerTransport{
-		srv: srv,
-		beginCreateOrUpdate: newTracker[azfake.PollerResponder[armavs.PlacementPoliciesClientCreateOrUpdateResponse]](),
-		beginDelete: newTracker[azfake.PollerResponder[armavs.PlacementPoliciesClientDeleteResponse]](),
+		srv:                   srv,
+		beginDelete:           newTracker[azfake.PollerResponder[armavs.PlacementPoliciesClientDeleteResponse]](),
 		newListByClusterPager: newTracker[azfake.PagerResponder[armavs.PlacementPoliciesClientListByClusterResponse]](),
 	}
 }
@@ -58,9 +56,8 @@ func NewPlacementPoliciesServerTransport(srv *PlacementPoliciesServer) *Placemen
 // PlacementPoliciesServerTransport connects instances of armavs.PlacementPoliciesClient to instances of PlacementPoliciesServer.
 // Don't use this type directly, use NewPlacementPoliciesServerTransport instead.
 type PlacementPoliciesServerTransport struct {
-	srv *PlacementPoliciesServer
-	beginCreateOrUpdate *tracker[azfake.PollerResponder[armavs.PlacementPoliciesClientCreateOrUpdateResponse]]
-	beginDelete *tracker[azfake.PollerResponder[armavs.PlacementPoliciesClientDeleteResponse]]
+	srv                   *PlacementPoliciesServer
+	beginDelete           *tracker[azfake.PollerResponder[armavs.PlacementPoliciesClientDeleteResponse]]
 	newListByClusterPager *tracker[azfake.PagerResponder[armavs.PlacementPoliciesClientListByClusterResponse]]
 }
 
@@ -80,8 +77,8 @@ func (p *PlacementPoliciesServerTransport) dispatchToMethodFake(req *http.Reques
 	var err error
 
 	switch method {
-	case "PlacementPoliciesClient.BeginCreateOrUpdate":
-		resp, err = p.dispatchBeginCreateOrUpdate(req)
+	case "PlacementPoliciesClient.CreateOrUpdate":
+		resp, err = p.dispatchCreateOrUpdate(req)
 	case "PlacementPoliciesClient.BeginDelete":
 		resp, err = p.dispatchBeginDelete(req)
 	case "PlacementPoliciesClient.Get":
@@ -97,12 +94,10 @@ func (p *PlacementPoliciesServerTransport) dispatchToMethodFake(req *http.Reques
 	return resp, err
 }
 
-func (p *PlacementPoliciesServerTransport) dispatchBeginCreateOrUpdate(req *http.Request) (*http.Response, error) {
-	if p.srv.BeginCreateOrUpdate == nil {
-		return nil, &nonRetriableError{errors.New("fake for method BeginCreateOrUpdate not implemented")}
+func (p *PlacementPoliciesServerTransport) dispatchCreateOrUpdate(req *http.Request) (*http.Response, error) {
+	if p.srv.CreateOrUpdate == nil {
+		return nil, &nonRetriableError{errors.New("fake for method CreateOrUpdate not implemented")}
 	}
-	beginCreateOrUpdate := p.beginCreateOrUpdate.get(req)
-	if beginCreateOrUpdate == nil {
 	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/clusters/(?P<clusterName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/placementPolicies/(?P<placementPolicyName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
 	regex := regexp.MustCompile(regexStr)
 	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
@@ -133,27 +128,21 @@ func (p *PlacementPoliciesServerTransport) dispatchBeginCreateOrUpdate(req *http
 	if err != nil {
 		return nil, err
 	}
-	respr, errRespr := p.srv.BeginCreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, clusterNameParam, placementPolicyNameParam, body, nil)
+	respr, errRespr := p.srv.CreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, clusterNameParam, placementPolicyNameParam, body, nil)
 	if respErr := server.GetError(errRespr, req); respErr != nil {
 		return nil, respErr
 	}
-		beginCreateOrUpdate = &respr
-		p.beginCreateOrUpdate.add(req, beginCreateOrUpdate)
+	respContent := server.GetResponseContent(respr)
+	if !contains([]int{http.StatusOK, http.StatusCreated}, respContent.HTTPStatus) {
+		return nil, &nonRetriableError{fmt.Errorf("unexpected status code %d. acceptable values are http.StatusOK, http.StatusCreated", respContent.HTTPStatus)}
 	}
-
-	resp, err := server.PollerResponderNext(beginCreateOrUpdate, req)
+	resp, err := server.MarshalResponseAsJSON(respContent, server.GetResponse(respr).PlacementPolicy, req)
 	if err != nil {
 		return nil, err
 	}
-
-	if !contains([]int{http.StatusOK, http.StatusCreated}, resp.StatusCode) {
-		p.beginCreateOrUpdate.remove(req)
-		return nil, &nonRetriableError{fmt.Errorf("unexpected status code %d. acceptable values are http.StatusOK, http.StatusCreated", resp.StatusCode)}
+	if val := server.GetResponse(respr).RetryAfter; val != nil {
+		resp.Header.Set("Retry-After", strconv.FormatInt(int64(*val), 10))
 	}
-	if !server.PollerResponderMore(beginCreateOrUpdate) {
-		p.beginCreateOrUpdate.remove(req)
-	}
-
 	return resp, nil
 }
 
@@ -163,36 +152,36 @@ func (p *PlacementPoliciesServerTransport) dispatchBeginDelete(req *http.Request
 	}
 	beginDelete := p.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/clusters/(?P<clusterName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/placementPolicies/(?P<placementPolicyName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 5 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-	clusterNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("clusterName")])
-	if err != nil {
-		return nil, err
-	}
-	placementPolicyNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("placementPolicyName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := p.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, clusterNameParam, placementPolicyNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/clusters/(?P<clusterName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/placementPolicies/(?P<placementPolicyName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 5 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		clusterNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("clusterName")])
+		if err != nil {
+			return nil, err
+		}
+		placementPolicyNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("placementPolicyName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := p.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, clusterNameParam, placementPolicyNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		p.beginDelete.add(req, beginDelete)
 	}
@@ -264,29 +253,29 @@ func (p *PlacementPoliciesServerTransport) dispatchNewListByClusterPager(req *ht
 	}
 	newListByClusterPager := p.newListByClusterPager.get(req)
 	if newListByClusterPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/clusters/(?P<clusterName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/placementPolicies`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-	clusterNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("clusterName")])
-	if err != nil {
-		return nil, err
-	}
-resp := p.srv.NewListByClusterPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, clusterNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/clusters/(?P<clusterName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/placementPolicies`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		clusterNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("clusterName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := p.srv.NewListByClusterPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, clusterNameParam, nil)
 		newListByClusterPager = &resp
 		p.newListByClusterPager.add(req, newListByClusterPager)
 		server.PagerResponderInjectNextLinks(newListByClusterPager, req, func(page *armavs.PlacementPoliciesClientListByClusterResponse, createLink func() string) {
@@ -361,4 +350,3 @@ func (p *PlacementPoliciesServerTransport) dispatchUpdate(req *http.Request) (*h
 	}
 	return resp, nil
 }
-

@@ -14,13 +14,12 @@ import (
 )
 
 // Server is a fake server for instances of the armedgezones.Client type.
-type Server struct{
+type Server struct {
 	// ExtendedZonesServer contains the fakes for client ExtendedZonesClient
 	ExtendedZonesServer ExtendedZonesServer
 
 	// OperationsServer contains the fakes for client OperationsClient
 	OperationsServer OperationsServer
-
 }
 
 // NewServerTransport creates a new instance of ServerTransport with the provided implementation.
@@ -33,10 +32,10 @@ func NewServerTransport(srv *Server) *ServerTransport {
 // ServerTransport connects instances of armedgezones.Client to instances of Server.
 // Don't use this type directly, use NewServerTransport instead.
 type ServerTransport struct {
-	srv *Server
-	trMu sync.Mutex
+	srv                   *Server
+	trMu                  sync.Mutex
 	trExtendedZonesServer *ExtendedZonesServerTransport
-	trOperationsServer *OperationsServerTransport
+	trOperationsServer    *OperationsServerTransport
 }
 
 // Do implements the policy.Transporter interface for ServerTransport.
@@ -57,11 +56,13 @@ func (s *ServerTransport) dispatchToClientFake(req *http.Request, client string)
 	switch client {
 	case "ExtendedZonesClient":
 		initServer(&s.trMu, &s.trExtendedZonesServer, func() *ExtendedZonesServerTransport {
-		return NewExtendedZonesServerTransport(&s.srv.ExtendedZonesServer) })
+			return NewExtendedZonesServerTransport(&s.srv.ExtendedZonesServer)
+		})
 		resp, err = s.trExtendedZonesServer.Do(req)
 	case "OperationsClient":
 		initServer(&s.trMu, &s.trOperationsServer, func() *OperationsServerTransport {
-		return NewOperationsServerTransport(&s.srv.OperationsServer) })
+			return NewOperationsServerTransport(&s.srv.OperationsServer)
+		})
 		resp, err = s.trOperationsServer.Do(req)
 	default:
 		err = fmt.Errorf("unhandled client %s", client)
@@ -69,4 +70,3 @@ func (s *ServerTransport) dispatchToClientFake(req *http.Request, client string)
 
 	return resp, err
 }
-

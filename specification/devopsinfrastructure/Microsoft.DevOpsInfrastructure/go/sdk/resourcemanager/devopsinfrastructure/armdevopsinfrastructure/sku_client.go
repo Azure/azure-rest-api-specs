@@ -31,7 +31,7 @@ func NewSkuClient(credential azcore.TokenCredential, options *arm.ClientOptions)
 		return nil, err
 	}
 	client := &SkuClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -40,13 +40,13 @@ func NewSkuClient(credential azcore.TokenCredential, options *arm.ClientOptions)
 //   - subscriptionID - The ID of the target subscription.
 //   - locationName - Name of the location.
 //   - options - SkuClientListByLocationOptions contains the optional parameters for the SkuClient.NewListByLocationPager method.
-func (client *SkuClient) NewListByLocationPager(subscriptionID string, locationName string, options *SkuClientListByLocationOptions) (*runtime.Pager[SkuClientListByLocationResponse]) {
+func (client *SkuClient) NewListByLocationPager(subscriptionID string, locationName string, options *SkuClientListByLocationOptions) *runtime.Pager[SkuClientListByLocationResponse] {
 	return runtime.NewPager(runtime.PagingHandler[SkuClientListByLocationResponse]{
 		More: func(page SkuClientListByLocationResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *SkuClientListByLocationResponse) (SkuClientListByLocationResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SkuClient.NewListByLocationPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SkuClient.NewListByLocationPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -58,7 +58,7 @@ func (client *SkuClient) NewListByLocationPager(subscriptionID string, locationN
 				return SkuClientListByLocationResponse{}, err
 			}
 			return client.listByLocationHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -92,4 +92,3 @@ func (client *SkuClient) listByLocationHandleResponse(resp *http.Response) (SkuC
 	}
 	return result, nil
 }
-

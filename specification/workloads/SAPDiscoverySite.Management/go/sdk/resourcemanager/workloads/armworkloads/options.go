@@ -93,4 +93,3 @@ type ServerInstancesClientListBySAPInstanceOptions struct {
 type ServerInstancesClientUpdateOptions struct {
 	// placeholder for future optional parameters
 }
-

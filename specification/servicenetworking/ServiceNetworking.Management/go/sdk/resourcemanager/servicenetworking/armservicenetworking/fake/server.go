@@ -14,7 +14,7 @@ import (
 )
 
 // Server is a fake server for instances of the armservicenetworking.Client type.
-type Server struct{
+type Server struct {
 	// AssociationsInterfaceServer contains the fakes for client AssociationsInterfaceClient
 	AssociationsInterfaceServer AssociationsInterfaceServer
 
@@ -26,7 +26,6 @@ type Server struct{
 
 	// TrafficControllerInterfaceServer contains the fakes for client TrafficControllerInterfaceClient
 	TrafficControllerInterfaceServer TrafficControllerInterfaceServer
-
 }
 
 // NewServerTransport creates a new instance of ServerTransport with the provided implementation.
@@ -39,11 +38,11 @@ func NewServerTransport(srv *Server) *ServerTransport {
 // ServerTransport connects instances of armservicenetworking.Client to instances of Server.
 // Don't use this type directly, use NewServerTransport instead.
 type ServerTransport struct {
-	srv *Server
-	trMu sync.Mutex
-	trAssociationsInterfaceServer *AssociationsInterfaceServerTransport
-	trFrontendsInterfaceServer *FrontendsInterfaceServerTransport
-	trOperationsServer *OperationsServerTransport
+	srv                                *Server
+	trMu                               sync.Mutex
+	trAssociationsInterfaceServer      *AssociationsInterfaceServerTransport
+	trFrontendsInterfaceServer         *FrontendsInterfaceServerTransport
+	trOperationsServer                 *OperationsServerTransport
 	trTrafficControllerInterfaceServer *TrafficControllerInterfaceServerTransport
 }
 
@@ -65,19 +64,23 @@ func (s *ServerTransport) dispatchToClientFake(req *http.Request, client string)
 	switch client {
 	case "AssociationsInterfaceClient":
 		initServer(&s.trMu, &s.trAssociationsInterfaceServer, func() *AssociationsInterfaceServerTransport {
-		return NewAssociationsInterfaceServerTransport(&s.srv.AssociationsInterfaceServer) })
+			return NewAssociationsInterfaceServerTransport(&s.srv.AssociationsInterfaceServer)
+		})
 		resp, err = s.trAssociationsInterfaceServer.Do(req)
 	case "FrontendsInterfaceClient":
 		initServer(&s.trMu, &s.trFrontendsInterfaceServer, func() *FrontendsInterfaceServerTransport {
-		return NewFrontendsInterfaceServerTransport(&s.srv.FrontendsInterfaceServer) })
+			return NewFrontendsInterfaceServerTransport(&s.srv.FrontendsInterfaceServer)
+		})
 		resp, err = s.trFrontendsInterfaceServer.Do(req)
 	case "OperationsClient":
 		initServer(&s.trMu, &s.trOperationsServer, func() *OperationsServerTransport {
-		return NewOperationsServerTransport(&s.srv.OperationsServer) })
+			return NewOperationsServerTransport(&s.srv.OperationsServer)
+		})
 		resp, err = s.trOperationsServer.Do(req)
 	case "TrafficControllerInterfaceClient":
 		initServer(&s.trMu, &s.trTrafficControllerInterfaceServer, func() *TrafficControllerInterfaceServerTransport {
-		return NewTrafficControllerInterfaceServerTransport(&s.srv.TrafficControllerInterfaceServer) })
+			return NewTrafficControllerInterfaceServerTransport(&s.srv.TrafficControllerInterfaceServer)
+		})
 		resp, err = s.trTrafficControllerInterfaceServer.Do(req)
 	default:
 		err = fmt.Errorf("unhandled client %s", client)
@@ -85,4 +88,3 @@ func (s *ServerTransport) dispatchToClientFake(req *http.Request, client string)
 
 	return resp, err
 }
-

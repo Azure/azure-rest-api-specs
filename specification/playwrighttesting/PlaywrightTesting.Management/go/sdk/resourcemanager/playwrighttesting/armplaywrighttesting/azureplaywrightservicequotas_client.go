@@ -31,7 +31,7 @@ func NewAzurePlaywrightServiceQuotasClient(credential azcore.TokenCredential, op
 		return nil, err
 	}
 	client := &AzurePlaywrightServiceQuotasClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -101,13 +101,13 @@ func (client *AzurePlaywrightServiceQuotasClient) getHandleResponse(resp *http.R
 //   - location - The location of quota in ARM Normalized format like eastus, southeastasia etc.
 //   - options - AzurePlaywrightServiceQuotasClientListBySubscriptionOptions contains the optional parameters for the AzurePlaywrightServiceQuotasClient.NewListBySubscriptionPager
 //     method.
-func (client *AzurePlaywrightServiceQuotasClient) NewListBySubscriptionPager(subscriptionID string, location string, options *AzurePlaywrightServiceQuotasClientListBySubscriptionOptions) (*runtime.Pager[AzurePlaywrightServiceQuotasClientListBySubscriptionResponse]) {
+func (client *AzurePlaywrightServiceQuotasClient) NewListBySubscriptionPager(subscriptionID string, location string, options *AzurePlaywrightServiceQuotasClientListBySubscriptionOptions) *runtime.Pager[AzurePlaywrightServiceQuotasClientListBySubscriptionResponse] {
 	return runtime.NewPager(runtime.PagingHandler[AzurePlaywrightServiceQuotasClientListBySubscriptionResponse]{
 		More: func(page AzurePlaywrightServiceQuotasClientListBySubscriptionResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AzurePlaywrightServiceQuotasClientListBySubscriptionResponse) (AzurePlaywrightServiceQuotasClientListBySubscriptionResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzurePlaywrightServiceQuotasClient.NewListBySubscriptionPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzurePlaywrightServiceQuotasClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -119,7 +119,7 @@ func (client *AzurePlaywrightServiceQuotasClient) NewListBySubscriptionPager(sub
 				return AzurePlaywrightServiceQuotasClientListBySubscriptionResponse{}, err
 			}
 			return client.listBySubscriptionHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -153,4 +153,3 @@ func (client *AzurePlaywrightServiceQuotasClient) listBySubscriptionHandleRespon
 	}
 	return result, nil
 }
-

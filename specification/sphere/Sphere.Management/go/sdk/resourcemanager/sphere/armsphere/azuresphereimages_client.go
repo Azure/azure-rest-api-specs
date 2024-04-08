@@ -32,7 +32,7 @@ func NewAzureSphereImagesClient(credential azcore.TokenCredential, options *arm.
 		return nil, err
 	}
 	client := &AzureSphereImagesClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -106,8 +106,8 @@ func (client *AzureSphereImagesClient) createOrUpdateCreateRequest(ctx context.C
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -250,13 +250,13 @@ func (client *AzureSphereImagesClient) getHandleResponse(resp *http.Response) (A
 //   - catalogName - Name of catalog
 //   - options - AzureSphereImagesClientListByCatalogOptions contains the optional parameters for the AzureSphereImagesClient.NewListByCatalogPager
 //     method.
-func (client *AzureSphereImagesClient) NewListByCatalogPager(subscriptionID string, resourceGroupName string, catalogName string, options *AzureSphereImagesClientListByCatalogOptions) (*runtime.Pager[AzureSphereImagesClientListByCatalogResponse]) {
+func (client *AzureSphereImagesClient) NewListByCatalogPager(subscriptionID string, resourceGroupName string, catalogName string, options *AzureSphereImagesClientListByCatalogOptions) *runtime.Pager[AzureSphereImagesClientListByCatalogResponse] {
 	return runtime.NewPager(runtime.PagingHandler[AzureSphereImagesClientListByCatalogResponse]{
 		More: func(page AzureSphereImagesClientListByCatalogResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AzureSphereImagesClientListByCatalogResponse) (AzureSphereImagesClientListByCatalogResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereImagesClient.NewListByCatalogPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereImagesClient.NewListByCatalogPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -268,7 +268,7 @@ func (client *AzureSphereImagesClient) NewListByCatalogPager(subscriptionID stri
 				return AzureSphereImagesClientListByCatalogResponse{}, err
 			}
 			return client.listByCatalogHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -318,4 +318,3 @@ func (client *AzureSphereImagesClient) listByCatalogHandleResponse(resp *http.Re
 	}
 	return result, nil
 }
-

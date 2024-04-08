@@ -13,6 +13,7 @@ import (
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/runtime"
 	"net/http"
 	"net/url"
+	"strconv"
 	"strings"
 )
 
@@ -31,53 +32,40 @@ func NewWorkloadNetworkDnsZonesClient(credential azcore.TokenCredential, options
 		return nil, err
 	}
 	client := &WorkloadNetworkDnsZonesClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
 
-// BeginCreate - Create a WorkloadNetworkDnsZone
+// Create - Create a WorkloadNetworkDnsZone
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
 //   - dnsZoneID - ID of the DNS zone.
-//   - resource - Resource create parameters.
+//   - workloadNetworkDNSZone - Resource create parameters.
 //   - options - WorkloadNetworkDnsZonesClientCreateOptions contains the optional parameters for the WorkloadNetworkDnsZonesClient.Create
 //     method.
-func (client *WorkloadNetworkDnsZonesClient) BeginCreate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsZoneID string, resource WorkloadNetworkDNSZone, options *WorkloadNetworkDnsZonesClientCreateOptions) (*runtime.Poller[WorkloadNetworkDnsZonesClientCreateResponse], error) {
-	if options == nil || options.ResumeToken == "" {
-		resp, err := client.create(ctx, subscriptionID, resourceGroupName, privateCloudName, dnsZoneID, resource, options)
-		if err != nil {
-			return nil, err
-		}
-		poller, err := runtime.NewPoller[WorkloadNetworkDnsZonesClientCreateResponse](resp, client.internal.Pipeline(), nil)
-		return poller, err
-	} else {
-		return runtime.NewPollerFromResumeToken[WorkloadNetworkDnsZonesClientCreateResponse](options.ResumeToken, client.internal.Pipeline(), nil)
-	}
-}
-
-// Create - Create a WorkloadNetworkDnsZone
-func (client *WorkloadNetworkDnsZonesClient) create(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsZoneID string, resource WorkloadNetworkDNSZone, options *WorkloadNetworkDnsZonesClientCreateOptions) (*http.Response, error) {
+func (client *WorkloadNetworkDnsZonesClient) Create(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsZoneID string, workloadNetworkDNSZone WorkloadNetworkDNSZone, options *WorkloadNetworkDnsZonesClientCreateOptions) (WorkloadNetworkDnsZonesClientCreateResponse, error) {
 	var err error
-	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDnsZonesClient.BeginCreate")
-	req, err := client.createCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, dnsZoneID, resource, options)
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDnsZonesClient.Create")
+	req, err := client.createCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, dnsZoneID, workloadNetworkDNSZone, options)
 	if err != nil {
-		return nil, err
+		return WorkloadNetworkDnsZonesClientCreateResponse{}, err
 	}
 	httpResp, err := client.internal.Pipeline().Do(req)
 	if err != nil {
-		return nil, err
+		return WorkloadNetworkDnsZonesClientCreateResponse{}, err
 	}
 	if !runtime.HasStatusCode(httpResp, http.StatusOK, http.StatusCreated) {
 		err = runtime.NewResponseError(httpResp)
-		return nil, err
+		return WorkloadNetworkDnsZonesClientCreateResponse{}, err
 	}
-	return httpResp, nil
+	resp, err := client.createHandleResponse(httpResp)
+	return resp, err
 }
 
 // createCreateRequest creates the Create request.
-func (client *WorkloadNetworkDnsZonesClient) createCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsZoneID string, resource WorkloadNetworkDNSZone, options *WorkloadNetworkDnsZonesClientCreateOptions) (*policy.Request, error) {
+func (client *WorkloadNetworkDnsZonesClient) createCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsZoneID string, workloadNetworkDNSZone WorkloadNetworkDNSZone, options *WorkloadNetworkDnsZonesClientCreateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsZones/{dnsZoneId}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -104,10 +92,27 @@ func (client *WorkloadNetworkDnsZonesClient) createCreateRequest(ctx context.Con
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
-	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+	if err := runtime.MarshalAsJSON(req, workloadNetworkDNSZone); err != nil {
+		return nil, err
+	}
 	return req, nil
+}
+
+// createHandleResponse handles the Create response.
+func (client *WorkloadNetworkDnsZonesClient) createHandleResponse(resp *http.Response) (WorkloadNetworkDnsZonesClientCreateResponse, error) {
+	result := WorkloadNetworkDnsZonesClientCreateResponse{}
+	if val := resp.Header.Get("Retry-After"); val != "" {
+		retryAfter32, err := strconv.ParseInt(val, 10, 32)
+		retryAfter := int32(retryAfter32)
+		if err != nil {
+			return WorkloadNetworkDnsZonesClientCreateResponse{}, err
+		}
+		result.RetryAfter = &retryAfter
+	}
+	if err := runtime.UnmarshalAsJSON(resp, &result.WorkloadNetworkDNSZone); err != nil {
+		return WorkloadNetworkDnsZonesClientCreateResponse{}, err
+	}
+	return result, nil
 }
 
 // BeginDelete - Delete a WorkloadNetworkDnsZone
@@ -250,13 +255,13 @@ func (client *WorkloadNetworkDnsZonesClient) getHandleResponse(resp *http.Respon
 //   - privateCloudName - Name of the private cloud
 //   - options - WorkloadNetworkDnsZonesClientListByWorkloadNetworkOptions contains the optional parameters for the WorkloadNetworkDnsZonesClient.NewListByWorkloadNetworkPager
 //     method.
-func (client *WorkloadNetworkDnsZonesClient) NewListByWorkloadNetworkPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *WorkloadNetworkDnsZonesClientListByWorkloadNetworkOptions) (*runtime.Pager[WorkloadNetworkDnsZonesClientListByWorkloadNetworkResponse]) {
+func (client *WorkloadNetworkDnsZonesClient) NewListByWorkloadNetworkPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *WorkloadNetworkDnsZonesClientListByWorkloadNetworkOptions) *runtime.Pager[WorkloadNetworkDnsZonesClientListByWorkloadNetworkResponse] {
 	return runtime.NewPager(runtime.PagingHandler[WorkloadNetworkDnsZonesClientListByWorkloadNetworkResponse]{
 		More: func(page WorkloadNetworkDnsZonesClientListByWorkloadNetworkResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *WorkloadNetworkDnsZonesClientListByWorkloadNetworkResponse) (WorkloadNetworkDnsZonesClientListByWorkloadNetworkResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDnsZonesClient.NewListByWorkloadNetworkPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDnsZonesClient.NewListByWorkloadNetworkPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -268,7 +273,7 @@ func (client *WorkloadNetworkDnsZonesClient) NewListByWorkloadNetworkPager(subsc
 				return WorkloadNetworkDnsZonesClientListByWorkloadNetworkResponse{}, err
 			}
 			return client.listByWorkloadNetworkHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -312,12 +317,12 @@ func (client *WorkloadNetworkDnsZonesClient) listByWorkloadNetworkHandleResponse
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
 //   - dnsZoneID - ID of the DNS zone.
-//   - properties - The resource properties to be updated.
+//   - workloadNetworkDNSZone - The resource properties to be updated.
 //   - options - WorkloadNetworkDnsZonesClientUpdateOptions contains the optional parameters for the WorkloadNetworkDnsZonesClient.Update
 //     method.
-func (client *WorkloadNetworkDnsZonesClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsZoneID string, properties WorkloadNetworkDNSZoneUpdate, options *WorkloadNetworkDnsZonesClientUpdateOptions) (*runtime.Poller[WorkloadNetworkDnsZonesClientUpdateResponse], error) {
+func (client *WorkloadNetworkDnsZonesClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsZoneID string, workloadNetworkDNSZone WorkloadNetworkDNSZoneUpdate, options *WorkloadNetworkDnsZonesClientUpdateOptions) (*runtime.Poller[WorkloadNetworkDnsZonesClientUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
-		resp, err := client.update(ctx, subscriptionID, resourceGroupName, privateCloudName, dnsZoneID, properties, options)
+		resp, err := client.update(ctx, subscriptionID, resourceGroupName, privateCloudName, dnsZoneID, workloadNetworkDNSZone, options)
 		if err != nil {
 			return nil, err
 		}
@@ -329,10 +334,10 @@ func (client *WorkloadNetworkDnsZonesClient) BeginUpdate(ctx context.Context, su
 }
 
 // Update - Update a WorkloadNetworkDnsZone
-func (client *WorkloadNetworkDnsZonesClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsZoneID string, properties WorkloadNetworkDNSZoneUpdate, options *WorkloadNetworkDnsZonesClientUpdateOptions) (*http.Response, error) {
+func (client *WorkloadNetworkDnsZonesClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsZoneID string, workloadNetworkDNSZone WorkloadNetworkDNSZoneUpdate, options *WorkloadNetworkDnsZonesClientUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDnsZonesClient.BeginUpdate")
-	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, dnsZoneID, properties, options)
+	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, dnsZoneID, workloadNetworkDNSZone, options)
 	if err != nil {
 		return nil, err
 	}
@@ -348,7 +353,7 @@ func (client *WorkloadNetworkDnsZonesClient) update(ctx context.Context, subscri
 }
 
 // updateCreateRequest creates the Update request.
-func (client *WorkloadNetworkDnsZonesClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsZoneID string, properties WorkloadNetworkDNSZoneUpdate, options *WorkloadNetworkDnsZonesClientUpdateOptions) (*policy.Request, error) {
+func (client *WorkloadNetworkDnsZonesClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dnsZoneID string, workloadNetworkDNSZone WorkloadNetworkDNSZoneUpdate, options *WorkloadNetworkDnsZonesClientUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dnsZones/{dnsZoneId}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -375,9 +380,8 @@ func (client *WorkloadNetworkDnsZonesClient) updateCreateRequest(ctx context.Con
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
-	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+	if err := runtime.MarshalAsJSON(req, workloadNetworkDNSZone); err != nil {
+		return nil, err
+	}
 	return req, nil
 }
-

@@ -19,7 +19,7 @@ import (
 )
 
 // AccountsServer is a fake server for instances of the armcodesigning.AccountsClient type.
-type AccountsServer struct{
+type AccountsServer struct {
 	// CheckNameAvailability is the fake for method AccountsClient.CheckNameAvailability
 	// HTTP status codes to indicate success: http.StatusOK
 	CheckNameAvailability func(ctx context.Context, subscriptionID string, body armcodesigning.CheckNameAvailability, options *armcodesigning.AccountsClientCheckNameAvailabilityOptions) (resp azfake.Responder[armcodesigning.AccountsClientCheckNameAvailabilityResponse], errResp azfake.ErrorResponder)
@@ -47,7 +47,6 @@ type AccountsServer struct{
 	// BeginUpdate is the fake for method AccountsClient.BeginUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
 	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, properties armcodesigning.AccountPatch, options *armcodesigning.AccountsClientUpdateOptions) (resp azfake.PollerResponder[armcodesigning.AccountsClientUpdateResponse], errResp azfake.ErrorResponder)
-
 }
 
 // NewAccountsServerTransport creates a new instance of AccountsServerTransport with the provided implementation.
@@ -55,24 +54,24 @@ type AccountsServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewAccountsServerTransport(srv *AccountsServer) *AccountsServerTransport {
 	return &AccountsServerTransport{
-		srv: srv,
-		beginCreate: newTracker[azfake.PollerResponder[armcodesigning.AccountsClientCreateResponse]](),
-		beginDelete: newTracker[azfake.PollerResponder[armcodesigning.AccountsClientDeleteResponse]](),
+		srv:                         srv,
+		beginCreate:                 newTracker[azfake.PollerResponder[armcodesigning.AccountsClientCreateResponse]](),
+		beginDelete:                 newTracker[azfake.PollerResponder[armcodesigning.AccountsClientDeleteResponse]](),
 		newListByResourceGroupPager: newTracker[azfake.PagerResponder[armcodesigning.AccountsClientListByResourceGroupResponse]](),
-		newListBySubscriptionPager: newTracker[azfake.PagerResponder[armcodesigning.AccountsClientListBySubscriptionResponse]](),
-		beginUpdate: newTracker[azfake.PollerResponder[armcodesigning.AccountsClientUpdateResponse]](),
+		newListBySubscriptionPager:  newTracker[azfake.PagerResponder[armcodesigning.AccountsClientListBySubscriptionResponse]](),
+		beginUpdate:                 newTracker[azfake.PollerResponder[armcodesigning.AccountsClientUpdateResponse]](),
 	}
 }
 
 // AccountsServerTransport connects instances of armcodesigning.AccountsClient to instances of AccountsServer.
 // Don't use this type directly, use NewAccountsServerTransport instead.
 type AccountsServerTransport struct {
-	srv *AccountsServer
-	beginCreate *tracker[azfake.PollerResponder[armcodesigning.AccountsClientCreateResponse]]
-	beginDelete *tracker[azfake.PollerResponder[armcodesigning.AccountsClientDeleteResponse]]
+	srv                         *AccountsServer
+	beginCreate                 *tracker[azfake.PollerResponder[armcodesigning.AccountsClientCreateResponse]]
+	beginDelete                 *tracker[azfake.PollerResponder[armcodesigning.AccountsClientDeleteResponse]]
 	newListByResourceGroupPager *tracker[azfake.PagerResponder[armcodesigning.AccountsClientListByResourceGroupResponse]]
-	newListBySubscriptionPager *tracker[azfake.PagerResponder[armcodesigning.AccountsClientListBySubscriptionResponse]]
-	beginUpdate *tracker[azfake.PollerResponder[armcodesigning.AccountsClientUpdateResponse]]
+	newListBySubscriptionPager  *tracker[azfake.PagerResponder[armcodesigning.AccountsClientListBySubscriptionResponse]]
+	beginUpdate                 *tracker[azfake.PollerResponder[armcodesigning.AccountsClientUpdateResponse]]
 }
 
 // Do implements the policy.Transporter interface for AccountsServerTransport.
@@ -151,32 +150,32 @@ func (a *AccountsServerTransport) dispatchBeginCreate(req *http.Request) (*http.
 	}
 	beginCreate := a.beginCreate.get(req)
 	if beginCreate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.CodeSigning/codeSigningAccounts/(?P<accountName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armcodesigning.Account](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	accountNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("accountName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := a.srv.BeginCreate(req.Context(), subscriptionIDParam, resourceGroupNameParam, accountNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.CodeSigning/codeSigningAccounts/(?P<accountName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armcodesigning.Account](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		accountNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("accountName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := a.srv.BeginCreate(req.Context(), subscriptionIDParam, resourceGroupNameParam, accountNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginCreate = &respr
 		a.beginCreate.add(req, beginCreate)
 	}
@@ -203,28 +202,28 @@ func (a *AccountsServerTransport) dispatchBeginDelete(req *http.Request) (*http.
 	}
 	beginDelete := a.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.CodeSigning/codeSigningAccounts/(?P<accountName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	accountNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("accountName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := a.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, accountNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.CodeSigning/codeSigningAccounts/(?P<accountName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		accountNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("accountName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := a.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, accountNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		a.beginDelete.add(req, beginDelete)
 	}
@@ -288,21 +287,21 @@ func (a *AccountsServerTransport) dispatchNewListByResourceGroupPager(req *http.
 	}
 	newListByResourceGroupPager := a.newListByResourceGroupPager.get(req)
 	if newListByResourceGroupPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.CodeSigning/codeSigningAccounts`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 2 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-resp := a.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.CodeSigning/codeSigningAccounts`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 2 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := a.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
 		newListByResourceGroupPager = &resp
 		a.newListByResourceGroupPager.add(req, newListByResourceGroupPager)
 		server.PagerResponderInjectNextLinks(newListByResourceGroupPager, req, func(page *armcodesigning.AccountsClientListByResourceGroupResponse, createLink func() string) {
@@ -329,17 +328,17 @@ func (a *AccountsServerTransport) dispatchNewListBySubscriptionPager(req *http.R
 	}
 	newListBySubscriptionPager := a.newListBySubscriptionPager.get(req)
 	if newListBySubscriptionPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.CodeSigning/codeSigningAccounts`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 1 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-resp := a.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.CodeSigning/codeSigningAccounts`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 1 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resp := a.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
 		newListBySubscriptionPager = &resp
 		a.newListBySubscriptionPager.add(req, newListBySubscriptionPager)
 		server.PagerResponderInjectNextLinks(newListBySubscriptionPager, req, func(page *armcodesigning.AccountsClientListBySubscriptionResponse, createLink func() string) {
@@ -366,32 +365,32 @@ func (a *AccountsServerTransport) dispatchBeginUpdate(req *http.Request) (*http.
 	}
 	beginUpdate := a.beginUpdate.get(req)
 	if beginUpdate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.CodeSigning/codeSigningAccounts/(?P<accountName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armcodesigning.AccountPatch](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	accountNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("accountName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := a.srv.BeginUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, accountNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.CodeSigning/codeSigningAccounts/(?P<accountName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armcodesigning.AccountPatch](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		accountNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("accountName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := a.srv.BeginUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, accountNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginUpdate = &respr
 		a.beginUpdate.add(req, beginUpdate)
 	}
@@ -411,4 +410,3 @@ func (a *AccountsServerTransport) dispatchBeginUpdate(req *http.Request) (*http.
 
 	return resp, nil
 }
-

@@ -19,7 +19,7 @@ import (
 )
 
 // VolumesServer is a fake server for instances of the armcontainerstorage.VolumesClient type.
-type VolumesServer struct{
+type VolumesServer struct {
 	// BeginCreateOrUpdate is the fake for method VolumesClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
 	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, resource armcontainerstorage.Volume, options *armcontainerstorage.VolumesClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armcontainerstorage.VolumesClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
@@ -39,7 +39,6 @@ type VolumesServer struct{
 	// BeginUpdate is the fake for method VolumesClient.BeginUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
 	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, volumeName string, properties armcontainerstorage.VolumeUpdate, options *armcontainerstorage.VolumesClientUpdateOptions) (resp azfake.PollerResponder[armcontainerstorage.VolumesClientUpdateResponse], errResp azfake.ErrorResponder)
-
 }
 
 // NewVolumesServerTransport creates a new instance of VolumesServerTransport with the provided implementation.
@@ -47,22 +46,22 @@ type VolumesServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewVolumesServerTransport(srv *VolumesServer) *VolumesServerTransport {
 	return &VolumesServerTransport{
-		srv: srv,
+		srv:                 srv,
 		beginCreateOrUpdate: newTracker[azfake.PollerResponder[armcontainerstorage.VolumesClientCreateOrUpdateResponse]](),
-		beginDelete: newTracker[azfake.PollerResponder[armcontainerstorage.VolumesClientDeleteResponse]](),
-		newListByPoolPager: newTracker[azfake.PagerResponder[armcontainerstorage.VolumesClientListByPoolResponse]](),
-		beginUpdate: newTracker[azfake.PollerResponder[armcontainerstorage.VolumesClientUpdateResponse]](),
+		beginDelete:         newTracker[azfake.PollerResponder[armcontainerstorage.VolumesClientDeleteResponse]](),
+		newListByPoolPager:  newTracker[azfake.PagerResponder[armcontainerstorage.VolumesClientListByPoolResponse]](),
+		beginUpdate:         newTracker[azfake.PollerResponder[armcontainerstorage.VolumesClientUpdateResponse]](),
 	}
 }
 
 // VolumesServerTransport connects instances of armcontainerstorage.VolumesClient to instances of VolumesServer.
 // Don't use this type directly, use NewVolumesServerTransport instead.
 type VolumesServerTransport struct {
-	srv *VolumesServer
+	srv                 *VolumesServer
 	beginCreateOrUpdate *tracker[azfake.PollerResponder[armcontainerstorage.VolumesClientCreateOrUpdateResponse]]
-	beginDelete *tracker[azfake.PollerResponder[armcontainerstorage.VolumesClientDeleteResponse]]
-	newListByPoolPager *tracker[azfake.PagerResponder[armcontainerstorage.VolumesClientListByPoolResponse]]
-	beginUpdate *tracker[azfake.PollerResponder[armcontainerstorage.VolumesClientUpdateResponse]]
+	beginDelete         *tracker[azfake.PollerResponder[armcontainerstorage.VolumesClientDeleteResponse]]
+	newListByPoolPager  *tracker[azfake.PagerResponder[armcontainerstorage.VolumesClientListByPoolResponse]]
+	beginUpdate         *tracker[azfake.PollerResponder[armcontainerstorage.VolumesClientUpdateResponse]]
 }
 
 // Do implements the policy.Transporter interface for VolumesServerTransport.
@@ -104,36 +103,36 @@ func (v *VolumesServerTransport) dispatchBeginCreateOrUpdate(req *http.Request) 
 	}
 	beginCreateOrUpdate := v.beginCreateOrUpdate.get(req)
 	if beginCreateOrUpdate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ContainerStorage/pools/(?P<poolName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/volumes/(?P<volumeName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armcontainerstorage.Volume](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	poolNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("poolName")])
-	if err != nil {
-		return nil, err
-	}
-	volumeNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("volumeName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := v.srv.BeginCreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, poolNameParam, volumeNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ContainerStorage/pools/(?P<poolName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/volumes/(?P<volumeName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armcontainerstorage.Volume](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		poolNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("poolName")])
+		if err != nil {
+			return nil, err
+		}
+		volumeNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("volumeName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := v.srv.BeginCreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, poolNameParam, volumeNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginCreateOrUpdate = &respr
 		v.beginCreateOrUpdate.add(req, beginCreateOrUpdate)
 	}
@@ -160,32 +159,32 @@ func (v *VolumesServerTransport) dispatchBeginDelete(req *http.Request) (*http.R
 	}
 	beginDelete := v.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ContainerStorage/pools/(?P<poolName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/volumes/(?P<volumeName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	poolNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("poolName")])
-	if err != nil {
-		return nil, err
-	}
-	volumeNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("volumeName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := v.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, poolNameParam, volumeNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ContainerStorage/pools/(?P<poolName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/volumes/(?P<volumeName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		poolNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("poolName")])
+		if err != nil {
+			return nil, err
+		}
+		volumeNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("volumeName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := v.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, poolNameParam, volumeNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		v.beginDelete.add(req, beginDelete)
 	}
@@ -253,25 +252,25 @@ func (v *VolumesServerTransport) dispatchNewListByPoolPager(req *http.Request) (
 	}
 	newListByPoolPager := v.newListByPoolPager.get(req)
 	if newListByPoolPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ContainerStorage/pools/(?P<poolName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/volumes`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	poolNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("poolName")])
-	if err != nil {
-		return nil, err
-	}
-resp := v.srv.NewListByPoolPager(subscriptionIDParam, resourceGroupNameParam, poolNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ContainerStorage/pools/(?P<poolName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/volumes`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		poolNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("poolName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := v.srv.NewListByPoolPager(subscriptionIDParam, resourceGroupNameParam, poolNameParam, nil)
 		newListByPoolPager = &resp
 		v.newListByPoolPager.add(req, newListByPoolPager)
 		server.PagerResponderInjectNextLinks(newListByPoolPager, req, func(page *armcontainerstorage.VolumesClientListByPoolResponse, createLink func() string) {
@@ -298,36 +297,36 @@ func (v *VolumesServerTransport) dispatchBeginUpdate(req *http.Request) (*http.R
 	}
 	beginUpdate := v.beginUpdate.get(req)
 	if beginUpdate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ContainerStorage/pools/(?P<poolName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/volumes/(?P<volumeName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armcontainerstorage.VolumeUpdate](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	poolNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("poolName")])
-	if err != nil {
-		return nil, err
-	}
-	volumeNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("volumeName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := v.srv.BeginUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, poolNameParam, volumeNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ContainerStorage/pools/(?P<poolName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/volumes/(?P<volumeName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armcontainerstorage.VolumeUpdate](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		poolNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("poolName")])
+		if err != nil {
+			return nil, err
+		}
+		volumeNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("volumeName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := v.srv.BeginUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, poolNameParam, volumeNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginUpdate = &respr
 		v.beginUpdate.add(req, beginUpdate)
 	}
@@ -347,4 +346,3 @@ func (v *VolumesServerTransport) dispatchBeginUpdate(req *http.Request) (*http.R
 
 	return resp, nil
 }
-

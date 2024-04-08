@@ -24,7 +24,7 @@ func NewAzureSphereClient(credential azcore.TokenCredential, options *arm.Client
 		return nil, err
 	}
 	client := &AzureSphereClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -84,4 +84,3 @@ func (client *AzureSphereClient) NewAzureSphereProductsClient() *AzureSphereProd
 		internal: client.internal,
 	}
 }
-

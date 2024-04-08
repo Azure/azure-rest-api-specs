@@ -31,7 +31,7 @@ func NewScriptCmdletsClient(credential azcore.TokenCredential, options *arm.Clie
 		return nil, err
 	}
 	client := &ScriptCmdletsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -112,13 +112,13 @@ func (client *ScriptCmdletsClient) getHandleResponse(resp *http.Response) (Scrip
 //   - scriptPackageName - Name of the script package.
 //   - options - ScriptCmdletsClientListByScriptPackageOptions contains the optional parameters for the ScriptCmdletsClient.NewListByScriptPackagePager
 //     method.
-func (client *ScriptCmdletsClient) NewListByScriptPackagePager(subscriptionID string, resourceGroupName string, privateCloudName string, scriptPackageName string, options *ScriptCmdletsClientListByScriptPackageOptions) (*runtime.Pager[ScriptCmdletsClientListByScriptPackageResponse]) {
+func (client *ScriptCmdletsClient) NewListByScriptPackagePager(subscriptionID string, resourceGroupName string, privateCloudName string, scriptPackageName string, options *ScriptCmdletsClientListByScriptPackageOptions) *runtime.Pager[ScriptCmdletsClientListByScriptPackageResponse] {
 	return runtime.NewPager(runtime.PagingHandler[ScriptCmdletsClientListByScriptPackageResponse]{
 		More: func(page ScriptCmdletsClientListByScriptPackageResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *ScriptCmdletsClientListByScriptPackageResponse) (ScriptCmdletsClientListByScriptPackageResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ScriptCmdletsClient.NewListByScriptPackagePager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ScriptCmdletsClient.NewListByScriptPackagePager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -130,7 +130,7 @@ func (client *ScriptCmdletsClient) NewListByScriptPackagePager(subscriptionID st
 				return ScriptCmdletsClientListByScriptPackageResponse{}, err
 			}
 			return client.listByScriptPackageHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -172,4 +172,3 @@ func (client *ScriptCmdletsClient) listByScriptPackageHandleResponse(resp *http.
 	}
 	return result, nil
 }
-

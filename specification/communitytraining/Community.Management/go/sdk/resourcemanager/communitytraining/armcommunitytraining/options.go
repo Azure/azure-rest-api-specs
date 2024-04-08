@@ -44,4 +44,3 @@ type CommunityCommunityTrainingsClientUpdateOptions struct {
 type CommunityOperationsClientListOptions struct {
 	// placeholder for future optional parameters
 }
-

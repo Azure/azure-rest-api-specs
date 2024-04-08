@@ -24,7 +24,7 @@ func NewClient(credential azcore.TokenCredential, options *arm.ClientOptions) (*
 		return nil, err
 	}
 	client := &Client{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -210,4 +210,3 @@ func (client *Client) NewWorkloadNetworksClient() *WorkloadNetworksClient {
 		internal: client.internal,
 	}
 }
-

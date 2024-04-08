@@ -228,6 +228,9 @@ type OperationsClientListResponse struct {
 type PlacementPoliciesClientCreateOrUpdateResponse struct {
 	// A vSphere Distributed Resource Scheduler (DRS) placement policy
 	PlacementPolicy
+
+	// The Retry-After header can indicate how long the client should wait before polling the operation status.
+	RetryAfter *int32
 }
 
 // PlacementPoliciesClientDeleteResponse contains the response from method PlacementPoliciesClient.Delete.
@@ -390,6 +393,9 @@ type VirtualMachinesClientRestrictMovementResponse struct {
 type WorkloadNetworkDhcpConfigurationsClientCreateResponse struct {
 	// NSX DHCP
 	WorkloadNetworkDhcp
+
+	// The Retry-After header can indicate how long the client should wait before polling the operation status.
+	RetryAfter *int32
 }
 
 // WorkloadNetworkDhcpConfigurationsClientDeleteResponse contains the response from method WorkloadNetworkDhcpConfigurationsClient.Delete.
@@ -419,6 +425,9 @@ type WorkloadNetworkDhcpConfigurationsClientUpdateResponse struct {
 type WorkloadNetworkDnsServicesClientCreateResponse struct {
 	// NSX DNS Service
 	WorkloadNetworkDNSService
+
+	// The Retry-After header can indicate how long the client should wait before polling the operation status.
+	RetryAfter *int32
 }
 
 // WorkloadNetworkDnsServicesClientDeleteResponse contains the response from method WorkloadNetworkDnsServicesClient.Delete.
@@ -448,6 +457,9 @@ type WorkloadNetworkDnsServicesClientUpdateResponse struct {
 type WorkloadNetworkDnsZonesClientCreateResponse struct {
 	// NSX DNS Zone
 	WorkloadNetworkDNSZone
+
+	// The Retry-After header can indicate how long the client should wait before polling the operation status.
+	RetryAfter *int32
 }
 
 // WorkloadNetworkDnsZonesClientDeleteResponse contains the response from method WorkloadNetworkDnsZonesClient.Delete.
@@ -489,6 +501,9 @@ type WorkloadNetworkGatewaysClientListByWorkloadNetworkResponse struct {
 type WorkloadNetworkPortMirroringProfilesClientCreateResponse struct {
 	// NSX Port Mirroring
 	WorkloadNetworkPortMirroring
+
+	// The Retry-After header can indicate how long the client should wait before polling the operation status.
+	RetryAfter *int32
 }
 
 // WorkloadNetworkPortMirroringProfilesClientDeleteResponse contains the response from method WorkloadNetworkPortMirroringProfilesClient.Delete.
@@ -518,6 +533,9 @@ type WorkloadNetworkPortMirroringProfilesClientUpdateResponse struct {
 type WorkloadNetworkPublicIpsClientCreateResponse struct {
 	// NSX Public IP Block
 	WorkloadNetworkPublicIP
+
+	// The Retry-After header can indicate how long the client should wait before polling the operation status.
+	RetryAfter *int32
 }
 
 // WorkloadNetworkPublicIpsClientDeleteResponse contains the response from method WorkloadNetworkPublicIpsClient.Delete.
@@ -541,6 +559,9 @@ type WorkloadNetworkPublicIpsClientListByWorkloadNetworkResponse struct {
 type WorkloadNetworkSegmentsClientCreateResponse struct {
 	// NSX Segment
 	WorkloadNetworkSegment
+
+	// The Retry-After header can indicate how long the client should wait before polling the operation status.
+	RetryAfter *int32
 }
 
 // WorkloadNetworkSegmentsClientDeleteSegmentResponse contains the response from method WorkloadNetworkSegmentsClient.DeleteSegment.
@@ -582,6 +603,9 @@ type WorkloadNetworkVirtualMachinesClientListByWorkloadNetworkResponse struct {
 type WorkloadNetworkVmGroupsClientCreateResponse struct {
 	// NSX VM Group
 	WorkloadNetworkVMGroup
+
+	// The Retry-After header can indicate how long the client should wait before polling the operation status.
+	RetryAfter *int32
 }
 
 // WorkloadNetworkVmGroupsClientDeleteResponse contains the response from method WorkloadNetworkVmGroupsClient.Delete.
@@ -618,4 +642,3 @@ type WorkloadNetworksClientListByPrivateCloudResponse struct {
 	// The response of a WorkloadNetwork list operation.
 	WorkloadNetworkListResult
 }
-

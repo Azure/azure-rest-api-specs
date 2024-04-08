@@ -31,7 +31,7 @@ func NewDeploymentsClient(credential azcore.TokenCredential, options *arm.Client
 		return nil, err
 	}
 	client := &DeploymentsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -102,8 +102,8 @@ func (client *DeploymentsClient) createOrUpdateCreateRequest(ctx context.Context
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, payload); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -331,13 +331,13 @@ func (client *DeploymentsClient) headCreateRequest(ctx context.Context, subscrip
 //   - workspaceName - The name of the workspace.
 //   - apiName - The name of the API.
 //   - options - DeploymentsClientListOptions contains the optional parameters for the DeploymentsClient.NewListPager method.
-func (client *DeploymentsClient) NewListPager(subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, options *DeploymentsClientListOptions) (*runtime.Pager[DeploymentsClientListResponse]) {
+func (client *DeploymentsClient) NewListPager(subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, options *DeploymentsClientListOptions) *runtime.Pager[DeploymentsClientListResponse] {
 	return runtime.NewPager(runtime.PagingHandler[DeploymentsClientListResponse]{
 		More: func(page DeploymentsClientListResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *DeploymentsClientListResponse) (DeploymentsClientListResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DeploymentsClient.NewListPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DeploymentsClient.NewListPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -349,7 +349,7 @@ func (client *DeploymentsClient) NewListPager(subscriptionID string, resourceGro
 				return DeploymentsClientListResponse{}, err
 			}
 			return client.listHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -398,4 +398,3 @@ func (client *DeploymentsClient) listHandleResponse(resp *http.Response) (Deploy
 	}
 	return result, nil
 }
-

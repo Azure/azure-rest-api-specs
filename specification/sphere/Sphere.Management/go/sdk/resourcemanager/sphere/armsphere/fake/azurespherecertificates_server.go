@@ -20,7 +20,7 @@ import (
 )
 
 // AzureSphereCertificatesServer is a fake server for instances of the armsphere.AzureSphereCertificatesClient type.
-type AzureSphereCertificatesServer struct{
+type AzureSphereCertificatesServer struct {
 	// Get is the fake for method AzureSphereCertificatesClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
 	Get func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, serialNumber string, options *armsphere.AzureSphereCertificatesClientGetOptions) (resp azfake.Responder[armsphere.AzureSphereCertificatesClientGetResponse], errResp azfake.ErrorResponder)
@@ -36,7 +36,6 @@ type AzureSphereCertificatesServer struct{
 	// RetrieveProofOfPossessionNonce is the fake for method AzureSphereCertificatesClient.RetrieveProofOfPossessionNonce
 	// HTTP status codes to indicate success: http.StatusOK
 	RetrieveProofOfPossessionNonce func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, serialNumber string, body armsphere.ProofOfPossessionNonceRequest, options *armsphere.AzureSphereCertificatesClientRetrieveProofOfPossessionNonceOptions) (resp azfake.Responder[armsphere.AzureSphereCertificatesClientRetrieveProofOfPossessionNonceResponse], errResp azfake.ErrorResponder)
-
 }
 
 // NewAzureSphereCertificatesServerTransport creates a new instance of AzureSphereCertificatesServerTransport with the provided implementation.
@@ -44,7 +43,7 @@ type AzureSphereCertificatesServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewAzureSphereCertificatesServerTransport(srv *AzureSphereCertificatesServer) *AzureSphereCertificatesServerTransport {
 	return &AzureSphereCertificatesServerTransport{
-		srv: srv,
+		srv:                   srv,
 		newListByCatalogPager: newTracker[azfake.PagerResponder[armsphere.AzureSphereCertificatesClientListByCatalogResponse]](),
 	}
 }
@@ -52,7 +51,7 @@ func NewAzureSphereCertificatesServerTransport(srv *AzureSphereCertificatesServe
 // AzureSphereCertificatesServerTransport connects instances of armsphere.AzureSphereCertificatesClient to instances of AzureSphereCertificatesServer.
 // Don't use this type directly, use NewAzureSphereCertificatesServerTransport instead.
 type AzureSphereCertificatesServerTransport struct {
-	srv *AzureSphereCertificatesServer
+	srv                   *AzureSphereCertificatesServer
 	newListByCatalogPager *tracker[azfake.PagerResponder[armsphere.AzureSphereCertificatesClientListByCatalogResponse]]
 }
 
@@ -134,82 +133,82 @@ func (a *AzureSphereCertificatesServerTransport) dispatchNewListByCatalogPager(r
 	}
 	newListByCatalogPager := a.newListByCatalogPager.get(req)
 	if newListByCatalogPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureSphere/catalogs/(?P<catalogName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/certificates`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	qp := req.URL.Query()
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	filterUnescaped, err := url.QueryUnescape(qp.Get("$filter"))
-	if err != nil {
-		return nil, err
-	}
-	filterParam := getOptional(filterUnescaped)
-	topUnescaped, err := url.QueryUnescape(qp.Get("$top"))
-	if err != nil {
-		return nil, err
-	}
-	topParam, err := parseOptional(topUnescaped, func(v string) (int32, error) {
-		p, parseErr := strconv.ParseInt(v, 10, 32)
-		if parseErr != nil {
-			return 0, parseErr
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureSphere/catalogs/(?P<catalogName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/certificates`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
 		}
-		return int32(p), nil
-	})
-	if err != nil {
-		return nil, err
-	}
-	skipUnescaped, err := url.QueryUnescape(qp.Get("$skip"))
-	if err != nil {
-		return nil, err
-	}
-	skipParam, err := parseOptional(skipUnescaped, func(v string) (int32, error) {
-		p, parseErr := strconv.ParseInt(v, 10, 32)
-		if parseErr != nil {
-			return 0, parseErr
+		qp := req.URL.Query()
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
 		}
-		return int32(p), nil
-	})
-	if err != nil {
-		return nil, err
-	}
-	maxpagesizeUnescaped, err := url.QueryUnescape(qp.Get("$maxpagesize"))
-	if err != nil {
-		return nil, err
-	}
-	maxpagesizeParam, err := parseOptional(maxpagesizeUnescaped, func(v string) (int32, error) {
-		p, parseErr := strconv.ParseInt(v, 10, 32)
-		if parseErr != nil {
-			return 0, parseErr
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
 		}
-		return int32(p), nil
-	})
-	if err != nil {
-		return nil, err
-	}
-	catalogNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("catalogName")])
-	if err != nil {
-		return nil, err
-	}
-	var options *armsphere.AzureSphereCertificatesClientListByCatalogOptions
-	if filterParam != nil || topParam != nil || skipParam != nil || maxpagesizeParam != nil {
-		options = &armsphere.AzureSphereCertificatesClientListByCatalogOptions{
-			Filter: filterParam,
-			Top: topParam,
-			Skip: skipParam,
-			Maxpagesize: maxpagesizeParam,
+		filterUnescaped, err := url.QueryUnescape(qp.Get("$filter"))
+		if err != nil {
+			return nil, err
 		}
-	}
-resp := a.srv.NewListByCatalogPager(subscriptionIDParam, resourceGroupNameParam, catalogNameParam, options)
+		filterParam := getOptional(filterUnescaped)
+		topUnescaped, err := url.QueryUnescape(qp.Get("$top"))
+		if err != nil {
+			return nil, err
+		}
+		topParam, err := parseOptional(topUnescaped, func(v string) (int32, error) {
+			p, parseErr := strconv.ParseInt(v, 10, 32)
+			if parseErr != nil {
+				return 0, parseErr
+			}
+			return int32(p), nil
+		})
+		if err != nil {
+			return nil, err
+		}
+		skipUnescaped, err := url.QueryUnescape(qp.Get("$skip"))
+		if err != nil {
+			return nil, err
+		}
+		skipParam, err := parseOptional(skipUnescaped, func(v string) (int32, error) {
+			p, parseErr := strconv.ParseInt(v, 10, 32)
+			if parseErr != nil {
+				return 0, parseErr
+			}
+			return int32(p), nil
+		})
+		if err != nil {
+			return nil, err
+		}
+		maxpagesizeUnescaped, err := url.QueryUnescape(qp.Get("$maxpagesize"))
+		if err != nil {
+			return nil, err
+		}
+		maxpagesizeParam, err := parseOptional(maxpagesizeUnescaped, func(v string) (int32, error) {
+			p, parseErr := strconv.ParseInt(v, 10, 32)
+			if parseErr != nil {
+				return 0, parseErr
+			}
+			return int32(p), nil
+		})
+		if err != nil {
+			return nil, err
+		}
+		catalogNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("catalogName")])
+		if err != nil {
+			return nil, err
+		}
+		var options *armsphere.AzureSphereCertificatesClientListByCatalogOptions
+		if filterParam != nil || topParam != nil || skipParam != nil || maxpagesizeParam != nil {
+			options = &armsphere.AzureSphereCertificatesClientListByCatalogOptions{
+				Filter:      filterParam,
+				Top:         topParam,
+				Skip:        skipParam,
+				Maxpagesize: maxpagesizeParam,
+			}
+		}
+		resp := a.srv.NewListByCatalogPager(subscriptionIDParam, resourceGroupNameParam, catalogNameParam, options)
 		newListByCatalogPager = &resp
 		a.newListByCatalogPager.add(req, newListByCatalogPager)
 		server.PagerResponderInjectNextLinks(newListByCatalogPager, req, func(page *armsphere.AzureSphereCertificatesClientListByCatalogResponse, createLink func() string) {
@@ -319,4 +318,3 @@ func (a *AzureSphereCertificatesServerTransport) dispatchRetrieveProofOfPossessi
 	}
 	return resp, nil
 }
-

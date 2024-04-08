@@ -7,7 +7,7 @@ package armnetworkanalytics
 const host = "https://management.azure.com"
 
 const (
-	moduleName = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/networkanalytics/armnetworkanalytics"
+	moduleName    = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/networkanalytics/armnetworkanalytics"
 	moduleVersion = "v0.1.0"
 )
 
@@ -21,7 +21,7 @@ const (
 
 // PossibleActionTypeValues returns the possible values for the ActionType const type.
 func PossibleActionTypeValues() []ActionType {
-	return []ActionType{	
+	return []ActionType{
 		ActionTypeInternal,
 	}
 }
@@ -38,7 +38,7 @@ const (
 
 // PossibleControlStateValues returns the possible values for the ControlState const type.
 func PossibleControlStateValues() []ControlState {
-	return []ControlState{	
+	return []ControlState{
 		ControlStateDisabled,
 		ControlStateEnabled,
 	}
@@ -60,7 +60,7 @@ const (
 
 // PossibleCreatedByTypeValues returns the possible values for the CreatedByType const type.
 func PossibleCreatedByTypeValues() []CreatedByType {
-	return []CreatedByType{	
+	return []CreatedByType{
 		CreatedByTypeApplication,
 		CreatedByTypeKey,
 		CreatedByTypeManagedIdentity,
@@ -75,13 +75,13 @@ const (
 	// DataProductUserRoleReader - Field to specify user of type Reader.
 	DataProductUserRoleReader DataProductUserRole = "Reader"
 	// DataProductUserRoleSensitiveReader - Field to specify user of type SensitiveReader.
-// This user has privileged access to read sensitive data of a data product.
+	// This user has privileged access to read sensitive data of a data product.
 	DataProductUserRoleSensitiveReader DataProductUserRole = "SensitiveReader"
 )
 
 // PossibleDataProductUserRoleValues returns the possible values for the DataProductUserRole const type.
 func PossibleDataProductUserRoleValues() []DataProductUserRole {
-	return []DataProductUserRole{	
+	return []DataProductUserRole{
 		DataProductUserRoleReader,
 		DataProductUserRoleSensitiveReader,
 	}
@@ -99,7 +99,7 @@ const (
 
 // PossibleDataTypeStateValues returns the possible values for the DataTypeState const type.
 func PossibleDataTypeStateValues() []DataTypeState {
-	return []DataTypeState{	
+	return []DataTypeState{
 		DataTypeStateRunning,
 		DataTypeStateStopped,
 	}
@@ -117,7 +117,7 @@ const (
 
 // PossibleDefaultActionValues returns the possible values for the DefaultAction const type.
 func PossibleDefaultActionValues() []DefaultAction {
-	return []DefaultAction{	
+	return []DefaultAction{
 		DefaultActionAllow,
 		DefaultActionDeny,
 	}
@@ -139,7 +139,7 @@ const (
 
 // PossibleManagedIdentityTypeValues returns the possible values for the ManagedIdentityType const type.
 func PossibleManagedIdentityTypeValues() []ManagedIdentityType {
-	return []ManagedIdentityType{	
+	return []ManagedIdentityType{
 		ManagedIdentityTypeNone,
 		ManagedIdentityTypeSystemAndUserAssigned,
 		ManagedIdentityTypeSystemAssigned,
@@ -162,7 +162,7 @@ const (
 
 // PossibleOriginValues returns the possible values for the Origin const type.
 func PossibleOriginValues() []Origin {
-	return []Origin{	
+	return []Origin{
 		OriginSystem,
 		OriginUser,
 		OriginUserSystem,
@@ -191,7 +191,7 @@ const (
 
 // PossibleProvisioningStateValues returns the possible values for the ProvisioningState const type.
 func PossibleProvisioningStateValues() []ProvisioningState {
-	return []ProvisioningState{	
+	return []ProvisioningState{
 		ProvisioningStateAccepted,
 		ProvisioningStateCanceled,
 		ProvisioningStateDeleting,
@@ -201,25 +201,3 @@ func PossibleProvisioningStateValues() []ProvisioningState {
 		ProvisioningStateUpdating,
 	}
 }
-
-// ResourceProvisioningState - The provisioning state of a resource type.
-type ResourceProvisioningState string
-
-const (
-	// ResourceProvisioningStateCanceled - Resource creation was canceled.
-	ResourceProvisioningStateCanceled ResourceProvisioningState = "Canceled"
-	// ResourceProvisioningStateFailed - Resource creation failed.
-	ResourceProvisioningStateFailed ResourceProvisioningState = "Failed"
-	// ResourceProvisioningStateSucceeded - Resource has been created.
-	ResourceProvisioningStateSucceeded ResourceProvisioningState = "Succeeded"
-)
-
-// PossibleResourceProvisioningStateValues returns the possible values for the ResourceProvisioningState const type.
-func PossibleResourceProvisioningStateValues() []ResourceProvisioningState {
-	return []ResourceProvisioningState{	
-		ResourceProvisioningStateCanceled,
-		ResourceProvisioningStateFailed,
-		ResourceProvisioningStateSucceeded,
-	}
-}
-

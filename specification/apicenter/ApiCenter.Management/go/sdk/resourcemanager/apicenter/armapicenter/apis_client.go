@@ -31,7 +31,7 @@ func NewApisClient(credential azcore.TokenCredential, options *arm.ClientOptions
 		return nil, err
 	}
 	client := &ApisClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -96,8 +96,8 @@ func (client *ApisClient) createOrUpdateCreateRequest(ctx context.Context, subsc
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, payload); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -309,13 +309,13 @@ func (client *ApisClient) headCreateRequest(ctx context.Context, subscriptionID 
 //   - serviceName - The name of Azure API Center service.
 //   - workspaceName - The name of the workspace.
 //   - options - ApisClientListOptions contains the optional parameters for the ApisClient.NewListPager method.
-func (client *ApisClient) NewListPager(subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, options *ApisClientListOptions) (*runtime.Pager[ApisClientListResponse]) {
+func (client *ApisClient) NewListPager(subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, options *ApisClientListOptions) *runtime.Pager[ApisClientListResponse] {
 	return runtime.NewPager(runtime.PagingHandler[ApisClientListResponse]{
 		More: func(page ApisClientListResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *ApisClientListResponse) (ApisClientListResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ApisClient.NewListPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ApisClient.NewListPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -327,7 +327,7 @@ func (client *ApisClient) NewListPager(subscriptionID string, resourceGroupName 
 				return ApisClientListResponse{}, err
 			}
 			return client.listHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -372,4 +372,3 @@ func (client *ApisClient) listHandleResponse(resp *http.Response) (ApisClientLis
 	}
 	return result, nil
 }
-

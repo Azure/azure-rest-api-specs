@@ -31,7 +31,7 @@ func NewAzurePlaywrightServiceAccountsClient(credential azcore.TokenCredential, 
 		return nil, err
 	}
 	client := &AzurePlaywrightServiceAccountsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -78,8 +78,8 @@ func (client *AzurePlaywrightServiceAccountsClient) checkNameAvailabilityCreateR
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, body); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -156,8 +156,8 @@ func (client *AzurePlaywrightServiceAccountsClient) createOrUpdateCreateRequest(
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -290,13 +290,13 @@ func (client *AzurePlaywrightServiceAccountsClient) getHandleResponse(resp *http
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - options - AzurePlaywrightServiceAccountsClientListByResourceGroupOptions contains the optional parameters for the AzurePlaywrightServiceAccountsClient.NewListByResourceGroupPager
 //     method.
-func (client *AzurePlaywrightServiceAccountsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *AzurePlaywrightServiceAccountsClientListByResourceGroupOptions) (*runtime.Pager[AzurePlaywrightServiceAccountsClientListByResourceGroupResponse]) {
+func (client *AzurePlaywrightServiceAccountsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *AzurePlaywrightServiceAccountsClientListByResourceGroupOptions) *runtime.Pager[AzurePlaywrightServiceAccountsClientListByResourceGroupResponse] {
 	return runtime.NewPager(runtime.PagingHandler[AzurePlaywrightServiceAccountsClientListByResourceGroupResponse]{
 		More: func(page AzurePlaywrightServiceAccountsClientListByResourceGroupResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AzurePlaywrightServiceAccountsClientListByResourceGroupResponse) (AzurePlaywrightServiceAccountsClientListByResourceGroupResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzurePlaywrightServiceAccountsClient.NewListByResourceGroupPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzurePlaywrightServiceAccountsClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -308,7 +308,7 @@ func (client *AzurePlaywrightServiceAccountsClient) NewListByResourceGroupPager(
 				return AzurePlaywrightServiceAccountsClientListByResourceGroupResponse{}, err
 			}
 			return client.listByResourceGroupHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -347,13 +347,13 @@ func (client *AzurePlaywrightServiceAccountsClient) listByResourceGroupHandleRes
 //   - subscriptionID - The ID of the target subscription.
 //   - options - AzurePlaywrightServiceAccountsClientListBySubscriptionOptions contains the optional parameters for the AzurePlaywrightServiceAccountsClient.NewListBySubscriptionPager
 //     method.
-func (client *AzurePlaywrightServiceAccountsClient) NewListBySubscriptionPager(subscriptionID string, options *AzurePlaywrightServiceAccountsClientListBySubscriptionOptions) (*runtime.Pager[AzurePlaywrightServiceAccountsClientListBySubscriptionResponse]) {
+func (client *AzurePlaywrightServiceAccountsClient) NewListBySubscriptionPager(subscriptionID string, options *AzurePlaywrightServiceAccountsClientListBySubscriptionOptions) *runtime.Pager[AzurePlaywrightServiceAccountsClientListBySubscriptionResponse] {
 	return runtime.NewPager(runtime.PagingHandler[AzurePlaywrightServiceAccountsClientListBySubscriptionResponse]{
 		More: func(page AzurePlaywrightServiceAccountsClientListBySubscriptionResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AzurePlaywrightServiceAccountsClientListBySubscriptionResponse) (AzurePlaywrightServiceAccountsClientListBySubscriptionResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzurePlaywrightServiceAccountsClient.NewListBySubscriptionPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzurePlaywrightServiceAccountsClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -365,7 +365,7 @@ func (client *AzurePlaywrightServiceAccountsClient) NewListBySubscriptionPager(s
 				return AzurePlaywrightServiceAccountsClientListBySubscriptionResponse{}, err
 			}
 			return client.listBySubscriptionHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -447,8 +447,8 @@ func (client *AzurePlaywrightServiceAccountsClient) updateCreateRequest(ctx cont
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -460,4 +460,3 @@ func (client *AzurePlaywrightServiceAccountsClient) updateHandleResponse(resp *h
 	}
 	return result, nil
 }
-

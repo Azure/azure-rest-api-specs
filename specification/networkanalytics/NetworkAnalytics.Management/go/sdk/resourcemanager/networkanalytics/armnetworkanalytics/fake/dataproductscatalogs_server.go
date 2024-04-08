@@ -19,7 +19,7 @@ import (
 )
 
 // DataProductsCatalogsServer is a fake server for instances of the armnetworkanalytics.DataProductsCatalogsClient type.
-type DataProductsCatalogsServer struct{
+type DataProductsCatalogsServer struct {
 	// Get is the fake for method DataProductsCatalogsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
 	Get func(ctx context.Context, subscriptionID string, resourceGroupName string, options *armnetworkanalytics.DataProductsCatalogsClientGetOptions) (resp azfake.Responder[armnetworkanalytics.DataProductsCatalogsClientGetResponse], errResp azfake.ErrorResponder)
@@ -31,7 +31,6 @@ type DataProductsCatalogsServer struct{
 	// NewListBySubscriptionPager is the fake for method DataProductsCatalogsClient.NewListBySubscriptionPager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListBySubscriptionPager func(subscriptionID string, options *armnetworkanalytics.DataProductsCatalogsClientListBySubscriptionOptions) (resp azfake.PagerResponder[armnetworkanalytics.DataProductsCatalogsClientListBySubscriptionResponse])
-
 }
 
 // NewDataProductsCatalogsServerTransport creates a new instance of DataProductsCatalogsServerTransport with the provided implementation.
@@ -39,18 +38,18 @@ type DataProductsCatalogsServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewDataProductsCatalogsServerTransport(srv *DataProductsCatalogsServer) *DataProductsCatalogsServerTransport {
 	return &DataProductsCatalogsServerTransport{
-		srv: srv,
+		srv:                         srv,
 		newListByResourceGroupPager: newTracker[azfake.PagerResponder[armnetworkanalytics.DataProductsCatalogsClientListByResourceGroupResponse]](),
-		newListBySubscriptionPager: newTracker[azfake.PagerResponder[armnetworkanalytics.DataProductsCatalogsClientListBySubscriptionResponse]](),
+		newListBySubscriptionPager:  newTracker[azfake.PagerResponder[armnetworkanalytics.DataProductsCatalogsClientListBySubscriptionResponse]](),
 	}
 }
 
 // DataProductsCatalogsServerTransport connects instances of armnetworkanalytics.DataProductsCatalogsClient to instances of DataProductsCatalogsServer.
 // Don't use this type directly, use NewDataProductsCatalogsServerTransport instead.
 type DataProductsCatalogsServerTransport struct {
-	srv *DataProductsCatalogsServer
+	srv                         *DataProductsCatalogsServer
 	newListByResourceGroupPager *tracker[azfake.PagerResponder[armnetworkanalytics.DataProductsCatalogsClientListByResourceGroupResponse]]
-	newListBySubscriptionPager *tracker[azfake.PagerResponder[armnetworkanalytics.DataProductsCatalogsClientListBySubscriptionResponse]]
+	newListBySubscriptionPager  *tracker[azfake.PagerResponder[armnetworkanalytics.DataProductsCatalogsClientListBySubscriptionResponse]]
 }
 
 // Do implements the policy.Transporter interface for DataProductsCatalogsServerTransport.
@@ -121,21 +120,21 @@ func (d *DataProductsCatalogsServerTransport) dispatchNewListByResourceGroupPage
 	}
 	newListByResourceGroupPager := d.newListByResourceGroupPager.get(req)
 	if newListByResourceGroupPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.NetworkAnalytics/dataProductsCatalogs`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 2 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-resp := d.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.NetworkAnalytics/dataProductsCatalogs`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 2 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := d.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
 		newListByResourceGroupPager = &resp
 		d.newListByResourceGroupPager.add(req, newListByResourceGroupPager)
 		server.PagerResponderInjectNextLinks(newListByResourceGroupPager, req, func(page *armnetworkanalytics.DataProductsCatalogsClientListByResourceGroupResponse, createLink func() string) {
@@ -162,17 +161,17 @@ func (d *DataProductsCatalogsServerTransport) dispatchNewListBySubscriptionPager
 	}
 	newListBySubscriptionPager := d.newListBySubscriptionPager.get(req)
 	if newListBySubscriptionPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.NetworkAnalytics/dataProductsCatalogs`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 1 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-resp := d.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.NetworkAnalytics/dataProductsCatalogs`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 1 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resp := d.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
 		newListBySubscriptionPager = &resp
 		d.newListBySubscriptionPager.add(req, newListBySubscriptionPager)
 		server.PagerResponderInjectNextLinks(newListBySubscriptionPager, req, func(page *armnetworkanalytics.DataProductsCatalogsClientListBySubscriptionResponse, createLink func() string) {
@@ -192,4 +191,3 @@ resp := d.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
 	}
 	return resp, nil
 }
-

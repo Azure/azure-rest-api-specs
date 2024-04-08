@@ -31,7 +31,7 @@ func NewTargetsClient(credential azcore.TokenCredential, options *arm.ClientOpti
 		return nil, err
 	}
 	client := &TargetsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -91,8 +91,8 @@ func (client *TargetsClient) createOrUpdateCreateRequest(ctx context.Context, su
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -229,13 +229,13 @@ func (client *TargetsClient) getHandleResponse(resp *http.Response) (TargetsClie
 //   - watcherName - The database watcher name.
 //   - options - TargetsClientListByWatcherOptions contains the optional parameters for the TargetsClient.NewListByWatcherPager
 //     method.
-func (client *TargetsClient) NewListByWatcherPager(subscriptionID string, resourceGroupName string, watcherName string, options *TargetsClientListByWatcherOptions) (*runtime.Pager[TargetsClientListByWatcherResponse]) {
+func (client *TargetsClient) NewListByWatcherPager(subscriptionID string, resourceGroupName string, watcherName string, options *TargetsClientListByWatcherOptions) *runtime.Pager[TargetsClientListByWatcherResponse] {
 	return runtime.NewPager(runtime.PagingHandler[TargetsClientListByWatcherResponse]{
 		More: func(page TargetsClientListByWatcherResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *TargetsClientListByWatcherResponse) (TargetsClientListByWatcherResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "TargetsClient.NewListByWatcherPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "TargetsClient.NewListByWatcherPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -247,7 +247,7 @@ func (client *TargetsClient) NewListByWatcherPager(subscriptionID string, resour
 				return TargetsClientListByWatcherResponse{}, err
 			}
 			return client.listByWatcherHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -285,4 +285,3 @@ func (client *TargetsClient) listByWatcherHandleResponse(resp *http.Response) (T
 	}
 	return result, nil
 }
-

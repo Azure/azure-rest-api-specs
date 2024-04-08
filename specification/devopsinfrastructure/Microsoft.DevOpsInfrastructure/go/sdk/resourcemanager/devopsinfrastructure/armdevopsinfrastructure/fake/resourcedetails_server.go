@@ -18,11 +18,10 @@ import (
 )
 
 // ResourceDetailsServer is a fake server for instances of the armdevopsinfrastructure.ResourceDetailsClient type.
-type ResourceDetailsServer struct{
+type ResourceDetailsServer struct {
 	// NewListByPoolPager is the fake for method ResourceDetailsClient.NewListByPoolPager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListByPoolPager func(subscriptionID string, resourceGroupName string, poolName string, options *armdevopsinfrastructure.ResourceDetailsClientListByPoolOptions) (resp azfake.PagerResponder[armdevopsinfrastructure.ResourceDetailsClientListByPoolResponse])
-
 }
 
 // NewResourceDetailsServerTransport creates a new instance of ResourceDetailsServerTransport with the provided implementation.
@@ -30,7 +29,7 @@ type ResourceDetailsServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewResourceDetailsServerTransport(srv *ResourceDetailsServer) *ResourceDetailsServerTransport {
 	return &ResourceDetailsServerTransport{
-		srv: srv,
+		srv:                srv,
 		newListByPoolPager: newTracker[azfake.PagerResponder[armdevopsinfrastructure.ResourceDetailsClientListByPoolResponse]](),
 	}
 }
@@ -38,7 +37,7 @@ func NewResourceDetailsServerTransport(srv *ResourceDetailsServer) *ResourceDeta
 // ResourceDetailsServerTransport connects instances of armdevopsinfrastructure.ResourceDetailsClient to instances of ResourceDetailsServer.
 // Don't use this type directly, use NewResourceDetailsServerTransport instead.
 type ResourceDetailsServerTransport struct {
-	srv *ResourceDetailsServer
+	srv                *ResourceDetailsServer
 	newListByPoolPager *tracker[azfake.PagerResponder[armdevopsinfrastructure.ResourceDetailsClientListByPoolResponse]]
 }
 
@@ -73,25 +72,25 @@ func (r *ResourceDetailsServerTransport) dispatchNewListByPoolPager(req *http.Re
 	}
 	newListByPoolPager := r.newListByPoolPager.get(req)
 	if newListByPoolPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DevOpsInfrastructure/pools/(?P<poolName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resources`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	poolNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("poolName")])
-	if err != nil {
-		return nil, err
-	}
-resp := r.srv.NewListByPoolPager(subscriptionIDParam, resourceGroupNameParam, poolNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.DevOpsInfrastructure/pools/(?P<poolName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resources`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		poolNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("poolName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := r.srv.NewListByPoolPager(subscriptionIDParam, resourceGroupNameParam, poolNameParam, nil)
 		newListByPoolPager = &resp
 		r.newListByPoolPager.add(req, newListByPoolPager)
 		server.PagerResponderInjectNextLinks(newListByPoolPager, req, func(page *armdevopsinfrastructure.ResourceDetailsClientListByPoolResponse, createLink func() string) {
@@ -111,4 +110,3 @@ resp := r.srv.NewListByPoolPager(subscriptionIDParam, resourceGroupNameParam, po
 	}
 	return resp, nil
 }
-

@@ -31,7 +31,7 @@ func NewApiVersionsClient(credential azcore.TokenCredential, options *arm.Client
 		return nil, err
 	}
 	client := &ApiVersionsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -102,8 +102,8 @@ func (client *ApiVersionsClient) createOrUpdateCreateRequest(ctx context.Context
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, payload); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -331,13 +331,13 @@ func (client *ApiVersionsClient) headCreateRequest(ctx context.Context, subscrip
 //   - workspaceName - The name of the workspace.
 //   - apiName - The name of the API.
 //   - options - ApiVersionsClientListOptions contains the optional parameters for the ApiVersionsClient.NewListPager method.
-func (client *ApiVersionsClient) NewListPager(subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, options *ApiVersionsClientListOptions) (*runtime.Pager[ApiVersionsClientListResponse]) {
+func (client *ApiVersionsClient) NewListPager(subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, options *ApiVersionsClientListOptions) *runtime.Pager[ApiVersionsClientListResponse] {
 	return runtime.NewPager(runtime.PagingHandler[ApiVersionsClientListResponse]{
 		More: func(page ApiVersionsClientListResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *ApiVersionsClientListResponse) (ApiVersionsClientListResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ApiVersionsClient.NewListPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ApiVersionsClient.NewListPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -349,7 +349,7 @@ func (client *ApiVersionsClient) NewListPager(subscriptionID string, resourceGro
 				return ApiVersionsClientListResponse{}, err
 			}
 			return client.listHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -398,4 +398,3 @@ func (client *ApiVersionsClient) listHandleResponse(resp *http.Response) (ApiVer
 	}
 	return result, nil
 }
-

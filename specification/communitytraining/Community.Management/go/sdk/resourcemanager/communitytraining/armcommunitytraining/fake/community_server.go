@@ -14,13 +14,12 @@ import (
 )
 
 // CommunityServer is a fake server for instances of the armcommunitytraining.CommunityClient type.
-type CommunityServer struct{
+type CommunityServer struct {
 	// CommunityCommunityTrainingsServer contains the fakes for client CommunityCommunityTrainingsClient
 	CommunityCommunityTrainingsServer CommunityCommunityTrainingsServer
 
 	// CommunityOperationsServer contains the fakes for client CommunityOperationsClient
 	CommunityOperationsServer CommunityOperationsServer
-
 }
 
 // NewCommunityServerTransport creates a new instance of CommunityServerTransport with the provided implementation.
@@ -33,10 +32,10 @@ func NewCommunityServerTransport(srv *CommunityServer) *CommunityServerTransport
 // CommunityServerTransport connects instances of armcommunitytraining.CommunityClient to instances of CommunityServer.
 // Don't use this type directly, use NewCommunityServerTransport instead.
 type CommunityServerTransport struct {
-	srv *CommunityServer
-	trMu sync.Mutex
+	srv                                 *CommunityServer
+	trMu                                sync.Mutex
 	trCommunityCommunityTrainingsServer *CommunityCommunityTrainingsServerTransport
-	trCommunityOperationsServer *CommunityOperationsServerTransport
+	trCommunityOperationsServer         *CommunityOperationsServerTransport
 }
 
 // Do implements the policy.Transporter interface for CommunityServerTransport.
@@ -57,11 +56,13 @@ func (c *CommunityServerTransport) dispatchToClientFake(req *http.Request, clien
 	switch client {
 	case "CommunityCommunityTrainingsClient":
 		initServer(&c.trMu, &c.trCommunityCommunityTrainingsServer, func() *CommunityCommunityTrainingsServerTransport {
-		return NewCommunityCommunityTrainingsServerTransport(&c.srv.CommunityCommunityTrainingsServer) })
+			return NewCommunityCommunityTrainingsServerTransport(&c.srv.CommunityCommunityTrainingsServer)
+		})
 		resp, err = c.trCommunityCommunityTrainingsServer.Do(req)
 	case "CommunityOperationsClient":
 		initServer(&c.trMu, &c.trCommunityOperationsServer, func() *CommunityOperationsServerTransport {
-		return NewCommunityOperationsServerTransport(&c.srv.CommunityOperationsServer) })
+			return NewCommunityOperationsServerTransport(&c.srv.CommunityOperationsServer)
+		})
 		resp, err = c.trCommunityOperationsServer.Do(req)
 	default:
 		err = fmt.Errorf("unhandled client %s", client)
@@ -69,4 +70,3 @@ func (c *CommunityServerTransport) dispatchToClientFake(req *http.Request, clien
 
 	return resp, err
 }
-

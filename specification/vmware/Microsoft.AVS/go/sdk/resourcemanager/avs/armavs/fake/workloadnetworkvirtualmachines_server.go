@@ -19,7 +19,7 @@ import (
 )
 
 // WorkloadNetworkVirtualMachinesServer is a fake server for instances of the armavs.WorkloadNetworkVirtualMachinesClient type.
-type WorkloadNetworkVirtualMachinesServer struct{
+type WorkloadNetworkVirtualMachinesServer struct {
 	// Get is the fake for method WorkloadNetworkVirtualMachinesClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
 	Get func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, virtualMachineID string, options *armavs.WorkloadNetworkVirtualMachinesClientGetOptions) (resp azfake.Responder[armavs.WorkloadNetworkVirtualMachinesClientGetResponse], errResp azfake.ErrorResponder)
@@ -27,7 +27,6 @@ type WorkloadNetworkVirtualMachinesServer struct{
 	// NewListByWorkloadNetworkPager is the fake for method WorkloadNetworkVirtualMachinesClient.NewListByWorkloadNetworkPager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListByWorkloadNetworkPager func(subscriptionID string, resourceGroupName string, privateCloudName string, options *armavs.WorkloadNetworkVirtualMachinesClientListByWorkloadNetworkOptions) (resp azfake.PagerResponder[armavs.WorkloadNetworkVirtualMachinesClientListByWorkloadNetworkResponse])
-
 }
 
 // NewWorkloadNetworkVirtualMachinesServerTransport creates a new instance of WorkloadNetworkVirtualMachinesServerTransport with the provided implementation.
@@ -35,7 +34,7 @@ type WorkloadNetworkVirtualMachinesServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewWorkloadNetworkVirtualMachinesServerTransport(srv *WorkloadNetworkVirtualMachinesServer) *WorkloadNetworkVirtualMachinesServerTransport {
 	return &WorkloadNetworkVirtualMachinesServerTransport{
-		srv: srv,
+		srv:                           srv,
 		newListByWorkloadNetworkPager: newTracker[azfake.PagerResponder[armavs.WorkloadNetworkVirtualMachinesClientListByWorkloadNetworkResponse]](),
 	}
 }
@@ -43,7 +42,7 @@ func NewWorkloadNetworkVirtualMachinesServerTransport(srv *WorkloadNetworkVirtua
 // WorkloadNetworkVirtualMachinesServerTransport connects instances of armavs.WorkloadNetworkVirtualMachinesClient to instances of WorkloadNetworkVirtualMachinesServer.
 // Don't use this type directly, use NewWorkloadNetworkVirtualMachinesServerTransport instead.
 type WorkloadNetworkVirtualMachinesServerTransport struct {
-	srv *WorkloadNetworkVirtualMachinesServer
+	srv                           *WorkloadNetworkVirtualMachinesServer
 	newListByWorkloadNetworkPager *tracker[azfake.PagerResponder[armavs.WorkloadNetworkVirtualMachinesClientListByWorkloadNetworkResponse]]
 }
 
@@ -121,25 +120,25 @@ func (w *WorkloadNetworkVirtualMachinesServerTransport) dispatchNewListByWorkloa
 	}
 	newListByWorkloadNetworkPager := w.newListByWorkloadNetworkPager.get(req)
 	if newListByWorkloadNetworkPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/virtualMachines`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-resp := w.srv.NewListByWorkloadNetworkPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/virtualMachines`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := w.srv.NewListByWorkloadNetworkPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, nil)
 		newListByWorkloadNetworkPager = &resp
 		w.newListByWorkloadNetworkPager.add(req, newListByWorkloadNetworkPager)
 		server.PagerResponderInjectNextLinks(newListByWorkloadNetworkPager, req, func(page *armavs.WorkloadNetworkVirtualMachinesClientListByWorkloadNetworkResponse, createLink func() string) {
@@ -159,4 +158,3 @@ resp := w.srv.NewListByWorkloadNetworkPager(subscriptionIDParam, resourceGroupNa
 	}
 	return resp, nil
 }
-

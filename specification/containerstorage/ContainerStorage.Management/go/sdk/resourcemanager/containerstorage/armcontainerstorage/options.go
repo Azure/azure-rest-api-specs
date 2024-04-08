@@ -84,4 +84,3 @@ type VolumesClientListByPoolOptions struct {
 type VolumesClientUpdateOptions struct {
 	ResumeToken string
 }
-

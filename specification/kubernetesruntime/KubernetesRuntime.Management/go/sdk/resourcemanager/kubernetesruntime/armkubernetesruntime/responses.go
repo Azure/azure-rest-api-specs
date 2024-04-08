@@ -117,4 +117,3 @@ type StorageClassClientUpdateResponse struct {
 	// A StorageClass resource for an Arc connected cluster (Microsoft.Kubernetes/connectedClusters)
 	StorageClassResource
 }
-

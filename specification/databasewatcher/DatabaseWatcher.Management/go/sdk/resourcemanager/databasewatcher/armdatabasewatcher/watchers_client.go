@@ -31,7 +31,7 @@ func NewWatchersClient(credential azcore.TokenCredential, options *arm.ClientOpt
 		return nil, err
 	}
 	client := &WatchersClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -99,8 +99,8 @@ func (client *WatchersClient) createOrUpdateCreateRequest(ctx context.Context, s
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -231,13 +231,13 @@ func (client *WatchersClient) getHandleResponse(resp *http.Response) (WatchersCl
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - options - WatchersClientListByResourceGroupOptions contains the optional parameters for the WatchersClient.NewListByResourceGroupPager
 //     method.
-func (client *WatchersClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *WatchersClientListByResourceGroupOptions) (*runtime.Pager[WatchersClientListByResourceGroupResponse]) {
+func (client *WatchersClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *WatchersClientListByResourceGroupOptions) *runtime.Pager[WatchersClientListByResourceGroupResponse] {
 	return runtime.NewPager(runtime.PagingHandler[WatchersClientListByResourceGroupResponse]{
 		More: func(page WatchersClientListByResourceGroupResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *WatchersClientListByResourceGroupResponse) (WatchersClientListByResourceGroupResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WatchersClient.NewListByResourceGroupPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WatchersClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -249,7 +249,7 @@ func (client *WatchersClient) NewListByResourceGroupPager(subscriptionID string,
 				return WatchersClientListByResourceGroupResponse{}, err
 			}
 			return client.listByResourceGroupHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -288,13 +288,13 @@ func (client *WatchersClient) listByResourceGroupHandleResponse(resp *http.Respo
 //   - subscriptionID - The ID of the target subscription.
 //   - options - WatchersClientListBySubscriptionOptions contains the optional parameters for the WatchersClient.NewListBySubscriptionPager
 //     method.
-func (client *WatchersClient) NewListBySubscriptionPager(subscriptionID string, options *WatchersClientListBySubscriptionOptions) (*runtime.Pager[WatchersClientListBySubscriptionResponse]) {
+func (client *WatchersClient) NewListBySubscriptionPager(subscriptionID string, options *WatchersClientListBySubscriptionOptions) *runtime.Pager[WatchersClientListBySubscriptionResponse] {
 	return runtime.NewPager(runtime.PagingHandler[WatchersClientListBySubscriptionResponse]{
 		More: func(page WatchersClientListBySubscriptionResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *WatchersClientListBySubscriptionResponse) (WatchersClientListBySubscriptionResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WatchersClient.NewListBySubscriptionPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WatchersClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -306,7 +306,7 @@ func (client *WatchersClient) NewListBySubscriptionPager(subscriptionID string, 
 				return WatchersClientListBySubscriptionResponse{}, err
 			}
 			return client.listBySubscriptionHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -526,8 +526,7 @@ func (client *WatchersClient) updateCreateRequest(ctx context.Context, subscript
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
-

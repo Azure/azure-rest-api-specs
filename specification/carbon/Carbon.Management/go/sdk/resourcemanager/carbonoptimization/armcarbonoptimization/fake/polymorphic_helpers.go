@@ -37,4 +37,3 @@ func unmarshalQueryFilterClassification(rawMsg json.RawMessage) (armcarbonoptimi
 	}
 	return b, nil
 }
-

@@ -19,7 +19,7 @@ import (
 )
 
 // AzurePlaywrightServiceQuotasServer is a fake server for instances of the armplaywrighttesting.AzurePlaywrightServiceQuotasClient type.
-type AzurePlaywrightServiceQuotasServer struct{
+type AzurePlaywrightServiceQuotasServer struct {
 	// Get is the fake for method AzurePlaywrightServiceQuotasClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
 	Get func(ctx context.Context, subscriptionID string, location string, quotaName armplaywrighttesting.QuotaNames, options *armplaywrighttesting.AzurePlaywrightServiceQuotasClientGetOptions) (resp azfake.Responder[armplaywrighttesting.AzurePlaywrightServiceQuotasClientGetResponse], errResp azfake.ErrorResponder)
@@ -27,7 +27,6 @@ type AzurePlaywrightServiceQuotasServer struct{
 	// NewListBySubscriptionPager is the fake for method AzurePlaywrightServiceQuotasClient.NewListBySubscriptionPager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListBySubscriptionPager func(subscriptionID string, location string, options *armplaywrighttesting.AzurePlaywrightServiceQuotasClientListBySubscriptionOptions) (resp azfake.PagerResponder[armplaywrighttesting.AzurePlaywrightServiceQuotasClientListBySubscriptionResponse])
-
 }
 
 // NewAzurePlaywrightServiceQuotasServerTransport creates a new instance of AzurePlaywrightServiceQuotasServerTransport with the provided implementation.
@@ -35,7 +34,7 @@ type AzurePlaywrightServiceQuotasServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewAzurePlaywrightServiceQuotasServerTransport(srv *AzurePlaywrightServiceQuotasServer) *AzurePlaywrightServiceQuotasServerTransport {
 	return &AzurePlaywrightServiceQuotasServerTransport{
-		srv: srv,
+		srv:                        srv,
 		newListBySubscriptionPager: newTracker[azfake.PagerResponder[armplaywrighttesting.AzurePlaywrightServiceQuotasClientListBySubscriptionResponse]](),
 	}
 }
@@ -43,7 +42,7 @@ func NewAzurePlaywrightServiceQuotasServerTransport(srv *AzurePlaywrightServiceQ
 // AzurePlaywrightServiceQuotasServerTransport connects instances of armplaywrighttesting.AzurePlaywrightServiceQuotasClient to instances of AzurePlaywrightServiceQuotasServer.
 // Don't use this type directly, use NewAzurePlaywrightServiceQuotasServerTransport instead.
 type AzurePlaywrightServiceQuotasServerTransport struct {
-	srv *AzurePlaywrightServiceQuotasServer
+	srv                        *AzurePlaywrightServiceQuotasServer
 	newListBySubscriptionPager *tracker[azfake.PagerResponder[armplaywrighttesting.AzurePlaywrightServiceQuotasClientListBySubscriptionResponse]]
 }
 
@@ -92,7 +91,7 @@ func (a *AzurePlaywrightServiceQuotasServerTransport) dispatchGet(req *http.Requ
 	if err != nil {
 		return nil, err
 	}
-	quotaNameParam, err := parseWithCast(matches[regex.SubexpIndex("quotaName")], func (v string) (armplaywrighttesting.QuotaNames, error) {
+	quotaNameParam, err := parseWithCast(matches[regex.SubexpIndex("quotaName")], func(v string) (armplaywrighttesting.QuotaNames, error) {
 		p, unescapeErr := url.PathUnescape(v)
 		if unescapeErr != nil {
 			return "", unescapeErr
@@ -123,21 +122,21 @@ func (a *AzurePlaywrightServiceQuotasServerTransport) dispatchNewListBySubscript
 	}
 	newListBySubscriptionPager := a.newListBySubscriptionPager.get(req)
 	if newListBySubscriptionPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzurePlaywrightService/locations/(?P<location>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/quotas`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 2 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	locationParam, err := url.PathUnescape(matches[regex.SubexpIndex("location")])
-	if err != nil {
-		return nil, err
-	}
-resp := a.srv.NewListBySubscriptionPager(subscriptionIDParam, locationParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzurePlaywrightService/locations/(?P<location>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/quotas`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 2 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		locationParam, err := url.PathUnescape(matches[regex.SubexpIndex("location")])
+		if err != nil {
+			return nil, err
+		}
+		resp := a.srv.NewListBySubscriptionPager(subscriptionIDParam, locationParam, nil)
 		newListBySubscriptionPager = &resp
 		a.newListBySubscriptionPager.add(req, newListBySubscriptionPager)
 		server.PagerResponderInjectNextLinks(newListBySubscriptionPager, req, func(page *armplaywrighttesting.AzurePlaywrightServiceQuotasClientListBySubscriptionResponse, createLink func() string) {
@@ -157,4 +156,3 @@ resp := a.srv.NewListBySubscriptionPager(subscriptionIDParam, locationParam, nil
 	}
 	return resp, nil
 }
-

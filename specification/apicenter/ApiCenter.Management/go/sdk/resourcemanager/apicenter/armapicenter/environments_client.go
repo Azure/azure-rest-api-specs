@@ -31,7 +31,7 @@ func NewEnvironmentsClient(credential azcore.TokenCredential, options *arm.Clien
 		return nil, err
 	}
 	client := &EnvironmentsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -97,8 +97,8 @@ func (client *EnvironmentsClient) createOrUpdateCreateRequest(ctx context.Contex
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, payload); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -310,13 +310,13 @@ func (client *EnvironmentsClient) headCreateRequest(ctx context.Context, subscri
 //   - serviceName - The name of Azure API Center service.
 //   - workspaceName - The name of the workspace.
 //   - options - EnvironmentsClientListOptions contains the optional parameters for the EnvironmentsClient.NewListPager method.
-func (client *EnvironmentsClient) NewListPager(subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, options *EnvironmentsClientListOptions) (*runtime.Pager[EnvironmentsClientListResponse]) {
+func (client *EnvironmentsClient) NewListPager(subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, options *EnvironmentsClientListOptions) *runtime.Pager[EnvironmentsClientListResponse] {
 	return runtime.NewPager(runtime.PagingHandler[EnvironmentsClientListResponse]{
 		More: func(page EnvironmentsClientListResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *EnvironmentsClientListResponse) (EnvironmentsClientListResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "EnvironmentsClient.NewListPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "EnvironmentsClient.NewListPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -328,7 +328,7 @@ func (client *EnvironmentsClient) NewListPager(subscriptionID string, resourceGr
 				return EnvironmentsClientListResponse{}, err
 			}
 			return client.listHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -373,4 +373,3 @@ func (client *EnvironmentsClient) listHandleResponse(resp *http.Response) (Envir
 	}
 	return result, nil
 }
-

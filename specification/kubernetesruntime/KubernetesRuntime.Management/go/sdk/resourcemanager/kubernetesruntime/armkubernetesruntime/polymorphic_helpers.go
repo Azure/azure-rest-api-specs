@@ -34,4 +34,3 @@ func unmarshalStorageClassTypePropertiesClassification(rawMsg json.RawMessage) (
 	}
 	return b, nil
 }
-

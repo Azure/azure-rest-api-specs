@@ -19,7 +19,7 @@ import (
 )
 
 // DataTypesServer is a fake server for instances of the armnetworkanalytics.DataTypesClient type.
-type DataTypesServer struct{
+type DataTypesServer struct {
 	// BeginCreate is the fake for method DataTypesClient.BeginCreate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
 	BeginCreate func(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, dataTypeName string, resource armnetworkanalytics.DataType, options *armnetworkanalytics.DataTypesClientCreateOptions) (resp azfake.PollerResponder[armnetworkanalytics.DataTypesClientCreateResponse], errResp azfake.ErrorResponder)
@@ -47,7 +47,6 @@ type DataTypesServer struct{
 	// BeginUpdate is the fake for method DataTypesClient.BeginUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
 	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, dataProductName string, dataTypeName string, properties armnetworkanalytics.DataTypeUpdate, options *armnetworkanalytics.DataTypesClientUpdateOptions) (resp azfake.PollerResponder[armnetworkanalytics.DataTypesClientUpdateResponse], errResp azfake.ErrorResponder)
-
 }
 
 // NewDataTypesServerTransport creates a new instance of DataTypesServerTransport with the provided implementation.
@@ -55,24 +54,24 @@ type DataTypesServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewDataTypesServerTransport(srv *DataTypesServer) *DataTypesServerTransport {
 	return &DataTypesServerTransport{
-		srv: srv,
-		beginCreate: newTracker[azfake.PollerResponder[armnetworkanalytics.DataTypesClientCreateResponse]](),
-		beginDelete: newTracker[azfake.PollerResponder[armnetworkanalytics.DataTypesClientDeleteResponse]](),
-		beginDeleteData: newTracker[azfake.PollerResponder[armnetworkanalytics.DataTypesClientDeleteDataResponse]](),
+		srv:                       srv,
+		beginCreate:               newTracker[azfake.PollerResponder[armnetworkanalytics.DataTypesClientCreateResponse]](),
+		beginDelete:               newTracker[azfake.PollerResponder[armnetworkanalytics.DataTypesClientDeleteResponse]](),
+		beginDeleteData:           newTracker[azfake.PollerResponder[armnetworkanalytics.DataTypesClientDeleteDataResponse]](),
 		newListByDataProductPager: newTracker[azfake.PagerResponder[armnetworkanalytics.DataTypesClientListByDataProductResponse]](),
-		beginUpdate: newTracker[azfake.PollerResponder[armnetworkanalytics.DataTypesClientUpdateResponse]](),
+		beginUpdate:               newTracker[azfake.PollerResponder[armnetworkanalytics.DataTypesClientUpdateResponse]](),
 	}
 }
 
 // DataTypesServerTransport connects instances of armnetworkanalytics.DataTypesClient to instances of DataTypesServer.
 // Don't use this type directly, use NewDataTypesServerTransport instead.
 type DataTypesServerTransport struct {
-	srv *DataTypesServer
-	beginCreate *tracker[azfake.PollerResponder[armnetworkanalytics.DataTypesClientCreateResponse]]
-	beginDelete *tracker[azfake.PollerResponder[armnetworkanalytics.DataTypesClientDeleteResponse]]
-	beginDeleteData *tracker[azfake.PollerResponder[armnetworkanalytics.DataTypesClientDeleteDataResponse]]
+	srv                       *DataTypesServer
+	beginCreate               *tracker[azfake.PollerResponder[armnetworkanalytics.DataTypesClientCreateResponse]]
+	beginDelete               *tracker[azfake.PollerResponder[armnetworkanalytics.DataTypesClientDeleteResponse]]
+	beginDeleteData           *tracker[azfake.PollerResponder[armnetworkanalytics.DataTypesClientDeleteDataResponse]]
 	newListByDataProductPager *tracker[azfake.PagerResponder[armnetworkanalytics.DataTypesClientListByDataProductResponse]]
-	beginUpdate *tracker[azfake.PollerResponder[armnetworkanalytics.DataTypesClientUpdateResponse]]
+	beginUpdate               *tracker[azfake.PollerResponder[armnetworkanalytics.DataTypesClientUpdateResponse]]
 }
 
 // Do implements the policy.Transporter interface for DataTypesServerTransport.
@@ -118,36 +117,36 @@ func (d *DataTypesServerTransport) dispatchBeginCreate(req *http.Request) (*http
 	}
 	beginCreate := d.beginCreate.get(req)
 	if beginCreate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.NetworkAnalytics/dataProducts/(?P<dataProductName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/dataTypes/(?P<dataTypeName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armnetworkanalytics.DataType](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	dataProductNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("dataProductName")])
-	if err != nil {
-		return nil, err
-	}
-	dataTypeNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("dataTypeName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := d.srv.BeginCreate(req.Context(), subscriptionIDParam, resourceGroupNameParam, dataProductNameParam, dataTypeNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.NetworkAnalytics/dataProducts/(?P<dataProductName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/dataTypes/(?P<dataTypeName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armnetworkanalytics.DataType](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		dataProductNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("dataProductName")])
+		if err != nil {
+			return nil, err
+		}
+		dataTypeNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("dataTypeName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := d.srv.BeginCreate(req.Context(), subscriptionIDParam, resourceGroupNameParam, dataProductNameParam, dataTypeNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginCreate = &respr
 		d.beginCreate.add(req, beginCreate)
 	}
@@ -174,32 +173,32 @@ func (d *DataTypesServerTransport) dispatchBeginDelete(req *http.Request) (*http
 	}
 	beginDelete := d.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.NetworkAnalytics/dataProducts/(?P<dataProductName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/dataTypes/(?P<dataTypeName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	dataProductNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("dataProductName")])
-	if err != nil {
-		return nil, err
-	}
-	dataTypeNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("dataTypeName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := d.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, dataProductNameParam, dataTypeNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.NetworkAnalytics/dataProducts/(?P<dataProductName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/dataTypes/(?P<dataTypeName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		dataProductNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("dataProductName")])
+		if err != nil {
+			return nil, err
+		}
+		dataTypeNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("dataTypeName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := d.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, dataProductNameParam, dataTypeNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		d.beginDelete.add(req, beginDelete)
 	}
@@ -226,36 +225,36 @@ func (d *DataTypesServerTransport) dispatchBeginDeleteData(req *http.Request) (*
 	}
 	beginDeleteData := d.beginDeleteData.get(req)
 	if beginDeleteData == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.NetworkAnalytics/dataProducts/(?P<dataProductName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/dataTypes/(?P<dataTypeName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/deleteData`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armnetworkanalytics.DeleteDataRequest](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	dataProductNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("dataProductName")])
-	if err != nil {
-		return nil, err
-	}
-	dataTypeNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("dataTypeName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := d.srv.BeginDeleteData(req.Context(), subscriptionIDParam, resourceGroupNameParam, dataProductNameParam, dataTypeNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.NetworkAnalytics/dataProducts/(?P<dataProductName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/dataTypes/(?P<dataTypeName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/deleteData`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armnetworkanalytics.DeleteDataRequest](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		dataProductNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("dataProductName")])
+		if err != nil {
+			return nil, err
+		}
+		dataTypeNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("dataTypeName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := d.srv.BeginDeleteData(req.Context(), subscriptionIDParam, resourceGroupNameParam, dataProductNameParam, dataTypeNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDeleteData = &respr
 		d.beginDeleteData.add(req, beginDeleteData)
 	}
@@ -368,25 +367,25 @@ func (d *DataTypesServerTransport) dispatchNewListByDataProductPager(req *http.R
 	}
 	newListByDataProductPager := d.newListByDataProductPager.get(req)
 	if newListByDataProductPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.NetworkAnalytics/dataProducts/(?P<dataProductName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/dataTypes`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	dataProductNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("dataProductName")])
-	if err != nil {
-		return nil, err
-	}
-resp := d.srv.NewListByDataProductPager(subscriptionIDParam, resourceGroupNameParam, dataProductNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.NetworkAnalytics/dataProducts/(?P<dataProductName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/dataTypes`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		dataProductNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("dataProductName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := d.srv.NewListByDataProductPager(subscriptionIDParam, resourceGroupNameParam, dataProductNameParam, nil)
 		newListByDataProductPager = &resp
 		d.newListByDataProductPager.add(req, newListByDataProductPager)
 		server.PagerResponderInjectNextLinks(newListByDataProductPager, req, func(page *armnetworkanalytics.DataTypesClientListByDataProductResponse, createLink func() string) {
@@ -413,36 +412,36 @@ func (d *DataTypesServerTransport) dispatchBeginUpdate(req *http.Request) (*http
 	}
 	beginUpdate := d.beginUpdate.get(req)
 	if beginUpdate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.NetworkAnalytics/dataProducts/(?P<dataProductName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/dataTypes/(?P<dataTypeName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armnetworkanalytics.DataTypeUpdate](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	dataProductNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("dataProductName")])
-	if err != nil {
-		return nil, err
-	}
-	dataTypeNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("dataTypeName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := d.srv.BeginUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, dataProductNameParam, dataTypeNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.NetworkAnalytics/dataProducts/(?P<dataProductName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/dataTypes/(?P<dataTypeName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armnetworkanalytics.DataTypeUpdate](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		dataProductNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("dataProductName")])
+		if err != nil {
+			return nil, err
+		}
+		dataTypeNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("dataTypeName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := d.srv.BeginUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, dataProductNameParam, dataTypeNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginUpdate = &respr
 		d.beginUpdate.add(req, beginUpdate)
 	}
@@ -462,4 +461,3 @@ func (d *DataTypesServerTransport) dispatchBeginUpdate(req *http.Request) (*http
 
 	return resp, nil
 }
-

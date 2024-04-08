@@ -103,4 +103,3 @@ type StorageClassClientListOptions struct {
 type StorageClassClientUpdateOptions struct {
 	ResumeToken string
 }
-

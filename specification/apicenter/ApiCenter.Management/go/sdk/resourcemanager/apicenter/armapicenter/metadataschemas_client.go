@@ -31,7 +31,7 @@ func NewMetadataSchemasClient(credential azcore.TokenCredential, options *arm.Cl
 		return nil, err
 	}
 	client := &MetadataSchemasClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -92,8 +92,8 @@ func (client *MetadataSchemasClient) createOrUpdateCreateRequest(ctx context.Con
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, payload); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -290,13 +290,13 @@ func (client *MetadataSchemasClient) headCreateRequest(ctx context.Context, subs
 //   - serviceName - The name of Azure API Center service.
 //   - options - MetadataSchemasClientListOptions contains the optional parameters for the MetadataSchemasClient.NewListPager
 //     method.
-func (client *MetadataSchemasClient) NewListPager(subscriptionID string, resourceGroupName string, serviceName string, options *MetadataSchemasClientListOptions) (*runtime.Pager[MetadataSchemasClientListResponse]) {
+func (client *MetadataSchemasClient) NewListPager(subscriptionID string, resourceGroupName string, serviceName string, options *MetadataSchemasClientListOptions) *runtime.Pager[MetadataSchemasClientListResponse] {
 	return runtime.NewPager(runtime.PagingHandler[MetadataSchemasClientListResponse]{
 		More: func(page MetadataSchemasClientListResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *MetadataSchemasClientListResponse) (MetadataSchemasClientListResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "MetadataSchemasClient.NewListPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "MetadataSchemasClient.NewListPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -308,7 +308,7 @@ func (client *MetadataSchemasClient) NewListPager(subscriptionID string, resourc
 				return MetadataSchemasClientListResponse{}, err
 			}
 			return client.listHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -349,4 +349,3 @@ func (client *MetadataSchemasClient) listHandleResponse(resp *http.Response) (Me
 	}
 	return result, nil
 }
-

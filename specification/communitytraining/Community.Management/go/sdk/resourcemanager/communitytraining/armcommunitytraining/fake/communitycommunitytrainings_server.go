@@ -19,7 +19,7 @@ import (
 )
 
 // CommunityCommunityTrainingsServer is a fake server for instances of the armcommunitytraining.CommunityCommunityTrainingsClient type.
-type CommunityCommunityTrainingsServer struct{
+type CommunityCommunityTrainingsServer struct {
 	// BeginCreate is the fake for method CommunityCommunityTrainingsClient.BeginCreate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
 	BeginCreate func(ctx context.Context, subscriptionID string, resourceGroupName string, communityTrainingName string, resource armcommunitytraining.CommunityTraining, options *armcommunitytraining.CommunityCommunityTrainingsClientCreateOptions) (resp azfake.PollerResponder[armcommunitytraining.CommunityCommunityTrainingsClientCreateResponse], errResp azfake.ErrorResponder)
@@ -43,7 +43,6 @@ type CommunityCommunityTrainingsServer struct{
 	// BeginUpdate is the fake for method CommunityCommunityTrainingsClient.BeginUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
 	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, communityTrainingName string, properties armcommunitytraining.Update, options *armcommunitytraining.CommunityCommunityTrainingsClientUpdateOptions) (resp azfake.PollerResponder[armcommunitytraining.CommunityCommunityTrainingsClientUpdateResponse], errResp azfake.ErrorResponder)
-
 }
 
 // NewCommunityCommunityTrainingsServerTransport creates a new instance of CommunityCommunityTrainingsServerTransport with the provided implementation.
@@ -51,24 +50,24 @@ type CommunityCommunityTrainingsServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewCommunityCommunityTrainingsServerTransport(srv *CommunityCommunityTrainingsServer) *CommunityCommunityTrainingsServerTransport {
 	return &CommunityCommunityTrainingsServerTransport{
-		srv: srv,
-		beginCreate: newTracker[azfake.PollerResponder[armcommunitytraining.CommunityCommunityTrainingsClientCreateResponse]](),
-		beginDelete: newTracker[azfake.PollerResponder[armcommunitytraining.CommunityCommunityTrainingsClientDeleteResponse]](),
+		srv:                         srv,
+		beginCreate:                 newTracker[azfake.PollerResponder[armcommunitytraining.CommunityCommunityTrainingsClientCreateResponse]](),
+		beginDelete:                 newTracker[azfake.PollerResponder[armcommunitytraining.CommunityCommunityTrainingsClientDeleteResponse]](),
 		newListByResourceGroupPager: newTracker[azfake.PagerResponder[armcommunitytraining.CommunityCommunityTrainingsClientListByResourceGroupResponse]](),
-		newListBySubscriptionPager: newTracker[azfake.PagerResponder[armcommunitytraining.CommunityCommunityTrainingsClientListBySubscriptionResponse]](),
-		beginUpdate: newTracker[azfake.PollerResponder[armcommunitytraining.CommunityCommunityTrainingsClientUpdateResponse]](),
+		newListBySubscriptionPager:  newTracker[azfake.PagerResponder[armcommunitytraining.CommunityCommunityTrainingsClientListBySubscriptionResponse]](),
+		beginUpdate:                 newTracker[azfake.PollerResponder[armcommunitytraining.CommunityCommunityTrainingsClientUpdateResponse]](),
 	}
 }
 
 // CommunityCommunityTrainingsServerTransport connects instances of armcommunitytraining.CommunityCommunityTrainingsClient to instances of CommunityCommunityTrainingsServer.
 // Don't use this type directly, use NewCommunityCommunityTrainingsServerTransport instead.
 type CommunityCommunityTrainingsServerTransport struct {
-	srv *CommunityCommunityTrainingsServer
-	beginCreate *tracker[azfake.PollerResponder[armcommunitytraining.CommunityCommunityTrainingsClientCreateResponse]]
-	beginDelete *tracker[azfake.PollerResponder[armcommunitytraining.CommunityCommunityTrainingsClientDeleteResponse]]
+	srv                         *CommunityCommunityTrainingsServer
+	beginCreate                 *tracker[azfake.PollerResponder[armcommunitytraining.CommunityCommunityTrainingsClientCreateResponse]]
+	beginDelete                 *tracker[azfake.PollerResponder[armcommunitytraining.CommunityCommunityTrainingsClientDeleteResponse]]
 	newListByResourceGroupPager *tracker[azfake.PagerResponder[armcommunitytraining.CommunityCommunityTrainingsClientListByResourceGroupResponse]]
-	newListBySubscriptionPager *tracker[azfake.PagerResponder[armcommunitytraining.CommunityCommunityTrainingsClientListBySubscriptionResponse]]
-	beginUpdate *tracker[azfake.PollerResponder[armcommunitytraining.CommunityCommunityTrainingsClientUpdateResponse]]
+	newListBySubscriptionPager  *tracker[azfake.PagerResponder[armcommunitytraining.CommunityCommunityTrainingsClientListBySubscriptionResponse]]
+	beginUpdate                 *tracker[azfake.PollerResponder[armcommunitytraining.CommunityCommunityTrainingsClientUpdateResponse]]
 }
 
 // Do implements the policy.Transporter interface for CommunityCommunityTrainingsServerTransport.
@@ -112,32 +111,32 @@ func (c *CommunityCommunityTrainingsServerTransport) dispatchBeginCreate(req *ht
 	}
 	beginCreate := c.beginCreate.get(req)
 	if beginCreate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.Community/communityTrainings/(?P<communityTrainingName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armcommunitytraining.CommunityTraining](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	communityTrainingNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("communityTrainingName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := c.srv.BeginCreate(req.Context(), subscriptionIDParam, resourceGroupNameParam, communityTrainingNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.Community/communityTrainings/(?P<communityTrainingName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armcommunitytraining.CommunityTraining](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		communityTrainingNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("communityTrainingName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := c.srv.BeginCreate(req.Context(), subscriptionIDParam, resourceGroupNameParam, communityTrainingNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginCreate = &respr
 		c.beginCreate.add(req, beginCreate)
 	}
@@ -164,28 +163,28 @@ func (c *CommunityCommunityTrainingsServerTransport) dispatchBeginDelete(req *ht
 	}
 	beginDelete := c.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.Community/communityTrainings/(?P<communityTrainingName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	communityTrainingNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("communityTrainingName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := c.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, communityTrainingNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.Community/communityTrainings/(?P<communityTrainingName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		communityTrainingNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("communityTrainingName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := c.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, communityTrainingNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		c.beginDelete.add(req, beginDelete)
 	}
@@ -249,21 +248,21 @@ func (c *CommunityCommunityTrainingsServerTransport) dispatchNewListByResourceGr
 	}
 	newListByResourceGroupPager := c.newListByResourceGroupPager.get(req)
 	if newListByResourceGroupPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.Community/communityTrainings`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 2 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-resp := c.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.Community/communityTrainings`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 2 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := c.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
 		newListByResourceGroupPager = &resp
 		c.newListByResourceGroupPager.add(req, newListByResourceGroupPager)
 		server.PagerResponderInjectNextLinks(newListByResourceGroupPager, req, func(page *armcommunitytraining.CommunityCommunityTrainingsClientListByResourceGroupResponse, createLink func() string) {
@@ -290,17 +289,17 @@ func (c *CommunityCommunityTrainingsServerTransport) dispatchNewListBySubscripti
 	}
 	newListBySubscriptionPager := c.newListBySubscriptionPager.get(req)
 	if newListBySubscriptionPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.Community/communityTrainings`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 1 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-resp := c.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.Community/communityTrainings`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 1 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resp := c.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
 		newListBySubscriptionPager = &resp
 		c.newListBySubscriptionPager.add(req, newListBySubscriptionPager)
 		server.PagerResponderInjectNextLinks(newListBySubscriptionPager, req, func(page *armcommunitytraining.CommunityCommunityTrainingsClientListBySubscriptionResponse, createLink func() string) {
@@ -327,32 +326,32 @@ func (c *CommunityCommunityTrainingsServerTransport) dispatchBeginUpdate(req *ht
 	}
 	beginUpdate := c.beginUpdate.get(req)
 	if beginUpdate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.Community/communityTrainings/(?P<communityTrainingName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armcommunitytraining.Update](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	communityTrainingNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("communityTrainingName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := c.srv.BeginUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, communityTrainingNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.Community/communityTrainings/(?P<communityTrainingName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armcommunitytraining.Update](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		communityTrainingNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("communityTrainingName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := c.srv.BeginUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, communityTrainingNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginUpdate = &respr
 		c.beginUpdate.add(req, beginUpdate)
 	}
@@ -372,4 +371,3 @@ func (c *CommunityCommunityTrainingsServerTransport) dispatchBeginUpdate(req *ht
 
 	return resp, nil
 }
-

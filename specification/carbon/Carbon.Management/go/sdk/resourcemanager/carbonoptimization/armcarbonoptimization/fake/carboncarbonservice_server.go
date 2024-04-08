@@ -17,7 +17,7 @@ import (
 )
 
 // CarbonCarbonServiceServer is a fake server for instances of the armcarbonoptimization.CarbonCarbonServiceClient type.
-type CarbonCarbonServiceServer struct{
+type CarbonCarbonServiceServer struct {
 	// NewListCarbonEmissionReportsPager is the fake for method CarbonCarbonServiceClient.NewListCarbonEmissionReportsPager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListCarbonEmissionReportsPager func(queryParameters armcarbonoptimization.QueryFilterClassification, options *armcarbonoptimization.CarbonCarbonServiceClientListCarbonEmissionReportsOptions) (resp azfake.PagerResponder[armcarbonoptimization.CarbonCarbonServiceClientListCarbonEmissionReportsResponse])
@@ -25,7 +25,6 @@ type CarbonCarbonServiceServer struct{
 	// QueryCarbonEmissionDataAvailableDateRange is the fake for method CarbonCarbonServiceClient.QueryCarbonEmissionDataAvailableDateRange
 	// HTTP status codes to indicate success: http.StatusOK
 	QueryCarbonEmissionDataAvailableDateRange func(ctx context.Context, options *armcarbonoptimization.CarbonCarbonServiceClientQueryCarbonEmissionDataAvailableDateRangeOptions) (resp azfake.Responder[armcarbonoptimization.CarbonCarbonServiceClientQueryCarbonEmissionDataAvailableDateRangeResponse], errResp azfake.ErrorResponder)
-
 }
 
 // NewCarbonCarbonServiceServerTransport creates a new instance of CarbonCarbonServiceServerTransport with the provided implementation.
@@ -33,7 +32,7 @@ type CarbonCarbonServiceServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewCarbonCarbonServiceServerTransport(srv *CarbonCarbonServiceServer) *CarbonCarbonServiceServerTransport {
 	return &CarbonCarbonServiceServerTransport{
-		srv: srv,
+		srv:                               srv,
 		newListCarbonEmissionReportsPager: newTracker[azfake.PagerResponder[armcarbonoptimization.CarbonCarbonServiceClientListCarbonEmissionReportsResponse]](),
 	}
 }
@@ -41,7 +40,7 @@ func NewCarbonCarbonServiceServerTransport(srv *CarbonCarbonServiceServer) *Carb
 // CarbonCarbonServiceServerTransport connects instances of armcarbonoptimization.CarbonCarbonServiceClient to instances of CarbonCarbonServiceServer.
 // Don't use this type directly, use NewCarbonCarbonServiceServerTransport instead.
 type CarbonCarbonServiceServerTransport struct {
-	srv *CarbonCarbonServiceServer
+	srv                               *CarbonCarbonServiceServer
 	newListCarbonEmissionReportsPager *tracker[azfake.PagerResponder[armcarbonoptimization.CarbonCarbonServiceClientListCarbonEmissionReportsResponse]]
 }
 
@@ -78,15 +77,15 @@ func (c *CarbonCarbonServiceServerTransport) dispatchNewListCarbonEmissionReport
 	}
 	newListCarbonEmissionReportsPager := c.newListCarbonEmissionReportsPager.get(req)
 	if newListCarbonEmissionReportsPager == nil {
-	raw, err := readRequestBody(req)
-	if err != nil {
-		return nil, err
-	}
-	body, err := unmarshalQueryFilterClassification(raw)
-	if err != nil {
-		return nil, err
-	}
-resp := c.srv.NewListCarbonEmissionReportsPager(body, nil)
+		raw, err := readRequestBody(req)
+		if err != nil {
+			return nil, err
+		}
+		body, err := unmarshalQueryFilterClassification(raw)
+		if err != nil {
+			return nil, err
+		}
+		resp := c.srv.NewListCarbonEmissionReportsPager(body, nil)
 		newListCarbonEmissionReportsPager = &resp
 		c.newListCarbonEmissionReportsPager.add(req, newListCarbonEmissionReportsPager)
 		server.PagerResponderInjectNextLinks(newListCarbonEmissionReportsPager, req, func(page *armcarbonoptimization.CarbonCarbonServiceClientListCarbonEmissionReportsResponse, createLink func() string) {
@@ -125,4 +124,3 @@ func (c *CarbonCarbonServiceServerTransport) dispatchQueryCarbonEmissionDataAvai
 	}
 	return resp, nil
 }
-

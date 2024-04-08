@@ -46,42 +46,6 @@ type Datastore struct {
 	KustoClusterDisplayName *string
 }
 
-// The resource management error additional info.
-type ErrorAdditionalInfo struct {
-	// The additional info.
-	Info *ErrorAdditionalInfoInfo
-
-	// The additional info type.
-	Type *string
-}
-
-type ErrorAdditionalInfoInfo struct {
-}
-
-// The error detail.
-type ErrorDetail struct {
-	// The error additional info.
-	AdditionalInfo []*ErrorAdditionalInfo
-
-	// The error code.
-	Code *string
-
-	// The error details.
-	Details []*ErrorDetail
-
-	// The error message.
-	Message *string
-
-	// The error target.
-	Target *string
-}
-
-// Common error response for all Azure Resource Manager APIs to return error details for failed operations.
-type ErrorResponse struct {
-	// The error object.
-	Error *ErrorDetail
-}
-
 // The properties of the managed service identities assigned to this resource.
 type ManagedIdentityProperties struct {
 	// REQUIRED; The type of managed identity assigned to this resource.
@@ -106,15 +70,15 @@ type Operation struct {
 	Display *OperationDisplay
 
 	// Whether the operation applies to data-plane. This is "true" for data-plane operations and "false" for Azure Resource Manager/control-plane
-// operations.
+	// operations.
 	IsDataAction *bool
 
 	// The name of the operation, as per Resource-Based Access Control (RBAC). Examples: "Microsoft.Compute/virtualMachines/write",
-// "Microsoft.Compute/virtualMachines/capture/action"
+	// "Microsoft.Compute/virtualMachines/capture/action"
 	Name *string
 
 	// The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is
-// "user,system"
+	// "user,system"
 	Origin *Origin
 }
 
@@ -124,7 +88,7 @@ type OperationDisplay struct {
 	Description *string
 
 	// The concise, localized friendly name for the operation; suitable for dropdowns. E.g. "Create or Update Virtual Machine",
-// "Restart Virtual Machine".
+	// "Restart Virtual Machine".
 	Operation *string
 
 	// The localized friendly form of the resource provider name, e.g. "Microsoft Monitoring Insights" or "Microsoft Compute".
@@ -161,7 +125,7 @@ type SQLDbElasticPoolTargetProperties struct {
 	AnchorDatabaseResourceID *string
 
 	// REQUIRED; The server name to use in the connection string when connecting to a target. Port number and instance name must
-// be specified separately.
+	// be specified separately.
 	ConnectionServerName *string
 
 	// REQUIRED; The Azure ResourceId of an Azure SQL DB elastic pool target.
@@ -171,7 +135,7 @@ type SQLDbElasticPoolTargetProperties struct {
 	TargetAuthenticationType *TargetAuthenticationType
 
 	// CONSTANT; The Azure SQL DB elastic pool target.
-// Field has constant value "SqlEp", any specified value is ignored.
+	// Field has constant value "SqlEp", any specified value is ignored.
 	TargetType *string
 
 	// The provisioning state of the resource.
@@ -187,18 +151,18 @@ type SQLDbElasticPoolTargetProperties struct {
 // GetTargetProperties implements the TargetPropertiesClassification interface for type SQLDbElasticPoolTargetProperties.
 func (s *SQLDbElasticPoolTargetProperties) GetTargetProperties() *TargetProperties {
 	return &TargetProperties{
-		ConnectionServerName: s.ConnectionServerName,
-		ProvisioningState: s.ProvisioningState,
+		ConnectionServerName:     s.ConnectionServerName,
+		ProvisioningState:        s.ProvisioningState,
 		TargetAuthenticationType: s.TargetAuthenticationType,
-		TargetType: s.TargetType,
-		TargetVault: s.TargetVault,
+		TargetType:               s.TargetType,
+		TargetVault:              s.TargetVault,
 	}
 }
 
 // The properties specific to single database in Azure SQL Database.
 type SQLDbSingleDatabaseTargetProperties struct {
 	// REQUIRED; The server name to use in the connection string when connecting to a target. Port number and instance name must
-// be specified separately.
+	// be specified separately.
 	ConnectionServerName *string
 
 	// REQUIRED; The Azure ResourceId of an Azure SQL DB single database target.
@@ -208,7 +172,7 @@ type SQLDbSingleDatabaseTargetProperties struct {
 	TargetAuthenticationType *TargetAuthenticationType
 
 	// CONSTANT; The Azure SQL DB single database target.
-// Field has constant value "SqlDb", any specified value is ignored.
+	// Field has constant value "SqlDb", any specified value is ignored.
 	TargetType *string
 
 	// The provisioning state of the resource.
@@ -224,18 +188,18 @@ type SQLDbSingleDatabaseTargetProperties struct {
 // GetTargetProperties implements the TargetPropertiesClassification interface for type SQLDbSingleDatabaseTargetProperties.
 func (s *SQLDbSingleDatabaseTargetProperties) GetTargetProperties() *TargetProperties {
 	return &TargetProperties{
-		ConnectionServerName: s.ConnectionServerName,
-		ProvisioningState: s.ProvisioningState,
+		ConnectionServerName:     s.ConnectionServerName,
+		ProvisioningState:        s.ProvisioningState,
 		TargetAuthenticationType: s.TargetAuthenticationType,
-		TargetType: s.TargetType,
-		TargetVault: s.TargetVault,
+		TargetType:               s.TargetType,
+		TargetVault:              s.TargetVault,
 	}
 }
 
 // The properties specific to Azure SQL Managed Instance targets.
 type SQLMiTargetProperties struct {
 	// REQUIRED; The server name to use in the connection string when connecting to a target. Port number and instance name must
-// be specified separately.
+	// be specified separately.
 	ConnectionServerName *string
 
 	// REQUIRED; The Azure ResourceId of an Azure SQL Managed Instance target.
@@ -245,7 +209,7 @@ type SQLMiTargetProperties struct {
 	TargetAuthenticationType *TargetAuthenticationType
 
 	// CONSTANT; The Azure SQL Managed Instance target.
-// Field has constant value "SqlMi", any specified value is ignored.
+	// Field has constant value "SqlMi", any specified value is ignored.
 	TargetType *string
 
 	// The TCP port number to optionally use in the connection string when connecting to an Azure SQL Managed Instance target.
@@ -264,18 +228,18 @@ type SQLMiTargetProperties struct {
 // GetTargetProperties implements the TargetPropertiesClassification interface for type SQLMiTargetProperties.
 func (s *SQLMiTargetProperties) GetTargetProperties() *TargetProperties {
 	return &TargetProperties{
-		ConnectionServerName: s.ConnectionServerName,
-		ProvisioningState: s.ProvisioningState,
+		ConnectionServerName:     s.ConnectionServerName,
+		ProvisioningState:        s.ProvisioningState,
 		TargetAuthenticationType: s.TargetAuthenticationType,
-		TargetType: s.TargetType,
-		TargetVault: s.TargetVault,
+		TargetType:               s.TargetType,
+		TargetVault:              s.TargetVault,
 	}
 }
 
 // The properties specific to Azure SQL VM targets.
 type SQLVMTargetProperties struct {
 	// REQUIRED; The server name to use in the connection string when connecting to a target. Port number and instance name must
-// be specified separately.
+	// be specified separately.
 	ConnectionServerName *string
 
 	// REQUIRED; The Azure ResourceId of an Azure SQL VM target.
@@ -285,7 +249,7 @@ type SQLVMTargetProperties struct {
 	TargetAuthenticationType *TargetAuthenticationType
 
 	// CONSTANT; The Azure SQL VM target.
-// Field has constant value "SqlVm", any specified value is ignored.
+	// Field has constant value "SqlVm", any specified value is ignored.
 	TargetType *string
 
 	// The TCP port number to optionally use in the connection string when connecting to an Azure SQL VM target.
@@ -304,11 +268,11 @@ type SQLVMTargetProperties struct {
 // GetTargetProperties implements the TargetPropertiesClassification interface for type SQLVMTargetProperties.
 func (s *SQLVMTargetProperties) GetTargetProperties() *TargetProperties {
 	return &TargetProperties{
-		ConnectionServerName: s.ConnectionServerName,
-		ProvisioningState: s.ProvisioningState,
+		ConnectionServerName:     s.ConnectionServerName,
+		ProvisioningState:        s.ProvisioningState,
 		TargetAuthenticationType: s.TargetAuthenticationType,
-		TargetType: s.TargetType,
-		TargetVault: s.TargetVault,
+		TargetType:               s.TargetType,
+		TargetVault:              s.TargetVault,
 	}
 }
 
@@ -411,7 +375,7 @@ type TargetListResult struct {
 // The generic properties of a target.
 type TargetProperties struct {
 	// REQUIRED; The server name to use in the connection string when connecting to a target. Port number and instance name must
-// be specified separately.
+	// be specified separately.
 	ConnectionServerName *string
 
 	// REQUIRED; The type of authentication to use when connecting to a target.
@@ -520,7 +484,7 @@ type WatcherProperties struct {
 // The type used for update operations of the Watcher.
 type WatcherUpdate struct {
 	// The managed service identities assigned to this resource.
-	Identity *ManagedIdentityProperties
+	Identity   *ManagedIdentityProperties
 	Properties *WatcherUpdateProperties
 
 	// Resource tags.
@@ -532,4 +496,3 @@ type WatcherUpdateProperties struct {
 	// The data store for collected monitoring data.
 	Datastore *Datastore
 }
-

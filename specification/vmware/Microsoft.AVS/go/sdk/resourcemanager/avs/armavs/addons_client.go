@@ -31,7 +31,7 @@ func NewAddonsClient(credential azcore.TokenCredential, options *arm.ClientOptio
 		return nil, err
 	}
 	client := &AddonsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -41,11 +41,11 @@ func NewAddonsClient(credential azcore.TokenCredential, options *arm.ClientOptio
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
 //   - addonName - Name of the addon.
-//   - resource - Resource create parameters.
+//   - addon - Resource create parameters.
 //   - options - AddonsClientCreateOrUpdateOptions contains the optional parameters for the AddonsClient.CreateOrUpdate method.
-func (client *AddonsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, addonName string, resource Addon, options *AddonsClientCreateOrUpdateOptions) (*runtime.Poller[AddonsClientCreateOrUpdateResponse], error) {
+func (client *AddonsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, addonName string, addon Addon, options *AddonsClientCreateOrUpdateOptions) (*runtime.Poller[AddonsClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
-		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, privateCloudName, addonName, resource, options)
+		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, privateCloudName, addonName, addon, options)
 		if err != nil {
 			return nil, err
 		}
@@ -57,10 +57,10 @@ func (client *AddonsClient) BeginCreateOrUpdate(ctx context.Context, subscriptio
 }
 
 // CreateOrUpdate - Create a Addon
-func (client *AddonsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, addonName string, resource Addon, options *AddonsClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *AddonsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, addonName string, addon Addon, options *AddonsClientCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AddonsClient.BeginCreateOrUpdate")
-	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, addonName, resource, options)
+	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, addonName, addon, options)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ func (client *AddonsClient) createOrUpdate(ctx context.Context, subscriptionID s
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *AddonsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, addonName string, resource Addon, options *AddonsClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *AddonsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, addonName string, addon Addon, options *AddonsClientCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/addons/{addonName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -103,9 +103,9 @@ func (client *AddonsClient) createOrUpdateCreateRequest(ctx context.Context, sub
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
-	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+	if err := runtime.MarshalAsJSON(req, addon); err != nil {
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -247,13 +247,13 @@ func (client *AddonsClient) getHandleResponse(resp *http.Response) (AddonsClient
 //   - privateCloudName - Name of the private cloud
 //   - options - AddonsClientListByPrivateCloudOptions contains the optional parameters for the AddonsClient.NewListByPrivateCloudPager
 //     method.
-func (client *AddonsClient) NewListByPrivateCloudPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *AddonsClientListByPrivateCloudOptions) (*runtime.Pager[AddonsClientListByPrivateCloudResponse]) {
+func (client *AddonsClient) NewListByPrivateCloudPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *AddonsClientListByPrivateCloudOptions) *runtime.Pager[AddonsClientListByPrivateCloudResponse] {
 	return runtime.NewPager(runtime.PagingHandler[AddonsClientListByPrivateCloudResponse]{
 		More: func(page AddonsClientListByPrivateCloudResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AddonsClientListByPrivateCloudResponse) (AddonsClientListByPrivateCloudResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AddonsClient.NewListByPrivateCloudPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AddonsClient.NewListByPrivateCloudPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -265,7 +265,7 @@ func (client *AddonsClient) NewListByPrivateCloudPager(subscriptionID string, re
 				return AddonsClientListByPrivateCloudResponse{}, err
 			}
 			return client.listByPrivateCloudHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -303,4 +303,3 @@ func (client *AddonsClient) listByPrivateCloudHandleResponse(resp *http.Response
 	}
 	return result, nil
 }
-

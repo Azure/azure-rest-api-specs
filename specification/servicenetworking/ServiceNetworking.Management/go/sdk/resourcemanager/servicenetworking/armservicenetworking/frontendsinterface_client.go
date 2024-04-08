@@ -31,7 +31,7 @@ func NewFrontendsInterfaceClient(credential azcore.TokenCredential, options *arm
 		return nil, err
 	}
 	client := &FrontendsInterfaceClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -105,8 +105,8 @@ func (client *FrontendsInterfaceClient) createOrUpdateCreateRequest(ctx context.
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -249,13 +249,13 @@ func (client *FrontendsInterfaceClient) getHandleResponse(resp *http.Response) (
 //   - trafficControllerName - traffic controller name for path
 //   - options - FrontendsInterfaceClientListByTrafficControllerOptions contains the optional parameters for the FrontendsInterfaceClient.NewListByTrafficControllerPager
 //     method.
-func (client *FrontendsInterfaceClient) NewListByTrafficControllerPager(subscriptionID string, resourceGroupName string, trafficControllerName string, options *FrontendsInterfaceClientListByTrafficControllerOptions) (*runtime.Pager[FrontendsInterfaceClientListByTrafficControllerResponse]) {
+func (client *FrontendsInterfaceClient) NewListByTrafficControllerPager(subscriptionID string, resourceGroupName string, trafficControllerName string, options *FrontendsInterfaceClientListByTrafficControllerOptions) *runtime.Pager[FrontendsInterfaceClientListByTrafficControllerResponse] {
 	return runtime.NewPager(runtime.PagingHandler[FrontendsInterfaceClientListByTrafficControllerResponse]{
 		More: func(page FrontendsInterfaceClientListByTrafficControllerResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *FrontendsInterfaceClientListByTrafficControllerResponse) (FrontendsInterfaceClientListByTrafficControllerResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "FrontendsInterfaceClient.NewListByTrafficControllerPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "FrontendsInterfaceClient.NewListByTrafficControllerPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -267,7 +267,7 @@ func (client *FrontendsInterfaceClient) NewListByTrafficControllerPager(subscrip
 				return FrontendsInterfaceClientListByTrafficControllerResponse{}, err
 			}
 			return client.listByTrafficControllerHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -362,8 +362,8 @@ func (client *FrontendsInterfaceClient) updateCreateRequest(ctx context.Context,
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -375,4 +375,3 @@ func (client *FrontendsInterfaceClient) updateHandleResponse(resp *http.Response
 	}
 	return result, nil
 }
-

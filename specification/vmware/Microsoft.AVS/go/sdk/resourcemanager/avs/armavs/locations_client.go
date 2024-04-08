@@ -31,7 +31,7 @@ func NewLocationsClient(credential azcore.TokenCredential, options *arm.ClientOp
 		return nil, err
 	}
 	client := &LocationsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -136,9 +136,9 @@ func (client *LocationsClient) checkTrialAvailabilityCreateRequest(ctx context.C
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if options != nil && options.Sku != nil {
-	if err := runtime.MarshalAsJSON(req, *options.Sku); err != nil {
-	return nil, err
-}
+		if err := runtime.MarshalAsJSON(req, *options.Sku); err != nil {
+			return nil, err
+		}
 		return req, nil
 	}
 	return req, nil
@@ -152,4 +152,3 @@ func (client *LocationsClient) checkTrialAvailabilityHandleResponse(resp *http.R
 	}
 	return result, nil
 }
-

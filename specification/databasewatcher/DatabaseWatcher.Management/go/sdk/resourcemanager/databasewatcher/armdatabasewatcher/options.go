@@ -94,4 +94,3 @@ type WatchersClientStopOptions struct {
 type WatchersClientUpdateOptions struct {
 	ResumeToken string
 }
-

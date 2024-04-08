@@ -8,4 +8,3 @@ package armworkloads
 type OperationsClientListOptions struct {
 	// placeholder for future optional parameters
 }
-

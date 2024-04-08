@@ -16,13 +16,14 @@ import (
 	"net/http"
 	"net/url"
 	"regexp"
+	"strconv"
 )
 
 // WorkloadNetworkVmGroupsServer is a fake server for instances of the armavs.WorkloadNetworkVmGroupsClient type.
-type WorkloadNetworkVmGroupsServer struct{
-	// BeginCreate is the fake for method WorkloadNetworkVmGroupsClient.BeginCreate
+type WorkloadNetworkVmGroupsServer struct {
+	// Create is the fake for method WorkloadNetworkVmGroupsClient.Create
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
-	BeginCreate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, vmGroupID string, resource armavs.WorkloadNetworkVMGroup, options *armavs.WorkloadNetworkVmGroupsClientCreateOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkVmGroupsClientCreateResponse], errResp azfake.ErrorResponder)
+	Create func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, vmGroupID string, resource armavs.WorkloadNetworkVMGroup, options *armavs.WorkloadNetworkVmGroupsClientCreateOptions) (resp azfake.Responder[armavs.WorkloadNetworkVmGroupsClientCreateResponse], errResp azfake.ErrorResponder)
 
 	// BeginDelete is the fake for method WorkloadNetworkVmGroupsClient.BeginDelete
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted, http.StatusNoContent
@@ -38,8 +39,7 @@ type WorkloadNetworkVmGroupsServer struct{
 
 	// BeginUpdate is the fake for method WorkloadNetworkVmGroupsClient.BeginUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
-	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, vmGroupID string, properties armavs.WorkloadNetworkVMGroupUpdate, options *armavs.WorkloadNetworkVmGroupsClientUpdateOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkVmGroupsClientUpdateResponse], errResp azfake.ErrorResponder)
-
+	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, vmGroupID string, workloadNetworkVMGroup armavs.WorkloadNetworkVMGroupUpdate, options *armavs.WorkloadNetworkVmGroupsClientUpdateOptions) (resp azfake.PollerResponder[armavs.WorkloadNetworkVmGroupsClientUpdateResponse], errResp azfake.ErrorResponder)
 }
 
 // NewWorkloadNetworkVmGroupsServerTransport creates a new instance of WorkloadNetworkVmGroupsServerTransport with the provided implementation.
@@ -47,22 +47,20 @@ type WorkloadNetworkVmGroupsServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewWorkloadNetworkVmGroupsServerTransport(srv *WorkloadNetworkVmGroupsServer) *WorkloadNetworkVmGroupsServerTransport {
 	return &WorkloadNetworkVmGroupsServerTransport{
-		srv: srv,
-		beginCreate: newTracker[azfake.PollerResponder[armavs.WorkloadNetworkVmGroupsClientCreateResponse]](),
-		beginDelete: newTracker[azfake.PollerResponder[armavs.WorkloadNetworkVmGroupsClientDeleteResponse]](),
+		srv:                           srv,
+		beginDelete:                   newTracker[azfake.PollerResponder[armavs.WorkloadNetworkVmGroupsClientDeleteResponse]](),
 		newListByWorkloadNetworkPager: newTracker[azfake.PagerResponder[armavs.WorkloadNetworkVmGroupsClientListByWorkloadNetworkResponse]](),
-		beginUpdate: newTracker[azfake.PollerResponder[armavs.WorkloadNetworkVmGroupsClientUpdateResponse]](),
+		beginUpdate:                   newTracker[azfake.PollerResponder[armavs.WorkloadNetworkVmGroupsClientUpdateResponse]](),
 	}
 }
 
 // WorkloadNetworkVmGroupsServerTransport connects instances of armavs.WorkloadNetworkVmGroupsClient to instances of WorkloadNetworkVmGroupsServer.
 // Don't use this type directly, use NewWorkloadNetworkVmGroupsServerTransport instead.
 type WorkloadNetworkVmGroupsServerTransport struct {
-	srv *WorkloadNetworkVmGroupsServer
-	beginCreate *tracker[azfake.PollerResponder[armavs.WorkloadNetworkVmGroupsClientCreateResponse]]
-	beginDelete *tracker[azfake.PollerResponder[armavs.WorkloadNetworkVmGroupsClientDeleteResponse]]
+	srv                           *WorkloadNetworkVmGroupsServer
+	beginDelete                   *tracker[azfake.PollerResponder[armavs.WorkloadNetworkVmGroupsClientDeleteResponse]]
 	newListByWorkloadNetworkPager *tracker[azfake.PagerResponder[armavs.WorkloadNetworkVmGroupsClientListByWorkloadNetworkResponse]]
-	beginUpdate *tracker[azfake.PollerResponder[armavs.WorkloadNetworkVmGroupsClientUpdateResponse]]
+	beginUpdate                   *tracker[azfake.PollerResponder[armavs.WorkloadNetworkVmGroupsClientUpdateResponse]]
 }
 
 // Do implements the policy.Transporter interface for WorkloadNetworkVmGroupsServerTransport.
@@ -81,8 +79,8 @@ func (w *WorkloadNetworkVmGroupsServerTransport) dispatchToMethodFake(req *http.
 	var err error
 
 	switch method {
-	case "WorkloadNetworkVmGroupsClient.BeginCreate":
-		resp, err = w.dispatchBeginCreate(req)
+	case "WorkloadNetworkVmGroupsClient.Create":
+		resp, err = w.dispatchCreate(req)
 	case "WorkloadNetworkVmGroupsClient.BeginDelete":
 		resp, err = w.dispatchBeginDelete(req)
 	case "WorkloadNetworkVmGroupsClient.Get":
@@ -98,12 +96,10 @@ func (w *WorkloadNetworkVmGroupsServerTransport) dispatchToMethodFake(req *http.
 	return resp, err
 }
 
-func (w *WorkloadNetworkVmGroupsServerTransport) dispatchBeginCreate(req *http.Request) (*http.Response, error) {
-	if w.srv.BeginCreate == nil {
-		return nil, &nonRetriableError{errors.New("fake for method BeginCreate not implemented")}
+func (w *WorkloadNetworkVmGroupsServerTransport) dispatchCreate(req *http.Request) (*http.Response, error) {
+	if w.srv.Create == nil {
+		return nil, &nonRetriableError{errors.New("fake for method Create not implemented")}
 	}
-	beginCreate := w.beginCreate.get(req)
-	if beginCreate == nil {
 	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/vmGroups/(?P<vmGroupId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
 	regex := regexp.MustCompile(regexStr)
 	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
@@ -130,27 +126,21 @@ func (w *WorkloadNetworkVmGroupsServerTransport) dispatchBeginCreate(req *http.R
 	if err != nil {
 		return nil, err
 	}
-	respr, errRespr := w.srv.BeginCreate(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, vmGroupIDParam, body, nil)
+	respr, errRespr := w.srv.Create(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, vmGroupIDParam, body, nil)
 	if respErr := server.GetError(errRespr, req); respErr != nil {
 		return nil, respErr
 	}
-		beginCreate = &respr
-		w.beginCreate.add(req, beginCreate)
+	respContent := server.GetResponseContent(respr)
+	if !contains([]int{http.StatusOK, http.StatusCreated}, respContent.HTTPStatus) {
+		return nil, &nonRetriableError{fmt.Errorf("unexpected status code %d. acceptable values are http.StatusOK, http.StatusCreated", respContent.HTTPStatus)}
 	}
-
-	resp, err := server.PollerResponderNext(beginCreate, req)
+	resp, err := server.MarshalResponseAsJSON(respContent, server.GetResponse(respr).WorkloadNetworkVMGroup, req)
 	if err != nil {
 		return nil, err
 	}
-
-	if !contains([]int{http.StatusOK, http.StatusCreated}, resp.StatusCode) {
-		w.beginCreate.remove(req)
-		return nil, &nonRetriableError{fmt.Errorf("unexpected status code %d. acceptable values are http.StatusOK, http.StatusCreated", resp.StatusCode)}
+	if val := server.GetResponse(respr).RetryAfter; val != nil {
+		resp.Header.Set("Retry-After", strconv.FormatInt(int64(*val), 10))
 	}
-	if !server.PollerResponderMore(beginCreate) {
-		w.beginCreate.remove(req)
-	}
-
 	return resp, nil
 }
 
@@ -160,32 +150,32 @@ func (w *WorkloadNetworkVmGroupsServerTransport) dispatchBeginDelete(req *http.R
 	}
 	beginDelete := w.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/vmGroups/(?P<vmGroupId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	vmGroupIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("vmGroupId")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := w.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, vmGroupIDParam, privateCloudNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/vmGroups/(?P<vmGroupId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		vmGroupIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("vmGroupId")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := w.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, vmGroupIDParam, privateCloudNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		w.beginDelete.add(req, beginDelete)
 	}
@@ -253,25 +243,25 @@ func (w *WorkloadNetworkVmGroupsServerTransport) dispatchNewListByWorkloadNetwor
 	}
 	newListByWorkloadNetworkPager := w.newListByWorkloadNetworkPager.get(req)
 	if newListByWorkloadNetworkPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/vmGroups`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-resp := w.srv.NewListByWorkloadNetworkPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/vmGroups`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := w.srv.NewListByWorkloadNetworkPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, nil)
 		newListByWorkloadNetworkPager = &resp
 		w.newListByWorkloadNetworkPager.add(req, newListByWorkloadNetworkPager)
 		server.PagerResponderInjectNextLinks(newListByWorkloadNetworkPager, req, func(page *armavs.WorkloadNetworkVmGroupsClientListByWorkloadNetworkResponse, createLink func() string) {
@@ -298,36 +288,36 @@ func (w *WorkloadNetworkVmGroupsServerTransport) dispatchBeginUpdate(req *http.R
 	}
 	beginUpdate := w.beginUpdate.get(req)
 	if beginUpdate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/vmGroups/(?P<vmGroupId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armavs.WorkloadNetworkVMGroupUpdate](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-	vmGroupIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("vmGroupId")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := w.srv.BeginUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, vmGroupIDParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workloadNetworks/default/vmGroups/(?P<vmGroupId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armavs.WorkloadNetworkVMGroupUpdate](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		vmGroupIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("vmGroupId")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := w.srv.BeginUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, vmGroupIDParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginUpdate = &respr
 		w.beginUpdate.add(req, beginUpdate)
 	}
@@ -347,4 +337,3 @@ func (w *WorkloadNetworkVmGroupsServerTransport) dispatchBeginUpdate(req *http.R
 
 	return resp, nil
 }
-

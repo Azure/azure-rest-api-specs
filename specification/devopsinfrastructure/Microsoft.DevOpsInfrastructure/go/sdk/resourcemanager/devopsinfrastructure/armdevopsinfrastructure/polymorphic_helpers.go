@@ -72,4 +72,3 @@ func unmarshalOrganizationProfileClassification(rawMsg json.RawMessage) (Organiz
 	}
 	return b, nil
 }
-

@@ -19,7 +19,7 @@ import (
 )
 
 // ScriptCmdletsServer is a fake server for instances of the armavs.ScriptCmdletsClient type.
-type ScriptCmdletsServer struct{
+type ScriptCmdletsServer struct {
 	// Get is the fake for method ScriptCmdletsClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
 	Get func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptPackageName string, scriptCmdletName string, options *armavs.ScriptCmdletsClientGetOptions) (resp azfake.Responder[armavs.ScriptCmdletsClientGetResponse], errResp azfake.ErrorResponder)
@@ -27,7 +27,6 @@ type ScriptCmdletsServer struct{
 	// NewListByScriptPackagePager is the fake for method ScriptCmdletsClient.NewListByScriptPackagePager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListByScriptPackagePager func(subscriptionID string, resourceGroupName string, privateCloudName string, scriptPackageName string, options *armavs.ScriptCmdletsClientListByScriptPackageOptions) (resp azfake.PagerResponder[armavs.ScriptCmdletsClientListByScriptPackageResponse])
-
 }
 
 // NewScriptCmdletsServerTransport creates a new instance of ScriptCmdletsServerTransport with the provided implementation.
@@ -35,7 +34,7 @@ type ScriptCmdletsServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewScriptCmdletsServerTransport(srv *ScriptCmdletsServer) *ScriptCmdletsServerTransport {
 	return &ScriptCmdletsServerTransport{
-		srv: srv,
+		srv:                         srv,
 		newListByScriptPackagePager: newTracker[azfake.PagerResponder[armavs.ScriptCmdletsClientListByScriptPackageResponse]](),
 	}
 }
@@ -43,7 +42,7 @@ func NewScriptCmdletsServerTransport(srv *ScriptCmdletsServer) *ScriptCmdletsSer
 // ScriptCmdletsServerTransport connects instances of armavs.ScriptCmdletsClient to instances of ScriptCmdletsServer.
 // Don't use this type directly, use NewScriptCmdletsServerTransport instead.
 type ScriptCmdletsServerTransport struct {
-	srv *ScriptCmdletsServer
+	srv                         *ScriptCmdletsServer
 	newListByScriptPackagePager *tracker[azfake.PagerResponder[armavs.ScriptCmdletsClientListByScriptPackageResponse]]
 }
 
@@ -125,29 +124,29 @@ func (s *ScriptCmdletsServerTransport) dispatchNewListByScriptPackagePager(req *
 	}
 	newListByScriptPackagePager := s.newListByScriptPackagePager.get(req)
 	if newListByScriptPackagePager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/scriptPackages/(?P<scriptPackageName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/scriptCmdlets`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-	scriptPackageNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("scriptPackageName")])
-	if err != nil {
-		return nil, err
-	}
-resp := s.srv.NewListByScriptPackagePager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, scriptPackageNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/scriptPackages/(?P<scriptPackageName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/scriptCmdlets`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		scriptPackageNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("scriptPackageName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := s.srv.NewListByScriptPackagePager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, scriptPackageNameParam, nil)
 		newListByScriptPackagePager = &resp
 		s.newListByScriptPackagePager.add(req, newListByScriptPackagePager)
 		server.PagerResponderInjectNextLinks(newListByScriptPackagePager, req, func(page *armavs.ScriptCmdletsClientListByScriptPackageResponse, createLink func() string) {
@@ -167,4 +166,3 @@ resp := s.srv.NewListByScriptPackagePager(subscriptionIDParam, resourceGroupName
 	}
 	return resp, nil
 }
-

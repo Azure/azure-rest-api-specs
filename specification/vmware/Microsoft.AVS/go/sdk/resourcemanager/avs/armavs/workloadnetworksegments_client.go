@@ -13,6 +13,7 @@ import (
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/runtime"
 	"net/http"
 	"net/url"
+	"strconv"
 	"strings"
 )
 
@@ -31,53 +32,40 @@ func NewWorkloadNetworkSegmentsClient(credential azcore.TokenCredential, options
 		return nil, err
 	}
 	client := &WorkloadNetworkSegmentsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
 
-// BeginCreate - Create a WorkloadNetworkSegment
+// Create - Create a WorkloadNetworkSegment
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
 //   - segmentID - The ID of the NSX Segment
-//   - resource - Resource create parameters.
+//   - workloadNetworkSegment - Resource create parameters.
 //   - options - WorkloadNetworkSegmentsClientCreateOptions contains the optional parameters for the WorkloadNetworkSegmentsClient.Create
 //     method.
-func (client *WorkloadNetworkSegmentsClient) BeginCreate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, segmentID string, resource WorkloadNetworkSegment, options *WorkloadNetworkSegmentsClientCreateOptions) (*runtime.Poller[WorkloadNetworkSegmentsClientCreateResponse], error) {
-	if options == nil || options.ResumeToken == "" {
-		resp, err := client.create(ctx, subscriptionID, resourceGroupName, privateCloudName, segmentID, resource, options)
-		if err != nil {
-			return nil, err
-		}
-		poller, err := runtime.NewPoller[WorkloadNetworkSegmentsClientCreateResponse](resp, client.internal.Pipeline(), nil)
-		return poller, err
-	} else {
-		return runtime.NewPollerFromResumeToken[WorkloadNetworkSegmentsClientCreateResponse](options.ResumeToken, client.internal.Pipeline(), nil)
-	}
-}
-
-// Create - Create a WorkloadNetworkSegment
-func (client *WorkloadNetworkSegmentsClient) create(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, segmentID string, resource WorkloadNetworkSegment, options *WorkloadNetworkSegmentsClientCreateOptions) (*http.Response, error) {
+func (client *WorkloadNetworkSegmentsClient) Create(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, segmentID string, workloadNetworkSegment WorkloadNetworkSegment, options *WorkloadNetworkSegmentsClientCreateOptions) (WorkloadNetworkSegmentsClientCreateResponse, error) {
 	var err error
-	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkSegmentsClient.BeginCreate")
-	req, err := client.createCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, segmentID, resource, options)
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkSegmentsClient.Create")
+	req, err := client.createCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, segmentID, workloadNetworkSegment, options)
 	if err != nil {
-		return nil, err
+		return WorkloadNetworkSegmentsClientCreateResponse{}, err
 	}
 	httpResp, err := client.internal.Pipeline().Do(req)
 	if err != nil {
-		return nil, err
+		return WorkloadNetworkSegmentsClientCreateResponse{}, err
 	}
 	if !runtime.HasStatusCode(httpResp, http.StatusOK, http.StatusCreated) {
 		err = runtime.NewResponseError(httpResp)
-		return nil, err
+		return WorkloadNetworkSegmentsClientCreateResponse{}, err
 	}
-	return httpResp, nil
+	resp, err := client.createHandleResponse(httpResp)
+	return resp, err
 }
 
 // createCreateRequest creates the Create request.
-func (client *WorkloadNetworkSegmentsClient) createCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, segmentID string, resource WorkloadNetworkSegment, options *WorkloadNetworkSegmentsClientCreateOptions) (*policy.Request, error) {
+func (client *WorkloadNetworkSegmentsClient) createCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, segmentID string, workloadNetworkSegment WorkloadNetworkSegment, options *WorkloadNetworkSegmentsClientCreateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/segments/{segmentId}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -104,10 +92,27 @@ func (client *WorkloadNetworkSegmentsClient) createCreateRequest(ctx context.Con
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
-	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+	if err := runtime.MarshalAsJSON(req, workloadNetworkSegment); err != nil {
+		return nil, err
+	}
 	return req, nil
+}
+
+// createHandleResponse handles the Create response.
+func (client *WorkloadNetworkSegmentsClient) createHandleResponse(resp *http.Response) (WorkloadNetworkSegmentsClientCreateResponse, error) {
+	result := WorkloadNetworkSegmentsClientCreateResponse{}
+	if val := resp.Header.Get("Retry-After"); val != "" {
+		retryAfter32, err := strconv.ParseInt(val, 10, 32)
+		retryAfter := int32(retryAfter32)
+		if err != nil {
+			return WorkloadNetworkSegmentsClientCreateResponse{}, err
+		}
+		result.RetryAfter = &retryAfter
+	}
+	if err := runtime.UnmarshalAsJSON(resp, &result.WorkloadNetworkSegment); err != nil {
+		return WorkloadNetworkSegmentsClientCreateResponse{}, err
+	}
+	return result, nil
 }
 
 // BeginDeleteSegment - Delete a WorkloadNetworkSegment
@@ -250,13 +255,13 @@ func (client *WorkloadNetworkSegmentsClient) getHandleResponse(resp *http.Respon
 //   - privateCloudName - Name of the private cloud
 //   - options - WorkloadNetworkSegmentsClientListByWorkloadNetworkOptions contains the optional parameters for the WorkloadNetworkSegmentsClient.NewListByWorkloadNetworkPager
 //     method.
-func (client *WorkloadNetworkSegmentsClient) NewListByWorkloadNetworkPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *WorkloadNetworkSegmentsClientListByWorkloadNetworkOptions) (*runtime.Pager[WorkloadNetworkSegmentsClientListByWorkloadNetworkResponse]) {
+func (client *WorkloadNetworkSegmentsClient) NewListByWorkloadNetworkPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *WorkloadNetworkSegmentsClientListByWorkloadNetworkOptions) *runtime.Pager[WorkloadNetworkSegmentsClientListByWorkloadNetworkResponse] {
 	return runtime.NewPager(runtime.PagingHandler[WorkloadNetworkSegmentsClientListByWorkloadNetworkResponse]{
 		More: func(page WorkloadNetworkSegmentsClientListByWorkloadNetworkResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *WorkloadNetworkSegmentsClientListByWorkloadNetworkResponse) (WorkloadNetworkSegmentsClientListByWorkloadNetworkResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkSegmentsClient.NewListByWorkloadNetworkPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkSegmentsClient.NewListByWorkloadNetworkPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -268,7 +273,7 @@ func (client *WorkloadNetworkSegmentsClient) NewListByWorkloadNetworkPager(subsc
 				return WorkloadNetworkSegmentsClientListByWorkloadNetworkResponse{}, err
 			}
 			return client.listByWorkloadNetworkHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -376,8 +381,7 @@ func (client *WorkloadNetworkSegmentsClient) updateCreateRequest(ctx context.Con
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
-

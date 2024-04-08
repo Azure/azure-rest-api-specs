@@ -19,7 +19,7 @@ import (
 )
 
 // CertificateProfilesServer is a fake server for instances of the armcodesigning.CertificateProfilesClient type.
-type CertificateProfilesServer struct{
+type CertificateProfilesServer struct {
 	// BeginCreate is the fake for method CertificateProfilesClient.BeginCreate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
 	BeginCreate func(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, profileName string, resource armcodesigning.CertificateProfile, options *armcodesigning.CertificateProfilesClientCreateOptions) (resp azfake.PollerResponder[armcodesigning.CertificateProfilesClientCreateResponse], errResp azfake.ErrorResponder)
@@ -39,7 +39,6 @@ type CertificateProfilesServer struct{
 	// RevokeCertificate is the fake for method CertificateProfilesClient.RevokeCertificate
 	// HTTP status codes to indicate success: http.StatusNoContent
 	RevokeCertificate func(ctx context.Context, subscriptionID string, resourceGroupName string, accountName string, profileName string, body armcodesigning.RevokeCertificate, options *armcodesigning.CertificateProfilesClientRevokeCertificateOptions) (resp azfake.Responder[armcodesigning.CertificateProfilesClientRevokeCertificateResponse], errResp azfake.ErrorResponder)
-
 }
 
 // NewCertificateProfilesServerTransport creates a new instance of CertificateProfilesServerTransport with the provided implementation.
@@ -47,9 +46,9 @@ type CertificateProfilesServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewCertificateProfilesServerTransport(srv *CertificateProfilesServer) *CertificateProfilesServerTransport {
 	return &CertificateProfilesServerTransport{
-		srv: srv,
-		beginCreate: newTracker[azfake.PollerResponder[armcodesigning.CertificateProfilesClientCreateResponse]](),
-		beginDelete: newTracker[azfake.PollerResponder[armcodesigning.CertificateProfilesClientDeleteResponse]](),
+		srv:                              srv,
+		beginCreate:                      newTracker[azfake.PollerResponder[armcodesigning.CertificateProfilesClientCreateResponse]](),
+		beginDelete:                      newTracker[azfake.PollerResponder[armcodesigning.CertificateProfilesClientDeleteResponse]](),
 		newListByCodeSigningAccountPager: newTracker[azfake.PagerResponder[armcodesigning.CertificateProfilesClientListByCodeSigningAccountResponse]](),
 	}
 }
@@ -57,9 +56,9 @@ func NewCertificateProfilesServerTransport(srv *CertificateProfilesServer) *Cert
 // CertificateProfilesServerTransport connects instances of armcodesigning.CertificateProfilesClient to instances of CertificateProfilesServer.
 // Don't use this type directly, use NewCertificateProfilesServerTransport instead.
 type CertificateProfilesServerTransport struct {
-	srv *CertificateProfilesServer
-	beginCreate *tracker[azfake.PollerResponder[armcodesigning.CertificateProfilesClientCreateResponse]]
-	beginDelete *tracker[azfake.PollerResponder[armcodesigning.CertificateProfilesClientDeleteResponse]]
+	srv                              *CertificateProfilesServer
+	beginCreate                      *tracker[azfake.PollerResponder[armcodesigning.CertificateProfilesClientCreateResponse]]
+	beginDelete                      *tracker[azfake.PollerResponder[armcodesigning.CertificateProfilesClientDeleteResponse]]
 	newListByCodeSigningAccountPager *tracker[azfake.PagerResponder[armcodesigning.CertificateProfilesClientListByCodeSigningAccountResponse]]
 }
 
@@ -102,36 +101,36 @@ func (c *CertificateProfilesServerTransport) dispatchBeginCreate(req *http.Reque
 	}
 	beginCreate := c.beginCreate.get(req)
 	if beginCreate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.CodeSigning/codeSigningAccounts/(?P<accountName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/certificateProfiles/(?P<profileName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armcodesigning.CertificateProfile](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	accountNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("accountName")])
-	if err != nil {
-		return nil, err
-	}
-	profileNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("profileName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := c.srv.BeginCreate(req.Context(), subscriptionIDParam, resourceGroupNameParam, accountNameParam, profileNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.CodeSigning/codeSigningAccounts/(?P<accountName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/certificateProfiles/(?P<profileName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armcodesigning.CertificateProfile](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		accountNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("accountName")])
+		if err != nil {
+			return nil, err
+		}
+		profileNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("profileName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := c.srv.BeginCreate(req.Context(), subscriptionIDParam, resourceGroupNameParam, accountNameParam, profileNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginCreate = &respr
 		c.beginCreate.add(req, beginCreate)
 	}
@@ -158,32 +157,32 @@ func (c *CertificateProfilesServerTransport) dispatchBeginDelete(req *http.Reque
 	}
 	beginDelete := c.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.CodeSigning/codeSigningAccounts/(?P<accountName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/certificateProfiles/(?P<profileName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	accountNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("accountName")])
-	if err != nil {
-		return nil, err
-	}
-	profileNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("profileName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := c.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, accountNameParam, profileNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.CodeSigning/codeSigningAccounts/(?P<accountName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/certificateProfiles/(?P<profileName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		accountNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("accountName")])
+		if err != nil {
+			return nil, err
+		}
+		profileNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("profileName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := c.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, accountNameParam, profileNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		c.beginDelete.add(req, beginDelete)
 	}
@@ -251,25 +250,25 @@ func (c *CertificateProfilesServerTransport) dispatchNewListByCodeSigningAccount
 	}
 	newListByCodeSigningAccountPager := c.newListByCodeSigningAccountPager.get(req)
 	if newListByCodeSigningAccountPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.CodeSigning/codeSigningAccounts/(?P<accountName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/certificateProfiles`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	accountNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("accountName")])
-	if err != nil {
-		return nil, err
-	}
-resp := c.srv.NewListByCodeSigningAccountPager(subscriptionIDParam, resourceGroupNameParam, accountNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.CodeSigning/codeSigningAccounts/(?P<accountName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/certificateProfiles`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		accountNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("accountName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := c.srv.NewListByCodeSigningAccountPager(subscriptionIDParam, resourceGroupNameParam, accountNameParam, nil)
 		newListByCodeSigningAccountPager = &resp
 		c.newListByCodeSigningAccountPager.add(req, newListByCodeSigningAccountPager)
 		server.PagerResponderInjectNextLinks(newListByCodeSigningAccountPager, req, func(page *armcodesigning.CertificateProfilesClientListByCodeSigningAccountResponse, createLink func() string) {
@@ -334,4 +333,3 @@ func (c *CertificateProfilesServerTransport) dispatchRevokeCertificate(req *http
 	}
 	return resp, nil
 }
-

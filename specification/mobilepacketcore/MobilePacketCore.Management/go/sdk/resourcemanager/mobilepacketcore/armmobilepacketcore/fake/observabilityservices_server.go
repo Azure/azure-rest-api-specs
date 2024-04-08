@@ -20,7 +20,7 @@ import (
 )
 
 // ObservabilityServicesServer is a fake server for instances of the armmobilepacketcore.ObservabilityServicesClient type.
-type ObservabilityServicesServer struct{
+type ObservabilityServicesServer struct {
 	// CreateOrUpdate is the fake for method ObservabilityServicesClient.CreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
 	CreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, observabilityServiceName string, resource armmobilepacketcore.ObservabilityServiceResource, options *armmobilepacketcore.ObservabilityServicesClientCreateOrUpdateOptions) (resp azfake.Responder[armmobilepacketcore.ObservabilityServicesClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
@@ -44,7 +44,6 @@ type ObservabilityServicesServer struct{
 	// UpdateTags is the fake for method ObservabilityServicesClient.UpdateTags
 	// HTTP status codes to indicate success: http.StatusOK
 	UpdateTags func(ctx context.Context, subscriptionID string, resourceGroupName string, observabilityServiceName string, properties armmobilepacketcore.ObservabilityServiceResourceTagsUpdate, options *armmobilepacketcore.ObservabilityServicesClientUpdateTagsOptions) (resp azfake.Responder[armmobilepacketcore.ObservabilityServicesClientUpdateTagsResponse], errResp azfake.ErrorResponder)
-
 }
 
 // NewObservabilityServicesServerTransport creates a new instance of ObservabilityServicesServerTransport with the provided implementation.
@@ -52,20 +51,20 @@ type ObservabilityServicesServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewObservabilityServicesServerTransport(srv *ObservabilityServicesServer) *ObservabilityServicesServerTransport {
 	return &ObservabilityServicesServerTransport{
-		srv: srv,
-		beginDelete: newTracker[azfake.PollerResponder[armmobilepacketcore.ObservabilityServicesClientDeleteResponse]](),
+		srv:                         srv,
+		beginDelete:                 newTracker[azfake.PollerResponder[armmobilepacketcore.ObservabilityServicesClientDeleteResponse]](),
 		newListByResourceGroupPager: newTracker[azfake.PagerResponder[armmobilepacketcore.ObservabilityServicesClientListByResourceGroupResponse]](),
-		newListBySubscriptionPager: newTracker[azfake.PagerResponder[armmobilepacketcore.ObservabilityServicesClientListBySubscriptionResponse]](),
+		newListBySubscriptionPager:  newTracker[azfake.PagerResponder[armmobilepacketcore.ObservabilityServicesClientListBySubscriptionResponse]](),
 	}
 }
 
 // ObservabilityServicesServerTransport connects instances of armmobilepacketcore.ObservabilityServicesClient to instances of ObservabilityServicesServer.
 // Don't use this type directly, use NewObservabilityServicesServerTransport instead.
 type ObservabilityServicesServerTransport struct {
-	srv *ObservabilityServicesServer
-	beginDelete *tracker[azfake.PollerResponder[armmobilepacketcore.ObservabilityServicesClientDeleteResponse]]
+	srv                         *ObservabilityServicesServer
+	beginDelete                 *tracker[azfake.PollerResponder[armmobilepacketcore.ObservabilityServicesClientDeleteResponse]]
 	newListByResourceGroupPager *tracker[azfake.PagerResponder[armmobilepacketcore.ObservabilityServicesClientListByResourceGroupResponse]]
-	newListBySubscriptionPager *tracker[azfake.PagerResponder[armmobilepacketcore.ObservabilityServicesClientListBySubscriptionResponse]]
+	newListBySubscriptionPager  *tracker[azfake.PagerResponder[armmobilepacketcore.ObservabilityServicesClientListBySubscriptionResponse]]
 }
 
 // Do implements the policy.Transporter interface for ObservabilityServicesServerTransport.
@@ -153,28 +152,28 @@ func (o *ObservabilityServicesServerTransport) dispatchBeginDelete(req *http.Req
 	}
 	beginDelete := o.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/observabilityServices/(?P<observabilityServiceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	observabilityServiceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("observabilityServiceName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := o.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, observabilityServiceNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/observabilityServices/(?P<observabilityServiceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		observabilityServiceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("observabilityServiceName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := o.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, observabilityServiceNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		o.beginDelete.add(req, beginDelete)
 	}
@@ -238,21 +237,21 @@ func (o *ObservabilityServicesServerTransport) dispatchNewListByResourceGroupPag
 	}
 	newListByResourceGroupPager := o.newListByResourceGroupPager.get(req)
 	if newListByResourceGroupPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/observabilityServices`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 2 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-resp := o.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/observabilityServices`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 2 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := o.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
 		newListByResourceGroupPager = &resp
 		o.newListByResourceGroupPager.add(req, newListByResourceGroupPager)
 		server.PagerResponderInjectNextLinks(newListByResourceGroupPager, req, func(page *armmobilepacketcore.ObservabilityServicesClientListByResourceGroupResponse, createLink func() string) {
@@ -279,17 +278,17 @@ func (o *ObservabilityServicesServerTransport) dispatchNewListBySubscriptionPage
 	}
 	newListBySubscriptionPager := o.newListBySubscriptionPager.get(req)
 	if newListBySubscriptionPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/observabilityServices`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 1 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-resp := o.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/observabilityServices`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 1 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resp := o.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
 		newListBySubscriptionPager = &resp
 		o.newListBySubscriptionPager.add(req, newListBySubscriptionPager)
 		server.PagerResponderInjectNextLinks(newListBySubscriptionPager, req, func(page *armmobilepacketcore.ObservabilityServicesClientListBySubscriptionResponse, createLink func() string) {
@@ -350,4 +349,3 @@ func (o *ObservabilityServicesServerTransport) dispatchUpdateTags(req *http.Requ
 	}
 	return resp, nil
 }
-

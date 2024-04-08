@@ -19,7 +19,7 @@ import (
 )
 
 // LoadBalancersServer is a fake server for instances of the armkubernetesruntime.LoadBalancersClient type.
-type LoadBalancersServer struct{
+type LoadBalancersServer struct {
 	// BeginCreateOrUpdate is the fake for method LoadBalancersClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
 	BeginCreateOrUpdate func(ctx context.Context, resourceURI string, loadBalancerName string, resource armkubernetesruntime.LoadBalancer, options *armkubernetesruntime.LoadBalancersClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armkubernetesruntime.LoadBalancersClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
@@ -39,7 +39,6 @@ type LoadBalancersServer struct{
 	// BeginOldDelete is the fake for method LoadBalancersClient.BeginOldDelete
 	// HTTP status codes to indicate success: http.StatusAccepted, http.StatusNoContent
 	BeginOldDelete func(ctx context.Context, resourceURI string, loadBalancerName string, options *armkubernetesruntime.LoadBalancersClientOldDeleteOptions) (resp azfake.PollerResponder[armkubernetesruntime.LoadBalancersClientOldDeleteResponse], errResp azfake.ErrorResponder)
-
 }
 
 // NewLoadBalancersServerTransport creates a new instance of LoadBalancersServerTransport with the provided implementation.
@@ -47,20 +46,20 @@ type LoadBalancersServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewLoadBalancersServerTransport(srv *LoadBalancersServer) *LoadBalancersServerTransport {
 	return &LoadBalancersServerTransport{
-		srv: srv,
+		srv:                 srv,
 		beginCreateOrUpdate: newTracker[azfake.PollerResponder[armkubernetesruntime.LoadBalancersClientCreateOrUpdateResponse]](),
-		newListPager: newTracker[azfake.PagerResponder[armkubernetesruntime.LoadBalancersClientListResponse]](),
-		beginOldDelete: newTracker[azfake.PollerResponder[armkubernetesruntime.LoadBalancersClientOldDeleteResponse]](),
+		newListPager:        newTracker[azfake.PagerResponder[armkubernetesruntime.LoadBalancersClientListResponse]](),
+		beginOldDelete:      newTracker[azfake.PollerResponder[armkubernetesruntime.LoadBalancersClientOldDeleteResponse]](),
 	}
 }
 
 // LoadBalancersServerTransport connects instances of armkubernetesruntime.LoadBalancersClient to instances of LoadBalancersServer.
 // Don't use this type directly, use NewLoadBalancersServerTransport instead.
 type LoadBalancersServerTransport struct {
-	srv *LoadBalancersServer
+	srv                 *LoadBalancersServer
 	beginCreateOrUpdate *tracker[azfake.PollerResponder[armkubernetesruntime.LoadBalancersClientCreateOrUpdateResponse]]
-	newListPager *tracker[azfake.PagerResponder[armkubernetesruntime.LoadBalancersClientListResponse]]
-	beginOldDelete *tracker[azfake.PollerResponder[armkubernetesruntime.LoadBalancersClientOldDeleteResponse]]
+	newListPager        *tracker[azfake.PagerResponder[armkubernetesruntime.LoadBalancersClientListResponse]]
+	beginOldDelete      *tracker[azfake.PollerResponder[armkubernetesruntime.LoadBalancersClientOldDeleteResponse]]
 }
 
 // Do implements the policy.Transporter interface for LoadBalancersServerTransport.
@@ -102,28 +101,28 @@ func (l *LoadBalancersServerTransport) dispatchBeginCreateOrUpdate(req *http.Req
 	}
 	beginCreateOrUpdate := l.beginCreateOrUpdate.get(req)
 	if beginCreateOrUpdate == nil {
-	const regexStr = `/(?P<resourceUri>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.KubernetesRuntime/loadBalancers/(?P<loadBalancerName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 2 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armkubernetesruntime.LoadBalancer](req)
-	if err != nil {
-		return nil, err
-	}
-	resourceURIParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceUri")])
-	if err != nil {
-		return nil, err
-	}
-	loadBalancerNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("loadBalancerName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := l.srv.BeginCreateOrUpdate(req.Context(), resourceURIParam, loadBalancerNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/(?P<resourceUri>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.KubernetesRuntime/loadBalancers/(?P<loadBalancerName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 2 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armkubernetesruntime.LoadBalancer](req)
+		if err != nil {
+			return nil, err
+		}
+		resourceURIParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceUri")])
+		if err != nil {
+			return nil, err
+		}
+		loadBalancerNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("loadBalancerName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := l.srv.BeginCreateOrUpdate(req.Context(), resourceURIParam, loadBalancerNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginCreateOrUpdate = &respr
 		l.beginCreateOrUpdate.add(req, beginCreateOrUpdate)
 	}
@@ -216,17 +215,17 @@ func (l *LoadBalancersServerTransport) dispatchNewListPager(req *http.Request) (
 	}
 	newListPager := l.newListPager.get(req)
 	if newListPager == nil {
-	const regexStr = `/(?P<resourceUri>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.KubernetesRuntime/loadBalancers`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 1 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	resourceURIParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceUri")])
-	if err != nil {
-		return nil, err
-	}
-resp := l.srv.NewListPager(resourceURIParam, nil)
+		const regexStr = `/(?P<resourceUri>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.KubernetesRuntime/loadBalancers`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 1 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		resourceURIParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceUri")])
+		if err != nil {
+			return nil, err
+		}
+		resp := l.srv.NewListPager(resourceURIParam, nil)
 		newListPager = &resp
 		l.newListPager.add(req, newListPager)
 		server.PagerResponderInjectNextLinks(newListPager, req, func(page *armkubernetesruntime.LoadBalancersClientListResponse, createLink func() string) {
@@ -253,24 +252,24 @@ func (l *LoadBalancersServerTransport) dispatchBeginOldDelete(req *http.Request)
 	}
 	beginOldDelete := l.beginOldDelete.get(req)
 	if beginOldDelete == nil {
-	const regexStr = `/(?P<resourceUri>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.KubernetesRuntime/loadBalancers/(?P<loadBalancerName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 2 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	resourceURIParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceUri")])
-	if err != nil {
-		return nil, err
-	}
-	loadBalancerNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("loadBalancerName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := l.srv.BeginOldDelete(req.Context(), resourceURIParam, loadBalancerNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/(?P<resourceUri>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.KubernetesRuntime/loadBalancers/(?P<loadBalancerName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 2 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		resourceURIParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceUri")])
+		if err != nil {
+			return nil, err
+		}
+		loadBalancerNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("loadBalancerName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := l.srv.BeginOldDelete(req.Context(), resourceURIParam, loadBalancerNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginOldDelete = &respr
 		l.beginOldDelete.add(req, beginOldDelete)
 	}
@@ -290,4 +289,3 @@ func (l *LoadBalancersServerTransport) dispatchBeginOldDelete(req *http.Request)
 
 	return resp, nil
 }
-

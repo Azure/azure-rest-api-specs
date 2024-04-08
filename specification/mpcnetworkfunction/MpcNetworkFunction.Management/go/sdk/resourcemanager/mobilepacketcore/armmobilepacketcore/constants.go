@@ -7,7 +7,7 @@ package armmobilepacketcore
 const host = "https://management.azure.com"
 
 const (
-	moduleName = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/mobilepacketcore/armmobilepacketcore"
+	moduleName    = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/mobilepacketcore/armmobilepacketcore"
 	moduleVersion = "v0.1.0"
 )
 
@@ -21,7 +21,7 @@ const (
 
 // PossibleActionTypeValues returns the possible values for the ActionType const type.
 func PossibleActionTypeValues() []ActionType {
-	return []ActionType{	
+	return []ActionType{
 		ActionTypeInternal,
 	}
 }
@@ -42,7 +42,7 @@ const (
 
 // PossibleCreatedByTypeValues returns the possible values for the CreatedByType const type.
 func PossibleCreatedByTypeValues() []CreatedByType {
-	return []CreatedByType{	
+	return []CreatedByType{
 		CreatedByTypeApplication,
 		CreatedByTypeKey,
 		CreatedByTypeManagedIdentity,
@@ -62,7 +62,7 @@ const (
 
 // PossibleNetworkFunctionAdministrativeStateValues returns the possible values for the NetworkFunctionAdministrativeState const type.
 func PossibleNetworkFunctionAdministrativeStateValues() []NetworkFunctionAdministrativeState {
-	return []NetworkFunctionAdministrativeState{	
+	return []NetworkFunctionAdministrativeState{
 		NetworkFunctionAdministrativeStateCommissioned,
 		NetworkFunctionAdministrativeStateDecommissioned,
 	}
@@ -84,7 +84,7 @@ const (
 
 // PossibleNetworkFunctionOperationalStatusValues returns the possible values for the NetworkFunctionOperationalStatus const type.
 func PossibleNetworkFunctionOperationalStatusValues() []NetworkFunctionOperationalStatus {
-	return []NetworkFunctionOperationalStatus{	
+	return []NetworkFunctionOperationalStatus{
 		NetworkFunctionOperationalStatusActive,
 		NetworkFunctionOperationalStatusInactive,
 		NetworkFunctionOperationalStatusInstantiatedNotProvisioned,
@@ -117,13 +117,13 @@ const (
 	// NetworkFunctionTypeSMF - Session Management Function
 	NetworkFunctionTypeSMF NetworkFunctionType = "SMF"
 	// NetworkFunctionTypeSaegw - System Architecture Evolution Gateway. This combines the Serving Gateway (SGW) and the Packet
-// Data Network Gateway (PGW) functionality
+	// Data Network Gateway (PGW) functionality
 	NetworkFunctionTypeSaegw NetworkFunctionType = "Saegw"
 	// NetworkFunctionTypeSaegwControlPlane - System Architecture Evolution Gateway Control Plane, control and user plane separation
-// (CUPS) architecture
+	// (CUPS) architecture
 	NetworkFunctionTypeSaegwControlPlane NetworkFunctionType = "SaegwControlPlane"
 	// NetworkFunctionTypeSaegwUserPlane - System Architecture Evolution Gateway User Plane, control and user plane separation
-// (CUPS) architecture
+	// (CUPS) architecture
 	NetworkFunctionTypeSaegwUserPlane NetworkFunctionType = "SaegwUserPlane"
 	// NetworkFunctionTypeUPF - User Plane Function
 	NetworkFunctionTypeUPF NetworkFunctionType = "UPF"
@@ -131,7 +131,7 @@ const (
 
 // PossibleNetworkFunctionTypeValues returns the possible values for the NetworkFunctionType const type.
 func PossibleNetworkFunctionTypeValues() []NetworkFunctionType {
-	return []NetworkFunctionType{	
+	return []NetworkFunctionType{
 		NetworkFunctionTypeAMF,
 		NetworkFunctionTypeEMS,
 		NetworkFunctionTypeEPDG,
@@ -164,7 +164,7 @@ const (
 
 // PossibleOriginValues returns the possible values for the Origin const type.
 func PossibleOriginValues() []Origin {
-	return []Origin{	
+	return []Origin{
 		OriginSystem,
 		OriginUser,
 		OriginUserSystem,
@@ -193,7 +193,7 @@ const (
 
 // PossibleProvisioningStateValues returns the possible values for the ProvisioningState const type.
 func PossibleProvisioningStateValues() []ProvisioningState {
-	return []ProvisioningState{	
+	return []ProvisioningState{
 		ProvisioningStateAccepted,
 		ProvisioningStateCanceled,
 		ProvisioningStateDeleting,
@@ -220,11 +220,10 @@ const (
 
 // PossibleSKUDefinitionsValues returns the possible values for the SKUDefinitions const type.
 func PossibleSKUDefinitionsValues() []SKUDefinitions {
-	return []SKUDefinitions{	
+	return []SKUDefinitions{
 		SKUDefinitionsAzureLab,
 		SKUDefinitionsAzureProduction,
 		SKUDefinitionsNexusLab,
 		SKUDefinitionsNexusProduction,
 	}
 }
-

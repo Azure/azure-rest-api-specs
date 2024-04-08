@@ -7,7 +7,7 @@ package armsphere
 const host = "https://management.azure.com"
 
 const (
-	moduleName = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/sphere/armsphere"
+	moduleName    = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/sphere/armsphere"
 	moduleVersion = "v0.1.0"
 )
 
@@ -21,7 +21,7 @@ const (
 
 // PossibleActionTypeValues returns the possible values for the ActionType const type.
 func PossibleActionTypeValues() []ActionType {
-	return []ActionType{	
+	return []ActionType{
 		ActionTypeInternal,
 	}
 }
@@ -38,7 +38,7 @@ const (
 
 // PossibleAllowCrashDumpCollectionValues returns the possible values for the AllowCrashDumpCollection const type.
 func PossibleAllowCrashDumpCollectionValues() []AllowCrashDumpCollection {
-	return []AllowCrashDumpCollection{	
+	return []AllowCrashDumpCollection{
 		AllowCrashDumpCollectionDisabled,
 		AllowCrashDumpCollectionEnabled,
 	}
@@ -56,7 +56,7 @@ const (
 
 // PossibleCapabilityTypeValues returns the possible values for the CapabilityType const type.
 func PossibleCapabilityTypeValues() []CapabilityType {
-	return []CapabilityType{	
+	return []CapabilityType{
 		CapabilityTypeApplicationDevelopment,
 		CapabilityTypeFieldServicing,
 	}
@@ -78,7 +78,7 @@ const (
 
 // PossibleCertificateStatusValues returns the possible values for the CertificateStatus const type.
 func PossibleCertificateStatusValues() []CertificateStatus {
-	return []CertificateStatus{	
+	return []CertificateStatus{
 		CertificateStatusActive,
 		CertificateStatusExpired,
 		CertificateStatusInactive,
@@ -102,7 +102,7 @@ const (
 
 // PossibleCreatedByTypeValues returns the possible values for the CreatedByType const type.
 func PossibleCreatedByTypeValues() []CreatedByType {
-	return []CreatedByType{	
+	return []CreatedByType{
 		CreatedByTypeApplication,
 		CreatedByTypeKey,
 		CreatedByTypeManagedIdentity,
@@ -166,7 +166,7 @@ const (
 
 // PossibleImageTypeValues returns the possible values for the ImageType const type.
 func PossibleImageTypeValues() []ImageType {
-	return []ImageType{	
+	return []ImageType{
 		ImageTypeApplications,
 		ImageTypeBaseSystemUpdateManifest,
 		ImageTypeBootManifest,
@@ -206,7 +206,7 @@ const (
 
 // PossibleOSFeedTypeValues returns the possible values for the OSFeedType const type.
 func PossibleOSFeedTypeValues() []OSFeedType {
-	return []OSFeedType{	
+	return []OSFeedType{
 		OSFeedTypeRetail,
 		OSFeedTypeRetailEval,
 	}
@@ -227,7 +227,7 @@ const (
 
 // PossibleOriginValues returns the possible values for the Origin const type.
 func PossibleOriginValues() []Origin {
-	return []Origin{	
+	return []Origin{
 		OriginSystem,
 		OriginUser,
 		OriginUserSystem,
@@ -256,7 +256,7 @@ const (
 
 // PossibleProvisioningStateValues returns the possible values for the ProvisioningState const type.
 func PossibleProvisioningStateValues() []ProvisioningState {
-	return []ProvisioningState{	
+	return []ProvisioningState{
 		ProvisioningStateAccepted,
 		ProvisioningStateCanceled,
 		ProvisioningStateDeleting,
@@ -279,30 +279,9 @@ const (
 
 // PossibleRegionalDataBoundaryValues returns the possible values for the RegionalDataBoundary const type.
 func PossibleRegionalDataBoundaryValues() []RegionalDataBoundary {
-	return []RegionalDataBoundary{	
+	return []RegionalDataBoundary{
 		RegionalDataBoundaryEU,
 		RegionalDataBoundaryNone,
-	}
-}
-
-// ResourceProvisioningState - The provisioning state of a resource type.
-type ResourceProvisioningState string
-
-const (
-	// ResourceProvisioningStateCanceled - Resource creation was canceled.
-	ResourceProvisioningStateCanceled ResourceProvisioningState = "Canceled"
-	// ResourceProvisioningStateFailed - Resource creation failed.
-	ResourceProvisioningStateFailed ResourceProvisioningState = "Failed"
-	// ResourceProvisioningStateSucceeded - Resource has been created.
-	ResourceProvisioningStateSucceeded ResourceProvisioningState = "Succeeded"
-)
-
-// PossibleResourceProvisioningStateValues returns the possible values for the ResourceProvisioningState const type.
-func PossibleResourceProvisioningStateValues() []ResourceProvisioningState {
-	return []ResourceProvisioningState{	
-		ResourceProvisioningStateCanceled,
-		ResourceProvisioningStateFailed,
-		ResourceProvisioningStateSucceeded,
 	}
 }
 
@@ -318,9 +297,8 @@ const (
 
 // PossibleUpdatePolicyValues returns the possible values for the UpdatePolicy const type.
 func PossibleUpdatePolicyValues() []UpdatePolicy {
-	return []UpdatePolicy{	
+	return []UpdatePolicy{
 		UpdatePolicyNo3RdPartyAppUpdates,
 		UpdatePolicyUpdateAll,
 	}
 }
-

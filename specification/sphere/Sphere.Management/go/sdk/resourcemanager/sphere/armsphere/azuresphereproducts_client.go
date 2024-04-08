@@ -31,7 +31,7 @@ func NewAzureSphereProductsClient(credential azcore.TokenCredential, options *ar
 		return nil, err
 	}
 	client := &AzureSphereProductsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -93,8 +93,8 @@ func (client *AzureSphereProductsClient) countDevicesCreateRequest(ctx context.C
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, body); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -178,8 +178,8 @@ func (client *AzureSphereProductsClient) createOrUpdateCreateRequest(ctx context
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -261,13 +261,13 @@ func (client *AzureSphereProductsClient) deleteCreateRequest(ctx context.Context
 //   - body - The content of the action request
 //   - options - AzureSphereProductsClientGenerateDefaultDeviceGroupsOptions contains the optional parameters for the AzureSphereProductsClient.NewGenerateDefaultDeviceGroupsPager
 //     method.
-func (client *AzureSphereProductsClient) NewGenerateDefaultDeviceGroupsPager(subscriptionID string, resourceGroupName string, catalogName string, productName string, body any, options *AzureSphereProductsClientGenerateDefaultDeviceGroupsOptions) (*runtime.Pager[AzureSphereProductsClientGenerateDefaultDeviceGroupsResponse]) {
+func (client *AzureSphereProductsClient) NewGenerateDefaultDeviceGroupsPager(subscriptionID string, resourceGroupName string, catalogName string, productName string, body any, options *AzureSphereProductsClientGenerateDefaultDeviceGroupsOptions) *runtime.Pager[AzureSphereProductsClientGenerateDefaultDeviceGroupsResponse] {
 	return runtime.NewPager(runtime.PagingHandler[AzureSphereProductsClientGenerateDefaultDeviceGroupsResponse]{
 		More: func(page AzureSphereProductsClientGenerateDefaultDeviceGroupsResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AzureSphereProductsClientGenerateDefaultDeviceGroupsResponse) (AzureSphereProductsClientGenerateDefaultDeviceGroupsResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereProductsClient.NewGenerateDefaultDeviceGroupsPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereProductsClient.NewGenerateDefaultDeviceGroupsPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -279,7 +279,7 @@ func (client *AzureSphereProductsClient) NewGenerateDefaultDeviceGroupsPager(sub
 				return AzureSphereProductsClientGenerateDefaultDeviceGroupsResponse{}, err
 			}
 			return client.generateDefaultDeviceGroupsHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -312,8 +312,8 @@ func (client *AzureSphereProductsClient) generateDefaultDeviceGroupsCreateReques
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, body); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -396,13 +396,13 @@ func (client *AzureSphereProductsClient) getHandleResponse(resp *http.Response) 
 //   - catalogName - Name of catalog
 //   - options - AzureSphereProductsClientListByCatalogOptions contains the optional parameters for the AzureSphereProductsClient.NewListByCatalogPager
 //     method.
-func (client *AzureSphereProductsClient) NewListByCatalogPager(subscriptionID string, resourceGroupName string, catalogName string, options *AzureSphereProductsClientListByCatalogOptions) (*runtime.Pager[AzureSphereProductsClientListByCatalogResponse]) {
+func (client *AzureSphereProductsClient) NewListByCatalogPager(subscriptionID string, resourceGroupName string, catalogName string, options *AzureSphereProductsClientListByCatalogOptions) *runtime.Pager[AzureSphereProductsClientListByCatalogResponse] {
 	return runtime.NewPager(runtime.PagingHandler[AzureSphereProductsClientListByCatalogResponse]{
 		More: func(page AzureSphereProductsClientListByCatalogResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AzureSphereProductsClientListByCatalogResponse) (AzureSphereProductsClientListByCatalogResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereProductsClient.NewListByCatalogPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereProductsClient.NewListByCatalogPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -414,7 +414,7 @@ func (client *AzureSphereProductsClient) NewListByCatalogPager(subscriptionID st
 				return AzureSphereProductsClientListByCatalogResponse{}, err
 			}
 			return client.listByCatalogHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -522,8 +522,7 @@ func (client *AzureSphereProductsClient) updateCreateRequest(ctx context.Context
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
-

@@ -19,7 +19,7 @@ import (
 )
 
 // VirtualMachinesServer is a fake server for instances of the armavs.VirtualMachinesClient type.
-type VirtualMachinesServer struct{
+type VirtualMachinesServer struct {
 	// Get is the fake for method VirtualMachinesClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
 	Get func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, virtualMachineID string, options *armavs.VirtualMachinesClientGetOptions) (resp azfake.Responder[armavs.VirtualMachinesClientGetResponse], errResp azfake.ErrorResponder)
@@ -31,7 +31,6 @@ type VirtualMachinesServer struct{
 	// BeginRestrictMovement is the fake for method VirtualMachinesClient.BeginRestrictMovement
 	// HTTP status codes to indicate success: http.StatusAccepted
 	BeginRestrictMovement func(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, virtualMachineID string, restrictMovement armavs.VirtualMachineRestrictMovement, options *armavs.VirtualMachinesClientRestrictMovementOptions) (resp azfake.PollerResponder[armavs.VirtualMachinesClientRestrictMovementResponse], errResp azfake.ErrorResponder)
-
 }
 
 // NewVirtualMachinesServerTransport creates a new instance of VirtualMachinesServerTransport with the provided implementation.
@@ -39,7 +38,7 @@ type VirtualMachinesServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewVirtualMachinesServerTransport(srv *VirtualMachinesServer) *VirtualMachinesServerTransport {
 	return &VirtualMachinesServerTransport{
-		srv: srv,
+		srv:                   srv,
 		newListByClusterPager: newTracker[azfake.PagerResponder[armavs.VirtualMachinesClientListByClusterResponse]](),
 		beginRestrictMovement: newTracker[azfake.PollerResponder[armavs.VirtualMachinesClientRestrictMovementResponse]](),
 	}
@@ -48,7 +47,7 @@ func NewVirtualMachinesServerTransport(srv *VirtualMachinesServer) *VirtualMachi
 // VirtualMachinesServerTransport connects instances of armavs.VirtualMachinesClient to instances of VirtualMachinesServer.
 // Don't use this type directly, use NewVirtualMachinesServerTransport instead.
 type VirtualMachinesServerTransport struct {
-	srv *VirtualMachinesServer
+	srv                   *VirtualMachinesServer
 	newListByClusterPager *tracker[azfake.PagerResponder[armavs.VirtualMachinesClientListByClusterResponse]]
 	beginRestrictMovement *tracker[azfake.PollerResponder[armavs.VirtualMachinesClientRestrictMovementResponse]]
 }
@@ -133,29 +132,29 @@ func (v *VirtualMachinesServerTransport) dispatchNewListByClusterPager(req *http
 	}
 	newListByClusterPager := v.newListByClusterPager.get(req)
 	if newListByClusterPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/clusters/(?P<clusterName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/virtualMachines`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-	clusterNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("clusterName")])
-	if err != nil {
-		return nil, err
-	}
-resp := v.srv.NewListByClusterPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, clusterNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/clusters/(?P<clusterName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/virtualMachines`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		clusterNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("clusterName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := v.srv.NewListByClusterPager(subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, clusterNameParam, nil)
 		newListByClusterPager = &resp
 		v.newListByClusterPager.add(req, newListByClusterPager)
 		server.PagerResponderInjectNextLinks(newListByClusterPager, req, func(page *armavs.VirtualMachinesClientListByClusterResponse, createLink func() string) {
@@ -182,40 +181,40 @@ func (v *VirtualMachinesServerTransport) dispatchBeginRestrictMovement(req *http
 	}
 	beginRestrictMovement := v.beginRestrictMovement.get(req)
 	if beginRestrictMovement == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/clusters/(?P<clusterName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/virtualMachines/(?P<virtualMachineId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/restrictMovement`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 5 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armavs.VirtualMachineRestrictMovement](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
-	if err != nil {
-		return nil, err
-	}
-	clusterNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("clusterName")])
-	if err != nil {
-		return nil, err
-	}
-	virtualMachineIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("virtualMachineId")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := v.srv.BeginRestrictMovement(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, clusterNameParam, virtualMachineIDParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AVS/privateClouds/(?P<privateCloudName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/clusters/(?P<clusterName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/virtualMachines/(?P<virtualMachineId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/restrictMovement`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 5 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armavs.VirtualMachineRestrictMovement](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		privateCloudNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("privateCloudName")])
+		if err != nil {
+			return nil, err
+		}
+		clusterNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("clusterName")])
+		if err != nil {
+			return nil, err
+		}
+		virtualMachineIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("virtualMachineId")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := v.srv.BeginRestrictMovement(req.Context(), subscriptionIDParam, resourceGroupNameParam, privateCloudNameParam, clusterNameParam, virtualMachineIDParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginRestrictMovement = &respr
 		v.beginRestrictMovement.add(req, beginRestrictMovement)
 	}
@@ -235,4 +234,3 @@ func (v *VirtualMachinesServerTransport) dispatchBeginRestrictMovement(req *http
 
 	return resp, nil
 }
-

@@ -24,7 +24,7 @@ func NewAzureLargeInstanceClient(credential azcore.TokenCredential, options *arm
 		return nil, err
 	}
 	client := &AzureLargeInstanceClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -49,4 +49,3 @@ func (client *AzureLargeInstanceClient) NewAzureLargeInstanceOperationsClient() 
 		internal: client.internal,
 	}
 }
-

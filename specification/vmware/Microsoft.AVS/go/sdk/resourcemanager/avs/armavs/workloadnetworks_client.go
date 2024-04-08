@@ -31,7 +31,7 @@ func NewWorkloadNetworksClient(credential azcore.TokenCredential, options *arm.C
 		return nil, err
 	}
 	client := &WorkloadNetworksClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -101,13 +101,13 @@ func (client *WorkloadNetworksClient) getHandleResponse(resp *http.Response) (Wo
 //   - privateCloudName - Name of the private cloud
 //   - options - WorkloadNetworksClientListByPrivateCloudOptions contains the optional parameters for the WorkloadNetworksClient.NewListByPrivateCloudPager
 //     method.
-func (client *WorkloadNetworksClient) NewListByPrivateCloudPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *WorkloadNetworksClientListByPrivateCloudOptions) (*runtime.Pager[WorkloadNetworksClientListByPrivateCloudResponse]) {
+func (client *WorkloadNetworksClient) NewListByPrivateCloudPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *WorkloadNetworksClientListByPrivateCloudOptions) *runtime.Pager[WorkloadNetworksClientListByPrivateCloudResponse] {
 	return runtime.NewPager(runtime.PagingHandler[WorkloadNetworksClientListByPrivateCloudResponse]{
 		More: func(page WorkloadNetworksClientListByPrivateCloudResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *WorkloadNetworksClientListByPrivateCloudResponse) (WorkloadNetworksClientListByPrivateCloudResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworksClient.NewListByPrivateCloudPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworksClient.NewListByPrivateCloudPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -119,7 +119,7 @@ func (client *WorkloadNetworksClient) NewListByPrivateCloudPager(subscriptionID 
 				return WorkloadNetworksClientListByPrivateCloudResponse{}, err
 			}
 			return client.listByPrivateCloudHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -157,4 +157,3 @@ func (client *WorkloadNetworksClient) listByPrivateCloudHandleResponse(resp *htt
 	}
 	return result, nil
 }
-

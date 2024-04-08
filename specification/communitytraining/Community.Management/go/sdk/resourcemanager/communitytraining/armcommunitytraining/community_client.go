@@ -24,7 +24,7 @@ func NewCommunityClient(credential azcore.TokenCredential, options *arm.ClientOp
 		return nil, err
 	}
 	client := &CommunityClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -42,4 +42,3 @@ func (client *CommunityClient) NewCommunityOperationsClient() *CommunityOperatio
 		internal: client.internal,
 	}
 }
-

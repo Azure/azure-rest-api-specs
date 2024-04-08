@@ -19,7 +19,7 @@ import (
 )
 
 // DeploymentsServer is a fake server for instances of the armapicenter.DeploymentsClient type.
-type DeploymentsServer struct{
+type DeploymentsServer struct {
 	// CreateOrUpdate is the fake for method DeploymentsClient.CreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
 	CreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, deploymentName string, payload armapicenter.Deployment, options *armapicenter.DeploymentsClientCreateOrUpdateOptions) (resp azfake.Responder[armapicenter.DeploymentsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
@@ -39,7 +39,6 @@ type DeploymentsServer struct{
 	// NewListPager is the fake for method DeploymentsClient.NewListPager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListPager func(subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, options *armapicenter.DeploymentsClientListOptions) (resp azfake.PagerResponder[armapicenter.DeploymentsClientListResponse])
-
 }
 
 // NewDeploymentsServerTransport creates a new instance of DeploymentsServerTransport with the provided implementation.
@@ -47,7 +46,7 @@ type DeploymentsServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewDeploymentsServerTransport(srv *DeploymentsServer) *DeploymentsServerTransport {
 	return &DeploymentsServerTransport{
-		srv: srv,
+		srv:          srv,
 		newListPager: newTracker[azfake.PagerResponder[armapicenter.DeploymentsClientListResponse]](),
 	}
 }
@@ -55,7 +54,7 @@ func NewDeploymentsServerTransport(srv *DeploymentsServer) *DeploymentsServerTra
 // DeploymentsServerTransport connects instances of armapicenter.DeploymentsClient to instances of DeploymentsServer.
 // Don't use this type directly, use NewDeploymentsServerTransport instead.
 type DeploymentsServerTransport struct {
-	srv *DeploymentsServer
+	srv          *DeploymentsServer
 	newListPager *tracker[azfake.PagerResponder[armapicenter.DeploymentsClientListResponse]]
 }
 
@@ -304,45 +303,45 @@ func (d *DeploymentsServerTransport) dispatchNewListPager(req *http.Request) (*h
 	}
 	newListPager := d.newListPager.get(req)
 	if newListPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ApiCenter/services/(?P<serviceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workspaces/(?P<workspaceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/apis/(?P<apiName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/deployments`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 5 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	qp := req.URL.Query()
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	serviceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("serviceName")])
-	if err != nil {
-		return nil, err
-	}
-	workspaceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("workspaceName")])
-	if err != nil {
-		return nil, err
-	}
-	apiNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("apiName")])
-	if err != nil {
-		return nil, err
-	}
-	filterUnescaped, err := url.QueryUnescape(qp.Get("$filter"))
-	if err != nil {
-		return nil, err
-	}
-	filterParam := getOptional(filterUnescaped)
-	var options *armapicenter.DeploymentsClientListOptions
-	if filterParam != nil {
-		options = &armapicenter.DeploymentsClientListOptions{
-			Filter: filterParam,
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ApiCenter/services/(?P<serviceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workspaces/(?P<workspaceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/apis/(?P<apiName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/deployments`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 5 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
 		}
-	}
-resp := d.srv.NewListPager(subscriptionIDParam, resourceGroupNameParam, serviceNameParam, workspaceNameParam, apiNameParam, options)
+		qp := req.URL.Query()
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		serviceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("serviceName")])
+		if err != nil {
+			return nil, err
+		}
+		workspaceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("workspaceName")])
+		if err != nil {
+			return nil, err
+		}
+		apiNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("apiName")])
+		if err != nil {
+			return nil, err
+		}
+		filterUnescaped, err := url.QueryUnescape(qp.Get("$filter"))
+		if err != nil {
+			return nil, err
+		}
+		filterParam := getOptional(filterUnescaped)
+		var options *armapicenter.DeploymentsClientListOptions
+		if filterParam != nil {
+			options = &armapicenter.DeploymentsClientListOptions{
+				Filter: filterParam,
+			}
+		}
+		resp := d.srv.NewListPager(subscriptionIDParam, resourceGroupNameParam, serviceNameParam, workspaceNameParam, apiNameParam, options)
 		newListPager = &resp
 		d.newListPager.add(req, newListPager)
 		server.PagerResponderInjectNextLinks(newListPager, req, func(page *armapicenter.DeploymentsClientListResponse, createLink func() string) {
@@ -362,4 +361,3 @@ resp := d.srv.NewListPager(subscriptionIDParam, resourceGroupNameParam, serviceN
 	}
 	return resp, nil
 }
-

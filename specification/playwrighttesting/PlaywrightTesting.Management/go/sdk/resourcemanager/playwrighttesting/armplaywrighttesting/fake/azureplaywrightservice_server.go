@@ -14,7 +14,7 @@ import (
 )
 
 // AzurePlaywrightServiceServer is a fake server for instances of the armplaywrighttesting.AzurePlaywrightServiceClient type.
-type AzurePlaywrightServiceServer struct{
+type AzurePlaywrightServiceServer struct {
 	// AzurePlaywrightServiceAccountQuotasServer contains the fakes for client AzurePlaywrightServiceAccountQuotasClient
 	AzurePlaywrightServiceAccountQuotasServer AzurePlaywrightServiceAccountQuotasServer
 
@@ -26,7 +26,6 @@ type AzurePlaywrightServiceServer struct{
 
 	// AzurePlaywrightServiceQuotasServer contains the fakes for client AzurePlaywrightServiceQuotasClient
 	AzurePlaywrightServiceQuotasServer AzurePlaywrightServiceQuotasServer
-
 }
 
 // NewAzurePlaywrightServiceServerTransport creates a new instance of AzurePlaywrightServiceServerTransport with the provided implementation.
@@ -39,12 +38,12 @@ func NewAzurePlaywrightServiceServerTransport(srv *AzurePlaywrightServiceServer)
 // AzurePlaywrightServiceServerTransport connects instances of armplaywrighttesting.AzurePlaywrightServiceClient to instances of AzurePlaywrightServiceServer.
 // Don't use this type directly, use NewAzurePlaywrightServiceServerTransport instead.
 type AzurePlaywrightServiceServerTransport struct {
-	srv *AzurePlaywrightServiceServer
-	trMu sync.Mutex
+	srv                                         *AzurePlaywrightServiceServer
+	trMu                                        sync.Mutex
 	trAzurePlaywrightServiceAccountQuotasServer *AzurePlaywrightServiceAccountQuotasServerTransport
-	trAzurePlaywrightServiceAccountsServer *AzurePlaywrightServiceAccountsServerTransport
-	trAzurePlaywrightServiceOperationsServer *AzurePlaywrightServiceOperationsServerTransport
-	trAzurePlaywrightServiceQuotasServer *AzurePlaywrightServiceQuotasServerTransport
+	trAzurePlaywrightServiceAccountsServer      *AzurePlaywrightServiceAccountsServerTransport
+	trAzurePlaywrightServiceOperationsServer    *AzurePlaywrightServiceOperationsServerTransport
+	trAzurePlaywrightServiceQuotasServer        *AzurePlaywrightServiceQuotasServerTransport
 }
 
 // Do implements the policy.Transporter interface for AzurePlaywrightServiceServerTransport.
@@ -65,19 +64,23 @@ func (a *AzurePlaywrightServiceServerTransport) dispatchToClientFake(req *http.R
 	switch client {
 	case "AzurePlaywrightServiceAccountQuotasClient":
 		initServer(&a.trMu, &a.trAzurePlaywrightServiceAccountQuotasServer, func() *AzurePlaywrightServiceAccountQuotasServerTransport {
-		return NewAzurePlaywrightServiceAccountQuotasServerTransport(&a.srv.AzurePlaywrightServiceAccountQuotasServer) })
+			return NewAzurePlaywrightServiceAccountQuotasServerTransport(&a.srv.AzurePlaywrightServiceAccountQuotasServer)
+		})
 		resp, err = a.trAzurePlaywrightServiceAccountQuotasServer.Do(req)
 	case "AzurePlaywrightServiceAccountsClient":
 		initServer(&a.trMu, &a.trAzurePlaywrightServiceAccountsServer, func() *AzurePlaywrightServiceAccountsServerTransport {
-		return NewAzurePlaywrightServiceAccountsServerTransport(&a.srv.AzurePlaywrightServiceAccountsServer) })
+			return NewAzurePlaywrightServiceAccountsServerTransport(&a.srv.AzurePlaywrightServiceAccountsServer)
+		})
 		resp, err = a.trAzurePlaywrightServiceAccountsServer.Do(req)
 	case "AzurePlaywrightServiceOperationsClient":
 		initServer(&a.trMu, &a.trAzurePlaywrightServiceOperationsServer, func() *AzurePlaywrightServiceOperationsServerTransport {
-		return NewAzurePlaywrightServiceOperationsServerTransport(&a.srv.AzurePlaywrightServiceOperationsServer) })
+			return NewAzurePlaywrightServiceOperationsServerTransport(&a.srv.AzurePlaywrightServiceOperationsServer)
+		})
 		resp, err = a.trAzurePlaywrightServiceOperationsServer.Do(req)
 	case "AzurePlaywrightServiceQuotasClient":
 		initServer(&a.trMu, &a.trAzurePlaywrightServiceQuotasServer, func() *AzurePlaywrightServiceQuotasServerTransport {
-		return NewAzurePlaywrightServiceQuotasServerTransport(&a.srv.AzurePlaywrightServiceQuotasServer) })
+			return NewAzurePlaywrightServiceQuotasServerTransport(&a.srv.AzurePlaywrightServiceQuotasServer)
+		})
 		resp, err = a.trAzurePlaywrightServiceQuotasServer.Do(req)
 	default:
 		err = fmt.Errorf("unhandled client %s", client)
@@ -85,4 +88,3 @@ func (a *AzurePlaywrightServiceServerTransport) dispatchToClientFake(req *http.R
 
 	return resp, err
 }
-

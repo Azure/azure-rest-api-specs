@@ -14,7 +14,7 @@ import (
 )
 
 // AzureSphereServer is a fake server for instances of the armsphere.AzureSphereClient type.
-type AzureSphereServer struct{
+type AzureSphereServer struct {
 	// AzureSphereCatalogsServer contains the fakes for client AzureSphereCatalogsClient
 	AzureSphereCatalogsServer AzureSphereCatalogsServer
 
@@ -38,7 +38,6 @@ type AzureSphereServer struct{
 
 	// AzureSphereProductsServer contains the fakes for client AzureSphereProductsClient
 	AzureSphereProductsServer AzureSphereProductsServer
-
 }
 
 // NewAzureSphereServerTransport creates a new instance of AzureSphereServerTransport with the provided implementation.
@@ -51,16 +50,16 @@ func NewAzureSphereServerTransport(srv *AzureSphereServer) *AzureSphereServerTra
 // AzureSphereServerTransport connects instances of armsphere.AzureSphereClient to instances of AzureSphereServer.
 // Don't use this type directly, use NewAzureSphereServerTransport instead.
 type AzureSphereServerTransport struct {
-	srv *AzureSphereServer
-	trMu sync.Mutex
-	trAzureSphereCatalogsServer *AzureSphereCatalogsServerTransport
+	srv                             *AzureSphereServer
+	trMu                            sync.Mutex
+	trAzureSphereCatalogsServer     *AzureSphereCatalogsServerTransport
 	trAzureSphereCertificatesServer *AzureSphereCertificatesServerTransport
-	trAzureSphereDeploymentsServer *AzureSphereDeploymentsServerTransport
+	trAzureSphereDeploymentsServer  *AzureSphereDeploymentsServerTransport
 	trAzureSphereDeviceGroupsServer *AzureSphereDeviceGroupsServerTransport
-	trAzureSphereDevicesServer *AzureSphereDevicesServerTransport
-	trAzureSphereImagesServer *AzureSphereImagesServerTransport
-	trAzureSphereOperationsServer *AzureSphereOperationsServerTransport
-	trAzureSphereProductsServer *AzureSphereProductsServerTransport
+	trAzureSphereDevicesServer      *AzureSphereDevicesServerTransport
+	trAzureSphereImagesServer       *AzureSphereImagesServerTransport
+	trAzureSphereOperationsServer   *AzureSphereOperationsServerTransport
+	trAzureSphereProductsServer     *AzureSphereProductsServerTransport
 }
 
 // Do implements the policy.Transporter interface for AzureSphereServerTransport.
@@ -81,35 +80,43 @@ func (a *AzureSphereServerTransport) dispatchToClientFake(req *http.Request, cli
 	switch client {
 	case "AzureSphereCatalogsClient":
 		initServer(&a.trMu, &a.trAzureSphereCatalogsServer, func() *AzureSphereCatalogsServerTransport {
-		return NewAzureSphereCatalogsServerTransport(&a.srv.AzureSphereCatalogsServer) })
+			return NewAzureSphereCatalogsServerTransport(&a.srv.AzureSphereCatalogsServer)
+		})
 		resp, err = a.trAzureSphereCatalogsServer.Do(req)
 	case "AzureSphereCertificatesClient":
 		initServer(&a.trMu, &a.trAzureSphereCertificatesServer, func() *AzureSphereCertificatesServerTransport {
-		return NewAzureSphereCertificatesServerTransport(&a.srv.AzureSphereCertificatesServer) })
+			return NewAzureSphereCertificatesServerTransport(&a.srv.AzureSphereCertificatesServer)
+		})
 		resp, err = a.trAzureSphereCertificatesServer.Do(req)
 	case "AzureSphereDeploymentsClient":
 		initServer(&a.trMu, &a.trAzureSphereDeploymentsServer, func() *AzureSphereDeploymentsServerTransport {
-		return NewAzureSphereDeploymentsServerTransport(&a.srv.AzureSphereDeploymentsServer) })
+			return NewAzureSphereDeploymentsServerTransport(&a.srv.AzureSphereDeploymentsServer)
+		})
 		resp, err = a.trAzureSphereDeploymentsServer.Do(req)
 	case "AzureSphereDeviceGroupsClient":
 		initServer(&a.trMu, &a.trAzureSphereDeviceGroupsServer, func() *AzureSphereDeviceGroupsServerTransport {
-		return NewAzureSphereDeviceGroupsServerTransport(&a.srv.AzureSphereDeviceGroupsServer) })
+			return NewAzureSphereDeviceGroupsServerTransport(&a.srv.AzureSphereDeviceGroupsServer)
+		})
 		resp, err = a.trAzureSphereDeviceGroupsServer.Do(req)
 	case "AzureSphereDevicesClient":
 		initServer(&a.trMu, &a.trAzureSphereDevicesServer, func() *AzureSphereDevicesServerTransport {
-		return NewAzureSphereDevicesServerTransport(&a.srv.AzureSphereDevicesServer) })
+			return NewAzureSphereDevicesServerTransport(&a.srv.AzureSphereDevicesServer)
+		})
 		resp, err = a.trAzureSphereDevicesServer.Do(req)
 	case "AzureSphereImagesClient":
 		initServer(&a.trMu, &a.trAzureSphereImagesServer, func() *AzureSphereImagesServerTransport {
-		return NewAzureSphereImagesServerTransport(&a.srv.AzureSphereImagesServer) })
+			return NewAzureSphereImagesServerTransport(&a.srv.AzureSphereImagesServer)
+		})
 		resp, err = a.trAzureSphereImagesServer.Do(req)
 	case "AzureSphereOperationsClient":
 		initServer(&a.trMu, &a.trAzureSphereOperationsServer, func() *AzureSphereOperationsServerTransport {
-		return NewAzureSphereOperationsServerTransport(&a.srv.AzureSphereOperationsServer) })
+			return NewAzureSphereOperationsServerTransport(&a.srv.AzureSphereOperationsServer)
+		})
 		resp, err = a.trAzureSphereOperationsServer.Do(req)
 	case "AzureSphereProductsClient":
 		initServer(&a.trMu, &a.trAzureSphereProductsServer, func() *AzureSphereProductsServerTransport {
-		return NewAzureSphereProductsServerTransport(&a.srv.AzureSphereProductsServer) })
+			return NewAzureSphereProductsServerTransport(&a.srv.AzureSphereProductsServer)
+		})
 		resp, err = a.trAzureSphereProductsServer.Do(req)
 	default:
 		err = fmt.Errorf("unhandled client %s", client)
@@ -117,4 +124,3 @@ func (a *AzureSphereServerTransport) dispatchToClientFake(req *http.Request, cli
 
 	return resp, err
 }
-

@@ -100,4 +100,3 @@ type WatchersClientUpdateResponse struct {
 	// The DatabaseWatcherProviderHub resource.
 	Watcher
 }
-

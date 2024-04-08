@@ -326,4 +326,3 @@ type WorkspacesClientListResponse struct {
 	// The response of a Workspace list operation.
 	WorkspaceListResult
 }
-

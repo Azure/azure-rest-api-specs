@@ -11,7 +11,6 @@ import (
 	"sync"
 )
 
-
 type nonRetriableError struct {
 	error
 }
@@ -63,7 +62,7 @@ func newTracker[T any]() *tracker[T] {
 
 type tracker[T any] struct {
 	items map[string]*T
-	mu sync.Mutex
+	mu    sync.Mutex
 }
 
 func (p *tracker[T]) get(req *http.Request) *T {

@@ -31,7 +31,7 @@ func NewDatastoresClient(credential azcore.TokenCredential, options *arm.ClientO
 		return nil, err
 	}
 	client := &DatastoresClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -42,12 +42,12 @@ func NewDatastoresClient(credential azcore.TokenCredential, options *arm.ClientO
 //   - privateCloudName - Name of the private cloud
 //   - clusterName - Name of the cluster
 //   - datastoreName - Name of the datastore
-//   - resource - Resource create parameters.
+//   - datastore - Resource create parameters.
 //   - options - DatastoresClientCreateOrUpdateOptions contains the optional parameters for the DatastoresClient.CreateOrUpdate
 //     method.
-func (client *DatastoresClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, datastoreName string, resource Datastore, options *DatastoresClientCreateOrUpdateOptions) (*runtime.Poller[DatastoresClientCreateOrUpdateResponse], error) {
+func (client *DatastoresClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, datastoreName string, datastore Datastore, options *DatastoresClientCreateOrUpdateOptions) (*runtime.Poller[DatastoresClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
-		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, datastoreName, resource, options)
+		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, datastoreName, datastore, options)
 		if err != nil {
 			return nil, err
 		}
@@ -59,10 +59,10 @@ func (client *DatastoresClient) BeginCreateOrUpdate(ctx context.Context, subscri
 }
 
 // CreateOrUpdate - Create a Datastore
-func (client *DatastoresClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, datastoreName string, resource Datastore, options *DatastoresClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *DatastoresClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, datastoreName string, datastore Datastore, options *DatastoresClientCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DatastoresClient.BeginCreateOrUpdate")
-	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, datastoreName, resource, options)
+	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, clusterName, datastoreName, datastore, options)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ func (client *DatastoresClient) createOrUpdate(ctx context.Context, subscription
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *DatastoresClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, datastoreName string, resource Datastore, options *DatastoresClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *DatastoresClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, datastoreName string, datastore Datastore, options *DatastoresClientCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/clusters/{clusterName}/datastores/{datastoreName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -109,9 +109,9 @@ func (client *DatastoresClient) createOrUpdateCreateRequest(ctx context.Context,
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
-	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+	if err := runtime.MarshalAsJSON(req, datastore); err != nil {
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -264,13 +264,13 @@ func (client *DatastoresClient) getHandleResponse(resp *http.Response) (Datastor
 //   - clusterName - Name of the cluster
 //   - options - DatastoresClientListByClusterOptions contains the optional parameters for the DatastoresClient.NewListByClusterPager
 //     method.
-func (client *DatastoresClient) NewListByClusterPager(subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, options *DatastoresClientListByClusterOptions) (*runtime.Pager[DatastoresClientListByClusterResponse]) {
+func (client *DatastoresClient) NewListByClusterPager(subscriptionID string, resourceGroupName string, privateCloudName string, clusterName string, options *DatastoresClientListByClusterOptions) *runtime.Pager[DatastoresClientListByClusterResponse] {
 	return runtime.NewPager(runtime.PagingHandler[DatastoresClientListByClusterResponse]{
 		More: func(page DatastoresClientListByClusterResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *DatastoresClientListByClusterResponse) (DatastoresClientListByClusterResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DatastoresClient.NewListByClusterPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DatastoresClient.NewListByClusterPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -282,7 +282,7 @@ func (client *DatastoresClient) NewListByClusterPager(subscriptionID string, res
 				return DatastoresClientListByClusterResponse{}, err
 			}
 			return client.listByClusterHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -324,4 +324,3 @@ func (client *DatastoresClient) listByClusterHandleResponse(resp *http.Response)
 	}
 	return result, nil
 }
-

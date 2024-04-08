@@ -31,7 +31,7 @@ func NewAzureLargeInstanceAzureLargeInstancesClient(credential azcore.TokenCrede
 		return nil, err
 	}
 	client := &AzureLargeInstanceAzureLargeInstancesClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -103,13 +103,13 @@ func (client *AzureLargeInstanceAzureLargeInstancesClient) getHandleResponse(res
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - options - AzureLargeInstanceAzureLargeInstancesClientListByResourceGroupOptions contains the optional parameters for the
 //     AzureLargeInstanceAzureLargeInstancesClient.NewListByResourceGroupPager method.
-func (client *AzureLargeInstanceAzureLargeInstancesClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *AzureLargeInstanceAzureLargeInstancesClientListByResourceGroupOptions) (*runtime.Pager[AzureLargeInstanceAzureLargeInstancesClientListByResourceGroupResponse]) {
+func (client *AzureLargeInstanceAzureLargeInstancesClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *AzureLargeInstanceAzureLargeInstancesClientListByResourceGroupOptions) *runtime.Pager[AzureLargeInstanceAzureLargeInstancesClientListByResourceGroupResponse] {
 	return runtime.NewPager(runtime.PagingHandler[AzureLargeInstanceAzureLargeInstancesClientListByResourceGroupResponse]{
 		More: func(page AzureLargeInstanceAzureLargeInstancesClientListByResourceGroupResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AzureLargeInstanceAzureLargeInstancesClientListByResourceGroupResponse) (AzureLargeInstanceAzureLargeInstancesClientListByResourceGroupResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureLargeInstanceAzureLargeInstancesClient.NewListByResourceGroupPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureLargeInstanceAzureLargeInstancesClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -121,7 +121,7 @@ func (client *AzureLargeInstanceAzureLargeInstancesClient) NewListByResourceGrou
 				return AzureLargeInstanceAzureLargeInstancesClientListByResourceGroupResponse{}, err
 			}
 			return client.listByResourceGroupHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -161,13 +161,13 @@ func (client *AzureLargeInstanceAzureLargeInstancesClient) listByResourceGroupHa
 //   - subscriptionID - The ID of the target subscription.
 //   - options - AzureLargeInstanceAzureLargeInstancesClientListBySubscriptionOptions contains the optional parameters for the
 //     AzureLargeInstanceAzureLargeInstancesClient.NewListBySubscriptionPager method.
-func (client *AzureLargeInstanceAzureLargeInstancesClient) NewListBySubscriptionPager(subscriptionID string, options *AzureLargeInstanceAzureLargeInstancesClientListBySubscriptionOptions) (*runtime.Pager[AzureLargeInstanceAzureLargeInstancesClientListBySubscriptionResponse]) {
+func (client *AzureLargeInstanceAzureLargeInstancesClient) NewListBySubscriptionPager(subscriptionID string, options *AzureLargeInstanceAzureLargeInstancesClientListBySubscriptionOptions) *runtime.Pager[AzureLargeInstanceAzureLargeInstancesClientListBySubscriptionResponse] {
 	return runtime.NewPager(runtime.PagingHandler[AzureLargeInstanceAzureLargeInstancesClientListBySubscriptionResponse]{
 		More: func(page AzureLargeInstanceAzureLargeInstancesClientListBySubscriptionResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AzureLargeInstanceAzureLargeInstancesClientListBySubscriptionResponse) (AzureLargeInstanceAzureLargeInstancesClientListBySubscriptionResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureLargeInstanceAzureLargeInstancesClient.NewListBySubscriptionPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureLargeInstanceAzureLargeInstancesClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -179,7 +179,7 @@ func (client *AzureLargeInstanceAzureLargeInstancesClient) NewListBySubscription
 				return AzureLargeInstanceAzureLargeInstancesClientListBySubscriptionResponse{}, err
 			}
 			return client.listBySubscriptionHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -273,9 +273,9 @@ func (client *AzureLargeInstanceAzureLargeInstancesClient) restartCreateRequest(
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if options != nil && options.ForceParameter != nil {
-	if err := runtime.MarshalAsJSON(req, *options.ForceParameter); err != nil {
-	return nil, err
-}
+		if err := runtime.MarshalAsJSON(req, *options.ForceParameter); err != nil {
+			return nil, err
+		}
 		return req, nil
 	}
 	return req, nil
@@ -461,8 +461,8 @@ func (client *AzureLargeInstanceAzureLargeInstancesClient) updateCreateRequest(c
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -474,4 +474,3 @@ func (client *AzureLargeInstanceAzureLargeInstancesClient) updateHandleResponse(
 	}
 	return result, nil
 }
-

@@ -339,4 +339,3 @@ type AzureSphereProductsClientListByCatalogOptions struct {
 type AzureSphereProductsClientUpdateOptions struct {
 	ResumeToken string
 }
-

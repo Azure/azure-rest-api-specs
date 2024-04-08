@@ -27,7 +27,7 @@ type Addon struct {
 // The properties of an Arc addon
 type AddonArcProperties struct {
 	// CONSTANT; The type of private cloud addon
-// Field has constant value AddonTypeArc, any specified value is ignored.
+	// Field has constant value AddonTypeArc, any specified value is ignored.
 	AddonType *AddonType
 
 	// The state of the addon provisioning
@@ -40,7 +40,7 @@ type AddonArcProperties struct {
 // GetAddonProperties implements the AddonPropertiesClassification interface for type AddonArcProperties.
 func (a *AddonArcProperties) GetAddonProperties() *AddonProperties {
 	return &AddonProperties{
-		AddonType: a.AddonType,
+		AddonType:         a.AddonType,
 		ProvisioningState: a.ProvisioningState,
 	}
 }
@@ -48,7 +48,7 @@ func (a *AddonArcProperties) GetAddonProperties() *AddonProperties {
 // The properties of an HCX addon
 type AddonHcxProperties struct {
 	// CONSTANT; The type of private cloud addon
-// Field has constant value AddonTypeHCX, any specified value is ignored.
+	// Field has constant value AddonTypeHCX, any specified value is ignored.
 	AddonType *AddonType
 
 	// REQUIRED; The HCX offer, example VMware MaaS Cloud Provider (Enterprise)
@@ -61,7 +61,7 @@ type AddonHcxProperties struct {
 // GetAddonProperties implements the AddonPropertiesClassification interface for type AddonHcxProperties.
 func (a *AddonHcxProperties) GetAddonProperties() *AddonProperties {
 	return &AddonProperties{
-		AddonType: a.AddonType,
+		AddonType:         a.AddonType,
 		ProvisioningState: a.ProvisioningState,
 	}
 }
@@ -90,7 +90,7 @@ func (a *AddonProperties) GetAddonProperties() *AddonProperties { return a }
 // The properties of a Site Recovery Manager (SRM) addon
 type AddonSrmProperties struct {
 	// CONSTANT; The type of private cloud addon
-// Field has constant value AddonTypeSRM, any specified value is ignored.
+	// Field has constant value AddonTypeSRM, any specified value is ignored.
 	AddonType *AddonType
 
 	// The Site Recovery Manager (SRM) license
@@ -103,7 +103,7 @@ type AddonSrmProperties struct {
 // GetAddonProperties implements the AddonPropertiesClassification interface for type AddonSrmProperties.
 func (a *AddonSrmProperties) GetAddonProperties() *AddonProperties {
 	return &AddonProperties{
-		AddonType: a.AddonType,
+		AddonType:         a.AddonType,
 		ProvisioningState: a.ProvisioningState,
 	}
 }
@@ -111,7 +111,7 @@ func (a *AddonSrmProperties) GetAddonProperties() *AddonProperties {
 // The properties of a vSphere Replication (VR) addon
 type AddonVrProperties struct {
 	// CONSTANT; The type of private cloud addon
-// Field has constant value AddonTypeVR, any specified value is ignored.
+	// Field has constant value AddonTypeVR, any specified value is ignored.
 	AddonType *AddonType
 
 	// REQUIRED; The vSphere Replication Server (VRS) count
@@ -124,7 +124,7 @@ type AddonVrProperties struct {
 // GetAddonProperties implements the AddonPropertiesClassification interface for type AddonVrProperties.
 func (a *AddonVrProperties) GetAddonProperties() *AddonProperties {
 	return &AddonProperties{
-		AddonType: a.AddonType,
+		AddonType:         a.AddonType,
 		ProvisioningState: a.ProvisioningState,
 	}
 }
@@ -361,7 +361,7 @@ type DiskPoolVolume struct {
 	TargetID *string
 
 	// Mode that describes whether the LUN has to be mounted as a datastore or
-// attached as a LUN
+	// attached as a LUN
 	MountOption *MountOptionEnum
 
 	// Device path
@@ -423,42 +423,6 @@ type Endpoints struct {
 
 	// Endpoint FQDN for Virtual Center Server Appliance
 	Vcsa *string
-}
-
-// The resource management error additional info.
-type ErrorAdditionalInfo struct {
-	// The additional info.
-	Info *ErrorAdditionalInfoInfo
-
-	// The additional info type.
-	Type *string
-}
-
-type ErrorAdditionalInfoInfo struct {
-}
-
-// The error detail.
-type ErrorDetail struct {
-	// The error additional info.
-	AdditionalInfo []*ErrorAdditionalInfo
-
-	// The error code.
-	Code *string
-
-	// The error details.
-	Details []*ErrorDetail
-
-	// The error message.
-	Message *string
-
-	// The error target.
-	Target *string
-}
-
-// Common error response for all Azure Resource Manager APIs to return error details for failed operations.
-type ErrorResponse struct {
-	// The error object.
-	Error *ErrorDetail
 }
 
 // ExpressRoute Circuit Authorization
@@ -533,22 +497,22 @@ type GlobalReachConnectionListResult struct {
 // The properties of a global reach connection
 type GlobalReachConnectionProperties struct {
 	// The network used for global reach carved out from the original network block
-// provided for the private cloud
+	// provided for the private cloud
 	AddressPrefix *string
 
 	// Authorization key from the peer express route used for the global reach
-// connection
+	// connection
 	AuthorizationKey *string
 
 	// The connection status of the global reach connection
 	CircuitConnectionStatus *GlobalReachConnectionStatus
 
 	// The ID of the Private Cloud's ExpressRoute Circuit that is participating in the
-// global reach connection
+	// global reach connection
 	ExpressRouteID *string
 
 	// Identifier of the ExpressRoute Circuit to peer with in the global reach
-// connection
+	// connection
 	PeerExpressRouteCircuit *string
 
 	// The state of the ExpressRoute Circuit Authorization provisioning
@@ -612,7 +576,7 @@ type IdentitySource struct {
 	Name *string
 
 	// The password of the Active Directory user with a minimum of read-only access to
-// Base DN for users and groups.
+	// Base DN for users and groups.
 	Password *string
 
 	// Primary server URL
@@ -625,7 +589,7 @@ type IdentitySource struct {
 	SecondaryServer *string
 
 	// The ID of an Active Directory user with a minimum of read-only access to Base
-// DN for users and group
+	// DN for users and group
 	Username *string
 }
 
@@ -710,15 +674,15 @@ type Operation struct {
 	Display *OperationDisplay
 
 	// Whether the operation applies to data-plane. This is "true" for data-plane operations and "false" for Azure Resource Manager/control-plane
-// operations.
+	// operations.
 	IsDataAction *bool
 
 	// The name of the operation, as per Resource-Based Access Control (RBAC). Examples: "Microsoft.Compute/virtualMachines/write",
-// "Microsoft.Compute/virtualMachines/capture/action"
+	// "Microsoft.Compute/virtualMachines/capture/action"
 	Name *string
 
 	// The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is
-// "user,system"
+	// "user,system"
 	Origin *Origin
 }
 
@@ -728,7 +692,7 @@ type OperationDisplay struct {
 	Description *string
 
 	// The concise, localized friendly name for the operation; suitable for dropdowns. E.g. "Create or Update Virtual Machine",
-// "Restart Virtual Machine".
+	// "Restart Virtual Machine".
 	Operation *string
 
 	// The localized friendly form of the resource provider name, e.g. "Microsoft Monitoring Insights" or "Microsoft Compute".
@@ -744,7 +708,7 @@ type PSCredentialExecutionParameter struct {
 	Name *string
 
 	// CONSTANT; The type of execution parameter
-// Field has constant value "Credential", any specified value is ignored.
+	// Field has constant value "Credential", any specified value is ignored.
 	Type *string
 
 	// password for login
@@ -814,7 +778,9 @@ type PlacementPolicyProperties struct {
 }
 
 // GetPlacementPolicyProperties implements the PlacementPolicyPropertiesClassification interface for type PlacementPolicyProperties.
-func (p *PlacementPolicyProperties) GetPlacementPolicyProperties() *PlacementPolicyProperties { return p }
+func (p *PlacementPolicyProperties) GetPlacementPolicyProperties() *PlacementPolicyProperties {
+	return p
+}
 
 // An update of a DRS placement policy resource
 type PlacementPolicyUpdate struct {
@@ -885,8 +851,8 @@ type PrivateCloudProperties struct {
 	ManagementCluster *ManagementCluster
 
 	// REQUIRED; The block of addresses should be unique across VNet in your subscription as
-// well as on-premise. Make sure the CIDR format is conformed to (A.B.C.D/X) where
-// A,B,C,D are between 0 and 255, and X is between 0 and 22
+	// well as on-premise. Make sure the CIDR format is conformed to (A.B.C.D/X) where
+	// A,B,C,D are between 0 and 255, and X is between 0 and 22
 	NetworkBlock *string
 
 	// Properties describing how the cloud is distributed across availability zones
@@ -905,9 +871,9 @@ type PrivateCloudProperties struct {
 	Endpoints *Endpoints
 
 	// Array of additional networks noncontiguous with networkBlock. Networks must be
-// unique and non-overlapping across VNet in your subscription, on-premise, and
-// this privateCloud networkBlock attribute. Make sure the CIDR format conforms to
-// (A.B.C.D/X).
+	// unique and non-overlapping across VNet in your subscription, on-premise, and
+	// this privateCloud networkBlock attribute. Make sure the CIDR format conforms to
+	// (A.B.C.D/X).
 	ExtendedNetworkBlocks []*string
 
 	// Array of cloud link IDs from other clouds that connect to this one
@@ -923,7 +889,7 @@ type PrivateCloudProperties struct {
 	ManagementNetwork *string
 
 	// Flag to indicate whether the private cloud has the quota for provisioned NSX
-// Public IP count raised from 64 to 1024
+	// Public IP count raised from 64 to 1024
 	NsxPublicIPQuotaRaised *NsxPublicIPQuotaRaisedEnum
 
 	// Thumbprint of the NSX-T Manager SSL certificate
@@ -939,7 +905,7 @@ type PrivateCloudProperties struct {
 	ProvisioningState *PrivateCloudProvisioningState
 
 	// A secondary expressRoute circuit from a separate AZ. Only present in a
-// stretched private cloud
+	// stretched private cloud
 	SecondaryCircuit *Circuit
 
 	// Thumbprint of the vCenter Server SSL certificate
@@ -982,9 +948,9 @@ type PrivateCloudUpdateProperties struct {
 	Encryption *Encryption
 
 	// Array of additional networks noncontiguous with networkBlock. Networks must be
-// unique and non-overlapping across VNet in your subscription, on-premise, and
-// this privateCloud networkBlock attribute. Make sure the CIDR format conforms to
-// (A.B.C.D/X).
+	// unique and non-overlapping across VNet in your subscription, on-premise, and
+	// this privateCloud networkBlock attribute. Make sure the CIDR format conforms to
+	// (A.B.C.D/X).
 	ExtendedNetworkBlocks []*string
 
 	// vCenter Single Sign On Identity Sources
@@ -1024,7 +990,7 @@ type ResourceSKUType struct {
 	Name *string
 
 	// If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the
-// resource this may be omitted.
+	// resource this may be omitted.
 	Capacity *int32
 
 	// If the service has different generations of hardware, for the same SKU, then that can be captured here.
@@ -1034,7 +1000,7 @@ type ResourceSKUType struct {
 	Size *string
 
 	// This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required
-// on a PUT.
+	// on a PUT.
 	Tier *SKUTier
 }
 
@@ -1131,14 +1097,14 @@ type ScriptExecutionProperties struct {
 	Errors []*string
 
 	// Error message if the script was able to run, but if the script itself had
-// errors or powershell threw an exception
+	// errors or powershell threw an exception
 	FailureReason *string
 
 	// Time the script execution was finished
 	FinishedAt *time.Time
 
 	// Parameters that will be hidden/not visible to ARM, such as passwords and
-// credentials
+	// credentials
 	HiddenParameters []ScriptExecutionParameterClassification
 
 	// Standard information out stream from the powershell execution
@@ -1232,11 +1198,11 @@ type ScriptParameter struct {
 	Optional *OptionalParamEnum
 
 	// The type of parameter the script is expecting. psCredential is a
-// PSCredentialObject
+	// PSCredentialObject
 	Type *ScriptParameterTypes
 
 	// Should this parameter be visible to arm and passed in the parameters argument
-// when executing
+	// when executing
 	Visibility *VisibilityParameterEnum
 }
 
@@ -1246,7 +1212,7 @@ type ScriptSecureStringExecutionParameter struct {
 	Name *string
 
 	// CONSTANT; The type of execution parameter
-// Field has constant value ScriptExecutionParameterTypeSecureValue, any specified value is ignored.
+	// Field has constant value ScriptExecutionParameterTypeSecureValue, any specified value is ignored.
 	Type *ScriptExecutionParameterType
 
 	// A secure value for the passed parameter, not to be stored in logs
@@ -1267,7 +1233,7 @@ type ScriptStringExecutionParameter struct {
 	Name *string
 
 	// CONSTANT; The type of execution parameter
-// Field has constant value ScriptExecutionParameterTypeValue, any specified value is ignored.
+	// Field has constant value ScriptExecutionParameterTypeValue, any specified value is ignored.
 	Type *ScriptExecutionParameterType
 
 	// The value for the passed parameter
@@ -1339,7 +1305,7 @@ type VMHostPlacementPolicyProperties struct {
 	HostMembers []*string
 
 	// CONSTANT; placement policy type
-// Field has constant value PlacementPolicyTypeVMHost, any specified value is ignored.
+	// Field has constant value PlacementPolicyTypeVMHost, any specified value is ignored.
 	Type *PlacementPolicyType
 
 	// REQUIRED; Virtual machine members list
@@ -1364,10 +1330,10 @@ type VMHostPlacementPolicyProperties struct {
 // GetPlacementPolicyProperties implements the PlacementPolicyPropertiesClassification interface for type VMHostPlacementPolicyProperties.
 func (v *VMHostPlacementPolicyProperties) GetPlacementPolicyProperties() *PlacementPolicyProperties {
 	return &PlacementPolicyProperties{
-		DisplayName: v.DisplayName,
+		DisplayName:       v.DisplayName,
 		ProvisioningState: v.ProvisioningState,
-		State: v.State,
-		Type: v.Type,
+		State:             v.State,
+		Type:              v.Type,
 	}
 }
 
@@ -1377,7 +1343,7 @@ type VMVMPlacementPolicyProperties struct {
 	AffinityType *AffinityType
 
 	// CONSTANT; placement policy type
-// Field has constant value PlacementPolicyTypeVMVM, any specified value is ignored.
+	// Field has constant value PlacementPolicyTypeVMVM, any specified value is ignored.
 	Type *PlacementPolicyType
 
 	// REQUIRED; Virtual machine members list
@@ -1396,10 +1362,10 @@ type VMVMPlacementPolicyProperties struct {
 // GetPlacementPolicyProperties implements the PlacementPolicyPropertiesClassification interface for type VMVMPlacementPolicyProperties.
 func (v *VMVMPlacementPolicyProperties) GetPlacementPolicyProperties() *PlacementPolicyProperties {
 	return &PlacementPolicyProperties{
-		DisplayName: v.DisplayName,
+		DisplayName:       v.DisplayName,
 		ProvisioningState: v.ProvisioningState,
-		State: v.State,
-		Type: v.Type,
+		State:             v.State,
+		Type:              v.Type,
 	}
 }
 
@@ -1627,7 +1593,9 @@ type WorkloadNetworkDhcpEntity struct {
 }
 
 // GetWorkloadNetworkDhcpEntity implements the WorkloadNetworkDhcpEntityClassification interface for type WorkloadNetworkDhcpEntity.
-func (w *WorkloadNetworkDhcpEntity) GetWorkloadNetworkDhcpEntity() *WorkloadNetworkDhcpEntity { return w }
+func (w *WorkloadNetworkDhcpEntity) GetWorkloadNetworkDhcpEntity() *WorkloadNetworkDhcpEntity {
+	return w
+}
 
 // The response of a WorkloadNetworkDhcp list operation.
 type WorkloadNetworkDhcpListResult struct {
@@ -1641,7 +1609,7 @@ type WorkloadNetworkDhcpListResult struct {
 // NSX DHCP Relay
 type WorkloadNetworkDhcpRelay struct {
 	// CONSTANT; Type of DHCP: SERVER or RELAY.
-// Field has constant value DhcpTypeEnumRELAY, any specified value is ignored.
+	// Field has constant value DhcpTypeEnumRELAY, any specified value is ignored.
 	DhcpType *DhcpTypeEnum
 
 	// Display name of the DHCP entity.
@@ -1663,18 +1631,18 @@ type WorkloadNetworkDhcpRelay struct {
 // GetWorkloadNetworkDhcpEntity implements the WorkloadNetworkDhcpEntityClassification interface for type WorkloadNetworkDhcpRelay.
 func (w *WorkloadNetworkDhcpRelay) GetWorkloadNetworkDhcpEntity() *WorkloadNetworkDhcpEntity {
 	return &WorkloadNetworkDhcpEntity{
-		DhcpType: w.DhcpType,
-		DisplayName: w.DisplayName,
+		DhcpType:          w.DhcpType,
+		DisplayName:       w.DisplayName,
 		ProvisioningState: w.ProvisioningState,
-		Revision: w.Revision,
-		Segments: w.Segments,
+		Revision:          w.Revision,
+		Segments:          w.Segments,
 	}
 }
 
 // NSX DHCP Server
 type WorkloadNetworkDhcpServer struct {
 	// CONSTANT; Type of DHCP: SERVER or RELAY.
-// Field has constant value DhcpTypeEnumSERVER, any specified value is ignored.
+	// Field has constant value DhcpTypeEnumSERVER, any specified value is ignored.
 	DhcpType *DhcpTypeEnum
 
 	// Display name of the DHCP entity.
@@ -1699,11 +1667,11 @@ type WorkloadNetworkDhcpServer struct {
 // GetWorkloadNetworkDhcpEntity implements the WorkloadNetworkDhcpEntityClassification interface for type WorkloadNetworkDhcpServer.
 func (w *WorkloadNetworkDhcpServer) GetWorkloadNetworkDhcpEntity() *WorkloadNetworkDhcpEntity {
 	return &WorkloadNetworkDhcpEntity{
-		DhcpType: w.DhcpType,
-		DisplayName: w.DisplayName,
+		DhcpType:          w.DhcpType,
+		DisplayName:       w.DisplayName,
 		ProvisioningState: w.ProvisioningState,
-		Revision: w.Revision,
-		Segments: w.Segments,
+		Revision:          w.Revision,
+		Segments:          w.Segments,
 	}
 }
 
@@ -2027,4 +1995,3 @@ type WorkloadNetworkVirtualMachineProperties struct {
 	// Virtual machine type.
 	VMType *VMTypeEnum
 }
-

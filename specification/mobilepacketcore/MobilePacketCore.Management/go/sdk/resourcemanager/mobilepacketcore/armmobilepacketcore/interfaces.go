@@ -12,4 +12,3 @@ type ClusterServiceClusterTypeSpecificDataClassification interface {
 	// GetClusterServiceClusterTypeSpecificData returns the ClusterServiceClusterTypeSpecificData content of the underlying type.
 	GetClusterServiceClusterTypeSpecificData() *ClusterServiceClusterTypeSpecificData
 }
-

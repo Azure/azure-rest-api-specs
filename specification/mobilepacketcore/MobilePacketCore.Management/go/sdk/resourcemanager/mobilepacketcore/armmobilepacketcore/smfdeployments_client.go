@@ -32,7 +32,7 @@ func NewSmfDeploymentsClient(credential azcore.TokenCredential, options *arm.Cli
 		return nil, err
 	}
 	client := &SmfDeploymentsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -88,8 +88,8 @@ func (client *SmfDeploymentsClient) createOrUpdateCreateRequest(ctx context.Cont
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -237,13 +237,13 @@ func (client *SmfDeploymentsClient) getHandleResponse(resp *http.Response) (SmfD
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - options - SmfDeploymentsClientListByResourceGroupOptions contains the optional parameters for the SmfDeploymentsClient.NewListByResourceGroupPager
 //     method.
-func (client *SmfDeploymentsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *SmfDeploymentsClientListByResourceGroupOptions) (*runtime.Pager[SmfDeploymentsClientListByResourceGroupResponse]) {
+func (client *SmfDeploymentsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *SmfDeploymentsClientListByResourceGroupOptions) *runtime.Pager[SmfDeploymentsClientListByResourceGroupResponse] {
 	return runtime.NewPager(runtime.PagingHandler[SmfDeploymentsClientListByResourceGroupResponse]{
 		More: func(page SmfDeploymentsClientListByResourceGroupResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *SmfDeploymentsClientListByResourceGroupResponse) (SmfDeploymentsClientListByResourceGroupResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SmfDeploymentsClient.NewListByResourceGroupPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SmfDeploymentsClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -255,7 +255,7 @@ func (client *SmfDeploymentsClient) NewListByResourceGroupPager(subscriptionID s
 				return SmfDeploymentsClientListByResourceGroupResponse{}, err
 			}
 			return client.listByResourceGroupHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -294,13 +294,13 @@ func (client *SmfDeploymentsClient) listByResourceGroupHandleResponse(resp *http
 //   - subscriptionID - The ID of the target subscription.
 //   - options - SmfDeploymentsClientListBySubscriptionOptions contains the optional parameters for the SmfDeploymentsClient.NewListBySubscriptionPager
 //     method.
-func (client *SmfDeploymentsClient) NewListBySubscriptionPager(subscriptionID string, options *SmfDeploymentsClientListBySubscriptionOptions) (*runtime.Pager[SmfDeploymentsClientListBySubscriptionResponse]) {
+func (client *SmfDeploymentsClient) NewListBySubscriptionPager(subscriptionID string, options *SmfDeploymentsClientListBySubscriptionOptions) *runtime.Pager[SmfDeploymentsClientListBySubscriptionResponse] {
 	return runtime.NewPager(runtime.PagingHandler[SmfDeploymentsClientListBySubscriptionResponse]{
 		More: func(page SmfDeploymentsClientListBySubscriptionResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *SmfDeploymentsClientListBySubscriptionResponse) (SmfDeploymentsClientListBySubscriptionResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SmfDeploymentsClient.NewListBySubscriptionPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SmfDeploymentsClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -312,7 +312,7 @@ func (client *SmfDeploymentsClient) NewListBySubscriptionPager(subscriptionID st
 				return SmfDeploymentsClientListBySubscriptionResponse{}, err
 			}
 			return client.listBySubscriptionHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -394,8 +394,8 @@ func (client *SmfDeploymentsClient) updateTagsCreateRequest(ctx context.Context,
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -407,4 +407,3 @@ func (client *SmfDeploymentsClient) updateTagsHandleResponse(resp *http.Response
 	}
 	return result, nil
 }
-

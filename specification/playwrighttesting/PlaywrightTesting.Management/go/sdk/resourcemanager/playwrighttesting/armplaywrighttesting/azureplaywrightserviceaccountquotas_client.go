@@ -31,7 +31,7 @@ func NewAzurePlaywrightServiceAccountQuotasClient(credential azcore.TokenCredent
 		return nil, err
 	}
 	client := &AzurePlaywrightServiceAccountQuotasClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -107,13 +107,13 @@ func (client *AzurePlaywrightServiceAccountQuotasClient) getHandleResponse(resp 
 //   - accountName - Name of account.
 //   - options - AzurePlaywrightServiceAccountQuotasClientListByAccountOptions contains the optional parameters for the AzurePlaywrightServiceAccountQuotasClient.NewListByAccountPager
 //     method.
-func (client *AzurePlaywrightServiceAccountQuotasClient) NewListByAccountPager(subscriptionID string, resourceGroupName string, accountName string, options *AzurePlaywrightServiceAccountQuotasClientListByAccountOptions) (*runtime.Pager[AzurePlaywrightServiceAccountQuotasClientListByAccountResponse]) {
+func (client *AzurePlaywrightServiceAccountQuotasClient) NewListByAccountPager(subscriptionID string, resourceGroupName string, accountName string, options *AzurePlaywrightServiceAccountQuotasClientListByAccountOptions) *runtime.Pager[AzurePlaywrightServiceAccountQuotasClientListByAccountResponse] {
 	return runtime.NewPager(runtime.PagingHandler[AzurePlaywrightServiceAccountQuotasClientListByAccountResponse]{
 		More: func(page AzurePlaywrightServiceAccountQuotasClientListByAccountResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AzurePlaywrightServiceAccountQuotasClientListByAccountResponse) (AzurePlaywrightServiceAccountQuotasClientListByAccountResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzurePlaywrightServiceAccountQuotasClient.NewListByAccountPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzurePlaywrightServiceAccountQuotasClient.NewListByAccountPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -125,7 +125,7 @@ func (client *AzurePlaywrightServiceAccountQuotasClient) NewListByAccountPager(s
 				return AzurePlaywrightServiceAccountQuotasClientListByAccountResponse{}, err
 			}
 			return client.listByAccountHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -163,4 +163,3 @@ func (client *AzurePlaywrightServiceAccountQuotasClient) listByAccountHandleResp
 	}
 	return result, nil
 }
-

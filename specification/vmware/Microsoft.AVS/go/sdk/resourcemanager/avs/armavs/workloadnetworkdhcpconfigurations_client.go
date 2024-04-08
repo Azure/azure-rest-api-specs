@@ -13,6 +13,7 @@ import (
 	"github.com/Azure/azure-sdk-for-go/sdk/azcore/runtime"
 	"net/http"
 	"net/url"
+	"strconv"
 	"strings"
 )
 
@@ -31,53 +32,40 @@ func NewWorkloadNetworkDhcpConfigurationsClient(credential azcore.TokenCredentia
 		return nil, err
 	}
 	client := &WorkloadNetworkDhcpConfigurationsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
 
-// BeginCreate - Create a WorkloadNetworkDhcp
+// Create - Create a WorkloadNetworkDhcp
 //   - subscriptionID - The ID of the target subscription.
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
 //   - dhcpID - The ID of the DHCP configuration
-//   - resource - Resource create parameters.
+//   - workloadNetworkDhcp - Resource create parameters.
 //   - options - WorkloadNetworkDhcpConfigurationsClientCreateOptions contains the optional parameters for the WorkloadNetworkDhcpConfigurationsClient.Create
 //     method.
-func (client *WorkloadNetworkDhcpConfigurationsClient) BeginCreate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, resource WorkloadNetworkDhcp, options *WorkloadNetworkDhcpConfigurationsClientCreateOptions) (*runtime.Poller[WorkloadNetworkDhcpConfigurationsClientCreateResponse], error) {
-	if options == nil || options.ResumeToken == "" {
-		resp, err := client.create(ctx, subscriptionID, resourceGroupName, privateCloudName, dhcpID, resource, options)
-		if err != nil {
-			return nil, err
-		}
-		poller, err := runtime.NewPoller[WorkloadNetworkDhcpConfigurationsClientCreateResponse](resp, client.internal.Pipeline(), nil)
-		return poller, err
-	} else {
-		return runtime.NewPollerFromResumeToken[WorkloadNetworkDhcpConfigurationsClientCreateResponse](options.ResumeToken, client.internal.Pipeline(), nil)
-	}
-}
-
-// Create - Create a WorkloadNetworkDhcp
-func (client *WorkloadNetworkDhcpConfigurationsClient) create(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, resource WorkloadNetworkDhcp, options *WorkloadNetworkDhcpConfigurationsClientCreateOptions) (*http.Response, error) {
+func (client *WorkloadNetworkDhcpConfigurationsClient) Create(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, workloadNetworkDhcp WorkloadNetworkDhcp, options *WorkloadNetworkDhcpConfigurationsClientCreateOptions) (WorkloadNetworkDhcpConfigurationsClientCreateResponse, error) {
 	var err error
-	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDhcpConfigurationsClient.BeginCreate")
-	req, err := client.createCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, dhcpID, resource, options)
+	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDhcpConfigurationsClient.Create")
+	req, err := client.createCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, dhcpID, workloadNetworkDhcp, options)
 	if err != nil {
-		return nil, err
+		return WorkloadNetworkDhcpConfigurationsClientCreateResponse{}, err
 	}
 	httpResp, err := client.internal.Pipeline().Do(req)
 	if err != nil {
-		return nil, err
+		return WorkloadNetworkDhcpConfigurationsClientCreateResponse{}, err
 	}
 	if !runtime.HasStatusCode(httpResp, http.StatusOK, http.StatusCreated) {
 		err = runtime.NewResponseError(httpResp)
-		return nil, err
+		return WorkloadNetworkDhcpConfigurationsClientCreateResponse{}, err
 	}
-	return httpResp, nil
+	resp, err := client.createHandleResponse(httpResp)
+	return resp, err
 }
 
 // createCreateRequest creates the Create request.
-func (client *WorkloadNetworkDhcpConfigurationsClient) createCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, resource WorkloadNetworkDhcp, options *WorkloadNetworkDhcpConfigurationsClientCreateOptions) (*policy.Request, error) {
+func (client *WorkloadNetworkDhcpConfigurationsClient) createCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, workloadNetworkDhcp WorkloadNetworkDhcp, options *WorkloadNetworkDhcpConfigurationsClientCreateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dhcpConfigurations/{dhcpId}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -104,10 +92,27 @@ func (client *WorkloadNetworkDhcpConfigurationsClient) createCreateRequest(ctx c
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
-	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+	if err := runtime.MarshalAsJSON(req, workloadNetworkDhcp); err != nil {
+		return nil, err
+	}
 	return req, nil
+}
+
+// createHandleResponse handles the Create response.
+func (client *WorkloadNetworkDhcpConfigurationsClient) createHandleResponse(resp *http.Response) (WorkloadNetworkDhcpConfigurationsClientCreateResponse, error) {
+	result := WorkloadNetworkDhcpConfigurationsClientCreateResponse{}
+	if val := resp.Header.Get("Retry-After"); val != "" {
+		retryAfter32, err := strconv.ParseInt(val, 10, 32)
+		retryAfter := int32(retryAfter32)
+		if err != nil {
+			return WorkloadNetworkDhcpConfigurationsClientCreateResponse{}, err
+		}
+		result.RetryAfter = &retryAfter
+	}
+	if err := runtime.UnmarshalAsJSON(resp, &result.WorkloadNetworkDhcp); err != nil {
+		return WorkloadNetworkDhcpConfigurationsClientCreateResponse{}, err
+	}
+	return result, nil
 }
 
 // BeginDelete - Delete a WorkloadNetworkDhcp
@@ -250,13 +255,13 @@ func (client *WorkloadNetworkDhcpConfigurationsClient) getHandleResponse(resp *h
 //   - privateCloudName - Name of the private cloud
 //   - options - WorkloadNetworkDhcpConfigurationsClientListByWorkloadNetworkOptions contains the optional parameters for the
 //     WorkloadNetworkDhcpConfigurationsClient.NewListByWorkloadNetworkPager method.
-func (client *WorkloadNetworkDhcpConfigurationsClient) NewListByWorkloadNetworkPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *WorkloadNetworkDhcpConfigurationsClientListByWorkloadNetworkOptions) (*runtime.Pager[WorkloadNetworkDhcpConfigurationsClientListByWorkloadNetworkResponse]) {
+func (client *WorkloadNetworkDhcpConfigurationsClient) NewListByWorkloadNetworkPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *WorkloadNetworkDhcpConfigurationsClientListByWorkloadNetworkOptions) *runtime.Pager[WorkloadNetworkDhcpConfigurationsClientListByWorkloadNetworkResponse] {
 	return runtime.NewPager(runtime.PagingHandler[WorkloadNetworkDhcpConfigurationsClientListByWorkloadNetworkResponse]{
 		More: func(page WorkloadNetworkDhcpConfigurationsClientListByWorkloadNetworkResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *WorkloadNetworkDhcpConfigurationsClientListByWorkloadNetworkResponse) (WorkloadNetworkDhcpConfigurationsClientListByWorkloadNetworkResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDhcpConfigurationsClient.NewListByWorkloadNetworkPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDhcpConfigurationsClient.NewListByWorkloadNetworkPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -268,7 +273,7 @@ func (client *WorkloadNetworkDhcpConfigurationsClient) NewListByWorkloadNetworkP
 				return WorkloadNetworkDhcpConfigurationsClientListByWorkloadNetworkResponse{}, err
 			}
 			return client.listByWorkloadNetworkHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -312,12 +317,12 @@ func (client *WorkloadNetworkDhcpConfigurationsClient) listByWorkloadNetworkHand
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
 //   - dhcpID - The ID of the DHCP configuration
-//   - properties - The resource properties to be updated.
+//   - workloadNetworkDhcp - The resource properties to be updated.
 //   - options - WorkloadNetworkDhcpConfigurationsClientUpdateOptions contains the optional parameters for the WorkloadNetworkDhcpConfigurationsClient.Update
 //     method.
-func (client *WorkloadNetworkDhcpConfigurationsClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, properties WorkloadNetworkDhcpUpdate, options *WorkloadNetworkDhcpConfigurationsClientUpdateOptions) (*runtime.Poller[WorkloadNetworkDhcpConfigurationsClientUpdateResponse], error) {
+func (client *WorkloadNetworkDhcpConfigurationsClient) BeginUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, workloadNetworkDhcp WorkloadNetworkDhcpUpdate, options *WorkloadNetworkDhcpConfigurationsClientUpdateOptions) (*runtime.Poller[WorkloadNetworkDhcpConfigurationsClientUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
-		resp, err := client.update(ctx, subscriptionID, resourceGroupName, privateCloudName, dhcpID, properties, options)
+		resp, err := client.update(ctx, subscriptionID, resourceGroupName, privateCloudName, dhcpID, workloadNetworkDhcp, options)
 		if err != nil {
 			return nil, err
 		}
@@ -329,10 +334,10 @@ func (client *WorkloadNetworkDhcpConfigurationsClient) BeginUpdate(ctx context.C
 }
 
 // Update - Update a WorkloadNetworkDhcp
-func (client *WorkloadNetworkDhcpConfigurationsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, properties WorkloadNetworkDhcpUpdate, options *WorkloadNetworkDhcpConfigurationsClientUpdateOptions) (*http.Response, error) {
+func (client *WorkloadNetworkDhcpConfigurationsClient) update(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, workloadNetworkDhcp WorkloadNetworkDhcpUpdate, options *WorkloadNetworkDhcpConfigurationsClientUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkDhcpConfigurationsClient.BeginUpdate")
-	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, dhcpID, properties, options)
+	req, err := client.updateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, dhcpID, workloadNetworkDhcp, options)
 	if err != nil {
 		return nil, err
 	}
@@ -348,7 +353,7 @@ func (client *WorkloadNetworkDhcpConfigurationsClient) update(ctx context.Contex
 }
 
 // updateCreateRequest creates the Update request.
-func (client *WorkloadNetworkDhcpConfigurationsClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, properties WorkloadNetworkDhcpUpdate, options *WorkloadNetworkDhcpConfigurationsClientUpdateOptions) (*policy.Request, error) {
+func (client *WorkloadNetworkDhcpConfigurationsClient) updateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, dhcpID string, workloadNetworkDhcp WorkloadNetworkDhcpUpdate, options *WorkloadNetworkDhcpConfigurationsClientUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/workloadNetworks/default/dhcpConfigurations/{dhcpId}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -375,9 +380,8 @@ func (client *WorkloadNetworkDhcpConfigurationsClient) updateCreateRequest(ctx c
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
-	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+	if err := runtime.MarshalAsJSON(req, workloadNetworkDhcp); err != nil {
+		return nil, err
+	}
 	return req, nil
 }
-

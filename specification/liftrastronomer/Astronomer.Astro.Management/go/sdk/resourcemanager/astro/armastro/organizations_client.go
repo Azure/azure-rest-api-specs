@@ -31,7 +31,7 @@ func NewOrganizationsClient(credential azcore.TokenCredential, options *arm.Clie
 		return nil, err
 	}
 	client := &OrganizationsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -100,8 +100,8 @@ func (client *OrganizationsClient) createOrUpdateCreateRequest(ctx context.Conte
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -232,13 +232,13 @@ func (client *OrganizationsClient) getHandleResponse(resp *http.Response) (Organ
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - options - OrganizationsClientListByResourceGroupOptions contains the optional parameters for the OrganizationsClient.NewListByResourceGroupPager
 //     method.
-func (client *OrganizationsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *OrganizationsClientListByResourceGroupOptions) (*runtime.Pager[OrganizationsClientListByResourceGroupResponse]) {
+func (client *OrganizationsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *OrganizationsClientListByResourceGroupOptions) *runtime.Pager[OrganizationsClientListByResourceGroupResponse] {
 	return runtime.NewPager(runtime.PagingHandler[OrganizationsClientListByResourceGroupResponse]{
 		More: func(page OrganizationsClientListByResourceGroupResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *OrganizationsClientListByResourceGroupResponse) (OrganizationsClientListByResourceGroupResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "OrganizationsClient.NewListByResourceGroupPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "OrganizationsClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -250,7 +250,7 @@ func (client *OrganizationsClient) NewListByResourceGroupPager(subscriptionID st
 				return OrganizationsClientListByResourceGroupResponse{}, err
 			}
 			return client.listByResourceGroupHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -289,13 +289,13 @@ func (client *OrganizationsClient) listByResourceGroupHandleResponse(resp *http.
 //   - subscriptionID - The ID of the target subscription.
 //   - options - OrganizationsClientListBySubscriptionOptions contains the optional parameters for the OrganizationsClient.NewListBySubscriptionPager
 //     method.
-func (client *OrganizationsClient) NewListBySubscriptionPager(subscriptionID string, options *OrganizationsClientListBySubscriptionOptions) (*runtime.Pager[OrganizationsClientListBySubscriptionResponse]) {
+func (client *OrganizationsClient) NewListBySubscriptionPager(subscriptionID string, options *OrganizationsClientListBySubscriptionOptions) *runtime.Pager[OrganizationsClientListBySubscriptionResponse] {
 	return runtime.NewPager(runtime.PagingHandler[OrganizationsClientListBySubscriptionResponse]{
 		More: func(page OrganizationsClientListBySubscriptionResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *OrganizationsClientListBySubscriptionResponse) (OrganizationsClientListBySubscriptionResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "OrganizationsClient.NewListBySubscriptionPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "OrganizationsClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -307,7 +307,7 @@ func (client *OrganizationsClient) NewListBySubscriptionPager(subscriptionID str
 				return OrganizationsClientListBySubscriptionResponse{}, err
 			}
 			return client.listBySubscriptionHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -401,8 +401,7 @@ func (client *OrganizationsClient) updateCreateRequest(ctx context.Context, subs
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
-

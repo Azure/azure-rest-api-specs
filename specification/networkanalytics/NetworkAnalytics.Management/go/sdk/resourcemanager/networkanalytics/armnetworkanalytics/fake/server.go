@@ -14,7 +14,7 @@ import (
 )
 
 // Server is a fake server for instances of the armnetworkanalytics.Client type.
-type Server struct{
+type Server struct {
 	// DataProductsCatalogsServer contains the fakes for client DataProductsCatalogsClient
 	DataProductsCatalogsServer DataProductsCatalogsServer
 
@@ -26,7 +26,6 @@ type Server struct{
 
 	// OperationsServer contains the fakes for client OperationsClient
 	OperationsServer OperationsServer
-
 }
 
 // NewServerTransport creates a new instance of ServerTransport with the provided implementation.
@@ -39,12 +38,12 @@ func NewServerTransport(srv *Server) *ServerTransport {
 // ServerTransport connects instances of armnetworkanalytics.Client to instances of Server.
 // Don't use this type directly, use NewServerTransport instead.
 type ServerTransport struct {
-	srv *Server
-	trMu sync.Mutex
+	srv                          *Server
+	trMu                         sync.Mutex
 	trDataProductsCatalogsServer *DataProductsCatalogsServerTransport
-	trDataProductsServer *DataProductsServerTransport
-	trDataTypesServer *DataTypesServerTransport
-	trOperationsServer *OperationsServerTransport
+	trDataProductsServer         *DataProductsServerTransport
+	trDataTypesServer            *DataTypesServerTransport
+	trOperationsServer           *OperationsServerTransport
 }
 
 // Do implements the policy.Transporter interface for ServerTransport.
@@ -65,19 +64,23 @@ func (s *ServerTransport) dispatchToClientFake(req *http.Request, client string)
 	switch client {
 	case "DataProductsCatalogsClient":
 		initServer(&s.trMu, &s.trDataProductsCatalogsServer, func() *DataProductsCatalogsServerTransport {
-		return NewDataProductsCatalogsServerTransport(&s.srv.DataProductsCatalogsServer) })
+			return NewDataProductsCatalogsServerTransport(&s.srv.DataProductsCatalogsServer)
+		})
 		resp, err = s.trDataProductsCatalogsServer.Do(req)
 	case "DataProductsClient":
 		initServer(&s.trMu, &s.trDataProductsServer, func() *DataProductsServerTransport {
-		return NewDataProductsServerTransport(&s.srv.DataProductsServer) })
+			return NewDataProductsServerTransport(&s.srv.DataProductsServer)
+		})
 		resp, err = s.trDataProductsServer.Do(req)
 	case "DataTypesClient":
 		initServer(&s.trMu, &s.trDataTypesServer, func() *DataTypesServerTransport {
-		return NewDataTypesServerTransport(&s.srv.DataTypesServer) })
+			return NewDataTypesServerTransport(&s.srv.DataTypesServer)
+		})
 		resp, err = s.trDataTypesServer.Do(req)
 	case "OperationsClient":
 		initServer(&s.trMu, &s.trOperationsServer, func() *OperationsServerTransport {
-		return NewOperationsServerTransport(&s.srv.OperationsServer) })
+			return NewOperationsServerTransport(&s.srv.OperationsServer)
+		})
 		resp, err = s.trOperationsServer.Do(req)
 	default:
 		err = fmt.Errorf("unhandled client %s", client)
@@ -85,4 +88,3 @@ func (s *ServerTransport) dispatchToClientFake(req *http.Request, client string)
 
 	return resp, err
 }
-

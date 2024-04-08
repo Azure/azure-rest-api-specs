@@ -14,7 +14,7 @@ import (
 )
 
 // Server is a fake server for instances of the armcontainerstorage.Client type.
-type Server struct{
+type Server struct {
 	// OperationsServer contains the fakes for client OperationsClient
 	OperationsServer OperationsServer
 
@@ -26,7 +26,6 @@ type Server struct{
 
 	// VolumesServer contains the fakes for client VolumesClient
 	VolumesServer VolumesServer
-
 }
 
 // NewServerTransport creates a new instance of ServerTransport with the provided implementation.
@@ -39,12 +38,12 @@ func NewServerTransport(srv *Server) *ServerTransport {
 // ServerTransport connects instances of armcontainerstorage.Client to instances of Server.
 // Don't use this type directly, use NewServerTransport instead.
 type ServerTransport struct {
-	srv *Server
-	trMu sync.Mutex
+	srv                *Server
+	trMu               sync.Mutex
 	trOperationsServer *OperationsServerTransport
-	trPoolsServer *PoolsServerTransport
-	trSnapshotsServer *SnapshotsServerTransport
-	trVolumesServer *VolumesServerTransport
+	trPoolsServer      *PoolsServerTransport
+	trSnapshotsServer  *SnapshotsServerTransport
+	trVolumesServer    *VolumesServerTransport
 }
 
 // Do implements the policy.Transporter interface for ServerTransport.
@@ -65,19 +64,23 @@ func (s *ServerTransport) dispatchToClientFake(req *http.Request, client string)
 	switch client {
 	case "OperationsClient":
 		initServer(&s.trMu, &s.trOperationsServer, func() *OperationsServerTransport {
-		return NewOperationsServerTransport(&s.srv.OperationsServer) })
+			return NewOperationsServerTransport(&s.srv.OperationsServer)
+		})
 		resp, err = s.trOperationsServer.Do(req)
 	case "PoolsClient":
 		initServer(&s.trMu, &s.trPoolsServer, func() *PoolsServerTransport {
-		return NewPoolsServerTransport(&s.srv.PoolsServer) })
+			return NewPoolsServerTransport(&s.srv.PoolsServer)
+		})
 		resp, err = s.trPoolsServer.Do(req)
 	case "SnapshotsClient":
 		initServer(&s.trMu, &s.trSnapshotsServer, func() *SnapshotsServerTransport {
-		return NewSnapshotsServerTransport(&s.srv.SnapshotsServer) })
+			return NewSnapshotsServerTransport(&s.srv.SnapshotsServer)
+		})
 		resp, err = s.trSnapshotsServer.Do(req)
 	case "VolumesClient":
 		initServer(&s.trMu, &s.trVolumesServer, func() *VolumesServerTransport {
-		return NewVolumesServerTransport(&s.srv.VolumesServer) })
+			return NewVolumesServerTransport(&s.srv.VolumesServer)
+		})
 		resp, err = s.trVolumesServer.Do(req)
 	default:
 		err = fmt.Errorf("unhandled client %s", client)
@@ -85,4 +88,3 @@ func (s *ServerTransport) dispatchToClientFake(req *http.Request, client string)
 
 	return resp, err
 }
-

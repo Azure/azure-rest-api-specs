@@ -31,7 +31,7 @@ func NewCloudLinksClient(credential azcore.TokenCredential, options *arm.ClientO
 		return nil, err
 	}
 	client := &CloudLinksClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -41,12 +41,12 @@ func NewCloudLinksClient(credential azcore.TokenCredential, options *arm.ClientO
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
 //   - cloudLinkName - Name of the cloud link.
-//   - resource - Resource create parameters.
+//   - cloudLink - Resource create parameters.
 //   - options - CloudLinksClientCreateOrUpdateOptions contains the optional parameters for the CloudLinksClient.CreateOrUpdate
 //     method.
-func (client *CloudLinksClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, cloudLinkName string, resource CloudLink, options *CloudLinksClientCreateOrUpdateOptions) (*runtime.Poller[CloudLinksClientCreateOrUpdateResponse], error) {
+func (client *CloudLinksClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, cloudLinkName string, cloudLink CloudLink, options *CloudLinksClientCreateOrUpdateOptions) (*runtime.Poller[CloudLinksClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
-		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, privateCloudName, cloudLinkName, resource, options)
+		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, privateCloudName, cloudLinkName, cloudLink, options)
 		if err != nil {
 			return nil, err
 		}
@@ -58,10 +58,10 @@ func (client *CloudLinksClient) BeginCreateOrUpdate(ctx context.Context, subscri
 }
 
 // CreateOrUpdate - Create a CloudLink
-func (client *CloudLinksClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, cloudLinkName string, resource CloudLink, options *CloudLinksClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *CloudLinksClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, cloudLinkName string, cloudLink CloudLink, options *CloudLinksClientCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "CloudLinksClient.BeginCreateOrUpdate")
-	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, cloudLinkName, resource, options)
+	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, cloudLinkName, cloudLink, options)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ func (client *CloudLinksClient) createOrUpdate(ctx context.Context, subscription
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *CloudLinksClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, cloudLinkName string, resource CloudLink, options *CloudLinksClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *CloudLinksClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, cloudLinkName string, cloudLink CloudLink, options *CloudLinksClientCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/cloudLinks/{cloudLinkName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -104,9 +104,9 @@ func (client *CloudLinksClient) createOrUpdateCreateRequest(ctx context.Context,
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
-	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+	if err := runtime.MarshalAsJSON(req, cloudLink); err != nil {
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -248,13 +248,13 @@ func (client *CloudLinksClient) getHandleResponse(resp *http.Response) (CloudLin
 //   - privateCloudName - Name of the private cloud
 //   - options - CloudLinksClientListByPrivateCloudOptions contains the optional parameters for the CloudLinksClient.NewListByPrivateCloudPager
 //     method.
-func (client *CloudLinksClient) NewListByPrivateCloudPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *CloudLinksClientListByPrivateCloudOptions) (*runtime.Pager[CloudLinksClientListByPrivateCloudResponse]) {
+func (client *CloudLinksClient) NewListByPrivateCloudPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *CloudLinksClientListByPrivateCloudOptions) *runtime.Pager[CloudLinksClientListByPrivateCloudResponse] {
 	return runtime.NewPager(runtime.PagingHandler[CloudLinksClientListByPrivateCloudResponse]{
 		More: func(page CloudLinksClientListByPrivateCloudResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *CloudLinksClientListByPrivateCloudResponse) (CloudLinksClientListByPrivateCloudResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "CloudLinksClient.NewListByPrivateCloudPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "CloudLinksClient.NewListByPrivateCloudPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -266,7 +266,7 @@ func (client *CloudLinksClient) NewListByPrivateCloudPager(subscriptionID string
 				return CloudLinksClientListByPrivateCloudResponse{}, err
 			}
 			return client.listByPrivateCloudHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -304,4 +304,3 @@ func (client *CloudLinksClient) listByPrivateCloudHandleResponse(resp *http.Resp
 	}
 	return result, nil
 }
-

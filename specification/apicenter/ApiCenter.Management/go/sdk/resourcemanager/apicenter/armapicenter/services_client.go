@@ -31,7 +31,7 @@ func NewServicesClient(credential azcore.TokenCredential, options *arm.ClientOpt
 		return nil, err
 	}
 	client := &ServicesClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -86,8 +86,8 @@ func (client *ServicesClient) createOrUpdateCreateRequest(ctx context.Context, s
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -213,8 +213,8 @@ func (client *ServicesClient) exportMetadataSchemaCreateRequest(ctx context.Cont
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, payload); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -282,13 +282,13 @@ func (client *ServicesClient) getHandleResponse(resp *http.Response) (ServicesCl
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - options - ServicesClientListByResourceGroupOptions contains the optional parameters for the ServicesClient.NewListByResourceGroupPager
 //     method.
-func (client *ServicesClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *ServicesClientListByResourceGroupOptions) (*runtime.Pager[ServicesClientListByResourceGroupResponse]) {
+func (client *ServicesClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *ServicesClientListByResourceGroupOptions) *runtime.Pager[ServicesClientListByResourceGroupResponse] {
 	return runtime.NewPager(runtime.PagingHandler[ServicesClientListByResourceGroupResponse]{
 		More: func(page ServicesClientListByResourceGroupResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *ServicesClientListByResourceGroupResponse) (ServicesClientListByResourceGroupResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ServicesClient.NewListByResourceGroupPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ServicesClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -300,7 +300,7 @@ func (client *ServicesClient) NewListByResourceGroupPager(subscriptionID string,
 				return ServicesClientListByResourceGroupResponse{}, err
 			}
 			return client.listByResourceGroupHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -339,13 +339,13 @@ func (client *ServicesClient) listByResourceGroupHandleResponse(resp *http.Respo
 //   - subscriptionID - The ID of the target subscription.
 //   - options - ServicesClientListBySubscriptionOptions contains the optional parameters for the ServicesClient.NewListBySubscriptionPager
 //     method.
-func (client *ServicesClient) NewListBySubscriptionPager(subscriptionID string, options *ServicesClientListBySubscriptionOptions) (*runtime.Pager[ServicesClientListBySubscriptionResponse]) {
+func (client *ServicesClient) NewListBySubscriptionPager(subscriptionID string, options *ServicesClientListBySubscriptionOptions) *runtime.Pager[ServicesClientListBySubscriptionResponse] {
 	return runtime.NewPager(runtime.PagingHandler[ServicesClientListBySubscriptionResponse]{
 		More: func(page ServicesClientListBySubscriptionResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *ServicesClientListBySubscriptionResponse) (ServicesClientListBySubscriptionResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ServicesClient.NewListBySubscriptionPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ServicesClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -357,7 +357,7 @@ func (client *ServicesClient) NewListBySubscriptionPager(subscriptionID string, 
 				return ServicesClientListBySubscriptionResponse{}, err
 			}
 			return client.listBySubscriptionHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -438,8 +438,8 @@ func (client *ServicesClient) updateCreateRequest(ctx context.Context, subscript
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, payload); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -451,4 +451,3 @@ func (client *ServicesClient) updateHandleResponse(resp *http.Response) (Service
 	}
 	return result, nil
 }
-

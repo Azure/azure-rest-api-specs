@@ -40,4 +40,3 @@ type OrganizationsClientListBySubscriptionOptions struct {
 type OrganizationsClientUpdateOptions struct {
 	ResumeToken string
 }
-

@@ -31,7 +31,7 @@ func NewCertificateProfilesClient(credential azcore.TokenCredential, options *ar
 		return nil, err
 	}
 	client := &CertificateProfilesClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -105,8 +105,8 @@ func (client *CertificateProfilesClient) createCreateRequest(ctx context.Context
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -249,13 +249,13 @@ func (client *CertificateProfilesClient) getHandleResponse(resp *http.Response) 
 //   - accountName - Trusted Signing account name.
 //   - options - CertificateProfilesClientListByCodeSigningAccountOptions contains the optional parameters for the CertificateProfilesClient.NewListByCodeSigningAccountPager
 //     method.
-func (client *CertificateProfilesClient) NewListByCodeSigningAccountPager(subscriptionID string, resourceGroupName string, accountName string, options *CertificateProfilesClientListByCodeSigningAccountOptions) (*runtime.Pager[CertificateProfilesClientListByCodeSigningAccountResponse]) {
+func (client *CertificateProfilesClient) NewListByCodeSigningAccountPager(subscriptionID string, resourceGroupName string, accountName string, options *CertificateProfilesClientListByCodeSigningAccountOptions) *runtime.Pager[CertificateProfilesClientListByCodeSigningAccountResponse] {
 	return runtime.NewPager(runtime.PagingHandler[CertificateProfilesClientListByCodeSigningAccountResponse]{
 		More: func(page CertificateProfilesClientListByCodeSigningAccountResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *CertificateProfilesClientListByCodeSigningAccountResponse) (CertificateProfilesClientListByCodeSigningAccountResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "CertificateProfilesClient.NewListByCodeSigningAccountPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "CertificateProfilesClient.NewListByCodeSigningAccountPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -267,7 +267,7 @@ func (client *CertificateProfilesClient) NewListByCodeSigningAccountPager(subscr
 				return CertificateProfilesClientListByCodeSigningAccountResponse{}, err
 			}
 			return client.listByCodeSigningAccountHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -361,8 +361,7 @@ func (client *CertificateProfilesClient) revokeCertificateCreateRequest(ctx cont
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, body); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
-

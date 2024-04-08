@@ -16,11 +16,10 @@ import (
 )
 
 // AzureLargeInstanceOperationsServer is a fake server for instances of the armlargeinstance.AzureLargeInstanceOperationsClient type.
-type AzureLargeInstanceOperationsServer struct{
+type AzureLargeInstanceOperationsServer struct {
 	// NewListPager is the fake for method AzureLargeInstanceOperationsClient.NewListPager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListPager func(options *armlargeinstance.AzureLargeInstanceOperationsClientListOptions) (resp azfake.PagerResponder[armlargeinstance.AzureLargeInstanceOperationsClientListResponse])
-
 }
 
 // NewAzureLargeInstanceOperationsServerTransport creates a new instance of AzureLargeInstanceOperationsServerTransport with the provided implementation.
@@ -28,7 +27,7 @@ type AzureLargeInstanceOperationsServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewAzureLargeInstanceOperationsServerTransport(srv *AzureLargeInstanceOperationsServer) *AzureLargeInstanceOperationsServerTransport {
 	return &AzureLargeInstanceOperationsServerTransport{
-		srv: srv,
+		srv:          srv,
 		newListPager: newTracker[azfake.PagerResponder[armlargeinstance.AzureLargeInstanceOperationsClientListResponse]](),
 	}
 }
@@ -36,7 +35,7 @@ func NewAzureLargeInstanceOperationsServerTransport(srv *AzureLargeInstanceOpera
 // AzureLargeInstanceOperationsServerTransport connects instances of armlargeinstance.AzureLargeInstanceOperationsClient to instances of AzureLargeInstanceOperationsServer.
 // Don't use this type directly, use NewAzureLargeInstanceOperationsServerTransport instead.
 type AzureLargeInstanceOperationsServerTransport struct {
-	srv *AzureLargeInstanceOperationsServer
+	srv          *AzureLargeInstanceOperationsServer
 	newListPager *tracker[azfake.PagerResponder[armlargeinstance.AzureLargeInstanceOperationsClientListResponse]]
 }
 
@@ -71,7 +70,7 @@ func (a *AzureLargeInstanceOperationsServerTransport) dispatchNewListPager(req *
 	}
 	newListPager := a.newListPager.get(req)
 	if newListPager == nil {
-resp := a.srv.NewListPager(nil)
+		resp := a.srv.NewListPager(nil)
 		newListPager = &resp
 		a.newListPager.add(req, newListPager)
 		server.PagerResponderInjectNextLinks(newListPager, req, func(page *armlargeinstance.AzureLargeInstanceOperationsClientListResponse, createLink func() string) {
@@ -91,4 +90,3 @@ resp := a.srv.NewListPager(nil)
 	}
 	return resp, nil
 }
-

@@ -32,7 +32,7 @@ func NewClusterServicesClient(credential azcore.TokenCredential, options *arm.Cl
 		return nil, err
 	}
 	client := &ClusterServicesClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -88,8 +88,8 @@ func (client *ClusterServicesClient) createOrUpdateCreateRequest(ctx context.Con
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -237,13 +237,13 @@ func (client *ClusterServicesClient) getHandleResponse(resp *http.Response) (Clu
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - options - ClusterServicesClientListByResourceGroupOptions contains the optional parameters for the ClusterServicesClient.NewListByResourceGroupPager
 //     method.
-func (client *ClusterServicesClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *ClusterServicesClientListByResourceGroupOptions) (*runtime.Pager[ClusterServicesClientListByResourceGroupResponse]) {
+func (client *ClusterServicesClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *ClusterServicesClientListByResourceGroupOptions) *runtime.Pager[ClusterServicesClientListByResourceGroupResponse] {
 	return runtime.NewPager(runtime.PagingHandler[ClusterServicesClientListByResourceGroupResponse]{
 		More: func(page ClusterServicesClientListByResourceGroupResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *ClusterServicesClientListByResourceGroupResponse) (ClusterServicesClientListByResourceGroupResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ClusterServicesClient.NewListByResourceGroupPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ClusterServicesClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -255,7 +255,7 @@ func (client *ClusterServicesClient) NewListByResourceGroupPager(subscriptionID 
 				return ClusterServicesClientListByResourceGroupResponse{}, err
 			}
 			return client.listByResourceGroupHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -294,13 +294,13 @@ func (client *ClusterServicesClient) listByResourceGroupHandleResponse(resp *htt
 //   - subscriptionID - The ID of the target subscription.
 //   - options - ClusterServicesClientListBySubscriptionOptions contains the optional parameters for the ClusterServicesClient.NewListBySubscriptionPager
 //     method.
-func (client *ClusterServicesClient) NewListBySubscriptionPager(subscriptionID string, options *ClusterServicesClientListBySubscriptionOptions) (*runtime.Pager[ClusterServicesClientListBySubscriptionResponse]) {
+func (client *ClusterServicesClient) NewListBySubscriptionPager(subscriptionID string, options *ClusterServicesClientListBySubscriptionOptions) *runtime.Pager[ClusterServicesClientListBySubscriptionResponse] {
 	return runtime.NewPager(runtime.PagingHandler[ClusterServicesClientListBySubscriptionResponse]{
 		More: func(page ClusterServicesClientListBySubscriptionResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *ClusterServicesClientListBySubscriptionResponse) (ClusterServicesClientListBySubscriptionResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ClusterServicesClient.NewListBySubscriptionPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ClusterServicesClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -312,7 +312,7 @@ func (client *ClusterServicesClient) NewListBySubscriptionPager(subscriptionID s
 				return ClusterServicesClientListBySubscriptionResponse{}, err
 			}
 			return client.listBySubscriptionHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -394,8 +394,8 @@ func (client *ClusterServicesClient) updateTagsCreateRequest(ctx context.Context
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -407,4 +407,3 @@ func (client *ClusterServicesClient) updateTagsHandleResponse(resp *http.Respons
 	}
 	return result, nil
 }
-

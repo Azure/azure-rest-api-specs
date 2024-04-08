@@ -31,7 +31,7 @@ func NewDataTypesClient(credential azcore.TokenCredential, options *arm.ClientOp
 		return nil, err
 	}
 	client := &DataTypesClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -104,8 +104,8 @@ func (client *DataTypesClient) createCreateRequest(ctx context.Context, subscrip
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -245,8 +245,8 @@ func (client *DataTypesClient) deleteDataCreateRequest(ctx context.Context, subs
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, body); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -306,8 +306,8 @@ func (client *DataTypesClient) generateStorageContainerSasTokenCreateRequest(ctx
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, body); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -390,13 +390,13 @@ func (client *DataTypesClient) getHandleResponse(resp *http.Response) (DataTypes
 //   - dataProductName - The data product resource name
 //   - options - DataTypesClientListByDataProductOptions contains the optional parameters for the DataTypesClient.NewListByDataProductPager
 //     method.
-func (client *DataTypesClient) NewListByDataProductPager(subscriptionID string, resourceGroupName string, dataProductName string, options *DataTypesClientListByDataProductOptions) (*runtime.Pager[DataTypesClientListByDataProductResponse]) {
+func (client *DataTypesClient) NewListByDataProductPager(subscriptionID string, resourceGroupName string, dataProductName string, options *DataTypesClientListByDataProductOptions) *runtime.Pager[DataTypesClientListByDataProductResponse] {
 	return runtime.NewPager(runtime.PagingHandler[DataTypesClientListByDataProductResponse]{
 		More: func(page DataTypesClientListByDataProductResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *DataTypesClientListByDataProductResponse) (DataTypesClientListByDataProductResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataTypesClient.NewListByDataProductPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "DataTypesClient.NewListByDataProductPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -408,7 +408,7 @@ func (client *DataTypesClient) NewListByDataProductPager(subscriptionID string, 
 				return DataTypesClientListByDataProductResponse{}, err
 			}
 			return client.listByDataProductHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -515,8 +515,7 @@ func (client *DataTypesClient) updateCreateRequest(ctx context.Context, subscrip
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
-

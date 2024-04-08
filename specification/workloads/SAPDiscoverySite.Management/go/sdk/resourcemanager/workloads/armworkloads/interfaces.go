@@ -12,4 +12,3 @@ type PerformanceDataClassification interface {
 	// GetPerformanceData returns the PerformanceData content of the underlying type.
 	GetPerformanceData() *PerformanceData
 }
-

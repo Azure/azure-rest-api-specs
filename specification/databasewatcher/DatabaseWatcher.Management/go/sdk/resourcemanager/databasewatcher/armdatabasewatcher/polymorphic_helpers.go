@@ -32,4 +32,3 @@ func unmarshalTargetPropertiesClassification(rawMsg json.RawMessage) (TargetProp
 	}
 	return b, nil
 }
-

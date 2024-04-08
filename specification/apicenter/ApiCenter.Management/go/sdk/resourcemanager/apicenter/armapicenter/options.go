@@ -264,4 +264,3 @@ type WorkspacesClientListOptions struct {
 	// OData filter parameter.
 	Filter *string
 }
-

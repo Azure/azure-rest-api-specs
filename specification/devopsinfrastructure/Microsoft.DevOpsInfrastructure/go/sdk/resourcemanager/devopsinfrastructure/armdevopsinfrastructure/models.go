@@ -37,7 +37,7 @@ type ArmResourceBase struct {
 // Azure DevOps organization profile
 type AzureDevOpsOrganizationProfile struct {
 	// CONSTANT; Azure DevOps organization profile
-// Field has constant value "AzureDevOps", any specified value is ignored.
+	// Field has constant value "AzureDevOps", any specified value is ignored.
 	Kind *string
 
 	// REQUIRED; The list of Azure DevOps organizations the pool should be present in.
@@ -69,7 +69,7 @@ type AzureDevOpsPermissionProfile struct {
 // The data disk of the VMSS.
 type DataDisk struct {
 	// The type of caching to be enabled for the data disks. The default value for caching is readwrite. For information about
-// the caching options see: https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.
+	// the caching options see: https://blogs.msdn.microsoft.com/windowsazurestorage/2012/06/27/exploring-windows-azure-drives-disks-and-images/.
 	Caching *CachingType
 
 	// The initial disk size in gigabytes.
@@ -86,42 +86,6 @@ type DataDisk struct {
 type DevOpsAzureSKU struct {
 	// REQUIRED; The Azure SKU name of the machines in the pool.
 	Name *string
-}
-
-// The resource management error additional info.
-type ErrorAdditionalInfo struct {
-	// The additional info.
-	Info *ErrorAdditionalInfoInfo
-
-	// The additional info type.
-	Type *string
-}
-
-type ErrorAdditionalInfoInfo struct {
-}
-
-// The error detail.
-type ErrorDetail struct {
-	// The error additional info.
-	AdditionalInfo []*ErrorAdditionalInfo
-
-	// The error code.
-	Code *string
-
-	// The error details.
-	Details []*ErrorDetail
-
-	// The error message.
-	Message *string
-
-	// The error target.
-	Target *string
-}
-
-// Common error response for all Azure Resource Manager APIs to return error details for failed operations.
-type ErrorResponse struct {
-	// The error object.
-	Error *ErrorDetail
 }
 
 // Defines the type of fabric the agent will run on.
@@ -145,7 +109,7 @@ type GitHubOrganization struct {
 // GitHub organization profile
 type GitHubOrganizationProfile struct {
 	// CONSTANT; GitHub organization profile
-// Field has constant value "GitHub", any specified value is ignored.
+	// Field has constant value "GitHub", any specified value is ignored.
 	Kind *string
 
 	// REQUIRED; The list of GitHub organizations/repositories the pool should be present in.
@@ -189,15 +153,15 @@ type Operation struct {
 	Display *OperationDisplay
 
 	// Whether the operation applies to data-plane. This is "true" for data-plane operations and "false" for Azure Resource Manager/control-plane
-// operations.
+	// operations.
 	IsDataAction *bool
 
 	// The name of the operation, as per Resource-Based Access Control (RBAC). Examples: "Microsoft.Compute/virtualMachines/write",
-// "Microsoft.Compute/virtualMachines/capture/action"
+	// "Microsoft.Compute/virtualMachines/capture/action"
 	Name *string
 
 	// The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value is
-// "user,system"
+	// "user,system"
 	Origin *Origin
 }
 
@@ -207,7 +171,7 @@ type OperationDisplay struct {
 	Description *string
 
 	// The concise, localized friendly name for the operation; suitable for dropdowns. E.g. "Create or Update Virtual Machine",
-// "Restart Virtual Machine".
+	// "Restart Virtual Machine".
 	Operation *string
 
 	// The localized friendly form of the resource provider name, e.g. "Microsoft Monitoring Insights" or "Microsoft Compute".
@@ -331,7 +295,7 @@ type PoolProperties struct {
 // The type used for update operations of the Pool.
 type PoolUpdate struct {
 	// The managed service identities assigned to this resource.
-	Identity *ManagedIdentityProperties
+	Identity   *ManagedIdentityProperties
 	Properties *PoolUpdateProperties
 
 	// Resource tags.
@@ -504,7 +468,7 @@ type ResourceSKURestrictions struct {
 	RestrictionInfo *ResourceSKURestrictionInfo
 
 	// REQUIRED; The value of restrictions. If the restriction type is set to location. This would be different locations where
-// the SKU is restricted.
+	// the SKU is restricted.
 	Values []*string
 
 	// the reason for restriction.
@@ -538,7 +502,7 @@ type SecretsManagementSettings struct {
 // Stateful profile meaning that the machines will be returned to the pool after running a job.
 type Stateful struct {
 	// CONSTANT; Stateful profile meaning that the machines will be returned to the pool after running a job.
-// Field has constant value "Stateful", any specified value is ignored.
+	// Field has constant value "Stateful", any specified value is ignored.
 	Kind *string
 
 	// REQUIRED; How long should stateful machines be kept around. The maximum is one week.
@@ -551,7 +515,7 @@ type Stateful struct {
 // GetAgentProfile implements the AgentProfileClassification interface for type Stateful.
 func (s *Stateful) GetAgentProfile() *AgentProfile {
 	return &AgentProfile{
-		Kind: s.Kind,
+		Kind:                s.Kind,
 		ResourcePredictions: s.ResourcePredictions,
 	}
 }
@@ -559,7 +523,7 @@ func (s *Stateful) GetAgentProfile() *AgentProfile {
 // Stateless profile meaning that the machines will be cleaned up after running a job.
 type StatelessAgentProfile struct {
 	// CONSTANT; Stateless profile meaning that the machines will be cleaned up after running a job.
-// Field has constant value "Stateless", any specified value is ignored.
+	// Field has constant value "Stateless", any specified value is ignored.
 	Kind *string
 
 	// Defines pool buffer.
@@ -569,7 +533,7 @@ type StatelessAgentProfile struct {
 // GetAgentProfile implements the AgentProfileClassification interface for type StatelessAgentProfile.
 func (s *StatelessAgentProfile) GetAgentProfile() *AgentProfile {
 	return &AgentProfile{
-		Kind: s.Kind,
+		Kind:                s.Kind,
 		ResourcePredictions: s.ResourcePredictions,
 	}
 }
@@ -637,7 +601,7 @@ type VmssFabricProfile struct {
 	Images []*PoolImage
 
 	// CONSTANT; Virtual Machine Scale Sets
-// Field has constant value "Vmss", any specified value is ignored.
+	// Field has constant value "Vmss", any specified value is ignored.
 	Kind *string
 
 	// REQUIRED; The Azure SKU of the machines in the pool.
@@ -659,4 +623,3 @@ func (v *VmssFabricProfile) GetFabricProfile() *FabricProfile {
 		Kind: v.Kind,
 	}
 }
-

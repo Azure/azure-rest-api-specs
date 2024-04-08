@@ -31,7 +31,7 @@ func NewExtendedZonesClient(credential azcore.TokenCredential, options *arm.Clie
 		return nil, err
 	}
 	client := &ExtendedZonesClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -94,13 +94,13 @@ func (client *ExtendedZonesClient) getHandleResponse(resp *http.Response) (Exten
 //   - subscriptionID - The ID of the target subscription.
 //   - options - ExtendedZonesClientListBySubscriptionOptions contains the optional parameters for the ExtendedZonesClient.NewListBySubscriptionPager
 //     method.
-func (client *ExtendedZonesClient) NewListBySubscriptionPager(subscriptionID string, options *ExtendedZonesClientListBySubscriptionOptions) (*runtime.Pager[ExtendedZonesClientListBySubscriptionResponse]) {
+func (client *ExtendedZonesClient) NewListBySubscriptionPager(subscriptionID string, options *ExtendedZonesClientListBySubscriptionOptions) *runtime.Pager[ExtendedZonesClientListBySubscriptionResponse] {
 	return runtime.NewPager(runtime.PagingHandler[ExtendedZonesClientListBySubscriptionResponse]{
 		More: func(page ExtendedZonesClientListBySubscriptionResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *ExtendedZonesClientListBySubscriptionResponse) (ExtendedZonesClientListBySubscriptionResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ExtendedZonesClient.NewListBySubscriptionPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ExtendedZonesClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -112,7 +112,7 @@ func (client *ExtendedZonesClient) NewListBySubscriptionPager(subscriptionID str
 				return ExtendedZonesClientListBySubscriptionResponse{}, err
 			}
 			return client.listBySubscriptionHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -251,4 +251,3 @@ func (client *ExtendedZonesClient) unregisterHandleResponse(resp *http.Response)
 	}
 	return result, nil
 }
-

@@ -31,7 +31,7 @@ func NewScriptPackagesClient(credential azcore.TokenCredential, options *arm.Cli
 		return nil, err
 	}
 	client := &ScriptPackagesClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -106,13 +106,13 @@ func (client *ScriptPackagesClient) getHandleResponse(resp *http.Response) (Scri
 //   - privateCloudName - Name of the private cloud
 //   - options - ScriptPackagesClientListByPrivateCloudOptions contains the optional parameters for the ScriptPackagesClient.NewListByPrivateCloudPager
 //     method.
-func (client *ScriptPackagesClient) NewListByPrivateCloudPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *ScriptPackagesClientListByPrivateCloudOptions) (*runtime.Pager[ScriptPackagesClientListByPrivateCloudResponse]) {
+func (client *ScriptPackagesClient) NewListByPrivateCloudPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *ScriptPackagesClientListByPrivateCloudOptions) *runtime.Pager[ScriptPackagesClientListByPrivateCloudResponse] {
 	return runtime.NewPager(runtime.PagingHandler[ScriptPackagesClientListByPrivateCloudResponse]{
 		More: func(page ScriptPackagesClientListByPrivateCloudResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *ScriptPackagesClientListByPrivateCloudResponse) (ScriptPackagesClientListByPrivateCloudResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ScriptPackagesClient.NewListByPrivateCloudPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ScriptPackagesClient.NewListByPrivateCloudPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -124,7 +124,7 @@ func (client *ScriptPackagesClient) NewListByPrivateCloudPager(subscriptionID st
 				return ScriptPackagesClientListByPrivateCloudResponse{}, err
 			}
 			return client.listByPrivateCloudHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -162,4 +162,3 @@ func (client *ScriptPackagesClient) listByPrivateCloudHandleResponse(resp *http.
 	}
 	return result, nil
 }
-

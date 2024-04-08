@@ -19,7 +19,7 @@ import (
 )
 
 // SAPInstancesServer is a fake server for instances of the armworkloads.SAPInstancesClient type.
-type SAPInstancesServer struct{
+type SAPInstancesServer struct {
 	// BeginCreate is the fake for method SAPInstancesClient.BeginCreate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
 	BeginCreate func(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, sapInstanceName string, resource armworkloads.SAPInstance, options *armworkloads.SAPInstancesClientCreateOptions) (resp azfake.PollerResponder[armworkloads.SAPInstancesClientCreateResponse], errResp azfake.ErrorResponder)
@@ -39,7 +39,6 @@ type SAPInstancesServer struct{
 	// Update is the fake for method SAPInstancesClient.Update
 	// HTTP status codes to indicate success: http.StatusOK
 	Update func(ctx context.Context, subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, sapInstanceName string, properties armworkloads.SAPInstanceTagsUpdate, options *armworkloads.SAPInstancesClientUpdateOptions) (resp azfake.Responder[armworkloads.SAPInstancesClientUpdateResponse], errResp azfake.ErrorResponder)
-
 }
 
 // NewSAPInstancesServerTransport creates a new instance of SAPInstancesServerTransport with the provided implementation.
@@ -47,9 +46,9 @@ type SAPInstancesServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewSAPInstancesServerTransport(srv *SAPInstancesServer) *SAPInstancesServerTransport {
 	return &SAPInstancesServerTransport{
-		srv: srv,
-		beginCreate: newTracker[azfake.PollerResponder[armworkloads.SAPInstancesClientCreateResponse]](),
-		beginDelete: newTracker[azfake.PollerResponder[armworkloads.SAPInstancesClientDeleteResponse]](),
+		srv:                            srv,
+		beginCreate:                    newTracker[azfake.PollerResponder[armworkloads.SAPInstancesClientCreateResponse]](),
+		beginDelete:                    newTracker[azfake.PollerResponder[armworkloads.SAPInstancesClientDeleteResponse]](),
 		newListBySAPDiscoverySitePager: newTracker[azfake.PagerResponder[armworkloads.SAPInstancesClientListBySAPDiscoverySiteResponse]](),
 	}
 }
@@ -57,9 +56,9 @@ func NewSAPInstancesServerTransport(srv *SAPInstancesServer) *SAPInstancesServer
 // SAPInstancesServerTransport connects instances of armworkloads.SAPInstancesClient to instances of SAPInstancesServer.
 // Don't use this type directly, use NewSAPInstancesServerTransport instead.
 type SAPInstancesServerTransport struct {
-	srv *SAPInstancesServer
-	beginCreate *tracker[azfake.PollerResponder[armworkloads.SAPInstancesClientCreateResponse]]
-	beginDelete *tracker[azfake.PollerResponder[armworkloads.SAPInstancesClientDeleteResponse]]
+	srv                            *SAPInstancesServer
+	beginCreate                    *tracker[azfake.PollerResponder[armworkloads.SAPInstancesClientCreateResponse]]
+	beginDelete                    *tracker[azfake.PollerResponder[armworkloads.SAPInstancesClientDeleteResponse]]
 	newListBySAPDiscoverySitePager *tracker[azfake.PagerResponder[armworkloads.SAPInstancesClientListBySAPDiscoverySiteResponse]]
 }
 
@@ -102,36 +101,36 @@ func (s *SAPInstancesServerTransport) dispatchBeginCreate(req *http.Request) (*h
 	}
 	beginCreate := s.beginCreate.get(req)
 	if beginCreate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.Workloads/sapDiscoverySites/(?P<sapDiscoverySiteName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/sapInstances/(?P<sapInstanceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armworkloads.SAPInstance](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	sapDiscoverySiteNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("sapDiscoverySiteName")])
-	if err != nil {
-		return nil, err
-	}
-	sapInstanceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("sapInstanceName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := s.srv.BeginCreate(req.Context(), subscriptionIDParam, resourceGroupNameParam, sapDiscoverySiteNameParam, sapInstanceNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.Workloads/sapDiscoverySites/(?P<sapDiscoverySiteName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/sapInstances/(?P<sapInstanceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armworkloads.SAPInstance](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		sapDiscoverySiteNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("sapDiscoverySiteName")])
+		if err != nil {
+			return nil, err
+		}
+		sapInstanceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("sapInstanceName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := s.srv.BeginCreate(req.Context(), subscriptionIDParam, resourceGroupNameParam, sapDiscoverySiteNameParam, sapInstanceNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginCreate = &respr
 		s.beginCreate.add(req, beginCreate)
 	}
@@ -158,32 +157,32 @@ func (s *SAPInstancesServerTransport) dispatchBeginDelete(req *http.Request) (*h
 	}
 	beginDelete := s.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.Workloads/sapDiscoverySites/(?P<sapDiscoverySiteName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/sapInstances/(?P<sapInstanceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	sapDiscoverySiteNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("sapDiscoverySiteName")])
-	if err != nil {
-		return nil, err
-	}
-	sapInstanceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("sapInstanceName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := s.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, sapDiscoverySiteNameParam, sapInstanceNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.Workloads/sapDiscoverySites/(?P<sapDiscoverySiteName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/sapInstances/(?P<sapInstanceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		sapDiscoverySiteNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("sapDiscoverySiteName")])
+		if err != nil {
+			return nil, err
+		}
+		sapInstanceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("sapInstanceName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := s.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, sapDiscoverySiteNameParam, sapInstanceNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		s.beginDelete.add(req, beginDelete)
 	}
@@ -251,25 +250,25 @@ func (s *SAPInstancesServerTransport) dispatchNewListBySAPDiscoverySitePager(req
 	}
 	newListBySAPDiscoverySitePager := s.newListBySAPDiscoverySitePager.get(req)
 	if newListBySAPDiscoverySitePager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.Workloads/sapDiscoverySites/(?P<sapDiscoverySiteName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/sapInstances`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	sapDiscoverySiteNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("sapDiscoverySiteName")])
-	if err != nil {
-		return nil, err
-	}
-resp := s.srv.NewListBySAPDiscoverySitePager(subscriptionIDParam, resourceGroupNameParam, sapDiscoverySiteNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.Workloads/sapDiscoverySites/(?P<sapDiscoverySiteName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/sapInstances`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		sapDiscoverySiteNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("sapDiscoverySiteName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := s.srv.NewListBySAPDiscoverySitePager(subscriptionIDParam, resourceGroupNameParam, sapDiscoverySiteNameParam, nil)
 		newListBySAPDiscoverySitePager = &resp
 		s.newListBySAPDiscoverySitePager.add(req, newListBySAPDiscoverySitePager)
 		server.PagerResponderInjectNextLinks(newListBySAPDiscoverySitePager, req, func(page *armworkloads.SAPInstancesClientListBySAPDiscoverySiteResponse, createLink func() string) {
@@ -334,4 +333,3 @@ func (s *SAPInstancesServerTransport) dispatchUpdate(req *http.Request) (*http.R
 	}
 	return resp, nil
 }
-

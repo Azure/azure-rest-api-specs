@@ -20,7 +20,7 @@ import (
 )
 
 // AzureSphereDeviceGroupsServer is a fake server for instances of the armsphere.AzureSphereDeviceGroupsClient type.
-type AzureSphereDeviceGroupsServer struct{
+type AzureSphereDeviceGroupsServer struct {
 	// BeginClaimDevices is the fake for method AzureSphereDeviceGroupsClient.BeginClaimDevices
 	// HTTP status codes to indicate success: http.StatusAccepted
 	BeginClaimDevices func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, body armsphere.ClaimDevicesRequest, options *armsphere.AzureSphereDeviceGroupsClientClaimDevicesOptions) (resp azfake.PollerResponder[armsphere.AzureSphereDeviceGroupsClientClaimDevicesResponse], errResp azfake.ErrorResponder)
@@ -48,7 +48,6 @@ type AzureSphereDeviceGroupsServer struct{
 	// BeginUpdate is the fake for method AzureSphereDeviceGroupsClient.BeginUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusAccepted
 	BeginUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, properties armsphere.DeviceGroupUpdate, options *armsphere.AzureSphereDeviceGroupsClientUpdateOptions) (resp azfake.PollerResponder[armsphere.AzureSphereDeviceGroupsClientUpdateResponse], errResp azfake.ErrorResponder)
-
 }
 
 // NewAzureSphereDeviceGroupsServerTransport creates a new instance of AzureSphereDeviceGroupsServerTransport with the provided implementation.
@@ -56,24 +55,24 @@ type AzureSphereDeviceGroupsServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewAzureSphereDeviceGroupsServerTransport(srv *AzureSphereDeviceGroupsServer) *AzureSphereDeviceGroupsServerTransport {
 	return &AzureSphereDeviceGroupsServerTransport{
-		srv: srv,
-		beginClaimDevices: newTracker[azfake.PollerResponder[armsphere.AzureSphereDeviceGroupsClientClaimDevicesResponse]](),
-		beginCreateOrUpdate: newTracker[azfake.PollerResponder[armsphere.AzureSphereDeviceGroupsClientCreateOrUpdateResponse]](),
-		beginDelete: newTracker[azfake.PollerResponder[armsphere.AzureSphereDeviceGroupsClientDeleteResponse]](),
+		srv:                   srv,
+		beginClaimDevices:     newTracker[azfake.PollerResponder[armsphere.AzureSphereDeviceGroupsClientClaimDevicesResponse]](),
+		beginCreateOrUpdate:   newTracker[azfake.PollerResponder[armsphere.AzureSphereDeviceGroupsClientCreateOrUpdateResponse]](),
+		beginDelete:           newTracker[azfake.PollerResponder[armsphere.AzureSphereDeviceGroupsClientDeleteResponse]](),
 		newListByProductPager: newTracker[azfake.PagerResponder[armsphere.AzureSphereDeviceGroupsClientListByProductResponse]](),
-		beginUpdate: newTracker[azfake.PollerResponder[armsphere.AzureSphereDeviceGroupsClientUpdateResponse]](),
+		beginUpdate:           newTracker[azfake.PollerResponder[armsphere.AzureSphereDeviceGroupsClientUpdateResponse]](),
 	}
 }
 
 // AzureSphereDeviceGroupsServerTransport connects instances of armsphere.AzureSphereDeviceGroupsClient to instances of AzureSphereDeviceGroupsServer.
 // Don't use this type directly, use NewAzureSphereDeviceGroupsServerTransport instead.
 type AzureSphereDeviceGroupsServerTransport struct {
-	srv *AzureSphereDeviceGroupsServer
-	beginClaimDevices *tracker[azfake.PollerResponder[armsphere.AzureSphereDeviceGroupsClientClaimDevicesResponse]]
-	beginCreateOrUpdate *tracker[azfake.PollerResponder[armsphere.AzureSphereDeviceGroupsClientCreateOrUpdateResponse]]
-	beginDelete *tracker[azfake.PollerResponder[armsphere.AzureSphereDeviceGroupsClientDeleteResponse]]
+	srv                   *AzureSphereDeviceGroupsServer
+	beginClaimDevices     *tracker[azfake.PollerResponder[armsphere.AzureSphereDeviceGroupsClientClaimDevicesResponse]]
+	beginCreateOrUpdate   *tracker[azfake.PollerResponder[armsphere.AzureSphereDeviceGroupsClientCreateOrUpdateResponse]]
+	beginDelete           *tracker[azfake.PollerResponder[armsphere.AzureSphereDeviceGroupsClientDeleteResponse]]
 	newListByProductPager *tracker[azfake.PagerResponder[armsphere.AzureSphereDeviceGroupsClientListByProductResponse]]
-	beginUpdate *tracker[azfake.PollerResponder[armsphere.AzureSphereDeviceGroupsClientUpdateResponse]]
+	beginUpdate           *tracker[azfake.PollerResponder[armsphere.AzureSphereDeviceGroupsClientUpdateResponse]]
 }
 
 // Do implements the policy.Transporter interface for AzureSphereDeviceGroupsServerTransport.
@@ -119,40 +118,40 @@ func (a *AzureSphereDeviceGroupsServerTransport) dispatchBeginClaimDevices(req *
 	}
 	beginClaimDevices := a.beginClaimDevices.get(req)
 	if beginClaimDevices == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureSphere/catalogs/(?P<catalogName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/products/(?P<productName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/deviceGroups/(?P<deviceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/claimDevices`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 5 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armsphere.ClaimDevicesRequest](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	catalogNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("catalogName")])
-	if err != nil {
-		return nil, err
-	}
-	productNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("productName")])
-	if err != nil {
-		return nil, err
-	}
-	deviceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("deviceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := a.srv.BeginClaimDevices(req.Context(), subscriptionIDParam, resourceGroupNameParam, catalogNameParam, productNameParam, deviceGroupNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureSphere/catalogs/(?P<catalogName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/products/(?P<productName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/deviceGroups/(?P<deviceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/claimDevices`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 5 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armsphere.ClaimDevicesRequest](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		catalogNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("catalogName")])
+		if err != nil {
+			return nil, err
+		}
+		productNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("productName")])
+		if err != nil {
+			return nil, err
+		}
+		deviceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("deviceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := a.srv.BeginClaimDevices(req.Context(), subscriptionIDParam, resourceGroupNameParam, catalogNameParam, productNameParam, deviceGroupNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginClaimDevices = &respr
 		a.beginClaimDevices.add(req, beginClaimDevices)
 	}
@@ -228,40 +227,40 @@ func (a *AzureSphereDeviceGroupsServerTransport) dispatchBeginCreateOrUpdate(req
 	}
 	beginCreateOrUpdate := a.beginCreateOrUpdate.get(req)
 	if beginCreateOrUpdate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureSphere/catalogs/(?P<catalogName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/products/(?P<productName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/deviceGroups/(?P<deviceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 5 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armsphere.DeviceGroup](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	catalogNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("catalogName")])
-	if err != nil {
-		return nil, err
-	}
-	productNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("productName")])
-	if err != nil {
-		return nil, err
-	}
-	deviceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("deviceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := a.srv.BeginCreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, catalogNameParam, productNameParam, deviceGroupNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureSphere/catalogs/(?P<catalogName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/products/(?P<productName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/deviceGroups/(?P<deviceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 5 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armsphere.DeviceGroup](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		catalogNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("catalogName")])
+		if err != nil {
+			return nil, err
+		}
+		productNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("productName")])
+		if err != nil {
+			return nil, err
+		}
+		deviceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("deviceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := a.srv.BeginCreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, catalogNameParam, productNameParam, deviceGroupNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginCreateOrUpdate = &respr
 		a.beginCreateOrUpdate.add(req, beginCreateOrUpdate)
 	}
@@ -288,36 +287,36 @@ func (a *AzureSphereDeviceGroupsServerTransport) dispatchBeginDelete(req *http.R
 	}
 	beginDelete := a.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureSphere/catalogs/(?P<catalogName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/products/(?P<productName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/deviceGroups/(?P<deviceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 5 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	catalogNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("catalogName")])
-	if err != nil {
-		return nil, err
-	}
-	productNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("productName")])
-	if err != nil {
-		return nil, err
-	}
-	deviceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("deviceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := a.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, catalogNameParam, productNameParam, deviceGroupNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureSphere/catalogs/(?P<catalogName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/products/(?P<productName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/deviceGroups/(?P<deviceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 5 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		catalogNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("catalogName")])
+		if err != nil {
+			return nil, err
+		}
+		productNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("productName")])
+		if err != nil {
+			return nil, err
+		}
+		deviceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("deviceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := a.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, catalogNameParam, productNameParam, deviceGroupNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		a.beginDelete.add(req, beginDelete)
 	}
@@ -389,86 +388,86 @@ func (a *AzureSphereDeviceGroupsServerTransport) dispatchNewListByProductPager(r
 	}
 	newListByProductPager := a.newListByProductPager.get(req)
 	if newListByProductPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureSphere/catalogs/(?P<catalogName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/products/(?P<productName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/deviceGroups`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	qp := req.URL.Query()
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	filterUnescaped, err := url.QueryUnescape(qp.Get("$filter"))
-	if err != nil {
-		return nil, err
-	}
-	filterParam := getOptional(filterUnescaped)
-	topUnescaped, err := url.QueryUnescape(qp.Get("$top"))
-	if err != nil {
-		return nil, err
-	}
-	topParam, err := parseOptional(topUnescaped, func(v string) (int32, error) {
-		p, parseErr := strconv.ParseInt(v, 10, 32)
-		if parseErr != nil {
-			return 0, parseErr
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureSphere/catalogs/(?P<catalogName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/products/(?P<productName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/deviceGroups`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
 		}
-		return int32(p), nil
-	})
-	if err != nil {
-		return nil, err
-	}
-	skipUnescaped, err := url.QueryUnescape(qp.Get("$skip"))
-	if err != nil {
-		return nil, err
-	}
-	skipParam, err := parseOptional(skipUnescaped, func(v string) (int32, error) {
-		p, parseErr := strconv.ParseInt(v, 10, 32)
-		if parseErr != nil {
-			return 0, parseErr
+		qp := req.URL.Query()
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
 		}
-		return int32(p), nil
-	})
-	if err != nil {
-		return nil, err
-	}
-	maxpagesizeUnescaped, err := url.QueryUnescape(qp.Get("$maxpagesize"))
-	if err != nil {
-		return nil, err
-	}
-	maxpagesizeParam, err := parseOptional(maxpagesizeUnescaped, func(v string) (int32, error) {
-		p, parseErr := strconv.ParseInt(v, 10, 32)
-		if parseErr != nil {
-			return 0, parseErr
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
 		}
-		return int32(p), nil
-	})
-	if err != nil {
-		return nil, err
-	}
-	catalogNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("catalogName")])
-	if err != nil {
-		return nil, err
-	}
-	productNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("productName")])
-	if err != nil {
-		return nil, err
-	}
-	var options *armsphere.AzureSphereDeviceGroupsClientListByProductOptions
-	if filterParam != nil || topParam != nil || skipParam != nil || maxpagesizeParam != nil {
-		options = &armsphere.AzureSphereDeviceGroupsClientListByProductOptions{
-			Filter: filterParam,
-			Top: topParam,
-			Skip: skipParam,
-			Maxpagesize: maxpagesizeParam,
+		filterUnescaped, err := url.QueryUnescape(qp.Get("$filter"))
+		if err != nil {
+			return nil, err
 		}
-	}
-resp := a.srv.NewListByProductPager(subscriptionIDParam, resourceGroupNameParam, catalogNameParam, productNameParam, options)
+		filterParam := getOptional(filterUnescaped)
+		topUnescaped, err := url.QueryUnescape(qp.Get("$top"))
+		if err != nil {
+			return nil, err
+		}
+		topParam, err := parseOptional(topUnescaped, func(v string) (int32, error) {
+			p, parseErr := strconv.ParseInt(v, 10, 32)
+			if parseErr != nil {
+				return 0, parseErr
+			}
+			return int32(p), nil
+		})
+		if err != nil {
+			return nil, err
+		}
+		skipUnescaped, err := url.QueryUnescape(qp.Get("$skip"))
+		if err != nil {
+			return nil, err
+		}
+		skipParam, err := parseOptional(skipUnescaped, func(v string) (int32, error) {
+			p, parseErr := strconv.ParseInt(v, 10, 32)
+			if parseErr != nil {
+				return 0, parseErr
+			}
+			return int32(p), nil
+		})
+		if err != nil {
+			return nil, err
+		}
+		maxpagesizeUnescaped, err := url.QueryUnescape(qp.Get("$maxpagesize"))
+		if err != nil {
+			return nil, err
+		}
+		maxpagesizeParam, err := parseOptional(maxpagesizeUnescaped, func(v string) (int32, error) {
+			p, parseErr := strconv.ParseInt(v, 10, 32)
+			if parseErr != nil {
+				return 0, parseErr
+			}
+			return int32(p), nil
+		})
+		if err != nil {
+			return nil, err
+		}
+		catalogNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("catalogName")])
+		if err != nil {
+			return nil, err
+		}
+		productNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("productName")])
+		if err != nil {
+			return nil, err
+		}
+		var options *armsphere.AzureSphereDeviceGroupsClientListByProductOptions
+		if filterParam != nil || topParam != nil || skipParam != nil || maxpagesizeParam != nil {
+			options = &armsphere.AzureSphereDeviceGroupsClientListByProductOptions{
+				Filter:      filterParam,
+				Top:         topParam,
+				Skip:        skipParam,
+				Maxpagesize: maxpagesizeParam,
+			}
+		}
+		resp := a.srv.NewListByProductPager(subscriptionIDParam, resourceGroupNameParam, catalogNameParam, productNameParam, options)
 		newListByProductPager = &resp
 		a.newListByProductPager.add(req, newListByProductPager)
 		server.PagerResponderInjectNextLinks(newListByProductPager, req, func(page *armsphere.AzureSphereDeviceGroupsClientListByProductResponse, createLink func() string) {
@@ -495,40 +494,40 @@ func (a *AzureSphereDeviceGroupsServerTransport) dispatchBeginUpdate(req *http.R
 	}
 	beginUpdate := a.beginUpdate.get(req)
 	if beginUpdate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureSphere/catalogs/(?P<catalogName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/products/(?P<productName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/deviceGroups/(?P<deviceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 5 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armsphere.DeviceGroupUpdate](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	catalogNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("catalogName")])
-	if err != nil {
-		return nil, err
-	}
-	productNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("productName")])
-	if err != nil {
-		return nil, err
-	}
-	deviceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("deviceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := a.srv.BeginUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, catalogNameParam, productNameParam, deviceGroupNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureSphere/catalogs/(?P<catalogName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/products/(?P<productName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/deviceGroups/(?P<deviceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 5 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armsphere.DeviceGroupUpdate](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		catalogNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("catalogName")])
+		if err != nil {
+			return nil, err
+		}
+		productNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("productName")])
+		if err != nil {
+			return nil, err
+		}
+		deviceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("deviceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := a.srv.BeginUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, catalogNameParam, productNameParam, deviceGroupNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginUpdate = &respr
 		a.beginUpdate.add(req, beginUpdate)
 	}
@@ -548,4 +547,3 @@ func (a *AzureSphereDeviceGroupsServerTransport) dispatchBeginUpdate(req *http.R
 
 	return resp, nil
 }
-

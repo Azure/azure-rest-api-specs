@@ -31,7 +31,7 @@ func NewSAPInstancesClient(credential azcore.TokenCredential, options *arm.Clien
 		return nil, err
 	}
 	client := &SAPInstancesClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -106,8 +106,8 @@ func (client *SAPInstancesClient) createCreateRequest(ctx context.Context, subsc
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -253,13 +253,13 @@ func (client *SAPInstancesClient) getHandleResponse(resp *http.Response) (SAPIns
 //   - sapDiscoverySiteName - The name of the discovery site resource for SAP Migration.
 //   - options - SAPInstancesClientListBySAPDiscoverySiteOptions contains the optional parameters for the SAPInstancesClient.NewListBySAPDiscoverySitePager
 //     method.
-func (client *SAPInstancesClient) NewListBySAPDiscoverySitePager(subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, options *SAPInstancesClientListBySAPDiscoverySiteOptions) (*runtime.Pager[SAPInstancesClientListBySAPDiscoverySiteResponse]) {
+func (client *SAPInstancesClient) NewListBySAPDiscoverySitePager(subscriptionID string, resourceGroupName string, sapDiscoverySiteName string, options *SAPInstancesClientListBySAPDiscoverySiteOptions) *runtime.Pager[SAPInstancesClientListBySAPDiscoverySiteResponse] {
 	return runtime.NewPager(runtime.PagingHandler[SAPInstancesClientListBySAPDiscoverySiteResponse]{
 		More: func(page SAPInstancesClientListBySAPDiscoverySiteResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *SAPInstancesClientListBySAPDiscoverySiteResponse) (SAPInstancesClientListBySAPDiscoverySiteResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SAPInstancesClient.NewListBySAPDiscoverySitePager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SAPInstancesClient.NewListBySAPDiscoverySitePager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -271,7 +271,7 @@ func (client *SAPInstancesClient) NewListBySAPDiscoverySitePager(subscriptionID 
 				return SAPInstancesClientListBySAPDiscoverySiteResponse{}, err
 			}
 			return client.listBySAPDiscoverySiteHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -365,8 +365,8 @@ func (client *SAPInstancesClient) updateCreateRequest(ctx context.Context, subsc
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -378,4 +378,3 @@ func (client *SAPInstancesClient) updateHandleResponse(resp *http.Response) (SAP
 	}
 	return result, nil
 }
-

@@ -19,7 +19,7 @@ import (
 )
 
 // FrontendsInterfaceServer is a fake server for instances of the armservicenetworking.FrontendsInterfaceClient type.
-type FrontendsInterfaceServer struct{
+type FrontendsInterfaceServer struct {
 	// BeginCreateOrUpdate is the fake for method FrontendsInterfaceClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
 	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, frontendName string, resource armservicenetworking.Frontend, options *armservicenetworking.FrontendsInterfaceClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armservicenetworking.FrontendsInterfaceClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
@@ -39,7 +39,6 @@ type FrontendsInterfaceServer struct{
 	// Update is the fake for method FrontendsInterfaceClient.Update
 	// HTTP status codes to indicate success: http.StatusOK
 	Update func(ctx context.Context, subscriptionID string, resourceGroupName string, trafficControllerName string, frontendName string, properties armservicenetworking.FrontendUpdate, options *armservicenetworking.FrontendsInterfaceClientUpdateOptions) (resp azfake.Responder[armservicenetworking.FrontendsInterfaceClientUpdateResponse], errResp azfake.ErrorResponder)
-
 }
 
 // NewFrontendsInterfaceServerTransport creates a new instance of FrontendsInterfaceServerTransport with the provided implementation.
@@ -47,9 +46,9 @@ type FrontendsInterfaceServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewFrontendsInterfaceServerTransport(srv *FrontendsInterfaceServer) *FrontendsInterfaceServerTransport {
 	return &FrontendsInterfaceServerTransport{
-		srv: srv,
-		beginCreateOrUpdate: newTracker[azfake.PollerResponder[armservicenetworking.FrontendsInterfaceClientCreateOrUpdateResponse]](),
-		beginDelete: newTracker[azfake.PollerResponder[armservicenetworking.FrontendsInterfaceClientDeleteResponse]](),
+		srv:                             srv,
+		beginCreateOrUpdate:             newTracker[azfake.PollerResponder[armservicenetworking.FrontendsInterfaceClientCreateOrUpdateResponse]](),
+		beginDelete:                     newTracker[azfake.PollerResponder[armservicenetworking.FrontendsInterfaceClientDeleteResponse]](),
 		newListByTrafficControllerPager: newTracker[azfake.PagerResponder[armservicenetworking.FrontendsInterfaceClientListByTrafficControllerResponse]](),
 	}
 }
@@ -57,9 +56,9 @@ func NewFrontendsInterfaceServerTransport(srv *FrontendsInterfaceServer) *Fronte
 // FrontendsInterfaceServerTransport connects instances of armservicenetworking.FrontendsInterfaceClient to instances of FrontendsInterfaceServer.
 // Don't use this type directly, use NewFrontendsInterfaceServerTransport instead.
 type FrontendsInterfaceServerTransport struct {
-	srv *FrontendsInterfaceServer
-	beginCreateOrUpdate *tracker[azfake.PollerResponder[armservicenetworking.FrontendsInterfaceClientCreateOrUpdateResponse]]
-	beginDelete *tracker[azfake.PollerResponder[armservicenetworking.FrontendsInterfaceClientDeleteResponse]]
+	srv                             *FrontendsInterfaceServer
+	beginCreateOrUpdate             *tracker[azfake.PollerResponder[armservicenetworking.FrontendsInterfaceClientCreateOrUpdateResponse]]
+	beginDelete                     *tracker[azfake.PollerResponder[armservicenetworking.FrontendsInterfaceClientDeleteResponse]]
 	newListByTrafficControllerPager *tracker[azfake.PagerResponder[armservicenetworking.FrontendsInterfaceClientListByTrafficControllerResponse]]
 }
 
@@ -102,36 +101,36 @@ func (f *FrontendsInterfaceServerTransport) dispatchBeginCreateOrUpdate(req *htt
 	}
 	beginCreateOrUpdate := f.beginCreateOrUpdate.get(req)
 	if beginCreateOrUpdate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ServiceNetworking/trafficControllers/(?P<trafficControllerName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/frontends/(?P<frontendName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armservicenetworking.Frontend](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	trafficControllerNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("trafficControllerName")])
-	if err != nil {
-		return nil, err
-	}
-	frontendNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("frontendName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := f.srv.BeginCreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, trafficControllerNameParam, frontendNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ServiceNetworking/trafficControllers/(?P<trafficControllerName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/frontends/(?P<frontendName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armservicenetworking.Frontend](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		trafficControllerNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("trafficControllerName")])
+		if err != nil {
+			return nil, err
+		}
+		frontendNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("frontendName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := f.srv.BeginCreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, trafficControllerNameParam, frontendNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginCreateOrUpdate = &respr
 		f.beginCreateOrUpdate.add(req, beginCreateOrUpdate)
 	}
@@ -158,32 +157,32 @@ func (f *FrontendsInterfaceServerTransport) dispatchBeginDelete(req *http.Reques
 	}
 	beginDelete := f.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ServiceNetworking/trafficControllers/(?P<trafficControllerName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/frontends/(?P<frontendName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	trafficControllerNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("trafficControllerName")])
-	if err != nil {
-		return nil, err
-	}
-	frontendNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("frontendName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := f.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, trafficControllerNameParam, frontendNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ServiceNetworking/trafficControllers/(?P<trafficControllerName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/frontends/(?P<frontendName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		trafficControllerNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("trafficControllerName")])
+		if err != nil {
+			return nil, err
+		}
+		frontendNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("frontendName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := f.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, trafficControllerNameParam, frontendNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		f.beginDelete.add(req, beginDelete)
 	}
@@ -251,25 +250,25 @@ func (f *FrontendsInterfaceServerTransport) dispatchNewListByTrafficControllerPa
 	}
 	newListByTrafficControllerPager := f.newListByTrafficControllerPager.get(req)
 	if newListByTrafficControllerPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ServiceNetworking/trafficControllers/(?P<trafficControllerName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/frontends`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	trafficControllerNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("trafficControllerName")])
-	if err != nil {
-		return nil, err
-	}
-resp := f.srv.NewListByTrafficControllerPager(subscriptionIDParam, resourceGroupNameParam, trafficControllerNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ServiceNetworking/trafficControllers/(?P<trafficControllerName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/frontends`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		trafficControllerNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("trafficControllerName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := f.srv.NewListByTrafficControllerPager(subscriptionIDParam, resourceGroupNameParam, trafficControllerNameParam, nil)
 		newListByTrafficControllerPager = &resp
 		f.newListByTrafficControllerPager.add(req, newListByTrafficControllerPager)
 		server.PagerResponderInjectNextLinks(newListByTrafficControllerPager, req, func(page *armservicenetworking.FrontendsInterfaceClientListByTrafficControllerResponse, createLink func() string) {
@@ -334,4 +333,3 @@ func (f *FrontendsInterfaceServerTransport) dispatchUpdate(req *http.Request) (*
 	}
 	return resp, nil
 }
-

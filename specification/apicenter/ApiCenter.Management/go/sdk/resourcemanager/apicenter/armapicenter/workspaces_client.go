@@ -31,7 +31,7 @@ func NewWorkspacesClient(credential azcore.TokenCredential, options *arm.ClientO
 		return nil, err
 	}
 	client := &WorkspacesClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -92,8 +92,8 @@ func (client *WorkspacesClient) createOrUpdateCreateRequest(ctx context.Context,
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, payload); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -289,13 +289,13 @@ func (client *WorkspacesClient) headCreateRequest(ctx context.Context, subscript
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - serviceName - The name of Azure API Center service.
 //   - options - WorkspacesClientListOptions contains the optional parameters for the WorkspacesClient.NewListPager method.
-func (client *WorkspacesClient) NewListPager(subscriptionID string, resourceGroupName string, serviceName string, options *WorkspacesClientListOptions) (*runtime.Pager[WorkspacesClientListResponse]) {
+func (client *WorkspacesClient) NewListPager(subscriptionID string, resourceGroupName string, serviceName string, options *WorkspacesClientListOptions) *runtime.Pager[WorkspacesClientListResponse] {
 	return runtime.NewPager(runtime.PagingHandler[WorkspacesClientListResponse]{
 		More: func(page WorkspacesClientListResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *WorkspacesClientListResponse) (WorkspacesClientListResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkspacesClient.NewListPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkspacesClient.NewListPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -307,7 +307,7 @@ func (client *WorkspacesClient) NewListPager(subscriptionID string, resourceGrou
 				return WorkspacesClientListResponse{}, err
 			}
 			return client.listHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -348,4 +348,3 @@ func (client *WorkspacesClient) listHandleResponse(resp *http.Response) (Workspa
 	}
 	return result, nil
 }
-

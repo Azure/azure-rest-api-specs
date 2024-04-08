@@ -16,11 +16,10 @@ import (
 )
 
 // CommunityOperationsServer is a fake server for instances of the armcommunitytraining.CommunityOperationsClient type.
-type CommunityOperationsServer struct{
+type CommunityOperationsServer struct {
 	// NewListPager is the fake for method CommunityOperationsClient.NewListPager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListPager func(options *armcommunitytraining.CommunityOperationsClientListOptions) (resp azfake.PagerResponder[armcommunitytraining.CommunityOperationsClientListResponse])
-
 }
 
 // NewCommunityOperationsServerTransport creates a new instance of CommunityOperationsServerTransport with the provided implementation.
@@ -28,7 +27,7 @@ type CommunityOperationsServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewCommunityOperationsServerTransport(srv *CommunityOperationsServer) *CommunityOperationsServerTransport {
 	return &CommunityOperationsServerTransport{
-		srv: srv,
+		srv:          srv,
 		newListPager: newTracker[azfake.PagerResponder[armcommunitytraining.CommunityOperationsClientListResponse]](),
 	}
 }
@@ -36,7 +35,7 @@ func NewCommunityOperationsServerTransport(srv *CommunityOperationsServer) *Comm
 // CommunityOperationsServerTransport connects instances of armcommunitytraining.CommunityOperationsClient to instances of CommunityOperationsServer.
 // Don't use this type directly, use NewCommunityOperationsServerTransport instead.
 type CommunityOperationsServerTransport struct {
-	srv *CommunityOperationsServer
+	srv          *CommunityOperationsServer
 	newListPager *tracker[azfake.PagerResponder[armcommunitytraining.CommunityOperationsClientListResponse]]
 }
 
@@ -71,7 +70,7 @@ func (c *CommunityOperationsServerTransport) dispatchNewListPager(req *http.Requ
 	}
 	newListPager := c.newListPager.get(req)
 	if newListPager == nil {
-resp := c.srv.NewListPager(nil)
+		resp := c.srv.NewListPager(nil)
 		newListPager = &resp
 		c.newListPager.add(req, newListPager)
 		server.PagerResponderInjectNextLinks(newListPager, req, func(page *armcommunitytraining.CommunityOperationsClientListResponse, createLink func() string) {
@@ -91,4 +90,3 @@ resp := c.srv.NewListPager(nil)
 	}
 	return resp, nil
 }
-

@@ -20,7 +20,7 @@ import (
 )
 
 // AzureSphereImagesServer is a fake server for instances of the armsphere.AzureSphereImagesClient type.
-type AzureSphereImagesServer struct{
+type AzureSphereImagesServer struct {
 	// BeginCreateOrUpdate is the fake for method AzureSphereImagesClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
 	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, catalogName string, imageName string, resource armsphere.Image, options *armsphere.AzureSphereImagesClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armsphere.AzureSphereImagesClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
@@ -36,7 +36,6 @@ type AzureSphereImagesServer struct{
 	// NewListByCatalogPager is the fake for method AzureSphereImagesClient.NewListByCatalogPager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListByCatalogPager func(subscriptionID string, resourceGroupName string, catalogName string, options *armsphere.AzureSphereImagesClientListByCatalogOptions) (resp azfake.PagerResponder[armsphere.AzureSphereImagesClientListByCatalogResponse])
-
 }
 
 // NewAzureSphereImagesServerTransport creates a new instance of AzureSphereImagesServerTransport with the provided implementation.
@@ -44,9 +43,9 @@ type AzureSphereImagesServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewAzureSphereImagesServerTransport(srv *AzureSphereImagesServer) *AzureSphereImagesServerTransport {
 	return &AzureSphereImagesServerTransport{
-		srv: srv,
-		beginCreateOrUpdate: newTracker[azfake.PollerResponder[armsphere.AzureSphereImagesClientCreateOrUpdateResponse]](),
-		beginDelete: newTracker[azfake.PollerResponder[armsphere.AzureSphereImagesClientDeleteResponse]](),
+		srv:                   srv,
+		beginCreateOrUpdate:   newTracker[azfake.PollerResponder[armsphere.AzureSphereImagesClientCreateOrUpdateResponse]](),
+		beginDelete:           newTracker[azfake.PollerResponder[armsphere.AzureSphereImagesClientDeleteResponse]](),
 		newListByCatalogPager: newTracker[azfake.PagerResponder[armsphere.AzureSphereImagesClientListByCatalogResponse]](),
 	}
 }
@@ -54,9 +53,9 @@ func NewAzureSphereImagesServerTransport(srv *AzureSphereImagesServer) *AzureSph
 // AzureSphereImagesServerTransport connects instances of armsphere.AzureSphereImagesClient to instances of AzureSphereImagesServer.
 // Don't use this type directly, use NewAzureSphereImagesServerTransport instead.
 type AzureSphereImagesServerTransport struct {
-	srv *AzureSphereImagesServer
-	beginCreateOrUpdate *tracker[azfake.PollerResponder[armsphere.AzureSphereImagesClientCreateOrUpdateResponse]]
-	beginDelete *tracker[azfake.PollerResponder[armsphere.AzureSphereImagesClientDeleteResponse]]
+	srv                   *AzureSphereImagesServer
+	beginCreateOrUpdate   *tracker[azfake.PollerResponder[armsphere.AzureSphereImagesClientCreateOrUpdateResponse]]
+	beginDelete           *tracker[azfake.PollerResponder[armsphere.AzureSphereImagesClientDeleteResponse]]
 	newListByCatalogPager *tracker[azfake.PagerResponder[armsphere.AzureSphereImagesClientListByCatalogResponse]]
 }
 
@@ -97,36 +96,36 @@ func (a *AzureSphereImagesServerTransport) dispatchBeginCreateOrUpdate(req *http
 	}
 	beginCreateOrUpdate := a.beginCreateOrUpdate.get(req)
 	if beginCreateOrUpdate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureSphere/catalogs/(?P<catalogName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/images/(?P<imageName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armsphere.Image](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	catalogNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("catalogName")])
-	if err != nil {
-		return nil, err
-	}
-	imageNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("imageName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := a.srv.BeginCreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, catalogNameParam, imageNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureSphere/catalogs/(?P<catalogName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/images/(?P<imageName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armsphere.Image](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		catalogNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("catalogName")])
+		if err != nil {
+			return nil, err
+		}
+		imageNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("imageName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := a.srv.BeginCreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, catalogNameParam, imageNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginCreateOrUpdate = &respr
 		a.beginCreateOrUpdate.add(req, beginCreateOrUpdate)
 	}
@@ -153,32 +152,32 @@ func (a *AzureSphereImagesServerTransport) dispatchBeginDelete(req *http.Request
 	}
 	beginDelete := a.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureSphere/catalogs/(?P<catalogName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/images/(?P<imageName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	catalogNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("catalogName")])
-	if err != nil {
-		return nil, err
-	}
-	imageNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("imageName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := a.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, catalogNameParam, imageNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureSphere/catalogs/(?P<catalogName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/images/(?P<imageName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		catalogNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("catalogName")])
+		if err != nil {
+			return nil, err
+		}
+		imageNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("imageName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := a.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, catalogNameParam, imageNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		a.beginDelete.add(req, beginDelete)
 	}
@@ -246,82 +245,82 @@ func (a *AzureSphereImagesServerTransport) dispatchNewListByCatalogPager(req *ht
 	}
 	newListByCatalogPager := a.newListByCatalogPager.get(req)
 	if newListByCatalogPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureSphere/catalogs/(?P<catalogName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/images`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	qp := req.URL.Query()
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	filterUnescaped, err := url.QueryUnescape(qp.Get("$filter"))
-	if err != nil {
-		return nil, err
-	}
-	filterParam := getOptional(filterUnescaped)
-	topUnescaped, err := url.QueryUnescape(qp.Get("$top"))
-	if err != nil {
-		return nil, err
-	}
-	topParam, err := parseOptional(topUnescaped, func(v string) (int32, error) {
-		p, parseErr := strconv.ParseInt(v, 10, 32)
-		if parseErr != nil {
-			return 0, parseErr
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureSphere/catalogs/(?P<catalogName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/images`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
 		}
-		return int32(p), nil
-	})
-	if err != nil {
-		return nil, err
-	}
-	skipUnescaped, err := url.QueryUnescape(qp.Get("$skip"))
-	if err != nil {
-		return nil, err
-	}
-	skipParam, err := parseOptional(skipUnescaped, func(v string) (int32, error) {
-		p, parseErr := strconv.ParseInt(v, 10, 32)
-		if parseErr != nil {
-			return 0, parseErr
+		qp := req.URL.Query()
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
 		}
-		return int32(p), nil
-	})
-	if err != nil {
-		return nil, err
-	}
-	maxpagesizeUnescaped, err := url.QueryUnescape(qp.Get("$maxpagesize"))
-	if err != nil {
-		return nil, err
-	}
-	maxpagesizeParam, err := parseOptional(maxpagesizeUnescaped, func(v string) (int32, error) {
-		p, parseErr := strconv.ParseInt(v, 10, 32)
-		if parseErr != nil {
-			return 0, parseErr
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
 		}
-		return int32(p), nil
-	})
-	if err != nil {
-		return nil, err
-	}
-	catalogNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("catalogName")])
-	if err != nil {
-		return nil, err
-	}
-	var options *armsphere.AzureSphereImagesClientListByCatalogOptions
-	if filterParam != nil || topParam != nil || skipParam != nil || maxpagesizeParam != nil {
-		options = &armsphere.AzureSphereImagesClientListByCatalogOptions{
-			Filter: filterParam,
-			Top: topParam,
-			Skip: skipParam,
-			Maxpagesize: maxpagesizeParam,
+		filterUnescaped, err := url.QueryUnescape(qp.Get("$filter"))
+		if err != nil {
+			return nil, err
 		}
-	}
-resp := a.srv.NewListByCatalogPager(subscriptionIDParam, resourceGroupNameParam, catalogNameParam, options)
+		filterParam := getOptional(filterUnescaped)
+		topUnescaped, err := url.QueryUnescape(qp.Get("$top"))
+		if err != nil {
+			return nil, err
+		}
+		topParam, err := parseOptional(topUnescaped, func(v string) (int32, error) {
+			p, parseErr := strconv.ParseInt(v, 10, 32)
+			if parseErr != nil {
+				return 0, parseErr
+			}
+			return int32(p), nil
+		})
+		if err != nil {
+			return nil, err
+		}
+		skipUnescaped, err := url.QueryUnescape(qp.Get("$skip"))
+		if err != nil {
+			return nil, err
+		}
+		skipParam, err := parseOptional(skipUnescaped, func(v string) (int32, error) {
+			p, parseErr := strconv.ParseInt(v, 10, 32)
+			if parseErr != nil {
+				return 0, parseErr
+			}
+			return int32(p), nil
+		})
+		if err != nil {
+			return nil, err
+		}
+		maxpagesizeUnescaped, err := url.QueryUnescape(qp.Get("$maxpagesize"))
+		if err != nil {
+			return nil, err
+		}
+		maxpagesizeParam, err := parseOptional(maxpagesizeUnescaped, func(v string) (int32, error) {
+			p, parseErr := strconv.ParseInt(v, 10, 32)
+			if parseErr != nil {
+				return 0, parseErr
+			}
+			return int32(p), nil
+		})
+		if err != nil {
+			return nil, err
+		}
+		catalogNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("catalogName")])
+		if err != nil {
+			return nil, err
+		}
+		var options *armsphere.AzureSphereImagesClientListByCatalogOptions
+		if filterParam != nil || topParam != nil || skipParam != nil || maxpagesizeParam != nil {
+			options = &armsphere.AzureSphereImagesClientListByCatalogOptions{
+				Filter:      filterParam,
+				Top:         topParam,
+				Skip:        skipParam,
+				Maxpagesize: maxpagesizeParam,
+			}
+		}
+		resp := a.srv.NewListByCatalogPager(subscriptionIDParam, resourceGroupNameParam, catalogNameParam, options)
 		newListByCatalogPager = &resp
 		a.newListByCatalogPager.add(req, newListByCatalogPager)
 		server.PagerResponderInjectNextLinks(newListByCatalogPager, req, func(page *armsphere.AzureSphereImagesClientListByCatalogResponse, createLink func() string) {
@@ -341,4 +340,3 @@ resp := a.srv.NewListByCatalogPager(subscriptionIDParam, resourceGroupNameParam,
 	}
 	return resp, nil
 }
-

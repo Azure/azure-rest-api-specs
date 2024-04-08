@@ -31,7 +31,7 @@ func NewWorkloadNetworkGatewaysClient(credential azcore.TokenCredential, options
 		return nil, err
 	}
 	client := &WorkloadNetworkGatewaysClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -107,13 +107,13 @@ func (client *WorkloadNetworkGatewaysClient) getHandleResponse(resp *http.Respon
 //   - privateCloudName - Name of the private cloud
 //   - options - WorkloadNetworkGatewaysClientListByWorkloadNetworkOptions contains the optional parameters for the WorkloadNetworkGatewaysClient.NewListByWorkloadNetworkPager
 //     method.
-func (client *WorkloadNetworkGatewaysClient) NewListByWorkloadNetworkPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *WorkloadNetworkGatewaysClientListByWorkloadNetworkOptions) (*runtime.Pager[WorkloadNetworkGatewaysClientListByWorkloadNetworkResponse]) {
+func (client *WorkloadNetworkGatewaysClient) NewListByWorkloadNetworkPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *WorkloadNetworkGatewaysClientListByWorkloadNetworkOptions) *runtime.Pager[WorkloadNetworkGatewaysClientListByWorkloadNetworkResponse] {
 	return runtime.NewPager(runtime.PagingHandler[WorkloadNetworkGatewaysClientListByWorkloadNetworkResponse]{
 		More: func(page WorkloadNetworkGatewaysClientListByWorkloadNetworkResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *WorkloadNetworkGatewaysClientListByWorkloadNetworkResponse) (WorkloadNetworkGatewaysClientListByWorkloadNetworkResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkGatewaysClient.NewListByWorkloadNetworkPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "WorkloadNetworkGatewaysClient.NewListByWorkloadNetworkPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -125,7 +125,7 @@ func (client *WorkloadNetworkGatewaysClient) NewListByWorkloadNetworkPager(subsc
 				return WorkloadNetworkGatewaysClientListByWorkloadNetworkResponse{}, err
 			}
 			return client.listByWorkloadNetworkHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -163,4 +163,3 @@ func (client *WorkloadNetworkGatewaysClient) listByWorkloadNetworkHandleResponse
 	}
 	return result, nil
 }
-

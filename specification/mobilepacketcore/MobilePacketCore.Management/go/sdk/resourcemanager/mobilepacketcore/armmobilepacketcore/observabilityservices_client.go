@@ -32,7 +32,7 @@ func NewObservabilityServicesClient(credential azcore.TokenCredential, options *
 		return nil, err
 	}
 	client := &ObservabilityServicesClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -88,8 +88,8 @@ func (client *ObservabilityServicesClient) createOrUpdateCreateRequest(ctx conte
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -239,13 +239,13 @@ func (client *ObservabilityServicesClient) getHandleResponse(resp *http.Response
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - options - ObservabilityServicesClientListByResourceGroupOptions contains the optional parameters for the ObservabilityServicesClient.NewListByResourceGroupPager
 //     method.
-func (client *ObservabilityServicesClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *ObservabilityServicesClientListByResourceGroupOptions) (*runtime.Pager[ObservabilityServicesClientListByResourceGroupResponse]) {
+func (client *ObservabilityServicesClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *ObservabilityServicesClientListByResourceGroupOptions) *runtime.Pager[ObservabilityServicesClientListByResourceGroupResponse] {
 	return runtime.NewPager(runtime.PagingHandler[ObservabilityServicesClientListByResourceGroupResponse]{
 		More: func(page ObservabilityServicesClientListByResourceGroupResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *ObservabilityServicesClientListByResourceGroupResponse) (ObservabilityServicesClientListByResourceGroupResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ObservabilityServicesClient.NewListByResourceGroupPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ObservabilityServicesClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -257,7 +257,7 @@ func (client *ObservabilityServicesClient) NewListByResourceGroupPager(subscript
 				return ObservabilityServicesClientListByResourceGroupResponse{}, err
 			}
 			return client.listByResourceGroupHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -296,13 +296,13 @@ func (client *ObservabilityServicesClient) listByResourceGroupHandleResponse(res
 //   - subscriptionID - The ID of the target subscription.
 //   - options - ObservabilityServicesClientListBySubscriptionOptions contains the optional parameters for the ObservabilityServicesClient.NewListBySubscriptionPager
 //     method.
-func (client *ObservabilityServicesClient) NewListBySubscriptionPager(subscriptionID string, options *ObservabilityServicesClientListBySubscriptionOptions) (*runtime.Pager[ObservabilityServicesClientListBySubscriptionResponse]) {
+func (client *ObservabilityServicesClient) NewListBySubscriptionPager(subscriptionID string, options *ObservabilityServicesClientListBySubscriptionOptions) *runtime.Pager[ObservabilityServicesClientListBySubscriptionResponse] {
 	return runtime.NewPager(runtime.PagingHandler[ObservabilityServicesClientListBySubscriptionResponse]{
 		More: func(page ObservabilityServicesClientListBySubscriptionResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *ObservabilityServicesClientListBySubscriptionResponse) (ObservabilityServicesClientListBySubscriptionResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ObservabilityServicesClient.NewListBySubscriptionPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ObservabilityServicesClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -314,7 +314,7 @@ func (client *ObservabilityServicesClient) NewListBySubscriptionPager(subscripti
 				return ObservabilityServicesClientListBySubscriptionResponse{}, err
 			}
 			return client.listBySubscriptionHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -396,8 +396,8 @@ func (client *ObservabilityServicesClient) updateTagsCreateRequest(ctx context.C
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -409,4 +409,3 @@ func (client *ObservabilityServicesClient) updateTagsHandleResponse(resp *http.R
 	}
 	return result, nil
 }
-

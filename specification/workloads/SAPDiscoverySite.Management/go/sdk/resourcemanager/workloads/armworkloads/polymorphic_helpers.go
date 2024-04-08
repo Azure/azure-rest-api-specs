@@ -28,4 +28,3 @@ func unmarshalPerformanceDataClassification(rawMsg json.RawMessage) (Performance
 	}
 	return b, nil
 }
-

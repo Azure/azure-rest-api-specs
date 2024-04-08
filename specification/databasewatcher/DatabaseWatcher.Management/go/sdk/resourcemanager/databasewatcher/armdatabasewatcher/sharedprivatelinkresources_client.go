@@ -31,7 +31,7 @@ func NewSharedPrivateLinkResourcesClient(credential azcore.TokenCredential, opti
 		return nil, err
 	}
 	client := &SharedPrivateLinkResourcesClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -105,8 +105,8 @@ func (client *SharedPrivateLinkResourcesClient) createCreateRequest(ctx context.
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -250,13 +250,13 @@ func (client *SharedPrivateLinkResourcesClient) getHandleResponse(resp *http.Res
 //   - watcherName - The database watcher name.
 //   - options - SharedPrivateLinkResourcesClientListByWatcherOptions contains the optional parameters for the SharedPrivateLinkResourcesClient.NewListByWatcherPager
 //     method.
-func (client *SharedPrivateLinkResourcesClient) NewListByWatcherPager(subscriptionID string, resourceGroupName string, watcherName string, options *SharedPrivateLinkResourcesClientListByWatcherOptions) (*runtime.Pager[SharedPrivateLinkResourcesClientListByWatcherResponse]) {
+func (client *SharedPrivateLinkResourcesClient) NewListByWatcherPager(subscriptionID string, resourceGroupName string, watcherName string, options *SharedPrivateLinkResourcesClientListByWatcherOptions) *runtime.Pager[SharedPrivateLinkResourcesClientListByWatcherResponse] {
 	return runtime.NewPager(runtime.PagingHandler[SharedPrivateLinkResourcesClientListByWatcherResponse]{
 		More: func(page SharedPrivateLinkResourcesClientListByWatcherResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *SharedPrivateLinkResourcesClientListByWatcherResponse) (SharedPrivateLinkResourcesClientListByWatcherResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SharedPrivateLinkResourcesClient.NewListByWatcherPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SharedPrivateLinkResourcesClient.NewListByWatcherPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -268,7 +268,7 @@ func (client *SharedPrivateLinkResourcesClient) NewListByWatcherPager(subscripti
 				return SharedPrivateLinkResourcesClientListByWatcherResponse{}, err
 			}
 			return client.listByWatcherHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -306,4 +306,3 @@ func (client *SharedPrivateLinkResourcesClient) listByWatcherHandleResponse(resp
 	}
 	return result, nil
 }
-

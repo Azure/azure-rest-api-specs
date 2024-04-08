@@ -32,7 +32,7 @@ func NewNssfDeploymentsClient(credential azcore.TokenCredential, options *arm.Cl
 		return nil, err
 	}
 	client := &NssfDeploymentsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -88,8 +88,8 @@ func (client *NssfDeploymentsClient) createOrUpdateCreateRequest(ctx context.Con
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -237,13 +237,13 @@ func (client *NssfDeploymentsClient) getHandleResponse(resp *http.Response) (Nss
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - options - NssfDeploymentsClientListByResourceGroupOptions contains the optional parameters for the NssfDeploymentsClient.NewListByResourceGroupPager
 //     method.
-func (client *NssfDeploymentsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *NssfDeploymentsClientListByResourceGroupOptions) (*runtime.Pager[NssfDeploymentsClientListByResourceGroupResponse]) {
+func (client *NssfDeploymentsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *NssfDeploymentsClientListByResourceGroupOptions) *runtime.Pager[NssfDeploymentsClientListByResourceGroupResponse] {
 	return runtime.NewPager(runtime.PagingHandler[NssfDeploymentsClientListByResourceGroupResponse]{
 		More: func(page NssfDeploymentsClientListByResourceGroupResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *NssfDeploymentsClientListByResourceGroupResponse) (NssfDeploymentsClientListByResourceGroupResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NssfDeploymentsClient.NewListByResourceGroupPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NssfDeploymentsClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -255,7 +255,7 @@ func (client *NssfDeploymentsClient) NewListByResourceGroupPager(subscriptionID 
 				return NssfDeploymentsClientListByResourceGroupResponse{}, err
 			}
 			return client.listByResourceGroupHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -294,13 +294,13 @@ func (client *NssfDeploymentsClient) listByResourceGroupHandleResponse(resp *htt
 //   - subscriptionID - The ID of the target subscription.
 //   - options - NssfDeploymentsClientListBySubscriptionOptions contains the optional parameters for the NssfDeploymentsClient.NewListBySubscriptionPager
 //     method.
-func (client *NssfDeploymentsClient) NewListBySubscriptionPager(subscriptionID string, options *NssfDeploymentsClientListBySubscriptionOptions) (*runtime.Pager[NssfDeploymentsClientListBySubscriptionResponse]) {
+func (client *NssfDeploymentsClient) NewListBySubscriptionPager(subscriptionID string, options *NssfDeploymentsClientListBySubscriptionOptions) *runtime.Pager[NssfDeploymentsClientListBySubscriptionResponse] {
 	return runtime.NewPager(runtime.PagingHandler[NssfDeploymentsClientListBySubscriptionResponse]{
 		More: func(page NssfDeploymentsClientListBySubscriptionResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *NssfDeploymentsClientListBySubscriptionResponse) (NssfDeploymentsClientListBySubscriptionResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NssfDeploymentsClient.NewListBySubscriptionPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NssfDeploymentsClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -312,7 +312,7 @@ func (client *NssfDeploymentsClient) NewListBySubscriptionPager(subscriptionID s
 				return NssfDeploymentsClientListBySubscriptionResponse{}, err
 			}
 			return client.listBySubscriptionHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -394,8 +394,8 @@ func (client *NssfDeploymentsClient) updateTagsCreateRequest(ctx context.Context
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -407,4 +407,3 @@ func (client *NssfDeploymentsClient) updateTagsHandleResponse(resp *http.Respons
 	}
 	return result, nil
 }
-

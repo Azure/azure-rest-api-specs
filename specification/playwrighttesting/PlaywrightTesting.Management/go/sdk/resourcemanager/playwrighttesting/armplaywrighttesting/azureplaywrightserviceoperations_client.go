@@ -28,7 +28,7 @@ func NewAzurePlaywrightServiceOperationsClient(credential azcore.TokenCredential
 		return nil, err
 	}
 	client := &AzurePlaywrightServiceOperationsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -36,13 +36,13 @@ func NewAzurePlaywrightServiceOperationsClient(credential azcore.TokenCredential
 // NewListPager - List the operations for the provider
 //   - options - AzurePlaywrightServiceOperationsClientListOptions contains the optional parameters for the AzurePlaywrightServiceOperationsClient.NewListPager
 //     method.
-func (client *AzurePlaywrightServiceOperationsClient) NewListPager(options *AzurePlaywrightServiceOperationsClientListOptions) (*runtime.Pager[AzurePlaywrightServiceOperationsClientListResponse]) {
+func (client *AzurePlaywrightServiceOperationsClient) NewListPager(options *AzurePlaywrightServiceOperationsClientListOptions) *runtime.Pager[AzurePlaywrightServiceOperationsClientListResponse] {
 	return runtime.NewPager(runtime.PagingHandler[AzurePlaywrightServiceOperationsClientListResponse]{
 		More: func(page AzurePlaywrightServiceOperationsClientListResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AzurePlaywrightServiceOperationsClientListResponse) (AzurePlaywrightServiceOperationsClientListResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzurePlaywrightServiceOperationsClient.NewListPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzurePlaywrightServiceOperationsClient.NewListPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -54,7 +54,7 @@ func (client *AzurePlaywrightServiceOperationsClient) NewListPager(options *Azur
 				return AzurePlaywrightServiceOperationsClientListResponse{}, err
 			}
 			return client.listHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -80,4 +80,3 @@ func (client *AzurePlaywrightServiceOperationsClient) listHandleResponse(resp *h
 	}
 	return result, nil
 }
-

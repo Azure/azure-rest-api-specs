@@ -19,7 +19,7 @@ import (
 )
 
 // WorkspacesServer is a fake server for instances of the armapicenter.WorkspacesClient type.
-type WorkspacesServer struct{
+type WorkspacesServer struct {
 	// CreateOrUpdate is the fake for method WorkspacesClient.CreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
 	CreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, payload armapicenter.Workspace, options *armapicenter.WorkspacesClientCreateOrUpdateOptions) (resp azfake.Responder[armapicenter.WorkspacesClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
@@ -39,7 +39,6 @@ type WorkspacesServer struct{
 	// NewListPager is the fake for method WorkspacesClient.NewListPager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListPager func(subscriptionID string, resourceGroupName string, serviceName string, options *armapicenter.WorkspacesClientListOptions) (resp azfake.PagerResponder[armapicenter.WorkspacesClientListResponse])
-
 }
 
 // NewWorkspacesServerTransport creates a new instance of WorkspacesServerTransport with the provided implementation.
@@ -47,7 +46,7 @@ type WorkspacesServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewWorkspacesServerTransport(srv *WorkspacesServer) *WorkspacesServerTransport {
 	return &WorkspacesServerTransport{
-		srv: srv,
+		srv:          srv,
 		newListPager: newTracker[azfake.PagerResponder[armapicenter.WorkspacesClientListResponse]](),
 	}
 }
@@ -55,7 +54,7 @@ func NewWorkspacesServerTransport(srv *WorkspacesServer) *WorkspacesServerTransp
 // WorkspacesServerTransport connects instances of armapicenter.WorkspacesClient to instances of WorkspacesServer.
 // Don't use this type directly, use NewWorkspacesServerTransport instead.
 type WorkspacesServerTransport struct {
-	srv *WorkspacesServer
+	srv          *WorkspacesServer
 	newListPager *tracker[azfake.PagerResponder[armapicenter.WorkspacesClientListResponse]]
 }
 
@@ -272,37 +271,37 @@ func (w *WorkspacesServerTransport) dispatchNewListPager(req *http.Request) (*ht
 	}
 	newListPager := w.newListPager.get(req)
 	if newListPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ApiCenter/services/(?P<serviceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workspaces`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	qp := req.URL.Query()
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	serviceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("serviceName")])
-	if err != nil {
-		return nil, err
-	}
-	filterUnescaped, err := url.QueryUnescape(qp.Get("$filter"))
-	if err != nil {
-		return nil, err
-	}
-	filterParam := getOptional(filterUnescaped)
-	var options *armapicenter.WorkspacesClientListOptions
-	if filterParam != nil {
-		options = &armapicenter.WorkspacesClientListOptions{
-			Filter: filterParam,
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ApiCenter/services/(?P<serviceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workspaces`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
 		}
-	}
-resp := w.srv.NewListPager(subscriptionIDParam, resourceGroupNameParam, serviceNameParam, options)
+		qp := req.URL.Query()
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		serviceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("serviceName")])
+		if err != nil {
+			return nil, err
+		}
+		filterUnescaped, err := url.QueryUnescape(qp.Get("$filter"))
+		if err != nil {
+			return nil, err
+		}
+		filterParam := getOptional(filterUnescaped)
+		var options *armapicenter.WorkspacesClientListOptions
+		if filterParam != nil {
+			options = &armapicenter.WorkspacesClientListOptions{
+				Filter: filterParam,
+			}
+		}
+		resp := w.srv.NewListPager(subscriptionIDParam, resourceGroupNameParam, serviceNameParam, options)
 		newListPager = &resp
 		w.newListPager.add(req, newListPager)
 		server.PagerResponderInjectNextLinks(newListPager, req, func(page *armapicenter.WorkspacesClientListResponse, createLink func() string) {
@@ -322,4 +321,3 @@ resp := w.srv.NewListPager(subscriptionIDParam, resourceGroupNameParam, serviceN
 	}
 	return resp, nil
 }
-

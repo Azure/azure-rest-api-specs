@@ -20,7 +20,7 @@ import (
 )
 
 // AzureLargeInstanceAzureLargeInstancesServer is a fake server for instances of the armlargeinstance.AzureLargeInstanceAzureLargeInstancesClient type.
-type AzureLargeInstanceAzureLargeInstancesServer struct{
+type AzureLargeInstanceAzureLargeInstancesServer struct {
 	// Get is the fake for method AzureLargeInstanceAzureLargeInstancesClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
 	Get func(ctx context.Context, subscriptionID string, resourceGroupName string, azureLargeInstanceName string, options *armlargeinstance.AzureLargeInstanceAzureLargeInstancesClientGetOptions) (resp azfake.Responder[armlargeinstance.AzureLargeInstanceAzureLargeInstancesClientGetResponse], errResp azfake.ErrorResponder)
@@ -48,7 +48,6 @@ type AzureLargeInstanceAzureLargeInstancesServer struct{
 	// Update is the fake for method AzureLargeInstanceAzureLargeInstancesClient.Update
 	// HTTP status codes to indicate success: http.StatusOK
 	Update func(ctx context.Context, subscriptionID string, resourceGroupName string, azureLargeInstanceName string, properties armlargeinstance.AzureLargeInstanceTagsUpdate, options *armlargeinstance.AzureLargeInstanceAzureLargeInstancesClientUpdateOptions) (resp azfake.Responder[armlargeinstance.AzureLargeInstanceAzureLargeInstancesClientUpdateResponse], errResp azfake.ErrorResponder)
-
 }
 
 // NewAzureLargeInstanceAzureLargeInstancesServerTransport creates a new instance of AzureLargeInstanceAzureLargeInstancesServerTransport with the provided implementation.
@@ -56,24 +55,24 @@ type AzureLargeInstanceAzureLargeInstancesServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewAzureLargeInstanceAzureLargeInstancesServerTransport(srv *AzureLargeInstanceAzureLargeInstancesServer) *AzureLargeInstanceAzureLargeInstancesServerTransport {
 	return &AzureLargeInstanceAzureLargeInstancesServerTransport{
-		srv: srv,
+		srv:                         srv,
 		newListByResourceGroupPager: newTracker[azfake.PagerResponder[armlargeinstance.AzureLargeInstanceAzureLargeInstancesClientListByResourceGroupResponse]](),
-		newListBySubscriptionPager: newTracker[azfake.PagerResponder[armlargeinstance.AzureLargeInstanceAzureLargeInstancesClientListBySubscriptionResponse]](),
-		beginRestart: newTracker[azfake.PollerResponder[armlargeinstance.AzureLargeInstanceAzureLargeInstancesClientRestartResponse]](),
-		beginShutdown: newTracker[azfake.PollerResponder[armlargeinstance.AzureLargeInstanceAzureLargeInstancesClientShutdownResponse]](),
-		beginStart: newTracker[azfake.PollerResponder[armlargeinstance.AzureLargeInstanceAzureLargeInstancesClientStartResponse]](),
+		newListBySubscriptionPager:  newTracker[azfake.PagerResponder[armlargeinstance.AzureLargeInstanceAzureLargeInstancesClientListBySubscriptionResponse]](),
+		beginRestart:                newTracker[azfake.PollerResponder[armlargeinstance.AzureLargeInstanceAzureLargeInstancesClientRestartResponse]](),
+		beginShutdown:               newTracker[azfake.PollerResponder[armlargeinstance.AzureLargeInstanceAzureLargeInstancesClientShutdownResponse]](),
+		beginStart:                  newTracker[azfake.PollerResponder[armlargeinstance.AzureLargeInstanceAzureLargeInstancesClientStartResponse]](),
 	}
 }
 
 // AzureLargeInstanceAzureLargeInstancesServerTransport connects instances of armlargeinstance.AzureLargeInstanceAzureLargeInstancesClient to instances of AzureLargeInstanceAzureLargeInstancesServer.
 // Don't use this type directly, use NewAzureLargeInstanceAzureLargeInstancesServerTransport instead.
 type AzureLargeInstanceAzureLargeInstancesServerTransport struct {
-	srv *AzureLargeInstanceAzureLargeInstancesServer
+	srv                         *AzureLargeInstanceAzureLargeInstancesServer
 	newListByResourceGroupPager *tracker[azfake.PagerResponder[armlargeinstance.AzureLargeInstanceAzureLargeInstancesClientListByResourceGroupResponse]]
-	newListBySubscriptionPager *tracker[azfake.PagerResponder[armlargeinstance.AzureLargeInstanceAzureLargeInstancesClientListBySubscriptionResponse]]
-	beginRestart *tracker[azfake.PollerResponder[armlargeinstance.AzureLargeInstanceAzureLargeInstancesClientRestartResponse]]
-	beginShutdown *tracker[azfake.PollerResponder[armlargeinstance.AzureLargeInstanceAzureLargeInstancesClientShutdownResponse]]
-	beginStart *tracker[azfake.PollerResponder[armlargeinstance.AzureLargeInstanceAzureLargeInstancesClientStartResponse]]
+	newListBySubscriptionPager  *tracker[azfake.PagerResponder[armlargeinstance.AzureLargeInstanceAzureLargeInstancesClientListBySubscriptionResponse]]
+	beginRestart                *tracker[azfake.PollerResponder[armlargeinstance.AzureLargeInstanceAzureLargeInstancesClientRestartResponse]]
+	beginShutdown               *tracker[azfake.PollerResponder[armlargeinstance.AzureLargeInstanceAzureLargeInstancesClientShutdownResponse]]
+	beginStart                  *tracker[azfake.PollerResponder[armlargeinstance.AzureLargeInstanceAzureLargeInstancesClientStartResponse]]
 }
 
 // Do implements the policy.Transporter interface for AzureLargeInstanceAzureLargeInstancesServerTransport.
@@ -156,21 +155,21 @@ func (a *AzureLargeInstanceAzureLargeInstancesServerTransport) dispatchNewListBy
 	}
 	newListByResourceGroupPager := a.newListByResourceGroupPager.get(req)
 	if newListByResourceGroupPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureLargeInstance/azureLargeInstances`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 2 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-resp := a.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureLargeInstance/azureLargeInstances`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 2 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := a.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
 		newListByResourceGroupPager = &resp
 		a.newListByResourceGroupPager.add(req, newListByResourceGroupPager)
 		server.PagerResponderInjectNextLinks(newListByResourceGroupPager, req, func(page *armlargeinstance.AzureLargeInstanceAzureLargeInstancesClientListByResourceGroupResponse, createLink func() string) {
@@ -197,17 +196,17 @@ func (a *AzureLargeInstanceAzureLargeInstancesServerTransport) dispatchNewListBy
 	}
 	newListBySubscriptionPager := a.newListBySubscriptionPager.get(req)
 	if newListBySubscriptionPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureLargeInstance/azureLargeInstances`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 1 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-resp := a.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureLargeInstance/azureLargeInstances`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 1 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resp := a.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
 		newListBySubscriptionPager = &resp
 		a.newListBySubscriptionPager.add(req, newListBySubscriptionPager)
 		server.PagerResponderInjectNextLinks(newListBySubscriptionPager, req, func(page *armlargeinstance.AzureLargeInstanceAzureLargeInstancesClientListBySubscriptionResponse, createLink func() string) {
@@ -234,38 +233,38 @@ func (a *AzureLargeInstanceAzureLargeInstancesServerTransport) dispatchBeginRest
 	}
 	beginRestart := a.beginRestart.get(req)
 	if beginRestart == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureLargeInstance/azureLargeInstances/(?P<azureLargeInstanceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/restart`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armlargeinstance.ForceState](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	azureLargeInstanceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("azureLargeInstanceName")])
-	if err != nil {
-		return nil, err
-	}
-	var options *armlargeinstance.AzureLargeInstanceAzureLargeInstancesClientRestartOptions
-	if !reflect.ValueOf(body).IsZero() {
-		options = &armlargeinstance.AzureLargeInstanceAzureLargeInstancesClientRestartOptions{
-			ForceParameter: &body,
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureLargeInstance/azureLargeInstances/(?P<azureLargeInstanceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/restart`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
 		}
-	}
-	respr, errRespr := a.srv.BeginRestart(req.Context(), subscriptionIDParam, resourceGroupNameParam, azureLargeInstanceNameParam, options)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		body, err := server.UnmarshalRequestAsJSON[armlargeinstance.ForceState](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		azureLargeInstanceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("azureLargeInstanceName")])
+		if err != nil {
+			return nil, err
+		}
+		var options *armlargeinstance.AzureLargeInstanceAzureLargeInstancesClientRestartOptions
+		if !reflect.ValueOf(body).IsZero() {
+			options = &armlargeinstance.AzureLargeInstanceAzureLargeInstancesClientRestartOptions{
+				ForceParameter: &body,
+			}
+		}
+		respr, errRespr := a.srv.BeginRestart(req.Context(), subscriptionIDParam, resourceGroupNameParam, azureLargeInstanceNameParam, options)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginRestart = &respr
 		a.beginRestart.add(req, beginRestart)
 	}
@@ -292,28 +291,28 @@ func (a *AzureLargeInstanceAzureLargeInstancesServerTransport) dispatchBeginShut
 	}
 	beginShutdown := a.beginShutdown.get(req)
 	if beginShutdown == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureLargeInstance/azureLargeInstances/(?P<azureLargeInstanceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/shutdown`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	azureLargeInstanceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("azureLargeInstanceName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := a.srv.BeginShutdown(req.Context(), subscriptionIDParam, resourceGroupNameParam, azureLargeInstanceNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureLargeInstance/azureLargeInstances/(?P<azureLargeInstanceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/shutdown`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		azureLargeInstanceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("azureLargeInstanceName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := a.srv.BeginShutdown(req.Context(), subscriptionIDParam, resourceGroupNameParam, azureLargeInstanceNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginShutdown = &respr
 		a.beginShutdown.add(req, beginShutdown)
 	}
@@ -340,28 +339,28 @@ func (a *AzureLargeInstanceAzureLargeInstancesServerTransport) dispatchBeginStar
 	}
 	beginStart := a.beginStart.get(req)
 	if beginStart == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureLargeInstance/azureLargeInstances/(?P<azureLargeInstanceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/start`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	azureLargeInstanceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("azureLargeInstanceName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := a.srv.BeginStart(req.Context(), subscriptionIDParam, resourceGroupNameParam, azureLargeInstanceNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureLargeInstance/azureLargeInstances/(?P<azureLargeInstanceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/start`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		azureLargeInstanceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("azureLargeInstanceName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := a.srv.BeginStart(req.Context(), subscriptionIDParam, resourceGroupNameParam, azureLargeInstanceNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginStart = &respr
 		a.beginStart.add(req, beginStart)
 	}
@@ -422,4 +421,3 @@ func (a *AzureLargeInstanceAzureLargeInstancesServerTransport) dispatchUpdate(re
 	}
 	return resp, nil
 }
-

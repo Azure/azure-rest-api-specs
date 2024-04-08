@@ -20,7 +20,7 @@ import (
 )
 
 // NetworkFunctionsServer is a fake server for instances of the armmobilepacketcore.NetworkFunctionsClient type.
-type NetworkFunctionsServer struct{
+type NetworkFunctionsServer struct {
 	// CreateOrUpdate is the fake for method NetworkFunctionsClient.CreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
 	CreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, networkFunctionName string, resource armmobilepacketcore.NetworkFunctionResource, options *armmobilepacketcore.NetworkFunctionsClientCreateOrUpdateOptions) (resp azfake.Responder[armmobilepacketcore.NetworkFunctionsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
@@ -44,7 +44,6 @@ type NetworkFunctionsServer struct{
 	// UpdateTags is the fake for method NetworkFunctionsClient.UpdateTags
 	// HTTP status codes to indicate success: http.StatusOK
 	UpdateTags func(ctx context.Context, subscriptionID string, resourceGroupName string, networkFunctionName string, properties armmobilepacketcore.NetworkFunctionResourceTagsUpdate, options *armmobilepacketcore.NetworkFunctionsClientUpdateTagsOptions) (resp azfake.Responder[armmobilepacketcore.NetworkFunctionsClientUpdateTagsResponse], errResp azfake.ErrorResponder)
-
 }
 
 // NewNetworkFunctionsServerTransport creates a new instance of NetworkFunctionsServerTransport with the provided implementation.
@@ -52,18 +51,18 @@ type NetworkFunctionsServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewNetworkFunctionsServerTransport(srv *NetworkFunctionsServer) *NetworkFunctionsServerTransport {
 	return &NetworkFunctionsServerTransport{
-		srv: srv,
+		srv:                         srv,
 		newListByResourceGroupPager: newTracker[azfake.PagerResponder[armmobilepacketcore.NetworkFunctionsClientListByResourceGroupResponse]](),
-		newListBySubscriptionPager: newTracker[azfake.PagerResponder[armmobilepacketcore.NetworkFunctionsClientListBySubscriptionResponse]](),
+		newListBySubscriptionPager:  newTracker[azfake.PagerResponder[armmobilepacketcore.NetworkFunctionsClientListBySubscriptionResponse]](),
 	}
 }
 
 // NetworkFunctionsServerTransport connects instances of armmobilepacketcore.NetworkFunctionsClient to instances of NetworkFunctionsServer.
 // Don't use this type directly, use NewNetworkFunctionsServerTransport instead.
 type NetworkFunctionsServerTransport struct {
-	srv *NetworkFunctionsServer
+	srv                         *NetworkFunctionsServer
 	newListByResourceGroupPager *tracker[azfake.PagerResponder[armmobilepacketcore.NetworkFunctionsClientListByResourceGroupResponse]]
-	newListBySubscriptionPager *tracker[azfake.PagerResponder[armmobilepacketcore.NetworkFunctionsClientListBySubscriptionResponse]]
+	newListBySubscriptionPager  *tracker[azfake.PagerResponder[armmobilepacketcore.NetworkFunctionsClientListBySubscriptionResponse]]
 }
 
 // Do implements the policy.Transporter interface for NetworkFunctionsServerTransport.
@@ -225,21 +224,21 @@ func (n *NetworkFunctionsServerTransport) dispatchNewListByResourceGroupPager(re
 	}
 	newListByResourceGroupPager := n.newListByResourceGroupPager.get(req)
 	if newListByResourceGroupPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/networkFunctions`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 2 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-resp := n.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/networkFunctions`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 2 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := n.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
 		newListByResourceGroupPager = &resp
 		n.newListByResourceGroupPager.add(req, newListByResourceGroupPager)
 		server.PagerResponderInjectNextLinks(newListByResourceGroupPager, req, func(page *armmobilepacketcore.NetworkFunctionsClientListByResourceGroupResponse, createLink func() string) {
@@ -266,17 +265,17 @@ func (n *NetworkFunctionsServerTransport) dispatchNewListBySubscriptionPager(req
 	}
 	newListBySubscriptionPager := n.newListBySubscriptionPager.get(req)
 	if newListBySubscriptionPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/networkFunctions`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 1 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-resp := n.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.MobilePacketCore/networkFunctions`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 1 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resp := n.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
 		newListBySubscriptionPager = &resp
 		n.newListBySubscriptionPager.add(req, newListBySubscriptionPager)
 		server.PagerResponderInjectNextLinks(newListBySubscriptionPager, req, func(page *armmobilepacketcore.NetworkFunctionsClientListBySubscriptionResponse, createLink func() string) {
@@ -337,4 +336,3 @@ func (n *NetworkFunctionsServerTransport) dispatchUpdateTags(req *http.Request) 
 	}
 	return resp, nil
 }
-

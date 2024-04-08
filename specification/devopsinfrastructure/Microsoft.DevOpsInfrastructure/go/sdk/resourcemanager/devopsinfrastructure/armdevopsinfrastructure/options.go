@@ -50,4 +50,3 @@ type ResourceDetailsClientListByPoolOptions struct {
 type SkuClientListByLocationOptions struct {
 	// placeholder for future optional parameters
 }
-

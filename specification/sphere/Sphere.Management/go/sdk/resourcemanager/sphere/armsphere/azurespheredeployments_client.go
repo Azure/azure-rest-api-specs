@@ -32,7 +32,7 @@ func NewAzureSphereDeploymentsClient(credential azcore.TokenCredential, options 
 		return nil, err
 	}
 	client := &AzureSphereDeploymentsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -119,8 +119,8 @@ func (client *AzureSphereDeploymentsClient) createOrUpdateCreateRequest(ctx cont
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -292,13 +292,13 @@ func (client *AzureSphereDeploymentsClient) getHandleResponse(resp *http.Respons
 //   - deviceGroupName - Name of device group.
 //   - options - AzureSphereDeploymentsClientListByDeviceGroupOptions contains the optional parameters for the AzureSphereDeploymentsClient.NewListByDeviceGroupPager
 //     method.
-func (client *AzureSphereDeploymentsClient) NewListByDeviceGroupPager(subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, options *AzureSphereDeploymentsClientListByDeviceGroupOptions) (*runtime.Pager[AzureSphereDeploymentsClientListByDeviceGroupResponse]) {
+func (client *AzureSphereDeploymentsClient) NewListByDeviceGroupPager(subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, options *AzureSphereDeploymentsClientListByDeviceGroupOptions) *runtime.Pager[AzureSphereDeploymentsClientListByDeviceGroupResponse] {
 	return runtime.NewPager(runtime.PagingHandler[AzureSphereDeploymentsClientListByDeviceGroupResponse]{
 		More: func(page AzureSphereDeploymentsClientListByDeviceGroupResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AzureSphereDeploymentsClientListByDeviceGroupResponse) (AzureSphereDeploymentsClientListByDeviceGroupResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereDeploymentsClient.NewListByDeviceGroupPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereDeploymentsClient.NewListByDeviceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -310,7 +310,7 @@ func (client *AzureSphereDeploymentsClient) NewListByDeviceGroupPager(subscripti
 				return AzureSphereDeploymentsClientListByDeviceGroupResponse{}, err
 			}
 			return client.listByDeviceGroupHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -368,4 +368,3 @@ func (client *AzureSphereDeploymentsClient) listByDeviceGroupHandleResponse(resp
 	}
 	return result, nil
 }
-

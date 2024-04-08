@@ -31,7 +31,7 @@ func NewHcxEnterpriseSitesClient(credential azcore.TokenCredential, options *arm
 		return nil, err
 	}
 	client := &HcxEnterpriseSitesClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -41,13 +41,13 @@ func NewHcxEnterpriseSitesClient(credential azcore.TokenCredential, options *arm
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
 //   - hcxEnterpriseSiteName - Name of the HCX Enterprise Site
-//   - resource - Resource create parameters.
+//   - hcxEnterpriseSite - Resource create parameters.
 //   - options - HcxEnterpriseSitesClientCreateOrUpdateOptions contains the optional parameters for the HcxEnterpriseSitesClient.CreateOrUpdate
 //     method.
-func (client *HcxEnterpriseSitesClient) CreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, hcxEnterpriseSiteName string, resource HcxEnterpriseSite, options *HcxEnterpriseSitesClientCreateOrUpdateOptions) (HcxEnterpriseSitesClientCreateOrUpdateResponse, error) {
+func (client *HcxEnterpriseSitesClient) CreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, hcxEnterpriseSiteName string, hcxEnterpriseSite HcxEnterpriseSite, options *HcxEnterpriseSitesClientCreateOrUpdateOptions) (HcxEnterpriseSitesClientCreateOrUpdateResponse, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "HcxEnterpriseSitesClient.CreateOrUpdate")
-	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, hcxEnterpriseSiteName, resource, options)
+	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, hcxEnterpriseSiteName, hcxEnterpriseSite, options)
 	if err != nil {
 		return HcxEnterpriseSitesClientCreateOrUpdateResponse{}, err
 	}
@@ -64,7 +64,7 @@ func (client *HcxEnterpriseSitesClient) CreateOrUpdate(ctx context.Context, subs
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *HcxEnterpriseSitesClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, hcxEnterpriseSiteName string, resource HcxEnterpriseSite, options *HcxEnterpriseSitesClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *HcxEnterpriseSitesClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, hcxEnterpriseSiteName string, hcxEnterpriseSite HcxEnterpriseSite, options *HcxEnterpriseSitesClientCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/hcxEnterpriseSites/{hcxEnterpriseSiteName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -91,9 +91,9 @@ func (client *HcxEnterpriseSitesClient) createOrUpdateCreateRequest(ctx context.
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
-	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+	if err := runtime.MarshalAsJSON(req, hcxEnterpriseSite); err != nil {
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -231,13 +231,13 @@ func (client *HcxEnterpriseSitesClient) getHandleResponse(resp *http.Response) (
 //   - privateCloudName - Name of the private cloud
 //   - options - HcxEnterpriseSitesClientListByPrivateCloudOptions contains the optional parameters for the HcxEnterpriseSitesClient.NewListByPrivateCloudPager
 //     method.
-func (client *HcxEnterpriseSitesClient) NewListByPrivateCloudPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *HcxEnterpriseSitesClientListByPrivateCloudOptions) (*runtime.Pager[HcxEnterpriseSitesClientListByPrivateCloudResponse]) {
+func (client *HcxEnterpriseSitesClient) NewListByPrivateCloudPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *HcxEnterpriseSitesClientListByPrivateCloudOptions) *runtime.Pager[HcxEnterpriseSitesClientListByPrivateCloudResponse] {
 	return runtime.NewPager(runtime.PagingHandler[HcxEnterpriseSitesClientListByPrivateCloudResponse]{
 		More: func(page HcxEnterpriseSitesClientListByPrivateCloudResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *HcxEnterpriseSitesClientListByPrivateCloudResponse) (HcxEnterpriseSitesClientListByPrivateCloudResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "HcxEnterpriseSitesClient.NewListByPrivateCloudPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "HcxEnterpriseSitesClient.NewListByPrivateCloudPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -249,7 +249,7 @@ func (client *HcxEnterpriseSitesClient) NewListByPrivateCloudPager(subscriptionI
 				return HcxEnterpriseSitesClientListByPrivateCloudResponse{}, err
 			}
 			return client.listByPrivateCloudHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -287,4 +287,3 @@ func (client *HcxEnterpriseSitesClient) listByPrivateCloudHandleResponse(resp *h
 	}
 	return result, nil
 }
-

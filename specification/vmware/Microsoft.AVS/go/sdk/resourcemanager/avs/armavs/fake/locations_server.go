@@ -19,7 +19,7 @@ import (
 )
 
 // LocationsServer is a fake server for instances of the armavs.LocationsClient type.
-type LocationsServer struct{
+type LocationsServer struct {
 	// CheckQuotaAvailability is the fake for method LocationsClient.CheckQuotaAvailability
 	// HTTP status codes to indicate success: http.StatusOK
 	CheckQuotaAvailability func(ctx context.Context, subscriptionID string, location string, options *armavs.LocationsClientCheckQuotaAvailabilityOptions) (resp azfake.Responder[armavs.LocationsClientCheckQuotaAvailabilityResponse], errResp azfake.ErrorResponder)
@@ -27,7 +27,6 @@ type LocationsServer struct{
 	// CheckTrialAvailability is the fake for method LocationsClient.CheckTrialAvailability
 	// HTTP status codes to indicate success: http.StatusOK
 	CheckTrialAvailability func(ctx context.Context, subscriptionID string, location string, options *armavs.LocationsClientCheckTrialAvailabilityOptions) (resp azfake.Responder[armavs.LocationsClientCheckTrialAvailabilityResponse], errResp azfake.ErrorResponder)
-
 }
 
 // NewLocationsServerTransport creates a new instance of LocationsServerTransport with the provided implementation.
@@ -145,4 +144,3 @@ func (l *LocationsServerTransport) dispatchCheckTrialAvailability(req *http.Requ
 	}
 	return resp, nil
 }
-

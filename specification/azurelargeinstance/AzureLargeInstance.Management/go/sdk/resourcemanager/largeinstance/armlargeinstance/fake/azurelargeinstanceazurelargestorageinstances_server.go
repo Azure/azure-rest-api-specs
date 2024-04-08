@@ -19,7 +19,7 @@ import (
 )
 
 // AzureLargeInstanceAzureLargeStorageInstancesServer is a fake server for instances of the armlargeinstance.AzureLargeInstanceAzureLargeStorageInstancesClient type.
-type AzureLargeInstanceAzureLargeStorageInstancesServer struct{
+type AzureLargeInstanceAzureLargeStorageInstancesServer struct {
 	// Get is the fake for method AzureLargeInstanceAzureLargeStorageInstancesClient.Get
 	// HTTP status codes to indicate success: http.StatusOK
 	Get func(ctx context.Context, subscriptionID string, resourceGroupName string, azureLargeStorageInstanceName string, options *armlargeinstance.AzureLargeInstanceAzureLargeStorageInstancesClientGetOptions) (resp azfake.Responder[armlargeinstance.AzureLargeInstanceAzureLargeStorageInstancesClientGetResponse], errResp azfake.ErrorResponder)
@@ -35,7 +35,6 @@ type AzureLargeInstanceAzureLargeStorageInstancesServer struct{
 	// Update is the fake for method AzureLargeInstanceAzureLargeStorageInstancesClient.Update
 	// HTTP status codes to indicate success: http.StatusOK
 	Update func(ctx context.Context, subscriptionID string, resourceGroupName string, azureLargeStorageInstanceName string, properties armlargeinstance.AzureLargeStorageInstanceTagsUpdate, options *armlargeinstance.AzureLargeInstanceAzureLargeStorageInstancesClientUpdateOptions) (resp azfake.Responder[armlargeinstance.AzureLargeInstanceAzureLargeStorageInstancesClientUpdateResponse], errResp azfake.ErrorResponder)
-
 }
 
 // NewAzureLargeInstanceAzureLargeStorageInstancesServerTransport creates a new instance of AzureLargeInstanceAzureLargeStorageInstancesServerTransport with the provided implementation.
@@ -43,18 +42,18 @@ type AzureLargeInstanceAzureLargeStorageInstancesServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewAzureLargeInstanceAzureLargeStorageInstancesServerTransport(srv *AzureLargeInstanceAzureLargeStorageInstancesServer) *AzureLargeInstanceAzureLargeStorageInstancesServerTransport {
 	return &AzureLargeInstanceAzureLargeStorageInstancesServerTransport{
-		srv: srv,
+		srv:                         srv,
 		newListByResourceGroupPager: newTracker[azfake.PagerResponder[armlargeinstance.AzureLargeInstanceAzureLargeStorageInstancesClientListByResourceGroupResponse]](),
-		newListBySubscriptionPager: newTracker[azfake.PagerResponder[armlargeinstance.AzureLargeInstanceAzureLargeStorageInstancesClientListBySubscriptionResponse]](),
+		newListBySubscriptionPager:  newTracker[azfake.PagerResponder[armlargeinstance.AzureLargeInstanceAzureLargeStorageInstancesClientListBySubscriptionResponse]](),
 	}
 }
 
 // AzureLargeInstanceAzureLargeStorageInstancesServerTransport connects instances of armlargeinstance.AzureLargeInstanceAzureLargeStorageInstancesClient to instances of AzureLargeInstanceAzureLargeStorageInstancesServer.
 // Don't use this type directly, use NewAzureLargeInstanceAzureLargeStorageInstancesServerTransport instead.
 type AzureLargeInstanceAzureLargeStorageInstancesServerTransport struct {
-	srv *AzureLargeInstanceAzureLargeStorageInstancesServer
+	srv                         *AzureLargeInstanceAzureLargeStorageInstancesServer
 	newListByResourceGroupPager *tracker[azfake.PagerResponder[armlargeinstance.AzureLargeInstanceAzureLargeStorageInstancesClientListByResourceGroupResponse]]
-	newListBySubscriptionPager *tracker[azfake.PagerResponder[armlargeinstance.AzureLargeInstanceAzureLargeStorageInstancesClientListBySubscriptionResponse]]
+	newListBySubscriptionPager  *tracker[azfake.PagerResponder[armlargeinstance.AzureLargeInstanceAzureLargeStorageInstancesClientListBySubscriptionResponse]]
 }
 
 // Do implements the policy.Transporter interface for AzureLargeInstanceAzureLargeStorageInstancesServerTransport.
@@ -131,21 +130,21 @@ func (a *AzureLargeInstanceAzureLargeStorageInstancesServerTransport) dispatchNe
 	}
 	newListByResourceGroupPager := a.newListByResourceGroupPager.get(req)
 	if newListByResourceGroupPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureLargeInstance/azureLargeStorageInstances`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 2 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-resp := a.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureLargeInstance/azureLargeStorageInstances`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 2 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := a.srv.NewListByResourceGroupPager(subscriptionIDParam, resourceGroupNameParam, nil)
 		newListByResourceGroupPager = &resp
 		a.newListByResourceGroupPager.add(req, newListByResourceGroupPager)
 		server.PagerResponderInjectNextLinks(newListByResourceGroupPager, req, func(page *armlargeinstance.AzureLargeInstanceAzureLargeStorageInstancesClientListByResourceGroupResponse, createLink func() string) {
@@ -172,17 +171,17 @@ func (a *AzureLargeInstanceAzureLargeStorageInstancesServerTransport) dispatchNe
 	}
 	newListBySubscriptionPager := a.newListBySubscriptionPager.get(req)
 	if newListBySubscriptionPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureLargeInstance/azureLargeStorageInstances`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 1 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-resp := a.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.AzureLargeInstance/azureLargeStorageInstances`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 1 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resp := a.srv.NewListBySubscriptionPager(subscriptionIDParam, nil)
 		newListBySubscriptionPager = &resp
 		a.newListBySubscriptionPager.add(req, newListBySubscriptionPager)
 		server.PagerResponderInjectNextLinks(newListBySubscriptionPager, req, func(page *armlargeinstance.AzureLargeInstanceAzureLargeStorageInstancesClientListBySubscriptionResponse, createLink func() string) {
@@ -243,4 +242,3 @@ func (a *AzureLargeInstanceAzureLargeStorageInstancesServerTransport) dispatchUp
 	}
 	return resp, nil
 }
-

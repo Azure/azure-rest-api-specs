@@ -32,7 +32,7 @@ func NewNetworkFunctionsClient(credential azcore.TokenCredential, options *arm.C
 		return nil, err
 	}
 	client := &NetworkFunctionsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -88,8 +88,8 @@ func (client *NetworkFunctionsClient) createOrUpdateCreateRequest(ctx context.Co
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -223,13 +223,13 @@ func (client *NetworkFunctionsClient) getHandleResponse(resp *http.Response) (Ne
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - options - NetworkFunctionsClientListByResourceGroupOptions contains the optional parameters for the NetworkFunctionsClient.NewListByResourceGroupPager
 //     method.
-func (client *NetworkFunctionsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *NetworkFunctionsClientListByResourceGroupOptions) (*runtime.Pager[NetworkFunctionsClientListByResourceGroupResponse]) {
+func (client *NetworkFunctionsClient) NewListByResourceGroupPager(subscriptionID string, resourceGroupName string, options *NetworkFunctionsClientListByResourceGroupOptions) *runtime.Pager[NetworkFunctionsClientListByResourceGroupResponse] {
 	return runtime.NewPager(runtime.PagingHandler[NetworkFunctionsClientListByResourceGroupResponse]{
 		More: func(page NetworkFunctionsClientListByResourceGroupResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *NetworkFunctionsClientListByResourceGroupResponse) (NetworkFunctionsClientListByResourceGroupResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NetworkFunctionsClient.NewListByResourceGroupPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NetworkFunctionsClient.NewListByResourceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -241,7 +241,7 @@ func (client *NetworkFunctionsClient) NewListByResourceGroupPager(subscriptionID
 				return NetworkFunctionsClientListByResourceGroupResponse{}, err
 			}
 			return client.listByResourceGroupHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -280,13 +280,13 @@ func (client *NetworkFunctionsClient) listByResourceGroupHandleResponse(resp *ht
 //   - subscriptionID - The ID of the target subscription.
 //   - options - NetworkFunctionsClientListBySubscriptionOptions contains the optional parameters for the NetworkFunctionsClient.NewListBySubscriptionPager
 //     method.
-func (client *NetworkFunctionsClient) NewListBySubscriptionPager(subscriptionID string, options *NetworkFunctionsClientListBySubscriptionOptions) (*runtime.Pager[NetworkFunctionsClientListBySubscriptionResponse]) {
+func (client *NetworkFunctionsClient) NewListBySubscriptionPager(subscriptionID string, options *NetworkFunctionsClientListBySubscriptionOptions) *runtime.Pager[NetworkFunctionsClientListBySubscriptionResponse] {
 	return runtime.NewPager(runtime.PagingHandler[NetworkFunctionsClientListBySubscriptionResponse]{
 		More: func(page NetworkFunctionsClientListBySubscriptionResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *NetworkFunctionsClientListBySubscriptionResponse) (NetworkFunctionsClientListBySubscriptionResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NetworkFunctionsClient.NewListBySubscriptionPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "NetworkFunctionsClient.NewListBySubscriptionPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -298,7 +298,7 @@ func (client *NetworkFunctionsClient) NewListBySubscriptionPager(subscriptionID 
 				return NetworkFunctionsClientListBySubscriptionResponse{}, err
 			}
 			return client.listBySubscriptionHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -380,8 +380,8 @@ func (client *NetworkFunctionsClient) updateTagsCreateRequest(ctx context.Contex
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -393,4 +393,3 @@ func (client *NetworkFunctionsClient) updateTagsHandleResponse(resp *http.Respon
 	}
 	return result, nil
 }
-

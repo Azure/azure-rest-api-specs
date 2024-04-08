@@ -14,7 +14,7 @@ import (
 )
 
 // Server is a fake server for instances of the armworkloads.Client type.
-type Server struct{
+type Server struct {
 	// SAPDiscoverySitesServer contains the fakes for client SAPDiscoverySitesClient
 	SAPDiscoverySitesServer SAPDiscoverySitesServer
 
@@ -23,7 +23,6 @@ type Server struct{
 
 	// ServerInstancesServer contains the fakes for client ServerInstancesClient
 	ServerInstancesServer ServerInstancesServer
-
 }
 
 // NewServerTransport creates a new instance of ServerTransport with the provided implementation.
@@ -36,11 +35,11 @@ func NewServerTransport(srv *Server) *ServerTransport {
 // ServerTransport connects instances of armworkloads.Client to instances of Server.
 // Don't use this type directly, use NewServerTransport instead.
 type ServerTransport struct {
-	srv *Server
-	trMu sync.Mutex
+	srv                       *Server
+	trMu                      sync.Mutex
 	trSAPDiscoverySitesServer *SAPDiscoverySitesServerTransport
-	trSAPInstancesServer *SAPInstancesServerTransport
-	trServerInstancesServer *ServerInstancesServerTransport
+	trSAPInstancesServer      *SAPInstancesServerTransport
+	trServerInstancesServer   *ServerInstancesServerTransport
 }
 
 // Do implements the policy.Transporter interface for ServerTransport.
@@ -61,15 +60,18 @@ func (s *ServerTransport) dispatchToClientFake(req *http.Request, client string)
 	switch client {
 	case "SAPDiscoverySitesClient":
 		initServer(&s.trMu, &s.trSAPDiscoverySitesServer, func() *SAPDiscoverySitesServerTransport {
-		return NewSAPDiscoverySitesServerTransport(&s.srv.SAPDiscoverySitesServer) })
+			return NewSAPDiscoverySitesServerTransport(&s.srv.SAPDiscoverySitesServer)
+		})
 		resp, err = s.trSAPDiscoverySitesServer.Do(req)
 	case "SAPInstancesClient":
 		initServer(&s.trMu, &s.trSAPInstancesServer, func() *SAPInstancesServerTransport {
-		return NewSAPInstancesServerTransport(&s.srv.SAPInstancesServer) })
+			return NewSAPInstancesServerTransport(&s.srv.SAPInstancesServer)
+		})
 		resp, err = s.trSAPInstancesServer.Do(req)
 	case "ServerInstancesClient":
 		initServer(&s.trMu, &s.trServerInstancesServer, func() *ServerInstancesServerTransport {
-		return NewServerInstancesServerTransport(&s.srv.ServerInstancesServer) })
+			return NewServerInstancesServerTransport(&s.srv.ServerInstancesServer)
+		})
 		resp, err = s.trServerInstancesServer.Do(req)
 	default:
 		err = fmt.Errorf("unhandled client %s", client)
@@ -77,4 +79,3 @@ func (s *ServerTransport) dispatchToClientFake(req *http.Request, client string)
 
 	return resp, err
 }
-

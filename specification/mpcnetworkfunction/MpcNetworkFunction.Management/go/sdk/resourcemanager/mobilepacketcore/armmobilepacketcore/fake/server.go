@@ -14,13 +14,12 @@ import (
 )
 
 // Server is a fake server for instances of the armmobilepacketcore.Client type.
-type Server struct{
+type Server struct {
 	// NetworkFunctionsServer contains the fakes for client NetworkFunctionsClient
 	NetworkFunctionsServer NetworkFunctionsServer
 
 	// OperationsServer contains the fakes for client OperationsClient
 	OperationsServer OperationsServer
-
 }
 
 // NewServerTransport creates a new instance of ServerTransport with the provided implementation.
@@ -33,10 +32,10 @@ func NewServerTransport(srv *Server) *ServerTransport {
 // ServerTransport connects instances of armmobilepacketcore.Client to instances of Server.
 // Don't use this type directly, use NewServerTransport instead.
 type ServerTransport struct {
-	srv *Server
-	trMu sync.Mutex
+	srv                      *Server
+	trMu                     sync.Mutex
 	trNetworkFunctionsServer *NetworkFunctionsServerTransport
-	trOperationsServer *OperationsServerTransport
+	trOperationsServer       *OperationsServerTransport
 }
 
 // Do implements the policy.Transporter interface for ServerTransport.
@@ -57,11 +56,13 @@ func (s *ServerTransport) dispatchToClientFake(req *http.Request, client string)
 	switch client {
 	case "NetworkFunctionsClient":
 		initServer(&s.trMu, &s.trNetworkFunctionsServer, func() *NetworkFunctionsServerTransport {
-		return NewNetworkFunctionsServerTransport(&s.srv.NetworkFunctionsServer) })
+			return NewNetworkFunctionsServerTransport(&s.srv.NetworkFunctionsServer)
+		})
 		resp, err = s.trNetworkFunctionsServer.Do(req)
 	case "OperationsClient":
 		initServer(&s.trMu, &s.trOperationsServer, func() *OperationsServerTransport {
-		return NewOperationsServerTransport(&s.srv.OperationsServer) })
+			return NewOperationsServerTransport(&s.srv.OperationsServer)
+		})
 		resp, err = s.trOperationsServer.Do(req)
 	default:
 		err = fmt.Errorf("unhandled client %s", client)
@@ -69,4 +70,3 @@ func (s *ServerTransport) dispatchToClientFake(req *http.Request, client string)
 
 	return resp, err
 }
-

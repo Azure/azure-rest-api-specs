@@ -4,8 +4,6 @@
 
 package fake
 
-
-
 import (
 	"encoding/json"
 	"fmt"
@@ -15,8 +13,6 @@ import (
 	"strings"
 	"time"
 )
-
-
 
 // Azure reports time in UTC but it doesn't include the 'Z' time zone suffix in some cases.
 var tzOffsetRegex = regexp.MustCompile(`(?:Z|z|\+|-)(?:\d+:\d+)*"*$`)
@@ -87,7 +83,6 @@ func (t *dateTimeRFC3339) Parse(layout, value string) error {
 func (t dateTimeRFC3339) String() string {
 	return time.Time(t).Format(time.RFC3339Nano)
 }
-
 
 func populateDateTimeRFC3339(m map[string]any, k string, t *time.Time) {
 	if t == nil {

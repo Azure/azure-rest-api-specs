@@ -7,7 +7,7 @@ package armdatabasewatcher
 const host = "https://management.azure.com"
 
 const (
-	moduleName = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/databasewatcher/armdatabasewatcher"
+	moduleName    = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/databasewatcher/armdatabasewatcher"
 	moduleVersion = "v0.1.0"
 )
 
@@ -21,7 +21,7 @@ const (
 
 // PossibleActionTypeValues returns the possible values for the ActionType const type.
 func PossibleActionTypeValues() []ActionType {
-	return []ActionType{	
+	return []ActionType{
 		ActionTypeInternal,
 	}
 }
@@ -42,7 +42,7 @@ const (
 
 // PossibleCreatedByTypeValues returns the possible values for the CreatedByType const type.
 func PossibleCreatedByTypeValues() []CreatedByType {
-	return []CreatedByType{	
+	return []CreatedByType{
 		CreatedByTypeApplication,
 		CreatedByTypeKey,
 		CreatedByTypeManagedIdentity,
@@ -64,7 +64,7 @@ const (
 
 // PossibleKustoOfferingTypeValues returns the possible values for the KustoOfferingType const type.
 func PossibleKustoOfferingTypeValues() []KustoOfferingType {
-	return []KustoOfferingType{	
+	return []KustoOfferingType{
 		KustoOfferingTypeAdx,
 		KustoOfferingTypeFabric,
 		KustoOfferingTypeFree,
@@ -87,7 +87,7 @@ const (
 
 // PossibleManagedIdentityTypeValues returns the possible values for the ManagedIdentityType const type.
 func PossibleManagedIdentityTypeValues() []ManagedIdentityType {
-	return []ManagedIdentityType{	
+	return []ManagedIdentityType{
 		ManagedIdentityTypeNone,
 		ManagedIdentityTypeSystemAndUserAssigned,
 		ManagedIdentityTypeSystemAssigned,
@@ -110,7 +110,7 @@ const (
 
 // PossibleOriginValues returns the possible values for the Origin const type.
 func PossibleOriginValues() []Origin {
-	return []Origin{	
+	return []Origin{
 		OriginSystem,
 		OriginUser,
 		OriginUserSystem,
@@ -131,7 +131,7 @@ const (
 
 // PossibleProvisioningStateValues returns the possible values for the ProvisioningState const type.
 func PossibleProvisioningStateValues() []ProvisioningState {
-	return []ProvisioningState{	
+	return []ProvisioningState{
 		ProvisioningStateCanceled,
 		ProvisioningStateFailed,
 		ProvisioningStateSucceeded,
@@ -152,7 +152,7 @@ const (
 
 // PossibleResourceProvisioningStateValues returns the possible values for the ResourceProvisioningState const type.
 func PossibleResourceProvisioningStateValues() []ResourceProvisioningState {
-	return []ResourceProvisioningState{	
+	return []ResourceProvisioningState{
 		ResourceProvisioningStateCanceled,
 		ResourceProvisioningStateFailed,
 		ResourceProvisioningStateSucceeded,
@@ -166,10 +166,10 @@ const (
 	// SharedPrivateLinkResourceStatusApproved - The shared private link connection request was approved by the resource owner.
 	SharedPrivateLinkResourceStatusApproved SharedPrivateLinkResourceStatus = "Approved"
 	// SharedPrivateLinkResourceStatusDisconnected - The shared private link connection request was disconnected by the resource
-// owner.
+	// owner.
 	SharedPrivateLinkResourceStatusDisconnected SharedPrivateLinkResourceStatus = "Disconnected"
 	// SharedPrivateLinkResourceStatusPending - The shared private link connection request was not yet authorized by the resource
-// owner.
+	// owner.
 	SharedPrivateLinkResourceStatusPending SharedPrivateLinkResourceStatus = "Pending"
 	// SharedPrivateLinkResourceStatusRejected - The shared private link connection request was rejected by the resource owner.
 	SharedPrivateLinkResourceStatusRejected SharedPrivateLinkResourceStatus = "Rejected"
@@ -177,7 +177,7 @@ const (
 
 // PossibleSharedPrivateLinkResourceStatusValues returns the possible values for the SharedPrivateLinkResourceStatus const type.
 func PossibleSharedPrivateLinkResourceStatusValues() []SharedPrivateLinkResourceStatus {
-	return []SharedPrivateLinkResourceStatus{	
+	return []SharedPrivateLinkResourceStatus{
 		SharedPrivateLinkResourceStatusApproved,
 		SharedPrivateLinkResourceStatusDisconnected,
 		SharedPrivateLinkResourceStatusPending,
@@ -197,7 +197,7 @@ const (
 
 // PossibleTargetAuthenticationTypeValues returns the possible values for the TargetAuthenticationType const type.
 func PossibleTargetAuthenticationTypeValues() []TargetAuthenticationType {
-	return []TargetAuthenticationType{	
+	return []TargetAuthenticationType{
 		TargetAuthenticationTypeAAD,
 		TargetAuthenticationTypeSQL,
 	}
@@ -221,7 +221,7 @@ const (
 
 // PossibleWatcherStatusValues returns the possible values for the WatcherStatus const type.
 func PossibleWatcherStatusValues() []WatcherStatus {
-	return []WatcherStatus{	
+	return []WatcherStatus{
 		WatcherStatusDeleting,
 		WatcherStatusRunning,
 		WatcherStatusStarting,
@@ -229,4 +229,3 @@ func PossibleWatcherStatusValues() []WatcherStatus {
 		WatcherStatusStopping,
 	}
 }
-

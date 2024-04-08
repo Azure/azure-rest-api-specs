@@ -31,7 +31,7 @@ func NewSnapshotsClient(credential azcore.TokenCredential, options *arm.ClientOp
 		return nil, err
 	}
 	client := &SnapshotsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -105,8 +105,8 @@ func (client *SnapshotsClient) createOrUpdateCreateRequest(ctx context.Context, 
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -248,13 +248,13 @@ func (client *SnapshotsClient) getHandleResponse(resp *http.Response) (Snapshots
 //   - poolName - Pool Object
 //   - options - SnapshotsClientListByPoolOptions contains the optional parameters for the SnapshotsClient.NewListByPoolPager
 //     method.
-func (client *SnapshotsClient) NewListByPoolPager(subscriptionID string, resourceGroupName string, poolName string, options *SnapshotsClientListByPoolOptions) (*runtime.Pager[SnapshotsClientListByPoolResponse]) {
+func (client *SnapshotsClient) NewListByPoolPager(subscriptionID string, resourceGroupName string, poolName string, options *SnapshotsClientListByPoolOptions) *runtime.Pager[SnapshotsClientListByPoolResponse] {
 	return runtime.NewPager(runtime.PagingHandler[SnapshotsClientListByPoolResponse]{
 		More: func(page SnapshotsClientListByPoolResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *SnapshotsClientListByPoolResponse) (SnapshotsClientListByPoolResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SnapshotsClient.NewListByPoolPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "SnapshotsClient.NewListByPoolPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -266,7 +266,7 @@ func (client *SnapshotsClient) NewListByPoolPager(subscriptionID string, resourc
 				return SnapshotsClientListByPoolResponse{}, err
 			}
 			return client.listByPoolHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -304,4 +304,3 @@ func (client *SnapshotsClient) listByPoolHandleResponse(resp *http.Response) (Sn
 	}
 	return result, nil
 }
-

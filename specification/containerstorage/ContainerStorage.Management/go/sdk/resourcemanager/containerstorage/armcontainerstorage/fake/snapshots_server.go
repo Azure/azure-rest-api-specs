@@ -19,7 +19,7 @@ import (
 )
 
 // SnapshotsServer is a fake server for instances of the armcontainerstorage.SnapshotsClient type.
-type SnapshotsServer struct{
+type SnapshotsServer struct {
 	// BeginCreateOrUpdate is the fake for method SnapshotsClient.BeginCreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
 	BeginCreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, poolName string, snapshotName string, resource armcontainerstorage.Snapshot, options *armcontainerstorage.SnapshotsClientCreateOrUpdateOptions) (resp azfake.PollerResponder[armcontainerstorage.SnapshotsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
@@ -35,7 +35,6 @@ type SnapshotsServer struct{
 	// NewListByPoolPager is the fake for method SnapshotsClient.NewListByPoolPager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListByPoolPager func(subscriptionID string, resourceGroupName string, poolName string, options *armcontainerstorage.SnapshotsClientListByPoolOptions) (resp azfake.PagerResponder[armcontainerstorage.SnapshotsClientListByPoolResponse])
-
 }
 
 // NewSnapshotsServerTransport creates a new instance of SnapshotsServerTransport with the provided implementation.
@@ -43,20 +42,20 @@ type SnapshotsServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewSnapshotsServerTransport(srv *SnapshotsServer) *SnapshotsServerTransport {
 	return &SnapshotsServerTransport{
-		srv: srv,
+		srv:                 srv,
 		beginCreateOrUpdate: newTracker[azfake.PollerResponder[armcontainerstorage.SnapshotsClientCreateOrUpdateResponse]](),
-		beginDelete: newTracker[azfake.PollerResponder[armcontainerstorage.SnapshotsClientDeleteResponse]](),
-		newListByPoolPager: newTracker[azfake.PagerResponder[armcontainerstorage.SnapshotsClientListByPoolResponse]](),
+		beginDelete:         newTracker[azfake.PollerResponder[armcontainerstorage.SnapshotsClientDeleteResponse]](),
+		newListByPoolPager:  newTracker[azfake.PagerResponder[armcontainerstorage.SnapshotsClientListByPoolResponse]](),
 	}
 }
 
 // SnapshotsServerTransport connects instances of armcontainerstorage.SnapshotsClient to instances of SnapshotsServer.
 // Don't use this type directly, use NewSnapshotsServerTransport instead.
 type SnapshotsServerTransport struct {
-	srv *SnapshotsServer
+	srv                 *SnapshotsServer
 	beginCreateOrUpdate *tracker[azfake.PollerResponder[armcontainerstorage.SnapshotsClientCreateOrUpdateResponse]]
-	beginDelete *tracker[azfake.PollerResponder[armcontainerstorage.SnapshotsClientDeleteResponse]]
-	newListByPoolPager *tracker[azfake.PagerResponder[armcontainerstorage.SnapshotsClientListByPoolResponse]]
+	beginDelete         *tracker[azfake.PollerResponder[armcontainerstorage.SnapshotsClientDeleteResponse]]
+	newListByPoolPager  *tracker[azfake.PagerResponder[armcontainerstorage.SnapshotsClientListByPoolResponse]]
 }
 
 // Do implements the policy.Transporter interface for SnapshotsServerTransport.
@@ -96,36 +95,36 @@ func (s *SnapshotsServerTransport) dispatchBeginCreateOrUpdate(req *http.Request
 	}
 	beginCreateOrUpdate := s.beginCreateOrUpdate.get(req)
 	if beginCreateOrUpdate == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ContainerStorage/pools/(?P<poolName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/snapshots/(?P<snapshotName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armcontainerstorage.Snapshot](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	poolNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("poolName")])
-	if err != nil {
-		return nil, err
-	}
-	snapshotNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("snapshotName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := s.srv.BeginCreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, poolNameParam, snapshotNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ContainerStorage/pools/(?P<poolName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/snapshots/(?P<snapshotName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armcontainerstorage.Snapshot](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		poolNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("poolName")])
+		if err != nil {
+			return nil, err
+		}
+		snapshotNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("snapshotName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := s.srv.BeginCreateOrUpdate(req.Context(), subscriptionIDParam, resourceGroupNameParam, poolNameParam, snapshotNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginCreateOrUpdate = &respr
 		s.beginCreateOrUpdate.add(req, beginCreateOrUpdate)
 	}
@@ -152,32 +151,32 @@ func (s *SnapshotsServerTransport) dispatchBeginDelete(req *http.Request) (*http
 	}
 	beginDelete := s.beginDelete.get(req)
 	if beginDelete == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ContainerStorage/pools/(?P<poolName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/snapshots/(?P<snapshotName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 4 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	poolNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("poolName")])
-	if err != nil {
-		return nil, err
-	}
-	snapshotNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("snapshotName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := s.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, poolNameParam, snapshotNameParam, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ContainerStorage/pools/(?P<poolName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/snapshots/(?P<snapshotName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 4 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		poolNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("poolName")])
+		if err != nil {
+			return nil, err
+		}
+		snapshotNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("snapshotName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := s.srv.BeginDelete(req.Context(), subscriptionIDParam, resourceGroupNameParam, poolNameParam, snapshotNameParam, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginDelete = &respr
 		s.beginDelete.add(req, beginDelete)
 	}
@@ -245,25 +244,25 @@ func (s *SnapshotsServerTransport) dispatchNewListByPoolPager(req *http.Request)
 	}
 	newListByPoolPager := s.newListByPoolPager.get(req)
 	if newListByPoolPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ContainerStorage/pools/(?P<poolName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/snapshots`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 3 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	poolNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("poolName")])
-	if err != nil {
-		return nil, err
-	}
-resp := s.srv.NewListByPoolPager(subscriptionIDParam, resourceGroupNameParam, poolNameParam, nil)
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ContainerStorage/pools/(?P<poolName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/snapshots`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 3 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		poolNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("poolName")])
+		if err != nil {
+			return nil, err
+		}
+		resp := s.srv.NewListByPoolPager(subscriptionIDParam, resourceGroupNameParam, poolNameParam, nil)
 		newListByPoolPager = &resp
 		s.newListByPoolPager.add(req, newListByPoolPager)
 		server.PagerResponderInjectNextLinks(newListByPoolPager, req, func(page *armcontainerstorage.SnapshotsClientListByPoolResponse, createLink func() string) {
@@ -283,4 +282,3 @@ resp := s.srv.NewListByPoolPager(subscriptionIDParam, resourceGroupNameParam, po
 	}
 	return resp, nil
 }
-

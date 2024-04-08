@@ -7,7 +7,7 @@ package armdevopsinfrastructure
 const host = "https://management.azure.com"
 
 const (
-	moduleName = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/devopsinfrastructure/armdevopsinfrastructure"
+	moduleName    = "github.com/Azure/azure-sdk-for-go/sdk/resourcemanager/devopsinfrastructure/armdevopsinfrastructure"
 	moduleVersion = "v0.1.0"
 )
 
@@ -21,7 +21,7 @@ const (
 
 // PossibleActionTypeValues returns the possible values for the ActionType const type.
 func PossibleActionTypeValues() []ActionType {
-	return []ActionType{	
+	return []ActionType{
 		ActionTypeInternal,
 	}
 }
@@ -40,7 +40,7 @@ const (
 
 // PossibleAzureDevOpsPermissionTypeValues returns the possible values for the AzureDevOpsPermissionType const type.
 func PossibleAzureDevOpsPermissionTypeValues() []AzureDevOpsPermissionType {
-	return []AzureDevOpsPermissionType{	
+	return []AzureDevOpsPermissionType{
 		AzureDevOpsPermissionTypeCreatorOnly,
 		AzureDevOpsPermissionTypeInherit,
 		AzureDevOpsPermissionTypeSpecificAccounts,
@@ -61,7 +61,7 @@ const (
 
 // PossibleCachingTypeValues returns the possible values for the CachingType const type.
 func PossibleCachingTypeValues() []CachingType {
-	return []CachingType{	
+	return []CachingType{
 		CachingTypeNone,
 		CachingTypeReadOnly,
 		CachingTypeReadWrite,
@@ -84,7 +84,7 @@ const (
 
 // PossibleCreatedByTypeValues returns the possible values for the CreatedByType const type.
 func PossibleCreatedByTypeValues() []CreatedByType {
-	return []CreatedByType{	
+	return []CreatedByType{
 		CreatedByTypeApplication,
 		CreatedByTypeKey,
 		CreatedByTypeManagedIdentity,
@@ -104,7 +104,7 @@ const (
 
 // PossibleLogonTypeValues returns the possible values for the LogonType const type.
 func PossibleLogonTypeValues() []LogonType {
-	return []LogonType{	
+	return []LogonType{
 		LogonTypeInteractive,
 		LogonTypeService,
 	}
@@ -126,7 +126,7 @@ const (
 
 // PossibleManagedIdentityTypeValues returns the possible values for the ManagedIdentityType const type.
 func PossibleManagedIdentityTypeValues() []ManagedIdentityType {
-	return []ManagedIdentityType{	
+	return []ManagedIdentityType{
 		ManagedIdentityTypeNone,
 		ManagedIdentityTypeSystemAndUserAssigned,
 		ManagedIdentityTypeSystemAssigned,
@@ -149,7 +149,7 @@ const (
 
 // PossibleOriginValues returns the possible values for the Origin const type.
 func PossibleOriginValues() []Origin {
-	return []Origin{	
+	return []Origin{
 		OriginSystem,
 		OriginUser,
 		OriginUserSystem,
@@ -170,7 +170,7 @@ const (
 
 // PossibleOsDiskStorageAccountTypeValues returns the possible values for the OsDiskStorageAccountType const type.
 func PossibleOsDiskStorageAccountTypeValues() []OsDiskStorageAccountType {
-	return []OsDiskStorageAccountType{	
+	return []OsDiskStorageAccountType{
 		OsDiskStorageAccountTypePremium,
 		OsDiskStorageAccountTypeStandard,
 		OsDiskStorageAccountTypeStandardSSD,
@@ -199,7 +199,7 @@ const (
 
 // PossibleProvisioningStateValues returns the possible values for the ProvisioningState const type.
 func PossibleProvisioningStateValues() []ProvisioningState {
-	return []ProvisioningState{	
+	return []ProvisioningState{
 		ProvisioningStateAccepted,
 		ProvisioningStateCanceled,
 		ProvisioningStateDeleting,
@@ -210,37 +210,16 @@ func PossibleProvisioningStateValues() []ProvisioningState {
 	}
 }
 
-// ResourceProvisioningState - The provisioning state of a resource type.
-type ResourceProvisioningState string
-
-const (
-	// ResourceProvisioningStateCanceled - Resource creation was canceled.
-	ResourceProvisioningStateCanceled ResourceProvisioningState = "Canceled"
-	// ResourceProvisioningStateFailed - Resource creation failed.
-	ResourceProvisioningStateFailed ResourceProvisioningState = "Failed"
-	// ResourceProvisioningStateSucceeded - Resource has been created.
-	ResourceProvisioningStateSucceeded ResourceProvisioningState = "Succeeded"
-)
-
-// PossibleResourceProvisioningStateValues returns the possible values for the ResourceProvisioningState const type.
-func PossibleResourceProvisioningStateValues() []ResourceProvisioningState {
-	return []ResourceProvisioningState{	
-		ResourceProvisioningStateCanceled,
-		ResourceProvisioningStateFailed,
-		ResourceProvisioningStateSucceeded,
-	}
-}
-
 type ResourceSKURestrictionsReasonCode string
 
 const (
 	ResourceSKURestrictionsReasonCodeNotAvailableForSubscription ResourceSKURestrictionsReasonCode = "NotAvailableForSubscription"
-	ResourceSKURestrictionsReasonCodeQuotaID ResourceSKURestrictionsReasonCode = "QuotaId"
+	ResourceSKURestrictionsReasonCodeQuotaID                     ResourceSKURestrictionsReasonCode = "QuotaId"
 )
 
 // PossibleResourceSKURestrictionsReasonCodeValues returns the possible values for the ResourceSKURestrictionsReasonCode const type.
 func PossibleResourceSKURestrictionsReasonCodeValues() []ResourceSKURestrictionsReasonCode {
-	return []ResourceSKURestrictionsReasonCode{	
+	return []ResourceSKURestrictionsReasonCode{
 		ResourceSKURestrictionsReasonCodeNotAvailableForSubscription,
 		ResourceSKURestrictionsReasonCodeQuotaID,
 	}
@@ -250,12 +229,12 @@ type ResourceSKURestrictionsType string
 
 const (
 	ResourceSKURestrictionsTypeLocation ResourceSKURestrictionsType = "Location"
-	ResourceSKURestrictionsTypeZone ResourceSKURestrictionsType = "Zone"
+	ResourceSKURestrictionsTypeZone     ResourceSKURestrictionsType = "Zone"
 )
 
 // PossibleResourceSKURestrictionsTypeValues returns the possible values for the ResourceSKURestrictionsType const type.
 func PossibleResourceSKURestrictionsTypeValues() []ResourceSKURestrictionsType {
-	return []ResourceSKURestrictionsType{	
+	return []ResourceSKURestrictionsType{
 		ResourceSKURestrictionsTypeLocation,
 		ResourceSKURestrictionsTypeZone,
 	}
@@ -291,7 +270,7 @@ const (
 
 // PossibleResourceStatusValues returns the possible values for the ResourceStatus const type.
 func PossibleResourceStatusValues() []ResourceStatus {
-	return []ResourceStatus{	
+	return []ResourceStatus{
 		ResourceStatusAllocated,
 		ResourceStatusLeased,
 		ResourceStatusNotReady,
@@ -324,7 +303,7 @@ const (
 
 // PossibleStorageAccountTypeValues returns the possible values for the StorageAccountType const type.
 func PossibleStorageAccountTypeValues() []StorageAccountType {
-	return []StorageAccountType{	
+	return []StorageAccountType{
 		StorageAccountTypePremiumLRS,
 		StorageAccountTypePremiumZRS,
 		StorageAccountTypeStandardLRS,
@@ -332,4 +311,3 @@ func PossibleStorageAccountTypeValues() []StorageAccountType {
 		StorageAccountTypeStandardSSDZRS,
 	}
 }
-

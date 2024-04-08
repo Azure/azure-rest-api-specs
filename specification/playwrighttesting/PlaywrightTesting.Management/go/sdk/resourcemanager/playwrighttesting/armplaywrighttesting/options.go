@@ -75,4 +75,3 @@ type AzurePlaywrightServiceQuotasClientGetOptions struct {
 type AzurePlaywrightServiceQuotasClientListBySubscriptionOptions struct {
 	// placeholder for future optional parameters
 }
-

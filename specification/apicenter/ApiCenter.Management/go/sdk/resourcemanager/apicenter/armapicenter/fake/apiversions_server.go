@@ -19,7 +19,7 @@ import (
 )
 
 // ApiVersionsServer is a fake server for instances of the armapicenter.ApiVersionsClient type.
-type ApiVersionsServer struct{
+type ApiVersionsServer struct {
 	// CreateOrUpdate is the fake for method ApiVersionsClient.CreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
 	CreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, payload armapicenter.APIVersion, options *armapicenter.ApiVersionsClientCreateOrUpdateOptions) (resp azfake.Responder[armapicenter.ApiVersionsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
@@ -39,7 +39,6 @@ type ApiVersionsServer struct{
 	// NewListPager is the fake for method ApiVersionsClient.NewListPager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListPager func(subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, options *armapicenter.ApiVersionsClientListOptions) (resp azfake.PagerResponder[armapicenter.ApiVersionsClientListResponse])
-
 }
 
 // NewApiVersionsServerTransport creates a new instance of ApiVersionsServerTransport with the provided implementation.
@@ -47,7 +46,7 @@ type ApiVersionsServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewApiVersionsServerTransport(srv *ApiVersionsServer) *ApiVersionsServerTransport {
 	return &ApiVersionsServerTransport{
-		srv: srv,
+		srv:          srv,
 		newListPager: newTracker[azfake.PagerResponder[armapicenter.ApiVersionsClientListResponse]](),
 	}
 }
@@ -55,7 +54,7 @@ func NewApiVersionsServerTransport(srv *ApiVersionsServer) *ApiVersionsServerTra
 // ApiVersionsServerTransport connects instances of armapicenter.ApiVersionsClient to instances of ApiVersionsServer.
 // Don't use this type directly, use NewApiVersionsServerTransport instead.
 type ApiVersionsServerTransport struct {
-	srv *ApiVersionsServer
+	srv          *ApiVersionsServer
 	newListPager *tracker[azfake.PagerResponder[armapicenter.ApiVersionsClientListResponse]]
 }
 
@@ -304,45 +303,45 @@ func (a *ApiVersionsServerTransport) dispatchNewListPager(req *http.Request) (*h
 	}
 	newListPager := a.newListPager.get(req)
 	if newListPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ApiCenter/services/(?P<serviceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workspaces/(?P<workspaceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/apis/(?P<apiName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/versions`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 5 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	qp := req.URL.Query()
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	serviceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("serviceName")])
-	if err != nil {
-		return nil, err
-	}
-	workspaceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("workspaceName")])
-	if err != nil {
-		return nil, err
-	}
-	apiNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("apiName")])
-	if err != nil {
-		return nil, err
-	}
-	filterUnescaped, err := url.QueryUnescape(qp.Get("$filter"))
-	if err != nil {
-		return nil, err
-	}
-	filterParam := getOptional(filterUnescaped)
-	var options *armapicenter.ApiVersionsClientListOptions
-	if filterParam != nil {
-		options = &armapicenter.ApiVersionsClientListOptions{
-			Filter: filterParam,
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ApiCenter/services/(?P<serviceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workspaces/(?P<workspaceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/apis/(?P<apiName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/versions`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 5 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
 		}
-	}
-resp := a.srv.NewListPager(subscriptionIDParam, resourceGroupNameParam, serviceNameParam, workspaceNameParam, apiNameParam, options)
+		qp := req.URL.Query()
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		serviceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("serviceName")])
+		if err != nil {
+			return nil, err
+		}
+		workspaceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("workspaceName")])
+		if err != nil {
+			return nil, err
+		}
+		apiNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("apiName")])
+		if err != nil {
+			return nil, err
+		}
+		filterUnescaped, err := url.QueryUnescape(qp.Get("$filter"))
+		if err != nil {
+			return nil, err
+		}
+		filterParam := getOptional(filterUnescaped)
+		var options *armapicenter.ApiVersionsClientListOptions
+		if filterParam != nil {
+			options = &armapicenter.ApiVersionsClientListOptions{
+				Filter: filterParam,
+			}
+		}
+		resp := a.srv.NewListPager(subscriptionIDParam, resourceGroupNameParam, serviceNameParam, workspaceNameParam, apiNameParam, options)
 		newListPager = &resp
 		a.newListPager.add(req, newListPager)
 		server.PagerResponderInjectNextLinks(newListPager, req, func(page *armapicenter.ApiVersionsClientListResponse, createLink func() string) {
@@ -362,4 +361,3 @@ resp := a.srv.NewListPager(subscriptionIDParam, resourceGroupNameParam, serviceN
 	}
 	return resp, nil
 }
-

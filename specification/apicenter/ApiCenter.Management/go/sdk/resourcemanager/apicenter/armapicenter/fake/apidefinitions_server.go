@@ -19,7 +19,7 @@ import (
 )
 
 // ApiDefinitionsServer is a fake server for instances of the armapicenter.ApiDefinitionsClient type.
-type ApiDefinitionsServer struct{
+type ApiDefinitionsServer struct {
 	// CreateOrUpdate is the fake for method ApiDefinitionsClient.CreateOrUpdate
 	// HTTP status codes to indicate success: http.StatusOK, http.StatusCreated
 	CreateOrUpdate func(ctx context.Context, subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, definitionName string, payload armapicenter.APIDefinition, options *armapicenter.ApiDefinitionsClientCreateOrUpdateOptions) (resp azfake.Responder[armapicenter.ApiDefinitionsClientCreateOrUpdateResponse], errResp azfake.ErrorResponder)
@@ -47,7 +47,6 @@ type ApiDefinitionsServer struct{
 	// NewListPager is the fake for method ApiDefinitionsClient.NewListPager
 	// HTTP status codes to indicate success: http.StatusOK
 	NewListPager func(subscriptionID string, resourceGroupName string, serviceName string, workspaceName string, apiName string, versionName string, options *armapicenter.ApiDefinitionsClientListOptions) (resp azfake.PagerResponder[armapicenter.ApiDefinitionsClientListResponse])
-
 }
 
 // NewApiDefinitionsServerTransport creates a new instance of ApiDefinitionsServerTransport with the provided implementation.
@@ -55,20 +54,20 @@ type ApiDefinitionsServer struct{
 // azcore.ClientOptions.Transporter field in the client's constructor parameters.
 func NewApiDefinitionsServerTransport(srv *ApiDefinitionsServer) *ApiDefinitionsServerTransport {
 	return &ApiDefinitionsServerTransport{
-		srv: srv,
+		srv:                      srv,
 		beginExportSpecification: newTracker[azfake.PollerResponder[armapicenter.ApiDefinitionsClientExportSpecificationResponse]](),
 		beginImportSpecification: newTracker[azfake.PollerResponder[armapicenter.ApiDefinitionsClientImportSpecificationResponse]](),
-		newListPager: newTracker[azfake.PagerResponder[armapicenter.ApiDefinitionsClientListResponse]](),
+		newListPager:             newTracker[azfake.PagerResponder[armapicenter.ApiDefinitionsClientListResponse]](),
 	}
 }
 
 // ApiDefinitionsServerTransport connects instances of armapicenter.ApiDefinitionsClient to instances of ApiDefinitionsServer.
 // Don't use this type directly, use NewApiDefinitionsServerTransport instead.
 type ApiDefinitionsServerTransport struct {
-	srv *ApiDefinitionsServer
+	srv                      *ApiDefinitionsServer
 	beginExportSpecification *tracker[azfake.PollerResponder[armapicenter.ApiDefinitionsClientExportSpecificationResponse]]
 	beginImportSpecification *tracker[azfake.PollerResponder[armapicenter.ApiDefinitionsClientImportSpecificationResponse]]
-	newListPager *tracker[azfake.PagerResponder[armapicenter.ApiDefinitionsClientListResponse]]
+	newListPager             *tracker[azfake.PagerResponder[armapicenter.ApiDefinitionsClientListResponse]]
 }
 
 // Do implements the policy.Transporter interface for ApiDefinitionsServerTransport.
@@ -227,48 +226,48 @@ func (a *ApiDefinitionsServerTransport) dispatchBeginExportSpecification(req *ht
 	}
 	beginExportSpecification := a.beginExportSpecification.get(req)
 	if beginExportSpecification == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ApiCenter/services/(?P<serviceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workspaces/(?P<workspaceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/apis/(?P<apiName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/versions/(?P<versionName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/definitions/(?P<definitionName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/exportSpecification`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 7 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[any](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	serviceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("serviceName")])
-	if err != nil {
-		return nil, err
-	}
-	workspaceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("workspaceName")])
-	if err != nil {
-		return nil, err
-	}
-	apiNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("apiName")])
-	if err != nil {
-		return nil, err
-	}
-	versionNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("versionName")])
-	if err != nil {
-		return nil, err
-	}
-	definitionNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("definitionName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := a.srv.BeginExportSpecification(req.Context(), subscriptionIDParam, resourceGroupNameParam, serviceNameParam, workspaceNameParam, apiNameParam, versionNameParam, definitionNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ApiCenter/services/(?P<serviceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workspaces/(?P<workspaceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/apis/(?P<apiName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/versions/(?P<versionName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/definitions/(?P<definitionName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/exportSpecification`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 7 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[any](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		serviceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("serviceName")])
+		if err != nil {
+			return nil, err
+		}
+		workspaceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("workspaceName")])
+		if err != nil {
+			return nil, err
+		}
+		apiNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("apiName")])
+		if err != nil {
+			return nil, err
+		}
+		versionNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("versionName")])
+		if err != nil {
+			return nil, err
+		}
+		definitionNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("definitionName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := a.srv.BeginExportSpecification(req.Context(), subscriptionIDParam, resourceGroupNameParam, serviceNameParam, workspaceNameParam, apiNameParam, versionNameParam, definitionNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginExportSpecification = &respr
 		a.beginExportSpecification.add(req, beginExportSpecification)
 	}
@@ -404,48 +403,48 @@ func (a *ApiDefinitionsServerTransport) dispatchBeginImportSpecification(req *ht
 	}
 	beginImportSpecification := a.beginImportSpecification.get(req)
 	if beginImportSpecification == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ApiCenter/services/(?P<serviceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workspaces/(?P<workspaceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/apis/(?P<apiName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/versions/(?P<versionName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/definitions/(?P<definitionName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/importSpecification`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 7 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	body, err := server.UnmarshalRequestAsJSON[armapicenter.APISpecImportRequest](req)
-	if err != nil {
-		return nil, err
-	}
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	serviceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("serviceName")])
-	if err != nil {
-		return nil, err
-	}
-	workspaceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("workspaceName")])
-	if err != nil {
-		return nil, err
-	}
-	apiNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("apiName")])
-	if err != nil {
-		return nil, err
-	}
-	versionNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("versionName")])
-	if err != nil {
-		return nil, err
-	}
-	definitionNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("definitionName")])
-	if err != nil {
-		return nil, err
-	}
-	respr, errRespr := a.srv.BeginImportSpecification(req.Context(), subscriptionIDParam, resourceGroupNameParam, serviceNameParam, workspaceNameParam, apiNameParam, versionNameParam, definitionNameParam, body, nil)
-	if respErr := server.GetError(errRespr, req); respErr != nil {
-		return nil, respErr
-	}
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ApiCenter/services/(?P<serviceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workspaces/(?P<workspaceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/apis/(?P<apiName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/versions/(?P<versionName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/definitions/(?P<definitionName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/importSpecification`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 7 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
+		}
+		body, err := server.UnmarshalRequestAsJSON[armapicenter.APISpecImportRequest](req)
+		if err != nil {
+			return nil, err
+		}
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		serviceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("serviceName")])
+		if err != nil {
+			return nil, err
+		}
+		workspaceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("workspaceName")])
+		if err != nil {
+			return nil, err
+		}
+		apiNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("apiName")])
+		if err != nil {
+			return nil, err
+		}
+		versionNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("versionName")])
+		if err != nil {
+			return nil, err
+		}
+		definitionNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("definitionName")])
+		if err != nil {
+			return nil, err
+		}
+		respr, errRespr := a.srv.BeginImportSpecification(req.Context(), subscriptionIDParam, resourceGroupNameParam, serviceNameParam, workspaceNameParam, apiNameParam, versionNameParam, definitionNameParam, body, nil)
+		if respErr := server.GetError(errRespr, req); respErr != nil {
+			return nil, respErr
+		}
 		beginImportSpecification = &respr
 		a.beginImportSpecification.add(req, beginImportSpecification)
 	}
@@ -472,49 +471,49 @@ func (a *ApiDefinitionsServerTransport) dispatchNewListPager(req *http.Request) 
 	}
 	newListPager := a.newListPager.get(req)
 	if newListPager == nil {
-	const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ApiCenter/services/(?P<serviceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workspaces/(?P<workspaceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/apis/(?P<apiName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/versions/(?P<versionName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/definitions`
-	regex := regexp.MustCompile(regexStr)
-	matches := regex.FindStringSubmatch(req.URL.EscapedPath())
-	if matches == nil || len(matches) < 6 {
-		return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
-	}
-	qp := req.URL.Query()
-	subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
-	if err != nil {
-		return nil, err
-	}
-	resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
-	if err != nil {
-		return nil, err
-	}
-	serviceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("serviceName")])
-	if err != nil {
-		return nil, err
-	}
-	workspaceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("workspaceName")])
-	if err != nil {
-		return nil, err
-	}
-	apiNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("apiName")])
-	if err != nil {
-		return nil, err
-	}
-	versionNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("versionName")])
-	if err != nil {
-		return nil, err
-	}
-	filterUnescaped, err := url.QueryUnescape(qp.Get("$filter"))
-	if err != nil {
-		return nil, err
-	}
-	filterParam := getOptional(filterUnescaped)
-	var options *armapicenter.ApiDefinitionsClientListOptions
-	if filterParam != nil {
-		options = &armapicenter.ApiDefinitionsClientListOptions{
-			Filter: filterParam,
+		const regexStr = `/subscriptions/(?P<subscriptionId>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/resourceGroups/(?P<resourceGroupName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/providers/Microsoft\.ApiCenter/services/(?P<serviceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/workspaces/(?P<workspaceName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/apis/(?P<apiName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/versions/(?P<versionName>[!#&$-;=?-\[\]_a-zA-Z0-9~%@]+)/definitions`
+		regex := regexp.MustCompile(regexStr)
+		matches := regex.FindStringSubmatch(req.URL.EscapedPath())
+		if matches == nil || len(matches) < 6 {
+			return nil, fmt.Errorf("failed to parse path %s", req.URL.Path)
 		}
-	}
-resp := a.srv.NewListPager(subscriptionIDParam, resourceGroupNameParam, serviceNameParam, workspaceNameParam, apiNameParam, versionNameParam, options)
+		qp := req.URL.Query()
+		subscriptionIDParam, err := url.PathUnescape(matches[regex.SubexpIndex("subscriptionId")])
+		if err != nil {
+			return nil, err
+		}
+		resourceGroupNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("resourceGroupName")])
+		if err != nil {
+			return nil, err
+		}
+		serviceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("serviceName")])
+		if err != nil {
+			return nil, err
+		}
+		workspaceNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("workspaceName")])
+		if err != nil {
+			return nil, err
+		}
+		apiNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("apiName")])
+		if err != nil {
+			return nil, err
+		}
+		versionNameParam, err := url.PathUnescape(matches[regex.SubexpIndex("versionName")])
+		if err != nil {
+			return nil, err
+		}
+		filterUnescaped, err := url.QueryUnescape(qp.Get("$filter"))
+		if err != nil {
+			return nil, err
+		}
+		filterParam := getOptional(filterUnescaped)
+		var options *armapicenter.ApiDefinitionsClientListOptions
+		if filterParam != nil {
+			options = &armapicenter.ApiDefinitionsClientListOptions{
+				Filter: filterParam,
+			}
+		}
+		resp := a.srv.NewListPager(subscriptionIDParam, resourceGroupNameParam, serviceNameParam, workspaceNameParam, apiNameParam, versionNameParam, options)
 		newListPager = &resp
 		a.newListPager.add(req, newListPager)
 		server.PagerResponderInjectNextLinks(newListPager, req, func(page *armapicenter.ApiDefinitionsClientListResponse, createLink func() string) {
@@ -534,4 +533,3 @@ resp := a.srv.NewListPager(subscriptionIDParam, resourceGroupNameParam, serviceN
 	}
 	return resp, nil
 }
-

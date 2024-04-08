@@ -28,4 +28,3 @@ func unmarshalClusterServiceClusterTypeSpecificDataClassification(rawMsg json.Ra
 	}
 	return b, nil
 }
-

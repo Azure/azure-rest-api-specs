@@ -31,7 +31,7 @@ func NewScriptExecutionsClient(credential azcore.TokenCredential, options *arm.C
 		return nil, err
 	}
 	client := &ScriptExecutionsClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -41,12 +41,12 @@ func NewScriptExecutionsClient(credential azcore.TokenCredential, options *arm.C
 //   - resourceGroupName - The name of the resource group. The name is case insensitive.
 //   - privateCloudName - Name of the private cloud
 //   - scriptExecutionName - Name of the script cmdlet.
-//   - resource - Resource create parameters.
+//   - scriptExecution - Resource create parameters.
 //   - options - ScriptExecutionsClientCreateOrUpdateOptions contains the optional parameters for the ScriptExecutionsClient.CreateOrUpdate
 //     method.
-func (client *ScriptExecutionsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptExecutionName string, resource ScriptExecution, options *ScriptExecutionsClientCreateOrUpdateOptions) (*runtime.Poller[ScriptExecutionsClientCreateOrUpdateResponse], error) {
+func (client *ScriptExecutionsClient) BeginCreateOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptExecutionName string, scriptExecution ScriptExecution, options *ScriptExecutionsClientCreateOrUpdateOptions) (*runtime.Poller[ScriptExecutionsClientCreateOrUpdateResponse], error) {
 	if options == nil || options.ResumeToken == "" {
-		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, privateCloudName, scriptExecutionName, resource, options)
+		resp, err := client.createOrUpdate(ctx, subscriptionID, resourceGroupName, privateCloudName, scriptExecutionName, scriptExecution, options)
 		if err != nil {
 			return nil, err
 		}
@@ -58,10 +58,10 @@ func (client *ScriptExecutionsClient) BeginCreateOrUpdate(ctx context.Context, s
 }
 
 // CreateOrUpdate - Create a ScriptExecution
-func (client *ScriptExecutionsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptExecutionName string, resource ScriptExecution, options *ScriptExecutionsClientCreateOrUpdateOptions) (*http.Response, error) {
+func (client *ScriptExecutionsClient) createOrUpdate(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptExecutionName string, scriptExecution ScriptExecution, options *ScriptExecutionsClientCreateOrUpdateOptions) (*http.Response, error) {
 	var err error
 	ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ScriptExecutionsClient.BeginCreateOrUpdate")
-	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, scriptExecutionName, resource, options)
+	req, err := client.createOrUpdateCreateRequest(ctx, subscriptionID, resourceGroupName, privateCloudName, scriptExecutionName, scriptExecution, options)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ func (client *ScriptExecutionsClient) createOrUpdate(ctx context.Context, subscr
 }
 
 // createOrUpdateCreateRequest creates the CreateOrUpdate request.
-func (client *ScriptExecutionsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptExecutionName string, resource ScriptExecution, options *ScriptExecutionsClientCreateOrUpdateOptions) (*policy.Request, error) {
+func (client *ScriptExecutionsClient) createOrUpdateCreateRequest(ctx context.Context, subscriptionID string, resourceGroupName string, privateCloudName string, scriptExecutionName string, scriptExecution ScriptExecution, options *ScriptExecutionsClientCreateOrUpdateOptions) (*policy.Request, error) {
 	urlPath := "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AVS/privateClouds/{privateCloudName}/scriptExecutions/{scriptExecutionName}"
 	if subscriptionID == "" {
 		return nil, errors.New("parameter subscriptionID cannot be empty")
@@ -104,9 +104,9 @@ func (client *ScriptExecutionsClient) createOrUpdateCreateRequest(ctx context.Co
 	req.Raw().URL.RawQuery = reqQP.Encode()
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
-	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+	if err := runtime.MarshalAsJSON(req, scriptExecution); err != nil {
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -297,9 +297,9 @@ func (client *ScriptExecutionsClient) getExecutionLogsCreateRequest(ctx context.
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if options != nil && options.ScriptOutputStreamType != nil {
-	if err := runtime.MarshalAsJSON(req, options.ScriptOutputStreamType); err != nil {
-	return nil, err
-}
+		if err := runtime.MarshalAsJSON(req, options.ScriptOutputStreamType); err != nil {
+			return nil, err
+		}
 		return req, nil
 	}
 	return req, nil
@@ -320,13 +320,13 @@ func (client *ScriptExecutionsClient) getExecutionLogsHandleResponse(resp *http.
 //   - privateCloudName - Name of the private cloud
 //   - options - ScriptExecutionsClientListByPrivateCloudOptions contains the optional parameters for the ScriptExecutionsClient.NewListByPrivateCloudPager
 //     method.
-func (client *ScriptExecutionsClient) NewListByPrivateCloudPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *ScriptExecutionsClientListByPrivateCloudOptions) (*runtime.Pager[ScriptExecutionsClientListByPrivateCloudResponse]) {
+func (client *ScriptExecutionsClient) NewListByPrivateCloudPager(subscriptionID string, resourceGroupName string, privateCloudName string, options *ScriptExecutionsClientListByPrivateCloudOptions) *runtime.Pager[ScriptExecutionsClientListByPrivateCloudResponse] {
 	return runtime.NewPager(runtime.PagingHandler[ScriptExecutionsClientListByPrivateCloudResponse]{
 		More: func(page ScriptExecutionsClientListByPrivateCloudResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *ScriptExecutionsClientListByPrivateCloudResponse) (ScriptExecutionsClientListByPrivateCloudResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ScriptExecutionsClient.NewListByPrivateCloudPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "ScriptExecutionsClient.NewListByPrivateCloudPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -338,7 +338,7 @@ func (client *ScriptExecutionsClient) NewListByPrivateCloudPager(subscriptionID 
 				return ScriptExecutionsClientListByPrivateCloudResponse{}, err
 			}
 			return client.listByPrivateCloudHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -376,4 +376,3 @@ func (client *ScriptExecutionsClient) listByPrivateCloudHandleResponse(resp *htt
 	}
 	return result, nil
 }
-

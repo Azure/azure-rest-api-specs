@@ -14,7 +14,7 @@ import (
 )
 
 // Server is a fake server for instances of the armkubernetesruntime.Client type.
-type Server struct{
+type Server struct {
 	// BgpPeersServer contains the fakes for client BgpPeersClient
 	BgpPeersServer BgpPeersServer
 
@@ -29,7 +29,6 @@ type Server struct{
 
 	// StorageClassServer contains the fakes for client StorageClassClient
 	StorageClassServer StorageClassServer
-
 }
 
 // NewServerTransport creates a new instance of ServerTransport with the provided implementation.
@@ -42,13 +41,13 @@ func NewServerTransport(srv *Server) *ServerTransport {
 // ServerTransport connects instances of armkubernetesruntime.Client to instances of Server.
 // Don't use this type directly, use NewServerTransport instead.
 type ServerTransport struct {
-	srv *Server
-	trMu sync.Mutex
-	trBgpPeersServer *BgpPeersServerTransport
+	srv                   *Server
+	trMu                  sync.Mutex
+	trBgpPeersServer      *BgpPeersServerTransport
 	trLoadBalancersServer *LoadBalancersServerTransport
-	trOperationsServer *OperationsServerTransport
-	trServicesServer *ServicesServerTransport
-	trStorageClassServer *StorageClassServerTransport
+	trOperationsServer    *OperationsServerTransport
+	trServicesServer      *ServicesServerTransport
+	trStorageClassServer  *StorageClassServerTransport
 }
 
 // Do implements the policy.Transporter interface for ServerTransport.
@@ -69,23 +68,28 @@ func (s *ServerTransport) dispatchToClientFake(req *http.Request, client string)
 	switch client {
 	case "BgpPeersClient":
 		initServer(&s.trMu, &s.trBgpPeersServer, func() *BgpPeersServerTransport {
-		return NewBgpPeersServerTransport(&s.srv.BgpPeersServer) })
+			return NewBgpPeersServerTransport(&s.srv.BgpPeersServer)
+		})
 		resp, err = s.trBgpPeersServer.Do(req)
 	case "LoadBalancersClient":
 		initServer(&s.trMu, &s.trLoadBalancersServer, func() *LoadBalancersServerTransport {
-		return NewLoadBalancersServerTransport(&s.srv.LoadBalancersServer) })
+			return NewLoadBalancersServerTransport(&s.srv.LoadBalancersServer)
+		})
 		resp, err = s.trLoadBalancersServer.Do(req)
 	case "OperationsClient":
 		initServer(&s.trMu, &s.trOperationsServer, func() *OperationsServerTransport {
-		return NewOperationsServerTransport(&s.srv.OperationsServer) })
+			return NewOperationsServerTransport(&s.srv.OperationsServer)
+		})
 		resp, err = s.trOperationsServer.Do(req)
 	case "ServicesClient":
 		initServer(&s.trMu, &s.trServicesServer, func() *ServicesServerTransport {
-		return NewServicesServerTransport(&s.srv.ServicesServer) })
+			return NewServicesServerTransport(&s.srv.ServicesServer)
+		})
 		resp, err = s.trServicesServer.Do(req)
 	case "StorageClassClient":
 		initServer(&s.trMu, &s.trStorageClassServer, func() *StorageClassServerTransport {
-		return NewStorageClassServerTransport(&s.srv.StorageClassServer) })
+			return NewStorageClassServerTransport(&s.srv.StorageClassServer)
+		})
 		resp, err = s.trStorageClassServer.Do(req)
 	default:
 		err = fmt.Errorf("unhandled client %s", client)
@@ -93,4 +97,3 @@ func (s *ServerTransport) dispatchToClientFake(req *http.Request, client string)
 
 	return resp, err
 }
-

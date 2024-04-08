@@ -31,7 +31,7 @@ func NewAssociationsInterfaceClient(credential azcore.TokenCredential, options *
 		return nil, err
 	}
 	client := &AssociationsInterfaceClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -105,8 +105,8 @@ func (client *AssociationsInterfaceClient) createOrUpdateCreateRequest(ctx conte
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -250,13 +250,13 @@ func (client *AssociationsInterfaceClient) getHandleResponse(resp *http.Response
 //   - trafficControllerName - traffic controller name for path
 //   - options - AssociationsInterfaceClientListByTrafficControllerOptions contains the optional parameters for the AssociationsInterfaceClient.NewListByTrafficControllerPager
 //     method.
-func (client *AssociationsInterfaceClient) NewListByTrafficControllerPager(subscriptionID string, resourceGroupName string, trafficControllerName string, options *AssociationsInterfaceClientListByTrafficControllerOptions) (*runtime.Pager[AssociationsInterfaceClientListByTrafficControllerResponse]) {
+func (client *AssociationsInterfaceClient) NewListByTrafficControllerPager(subscriptionID string, resourceGroupName string, trafficControllerName string, options *AssociationsInterfaceClientListByTrafficControllerOptions) *runtime.Pager[AssociationsInterfaceClientListByTrafficControllerResponse] {
 	return runtime.NewPager(runtime.PagingHandler[AssociationsInterfaceClientListByTrafficControllerResponse]{
 		More: func(page AssociationsInterfaceClientListByTrafficControllerResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AssociationsInterfaceClientListByTrafficControllerResponse) (AssociationsInterfaceClientListByTrafficControllerResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AssociationsInterfaceClient.NewListByTrafficControllerPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AssociationsInterfaceClient.NewListByTrafficControllerPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -268,7 +268,7 @@ func (client *AssociationsInterfaceClient) NewListByTrafficControllerPager(subsc
 				return AssociationsInterfaceClientListByTrafficControllerResponse{}, err
 			}
 			return client.listByTrafficControllerHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -363,8 +363,8 @@ func (client *AssociationsInterfaceClient) updateCreateRequest(ctx context.Conte
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -376,4 +376,3 @@ func (client *AssociationsInterfaceClient) updateHandleResponse(resp *http.Respo
 	}
 	return result, nil
 }
-

@@ -32,7 +32,7 @@ func NewAzureSphereDevicesClient(credential azcore.TokenCredential, options *arm
 		return nil, err
 	}
 	client := &AzureSphereDevicesClient{
-	internal: cl,
+		internal: cl,
 	}
 	return client, nil
 }
@@ -118,8 +118,8 @@ func (client *AzureSphereDevicesClient) createOrUpdateCreateRequest(ctx context.
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, resource); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -283,8 +283,8 @@ func (client *AzureSphereDevicesClient) generateCapabilityImageCreateRequest(ctx
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, body); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -372,13 +372,13 @@ func (client *AzureSphereDevicesClient) getHandleResponse(resp *http.Response) (
 //   - deviceGroupName - Name of device group.
 //   - options - AzureSphereDevicesClientListByDeviceGroupOptions contains the optional parameters for the AzureSphereDevicesClient.NewListByDeviceGroupPager
 //     method.
-func (client *AzureSphereDevicesClient) NewListByDeviceGroupPager(subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, options *AzureSphereDevicesClientListByDeviceGroupOptions) (*runtime.Pager[AzureSphereDevicesClientListByDeviceGroupResponse]) {
+func (client *AzureSphereDevicesClient) NewListByDeviceGroupPager(subscriptionID string, resourceGroupName string, catalogName string, productName string, deviceGroupName string, options *AzureSphereDevicesClientListByDeviceGroupOptions) *runtime.Pager[AzureSphereDevicesClientListByDeviceGroupResponse] {
 	return runtime.NewPager(runtime.PagingHandler[AzureSphereDevicesClientListByDeviceGroupResponse]{
 		More: func(page AzureSphereDevicesClientListByDeviceGroupResponse) bool {
 			return page.NextLink != nil && len(*page.NextLink) > 0
 		},
 		Fetcher: func(ctx context.Context, page *AzureSphereDevicesClientListByDeviceGroupResponse) (AzureSphereDevicesClientListByDeviceGroupResponse, error) {
-		ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereDevicesClient.NewListByDeviceGroupPager")
+			ctx = context.WithValue(ctx, runtime.CtxAPINameKey{}, "AzureSphereDevicesClient.NewListByDeviceGroupPager")
 			nextLink := ""
 			if page != nil {
 				nextLink = *page.NextLink
@@ -390,7 +390,7 @@ func (client *AzureSphereDevicesClient) NewListByDeviceGroupPager(subscriptionID
 				return AzureSphereDevicesClientListByDeviceGroupResponse{}, err
 			}
 			return client.listByDeviceGroupHandleResponse(resp)
-			},
+		},
 	})
 }
 
@@ -504,8 +504,8 @@ func (client *AzureSphereDevicesClient) updateCreateRequest(ctx context.Context,
 	req.Raw().Header["Accept"] = []string{"application/json"}
 	req.Raw().Header["Content-Type"] = []string{"application/json"}
 	if err := runtime.MarshalAsJSON(req, properties); err != nil {
-	return nil, err
-}
+		return nil, err
+	}
 	return req, nil
 }
 
@@ -525,4 +525,3 @@ func (client *AzureSphereDevicesClient) updateHandleResponse(resp *http.Response
 	}
 	return result, nil
 }
-
