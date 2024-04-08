@@ -433,19 +433,47 @@ union DataPreviewStartMode {
   string,
 }
 
+@doc("dataPreviewRange by max records count")
+@discriminator("type")
+model DataPreviewRecordLimit {
+  @doc("type of dataPreviewRange")
+  type: string = "recordLimit";
+
+  @doc("max records count of dataPreview")
+  maxCount: int32;
+}
+
+@doc("dataPreviewRange by time")
+model DataPreviewTimeRange extends DataPreviewRecordLimit {
+  @doc("time type of dataPreviewRange")
+  type: "timeRange";
+  
+  @doc("start time of DataPreview")
+  startTime: utcDateTime;
+
+  @doc("end time of DataPreview")
+  endTime?: utcDateTime;
+}
+
+@doc("dataPreviewRange by offset")
+model DataPreviewOffsetRange extends DataPreviewRecordLimit {
+  @doc("offset type of dataPreviewRange")
+  type: "offsetRange";
+  
+  @doc("start time of DataPreview")
+  startOffset: int64;
+
+  @doc("end time of DataPreview")
+  endOffset?: int64;
+}
+
 @doc("Properties of one arm DataPreview resource")
 model DataPreviewProperties {
   @doc("Properties of one Connector Source")
   connectorProperties: ConnectorProperties;
 
-  @doc("start time of DataPreview")
-  startTime: utcDateTime;
-
-  @doc("end time of DataPreview")
-  endTime: utcDateTime;
-
-  @doc("max limit DataPreview records")
-  limit: int32;
+  @doc("dataPreviewRange of DataPreview")
+  dataPreviewRange: DataPreviewRecordLimit;
 
   @doc("startMode of DataPreview")
   startMode: DataPreviewStartMode;

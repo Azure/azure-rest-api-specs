@@ -1251,6 +1251,31 @@
         }
       ]
     },
+    "DataPreviewOffsetRange": {
+      "type": "object",
+      "description": "dataPreviewRange by offset",
+      "properties": {
+        "startOffset": {
+          "type": "integer",
+          "format": "int64",
+          "description": "start time of DataPreview"
+        },
+        "endOffset": {
+          "type": "integer",
+          "format": "int64",
+          "description": "end time of DataPreview"
+        }
+      },
+      "required": [
+        "startOffset"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataPreviewRecordLimit"
+        }
+      ],
+      "x-ms-discriminator-value": "offsetRange"
+    },
     "DataPreviewProperties": {
       "type": "object",
       "description": "Properties of one arm DataPreview resource",
@@ -1259,20 +1284,9 @@
           "$ref": "#/definitions/ConnectorProperties",
           "description": "Properties of one Connector Source"
         },
-        "startTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "start time of DataPreview"
-        },
-        "endTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "end time of DataPreview"
-        },
-        "limit": {
-          "type": "integer",
-          "format": "int32",
-          "description": "max limit DataPreview records"
+        "dataPreviewRange": {
+          "$ref": "#/definitions/DataPreviewRecordLimit",
+          "description": "dataPreviewRange of DataPreview"
         },
         "startMode": {
           "$ref": "#/definitions/DataPreviewStartMode",
@@ -1286,10 +1300,29 @@
       },
       "required": [
         "connectorProperties",
-        "startTime",
-        "endTime",
-        "limit",
+        "dataPreviewRange",
         "startMode"
+      ]
+    },
+    "DataPreviewRecordLimit": {
+      "type": "object",
+      "description": "dataPreviewRange by max records count",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "type of dataPreviewRange",
+          "default": "recordLimit"
+        },
+        "maxCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "max records count of dataPreview"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type",
+        "maxCount"
       ]
     },
     "DataPreviewResults": {
@@ -1396,6 +1429,31 @@
           }
         ]
       }
+    },
+    "DataPreviewTimeRange": {
+      "type": "object",
+      "description": "dataPreviewRange by time",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "start time of DataPreview"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "end time of DataPreview"
+        }
+      },
+      "required": [
+        "startTime"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataPreviewRecordLimit"
+        }
+      ],
+      "x-ms-discriminator-value": "timeRange"
     },
     "Direction": {
       "type": "string",
