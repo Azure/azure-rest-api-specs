@@ -1,8 +1,8 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
-import "./DevBox/routes.tsp";	
-import "./DevCenter/routes.tsp";	
+import "./DevBox/routes.tsp";
+import "./DevCenter/routes.tsp";
 import "./Environments/routes.tsp";
 
 using Azure.Core;
