@@ -979,7 +979,7 @@
       ],
       "x-ms-enum": {
         "name": "ConnectorState",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Unknown",
@@ -1051,7 +1051,7 @@
       ],
       "x-ms-enum": {
         "name": "ConnectorType",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Unknown",
@@ -1261,19 +1261,23 @@
           "description": "Properties of one Connector Source"
         },
         "startTime": {
-          "type": "integer",
-          "format": "int64",
+          "type": "string",
+          "format": "date-time",
           "description": "start time of DataPreview"
         },
         "endTime": {
-          "type": "integer",
-          "format": "int64",
+          "type": "string",
+          "format": "date-time",
           "description": "end time of DataPreview"
         },
         "limit": {
           "type": "integer",
           "format": "int32",
           "description": "max limit DataPreview records"
+        },
+        "startMode": {
+          "$ref": "#/definitions/DataPreviewStartMode",
+          "description": "startMode of DataPreview"
         },
         "provisioningState": {
           "$ref": "#/definitions/ConnectorProvisioningState",
@@ -1285,7 +1289,8 @@
         "connectorProperties",
         "startTime",
         "endTime",
-        "limit"
+        "limit",
+        "startMode"
       ]
     },
     "DataPreviewResults": {
@@ -1314,6 +1319,48 @@
         "count",
         "results"
       ]
+    },
+    "DataPreviewStartMode": {
+      "type": "string",
+      "description": "StartMode of DataPreview",
+      "enum": [
+        "Snapshot",
+        "Earliest",
+        "Now",
+        "CustomTimeRange",
+        "FromLastAckPosition"
+      ],
+      "x-ms-enum": {
+        "name": "DataPreviewStartMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Snapshot",
+            "value": "Snapshot",
+            "description": "Snapshot mode for CDC data source"
+          },
+          {
+            "name": "Earliest",
+            "value": "Earliest",
+            "description": "DataPreview from the earliest data"
+          },
+          {
+            "name": "Now",
+            "value": "Now",
+            "description": "DataPreview from Now"
+          },
+          {
+            "name": "CustomTimeRange",
+            "value": "CustomTimeRange",
+            "description": "DataPreview from custom time range"
+          },
+          {
+            "name": "FromLastAckPosition",
+            "value": "FromLastAckPosition",
+            "description": "DataPreview from last ack position"
+          }
+        ]
+      }
     },
     "DataPreviewState": {
       "type": "string",

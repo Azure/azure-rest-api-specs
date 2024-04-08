@@ -15,8 +15,15 @@ namespace Microsoft.MessagingConnectors;
 
 @doc("Provisioning states of Connector ARM Resource")
 @lroStatus
-enum ConnectorProvisioningState {
-  ...ResourceProvisioningState,
+union ConnectorProvisioningState {
+  @doc("Resource has been created.")
+  Succeeded: "Succeeded",
+
+  @doc("Resource creation failed.")
+  Failed: "Failed",
+
+  @doc("Resource creation was canceled.")
+  Canceled: "Canceled",
 
   @doc("Accepted State")
   Accepted: "Accepted",
@@ -26,6 +33,8 @@ enum ConnectorProvisioningState {
 
   @doc("Updating State")
   Updating: "Updating",
+
+  string,
 }
 
 @doc("Business State of Connector")
@@ -404,19 +413,42 @@ union DataPreviewState {
   string,
 }
 
+@doc("StartMode of DataPreview")
+union DataPreviewStartMode {
+  @doc("Snapshot mode for CDC data source")
+  Snapshot: "Snapshot",
+
+  @doc("DataPreview from the earliest data")
+  Earliest: "Earliest",
+  
+  @doc("DataPreview from Now")
+  Now: "Now",
+  
+  @doc("DataPreview from custom time range")
+  CustomTimeRange: "CustomTimeRange",
+
+  @doc("DataPreview from last ack position")
+  FromLastAckPosition: "FromLastAckPosition",
+  
+  string,
+}
+
 @doc("Properties of one arm DataPreview resource")
 model DataPreviewProperties {
   @doc("Properties of one Connector Source")
   connectorProperties: ConnectorProperties;
 
   @doc("start time of DataPreview")
-  startTime: int64;
+  startTime: utcDateTime;
 
   @doc("end time of DataPreview")
-  endTime: int64;
+  endTime: utcDateTime;
 
   @doc("max limit DataPreview records")
   limit: int32;
+
+  @doc("startMode of DataPreview")
+  startMode: DataPreviewStartMode;
 
   @doc("State of provisioning of the MessagingConnector ARM Resource")
   @visibility("read")
