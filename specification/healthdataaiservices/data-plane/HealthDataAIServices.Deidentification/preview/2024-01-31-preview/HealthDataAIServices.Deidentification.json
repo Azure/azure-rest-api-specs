@@ -13,13 +13,13 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "https://{deid-service-uri}",
+    "hostTemplate": "https://{endpoint}",
     "useSchemePrefix": false,
     "parameters": [
       {
-        "name": "deid-service-uri",
+        "name": "endpoint",
         "in": "path",
-        "description": "Uri of your Deid Service.",
+        "description": "Url of your Deid Service.",
         "required": true,
         "type": "string"
       }
@@ -54,7 +54,7 @@
   "paths": {
     "/deid": {
       "post": {
-        "operationId": "RealtimeOperations_Deid",
+        "operationId": "Deidentification_Deidentify",
         "summary": "Realtime Synchronous Deidentification.",
         "description": "A remote procedure call (RPC) operation.",
         "parameters": [
@@ -67,7 +67,7 @@
             "description": "The request body for realtime deidentification.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DeidRequest"
+              "$ref": "#/definitions/DeidentifyOptions"
             }
           }
         ],
@@ -75,7 +75,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DeidResponse"
+              "$ref": "#/definitions/DeidentifyResult"
             }
           },
           "default": {
@@ -93,15 +93,15 @@
         },
         "x-ms-examples": {
           "Realtime Synchronous Deidentification.": {
-            "$ref": "./examples/RealtimeOperations_Deid.json"
+            "$ref": "./examples/Deidentification_Deidentify.json"
           }
         }
       }
     },
     "/jobs": {
       "get": {
-        "operationId": "Jobs_List",
-        "summary": "List DeID Jobs",
+        "operationId": "Deidentification_ListJobs",
+        "summary": "List De-Identify Jobs",
         "description": "Resource list operation template.",
         "parameters": [
           {
@@ -121,7 +121,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedJob"
+              "$ref": "#/definitions/PagedDeidentifyJob"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -145,8 +145,8 @@
           }
         },
         "x-ms-examples": {
-          "List DeID Jobs": {
-            "$ref": "./examples/Jobs_List.json"
+          "List De-Identify Jobs": {
+            "$ref": "./examples/Deidentification_ListJobs.json"
           }
         },
         "x-ms-pageable": {
@@ -156,8 +156,8 @@
     },
     "/jobs/{name}": {
       "get": {
-        "operationId": "Jobs_Get",
-        "summary": "Get a DeID Job",
+        "operationId": "Deidentification_GetJob",
+        "summary": "Get a De-Identify Job",
         "description": "Resource read operation template.",
         "parameters": [
           {
@@ -181,7 +181,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Job"
+              "$ref": "#/definitions/DeidentifyJob"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -205,14 +205,14 @@
           }
         },
         "x-ms-examples": {
-          "Get a DeID Job": {
-            "$ref": "./examples/Jobs_Get.json"
+          "Get a De-Identify Job": {
+            "$ref": "./examples/Deidentification_GetJob.json"
           }
         }
       },
       "put": {
-        "operationId": "Jobs_Create",
-        "summary": "Create a DeID Job",
+        "operationId": "Deidentification_CreateJob",
+        "summary": "Create a De-Identify Job",
         "description": "Long-running resource create or replace operation template.",
         "parameters": [
           {
@@ -237,7 +237,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/JobCreateOrUpdate"
+              "$ref": "#/definitions/DeidentifyJobCreateOrUpdate"
             }
           }
         ],
@@ -245,7 +245,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Job"
+              "$ref": "#/definitions/DeidentifyJob"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -263,7 +263,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/Job"
+              "$ref": "#/definitions/DeidentifyJob"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -292,15 +292,15 @@
           }
         },
         "x-ms-examples": {
-          "Create a DeID Job": {
-            "$ref": "./examples/Jobs_Create.json"
+          "Create a De-Identify Job": {
+            "$ref": "./examples/Deidentification_CreateJob.json"
           }
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "Jobs_Delete",
-        "summary": "Delete a DeID Job",
+        "operationId": "Deidentification_DeleteJob",
+        "summary": "Delete a De-Identify Job",
         "description": "Removes the record of the job from the service. Does not delete any files.",
         "parameters": [
           {
@@ -345,16 +345,16 @@
           }
         },
         "x-ms-examples": {
-          "Delete a DeID Job": {
-            "$ref": "./examples/Jobs_Delete.json"
+          "Delete a De-Identify Job": {
+            "$ref": "./examples/Deidentification_DeleteJob.json"
           }
         }
       }
     },
-    "/jobs/{name}:cancel": {
+    "/jobs/{name}:cancelJob": {
       "post": {
-        "operationId": "Jobs_Cancel",
-        "summary": "Cancel a DeID Job",
+        "operationId": "Deidentification_CancelJob",
+        "summary": "Cancel a De-Identify Job",
         "description": "Cancels a job that is in progress. \n\nThe job will be marked as canceled and the service will stop processing the job. The service will not delete any files that have already been processed.\n\nIf the job is already complete, this will have no effect. ",
         "parameters": [
           {
@@ -378,7 +378,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Job"
+              "$ref": "#/definitions/DeidentifyJob"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -402,15 +402,15 @@
           }
         },
         "x-ms-examples": {
-          "Cancel a DeID Job": {
-            "$ref": "./examples/Jobs_Cancel.json"
+          "Cancel a De-Identify Job": {
+            "$ref": "./examples/Deidentification_CancelJob.json"
           }
         }
       }
     },
     "/jobs/{name}/files": {
       "get": {
-        "operationId": "Jobs_ListFiles",
+        "operationId": "Deidentification_ListJobFiles",
         "summary": "List processed files within a Job",
         "description": "Resource list operation template.",
         "parameters": [
@@ -441,7 +441,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedFile"
+              "$ref": "#/definitions/PagedHealthFileDetails"
             },
             "headers": {
               "x-ms-client-request-id": {
@@ -466,7 +466,7 @@
         },
         "x-ms-examples": {
           "List processed files within a Job": {
-            "$ref": "./examples/Jobs_ListFiles.json"
+            "$ref": "./examples/Deidentification_ListJobFiles.json"
           }
         },
         "x-ms-pageable": {
@@ -583,128 +583,7 @@
       "type": "string",
       "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
     },
-    "DeidRequest": {
-      "type": "object",
-      "description": "Request for synchronous DeID operation.",
-      "properties": {
-        "inputText": {
-          "type": "string",
-          "description": "Input text to deidentify.",
-          "maxLength": 100000
-        },
-        "dataType": {
-          "$ref": "#/definitions/DocumentDataType",
-          "description": "Data type of the input.",
-          "default": "PlainText"
-        },
-        "operation": {
-          "$ref": "#/definitions/OperationType",
-          "description": "Operation to perform on the input.",
-          "default": "Surrogate"
-        },
-        "stringIndexType": {
-          "$ref": "#/definitions/StringIndexType",
-          "description": "Requested Encoding of the tag response indices.",
-          "default": "TextElement_v8"
-        },
-        "redactionFormat": {
-          "type": "string",
-          "description": "Format of the redacted output. Only valid when OperationType is Redact.",
-          "maxLength": 16
-        }
-      },
-      "required": [
-        "inputText",
-        "dataType",
-        "operation",
-        "stringIndexType"
-      ]
-    },
-    "DeidResponse": {
-      "type": "object",
-      "description": "Response for synchronous DeID operation.",
-      "properties": {
-        "outputText": {
-          "type": "string",
-          "description": "Output text after deidentification. Not available for Tag Operation."
-        },
-        "taggerResult": {
-          "$ref": "#/definitions/PhiTaggerResult",
-          "description": "Result of the tag operation. Only available for Tag Operation."
-        }
-      }
-    },
-    "DocumentDataType": {
-      "type": "string",
-      "description": "Enum of supported Data Types.",
-      "enum": [
-        "PlainText"
-      ],
-      "x-ms-enum": {
-        "name": "DocumentDataType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "PlainText",
-            "value": "PlainText",
-            "description": "Plain text data type."
-          }
-        ]
-      }
-    },
-    "File": {
-      "type": "object",
-      "description": "File report once job has completed.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Id of the file report.",
-          "readOnly": true
-        },
-        "input": {
-          "$ref": "#/definitions/FileLocation",
-          "description": "File Location for the input."
-        },
-        "output": {
-          "$ref": "#/definitions/FileLocation",
-          "description": "File Location for the output."
-        },
-        "status": {
-          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-          "description": "Status of the file."
-        },
-        "error": {
-          "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "Error when file fails."
-        }
-      },
-      "required": [
-        "id",
-        "input",
-        "status"
-      ]
-    },
-    "FileLocation": {
-      "type": "object",
-      "description": "Location of a file.",
-      "properties": {
-        "path": {
-          "type": "string",
-          "description": "Absolute path to the file in storage.",
-          "maxLength": 1024
-        },
-        "etag": {
-          "$ref": "#/definitions/Azure.Core.eTag",
-          "description": "The entity tag for this resource.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "path",
-        "etag"
-      ]
-    },
-    "Job": {
+    "DeidentifyJob": {
       "type": "object",
       "description": "A job containing a batch of documents to deidentify.",
       "properties": {
@@ -784,7 +663,7 @@
         "createdAt"
       ]
     },
-    "JobCreateOrUpdate": {
+    "DeidentifyJobCreateOrUpdate": {
       "type": "object",
       "description": "A job containing a batch of documents to deidentify.",
       "properties": {
@@ -818,6 +697,127 @@
         "targetLocation",
         "dataType",
         "operation"
+      ]
+    },
+    "DeidentifyOptions": {
+      "type": "object",
+      "description": "Request for synchronous De-Identify operation.",
+      "properties": {
+        "inputText": {
+          "type": "string",
+          "description": "Input text to deidentify.",
+          "maxLength": 100000
+        },
+        "dataType": {
+          "$ref": "#/definitions/DocumentDataType",
+          "description": "Data type of the input.",
+          "default": "PlainText"
+        },
+        "operation": {
+          "$ref": "#/definitions/OperationType",
+          "description": "Operation to perform on the input.",
+          "default": "Surrogate"
+        },
+        "stringIndexType": {
+          "$ref": "#/definitions/StringIndexType",
+          "description": "Requested Encoding of the tag response indices.",
+          "default": "TextElement_v8"
+        },
+        "redactionFormat": {
+          "type": "string",
+          "description": "Format of the redacted output. Only valid when OperationType is Redact.",
+          "maxLength": 16
+        }
+      },
+      "required": [
+        "inputText",
+        "dataType",
+        "operation",
+        "stringIndexType"
+      ]
+    },
+    "DeidentifyResult": {
+      "type": "object",
+      "description": "Response for synchronous De-Identify operation.",
+      "properties": {
+        "outputText": {
+          "type": "string",
+          "description": "Output text after de-identifying. Not available for Tag Operation."
+        },
+        "taggerResult": {
+          "$ref": "#/definitions/PhiTaggerResult",
+          "description": "Result of the tag operation. Only available for Tag Operation."
+        }
+      }
+    },
+    "DocumentDataType": {
+      "type": "string",
+      "description": "Enum of supported Data Types.",
+      "enum": [
+        "PlainText"
+      ],
+      "x-ms-enum": {
+        "name": "DocumentDataType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PlainText",
+            "value": "PlainText",
+            "description": "Plain text data type."
+          }
+        ]
+      }
+    },
+    "FileLocation": {
+      "type": "object",
+      "description": "Location of a file.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Absolute path to the file in storage.",
+          "maxLength": 1024
+        },
+        "etag": {
+          "$ref": "#/definitions/Azure.Core.eTag",
+          "description": "The entity tag for this resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "path",
+        "etag"
+      ]
+    },
+    "HealthFileDetails": {
+      "type": "object",
+      "description": "File report once job has completed.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of the file report.",
+          "readOnly": true
+        },
+        "input": {
+          "$ref": "#/definitions/FileLocation",
+          "description": "File Location for the input."
+        },
+        "output": {
+          "$ref": "#/definitions/FileLocation",
+          "description": "File Location for the output."
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "Status of the file."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error when file fails."
+        }
+      },
+      "required": [
+        "id",
+        "input",
+        "status"
       ]
     },
     "JobStatus": {
@@ -936,16 +936,17 @@
         ]
       }
     },
-    "PagedFile": {
+    "PagedDeidentifyJob": {
       "type": "object",
-      "description": "Paged collection of File items",
+      "description": "Paged collection of DeidentifyJob items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The File items on this page",
+          "description": "The DeidentifyJob items on this page",
           "items": {
-            "$ref": "#/definitions/File"
-          }
+            "$ref": "#/definitions/DeidentifyJob"
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
@@ -957,17 +958,16 @@
         "value"
       ]
     },
-    "PagedJob": {
+    "PagedHealthFileDetails": {
       "type": "object",
-      "description": "Paged collection of Job items",
+      "description": "Paged collection of HealthFileDetails items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Job items on this page",
+          "description": "The HealthFileDetails items on this page",
           "items": {
-            "$ref": "#/definitions/Job"
-          },
-          "x-ms-identifiers": []
+            "$ref": "#/definitions/HealthFileDetails"
+          }
         },
         "nextLink": {
           "type": "string",
