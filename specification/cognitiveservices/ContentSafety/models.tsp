@@ -174,7 +174,7 @@ model TextBlocklistItem {
   @maxLength(128)
   text: string;
 
-  @added(ContentSafety.Versions.v2024_02_15_Preview)
+  @added(ContentSafety.Versions.v2024_04_15_Preview)
   @doc("Optional setting. true means this item is a regex matched term, false means this item is an exact matched term. Default value is false.")
   isRegex?: boolean;
 }
@@ -413,7 +413,7 @@ model TextPromptInjectionResult {
   attackDetected: boolean;
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
+@added(ContentSafety.Versions.v2024_04_15_Preview)
 @doc("The auto reviewer version.")
 @resource("text/autoReviewers")
 model AutoReviewerVersion {
@@ -456,7 +456,7 @@ model AutoReviewerVersion {
   error?: string;
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
+@added(ContentSafety.Versions.v2024_04_15_Preview)
 @doc("The label details in the auto reviewer.")
 model AutoReviewerLabelDetails {
   @doc("The name of the label.")
@@ -466,7 +466,7 @@ model AutoReviewerLabelDetails {
   description: string;
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
+@added(ContentSafety.Versions.v2024_04_15_Preview)
 union AutoReviewerOperationStatus {
   string,
   "NotStarted",
@@ -475,14 +475,14 @@ union AutoReviewerOperationStatus {
   "Failed",
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
+@added(ContentSafety.Versions.v2024_04_15_Preview)
 @doc("List of auto reviewer versions.")
 model AutoReviewerVersionList {
   @doc("List of auto reviewer versions.")
   value: AutoReviewerVersion[];
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
+@added(ContentSafety.Versions.v2024_04_15_Preview)
 @doc("The text auto reviewing request.")
 model AutoReviewTextOptions {
   @doc("The text needs to be auto reviewed.")
@@ -495,7 +495,7 @@ model AutoReviewTextOptions {
   autoReviewerVersion?: int32;
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
+@added(ContentSafety.Versions.v2024_04_15_Preview)
 @doc("The text auto reviewing result.")
 model AutoReviewTextResult {
   @doc("The output label name.")
@@ -505,7 +505,7 @@ model AutoReviewTextResult {
   reasoning: string;
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
+@added(ContentSafety.Versions.v2024_04_15_Preview)
 @doc("The auto reviewer operation.")
 @resource("text/autoReviewers/operations")
 model AutoReviewerOperationDetail {
@@ -522,7 +522,7 @@ model AutoReviewerOperationDetail {
   error?: Azure.Core.Foundations.Error;
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
+@added(ContentSafety.Versions.v2024_04_15_Preview)
 @doc("Text Incident.")
 @resource("text/incidents")
 model TextIncident {
@@ -546,7 +546,7 @@ model TextIncident {
   lastUpdated: utcDateTime;
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
+@added(ContentSafety.Versions.v2024_04_15_Preview)
 @doc("Incident operation status.")
 union IncidentOperationStatus {
   string,
@@ -557,7 +557,7 @@ union IncidentOperationStatus {
   "Canceled",
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
+@added(ContentSafety.Versions.v2024_04_15_Preview)
 @doc("Sample in a Text Incident.")
 @resource("incidentSamples")
 @parentResource(TextIncident)
@@ -573,28 +573,28 @@ model TextIncidentSample {
   text?: string;
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
+@added(ContentSafety.Versions.v2024_04_15_Preview)
 @doc("The request to add incidentSamples to a incident.")
 model AddTextIncidentSamplesOptions {
   @doc("Array of incidentSamples to add.")
   incidentSamples: TextIncidentSample[];
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
+@added(ContentSafety.Versions.v2024_04_15_Preview)
 @doc("The response of adding incidentSamples to the incident.")
 model AddTextIncidentSamplesResult {
   @doc("Array of incidentSamples have been added.")
   incidentSamples: TextIncidentSample[];
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
+@added(ContentSafety.Versions.v2024_04_15_Preview)
 @doc("The request to remove incidentSamples from a incident.")
 model RemoveTextIncidentSamplesOptions {
   @doc("Array of incidentSamples to remove.")
   incidentSampleIds: string[];
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
+@added(ContentSafety.Versions.v2024_04_15_Preview)
 @doc("Image Incident.")
 @resource("image/incidents")
 model ImageIncident {
@@ -614,7 +614,7 @@ model ImageIncident {
   lastUpdated: utcDateTime;
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
+@added(ContentSafety.Versions.v2024_04_15_Preview)
 @doc("Sample in an Image Incident.")
 @resource("incidentSamples")
 @parentResource(ImageIncident)
@@ -629,7 +629,7 @@ model ImageIncidentSample {
   image?: ImageData;
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
+@added(ContentSafety.Versions.v2024_04_15_Preview)
 @doc("Sample Result in an Image Incident.")
 @resource("incidentSamples")
 @parentResource(ImageIncident)
@@ -652,21 +652,21 @@ model ImageDataResult {
   content?: bytes;
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
+@added(ContentSafety.Versions.v2024_04_15_Preview)
 @doc("The request to add incidentSamples to a incident.")
 model AddImageIncidentSamplesOptions {
   @doc("Array of incidentSamples to add.")
   incidentSamples: ImageIncidentSample[];
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
+@added(ContentSafety.Versions.v2024_04_15_Preview)
 @doc("The request to remove incidentSamples from a incident.")
 model RemoveImageIncidentSamplesOptions {
   @doc("Array of incidentSamples to remove.")
   incidentSampleIds: string[];
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
+@added(ContentSafety.Versions.v2024_04_15_Preview)
 @doc("Sample in a Image Incident.")
 @resource("incidentSamples")
 @parentResource(ImageIncident)
@@ -678,26 +678,26 @@ model ListImageIncidentSampleResult {
   incidentSampleId: string;
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
+@added(ContentSafety.Versions.v2024_04_15_Preview)
 @doc("The response of adding incidentSamples to the incident.")
 model AddImageIncidentSamplesResult {
   @doc("Array of incidentSamples have been added.")
   incidentSamples: ListImageIncidentSampleResult[];
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
+@added(ContentSafety.Versions.v2024_04_15_Preview)
 @doc("The text detect incidents analysis request.")
 model AnalyzeTextDetectIncidentsOptions {
   @doc("The text needs to be analyzed if it attempts to detect incidents. We support a maximum of 10 thousands Unicode characters (Unicode code points) in the text of one request.")
   @maxLength(10000)
   text: string;
 
-  @added(ContentSafety.Versions.v2024_02_15_Preview)
+  @added(ContentSafety.Versions.v2024_04_15_Preview)
   @doc("The incidents to detect.")
   incidentNames: string[];
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
+@added(ContentSafety.Versions.v2024_04_15_Preview)
 @doc("The result of text incident match.")
 model IncidentMatch {
   @doc("The name of the matched incident.")
@@ -705,25 +705,25 @@ model IncidentMatch {
   incidentName: string;
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
+@added(ContentSafety.Versions.v2024_04_15_Preview)
 @doc("The detect incidents analysis request.")
 model DetectIncidentsResult {
   @doc("The detect incidents match details.")
   incidentMatches: IncidentMatch[];
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
+@added(ContentSafety.Versions.v2024_04_15_Preview)
 @doc("The image detect incidents analysis request.")
 model AnalyzeImageDetectIncidentsOptions {
   @doc("The image needs to be analyzed.")
   image: ImageData;
 
-  @added(ContentSafety.Versions.v2024_02_15_Preview)
+  @added(ContentSafety.Versions.v2024_04_15_Preview)
   @doc("The incidents to detect.")
   incidentNames: string[];
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
+@added(ContentSafety.Versions.v2024_04_15_Preview)
 @doc("The text incident operation result.")
 @resource("text/incidents/operations")
 model TextIncidentOperationResult {
@@ -741,7 +741,7 @@ model TextIncidentOperationResult {
   error?: Azure.Core.Foundations.Error;
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
+@added(ContentSafety.Versions.v2024_04_15_Preview)
 @doc("The image incident operation result.")
 @resource("image/incidents/operations")
 model ImageIncidentOperationResult {
@@ -759,7 +759,7 @@ model ImageIncidentOperationResult {
   error?: Azure.Core.Foundations.Error;
 }
 
-@added(ContentSafety.Versions.v2024_02_15_Preview)
+@added(ContentSafety.Versions.v2024_04_15_Preview)
 @doc("Incident operation id options.")
 model IncidentOperationIdOptions {
   @doc("The operation id passed by the user, if not provided, will be automatically generated as a UUID.")
