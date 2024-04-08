@@ -143,6 +143,27 @@ directive:
         }
       }
 
+  # local change for network configuration
+  - from: privateLinkScopes.json
+    where: $.definitions["NetworkSecurityPerimeterProfile"].properties.accessRulesVersion
+    transform: >-
+      return {
+        "type": "integer",
+        "format": "int32",
+        "description": "Access rules version number",
+        "readOnly": true
+      }
+
+  - from: privateLinkScopes.json
+    where: $.definitions["NetworkSecurityPerimeterProfile"].properties.diagnosticSettingsVersion
+    transform: >-
+      return {
+        "type": "integer",
+        "format": "int32",
+        "description": "Diagnostic settings version number",
+        "readOnly": true
+      }
+
   # remove cmdlets
   - where:
       subject: NetworkProfile
@@ -174,14 +195,6 @@ directive:
   - remove-operation: LicenseProfiles_Update
   - remove-operation: LicenseProfiles_List
   - remove-operation: LicenseProfiles_CreateOrUpdate
-
-  - remove-operation: NetworkConfigurations_Get
-  - remove-operation: NetworkConfigurations_Update
-  - remove-operation: NetworkConfigurations_CreateOrUpdate
-
-  - remove-operation: NetworkSecurityPerimeterConfigurations_GetByPrivateLinkScope
-  - remove-operation: NetworkSecurityPerimeterConfigurations_ListByPrivateLinkScope
-  - remove-operation: NetworkSecurityPerimeterConfigurations_ReconcileForPrivateLinkScope
 
 ```
 
