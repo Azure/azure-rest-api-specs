@@ -927,6 +927,144 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/models": {
+      "get": {
+        "tags": [
+          "Models"
+        ],
+        "operationId": "ResourceModels_List",
+        "description": "List subscription level Models.",
+        "x-ms-examples": {
+          "ListResourceModels": {
+            "$ref": "./examples/ListResourceModels.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ModelListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/modelCapacities/{model-format}/{model-name}/{model-version}": {
+      "get": {
+        "tags": [
+          "ModelCapacities"
+        ],
+        "operationId": "LocationBasedModelCapacities_List",
+        "description": "List Location Based ModelCapacities.",
+        "x-ms-examples": {
+          "ListModels": {
+            "$ref": "./examples/ListLocationBasedModelCapacities.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/modelFormatParameter"
+          },
+          {
+            "$ref": "#/parameters/modelNameParameter"
+          },
+          {
+            "$ref": "#/parameters/modelVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ModelCapacityListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/modelCapacities/{model-format}/{model-name}/{model-version}": {
+      "get": {
+        "tags": [
+          "ModelCapacities"
+        ],
+        "operationId": "ModelCapacities_List",
+        "description": "List ModelCapacities.",
+        "x-ms-examples": {
+          "ListModels": {
+            "$ref": "./examples/ListModelCapacities.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/modelFormatParameter"
+          },
+          {
+            "$ref": "#/parameters/modelNameParameter"
+          },
+          {
+            "$ref": "#/parameters/modelVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ModelCapacityListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/checkDomainAvailability": {
       "post": {
         "tags": [
@@ -2556,7 +2694,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RaiBlocklistItems"
+              "$ref": "#/definitions/RaiBlocklistItemsAddRequestBody"
             },
             "description": "Properties describing the custom blocklist items."
           }
@@ -2610,7 +2748,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RaiBlocklistItemsRequestBody"
+              "$ref": "#/definitions/RaiBlocklistItemsDeleteRequestBody"
             },
             "description": "List of RAI Blocklist Items Names."
           }
@@ -4089,6 +4227,20 @@
         }
       },
       "description": "The call rate limit Cognitive Services account."
+    },
+    "BillingMeterInfo": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "meterId": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        }
+      }
     },
     "DeploymentCapacitySettings": {
       "type": "object",
@@ -5604,6 +5756,14 @@
           },
           "x-ms-identifiers": [],
           "description": "The list of rateLimit."
+        },
+        "cost": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BillingMeterInfo"
+          },
+          "x-ms-identifiers": [],
+          "description": "The list of billing meter info."
         }
       },
       "description": "Describes an available Cognitive Services Model SKU."
@@ -5709,6 +5869,50 @@
         "inference": {
           "type": "string",
           "description": "The datetime of deprecation of the inference Model."
+        }
+      }
+    },
+    "ModelCapacityListResult": {
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of ModelSkuCapacity.",
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelSkuCapacity"
+          },
+          "x-ms-identifiers": [
+            "model"
+          ],
+          "description": "Gets the list of Cognitive Services accounts ModelSkuCapacity."
+        }
+      },
+      "description": "The list of cognitive services accounts operation response."
+    },
+    "ModelSkuCapacity": {
+      "description": "Cognitive Services account ModelSkuCapacity.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string"
+        },
+        "model": {
+          "type": "object",
+          "$ref": "#/definitions/DeploymentModel"
+        },
+        "skuName": {
+          "type": "string"
+        },
+        "availableCapacity": {
+          "type": "number",
+          "description": "The available capacity for deployment with this model and sku."
+        },
+        "availableFinetuneCapacity": {
+          "type": "number",
+          "description": "The available capacity for deployment with a fine-tune version of this model and sku."
         }
       }
     },
@@ -5924,7 +6128,30 @@
         "name"
       ]
     },
-    "RaiBlocklistItemsRequestBody": {
+    "RaiBlocklistItemsAddRequestBody": {
+      "description": "The list of Cognitive Services RaiBlocklist Items for batch add.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/RaiBlocklistItemRequestBody"
+      },
+      "x-ms-identifiers": [
+        "name"
+      ]
+    },
+    "RaiBlocklistItemRequestBody": {
+      "description": "The Cognitive Services RaiBlocklist Item request body.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/RaiBlocklistItemProperties",
+          "description": "Properties of Cognitive Services RaiBlocklist Item."
+        }
+      }
+    },
+    "RaiBlocklistItemsDeleteRequestBody": {
       "description": "The list of Cognitive Services RaiBlocklist Items Names.",
       "type": "object",
       "items": {
@@ -5955,10 +6182,6 @@
             "update"
           ],
           "description": "Resource tags."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Rai Blocklist Item Name."
         },
         "properties": {
           "$ref": "#/definitions/RaiBlocklistItemProperties",
@@ -6554,6 +6777,33 @@
       "type": "string",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
       "description": "The name of the encryptionScope associated with the Cognitive Services Account",
+      "x-ms-parameter-location": "method"
+    },
+    "modelFormatParameter": {
+      "name": "model-format",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The format of the Model",
+      "x-ms-parameter-location": "method"
+    },
+    "modelNameParameter": {
+      "name": "model-name",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the Model",
+      "x-ms-parameter-location": "method"
+    },
+    "modelVersionParameter": {
+      "name": "model-version",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The version of the Model",
       "x-ms-parameter-location": "method"
     },
     "defenderForAISettingNameParameter": {
