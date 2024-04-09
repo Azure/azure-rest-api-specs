@@ -5,6 +5,7 @@ import "./fleetmember.tsp";
 import "./update/common.tsp";
 import "./update/run.tsp";
 import "./update/strategy.tsp";
+import "./update/autoupgradeprofile.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
