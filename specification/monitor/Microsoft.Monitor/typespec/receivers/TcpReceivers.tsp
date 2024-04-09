@@ -27,7 +27,7 @@ model UdpReceiver is TcpReceiver {
 @doc("Encoding types for streams.")
 union StreamEncodingType {
   string,
-  
+
   @doc("No encoding validation. Treats the file as a stream of raw bytes.")
   nop: "nop",
 
