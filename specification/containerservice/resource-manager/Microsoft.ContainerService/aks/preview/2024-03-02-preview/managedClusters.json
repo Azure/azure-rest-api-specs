@@ -3736,13 +3736,13 @@
         "summary": "Gets a list of load balancers in the specified managed cluster.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -3766,7 +3766,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List Agent Pools by Managed Cluster": {
+          "List Load Balancers by Managed Cluster": {
             "$ref": "./examples/LoadBalancers_List.json"
           }
         }
@@ -3781,23 +3781,23 @@
         "summary": "Rebalance nodes across specific load balancers.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "name": "RebalanceLoadBalancersParameter",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RebalanceLoadBalancersParameter"
+              "$ref": "#/definitions/RebalanceLoadBalancersRequestBody"
             },
             "description": "The names of the load balancers to be rebalanced. If set to empty, all load balancers will be rebalanced."
           }
@@ -3815,7 +3815,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3836,26 +3836,19 @@
         "summary": "Gets the specified load balancer.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "name": "loadBalancerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z][a-z0-9]{0,11}$",
-            "minLength": 1,
-            "maxLength": 12,
-            "description": "The name of the load balancer."
+            "$ref": "#/parameters/LoadBalancerNameParameter"
           }
         ],
         "responses": {
@@ -3886,28 +3879,25 @@
         "summary": "Creates or updates a load balancer in the specified managed cluster.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "name": "loadBalancerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the load balancer."
+            "$ref": "#/parameters/LoadBalancerNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
+            "x-ms-client-flatten": true,
             "schema": {
               "$ref": "#/definitions/LoadBalancer"
             },
@@ -3915,14 +3905,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
-              }
-            },
+          "200": {
+            "description": "The existing load balancer has been successfully updated",
+            "schema": {
+              "$ref": "#/definitions/LoadBalancer"
+            }
+          },
+          "201": {
+            "description": "The new load balancer has been successfully created",
             "schema": {
               "$ref": "#/definitions/LoadBalancer"
             }
@@ -3936,8 +3926,8 @@
         },
         "x-ms-long-running-operation": false,
         "x-ms-examples": {
-          "Create/Update Load Balancer": {
-            "$ref": "./examples/LoadBalancers_Create_Update.json"
+          "Create or update a Load Balancer": {
+            "$ref": "./examples/LoadBalancers_Create_Or_Update.json"
           }
         }
       },
@@ -3949,23 +3939,19 @@
         "summary": "Deletes a load balancer in the specified managed cluster.",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
           },
           {
-            "name": "loadBalancerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the load balancer."
+            "$ref": "#/parameters/LoadBalancerNameParameter"
           }
         ],
         "responses": {
@@ -3976,9 +3962,6 @@
                 "description": "URL to query for status of the operation.",
                 "type": "string"
               }
-            },
-            "schema": {
-              "$ref": "#/definitions/LoadBalancer"
             }
           },
           "204": {
@@ -3987,13 +3970,13 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
-        "x-ms-long-running-operation": false,
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Delete Load Balancer": {
+          "Delete a Load Balancer": {
             "$ref": "./examples/LoadBalancers_Delete.json"
           }
         }
@@ -9801,10 +9784,23 @@
         }
       ],
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/LoadBalancerProperties",
+          "description": "The properties of the load balancer.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "The configurations regarding multiple standard load balancers. If not supplied, single load balancer mode will be used. Multiple standard load balancers mode will be used if at lease one configuration is supplied. There has to be a configuration named `kubernetes`."
+    },
+    "LoadBalancerProperties": {
+      "type": "object",
+      "properties": {
         "name": {
           "type": "string",
-          "readOnly": true,
-          "description": "Name of the public load balancer. There will be an internal load balancer created if needed, and the name will be `<name>-internal`. The internal lb shares the same configurations as the external one. The internal lbs are not needed to be included in LoadBalancer list. There must be a name of “kubernetes” in the list."
+          "description": "Name of the public load balancer. There will be an internal load balancer created if needed, and the name will be `<name>-internal`. The internal lb shares the same configurations as the external one. The internal lbs are not needed to be included in LoadBalancer list. There must be a name of kubernetes in the list."
         },
         "primaryAgentPoolName": {
           "type": "string",
@@ -9835,19 +9831,18 @@
       "required": [
         "name",
         "primaryAgentPoolName"
-      ],
-      "description": "The configurations regarding multiple standard load balancers. If not supplied, single load balancer mode will be used. Multiple standard load balancers mode will be used if at lease one configuration is supplied. There has to be a configuration named `kubernetes`."
+      ]
     },
     "LabelSelector": {
       "type": "object",
       "description": "A label selector is a label query over a set of resources. The result of matchLabels and matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches no objects.",
       "properties": {
         "matchLabels": {
-          "type": "object",
-          "additionalProperties": {
+          "type": "array",
+          "items": {
             "type": "string"
           },
-          "description": "matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is `key`, the operator is `In`, and the values array contains only `value`. The requirements are ANDed."
+          "description": "matchLabels is an array of {key=value} pairs. A single {key=value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is `key`, the operator is `In`, and the values array contains only `value`. The requirements are ANDed."
         },
         "matchExpressions": {
           "type": "array",
@@ -9893,7 +9888,7 @@
               {
                 "value": "DoesNotExist",
                 "description": "The value of the key should not exist."
-              },
+              }
             ]
           },
           "description": "operator represents a key's relationship to a set of values. Valid operators are In and NotIn"
@@ -9907,7 +9902,7 @@
         }
       }
     },
-    "RebalanceLoadBalancersParameter": {
+    "RebalanceLoadBalancersRequestBody": {
       "type": "object",
       "properties": {
         "loadBalancerNames": {
@@ -9923,6 +9918,17 @@
     }
   },
   "parameters": {
+    "LoadBalancerNameParameter": {
+      "name": "loadBalancerName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]{0,11}$",
+      "minLength": 1,
+      "maxLength": 12,
+      "description": "The name of the load balancer.",
+      "x-ms-parameter-location": "method"
+    },
     "ResourceNameParameter": {
       "name": "resourceName",
       "in": "path",
