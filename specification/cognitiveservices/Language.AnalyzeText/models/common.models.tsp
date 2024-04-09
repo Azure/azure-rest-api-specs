@@ -531,7 +531,7 @@ model InputWarning {
 }
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("if showStats=true was specified in the request this field will contain information about the request payload.")
-model RequestStatistics is Record<unknown> {
+model RequestStatistics {
   @doc("Number of documents submitted in the request.")
   documentsCount: int32;
 
@@ -954,8 +954,8 @@ enum redactionCharacter {
 
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @clientName("AnalyzeTextError", "csharp")
-@doc("The error object.")
-model Error is Record<unknown> {
+@doc("The error response object returned when the service encounters some errors during processing the request.")
+model Error {
   @doc("One of a server-defined set of error codes.")
   code: ErrorCode;
 
