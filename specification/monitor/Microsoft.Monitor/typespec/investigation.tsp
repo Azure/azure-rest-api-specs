@@ -37,8 +37,10 @@ model InvestigationResource is ExtensionResource<InvestigationProperties> {
 enum FilterOperator {
   @doc("Include this tag in the filter")
   include,
+
   @doc("Exclude this tag from the filter")
   exclude,
+
   @doc("Filter using this tag as the start of the scope")
   startsWith,
 }
@@ -51,8 +53,10 @@ enum FilterOperator {
 enum Sensitivity {
   @doc("Low sensitivity for the investigation")
   low,
+
   @doc("Medium sensitivity for the investigation")
   medium,
+
   @doc("High sensitivity for the investigation")
   high,
 }
@@ -66,10 +70,13 @@ enum Sensitivity {
 enum InvestigationProvisioningState {
   @doc("No investigation operation state")
   none,
+
   @doc("Running investigation operation state")
   running,
+
   @doc("Investigation operation succeeded")
   succeeded,
+
   @doc("Investigation operation failed")
   failed,
 }
@@ -82,10 +89,13 @@ enum InvestigationProvisioningState {
 enum HealthState {
   @doc("Investigation health state is unknown")
   `unknown`,
+
   @doc("Investigation health state is healthy")
   healthy,
+
   @doc("Investigation health state is degraded")
   degraded,
+
   @doc("Investigation health state is unhealthy")
   unhealthy,
 }
@@ -98,10 +108,13 @@ enum HealthState {
 enum ConfidenceLevel {
   @doc("Investigation result confidence level is unknown")
   `unknown`,
+
   @doc("Investigation result confidence level is low")
   low,
+
   @doc("Investigation result confidence level is medium")
   medium,
+
   @doc("Investigation result confidence level is high")
   high,
 }
@@ -114,8 +127,10 @@ enum ConfidenceLevel {
 enum ResultType {
   @doc("Resource Health Investigation result")
   resourceHealth,
+
   @doc("Correlated Metric Anomalies Investigation result")
   correlatedMetricAnomalies,
+
   @doc("Azure Metric Anomaly Investigation result")
   azureMetricAnomaly,
 }
@@ -303,10 +318,10 @@ model InvestigationResult {
    */
   resultType?: ResultType;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   /**
    * The details of the investigation result.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   details?: Record<unknown>;
 }
 
@@ -388,16 +403,15 @@ interface Investigations {
    */
   @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
   listAtSubscription is ArmListBySubscription<
-  InvestigationResource,
-  {
-    /**
-     * The number of results to get. If null is passed, returns all Investigations.
-     */
-    @query("$top")
-    $top?: int32;
-  }
->;
-
+    InvestigationResource,
+    {
+      /**
+       * The number of results to get. If null is passed, returns all Investigations.
+       */
+      @query("$top")
+      $top?: int32;
+    }
+  >;
 }
 
 @@projectedName(Investigations.createOrUpdateAtResource::parameters.resource,
