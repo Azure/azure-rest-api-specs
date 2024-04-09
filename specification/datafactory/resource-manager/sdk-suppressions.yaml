@@ -1,0 +1,46 @@
+suppressions:
+  azure-sdk-for-go:
+    - package: 'sdk/resourcemanager/datafactory/armdatafactory'
+      breaking-changes:
+        - Field `ManagedIdentityCredentialResource` of struct `CredentialOperationsClientCreateOrUpdateResponse` has been removed
+        - Field `ManagedIdentityCredentialResource` of struct `CredentialOperationsClientGetResponse` has been removed
+        - Field `TypeProperties` of struct `ManagedIdentityCredential` has been removed
+        - Function `*ClientFactory.NewOperationsClient` has been removed
+        - Function `*CredentialOperationsClient.CreateOrUpdate` parameter(s) have been changed from `(context.Context, string, string, string, ManagedIdentityCredentialResource, *CredentialOperationsClientCreateOrUpdateOptions)` to `(context.Context, string, string, string, CredentialResource, *CredentialOperationsClientCreateOrUpdateOptions)`
+        - Function `*OperationsClient.NewListPager` has been removed
+        - Function `NewOperationsClient` has been removed
+        - Struct `ManagedIdentityCredentialResource` has been removed
+        - Struct `ManagedIdentityTypeProperties` has been removed
+        - Struct `OperationDisplay` has been removed
+        - Struct `OperationListResponse` has been removed
+        - Struct `OperationLogSpecification` has been removed
+        - Struct `OperationMetricAvailability` has been removed
+        - Struct `OperationMetricDimension` has been removed
+        - Struct `OperationMetricSpecification` has been removed
+        - Struct `OperationProperties` has been removed
+        - Struct `OperationServiceSpecification` has been removed
+        - Struct `Operation` has been removed
+        - Type of `AzureFunctionActivityTypeProperties.Headers` has been changed from `map[string]*string` to `map[string]any`
+        - Type of `CredentialListResponse.Value` has been changed from `[]*ManagedIdentityCredentialResource` to `[]*CredentialResource`
+        - Type of `WebActivityTypeProperties.Headers` has been changed from `map[string]*string` to `map[string]any`
+        - Type of `WebHookActivityTypeProperties.Headers` has been changed from `map[string]*string` to `map[string]any`
+
+  azure-sdk-for-js:
+    - package: '@azure/arm-datafactory'
+      breaking-changes:
+        - Removed operation group Operations
+        - Operation CredentialOperations.createOrUpdate has a new signature
+        - Interface ManagedIdentityCredential no longer has parameter resourceId
+        - Class DataFactoryManagementClient no longer has parameter operations
+        - "Type of parameter headers of interface AzureFunctionActivity is changed from {\n        [propertyName: string]: string;\n    } to {\n        [propertyName: string]: any;\n    }"
+        - "Type of parameter headers of interface WebActivity is changed from {\n        [propertyName: string]: string;\n    } to {\n        [propertyName: string]: any;\n    }"
+        - "Type of parameter headers of interface WebHookActivity is changed from {\n        [propertyName: string]: string;\n    } to {\n        [propertyName: string]: any;\n    }"
+        - Type of parameter value of interface CredentialListResponse is changed from ManagedIdentityCredentialResource[] to CredentialResource[]
+    
+  azure-sdk-for-python:
+    - package: track2_azure-mgmt-datafactory
+      breaking-changes:
+        - Model ManagedIdentityCredential no longer has parameter resource_id
+        - Removed operation group Operations
+
+  
