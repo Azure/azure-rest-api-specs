@@ -9,8 +9,7 @@ using TypeSpec.Rest;
 
 namespace Face;
 
-@doc("Query parameters for detect API.")
-model FaceDetectionOptions {
+alias FaceDetectionOptions = {
   @doc("Return faceIds of the detected faces or not. The default value is true.")
   @query
   returnFaceId?: boolean = true;
@@ -42,7 +41,7 @@ model FaceDetectionOptions {
   @minValue(60)
   @maxValue(86400)
   faceIdTimeToLive?: int32 = 86400;
-}
+};
 
 #suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Use fixed enum to represent modelAsString = false"
 @doc("Available options for detect face with attribute.")

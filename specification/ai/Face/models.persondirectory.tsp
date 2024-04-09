@@ -67,16 +67,14 @@ model DynamicPersonGroup {
   ...UserDefinedFields;
 }
 
-@doc("Request of create dynamic person group.")
-model CreateDynamicPersonGroupContent {
+alias CreateDynamicPersonGroupOptions = {
   @doc("Array of personIds created by PersonDirectory Person - Create to add.")
   addPersonIds?: uuid[];
 
   ...UserDefinedFields;
-}
+};
 
-@doc("Request of update dynamic person group.")
-model UpdateDynamicPersonGroupContent {
+alias UpdateDynamicPersonGroupOptions = {
   @doc("Array of personIds created by PersonDirectory Person - Create to add.")
   addPersonIds?: uuid[];
 
@@ -84,7 +82,7 @@ model UpdateDynamicPersonGroupContent {
   removePersonIds?: uuid[];
 
   ...UserDefinedFields;
-}
+};
 
 @doc("Response of list dynamic person group of person.")
 model ListGroupReferenceResult {

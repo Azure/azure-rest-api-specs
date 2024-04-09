@@ -196,7 +196,7 @@ interface PersonDirectoryOperations {
   """)
   @returnsDoc(DynamicPersonGroupModificationAccepted)
   @put
-  createDynamicPersonGroup is DynamicPersonGroupLongRunningOperation<CreateDynamicPersonGroupContent>;
+  createDynamicPersonGroup is DynamicPersonGroupLongRunningOperation<CreateDynamicPersonGroupOptions>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @summary("Deletes an existing dynamic person group with specified dynamicPersonGroupId.")
@@ -221,7 +221,7 @@ interface PersonDirectoryOperations {
   """)
   @returnsDoc(DynamicPersonGroupModificationAccepted)
   @patch
-  updateDynamicPersonGroup is DynamicPersonGroupLongRunningOperation<UpdateDynamicPersonGroupContent>;
+  updateDynamicPersonGroup is DynamicPersonGroupLongRunningOperation<UpdateDynamicPersonGroupOptions>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @summary("List all existing dynamic person groups by dynamicPersonGroupId along with name and userData.")

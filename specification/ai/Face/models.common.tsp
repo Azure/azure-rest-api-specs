@@ -27,8 +27,7 @@ model ApiVersionPathParameter {
   apiVersion: string;
 }
 
-@doc("The request for list resources.")
-model ListRequestOptions {
+alias ListRequestOptions = {
   @doc("List resources greater than the \"start\". It contains no more than 64 characters. Default is empty.")
   @query
   start?: string;
@@ -38,7 +37,7 @@ model ListRequestOptions {
   @minValue(1)
   @maxValue(1000)
   top?: int32 = 1000;
-}
+};
 
 @doc("The recognition model for the face.")
 @clientName("FaceRecognitionModel")
@@ -73,8 +72,7 @@ union DetectionModel {
   "detection_03",
 }
 
-@doc("Model for object name and user data.")
-model UserDefinedFields {
+alias UserDefinedFields = {
   @doc("User defined name, maximum length is 128.")
   @maxLength(128)
   @minLength(1)
@@ -83,7 +81,7 @@ model UserDefinedFields {
   @doc("Optional user defined data. Length should not exceed 16K.")
   @maxLength(16384)
   userData?: string;
-}
+};
 
 @doc("Common model for face list and person group.")
 model BaseCollection {
@@ -93,13 +91,12 @@ model BaseCollection {
   recognitionModel?: RecognitionModel;
 }
 
-@doc("Model for create face list and person group.")
-model CreateCollectionOptions {
+alias CreateCollectionOptions = {
   ...UserDefinedFields;
 
   @doc("The 'recognitionModel' associated with this face list. Supported 'recognitionModel' values include 'recognition_01', 'recognition_02, 'recognition_03', and 'recognition_04'. The default value is 'recognition_01'. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.")
   recognitionModel?: RecognitionModel = "recognition_01";
-}
+};
 
 @doc("Common model for persisted face.")
 @resource("persistedfaces")
@@ -114,8 +111,7 @@ model BaseFace {
   userData?: string;
 }
 
-@doc("Query parameter for adding face to person.")
-model AddFaceOptions {
+alias AddFaceOptions = {
   @doc("A face rectangle to specify the target face to be added to a person, in the format of 'targetFace=left,top,width,height'.")
   @query({
     format: "csv",
@@ -132,7 +128,7 @@ model AddFaceOptions {
   @doc("User-provided data attached to the face. The size limit is 1K.")
   @maxLength(1024)
   userData?: string;
-}
+};
 
 @doc("Response body for adding face.")
 model AddFaceResult {
@@ -146,12 +142,11 @@ model CreatePersonResult {
   personId: uuid;
 }
 
-@doc("Query parameters for whether response resource should include recognition model.")
-model ReturnRecognitionModelOptions {
+alias ReturnRecognitionModelOptions = {
   @query
   @doc("Return 'recognitionModel' or not. The default value is false.")
   returnRecognitionModel?: boolean = false;
-}
+};
 
 #suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Use fixed enum to represent modelAsString = false"
 @doc("The status of long running operation.")
