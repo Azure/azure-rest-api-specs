@@ -6,39 +6,41 @@ using TypeSpec.Versioning;
 
 namespace Language.AnalyzeText;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Contains the analyze text Entity linking input.")
 model AnalyzeTextEntityLinkingInput extends AnalyzeTextTask {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Kind for Entity linking input.")
   kind: AnalyzeTextTaskKind.EntityLinking;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Contains the analysis input to be handled by the service.")
   analysisInput?: MultiLanguageAnalysisInput;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Task parameters.")
   parameters?: EntityLinkingTaskParameters;
 }
 
 @doc("Supported parameters for an Entity Linking task.")
 @clientName("EntityLinkingTaskContent", "csharp")
 model EntityLinkingTaskParameters is PreBuiltTaskParameters {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Optional parameter to provide the string index type used to interpret string offsets. Defaults to TextElements (Graphemes).")
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Contains the analyze text Entity linking LRO task.")
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 model EntityLinkingLROTask extends AnalyzeTextLROTask {
+  @doc("Kind of task result")
   kind: AnalyzeTextLROTaskKind.EntityLinking;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Task parameters.")
   parameters?: EntityLinkingTaskParameters;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Contains the analyze text Entity linking task result.")
 model EntityLinkingTaskResult extends AnalyzeTextTaskResult {
+  @doc("Kind of task result")
   kind: AnalyzeTextTaskResultsKind.EntityLinkingResults;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Entity linking result.")
   results: EntityLinkingResult;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Entity linking result.")
 model EntityLinkingResult is PreBuiltResult {
   @doc("Response by document")
   @typeChangedFrom(
@@ -48,20 +50,20 @@ model EntityLinkingResult is PreBuiltResult {
   documents: Array<EntityLinkingResultWithDetectedLanguage>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Entity linking document result.")
 model LinkedEntitiesDocumentResult is DocumentResult {
   @doc("Recognized well known entities in the document.")
   entities: Array<LinkedEntity>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Entity linking document result with auto language detection.")
 @added(Versions.v2023_04_15_preview)
 model EntityLinkingResultWithDetectedLanguage {
   ...LinkedEntitiesDocumentResult;
   ...DocumentDetectedLanguage;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("The LinkedEntity object containing the detected entity with the associated sources/links.")
 model LinkedEntity {
   @doc("Entity Linking formal name.")
   name: string;
@@ -85,7 +87,7 @@ model LinkedEntity {
   bingId?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("The Match object containing the detected entity text with the offset and the length.")
 @clientName("EntityLinkingMatch", "csharp")
 model Match {
   @doc("If a well known item is recognized, a decimal number denoting the confidence level between 0 and 1 will be returned.")
@@ -101,7 +103,7 @@ model Match {
   length: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Contains the analyze text Entity linking task LRO result.")
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 model EntityLinkingLROResult extends AnalyzeTextLROResult {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"

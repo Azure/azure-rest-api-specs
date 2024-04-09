@@ -9,36 +9,35 @@ namespace Language.AnalyzeText;
 @clientName("CustomHealthcareTaskContent", "csharp")
 @doc("Supported parameters for a custom Healthcare task.")
 model CustomHealthcareTaskParameters is CustomTaskParameters {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Optional parameter to provide the string index type used to interpret string offsets. Defaults to TextElements (Graphemes).")
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@doc("Contains the custom healthcare task definition.")
 @added(Versions.v2023_04_15_preview)
 model CustomHealthcareLROTask extends AnalyzeTextLROTask {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   kind: AnalyzeTextLROTaskKind.CustomHealthcare;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Contains the custom healthcare task parameters.")
   parameters?: CustomHealthcareTaskParameters;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_15_preview)
+@doc("Contains the custom healthcare result for the request.")
 model CustomHealthcareResult is CustomResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("List of custom healthcare results for the document.")
   documents: Array<CustomHealthcareEntitiesDocumentResultWithDocumentDetectedLanguage>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_15_preview)
+@doc("Contains the document custom healthcare results with detected language.")
 model CustomHealthcareEntitiesDocumentResultWithDocumentDetectedLanguage
   is CustomHealthcareEntitiesDocumentResult {
   ...DocumentDetectedLanguage;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_15_preview)
+@doc("Contains the document custom healthcare results.") 
 model CustomHealthcareEntitiesDocumentResult is DocumentResult {
   @doc("Healthcare entities.")
   entities: Array<CustomHealthcareEntity>;
@@ -47,19 +46,18 @@ model CustomHealthcareEntitiesDocumentResult is DocumentResult {
   relations: Array<HealthcareRelation>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Contains the custom healthcare entity.") 
 @added(Versions.v2023_04_15_preview)
 model CustomHealthcareEntity is HealthcareEntity {
   @doc("(Optional) Entity component information listing fired components of the extracted entity. This object only applies for custom healthcare.")
   entityComponentInformation?: Array<EntityComponentInformation>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @added(Versions.v2023_04_15_preview)
+@doc("Contains the custom healthcare job result.")
 model CustomHealthcareLROResult extends AnalyzeTextLROResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   kind: AnalyzeTextLROResultsKind.CustomHealthcareLROResults;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Contains the list of document results.")
   results: CustomHealthcareResult;
 }

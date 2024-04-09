@@ -6,19 +6,18 @@ using TypeSpec.Versioning;
 
 namespace Language.AnalyzeText;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Contains the language detection document analysis input.")
 model LanguageDetectionAnalysisInput {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("List of documents to be analyzed.")
   documents?: Array<LanguageInput>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Contains the language detection document analysis task input.")
 model AnalyzeTextLanguageDetectionInput extends AnalyzeTextTask {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   kind: AnalyzeTextTaskKind.LanguageDetection;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Documents to be analyzed.")
   analysisInput?: LanguageDetectionAnalysisInput;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("task parameters.")
   parameters?: LanguageDetectionTaskParameters;
 }
 
@@ -26,27 +25,26 @@ model AnalyzeTextLanguageDetectionInput extends AnalyzeTextTask {
 @doc("Supported parameters for a Language Detection task.")
 model LanguageDetectionTaskParameters is PreBuiltTaskParameters;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Contains the language detection task result for the request.")
 model LanguageDetectionTaskResult extends AnalyzeTextTaskResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   kind: AnalyzeTextTaskResultsKind.LanguageDetectionResults;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Contains the language detection results.")
   results: LanguageDetectionResult;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Contains the language detection result for the request.")
 model LanguageDetectionResult is PreBuiltResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Enumeration of language detection results for each input document.")
   documents: Array<LanguageDetectionDocumentResult>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Contains the language detection for a document.")
 model LanguageDetectionDocumentResult is DocumentResult {
   @doc("Detected Language.")
   detectedLanguage: DetectedLanguage;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Contains the details of the detected language for the text.")
 model DetectedLanguage {
   @doc("Long name of a detected language (e.g. English, French).")
   name: string;
@@ -306,7 +304,7 @@ enum ScriptCode {
   Tibt,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Contains the language detection input.")
 model LanguageInput {
   @doc("A unique, non-empty document identifier.")
   id: string;
@@ -314,6 +312,6 @@ model LanguageInput {
   @doc("The input text to process.")
   text: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("The country hint to help with language detection of the text.")
   countryHint?: string;
 }
