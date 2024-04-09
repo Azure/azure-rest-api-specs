@@ -317,12 +317,12 @@ model InvestigationResult {
  * Common fields that are returned in the response for all Azure Resource Manager resources
  */
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
+@extension("x-ms-azure-resource", true)
 model Resource {
   /**
    * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
    */
   @visibility("read")
-  @extension("x-ms-azure-resource", true)
   id?: ResourceIdentifier;
 
   /**
@@ -418,10 +418,10 @@ interface Investigations {
   "json",
   "investigation"
 );
-@@extension(Investigations.createOrUpdateAtResource::parameters.resource,
-  "x-ms-client-name",
-  "investigation"
-);
+// @@extension(Investigations.createOrUpdateAtResource::parameters.resource,
+//   "x-ms-client-name",
+//   "investigation"
+// );
 @@doc(Investigations.createOrUpdateAtResource::parameters.resource,
-  "Additional parameters supplied to the operation."
+  "Investigation body to create/update"
 );

@@ -79,6 +79,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Lists the Microsoft.Monitor resource provider operations": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -111,6 +116,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Azure Monitor Workspaces by subscription": {
+            "$ref": "./examples/AzureMonitorWorkspacesListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -194,6 +204,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List Pipeline groups by subscription": {
+            "$ref": "./examples/PipelineGroupListBySubscription.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -229,6 +244,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Azure Monitor Workspaces by resource group": {
+            "$ref": "./examples/AzureMonitorWorkspacesListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -274,6 +294,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieves an Azure Monitor Workspace": {
+            "$ref": "./examples/AzureMonitorWorkspaceGet.json"
           }
         }
       },
@@ -338,6 +363,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Creates an Azure Monitor Workspace": {
+            "$ref": "./examples/AzureMonitorWorkspaceCreate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -390,6 +420,11 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Updates an Azure Monitor Workspace": {
+            "$ref": "./examples/AzureMonitorWorkspaceUpdate.json"
+          }
         }
       },
       "delete": {
@@ -440,6 +475,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes an Azure Monitor Workspace asynchronously": {
+            "$ref": "./examples/AzureMonitorWorkspaceDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -569,12 +609,12 @@
           {
             "name": "investigation",
             "in": "body",
-            "description": "Additional parameters supplied to the operation.",
+            "description": "Investigation body to create/update",
             "required": true,
             "schema": {
               "$ref": "#/definitions/InvestigationResource"
             },
-            "x-ms-client-name": "investigation"
+            "x-ms-client-name": "resource"
           }
         ],
         "responses": {
@@ -695,6 +735,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List Pipeline groups by resource group": {
+            "$ref": "./examples/PipelineGroupListByResourceGroup.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -738,6 +783,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieves a PipelineGroup instance by name": {
+            "$ref": "./examples/PipelineGroupGet.json"
           }
         }
       },
@@ -800,6 +850,20 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create a PipelineGroup instance using UDP receiver": {
+            "$ref": "./examples/PipelineGroupCreateUdp.json"
+          },
+          "Create a PipelineGroup instance using a syslog receiver": {
+            "$ref": "./examples/PipelineGroupCreateSyslogs.json"
+          },
+          "Create a PipelineGroup instance using a syslog receiver and cache.": {
+            "$ref": "./examples/PipelineGroupCreateSyslogsWithCache.json"
+          },
+          "Create a PipelineGroup instance using a syslog receiver and networking configurations.": {
+            "$ref": "./examples/PipelineGroupCreateSyslogsWithNetworking.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -869,6 +933,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Updates a PipelineGroup instance": {
+            "$ref": "./examples/PipelineGroupUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -922,6 +991,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a PipelineGroup instance": {
+            "$ref": "./examples/PipelineGroupDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1414,14 +1488,12 @@
         "dataCollectionRuleResourceId": {
           "type": "string",
           "description": "The Azure resource Id of the default data collection rule for this workspace.",
-          "readOnly": true,
-          "x-ms-azure-resource": true
+          "readOnly": true
         },
         "dataCollectionEndpointResourceId": {
           "type": "string",
           "description": "The Azure resource Id of the default data collection endpoint for this workspace.",
-          "readOnly": true,
-          "x-ms-azure-resource": true
+          "readOnly": true
         }
       }
     },
@@ -2207,7 +2279,6 @@
           "format": "arm-id",
           "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\"",
           "readOnly": true,
-          "x-ms-azure-resource": true,
           "x-ms-arm-id-details": {
             "allowedResources": []
           }
@@ -2227,7 +2298,8 @@
           "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
           "readOnly": true
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "ResourceMap": {
       "type": "object",
