@@ -52,9 +52,13 @@ time.
 
     @doc("Accept header")
     @header
-    accept: "application/vnd.microsoft.appconfig.keyset+json, application/problem+json";
+    accept: "application/vnd.microsoft.appconfig.keyset+json" | "application/problem+json";
   },
-  KeyListResult
+  KeyListResult & {
+    @doc("Used to guarantee real-time consistency between requests.")
+    @header("Sync-Token")
+    syncToken?: string;
+  }
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
@@ -172,9 +176,9 @@ https://aka.ms/azconfig/docs/keyvaluefiltering
 
     @doc("Accept header")
     @header
-    accept: "application/vnd.microsoft.appconfig.kvset+json, application/problem+json";
+    accept: "application/vnd.microsoft.appconfig.kvset+json" | "application/problem+json";
   },
-  KeyValueListResult
+  KeyValueListResult & AppConfigResponseHeaders
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
@@ -302,8 +306,8 @@ match the value provided.
 
       @doc("Accept header")
       @header
-      accept: "application/vnd.microsoft.appconfig.kv+json, application/problem+json";
-    }>
+      accept: "application/vnd.microsoft.appconfig.kv+json" | "application/problem+json";
+    }> & ResponseHeadersTrait<AppConfigResponseHeaders>
 >;
 
 // FIXME: check is service returns 201 and/or 200?
@@ -347,7 +351,7 @@ match the value provided.
 
     @doc("Accept header")
     @header
-    accept: "application/vnd.microsoft.appconfig.kv+json, application/problem+json";
+    accept: "application/vnd.microsoft.appconfig.kv+json" | "application/problem+json";
   },
   KeyValue & AppConfigResponseHeaders
 >;
@@ -380,7 +384,7 @@ value provided.
 
     @doc("Accept header")
     @header
-    accept: "application/vnd.microsoft.appconfig.kv+json, application/problem+json";
+    accept: "application/vnd.microsoft.appconfig.kv+json" | "application/problem+json";
   },
   (KeyValue & AppConfigResponseHeaders) | AppConfigResponseHeaders
 >;
@@ -472,7 +476,7 @@ to by the specified token.
 
     @doc("Accept header")
     @header
-    accept: "application/vnd.microsoft.appconfig.snapshotset+json, application/problem+json";
+    accept: "application/vnd.microsoft.appconfig.snapshotset+json" | "application/problem+json";
   },
   SnapshotListResult
 >;
@@ -535,7 +539,7 @@ match the value provided.
 
       @doc("Accept header")
       @header
-      accept: "application/vnd.microsoft.appconfig.snapshot+json, application/problem+json";
+      accept: "application/vnd.microsoft.appconfig.snapshot+json" | "application/problem+json";
     }>
 >;
 
@@ -563,7 +567,7 @@ op createSnapshot is Foundations.LongRunningOperation<
 
     @doc("Accept header")
     @header
-    accept: "application/vnd.microsoft.appconfig.snapshot+json, application/problem+json";
+    accept: "application/vnd.microsoft.appconfig.snapshot+json" | "application/problem+json";
   },
   CreatedResponse &
     Snapshot & {
@@ -611,7 +615,7 @@ match the value provided.
 
     @doc("Accept header")
     @header
-    accept: "application/vnd.microsoft.appconfig.snapshot+json, application/problem+json";
+    accept: "application/vnd.microsoft.appconfig.snapshot+json" | "application/problem+json";
   },
   Snapshot & {
     ...AppConfigResponseHeaders;
@@ -697,7 +701,7 @@ time.
 
     @doc("Accept header")
     @header
-    accept: "application/vnd.microsoft.appconfig.labelset+json, application/problem+json";
+    accept: "application/vnd.microsoft.appconfig.labelset+json" | "application/problem+json";
   },
   LabelListResult
 >;
@@ -780,7 +784,7 @@ match the value provided.
 
     @doc("Accept header")
     @header
-    accept: "application/vnd.microsoft.appconfig.kv+json, application/problem+json";
+    accept: "application/vnd.microsoft.appconfig.kv+json" | "application/problem+json";
   },
   KeyValue & AppConfigResponseHeaders
 >;
@@ -821,7 +825,7 @@ match the value provided.
 
     @doc("Accept header")
     @header
-    accept: "application/vnd.microsoft.appconfig.kv+json, application/problem+json";
+    accept: "application/vnd.microsoft.appconfig.kv+json" | "application/problem+json";
   },
   KeyValue & AppConfigResponseHeaders
 >;
@@ -885,7 +889,7 @@ https://aka.ms/azconfig/docs/restapirevisions
 
     @doc("Accept header")
     @header
-    accept: "application/vnd.microsoft.appconfig.kvset+json, application/problem+json";
+    accept: "application/vnd.microsoft.appconfig.kvset+json" | "application/problem+json";
   },
   KeyValueListResult & AppConfigResponseHeaders
 >;

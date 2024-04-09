@@ -13,7 +13,7 @@ using TypeSpec.Versioning;
 @versioned(Versions)
 // FIXME: Check API key header name and find service scope
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
+  ApiKeyAuth<ApiKeyLocation.header, "Connection String"> | OAuth2Auth<[
     {
       type: OAuth2FlowType.implicit,
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",

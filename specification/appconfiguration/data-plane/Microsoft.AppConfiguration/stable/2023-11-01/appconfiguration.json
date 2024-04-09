@@ -44,7 +44,7 @@
   "securityDefinitions": {
     "ApiKeyAuth": {
       "type": "apiKey",
-      "name": "Ocp-Apim-Subscription-Key",
+      "name": "Connection String",
       "in": "header"
     },
     "OAuth2Auth": {
@@ -105,7 +105,8 @@
             "required": true,
             "type": "string",
             "enum": [
-              "application/vnd.microsoft.appconfig.keyset+json, application/problem+json"
+              "application/vnd.microsoft.appconfig.keyset+json",
+              "application/problem+json"
             ],
             "x-ms-enum": {
               "modelAsString": false
@@ -117,6 +118,12 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/KeyListResult"
+            },
+            "headers": {
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              }
             }
           },
           "default": {
@@ -357,7 +364,8 @@
             "required": true,
             "type": "string",
             "enum": [
-              "application/vnd.microsoft.appconfig.kvset+json, application/problem+json"
+              "application/vnd.microsoft.appconfig.kvset+json",
+              "application/problem+json"
             ],
             "x-ms-enum": {
               "modelAsString": false
@@ -369,6 +377,16 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/KeyValueListResult"
+            },
+            "headers": {
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              },
+              "ETag": {
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              }
             }
           },
           "default": {
@@ -696,7 +714,8 @@
             "required": true,
             "type": "string",
             "enum": [
-              "application/vnd.microsoft.appconfig.kv+json, application/problem+json"
+              "application/vnd.microsoft.appconfig.kv+json",
+              "application/problem+json"
             ],
             "x-ms-enum": {
               "modelAsString": false
@@ -708,6 +727,16 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/KeyValue"
+            },
+            "headers": {
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              },
+              "ETag": {
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              }
             }
           },
           "default": {
@@ -777,7 +806,8 @@
             "required": true,
             "type": "string",
             "enum": [
-              "application/vnd.microsoft.appconfig.kv+json, application/problem+json"
+              "application/vnd.microsoft.appconfig.kv+json",
+              "application/problem+json"
             ],
             "x-ms-enum": {
               "modelAsString": false
@@ -869,7 +899,8 @@
             "required": true,
             "type": "string",
             "enum": [
-              "application/vnd.microsoft.appconfig.kv+json, application/problem+json"
+              "application/vnd.microsoft.appconfig.kv+json",
+              "application/problem+json"
             ],
             "x-ms-enum": {
               "modelAsString": false
@@ -1145,7 +1176,8 @@
             "required": true,
             "type": "string",
             "enum": [
-              "application/vnd.microsoft.appconfig.labelset+json, application/problem+json"
+              "application/vnd.microsoft.appconfig.labelset+json",
+              "application/problem+json"
             ],
             "x-ms-enum": {
               "modelAsString": false
@@ -1321,7 +1353,8 @@
             "required": true,
             "type": "string",
             "enum": [
-              "application/vnd.microsoft.appconfig.kv+json, application/problem+json"
+              "application/vnd.microsoft.appconfig.kv+json",
+              "application/problem+json"
             ],
             "x-ms-enum": {
               "modelAsString": false
@@ -1412,7 +1445,8 @@
             "required": true,
             "type": "string",
             "enum": [
-              "application/vnd.microsoft.appconfig.kv+json, application/problem+json"
+              "application/vnd.microsoft.appconfig.kv+json",
+              "application/problem+json"
             ],
             "x-ms-enum": {
               "modelAsString": false
@@ -1623,7 +1657,8 @@
             "required": true,
             "type": "string",
             "enum": [
-              "application/vnd.microsoft.appconfig.kvset+json, application/problem+json"
+              "application/vnd.microsoft.appconfig.kvset+json",
+              "application/problem+json"
             ],
             "x-ms-enum": {
               "modelAsString": false
@@ -1987,7 +2022,8 @@
             "required": true,
             "type": "string",
             "enum": [
-              "application/vnd.microsoft.appconfig.snapshotset+json, application/problem+json"
+              "application/vnd.microsoft.appconfig.snapshotset+json",
+              "application/problem+json"
             ],
             "x-ms-enum": {
               "modelAsString": false
@@ -2201,7 +2237,8 @@
             "required": true,
             "type": "string",
             "enum": [
-              "application/vnd.microsoft.appconfig.snapshot+json, application/problem+json"
+              "application/vnd.microsoft.appconfig.snapshot+json",
+              "application/problem+json"
             ],
             "x-ms-enum": {
               "modelAsString": false
@@ -2260,7 +2297,8 @@
             "required": true,
             "type": "string",
             "enum": [
-              "application/vnd.microsoft.appconfig.snapshot+json, application/problem+json"
+              "application/vnd.microsoft.appconfig.snapshot+json",
+              "application/problem+json"
             ],
             "x-ms-enum": {
               "modelAsString": false
@@ -2363,7 +2401,8 @@
             "required": true,
             "type": "string",
             "enum": [
-              "application/vnd.microsoft.appconfig.snapshot+json, application/problem+json"
+              "application/vnd.microsoft.appconfig.snapshot+json",
+              "application/problem+json"
             ],
             "x-ms-enum": {
               "modelAsString": false
