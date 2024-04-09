@@ -39,7 +39,8 @@ input-file:
   - Microsoft.DesktopVirtualization/stable/2024-04-03/desktopvirtualization.json
 suppressions:
     - code: PatchIdentityProperty
-    reason: There is an error loop with the identity property. We received approval to suppress this error, but we still need to investigate error loop.
+      from: desktopvirtualization.json  
+      reason: There is an error loop with the identity property. We received approval to suppress this error, but we still need to investigate error loop.
 ```
 ### Tag: package-preview-2024-03
 
