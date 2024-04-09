@@ -4367,12 +4367,14 @@
           "description": "List of applicationGroup resource Ids.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-nullable": true
         },
         "cloudPcResource": {
           "type": "boolean",
           "description": "Is cloud pc resource.",
-          "readOnly": true
+          "readOnly": true,
+          "x-nullable": true
         },
         "publicNetworkAccess": {
           "enum": [
@@ -4385,7 +4387,7 @@
           },
           "type": "string",
           "description": "Enabled allows this resource to be accessed from both public and private networks, Disabled allows this resource to only be accessed via private endpoints",
-          "x-nullable": false
+          "x-nullable": true
         },
         "privateEndpointConnections": {
           "readOnly": true,
@@ -4393,7 +4395,8 @@
           "items": {
             "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
-          "description": "List of private endpoint connection associated with the specified resource"
+          "description": "List of private endpoint connection associated with the specified resource",
+          "x-nullable": true
         }
       }
     },
@@ -4425,7 +4428,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "tags to be updated"
+          "description": "tags to be updated",
+          "x-nullable": true
         },
         "properties": {
           "description": "Detailed properties for Workspace",
@@ -4451,7 +4455,8 @@
           "description": "List of applicationGroup links.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-nullable": true
         },
         "publicNetworkAccess": {
           "enum": [
@@ -4463,7 +4468,8 @@
             "modelAsString": true
           },
           "type": "string",
-          "description": "Enabled to allow this resource to be access from the public network"
+          "description": "Enabled to allow this resource to be access from the public network",
+          "x-nullable": true
         }
       }
     },
@@ -4538,7 +4544,8 @@
         "cloudPcResource": {
           "type": "boolean",
           "description": "Is cloud pc resource.",
-          "readOnly": true
+          "readOnly": true,
+          "x-nullable": true
         },
         "showInFeed": {
           "type": "boolean",
@@ -4560,7 +4567,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "tags to be updated"
+          "description": "tags to be updated",
+          "x-nullable": true
         },
         "properties": {
           "description": "ApplicationGroup properties that can be patched.",
@@ -4690,7 +4698,8 @@
             "modelAsString": true
           },
           "type": "string",
-          "description": "PersonalDesktopAssignment type for HostPool."
+          "description": "PersonalDesktopAssignment type for HostPool.",
+          "x-nullable": true
         },
         "customRdpProperty": {
           "type": "string",
@@ -4699,7 +4708,8 @@
         "maxSessionLimit": {
           "type": "integer",
           "format": "int32",
-          "description": "The max session limit of HostPool."
+          "description": "The max session limit of HostPool.",
+          "x-nullable": true
         },
         "loadBalancerType": {
           "enum": [
@@ -4718,15 +4728,18 @@
         "ring": {
           "type": "integer",
           "format": "int32",
-          "description": "The ring number of HostPool."
+          "description": "The ring number of HostPool.",
+          "x-nullable": true
         },
         "validationEnvironment": {
           "type": "boolean",
-          "description": "Is validation environment."
+          "description": "Is validation environment.",
+          "x-nullable": true
         },
         "registrationInfo": {
           "$ref": "#/definitions/RegistrationInfo",
-          "description": "The registration info of HostPool."
+          "description": "The registration info of HostPool.",
+          "x-nullable": true
         },
         "vmTemplate": {
           "type": "string",
@@ -4738,7 +4751,8 @@
           "description": "List of applicationGroup links.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-nullable": true
         },
         "appAttachPackageReferences": {
           "readOnly": true,
@@ -4772,7 +4786,8 @@
             "modelAsString": true
           },
           "type": "string",
-          "description": "The type of single sign on Secret Type."
+          "description": "The type of single sign on Secret Type.",
+          "x-nullable": true
         },
         "preferredAppGroupType": {
           "enum": [
@@ -4790,12 +4805,14 @@
         },
         "startVMOnConnect": {
           "type": "boolean",
-          "description": "The flag to turn on/off StartVMOnConnect feature."
+          "description": "The flag to turn on/off StartVMOnConnect feature.",
+          "x-nullable": true
         },
         "cloudPcResource": {
           "type": "boolean",
           "description": "Is cloud pc resource.",
-          "readOnly": true
+          "readOnly": true,
+          "x-nullable": true
         },
         "publicNetworkAccess": {
           "enum": [
@@ -4810,11 +4827,12 @@
           },
           "type": "string",
           "description": "Enabled allows this resource to be accessed from both public and private networks, Disabled allows this resource to only be accessed via private endpoints",
-          "x-nullable": false
+          "x-nullable": true
         },
         "agentUpdate": {
           "$ref": "#/definitions/AgentUpdateProperties",
-          "description": "The session host configuration for updating agent, monitoring agent, and stack component."
+          "description": "The session host configuration for updating agent, monitoring agent, and stack component.",
+          "x-nullable": true
         },
         "privateEndpointConnections": {
           "readOnly": true,
@@ -4822,7 +4840,8 @@
           "items": {
             "$ref": "../../../../../common-types/resource-management/v2/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
-          "description": "List of private endpoint connection associated with the specified resource"
+          "description": "List of private endpoint connection associated with the specified resource",
+          "x-nullable": true
         }
       }
     },
@@ -4840,7 +4859,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "tags to be updated"
+          "description": "tags to be updated",
+          "x-nullable": true
         },
         "properties": {
           "description": "HostPool properties that can be patched.",
@@ -4868,7 +4888,8 @@
         "maxSessionLimit": {
           "type": "integer",
           "format": "int32",
-          "description": "The max session limit of HostPool."
+          "description": "The max session limit of HostPool.",
+          "x-nullable": true
         },
         "personalDesktopAssignmentType": {
           "enum": [
@@ -4880,7 +4901,8 @@
             "modelAsString": true
           },
           "type": "string",
-          "description": "PersonalDesktopAssignment type for HostPool."
+          "description": "PersonalDesktopAssignment type for HostPool.",
+          "x-nullable": true
         },
         "loadBalancerType": {
           "enum": [
@@ -4898,15 +4920,18 @@
         "ring": {
           "type": "integer",
           "format": "int32",
-          "description": "The ring number of HostPool."
+          "description": "The ring number of HostPool.",
+          "x-nullable": true
         },
         "validationEnvironment": {
           "type": "boolean",
-          "description": "Is validation environment."
+          "description": "Is validation environment.",
+          "x-nullable": true
         },
         "registrationInfo": {
           "$ref": "#/definitions/RegistrationInfoPatch",
-          "description": "The registration info of HostPool."
+          "description": "The registration info of HostPool.",
+          "x-nullable": true
         },
         "vmTemplate": {
           "type": "string",
@@ -4936,7 +4961,8 @@
             "modelAsString": true
           },
           "type": "string",
-          "description": "The type of single sign on Secret Type."
+          "description": "The type of single sign on Secret Type.",
+          "x-nullable": true
         },
         "preferredAppGroupType": {
           "enum": [
@@ -4953,7 +4979,8 @@
         },
         "startVMOnConnect": {
           "type": "boolean",
-          "description": "The flag to turn on/off StartVMOnConnect feature."
+          "description": "The flag to turn on/off StartVMOnConnect feature.",
+          "x-nullable": true
         },
         "publicNetworkAccess": {
           "enum": [
@@ -4967,11 +4994,13 @@
             "modelAsString": true
           },
           "type": "string",
-          "description": "Enabled to allow this resource to be access from the public network"
+          "description": "Enabled to allow this resource to be access from the public network",
+          "x-nullable": true
         },
         "agentUpdate": {
           "$ref": "#/definitions/AgentUpdatePatchProperties",
-          "description": "The session host configuration for updating agent, monitoring agent, and stack component."
+          "description": "The session host configuration for updating agent, monitoring agent, and stack component.",
+          "x-nullable": true
         }
       }
     },
@@ -4982,7 +5011,8 @@
         "expirationTime": {
           "format": "date-time",
           "type": "string",
-          "description": "Expiration time of registration token."
+          "description": "Expiration time of registration token.",
+          "x-nullable": true
         },
         "token": {
           "type": "string",
@@ -5011,7 +5041,8 @@
         "expirationTime": {
           "format": "date-time",
           "type": "string",
-          "description": "Expiration time of registration token."
+          "description": "Expiration time of registration token.",
+          "x-nullable": true
         },
         "registrationTokenOperation": {
           "enum": [
@@ -5068,7 +5099,8 @@
           "items": {
             "$ref": "#/definitions/MaintenanceWindowProperties"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [],
+          "x-nullable": true
         }
       }
     },
@@ -5140,7 +5172,8 @@
           "items": {
             "$ref": "#/definitions/MaintenanceWindowPatchProperties"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [],
+          "x-nullable": true
         }
       }
     },
@@ -5449,7 +5482,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "tags to be updated"
+          "description": "tags to be updated",
+          "x-nullable": true
         },
         "properties": {
           "description": "Detailed properties for App Attach Package",
@@ -5847,7 +5881,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "tags to be updated"
+          "description": "tags to be updated",
+          "x-nullable": true
         },
         "properties": {
           "description": "Detailed properties for Application",
@@ -6004,7 +6039,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "tags to be updated"
+          "description": "tags to be updated",
+          "x-nullable": true
         },
         "properties": {
           "description": "Detailed properties for Desktop",
@@ -7186,7 +7222,8 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "tags to be updated"
+          "description": "tags to be updated",
+          "x-nullable": true
         },
         "properties": {
           "description": "Detailed properties for scaling plan",
