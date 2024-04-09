@@ -58,7 +58,7 @@
             "maxLength": 63
           },
           {
-            "name": "sessionEnvelope",
+            "name": "generateSessionsEnvelope",
             "in": "body",
             "description": "Properties used to generate a session",
             "required": true,
@@ -257,67 +257,61 @@
       "description": "Session template.",
       "type": "object",
       "properties": {
-        "properties": {
-          "description": "Session resource specific properties.",
-          "type": "object",
-          "properties": {
-            "requestedDurationInSeconds": {
-              "description": "The requested duration of the Session in seconds.",
-              "type": "integer",
-              "format": "int32"
-            },
-            "timeElapsedInSeconds": {
-              "description": "The time elapsed in seconds since the Session was created.",
-              "type": "integer",
-              "format": "int32"
-            },
-            "expiryTime": {
-              "description": "The time when the Session will expire.",
-              "type": "string",
-              "format": "date-time"
-            },
-            "generatedTime": {
-              "description": "The time when the Session was generated.",
-              "type": "string",
-              "format": "date-time"
-            },
-            "connectionString": {
-              "description": "The connection string of the Session.",
-              "type": "string"
-            },
-            "endpoint": {
-              "description": "The endpoint of the Session.",
-              "type": "string"
-            },
-            "sessionKind": {
-              "description": "The kind of the Session.",
-              "enum": [
-                "SSH",
-                "CustomImage"
-              ],
-              "type": "string",
-              "x-ms-enum": {
-                "name": "ContainerType",
-                "modelAsString": true
-              }
-            },
-            "status": {
-              "description": "The status of the Session.",
-              "type": "string"
-            },
-            "sshConfiguration": {
-              "description": "SSH configuration of the Session.",
-              "$ref": "#/definitions/SSHConfiguration"
-            },
-            "codeExecutionConfiguration": {
-              "description": "Code execution configuration of the Session.",
-              "$ref": "#/definitions/CodeExecutionConfiguration"
-            },
-            "sessionAuthConfiguration": {
-              "description": "Session auth configuration.",
-              "$ref": "#/definitions/SessionAuthConfiguration"
-            }
+        "requestedDurationInSeconds": {
+          "description": "The requested duration of the Session in seconds.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "timeElapsedInSeconds": {
+          "description": "The time elapsed in seconds since the Session was created.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "expiryTime": {
+          "description": "The time when the Session will expire.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "generatedTime": {
+          "description": "The time when the Session was generated.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "connectionString": {
+          "description": "The connection string of the Session.",
+          "type": "string"
+        },
+        "endpoint": {
+          "description": "The endpoint of the Session.",
+          "type": "string"
+        },
+        "sessionKind": {
+          "description": "The kind of the Session.",
+          "enum": [
+            "SSH",
+            "CustomImage"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ContainerType",
+            "modelAsString": true
           }
+        },
+        "status": {
+          "description": "The status of the Session.",
+          "type": "string"
+        },
+        "sshConfiguration": {
+          "description": "SSH configuration of the Session.",
+          "$ref": "#/definitions/SSHConfiguration"
+        },
+        "codeExecutionConfiguration": {
+          "description": "Code execution configuration of the Session.",
+          "$ref": "#/definitions/CodeExecutionConfiguration"
+        },
+        "sessionAuthConfiguration": {
+          "description": "Session auth configuration.",
+          "$ref": "#/definitions/SessionAuthConfiguration"
         }
       }
     },
