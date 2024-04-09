@@ -26,15 +26,23 @@ These are the global settings for the DesktopVirtualizationClient API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2024-03
+tag: package-2024-04
 ```
 
 
+### Tag: package-2024-04
+
+These settings apply only when `--tag=package-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04'
+input-file:
+  - Microsoft.DesktopVirtualization/stable/2024-04-03/desktopvirtualization.json
+```
 ### Tag: package-preview-2024-03
 
 These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2024-03'
+``` yaml $(tag) == 'package-preview-2024-03'
 input-file:
   - Microsoft.DesktopVirtualization/preview/2024-03-06-preview/desktopvirtualization.json
 suppressions:
@@ -42,6 +50,7 @@ suppressions:
     from: desktopvirtualization.json
     reason: Pattern restriction will be a breaking change. Update for next stable version. Work item to fix https://microsoft.visualstudio.com/OS/_workitems/edit/47527278
 ```
+
 ### Tag: package-preview-2024-01
 
 These settings apply only when `--tag=package-preview-2024-01` is specified on the command line.
