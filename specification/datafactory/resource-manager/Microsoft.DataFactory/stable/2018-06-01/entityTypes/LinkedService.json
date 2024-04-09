@@ -223,6 +223,121 @@
         }
       }
     },
+    "SqlServerBaseLinkedServiceTypeProperties": {
+      "description": "Sql Server family connector common linked service properties.",
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference. Type: string, SecureString or AzureKeyVaultSecretReference."
+        },
+        "server": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name or network address of the instance of SQL Server to which to connect. Type: string."
+        },
+        "database": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name of the database. Type: string."
+        },
+        "encrypt": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "Indicate whether TLS encryption is required for all data sent between the client and server. Type: string."
+        },
+        "trustServerCertificate": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Indicate whether the channel will be encrypted while bypassing walking the certificate chain to validate trust. Type: Boolean."
+        },
+        "hostNameInCertificate": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The host name to use when validating the server certificate for the connection. When not specified, the server name from the Data Source is used for certificate validation. Type: string."
+        },
+        "userName": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The user name to be used when connecting to server. Type: string."
+        },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
+        },
+        "applicationIntent": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The application workload type when connecting to a server. Possible values are ReadOnly and ReadWrite. Type: string."
+        },
+        "connectTimeout": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The length of time (in seconds) to wait for a connection to the server before terminating the attempt and generating an error. Type: integer."
+        },
+        "connectRetryCount": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The number of reconnections attempted after identifying that there was an idle connection failure. This must be an integer between 0 and 255. Type: integer."
+        },
+        "connectRetryInterval": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The amount of time (in seconds) between each reconnection attempt after identifying that there was an idle connection failure. This must be an integer between 1 and 60. Type: integer."
+        },
+        "loadBalanceTimeout": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The minimum time, in seconds, for the connection to live in the connection pool before being destroyed. Type: integer."
+        },
+        "commandTimeout": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The default wait time (in seconds) before terminating the attempt to execute a command and generating an error. Type: integer."
+        },
+        "integratedSecurity": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Indicate whether User ID and Password are specified in the connection (when false) or whether the current Windows account credentials are used for authentication (when true). Type: Boolean."
+        },
+        "failoverPartner": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The name or address of the partner server to connect to if the primary server is down. Type: string."
+        },
+        "maxPoolSize": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The maximum number of connections allowed in the connection pool for this specific connection string. Type: integer."
+        },
+        "minPoolSize": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The minimum number of connections allowed in the connection pool for this specific connection string. Type: integer."
+        },
+        "multipleActiveResultSets": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "When true, an application can maintain multiple active result sets (MARS). When false, an application must process or cancel all result sets from one batch before it can execute any other batch on that connection. Type: Bpplean."
+        },
+        "multiSubnetFailover": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "If your application is connecting to an AlwaysOn availability group (AG) on different subnets, setting MultiSubnetFailover=true provides faster detection of and connection to the (currently) active server. Type: Boolean."
+        },
+        "packetSize": {
+          "type": "object",
+          "x-ms-format": "dfe-int",
+          "description": "The size in bytes of the network packets used to communicate with an instance of server. Type: integer."
+        },
+        "pooling": {
+          "type": "object",
+          "x-ms-format": "dfe-bool",
+          "description": "Indicate whether the connection will be pooled or explicitly opened every time that the connection is requested. Type: Boolean."
+        }
+      }
+    },
     "AzureSqlDWLinkedService": {
       "x-ms-discriminator-value": "AzureSqlDW",
       "description": "Azure SQL Data Warehouse linked service.",
@@ -246,15 +361,25 @@
     "AzureSqlDWLinkedServiceTypeProperties": {
       "description": "Azure SQL Data Warehouse linked service properties.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SqlServerBaseLinkedServiceTypeProperties"
+        }
+      ],
       "properties": {
-        "connectionString": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference. Type: string, SecureString or AzureKeyVaultSecretReference."
-        },
-        "password": {
-          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
-          "description": "The Azure key vault secret reference of password in connection string."
+        "authenticationType": {
+          "x-ms-enum": {
+            "name": "AzureSqlDWAuthenticationType",
+            "modelAsString": true
+          },
+          "enum": [
+            "SQL",
+            "ServicePrincipal",
+            "SystemAssignedManagedIdentity",
+            "UserAssignedManagedIdentity"
+          ],
+          "type": "string",
+          "description": "The type used for authentication. Type: string."
         },
         "servicePrincipalId": {
           "type": "object",
@@ -264,6 +389,15 @@
         "servicePrincipalKey": {
           "$ref": "../datafactory.json#/definitions/SecretBase",
           "description": "The key of the service principal used to authenticate against Azure SQL Data Warehouse."
+        },
+        "servicePrincipalCredentialType": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalCredential": {
+          "description": "The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey', servicePrincipalCredential can be SecureString or AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only be AzureKeyVaultSecretReference.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "tenant": {
           "type": "object",
@@ -283,10 +417,7 @@
           "$ref": "../datafactory.json#/definitions/CredentialReference",
           "description": "The credential reference containing authentication information."
         }
-      },
-      "required": [
-        "connectionString"
-      ]
+      }
     },
     "SqlServerLinkedService": {
       "x-ms-discriminator-value": "SqlServer",
@@ -311,20 +442,23 @@
     "SqlServerLinkedServiceTypeProperties": {
       "description": "SQL Server linked service properties.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SqlServerBaseLinkedServiceTypeProperties"
+        }
+      ],
       "properties": {
-        "connectionString": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference."
-        },
-        "userName": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The on-premises Windows authentication user name. Type: string (or Expression with resultType string)."
-        },
-        "password": {
-          "description": "The on-premises Windows authentication password.",
-          "$ref": "../datafactory.json#/definitions/SecretBase"
+        "authenticationType": {
+          "x-ms-enum": {
+            "name": "SqlServerAuthenticationType",
+            "modelAsString": true
+          },
+          "enum": [
+            "SQL",
+            "Windows"
+          ],
+          "type": "string",
+          "description": "The type used for authentication. Type: string."
         },
         "encryptedCredential": {
           "type": "string",
@@ -334,10 +468,7 @@
           "$ref": "#/definitions/SqlAlwaysEncryptedProperties",
           "description": "Sql always encrypted properties."
         }
-      },
-      "required": [
-        "connectionString"
-      ]
+      }
     },
     "AmazonRdsForSqlServerLinkedService": {
       "x-ms-discriminator-value": "AmazonRdsForSqlServer",
@@ -362,20 +493,23 @@
     "AmazonRdsForSqlServerLinkedServiceTypeProperties": {
       "description": "Amazon Rds for SQL Server linked service properties.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SqlServerBaseLinkedServiceTypeProperties"
+        }
+      ],
       "properties": {
-        "connectionString": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference."
-        },
-        "userName": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The on-premises Windows authentication user name. Type: string (or Expression with resultType string)."
-        },
-        "password": {
-          "description": "The on-premises Windows authentication password.",
-          "$ref": "../datafactory.json#/definitions/SecretBase"
+        "authenticationType": {
+          "x-ms-enum": {
+            "name": "AmazonRdsForSqlAuthenticationType",
+            "modelAsString": true
+          },
+          "enum": [
+            "SQL",
+            "Windows"
+          ],
+          "type": "string",
+          "description": "The type used for authentication. Type: string."
         },
         "encryptedCredential": {
           "type": "string",
@@ -385,10 +519,7 @@
           "$ref": "#/definitions/SqlAlwaysEncryptedProperties",
           "description": "Sql always encrypted properties."
         }
-      },
-      "required": [
-        "connectionString"
-      ]
+      }
     },
     "AzureSqlDatabaseLinkedService": {
       "x-ms-discriminator-value": "AzureSqlDatabase",
@@ -413,15 +544,25 @@
     "AzureSqlDatabaseLinkedServiceTypeProperties": {
       "description": "Azure SQL Database linked service properties.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SqlServerBaseLinkedServiceTypeProperties"
+        }
+      ],
       "properties": {
-        "connectionString": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference."
-        },
-        "password": {
-          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
-          "description": "The Azure key vault secret reference of password in connection string."
+        "authenticationType": {
+          "x-ms-enum": {
+            "name": "AzureSqlDatabaseAuthenticationType",
+            "modelAsString": true
+          },
+          "enum": [
+            "SQL",
+            "ServicePrincipal",
+            "SystemAssignedManagedIdentity",
+            "UserAssignedManagedIdentity"
+          ],
+          "type": "string",
+          "description": "The type used for authentication. Type: string."
         },
         "servicePrincipalId": {
           "type": "object",
@@ -431,6 +572,15 @@
         "servicePrincipalKey": {
           "$ref": "../datafactory.json#/definitions/SecretBase",
           "description": "The key of the service principal used to authenticate against Azure SQL Database."
+        },
+        "servicePrincipalCredentialType": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalCredential": {
+          "description": "The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey', servicePrincipalCredential can be SecureString or AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only be AzureKeyVaultSecretReference.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "tenant": {
           "type": "object",
@@ -454,10 +604,7 @@
           "$ref": "../datafactory.json#/definitions/CredentialReference",
           "description": "The credential reference containing authentication information."
         }
-      },
-      "required": [
-        "connectionString"
-      ]
+      }
     },
     "AzureSqlMILinkedService": {
       "x-ms-discriminator-value": "AzureSqlMI",
@@ -482,15 +629,25 @@
     "AzureSqlMILinkedServiceTypeProperties": {
       "description": "Azure SQL Managed Instance linked service properties.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SqlServerBaseLinkedServiceTypeProperties"
+        }
+      ],
       "properties": {
-        "connectionString": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference."
-        },
-        "password": {
-          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
-          "description": "The Azure key vault secret reference of password in connection string."
+        "authenticationType": {
+          "x-ms-enum": {
+            "name": "AzureSqlMIAuthenticationType",
+            "modelAsString": true
+          },
+          "enum": [
+            "SQL",
+            "ServicePrincipal",
+            "SystemAssignedManagedIdentity",
+            "UserAssignedManagedIdentity"
+          ],
+          "type": "string",
+          "description": "The type used for authentication. Type: string."
         },
         "servicePrincipalId": {
           "type": "object",
@@ -500,6 +657,15 @@
         "servicePrincipalKey": {
           "$ref": "../datafactory.json#/definitions/SecretBase",
           "description": "The key of the service principal used to authenticate against Azure SQL Managed Instance."
+        },
+        "servicePrincipalCredentialType": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalCredential": {
+          "description": "The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey', servicePrincipalCredential can be SecureString or AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only be AzureKeyVaultSecretReference.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "tenant": {
           "type": "object",
@@ -523,10 +689,7 @@
           "$ref": "../datafactory.json#/definitions/CredentialReference",
           "description": "The credential reference containing authentication information."
         }
-      },
-      "required": [
-        "connectionString"
-      ]
+      }
     },
     "SqlAlwaysEncryptedProperties": {
       "description": "Sql always encrypted properties.",
