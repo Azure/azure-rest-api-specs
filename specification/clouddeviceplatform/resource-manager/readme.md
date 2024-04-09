@@ -36,5 +36,5 @@ These settings apply only when `--tag=package-2021-10-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-10-01-preview'
 input-file:
-  - Microsoft.CloudDevicePlatform/pre-release/2021-10-01-preview/CloudDevicePlatform.json
+  - Microsoft.CloudDevicePlatform/preview/2021-10-01-preview/CloudDevicePlatform.json
 ```
