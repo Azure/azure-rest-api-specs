@@ -314,6 +314,66 @@
           }
         }
       }
+    },
+    "/route/range": {
+      "post": {
+        "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe Snap to Roads API accepts GPS point data, represented as latitude and longitude coordinates, and generates a route that aligns with existing roadways on a map. This process, known as \"snapping to roads,\" produces a series of objects that trace a path closely following the road network. The resulting data includes road names and their respective speed limits, pertinent to the traversed segments.\n\nMoreover, the Snap to Roads API offers an interpolation feature, which refines the GPS points to create a smoother route that adheres to the road's geometry. This functionality is especially beneficial for asset tracking and enhancing data visualization in mapping applications.\n\n\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=route-v2).\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n",
+        "operationId": "Route_PostRouteRange",
+        "consumes": [
+          "application/geo+json"
+        ],
+        "produces": [
+          "application/geo+json",
+          "application/json"
+        ],
+        "x-ms-client-name": "Route_PostRouteRange",
+        "x-ms-examples": {
+          "Successfully retrieve a snap to roads points with additional parameters in the body": {
+            "$ref": "./examples/PostRouteRange.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/Accept-Language"
+          },
+          {
+            "name": "routeRangeRequest",
+            "in": "body",
+            "description": "Request body of RouteRange API in GeoJSON format.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RouteRangeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RouteRangeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code of the error that occurred."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -417,54 +477,7 @@
           "default": false
         },
         "avoid": {
-          "description": "Specifies restrictions that the route calculation should honor when determining the route. Avoid supports multiple values in a request and is only supported for the driving and truck travelMode.\n\nExample: \"avoid\": [\"limitedAccessHighways\", \"tolls\"]",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "limitedAccessHighways",
-              "tollRoads",
-              "ferries",
-              "tunnels",
-              "borderCrossings",
-              "lowEmissionZones",
-              "unpavedRoads"
-            ],
-            "x-ms-enum": {
-              "name": "Avoid",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "limitedAccessHighways",
-                  "description": "Avoids the use of limited access highways in the route."
-                },
-                {
-                  "value": "tollRoads",
-                  "description": "Avoids the use of toll roads in the route."
-                },
-                {
-                  "value": "ferries",
-                  "description": "Avoids the use of ferries in the route."
-                },
-                {
-                  "value": "tunnels",
-                  "description": "Avoids the use of tunnels in the route. `Note`: Only supported for truck travelMode."
-                },
-                {
-                  "value": "borderCrossings",
-                  "description": "Avoids crossing country borders in the route."
-                },
-                {
-                  "value": "lowEmissionZones",
-                  "description": "Avoids low-emission zones in the route. `Note`: Only supported for truck travelMode."
-                },
-                {
-                  "value": "unpavedRoads",
-                  "description": "Avoids unpaved roads in the route. `Note`: Only supported for truck travelMode."
-                }
-              ]
-            }
-          }
+          "$ref": "#/definitions/Avoid"
         },
         "routeOutputOptions": {
           "description": "Include the desired route information from the response. By default, the itinerary is included in the response.\n\nSupports multiple values such as \"routeOutputOptions\": [\"routePath\", \"regionTravelSummary\"]",
@@ -565,18 +578,13 @@
             "$ref": "#/definitions/InputSnapToRoadsFeaturesItem"
           }
         },
-        "pointIndex": {
-          "description": "Identify the corresponding index in the original list of points for each snapped point. Ensure that interpolated points have unique indices to distinguish them from the snapped points.",
-          "format": "int64",
-          "type": "integer"
-        },
         "interpolate": {
           "description": "Specify whether to insert additional points between the snapped points to complete the full route path",
           "type": "boolean",
           "default": false
         },
         "includeSpeedLimit": {
-          "description": "Specify whether to include speed limit information for the snapped points. The unit is in kilometers per hour.",
+          "description": "Specify whether to include speed limit information for the snapped points. The unit is in kilometers per hour. `Note`: Only supported for driving travelMode",
           "type": "boolean",
           "default": false
         },
@@ -617,6 +625,168 @@
           "description": "`GeoJSON` feature object that contains Geometry object and additional properties. Refer to [RFC 7946, Section 3.2](https://www.rfc-editor.org/rfc/rfc7946#section-3.2) for details.",
           "items": {
             "$ref": "#/definitions/SnapToRoadFeaturesItem"
+          }
+        },
+        "nextLink": {
+          "$ref": "#/definitions/NextLink"
+        }
+      }
+    },
+    "RouteRangeRequest": {
+      "type": "object",
+      "description": "Specifies the starting point for range calculation. `GeoJSON` feature object and additional properties. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+      "required": [
+        "type",
+        "geometry",
+        "properties"
+      ],
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FeaturesItemTypeEnum"
+        },
+        "geometry": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
+        },
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "departAt": {
+              "description": "The date and time of departure from the origin point formatted as a dateTime value defined by [RFC 3339, section 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6). When a time zone offset is not specified, UTC will be assumed.\n\nThe departAt value must be in the future in the date-time format or now value to set it to the current time.\n\nExamples:\n\n\"departAt\": \"2023-06-01T09:30:00.000-07:00\"",
+              "type": "string",
+              "format": "date-time"
+            },
+            "optimizeRoute": {
+              "description": "Specifies the parameter to use to optimize the route. If not defined, the default is \"fastestWithoutTraffic\" which returns the route to minimize the travel time without using current traffic information.\n\nExample: \"optimizeRoute\":\"shortest\"",
+              "type": "string",
+              "default": "fastestWithoutTraffic",
+              "enum": [
+                "shortest",
+                "fastestWithoutTraffic",
+                "fastestWithTraffic",
+                "thrillingWithTraffic",
+                "thrillingWithoutTraffic"
+              ],
+              "x-ms-enum": {
+                "name": "OptimizeRoute",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "shortest",
+                    "name": "Shortest",
+                    "description": "The route is calculated to minimize the distance. Traffic information is not used."
+                  },
+                  {
+                    "value": "fastestWithoutTraffic",
+                    "name": "FastestWithoutTraffic",
+                    "description": "Finds the fastest route, without factoring in traffic information."
+                  },
+                  {
+                    "value": "fastestWithTraffic",
+                    "name": "FastestWithTraffic",
+                    "description": "The route is calculated to minimize the time using current traffic information. `Note`: Only supported for driving and truck travelMode."
+                  },
+                  {
+                    "value": "thrillingWithTraffic",
+                    "name": "ThrillingWithTraffic",
+                    "description": "The route is calculated to provide a thrilling driving experience using current traffic information."
+                  },
+                  {
+                    "value": "thrillingWithoutTraffic",
+                    "name": "ThrillingWithoutTraffic",
+                    "description": "The route is calculated to provide a thrilling driving experience without using current traffic information."
+                  }
+                ]
+              }
+            },
+            "avoid": {
+              "$ref": "#/definitions/Avoid"
+            },
+            "vehicleSpec": {
+              "$ref": "#/definitions/VehicleSpec"
+            },
+            "distanceBudgetInMeters ": {
+              "description": "The distance budget refers to the maximum number of meters one can travel without going over the set limit.",
+              "type": "number",
+              "minimum": 0,
+              "maximum": 50000000
+            },
+            "timeBudgetInSec": {
+              "description": "The time budget represents the maximum number of seconds available for travel, defining how far one can go within this time constraint.",
+              "type": "number",
+              "minimum": 0,
+              "maximum": 10000000
+            },
+            "thrilling": {
+              "type": "object",
+              "description": "The thrilling object is used to describe a route with two main characteristics: windingness and hilliness and is used when optimizedRoute is thrilling mode.",
+              "properties": {
+                "windingness": {
+                  "description": "Specify the windingness of the route. If unspecified, the default mode is \"normal\".",
+                  "type": "string",
+                  "default": "normal",
+                  "enum": [
+                    "normal",
+                    "low",
+                    "high"
+                  ]
+                },
+                "hilliness": {
+                  "description": "Specify the hilliness of the route. If unspecified, the default mode is \"normal\".",
+                  "type": "string",
+                  "default": "normal",
+                  "enum": [
+                    "normal",
+                    "low",
+                    "high"
+                  ]
+                }
+              }
+            },
+            "travelMode": {
+              "description": "Specify the travel mode. If unspecified, the default mode is \"driving\".",
+              "type": "string",
+              "default": "driving",
+              "enum": [
+                "driving",
+                "walking",
+                "truck"
+              ],
+              "x-ms-enum": {
+                "name": "SnapToRoadsTravelMode",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "driving",
+                    "description": "driving"
+                  },
+                  {
+                    "value": "walking",
+                    "description": "walking."
+                  },
+                  {
+                    "value": "truck",
+                    "description": "truck."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "RouteRangeResponse": {
+      "description": "This object is returned from a successful call.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FeatureTypeEnum"
+        },
+        "features": {
+          "type": "array",
+          "description": "`GeoJSON` feature object that contains Geometry object and additional properties. Refer to [RFC 7946, Section 3.2](https://www.rfc-editor.org/rfc/rfc7946#section-3.2) for details.",
+          "items": {
+            "$ref": "#/definitions/RouteRangeFeaturesItem"
           }
         },
         "nextLink": {
@@ -787,6 +957,19 @@
         },
         {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonMultiLineString"
+        }
+      ]
+    },
+    "PolygonGeometry": {
+      "type": "object",
+      "description": "Specifies the `GeoJSON` Polygon Geometry object. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+      "x-ms-discriminator-value": "Polygon",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Geometry"
+        },
+        {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPolygon"
         }
       ]
     },
@@ -2062,6 +2245,56 @@
         }
       }
     },
+    "Avoid": {
+      "description": "Specifies restrictions that the route calculation should honor when determining the route. Avoid supports multiple values in a request and is only supported for the driving and truck travelMode.\n\nExample: \"avoid\": [\"limitedAccessHighways\", \"tolls\"]",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "limitedAccessHighways",
+          "tollRoads",
+          "ferries",
+          "tunnels",
+          "borderCrossings",
+          "lowEmissionZones",
+          "unpavedRoads"
+        ],
+        "x-ms-enum": {
+          "name": "Avoid",
+          "modelAsString": true,
+          "values": [
+            {
+              "value": "limitedAccessHighways",
+              "description": "Avoids the use of limited access highways in the route."
+            },
+            {
+              "value": "tollRoads",
+              "description": "Avoids the use of toll roads in the route."
+            },
+            {
+              "value": "ferries",
+              "description": "Avoids the use of ferries in the route."
+            },
+            {
+              "value": "tunnels",
+              "description": "Avoids the use of tunnels in the route. `Note`: Only supported for truck travelMode."
+            },
+            {
+              "value": "borderCrossings",
+              "description": "Avoids crossing country borders in the route."
+            },
+            {
+              "value": "lowEmissionZones",
+              "description": "Avoids low-emission zones in the route. `Note`: Only supported for truck travelMode."
+            },
+            {
+              "value": "unpavedRoads",
+              "description": "Avoids unpaved roads in the route. `Note`: Only supported for truck travelMode."
+            }
+          ]
+        }
+      }
+    },
     "NextLink": {
       "type": "string",
       "description": "The is the link to the next page of the features returned. If it's the last page, the field will not exist."
@@ -2198,6 +2431,84 @@
           "description": "Identify the corresponding index in the original list of points for each snapped point. Ensure that interpolated points have unique indices to distinguish them from the snapped points.",
           "format": "int64",
           "type": "integer"
+        }
+      }
+    },
+    "InputRouteRangeFeaturesItem": {
+      "type": "object",
+      "description": "Specifies the starting point for range calculation. `GeoJSON` feature object and additional properties. Refer to [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for details.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FeaturesItemTypeEnum"
+        },
+        "geometry": {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/InputRouteRangeProperties"
+        }
+      },
+      "required": [
+        "type",
+        "geometry",
+        "properties"
+      ]
+    },
+    "InputRouteRangeProperties": {
+      "type": "object",
+      "description": "",
+      "properties": {}
+    },
+    "RouteRangeFeaturesItem": {
+      "type": "object",
+      "description": "GeoJSON feature object that contains Geometry object and additional properties of the route.",
+      "allOf": [
+        {
+          "type": "object",
+          "description": "GeoJSON feature object that contains Geometry object and additional properties of the route.",
+          "properties": {
+            "type": {
+              "$ref": "#/definitions/FeaturesItemTypeEnum"
+            },
+            "geometry": {
+              "$ref": "#/definitions/Geometry"
+            },
+            "bbox": {
+              "$ref": "#/definitions/Bbox"
+            },
+            "properties": {
+              "$ref": "#/definitions/RouteRangeFeatureProperties"
+            }
+          }
+        }
+      ]
+    },
+    "RouteRangeFeatureProperties": {
+      "description": "Route Ranges properties.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The point type",
+          "type": "string",
+          "enum": [
+            "center",
+            "boundary"
+          ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "center",
+                "description": "The center point for the range calculation."
+              },
+              {
+                "value": "boundary",
+                "description": "The boundary for the range calculation."
+              }
+            ]
+          }
         }
       }
     },
