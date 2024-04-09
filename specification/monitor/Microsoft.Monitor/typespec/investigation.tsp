@@ -15,12 +15,9 @@ namespace Microsoft.Monitor;
 /**
  * Investigation resource, including result.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@includeInapplicableMetadataInPayload(false)
-//@Azure.ResourceManager.Private.armResourceInternal(InvestigationProperties)
 @doc("An investigation definition.")
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
-model InvestigationResource extends ExtensionResource<InvestigationProperties> {
+model InvestigationResource is ExtensionResource<InvestigationProperties> {
   /**
    * The name of the investigation.
    */
@@ -344,7 +341,8 @@ model Resource {
   systemData?: SystemData;
 }
 
-@armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/improper-subscription-list-operation" "For backward compatibility"
+@armResourceOperations(InvestigationResource)
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
 interface Investigations {
   /**
@@ -362,11 +360,7 @@ interface Investigations {
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
   @operationId("Investigations_CreateOrUpdateAtResource")
   @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
-  createOrUpdateAtResource is ArmResourceCreateOrReplaceAsync<
-    InvestigationResource,
-    BaseParameters<InvestigationResource>,
-    ArmAsyncOperationHeader
-  >;
+  createOrUpdateAtResource is ArmResourceCreateOrUpdateAsync<InvestigationResource>;
 
   /**
    * A template investigation that is currently running cannot be deleted.
