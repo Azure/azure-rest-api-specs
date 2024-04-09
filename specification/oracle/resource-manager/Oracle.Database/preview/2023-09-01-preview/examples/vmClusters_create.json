@@ -6,9 +6,6 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg000",
     "cloudvmclustername": "cluster1",
-    "tags": {
-      "tagK1": "tagV1"
-    },
     "resource": {
       "properties": {
         "dataStorageSizeInTbs": 1000,
@@ -27,6 +24,18 @@
         "sshPublicKeys": [
           "ssh-key 1"
         ],
+        "nsgCidrs": [
+          {
+            "source": "10.0.0.0/16",
+            "destinationPortRange": {
+              "min": 1520,
+              "max": 1522
+            }
+          },
+          {
+            "source": "10.10.0.0/24"
+          }
+        ],
         "licenseModel": "LicenseIncluded",
         "scanListenerPortTcp": 1050,
         "scanListenerPortTcpSsl": 1025,
@@ -44,7 +53,10 @@
           "ocid1..aaaa"
         ]
       },
-      "location": "eastus"
+      "location": "eastus",
+      "tags": {
+        "tagK1": "tagV1"
+      }
     }
   },
   "responses": {

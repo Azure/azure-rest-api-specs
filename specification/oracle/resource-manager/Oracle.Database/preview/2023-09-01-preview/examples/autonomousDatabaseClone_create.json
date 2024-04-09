@@ -6,9 +6,6 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg000",
     "autonomousdatabasename": "databasedb1",
-    "tags": {
-      "tagK1": "tagV1"
-    },
     "resource": {
       "properties": {
         "dataBaseType": "Clone",
@@ -24,7 +21,10 @@
         "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
         "vnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg000/providers/Microsoft.Network/virtualNetworks/vnet1"
       },
-      "location": "eastus"
+      "location": "eastus",
+      "tags": {
+        "tagK1": "tagV1"
+      }
     }
   },
   "responses": {
@@ -55,7 +55,7 @@
           "displayName": "example_autonomous_databasedb1",
           "isAutoScalingEnabled": false,
           "isAutoScalingForStorageEnabled": false,
-          "isDataGuardEnabled": false,
+          "isLocalDataGuardEnabled": false,
           "isMtlsConnectionRequired": true,
           "licenseModel": "BringYourOwnLicense",
           "lifecycleState": "Succeeded",
@@ -106,7 +106,7 @@
           "displayName": "example_autonomous_databasedb1",
           "isAutoScalingEnabled": false,
           "isAutoScalingForStorageEnabled": false,
-          "isDataGuardEnabled": false,
+          "isLocalDataGuardEnabled": false,
           "isMtlsConnectionRequired": true,
           "licenseModel": "BringYourOwnLicense",
           "lifecycleState": "Succeeded",
