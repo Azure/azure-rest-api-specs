@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.KubernetesConfiguration;
 
-model Operation is ProxyResource<OperationsParameter> {
+model OperationModel is ProxyResource<OperationsParameter> {
   /**
    * Name of the Extension.
    */
@@ -27,7 +27,7 @@ interface OperationStatus {
    * List all operations in the cluster.
    */
   list is ArmResourceListByParent<
-    Operation,
-    BaseParameters = CustomBaseParameters<Operation>
+    OperationModel,
+    BaseParameters = CustomBaseParameters<OperationModel>
   >;
 }

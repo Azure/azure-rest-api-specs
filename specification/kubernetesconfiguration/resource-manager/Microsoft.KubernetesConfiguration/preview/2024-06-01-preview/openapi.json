@@ -1166,7 +1166,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationModelListResult"
             }
           },
           "default": {
@@ -1444,8 +1444,7 @@
             "description": "Resource creation was canceled."
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "AzureBlobDefinition": {
       "type": "object",
@@ -2774,7 +2773,7 @@
         }
       }
     },
-    "Operation": {
+    "OperationModel": {
       "type": "object",
       "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "properties": {
@@ -2794,15 +2793,15 @@
         }
       ]
     },
-    "OperationListResult": {
+    "OperationModelListResult": {
       "type": "object",
-      "description": "The response of a Operation list operation.",
+      "description": "The response of a OperationModel list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Operation items on this page",
+          "description": "The OperationModel items on this page",
           "items": {
-            "$ref": "#/definitions/Operation"
+            "$ref": "#/definitions/OperationModel"
           }
         },
         "nextLink": {
@@ -2871,27 +2870,6 @@
           }
         ]
       }
-    },
-    "PagedOperationStatusResult": {
-      "type": "object",
-      "description": "The async operations in progress, in the cluster.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The OperationStatusResult items on this page",
-          "items": {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "PatchExtension": {
       "type": "object",
@@ -3035,8 +3013,7 @@
             "description": "Deleting"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "ProvisioningStateType": {
       "type": "string",
@@ -3078,8 +3055,7 @@
             "value": "Canceled"
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "RepositoryRefDefinition": {
       "type": "object",
@@ -3121,52 +3097,6 @@
           "type": "string",
           "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
           "readOnly": true
-        }
-      }
-    },
-    "ResourceProviderOperation": {
-      "type": "object",
-      "description": "Supported operation of this resource provider.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Operation name, in format of {provider}/{resource}/{operation}"
-        },
-        "display": {
-          "$ref": "#/definitions/ResourceProviderOperationDisplay",
-          "description": "Display metadata associated with the operation."
-        },
-        "isDataAction": {
-          "type": "boolean",
-          "description": "The flag that indicates whether the operation applies to data plane.",
-          "readOnly": true
-        },
-        "origin": {
-          "type": "string",
-          "description": "Origin of the operation",
-          "readOnly": true
-        }
-      }
-    },
-    "ResourceProviderOperationDisplay": {
-      "type": "object",
-      "description": "Display metadata associated with the operation.",
-      "properties": {
-        "provider": {
-          "type": "string",
-          "description": "Resource provider: Microsoft KubernetesConfiguration."
-        },
-        "resource": {
-          "type": "string",
-          "description": "Resource on which the operation is performed."
-        },
-        "operation": {
-          "type": "string",
-          "description": "Type of operation: get, read, delete, etc."
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of this operation."
         }
       }
     },
