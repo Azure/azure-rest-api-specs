@@ -569,12 +569,12 @@
           {
             "name": "investigation",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "Additional parameters supplied to the operation.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/InvestigationResource"
             },
-            "x-ms-client-name": "resource"
+            "x-ms-client-name": "investigation"
           }
         ],
         "responses": {
@@ -1414,12 +1414,14 @@
         "dataCollectionRuleResourceId": {
           "type": "string",
           "description": "The Azure resource Id of the default data collection rule for this workspace.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-azure-resource": true
         },
         "dataCollectionEndpointResourceId": {
           "type": "string",
           "description": "The Azure resource Id of the default data collection endpoint for this workspace.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-azure-resource": true
         }
       }
     },
