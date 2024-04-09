@@ -37,6 +37,7 @@ model InvestigationResource extends ExtensionResource<InvestigationProperties> {
  * Filter operator for dimensions or tags.
  */
 @doc("Filter operator for dimensions or tags")
+@added(Microsoft.Monitor.Versions.v2024_01_01_preview)
 enum FilterOperator {
   @doc("Include this tag in the filter")
   include,
@@ -50,6 +51,7 @@ enum FilterOperator {
  * The sensitivity which controls the investigation operation.
  */
 @doc("The sensitivity which controls the investigation operation.")
+@added(Microsoft.Monitor.Versions.v2024_01_01_preview)
 enum Sensitivity {
   @doc("Low sensitivity for the investigation")
   low,
@@ -64,6 +66,7 @@ enum Sensitivity {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
 @doc("Denotes the state of the investigation operation.")
+@added(Microsoft.Monitor.Versions.v2024_01_01_preview)
 enum InvestigationProvisioningState {
   @doc("No investigation operation state")
   none,
@@ -79,6 +82,7 @@ enum InvestigationProvisioningState {
  * The health state of the investigation's scope.
  */
 @doc("The health state of the investigation's scope")
+@added(Microsoft.Monitor.Versions.v2024_01_01_preview)
 enum HealthState {
   @doc("Investigation health state is unknown")
   `unknown`,
@@ -94,6 +98,7 @@ enum HealthState {
  * The confidence level of the investigation result.
  */
 @doc("The confidence level of the investigation result")
+@added(Microsoft.Monitor.Versions.v2024_01_01_preview)
 enum ConfidenceLevel {
   @doc("Investigation result confidence level is unknown")
   `unknown`,
@@ -109,6 +114,7 @@ enum ConfidenceLevel {
  * The type of the result returned by the investigation.
  */
 @doc("The type of the result returned by the investigation")
+@added(Microsoft.Monitor.Versions.v2024_01_01_preview)
 enum ResultType {
   @doc("Resource Health Investigation result")
   resourceHealth,
@@ -122,6 +128,7 @@ enum ResultType {
  * Investigation properties with the investigation result.
  */
 @doc("Investigation properties with the investigation result")
+@added(Microsoft.Monitor.Versions.v2024_01_01_preview)
 model InvestigationProperties {
   /**
    * The target ARM resources which the investigation will use.
@@ -166,6 +173,7 @@ model InvestigationProperties {
 /**
  * The run configuration for the investigation.
  */
+@added(Microsoft.Monitor.Versions.v2024_01_01_preview)
 model InvestigationRunConfiguration {
   @doc("Hints used for the investigation run")
   @extension("x-ms-identifiers", [])
@@ -194,6 +202,7 @@ model InvestigationRunConfiguration {
 /**
  * Filter for dimensions or tags.
  */
+@added(Microsoft.Monitor.Versions.v2024_01_01_preview)
 model Filter {
   /**
    * The name of the dimension or tag to filter on.
@@ -215,6 +224,7 @@ model Filter {
 /**
  * The investigation that ran on the given scope.
  */
+@added(Microsoft.Monitor.Versions.v2024_01_01_preview)
 model Investigation {
   /**
    * The scope of which this investigation ran on.
@@ -250,6 +260,7 @@ model Investigation {
 /**
  * The execution details of the investigation.
  */
+@added(Microsoft.Monitor.Versions.v2024_01_01_preview)
 model Execution {
   @doc("The time the investigation completed running")
   completedOn?: utcDateTime;
@@ -264,6 +275,7 @@ model Execution {
 /**
  * The investigation result.
  */
+@added(Microsoft.Monitor.Versions.v2024_01_01_preview)
 model InvestigationResult {
   /**
    * The health state of the investigation's scope.
@@ -305,6 +317,7 @@ model InvestigationResult {
 /**
  * Common fields that are returned in the response for all Azure Resource Manager resources
  */
+@added(Microsoft.Monitor.Versions.v2024_01_01_preview)
 model Resource {
   /**
    * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
@@ -332,6 +345,7 @@ model Resource {
 }
 
 @armResourceOperations
+@added(Microsoft.Monitor.Versions.v2024_01_01_preview)
 interface Investigations {
   /**
    * Gets an investigation.
