@@ -513,22 +513,6 @@
         "summary": "Creates or updates a managed cluster.",
         "parameters": [
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "The request should only proceed if an entity matches this string.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "The request should only proceed if no entity matches this string.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
-          },
-          {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -548,6 +532,22 @@
               "$ref": "#/definitions/ManagedCluster"
             },
             "description": "The managed cluster to create or update."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "The request should only proceed if no entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           }
         ],
         "responses": {
@@ -681,14 +681,6 @@
         "summary": "Updates tags on a managed cluster.",
         "parameters": [
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "The request should only proceed if an entity matches this string.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
-          },
-          {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -708,6 +700,14 @@
               "$ref": "#/definitions/TagsObject"
             },
             "description": "Parameters supplied to the Update Managed Cluster Tags operation."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           }
         ],
         "responses": {
@@ -739,14 +739,6 @@
         "summary": "Deletes a managed cluster.",
         "parameters": [
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "The request should only proceed if an entity matches this string.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
-          },
-          {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -760,6 +752,14 @@
           },
           {
             "$ref": "#/parameters/IgnorePodDisruptionBudgetParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           }
         ],
         "responses": {
@@ -1164,22 +1164,6 @@
         "summary": "Creates or updates an agent pool in the specified managed cluster.",
         "parameters": [
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "The request should only proceed if an entity matches this string.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
-          },
-          {
-            "name": "If-None-Match",
-            "in": "header",
-            "description": "The request should only proceed if no entity matches this string.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifNoneMatch"
-          },
-          {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -1202,6 +1186,22 @@
               "$ref": "#/definitions/AgentPool"
             },
             "description": "The agent pool to create or update."
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "The request should only proceed if no entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           }
         ],
         "responses": {
@@ -1302,14 +1302,6 @@
         "summary": "Deletes an agent pool in the specified managed cluster.",
         "parameters": [
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "The request should only proceed if an entity matches this string.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
-          },
-          {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -1326,6 +1318,14 @@
           },
           {
             "$ref": "#/parameters/IgnorePodDisruptionBudgetParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if an entity matches this string.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           }
         ],
         "responses": {
@@ -3976,7 +3976,7 @@
     "ManagedClusterAgentPoolProfileProperties": {
       "type": "object",
       "properties": {
-        "eTag":{
+        "eTag": {
           "type": "string",
           "description": "Unique read-only string used to implement optimistic concurrency. The eTag value will change when the resource is updated. Specify an if-match or if-none-match header with the eTag value for a subsequent request to enable optimistic concurrency per the normal etag convention.",
           "readOnly": true
