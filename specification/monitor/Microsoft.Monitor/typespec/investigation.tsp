@@ -348,8 +348,6 @@ interface Investigations {
   /**
    * Gets an investigation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Investigations_GetAtResource")
   @doc("Returns the specific investigation")
   @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
   getAtResource is ArmResourceRead<InvestigationResource>;
@@ -357,16 +355,12 @@ interface Investigations {
   /**
    * You can provide the template and parameters directly in the request or link to JSON files.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Investigations_CreateOrUpdateAtResource")
   @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
   createOrUpdateAtResource is ArmResourceCreateOrUpdateAsync<InvestigationResource>;
 
   /**
    * A template investigation that is currently running cannot be deleted.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Investigations_DeleteAtResource")
   @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
   deleteAtResource is ArmResourceDeleteSync<InvestigationResource>;
 
@@ -392,8 +386,6 @@ interface Investigations {
   /**
    * Get all the Investigations at the given resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
-  @operationId("Investigations_ListAtSubscription")
   @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
   listAtSubscription is ArmListBySubscription<
   InvestigationResource,
