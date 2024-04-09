@@ -7,4 +7,14 @@ suppressions:
         - "Type of parameter headers of interface WebActivity is changed from {\n        [propertyName: string]: string;\n    } to {\n        [propertyName: string]: any;\n    }"
         - "Type of parameter headers of interface WebHookActivity is changed from {\n        [propertyName: string]: string;\n    } to {\n        [propertyName: string]: any;\n    }"
         - Type of parameter value of interface CredentialListResponse is changed from ManagedIdentityCredentialResource[] to CredentialResource[]
-S
+  azure-sdk-for-go:
+    - package: 'sdk/resourcemanager/datafactory/armdatafactory'
+      breaking-changes:
+        - Field `ManagedIdentityCredentialResource` of struct `CredentialOperationsClientCreateOrUpdateResponse` has been removed
+        - Field `ManagedIdentityCredentialResource` of struct `CredentialOperationsClientGetResponse` has been removed
+        - Function `*CredentialOperationsClient.CreateOrUpdate` parameter(s) have been changed from `(context.Context, string, string, string, ManagedIdentityCredentialResource, *CredentialOperationsClientCreateOrUpdateOptions)` to `(context.Context, string, string, string, CredentialResource, *CredentialOperationsClientCreateOrUpdateOptions)`
+        - Struct `ManagedIdentityCredentialResource` has been removed
+        - Type of `AzureFunctionActivityTypeProperties.Headers` has been changed from `map[string]*string` to `map[string]any`
+        - Type of `CredentialListResponse.Value` has been changed from `[]*ManagedIdentityCredentialResource` to `[]*CredentialResource`
+        - Type of `WebActivityTypeProperties.Headers` has been changed from `map[string]*string` to `map[string]any`
+        - Type of `WebHookActivityTypeProperties.Headers` has been changed from `map[string]*string` to `map[string]any`
