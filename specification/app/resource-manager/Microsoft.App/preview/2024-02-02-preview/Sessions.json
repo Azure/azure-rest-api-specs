@@ -204,71 +204,6 @@
           "nextLinkName": "nextLink"
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sessionPools/{sessionPoolName}/sessions/{name}/updateEnvironmentVariables": {
-      "post": {
-        "tags": [
-          "ContainerAppsSessionPoolSessions"
-        ],
-        "summary": "Update environment variables of a Session.",
-        "operationId": "ContainerAppsSessionPoolSessions_UpdateEnvironmentVariables",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "sessionPoolName",
-            "in": "path",
-            "description": "Name of the Session Pool.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z][a-z0-9]*$",
-            "minLength": 3,
-            "maxLength": 63
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the Session.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z][a-z0-9]*$",
-            "minLength": 3,
-            "maxLength": 63
-          },
-          {
-            "name": "environmentVariables",
-            "in": "body",
-            "description": "Environment variables to update",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EnvironmentVariableCollection"
-            }
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update Session environment variables": {
-            "$ref": "./examples/Sessions_UpdateEnvironmentVariables.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -421,37 +356,6 @@
           "readOnly": true
         }
       }
-    },
-    "EnvironmentVariablesItem": {
-      "description": "An item of the environment variables collection.",
-      "type": "object",
-      "properties": {
-        "key": {
-          "description": "The key of the item.",
-          "type": "string"
-        },
-        "value": {
-          "description": "The value of the item.",
-          "type": "array",
-          "items": {
-            "$ref": "./CommonDefinitions.json#/definitions/EnvironmentVar"
-          }
-        }
-      }
-    },
-    "EnvironmentVariableCollection": {
-      "description": "Environment variables to update.",
-      "type": "object",
-      "properties": {
-        "environmentVariables": {
-          "description": "Collection of environment variables",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EnvironmentVariablesItem"
-          }
-        }
-      },
-      "x-ms-client-flatten": true
     }
   }
 }
