@@ -569,12 +569,12 @@
           {
             "name": "investigation",
             "in": "body",
-            "description": "Additional parameters supplied to the operation.",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/InvestigationResource"
             },
-            "x-ms-client-name": "investigation"
+            "x-ms-client-name": "resource"
           }
         ],
         "responses": {
@@ -2205,6 +2205,7 @@
           "format": "arm-id",
           "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\"",
           "readOnly": true,
+          "x-ms-azure-resource": true,
           "x-ms-arm-id-details": {
             "allowedResources": []
           }

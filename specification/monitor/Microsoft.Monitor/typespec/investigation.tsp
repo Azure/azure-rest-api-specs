@@ -19,7 +19,6 @@ namespace Microsoft.Monitor;
 @includeInapplicableMetadataInPayload(false)
 //@Azure.ResourceManager.Private.armResourceInternal(InvestigationProperties)
 @doc("An investigation definition.")
-//@Versioning.added(Versions.v2024_01_01_preview)
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
 model InvestigationResource extends ExtensionResource<InvestigationProperties> {
   /**
@@ -323,6 +322,7 @@ model Resource {
    * Fully qualified resource ID for the resource. E.g. "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
    */
   @visibility("read")
+  @extension("x-ms-azure-resource", true)
   id?: ResourceIdentifier;
 
   /**
