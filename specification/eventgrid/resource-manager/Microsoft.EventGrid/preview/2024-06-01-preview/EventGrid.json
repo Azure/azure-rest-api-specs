@@ -11637,6 +11637,10 @@
           "Namespaces_ValidateCustomDomainOwnership": {
             "$ref": "./examples/Namespaces_ValidateCustomDomainOwnership.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -14879,41 +14883,6 @@
       },
       "x-ms-discriminator-value": "NamespaceTopic"
     },
-    "FabricEventStreamEventSubscriptionDestinationProperties": {
-      "description": "The properties for a fabric event stream destination.",
-      "type": "object",
-      "properties": {
-        "workspaceId": {
-          "description": "Event stream workspace id.",
-          "type": "string"
-        },
-        "eventStreamArtifactId": {
-          "description": "Event stream artifact id.",
-          "type": "string"
-        },
-        "eventLinkId": {
-          "description": "Data source id.",
-          "type": "string"
-        }
-      }
-    },
-    "FabricEventStreamEventSubscriptionDestination": {
-      "description": "Information about the fabric event stream destination for an event subscription.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/EventSubscriptionDestination"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/FabricEventStreamEventSubscriptionDestinationProperties",
-          "description": "Storage Queue Properties of the event subscription destination.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "x-ms-discriminator-value": "FabricEventStream"
-    },
     "EventSubscriptionDestination": {
       "description": "Information about the destination for an event subscription.",
       "required": [
@@ -14933,8 +14902,7 @@
             "AzureFunction",
             "PartnerDestination",
             "MonitorAlert",
-            "NamespaceTopic",
-            "FabricEventStream"
+            "NamespaceTopic"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -17732,14 +17700,14 @@
       "description": "Namespace custom domain ownership validation result.",
       "type": "object",
       "properties": {
-        "CustomDomainsForTopicsConfiguration": {
+        "customDomainsForTopicsConfiguration": {
           "description": "List of custom domain configurations for the namespace under topics configuration.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CustomDomainConfiguration"
           }
         },
-        "CustomDomainsForTopicSpacesConfiguration": {
+        "customDomainsForTopicSpacesConfiguration": {
           "description": "List of custom domain configurations for the namespace under topic spaces configuration.",
           "type": "array",
           "items": {
