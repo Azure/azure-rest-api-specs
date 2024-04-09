@@ -204,7 +204,7 @@
           "enum": [
             "Geocode",
             "ReverseGeocode",
-            "RouteDirections"
+            "Directions"
           ],
           "x-ms-enum": {
             "name": "OperationTypeEnum",
@@ -219,7 +219,7 @@
                 "description": "Reverse geocode asynchronous batch job."
               },
               {
-                "value": "RouteDirections",
+                "value": "Directions",
                 "description": "Route directions asynchronous batch job."
               }
             ]
@@ -242,12 +242,12 @@
         "createdDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Client ID of a user-assigned managed identity. This is used for authentication and authorization purposes. If the managed identity is system-assigned, this field can be null."
+          "description": "Timestamp when the operation was created."
         },
         "lastActionDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the operation was created."
+          "description": "Timestamp when the operation status was updated."
         },
         "percentComplete": {
           "type": "integer",
