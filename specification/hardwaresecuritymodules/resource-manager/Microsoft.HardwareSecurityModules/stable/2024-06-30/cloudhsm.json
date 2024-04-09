@@ -607,6 +607,14 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "BackupProperties",
+            "schema": {
+              "$ref": "#/definitions/BackupProperties"
+            },
+            "description": "Backup Operation Required properties"
           }
         ],
         "responses": {
@@ -658,7 +666,7 @@
             "in": "body",
             "name": "preBackupProperties",
             "schema": {
-              "$ref": "#/definitions/PreBackupAndRestoreProperties"
+              "$ref": "#/definitions/BackupProperties"
             },
             "description": "Optional Parameters to validate prior performing a backup operation."
           }
@@ -767,6 +775,14 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "TODO",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/RestoreProperties"
+            },
+            "description": "The Azure blob SAS token pointing to a folder where the previous successful full backup was stored"
           }
         ],
         "responses": {
@@ -828,7 +844,7 @@
             "in": "body",
             "name": "preRestoreProperties",
             "schema": {
-              "$ref": "#/definitions/PreBackupAndRestoreProperties"
+              "$ref": "#/definitions/RestoreProperties"
             },
             "description": "Optional Parameters to validate prior performing a restore operation."
           }
@@ -1225,6 +1241,21 @@
       },
       "description": "List of private endpoint connections associated with the specified resource."
     },
+    "BackupProperties": {
+      "type": "object",
+      "description": "Cloud Hsm Cluster backup information",
+      "properties": {
+        "azureStorageResourceUri": {
+          "type": "string",
+          "description": "Azure storage Resource Uri"
+        },
+        "useManagedIdentity": {
+          "type": "boolean",
+          "default": false,
+          "description": "Indicates which authentication method should be used. If set to true, Managed HSM will use the configured user-assigned managed identity to authenticate with Azure Storage. Otherwise, a SAS token has to be specified."
+        }
+      }
+    },
     "BackupOperationResult": {
       "properties": {
         "azureStorageBlobContainerUri": {
@@ -1239,72 +1270,74 @@
       ],
       "description": "Backup operation Result"
     },
-    "PreBackupAndRestoreProperties": {
-      "properties": {
-        "useManagedIdentity": {
-          "type": "boolean",
-          "default": false,
-          "description": "Indicates which authentication method should be used. If set to true, Cloud HSM will use the configured user-assigned managed identity to authenticate with Azure Storage."
-        }
-      },
+    "RestoreProperties": {
       "type": "object",
-      "description": "Prepackup operation properties"
-    },
-    "RestoreOperationResult": {
+      "description": "Cloud Hsm Cluster restore information",
       "properties": {
-        "status": {
+        "foldername": {
           "type": "string",
-          "description": "Status of the backup operation"
+          "description": "Directory name in Azure Storage Blob where the backup is stored"
         },
-        "statusDetails": {
+        "azureStorageResourceUri": {
           "type": "string",
-          "description": "The status details of backup operation"
-        },
-        "error": {
-          "$ref": "common.json#/definitions/Error",
-          "description": "Error encountered, if any, during the backup operation."
-        },
-        "startTime": {
-          "type": "integer",
-          "format": "unixtime",
-          "description": "The start time of the backup operation in UTC"
-        },
-        "endTime": {
-          "type": "integer",
-          "format": "unixtime",
-          "description": "The end time of the backup operation in UTC",
-          "x-nullable": true
-        },
-        "jobId": {
-          "type": "string",
-          "description": "Identifier for the backup operation."
+          "description": "Azure Blob storage container Uri"
         }
       },
-      "description": "Backup and Restore operation common properties"
-    }
-  },
-  "parameters": {
-    "cloudHsmClusterName": {
-      "name": "cloudHsmClusterName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the Cloud HSM Cluster within the specified resource group. Cloud HSM Cluster names must be between 3 and 24 characters in length.",
-      "pattern": "^[a-zA-Z0-9-]{3,24}$",
-      "maxLength": 24,
-      "minLength": 3,
-      "x-ms-parameter-location": "method"
+      "RestoreOperationResult": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the backup operation"
+          },
+          "statusDetails": {
+            "type": "string",
+            "description": "The status details of backup operation"
+          },
+          "error": {
+            "$ref": "common.json#/definitions/Error",
+            "description": "Error encountered, if any, during the backup operation."
+          },
+          "startTime": {
+            "type": "integer",
+            "format": "unixtime",
+            "description": "The start time of the backup operation in UTC"
+          },
+          "endTime": {
+            "type": "integer",
+            "format": "unixtime",
+            "description": "The end time of the backup operation in UTC",
+            "x-nullable": true
+          },
+          "jobId": {
+            "type": "string",
+            "description": "Identifier for the backup operation."
+          }
+        },
+        "description": "Backup and Restore operation common properties"
+      }
     },
-    "peConnectionName": {
-      "name": "peConnectionName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Name of the private endpoint connection associated with the Cloud HSM Cluster.",
-      "pattern": "^[a-zA-Z0-9-]{3,24}$",
-      "maxLength": 24,
-      "minLength": 3,
-      "x-ms-parameter-location": "method"
+    "parameters": {
+      "cloudHsmClusterName": {
+        "name": "cloudHsmClusterName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The name of the Cloud HSM Cluster within the specified resource group. Cloud HSM Cluster names must be between 3 and 24 characters in length.",
+        "pattern": "^[a-zA-Z0-9-]{3,24}$",
+        "maxLength": 24,
+        "minLength": 3,
+        "x-ms-parameter-location": "method"
+      },
+      "peConnectionName": {
+        "name": "peConnectionName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "Name of the private endpoint connection associated with the Cloud HSM Cluster.",
+        "pattern": "^[a-zA-Z0-9-]{3,24}$",
+        "maxLength": 24,
+        "minLength": 3,
+        "x-ms-parameter-location": "method"
+      }
     }
   }
-}
