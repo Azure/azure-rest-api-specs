@@ -17,7 +17,8 @@ namespace Microsoft.Workloads;
  */
 union EpicEnvironmentType {
   string,
-    /**
+
+  /**
    * Environment is designated for non-production use.
    */
   NonProduction: "NonProduction",
@@ -33,6 +34,7 @@ union EpicEnvironmentType {
  */
 union EpicConfigurationType {
   string,
+
   /**
    * Configuration for registration.
    */
@@ -44,6 +46,7 @@ union EpicConfigurationType {
  */
 union EpicVirtualInstanceStatus {
   string,
+
   /**
    * Instance is currently running.
    */
@@ -65,10 +68,11 @@ union EpicVirtualInstanceStatus {
  */
 union EpicHealthState {
   string,
+
   /**
    * Health state is available.
    */
-Available:  "Available",
+  Available: "Available",
 
   /**
    * Instance is unavailable.
@@ -91,6 +95,7 @@ Available:  "Available",
  */
 union EpicVirtualInstanceState {
   string,
+
   /**
    * Registration of the instance is in progress.
    */
@@ -112,6 +117,7 @@ union EpicVirtualInstanceState {
  */
 union EpicVirtualInstanceProvisioningState {
   string,
+
   /**
    * Provisioning has succeeded.
    */
@@ -148,6 +154,7 @@ union EpicVirtualInstanceProvisioningState {
  */
 union WssRole {
   string,
+
   /**
    * Role for WSS InterConnect.
    */
@@ -216,6 +223,7 @@ union DatabaseVmRole {
  */
 union PresentationRole {
   string,
+
   /**
    * Role for Hyperspace VDI.
    */
@@ -237,6 +245,7 @@ union PresentationRole {
  */
 union SharedRole {
   string,
+
   /**
    * Role for Kuiper.
    */
@@ -258,6 +267,7 @@ union SharedRole {
  */
 union HyperspaceWebRole {
   string,
+
   /**
    * Role for Hyperspace Web.
    */
