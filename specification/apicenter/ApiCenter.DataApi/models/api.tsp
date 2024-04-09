@@ -48,7 +48,7 @@ model Api {
   externalDocumentation?: ExternalDocumentation[];
 
   @doc("Points of contact for the API.")
-  contacts?: Array<Contact>;
+  contacts?: Contact[];
 
   @doc("The custom metadata defined for API entities.")
   customProperties?: {};
