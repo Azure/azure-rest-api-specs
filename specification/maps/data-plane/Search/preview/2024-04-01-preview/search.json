@@ -471,6 +471,10 @@
         "description": "The Geocoding Asynchronous Batch API is designed for processing large volumes of geocoding queries asynchronously. This API is optimized for handling high-volume batch requests without the need for immediate response times, making it ideal for extensive geocoding operations.\n\nAfter submitting your batch request, the service processes the queries in the background. You can check the status of the request periodically and retrieve the results once they are available. This approach is beneficial for applications that can accommodate longer processing times and do not require instant responses.\n\n### Submitting an Asynchronous Batch Request\n\nTo submit a request, you must provide the following:\n\n- **`inputBlobUrl`**: A URL pointing to a blob storage that contains your batch of geocoding queries. The format of the data should be consistent with that used for the synchronous batch version.\n- **`outputStorageUrl`**: The destination URL where the batch results will be stored upon completion.\n- **`msiClientId`** (optional): The Client ID of a user-assigned managed identity. This is used for authentication and authorization of both `inputBlobUrl` and `outputStorageUrl`. If the managed identity is system-assigned, this field can be left null.\n\nThe response header `Operation-Location` returns a URL with the Azure Maps geography endpoint `{geography}.atlas.microsoft.com`. To ensure that the endpoint returned in the `Operation-Location` header is the same as the submit job endpoint, using the geography endpoint is suggested.",
         "operationId": "Search_SubmitGeocodingAsynchronousBatch",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location",
+          "final-state-schema": "#/definitions/AsyncBatchOperation"
+        },
         "x-ms-examples": {
           "Submit an asynchronous batch job for forward geocoding": {
             "$ref": "./examples/ForwardGeocodingAsyncBatch.json"
@@ -716,6 +720,10 @@
         "description": "The Reverse Geocoding Asynchronous Batch API is designed for processing large volumes of reverse geocoding queries asynchronously. This API is optimized for handling high-volume batch requests without the need for immediate response times, making it ideal for extensive geocoding operations.\n\nAfter submitting your batch request, the service processes the queries in the background. You can check the status of the request periodically and retrieve the results once they are available. This approach is beneficial for applications that can accommodate longer processing times and do not require instant responses.\n\n### Submitting an Asynchronous Batch Request\n\nTo submit a request, you must provide the following:\n\n- **`inputBlobUrl`**: A URL pointing to a blob storage that contains your batch of geocoding queries. The format of the data should be consistent with that used for the synchronous batch version.\n- **`outputStorageUrl`**: The destination URL where the batch results will be stored upon completion.\n- **`msiClientId`** (optional): The Client ID of a user-assigned managed identity. This is used for authentication and authorization of both `inputBlobUrl` and `outputStorageUrl`. If the managed identity is system-assigned, this field can be left null.\n\nThe response header `Operation-Location` returns a URL with the Azure Maps geography endpoint `{geography}.atlas.microsoft.com`. To ensure that the endpoint returned in the `Operation-Location` header is the same as the submit job endpoint, using the geography endpoint is suggested.",
         "operationId": "Search_SubmitReverseGeocodingAsynchronousBatch",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location",
+          "final-state-schema": "#/definitions/AsyncBatchOperation"
+        },
         "x-ms-examples": {
           "Submit an asynchronous batch job for reverse geocoding": {
             "$ref": "./examples/ReverseGeocodingAsyncBatch.json"
@@ -1375,6 +1383,9 @@
           "type": "string"
         }
       }
+    },
+    "AsyncBatchOperation": {
+      "$ref": "../../../AsyncBatchManagement/preview/2024-04-01-preview/asyncBatchManagement.json#/definitions/AsyncBatchOperation"
     }
   }
 }
