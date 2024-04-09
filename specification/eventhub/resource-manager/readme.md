@@ -253,11 +253,14 @@ input-file:
 ``` yaml
 directive:
   - suppress: PostOperationAsyncResponseValidation
-    from: namespaces-preview.json
+    from: namespaces.json
     reason: Not a mandatory check
   - suppress: LroPostReturn
-    from: namespaces-preview.json
+    from: namespaces.json
     reason: Not a mandatory check
+  - code: LroErrorContent
+    from: swagger-document
+    reason: Keeping it for legacy tooling
 ```
 
 ### Tag: profile-hybrid-2020-09-01
