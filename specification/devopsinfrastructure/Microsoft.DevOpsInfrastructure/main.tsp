@@ -20,9 +20,9 @@ namespace Microsoft.DevOpsInfrastructure;
 
 /** Api versions */
 enum Versions {
-  /** 2024-03-26-preview preview version */
+  /** 2024-04-04-preview preview version */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  `2024-03-26-preview`,
+  `2024-04-04-preview`,
 }
 
 model Pool is TrackedResource<PoolProperties> {
@@ -515,6 +515,46 @@ model ResourceSku is ProxyResource<ResourceSkuProperties> {
   name: string;
 }
 
+@doc("Describes Compute Resource Quota")
+@parentResource(Location)
+model Quota is ProxyResource<QuotaProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
+  @doc("The name of the quota.")
+  @key("quotaName")
+  @segment("subscriptionUsages")
+  @visibility("read")
+  @path
+  name: QuotaName;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
+@doc("Describes Compute Resource Quota properties")
+model QuotaProperties {
+  @doc("The unit of usage measurement.")
+  unit: string;
+
+  @doc("The current usage of the resource.")
+  currentValue: int64;
+
+  @doc("The maximum permitted usage of the resource.")
+  limit: int64;
+}
+
+union UsageUnit {
+  string,
+  Count: "Count"
+}
+
+@doc("The Quota Names")
+model QuotaName
+{
+  @doc("The name of the resource.")
+  value?: string;
+
+  @doc("The localized name of the resource.")
+  localizedValue?: string;
+}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
 @doc("Properties of a ResourceSku")
 model ResourceSkuProperties {
@@ -566,4 +606,9 @@ model LocationProperties {}
 @armResourceOperations
 interface Sku {
   listByLocation is ArmListBySubscription<ResourceSku>;
+}
+
+@armResourceOperations
+interface SubscriptionUsages {
+  listByLocation is ArmListBySubscription<Quota>;
 }
