@@ -738,7 +738,7 @@ model TextIncidentOperationResult {
   status: IncidentOperationStatus;
 
   @doc("Return error detail when the operation failed.")
-  error?: Azure.Core.Foundations.Error;
+  errorMessage?: Azure.Core.Foundations.Error;
 }
 
 @added(ContentSafety.Versions.v2024_04_15_Preview)

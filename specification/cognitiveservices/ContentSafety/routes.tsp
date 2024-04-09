@@ -238,11 +238,29 @@ interface AutoReviewerOps
       NoConditionalRequests &
       NoClientRequestId> {}
 
+alias OperationIdTrait = Azure.Core.Traits.RequestHeadersTrait<{
+  @header("Operation-Id")
+  @pattern("^[0-9A-Za-z._~-]+$")
+  @maxLength(64)
+  @doc("The operation id passed by the user, if not provided, will be automatically generated as a UUID.")
+  operationId?: string;
+}> &
+  Azure.Core.Traits.ResponseHeadersTrait<{
+    @header("Operation-Id")
+    @pattern("^[0-9A-Za-z._~-]+$")
+    @maxLength(64)
+    @doc("The operation id passed by the user, if not provided, will be automatically generated as a UUID.")
+    operationId: string;
+  }>;
+
 @added(ContentSafety.Versions.v2024_04_15_Preview)
 interface AutoReviewerOperations {
   @summary("Create a new version of auto reviewer.")
   @doc("Create new auto reviewer or a new version of existing auto reviewer.")
-  createOrReplaceAutoReviewer is AutoReviewerOps.LongRunningResourceCreateOrReplace<AutoReviewerVersion>;
+  createOrReplaceAutoReviewer is AutoReviewerOps.LongRunningResourceCreateOrReplace<
+    AutoReviewerVersion,
+    OperationIdTrait
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Get a auto reviewer or a specific version of it.")

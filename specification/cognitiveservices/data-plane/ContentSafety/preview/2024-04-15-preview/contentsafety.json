@@ -588,6 +588,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Analyze Image": {
+            "$ref": "./examples/AnalyzeImage.json"
+          }
         }
       }
     },
@@ -738,6 +743,16 @@
             "pattern": "^[0-9A-Za-z._~-]+$"
           },
           {
+            "name": "Operation-Id",
+            "in": "header",
+            "description": "The operation id passed by the user, if not provided, will be automatically generated as a UUID.",
+            "required": false,
+            "type": "string",
+            "maxLength": 64,
+            "pattern": "^[0-9A-Za-z._~-]+$",
+            "x-ms-client-name": "operationId"
+          },
+          {
             "name": "resource",
             "in": "body",
             "description": "The resource instance.",
@@ -754,6 +769,12 @@
               "$ref": "#/definitions/AutoReviewerVersion"
             },
             "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "The operation id passed by the user, if not provided, will be automatically generated as a UUID.",
+                "maxLength": 64,
+                "pattern": "^[0-9A-Za-z._~-]+$"
+              },
               "Operation-Location": {
                 "type": "string",
                 "format": "uri",
@@ -767,6 +788,12 @@
               "$ref": "#/definitions/AutoReviewerVersion"
             },
             "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "The operation id passed by the user, if not provided, will be automatically generated as a UUID.",
+                "maxLength": 64,
+                "pattern": "^[0-9A-Za-z._~-]+$"
+              },
               "Operation-Location": {
                 "type": "string",
                 "format": "uri",
@@ -903,6 +930,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get All Text Blocklists": {
+            "$ref": "./examples/ListTextBlocklists.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -945,6 +977,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Text Blocklist By blocklistName": {
+            "$ref": "./examples/GetTextBlocklist.json"
           }
         }
       },
@@ -1003,6 +1040,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Create Or Update Text Blocklist": {
+            "$ref": "./examples/CreateOrUpdateTextBlocklist.json"
+          }
         }
       },
       "delete": {
@@ -1038,6 +1080,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Text Blocklist By blocklistName": {
+            "$ref": "./examples/DeleteTextBlocklist.json"
           }
         }
       }
@@ -1089,6 +1136,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Add or Update BlocklistItems To Text Blocklist": {
+            "$ref": "./examples/AddOrUpdateBlocklistItems.json"
+          }
         }
       }
     },
@@ -1135,6 +1187,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Remove BlockItems From Text Blocklist": {
+            "$ref": "./examples/RemoveBlocklistItems.json"
           }
         }
       }
@@ -1187,6 +1244,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Get All BlockItems By blocklistName": {
+            "$ref": "./examples/ListTextBlocklistItems.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1237,6 +1299,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get BlockItem By blocklistName And blocklistItemId": {
+            "$ref": "./examples/GetTextBlocklistItem.json"
           }
         }
       }
@@ -1770,6 +1837,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Analyze Text": {
+            "$ref": "./examples/AnalyzeText.json"
+          }
         }
       }
     },
@@ -1851,6 +1923,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Detect Groundedness": {
+            "$ref": "./examples/DetectGroundedness.json"
           }
         }
       }
@@ -1934,6 +2011,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Detect Jailbreak": {
+            "$ref": "./examples/DetectJailbreak.json"
+          }
         }
       }
     },
@@ -1975,6 +2057,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Detect Protected Material": {
+            "$ref": "./examples/DetectProtectedMaterial.json"
+          }
         }
       }
     },
@@ -2015,6 +2102,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Analyze text prompt injection attacks": {
+            "$ref": "./examples/DetectTextPromptInjection.json"
           }
         }
       }
@@ -3561,7 +3653,7 @@
           "description": "The status of the text incident operation.",
           "readOnly": true
         },
-        "error": {
+        "errorMessage": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "Return error detail when the operation failed."
         }
