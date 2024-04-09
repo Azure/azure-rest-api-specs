@@ -253,28 +253,14 @@
         }
       }
     },
-    "Session": {
-      "description": "Session resource.",
+    "SessionTemplate": {
+      "description": "Session template.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ],
       "properties": {
         "properties": {
           "description": "Session resource specific properties.",
           "type": "object",
           "properties": {
-            "name": {
-              "description": "The name of the Session.",
-              "type": "string"
-            },
-            "count": {
-              "description": "The number of Sessions to generate.",
-              "type": "integer",
-              "format": "int32"
-            },
             "requestedDurationInSeconds": {
               "description": "The requested duration of the Session in seconds.",
               "type": "integer",
@@ -330,6 +316,58 @@
             "sessionAuthConfiguration": {
               "description": "Session auth configuration.",
               "$ref": "#/definitions/SessionAuthConfiguration"
+            }
+          }
+        }
+      }
+    },
+    "Session": {
+      "description": "Session resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Session resource specific properties.",
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "The name of the Session.",
+              "type": "string"
+            },
+            "sessionTemplate": {
+              "description": "The template of the session.",
+              "$ref": "#/definitions/SessionTemplate"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "GenerateSessionsRequest": {
+      "description": "Request body to generate sessions.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Session resource specific properties.",
+          "type": "object",
+          "properties": {
+            "count": {
+              "description": "The number of Sessions to generate.",
+              "type": "integer",
+              "format": "int32"
+            },
+            "sessionTemplate": {
+              "description": "The template of the session.",
+              "$ref": "#/definitions/SessionTemplate"
             }
           },
           "x-ms-client-flatten": true

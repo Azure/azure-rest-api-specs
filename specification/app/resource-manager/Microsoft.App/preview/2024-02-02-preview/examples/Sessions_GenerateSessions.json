@@ -6,18 +6,19 @@
     "api-version": "2024-02-02-preview",
     "sessionEnvelope": {
       "properties": {
-        "name": "testsession",
-        "count": 20,
-        "requestedDurationInSeconds": 3600,
-        "timeElapsedInSeconds": 3600,
-        "sessionKind": "CustomImage",
-        "codeExecutionConfiguration": {
-          "token": "testcodeexecutiontoken",
-          "environment": "testenvironment"
-        },
-        "sessionAuthConfiguration": {
-          "jwtToken": "testsessionauthtoken",
-          "authEnabled": true
+        "count": 2,
+        "sessionTemplate": {
+          "requestedDurationInSeconds": 3600,
+          "timeElapsedInSeconds": 3600,
+          "sessionKind": "CustomImage",
+          "codeExecutionConfiguration": {
+            "token": "testcodeexecutiontoken",
+            "environment": "testenvironment"
+          },
+          "sessionAuthConfiguration": {
+            "jwtToken": "testsessionauthtoken",
+            "authEnabled": true
+          }
         }
       }
     }
@@ -28,25 +29,50 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/sessionPools/testsessionpool/sessions/testsession",
-            "name": "testsession",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/sessionPools/testsessionpool/sessions/testsessionpool--1",
+            "name": "testsessionpool--1",
             "type": "Microsoft.App/sessionPools/sessions",
             "properties": {
-              "name": "testsession",
-              "count": 20,
-              "requestedDurationInSeconds": 3600,
-              "timeElapsedInSeconds": 3600,
-              "expiryTime": "2023-08-02T00:00:00Z",
-              "generatedTime": "2023-08-01T00:00:00Z",
-              "endpoint": "https://testsessionpool.azurewebsites.net",
-              "sessionKind": "CustomImage",
-              "codeExecutionConfiguration": {
-                "token": "testcodeexecutiontoken",
-                "environment": "testenvironment"
-              },
-              "sessionAuthConfiguration": {
-                "jwtToken": "testsessionauthtoken",
-                "authEnabled": true
+              "name": "testsessionpool--1",
+              "endpoint": "https://testsessionpool--1.azurewebsites.net",
+              "sessionTemplate": {
+                "requestedDurationInSeconds": 3600,
+                "timeElapsedInSeconds": 3600,
+                "expiryTime": "2023-08-02T00:00:00Z",
+                "generatedTime": "2023-08-01T00:00:00Z",
+                "sessionKind": "CustomImage",
+                "codeExecutionConfiguration": {
+                  "token": "testcodeexecutiontoken",
+                  "environment": "testenvironment"
+                },
+                "sessionAuthConfiguration": {
+                  "jwtToken": "testsessionauthtoken",
+                  "authEnabled": true
+                }
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/sessionPools/testsessionpool/sessions/testsessionpool--2",
+            "name": "testsessionpool--2",
+            "type": "Microsoft.App/sessionPools/sessions",
+            "properties": {
+              "name": "testsessionpool--1",
+              "endpoint": "https://testsessionpool--2.azurewebsites.net",
+              "sessionTemplate": {
+                "requestedDurationInSeconds": 3600,
+                "timeElapsedInSeconds": 3600,
+                "expiryTime": "2023-08-02T00:00:00Z",
+                "generatedTime": "2023-08-01T00:00:00Z",
+                "sessionKind": "CustomImage",
+                "codeExecutionConfiguration": {
+                  "token": "testcodeexecutiontoken",
+                  "environment": "testenvironment"
+                },
+                "sessionAuthConfiguration": {
+                  "jwtToken": "testsessionauthtoken",
+                  "authEnabled": true
+                }
               }
             }
           }
