@@ -19,12 +19,9 @@ namespace Microsoft.MessagingConnectors;
 @doc("Base Parameters for Location Level operation")
 model LocationLevelBaseParameters {
   ...ApiVersionParameter;
-
   ...SubscriptionIdParameter;
-
   ...LocationResourceParameter;
 }
-
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
 @doc("ActionAsync base operation")
@@ -50,7 +47,6 @@ op ActionAsyncBase<
   body: Request,
 ): Response | Error;
 
-
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
 @doc("ActionAsync operation")
 op LocationLevelActionAsync<
@@ -67,7 +63,10 @@ op LocationLevelActionAsync<
   Error extends {} = ErrorResponse
 > is ActionAsyncBase<
   Request,
-  ArmAcceptedLroResponse<"Resource operation accepted.", LroHeaders> | Response,
+  ArmAcceptedLroResponse<
+    "Resource operation accepted.",
+    LroHeaders
+  > | Response,
   BaseParameters,
   Parameters,
   Error
@@ -77,5 +76,8 @@ op LocationLevelActionAsync<
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.MessagingConnectors/locations/{location}/")
 interface DataPreviewOperations {
   @route("dataPreview")
-  dataPreview is LocationLevelActionAsync<DataPreviewProperties, DataPreviewResults>;
+  dataPreview is LocationLevelActionAsync<
+    DataPreviewProperties,
+    DataPreviewResults
+  >;
 }
