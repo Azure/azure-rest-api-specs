@@ -21,8 +21,6 @@ model Site is ProxyResource<SiteProperties> {
   @segment("sites")
   @visibility("read")
   name: string;
-
-  ...Azure.ResourceManager.ManagedServiceIdentity;
 }
 
 @armResourceOperations

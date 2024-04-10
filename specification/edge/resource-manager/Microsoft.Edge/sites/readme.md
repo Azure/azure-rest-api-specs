@@ -43,7 +43,7 @@ These are the global settings for the edgesites.
 
 ```yaml
 openapi-type: arm
-openapi-subtype: providerHub
+openapi-subtype: rpass
 tag: package-2024-02-01-preview
 ```
 
