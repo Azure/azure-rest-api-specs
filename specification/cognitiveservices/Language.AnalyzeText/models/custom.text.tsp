@@ -172,13 +172,14 @@ model EntityComponentInformation {
 
 @doc("Kind of entity components supported.")
 @added(Versions.v2023_04_15_preview)
-enum entityComponentKind {
+union entityComponentKind {
+  string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  PrebuiltComponent,
+  PrebuiltComponent: "PrebuiltComponent",
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  LearnedComponent,
+  LearnedComponent: "LearnedComponent",
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  ListComponent,
+  ListComponent: "ListComponent",
 }
 
 @added(Versions.v2023_04_15_preview)
@@ -224,11 +225,12 @@ model DynamicClassificationTaskParameters is PreBuiltTaskParameters {
 
 @added(Versions.v2023_04_15_preview)
 @doc("Specifies either one or multiple categories per document. Defaults to multi classification which may return more than one class for each document.")
-enum ClassificationType {
+union ClassificationType {
+  string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  Multi,
+  Multi: "Multi",
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  Single,
+  Single: "Single",
 }
 
 @added(Versions.v2023_04_15_preview)

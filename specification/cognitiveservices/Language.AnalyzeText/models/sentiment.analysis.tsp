@@ -45,28 +45,26 @@ model SentimentTaskResult extends AnalyzeTextTaskResult {
   results: SentimentResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-core/use-extensible-enum"
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
 @doc("The predicted Sentiment for the sentence.")
-@fixed
-enum SentenceSentimentValue {
+union SentenceSentimentValue {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  positive,
+  positive: "positive",
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  neutral,
+  neutral:  "neutral",
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  negative,
+  negative: "negative",
 }
 
-#suppress "@azure-tools/typespec-azure-core/use-extensible-enum"
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
 @doc("The predicted Sentiment for the sentence.")
-@fixed
-enum TokenSentimentValue {
+union TokenSentimentValue {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  positive,
+  positive: "positive",
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  mixed,
+  mixed: "mixed",
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  negative,
+  negative: "negative",
 }
 
 @clientName("SentimentResult", "csharp")
@@ -167,14 +165,13 @@ model TargetRelation {
   relationType: TargetRelationType;
 }
 
-#suppress "@azure-tools/typespec-azure-core/use-extensible-enum"
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
 @doc("The type related to the target.")
-@fixed
-enum TargetRelationType {
+union TargetRelationType {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  assessment,
+  assessment: "assessment",
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  target,
+  target: "target",
 }
 
 @doc("Represents the confidence scores across all sentiment classes: positive and negative.")

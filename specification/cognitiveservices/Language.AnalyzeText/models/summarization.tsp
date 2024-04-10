@@ -46,12 +46,13 @@ model ExtractiveSummarizationResult is PreBuiltResult {
 
 @added(Versions.v2023_04_01)
 @doc("The sorting criteria to use for the results of Extractive Summarization.")
-enum ExtractiveSummarizationSortingCriteria {
+union ExtractiveSummarizationSortingCriteria {
+  string,
   @doc("Indicates that results should be sorted in order of appearance in the text.")
-  Offset,
+  Offset: "Offset",
 
   @doc("Indicates that results should be sorted in order of importance (i.e. rank score) according to the model.")
-  Rank,
+  Rank: "Rank",
 }
 
 @added(Versions.v2023_04_01)

@@ -57,15 +57,16 @@ model InnerErrorModel {
 }
 
 @doc("Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.")
-enum StringIndexType {
+union StringIndexType {
+  string,
   @doc("Returned offset and length values will correspond to TextElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo.")
-  TextElements_v8,
+  TextElements_v8: "TextElements_v8",
 
   @doc("Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that support Unicode, for example Python.")
-  UnicodeCodePoint,
+  UnicodeCodePoint: "UnicodeCodePoint",
 
   @doc("Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript.")
-  Utf16CodeUnit,
+  Utf16CodeUnit: "Utf16CodeUnit",
 }
 
 @doc("Returns the current state of the task.")
@@ -81,29 +82,30 @@ model TaskState {
 @doc("The status of the task at the mentioned last update time.")
 @lroStatus
 @added(Versions.v2023_04_01)
-enum State {
+union State {
+  string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'notStarted' should have a documentation or description, please use decorator @doc to add it."
-  notStarted,
+  notStarted: "notStarted",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'running' should have a documentation or description, please use decorator @doc to add it."
-  running,
+  running: "running",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'succeeded' should have a documentation or description, please use decorator @doc to add it."
   @lroSucceeded
-  succeeded,
+  succeeded: "succeeded",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'partiallyCompleted' should have a documentation or description, please use decorator @doc to add it."
-  partiallyCompleted,
+  partiallyCompleted: "partiallyCompleted",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'failed' should have a documentation or description, please use decorator @doc to add it."
   @lroFailed
-  failed,
+  failed: "failed",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'cancelled' should have a documentation or description, please use decorator @doc to add it."
   @lroCanceled
-  cancelled,
+  cancelled: "cancelled",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'cancelling' should have a documentation or description, please use decorator @doc to add it."
-  cancelling,
+  cancelling: "cancelling",
 }
 
 @doc("Base task object.")
@@ -336,12 +338,13 @@ model AnswersOptions {
 }
 
 @doc("Type of ranker to be used")
-enum RankerKind {
+union RankerKind {
+  string,
   @doc("Default ranker.")
-  Default,
+  Default: "Default",
 
   @doc("Question only ranker.")
-  QuestionOnly,
+  QuestionOnly: "QuestionOnly",
 }
 
 @doc("Context object with previous QnA's information.")
@@ -389,11 +392,12 @@ model SourceFilter is Array<string>;
 
 //todo: add enum member descriptions
 @doc("Set to 'OR' or 'AND' for using corresponding logical operation.")
-enum LogicalOperationKind {
+union LogicalOperationKind {
+  string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'AND' should have a documentation or description, please use decorator @doc to add it."
-  AND,
+  AND: "AND",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'OR' should have a documentation or description, please use decorator @doc to add it."
-  OR,
+  OR: "OR",
 }
 
 @doc("To configure Answer span prediction feature.")
@@ -416,92 +420,95 @@ model ShortAnswerOptions {
 
 //todo: add enum member descriptions
 @doc("Human-readable error code.")
-enum InnerErrorCode {
+union InnerErrorCode {
+  string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'InvalidRequest' should have a documentation or description, please use decorator @doc to add it."
-  InvalidRequest,
+  InvalidRequest: "InvalidRequest",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'InvalidParameterValue' should have a documentation or description, please use decorator @doc to add it."
-  InvalidParameterValue,
+  InvalidParameterValue: "InvalidParameterValue",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'KnowledgeBaseNotFound' should have a documentation or description, please use decorator @doc to add it."
-  KnowledgeBaseNotFound,
+  KnowledgeBaseNotFound: "KnowledgeBaseNotFound",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'AzureCognitiveSearchNotFound' should have a documentation or description, please use decorator @doc to add it."
-  AzureCognitiveSearchNotFound,
+  AzureCognitiveSearchNotFound: "AzureCognitiveSearchNotFound",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'AzureCognitiveSearchThrottling' should have a documentation or description, please use decorator @doc to add it."
-  AzureCognitiveSearchThrottling,
+  AzureCognitiveSearchThrottling: "AzureCognitiveSearchThrottling",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'ExtractionFailure' should have a documentation or description, please use decorator @doc to add it."
-  ExtractionFailure,
+  ExtractionFailure: "ExtractionFailure",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'InvalidRequestBodyFormat' should have a documentation or description, please use decorator @doc to add it."
-  InvalidRequestBodyFormat,
+  InvalidRequestBodyFormat: "InvalidRequestBodyFormat",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'EmptyRequest' should have a documentation or description, please use decorator @doc to add it."
-  EmptyRequest,
+  EmptyRequest: "EmptyRequest",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'MissingInputDocuments' should have a documentation or description, please use decorator @doc to add it."
-  MissingInputDocuments,
+  MissingInputDocuments: "MissingInputDocuments",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'InvalidDocument' should have a documentation or description, please use decorator @doc to add it."
-  InvalidDocument,
+  InvalidDocument: "InvalidDocument",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'ModelVersionIncorrect' should have a documentation or description, please use decorator @doc to add it."
-  ModelVersionIncorrect,
+  ModelVersionIncorrect: "ModelVersionIncorrect",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'InvalidDocumentBatch' should have a documentation or description, please use decorator @doc to add it."
-  InvalidDocumentBatch,
+  InvalidDocumentBatch: "InvalidDocumentBatch",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'UnsupportedLanguageCode' should have a documentation or description, please use decorator @doc to add it."
-  UnsupportedLanguageCode,
+  UnsupportedLanguageCode: "UnsupportedLanguageCode",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'InvalidCountryHint' should have a documentation or description, please use decorator @doc to add it."
-  InvalidCountryHint,
+  InvalidCountryHint: "InvalidCountryHint",
 }
 
 //todo: add enum member descriptions
 @doc("Human-readable error code.")
-enum ErrorCode {
+union ErrorCode {
+  string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'InvalidRequest' should have a documentation or description, please use decorator @doc to add it."
-  InvalidRequest,
+  InvalidRequest: "InvalidRequest",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'InvalidArgument' should have a documentation or description, please use decorator @doc to add it."
-  InvalidArgument,
+  InvalidArgument: "InvalidArgument",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Unauthorized' should have a documentation or description, please use decorator @doc to add it."
-  Unauthorized,
+  Unauthorized: "Unauthorized",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Forbidden' should have a documentation or description, please use decorator @doc to add it."
-  Forbidden,
+  Forbidden: "Forbidden",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'NotFound' should have a documentation or description, please use decorator @doc to add it."
-  NotFound,
+  NotFound: "NotFound",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'ProjectNotFound' should have a documentation or description, please use decorator @doc to add it."
-  ProjectNotFound,
+  ProjectNotFound: "ProjectNotFound",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'OperationNotFound' should have a documentation or description, please use decorator @doc to add it."
-  OperationNotFound,
+  OperationNotFound: "OperationNotFound",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'AzureCognitiveSearchNotFound' should have a documentation or description, please use decorator @doc to add it."
-  AzureCognitiveSearchNotFound,
+  AzureCognitiveSearchNotFound: "AzureCognitiveSearchNotFound",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'AzureCognitiveSearchIndexNotFound' should have a documentation or description, please use decorator @doc to add it."
-  AzureCognitiveSearchIndexNotFound,
+  AzureCognitiveSearchIndexNotFound: "AzureCognitiveSearchIndexNotFound",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'TooManyRequests' should have a documentation or description, please use decorator @doc to add it."
-  TooManyRequests,
+  TooManyRequests: "TooManyRequests",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'AzureCognitiveSearchThrottling' should have a documentation or description, please use decorator @doc to add it."
-  AzureCognitiveSearchThrottling,
+  AzureCognitiveSearchThrottling: "AzureCognitiveSearchThrottling",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'AzureCognitiveSearchIndexLimitReached' should have a documentation or description, please use decorator @doc to add it."
-  AzureCognitiveSearchIndexLimitReached,
+  AzureCognitiveSearchIndexLimitReached: "AzureCognitiveSearchIndexLimitReached",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'InternalServerError' should have a documentation or description, please use decorator @doc to add it."
-  InternalServerError,
+  InternalServerError: "InternalServerError",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'ServiceUnavailable' should have a documentation or description, please use decorator @doc to add it."
-  ServiceUnavailable,
+  ServiceUnavailable: "ServiceUnavailable",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Timeout' should have a documentation or description, please use decorator @doc to add it."
-  Timeout,
+  Timeout: "Timeout",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'QuotaExceeded' should have a documentation or description, please use decorator @doc to add it."
-  QuotaExceeded,
+  QuotaExceeded: "QuotaExceeded",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Conflict' should have a documentation or description, please use decorator @doc to add it."
-  Conflict,
+  Conflict: "Conflict",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'Warning' should have a documentation or description, please use decorator @doc to add it."
-  Warning,
+  Warning: "Warning",
 }
 
 @doc("Predicted sentiment")
 @added(Versions.v2023_04_01)
-enum TextSentiment {
+union TextSentiment {
+  string,
   @doc("Positive statement")
-  positive,
+  positive: "positive",
 
   @doc("Neutral statement")
-  neutral,
+  neutral: "neutral",
 
   @doc("Negative statement")
-  negative,
+  negative: "negative",
 
   @doc("Mixed statement")
-  mixed,
+  mixed: "mixed",
 }
 
 @doc("Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative.")
@@ -519,15 +526,16 @@ model SentimentConfidenceScores {
 
 @added(Versions.v2023_11_15_preview)
 @doc("Enum that defines the length of the output summaries.")
-enum SummaryLengthBucket {
+union SummaryLengthBucket {
+  string,
   @doc("Instructs model to generate shorter length summaries.")
-  short,
+  short: "short",
 
   @doc("Instructs model to generate medium length summaries.")
-  medium,
+  medium: "medium",
 
   @doc("Instructs model to generate longer length summaries.")
-  long,
+  long: "long",
 }
 
 @doc("Supported parameters for an Abstractive Summarization task.")
@@ -581,7 +589,8 @@ model CustomResult {
 }
 
 @doc("Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.")
-enum redactionCharacter {
+union redactionCharacter {
+  string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   exclamationPoint: "!",
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
