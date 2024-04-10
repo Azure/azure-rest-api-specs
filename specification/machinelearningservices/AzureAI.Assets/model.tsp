@@ -56,6 +56,25 @@ model PagedIndex {
   nextLink?: ResourceLocation<Index>;
 }
 
+@doc("Prompt resource definition")
+model Prompt is AssetVersion {
+  @doc("Default workspace blob storage Ui. Should work across storage types and auth scenarios.")
+  storageUri: string
+}
+
+@doc("Paged collection of PromptVersion items")
+@pagedResult
+model PagedPrompt {
+  @doc("The list of Prompts.")
+  @extension("x-ms-identifiers", [])
+  @items
+  value: Prompt[];
+
+  @doc("The link to the next page of items")
+  @nextLink
+  nextLink?: ResourceLocation<Prompt>;
+}
+
 @doc("Next version definition.")
 model VersionInfo {
   @doc("Next version as defined by the server.")
