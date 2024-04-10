@@ -16,7 +16,6 @@ alias acceptHeader<T extends string> = {
   accept: T | "application/problem+json" | string;
 };
 
-// FIXME headers not in generated openapi response
 alias AppConfigResponseHeaders = {
   @doc("Used to guarantee real-time consistency between requests.")
   @header("Sync-Token")
