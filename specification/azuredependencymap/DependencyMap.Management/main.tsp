@@ -58,7 +58,7 @@ union ProvisioningState {
 
   @doc("Resource creation was canceled.")
   Canceled: "Canceled",
-  
+
   @doc("This state indicates that the resource is being provisioned.")
   Provisioning: "Provisioning",
 
@@ -70,7 +70,8 @@ union ProvisioningState {
 
   @doc("This state indicates that the operation on the resource has been accepted.")
   Accepted: "Accepted",
-  string
+
+  string,
 }
 
 @armResourceOperations
@@ -143,7 +144,8 @@ union ProcessNameFilterOperator {
 
   @doc("Operator to exclude items in the result")
   notContains: "notContains",
-  string
+
+  string,
 }
 
 @doc("GetDependencyViewForFocusedMachine request model")
@@ -298,7 +300,8 @@ model AgentStatus {
 union FabricType {
   @doc("VMware fabric type")
   VMware: "VMware",
-  string
+
+  string,
   //fill this
 }
 
@@ -309,7 +312,8 @@ union SourceType {
 
   @doc("OffAzure source type")
   OffAzure: "OffAzure",
-  string
+
+  string,
 }
 
 @armResourceOperations
