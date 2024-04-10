@@ -609,12 +609,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "in": "body",
-            "name": "BackupProperties",
-            "schema": {
-              "$ref": "#/definitions/BackupProperties"
-            },
-            "description": "Backup Operation Required properties"
+            "$ref": "#/parameters/azureStorageResourceUri"
           }
         ],
         "responses": {
@@ -643,7 +638,7 @@
         },
         "x-ms-examples": {
           "CloudHsmCluster_Create_Backup_MaximumSet_Gen": {
-            "$ref": "TODO create example file"
+            "$ref": "./examples/CloudHsmCluster_CreateOrValidate_Backup_MaximumSet_Gen.json"
           }
         }
       }
@@ -673,12 +668,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "in": "body",
-            "name": "preBackupProperties",
-            "schema": {
-              "$ref": "#/definitions/BackupProperties"
-            },
-            "description": "Optional Parameters to validate prior performing a backup operation."
+            "$ref": "#/parameters/azureStorageResourceUri"
           }
         ],
         "responses": {
@@ -708,7 +698,7 @@
         },
         "x-ms-examples": {
           "CloudHsmCluster_PreBackup_Validation_MaximumSet_Gen": {
-            "$ref": "TODO create example file"
+            "$ref": "./examples/CloudHsmCluster_CreateOrValidate_Backup_MaximumSet_Gen.json"
           }
         }
       }
@@ -753,7 +743,7 @@
         },
         "x-ms-examples": {
           "CloudHsmCluster_Get_Backup_Status_MaximumSet_Gen": {
-            "$ref": "TODO create example file"
+            "$ref": "./examples/CloudHsmCluster_Backup_Pending_MaximumSet_Gen.json"
           }
         }
       }
@@ -784,7 +774,7 @@
           },
           {
             "in": "body",
-            "name": "RestoreProperties",
+            "name": "restoreProperties",
             "schema": {
               "$ref": "#/definitions/RestoreProperties"
             },
@@ -816,7 +806,7 @@
           },
           "x-ms-examples": {
             "CloudHsmCluster_Restore_MaximumSet_Gen": {
-              "$ref": "TODO create example file"
+              "$ref": "./examples/CloudHsmCluster_RequestOrValidate_Restore_MaximumSet_Gen.json"
             }
           }
         }
@@ -881,7 +871,7 @@
           },
           "x-ms-examples": {
             "CloudHsmCluster_PreRestore_MaximumSet_Gen": {
-              "$ref": "TODO create example file"
+              "$ref": "./examples/CloudHsmCluster_RequestOrValidate_Restore_MaximumSet_Gen.json"
             }
           }
         }
@@ -914,7 +904,7 @@
             "200": {
               "description": "Cloud HSM Cluster Backup Operation status returned",
               "schema": {
-                "$ref": "#/definitions/BackupOperationResult"
+                "$ref": "#/definitions/RestoreOperationResult"
               }
             },
             "default": {
@@ -926,7 +916,7 @@
           },
           "x-ms-examples": {
             "CloudHsmCluster_Get_Restore_Status_MaximumSet_Gen": {
-              "$ref": "TODO create example file"
+              "$ref": "./examples/CloudHsmCluster_Restore_Pending_MaximumSet_Gen.json"
             }
           }
         }
@@ -1243,19 +1233,9 @@
       },
       "description": "List of private endpoint connections associated with the specified resource."
     },
-    "BackupProperties": {
-      "type": "object",
-      "description": "Cloud Hsm Cluster backup information",
-      "properties": {
-        "azureStorageResourceUri": {
-          "type": "string",
-          "description": "Azure storage Resource Uri"
-        }
-      }
-    },
     "BackupOperationResult": {
       "properties": {
-        "azureStorageBlobContainerUri": {
+        "azureStorageResourceUri": {
           "type": "string",
           "description": "The Azure blob storage container Uri which contains the backup"
         }
@@ -1307,13 +1287,15 @@
           "description": "Error encountered, if any, during the backup operation."
         },
         "startTime": {
-          "type": "integer",
-          "format": "unixtime",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
           "description": "The start time of the backup operation in UTC"
         },
         "endTime": {
-          "type": "integer",
-          "format": "unixtime",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
           "description": "The end time of the backup operation in UTC",
           "x-nullable": true
         },
@@ -1348,6 +1330,12 @@
         "minLength": 3,
         "x-ms-parameter-location": "method"
       },
+      "azureStorageResourceUri": {
+        "name": "azureStorageResourceUri",
+        "in": "body",
+        "type": "string",
+        "description": "Azure storage Resource Uri"
+      }
       "backupRestoreJobId": {
         "name": "jobId",
         "in": "path",

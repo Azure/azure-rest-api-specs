@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgcloudhsm",
+    "cloudHsmClusterName": "chsm1",
+    "api-version": "2024-06-30",
+    "body": {
+      "jobId": "572a45927fc240e1ac075de27371680b"
+    }
+  },
+  "response": {
+    "202": {
+      "headers": {
+        "Retry-After": 5,
+        "Azure-AsynchOperation": "https://chsm-prebackup-polling-uri/"
+      },
+      "body": {
+        "azureStorageResourceUri": "https://myaccount.blob.core.windows.net/sascontainer/sasContainer",
+        "status": "InProgress",
+        "statusDetails": "Backup operation is in progress",
+        "startTime": "2022-09-12T12:00:00.0000000Z",
+        "endTime": "null",
+        "jobId": "572a45927fc240e1ac075de27371680b"
+      }
+    }
+  }
+}
