@@ -1,7 +1,7 @@
-- [Repository Guidelines for TypeSpec Projects](#repository-guidelines-for-typeSpec-projects)
+- [Repository Guidelines for TypeSpec projects](#repository-guidelines-for-typespec-projects)
   - [Purpose](#purpose)
   - [Repository](#repository)
-  - [Structure Overview](#structure-overview)
+  - [Directory Structure Overview](#directory-structure-overview)
   - [Service Folders](#service-folders)
     - [Packages](#packages)
     - [Structure](#structure)
@@ -14,6 +14,11 @@
 
 # Repository Guidelines for TypeSpec projects
 
+<!-- TODO: 
+Documentation: update the TypeSpec directory structure guidance in the specs repo
+https://github.com/Azure/azure-sdk-tools/issues/8028
+--> 
+
 ## Purpose
 
 We need to formulate a strategy for checking in actual TypeSpec projects for Azure. Service teams need to know where
@@ -25,7 +30,10 @@ library, and to maximize the benefits of TypeSpec, this approach needs to be sup
 
 TypeSpec can co-exist with Swagger within the existing `azure-rest-api-specs` repository. This approach will make it easier to generate Swagger artifacts without needing to sync between repos at the downside of having to live with any baggage associated with the repo as it ages. There are currently over 1,000 issues and 500 open PRs in this repo.
 
-## Structure Overview
+## Directory Structure Overview
+
+This section describes the directory structure of `specification/<azureTeam>/<typeSpecFolder>` set of folders,
+as elaborated on in the [`specification` folder directory structure] article.
 
 This proposal strives to align with [Azure SDK Repo Structure Guidelines](https://azure.github.io/azure-sdk/policies_repostructure.html).
 
@@ -156,3 +164,5 @@ The purest approach to publish a spec is to merge the PR that modifies the TypeS
 In the event that a major break makes it infeasible to continue using a spec with version annotations, the spec could be reset to some base version (likely the breaking one) and continue versioning from there. The commit hash or tag that represented the spec prior to the reset would need to be tracked in order to regenerate older versions of the spec. At this point, if an update was needed to an older version of the spec no longer represented on the latest commit on `main`, we would need a servicing branch and update the hash pointers to the commit on that servicing branch.
 
 This option is only suitable for _public_ previews. Private previews should live solely in a branch (in either the public or private repo) until/unless they become a public preview.
+
+[`specification` folder directory structure]: https://aka.ms/azsdk/spec-dirs
