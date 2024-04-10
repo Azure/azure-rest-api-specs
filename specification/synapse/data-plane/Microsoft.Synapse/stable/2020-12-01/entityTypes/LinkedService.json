@@ -229,14 +229,6 @@
           "type": "object",
           "description": "The host name to use when validating the server certificate for the connection. When not specified, the server name from the Data Source is used for certificate validation, used by recommended version. Type: string."
         },
-        "userName": {
-          "type": "object",
-          "description": "The user name to be used when connecting to server. Type: string."
-        },
-        "password": {
-          "description": "The password for the SQL Server account.",
-          "$ref": "../artifacts.json#/definitions/AzureKeyVaultSecretReference"
-        },
         "applicationIntent": {
           "type": "object",
           "description": "The application workload type when connecting to a server, used by recommended version. Possible values are ReadOnly and ReadWrite. Type: string."
@@ -338,6 +330,14 @@
           "type": "string",
           "description": "The type used for authentication. Type: string."
         },
+        "userName": {
+          "type": "object",
+          "description": "The user name to be used when connecting to server. Type: string."
+        },
+        "password": {
+          "$ref": "../artifacts.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
+        },
         "servicePrincipalId": {
           "type": "object",
           "description": "The ID of the service principal used to authenticate against Azure SQL Data Warehouse. Type: string (or Expression with resultType string)."
@@ -413,6 +413,14 @@
           "type": "string",
           "description": "The type used for authentication. Type: string."
         },
+        "userName": {
+          "type": "object",
+          "description": "The on-premises Windows authentication user name. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "The on-premises Windows authentication password.",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
+        },
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
@@ -463,6 +471,14 @@
           ],
           "type": "string",
           "description": "The type used for authentication. Type: string."
+        },
+        "userName": {
+          "type": "object",
+          "description": "The on-premises Windows authentication user name. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "The on-premises Windows authentication password.",
+          "$ref": "../artifacts.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
           "type": "object",
@@ -516,6 +532,14 @@
           ],
           "type": "string",
           "description": "The type used for authentication. Type: string."
+        },
+        "userName": {
+          "type": "object",
+          "description": "The user name to be used when connecting to server. Type: string."
+        },
+        "password": {
+          "$ref": "../artifacts.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
         },
         "servicePrincipalId": {
           "type": "object",
@@ -597,6 +621,14 @@
           ],
           "type": "string",
           "description": "The type used for authentication. Type: string."
+        },
+        "userName": {
+          "type": "object",
+          "description": "The user name to be used when connecting to server. Type: string."
+        },
+        "password": {
+          "$ref": "../artifacts.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
         },
         "servicePrincipalId": {
           "type": "object",

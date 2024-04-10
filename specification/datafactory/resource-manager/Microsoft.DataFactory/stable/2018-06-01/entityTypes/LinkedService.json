@@ -257,15 +257,6 @@
           "x-ms-format": "dfe-string",
           "description": "The host name to use when validating the server certificate for the connection. When not specified, the server name from the Data Source is used for certificate validation, used by recommended version. Type: string."
         },
-        "userName": {
-          "type": "object",
-          "x-ms-format": "dfe-string",
-          "description": "The user name to be used when connecting to server. Type: string."
-        },
-        "password": {
-          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
-          "description": "The password for the SQL Server account."
-        },
         "applicationIntent": {
           "type": "object",
           "x-ms-format": "dfe-string",
@@ -381,6 +372,15 @@
           "type": "string",
           "description": "The type used for authentication. Type: string."
         },
+        "userName": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The user name to be used when connecting to server. Type: string."
+        },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
+        },
         "servicePrincipalId": {
           "type": "object",
           "x-ms-format": "dfe-string",
@@ -460,6 +460,15 @@
           "type": "string",
           "description": "The type used for authentication. Type: string."
         },
+        "userName": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The on-premises Windows authentication user name. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "The on-premises Windows authentication password.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
         "encryptedCredential": {
           "type": "string",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
@@ -510,6 +519,15 @@
           ],
           "type": "string",
           "description": "The type used for authentication. Type: string."
+        },
+        "userName": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The on-premises Windows authentication user name. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "The on-premises Windows authentication password.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "encryptedCredential": {
           "type": "string",
@@ -563,6 +581,15 @@
           ],
           "type": "string",
           "description": "The type used for authentication. Type: string."
+        },
+        "userName": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The user name to be used when connecting to server. Type: string."
+        },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
         },
         "servicePrincipalId": {
           "type": "object",
@@ -648,6 +675,15 @@
           ],
           "type": "string",
           "description": "The type used for authentication. Type: string."
+        },
+        "userName": {
+          "type": "object",
+          "x-ms-format": "dfe-string",
+          "description": "The user name to be used when connecting to server. Type: string."
+        },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
         },
         "servicePrincipalId": {
           "type": "object",
