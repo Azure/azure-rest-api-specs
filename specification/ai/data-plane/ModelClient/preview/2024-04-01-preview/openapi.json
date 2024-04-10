@@ -12,52 +12,6 @@
   "schemes": [
     "https"
   ],
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}",
-    "useSchemePrefix": false,
-    "parameters": [
-      {
-        "name": "endpoint",
-        "in": "path",
-        "description": "The AI model service endpoint.",
-        "required": true,
-        "type": "string"
-      },
-      {
-        "name": "extra_parameters",
-        "in": "path",
-        "description": "Controls what happens if extra parameters are passed in the request payload.",
-        "required": false,
-        "type": "string",
-        "enum": [
-          "error",
-          "ignore",
-          "allow"
-        ],
-        "x-ms-enum": {
-          "name": "ExtraParameters",
-          "modelAsString": true,
-          "values": [
-            {
-              "name": "error",
-              "value": "error",
-              "description": "The service should error when it sees extra parameters in the request payload. This is the default behavior if the service."
-            },
-            {
-              "name": "ignore",
-              "value": "ignore",
-              "description": "The service should ignore extra parameters in the request payload. They will not be passed to the back-end AI model."
-            },
-            {
-              "name": "allow",
-              "value": "allow",
-              "description": "The service should pass extra parameters to the back-end AI model."
-            }
-          ]
-        }
-      }
-    ]
-  },
   "produces": [
     "application/json"
   ],
