@@ -11,7 +11,7 @@ namespace Language.AnalyzeText;
 @doc("Supported parameters for a Healthcare task.")
 @clientName("HealthcareTaskContent", "csharp")
 model HealthcareTaskParameters is PreBuiltTaskParameters {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Specifies the method used to interpret string offsets.")
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   #suppress "@azure-tools/typespec-azure-core/bad-record-type"
@@ -24,7 +24,7 @@ model HealthcareTaskParameters is PreBuiltTaskParameters {
   documentType?: healthcareDocumentType;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("The FHIR Spec version.")
 @added(Versions.v2023_04_15_preview)
 union fhirVersion {
   string,
@@ -32,7 +32,7 @@ union fhirVersion {
   `4.0.1`: "4.0.1",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Document type.")
 @added(Versions.v2023_04_15_preview)
 union healthcareDocumentType {
   string,
@@ -56,26 +56,27 @@ union healthcareDocumentType {
   ProcedureNote: "ProcedureNote",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("The long running task to be performed by the service on the Healthcare input documents.")
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 model HealthcareLROTask extends AnalyzeTextLROTask {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Healthcare kind of the long running task.")
   kind: AnalyzeTextLROTaskKind.Healthcare;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("Parameters for the Healthcare task.")
   parameters?: HealthcareTaskParameters;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Result object for the processed Healthcare task.")
 model HealthcareResult is PreBuiltResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   @typeChangedFrom(
     Versions.v2023_04_15_preview,
     Array<HealthcareEntitiesDocumentResult>
   )
+  @doc("List of result objects for the processed Healthcare documents.")
   documents: Array<HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Result object for the processed Healthcare document.")
 model HealthcareEntitiesDocumentResult is DocumentResult {
   @doc("Healthcare entities.")
   entities: Array<HealthcareEntity>;
@@ -89,7 +90,7 @@ model HealthcareEntitiesDocumentResult is DocumentResult {
   fhirBundle?: Record<unknown>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Healthcare entity extracted from the document")
 model HealthcareEntity {
   @doc("Entity text as appears in the request.")
   text: string;
@@ -109,7 +110,7 @@ model HealthcareEntity {
   @doc("Confidence score between 0 and 1 of the extracted entity.")
   confidenceScore: float64;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Assertion of the entity.")
   assertion?: HealthcareAssertion;
 
   @doc("Preferred name for the entity. Example: 'histologically' would have a 'name' of 'histologic'.")
@@ -332,7 +333,7 @@ union relationType {
   VariantOfGene: "VariantOfGene",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Assertion of the entity.")
 model HealthcareAssertion {
   @doc("Describes any conditionality on the entity.")
   conditionality?: Conditionality;
@@ -397,7 +398,7 @@ union Association {
   other: "other",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Entity in the relation.")
 model HealthcareRelationEntity {
   @doc("Reference link object, using a JSON pointer RFC 6901 (URI Fragment Identifier Representation), pointing to the entity .")
   ref: string;
@@ -406,7 +407,7 @@ model HealthcareRelationEntity {
   role: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Reference to an entity in known data sources.")
 model HealthcareEntityLink {
   @doc("Entity Catalog. Examples include: UMLS, CHV, MSH, etc.")
   dataSource: string;
@@ -415,18 +416,18 @@ model HealthcareEntityLink {
   id: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@doc("Healthcare Analyze Text long tunning opertion result object.")
 model HealthcareLROResult extends AnalyzeTextLROResult {
   @doc("Kind of the task.")
   kind: AnalyzeTextLROResultsKind.HealthcareLROResults;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Results of the task.")
   results: HealthcareResult;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_15_preview)
+@doc("Result object for the processed Healthcare document with detected language.")
 model HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage
   is HealthcareEntitiesDocumentResult {
   ...DocumentDetectedLanguage;
