@@ -327,7 +327,6 @@ model EntitiesDocumentResultWithMetadata is DocumentResult {
 }
 
 @doc("Entity tag object which contains the name of the tags abd any associated confidence score. Entity Tags are used to express some similarities/affinity between entities.")
-")
 @added(Versions.v2023_04_15_preview)
 model EntityTag {
   @doc("Name of the tag. Entity Tag names will be unique globally.")

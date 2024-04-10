@@ -241,12 +241,15 @@
     },
     "AnalyzeTextEntityRecognitionInput": {
       "type": "object",
+      "description": "The entity recognition analyze text input task request.",
       "properties": {
         "analysisInput": {
-          "$ref": "#/definitions/MultiLanguageAnalysisInput"
+          "$ref": "#/definitions/MultiLanguageAnalysisInput",
+          "description": "The input to be analyzed."
         },
         "parameters": {
-          "$ref": "#/definitions/EntitiesTaskParameters"
+          "$ref": "#/definitions/EntitiesTaskParameters",
+          "description": "Task parameters."
         }
       },
       "allOf": [
@@ -301,7 +304,8 @@
           "description": "next link"
         },
         "tasks": {
-          "$ref": "#/definitions/Tasks"
+          "$ref": "#/definitions/Tasks",
+          "description": "List of tasks."
         },
         "statistics": {
           "$ref": "#/definitions/RequestStatistics",
@@ -1231,7 +1235,7 @@
     },
     "EntitiesDocumentResult": {
       "type": "object",
-      "description": "Contains the result object for the processed document.",
+      "description": "Contains the entity recognition task result for the document.",
       "properties": {
         "id": {
           "type": "string",
@@ -1269,7 +1273,8 @@
       "description": "An object representing the task definition for an Entities Recognition task.",
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/EntitiesTaskParameters"
+          "$ref": "#/definitions/EntitiesTaskParameters",
+          "description": "Task parameters."
         }
       },
       "allOf": [
@@ -1281,7 +1286,7 @@
     },
     "EntitiesResult": {
       "type": "object",
-      "description": "Pre built result",
+      "description": "Contains the entity recognition task result.",
       "properties": {
         "errors": {
           "type": "array",
@@ -1328,7 +1333,7 @@
         },
         "stringIndexType": {
           "type": "string",
-          "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.",
+          "description": "(Optional) parameter to provide the string index type used to interpret string offsets. Defaults to TextElements (Graphemes).",
           "default": "TextElements_v8",
           "enum": [
             "TextElements_v8",
@@ -1361,9 +1366,11 @@
     },
     "EntitiesTaskResult": {
       "type": "object",
+      "description": "Contains the entity task ",
       "properties": {
         "results": {
-          "$ref": "#/definitions/EntitiesResult"
+          "$ref": "#/definitions/EntitiesResult",
+          "description": "Results for entity recognition."
         }
       },
       "required": [
@@ -1378,6 +1385,7 @@
     },
     "Entity": {
       "type": "object",
+      "description": "Defines the detected entity object containing the entity category and entity text detected, etc.",
       "properties": {
         "text": {
           "type": "string",
@@ -1420,7 +1428,8 @@
       "description": "Contains the analyze text Entity linking task LRO result.",
       "properties": {
         "results": {
-          "$ref": "#/definitions/EntityLinkingResult"
+          "$ref": "#/definitions/EntityLinkingResult",
+          "description": "Entity linking result."
         }
       },
       "required": [
@@ -1550,9 +1559,11 @@
     },
     "EntityRecognitionLROResult": {
       "type": "object",
+      "description": "Contains the entity recognition job task result.",
       "properties": {
         "results": {
-          "$ref": "#/definitions/EntitiesResult"
+          "$ref": "#/definitions/EntitiesResult",
+          "description": "Results for the task."
         }
       },
       "required": [
@@ -1716,6 +1727,7 @@
     },
     "HealthcareAssertion": {
       "type": "object",
+      "description": "Assertion of the entity.",
       "properties": {
         "conditionality": {
           "$ref": "#/definitions/Conditionality",
@@ -1733,7 +1745,7 @@
     },
     "HealthcareEntitiesDocumentResult": {
       "type": "object",
-      "description": "Contains the result object for the processed document.",
+      "description": "Result object for the processed Healthcare document.",
       "properties": {
         "id": {
           "type": "string",
@@ -1777,6 +1789,7 @@
     },
     "HealthcareEntity": {
       "type": "object",
+      "description": "Healthcare entity extracted from the document",
       "properties": {
         "text": {
           "type": "string",
@@ -1806,7 +1819,8 @@
           "description": "Confidence score between 0 and 1 of the extracted entity."
         },
         "assertion": {
-          "$ref": "#/definitions/HealthcareAssertion"
+          "$ref": "#/definitions/HealthcareAssertion",
+          "description": "Assertion of the entity."
         },
         "name": {
           "type": "string",
@@ -1830,6 +1844,7 @@
     },
     "HealthcareEntityLink": {
       "type": "object",
+      "description": "Reference to an entity in known data sources.",
       "properties": {
         "dataSource": {
           "type": "string",
@@ -1847,9 +1862,11 @@
     },
     "HealthcareLROResult": {
       "type": "object",
+      "description": "Healthcare Analyze Text long tunning opertion result object.",
       "properties": {
         "results": {
-          "$ref": "#/definitions/HealthcareResult"
+          "$ref": "#/definitions/HealthcareResult",
+          "description": "Results of the task."
         }
       },
       "required": [
@@ -1864,9 +1881,11 @@
     },
     "HealthcareLROTask": {
       "type": "object",
+      "description": "The long running task to be performed by the service on the Healthcare input documents.",
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/HealthcareTaskParameters"
+          "$ref": "#/definitions/HealthcareTaskParameters",
+          "description": "Parameters for the Healthcare task."
         }
       },
       "allOf": [
@@ -1900,6 +1919,7 @@
     },
     "HealthcareRelationEntity": {
       "type": "object",
+      "description": "Entity in the relation.",
       "properties": {
         "ref": {
           "type": "string",
@@ -1917,7 +1937,7 @@
     },
     "HealthcareResult": {
       "type": "object",
-      "description": "Pre built result",
+      "description": "Result object for the processed Healthcare task.",
       "properties": {
         "errors": {
           "type": "array",
@@ -1936,6 +1956,7 @@
         },
         "documents": {
           "type": "array",
+          "description": "List of result objects for the processed Healthcare documents.",
           "items": {
             "$ref": "#/definitions/HealthcareEntitiesDocumentResult"
           }
@@ -1963,7 +1984,7 @@
         },
         "stringIndexType": {
           "type": "string",
-          "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.",
+          "description": "Specifies the method used to interpret string offsets.",
           "default": "TextElements_v8",
           "enum": [
             "TextElements_v8",
@@ -3442,7 +3463,8 @@
       "description": "Contains the PII LRO results.",
       "properties": {
         "results": {
-          "$ref": "#/definitions/PiiResult"
+          "$ref": "#/definitions/PiiResult",
+          "description": "The list of pii results"
         }
       },
       "required": [
@@ -3588,7 +3610,8 @@
       "description": "Contains the analyze text PIIEntityRecognition LRO task.",
       "properties": {
         "results": {
-          "$ref": "#/definitions/PiiResult"
+          "$ref": "#/definitions/PiiResult",
+          "description": "The list of pii results"
         }
       },
       "required": [
@@ -4117,10 +4140,12 @@
         },
         "total": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Count of total tasks."
         },
         "items": {
           "type": "array",
+          "description": "Enumerable of Analyze text job results.",
           "items": {
             "$ref": "#/definitions/AnalyzeTextLROResult"
           },

@@ -410,7 +410,8 @@
           "description": "The numeric value that the extracted text denotes."
         },
         "unit": {
-          "$ref": "#/definitions/AgeUnit"
+          "$ref": "#/definitions/AgeUnit",
+          "description": "Unit of measure for age."
         }
       },
       "required": [
@@ -513,12 +514,15 @@
     },
     "AnalyzeTextEntityRecognitionInput": {
       "type": "object",
+      "description": "The entity recognition analyze text input task request.",
       "properties": {
         "analysisInput": {
-          "$ref": "#/definitions/MultiLanguageAnalysisInput"
+          "$ref": "#/definitions/MultiLanguageAnalysisInput",
+          "description": "The input to be analyzed."
         },
         "parameters": {
-          "$ref": "#/definitions/EntitiesTaskParameters"
+          "$ref": "#/definitions/EntitiesTaskParameters",
+          "description": "Task parameters."
         }
       },
       "allOf": [
@@ -573,7 +577,8 @@
           "description": "next link"
         },
         "tasks": {
-          "$ref": "#/definitions/Tasks"
+          "$ref": "#/definitions/Tasks",
+          "description": "List of tasks."
         },
         "statistics": {
           "$ref": "#/definitions/RequestStatistics",
@@ -1035,7 +1040,8 @@
           "description": "The numeric value that the extracted text denotes."
         },
         "unit": {
-          "$ref": "#/definitions/AreaUnit"
+          "$ref": "#/definitions/AreaUnit",
+          "description": "Unit of measure for area."
         }
       },
       "required": [
@@ -1328,7 +1334,8 @@
           "description": "The numeric value that the extracted text denotes."
         },
         "unit": {
-          "type": "string"
+          "type": "string",
+          "description": "Currency unit."
         },
         "iso4217": {
           "type": "string",
@@ -1686,7 +1693,8 @@
           "description": "Confidence score between 0 and 1 of the extracted entity."
         },
         "assertion": {
-          "$ref": "#/definitions/HealthcareAssertion"
+          "$ref": "#/definitions/HealthcareAssertion",
+          "description": "Assertion of the entity."
         },
         "name": {
           "type": "string",
@@ -2207,6 +2215,7 @@
       "properties": {
         "dateValues": {
           "type": "array",
+          "description": "List of date values.",
           "items": {
             "$ref": "#/definitions/DateValue"
           },
@@ -2226,6 +2235,7 @@
       "properties": {
         "dateValues": {
           "type": "array",
+          "description": "List of date values.",
           "items": {
             "$ref": "#/definitions/DateValue"
           },
@@ -2252,7 +2262,8 @@
           "description": "The actual time that the extracted text denote."
         },
         "modifier": {
-          "$ref": "#/definitions/TemporalModifier"
+          "$ref": "#/definitions/TemporalModifier",
+          "description": "Modifier for datetime to indicate point of reference like before, after etc."
         }
       },
       "required": [
@@ -2521,6 +2532,7 @@
     },
     "EntitiesDocumentResultWithDetectedLanguage": {
       "type": "object",
+      "description": "Contains the entity recognition task result for the document with detected language.",
       "properties": {
         "id": {
           "type": "string",
@@ -2559,7 +2571,7 @@
     },
     "EntitiesDocumentResultWithMetadataDetectedLanguage": {
       "type": "object",
-      "description": "Contains the result object for the processed document.",
+      "description": "Contains the entity recognition task result for the document with metadata and detected language.",
       "properties": {
         "id": {
           "type": "string",
@@ -2601,7 +2613,8 @@
       "description": "An object representing the task definition for an Entities Recognition task.",
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/EntitiesTaskParameters"
+          "$ref": "#/definitions/EntitiesTaskParameters",
+          "description": "Task parameters."
         }
       },
       "allOf": [
@@ -2613,7 +2626,7 @@
     },
     "EntitiesResult": {
       "type": "object",
-      "description": "Pre built result",
+      "description": "Contains the entity recognition task result.",
       "properties": {
         "errors": {
           "type": "array",
@@ -2660,7 +2673,7 @@
         },
         "stringIndexType": {
           "type": "string",
-          "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.",
+          "description": "(Optional) parameter to provide the string index type used to interpret string offsets. Defaults to TextElements (Graphemes).",
           "default": "TextElements_v8",
           "enum": [
             "TextElements_v8",
@@ -2711,9 +2724,11 @@
     },
     "EntitiesTaskResult": {
       "type": "object",
+      "description": "Contains the entity task ",
       "properties": {
         "results": {
-          "$ref": "#/definitions/EntitiesResult"
+          "$ref": "#/definitions/EntitiesResult",
+          "description": "Results for entity recognition."
         }
       },
       "required": [
@@ -2728,6 +2743,7 @@
     },
     "Entity": {
       "type": "object",
+      "description": "Defines the detected entity object containing the entity category and entity text detected, etc.",
       "properties": {
         "text": {
           "type": "string",
@@ -2767,6 +2783,7 @@
     },
     "EntityCategory": {
       "type": "string",
+      "description": "Contains all the entity categories detected by entity recognition.",
       "enum": [
         "Address",
         "Numeric",
@@ -3093,7 +3110,8 @@
       "description": "This object contains information of the detected entity components. The possible component types may expand in the future. Parsing code should handle unexpected values gracefully",
       "properties": {
         "entityComponentKind": {
-          "$ref": "#/definitions/entityComponentKind"
+          "$ref": "#/definitions/entityComponentKind",
+          "description": "Kind of entity component."
         }
       },
       "discriminator": "entityComponentKind",
@@ -3106,7 +3124,8 @@
       "description": "Contains the analyze text Entity linking task LRO result.",
       "properties": {
         "results": {
-          "$ref": "#/definitions/EntityLinkingResult"
+          "$ref": "#/definitions/EntityLinkingResult",
+          "description": "Entity linking result."
         }
       },
       "required": [
@@ -3274,9 +3293,11 @@
     },
     "EntityRecognitionLROResult": {
       "type": "object",
+      "description": "Contains the entity recognition job task result.",
       "properties": {
         "results": {
-          "$ref": "#/definitions/EntitiesResult"
+          "$ref": "#/definitions/EntitiesResult",
+          "description": "Results for the task."
         }
       },
       "required": [
@@ -3291,10 +3312,11 @@
     },
     "EntityTag": {
       "type": "object",
+      "description": "Entity tag object which contains the name of the tags abd any associated confidence score. Entity Tags are used to express some similarities/affinity between entities.",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Tags are to express some similarities/affinity between entities. Entity Tags will be unique globally."
+          "description": "Name of the tag. Entity Tag names will be unique globally."
         },
         "confidenceScore": {
           "type": "number",
@@ -3308,6 +3330,7 @@
     },
     "EntityWithMetadata": {
       "type": "object",
+      "description": "Entity object with tags and metadata.",
       "properties": {
         "text": {
           "type": "string",
@@ -3724,6 +3747,7 @@
     },
     "HealthcareAssertion": {
       "type": "object",
+      "description": "Assertion of the entity.",
       "properties": {
         "conditionality": {
           "$ref": "#/definitions/Conditionality",
@@ -3745,7 +3769,7 @@
     },
     "HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage": {
       "type": "object",
-      "description": "Contains the result object for the processed document.",
+      "description": "Result object for the processed Healthcare document with detected language.",
       "properties": {
         "id": {
           "type": "string",
@@ -3798,6 +3822,7 @@
     },
     "HealthcareEntity": {
       "type": "object",
+      "description": "Healthcare entity extracted from the document",
       "properties": {
         "text": {
           "type": "string",
@@ -3827,7 +3852,8 @@
           "description": "Confidence score between 0 and 1 of the extracted entity."
         },
         "assertion": {
-          "$ref": "#/definitions/HealthcareAssertion"
+          "$ref": "#/definitions/HealthcareAssertion",
+          "description": "Assertion of the entity."
         },
         "name": {
           "type": "string",
@@ -3851,6 +3877,7 @@
     },
     "HealthcareEntityLink": {
       "type": "object",
+      "description": "Reference to an entity in known data sources.",
       "properties": {
         "dataSource": {
           "type": "string",
@@ -3868,9 +3895,11 @@
     },
     "HealthcareLROResult": {
       "type": "object",
+      "description": "Healthcare Analyze Text long tunning opertion result object.",
       "properties": {
         "results": {
-          "$ref": "#/definitions/HealthcareResult"
+          "$ref": "#/definitions/HealthcareResult",
+          "description": "Results of the task."
         }
       },
       "required": [
@@ -3885,9 +3914,11 @@
     },
     "HealthcareLROTask": {
       "type": "object",
+      "description": "The long running task to be performed by the service on the Healthcare input documents.",
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/HealthcareTaskParameters"
+          "$ref": "#/definitions/HealthcareTaskParameters",
+          "description": "Parameters for the Healthcare task."
         }
       },
       "allOf": [
@@ -3926,6 +3957,7 @@
     },
     "HealthcareRelationEntity": {
       "type": "object",
+      "description": "Entity in the relation.",
       "properties": {
         "ref": {
           "type": "string",
@@ -3943,7 +3975,7 @@
     },
     "HealthcareResult": {
       "type": "object",
-      "description": "Pre built result",
+      "description": "Result object for the processed Healthcare task.",
       "properties": {
         "errors": {
           "type": "array",
@@ -3962,6 +3994,7 @@
         },
         "documents": {
           "type": "array",
+          "description": "List of result objects for the processed Healthcare documents.",
           "items": {
             "$ref": "#/definitions/HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage"
           }
@@ -3989,7 +4022,7 @@
         },
         "stringIndexType": {
           "type": "string",
-          "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.",
+          "description": "Specifies the method used to interpret string offsets.",
           "default": "TextElements_v8",
           "enum": [
             "TextElements_v8",
@@ -4038,7 +4071,8 @@
           "description": "The numeric value that the extracted text denotes."
         },
         "unit": {
-          "$ref": "#/definitions/InformationUnit"
+          "$ref": "#/definitions/InformationUnit",
+          "description": "Unit of measure for information."
         }
       },
       "required": [
@@ -4540,7 +4574,8 @@
           "description": "The numeric value that the extracted text denotes."
         },
         "unit": {
-          "$ref": "#/definitions/LengthUnit"
+          "$ref": "#/definitions/LengthUnit",
+          "description": "Unit of measure for length."
         }
       },
       "required": [
@@ -4966,7 +5001,8 @@
       "description": "A metadata for numeric entity instances.",
       "properties": {
         "numberKind": {
-          "$ref": "#/definitions/NumberKind"
+          "$ref": "#/definitions/NumberKind",
+          "description": "Kind of the number type."
         },
         "value": {
           "type": "number",
@@ -4990,7 +5026,8 @@
       "description": "represents the Metadata of numeric intervals.",
       "properties": {
         "rangeKind": {
-          "$ref": "#/definitions/RangeKind"
+          "$ref": "#/definitions/RangeKind",
+          "description": "Kind of numeric ranges supported - like Number, Speed, etc."
         },
         "minimum": {
           "type": "number",
@@ -5003,7 +5040,8 @@
           "description": "The ending value of the interval."
         },
         "rangeInclusivity": {
-          "$ref": "#/definitions/RangeInclusivity"
+          "$ref": "#/definitions/RangeInclusivity",
+          "description": "The inclusiveness of this range."
         }
       },
       "required": [
@@ -5027,7 +5065,8 @@
           "description": "The offset With respect to the reference (e.g., offset = -1 in \"show me the second to last\""
         },
         "relativeTo": {
-          "$ref": "#/definitions/RelativeTo"
+          "$ref": "#/definitions/RelativeTo",
+          "description": "The reference point that the ordinal number denotes."
         },
         "value": {
           "type": "string",
@@ -6795,7 +6834,8 @@
       "description": "Contains the PII LRO results.",
       "properties": {
         "results": {
-          "$ref": "#/definitions/PiiResult"
+          "$ref": "#/definitions/PiiResult",
+          "description": "The list of pii results"
         }
       },
       "required": [
@@ -7072,7 +7112,8 @@
       "description": "Contains the analyze text PIIEntityRecognition LRO task.",
       "properties": {
         "results": {
-          "$ref": "#/definitions/PiiResult"
+          "$ref": "#/definitions/PiiResult",
+          "description": "The list of pii results"
         }
       },
       "required": [
@@ -7642,7 +7683,8 @@
           "description": "The numeric value that the extracted text denotes."
         },
         "unit": {
-          "$ref": "#/definitions/SpeedUnit"
+          "$ref": "#/definitions/SpeedUnit",
+          "description": "Unit of measure for speed."
         }
       },
       "required": [
@@ -7899,10 +7941,12 @@
         },
         "total": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Count of total tasks."
         },
         "items": {
           "type": "array",
+          "description": "Enumerable of Analyze text job results.",
           "items": {
             "$ref": "#/definitions/AnalyzeTextLROResult"
           },
@@ -7926,7 +7970,8 @@
           "description": "The numeric value that the extracted text denotes."
         },
         "unit": {
-          "$ref": "#/definitions/TemperatureUnit"
+          "$ref": "#/definitions/TemperatureUnit",
+          "description": "Unit of measure for tenperature."
         }
       },
       "required": [
@@ -8085,6 +8130,7 @@
       "properties": {
         "dateValues": {
           "type": "array",
+          "description": "List of date values.",
           "items": {
             "$ref": "#/definitions/DateValue"
           },
@@ -8104,6 +8150,7 @@
       "properties": {
         "spanValues": {
           "type": "array",
+          "description": "List of temporal spans detected.",
           "items": {
             "$ref": "#/definitions/TemporalSpanValues"
           },
@@ -8119,19 +8166,23 @@
     },
     "TemporalSpanValues": {
       "type": "object",
+      "description": "Temporal span object.",
       "properties": {
         "begin": {
-          "type": "string"
+          "type": "string",
+          "description": "Start value for the span."
         },
         "end": {
-          "type": "string"
+          "type": "string",
+          "description": "End value for the span."
         },
         "duration": {
           "type": "string",
           "description": "An optional duration value formatted based on the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)"
         },
         "modifier": {
-          "$ref": "#/definitions/TemporalModifier"
+          "$ref": "#/definitions/TemporalModifier",
+          "description": "Modifier for datetime to indicate point of reference like before, after etc."
         },
         "timex": {
           "type": "string",
@@ -8172,6 +8223,7 @@
       "properties": {
         "dateValues": {
           "type": "array",
+          "description": "List of date values.",
           "items": {
             "$ref": "#/definitions/DateValue"
           },
@@ -8222,7 +8274,8 @@
           "description": "The numeric value that the extracted text denotes."
         },
         "unit": {
-          "$ref": "#/definitions/VolumeUnit"
+          "$ref": "#/definitions/VolumeUnit",
+          "description": "Unit of measure for volume."
         }
       },
       "required": [
@@ -8448,7 +8501,8 @@
           "description": "The numeric value that the extracted text denotes."
         },
         "unit": {
-          "$ref": "#/definitions/WeightUnit"
+          "$ref": "#/definitions/WeightUnit",
+          "description": "Unit of measure for weight."
         }
       },
       "required": [
@@ -8583,6 +8637,7 @@
     },
     "fhirVersion": {
       "type": "string",
+      "description": "The FHIR Spec version.",
       "enum": [
         "4.0.1"
       ],
@@ -8599,6 +8654,7 @@
     },
     "healthcareDocumentType": {
       "type": "string",
+      "description": "Document type.",
       "enum": [
         "None",
         "ClinicalTrial",
