@@ -28,26 +28,29 @@ enum Versions {
 
 @doc("The provisioning state of a resource.")
 @lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+
+  // extend ARM common provisioning state
+  ResourceProvisioningState,
 
   @doc("Resource has unknown state.")
-  Unknown,
+  Unknown: "Unknown",
 
   @doc("Resource is being validated.")
-  Validating,
+  Validating: "Validating",
 
   @doc("Resource provisioning in progress.")
-  Processing,
+  Processing: "Processing",
 
   @doc("Resource is being deleted.")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("Resource provisioning action accepted.")
-  Accepted,
+  Accepted: "Accepted",
 
   @doc("Resource has been deleted.")
-  Deleted,
+  Deleted: "Deleted",
 }
 
 @doc("The property for specifying the status of the last operation.")
@@ -58,18 +61,20 @@ model ProvisioningStateProperty {
 }
 
 @doc("The power state of a resource.")
-enum PowerState {
+union PowerState {
+  string,
+
   @doc("Resource is Running.")
-  Running,
+  Running: "Running",
 
   @doc("Resource is Stopped.")
-  Stopped,
+  Stopped: "Stopped",
 
   @doc("Resource is Starting.")
-  Starting,
+  Starting: "Starting",
 
   @doc("Resource is Stopping.")
-  Stopping,
+  Stopping: "Stopping",
 }
 
 @doc("The property for specifying the power state.")

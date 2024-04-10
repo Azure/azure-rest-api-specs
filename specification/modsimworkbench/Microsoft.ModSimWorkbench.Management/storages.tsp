@@ -18,15 +18,17 @@ using Azure.ResourceManager;
 namespace Microsoft.ModSimWorkbench;
 
 @doc("Performance tier of chamber storage.")
-enum StoragePerformanceTier {
-  @doc("Standard tier.")
-  Standard,
+union StoragePerformanceTier {
+  string,
 
-  @doc("Premium tier.")
-  Premium,
+  @doc("Standard tier.")
+  Standard: "Standard",
 
   @doc("Ultra tier.")
-  Ultra,
+  Ultra: "Ultra",
+
+  @doc("Premium tier.")
+  Premium: "Premium",
 }
 
 @doc("Storage properties.")
