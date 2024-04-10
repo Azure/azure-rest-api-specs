@@ -110,8 +110,7 @@ model KeyListResult {
 
   @doc("The URI that can be used to request the next set of paged results.")
   @nextLink
-  @projectedName("json", "@nextLink")
-  nextLink?: string;
+  `@nextLink`?: string;
 }
 
 @doc("Keys serve as identifiers for key-values and are used to store and retrieve corresponding values.")
@@ -154,8 +153,7 @@ model KeyValueListResult {
 
   @doc("The URI that can be used to request the next set of paged results.")
   @nextLink
-  @projectedName("json", "@nextLink")
-  nextLink?: string;
+  `@nextLink`?: string;
 }
 
 @doc("A key-value pair representing application settings.")
@@ -200,8 +198,7 @@ model SnapshotListResult {
 
   @doc("The URI that can be used to request the next set of paged results.")
   @nextLink
-  @projectedName("json", "@nextLink")
-  nextLink?: string;
+  `@nextLink`?: string;
 }
 
 @doc("A snapshot is a named, immutable subset of an App Configuration store's key-values.")
@@ -296,8 +293,7 @@ model LabelListResult {
 
   @doc("The URI that can be used to request the next set of paged results.")
   @nextLink
-  @projectedName("json", "@nextLink")
-  nextLink?: string;
+  `@nextLink`?: string;
 }
 
 @doc("Labels are used to group key-values.")

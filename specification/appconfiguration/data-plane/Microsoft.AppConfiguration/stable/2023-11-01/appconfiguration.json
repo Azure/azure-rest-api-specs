@@ -140,7 +140,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "@nextLink"
         }
       },
       "head": {
@@ -403,7 +403,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "@nextLink"
         }
       },
       "head": {
@@ -930,10 +930,6 @@
               "Sync-Token": {
                 "type": "string",
                 "description": "Used to guarantee real-time consistency between requests."
-              },
-              "ETag": {
-                "type": "string",
-                "description": "A value representing the current state of the resource."
               }
             }
           },
@@ -1189,6 +1185,12 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/LabelListResult"
+            },
+            "headers": {
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              }
             }
           },
           "default": {
@@ -1205,7 +1207,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "@nextLink"
         }
       },
       "head": {
@@ -1696,7 +1698,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "@nextLink"
         }
       },
       "head": {
@@ -2035,6 +2037,12 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SnapshotListResult"
+            },
+            "headers": {
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              }
             }
           },
           "default": {
@@ -2051,7 +2059,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "@nextLink"
         }
       },
       "head": {
@@ -2250,6 +2258,20 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Snapshot"
+            },
+            "headers": {
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              },
+              "ETag": {
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              },
+              "Link": {
+                "type": "string",
+                "description": "Includes links to related resources."
+              }
             }
           },
           "default": {
@@ -2710,8 +2732,7 @@
         },
         "@nextLink": {
           "type": "string",
-          "description": "The URI that can be used to request the next set of paged results.",
-          "x-ms-client-name": "nextLink"
+          "description": "The URI that can be used to request the next set of paged results."
         }
       }
     },
@@ -2865,8 +2886,7 @@
         },
         "@nextLink": {
           "type": "string",
-          "description": "The URI that can be used to request the next set of paged results.",
-          "x-ms-client-name": "nextLink"
+          "description": "The URI that can be used to request the next set of paged results."
         }
       }
     },
@@ -2916,8 +2936,7 @@
         },
         "@nextLink": {
           "type": "string",
-          "description": "The URI that can be used to request the next set of paged results.",
-          "x-ms-client-name": "nextLink"
+          "description": "The URI that can be used to request the next set of paged results."
         }
       }
     },
@@ -3113,8 +3132,7 @@
         },
         "@nextLink": {
           "type": "string",
-          "description": "The URI that can be used to request the next set of paged results.",
-          "x-ms-client-name": "nextLink"
+          "description": "The URI that can be used to request the next set of paged results."
         }
       }
     },
