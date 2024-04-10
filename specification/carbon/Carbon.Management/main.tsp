@@ -39,45 +39,51 @@ model DateRange {
 }
 
 @doc("Supported category types to be used with QueryParameter")
-enum CategoryTypeEnum {
+union CategoryTypeEnum {
+  string,
+
   @doc("Subscription level aggregation granularity")
-  Subscription,
+  Subscription: "Subscription",
 
   @doc("ResourceGroup level aggregation granularity")
-  ResourceGroup,
+  ResourceGroup: "ResourceGroup",
 
   @doc("Location level aggregation granularity")
-  Location,
+  Location: "Location",
 
   @doc("ServiceType level aggregation granularity")
-  ServiceType,
+  ServiceType: "ServiceType",
 
   @doc("Resource level aggregation granularity")
-  Resource,
+  Resource: "Resource",
 
   @doc("ResourceType level aggregation granularity")
-  ResourceType,
+  ResourceType: "ResourceType",
 }
 
 @doc("Supported emission scopes to be used with QueryParameter")
-enum EmissionScopeEnum {
+union EmissionScopeEnum {
+  string,
+
   @doc("Scope1 carbon emission")
-  Scope1,
+  Scope1: "Scope1",
 
   @doc("Scope2 carbon emission")
-  Scope2,
+  Scope2: "Scope2",
 
   @doc("Scope3 carbon emission")
-  Scope3,
+  Scope3: "Scope3",
 }
 
 @doc("Enum for Access Decision")
-enum AccessDecisionEnum {
+union AccessDecisionEnum {
+  string,
+
   @doc("Access allowed")
-  Allowed,
+  Allowed: "Allowed",
 
   @doc("Access denied")
-  Denied,
+  Denied: "Denied",
 }
 
 @doc("Query filter parameter specified by users")
