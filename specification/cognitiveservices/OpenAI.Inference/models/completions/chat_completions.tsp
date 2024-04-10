@@ -248,6 +248,7 @@ model ChatChoice {
   finishReason: CompletionsFinishReason | null;
 
   // Note: this property is currently speculative via observation and not yet documented anywhere.
+
   @doc("""
   The reason the model stopped generating tokens, together with any applicable details.
   This structured representation replaces 'finish_reason' for some models.
@@ -302,6 +303,9 @@ model ChatCompletions {
     Token limits and other settings may limit the number of choices generated.
     """)
   choices: ChatChoice[];
+
+  @doc("The model name used for this completions request.")
+  `model`?: string;
 
   @doc("""
   Content filtering results for zero or more prompts in the request. In a streaming request,
