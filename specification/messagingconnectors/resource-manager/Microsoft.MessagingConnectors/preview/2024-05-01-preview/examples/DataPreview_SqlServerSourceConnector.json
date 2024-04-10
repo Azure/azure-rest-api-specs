@@ -1,10 +1,10 @@
 {
-  "title": "DataPreview Start SqlServerSourceConnector",
-  "operationId": "DataPreviewOperations_StartPreview",
+  "title": "DataPreview SqlServerSourceConnector",
+  "operationId": "DataPreviewOperations_DataPreview",
   "parameters": {
-    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
     "api-version": "2024-05-01-preview",
-    "name": "dataPreviewSqlServerSourceConnector1",
+    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+    "location": "Central US EUAP",
     "body": {
       "connectorProperties": {
         "connectorType": "SqlServerSource",
@@ -28,6 +28,22 @@
     }
   },
   "responses": {
-    "204": {}
+    "200": {
+      "body": {
+        "state": "Success",
+        "count": 3,
+        "results": [
+          "value1",
+          "value2",
+          "value3"
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "example.url",
+        "retry-after": 15
+      }
+    }
   }
 }

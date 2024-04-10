@@ -44,9 +44,6 @@
     },
     {
       "name": "ConnectorOperations"
-    },
-    {
-      "name": "DataPreviewOperationsV1"
     }
   ],
   "paths": {
@@ -125,10 +122,10 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MessagingConnectors/dataPreview": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MessagingConnectors/locations/{location}/dataPreview": {
       "post": {
         "operationId": "DataPreviewOperations_DataPreview",
-        "description": "DataPreview operation",
+        "description": "ActionAsync operation",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -137,135 +134,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "body",
-            "in": "body",
-            "description": "dataPreview properties",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "properties": {
-                  "$ref": "#/definitions/DataPreviewProperties"
-                }
-              },
-              "required": [
-                "properties"
-              ]
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DataPreviewOperationResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MessagingConnectors/dataPreview/{dataPreviewId}": {
-      "get": {
-        "operationId": "DataPreviewOperations_GetDataPreviewResults",
-        "description": "DataPreview operation",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "dataPreviewId",
-            "in": "path",
-            "description": "The id of dataPreview.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DataPreviewResults"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MessagingConnectors/dataPreview/{name}/getResults": {
-      "post": {
-        "operationId": "DataPreviewOperationsV1_GetResults",
-        "tags": [
-          "DataPreviewOperationsV1"
-        ],
-        "description": "Get the result of DataPreview",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the DataPreview resource.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DataPreviewResults"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MessagingConnectors/dataPreview/{name}/startPreview": {
-      "post": {
-        "operationId": "DataPreviewOperationsV1_StartPreview",
-        "tags": [
-          "DataPreviewOperationsV1"
-        ],
-        "description": "Start one DataPreview task",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the DataPreview resource.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
             "name": "body",
@@ -278,8 +147,25 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Azure operation completed successfully."
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataPreviewResults"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -287,7 +173,16 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-examples": {
+          "DataPreview SqlServerSourceConnector": {
+            "$ref": "./examples/DataPreview_SqlServerSourceConnector.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MessagingConnectors/connectors": {
@@ -1302,26 +1197,6 @@
       ],
       "x-ms-discriminator-value": "CosmosDbSource"
     },
-    "DataPreviewInstance": {
-      "type": "object",
-      "description": "A DataPreview resource Azure",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/DataPreviewProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "DataPreviewOffsetRange": {
       "type": "object",
       "description": "dataPreviewRange by offset",
@@ -1722,6 +1597,32 @@
         }
       ],
       "x-ms-discriminator-value": "KinesisSource"
+    },
+    "LocationLevelBaseParameters": {
+      "type": "object",
+      "description": "Base Parameters for Location Level operation",
+      "properties": {
+        "apiVersion": {
+          "type": "string",
+          "description": "The API version to use for this operation.",
+          "minLength": 1
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The ID of the target subscription.",
+          "minLength": 1
+        },
+        "location": {
+          "type": "string",
+          "description": "The location name.",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "apiVersion",
+        "subscriptionId",
+        "location"
+      ]
     },
     "MySqlSourceConnectorProperties": {
       "type": "object",

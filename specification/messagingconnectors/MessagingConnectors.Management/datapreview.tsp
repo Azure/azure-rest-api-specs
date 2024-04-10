@@ -16,64 +16,66 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.MessagingConnectors;
 
-@doc("A DataPreview resource Azure")
-@subscriptionResource
-model DataPreviewInstance is ProxyResource<DataPreviewProperties> {
-  @doc("Name of the DataPreview resource.")
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{0,78}[a-zA-Z0-9_]")
-  @path
-  @key("name")
-  @segment("dataPreview")
-  name: string;
+@doc("Base Parameters for Location Level operation")
+model LocationLevelBaseParameters {
+  ...ApiVersionParameter;
+
+  ...SubscriptionIdParameter;
+
+  ...LocationResourceParameter;
 }
 
-@armResourceOperations(DataPreviewInstance)
-interface DataPreviewOperationsV1 {
-  @doc("Start one DataPreview task")
-  startPreview is ArmResourceActionSync<
-    DataPreviewInstance,
-    DataPreviewProperties,
-    void
-  >;
 
-  @doc("Get the result of DataPreview")
-  getResults is ArmResourceActionSync<
-    DataPreviewInstance,
-    void,
-    DataPreviewResults
-  >;
-}
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
+@doc("ActionAsync base operation")
+@extension("x-ms-long-running-operation", true)
+@extension(
+  "x-ms-long-running-operation-options",
+  {
+    `final-state-via`: "location",
+  }
+)
+op ActionAsyncBase<
+  Request extends TypeSpec.Reflection.Model | void,
+  Response extends TypeSpec.Reflection.Model | void,
+  BaseParameters extends TypeSpec.Reflection.Model,
+  Parameters extends {} = {},
+  Error extends {} = ErrorResponse
+>(
+  ...BaseParameters,
+  ...Parameters,
 
+  @doc("The content of the action request")
+  @body
+  body: Request,
+): Response | Error;
+
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
+@doc("ActionAsync operation")
+op LocationLevelActionAsync<
+  Request extends TypeSpec.Reflection.Model | void,
+  Response extends TypeSpec.Reflection.Model | void,
+  LroHeaders extends TypeSpec.Reflection.Model = ArmLroLocationHeader<
+    Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
+    Response,
+    string
+  > &
+    Azure.Core.Foundations.RetryAfterHeader,
+  BaseParameters extends TypeSpec.Reflection.Model = LocationLevelBaseParameters,
+  Parameters extends {} = {},
+  Error extends {} = ErrorResponse
+> is ActionAsyncBase<
+  Request,
+  ArmAcceptedLroResponse<"Resource operation accepted.", LroHeaders> | Response,
+  BaseParameters,
+  Parameters,
+  Error
+>;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+@route("/subscriptions/{subscriptionId}/providers/Microsoft.MessagingConnectors/locations/{location}/")
 interface DataPreviewOperations {
-  /**
-   * DataPreview operation
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
-  @post
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.MessagingConnectors/dataPreview/")
-  op dataPreview(
-    ...Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    @body
-    @doc("dataPreview properties")
-    body: {
-      properties: DataPreviewProperties
-    }
-  ): ArmResponse<DataPreviewOperationResult> | ErrorResponse;
-
-  /**
-   * DataPreview operation
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
-  @get
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.MessagingConnectors/dataPreview/{dataPreviewId}")
-  op getDataPreviewResults(
-    ...Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    @path
-    @minLength(1)
-    @segment("dataPreviewId")
-    @doc("The id of dataPreview.")
-    dataPreviewId: string
-  ): ArmResponse<DataPreviewResults> | ErrorResponse;
+  @route("dataPreview")
+  dataPreview is LocationLevelActionAsync<DataPreviewProperties, DataPreviewResults>;
 }
