@@ -59,6 +59,7 @@ model InnerErrorModel {
 @doc("Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.")
 union StringIndexType {
   string,
+
   @doc("Returned offset and length values will correspond to TextElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo.")
   TextElements_v8: "TextElements_v8",
 
@@ -340,6 +341,7 @@ model AnswersOptions {
 @doc("Type of ranker to be used")
 union RankerKind {
   string,
+
   @doc("Default ranker.")
   Default: "Default",
 
@@ -498,6 +500,7 @@ union ErrorCode {
 @added(Versions.v2023_04_01)
 union TextSentiment {
   string,
+
   @doc("Positive statement")
   positive: "positive",
 
@@ -528,6 +531,7 @@ model SentimentConfidenceScores {
 @doc("Enum that defines the length of the output summaries.")
 union SummaryLengthBucket {
   string,
+
   @doc("Instructs model to generate shorter length summaries.")
   short: "short",
 

@@ -51,7 +51,7 @@ union SentenceSentimentValue {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   positive: "positive",
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  neutral:  "neutral",
+  neutral: "neutral",
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   negative: "negative",
 }

@@ -48,6 +48,7 @@ model ExtractiveSummarizationResult is PreBuiltResult {
 @doc("The sorting criteria to use for the results of Extractive Summarization.")
 union ExtractiveSummarizationSortingCriteria {
   string,
+
   @doc("Indicates that results should be sorted in order of appearance in the text.")
   Offset: "Offset",
 

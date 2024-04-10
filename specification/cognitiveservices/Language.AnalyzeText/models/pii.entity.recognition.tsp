@@ -74,6 +74,7 @@ model PiiResult is PreBuiltResult {
 @doc("PII domains.")
 union PiiDomain {
   string,
+
   @doc("Indicates that entities in the Personal Health Information domain should be redacted.")
   phi: "phi",
 
@@ -466,7 +467,7 @@ union PiiCategoriesExclude {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   ABARoutingNumber: "ABARoutingNumber",
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  ARNationalIdentityNumber : "ARNationalIdentityNumber",
+  ARNationalIdentityNumber: "ARNationalIdentityNumber",
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   AUBankAccountNumber: "AUBankAccountNumber",
   #suppress "@azure-tools/typespec-azure-core/documentation-required"

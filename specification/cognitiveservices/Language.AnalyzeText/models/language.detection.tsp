@@ -73,6 +73,7 @@ model DetectedLanguage {
 @doc("Identifies the script of the input document. Maps to the ISO 15924 standard formal name.")
 union ScriptKind {
   string,
+
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the Arabic script.")
   Arabic: "Arabic",
@@ -190,11 +191,11 @@ union ScriptKind {
   Tibetan: "Tibetan",
 }
 
-
 @added(Versions.v2023_11_15_preview)
 @doc("Identifies the script of the input document. Maps to the ISO 15924 standard script code.")
 union ScriptCode {
   string,
+
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the Arabic script.")
   Arab: "Arab",
