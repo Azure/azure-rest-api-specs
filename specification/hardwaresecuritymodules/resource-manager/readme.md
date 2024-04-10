@@ -37,7 +37,6 @@ modelerfour:
 tag: package-2024-06
 ```
 
-
 ### Tag: package-2024-06
 
 These settings apply only when `--tag=package-2024-06` is specified on the command line.
@@ -45,23 +44,18 @@ These settings apply only when `--tag=package-2024-06` is specified on the comma
 ```yaml $(tag) == 'package-2024-06'
 input-file:
   - Microsoft.HardwareSecurityModules/stable/2024-06-30/cloudhsm.json
-```
-### Tag: package-2018-10
-
-These settings apply only when `--tag=package-2018-10` is specified on the command line.
-
-``` yaml $(tag) == 'package-2018-10'
-input-file:
-- Microsoft.HardwareSecurityModules/preview/2018-10-31-preview/dedicatedhsm.json
+  - Microsoft.HardwareSecurityModules/stable/2024-06-30/dedicatedhsm.json
+  - Microsoft.HardwareSecurityModules/stable/2024-06-30/operations.json
 ```
 
-### Tag: package-2021-11
+### Tag: package-2023-12-preview
 
-These settings apply only when `--tag=package-2021-11` is specified on the command line.
+These settings apply only when `--tag=package-2023-12-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-11'
+``` yaml $(tag) == 'package-2023-12-preview'
 input-file:
-- Microsoft.HardwareSecurityModules/stable/2021-11-30/dedicatedhsm.json
+  - Microsoft.HardwareSecurityModules/preview/2023-12-10-preview/cloudhsm.json
+  - Microsoft.HardwareSecurityModules/stable/2021-11-30/dedicatedhsm.json
 ```
 
 ### Tag: package-2022-08-preview
@@ -74,14 +68,22 @@ input-file:
 - Microsoft.HardwareSecurityModules/stable/2021-11-30/dedicatedhsm.json
 ```
 
-### Tag: package-2023-12-preview
+### Tag: package-2021-11
 
-These settings apply only when `--tag=package-2023-12-preview` is specified on the command line.
+These settings apply only when `--tag=package-2021-11` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-12-preview'
+``` yaml $(tag) == 'package-2021-11'
 input-file:
-  - Microsoft.HardwareSecurityModules/preview/2023-12-10-preview/cloudhsm.json
-  - Microsoft.HardwareSecurityModules/stable/2021-11-30/dedicatedhsm.json
+- Microsoft.HardwareSecurityModules/stable/2021-11-30/dedicatedhsm.json
+```
+
+### Tag: package-2018-10
+
+These settings apply only when `--tag=package-2018-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-10'
+input-file:
+- Microsoft.HardwareSecurityModules/preview/2018-10-31-preview/dedicatedhsm.json
 ```
 
 # Code Generation
