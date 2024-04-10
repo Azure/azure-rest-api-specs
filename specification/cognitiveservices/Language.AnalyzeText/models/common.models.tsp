@@ -275,7 +275,7 @@ union Status {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-@doc("Contains the AnalyzeText long tunning opertion result object.")
+@doc("Contains the AnalyzeText long running operation result object.")
 @discriminator("kind")
 model AnalyzeTextLROResult {
   ...TaskState;
