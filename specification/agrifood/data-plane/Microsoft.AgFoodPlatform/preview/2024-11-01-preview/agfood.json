@@ -3,7 +3,7 @@
     "info": {
       "title": "Azure AgFoodPlatform Data Plane Service",
       "description": "APIs documentation for Azure AgPlatform DataPlane Service.",
-      "version": "2024-05-31-preview"
+      "version": "2024-11-01-preview"
     },
     "x-ms-parameterized-host": {
         "hostTemplate": "{endpoint}",
@@ -666,99 +666,28 @@
         }
       },
       "/catalogs/{catalogId}/collections/{collectionId}/items": {
-        "get": {
+        "post": {
           "tags": [
             "Items"
           ],
-          "description": "Returns a paginated list of Item resources.",
-          "operationId": "Items_List",
+          "description": "Search for Items across all parties by intersecting geometry.",
+          "operationId": "Items_GetAllItemsUnderCollection",
+          "consumes": [
+            "application/json"
+          ],
           "produces": [
             "application/json"
           ],
           "parameters": [
             {
               "in": "query",
-              "name": "ids",
-              "description": "Ids of the resource.",
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "collectionFormat": "multi"
-            },
-            {
-              "in": "query",
-              "name": "names",
-              "description": "Names of the resource.",
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "collectionFormat": "multi"
-            },
-            {
-              "in": "query",
-              "name": "propertyFilters",
-              "description": "Filters on key-value pairs within the Properties object.\r\neg. \"{testKey} eq {testValue}\".",
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "collectionFormat": "multi"
-            },
-            {
-              "in": "query",
-              "name": "statuses",
-              "description": "Statuses of the resource.",
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "collectionFormat": "multi"
-            },
-            {
-              "in": "query",
-              "name": "minCreatedDateTime",
-              "description": "Minimum creation date of resource (inclusive).",
-              "type": "string",
-              "format": "date-time"
-            },
-            {
-              "in": "query",
-              "name": "maxCreatedDateTime",
-              "description": "Maximum creation date of resource (inclusive).",
-              "type": "string",
-              "format": "date-time"
-            },
-            {
-              "in": "query",
-              "name": "minLastModifiedDateTime",
-              "description": "Minimum last modified date of resource (inclusive).",
-              "type": "string",
-              "format": "date-time"
-            },
-            {
-              "in": "query",
-              "name": "maxLastModifiedDateTime",
-              "description": "Maximum last modified date of resource (inclusive).",
-              "type": "string",
-              "format": "date-time"
-            },
-            {
-              "in": "query",
               "name": "maxPageSize",
-              "description": "Maximum number of items needed (inclusive).\r\nMinimum = 10, Maximum = 1000, Default value = 50.",
+              "description": "Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000, Default Value = 50.",
               "type": "integer",
               "format": "int32",
               "default": 50,
               "maximum": 1000,
               "minimum": 10
-            },
-            {
-              "in": "query",
-              "name": "skipToken",
-              "description": "Skip token for getting next set of results.",
-              "type": "string"
             },
             {
               "in": "path",
@@ -778,6 +707,15 @@
               "description": "The requested API version",
               "required": true,
               "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "searchItemQuery",
+              "description": "Query filters.",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/ItemQuery"
+              }
             }
           ],
           "responses": {
@@ -801,12 +739,9 @@
               "x-ms-error-response": true
             }
           },
-          "x-ms-pageable": {
-            "nextLinkName": "nextLink"
-          },
           "x-ms-examples": {
-            "Items_List": {
-              "$ref": "./examples/Items_List.json"
+            "Items_GetAllItemsUnderCollection": {
+              "$ref": "./examples/Items_GetAllItemsUnderCollection.json"
             }
           }
         }
@@ -1025,7 +960,7 @@
           }
         }
       },
-      "/items:search": {
+      "/catalogs/{catalogId}/items:search": {
         "post": {
           "tags": [
             "Items"
@@ -1041,12 +976,6 @@
           "parameters": [
             {
               "in": "query",
-              "name": "skipToken",
-              "description": "Skip token for getting next set of results.",
-              "type": "string"
-            },
-            {
-              "in": "query",
               "name": "maxPageSize",
               "description": "Maximum number of items needed (inclusive). Minimum = 10, Maximum = 1000, Default Value = 50.",
               "type": "integer",
@@ -1054,6 +983,12 @@
               "default": 50,
               "maximum": 1000,
               "minimum": 10
+            },
+            {
+              "in": "path",
+              "name": "catalogId",
+              "required": true,
+              "type": "string"
             },
             {
               "in": "query",
@@ -1076,7 +1011,7 @@
             "200": {
               "description": "Success",
               "schema": {
-                "$ref": "#/definitions/ItemMetadataListResponse"
+                "$ref": "#/definitions/ItemListResponse"
               }
             },
             "default": {
@@ -1570,7 +1505,7 @@
         }
       },
       "CatalogListResponse": {
-        "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
+        "description": "Paged response contains list of requested objects and a skipToken to get the next set of results.",
         "required": [
           "value"
         ],
@@ -1585,10 +1520,6 @@
           },
           "skipToken": {
             "description": "Token used in retrieving the next page. If null, there are no additional pages.",
-            "type": "string"
-          },
-          "nextLink": {
-            "description": "Continuation link (absolute URI) to the next page of results in the list.",
             "type": "string"
           }
         }
@@ -1702,7 +1633,7 @@
         }
       },
       "CollectionListResponse": {
-        "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
+        "description": "Paged response contains list of requested objects and a skipToken to get the next set of results.",
         "required": [
           "value"
         ],
@@ -1718,10 +1649,6 @@
           "skipToken": {
             "description": "Token used in retrieving the next page. If null, there are no additional pages.",
             "type": "string"
-          },
-          "nextLink": {
-            "description": "Continuation link (absolute URI) to the next page of results in the list.",
-            "type": "string"
           }
         }
       },
@@ -1735,6 +1662,20 @@
         "type": "string",
         "x-ms-enum": {
           "name": "DataFormat",
+          "modelAsString": true
+        }
+      },
+      "DestinationType": {
+        "description": "DestinationType.",
+        "enum": [
+          "Catalog",
+          "Collection",
+          "Item",
+          "Asset"
+        ],
+        "type": "string",
+        "x-ms-enum": {
+          "name": "DestinationType",
           "modelAsString": true
         }
       },
@@ -1827,7 +1768,7 @@
       "Item": {
         "description": "Item.",
         "required": [
-          "itemDataModel",
+          "data",
           "ownerItemId"
         ],
         "type": "object",
@@ -1839,7 +1780,7 @@
               "$ref": "#/definitions/Link"
             }
           },
-          "itemDataModel": {
+          "data": {
             "description": "Schema for records under the dataset.",
             "type": "object",
             "additionalProperties": { }
@@ -1850,7 +1791,7 @@
             "type": "string"
           },
           "catalogId": {
-            "description": "CollectionId.",
+            "description": "CatalogId.",
             "type": "string",
             "readOnly": true
           },
@@ -1936,7 +1877,7 @@
         }
       },
       "ItemListResponse": {
-        "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
+        "description": "Paged response contains list of requested objects and a skipToken to get the next set of results.",
         "required": [
           "value"
         ],
@@ -1952,112 +1893,81 @@
           "skipToken": {
             "description": "Token used in retrieving the next page. If null, there are no additional pages.",
             "type": "string"
-          },
-          "nextLink": {
-            "description": "Continuation link (absolute URI) to the next page of results in the list.",
-            "type": "string"
           }
         }
       },
-      "ItemMetadata": {
-        "description": "Item Metadata.",
+      "ItemQuery": {
+        "description": "ItemQuery.",
         "type": "object",
         "properties": {
-          "partyId": {
-            "description": "Party Id.",
-            "type": "string",
-            "readOnly": true
-          },
-          "id": {
-            "description": "Unique resource ID.",
-            "type": "string",
-            "readOnly": true
-          },
-          "eTag": {
-            "description": "The ETag value to implement optimistic concurrency.",
-            "type": "string",
-            "readOnly": true
-          },
-          "status": {
-            "description": "Status of the resource.",
-            "maxLength": 100,
-            "minLength": 0,
-            "type": "string"
-          },
-          "createdDateTime": {
-            "format": "date-time",
-            "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
-            "type": "string",
-            "readOnly": true,
-            "example": "2020-12-31T11:10:21Z"
-          },
-          "modifiedDateTime": {
-            "format": "date-time",
-            "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
-            "type": "string",
-            "readOnly": true,
-            "example": "2020-12-31T11:10:21Z"
-          },
-          "source": {
-            "description": "Source of the resource.",
-            "maxLength": 100,
-            "minLength": 2,
-            "type": "string"
-          },
-          "name": {
-            "description": "Name to identify resource.",
-            "maxLength": 100,
-            "minLength": 0,
-            "type": "string"
-          },
-          "description": {
-            "description": "Textual description of the resource.",
-            "maxLength": 500,
-            "minLength": 0,
-            "type": "string"
-          },
-          "createdBy": {
-            "description": "Created by user/tenant id.",
-            "type": "string",
-            "readOnly": true
-          },
-          "modifiedBy": {
-            "description": "Modified by user/tenant id.",
-            "type": "string",
-            "readOnly": true
-          },
-          "properties": {
-            "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
-            "type": "object",
-            "additionalProperties": { },
-            "example": {
-              "key1": "value1",
-              "key2": 123.45
-            }
-          }
-        }
-      },
-      "ItemMetadataListResponse": {
-        "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
-        "required": [
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "value": {
-            "description": "List of requested objects.",
+          "ids": {
+            "description": "Ids of the resource.",
             "type": "array",
             "items": {
-              "$ref": "#/definitions/ItemMetadata"
+              "type": "string"
             }
           },
-          "skipToken": {
-            "description": "Token used in retrieving the next page. If null, there are no additional pages.",
+          "ownerItemIds": {
+            "description": "Owner Item Ids of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "names": {
+            "description": "Names of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "propertyFilters": {
+            "description": "Filters on key-value pairs within the Properties object.\r\ne.g. \"{testKey} eq {testValue}\".",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "dataFilters": {
+            "description": "Filters on key-value pairs within the Data object.\r\ne.g. \"{testKey} eq {testValue}\".",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "statuses": {
+            "description": "Statuses of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "minCreatedDateTime": {
+            "format": "date-time",
+            "description": "Minimum creation date of resource (inclusive).",
             "type": "string"
           },
-          "nextLink": {
-            "description": "Continuation link (absolute URI) to the next page of results in the list.",
+          "maxCreatedDateTime": {
+            "format": "date-time",
+            "description": "Maximum creation date of resource (inclusive).",
             "type": "string"
+          },
+          "minLastModifiedDateTime": {
+            "format": "date-time",
+            "description": "Minimum last modified date of resource (inclusive).",
+            "type": "string"
+          },
+          "maxLastModifiedDateTime": {
+            "format": "date-time",
+            "description": "Maximum last modified date of resource (inclusive).",
+            "type": "string"
+          },
+          "skipToken": {
+            "description": "Skip token for getting next set of results.",
+            "type": "string"
+          },
+          "intersectsWithGeometry": {
+            "$ref": "#/definitions/GeoJsonObject"
           }
         }
       },
@@ -2095,15 +2005,14 @@
         "type": "object",
         "properties": {
           "rel": {
-            "description": "Rel.",
-            "type": "string"
+            "$ref": "#/definitions/RelationshipType"
           },
           "href": {
             "description": "Href.",
             "type": "string"
           },
           "type": {
-            "$ref": "#/definitions/RelationshipType"
+            "$ref": "#/definitions/DestinationType"
           }
         }
       },
@@ -2232,14 +2141,11 @@
         "x-ms-discriminator-value": "Polygon"
       },
       "RelationshipType": {
-        "description": "Type of dataset.",
+        "description": "Type of relationship.",
         "enum": [
           "DerivedFrom",
           "Child",
-          "Parent",
-          "Catalogue",
-          "Collection",
-          "Item"
+          "Parent"
         ],
         "type": "string",
         "x-ms-enum": {
@@ -2248,7 +2154,7 @@
         }
       },
       "Schema": {
-        "description": "Schema.",
+        "description": "SchemaModel.",
         "required": [
           "schemaModel"
         ],
@@ -2328,16 +2234,42 @@
           "properties": {
             "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
             "type": "object",
-            "additionalProperties": { },
-            "example": {
-              "key1": "value1",
-              "key2": 123.45
-            }
+            "additionalProperties": { }
+          }
+        },
+        "example": {
+          "schemaModel": {
+            "type": "string",
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 2,
+                "maxLength": 100
+              }
+            },
+            "company": {
+              "type": "string"
+            },
+            "substanceNames": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "substancePercentages": {
+              "type": "number",
+              "maximum": 100,
+              "minimum": 0
+            },
+            "required": [
+              "company",
+              "name"
+            ]
           }
         }
       },
       "SchemaListResponse": {
-        "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
+        "description": "Paged response contains list of requested objects and a skipToken to get the next set of results.",
         "required": [
           "value"
         ],
@@ -2353,19 +2285,15 @@
           "skipToken": {
             "description": "Token used in retrieving the next page. If null, there are no additional pages.",
             "type": "string"
-          },
-          "nextLink": {
-            "description": "Continuation link (absolute URI) to the next page of results in the list.",
-            "type": "string"
           }
         }
       },
       "SearchItemQuery": {
-        "description": "SearchItemQuery.",
+        "description": "ItemQuery.",
         "type": "object",
         "properties": {
-          "rootIds": {
-            "description": "FarmIds of the resource.",
+          "collectionIds": {
+            "description": "Collection Ids of the resource.",
             "type": "array",
             "items": {
               "type": "string"
@@ -2373,6 +2301,13 @@
           },
           "ids": {
             "description": "Ids of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ownerItemIds": {
+            "description": "Owner Item Ids of the resource.",
             "type": "array",
             "items": {
               "type": "string"
@@ -2387,6 +2322,13 @@
           },
           "propertyFilters": {
             "description": "Filters on key-value pairs within the Properties object.\r\ne.g. \"{testKey} eq {testValue}\".",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "dataFilters": {
+            "description": "Filters on key-value pairs within the Data object.\r\ne.g. \"{testKey} eq {testValue}\".",
             "type": "array",
             "items": {
               "type": "string"
@@ -2419,12 +2361,12 @@
             "description": "Maximum last modified date of resource (inclusive).",
             "type": "string"
           },
+          "skipToken": {
+            "description": "Skip token for getting next set of results.",
+            "type": "string"
+          },
           "intersectsWithGeometry": {
             "$ref": "#/definitions/GeoJsonObject"
-          },
-          "partyId": {
-            "description": "Party ID which belongs to the operation data.",
-            "type": "string"
           }
         }
       }
