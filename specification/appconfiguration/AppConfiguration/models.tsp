@@ -168,14 +168,14 @@ model KeyValue {
   label?: string;
 
   @doc("The content type of the value stored within the key-value.")
-  @projectedName("json", "content_type")
+  @encodedName("application/json", "content_type")
   contentType?: string;
 
   @doc("The value of the key-value.")
   value?: string;
 
   @doc("A date representing the last time the key-value was modified.")
-  @projectedName("json", "last_modified")
+  @encodedName("application/json", "last_modified")
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModified?: utcDateTime;
 
@@ -222,7 +222,7 @@ composed. The 'key' composition type ensures there are no two key-values
 containing the same key. The 'key_label' composition type ensures there are no
 two key-values containing the same key and label.
 """)
-  @projectedName("json", "composition_type")
+  @encodedName("application/json", "composition_type")
   compositionType?: CompositionType;
 
   @doc("The time that the snapshot was created.")
@@ -243,7 +243,7 @@ used.
 """)
   @maxValue(7776000)
   @minValue(3600)
-  @projectedName("json", "retention_period")
+  @encodedName("application/json", "retention_period")
   retentionPeriod?: int32;
 
   @doc("The size in bytes of the snapshot.")
@@ -252,7 +252,7 @@ used.
 
   @doc("The amount of key-values in the snapshot.")
   @visibility("read")
-  @projectedName("json", "items_count")
+  @encodedName("application/json", "items_count")
   itemsCount?: int32;
 
   @doc("The tags of the snapshot.")
