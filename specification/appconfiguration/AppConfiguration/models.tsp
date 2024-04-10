@@ -9,96 +9,106 @@ using Azure.Core;
 namespace AzureAppConfiguration;
 
 @doc("Key-value fields.")
-enum KeyValueFields {
+union KeyValueFields {
   @doc("Key field.")
-  key,
+  key: "key",
 
   @doc("Label field.")
-  label,
+  label: "label",
 
   @doc("Content type field.")
-  content_type,
+  content_type: "content_type",
 
   @doc("Value field.")
-  value,
+  value: "value",
 
   @doc("Last modified field.")
-  last_modified,
+  last_modified: "last_modified",
 
   @doc("Tags field.")
-  tags,
+  tags: "tags",
 
   @doc("Locked field.")
-  locked,
+  locked: "locked",
 
   @doc("Etag field.")
-  etag,
+  etag: "etag",
+
+  string,
 }
 
 @doc("Snapshot fields.")
-enum SnapshotFields {
+union SnapshotFields {
   @doc("Name field.")
-  name,
+  name: "name",
 
   @doc("Status field.")
-  status,
+  status: "status",
 
   @doc("Filters field.")
-  filters,
+  filters: "filters",
 
   @doc("Composition type field.")
-  composition_type,
+  composition_type: "composition_type",
 
   @doc("Created field.")
-  created,
+  created: "created",
 
   @doc("Expires field.")
-  expires,
+  expires: "expires",
 
   @doc("Retention period field.")
-  retention_period,
+  retention_period: "retention_period",
 
   @doc("Size field.")
-  size,
+  size: "size",
 
   @doc("Items count field.")
-  items_count,
+  items_count: "items_count",
 
   @doc("Tags field.")
-  tags,
+  tags: "tags",
 
   @doc("Etag field.")
-  etag,
+  etag: "etag",
+
+  string,
 }
 
 @doc("Snapshot status.")
-enum SnapshotStatus {
+union SnapshotStatus {
   @doc("Provisioning")
-  provisioning,
+  provisioning: "provisioning",
 
   @doc("Ready")
-  ready,
+  ready: "ready",
 
   @doc("Archived")
-  archived,
+  archived: "archived",
 
   @doc("Failed")
-  failed,
+  failed: "failed",
+
+  string,
 }
 
 @doc("Composition types.")
-enum CompositionType {
+union CompositionType {
   @doc("The 'key' composition type.")
-  key,
+  key: "key",
 
   @doc("The 'key_label' composition type.")
-  key_label,
+  key_label: "key_label",
+
+  string,
 }
 
 @doc("Label fields.")
-enum LabelFields {
+union LabelFields {
   @doc("Name field.")
-  name,
+  name: "name",
+
+  string,
 }
 
 @doc("The result of a list request.")
