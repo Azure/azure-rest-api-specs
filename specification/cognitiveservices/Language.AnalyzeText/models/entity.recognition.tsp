@@ -6,20 +6,20 @@ using TypeSpec.Versioning;
 
 namespace Language.AnalyzeText;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("The entity recognition analyze text input task request.")
 model AnalyzeTextEntityRecognitionInput extends AnalyzeTextTask {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("The kind of task.")
   kind: AnalyzeTextTaskKind.EntityRecognition;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("The input to be analyzed.")
   analysisInput?: MultiLanguageAnalysisInput;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Task parameters.")
   parameters?: EntitiesTaskParameters;
 }
 
 @clientName("EntitiesTaskContent", "csharp")
 @doc("Supported parameters for an Entity Recognition task.")
 model EntitiesTaskParameters is PreBuiltTaskParameters {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("(Optional) parameter to provide the string index type used to interpret string offsets. Defaults to TextElements (Graphemes).")
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   @added(Versions.v2023_04_15_preview)
@@ -42,17 +42,17 @@ model EntitiesTaskParameters is PreBuiltTaskParameters {
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("An object representing the task definition for an Entities Recognition task.")
 model EntitiesLROTask extends AnalyzeTextLROTask {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("The kind of task.")
   kind: AnalyzeTextLROTaskKind.EntityRecognition;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Task parameters.")
   parameters?: EntitiesTaskParameters;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Contains the entity task ")
 model EntitiesTaskResult extends AnalyzeTextTaskResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("kind of the task")
   kind: AnalyzeTextTaskResultsKind.EntityRecognitionResults;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Results for entity recognition.")
   results: EntitiesResult;
 }
 

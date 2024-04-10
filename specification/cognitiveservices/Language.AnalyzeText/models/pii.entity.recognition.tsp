@@ -48,9 +48,9 @@ model PiiLROTask extends AnalyzeTextLROTask {
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Contains the analyze text PIIEntityRecognition LRO task.")
 model PiiTaskResult extends AnalyzeTextTaskResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("The kind of the task.")
   kind: AnalyzeTextTaskResultsKind.PiiEntityRecognitionResults;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("The list of pii results")
   results: PiiResult;
 }
 
@@ -444,9 +444,9 @@ enum PiiCategory {
 @doc("Contains the PII LRO results.")
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 model PiiEntityRecognitionLROResult extends AnalyzeTextLROResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("The kind of the task.")
   kind: AnalyzeTextLROResultsKind.PiiEntityRecognitionLROResults;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("The list of pii results")
   results: PiiResult;
 }
 

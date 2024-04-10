@@ -894,6 +894,7 @@ model SummaryContext {
   @doc("The length of the context. Use of different 'stringIndexType' values can affect the length returned.")
   length: int32;
 }
+
 @clientName("CustomTaskContent", "csharp")
 @doc("Parameters object for a text analysis task using custom models.")
 model CustomTaskParameters is TaskParameters {
