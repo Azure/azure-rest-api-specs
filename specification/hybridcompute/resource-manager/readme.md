@@ -28,11 +28,7 @@ These are the global settings for the HybridCompute API.
 openapi-type: arm
 tag: package-preview-2023-10
 directive:
-  - where:
-      - $.definitions.Machine.properties
-    suppress:
-      - BodyTopLevelProperties
-
+  # add fix to swagger and remove them from here in the next swagger release
   - from: HybridCompute.json
     where: $.definitions.MachineInstallPatchesParameters.properties.maximumDuration
     transform: $['format'] = 'duration'
@@ -138,32 +134,11 @@ directive:
         "default": {
           "description": "Error response describing why the operation failed.",
           "schema": {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            "$ref": "https://github.com/Azure/azure-rest-api-specs/blob/f6278b35fb38d62aadb7a4327a876544d5d7e1e4/specification/common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
           }
         }
       }
-
-  # local change for network configuration
-  - from: privateLinkScopes.json
-    where: $.definitions["NetworkSecurityPerimeterProfile"].properties.accessRulesVersion
-    transform: >-
-      return {
-        "type": "integer",
-        "format": "int32",
-        "description": "Access rules version number",
-        "readOnly": true
-      }
-
-  - from: privateLinkScopes.json
-    where: $.definitions["NetworkSecurityPerimeterProfile"].properties.diagnosticSettingsVersion
-    transform: >-
-      return {
-        "type": "integer",
-        "format": "int32",
-        "description": "Diagnostic settings version number",
-        "readOnly": true
-      }
-
+  
   # remove cmdlets
   - where:
       subject: NetworkProfile
@@ -195,6 +170,14 @@ directive:
   - remove-operation: LicenseProfiles_Update
   - remove-operation: LicenseProfiles_List
   - remove-operation: LicenseProfiles_CreateOrUpdate
+
+  - remove-operation: NetworkConfigurations_Get
+  - remove-operation: NetworkConfigurations_Update
+  - remove-operation: NetworkConfigurations_CreateOrUpdate
+
+  - remove-operation: NetworkSecurityPerimeterConfigurations_GetByPrivateLinkScope
+  - remove-operation: NetworkSecurityPerimeterConfigurations_ListByPrivateLinkScope
+  - remove-operation: NetworkSecurityPerimeterConfigurations_ReconcileForPrivateLinkScope
 
 ```
 
