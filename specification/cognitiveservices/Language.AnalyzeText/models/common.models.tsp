@@ -183,7 +183,7 @@ model AnalyzeTextJobsInput {
   @doc("Contains the input to be analyzed.")
   analysisInput: MultiLanguageAnalysisInput;
 
-  @doc("List of tasks to be peformed as part of the LRO.")
+  @doc("List of tasks to be performed as part of the LRO.")
   tasks: Array<AnalyzeTextLROTask>;
 
   @added(Versions.v2023_04_15_preview)
@@ -575,11 +575,11 @@ model KnowledgeBaseAnswer {
   @doc("Answer confidence score, value ranges from 0 to 1.")
   @minValue(0)
   @maxValue(1)
-  @projectedName("client", "confidence")
+  @encodedName("client", "confidence")
   confidenceScore?: float64;
 
   @doc("ID of the QnA result.")
-  @projectedName("client", "qnaId")
+  @encodedName("client", "qnaId")
   id?: int32;
 
   @doc("Source of QnA result.")
@@ -593,7 +593,7 @@ model KnowledgeBaseAnswer {
   dialog?: KnowledgeBaseAnswerDialog;
 
   @doc("Answer span object of QnA with respect to user's question.")
-  @projectedName("client", "shortAnswer")
+  @encodedName("client", "shortAnswer")
   answerSpan?: AnswerSpan;
 }
 
@@ -654,22 +654,22 @@ model AnswersOptions {
   @doc("Minimum threshold score for answers, value ranges from 0 to 1.")
   @maxValue(1)
   @minValue(0)
-  @projectedName("client", "confidenceThreshold")
+  @encodedName("client", "confidenceThreshold")
   confidenceScoreThreshold?: float64;
 
   @doc("Context object with previous QnA's information.")
-  @projectedName("client", "answerContext")
+  @encodedName("client", "answerContext")
   context?: KnowledgeBaseAnswerContext;
 
   @doc("Type of ranker to be used.")
-  @projectedName("client", "rankerKind")
+  @encodedName("client", "rankerKind")
   rankerType?: RankerKind;
 
   @doc("Filter QnAs based on given metadata list and knowledge base sources.")
   filters?: QueryFilters;
 
   @doc("To configure Answer span prediction feature.")
-  @projectedName("client", "shortAnswerOptions")
+  @encodedName("client", "shortAnswerOptions")
   answerSpanRequest?: ShortAnswerOptions;
 
   @doc("(Optional) Flag to enable Query over Unstructured Sources.")
@@ -691,7 +691,7 @@ model KnowledgeBaseAnswerContext {
   previousQnaId: int32;
 
   @doc("Previous user query.")
-  @projectedName("client", "previousQuestion")
+  @encodedName("client", "previousQuestion")
   previousUserQuery?: string;
 }
 
@@ -745,13 +745,13 @@ model ShortAnswerOptions {
   @doc("Minimum threshold score required to include an answer span, value ranges from 0 to 1.")
   @maxValue(1)
   @minValue(0)
-  @projectedName("client", "confidenceThreshold")
+  @encodedName("client", "confidenceThreshold")
   confidenceScoreThreshold?: float64;
 
   @doc("Number of Top answers to be considered for span prediction from 1 to 10.")
   @maxValue(10)
   @minValue(1)
-  @projectedName("client", "top")
+  @encodedName("client", "top")
   topAnswersWithSpan?: int32;
 }
 

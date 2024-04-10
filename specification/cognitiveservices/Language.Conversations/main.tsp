@@ -257,7 +257,7 @@ model TargetIntentResult {
   @doc("The prediction score and it ranges from 0.0 to 1.0.")
   @minValue(0)
   @maxValue(1)
-  @projectedName("client", "confidence")
+  @encodedName("client", "confidence")
   confidenceScore: float64;
 }
 
@@ -302,7 +302,7 @@ model ConversationIntent {
   @doc("The confidence score of the class from 0.0 to 1.0.")
   @minValue(0)
   @maxValue(1)
-  @projectedName("client", "confidence")
+  @encodedName("client", "confidence")
   confidenceScore: float32;
 }
 
@@ -321,7 +321,7 @@ model ConversationEntity {
   length: int32;
 
   @doc("The entity confidence score.")
-  @projectedName("client", "confidence")
+  @encodedName("client", "confidence")
   confidenceScore: float32;
 
   @doc("The collection of entity resolution objects.")
@@ -488,7 +488,7 @@ model CurrencyResolution extends BaseResolution {
   resolutionKind: ResolutionKind.CurrencyResolution;
 
   @doc("The alphabetic code based on another ISO standard, ISO 3166, which lists the codes for country names. The first two letters of the ISO 4217 three-letter code are the same as the code for the country name, and, where possible, the third letter corresponds to the first letter of the currency name.")
-  @projectedName("json", "ISO4217")
+  @encodedName("json", "ISO4217")
   iso4217?: string;
 
   @doc("The money amount captured in the extracted entity")

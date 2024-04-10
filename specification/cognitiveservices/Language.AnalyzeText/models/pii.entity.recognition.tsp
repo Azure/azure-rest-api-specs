@@ -37,7 +37,7 @@ model PiiTaskParameters is PreBuiltTaskParameters {
   excludePiiCategories?: PiiCategoriesExclude;
 
   @added(Versions.v2023_04_15_preview)
-  @doc("Characeter to be used for redaction. Default in '*'.")
+  @doc("Character to be used for redaction. Default in '*'.")
   redactionCharacter?: redactionCharacter = redactionCharacter.asterisk;
 }
 
