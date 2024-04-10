@@ -186,7 +186,7 @@ interface Prompts {
       tags?: string;
 
       ...StandardListQueryParameters;
-    }
+    },
     PagedPrompt | Foundations.ErrorResponse
   >;
 

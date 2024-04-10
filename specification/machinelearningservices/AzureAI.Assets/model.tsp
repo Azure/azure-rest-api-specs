@@ -59,7 +59,7 @@ model PagedIndex {
 @doc("Prompt resource definition")
 model Prompt is AssetVersion {
   @doc("Default workspace blob storage Ui. Should work across storage types and auth scenarios.")
-  storageUri: string
+  storageUri: string;
 
   @doc("Categories assigned to the Prompt")
   categories?: string[];
