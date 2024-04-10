@@ -54,13 +54,13 @@ time.
 """)
     @header("Accept-Datetime")
     acceptDatetime?: string;
-
-    ...acceptHeader<"application/vnd.microsoft.appconfig.keyset+json">;
   },
   KeyListResult & {
     @doc("Used to guarantee real-time consistency between requests.")
     @header("Sync-Token")
     syncToken?: string;
+
+    ...acceptHeader<"application/vnd.microsoft.appconfig.keyset+json">;
   }
 >;
 
@@ -176,10 +176,8 @@ https://aka.ms/azconfig/docs/keyvaluefiltering
       format: "multi",
     })
     tags?: string[];
-
-    ...acceptHeader<"application/vnd.microsoft.appconfig.kvset+json">;
   },
-  KeyValueListResult & AppConfigResponseHeaders
+  KeyValueListResult & AppConfigResponseHeaders & acceptHeader<"application/vnd.microsoft.appconfig.kvset+json">
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
@@ -304,10 +302,8 @@ match the value provided.
 """)
       @header("If-None-Match")
       ifNoneMatch?: string;
-
-      ...acceptHeader<"application/vnd.microsoft.appconfig.kv+json">;
     }> &
-    ResponseHeadersTrait<AppConfigResponseHeaders>
+    ResponseHeadersTrait<AppConfigResponseHeaders & acceptHeader<"application/vnd.microsoft.appconfig.kv+json">>
 >;
 
 // FIXME: check is service returns 201 and/or 200?
@@ -348,10 +344,8 @@ match the value provided.
     @doc("The key-value to create.")
     @body
     entity?: KeyValue;
-
-    ...acceptHeader<"application/vnd.microsoft.appconfig.kv+json">;
   },
-  KeyValue & AppConfigResponseHeaders
+  KeyValue & AppConfigResponseHeaders & acceptHeader<"application/vnd.microsoft.appconfig.kv+json">
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -379,13 +373,13 @@ value provided.
 """)
     @header("If-Match")
     ifMatch?: string;
-
-    ...acceptHeader<"application/vnd.microsoft.appconfig.kv+json">;
   },
-  (KeyValue & AppConfigResponseHeaders) | {
+  (KeyValue & AppConfigResponseHeaders & acceptHeader<"application/vnd.microsoft.appconfig.kvset+json">) | {
     @doc("Used to guarantee real-time consistency between requests.")
     @header("Sync-Token")
     syncToken?: string;
+
+    ...acceptHeader<"application/vnd.microsoft.appconfig.kv+json">;
   }
 >;
 
@@ -473,13 +467,13 @@ to by the specified token.
     @doc("Used to guarantee real-time consistency between requests.")
     @header("Sync-Token")
     syncToken?: string;
-
-    ...acceptHeader<"application/vnd.microsoft.appconfig.snapshotset+json">;
   },
   SnapshotListResult & {
     @doc("Used to guarantee real-time consistency between requests.")
     @header("Sync-Token")
     syncToken?: string;
+
+    ...acceptHeader<"application/vnd.microsoft.appconfig.snapshotset+json">;
   }
 >;
 
@@ -538,13 +532,13 @@ match the value provided.
 """)
       @header("If-None-Match")
       ifNoneMatch?: string;
-
-      ...acceptHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
     }> &
     ResponseHeadersTrait<AppConfigResponseHeaders & {
       @doc("Includes links to related resources.")
       @header("Link")
       link?: string;
+
+      ...acceptHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
     }>
 >;
 
@@ -569,8 +563,6 @@ op createSnapshot is Foundations.LongRunningOperation<
     @doc("The key-value snapshot to create.")
     @body
     entity: Snapshot;
-
-    ...acceptHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
   },
   CreatedResponse &
     Snapshot & {
@@ -579,6 +571,8 @@ op createSnapshot is Foundations.LongRunningOperation<
       @doc("Includes links to related resources.")
       @header("Link")
       link?: string;
+
+      ...acceptHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
     }
 >;
 
@@ -615,8 +609,6 @@ match the value provided.
     @doc("The parameters used to update the snapshot.")
     @body
     entity: SnapshotUpdateParameters;
-
-    ...acceptHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
   },
   Snapshot & {
     ...AppConfigResponseHeaders;
@@ -624,6 +616,8 @@ match the value provided.
     @doc("Includes links to related resources.")
     @header("Link")
     link?: string;
+
+    ...acceptHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
   }
 >;
 
@@ -699,13 +693,13 @@ time.
       format: "csv",
     })
     select?: LabelFields[];
-
-    ...acceptHeader<"application/vnd.microsoft.appconfig.labelset+json">;
   },
   LabelListResult & {
     @doc("Used to guarantee real-time consistency between requests.")
     @header("Sync-Token")
     syncToken?: string;
+
+    ...acceptHeader<"application/vnd.microsoft.appconfig.labelset+json">;
   }
 >;
 
@@ -784,10 +778,8 @@ match the value provided.
 """)
     @header("If-None-Match")
     ifNoneMatch?: string;
-
-    ...acceptHeader<"application/vnd.microsoft.appconfig.kv+json">;
   },
-  KeyValue & AppConfigResponseHeaders
+  KeyValue & AppConfigResponseHeaders & acceptHeader<"application/vnd.microsoft.appconfig.kv+json">
 >;
 
 // FIXME: was the original swagger missing a 204?
@@ -823,10 +815,8 @@ match the value provided.
 """)
     @header("If-None-Match")
     ifNoneMatch?: string;
-
-    ...acceptHeader<"application/vnd.microsoft.appconfig.kv+json">;
   },
-  KeyValue & AppConfigResponseHeaders
+  KeyValue & AppConfigResponseHeaders & acceptHeader<"application/vnd.microsoft.appconfig.kv+json">
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -885,10 +875,8 @@ https://aka.ms/azconfig/docs/restapirevisions
       format: "multi",
     })
     tags?: string[];
-
-    ...acceptHeader<"application/vnd.microsoft.appconfig.kvset+json">;
   },
-  KeyValueListResult & AppConfigResponseHeaders
+  KeyValueListResult & AppConfigResponseHeaders & acceptHeader<"application/vnd.microsoft.appconfig.kvset+json">
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
