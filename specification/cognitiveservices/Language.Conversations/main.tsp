@@ -685,7 +685,6 @@ model AnalyzeConversationJobState {
 @doc("Contains the statistics for the submitted job.")
 @added(Versions.v2023_04_01)
 model AnalyzeConversationJobStatistics {
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("Contains the statistics for the submitted job.")
   statistics?: ConversationRequestStatistics;
 }
@@ -863,7 +862,6 @@ model ConversationStatistics {
   transactionsCount: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("if showStats=true was specified in the request, this field contains information about the request payload.")
 @added(Versions.v2023_04_01)
 model ConversationRequestStatistics is RequestStatistics {

@@ -10,8 +10,10 @@ namespace Language.AnalyzeText;
 model AnalyzeTextEntityLinkingInput extends AnalyzeTextTask {
   @doc("Kind for Entity linking input.")
   kind: AnalyzeTextTaskKind.EntityLinking;
+
   @doc("Contains the analysis input to be handled by the service.")
   analysisInput?: MultiLanguageAnalysisInput;
+
   @doc("Task parameters.")
   parameters?: EntityLinkingTaskParameters;
 }
@@ -23,11 +25,12 @@ model EntityLinkingTaskParameters is PreBuiltTaskParameters {
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 }
 
-@doc("Contains the analyze text Entity linking LRO task.")
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@doc("Contains the analyze text Entity linking LRO task.")
 model EntityLinkingLROTask extends AnalyzeTextLROTask {
   @doc("Kind of task result")
   kind: AnalyzeTextLROTaskKind.EntityLinking;
+
   @doc("Task parameters.")
   parameters?: EntityLinkingTaskParameters;
 }
@@ -36,6 +39,7 @@ model EntityLinkingLROTask extends AnalyzeTextLROTask {
 model EntityLinkingTaskResult extends AnalyzeTextTaskResult {
   @doc("Kind of task result")
   kind: AnalyzeTextTaskResultsKind.EntityLinkingResults;
+
   @doc("Entity linking result.")
   results: EntityLinkingResult;
 }
@@ -103,11 +107,12 @@ model Match {
   length: int32;
 }
 
-@doc("Contains the analyze text Entity linking task LRO result.")
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@doc("Contains the analyze text Entity linking task LRO result.")
 model EntityLinkingLROResult extends AnalyzeTextLROResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Kind of the task.")
   kind: AnalyzeTextLROResultsKind.EntityLinkingLROResults;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: EntityLinkingResult;
 }

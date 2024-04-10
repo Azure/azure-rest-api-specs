@@ -16,14 +16,12 @@ namespace Language.Conversations;
 @doc("Error response.")
 @error
 model ErrorResponse {
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("The error object.")
   error: Error;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("The error object.")
-model Error is Record<unknown> {
+model Error {
   @doc("One of a server-defined set of error codes.")
   code: ErrorCode;
 
@@ -36,7 +34,6 @@ model Error is Record<unknown> {
   @doc("An array of details about specific errors that led to this reported error.")
   details?: Array<Error>;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("An object containing more specific information than the current object about the error.")
   innererror?: InnerErrorModel;
 }
@@ -177,7 +174,6 @@ model DocumentError {
   @doc("The ID of the input document.")
   id: string;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("Error encountered.")
   error: Error;
 }
@@ -194,9 +190,8 @@ model InputWarning {
   targetRef?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @doc("if showStats=true was specified in the request this field will contain information about the request payload.")
-model RequestStatistics is Record<unknown> {
+model RequestStatistics {
   @doc("Number of documents submitted in the request.")
   documentsCount: int32;
 
@@ -215,7 +210,6 @@ model PreBuiltResult {
   @doc("Errors by document id.")
   errors: Array<DocumentError>;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("statistics")
   statistics?: RequestStatistics;
 
@@ -576,7 +570,6 @@ model CustomResult {
   @doc("Errors by document id.")
   errors: Array<DocumentError>;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("if showStats=true was specified in the request this field will contain information about the request payload.")
   statistics?: RequestStatistics;
 

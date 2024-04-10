@@ -179,8 +179,10 @@ model AnalyzeTextTaskResult {
 model AnalyzeTextJobsInput {
   @doc("Name for the task.")
   displayName?: string;
+
   @doc("Contains the input to be analyzed.")
   analysisInput: MultiLanguageAnalysisInput;
+
   @doc("List of tasks to be peformed as part of the LRO.")
   tasks: Array<AnalyzeTextLROTask>;
 
@@ -194,7 +196,6 @@ model AnalyzeTextPreBuiltResult {
   @doc("Errors by document id.")
   errors: Array<AnalyzeTextDocumentError>;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("if showStats=true was specified in the request this field will contain information about the request payload.")
   statistics?: RequestStatistics;
 
@@ -216,20 +217,19 @@ model Pagination {
   nextLink?: string;
 }
 
-@docs("Contains the analyze text LRO errors")
+@doc("Contains the analyze text LRO errors")
 model AnalyzeTextJobErrors {
-  @docs("Collection of errors encountered during processing.")
+  @doc("Collection of errors encountered during processing.")
   errors: Array<Error>;
 }
 
-@docs("Contains the analyze text job statistics returned only when showStats=true.")
+@doc("Contains the analyze text job statistics returned only when showStats=true.")
 model AnalyzeTextJobStatistics {
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("if showStats=true was specified in the request this field will contain information about the request payload.")
   statistics?: RequestStatistics;
 }
 
-@docs("Contains the analyze text job tasks.")
+@doc("Contains the analyze text job tasks.")
 model TasksState {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   tasks: Tasks;
@@ -240,10 +240,13 @@ model TasksState {
 model Tasks {
   @doc("Count of completed tasks.")
   completed: int32;
+
   @doc("Count of failed tasks.")
   failed: int32;
+
   @doc("Count of inprogress tasks.")
   inProgress: int32;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   total: int32;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -272,6 +275,7 @@ enum Status {
 model AnalyzeTextLROResult {
   ...TaskState;
   ...TaskIdentifier;
+
   @doc("Kind of the task.")
   kind: AnalyzeTextLROResultsKind;
 }
@@ -296,7 +300,6 @@ model AnalyzeTextDocumentError {
   @doc("Document Id.")
   id: string;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("Document Error.")
   error: Error;
 }
@@ -352,7 +355,6 @@ model DocumentDetectedLanguage {
 @doc("Error response.")
 @error
 model ErrorResponse {
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("The error object.")
   error: Error;
 }
@@ -513,7 +515,6 @@ model DocumentError {
   @doc("The ID of the input document.")
   id: string;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("Error encountered.")
   error: Error;
 }
@@ -550,7 +551,6 @@ model PreBuiltResult {
   @doc("Errors by document id.")
   errors: Array<DocumentError>;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("if showStats=true was specified in the request this field will contain information about the request payload.")
   statistics?: RequestStatistics;
 
@@ -909,7 +909,6 @@ model CustomResult {
   @doc("Errors by document id.")
   errors: Array<DocumentError>;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("if showStats=true was specified in the request this field will contain information about the request payload.")
   statistics?: RequestStatistics;
 
@@ -952,7 +951,6 @@ enum redactionCharacter {
   tilde: "~",
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @clientName("AnalyzeTextError", "csharp")
 @doc("The error response object returned when the service encounters some errors during processing the request.")
 model Error {
@@ -968,7 +966,6 @@ model Error {
   @doc("An array of details about specific errors that led to this reported error.")
   details?: Array<Error>;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("An object containing more specific information than the current object about the error.")
   innererror?: InnerErrorModel;
 }

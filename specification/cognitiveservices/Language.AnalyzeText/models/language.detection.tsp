@@ -14,9 +14,12 @@ model LanguageDetectionAnalysisInput {
 
 @doc("Contains the language detection document analysis task input.")
 model AnalyzeTextLanguageDetectionInput extends AnalyzeTextTask {
+  @doc("Kind of the task.")
   kind: AnalyzeTextTaskKind.LanguageDetection;
+
   @doc("Documents to be analyzed.")
   analysisInput?: LanguageDetectionAnalysisInput;
+
   @doc("task parameters.")
   parameters?: LanguageDetectionTaskParameters;
 }
@@ -27,7 +30,9 @@ model LanguageDetectionTaskParameters is PreBuiltTaskParameters;
 
 @doc("Contains the language detection task result for the request.")
 model LanguageDetectionTaskResult extends AnalyzeTextTaskResult {
+  @doc("Kind of the task result.")
   kind: AnalyzeTextTaskResultsKind.LanguageDetectionResults;
+
   @doc("Contains the language detection results.")
   results: LanguageDetectionResult;
 }

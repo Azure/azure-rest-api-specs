@@ -8,8 +8,9 @@ namespace Language.AnalyzeText;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model AnalyzeTextEntityRecognitionInput extends AnalyzeTextTask {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Kind of the task.")
   kind: AnalyzeTextTaskKind.EntityRecognition;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   analysisInput?: MultiLanguageAnalysisInput;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -108,8 +109,9 @@ model Entity {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 model EntityRecognitionLROResult extends AnalyzeTextLROResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Kind of the task.")
   kind: AnalyzeTextLROResultsKind.EntityRecognitionLROResults;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: EntitiesResult;
 }

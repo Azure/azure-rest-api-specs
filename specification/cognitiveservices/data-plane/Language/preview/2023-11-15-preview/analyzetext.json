@@ -459,12 +459,15 @@
     },
     "AnalyzeTextDynamicClassificationInput": {
       "type": "object",
+      "description": "Contains the analyze text dynamic classifications input.",
       "properties": {
         "analysisInput": {
-          "$ref": "#/definitions/MultiLanguageAnalysisInput"
+          "$ref": "#/definitions/MultiLanguageAnalysisInput",
+          "description": "Input to be analyzed."
         },
         "parameters": {
-          "$ref": "#/definitions/DynamicClassificationTaskParameters"
+          "$ref": "#/definitions/DynamicClassificationTaskParameters",
+          "description": "Task parameters."
         }
       },
       "allOf": [
@@ -476,12 +479,15 @@
     },
     "AnalyzeTextEntityLinkingInput": {
       "type": "object",
+      "description": "Contains the analyze text Entity linking input.",
       "properties": {
         "analysisInput": {
-          "$ref": "#/definitions/MultiLanguageAnalysisInput"
+          "$ref": "#/definitions/MultiLanguageAnalysisInput",
+          "description": "Contains the analysis input to be handled by the service."
         },
         "parameters": {
-          "$ref": "#/definitions/EntityLinkingTaskParameters"
+          "$ref": "#/definitions/EntityLinkingTaskParameters",
+          "description": "Task parameters."
         }
       },
       "allOf": [
@@ -510,6 +516,7 @@
     },
     "AnalyzeTextJobState": {
       "type": "object",
+      "description": "The object containing the analyze job LRO job state.",
       "properties": {
         "displayName": {
           "type": "string",
@@ -569,15 +576,19 @@
     },
     "AnalyzeTextJobsInput": {
       "type": "object",
+      "description": "The input object for the analyze text LRO.",
       "properties": {
         "displayName": {
-          "type": "string"
+          "type": "string",
+          "description": "Name for the task."
         },
         "analysisInput": {
-          "$ref": "#/definitions/MultiLanguageAnalysisInput"
+          "$ref": "#/definitions/MultiLanguageAnalysisInput",
+          "description": "Contains the input to be analyzed."
         },
         "tasks": {
           "type": "array",
+          "description": "List of tasks to be peformed as part of the LRO.",
           "items": {
             "$ref": "#/definitions/AnalyzeTextLROTask"
           },
@@ -612,6 +623,7 @@
     },
     "AnalyzeTextLROResult": {
       "type": "object",
+      "description": "Contains the AnalyzeText long tunning opertion result object.",
       "properties": {
         "lastUpdateDateTime": {
           "type": "string",
@@ -627,7 +639,8 @@
           "description": "task name"
         },
         "kind": {
-          "$ref": "#/definitions/AnalyzeTextLROResultsKind"
+          "$ref": "#/definitions/AnalyzeTextLROResultsKind",
+          "description": "Kind of the task."
         }
       },
       "discriminator": "kind",
@@ -639,6 +652,7 @@
     },
     "AnalyzeTextLROResultsKind": {
       "type": "string",
+      "description": "The kind of the response object returned by the analyze-text long running task.",
       "enum": [
         "SentimentAnalysisLROResults",
         "EntityRecognitionLROResults",
@@ -662,7 +676,7 @@
     },
     "AnalyzeTextLROTask": {
       "type": "object",
-      "description": "Base task object.",
+      "description": "The long running task to be performed by the service on the input documents.",
       "properties": {
         "taskName": {
           "type": "string",
@@ -680,6 +694,7 @@
     },
     "AnalyzeTextLROTaskKind": {
       "type": "string",
+      "description": "The kind of the long running analyze text tasks supported.",
       "enum": [
         "SentimentAnalysis",
         "EntityRecognition",
@@ -703,12 +718,15 @@
     },
     "AnalyzeTextLanguageDetectionInput": {
       "type": "object",
+      "description": "Contains the language detection document analysis task input.",
       "properties": {
         "analysisInput": {
-          "$ref": "#/definitions/LanguageDetectionAnalysisInput"
+          "$ref": "#/definitions/LanguageDetectionAnalysisInput",
+          "description": "Documents to be analyzed."
         },
         "parameters": {
-          "$ref": "#/definitions/LanguageDetectionTaskParameters"
+          "$ref": "#/definitions/LanguageDetectionTaskParameters",
+          "description": "task parameters."
         }
       },
       "allOf": [
@@ -720,12 +738,15 @@
     },
     "AnalyzeTextPiiEntitiesRecognitionInput": {
       "type": "object",
+      "description": "Contains the analyze text PIIEntityRecognition task input.",
       "properties": {
         "analysisInput": {
-          "$ref": "#/definitions/MultiLanguageAnalysisInput"
+          "$ref": "#/definitions/MultiLanguageAnalysisInput",
+          "description": "Contains the input documents."
         },
         "parameters": {
-          "$ref": "#/definitions/PiiTaskParameters"
+          "$ref": "#/definitions/PiiTaskParameters",
+          "description": "Pii task parameters."
         }
       },
       "allOf": [
@@ -768,6 +789,7 @@
     },
     "AnalyzeTextTaskKind": {
       "type": "string",
+      "description": "The kind of the analyze-text tasks supported.",
       "enum": [
         "SentimentAnalysis",
         "EntityRecognition",
@@ -784,6 +806,7 @@
     },
     "AnalyzeTextTaskResult": {
       "type": "object",
+      "description": "The result object for the analyze task.",
       "properties": {
         "kind": {
           "$ref": "#/definitions/AnalyzeTextTaskResultsKind",
@@ -797,6 +820,7 @@
     },
     "AnalyzeTextTaskResultsKind": {
       "type": "string",
+      "description": "The kind of the response object returned by the analyze-text task.",
       "enum": [
         "SentimentAnalysisResults",
         "EntityRecognitionResults",
@@ -940,6 +964,7 @@
     },
     "ClassificationDocumentResultWithDetectedLanguage": {
       "type": "object",
+      "description": "Contains the classification doc result for the task with detected language.",
       "properties": {
         "id": {
           "type": "string",
@@ -959,6 +984,7 @@
         },
         "class": {
           "type": "array",
+          "description": "Contains the classification doc results for all docs.",
           "items": {
             "$ref": "#/definitions/ClassificationResult"
           },
@@ -977,6 +1003,7 @@
     },
     "ClassificationResult": {
       "type": "object",
+      "description": "Contains the classification result.",
       "properties": {
         "category": {
           "type": "string",
@@ -1172,9 +1199,11 @@
     },
     "CustomEntitiesLROTask": {
       "type": "object",
+      "description": "Contains the custom text LRO task.",
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/CustomEntitiesTaskParameters"
+          "$ref": "#/definitions/CustomEntitiesTaskParameters",
+          "description": "task parameters."
         }
       },
       "allOf": [
@@ -1186,7 +1215,7 @@
     },
     "CustomEntitiesResultWithDocumentDetectedLanguage": {
       "type": "object",
-      "description": "Custom Task Results",
+      "description": "Contains the list of detected custom entities result for the documents along with detected language.",
       "properties": {
         "errors": {
           "type": "array",
@@ -1209,6 +1238,7 @@
         },
         "documents": {
           "type": "array",
+          "description": "Enumeration of the document results with detected language.",
           "items": {
             "$ref": "#/definitions/EntitiesDocumentResultWithDetectedLanguage"
           }
@@ -1240,7 +1270,7 @@
         },
         "stringIndexType": {
           "type": "string",
-          "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.",
+          "description": "Optional parameter to provide the string index type used to interpret string offsets. Defaults to TextElements (Graphemes).",
           "default": "TextElements_v8",
           "enum": [
             "TextElements_v8",
@@ -1277,9 +1307,11 @@
     },
     "CustomEntityRecognitionLROResult": {
       "type": "object",
+      "description": "Contains the custom entity recognition job result.",
       "properties": {
         "results": {
-          "$ref": "#/definitions/CustomEntitiesResultWithDocumentDetectedLanguage"
+          "$ref": "#/definitions/CustomEntitiesResultWithDocumentDetectedLanguage",
+          "description": "List of results."
         }
       },
       "required": [
@@ -1294,6 +1326,7 @@
     },
     "CustomHealthcareEntitiesDocumentResultWithDocumentDetectedLanguage": {
       "type": "object",
+      "description": "Contains the document custom healthcare results with detected language.",
       "properties": {
         "id": {
           "type": "string",
@@ -1341,6 +1374,7 @@
     },
     "CustomHealthcareEntity": {
       "type": "object",
+      "description": "Contains the custom healthcare entity.",
       "properties": {
         "text": {
           "type": "string",
@@ -1402,9 +1436,11 @@
     },
     "CustomHealthcareLROResult": {
       "type": "object",
+      "description": "Contains the custom healthcare job result.",
       "properties": {
         "results": {
-          "$ref": "#/definitions/CustomHealthcareResult"
+          "$ref": "#/definitions/CustomHealthcareResult",
+          "description": "Contains the list of document results."
         }
       },
       "required": [
@@ -1419,9 +1455,11 @@
     },
     "CustomHealthcareLROTask": {
       "type": "object",
+      "description": "Contains the custom healthcare task definition.",
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/CustomHealthcareTaskParameters"
+          "$ref": "#/definitions/CustomHealthcareTaskParameters",
+          "description": "Contains the custom healthcare task parameters."
         }
       },
       "allOf": [
@@ -1433,7 +1471,7 @@
     },
     "CustomHealthcareResult": {
       "type": "object",
-      "description": "Custom Task Results",
+      "description": "Contains the custom healthcare result for the request.",
       "properties": {
         "errors": {
           "type": "array",
@@ -1456,6 +1494,7 @@
         },
         "documents": {
           "type": "array",
+          "description": "List of custom healthcare results for the document.",
           "items": {
             "$ref": "#/definitions/CustomHealthcareEntitiesDocumentResultWithDocumentDetectedLanguage"
           }
@@ -1487,7 +1526,7 @@
         },
         "stringIndexType": {
           "type": "string",
-          "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.",
+          "description": "Optional parameter to provide the string index type used to interpret string offsets. Defaults to TextElements (Graphemes).",
           "default": "TextElements_v8",
           "enum": [
             "TextElements_v8",
@@ -1524,7 +1563,7 @@
     },
     "CustomLabelClassificationResultWithDocumentDetectedLanguage": {
       "type": "object",
-      "description": "Custom Task Results",
+      "description": "Contains the custom label classification with detected language results.",
       "properties": {
         "errors": {
           "type": "array",
@@ -1562,9 +1601,11 @@
     },
     "CustomMultiLabelClassificationLROResult": {
       "type": "object",
+      "description": "Contains the custom multi label classification job result.",
       "properties": {
         "results": {
-          "$ref": "#/definitions/CustomLabelClassificationResultWithDocumentDetectedLanguage"
+          "$ref": "#/definitions/CustomLabelClassificationResultWithDocumentDetectedLanguage",
+          "description": "List of results."
         }
       },
       "required": [
@@ -1582,7 +1623,8 @@
       "description": "Use custom models to classify text into multi label taxonomy",
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/CustomMultiLabelClassificationTaskParameters"
+          "$ref": "#/definitions/CustomMultiLabelClassificationTaskParameters",
+          "description": "Task parameters."
         }
       },
       "allOf": [
@@ -1821,9 +1863,11 @@
     },
     "CustomSingleLabelClassificationLROResult": {
       "type": "object",
+      "description": "Contains the custom single label classification job result.",
       "properties": {
         "results": {
-          "$ref": "#/definitions/CustomLabelClassificationResultWithDocumentDetectedLanguage"
+          "$ref": "#/definitions/CustomLabelClassificationResultWithDocumentDetectedLanguage",
+          "description": "List of results."
         }
       },
       "required": [
@@ -1841,7 +1885,8 @@
       "description": "Use custom models to classify text into single label taxonomy",
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/CustomSingleLabelClassificationTaskParameters"
+          "$ref": "#/definitions/CustomSingleLabelClassificationTaskParameters",
+          "description": "Task parameters"
         }
       },
       "allOf": [
@@ -1935,6 +1980,7 @@
     },
     "DetectedLanguage": {
       "type": "object",
+      "description": "Contains the details of the detected language for the text.",
       "properties": {
         "name": {
           "type": "string",
@@ -2040,6 +2086,7 @@
     },
     "DocumentWarning": {
       "type": "object",
+      "description": "Contains the warnings object with warnings encountered for the processed document.",
       "properties": {
         "code": {
           "$ref": "#/definitions/WarningCodeValue"
@@ -2060,6 +2107,7 @@
     },
     "DynamicClassificationDocumentResult": {
       "type": "object",
+      "description": "Contains the Dynamic Classification document result.",
       "properties": {
         "id": {
           "type": "string",
@@ -2079,6 +2127,7 @@
         },
         "classifications": {
           "type": "array",
+          "description": "Array of classification results.",
           "items": {
             "$ref": "#/definitions/ClassificationResult"
           },
@@ -2093,7 +2142,7 @@
     },
     "DynamicClassificationResult": {
       "type": "object",
-      "description": "Pre built result",
+      "description": "Contains the Dynamic Classification result.",
       "properties": {
         "errors": {
           "type": "array",
@@ -2165,7 +2214,7 @@
     },
     "DynamicClassificationTaskResult": {
       "type": "object",
-      "description": "Result for Dynamic Classification task",
+      "description": "Result for Dynamic Classification task.",
       "properties": {
         "results": {
           "$ref": "#/definitions/DynamicClassificationResult",
@@ -2222,6 +2271,7 @@
     },
     "EntitiesDocumentResultWithMetadataDetectedLanguage": {
       "type": "object",
+      "description": "Contains the result object for the processed document.",
       "properties": {
         "id": {
           "type": "string",
@@ -2780,6 +2830,7 @@
     },
     "EntityLinkingLROResult": {
       "type": "object",
+      "description": "Contains the analyze text Entity linking task LRO result.",
       "properties": {
         "results": {
           "$ref": "#/definitions/EntityLinkingResult"
@@ -2797,9 +2848,11 @@
     },
     "EntityLinkingLROTask": {
       "type": "object",
+      "description": "Contains the analyze text Entity linking LRO task.",
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/EntityLinkingTaskParameters"
+          "$ref": "#/definitions/EntityLinkingTaskParameters",
+          "description": "Task parameters."
         }
       },
       "allOf": [
@@ -2811,7 +2864,7 @@
     },
     "EntityLinkingResult": {
       "type": "object",
-      "description": "Pre built result",
+      "description": "Entity linking result.",
       "properties": {
         "errors": {
           "type": "array",
@@ -2844,6 +2897,7 @@
     },
     "EntityLinkingResultWithDetectedLanguage": {
       "type": "object",
+      "description": "Entity linking document result with auto language detection.",
       "properties": {
         "id": {
           "type": "string",
@@ -2895,7 +2949,7 @@
         },
         "stringIndexType": {
           "type": "string",
-          "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.",
+          "description": "Optional parameter to provide the string index type used to interpret string offsets. Defaults to TextElements (Graphemes).",
           "default": "TextElements_v8",
           "enum": [
             "TextElements_v8",
@@ -2928,9 +2982,11 @@
     },
     "EntityLinkingTaskResult": {
       "type": "object",
+      "description": "Contains the analyze text Entity linking task result.",
       "properties": {
         "results": {
-          "$ref": "#/definitions/EntityLinkingResult"
+          "$ref": "#/definitions/EntityLinkingResult",
+          "description": "Entity linking result."
         }
       },
       "required": [
@@ -3036,7 +3092,7 @@
     },
     "Error": {
       "type": "object",
-      "description": "The error object.",
+      "description": "The error response object returned when the service encounters some errors during processing the request.",
       "properties": {
         "code": {
           "$ref": "#/definitions/ErrorCode",
@@ -3066,8 +3122,7 @@
       "required": [
         "code",
         "message"
-      ],
-      "additionalProperties": {}
+      ]
     },
     "ErrorCode": {
       "type": "string",
@@ -3347,6 +3402,7 @@
     },
     "HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage": {
       "type": "object",
+      "description": "Contains the result object for the processed document.",
       "properties": {
         "id": {
           "type": "string",
@@ -3871,9 +3927,11 @@
     },
     "LanguageDetectionAnalysisInput": {
       "type": "object",
+      "description": "Contains the language detection document analysis input.",
       "properties": {
         "documents": {
           "type": "array",
+          "description": "List of documents to be analyzed.",
           "items": {
             "$ref": "#/definitions/LanguageInput"
           }
@@ -3882,6 +3940,7 @@
     },
     "LanguageDetectionDocumentResult": {
       "type": "object",
+      "description": "Contains the language detection for a document.",
       "properties": {
         "id": {
           "type": "string",
@@ -3912,7 +3971,7 @@
     },
     "LanguageDetectionResult": {
       "type": "object",
-      "description": "Pre built result",
+      "description": "Contains the language detection result for the request.",
       "properties": {
         "errors": {
           "type": "array",
@@ -3931,6 +3990,7 @@
         },
         "documents": {
           "type": "array",
+          "description": "Enumeration of language detection results for each input document.",
           "items": {
             "$ref": "#/definitions/LanguageDetectionDocumentResult"
           }
@@ -3960,9 +4020,11 @@
     },
     "LanguageDetectionTaskResult": {
       "type": "object",
+      "description": "Contains the language detection task result for the request.",
       "properties": {
         "results": {
-          "$ref": "#/definitions/LanguageDetectionResult"
+          "$ref": "#/definitions/LanguageDetectionResult",
+          "description": "Contains the language detection results."
         }
       },
       "required": [
@@ -3977,6 +4039,7 @@
     },
     "LanguageInput": {
       "type": "object",
+      "description": "Contains the language detection input.",
       "properties": {
         "id": {
           "type": "string",
@@ -3987,7 +4050,8 @@
           "description": "The input text to process."
         },
         "countryHint": {
-          "type": "string"
+          "type": "string",
+          "description": "The country hint to help with language detection of the text."
         }
       },
       "required": [
@@ -4064,6 +4128,7 @@
     },
     "LinkedEntity": {
       "type": "object",
+      "description": "The LinkedEntity object containing the detected entity with the associated sources/links.",
       "properties": {
         "name": {
           "type": "string",
@@ -4124,6 +4189,7 @@
     },
     "Match": {
       "type": "object",
+      "description": "The Match object containing the detected entity text with the offset and the length.",
       "properties": {
         "confidenceScore": {
           "type": "number",
@@ -4191,6 +4257,7 @@
     },
     "MultiLanguageAnalysisInput": {
       "type": "object",
+      "description": "Collection of input documents to be analyzed by the service.",
       "properties": {
         "documents": {
           "type": "array",
@@ -4690,6 +4757,7 @@
     },
     "PiiEntityRecognitionLROResult": {
       "type": "object",
+      "description": "Contains the PII LRO results.",
       "properties": {
         "results": {
           "$ref": "#/definitions/PiiResult"
@@ -4707,9 +4775,11 @@
     },
     "PiiLROTask": {
       "type": "object",
+      "description": "Contains the analyze text PIIEntityRecognition LRO task.",
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/PiiTaskParameters"
+          "$ref": "#/definitions/PiiTaskParameters",
+          "description": "Pii task parameters."
         }
       },
       "allOf": [
@@ -4721,7 +4791,7 @@
     },
     "PiiResult": {
       "type": "object",
-      "description": "Pre built result",
+      "description": "Contains the PiiResult.",
       "properties": {
         "errors": {
           "type": "array",
@@ -4754,6 +4824,7 @@
     },
     "PiiResultWithDetectedLanguage": {
       "type": "object",
+      "description": "Contains the PII results with detected language.",
       "properties": {
         "id": {
           "type": "string",
@@ -4811,6 +4882,7 @@
         },
         "domain": {
           "type": "string",
+          "description": "Domain for PII task",
           "default": "none",
           "enum": [
             "phi",
@@ -4835,13 +4907,14 @@
         },
         "piiCategories": {
           "type": "array",
+          "description": "Enumeration of PII categories to be returned in the response.",
           "items": {
             "$ref": "#/definitions/PiiCategory"
           }
         },
         "stringIndexType": {
           "type": "string",
-          "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.",
+          "description": "StringIndexType to be used for analysis.",
           "default": "TextElements_v8",
           "enum": [
             "TextElements_v8",
@@ -4871,11 +4944,12 @@
           }
         },
         "excludePiiCategories": {
-          "$ref": "#/definitions/PiiCategoriesExclude"
+          "$ref": "#/definitions/PiiCategoriesExclude",
+          "description": "Enumeration of PII categories to be excluded in the response."
         },
         "redactionCharacter": {
           "type": "string",
-          "description": "Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.",
+          "description": "Characeter to be used for redaction. Default in '*'.",
           "default": "*",
           "enum": [
             "!",
@@ -4960,6 +5034,7 @@
     },
     "PiiTaskResult": {
       "type": "object",
+      "description": "Contains the analyze text PIIEntityRecognition LRO task.",
       "properties": {
         "results": {
           "$ref": "#/definitions/PiiResult"
@@ -5067,8 +5142,7 @@
         "validDocumentsCount",
         "erroneousDocumentsCount",
         "transactionsCount"
-      ],
-      "additionalProperties": {}
+      ]
     },
     "ScriptCode": {
       "type": "string",
@@ -5955,18 +6029,22 @@
     },
     "Tasks": {
       "type": "object",
+      "description": "Container for the tasks status for the LRO job.",
       "properties": {
         "completed": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Count of completed tasks."
         },
         "failed": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Count of failed tasks."
         },
         "inProgress": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Count of inprogress tasks."
         },
         "total": {
           "type": "integer",
@@ -6223,6 +6301,7 @@
     },
     "WarningCodeValue": {
       "type": "string",
+      "description": "Defines the list of the warning codes.",
       "enum": [
         "LongWordsInDocument",
         "DocumentTruncated"
@@ -6284,6 +6363,7 @@
     },
     "entityComponentKind": {
       "type": "string",
+      "description": "Kind of entity components supported.",
       "enum": [
         "PrebuiltComponent",
         "LearnedComponent",

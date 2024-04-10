@@ -22,6 +22,7 @@ model CustomEntitiesTaskParameters is CustomTaskParameters {
 model CustomEntitiesLROTask extends AnalyzeTextLROTask {
   @doc("Kind of the task.")
   kind: AnalyzeTextLROTaskKind.CustomEntityRecognition;
+
   @doc("task parameters.")
   parameters?: CustomEntitiesTaskParameters;
 }
@@ -48,6 +49,7 @@ model CustomSingleLabelClassificationTaskParameters is CustomTaskParameters;
 model CustomSingleLabelClassificationLROTask extends AnalyzeTextLROTask {
   @doc("Kind of the task.")
   kind: AnalyzeTextLROTaskKind.CustomSingleLabelClassification;
+
   @doc("Task parameters")
   parameters?: CustomSingleLabelClassificationTaskParameters;
 }
@@ -84,6 +86,7 @@ model CustomMultiLabelClassificationTaskParameters is CustomTaskParameters;
 model CustomMultiLabelClassificationLROTask extends AnalyzeTextLROTask {
   @doc("Kind of the task.")
   kind: AnalyzeTextLROTaskKind.CustomMultiLabelClassification;
+
   @doc("Task parameters.")
   parameters?: CustomMultiLabelClassificationTaskParameters;
 }
@@ -144,8 +147,10 @@ model CustomMultiLabelClassificationLROResult extends AnalyzeTextLROResult {
 model AnalyzeTextDynamicClassificationInput extends AnalyzeTextTask {
   @doc("Kind of the task.")
   kind: AnalyzeTextTaskKind.DynamicClassification;
+
   @doc("Input to be analyzed.")
   analysisInput?: MultiLanguageAnalysisInput;
+
   @doc("Task parameters.")
   parameters?: DynamicClassificationTaskParameters;
 }
@@ -153,7 +158,7 @@ model AnalyzeTextDynamicClassificationInput extends AnalyzeTextTask {
 @added(Versions.v2023_04_15_preview)
 @doc("Contains the Dynamic Classification document result.")
 model DynamicClassificationDocumentResult is DocumentResult {
-  doc("Array of classification results.")
+  @doc("Array of classification results.")
   classifications: Array<ClassificationResult>;
 }
 

@@ -9,9 +9,12 @@ namespace Language.AnalyzeText;
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Contains the analyze text PIIEntityRecognition task input.")
 model AnalyzeTextPiiEntitiesRecognitionInput extends AnalyzeTextTask {
+  @doc("Kind of the task.")
   kind: AnalyzeTextTaskKind.PiiEntityRecognition;
+
   @doc("Contains the input documents.")
   analysisInput?: MultiLanguageAnalysisInput;
+
   @doc("Pii task parameters.")
   parameters?: PiiTaskParameters;
 }
@@ -25,6 +28,7 @@ model PiiTaskParameters is PreBuiltTaskParameters {
 
   @doc("Enumeration of PII categories to be returned in the response.")
   piiCategories?: Array<PiiCategory>;
+
   @doc("StringIndexType to be used for analysis.")
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
@@ -40,7 +44,9 @@ model PiiTaskParameters is PreBuiltTaskParameters {
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Contains the analyze text PIIEntityRecognition LRO task.")
 model PiiLROTask extends AnalyzeTextLROTask {
+  @doc("Kind of the task.")
   kind: AnalyzeTextLROTaskKind.PiiEntityRecognition;
+
   @doc("Pii task parameters.")
   parameters?: PiiTaskParameters;
 }
@@ -74,8 +80,8 @@ enum PiiDomain {
   none,
 }
 
-@doc("Contains the PII results.")
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@doc("Contains the PII results.")
 model PiiEntitiesDocumentResult is DocumentResult {
   @doc("Returns redacted text.")
   redactedText: string;
@@ -84,8 +90,8 @@ model PiiEntitiesDocumentResult is DocumentResult {
   entities: Array<Entity>;
 }
 
-@doc("Contains the PII results with detected language.")
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@doc("Contains the PII results with detected language.")
 model PiiResultWithDetectedLanguage {
   ...PiiEntitiesDocumentResult;
   ...DocumentDetectedLanguage;
@@ -441,11 +447,12 @@ enum PiiCategory {
   Default,
 }
 
-@doc("Contains the PII LRO results.")
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@doc("Contains the PII LRO results.")
 model PiiEntityRecognitionLROResult extends AnalyzeTextLROResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Kind of the task.")
   kind: AnalyzeTextLROResultsKind.PiiEntityRecognitionLROResults;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: PiiResult;
 }
