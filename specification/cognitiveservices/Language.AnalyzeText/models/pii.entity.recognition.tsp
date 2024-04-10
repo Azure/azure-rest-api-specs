@@ -56,6 +56,7 @@ model PiiLROTask extends AnalyzeTextLROTask {
 model PiiTaskResult extends AnalyzeTextTaskResult {
   @doc("The kind of the task.")
   kind: AnalyzeTextTaskResultsKind.PiiEntityRecognitionResults;
+
   @doc("The list of pii results")
   results: PiiResult;
 }
@@ -455,6 +456,7 @@ union PiiCategory {
 model PiiEntityRecognitionLROResult extends AnalyzeTextLROResult {
   @doc("The kind of the task.")
   kind: AnalyzeTextLROResultsKind.PiiEntityRecognitionLROResults;
+
   @doc("The list of pii results")
   results: PiiResult;
 }

@@ -252,7 +252,7 @@ model Tasks {
 
   @doc("Count of total tasks.")
   total: int32;
-  
+
   @doc("Enumerable of Analyze text job results.")
   items?: Array<AnalyzeTextLROResult>;
 }

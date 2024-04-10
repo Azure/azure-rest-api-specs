@@ -10,8 +10,10 @@ namespace Language.AnalyzeText;
 model AnalyzeTextEntityRecognitionInput extends AnalyzeTextTask {
   @doc("The kind of task.")
   kind: AnalyzeTextTaskKind.EntityRecognition;
+
   @doc("The input to be analyzed.")
   analysisInput?: MultiLanguageAnalysisInput;
+
   @doc("Task parameters.")
   parameters?: EntitiesTaskParameters;
 }
@@ -44,6 +46,7 @@ model EntitiesTaskParameters is PreBuiltTaskParameters {
 model EntitiesLROTask extends AnalyzeTextLROTask {
   @doc("The kind of task.")
   kind: AnalyzeTextLROTaskKind.EntityRecognition;
+
   @doc("Task parameters.")
   parameters?: EntitiesTaskParameters;
 }
@@ -52,6 +55,7 @@ model EntitiesLROTask extends AnalyzeTextLROTask {
 model EntitiesTaskResult extends AnalyzeTextTaskResult {
   @doc("kind of the task")
   kind: AnalyzeTextTaskResultsKind.EntityRecognitionResults;
+
   @doc("Results for entity recognition.")
   results: EntitiesResult;
 }
@@ -105,8 +109,8 @@ model Entity {
   confidenceScore: float64;
 }
 
-@doc("Contains the entity recognition job task result.")
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@doc("Contains the entity recognition job task result.")
 model EntityRecognitionLROResult extends AnalyzeTextLROResult {
   @doc("Kind of the task.")
   kind: AnalyzeTextLROResultsKind.EntityRecognitionLROResults;
@@ -869,8 +873,10 @@ model QuantityMetadata {
 @doc("Represents the Age entity Metadata model.")
 model AgeMetadata extends BaseMetadata {
   ...QuantityMetadata;
+
   @doc("Kind of the metadata.")
   metadataKind: MetadataKind.AgeMetadata;
+
   @doc("Unit of measure for age.")
   unit: AgeUnit;
 }
@@ -879,8 +885,10 @@ model AgeMetadata extends BaseMetadata {
 @doc("Represents the Volume entity Metadata model.")
 model VolumeMetadata extends BaseMetadata {
   ...QuantityMetadata;
+
   @doc("Kind of the metadata.")
   metadataKind: MetadataKind.VolumeMetadata;
+
   @doc("Unit of measure for volume.")
   unit: VolumeUnit;
 }
@@ -889,8 +897,10 @@ model VolumeMetadata extends BaseMetadata {
 @doc("Represents the Speed entity Metadata model.")
 model SpeedMetadata extends BaseMetadata {
   ...QuantityMetadata;
+
   @doc("Kind of the metadata.")
   metadataKind: MetadataKind.SpeedMetadata;
+
   @doc("Unit of measure for speed.")
   unit: SpeedUnit;
 }
@@ -899,8 +909,10 @@ model SpeedMetadata extends BaseMetadata {
 @doc("Represents the Area entity Metadata model.")
 model AreaMetadata extends BaseMetadata {
   ...QuantityMetadata;
+
   @doc("Kind of the metadata.")
   metadataKind: MetadataKind.AreaMetadata;
+
   @doc("Unit of measure for area.")
   unit: AreaUnit;
 }
@@ -909,8 +921,10 @@ model AreaMetadata extends BaseMetadata {
 @doc("Represents the Length entity Metadata model.")
 model LengthMetadata extends BaseMetadata {
   ...QuantityMetadata;
+
   @doc("Kind of the metadata.")
   metadataKind: MetadataKind.LengthMetadata;
+
   @doc("Unit of measure for length.")
   unit: LengthUnit;
 }
@@ -919,8 +933,10 @@ model LengthMetadata extends BaseMetadata {
 @doc("Represents the Information (data) entity Metadata model.")
 model InformationMetadata extends BaseMetadata {
   ...QuantityMetadata;
+
   @doc("Kind of the metadata.")
   metadataKind: MetadataKind.InformationMetadata;
+
   @doc("Unit of measure for information.")
   unit: InformationUnit;
 }
@@ -929,8 +945,10 @@ model InformationMetadata extends BaseMetadata {
 @doc("Represents the Information entity Metadata model.")
 model TemperatureMetadata extends BaseMetadata {
   ...QuantityMetadata;
+
   @doc("Kind of the metadata.")
   metadataKind: MetadataKind.TemperatureMetadata;
+
   @doc("Unit of measure for tenperature.")
   unit: TemperatureUnit;
 }
@@ -939,8 +957,10 @@ model TemperatureMetadata extends BaseMetadata {
 @doc("Represents the Weight ) entity Metadata model.")
 model WeightMetadata extends BaseMetadata {
   ...QuantityMetadata;
+
   @doc("Kind of the metadata.")
   metadataKind: MetadataKind.WeightMetadata;
+
   @doc("Unit of measure for weight.")
   unit: WeightUnit;
 }
@@ -949,8 +969,10 @@ model WeightMetadata extends BaseMetadata {
 @doc("Represents the Currency ) entity Metadata model.")
 model CurrencyMetadata extends BaseMetadata {
   ...QuantityMetadata;
+
   @doc("Kind of the metadata.")
   metadataKind: MetadataKind.CurrencyMetadata;
+
   @doc("Currency unit.")
   unit: string;
 
@@ -982,6 +1004,7 @@ model BaseTemporalMetadata {
 @doc("A Metadata for date entity instances.")
 model DateMetadata extends BaseMetadata {
   ...BaseTemporalMetadata;
+
   @doc("Kind of the metadata.")
   metadataKind: MetadataKind.DateMetadata;
 }
@@ -990,6 +1013,7 @@ model DateMetadata extends BaseMetadata {
 @doc("A Metadata for datetime entity instances.")
 model DateTimeMetadata extends BaseMetadata {
   ...BaseTemporalMetadata;
+
   @doc("Kind of the metadata.")
   metadataKind: MetadataKind.DateTimeMetadata;
 }
@@ -998,6 +1022,7 @@ model DateTimeMetadata extends BaseMetadata {
 @doc("A Metadata for temporal set entity instances.")
 model TemporalSetMetadata extends BaseMetadata {
   ...BaseTemporalMetadata;
+
   @doc("Kind of the metadata.")
   metadataKind: MetadataKind.TemporalSetMetadata;
 }
@@ -1006,6 +1031,7 @@ model TemporalSetMetadata extends BaseMetadata {
 @doc("A Metadata for time entity instances.")
 model TimeMetadata extends BaseMetadata {
   ...BaseTemporalMetadata;
+
   @doc("Kind of the metadata.")
   metadataKind: MetadataKind.TimeMetadata;
 }
@@ -1044,6 +1070,7 @@ model OrdinalMetadata extends BaseMetadata {
 model TemporalSpanMetadata extends BaseMetadata {
   @doc("Kind of the metadata.")
   metadataKind: MetadataKind.TemporalSpanMetadata;
+
   @doc("List of temporal spans detected.")
   spanValues?: TemporalSpanValues[];
 }

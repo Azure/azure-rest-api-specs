@@ -56,8 +56,8 @@ union healthcareDocumentType {
   ProcedureNote: "ProcedureNote",
 }
 
-@doc("The long running task to be performed by the service on the Healthcare input documents.")
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@doc("The long running task to be performed by the service on the Healthcare input documents.")
 model HealthcareLROTask extends AnalyzeTextLROTask {
   @doc("Healthcare kind of the long running task.")
   kind: AnalyzeTextLROTaskKind.Healthcare;
