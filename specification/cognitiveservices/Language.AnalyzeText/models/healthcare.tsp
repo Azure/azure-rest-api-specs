@@ -417,7 +417,7 @@ model HealthcareEntityLink {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-@doc("Healthcare Analyze Text long tunning opertion result object.")
+@doc("Healthcare Analyze Text long tunning operation result object.")
 model HealthcareLROResult extends AnalyzeTextLROResult {
   @doc("Kind of the task.")
   kind: AnalyzeTextLROResultsKind.HealthcareLROResults;

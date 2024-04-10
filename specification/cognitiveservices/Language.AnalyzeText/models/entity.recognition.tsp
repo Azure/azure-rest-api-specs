@@ -948,8 +948,7 @@ model TemperatureMetadata extends BaseMetadata {
 
   @doc("Kind of the metadata.")
   metadataKind: MetadataKind.TemperatureMetadata;
-
-  @doc("Unit of measure for tenperature.")
+  @doc("Unit of measure for temperature.")
   unit: TemperatureUnit;
 }
 
