@@ -306,7 +306,8 @@ match the value provided.
       ifNoneMatch?: string;
 
       ...acceptHeader<"application/vnd.microsoft.appconfig.kv+json">;
-    }> & ResponseHeadersTrait<AppConfigResponseHeaders>
+    }> &
+    ResponseHeadersTrait<AppConfigResponseHeaders>
 >;
 
 // FIXME: check is service returns 201 and/or 200?
@@ -539,7 +540,8 @@ match the value provided.
       ifNoneMatch?: string;
 
       ...acceptHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
-    }> & ResponseHeadersTrait<AppConfigResponseHeaders & {
+    }> &
+    ResponseHeadersTrait<AppConfigResponseHeaders & {
       @doc("Includes links to related resources.")
       @header("Link")
       link?: string;
