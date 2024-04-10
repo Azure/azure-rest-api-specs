@@ -10,6 +10,11 @@ using Azure.Core.Traits;
 namespace AzureAppConfiguration;
 
 alias standardOps = StandardResourceOperations;
+alias acceptHeader<T extends string> = {
+  @doc("Accept header")
+  @header
+  accept: T | "application/problem+json" | string;
+};
 
 // FIXME headers not in generated openapi response
 alias AppConfigResponseHeaders = {
@@ -50,9 +55,7 @@ time.
     @header("Accept-Datetime")
     acceptDatetime?: string;
 
-    @doc("Accept header")
-    @header
-    accept: "application/vnd.microsoft.appconfig.keyset+json" | "application/problem+json";
+    ...acceptHeader<"application/vnd.microsoft.appconfig.keyset+json">;
   },
   KeyListResult & {
     @doc("Used to guarantee real-time consistency between requests.")
@@ -174,9 +177,7 @@ https://aka.ms/azconfig/docs/keyvaluefiltering
     })
     tags?: string[];
 
-    @doc("Accept header")
-    @header
-    accept: "application/vnd.microsoft.appconfig.kvset+json" | "application/problem+json";
+    ...acceptHeader<"application/vnd.microsoft.appconfig.kvset+json">;
   },
   KeyValueListResult & AppConfigResponseHeaders
 >;
@@ -304,9 +305,7 @@ match the value provided.
       @header("If-None-Match")
       ifNoneMatch?: string;
 
-      @doc("Accept header")
-      @header
-      accept: "application/vnd.microsoft.appconfig.kv+json" | "application/problem+json";
+      ...acceptHeader<"application/vnd.microsoft.appconfig.kv+json">;
     }> & ResponseHeadersTrait<AppConfigResponseHeaders>
 >;
 
@@ -349,9 +348,7 @@ match the value provided.
     @body
     entity?: KeyValue;
 
-    @doc("Accept header")
-    @header
-    accept: "application/vnd.microsoft.appconfig.kv+json" | "application/problem+json";
+    ...acceptHeader<"application/vnd.microsoft.appconfig.kv+json">;
   },
   KeyValue & AppConfigResponseHeaders
 >;
@@ -382,9 +379,7 @@ value provided.
     @header("If-Match")
     ifMatch?: string;
 
-    @doc("Accept header")
-    @header
-    accept: "application/vnd.microsoft.appconfig.kv+json" | "application/problem+json";
+    ...acceptHeader<"application/vnd.microsoft.appconfig.kv+json">;
   },
   (KeyValue & AppConfigResponseHeaders) | {
     @doc("Used to guarantee real-time consistency between requests.")
@@ -478,9 +473,7 @@ to by the specified token.
     @header("Sync-Token")
     syncToken?: string;
 
-    @doc("Accept header")
-    @header
-    accept: "application/vnd.microsoft.appconfig.snapshotset+json" | "application/problem+json";
+    ...acceptHeader<"application/vnd.microsoft.appconfig.snapshotset+json">;
   },
   SnapshotListResult & {
     @doc("Used to guarantee real-time consistency between requests.")
@@ -545,9 +538,7 @@ match the value provided.
       @header("If-None-Match")
       ifNoneMatch?: string;
 
-      @doc("Accept header")
-      @header
-      accept: "application/vnd.microsoft.appconfig.snapshot+json" | "application/problem+json";
+      ...acceptHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
     }> & ResponseHeadersTrait<AppConfigResponseHeaders & {
       @doc("Includes links to related resources.")
       @header("Link")
@@ -577,9 +568,7 @@ op createSnapshot is Foundations.LongRunningOperation<
     @body
     entity: Snapshot;
 
-    @doc("Accept header")
-    @header
-    accept: "application/vnd.microsoft.appconfig.snapshot+json" | "application/problem+json";
+    ...acceptHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
   },
   CreatedResponse &
     Snapshot & {
@@ -625,9 +614,7 @@ match the value provided.
     @body
     entity: SnapshotUpdateParameters;
 
-    @doc("Accept header")
-    @header
-    accept: "application/vnd.microsoft.appconfig.snapshot+json" | "application/problem+json";
+    ...acceptHeader<"application/vnd.microsoft.appconfig.snapshot+json">;
   },
   Snapshot & {
     ...AppConfigResponseHeaders;
@@ -711,9 +698,7 @@ time.
     })
     select?: LabelFields[];
 
-    @doc("Accept header")
-    @header
-    accept: "application/vnd.microsoft.appconfig.labelset+json" | "application/problem+json";
+    ...acceptHeader<"application/vnd.microsoft.appconfig.labelset+json">;
   },
   LabelListResult & {
     @doc("Used to guarantee real-time consistency between requests.")
@@ -798,9 +783,7 @@ match the value provided.
     @header("If-None-Match")
     ifNoneMatch?: string;
 
-    @doc("Accept header")
-    @header
-    accept: "application/vnd.microsoft.appconfig.kv+json" | "application/problem+json";
+    ...acceptHeader<"application/vnd.microsoft.appconfig.kv+json">;
   },
   KeyValue & AppConfigResponseHeaders
 >;
@@ -839,9 +822,7 @@ match the value provided.
     @header("If-None-Match")
     ifNoneMatch?: string;
 
-    @doc("Accept header")
-    @header
-    accept: "application/vnd.microsoft.appconfig.kv+json" | "application/problem+json";
+    ...acceptHeader<"application/vnd.microsoft.appconfig.kv+json">;
   },
   KeyValue & AppConfigResponseHeaders
 >;
@@ -903,9 +884,7 @@ https://aka.ms/azconfig/docs/restapirevisions
     })
     tags?: string[];
 
-    @doc("Accept header")
-    @header
-    accept: "application/vnd.microsoft.appconfig.kvset+json" | "application/problem+json";
+    ...acceptHeader<"application/vnd.microsoft.appconfig.kvset+json">;
   },
   KeyValueListResult & AppConfigResponseHeaders
 >;
