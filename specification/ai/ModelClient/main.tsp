@@ -13,18 +13,19 @@ using Azure.Core;
 @service({
   title: "AI Model Inference",
 })
-@server(
-  "{endpoint}",
-  "An AI endpoint that does chat completions, embeddings or image-generation",
-  {
-    @doc("The AI model service endpoint.")
-    endpoint: string,
-
-    @doc("Controls what happens if extra parameters are passed in the request payload.")
-    @header("extra-parameters")
-    extra_parameters?: ExtraParameters,
-  }
-)
+// Is this the right way to do this? This results in an error in the emitted Python code.
+// @server(
+//   "{endpoint}",
+//   "An AI endpoint that does chat completions, embeddings or image-generation",
+//   {
+//     @doc("The AI model service endpoint.")
+//     endpoint: string,
+//
+//     @doc("Controls what happens if extra parameters are passed in the request payload.")
+//     @header("extra-parameters")
+//     extra_parameters?: ExtraParameters,
+//   }
+// )
 @versioned(ModelClient.Versions)
 namespace ModelClient;
 
