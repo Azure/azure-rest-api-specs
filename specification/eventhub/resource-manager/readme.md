@@ -246,6 +246,14 @@ input-file:
 - Microsoft.EventHub/preview/2024-05-01-preview/eventhubs.json
 - Microsoft.EventHub/preview/2024-05-01-preview/SchemaRegistry.json
 - Microsoft.EventHub/preview/2024-05-01-preview/ApplicationGroups.json
+
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: swagger-document
+    reason: Addition of Pattern restriction will cause a breaking change as there is no restriction in previous api versions.
+  - code:  LroLocationHeader
+    from: swagger-document
+    reason: not a required property.
 ```
 
 ## Suppression
@@ -253,14 +261,11 @@ input-file:
 ``` yaml
 directive:
   - suppress: PostOperationAsyncResponseValidation
-    from: namespaces.json
+    from: namespaces-preview.json
     reason: Not a mandatory check
   - suppress: LroPostReturn
-    from: namespaces.json
+    from: namespaces-preview.json
     reason: Not a mandatory check
-  - code: LroErrorContent
-    from: swagger-document
-    reason: Keeping it for legacy tooling
 ```
 
 ### Tag: profile-hybrid-2020-09-01
