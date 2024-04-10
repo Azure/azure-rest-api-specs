@@ -1,5 +1,4 @@
 import "@typespec/rest";
-import "@azure-tools/typespec-providerhub";
 import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
@@ -53,8 +52,9 @@ interface Operations extends Azure.ResourceManager.Operations {}
 // Various tooling enforces (or at least suggests) that all models should have a provisioning State field, as this means something special to ARM.
 
 @doc("Provisioning state of the resource.")
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+  ResourceProvisioningState,
 }
 
 @doc("General resource properties.")
@@ -110,11 +110,14 @@ model CheckNameAvailabilityRequest {
 }
 
 @doc("Possible reasons for a name not being available.")
-enum CheckNameAvailabilityReason {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The common CheckNameAvailabilityReason does not docs for enum variants in types.json"
-  Invalid,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The common CheckNameAvailabilityReason does not docs for enum variants in types.json"
-  AlreadyExists,
+union CheckNameAvailabilityReason {
+  string,
+
+  @doc("Name not available if the name is invalid.")
+  Invalid: "Invalid",
+
+  @doc("Name not available if the name is already in use.")
+  AlreadyExists: "AlreadyExists",
 }
 
 @doc("The check availability result.")
