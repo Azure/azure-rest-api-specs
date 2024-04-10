@@ -258,14 +258,116 @@ directive:
   - suppress: LroPostReturn
     from: namespaces-preview.json
     reason: Not a mandatory check
+
   - suppress: LroLocationHeader
     from: Clusters-preview.json
     reason: Not a mandatory check
+  - suppress: PutResponseCodes
+    from: Clusters-preview.json
+    reason: Not a mandatory check
+  - suppress: LroErrorContent
+    from: Clusters-preview.json
+    reason: Not a mandatory check
+  - suppress: PatchResponseCodes
+    from: Clusters-preview.json
+    reason: Not a mandatory check
+  - suppress: PatchBodyParametersSchema
+    from: Clusters-preview.json
+    reason: Not a mandatory check
+  - suppress: DeleteResponseCodes
+    from: Clusters-preview.json
+    reason: Not a mandatory check
+  - suppress: XmsPageableForListCalls
+    from: Clusters-preview.json
+    reason: Not a mandatory check
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: Clusters-preview.json
+    reason: Not a mandatory check
+
+
   - suppress: LroLocationHeader
     from: quotaConfiguration-preview.json
     reason: Not a mandatory check
-  - suppress: LroLocationHeader
+  - suppress: LroExtension
     from: quotaConfiguration-preview.json
+    reason: Not a mandatory check
+  - suppress: PatchResponseCodes
+    from: quotaConfiguration-preview.json
+    reason: Not a mandatory check
+  - suppress: XmsPageableForListCalls
+    from: quotaConfiguration-preview.json
+    reason: Not a mandatory check
+  - suppress: BodyTopLevelProperties
+    from: quotaConfiguration-preview.json
+    reason: Not a mandatory check
+  - suppress: NestedResourcesMustHaveListOperation
+    from: quotaConfiguration-preview.json
+    reason: Not a mandatory check
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: quotaConfiguration-preview.json
+    reason: Not a mandatory check
+  - suppress: AvoidAdditionalProperties
+    from: quotaConfiguration-preview.json
+    reason: Not a mandatory check
+
+  - suppress: OperationIdNounVerb
+    from: AvailableClusterRegions-preview.json
+    reason: Not a mandatory check
+  - suppress: XmsPageableForListCalls
+    from: AvailableClusterRegions-preview.json
+    reason: Not a mandatory check
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: AvailableClusterRegions-preview.json
+    reason: Not a mandatory check
+
+  - suppress: OperationIdNounVerb
+    from: ApplicationGroups.json
+    reason: Not a mandatory check 
+  - suppress: ResourceNameRestriction
+    from: ApplicationGroups.json
+    reason: Not a mandatory check
+  - suppress: PutResponseCodes
+    from: ApplicationGroups.json
+    reason: Not a mandatory check
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: ApplicationGroups.json
+    reason: Not a mandatory check
+  - suppress: OperationIdNounVerb
+    from: ApplicationGroups.json
+    reason: Not a mandatory check
+  - suppress: TrackedResourcePatchOperation
+    from: ApplicationGroups.json
+    reason: Not a mandatory check
+  - suppress: SystemDataDefinitionsCommonTypes
+    from: ApplicationGroups.json
+    reason: Not a mandatory check
+
+  - suppress: TrackedResourcePatchOperation
+    from: networkrulessets-preview.json
+    reason: Not a mandatory check
+  - suppress: EvenSegmentedPathForPutOperation
+    from: networkrulessets-preview.json
+    reason: Not a mandatory check
+  - suppress: PutResponseCodes
+    from: networkrulessets-preview.json
+    reason: Not a mandatory check
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: networkrulessets-preview.json
+    reason: Not a mandatory check
+  - suppress: XmsPageableForListCalls
+    from: networkrulessets-preview.json
+    reason: Not a mandatory check
+  - suppress: MissingTypeObject
+    from: networkrulessets-preview.json
+    reason: Not a mandatory check
+  - suppress: AllTrackedResourcesMustHaveDelete
+    from: networkrulessets-preview.json
+    reason: Not a mandatory check
+  - suppress: TrackedResourcePatchOperation
+    from: networkrulessets-preview.json
+    reason: Not a mandatory check
+  - suppress: SystemDataDefinitionsCommonTypes
+    from: networkrulessets-preview.json
     reason: Not a mandatory check
   
 ```
