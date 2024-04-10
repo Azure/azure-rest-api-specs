@@ -1,0 +1,395 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-10-01",
+    "title": "Scheduled Query Rules API",
+    "description": "Azure Monitor client to create/update/delete Scheduled Query Rules."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/scheduledQueryRules/{ruleName}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "description": "Gets a list of NSP configurations for specified scheduled query rule.",
+        "operationId": "ScheduledQueryRule_NSP_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of configs.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List NSP configs by Scheduled Query Rule": {
+            "$ref": "./examples/NSPForScheduledQueryRule_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/scheduledQueryRules/{ruleName}/networkSecurityPerimeterConfigurations/{configurationName}": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "description": "Gets a network security perimeter configuration.",
+        "operationId": "ScheduledQueryRule_NSP_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the config.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get NSP config by name for Scheduled Query Rule": {
+            "$ref": "./examples/NSPForScheduledQueryRule_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/scheduledQueryRules/{ruleName}/networkSecurityPerimeterConfigurations/{configurationName}/reconcile": {
+      "post": {
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "description": "Reconcile network security perimeter configuration for ScheduledQueryRule resource.",
+        "operationId": "ScheduledQueryRule_NSP_Reconcile",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reconcile NSP Configuration operation successful",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/ErrorContract"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get NSP config by name for Scheduled Query Rule": {
+            "$ref": "./examples/NSPForScheduledQueryRule_Reconcile.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NetworkSecurityPerimeterConfiguration": {
+      "description": "NSP Configuration for a server.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationListResult": {
+      "description": "A list of NSP configurations for a server.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationProperties": {
+      "description": "The properties of an NSP config.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string"
+        },
+        "networkSecurityPerimeter": {
+          "$ref": "#/definitions/NSPConfigPerimeter"
+        },
+        "resourceAssociation": {
+          "$ref": "#/definitions/NSPConfigAssociation"
+        },
+        "profile": {
+          "$ref": "#/definitions/NSPConfigProfile"
+        },
+        "provisioningIssues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NSPProvisioningIssue"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "NSPConfigAccessRule": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/NSPConfigAccessRuleProperties"
+        }
+      }
+    },
+    "NSPConfigAccessRuleProperties": {
+      "type": "object",
+      "properties": {
+        "direction": {
+          "type": "string"
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fullyQualifiedDomainNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "subscriptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "networkSecurityPerimeters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NSPConfigNetworkSecurityPerimeterRule"
+          }
+        }
+      }
+    },
+    "NSPConfigAssociation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "accessMode": {
+          "type": "string"
+        }
+      }
+    },
+    "NSPConfigNetworkSecurityPerimeterRule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "perimeterGuid": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        }
+      }
+    },
+    "NSPConfigPerimeter": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "perimeterGuid": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        }
+      }
+    },
+    "NSPConfigProfile": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "accessRulesVersion": {
+          "type": "string"
+        },
+        "accessRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NSPConfigAccessRule"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "NSPProvisioningIssue": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/NSPProvisioningIssueProperties"
+        }
+      }
+    },
+    "NSPProvisioningIssueProperties": {
+      "type": "object",
+      "properties": {
+        "issueType": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "suggestedResourceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "suggestedAccessRules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ErrorContract": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The error details.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "RuleNameParameter": {
+      "name": "ruleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the rule.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
