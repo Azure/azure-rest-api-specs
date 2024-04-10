@@ -494,3 +494,9 @@ model DataPreviewResults {
   @doc("Content of DataPreview results")
   results: string[];
 }
+
+@doc("Results of DataPreview operation")
+model DataPreviewOperationResult {
+  @doc("Id of DataPreview")
+  id: string;
+}

@@ -28,7 +28,7 @@ model DataPreviewInstance is ProxyResource<DataPreviewProperties> {
 }
 
 @armResourceOperations(DataPreviewInstance)
-interface DataPreviewOperations {
+interface DataPreviewOperationsV1 {
   @doc("Start one DataPreview task")
   startPreview is ArmResourceActionSync<
     DataPreviewInstance,
@@ -42,4 +42,38 @@ interface DataPreviewOperations {
     void,
     DataPreviewResults
   >;
+}
+
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+interface DataPreviewOperations {
+  /**
+   * DataPreview operation
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
+  @post
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.MessagingConnectors/dataPreview/")
+  op dataPreview(
+    ...Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    @body
+    @doc("dataPreview properties")
+    body: {
+      properties: DataPreviewProperties
+    }
+  ): ArmResponse<DataPreviewOperationResult> | ErrorResponse;
+
+  /**
+   * DataPreview operation
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
+  @get
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.MessagingConnectors/dataPreview/{dataPreviewId}")
+  op getDataPreviewResults(
+    ...Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    @path
+    @minLength(1)
+    @segment("dataPreviewId")
+    @doc("The id of dataPreview.")
+    dataPreviewId: string
+  ): ArmResponse<DataPreviewResults> | ErrorResponse;
 }

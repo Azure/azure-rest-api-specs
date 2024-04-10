@@ -46,7 +46,7 @@
       "name": "ConnectorOperations"
     },
     {
-      "name": "DataPreviewOperations"
+      "name": "DataPreviewOperationsV1"
     }
   ],
   "paths": {
@@ -125,11 +125,92 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MessagingConnectors/dataPreview": {
+      "post": {
+        "operationId": "DataPreviewOperations_DataPreview",
+        "description": "DataPreview operation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "dataPreview properties",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "properties": {
+                  "$ref": "#/definitions/DataPreviewProperties"
+                }
+              },
+              "required": [
+                "properties"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataPreviewOperationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MessagingConnectors/dataPreview/{dataPreviewId}": {
+      "get": {
+        "operationId": "DataPreviewOperations_GetDataPreviewResults",
+        "description": "DataPreview operation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "dataPreviewId",
+            "in": "path",
+            "description": "The id of dataPreview.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataPreviewResults"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.MessagingConnectors/dataPreview/{name}/getResults": {
       "post": {
-        "operationId": "DataPreviewOperations_GetResults",
+        "operationId": "DataPreviewOperationsV1_GetResults",
         "tags": [
-          "DataPreviewOperations"
+          "DataPreviewOperationsV1"
         ],
         "description": "Get the result of DataPreview",
         "parameters": [
@@ -161,19 +242,14 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "DataPreview GetResults SqlServerSourceConnector": {
-            "$ref": "./examples/DataPreview_GetResults_SqlServerSourceConnector.json"
-          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.MessagingConnectors/dataPreview/{name}/startPreview": {
       "post": {
-        "operationId": "DataPreviewOperations_StartPreview",
+        "operationId": "DataPreviewOperationsV1_StartPreview",
         "tags": [
-          "DataPreviewOperations"
+          "DataPreviewOperationsV1"
         ],
         "description": "Start one DataPreview task",
         "parameters": [
@@ -210,11 +286,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DataPreview Start SqlServerSourceConnector": {
-            "$ref": "./examples/DataPreview_Start_SqlServerSourceConnector.json"
           }
         }
       }
@@ -1275,6 +1346,19 @@
         }
       ],
       "x-ms-discriminator-value": "offsetRange"
+    },
+    "DataPreviewOperationResult": {
+      "type": "object",
+      "description": "Results of DataPreview operation",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of DataPreview"
+        }
+      },
+      "required": [
+        "id"
+      ]
     },
     "DataPreviewProperties": {
       "type": "object",
