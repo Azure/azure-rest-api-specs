@@ -88,8 +88,9 @@ model ExtractedSummarySentence {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_01)
 model ExtractiveSummarizationLROResult extends AnalyzeTextLROResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Kind of the task.")
   kind: AnalyzeTextLROResultsKind.ExtractiveSummarizationLROResults;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: ExtractiveSummarizationResult;
 }
@@ -119,8 +120,9 @@ model AbstractiveSummarizationTaskParameters is PreBuiltTaskParameters {
 @added(Versions.v2023_04_01)
 @doc("An object representing the results for an Abstractive Summarization task.")
 model AbstractiveSummarizationLROResult extends AnalyzeTextLROResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Kind of the task.")
   kind: AnalyzeTextLROResultsKind.AbstractiveSummarizationLROResults;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: AbstractiveSummarizationResult;
 }
@@ -189,8 +191,9 @@ model CustomAbstractiveSummarizationTaskParameters
 @added(Versions.v2023_04_15_preview)
 @doc("An object representing the results for an Custom Abstractive Summarization task.")
 model CustomAbstractiveSummarizationLROResult extends AnalyzeTextLROResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Kind of the task.")
   kind: AnalyzeTextLROResultsKind.CustomAbstractiveSummarizationLROResults;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: CustomAbstractiveSummarizationResult;
 }

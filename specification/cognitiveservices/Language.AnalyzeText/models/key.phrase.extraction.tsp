@@ -8,8 +8,9 @@ namespace Language.AnalyzeText;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model AnalyzeTextKeyPhraseExtractionInput extends AnalyzeTextTask {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Kind of the task.")
   kind: AnalyzeTextTaskKind.KeyPhraseExtraction;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   analysisInput?: MultiLanguageAnalysisInput;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -63,8 +64,9 @@ model KeyPhrasesDocumentResultWithDetectedLanguage {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 model KeyPhraseExtractionLROResult extends AnalyzeTextLROResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Kind of the task.")
   kind: AnalyzeTextLROResultsKind.KeyPhraseExtractionLROResults;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: KeyPhraseResult;
 }

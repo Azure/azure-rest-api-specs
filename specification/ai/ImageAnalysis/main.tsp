@@ -14,7 +14,12 @@ using Azure.Core;
   title: "Image Analysis",
 })
 @versioned(ImageAnalysis.Versions)
-@useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
+@useAuth(
+  ApiKeyAuth<
+    ApiKeyLocation.header,
+    "Ocp-Apim-Subscription-Key"
+  > | AadOauth2Auth<["https://cognitiveservices.azure.com/.default"]>
+)
 @server(
   "{endpoint}/computervision",
   "Analyze an image to generate a description of its content, detect text, objects and more.",

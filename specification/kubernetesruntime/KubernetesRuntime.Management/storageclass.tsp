@@ -8,90 +8,104 @@ using Azure.ResourceManager;
 namespace Microsoft.KubernetesRuntime;
 
 @doc("Performance tier of a storage class")
-enum PerformanceTier {
+union PerformanceTier {
+  string,
+
   @doc("Undefined Performance Tier")
-  Undefined,
+  Undefined: "Undefined",
 
   @doc("Basic Performance Tier")
-  Basic,
+  Basic: "Basic",
 
   @doc("Standard Performance Tier")
-  Standard,
+  Standard: "Standard",
 
   @doc("Premium Performance Tier")
-  Premium,
+  Premium: "Premium",
 
   @doc("Ultra Performance Tier")
-  Ultra,
+  Ultra: "Ultra",
 }
 
 @doc("Failover tier of a storage class")
-enum FailoverTier {
+union FailoverTier {
+  string,
+
   @doc("Not available Failover Tier")
-  NotAvailable,
+  NotAvailable: "NotAvailable",
 
   @doc("Slow Failover Tier")
-  Slow,
+  Slow: "Slow",
 
   @doc("Fast Failover Tier")
-  Fast,
+  Fast: "Fast",
 
   @doc("Super Failover Tier")
-  Super,
+  Super: "Super",
 }
 
 @doc("Type of a storage class")
-enum SCType {
+union SCType {
+  string,
+
   @doc("Native storage class")
-  Native,
+  Native: "Native",
 
   @doc("RWX storage class")
-  RWX,
+  RWX: "RWX",
 
   @doc("Blob storage class")
-  Blob,
+  Blob: "Blob",
 
   @doc("NFS storage class")
-  NFS,
+  NFS: "NFS",
 
   @doc("SMB storage class")
-  SMB,
+  SMB: "SMB",
 }
 
 @doc("Data resilience tier of a storage class")
-enum DataResilienceTier {
+union DataResilienceTier {
+  string,
+
   @doc("Not data resilient")
-  NotDataResilient,
+  NotDataResilient: "NotDataResilient",
 
   @doc("Data resilient")
-  DataResilient,
+  DataResilient: "DataResilient",
 }
 
 @doc("Ability to expand volumes of a storage class")
-enum VolumeExpansion {
+union VolumeExpansion {
+  string,
+
   @doc("Allow volume expansion")
-  Allow,
+  Allow: "Allow",
 
   @doc("Disallow volume expansion")
-  Disallow,
+  Disallow: "Disallow",
 }
 
 @doc("Storage Class Access Mode")
-enum AccessMode {
+union AccessMode {
+  string,
+
   @doc("Read Write Once (RWO) access mode")
-  ReadWriteOnce,
+  ReadWriteOnce: "ReadWriteOnce",
 
   @doc("Read Write Many (RWX) access mode")
-  ReadWriteMany,
+  ReadWriteMany: "ReadWriteMany",
 }
 
 @doc("Storage class volume binding mode")
-enum VolumeBindingMode {
+union VolumeBindingMode {
+  string,
+
   @doc("Immediate binding mode")
-  Immediate,
+  Immediate: "Immediate",
 
   @doc("Wait for first consumer binding mode")
-  WaitForFirstConsumer,
+  WaitForFirstConsumer: "WaitForFirstConsumer",
 }
 
 @doc("Details of the StorageClass StorageClass.")
@@ -174,12 +188,14 @@ model BlobStorageClassTypeProperties extends StorageClassTypeProperties {
 }
 
 @doc("The action to take when a NFS volume is deleted")
-enum NfsDirectoryActionOnVolumeDeletion {
+union NfsDirectoryActionOnVolumeDeletion {
+  string,
+
   @doc("When the volume is deleted, delete the directory")
-  Delete,
+  Delete: "Delete",
 
   @doc("When the volume is deleted, retain the directory")
-  Retain,
+  Retain: "Retain",
 }
 
 @doc("The properties of NFS StorageClass")

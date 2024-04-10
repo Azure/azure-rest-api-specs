@@ -17,7 +17,9 @@ model CustomHealthcareTaskParameters is CustomTaskParameters {
 @doc("Contains the custom healthcare task definition.")
 @added(Versions.v2023_04_15_preview)
 model CustomHealthcareLROTask extends AnalyzeTextLROTask {
+  @doc("Kind of the task.")
   kind: AnalyzeTextLROTaskKind.CustomHealthcare;
+
   @doc("Contains the custom healthcare task parameters.")
   parameters?: CustomHealthcareTaskParameters;
 }
@@ -37,7 +39,7 @@ model CustomHealthcareEntitiesDocumentResultWithDocumentDetectedLanguage
 }
 
 @added(Versions.v2023_04_15_preview)
-@doc("Contains the document custom healthcare results.") 
+@doc("Contains the document custom healthcare results.")
 model CustomHealthcareEntitiesDocumentResult is DocumentResult {
   @doc("Healthcare entities.")
   entities: Array<CustomHealthcareEntity>;
@@ -46,7 +48,7 @@ model CustomHealthcareEntitiesDocumentResult is DocumentResult {
   relations: Array<HealthcareRelation>;
 }
 
-@doc("Contains the custom healthcare entity.") 
+@doc("Contains the custom healthcare entity.")
 @added(Versions.v2023_04_15_preview)
 model CustomHealthcareEntity is HealthcareEntity {
   @doc("(Optional) Entity component information listing fired components of the extracted entity. This object only applies for custom healthcare.")
@@ -57,7 +59,9 @@ model CustomHealthcareEntity is HealthcareEntity {
 @added(Versions.v2023_04_15_preview)
 @doc("Contains the custom healthcare job result.")
 model CustomHealthcareLROResult extends AnalyzeTextLROResult {
+  @doc("Kind of the task.")
   kind: AnalyzeTextLROResultsKind.CustomHealthcareLROResults;
+
   @doc("Contains the list of document results.")
   results: CustomHealthcareResult;
 }

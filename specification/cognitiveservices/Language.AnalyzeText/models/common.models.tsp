@@ -179,9 +179,11 @@ model AnalyzeTextTaskResult {
 model AnalyzeTextJobsInput {
   @doc("Name for the task.")
   displayName?: string;
+
   @doc("Contains the input to be analyzed.")
   analysisInput: MultiLanguageAnalysisInput;
-  @doc("List of tasks to be peformed as part of the LRO.")
+
+  @doc("List of tasks to be performed as part of the LRO.")
   tasks: Array<AnalyzeTextLROTask>;
 
   @added(Versions.v2023_04_15_preview)
@@ -194,7 +196,6 @@ model AnalyzeTextPreBuiltResult {
   @doc("Errors by document id.")
   errors: Array<AnalyzeTextDocumentError>;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("if showStats=true was specified in the request this field will contain information about the request payload.")
   statistics?: RequestStatistics;
 
@@ -216,20 +217,19 @@ model Pagination {
   nextLink?: string;
 }
 
-@docs("Contains the analyze text LRO errors")
+@doc("Contains the analyze text LRO errors")
 model AnalyzeTextJobErrors {
-  @docs("Collection of errors encountered during processing.")
+  @doc("Collection of errors encountered during processing.")
   errors: Array<Error>;
 }
 
-@docs("Contains the analyze text job statistics returned only when showStats=true.")
+@doc("Contains the analyze text job statistics returned only when showStats=true.")
 model AnalyzeTextJobStatistics {
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("if showStats=true was specified in the request this field will contain information about the request payload.")
   statistics?: RequestStatistics;
 }
 
-@docs("Contains the analyze text job tasks.")
+@doc("Contains the analyze text job tasks.")
 model TasksState {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   tasks: Tasks;
@@ -240,10 +240,13 @@ model TasksState {
 model Tasks {
   @doc("Count of completed tasks.")
   completed: int32;
+
   @doc("Count of failed tasks.")
   failed: int32;
+
   @doc("Count of inprogress tasks.")
   inProgress: int32;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   total: int32;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -272,6 +275,7 @@ enum Status {
 model AnalyzeTextLROResult {
   ...TaskState;
   ...TaskIdentifier;
+
   @doc("Kind of the task.")
   kind: AnalyzeTextLROResultsKind;
 }
@@ -296,7 +300,6 @@ model AnalyzeTextDocumentError {
   @doc("Document Id.")
   id: string;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("Document Error.")
   error: Error;
 }
@@ -352,7 +355,6 @@ model DocumentDetectedLanguage {
 @doc("Error response.")
 @error
 model ErrorResponse {
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("The error object.")
   error: Error;
 }
@@ -513,7 +515,6 @@ model DocumentError {
   @doc("The ID of the input document.")
   id: string;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("Error encountered.")
   error: Error;
 }
@@ -550,7 +551,6 @@ model PreBuiltResult {
   @doc("Errors by document id.")
   errors: Array<DocumentError>;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("if showStats=true was specified in the request this field will contain information about the request payload.")
   statistics?: RequestStatistics;
 
@@ -575,11 +575,11 @@ model KnowledgeBaseAnswer {
   @doc("Answer confidence score, value ranges from 0 to 1.")
   @minValue(0)
   @maxValue(1)
-  @projectedName("client", "confidence")
+  @clientName("confidence")
   confidenceScore?: float64;
 
   @doc("ID of the QnA result.")
-  @projectedName("client", "qnaId")
+  @clientName("qnaId")
   id?: int32;
 
   @doc("Source of QnA result.")
@@ -593,7 +593,7 @@ model KnowledgeBaseAnswer {
   dialog?: KnowledgeBaseAnswerDialog;
 
   @doc("Answer span object of QnA with respect to user's question.")
-  @projectedName("client", "shortAnswer")
+  @clientName("shortAnswer")
   answerSpan?: AnswerSpan;
 }
 
@@ -654,22 +654,22 @@ model AnswersOptions {
   @doc("Minimum threshold score for answers, value ranges from 0 to 1.")
   @maxValue(1)
   @minValue(0)
-  @projectedName("client", "confidenceThreshold")
+  @clientName("confidenceThreshold")
   confidenceScoreThreshold?: float64;
 
   @doc("Context object with previous QnA's information.")
-  @projectedName("client", "answerContext")
+  @clientName("answerContext")
   context?: KnowledgeBaseAnswerContext;
 
   @doc("Type of ranker to be used.")
-  @projectedName("client", "rankerKind")
+  @clientName("rankerKind")
   rankerType?: RankerKind;
 
   @doc("Filter QnAs based on given metadata list and knowledge base sources.")
   filters?: QueryFilters;
 
   @doc("To configure Answer span prediction feature.")
-  @projectedName("client", "shortAnswerOptions")
+  @clientName("shortAnswerOptions")
   answerSpanRequest?: ShortAnswerOptions;
 
   @doc("(Optional) Flag to enable Query over Unstructured Sources.")
@@ -691,7 +691,7 @@ model KnowledgeBaseAnswerContext {
   previousQnaId: int32;
 
   @doc("Previous user query.")
-  @projectedName("client", "previousQuestion")
+  @clientName("previousQuestion")
   previousUserQuery?: string;
 }
 
@@ -745,13 +745,13 @@ model ShortAnswerOptions {
   @doc("Minimum threshold score required to include an answer span, value ranges from 0 to 1.")
   @maxValue(1)
   @minValue(0)
-  @projectedName("client", "confidenceThreshold")
+  @clientName("confidenceThreshold")
   confidenceScoreThreshold?: float64;
 
   @doc("Number of Top answers to be considered for span prediction from 1 to 10.")
   @maxValue(10)
   @minValue(1)
-  @projectedName("client", "top")
+  @clientName("top")
   topAnswersWithSpan?: int32;
 }
 
@@ -910,7 +910,6 @@ model CustomResult {
   @doc("Errors by document id.")
   errors: Array<DocumentError>;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("if showStats=true was specified in the request this field will contain information about the request payload.")
   statistics?: RequestStatistics;
 
@@ -953,7 +952,6 @@ enum redactionCharacter {
   tilde: "~",
 }
 
-#suppress "@azure-tools/typespec-azure-core/bad-record-type"
 @clientName("AnalyzeTextError", "csharp")
 @doc("The error response object returned when the service encounters some errors during processing the request.")
 model Error {
@@ -969,7 +967,6 @@ model Error {
   @doc("An array of details about specific errors that led to this reported error.")
   details?: Array<Error>;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type"
   @doc("An object containing more specific information than the current object about the error.")
   innererror?: InnerErrorModel;
 }

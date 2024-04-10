@@ -418,8 +418,9 @@ model HealthcareEntityLink {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 model HealthcareLROResult extends AnalyzeTextLROResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Kind of the task.")
   kind: AnalyzeTextLROResultsKind.HealthcareLROResults;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: HealthcareResult;
 }

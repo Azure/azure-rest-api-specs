@@ -10,8 +10,9 @@ namespace Language.AnalyzeText;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 model AnalyzeTextSentimentAnalysisInput extends AnalyzeTextTask {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Kind of the task.")
   kind: AnalyzeTextTaskKind.SentimentAnalysis;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   analysisInput?: MultiLanguageAnalysisInput;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -188,8 +189,9 @@ model TargetConfidenceScoreLabel {
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 model SentimentLROResult extends AnalyzeTextLROResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Kind of the task.")
   kind: AnalyzeTextLROResultsKind.SentimentAnalysisLROResults;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: SentimentResponse;
 }
@@ -261,8 +263,9 @@ model CustomSentimentAnalysisResultDocument {
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @added(Versions.v2023_04_15_preview)
 model CustomSentimentAnalysisLROResult extends AnalyzeTextLROResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Kind of the task.")
   kind: AnalyzeTextLROResultsKind.CustomSentimentAnalysisLROResults;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   results: CustomSentimentAnalysisResult;
 }
