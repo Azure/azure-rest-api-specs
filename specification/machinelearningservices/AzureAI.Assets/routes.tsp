@@ -120,3 +120,112 @@ interface Indexes {
     PagedIndex | Foundations.ErrorResponse
   >;
 }
+
+
+interface Prompts {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Fetch a Prompt by name and version")
+  @route("/prompts/{name}/versions/{version}")
+  @get
+  get is Azure.Core.Foundations.Operation<
+    {
+      @doc("Name of the prompt")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$")
+      @path
+      name: string;
+
+      @doc("Version of the prompt")
+      @path
+      version: string;
+    },
+    Prompt | Foundations.ErrorResponse
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Creates or updates a Prompt")
+  @route("/prompts/{name}/versions/{version}")
+  @put
+  createOrUpdate is Azure.Core.Foundations.Operation<
+    {
+      @doc("Name of the prompt")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$")
+      @path
+      name: string;
+
+      @doc("Version of the prompt")
+      @path
+      version: string;
+
+      @doc("Properties of a Prompt Version.")
+      @body
+      body: Prompt;
+    },
+    ResourceCreatedOrOkResponse<Prompt> | Foundations.ErrorResponse
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @route("/prompts/{name}/versions")
+  @get
+  list is Azure.Core.Foundations.Operation<
+    {
+      @doc("Name of the prompt")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$")
+      @path
+      name: string;
+
+      @doc("View type for including/excluding (for example) archived entities.")
+      @query
+      listViewType: string = "ActiveOnly";
+
+      @doc("Ordering of list: Please choose OrderBy value from ['createdtime', 'modifiedtime'].")
+      @query
+      orderBy?: string;
+
+      @doc("Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2.")
+      @query
+      tags?: string;
+
+      ...StandardListQueryParameters;
+    }
+    PagedPrompt | Foundations.ErrorResponse
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
+  @doc("Get latest Prompt.")
+  @route("/prompts/{name}")
+  @get
+  getLatest is Azure.Core.Foundations.Operation<
+    {
+      @doc("Name of the prompt")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$")
+      @path
+      name: string;
+    },
+    Prompt | Foundations.ErrorResponse
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
+  @doc("Get next Prompt version.")
+  @route("/prompts/{name}:getNextVersion")
+  @post
+  getNextVersion is Azure.Core.Foundations.Operation<
+    {
+      @doc("Name of the prompt")
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{0,254}$")
+      @path
+      name: string;
+    },
+    VersionInfo | Foundations.ErrorResponse
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
+  @doc("List the latest version of each prompt.")
+  @route("/prompts/")
+  @get
+  listLatest is Azure.Core.Foundations.Operation<
+    {
+      ...StandardListQueryParameters;
+    },
+    PagedPrompt | Foundations.ErrorResponse
+  >;
+}
