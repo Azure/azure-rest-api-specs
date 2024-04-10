@@ -1306,41 +1306,41 @@
       "description": "Backup and Restore operation common properties"
     }
   },
-    "parameters": {
-      "cloudHsmClusterName": {
-        "name": "cloudHsmClusterName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "The name of the Cloud HSM Cluster within the specified resource group. Cloud HSM Cluster names must be between 3 and 24 characters in length.",
-        "pattern": "^[a-zA-Z0-9-]{3,24}$",
-        "maxLength": 24,
-        "minLength": 3,
-        "x-ms-parameter-location": "method"
-      },
-      "peConnectionName": {
-        "name": "peConnectionName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "Name of the private endpoint connection associated with the Cloud HSM Cluster.",
-        "pattern": "^[a-zA-Z0-9-]{3,24}$",
-        "maxLength": 24,
-        "minLength": 3,
-        "x-ms-parameter-location": "method"
-      },
-      "azureStorageResourceUri": {
-        "name": "azureStorageResourceUri",
-        "in": "body",
-        "type": "string",
-        "description": "Azure storage Resource Uri"
-      },
-      "backupRestoreJobId": {
-        "name": "jobId",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "The id returned as part of the backup request"
-      }
+  "parameters": {
+    "cloudHsmClusterName": {
+      "name": "cloudHsmClusterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Cloud HSM Cluster within the specified resource group. Cloud HSM Cluster names must be between 3 and 24 characters in length.",
+      "pattern": "^[a-zA-Z0-9-]{3,24}$",
+      "maxLength": 24,
+      "minLength": 3,
+      "x-ms-parameter-location": "method"
+    },
+    "peConnectionName": {
+      "name": "peConnectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the private endpoint connection associated with the Cloud HSM Cluster.",
+      "pattern": "^[a-zA-Z0-9-]{3,24}$",
+      "maxLength": 24,
+      "minLength": 3,
+      "x-ms-parameter-location": "method"
+    },
+    "azureStorageResourceUri": {
+      "name": "azureStorageResourceUri",
+      "in": "body",
+      "type": "string",
+      "description": "Azure storage Resource Uri"
+    },
+    "backupRestoreJobId": {
+      "name": "jobId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The id returned as part of the backup request"
     }
+  }
 }
