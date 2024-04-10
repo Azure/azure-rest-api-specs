@@ -257,7 +257,7 @@ model TargetIntentResult {
   @doc("The prediction score and it ranges from 0.0 to 1.0.")
   @minValue(0)
   @maxValue(1)
-  @encodedName("client", "confidence")
+  @clientName("confidence")
   confidenceScore: float64;
 }
 
@@ -302,7 +302,7 @@ model ConversationIntent {
   @doc("The confidence score of the class from 0.0 to 1.0.")
   @minValue(0)
   @maxValue(1)
-  @encodedName("client", "confidence")
+  @clientName("confidence")
   confidenceScore: float32;
 }
 
@@ -321,7 +321,7 @@ model ConversationEntity {
   length: int32;
 
   @doc("The entity confidence score.")
-  @encodedName("client", "confidence")
+  @clientName("confidence")
   confidenceScore: float32;
 
   @doc("The collection of entity resolution objects.")

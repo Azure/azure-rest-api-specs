@@ -575,11 +575,11 @@ model KnowledgeBaseAnswer {
   @doc("Answer confidence score, value ranges from 0 to 1.")
   @minValue(0)
   @maxValue(1)
-  @encodedName("client", "confidence")
+  @clientName("confidence")
   confidenceScore?: float64;
 
   @doc("ID of the QnA result.")
-  @encodedName("client", "qnaId")
+  @clientName("qnaId")
   id?: int32;
 
   @doc("Source of QnA result.")
@@ -593,7 +593,7 @@ model KnowledgeBaseAnswer {
   dialog?: KnowledgeBaseAnswerDialog;
 
   @doc("Answer span object of QnA with respect to user's question.")
-  @encodedName("client", "shortAnswer")
+  @clientName("shortAnswer")
   answerSpan?: AnswerSpan;
 }
 
@@ -654,22 +654,22 @@ model AnswersOptions {
   @doc("Minimum threshold score for answers, value ranges from 0 to 1.")
   @maxValue(1)
   @minValue(0)
-  @encodedName("client", "confidenceThreshold")
+  @clientName("confidenceThreshold")
   confidenceScoreThreshold?: float64;
 
   @doc("Context object with previous QnA's information.")
-  @encodedName("client", "answerContext")
+  @clientName("answerContext")
   context?: KnowledgeBaseAnswerContext;
 
   @doc("Type of ranker to be used.")
-  @encodedName("client", "rankerKind")
+  @clientName("rankerKind")
   rankerType?: RankerKind;
 
   @doc("Filter QnAs based on given metadata list and knowledge base sources.")
   filters?: QueryFilters;
 
   @doc("To configure Answer span prediction feature.")
-  @encodedName("client", "shortAnswerOptions")
+  @clientName("shortAnswerOptions")
   answerSpanRequest?: ShortAnswerOptions;
 
   @doc("(Optional) Flag to enable Query over Unstructured Sources.")
@@ -691,7 +691,7 @@ model KnowledgeBaseAnswerContext {
   previousQnaId: int32;
 
   @doc("Previous user query.")
-  @encodedName("client", "previousQuestion")
+  @clientName("previousQuestion")
   previousUserQuery?: string;
 }
 
@@ -745,13 +745,13 @@ model ShortAnswerOptions {
   @doc("Minimum threshold score required to include an answer span, value ranges from 0 to 1.")
   @maxValue(1)
   @minValue(0)
-  @encodedName("client", "confidenceThreshold")
+  @clientName("confidenceThreshold")
   confidenceScoreThreshold?: float64;
 
   @doc("Number of Top answers to be considered for span prediction from 1 to 10.")
   @maxValue(10)
   @minValue(1)
-  @encodedName("client", "top")
+  @clientName("top")
   topAnswersWithSpan?: int32;
 }
 
