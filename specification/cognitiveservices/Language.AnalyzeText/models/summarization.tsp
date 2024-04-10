@@ -32,8 +32,8 @@ model ExtractiveSummarizationLROTask extends AnalyzeTextLROTask {
   parameters?: ExtractiveSummarizationTaskParameters;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_01)
+@doc("An object representing the pre-built Extractive Summarization results of each document.")
 model ExtractiveSummarizationResult is PreBuiltResult {
   @added(Versions.v2023_04_01)
   @doc("Response by document")
@@ -109,7 +109,7 @@ model AbstractiveSummarizationLROTask extends AnalyzeTextLROTask {
 
 @added(Versions.v2023_04_01)
 @clientName("AbstractiveSummarizationTaskContent", "csharp")
-@doc("Supported parameters for the pre-build Abstractive Summarization task.")
+@doc("Supported parameters for the pre-built Abstractive Summarization task.")
 model AbstractiveSummarizationTaskParameters is PreBuiltTaskParameters {
   ...AbstractiveSummarizationTaskParametersBase;
 
@@ -142,20 +142,20 @@ model AbstractiveSummarizationResultBase {
 }
 
 @added(Versions.v2023_04_01)
-@doc("An object representing the pre-build summarization results of each document.")
+@doc("An object representing the pre-built Abstractive Summarization results of each document.")
 model AbstractiveSummarizationResult is PreBuiltResult {
   ...AbstractiveSummarizationResultBase;
 }
 
 @added(Versions.v2023_04_01)
-@doc("An object representing the pre-build summarization results of each document.")
+@doc("An object representing the pre-built Abstractive Summarization results of each document.")
 model AbstractiveSummaryDocumentResult is DocumentResult {
   @doc("A list of abstractive summaries.")
   summaries: Array<AbstractiveSummary>;
 }
 
 @added(Versions.v2023_04_15_preview)
-@doc("An object representing the summarization result of a single document with detected language.")
+@doc("An object representing the Abstractive Summarization result of a single document with detected language.")
 model AbstractiveSummaryDocumentResultWithDetectedLanguage
   is AbstractiveSummaryDocumentResult {
   ...DocumentDetectedLanguage;
