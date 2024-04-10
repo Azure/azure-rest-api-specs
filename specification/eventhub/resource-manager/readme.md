@@ -259,8 +259,15 @@ directive:
     from: namespaces-preview.json
     reason: Not a mandatory check
   - suppress: LroLocationHeader
-    from: swagger-document
+    from: Clusters-preview.json
     reason: Not a mandatory check
+  - suppress: LroLocationHeader
+    from: quotaConfiguration-preview.json
+    reason: Not a mandatory check
+  - suppress: LroLocationHeader
+    from: quotaConfiguration-preview.json
+    reason: Not a mandatory check
+  
 ```
 
 ### Tag: profile-hybrid-2020-09-01
