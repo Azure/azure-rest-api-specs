@@ -446,59 +446,6 @@ model Identity {
 }
 
 /**
- * Plan for the resource.
- */
-model Plan {
-  /**
-   * A user defined name of the 3rd Party Artifact that is being procured.
-   */
-  name: string;
-
-  /**
-   * The publisher of the 3rd Party Artifact that is being bought. E.g. NewRelic
-   */
-  publisher: string;
-
-  /**
-   * The 3rd Party artifact that is being procured. E.g. NewRelic. Product maps to the OfferID specified for the artifact at the time of Data Market onboarding.
-   */
-  product: string;
-
-  /**
-   * A publisher provided promotion code as provisioned in Data Market for the said product/artifact.
-   */
-  promotionCode?: string;
-
-  /**
-   * The version of the desired product/artifact.
-   */
-  version?: string;
-}
-
-/**
- * Common fields that are returned in the response for all Azure Resource Manager resources
- */
-model Resource {
-  /**
-   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
-   */
-  @visibility("read")
-  id?: string;
-
-  /**
-   * The name of the resource
-   */
-  @visibility("read")
-  name?: string;
-
-  /**
-   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts"
-   */
-  @visibility("read")
-  type?: string;
-}
-
-/**
  * The Extension Patch Request object.
  */
 model PatchExtension {

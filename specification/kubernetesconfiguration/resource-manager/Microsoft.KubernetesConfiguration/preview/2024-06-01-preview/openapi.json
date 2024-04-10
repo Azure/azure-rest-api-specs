@@ -836,7 +836,7 @@
             "$ref": "./examples/CreateFluxConfiguration.json"
           },
           "FluxConfigurations_Create_Azure_Blob": {
-            "$ref": "./examples/CreateFluxConfigurationWithAzureBlob"
+            "$ref": "./examples/CreateFluxConfigurationWithAzureBlob.json"
           },
           "FluxConfigurations_Create_With_Bucket": {
             "$ref": "./examples/CreateFluxConfigurationWithBucket.json"
@@ -2318,7 +2318,7 @@
           "type": "string",
           "description": "Plaintext HTTPS username used to access private git repositories over HTTPS"
         },
-        "httpsCaCert": {
+        "httpsCACert": {
           "type": "string",
           "description": "Base64-encoded HTTPS certificate authority contents used to access git private git repositories over HTTPS"
         },
@@ -2358,7 +2358,7 @@
           "type": "string",
           "description": "Plaintext HTTPS username used to access private git repositories over HTTPS"
         },
-        "httpsCaCert": {
+        "httpsCACert": {
           "type": "string",
           "description": "Base64-encoded HTTPS certificate authority contents used to access git private git repositories over HTTPS"
         },
@@ -2915,37 +2915,6 @@
         }
       }
     },
-    "Plan": {
-      "type": "object",
-      "description": "Plan for the resource.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "A user defined name of the 3rd Party Artifact that is being procured."
-        },
-        "publisher": {
-          "type": "string",
-          "description": "The publisher of the 3rd Party Artifact that is being bought. E.g. NewRelic"
-        },
-        "product": {
-          "type": "string",
-          "description": "The 3rd Party artifact that is being procured. E.g. NewRelic. Product maps to the OfferID specified for the artifact at the time of Data Market onboarding."
-        },
-        "promotionCode": {
-          "type": "string",
-          "description": "A publisher provided promotion code as provisioned in Data Market for the said product/artifact."
-        },
-        "version": {
-          "type": "string",
-          "description": "The version of the desired product/artifact."
-        }
-      },
-      "required": [
-        "name",
-        "publisher",
-        "product"
-      ]
-    },
     "PostBuildDefinition": {
       "type": "object",
       "description": "The postBuild definitions defining variable substitutions for this Kustomization after kustomize build.",
@@ -3076,27 +3045,6 @@
         "commit": {
           "type": "string",
           "description": "The commit SHA to checkout. This value must be combined with the branch name to be valid. This takes precedence over semver."
-        }
-      }
-    },
-    "Resource": {
-      "type": "object",
-      "description": "Common fields that are returned in the response for all Azure Resource Manager resources",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
         }
       }
     },
