@@ -469,10 +469,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/PaginationSkipParameter"
-          },
-          {
-            "$ref": "#/parameters/PaginationTopParameter"
+            "$ref": "#/parameters/MaxPageSizeParameter"
           }
         ],
         "responses": {
@@ -1912,7 +1909,7 @@
       "type": "object",
       "properties": {
         "reservations": {
-          "description": "Represents a list of phone numbers.",
+          "description": "Represents a list of phone numbers reservations. Note that the phone numbers from each reservation are not included.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PhoneNumbersReservation"
@@ -1925,9 +1922,6 @@
       }
     },
     "PhoneNumbersReservation": {
-      "required": [
-        "phoneNumbers"
-      ],
       "type": "object",
       "properties": {
         "id": {
@@ -1943,12 +1937,14 @@
         },
         "phoneNumbers": {
           "type": "object",
+          "description": "A dictionary containing the reservation phone numbers. The key is the ID of the phone number (digits only) and values are AvailablePhoneNumber objects. Not populated when retrieving PhoneNumbersReservation collections.",
           "additionalProperties": {
             "$ref": "#/definitions/AvailablePhoneNumber"
           }
         },
         "status": {
           "type": "string",
+          "description": "Represents the status of the reservation. Possible values include: 'active', 'submitted', 'completed', 'expired'.",
           "readOnly": true,
           "enum": [
             "active",
