@@ -28,13 +28,12 @@ These are the global settings for the Hardware Security Modules API.
 title: Azure HSM Resource Provider
 description: The Azure management API provides a RESTful set of web services that interact with Azure HSM RP.
 openapi-type: arm
-tag: package-2023-12-preview
+tag: package-2024-06
 ```
 
 ``` yaml !$(typescript)
 modelerfour:
   flatten-models: false
-tag: package-2024-06
 ```
 
 ### Tag: package-2024-06

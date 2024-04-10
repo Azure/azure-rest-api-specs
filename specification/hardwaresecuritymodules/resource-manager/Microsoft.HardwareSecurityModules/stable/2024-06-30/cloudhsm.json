@@ -653,7 +653,7 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "description": "Pre Backup operation to validate whether the customer can pefrorm a backup on the Cloud HSM Cluster resource in the specified subscription.",
+        "description": "Pre Backup operation to validate whether the customer can perform a backup on the Cloud HSM Cluster resource in the specified subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -1242,7 +1242,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/BackupRestoreCommomOperationResult"
+          "$ref": "#/definitions/BackupRestoreCommonOperationResult"
         }
       ],
       "description": "Backup operation Result"
@@ -1267,12 +1267,12 @@
       "properties": {
         "allOf": [
           {
-            "$ref": "#/definitions/BackupRestoreCommomOperationResult"
+            "$ref": "#/definitions/BackupRestoreCommonOperationResult"
           }
         ]
       }
     },
-    "BackupRestoreCommomOperationResult": {
+    "BackupRestoreCommonOperationResult": {
       "properties": {
         "status": {
           "type": "string",
@@ -1283,7 +1283,7 @@
           "description": "The status details of backup operation"
         },
         "error": {
-          "$ref": "common.json#/definitions/Error",
+          "$ref": "#/definitions/CloudHsmClusterError",
           "description": "Error encountered, if any, during the backup operation."
         },
         "startTime": {
