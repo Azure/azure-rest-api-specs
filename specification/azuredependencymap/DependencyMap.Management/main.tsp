@@ -49,20 +49,28 @@ model MapsResourceProperties {
 
 @doc("Provisioning state of the resource")
 @lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState, //standard terminal values
+union ProvisioningState {
+  @doc("Resource has been created.")
+  Succeeded: "Succeeded",
 
+  @doc("Resource creation failed.")
+  Failed: "Failed",
+
+  @doc("Resource creation was canceled.")
+  Canceled: "Canceled",
+  
   @doc("This state indicates that the resource is being provisioned.")
-  Provisioning,
+  Provisioning: "Provisioning",
 
   @doc("This state indicates that the resource is being updated.")
-  Updating,
+  Updating: "Updating",
 
   @doc("This state indicates that the resource is being deleted.")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("This state indicates that the operation on the resource has been accepted.")
-  Accepted,
+  Accepted: "Accepted",
+  string
 }
 
 @armResourceOperations
@@ -129,12 +137,13 @@ model ProcessNameFilter {
 }
 
 @doc("Operator enum for process name filter")
-enum ProcessNameFilterOperator {
+union ProcessNameFilterOperator {
   @doc("Operator to include items in the result")
-  contains,
+  contains: "contains",
 
   @doc("Operator to exclude items in the result")
-  notContains,
+  notContains: "notContains",
+  string
 }
 
 @doc("GetDependencyViewForFocusedMachine request model")
@@ -286,19 +295,21 @@ model AgentStatus {
 }
 
 @doc("Fabric type enum")
-enum FabricType {
+union FabricType {
   @doc("VMware fabric type")
-  VMware,
+  VMware: "VMware",
+  string
   //fill this
 }
 
 @doc("Source type enum")
-enum SourceType {
+union SourceType {
   @doc("Arc source type")
-  Arc,
+  Arc: "Arc",
 
   @doc("OffAzure source type")
-  OffAzure,
+  OffAzure: "OffAzure",
+  string
 }
 
 @armResourceOperations
