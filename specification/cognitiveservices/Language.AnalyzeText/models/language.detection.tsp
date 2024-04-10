@@ -71,242 +71,246 @@ model DetectedLanguage {
 
 @added(Versions.v2023_04_15_preview)
 @doc("Identifies the script of the input document. Maps to the ISO 15924 standard formal name.")
-enum ScriptKind {
+union ScriptKind {
+  string,
+
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the Arabic script.")
-  Arabic,
+  Arabic: "Arabic",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the Armenian script.")
-  Armenian,
+  Armenian: "Armenian",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the Bangla script.")
-  Bangla,
+  Bangla: "Bangla",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the UnifiedCanadianAboriginalSyllabics script.")
-  UnifiedCanadianAboriginalSyllabics,
+  UnifiedCanadianAboriginalSyllabics: "UnifiedCanadianAboriginalSyllabics",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the Cyrillic script.")
-  Cyrillic,
+  Cyrillic: "Cyrillic",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the Devanagari script.")
-  Devanagari,
+  Devanagari: "Devanagari",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the Ethiopic script.")
-  Ethiopic,
+  Ethiopic: "Ethiopic",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the Georgian script.")
-  Georgian,
+  Georgian: "Georgian",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the Greek script.")
-  Greek,
+  Greek: "Greek",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the Gujarati script.")
-  Gujarati,
+  Gujarati: "Gujarati",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the Gurmukhi script.")
-  Gurmukhi,
+  Gurmukhi: "Gurmukhi",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the Hangul script.")
-  Hangul,
+  Hangul: "Hangul",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the HanSimplified script.")
-  HanSimplified,
+  HanSimplified: "HanSimplified",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the HanTraditional script.")
-  HanTraditional,
+  HanTraditional: "HanTraditional",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the Hebrew script.")
-  Hebrew,
+  Hebrew: "Hebrew",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the Japanese script.")
-  Japanese,
+  Japanese: "Japanese",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the Khmer script.")
-  Khmer,
+  Khmer: "Khmer",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the Kannada script.")
-  Kannada,
+  Kannada: "Kannada",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the Lao script.")
-  Lao,
+  Lao: "Lao",
 
   @added(Versions.v2023_04_15_preview)
   @doc("Script name for the Latin script.")
-  Latin,
+  Latin: "Latin",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the Malayalam script.")
-  Malayalam,
+  Malayalam: "Malayalam",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the Myanmar script.")
-  Myanmar,
+  Myanmar: "Myanmar",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the Odia script.")
-  Odia,
+  Odia: "Odia",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the Sinhala script.")
-  Sinhala,
+  Sinhala: "Sinhala",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the Tamil script.")
-  Tamil,
+  Tamil: "Tamil",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the Telugu script.")
-  Telugu,
+  Telugu: "Telugu",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the Thaana script.")
-  Thaana,
+  Thaana: "Thaana",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the Thai script.")
-  Thai,
+  Thai: "Thai",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script name for the Tibetan script.")
-  Tibetan,
+  Tibetan: "Tibetan",
 }
 
 @added(Versions.v2023_11_15_preview)
 @doc("Identifies the script of the input document. Maps to the ISO 15924 standard script code.")
-enum ScriptCode {
+union ScriptCode {
+  string,
+
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the Arabic script.")
-  Arab,
+  Arab: "Arab",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the Armenian script.")
-  Armn,
+  Armn: "Armn",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the Bangla script.")
-  Beng,
+  Beng: "Beng",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the UnifiedCanadianAboriginalSyllabics script.")
-  Cans,
+  Cans: "Cans",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the Cyrillic script.")
-  Cyrl,
+  Cyrl: "Cyrl",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the Devanagari script.")
-  Deva,
+  Deva: "Deva",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the Ethiopic script.")
-  Ethi,
+  Ethi: "Ethi",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the Georgian script.")
-  Geor,
+  Geor: "Geor",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the Greek script.")
-  Grek,
+  Grek: "Grek",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the Gujarati script.")
-  Gujr,
+  Gujr: "Gujr",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the Gurmukhi script.")
-  Guru,
+  Guru: "Guru",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the Hangul script.")
-  Hang,
+  Hang: "Hang",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the HanSimplified script.")
-  Hans,
+  Hans: "Hans",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the HanTraditional script.")
-  Hant,
+  Hant: "Hant",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the Hebrew script.")
-  Hebr,
+  Hebr: "Hebr",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the Japanese script.")
-  Jpan,
+  Jpan: "Jpan",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the Khmer script.")
-  Khmr,
+  Khmr: "Khmr",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the Kannada script.")
-  Knda,
+  Knda: "Knda",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the Lao script.")
-  Laoo,
+  Laoo: "Laoo",
 
   @added(Versions.v2023_04_15_preview)
   @doc("Script code for the Latin script.")
-  Latn,
+  Latn: "Latn",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the Malayalam script.")
-  Mlym,
+  Mlym: "Mlym",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the Myanmar script.")
-  Mymr,
+  Mymr: "Mymr",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the Odia script.")
-  Orya,
+  Orya: "Orya",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the Sinhala script.")
-  Sinh,
+  Sinh: "Sinh",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the Tamil script.")
-  Taml,
+  Taml: "Taml",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the Telugu script.")
-  Telu,
+  Telu: "Telu",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the Thaana script.")
-  Thaa,
+  Thaa: "Thaa",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the Thai script.")
-  Thai,
+  Thai: "Thai",
 
   @added(Versions.v2023_11_15_preview)
   @doc("Script code for the Tibetan script.")
-  Tibt,
+  Tibt: "Tibt",
 }
 
 @doc("Contains the language detection input.")
