@@ -869,56 +869,56 @@
             "schema": {
               "$ref": "#/definitions/CloudHsmClusterError"
             }
-          },
-          "x-ms-examples": {
-            "CloudHsmCluster_PreRestore_MaximumSet_Gen": {
-              "$ref": "./examples/CloudHsmCluster_RequestOrValidate_Restore_MaximumSet_Gen.json"
-            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudHsmCluster_PreRestore_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmCluster_RequestOrValidate_Restore_MaximumSet_Gen.json"
           }
         }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/restore/{jobId}/pending": {
-        "get": {
-          "tags": [
-            "Returns Restore Operation Status"
-          ],
-          "operationId": "CloudHsmClusters_RestoreStatus_Get",
-          "description": "Gets the restore operation status of the specified Cloud HSM Cluster",
-          "parameters": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "#/parameters/cloudHsmClusterName"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/backupRestoreJobId"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "Cloud HSM Cluster Backup Operation status returned",
-              "schema": {
-                "$ref": "#/definitions/RestoreOperationResult"
-              }
-            },
-            "default": {
-              "description": "The error response describing why the operation failed",
-              "schema": {
-                "$ref": "#/definitions/CloudHsmClusterError"
-              }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/restore/{jobId}/pending": {
+      "get": {
+        "tags": [
+          "Returns Restore Operation Status"
+        ],
+        "operationId": "CloudHsmClusters_RestoreStatus_Get",
+        "description": "Gets the restore operation status of the specified Cloud HSM Cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/cloudHsmClusterName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/backupRestoreJobId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cloud HSM Cluster Backup Operation status returned",
+            "schema": {
+              "$ref": "#/definitions/RestoreOperationResult"
             }
           },
-          "x-ms-examples": {
-            "CloudHsmCluster_Get_Restore_Status_MaximumSet_Gen": {
-              "$ref": "./examples/CloudHsmCluster_Restore_Pending_MaximumSet_Gen.json"
+          "default": {
+            "description": "The error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudHsmClusterError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CloudHsmCluster_Get_Restore_Status_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmCluster_Restore_Pending_MaximumSet_Gen.json"
           }
         }
       }
