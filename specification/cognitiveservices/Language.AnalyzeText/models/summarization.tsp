@@ -10,11 +10,11 @@ namespace Language.AnalyzeText;
 @clientName("ExtractiveSummarizationTaskContent", "csharp")
 @doc("Supported parameters for an Extractive Summarization task.")
 model ExtractiveSummarizationTaskParameters is PreBuiltTaskParameters {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Specifies the number of sentences in the extracted summary.")
   sentenceCount?: int64 = 3;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Specifies how to sort the extracted summaries.")
   sortBy?: ExtractiveSummarizationSortingCriteria = ExtractiveSummarizationSortingCriteria.Offset;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Specifies the method used to interpret string offsets.")
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
   @added(Versions.v2023_11_15_preview)
@@ -26,9 +26,9 @@ model ExtractiveSummarizationTaskParameters is PreBuiltTaskParameters {
 @added(Versions.v2023_04_01)
 @doc("An object representing the task definition for an Extractive Summarization task.")
 model ExtractiveSummarizationLROTask extends AnalyzeTextLROTask {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("The Extractive Summarization kind of the long running task.")
   kind: AnalyzeTextLROTaskKind.ExtractiveSummarization;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Parameters for the Extractive Summarization task.")
   parameters?: ExtractiveSummarizationTaskParameters;
 }
 
@@ -59,7 +59,7 @@ union ExtractiveSummarizationSortingCriteria {
 @added(Versions.v2023_04_01)
 @doc("A ranked list of sentences representing the extracted summary.")
 model ExtractedSummaryDocumentResult is DocumentResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Specifies the the extracted sentences from the input document.")
   sentences: Array<ExtractedSummarySentence>;
 }
 
@@ -70,7 +70,7 @@ model ExtractedSummaryDocumentResultWithDetectedLanguage
   ...DocumentDetectedLanguage;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Represents an extracted sentences from the input document.")
 @added(Versions.v2023_04_01)
 model ExtractedSummarySentence {
   @doc("The extracted sentence text.")
@@ -87,13 +87,13 @@ model ExtractedSummarySentence {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2023_04_01)
+@doc("An object representing the results for an Extractive Summarization task.")
 model ExtractiveSummarizationLROResult extends AnalyzeTextLROResult {
   @doc("Kind of the task.")
   kind: AnalyzeTextLROResultsKind.ExtractiveSummarizationLROResults;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Results of the task.")
   results: ExtractiveSummarizationResult;
 }
 
@@ -101,9 +101,9 @@ model ExtractiveSummarizationLROResult extends AnalyzeTextLROResult {
 @added(Versions.v2023_04_01)
 @doc("An object representing the task definition for an Abstractive Summarization task.")
 model AbstractiveSummarizationLROTask extends AnalyzeTextLROTask {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("The Abstractive Summarization kind of the long running task.")
   kind: AnalyzeTextLROTaskKind.AbstractiveSummarization;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Parameters for the Abstractive Summarization task.")
   parameters: AbstractiveSummarizationTaskParameters;
 }
 
@@ -125,7 +125,7 @@ model AbstractiveSummarizationLROResult extends AnalyzeTextLROResult {
   @doc("Kind of the task.")
   kind: AnalyzeTextLROResultsKind.AbstractiveSummarizationLROResults;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Results of the task.")
   results: AbstractiveSummarizationResult;
 }
 
@@ -175,9 +175,9 @@ model AbstractiveSummary {
 @added(Versions.v2023_04_15_preview)
 @doc("An object representing the task definition for an Custom Abstractive Summarization task.")
 model CustomAbstractiveSummarizationLROTask extends AnalyzeTextLROTask {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("The Custom Abstractive Summarization kind of the long running task.")
   kind: AnalyzeTextLROTaskKind.CustomAbstractiveSummarization;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Parameters for the Custom Abstractive Summarization task.")
   parameters: CustomAbstractiveSummarizationTaskParameters;
 }
 
@@ -196,7 +196,7 @@ model CustomAbstractiveSummarizationLROResult extends AnalyzeTextLROResult {
   @doc("Kind of the task.")
   kind: AnalyzeTextLROResultsKind.CustomAbstractiveSummarizationLROResults;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Results of the task.")
   results: CustomAbstractiveSummarizationResult;
 }
 
