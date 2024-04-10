@@ -26,11 +26,11 @@ model Connector is ProxyResource<ConnectorProperties> {
 model ConnectorProperties is ResourceProperties {
   @visibility("read")
   @doc("unique id of the connector.")
-  connectorId?: string;
+  connectorId: string;
 
   @visibility("read")
   @doc("tenant id of this connector")
-  tenantId?: string;
+  tenantId: string;
 
   @doc("connector type")
   connectorType: Platform;
@@ -40,7 +40,7 @@ model ConnectorProperties is ResourceProperties {
 
   @visibility("read")
   @doc("last run time stamp of this connector in UTC time zone")
-  lastRunTimeStamp?: utcDateTime;
+  lastRunTimeStamp: utcDateTime;
 }
 
 @doc("Enum for connector types")
