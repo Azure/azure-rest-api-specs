@@ -1,0 +1,408 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Monitor Data Collection Endpoints API",
+    "description": "Provides operations for working with Azure Monitor data collection endpoints",
+    "version": "2021-10-01",
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/dataCollectionEndpoints/{dataCollectionEndpointName}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "summary": "Gets a list of NSP configurations for the specified data collection endpoint.",
+        "operationId": "DataCollectionEndpoints_NSP_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataCollectionEndpointNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of configs.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseCommonV2"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get data collection endpoint": {
+            "$ref": "./examples/NSPForDataCollectionEndpoints_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/dataCollectionEndpoints/{dataCollectionEndpointName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "summary": "Gets the specified NSP configuration for the specified data collection endpoint.",
+        "operationId": "DataCollectionEndpoints_NSP_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataCollectionEndpointNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the config.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseCommonV2"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get data collection endpoint": {
+            "$ref": "./examples/NSPForDataCollectionEndpoints_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers//Microsoft.Insights/dataCollectionEndpoints/{dataCollectionEndpointName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile": {
+      "post": {
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "summary": "Reconciles the specified NSP configuration for the specified data collection endpoint.",
+        "operationId": "DataCollectionEndpoints_NSP_Reconcile",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataCollectionEndpointNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully reconciled the config.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseCommonV2"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get data collection endpoint": {
+            "$ref": "./examples/NSPForDataCollectionEndpoints_Reconcile.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NetworkSecurityPerimeterConfiguration": {
+      "description": "NSP Configuration for a server.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationListResult": {
+      "description": "A list of NSP configurations for a server.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationProperties": {
+      "description": "The properties of an NSP config.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string"
+        },
+        "networkSecurityPerimeter": {
+          "$ref": "#/definitions/NSPConfigPerimeter"
+        },
+        "resourceAssociation": {
+          "$ref": "#/definitions/NSPConfigAssociation"
+        },
+        "profile": {
+          "$ref": "#/definitions/NSPConfigProfile"
+        },
+        "provisioningIssues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NSPProvisioningIssue"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "NSPConfigAccessRule": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/NSPConfigAccessRuleProperties"
+        }
+      }
+    },
+    "NSPConfigAccessRuleProperties": {
+      "type": "object",
+      "properties": {
+        "direction": {
+          "type": "string"
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fullyQualifiedDomainNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "subscriptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "networkSecurityPerimeters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NSPConfigNetworkSecurityPerimeterRule"
+          }
+        }
+      }
+    },
+    "NSPConfigAssociation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "accessMode": {
+          "type": "string"
+        }
+      }
+    },
+    "NSPConfigNetworkSecurityPerimeterRule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "perimeterGuid": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        }
+      }
+    },
+    "NSPConfigPerimeter": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "perimeterGuid": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        }
+      }
+    },
+    "NSPConfigProfile": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "accessRulesVersion": {
+          "type": "string"
+        },
+        "accessRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NSPConfigAccessRule"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "NSPProvisioningIssue": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/NSPProvisioningIssueProperties"
+        }
+      }
+    },
+    "NSPProvisioningIssueProperties": {
+      "type": "object",
+      "properties": {
+        "issueType": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "suggestedResourceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "suggestedAccessRules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ErrorResponseCommonV2": {
+      "title": "Error response",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The error object.",
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "DataCollectionEndpointNameParameter": {
+      "in": "path",
+      "name": "dataCollectionEndpointName",
+      "description": "The name of the data collection endpoint. The name is case insensitive.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
