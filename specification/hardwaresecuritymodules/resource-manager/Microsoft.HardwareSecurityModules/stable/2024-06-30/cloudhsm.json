@@ -589,12 +589,12 @@
         "tags": [
           "Cloud HSM Cluster Backup"
         ],
-        "operationId": "TODO",
+        "operationId": "CloudHsmClusters_Backup",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "description": "TODO",
+        "description": "Create a backup of the Cloud HSM Cluster in the specified subscription",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -619,7 +619,17 @@
         ],
         "responses": {
           "202": {
-            "description": "Cloud HSM Cluster Backup Operation started",
+            "description": "Cloud HSM Cluster Backup operation started",
+            "headers": {
+              "Retry-After": {
+                "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
+                "type": "integer"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/BackupOperationResult"
             }
@@ -643,12 +653,12 @@
         "tags": [
           "Cloud HSM Pre Backup"
         ],
-        "operationId": "TODO",
+        "operationId": "CloudHsmClusters_PreBackup",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "description": "TODO",
+        "description": "Pre Backup operation to validate whether the customer can pefrorm a backup on the Cloud HSM Cluster resource in the specified subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -697,7 +707,7 @@
           }
         },
         "x-ms-examples": {
-          "CloudHsmCluster_PreBackup_Validation_Operation_MaximumSet_Gen": {
+          "CloudHsmCluster_PreBackup_Validation_MaximumSet_Gen": {
             "$ref": "TODO create example file"
           }
         }
@@ -708,8 +718,8 @@
         "tags": [
           "Returns Backup Operation Status"
         ],
-        "operationId": "TODO",
-        "description": "TODO",
+        "operationId": "CloudHsmClusters_BackupStatus_Get",
+        "description": "Gets the backup operation status of the specified Cloud HSM Cluster",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -724,11 +734,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "jobId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The id returned as part of the backup request"
+            "$ref": "#/parameters/backupRestoreJobId"
           }
         ],
         "responses": {
@@ -757,12 +763,12 @@
         "tags": [
           "Cloud HSM Cluster Restore"
         ],
-        "operationId": "TODO",
+        "operationId": "CloudHsmClusters_Restore",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "description": "TODO",
+        "description": "Restores all key materials of a specified Cloud HSM Cluster",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -777,17 +783,17 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "TODO",
             "in": "body",
+            "name": "RestoreProperties",
             "schema": {
               "$ref": "#/definitions/RestoreProperties"
             },
-            "description": "The Azure blob SAS token pointing to a folder where the previous successful full backup was stored"
+            "description": "Backup Operation Required properties"
           }
         ],
         "responses": {
           "202": {
-            "description": "TODO",
+            "description": "Cloud HSM Cluster Restore operation started",
             "headers": {
               "Retry-After": {
                 "description": "The recommended number of seconds to wait before calling the URI specified in Azure-AsyncOperation.",
@@ -819,14 +825,14 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/prerestore": {
       "put": {
         "tags": [
-          "Cloud HSM Pre Backup"
+          "Cloud HSM Cluster Pre Restore"
         ],
-        "operationId": "TODO",
+        "operationId": "CloudHsmClusters_PreRestore",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "description": "TODO",
+        "description": "Queued validating pre restore operation",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -885,8 +891,8 @@
           "tags": [
             "Returns Restore Operation Status"
           ],
-          "operationId": "TODO",
-          "description": "TODO",
+          "operationId": "CloudHsmClusters_RestoreStatus_Get",
+          "description": "Gets the restore operation status of the specified Cloud HSM Cluster",
           "parameters": [
             {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -901,11 +907,7 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
             },
             {
-              "name": "jobId",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "description": "The id returned as part of the backup request"
+              "$ref": "#/parameters/backupRestoreJobId"
             }
           ],
           "responses": {
@@ -923,7 +925,7 @@
             }
           },
           "x-ms-examples": {
-            "CloudHsmCluster_Get_Backup_Status_MaximumSet_Gen": {
+            "CloudHsmCluster_Get_Restore_Status_MaximumSet_Gen": {
               "$ref": "TODO create example file"
             }
           }
@@ -1248,11 +1250,6 @@
         "azureStorageResourceUri": {
           "type": "string",
           "description": "Azure storage Resource Uri"
-        },
-        "useManagedIdentity": {
-          "type": "boolean",
-          "default": false,
-          "description": "Indicates which authentication method should be used. If set to true, Managed HSM will use the configured user-assigned managed identity to authenticate with Azure Storage. Otherwise, a SAS token has to be specified."
         }
       }
     },
@@ -1265,7 +1262,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/RestoreOperationResult"
+          "$ref": "#/definitions/BackupRestoreCommomOperationResult"
         }
       ],
       "description": "Backup operation Result"
@@ -1284,39 +1281,50 @@
         }
       }
     },
-      "RestoreOperationResult": {
-        "properties": {
-          "status": {
-            "type": "string",
-            "description": "Status of the backup operation"
-          },
-          "statusDetails": {
-            "type": "string",
-            "description": "The status details of backup operation"
-          },
-          "error": {
-            "$ref": "common.json#/definitions/Error",
-            "description": "Error encountered, if any, during the backup operation."
-          },
-          "startTime": {
-            "type": "integer",
-            "format": "unixtime",
-            "description": "The start time of the backup operation in UTC"
-          },
-          "endTime": {
-            "type": "integer",
-            "format": "unixtime",
-            "description": "The end time of the backup operation in UTC",
-            "x-nullable": true
-          },
-          "jobId": {
-            "type": "string",
-            "description": "Identifier for the backup operation."
+    "RestoreOperationResult": {
+      "type": "object",
+      "description": "Restore operation properties",
+      "properties": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/BackupRestoreCommomOperationResult"
           }
-        },
-        "description": "Backup and Restore operation common properties"
+        ]
       }
     },
+    "BackupRestoreCommomOperationResult": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Status of the backup operation"
+        },
+        "statusDetails": {
+          "type": "string",
+          "description": "The status details of backup operation"
+        },
+        "error": {
+          "$ref": "common.json#/definitions/Error",
+          "description": "Error encountered, if any, during the backup operation."
+        },
+        "startTime": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The start time of the backup operation in UTC"
+        },
+        "endTime": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The end time of the backup operation in UTC",
+          "x-nullable": true
+        },
+        "jobId": {
+          "type": "string",
+          "description": "Identifier for the backup operation."
+        }
+      },
+      "description": "Backup and Restore operation common properties"
+    }
+  },
     "parameters": {
       "cloudHsmClusterName": {
         "name": "cloudHsmClusterName",
@@ -1339,6 +1347,13 @@
         "maxLength": 24,
         "minLength": 3,
         "x-ms-parameter-location": "method"
+      },
+      "backupRestoreJobId": {
+        "name": "jobId",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The id returned as part of the backup request"
       }
     }
 }
