@@ -227,10 +227,7 @@ time.
     })
     select?: KeyValueFields[];
 
-    @doc("""
-A filter used get key-values for a snapshot. Not valid when used with 'key' and
-'label' filters.
-""")
+    @doc("A filter used get key-values for a snapshot. Not valid when used with 'key' and 'label' filters.")
     @query("snapshot")
     snapshot?: string;
 
