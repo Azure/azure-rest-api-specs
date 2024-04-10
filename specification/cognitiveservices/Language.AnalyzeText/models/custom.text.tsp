@@ -166,14 +166,14 @@ model DynamicClassificationDocumentResult is DocumentResult {
 @discriminator("entityComponentKind")
 @doc("This object contains information of the detected entity components. The possible component types may expand in the future. Parsing code should handle unexpected values gracefully")
 model EntityComponentInformation {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Kind of entity component.")
   entityComponentKind: entityComponentKind;
 }
 
 @doc("Kind of entity components supported.")
 @added(Versions.v2023_04_15_preview)
 enum entityComponentKind {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("prebuilt.")
   PrebuiltComponent,
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   LearnedComponent,

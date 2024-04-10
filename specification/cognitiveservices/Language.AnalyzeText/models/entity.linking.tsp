@@ -113,6 +113,6 @@ model EntityLinkingLROResult extends AnalyzeTextLROResult {
   @doc("Kind of the task.")
   kind: AnalyzeTextLROResultsKind.EntityLinkingLROResults;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Entity linking result.")
   results: EntityLinkingResult;
 }

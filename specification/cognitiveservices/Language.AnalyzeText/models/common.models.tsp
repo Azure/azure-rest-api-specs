@@ -231,7 +231,7 @@ model AnalyzeTextJobStatistics {
 
 @doc("Contains the analyze text job tasks.")
 model TasksState {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("List of tasks.")
   tasks: Tasks;
 }
 
@@ -247,9 +247,10 @@ model Tasks {
   @doc("Count of inprogress tasks.")
   inProgress: int32;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Count of total tasks.")
   total: int32;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  
+  @doc("Enumerable of Analyze text job results.")
   items?: Array<AnalyzeTextLROResult>;
 }
 
