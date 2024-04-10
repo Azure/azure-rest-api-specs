@@ -25,7 +25,7 @@ union DataPipelineDirection {
   Inbound: "Inbound",
 
   @doc("File going out from chamber.")
-  Outbound: "Inbound",
+  Outbound: "Outbound",
 }
 
 @doc("Action to be performed on data pipeline file.")
