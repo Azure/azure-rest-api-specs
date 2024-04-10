@@ -231,9 +231,5 @@ interface Fleets {
   listBySubscription is ArmListBySubscription<Fleet>;
 
   @doc("Lists the user credentials of a Fleet.")
-  listCredentials is ArmResourceActionSync<
-    Fleet,
-    void,
-    FleetCredentialResults
-  >;
+  listCredentials is ArmResourceActionSync<Fleet, void, FleetCredentialResults>;
 }
