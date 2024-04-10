@@ -134,7 +134,7 @@ directive:
         "default": {
           "description": "Error response describing why the operation failed.",
           "schema": {
-            "$ref": "https://github.com/Azure/azure-rest-api-specs/blob/f6278b35fb38d62aadb7a4327a876544d5d7e1e4/specification/common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
           }
         }
       }
