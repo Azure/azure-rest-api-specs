@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Dependency Map RP",
+    "title": "Microsoft.DependencyMap management service",
     "version": "2024-06-01-preview",
-    "description": "Dependency Map Resource provider",
+    "description": "Microsoft.DependencyMap management service",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -64,7 +64,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
@@ -76,13 +76,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Operations_List": {
             "$ref": "./examples/Operations_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -103,7 +103,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MapsResourceListResult"
             }
@@ -115,13 +115,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Maps_ListBySubscription": {
             "$ref": "./examples/Maps_ListBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -150,7 +150,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DiscoverySourceResourceListResult"
             }
@@ -162,13 +162,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "DiscoverySources_ListBySubscription": {
             "$ref": "./examples/DiscoverySources_ListBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -192,7 +192,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MapsResourceListResult"
             }
@@ -204,13 +204,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Maps_ListByResourceGroup": {
             "$ref": "./examples/Maps_ListByResourceGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -242,7 +242,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MapsResource"
             }
@@ -321,15 +321,15 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Maps_CreateOrUpdate": {
             "$ref": "./examples/Maps_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "Maps_Update",
@@ -367,7 +367,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/MapsResource"
             }
@@ -393,15 +393,15 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Maps_Update": {
             "$ref": "./examples/Maps_Update.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "Maps_Delete",
@@ -444,7 +444,7 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -453,15 +453,15 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Maps_Delete": {
             "$ref": "./examples/Maps_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DependencyMap/maps/{mapName}/discoverySources": {
@@ -492,7 +492,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DiscoverySourceResourceListResult"
             }
@@ -504,13 +504,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "DiscoverySources_ListByMapsResource": {
             "$ref": "./examples/DiscoverySources_ListByMapsResource.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -550,7 +550,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DiscoverySourceResource"
             }
@@ -637,15 +637,15 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "DiscoverySources_CreateOrUpdate": {
             "$ref": "./examples/DiscoverySources_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "DiscoverySources_Update",
@@ -691,7 +691,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ARM operation completed successfully.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/DiscoverySourceResource"
             }
@@ -717,15 +717,15 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "DiscoverySources_Update": {
             "$ref": "./examples/DiscoverySources_Update.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "DiscoverySources_Delete",
@@ -776,7 +776,7 @@
             }
           },
           "204": {
-            "description": "Resource deleted successfully."
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -785,15 +785,15 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "DiscoverySources_Delete": {
             "$ref": "./examples/DiscoverySources_Delete.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DependencyMap/maps/{mapName}/exportDependencies": {
@@ -853,15 +853,15 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Maps_ExportDependencies": {
             "$ref": "./examples/Maps_ExportDependencies.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DependencyMap/maps/{mapName}/getConnectionsForProcessOnFocusedMachine": {
@@ -921,15 +921,15 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Maps_GetConnectionsForProcessOnFocusedMachine": {
             "$ref": "./examples/Maps_GetConnectionsForProcessOnFocusedMachine.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DependencyMap/maps/{mapName}/getConnectionsWithConnectedMachineForFocusedMachine": {
@@ -989,15 +989,15 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Maps_GetConnectionsWithConnectedMachineForFocusedMachine": {
             "$ref": "./examples/Maps_GetConnectionsWithConnectedMachineForFocusedMachine.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DependencyMap/maps/{mapName}/getDependencyViewForFocusedMachine": {
@@ -1057,15 +1057,15 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Maps_GetDependencyViewForFocusedMachine": {
             "$ref": "./examples/Maps_GetDependencyViewForFocusedMachine.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -1237,7 +1237,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -1478,7 +1479,8 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The link to the next page of items"
+          "description": "The link to the next page of items",
+          "readOnly": true
         }
       },
       "required": [
@@ -1512,7 +1514,6 @@
     "OffAzureDiscoverySourceResourceProperties": {
       "type": "object",
       "description": "OffAzure discovery source resource properties",
-      "properties": {},
       "allOf": [
         {
           "$ref": "#/definitions/DiscoverySourceResourceProperties"
@@ -1617,7 +1618,8 @@
             "description": "This state indicates that the operation on the resource has been accepted."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "SourceType": {
       "type": "string",
@@ -1639,6 +1641,24 @@
             "name": "OffAzure",
             "value": "OffAzure",
             "description": "OffAzure source type"
+          }
+        ]
+      }
+    },
+    "Versions": {
+      "type": "string",
+      "description": "The available API versions.",
+      "enum": [
+        "2024-06-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2024_06_01_preview",
+            "value": "2024-06-01-preview",
+            "description": "2024-06-01-preview version"
           }
         ]
       }
