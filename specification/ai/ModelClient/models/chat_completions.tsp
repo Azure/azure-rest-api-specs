@@ -74,11 +74,6 @@ alias ChatCompletionsOptions = {
   @minItems(1)
   stop?: string[];
 
-  @doc("""
-  A value indicating whether chat completions should be streamed for this request.
-  """)
-  stream?: boolean = false;
-
   @doc("The available tool definitions that the chat completions request can use, including caller-defined functions.")
   @minItems(1)
   tools?: ChatCompletionsToolDefinition[];
