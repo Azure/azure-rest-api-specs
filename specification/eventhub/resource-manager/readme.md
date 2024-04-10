@@ -252,6 +252,61 @@ input-file:
 
 ``` yaml
 directive:
+  - suppress: MissingTypeObject
+    from: CheckNameAvailability.json
+    reason: Not a mandatory check
+
+  - suppress: ResourceNameRestriction
+    from: consumergroups.json
+    reason: Not a mandatory check
+  - suppress: PutResponseCodes
+    from: consumergroups.json
+    reason: Not a mandatory check
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: consumergroups.json
+    reason: Not a mandatory check
+  - suppress: MissingTypeObject
+    from: consumergroups.json
+    reason: Not a mandatory check
+  - suppress: TrackedResourcePatchOperation
+    from: consumergroups.json
+    reason: Not a mandatory check.
+  - suppress: SystemDataDefinitionsCommonTypes
+    from: consumergroups.json
+    reason: Not a mandatory check
+  
+  - suppress: PathForResourceAction
+    from: disasterRecoveryConfigs.json
+    reason: Not a mandatory check
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: disasterRecoveryConfigs.json
+    reason: Not a mandatory check
+  - suppress: MissingTypeObject
+    from: disasterRecoveryConfigs.json
+    reason: Not a mandatory check
+  - suppress: TrackedResourcePatchOperation
+    from: disasterRecoveryConfigs.json
+    reason: Not a mandatory check
+  - suppress: ProvisioningStateValidation
+    from: disasterRecoveryConfigs.json
+    reason: Not a mandatory check
+  - suppress: SystemDataDefinitionsCommonTypes
+    from: disasterRecoveryConfigs.json
+    reason: Not a mandatory check
+
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: eventhubs.json
+    reason: Not a mandatory check
+  - suppress: ResourceNameRestriction
+    from: eventhubs.json
+    reason: Not a mandatory check
+  - suppress: PutResponseCodes
+    from: eventhubs.json
+    reason: Not a mandatory check
+  - suppress: MissingTypeObject
+    from: eventhubs.json
+    reason: Not a mandatory check
+
   - suppress: PostOperationAsyncResponseValidation
     from: namespaces-preview.json
     reason: Not a mandatory check
@@ -283,7 +338,12 @@ directive:
   - suppress: GetCollectionOnlyHasValueAndNextLink
     from: Clusters-preview.json
     reason: Not a mandatory check
-
+  - suppress: SystemDataDefinitionsCommonTypes
+    from: Clusters-preview.json
+    reason: Not a mandatory check
+  - suppress: ResourceNameRestriction
+    from: Clusters-preview.json
+    reason: Not a mandatory check
 
   - suppress: LroLocationHeader
     from: quotaConfiguration-preview.json
@@ -307,6 +367,9 @@ directive:
     from: quotaConfiguration-preview.json
     reason: Not a mandatory check
   - suppress: AvoidAdditionalProperties
+    from: quotaConfiguration-preview.json
+    reason: Not a mandatory check
+  - suppress: ResourceNameRestriction
     from: quotaConfiguration-preview.json
     reason: Not a mandatory check
 
@@ -370,6 +433,24 @@ directive:
     from: networkrulessets-preview.json
     reason: Not a mandatory check
   
+  - suppress: ResourceNameRestriction
+    from: AuthorizationRules.json
+    reason: Not a mandatory check
+  - suppress: PutResponseCodes
+    from: AuthorizationRules.json
+    reason: Not a mandatory check
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: AuthorizationRules.json
+    reason: Not a mandatory check
+  - suppress: MissingTypeObject
+    from: AuthorizationRules.json
+    reason: Not a mandatory check
+  - suppress: SystemDataDefinitionsCommonTypes
+    from: AuthorizationRules.json
+    reason: Not a mandatory check
+  - suppress: TrackedResourcePatchOperation
+    from: AuthorizationRules.json
+    reason: Not a mandatory check
 ```
 
 ### Tag: profile-hybrid-2020-09-01
