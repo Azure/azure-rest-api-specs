@@ -4151,11 +4151,15 @@
       "type": "object",
       "description": "List of chambers connected to a shared storage.",
       "properties": {
-        "chamberId": {
+        "id": {
           "type": "string",
           "format": "arm-id",
           "description": "Fully qualified resource ID for the chamber resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-          "readOnly": true,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ],
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -4166,7 +4170,7 @@
         }
       },
       "required": [
-        "chamberId"
+        "id"
       ]
     },
     "Connector": {
@@ -5338,7 +5342,7 @@
             "$ref": "#/definitions/ConnectedChamber"
           },
           "x-ms-identifiers": [
-            "chamberId"
+            "id"
           ],
           "x-ms-mutability": [
             "read",
@@ -5421,7 +5425,7 @@
             "$ref": "#/definitions/ConnectedChamber"
           },
           "x-ms-identifiers": [
-            "chamberId"
+            "id"
           ],
           "x-ms-mutability": [
             "read",

@@ -36,8 +36,8 @@ union SharedStoragePerformanceTier {
 @doc("List of chambers connected to a shared storage.")
 model ConnectedChamber {
   @doc("Fully qualified resource ID for the chamber resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}")
-  @visibility("read")
-  chamberId: Azure.Core.armResourceIdentifier<[
+  @visibility("read", "create", "update")
+  id: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ModSimWorkbench/chamber";
     }
@@ -60,7 +60,7 @@ model SharedStorageProperties {
 
   @visibility("read", "create", "update")
   @doc("List of Chambers connected to the shared storage.")
-  @extension("x-ms-identifiers", ["chamberId"])
+  @extension("x-ms-identifiers", ["id"])
   chambers: Array<ConnectedChamber>;
 }
 
