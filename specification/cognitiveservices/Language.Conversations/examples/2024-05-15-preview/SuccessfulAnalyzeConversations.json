@@ -12,7 +12,7 @@
         "conversationItem": {
           "id": "1",
           "participantId": "1",
-          "text": "play In the air tonight from Phil Collins"
+          "text": "Book a flight to Seattle on Oct 10th"
         }
       },
       "parameters": {
@@ -28,32 +28,89 @@
       "body": {
         "kind": "ConversationResult",
         "result": {
-          "query": "play In the air tonight from Phil Collins",
+          "query": "Book a flight to Seattle on Oct 10th",
           "prediction": {
-            "topIntent": "PlayMusic",
+            "topIntent": "BookFlight",
             "projectKind": "Conversation",
             "intents": [
               {
-                "category": "PlayMusic",
+                "category": "None",
                 "confidenceScore": 1
               },
               {
-                "category": "SearchCreativeWork",
+                "category": "BookTrain",
                 "confidenceScore": 0
               },
               {
-                "category": "AddToPlaylist",
+                "category": "BookFlight",
                 "confidenceScore": 0
               }
             ],
             "entities": [
-              {
-                "category": "Media.Artist",
-                "text": "Phil Collins",
-                "offset": 29,
-                "length": 12,
-                "confidenceScore": 1
-              }
+            {
+              "category": "Geography.Location",
+              "text": "seattle",
+              "offset": 17,
+              "length": 7,
+              "confidenceScore": 1,
+              "extraInformation": [
+                {
+                  "extraInformationKind": "EntitySubtype",
+                  "value": "geography.location",
+                  "tags": [
+                    {
+                      "name": "City",
+                      "confidenceScore": 1
+                    },
+                    {
+                      "name": "GPE",
+                      "confidenceScore": 1
+                    },
+                    {
+                      "name": "Location",
+                      "confidenceScore": 1
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "category": "DateTime",
+              "text": "oct 10th",
+              "offset": 28,
+              "length": 8,
+              "confidenceScore": 1,
+              "resolutions": [
+                {
+                  "resolutionKind": "DateTimeResolution",
+                  "dateTimeSubKind": "Date",
+                  "timex": "XXXX-10-10",
+                  "value": "2023-10-10"
+                },
+                {
+                  "resolutionKind": "DateTimeResolution",
+                  "dateTimeSubKind": "Date",
+                  "timex": "XXXX-10-10",
+                  "value": "2024-10-10"
+                }
+              ],
+              "extraInformation": [
+                {
+                  "extraInformationKind": "EntitySubtype",
+                  "value": "datetime.date",
+                  "tags": [
+                    {
+                      "name": "Date",
+                      "confidenceScore": 1
+                    },
+                    {
+                      "name": "Temporal",
+                      "confidenceScore": 1
+                    }
+                  ]
+                }
+              ]
+            }
             ]
           }
         }
