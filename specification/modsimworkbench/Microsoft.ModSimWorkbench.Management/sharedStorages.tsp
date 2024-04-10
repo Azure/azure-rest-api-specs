@@ -1,13 +1,18 @@
+import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-autorest";
 
 import "./common-types.tsp";
 import "./chambers.tsp";
 
+using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
+using OpenAPI;
 
 @armProviderNamespace("Microsoft.ModSimWorkbench")
 @service({
@@ -32,7 +37,11 @@ union SharedStoragePerformanceTier {
 model ConnectedChamber {
   @doc("Fully qualified resource ID for the chamber resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}")
   @visibility("read")
-  id: string; // TODO: Change to chamberId
+  chamberId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ModSimWorkbench/chamber";
+    }
+  ]>;
 }
 
 @doc("Shared storage properties.")
@@ -51,6 +60,7 @@ model SharedStorageProperties {
 
   @visibility("read", "create", "update")
   @doc("List of Chambers connected to the shared storage.")
+  @extension("x-ms-identifiers", ["chamberId"])
   chambers: Array<ConnectedChamber>;
 }
 

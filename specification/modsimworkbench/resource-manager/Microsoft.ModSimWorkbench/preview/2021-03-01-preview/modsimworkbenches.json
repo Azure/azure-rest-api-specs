@@ -4151,14 +4151,22 @@
       "type": "object",
       "description": "List of chambers connected to a shared storage.",
       "properties": {
-        "id": {
+        "chamberId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Fully qualified resource ID for the chamber resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ModSimWorkbench/chamber"
+              }
+            ]
+          }
         }
       },
       "required": [
-        "id"
+        "chamberId"
       ]
     },
     "Connector": {
@@ -5329,6 +5337,9 @@
           "items": {
             "$ref": "#/definitions/ConnectedChamber"
           },
+          "x-ms-identifiers": [
+            "chamberId"
+          ],
           "x-ms-mutability": [
             "read",
             "update",
@@ -5409,6 +5420,9 @@
           "items": {
             "$ref": "#/definitions/ConnectedChamber"
           },
+          "x-ms-identifiers": [
+            "chamberId"
+          ],
           "x-ms-mutability": [
             "read",
             "update",
