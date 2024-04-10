@@ -176,7 +176,9 @@ https://aka.ms/azconfig/docs/keyvaluefiltering
     })
     tags?: string[];
   },
-  KeyValueListResult & AppConfigResponseHeaders & acceptHeader<"application/vnd.microsoft.appconfig.kvset+json">
+  KeyValueListResult &
+    AppConfigResponseHeaders &
+    acceptHeader<"application/vnd.microsoft.appconfig.kvset+json">
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
@@ -302,7 +304,8 @@ match the value provided.
       @header("If-None-Match")
       ifNoneMatch?: string;
     }> &
-    ResponseHeadersTrait<AppConfigResponseHeaders & acceptHeader<"application/vnd.microsoft.appconfig.kv+json">>
+    ResponseHeadersTrait<AppConfigResponseHeaders &
+      acceptHeader<"application/vnd.microsoft.appconfig.kv+json">>
 >;
 
 // FIXME: check is service returns 201 and/or 200?
@@ -344,7 +347,9 @@ match the value provided.
     @body
     entity?: KeyValue;
   },
-  KeyValue & AppConfigResponseHeaders & acceptHeader<"application/vnd.microsoft.appconfig.kv+json">
+  KeyValue &
+    AppConfigResponseHeaders &
+    acceptHeader<"application/vnd.microsoft.appconfig.kv+json">
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -373,7 +378,9 @@ value provided.
     @header("If-Match")
     ifMatch?: string;
   },
-  (KeyValue & AppConfigResponseHeaders & acceptHeader<"application/vnd.microsoft.appconfig.kvset+json">) | {
+  (KeyValue &
+    AppConfigResponseHeaders &
+    acceptHeader<"application/vnd.microsoft.appconfig.kvset+json">) | {
     @doc("Used to guarantee real-time consistency between requests.")
     @header("Sync-Token")
     syncToken?: string;
@@ -778,7 +785,9 @@ match the value provided.
     @header("If-None-Match")
     ifNoneMatch?: string;
   },
-  KeyValue & AppConfigResponseHeaders & acceptHeader<"application/vnd.microsoft.appconfig.kv+json">
+  KeyValue &
+    AppConfigResponseHeaders &
+    acceptHeader<"application/vnd.microsoft.appconfig.kv+json">
 >;
 
 // FIXME: was the original swagger missing a 204?
@@ -815,7 +824,9 @@ match the value provided.
     @header("If-None-Match")
     ifNoneMatch?: string;
   },
-  KeyValue & AppConfigResponseHeaders & acceptHeader<"application/vnd.microsoft.appconfig.kv+json">
+  KeyValue &
+    AppConfigResponseHeaders &
+    acceptHeader<"application/vnd.microsoft.appconfig.kv+json">
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -875,7 +886,9 @@ https://aka.ms/azconfig/docs/restapirevisions
     })
     tags?: string[];
   },
-  KeyValueListResult & AppConfigResponseHeaders & acceptHeader<"application/vnd.microsoft.appconfig.kvset+json">
+  KeyValueListResult &
+    AppConfigResponseHeaders &
+    acceptHeader<"application/vnd.microsoft.appconfig.kvset+json">
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
