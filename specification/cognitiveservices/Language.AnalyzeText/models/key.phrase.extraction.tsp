@@ -6,14 +6,14 @@ using TypeSpec.Versioning;
 
 namespace Language.AnalyzeText;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Contains the analyze text KeyPhraseExtraction task input.")
 model AnalyzeTextKeyPhraseExtractionInput extends AnalyzeTextTask {
   @doc("Kind of the task.")
   kind: AnalyzeTextTaskKind.KeyPhraseExtraction;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Contains the input documents.")
   analysisInput?: MultiLanguageAnalysisInput;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Key phrase extraction task parameters.")
   parameters?: KeyPhraseTaskParameters;
 }
 
@@ -24,21 +24,21 @@ model KeyPhraseTaskParameters is PreBuiltTaskParameters;
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("An object representing the task definition for a Key Phrase Extraction task.")
 model KeyPhraseLROTask extends AnalyzeTextLROTask {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Kind of the task.")
   kind: AnalyzeTextLROTaskKind.KeyPhraseExtraction;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Key phrase extraction task parameters.")
   parameters?: KeyPhraseTaskParameters;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Contains the analyze text KeyPhraseExtraction task result.")
 model KeyPhraseTaskResult extends AnalyzeTextTaskResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("Kind of the task results.")
   kind: AnalyzeTextTaskResultsKind.KeyPhraseExtractionResults;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("The list of Key phrase extraction results")
   results: KeyPhraseResult;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Contains the KeyPhraseResult.")
 model KeyPhraseResult is PreBuiltResult {
   @doc("Response by document")
   @typeChangedFrom(
@@ -48,7 +48,7 @@ model KeyPhraseResult is PreBuiltResult {
   documents: Array<KeyPhrasesDocumentResultWithDetectedLanguage>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
+@doc("Contains the Key phrase extraction results for a document.")
 model KeyPhrasesDocumentResult is DocumentResult {
   @doc("A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document.")
   keyPhrases: Array<string>;
@@ -61,12 +61,12 @@ model KeyPhrasesDocumentResultWithDetectedLanguage {
   ...DocumentDetectedLanguage;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@doc("Contains the analyze text KeyPhraseExtraction LRO task.")
 model KeyPhraseExtractionLROResult extends AnalyzeTextLROResult {
   @doc("Kind of the task.")
   kind: AnalyzeTextLROResultsKind.KeyPhraseExtractionLROResults;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  @doc("The list of Key phrase extraction results")
   results: KeyPhraseResult;
 }
