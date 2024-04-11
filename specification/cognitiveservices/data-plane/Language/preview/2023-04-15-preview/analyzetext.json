@@ -7136,8 +7136,11 @@
           }
         },
         "excludePiiCategories": {
-          "$ref": "#/definitions/PiiCategoriesExclude",
-          "description": "Enumeration of PII categories to be excluded in the response."
+          "type": "array",
+          "description": "Enumeration of PII categories to be excluded in the response.",
+          "items": {
+            "$ref": "#/definitions/PiiCategoriesExclude"
+          }
         },
         "redactionCharacter": {
           "type": "string",
