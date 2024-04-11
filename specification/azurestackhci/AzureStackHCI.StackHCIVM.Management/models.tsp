@@ -14,346 +14,369 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.AzureStackHCI;
 
 @doc("Datasource for the gallery image when provisioning with cloud-init [NoCloud, Azure]")
-enum CloudInitDataSource {
+union CloudInitDataSource {
   @doc("NoCloud is used as the datasource")
-  NoCloud,
+  NoCloud: "NoCloud",
 
   @doc("Azure is used as the datasource")
-  Azure,
+  Azure: "Azure",
+  
+  string,
 }
 
 @doc("The hypervisor generation of the Virtual Machine [V1, V2]")
-enum HyperVGeneration {
+union HyperVGeneration {
   @doc("Generation 1 (V1) hypervisor")
-  V1,
+  V1: "V1",
 
   @doc("Generation 2 (V2) hypervisor")
-  V2,
+  V2: "V2",
+
+  string,
 }
 
-@doc("Provisioning state of the gallery image.")
-enum ProvisioningStateEnum {
+@doc("Provisioning state of the resource.")
+union ProvisioningState {
   @doc("Provisioning has succeeded")
-  Succeeded,
+  Succeeded: "Succeeded",
 
   @doc("Provisioning has failed")
-  Failed,
+  Failed: "Failed",
 
   @doc("Provisioning is in progress")
-  InProgress,
+  InProgress: "InProgress",
 
   @doc("Provisioning has been accepted")
-  Accepted,
+  Accepted: "Accepted",
 
   @doc("Deletion of the resource is in progress")
-  Deleting,
+  Deleting: "Deleting",
 
   @doc("Provisioning has been canceled")
-  Canceled,
+  Canceled: "Canceled",
+
+  string,
 }
 
-@doc("The status of the operation performed on the gallery image [Succeeded, Failed, InProgress]")
-enum Status {
+@doc("The status of the operation performed on the resource [Succeeded, Failed, InProgress]")
+union Status {
   @doc("Operation succeeded")
-  Succeeded,
+  Succeeded: "Succeeded",
 
   @doc("Operation failed")
-  Failed,
+  Failed: "Failed",
 
   @doc("Operation is in progress")
-  InProgress,
+  InProgress: "InProgress",
+
+  string,
 }
 
 @doc("The type of extendedLocation.")
-enum ExtendedLocationTypes {
+union ExtendedLocationTypes {
   @doc("Custom extended location type")
-  CustomLocation,
+  CustomLocation: "CustomLocation",
+  string,
 }
 
 @doc("IPAllocationMethod - The IP address allocation method. Possible values include: 'Static', 'Dynamic'")
-enum IpAllocationMethodEnum {
+union IpAllocationMethod {
   @doc("Dynamic IP allocation method")
-  Dynamic,
+  Dynamic: "Dynamic",
 
   @doc("Static IP allocation method")
-  Static,
+  Static: "Static",
+
+  string,
 }
 
 @doc("Network protocol this rule applies to.")
-enum SecurityRuleProtocol {
+union SecurityRuleProtocol {
   @doc("Transmission Control Protocol")
-  Tcp,
+  Tcp: "Tcp",
 
   @doc("User Datagram Protocol")
-  Udp,
+  Udp: "Udp",
 
   @doc("Internet Control Message Protocol")
-  Icmp,
+  Icmp: "Icmp",
 
   @doc("Wildcard rule for all protocols")
   Asterisk: "*",
+
+  string,
 }
 
 @doc("Whether network traffic is allowed or denied.")
-enum SecurityRuleAccess {
+union SecurityRuleAccess {
   @doc("Network traffic is allowed")
-  Allow,
+  Allow: "Allow",
 
   @doc("Network traffic is denied")
-  Deny,
+  Deny: "Deny",
+
+  string,
 }
 
 @doc("The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic.")
-enum SecurityRuleDirection {
+union SecurityRuleDirection {
   @doc("Rule is evaluated on incoming traffic")
-  Inbound,
+  Inbound: "Inbound",
 
   @doc("Rule is evaluated on outgoing traffic")
-  Outbound,
-}
+  Outbound: "Outbound",
 
-@doc("The current provisioning state.")
-enum ProvisioningState {
-  @doc("Provisioning has succeeded")
-  Succeeded,
-
-  @doc("Resource is being updated")
-  Updating,
-
-  @doc("Resource is being deleted")
-  Deleting,
-
-  @doc("Provisioning has failed")
-  Failed,
-
-  @doc("Provisioning has been canceled")
-  Canceled,
+  string,
 }
 
 @doc("The format of the actual VHD file [vhd, vhdx]")
-enum DiskFileFormat {
+union DiskFileFormat {
   @doc("VHDX file format")
-  vhdx,
+  vhdx: "vhdx",
 
   @doc("VHD file format")
-  vhd,
+  vhd: "vhd",
+
+  string,
 }
 
-@doc("Enum of VM Sizes")
-enum VmSizeEnum {
+@doc("VM Sizes")
+union VmSize {
   @doc("Default virtual machine size")
-  Default,
+  Default: "Default",
 
   @doc("Standard A2 v2 virtual machine size")
-  Standard_A2_v2,
+  Standard_A2_v2: "Standard_A2_v2",
 
   @doc("Standard A4 v2 virtual machine size")
-  Standard_A4_v2,
+  Standard_A4_v2: "Standard_A4_v2",
 
   @doc("Standard D2s v3 virtual machine size")
-  Standard_D2s_v3,
+  Standard_D2s_v3: "Standard_D2s_v3",
 
   @doc("Standard D4s v3 virtual machine size")
-  Standard_D4s_v3,
+  Standard_D4s_v3: "Standard_D4s_v3",
 
   @doc("Standard D8s v3 virtual machine size")
-  Standard_D8s_v3,
+  Standard_D8s_v3: "Standard_D8s_v3",
 
   @doc("Standard D16s v3 virtual machine size")
-  Standard_D16s_v3,
+  Standard_D16s_v3: "Standard_D16s_v3",
 
   @doc("Standard D32s v3 virtual machine size")
-  Standard_D32s_v3,
+  Standard_D32s_v3: "Standard_D32s_v3",
 
   @doc("Standard DS2 v2 virtual machine size")
-  Standard_DS2_v2,
+  Standard_DS2_v2: "Standard_DS2_v2",
 
   @doc("Standard DS3 v2 virtual machine size")
-  Standard_DS3_v2,
+  Standard_DS3_v2: "Standard_DS3_v2",
 
   @doc("Standard DS4 v2 virtual machine size")
-  Standard_DS4_v2,
+  Standard_DS4_v2: "Standard_DS4_v2",
 
   @doc("Standard DS5 v2 virtual machine size")
-  Standard_DS5_v2,
+  Standard_DS5_v2: "Standard_DS5_v2",
 
   @doc("Standard DS13 v2 virtual machine size")
-  Standard_DS13_v2,
+  Standard_DS13_v2: "Standard_DS13_v2",
 
   @doc("Standard K8S v1 virtual machine size")
-  Standard_K8S_v1,
+  Standard_K8S_v1: "Standard_K8S_v1",
 
   @doc("Standard K8S2 v1 virtual machine size")
-  Standard_K8S2_v1,
+  Standard_K8S2_v1: "Standard_K8S2_v1",
 
   @doc("Standard K8S3 v1 virtual machine size")
-  Standard_K8S3_v1,
+  Standard_K8S3_v1: "Standard_K8S3_v1",
 
   @doc("Standard K8S4 v1 virtual machine size")
-  Standard_K8S4_v1,
+  Standard_K8S4_v1: "Standard_K8S4_v1",
 
   @doc("Standard NK6 virtual machine size")
-  Standard_NK6,
+  Standard_NK6: "Standard_NK6",
 
   @doc("Standard NK12 virtual machine size")
-  Standard_NK12,
+  Standard_NK12: "Standard_NK12",
 
   @doc("Standard NV6 virtual machine size")
-  Standard_NV6,
+  Standard_NV6: "Standard_NV6",
 
   @doc("Standard NV12 virtual machine size")
-  Standard_NV12,
+  Standard_NV12: "Standard_NV12",
 
   @doc("Standard K8S5 v1 virtual machine size")
-  Standard_K8S5_v1,
+  Standard_K8S5_v1: "Standard_K8S5_v1",
 
   @doc("Custom virtual machine size")
-  Custom,
+  Custom: "Custom",
+
+  string,
 }
 
 @doc("Specifies the SecurityType of the virtual machine. EnableTPM and SecureBootEnabled must be set to true for SecurityType to function.")
-enum SecurityTypes {
+union SecurityTypes {
   @doc("Trusted Launch security type")
-  TrustedLaunch,
+  TrustedLaunch: "TrustedLaunch",
 
   @doc("Confidential VM security type")
-  ConfidentialVM,
+  ConfidentialVM: "ConfidentialVM",
+
+  string,
 }
 
 @doc("The level code.")
-enum StatusLevelTypes {
+union StatusLevelTypes {
   @doc("Informational status level")
-  Info,
+  Info: "Info",
 
   @doc("Warning status level")
-  Warning,
+  Warning: "Warning",
 
   @doc("Error status level")
-  Error,
+  Error: "Error",
 }
 
 @doc("The power state of the virtual machine instance")
-enum PowerStateEnum {
+union PowerState {
   @doc("Virtual machine deallocated")
-  Deallocated,
+  Deallocated: "Deallocated",
 
   @doc("Virtual machine deallocating")
-  Deallocating,
+  Deallocating: "Deallocating",
 
   @doc("Virtual machine running")
-  Running,
+  Running: "Running",
 
   @doc("Virtual machine starting")
-  Starting,
+  Starting: "Starting",
 
   @doc("Virtual machine stopped")
-  Stopped,
+  Stopped: "Stopped",
 
   @doc("Virtual machine stopping")
-  Stopping,
+  Stopping: "Stopping",
 
   @doc("Virtual machine paused")
-  Paused,
+  Paused: "Paused",
 
   @doc("Virtual machine Saved,")
-  Saved,
+  Saved: "Saved",
 
   @doc("Power state of the virtual machine is unknown")
-  Unknown,
+  Unknown: "Unknown",
+
+  string,
 }
 
 @doc("The installation status of the hybrid machine agent installation.")
-enum StatusTypes {
+union StatusTypes {
   @doc("Installation succeeded")
-  Succeeded,
+  Succeeded: "Succeeded",
 
   @doc("Installation in progress")
-  InProgress,
+  InProgress: "InProgress",
 
   @doc("Installation failed")
-  Failed,
+  Failed: "Failed",
+
+  string,
 }
 
 @doc("The status of whether secure boot is enabled.")
-enum AttestSecureBootPropertyEnum {
+union AttestSecureBootProperty {
   @doc("Secure boot enabled")
-  Enabled,
+  Enabled: "Enabled",
 
   @doc("Secure boot disabled")
-  Disabled,
+  Disabled: "Disabled",
 
   @doc("Secure boot status is unknown")
-  Unknown,
+  Unknown: "Unknown",
+
+  string,
 }
 
 @doc("The status of whether attestation certificate is validated.")
-enum AttestCertPropertyEnum {
+union AttestCertProperty {
   @doc("Attestation certificate is valid")
-  Valid,
+  Valid: "Valid",
 
   @doc("Attestation certificate is invalid")
-  Invalid,
+  Invalid: "Invalid",
 
   @doc("Attestation certificate status is unknown")
-  Unknown,
+  Unknown: "Unknown",
+
+  string,
 }
 
 @doc("The status of whether the list of boot integrity properties is validated.")
-enum AttestBootIntegrityPropertyEnum {
+union AttestBootIntegrityProperty {
   @doc("Boot integrity properties are valid")
-  Valid,
+  Valid: "Valid",
 
   @doc("Boot integrity properties are invalid")
-  Invalid,
+  Invalid: "Invalid",
 
   @doc("Boot integrity properties status is unknown")
-  Unknown,
+  Unknown: "Unknown",
+
+  string,
 }
 
 @doc("The health status of attestation validation and parsing")
-enum AttestHealthStatusEnum {
+union AttestHealthStatus {
   @doc("Attestation validation and parsing pending")
-  Pending,
+  Pending: "Pending",
 
   @doc("Attestation validation and parsing healthy")
-  Healthy,
+  Healthy: "Healthy",
 
   @doc("Attestation validation and parsing unhealthy")
-  Unhealthy,
+  Unhealthy: "Unhealthy",
 
   @doc("Attestation validation and parsing status is unknown")
-  Unknown,
+  Unknown: "Unknown",
+
+  string,
 }
 
 @doc("Defines the different types of operations for guest agent.")
-enum ProvisioningAction {
+union ProvisioningAction {
   @doc("Install guest agent")
-  install,
+  install: "install",
 
   @doc("Uninstall guest agent")
-  uninstall,
+  uninstall: "uninstall",
 
   @doc("Repair guest agent")
-  repair,
+  repair: "repair",
+  
+  string,
 }
 
 @doc("Operating system type that the gallery image uses [Windows, Linux]")
-enum OperatingSystemTypes {
+union OperatingSystemTypes {
   @doc("Windows operating system")
-  Windows,
+  Windows: "Windows",
 
   @doc("Linux operating system")
-  Linux,
+  Linux: "Linux",
+
+  string,
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
 @doc("Type of the IP Pool [vm, vippool]")
-enum IPPoolTypeEnum {
+union IPPoolType {
   @doc("Virtual Machine IP Pool")
-  vm,
+  vm: "vm",
 
   @doc("VIP Pool")
-  vippool,
+  vippool: "vippool",
+
+  string,
 }
 
 @doc("Properties under the gallery image resource")
@@ -386,7 +409,7 @@ model GalleryImageProperties {
 
   @doc("Provisioning state of the gallery image.")
   @visibility("read")
-  provisioningState?: ProvisioningStateEnum;
+  provisioningState?: ProvisioningState;
 
   @doc("The observed state of gallery images")
   @visibility("read")
@@ -502,7 +525,7 @@ model LogicalNetworkProperties {
 
   @doc("Provisioning state of the logical network.")
   @visibility("read")
-  provisioningState?: ProvisioningStateEnum;
+  provisioningState?: ProvisioningState;
 
   @doc("name of the network switch to be used for VMs")
   vmSwitchName?: string;
@@ -538,7 +561,7 @@ model SubnetProperties {
   addressPrefixes?: string[];
 
   @doc("IPAllocationMethod - The IP address allocation method. Possible values include: 'Static', 'Dynamic'")
-  ipAllocationMethod?: IpAllocationMethodEnum;
+  ipAllocationMethod?: IpAllocationMethod;
 
   @doc("IPConfigurationReferences - list of IPConfigurationReferences")
   ipConfigurationReferences?: SubnetPropertiesFormatIpConfigurationReferencesItem[];
@@ -623,7 +646,7 @@ model IPPool {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("Type of the IP Pool [vm, vippool]")
-  ipPoolType?: IPPoolTypeEnum;
+  ipPoolType?: IPPoolType;
 
   @doc("Start of the IP address pool")
   start?: string;
@@ -710,7 +733,7 @@ model SecurityRuleProperties {
 
   @doc("Provisioning state of the SR")
   @visibility("read")
-  provisioningState?: ProvisioningStateEnum;
+  provisioningState?: ProvisioningState;
 }
 
 @doc("Properties under the network interface resource")
@@ -727,7 +750,7 @@ model NetworkInterfaceProperties {
 
   @doc("Provisioning state of the network interface.")
   @visibility("read")
-  provisioningState?: ProvisioningStateEnum;
+  provisioningState?: ProvisioningState;
 
   @doc("The observed state of network interfaces")
   @visibility("read")
@@ -860,7 +883,7 @@ model MarketplaceGalleryImageProperties {
 
   @doc("Provisioning state of the marketplace gallery image.")
   @visibility("read")
-  provisioningState?: ProvisioningStateEnum;
+  provisioningState?: ProvisioningState;
 
   @doc("The observed state of marketplace gallery images")
   @visibility("read")
@@ -926,7 +949,7 @@ model StorageContainerProperties {
 
   @doc("Provisioning state of the storage container.")
   @visibility("read")
-  provisioningState?: ProvisioningStateEnum;
+  provisioningState?: ProvisioningState;
 
   @doc("The observed state of storage containers")
   @visibility("read")
@@ -995,7 +1018,7 @@ model VirtualHardDiskProperties {
 
   @doc("Provisioning state of the virtual hard disk.")
   @visibility("read")
-  provisioningState?: ProvisioningStateEnum;
+  provisioningState?: ProvisioningState;
 
   @doc("Storage ContainerID of the storage container to be used for VHD")
   containerId?: ResourceIdentifier<[
@@ -1058,7 +1081,7 @@ model VirtualMachineInstanceProperties {
 
   @doc("Provisioning state of the virtual machine instance.")
   @visibility("read")
-  provisioningState?: ProvisioningStateEnum;
+  provisioningState?: ProvisioningState;
 
   @doc("The virtual machine instance view.")
   @visibility("read")
@@ -1082,7 +1105,7 @@ model VirtualMachineInstanceProperties {
 @doc("HardwareProfile - Specifies the hardware settings for the virtual machine instance.")
 model VirtualMachineInstancePropertiesHardwareProfile {
   @doc("Enum of VM Sizes")
-  vmSize?: VmSizeEnum;
+  vmSize?: VmSize;
 
   @doc("number of processors for the virtual machine instance")
   processors?: int32;
@@ -1314,7 +1337,7 @@ model VirtualMachineInstanceStatus {
   errorMessage?: string;
 
   @doc("The power state of the virtual machine instance")
-  powerState?: PowerStateEnum;
+  powerState?: PowerState;
 
   @doc("Provisioning status of the virtual machine instance")
   provisioningStatus?: VirtualMachineInstanceStatusProvisioningStatus;
@@ -1394,7 +1417,7 @@ model VirtualMachineInstanceUpdateProperties {
 @doc("HardwareProfile - Specifies the hardware settings for the virtual machine instance.")
 model HardwareProfileUpdate {
   @doc("VM Size Enum")
-  vmSize?: VmSizeEnum;
+  vmSize?: VmSize;
 
   @doc("number of processors for the virtual machine instance")
   processors?: int32;
@@ -1476,22 +1499,22 @@ model HybridIdentityMetadataProperties {
 
   @doc("Provisioning state of the virtual machine instance.")
   @visibility("read")
-  provisioningState?: ProvisioningStateEnum;
+  provisioningState?: ProvisioningState;
 }
 
 @doc("Defines the attestation status properties")
 model AttestationStatusProperties {
   @doc("The status of whether secure boot is enabled.")
   @visibility("read")
-  attestSecureBootEnabled?: AttestSecureBootPropertyEnum = AttestSecureBootPropertyEnum.Unknown;
+  attestSecureBootEnabled?: AttestSecureBootProperty = AttestSecureBootProperty.Unknown;
 
   @doc("The status of whether attestation certificate is validated.")
   @visibility("read")
-  attestationCertValidated?: AttestCertPropertyEnum = AttestCertPropertyEnum.Unknown;
+  attestationCertValidated?: AttestCertProperty = AttestCertProperty.Unknown;
 
   @doc("The status of whether the list of boot integrity properties is validated.")
   @visibility("read")
-  bootIntegrityValidated?: AttestBootIntegrityPropertyEnum = AttestBootIntegrityPropertyEnum.Unknown;
+  bootIntegrityValidated?: AttestBootIntegrityProperty = AttestBootIntegrityProperty.Unknown;
 
   @doc("kernel version string for Linux VM.")
   @visibility("read")
@@ -1499,7 +1522,7 @@ model AttestationStatusProperties {
 
   @doc("The health status of attestation validation and parsing")
   @visibility("read")
-  healthStatus?: AttestHealthStatusEnum = AttestHealthStatusEnum.Unknown;
+  healthStatus?: AttestHealthStatus = AttestHealthStatus.Unknown;
 
   @doc("The time stamp of the last time attestation token is validated by relying party service.")
   @visibility("read")
@@ -1511,7 +1534,7 @@ model AttestationStatusProperties {
 
   @doc("Provisioning state of the virtual machine instance.")
   @visibility("read")
-  provisioningState?: ProvisioningStateEnum;
+  provisioningState?: ProvisioningState;
 }
 
 @doc("Defines the resource properties.")
@@ -1528,7 +1551,7 @@ model GuestAgentProperties {
 
   @doc("Provisioning state of the virtual machine instance.")
   @visibility("read")
-  provisioningState?: ProvisioningStateEnum;
+  provisioningState?: ProvisioningState;
 }
 
 @doc("Username / Password Credentials to connect to guest.")
