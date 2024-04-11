@@ -176,10 +176,12 @@ model AudioTranscriptionWord {
   word: string;
 
   @doc("The start time of the word relative to the beginning of the audio, expressed in seconds.")
-  start: float32;
+  @encode("seconds", float32)
+  start: duration;
 
   @doc("The end time of the word relative to the beginning of the audio, expressed in seconds.")
-  end: float32;
+  @encode("seconds", float32)
+  end: duration;
 }
 
 @doc("Result information for an operation that transcribed spoken audio into written text.")
