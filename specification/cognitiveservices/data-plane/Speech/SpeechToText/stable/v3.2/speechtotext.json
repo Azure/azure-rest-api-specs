@@ -1,13 +1,13 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Speech Services API v3.2-preview.2",
-    "description": "Speech Services API v3.2-preview.2.",
+    "title": "Speech Services API v3.2",
+    "description": "Speech Services API v3.2.",
     "contact": {
       "name": "Cognitive Services - Speech Services",
       "url": "https://learn.microsoft.com/azure/cognitive-services/speech-service/support"
     },
-    "version": "v3.2-preview.2"
+    "version": "v3.2"
   },
   "paths": {
     "/datasets/locales": {
@@ -2130,67 +2130,6 @@
         }
       }
     },
-    "/models/{id}:copyto": {
-      "post": {
-        "tags": [
-          "Custom Speech models:"
-        ],
-        "summary": "Copies a model from one subscription to another.",
-        "description": "This method is obsolete and will be removed in future API version. Please use models/{id}:copy instead.\r\nThis method can be used to copy a model from one speech resource to another one.\r\nOnly custom models can be copied to another speech resource.",
-        "operationId": "Models_CopyTo",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "The identifier of the model that will be copied.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "in": "body",
-            "name": "modelCopy",
-            "description": "The body contains the key of the target speech resource.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ModelCopy"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The response contains information about the entity as payload and its location as header.",
-            "schema": {
-              "$ref": "#/definitions/CustomModel"
-            },
-            "headers": {
-              "Location": {
-                "description": "The location of the created resource.",
-                "type": "string",
-                "format": "uri"
-              }
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Copy a model": {
-            "$ref": "./examples/copy_model.json"
-          }
-        }
-      }
-    },
     "/models/{id}:copy": {
       "post": {
         "tags": [
@@ -3915,37 +3854,6 @@
           }
         }
       }
-    },
-    "/healthstatus": {
-      "get": {
-        "tags": [
-          "Service Health:"
-        ],
-        "summary": "Returns the overall health of the service and optionally of the different subcomponents.",
-        "operationId": "ServiceHealth_Get",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServiceHealth"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Gets the health status": {
-            "$ref": "examples/get_healthstatus.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -4075,30 +3983,6 @@
         },
         "id": {
           "type": "string"
-        }
-      }
-    },
-    "Component": {
-      "title": "Component",
-      "type": "object",
-      "properties": {
-        "message": {
-          "description": "Additional messages about the current service health.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the component.",
-          "type": "string",
-          "readOnly": true
-        },
-        "status": {
-          "$ref": "#/definitions/HealthStatus"
-        },
-        "type": {
-          "description": "The type of this component.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -4473,6 +4357,7 @@
         "InvalidRecordingsUri",
         "OnlyOneOfUrlsOrContainerOrDataset",
         "ExceededNumberOfRecordingsUris",
+        "InvalidChannels",
         "ModelMismatch",
         "ProjectGenderMismatch",
         "ModelDeprecated",
@@ -4512,7 +4397,7 @@
         "InvalidWebHookEventKind",
         "InvalidTimeToLive",
         "InvalidSourceAzureResourceId",
-        "ModelCopyOperationExists"
+        "ModelCopyAuthorizationExpired"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -4638,6 +4523,10 @@
           {
             "value": "ExceededNumberOfRecordingsUris",
             "description": "Exceeded number of recordings uris."
+          },
+          {
+            "value": "InvalidChannels",
+            "description": "Invalid channels."
           },
           {
             "value": "ModelMismatch",
@@ -4796,8 +4685,8 @@
             "description": "Invalid source Azure resource ID."
           },
           {
-            "value": "ModelCopyOperationExists",
-            "description": "Model copy operation exists."
+            "value": "ModelCopyAuthorizationExpired",
+            "description": "Expired ModelCopyAuthorization."
           }
         ]
       }
@@ -5580,35 +5469,6 @@
         }
       }
     },
-    "HealthStatus": {
-      "title": "HealthStatus",
-      "description": "Health status of the service.",
-      "enum": [
-        "Unhealthy",
-        "Degraded",
-        "Healthy"
-      ],
-      "type": "string",
-      "readOnly": true,
-      "x-ms-enum": {
-        "name": "HealthStatus",
-        "modelAsString": false,
-        "values": [
-          {
-            "value": "Unhealthy",
-            "description": "Unhealthy."
-          },
-          {
-            "value": "Degraded",
-            "description": "Degraded."
-          },
-          {
-            "value": "Healthy",
-            "description": "Healthy."
-          }
-        ]
-      }
-    },
     "InnerError": {
       "title": "InnerError",
       "description": "New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.\r\nThis contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested).",
@@ -5672,7 +5532,7 @@
           "$ref": "#/definitions/LanguageIdentificationMode"
         },
         "candidateLocales": {
-          "description": "The candidate locales for language identification (example [\"en-US\", \"de-DE\", \"es-ES\"]). A minimum of 2 and a maximum of 10 candidate locales, including the main locale for the transcription, is supported.",
+          "description": "The candidate locales for language identification (example [\"en-US\", \"de-DE\", \"es-ES\"]). A minimum of 2 and a maximum of 10 candidate locales, including the main locale for the transcription, is supported for continuous mode. For single language identification, the maximum number of candidate locales is unbounded.",
           "type": "array",
           "items": {
             "type": "string"
@@ -5684,20 +5544,6 @@
           "additionalProperties": {
             "$ref": "#/definitions/EntityReference"
           }
-        }
-      }
-    },
-    "ModelCopy": {
-      "title": "ModelCopy",
-      "required": [
-        "targetSubscriptionKey"
-      ],
-      "type": "object",
-      "properties": {
-        "targetSubscriptionKey": {
-          "description": "The subscription key of the subscription that is the target of the copy operation.",
-          "minLength": 1,
-          "type": "string"
         }
       }
     },
@@ -6308,28 +6154,6 @@
         }
       }
     },
-    "ServiceHealth": {
-      "title": "ServiceHealth",
-      "type": "object",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/HealthStatus"
-        },
-        "message": {
-          "description": "Additional messages about the current service health.",
-          "type": "string",
-          "readOnly": true
-        },
-        "components": {
-          "description": "Optional subcomponents of this service and their status.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Component"
-          },
-          "readOnly": true
-        }
-      }
-    },
     "SharedModel": {
       "title": "SharedModel",
       "required": [
@@ -6407,7 +6231,7 @@
     },
     "Status": {
       "title": "Status",
-      "description": "Describe the current state of the API",
+      "description": "Describe the current state of the API.",
       "enum": [
         "NotStarted",
         "Running",
@@ -6592,7 +6416,7 @@
           "$ref": "#/definitions/ProfanityFilterMode"
         },
         "timeToLive": {
-          "description": "How long the transcription will be kept in the system after it has completed. Once the\r\ntranscription reaches the time to live after completion (successful or failed) it will be automatically\r\ndeleted. Not setting this value or setting it to 0 will disable automatic deletion. The longest supported\r\nduration is 31 days.\r\nThe duration is encoded as ISO 8601 duration (\"PnYnMnDTnHnMnS\", see https://en.wikipedia.org/wiki/ISO_8601#Durations).",
+          "description": "How long the transcription will be kept in the system after it has completed. Once the\r\ntranscription reaches the time to live after completion (successful or failed) it will be automatically\r\ndeleted.\r\n            \r\nNote: When using BYOS (bring your own storage), the result files on the customer owned storage account\r\nwill not be deleted.\r\n            \r\nImportant: Not setting this value or setting it to 0 will default to a TTL of 7 days.\r\n            \r\nThe shorted supported duration is 6h, the longest supported duration is 31 days.\r\nThe duration is encoded as ISO 8601 duration (\"PnYnMnDTnHnMnS\", see https://en.wikipedia.org/wiki/ISO_8601#Durations).",
           "type": "string"
         },
         "email": {
@@ -6934,7 +6758,7 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}/speechtotext/v3.2-preview.2",
+    "hostTemplate": "{endpoint}/speechtotext/v3.2",
     "useSchemePrefix": false,
     "parameters": [
       {
