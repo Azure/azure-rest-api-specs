@@ -96,18 +96,18 @@ Putting everything together discussed, the directory structure of a singular `sp
 /resource-manager/README.md
 /resource-manager/<RPNS>/stable/<apiVersion1>/*.json
 /resource-manager/<RPNS>/stable/<apiVersion1>/examples/*.json
-                             /<apiVersion2>/ ... # multiple 'apiVer' folders
+                               /<apiVersion2>/ ... # multiple '<apiVersion>' folders
 /resource-manager/<RPNS>/preview/<apiVersion3-preview>/*.json
 /resource-manager/<RPNS>/preview/<apiVersion3-preview>/examples/*.json
-                              /<apiVersion4-preview>/ ... # multiple 'apiVer-preview' folders
+                                /<apiVersion4-preview>/ ... # multiple '<apiVersion-preview>' folders
 
 /data-plane/README.md
 /data-plane/<dataPlaneSubfolder1>/stable/<apiVersion5>/*.json
 /data-plane/<dataPlaneSubfolder1>/stable/<apiVersion5>/examples/*.json
-                                      /<apiVersion6>/ ... # multiple 'apiVer' folders
+                                        /<apiVersion6>/ ... # multiple '<apiVersion>' folders
 /data-plane/<dataPlaneSubfolder1>/preview/<apiVersion7-preview>/*.json
 /data-plane/<dataPlaneSubfolder1>/preview/<apiVersion7-preview>/examples/*.json
-                                       /<apiVersion8-preview>/ ... # multiple 'apiVer-preview' folders
+                                         /<apiVersion8-preview>/ ... # multiple '<apiVersion-preview>' folders
            /<dataPlaneSubfolder2>/ ... # multiple '<dataPlaneSubfolder>' folders
 
 ```
