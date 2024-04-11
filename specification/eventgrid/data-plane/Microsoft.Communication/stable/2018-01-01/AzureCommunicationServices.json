@@ -1533,12 +1533,12 @@
         }
       }
     },
-    "AcsAdvancedMessageReceivedEventData": {
+    "AcsMessageReceivedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageReceived event.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/AcsAdvancedMessageEventData"
+          "$ref": "#/definitions/AcsMessageEventData"
         }
       ],
       "properties": {
@@ -1566,23 +1566,23 @@
         },
         "media": {
           "description": "The received message media content",
-          "$ref": "#/definitions/AcsAdvancedMessageMediaContent",
+          "$ref": "#/definitions/AcsMessageMediaContent",
           "type": "object",
           "x-ms-client-name": "mediaContent"
         },
         "context": {
           "description": "The received message context",
-          "$ref": "#/definitions/AcsAdvancedMessageContext",
+          "$ref": "#/definitions/AcsMessageContext",
           "type": "object"
         },
         "button": {
           "description": "The received message button content",
-          "$ref": "#/definitions/AcsAdvancedMessageButtonContent",
+          "$ref": "#/definitions/AcsMessageButtonContent",
           "type": "object"
         },
         "interactive": {
           "description": "The received message interactive content",
-          "$ref": "#/definitions/AcsAdvancedMessageInteractiveContent",
+          "$ref": "#/definitions/AcsMessageInteractiveContent",
           "type": "object",
           "x-ms-client-name": "interactiveContent"
         }
@@ -1596,12 +1596,12 @@
         }
       }
     },
-    "AcsAdvancedMessageDeliveryStatusUpdatedEventData": {
+    "AcsMessageDeliveryStatusUpdatedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AdvancedMessageDeliveryStatusUpdated event.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/AcsAdvancedMessageEventData"
+          "$ref": "#/definitions/AcsMessageEventData"
         }
       ],
       "properties": {
@@ -1621,7 +1621,7 @@
             "Unknown"
           ],
           "x-ms-enum": {
-            "name": "AcsAdvancedMessageDeliveryStatus",
+            "name": "AcsMessageDeliveryStatus",
             "modelAsString": true,
             "values": [
               {
@@ -1673,7 +1673,7 @@
         }
       }
     },
-    "AcsAdvancedMessageEventData": {
+    "AcsMessageEventData": {
       "description": "Schema of common properties of all chat thread events",
       "type": "object",
       "properties": {
@@ -1692,7 +1692,7 @@
         },
         "error": {
           "description": "The channel event error",
-          "$ref": "#/definitions/AcsAdvancedMessageChannelEventError",
+          "$ref": "#/definitions/AcsMessageChannelEventError",
           "type": "object"
         }
       }
@@ -2197,8 +2197,8 @@
         }
       }
     },
-    "AcsAdvancedMessageChannelEventError": {
-      "description": "Advanced Message Channel Event Error",
+    "AcsMessageChannelEventError": {
+      "description": "Message Channel Event Error",
       "type": "object",
       "properties": {
         "channelCode": {
@@ -2211,8 +2211,8 @@
         }
       }
     },
-    "AcsAdvancedMessageMediaContent": {
-      "description": "Advanced Message Media Content",
+    "AcsMessageMediaContent": {
+      "description": "Message Media Content",
       "type": "object",
       "properties": {
         "mimeType": {
@@ -2234,8 +2234,8 @@
         }
       }
     },
-    "AcsAdvancedMessageContext": {
-      "description": "Advanced Message Context",
+    "AcsMessageContext": {
+      "description": "Message Context",
       "type": "object",
       "properties": {
         "from": {
@@ -2249,8 +2249,8 @@
         }
       }
     },
-    "AcsAdvancedMessageButtonContent": {
-      "description": "Advanced Message Button Content",
+    "AcsMessageButtonContent": {
+      "description": "Message Button Content",
       "type": "object",
       "properties": {
         "text": {
@@ -2263,8 +2263,8 @@
         }
       }
     },
-    "AcsAdvancedMessageInteractiveContent": {
-      "description": "Advanced Message Interactive Content",
+    "AcsMessageInteractiveContent": {
+      "description": "Message Interactive Content",
       "type": "object",
       "properties": {
         "type": {
@@ -2297,18 +2297,18 @@
         },
         "buttonReply": {
           "description": "The Message Sent when a customer clicks a button",
-          "$ref": "#/definitions/AcsAdvancedMessageInteractiveButtonReplyContent",
+          "$ref": "#/definitions/AcsMessageInteractiveButtonReplyContent",
           "type": "object"
         },
         "listReply": {
           "description": "The Message Sent when a customer selects an item from a list",
-          "$ref": "#/definitions/AcsAdvancedMessageInteractiveListReplyContent",
+          "$ref": "#/definitions/AcsMessageInteractiveListReplyContent",
           "type": "object"
         }
       }
     },
-    "AcsAdvancedMessageInteractiveButtonReplyContent": {
-      "description": "Advanced Message Interactive button reply content for a user to business message",
+    "AcsMessageInteractiveButtonReplyContent": {
+      "description": "Message Interactive button reply content for a user to business message",
       "type": "object",
       "properties": {
         "id": {
@@ -2322,8 +2322,8 @@
         }
       }
     },
-    "AcsAdvancedMessageInteractiveListReplyContent": {
-      "description": "Advanced Message Interactive list reply content for a user to business message",
+    "AcsMessageInteractiveListReplyContent": {
+      "description": "Message Interactive list reply content for a user to business message",
       "type": "object",
       "properties": {
         "id": {

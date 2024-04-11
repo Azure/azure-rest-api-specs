@@ -26,15 +26,23 @@ These are the global settings for the Support API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-06
+tag: package-2024-04
 ```
 
 
+### Tag: package-2024-04
+
+These settings apply only when `--tag=package-2024-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04'
+input-file:
+  - Microsoft.Support/stable/2024-04-01/support.json
+```
 ### Tag: package-preview-2023-06
 
 These settings apply only when `--tag=package-preview-2023-06` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-06'
+``` yaml $(tag) == 'package-preview-2023-06'
 input-file:
   - Microsoft.Support/preview/2023-06-01-preview/support.json
 ```
@@ -51,7 +59,7 @@ directive:
 
 These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-09'
+``` yaml $(tag) == 'package-preview-2022-09'
 input-file:
   - Microsoft.Support/preview/2022-09-01-preview/support.json
 suppressions:
