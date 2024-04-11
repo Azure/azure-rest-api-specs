@@ -111,89 +111,89 @@ model FaceRectangle {
 
 @doc("A collection of 27-point face landmarks pointing to the important positions of face components.")
 model FaceLandmarks {
-  @doc("Coordinates within an image")
+  @doc("The coordinates of the left eye pupil.")
   pupilLeft: LandmarkCoordinate;
 
-  @doc("Coordinates within an image")
+  @doc("The coordinates of the right eye pupil.")
   pupilRight: LandmarkCoordinate;
 
-  @doc("Coordinates within an image")
+  @doc("The coordinates of the nose tip.")
   noseTip: LandmarkCoordinate;
 
-  @doc("Coordinates within an image")
+  @doc("The coordinates of the mouth left.")
   mouthLeft: LandmarkCoordinate;
 
-  @doc("Coordinates within an image")
+  @doc("The coordinates of the mouth right.")
   mouthRight: LandmarkCoordinate;
 
-  @doc("Coordinates within an image")
+  @doc("The coordinates of the left eyebrow outer.")
   eyebrowLeftOuter: LandmarkCoordinate;
 
-  @doc("Coordinates within an image")
+  @doc("The coordinates of the left eyebrow inner.")
   eyebrowLeftInner: LandmarkCoordinate;
 
-  @doc("Coordinates within an image")
+  @doc("The coordinates of the left eye outer.")
   eyeLeftOuter: LandmarkCoordinate;
 
-  @doc("Coordinates within an image")
+  @doc("The coordinates of the left eye top.")
   eyeLeftTop: LandmarkCoordinate;
 
-  @doc("Coordinates within an image")
+  @doc("The coordinates of the left eye bottom.")
   eyeLeftBottom: LandmarkCoordinate;
 
-  @doc("Coordinates within an image")
+  @doc("The coordinates of the left eye inner.")
   eyeLeftInner: LandmarkCoordinate;
 
-  @doc("Coordinates within an image")
+  @doc("The coordinates of the right eyebrow inner.")
   eyebrowRightInner: LandmarkCoordinate;
 
-  @doc("Coordinates within an image")
+  @doc("The coordinates of the right eyebrow outer.")
   eyebrowRightOuter: LandmarkCoordinate;
 
-  @doc("Coordinates within an image")
+  @doc("The coordinates of the right eye inner.")
   eyeRightInner: LandmarkCoordinate;
 
-  @doc("Coordinates within an image")
+  @doc("The coordinates of the right eye top.")
   eyeRightTop: LandmarkCoordinate;
 
-  @doc("Coordinates within an image")
+  @doc("The coordinates of the right eye bottom.")
   eyeRightBottom: LandmarkCoordinate;
 
-  @doc("Coordinates within an image")
+  @doc("The coordinates of the right eye outer.")
   eyeRightOuter: LandmarkCoordinate;
 
-  @doc("Coordinates within an image")
+  @doc("The coordinates of the nose root left.")
   noseRootLeft: LandmarkCoordinate;
 
-  @doc("Coordinates within an image")
+  @doc("The coordinates of the nose root right.")
   noseRootRight: LandmarkCoordinate;
 
-  @doc("Coordinates within an image")
+  @doc("The coordinates of the nose left alar top.")
   noseLeftAlarTop: LandmarkCoordinate;
 
-  @doc("Coordinates within an image")
+  @doc("The coordinates of the nose right alar top.")
   noseRightAlarTop: LandmarkCoordinate;
 
-  @doc("Coordinates within an image")
+  @doc("The coordinates of the nose left alar out tip.")
   noseLeftAlarOutTip: LandmarkCoordinate;
 
-  @doc("Coordinates within an image")
+  @doc("The coordinates of the nose right alar out tip.")
   noseRightAlarOutTip: LandmarkCoordinate;
 
-  @doc("Coordinates within an image")
+  @doc("The coordinates of the upper lip top.")
   upperLipTop: LandmarkCoordinate;
 
-  @doc("Coordinates within an image")
+  @doc("The coordinates of the upper lip bottom.")
   upperLipBottom: LandmarkCoordinate;
 
-  @doc("Coordinates within an image")
+  @doc("The coordinates of the under lip top.")
   underLipTop: LandmarkCoordinate;
 
-  @doc("Coordinates within an image")
+  @doc("The coordinates of the under lip bottom.")
   underLipBottom: LandmarkCoordinate;
 }
 
-@doc("Coordinates within an image.")
+@doc("Landmark coordinates within an image.")
 model LandmarkCoordinate {
   @doc("The horizontal component, in pixels.")
   x: float32;
@@ -204,10 +204,10 @@ model LandmarkCoordinate {
 
 @doc("Face attributes for the detected face.")
 model FaceAttributes {
-  @doc("Age in years")
+  @doc("Age in years.")
   age?: float32;
 
-  @doc("Smile intensity, a number between [0,1]")
+  @doc("Smile intensity, a number between [0,1].")
   @minValue(0)
   @maxValue(1)
   smile?: float32;
@@ -322,28 +322,28 @@ model HairColor {
 union HairColorType {
   string,
 
-  @doc("Unknown")
+  @doc("Unknown.")
   unknownHairColor: "unknown",
 
-  @doc("White")
+  @doc("White.")
   "white",
 
-  @doc("Gray")
+  @doc("Gray.")
   "gray",
 
-  @doc("Blond")
+  @doc("Blond.")
   "blond",
 
-  @doc("Brown")
+  @doc("Brown.")
   "brown",
 
-  @doc("Red")
+  @doc("Red.")
   "red",
 
-  @doc("Black")
+  @doc("Black.")
   "black",
 
-  @doc("Other")
+  @doc("Other.")
   "other",
 }
 
@@ -374,13 +374,13 @@ model AccessoryItem {
 union AccessoryType {
   string,
 
-  @doc("Head wear")
+  @doc("Head wear.")
   "headwear",
 
-  @doc("Glasses")
+  @doc("Glasses.")
   "glasses",
 
-  @doc("Mask")
+  @doc("Mask.")
   "mask",
 }
 
@@ -464,11 +464,11 @@ model MaskProperties {
   @doc("A boolean value indicating whether nose and mouth are covered.")
   noseAndMouthCovered: boolean;
 
-  @doc("Mask type if any of the face")
+  @doc("Type of the mask.")
   type: MaskType;
 }
 
-@doc("Mask type if any of the face")
+@doc("Type of the mask.")
 union MaskType {
   string,
 
@@ -481,7 +481,7 @@ union MaskType {
   @doc("Other types of mask or occlusion.")
   "otherMaskOrOcclusion",
 
-  @doc("Uncertain")
+  @doc("Uncertain.")
   "uncertain",
 }
 

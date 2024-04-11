@@ -1,5 +1,5 @@
 {
-  "title": "PersonDirectoryOperations_AddPersonFaceFromUrl",
+  "title": "Add Face to PersonDirectory Person from Url",
   "operationId": "PersonDirectoryOperations_AddPersonFaceFromUrl",
   "parameters": {
     "apiVersion": "v1.1-preview.1",
@@ -20,6 +20,70 @@
       },
       "body": {
         "persistedFaceId": "43897a75-8d6f-42cf-885e-74832febb055"
+      }
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "BadArgument",
+          "message": "JSON parsing error."
+        }
+      }
+    },
+    "401": {
+      "body": {
+        "error": {
+          "code": "Unspecified",
+          "message": "Access denied due to invalid subscription key. Make sure you are subscribed to an API you are trying to call and provide the right key."
+        }
+      }
+    },
+    "403": {
+      "body": {
+        "error": {
+          "code": "QuotaExceeded",
+          "message": "Persisted face number reached limit."
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "PersonNotFound",
+          "message": "Person is not found."
+        }
+      }
+    },
+    "408": {
+      "body": {
+        "error": {
+          "code": "OperationTimeOut",
+          "message": "Request Timeout."
+        }
+      }
+    },
+    "409": {
+      "body": {
+        "error": {
+          "code": "ConcurrentOperationConflict",
+          "message": "Concurrent operation conflict on requested resource."
+        }
+      }
+    },
+    "415": {
+      "body": {
+        "error": {
+          "code": "BadArgument",
+          "message": "Invalid Media Type."
+        }
+      }
+    },
+    "429": {
+      "body": {
+        "error": {
+          "statusCode": 429,
+          "message": "Rate limit is exceeded. Try again in 26 seconds."
+        }
       }
     }
   }

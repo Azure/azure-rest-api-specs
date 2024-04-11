@@ -1,5 +1,5 @@
 {
-  "title": "PersonDirectoryOperations_GetPersons",
+  "title": "Get Persons from PersonDirectory",
   "operationId": "PersonDirectoryOperations_GetPersons",
   "parameters": {
     "apiVersion": "v1.1-preview.1",
@@ -15,6 +15,38 @@
           "userData": "your user data"
         }
       ]
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "BadArgument",
+          "message": "'start' is not valid person id."
+        }
+      }
+    },
+    "401": {
+      "body": {
+        "error": {
+          "code": "Unspecified",
+          "message": "Access denied due to invalid subscription key. Make sure you are subscribed to an API you are trying to call and provide the right key."
+        }
+      }
+    },
+    "403": {
+      "body": {
+        "error": {
+          "statusCode": 403,
+          "message": "Out of call volume quota. Quota will be replenished in 2 days."
+        }
+      }
+    },
+    "429": {
+      "body": {
+        "error": {
+          "statusCode": 429,
+          "message": "Rate limit is exceeded. Try again in 26 seconds."
+        }
+      }
     }
   }
 }

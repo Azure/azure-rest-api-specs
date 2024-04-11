@@ -47,7 +47,8 @@ op IdentifyOperation<T extends TypeSpec.Reflection.Model> is Azure.Core.RpcOpera
     confidenceThreshold?: float32;
   },
   Body<IdentificationResult[]>,
-  ServiceTraits
+  ServiceTraits,
+  FaceErrorResponse
 >;
 
 @doc("""
@@ -63,16 +64,17 @@ op IdentifyOperation<T extends TypeSpec.Reflection.Model> is Azure.Core.RpcOpera
 op VerifyOperation<T extends TypeSpec.Reflection.Model> is Azure.Core.RpcOperation<
   T,
   VerificationResult,
-  ServiceTraits
+  ServiceTraits,
+  FaceErrorResponse
 >;
 
 @doc("""
-Depending on the input the returned similar faces list contains faceIds or persistedFaceIds ranked by similarity.
+  Depending on the input the returned similar faces list contains faceIds or persistedFaceIds ranked by similarity.
 
-Find similar has two working modes, "matchPerson" and "matchFace". "matchPerson" is the default mode that it tries to find faces of the same person as possible by using internal same-person thresholds. It is useful to find a known person's other photos. Note that an empty list will be returned if no faces pass the internal thresholds. "matchFace" mode ignores same-person thresholds and returns ranked similar faces anyway, even the similarity is low. It can be used in the cases like searching celebrity-looking faces.
+  Find similar has two working modes, "matchPerson" and "matchFace". "matchPerson" is the default mode that it tries to find faces of the same person as possible by using internal same-person thresholds. It is useful to find a known person's other photos. Note that an empty list will be returned if no faces pass the internal thresholds. "matchFace" mode ignores same-person thresholds and returns ranked similar faces anyway, even the similarity is low. It can be used in the cases like searching celebrity-looking faces.
 
-The 'recognitionModel' associated with the query face's faceId should be the same as the 'recognitionModel' used by the target faceId array, face list or large face list.
-""")
+  The 'recognitionModel' associated with the query face's faceId should be the same as the 'recognitionModel' used by the target faceId array, face list or large face list.
+  """)
 @returnsDoc("A successful call returns an array of the most similar faces represented in faceId if the input parameter is faceIds or persistedFaceId if the input parameter is faceListId or largeFaceListId.")
 @sharedRoute
 @post
@@ -91,7 +93,8 @@ op FindSimilarOperation<T extends TypeSpec.Reflection.Model> is Azure.Core.RpcOp
     ...T;
   },
   Body<FindSimilarResult[]>,
-  ServiceTraits
+  ServiceTraits,
+  FaceErrorResponse
 >;
 
 interface FaceRecognitionOperations {
@@ -195,11 +198,13 @@ interface FaceRecognitionOperations {
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path."
   @summary("Divide candidate faces into groups based on face similarity.")
   @doc("""
-  * The output is one or more disjointed face groups and a messyGroup. A face group contains faces that have similar looking, often of the same person. Face groups are ranked by group size, i.e. number of faces. Notice that faces belonging to a same person might be split into several groups in the result.
-  * MessyGroup is a special face group containing faces that cannot find any similar counterpart face from original faces. The messyGroup will not appear in the result if all faces found their counterparts.
-  * Group API needs at least 2 candidate faces and 1000 at most. We suggest to try Face - Verify when you only have 2 candidate faces.
-  * The 'recognitionModel' associated with the query faces' faceIds should be the same.
-  """)
+    >
+    *
+      * The output is one or more disjointed face groups and a messyGroup. A face group contains faces that have similar looking, often of the same person. Face groups are ranked by group size, i.e. number of faces. Notice that faces belonging to a same person might be split into several groups in the result.
+      * MessyGroup is a special face group containing faces that cannot find any similar counterpart face from original faces. The messyGroup will not appear in the result if all faces found their counterparts.
+      * Group API needs at least 2 candidate faces and 1000 at most. We suggest to try Face - Verify when you only have 2 candidate faces.
+      * The 'recognitionModel' associated with the query faces' faceIds should be the same.
+    """)
   @returnsDoc("A successful call returns one or more groups of similar faces (rank by group size) and a messyGroup.")
   @post
   @route("/face/{apiVersion}/group")
@@ -209,6 +214,7 @@ interface FaceRecognitionOperations {
       faceIds: uuid[];
     },
     GroupingResult,
-    ServiceTraits
+    ServiceTraits,
+    FaceErrorResponse
   >;
 }

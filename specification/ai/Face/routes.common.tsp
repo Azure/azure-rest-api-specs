@@ -19,6 +19,8 @@ alias ServiceTraits = NoClientRequestId &
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 
+alias SuccessfulCallWithEmptyBody = "A successful call returns an empty response body.";
+
 @createsResource(TResource)
 op FaceResourceCreateWithServiceProvidedName<
   TResource extends TypeSpec.Reflection.Model,
@@ -28,7 +30,8 @@ op FaceResourceCreateWithServiceProvidedName<
   TResource,
   TParams,
   TResponse,
-  ServiceTraits
+  ServiceTraits,
+  FaceErrorResponse
 >;
 
 @createsOrReplacesResource(TResource)
@@ -36,9 +39,11 @@ op FaceCollectionResourceCreateOperation<TResource extends TypeSpec.Reflection.M
   TResource,
   CreateCollectionOptions,
   TypeSpec.Http.OkResponse,
-  ServiceTraits
+  ServiceTraits,
+  FaceErrorResponse
 >;
 
+alias AddFaceSuccess = "A successful call returns a new persistedFaceId.";
 #suppress "@azure-tools/typespec-azure-core/byos" "It's a template."
 @sharedRoute
 @createsResource(TFace)
@@ -54,7 +59,8 @@ op AddFace<TFace extends BaseFace> is Foundations.ResourceCollectionOperation<
     imageContent: bytes;
   },
   AddFaceResult,
-  ServiceTraits
+  ServiceTraits,
+  FaceErrorResponse
 >;
 
 @sharedRoute
@@ -66,7 +72,8 @@ op AddFaceFromUrl<TFace extends BaseFace> is Foundations.ResourceCollectionOpera
     url: url;
   },
   AddFaceResult,
-  ServiceTraits
+  ServiceTraits,
+  FaceErrorResponse
 >;
 
 @updatesResource(TResource)
@@ -77,7 +84,8 @@ op FaceResourceUpdateOperation<
   TResource,
   TParams,
   OkResponse,
-  ServiceTraits
+  ServiceTraits,
+  FaceErrorResponse
 >;
 
 op FaceResourceListOperation<
@@ -88,7 +96,8 @@ op FaceResourceListOperation<
   TResource,
   ListRequestOptions & TQuery,
   Body<TResourceItem[]>,
-  ServiceTraits
+  ServiceTraits,
+  FaceErrorResponse
 >;
 
 @deletesResource(TResource)
@@ -96,7 +105,8 @@ op FaceResourceDeleteOperation<TResource extends TypeSpec.Reflection.Model> is F
   TResource,
   {},
   TypeSpec.Http.OkResponse,
-  ServiceTraits
+  ServiceTraits,
+  FaceErrorResponse
 >;
 
 op FaceResourceReadOperationWithReturnRecognitionModelOptions<TResource extends TypeSpec.Reflection.Model> is Operations.ResourceRead<
@@ -123,5 +133,6 @@ op FaceResourceGetTrainingStatus<TResource extends TypeSpec.Reflection.Model> is
   TResource,
   {},
   TrainingStatus,
-  ServiceTraits
+  ServiceTraits,
+  FaceErrorResponse
 >;

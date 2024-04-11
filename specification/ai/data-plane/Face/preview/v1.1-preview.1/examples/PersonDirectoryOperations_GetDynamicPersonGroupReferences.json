@@ -1,5 +1,5 @@
 {
-  "title": "PersonDirectoryOperations_GetDynamicPersonGroupReferences",
+  "title": "Get DynamicPersonGroup References",
   "operationId": "PersonDirectoryOperations_GetDynamicPersonGroupReferences",
   "parameters": {
     "apiVersion": "v1.1-preview.1",
@@ -13,6 +13,46 @@
         "dynamicPersonGroupIds": [
           "your_dynamic_person_group_id"
         ]
+      }
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "BadArgument",
+          "message": "'start' is not valid."
+        }
+      }
+    },
+    "401": {
+      "body": {
+        "error": {
+          "code": "Unspecified",
+          "message": "Access denied due to invalid subscription key. Make sure you are subscribed to an API you are trying to call and provide the right key."
+        }
+      }
+    },
+    "403": {
+      "body": {
+        "error": {
+          "statusCode": 403,
+          "message": "Out of call volume quota. Quota will be replenished in 2 days."
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "PersonNotFound",
+          "message": "Person ID is invalid."
+        }
+      }
+    },
+    "429": {
+      "body": {
+        "error": {
+          "statusCode": 429,
+          "message": "Rate limit is exceeded. Try again in 26 seconds."
+        }
       }
     }
   }

@@ -1,5 +1,5 @@
 {
-  "title": "PersonGroupOperations_CreateLargePersonGroupPerson",
+  "title": "Create Person in LargePersonGroup",
   "operationId": "PersonGroupOperations_CreateLargePersonGroupPerson",
   "parameters": {
     "apiVersion": "v1.1-preview.1",
@@ -13,6 +13,54 @@
     "200": {
       "body": {
         "personId": "25985303-c537-4467-b41d-bdb45cd95ca1"
+      }
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "BadArgument",
+          "message": "'name' is too long."
+        }
+      }
+    },
+    "401": {
+      "body": {
+        "error": {
+          "code": "Unspecified",
+          "message": "Access denied due to invalid subscription key. Make sure you are subscribed to an API you are trying to call and provide the right key."
+        }
+      }
+    },
+    "403": {
+      "body": {
+        "error": {
+          "code": "QuotaExceeded",
+          "message": "Person number reached subscription level limit."
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "LargePersonGroupNotFound",
+          "message": "Large person group is not found."
+        }
+      }
+    },
+    "415": {
+      "body": {
+        "error": {
+          "code": "BadArgument",
+          "message": "Invalid Media Type."
+        }
+      }
+    },
+    "429": {
+      "body": {
+        "error": {
+          "statusCode": 429,
+          "message": "Rate limit is exceeded. Try again in 26 seconds."
+        }
       }
     }
   }

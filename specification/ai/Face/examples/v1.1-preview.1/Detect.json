@@ -176,6 +176,54 @@
           }
         }
       ]
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "InvalidImageSize",
+          "message": "Image size is too small. The valid image file size should be larger than or equal to 1KB."
+        }
+      }
+    },
+    "401": {
+      "body": {
+        "error": {
+          "code": "Unspecified",
+          "message": "Access denied due to invalid subscription key. Make sure you are subscribed to an API you are trying to call and provide the right key."
+        }
+      }
+    },
+    "403": {
+      "body": {
+        "error": {
+          "statusCode": 403,
+          "message": "Out of call volume quota. Quota will be replenished in 2 days."
+        }
+      }
+    },
+    "408": {
+      "body": {
+        "error": {
+          "code": "OperationTimeOut",
+          "message": "Request Timeout."
+        }
+      }
+    },
+    "415": {
+      "body": {
+        "error": {
+          "code": "BadArgument",
+          "message": "Invalid Media Type."
+        }
+      }
+    },
+    "429": {
+      "body": {
+        "error": {
+          "statusCode": 429,
+          "message": "Rate limit is exceeded. Try again in 26 seconds."
+        }
+      }
     }
   }
 }

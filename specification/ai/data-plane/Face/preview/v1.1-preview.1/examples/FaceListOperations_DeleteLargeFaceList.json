@@ -1,11 +1,43 @@
 {
-  "title": "FaceListOperations_DeleteLargeFaceList",
+  "title": "Delete LargeFaceList",
   "operationId": "FaceListOperations_DeleteLargeFaceList",
   "parameters": {
     "apiVersion": "v1.1-preview.1",
     "largeFaceListId": "your_large_face_list_id"
   },
   "responses": {
-    "200": {}
+    "200": {},
+    "401": {
+      "body": {
+        "error": {
+          "code": "Unspecified",
+          "message": "Access denied due to invalid subscription key. Make sure you are subscribed to an API you are trying to call and provide the right key."
+        }
+      }
+    },
+    "403": {
+      "body": {
+        "error": {
+          "statusCode": 403,
+          "message": "Out of call volume quota. Quota will be replenished in 2 days."
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "LargeFaceListNotFound",
+          "message": "Large face list is not found."
+        }
+      }
+    },
+    "429": {
+      "body": {
+        "error": {
+          "statusCode": 429,
+          "message": "Rate limit is exceeded. Try again in 26 seconds."
+        }
+      }
+    }
   }
 }

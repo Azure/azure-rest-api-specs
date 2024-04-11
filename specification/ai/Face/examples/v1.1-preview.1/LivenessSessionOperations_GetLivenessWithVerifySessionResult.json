@@ -1,5 +1,5 @@
 {
-  "title": "LivenessSessionOperations_GetLivenessWithVerifySessionResult",
+  "title": "Get LivenessWithVerify Session Result",
   "operationId": "LivenessSessionOperations_GetLivenessWithVerifySessionResult",
   "parameters": {
     "apiVersion": "v1.1-preview.1",
@@ -34,6 +34,47 @@
             "latencyInMilliseconds": 1200
           },
           "digest": "1CC98BA83EAF1D0FF7F566FAEFCCCC787819FFA01251E2D9299143F7AD6651DB"
+        }
+      }
+    },
+    "401": {
+      "body": {
+        "error": {
+          "code": "Unspecified",
+          "message": "Access denied due to invalid subscription key. Make sure you are subscribed to an API you are trying to call and provide the right key."
+        }
+      }
+    },
+    "403": {
+      "body": {
+        "error": {
+          "statusCode": 403,
+          "message": "Out of call volume quota. Quota will be replenished in 2 days."
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "SessionNotFound",
+          "message": "Session Id is not found. The session id is expired or does not exist."
+        }
+      }
+    },
+    "415": {
+      "body": {
+        "error": {
+          "code": "BadArgument",
+          "message": "Invalid Media Type."
+        }
+      }
+      
+    },
+    "429": {
+      "body": {
+        "error": {
+          "statusCode": 429,
+          "message": "Rate limit is exceeded. Try again in 26 seconds."
         }
       }
     }

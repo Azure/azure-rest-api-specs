@@ -1,5 +1,5 @@
 {
-  "title": "FaceRecognitionOperations_FindSimilarFromFaceList",
+  "title": "Find Similar from FaceList",
   "operationId": "FaceRecognitionOperations_FindSimilarFromFaceList",
   "parameters": {
     "apiVersion": "v1.1-preview.1",
@@ -18,6 +18,46 @@
           "faceId": "015839fb-fbd9-4f79-ace9-7675fc2f1dd9"
         }
       ]
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "BadArgument",
+          "message": "Request body is invalid."
+        }
+      }
+    },
+    "401": {
+      "body": {
+        "error": {
+          "code": "Unspecified",
+          "message": "Access denied due to invalid subscription key. Make sure you are subscribed to an API you are trying to call and provide the right key."
+        }
+      }
+    },
+    "403": {
+      "body": {
+        "error": {
+          "statusCode": 403,
+          "message": "Out of call volume quota. Quota will be replenished in 2 days."
+        }
+      }
+    },
+    "415": {
+      "body": {
+        "error": {
+          "code": "BadArgument",
+          "message": "Invalid Media Type."
+        }
+      }
+    },
+    "429": {
+      "body": {
+        "error": {
+          "statusCode": 429,
+          "message": "Rate limit is exceeded. Try again in 26 seconds."
+        }
+      }
     }
   }
 }

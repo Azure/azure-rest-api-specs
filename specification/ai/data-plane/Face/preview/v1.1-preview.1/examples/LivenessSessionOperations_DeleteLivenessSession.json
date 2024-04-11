@@ -1,11 +1,52 @@
 {
-  "title": "LivenessSessionOperations_DeleteLivenessSession",
+  "title": "Delete Liveness Session",
   "operationId": "LivenessSessionOperations_DeleteLivenessSession",
   "parameters": {
     "apiVersion": "v1.1-preview.1",
     "sessionId": "b12e033e-bda7-4b83-a211-e721c661f30e"
   },
   "responses": {
-    "200": {}
+    "200": {},
+    "401": {
+      "body": {
+        "error": {
+          "code": "Unspecified",
+          "message": "Access denied due to invalid subscription key. Make sure you are subscribed to an API you are trying to call and provide the right key."
+        }
+      }
+    },
+    "403": {
+      "body": {
+        "error": {
+          "statusCode": 403,
+          "message": "Out of call volume quota. Quota will be replenished in 2 days."
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "SessionNotFound",
+          "message": "Session Id is not found. The session id is expired or does not exist."
+        }
+      }
+    },
+    "415": {
+      "body": {
+        "error": {
+          "code": "BadArgument",
+          "message": "Invalid Media Type."
+        }
+      }
+      
+    },
+    "429": {
+      "body": {
+        "error": {
+          "statusCode": 429,
+          "message": "Rate limit is exceeded. Try again in 26 seconds."
+        }
+      }
+    }
   }
 }

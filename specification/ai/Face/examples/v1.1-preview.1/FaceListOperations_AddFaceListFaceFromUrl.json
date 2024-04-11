@@ -1,5 +1,5 @@
 {
-  "title": "FaceListOperations_AddFaceListFaceFromUrl",
+  "title": "Add Face to FaceList from Url",
   "operationId": "FaceListOperations_AddFaceListFaceFromUrl",
   "parameters": {
     "apiVersion": "v1.1-preview.1",
@@ -15,6 +15,70 @@
     "200": {
       "body": {
         "persistedFaceId": "43897a75-8d6f-42cf-885e-74832febb055"
+      }
+    },
+    "400": {
+      "body": {
+        "error": {
+          "code": "BadArgument",
+          "message": "JSON parsing error."
+        }
+      }
+    },
+    "401": {
+      "body": {
+        "error": {
+          "code": "Unspecified",
+          "message": "Access denied due to invalid subscription key. Make sure you are subscribed to an API you are trying to call and provide the right key."
+        }
+      }
+    },
+    "403": {
+      "body": {
+        "error": {
+          "code": "QuotaExceeded",
+          "message": "Face number reached limit."
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "FaceListNotFound",
+          "message": "Face list is not found."
+        }
+      }
+    },
+    "408": {
+      "body": {
+        "error": {
+          "code": "OperationTimeOut",
+          "message": "Request Timeout."
+        }
+      }
+    },
+    "409": {
+      "body": {
+        "error": {
+          "code": "ConcurrentOperationConflict",
+          "message": "There is a conflict operation on requested resource, please try later."
+        }
+      }
+    },
+    "415": {
+      "body": {
+        "error": {
+          "code": "BadArgument",
+          "message": "Invalid Media Type."
+        }
+      }
+    },
+    "429": {
+      "body": {
+        "error": {
+          "statusCode": 429,
+          "message": "Rate limit is exceeded. Try again in 26 seconds."
+        }
       }
     }
   }

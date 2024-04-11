@@ -65,7 +65,7 @@
       "post": {
         "operationId": "FaceDetectionOperations_Detect",
         "summary": "Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.",
-        "description": "> [!IMPORTANT]\n> To mitigate potential misuse that can subject people to stereotyping, discrimination, or unfair denial of services, we are retiring Face API attributes that predict emotion, gender, age, smile, facial hair, hair, and makeup. Read more about this decision https://azure.microsoft.com/en-us/blog/responsible-ai-investments-and-safeguards-for-facial-recognition/. We will also retire the Snapshot API, which allowed biometric data transfer from one Face subscription to another. Existing customers have until 30 June 2023 to use the emotion, gender, age, smile, facial hair, hair, and makeup attributes and the Snapshot API through Face API before they are retired.\n\n* No image will be stored. Only the extracted face feature(s) will be stored on server. The faceId is an identifier of the face feature and will be used in Face - Identify, Face - Verify, and Face - Find Similar. The stored face features will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.\n* Optional parameters include faceId, landmarks, and attributes. Attributes include headPose, glasses, occlusion, accessories, blur, exposure, noise, mask, and qualityForRecognition. Some of the results returned for specific attributes may not be highly accurate.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n* For optimal results when querying Face - Identify, Face - Verify, and Face - Find Similar ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n  * 'detection_01': The default detection model for Face - Detect. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n  * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. Face attributes and landmarks are disabled if you choose this detection model.\n  * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces. Face attributes (mask and headPose only) and landmarks are supported if you choose this detection model.\n* Different 'recognitionModel' values are provided. If follow-up operations like Verify, Identify, Find Similar are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-recognition-model.\n  * 'recognition_01': The default recognition model for Face - Detect. All those faceIds created before 2019 March are bonded with this recognition model.\n  * 'recognition_02': Recognition model released in 2019 March.\n  * 'recognition_03': Recognition model released in 2020 May.\n  * 'recognition_04': Recognition model released in 2021 February. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.",
+        "description": "> [!IMPORTANT]\n> To mitigate potential misuse that can subject people to stereotyping, discrimination, or unfair denial of services, we are retiring Face API attributes that predict emotion, gender, age, smile, facial hair, hair, and makeup. Read more about this decision https://azure.microsoft.com/en-us/blog/responsible-ai-investments-and-safeguards-for-facial-recognition/. We will also retire the Snapshot API, which allowed biometric data transfer from one Face subscription to another. Existing customers have until 30 June 2023 to use the emotion, gender, age, smile, facial hair, hair, and makeup attributes and the Snapshot API through Face API before they are retired.\n\n*\n  * No image will be stored. Only the extracted face feature(s) will be stored on server. The faceId is an identifier of the face feature and will be used in Face - Identify, Face - Verify, and Face - Find Similar. The stored face features will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.\n  * Optional parameters include faceId, landmarks, and attributes. Attributes include headPose, glasses, occlusion, accessories, blur, exposure, noise, mask, and qualityForRecognition. Some of the results returned for specific attributes may not be highly accurate.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n  * For optimal results when querying Face - Identify, Face - Verify, and Face - Find Similar ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n    * 'detection_01': The default detection model for Face - Detect. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n    * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. Face attributes and landmarks are disabled if you choose this detection model.\n    * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces. Face attributes (mask and headPose only) and landmarks are supported if you choose this detection model.\n  * Different 'recognitionModel' values are provided. If follow-up operations like Verify, Identify, Find Similar are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-recognition-model.\n    * 'recognition_01': The default recognition model for Face - Detect. All those faceIds created before 2019 March are bonded with this recognition model.\n    * 'recognition_02': Recognition model released in 2019 March.\n    * 'recognition_03': Recognition model released in 2020 May.\n    * 'recognition_04': Recognition model released in 2021 February. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.",
         "consumes": [
           "application/octet-stream"
         ],
@@ -280,7 +280,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -301,7 +301,7 @@
       "get": {
         "operationId": "LivenessSessionOperations_GetLivenessSessions",
         "summary": "Lists sessions for /detectLiveness/SingleModal.",
-        "description": "List sessions from the last sessionId greater than the 'start'.\nThe result should be ordered by sessionId in ascending order.",
+        "description": "List sessions from the last sessionId greater than the 'start'.\n\nThe result should be ordered by sessionId in ascending order.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionPathParameter"
@@ -338,7 +338,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -349,7 +349,7 @@
           }
         },
         "x-ms-examples": {
-          "LivenessSessionOperations_GetLivenessSessions": {
+          "Get LivenessSessions": {
             "$ref": "./examples/LivenessSessionOperations_GetLivenessSessions.json"
           }
         }
@@ -357,7 +357,7 @@
       "post": {
         "operationId": "LivenessSessionOperations_CreateLivenessSession",
         "summary": "Create a new detect liveness session.",
-        "description": "A session is best for client device scenarios where developers want to authorize a client device to perform only a liveness detection without granting full access to their resource. Created sessions have a limited life span and only authorize clients to perform the desired action before access is expired.\n\nPermissions includes...\n* Ability to call /detectLiveness/singleModal for up to 3 reties.\n* A token lifetime of 10 minutes.\n\n> [!NOTE]\n> Client access can be revoked by deleting the session using the Delete Liveness Session operation. To retrieve a result, use the Get Liveness Session. To audit the individual requests that a client has made to your resource, use the List Liveness Session Audit Entries.",
+        "description": "A session is best for client device scenarios where developers want to authorize a client device to perform only a liveness detection without granting full access to their resource. Created sessions have a limited life span and only authorize clients to perform the desired action before access is expired.\n\nPermissions includes...\n>\n*\n  * Ability to call /detectLiveness/singleModal for up to 3 reties.\n  * A token lifetime of 10 minutes.\n\n> [!NOTE]\n> Client access can be revoked by deleting the session using the Delete Liveness Session operation. To retrieve a result, use the Get Liveness Session. To audit the individual requests that a client has made to your resource, use the List Liveness Session Audit Entries.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionPathParameter"
@@ -381,7 +381,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -392,7 +392,7 @@
           }
         },
         "x-ms-examples": {
-          "LivenessSessionOperations_CreateLivenessSession": {
+          "Create Liveness Session": {
             "$ref": "./examples/LivenessSessionOperations_CreateLivenessSession.json"
           }
         }
@@ -435,7 +435,7 @@
           }
         },
         "x-ms-examples": {
-          "LivenessSessionOperations_GetLivenessSessionResult": {
+          "Get LivenessSession Result": {
             "$ref": "./examples/LivenessSessionOperations_GetLivenessSessionResult.json"
           }
         }
@@ -463,7 +463,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -474,7 +474,7 @@
           }
         },
         "x-ms-examples": {
-          "LivenessSessionOperations_DeleteLivenessSession": {
+          "Delete Liveness Session": {
             "$ref": "./examples/LivenessSessionOperations_DeleteLivenessSession.json"
           }
         }
@@ -527,7 +527,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -538,7 +538,7 @@
           }
         },
         "x-ms-examples": {
-          "LivenessSessionOperations_GetLivenessSessionAuditEntries": {
+          "Get LivenessSession Audit Entries": {
             "$ref": "./examples/LivenessSessionOperations_GetLivenessSessionAuditEntries.json"
           }
         }
@@ -548,7 +548,7 @@
       "get": {
         "operationId": "LivenessSessionOperations_GetLivenessWithVerifySessions",
         "summary": "Lists sessions for /detectLivenessWithVerify/SingleModal.",
-        "description": "List sessions from the last sessionId greater than the \"start\".\nThe result should be ordered by sessionId in ascending order.",
+        "description": "List sessions from the last sessionId greater than the \"start\".\n\nThe result should be ordered by sessionId in ascending order.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionPathParameter"
@@ -585,7 +585,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -596,7 +596,7 @@
           }
         },
         "x-ms-examples": {
-          "LivenessSessionOperations_GetLivenessWithVerifySessions": {
+          "Get LivenessWithVerify Sessions": {
             "$ref": "./examples/LivenessSessionOperations_GetLivenessWithVerifySessions.json"
           }
         }
@@ -604,7 +604,7 @@
       "post": {
         "operationId": "LivenessSessionOperations_CreateLivenessWithVerifySessionWithVerifyImage",
         "summary": "Create a new liveness session with verify. Provide the verify image during session creation.",
-        "description": "A session is best for client device scenarios where developers want to authorize a client device to perform only a liveness detection without granting full access to their resource. Created sessions have a limited life span and only authorize clients to perform the desired action before access is expired.\n\nPermissions includes...\n* Ability to call /detectLivenessWithVerify/singleModal for up to 3 reties.\n* A token lifetime of 10 minutes.\n\n> [!NOTE]\n> Client access can be revoked by deleting the session using the Delete Liveness With Verify Session operation. To retrieve a result, use the Get Liveness With Verify Session. To audit the individual requests that a client has made to your resource, use the List Liveness With Verify Session Audit Entries.\n\nRecommended Option: VerifyImage is provided during session creation.",
+        "description": "A session is best for client device scenarios where developers want to authorize a client device to perform only a liveness detection without granting full access to their resource. Created sessions have a limited life span and only authorize clients to perform the desired action before access is expired.\n\nPermissions includes...\n*\n  * Ability to call /detectLivenessWithVerify/singleModal for up to 3 reties.\n  * A token lifetime of 10 minutes.\n\n> [!NOTE]\n> Client access can be revoked by deleting the session using the Delete Liveness With Verify Session operation. To retrieve a result, use the Get Liveness With Verify Session. To audit the individual requests that a client has made to your resource, use the List Liveness With Verify Session Audit Entries.\n\nRecommended Option: VerifyImage is provided during session creation.",
         "consumes": [
           "multipart/form-data"
         ],
@@ -629,7 +629,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -640,7 +640,7 @@
           }
         },
         "x-ms-examples": {
-          "LivenessSessionOperations_CreateLivenessWithVerifySessionWithVerifyImage": {
+          "Create LivenessWithVerify Session with VerifyImage": {
             "$ref": "./examples/LivenessSessionOperations_CreateLivenessWithVerifySessionWithVerifyImage.json"
           }
         }
@@ -683,7 +683,7 @@
           }
         },
         "x-ms-examples": {
-          "LivenessSessionOperations_GetLivenessWithVerifySessionResult": {
+          "Get LivenessWithVerify Session Result": {
             "$ref": "./examples/LivenessSessionOperations_GetLivenessWithVerifySessionResult.json"
           }
         }
@@ -711,7 +711,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -722,7 +722,7 @@
           }
         },
         "x-ms-examples": {
-          "LivenessSessionOperations_DeleteLivenessWithVerifySession": {
+          "Delete LivenessWithVerify Session": {
             "$ref": "./examples/LivenessSessionOperations_DeleteLivenessWithVerifySession.json"
           }
         }
@@ -775,7 +775,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -786,7 +786,7 @@
           }
         },
         "x-ms-examples": {
-          "LivenessSessionOperations_GetLivenessWithVerifySessionAuditEntries": {
+          "Get LivenessWithVerify Session Audit Entries": {
             "$ref": "./examples/LivenessSessionOperations_GetLivenessWithVerifySessionAuditEntries.json"
           }
         }
@@ -796,7 +796,7 @@
       "get": {
         "operationId": "PersonDirectoryOperations_GetDynamicPersonGroups",
         "summary": "List all existing dynamic person groups by dynamicPersonGroupId along with name and userData.",
-        "description": "* Dynamic person groups are stored in alphabetical order of dynamicPersonGroupId.\n* \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n* \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
+        "description": "Dynamic person groups are stored in alphabetical order of dynamicPersonGroupId.\n>\n*\n  * \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n  * \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionPathParameter"
@@ -822,7 +822,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns an array of dynamic person groups and their information (dynamicPersonGroupId, name and userData).",
             "schema": {
               "type": "array",
               "items": {
@@ -834,7 +834,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -845,7 +845,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonDirectoryOperations_GetDynamicPersonGroups": {
+          "Get DynamicPersonGroups": {
             "$ref": "./examples/PersonDirectoryOperations_GetDynamicPersonGroups.json"
           }
         }
@@ -892,7 +892,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonDirectoryOperations_GetDynamicPersonGroup": {
+          "Get DynamicPersonGroup": {
             "$ref": "./examples/PersonDirectoryOperations_GetDynamicPersonGroup.json"
           }
         }
@@ -900,7 +900,7 @@
       "put": {
         "operationId": "PersonDirectoryOperations_CreateDynamicPersonGroup",
         "summary": "Creates a new dynamic person group with specified dynamicPersonGroupId, name, and user-provided userData.",
-        "description": "A dynamic person group is a container that references PersonDirectory Person - Create. After creation, use PersonDirectory DynamicPersonGroup - Update to add or remove persons into the dynamic person group. DynamicPersonGroup and UserData will be stored on server until PersonDirectory DynamicPersonGroup - Delete is called. Use Face - Identify with the dynamicPersonGroupId parameter to identify against persons.\nNo image will be stored. Only the person's extracted face feature(s) and userData will be stored on server until PersonDirectory Person - Delete or PersonDirectory Person - Delete Face is called.\n\n'recognitionModel' does not need to be specified with dynamic person groups. Dynamic person groups are references to PersonDirectory Person - Create and therefore work with most all 'recognitionModels'. The faceId's provided during Face - Identify determine the 'recognitionModel' used.",
+        "description": "A dynamic person group is a container that references PersonDirectory Person - Create. After creation, use PersonDirectory DynamicPersonGroup - Update to add or remove persons into the dynamic person group. DynamicPersonGroup and UserData will be stored on server until PersonDirectory DynamicPersonGroup - Delete is called. Use Face - Identify with the dynamicPersonGroupId parameter to identify against persons.\n\nNo image will be stored. Only the person's extracted face feature(s) and userData will be stored on server until PersonDirectory Person - Delete or PersonDirectory Person - Delete Face is called.\n\n'recognitionModel' does not need to be specified with dynamic person groups. Dynamic person groups are references to PersonDirectory Person - Create and therefore work with most all 'recognitionModels'. The faceId's provided during Face - Identify determine the 'recognitionModel' used.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionPathParameter"
@@ -964,7 +964,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -975,7 +975,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonDirectoryOperations_CreateDynamicPersonGroup": {
+          "Create DynamicPersonGroup": {
             "$ref": "./examples/PersonDirectoryOperations_CreateDynamicPersonGroup.json"
           }
         }
@@ -1051,7 +1051,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -1062,7 +1062,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonDirectoryOperations_UpdateDynamicPersonGroup": {
+          "Update DynamicPersonGroup": {
             "$ref": "./examples/PersonDirectoryOperations_UpdateDynamicPersonGroup.json"
           }
         }
@@ -1100,7 +1100,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -1111,7 +1111,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonDirectoryOperations_DeleteDynamicPersonGroup": {
+          "Delete DynamicPersonGroup": {
             "$ref": "./examples/PersonDirectoryOperations_DeleteDynamicPersonGroup.json"
           }
         },
@@ -1122,7 +1122,7 @@
       "get": {
         "operationId": "PersonDirectoryOperations_GetDynamicPersonGroupPersons",
         "summary": "List all persons in the specified dynamic person group.",
-        "description": "* Persons are stored in alphabetical order of personId created in PersonDirectory Person - Create.\n* \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n* \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
+        "description": "Persons are stored in alphabetical order of personId created in PersonDirectory Person - Create.\n>\n*\n  * \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n  * \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionPathParameter"
@@ -1158,7 +1158,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns an array of person information in the person directory.",
             "schema": {
               "$ref": "#/definitions/ListPersonResult"
             }
@@ -1166,7 +1166,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -1177,7 +1177,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonDirectoryOperations_GetDynamicPersonGroupPersons": {
+          "Get DynamicPersonGroup Persons": {
             "$ref": "./examples/PersonDirectoryOperations_GetDynamicPersonGroupPersons.json"
           }
         }
@@ -1186,7 +1186,7 @@
     "/face/{apiVersion}/facelists": {
       "get": {
         "operationId": "FaceListOperations_GetFaceLists",
-        "description": "List face lists' faceListId, name, userData and recognitionModel.\nTo get face information inside faceList use Get Face List.",
+        "description": "List face lists' faceListId, name, userData and recognitionModel.\n\nTo get face information inside faceList use Get Face List.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionPathParameter"
@@ -1202,7 +1202,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns an array of faceList.",
             "schema": {
               "type": "array",
               "items": {
@@ -1214,7 +1214,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -1225,7 +1225,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceListOperations_GetFaceLists": {
+          "Get FaceLists": {
             "$ref": "./examples/FaceListOperations_GetFaceLists.json"
           }
         }
@@ -1260,7 +1260,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns the face list's information.",
             "schema": {
               "$ref": "#/definitions/FaceList"
             }
@@ -1279,7 +1279,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceListOperations_GetFaceList": {
+          "Get FaceList": {
             "$ref": "./examples/FaceListOperations_GetFaceList.json"
           }
         }
@@ -1287,7 +1287,7 @@
       "put": {
         "operationId": "FaceListOperations_CreateFaceList",
         "summary": "Create an empty face list with user-specified faceListId, name, an optional userData and recognitionModel.",
-        "description": "Up to 64 face lists are allowed in one subscription.\nFace list is a list of faces, up to 1,000 faces, and used by Face - Find Similar.\nAfter creation, user should use FaceList - Add Face to import the faces. No image will be stored. Only the extracted face feature(s) will be stored on server until FaceList - Delete is called.\nFind Similar is used for scenario like finding celebrity-like faces, similar face filtering, or as a light way face identification. But if the actual use is to identify person, please use PersonGroup / LargePersonGroup and Face - Identify.\nPlease consider LargeFaceList when the face number is large. It can support up to 1,000,000 faces.",
+        "description": "Up to 64 face lists are allowed in one subscription.\n\nFace list is a list of faces, up to 1,000 faces, and used by Face - Find Similar.\n\nAfter creation, user should use FaceList - Add Face to import the faces. No image will be stored. Only the extracted face feature(s) will be stored on server until FaceList - Delete is called.\n\nFind Similar is used for scenario like finding celebrity-like faces, similar face filtering, or as a light way face identification. But if the actual use is to identify person, please use PersonGroup / LargePersonGroup and Face - Identify.\n\nPlease consider LargeFaceList when the face number is large. It can support up to 1,000,000 faces.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionPathParameter"
@@ -1371,7 +1371,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -1382,7 +1382,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceListOperations_CreateFaceList": {
+          "Create FaceList": {
             "$ref": "./examples/FaceListOperations_CreateFaceList.json"
           }
         }
@@ -1433,7 +1433,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -1444,7 +1444,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceListOperations_UpdateFaceList": {
+          "Update FaceList": {
             "$ref": "./examples/FaceListOperations_UpdateFaceList.json"
           }
         }
@@ -1474,7 +1474,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -1485,7 +1485,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceListOperations_DeleteFaceList": {
+          "Delete FaceList": {
             "$ref": "./examples/FaceListOperations_DeleteFaceList.json"
           }
         }
@@ -1495,7 +1495,7 @@
       "post": {
         "operationId": "FaceListOperations_AddFaceListFace",
         "summary": "Add a face to a specified face list, up to 1,000 faces.",
-        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until FaceList - Delete Face or FaceList - Delete is called.\nNote persistedFaceId is different from faceId generated by Face - Detect.\n\n* Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* Each person entry can hold up to 248 faces.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from Face - Detect, there's no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n  * 'detection_01': The default detection model for PersonDirectory Person - Add Face. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n  * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.\n  * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces.",
+        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until FaceList - Delete Face or FaceList - Delete is called.\n\nNote persistedFaceId is different from faceId generated by Face - Detect.\n>\n*\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * Each person entry can hold up to 248 faces.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from Face - Detect, there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n    * 'detection_01': The default detection model for PersonDirectory Person - Add Face. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n    * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.\n    * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces.",
         "consumes": [
           "application/octet-stream"
         ],
@@ -1582,7 +1582,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns a new persistedFaceId.",
             "schema": {
               "$ref": "#/definitions/AddFaceResult"
             }
@@ -1590,7 +1590,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -1601,7 +1601,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceListOperations_AddFaceListFace": {
+          "Add Face to FaceList": {
             "$ref": "./examples/FaceListOperations_AddFaceListFaceFromStream.json"
           }
         }
@@ -1644,7 +1644,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -1655,7 +1655,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceListOperations_DeleteFaceListFace": {
+          "Delete Face from FaceList": {
             "$ref": "./examples/FaceListOperations_DeleteFaceListFace.json"
           }
         }
@@ -1719,7 +1719,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -1730,7 +1730,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceRecognitionOperations_FindSimilar": {
+          "Find Similar among Face IDs": {
             "$ref": "./examples/FaceRecognitionOperations_FindSimilar.json"
           }
         }
@@ -1740,7 +1740,7 @@
       "post": {
         "operationId": "FaceRecognitionOperations_Group",
         "summary": "Divide candidate faces into groups based on face similarity.",
-        "description": "* The output is one or more disjointed face groups and a messyGroup. A face group contains faces that have similar looking, often of the same person. Face groups are ranked by group size, i.e. number of faces. Notice that faces belonging to a same person might be split into several groups in the result.\n* MessyGroup is a special face group containing faces that cannot find any similar counterpart face from original faces. The messyGroup will not appear in the result if all faces found their counterparts.\n* Group API needs at least 2 candidate faces and 1000 at most. We suggest to try Face - Verify when you only have 2 candidate faces.\n* The 'recognitionModel' associated with the query faces' faceIds should be the same.",
+        "description": ">\n*\n  * The output is one or more disjointed face groups and a messyGroup. A face group contains faces that have similar looking, often of the same person. Face groups are ranked by group size, i.e. number of faces. Notice that faces belonging to a same person might be split into several groups in the result.\n  * MessyGroup is a special face group containing faces that cannot find any similar counterpart face from original faces. The messyGroup will not appear in the result if all faces found their counterparts.\n  * Group API needs at least 2 candidate faces and 1000 at most. We suggest to try Face - Verify when you only have 2 candidate faces.\n  * The 'recognitionModel' associated with the query faces' faceIds should be the same.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionPathParameter"
@@ -1776,7 +1776,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -1787,7 +1787,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceRecognitionOperations_Group": {
+          "Group Face IDs": {
             "$ref": "./examples/FaceRecognitionOperations_Group.json"
           }
         }
@@ -1858,7 +1858,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -1869,7 +1869,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceRecognitionOperations_IdentifyFromPersonGroup": {
+          "Identify from PersonGroup": {
             "$ref": "./examples/FaceRecognitionOperations_IdentifyFromPersonGroup.json"
           }
         }
@@ -1879,7 +1879,7 @@
       "get": {
         "operationId": "FaceListOperations_GetLargeFaceLists",
         "summary": "List large face lists' information of largeFaceListId, name, userData and recognitionModel.",
-        "description": "To get face information inside largeFaceList use LargeFaceList Face - Get.\nLarge face lists are stored in alphabetical order of largeFaceListId.\n* \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n* \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
+        "description": "To get face information inside largeFaceList use LargeFaceList Face - Get.\n\nLarge face lists are stored in alphabetical order of largeFaceListId.\n>\n*\n  * \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n  * \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionPathParameter"
@@ -1913,7 +1913,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns an array of large face lists and their information (largeFaceListId, name and userData).",
             "schema": {
               "type": "array",
               "items": {
@@ -1925,7 +1925,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -1936,7 +1936,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceListOperations_GetLargeFaceLists": {
+          "Get LargeFaceLists": {
             "$ref": "./examples/FaceListOperations_GetLargeFaceLists.json"
           }
         }
@@ -1971,7 +1971,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns the large face list's information.",
             "schema": {
               "$ref": "#/definitions/LargeFaceList"
             }
@@ -1990,7 +1990,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceListOperations_GetLargeFaceList": {
+          "Get LargeFaceList": {
             "$ref": "./examples/FaceListOperations_GetLargeFaceList.json"
           }
         }
@@ -1998,7 +1998,7 @@
       "put": {
         "operationId": "FaceListOperations_CreateLargeFaceList",
         "summary": "Create an empty large face list with user-specified largeFaceListId, name, an optional userData and recognitionModel.",
-        "description": "Large face list is a list of faces, up to 1,000,000 faces, and used by Find Similar.\nAfter creation, user should use Add Large Face List Face to import the faces and Train Large Face List to make it ready for Find Similar. No image will be stored. Only the extracted face feature(s) will be stored on server until Delete Large Face List is called.\nFind Similar is used for scenario like finding celebrity-like faces, similar face filtering, or as a light way face identification. But if the actual use is to identify person, please use Person Group / Large Person Group and Identify.\n\n> [!NOTE]\n> * Free-tier subscription quota: 64 large face lists.\n> * S0-tier subscription quota: 1,000,000 large face lists.",
+        "description": "Large face list is a list of faces, up to 1,000,000 faces, and used by Find Similar.\n\nAfter creation, user should use Add Large Face List Face to import the faces and Train Large Face List to make it ready for Find Similar. No image will be stored. Only the extracted face feature(s) will be stored on server until Delete Large Face List is called.\n\nFind Similar is used for scenario like finding celebrity-like faces, similar face filtering, or as a light way face identification. But if the actual use is to identify person, please use Person Group / Large Person Group and Identify.\n\n> [!NOTE]\n> * Free-tier subscription quota: 64 large face lists.\n> * S0-tier subscription quota: 1,000,000 large face lists.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionPathParameter"
@@ -2082,7 +2082,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -2093,7 +2093,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceListOperations_CreateLargeFaceList": {
+          "Create LargeFaceList": {
             "$ref": "./examples/FaceListOperations_CreateLargeFaceList.json"
           }
         }
@@ -2144,7 +2144,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -2155,7 +2155,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceListOperations_UpdateLargeFaceList": {
+          "Update LargeFaceList": {
             "$ref": "./examples/FaceListOperations_UpdateLargeFaceList.json"
           }
         }
@@ -2186,7 +2186,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -2197,7 +2197,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceListOperations_DeleteLargeFaceList": {
+          "Delete LargeFaceList": {
             "$ref": "./examples/FaceListOperations_DeleteLargeFaceList.json"
           }
         }
@@ -2207,7 +2207,7 @@
       "get": {
         "operationId": "FaceListOperations_GetLargeFaceListFaces",
         "summary": "List faces' persistedFaceId and userData in a specified large face list.",
-        "description": "Faces are stored in alphabetical order of persistedFaceId created in LargeFaceList Face - Add.\n* \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n* \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
+        "description": "Faces are stored in alphabetical order of persistedFaceId created in LargeFaceList Face - Add.\n>\n*\n  * \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n  * \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionPathParameter"
@@ -2243,7 +2243,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns an array of persisted faces and their information (persistedFaceId and userData).",
             "schema": {
               "type": "array",
               "items": {
@@ -2255,7 +2255,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -2266,7 +2266,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceListOperations_GetLargeFaceListFaces": {
+          "Get Faces from LargeFaceList": {
             "$ref": "./examples/FaceListOperations_GetLargeFaceListFaces.json"
           }
         }
@@ -2274,7 +2274,7 @@
       "post": {
         "operationId": "FaceListOperations_AddLargeFaceListFace",
         "summary": "Add a face to a specified large face list, up to 1,000,000 faces.",
-        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until LargeFaceList - Delete Face or LargeFaceList - Delete is called.\nNote persistedFaceId is different from faceId generated by Face - Detect.\n\n* Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* Each person entry can hold up to 248 faces.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from Face - Detect, there's no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n  * 'detection_01': The default detection model for PersonDirectory Person - Add Face. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n  * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.\n  * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces.\n\n> [!NOTE]\n> * Free-tier subscription quota: 1,000 faces per large face list.\n> * S0-tier subscription quota: 1,000,000 faces per large face list.",
+        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until LargeFaceList - Delete Face or LargeFaceList - Delete is called.\n\nNote persistedFaceId is different from faceId generated by Face - Detect.\n>\n*\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * Each person entry can hold up to 248 faces.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from Face - Detect, there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n    * 'detection_01': The default detection model for PersonDirectory Person - Add Face. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n    * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.\n    * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces.\n\n> [!NOTE]\n> * Free-tier subscription quota: 1,000 faces per large face list.\n> * S0-tier subscription quota: 1,000,000 faces per large face list.",
         "consumes": [
           "application/octet-stream"
         ],
@@ -2361,7 +2361,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns a new persistedFaceId.",
             "schema": {
               "$ref": "#/definitions/AddFaceResult"
             }
@@ -2369,7 +2369,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -2380,7 +2380,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceListOperations_AddLargeFaceListFace": {
+          "Add Face to LargeFaceList": {
             "$ref": "./examples/FaceListOperations_AddLargeFaceListFaceFromStream.json"
           }
         }
@@ -2417,7 +2417,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns target persisted face's information (persistedFaceId and userData).",
             "schema": {
               "$ref": "#/definitions/LargeFaceListFace"
             }
@@ -2436,7 +2436,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceListOperations_GetLargeFaceListFace": {
+          "Get Face from LargeFaceList": {
             "$ref": "./examples/FaceListOperations_GetLargeFaceListFace.json"
           }
         }
@@ -2491,7 +2491,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -2502,7 +2502,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceListOperations_UpdateLargeFaceListFace": {
+          "Update Face in LargeFaceList": {
             "$ref": "./examples/FaceListOperations_UpdateLargeFaceListFace.json"
           }
         }
@@ -2542,7 +2542,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -2553,7 +2553,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceListOperations_DeleteLargeFaceListFace": {
+          "Delete Face From LargeFaceList": {
             "$ref": "./examples/FaceListOperations_DeleteLargeFaceListFace.json"
           }
         }
@@ -2563,7 +2563,7 @@
       "post": {
         "operationId": "FaceListOperations_TrainLargeFaceList",
         "summary": "Submit a large face list training task.",
-        "description": "Training is a crucial step that only a trained large face list can be used by Find Similar.\nThe training task is an asynchronous task. Training time depends on the number of face entries in a large face list. It could be in seconds, or up to half an hour for 1,000,000 faces. To check training completion, please use Get Large Face List Training Status.",
+        "description": "\nTraining is a crucial step that only a trained large face list can be used by Find Similar.\n\nThe training task is an asynchronous task. Training time depends on the number of face entries in a large face list. It could be in seconds, or up to half an hour for 1,000,000 faces. To check training completion, please use Get Large Face List Training Status.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionPathParameter"
@@ -2604,7 +2604,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceListOperations_TrainLargeFaceList": {
+          "Train LargeFaceList": {
             "$ref": "./examples/FaceListOperations_TrainLargeFaceList.json"
           }
         },
@@ -2614,7 +2614,7 @@
     "/face/{apiVersion}/largefacelists/{largeFaceListId}/training": {
       "get": {
         "operationId": "FaceListOperations_GetLargeFaceListTrainingStatus",
-        "description": "To check the large face list training status completed or still ongoing. LargeFaceList Training is an asynchronous operation triggered by Train Large Face List.\nTraining time depends on the number of face entries in a large face list. It could be in seconds, or up to half an hour for 1,000,000 faces.",
+        "description": "To check the large face list training status completed or still ongoing. LargeFaceList Training is an asynchronous operation triggered by Train Large Face List.\n\nTraining time depends on the number of face entries in a large face list. It could be in seconds, or up to half an hour for 1,000,000 faces.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionPathParameter"
@@ -2632,7 +2632,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns the large face list's training status.",
             "schema": {
               "$ref": "#/definitions/TrainingStatus"
             }
@@ -2640,7 +2640,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -2651,7 +2651,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceListOperations_GetLargeFaceListTrainingStatus": {
+          "Get Training Status of LargeFaceList": {
             "$ref": "./examples/FaceListOperations_GetLargeFaceListTrainingStatus.json"
           }
         }
@@ -2661,7 +2661,7 @@
       "get": {
         "operationId": "PersonGroupOperations_GetLargePersonGroups",
         "summary": "List all existing large person groups' largePersonGroupId, name, userData and recognitionModel.",
-        "description": "* Large person groups are stored in alphabetical order of largePersonGroupId.\n* \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n* \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
+        "description": "Large person groups are stored in alphabetical order of largePersonGroupId.\n>\n*\n  * \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n  * \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionPathParameter"
@@ -2695,7 +2695,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns an array of large person groups and their information (largePersonGroupId, name and userData).",
             "schema": {
               "type": "array",
               "items": {
@@ -2707,7 +2707,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -2718,7 +2718,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_GetLargePersonGroups": {
+          "Get LargePersonGroups": {
             "$ref": "./examples/PersonGroupOperations_GetLargePersonGroups.json"
           }
         }
@@ -2753,7 +2753,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns the large person group's information.",
             "schema": {
               "$ref": "#/definitions/LargePersonGroup"
             }
@@ -2772,7 +2772,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_GetLargePersonGroup": {
+          "Get LargePersonGroup": {
             "$ref": "./examples/PersonGroupOperations_GetLargePersonGroup.json"
           }
         }
@@ -2780,7 +2780,7 @@
       "put": {
         "operationId": "PersonGroupOperations_CreateLargePersonGroup",
         "summary": "Create a new large person group with user-specified largePersonGroupId, name, an optional userData and recognitionModel.",
-        "description": "A large person group is a container holding the uploaded person data, including the face recognition features. It can hold up to 1,000,000 entities.\nAfter creation, use LargePersonGroup Person - Create to add person into the group, and call LargePersonGroup - Train to get this group ready for Face - Identify.\nNo image will be stored. Only the person's extracted face feature(s) and userData will be stored on server until LargePersonGroup Person - Delete or LargePersonGroup - Delete is called.\n\n'recognitionModel' should be specified to associate with this large person group. The default value for 'recognitionModel' is 'recognition_01', if the latest model needed, please explicitly specify the model you need in this parameter. New faces that are added to an existing large person group will use the recognition model that's already associated with the collection. Existing face feature(s) in a large person group can't be updated to features extracted by another version of recognition model.\n\n> [!NOTE]\n> * Free-tier subscription quota: 1,000 large person groups.\n> * S0-tier subscription quota: 1,000,000 large person groups.",
+        "description": "A large person group is a container holding the uploaded person data, including the face recognition features. It can hold up to 1,000,000 entities.\n\nAfter creation, use LargePersonGroup Person - Create to add person into the group, and call LargePersonGroup - Train to get this group ready for Face - Identify.\n\nNo image will be stored. Only the person's extracted face feature(s) and userData will be stored on server until LargePersonGroup Person - Delete or LargePersonGroup - Delete is called.\n\n'recognitionModel' should be specified to associate with this large person group. The default value for 'recognitionModel' is 'recognition_01', if the latest model needed, please explicitly specify the model you need in this parameter. New faces that are added to an existing large person group will use the recognition model that's already associated with the collection. Existing face feature(s) in a large person group can't be updated to features extracted by another version of recognition model.\n\n> [!NOTE]\n> * Free-tier subscription quota: 1,000 large person groups.\n> * S0-tier subscription quota: 1,000,000 large person groups.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionPathParameter"
@@ -2864,7 +2864,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -2875,7 +2875,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_CreateLargePersonGroup": {
+          "Create LargePersonGroup": {
             "$ref": "./examples/PersonGroupOperations_CreateLargePersonGroup.json"
           }
         }
@@ -2926,7 +2926,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -2937,7 +2937,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_UpdateLargePersonGroup": {
+          "Update LargePersonGroup": {
             "$ref": "./examples/PersonGroupOperations_UpdateLargePersonGroup.json"
           }
         }
@@ -2967,7 +2967,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -2978,7 +2978,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_DeleteLargePersonGroup": {
+          "Delete LargePersonGroup": {
             "$ref": "./examples/PersonGroupOperations_DeleteLargePersonGroup.json"
           }
         }
@@ -2988,7 +2988,7 @@
       "get": {
         "operationId": "PersonGroupOperations_GetLargePersonGroupPersons",
         "summary": "List all persons' information in the specified large person group, including personId, name, userData and persistedFaceIds of registered person faces.",
-        "description": "* Persons are stored in alphabetical order of personId created in LargePersonGroup Person - Create.\n* \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n* \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
+        "description": "Persons are stored in alphabetical order of personId created in LargePersonGroup Person - Create.\n>\n*\n  * \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n  * \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionPathParameter"
@@ -3024,7 +3024,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns an array of person information that belong to the large person group.",
             "schema": {
               "type": "array",
               "items": {
@@ -3036,7 +3036,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -3047,7 +3047,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_GetLargePersonGroupPersons": {
+          "Get Persons from LargePersonGroup": {
             "$ref": "./examples/PersonGroupOperations_GetLargePersonGroupPersons.json"
           }
         }
@@ -3097,7 +3097,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns a new personId created.",
             "schema": {
               "$ref": "#/definitions/CreatePersonResult"
             }
@@ -3105,7 +3105,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -3116,7 +3116,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_CreateLargePersonGroupPerson": {
+          "Create Person in LargePersonGroup": {
             "$ref": "./examples/PersonGroupOperations_CreateLargePersonGroupPerson.json"
           }
         }
@@ -3153,7 +3153,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns the person's information.",
             "schema": {
               "$ref": "#/definitions/LargePersonGroupPerson"
             }
@@ -3172,7 +3172,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_GetLargePersonGroupPerson": {
+          "Get Person from LargePersonGroup": {
             "$ref": "./examples/PersonGroupOperations_GetLargePersonGroupPerson.json"
           }
         }
@@ -3233,7 +3233,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -3244,7 +3244,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_UpdateLargePersonGroupPerson": {
+          "Update Person in LargePersonGroup": {
             "$ref": "./examples/PersonGroupOperations_UpdateLargePersonGroupPerson.json"
           }
         }
@@ -3284,7 +3284,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -3295,7 +3295,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_DeleteLargePersonGroupPerson": {
+          "Delete Person from LargePersonGroup": {
             "$ref": "./examples/PersonGroupOperations_DeleteLargePersonGroupPerson.json"
           }
         }
@@ -3305,7 +3305,7 @@
       "post": {
         "operationId": "PersonGroupOperations_AddLargePersonGroupPersonFace",
         "summary": "Add a face to a person into a large person group for face identification or verification.",
-        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until LargePersonGroup PersonFace - Delete, LargePersonGroup Person - Delete or LargePersonGroup - Delete is called.\nNote persistedFaceId is different from faceId generated by Face - Detect.\n\n* Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* Each person entry can hold up to 248 faces.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from Face - Detect, there's no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n  * 'detection_01': The default detection model for PersonDirectory Person - Add Face. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n  * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.\n  * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces.",
+        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until LargePersonGroup PersonFace - Delete, LargePersonGroup Person - Delete or LargePersonGroup - Delete is called.\n\nNote persistedFaceId is different from faceId generated by Face - Detect.\n>\n*\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * Each person entry can hold up to 248 faces.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from Face - Detect, there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n    * 'detection_01': The default detection model for PersonDirectory Person - Add Face. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n    * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.\n    * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces.",
         "consumes": [
           "application/octet-stream"
         ],
@@ -3402,7 +3402,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns a new persistedFaceId.",
             "schema": {
               "$ref": "#/definitions/AddFaceResult"
             }
@@ -3410,7 +3410,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -3421,7 +3421,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_AddLargePersonGroupPersonFace": {
+          "Add Face in LargePersonGroup Person": {
             "$ref": "./examples/PersonGroupOperations_AddLargePersonGroupPersonFaceFromStream.json"
           }
         }
@@ -3468,7 +3468,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns target persisted face's information (persistedFaceId and userData).",
             "schema": {
               "$ref": "#/definitions/LargePersonGroupPersonFace"
             }
@@ -3487,7 +3487,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_GetLargePersonGroupPersonFace": {
+          "Get Face from LargePersonGroup Person": {
             "$ref": "./examples/PersonGroupOperations_GetLargePersonGroupPersonFace.json"
           }
         }
@@ -3552,7 +3552,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -3563,7 +3563,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_UpdateLargePersonGroupPersonFace": {
+          "Update Face in LargePersonGroup Person": {
             "$ref": "./examples/PersonGroupOperations_UpdateLargePersonGroupPersonFace.json"
           }
         }
@@ -3614,7 +3614,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -3625,7 +3625,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_DeleteLargePersonGroupPersonFace": {
+          "Delete Face from LargePersonGroup Person": {
             "$ref": "./examples/PersonGroupOperations_DeleteLargePersonGroupPersonFace.json"
           }
         }
@@ -3653,7 +3653,7 @@
         ],
         "responses": {
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "description": "A successful call returns an empty response body.",
             "headers": {
               "operation-Location": {
                 "type": "string",
@@ -3676,7 +3676,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_TrainLargePersonGroup": {
+          "Train LargePersonGroup": {
             "$ref": "./examples/PersonGroupOperations_TrainLargePersonGroup.json"
           }
         },
@@ -3705,7 +3705,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns the large person group's training status.",
             "schema": {
               "$ref": "#/definitions/TrainingStatus"
             }
@@ -3713,7 +3713,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -3724,7 +3724,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_GetLargePersonGroupTrainingStatus": {
+          "Get Training Status of LargePersonGroup": {
             "$ref": "./examples/PersonGroupOperations_GetLargePersonGroupTrainingStatus.json"
           }
         }
@@ -3751,7 +3751,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns the long running operation status.",
             "schema": {
               "$ref": "#/definitions/FaceOperationStatus"
             }
@@ -3770,7 +3770,7 @@
           }
         },
         "x-ms-examples": {
-          "GetFaceOperationStatus": {
+          "Get Face Operation Status": {
             "$ref": "./examples/GetFaceOperationStatus.json"
           }
         }
@@ -3780,7 +3780,7 @@
       "get": {
         "operationId": "PersonGroupOperations_GetPersonGroups",
         "summary": "List person groups' personGroupId, name, userData and recognitionModel.",
-        "description": "* Person groups are stored in alphabetical order of personGroupId.\n* \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n* \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
+        "description": "Person groups are stored in alphabetical order of personGroupId.\n>\n*\n  * \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n  * \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionPathParameter"
@@ -3814,7 +3814,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns an array of person groups and their information (personGroupId, name and userData).",
             "schema": {
               "type": "array",
               "items": {
@@ -3826,7 +3826,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -3837,7 +3837,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_GetPersonGroups": {
+          "Get PersonGroups": {
             "$ref": "./examples/PersonGroupOperations_GetPersonGroups.json"
           }
         }
@@ -3872,7 +3872,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns the person group's information.",
             "schema": {
               "$ref": "#/definitions/PersonGroup"
             }
@@ -3891,7 +3891,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_GetPersonGroup": {
+          "Get PersonGroup": {
             "$ref": "./examples/PersonGroupOperations_GetPersonGroup.json"
           }
         }
@@ -3899,7 +3899,7 @@
       "put": {
         "operationId": "PersonGroupOperations_CreatePersonGroup",
         "summary": "Create a new person group with specified personGroupId, name, user-provided userData and recognitionModel.",
-        "description": "A person group is a container holding the uploaded person data, including face recognition features.\nAfter creation, use PersonGroup Person - Create to add persons into the group, and then call PersonGroup - Train to get this group ready for Face - Identify.\nNo image will be stored. Only the person's extracted face feature(s) and userData will be stored on server until PersonGroup Person - Delete or PersonGroup - Delete is called.\n\n'recognitionModel' should be specified to associate with this person group. The default value for 'recognitionModel' is 'recognition_01', if the latest model needed, please explicitly specify the model you need in this parameter. New faces that are added to an existing person group will use the recognition model that's already associated with the collection. Existing face feature(s) in a person group can't be updated to features extracted by another version of recognition model.\n\n> [!NOTE]\n> * Free-tier subscription quota: 1,000 person groups. Each holds up to 1,000 persons.\n> * S0-tier subscription quota: 1,000,000 person groups. Each holds up to 10,000 persons.\n> * to handle larger scale face identification problem, please consider using LargePersonGroup.",
+        "description": "A person group is a container holding the uploaded person data, including face recognition features.\n\nAfter creation, use PersonGroup Person - Create to add persons into the group, and then call PersonGroup - Train to get this group ready for Face - Identify.\n\nNo image will be stored. Only the person's extracted face feature(s) and userData will be stored on server until PersonGroup Person - Delete or PersonGroup - Delete is called.\n\n'recognitionModel' should be specified to associate with this person group. The default value for 'recognitionModel' is 'recognition_01', if the latest model needed, please explicitly specify the model you need in this parameter. New faces that are added to an existing person group will use the recognition model that's already associated with the collection. Existing face feature(s) in a person group can't be updated to features extracted by another version of recognition model.\n\n> [!NOTE]\n> * Free-tier subscription quota: 1,000 person groups. Each holds up to 1,000 persons.\n> * S0-tier subscription quota: 1,000,000 person groups. Each holds up to 10,000 persons.\n> * to handle larger scale face identification problem, please consider using LargePersonGroup.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionPathParameter"
@@ -3983,7 +3983,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -3994,7 +3994,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_CreatePersonGroup": {
+          "Create PersonGroup": {
             "$ref": "./examples/PersonGroupOperations_CreatePersonGroup.json"
           }
         }
@@ -4045,7 +4045,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -4056,7 +4056,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_UpdatePersonGroup": {
+          "Update PersonGroup": {
             "$ref": "./examples/PersonGroupOperations_UpdatePersonGroup.json"
           }
         }
@@ -4086,7 +4086,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -4097,7 +4097,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_DeletePersonGroup": {
+          "Delete PersonGroup": {
             "$ref": "./examples/PersonGroupOperations_DeletePersonGroup.json"
           }
         }
@@ -4107,7 +4107,7 @@
       "get": {
         "operationId": "PersonGroupOperations_GetPersonGroupPersons",
         "summary": "List all persons' information in the specified person group, including personId, name, userData and persistedFaceIds of registered person faces.",
-        "description": "Persons are stored in alphabetical order of personId created in PersonGroup Person - Create.\n* \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n* \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
+        "description": "Persons are stored in alphabetical order of personId created in PersonGroup Person - Create.\n>\n*\n  * \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n  * \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionPathParameter"
@@ -4143,7 +4143,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns an array of person information that belong to the person group.",
             "schema": {
               "type": "array",
               "items": {
@@ -4155,7 +4155,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -4166,7 +4166,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_GetPersonGroupPersons": {
+          "Get Persons from PersonGroup": {
             "$ref": "./examples/PersonGroupOperations_GetPersonGroupPersons.json"
           }
         }
@@ -4216,7 +4216,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns a new personId created.",
             "schema": {
               "$ref": "#/definitions/CreatePersonResult"
             }
@@ -4224,7 +4224,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -4235,7 +4235,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_CreatePersonGroupPerson": {
+          "Create Person in PersonGroup": {
             "$ref": "./examples/PersonGroupOperations_CreatePersonGroupPerson.json"
           }
         }
@@ -4272,7 +4272,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns the person's information.",
             "schema": {
               "$ref": "#/definitions/PersonGroupPerson"
             }
@@ -4291,7 +4291,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_GetPersonGroupPerson": {
+          "Get Person from PersonGroup": {
             "$ref": "./examples/PersonGroupOperations_GetPersonGroupPerson.json"
           }
         }
@@ -4352,7 +4352,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -4363,7 +4363,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_UpdatePersonGroupPerson": {
+          "Update PersonGroup Person": {
             "$ref": "./examples/PersonGroupOperations_UpdatePersonGroupPerson.json"
           }
         }
@@ -4403,7 +4403,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -4414,7 +4414,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_DeletePersonGroupPerson": {
+          "Delete Person from PersonGroup": {
             "$ref": "./examples/PersonGroupOperations_DeletePersonGroupPerson.json"
           }
         }
@@ -4424,7 +4424,7 @@
       "post": {
         "operationId": "PersonGroupOperations_AddPersonGroupPersonFace",
         "summary": "Add a face to a person into a person group for face identification or verification.",
-        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until PersonGroup PersonFace - Delete, PersonGroup Person - Delete or PersonGroup - Delete is called.\nNote persistedFaceId is different from faceId generated by Face - Detect.\n\n* Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* Each person entry can hold up to 248 faces.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from Face - Detect, there's no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n  * 'detection_01': The default detection model for PersonDirectory Person - Add Face. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n  * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.\n  * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces.",
+        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until PersonGroup PersonFace - Delete, PersonGroup Person - Delete or PersonGroup - Delete is called.\n\nNote persistedFaceId is different from faceId generated by Face - Detect.\n>\n*\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * Each person entry can hold up to 248 faces.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from Face - Detect, there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n    * 'detection_01': The default detection model for PersonDirectory Person - Add Face. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n    * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.\n    * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces.",
         "consumes": [
           "application/octet-stream"
         ],
@@ -4521,7 +4521,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns a new persistedFaceId.",
             "schema": {
               "$ref": "#/definitions/AddFaceResult"
             }
@@ -4529,7 +4529,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -4540,7 +4540,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_AddPersonGroupPersonFace": {
+          "Add Face to PersonGroup Person": {
             "$ref": "./examples/PersonGroupOperations_AddPersonGroupPersonFaceFromStream.json"
           }
         }
@@ -4587,7 +4587,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns target persisted face's information (persistedFaceId and userData).",
             "schema": {
               "$ref": "#/definitions/PersonGroupPersonFace"
             }
@@ -4606,7 +4606,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_GetPersonGroupPersonFace": {
+          "Get Face form PersonGroup Person": {
             "$ref": "./examples/PersonGroupOperations_GetPersonGroupPersonFace.json"
           }
         }
@@ -4671,7 +4671,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -4682,7 +4682,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_UpdatePersonGroupPersonFace": {
+          "Update Face in PersonGroup Person": {
             "$ref": "./examples/PersonGroupOperations_UpdatePersonGroupPersonFace.json"
           }
         }
@@ -4733,7 +4733,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -4744,7 +4744,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_DeletePersonGroupPersonFace": {
+          "Delete Face from PersonGroup Person": {
             "$ref": "./examples/PersonGroupOperations_DeletePersonGroupPersonFace.json"
           }
         }
@@ -4772,7 +4772,7 @@
         ],
         "responses": {
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "description": "A successful call returns an empty response body.",
             "headers": {
               "operation-Location": {
                 "type": "string",
@@ -4795,7 +4795,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_TrainPersonGroup": {
+          "Train PersonGroup": {
             "$ref": "./examples/PersonGroupOperations_TrainPersonGroup.json"
           }
         },
@@ -4823,7 +4823,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns the person group's training status.",
             "schema": {
               "$ref": "#/definitions/TrainingStatus"
             }
@@ -4831,7 +4831,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -4842,7 +4842,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_GetPersonGroupTrainingStatus": {
+          "Get Training Status of PersonGroup": {
             "$ref": "./examples/PersonGroupOperations_GetPersonGroupTrainingStatus.json"
           }
         }
@@ -4852,7 +4852,7 @@
       "get": {
         "operationId": "PersonDirectoryOperations_GetPersons",
         "summary": "List all persons' information in person directory, including personId, name, and userData.",
-        "description": "* Persons are stored in alphabetical order of personId created in PersonDirectory Person - Create.\n* \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n* \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
+        "description": "Persons are stored in alphabetical order of personId created in PersonDirectory Person - Create.\n>\n*\n  * \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n  * \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionPathParameter"
@@ -4878,7 +4878,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns an array of personIds contain in the dynamic person group.",
             "schema": {
               "type": "array",
               "items": {
@@ -4890,7 +4890,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -4901,7 +4901,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonDirectoryOperations_GetPersons": {
+          "Get Persons from PersonDirectory": {
             "$ref": "./examples/PersonDirectoryOperations_GetPersons.json"
           }
         }
@@ -4945,22 +4945,22 @@
               "$ref": "#/definitions/CreatePersonResult"
             },
             "headers": {
-              "Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location of an instance of PersonDirectoryPerson"
-              },
               "operation-Location": {
                 "type": "string",
                 "format": "uri",
                 "description": "The location of an instance of FaceOperationStatus"
+              },
+              "Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of PersonDirectoryPerson"
               }
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -4971,7 +4971,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonDirectoryOperations_CreatePerson": {
+          "Create Person in PersonDirectory": {
             "$ref": "./examples/PersonDirectoryOperations_CreatePerson.json"
           }
         }
@@ -4998,7 +4998,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns the person's information.",
             "schema": {
               "$ref": "#/definitions/PersonDirectoryPerson"
             }
@@ -5017,7 +5017,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonDirectoryOperations_GetPerson": {
+          "Get Person from PeronDirectory": {
             "$ref": "./examples/PersonDirectoryOperations_GetPerson.json"
           }
         }
@@ -5068,7 +5068,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -5079,7 +5079,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonDirectoryOperations_UpdatePerson": {
+          "Update Person in PersonDirectory": {
             "$ref": "./examples/PersonDirectoryOperations_UpdatePerson.json"
           }
         }
@@ -5116,7 +5116,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -5127,7 +5127,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonDirectoryOperations_DeletePerson": {
+          "Delete Person": {
             "$ref": "./examples/PersonDirectoryOperations_DeletePerson.json"
           }
         },
@@ -5138,7 +5138,7 @@
       "get": {
         "operationId": "PersonDirectoryOperations_GetDynamicPersonGroupReferences",
         "summary": "List all dynamic person groups a person has been referenced by in person directory.",
-        "description": "* Dynamic person groups are stored in alphabetical order of dynamic person group id created in PersonDirectory DynamicPersonGroup - Create.\n* \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n* \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
+        "description": "Dynamic person groups are stored in alphabetical order of dynamic person group id created in PersonDirectory DynamicPersonGroup - Create.\n>\n*\n  * \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n  * \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionPathParameter"
@@ -5174,7 +5174,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns an array of dynamicPersonGroups information that reference the provided personId.",
             "schema": {
               "$ref": "#/definitions/ListGroupReferenceResult"
             }
@@ -5182,7 +5182,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -5193,7 +5193,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonDirectoryOperations_GetDynamicPersonGroupReferences": {
+          "Get DynamicPersonGroup References": {
             "$ref": "./examples/PersonDirectoryOperations_GetDynamicPersonGroupReferences.json"
           }
         }
@@ -5259,7 +5259,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns an array of persistedFaceIds and and a person ID.",
             "schema": {
               "$ref": "#/definitions/ListFaceResult"
             }
@@ -5267,7 +5267,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -5278,7 +5278,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonDirectoryOperations_GetPersonFaces": {
+          "Get Faces from PersonDirectory Person": {
             "$ref": "./examples/PersonDirectoryOperations_GetPersonFaces.json"
           }
         }
@@ -5286,7 +5286,7 @@
       "post": {
         "operationId": "PersonDirectoryOperations_AddPersonFace",
         "summary": "Add a face to a person (see PersonDirectory Person - Create) for face identification or verification.",
-        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until PersonDirectory Person - Delete Face or PersonDirectory Person - Delete is called.\nNote persistedFaceId is different from faceId generated by Face - Detect.\n\n* Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* Each person entry can hold up to 248 faces.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from Face - Detect, there's no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n  * 'detection_01': The default detection model for PersonDirectory Person - Add Face. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n  * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.\n  * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces.\n* Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.\n* This is a long running operation. Use Response Header \"Operation-Location\" to determine when the AddFace operation has successfully propagated for future requests to Face - Identify. For further information about Operation-Locations see Operations - Get Status.",
+        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until PersonDirectory Person - Delete Face or PersonDirectory Person - Delete is called.\n\nNote persistedFaceId is different from faceId generated by Face - Detect.\n>\n*\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * Each person entry can hold up to 248 faces.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from Face - Detect, there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n    * 'detection_01': The default detection model for PersonDirectory Person - Add Face. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n    * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.\n    * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces.\n*\n  * Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.\n  * This is a long running operation. Use Response Header \"Operation-Location\" to determine when the AddFace operation has successfully propagated for future requests to Face - Identify. For further information about Operation-Locations see Operations - Get Status.",
         "consumes": [
           "application/octet-stream"
         ],
@@ -5417,22 +5417,22 @@
               "$ref": "#/definitions/AddFaceResult"
             },
             "headers": {
-              "Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location of an instance of PersonDirectoryPerson"
-              },
               "operation-Location": {
                 "type": "string",
                 "format": "uri",
                 "description": "The location of an instance of FaceOperationStatus"
+              },
+              "Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of PersonDirectoryPerson"
               }
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -5443,7 +5443,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonDirectoryOperations_AddPersonFace": {
+          "Add Face to a PersonDirectory Person": {
             "$ref": "./examples/PersonDirectoryOperations_AddPersonFaceFromStream.json"
           }
         }
@@ -5519,7 +5519,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns target persisted face's information (persistedFaceId and userData).",
             "schema": {
               "$ref": "#/definitions/PersonDirectoryFace"
             }
@@ -5538,7 +5538,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonDirectoryOperations_GetPersonFace": {
+          "Get Face from PersonDirectory Person": {
             "$ref": "./examples/PersonDirectoryOperations_GetPersonFace.json"
           }
         }
@@ -5632,7 +5632,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -5643,7 +5643,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonDirectoryOperations_UpdatePersonFace": {
+          "Update Face of PersonDirectory Person": {
             "$ref": "./examples/PersonDirectoryOperations_UpdatePersonFace.json"
           }
         }
@@ -5730,7 +5730,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -5741,7 +5741,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonDirectoryOperations_DeletePersonFace": {
+          "Delete Face from PersonDirectory Person": {
             "$ref": "./examples/PersonDirectoryOperations_DeletePersonFace.json"
           }
         },
@@ -5790,7 +5790,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -5801,7 +5801,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceRecognitionOperations_VerifyFaceToFace": {
+          "Verify Face to Face": {
             "$ref": "./examples/FaceRecognitionOperations_VerifyFaceToFace.json"
           }
         }
@@ -5813,7 +5813,7 @@
       "post": {
         "operationId": "FaceDetectionOperations_DetectFromUrl",
         "summary": "Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.",
-        "description": "> [!IMPORTANT]\n> To mitigate potential misuse that can subject people to stereotyping, discrimination, or unfair denial of services, we are retiring Face API attributes that predict emotion, gender, age, smile, facial hair, hair, and makeup. Read more about this decision https://azure.microsoft.com/en-us/blog/responsible-ai-investments-and-safeguards-for-facial-recognition/. We will also retire the Snapshot API, which allowed biometric data transfer from one Face subscription to another. Existing customers have until 30 June 2023 to use the emotion, gender, age, smile, facial hair, hair, and makeup attributes and the Snapshot API through Face API before they are retired.\n\n* No image will be stored. Only the extracted face feature(s) will be stored on server. The faceId is an identifier of the face feature and will be used in Face - Identify, Face - Verify, and Face - Find Similar. The stored face features will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.\n* Optional parameters include faceId, landmarks, and attributes. Attributes include headPose, glasses, occlusion, accessories, blur, exposure, noise, mask, and qualityForRecognition. Some of the results returned for specific attributes may not be highly accurate.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n* For optimal results when querying Face - Identify, Face - Verify, and Face - Find Similar ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n  * 'detection_01': The default detection model for Face - Detect. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n  * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. Face attributes and landmarks are disabled if you choose this detection model.\n  * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces. Face attributes (mask and headPose only) and landmarks are supported if you choose this detection model.\n* Different 'recognitionModel' values are provided. If follow-up operations like Verify, Identify, Find Similar are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-recognition-model.\n  * 'recognition_01': The default recognition model for Face - Detect. All those faceIds created before 2019 March are bonded with this recognition model.\n  * 'recognition_02': Recognition model released in 2019 March.\n  * 'recognition_03': Recognition model released in 2020 May.\n  * 'recognition_04': Recognition model released in 2021 February. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.",
+        "description": "> [!IMPORTANT]\n> To mitigate potential misuse that can subject people to stereotyping, discrimination, or unfair denial of services, we are retiring Face API attributes that predict emotion, gender, age, smile, facial hair, hair, and makeup. Read more about this decision https://azure.microsoft.com/en-us/blog/responsible-ai-investments-and-safeguards-for-facial-recognition/. We will also retire the Snapshot API, which allowed biometric data transfer from one Face subscription to another. Existing customers have until 30 June 2023 to use the emotion, gender, age, smile, facial hair, hair, and makeup attributes and the Snapshot API through Face API before they are retired.\n\n*\n  * No image will be stored. Only the extracted face feature(s) will be stored on server. The faceId is an identifier of the face feature and will be used in Face - Identify, Face - Verify, and Face - Find Similar. The stored face features will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.\n  * Optional parameters include faceId, landmarks, and attributes. Attributes include headPose, glasses, occlusion, accessories, blur, exposure, noise, mask, and qualityForRecognition. Some of the results returned for specific attributes may not be highly accurate.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n  * For optimal results when querying Face - Identify, Face - Verify, and Face - Find Similar ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n    * 'detection_01': The default detection model for Face - Detect. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n    * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. Face attributes and landmarks are disabled if you choose this detection model.\n    * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces. Face attributes (mask and headPose only) and landmarks are supported if you choose this detection model.\n  * Different 'recognitionModel' values are provided. If follow-up operations like Verify, Identify, Find Similar are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-recognition-model.\n    * 'recognition_01': The default recognition model for Face - Detect. All those faceIds created before 2019 March are bonded with this recognition model.\n    * 'recognition_02': Recognition model released in 2019 March.\n    * 'recognition_03': Recognition model released in 2020 May.\n    * 'recognition_04': Recognition model released in 2021 February. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionPathParameter"
@@ -6033,7 +6033,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -6054,7 +6054,7 @@
       "post": {
         "operationId": "LivenessSessionOperations_CreateLivenessWithVerifySession",
         "summary": "Create a new liveness session with verify. Client device submits VerifyImage during the /detectLivenessWithVerify/singleModal call.",
-        "description": "A session is best for client device scenarios where developers want to authorize a client device to perform only a liveness detection without granting full access to their resource. Created sessions have a limited life span and only authorize clients to perform the desired action before access is expired.\n\nPermissions includes...\n* Ability to call /detectLivenessWithVerify/singleModal for up to 3 reties.\n* A token lifetime of 10 minutes.\n\n> [!NOTE]\n> Client access can be revoked by deleting the session using the Delete Liveness With Verify Session operation. To retrieve a result, use the Get Liveness With Verify Session. To audit the individual requests that a client has made to your resource, use the List Liveness With Verify Session Audit Entries.\n\nAlternative Option: Client device submits VerifyImage during the /detectLivenessWithVerify/singleModal call.\n> [!NOTE]\n> Extra measures should be taken to validate that the client is sending the expected VerifyImage.",
+        "description": "A session is best for client device scenarios where developers want to authorize a client device to perform only a liveness detection without granting full access to their resource. Created sessions have a limited life span and only authorize clients to perform the desired action before access is expired.\n\nPermissions includes...\n*\n  * Ability to call /detectLivenessWithVerify/singleModal for up to 3 reties.\n  * A token lifetime of 10 minutes.\n\n> [!NOTE]\n> Client access can be revoked by deleting the session using the Delete Liveness With Verify Session operation. To retrieve a result, use the Get Liveness With Verify Session. To audit the individual requests that a client has made to your resource, use the List Liveness With Verify Session Audit Entries.\n\nAlternative Option: Client device submits VerifyImage during the /detectLivenessWithVerify/singleModal call.\n> [!NOTE]\n> Extra measures should be taken to validate that the client is sending the expected VerifyImage.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionPathParameter"
@@ -6078,7 +6078,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -6089,7 +6089,7 @@
           }
         },
         "x-ms-examples": {
-          "LivenessSessionOperations_CreateLivenessWithVerifySession": {
+          "Create LivenessWithVerify Session": {
             "$ref": "./examples/LivenessSessionOperations_CreateLivenessWithVerifySession.json"
           }
         }
@@ -6099,7 +6099,7 @@
       "post": {
         "operationId": "FaceListOperations_AddFaceListFaceFromUrl",
         "summary": "Add a face to a specified face list, up to 1,000 faces.",
-        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until FaceList - Delete Face or FaceList - Delete is called.\nNote persistedFaceId is different from faceId generated by Face - Detect.\n\n* Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* Each person entry can hold up to 248 faces.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from Face - Detect, there's no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n  * 'detection_01': The default detection model for PersonDirectory Person - Add Face. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n  * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.\n  * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces.",
+        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until FaceList - Delete Face or FaceList - Delete is called.\n\nNote persistedFaceId is different from faceId generated by Face - Detect.\n>\n*\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * Each person entry can hold up to 248 faces.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from Face - Detect, there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n    * 'detection_01': The default detection model for PersonDirectory Person - Add Face. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n    * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.\n    * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionPathParameter"
@@ -6191,7 +6191,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns a new persistedFaceId.",
             "schema": {
               "$ref": "#/definitions/AddFaceResult"
             }
@@ -6199,7 +6199,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -6210,7 +6210,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceListOperations_AddFaceListFaceFromUrl": {
+          "Add Face to FaceList from Url": {
             "$ref": "./examples/FaceListOperations_AddFaceListFaceFromUrl.json"
           }
         }
@@ -6271,7 +6271,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -6282,7 +6282,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceRecognitionOperations_FindSimilarFromFaceList": {
+          "Find Similar from FaceList": {
             "$ref": "./examples/FaceRecognitionOperations_FindSimilarFromFaceList.json"
           }
         }
@@ -6343,7 +6343,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -6354,7 +6354,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceRecognitionOperations_FindSimilarFromLargeFaceList": {
+          "Find Similar from LargeFaceList": {
             "$ref": "./examples/FaceRecognitionOperations_FindSimilarFromLargeFaceList.json"
           }
         }
@@ -6425,7 +6425,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -6436,7 +6436,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceRecognitionOperations_IdentifyFromDynamicPersonGroup": {
+          "Identify from DynamicPersonGroup": {
             "$ref": "./examples/FaceRecognitionOperations_IdentifyFromDynamicPersonGroup.json"
           }
         }
@@ -6507,7 +6507,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -6518,7 +6518,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceRecognitionOperations_IdentifyFromLargePersonGroup": {
+          "Identify from LargePersonGroup": {
             "$ref": "./examples/FaceRecognitionOperations_IdentifyFromLargePersonGroup.json"
           }
         }
@@ -6594,7 +6594,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -6605,7 +6605,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceRecognitionOperations_IdentifyFromPersonDirectory": {
+          "Identify from PersonDirectory": {
             "$ref": "./examples/FaceRecognitionOperations_IdentifyFromPersonDirectory.json"
           }
         }
@@ -6615,7 +6615,7 @@
       "post": {
         "operationId": "FaceListOperations_AddLargeFaceListFaceFromUrl",
         "summary": "Add a face to a specified large face list, up to 1,000,000 faces.",
-        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until LargeFaceList - Delete Face or LargeFaceList - Delete is called.\nNote persistedFaceId is different from faceId generated by Face - Detect.\n\n* Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* Each person entry can hold up to 248 faces.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from Face - Detect, there's no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n  * 'detection_01': The default detection model for PersonDirectory Person - Add Face. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n  * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.\n  * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces.\n\n> [!NOTE]\n> * Free-tier subscription quota: 1,000 faces per large face list.\n> * S0-tier subscription quota: 1,000,000 faces per large face list.",
+        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until LargeFaceList - Delete Face or LargeFaceList - Delete is called.\n\nNote persistedFaceId is different from faceId generated by Face - Detect.\n>\n*\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * Each person entry can hold up to 248 faces.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from Face - Detect, there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n    * 'detection_01': The default detection model for PersonDirectory Person - Add Face. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n    * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.\n    * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces.\n\n> [!NOTE]\n> * Free-tier subscription quota: 1,000 faces per large face list.\n> * S0-tier subscription quota: 1,000,000 faces per large face list.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionPathParameter"
@@ -6707,7 +6707,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns a new persistedFaceId.",
             "schema": {
               "$ref": "#/definitions/AddFaceResult"
             }
@@ -6715,7 +6715,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -6726,7 +6726,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceListOperations_AddLargeFaceListFaceFromUrl": {
+          "Add Face to LargeFaceList from Url": {
             "$ref": "./examples/FaceListOperations_AddLargeFaceListFaceFromUrl.json"
           }
         }
@@ -6736,7 +6736,7 @@
       "post": {
         "operationId": "PersonGroupOperations_AddLargePersonGroupPersonFaceFromUrl",
         "summary": "Add a face to a person into a large person group for face identification or verification.",
-        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until LargePersonGroup PersonFace - Delete, LargePersonGroup Person - Delete or LargePersonGroup - Delete is called.\nNote persistedFaceId is different from faceId generated by Face - Detect.\n\n* Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* Each person entry can hold up to 248 faces.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from Face - Detect, there's no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n  * 'detection_01': The default detection model for PersonDirectory Person - Add Face. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n  * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.\n  * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces.",
+        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until LargePersonGroup PersonFace - Delete, LargePersonGroup Person - Delete or LargePersonGroup - Delete is called.\n\nNote persistedFaceId is different from faceId generated by Face - Detect.\n>\n*\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * Each person entry can hold up to 248 faces.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from Face - Detect, there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n    * 'detection_01': The default detection model for PersonDirectory Person - Add Face. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n    * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.\n    * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionPathParameter"
@@ -6838,7 +6838,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns a new persistedFaceId.",
             "schema": {
               "$ref": "#/definitions/AddFaceResult"
             }
@@ -6846,7 +6846,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -6857,7 +6857,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_AddLargePersonGroupPersonFaceFromUrl": {
+          "Add Face in LargePersonGroup Person from Url": {
             "$ref": "./examples/PersonGroupOperations_AddLargePersonGroupPersonFaceFromUrl.json"
           }
         }
@@ -6867,7 +6867,7 @@
       "post": {
         "operationId": "PersonGroupOperations_AddPersonGroupPersonFaceFromUrl",
         "summary": "Add a face to a person into a person group for face identification or verification.",
-        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until PersonGroup PersonFace - Delete, PersonGroup Person - Delete or PersonGroup - Delete is called.\nNote persistedFaceId is different from faceId generated by Face - Detect.\n\n* Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* Each person entry can hold up to 248 faces.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from Face - Detect, there's no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n  * 'detection_01': The default detection model for PersonDirectory Person - Add Face. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n  * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.\n  * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces.",
+        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until PersonGroup PersonFace - Delete, PersonGroup Person - Delete or PersonGroup - Delete is called.\n\nNote persistedFaceId is different from faceId generated by Face - Detect.\n>\n*\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * Each person entry can hold up to 248 faces.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from Face - Detect, there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n    * 'detection_01': The default detection model for PersonDirectory Person - Add Face. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n    * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.\n    * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionPathParameter"
@@ -6969,7 +6969,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "A successful call returns a new persistedFaceId.",
             "schema": {
               "$ref": "#/definitions/AddFaceResult"
             }
@@ -6977,7 +6977,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -6988,7 +6988,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonGroupOperations_AddPersonGroupPersonFaceFromUrl": {
+          "Add Face to PersonGroupPerson from Url": {
             "$ref": "./examples/PersonGroupOperations_AddPersonGroupPersonFaceFromUrl.json"
           }
         }
@@ -6998,7 +6998,7 @@
       "post": {
         "operationId": "PersonDirectoryOperations_AddPersonFaceFromUrl",
         "summary": "Add a face to a person (see PersonDirectory Person - Create) for face identification or verification.",
-        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until PersonDirectory Person - Delete Face or PersonDirectory Person - Delete is called.\nNote persistedFaceId is different from faceId generated by Face - Detect.\n\n* Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n* Each person entry can hold up to 248 faces.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from Face - Detect, there's no guarantee to detect and add the face successfully.\n* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n  * 'detection_01': The default detection model for PersonDirectory Person - Add Face. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n  * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.\n  * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces.\n* Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.\n* This is a long running operation. Use Response Header \"Operation-Location\" to determine when the AddFace operation has successfully propagated for future requests to Face - Identify. For further information about Operation-Locations see Operations - Get Status.",
+        "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until PersonDirectory Person - Delete Face or PersonDirectory Person - Delete is called.\n\nNote persistedFaceId is different from faceId generated by Face - Detect.\n>\n*\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * Each person entry can hold up to 248 faces.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from Face - Detect, there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n    * 'detection_01': The default detection model for PersonDirectory Person - Add Face. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n    * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.\n    * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces.\n*\n  * Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.\n  * This is a long running operation. Use Response Header \"Operation-Location\" to determine when the AddFace operation has successfully propagated for future requests to Face - Identify. For further information about Operation-Locations see Operations - Get Status.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionPathParameter"
@@ -7134,22 +7134,22 @@
               "$ref": "#/definitions/AddFaceResult"
             },
             "headers": {
-              "Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location of an instance of PersonDirectoryPerson"
-              },
               "operation-Location": {
                 "type": "string",
                 "format": "uri",
                 "description": "The location of an instance of FaceOperationStatus"
+              },
+              "Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location of an instance of PersonDirectoryPerson"
               }
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -7160,7 +7160,7 @@
           }
         },
         "x-ms-examples": {
-          "PersonDirectoryOperations_AddPersonFaceFromUrl": {
+          "Add Face to PersonDirectory Person from Url": {
             "$ref": "./examples/PersonDirectoryOperations_AddPersonFaceFromUrl.json"
           }
         }
@@ -7213,7 +7213,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -7224,7 +7224,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceRecognitionOperations_VerifyFromLargePersonGroup": {
+          "Verify from LargePersonGroup": {
             "$ref": "./examples/FaceRecognitionOperations_VerifyFromLargePersonGroup.json"
           }
         }
@@ -7272,7 +7272,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -7283,7 +7283,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceRecognitionOperations_VerifyFromPersonDirectory": {
+          "Verify from PersonDirectory": {
             "$ref": "./examples/FaceRecognitionOperations_VerifyFromPersonDirectory.json"
           }
         }
@@ -7336,7 +7336,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/FaceErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -7347,7 +7347,7 @@
           }
         },
         "x-ms-examples": {
-          "FaceRecognitionOperations_VerifyFromPersonGroup": {
+          "Verify from PersonGroup": {
             "$ref": "./examples/FaceRecognitionOperations_VerifyFromPersonGroup.json"
           }
         }
@@ -7391,17 +7391,17 @@
           {
             "name": "headwear",
             "value": "headwear",
-            "description": "Head wear"
+            "description": "Headwear."
           },
           {
             "name": "glasses",
             "value": "glasses",
-            "description": "Glasses"
+            "description": "Glasses."
           },
           {
             "name": "mask",
             "value": "mask",
-            "description": "Mask"
+            "description": "Mask."
           }
         ]
       }
@@ -7628,12 +7628,12 @@
         "age": {
           "type": "number",
           "format": "float",
-          "description": "Age in years"
+          "description": "Age in years."
         },
         "smile": {
           "type": "number",
           "format": "float",
-          "description": "Smile intensity, a number between [0,1]",
+          "description": "Smile intensity, a number between [0,1].",
           "minimum": 0,
           "maximum": 1
         },
@@ -7716,117 +7716,148 @@
         "faceId"
       ]
     },
+    "FaceError": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "FaceErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/FaceError",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
     "FaceLandmarks": {
       "type": "object",
       "description": "A collection of 27-point face landmarks pointing to the important positions of face components.",
       "properties": {
         "pupilLeft": {
           "$ref": "#/definitions/LandmarkCoordinate",
-          "description": "Coordinates within an image"
+          "description": "The coordinates of the left eye pupil."
         },
         "pupilRight": {
           "$ref": "#/definitions/LandmarkCoordinate",
-          "description": "Coordinates within an image"
+          "description": "The coordinates of the right eye pupil."
         },
         "noseTip": {
           "$ref": "#/definitions/LandmarkCoordinate",
-          "description": "Coordinates within an image"
+          "description": "The coordinates of the nose tip."
         },
         "mouthLeft": {
           "$ref": "#/definitions/LandmarkCoordinate",
-          "description": "Coordinates within an image"
+          "description": "The coordinates of the mouth left."
         },
         "mouthRight": {
           "$ref": "#/definitions/LandmarkCoordinate",
-          "description": "Coordinates within an image"
+          "description": "The coordinates of the mouth right."
         },
         "eyebrowLeftOuter": {
           "$ref": "#/definitions/LandmarkCoordinate",
-          "description": "Coordinates within an image"
+          "description": "The coordinates of the left eyebrow outer."
         },
         "eyebrowLeftInner": {
           "$ref": "#/definitions/LandmarkCoordinate",
-          "description": "Coordinates within an image"
+          "description": "The coordinates of the left eyebrow inner."
         },
         "eyeLeftOuter": {
           "$ref": "#/definitions/LandmarkCoordinate",
-          "description": "Coordinates within an image"
+          "description": "The coordinates of the left eye outer."
         },
         "eyeLeftTop": {
           "$ref": "#/definitions/LandmarkCoordinate",
-          "description": "Coordinates within an image"
+          "description": "The coordinates of the left eye top."
         },
         "eyeLeftBottom": {
           "$ref": "#/definitions/LandmarkCoordinate",
-          "description": "Coordinates within an image"
+          "description": "The coordinates of the left eye bottom."
         },
         "eyeLeftInner": {
           "$ref": "#/definitions/LandmarkCoordinate",
-          "description": "Coordinates within an image"
+          "description": "The coordinates of the left eye inner."
         },
         "eyebrowRightInner": {
           "$ref": "#/definitions/LandmarkCoordinate",
-          "description": "Coordinates within an image"
+          "description": "The coordinates of the right eyebrow inner."
         },
         "eyebrowRightOuter": {
           "$ref": "#/definitions/LandmarkCoordinate",
-          "description": "Coordinates within an image"
+          "description": "The coordinates of the right eyebrow outer."
         },
         "eyeRightInner": {
           "$ref": "#/definitions/LandmarkCoordinate",
-          "description": "Coordinates within an image"
+          "description": "The coordinates of the right eye inner."
         },
         "eyeRightTop": {
           "$ref": "#/definitions/LandmarkCoordinate",
-          "description": "Coordinates within an image"
+          "description": "The coordinates of the right eye top."
         },
         "eyeRightBottom": {
           "$ref": "#/definitions/LandmarkCoordinate",
-          "description": "Coordinates within an image"
+          "description": "The coordinates of the right eye bottom."
         },
         "eyeRightOuter": {
           "$ref": "#/definitions/LandmarkCoordinate",
-          "description": "Coordinates within an image"
+          "description": "The coordinates of the right eye outer."
         },
         "noseRootLeft": {
           "$ref": "#/definitions/LandmarkCoordinate",
-          "description": "Coordinates within an image"
+          "description": "The coordinates of the nose root left."
         },
         "noseRootRight": {
           "$ref": "#/definitions/LandmarkCoordinate",
-          "description": "Coordinates within an image"
+          "description": "The coordinates of the nose root right."
         },
         "noseLeftAlarTop": {
           "$ref": "#/definitions/LandmarkCoordinate",
-          "description": "Coordinates within an image"
+          "description": "The coordinates of the nose left alar top."
         },
         "noseRightAlarTop": {
           "$ref": "#/definitions/LandmarkCoordinate",
-          "description": "Coordinates within an image"
+          "description": "The coordinates of the nose right alar top."
         },
         "noseLeftAlarOutTip": {
           "$ref": "#/definitions/LandmarkCoordinate",
-          "description": "Coordinates within an image"
+          "description": "The coordinates of the nose left alar out tip."
         },
         "noseRightAlarOutTip": {
           "$ref": "#/definitions/LandmarkCoordinate",
-          "description": "Coordinates within an image"
+          "description": "The coordinates of the nose right alar out tip."
         },
         "upperLipTop": {
           "$ref": "#/definitions/LandmarkCoordinate",
-          "description": "Coordinates within an image"
+          "description": "The coordinates of the upper lip top."
         },
         "upperLipBottom": {
           "$ref": "#/definitions/LandmarkCoordinate",
-          "description": "Coordinates within an image"
+          "description": "The coordinates of the upper lip bottom."
         },
         "underLipTop": {
           "$ref": "#/definitions/LandmarkCoordinate",
-          "description": "Coordinates within an image"
+          "description": "The coordinates of the under lip top."
         },
         "underLipBottom": {
           "$ref": "#/definitions/LandmarkCoordinate",
-          "description": "Coordinates within an image"
+          "description": "The coordinates of the under lip bottom."
         }
       },
       "required": [
@@ -8262,42 +8293,42 @@
           {
             "name": "unknownHairColor",
             "value": "unknown",
-            "description": "Unknown"
+            "description": "Unknown."
           },
           {
             "name": "white",
             "value": "white",
-            "description": "White"
+            "description": "White."
           },
           {
             "name": "gray",
             "value": "gray",
-            "description": "Gray"
+            "description": "Gray."
           },
           {
             "name": "blond",
             "value": "blond",
-            "description": "Blond"
+            "description": "Blond."
           },
           {
             "name": "brown",
             "value": "brown",
-            "description": "Brown"
+            "description": "Brown."
           },
           {
             "name": "red",
             "value": "red",
-            "description": "Red"
+            "description": "Red."
           },
           {
             "name": "black",
             "value": "black",
-            "description": "Black"
+            "description": "Black."
           },
           {
             "name": "other",
             "value": "other",
-            "description": "Other"
+            "description": "Other."
           }
         ]
       }
@@ -8416,7 +8447,7 @@
     },
     "LandmarkCoordinate": {
       "type": "object",
-      "description": "Coordinates within an image.",
+      "description": "Landmark coordinates within an image.",
       "properties": {
         "x": {
           "type": "number",
@@ -9103,7 +9134,7 @@
         },
         "type": {
           "$ref": "#/definitions/MaskType",
-          "description": "Mask type if any of the face"
+          "description": "Type of the mask."
         }
       },
       "required": [
@@ -9113,7 +9144,7 @@
     },
     "MaskType": {
       "type": "string",
-      "description": "Mask type if any of the face",
+      "description": "Type of the mask.",
       "enum": [
         "faceMask",
         "noMask",
@@ -9142,7 +9173,7 @@
           {
             "name": "uncertain",
             "value": "uncertain",
-            "description": "Uncertain"
+            "description": "Uncertain."
           }
         ]
       }

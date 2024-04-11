@@ -261,22 +261,26 @@ model GroupingResult {
   messyGroup: uuid[];
 }
 
-alias AddFaceDescription = """
-* Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.
-* Each person entry can hold up to 248 faces.
-* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.
-* "targetFace" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided "targetFace" rectangle is not returned from Face - Detect, there's no guarantee to detect and add the face successfully.
-* Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.
-* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.
-* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model
-  * 'detection_01': The default detection model for PersonDirectory Person - Add Face. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.
-  * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.
-  * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces.
+alias AddFaceDescriptionInList = """
+>
+*
+  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.
+  * Each person entry can hold up to 248 faces.
+  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.
+  * "targetFace" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided "targetFace" rectangle is not returned from Face - Detect, there's no guarantee to detect and add the face successfully.
+  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.
+  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.
+  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model
+    * 'detection_01': The default detection model for PersonDirectory Person - Add Face. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.
+    * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.
+    * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces.
 """;
 
-alias ListRequestOptionsDescription = """
-* "start" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. "start" set to empty to indicate return from the first item.
-* "top" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify "start" with the last returned entry's personId of the current call.
+alias ListRequestOptionsDescriptionInList = """
+>
+*
+  * "start" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. "start" set to empty to indicate return from the first item.
+  * "top" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify "start" with the last returned entry's personId of the current call.
 
 > [!TIP]
 > For example, total 5 items with their id: "itemId1", ..., "itemId5".
@@ -284,3 +288,14 @@ alias ListRequestOptionsDescription = """
 > * "start=&top=2" will return "itemId1", "itemId2".
 > * "start=itemId2&top=3" will return "itemId3", "itemId4", "itemId5".
 """;
+
+@doc("The error object.")
+model FaceError {
+  @doc("One of a server-defined set of error codes.")
+  code: string;
+
+  @doc("A human-readable representation of the error.")
+  message: string;
+}
+
+model FaceErrorResponse is Azure.Core.Foundations.ErrorResponseBase<FaceError>;
