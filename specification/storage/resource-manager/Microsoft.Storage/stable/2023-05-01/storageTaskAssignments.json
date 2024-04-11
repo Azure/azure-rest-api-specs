@@ -439,17 +439,6 @@
       ],
       "description": "The storage task assignment."
     },
-    "StorageTaskAssignmentUpdateParameters": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/StorageTaskAssignmentProperties",
-          "description": "Properties of the storage task assignment."
-        }
-      },
-      "description": "Parameters of the storage task assignment update request"
-    },
     "StorageTaskAssignmentProperties": {
       "type": "object",
       "properties": {
@@ -521,6 +510,10 @@
           "description": "Execution constraints of the storage task assignment"
         }
       },
+      "required": [
+        "target",
+        "trigger"
+      ],
       "description": "Execution context of the storage task assignment."
     },
     "ExecutionTarget": {
@@ -686,6 +679,177 @@
       "required": [
         "prefix"
       ],
+      "description": "The storage task assignment report"
+    },
+    "StorageTaskAssignmentUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/StorageTaskAssignmentUpdateProperties",
+          "description": "Properties of the storage task assignment."
+        }
+      },
+      "description": "Parameters of the storage task assignment update request"
+    },
+    "StorageTaskAssignmentUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "taskId": {
+          "type": "string",
+          "description": "Id of the corresponding storage task"
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the storage task assignment is enabled or not"
+        },
+        "description": {
+          "type": "string",
+          "description": "Text that describes the purpose of the storage task assignment"
+        },
+        "executionContext": {
+          "$ref": "#/definitions/StorageTaskAssignmentUpdateExecutionContext",
+          "description": "The storage task assignment execution context"
+        },
+        "report": {
+          "$ref": "#/definitions/StorageTaskAssignmentUpdateReport",
+          "description": "The storage task assignment report"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Represents the provisioning state of the storage task assignment.",
+          "enum": [
+            "ValidateSubscriptionQuotaBegin",
+            "ValidateSubscriptionQuotaEnd",
+            "Creating",
+            "Succeeded",
+            "Deleting",
+            "Canceled",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": false
+          }
+        },
+        "runStatus": {
+          "$ref": "./common.json#/definitions/StorageTaskReportProperties",
+          "description": "Run status of storage task assignment"
+        }
+      },
+      "description": "Properties of the storage task update assignment."
+    },
+    "StorageTaskAssignmentUpdateExecutionContext": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "$ref": "#/definitions/ExecutionTargetUpdate",
+          "description": "Execution target of the storage task assignment"
+        },
+        "trigger": {
+          "$ref": "#/definitions/ExecutionTriggerUpdate",
+          "description": "Execution trigger of the storage task assignment"
+        },
+        "constraints": {
+          "$ref": "#/definitions/ExecutionConstraints",
+          "description": "Execution constraints of the storage task assignment"
+        }
+      },
+      "description": "Execution context of the storage task assignment update."
+    },
+    "ExecutionTargetUpdate": {
+      "type": "object",
+      "properties": {
+        "prefix": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of target prefixes"
+        },
+        "excludePrefix": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of target prefixes to exclude"
+        },
+        "reservedPathPrefix": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of reserved path prefixes"
+        }
+      },
+      "description": "Target for storage task assignment update execution"
+    },
+    "ExecutionTriggerUpdate": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "RunOnce",
+            "OnSchedule"
+          ],
+          "x-ms-enum": {
+            "name": "TriggerType",
+            "modelAsString": false
+          },
+          "description": "The trigger type of the storage task assignment execution"
+        },
+        "parameters": {
+          "$ref": "#/definitions/TriggerParametersUpdate",
+          "description": "The trigger parameters of the storage task assignment execution"
+        }
+      },
+      "description": "Execution trigger update for storage task assignment"
+    },
+    "TriggerParametersUpdate": {
+      "type": "object",
+      "properties": {
+        "startFrom": {
+          "type": "string",
+          "description": "When to start task execution"
+        },
+        "interval": {
+          "type": "integer",
+          "minimum": 1,
+          "format": "int32",
+          "description": "Run interval of task execution"
+        },
+        "intervalUnit": {
+          "type": "string",
+          "enum": [
+            "days"
+          ],
+          "x-ms-enum": {
+            "name": "IntervalUnit",
+            "modelAsString": false
+          },
+          "description": "Run interval unit of task execution"
+        },
+        "endBy": {
+          "type": "string",
+          "description": "When to end task execution"
+        },
+        "startOn": {
+          "type": "string",
+          "description": "startOn for task execution"
+        }
+      },
+      "description": "The trigger parameters update for the storage task assignment execution"
+    },
+    "StorageTaskAssignmentUpdateReport": {
+      "type": "object",
+      "properties": {
+        "prefix": {
+          "type": "string",
+          "description": "The prefix of the storage task assignment report"
+        }
+      },
       "description": "The storage task assignment report"
     },
     "StorageTaskAssignmentsList": {
