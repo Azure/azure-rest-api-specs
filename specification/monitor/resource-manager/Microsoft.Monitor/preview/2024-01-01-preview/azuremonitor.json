@@ -1644,6 +1644,14 @@
       "type": "object",
       "description": "The investigation result.",
       "properties": {
+        "scopeType": {
+          "$ref": "#/definitions/ScopeSourceType",
+          "description": "The investigation scope source type."
+        },
+        "scopingSourceResourceId": {
+          "type": "string",
+          "description": "The investigation scope source resource id."
+        },
         "healthState": {
           "$ref": "#/definitions/HealthState",
           "description": "The health state of the investigation's scope."
@@ -2481,6 +2489,30 @@
         "from",
         "to"
       ]
+    },
+    "ScopeSourceType": {
+      "type": "string",
+      "description": "The investigation scope source type.",
+      "enum": [
+        "automatic",
+        "UserDefined"
+      ],
+      "x-ms-enum": {
+        "name": "ScopeSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "automatic",
+            "value": "automatic",
+            "description": "Automatic scope"
+          },
+          {
+            "name": "UserDefined",
+            "value": "UserDefined",
+            "description": "User defined scope"
+          }
+        ]
+      }
     },
     "Sensitivity": {
       "type": "string",

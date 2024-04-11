@@ -182,6 +182,20 @@ enum InvestigationScopeType {
 }
 
 /**
+ * The investigation scope source type.
+ */
+@doc("The investigation scope source type.")
+@added(Microsoft.Monitor.Versions.v2024_01_01_preview)
+enum ScopeSourceType {
+  @doc("Automatic scope")
+  automatic,
+
+  @doc("User defined scope")
+  UserDefined,
+}
+
+
+/**
  * Investigation properties with the investigation result.
  */
 @doc("Investigation properties with the investigation result")
@@ -300,6 +314,12 @@ model Execution {
  */
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
 model InvestigationResult {
+  @doc("The investigation scope source type.")
+  scopeType?: ScopeSourceType;
+
+  @doc("The investigation scope source resource id.")
+  scopingSourceResourceId?: string;
+
   @doc("The health state of the investigation's scope.")
   healthState?: HealthState;
 
