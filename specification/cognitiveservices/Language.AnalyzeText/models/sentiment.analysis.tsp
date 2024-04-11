@@ -48,22 +48,22 @@ model SentimentTaskResult extends AnalyzeTextTaskResult {
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
 @doc("The predicted Sentiment for the sentence.")
 union SentenceSentimentValue {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'positive' should have a documentation or description: " description ", please use decorator @doc to add it."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   positive: "positive",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'neutral' should have a documentation or description: " description ", please use decorator @doc to add it."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   neutral: "neutral",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'negative' should have a documentation or description: " description ", please use decorator @doc to add it."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   negative: "negative",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
 @doc("The predicted Sentiment for the sentence.")
 union TokenSentimentValue {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'positive' should have a documentation or description: " description ", please use decorator @doc to add it."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   positive: "positive",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'mixed' should have a documentation or description: " description ", please use decorator @doc to add it."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   mixed: "mixed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'negative' should have a documentation or description: " description ", please use decorator @doc to add it."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   negative: "negative",
 }
 
@@ -168,9 +168,9 @@ model TargetRelation {
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
 @doc("The type related to the target.")
 union TargetRelationType {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'assessment' should have a documentation or description: " description ", please use decorator @doc to add it."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   assessment: "assessment",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "The EnumMember named 'target' should have a documentation or description: " description ", please use decorator @doc to add it."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required"
   target: "target",
 }
 
