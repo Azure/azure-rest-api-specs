@@ -127,19 +127,21 @@ interface ProxyResourceOperations<T extends ProxyResourceBase> {
 @doc("Common interface for all tracked resources")
 interface BaseResourceOperations<
   T extends TrackedResourceBase,
-  P extends TypeSpec.Reflection.Model
+  P extends TypeSpec.Reflection.Model,
+  U extends TypeSpec.Reflection.Model=P
 > {
   get is ArmResourceRead<T>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<T>;
-  update is ArmResourcePatchAsync<T, P>;
+  update is ArmResourcePatchAsync<T, U>;
   delete is ArmResourceDeleteWithoutOkAsync<T>;
 }
 
 @doc("Common interface of all nested resources")
 interface NestedResourceOperations<
   T extends TrackedResourceBase,
-  P extends TypeSpec.Reflection.Model
-> extends BaseResourceOperations<T, P> {
+  P extends TypeSpec.Reflection.Model,
+  U extends TypeSpec.Reflection.Model=P
+> extends BaseResourceOperations<T, P, U> {
   list is ArmResourceListByParent<T>;
 }
 

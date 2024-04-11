@@ -5500,6 +5500,36 @@
         "value"
       ]
     },
+    "StoragePerformanceTier": {
+      "type": "string",
+      "description": "Performance tier of chamber storage.",
+      "enum": [
+        "Standard",
+        "Ultra",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "StoragePerformanceTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard tier."
+          },
+          {
+            "name": "Ultra",
+            "value": "Ultra",
+            "description": "Ultra tier."
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "Premium tier."
+          }
+        ]
+      }
+    },
     "StorageProperties": {
       "type": "object",
       "description": "Storage properties.",
@@ -5604,35 +5634,8 @@
           ]
         },
         "performanceTier": {
-          "type": "string",
+          "$ref": "#/definitions/StoragePerformanceTier",
           "description": "Performance tier of the chamber storage.",
-          "default": "Standard",
-          "enum": [
-            "Standard",
-            "Ultra",
-            "Premium"
-          ],
-          "x-ms-enum": {
-            "name": "StoragePerformanceTier",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Standard",
-                "value": "Standard",
-                "description": "Standard tier."
-              },
-              {
-                "name": "Ultra",
-                "value": "Ultra",
-                "description": "Ultra tier."
-              },
-              {
-                "name": "Premium",
-                "value": "Premium",
-                "description": "Premium tier."
-              }
-            ]
-          },
           "x-ms-mutability": [
             "read",
             "update",

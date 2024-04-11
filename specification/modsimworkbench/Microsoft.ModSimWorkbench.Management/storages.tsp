@@ -46,6 +46,15 @@ model StorageProperties {
   performanceTier: StoragePerformanceTier = StoragePerformanceTier.Standard;
 }
 
+@doc("Storage properties.")
+model StorageUpdateProperties {
+  ...CapacityAllocatedProperty;
+
+  @visibility("read", "create", "update")
+  @doc("Performance tier of the chamber storage.")
+  performanceTier?: StoragePerformanceTier;
+}
+
 @doc("Storage tracked resource.")
 @parentResource(Chamber)
 model Storage is TrackedResource<StorageProperties> {
@@ -59,4 +68,4 @@ model Storage is TrackedResource<StorageProperties> {
 
 @armResourceOperations
 interface Storages
-  extends NestedResourceOperations<Storage, StorageProperties> {}
+  extends NestedResourceOperations<Storage, StorageProperties, StorageUpdateProperties> {}
