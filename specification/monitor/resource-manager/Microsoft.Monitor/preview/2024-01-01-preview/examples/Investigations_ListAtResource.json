@@ -139,43 +139,41 @@
                               }
                             }
                           },
-                          {
-                            "scope": "subscriptions/ebb79bc0-aa86-44a7-8111-cabbe0c43993/resourceGroups/CH1-ContosoSH360ClusterRG/providers/Microsoft.ContainerService/managedClusters/CH1-ContosoSH360Cluster",
-                            "id": "1e248e13-6c4f-46c2-a5cb-c8e2b74eb297",
-                            "type": "correlatedMetricAnomaly",
-                            "execution": {
-                              "completedOn": "2023-05-14T15:35:05.5998478+03:00",
-                              "status": "succeeded"
-                            },
-                            "result": {
-                              "healthState": "unhealthy",
-                              "confidenceLevel": "medium",
-                              "resultType": "azureMetricAnomaly",
-                              "details": {
-                                "metricIdentifier": {
-                                  "metricName": "Memory usage",
-                                  "metricNamespace": "Microsoft.Storage/storageAccounts/blobServices",
-                                  "metricInterval": "PT1M",
-                                  "metricAggregation": "sum",
-                                  "dimensions": {
-                                    "Role": [
-                                      "RoleC",
-                                      "RoleB"
-                                    ]
-                                  }
-                                },
-                                "anomalyScanRnage": {
-                                  "start": "2017-04-14T02:20:00Z",
-                                  "end": "2017-04-14T04:20:00Z"
-                                },
-                                "thresholds": {
-                                  "upper": 500,
-                                  "lower": 250
-                                },
-                                "anomalyDirection": "Increase"
-                              }
-                            }
-                          }
+						  {
+							"scope": "/subscriptions/064c2ca1-818f-4bee-a8f6-402d02b9ad07/resourceGroups/DevAksCluster/providers/microsoft.monitor/accounts/DevAksClusterMon",
+							"id": "f6702d8c-6658-4a77-9d43-0081327a6acf",
+							"type": "correlatedMetricAnomaly",
+							"execution": {
+							  "completedOn": "2023-10-30T00:00:00Z",
+							  "status": "succeeded"
+							},
+							"result": {
+							  "healthState": "unhealthy",
+							  "confidenceLevel": "unknown",
+							  "resultType": "prometheusMetricAnomaly",
+							  "details": {
+								"metricIdentifier": {
+								  "query": "sum by (namespace) (node_namespace_pod_container:container_memory_cache{cluster=\"DevAksCluster\"})",
+								  "queryType": "Range",
+								  "labels": {
+									"namespace": [
+									  "promdev0"
+									]
+								  },
+								  "step": "15m"
+								},
+								"anomalyScanRange": {
+								  "start": "2023-08-19T22:00:00+00:00",
+								  "end": "2023-08-20T00:00:00+00:00"
+								},
+								"thresholds": {
+								  "high": 513937.75,
+								  "low": 244468.83
+								},
+								"anomalyDirection": "decrease"
+							  }
+							}
+						  }
                         ]
                       }
                     ]
