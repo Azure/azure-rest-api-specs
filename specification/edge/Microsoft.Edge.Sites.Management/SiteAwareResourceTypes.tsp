@@ -24,6 +24,7 @@ model SiteAwareResourceTypes is ProxyResource<SiteAwareResourceTypesProperties> 
   @key("siteAwareResourceType")
   @segment("siteAwareResourceTypes")
   @visibility("read")
+  @pattern("^default$")
   name: string;
 }
 
