@@ -1,6 +1,5 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
-import "@azure-tools/typespec-autorest";
 import "./models.tsp";
 import "../shared/routes.tsp";
 
@@ -8,7 +7,6 @@ using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using Autorest;
 
 namespace DevCenterService;
 
