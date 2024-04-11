@@ -23,8 +23,9 @@ model LocationLevelBaseParameters {
   ...LocationResourceParameter;
 }
 
+// Note: The op definition below is used directly for asynchronous operations without requiring ARM resources
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
-@doc("ActionAsync base operation")
+@doc("base operation of ActionAsync")
 @extension("x-ms-long-running-operation", true)
 @extension(
   "x-ms-long-running-operation-options",
@@ -48,7 +49,7 @@ op ActionAsyncBase<
 ): Response | Error;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
-@doc("ActionAsync operation")
+@doc("LocationLevel Async operation")
 op LocationLevelActionAsync<
   Request extends TypeSpec.Reflection.Model | void,
   Response extends TypeSpec.Reflection.Model | void,
