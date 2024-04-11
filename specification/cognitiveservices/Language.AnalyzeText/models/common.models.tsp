@@ -595,6 +595,7 @@ model KnowledgeBaseAnswer {
   source?: string;
 
   @doc("Metadata associated with the answer, useful to categorize or filter question answers.")
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "KnowledgeBaseAnswer.metadata should not use ': Record<unknown>'. Use ': Record<string>' instead."
   metadata?: Record<unknown>;
 
   @doc("Dialog associated with Answer.")
