@@ -39,8 +39,10 @@
     "200": {
       "description": "Successful validation result.",
       "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/myMg/providers/Microsoft.Resources/deploymentStacks/simpleDeploymentStack",
+        "name": "simpleDeploymentStack",
+        "type": "Microsoft.Resources/deploymentStacks",
         "properties": {
-          "name": "simpleDeploymentStack",
           "correlationId": "00000000-0000-0000-0000-000000000000",
           "denySettings": {
             "mode": "denyDelete",
@@ -52,6 +54,8 @@
             ],
             "applyToChildScopes": false
           },
+          "deploymentScope": "/providers/Microsoft.Management/managementGroups/myMg",
+          "description": "A validation description.",
           "parameters": {
             "parameter1": {
               "type": "string"
@@ -75,6 +79,13 @@
     "400": {
       "description": "Failed validation result.",
       "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/myMg/providers/Microsoft.Resources/deploymentStacks/simpleDeploymentStack",
+        "name": "simpleDeploymentStack",
+        "type": "Microsoft.Resources/deploymentStacks",
+        "error": {
+          "code": "ErrorCode",
+          "message": "Deployment validation failed"
+        },
         "properties": {
           "correlationId": "00000000-0000-0000-0000-000000000000",
           "denySettings": {
@@ -87,11 +98,8 @@
             ],
             "applyToChildScopes": false
           },
-          "error": {
-            "code": "ErrorCode",
-            "message": "Deployment validation failed"
-          },
-          "name": "simpleDeploymentStack",
+          "deploymentScope": "/providers/Microsoft.Management/managementGroups/myMg",
+          "description": "A validation description.",
           "parameters": {
             "parameter1": {
               "type": "string"

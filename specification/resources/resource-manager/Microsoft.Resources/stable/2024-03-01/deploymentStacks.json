@@ -1497,6 +1497,9 @@
       "description": "The Deployment stack validation result.",
       "allOf": [
         {
+          "$ref": "#/definitions/AzureResourceBase"
+        },
+        {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
         }
       ],
@@ -1515,11 +1518,6 @@
     "DeploymentStackValidateProperties": {
       "type": "object",
       "description": "The Deployment stack validation result details.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-        }
-      ],
       "properties": {
         "actionOnUnmanage": {
           "$ref": "#/definitions/ActionOnUnmanage",
@@ -1534,17 +1532,13 @@
           "$ref": "#/definitions/DenySettings",
           "description": "The Deployment stack deny settings."
         },
-        "deploymentId": {
-          "type": "string",
-          "description": "The resourceId of the deployment resource of the Deployment stack."
-        },
         "deploymentScope": {
           "type": "string",
           "description": "The Deployment stack deployment scope."
         },
-        "name": {
+        "description": {
           "type": "string",
-          "description": "The Deployment stack name."
+          "description": "The Deployment stack validation description."
         },
         "parameters": {
           "type": "object",
