@@ -211,11 +211,11 @@ model CustomBaseParameters<Resource extends Azure.ResourceManager.Foundations.Ar
   ...ResourceGroupParameter;
 
   @path
-  @doc("providerName")
+  @doc("ProviderName")
   providerName: "provider";
 
   @path
-  @doc("cluster Rp name")
+  @doc("Cluster Resource Provider Name")
   clusterRp: string;
 
   @path
@@ -223,7 +223,7 @@ model CustomBaseParameters<Resource extends Azure.ResourceManager.Foundations.Ar
   clusterResourceName: string;
 
   @path
-  @doc("cluste rName")
+  @doc("cluster Name")
   clusterName: string;
 }
 
