@@ -316,7 +316,7 @@ model Schedule {
 
   @doc("The target time to trigger the action. The format is HH:MM.")
   //no build in time type matches HH:MM time format
-  time: string;
+  time: plainTime;
 
   @doc("The IANA timezone id at which the schedule should execute.")
   timeZone: string;
