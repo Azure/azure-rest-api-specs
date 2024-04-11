@@ -632,10 +632,10 @@ model GitRepositoryDefinition {
    */
   httpsUser?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "It is a breaking change for our existing SDKs"
   /**
    * Base64-encoded HTTPS certificate authority contents used to access git private git repositories over HTTPS
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "It is a breaking change for our existing SDKs"
   httpsCACert?: string;
 
   /**
@@ -1099,10 +1099,10 @@ model GitRepositoryPatchDefinition {
    */
   httpsUser?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "It is a breaking change for our existing SDKs"
   /**
    * Base64-encoded HTTPS certificate authority contents used to access git private git repositories over HTTPS
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "It is a breaking change for our existing SDKs"
   httpsCACert?: string;
 
   /**
