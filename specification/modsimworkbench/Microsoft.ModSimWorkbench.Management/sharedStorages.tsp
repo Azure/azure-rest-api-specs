@@ -94,4 +94,8 @@ model SharedStorage is TrackedResource<SharedStorageProperties> {
 
 @armResourceOperations
 interface SharedStorages
-  extends NestedResourceOperations<SharedStorage, SharedStorageProperties, SharedStorageUpdateProperties> {}
+  extends NestedResourceOperations<
+      SharedStorage,
+      SharedStorageProperties,
+      SharedStorageUpdateProperties
+    > {}
