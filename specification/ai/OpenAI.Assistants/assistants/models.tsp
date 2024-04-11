@@ -38,7 +38,7 @@ model Assistant {
   @doc("The collection of tools enabled for the assistant.")
   tools: ToolDefinition[] = [];
 
-  @projectedName("json", "file_ids")
+  @encodedName("application/json", "file_ids")
   @doc("A list of attached file IDs, ordered by creation date in ascending order.")
   fileIds: string[] = [];
 
@@ -67,7 +67,7 @@ model AssistantCreationOptions {
   @doc("The collection of tools to enable for the new assistant.")
   tools?: ToolDefinition[] = [];
 
-  @projectedName("json", "file_ids")
+  @encodedName("application/json", "file_ids")
   @doc("A list of previously uploaded file IDs to attach to the assistant.")
   fileIds?: string[] = [];
 
@@ -99,7 +99,7 @@ model UpdateAssistantOptions {
   @doc("The modified collection of tools to enable for the assistant.")
   tools?: ToolDefinition[] = [];
 
-  @projectedName("json", "file_ids")
+  @encodedName("application/json", "file_ids")
   @doc("The modified list of previously uploaded fileIDs to attach to the assistant.")
   fileIds?: string[] = [];
 
@@ -128,7 +128,7 @@ model AssistantFile {
   @doc("The Unix timestamp, in seconds, representing when this object was created.")
   createdAt: epochDateTime;
 
-  @projectedName("json", "assistant_id")
+  @encodedName("application/json", "assistant_id")
   @doc("The assistant ID that the file is attached to.")
   assistantId: string;
 }
