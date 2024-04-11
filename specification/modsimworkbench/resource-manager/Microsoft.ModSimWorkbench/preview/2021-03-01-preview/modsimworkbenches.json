@@ -5305,6 +5305,21 @@
           "description": "Directory where the shared storage volume mounted.",
           "readOnly": true
         },
+        "chambers": {
+          "type": "array",
+          "description": "List of Chambers connected to the shared storage.",
+          "items": {
+            "$ref": "#/definitions/ConnectedChamber"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
         "performanceTier": {
           "type": "string",
           "description": "Performance tier of the shared storage.",
@@ -5334,27 +5349,12 @@
             "update",
             "create"
           ]
-        },
-        "chambers": {
-          "type": "array",
-          "description": "List of Chambers connected to the shared storage.",
-          "items": {
-            "$ref": "#/definitions/ConnectedChamber"
-          },
-          "x-ms-identifiers": [
-            "id"
-          ],
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
         }
       },
       "required": [
         "capacityAllocated",
-        "performanceTier",
-        "chambers"
+        "chambers",
+        "performanceTier"
       ]
     },
     "SharedStorageUpdate": {
@@ -5388,6 +5388,21 @@
             "create"
           ]
         },
+        "chambers": {
+          "type": "array",
+          "description": "List of Chambers connected to the shared storage.",
+          "items": {
+            "$ref": "#/definitions/ConnectedChamber"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
         "performanceTier": {
           "type": "string",
           "description": "Performance tier of the shared storage.",
@@ -5412,21 +5427,6 @@
               }
             ]
           },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "chambers": {
-          "type": "array",
-          "description": "List of Chambers connected to the shared storage.",
-          "items": {
-            "$ref": "#/definitions/ConnectedChamber"
-          },
-          "x-ms-identifiers": [
-            "id"
-          ],
           "x-ms-mutability": [
             "read",
             "update",
@@ -5532,7 +5532,7 @@
     },
     "StorageProperties": {
       "type": "object",
-      "description": "Storage properties.",
+      "description": "Storage  properties.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",

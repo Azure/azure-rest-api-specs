@@ -1,3 +1,4 @@
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
@@ -11,6 +12,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using OpenAPI;
 
@@ -44,8 +46,9 @@ model ConnectedChamber {
   ]>;
 }
 
-@doc("Shared storage properties.")
-model SharedStorageProperties {
+@doc("Shared storage properties common between create and update.")
+@access(Access.internal)
+model SharedStorageBaseProperties {
   ...ProvisioningStateProperty;
   ...CapacityAllocatedProperty;
   ...CapacityUsedProperty;
@@ -55,14 +58,29 @@ model SharedStorageProperties {
   localMountPath?: string;
 
   @visibility("read", "create", "update")
-  @doc("Performance tier of the shared storage.")
-  performanceTier: SharedStoragePerformanceTier = SharedStoragePerformanceTier.Standard;
-
-  @visibility("read", "create", "update")
   @doc("List of Chambers connected to the shared storage.")
   @extension("x-ms-identifiers", ["id"])
   chambers: Array<ConnectedChamber>;
 }
+
+@doc("Shared storage properties.")
+model SharedStorageProperties {
+  ...SharedStorageBaseProperties;
+
+  @visibility("read", "create", "update")
+  @doc("Performance tier of the shared storage.")
+  performanceTier: SharedStoragePerformanceTier = SharedStoragePerformanceTier.Standard;
+}
+
+@doc("Shared storage update properties.")
+model SharedStorageUpdateProperties {
+  ...SharedStorageBaseProperties;
+
+  @visibility("read", "create", "update")
+  @doc("Performance tier of the shared storage.")
+  performanceTier: SharedStoragePerformanceTier;
+}
+
 
 @doc("Shared storage tracked resource.")
 @parentResource(Workbench)

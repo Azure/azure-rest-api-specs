@@ -1,3 +1,4 @@
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
@@ -5,9 +6,10 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./common-types.tsp";
 import "./chambers.tsp";
 
+using Azure.ClientGenerator.Core;
+using Azure.ResourceManager;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.ModSimWorkbench")
 @service({
@@ -31,8 +33,9 @@ union StoragePerformanceTier {
   Premium: "Premium",
 }
 
-@doc("Storage properties.")
-model StorageProperties {
+@doc("Storage properties common between create and update.")
+@access(Access.internal)
+model StorageBaseProperties {
   ...ProvisioningStateProperty;
   ...CapacityAllocatedProperty;
   ...CapacityUsedProperty;
@@ -41,18 +44,25 @@ model StorageProperties {
   @doc("Directory where the chamber storage volume mounted.")
   localMountPath?: string;
 
+
+}
+
+@doc("Storage  properties.")
+model StorageProperties {
+  ...StorageBaseProperties;
+
   @visibility("read", "create", "update")
   @doc("Performance tier of the chamber storage.")
   performanceTier: StoragePerformanceTier = StoragePerformanceTier.Standard;
 }
 
-@doc("Storage properties.")
+@doc("Storage update properties.")
 model StorageUpdateProperties {
-  ...CapacityAllocatedProperty;
+  ...StorageBaseProperties;
 
   @visibility("read", "create", "update")
   @doc("Performance tier of the chamber storage.")
-  performanceTier?: StoragePerformanceTier;
+  performanceTier: StoragePerformanceTier;
 }
 
 @doc("Storage tracked resource.")
