@@ -112,54 +112,6 @@ input-file:
 # Needed when there is more than one input file
 override-info:
   title: PolicyClient
-
-suppressions:
-  - code: PathForPutOperation
-    from: policyDefinitions.json
-    reason: Policy definitions can be created at management group or subscriptions
-  - code: PathForPutOperation
-    from: policySetDefinitions.json
-    reason: Policy sets can be created at management group or subscriptions
-  - code: PathForPutOperation
-    from: policyAssignments.json
-    reason: Policy assignments can be created at management group or subscriptions
-  - code: PathForPutOperation
-    from: policyDefinitionVersions.json
-    reason: Policy definition versions can be created at management group or subscriptions
-  - code: PathForPutOperation
-    from: policySetDefinitionVersions.json
-    reason: Policy set versions can be created at management group or subscriptions
-  - code: DeleteResponseBodyEmpty
-    from: policyAssignments.json
-    reason: Policy assignment body is returned on delete and this must match API
-  - code: RequestSchemaForTrackedResourcesMustHaveTags
-    from: policyAssignments.json
-    reason: Policy assignments are not tracked resources
-  - code: RepeatedPathInfo
-    from: policyAssignments.json
-    reason: Service requires the scope to be in the body
-  - code: PutResponseSchemaDescription
-    from: policyAssignments.json
-    reason: Service only returns 201 on all successful PUTs
-  - code: PutResponseSchemaDescription
-    from: policyDefinitions.json
-    reason: Service only returns 201 on all successful PUTs
-  - code: PutResponseSchemaDescription
-    from: policySetDefinitions.json
-    reason: Service only returns 201 on all successful PUTs
-  - code: UnSupportedPatchProperties
-    from: policyAssignments.json
-    reason: The location property represents the user-assigned identity location and is changeable for policy assignments
-  - code: PathContainsResourceType
-    from: policyAssignments.json
-    reason: The policy assignment id does contain the resource type
-  - code: ResourceNameRestriction
-    from: policyDefinitionVersions.json
-    reason: Using common types for management group name
-  - code: ResourceNameRestriction
-    from: policySetDefinitionVersions.json
-    reason: Using common types for management group name
-
 ```
 
 ### Tag: package-policy-2023-04-only
@@ -1398,6 +1350,63 @@ directive:
   - suppress: RequiredReadOnlySystemData
     from: resources.json
     reason: Pre-existing lint error. Not related to this version release. Will fix in the future
+  - suppress: PathForTrackedResourceTypes
+    from: deploymentStacks.json
+    reason: "A deployment stack resource is a proxy location-mapped resource type."
+  - suppress: TenantLevelAPIsNotAllowed
+    from: deploymentStacks.json
+    reason: "Working with deployment stacks at the management group scope is supported."
+  - suppress: TrackedResourcePatchOperation
+    from: deploymentStacks.json
+    reason: "A deployment stack resource is a proxy location-mapped resource type."
+  - suppress: AvoidAdditionalProperties
+    from: deploymentStacks.json
+    reason: "Deployment properties such as 'parameters', 'outputs', and 'template' are dynamic types. For example, properties of the parameters object are defined by the template content."
+  - suppress: PathForPutOperation
+    from: policyDefinitions.json
+    reason: Policy definitions can be created at management group or subscriptions
+  - suppress: PathForPutOperation
+    from: policySetDefinitions.json
+    reason: Policy sets can be created at management group or subscriptions
+  - suppress: PathForPutOperation
+    from: policyAssignments.json
+    reason: Policy assignments can be created at management group or subscriptions
+  - suppress: PathForPutOperation
+    from: policyDefinitionVersions.json
+    reason: Policy definition versions can be created at management group or subscriptions
+  - suppress: PathForPutOperation
+    from: policySetDefinitionVersions.json
+    reason: Policy set versions can be created at management group or subscriptions
+  - suppress: DeleteResponseBodyEmpty
+    from: policyAssignments.json
+    reason: Policy assignment body is returned on delete and this must match API
+  - suppress: RequestSchemaForTrackedResourcesMustHaveTags
+    from: policyAssignments.json
+    reason: Policy assignments are not tracked resources
+  - suppress: RepeatedPathInfo
+    from: policyAssignments.json
+    reason: Service requires the scope to be in the body
+  - suppress: PutResponseSchemaDescription
+    from: policyAssignments.json
+    reason: Service only returns 201 on all successful PUTs
+  - suppress: PutResponseSchemaDescription
+    from: policyDefinitions.json
+    reason: Service only returns 201 on all successful PUTs
+  - suppress: PutResponseSchemaDescription
+    from: policySetDefinitions.json
+    reason: Service only returns 201 on all successful PUTs
+  - suppress: UnSupportedPatchProperties
+    from: policyAssignments.json
+    reason: The location property represents the user-assigned identity location and is changeable for policy assignments
+  - suppress: PathContainsResourceType
+    from: policyAssignments.json
+    reason: The policy assignment id does contain the resource type
+  - suppress: ResourceNameRestriction
+    from: policyDefinitionVersions.json
+    reason: Using common types for management group name
+  - suppress: ResourceNameRestriction
+    from: policySetDefinitionVersions.json
+    reason: Using common types for management group name
 ```
 
 ---
