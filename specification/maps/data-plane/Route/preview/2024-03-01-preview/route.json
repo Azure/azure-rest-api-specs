@@ -852,7 +852,7 @@
                 "truck"
               ],
               "x-ms-enum": {
-                "name": "SnapToRoadsTravelMode",
+                "name": "RouteRangeTravelMode",
                 "modelAsString": true,
                 "values": [
                   {
@@ -2261,6 +2261,14 @@
         "axleWeight": {
           "x-ms-client-name": "axleWeightInKilograms",
           "description": "Weight per axle of the vehicle in kg. A value of 0 means that weight restrictions per axle are not considered.",
+          "format": "int64",
+          "type": "integer",
+          "maximum": 1000000,
+          "minimum": 0,
+          "default": 0
+        },
+        "axleCount": {
+          "description": "Number of axles on the vehicle. A value of 0 means that axle restrictions are not considered.",
           "format": "int64",
           "type": "integer",
           "maximum": 1000000,
