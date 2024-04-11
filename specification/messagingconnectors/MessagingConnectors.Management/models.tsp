@@ -477,10 +477,6 @@ model DataPreviewProperties {
 
   @doc("startMode of DataPreview")
   startMode: DataPreviewStartMode;
-
-  @doc("State of provisioning of the MessagingConnector ARM Resource")
-  @visibility("read")
-  provisioningState?: ConnectorProvisioningState;
 }
 
 @doc("Properties of DataPreview results")
@@ -493,10 +489,4 @@ model DataPreviewResults {
 
   @doc("Content of DataPreview results")
   results: string[];
-}
-
-@doc("Results of DataPreview operation")
-model DataPreviewOperationResult {
-  @doc("Id of DataPreview")
-  id: string;
 }
