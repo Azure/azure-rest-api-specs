@@ -182,68 +182,6 @@
         },
         "x-ms-long-running-operation": true
       },
-      "patch": {
-        "tags": [
-          "ApiManagementGatewayConfigConnection"
-        ],
-        "operationId": "ApiManagementGatewayConfigConnection_Update",
-        "description": "Updates an existing API Management gateway config connection.",
-        "x-ms-examples": {
-          "ApiManagementUpdateGatewayConfigConnection": {
-            "$ref": "./examples/ApiManagementUpdateGatewayConfigConnection.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/GatewayNameParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/ConfigConnectionIdParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ApiManagementGatewayConfigConnectionUpdateResource"
-            },
-            "description": "Parameters supplied to the Update API Management gateway config connection operation."
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The gateway config connection was successfully updated.",
-            "schema": {
-              "$ref": "#/definitions/ApiManagementGatewayConfigConnectionResource"
-            }
-          },
-          "202": {
-            "description": "The gateway update request was Accepted.",
-            "headers": {
-              "location": {
-                "description": "Location header",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
       "delete": {
         "tags": [
           "ApiManagementGatewayConfigConnection"
@@ -335,16 +273,6 @@
       ],
       "description": "Properties of an API Management gateway config connection resource."
     },
-    "ApiManagementGatewayConfigConnectionUpdateProperties": {
-      "type": "object",
-      "properties": {},
-      "allOf": [
-        {
-          "$ref": "#/definitions/GatewayConfigConnectionBaseProperties"
-        }
-      ],
-      "description": "Properties of an API Management gateway config connection resource."
-    },
     "ApiManagementGatewayConfigConnectionListResult": {
       "type": "object",
       "properties": {
@@ -410,27 +338,6 @@
         }
       },
       "x-ms-azure-resource": true
-    },
-    "ApiManagementGatewayConfigConnectionUpdateResource": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ApiManagementGatewayConfigConnectionUpdateProperties",
-          "description": "Properties of the API Management update gateway config."
-        },
-        "etag": {
-          "type": "string",
-          "description": "ETag of the resource.",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ApimResource"
-        }
-      ],
-      "description": "Parameter supplied to Update API Management gateway."
     }
   },
   "parameters": {}
