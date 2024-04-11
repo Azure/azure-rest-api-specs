@@ -92,3 +92,6 @@ alias OptionalNullableMetadata = {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   metadata?: Record<string> | null;
 };
+
+@encode(DateTimeKnownEncoding.unixTimestamp, int64)
+scalar epochDateTime extends utcDateTime;

@@ -32,10 +32,9 @@ model ThreadMessage {
   @doc("The object type, which is always 'thread.message'.")
   object: "thread.message";
 
-  @encodedName("application/json", "created_at")
-  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
+  @projectedName("json", "created_at")
   @doc("The Unix timestamp, in seconds, representing when this object was created.")
-  createdAt: utcDateTime;
+  createdAt: epochDateTime;
 
   @encodedName("application/json", "thread_id")
   @doc("The ID of the thread that this message belongs to.")
@@ -198,10 +197,9 @@ model MessageFile {
   @doc("The object type, which is always 'thread.message.file'.")
   object: "thread.message.file";
 
-  @encodedName("application/json", "created_at")
-  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
+  @projectedName("json", "created_at")
   @doc("The Unix timestamp, in seconds, representing when this object was created.")
-  createdAt: utcDateTime;
+  createdAt: epochDateTime;
 
   @encodedName("application/json", "message_id")
   @doc("The ID of the message that this file is attached to.")
