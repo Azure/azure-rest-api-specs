@@ -13,7 +13,7 @@ model ThreadInitializationMessage {
   @doc("The textual content of the initial message. Currently, robust input including images and annotated text may only be provided via a separate call to the create message API.")
   content: string;
 
-  @encodedName("application/json", "file_ids")
+  @projectedName("json", "file_ids")
   @doc("""
   A list of file IDs that the assistant should use. Useful for tools like retrieval and code_interpreter that can
   access files.
@@ -36,7 +36,7 @@ model ThreadMessage {
   @doc("The Unix timestamp, in seconds, representing when this object was created.")
   createdAt: epochDateTime;
 
-  @encodedName("application/json", "thread_id")
+  @projectedName("json", "thread_id")
   @doc("The ID of the thread that this message belongs to.")
   threadId: string;
 
@@ -46,15 +46,15 @@ model ThreadMessage {
   @doc("The list of content items associated with the assistant thread message.")
   content: MessageContent[];
 
-  @encodedName("application/json", "assistant_id")
+  @projectedName("json", "assistant_id")
   @doc("If applicable, the ID of the assistant that authored this message.")
   assistantId?: string;
 
-  @encodedName("application/json", "run_id")
+  @projectedName("json", "run_id")
   @doc("If applicable, the ID of the run associated with the authoring of this message.")
   runId?: string;
 
-  @encodedName("application/json", "file_ids")
+  @projectedName("json", "file_ids")
   @doc("""
   A list of file IDs that the assistant should use. Useful for tools like retrieval and code_interpreter that can
   access files.
@@ -90,7 +90,7 @@ model MessageImageFileContent extends MessageContent {
   @doc("The object type, which is always 'image_file'.")
   type: "image_file";
 
-  @encodedName("application/json", "image_file")
+  @projectedName("json", "image_file")
   @doc("The image file for this thread message content item.")
   imageFile: MessageImageFileDetails;
 }
@@ -119,11 +119,11 @@ model MessageTextAnnotation {
   @doc("The textual content associated with this text annotation item.")
   text: string;
 
-  @encodedName("application/json", "start_index")
+  @projectedName("json", "start_index")
   @doc("The first text index associated with this text annotation.")
   startIndex: int32;
 
-  @encodedName("application/json", "end_index")
+  @projectedName("json", "end_index")
   @doc("The last text index associated with this text annotation.")
   endIndex: int32;
 }
@@ -136,7 +136,7 @@ model MessageTextFileCitationAnnotation extends MessageTextAnnotation {
   @doc("The object type, which is always 'file_citation'.")
   type: "file_citation";
 
-  @encodedName("application/json", "file_citation")
+  @projectedName("json", "file_citation")
   @doc("""
   A citation within the message that points to a specific quote from a specific file.
   Generated when the assistant uses the "retrieval" tool to search files.
@@ -147,7 +147,7 @@ model MessageTextFileCitationAnnotation extends MessageTextAnnotation {
 @doc("A representation of a file-based text citation, as used in a file-based annotation of text thread message content.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model MessageTextFileCitationDetails {
-  @encodedName("application/json", "file_id")
+  @projectedName("json", "file_id")
   @doc("The ID of the file associated with this citation.")
   fileId: string;
 
@@ -163,7 +163,7 @@ model MessageTextFilePathAnnotation extends MessageTextAnnotation {
   @doc("The object type, which is always 'file_path'.")
   type: "file_path";
 
-  @encodedName("application/json", "file_path")
+  @projectedName("json", "file_path")
   @doc("A URL for the file that's generated when the assistant used the code_interpreter tool to generate a file.")
   filePath: MessageTextFilePathDetails;
 }
@@ -172,7 +172,7 @@ model MessageTextFilePathAnnotation extends MessageTextAnnotation {
 @added(ServiceApiVersions.v2024_02_15_preview)
 model MessageTextFilePathDetails {
   @doc("The ID of the specific file that the citation is from.")
-  @encodedName("application/json", "file_id")
+  @projectedName("json", "file_id")
   fileId: string;
 }
 
@@ -181,7 +181,7 @@ model MessageTextFilePathDetails {
 @doc("An image reference, as represented in thread message content.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model MessageImageFileDetails {
-  @encodedName("application/json", "file_id")
+  @projectedName("json", "file_id")
   @doc("The ID for the file associated with this image.")
   fileId: string;
 }
@@ -201,7 +201,7 @@ model MessageFile {
   @doc("The Unix timestamp, in seconds, representing when this object was created.")
   createdAt: epochDateTime;
 
-  @encodedName("application/json", "message_id")
+  @projectedName("json", "message_id")
   @doc("The ID of the message that this file is attached to.")
   messageId: string;
 }

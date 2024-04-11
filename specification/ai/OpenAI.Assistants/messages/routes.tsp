@@ -33,7 +33,7 @@ op createMessage(
   @path threadId: string,
   role: MessageRole,
   content: string,
-  @encodedName("application/json", "file_ids") fileIds?: string[],
+  @projectedName("json", "file_ids") fileIds?: string[],
   ...OptionalNullableMetadata,
 ): ThreadMessage;
 
