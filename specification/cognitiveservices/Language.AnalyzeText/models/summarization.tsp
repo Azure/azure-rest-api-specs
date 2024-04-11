@@ -12,8 +12,10 @@ namespace Language.AnalyzeText;
 model ExtractiveSummarizationTaskParameters is PreBuiltTaskParameters {
   @doc("Specifies the number of sentences in the extracted summary.")
   sentenceCount?: int64 = 3;
+
   @doc("Specifies how to sort the extracted summaries.")
   sortBy?: ExtractiveSummarizationSortingCriteria = ExtractiveSummarizationSortingCriteria.Offset;
+
   @doc("Specifies the method used to interpret string offsets.")
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
@@ -28,6 +30,7 @@ model ExtractiveSummarizationTaskParameters is PreBuiltTaskParameters {
 model ExtractiveSummarizationLROTask extends AnalyzeTextLROTask {
   @doc("The Extractive Summarization kind of the long running task.")
   kind: AnalyzeTextLROTaskKind.ExtractiveSummarization;
+
   @doc("Parameters for the Extractive Summarization task.")
   parameters?: ExtractiveSummarizationTaskParameters;
 }
@@ -103,6 +106,7 @@ model ExtractiveSummarizationLROResult extends AnalyzeTextLROResult {
 model AbstractiveSummarizationLROTask extends AnalyzeTextLROTask {
   @doc("The Abstractive Summarization kind of the long running task.")
   kind: AnalyzeTextLROTaskKind.AbstractiveSummarization;
+
   @doc("Parameters for the Abstractive Summarization task.")
   parameters: AbstractiveSummarizationTaskParameters;
 }
@@ -177,6 +181,7 @@ model AbstractiveSummary {
 model CustomAbstractiveSummarizationLROTask extends AnalyzeTextLROTask {
   @doc("The Custom Abstractive Summarization kind of the long running task.")
   kind: AnalyzeTextLROTaskKind.CustomAbstractiveSummarization;
+
   @doc("Parameters for the Custom Abstractive Summarization task.")
   parameters: CustomAbstractiveSummarizationTaskParameters;
 }

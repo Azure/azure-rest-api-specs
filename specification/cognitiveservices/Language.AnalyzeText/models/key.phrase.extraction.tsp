@@ -13,6 +13,7 @@ model AnalyzeTextKeyPhraseExtractionInput extends AnalyzeTextTask {
 
   @doc("Contains the input documents.")
   analysisInput?: MultiLanguageAnalysisInput;
+
   @doc("Key phrase extraction task parameters.")
   parameters?: KeyPhraseTaskParameters;
 }
@@ -26,6 +27,7 @@ model KeyPhraseTaskParameters is PreBuiltTaskParameters;
 model KeyPhraseLROTask extends AnalyzeTextLROTask {
   @doc("Kind of the task.")
   kind: AnalyzeTextLROTaskKind.KeyPhraseExtraction;
+
   @doc("Key phrase extraction task parameters.")
   parameters?: KeyPhraseTaskParameters;
 }
@@ -34,6 +36,7 @@ model KeyPhraseLROTask extends AnalyzeTextLROTask {
 model KeyPhraseTaskResult extends AnalyzeTextTaskResult {
   @doc("Kind of the task results.")
   kind: AnalyzeTextTaskResultsKind.KeyPhraseExtractionResults;
+
   @doc("The list of Key phrase extraction results")
   results: KeyPhraseResult;
 }

@@ -15,6 +15,7 @@ model AnalyzeTextSentimentAnalysisInput extends AnalyzeTextTask {
 
   @doc("Contains the input documents.")
   analysisInput?: MultiLanguageAnalysisInput;
+
   @doc("Sentiment Analysis task parameters.")
   parameters?: SentimentAnalysisTaskParameters;
 }
@@ -24,6 +25,7 @@ model AnalyzeTextSentimentAnalysisInput extends AnalyzeTextTask {
 model SentimentAnalysisTaskParameters is PreBuiltTaskParameters {
   @doc("Whether to use opinion mining in the request or not.")
   opinionMining?: boolean = false;
+
   @doc("Specifies the method used to interpret string offsets.")
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 }
@@ -33,6 +35,7 @@ model SentimentAnalysisTaskParameters is PreBuiltTaskParameters {
 model SentimentAnalysisLROTask extends AnalyzeTextLROTask {
   @doc("The Sentiment Analysis kind of the long running task.")
   kind: AnalyzeTextLROTaskKind.SentimentAnalysis;
+
   @doc("Parameters for the Sentiment Analysis task.")
   parameters?: SentimentAnalysisTaskParameters;
 }
@@ -41,6 +44,7 @@ model SentimentAnalysisLROTask extends AnalyzeTextLROTask {
 model SentimentTaskResult extends AnalyzeTextTaskResult {
   @doc("Kind of the task.")
   kind: AnalyzeTextTaskResultsKind.SentimentAnalysisResults;
+
   @doc("The sentiment analysis results")
   results: SentimentResponse;
 }
@@ -88,6 +92,7 @@ model SentimentDocumentResult is DocumentResult {
 
   @doc("The sentiment confidence score between 0 and 1 for the sentence for all classes.")
   confidenceScores: SentimentConfidenceScores;
+
   @doc("The document's sentences sentiment.")
   sentences: Array<SentenceSentiment>;
 }
@@ -120,6 +125,7 @@ model SentenceSentiment {
 model SentenceTarget {
   @doc("The sentiment of the sentence.")
   sentiment: TokenSentimentValue;
+
   @doc("Represents the confidence scores across all sentiment classes: positive and negative.")
   confidenceScores: TargetConfidenceScoreLabel;
 
@@ -140,6 +146,7 @@ model SentenceTarget {
 model SentenceAssessment {
   @doc("The sentiment of the sentence.")
   sentiment: TokenSentimentValue;
+
   @doc("Represents the confidence scores across all sentiment classes: positive and negative.")
   confidenceScores: TargetConfidenceScoreLabel;
 
@@ -239,6 +246,7 @@ model CustomSentimentAnalysisTaskParameters is CustomTaskParameters {
 model CustomSentimentAnalysisLROTask extends AnalyzeTextLROTask {
   @doc("Kind of the task.")
   kind: AnalyzeTextLROTaskKind.CustomSentimentAnalysis;
+
   @doc("Custom Sentiment Analysis task parameters.")
   parameters?: CustomSentimentAnalysisTaskParameters;
 }
