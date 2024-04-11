@@ -39,31 +39,33 @@
     "200": {
       "description": "Successful validation result.",
       "body": {
-        "name": "simpleDeploymentStack",
-        "correlationId": "00000000-0000-0000-0000-000000000000",
-        "denySettings": {
-          "mode": "denyDelete",
-          "excludedPrincipals": [
-            "principal"
-          ],
-          "excludedActions": [
-            "action"
-          ],
-          "applyToChildScopes": false
-        },
-        "parameters": {
-          "parameter1": {
-            "type": "string"
-          }
-        },
-        "validatedResources": [
-          {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/deploymentStacksRG/providers/Microsoft.Sql/servers/server1"
+        "properties": {
+          "name": "simpleDeploymentStack",
+          "correlationId": "00000000-0000-0000-0000-000000000000",
+          "denySettings": {
+            "mode": "denyDelete",
+            "excludedPrincipals": [
+              "principal"
+            ],
+            "excludedActions": [
+              "action"
+            ],
+            "applyToChildScopes": false
           },
-          {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/deploymentStacksRG/providers/Microsoft.Sql/servers/server2"
-          }
-        ]
+          "parameters": {
+            "parameter1": {
+              "type": "string"
+            }
+          },
+          "validatedResources": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/deploymentStacksRG/providers/Microsoft.Sql/servers/server1"
+            },
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/deploymentStacksRG/providers/Microsoft.Sql/servers/server2"
+            }
+          ]
+        }
       }
     },
     "202": {
@@ -76,35 +78,37 @@
     "400": {
       "description": "Failed validation result.",
       "body": {
-        "correlationId": "00000000-0000-0000-0000-000000000000",
-        "denySettings": {
-          "mode": "denyDelete",
-          "excludedPrincipals": [
-            "principal"
-          ],
-          "excludedActions": [
-            "action"
-          ],
-          "applyToChildScopes": false
-        },
-        "error": {
-          "code": "ErrorCode",
-          "message": "Deployment validation failed"
-        },
-        "name": "simpleDeploymentStack",
-        "parameters": {
-          "parameter1": {
-            "type": "string"
-          }
-        },
-        "validatedResources": [
-          {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/deploymentStacksRG/providers/Microsoft.Sql/servers/server1"
+        "properties": {
+          "correlationId": "00000000-0000-0000-0000-000000000000",
+          "denySettings": {
+            "mode": "denyDelete",
+            "excludedPrincipals": [
+              "principal"
+            ],
+            "excludedActions": [
+              "action"
+            ],
+            "applyToChildScopes": false
           },
-          {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/deploymentStacksRG/providers/Microsoft.Sql/servers/server2"
-          }
-        ]
+          "error": {
+            "code": "ErrorCode",
+            "message": "Deployment validation failed"
+          },
+          "name": "simpleDeploymentStack",
+          "parameters": {
+            "parameter1": {
+              "type": "string"
+            }
+          },
+          "validatedResources": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/deploymentStacksRG/providers/Microsoft.Sql/servers/server1"
+            },
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/deploymentStacksRG/providers/Microsoft.Sql/servers/server2"
+            }
+          ]
+        }
       }
     }
   }
