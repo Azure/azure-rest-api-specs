@@ -43,8 +43,6 @@ model StorageBaseProperties {
   @visibility("read")
   @doc("Directory where the chamber storage volume mounted.")
   localMountPath?: string;
-
-
 }
 
 @doc("Storage  properties.")
@@ -78,4 +76,8 @@ model Storage is TrackedResource<StorageProperties> {
 
 @armResourceOperations
 interface Storages
-  extends NestedResourceOperations<Storage, StorageProperties, StorageUpdateProperties> {}
+  extends NestedResourceOperations<
+      Storage,
+      StorageProperties,
+      StorageUpdateProperties
+    > {}

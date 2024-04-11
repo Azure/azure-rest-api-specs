@@ -128,7 +128,7 @@ interface ProxyResourceOperations<T extends ProxyResourceBase> {
 interface BaseResourceOperations<
   T extends TrackedResourceBase,
   P extends TypeSpec.Reflection.Model,
-  U extends TypeSpec.Reflection.Model=P
+  U extends TypeSpec.Reflection.Model = P
 > {
   get is ArmResourceRead<T>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<T>;
@@ -140,7 +140,7 @@ interface BaseResourceOperations<
 interface NestedResourceOperations<
   T extends TrackedResourceBase,
   P extends TypeSpec.Reflection.Model,
-  U extends TypeSpec.Reflection.Model=P
+  U extends TypeSpec.Reflection.Model = P
 > extends BaseResourceOperations<T, P, U> {
   list is ArmResourceListByParent<T>;
 }

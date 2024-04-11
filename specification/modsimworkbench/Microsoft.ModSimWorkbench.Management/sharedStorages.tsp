@@ -81,7 +81,6 @@ model SharedStorageUpdateProperties {
   performanceTier: SharedStoragePerformanceTier;
 }
 
-
 @doc("Shared storage tracked resource.")
 @parentResource(Workbench)
 model SharedStorage is TrackedResource<SharedStorageProperties> {
