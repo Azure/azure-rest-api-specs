@@ -3,6 +3,7 @@ import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 
@@ -67,11 +68,9 @@ model LivenessSessionItem {
 @doc("Session details data.")
 model LivenessSessionDetails {
   @doc("The session status.")
-  @visibility("read")
   status: FaceSessionStatus;
 
   @doc("The last result of session.")
-  @visibility("read")
   result?: LivenessSessionAuditEntry;
 }
 
@@ -110,6 +109,95 @@ union FaceSessionStatus {
   "ResultAvailable",
 }
 
+@doc("The outcome of the liveness classification.")
+@clientName("FaceLivenessDecision")
+union LivenessDecision {
+  string,
+
+  @doc("The algorithm could not classify the target face as either real or spoof.")
+  "uncertain",
+
+  @doc("The algorithm has classified the target face as real.")
+  "realface",
+
+  @doc("The algorithm has classified the target face as a spoof.")
+  "spoofface",
+}
+
+@doc("The type of image.")
+@clientName("FaceImageType")
+union ImageType {
+  string,
+
+  "Color",
+  "Infrared",
+  "Depth",
+}
+
+@doc("The liveness classification for target face.")
+model LivenessOutputsTarget {
+  @doc("The face region where the liveness classification was made on.")
+  faceRectangle: FaceRectangle;
+
+  @doc("The file name which contains the face rectangle where the liveness classification was made on.")
+  fileName: string;
+
+  @doc("The time offset within the file of the frame which contains the face rectangle where the liveness classification was made on.")
+  timeOffsetWithinFile: int32;
+
+  @doc("The image type which contains the face rectangle where the liveness classification was made on.")
+  imageType: ImageType;
+}
+
+@doc("The model version used for liveness classification.")
+union LivenessModel {
+  string,
+  "2020-02-15-preview.01",
+  "2021-11-12-preview.03",
+  "2022-10-15-preview.04",
+  "2023-03-02-preview.05",
+}
+
+@doc("The detail of face for verification.")
+model LivenessWithVerifyImage {
+  @doc("The face region where the comparison image's classification was made.")
+  faceRectangle: FaceRectangle;
+
+  @doc("Quality of face image for recognition.")
+  qualityForRecognition: QualityForRecognition;
+}
+
+@doc("The face verification output.")
+model LivenessWithVerifyOutputs {
+  @doc("The detail of face for verification.")
+  verifyImage: LivenessWithVerifyImage;
+
+  @doc("The target face liveness face and comparison image face verification confidence.")
+  @minValue(0)
+  @maxValue(1)
+  matchConfidence: float32;
+
+  @doc("Whether the target liveness face and comparison image face match.")
+  isIdentical: boolean;
+}
+
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Use Record for accepting failure response"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending Record for accepting failure response"
+@doc("The response body of detect liveness API call.")
+model LivenessResponseBody extends Record<unknown> {
+  @doc("The liveness classification for the target face.")
+  livenessDecision?: LivenessDecision;
+
+  @doc("Specific targets used for liveness classification.")
+  target?: LivenessOutputsTarget;
+
+  @doc("The model version used for liveness classification.")
+  modelVersionUsed?: LivenessModel;
+
+  @doc("The face verification output. Only available when the request is liveness with verify.")
+  verifyResult?: LivenessWithVerifyOutputs;
+}
+
 @doc("Audit entry for a request in the session.")
 model SessionAuditEntryRequestInfo {
   @doc("The relative URL of the liveness request.")
@@ -130,9 +218,8 @@ model SessionAuditEntryRequestInfo {
 
 @doc("Audit entry for a response in the session.")
 model SessionAuditEntryResponseInfo {
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Represent complex JSON object"
   @doc("The response body.")
-  body: Record<unknown>;
+  body: LivenessResponseBody;
 
   @doc("The HTTP status code of the request.")
   statusCode: int32;

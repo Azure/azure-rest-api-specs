@@ -8401,6 +8401,19 @@
         "candidates"
       ]
     },
+    "ImageType": {
+      "type": "string",
+      "description": "The type of image.",
+      "enum": [
+        "Color",
+        "Infrared",
+        "Depth"
+      ],
+      "x-ms-enum": {
+        "name": "ImageType",
+        "modelAsString": true
+      }
+    },
     "LandmarkCoordinate": {
       "type": "object",
       "description": "Coordinates within an image.",
@@ -8606,6 +8619,50 @@
         "personIds"
       ]
     },
+    "LivenessDecision": {
+      "type": "string",
+      "description": "The outcome of the liveness classification.",
+      "enum": [
+        "uncertain",
+        "realface",
+        "spoofface"
+      ],
+      "x-ms-enum": {
+        "name": "LivenessDecision",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "uncertain",
+            "value": "uncertain",
+            "description": "The algorithm could not classify the target face as either real or spoof."
+          },
+          {
+            "name": "realface",
+            "value": "realface",
+            "description": "The algorithm has classified the target face as real."
+          },
+          {
+            "name": "spoofface",
+            "value": "spoofface",
+            "description": "The algorithm has classified the target face as a spoof."
+          }
+        ]
+      }
+    },
+    "LivenessModel": {
+      "type": "string",
+      "description": "The model version used for liveness classification.",
+      "enum": [
+        "2020-02-15-preview.01",
+        "2021-11-12-preview.03",
+        "2022-10-15-preview.04",
+        "2023-03-02-preview.05"
+      ],
+      "x-ms-enum": {
+        "name": "LivenessModel",
+        "modelAsString": true
+      }
+    },
     "LivenessOperationMode": {
       "type": "string",
       "description": "The operation mode for the liveness modal.",
@@ -8623,6 +8680,63 @@
           }
         ]
       }
+    },
+    "LivenessOutputsTarget": {
+      "type": "object",
+      "description": "The liveness classification for target face.",
+      "properties": {
+        "faceRectangle": {
+          "$ref": "#/definitions/FaceRectangle",
+          "description": "The face region where the liveness classification was made on."
+        },
+        "fileName": {
+          "type": "string",
+          "description": "The file name which contains the face rectangle where the liveness classification was made on."
+        },
+        "timeOffsetWithinFile": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The time offset within the file of the frame which contains the face rectangle where the liveness classification was made on."
+        },
+        "imageType": {
+          "$ref": "#/definitions/ImageType",
+          "description": "The image type which contains the face rectangle where the liveness classification was made on."
+        }
+      },
+      "required": [
+        "faceRectangle",
+        "fileName",
+        "timeOffsetWithinFile",
+        "imageType"
+      ]
+    },
+    "LivenessResponseBody": {
+      "type": "object",
+      "description": "The response body of detect liveness API call.",
+      "properties": {
+        "livenessDecision": {
+          "$ref": "#/definitions/LivenessDecision",
+          "description": "The liveness classification for the target face."
+        },
+        "target": {
+          "$ref": "#/definitions/LivenessOutputsTarget",
+          "description": "Specific targets used for liveness classification."
+        },
+        "modelVersionUsed": {
+          "$ref": "#/definitions/LivenessModel",
+          "description": "The model version used for liveness classification."
+        },
+        "verifyResult": {
+          "$ref": "#/definitions/LivenessWithVerifyOutputs",
+          "description": "The face verification output. Only available when the request is liveness with verify."
+        }
+      },
+      "allOf": [
+        {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      ]
     },
     "LivenessSession": {
       "type": "object",
@@ -8664,13 +8778,11 @@
         },
         "status": {
           "$ref": "#/definitions/FaceSessionStatus",
-          "description": "The session status.",
-          "readOnly": true
+          "description": "The session status."
         },
         "result": {
           "$ref": "#/definitions/LivenessSessionAuditEntry",
-          "description": "The last result of session.",
-          "readOnly": true
+          "description": "The last result of session."
         }
       },
       "required": [
@@ -8882,6 +8994,50 @@
         "VerifyImage"
       ]
     },
+    "LivenessWithVerifyImage": {
+      "type": "object",
+      "description": "The detail of face for verification.",
+      "properties": {
+        "faceRectangle": {
+          "$ref": "#/definitions/FaceRectangle",
+          "description": "The face region where the comparison image's classification was made."
+        },
+        "qualityForRecognition": {
+          "$ref": "#/definitions/QualityForRecognition",
+          "description": "Quality of face image for recognition."
+        }
+      },
+      "required": [
+        "faceRectangle",
+        "qualityForRecognition"
+      ]
+    },
+    "LivenessWithVerifyOutputs": {
+      "type": "object",
+      "description": "The face verification output.",
+      "properties": {
+        "verifyImage": {
+          "$ref": "#/definitions/LivenessWithVerifyImage",
+          "description": "The detail of face for verification."
+        },
+        "matchConfidence": {
+          "type": "number",
+          "format": "float",
+          "description": "The target face liveness face and comparison image face verification confidence.",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "isIdentical": {
+          "type": "boolean",
+          "description": "Whether the target liveness face and comparison image face match."
+        }
+      },
+      "required": [
+        "verifyImage",
+        "matchConfidence",
+        "isIdentical"
+      ]
+    },
     "LivenessWithVerifySession": {
       "type": "object",
       "description": "Session result of detect liveness with verify.",
@@ -8922,13 +9078,11 @@
         },
         "status": {
           "$ref": "#/definitions/FaceSessionStatus",
-          "description": "The session status.",
-          "readOnly": true
+          "description": "The session status."
         },
         "result": {
           "$ref": "#/definitions/LivenessSessionAuditEntry",
-          "description": "The last result of session.",
-          "readOnly": true
+          "description": "The last result of session."
         }
       },
       "required": [
@@ -9298,9 +9452,8 @@
       "description": "Audit entry for a response in the session.",
       "properties": {
         "body": {
-          "type": "object",
-          "description": "The response body.",
-          "additionalProperties": {}
+          "$ref": "#/definitions/LivenessResponseBody",
+          "description": "The response body."
         },
         "statusCode": {
           "type": "integer",
