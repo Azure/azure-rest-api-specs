@@ -34,15 +34,12 @@
         },
         "properties": {
           "provisioningState": "Succeeded",
-          "errors": [
-            {
-              "code": "0000",
-              "message": "Error message",
-              "target": "",
-              "details": "Error details",
-              "innerError": "Error stack trace"
-            }
-          ],
+          "errors": {
+            "code": "0000",
+            "message": "Error message",
+            "target": "Error target",
+            "details": []
+          },
           "appLocation": "eastus",
           "routingPreference": "RouteAll",
           "zoneRedundancyPreference": "ZoneRedundantApp",
@@ -51,9 +48,18 @@
           },
           "logAnalyticsWorkspaceArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.operationalinsights/workspaces/myWorkspace",
           "monitorSubnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet",
+          "appServicePlanConfiguration": {
+            "tier": "ElasticPremium",
+            "capacity": 1
+          },
           "msiArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myMsi",
           "storageAccountArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount"
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-AsyncOperation": "https://eastus2euap.management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Workloads/locations/NORTHEUROPE/operationStatuses/sample-op-status?api-version=2021-12-01-preview"
       }
     }
   }

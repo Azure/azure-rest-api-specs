@@ -42,10 +42,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -58,7 +58,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -82,13 +82,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -101,7 +101,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -128,13 +128,13 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/monitorNameParameter"
@@ -150,7 +150,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -179,13 +179,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/monitorNameParameter"
@@ -210,7 +210,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -233,13 +233,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/monitorNameParameter"
@@ -250,7 +250,12 @@
             "description": "Deleting SAP monitor",
             "headers": {
               "Location": {
-                "type": "string"
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -260,7 +265,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -270,6 +275,10 @@
           "Monitors"
         ],
         "operationId": "monitors_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "summary": "Patches the Tags field of a SAP monitor.",
         "description": "Patches the Tags field of a SAP monitor for the specified subscription, resource group, and SAP monitor name.",
         "x-ms-examples": {
@@ -282,13 +291,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/monitorNameParameter"
@@ -310,10 +319,23 @@
               "$ref": "#/definitions/Monitor"
             }
           },
+          "202": {
+            "description": "Updating SAP monitor",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -334,13 +356,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/monitorNameParameter"
@@ -356,7 +378,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -372,9 +394,6 @@
         ],
         "operationId": "ProviderInstances_Get",
         "summary": "Gets properties of a provider instance.",
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
         "description": "Gets properties of a provider instance for the specified subscription, resource group, SAP monitor name, and resource name.",
         "x-ms-examples": {
           "Get properties of a SAP monitor Hana provider": {
@@ -401,13 +420,13 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/monitorNameParameter"
@@ -426,7 +445,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -482,13 +501,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/monitorNameParameter"
@@ -516,7 +535,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -539,13 +558,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/monitorNameParameter"
@@ -559,7 +578,12 @@
             "description": "Deleting provider instance",
             "headers": {
               "Location": {
-                "type": "string"
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -569,7 +593,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -593,13 +617,13 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/monitorNameParameter"
@@ -615,7 +639,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -634,13 +658,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/monitorNameParameter"
@@ -665,7 +689,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -684,13 +708,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/monitorNameParameter"
@@ -706,7 +730,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -725,13 +749,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/monitorNameParameter"
@@ -750,7 +774,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -774,13 +798,13 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/monitorNameParameter"
@@ -796,7 +820,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -823,6 +847,7 @@
       "type": "object",
       "properties": {
         "healthState": {
+          "description": "Health state of the resource",
           "$ref": "#/definitions/HealthState"
         },
         "impactingReasons": {
@@ -846,164 +871,6 @@
         "modelAsString": true
       }
     },
-    "OperationsDisplayDefinition": {
-      "description": "Defines the workload operation.",
-      "required": [
-        "description",
-        "operation",
-        "provider",
-        "resource"
-      ],
-      "type": "object",
-      "properties": {
-        "provider": {
-          "type": "string",
-          "description": "Defines the workload provider."
-        },
-        "resource": {
-          "type": "string",
-          "description": "Defines the workload resource."
-        },
-        "operation": {
-          "type": "string",
-          "description": "Defines the workload operation."
-        },
-        "description": {
-          "type": "string",
-          "description": "Describes the workload operation."
-        }
-      }
-    },
-    "OperationsDefinition": {
-      "required": [
-        "display",
-        "name"
-      ],
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the operation."
-        },
-        "isDataAction": {
-          "type": "boolean",
-          "description": "Indicates whether the operation applies to data-plane."
-        },
-        "origin": {
-          "enum": [
-            "NotSpecified",
-            "User",
-            "System"
-          ],
-          "type": "string",
-          "description": "Defines the workload operation origin.",
-          "x-ms-enum": {
-            "name": "OperationProperties",
-            "modelAsString": true
-          }
-        },
-        "display": {
-          "description": "Display information of the operation.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/OperationsDisplayDefinition"
-            }
-          ]
-        },
-        "actionType": {
-          "enum": [
-            "NotSpecified",
-            "Internal"
-          ],
-          "x-ms-enum": {
-            "name": "WorkloadMonitorActionType",
-            "modelAsString": true
-          },
-          "description": "Defines the action type of workload operation.",
-          "type": "string"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Defines the workload operation properties."
-        }
-      },
-      "description": "Properties of an Operation."
-    },
-    "OperationsContent": {
-      "type": "object",
-      "description": "Defines the workload operation content.",
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Operations content.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/OperationsDefinition"
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "OperationsDefinitionArrayResponseWithContinuation": {
-      "type": "object",
-      "description": "Defines the workload operation definition response.",
-      "properties": {
-        "value": {
-          "description": "Defines the workload operation definition response properties.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OperationsDefinition"
-          },
-          "x-ms-identifiers": []
-        },
-        "nextLink": {
-          "description": "The URL to get to the next set of results, if there are any.",
-          "type": "string"
-        }
-      }
-    },
-    "Error": {
-      "description": "Standard error object.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Server-defined set of error codes.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Human-readable representation of the error.",
-          "type": "string",
-          "readOnly": true
-        },
-        "target": {
-          "description": "Target of the error.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Array of details about specific errors that led to this reported error.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        },
-        "innerError": {
-          "description": "Object containing more specific information than  the current object about the error.",
-          "type": "object",
-          "properties": {
-            "innerError": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "readOnly": true
-        }
-      }
-    },
     "ManagedRGConfiguration": {
       "description": "Managed resource group configuration",
       "type": "object",
@@ -1011,6 +878,42 @@
         "name": {
           "type": "string",
           "description": "Managed resource group name"
+        }
+      }
+    },
+    "AppServicePlanConfiguration": {
+      "description": "Configuration details of app service plan",
+      "type": "object",
+      "properties": {
+        "tier": {
+          "type": "string",
+          "description": "The App Service plan tier.",
+          "enum": [
+            "ElasticPremium",
+            "PremiumV3"
+          ],
+          "x-ms-enum": {
+            "name": "AppServicePlanTier",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ElasticPremium",
+                "value": "ElasticPremium",
+                "description": "Elastic Premium plan"
+              },
+              {
+                "name": "PremiumV3",
+                "value": "PremiumV3",
+                "description": "Dedicated Premium v3 plan"
+              }
+            ]
+          }
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of workers in app service plan. If this is not set or set to 0, auto scale will be configured for the app service plan, otherwise, instance count is set to this number.",
+          "minimum": 0
         }
       }
     },
@@ -1058,7 +961,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "SAP monitor info on Azure (ARM properties and SAP monitor properties)"
@@ -1087,11 +990,7 @@
         },
         "errors": {
           "description": "Defines the SAP monitor errors.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Error"
-            }
-          ],
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
           "readOnly": true
         },
         "appLocation": {
@@ -1125,6 +1024,10 @@
         "monitorSubnet": {
           "type": "string",
           "description": "The subnet which the SAP monitor will be deployed in"
+        },
+        "appServicePlanConfiguration": {
+          "description": "App service plan configuration",
+          "$ref": "#/definitions/AppServicePlanConfiguration"
         },
         "msiArmId": {
           "readOnly": true,
@@ -1183,7 +1086,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "A provider instance associated with SAP monitor."
@@ -1499,17 +1402,12 @@
         },
         "health": {
           "readOnly": true,
-          "type": "object",
           "description": "Resource health details",
           "$ref": "#/definitions/Health"
         },
         "errors": {
           "description": "Defines the provider instance errors.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Error"
-            }
-          ],
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
           "readOnly": true
         },
         "providerSettings": {
@@ -1587,7 +1485,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "description": "configuration associated with SAP Landscape Monitor Dashboard."
@@ -1669,7 +1567,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9-]+$",
+      "pattern": "^[a-zA-Z0-9-_]+$",
       "description": "Name of the provider instance.",
       "x-ms-parameter-location": "method"
     },
