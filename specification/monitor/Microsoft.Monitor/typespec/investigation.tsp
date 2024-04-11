@@ -144,7 +144,7 @@ enum ResultType {
   abnormalEvent,
 
   @doc("Anomaly result identified through patterns in tracing data")
-  TracePatternAnomalies,
+  tracePatternAnomalies,
 
   @doc("Anomaly result identified through patterns in transaction data")
   transactionPatternAnomalies,
