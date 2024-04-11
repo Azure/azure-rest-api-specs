@@ -5275,6 +5275,30 @@
         "value"
       ]
     },
+    "SharedStoragePerformanceTier": {
+      "type": "string",
+      "description": "Performance tier of shared storage.",
+      "enum": [
+        "Standard",
+        "Ultra"
+      ],
+      "x-ms-enum": {
+        "name": "SharedStoragePerformanceTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard tier."
+          },
+          {
+            "name": "Ultra",
+            "value": "Ultra",
+            "description": "Ultra tier."
+          }
+        ]
+      }
+    },
     "SharedStorageProperties": {
       "type": "object",
       "description": "Shared storage properties.",
@@ -5404,29 +5428,8 @@
           ]
         },
         "performanceTier": {
-          "type": "string",
+          "$ref": "#/definitions/SharedStoragePerformanceTier",
           "description": "Performance tier of the shared storage.",
-          "default": "Standard",
-          "enum": [
-            "Standard",
-            "Ultra"
-          ],
-          "x-ms-enum": {
-            "name": "SharedStoragePerformanceTier",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Standard",
-                "value": "Standard",
-                "description": "Standard tier."
-              },
-              {
-                "name": "Ultra",
-                "value": "Ultra",
-                "description": "Ultra tier."
-              }
-            ]
-          },
           "x-ms-mutability": [
             "read",
             "update",
