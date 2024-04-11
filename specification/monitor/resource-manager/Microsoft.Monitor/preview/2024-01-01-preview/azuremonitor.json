@@ -1414,17 +1414,17 @@
           {
             "name": "include",
             "value": "include",
-            "description": "Include this tag in the filter"
+            "description": "Value is included in the values specified"
           },
           {
             "name": "exclude",
             "value": "exclude",
-            "description": "Exclude this tag from the filter"
+            "description": "Exclude the values specified"
           },
           {
             "name": "startsWith",
             "value": "startsWith",
-            "description": "Filter using this tag as the start of the scope"
+            "description": "Checks values that starts with the values specified"
           }
         ]
       }
@@ -1491,10 +1491,10 @@
         },
         "id": {
           "type": "string",
-          "description": "The unique Id for this investigation."
+          "description": " The unique Id for this investigation."
         },
         "type": {
-          "type": "string",
+          "$ref": "#/definitions/InvestigationScopeType",
           "description": "The type of this investigation."
         },
         "execution": {
@@ -1508,7 +1508,7 @@
         },
         "healthChecks": {
           "type": "array",
-          "description": "List of investigations",
+          "description": "Child investigations.",
           "items": {
             "$ref": "#/definitions/Investigation"
           },
@@ -1701,12 +1701,80 @@
         },
         "onlyInvestigateTargetResource": {
           "type": "boolean",
-          "description": "Configure the investigation to run only on Target resource"
+          "description": "Configure the investigation to run only on Target resource."
         },
         "sensitivity": {
           "$ref": "#/definitions/Sensitivity",
           "description": "The sensitivity which controls the investigation operation."
+        },
+        "investigationScope": {
+          "type": "array",
+          "description": "List of arm resources to investigate.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
         }
+      }
+    },
+    "InvestigationScopeType": {
+      "type": "string",
+      "description": "The type of the scope of the investigation",
+      "enum": [
+        "subscription",
+        "resource",
+        "correlatedMetricAnomalies",
+        "correlatedMetricAnomaly",
+        "correlatedApplicationAnomalies",
+        "abnormalEvent",
+        "tracePatternAnomalies",
+        "transactionPatternAnomalies"
+      ],
+      "x-ms-enum": {
+        "name": "InvestigationScopeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "subscription",
+            "value": "subscription",
+            "description": "The investigation ran on a subscription level"
+          },
+          {
+            "name": "resource",
+            "value": "resource",
+            "description": "The investigation ran on a resource level"
+          },
+          {
+            "name": "correlatedMetricAnomalies",
+            "value": "correlatedMetricAnomalies",
+            "description": "The investigation ran on resource correlated metrics"
+          },
+          {
+            "name": "correlatedMetricAnomaly",
+            "value": "correlatedMetricAnomaly",
+            "description": "The investigation ran on an metric anomaly"
+          },
+          {
+            "name": "correlatedApplicationAnomalies",
+            "value": "correlatedApplicationAnomalies",
+            "description": "The investigation ran on resource application anomalies"
+          },
+          {
+            "name": "abnormalEvent",
+            "value": "abnormalEvent",
+            "description": "The investigation identified unusual or unexpected events through logs analysis."
+          },
+          {
+            "name": "tracePatternAnomalies",
+            "value": "tracePatternAnomalies",
+            "description": "The investigation analyzed trace data for patterns that deviate from expected behavior."
+          },
+          {
+            "name": "transactionPatternAnomalies",
+            "value": "transactionPatternAnomalies",
+            "description": "The investigation analyzed transaction data for patterns that deviate from expected behavior."
+          }
+        ]
       }
     },
     "Metrics": {
@@ -2309,7 +2377,12 @@
       "enum": [
         "resourceHealth",
         "correlatedMetricAnomalies",
-        "azureMetricAnomaly"
+        "azureMetricAnomaly",
+        "prometheusMetricAnomaly",
+        "correlatedApplicationAnomalies",
+        "abnormalEvent",
+        "TracePatternAnomalies",
+        "transactionPatternAnomalies"
       ],
       "x-ms-enum": {
         "name": "ResultType",
@@ -2318,17 +2391,42 @@
           {
             "name": "resourceHealth",
             "value": "resourceHealth",
-            "description": "Resource Health Investigation result"
+            "description": "Resource health result"
           },
           {
             "name": "correlatedMetricAnomalies",
             "value": "correlatedMetricAnomalies",
-            "description": "Correlated Metric Anomalies Investigation result"
+            "description": "Correlated metric anomalies of the scope resource"
           },
           {
             "name": "azureMetricAnomaly",
             "value": "azureMetricAnomaly",
-            "description": "Azure Metric Anomaly Investigation result"
+            "description": "Anomaly result based on Azure metric provided by Microsoft.Insights/metrics"
+          },
+          {
+            "name": "prometheusMetricAnomaly",
+            "value": "prometheusMetricAnomaly",
+            "description": "Anomaly result based on metric provided by Prometheus query"
+          },
+          {
+            "name": "correlatedApplicationAnomalies",
+            "value": "correlatedApplicationAnomalies",
+            "description": "Anomaly result based on anomalies in the application telemetry"
+          },
+          {
+            "name": "abnormalEvent",
+            "value": "abnormalEvent",
+            "description": "Anomaly result based on unusual or unexpected event identified in logs"
+          },
+          {
+            "name": "TracePatternAnomalies",
+            "value": "TracePatternAnomalies",
+            "description": "Anomaly result identified through patterns in tracing data"
+          },
+          {
+            "name": "transactionPatternAnomalies",
+            "value": "transactionPatternAnomalies",
+            "description": "Anomaly result identified through patterns in transaction data"
           }
         ]
       }

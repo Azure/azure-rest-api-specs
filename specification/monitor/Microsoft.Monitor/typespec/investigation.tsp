@@ -35,13 +35,13 @@ model InvestigationResource is ExtensionResource<InvestigationProperties> {
 @doc("Filter operator for dimensions or tags")
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
 enum FilterOperator {
-  @doc("Include this tag in the filter")
+  @doc("Value is included in the values specified")
   include,
 
-  @doc("Exclude this tag from the filter")
+  @doc("Exclude the values specified")
   exclude,
 
-  @doc("Filter using this tag as the start of the scope")
+  @doc("Checks values that starts with the values specified")
   startsWith,
 }
 
@@ -125,14 +125,60 @@ enum ConfidenceLevel {
 @doc("The type of the result returned by the investigation")
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
 enum ResultType {
-  @doc("Resource Health Investigation result")
+  @doc("Resource health result")
   resourceHealth,
 
-  @doc("Correlated Metric Anomalies Investigation result")
+  @doc("Correlated metric anomalies of the scope resource")
   correlatedMetricAnomalies,
 
-  @doc("Azure Metric Anomaly Investigation result")
+  @doc("Anomaly result based on Azure metric provided by Microsoft.Insights/metrics")
   azureMetricAnomaly,
+  
+  @doc("Anomaly result based on metric provided by Prometheus query")
+  prometheusMetricAnomaly,
+  
+  @doc("Anomaly result based on anomalies in the application telemetry")
+  correlatedApplicationAnomalies,
+  
+  @doc("Anomaly result based on unusual or unexpected event identified in logs")
+  abnormalEvent,
+  
+  @doc("Anomaly result identified through patterns in tracing data")
+  TracePatternAnomalies,
+  
+  @doc("Anomaly result identified through patterns in transaction data")
+  transactionPatternAnomalies,
+}
+
+/**
+ * The type of the scope of the investigation.
+ */
+@doc("The type of the scope of the investigation")
+@added(Microsoft.Monitor.Versions.v2024_01_01_preview)
+enum InvestigationScopeType {
+  @doc("The investigation ran on a subscription level")
+  subscription,
+  
+  @doc("The investigation ran on a resource level")
+  resource,
+  
+  @doc("The investigation ran on resource correlated metrics")
+  correlatedMetricAnomalies,
+  
+  @doc("The investigation ran on an metric anomaly")
+  correlatedMetricAnomaly,
+
+  @doc("The investigation ran on resource application anomalies")
+  correlatedApplicationAnomalies,
+
+  @doc("The investigation identified unusual or unexpected events through logs analysis.")
+  abnormalEvent,
+
+  @doc("The investigation analyzed trace data for patterns that deviate from expected behavior.")
+  tracePatternAnomalies,
+
+  @doc("The investigation analyzed transaction data for patterns that deviate from expected behavior.")
+  transactionPatternAnomalies,
 }
 
 /**
@@ -141,42 +187,27 @@ enum ResultType {
 @doc("Investigation properties with the investigation result")
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
 model InvestigationProperties {
-  /**
-   * The target ARM resources which the investigation will use.
-   */
+  @doc("The target ARM resources which the investigation will use.")
   @extension("x-ms-identifiers", [])
   targets: string[];
 
-  /**
-   * The display name of this investigation.
-   */
+  @doc("The display name of this investigation.")
   displayName: string;
 
-  /**
-   * The ARM Id of a Microsoft.AlertsManagement/alerts resource related to this investigation.
-   */
+  @doc("The ARM Id of a Microsoft.AlertsManagement/alerts resource related to this investigation.")
   alertId?: string;
 
-  /**
-   * The impact time which the investigation ran on.
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  @doc("The impact time which the investigation ran on.")
   impactTime: utcDateTime;
 
-  /**
-   * The run configuration for the investigation.
-   */
+  @doc("The run configuration for the investigation.")
   runConfiguration?: InvestigationRunConfiguration;
 
-  /**
-   * Denotes the state of the investigation operation.
-   */
+  @doc("Denotes the state of the investigation operation.")
   @visibility("read")
   provisioningState?: InvestigationProvisioningState;
 
-  /**
-   * The investigation that ran on the given scope.
-   */
+  @doc("The investigation that ran on the given scope.")
   @visibility("read")
   investigation?: Investigation;
 }
@@ -194,20 +225,18 @@ model InvestigationRunConfiguration {
   @extension("x-ms-identifiers", [])
   tagScopeFilters?: Filter[];
 
-  /**
-   * The time window to look back from impactTime.
-   */
+  @doc("The time window to look back from impactTime.")
   lookBackWindow?: string;
 
-  /**
-   * Configure the investigation to run only on Target resource
-   */
+  @doc("Configure the investigation to run only on Target resource.")
   onlyInvestigateTargetResource?: boolean;
 
-  /**
-   * The sensitivity which controls the investigation operation.
-   */
+  @doc("The sensitivity which controls the investigation operation.")
   sensitivity?: Sensitivity;
+
+  @doc("List of arm resources to investigate.")
+  @extension("x-ms-identifiers", [])
+  investigationScope?: string[]
 }
 
 /**
@@ -215,19 +244,13 @@ model InvestigationRunConfiguration {
  */
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
 model Filter {
-  /**
-   * The name of the dimension or tag to filter on.
-   */
+  @doc("The name of the dimension or tag to filter on.")
   name?: string;
 
-  /**
-   * Filter operator for dimensions or tags.
-   */
+  @doc("Filter operator for dimensions or tags.")
   operator?: FilterOperator;
 
-  /**
-   * The values to filter based on.
-   */
+  @doc("The values to filter based on.")
   @extension("x-ms-identifiers", [])
   values?: string[];
 }
@@ -235,35 +258,26 @@ model Filter {
 /**
  * The investigation that ran on the given scope.
  */
+@doc("The investigation that ran on the given scope.")
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
 model Investigation {
-  /**
-   * The scope of which this investigation ran on.
-   */
+  @doc("The scope of which this investigation ran on.")
   scope?: string;
 
-  /**
-   * The unique Id for this investigation.
-   */
+  @doc(" The unique Id for this investigation.")
   id?: string;
 
-  /**
-   * The type of this investigation.
-   */
-  type?: string;
+  @doc("The type of this investigation.")
+  type?: InvestigationScopeType; 
 
-  /**
-   * The execution details of the investigation.
-   */
+  @doc("The execution details of the investigation.")
   execution?: Execution;
 
-  /**
-   * The investigation result.
-   */
+  @doc("The investigation result.")
   @visibility("read")
   result?: InvestigationResult;
 
-  @doc("List of investigations")
+  @doc("Child investigations.")
   @extension("x-ms-identifiers", [])
   healthChecks?: Investigation[];
 }
@@ -276,9 +290,7 @@ model Execution {
   @doc("The time the investigation completed running")
   completedOn?: utcDateTime;
 
-  /**
-   * Denotes the state of the investigation operation.
-   */
+  @doc("Denotes the state of the investigation operation.")
   @visibility("read")
   status?: InvestigationProvisioningState;
 }
@@ -288,40 +300,26 @@ model Execution {
  */
 @added(Microsoft.Monitor.Versions.v2024_01_01_preview)
 model InvestigationResult {
-  /**
-   * The health state of the investigation's scope.
-   */
+  @doc("The health state of the investigation's scope.")
   healthState?: HealthState;
 
-  /**
-   * The summary of the investigation resource.
-   */
+  @doc("The summary of the investigation resource.")
   summary?: string;
 
-  /**
-   * The cause of the investigated issue.
-   */
+  @doc("The cause of the investigated issue.")
   cause?: string;
 
-  /**
-   * The recommendation of the investigation.
-   */
+  @doc("The recommendation of the investigation.")
   recommendation?: string;
 
-  /**
-   * The confidence level of the investigation result.
-   */
+  @doc("The confidence level of the investigation result.")
   confidenceLevel?: ConfidenceLevel;
 
-  /**
-   * The type of the result returned by the investigation.
-   */
+  @doc("The type of the result returned by the investigation.")
   resultType?: ResultType;
 
-  /**
-   * The details of the investigation result.
-   */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+  @doc("The details of the investigation result.")
   details?: Record<unknown>;
 }
 
