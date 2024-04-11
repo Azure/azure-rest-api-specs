@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
@@ -30,7 +31,7 @@ model HybridIdentityMetadata
 }
 
 @armResourceOperations
-@projectedName("client", "HybridIdentityMetadata")
+@Azure.ClientGenerator.Core.clientName("HybridIdentityMetadata")
 interface HybridIdentityMetadataGroup {
   @doc("Implements HybridIdentityMetadata GET method.")
   get is ArmResourceRead<HybridIdentityMetadata>;

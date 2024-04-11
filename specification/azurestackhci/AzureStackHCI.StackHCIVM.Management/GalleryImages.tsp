@@ -29,7 +29,6 @@ model GalleryImage is TrackedResource<GalleryImageProperties> {
 }
 
 @armResourceOperations
-@projectedName("client", "GalleryImages")
 interface GalleryImages {
   @doc("Gets a gallery image")
   get is ArmResourceRead<GalleryImage>;

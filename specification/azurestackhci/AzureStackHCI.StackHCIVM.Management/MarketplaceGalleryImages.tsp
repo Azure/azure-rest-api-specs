@@ -30,7 +30,6 @@ model MarketplaceGalleryImage
 }
 
 @armResourceOperations
-@projectedName("client", "MarketplaceGalleryImages")
 interface MarketplaceGalleryImages {
   @doc("Gets a marketplace gallery image")
   get is ArmResourceRead<MarketplaceGalleryImage>;

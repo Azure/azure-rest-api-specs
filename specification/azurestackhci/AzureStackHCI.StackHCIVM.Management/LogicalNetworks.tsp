@@ -1,6 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
+import "@typespec/openapi"; 
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -29,7 +29,6 @@ model LogicalNetwork is TrackedResource<LogicalNetworkProperties> {
 }
 
 @armResourceOperations
-@projectedName("client", "LogicalNetworks")
 interface LogicalNetworks {
   @doc("The operation to get a logical network.")
   get is ArmResourceRead<LogicalNetwork>;
