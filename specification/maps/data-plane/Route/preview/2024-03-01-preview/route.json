@@ -265,7 +265,7 @@
         ],
         "x-ms-client-name": "Route_PostSnapToRoadsBatch",
         "x-ms-examples": {
-          "A Route Directions Batch request containing 2 queries": {
+          "A Snap To Roads Batch request containing 1 query": {
             "$ref": "./examples/PostSnapToRoadsBatch.json"
           }
         },
@@ -279,7 +279,7 @@
           {
             "name": "snapToRoadsBatchRequest",
             "in": "body",
-            "description": "The list of route directions queries/requests to process. The list can contain a max of 100 queries for sync version and must contain at least 1 query.",
+            "description": "The list of Snap To Roads queries/requests to process. The list can contain a max of 100 queries for sync version and must contain at least 1 query.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SnapToRoadsBatchRequestBody"
@@ -357,6 +357,68 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/RouteRangeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code of the error that occurred."
+              }
+            },
+            "x-ms-error-response": true
+          }
+        }
+      }
+    },
+    "/route/range:batch": {
+      "post": {
+        "description": "**Route Range Batch API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nThe Route Range Batch API sends batches of up to **100** queries as a single call to the [Snap To Roads API](https://learn.microsoft.com/en-us/rest/api/maps/route/post-route-range?view=rest-maps-2024-03-01-preview).\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/route/range:batch?api-version=2024-03-01-preview\n```\n### POST Body for Batch Request\nTo send the _route range_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _route_range_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"type\": \"Feature\",\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          5.86605,\n          50.9745\n        ]\n      },\n      \"properties\": {\n        \"timeBudgetInSec\": 6000\n      }\n    },\n    {\n      \"type\": \"Feature\",\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          -122.201669,\n          47.615076\n        ]\n      },\n      \"properties\": {\n        \"timeBudgetInSec\": 2000\n      }\n    }\n  ]\n}\n```\n\nA _route range_ batchItem object can accept any of the supported _snap to roads_ [Request body](/rest/api/maps/route/post-snap-to-roads?view=rest-maps-2024-03-01-preview#request-body) \n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`RouteRangeResponse`](/rest/api/maps/route/post-route-range#response) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
+        "operationId": "Route_PostRouteRangeBatch",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-client-name": "Route_PostRouteRangeBatch",
+        "x-ms-examples": {
+          "A Route Range Batch request containing 1 query": {
+            "$ref": "./examples/PostRouteRangeBatch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "name": "routeRangeBatchRequest",
+            "in": "body",
+            "description": "The list of route directions queries/requests to process. The list can contain a max of 100 queries for sync version and must contain at least 1 query.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RouteRangeBatchRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Batch request successfully processed. The response body contains all the batch results.",
+            "schema": {
+              "$ref": "#/definitions/RouteRangeBatchResponse"
+            }
+          },
+          "207": {
+            "description": "Multi-Status. One or more batch items could not be processed and return different status code.",
+            "schema": {
+              "$ref": "#/definitions/RouteRangeBatchResponse"
             }
           },
           "default": {
@@ -2667,6 +2729,84 @@
           "$ref": "#/definitions/NextLink"
         }
       }
+    },
+    "RouteRangeBatchRequestBody": {
+      "description": "The list of route range queries/requests to process. The list can contain a max of 100 queries and must contain at least 1 query.",
+      "type": "object",
+      "properties": {
+        "batchItems": {
+          "description": "The list of queries to process.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RouteRangeBatchRequestItem"
+          }
+        }
+      }
+    },
+    "RouteRangeBatchRequestItem": {
+      "description": "Batch Query object",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OptionalId"
+        },
+        {
+          "$ref": "#/definitions/RouteRangeRequest"
+        }
+      ]
+    },
+    "RouteRangeBatchResponse": {
+      "description": "This object is returned from a successful Route Range Batch service call.",
+      "type": "object",
+      "properties": {
+        "summary": {
+          "description": "Summary for the batch request",
+          "type": "object",
+          "properties": {
+            "successfulRequests": {
+              "description": "Number of successful requests in the batch",
+              "type": "integer",
+              "format": "int32"
+            },
+            "totalRequests": {
+              "description": "Total number of requests in the batch",
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        },
+        "batchItems": {
+          "description": "Array containing the batch results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RouteRangeBatchResponseItem"
+          }
+        },
+        "nextLink": {
+          "$ref": "#/definitions/NextLink"
+        }
+      }
+    },
+    "RouteRangeBatchResponseItem": {
+      "description": "Batch response item",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OptionalId"
+        },
+        {
+          "$ref": "#/definitions/RouteRangeResponse"
+        },
+        {
+          "type": "object",
+          "description": "error details",
+          "properties": {
+            "error": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
+            }
+          }
+        }
+      ]
     }
   }
 }
