@@ -56,15 +56,15 @@ model OpenAIPageableListOf<T> {
   @doc("The requested list of items.")
   data: T[];
 
-  @encodedName("application/json", "first_id")
+  @projectedName("json", "first_id")
   @doc("The first ID represented in this list.")
   firstId: string;
 
-  @encodedName("application/json", "last_id")
+  @projectedName("json", "last_id")
   @doc("The last ID represented in this list.")
   lastId: string;
 
-  @encodedName("application/json", "has_more")
+  @projectedName("json", "has_more")
   @doc("A value indicating whether there are additional values available not captured in this list.")
   hasMore: boolean;
 }

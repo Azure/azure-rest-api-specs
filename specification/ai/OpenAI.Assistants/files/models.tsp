@@ -21,7 +21,7 @@ model OpenAIFile {
   @doc("The name of the file.")
   filename: string;
 
-  @encodedName("application/json", "created_at")
+  @projectedName("json", "created_at")
   @doc("The Unix timestamp, in seconds, representing when this object was created.")
   createdAt: epochDateTime;
 

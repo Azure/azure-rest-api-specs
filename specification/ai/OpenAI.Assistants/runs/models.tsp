@@ -18,11 +18,11 @@ model ThreadRun {
   @doc("The object type, which is always 'thread.run'.")
   object: "thread.run";
 
-  @encodedName("application/json", "thread_id")
+  @projectedName("json", "thread_id")
   @doc("The ID of the thread associated with this run.")
   threadId: string;
 
-  @encodedName("application/json", "assistant_id")
+  @projectedName("json", "assistant_id")
   @doc("The ID of the assistant associated with the thread this run was performed against.")
   assistantId: string;
 
@@ -35,12 +35,12 @@ model ThreadRun {
   //                https://platform.openai.com/docs/api-reference/runs/object#runs/object-expires_at
   //                https://github.com/openai/openai-openapi/blob/master/openapi.yaml#L8245
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @encodedName("application/json", "required_action")
+  @projectedName("json", "required_action")
   @doc("The details of the action required for the assistant thread run to continue.")
   requiredAction?: RequiredAction | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @encodedName("application/json", "last_error")
+  @projectedName("json", "last_error")
   @doc("The last error, if any, encountered by this assistant thread run.")
   lastError: RunError | null;
 
@@ -53,11 +53,11 @@ model ThreadRun {
   @doc("The overridden enabled tools used for this assistant thread run.")
   tools: ToolDefinition[] = [];
 
-  @encodedName("application/json", "file_ids")
+  @projectedName("json", "file_ids")
   @doc("A list of attached file IDs, ordered by creation date in ascending order.")
   fileIds: string[] = [];
 
-  @encodedName("application/json", "created_at")
+  @projectedName("json", "created_at")
   @doc("The Unix timestamp, in seconds, representing when this object was created.")
   createdAt: epochDateTime;
 
@@ -65,27 +65,27 @@ model ThreadRun {
   //                for completed runs.
   //                https://platform.openai.com/docs/api-reference/runs/object#runs/object-expires_at
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @encodedName("application/json", "expires_at")
+  @projectedName("json", "expires_at")
   @doc("The Unix timestamp, in seconds, representing when this item expires.")
   expiresAt: epochDateTime | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @encodedName("application/json", "started_at")
+  @projectedName("json", "started_at")
   @doc("The Unix timestamp, in seconds, representing when this item was started.")
   startedAt: epochDateTime | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @encodedName("application/json", "completed_at")
+  @projectedName("json", "completed_at")
   @doc("The Unix timestamp, in seconds, representing when this completed.")
   completedAt: epochDateTime | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @encodedName("application/json", "cancelled_at")
+  @projectedName("json", "cancelled_at")
   @doc("The Unix timestamp, in seconds, representing when this was cancelled.")
   cancelledAt: epochDateTime | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @encodedName("application/json", "failed_at")
+  @projectedName("json", "failed_at")
   @doc("The Unix timestamp, in seconds, representing when this failed.")
   failedAt: epochDateTime | null;
 
@@ -96,7 +96,7 @@ model ThreadRun {
 @added(ServiceApiVersions.v2024_02_15_preview)
 model CreateRunOptions {
   @doc("The ID of the assistant that should run the thread.")
-  @encodedName("application/json", "assistant_id")
+  @projectedName("json", "assistant_id")
   assistantId: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
@@ -108,7 +108,7 @@ model CreateRunOptions {
   instructions?: string | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @encodedName("application/json", "additional_instructions")
+  @projectedName("json", "additional_instructions")
   @doc("""
   Additional instructions to append at the end of the instructions for the run. This is useful for modifying the behavior
   on a per-run basis without overriding other instructions.
@@ -176,7 +176,7 @@ model SubmitToolOutputsAction extends RequiredAction {
   @doc("The object type, which is always 'submit_tool_outputs'.")
   type: "submit_tool_outputs";
 
-  @encodedName("application/json", "submit_tool_outputs")
+  @projectedName("json", "submit_tool_outputs")
   @doc("The details describing tools that should be called to submit tool outputs.")
   submitToolOutputs: SubmitToolOutputsDetails;
 }
@@ -184,7 +184,7 @@ model SubmitToolOutputsAction extends RequiredAction {
 @doc("The details describing tools that should be called to submit tool outputs.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model SubmitToolOutputsDetails {
-  @encodedName("application/json", "tool_calls")
+  @projectedName("json", "tool_calls")
   @doc("The list of tool calls that must be resolved for the assistant thread run to continue.")
   toolCalls: RequiredToolCall[];
 }
@@ -192,7 +192,7 @@ model SubmitToolOutputsDetails {
 @doc("The details used when creating and immediately running a new assistant thread.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model CreateAndRunThreadOptions {
-  @encodedName("application/json", "assistant_id")
+  @projectedName("json", "assistant_id")
   @doc("The ID of the assistant for which the thread should be created.")
   assistantId: string;
 

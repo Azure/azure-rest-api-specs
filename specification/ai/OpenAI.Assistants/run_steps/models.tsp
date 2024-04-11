@@ -17,51 +17,51 @@ model RunStep {
   @doc("The type of run step, which can be either message_creation or tool_calls.")
   type: RunStepType;
 
-  @encodedName("application/json", "assistant_id")
+  @projectedName("json", "assistant_id")
   @doc("The ID of the assistant associated with the run step.")
   assistantId: string;
 
-  @encodedName("application/json", "thread_id")
+  @projectedName("json", "thread_id")
   @doc("The ID of the thread that was run.")
   threadId: string;
 
-  @encodedName("application/json", "run_id")
+  @projectedName("json", "run_id")
   @doc("The ID of the run that this run step is a part of.")
   runId: string;
 
   @doc("The status of this run step.")
   status: RunStepStatus;
 
-  @encodedName("application/json", "step_details")
+  @projectedName("json", "step_details")
   @doc("The details for this run step.")
   stepDetails: RunStepDetails;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @encodedName("application/json", "last_error")
+  @projectedName("json", "last_error")
   @doc("If applicable, information about the last error encountered by this run step.")
   lastError: RunStepError | null;
 
-  @encodedName("application/json", "created_at")
+  @projectedName("json", "created_at")
   @doc("The Unix timestamp, in seconds, representing when this object was created.")
   createdAt: epochDateTime;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @encodedName("application/json", "expired_at")
+  @projectedName("json", "expired_at")
   @doc("The Unix timestamp, in seconds, representing when this item expired.")
   expiredAt: epochDateTime | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @encodedName("application/json", "completed_at")
+  @projectedName("json", "completed_at")
   @doc("The Unix timestamp, in seconds, representing when this completed.")
   completedAt: epochDateTime | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @encodedName("application/json", "cancelled_at")
+  @projectedName("json", "cancelled_at")
   @doc("The Unix timestamp, in seconds, representing when this was cancelled.")
   cancelledAt: epochDateTime | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @encodedName("application/json", "failed_at")
+  @projectedName("json", "failed_at")
   @doc("The Unix timestamp, in seconds, representing when this failed.")
   failedAt: epochDateTime | null;
 
@@ -94,7 +94,7 @@ model RunStepMessageCreationDetails extends RunStepDetails {
   @doc("The object type, which is always 'message_creation'.")
   type: RunStepType.messageCreation;
 
-  @encodedName("application/json", "message_creation")
+  @projectedName("json", "message_creation")
   @doc("Information about the message creation associated with this run step.")
   messageCreation: RunStepMessageCreationReference;
 }
@@ -105,7 +105,7 @@ model RunStepToolCallDetails extends RunStepDetails {
   @doc("The object type, which is always 'tool_calls'.")
   type: RunStepType.toolCalls;
 
-  @encodedName("application/json", "tool_calls")
+  @projectedName("json", "tool_calls")
   @doc("A list of tool call details for this run step.")
   toolCalls: RunStepToolCall[];
 }
@@ -113,7 +113,7 @@ model RunStepToolCallDetails extends RunStepDetails {
 @doc("The details of a message created as a part of a run step.")
 @added(ServiceApiVersions.v2024_02_15_preview)
 model RunStepMessageCreationReference {
-  @encodedName("application/json", "message_id")
+  @projectedName("json", "message_id")
   @doc("The ID of the message created by this run step.")
   messageId: string;
 }
