@@ -28,6 +28,10 @@ openapi-subtype: rpaas
 tag: package-preview-2023-11
 ```
 
+``` yaml
+modelerfour:
+  flatten-models: false
+```
 
 ### Tag: package-preview-2023-11
 
@@ -48,6 +52,8 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-python
 ```
 
 ## Go
