@@ -15,7 +15,7 @@ model AssistantThread {
   @doc("The object type, which is always 'thread'.")
   object: "thread";
 
-  @projectedName("json", "created_at")
+  @encodedName("application/json", "created_at")
   @doc("The Unix timestamp, in seconds, representing when this object was created.")
   createdAt: epochDateTime;
 

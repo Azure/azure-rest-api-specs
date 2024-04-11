@@ -1143,8 +1143,8 @@ components:
             - assistant
           description: The object type, which is always assistant.
         created_at:
-          type: integer
-          format: unixtime
+          allOf:
+            - $ref: '#/components/schemas/epochDateTime'
           description: The Unix timestamp, in seconds, representing when this object was created.
         name:
           type: string
@@ -1255,8 +1255,8 @@ components:
             - assistant.file
           description: The object type, which is always 'assistant.file'.
         created_at:
-          type: integer
-          format: unixtime
+          allOf:
+            - $ref: '#/components/schemas/epochDateTime'
           description: The Unix timestamp, in seconds, representing when this object was created.
         assistant_id:
           type: string
@@ -1298,8 +1298,8 @@ components:
             - thread
           description: The object type, which is always 'thread'.
         created_at:
-          type: integer
-          format: unixtime
+          allOf:
+            - $ref: '#/components/schemas/epochDateTime'
           description: The Unix timestamp, in seconds, representing when this object was created.
         metadata:
           type: object
@@ -1519,8 +1519,8 @@ components:
             - thread.message.file
           description: The object type, which is always 'thread.message.file'.
         created_at:
-          type: integer
-          format: unixtime
+          allOf:
+            - $ref: '#/components/schemas/epochDateTime'
           description: The Unix timestamp, in seconds, representing when this object was created.
         message_id:
           type: string
@@ -1708,8 +1708,8 @@ components:
           type: string
           description: The name of the file.
         created_at:
-          type: integer
-          format: unixtime
+          allOf:
+            - $ref: '#/components/schemas/epochDateTime'
           description: The Unix timestamp, in seconds, representing when this object was created.
         purpose:
           allOf:
@@ -1872,27 +1872,27 @@ components:
           nullable: true
           description: If applicable, information about the last error encountered by this run step.
         created_at:
-          type: integer
-          format: unixtime
+          allOf:
+            - $ref: '#/components/schemas/epochDateTime'
           description: The Unix timestamp, in seconds, representing when this object was created.
         expired_at:
-          type: integer
-          format: unixtime
+          oneOf:
+            - $ref: '#/components/schemas/epochDateTime'
           nullable: true
           description: The Unix timestamp, in seconds, representing when this item expired.
         completed_at:
-          type: integer
-          format: unixtime
+          oneOf:
+            - $ref: '#/components/schemas/epochDateTime'
           nullable: true
           description: The Unix timestamp, in seconds, representing when this completed.
         cancelled_at:
-          type: integer
-          format: unixtime
+          oneOf:
+            - $ref: '#/components/schemas/epochDateTime'
           nullable: true
           description: The Unix timestamp, in seconds, representing when this was cancelled.
         failed_at:
-          type: integer
-          format: unixtime
+          oneOf:
+            - $ref: '#/components/schemas/epochDateTime'
           nullable: true
           description: The Unix timestamp, in seconds, representing when this failed.
         metadata:
@@ -2277,8 +2277,8 @@ components:
             - thread.message
           description: The object type, which is always 'thread.message'.
         created_at:
-          type: integer
-          format: unixtime
+          allOf:
+            - $ref: '#/components/schemas/epochDateTime'
           description: The Unix timestamp, in seconds, representing when this object was created.
         thread_id:
           type: string
@@ -2382,32 +2382,32 @@ components:
           description: A list of attached file IDs, ordered by creation date in ascending order.
           default: []
         created_at:
-          type: integer
-          format: unixtime
+          allOf:
+            - $ref: '#/components/schemas/epochDateTime'
           description: The Unix timestamp, in seconds, representing when this object was created.
         expires_at:
-          type: integer
-          format: unixtime
+          oneOf:
+            - $ref: '#/components/schemas/epochDateTime'
           nullable: true
           description: The Unix timestamp, in seconds, representing when this item expires.
         started_at:
-          type: integer
-          format: unixtime
+          oneOf:
+            - $ref: '#/components/schemas/epochDateTime'
           nullable: true
           description: The Unix timestamp, in seconds, representing when this item was started.
         completed_at:
-          type: integer
-          format: unixtime
+          oneOf:
+            - $ref: '#/components/schemas/epochDateTime'
           nullable: true
           description: The Unix timestamp, in seconds, representing when this completed.
         cancelled_at:
-          type: integer
-          format: unixtime
+          oneOf:
+            - $ref: '#/components/schemas/epochDateTime'
           nullable: true
           description: The Unix timestamp, in seconds, representing when this was cancelled.
         failed_at:
-          type: integer
-          format: unixtime
+          oneOf:
+            - $ref: '#/components/schemas/epochDateTime'
           nullable: true
           description: The Unix timestamp, in seconds, representing when this failed.
         metadata:
@@ -2479,6 +2479,9 @@ components:
           nullable: true
           description: A set of up to 16 key/value pairs that can be attached to an object, used for storing additional information about that object in a structured format. Keys may be up to 64 characters in length and values may be up to 512 characters in length.
       description: The request details to use when modifying an existing assistant.
+    epochDateTime:
+      type: integer
+      format: unixtime
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
