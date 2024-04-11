@@ -215,15 +215,15 @@ model CustomBaseParameters<Resource extends Azure.ResourceManager.Foundations.Ar
   providerName: "provider";
 
   @path
-  @doc("clusterRp")
+  @doc("cluster Rp name")
   clusterRp: string;
 
   @path
-  @doc("clusterResourceName")
+  @doc("cluster Resource Name")
   clusterResourceName: string;
 
   @path
-  @doc("clusterName")
+  @doc("cluste rName")
   clusterName: string;
 }
 
