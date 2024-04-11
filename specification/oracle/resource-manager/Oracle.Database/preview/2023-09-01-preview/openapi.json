@@ -1352,9 +1352,6 @@
         "x-ms-examples": {
           "Get Autonomous Database": {
             "$ref": "./examples/autonomousDatabase_get.json"
-          },
-          "Get Autonomous Database Backup.": {
-            "$ref": "./examples/autonomousDatabaseBackup_get.json"
           }
         }
       },
@@ -1423,9 +1420,6 @@
         "x-ms-examples": {
           "Create Autonomous Database": {
             "$ref": "./examples/autonomousDatabase_create.json"
-          },
-          "Create Autonomous Database Backup.": {
-            "$ref": "./examples/autonomousDatabaseBackup_create.json"
           },
           "Create clone Autonomous Database": {
             "$ref": "./examples/autonomousDatabaseClone_create.json"
@@ -1563,9 +1557,6 @@
         "x-ms-examples": {
           "Delete Autonomous Database": {
             "$ref": "./examples/autonomousDatabase_delete.json"
-          },
-          "Delete Autonomous Database Backup.": {
-            "$ref": "./examples/autonomousDatabaseBackup_delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1672,6 +1663,11 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get Autonomous Database Backup.": {
+            "$ref": "./examples/autonomousDatabaseBackup_get.json"
+          }
         }
       },
       "put": {
@@ -1741,6 +1737,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Create Autonomous Database Backup.": {
+            "$ref": "./examples/autonomousDatabaseBackup_create.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1886,6 +1887,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete Autonomous Database Backup.": {
+            "$ref": "./examples/autonomousDatabaseBackup_delete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1965,6 +1971,63 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/autonomousDatabases/{autonomousdatabasename}/generateWallet": {
+      "post": {
+        "operationId": "AutonomousDatabases_GenerateWallet",
+        "tags": [
+          "AutonomousDatabases"
+        ],
+        "description": "Generate wallet action on Autonomous Database",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "autonomousdatabasename",
+            "in": "path",
+            "description": "The database name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 30
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateAutonomousDatabaseWalletDetails"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AutonomousDatabaseWalletFile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Generate wallet action on Autonomous Database": {
+            "$ref": "./examples/autonomousDatabase_generateWallet.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Oracle.Database/autonomousDatabases/{autonomousdatabasename}/switchover": {
@@ -4185,6 +4248,18 @@
             "update",
             "create"
           ]
+        },
+        "whitelistedIps": {
+          "type": "array",
+          "description": "The client IP access control list (ACL). This is an array of CIDR notations and/or IP addresses. Values should be separate strings, separated by commas. Example: ['1.1.1.1','1.1.1.0/24','1.1.2.25']",
+          "items": {
+            "$ref": "#/definitions/aclString"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
       "discriminator": "dataBaseType",
@@ -4813,8 +4888,33 @@
             "update",
             "create"
           ]
+        },
+        "whitelistedIps": {
+          "type": "array",
+          "description": "The client IP access control list (ACL). This is an array of CIDR notations and/or IP addresses. Values should be separate strings, separated by commas. Example: ['1.1.1.1','1.1.1.0/24','1.1.2.25']",
+          "items": {
+            "$ref": "#/definitions/aclString"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       }
+    },
+    "AutonomousDatabaseWalletFile": {
+      "type": "object",
+      "description": "Autonomous Database Wallet File resource model.",
+      "properties": {
+        "walletFiles": {
+          "type": "string",
+          "description": "The base64 encoded wallet files"
+        }
+      },
+      "required": [
+        "walletFiles"
+      ]
     },
     "AutonomousDbVersion": {
       "type": "object",
@@ -7549,6 +7649,52 @@
         }
       }
     },
+    "GenerateAutonomousDatabaseWalletDetails": {
+      "type": "object",
+      "description": "Autonomous Database Generate Wallet resource model.",
+      "properties": {
+        "generateType": {
+          "$ref": "#/definitions/GenerateType",
+          "description": "The type of wallet to generate."
+        },
+        "isRegional": {
+          "type": "boolean",
+          "description": "True when requesting regional connection strings in PDB connect info, applicable to cross-region DG only."
+        },
+        "password": {
+          "$ref": "#/definitions/Password",
+          "description": "The password to encrypt the keys inside the wallet",
+          "minLength": 8
+        }
+      },
+      "required": [
+        "password"
+      ]
+    },
+    "GenerateType": {
+      "type": "string",
+      "description": "GenerateType enum",
+      "enum": [
+        "Single",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "GenerateType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Single",
+            "value": "Single",
+            "description": "SINGLE value"
+          },
+          {
+            "name": "All",
+            "value": "All",
+            "description": "ALL value"
+          }
+        ]
+      }
+    },
     "GiVersion": {
       "type": "object",
       "description": "GiVersion resource definition",
@@ -9128,6 +9274,11 @@
           }
         ]
       }
+    },
+    "aclString": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
     }
   },
   "parameters": {}
