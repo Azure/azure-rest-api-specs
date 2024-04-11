@@ -318,7 +318,7 @@
     "/route/range": {
       "post": {
         "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nThe Snap to Roads API accepts GPS point data, represented as latitude and longitude coordinates, and generates a route that aligns with existing roadways on a map. This process, known as \"snapping to roads,\" produces a series of objects that trace a path closely following the road network. The resulting data includes road names and their respective speed limits, pertinent to the traversed segments.\n\nMoreover, the Snap to Roads API offers an interpolation feature, which refines the GPS points to create a smoother route that adheres to the road's geometry. This functionality is especially beneficial for asset tracking and enhancing data visualization in mapping applications.\n\n\n\nFor information about routing availability in countries/regions, see [Azure Maps routing coverage](https://learn.microsoft.com/azure/azure-maps/routing-coverage?pivots=route-v2).\n\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n",
-        "operationId": "Route_PostRouteRange",
+        "operationId": "Route_PostRange",
         "consumes": [
           "application/geo+json"
         ],
@@ -378,7 +378,7 @@
     "/route/range:batch": {
       "post": {
         "description": "**Route Range Batch API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nThe Route Range Batch API sends batches of up to **100** queries as a single call to the [Snap To Roads API](https://learn.microsoft.com/en-us/rest/api/maps/route/post-route-range?view=rest-maps-2024-03-01-preview).\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/route/range:batch?api-version=2024-03-01-preview\n```\n### POST Body for Batch Request\nTo send the _route range_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _route_range_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"type\": \"Feature\",\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          5.86605,\n          50.9745\n        ]\n      },\n      \"properties\": {\n        \"timeBudgetInSec\": 6000\n      }\n    },\n    {\n      \"type\": \"Feature\",\n      \"geometry\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n          -122.201669,\n          47.615076\n        ]\n      },\n      \"properties\": {\n        \"timeBudgetInSec\": 2000\n      }\n    }\n  ]\n}\n```\n\nA _route range_ batchItem object can accept any of the supported _snap to roads_ [Request body](/rest/api/maps/route/post-snap-to-roads?view=rest-maps-2024-03-01-preview#request-body) \n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`RouteRangeResponse`](/rest/api/maps/route/post-route-range#response) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
-        "operationId": "Route_PostRouteRangeBatch",
+        "operationId": "Route_PostRangeBatch",
         "consumes": [
           "application/json"
         ],
@@ -507,7 +507,7 @@
             "fastestWithTraffic"
           ],
           "x-ms-enum": {
-            "name": "OptimizeRoute",
+            "name": "RouteDirectionOptimizeRoute",
             "modelAsString": true,
             "values": [
               {
@@ -711,6 +711,7 @@
         },
         "properties": {
           "type": "object",
+          "description": "Specify properties for the range calculation.",
           "x-ms-client-flatten": true,
           "properties": {
             "departAt": {
@@ -730,7 +731,7 @@
                 "thrillingWithoutTraffic"
               ],
               "x-ms-enum": {
-                "name": "OptimizeRoute",
+                "name": "RouteRangeOptimizeRoute",
                 "modelAsString": true,
                 "values": [
                   {
@@ -791,7 +792,25 @@
                     "normal",
                     "low",
                     "high"
-                  ]
+                  ],
+                  "x-ms-enum": {
+                    "name": "ThrillingWindingness",
+                    "modelAsString": true,
+                    "values": [
+                      {
+                        "value": "normal",
+                        "description": "normal"
+                      },
+                      {
+                        "value": "low",
+                        "description": "low"
+                      },
+                      {
+                        "value": "high",
+                        "description": "high"
+                      }
+                    ]
+                  }
                 },
                 "hilliness": {
                   "description": "Specify the hilliness of the route. If unspecified, the default mode is \"normal\".",
@@ -801,7 +820,25 @@
                     "normal",
                     "low",
                     "high"
-                  ]
+                  ],
+                  "x-ms-enum": {
+                    "name": "ThrillingHilliness",
+                    "modelAsString": true,
+                    "values": [
+                      {
+                        "value": "normal",
+                        "description": "normal"
+                      },
+                      {
+                        "value": "low",
+                        "description": "low"
+                      },
+                      {
+                        "value": "high",
+                        "description": "high"
+                      }
+                    ]
+                  }
                 }
               }
             },
@@ -2487,7 +2524,7 @@
     },
     "InputSnapToRoadsProperties": {
       "type": "object",
-      "description": "",
+      "description": "Specifies the properties of Snap To Roads",
       "properties": {
         "pointIndex": {
           "description": "Identify the corresponding index in the original list of points for each snapped point. Ensure that interpolated points have unique indices to distinguish them from the snapped points.",
@@ -2507,8 +2544,8 @@
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
         },
         "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/InputRouteRangeProperties"
+          "type": "object",
+          "description": "Route Ranges properties."
         }
       },
       "required": [
@@ -2516,11 +2553,6 @@
         "geometry",
         "properties"
       ]
-    },
-    "InputRouteRangeProperties": {
-      "type": "object",
-      "description": "",
-      "properties": {}
     },
     "RouteRangeFeaturesItem": {
       "type": "object",
@@ -2627,6 +2659,7 @@
         "summary": {
           "description": "Summary for the batch request",
           "type": "object",
+          "x-ms-client-flatten": true,
           "properties": {
             "successfulRequests": {
               "description": "Number of successful requests in the batch",
@@ -2705,6 +2738,7 @@
         "summary": {
           "description": "Summary for the batch request",
           "type": "object",
+          "x-ms-client-flatten": true,
           "properties": {
             "successfulRequests": {
               "description": "Number of successful requests in the batch",
@@ -2762,6 +2796,7 @@
         "summary": {
           "description": "Summary for the batch request",
           "type": "object",
+          "x-ms-client-flatten": true,
           "properties": {
             "successfulRequests": {
               "description": "Number of successful requests in the batch",
