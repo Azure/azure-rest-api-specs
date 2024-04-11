@@ -10,8 +10,8 @@
       },
       "properties": {
         "actionOnUnmanage": {
-          "resources": "delete",
-          "resourceGroups": "delete",
+          "resources": "detach",
+          "resourceGroups": "detach",
           "managementGroups": "detach"
         },
         "denySettings": {
@@ -36,10 +36,69 @@
     }
   },
   "responses": {
+    "200": {
+      "description": "Successful validation result.",
+      "body": {
+        "name": "simpleDeploymentStack",
+        "correlationId": "00000000-0000-0000-0000-000000000000",
+        "denySettings": {
+          "mode": "denyDelete",
+          "excludedPrincipals": [
+            "principal"
+          ],
+          "excludedActions": [
+            "action"
+          ],
+          "applyToChildScopes": false
+        },
+        "parameters": {
+          "parameter1": {
+            "type": "string"
+          }
+        },
+        "validatedResources": [
+          {
+            "id": "/providers/Microsoft.Management/managementGroups/myMg/providers/Microsoft.Authorization/policyDefinitions/Policy1"
+          }
+        ]
+      }
+    },
     "202": {
       "description": "Accepted",
       "headers": {
-        "Azure-AsyncOperation": "https://example.com"
+        "Location": "https://example.com",
+        "Retry-After": "15"
+      }
+    },
+    "400": {
+      "description": "Failed validation result.",
+      "body": {
+        "correlationId": "00000000-0000-0000-0000-000000000000",
+        "denySettings": {
+          "mode": "denyDelete",
+          "excludedPrincipals": [
+            "principal"
+          ],
+          "excludedActions": [
+            "action"
+          ],
+          "applyToChildScopes": false
+        },
+        "error": {
+          "code": "ErrorCode",
+          "message": "Deployment validation failed"
+        },
+        "name": "simpleDeploymentStack",
+        "parameters": {
+          "parameter1": {
+            "type": "string"
+          }
+        },
+        "validatedResources": [
+          {
+            "id": "/providers/Microsoft.Management/managementGroups/myMg/providers/Microsoft.Authorization/policyDefinitions/Policy1"
+          }
+        ]
       }
     }
   }
