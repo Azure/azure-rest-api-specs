@@ -935,7 +935,7 @@
     },
     "Connector": {
       "type": "object",
-      "description": "A ImpactProviderHub resource",
+      "description": "A connector is a resource that can be used to proactively report impacts against workloads in Azure to Microsoft.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ConnectorProperties",
@@ -976,7 +976,7 @@
     },
     "ConnectorProperties": {
       "type": "object",
-      "description": "Details of the Impact Connector.",
+      "description": "Details of the Connector.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -996,10 +996,6 @@
         "connectorType": {
           "$ref": "#/definitions/Platform",
           "description": "connector type"
-        },
-        "filters": {
-          "type": "string",
-          "description": "filters associated with this connector"
         },
         "lastRunTimeStamp": {
           "type": "string",
@@ -1032,10 +1028,6 @@
         "connectorType": {
           "$ref": "#/definitions/Platform",
           "description": "connector type"
-        },
-        "filters": {
-          "type": "string",
-          "description": "filters associated with this connector"
         }
       }
     },

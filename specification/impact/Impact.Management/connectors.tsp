@@ -11,7 +11,7 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Impact;
 
-@doc("A ImpactProviderHub resource")
+@doc("A connector is a resource that can be used to proactively report impacts against workloads in Azure to Microsoft.")
 @subscriptionResource
 model Connector is ProxyResource<ConnectorProperties> {
   @doc("The name of the connector")
@@ -22,7 +22,7 @@ model Connector is ProxyResource<ConnectorProperties> {
   name: string;
 }
 
-@doc("Details of the Impact Connector.")
+@doc("Details of the Connector.")
 model ConnectorProperties is ResourceProperties {
   @visibility("read")
   @doc("unique id of the connector.")
@@ -34,9 +34,6 @@ model ConnectorProperties is ResourceProperties {
 
   @doc("connector type")
   connectorType: Platform;
-
-  @doc("filters associated with this connector")
-  filters?: string;
 
   @visibility("read")
   @doc("last run time stamp of this connector in UTC time zone")
