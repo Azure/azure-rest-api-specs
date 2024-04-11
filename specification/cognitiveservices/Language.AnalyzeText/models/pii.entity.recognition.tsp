@@ -34,7 +34,7 @@ model PiiTaskParameters is PreBuiltTaskParameters {
 
   @added(Versions.v2023_04_15_preview)
   @doc("Enumeration of PII categories to be excluded in the response.")
-  excludePiiCategories?: PiiCategoriesExclude;
+  excludePiiCategories?: Array<PiiCategoriesExclude>;
 
   @added(Versions.v2023_04_15_preview)
   @doc("Character to be used for redaction. Default in '*'.")
