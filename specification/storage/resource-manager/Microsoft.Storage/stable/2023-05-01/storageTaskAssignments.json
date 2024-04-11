@@ -555,6 +555,7 @@
     },
     "ExecutionTrigger": {
       "type": "object",
+      "discriminator": "type",
       "properties": {
         "type": {
           "type": "string",
@@ -563,23 +564,69 @@
             "OnSchedule"
           ],
           "x-ms-enum": {
-            "name": "Type",
+            "name": "TriggerType",
             "modelAsString": false
           },
           "description": "The trigger type of the storage task assignment execution"
-        },
-        "parameters": {
-          "$ref": "#/definitions/TriggerParameters",
-          "description": "The trigger parameters of the storage task assignment execution"
         }
       },
       "required": [
-        "type",
+        "type"
+      ],
+      "description": "Execution trigger for storage task assignment"
+    },
+    "RunOnceTrigger": {
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/RunOnceTriggerParameters",
+          "description": "Execution trigger parameters of the storage task assignment"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionTrigger"
+        }
+      ],
+      "required": [
         "parameters"
       ],
-      "description": "Trigger for storage task assignment execution"
+      "x-ms-discriminator-value": "RunOnce",
+      "description": "Run once execution trigger parameters of the storage task assignment"
     },
-    "TriggerParameters": {
+    "RunOnceTriggerParameters": {
+      "type": "object",
+      "properties": {
+        "startOn": {
+          "type": "string",
+          "description": "startOn for task execution"
+        }
+      },
+      "required": [
+        "startOn"
+      ],
+      "description": "The trigger parameters of the storage task assignment run once execution"
+    },
+    "OnScheduleTrigger": {
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/OnScheduleTriggerParameters",
+          "description": "Execution trigger parameters of the storage task assignment"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionTrigger"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "x-ms-discriminator-value": "OnSchedule",
+      "description": "On schedule execution trigger parameters of the storage task assignment"
+    },
+    "OnScheduleTriggerParameters": {
       "type": "object",
       "properties": {
         "startFrom": {
@@ -606,13 +653,15 @@
         "endBy": {
           "type": "string",
           "description": "When to end task execution"
-        },
-        "startOn": {
-          "type": "string",
-          "description": "startOn for task execution"
         }
       },
-      "description": "The trigger parameters of the storage task assignment execution"
+      "required": [
+        "startFrom",
+        "interval",
+        "intervalUnit",
+        "endBy"
+      ],
+      "description": "The trigger parameters of the storage task assignment on schedule execution"
     },
     "ExecutionConstraints": {
       "type": "object",
