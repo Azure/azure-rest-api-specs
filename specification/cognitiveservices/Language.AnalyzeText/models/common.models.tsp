@@ -539,7 +539,7 @@ model InputWarning {
   @doc("A JSON pointer reference indicating the target object.")
   targetRef?: string;
 }
-#suppress "@azure-tools/typespec-azure-core/bad-record-type"
+
 @doc("if showStats=true was specified in the request this field will contain information about the request payload.")
 model RequestStatistics {
   @doc("Number of documents submitted in the request.")
@@ -594,7 +594,6 @@ model KnowledgeBaseAnswer {
   @doc("Source of QnA result.")
   source?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "KnowledgeBaseAnswer.metadata should not use ': Record<unknown>'. Use ': Record<string>' instead."
   @doc("Metadata associated with the answer, useful to categorize or filter question answers.")
   metadata?: Record<unknown>;
 

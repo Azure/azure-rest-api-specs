@@ -22,7 +22,7 @@ model AnalyzeTextSentimentAnalysisInput extends AnalyzeTextTask {
 @doc("Supported parameters for a Sentiment Analysis task.")
 @clientName("SentimentAnalysisTaskContent", "csharp")
 model SentimentAnalysisTaskParameters is PreBuiltTaskParameters {
-  @doc("Whether to use opinion mining in the request or not.)
+  @doc("Whether to use opinion mining in the request or not.")
   opinionMining?: boolean = false;
   @doc("Specifies the method used to interpret string offsets.")
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
@@ -221,6 +221,7 @@ model CustomSentimentDocumentResult is DocumentResult {
   @doc("The sentiment confidence score between 0 and 1 for the sentence for all classes.")
   confidenceScores: SentimentConfidenceScores;
 
+  @doc("The document's sentences sentiment.")
   sentences: Array<CustomSentenceSentiment>;
 }
 

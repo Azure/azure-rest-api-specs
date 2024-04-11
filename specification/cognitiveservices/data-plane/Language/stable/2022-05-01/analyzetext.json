@@ -348,12 +348,15 @@
     },
     "AnalyzeTextKeyPhraseExtractionInput": {
       "type": "object",
+      "description": "Contains the analyze text KeyPhraseExtraction task input.",
       "properties": {
         "analysisInput": {
-          "$ref": "#/definitions/MultiLanguageAnalysisInput"
+          "$ref": "#/definitions/MultiLanguageAnalysisInput",
+          "description": "Contains the input documents."
         },
         "parameters": {
-          "$ref": "#/definitions/KeyPhraseTaskParameters"
+          "$ref": "#/definitions/KeyPhraseTaskParameters",
+          "description": "Key phrase extraction task parameters."
         }
       },
       "allOf": [
@@ -566,12 +569,15 @@
     },
     "AnalyzeTextSentimentAnalysisInput": {
       "type": "object",
+      "description": "Contains the analyze text SentimentAnalysis task input.",
       "properties": {
         "analysisInput": {
-          "$ref": "#/definitions/MultiLanguageAnalysisInput"
+          "$ref": "#/definitions/MultiLanguageAnalysisInput",
+          "description": "Contains the input documents."
         },
         "parameters": {
-          "$ref": "#/definitions/SentimentAnalysisTaskParameters"
+          "$ref": "#/definitions/SentimentAnalysisTaskParameters",
+          "description": "Sentiment Analysis task parameters."
         }
       },
       "allOf": [
@@ -2132,9 +2138,11 @@
     },
     "KeyPhraseExtractionLROResult": {
       "type": "object",
+      "description": "Contains the analyze text KeyPhraseExtraction LRO task.",
       "properties": {
         "results": {
-          "$ref": "#/definitions/KeyPhraseResult"
+          "$ref": "#/definitions/KeyPhraseResult",
+          "description": "The list of Key phrase extraction results"
         }
       },
       "required": [
@@ -2152,7 +2160,8 @@
       "description": "An object representing the task definition for a Key Phrase Extraction task.",
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/KeyPhraseTaskParameters"
+          "$ref": "#/definitions/KeyPhraseTaskParameters",
+          "description": "Key phrase extraction task parameters."
         }
       },
       "allOf": [
@@ -2164,7 +2173,7 @@
     },
     "KeyPhraseResult": {
       "type": "object",
-      "description": "Pre built result",
+      "description": "Contains the KeyPhraseResult.",
       "properties": {
         "errors": {
           "type": "array",
@@ -2213,9 +2222,11 @@
     },
     "KeyPhraseTaskResult": {
       "type": "object",
+      "description": "Contains the analyze text KeyPhraseExtraction task result.",
       "properties": {
         "results": {
-          "$ref": "#/definitions/KeyPhraseResult"
+          "$ref": "#/definitions/KeyPhraseResult",
+          "description": "The list of Key phrase extraction results"
         }
       },
       "required": [
@@ -2230,7 +2241,7 @@
     },
     "KeyPhrasesDocumentResult": {
       "type": "object",
-      "description": "Contains the result object for the processed document.",
+      "description": "Contains the Key phrase extraction results for a document.",
       "properties": {
         "id": {
           "type": "string",
@@ -3658,12 +3669,15 @@
     },
     "SentenceAssessment": {
       "type": "object",
+      "description": "Represents a sentence assessment and the assessments or target objects related to it.",
       "properties": {
         "sentiment": {
-          "$ref": "#/definitions/TokenSentimentValue"
+          "$ref": "#/definitions/TokenSentimentValue",
+          "description": "The sentiment of the sentence."
         },
         "confidenceScores": {
-          "$ref": "#/definitions/TargetConfidenceScoreLabel"
+          "$ref": "#/definitions/TargetConfidenceScoreLabel",
+          "description": "Represents the confidence scores across all sentiment classes: positive and negative."
         },
         "offset": {
           "type": "integer",
@@ -3695,6 +3709,7 @@
     },
     "SentenceSentiment": {
       "type": "object",
+      "description": "A document's sentence sentiment.",
       "properties": {
         "text": {
           "type": "string",
@@ -3772,12 +3787,15 @@
     },
     "SentenceTarget": {
       "type": "object",
+      "description": "Represents a sentence target and the assessments or target objects related to it.",
       "properties": {
         "sentiment": {
-          "$ref": "#/definitions/TokenSentimentValue"
+          "$ref": "#/definitions/TokenSentimentValue",
+          "description": "The sentiment of the sentence."
         },
         "confidenceScores": {
-          "$ref": "#/definitions/TargetConfidenceScoreLabel"
+          "$ref": "#/definitions/TargetConfidenceScoreLabel",
+          "description": "Represents the confidence scores across all sentiment classes: positive and negative."
         },
         "offset": {
           "type": "integer",
@@ -3816,7 +3834,8 @@
       "description": "An object representing the task definition for a Sentiment Analysis task.",
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/SentimentAnalysisTaskParameters"
+          "$ref": "#/definitions/SentimentAnalysisTaskParameters",
+          "description": "Parameters for the Sentiment Analysis task."
         }
       },
       "allOf": [
@@ -3842,11 +3861,12 @@
         },
         "opinionMining": {
           "type": "boolean",
+          "description": "Whether to use opinion mining in the request or not.",
           "default": false
         },
         "stringIndexType": {
           "type": "string",
-          "description": "Specifies the method used to interpret string offsets.  Defaults to Text Elements (Graphemes) according to Unicode v8.0.0. For additional information see https://aka.ms/text-analytics-offsets.",
+          "description": "Specifies the method used to interpret string offsets.",
           "default": "TextElements_v8",
           "enum": [
             "TextElements_v8",
@@ -3905,7 +3925,7 @@
     },
     "SentimentDocumentResult": {
       "type": "object",
-      "description": "Contains the result object for the processed document.",
+      "description": "An object representing the pre-built Sentiment Analysis results of each document.",
       "properties": {
         "id": {
           "type": "string",
@@ -3928,10 +3948,12 @@
           "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed)."
         },
         "confidenceScores": {
-          "$ref": "#/definitions/SentimentConfidenceScores"
+          "$ref": "#/definitions/SentimentConfidenceScores",
+          "description": "The sentiment confidence score between 0 and 1 for the sentence for all classes."
         },
         "sentences": {
           "type": "array",
+          "description": "The document's sentences sentiment.",
           "items": {
             "$ref": "#/definitions/SentenceSentiment"
           },
@@ -3948,9 +3970,11 @@
     },
     "SentimentLROResult": {
       "type": "object",
+      "description": "Contains the Sentiment Analysis LRO results.",
       "properties": {
         "results": {
-          "$ref": "#/definitions/SentimentResponse"
+          "$ref": "#/definitions/SentimentResponse",
+          "description": "The sentiment analysis results"
         }
       },
       "required": [
@@ -3965,7 +3989,7 @@
     },
     "SentimentResponse": {
       "type": "object",
-      "description": "Sentiment analysis per document.",
+      "description": "Sentiment analysis results for the input documents.",
       "properties": {
         "errors": {
           "type": "array",
@@ -3998,9 +4022,11 @@
     },
     "SentimentTaskResult": {
       "type": "object",
+      "description": "Contains the analyze text SentimentAnalysis LRO task result.",
       "properties": {
         "results": {
-          "$ref": "#/definitions/SentimentResponse"
+          "$ref": "#/definitions/SentimentResponse",
+          "description": "The sentiment analysis results"
         }
       },
       "required": [
@@ -4082,6 +4108,7 @@
     },
     "TargetRelation": {
       "type": "object",
+      "description": "Represents the relation between assessments and/or targets.",
       "properties": {
         "ref": {
           "type": "string",
