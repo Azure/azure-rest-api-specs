@@ -133,19 +133,19 @@ enum ResultType {
 
   @doc("Anomaly result based on Azure metric provided by Microsoft.Insights/metrics")
   azureMetricAnomaly,
-  
+
   @doc("Anomaly result based on metric provided by Prometheus query")
   prometheusMetricAnomaly,
-  
+
   @doc("Anomaly result based on anomalies in the application telemetry")
   correlatedApplicationAnomalies,
-  
+
   @doc("Anomaly result based on unusual or unexpected event identified in logs")
   abnormalEvent,
-  
+
   @doc("Anomaly result identified through patterns in tracing data")
   TracePatternAnomalies,
-  
+
   @doc("Anomaly result identified through patterns in transaction data")
   transactionPatternAnomalies,
 }
@@ -158,13 +158,13 @@ enum ResultType {
 enum InvestigationScopeType {
   @doc("The investigation ran on a subscription level")
   subscription,
-  
+
   @doc("The investigation ran on a resource level")
   resource,
-  
+
   @doc("The investigation ran on resource correlated metrics")
   correlatedMetricAnomalies,
-  
+
   @doc("The investigation ran on an metric anomaly")
   correlatedMetricAnomaly,
 
@@ -193,7 +193,6 @@ enum ScopeSourceType {
   @doc("User defined scope")
   UserDefined,
 }
-
 
 /**
  * Investigation properties with the investigation result.
@@ -250,7 +249,7 @@ model InvestigationRunConfiguration {
 
   @doc("List of arm resources to investigate.")
   @extension("x-ms-identifiers", [])
-  investigationScope?: string[]
+  investigationScope?: string[];
 }
 
 /**
@@ -282,7 +281,7 @@ model Investigation {
   id?: string;
 
   @doc("The type of this investigation.")
-  type?: InvestigationScopeType; 
+  type?: InvestigationScopeType;
 
   @doc("The execution details of the investigation.")
   execution?: Execution;
