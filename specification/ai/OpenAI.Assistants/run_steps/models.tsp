@@ -41,29 +41,34 @@ model RunStep {
   @doc("If applicable, information about the last error encountered by this run step.")
   lastError: RunStepError | null;
 
-  @projectedName("json", "created_at")
+  @encodedName("application/json", "created_at")
+  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   @doc("The Unix timestamp, in seconds, representing when this object was created.")
-  createdAt: epochDateTime;
+  createdAt: utcDateTime;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @projectedName("json", "expired_at")
+  @encodedName("application/json", "expired_at")
+  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   @doc("The Unix timestamp, in seconds, representing when this item expired.")
-  expiredAt: epochDateTime | null;
+  expiredAt: utcDateTime | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @projectedName("json", "completed_at")
+  @encodedName("application/json", "completed_at")
+  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   @doc("The Unix timestamp, in seconds, representing when this completed.")
-  completedAt: epochDateTime | null;
+  completedAt: utcDateTime | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @projectedName("json", "cancelled_at")
+  @encodedName("application/json", "cancelled_at")
+  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   @doc("The Unix timestamp, in seconds, representing when this was cancelled.")
-  cancelledAt: epochDateTime | null;
+  cancelledAt: utcDateTime | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @projectedName("json", "failed_at")
+  @encodedName("application/json", "failed_at")
+  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   @doc("The Unix timestamp, in seconds, representing when this failed.")
-  failedAt: epochDateTime | null;
+  failedAt: utcDateTime | null;
 
   ...RequiredNullableMetadata;
 }

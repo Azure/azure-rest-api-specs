@@ -16,9 +16,10 @@ model Assistant {
   @doc("The object type, which is always assistant.")
   object: "assistant";
 
-  @projectedName("json", "created_at")
+  @encodedName("application/json", "created_at")
+  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   @doc("The Unix timestamp, in seconds, representing when this object was created.")
-  createdAt: epochDateTime;
+  createdAt: utcDateTime;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
   @doc("The name of the assistant.")
@@ -124,9 +125,10 @@ model AssistantFile {
   @doc("The object type, which is always 'assistant.file'.")
   object: "assistant.file";
 
-  @projectedName("json", "created_at")
+  @encodedName("application/json", "created_at")
+  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   @doc("The Unix timestamp, in seconds, representing when this object was created.")
-  createdAt: epochDateTime;
+  createdAt: utcDateTime;
 
   @encodedName("application/json", "assistant_id")
   @doc("The assistant ID that the file is attached to.")

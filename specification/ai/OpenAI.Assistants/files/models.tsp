@@ -1,5 +1,4 @@
 import "@typespec/versioning";
-import "../common/models.tsp";
 
 namespace Azure.AI.OpenAI.Assistants;
 
@@ -21,9 +20,10 @@ model OpenAIFile {
   @doc("The name of the file.")
   filename: string;
 
-  @projectedName("json", "created_at")
+  @encodedName("application/json", "created_at")
+  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   @doc("The Unix timestamp, in seconds, representing when this object was created.")
-  createdAt: epochDateTime;
+  createdAt: utcDateTime;
 
   @doc("The intended purpose of a file.")
   purpose: FilePurpose;

@@ -57,37 +57,43 @@ model ThreadRun {
   @doc("A list of attached file IDs, ordered by creation date in ascending order.")
   fileIds: string[] = [];
 
-  @projectedName("json", "created_at")
+  @encodedName("application/json", "created_at")
+  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   @doc("The Unix timestamp, in seconds, representing when this object was created.")
-  createdAt: epochDateTime;
+  createdAt: utcDateTime;
 
   // Internal note: API reference describes this as non-nullable, but retrieveThreadRun gets a null expiresAt
   //                for completed runs.
   //                https://platform.openai.com/docs/api-reference/runs/object#runs/object-expires_at
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @projectedName("json", "expires_at")
+  @encodedName("application/json", "expires_at")
+  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   @doc("The Unix timestamp, in seconds, representing when this item expires.")
-  expiresAt: epochDateTime | null;
+  expiresAt: utcDateTime | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @projectedName("json", "started_at")
+  @encodedName("application/json", "started_at")
+  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   @doc("The Unix timestamp, in seconds, representing when this item was started.")
-  startedAt: epochDateTime | null;
+  startedAt: utcDateTime | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @projectedName("json", "completed_at")
+  @encodedName("application/json", "completed_at")
+  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   @doc("The Unix timestamp, in seconds, representing when this completed.")
-  completedAt: epochDateTime | null;
+  completedAt: utcDateTime | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @projectedName("json", "cancelled_at")
+  @encodedName("application/json", "cancelled_at")
+  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   @doc("The Unix timestamp, in seconds, representing when this was cancelled.")
-  cancelledAt: epochDateTime | null;
+  cancelledAt: utcDateTime | null;
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
-  @projectedName("json", "failed_at")
+  @encodedName("application/json", "failed_at")
+  @encode(DateTimeKnownEncoding.unixTimestamp, int32)
   @doc("The Unix timestamp, in seconds, representing when this failed.")
-  failedAt: epochDateTime | null;
+  failedAt: utcDateTime | null;
 
   ...RequiredNullableMetadata;
 }
