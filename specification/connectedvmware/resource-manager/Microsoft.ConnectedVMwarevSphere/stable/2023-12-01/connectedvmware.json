@@ -3758,11 +3758,13 @@
         },
         "deviceName": {
           "description": "Gets or sets the device name.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
-        "filename": {
+        "fileName": {
           "description": "Gets or sets the disk file name.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "diskType": {
           "description": "Gets or sets the disk backing type.",
@@ -3778,7 +3780,8 @@
         },
         "controllerType": {
           "description": "Gets or sets the controller type.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "uuid": {
           "description": "Gets or sets a unique identifier for this resource.",
@@ -5752,24 +5755,30 @@
         },
         "changeTrackingSupported": {
           "type": "boolean",
-          "description": "Gets a value indicating whether changeTrackingSupported is enabled."
+          "description": "Gets a value indicating whether change tracking is supported.",
+          "readOnly": true
         },
         "changeTrackingEnabled": {
           "type": "boolean",
-          "description": "Gets a value indicating whether changeTrackingEnabled is enabled."
+          "description": "Gets a value indicating whether change tracking is enabled.",
+          "readOnly": true
         },
         "maxSnapshots": {
-          "type": "int",
+          "format": "int32",
+          "type": "integer",
           "description": "Gets a value indicating the maximum possible number of snapshots.",
           "readOnly": true
         },
         "numberOfSnapshots": {
-          "type": "int",
-          "description": "Gets a value indicating the number of snapshots on the vm."
+          "format": "int32",
+          "type": "integer",
+          "description": "Gets a value indicating the number of snapshots on the vm.",
+          "readOnly": true
         },
         "diskEnabledUuid": {
           "type": "string",
-          "description": "Gets or sets the disk Enabled UUID of the vm."
+          "description": "Gets or sets the disk Enabled UUID of the vm.",
+          "readOnly": true
         },
         "computerName": {
           "type": "string",
@@ -5779,12 +5788,14 @@
         "memorySizeMB": {
           "format": "int32",
           "type": "integer",
-          "description": "Gets or sets memory size in MBs for the vm."
+          "description": "Gets or sets memory size in MBs for the vm.",
+          "readOnly": true
         },
         "numCPUs": {
           "format": "int32",
           "type": "integer",
-          "description": "Gets or sets the number of vCPU for the vm."
+          "description": "Gets or sets the number of vCPU for the vm.",
+          "readOnly": true
         },
         "storageProfile": {
           "description": "Storage properties.",
@@ -5902,11 +5913,13 @@
           "$ref": "#/definitions/InventoryItemDetails"
         },
         "numCoresPerSocket": {
-          "type": "int",
+          "format": "int32",
+          "type": "integer",
           "description": "Gets or sets the number of cores per socket on the host."
         },
         "numSockets": {
-          "type": "int",
+          "format": "int32",
+          "type": "integer",
           "description": "Gets or sets the number of sockets on the host."
         },
         "version": {
@@ -5914,7 +5927,7 @@
           "type": "string"
         },
         "cpuModel": {
-          "description": "Gets or sets the name of the host.",
+          "description": "Gets or sets the cpu model of the host.",
           "type": "string"
         },
         "powerState": {
@@ -6048,6 +6061,10 @@
             "update"
           ],
           "x-ms-secret": true
+        },
+        "privateKey": {
+          "type": "string",
+          "description": "Private key used to authenticate to a virtual machine through ssh."
         }
       }
     },
