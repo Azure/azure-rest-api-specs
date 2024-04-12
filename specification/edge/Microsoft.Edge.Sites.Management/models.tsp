@@ -20,7 +20,7 @@ model SiteProperties {
   description?: string;
 
   @doc("AddressResource ArmId of Site resource")
-  addressResourceId?: ResourceIdentifier<[
+  addressResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.EdgeOrder/addresses";
     }
@@ -40,7 +40,7 @@ model SiteUpdateProperties {
   description?: string;
 
   @doc("AddressResource ArmId of Site resource")
-  addressResourceId?: ResourceIdentifier<[
+  addressResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.EdgeOrder/addresses";
     }
