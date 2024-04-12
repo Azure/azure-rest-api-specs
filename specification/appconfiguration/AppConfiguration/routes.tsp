@@ -10,10 +10,17 @@ using Azure.Core.Traits;
 namespace AzureAppConfiguration;
 
 alias standardOps = StandardResourceOperations;
+
 alias acceptHeader<T extends string> = {
   @doc("Accept header")
-  @header
+  @header("Accept")
   accept: T | "application/problem+json" | string;
+};
+
+alias contentTypeHeader<T extends string> = {
+  @doc("Content-Type header")
+  @header("Content-Type")
+  contentType: T;
 };
 
 alias AppConfigResponseHeaders = {
