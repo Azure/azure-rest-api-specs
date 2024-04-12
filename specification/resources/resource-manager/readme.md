@@ -1362,6 +1362,15 @@ directive:
   - suppress: AvoidAdditionalProperties
     from: deploymentStacks.json
     reason: "Deployment properties such as 'parameters', 'outputs', and 'template' are dynamic types. For example, properties of the parameters object are defined by the template content."
+  - suppress: PostResponseCodes
+    from: deploymentStacks.json
+    reason: "Validate endpoints have 200, 202, 400, and default responses. The 400 response inherits the error response."
+  - suppress: LroErrorContent
+    from: deploymentStacks.json
+    reason: Error response is inherited via allOf on flagged response.
+  - suppress: NoErrorCodeResponses
+    from: deploymentStacks.json
+    reason: A 400 response from the validate endpoint indicates a validation failure.
   - suppress: PathForPutOperation
     from: policyDefinitions.json
     reason: Policy definitions can be created at management group or subscriptions
