@@ -41,7 +41,7 @@ model ExtractiveSummarizationResult is PreBuiltResult {
   @added(Versions.v2023_04_01)
   @doc("Response by document")
   @typeChangedFrom(
-    Versions.v2023_04_15_preview,
+    Versions.v2023_11_15_preview,
     Array<ExtractedSummaryDocumentResult>
   )
   documents: Array<ExtractedSummaryDocumentResultWithDetectedLanguage>;
@@ -66,7 +66,7 @@ model ExtractedSummaryDocumentResult is DocumentResult {
   sentences: Array<ExtractedSummarySentence>;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("A ranked list of sentences representing the extracted summary.")
 model ExtractedSummaryDocumentResultWithDetectedLanguage
   is ExtractedSummaryDocumentResult {
@@ -139,7 +139,7 @@ model AbstractiveSummarizationResultBase {
   @added(Versions.v2023_04_01)
   @doc("Response by document")
   @typeChangedFrom(
-    Versions.v2023_04_15_preview,
+    Versions.v2023_11_15_preview,
     Array<AbstractiveSummaryDocumentResult>
   )
   documents: Array<AbstractiveSummaryDocumentResultWithDetectedLanguage>;
@@ -158,7 +158,7 @@ model AbstractiveSummaryDocumentResult is DocumentResult {
   summaries: Array<AbstractiveSummary>;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("An object representing the Abstractive Summarization result of a single document with detected language.")
 model AbstractiveSummaryDocumentResultWithDetectedLanguage
   is AbstractiveSummaryDocumentResult {
@@ -176,7 +176,7 @@ model AbstractiveSummary {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("An object representing the task definition for an Custom Abstractive Summarization task.")
 model CustomAbstractiveSummarizationLROTask extends AnalyzeTextLROTask {
   @doc("The Custom Abstractive Summarization kind of the long running task.")
@@ -186,7 +186,7 @@ model CustomAbstractiveSummarizationLROTask extends AnalyzeTextLROTask {
   parameters: CustomAbstractiveSummarizationTaskParameters;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @clientName("CustomAbstractiveSummarizationTaskContent", "csharp")
 @doc("Supported parameters for the Custom Abstractive Summarization task.")
 model CustomAbstractiveSummarizationTaskParameters
@@ -195,7 +195,7 @@ model CustomAbstractiveSummarizationTaskParameters
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("An object representing the results for an Custom Abstractive Summarization task.")
 model CustomAbstractiveSummarizationLROResult extends AnalyzeTextLROResult {
   @doc("Kind of the task.")
@@ -205,7 +205,7 @@ model CustomAbstractiveSummarizationLROResult extends AnalyzeTextLROResult {
   results: CustomAbstractiveSummarizationResult;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("An object representing the custom summarization results of each document.")
 model CustomAbstractiveSummarizationResult
   is AbstractiveSummarizationResultBase {

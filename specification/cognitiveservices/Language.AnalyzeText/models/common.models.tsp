@@ -40,7 +40,7 @@ union AnalyzeTextTaskKind {
   EntityLinking: "EntityLinking",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2023_11_15_preview)
   DynamicClassification: "DynamicClassification",
 }
 
@@ -75,15 +75,15 @@ union AnalyzeTextLROTaskKind {
   AbstractiveSummarization: "AbstractiveSummarization",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2023_11_15_preview)
   CustomHealthcare: "CustomHealthcare",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2023_11_15_preview)
   CustomSentimentAnalysis: "CustomSentimentAnalysis",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2023_11_15_preview)
   CustomAbstractiveSummarization: "CustomAbstractiveSummarization",
 }
 
@@ -104,7 +104,7 @@ union AnalyzeTextTaskResultsKind {
   EntityLinkingResults: "EntityLinkingResults",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2023_11_15_preview)
   DynamicClassificationResults: "DynamicClassificationResults",
 }
 
@@ -139,15 +139,15 @@ union AnalyzeTextLROResultsKind {
   AbstractiveSummarizationLROResults: "AbstractiveSummarizationLROResults",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2023_11_15_preview)
   CustomHealthcareLROResults: "CustomHealthcareLROResults",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2023_11_15_preview)
   CustomSentimentAnalysisLROResults: "CustomSentimentAnalysisLROResults",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2023_11_15_preview)
   CustomAbstractiveSummarizationLROResults: "CustomAbstractiveSummarizationLROResults",
 }
 
@@ -189,7 +189,7 @@ model AnalyzeTextJobsInput {
   @doc("List of tasks to be performed as part of the LRO.")
   tasks: Array<AnalyzeTextLROTask>;
 
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2023_11_15_preview)
   @doc("Default language to use for records requesting automatic language detection.")
   defaultLanguage?: string;
 }
@@ -352,7 +352,7 @@ model MultiLanguageInput {
 }
 
 @doc("Defines the detected language for the document.")
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 model DocumentDetectedLanguage {
   @doc("If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document.")
   detectedLanguage?: DetectedLanguage;

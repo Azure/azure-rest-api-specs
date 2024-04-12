@@ -32,11 +32,11 @@ model PiiTaskParameters is PreBuiltTaskParameters {
   @doc("StringIndexType to be used for analysis.")
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
 
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2023_11_15_preview)
   @doc("Enumeration of PII categories to be excluded in the response.")
   excludePiiCategories?: Array<PiiCategoriesExclude>;
 
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2023_11_15_preview)
   @doc("Character to be used for redaction. Default in '*'.")
   redactionCharacter?: redactionCharacter = redactionCharacter.asterisk;
 }
@@ -66,7 +66,7 @@ model PiiTaskResult extends AnalyzeTextTaskResult {
 model PiiResult is PreBuiltResult {
   @doc("Response by document")
   @typeChangedFrom(
-    Versions.v2023_04_15_preview,
+    Versions.v2023_11_15_preview,
     Array<PiiEntitiesDocumentResult>
   )
   documents: Array<PiiResultWithDetectedLanguage>;
@@ -461,7 +461,7 @@ model PiiEntityRecognitionLROResult extends AnalyzeTextLROResult {
   results: PiiResult;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("(Optional) describes the PII categories to return")
 union PiiCategoriesExclude {
   string,

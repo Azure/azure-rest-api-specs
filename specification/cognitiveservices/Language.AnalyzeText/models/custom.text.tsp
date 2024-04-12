@@ -33,7 +33,7 @@ model CustomEntitiesResult is CustomResult {
   documents: Array<EntitiesDocumentResult>;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("Contains the list of detected custom entities result for the documents along with detected language.")
 model CustomEntitiesResultWithDocumentDetectedLanguage is CustomResult {
   @doc("Enumeration of the document results with detected language.")
@@ -60,7 +60,7 @@ model CustomLabelClassificationResult is CustomResult {
   documents: Array<ClassificationDocumentResult>;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("Contains the custom label classification with detected language results.")
 model CustomLabelClassificationResultWithDocumentDetectedLanguage
   is CustomResult {
@@ -110,7 +110,7 @@ model CustomEntityRecognitionLROResult extends AnalyzeTextLROResult {
   kind: AnalyzeTextLROResultsKind.CustomEntityRecognitionLROResults;
 
   @doc("List of results.")
-  @typeChangedFrom(Versions.v2023_04_15_preview, CustomEntitiesResult)
+  @typeChangedFrom(Versions.v2023_11_15_preview, CustomEntitiesResult)
   results: CustomEntitiesResultWithDocumentDetectedLanguage;
 }
 
@@ -122,7 +122,7 @@ model CustomSingleLabelClassificationLROResult extends AnalyzeTextLROResult {
 
   @doc("List of results.")
   @typeChangedFrom(
-    Versions.v2023_04_15_preview,
+    Versions.v2023_11_15_preview,
     CustomLabelClassificationResult
   )
   results: CustomLabelClassificationResultWithDocumentDetectedLanguage;
@@ -136,13 +136,13 @@ model CustomMultiLabelClassificationLROResult extends AnalyzeTextLROResult {
 
   @doc("List of results.")
   @typeChangedFrom(
-    Versions.v2023_04_15_preview,
+    Versions.v2023_11_15_preview,
     CustomLabelClassificationResult
   )
   results: CustomLabelClassificationResultWithDocumentDetectedLanguage;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("Contains the analyze text dynamic classifications input.")
 model AnalyzeTextDynamicClassificationInput extends AnalyzeTextTask {
   @doc("Kind of the task.")
@@ -155,14 +155,14 @@ model AnalyzeTextDynamicClassificationInput extends AnalyzeTextTask {
   parameters?: DynamicClassificationTaskParameters;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("Contains the Dynamic Classification document result.")
 model DynamicClassificationDocumentResult is DocumentResult {
   @doc("Array of classification results.")
   classifications: Array<ClassificationResult>;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @discriminator("entityComponentKind")
 @doc("This object contains information of the detected entity components. The possible component types may expand in the future. Parsing code should handle unexpected values gracefully")
 model EntityComponentInformation {
@@ -171,7 +171,7 @@ model EntityComponentInformation {
 }
 
 @doc("Kind of entity components supported.")
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 union entityComponentKind {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -182,7 +182,7 @@ union entityComponentKind {
   ListComponent: "ListComponent",
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("This object contains information of the prebuilt component of the detected entity.")
 model PrebuiltComponent extends EntityComponentInformation {
   @doc("Kind of entity component.")
@@ -192,7 +192,7 @@ model PrebuiltComponent extends EntityComponentInformation {
   value?: string;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("This object contains information of the learned component of the detected entity.")
 model LearnedComponent extends EntityComponentInformation {
   @doc("Kind of entity component.")
@@ -202,7 +202,7 @@ model LearnedComponent extends EntityComponentInformation {
   value?: string;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("This object contains information of the list component of the detected entity.")
 model ListComponent extends EntityComponentInformation {
   @doc("Kind of entity component.")
@@ -212,7 +212,7 @@ model ListComponent extends EntityComponentInformation {
   value?: string;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @clientName("DynamicClassificationTaskContent", "csharp")
 @doc("Supported parameters for a Dynamic Classification task.")
 model DynamicClassificationTaskParameters is PreBuiltTaskParameters {
@@ -223,7 +223,7 @@ model DynamicClassificationTaskParameters is PreBuiltTaskParameters {
   categories: Array<string>;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("Specifies either one or multiple categories per document. Defaults to multi classification which may return more than one class for each document.")
 union ClassificationType {
   string,
@@ -233,14 +233,14 @@ union ClassificationType {
   Single: "Single",
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("Contains the Dynamic Classification result.")
 model DynamicClassificationResult is PreBuiltResult {
   @doc("Response by document")
   documents: Array<DynamicClassificationDocumentResult>;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("Result for Dynamic Classification task.")
 model DynamicClassificationTaskResult extends AnalyzeTextTaskResult {
   @doc("Kind of task result")

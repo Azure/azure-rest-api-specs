@@ -247,7 +247,6 @@ model KnowledgeBaseAnswer {
   @doc("Source of QnA result.")
   source?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "KnowledgeBaseAnswer.metadata should not use ': Record<unknown>'. Use ': Record<string>' instead."
   @doc("Metadata associated with the answer, useful to categorize or filter question answers.")
   metadata?: Record<string>;
 

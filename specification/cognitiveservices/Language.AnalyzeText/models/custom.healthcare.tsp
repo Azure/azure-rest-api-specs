@@ -5,7 +5,7 @@ using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
 namespace Language.AnalyzeText;
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @clientName("CustomHealthcareTaskContent", "csharp")
 @doc("Supported parameters for a custom Healthcare task.")
 model CustomHealthcareTaskParameters is CustomTaskParameters {
@@ -15,7 +15,7 @@ model CustomHealthcareTaskParameters is CustomTaskParameters {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Contains the custom healthcare task definition.")
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 model CustomHealthcareLROTask extends AnalyzeTextLROTask {
   @doc("Kind of the task.")
   kind: AnalyzeTextLROTaskKind.CustomHealthcare;
@@ -24,21 +24,21 @@ model CustomHealthcareLROTask extends AnalyzeTextLROTask {
   parameters?: CustomHealthcareTaskParameters;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("Contains the custom healthcare result for the request.")
 model CustomHealthcareResult is CustomResult {
   @doc("List of custom healthcare results for the document.")
   documents: Array<CustomHealthcareEntitiesDocumentResultWithDocumentDetectedLanguage>;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("Contains the document custom healthcare results with detected language.")
 model CustomHealthcareEntitiesDocumentResultWithDocumentDetectedLanguage
   is CustomHealthcareEntitiesDocumentResult {
   ...DocumentDetectedLanguage;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("Contains the document custom healthcare results.")
 model CustomHealthcareEntitiesDocumentResult is DocumentResult {
   @doc("Healthcare entities.")
@@ -49,14 +49,14 @@ model CustomHealthcareEntitiesDocumentResult is DocumentResult {
 }
 
 @doc("Contains the custom healthcare entity.")
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 model CustomHealthcareEntity is HealthcareEntity {
   @doc("(Optional) Entity component information listing fired components of the extracted entity. This object only applies for custom healthcare.")
   entityComponentInformation?: Array<EntityComponentInformation>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("Contains the custom healthcare job result.")
 model CustomHealthcareLROResult extends AnalyzeTextLROResult {
   @doc("Kind of the task.")

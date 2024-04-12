@@ -74,7 +74,7 @@ union TokenSentimentValue {
 @clientName("SentimentResult", "csharp")
 @doc("Sentiment analysis results for the input documents.")
 model SentimentResponse is PreBuiltResult {
-  @typeChangedFrom(Versions.v2023_04_15_preview, Array<SentimentDocumentResult>)
+  @typeChangedFrom(Versions.v2023_11_15_preview, Array<SentimentDocumentResult>)
   @doc("The sentiment analysis results for each document in the input.")
   documents: Array<SentimentDocumentResultWithDetectedLanguage>;
 }
@@ -201,7 +201,7 @@ model SentimentLROResult extends AnalyzeTextLROResult {
 }
 
 @doc("A document's sentence custom sentiment.")
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 model CustomSentenceSentiment {
   @doc("The sentence text.")
   text: string;
@@ -220,7 +220,7 @@ model CustomSentenceSentiment {
 }
 
 @doc("An object representing the Custom Sentiment Analysis results of each document.")
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 model CustomSentimentDocumentResult is DocumentResult {
   @doc("Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).")
   sentiment: DocumentSentimentValue;
@@ -232,7 +232,7 @@ model CustomSentimentDocumentResult is DocumentResult {
   sentences: Array<CustomSentenceSentiment>;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @clientName("CustomSentimentAnalysisTaskContent", "csharp")
 @doc("Supported parameters for a Custom Sentiment Analysis task.")
 model CustomSentimentAnalysisTaskParameters is CustomTaskParameters {
@@ -241,7 +241,7 @@ model CustomSentimentAnalysisTaskParameters is CustomTaskParameters {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("Use custom models to ease the process of sentiment analysis from documents like product reviews")
 model CustomSentimentAnalysisLROTask extends AnalyzeTextLROTask {
   @doc("Kind of the task.")
@@ -252,14 +252,14 @@ model CustomSentimentAnalysisLROTask extends AnalyzeTextLROTask {
 }
 
 @doc("Custom Sentiment analysis results for the input documents.")
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 model CustomSentimentAnalysisResult is CustomResult {
   @doc("The custom sentiment analysis results for each document in the input.")
   documents: Array<CustomSentimentAnalysisResultDocument>;
 }
 
 @doc("Custom Sentiment analysis result for a specific document.")
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 model CustomSentimentAnalysisResultDocument {
   ...CustomSentimentDocumentResult;
   ...DocumentDetectedLanguage;
@@ -267,7 +267,7 @@ model CustomSentimentAnalysisResultDocument {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 @doc("Custom Sentiment Analysis Analyze Text long tunning operation result object.")
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 model CustomSentimentAnalysisLROResult extends AnalyzeTextLROResult {
   @doc("Kind of the task.")
   kind: AnalyzeTextLROResultsKind.CustomSentimentAnalysisLROResults;

@@ -60,7 +60,7 @@ model DetectedLanguage {
   @doc("A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true.")
   confidenceScore: float64;
 
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2023_11_15_preview)
   @doc("Identifies the script of the input document.")
   script?: ScriptKind;
 
@@ -69,7 +69,7 @@ model DetectedLanguage {
   scriptCode?: ScriptCode;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("Identifies the script of the input document. Maps to the ISO 15924 standard formal name.")
 union ScriptKind {
   string,
@@ -150,7 +150,7 @@ union ScriptKind {
   @doc("Script name for the Lao script.")
   Lao: "Lao",
 
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2023_11_15_preview)
   @doc("Script name for the Latin script.")
   Latin: "Latin",
 
@@ -272,7 +272,7 @@ union ScriptCode {
   @doc("Script code for the Lao script.")
   Laoo: "Laoo",
 
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2023_11_15_preview)
   @doc("Script code for the Latin script.")
   Latn: "Latn",
 

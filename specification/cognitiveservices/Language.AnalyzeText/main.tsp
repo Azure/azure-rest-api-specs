@@ -22,7 +22,6 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
-// using Autorest;
 
 @useAuth(
   TypeSpec.Http.ApiKeyAuth<
@@ -54,10 +53,6 @@ enum Versions {
   @doc("Version 2023-04-01")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_04_01: "2023-04-01",
-
-  @doc("Version 2023-04-15-preview")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2023_04_15_preview: "2023-04-15-preview",
 
   @doc("Version 2023-11-15-preview")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
