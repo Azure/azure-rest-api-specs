@@ -4,9 +4,9 @@ import "@typespec/http";
 import "@typespec/versioning";
 
 import "./common/common.tsp";
-import "./chat.completions/chat_completions.tsp";
+import "./chat/chat_completions.tsp";
 import "./embeddings/embeddings.tsp";
-import "./image.generation/image_generation.tsp";
+import "./image/image_generation.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
