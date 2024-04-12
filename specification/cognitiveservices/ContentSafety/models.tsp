@@ -767,3 +767,110 @@ model IncidentOperationIdOptions {
   @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
   operationId?: string;
 }
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@resource("text/categories")
+@doc("Text custom category")
+model TextCustomCategoryVersion {
+  @key
+  @visibility("read", "create", "update")
+  @doc("Name of the custom category")
+  categoryName: string;
+
+  @doc("Definition or description of the custom category.")
+  @visibility("read", "create", "update")
+  definition: string;
+
+  @doc("URL of sample jsonl blob. Read & write access to the last layer virtual directory is required.")
+  @visibility("create", "read", "update")
+  sampleBlobUrl: string;
+
+  @doc("Snapshot of copied sample jsonl blob.")
+  @visibility("read")
+  sampleBlobSnapshotUrl: string;
+
+  @doc("Version number of the custom category.")
+  @visibility("read")
+  version: int32;
+
+  @doc("Creation time of the custom category.")
+  @visibility("read")
+  createdTime: utcDateTime;
+
+  @doc("Status of the custom category")
+  @visibility("read")
+  status: CustomCategoryStatus;
+
+  @doc("Error message if status is Failed.")
+  @visibility("read")
+  errorMessage?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("Status of the custom category build.")
+union CustomCategoryStatus {
+  string,
+  "NotStarted",
+  "Running",
+  "Succeeded",
+  "Failed",
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("List of custom category versions.")
+model TextCustomCategoryVersionList {
+  @doc("List of custom category versions.")
+  value: TextCustomCategoryVersion[];
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+union CustomCategoryOperationStatus {
+  string,
+  "NotStarted",
+  "Running",
+  "Succeeded",
+  "Failed",
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The request to query text custom category operation.")
+@resource("text/categories/operations")
+model CustomCategoryOperationDetail {
+  @doc("The ID of the custom category operation.")
+  @key("operationId")
+  @visibility("read", "create", "query")
+  @maxLength(64)
+  id: string;
+
+  @doc("The status of the custom category operation.")
+  @visibility("read")
+  status: CustomCategoryOperationStatus;
+
+  @doc("Return error detail when the operation failed.")
+  error?: Azure.Core.Foundations.Error;
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The custom category option for text.")
+model AnalyzeTextCustomCategoryOption {
+  @doc("Custom category name.")
+  categoryName: string;
+
+  @doc("Custom category version, if not assigned use the latest version.")
+  version?: int32;
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The text analysis result on custom category.")
+model TextCustomCategoryAnalysis {
+  @doc("Whether the custom category is detected.")
+  detected: boolean;
+}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+@doc("The text analysis response on custom category.")
+model AnalyzeTextCustomCategoryResult {
+  @doc("Analysis result for custom category.")
+  customCategoryAnalysis: TextCustomCategoryAnalysis;
+}

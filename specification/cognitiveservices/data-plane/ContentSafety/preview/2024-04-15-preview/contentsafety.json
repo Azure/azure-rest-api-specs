@@ -1308,6 +1308,315 @@
         }
       }
     },
+    "/text/categories": {
+      "get": {
+        "operationId": "TextCustomizedCategoryOperations_ListCustomizedCategory",
+        "description": "List categories of their latest versions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedTextCustomCategoryVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/text/categories/{categoryName}": {
+      "get": {
+        "operationId": "TextCustomizedCategoryOperations_GetCustomizedCategory",
+        "description": "Get a custom category or a specific version of it.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "categoryName",
+            "in": "path",
+            "description": "Name of the custom category.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "If not provided, it will return the latest version.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TextCustomCategoryVersionList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "TextCustomizedCategoryOperations_CreateTextCustomCategoryVersion",
+        "summary": "Create a new version of text custom category.",
+        "description": "Create new category version.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "categoryName",
+            "in": "path",
+            "description": "Name of the custom category",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TextCustomCategoryVersion"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TextCustomCategoryVersion"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/TextCustomCategoryVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "TextCustomizedCategoryOperations_DeleteCustomizedCategory",
+        "description": "Delete a custom category or a specific version of it.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "categoryName",
+            "in": "path",
+            "description": "Name of the custom category",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "If not provided, it will delete all the versions of the custom category.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text/categories/{categoryName}:build": {
+      "post": {
+        "operationId": "TextCustomizedCategoryOperations_Build",
+        "description": "Trigger the category build process.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "categoryName",
+            "in": "path",
+            "description": "Name of the custom category",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "The build will target on the specicied category version",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "Operation-Id",
+            "in": "header",
+            "description": "The operation id passed by the user, if not provided, will be automatically generated as a UUID.",
+            "required": false,
+            "type": "string",
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$",
+            "x-ms-client-name": "operationId"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
+              "Operation-Id": {
+                "type": "string",
+                "description": "The operation id passed by the user, if not provided, will be automatically generated as a UUID.",
+                "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/text/categories/operations/{operationId}": {
+      "get": {
+        "operationId": "TextCustomizedCategoryOperations_GetCustomCategoryOperation",
+        "summary": "Get An Custom Category Operation.",
+        "description": "Get an custom category operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The ID of the custom category operation.",
+            "required": true,
+            "type": "string",
+            "maxLength": 64
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CustomCategoryOperationDetail"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/text/incidents": {
       "get": {
         "operationId": "TextIncidents_ListIncidents",
@@ -1845,6 +2154,47 @@
         }
       }
     },
+    "/text:analyzeCustomCategory": {
+      "post": {
+        "operationId": "TextOperations_AnalyzeTextCustomCategory",
+        "summary": "Analyze Text on Custom Category",
+        "description": "A synchronous API for the analysis of text on custom category.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The text analysis request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextCustomCategoryOption"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextCustomCategoryResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/text:autoReview": {
       "post": {
         "operationId": "TextOperations_AutoReview",
@@ -2290,6 +2640,37 @@
       },
       "required": [
         "categoriesAnalysis"
+      ]
+    },
+    "AnalyzeTextCustomCategoryOption": {
+      "type": "object",
+      "description": "The custom category option for text.",
+      "properties": {
+        "categoryName": {
+          "type": "string",
+          "description": "Custom category name."
+        },
+        "version": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Custom category version, if not assigned use the latest version."
+        }
+      },
+      "required": [
+        "categoryName"
+      ]
+    },
+    "AnalyzeTextCustomCategoryResult": {
+      "type": "object",
+      "description": "The text analysis response on custom category.",
+      "properties": {
+        "customCategoryAnalysis": {
+          "$ref": "#/definitions/TextCustomCategoryAnalysis",
+          "description": "Analysis result for custom category."
+        }
+      },
+      "required": [
+        "customCategoryAnalysis"
       ]
     },
     "AnalyzeTextDetectIncidentsOptions": {
@@ -2888,6 +3269,61 @@
         ]
       }
     },
+    "CustomCategoryOperationDetail": {
+      "type": "object",
+      "description": "The request to query text custom category operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the custom category operation.",
+          "maxLength": 64,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/CustomCategoryOperationStatus",
+          "description": "The status of the custom category operation.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Return error detail when the operation failed."
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    },
+    "CustomCategoryOperationStatus": {
+      "type": "string",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "CustomCategoryOperationStatus",
+        "modelAsString": true
+      }
+    },
+    "CustomCategoryStatus": {
+      "type": "string",
+      "description": "Status of the custom category build.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "CustomCategoryStatus",
+        "modelAsString": true
+      }
+    },
     "DetectIncidentsResult": {
       "type": "object",
       "description": "The detect incidents analysis request.",
@@ -3318,6 +3754,29 @@
         "value"
       ]
     },
+    "PagedTextCustomCategoryVersion": {
+      "type": "object",
+      "description": "Paged collection of TextCustomCategoryVersion items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TextCustomCategoryVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/TextCustomCategoryVersion"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "PagedTextIncident": {
       "type": "object",
       "description": "Paged collection of TextIncident items",
@@ -3571,6 +4030,105 @@
         "name": "TextCategory",
         "modelAsString": true
       }
+    },
+    "TextCustomCategoryAnalysis": {
+      "type": "object",
+      "description": "The text analysis result on custom category.",
+      "properties": {
+        "detected": {
+          "type": "boolean",
+          "description": "Whether the custom category is detected."
+        }
+      },
+      "required": [
+        "detected"
+      ]
+    },
+    "TextCustomCategoryVersion": {
+      "type": "object",
+      "description": "Text custom category",
+      "properties": {
+        "categoryName": {
+          "type": "string",
+          "description": "Name of the custom category",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "definition": {
+          "type": "string",
+          "description": "Definition or description of the custom category.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "sampleBlobUrl": {
+          "type": "string",
+          "description": "URL of sample jsonl blob. Read & write access to the last layer virtual directory is required.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "sampleBlobSnapshotUrl": {
+          "type": "string",
+          "description": "Snapshot of copied sample jsonl blob.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Version number of the custom category.",
+          "readOnly": true
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation time of the custom category.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/CustomCategoryStatus",
+          "description": "Status of the custom category",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message if status is Failed.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "categoryName",
+        "definition",
+        "sampleBlobUrl",
+        "sampleBlobSnapshotUrl",
+        "version",
+        "createdTime",
+        "status"
+      ]
+    },
+    "TextCustomCategoryVersionList": {
+      "type": "object",
+      "description": "List of custom category versions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of custom category versions.",
+          "items": {
+            "$ref": "#/definitions/TextCustomCategoryVersion"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "TextIncident": {
       "type": "object",

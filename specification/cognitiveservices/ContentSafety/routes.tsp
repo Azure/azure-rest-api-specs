@@ -111,6 +111,23 @@ interface TextOperations {
     },
     DetectIncidentsResult
   >;
+
+  @added(ContentSafety.Versions.v2024_04_15_Preview)
+  @summary("Analyze Text on Custom Category")
+  @doc("A synchronous API for the analysis of text on custom category.")
+  @route("/text:analyzeCustomCategory")
+  @post
+  analyzeTextCustomCategory is Azure.Core.RpcOperation<
+    {
+      @body
+      @doc("The text analysis request.")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
+      body: AnalyzeTextCustomCategoryOption;
+    },
+    AnalyzeTextCustomCategoryResult
+  >;
 }
 
 interface ImageOperations {
@@ -462,4 +479,77 @@ interface ImageIncidentOperation {
   @summary("Get Image Incident Operation By OperationId")
   @doc("Get a image incident operation.")
   getImageIncidentOperation is ImageIncidentOperationsOps.ResourceRead<ImageIncidentOperationResult>;
+}
+
+interface TextCustomizedCategoryOps
+  extends Azure.Core.ResourceOperations<NoRepeatableRequests &
+      NoConditionalRequests &
+      NoClientRequestId> {}
+
+@added(ContentSafety.Versions.v2024_04_15_Preview)
+interface TextCustomizedCategoryOperations {
+  @summary("Create a new version of text custom category.")
+  @doc("Create new category version.")
+  createTextCustomCategoryVersion is TextCustomizedCategoryOps.ResourceCreateOrReplace<TextCustomCategoryVersion>;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Get a custom category or a specific version of it.")
+  @get
+  @route("/text/categories/{categoryName}")
+  getCustomizedCategory is Azure.Core.Foundations.Operation<
+    {
+      @path
+      @doc("Name of the custom category.")
+      categoryName: string;
+
+      @query
+      @doc("If not provided, it will return the latest version.")
+      version?: int32;
+    },
+    TextCustomCategoryVersionList
+  >;
+
+  @doc("List categories of their latest versions.")
+  listCustomizedCategory is TextCustomizedCategoryOps.ResourceList<
+    TextCustomCategoryVersion,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
+
+  @doc("Delete a custom category or a specific version of it.")
+  deleteCustomizedCategory is TextCustomizedCategoryOps.ResourceDelete<
+    TextCustomCategoryVersion,
+    QueryParametersTrait<{
+      @query
+      @doc("If not provided, it will delete all the versions of the custom category.")
+      version?: int32;
+    }>
+  >;
+
+  @doc("Trigger the category build process.")
+  build is TextCustomizedCategoryOps.LongRunningResourceAction<
+    TextCustomCategoryVersion,
+    {
+      @query
+      @doc("The build will target on the specicied category version")
+      version: int32;
+
+      @doc("The operation id passed by the user, if not provided, will be automatically generated as a UUID.")
+      @header("Operation-Id")
+      @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
+      operationId?: string;
+    },
+    {
+      @statusCode
+      statusCode: 202;
+
+      @doc("The operation id passed by the user, if not provided, will be automatically generated as a UUID.")
+      @header("Operation-Id")
+      @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]*[a-zA-Z0-9]$")
+      operationId?: string;
+    }
+  >;
+
+  @summary("Get An Custom Category Operation.")
+  @doc("Get an custom category operation.")
+  getCustomCategoryOperation is Azure.Core.ResourceRead<CustomCategoryOperationDetail>;
 }
