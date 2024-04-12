@@ -209,12 +209,13 @@ interface TextCustomizedCategoryOps
 
 @added(ContentSafety.Versions.v2024_05_15_Preview)
 interface TextCustomizedCategoryOperations {
-  @summary("Create a new version of text custom category.")
-  @doc("Create new category version.")
+  @doc("Create a new version of text custom category.")
+  @summary("Create new text custom category version")
   createTextCustomCategoryVersion is TextCustomizedCategoryOps.ResourceCreateOrReplace<TextCustomCategoryVersion>;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Get a custom category or a specific version of it.")
+  @summary("Get a custom category version")
   @get
   @route("/text/categories/{categoryName}")
   getCustomizedCategory is Azure.Core.Foundations.Operation<
