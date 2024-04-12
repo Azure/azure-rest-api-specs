@@ -18,7 +18,6 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @doc("The provisioning state of the last accepted operation.")
 union ProvisioningState {
   string,
-
   ResourceProvisioningState,
 
   @doc("An operation is in-progress on the resource.")

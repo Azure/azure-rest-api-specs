@@ -94,7 +94,7 @@ model MongoClusterProperties {
   publicNetworkAccess?: PublicNetworkAccess;
 
   @doc("The list of node group specs in the cluster.")
-  @extension("x-ms-identifiers",[])
+  @extension("x-ms-identifiers", [])
   nodeGroupSpecs?: NodeGroupSpec[];
 
   @doc("List of private endpoint connections.")
