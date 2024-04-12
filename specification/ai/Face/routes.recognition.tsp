@@ -26,7 +26,7 @@ For each face in the faceIds array, Face Identify will compute similarities betw
 @returnsDoc("A successful call returns the identified candidate person(s) for each query face.")
 @sharedRoute
 @post
-@route("/face/{apiVersion}/identify")
+@route("identify")
 op IdentifyOperation<T extends TypeSpec.Reflection.Model> is Azure.Core.RpcOperation<
   {
     @doc("Array of query faces faceIds, created by the Face - Detect. Each of the faces are identified independently. The valid number of faceIds is between [1, 10].")
@@ -60,7 +60,7 @@ op IdentifyOperation<T extends TypeSpec.Reflection.Model> is Azure.Core.RpcOpera
 @returnsDoc("A successful call returns the verification result.")
 @sharedRoute
 @post
-@route("/face/{apiVersion}/verify")
+@route("verify")
 op VerifyOperation<T extends TypeSpec.Reflection.Model> is Azure.Core.RpcOperation<
   T,
   VerificationResult,
@@ -78,7 +78,7 @@ op VerifyOperation<T extends TypeSpec.Reflection.Model> is Azure.Core.RpcOperati
 @returnsDoc("A successful call returns an array of the most similar faces represented in faceId if the input parameter is faceIds or persistedFaceId if the input parameter is faceListId or largeFaceListId.")
 @sharedRoute
 @post
-@route("/face/{apiVersion}/findsimilars")
+@route("findsimilars")
 op FindSimilarOperation<T extends TypeSpec.Reflection.Model> is Azure.Core.RpcOperation<
   {
     @doc("faceId of the query face. User needs to call Face - Detect first to get a valid faceId. Note that this faceId is not persisted and will expire 24 hours after the detection call.")
@@ -207,7 +207,7 @@ interface FaceRecognitionOperations {
     """)
   @returnsDoc("A successful call returns one or more groups of similar faces (rank by group size) and a messyGroup.")
   @post
-  @route("/face/{apiVersion}/group")
+  @route("group")
   group is Azure.Core.RpcOperation<
     {
       @doc("Array of candidate faceId created by Face - Detect. The maximum is 1000 faces.")

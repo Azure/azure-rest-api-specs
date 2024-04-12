@@ -13,7 +13,7 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}",
+    "hostTemplate": "{endpoint}/face/{apiVersion}",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -22,6 +22,27 @@
         "description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://{resource-name}.cognitiveservices.azure.com).",
         "required": true,
         "type": "string"
+      },
+      {
+        "name": "apiVersion",
+        "in": "path",
+        "description": "API Version",
+        "required": true,
+        "type": "string",
+        "enum": [
+          "v1.1-preview.1"
+        ],
+        "x-ms-enum": {
+          "name": "Versions",
+          "modelAsString": true,
+          "values": [
+            {
+              "name": "v1_1_preview_1",
+              "value": "v1.1-preview.1",
+              "description": "v1.1-preview.1"
+            }
+          ]
+        }
       }
     ]
   },
@@ -61,7 +82,7 @@
   },
   "tags": [],
   "paths": {
-    "/face/{apiVersion}/detect": {
+    "/detect": {
       "post": {
         "operationId": "FaceDetectionOperations_Detect",
         "summary": "Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.",
@@ -70,9 +91,6 @@
           "application/octet-stream"
         ],
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "returnFaceId",
             "in": "query",
@@ -297,15 +315,12 @@
         }
       }
     },
-    "/face/{apiVersion}/detectLiveness/singleModal/sessions": {
+    "/detectLiveness/singleModal/sessions": {
       "get": {
         "operationId": "LivenessSessionOperations_GetLivenessSessions",
         "summary": "Lists sessions for /detectLiveness/SingleModal.",
         "description": "List sessions from the last sessionId greater than the 'start'.\n\nThe result should be ordered by sessionId in ascending order.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "start",
             "in": "query",
@@ -360,9 +375,6 @@
         "description": "A session is best for client device scenarios where developers want to authorize a client device to perform only a liveness detection without granting full access to their resource. Created sessions have a limited life span and only authorize clients to perform the desired action before access is expired.\n\nPermissions includes...\n>\n*\n  * Ability to call /detectLiveness/singleModal for up to 3 reties.\n  * A token lifetime of 10 minutes.\n\n> [!NOTE]\n> Client access can be revoked by deleting the session using the Delete Liveness Session operation. To retrieve a result, use the Get Liveness Session. To audit the individual requests that a client has made to your resource, use the List Liveness Session Audit Entries.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
-          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -398,14 +410,11 @@
         }
       }
     },
-    "/face/{apiVersion}/detectLiveness/singleModal/sessions/{sessionId}": {
+    "/detectLiveness/singleModal/sessions/{sessionId}": {
       "get": {
         "operationId": "LivenessSessionOperations_GetLivenessSessionResult",
         "description": "Get session result of detectLiveness/singleModal call.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "sessionId",
             "in": "path",
@@ -446,9 +455,6 @@
         "description": "> [!NOTE]\n> Deleting a session deactivates the Session Auth Token by blocking future API calls made with that Auth Token. While this can be used to remove any access for that token, those requests will still count towards overall resource rate limits. It's best to leverage TokenTTL to limit length of tokens in the case that it is misused.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
-          {
             "name": "sessionId",
             "in": "path",
             "description": "Unique ID to reference this session.",
@@ -480,14 +486,11 @@
         }
       }
     },
-    "/face/{apiVersion}/detectLiveness/singleModal/sessions/{sessionId}/audit": {
+    "/detectLiveness/singleModal/sessions/{sessionId}/audit": {
       "get": {
         "operationId": "LivenessSessionOperations_GetLivenessSessionAuditEntries",
         "description": "Gets session requests and response body for the session.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "sessionId",
             "in": "path",
@@ -544,15 +547,12 @@
         }
       }
     },
-    "/face/{apiVersion}/detectLivenessWithVerify/singleModal/sessions": {
+    "/detectLivenessWithVerify/singleModal/sessions": {
       "get": {
         "operationId": "LivenessSessionOperations_GetLivenessWithVerifySessions",
         "summary": "Lists sessions for /detectLivenessWithVerify/SingleModal.",
         "description": "List sessions from the last sessionId greater than the \"start\".\n\nThe result should be ordered by sessionId in ascending order.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "start",
             "in": "query",
@@ -610,9 +610,6 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
-          {
             "$ref": "#/parameters/LivenessSessionWithVerifyImageCreationContent.Parameters"
           },
           {
@@ -646,14 +643,11 @@
         }
       }
     },
-    "/face/{apiVersion}/detectLivenessWithVerify/singleModal/sessions/{sessionId}": {
+    "/detectLivenessWithVerify/singleModal/sessions/{sessionId}": {
       "get": {
         "operationId": "LivenessSessionOperations_GetLivenessWithVerifySessionResult",
         "description": "Get session result of detectLivenessWithVerify/singleModal call.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "sessionId",
             "in": "path",
@@ -694,9 +688,6 @@
         "description": "> [!NOTE]\n> Deleting a session deactivates the Session Auth Token by blocking future API calls made with that Auth Token. While this can be used to remove any access for that token, those requests will still count towards overall resource rate limits. It's best to leverage TokenTTL to limit length of tokens in the case that it is misused.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
-          {
             "name": "sessionId",
             "in": "path",
             "description": "Unique ID to reference this session.",
@@ -728,14 +719,11 @@
         }
       }
     },
-    "/face/{apiVersion}/detectLivenessWithVerify/singleModal/sessions/{sessionId}/audit": {
+    "/detectLivenessWithVerify/singleModal/sessions/{sessionId}/audit": {
       "get": {
         "operationId": "LivenessSessionOperations_GetLivenessWithVerifySessionAuditEntries",
         "description": "Gets session requests and response body for the session.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "sessionId",
             "in": "path",
@@ -792,15 +780,12 @@
         }
       }
     },
-    "/face/{apiVersion}/dynamicpersongroups": {
+    "/dynamicpersongroups": {
       "get": {
         "operationId": "PersonDirectoryOperations_GetDynamicPersonGroups",
         "summary": "List all existing dynamic person groups by dynamicPersonGroupId along with name and userData.",
         "description": "Dynamic person groups are stored in alphabetical order of dynamicPersonGroupId.\n>\n*\n  * \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n  * \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "start",
             "in": "query",
@@ -851,15 +836,12 @@
         }
       }
     },
-    "/face/{apiVersion}/dynamicpersongroups/{dynamicPersonGroupId}": {
+    "/dynamicpersongroups/{dynamicPersonGroupId}": {
       "get": {
         "operationId": "PersonDirectoryOperations_GetDynamicPersonGroup",
         "summary": "Retrieve the information of a dynamic person group, including its name and userData.",
         "description": "This API returns dynamic person group information only, use PersonDirectory DynamicPersonGroup - List Persons instead to retrieve person information under the dynamic person group.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "dynamicPersonGroupId",
             "in": "path",
@@ -902,9 +884,6 @@
         "summary": "Creates a new dynamic person group with specified dynamicPersonGroupId, name, and user-provided userData.",
         "description": "A dynamic person group is a container that references PersonDirectory Person - Create. After creation, use PersonDirectory DynamicPersonGroup - Update to add or remove persons into the dynamic person group. DynamicPersonGroup and UserData will be stored on server until PersonDirectory DynamicPersonGroup - Delete is called. Use Face - Identify with the dynamicPersonGroupId parameter to identify against persons.\n\nNo image will be stored. Only the person's extracted face feature(s) and userData will be stored on server until PersonDirectory Person - Delete or PersonDirectory Person - Delete Face is called.\n\n'recognitionModel' does not need to be specified with dynamic person groups. Dynamic person groups are references to PersonDirectory Person - Create and therefore work with most all 'recognitionModels'. The faceId's provided during Face - Identify determine the 'recognitionModel' used.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "dynamicPersonGroupId",
             "in": "path",
@@ -985,9 +964,6 @@
         "summary": "Update an existing dynamic person group name, userData, add, or remove persons.",
         "description": "The properties keep unchanged if they are not in request body.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "dynamicPersonGroupId",
             "in": "path",
@@ -1073,9 +1049,6 @@
         "description": "Deleting this dynamic person group only delete the references to persons data. To delete actual person see PersonDirectory Person - Delete.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
-          {
             "name": "dynamicPersonGroupId",
             "in": "path",
             "description": "ID of the dynamic person group.",
@@ -1118,15 +1091,12 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/face/{apiVersion}/dynamicpersongroups/{dynamicPersonGroupId}/persons": {
+    "/dynamicpersongroups/{dynamicPersonGroupId}/persons": {
       "get": {
         "operationId": "PersonDirectoryOperations_GetDynamicPersonGroupPersons",
         "summary": "List all persons in the specified dynamic person group.",
         "description": "Persons are stored in alphabetical order of personId created in PersonDirectory Person - Create.\n>\n*\n  * \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n  * \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "dynamicPersonGroupId",
             "in": "path",
@@ -1183,14 +1153,11 @@
         }
       }
     },
-    "/face/{apiVersion}/facelists": {
+    "/facelists": {
       "get": {
         "operationId": "FaceListOperations_GetFaceLists",
         "description": "List face lists' faceListId, name, userData and recognitionModel.\n\nTo get face information inside faceList use Get Face List.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "returnRecognitionModel",
             "in": "query",
@@ -1231,14 +1198,11 @@
         }
       }
     },
-    "/face/{apiVersion}/facelists/{faceListId}": {
+    "/facelists/{faceListId}": {
       "get": {
         "operationId": "FaceListOperations_GetFaceList",
         "description": "Retrieve a face list's faceListId, name, userData, recognitionModel and faces in the face list.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "faceListId",
             "in": "path",
@@ -1289,9 +1253,6 @@
         "summary": "Create an empty face list with user-specified faceListId, name, an optional userData and recognitionModel.",
         "description": "Up to 64 face lists are allowed in one subscription.\n\nFace list is a list of faces, up to 1,000 faces, and used by Face - Find Similar.\n\nAfter creation, user should use FaceList - Add Face to import the faces. No image will be stored. Only the extracted face feature(s) will be stored on server until FaceList - Delete is called.\n\nFind Similar is used for scenario like finding celebrity-like faces, similar face filtering, or as a light way face identification. But if the actual use is to identify person, please use PersonGroup / LargePersonGroup and Face - Identify.\n\nPlease consider LargeFaceList when the face number is large. It can support up to 1,000,000 faces.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "faceListId",
             "in": "path",
@@ -1392,9 +1353,6 @@
         "description": "Update information of a face list, including name and userData.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
-          {
             "name": "faceListId",
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
@@ -1454,9 +1412,6 @@
         "description": "Delete a specified face list.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
-          {
             "name": "faceListId",
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
@@ -1491,7 +1446,7 @@
         }
       }
     },
-    "/face/{apiVersion}/facelists/{faceListId}/persistedfaces": {
+    "/facelists/{faceListId}/persistedfaces": {
       "post": {
         "operationId": "FaceListOperations_AddFaceListFace",
         "summary": "Add a face to a specified face list, up to 1,000 faces.",
@@ -1500,9 +1455,6 @@
           "application/octet-stream"
         ],
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "faceListId",
             "in": "path",
@@ -1607,15 +1559,12 @@
         }
       }
     },
-    "/face/{apiVersion}/facelists/{faceListId}/persistedfaces/{persistedFaceId}": {
+    "/facelists/{faceListId}/persistedfaces/{persistedFaceId}": {
       "delete": {
         "operationId": "FaceListOperations_DeleteFaceListFace",
         "summary": "Delete a face from a face list by specified faceListId and persistedFaceId.",
         "description": "Adding/deleting faces to/from a same face list are processed sequentially and to/from different face lists are in parallel.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "faceListId",
             "in": "path",
@@ -1661,15 +1610,12 @@
         }
       }
     },
-    "/face/{apiVersion}/findsimilars": {
+    "/findsimilars": {
       "post": {
         "operationId": "FaceRecognitionOperations_FindSimilar",
         "summary": "Given query face's faceId, to search the similar-looking faces from a faceId array. A faceId array contains the faces created by Detect.",
         "description": "Depending on the input the returned similar faces list contains faceIds or persistedFaceIds ranked by similarity.\n\nFind similar has two working modes, \"matchPerson\" and \"matchFace\". \"matchPerson\" is the default mode that it tries to find faces of the same person as possible by using internal same-person thresholds. It is useful to find a known person's other photos. Note that an empty list will be returned if no faces pass the internal thresholds. \"matchFace\" mode ignores same-person thresholds and returns ranked similar faces anyway, even the similarity is low. It can be used in the cases like searching celebrity-looking faces.\n\nThe 'recognitionModel' associated with the query face's faceId should be the same as the 'recognitionModel' used by the target faceId array, face list or large face list.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "body",
             "in": "body",
@@ -1736,15 +1682,12 @@
         }
       }
     },
-    "/face/{apiVersion}/group": {
+    "/group": {
       "post": {
         "operationId": "FaceRecognitionOperations_Group",
         "summary": "Divide candidate faces into groups based on face similarity.",
         "description": ">\n*\n  * The output is one or more disjointed face groups and a messyGroup. A face group contains faces that have similar looking, often of the same person. Face groups are ranked by group size, i.e. number of faces. Notice that faces belonging to a same person might be split into several groups in the result.\n  * MessyGroup is a special face group containing faces that cannot find any similar counterpart face from original faces. The messyGroup will not appear in the result if all faces found their counterparts.\n  * Group API needs at least 2 candidate faces and 1000 at most. We suggest to try Face - Verify when you only have 2 candidate faces.\n  * The 'recognitionModel' associated with the query faces' faceIds should be the same.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "body",
             "in": "body",
@@ -1793,15 +1736,12 @@
         }
       }
     },
-    "/face/{apiVersion}/identify": {
+    "/identify": {
       "post": {
         "operationId": "FaceRecognitionOperations_IdentifyFromPersonGroup",
         "summary": "1-to-many identification to find the closest matches of the specific query person face from a person group.",
         "description": "For each face in the faceIds array, Face Identify will compute similarities between the query face and all the faces in the person group (given by personGroupId) or large person group (given by largePersonGroupId), and return candidate person(s) for that face ranked by similarity confidence. The person group/large person group should be trained to make it ready for identification. See more in PersonGroup - Train and LargePersonGroup - Train.\n\n> [!NOTE]\n> * The algorithm allows more than one face to be identified independently at the same request, but no more than 10 faces.\n> * Each person in the person group/large person group could have more than one face, but no more than 248 faces.\n> * Higher face image quality means better identification precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n> * Number of candidates returned is restricted by maxNumOfCandidatesReturned and confidenceThreshold. If no person is identified, the returned candidates will be an empty array.\n> * Try Face - Find Similar when you need to find similar faces from a face list/large face list instead of a person group/large person group.\n> * The 'recognitionModel' associated with the query faces' faceIds should be the same as the 'recognitionModel' used by the target person group or large person group.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "body",
             "in": "body",
@@ -1875,15 +1815,12 @@
         }
       }
     },
-    "/face/{apiVersion}/largefacelists": {
+    "/largefacelists": {
       "get": {
         "operationId": "FaceListOperations_GetLargeFaceLists",
         "summary": "List large face lists' information of largeFaceListId, name, userData and recognitionModel.",
         "description": "To get face information inside largeFaceList use LargeFaceList Face - Get.\n\nLarge face lists are stored in alphabetical order of largeFaceListId.\n>\n*\n  * \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n  * \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "start",
             "in": "query",
@@ -1942,14 +1879,11 @@
         }
       }
     },
-    "/face/{apiVersion}/largefacelists/{largeFaceListId}": {
+    "/largefacelists/{largeFaceListId}": {
       "get": {
         "operationId": "FaceListOperations_GetLargeFaceList",
         "description": "Retrieve a large face list's largeFaceListId, name, userData and recognitionModel.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "largeFaceListId",
             "in": "path",
@@ -2000,9 +1934,6 @@
         "summary": "Create an empty large face list with user-specified largeFaceListId, name, an optional userData and recognitionModel.",
         "description": "Large face list is a list of faces, up to 1,000,000 faces, and used by Find Similar.\n\nAfter creation, user should use Add Large Face List Face to import the faces and Train Large Face List to make it ready for Find Similar. No image will be stored. Only the extracted face feature(s) will be stored on server until Delete Large Face List is called.\n\nFind Similar is used for scenario like finding celebrity-like faces, similar face filtering, or as a light way face identification. But if the actual use is to identify person, please use Person Group / Large Person Group and Identify.\n\n> [!NOTE]\n> * Free-tier subscription quota: 64 large face lists.\n> * S0-tier subscription quota: 1,000,000 large face lists.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "largeFaceListId",
             "in": "path",
@@ -2103,9 +2034,6 @@
         "description": "Update information of a large face list, including name and userData.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
-          {
             "name": "largeFaceListId",
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
@@ -2166,9 +2094,6 @@
         "description": "Adding/deleting faces to/from a same large face list are processed sequentially and to/from different large face lists are in parallel.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
-          {
             "name": "largeFaceListId",
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
@@ -2203,15 +2128,12 @@
         }
       }
     },
-    "/face/{apiVersion}/largefacelists/{largeFaceListId}/persistedfaces": {
+    "/largefacelists/{largeFaceListId}/persistedfaces": {
       "get": {
         "operationId": "FaceListOperations_GetLargeFaceListFaces",
         "summary": "List faces' persistedFaceId and userData in a specified large face list.",
         "description": "Faces are stored in alphabetical order of persistedFaceId created in LargeFaceList Face - Add.\n>\n*\n  * \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n  * \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "largeFaceListId",
             "in": "path",
@@ -2279,9 +2201,6 @@
           "application/octet-stream"
         ],
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "largeFaceListId",
             "in": "path",
@@ -2386,14 +2305,11 @@
         }
       }
     },
-    "/face/{apiVersion}/largefacelists/{largeFaceListId}/persistedfaces/{persistedFaceId}": {
+    "/largefacelists/{largeFaceListId}/persistedfaces/{persistedFaceId}": {
       "get": {
         "operationId": "FaceListOperations_GetLargeFaceListFace",
         "description": "Retrieve persisted face in large face list by largeFaceListId and persistedFaceId.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "largeFaceListId",
             "in": "path",
@@ -2445,9 +2361,6 @@
         "operationId": "FaceListOperations_UpdateLargeFaceListFace",
         "description": "Update a specified face's userData field in a large face list by its persistedFaceId.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "largeFaceListId",
             "in": "path",
@@ -2512,9 +2425,6 @@
         "description": "Delete a face from a large face list by specified largeFaceListId and persistedFaceId.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
-          {
             "name": "largeFaceListId",
             "in": "path",
             "description": "Valid character is letter in lower case or digit or '-' or '_', maximum length is 64.",
@@ -2559,15 +2469,12 @@
         }
       }
     },
-    "/face/{apiVersion}/largefacelists/{largeFaceListId}/train": {
+    "/largefacelists/{largeFaceListId}/train": {
       "post": {
         "operationId": "FaceListOperations_TrainLargeFaceList",
         "summary": "Submit a large face list training task.",
         "description": "\nTraining is a crucial step that only a trained large face list can be used by Find Similar.\n\nThe training task is an asynchronous task. Training time depends on the number of face entries in a large face list. It could be in seconds, or up to half an hour for 1,000,000 faces. To check training completion, please use Get Large Face List Training Status.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "largeFaceListId",
             "in": "path",
@@ -2611,14 +2518,11 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/face/{apiVersion}/largefacelists/{largeFaceListId}/training": {
+    "/largefacelists/{largeFaceListId}/training": {
       "get": {
         "operationId": "FaceListOperations_GetLargeFaceListTrainingStatus",
         "description": "To check the large face list training status completed or still ongoing. LargeFaceList Training is an asynchronous operation triggered by Train Large Face List.\n\nTraining time depends on the number of face entries in a large face list. It could be in seconds, or up to half an hour for 1,000,000 faces.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "largeFaceListId",
             "in": "path",
@@ -2657,15 +2561,12 @@
         }
       }
     },
-    "/face/{apiVersion}/largepersongroups": {
+    "/largepersongroups": {
       "get": {
         "operationId": "PersonGroupOperations_GetLargePersonGroups",
         "summary": "List all existing large person groups' largePersonGroupId, name, userData and recognitionModel.",
         "description": "Large person groups are stored in alphabetical order of largePersonGroupId.\n>\n*\n  * \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n  * \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "start",
             "in": "query",
@@ -2724,14 +2625,11 @@
         }
       }
     },
-    "/face/{apiVersion}/largepersongroups/{largePersonGroupId}": {
+    "/largepersongroups/{largePersonGroupId}": {
       "get": {
         "operationId": "PersonGroupOperations_GetLargePersonGroup",
         "description": "Retrieve the information of a large person group, including its name, userData and recognitionModel. This API returns large person group information only, use LargePersonGroup Person - List instead to retrieve person information under the large person group.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "largePersonGroupId",
             "in": "path",
@@ -2782,9 +2680,6 @@
         "summary": "Create a new large person group with user-specified largePersonGroupId, name, an optional userData and recognitionModel.",
         "description": "A large person group is a container holding the uploaded person data, including the face recognition features. It can hold up to 1,000,000 entities.\n\nAfter creation, use LargePersonGroup Person - Create to add person into the group, and call LargePersonGroup - Train to get this group ready for Face - Identify.\n\nNo image will be stored. Only the person's extracted face feature(s) and userData will be stored on server until LargePersonGroup Person - Delete or LargePersonGroup - Delete is called.\n\n'recognitionModel' should be specified to associate with this large person group. The default value for 'recognitionModel' is 'recognition_01', if the latest model needed, please explicitly specify the model you need in this parameter. New faces that are added to an existing large person group will use the recognition model that's already associated with the collection. Existing face feature(s) in a large person group can't be updated to features extracted by another version of recognition model.\n\n> [!NOTE]\n> * Free-tier subscription quota: 1,000 large person groups.\n> * S0-tier subscription quota: 1,000,000 large person groups.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "largePersonGroupId",
             "in": "path",
@@ -2885,9 +2780,6 @@
         "description": "Update an existing large person group's name and userData. The properties keep unchanged if they are not in request body.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
-          {
             "name": "largePersonGroupId",
             "in": "path",
             "description": "ID of the container.",
@@ -2947,9 +2839,6 @@
         "description": "Delete an existing large person group with specified personGroupId. Persisted data in this large person group will be deleted.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
-          {
             "name": "largePersonGroupId",
             "in": "path",
             "description": "ID of the container.",
@@ -2984,15 +2873,12 @@
         }
       }
     },
-    "/face/{apiVersion}/largepersongroups/{largePersonGroupId}/persons": {
+    "/largepersongroups/{largePersonGroupId}/persons": {
       "get": {
         "operationId": "PersonGroupOperations_GetLargePersonGroupPersons",
         "summary": "List all persons' information in the specified large person group, including personId, name, userData and persistedFaceIds of registered person faces.",
         "description": "Persons are stored in alphabetical order of personId created in LargePersonGroup Person - Create.\n>\n*\n  * \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n  * \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "largePersonGroupId",
             "in": "path",
@@ -3058,9 +2944,6 @@
         "description": "> [!NOTE]\n> * Free-tier subscription quota:\n>   * 1,000 persons in all large person groups.\n> * S0-tier subscription quota:\n>   * 1,000,000 persons per large person group.\n>   * 1,000,000 large person groups.\n>   * 1,000,000,000 persons in all large person groups. ",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
-          {
             "name": "largePersonGroupId",
             "in": "path",
             "description": "ID of the container.",
@@ -3122,14 +3005,11 @@
         }
       }
     },
-    "/face/{apiVersion}/largepersongroups/{largePersonGroupId}/persons/{personId}": {
+    "/largepersongroups/{largePersonGroupId}/persons/{personId}": {
       "get": {
         "operationId": "PersonGroupOperations_GetLargePersonGroupPerson",
         "description": "Retrieve a person's name and userData, and the persisted faceIds representing the registered person face feature(s).",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "largePersonGroupId",
             "in": "path",
@@ -3181,9 +3061,6 @@
         "operationId": "PersonGroupOperations_UpdateLargePersonGroupPerson",
         "description": "Update name or userData of a person.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "largePersonGroupId",
             "in": "path",
@@ -3254,9 +3131,6 @@
         "description": "Delete an existing person from a large person group. The persistedFaceId, userData, person name and face feature(s) in the person entry will all be deleted.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
-          {
             "name": "largePersonGroupId",
             "in": "path",
             "description": "ID of the container.",
@@ -3301,7 +3175,7 @@
         }
       }
     },
-    "/face/{apiVersion}/largepersongroups/{largePersonGroupId}/persons/{personId}/persistedfaces": {
+    "/largepersongroups/{largePersonGroupId}/persons/{personId}/persistedfaces": {
       "post": {
         "operationId": "PersonGroupOperations_AddLargePersonGroupPersonFace",
         "summary": "Add a face to a person into a large person group for face identification or verification.",
@@ -3310,9 +3184,6 @@
           "application/octet-stream"
         ],
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "largePersonGroupId",
             "in": "path",
@@ -3427,14 +3298,11 @@
         }
       }
     },
-    "/face/{apiVersion}/largepersongroups/{largePersonGroupId}/persons/{personId}/persistedfaces/{persistedFaceId}": {
+    "/largepersongroups/{largePersonGroupId}/persons/{personId}/persistedfaces/{persistedFaceId}": {
       "get": {
         "operationId": "PersonGroupOperations_GetLargePersonGroupPersonFace",
         "description": "Retrieve person face information. The persisted person face is specified by its largePersonGroupId, personId and persistedFaceId.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "largePersonGroupId",
             "in": "path",
@@ -3496,9 +3364,6 @@
         "operationId": "PersonGroupOperations_UpdateLargePersonGroupPersonFace",
         "description": "Update a person persisted face's userData field.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "largePersonGroupId",
             "in": "path",
@@ -3574,9 +3439,6 @@
         "description": "Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
-          {
             "name": "largePersonGroupId",
             "in": "path",
             "description": "ID of the container.",
@@ -3631,15 +3493,12 @@
         }
       }
     },
-    "/face/{apiVersion}/largepersongroups/{largePersonGroupId}/train": {
+    "/largepersongroups/{largePersonGroupId}/train": {
       "post": {
         "operationId": "PersonGroupOperations_TrainLargePersonGroup",
         "summary": "Submit a large person group training task. Training is a crucial step that only a trained large person group can be used by Face - Identify.",
         "description": "The training task is an asynchronous task. Training time depends on the number of person entries, and their faces in a large person group. It could be in several seconds, or up to half a hour for 1,000,000 persons. To check training completion, please use LargePersonGroup - Get Training Status.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "largePersonGroupId",
             "in": "path",
@@ -3683,15 +3542,12 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/face/{apiVersion}/largepersongroups/{largePersonGroupId}/training": {
+    "/largepersongroups/{largePersonGroupId}/training": {
       "get": {
         "operationId": "PersonGroupOperations_GetLargePersonGroupTrainingStatus",
         "summary": "To check large person group training status completed or still ongoing. LargePersonGroup Training is an asynchronous operation triggered by LargePersonGroup - Train API.",
         "description": "Training time depends on the number of person entries, and their faces in a large person group. It could be in seconds, or up to half an hour for 1,000,000 persons.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "largePersonGroupId",
             "in": "path",
@@ -3730,14 +3586,11 @@
         }
       }
     },
-    "/face/{apiVersion}/operations/{operationId}": {
+    "/operations/{operationId}": {
       "get": {
         "operationId": "GetFaceOperationStatus",
         "description": "Get status of a long running operation.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "operationId",
             "in": "path",
@@ -3776,15 +3629,12 @@
         }
       }
     },
-    "/face/{apiVersion}/persongroups": {
+    "/persongroups": {
       "get": {
         "operationId": "PersonGroupOperations_GetPersonGroups",
         "summary": "List person groups' personGroupId, name, userData and recognitionModel.",
         "description": "Person groups are stored in alphabetical order of personGroupId.\n>\n*\n  * \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n  * \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "start",
             "in": "query",
@@ -3843,14 +3693,11 @@
         }
       }
     },
-    "/face/{apiVersion}/persongroups/{personGroupId}": {
+    "/persongroups/{personGroupId}": {
       "get": {
         "operationId": "PersonGroupOperations_GetPersonGroup",
         "description": "Retrieve person group name, userData and recognitionModel. To get person information under this personGroup, use PersonGroup Person - List.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "personGroupId",
             "in": "path",
@@ -3901,9 +3748,6 @@
         "summary": "Create a new person group with specified personGroupId, name, user-provided userData and recognitionModel.",
         "description": "A person group is a container holding the uploaded person data, including face recognition features.\n\nAfter creation, use PersonGroup Person - Create to add persons into the group, and then call PersonGroup - Train to get this group ready for Face - Identify.\n\nNo image will be stored. Only the person's extracted face feature(s) and userData will be stored on server until PersonGroup Person - Delete or PersonGroup - Delete is called.\n\n'recognitionModel' should be specified to associate with this person group. The default value for 'recognitionModel' is 'recognition_01', if the latest model needed, please explicitly specify the model you need in this parameter. New faces that are added to an existing person group will use the recognition model that's already associated with the collection. Existing face feature(s) in a person group can't be updated to features extracted by another version of recognition model.\n\n> [!NOTE]\n> * Free-tier subscription quota: 1,000 person groups. Each holds up to 1,000 persons.\n> * S0-tier subscription quota: 1,000,000 person groups. Each holds up to 10,000 persons.\n> * to handle larger scale face identification problem, please consider using LargePersonGroup.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "personGroupId",
             "in": "path",
@@ -4004,9 +3848,6 @@
         "description": "Update an existing person group's name and userData. The properties keep unchanged if they are not in request body.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
-          {
             "name": "personGroupId",
             "in": "path",
             "description": "ID of the container.",
@@ -4066,9 +3907,6 @@
         "description": "Delete an existing person group with specified personGroupId. Persisted data in this person group will be deleted.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
-          {
             "name": "personGroupId",
             "in": "path",
             "description": "ID of the container.",
@@ -4103,15 +3941,12 @@
         }
       }
     },
-    "/face/{apiVersion}/persongroups/{personGroupId}/persons": {
+    "/persongroups/{personGroupId}/persons": {
       "get": {
         "operationId": "PersonGroupOperations_GetPersonGroupPersons",
         "summary": "List all persons' information in the specified person group, including personId, name, userData and persistedFaceIds of registered person faces.",
         "description": "Persons are stored in alphabetical order of personId created in PersonGroup Person - Create.\n>\n*\n  * \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n  * \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "personGroupId",
             "in": "path",
@@ -4177,9 +4012,6 @@
         "description": "> [!NOTE]\n> * Free-tier subscription quota:\n>   * 1,000 persons in all person groups.\n> * S0-tier subscription quota:\n>   * 10,000 persons per person group.\n>   * 1,000,000 person groups.\n>   * 100,000,000 persons in all person groups.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
-          {
             "name": "personGroupId",
             "in": "path",
             "description": "ID of the container.",
@@ -4241,14 +4073,11 @@
         }
       }
     },
-    "/face/{apiVersion}/persongroups/{personGroupId}/persons/{personId}": {
+    "/persongroups/{personGroupId}/persons/{personId}": {
       "get": {
         "operationId": "PersonGroupOperations_GetPersonGroupPerson",
         "description": "Retrieve a person's name and userData, and the persisted faceIds representing the registered person face feature(s).",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "personGroupId",
             "in": "path",
@@ -4300,9 +4129,6 @@
         "operationId": "PersonGroupOperations_UpdatePersonGroupPerson",
         "description": "Update name or userData of a person.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "personGroupId",
             "in": "path",
@@ -4373,9 +4199,6 @@
         "description": "Delete an existing person from a person group. The persistedFaceId, userData, person name and face feature(s) in the person entry will all be deleted.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
-          {
             "name": "personGroupId",
             "in": "path",
             "description": "ID of the container.",
@@ -4420,7 +4243,7 @@
         }
       }
     },
-    "/face/{apiVersion}/persongroups/{personGroupId}/persons/{personId}/persistedfaces": {
+    "/persongroups/{personGroupId}/persons/{personId}/persistedfaces": {
       "post": {
         "operationId": "PersonGroupOperations_AddPersonGroupPersonFace",
         "summary": "Add a face to a person into a person group for face identification or verification.",
@@ -4429,9 +4252,6 @@
           "application/octet-stream"
         ],
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "personGroupId",
             "in": "path",
@@ -4546,14 +4366,11 @@
         }
       }
     },
-    "/face/{apiVersion}/persongroups/{personGroupId}/persons/{personId}/persistedfaces/{persistedFaceId}": {
+    "/persongroups/{personGroupId}/persons/{personId}/persistedfaces/{persistedFaceId}": {
       "get": {
         "operationId": "PersonGroupOperations_GetPersonGroupPersonFace",
         "description": "Retrieve person face information. The persisted person face is specified by its personGroupId, personId and persistedFaceId.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "personGroupId",
             "in": "path",
@@ -4615,9 +4432,6 @@
         "operationId": "PersonGroupOperations_UpdatePersonGroupPersonFace",
         "description": "Update a person persisted face's userData field.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "personGroupId",
             "in": "path",
@@ -4693,9 +4507,6 @@
         "description": "Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
-          {
             "name": "personGroupId",
             "in": "path",
             "description": "ID of the container.",
@@ -4750,15 +4561,12 @@
         }
       }
     },
-    "/face/{apiVersion}/persongroups/{personGroupId}/train": {
+    "/persongroups/{personGroupId}/train": {
       "post": {
         "operationId": "PersonGroupOperations_TrainPersonGroup",
         "summary": "Submit a person group training task. Training is a crucial step that only a trained person group can be used by Face - Identify.",
         "description": "The training task is an asynchronous task. Training time depends on the number of person entries, and their faces in a person group. It could be several seconds to minutes. To check training status, please use PersonGroup - Get Training Status.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "personGroupId",
             "in": "path",
@@ -4802,14 +4610,11 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/face/{apiVersion}/persongroups/{personGroupId}/training": {
+    "/persongroups/{personGroupId}/training": {
       "get": {
         "operationId": "PersonGroupOperations_GetPersonGroupTrainingStatus",
         "description": "To check person group training status completed or still ongoing. PersonGroup Training is an asynchronous operation triggered by PersonGroup - Train API.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "personGroupId",
             "in": "path",
@@ -4848,15 +4653,12 @@
         }
       }
     },
-    "/face/{apiVersion}/persons": {
+    "/persons": {
       "get": {
         "operationId": "PersonDirectoryOperations_GetPersons",
         "summary": "List all persons' information in person directory, including personId, name, and userData.",
         "description": "Persons are stored in alphabetical order of personId created in PersonDirectory Person - Create.\n>\n*\n  * \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n  * \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "start",
             "in": "query",
@@ -4910,9 +4712,6 @@
         "operationId": "PersonDirectoryOperations_CreatePerson",
         "description": "Creates a new person in a person directory. To add face to this person, please call PersonDirectory Person - Add Face.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "body",
             "in": "body",
@@ -4977,14 +4776,11 @@
         }
       }
     },
-    "/face/{apiVersion}/persons/{personId}": {
+    "/persons/{personId}": {
       "get": {
         "operationId": "PersonDirectoryOperations_GetPerson",
         "description": "Retrieve a person's name and userData from person directory.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "personId",
             "in": "path",
@@ -5026,9 +4822,6 @@
         "operationId": "PersonDirectoryOperations_UpdatePerson",
         "description": "Update name or userData of a person.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "personId",
             "in": "path",
@@ -5089,9 +4882,6 @@
         "description": "Delete an existing person from person directory. The persistedFaceId(s), userData, person name and face feature(s) in the person entry will all be deleted.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
-          {
             "name": "personId",
             "in": "path",
             "description": "Person ID of the person.",
@@ -5134,15 +4924,12 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/face/{apiVersion}/persons/{personId}/dynamicPersonGroupReferences": {
+    "/persons/{personId}/dynamicPersonGroupReferences": {
       "get": {
         "operationId": "PersonDirectoryOperations_GetDynamicPersonGroupReferences",
         "summary": "List all dynamic person groups a person has been referenced by in person directory.",
         "description": "Dynamic person groups are stored in alphabetical order of dynamic person group id created in PersonDirectory DynamicPersonGroup - Create.\n>\n*\n  * \"start\" parameter (string, optional) is a id value that returned entries have larger ids by string comparison. \"start\" set to empty to indicate return from the first item.\n  * \"top\" parameter (int, optional) specifies the number of entries to return. A maximal of 1000 entries can be returned in one call. To fetch more, you can specify \"start\" with the last returned entry's personId of the current call.\n\n> [!TIP]\n> For example, total 5 items with their id: \"itemId1\", ..., \"itemId5\".\n> * \"start=&top=\" will return all 5 items.\n> * \"start=&top=2\" will return \"itemId1\", \"itemId2\".\n> * \"start=itemId2&top=3\" will return \"itemId3\", \"itemId4\", \"itemId5\".",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "personId",
             "in": "path",
@@ -5199,14 +4986,11 @@
         }
       }
     },
-    "/face/{apiVersion}/persons/{personId}/recognitionModels/{recognitionModel}/persistedfaces": {
+    "/persons/{personId}/recognitionModels/{recognitionModel}/persistedfaces": {
       "get": {
         "operationId": "PersonDirectoryOperations_GetPersonFaces",
         "description": "Retrieve a person's persistedFaceIds representing the registered person face feature(s).",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "personId",
             "in": "path",
@@ -5291,9 +5075,6 @@
           "application/octet-stream"
         ],
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "personId",
             "in": "path",
@@ -5449,14 +5230,11 @@
         }
       }
     },
-    "/face/{apiVersion}/persons/{personId}/recognitionModels/{recognitionModel}/persistedfaces/{persistedFaceId}": {
+    "/persons/{personId}/recognitionModels/{recognitionModel}/persistedfaces/{persistedFaceId}": {
       "get": {
         "operationId": "PersonDirectoryOperations_GetPersonFace",
         "description": "Retrieve person face information. The persisted person face is specified by its personId. recognitionModel, and persistedFaceId.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "personId",
             "in": "path",
@@ -5547,9 +5325,6 @@
         "operationId": "PersonDirectoryOperations_UpdatePersonFace",
         "description": "Update a person persisted face's userData field.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "personId",
             "in": "path",
@@ -5654,9 +5429,6 @@
         "description": "Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
-          {
             "name": "personId",
             "in": "path",
             "description": "Person ID of the person.",
@@ -5748,15 +5520,12 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/face/{apiVersion}/verify": {
+    "/verify": {
       "post": {
         "operationId": "FaceRecognitionOperations_VerifyFaceToFace",
         "summary": "Verify whether two faces belong to a same person.",
         "description": "> [!NOTE]\n> * Higher face image quality means better identification precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n> * For the scenarios that are sensitive to accuracy please make your own judgment.\n> * The 'recognitionModel' associated with the query faces' faceIds should be the same as the 'recognitionModel' used by the target face, person group or large person group.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "body",
             "in": "body",
@@ -5809,15 +5578,12 @@
     }
   },
   "x-ms-paths": {
-    "/face/{apiVersion}/detect?_overload=detectFromUrl": {
+    "/detect?_overload=detectFromUrl": {
       "post": {
         "operationId": "FaceDetectionOperations_DetectFromUrl",
         "summary": "Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.",
         "description": "> [!IMPORTANT]\n> To mitigate potential misuse that can subject people to stereotyping, discrimination, or unfair denial of services, we are retiring Face API attributes that predict emotion, gender, age, smile, facial hair, hair, and makeup. Read more about this decision https://azure.microsoft.com/en-us/blog/responsible-ai-investments-and-safeguards-for-facial-recognition/. We will also retire the Snapshot API, which allowed biometric data transfer from one Face subscription to another. Existing customers have until 30 June 2023 to use the emotion, gender, age, smile, facial hair, hair, and makeup attributes and the Snapshot API through Face API before they are retired.\n\n*\n  * No image will be stored. Only the extracted face feature(s) will be stored on server. The faceId is an identifier of the face feature and will be used in Face - Identify, Face - Verify, and Face - Find Similar. The stored face features will expire and be deleted at the time specified by faceIdTimeToLive after the original detection call.\n  * Optional parameters include faceId, landmarks, and attributes. Attributes include headPose, glasses, occlusion, accessories, blur, exposure, noise, mask, and qualityForRecognition. Some of the results returned for specific attributes may not be highly accurate.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n  * For optimal results when querying Face - Identify, Face - Verify, and Face - Find Similar ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n    * 'detection_01': The default detection model for Face - Detect. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n    * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. Face attributes and landmarks are disabled if you choose this detection model.\n    * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces. Face attributes (mask and headPose only) and landmarks are supported if you choose this detection model.\n  * Different 'recognitionModel' values are provided. If follow-up operations like Verify, Identify, Find Similar are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-recognition-model.\n    * 'recognition_01': The default recognition model for Face - Detect. All those faceIds created before 2019 March are bonded with this recognition model.\n    * 'recognition_02': Recognition model released in 2019 March.\n    * 'recognition_03': Recognition model released in 2020 May.\n    * 'recognition_04': Recognition model released in 2021 February. 'recognition_04' is recommended since its accuracy is improved on faces wearing masks compared with 'recognition_03', and its overall accuracy is improved compared with 'recognition_01' and 'recognition_02'.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "returnFaceId",
             "in": "query",
@@ -6050,15 +5816,12 @@
         }
       }
     },
-    "/face/{apiVersion}/detectLivenessWithVerify/singleModal/sessions?_overload=createLivenessWithVerifySession": {
+    "/detectLivenessWithVerify/singleModal/sessions?_overload=createLivenessWithVerifySession": {
       "post": {
         "operationId": "LivenessSessionOperations_CreateLivenessWithVerifySession",
         "summary": "Create a new liveness session with verify. Client device submits VerifyImage during the /detectLivenessWithVerify/singleModal call.",
         "description": "A session is best for client device scenarios where developers want to authorize a client device to perform only a liveness detection without granting full access to their resource. Created sessions have a limited life span and only authorize clients to perform the desired action before access is expired.\n\nPermissions includes...\n*\n  * Ability to call /detectLivenessWithVerify/singleModal for up to 3 reties.\n  * A token lifetime of 10 minutes.\n\n> [!NOTE]\n> Client access can be revoked by deleting the session using the Delete Liveness With Verify Session operation. To retrieve a result, use the Get Liveness With Verify Session. To audit the individual requests that a client has made to your resource, use the List Liveness With Verify Session Audit Entries.\n\nAlternative Option: Client device submits VerifyImage during the /detectLivenessWithVerify/singleModal call.\n> [!NOTE]\n> Extra measures should be taken to validate that the client is sending the expected VerifyImage.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "body",
             "in": "body",
@@ -6095,15 +5858,12 @@
         }
       }
     },
-    "/face/{apiVersion}/facelists/{faceListId}/persistedfaces?_overload=addFaceListFaceFromUrl": {
+    "/facelists/{faceListId}/persistedfaces?_overload=addFaceListFaceFromUrl": {
       "post": {
         "operationId": "FaceListOperations_AddFaceListFaceFromUrl",
         "summary": "Add a face to a specified face list, up to 1,000 faces.",
         "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until FaceList - Delete Face or FaceList - Delete is called.\n\nNote persistedFaceId is different from faceId generated by Face - Detect.\n>\n*\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * Each person entry can hold up to 248 faces.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from Face - Detect, there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n    * 'detection_01': The default detection model for PersonDirectory Person - Add Face. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n    * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.\n    * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "faceListId",
             "in": "path",
@@ -6216,15 +5976,12 @@
         }
       }
     },
-    "/face/{apiVersion}/findsimilars?_overload=findSimilarFromFaceList": {
+    "/findsimilars?_overload=findSimilarFromFaceList": {
       "post": {
         "operationId": "FaceRecognitionOperations_FindSimilarFromFaceList",
         "summary": "Given query face's faceId, to search the similar-looking faces from a face list. A 'faceListId' is created by Create Face List.",
         "description": "Depending on the input the returned similar faces list contains faceIds or persistedFaceIds ranked by similarity.\n\nFind similar has two working modes, \"matchPerson\" and \"matchFace\". \"matchPerson\" is the default mode that it tries to find faces of the same person as possible by using internal same-person thresholds. It is useful to find a known person's other photos. Note that an empty list will be returned if no faces pass the internal thresholds. \"matchFace\" mode ignores same-person thresholds and returns ranked similar faces anyway, even the similarity is low. It can be used in the cases like searching celebrity-looking faces.\n\nThe 'recognitionModel' associated with the query face's faceId should be the same as the 'recognitionModel' used by the target faceId array, face list or large face list.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "body",
             "in": "body",
@@ -6288,15 +6045,12 @@
         }
       }
     },
-    "/face/{apiVersion}/findsimilars?_overload=findSimilarFromLargeFaceList": {
+    "/findsimilars?_overload=findSimilarFromLargeFaceList": {
       "post": {
         "operationId": "FaceRecognitionOperations_FindSimilarFromLargeFaceList",
         "summary": "Given query face's faceId, to search the similar-looking faces from a large face list. A 'largeFaceListId' is created by Create large Face List.",
         "description": "Depending on the input the returned similar faces list contains faceIds or persistedFaceIds ranked by similarity.\n\nFind similar has two working modes, \"matchPerson\" and \"matchFace\". \"matchPerson\" is the default mode that it tries to find faces of the same person as possible by using internal same-person thresholds. It is useful to find a known person's other photos. Note that an empty list will be returned if no faces pass the internal thresholds. \"matchFace\" mode ignores same-person thresholds and returns ranked similar faces anyway, even the similarity is low. It can be used in the cases like searching celebrity-looking faces.\n\nThe 'recognitionModel' associated with the query face's faceId should be the same as the 'recognitionModel' used by the target faceId array, face list or large face list.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "body",
             "in": "body",
@@ -6360,15 +6114,12 @@
         }
       }
     },
-    "/face/{apiVersion}/identify?_overload=identifyFromDynamicPersonGroup": {
+    "/identify?_overload=identifyFromDynamicPersonGroup": {
       "post": {
         "operationId": "FaceRecognitionOperations_IdentifyFromDynamicPersonGroup",
         "summary": "1-to-many identification to find the closest matches of the specific query person face from a dynamic person group.",
         "description": "For each face in the faceIds array, Face Identify will compute similarities between the query face and all the faces in the person group (given by personGroupId) or large person group (given by largePersonGroupId), and return candidate person(s) for that face ranked by similarity confidence. The person group/large person group should be trained to make it ready for identification. See more in PersonGroup - Train and LargePersonGroup - Train.\n\n> [!NOTE]\n> * The algorithm allows more than one face to be identified independently at the same request, but no more than 10 faces.\n> * Each person in the person group/large person group could have more than one face, but no more than 248 faces.\n> * Higher face image quality means better identification precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n> * Number of candidates returned is restricted by maxNumOfCandidatesReturned and confidenceThreshold. If no person is identified, the returned candidates will be an empty array.\n> * Try Face - Find Similar when you need to find similar faces from a face list/large face list instead of a person group/large person group.\n> * The 'recognitionModel' associated with the query faces' faceIds should be the same as the 'recognitionModel' used by the target person group or large person group.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "body",
             "in": "body",
@@ -6442,15 +6193,12 @@
         }
       }
     },
-    "/face/{apiVersion}/identify?_overload=identifyFromLargePersonGroup": {
+    "/identify?_overload=identifyFromLargePersonGroup": {
       "post": {
         "operationId": "FaceRecognitionOperations_IdentifyFromLargePersonGroup",
         "summary": "1-to-many identification to find the closest matches of the specific query person face from a large person group.",
         "description": "For each face in the faceIds array, Face Identify will compute similarities between the query face and all the faces in the person group (given by personGroupId) or large person group (given by largePersonGroupId), and return candidate person(s) for that face ranked by similarity confidence. The person group/large person group should be trained to make it ready for identification. See more in PersonGroup - Train and LargePersonGroup - Train.\n\n> [!NOTE]\n> * The algorithm allows more than one face to be identified independently at the same request, but no more than 10 faces.\n> * Each person in the person group/large person group could have more than one face, but no more than 248 faces.\n> * Higher face image quality means better identification precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n> * Number of candidates returned is restricted by maxNumOfCandidatesReturned and confidenceThreshold. If no person is identified, the returned candidates will be an empty array.\n> * Try Face - Find Similar when you need to find similar faces from a face list/large face list instead of a person group/large person group.\n> * The 'recognitionModel' associated with the query faces' faceIds should be the same as the 'recognitionModel' used by the target person group or large person group.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "body",
             "in": "body",
@@ -6524,15 +6272,12 @@
         }
       }
     },
-    "/face/{apiVersion}/identify?_overload=identifyFromPersonDirectory": {
+    "/identify?_overload=identifyFromPersonDirectory": {
       "post": {
         "operationId": "FaceRecognitionOperations_IdentifyFromPersonDirectory",
         "summary": "1-to-many identification to find the closest matches of the specific query person face from a person directory personIds array.",
         "description": "For each face in the faceIds array, Face Identify will compute similarities between the query face and all the faces in the person group (given by personGroupId) or large person group (given by largePersonGroupId), and return candidate person(s) for that face ranked by similarity confidence. The person group/large person group should be trained to make it ready for identification. See more in PersonGroup - Train and LargePersonGroup - Train.\n\n> [!NOTE]\n> * The algorithm allows more than one face to be identified independently at the same request, but no more than 10 faces.\n> * Each person in the person group/large person group could have more than one face, but no more than 248 faces.\n> * Higher face image quality means better identification precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n> * Number of candidates returned is restricted by maxNumOfCandidatesReturned and confidenceThreshold. If no person is identified, the returned candidates will be an empty array.\n> * Try Face - Find Similar when you need to find similar faces from a face list/large face list instead of a person group/large person group.\n> * The 'recognitionModel' associated with the query faces' faceIds should be the same as the 'recognitionModel' used by the target person group or large person group.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "body",
             "in": "body",
@@ -6611,15 +6356,12 @@
         }
       }
     },
-    "/face/{apiVersion}/largefacelists/{largeFaceListId}/persistedfaces?_overload=addLargeFaceListFaceFromUrl": {
+    "/largefacelists/{largeFaceListId}/persistedfaces?_overload=addLargeFaceListFaceFromUrl": {
       "post": {
         "operationId": "FaceListOperations_AddLargeFaceListFaceFromUrl",
         "summary": "Add a face to a specified large face list, up to 1,000,000 faces.",
         "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until LargeFaceList - Delete Face or LargeFaceList - Delete is called.\n\nNote persistedFaceId is different from faceId generated by Face - Detect.\n>\n*\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * Each person entry can hold up to 248 faces.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from Face - Detect, there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n    * 'detection_01': The default detection model for PersonDirectory Person - Add Face. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n    * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.\n    * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces.\n\n> [!NOTE]\n> * Free-tier subscription quota: 1,000 faces per large face list.\n> * S0-tier subscription quota: 1,000,000 faces per large face list.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "largeFaceListId",
             "in": "path",
@@ -6732,15 +6474,12 @@
         }
       }
     },
-    "/face/{apiVersion}/largepersongroups/{largePersonGroupId}/persons/{personId}/persistedfaces?_overload=addLargePersonGroupPersonFaceFromUrl": {
+    "/largepersongroups/{largePersonGroupId}/persons/{personId}/persistedfaces?_overload=addLargePersonGroupPersonFaceFromUrl": {
       "post": {
         "operationId": "PersonGroupOperations_AddLargePersonGroupPersonFaceFromUrl",
         "summary": "Add a face to a person into a large person group for face identification or verification.",
         "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until LargePersonGroup PersonFace - Delete, LargePersonGroup Person - Delete or LargePersonGroup - Delete is called.\n\nNote persistedFaceId is different from faceId generated by Face - Detect.\n>\n*\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * Each person entry can hold up to 248 faces.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from Face - Detect, there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n    * 'detection_01': The default detection model for PersonDirectory Person - Add Face. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n    * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.\n    * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "largePersonGroupId",
             "in": "path",
@@ -6863,15 +6602,12 @@
         }
       }
     },
-    "/face/{apiVersion}/persongroups/{personGroupId}/persons/{personId}/persistedfaces?_overload=addPersonGroupPersonFaceFromUrl": {
+    "/persongroups/{personGroupId}/persons/{personId}/persistedfaces?_overload=addPersonGroupPersonFaceFromUrl": {
       "post": {
         "operationId": "PersonGroupOperations_AddPersonGroupPersonFaceFromUrl",
         "summary": "Add a face to a person into a person group for face identification or verification.",
         "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until PersonGroup PersonFace - Delete, PersonGroup Person - Delete or PersonGroup - Delete is called.\n\nNote persistedFaceId is different from faceId generated by Face - Detect.\n>\n*\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * Each person entry can hold up to 248 faces.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from Face - Detect, there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n    * 'detection_01': The default detection model for PersonDirectory Person - Add Face. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n    * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.\n    * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "personGroupId",
             "in": "path",
@@ -6994,15 +6730,12 @@
         }
       }
     },
-    "/face/{apiVersion}/persons/{personId}/recognitionModels/{recognitionModel}/persistedfaces?_overload=addPersonFaceFromUrl": {
+    "/persons/{personId}/recognitionModels/{recognitionModel}/persistedfaces?_overload=addPersonFaceFromUrl": {
       "post": {
         "operationId": "PersonDirectoryOperations_AddPersonFaceFromUrl",
         "summary": "Add a face to a person (see PersonDirectory Person - Create) for face identification or verification.",
         "description": "To deal with an image containing multiple faces, input face can be specified as an image with a targetFace rectangle. It returns a persistedFaceId representing the added face. No image will be stored. Only the extracted face feature(s) will be stored on server until PersonDirectory Person - Delete Face or PersonDirectory Person - Delete is called.\n\nNote persistedFaceId is different from faceId generated by Face - Detect.\n>\n*\n  * Higher face image quality means better recognition precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n  * Each person entry can hold up to 248 faces.\n  * JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n  * \"targetFace\" rectangle should contain one face. Zero or multiple faces will be regarded as an error. If the provided \"targetFace\" rectangle is not returned from Face - Detect, there's no guarantee to detect and add the face successfully.\n  * Out of detectable face size (36x36 - 4096x4096 pixels), large head-pose, or large occlusions will cause failures.\n  * The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n  * Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/how-to/specify-detection-model\n    * 'detection_01': The default detection model for PersonDirectory Person - Add Face. Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected.\n    * 'detection_02': Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces.\n    * 'detection_03': Detection model released in 2021 February with improved accuracy especially on small faces.\n*\n  * Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.\n  * This is a long running operation. Use Response Header \"Operation-Location\" to determine when the AddFace operation has successfully propagated for future requests to Face - Identify. For further information about Operation-Locations see Operations - Get Status.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "personId",
             "in": "path",
@@ -7166,15 +6899,12 @@
         }
       }
     },
-    "/face/{apiVersion}/verify?_overload=verifyFromLargePersonGroup": {
+    "/verify?_overload=verifyFromLargePersonGroup": {
       "post": {
         "operationId": "FaceRecognitionOperations_VerifyFromLargePersonGroup",
         "summary": "Verify whether one face belongs to a person in large person group.",
         "description": "> [!NOTE]\n> * Higher face image quality means better identification precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n> * For the scenarios that are sensitive to accuracy please make your own judgment.\n> * The 'recognitionModel' associated with the query faces' faceIds should be the same as the 'recognitionModel' used by the target face, person group or large person group.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "body",
             "in": "body",
@@ -7230,15 +6960,12 @@
         }
       }
     },
-    "/face/{apiVersion}/verify?_overload=verifyFromPersonDirectory": {
+    "/verify?_overload=verifyFromPersonDirectory": {
       "post": {
         "operationId": "FaceRecognitionOperations_VerifyFromPersonDirectory",
         "summary": "Verify whether one face belongs to a person directory person.",
         "description": "> [!NOTE]\n> * Higher face image quality means better identification precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n> * For the scenarios that are sensitive to accuracy please make your own judgment.\n> * The 'recognitionModel' associated with the query faces' faceIds should be the same as the 'recognitionModel' used by the target face, person group or large person group.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "body",
             "in": "body",
@@ -7289,15 +7016,12 @@
         }
       }
     },
-    "/face/{apiVersion}/verify?_overload=verifyFromPersonGroup": {
+    "/verify?_overload=verifyFromPersonGroup": {
       "post": {
         "operationId": "FaceRecognitionOperations_VerifyFromPersonGroup",
         "summary": "Verify whether one face belongs to a person in person group.",
         "description": "> [!NOTE]\n> * Higher face image quality means better identification precision. Please consider high-quality faces: frontal, clear, and face size is 200x200 pixels (100 pixels between eyes) or bigger.\n> * For the scenarios that are sensitive to accuracy please make your own judgment.\n> * The 'recognitionModel' associated with the query faces' faceIds should be the same as the 'recognitionModel' used by the target face, person group or large person group.",
         "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionPathParameter"
-          },
           {
             "name": "body",
             "in": "body",
@@ -9574,14 +9298,6 @@
     }
   },
   "parameters": {
-    "ApiVersionPathParameter": {
-      "name": "apiVersion",
-      "in": "path",
-      "description": "The API version to use for this operation.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "LivenessSessionWithVerifyImageCreationContent.Parameters": {
       "name": "Parameters",
       "in": "formData",

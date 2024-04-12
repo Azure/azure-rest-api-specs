@@ -37,7 +37,7 @@ namespace Face;
 @returnsDoc("A successful call returns an array of face entries ranked by face rectangle size in descending order. An empty response indicates no faces detected.")
 @post
 @sharedRoute
-@route("/face/{apiVersion}/detect")
+@route("detect")
 op DetectOperation<T extends TypeSpec.Reflection.Model> is Azure.Core.RpcOperation<
   FaceDetectionOptions & T,
   Body<FaceDetectionResult[]>,

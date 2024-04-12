@@ -15,7 +15,7 @@ namespace Face;
 alias ServiceTraits = NoClientRequestId &
   NoRepeatableRequests &
   NoConditionalRequests &
-  TraitOverride<VersionParameterTrait<ApiVersionPathParameter>>;
+  TraitOverride<VersionParameterTrait<void>>;
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 

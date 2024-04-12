@@ -19,7 +19,7 @@ using TypeSpec.Versioning;
 })
 @versioned(Versions)
 @server(
-  "{endpoint}",
+  "{endpoint}/face/{apiVersion}",
   "Azure AI Face API",
   {
     @doc("""
@@ -27,6 +27,10 @@ Supported Cognitive Services endpoints (protocol and hostname, for example:
 https://{resource-name}.cognitiveservices.azure.com).
 """)
     endpoint: string,
+
+    @doc("API Version")
+    @path
+    apiVersion: Versions,
   }
 )
 namespace Face;
