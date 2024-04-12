@@ -90,6 +90,6 @@ union AvailabilityStatus {
 
   @doc("Supported if aggregation is supported for the resource-type")
   Supported: "Supported",
-  
-  string
+
+  string,
 }
