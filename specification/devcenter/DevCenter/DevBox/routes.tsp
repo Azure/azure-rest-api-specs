@@ -90,6 +90,9 @@ interface DevBoxes {
   listDevBoxesByUser is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       projectName: string;
 
@@ -122,6 +125,9 @@ interface DevBoxes {
   createDevBox is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute the operation.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       projectName: string;
 
@@ -160,6 +166,9 @@ interface DevBoxes {
   deleteDevBox is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       projectName: string;
 
@@ -260,6 +269,9 @@ interface DevBoxes {
   getRemoteConnection is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       projectName: string;
 

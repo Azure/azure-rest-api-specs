@@ -18,6 +18,9 @@ interface Environments {
   listEnvironments is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       projectName: string;
     },
@@ -34,6 +37,9 @@ interface Environments {
   listEnvironmentsByUser is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       projectName: string;
 
@@ -57,6 +63,9 @@ interface Environments {
   createOrReplaceEnvironment is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       projectName: string;
 
@@ -65,6 +74,9 @@ interface Environments {
       userId: string;
 
       @doc("The name of the environment.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       environmentName: string;
 
@@ -96,6 +108,9 @@ interface Environments {
       contentType: "application/merge-patch+json";
 
       @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       projectName: string;
 
@@ -104,6 +119,9 @@ interface Environments {
       userId: string;
 
       @doc("The name of the environment.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       environmentName: string;
 
@@ -123,6 +141,9 @@ interface Environments {
   deleteEnvironment is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       projectName: string;
 
@@ -131,6 +152,9 @@ interface Environments {
       userId: string;
 
       @doc("The name of the environment.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       environmentName: string;
     },
@@ -282,6 +306,9 @@ interface Environments {
   listEnvironmentDefinitionsByProject is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       projectName: string;
     },
@@ -298,10 +325,16 @@ interface Environments {
   listEnvironmentDefinitionsByCatalog is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       projectName: string;
 
       @doc("The name of the catalog")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       catalogName: string;
     },
@@ -318,6 +351,9 @@ interface Environments {
   listEnvironmentTypes is Azure.Core.Foundations.Operation<
     {
       @doc("The DevCenter Project upon which to execute operations.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       projectName: string;
     },
