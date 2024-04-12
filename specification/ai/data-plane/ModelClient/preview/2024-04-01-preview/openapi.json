@@ -22,7 +22,7 @@
   "paths": {
     "/images/generations": {
       "post": {
-        "operationId": "GetImageGenerations",
+        "operationId": "GenerateImages",
         "description": "Creates images given a prompt.",
         "parameters": [
           {
@@ -122,17 +122,17 @@
         },
         "x-ms-examples": {
           "maximum set image generation": {
-            "$ref": "./examples/GetImageGenerations_MaximumSet_Gen.json"
+            "$ref": "./examples/GenerateImages_MaximumSet_Gen.json"
           },
           "minimum set image generation": {
-            "$ref": "./examples/GetImageGenerations_MinimumSet_Gen.json"
+            "$ref": "./examples/GenerateImages_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/info": {
       "get": {
-        "operationId": "GetModelInformation",
+        "operationId": "GetModelInfo",
         "description": "Returns information about the AI model.",
         "parameters": [
           {
@@ -161,10 +161,10 @@
         },
         "x-ms-examples": {
           "maximum set model information": {
-            "$ref": "./examples/GetModelInformation_MaximumSet_Gen.json"
+            "$ref": "./examples/GetModelInfo_MaximumSet_Gen.json"
           },
           "minimum set model information": {
-            "$ref": "./examples/GetModelInformation_MinimumSet_Gen.json"
+            "$ref": "./examples/GetModelInfo_MinimumSet_Gen.json"
           }
         }
       }
@@ -393,6 +393,26 @@
     }
   },
   "definitions": {
+    "AssistantMessage": {
+      "type": "object",
+      "description": "A request chat message representing response or action from the assistant.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The content of the message.",
+          "x-nullable": true
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "assistant"
+    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -503,7 +523,7 @@
         "message"
       ]
     },
-    "ChatChoiceDelta": {
+    "ChatChoiceUpdate": {
       "type": "object",
       "description": "Represents an update to a single prompt completion when the service is streaming updates \nusing Server Sent Events (SSE).\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
       "properties": {
@@ -572,50 +592,6 @@
         "choices"
       ]
     },
-    "ChatCompletionsDelta": {
-      "type": "object",
-      "description": "Represents a response update to a chat completions request, when the service is streaming updates \nusing Server Sent Events (SSE).\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "A unique identifier associated with this chat completions response."
-        },
-        "object": {
-          "type": "string",
-          "description": "The response object type, which is always `chat.completion`."
-        },
-        "created": {
-          "type": "integer",
-          "format": "unixtime",
-          "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
-        },
-        "model": {
-          "type": "string",
-          "description": "The model used for the chat completion."
-        },
-        "usage": {
-          "$ref": "#/definitions/CompletionsUsage",
-          "description": "Usage information for tokens processed and generated as part of this completions operation."
-        },
-        "choices": {
-          "type": "array",
-          "description": "An update to the collection of completion choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/definitions/ChatChoiceDelta"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "id",
-        "object",
-        "created",
-        "model",
-        "usage",
-        "choices"
-      ]
-    },
     "ChatCompletionsFunctionToolCall": {
       "type": "object",
       "description": "A tool call to a function tool, issued by the model in evaluation of a configured function tool, that represents\na function invocation needed for a subsequent chat completions request to resolve.",
@@ -654,16 +630,6 @@
       ],
       "x-ms-discriminator-value": "function"
     },
-    "ChatCompletionsJsonResponseFormat": {
-      "type": "object",
-      "description": "A response format for Chat Completions that restricts responses to emitting valid JSON objects.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChatCompletionsResponseFormat"
-        }
-      ],
-      "x-ms-discriminator-value": "json_object"
-    },
     "ChatCompletionsNamedToolSelection": {
       "type": "object",
       "description": "An abstract representation of an explicit, named tool selection to use for a chat completions request.",
@@ -679,28 +645,28 @@
       ]
     },
     "ChatCompletionsResponseFormat": {
-      "type": "object",
-      "description": "An abstract representation of a response format configuration usable by Chat Completions. Can be used to enable JSON\nmode.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The discriminated type for the response format."
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ]
-    },
-    "ChatCompletionsTextResponseFormat": {
-      "type": "object",
-      "description": "The standard Chat Completions response format that can freely generate text and is not guaranteed to produce response\ncontent that adheres to a specific schema.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChatCompletionsResponseFormat"
-        }
+      "type": "string",
+      "description": "An representation of a response format configuration usable by Chat Completions. Can be used to enable JSON\nmode.",
+      "enum": [
+        "text",
+        "json_object"
       ],
-      "x-ms-discriminator-value": "text"
+      "x-ms-enum": {
+        "name": "ChatCompletionsResponseFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "text",
+            "value": "text",
+            "description": "The standard Chat Completions response format that can freely generate text and is not guaranteed to produce response\ncontent that adheres to a specific schema."
+          },
+          {
+            "name": "json_object",
+            "value": "json_object",
+            "description": "A response format for Chat Completions that restricts responses to emitting valid JSON objects."
+          }
+        ]
+      }
     },
     "ChatCompletionsToolCall": {
       "type": "object",
@@ -759,25 +725,49 @@
         ]
       }
     },
-    "ChatRequestAssistantMessage": {
+    "ChatCompletionsUpdate": {
       "type": "object",
-      "description": "A request chat message representing response or action from the assistant.",
+      "description": "Represents a response update to a chat completions request, when the service is streaming updates \nusing Server Sent Events (SSE).\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
       "properties": {
-        "content": {
+        "id": {
           "type": "string",
-          "description": "The content of the message.",
-          "x-nullable": true
+          "description": "A unique identifier associated with this chat completions response."
+        },
+        "object": {
+          "type": "string",
+          "description": "The response object type, which is always `chat.completion`."
+        },
+        "created": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970."
+        },
+        "model": {
+          "type": "string",
+          "description": "The model used for the chat completion."
+        },
+        "usage": {
+          "$ref": "#/definitions/CompletionsUsage",
+          "description": "Usage information for tokens processed and generated as part of this completions operation."
+        },
+        "choices": {
+          "type": "array",
+          "description": "An update to the collection of completion choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/ChatChoiceUpdate"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
-        "content"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChatRequestMessage"
-        }
-      ],
-      "x-ms-discriminator-value": "assistant"
+        "id",
+        "object",
+        "created",
+        "model",
+        "usage",
+        "choices"
+      ]
     },
     "ChatRequestMessage": {
       "type": "object",
@@ -792,70 +782,6 @@
       "required": [
         "role"
       ]
-    },
-    "ChatRequestSystemMessage": {
-      "type": "object",
-      "description": "A request chat message containing system instructions that influence how the model will generate a chat completions\nresponse.",
-      "properties": {
-        "content": {
-          "type": "string",
-          "description": "The contents of the system message."
-        }
-      },
-      "required": [
-        "content"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChatRequestMessage"
-        }
-      ],
-      "x-ms-discriminator-value": "system"
-    },
-    "ChatRequestToolMessage": {
-      "type": "object",
-      "description": "A request chat message representing requested output from a configured tool.",
-      "properties": {
-        "content": {
-          "type": "string",
-          "description": "The content of the message.",
-          "x-nullable": true
-        },
-        "tool_call_id": {
-          "type": "string",
-          "description": "The ID of the tool call resolved by the provided content.",
-          "x-ms-client-name": "toolCallId"
-        }
-      },
-      "required": [
-        "content",
-        "tool_call_id"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChatRequestMessage"
-        }
-      ],
-      "x-ms-discriminator-value": "tool"
-    },
-    "ChatRequestUserMessage": {
-      "type": "object",
-      "description": "A request chat message representing user input to the assistant.",
-      "properties": {
-        "content": {
-          "type": "string",
-          "description": "The contents of the user message, with available input types varying by selected model."
-        }
-      },
-      "required": [
-        "content"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/ChatRequestMessage"
-        }
-      ],
-      "x-ms-discriminator-value": "user"
     },
     "ChatResponseMessage": {
       "type": "object",
@@ -1335,6 +1261,70 @@
           }
         ]
       }
+    },
+    "SystemMessage": {
+      "type": "object",
+      "description": "A request chat message containing system instructions that influence how the model will generate a chat completions\nresponse.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The contents of the system message."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "system"
+    },
+    "ToolMessage": {
+      "type": "object",
+      "description": "A request chat message representing requested output from a configured tool.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The content of the message.",
+          "x-nullable": true
+        },
+        "tool_call_id": {
+          "type": "string",
+          "description": "The ID of the tool call resolved by the provided content.",
+          "x-ms-client-name": "toolCallId"
+        }
+      },
+      "required": [
+        "content",
+        "tool_call_id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "tool"
+    },
+    "UserMessage": {
+      "type": "object",
+      "description": "A request chat message representing user input to the assistant.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "The contents of the user message, with available input types varying by selected model."
+        }
+      },
+      "required": [
+        "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChatRequestMessage"
+        }
+      ],
+      "x-ms-discriminator-value": "user"
     },
     "Versions": {
       "type": "string",

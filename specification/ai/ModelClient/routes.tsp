@@ -45,7 +45,7 @@ op getEmbeddings is Azure.Core.RpcOperation<
 @doc("Creates images given a prompt.")
 @actionSeparator("/")
 @route("images/generations")
-op getImageGenerations is Azure.Core.RpcOperation<
+op generateImages is Azure.Core.RpcOperation<
   {
     ...ImageGenerationOptions;
     ...AdditionalRequestHeaders;
@@ -57,4 +57,4 @@ op getImageGenerations is Azure.Core.RpcOperation<
 @actionSeparator("/")
 @route("info")
 @get
-op getModelInformation is Azure.Core.RpcOperation<{}, ModelInformation>;
+op getModelInfo is Azure.Core.RpcOperation<{}, ModelInformation>;

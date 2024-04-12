@@ -137,7 +137,7 @@ using Server Sent Events (SSE).
 Completions support a wide variety of tasks and generate text that continues from or "completes"
 provided prompt data.
 """)
-model ChatCompletionsDelta {
+model ChatCompletionsUpdate {
   ...ChatCompletionsCommon;
 
   @doc("""
@@ -146,7 +146,7 @@ model ChatCompletionsDelta {
     Token limits and other settings may limit the number of choices generated.
     """)
   @minItems(1)
-  choices: ChatChoiceDelta[];
+  choices: ChatChoiceUpdate[];
 }
 
 @doc("""
@@ -204,30 +204,22 @@ union ChatRole {
 }
 
 @doc("""
-An abstract representation of a response format configuration usable by Chat Completions. Can be used to enable JSON
+An representation of a response format configuration usable by Chat Completions. Can be used to enable JSON
 mode.
 """)
-@discriminator("type")
-model ChatCompletionsResponseFormat {
-  @doc("The discriminated type for the response format.")
-  type: string;
-}
+union ChatCompletionsResponseFormat {
+  string,
 
-@doc("""
-The standard Chat Completions response format that can freely generate text and is not guaranteed to produce response
-content that adheres to a specific schema.
-""")
-model ChatCompletionsTextResponseFormat extends ChatCompletionsResponseFormat {
-  @doc("The discriminated object type, which is always 'text' for this format.")
-  type: "text";
-}
+  @doc("""
+  The standard Chat Completions response format that can freely generate text and is not guaranteed to produce response
+  content that adheres to a specific schema.
+  """)
+  text: "text",
 
-@doc("""
-A response format for Chat Completions that restricts responses to emitting valid JSON objects.
-""")
-model ChatCompletionsJsonResponseFormat extends ChatCompletionsResponseFormat {
-  @doc("The discriminated object type, which is always 'json_object' for this format.")
-  type: "json_object";
+  @doc("""
+  A response format for Chat Completions that restricts responses to emitting valid JSON objects.
+  """)
+  json_object: "json_object",
 }
 
 alias ChatChoiceCommon = {
@@ -258,7 +250,7 @@ using Server Sent Events (SSE).
 Generally, `n` choices are generated per provided prompt with a default value of 1.
 Token limits and other settings may limit the number of choices generated.
 """)
-model ChatChoiceDelta {
+model ChatChoiceUpdate {
   ...ChatChoiceCommon;
 
   @doc("An update to the chat message for a given chat completions prompt.")
@@ -276,7 +268,7 @@ model ChatRequestMessage {
 A request chat message containing system instructions that influence how the model will generate a chat completions
 response.
 """)
-model ChatRequestSystemMessage extends ChatRequestMessage {
+model SystemMessage extends ChatRequestMessage {
   @doc("The chat role associated with this message, which is always 'system' for system messages.")
   role: ChatRole.system;
 
@@ -285,7 +277,7 @@ model ChatRequestSystemMessage extends ChatRequestMessage {
 }
 
 @doc("A request chat message representing user input to the assistant.")
-model ChatRequestUserMessage extends ChatRequestMessage {
+model UserMessage extends ChatRequestMessage {
   @doc("The chat role associated with this message, which is always 'user' for user messages.")
   role: ChatRole.user;
 
@@ -294,7 +286,7 @@ model ChatRequestUserMessage extends ChatRequestMessage {
 }
 
 @doc("A request chat message representing response or action from the assistant.")
-model ChatRequestAssistantMessage extends ChatRequestMessage {
+model AssistantMessage extends ChatRequestMessage {
   @doc("The chat role associated with this message, which is always 'assistant' for assistant messages.")
   role: ChatRole.assistant;
 
@@ -304,7 +296,7 @@ model ChatRequestAssistantMessage extends ChatRequestMessage {
 }
 
 @doc("A request chat message representing requested output from a configured tool.")
-model ChatRequestToolMessage extends ChatRequestMessage {
+model ToolMessage extends ChatRequestMessage {
   @doc("The chat role associated with this message, which is always 'tool' for tool messages.")
   role: ChatRole.tool;
 
