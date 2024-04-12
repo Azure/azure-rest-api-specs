@@ -875,7 +875,7 @@
       "description": "Details of the CommunicationsGateway resource.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Resource provisioning state.",
           "readOnly": true
         },
@@ -1178,16 +1178,16 @@
         "operatorAddresses"
       ]
     },
-    "ProvisioningState": {
+    "ResourceProvisioningState": {
       "type": "string",
-      "description": "Provisioning state of the resource.",
+      "description": "The provisioning state of a resource type.",
       "enum": [
         "Succeeded",
         "Failed",
         "Canceled"
       ],
       "x-ms-enum": {
-        "name": "ProvisioningState",
+        "name": "ResourceProvisioningState",
         "modelAsString": true,
         "values": [
           {
@@ -1353,7 +1353,7 @@
       "description": "Details of the TestLine resource.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ResourceProvisioningState",
           "description": "Resource provisioning state.",
           "readOnly": true
         },
