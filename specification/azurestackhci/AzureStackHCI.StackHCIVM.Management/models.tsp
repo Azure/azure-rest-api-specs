@@ -36,7 +36,7 @@ union HyperVGeneration {
 }
 
 @doc("Provisioning state of the resource.")
-union ProvisioningState {
+union ProvisioningStateEnum {
   @doc("Provisioning has succeeded")
   Succeeded: "Succeeded",
 
@@ -80,7 +80,7 @@ union ExtendedLocationTypes {
 }
 
 @doc("IPAllocationMethod - The IP address allocation method. Possible values include: 'Static', 'Dynamic'")
-union IpAllocationMethod {
+union IpAllocationMethodEnum {
   @doc("Dynamic IP allocation method")
   Dynamic: "Dynamic",
 
@@ -141,7 +141,7 @@ union DiskFileFormat {
 }
 
 @doc("VM Sizes")
-union VmSize {
+union VmSizeEnum {
   @doc("Default virtual machine size")
   Default: "Default",
 
@@ -284,7 +284,7 @@ union StatusTypes {
 }
 
 @doc("The status of whether secure boot is enabled.")
-union AttestSecureBootProperty {
+union AttestSecureBootPropertyEnum {
   @doc("Secure boot enabled")
   Enabled: "Enabled",
 
@@ -298,7 +298,7 @@ union AttestSecureBootProperty {
 }
 
 @doc("The status of whether attestation certificate is validated.")
-union AttestCertProperty {
+union AttestCertPropertyEnum {
   @doc("Attestation certificate is valid")
   Valid: "Valid",
 
@@ -312,7 +312,7 @@ union AttestCertProperty {
 }
 
 @doc("The status of whether the list of boot integrity properties is validated.")
-union AttestBootIntegrityProperty {
+union AttestBootIntegrityPropertyEnum {
   @doc("Boot integrity properties are valid")
   Valid: "Valid",
 
@@ -326,7 +326,7 @@ union AttestBootIntegrityProperty {
 }
 
 @doc("The health status of attestation validation and parsing")
-union AttestHealthStatus {
+union AttestHealthStatusEnum {
   @doc("Attestation validation and parsing pending")
   Pending: "Pending",
 
@@ -369,7 +369,7 @@ union OperatingSystemTypes {
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
 @doc("Type of the IP Pool [vm, vippool]")
-union IPPoolType {
+union IPPoolTypeEnum {
   @doc("Virtual Machine IP Pool")
   vm: "vm",
 
@@ -409,7 +409,7 @@ model GalleryImageProperties {
 
   @doc("Provisioning state of the gallery image.")
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: ProvisioningStateEnum;
 
   @doc("The observed state of gallery images")
   @visibility("read")
@@ -525,7 +525,7 @@ model LogicalNetworkProperties {
 
   @doc("Provisioning state of the logical network.")
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: ProvisioningStateEnum;
 
   @doc("name of the network switch to be used for VMs")
   vmSwitchName?: string;
@@ -561,7 +561,7 @@ model SubnetProperties {
   addressPrefixes?: string[];
 
   @doc("IPAllocationMethod - The IP address allocation method. Possible values include: 'Static', 'Dynamic'")
-  ipAllocationMethod?: IpAllocationMethod;
+  ipAllocationMethod?: IpAllocationMethodEnum;
 
   @doc("IPConfigurationReferences - list of IPConfigurationReferences")
   ipConfigurationReferences?: ResourceIdentifier<[{type:"Microsoft.AzureStackHCI/networkInterfaces"}]>[];
@@ -634,7 +634,7 @@ model IPPool {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("Type of the IP Pool [vm, vippool]")
-  ipPoolType?: IPPoolType;
+  ipPoolType?: IPPoolTypeEnum;
 
   @doc("Start of the IP address pool")
   start?: string;
@@ -675,7 +675,7 @@ model NetworkSecurityGroupProperties {
 
   @doc("The provisioning state of the network security group resource.")
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: ProvisioningStateEnum;
 }
 
 @doc("Security rule resource.")
@@ -709,7 +709,7 @@ model SecurityRuleProperties {
 
   @doc("Provisioning state of the SR")
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: ProvisioningStateEnum;
 }
 
 @doc("Properties under the network interface resource")
@@ -726,7 +726,7 @@ model NetworkInterfaceProperties {
 
   @doc("Provisioning state of the network interface.")
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: ProvisioningStateEnum;
 
   @doc("The observed state of network interfaces")
   @visibility("read")
@@ -852,7 +852,7 @@ model MarketplaceGalleryImageProperties {
 
   @doc("Provisioning state of the marketplace gallery image.")
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: ProvisioningStateEnum;
 
   @doc("The observed state of marketplace gallery images")
   @visibility("read")
@@ -918,7 +918,7 @@ model StorageContainerProperties {
 
   @doc("Provisioning state of the storage container.")
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: ProvisioningStateEnum;
 
   @doc("The observed state of storage containers")
   @visibility("read")
@@ -987,7 +987,7 @@ model VirtualHardDiskProperties {
 
   @doc("Provisioning state of the virtual hard disk.")
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: ProvisioningStateEnum;
 
   @doc("Storage ContainerID of the storage container to be used for VHD")
   containerId?: ResourceIdentifier<[
@@ -1050,7 +1050,7 @@ model VirtualMachineInstanceProperties {
 
   @doc("Provisioning state of the virtual machine instance.")
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: ProvisioningStateEnum;
 
   @doc("The virtual machine instance view.")
   @visibility("read")
@@ -1074,7 +1074,7 @@ model VirtualMachineInstanceProperties {
 @doc("HardwareProfile - Specifies the hardware settings for the virtual machine instance.")
 model VirtualMachineInstancePropertiesHardwareProfile {
   @doc("Enum of VM Sizes")
-  vmSize?: VmSize;
+  vmSize?: VmSizeEnum;
 
   @doc("number of processors for the virtual machine instance")
   processors?: int32;
@@ -1380,7 +1380,7 @@ model VirtualMachineInstanceUpdateProperties {
 @doc("HardwareProfile - Specifies the hardware settings for the virtual machine instance.")
 model HardwareProfileUpdate {
   @doc("VM Size Enum")
-  vmSize?: VmSize;
+  vmSize?: VmSizeEnum;
 
   @doc("number of processors for the virtual machine instance")
   processors?: int32;
@@ -1450,22 +1450,22 @@ model HybridIdentityMetadataProperties {
 
   @doc("Provisioning state of the virtual machine instance.")
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: ProvisioningStateEnum;
 }
 
 @doc("Defines the attestation status properties")
 model AttestationStatusProperties {
   @doc("The status of whether secure boot is enabled.")
   @visibility("read")
-  attestSecureBootEnabled?: AttestSecureBootProperty = AttestSecureBootProperty.Unknown;
+  attestSecureBootEnabled?: AttestSecureBootPropertyEnum = AttestSecureBootPropertyEnum.Unknown;
 
   @doc("The status of whether attestation certificate is validated.")
   @visibility("read")
-  attestationCertValidated?: AttestCertProperty = AttestCertProperty.Unknown;
+  attestationCertValidated?: AttestCertPropertyEnum = AttestCertPropertyEnum.Unknown;
 
   @doc("The status of whether the list of boot integrity properties is validated.")
   @visibility("read")
-  bootIntegrityValidated?: AttestBootIntegrityProperty = AttestBootIntegrityProperty.Unknown;
+  bootIntegrityValidated?: AttestBootIntegrityPropertyEnum = AttestBootIntegrityPropertyEnum.Unknown;
 
   @doc("kernel version string for Linux VM.")
   @visibility("read")
@@ -1473,7 +1473,7 @@ model AttestationStatusProperties {
 
   @doc("The health status of attestation validation and parsing")
   @visibility("read")
-  healthStatus?: AttestHealthStatus = AttestHealthStatus.Unknown;
+  healthStatus?: AttestHealthStatusEnum = AttestHealthStatusEnum.Unknown;
 
   @doc("The time stamp of the last time attestation token is validated by relying party service.")
   @visibility("read")
@@ -1485,7 +1485,7 @@ model AttestationStatusProperties {
 
   @doc("Provisioning state of the virtual machine instance.")
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: ProvisioningStateEnum;
 }
 
 @doc("Defines the resource properties.")
@@ -1502,7 +1502,7 @@ model GuestAgentProperties {
 
   @doc("Provisioning state of the virtual machine instance.")
   @visibility("read")
-  provisioningState?: ProvisioningState;
+  provisioningState?: ProvisioningStateEnum;
 }
 
 @doc("Username / Password Credentials to connect to guest.")

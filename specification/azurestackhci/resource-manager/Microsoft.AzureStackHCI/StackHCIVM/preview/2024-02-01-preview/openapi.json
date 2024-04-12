@@ -3505,7 +3505,7 @@
         "defaultScopes"
       ]
     },
-    "AttestBootIntegrityProperty": {
+    "AttestBootIntegrityPropertyEnum": {
       "type": "string",
       "description": "The status of whether the list of boot integrity properties is validated.",
       "enum": [
@@ -3514,7 +3514,7 @@
         "Unknown"
       ],
       "x-ms-enum": {
-        "name": "AttestBootIntegrityProperty",
+        "name": "AttestBootIntegrityPropertyEnum",
         "modelAsString": true,
         "values": [
           {
@@ -3535,7 +3535,7 @@
         ]
       }
     },
-    "AttestCertProperty": {
+    "AttestCertPropertyEnum": {
       "type": "string",
       "description": "The status of whether attestation certificate is validated.",
       "enum": [
@@ -3544,7 +3544,7 @@
         "Unknown"
       ],
       "x-ms-enum": {
-        "name": "AttestCertProperty",
+        "name": "AttestCertPropertyEnum",
         "modelAsString": true,
         "values": [
           {
@@ -3565,7 +3565,7 @@
         ]
       }
     },
-    "AttestHealthStatus": {
+    "AttestHealthStatusEnum": {
       "type": "string",
       "description": "The health status of attestation validation and parsing",
       "enum": [
@@ -3575,7 +3575,7 @@
         "Unknown"
       ],
       "x-ms-enum": {
-        "name": "AttestHealthStatus",
+        "name": "AttestHealthStatusEnum",
         "modelAsString": true,
         "values": [
           {
@@ -3601,7 +3601,7 @@
         ]
       }
     },
-    "AttestSecureBootProperty": {
+    "AttestSecureBootPropertyEnum": {
       "type": "string",
       "description": "The status of whether secure boot is enabled.",
       "enum": [
@@ -3610,7 +3610,7 @@
         "Unknown"
       ],
       "x-ms-enum": {
-        "name": "AttestSecureBootProperty",
+        "name": "AttestSecureBootPropertyEnum",
         "modelAsString": true,
         "values": [
           {
@@ -3665,7 +3665,7 @@
             "Unknown"
           ],
           "x-ms-enum": {
-            "name": "AttestSecureBootProperty",
+            "name": "AttestSecureBootPropertyEnum",
             "modelAsString": true,
             "values": [
               {
@@ -3697,7 +3697,7 @@
             "Unknown"
           ],
           "x-ms-enum": {
-            "name": "AttestCertProperty",
+            "name": "AttestCertPropertyEnum",
             "modelAsString": true,
             "values": [
               {
@@ -3729,7 +3729,7 @@
             "Unknown"
           ],
           "x-ms-enum": {
-            "name": "AttestBootIntegrityProperty",
+            "name": "AttestBootIntegrityPropertyEnum",
             "modelAsString": true,
             "values": [
               {
@@ -3767,7 +3767,7 @@
             "Unknown"
           ],
           "x-ms-enum": {
-            "name": "AttestHealthStatus",
+            "name": "AttestHealthStatusEnum",
             "modelAsString": true,
             "values": [
               {
@@ -3805,7 +3805,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ProvisioningStateEnum",
           "description": "Provisioning state of the virtual machine instance.",
           "readOnly": true
         }
@@ -4013,7 +4013,7 @@
           "description": "Specifies information about the gallery image version that you want to create or update."
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ProvisioningStateEnum",
           "description": "Provisioning state of the gallery image.",
           "readOnly": true
         },
@@ -4251,7 +4251,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ProvisioningStateEnum",
           "description": "Provisioning state of the virtual machine instance.",
           "readOnly": true
         }
@@ -4280,7 +4280,7 @@
       "description": "HardwareProfile - Specifies the hardware settings for the virtual machine instance.",
       "properties": {
         "vmSize": {
-          "$ref": "#/definitions/VmSize",
+          "$ref": "#/definitions/VmSizeEnum",
           "description": "VM Size Enum"
         },
         "processors": {
@@ -4380,7 +4380,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ProvisioningStateEnum",
           "description": "Provisioning state of the virtual machine instance.",
           "readOnly": true
         }
@@ -4470,7 +4470,7 @@
           "description": "Name of the IP-Pool"
         },
         "ipPoolType": {
-          "$ref": "#/definitions/IPPoolType",
+          "$ref": "#/definitions/IPPoolTypeEnum",
           "description": "Type of the IP Pool [vm, vippool]"
         },
         "start": {
@@ -4503,7 +4503,7 @@
         }
       }
     },
-    "IPPoolType": {
+    "IPPoolTypeEnum": {
       "type": "string",
       "description": "Type of the IP Pool [vm, vippool]",
       "enum": [
@@ -4511,7 +4511,7 @@
         "vippool"
       ],
       "x-ms-enum": {
-        "name": "IPPoolType",
+        "name": "IPPoolTypeEnum",
         "modelAsString": true,
         "values": [
           {
@@ -4593,7 +4593,7 @@
         }
       }
     },
-    "IpAllocationMethod": {
+    "IpAllocationMethodEnum": {
       "type": "string",
       "description": "IPAllocationMethod - The IP address allocation method. Possible values include: 'Static', 'Dynamic'",
       "enum": [
@@ -4601,7 +4601,7 @@
         "Static"
       ],
       "x-ms-enum": {
-        "name": "IpAllocationMethod",
+        "name": "IpAllocationMethodEnum",
         "modelAsString": true,
         "values": [
           {
@@ -4683,7 +4683,7 @@
           ]
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ProvisioningStateEnum",
           "description": "Provisioning state of the logical network.",
           "readOnly": true
         },
@@ -4839,7 +4839,7 @@
           "description": "Specifies information about the gallery image version that you want to create or update."
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ProvisioningStateEnum",
           "description": "Provisioning state of the marketplace gallery image.",
           "readOnly": true
         },
@@ -5001,7 +5001,7 @@
           "description": "DNS Settings for the interface"
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ProvisioningStateEnum",
           "description": "Provisioning state of the network interface.",
           "readOnly": true
         },
@@ -5199,7 +5199,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ProvisioningStateEnum",
           "description": "The provisioning state of the network security group resource.",
           "readOnly": true
         }
@@ -5384,7 +5384,7 @@
         ]
       }
     },
-    "ProvisioningState": {
+    "ProvisioningStateEnum": {
       "type": "string",
       "description": "Provisioning state of the resource.",
       "enum": [
@@ -5396,7 +5396,7 @@
         "Canceled"
       ],
       "x-ms-enum": {
-        "name": "ProvisioningState",
+        "name": "ProvisioningStateEnum",
         "modelAsString": true,
         "values": [
           {
@@ -5654,7 +5654,7 @@
           "description": "The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic."
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ProvisioningStateEnum",
           "description": "Provisioning state of the SR",
           "readOnly": true
         }
@@ -5904,7 +5904,7 @@
           "description": "Path of the storage container on the disk"
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ProvisioningStateEnum",
           "description": "Provisioning state of the storage container.",
           "readOnly": true
         },
@@ -6040,7 +6040,7 @@
           }
         },
         "ipAllocationMethod": {
-          "$ref": "#/definitions/IpAllocationMethod",
+          "$ref": "#/definitions/IpAllocationMethodEnum",
           "description": "IPAllocationMethod - The IP address allocation method. Possible values include: 'Static', 'Dynamic'"
         },
         "ipConfigurationReferences": {
@@ -6210,7 +6210,7 @@
           "description": "The format of the actual VHD file [vhd, vhdx]"
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ProvisioningStateEnum",
           "description": "Provisioning state of the virtual hard disk.",
           "readOnly": true
         },
@@ -6394,7 +6394,7 @@
           "description": "HTTP Proxy configuration for the VM."
         },
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "$ref": "#/definitions/ProvisioningStateEnum",
           "description": "Provisioning state of the virtual machine instance.",
           "readOnly": true
         },
@@ -6428,7 +6428,7 @@
       "description": "HardwareProfile - Specifies the hardware settings for the virtual machine instance.",
       "properties": {
         "vmSize": {
-          "$ref": "#/definitions/VmSize",
+          "$ref": "#/definitions/VmSizeEnum",
           "description": "Enum of VM Sizes"
         },
         "processors": {
@@ -6777,7 +6777,7 @@
         }
       }
     },
-    "VmSize": {
+    "VmSizeEnum": {
       "type": "string",
       "description": "VM Sizes",
       "enum": [
@@ -6806,7 +6806,7 @@
         "Custom"
       ],
       "x-ms-enum": {
-        "name": "VmSize",
+        "name": "VmSizeEnum",
         "modelAsString": true,
         "values": [
           {
