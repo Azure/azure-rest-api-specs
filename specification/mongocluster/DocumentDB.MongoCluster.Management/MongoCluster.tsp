@@ -1,13 +1,17 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "./common.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.ResourceManager.Private;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.DocumentDB;
 @doc("Represents a mongo cluster resource.")
@@ -90,6 +94,7 @@ model MongoClusterProperties {
   publicNetworkAccess?: PublicNetworkAccess;
 
   @doc("The list of node group specs in the cluster.")
+  @extension("x-ms-identifiers",[])
   nodeGroupSpecs?: NodeGroupSpec[];
 
   @doc("List of private endpoint connections.")
@@ -98,18 +103,22 @@ model MongoClusterProperties {
 }
 
 @doc("The mode that the Mongo Cluster is created with.")
-enum CreateMode {
+union CreateMode {
+  string,
+
   @doc("Create a new mongo cluster.")
-  Default,
+  "Default",
 
   @doc("Create a mongo cluster from a restore point-in-time.")
-  PointInTimeRestore,
+  "PointInTimeRestore",
 }
 
 @doc("The kind of the node on the cluster.")
-enum NodeKind {
+union NodeKind {
+  string,
+
   @doc("The node is a shard kind.")
-  Shard,
+  "Shard",
 }
 
 @doc("Parameters used for restore operations")
@@ -148,14 +157,16 @@ model NodeGroupProperties {
 model ListConnectionStringsResult {
   @doc("An array that contains the connection strings for a mongo cluster.")
   @visibility("read")
+  @extension("x-ms-identifiers", [])
   connectionStrings?: ConnectionString[];
 }
 
 @doc("Connection string for the mongo cluster")
 model ConnectionString {
+  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" "https://github.com/Azure/typespec-azure/issues/417"
   @doc("Value of the connection string")
   @visibility("read")
-  @projectedName("csharp", "uri")
+  @clientName("uri", "csharp")
   connectionString?: string;
 
   @doc("Description of the connection string")
@@ -164,34 +175,38 @@ model ConnectionString {
 }
 
 @doc("The status of the Mongo cluster resource.")
-enum MongoClusterStatus {
+union MongoClusterStatus {
+  string,
+
   @doc("The mongo cluster resource is ready for use.")
-  Ready,
+  "Ready",
 
   @doc("The mongo cluster resource is being provisioned.")
-  Provisioning,
+  "Provisioning",
 
   @doc("The mongo cluster resource is being updated.")
-  Updating,
+  "Updating",
 
   @doc("The mongo cluster resource is being started.")
-  Starting,
+  "Starting",
 
   @doc("The mongo cluster resource is being stopped.")
-  Stopping,
+  "Stopping",
 
   @doc("The mongo cluster resource is stopped.")
-  Stopped,
+  "Stopped",
 
   @doc("The mongo cluster resource is being dropped.")
-  Dropping,
+  "Dropping",
 }
 
 @doc("Whether or not public endpoint access is allowed for this Mongo cluster.  Value is optional and default value is 'Enabled'")
-enum PublicNetworkAccess {
+union PublicNetworkAccess {
+  string,
+
   @doc("If set, mongo cluster can be accessed through private and public methods.")
-  Enabled,
+  "Enabled",
 
   @doc("If set, the private endpoints are the exclusive access method.")
-  Disabled,
+  "Disabled",
 }

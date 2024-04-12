@@ -16,15 +16,17 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @lroStatus
 @doc("The provisioning state of the last accepted operation.")
-enum ProvisioningState {
-  ...ResourceProvisioningState,
+union ProvisioningState {
+  string,
+
+  ResourceProvisioningState,
 
   @doc("An operation is in-progress on the resource.")
-  InProgress,
+  "InProgress",
 
   @doc("An update operation is in-progress on the resource.")
-  Updating,
+  "Updating",
 
   @doc("A drop operation is in-progress on the resource.")
-  Dropping,
+  "Dropping",
 }
