@@ -564,10 +564,10 @@ model SubnetProperties {
   ipAllocationMethod?: IpAllocationMethod;
 
   @doc("IPConfigurationReferences - list of IPConfigurationReferences")
-  ipConfigurationReferences?: SubnetPropertiesFormatIpConfigurationReferencesItem[];
+  ipConfigurationReferences?: ResourceIdentifier<[{type:"Microsoft.AzureStackHCI/networkInterfaces"}]>[];
 
   @doc("NetworkSecurityGroup - Network Security Group attached to the logical network.")
-  networkSecurityGroup?: NetworkSecurityGroupResourceReference;
+  networkSecurityGroup?: ResourceIdentifier<[{type:"Microsoft.AzureStackHCI/networkSecurityGroups"}]>;
 
   @doc("Route table resource.")
   routeTable?: RouteTable;
@@ -578,18 +578,6 @@ model SubnetProperties {
 
   @doc("Vlan to use for the subnet")
   vlan?: int32;
-}
-
-@doc("IPConfigurationReference - Describes a IPConfiguration under the virtual network")
-model SubnetPropertiesFormatIpConfigurationReferencesItem {
-  @doc("IPConfigurationID")
-  id?: string;
-}
-
-@doc("Network Security Group attached to the logical network")
-model NetworkSecurityGroupResourceReference {
-  @doc("The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/...")
-  id?: string;
 }
 
 @doc("Route table resource.")
@@ -675,11 +663,11 @@ model IPPoolInfo {
 model NetworkSecurityGroupProperties {
   @doc("A collection of references to network interfaces that are currently using this NSG.")
   @visibility("read")
-  networkInterfaceReferences?: NetworkInterfaceReference[];
+  networkInterfaceReferences?: ResourceIdentifier<[{type:"Microsoft.AzureStackHCI/networkInterfaces"}]>[];
 
   @doc("A collection of references to subnets that are currently using this NSG")
   @visibility("read")
-  subnets?: SubnetReference[];
+  subnets?: ResourceIdentifier<[{type:"Microsoft.AzureStackHCI/logicalNetworks"}]>[];
 
   @doc("The resource GUID property of the network security group resource.")
   @visibility("read")
@@ -688,18 +676,6 @@ model NetworkSecurityGroupProperties {
   @doc("The provisioning state of the network security group resource.")
   @visibility("read")
   provisioningState?: ProvisioningState;
-}
-
-@doc("Subnet - Name of Subnet bound to the NSG.")
-model SubnetReference {
-  @doc("ID - The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/...")
-  id?: string;
-}
-
-@doc("NetworkInterface - Name of NIC bound to the NSG.")
-model NetworkInterfaceReference {
-  @doc("ID - The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/...")
-  id?: string;
 }
 
 @doc("Security rule resource.")
@@ -757,7 +733,7 @@ model NetworkInterfaceProperties {
   status?: NetworkInterfaceStatus;
 
   @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
-  networkSecurityGroup?: NetworkSecurityGroupResourceReference;
+  networkSecurityGroup?: ResourceIdentifier<[{type:"Microsoft.AzureStackHCI/networkSecurityGroups"}]>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
@@ -791,14 +767,7 @@ model IPConfigurationProperties {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("Subnet - Name of Subnet bound to the IP configuration.")
-  subnet?: IPConfigurationPropertiesSubnet;
-}
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
-@doc("Subnet - Name of Subnet bound to the IP configuration.")
-model IPConfigurationPropertiesSubnet {
-  @doc("ID - The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/...")
-  id?: string;
+  subnet?: ResourceIdentifier<[{type:"Microsoft.AzureStackHCI/logicalNetworks"}]>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "DNS is a short form. The casing is correct."
@@ -1135,13 +1104,7 @@ model VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig {
 @doc("NetworkProfile - describes the network configuration the virtual machine instance")
 model VirtualMachineInstancePropertiesNetworkProfile {
   @doc("NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance")
-  networkInterfaces?: VirtualMachineInstancePropertiesNetworkProfileNetworkInterfacesItem[];
-}
-
-@doc("Describes the network interfaces item")
-model VirtualMachineInstancePropertiesNetworkProfileNetworkInterfacesItem {
-  @doc("ID - Resource Id of the network interface")
-  id?: string;
+  networkInterfaces?: ResourceIdentifier<[{type:"Microsoft.AzureStackHCI/networkInterfaces"}]>[];
 }
 
 @doc("OsProfile - describes the configuration of the operating system and sets login data")
@@ -1238,10 +1201,10 @@ model VirtualMachineInstancePropertiesSecurityProfileUefiSettings {
 @doc("StorageProfile - contains information about the disks and storage information for the virtual machine instance")
 model VirtualMachineInstancePropertiesStorageProfile {
   @doc("adds data disks to the virtual machine instance")
-  dataDisks?: VirtualMachineInstancePropertiesStorageProfileDataDisksItem[];
+  dataDisks?: ResourceIdentifier<[{type:"Microsoft.AzureStackHCI/virtualHardDisks"}]>[];
 
   @doc("Which Image to use for the virtual machine instance")
-  imageReference?: VirtualMachineInstancePropertiesStorageProfileImageReference;
+  imageReference?: ResourceIdentifier<[{type:"Microsoft.AzureStackHCI/marketplaceGalleryImages"}]>;
 
   @doc("VHD to attach as OS disk")
   osDisk?: VirtualMachineInstancePropertiesStorageProfileOsDisk;
@@ -1269,7 +1232,7 @@ model VirtualMachineInstancePropertiesStorageProfileImageReference {
 @doc("VHD to attach as OS disk")
 model VirtualMachineInstancePropertiesStorageProfileOsDisk {
   @doc("Resource ID of the OS disk")
-  id?: string;
+  id?: ResourceIdentifier<[{type:"Microsoft.AzureStackHCI/virtualHardDisk"}]>;
 
   @doc("This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: Windows, Linux.")
   osType?: OperatingSystemTypes;
@@ -1430,25 +1393,13 @@ model HardwareProfileUpdate {
 @doc("Storage profile update")
 model StorageProfileUpdate {
   @doc("adds data disks to the virtual machine instance for the update call")
-  dataDisks?: StorageProfileUpdateDataDisksItem[];
-}
-
-@doc("Storage profile update data disks")
-model StorageProfileUpdateDataDisksItem {
-  @doc("resource id of the data disk")
-  id?: string;
+  dataDisks?: ResourceIdentifier<[{type:"Microsoft.AzureStackHCI/virtualHardDisks"}]>[];
 }
 
 @doc("NetworkProfile - describes the network update configuration the virtual machine instance")
 model NetworkProfileUpdate {
   @doc("NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance")
-  networkInterfaces?: NetworkProfileUpdateNetworkInterfacesItem[];
-}
-
-@doc("Network profile update NICs")
-model NetworkProfileUpdateNetworkInterfacesItem {
-  @doc("ID - Resource ID of the network interface")
-  id?: string;
+  networkInterfaces?: ResourceIdentifier<[{type:"Microsoft.AzureStackHCI/networkInterfaces"}]>[];
 }
 
 @doc("OsProfile - describes the update configuration of the operating system")

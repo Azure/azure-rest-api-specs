@@ -4448,18 +4448,16 @@
           "description": "PrivateIPAddress - Private IP address of the IP configuration."
         },
         "subnet": {
-          "$ref": "#/definitions/IPConfigurationPropertiesSubnet",
-          "description": "Subnet - Name of Subnet bound to the IP configuration."
-        }
-      }
-    },
-    "IPConfigurationPropertiesSubnet": {
-      "type": "object",
-      "description": "Subnet - Name of Subnet bound to the IP configuration.",
-      "properties": {
-        "id": {
           "type": "string",
-          "description": "ID - The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/..."
+          "format": "arm-id",
+          "description": "Subnet - Name of Subnet bound to the IP configuration.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureStackHCI/logicalNetworks"
+              }
+            ]
+          }
         }
       }
     },
@@ -5013,18 +5011,16 @@
           "readOnly": true
         },
         "networkSecurityGroup": {
-          "$ref": "#/definitions/NetworkSecurityGroupResourceReference",
-          "description": "NetworkSecurityGroup - Network Security Group attached to the network interface."
-        }
-      }
-    },
-    "NetworkInterfaceReference": {
-      "type": "object",
-      "description": "NetworkInterface - Name of NIC bound to the NSG.",
-      "properties": {
-        "id": {
           "type": "string",
-          "description": "ID - The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/..."
+          "format": "arm-id",
+          "description": "NetworkSecurityGroup - Network Security Group attached to the network interface.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureStackHCI/networkSecurityGroups"
+              }
+            ]
+          }
         }
       }
     },
@@ -5094,18 +5090,17 @@
           "type": "array",
           "description": "NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance",
           "items": {
-            "$ref": "#/definitions/NetworkProfileUpdateNetworkInterfacesItem"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.AzureStackHCI/networkInterfaces"
+                }
+              ]
+            }
           }
-        }
-      }
-    },
-    "NetworkProfileUpdateNetworkInterfacesItem": {
-      "type": "object",
-      "description": "Network profile update NICs",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "ID - Resource ID of the network interface"
         }
       }
     },
@@ -5168,7 +5163,16 @@
           "type": "array",
           "description": "A collection of references to network interfaces that are currently using this NSG.",
           "items": {
-            "$ref": "#/definitions/NetworkInterfaceReference"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.AzureStackHCI/networkInterfaces"
+                }
+              ]
+            }
           },
           "readOnly": true
         },
@@ -5176,7 +5180,16 @@
           "type": "array",
           "description": "A collection of references to subnets that are currently using this NSG",
           "items": {
-            "$ref": "#/definitions/SubnetReference"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.AzureStackHCI/logicalNetworks"
+                }
+              ]
+            }
           },
           "readOnly": true
         },
@@ -5189,16 +5202,6 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the network security group resource.",
           "readOnly": true
-        }
-      }
-    },
-    "NetworkSecurityGroupResourceReference": {
-      "type": "object",
-      "description": "Network Security Group attached to the logical network",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/..."
         }
       }
     },
@@ -5991,18 +5994,17 @@
           "type": "array",
           "description": "adds data disks to the virtual machine instance for the update call",
           "items": {
-            "$ref": "#/definitions/StorageProfileUpdateDataDisksItem"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.AzureStackHCI/virtualHardDisks"
+                }
+              ]
+            }
           }
-        }
-      }
-    },
-    "StorageProfileUpdateDataDisksItem": {
-      "type": "object",
-      "description": "Storage profile update data disks",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "resource id of the data disk"
         }
       }
     },
@@ -6045,12 +6047,29 @@
           "type": "array",
           "description": "IPConfigurationReferences - list of IPConfigurationReferences",
           "items": {
-            "$ref": "#/definitions/SubnetPropertiesFormatIpConfigurationReferencesItem"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.AzureStackHCI/networkInterfaces"
+                }
+              ]
+            }
           }
         },
         "networkSecurityGroup": {
-          "$ref": "#/definitions/NetworkSecurityGroupResourceReference",
-          "description": "NetworkSecurityGroup - Network Security Group attached to the logical network."
+          "type": "string",
+          "format": "arm-id",
+          "description": "NetworkSecurityGroup - Network Security Group attached to the logical network.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureStackHCI/networkSecurityGroups"
+              }
+            ]
+          }
         },
         "routeTable": {
           "$ref": "#/definitions/RouteTable",
@@ -6074,26 +6093,6 @@
           "type": "integer",
           "format": "int32",
           "description": "Vlan to use for the subnet"
-        }
-      }
-    },
-    "SubnetPropertiesFormatIpConfigurationReferencesItem": {
-      "type": "object",
-      "description": "IPConfigurationReference - Describes a IPConfiguration under the virtual network",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "IPConfigurationID"
-        }
-      }
-    },
-    "SubnetReference": {
-      "type": "object",
-      "description": "Subnet - Name of Subnet bound to the NSG.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "ID - The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/..."
         }
       }
     },
@@ -6477,18 +6476,17 @@
           "type": "array",
           "description": "NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance",
           "items": {
-            "$ref": "#/definitions/VirtualMachineInstancePropertiesNetworkProfileNetworkInterfacesItem"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.AzureStackHCI/networkInterfaces"
+                }
+              ]
+            }
           }
-        }
-      }
-    },
-    "VirtualMachineInstancePropertiesNetworkProfileNetworkInterfacesItem": {
-      "type": "object",
-      "description": "Describes the network interfaces item",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "ID - Resource Id of the network interface"
         }
       }
     },
@@ -6609,12 +6607,29 @@
           "type": "array",
           "description": "adds data disks to the virtual machine instance",
           "items": {
-            "$ref": "#/definitions/VirtualMachineInstancePropertiesStorageProfileDataDisksItem"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.AzureStackHCI/virtualHardDisks"
+                }
+              ]
+            }
           }
         },
         "imageReference": {
-          "$ref": "#/definitions/VirtualMachineInstancePropertiesStorageProfileImageReference",
-          "description": "Which Image to use for the virtual machine instance"
+          "type": "string",
+          "format": "arm-id",
+          "description": "Which Image to use for the virtual machine instance",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureStackHCI/marketplaceGalleryImages"
+              }
+            ]
+          }
         },
         "osDisk": {
           "$ref": "#/definitions/VirtualMachineInstancePropertiesStorageProfileOsDisk",
@@ -6664,7 +6679,15 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Resource ID of the OS disk"
+          "format": "arm-id",
+          "description": "Resource ID of the OS disk",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureStackHCI/virtualHardDisk"
+              }
+            ]
+          }
         },
         "osType": {
           "$ref": "#/definitions/OperatingSystemTypes",
