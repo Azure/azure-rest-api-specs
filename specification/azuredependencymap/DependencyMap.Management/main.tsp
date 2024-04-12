@@ -219,29 +219,6 @@ model DiscoverySourceResourceProperties {
   sourceId: string;
 }
 
-@doc("Arc discovery source resource properties")
-model ArcDiscoverySourceResourceProperties
-  extends DiscoverySourceResourceProperties {
-  @doc("Type of discovery source resource")
-  sourceType: SourceType.Arc;
-
-  @doc("Arc details of the discoverySource resource")
-  @visibility("read", "create")
-  arcDetails: ArcDetails;
-
-  @doc("Fabric details of the discoverySource resource")
-  @visibility("read", "create")
-  fabricDetails: FabricDetails;
-
-  @doc("Agent settings for the discoverySource resource")
-  @visibility("read", "create", "update")
-  agentSettings: AgentSettings;
-
-  @doc("Agent status for the discoverySource resource")
-  @visibility("read")
-  agentStatus?: AgentStatus;
-}
-
 @doc("OffAzure discovery source resource properties")
 model OffAzureDiscoverySourceResourceProperties
   extends DiscoverySourceResourceProperties {
@@ -249,67 +226,8 @@ model OffAzureDiscoverySourceResourceProperties
   sourceType: SourceType.OffAzure;
 }
 
-@doc("Arc details of the discovery source")
-model ArcDetails {
-  @doc("Custom location corresponding to the discovery source")
-  @visibility("read", "create")
-  customLocation: string;
-}
-
-@doc("Fabric details of the discovery source")
-model FabricDetails {
-  @doc("Fabric Type")
-  @visibility("read", "create")
-  fabricType: FabricType;
-
-  @doc("FQDN of the source")
-  @visibility("read", "create")
-  fqdn: string;
-
-  @doc("Port number of the fabric")
-  @visibility("read", "create")
-  port: int32;
-
-  @doc("ArmId of the fabric credential")
-  @visibility("read", "create", "update")
-  credential: string;
-
-  @doc("Guest credentials")
-  @visibility("read", "create", "update")
-  guestCredentials: string[];
-}
-
-@doc("Agent settings of the discovery source")
-model AgentSettings {
-  @doc("Dependency mapping data upload frequency")
-  @visibility("read", "create", "update")
-  depMapDataUploadFrequencyInMinutes: int32;
-}
-
-@doc("Agent status of the discovery source")
-model AgentStatus {
-  @doc("Last upload time of dependency map data")
-  @visibility("read")
-  lastUploadTime: utcDateTime;
-
-  @doc("Last depMap data upload error")
-  uploadError: string;
-}
-
-@doc("Fabric type enum")
-union FabricType {
-  @doc("VMware fabric type")
-  VMware: "VMware",
-
-  string,
-  //fill this
-}
-
-@doc("Source type enum")
+@doc("Source type of the discoverySource")
 union SourceType {
-  @doc("Arc source type")
-  Arc: "Arc",
-
   @doc("OffAzure source type")
   OffAzure: "OffAzure",
 

@@ -1070,109 +1070,6 @@
     }
   },
   "definitions": {
-    "AgentSettings": {
-      "type": "object",
-      "description": "Agent settings of the discovery source",
-      "properties": {
-        "depMapDataUploadFrequencyInMinutes": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Dependency mapping data upload frequency",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "depMapDataUploadFrequencyInMinutes"
-      ]
-    },
-    "AgentStatus": {
-      "type": "object",
-      "description": "Agent status of the discovery source",
-      "properties": {
-        "lastUploadTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Last upload time of dependency map data",
-          "readOnly": true
-        },
-        "uploadError": {
-          "type": "string",
-          "description": "Last depMap data upload error"
-        }
-      },
-      "required": [
-        "lastUploadTime",
-        "uploadError"
-      ]
-    },
-    "ArcDetails": {
-      "type": "object",
-      "description": "Arc details of the discovery source",
-      "properties": {
-        "customLocation": {
-          "type": "string",
-          "description": "Custom location corresponding to the discovery source",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "customLocation"
-      ]
-    },
-    "ArcDiscoverySourceResourceProperties": {
-      "type": "object",
-      "description": "Arc discovery source resource properties",
-      "properties": {
-        "arcDetails": {
-          "$ref": "#/definitions/ArcDetails",
-          "description": "Arc details of the discoverySource resource",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "fabricDetails": {
-          "$ref": "#/definitions/FabricDetails",
-          "description": "Fabric details of the discoverySource resource",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "agentSettings": {
-          "$ref": "#/definitions/AgentSettings",
-          "description": "Agent settings for the discoverySource resource",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "agentStatus": {
-          "$ref": "#/definitions/AgentStatus",
-          "description": "Agent status for the discoverySource resource",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "arcDetails",
-        "fabricDetails",
-        "agentSettings"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/DiscoverySourceResourceProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "Arc"
-    },
     "DateTimeFilter": {
       "type": "object",
       "description": "UTC DateTime filter for dependency map visualization apis",
@@ -1305,83 +1202,6 @@
       "required": [
         "focusedMachineId"
       ]
-    },
-    "FabricDetails": {
-      "type": "object",
-      "description": "Fabric details of the discovery source",
-      "properties": {
-        "fabricType": {
-          "$ref": "#/definitions/FabricType",
-          "description": "Fabric Type",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "fqdn": {
-          "type": "string",
-          "description": "FQDN of the source",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "port": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Port number of the fabric",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "credential": {
-          "type": "string",
-          "description": "ArmId of the fabric credential",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "guestCredentials": {
-          "type": "array",
-          "description": "Guest credentials",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "fabricType",
-        "fqdn",
-        "port",
-        "credential",
-        "guestCredentials"
-      ]
-    },
-    "FabricType": {
-      "type": "string",
-      "description": "Fabric type enum",
-      "enum": [
-        "VMware"
-      ],
-      "x-ms-enum": {
-        "name": "FabricType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "VMware",
-            "value": "VMware",
-            "description": "VMware fabric type"
-          }
-        ]
-      }
     },
     "GetConnectionsForProcessOnFocusedMachineRequest": {
       "type": "object",
@@ -1621,20 +1441,14 @@
     },
     "SourceType": {
       "type": "string",
-      "description": "Source type enum",
+      "description": "Source type of the discoverySource",
       "enum": [
-        "Arc",
         "OffAzure"
       ],
       "x-ms-enum": {
         "name": "SourceType",
         "modelAsString": true,
         "values": [
-          {
-            "name": "Arc",
-            "value": "Arc",
-            "description": "Arc source type"
-          },
           {
             "name": "OffAzure",
             "value": "OffAzure",
