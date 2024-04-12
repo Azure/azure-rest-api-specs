@@ -84,7 +84,7 @@ interface Environments {
     }
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard operations produce wrong swagger"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard operations produce wrong operation definition"
   @doc("Partially updates an environment.")
   @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
   @patch
@@ -111,12 +111,7 @@ interface Environments {
       @body
       body: Environment;
     },
-    {
-      @statusCode
-      statusCode: 200;
-
-      @body body: Environment;
-    }
+    Environment
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
