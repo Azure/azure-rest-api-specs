@@ -927,48 +927,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/models/{modelFullName}": {
-      "get": {
-        "tags": [
-          "Models"
-        ],
-        "operationId": "Models_Get",
-        "description": "Get Model by Id.",
-        "x-ms-examples": {
-          "GetModel": {
-            "$ref": "./examples/GetModel.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/locationParameter"
-          },
-          {
-            "$ref": "#/parameters/modelFullNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Successfully retrieved model.",
-            "schema": {
-              "$ref": "#/definitions/SkuModel"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/models": {
       "get": {
         "tags": [
@@ -6921,15 +6879,6 @@
     },
     "modelVersionParameter": {
       "name": "model-version",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-      "description": "The version of the Model",
-      "x-ms-parameter-location": "method"
-    },
-    "modelFullNameParameter": {
-      "name": "modelFullName",
       "in": "path",
       "required": true,
       "type": "string",
