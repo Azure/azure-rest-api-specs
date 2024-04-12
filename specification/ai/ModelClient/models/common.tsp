@@ -39,10 +39,10 @@ union CapacityType {
   string,
 
   @doc("Your capacity has been affected by the usage amount (token count) reported here.")
-  error: "usage",
+  usage: "usage",
 
   @doc("Your capacity has not been affected by the usage amount (token count) reported here.")
-  ignore: "fixed",
+  fixed: "fixed",
 }
 
 alias ExtraRequestParameters = {

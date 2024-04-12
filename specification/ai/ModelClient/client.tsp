@@ -16,7 +16,7 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 @@usage(ModelClient.ChatChoiceUpdate, Usage.output);
 
 @client({
-  name: "ChatClient",
+  name: "ChatCompletionsClient",
   service: ModelClient,
 })
 interface Client1 {
