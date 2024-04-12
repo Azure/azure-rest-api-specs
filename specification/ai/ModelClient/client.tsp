@@ -20,7 +20,7 @@ namespace Customizations; // The actual name here doesn't matter and is here for
   service: ModelClient,
 })
 interface Client1 {
-  getChatCompletions is ModelClient.getChatCompletions;
+  create is ModelClient.getChatCompletions;
   getModelInfo is ModelClient.getModelInfo;
 }
 
@@ -29,7 +29,7 @@ interface Client1 {
   service: ModelClient,
 })
 interface Client2 {
-  getEmbeddings is ModelClient.getEmbeddings;
+  create is ModelClient.getEmbeddings;
   getModelInfo is ModelClient.getModelInfo;
 }
 
@@ -38,6 +38,6 @@ interface Client2 {
   service: ModelClient,
 })
 interface Client3 {
-  generateImages is ModelClient.generateImages;
+  create is ModelClient.generateImages;
   getModelInfo is ModelClient.getModelInfo;
 }

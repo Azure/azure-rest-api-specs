@@ -3,11 +3,10 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 
-import "./models/common.tsp";
-import "./models/chat_completions.tsp";
-import "./models/embeddings.tsp";
-import "./models/image_generation.tsp";
-import "./models/model_info.tsp";
+import "./common/common.tsp";
+import "./chat.completions/chat_completions.tsp";
+import "./embeddings/embeddings.tsp";
+import "./image.generation/image_generation.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
