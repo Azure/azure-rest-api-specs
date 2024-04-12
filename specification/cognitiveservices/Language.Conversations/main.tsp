@@ -45,10 +45,6 @@ enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_04_01: "2023-04-01",
 
-  @doc("Version 2023-04-15-preview")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  v2023_04_15_preview: "2023-04-15-preview",
-
   @doc("Version 2023-11-15-preview")
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_11_15_preview: "2023-11-15-preview",
@@ -238,15 +234,6 @@ model ConversationCallingOptions {
 
   @doc("If true, the query will be saved for customers to further review in authoring, to improve the model quality.")
   isLoggingEnabled?: boolean;
-}
-
-@doc("This is a set of request parameters for Question Answering knowledge bases.")
-model QuestionAnsweringParameters extends AnalysisParameters {
-  @doc("This is a set of request parameters for Question Answering knowledge bases.")
-  targetProjectKind: targetProjectKind.QuestionAnswering;
-
-  @doc("The options sent to a Question Answering KB.")
-  callingOptions?: AnswersOptions;
 }
 
 @doc("This is the base class of an intent prediction")
@@ -605,15 +592,6 @@ model LuisTargetIntentResult extends TargetIntentResult {
 }
 
 @doc("It is a wrap up a Question Answering KB response.")
-model QuestionAnsweringTargetIntentResult extends TargetIntentResult {
-  @doc("It is a wrap up a Question Answering KB response.")
-  targetProjectKind: targetProjectKind.QuestionAnswering;
-
-  @doc("The generated answer by a Question Answering KB.")
-  result?: AnswersResult;
-}
-
-@doc("It is a wrap up a Question Answering KB response.")
 @added(Versions.v2023_04_01)
 @resource("language/analyze-conversations/jobs")
 model AnalyzeConversationJobsInput {
@@ -647,15 +625,15 @@ union AnalyzeConversationLROTaskKind {
   @doc("Conversational Summarization Task")
   ConversationalSummarizationTask: "ConversationalSummarizationTask",
 
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2023_11_15_preview)
   @doc("Conversational PII Task")
   ConversationalPIITask: "ConversationalPIITask",
 
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2023_11_15_preview)
   @doc("Custom Conversational Summarization Task")
   CustomConversationalSummarizationTask: "CustomConversationalSummarizationTask",
 
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2023_11_15_preview)
   @doc("Conversational Sentiment Task")
   ConversationalSentimentTask: "ConversationalSentimentTask",
 }
@@ -669,15 +647,15 @@ union AnalyzeConversationResultsKind {
   @doc("Conversational Summarization Results")
   ConversationalSummarizationResults: "ConversationalSummarizationResults",
 
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2023_11_15_preview)
   @doc("Conversational PII Results")
   ConversationalPIIResults: "ConversationalPIIResults",
 
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2023_11_15_preview)
   @doc("Custom Conversational Summarization Results")
   CustomConversationalSummarizationResults: "CustomConversationalSummarizationResults",
 
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2023_11_15_preview)
   @doc("Conversational Sentiment Results")
   ConversationalSentimentResults: "ConversationalSentimentResults",
 }
@@ -890,7 +868,7 @@ model ConversationRequestStatistics is RequestStatistics {
 @added(Versions.v2023_04_01)
 model ConversationItemLevelTiming is AudioTiming;
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("Task definition for conversational sentiment.")
 model AnalyzeConversationalSentimentTask extends AnalyzeConversationLROTask {
   @doc("discriminator kind")
@@ -900,15 +878,15 @@ model AnalyzeConversationalSentimentTask extends AnalyzeConversationLROTask {
   parameters?: ConversationalSentimentTaskParameters;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("Supported parameters for a conversational sentiment task.")
 model ConversationalSentimentTaskParameters is PreBuiltTaskParameters {
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2023_11_15_preview)
   @doc("For transcript conversations, this parameter provides information regarding which content type should be used for sentiment analysis. The details of the sentiment analysis - like the offset, length and the text itself - will correspond to the text type selected here.")
   predictionSource?: TranscriptContentType;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("Result from the sentiment analysis operation performed on a list of conversations.")
 model AnalyzeConversationSentimentResult extends AnalyzeConversationJobResult {
   @doc("discriminator kind")
@@ -918,28 +896,28 @@ model AnalyzeConversationSentimentResult extends AnalyzeConversationJobResult {
   results: ConversationSentimentResults;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("The result from sentiment analysis operation for each conversation.")
 model ConversationSentimentResults is PreBuiltResult {
   @doc("Array of ConversationSentimentResults")
   conversations: Array<ConversationSentimentResultsConversation>;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("The result from sentiment analysis operation for each conversation.")
 model ConversationSentimentResultsConversation {
   ...ConversationResultBase;
   ...ConversationSentimentResult;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("The result from sentiment analysis operation for each conversation item.")
 model ConversationSentimentResult {
   @doc("Enumeration of Sentiment operation results for all the conversation items in a conversation.")
   conversationItems: Array<ConversationSentimentItemResult>;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("Sentiment operation results for a conversation items")
 model ConversationSentimentItemResult {
   @doc("The identifier for the conversation item")
@@ -955,7 +933,7 @@ model ConversationSentimentItemResult {
   confidenceScores: SentimentConfidenceScores;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("Text that has been categorized into pre-defined classes or types such as: person, location, event, product, and organization.")
 model Entity {
   @doc("Entity text as appears in the request.")
@@ -977,7 +955,7 @@ model Entity {
   confidenceScore: float64;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("Result from the personally identifiable information detection and redaction operation performed on a list of conversations.")
 model AnalyzeConversationConversationPiiResult
   extends AnalyzeConversationJobResult {
@@ -988,28 +966,28 @@ model AnalyzeConversationConversationPiiResult
   results: ConversationPiiResults;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("The result from PII detection and redaction operation for each conversation.")
 model ConversationPiiResults is PreBuiltResult {
   @doc("array of conversations")
   conversations: Array<ConversationalPiiResultWithResultBase>;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("Conversation PII result item")
 model ConversationalPiiResultWithResultBase {
   ...ConversationResultBase;
   ...ConversationPiiResult;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("The result from PII detection and redaction operation for each conversation.")
 model ConversationPiiResult {
   @doc("List of conversationItems")
   conversationItems: Array<ConversationPiiItemResult>;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("The result from PII detection and redaction operation for each conversation.")
 model ConversationPiiItemResult {
   @doc("Id of the result")
@@ -1022,7 +1000,7 @@ model ConversationPiiItemResult {
   entities: Array<Entity>;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("Task definition for a PII redaction in conversations.")
 model AnalyzeConversationPiiTask extends AnalyzeConversationLROTask {
   @doc("discriminator kind")
@@ -1032,30 +1010,30 @@ model AnalyzeConversationPiiTask extends AnalyzeConversationLROTask {
   parameters?: ConversationPiiTaskParameters;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("Supported parameters for a conversational pii task.")
 model ConversationPiiTaskParameters is PreBuiltTaskParameters {
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2023_11_15_preview)
   @doc("Array of ConversationPIICategories")
   piiCategories?: Array<ConversationPiiCategories>;
 
   @doc("Flag to indicate if response should include audio stream offset and duration for any detected entities to be redacted. By default, audio timing of redacted entities are not included.")
   redactAudioTiming?: boolean;
 
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2023_11_15_preview)
   @doc("For transcript conversations, this parameter provides information regarding which content type (ITN, Text, Lexical, Masked ITN) should be used for entity detection. The details of the entities detected - like the offset, length and the text itself - will correspond to the text type selected here.")
   redactionSource?: TranscriptContentType;
 
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2023_11_15_preview)
   @doc("Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction.")
   redactionCharacter?: redactionCharacter = redactionCharacter.asterisk;
 
-  @added(Versions.v2023_04_15_preview)
+  @added(Versions.v2023_11_15_preview)
   @doc("List of categories that need to be excluded instead of included.")
   excludePiiCategories?: Array<ConversationPiiCategoriesExclude>;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("Describes the PII categories to return for detection. If not provided, 'default' categories will be returned which will vary with the language.")
 union ConversationPiiCategories {
   string,
@@ -1081,7 +1059,7 @@ union ConversationPiiCategories {
   Default: "Default",
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("Describes the PII categories to exclude for detection. If not provided, 'default' categories will be returned which will vary with the language.")
 union ConversationPiiCategoriesExclude {
   string,
@@ -1101,7 +1079,7 @@ union ConversationPiiCategoriesExclude {
   USSocialSecurityNumber: "USSocialSecurityNumber",
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("Enumeration of supported transcript content types.")
 union TranscriptContentType {
   string,
@@ -1116,7 +1094,7 @@ union TranscriptContentType {
 }
 
 @doc("Task definition for custom conversational summarization.")
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 model AnalyzeCustomConversationSummarizationTask
   extends AnalyzeConversationLROTask {
   @doc("discriminator kind")
@@ -1151,7 +1129,7 @@ model ConversationSummarizationTaskParameters is PreBuiltTaskParameters {
 }
 
 @doc("Supported parameters for a custom conversation summarization task.")
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 model CustomConversationSummarizationTaskParameters is CustomTaskParameters {
   ...ConversationSummarizationTaskParametersBase;
 }
@@ -1194,7 +1172,7 @@ model AnalyzeConversationSummarizationResult
 }
 
 @doc("Result for the custom summarization task on the conversation.")
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 model AnalyzeCustomConversationSummarizationResult
   extends AnalyzeConversationJobResult {
   @doc("discriminator kind")
@@ -1218,7 +1196,7 @@ model SummaryResult {
   ...PreBuiltResult;
 }
 
-@added(Versions.v2023_04_15_preview)
+@added(Versions.v2023_11_15_preview)
 @doc("Custom Summary Results")
 model CustomSummaryResult {
   ...SummaryResultBase;
