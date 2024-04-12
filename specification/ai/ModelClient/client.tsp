@@ -21,6 +21,7 @@ namespace Customizations; // The actual name here doesn't matter and is here for
 })
 interface Client1 {
   getChatCompletions is ModelClient.getChatCompletions;
+  getModelInfo is ModelClient.getModelInfo;
 }
 
 @client({
@@ -29,6 +30,7 @@ interface Client1 {
 })
 interface Client2 {
   getEmbeddings is ModelClient.getEmbeddings;
+  getModelInfo is ModelClient.getModelInfo;
 }
 
 @client({
@@ -37,12 +39,5 @@ interface Client2 {
 })
 interface Client3 {
   generateImages is ModelClient.generateImages;
-}
-
-@client({
-  name: "ModelInfoClient",
-  service: ModelClient,
-})
-interface Client4 {
   getModelInfo is ModelClient.getModelInfo;
 }
