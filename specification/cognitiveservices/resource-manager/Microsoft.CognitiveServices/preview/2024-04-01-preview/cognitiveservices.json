@@ -6550,7 +6550,7 @@
           "description": "Optional array, suggested access rules",
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/NetworkSecurityPerimeterAccessRule"
           }
         }
       }
@@ -6628,15 +6628,7 @@
       "properties": {
         "direction": {
           "type": "string",
-          "description": "Direction of Access Rule",
-          "enum": [
-            "Inbound",
-            "Outbound"
-          ],
-          "x-ms-enum": {
-            "name": "NetworkSecurityPerimeterAccessRuleDirection",
-            "modelAsString": true
-          }
+          "description": "Direction of Access Rule"
         },
         "addressPrefixes": {
           "description": "Address prefixes for inbound rules",
@@ -6652,7 +6644,6 @@
           "items": {
             "description": "Subscription for inbound rule",
             "type": "object",
-            "readOnly": true,
             "properties": {
               "id": {
                 "description": "Fully qualified identifier of subscription",
@@ -6900,7 +6891,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "pattern": "^.*$",
       "description": "The name of the NSP Configuration.",
       "x-ms-parameter-location": "method"
     }
