@@ -28,11 +28,11 @@ These are the global settings for the MySql API.
 title: MySQLManagementClient
 description: The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules, VNET rules, log files and configurations with new business model.
 openapi-type: arm
-tag: package-flexibleserver-2023-10-01-preview
+tag: package-flexibleserver-2023-12-30
 ```
 
 ``` yaml $(package-flexibleservers)
-tag: package-flexibleserver-2023-10-01-preview
+tag: package-flexibleserver-2023-12-30
 ```
 
 ``` yaml $(package-singleservers)
@@ -160,6 +160,22 @@ input-file:
 - Microsoft.DBforMySQL/AAD/preview/2021-12-01-preview/AzureADAdministrator.json
 ```
 
+### Tag: package-flexibleserver-2022-01-01
+
+These settings apply only when `--tag=package-flexibleserver-2022-01-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2022-01-01'
+input-file:
+- Microsoft.DBforMySQL/Backups/stable/2022-01-01/Backups.json
+- Microsoft.DBforMySQL/Configurations/stable/2022-01-01/Configurations.json
+- Microsoft.DBforMySQL/Databases/stable/2022-01-01/Databases.json
+- Microsoft.DBforMySQL/Firewall/stable/2022-01-01/FirewallRules.json
+- Microsoft.DBforMySQL/FlexibleServers/stable/2022-01-01/FlexibleServers.json
+- Microsoft.DBforMySQL/LogFiles/stable/2022-01-01/LogFiles.json
+- Microsoft.DBforMySQL/ServiceOperations/stable/2022-01-01/ServiceOperations.json
+- Microsoft.DBforMySQL/AAD/stable/2022-01-01/AzureADAdministrator.json
+```
+
 ### Tag: package-flexibleserver-2022-09-30-preview
 
 These settings apply only when `--tag=package-flexibleserver-2022-09-30-preview` is specified on the command line.
@@ -180,6 +196,24 @@ suppressions:
   - code: PropertiesTypeObjectNoDefinition
     from: common-types.json
     reason: This will be fixed in new versions.
+```
+
+### Tag: package-flexibleserver-2022-09-30-preview-privatelink
+
+These settings apply only when `--tag=package-flexibleserver-2022-09-30-preview-privatelink` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2022-09-30-preview-privatelink'
+input-file:
+- Microsoft.DBforMySQL/Backups/preview/2021-12-01-preview/Backups.json
+- Microsoft.DBforMySQL/Configurations/preview/2021-12-01-preview/Configurations.json
+- Microsoft.DBforMySQL/Databases/preview/2021-12-01-preview/Databases.json
+- Microsoft.DBforMySQL/Firewall/preview/2021-12-01-preview/FirewallRules.json
+- Microsoft.DBforMySQL/FlexibleServers/preview/2021-12-01-preview/FlexibleServers.json
+- Microsoft.DBforMySQL/LogFiles/preview/2021-12-01-preview/LogFiles.json
+- Microsoft.DBforMySQL/ServiceOperations/preview/2021-12-01-preview/ServiceOperations.json
+- Microsoft.DBforMySQL/AAD/preview/2021-12-01-preview/AzureADAdministrator.json
+- Microsoft.DBforMySQL/PrivateLink/preview/2022-09-30-preview/PrivateEndpointConnections.json
+- Microsoft.DBforMySQL/PrivateLink/preview/2022-09-30-preview/PrivateLinkResources.json
 ```
 
 ### Tag: package-flexibleserver-2023-06-01-preview
@@ -232,6 +266,21 @@ suppressions:
     reason: This will be fixed in new versions.
 ```
 
+### Tag: package-flexibleserver-2023-06-30-privatelink
+
+These settings apply only when `--tag=package-flexibleserver-2023-06-30-privatelink` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2023-06-30-privatelink'
+input-file:
+- Microsoft.DBforMySQL/common-types/v1/common-types.json
+- Microsoft.DBforMySQL/PrivateLink/stable/2023-06-30/PrivateEndpointConnections.json
+- Microsoft.DBforMySQL/PrivateLink/stable/2023-06-30/PrivateLinkResources.json
+suppressions:
+  - code: PropertiesTypeObjectNoDefinition
+    from: common-types.json
+    reason: This will be fixed in new versions.
+```
+
 ### Tag: package-flexibleserver-2023-06-30
 
 These settings apply only when `--tag=package-flexibleserver-2023-06-30` is specified on the command line.
@@ -257,55 +306,6 @@ suppressions:
     reason: This will be fixed in new versions.
 ```
 
-### Tag: package-flexibleserver-2023-06-30-privatelink
-
-These settings apply only when `--tag=package-flexibleserver-2023-06-30-privatelink` is specified on the command line.
-
-``` yaml $(tag) == 'package-flexibleserver-2023-06-30-privatelink'
-input-file:
-- Microsoft.DBforMySQL/common-types/v1/common-types.json
-- Microsoft.DBforMySQL/PrivateLink/stable/2023-06-30/PrivateEndpointConnections.json
-- Microsoft.DBforMySQL/PrivateLink/stable/2023-06-30/PrivateLinkResources.json
-suppressions:
-  - code: PropertiesTypeObjectNoDefinition
-    from: common-types.json
-    reason: This will be fixed in new versions.
-```
-
-### Tag: package-flexibleserver-2022-01-01
-
-These settings apply only when `--tag=package-flexibleserver-2022-01-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-flexibleserver-2022-01-01'
-input-file:
-- Microsoft.DBforMySQL/Backups/stable/2022-01-01/Backups.json
-- Microsoft.DBforMySQL/Configurations/stable/2022-01-01/Configurations.json
-- Microsoft.DBforMySQL/Databases/stable/2022-01-01/Databases.json
-- Microsoft.DBforMySQL/Firewall/stable/2022-01-01/FirewallRules.json
-- Microsoft.DBforMySQL/FlexibleServers/stable/2022-01-01/FlexibleServers.json
-- Microsoft.DBforMySQL/LogFiles/stable/2022-01-01/LogFiles.json
-- Microsoft.DBforMySQL/ServiceOperations/stable/2022-01-01/ServiceOperations.json
-- Microsoft.DBforMySQL/AAD/stable/2022-01-01/AzureADAdministrator.json
-```
-
-### Tag: package-flexibleserver-2022-09-30-preview-privatelink
-
-These settings apply only when `--tag=package-flexibleserver-2022-09-30-preview-privatelink` is specified on the command line.
-
-``` yaml $(tag) == 'package-flexibleserver-2022-09-30-preview-privatelink'
-input-file:
-- Microsoft.DBforMySQL/Backups/preview/2021-12-01-preview/Backups.json
-- Microsoft.DBforMySQL/Configurations/preview/2021-12-01-preview/Configurations.json
-- Microsoft.DBforMySQL/Databases/preview/2021-12-01-preview/Databases.json
-- Microsoft.DBforMySQL/Firewall/preview/2021-12-01-preview/FirewallRules.json
-- Microsoft.DBforMySQL/FlexibleServers/preview/2021-12-01-preview/FlexibleServers.json
-- Microsoft.DBforMySQL/LogFiles/preview/2021-12-01-preview/LogFiles.json
-- Microsoft.DBforMySQL/ServiceOperations/preview/2021-12-01-preview/ServiceOperations.json
-- Microsoft.DBforMySQL/AAD/preview/2021-12-01-preview/AzureADAdministrator.json
-- Microsoft.DBforMySQL/PrivateLink/preview/2022-09-30-preview/PrivateEndpointConnections.json
-- Microsoft.DBforMySQL/PrivateLink/preview/2022-09-30-preview/PrivateLinkResources.json
-```
-
 ### Tag: package-flexibleserver-2023-10-01-preview
 
 These settings apply only when `--tag=package-flexibleserver-2023-10-01-preview` is specified on the command line.
@@ -327,6 +327,78 @@ suppressions:
   - code: PostOperationAsyncResponseValidation
     from: FlexibleServers.json
     reason: This check is optional.
+```
+
+### Tag: package-flexibleserver-2023-12-01-preview
+
+These settings apply only when `--tag=package-flexibleserver-2023-12-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2023-12-01-preview'
+input-file:
+- Microsoft.DBforMySQL/AAD/preview/2023-06-01-preview/AzureADAdministrator.json
+- Microsoft.DBforMySQL/Backups/preview/2023-10-01-preview/Backups.json
+- Microsoft.DBforMySQL/Backups/preview/2023-10-01-preview/BackupAndExport.json
+- Microsoft.DBforMySQL/Backups/preview/2023-10-01-preview/LongRunningBackups.json
+- Microsoft.DBforMySQL/Configurations/preview/2023-06-01-preview/Configurations.json
+- Microsoft.DBforMySQL/Databases/preview/2023-06-01-preview/Databases.json
+- Microsoft.DBforMySQL/Firewall/preview/2023-06-01-preview/FirewallRules.json
+- Microsoft.DBforMySQL/FlexibleServers/preview/2023-12-01-preview/FlexibleServers.json
+- Microsoft.DBforMySQL/FlexibleServers/preview/2023-12-01-preview/AdvancedThreatProtectionSettings.json
+- Microsoft.DBforMySQL/LogFiles/preview/2023-06-01-preview/LogFiles.json
+- Microsoft.DBforMySQL/ServiceOperations/preview/2023-12-01-preview/ServiceOperations.json
+- Microsoft.DBforMySQL/Maintenance/preview/2023-10-01-preview/Maintenances.json
+suppressions:
+  - code: PostOperationAsyncResponseValidation
+    from: FlexibleServers.json
+    reason: This check is optional.
+  - code: PutResponseCodes
+    from: LongRunningBackups.json
+    reason: "202 is a pattern that is already used in our existing resources and being carried forward to new implementations to maintain consistency for our customers. This has already been approved by the API review board."
+  - code: PutResponseCodes
+    from: AdvancedThreatProtectionSettings.json
+    reason: "202 is a pattern that is already used in our existing resources and being carried forward to new implementations to maintain consistency for our customers. This has already been approved by the API review board."
+  - code: PutInOperationName
+    from: AdvancedThreatProtectionSettings.json
+    reason: "This API is used to update thread detecion configuration, which is required by ARM policy, especially for `deployIfNotExist` scenario"
+  - code: AllProxyResourcesShouldHaveDelete
+    from: AdvancedThreatProtectionSettings.json
+    reason: "PUT API is used to update thread detecion configuration, which is required by ARM policy, especially for `deployIfNotExist` scenario, we do not support DELETE operation"
+```
+
+### Tag: package-flexibleserver-2023-12-30
+
+These settings apply only when `--tag=package-flexibleserver-2023-12-30` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2023-12-30'
+input-file:
+- Microsoft.DBforMySQL/AAD/preview/2023-06-01-preview/AzureADAdministrator.json
+- Microsoft.DBforMySQL/Backups/preview/2023-10-01-preview/Backups.json
+- Microsoft.DBforMySQL/Backups/preview/2023-10-01-preview/BackupAndExport.json
+- Microsoft.DBforMySQL/Backups/preview/2023-10-01-preview/LongRunningBackups.json
+- Microsoft.DBforMySQL/Configurations/preview/2023-06-01-preview/Configurations.json
+- Microsoft.DBforMySQL/Databases/preview/2023-06-01-preview/Databases.json
+- Microsoft.DBforMySQL/Firewall/preview/2023-06-01-preview/FirewallRules.json
+- Microsoft.DBforMySQL/FlexibleServers/stable/2023-12-30/FlexibleServers.json
+- Microsoft.DBforMySQL/FlexibleServers/stable/2023-12-30/AdvancedThreatProtectionSettings.json
+- Microsoft.DBforMySQL/LogFiles/preview/2023-06-01-preview/LogFiles.json
+- Microsoft.DBforMySQL/ServiceOperations/stable/2023-12-30/ServiceOperations.json
+- Microsoft.DBforMySQL/Maintenance/preview/2023-10-01-preview/Maintenances.json
+suppressions:
+  - code: PostOperationAsyncResponseValidation
+    from: FlexibleServers.json
+    reason: This check is optional.
+  - code: PutResponseCodes
+    from: LongRunningBackups.json
+    reason: "202 is a pattern that is already used in our existing resources and being carried forward to new implementations to maintain consistency for our customers. This has already been approved by the API review board."
+  - code: PutResponseCodes
+    from: AdvancedThreatProtectionSettings.json
+    reason: "202 is a pattern that is already used in our existing resources and being carried forward to new implementations to maintain consistency for our customers. This has already been approved by the API review board."
+  - code: PutInOperationName
+    from: AdvancedThreatProtectionSettings.json
+    reason: "This API is used to update thread detecion configuration, which is required by ARM policy, especially for `deployIfNotExist` scenario"
+  - code: AllProxyResourcesShouldHaveDelete
+    from: AdvancedThreatProtectionSettings.json
+    reason: "PUT API is used to update thread detecion configuration, which is required by ARM policy, especially for `deployIfNotExist` scenario, we do not support DELETE operation"
 ```
 
 ## Suppression
@@ -355,7 +427,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js

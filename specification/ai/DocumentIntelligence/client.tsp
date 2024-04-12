@@ -8,9 +8,8 @@ using Azure.ClientGenerator.Core;
 using DocumentIntelligence;
 
 @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
-//@TypeSpec.Versioning.useDependency(DocumentIntelligence.Versions.v2023_07_31)
 @TypeSpec.Versioning.useDependency(
-  DocumentIntelligence.Versions.v2023_10_31_preview
+  DocumentIntelligence.Versions.v2024_02_29_preview
 )
 namespace ClientCustomizations;
 
@@ -54,6 +53,47 @@ interface DocumentIntelligenceAdministrationClient {
   deleteClassifier is DocumentClassifiers.deleteClassifier;
 }
 
+@@clientName(AnalyzeDocumentRequest, "AnalyzeDocumentContent", "csharp");
+@@clientName(AuthorizeCopyRequest, "AuthorizeCopyContent", "csharp");
+@@clientName(BuildDocumentClassifierRequest,
+  "BuildDocumentClassifierContent",
+  "csharp"
+);
+@@clientName(BuildDocumentModelRequest, "BuildDocumentModelContent", "csharp");
+@@clientName(ClassifyDocumentRequest, "ClassifyDocumentContent", "csharp");
+@@clientName(ComposeDocumentModelRequest,
+  "ComposeDocumentModelContent",
+  "csharp"
+);
+@@clientName(DocumentBarcodeKind.EAN13, "Ean13", "csharp");
+@@clientName(DocumentBarcodeKind.EAN8, "Ean8", "csharp");
+@@clientName(DocumentBarcodeKind.ITF, "Itf", "csharp");
+@@clientName(DocumentBarcodeKind.MicroQRCode, "MicroQrCode", "csharp");
+@@clientName(DocumentBarcodeKind.PDF417, "Pdf417", "csharp");
+@@clientName(DocumentBarcodeKind.QRCode, "QrCode", "csharp");
+@@clientName(DocumentBarcodeKind.UPCA, "Upca", "csharp");
+@@clientName(DocumentBarcodeKind.UPCE, "Upce", "csharp");
+@@clientName(DocumentClassifierDetails.createdDateTime, "CreatedOn", "csharp");
+@@clientName(DocumentClassifierDetails.expirationDateTime,
+  "ExpiresOn",
+  "csharp"
+);
+@@clientName(DocumentField.valueArray, "ValueList", "csharp");
+@@clientName(DocumentField.valueInteger, "ValueLong", "csharp");
+@@clientName(DocumentField.valueNumber, "ValueDouble", "csharp");
+@@clientName(DocumentField.valueObject, "ValueDictionary", "csharp");
+@@clientName(DocumentFieldType.array, "List", "csharp");
+@@clientName(DocumentFieldType.integer, "Long", "csharp");
+@@clientName(DocumentFieldType.number, "Double", "csharp");
+@@clientName(DocumentFieldType.object, "Dictionary", "csharp");
+@@clientName(DocumentModelDetails.createdDateTime, "CreatedOn", "csharp");
+@@clientName(DocumentModelDetails.expirationDateTime, "ExpiresOn", "csharp");
+@@clientName(FontStyle, "DocumentFontStyle", "csharp");
+@@clientName(FontWeight, "DocumentFontWeight", "csharp");
+@@clientName(OperationDetails.createdDateTime, "CreatedOn", "csharp");
+@@clientName(OperationDetails.lastUpdatedDateTime, "LastUpdatedOn", "csharp");
+@@clientName(QuotaDetails.quotaResetDateTime, "QuotaResetsOn", "csharp");
+
 @@usage(DocumentAnalysisFeature, Usage.output, "csharp");
 @@usage(LengthUnit, Usage.output, "csharp");
 @@usage(DocumentSelectionMarkState, Usage.output, "csharp");
@@ -91,3 +131,10 @@ interface DocumentIntelligenceAdministrationClient {
 @@usage(DocumentField, Usage.output, "csharp");
 @@usage(CurrencyValue, Usage.output, "csharp");
 @@usage(AddressValue, Usage.output, "csharp");
+@@usage(BuildDocumentModelRequest, Usage.input, "csharp");
+@@usage(ComposeDocumentModelRequest, Usage.input, "csharp");
+@@usage(ComponentDocumentModelDetails, Usage.input, "csharp");
+@@usage(CopyAuthorization, Usage.input | Usage.output, "csharp");
+
+@@clientName(AnalyzeDocumentRequest.base64Source, "bytesSource", "python");
+@@clientName(ClassifyDocumentRequest.base64Source, "bytesSource", "python");

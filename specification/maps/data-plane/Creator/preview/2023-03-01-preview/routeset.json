@@ -185,7 +185,8 @@
   "paths": {
     "/routesets": {
       "post": {
-        "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThis API allows the caller to create routeset data from a dataset.\n\nUse the routeset API to create special data structures consumed by the Azure Maps Wayfinding service to discover the shortest paths within a facility.\n\n### Submit Create Request\n\nTo create a routeset, make a `POST` request with an empty body. The dataset is used as the source of the routeset data, so the `datasetId` query parameter must be included.\n\nThe Create Routeset API is a [long-running operation](https://aka.ms/am-creator-lrt-v2).",
+        "summary": "Use to create a routeset.",
+        "description": "\n\nThe `Create` API is an HTTP `POST` request that allows the caller to create a routeset from a dataset. The routeset is a data structure consumed by the Azure Maps [Wayfinding](/rest/api/maps-creator/wayfinding) service to discover the shortest paths within a facility.\n\nThe Create Routeset API is a [long-running operation](https://aka.ms/am-creator-lrt-v2).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDKs. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\n### Submit Create Request\n\nTo create a routeset, make a `POST` request with an empty body. The dataset is used as the source of the routeset data, so the `datasetId` query parameter must be included.",
         "operationId": "Routeset_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -220,7 +221,8 @@
         }
       },
       "get": {
-        "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThis API allows the caller to fetch a list of all routesets in the current Azure Maps Creator account.",
+        "summary": "Use to get a list of routesets.",
+        "description": "\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDKs. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\n### Submit List Request\n\nThe `List` API is an HTTP `GET` request that allows the caller to fetch a list of all routesets in the current Azure Maps Creator account.",
         "operationId": "Routeset_List",
         "x-ms-examples": {
           "Enumerate all routesets for a given subscription": {
@@ -254,7 +256,8 @@
     },
     "/routesets/{routesetId}": {
       "get": {
-        "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThis API allows the caller to fetch a routeset.",
+        "summary": "Use to get the details of a routeset.",
+        "description": "\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDKs. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\n### Submit Get Request\n\nThe `Get` API is an HTTP `GET` request that allows the caller to fetch the details of an existing routeset, specified by the `routesetId`.",
         "operationId": "Routeset_Get",
         "x-ms-examples": {
           "Get details for a previously created dataset": {
@@ -285,7 +288,8 @@
         }
       },
       "delete": {
-        "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThis API allows the caller to delete an existing routeset. Use this API when a routeset is no longer needed.\n\n### Submit Delete Request\n\nTo delete your routeset, send a `DELETE` request with the `routesetId` of the routeset to delete.",
+        "summary": "Use to delete a routeset.",
+        "description": "\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDKs. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\n### Submit Delete Request\n\nThe `Delete` API is an HTTP `DELETE` request sent with the `routesetId` of the routeset to delete.",
         "operationId": "Routeset_Delete",
         "x-ms-examples": {
           "Delete an existing routeset": {
@@ -315,7 +319,8 @@
     },
     "/routesets/operations/{operationId}": {
       "get": {
-        "description": "This API allows the caller to view the current progress of a routeset operation. The path is obtained from a call to the Create Routeset API.\n\n### Submit Operations Request\n\nTo view the current progress of a routeset operation, you will use a `GET` request with the `operationId` of the desired operation.\n\n### Operation Response\n\nWhile in progress, a `200-OK` http status code will be returned with no extra headers. If the operation succeeds, a `200-OK` http status code with Resource-Location header will be returned.",
+        "summary": "Use to check the status of the routeset creation process.",
+        "description": "\n\nThe `Get Operation` API is an HTTP `GET` request used to check the status of the routeset creation process and retrieve the `routesetId`.\n\n### Submit Operations Request\n\nTo view the current progress of a routeset operation, you will use a `GET` request where the `operationId` given the path is the ID that represents the operation.\n\n### Operation Response\n\nWhile in progress, a `200-OK` http status code is returned with no extra headers. If the operation succeeds, a `200-OK` http status code is returned with the `Resource-Location` in the header.",
         "operationId": "Routeset_GetOperation",
         "x-ms-examples": {
           "Get the status of an operation which is still running": {

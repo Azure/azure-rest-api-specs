@@ -2,7 +2,7 @@ parameters:
   "service-dir":
     default: "sdk/vision"
 emit:
- - "@azure-tools/typespec-autorest"
+  - "@azure-tools/typespec-autorest"
 linter:
   extends:
     - "@azure-tools/typespec-azure-core/all"
@@ -16,17 +16,21 @@ options:
   "@azure-tools/typespec-python":
     package-dir: "azure-ai-vision-imageanalysis"
     package-name: "{package-dir}"
+    flavor: azure
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.AI.Vision.ImageAnalysis"
     namespace: "Azure.AI.Vision.ImageAnalysis"
     clear-output-folder: true
     model-namespace: false
+    flavor: azure
   "@azure-tools/typespec-java":
     package-dir: "azure-ai-vision-imageanalysis"
     namespace: "com.azure.ai.vision.imageanalysis"
     # We switched two public methods to private. Make sure this is not overridden next time the SDK is emitted.
     partial-update: true
+    flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "ai-vision-image-analysis-rest"
     packageDetails:
       name: "@azure-rest/ai-vision-image-analysis"
+    flavor: azure

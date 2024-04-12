@@ -26,15 +26,48 @@ These are the global settings for the app.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-08
+tag: package-preview-2023-11
 ```
 
 
+### Tag: package-preview-2023-11
+
+These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-11'
+input-file:
+  - Microsoft.App/preview/2023-11-02-preview/AppResiliency.json
+  - Microsoft.App/preview/2023-11-02-preview/AuthConfigs.json
+  - Microsoft.App/preview/2023-11-02-preview/AvailableWorkloadProfiles.json
+  - Microsoft.App/preview/2023-11-02-preview/BillingMeters.json
+  - Microsoft.App/preview/2023-11-02-preview/Builders.json
+  - Microsoft.App/preview/2023-11-02-preview/Builds.json
+  - Microsoft.App/preview/2023-11-02-preview/CommonDefinitions.json
+  - Microsoft.App/preview/2023-11-02-preview/ConnectedEnvironments.json
+  - Microsoft.App/preview/2023-11-02-preview/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/preview/2023-11-02-preview/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2023-11-02-preview/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/preview/2023-11-02-preview/ContainerApps.json
+  - Microsoft.App/preview/2023-11-02-preview/ContainerAppsRevisions.json
+  - Microsoft.App/preview/2023-11-02-preview/Diagnostics.json
+  - Microsoft.App/preview/2023-11-02-preview/Global.json
+  - Microsoft.App/preview/2023-11-02-preview/Jobs.json
+  - Microsoft.App/preview/2023-11-02-preview/ManagedEnvironments.json
+  - Microsoft.App/preview/2023-11-02-preview/ManagedEnvironmentsDaprComponentResiliencyPolicies.json
+  - Microsoft.App/preview/2023-11-02-preview/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2023-11-02-preview/ManagedEnvironmentsDaprSubscriptions.json
+  - Microsoft.App/preview/2023-11-02-preview/ManagedEnvironmentsStorages.json
+  - Microsoft.App/preview/2023-11-02-preview/SourceControls.json
+  - Microsoft.App/preview/2023-11-02-preview/Subscriptions.json
+  - Microsoft.App/preview/2023-11-02-preview/Usages.json
+  - Microsoft.App/preview/2023-11-02-preview/JavaComponents.json
+  - Microsoft.App/preview/2023-11-02-preview/DotNetComponents.json
+```
 ### Tag: package-preview-2023-08
 
 These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-08'
+``` yaml $(tag) == 'package-preview-2023-08'
 input-file:
   - Microsoft.App/preview/2023-08-01-preview/AppResiliency.json
   - Microsoft.App/preview/2023-08-01-preview/AuthConfigs.json
@@ -77,6 +110,7 @@ directive:
       We are not using the common error response for these new resources to promote consistency 
       with the rest of the Microsoft.App RP, as it also doesn't use the common-types error.
 ```
+
 ### Tag: package-preview-2023-05
 
 These settings apply only when `--tag=package-preview-2023-05` is specified on the command line.
@@ -320,7 +354,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js

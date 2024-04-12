@@ -1,0 +1,17 @@
+parameters:
+  "service-dir":
+    default: "sdk/vmware"
+  "service-directory-name":
+    default: "vmware"
+emit: ["@azure-tools/typespec-autorest"]
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-resource-manager/all"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "resource-manager"
+    emitter-output-dir: "{project-root}/.."
+    examples-directory: "{project-root}/examples"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/vmware.json"
+    omit-unreachable-types: true
+    use-read-only-status-schema: true
