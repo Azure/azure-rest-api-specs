@@ -80,6 +80,23 @@ interface TextOperations {
     },
     AnalyzeTextPromptInjectionResult
   >;
+
+  @added(ContentSafety.Versions.v2024_05_15_Preview)
+  @summary("Analyze Text on Custom Category")
+  @doc("A synchronous API for the analysis of text on custom category.")
+  @route("/text:analyzeCustomCategory")
+  @post
+  analyzeTextCustomCategory is Azure.Core.RpcOperation<
+    {
+      @body
+      @doc("The text analysis request.")
+      @clientName("options", "csharp")
+      @clientName("options", "python")
+      @clientName("options", "java")
+      body: AnalyzeTextCustomCategoryOption;
+    },
+    AnalyzeTextCustomCategoryResult
+  >;
 }
 
 interface ImageOperations {
@@ -220,14 +237,7 @@ interface TextCustomizedCategoryOperations {
   >;
 
   @doc("Delete a custom category or a specific version of it.")
-  deleteCustomizedCategory is TextCustomizedCategoryOps.LongRunningResourceDelete<
-    TextCustomCategoryVersion,
-    QueryParametersTrait<{
-      @query
-      @doc("If not provided, it will delete the category")
-      version?: int32;
-    }>
-  >;
+  deleteCustomizedCategory is TextCustomizedCategoryOps.ResourceDelete<TextCustomCategoryVersion>;
 
   @doc("Trigger the category build process.")
   build is TextCustomizedCategoryOps.LongRunningResourceAction<

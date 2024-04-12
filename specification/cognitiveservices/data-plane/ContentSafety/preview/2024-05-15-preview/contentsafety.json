@@ -577,7 +577,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TextCustomCategoryVersionCreateOrUpdate"
+              "$ref": "#/definitions/TextCustomCategoryVersion"
             }
           }
         ],
@@ -621,48 +621,11 @@
             "description": "Name of the custom category",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "version",
-            "in": "query",
-            "description": "If not provided, it will delete the category",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
           }
         ],
         "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "type": "object",
-              "description": "Provides status details for long running operations.",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                }
-              },
-              "required": [
-                "id",
-                "status"
-              ]
-            },
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
             "description": "An unexpected error response.",
@@ -676,8 +639,7 @@
               }
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/text/categories/{categoryName}:build": {
@@ -817,6 +779,47 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/AnalyzeTextResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/text:analyzeCustomCategory": {
+      "post": {
+        "operationId": "TextOperations_AnalyzeTextCustomCategory",
+        "summary": "Analyze Text on Custom Category",
+        "description": "A synchronous API for the analysis of text on custom category.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The text analysis request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextCustomCategoryOption"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeTextCustomCategoryResult"
             }
           },
           "default": {
@@ -1090,6 +1093,37 @@
         "categoriesAnalysis"
       ]
     },
+    "AnalyzeTextCustomCategoryOption": {
+      "type": "object",
+      "description": "The custom category option for text.",
+      "properties": {
+        "categoryName": {
+          "type": "string",
+          "description": "Custom category name."
+        },
+        "version": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Custom category version, if not assigned use the latest version."
+        }
+      },
+      "required": [
+        "categoryName"
+      ]
+    },
+    "AnalyzeTextCustomCategoryResult": {
+      "type": "object",
+      "description": "The text analysis response on custom category.",
+      "properties": {
+        "customCategoryAnalysis": {
+          "$ref": "#/definitions/TextCustomCategoryAnalysis",
+          "description": "Analysis result for custom category."
+        }
+      },
+      "required": [
+        "customCategoryAnalysis"
+      ]
+    },
     "AnalyzeTextGroundednessOptions": {
       "type": "object",
       "description": "The request of groundedness detection.",
@@ -1276,14 +1310,6 @@
               }
             ]
           }
-        },
-        "customizedCategories": {
-          "type": "array",
-          "description": "Customized categories will be analyzed if they are assigned. If no customized categories are assigned, no analysis on them will be returned.",
-          "items": {
-            "$ref": "#/definitions/CustomizedCategoryOption"
-          },
-          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1369,14 +1395,6 @@
           "description": "Analysis result for categories.",
           "items": {
             "$ref": "#/definitions/TextCategoriesAnalysis"
-          },
-          "x-ms-identifiers": []
-        },
-        "textCustomizedCategoriesAnalysis": {
-          "type": "array",
-          "description": "Analysis result for text customized categories",
-          "items": {
-            "$ref": "#/definitions/TextCustomizedCategoriesAnalysis"
           },
           "x-ms-identifiers": []
         }
@@ -1488,22 +1506,6 @@
         ]
       }
     },
-    "CategoryStatus": {
-      "type": "string",
-      "description": "Status of the custom category build.",
-      "enum": [
-        "BuildNotStarted",
-        "BuildRunning",
-        "BuildSucceeded",
-        "BuildFailed",
-        "DeleteRunning",
-        "DeleteFailed"
-      ],
-      "x-ms-enum": {
-        "name": "CategoryStatus",
-        "modelAsString": true
-      }
-    },
     "CustomCategoryOperationDetail": {
       "type": "object",
       "properties": {
@@ -1544,24 +1546,19 @@
         "modelAsString": true
       }
     },
-    "CustomizedCategoryOption": {
-      "type": "object",
-      "description": "The custom category option for text.",
-      "properties": {
-        "categoryName": {
-          "type": "string",
-          "description": "Name"
-        },
-        "version": {
-          "type": "integer",
-          "format": "int32",
-          "description": "custom category version for inference"
-        }
-      },
-      "required": [
-        "categoryName",
-        "version"
-      ]
+    "CustomCategoryStatus": {
+      "type": "string",
+      "description": "Status of the custom category build.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "CustomCategoryStatus",
+        "modelAsString": true
+      }
     },
     "ImageCategoriesAnalysis": {
       "type": "object",
@@ -1928,6 +1925,19 @@
         "modelAsString": true
       }
     },
+    "TextCustomCategoryAnalysis": {
+      "type": "object",
+      "description": "The text analysis result on custom category.",
+      "properties": {
+        "detected": {
+          "type": "boolean",
+          "description": "Whether the custom category is detected."
+        }
+      },
+      "required": [
+        "detected"
+      ]
+    },
     "TextCustomCategoryVersion": {
       "type": "object",
       "description": "Text custom category",
@@ -1959,9 +1969,9 @@
             "create"
           ]
         },
-        "sampleBlobCopyUrl": {
+        "sampleBlobSnapshotUrl": {
           "type": "string",
-          "description": "URL of copied sample jsonl blob. If sampleBlobUrl is not provided in the request, this field will not be shown in the response.",
+          "description": "Snapshot of copied sample jsonl blob.",
           "readOnly": true
         },
         "version": {
@@ -1977,18 +1987,13 @@
           "readOnly": true
         },
         "status": {
-          "$ref": "#/definitions/CategoryStatus",
+          "$ref": "#/definitions/CustomCategoryStatus",
           "description": "Status of the custom category",
           "readOnly": true
         },
-        "buildInfo": {
-          "$ref": "#/definitions/TextCustomizedCategoryBuildInfo",
-          "description": "Build information for the custom category.",
-          "readOnly": true
-        },
-        "deleteInfo": {
-          "$ref": "#/definitions/TextCustomizedCategoryDeleteInfo",
-          "description": "Delete information for the custom category.",
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message if status is Failed.",
           "readOnly": true
         }
       },
@@ -1996,55 +2001,10 @@
         "categoryName",
         "definition",
         "sampleBlobUrl",
-        "sampleBlobCopyUrl",
+        "sampleBlobSnapshotUrl",
         "version",
         "createdTime",
         "status"
-      ]
-    },
-    "TextCustomCategoryVersionCreateOrUpdate": {
-      "type": "object",
-      "description": "Text custom category",
-      "properties": {
-        "categoryName": {
-          "type": "string",
-          "description": "Name of the custom category",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "definition": {
-          "type": "string",
-          "description": "Definition or description of the custom category.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "sampleBlobUrl": {
-          "type": "string",
-          "description": "URL of sample jsonl blob. Read & write access to the last layer virtual directory is required.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "blobDelimiter": {
-          "type": "string",
-          "description": "Delimiter of blob url. If not provided, '/' will be used as the delimiter to parse the sampleBlobUrl.",
-          "x-ms-mutability": [
-            "update"
-          ]
-        }
-      },
-      "required": [
-        "categoryName",
-        "definition",
-        "sampleBlobUrl"
       ]
     },
     "TextCustomCategoryVersionList": {
@@ -2062,60 +2022,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "TextCustomizedCategoriesAnalysis": {
-      "type": "object",
-      "description": "Analysis result for text customized categories.",
-      "properties": {
-        "categoryName": {
-          "type": "string",
-          "description": "Name of the custom category."
-        },
-        "detected": {
-          "type": "boolean",
-          "description": "Whether the custom category is detected."
-        }
-      },
-      "required": [
-        "categoryName",
-        "detected"
-      ]
-    },
-    "TextCustomizedCategoryBuildInfo": {
-      "type": "object",
-      "description": "Detailed information of the custom category build.",
-      "properties": {
-        "lastBuildTriggeredTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Last build trigger time."
-        },
-        "buildError": {
-          "type": "string",
-          "description": "Error when building the category."
-        }
-      },
-      "required": [
-        "lastBuildTriggeredTime"
-      ]
-    },
-    "TextCustomizedCategoryDeleteInfo": {
-      "type": "object",
-      "description": "Detailed information of the custom category build.",
-      "properties": {
-        "deleteTriggeredTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Last build trigger time."
-        },
-        "deleteError": {
-          "type": "string",
-          "description": "Error when building the category."
-        }
-      },
-      "required": [
-        "deleteTriggeredTime"
       ]
     },
     "TextPromptInjectionResult": {

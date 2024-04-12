@@ -65,20 +65,16 @@ model AnalyzeTextOptions {
 
   @doc("This refers to the type of text analysis output. If no value is assigned, the default value will be \"FourSeverityLevels\".")
   outputType?: AnalyzeTextOutputType = AnalyzeTextOutputType.FourSeverityLevels;
-
-  @doc("Customized categories will be analyzed if they are assigned. If no customized categories are assigned, no analysis on them will be returned.")
-  @added(ContentSafety.Versions.v2024_05_15_Preview)
-  customizedCategories?: CustomizedCategoryOption[];
 }
 
 @added(ContentSafety.Versions.v2024_05_15_Preview)
 @doc("The custom category option for text.")
-model CustomizedCategoryOption {
-  @doc("Name")
+model AnalyzeTextCustomCategoryOption {
+  @doc("Custom category name.")
   categoryName: string;
 
-  @doc("custom category version for inference")
-  version: int32;
+  @doc("Custom category version, if not assigned use the latest version.")
+  version?: int32;
 }
 
 @doc("The text analysis response.")
@@ -88,20 +84,20 @@ model AnalyzeTextResult {
 
   @doc("Analysis result for categories.")
   categoriesAnalysis: TextCategoriesAnalysis[];
-
-  @added(ContentSafety.Versions.v2024_05_15_Preview)
-  @doc("Analysis result for text customized categories")
-  textCustomizedCategoriesAnalysis?: TextCustomizedCategoriesAnalysis[];
 }
 
 @added(ContentSafety.Versions.v2024_05_15_Preview)
-@doc("Analysis result for text customized categories.")
-model TextCustomizedCategoriesAnalysis {
-  @doc("Name of the custom category.")
-  categoryName: string;
-
+@doc("The text analysis result on custom category.")
+model TextCustomCategoryAnalysis {
   @doc("Whether the custom category is detected.")
   detected: boolean;
+}
+
+@added(ContentSafety.Versions.v2024_05_15_Preview)
+@doc("The text analysis response on custom category.")
+model AnalyzeTextCustomCategoryResult {
+  @doc("Analysis result for custom category.")
+  customCategoryAnalysis: TextCustomCategoryAnalysis;
 }
 
 @doc("The result of blocklist match.")
@@ -454,13 +450,9 @@ model TextCustomCategoryVersion {
   @visibility("create", "read", "update")
   sampleBlobUrl: string;
 
-  @doc("Delimiter of blob url. If not provided, '/' will be used as the delimiter to parse the sampleBlobUrl.")
-  @visibility("created", "update")
-  blobDelimiter?: string;
-
-  @doc("URL of copied sample jsonl blob. If sampleBlobUrl is not provided in the request, this field will not be shown in the response.")
+  @doc("Snapshot of copied sample jsonl blob.")
   @visibility("read")
-  sampleBlobCopyUrl: string;
+  sampleBlobSnapshotUrl: string;
 
   @doc("Version number of the custom category.")
   @visibility("read")
@@ -472,45 +464,22 @@ model TextCustomCategoryVersion {
 
   @doc("Status of the custom category")
   @visibility("read")
-  status: CategoryStatus;
+  status: CustomCategoryStatus;
 
-  @doc("Build information for the custom category.")
+  @doc("Error message if status is Failed.")
   @visibility("read")
-  buildInfo?: TextCustomizedCategoryBuildInfo;
-
-  @doc("Delete information for the custom category.")
-  @visibility("read")
-  deleteInfo?: TextCustomizedCategoryDeleteInfo;
-}
-
-@doc("Detailed information of the custom category build.")
-model TextCustomizedCategoryBuildInfo {
-  @doc("Last build trigger time.")
-  lastBuildTriggeredTime: utcDateTime;
-
-  @doc("Error when building the category.")
-  buildError?: string;
-}
-
-@doc("Detailed information of the custom category build.")
-model TextCustomizedCategoryDeleteInfo {
-  @doc("Last build trigger time.")
-  deleteTriggeredTime: utcDateTime;
-
-  @doc("Error when building the category.")
-  deleteError?: string;
+  errorMessage?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "MUST fix in next update"
+@added(ContentSafety.Versions.v2024_05_15_Preview)
 @doc("Status of the custom category build.")
-union CategoryStatus {
+union CustomCategoryStatus {
   string,
-  "BuildNotStarted",
-  "BuildRunning",
-  "BuildSucceeded",
-  "BuildFailed",
-  "DeleteRunning",
-  "DeleteFailed",
+  "NotStarted",
+  "Running",
+  "Succeeded",
+  "Failed",
 }
 
 @added(ContentSafety.Versions.v2024_05_15_Preview)
