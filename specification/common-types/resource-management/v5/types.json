@@ -502,14 +502,15 @@
     "systemData": {
       "description": "Metadata pertaining to creation and last modification of the resource.",
       "type": "object",
-      "readOnly": true,
       "properties": {
         "createdBy": {
           "type": "string",
+          "readOnly": true,
           "description": "The identity that created the resource."
         },
         "createdByType": {
           "type": "string",
+          "readOnly": true,
           "description": "The type of identity that created the resource.",
           "enum": [
             "User",
@@ -524,15 +525,18 @@
         },
         "createdAt": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
           "description": "The timestamp of resource creation (UTC)."
         },
         "lastModifiedBy": {
           "type": "string",
+          "readOnly": true,
           "description": "The identity that last modified the resource."
         },
         "lastModifiedByType": {
           "type": "string",
+          "readOnly": true,
           "description": "The type of identity that last modified the resource.",
           "enum": [
             "User",
@@ -547,6 +551,7 @@
         },
         "lastModifiedAt": {
           "type": "string",
+          "readOnly": true,
           "format": "date-time",
           "description": "The timestamp of resource last modification (UTC)"
         }
