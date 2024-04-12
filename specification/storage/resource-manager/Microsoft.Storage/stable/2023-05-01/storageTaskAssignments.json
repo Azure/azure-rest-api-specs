@@ -548,7 +548,6 @@
     },
     "ExecutionTrigger": {
       "type": "object",
-      "discriminator": "type",
       "properties": {
         "type": {
           "type": "string",
@@ -561,76 +560,30 @@
             "modelAsString": false
           },
           "description": "The trigger type of the storage task assignment execution"
+        },
+        "parameters": {
+          "$ref": "#/definitions/TriggerParameters",
+          "description": "The trigger parameters of the storage task assignment execution"
         }
       },
       "required": [
-        "type"
+        "type",
+        "parameters"
       ],
       "description": "Execution trigger for storage task assignment"
     },
-    "RunOnceTrigger": {
-      "type": "object",
-      "properties": {
-        "parameters": {
-          "$ref": "#/definitions/RunOnceTriggerParameters",
-          "description": "Execution trigger parameters of the storage task assignment"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ExecutionTrigger"
-        }
-      ],
-      "required": [
-        "parameters"
-      ],
-      "x-ms-discriminator-value": "RunOnce",
-      "description": "Run once execution trigger parameters of the storage task assignment"
-    },
-    "RunOnceTriggerParameters": {
-      "type": "object",
-      "properties": {
-        "startOn": {
-          "type": "string",
-          "description": "startOn for task execution"
-        }
-      },
-      "required": [
-        "startOn"
-      ],
-      "description": "The trigger parameters of the storage task assignment run once execution"
-    },
-    "OnScheduleTrigger": {
-      "type": "object",
-      "properties": {
-        "parameters": {
-          "$ref": "#/definitions/OnScheduleTriggerParameters",
-          "description": "Execution trigger parameters of the storage task assignment"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ExecutionTrigger"
-        }
-      ],
-      "required": [
-        "parameters"
-      ],
-      "x-ms-discriminator-value": "OnSchedule",
-      "description": "On schedule execution trigger parameters of the storage task assignment"
-    },
-    "OnScheduleTriggerParameters": {
+    "TriggerParameters": {
       "type": "object",
       "properties": {
         "startFrom": {
           "type": "string",
-          "description": "When to start task execution"
+          "description": "When to start task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'"
         },
         "interval": {
           "type": "integer",
           "minimum": 1,
           "format": "int32",
-          "description": "Run interval of task execution"
+          "description": "Run interval of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'"
         },
         "intervalUnit": {
           "type": "string",
@@ -641,20 +594,18 @@
             "name": "IntervalUnit",
             "modelAsString": false
           },
-          "description": "Run interval unit of task execution"
+          "description": "Run interval unit of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'"
         },
         "endBy": {
           "type": "string",
-          "description": "When to end task execution"
+          "description": "When to end task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'"
+        },
+        "startOn": {
+          "type": "string",
+          "description": "When to start task execution. This is an optional field when ExecutionTrigger.properties.type is 'RunOnce'; this property should not be present when ExecutionTrigger.properties.type is 'OnSchedule'"
         }
       },
-      "required": [
-        "startFrom",
-        "interval",
-        "intervalUnit",
-        "endBy"
-      ],
-      "description": "The trigger parameters of the storage task assignment on schedule execution"
+      "description": "The trigger parameters update for the storage task assignment execution"
     },
     "ExecutionConstraints": {
       "type": "object",
@@ -812,13 +763,13 @@
       "properties": {
         "startFrom": {
           "type": "string",
-          "description": "When to start task execution"
+          "description": "When to start task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'"
         },
         "interval": {
           "type": "integer",
           "minimum": 1,
           "format": "int32",
-          "description": "Run interval of task execution"
+          "description": "Run interval of task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'"
         },
         "intervalUnit": {
           "type": "string",
@@ -829,15 +780,15 @@
             "name": "IntervalUnit",
             "modelAsString": false
           },
-          "description": "Run interval unit of task execution"
+          "description": "Run interval unit of task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'"
         },
         "endBy": {
           "type": "string",
-          "description": "When to end task execution"
+          "description": "When to end task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'"
         },
         "startOn": {
           "type": "string",
-          "description": "startOn for task execution"
+          "description": "When to start task execution. This is a mutable field when ExecutionTrigger.properties.type is 'RunOnce'; this property should not be present when ExecutionTrigger.properties.type is 'OnSchedule'"
         }
       },
       "description": "The trigger parameters update for the storage task assignment execution"
