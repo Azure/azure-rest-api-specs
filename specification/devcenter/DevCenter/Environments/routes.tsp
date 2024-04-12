@@ -44,6 +44,9 @@ interface Environments {
       projectName: string;
 
       @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+      @maxLength(36)
+      @minLength(2)
+      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
       @path
       userId: string;
     },
@@ -70,6 +73,9 @@ interface Environments {
       projectName: string;
 
       @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+      @maxLength(36)
+      @minLength(2)
+      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
       @path
       userId: string;
 
@@ -115,6 +121,9 @@ interface Environments {
       projectName: string;
 
       @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+      @maxLength(36)
+      @minLength(2)
+      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
       @path
       userId: string;
 
@@ -148,6 +157,9 @@ interface Environments {
       projectName: string;
 
       @doc("The AAD object id of the user. If value is 'me', the identity is taken from the authentication context.")
+      @maxLength(36)
+      @minLength(2)
+      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$|^me$")
       @path
       userId: string;
 
