@@ -58,13 +58,13 @@
           }
         },
         "x-ms-examples": {
-          "Get data collection endpoint": {
+          "List NSP configs by data collection endpoint": {
             "$ref": "./examples/NSPForDataCollectionEndpoints_List.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/dataCollectionEndpoints/{dataCollectionEndpointName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/dataCollectionEndpoints/{dataCollectionEndpointName}/networkSecurityPerimeterConfigurations/{configurationName}": {
       "get": {
         "tags": [
           "NetworkSecurityPerimeterConfigurations"
@@ -109,13 +109,13 @@
           }
         },
         "x-ms-examples": {
-          "Get data collection endpoint": {
+          "Get NSP configs by name for data collection endpoint": {
             "$ref": "./examples/NSPForDataCollectionEndpoints_Get.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers//Microsoft.Insights/dataCollectionEndpoints/{dataCollectionEndpointName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers//Microsoft.Insights/dataCollectionEndpoints/{dataCollectionEndpointName}/networkSecurityPerimeterConfigurations/{configurationName}/reconcile": {
       "post": {
         "tags": [
           "NetworkSecurityPerimeterConfigurations"
@@ -160,7 +160,7 @@
           }
         },
         "x-ms-examples": {
-          "Get data collection endpoint": {
+          "Reconcile NSP config for data collection endpoint": {
             "$ref": "./examples/NSPForDataCollectionEndpoints_Reconcile.json"
           }
         }
@@ -169,7 +169,7 @@
   },
   "definitions": {
     "NetworkSecurityPerimeterConfiguration": {
-      "description": "NSP Configuration for a server.",
+      "description": "NSP Configuration",
       "type": "object",
       "allOf": [
         {
@@ -185,7 +185,7 @@
       }
     },
     "NetworkSecurityPerimeterConfigurationListResult": {
-      "description": "A list of NSP configurations for a server.",
+      "description": "A list of NSP configurations.",
       "type": "object",
       "properties": {
         "value": {
