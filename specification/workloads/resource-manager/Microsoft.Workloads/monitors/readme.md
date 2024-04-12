@@ -38,7 +38,6 @@ These settings apply only when `--tag=package-preview-2023-12-01-preview` is spe
 ```yaml $(tag) == 'package-preview-2023-12-01-preview'
 input-file:
   - preview/2023-12-01-preview/monitors.json
-  - ../common-types/v2/commonTypes.json
   - ../operations/preview/2023-12-01-preview/operations.json
 suppressions:
   - code: GuidUsage
