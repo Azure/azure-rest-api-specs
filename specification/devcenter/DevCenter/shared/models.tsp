@@ -44,7 +44,6 @@ model OperationStatus {
   properties?: unknown;
 
   @doc("Operation Error message.")
-  @typeChangedFrom(APIVersions.v2024_02_01, Azure.Core.Foundations.Error)
   error?: Azure.Core.Foundations.Error;
 }
 
