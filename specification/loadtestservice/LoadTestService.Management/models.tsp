@@ -18,6 +18,7 @@ namespace Microsoft.LoadTestService;
 
 @doc("LoadTest details.")
 model LoadTestResource is TrackedResource<LoadTestProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Existing API"
   @doc("Load Test name")
   @key("loadTestName")
   @path
@@ -28,16 +29,20 @@ model LoadTestResource is TrackedResource<LoadTestProperties> {
 }
 
 @doc("Resources provisioning states.")
-enum ResourceState {
+union ResourceState {
+  string,
+
   @doc("Deleted state.")
   Deleted: "Deleted",
 
-  ...ResourceProvisioningState,
+  ResourceProvisioningState,
 }
 
 // can be renamed but since the type is already used in published docs, it will be a breaking change.
 @doc("Managed identity type to use for accessing encryption key Url.")
-enum type {
+union type {
+  string,
+
   @doc("System assigned identity.")
   SystemAssigned: "SystemAssigned",
 
@@ -118,6 +123,7 @@ model QuotaResourceProperties {
 @doc("Quota bucket details object.")
 @parentResource(ArmLocationResource<"Subscription">)
 model QuotaResource is ProxyResource<QuotaResourceProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Existing API"
   @doc("The quota name.")
   @key("quotaBucketName")
   @path
