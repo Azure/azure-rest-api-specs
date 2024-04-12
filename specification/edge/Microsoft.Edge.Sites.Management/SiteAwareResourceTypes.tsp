@@ -18,7 +18,8 @@ namespace Microsoft.Edge;
 @singleton("default")
 @tenantResource
 @includeInapplicableMetadataInPayload(false)
-model SiteAwareResourceTypes is ProxyResource<SiteAwareResourceTypesProperties> {
+model SiteAwareResourceTypes
+  is ProxyResource<SiteAwareResourceTypesProperties> {
   @doc("Name of the resource")
   @path
   @key("siteAwareResourceType")
@@ -28,9 +29,9 @@ model SiteAwareResourceTypes is ProxyResource<SiteAwareResourceTypesProperties> 
   name: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
 @armResourceOperations
 @encodedName("application/json", "SiteAwareResourceTypes")
-#suppress "@azure-tools/typespec-azure-core/no-operation-id" "For backward compatibility"
 @tag("SiteAwareResourceTypes")
 interface SiteAwareResourceTypesOperations {
   @doc("Get operation on SiteAwareResourceTypes resource")
