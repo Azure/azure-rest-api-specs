@@ -3025,6 +3025,48 @@
         }
       }
     },
+    "Azure.Core.Foundations.OperationState": {
+      "type": "string",
+      "description": "Enum describing allowed operation states.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled by the user."
+          }
+        ]
+      }
+    },
     "Azure.Core.azureLocation": {
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
@@ -3355,7 +3397,7 @@
           "description": "The kind of operation that occurred."
         },
         "status": {
-          "$ref": "#/definitions/DevBoxOperationStatus",
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
           "description": "The operation status."
         },
         "createdByObjectId": {
@@ -3417,48 +3459,6 @@
             "name": "Repair",
             "value": "Repair",
             "description": "The operation represents a Dev Box repair."
-          }
-        ]
-      }
-    },
-    "DevBoxOperationStatus": {
-      "type": "string",
-      "description": "The status of a Dev Box operation.",
-      "enum": [
-        "NotStarted",
-        "Running",
-        "Succeeded",
-        "Canceled",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "DevBoxOperationStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotStarted",
-            "value": "NotStarted",
-            "description": "The operation has not started."
-          },
-          {
-            "name": "Running",
-            "value": "Running",
-            "description": "The operation is running."
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "The operation succeeded."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "The operation was canceled."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "The operation failed."
           }
         ]
       }
