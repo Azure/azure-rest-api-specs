@@ -935,8 +935,8 @@
         "operationId": "ResourceModels_List",
         "description": "List subscription level Models.",
         "x-ms-examples": {
-          "ListResourceModels": {
-            "$ref": "./examples/ListResourceModels.json"
+          "ListModels": {
+            "$ref": "./examples/ListModels.json"
           }
         },
         "parameters": [
@@ -951,7 +951,7 @@
           "200": {
             "description": "OK. Successfully retrieved models.",
             "schema": {
-              "$ref": "#/definitions/SkuModelListResult"
+              "$ref": "#/definitions/ModelPropertiesListResult"
             }
           },
           "default": {
@@ -5744,7 +5744,7 @@
         }
       }
     },
-    "SkuModelListResult": {
+    "ModelPropertiesListResult": {
       "type": "object",
       "properties": {
         "nextLink": {
@@ -5754,17 +5754,17 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SkuModel"
+            "$ref": "#/definitions/ModelProperties"
           },
           "x-ms-identifiers": [
             "id"
           ],
-          "description": "Gets the list of Cognitive Services sku Model and their properties."
+          "description": "Gets the list of Cognitive Services Model properties."
         }
       },
       "description": "The list of cognitive services models."
     },
-    "SkuModel": {
+    "ModelProperties": {
       "description": "Cognitive Services Model Get Result.",
       "type": "object",
       "properties": {
