@@ -46,22 +46,22 @@
       "name": "Catalogs"
     },
     {
+      "name": "Certificates"
+    },
+    {
       "name": "Images"
     },
     {
-      "name": "DeviceGroups"
+      "name": "Products"
     },
     {
-      "name": "Certificates"
+      "name": "DeviceGroups"
     },
     {
       "name": "Deployments"
     },
     {
       "name": "Devices"
-    },
-    {
-      "name": "Products"
     }
   ],
   "paths": {
@@ -385,14 +385,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -426,6 +426,15 @@
         "description": "List Certificate resources by Catalog",
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
             "$ref": "#/parameters/CustomFilterQueryParameter"
           },
           {
@@ -436,15 +445,6 @@
           },
           {
             "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "catalogName",
@@ -626,7 +626,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/ProofOfPossessionNonceRequest"
-            }
+            },
+            "x-ms-client-name": "proofOfPossessionNonceRequest"
           }
         ],
         "responses": {
@@ -706,6 +707,15 @@
         "description": "List Image resources by Catalog",
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
             "$ref": "#/parameters/CustomFilterQueryParameter"
           },
           {
@@ -716,15 +726,6 @@
           },
           {
             "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "catalogName",
@@ -929,14 +930,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -979,14 +980,6 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "catalogName",
-            "in": "path",
-            "description": "Name of catalog",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$"
-          },
-          {
             "$ref": "#/parameters/CustomFilterQueryParameter"
           },
           {
@@ -997,6 +990,14 @@
           },
           {
             "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           }
         ],
         "responses": {
@@ -1041,14 +1042,6 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "catalogName",
-            "in": "path",
-            "description": "Name of catalog",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$"
-          },
-          {
             "$ref": "#/parameters/CustomFilterQueryParameter"
           },
           {
@@ -1061,13 +1054,22 @@
             "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
           },
           {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
+          },
+          {
             "name": "listDeviceGroupsRequest",
             "in": "body",
             "description": "List device groups for catalog.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ListDeviceGroupsRequest"
-            }
+            },
+            "x-ms-client-name": "listDeviceGroupsRequest"
           }
         ],
         "responses": {
@@ -1112,14 +1114,6 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "catalogName",
-            "in": "path",
-            "description": "Name of catalog",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$"
-          },
-          {
             "$ref": "#/parameters/CustomFilterQueryParameter"
           },
           {
@@ -1130,6 +1124,14 @@
           },
           {
             "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           }
         ],
         "responses": {
@@ -1174,14 +1176,6 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "catalogName",
-            "in": "path",
-            "description": "Name of catalog",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9_-]{1,50}$"
-          },
-          {
             "$ref": "#/parameters/CustomFilterQueryParameter"
           },
           {
@@ -1192,6 +1186,14 @@
           },
           {
             "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "description": "Name of catalog",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,50}$"
           }
         ],
         "responses": {
@@ -1453,14 +1455,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1521,14 +1523,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1617,6 +1619,15 @@
         "description": "List DeviceGroup resources by Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.",
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
             "$ref": "#/parameters/CustomFilterQueryParameter"
           },
           {
@@ -1627,15 +1638,6 @@
           },
           {
             "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "catalogName",
@@ -1887,14 +1889,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1963,14 +1965,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -2043,21 +2045,22 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/ClaimDevicesRequest"
-            }
+            },
+            "x-ms-client-name": "claimDevicesRequest"
           }
         ],
         "responses": {
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -2151,6 +2154,15 @@
         "description": "List Deployment resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.",
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
             "$ref": "#/parameters/CustomFilterQueryParameter"
           },
           {
@@ -2161,15 +2173,6 @@
           },
           {
             "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "catalogName",
@@ -2438,14 +2441,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -2849,14 +2852,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -2937,7 +2940,8 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/GenerateCapabilityImageRequest"
-            }
+            },
+            "x-ms-client-name": "generateDeviceCapabilityRequest"
           }
         ],
         "responses": {
@@ -2950,14 +2954,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -3069,21 +3073,22 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/Image"
-            }
+            },
+            "x-ms-client-name": "uploadImageRequest"
           }
         ],
         "responses": {
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -3584,6 +3589,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DeviceGroupUpdateProperties",
+          "description": "The updatable properties of the DeviceGroup.",
           "x-ms-client-flatten": true
         }
       }
@@ -3686,19 +3692,6 @@
         "value"
       ]
     },
-    "DevicePatchProperties": {
-      "type": "object",
-      "description": "The properties of device patch",
-      "properties": {
-        "deviceGroupId": {
-          "type": "string",
-          "description": "Device group id"
-        }
-      },
-      "required": [
-        "deviceGroupId"
-      ]
-    },
     "DeviceProperties": {
       "type": "object",
       "description": "The properties of device",
@@ -3751,6 +3744,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DeviceUpdateProperties",
+          "description": "The updatable properties of the Device.",
           "x-ms-client-flatten": true
         }
       }
@@ -4156,6 +4150,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ProductUpdateProperties",
+          "description": "The updatable properties of the Product.",
           "x-ms-client-flatten": true
         }
       }
@@ -4301,30 +4296,6 @@
             "name": "No3rdPartyAppUpdates",
             "value": "No3rdPartyAppUpdates",
             "description": "No update for 3rd party app policy."
-          }
-        ]
-      }
-    },
-    "Versions": {
-      "type": "string",
-      "description": "Azure Sphere API versions.",
-      "enum": [
-        "2022-09-01-preview",
-        "2024-04-01"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "v2022_09_01",
-            "value": "2022-09-01-preview",
-            "description": "Public preview API version."
-          },
-          {
-            "name": "v2024_04_01",
-            "value": "2024-04-01",
-            "description": "Initial GA API version."
           }
         ]
       }

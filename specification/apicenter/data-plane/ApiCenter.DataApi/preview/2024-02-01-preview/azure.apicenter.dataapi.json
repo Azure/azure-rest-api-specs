@@ -1,0 +1,1842 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure API Center Data API",
+    "version": "2024-02-01-preview",
+    "description": "Data API introduces endpoints to manage your API Center resources.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "https://{serviceName}.data.azure-apicenter.net",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "serviceName",
+        "in": "path",
+        "description": "Region-unique API Center service name",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "AadOauth2Auth": [
+        "https://azure-apicenter.net/user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "AadOauth2Auth": {
+      "type": "oauth2",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://azure-apicenter.net/user_impersonation": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/apis": {
+      "get": {
+        "operationId": "Apis_ListAll",
+        "description": "List a collection of APIs across workspaces.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedApiAll"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Apis_ListAll": {
+            "$ref": "./examples/Apis_ListAll.json"
+          }
+        }
+      }
+    },
+    "/environments": {
+      "get": {
+        "operationId": "Environments_ListAll",
+        "description": "List a collection of environments across workspaces.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedEnvironmentAll"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_ListAll": {
+            "$ref": "./examples/Environments_ListAll.json"
+          }
+        }
+      }
+    },
+    "/workspaces/{workspaceName}/apis": {
+      "get": {
+        "operationId": "Apis_List",
+        "description": "List a collection of APIs.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Workspace identifier.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedApi"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Apis_List": {
+            "$ref": "./examples/Apis_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/workspaces/{workspaceName}/apis/{apiName}": {
+      "get": {
+        "operationId": "Apis_Get",
+        "description": "Get an API.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Workspace identifier.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50
+          },
+          {
+            "name": "apiName",
+            "in": "path",
+            "description": "Api identifier.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Api"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Apis_Get": {
+            "$ref": "./examples/Apis_Get.json"
+          }
+        }
+      }
+    },
+    "/workspaces/{workspaceName}/apis/{apiName}/deployments": {
+      "get": {
+        "operationId": "ApiDeployments_ListDeployments",
+        "description": "List a collection of API deployments.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Workspace identifier.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50
+          },
+          {
+            "name": "apiName",
+            "in": "path",
+            "description": "Api identifier.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedApiDeployment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiDeployments_ListDeployments": {
+            "$ref": "./examples/ApiDeployments_ListDeployments.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/workspaces/{workspaceName}/apis/{apiName}/deployments/{deploymentName}": {
+      "get": {
+        "operationId": "ApiDeployments_GetDeployment",
+        "description": "Get an API deployment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Workspace identifier.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50
+          },
+          {
+            "name": "apiName",
+            "in": "path",
+            "description": "Api identifier.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "Deployment identifier.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ApiDeployment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiDeployments_GetDeployment": {
+            "$ref": "./examples/ApiDeployments_GetDeployment.json"
+          }
+        }
+      }
+    },
+    "/workspaces/{workspaceName}/apis/{apiName}/versions": {
+      "get": {
+        "operationId": "ApiVersions_ListVersions",
+        "description": "List a collection of API versions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Workspace identifier.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50
+          },
+          {
+            "name": "apiName",
+            "in": "path",
+            "description": "Api identifier.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedApiVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiVersions_ListVersions": {
+            "$ref": "./examples/ApiVersions_ListVersions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/workspaces/{workspaceName}/apis/{apiName}/versions/{versionName}": {
+      "get": {
+        "operationId": "ApiVersions_GetVersion",
+        "description": "Get an API version.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Workspace identifier.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50
+          },
+          {
+            "name": "apiName",
+            "in": "path",
+            "description": "Api identifier.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "Version identifier.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ApiVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiVersions_GetVersion": {
+            "$ref": "./examples/ApiVersions_GetVersion.json"
+          }
+        }
+      }
+    },
+    "/workspaces/{workspaceName}/apis/{apiName}/versions/{versionName}/definitions": {
+      "get": {
+        "operationId": "ApiDefinitions_ListDefinitions",
+        "description": "List a collection of API definitions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Workspace identifier.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50
+          },
+          {
+            "name": "apiName",
+            "in": "path",
+            "description": "Api identifier.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "Version identifier.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedApiDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiDefinitions_ListDefinitions": {
+            "$ref": "./examples/ApiDefinitions_ListDefinitions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/workspaces/{workspaceName}/apis/{apiName}/versions/{versionName}/definitions/{definitionName}": {
+      "get": {
+        "operationId": "ApiDefinitions_GetDefinition",
+        "description": "Get an API definition.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Workspace identifier.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50
+          },
+          {
+            "name": "apiName",
+            "in": "path",
+            "description": "Api identifier.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "Version identifier.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50
+          },
+          {
+            "name": "definitionName",
+            "in": "path",
+            "description": "Definition identifier.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ApiDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiDefinitions_GetDefinition": {
+            "$ref": "./examples/ApiDefinitions_GetDefinition.json"
+          }
+        }
+      }
+    },
+    "/workspaces/{workspaceName}/apis/{apiName}/versions/{versionName}/definitions/{definitionName}:exportSpecification": {
+      "post": {
+        "operationId": "ApiDefinitions_ExportSpecification",
+        "description": "Export an API specification asynchronously.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Workspace identifier.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50
+          },
+          {
+            "name": "apiName",
+            "in": "path",
+            "description": "Api identifier.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "Version identifier.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50
+          },
+          {
+            "name": "definitionName",
+            "in": "path",
+            "description": "API definition identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/ApiSpecExportResult",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiDefinitions_ExportSpecification": {
+            "$ref": "./examples/ApiDefinitions_ExportSpecification.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/workspaces/{workspaceName}/apis/{apiName}/versions/{versionName}/definitions/{definitionName}/operations/{operationId}": {
+      "get": {
+        "operationId": "ApiDefinitions_GetExportSpecificationOperationStatus",
+        "description": "Gets status of a an API specification export operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Workspace identifier.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50
+          },
+          {
+            "name": "apiName",
+            "in": "path",
+            "description": "Api identifier.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50
+          },
+          {
+            "name": "versionName",
+            "in": "path",
+            "description": "Version identifier.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50
+          },
+          {
+            "name": "definitionName",
+            "in": "path",
+            "description": "API definition identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The unique ID of the operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/ApiSpecExportResult",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiDefinitions_GetExportSpecificationOperationStatus": {
+            "$ref": "./examples/ApiDefinitions_GetExportSpecificationOperationStatus.json"
+          }
+        }
+      }
+    },
+    "/workspaces/{workspaceName}/environments": {
+      "get": {
+        "operationId": "Environments_List",
+        "description": "List a collection of environments.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Workspace identifier.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedEnvironment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_List": {
+            "$ref": "./examples/Environments_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/workspaces/{workspaceName}/environments/{environmentName}": {
+      "get": {
+        "operationId": "Environments_Get",
+        "description": "Get an environment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "Workspace identifier.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Environment identifier.",
+            "required": true,
+            "type": "string",
+            "maxLength": 50
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Environment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Environments_Get": {
+            "$ref": "./examples/Environments_Get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Api": {
+      "type": "object",
+      "description": "API resource model.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Api identifier.",
+          "maxLength": 50
+        },
+        "title": {
+          "type": "string",
+          "description": "The name of the API.",
+          "maxLength": 50
+        },
+        "summary": {
+          "type": "string",
+          "description": "Short description of the API.",
+          "maxLength": 200
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the API",
+          "maxLength": 1000
+        },
+        "kind": {
+          "$ref": "#/definitions/ApiKind",
+          "description": "Kind of API. For example, REST or GraphQL."
+        },
+        "lifecycleStage": {
+          "$ref": "#/definitions/LifecycleStage",
+          "description": "Current lifecycle stage of the API.",
+          "readOnly": true
+        },
+        "termsOfService": {
+          "$ref": "#/definitions/TermsOfService",
+          "description": "Terms of service for the API."
+        },
+        "license": {
+          "$ref": "#/definitions/License",
+          "description": "The license information for the API."
+        },
+        "externalDocumentation": {
+          "type": "array",
+          "description": "External documentation",
+          "items": {
+            "$ref": "#/definitions/ExternalDocumentation"
+          },
+          "x-ms-identifiers": []
+        },
+        "contacts": {
+          "type": "array",
+          "description": "Points of contact for the API.",
+          "items": {
+            "$ref": "#/definitions/Contact"
+          },
+          "x-ms-identifiers": []
+        },
+        "customProperties": {
+          "type": "object",
+          "description": "The custom metadata defined for API entities."
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last updated date and time.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "title",
+        "kind"
+      ]
+    },
+    "ApiDefinition": {
+      "type": "object",
+      "description": "API definition resource model.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Definition identifier.",
+          "maxLength": 50
+        },
+        "title": {
+          "type": "string",
+          "description": "The name of the API definition.",
+          "maxLength": 50
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the API definition.",
+          "maxLength": 1000
+        },
+        "specification": {
+          "$ref": "#/definitions/ApiSpecification",
+          "description": "The API specification details."
+        }
+      },
+      "required": [
+        "name",
+        "title"
+      ]
+    },
+    "ApiDeployment": {
+      "type": "object",
+      "description": "API deployment resource model.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Deployment identifier.",
+          "maxLength": 50
+        },
+        "title": {
+          "type": "string",
+          "description": "The name of the deployment.",
+          "maxLength": 50
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the deployment.",
+          "maxLength": 1000
+        },
+        "environment": {
+          "type": "string",
+          "description": "The name of the deployment environment."
+        },
+        "server": {
+          "$ref": "#/definitions/ApiDeploymentServer",
+          "description": "The server information of the API deployment."
+        },
+        "customProperties": {
+          "type": "object",
+          "description": "The custom metadata defined for API deployment entities."
+        },
+        "recommended": {
+          "type": "boolean",
+          "description": "Indicates if this is currently recommended deployment."
+        }
+      },
+      "required": [
+        "name",
+        "title",
+        "environment",
+        "server"
+      ]
+    },
+    "ApiDeploymentServer": {
+      "type": "object",
+      "description": "Api Deployment Server",
+      "properties": {
+        "runtimeUris": {
+          "type": "array",
+          "description": "Base runtime URIs for this deployment.",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "required": [
+        "runtimeUris"
+      ]
+    },
+    "ApiKind": {
+      "type": "string",
+      "description": "API kind",
+      "enum": [
+        "rest",
+        "graphql",
+        "grpc",
+        "soap",
+        "webhook",
+        "websocket"
+      ],
+      "x-ms-enum": {
+        "name": "ApiKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Rest",
+            "value": "rest",
+            "description": "REST API"
+          },
+          {
+            "name": "Graphql",
+            "value": "graphql",
+            "description": "GraphQL API"
+          },
+          {
+            "name": "Grpc",
+            "value": "grpc",
+            "description": "GRPC API"
+          },
+          {
+            "name": "Soap",
+            "value": "soap",
+            "description": "SOAP API"
+          },
+          {
+            "name": "Webhook",
+            "value": "webhook",
+            "description": "Webhook API"
+          },
+          {
+            "name": "Websocket",
+            "value": "websocket",
+            "description": "Websocket API"
+          }
+        ]
+      }
+    },
+    "ApiSpecExportResult": {
+      "type": "object",
+      "description": "Export specification result model.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The result of the specification export."
+        },
+        "format": {
+          "$ref": "#/definitions/ApiSpecExportResultFormat",
+          "description": "The format of the specification export result."
+        }
+      },
+      "required": [
+        "value",
+        "format"
+      ]
+    },
+    "ApiSpecExportResultFormat": {
+      "type": "string",
+      "description": "Export specification result format",
+      "enum": [
+        "link"
+      ],
+      "x-ms-enum": {
+        "name": "ApiSpecExportResultFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Link",
+            "value": "link",
+            "description": "Link format"
+          }
+        ]
+      }
+    },
+    "ApiSpecification": {
+      "type": "object",
+      "description": "API specification",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "API specification name, e.g. 'swagger' or 'openapi'."
+        },
+        "version": {
+          "type": "string",
+          "description": "API specification version, e.g. '3.0.1'."
+        }
+      },
+      "required": [
+        "name",
+        "version"
+      ]
+    },
+    "ApiVersion": {
+      "type": "object",
+      "description": "API version resource model.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Version identifier.",
+          "maxLength": 50
+        },
+        "title": {
+          "type": "string",
+          "description": "Version title."
+        },
+        "lifecycleStage": {
+          "$ref": "#/definitions/LifecycleStage",
+          "description": "Current lifecycle stage of the API version."
+        }
+      },
+      "required": [
+        "name",
+        "title",
+        "lifecycleStage"
+      ]
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": []
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.Core.Foundations.OperationState": {
+      "type": "string",
+      "description": "Enum describing allowed operation states.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled by the user."
+          }
+        ]
+      }
+    },
+    "Contact": {
+      "type": "object",
+      "description": "API contact information",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the contact.",
+          "maxLength": 100
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL for the contact."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address for the contact.",
+          "maxLength": 100
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "Environment": {
+      "type": "object",
+      "description": "Environment resource model.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Environment identifier.",
+          "maxLength": 50
+        },
+        "title": {
+          "type": "string",
+          "description": "The name of the environment.",
+          "maxLength": 50
+        },
+        "kind": {
+          "$ref": "#/definitions/EnvironmentKind",
+          "description": "Kind of deployment environment."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the environment.",
+          "maxLength": 1000
+        },
+        "server": {
+          "$ref": "#/definitions/EnvironmentServer",
+          "description": "Server information of the environment."
+        },
+        "onboarding": {
+          "$ref": "#/definitions/EnvironmentOnboardingModel",
+          "description": "Onboarding information for this environment."
+        },
+        "customProperties": {
+          "type": "object",
+          "description": "The custom metadata defined for environment entities."
+        }
+      },
+      "required": [
+        "name",
+        "title",
+        "kind"
+      ]
+    },
+    "EnvironmentKind": {
+      "type": "string",
+      "description": "Environment kind",
+      "enum": [
+        "development",
+        "testing",
+        "staging",
+        "production"
+      ],
+      "x-ms-enum": {
+        "name": "EnvironmentKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Development",
+            "value": "development",
+            "description": "Environment is in the development stage"
+          },
+          {
+            "name": "Testing",
+            "value": "testing",
+            "description": "Environment is in the testing stage"
+          },
+          {
+            "name": "Staging",
+            "value": "staging",
+            "description": "Environment is in the staging stage"
+          },
+          {
+            "name": "Production",
+            "value": "production",
+            "description": "Environment is in the production stage"
+          }
+        ]
+      }
+    },
+    "EnvironmentOnboardingModel": {
+      "type": "object",
+      "description": "Environment Onboarding Model",
+      "properties": {
+        "instructions": {
+          "type": "string",
+          "description": "Instructions how to onboard to the environment.",
+          "maxLength": 1000
+        },
+        "developerPortalUris": {
+          "type": "array",
+          "description": "Developer portal URIs of the environment.",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "required": [
+        "instructions",
+        "developerPortalUris"
+      ]
+    },
+    "EnvironmentServer": {
+      "type": "object",
+      "description": "Environment Server",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of the server that represents the environment."
+        },
+        "managementPortalUris": {
+          "type": "array",
+          "description": "URIs of the server's management portal.",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "required": [
+        "type",
+        "managementPortalUris"
+      ]
+    },
+    "ExternalDocumentation": {
+      "type": "object",
+      "description": "Api External Documentation Model",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title of the documentation.",
+          "maxLength": 50
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the documentation.",
+          "maxLength": 1000
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL pointing to the documentation."
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "url"
+      ]
+    },
+    "License": {
+      "type": "object",
+      "description": "API License Model",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the license.",
+          "maxLength": 50
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL pointing to the license details. The URL field is mutually exclusive of the identifier field."
+        },
+        "identifier": {
+          "type": "string",
+          "description": "SPDX license information for the API. The identifier field is mutually exclusive of the URL field.",
+          "maxLength": 200
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "LifecycleStage": {
+      "type": "string",
+      "description": "API Lifecycle Stage",
+      "enum": [
+        "design",
+        "development",
+        "testing",
+        "preview",
+        "production",
+        "deprecated",
+        "retired"
+      ],
+      "x-ms-enum": {
+        "name": "LifecycleStage",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Design",
+            "value": "design",
+            "description": "API is in the design stage"
+          },
+          {
+            "name": "Development",
+            "value": "development",
+            "description": "API is in the development stage"
+          },
+          {
+            "name": "Testing",
+            "value": "testing",
+            "description": "API is in the testing stage"
+          },
+          {
+            "name": "Preview",
+            "value": "preview",
+            "description": "API is in the preview stage"
+          },
+          {
+            "name": "Production",
+            "value": "production",
+            "description": "API is in the production stage"
+          },
+          {
+            "name": "Deprecated",
+            "value": "deprecated",
+            "description": "API is in the deprecated stage"
+          },
+          {
+            "name": "Retired",
+            "value": "retired",
+            "description": "API is in the retired stage"
+          }
+        ]
+      }
+    },
+    "PagedApi": {
+      "type": "object",
+      "description": "Paged collection of Api items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Api items on this page",
+          "items": {
+            "$ref": "#/definitions/Api"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedApiAll": {
+      "type": "object",
+      "description": "Paged collection of API items across workspaces.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Api items on this page",
+          "items": {
+            "$ref": "#/definitions/Api"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedApiDefinition": {
+      "type": "object",
+      "description": "Paged collection of ApiDefinition items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ApiDefinition items on this page",
+          "items": {
+            "$ref": "#/definitions/ApiDefinition"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedApiDeployment": {
+      "type": "object",
+      "description": "Paged collection of ApiDeployment items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ApiDeployment items on this page",
+          "items": {
+            "$ref": "#/definitions/ApiDeployment"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedApiVersion": {
+      "type": "object",
+      "description": "Paged collection of ApiVersion items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ApiVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/ApiVersion"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedEnvironment": {
+      "type": "object",
+      "description": "Paged collection of Environment items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Environment items on this page",
+          "items": {
+            "$ref": "#/definitions/Environment"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedEnvironmentAll": {
+      "type": "object",
+      "description": "Paged collection of Environment items across workspaces",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Environment items on this page",
+          "items": {
+            "$ref": "#/definitions/Environment"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TermsOfService": {
+      "type": "object",
+      "description": "API Terms of Service",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL pointing to the terms of service."
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "Versions": {
+      "type": "string",
+      "description": "API versions",
+      "enum": [
+        "2024-02-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2024_02_01_preview",
+            "value": "2024-02-01-preview",
+            "description": "Preview release version 2024-02-01-preview"
+          }
+        ]
+      }
+    },
+    "Workspace": {
+      "type": "object",
+      "description": "Workspace resource model.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Workspace identifier.",
+          "maxLength": 50
+        },
+        "title": {
+          "type": "string",
+          "description": "Workspace title, e.g. 'My workspace'.",
+          "maxLength": 50
+        },
+        "description": {
+          "type": "string",
+          "description": "Workspace description.",
+          "maxLength": 1000
+        }
+      },
+      "required": [
+        "name",
+        "title"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "Azure.Core.MaxPageSizeQueryParameter": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of result items per page.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.SkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.TopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "description": "The number of result items to return.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

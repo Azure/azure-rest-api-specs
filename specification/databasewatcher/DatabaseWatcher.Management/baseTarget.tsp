@@ -1,7 +1,6 @@
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@azure-tools/typespec-providerhub";
 
 namespace Microsoft.DatabaseWatcher;
 
@@ -42,10 +41,6 @@ model TargetProperties {
   @maxLength(200)
   connectionServerName: string;
 
-  @doc("The target collection status.")
-  @knownValues(TargetCollectionStatus)
-  targetCollectionStatus?: string;
-
   @visibility("read")
   @doc("The provisioning state of the resource.")
   provisioningState?: ResourceProvisioningState;
@@ -53,34 +48,29 @@ model TargetProperties {
 
 @doc("The vault specific details required if using SQL authentication to connect to a target.")
 model VaultSecret {
-  @doc("The ARM ResourceId of the Key Vault instance storing database authentication secrets.")
-  akvResourceId?: ResourceIdentifier<[
+  @doc("The Azure ResourceId of the Key Vault instance storing database authentication secrets.")
+  akvResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.KeyVault/vaults";
     }
   ]>;
 
   @doc("The path to the Key Vault secret storing the login name (aka user name, aka account name) for authentication to a target.")
+  @pattern("^[a-zA-Z0-9-]{1,127}$")
   akvTargetUser?: string;
 
   @doc("The path to the Key Vault secret storing the password for authentication to a target.")
+  @pattern("^[a-zA-Z0-9-]{1,127}$")
   akvTargetPassword?: string;
 }
 
-@doc("The target states.")
-enum TargetCollectionStatus {
-  @doc("Denotes a target that is enabled.")
-  Enabled,
-
-  @doc("Denotes a target that is disabled.")
-  Disabled,
-}
-
 @doc("The type of authentication to use when connecting to a target.")
-enum TargetAuthenticationType {
+union TargetAuthenticationType {
+  string,
+
   @doc("The Azure Active Directory authentication.")
-  Aad,
+  Aad: "Aad",
 
   @doc("The SQL password authentication.")
-  Sql,
+  Sql: "Sql",
 }

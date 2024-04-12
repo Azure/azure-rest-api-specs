@@ -203,17 +203,19 @@
             "description": "Redirection",
             "headers": {
               "location": {
-                "type": "string"
-              },
-              "x-ms-request-id": {
                 "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+                "format": "uri",
+                "description": "The URI of the network's authorization endpoint, which should be followed by the front-end application."
               },
               "x-ms-client-request-id": {
                 "type": "string",
                 "format": "uuid",
                 "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
               }
             }
           },
@@ -828,26 +830,12 @@
       "type": "object",
       "description": "Request to verify number of device - second call",
       "properties": {
-        "networkIdentifier": {
-          "$ref": "#/definitions/NetworkIdentifier",
-          "description": "Identifier for the network to query for this device."
-        },
-        "phoneNumber": {
-          "type": "string",
-          "description": "Phone number in E.164 format (starting with country code), and optionally prefixed with '+'",
-          "pattern": "^\\+?[0-9]{5,15}$"
-        },
-        "hashedPhoneNumber": {
-          "type": "string",
-          "description": "Hashed phone number. SHA-256 (in hexadecimal representation) of the mobile phone number in **E.164 format (starting with country code)**. Optionally prefixed with '+'."
-        },
         "apcCode": {
           "type": "string",
           "description": "The code provided by APC in exchange for the operator code."
         }
       },
       "required": [
-        "networkIdentifier",
         "apcCode"
       ]
     },
@@ -867,10 +855,16 @@
         "hashedPhoneNumber": {
           "type": "string",
           "description": "Hashed phone number. SHA-256 (in hexadecimal representation) of the mobile phone number in **E.164 format (starting with country code)**. Optionally prefixed with '+'."
+        },
+        "redirectUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "Redirect URI to backend application."
         }
       },
       "required": [
-        "networkIdentifier"
+        "networkIdentifier",
+        "redirectUri"
       ]
     },
     "PhoneNumberModel": {
@@ -942,10 +936,7 @@
           "format": "date-time",
           "description": "Datetime of most recent swap for SIM"
         }
-      },
-      "required": [
-        "date"
-      ]
+      }
     },
     "SimSwapVerificationContent": {
       "type": "object",

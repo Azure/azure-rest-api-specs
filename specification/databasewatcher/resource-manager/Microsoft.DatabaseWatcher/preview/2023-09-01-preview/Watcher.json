@@ -330,14 +330,14 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -387,14 +387,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -639,14 +639,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -707,14 +707,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -772,14 +772,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -1098,7 +1098,7 @@
         "adxClusterResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM ResourceId of an Azure Data Explorer cluster.",
+          "description": "The Azure ResourceId of an Azure Data Explorer cluster.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -1147,7 +1147,7 @@
         "adxClusterResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM ResourceId of an Azure Data Explorer cluster.",
+          "description": "The Azure ResourceId of an Azure Data Explorer cluster.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -1260,10 +1260,7 @@
         "privateLinkResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The resource id of the resource the shared private link resource is for.",
-          "x-ms-arm-id-details": {
-            "allowedResources": []
-          }
+          "description": "The resource id of the resource the shared private link resource is for."
         },
         "groupId": {
           "type": "string",
@@ -1337,7 +1334,7 @@
         "sqlEpResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM ResourceId of an Azure SQL DB elastic pool target.",
+          "description": "The Azure ResourceId of an Azure SQL DB elastic pool target.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -1349,7 +1346,7 @@
         "anchorDatabaseResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM ResourceId of the anchor database used to connect to an elastic pool.",
+          "description": "The Azure ResourceId of the anchor database used to connect to an elastic pool.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -1382,7 +1379,7 @@
         "sqlDbResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM ResourceId of an Azure SQL DB single database target.",
+          "description": "The Azure ResourceId of an Azure SQL DB single database target.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -1414,7 +1411,7 @@
         "sqlMiResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM ResourceId of an Azure SQL Managed Instance target.",
+          "description": "The Azure ResourceId of an Azure SQL Managed Instance target.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -1452,7 +1449,7 @@
         "sqlVmResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM ResourceId of an Azure SQL VM target.",
+          "description": "The Azure ResourceId of an Azure SQL VM target.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -1526,30 +1523,6 @@
         ]
       }
     },
-    "TargetCollectionStatus": {
-      "type": "string",
-      "description": "The target states.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "TargetCollectionStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "Denotes a target that is enabled."
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Denotes a target that is disabled."
-          }
-        ]
-      }
-    },
     "TargetListResult": {
       "type": "object",
       "description": "The response of a Target list operation.",
@@ -1592,30 +1565,6 @@
           "description": "The server name to use in the connection string when connecting to a target. Port number and instance name must be specified separately.",
           "maxLength": 200
         },
-        "targetCollectionStatus": {
-          "type": "string",
-          "description": "The target collection status.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "string",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "Denotes a target that is enabled."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "Denotes a target that is disabled."
-              }
-            ]
-          }
-        },
         "provisioningState": {
           "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "The provisioning state of the resource.",
@@ -1636,7 +1585,7 @@
         "akvResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The ARM ResourceId of the Key Vault instance storing database authentication secrets.",
+          "description": "The Azure ResourceId of the Key Vault instance storing database authentication secrets.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
@@ -1647,11 +1596,13 @@
         },
         "akvTargetUser": {
           "type": "string",
-          "description": "The path to the Key Vault secret storing the login name (aka user name, aka account name) for authentication to a target."
+          "description": "The path to the Key Vault secret storing the login name (aka user name, aka account name) for authentication to a target.",
+          "pattern": "^[a-zA-Z0-9-]{1,127}$"
         },
         "akvTargetPassword": {
           "type": "string",
-          "description": "The path to the Key Vault secret storing the password for authentication to a target."
+          "description": "The path to the Key Vault secret storing the password for authentication to a target.",
+          "pattern": "^[a-zA-Z0-9-]{1,127}$"
         }
       }
     },

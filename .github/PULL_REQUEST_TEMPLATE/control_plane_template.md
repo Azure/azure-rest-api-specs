@@ -10,29 +10,19 @@
 
 Please understand this diagram before proceeding. It explains how to get your PR approved & merged.
 
-![diagram](https://github.com/Azure/azure-rest-api-specs/assets/20296335/35140fb9-639e-4e44-ac4b-38b1a20dddf9)
+![diagram](https://github.com/Azure/azure-rest-api-specs/assets/20296335/9e51cff7-28f7-4ae7-99a3-0f4a116c759f)
 
 <details>
-<summary> Click here to see the details of Step 1 </summary>
+<summary>Click here to see the details of Step 1, Breaking Changes review</summary>
 
-### Breaking changes review (Diagram Step 1)
-
-If the automation determines you have breaking changes, i.e. Step 1 from the diagram applies to you,
-  you must follow the [breaking changes process].  
-  **IMPORTANT** This applies even if:
-- The tool fails while it shouldn't, e.g. due to runtime exception, or incorrect detection of breaking changes.
-- You believe there is no need for you to request breaking change approval, for any reason. 
-    Such claims must be reviewed, and the process is the same.
-
+If you are in purview of Step 1 of the diagram, follow the [Breaking Changes review process].  
+**IMPORTANT!** This applies even if you believe your PR was mislabeled, for any reason, including tool failure.
 </details>
 
 <details> 
-<summary> Click here to see the details of Step 2 </summary>
+<summary>Click here to see the details of Step 2, ARM review</summary>
 
-### ARM API changes review (Diagram Step 2)
-
-- For help with Step 2 / "ARM review", see https://aka.ms/azsdk/pr-arm-review.
-
+See https://aka.ms/azsdk/pr-arm-review.
 </details>
 
 <details>
@@ -99,4 +89,4 @@ If one or multiple validation error/warning suppression(s) is detected in your P
 [ARM review queue]: https://aka.ms/azsdk/pr-arm-review#about-the-arm-review-queue
 [public repo merge queue]: https://github.com/Azure/azure-rest-api-specs/pulls?q=is%3Aopen+is%3Apr+label%3AMergeRequested+draft%3Afalse+sort%3Acreated-asc
 [private repo merge queue]: https://github.com/Azure/azure-rest-api-specs-pr/pulls?q=is%3Aopen+is%3Apr+label%3AMergeRequested+-label%3AApproved-OkToMerge+draft%3Afalse+sort%3Acreated-asc
-[breaking changes process]: https://eng.ms/docs/cloud-ai-platform/azure-core/azure-core-pm-and-design/trusted-platform-pm-karimb/service-lifecycle-and-actions-team/service-lifecycle-actions-team/apex/media/launchingproductbreakingchanges#breaking-change-process-1
+[Breaking Changes review process]: https://aka.ms/brch

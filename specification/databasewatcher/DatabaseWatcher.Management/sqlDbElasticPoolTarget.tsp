@@ -1,7 +1,6 @@
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@azure-tools/typespec-providerhub";
 import "./baseTarget.tsp";
 
 namespace Microsoft.DatabaseWatcher;
@@ -16,15 +15,15 @@ model SqlDbElasticPoolTargetProperties extends TargetProperties {
   @doc("The Azure SQL DB elastic pool target.")
   targetType: "SqlEp";
 
-  @doc("The ARM ResourceId of an Azure SQL DB elastic pool target.")
-  sqlEpResourceId: ResourceIdentifier<[
+  @doc("The Azure ResourceId of an Azure SQL DB elastic pool target.")
+  sqlEpResourceId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Sql/servers/elasticPools";
     }
   ]>;
 
-  @doc("The ARM ResourceId of the anchor database used to connect to an elastic pool.")
-  anchorDatabaseResourceId: ResourceIdentifier<[
+  @doc("The Azure ResourceId of the anchor database used to connect to an elastic pool.")
+  anchorDatabaseResourceId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Sql/servers/databases";
     }
