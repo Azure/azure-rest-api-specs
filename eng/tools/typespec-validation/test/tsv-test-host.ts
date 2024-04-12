@@ -1,3 +1,4 @@
+import { RuleResult } from "../src/rule-result.js";
 import { IGitOperation, TsvHost } from "../src/tsv-host.js";
 import { normalizePath } from "../src/utils.js";
 import defaultPath, { PlatformPath } from "path";
@@ -20,6 +21,7 @@ export class TsvTestHost implements TsvHost {
       status: () => {
         return Promise.resolve({
           modified: [],
+          not_added: [],
           isClean: () => true,
         });
       },
@@ -50,6 +52,18 @@ export class TsvTestHost implements TsvHost {
 
   normalizePath(folder: string): string {
     return normalizePath(folder, this.path);
+  }
+
+  async gitDiffTopSpecFolder(host: TsvHost, folder: string): Promise<RuleResult> {
+    let success = true;
+    let stdout = `Running git diff on folder ${folder}, running default cmd ${host.runCmd("", "")}`;
+    let stderr = "";
+
+    return {
+      success: success,
+      stdOutput: stdout,
+      errorOutput: stderr,
+    };
   }
 
   async readTspConfig(_folder: string): Promise<string> {

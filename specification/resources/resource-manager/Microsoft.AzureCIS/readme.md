@@ -18,6 +18,7 @@ input-file:
   - preview/2023-08-22-preview/environment.json
   - preview/2023-08-22-preview/genevaActions.json
   - preview/2023-08-22-preview/plannedQuota.json
+  - preview/2023-08-22-preview/pav2.json
 ```
 
 ```yaml $(tag) == '2021-08-10-privatepreview'
