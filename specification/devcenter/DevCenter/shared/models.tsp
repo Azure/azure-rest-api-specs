@@ -10,25 +10,6 @@ using TypeSpec.Versioning;
 
 namespace DevCenterService;
 
-@doc("Indicates whether operation status is running, completed, canceled or failed.")
-@lroStatus
-union OperationStatusValue {
-  string,
-
-  @doc("Operation is in progress.")
-  Running: "Running",
-
-  @doc("Operation is completed with success.")
-  @lroSucceeded
-  Completed: "Completed",
-
-  @doc("Operation was canceled.")
-  Canceled: "Canceled",
-
-  @doc("Operation failed.")
-  Failed: "Failed",
-}
-
 @doc("The current status of an async operation.")
 @resource("operationstatuses")
 @parentResource(Project)
@@ -42,7 +23,7 @@ model OperationStatus {
   name?: string;
 
   @doc("Provisioning state of the resource.")
-  status: OperationStatusValue;
+  status: Azure.Core.Foundations.OperationState;
 
   @doc("The id of the resource.")
   resourceId?: string;

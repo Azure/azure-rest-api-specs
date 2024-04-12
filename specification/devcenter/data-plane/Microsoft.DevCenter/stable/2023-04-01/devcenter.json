@@ -2110,6 +2110,48 @@
         }
       }
     },
+    "Azure.Core.Foundations.OperationState": {
+      "type": "string",
+      "description": "Enum describing allowed operation states.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled by the user."
+          }
+        ]
+      }
+    },
     "Azure.Core.azureLocation": {
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
@@ -2868,7 +2910,7 @@
           "description": "The operation id name."
         },
         "status": {
-          "$ref": "#/definitions/OperationStatusValue",
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
           "description": "Provisioning state of the resource."
         },
         "resourceId": {
@@ -2904,42 +2946,6 @@
         "id",
         "status"
       ]
-    },
-    "OperationStatusValue": {
-      "type": "string",
-      "description": "Indicates whether operation status is running, completed, canceled or failed.",
-      "enum": [
-        "Running",
-        "Completed",
-        "Canceled",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "OperationStatusValue",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Running",
-            "value": "Running",
-            "description": "Operation is in progress."
-          },
-          {
-            "name": "Completed",
-            "value": "Completed",
-            "description": "Operation is completed with success."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Operation was canceled."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Operation failed."
-          }
-        ]
-      }
     },
     "OsDisk": {
       "type": "object",

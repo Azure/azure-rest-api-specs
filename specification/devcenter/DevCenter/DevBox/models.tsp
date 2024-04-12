@@ -619,7 +619,7 @@ model DevBoxOperation {
   kind: DevBoxOperationKind;
 
   @doc("The operation status.")
-  status: Azure.Core.Foundations.OperationStatus.status;
+  status: Azure.Core.Foundations.OperationState;
 
   @doc("The object ID of the actor which initiated the operation.")
   createdByObjectId?: Azure.Core.uuid;

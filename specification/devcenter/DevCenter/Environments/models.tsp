@@ -42,27 +42,6 @@ union EnvironmentOperationKind {
   string,
 }
 
-@doc("The status of an environment operation.")
-@added(APIVersions.v2024_02_01)
-union EnvironmentOperationStatus {
-  @doc("The operation has not started.")
-  NotStarted: "NotStarted",
-
-  @doc("The operation is running.")
-  Running: "Running",
-
-  @doc("The operation succeeded.")
-  Succeeded: "Succeeded",
-
-  @doc("The operation was canceled.")
-  Canceled: "Canceled",
-
-  @doc("he operation failed.")
-  Failed: "Failed",
-
-  string,
-}
-
 @doc("The scheduled action types.")
 @added(APIVersions.v2024_02_01)
 union EnvironmentActionType {
@@ -254,7 +233,7 @@ model EnvironmentOperation {
   kind: EnvironmentOperationKind;
 
   @doc("The operation status.")
-  status: EnvironmentOperationStatus;
+  status: Azure.Core.Foundations.OperationState;
 
   @doc("The object ID of the actor which initiated the operation.")
   createdByObjectId?: Azure.Core.uuid;
