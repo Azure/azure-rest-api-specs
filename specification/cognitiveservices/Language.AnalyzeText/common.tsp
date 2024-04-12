@@ -38,7 +38,6 @@ op LanguageLongRunningOperation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "template"
-@Foundations.Private.needsRoute
 @post
 @doc("Long running operation template to match Azure Language.")
 op LanguageLongRunningResourceCancel<
@@ -55,7 +54,6 @@ op LanguageLongRunningResourceCancel<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "template"
-@Foundations.Private.needsRoute
 @get
 @doc("Long running operation template to match Azure Language.")
 op LanguageLongRunningResourceRead<
