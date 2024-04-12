@@ -11,7 +11,6 @@ using Foundations;
 
 namespace Face;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "This is a template, polling operation should be defined in the operation instance."
 @summary("Add a face to a person (see PersonDirectory Person - Create) for face identification or verification.")
 @doc(
@@ -71,12 +70,11 @@ op DynamicPersonGroupLongRunningOperation<TParams extends TypeSpec.Reflection.Mo
 
 @doc("Get status of a long running operation.")
 @returnsDoc("A successful call returns the long running operation status.")
-op getFaceOperationStatus is Operations.ResourceRead<FaceOperationStatus>;
+op getFaceOperationStatus is FaceResourceReadOperation<FaceOperationStatus>;
 
 alias PersonModificationAccepted = "A successful call returns an empty response body. The service has accepted the request and will start processing soon. The client can query the operation status and result using the URL specified in the 'Operation-Location' response header. The URL expires in 48 hours.";
 alias DynamicPersonGroupModificationAccepted = "A successful call returns an empty response body. The service has accepted the request and will start processing soon. The client can query the operation status and result using the URL specified in the 'Operation-Location' response header. The URL expires in 48 hours. The URL provides the status of when PersonDirectory Person - List DynamicPersonGroup References will return the changes made in this request.";
 interface PersonDirectoryOperations {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Doesn't fit in generated long-running operation"
   @doc("Creates a new person in a person directory. To add face to this person, please call PersonDirectory Person - Add Face.")
   @returnsDoc(PersonModificationAccepted)
@@ -96,21 +94,18 @@ interface PersonDirectoryOperations {
     FaceErrorResponse
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @doc("Delete an existing person from person directory. The persistedFaceId(s), userData, person name and face feature(s) in the person entry will all be deleted.")
   @returnsDoc(PersonModificationAccepted)
   deletePerson is FaceResourceDeleteLongRunningOperation<PersonDirectoryPerson>;
 
   @doc("Retrieve a person's name and userData from person directory.")
   @returnsDoc("A successful call returns the person's information.")
-  getPerson is Operations.ResourceRead<PersonDirectoryPerson>;
+  getPerson is FaceResourceReadOperation<PersonDirectoryPerson>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @doc("Update name or userData of a person.")
   @returnsDoc(SuccessfulCallWithEmptyBody)
   updatePerson is FaceResourceUpdateOperation<PersonDirectoryPerson>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @doc(
     """
     Persons are stored in alphabetical order of personId created in PersonDirectory Person - Create.
@@ -121,7 +116,6 @@ interface PersonDirectoryOperations {
   @summary("List all persons' information in person directory, including personId, name, and userData.")
   getPersons is FaceResourceListOperation<PersonDirectoryPerson>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @summary("List all dynamic person groups a person has been referenced by in person directory.")
   @doc(
     """
@@ -142,7 +136,6 @@ interface PersonDirectoryOperations {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Doesn't fit in generated long-running operation"
   addPersonFace is AddPersonFaceOperation<{
     @doc("The format of the HTTP payload.")
@@ -155,14 +148,12 @@ interface PersonDirectoryOperations {
   }>;
 
   #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Doesn't fit in generated long-running operation"
   addPersonFaceFromUrl is AddPersonFaceOperation<{
     @doc("URL of input image.")
     url: url;
   }>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @summary("Delete a face from a person in person directory by specified personId and persistedFaceId.")
   @doc("""
     Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.
@@ -174,9 +165,8 @@ interface PersonDirectoryOperations {
     Retrieve person face information. The persisted person face is specified by its personId. recognitionModel, and persistedFaceId.
     """)
   @returnsDoc("A successful call returns target persisted face's information (persistedFaceId and userData).")
-  getPersonFace is Operations.ResourceRead<PersonDirectoryFace>;
+  getPersonFace is FaceResourceReadOperation<PersonDirectoryFace>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @doc("Update a person persisted face's userData field.")
   @returnsDoc(SuccessfulCallWithEmptyBody)
   @updatesResource(PersonDirectoryFace)
@@ -185,7 +175,6 @@ interface PersonDirectoryOperations {
     FaceUserData
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @doc("Retrieve a person's persistedFaceIds representing the registered person face feature(s).")
   @returnsDoc("A successful call returns an array of persistedFaceIds and and a person ID.")
   getPersonFaces is Foundations.ResourceList<
@@ -196,7 +185,6 @@ interface PersonDirectoryOperations {
     FaceErrorResponse
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Doesn't fit in generated long-running operation"
   @summary("Creates a new dynamic person group with specified dynamicPersonGroupId, name, and user-provided userData.")
   @doc("""
@@ -210,7 +198,6 @@ interface PersonDirectoryOperations {
   @put
   createDynamicPersonGroup is DynamicPersonGroupLongRunningOperation<CreateDynamicPersonGroupOptions>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @summary("Deletes an existing dynamic person group with specified dynamicPersonGroupId.")
   @doc("""
     Deleting this dynamic person group only delete the references to persons data. To delete actual person see PersonDirectory Person - Delete.
@@ -223,9 +210,8 @@ interface PersonDirectoryOperations {
     """)
   @summary("Retrieve the information of a dynamic person group, including its name and userData.")
   @returnsDoc("A successful call returns the dynamic person group's information.")
-  getDynamicPersonGroup is Operations.ResourceRead<DynamicPersonGroup>;
+  getDynamicPersonGroup is FaceResourceReadOperation<DynamicPersonGroup>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "Doesn't fit in generated long-running operation"
   @summary("Update an existing dynamic person group name, userData, add, or remove persons.")
   @doc("The properties keep unchanged if they are not in request body.")
@@ -233,7 +219,6 @@ interface PersonDirectoryOperations {
   @patch
   updateDynamicPersonGroup is DynamicPersonGroupLongRunningOperation<UpdateDynamicPersonGroupOptions>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @summary("List all existing dynamic person groups by dynamicPersonGroupId along with name and userData.")
   @doc(
     """
@@ -244,7 +229,6 @@ interface PersonDirectoryOperations {
   @returnsDoc("A successful call returns an array of dynamic person groups and their information (dynamicPersonGroupId, name and userData).")
   getDynamicPersonGroups is FaceResourceListOperation<DynamicPersonGroup>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @summary("List all persons in the specified dynamic person group.")
   @doc(
     """

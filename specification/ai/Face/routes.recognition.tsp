@@ -39,7 +39,7 @@ op IdentifyOperation<T extends TypeSpec.Reflection.Model> is Azure.Core.RpcOpera
     @doc("The range of maxNumOfCandidatesReturned is between 1 and 100 (default is 10).")
     @minValue(1)
     @maxValue(100)
-    maxNumOfCandidatesReturned?: int32;
+    maxNumOfCandidatesReturned?: int32 = 10;
 
     @doc("Customized identification confidence threshold, in the range of [0, 1]. Advanced user can tweak this value to override default internal threshold for better precision on their scenario data. Note there is no guarantee of this threshold value working on other data and after algorithm updates.")
     @minValue(0)
@@ -85,10 +85,12 @@ op FindSimilarOperation<T extends TypeSpec.Reflection.Model> is Azure.Core.RpcOp
     faceId: uuid;
 
     @doc("The number of top similar faces returned. The valid range is [1, 1000].It defaults to 20.")
-    maxNumOfCandidatesReturned?: int32;
+    @minValue(1)
+    @maxValue(1000)
+    maxNumOfCandidatesReturned?: int32 = 20;
 
     @doc("Similar face searching mode. It can be 'matchPerson' or 'matchFace'. It defaults to 'matchPerson'.")
-    mode?: FindSimilarMatchMode;
+    mode?: FindSimilarMatchMode = "matchPerson";
 
     ...T;
   },
@@ -98,42 +100,36 @@ op FindSimilarOperation<T extends TypeSpec.Reflection.Model> is Azure.Core.RpcOp
 >;
 
 interface FaceRecognitionOperations {
-  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path."
   @summary("Given query face's faceId, to search the similar-looking faces from a faceId array. A faceId array contains the faces created by Detect.")
   findSimilar is FindSimilarOperation<{
     @doc("An array of candidate faceIds. All of them are created by Face - Detect and the faceIds will expire 24 hours after the detection call. The number of faceIds is limited to 1000.")
     faceIds: uuid[];
   }>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path"
   @summary("Given query face's faceId, to search the similar-looking faces from a face list. A 'faceListId' is created by Create Face List.")
   findSimilarFromFaceList is FindSimilarOperation<{
     @doc("An existing user-specified unique candidate face list, created in FaceList - Create. Face list contains a set of persistedFaceIds which are persisted and will never expire.")
     faceListId: string;
   }>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path"
   @summary("Given query face's faceId, to search the similar-looking faces from a large face list. A 'largeFaceListId' is created by Create large Face List.")
   findSimilarFromLargeFaceList is FindSimilarOperation<{
     @doc("An existing user-specified unique candidate large face list, created in LargeFaceList - Create. Large face list contains a set of persistedFaceIds which are persisted and will never expire.")
     largeFaceListId: string;
   }>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path."
   @summary("1-to-many identification to find the closest matches of the specific query person face from a person group.")
   identifyFromPersonGroup is IdentifyOperation<{
     @doc("personGroupId of the target person group, created by PersonGroup - Create. Parameter personGroupId and largePersonGroupId should not be provided at the same time.")
     personGroupId: string;
   }>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path."
   @summary("1-to-many identification to find the closest matches of the specific query person face from a large person group.")
   identifyFromLargePersonGroup is IdentifyOperation<{
     @doc("largePersonGroupId of the target large person group, created by LargePersonGroup - Create. Parameter personGroupId and largePersonGroupId should not be provided at the same time.")
     largePersonGroupId: string;
   }>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path."
   @summary("1-to-many identification to find the closest matches of the specific query person face from a person directory personIds array.")
   identifyFromPersonDirectory is IdentifyOperation<{
     @doc("Array of personIds created in PersonDirectory - PersonCreate. The valid number of personIds is between [1,30].")
@@ -142,14 +138,12 @@ interface FaceRecognitionOperations {
     personIds: uuid[];
   }>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path."
   @summary("1-to-many identification to find the closest matches of the specific query person face from a dynamic person group.")
   identifyFromDynamicPersonGroup is IdentifyOperation<{
     @doc("DynamicPersonGroupId of the target PersonDirectory DynamicPersonGroup to match against.")
     dynamicPersonGroupId: string;
   }>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path."
   @summary("Verify whether two faces belong to a same person.")
   verifyFaceToFace is VerifyOperation<{
     @doc("faceId of one face, comes from Face - Detect.")
@@ -159,7 +153,6 @@ interface FaceRecognitionOperations {
     faceId2: uuid;
   }>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path."
   @summary("Verify whether one face belongs to a person in person group.")
   verifyFromPersonGroup is VerifyOperation<{
     @doc("faceId of the face, comes from Face - Detect.")
@@ -172,7 +165,6 @@ interface FaceRecognitionOperations {
     personId: uuid;
   }>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path."
   @summary("Verify whether one face belongs to a person in large person group.")
   verifyFromLargePersonGroup is VerifyOperation<{
     @doc("faceId of the face, comes from Face - Detect.")
@@ -185,7 +177,6 @@ interface FaceRecognitionOperations {
     personId: uuid;
   }>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path."
   @summary("Verify whether one face belongs to a person directory person.")
   verifyFromPersonDirectory is VerifyOperation<{
     @doc("faceId of the face, comes from Face - Detect.")
@@ -195,7 +186,6 @@ interface FaceRecognitionOperations {
     personId: string;
   }>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Workaround for RpcOperation not handling api version in path."
   @summary("Divide candidate faces into groups based on face similarity.")
   @doc("""
     >

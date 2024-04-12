@@ -17,8 +17,6 @@ alias ServiceTraits = NoClientRequestId &
   NoConditionalRequests &
   TraitOverride<VersionParameterTrait<void>>;
 
-alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
-
 alias SuccessfulCallWithEmptyBody = "A successful call returns an empty response body.";
 
 @createsResource(TResource)
@@ -109,21 +107,36 @@ op FaceResourceDeleteOperation<TResource extends TypeSpec.Reflection.Model> is F
   FaceErrorResponse
 >;
 
-op FaceResourceReadOperationWithReturnRecognitionModelOptions<TResource extends TypeSpec.Reflection.Model> is Operations.ResourceRead<
+@readsResource(TResource)
+op FaceResourceReadOperation<TResource extends TypeSpec.Reflection.Model> is Foundations.ResourceOperation<
   TResource,
-  QueryParametersTrait<ReturnRecognitionModelOptions>
+  {},
+  TResource,
+  ServiceTraits,
+  FaceErrorResponse
+>;
+
+op FaceResourceReadOperationWithReturnRecognitionModelOptions<TResource extends TypeSpec.Reflection.Model> is Foundations.ResourceOperation<
+  TResource,
+  ReturnRecognitionModelOptions,
+  TResource,
+  ServiceTraits,
+  FaceErrorResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "This is a template, polling operation should be defined in the operation instance."
+@post
 @action("train")
 @actionSeparator("/")
-op FaceResourceTrain<TResource extends TypeSpec.Reflection.Model> is Operations.ResourceAction<
+op FaceResourceTrain<TResource extends TypeSpec.Reflection.Model> is Foundations.ResourceOperation<
   TResource,
   {},
   TypeSpec.Http.AcceptedResponse & {
     @header("operation-Location")
     operationLocation: ResourceLocation<TrainingStatus>;
-  }
+  },
+  ServiceTraits,
+  FaceErrorResponse
 >;
 
 @get

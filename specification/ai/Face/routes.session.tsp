@@ -48,7 +48,6 @@ op FaceLivenessSessionListAuditEntries<TResource extends TypeSpec.Reflection.Mod
 >;
 
 interface LivenessSessionOperations {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "ResourceCreateWithServiceProvidedName does not fit, we don't return Location in header."
   @doc(
     """
     ${SessionCommonDescription}
@@ -71,16 +70,14 @@ interface LivenessSessionOperations {
     LivenessSessionCreationResult
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "ResourceDelete does not fit, we return 200 instead of 204"
   @summary(DeleteSessionSummary)
   @doc(DeleteSessionDescription)
   @returnsDoc("Successfully deleted session and all correlated data.")
   deleteLivenessSession is FaceResourceDeleteOperation<LivenessSession>;
 
   @doc("Get session result of detectLiveness/singleModal call.")
-  getLivenessSessionResult is Operations.ResourceRead<LivenessSession>;
+  getLivenessSessionResult is FaceResourceReadOperation<LivenessSession>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "ResourceList does not fit, we put object array in response directly"
   @doc(ListSessionDescription)
   @summary("Lists sessions for /detectLiveness/SingleModal.")
   getLivenessSessions is FaceResourceListOperation<
@@ -88,11 +85,9 @@ interface LivenessSessionOperations {
     LivenessSessionItem
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "ResourceList does not fit, we put object array in response directly"
   @doc(ListSessionAuditEntriesDescription)
   getLivenessSessionAuditEntries is FaceLivenessSessionListAuditEntries<LivenessSession>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   #suppress "@azure-tools/typespec-azure-core/byos" "Representation of existing multipart/form-data operation"
   @doc(
     """
@@ -110,7 +105,6 @@ interface LivenessSessionOperations {
     LivenessSessionCreationResult
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "ResourceCreateWithServiceProvidedName does not fit, we don't return Location in header."
   @doc(
     """
     ${LivenessSessionWithVerifyDescription}
@@ -129,16 +123,14 @@ interface LivenessSessionOperations {
     LivenessSessionCreationResult
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "ResourceDelete does not fit, we return 200 instead of 204"
   @summary(DeleteSessionSummary)
   @doc(DeleteSessionDescription)
   @returnsDoc("Successfully deleted session and all correlated data.")
   deleteLivenessWithVerifySession is FaceResourceDeleteOperation<LivenessWithVerifySession>;
 
   @doc("Get session result of detectLivenessWithVerify/singleModal call.")
-  getLivenessWithVerifySessionResult is Operations.ResourceRead<LivenessWithVerifySession>;
+  getLivenessWithVerifySessionResult is FaceResourceReadOperation<LivenessWithVerifySession>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "ResourceList does not fit, we put object array in response directly"
   @summary("Lists sessions for /detectLivenessWithVerify/SingleModal.")
   @doc("""
     List sessions from the last sessionId greater than the \"start\".
@@ -150,7 +142,6 @@ interface LivenessSessionOperations {
     LivenessSessionItem
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "ResourceList does not fit, we put object array in response directly"
   @doc(ListSessionAuditEntriesDescription)
   getLivenessWithVerifySessionAuditEntries is FaceLivenessSessionListAuditEntries<LivenessWithVerifySession>;
 }

@@ -20,7 +20,6 @@ model BasePersonGroupPerson {
   ...UserDefinedFields;
 
   @doc("Face ids of registered faces in the person.")
-  @visibility("read")
   persistedFaceIds?: uuid[];
 }
 

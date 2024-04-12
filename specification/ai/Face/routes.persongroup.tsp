@@ -30,7 +30,6 @@ alias GetPersonSuccess = "A successful call returns the person's information.";
 alias GetPersonFaceSuccess = "A successful call returns target persisted face's information (persistedFaceId and userData).";
 
 interface PersonGroupOperations {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Create has no response body while standard op requires resource in body"
   @summary("Create a new person group with specified personGroupId, name, user-provided userData and recognitionModel.")
   @doc("""
     A person group is a container holding the uploaded person data, including face recognition features.
@@ -49,7 +48,6 @@ interface PersonGroupOperations {
   @returnsDoc(SuccessfulCallWithEmptyBody)
   createPersonGroup is FaceCollectionResourceCreateOperation<PersonGroup>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Delete response with 200 while standard op requires 204"
   @doc("Delete an existing person group with specified personGroupId. Persisted data in this person group will be deleted.")
   @returnsDoc(SuccessfulCallWithEmptyBody)
   deletePersonGroup is FaceResourceDeleteOperation<PersonGroup>;
@@ -58,12 +56,10 @@ interface PersonGroupOperations {
   @returnsDoc("A successful call returns the person group's information.")
   getPersonGroup is FaceResourceReadOperationWithReturnRecognitionModelOptions<PersonGroup>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Update has no response body while standard op requires resource in body"
   @doc("Update an existing person group's name and userData. The properties keep unchanged if they are not in request body.")
   @returnsDoc(SuccessfulCallWithEmptyBody)
   updatePersonGroup is FaceResourceUpdateOperation<PersonGroup>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "List doesn't support Azure paging"
   @summary("List person groups' personGroupId, name, userData and recognitionModel.")
   @doc(
     """
@@ -78,7 +74,6 @@ interface PersonGroupOperations {
     ReturnRecognitionModelOptions
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @doc("To check person group training status completed or still ongoing. PersonGroup Training is an asynchronous operation triggered by PersonGroup - Train API.")
   @returnsDoc("A successful call returns the person group's training status.")
   getPersonGroupTrainingStatus is FaceResourceGetTrainingStatus<PersonGroup>;
@@ -91,7 +86,6 @@ interface PersonGroupOperations {
   @returnsDoc(SuccessfulCallWithEmptyBody)
   trainPersonGroup is FaceResourceTrain<PersonGroup>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Create person perform on resource collection but not response created resource location in header"
   @summary("Create a new person in a specified person group. To add face to this person, please call PersonGroup PersonFace - Add.")
   @doc("""
     > [!NOTE]
@@ -109,21 +103,18 @@ interface PersonGroupOperations {
     CreatePersonResult
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Delete response with 200 while standard op requires 204"
   @doc("Delete an existing person from a person group. The persistedFaceId, userData, person name and face feature(s) in the person entry will all be deleted.")
   @returnsDoc(SuccessfulCallWithEmptyBody)
   deletePersonGroupPerson is FaceResourceDeleteOperation<PersonGroupPerson>;
 
   @doc("Retrieve a person's name and userData, and the persisted faceIds representing the registered person face feature(s).")
   @returnsDoc(GetPersonSuccess)
-  getPersonGroupPerson is Operations.ResourceRead<PersonGroupPerson>;
+  getPersonGroupPerson is FaceResourceReadOperation<PersonGroupPerson>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Update has no response body while standard op requires resource in body"
   @doc("Update name or userData of a person.")
   @returnsDoc(SuccessfulCallWithEmptyBody)
   updatePersonGroupPerson is FaceResourceUpdateOperation<PersonGroupPerson>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "List doesn't support Azure paging"
   @summary("List all persons' information in the specified person group, including personId, name, userData and persistedFaceIds of registered person faces.")
   @doc(
     """
@@ -134,20 +125,17 @@ interface PersonGroupOperations {
   @returnsDoc("A successful call returns an array of person information that belong to the person group.")
   getPersonGroupPersons is FaceResourceListOperation<PersonGroupPerson>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Add face perform on resource collection but not response created resource location in header"
+  @summary(AddPersonGroupPersonFaceSummary)
+  @doc(AddPersonGroupPersonFaceDescription)
+  @returnsDoc(AddFaceSuccess)
+  addPersonGroupPersonFaceFromUrl is AddFaceFromUrl<PersonGroupPersonFace>;
+
   #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
   @summary(AddPersonGroupPersonFaceSummary)
   @doc(AddPersonGroupPersonFaceDescription)
   @returnsDoc(AddFaceSuccess)
   addPersonGroupPersonFace is AddFace<PersonGroupPersonFace>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Add face perform on resource collection but not response created resource location in header"
-  @summary(AddPersonGroupPersonFaceSummary)
-  @doc(AddPersonGroupPersonFaceDescription)
-  @returnsDoc(AddFaceSuccess)
-  addPersonGroupPersonFaceFromUrl is AddFaceFromUrl<PersonGroupPersonFace>;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Delete response with 200 while standard op requires 204"
   @summary("Delete a face from a person in a person group by specified personGroupId, personId and persistedFaceId.")
   @doc("""
     Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.
@@ -157,9 +145,8 @@ interface PersonGroupOperations {
 
   @doc("Retrieve person face information. The persisted person face is specified by its personGroupId, personId and persistedFaceId.")
   @returnsDoc(GetPersonFaceSuccess)
-  getPersonGroupPersonFace is Operations.ResourceRead<PersonGroupPersonFace>;
+  getPersonGroupPersonFace is FaceResourceReadOperation<PersonGroupPersonFace>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Update has no response body while standard op requires resource in body"
   @doc("Update a person persisted face's userData field.")
   @returnsDoc(SuccessfulCallWithEmptyBody)
   updatePersonGroupPersonFace is FaceResourceUpdateOperation<
@@ -167,7 +154,6 @@ interface PersonGroupOperations {
     FaceUserData
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Create has no response body while standard op requires resource in body"
   @summary("Create a new large person group with user-specified largePersonGroupId, name, an optional userData and recognitionModel.")
   @doc("""
     A large person group is a container holding the uploaded person data, including the face recognition features. It can hold up to 1,000,000 entities.
@@ -185,7 +171,6 @@ interface PersonGroupOperations {
   @returnsDoc(SuccessfulCallWithEmptyBody)
   createLargePersonGroup is FaceCollectionResourceCreateOperation<LargePersonGroup>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Delete response with 200 while standard op requires 204"
   @doc("Delete an existing large person group with specified personGroupId. Persisted data in this large person group will be deleted.")
   @returnsDoc(SuccessfulCallWithEmptyBody)
   deleteLargePersonGroup is FaceResourceDeleteOperation<LargePersonGroup>;
@@ -194,12 +179,10 @@ interface PersonGroupOperations {
   @returnsDoc("A successful call returns the large person group's information.")
   getLargePersonGroup is FaceResourceReadOperationWithReturnRecognitionModelOptions<LargePersonGroup>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Update has no response body while standard op requires resource in body"
   @doc("Update an existing large person group's name and userData. The properties keep unchanged if they are not in request body.")
   @returnsDoc(SuccessfulCallWithEmptyBody)
   updateLargePersonGroup is FaceResourceUpdateOperation<LargePersonGroup>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "List doesn't support Azure paging"
   @summary("List all existing large person groups' largePersonGroupId, name, userData and recognitionModel.")
   @doc(
     """
@@ -214,7 +197,6 @@ interface PersonGroupOperations {
     ReturnRecognitionModelOptions
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @summary("To check large person group training status completed or still ongoing. LargePersonGroup Training is an asynchronous operation triggered by LargePersonGroup - Train API.")
   @doc("""
     Training time depends on the number of person entries, and their faces in a large person group. It could be in seconds, or up to half an hour for 1,000,000 persons.
@@ -230,7 +212,6 @@ interface PersonGroupOperations {
   @returnsDoc(SuccessfulCallWithEmptyBody)
   trainLargePersonGroup is FaceResourceTrain<LargePersonGroup>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Create person perform on resource collection but not response created resource location in header"
   @summary("Create a new person in a specified large person group. To add face to this person, please call LargePersonGroup PersonFace - Add.")
   @doc("""
     > [!NOTE]
@@ -248,21 +229,18 @@ interface PersonGroupOperations {
     CreatePersonResult
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Delete response with 200 while standard op requires 204"
   @doc("Delete an existing person from a large person group. The persistedFaceId, userData, person name and face feature(s) in the person entry will all be deleted.")
   @returnsDoc(SuccessfulCallWithEmptyBody)
   deleteLargePersonGroupPerson is FaceResourceDeleteOperation<LargePersonGroupPerson>;
 
   @doc("Retrieve a person's name and userData, and the persisted faceIds representing the registered person face feature(s).")
   @returnsDoc(GetPersonSuccess)
-  getLargePersonGroupPerson is Operations.ResourceRead<LargePersonGroupPerson>;
+  getLargePersonGroupPerson is FaceResourceReadOperation<LargePersonGroupPerson>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Update has no response body while standard op requires resource in body"
   @doc("Update name or userData of a person.")
   @returnsDoc(SuccessfulCallWithEmptyBody)
   updateLargePersonGroupPerson is FaceResourceUpdateOperation<LargePersonGroupPerson>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "List doesn't support Azure paging"
   @summary("List all persons' information in the specified large person group, including personId, name, userData and persistedFaceIds of registered person faces.")
   @doc(
     """
@@ -273,20 +251,17 @@ interface PersonGroupOperations {
   @returnsDoc("A successful call returns an array of person information that belong to the large person group.")
   getLargePersonGroupPersons is FaceResourceListOperation<LargePersonGroupPerson>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Add face perform on resource collection but not response created resource location in header"
+  @summary(AddLargePersonGroupPersonFaceSummary)
+  @doc(AddLargePersonGroupPersonFaceDescription)
+  @returnsDoc(AddFaceSuccess)
+  addLargePersonGroupPersonFaceFromUrl is AddFaceFromUrl<LargePersonGroupPersonFace>;
+
   #suppress "@azure-tools/typespec-azure-core/byos" "It's an RPC call to detect face from an image, it doesn't store anything. There's a BYOS version of this call, but it's not this one."
   @summary(AddLargePersonGroupPersonFaceSummary)
   @doc(AddLargePersonGroupPersonFaceDescription)
   @returnsDoc(AddFaceSuccess)
   addLargePersonGroupPersonFace is AddFace<LargePersonGroupPersonFace>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Add face perform on resource collection but not response created resource location in header"
-  @summary(AddLargePersonGroupPersonFaceSummary)
-  @doc(AddLargePersonGroupPersonFaceDescription)
-  @returnsDoc(AddFaceSuccess)
-  addLargePersonGroupPersonFaceFromUrl is AddFaceFromUrl<LargePersonGroupPersonFace>;
-
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Delete response with 200 while standard op requires 204"
   @summary("Delete a face from a person in a large person group by specified largePersonGroupId, personId and persistedFaceId.")
   @doc("""
     Adding/deleting faces to/from a same person will be processed sequentially. Adding/deleting faces to/from different persons are processed in parallel.
@@ -296,9 +271,8 @@ interface PersonGroupOperations {
 
   @doc("Retrieve person face information. The persisted person face is specified by its largePersonGroupId, personId and persistedFaceId.")
   @returnsDoc(GetPersonFaceSuccess)
-  getLargePersonGroupPersonFace is Operations.ResourceRead<LargePersonGroupPersonFace>;
+  getLargePersonGroupPersonFace is FaceResourceReadOperation<LargePersonGroupPersonFace>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Update has no response body while standard op requires resource in body"
   @doc("Update a person persisted face's userData field.")
   @returnsDoc(SuccessfulCallWithEmptyBody)
   updateLargePersonGroupPersonFace is FaceResourceUpdateOperation<

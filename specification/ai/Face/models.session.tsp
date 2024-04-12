@@ -35,7 +35,7 @@ model LivenessSessionCreationContent {
 @doc("Data for liveness session.")
 model LivenessSessionData {
   @doc("Device Correlation Id to use for linking multiple sessions together.")
-  deviceCorrelationId: string;
+  deviceCorrelationId?: string;
 
   @doc("Session length in seconds. Range is 60 to 86400 seconds.")
   @minValue(60)
@@ -51,15 +51,12 @@ model LivenessSessionItem {
   id: string;
 
   @doc("Session creation time in millisecond from epoch.")
-  @visibility("read")
   createdDateTime: utcDateTime;
 
   @doc("Session started time from session auth token.")
-  @visibility("read")
   sessionStartDateTime?: utcDateTime;
 
   @doc("Whether or not the session is expired.")
-  @visibility("read")
   sessionExpired: boolean;
 
   ...LivenessSessionData;
@@ -128,7 +125,6 @@ union LivenessDecision {
 @clientName("FaceImageType")
 union ImageType {
   string,
-
   "Color",
   "Infrared",
   "Depth",

@@ -79,13 +79,13 @@ union FaceAttributeType {
 @doc("Response for detect API.")
 model FaceDetectionResult {
   @doc("Unique faceId of the detected face, created by detection API and it will expire 24 hours after the detection call. To return this, it requires 'returnFaceId' parameter to be true.")
-  faceId: uuid;
+  faceId?: uuid;
 
   @doc("The 'recognitionModel' associated with this faceId. This is only returned when 'returnRecognitionModel' is explicitly set as true.")
   recognitionModel?: RecognitionModel;
 
   @doc("A rectangle area for the face location on image.")
-  faceRectangle?: FaceRectangle;
+  faceRectangle: FaceRectangle;
 
   @doc("An array of 27-point face landmarks pointing to the important positions of face components. To return this, it requires 'returnFaceLandmarks' parameter to be true.")
   faceLandmarks?: FaceLandmarks;
