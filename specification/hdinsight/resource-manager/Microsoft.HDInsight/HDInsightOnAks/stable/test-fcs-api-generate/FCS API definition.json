@@ -1,11 +1,11 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "HDInsight on AKS Management Client",
-    "description": "The HDInsight on AKS Management Client.",
-    "version": "2024-05-01"
+    "title": "Azure FCS Management Client",
+    "description": "The Azure FCS Management Client.",
+    "version": "2024-03-02"
   },
-  "host": "management.azure.com",
+  "host": "hilodevrpwestus3.hdinsight-stable.azure-test.net",
   "schemes": [
     "https"
   ],
@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fcs/clusterpools/{clusterPoolName}": {
       "get": {
         "description": "Gets a cluster pool.",
         "operationId": "ClusterPools_Get",
@@ -59,7 +59,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Clusterpool resource details.",
+            "description": "Clusterpool details.",
             "schema": {
               "$ref": "#/definitions/ClusterPool"
             }
@@ -242,7 +242,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/clusterpools": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Fcs/clusterpools": {
       "get": {
         "operationId": "ClusterPools_ListBySubscription",
         "x-ms-examples": {
@@ -278,7 +278,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fcs/clusterpools": {
       "get": {
         "operationId": "ClusterPools_ListByResourceGroup",
         "x-ms-examples": {
@@ -317,7 +317,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/upgrade": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fcs/clusterpools/{clusterPoolName}/upgrade": {
       "post": {
         "description": "Upgrade a cluster pool.",
         "operationId": "ClusterPools_Upgrade",
@@ -381,91 +381,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/availableUpgrades": {
-      "get": {
-        "description": "List a cluster pool available upgrade.",
-        "operationId": "ClusterPoolAvailableUpgrades_List",
-        "x-ms-examples": {
-          "GetClusterPoolAvailableUpgrade": {
-            "$ref": "./examples/ListClusterPoolAvailableUpgrades.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterPoolNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Clusterpool Available Upgrade details.",
-            "schema": {
-              "$ref": "#/definitions/ClusterPoolAvailableUpgradeList"
-            }
-          },
-          "default": {
-            "description": "Error Response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/upgradeHistories": {
-      "get": {
-        "description": "Returns a list of upgrade history.",
-        "operationId": "ClusterPoolUpgradeHistories_List",
-        "x-ms-examples": {
-          "ClusterPoolUpgradeHistoriesListResult": {
-            "$ref": "./examples/ListClusterPoolUpgradeHistory.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterPoolNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Available cluster versions successfully returned.",
-            "schema": {
-              "$ref": "#/definitions/ClusterPoolUpgradeHistoryListResult"
-            }
-          },
-          "default": {
-            "description": "Error Response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fcs/clusterpools/{clusterPoolName}/clusters": {
       "get": {
         "operationId": "Clusters_ListByClusterPoolName",
         "description": "Lists the HDInsight cluster pools under a resource group.",
@@ -507,228 +423,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/upgrade": {
-      "post": {
-        "description": "Upgrade a cluster.",
-        "operationId": "Clusters_Upgrade",
-        "x-ms-examples": {
-          "ClustersUpgradeAKSPatchVersion": {
-            "$ref": "./examples/UpgradeAKSPatchVersionForCluster.json"
-          },
-          "ClustersUpgradeHotfix": {
-            "$ref": "./examples/UpgradeHotfixForCluster.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          },
-          {
-            "name": "ClusterUpgradeRequest",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ClusterUpgrade"
-            },
-            "description": "Upgrade a cluster."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful.",
-            "schema": {
-              "$ref": "#/definitions/Cluster"
-            }
-          },
-          "202": {
-            "description": "Cluster Upgrade request accepted.",
-            "headers": {
-              "location": {
-                "type": "string",
-                "description": "URL to get the status of the resize operation."
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/availableUpgrades": {
-      "get": {
-        "description": "List a cluster available upgrade.",
-        "operationId": "ClusterAvailableUpgrades_List",
-        "x-ms-examples": {
-          "GetClusterAvailableUpgrade": {
-            "$ref": "./examples/ListClusterAvailableUpgrades.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Cluster Available Upgrade details.",
-            "schema": {
-              "$ref": "#/definitions/ClusterAvailableUpgradeList"
-            }
-          },
-          "default": {
-            "description": "Error Response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/upgradeHistories": {
-      "get": {
-        "description": "Returns a list of upgrade history.",
-        "operationId": "ClusterUpgradeHistories_List",
-        "x-ms-examples": {
-          "ClusterUpgradeHistoriesListResult": {
-            "$ref": "./examples/ListClusterUpgradeHistory.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Available cluster versions successfully returned.",
-            "schema": {
-              "$ref": "#/definitions/ClusterUpgradeHistoryListResult"
-            }
-          },
-          "default": {
-            "description": "Error Response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/rollback": {
-      "post": {
-        "description": "Manual rollback upgrade for a cluster.",
-        "operationId": "Clusters_UpgradeManualRollback",
-        "x-ms-examples": {
-          "ClusterUpgradeRollback": {
-            "$ref": "./examples/ClusterUpgradeRollback.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          },
-          {
-            "name": "ClusterRollbackUpgradeRequest",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ClusterUpgradeRollback"
-            },
-            "description": "Manual rollback upgrade for a cluster."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful.",
-            "schema": {
-              "$ref": "#/definitions/Cluster"
-            }
-          },
-          "202": {
-            "description": "Cluster Manual Rollback Upgrade request accepted.",
-            "headers": {
-              "location": {
-                "type": "string",
-                "description": "URL to get the status of the rollback operation."
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/resize": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fcs/clusterpools/{clusterPoolName}/clusters/{clusterName}/resize": {
       "post": {
         "description": "Resize an existing Cluster.",
         "operationId": "Clusters_Resize",
@@ -792,7 +487,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fcs/clusterpools/{clusterPoolName}/clusters/{clusterName}": {
       "get": {
         "operationId": "Clusters_Get",
         "description": "Gets a HDInsight cluster.",
@@ -1021,168 +716,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/runJob": {
-      "post": {
-        "operationId": "ClusterJobs_RunJob",
-        "description": "Operations on jobs of HDInsight on AKS cluster.",
-        "x-ms-examples": {
-          "RunClusterJob": {
-            "$ref": "./examples/RunClusterJob.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          },
-          {
-            "name": "ClusterJob",
-            "description": "The Cluster job.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ClusterJob"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful.",
-            "schema": {
-              "$ref": "#/definitions/ClusterJob"
-            }
-          },
-          "202": {
-            "description": "Run cluster job action request accepted.",
-            "headers": {
-              "location": {
-                "type": "string",
-                "description": "URL to get the status of the resize operation."
-              }
-            }
-          },
-          "default": {
-            "description": "Error Response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/jobs": {
-      "get": {
-        "operationId": "ClusterJobs_List",
-        "description": "Get jobs of HDInsight on AKS cluster.",
-        "x-ms-examples": {
-          "ListClusterJobs": {
-            "$ref": "./examples/ListClusterJobs.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The system query option to filter job returned in the response. Allowed value is 'jobName eq {jobName}' or 'jarName eq {jarName}'."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Cluster job details.",
-            "schema": {
-              "$ref": "#/definitions/ClusterJobList"
-            }
-          },
-          "default": {
-            "description": "Error Response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/serviceConfigs": {
-      "get": {
-        "operationId": "Clusters_ListServiceConfigs",
-        "description": "Lists the config dump of all services running in cluster.",
-        "x-ms-examples": {
-          "HDInsightClusterGetServiceConfigs": {
-            "$ref": "./examples/ListClusterServiceConfigs.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServiceConfigListResult"
-            }
-          },
-          "default": {
-            "description": "Error Response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/checkNameAvailability": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Fcs/locations/{location}/checkNameAvailability": {
       "post": {
         "description": "Check the availability of the resource name.",
         "operationId": "Locations_CheckNameAvailability",
@@ -1227,127 +761,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/instanceViews": {
-      "get": {
-        "operationId": "Clusters_ListInstanceViews",
-        "x-ms-examples": {
-          "HDInsightClusterGetInstanceViews": {
-            "$ref": "./examples/ListClusterInstanceViews.json"
-          }
-        },
-        "description": "Lists the lists of instance views",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ClusterInstanceViewsResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/instanceViews/default": {
-      "get": {
-        "operationId": "Clusters_GetInstanceView",
-        "description": "Gets the status of a cluster instance.",
-        "x-ms-examples": {
-          "HDInsightClusterGetInstanceView": {
-            "$ref": "./examples/GetClusterInstanceView.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ClusterInstanceViewResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.HDInsight/operations": {
-      "get": {
-        "description": "Returns list of operations.",
-        "operationId": "Operations_List",
-        "x-ms-examples": {
-          "ListOperations": {
-            "$ref": "./examples/GetOperations.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Operation details.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/availableClusterPoolVersions": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Fcs/locations/{location}/availableClusterPoolVersions": {
       "get": {
         "description": "Returns a list of available cluster pool versions.",
         "operationId": "AvailableClusterPoolVersions_ListByLocation",
@@ -1386,7 +800,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/availableClusterVersions": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Fcs/locations/{location}/availableClusterVersions": {
       "get": {
         "description": "Returns a list of available cluster versions.",
         "operationId": "AvailableClusterVersions_ListByLocation",
@@ -1422,130 +836,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/libraries": {
-      "get": {
-        "operationId": "ClusterLibraries_List",
-        "description": "Get all libraries of HDInsight on AKS cluster.",
-        "x-ms-examples": {
-          "ListUserCustomClusterLibraries": {
-            "$ref": "./examples/ListUserCustomClusterLibraries.json"
-          },
-          "ListPredefinedClusterLibraries": {
-            "$ref": "./examples/ListPredefinedClusterLibraries.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          },
-          {
-            "name": "$category",
-            "in": "query",
-            "required": true,
-            "enum": [
-              "custom",
-              "predefined"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "$category",
-              "modelAsString": true
-            },
-            "description": "The system query option to filter libraries returned in the response. Allowed value is 'custom' or 'predefined'."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Collection of libraries in the cluster.",
-            "schema": {
-              "$ref": "#/definitions/ClusterLibraryList"
-            }
-          },
-          "default": {
-            "description": "Error Response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusterpools/{clusterPoolName}/clusters/{clusterName}/manageLibraries": {
-      "post": {
-        "operationId": "ClusterLibraries_ManageLibraries",
-        "description": "Library management operations on HDInsight on AKS cluster.",
-        "x-ms-examples": {
-          "InstallNewClusterLibraries": {
-            "$ref": "./examples/InstallNewClusterLibraries.json"
-          },
-          "UninstallExistingClusterLibraries": {
-            "$ref": "./examples/UninstallExistingClusterLibraries.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterPoolNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ClusterNameParameter"
-          },
-          {
-            "name": "operation",
-            "description": "The library management operation.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ClusterLibraryManagementOperation"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Cluster library management operation request accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "URL to get the status of the library management operation."
-              }
-            }
-          },
-          "default": {
-            "description": "Error Response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     }
@@ -1745,13 +1035,6 @@
           "example": "45cd32aead6e4a91b079a0cdbfac8c36",
           "readOnly": true
         },
-        "managedResourceGroupName": {
-          "type": "string",
-          "description": "A resource group created by RP, to hold the resources created by RP on-behalf of customers. It will also be used to generate aksManagedResourceGroupName by pattern: MC_{managedResourceGroupName}_{clusterPoolName}_{region}. Please make sure it meets resource group name restriction.",
-          "minLength": 1,
-          "maxLength": 40,
-          "example": "hdi-45cd32aead6e4a91b079a0cdbfac8c36"
-        },
         "aksManagedResourceGroupName": {
           "type": "string",
           "description": "A resource group created by AKS, to hold the infrastructure resources created by AKS on-behalf of customers. It is generated by cluster pool name and managed resource group name by pattern: MC_{managedResourceGroupName}_{clusterPoolName}_{region}",
@@ -1821,6 +1104,10 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
           "description": "SystemData of cluster pool.",
           "readOnly": true
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "The id to track the whole operation flow."
         }
       },
       "allOf": [
@@ -2288,10 +1575,6 @@
         "components": {
           "$ref": "#/definitions/ClusterComponents"
         },
-        "identityProfile": {
-          "description": "This is deprecated. Please use managed identity profile instead.",
-          "$ref": "#/definitions/IdentityProfile"
-        },
         "managedIdentityProfile": {
           "description": "This property is required by Trino, Spark and Flink cluster but is optional for Kafka cluster.",
           "$ref": "#/definitions/ManagedIdentityProfile"
@@ -2397,7 +1680,7 @@
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "This indicates whether auto scale is enabled on HDInsight on AKS cluster."
+          "description": "This indicates whether auto scale is enabled on Azure FCS cluster."
         },
         "gracefulDecommissionTimeout": {
           "type": "integer",
@@ -3476,6 +2759,10 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
           "description": "SystemData of cluster.",
           "readOnly": true
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "The id to track the whole operation flow."
         }
       },
       "allOf": [
@@ -3750,7 +3037,7 @@
         },
         "serviceStatuses": {
           "type": "array",
-          "description": "List of statuses of relevant services that make up the HDInsight on AKS cluster to surface to the customer.",
+          "description": "List of statuses of relevant services that make up the Azure FCS cluster to surface to the customer.",
           "items": {
             "$ref": "#/definitions/ServiceStatus"
           },
@@ -3781,7 +3068,7 @@
     },
     "ServiceStatus": {
       "type": "object",
-      "description": "Describes the status of a service of a HDInsight on AKS cluster.",
+      "description": "Describes the status of a service of a Azure FCS cluster.",
       "required": [
         "kind",
         "ready"
@@ -3811,7 +3098,7 @@
         },
         "type": {
           "type": "string",
-          "description": "The resource type in Microsoft.HDInsight."
+          "description": "The resource type in Microsoft.Fcs."
         }
       }
     },
@@ -3821,7 +3108,7 @@
       "properties": {
         "nameAvailable": {
           "type": "boolean",
-          "description": "Indicator of availability of the Microsoft.HDInsight resource name."
+          "description": "Indicator of availability of the Microsoft.Fcs resource name."
         },
         "reason": {
           "type": "string",
@@ -5148,7 +4435,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the HDInsight on AKS cluster type.",
+      "description": "The name of the Azure FCS cluster type.",
       "x-ms-parameter-location": "method"
     }
   }
