@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.PortalServices",
-    "version": "2024-01-01-preview",
+    "version": "2024-04-01-preview",
     "description": "Azure Portal Services API Reference",
     "x-typespec-generated": [
       {
@@ -417,11 +417,16 @@
         "blade": {
           "$ref": "#/definitions/BladeReferenceWithContextPane",
           "description": "open a blade in context pane"
+        },
+        "assetId": {
+          "$ref": "#/definitions/AssetIdReference",
+          "description": "The asset id reference."
+        },
+        "deepLink": {
+          "type": "string",
+          "description": "The deep link to the blade."
         }
       },
-      "required": [
-        "blade"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/ActionsOnClick"
@@ -832,6 +837,29 @@
         }
       ],
       "x-ms-discriminator-value": "arg"
+    },
+    "AssetIdReference": {
+      "type": "object",
+      "description": "Model for Asset Id Reference.",
+      "properties": {
+        "assetId": {
+          "type": "string",
+          "description": "The asset id."
+        },
+        "extensionName": {
+          "type": "string",
+          "description": "The extension name"
+        },
+        "assetType": {
+          "type": "string",
+          "description": "The asset type"
+        }
+      },
+      "required": [
+        "assetId",
+        "extensionName",
+        "assetType"
+      ]
     },
     "BladeReferenceWithContextPane": {
       "type": "object",
