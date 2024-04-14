@@ -475,14 +475,11 @@ alias AnalyzeTextJobQueryParameters = QueryParametersTrait<{
   skip?: int32;
 }>;
 
-@doc("Query parameters for the AnalyzeText operation.")
-model AnalyzeTextQueryParameters {
-  ...Azure.Core.Foundations.ApiVersionParameter;
-
+alias AnalyzeTextQueryParameters = {
   @doc("(Optional) if set to true, response will contain request and document level statistics.")
   @query
   showStats?: boolean;
-}
+};
 
 @doc("job state")
 model JobState {

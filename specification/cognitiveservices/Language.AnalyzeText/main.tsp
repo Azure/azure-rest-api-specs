@@ -3,7 +3,6 @@ import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
-import "./common.tsp";
 import "./models/common.models.tsp";
 import "./models/custom.text.tsp";
 import "./models/entity.linking.tsp";
@@ -63,24 +62,18 @@ alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
   NoClientRequestId;
 
-alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
+alias languageOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @post
 @route("/:analyze-text")
 @doc("Request text analysis over a collection of documents.")
-op analyzeText(
-  @doc("Collection of documents to analyze and a single task to execute.")
-  @body
-  body: AnalyzeTextTask,
-
-  ...AnalyzeTextQueryParameters,
-): AnalyzeTextTaskResult | ErrorResponse;
+op analyzeText is RpcOperation<AnalyzeTextTask & AnalyzeTextQueryParameters, AnalyzeTextTaskResult, {}, ErrorResponse>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.")
 @summary("Get analysis status and results")
-op analyzeTextJobStatus is LanguageLongRunningResourceRead<
+op analyzeTextJobStatus is languageOperations.ResourceRead<
   AnalyzeTextJobState,
   AnalyzeTextJobQueryParameters
 >;
@@ -89,15 +82,26 @@ op analyzeTextJobStatus is LanguageLongRunningResourceRead<
 @doc("Submit a collection of text documents for analysis. Specify one or more unique tasks to be executed as a long-running operation.")
 @route("/analyze-text/jobs")
 @pollingOperation(analyzeTextJobStatus)
-op analyzeTextSubmitJob is LanguageLongRunningOperation<
+op analyzeTextSubmitJob is Foundations.LongRunningOperation<
   AnalyzeTextJobsInput,
-  AnalyzeTextJobState
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Cancel a long-running Text Analysis job.")
 @summary("Cancel a long-running Text Analysis job.")
 @pollingOperation(analyzeTextJobStatus)
-@actionSeparator(":")
-@action("cancel")
-op analyzeTextCancelJob is LanguageLongRunningResourceCancel<AnalyzeTextJobState>;
+@route("/analyze-text/jobs/{jobId}:cancel")
+@post
+op analyzeTextCancelJob is Foundations.LongRunningOperation<
+  {
+    @path
+    @doc("The job ID to cancel.")
+    jobId: uuid;
+  },
+  AcceptedResponse,
+  {},
+  ErrorResponse
+>;

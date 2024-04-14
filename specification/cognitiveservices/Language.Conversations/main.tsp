@@ -1762,25 +1762,19 @@ alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
   NoClientRequestId;
 
-alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
+alias languageOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @post
-@doc("Analyzes the input conversation utterance.")
 @route("/:analyze-conversations")
-op analyzeConversations(
-  @doc("Collection of conversations to analyze and a single task to execute.")
-  @body
-  body: AnalyzeConversationTask,
-
-  ...Azure.Core.Foundations.ApiVersionParameter,
-): AnalyzeConversationTaskResult | ErrorResponseWithHeader;
+@doc("Analyzes the input conversation utterance.")
+op analyzeConversations is RpcOperation<AnalyzeConversationTask, AnalyzeConversationTaskResult, {}, ErrorResponseWithHeader>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.v2023_04_01)
 @doc("Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.")
 @summary("Get analysis status and results")
-op analyzeConversationsJobStatus is LanguageLongRunningResourceRead<
+op analyzeConversationsJobStatus is languageOperations.ResourceRead<
   AnalyzeConversationJobState,
   ShowStatsQueryParameter
 >;
@@ -1790,16 +1784,27 @@ op analyzeConversationsJobStatus is LanguageLongRunningResourceRead<
 @doc("Analyzes the input conversation utterance.")
 @route("/analyze-conversations/jobs")
 @pollingOperation(analyzeConversationsJobStatus)
-op analyzeConversationsSubmitJob is LanguageLongRunningOperation<
+op analyzeConversationsSubmitJob is Foundations.LongRunningOperation<
   AnalyzeConversationJobsInput,
-  AnalyzeConversationJobState
+  AcceptedResponse,
+  {},
+  ErrorResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.v2023_04_01)
 @doc("Cancel a long-running job for text analysis of conversations.")
-@summary("Cancel a long-running Text Analysis conversations job")
+@summary("Cancel a long-running Text Analysis conversations job.")
 @pollingOperation(analyzeConversationsJobStatus)
-@actionSeparator(":")
-@action("cancel")
-op analyzeConversationsCancelJob is LanguageLongRunningResourceCancel<AnalyzeConversationJobState>;
+@route("/analyze-conversations/jobs/{jobId}:cancel")
+@post
+op analyzeConversationsCancelJob is Foundations.LongRunningOperation<
+  {
+    @path
+    @doc("The job ID to cancel.")
+    jobId: uuid;
+  },
+  AcceptedResponse,
+  {},
+  ErrorResponse
+>;

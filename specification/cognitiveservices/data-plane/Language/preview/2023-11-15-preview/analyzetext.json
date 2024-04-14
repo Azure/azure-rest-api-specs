@@ -55,12 +55,15 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/AnalyzeTextQueryParameters.showStats"
+            "name": "showStats",
+            "in": "query",
+            "description": "(Optional) if set to true, response will contain request and document level statistics.",
+            "required": false,
+            "type": "boolean"
           },
           {
             "name": "body",
             "in": "body",
-            "description": "Collection of documents to analyze and a single task to execute.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AnalyzeTextTask"
@@ -277,7 +280,7 @@
           {
             "name": "jobId",
             "in": "path",
-            "description": "job ID",
+            "description": "The job ID to cancel.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -9648,14 +9651,6 @@
     }
   },
   "parameters": {
-    "AnalyzeTextQueryParameters.showStats": {
-      "name": "showStats",
-      "in": "query",
-      "description": "(Optional) if set to true, response will contain request and document level statistics.",
-      "required": false,
-      "type": "boolean",
-      "x-ms-parameter-location": "method"
-    },
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",

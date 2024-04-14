@@ -57,7 +57,6 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Collection of conversations to analyze and a single task to execute.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AnalyzeConversationTask"
@@ -195,7 +194,7 @@
     "/analyze-conversations/jobs/{jobId}:cancel": {
       "post": {
         "operationId": "AnalyzeConversationsCancelJob",
-        "summary": "Cancel a long-running Text Analysis conversations job",
+        "summary": "Cancel a long-running Text Analysis conversations job.",
         "description": "Cancel a long-running job for text analysis of conversations.",
         "parameters": [
           {
@@ -204,7 +203,7 @@
           {
             "name": "jobId",
             "in": "path",
-            "description": "job ID",
+            "description": "The job ID to cancel.",
             "required": true,
             "type": "string",
             "format": "uuid"
