@@ -64,7 +64,7 @@ union WorkloadMonitorProvisioningState {
 union RoutingPreference {
   string,
 
-  /** Default routing preference. Only RFC1918 traffic is routed to the customer VNET.*/
+  /** Default routing preference. Only RFC1918 traffic is routed to the customer VNET. */
   Default: "Default",
 
   /** Route all traffic to the customer VNET. */
@@ -77,7 +77,7 @@ union RoutingPreference {
 union AppServicePlanTier {
   string,
 
-  /**  Elastic Premium plan */
+  /** Elastic Premium plan */
   ElasticPremium: "ElasticPremium",
 
   /** Dedicated Premium V3 plan */
@@ -147,7 +147,8 @@ union SslPreference {
 @armCommonDefinition(
   "UserAssignedIdentities",
   Azure.ResourceManager.CommonTypes.Versions.v5,
-  "managedidentity.json")
+  "managedidentity.json"
+)
 model UserAssignedIdentities {}
 
 /**
@@ -272,7 +273,6 @@ model AppServicePlanConfiguration {
  * Defines the request body for updating SAP monitor resource.
  */
 model UpdateMonitorRequest {
-  
   ...ArmTagsProperty;
 
   /**

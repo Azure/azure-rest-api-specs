@@ -18,7 +18,8 @@ namespace Microsoft.Workloads;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "This is a singleton resource and the name is fixed."
 @singleton("default")
 @parentResource(Monitor)
-model SapLandscapeMonitorResource is ProxyResource<SapLandscapeMonitorProperties> {
+model SapLandscapeMonitorResource
+  is ProxyResource<SapLandscapeMonitorProperties> {
   /**
    * The name of the resource.
    */
@@ -45,7 +46,10 @@ interface SapLandscapeMonitor {
    * Patches the SAP Landscape Monitor Dashboard for the specified subscription, resource group, and SAP monitor name.
    */
   @parameterVisibility("read")
-  update is ArmCustomPatchSync<SapLandscapeMonitorResource, SapLandscapeMonitorResource>;
+  update is ArmCustomPatchSync<
+    SapLandscapeMonitorResource,
+    SapLandscapeMonitorResource
+  >;
 
   /**
    * Deletes a SAP Landscape Monitor Dashboard with the specified subscription, resource group, and SAP monitor name.
