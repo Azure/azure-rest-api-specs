@@ -18,7 +18,6 @@ model AnalyzeTextKeyPhraseExtractionInput extends AnalyzeTextTask {
   parameters?: KeyPhraseTaskParameters;
 }
 
-@clientName("KeyPhraseTaskContent", "csharp")
 @doc("Supported parameters for a Key Phrase Extraction task.")
 model KeyPhraseTaskParameters is PreBuiltTaskParameters;
 

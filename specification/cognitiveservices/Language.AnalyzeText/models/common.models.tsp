@@ -239,7 +239,6 @@ model TasksState {
 }
 
 @doc("Container for the tasks status for the LRO job.")
-@clientName("TasksStatus", "csharp")
 model Tasks {
   @doc("Count of completed tasks.")
   completed: int32;
@@ -407,7 +406,6 @@ model TaskState {
 }
 
 @doc("The status of the task at the mentioned last update time.")
-@clientName("CurrentState", "csharp")
 @lroStatus
 union State {
   string,
@@ -441,14 +439,12 @@ model TaskIdentifier {
   taskName?: string;
 }
 
-@clientName("TaskContent", "csharp")
 @doc("Base parameters object for a text analysis task.")
 model TaskParameters {
   @doc("logging opt out")
   loggingOptOut?: boolean = false;
 }
 
-@clientName("PreBuiltTaskContent", "csharp")
 @doc("Parameters object for a text analysis task using pre-built models.")
 model PreBuiltTaskParameters is TaskParameters {
   @doc("model version")
@@ -684,7 +680,6 @@ union SummaryLengthBucket {
 }
 
 @added(Versions.v2023_04_01)
-@clientName("AbstractiveSummarizationTaskContentBase", "csharp")
 @doc("Supported parameters for an Abstractive Summarization task.")
 model AbstractiveSummarizationTaskParametersBase {
   @doc("Controls the approximate number of sentences in the output summaries.")
@@ -707,7 +702,6 @@ model SummaryContext {
   length: int32;
 }
 
-@clientName("CustomTaskContent", "csharp")
 @doc("Parameters object for a text analysis task using custom models.")
 model CustomTaskParameters is TaskParameters {
   @doc("This field indicates the project name for the model.")
@@ -765,7 +759,6 @@ union redactionCharacter {
   tilde: "~",
 }
 
-@clientName("AnalyzeTextError", "csharp")
 @doc("The error response object returned when the service encounters some errors during processing the request.")
 model Error {
   @doc("One of a server-defined set of error codes.")

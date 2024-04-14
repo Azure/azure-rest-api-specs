@@ -18,7 +18,6 @@ model AnalyzeTextEntityRecognitionInput extends AnalyzeTextTask {
   parameters?: EntitiesTaskParameters;
 }
 
-@clientName("EntitiesTaskContent", "csharp")
 @doc("Supported parameters for an Entity Recognition task.")
 model EntitiesTaskParameters is PreBuiltTaskParameters {
   @doc("(Optional) parameter to provide the string index type used to interpret string offsets. Defaults to TextElements (Graphemes).")
@@ -88,7 +87,6 @@ model EntitiesDocumentResultWithMetadataDetectedLanguage
 }
 
 @doc("Defines the detected entity object containing the entity category and entity text detected, etc.")
-@clientName("NamedEntity", "csharp")
 model Entity {
   @doc("Entity text as appears in the request.")
   text: string;
@@ -282,7 +280,6 @@ union EntityCategory {
 }
 
 @added(Versions.v2023_11_15_preview)
-@clientName("EntityInferenceConfig", "csharp")
 @doc("The class that houses the inference options allowed for named entity recognition.")
 model EntityInferenceOptions {
   @doc("Option to include/exclude the detected entity values to be normalized and included in the metadata. The numeric and temporal entity types support value normalization.")

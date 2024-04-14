@@ -21,7 +21,6 @@ model AnalyzeTextSentimentAnalysisInput extends AnalyzeTextTask {
 }
 
 @doc("Supported parameters for a Sentiment Analysis task.")
-@clientName("SentimentAnalysisTaskContent", "csharp")
 model SentimentAnalysisTaskParameters is PreBuiltTaskParameters {
   @doc("Whether to use opinion mining in the request or not.")
   opinionMining?: boolean = false;
@@ -71,7 +70,6 @@ union TokenSentimentValue {
   negative: "negative",
 }
 
-@clientName("SentimentResult", "csharp")
 @doc("Sentiment analysis results for the input documents.")
 model SentimentResponse is PreBuiltResult {
   @typeChangedFrom(Versions.v2023_11_15_preview, Array<SentimentDocumentResult>)
@@ -233,7 +231,6 @@ model CustomSentimentDocumentResult is DocumentResult {
 }
 
 @added(Versions.v2023_11_15_preview)
-@clientName("CustomSentimentAnalysisTaskContent", "csharp")
 @doc("Supported parameters for a Custom Sentiment Analysis task.")
 model CustomSentimentAnalysisTaskParameters is CustomTaskParameters {
   @doc("Specifies the method used to interpret string offsets.")

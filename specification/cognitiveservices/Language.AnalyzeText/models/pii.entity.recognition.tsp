@@ -20,7 +20,6 @@ model AnalyzeTextPiiEntitiesRecognitionInput extends AnalyzeTextTask {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-@clientName("PiiTaskContent", "csharp")
 @doc("Supported parameters for a PII Entities Recognition task.")
 model PiiTaskParameters is PreBuiltTaskParameters {
   @doc("Domain for PII task")

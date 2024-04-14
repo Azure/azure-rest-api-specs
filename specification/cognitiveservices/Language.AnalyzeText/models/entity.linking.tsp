@@ -19,7 +19,6 @@ model AnalyzeTextEntityLinkingInput extends AnalyzeTextTask {
 }
 
 @doc("Supported parameters for an Entity Linking task.")
-@clientName("EntityLinkingTaskContent", "csharp")
 model EntityLinkingTaskParameters is PreBuiltTaskParameters {
   @doc("Optional parameter to provide the string index type used to interpret string offsets. Defaults to TextElements (Graphemes).")
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
@@ -92,7 +91,6 @@ model LinkedEntity {
 }
 
 @doc("The Match object containing the detected entity text with the offset and the length.")
-@clientName("EntityLinkingMatch", "csharp")
 model Match {
   @doc("If a well known item is recognized, a decimal number denoting the confidence level between 0 and 1 will be returned.")
   confidenceScore: float64;

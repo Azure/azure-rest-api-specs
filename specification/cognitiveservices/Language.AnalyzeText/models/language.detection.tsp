@@ -24,7 +24,6 @@ model AnalyzeTextLanguageDetectionInput extends AnalyzeTextTask {
   parameters?: LanguageDetectionTaskParameters;
 }
 
-@clientName("LanguageDetectionTaskContent", "csharp")
 @doc("Supported parameters for a Language Detection task.")
 model LanguageDetectionTaskParameters is PreBuiltTaskParameters;
 

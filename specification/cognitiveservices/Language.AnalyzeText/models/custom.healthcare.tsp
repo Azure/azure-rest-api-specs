@@ -6,7 +6,6 @@ using TypeSpec.Versioning;
 
 namespace Language.AnalyzeText;
 @added(Versions.v2023_11_15_preview)
-@clientName("CustomHealthcareTaskContent", "csharp")
 @doc("Supported parameters for a custom Healthcare task.")
 model CustomHealthcareTaskParameters is CustomTaskParameters {
   @doc("Optional parameter to provide the string index type used to interpret string offsets. Defaults to TextElements (Graphemes).")

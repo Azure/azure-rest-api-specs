@@ -7,7 +7,6 @@ using TypeSpec.Versioning;
 namespace Language.AnalyzeText;
 
 @added(Versions.v2023_04_01)
-@clientName("ExtractiveSummarizationTaskContent", "csharp")
 @doc("Supported parameters for an Extractive Summarization task.")
 model ExtractiveSummarizationTaskParameters is PreBuiltTaskParameters {
   @doc("Specifies the number of sentences in the extracted summary.")
@@ -112,7 +111,6 @@ model AbstractiveSummarizationLROTask extends AnalyzeTextLROTask {
 }
 
 @added(Versions.v2023_04_01)
-@clientName("AbstractiveSummarizationTaskContent", "csharp")
 @doc("Supported parameters for the pre-built Abstractive Summarization task.")
 model AbstractiveSummarizationTaskParameters is PreBuiltTaskParameters {
   ...AbstractiveSummarizationTaskParametersBase;
@@ -187,7 +185,7 @@ model CustomAbstractiveSummarizationLROTask extends AnalyzeTextLROTask {
 }
 
 @added(Versions.v2023_11_15_preview)
-@clientName("CustomAbstractiveSummarizationTaskContent", "csharp")
+
 @doc("Supported parameters for the Custom Abstractive Summarization task.")
 model CustomAbstractiveSummarizationTaskParameters
   is AbstractiveSummarizationTaskParametersBase {

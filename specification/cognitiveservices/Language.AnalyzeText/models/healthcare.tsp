@@ -9,7 +9,6 @@ using Azure.Core;
 namespace Language.AnalyzeText;
 
 @doc("Supported parameters for a Healthcare task.")
-@clientName("HealthcareTaskContent", "csharp")
 model HealthcareTaskParameters is PreBuiltTaskParameters {
   @doc("Specifies the method used to interpret string offsets.")
   stringIndexType?: StringIndexType = StringIndexType.TextElements_v8;
@@ -351,7 +350,6 @@ model HealthcareAssertion {
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
 @added(Versions.v2023_11_15_preview)
-@clientName("HealthcareAssertionTemporality", "csharp")
 @doc("Describes temporal information regarding the entity.")
 union Temporality {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -364,7 +362,6 @@ union Temporality {
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
 @doc("Describes any conditionality on the entity.")
-@clientName("HealthcareAssertionConditionality", "csharp")
 union Conditionality {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   hypothetical: "hypothetical",
@@ -373,7 +370,6 @@ union Conditionality {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
-@clientName("HealthcareAssertionCertainty", "csharp")
 @doc("Describes the entities certainty and polarity.")
 union Certainty {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
@@ -389,7 +385,6 @@ union Certainty {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" // defined as closed enum
-@clientName("HealthcareAssertionAssociation", "csharp")
 @doc("Describes if the entity is the subject of the text or if it describes someone else.")
 union Association {
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
