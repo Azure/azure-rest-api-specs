@@ -154,18 +154,21 @@ model UserAssignedIdentities {}
 /**
  * Describes the identity property of monitor resources.
  */
+#suppress "@azure-tools/typespec-azure-core/no-format" "uuid format is being refered in the common types"
 @doc("The Managed service identity.")
 model ManagedServiceIdentity {
   /**
    * The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.
    */
   @visibility("read")
+  @format("uuid")
   principalId?: string;
 
   /**
    * The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.
    */
   @visibility("read")
+  @format("uuid")
   tenantId?: string;
 
   /**
