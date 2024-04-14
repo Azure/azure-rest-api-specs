@@ -13,28 +13,28 @@ scenarios:
   - scenario: basic
     description: Basic scenario for creating, reading and deleting a Mongo Cluster.
     steps:
-      - step: MongoClusters_CheckNameAvailability
-        exampleFile: ../examples/MongoClusterNameAvailability.json
+      - step: MongoClusters_NameAvailability
+        exampleFile: ../examples/MongoClusters_NameAvailability.json
       - step: MongoClusters_CreateOrUpdate
-        exampleFile: ../examples/MongoClusterCreate.json
+        exampleFile: ../examples/MongoClusters_Create.json
         requestUpdate:
           - replace: /resource/properties/administratorLoginPassword
             value: $(administratorLoginPassword)
       - step: MongoClusters_ListByResourceGroup
-        exampleFile: ../examples/MongoClusterListByResourceGroup.json
+        exampleFile: ../examples/MongoClusters_ListByResourceGroup.json
       - step: MongoClusters_Get
-        exampleFile: ../examples/MongoClusterGet.json
+        exampleFile: ../examples/MongoClusters_Get.json
       - step: FirewallRules_CreateOrUpdate
-        exampleFile: ../examples/MongoClusterFirewallRuleCreate.json
+        exampleFile: ../examples/MongoClusters_FirewallRuleCreate.json
       - step: FirewallRules_ListByMongoCluster
-        exampleFile: ../examples/MongoClusterFirewallRuleList.json
+        exampleFile: ../examples/MongoClusters_FirewallRuleList.json
       - step: FirewallRules_Get
-        exampleFile: ../examples/MongoClusterFirewallRuleGet.json
+        exampleFile: ../examples/MongoClusters_FirewallRuleGet.json
       - step: MongoClusters_ListConnectionStrings
-        exampleFile: ../examples/MongoClusterListConnectionStrings.json
+        exampleFile: ../examples/MongoClusters_ListConnectionStrings.json
       - step: MongoClusters_Update
-        exampleFile: ../examples/MongoClusterPatchDiskSize.json
+        exampleFile: ../examples/MongoClusters_PatchDiskSize.json
       - step: FirewallRules_Delete
-        exampleFile: ../examples/MongoClusterFirewallRuleDelete.json
+        exampleFile: ../examples/MongoClusters_FirewallRuleDelete.json
       - step: MongoClusters_Delete
-        exampleFile: ../examples/MongoClusterDelete.json
+        exampleFile: ../examples/MongoClusters_Delete.json
