@@ -379,10 +379,52 @@ union IPPoolTypeEnum {
   string,
 }
 
+@doc("The ARM ID for a Network Interface.")
+model NetworkInterfaceArmReference {
+  @doc("The ARM ID for a Network Interface.")
+  id?: armResourceIdentifier<[{type:"Microsoft.AzureStackHCI/networkInterfaces"}]>
+}
+
+@doc("The ARM ID for a Network Security Group.")
+model NetworkSecurityGroupArmReference {
+  @doc("The ARM ID for a Network Security Group.")
+  id?: armResourceIdentifier<[{type:"Microsoft.AzureStackHCI/networkSecurityGroups"}]>
+}
+
+@doc("The ARM ID for a Logical Network.")
+model LogicalNetworkArmReference {
+  @doc("The ARM ID for a Logical Network.")
+  id?: armResourceIdentifier<[{type:"Microsoft.AzureStackHCI/logicalNetworks"}]>
+}
+
+@doc("The ARM ID for a Virtual Machine.")
+model VirtualMachineArmReference {
+  @doc("The ARM ID for a Virtual Machine.")
+  id?: armResourceIdentifier<[{type:"Microsoft.AzureStackHCI/virtualMachineInstance"}]>
+}
+
+@doc("The ARM ID for a Storage Container.")
+model StorageContainerArmReference {
+  @doc("The ARM ID for a Storage Container.")
+  id?: armResourceIdentifier<[{type:"Microsoft.AzureStackHCI/storageContainers"}]>
+}
+
+@doc("The ARM ID for a Gallery Image.")
+model GalleryImageArmReference {
+  @doc("The ARM ID for a Storage Container.")
+  id?: armResourceIdentifier<[{type:"Microsoft.AzureStackHCI/galleryImages"}]>
+}
+
+@doc("The ARM ID for a Virtual Hard Disk.")
+model VirtualHardDiskArmReference {
+  @doc("The ARM ID for a Virtual Hard Disk.")
+  id?: armResourceIdentifier<[{type:"Microsoft.AzureStackHCI/virtualHardDisks"}]>
+}
+
 @doc("Properties under the gallery image resource")
 model GalleryImageProperties {
   @doc("Storage ContainerID of the storage container to be used for gallery image")
-  containerId?: ResourceIdentifier<[
+  containerId?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/storageContainers";
     }
@@ -564,10 +606,10 @@ model SubnetProperties {
   ipAllocationMethod?: IpAllocationMethodEnum;
 
   @doc("IPConfigurationReferences - list of IPConfigurationReferences")
-  ipConfigurationReferences?: ResourceIdentifier<[{type:"Microsoft.AzureStackHCI/networkInterfaces"}]>[];
+  ipConfigurationReferences?: NetworkInterfaceArmReference[];
 
   @doc("NetworkSecurityGroup - Network Security Group attached to the logical network.")
-  networkSecurityGroup?: ResourceIdentifier<[{type:"Microsoft.AzureStackHCI/networkSecurityGroups"}]>;
+  networkSecurityGroup?: NetworkSecurityGroupArmReference;
 
   @doc("Route table resource.")
   routeTable?: RouteTable;
@@ -663,11 +705,11 @@ model IPPoolInfo {
 model NetworkSecurityGroupProperties {
   @doc("A collection of references to network interfaces that are currently using this NSG.")
   @visibility("read")
-  networkInterfaceReferences?: ResourceIdentifier<[{type:"Microsoft.AzureStackHCI/networkInterfaces"}]>[];
+  networkInterfaceReferences?: NetworkInterfaceArmReference[];
 
   @doc("A collection of references to subnets that are currently using this NSG")
   @visibility("read")
-  subnets?: ResourceIdentifier<[{type:"Microsoft.AzureStackHCI/logicalNetworks"}]>[];
+  subnets?: LogicalNetworkArmReference[];
 
   @doc("The resource GUID property of the network security group resource.")
   @visibility("read")
@@ -733,7 +775,7 @@ model NetworkInterfaceProperties {
   status?: NetworkInterfaceStatus;
 
   @doc("NetworkSecurityGroup - Network Security Group attached to the network interface.")
-  networkSecurityGroup?: ResourceIdentifier<[{type:"Microsoft.AzureStackHCI/networkSecurityGroups"}]>;
+  networkSecurityGroup?: NetworkSecurityGroupArmReference;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
@@ -767,7 +809,7 @@ model IPConfigurationProperties {
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("Subnet - Name of Subnet bound to the IP configuration.")
-  subnet?: ResourceIdentifier<[{type:"Microsoft.AzureStackHCI/logicalNetworks"}]>;
+  subnet?: LogicalNetworkArmReference;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "DNS is a short form. The casing is correct."
@@ -828,7 +870,7 @@ model LogicalNetworksUpdateRequest {
 @doc("Properties under the marketplace gallery image resource")
 model MarketplaceGalleryImageProperties {
   @doc("Storage ContainerID of the storage container to be used for marketplace gallery image")
-  containerId?: ResourceIdentifier<[
+  containerId?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureStackHCI/storageContainers";
     }
@@ -1104,7 +1146,7 @@ model VirtualMachineInstancePropertiesHardwareProfileDynamicMemoryConfig {
 @doc("NetworkProfile - describes the network configuration the virtual machine instance")
 model VirtualMachineInstancePropertiesNetworkProfile {
   @doc("NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance")
-  networkInterfaces?: ResourceIdentifier<[{type:"Microsoft.AzureStackHCI/networkInterfaces"}]>[];
+  networkInterfaces?: NetworkInterfaceArmReference[];
 }
 
 @doc("OsProfile - describes the configuration of the operating system and sets login data")
@@ -1201,13 +1243,14 @@ model VirtualMachineInstancePropertiesSecurityProfileUefiSettings {
 @doc("StorageProfile - contains information about the disks and storage information for the virtual machine instance")
 model VirtualMachineInstancePropertiesStorageProfile {
   @doc("adds data disks to the virtual machine instance")
-  dataDisks?: ResourceIdentifier<[{type:"Microsoft.AzureStackHCI/virtualHardDisks"}]>[];
+  dataDisks?: VirtualHardDiskArmReference[];
 
   @doc("Which Image to use for the virtual machine instance")
-  imageReference?: ResourceIdentifier<[{type:"Microsoft.AzureStackHCI/marketplaceGalleryImages"}]>;
+  @visibility("read", "create")
+  imageReference?: GalleryImageArmReference;
 
   @doc("VHD to attach as OS disk")
-  osDisk?: VirtualMachineInstancePropertiesStorageProfileOsDisk;
+  osDisk?: VirtualHardDiskArmReference;
 
   @doc("Id of the storage container that hosts the VM configuration file")
   vmConfigStoragePathId?: ResourceIdentifier<[
@@ -1216,24 +1259,9 @@ model VirtualMachineInstancePropertiesStorageProfile {
     }
   ]>;
 }
-@doc("Virtual machine instance storage profile data disks ")
-model VirtualMachineInstancePropertiesStorageProfileDataDisksItem {
-  @doc("Resource ID of the data disk")
-  id?: string;
-}
-
-@doc("Which Image to use for the virtual machine instance")
-model VirtualMachineInstancePropertiesStorageProfileImageReference {
-  @doc("Resource ID of the image")
-  @visibility("read", "create")
-  id?: string;
-}
 
 @doc("VHD to attach as OS disk")
-model VirtualMachineInstancePropertiesStorageProfileOsDisk {
-  @doc("Resource ID of the OS disk")
-  id?: ResourceIdentifier<[{type:"Microsoft.AzureStackHCI/virtualHardDisk"}]>;
-
+model VirtualMachineInstancePropertiesStorageProfileOsDisk extends VirtualHardDiskArmReference {
   @doc("This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: Windows, Linux.")
   osType?: OperatingSystemTypes;
 }
@@ -1393,13 +1421,13 @@ model HardwareProfileUpdate {
 @doc("Storage profile update")
 model StorageProfileUpdate {
   @doc("adds data disks to the virtual machine instance for the update call")
-  dataDisks?: ResourceIdentifier<[{type:"Microsoft.AzureStackHCI/virtualHardDisks"}]>[];
+  dataDisks?: VirtualHardDiskArmReference[];
 }
 
 @doc("NetworkProfile - describes the network update configuration the virtual machine instance")
 model NetworkProfileUpdate {
   @doc("NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance")
-  networkInterfaces?: ResourceIdentifier<[{type:"Microsoft.AzureStackHCI/networkInterfaces"}]>[];
+  networkInterfaces?: NetworkInterfaceArmReference[];
 }
 
 @doc("OsProfile - describes the update configuration of the operating system")
