@@ -329,7 +329,7 @@ model AutomaticResourcePredictionsProfile extends ResourcePredictionsProfile {
   kind: "Automatic";
 
   @doc("Determines the balance between cost and performance.")
-  predictionPreference?: PredictionPreference
+  predictionPreference?: PredictionPreference;
 }
 
 @doc("Determines the balance between cost and performance.")
@@ -349,7 +349,7 @@ union PredictionPreference {
   "MorePerformance",
 
   @doc("Optimizes for performance over cost.")
-  "BestPerformance"
+  "BestPerformance",
 }
 
 @doc("The status of the current operation.")
@@ -640,12 +640,11 @@ model QuotaProperties {
 
 union UsageUnit {
   string,
-  Count: "Count"
+  Count: "Count",
 }
 
 @doc("The Quota Names")
-model QuotaName
-{
+model QuotaName {
   @doc("The name of the resource.")
   value?: string;
 
