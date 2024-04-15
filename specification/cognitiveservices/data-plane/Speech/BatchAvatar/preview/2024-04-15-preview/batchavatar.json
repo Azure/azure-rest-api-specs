@@ -330,7 +330,8 @@
           "readOnly": true
         },
         "id": {
-          "$ref": "#/definitions/ResourceId"
+          "$ref": "#/definitions/ResourceId",
+          "readOnly": true
         },
         "description": {
           "description": "The description of the batch synthesis task.",
@@ -454,7 +455,8 @@
         "timeToLiveInHours": {
           "description": "How long the batch task will be kept in the system after it has completed. Once the batch task reaches the time to live after completion (succeeded or failed) it will be automatically deleted. The longest supported duration is 744 hours (31 days). The default value is 744 hours. ",
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": 774
         },
         "destinationContainerUrl": {
           "format": "uri",
