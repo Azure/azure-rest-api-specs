@@ -1281,7 +1281,7 @@ model VirtualMachineInstancePropertiesStorageProfile {
   imageReference?: GalleryImageArmReference;
 
   @doc("VHD to attach as OS disk")
-  osDisk?: VirtualHardDiskArmReference;
+  osDisk?: VirtualMachineInstancePropertiesStorageProfileOsDisk;
 
   @doc("Id of the storage container that hosts the VM configuration file")
   vmConfigStoragePathId?: armResourceIdentifier<[
