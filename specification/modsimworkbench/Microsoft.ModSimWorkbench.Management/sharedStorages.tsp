@@ -67,7 +67,7 @@ model SharedStorageBaseProperties {
 model SharedStorageProperties {
   ...SharedStorageBaseProperties;
 
-  @visibility("read", "create", "update")
+  @visibility("read", "create")
   @doc("Performance tier of the shared storage.")
   performanceTier: SharedStoragePerformanceTier = SharedStoragePerformanceTier.Standard;
 }
@@ -76,7 +76,7 @@ model SharedStorageProperties {
 model SharedStorageUpdateProperties {
   ...SharedStorageBaseProperties;
 
-  @visibility("read", "create", "update")
+  @visibility("update")
   @doc("Performance tier of the shared storage.")
   performanceTier: SharedStoragePerformanceTier;
 }

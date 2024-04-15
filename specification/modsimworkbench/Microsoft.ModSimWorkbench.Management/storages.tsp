@@ -49,7 +49,7 @@ model StorageBaseProperties {
 model StorageProperties {
   ...StorageBaseProperties;
 
-  @visibility("read", "create", "update")
+  @visibility("read", "create")
   @doc("Performance tier of the chamber storage.")
   performanceTier: StoragePerformanceTier = StoragePerformanceTier.Standard;
 }
@@ -58,7 +58,7 @@ model StorageProperties {
 model StorageUpdateProperties {
   ...StorageBaseProperties;
 
-  @visibility("read", "create", "update")
+  @visibility("update")
   @doc("Performance tier of the chamber storage.")
   performanceTier: StoragePerformanceTier;
 }
