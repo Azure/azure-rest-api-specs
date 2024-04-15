@@ -331,7 +331,7 @@ enum EvidenceType {
   @doc("The evidence is a file.")
   File,
 
-  @doc("The evidence auto collected by ACAT.")
+  @doc("The evidence auto collected by App Compliance Automation.")
   AutoCollectedEvidence,
 
   @doc("The evidence is data.")
@@ -386,7 +386,7 @@ enum Rule {
   @doc("The question answer should be a valid guid.")
   ValidGuid,
 
-  @doc("The question answer should be publisher verfification.")
+  @doc("The question answer should be publisher verification.")
   PublisherVerification,
 
   @doc("The question answer should be dynamic dropdown.")
@@ -442,7 +442,7 @@ enum InputType {
   @doc("The input content is a single result seleted from the dropdown options.")
   SingleSelectDropdown,
 
-  @doc("The input content are multiple results seleted from the checkboxs.")
+  @doc("The input content are multiple results seleted from the check boxs.")
   MultiSelectCheckbox,
 
   @doc("The input content are multiple results seleted from the dropdown options.")
@@ -1580,7 +1580,7 @@ model ScopingQuestion {
   rules: Rule[];
 
   /**
-   * The anwser value to show the sub questions.
+   * The answer value to show the sub questions.
    */
   @visibility("read")
   showSubQuestionsValue: string;
