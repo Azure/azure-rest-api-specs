@@ -575,7 +575,10 @@
             "in": "path",
             "description": "Fully qualified ID for the operation status.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$"
           }
         ],
         "responses": {
@@ -4454,6 +4457,9 @@
         "id": {
           "type": "string",
           "description": "Fully qualified ID for the operation status.",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$",
           "readOnly": true
         },
         "name": {

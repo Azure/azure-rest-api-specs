@@ -15,6 +15,9 @@ namespace DevCenterService;
 @parentResource(Project)
 model OperationStatus {
   @doc("Fully qualified ID for the operation status.")
+  @maxLength(36)
+  @minLength(36)
+  @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$")
   @key("operationId")
   @visibility("read")
   id: string;
