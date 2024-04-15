@@ -9,11 +9,7 @@
     }
   },
   "responses": {
-    "202": {
-      "headers": {
-        "Retry-After": 5,
-        "Azure-AsyncOperation": "https://chsm-prebackup-polling-uri/"
-      },
+    "200": {
       "body": {
         "azureStorageResourceUri": "https://myaccount.blob.core.windows.net/sascontainer/sasContainer",
         "status": "InProgress",
@@ -21,6 +17,12 @@
         "startTime": "2022-09-12T12:00:00.0000000Z",
         "endTime": "2022-09-12T12:00:00.0000000Z",
         "jobId": "572a45927fc240e1ac075de27371680b"
+      }
+    },
+    "202": {
+      "headers": {
+        "Retry-After": 5,
+        "Azure-AsyncOperation": "https://chsm-prebackup-polling-uri/"
       }
     }
   }
