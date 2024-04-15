@@ -25,6 +25,6 @@ You can learn more about AutoRest configuration files at
 You can learn more about the overall directory structure at
 [aka.ms/azsdk/spec-dirs](https://aka.ms/azsdk/spec-dirs).
 
-See also: [../samplefiles](../samplefiles)
+See also: [`samplefiles`](../samplefiles/ABOUT.md)
 
 
