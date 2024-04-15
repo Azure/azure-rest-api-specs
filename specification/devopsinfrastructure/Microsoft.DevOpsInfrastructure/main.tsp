@@ -307,7 +307,7 @@ model Stateful extends AgentProfile {
   @doc("How long should stateful machines be kept around. The maximum is one week.")
   maxAgentLifetime?: string;
 
-  @doc("How long should the machine be kept around after it ran a workload when there are no stand-by agents. The maxium is one week.")
+  @doc("How long should the machine be kept around after it ran a workload when there are no stand-by agents. The maximum is one week.")
   gracePeriod?: string;
 }
 @doc("Defines pool buffer.")
@@ -342,7 +342,7 @@ union PredictionPreference {
   @doc("Optimizes for cost over performance.")
   "MostCostEffective",
 
-  @doc("Halfway through cost and balaced.")
+  @doc("Halfway through cost and balanced.")
   "MoreCostEffective",
 
   @doc("Halfway through balanced and performance.")
