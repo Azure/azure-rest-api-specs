@@ -4,10 +4,10 @@
 
 Configuration for generating BatchAvatar SDK.
 
-The current release for the BatchAvatar is `release_2024_04_01_preview`.
+The current release for the BatchAvatar is `release_2024_04_15_preview`.
 
 ``` yaml
-tag: release_2024_04_01_preview
+tag: release_2024_04_15_preview
 add-credentials: true
 openapi-type: data-plane
 ```
@@ -16,9 +16,9 @@ openapi-type: data-plane
 
 ## BatchAvatar 2024-04-15
 
-These settings apply only when `--tag=release_2024_04_01_preview` is specified on the command line.
+These settings apply only when `--tag=release_2024_04_15_preview` is specified on the command line.
 
-```yaml $(tag) == 'release_2024_04_01_preview'
+```yaml $(tag) == 'release_2024_04_15_preview'
 input-file:
   - preview/2024-04-15-preview/batchavatar.json
 ```
