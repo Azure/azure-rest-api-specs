@@ -30,13 +30,13 @@ openapi-type: arm
 tag: package-preview-2024-05
 ```
 
-
 ### Tag: package-preview-2024-05
 
 These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
 
 ```yaml $(tag) == 'package-preview-2024-05'
 input-file:
+  - Microsoft.DocumentDB/preview/2024-05-15-preview/networkSecurityPerimeter.json
   - Microsoft.DocumentDB/preview/2024-05-15-preview/cosmos-db.json
   - Microsoft.DocumentDB/preview/2024-05-15-preview/dataTransferService.json
   - Microsoft.DocumentDB/preview/2024-05-15-preview/managedCassandra.json
@@ -50,6 +50,7 @@ input-file:
   - Microsoft.DocumentDB/preview/2024-05-15-preview/services.json
   - Microsoft.DocumentDB/preview/2024-05-15-preview/throughputpool.json
 ```
+
 ### Tag: package-preview-2024-02
 
 These settings apply only when `--tag=package-preview-2024-02` is specified on the command line.
