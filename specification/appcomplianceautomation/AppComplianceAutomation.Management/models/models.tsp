@@ -442,7 +442,7 @@ enum InputType {
   @doc("The input content is a single result seleted from the dropdown options.")
   SingleSelectDropdown,
 
-  @doc("The input content are multiple results seleted from the check boxs.")
+  @doc("The input content are multiple results seleted from the checkboxes.")
   MultiSelectCheckbox,
 
   @doc("The input content are multiple results seleted from the dropdown options.")
