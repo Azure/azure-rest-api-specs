@@ -175,6 +175,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "SubscriptionUsages_ListByLocation": {
+            "$ref": "./examples/SubscriptionUsages_ListByLocation.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -573,11 +578,11 @@
         },
         "resourcePredictions": {
           "$ref": "#/definitions/ResourcePredictions",
-          "description": "Defines pool buffer/standy-by agents."
+          "description": "Defines pool buffer/stand-by agents."
         },
         "resourcePredictionsProfile": {
           "$ref": "#/definitions/ResourcePredictionsProfile",
-          "description": "Defines how the pool buffer/standy-by agents is provided."
+          "description": "Defines how the pool buffer/stand-by agents is provided."
         }
       },
       "discriminator": "kind",
@@ -1125,22 +1130,22 @@
           {
             "name": "MostCostEffective",
             "value": "MostCostEffective",
-            "description": "MostCostEffective."
+            "description": "Optimizes for cost over performance."
           },
           {
             "name": "MoreCostEffective",
             "value": "MoreCostEffective",
-            "description": "MoreCostEffective."
+            "description": "Halfway through cost and balaced."
           },
           {
             "name": "MorePerformance",
             "value": "MorePerformance",
-            "description": "MorePerformance."
+            "description": "Halfway through balanced and performance."
           },
           {
             "name": "BestPerformance",
             "value": "BestPerformance",
-            "description": "BestPerformance."
+            "description": "Optimizes for performance over cost."
           }
         ]
       }

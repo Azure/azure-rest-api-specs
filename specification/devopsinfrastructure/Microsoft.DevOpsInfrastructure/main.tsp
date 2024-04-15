@@ -288,10 +288,10 @@ model NetworkProfile {
 @doc("The agent profile of the machines in the pool.")
 @discriminator("kind")
 model AgentProfile {
-  @doc("Defines pool buffer/standy-by agents.")
+  @doc("Defines pool buffer/stand-by agents.")
   resourcePredictions?: ResourcePredictions;
 
-  @doc("Defines how the pool buffer/standy-by agents is provided.")
+  @doc("Defines how the pool buffer/stand-by agents is provided.")
   resourcePredictionsProfile?: ResourcePredictionsProfile;
 }
 @doc("Stateless profile meaning that the machines will be cleaned up after running a job.")
@@ -339,16 +339,16 @@ union PredictionPreference {
   @doc("Balance between cost and performance.")
   "Balanced",
 
-  @doc("MostCostEffective.")
+  @doc("Optimizes for cost over performance.")
   "MostCostEffective",
 
-  @doc("MoreCostEffective.")
+  @doc("Halfway through cost and balaced.")
   "MoreCostEffective",
 
-  @doc("MorePerformance.")
+  @doc("Halfway through balanced and performance.")
   "MorePerformance",
 
-  @doc("BestPerformance.")
+  @doc("Optimizes for performance over cost.")
   "BestPerformance"
 }
 
