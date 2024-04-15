@@ -79,6 +79,9 @@ input-file:
   - Microsoft.Insights/stable/2023-03-11/dataCollectionEndpoints_API.json
   - Microsoft.Insights/stable/2023-03-11/dataCollectionRuleAssociations_API.json
   - Microsoft.Insights/stable/2023-03-11/dataCollectionRules_API.json
+  - Microsoft.Insights/stable/2021-10-01/actionGroups_NetworkSecurityPerimeter_API.json
+  - Microsoft.Insights/stable/2021-10-01/dataCollectionEndpoints_NetworkSecurityPerimeter_API.json
+  - Microsoft.Insights/stable/2021-10-01/scheduledQueryRule_NetworkSecurityPerimeter_API.json
 ```
 
 ### Tag: package-2024-02
