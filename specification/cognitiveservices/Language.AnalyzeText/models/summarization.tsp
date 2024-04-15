@@ -185,7 +185,6 @@ model CustomAbstractiveSummarizationLROTask extends AnalyzeTextLROTask {
 }
 
 @added(Versions.v2023_11_15_preview)
-
 @doc("Supported parameters for the Custom Abstractive Summarization task.")
 model CustomAbstractiveSummarizationTaskParameters
   is AbstractiveSummarizationTaskParametersBase {

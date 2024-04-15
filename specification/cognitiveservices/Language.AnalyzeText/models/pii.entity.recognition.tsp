@@ -102,351 +102,12 @@ model PiiResultWithDetectedLanguage {
 @doc("(Optional) describes the PII categories to return")
 union PiiCategory {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  ABARoutingNumber: "ABARoutingNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  ARNationalIdentityNumber: "ARNationalIdentityNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  AUBankAccountNumber: "AUBankAccountNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  AUDriversLicenseNumber: "AUDriversLicenseNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  AUMedicalAccountNumber: "AUMedicalAccountNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  AUPassportNumber: "AUPassportNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  AUTaxFileNumber: "AUTaxFileNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  AUBusinessNumber: "AUBusinessNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  AUCompanyNumber: "AUCompanyNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  ATIdentityCard: "ATIdentityCard",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  ATTaxIdentificationNumber: "ATTaxIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  ATValueAddedTaxNumber: "ATValueAddedTaxNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  AzureDocumentDBAuthKey: "AzureDocumentDBAuthKey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  AzureIAASDatabaseConnectionAndSQLString: "AzureIAASDatabaseConnectionAndSQLString",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  AzureIoTConnectionString: "AzureIoTConnectionString",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  AzurePublishSettingPassword: "AzurePublishSettingPassword",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  AzureRedisCacheString: "AzureRedisCacheString",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  AzureSAS: "AzureSAS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  AzureServiceBusString: "AzureServiceBusString",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  AzureStorageAccountKey: "AzureStorageAccountKey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  AzureStorageAccountGeneric: "AzureStorageAccountGeneric",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  BENationalNumber: "BENationalNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  BENationalNumberV2: "BENationalNumberV2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  BEValueAddedTaxNumber: "BEValueAddedTaxNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  BRCPFNumber: "BRCPFNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  BRLegalEntityNumber: "BRLegalEntityNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  BRNationalIDRG: "BRNationalIDRG",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  BGUniformCivilNumber: "BGUniformCivilNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  CABankAccountNumber: "CABankAccountNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  CADriversLicenseNumber: "CADriversLicenseNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  CAHealthServiceNumber: "CAHealthServiceNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  CAPassportNumber: "CAPassportNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  CAPersonalHealthIdentification: "CAPersonalHealthIdentification",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  CASocialInsuranceNumber: "CASocialInsuranceNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  CLIdentityCardNumber: "CLIdentityCardNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  CNResidentIdentityCardNumber: "CNResidentIdentityCardNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  CreditCardNumber: "CreditCardNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  HRIdentityCardNumber: "HRIdentityCardNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  HRNationalIDNumber: "HRNationalIDNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  HRPersonalIdentificationNumber: "HRPersonalIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  HRPersonalIdentificationOIBNumberV2: "HRPersonalIdentificationOIBNumberV2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  CYIdentityCard: "CYIdentityCard",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  CYTaxIdentificationNumber: "CYTaxIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  CZPersonalIdentityNumber: "CZPersonalIdentityNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  CZPersonalIdentityV2: "CZPersonalIdentityV2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  DKPersonalIdentificationNumber: "DKPersonalIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  DKPersonalIdentificationV2: "DKPersonalIdentificationV2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  DrugEnforcementAgencyNumber: "DrugEnforcementAgencyNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  EEPersonalIdentificationCode: "EEPersonalIdentificationCode",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  EUDebitCardNumber: "EUDebitCardNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  EUDriversLicenseNumber: "EUDriversLicenseNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  EUGPSCoordinates: "EUGPSCoordinates",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  EUNationalIdentificationNumber: "EUNationalIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  EUPassportNumber: "EUPassportNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  EUSocialSecurityNumber: "EUSocialSecurityNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  EUTaxIdentificationNumber: "EUTaxIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  FIEuropeanHealthNumber: "FIEuropeanHealthNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  FINationalID: "FINationalID",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  FINationalIDV2: "FINationalIDV2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  FIPassportNumber: "FIPassportNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  FRDriversLicenseNumber: "FRDriversLicenseNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  FRHealthInsuranceNumber: "FRHealthInsuranceNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  FRNationalID: "FRNationalID",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  FRPassportNumber: "FRPassportNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  FRSocialSecurityNumber: "FRSocialSecurityNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  FRTaxIdentificationNumber: "FRTaxIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  FRValueAddedTaxNumber: "FRValueAddedTaxNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  DEDriversLicenseNumber: "DEDriversLicenseNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  DEPassportNumber: "DEPassportNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  DEIdentityCardNumber: "DEIdentityCardNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  DETaxIdentificationNumber: "DETaxIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  DEValueAddedNumber: "DEValueAddedNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  GRNationalIDCard: "GRNationalIDCard",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  GRNationalIDV2: "GRNationalIDV2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  GRTaxIdentificationNumber: "GRTaxIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  HKIdentityCardNumber: "HKIdentityCardNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  HUValueAddedNumber: "HUValueAddedNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  HUPersonalIdentificationNumber: "HUPersonalIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  HUTaxIdentificationNumber: "HUTaxIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  INPermanentAccount: "INPermanentAccount",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  INUniqueIdentificationNumber: "INUniqueIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  IDIdentityCardNumber: "IDIdentityCardNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  InternationalBankingAccountNumber: "InternationalBankingAccountNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  IEPersonalPublicServiceNumber: "IEPersonalPublicServiceNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  IEPersonalPublicServiceNumberV2: "IEPersonalPublicServiceNumberV2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  ILBankAccountNumber: "ILBankAccountNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  ILNationalID: "ILNationalID",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  ITDriversLicenseNumber: "ITDriversLicenseNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  ITFiscalCode: "ITFiscalCode",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  ITValueAddedTaxNumber: "ITValueAddedTaxNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  JPBankAccountNumber: "JPBankAccountNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  JPDriversLicenseNumber: "JPDriversLicenseNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  JPPassportNumber: "JPPassportNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  JPResidentRegistrationNumber: "JPResidentRegistrationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  JPSocialInsuranceNumber: "JPSocialInsuranceNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  JPMyNumberCorporate: "JPMyNumberCorporate",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  JPMyNumberPersonal: "JPMyNumberPersonal",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  JPResidenceCardNumber: "JPResidenceCardNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  LVPersonalCode: "LVPersonalCode",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  LTPersonalCode: "LTPersonalCode",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  LUNationalIdentificationNumberNatural: "LUNationalIdentificationNumberNatural",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  LUNationalIdentificationNumberNonNatural: "LUNationalIdentificationNumberNonNatural",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  MYIdentityCardNumber: "MYIdentityCardNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  MTIdentityCardNumber: "MTIdentityCardNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  MTTaxIDNumber: "MTTaxIDNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  NLCitizensServiceNumber: "NLCitizensServiceNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  NLCitizensServiceNumberV2: "NLCitizensServiceNumberV2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  NLTaxIdentificationNumber: "NLTaxIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  NLValueAddedTaxNumber: "NLValueAddedTaxNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  NZBankAccountNumber: "NZBankAccountNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  NZDriversLicenseNumber: "NZDriversLicenseNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  NZInlandRevenueNumber: "NZInlandRevenueNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  NZMinistryOfHealthNumber: "NZMinistryOfHealthNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  NZSocialWelfareNumber: "NZSocialWelfareNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  NOIdentityNumber: "NOIdentityNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  PHUnifiedMultiPurposeIDNumber: "PHUnifiedMultiPurposeIDNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  PLIdentityCard: "PLIdentityCard",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  PLNationalID: "PLNationalID",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  PLNationalIDV2: "PLNationalIDV2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  PLPassportNumber: "PLPassportNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  PLTaxIdentificationNumber: "PLTaxIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  PLREGONNumber: "PLREGONNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  PTCitizenCardNumber: "PTCitizenCardNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  PTCitizenCardNumberV2: "PTCitizenCardNumberV2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  PTTaxIdentificationNumber: "PTTaxIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  ROPersonalNumericalCode: "ROPersonalNumericalCode",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  RUPassportNumberDomestic: "RUPassportNumberDomestic",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  RUPassportNumberInternational: "RUPassportNumberInternational",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  SANationalID: "SANationalID",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  SGNationalRegistrationIdentityCardNumber: "SGNationalRegistrationIdentityCardNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  SKPersonalNumber: "SKPersonalNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  SITaxIdentificationNumber: "SITaxIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  SIUniqueMasterCitizenNumber: "SIUniqueMasterCitizenNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  ZAIdentificationNumber: "ZAIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  KRResidentRegistrationNumber: "KRResidentRegistrationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  ESDNI: "ESDNI",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  ESSocialSecurityNumber: "ESSocialSecurityNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  ESTaxIdentificationNumber: "ESTaxIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  SQLServerConnectionString: "SQLServerConnectionString",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  SENationalID: "SENationalID",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  SENationalIDV2: "SENationalIDV2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  SEPassportNumber: "SEPassportNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  SETaxIdentificationNumber: "SETaxIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  SWIFTCode: "SWIFTCode",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  CHSocialSecurityNumber: "CHSocialSecurityNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  TWNationalID: "TWNationalID",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  TWPassportNumber: "TWPassportNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  TWResidentCertificate: "TWResidentCertificate",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  THPopulationIdentificationCode: "THPopulationIdentificationCode",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  TRNationalIdentificationNumber: "TRNationalIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  UKDriversLicenseNumber: "UKDriversLicenseNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  UKElectoralRollNumber: "UKElectoralRollNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  UKNationalHealthNumber: "UKNationalHealthNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  UKNationalInsuranceNumber: "UKNationalInsuranceNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  UKUniqueTaxpayerNumber: "UKUniqueTaxpayerNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  USUKPassportNumber: "USUKPassportNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  USBankAccountNumber: "USBankAccountNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  USDriversLicenseNumber: "USDriversLicenseNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  USIndividualTaxpayerIdentification: "USIndividualTaxpayerIdentification",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  USSocialSecurityNumber: "USSocialSecurityNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  UAPassportNumberDomestic: "UAPassportNumberDomestic",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  UAPassportNumberInternational: "UAPassportNumberInternational",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  Organization: "Organization",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  Email: "Email",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  URL: "URL",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  Age: "Age",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  PhoneNumber: "PhoneNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  IPAddress: "IPAddress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  Date: "Date",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  Person: "Person",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  Address: "Address",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+  PiiCategoriesExclude,
+
+  @doc("All PII categories.")
   All: "All",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("Default PII categories for the language.")
   Default: "Default",
 }
 
@@ -460,350 +121,520 @@ model PiiEntityRecognitionLROResult extends AnalyzeTextLROResult {
   results: PiiResult;
 }
 
-@added(Versions.v2023_11_15_preview)
 @doc("(Optional) describes the PII categories to return")
 union PiiCategoriesExclude {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("ABA Routing number")
   ABARoutingNumber: "ABARoutingNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("AR National Identity Number")
   ARNationalIdentityNumber: "ARNationalIdentityNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("AT Identity Card")
   AUBankAccountNumber: "AUBankAccountNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("AU Driver's License Number")
   AUDriversLicenseNumber: "AUDriversLicenseNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("AU Medical Account Number")
   AUMedicalAccountNumber: "AUMedicalAccountNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("AU Passport Number")
   AUPassportNumber: "AUPassportNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("AU Tax File Number")
   AUTaxFileNumber: "AUTaxFileNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("AU Business Number")
   AUBusinessNumber: "AUBusinessNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("AU Company Number")
   AUCompanyNumber: "AUCompanyNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("AT Identity Card")
   ATIdentityCard: "ATIdentityCard",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("AT Tax Identification Number")
   ATTaxIdentificationNumber: "ATTaxIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("AT Value Added Tax Number")
   ATValueAddedTaxNumber: "ATValueAddedTaxNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("Azure Document DB Auth Key")
   AzureDocumentDBAuthKey: "AzureDocumentDBAuthKey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("Azure IAAS Database Connection And SQL String")
   AzureIAASDatabaseConnectionAndSQLString: "AzureIAASDatabaseConnectionAndSQLString",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("Azure IoT Connection String")
   AzureIoTConnectionString: "AzureIoTConnectionString",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("Azure Publish Setting Password")
   AzurePublishSettingPassword: "AzurePublishSettingPassword",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("Azure Redis Cache String")
   AzureRedisCacheString: "AzureRedisCacheString",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("Azure SAS")
   AzureSAS: "AzureSAS",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("Azure Service Bus String")
   AzureServiceBusString: "AzureServiceBusString",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("Azure Storage Account Key")
   AzureStorageAccountKey: "AzureStorageAccountKey",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("Azure Storage Account Generic")
   AzureStorageAccountGeneric: "AzureStorageAccountGeneric",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("BE National Number")
   BENationalNumber: "BENationalNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("BE National Number V2")
   BENationalNumberV2: "BENationalNumberV2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("BE Value Added Tax Number")
   BEValueAddedTaxNumber: "BEValueAddedTaxNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("BR CPF Number")
   BRCPFNumber: "BRCPFNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("BR Legal Entity Number")
   BRLegalEntityNumber: "BRLegalEntityNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("BR National ID RG")
   BRNationalIDRG: "BRNationalIDRG",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("BG Uniform Civil Number")
   BGUniformCivilNumber: "BGUniformCivilNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("CA Bank Account Number")
   CABankAccountNumber: "CABankAccountNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("CA Driver's License Number")
   CADriversLicenseNumber: "CADriversLicenseNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("CA Health Service Number")
   CAHealthServiceNumber: "CAHealthServiceNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("CA Passport Number")
   CAPassportNumber: "CAPassportNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("CA Personal Health Identification")
   CAPersonalHealthIdentification: "CAPersonalHealthIdentification",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("CA Social Insurance Number")
   CASocialInsuranceNumber: "CASocialInsuranceNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("CL Identity Card Number")
   CLIdentityCardNumber: "CLIdentityCardNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("CN Resident Identity Card Number")
   CNResidentIdentityCardNumber: "CNResidentIdentityCardNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("Credit Card Number")
   CreditCardNumber: "CreditCardNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("HR Identity Card Number")
   HRIdentityCardNumber: "HRIdentityCardNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("HR National ID Number")
   HRNationalIDNumber: "HRNationalIDNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("HR Personal Identification Number")
   HRPersonalIdentificationNumber: "HRPersonalIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("HR Personal Identification OIB Number V2")
   HRPersonalIdentificationOIBNumberV2: "HRPersonalIdentificationOIBNumberV2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("CY Identity Card")
   CYIdentityCard: "CYIdentityCard",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("CY Tax Identification Number")
   CYTaxIdentificationNumber: "CYTaxIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("CZ Personal Identity Number")
   CZPersonalIdentityNumber: "CZPersonalIdentityNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("CZ Personal Identity V2")
   CZPersonalIdentityV2: "CZPersonalIdentityV2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("DK Personal Identification Number")
   DKPersonalIdentificationNumber: "DKPersonalIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("DK Personal Identification V2")
   DKPersonalIdentificationV2: "DKPersonalIdentificationV2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("Drug Enforcement Agency Number")
   DrugEnforcementAgencyNumber: "DrugEnforcementAgencyNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("EE Personal Identification Code")
   EEPersonalIdentificationCode: "EEPersonalIdentificationCode",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("EU Debit Card Number")
   EUDebitCardNumber: "EUDebitCardNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("EU Driver's License Number")
   EUDriversLicenseNumber: "EUDriversLicenseNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("EU GPS Coordinates")
   EUGPSCoordinates: "EUGPSCoordinates",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("EU National Identification Number")
   EUNationalIdentificationNumber: "EUNationalIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("EU Passport Number")
   EUPassportNumber: "EUPassportNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("EU Social Security Number")
   EUSocialSecurityNumber: "EUSocialSecurityNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("EU Tax Identification Number")
   EUTaxIdentificationNumber: "EUTaxIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("FI European Health Number")
   FIEuropeanHealthNumber: "FIEuropeanHealthNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("FI National ID")
   FINationalID: "FINationalID",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("FI National ID V2")
   FINationalIDV2: "FINationalIDV2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("FI Passport Number")
   FIPassportNumber: "FIPassportNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("FR Driver's License Number")
   FRDriversLicenseNumber: "FRDriversLicenseNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("FR Health Insurance Number")
   FRHealthInsuranceNumber: "FRHealthInsuranceNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("FR National ID")
   FRNationalID: "FRNationalID",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("FR Passport Number")
   FRPassportNumber: "FRPassportNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("FR Social Security Number")
   FRSocialSecurityNumber: "FRSocialSecurityNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("FR Tax Identification Number")
   FRTaxIdentificationNumber: "FRTaxIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("FR Value Added Tax Number")
   FRValueAddedTaxNumber: "FRValueAddedTaxNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("DE Driver's License Number")
   DEDriversLicenseNumber: "DEDriversLicenseNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("DE Passport Number")
   DEPassportNumber: "DEPassportNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("DE Identity Card Number")
   DEIdentityCardNumber: "DEIdentityCardNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("DE Tax Identification Number")
   DETaxIdentificationNumber: "DETaxIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("DE Value Added Number")
   DEValueAddedNumber: "DEValueAddedNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("GR National ID Card")
   GRNationalIDCard: "GRNationalIDCard",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("GR National ID V2")
   GRNationalIDV2: "GRNationalIDV2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("GR Tax Identification Number")
   GRTaxIdentificationNumber: "GRTaxIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("HK Identity Card Number")
   HKIdentityCardNumber: "HKIdentityCardNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("HU Value Added Number")
   HUValueAddedNumber: "HUValueAddedNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("HU Personal Identification Number")
   HUPersonalIdentificationNumber: "HUPersonalIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("HU Tax Identification Number")
   HUTaxIdentificationNumber: "HUTaxIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("IN Permanent Account")
   INPermanentAccount: "INPermanentAccount",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("IN Unique Identification Number")
   INUniqueIdentificationNumber: "INUniqueIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("ID Identity Card Number")
   IDIdentityCardNumber: "IDIdentityCardNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("International Banking Account Number")
   InternationalBankingAccountNumber: "InternationalBankingAccountNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("IE Personal Public Service Number")
   IEPersonalPublicServiceNumber: "IEPersonalPublicServiceNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("IE Personal Public Service Number V2")
   IEPersonalPublicServiceNumberV2: "IEPersonalPublicServiceNumberV2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("IL Bank Account Number")
   ILBankAccountNumber: "ILBankAccountNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("IL National ID")
   ILNationalID: "ILNationalID",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("IT Driver's License Number")
   ITDriversLicenseNumber: "ITDriversLicenseNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("IT Fiscal Code")
   ITFiscalCode: "ITFiscalCode",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("IT Value Added Tax Number")
   ITValueAddedTaxNumber: "ITValueAddedTaxNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("JP Bank Account Number")
   JPBankAccountNumber: "JPBankAccountNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("JP Driver's License Number")
   JPDriversLicenseNumber: "JPDriversLicenseNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("JP Passport Number")
   JPPassportNumber: "JPPassportNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("JP Resident Registration Number")
   JPResidentRegistrationNumber: "JPResidentRegistrationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("JP Social Insurance Number")
   JPSocialInsuranceNumber: "JPSocialInsuranceNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("JP My Number Corporate")
   JPMyNumberCorporate: "JPMyNumberCorporate",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("JP My Number Personal")
   JPMyNumberPersonal: "JPMyNumberPersonal",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("JP Residence Card Number")
   JPResidenceCardNumber: "JPResidenceCardNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("LV Personal Code")
   LVPersonalCode: "LVPersonalCode",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("LT Personal Code")
   LTPersonalCode: "LTPersonalCode",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("LU National Identification Number Natural")
   LUNationalIdentificationNumberNatural: "LUNationalIdentificationNumberNatural",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("LU National Identification Number Non Natural")
   LUNationalIdentificationNumberNonNatural: "LUNationalIdentificationNumberNonNatural",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("MY Identity Card Number")
   MYIdentityCardNumber: "MYIdentityCardNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("MT Identity Card Number")
   MTIdentityCardNumber: "MTIdentityCardNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("MT Tax ID Number")
   MTTaxIDNumber: "MTTaxIDNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("NL Citizens Service Number")
   NLCitizensServiceNumber: "NLCitizensServiceNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("NL Citizens Service Number V2")
   NLCitizensServiceNumberV2: "NLCitizensServiceNumberV2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("NL Tax Identification Number")
   NLTaxIdentificationNumber: "NLTaxIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("NL Value Added Tax Number")
   NLValueAddedTaxNumber: "NLValueAddedTaxNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("NZ Bank Account Number")
   NZBankAccountNumber: "NZBankAccountNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("NZ Driver's License Number")
   NZDriversLicenseNumber: "NZDriversLicenseNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("NZ Inland Revenue Number")
   NZInlandRevenueNumber: "NZInlandRevenueNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("NZ Ministry Of Health Number")
   NZMinistryOfHealthNumber: "NZMinistryOfHealthNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("NZ Social Welfare Number")
   NZSocialWelfareNumber: "NZSocialWelfareNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("NO Identity Number")
   NOIdentityNumber: "NOIdentityNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("PH Unified Multi Purpose ID Number")
   PHUnifiedMultiPurposeIDNumber: "PHUnifiedMultiPurposeIDNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("PL Identity Card")
   PLIdentityCard: "PLIdentityCard",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("PL National ID")
   PLNationalID: "PLNationalID",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("PL National ID V2")
   PLNationalIDV2: "PLNationalIDV2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("PL Passport Number")
   PLPassportNumber: "PLPassportNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("PL Tax Identification Number")
   PLTaxIdentificationNumber: "PLTaxIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("PL REGON Number")
   PLREGONNumber: "PLREGONNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("PT Citizen Card Number")
   PTCitizenCardNumber: "PTCitizenCardNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("PT Citizen Card Number V2")
   PTCitizenCardNumberV2: "PTCitizenCardNumberV2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("PT Tax Identification Number")
   PTTaxIdentificationNumber: "PTTaxIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("RO Personal Numerical Code")
   ROPersonalNumericalCode: "ROPersonalNumericalCode",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("RU Passport Number Domestic")
   RUPassportNumberDomestic: "RUPassportNumberDomestic",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("RU Passport Number International")
   RUPassportNumberInternational: "RUPassportNumberInternational",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("SA National ID")
   SANationalID: "SANationalID",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("SG National Registration Identity Card Number")
   SGNationalRegistrationIdentityCardNumber: "SGNationalRegistrationIdentityCardNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("SK Personal Number")
   SKPersonalNumber: "SKPersonalNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("SI Tax Identification Number")
   SITaxIdentificationNumber: "SITaxIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("SI Unique Master Citizen Number")
   SIUniqueMasterCitizenNumber: "SIUniqueMasterCitizenNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("ZA Identification Number")
   ZAIdentificationNumber: "ZAIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("KR Resident Registration Number")
   KRResidentRegistrationNumber: "KRResidentRegistrationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("ES DNI")
   ESDNI: "ESDNI",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("ES Social Security Number")
   ESSocialSecurityNumber: "ESSocialSecurityNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("ES Tax Identification Number")
   ESTaxIdentificationNumber: "ESTaxIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("SQL Server Connection String")
   SQLServerConnectionString: "SQLServerConnectionString",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("SE National ID")
   SENationalID: "SENationalID",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("SE National ID V2")
   SENationalIDV2: "SENationalIDV2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("SE Passport Number")
   SEPassportNumber: "SEPassportNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("SE Tax Identification Number")
   SETaxIdentificationNumber: "SETaxIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("SWIFT Code")
   SWIFTCode: "SWIFTCode",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("CH Social Security Number")
   CHSocialSecurityNumber: "CHSocialSecurityNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("TW National ID")
   TWNationalID: "TWNationalID",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("TW Passport Number")
   TWPassportNumber: "TWPassportNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("TW Resident Certificate")
   TWResidentCertificate: "TWResidentCertificate",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("TH Population Identification Code")
   THPopulationIdentificationCode: "THPopulationIdentificationCode",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("TR National Identification Number")
   TRNationalIdentificationNumber: "TRNationalIdentificationNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("UK Driver's License Number")
   UKDriversLicenseNumber: "UKDriversLicenseNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("UK Electoral Roll Number")
   UKElectoralRollNumber: "UKElectoralRollNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("UK National Health Number")
   UKNationalHealthNumber: "UKNationalHealthNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("UK National Insurance Number")
   UKNationalInsuranceNumber: "UKNationalInsuranceNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("UK Unique Taxpayer Number")
   UKUniqueTaxpayerNumber: "UKUniqueTaxpayerNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("US UK Passport Number")
   USUKPassportNumber: "USUKPassportNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("US Bank Account Number")
   USBankAccountNumber: "USBankAccountNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("US Driver's License Number")
   USDriversLicenseNumber: "USDriversLicenseNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("US Individual Taxpayer Identification")
   USIndividualTaxpayerIdentification: "USIndividualTaxpayerIdentification",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("US Social Security Number")
   USSocialSecurityNumber: "USSocialSecurityNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("UA Passport Number Domestic")
   UAPassportNumberDomestic: "UAPassportNumberDomestic",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("UA Passport Number International")
   UAPassportNumberInternational: "UAPassportNumberInternational",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("Organization")
   Organization: "Organization",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("Email")
   Email: "Email",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("URL")
   URL: "URL",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("Age")
   Age: "Age",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("Phone Number")
   PhoneNumber: "PhoneNumber",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("IP Address")
   IPAddress: "IPAddress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("Date")
   Date: "Date",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("Person")
   Person: "Person",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
+
+  @doc("Address")
   Address: "Address",
 }

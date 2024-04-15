@@ -68,7 +68,12 @@ alias languageOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
 @post
 @route("/:analyze-text")
 @doc("Request text analysis over a collection of documents.")
-op analyzeText is RpcOperation<AnalyzeTextTask & AnalyzeTextQueryParameters, AnalyzeTextTaskResult, {}, ErrorResponse>;
+op analyzeText is RpcOperation<
+  AnalyzeTextTask & AnalyzeTextQueryParameters,
+  AnalyzeTextTaskResult,
+  {},
+  ErrorResponse
+>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @doc("Get the status of an analysis job. A job can consist of one or more tasks. After all tasks succeed, the job transitions to the succeeded state and results are available for each task.")

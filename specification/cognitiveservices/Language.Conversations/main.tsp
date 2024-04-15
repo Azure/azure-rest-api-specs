@@ -1786,7 +1786,12 @@ alias languageOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
 @post
 @route("/:analyze-conversations")
 @doc("Analyzes the input conversation utterance.")
-op analyzeConversations is RpcOperation<AnalyzeConversationTask, AnalyzeConversationTaskResult, {}, ErrorResponseWithHeader>;
+op analyzeConversations is RpcOperation<
+  AnalyzeConversationTask,
+  AnalyzeConversationTaskResult,
+  {},
+  ErrorResponseWithHeader
+>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @added(Versions.v2023_04_01)
