@@ -854,6 +854,9 @@ model CustomCategoryOperationDetail {
 @added(ContentSafety.Versions.v2024_04_15_Preview)
 @doc("The custom category option for text.")
 model AnalyzeTextCustomCategoryOption {
+  @doc("The text needs to be analyzed.")
+  text: string;
+
   @doc("Custom category name.")
   categoryName: string;
 
