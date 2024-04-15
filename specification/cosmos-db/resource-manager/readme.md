@@ -18,7 +18,7 @@ To see additional help and options, run:
 
 ---
 
-### Configuration
+## Configuration
 
 ### Basic Information
 
