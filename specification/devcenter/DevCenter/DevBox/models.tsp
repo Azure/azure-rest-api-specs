@@ -638,21 +638,21 @@ model DevBoxOperation {
 @added(APIVersions.v2024_02_01)
 model DevBoxStartOperation extends DevBoxOperation {
   @doc("The kind of operation that occurred.")
-  kind: "Start";
+  kind: DevBoxOperationKind.Start;
 }
 
 @doc("Information about a stop operation on a Dev Box.")
 @added(APIVersions.v2024_02_01)
 model DevBoxStopOperation extends DevBoxOperation {
   @doc("The kind of operation that occurred.")
-  kind: "Stop";
+  kind: DevBoxOperationKind.Stop;
 }
 
 @doc("Information about a restart operation on a Dev Box.")
 @added(APIVersions.v2024_02_01)
 model DevBoxRestartOperation extends DevBoxOperation {
   @doc("The kind of operation that occurred.")
-  kind: "Restart";
+  kind: DevBoxOperationKind.Restart;
 }
 
 @doc("Information about a start operation on a Dev Box.")
@@ -662,7 +662,7 @@ model DevBoxRepairOperation extends DevBoxOperation {
   result?: DevBoxRepairOperationResult;
 
   @doc("The kind of operation that occurred.")
-  kind: "Repair";
+  kind: DevBoxOperationKind.Repair;
 }
 
 @doc("Information about the result of a repair operation on a Dev Box.")

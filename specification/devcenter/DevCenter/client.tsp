@@ -150,7 +150,7 @@ interface EnvironmentClientOperations {
   "DevCenterEnvironmentType",
   "csharp"
 );
-@@clientName(DevCenterService.OperationStatusValue,
+@@clientName(Azure.Core.Foundations.OperationState,
   "DevCenterOperationStatus",
   "csharp"
 );
@@ -210,7 +210,7 @@ interface EnvironmentClientOperations {
 );
 @@clientName(DevCenterService.HardwareProfile.vCPUs, "vCpus", "java");
 @@clientName(DevCenterService.HardwareProfile.memoryGB, "memoryGb", "java");
-@@clientName(DevCenterService.OperationStatusValue,
+@@clientName(Azure.Core.Foundations.OperationState,
   "DevCenterOperationStatus",
   "java"
 );
