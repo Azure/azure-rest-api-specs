@@ -40,7 +40,6 @@ input-file:
   - Microsoft.DocumentDB/preview/2024-05-15-preview/cosmos-db.json
   - Microsoft.DocumentDB/preview/2024-05-15-preview/dataTransferService.json
   - Microsoft.DocumentDB/preview/2024-05-15-preview/managedCassandra.json
-  - Microsoft.DocumentDB/preview/2024-05-15-preview/mongoCluster.json
   - Microsoft.DocumentDB/preview/2024-05-15-preview/mongorbac.json
   - Microsoft.DocumentDB/preview/2024-05-15-preview/notebook.json
   - Microsoft.DocumentDB/preview/2024-05-15-preview/privateEndpointConnection.json
