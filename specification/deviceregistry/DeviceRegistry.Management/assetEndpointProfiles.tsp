@@ -69,15 +69,17 @@ model UserAuthentication {
 }
 
 @doc("The mode to authenticate the user of the client at the server.")
-enum UserAuthenticationMode {
+union UserAuthenticationMode {
+  string,
+
   @doc("The user authentication mode is anonymous.")
-  Anonymous,
+  Anonymous: "Anonymous",
 
   @doc("The user authentication mode is an x509 certificate.")
-  Certificate,
+  Certificate: "Certificate",
 
   @doc("The user authentication mode is a username and password.")
-  UsernamePassword,
+  UsernamePassword: "UsernamePassword",
 }
 
 @doc("The credentials for authentication mode UsernamePassword.")
