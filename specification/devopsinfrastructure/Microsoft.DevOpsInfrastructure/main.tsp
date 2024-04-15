@@ -642,11 +642,6 @@ model QuotaProperties {
   name: QuotaName;
 }
 
-union UsageUnit {
-  string,
-  Count: "Count",
-}
-
 @doc("The Quota Names")
 model QuotaName {
   @doc("The name of the resource.")
