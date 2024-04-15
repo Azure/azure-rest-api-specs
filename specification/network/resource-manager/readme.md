@@ -36,7 +36,6 @@ These settings apply only when `--tag=package-2023-11-preview` is specified on t
 
 ```yaml $(tag) == 'package-2023-11-preview'
 input-file:
-  - Microsoft.Network/preview/2022-02-01-preview/networkManager.json
   - Microsoft.Network/preview/2022-02-01-preview/networkManagerSecurityUserConfiguration.json
   - Microsoft.Network/preview/2023-03-01-preview/networkManagerRoutingConfiguration.json
   - Microsoft.Network/stable/2023-11-01/applicationGateway.json
