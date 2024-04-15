@@ -30,17 +30,16 @@ openapi-type: arm
 tag: package-preview-2024-05
 ```
 
-
 ### Tag: package-preview-2024-05
 
 These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
 
 ```yaml $(tag) == 'package-preview-2024-05'
 input-file:
+  - Microsoft.DocumentDB/preview/2024-05-15-preview/networkSecurityPerimeter.json
   - Microsoft.DocumentDB/preview/2024-05-15-preview/cosmos-db.json
   - Microsoft.DocumentDB/preview/2024-05-15-preview/dataTransferService.json
   - Microsoft.DocumentDB/preview/2024-05-15-preview/managedCassandra.json
-  - Microsoft.DocumentDB/preview/2024-05-15-preview/mongoCluster.json
   - Microsoft.DocumentDB/preview/2024-05-15-preview/mongorbac.json
   - Microsoft.DocumentDB/preview/2024-05-15-preview/notebook.json
   - Microsoft.DocumentDB/preview/2024-05-15-preview/privateEndpointConnection.json
@@ -524,7 +523,7 @@ input-file:
   - Microsoft.DocumentDB/preview/2021-03-01-preview/privateEndpointConnection.json
 modelerfour:
   lenient-model-deduplication: true
-tag: package-preview-2024-05
+tag: package-preview-2021-04
 ```
 
 ### Tag: package-preview-2021-04
