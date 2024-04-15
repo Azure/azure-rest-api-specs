@@ -46,18 +46,18 @@
           "200": {
               "description": "Network Security Perimeter Configuration List",
               "schema": {
-              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationList"
+                "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationList"
               }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./cosmos-db.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -100,7 +100,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./cosmos-db.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -147,7 +147,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./cosmos-db.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -187,6 +187,11 @@
           "items": {
             "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
           }
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
