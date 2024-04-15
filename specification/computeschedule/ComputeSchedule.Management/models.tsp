@@ -15,72 +15,76 @@ namespace Microsoft.ComputeSchedule;
 
 // ------------------ Enums ---------------
 @doc("The types of deadlines supported by ScheduledActions")
-enum DeadlineType {
+union DeadlineType {
   @doc("Default value of Unknown.")
-  Unknown,
+  Unknown: "Unknown",
 
   @doc("Initiate the operation at the given deadline.")
-  InitiateAt,
-
+  InitiateAt: "InitiateAt",
+  
   @doc("Complete the operation by the given deadline.")
-  CompleteBy,
+  CompleteBy: "CompleteBy",
+  string,
 }
 
 @doc("The preferences customers can select to optimize their requests to ScheduledActions")
-enum OptimizationPreference {
+union OptimizationPreference {
   @doc("Optimize while considering cost savings")
-  Cost,
+  Cost: "Cost",
 
   @doc("Optimize while considering availability of resources")
-  Availability,
+  Availability: "Availability",
 
   @doc("Optimize while considering a balance of cost and availability")
-  CostAvailabilityBalanced,
+  CostAvailabilityBalanced: "CostAvailabilityBalanced",
+  string,
 }
 
 @doc("The kind of operation types that can be performed on resources using ScheduledActions")
-enum ResourceOperationType {
+union ResourceOperationType {
   @doc("The default value for this enum type")
-  Unknown,
+  Unknown: "Unknown",
 
   @doc("Start operations on the resources")
-  Start,
+  Start: "Start",
 
   @doc("Deallocate operations on the resources")
-  Deallocate,
+  Deallocate: "Deallocate",
 
   @doc("Hibernate operations on the resources")
-  Hibernate,
+  Hibernate: "Hibernate",
+  string,
 }
 
 @doc("Values that define the states of operations in Scheduled Actions")
-enum OperationState {
+union OperationState {
   @doc("The default value for the operation state enum")
-  Unknown,
+  Unknown: "Unknown",
 
   @doc("Operations that are pending scheduling")
-  PendingScheduling,
+  PendingScheduling: "PendingScheduling",
 
   @doc("Operations that have been scheduled")
-  Scheduled,
+  Scheduled: "Scheduled",
 
   @doc("Operations that are waiting to be executed")
-  PendingExecution,
+  PendingExecution: "PendingExecution",
 
   @doc("Operations that are in the process of being executed")
-  Executing,
+  Executing: "Executing",
 
   @doc("Operations that suceeded")
-  Succeeded,
+  Succeeded: "Succeeded",
 
   @doc("Operations that have failed")
-  Failed,
+  Failed: "Failed",
 
   @doc("Operations that have been cancelled by the user")
-  Cancelled,
+  Cancelled: "Cancelled",
 
   @doc("Operations that are blocked")
-  Blocked,
+  Blocked: "Blocked",
+  string,
 }
 
 // ------------------ Common Values ---------------
