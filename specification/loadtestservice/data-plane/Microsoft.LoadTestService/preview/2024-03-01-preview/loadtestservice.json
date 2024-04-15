@@ -2674,7 +2674,7 @@
         },
         "region": {
           "type": "string",
-          "description": "Name of region"
+          "description": "Azure region name.\nThe region name should of format accepted by ARM, and should be a region supported by Azure Load Testing. For example, East US should be passed as \"eastus\".\nThe region name must match one of the strings in the \"Name\" column returned from running the \"az account list-locations -o table\" Azure CLI command."
         }
       },
       "required": [
@@ -3306,7 +3306,7 @@
         },
         "regionalStatistics": {
           "type": "object",
-          "description": "Regional statistics",
+          "description": "Regional statistics. Key is the Azure region name and value is the test run statistics.\nThe region name should of format accepted by ARM, and should be a region supported by Azure Load Testing. For example, East US should be passed as \"eastus\".\nThe region name must match one of the strings in the \"Name\" column returned from running the \"az account list-locations -o table\" Azure CLI command.",
           "additionalProperties": {
             "$ref": "#/definitions/TestRunStatistics"
           },

@@ -391,7 +391,11 @@ model RegionalConfiguration {
 """)
   engineInstances: int32;
 
-  @doc("Name of region")
+  @doc("""
+Azure region name.
+The region name should of format accepted by ARM, and should be a region supported by Azure Load Testing. For example, East US should be passed as "eastus".
+The region name must match one of the strings in the "Name" column returned from running the "az account list-locations -o table" Azure CLI command.
+""")
   region: string;
 }
 
@@ -614,7 +618,11 @@ SECRET_VALUE.
   @visibility("read")
   testRunStatistics?: Record<TestRunStatistics>;
 
-  @doc("Regional statistics")
+  @doc("""
+Regional statistics. Key is the Azure region name and value is the test run statistics.
+The region name should of format accepted by ARM, and should be a region supported by Azure Load Testing. For example, East US should be passed as "eastus".
+The region name must match one of the strings in the "Name" column returned from running the "az account list-locations -o table" Azure CLI command.
+""")
   @visibility("read")
   @added(APIVersions.v2024_03_01_preview)
   regionalStatistics?: Record<TestRunStatistics>;
