@@ -2,7 +2,8 @@ This `samplefiles` directory contains sample AutoRest configuration files:
 `README.*.md`. It also contains the sample hand-written OpenAPI 
 specification files referenced by these files.
 
-Finally, the `./Microsoft.YourServiceName/stable/YYYY-MM-DD/scenarios/quickStart.yaml` is an [api-scenario](../api-scenario) sample.
+Finally, the `./Microsoft.YourServiceName/stable/YYYY-MM-DD/scenarios/quickStart.yaml`
+is an [api-scenario](../api-scenario) sample.
 
 You can learn more about AutoRest configuration files at
 [aka.ms/azsdk/autorest](https://aka.ms/azsdk/autorest).
