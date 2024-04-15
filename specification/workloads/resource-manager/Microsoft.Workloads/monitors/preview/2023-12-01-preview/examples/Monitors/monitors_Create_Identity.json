@@ -16,7 +16,11 @@
           "name": "myManagedRg"
         },
         "logAnalyticsWorkspaceArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.operationalinsights/workspaces/myWorkspace",
-        "monitorSubnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
+        "monitorSubnet": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet",
+        "appServicePlanConfiguration": {
+          "tier": "ElasticPremium",
+          "capacity": 1
+        }
       },
       "identity": {
         "type": "SystemAssigned"
@@ -43,15 +47,12 @@
         },
         "properties": {
           "provisioningState": "Succeeded",
-          "errors": [
-            {
-              "code": "0000",
-              "message": "Error message",
-              "target": "",
-              "details": "Error details",
-              "innerError": "Error stack trace"
-            }
-          ],
+          "errors": {
+            "code": "0000",
+            "message": "Error message",
+            "target": "Error target",
+            "details": []
+          },
           "appLocation": "eastus",
           "routingPreference": "RouteAll",
           "zoneRedundancyPreference": "ZoneRedundantApp",
@@ -81,15 +82,12 @@
         },
         "properties": {
           "provisioningState": "Accepted",
-          "errors": [
-            {
-              "code": "0000",
-              "message": "Error message",
-              "target": "",
-              "details": "Error details",
-              "innerError": "Error stack trace"
-            }
-          ],
+          "errors": {
+            "code": "0000",
+            "message": "Error message",
+            "target": "Error target",
+            "details": []
+          },
           "appLocation": "eastus",
           "routingPreference": "RouteAll",
           "managedResourceGroupConfiguration": {
