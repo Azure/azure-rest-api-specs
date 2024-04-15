@@ -2756,6 +2756,10 @@
           "items": {
             "$ref": "#/definitions/ChannelAffinity"
           }
+        },
+        "pauseOnStart": {
+          "description": "When set to true will start recording in Pause mode, which could be resumed.",
+          "type": "boolean"
         }
       }
     },
@@ -2819,6 +2823,18 @@
         "modelAsString": true
       }
     },
+    "RecordingKind": {
+      "enum": [
+        "azureCommunicationServices",
+        "teams",
+        "teamsCompliance"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RecordingKind",
+        "modelAsString": true
+      }
+    },
     "RecordingStateResponse": {
       "type": "object",
       "properties": {
@@ -2827,6 +2843,9 @@
         },
         "recordingState": {
           "$ref": "#/definitions/RecordingState"
+        },
+        "recordingKind": {
+          "$ref": "#/definitions/RecordingKind"
         }
       }
     },
@@ -3187,37 +3206,9 @@
           "description": "The time of the recording started",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "TeamsComplianceRecordingStateChanged": {
-      "type": "object",
-      "properties": {
-        "callConnectionId": {
-          "description": "Call connection ID.",
-          "type": "string"
         },
-        "serverCallId": {
-          "description": "Server call ID.",
-          "type": "string"
-        },
-        "correlationId": {
-          "description": "Correlation ID for event to call correlation.",
-          "type": "string"
-        },
-        "recordingId": {
-          "description": "The call recording id",
-          "type": "string",
-          "readOnly": true
-        },
-        "state": {
-          "$ref": "#/definitions/RecordingState"
-        },
-        "startDateTime": {
-          "format": "date-time",
-          "description": "The time of the recording started",
-          "type": "string",
-          "readOnly": true
+        "recordingKind": {
+          "$ref": "#/definitions/RecordingKind"
         }
       }
     },
