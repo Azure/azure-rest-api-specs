@@ -609,7 +609,12 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/azureStorageResourceUri"
+            "name": "BackupRequest",
+            "in": "body",
+            "description": "Azure storage Resource Uri",
+            "schema": {
+              "$ref": "#/definitions/BackupRequest"
+            }
           }
         ],
         "responses": {
@@ -668,7 +673,12 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/azureStorageResourceUri"
+            "name": "BackupRequest",
+            "in": "body",
+            "description": "Azure storage Resource Uri",
+            "schema": {
+              "$ref": "#/definitions/BackupRequest"
+            }
           }
         ],
         "responses": {
@@ -1234,6 +1244,15 @@
       },
       "description": "List of private endpoint connections associated with the specified resource."
     },
+    "BackupRequest": {
+      "description": "Azure storage Resource Uri",
+      "properties": {
+        "azureStorageResourceUri": {
+          "type": "string",
+          "description": "The Azure blob storage container Uri which contains the backup"
+        }
+      }
+    },
     "BackupOperationResult": {
       "properties": {
         "azureStorageResourceUri": {
@@ -1328,12 +1347,6 @@
       "maxLength": 24,
       "minLength": 3,
       "x-ms-parameter-location": "method"
-    },
-    "azureStorageResourceUri": {
-      "name": "azureStorageResourceUri",
-      "in": "body",
-      "type": "string",
-      "description": "Azure storage Resource Uri"
     },
     "backupRestoreJobId": {
       "name": "jobId",
