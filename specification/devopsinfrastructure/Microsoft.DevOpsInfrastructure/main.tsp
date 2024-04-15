@@ -292,7 +292,7 @@ model AgentProfile {
   resourcePredictions?: ResourcePredictions;
 
   @doc("Defines how the pool buffer/standy-by agents is provided.")
-  resourcePredictionsType?: ResourcePredictionsType;
+  resourcePredictionsProfile?: ResourcePredictionsProfile;
 }
 @doc("Stateless profile meaning that the machines will be cleaned up after running a job.")
 model StatelessAgentProfile extends AgentProfile {
@@ -314,14 +314,42 @@ model Stateful extends AgentProfile {
 model ResourcePredictions {}
 
 @doc("Determines how the stand-by scheme should be provided.")
-union ResourcePredictionsType {
+@discriminator("kind")
+model ResourcePredictionsProfile {}
+
+@doc("Customer provides the stand-by agent scheme.")
+model ManualResourcePredictionsProfile extends ResourcePredictionsProfile {
+  @doc("Customer provides the stand-by agent scheme.")
+  kind: "Manual";
+}
+
+@doc("The stand-by agent scheme is determined based on historical demand.")
+model AutomaticResourcePredictionsProfile extends ResourcePredictionsProfile {
+  @doc("The stand-by agent scheme is determined based on historical demand.")
+  kind: "Automatic";
+
+  @doc("Determines the balance between cost and performance.")
+  predictionPreference?: PredictionPreference
+}
+
+@doc("Determines the balance between cost and performance.")
+union PredictionPreference {
   string,
 
-  @doc("Customer provides the stand-by agents scheme.")
-  "Manual",
+  @doc("Balance between cost and performance.")
+  "Balanced",
 
-  @doc("The service determines how many stand-by agents should be up based on past demand.")
-  "Automatic",
+  @doc("MostCostEffective.")
+  "MostCostEffective",
+
+  @doc("MoreCostEffective.")
+  "MoreCostEffective",
+
+  @doc("MorePerformance.")
+  "MorePerformance",
+
+  @doc("BestPerformance.")
+  "BestPerformance"
 }
 
 @doc("The status of the current operation.")
@@ -583,4 +611,49 @@ model LocationProperties {}
 @armResourceOperations
 interface Sku {
   listByLocation is ArmListBySubscription<ResourceSku>;
+}
+
+@doc("Describes Compute Resource Quota")
+@parentResource(Location)
+model Quota is ProxyResource<QuotaProperties> {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
+  @doc("The name of the quota.")
+  @key("quotaName")
+  @segment("subscriptionUsages")
+  @visibility("read")
+  @path
+  name: QuotaName;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
+@doc("Describes Compute Resource Quota properties")
+model QuotaProperties {
+  @doc("The unit of usage measurement.")
+  unit: string;
+
+  @doc("The current usage of the resource.")
+  currentValue: int64;
+
+  @doc("The maximum permitted usage of the resource.")
+  limit: int64;
+}
+
+union UsageUnit {
+  string,
+  Count: "Count"
+}
+
+@doc("The Quota Names")
+model QuotaName
+{
+  @doc("The name of the resource.")
+  value?: string;
+
+  @doc("The localized name of the resource.")
+  localizedValue?: string;
+}
+
+@armResourceOperations
+interface SubscriptionUsages {
+  listByLocation is ArmListBySubscription<Quota>;
 }
