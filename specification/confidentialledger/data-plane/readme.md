@@ -11,6 +11,11 @@ Please look to the files `Microsoft.ConfidentialLedger/preview/2023-01-18-previe
 
 > see https://aka.ms/autorest
 
+``` yaml
+tag: package-2023-01-18-preview-identity
+openapi-type: data-plane
+```
+
 ## Configuration
 
 ### Tag: package-0.1-preview-ledger
@@ -92,4 +97,29 @@ These settings apply only when `--tag=package-2023-06-01-preview-mccf` is specif
 ```yaml $(tag) == 'package-2023-06-01-preview-mccf'
 input-file:
   - Microsoft.ManagedCcf/preview/2023-06-01-preview/mccfgov.json
+```
+
+### Tag: package-2024-01-11-preview-codetransparency
+
+These settings apply only when `--tag=package-2024-01-11-preview-codetransparency` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-01-11-preview-codetransparency'
+input-file:
+  - Microsoft.CodeTransparency/preview/2024-01-11-preview/cts.json
+suppressions:
+  - code: PageableOperation
+    from: cts.json
+    reason: Not pageable
+  - code:  PaginationResponse
+    from: cts.json
+    reason: Defined as in the RFC but the remaining ones are not pageable
+  - code: PathParameterSchema
+    from: cts.json
+    reason: maxLength parameter is not applicable
+  - code: DefaultResponse
+    from: cts.json
+    reason: TypeSpec did not generate this
+  - code: EnumInsteadOfBoolean
+    from: cts.json
+    reason: Defined as in the RFC
 ```

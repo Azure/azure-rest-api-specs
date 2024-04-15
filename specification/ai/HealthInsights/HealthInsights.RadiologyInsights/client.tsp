@@ -7,9 +7,7 @@ import "../HealthInsights.OpenAPI/service.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@TypeSpec.Versioning.useDependency(
-  AzureHealthInsights.ApiVersion.v2023_09_01_Preview
-)
+@TypeSpec.Versioning.useDependency(AzureHealthInsights.ApiVersion.v2024_04_01)
 namespace ClientForAzureHealthInsights;
 
 @client({
@@ -22,67 +20,65 @@ interface RadiologyInsightsClient {
   inferRadiologyInsights is AzureHealthInsights.RadiologyInsights.createJob;
 }
 
-@@projectedName(Fhir.R4.Extension, "java", "Fhir_R4_Extension");
-@@projectedName(Fhir.R4.Extension, "csharp", "Fhir_R4_Extension");
-@@projectedName(Fhir.R4.Extendible, "java", "Fhir_R4_Extendible");
-@@projectedName(Fhir.R4.Extendible, "csharp", "Fhir_R4_Extendible");
-@@projectedName(Fhir.R4.Element, "java", "Fhir_R4_Element");
-@@projectedName(Fhir.R4.Element, "csharp", "Fhir_R4_Element");
-@@projectedName(Fhir.R4.Coding, "java", "Fhir_R4_Coding");
-@@projectedName(Fhir.R4.Coding, "csharp", "Fhir_R4_Coding");
-@@projectedName(Fhir.R4.CodeableConcept, "java", "Fhir_R4_CodeableConcept");
-@@projectedName(Fhir.R4.CodeableConcept, "csharp", "Fhir_R4_CodeableConcept");
-@@projectedName(Fhir.R4.Meta, "java", "Fhir_R4_Meta");
-@@projectedName(Fhir.R4.Meta, "csharp", "Fhir_R4_Meta");
-@@projectedName(Fhir.R4.Narrative, "java", "Fhir_R4_Narrative");
-@@projectedName(Fhir.R4.Narrative, "csharp", "Fhir_R4_Narrative");
-@@projectedName(Fhir.R4.Reference, "java", "Fhir_R4_Reference");
-@@projectedName(Fhir.R4.Reference, "csharp", "Fhir_R4_Reference");
-@@projectedName(Fhir.R4.Identifier, "java", "Fhir_R4_Identifier");
-@@projectedName(Fhir.R4.Identifier, "csharp", "Fhir_R4_Identifier");
-@@projectedName(Fhir.R4.Period, "java", "Fhir_R4_Period");
-@@projectedName(Fhir.R4.Period, "csharp", "Fhir_R4_Period");
-@@projectedName(Fhir.R4.Quantity, "java", "Fhir_R4_Quantity");
-@@projectedName(Fhir.R4.Quantity, "csharp", "Fhir_R4_Quantity");
-@@projectedName(Fhir.R4.Range, "java", "Fhir_R4_Range");
-@@projectedName(Fhir.R4.Range, "csharp", "Fhir_R4_Range");
-@@projectedName(Fhir.R4.Ratio, "java", "Fhir_R4_Ratio");
-@@projectedName(Fhir.R4.Ratio, "csharp", "Fhir_R4_Ratio");
-@@projectedName(Fhir.R4.Annotation, "java", "Fhir_R4_Annotation");
-@@projectedName(Fhir.R4.Annotation, "csharp", "Fhir_R4_Annotation");
-@@projectedName(Fhir.R4.SampledData, "java", "Fhir_R4_SampledData");
-@@projectedName(Fhir.R4.SampledData, "csharp", "Fhir_R4_SampledData");
-@@projectedName(Fhir.R4.ContactDetail, "java", "Fhir_R4_ContactDetail");
-@@projectedName(Fhir.R4.ContactDetail, "csharp", "Fhir_R4_ContactDetail");
-@@projectedName(Fhir.R4.ContactPoint, "java", "Fhir_R4_ContactPoint");
-@@projectedName(Fhir.R4.ContactPoint, "csharp", "Fhir_R4_ContactPoint");
-@@projectedName(Fhir.R4.Resource, "java", "Fhir_R4_Resource");
-@@projectedName(Fhir.R4.Resource, "csharp", "Fhir_R4_Resource");
-@@projectedName(Fhir.R4.DomainResource, "java", "Fhir_R4_DomainResource");
-@@projectedName(Fhir.R4.DomainResource, "csharp", "Fhir_R4_DomainResource");
-@@projectedName(Fhir.R4.Condition, "java", "Fhir_R4_Condition");
-@@projectedName(Fhir.R4.Condition, "csharp", "Fhir_R4_Condition");
-@@projectedName(Fhir.R4.ConditionStage, "java", "Fhir_R4_ConditionStage");
-@@projectedName(Fhir.R4.ConditionStage, "csharp", "Fhir_R4_ConditionStage");
-@@projectedName(Fhir.R4.Observation, "java", "Fhir_R4_Observation");
-@@projectedName(Fhir.R4.Observation, "csharp", "Fhir_R4_Observation");
-@@projectedName(Fhir.R4.ObservationReferenceRange,
-  "java",
-  "Fhir_R4_ObservationReferenceRange"
+@@clientName(Fhir.R4.Extension, "Fhir_R4_Extension", "java");
+@@clientName(Fhir.R4.Extension, "Fhir_R4_Extension", "csharp");
+@@clientName(Fhir.R4.Extendible, "Fhir_R4_Extendible", "java");
+@@clientName(Fhir.R4.Extendible, "Fhir_R4_Extendible", "csharp");
+@@clientName(Fhir.R4.Element, "Fhir_R4_Element", "java");
+@@clientName(Fhir.R4.Element, "Fhir_R4_Element", "csharp");
+@@clientName(Fhir.R4.Coding, "Fhir_R4_Coding", "java");
+@@clientName(Fhir.R4.Coding, "Fhir_R4_Coding", "csharp");
+@@clientName(Fhir.R4.CodeableConcept, "Fhir_R4_CodeableConcept", "java");
+@@clientName(Fhir.R4.CodeableConcept, "Fhir_R4_CodeableConcept", "csharp");
+@@clientName(Fhir.R4.Meta, "Fhir_R4_Meta", "java");
+@@clientName(Fhir.R4.Meta, "Fhir_R4_Meta", "csharp");
+@@clientName(Fhir.R4.Narrative, "Fhir_R4_Narrative", "java");
+@@clientName(Fhir.R4.Narrative, "Fhir_R4_Narrative", "csharp");
+@@clientName(Fhir.R4.Reference, "Fhir_R4_Reference", "java");
+@@clientName(Fhir.R4.Reference, "Fhir_R4_Reference", "csharp");
+@@clientName(Fhir.R4.Identifier, "Fhir_R4_Identifier", "java");
+@@clientName(Fhir.R4.Identifier, "Fhir_R4_Identifier", "csharp");
+@@clientName(Fhir.R4.Period, "Fhir_R4_Period", "java");
+@@clientName(Fhir.R4.Period, "Fhir_R4_Period", "csharp");
+@@clientName(Fhir.R4.Quantity, "Fhir_R4_Quantity", "java");
+@@clientName(Fhir.R4.Quantity, "Fhir_R4_Quantity", "csharp");
+@@clientName(Fhir.R4.Range, "Fhir_R4_Range", "java");
+@@clientName(Fhir.R4.Range, "Fhir_R4_Range", "csharp");
+@@clientName(Fhir.R4.Ratio, "Fhir_R4_Ratio", "java");
+@@clientName(Fhir.R4.Ratio, "Fhir_R4_Ratio", "csharp");
+@@clientName(Fhir.R4.Annotation, "Fhir_R4_Annotation", "java");
+@@clientName(Fhir.R4.Annotation, "Fhir_R4_Annotation", "csharp");
+@@clientName(Fhir.R4.SampledData, "Fhir_R4_SampledData", "java");
+@@clientName(Fhir.R4.SampledData, "Fhir_R4_SampledData", "csharp");
+@@clientName(Fhir.R4.ContactDetail, "Fhir_R4_ContactDetail", "java");
+@@clientName(Fhir.R4.ContactDetail, "Fhir_R4_ContactDetail", "csharp");
+@@clientName(Fhir.R4.ContactPoint, "Fhir_R4_ContactPoint", "java");
+@@clientName(Fhir.R4.ContactPoint, "Fhir_R4_ContactPoint", "csharp");
+@@clientName(Fhir.R4.Resource, "Fhir_R4_Resource", "java");
+@@clientName(Fhir.R4.Resource, "Fhir_R4_Resource", "csharp");
+@@clientName(Fhir.R4.DomainResource, "Fhir_R4_DomainResource", "java");
+@@clientName(Fhir.R4.DomainResource, "Fhir_R4_DomainResource", "csharp");
+@@clientName(Fhir.R4.Condition, "Fhir_R4_Condition", "java");
+@@clientName(Fhir.R4.Condition, "Fhir_R4_Condition", "csharp");
+@@clientName(Fhir.R4.ConditionStage, "Fhir_R4_ConditionStage", "java");
+@@clientName(Fhir.R4.ConditionStage, "Fhir_R4_ConditionStage", "csharp");
+@@clientName(Fhir.R4.Observation, "Fhir_R4_Observation", "java");
+@@clientName(Fhir.R4.Observation, "Fhir_R4_Observation", "csharp");
+@@clientName(Fhir.R4.ObservationReferenceRange,
+  "Fhir_R4_ObservationReferenceRange",
+  "java"
 );
-@@projectedName(Fhir.R4.ObservationReferenceRange,
-  "csharp",
-  "Fhir_R4_ObservationReferenceRange"
+@@clientName(Fhir.R4.ObservationReferenceRange,
+  "Fhir_R4_ObservationReferenceRange",
+  "csharp"
 );
-@@projectedName(Fhir.R4.ObservationComponent,
-  "java",
-  "Fhir_R4_ObservationComponent"
+@@clientName(Fhir.R4.ObservationComponent,
+  "Fhir_R4_ObservationComponent",
+  "java"
 );
-@@projectedName(Fhir.R4.ObservationComponent,
-  "csharp",
-  "Fhir_R4_ObservationComponent"
+@@clientName(Fhir.R4.ObservationComponent,
+  "Fhir_R4_ObservationComponent",
+  "csharp"
 );
-@@projectedName(Fhir.R4.ResearchStudy, "java", "Fhir_R4_ResearchStudy");
-@@projectedName(Fhir.R4.ResearchStudy, "csharp", "Fhir_R4_ResearchStudy");
-@@projectedName(AzureHealthInsights.PatientInfoSex, "client", "PatientSex");
-@@projectedName(AzureHealthInsights.PatientInfo, "client", "PatientDetails");
+@@clientName(Fhir.R4.ResearchStudy, "Fhir_R4_ResearchStudy", "java");
+@@clientName(Fhir.R4.ResearchStudy, "Fhir_R4_ResearchStudy", "csharp");
