@@ -236,6 +236,15 @@ model ConversationCallingOptions {
   isLoggingEnabled?: boolean;
 }
 
+@doc("This is a set of request parameters for Question Answering knowledge bases.")
+model QuestionAnsweringParameters extends AnalysisParameters {
+  @doc("This is a set of request parameters for Question Answering knowledge bases.")
+  targetProjectKind: targetProjectKind.QuestionAnswering;
+
+  @doc("The options sent to a Question Answering KB.")
+  callingOptions?: AnswersOptions;
+}
+
 @doc("This is the base class of an intent prediction")
 @discriminator("targetProjectKind")
 model TargetIntentResult {
@@ -589,6 +598,15 @@ model LuisTargetIntentResult extends TargetIntentResult {
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "LuisTargetIntentResult.result should not use ': Record<unknown>'. Use ': Record<string>' instead."
   @doc("The actual response from a LUIS Generally Available application.")
   result?: {};
+}
+
+@doc("It is a wrap up a Question Answering KB response.")
+model QuestionAnsweringTargetIntentResult extends TargetIntentResult {
+  @doc("It is a wrap up a Question Answering KB response.")
+  targetProjectKind: targetProjectKind.QuestionAnswering;
+
+  @doc("The generated answer by a Question Answering KB.")
+  result?: AnswersResult;
 }
 
 @doc("It is a wrap up a Question Answering KB response.")
