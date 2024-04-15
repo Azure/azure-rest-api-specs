@@ -28,7 +28,6 @@ model StorageContainer is TrackedResource<StorageContainerProperties> {
 }
 
 @armResourceOperations
-@projectedName("client", "StorageContainers")
 interface StorageContainers {
   @doc("Gets a storage container")
   get is ArmResourceRead<StorageContainer>;
