@@ -280,6 +280,9 @@ model Pool {
   uri: url;
 
   @key("poolName")
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
   @visibility("read")
   @doc("Pool name.")
   name: string;
@@ -403,6 +406,9 @@ model Schedule {
   uri: url;
 
   @key("scheduleName")
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
   @visibility("read")
   @doc("Display name for the Schedule.")
   name: string;
@@ -611,6 +617,9 @@ model DevBoxOperation {
   uri: url;
 
   @doc("Unique identifier for the Dev Box operation.")
+  @minLength(36)
+  @maxLength(36)
+  @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$")
   @visibility("read")
   @key("operationId")
   operationId: Azure.Core.uuid;

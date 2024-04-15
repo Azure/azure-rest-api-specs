@@ -225,6 +225,9 @@ model EnvironmentOperation {
   uri: url;
 
   @doc("Unique identifier for the environment operation.")
+  @minLength(36)
+  @maxLength(36)
+  @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$")
   @visibility("read")
   @key("operationId")
   operationId: Azure.Core.uuid;
@@ -258,6 +261,9 @@ model EnvironmentOperation {
 @added(APIVersions.v2024_02_01)
 model EnvironmentAction {
   @doc("Uniquely identifies the action.")
+  @minLength(3)
+  @maxLength(63)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
   @visibility("read")
   @key("actionName")
   name: string;

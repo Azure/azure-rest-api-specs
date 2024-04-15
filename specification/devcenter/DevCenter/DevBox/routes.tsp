@@ -145,6 +145,9 @@ interface DevBoxes {
       userId: string;
 
       @doc("The name of a Dev Box.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       devBoxName: string;
 
@@ -189,6 +192,9 @@ interface DevBoxes {
       userId: string;
 
       @doc("The name of a Dev Box.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       devBoxName: string;
     },
@@ -295,6 +301,9 @@ interface DevBoxes {
       userId: string;
 
       @doc("The name of a Dev Box.")
+      @maxLength(63)
+      @minLength(3)
+      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
       @path
       devBoxName: string;
     },

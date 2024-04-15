@@ -677,7 +677,10 @@
             "in": "path",
             "description": "Pool name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           }
         ],
         "responses": {
@@ -789,14 +792,20 @@
             "in": "path",
             "description": "Pool name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "scheduleName",
             "in": "path",
             "description": "Display name for the Schedule.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           }
         ],
         "responses": {
@@ -1031,7 +1040,10 @@
             "in": "path",
             "description": "The name of a Dev Box.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "body",
@@ -1118,7 +1130,10 @@
             "in": "path",
             "description": "The name of a Dev Box.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           }
         ],
         "responses": {
@@ -1957,7 +1972,10 @@
             "description": "Unique identifier for the Dev Box operation.",
             "required": true,
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$"
           }
         ],
         "responses": {
@@ -2020,7 +2038,10 @@
             "in": "path",
             "description": "The name of a Dev Box.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           }
         ],
         "responses": {
@@ -2518,7 +2539,10 @@
             "in": "path",
             "description": "Uniquely identifies the action.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           }
         ],
         "responses": {
@@ -2591,7 +2615,10 @@
             "in": "path",
             "description": "Uniquely identifies the action.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           }
         ],
         "responses": {
@@ -2661,7 +2688,10 @@
             "in": "path",
             "description": "Uniquely identifies the action.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
           },
           {
             "name": "until",
@@ -2812,7 +2842,10 @@
             "description": "Unique identifier for the environment operation.",
             "required": true,
             "type": "string",
-            "format": "uuid"
+            "format": "uuid",
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$"
           }
         ],
         "responses": {
@@ -2890,9 +2923,9 @@
             "description": "The id of the operation on an environment.",
             "required": true,
             "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$"
+            "minLength": 36,
+            "maxLength": 36,
+            "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$"
           }
         ],
         "responses": {
@@ -3465,6 +3498,9 @@
         "operationId": {
           "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Unique identifier for the Dev Box operation.",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$",
           "readOnly": true
         },
         "kind": {
@@ -3803,6 +3839,9 @@
         "name": {
           "type": "string",
           "description": "Uniquely identifies the action.",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
           "readOnly": true
         },
         "uri": {
@@ -3995,6 +4034,9 @@
         "operationId": {
           "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Unique identifier for the environment operation.",
+          "minLength": 36,
+          "maxLength": 36,
+          "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$",
           "readOnly": true
         },
         "kind": {
@@ -4831,6 +4873,9 @@
         "name": {
           "type": "string",
           "description": "Pool name.",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
           "readOnly": true
         },
         "location": {
@@ -5030,6 +5075,9 @@
         "name": {
           "type": "string",
           "description": "Display name for the Schedule.",
+          "minLength": 3,
+          "maxLength": 63,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
           "readOnly": true
         },
         "sourceUri": {

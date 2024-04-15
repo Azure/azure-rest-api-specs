@@ -256,9 +256,9 @@ interface Environments {
       environmentName: string;
 
       @doc("The id of the operation on an environment.")
-      @maxLength(63)
-      @minLength(3)
-      @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$")
+      @maxLength(36)
+      @minLength(36)
+      @pattern("^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$")
       @path
       operationId: string;
     },
