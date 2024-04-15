@@ -20,7 +20,7 @@ union CloudInitDataSource {
 
   @doc("Azure is used as the datasource")
   Azure: "Azure",
-  
+
   string,
 }
 
@@ -76,6 +76,7 @@ union Status {
 union ExtendedLocationTypes {
   @doc("Custom extended location type")
   CustomLocation: "CustomLocation",
+
   string,
 }
 
@@ -354,7 +355,7 @@ union ProvisioningAction {
 
   @doc("Repair guest agent")
   repair: "repair",
-  
+
   string,
 }
 
@@ -384,43 +385,71 @@ union IPPoolTypeEnum {
 @doc("The ARM ID for a Network Interface.")
 model NetworkInterfaceArmReference {
   @doc("The ARM ID for a Network Interface.")
-  id?: armResourceIdentifier<[{type:"Microsoft.AzureStackHCI/networkInterfaces"}]>
+  id?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/networkInterfaces";
+    }
+  ]>;
 }
 
 @doc("The ARM ID for a Network Security Group.")
 model NetworkSecurityGroupArmReference {
   @doc("The ARM ID for a Network Security Group.")
-  id?: armResourceIdentifier<[{type:"Microsoft.AzureStackHCI/networkSecurityGroups"}]>
+  id?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/networkSecurityGroups";
+    }
+  ]>;
 }
 
 @doc("The ARM ID for a Logical Network.")
 model LogicalNetworkArmReference {
   @doc("The ARM ID for a Logical Network.")
-  id?: armResourceIdentifier<[{type:"Microsoft.AzureStackHCI/logicalNetworks"}]>
+  id?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/logicalNetworks";
+    }
+  ]>;
 }
 
 @doc("The ARM ID for a Virtual Machine.")
 model VirtualMachineArmReference {
   @doc("The ARM ID for a Virtual Machine.")
-  id?: armResourceIdentifier<[{type:"Microsoft.AzureStackHCI/virtualMachineInstance"}]>
+  id?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/virtualMachineInstance";
+    }
+  ]>;
 }
 
 @doc("The ARM ID for a Storage Container.")
 model StorageContainerArmReference {
   @doc("The ARM ID for a Storage Container.")
-  id?: armResourceIdentifier<[{type:"Microsoft.AzureStackHCI/storageContainers"}]>
+  id?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/storageContainers";
+    }
+  ]>;
 }
 
 @doc("The ARM ID for a Gallery Image.")
 model GalleryImageArmReference {
   @doc("The ARM ID for a Storage Container.")
-  id?: armResourceIdentifier<[{type:"Microsoft.AzureStackHCI/galleryImages"}]>
+  id?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/galleryImages";
+    }
+  ]>;
 }
 
 @doc("The ARM ID for a Virtual Hard Disk.")
 model VirtualHardDiskArmReference {
   @doc("The ARM ID for a Virtual Hard Disk.")
-  id?: armResourceIdentifier<[{type:"Microsoft.AzureStackHCI/virtualHardDisks"}]>
+  id?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/virtualHardDisks";
+    }
+  ]>;
 }
 
 @doc("Properties under the gallery image resource")
@@ -1263,7 +1292,8 @@ model VirtualMachineInstancePropertiesStorageProfile {
 }
 
 @doc("VHD to attach as OS disk")
-model VirtualMachineInstancePropertiesStorageProfileOsDisk is VirtualHardDiskArmReference {
+model VirtualMachineInstancePropertiesStorageProfileOsDisk
+  is VirtualHardDiskArmReference {
   @doc("This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. Possible values are: Windows, Linux.")
   osType?: OperatingSystemTypes;
 }
