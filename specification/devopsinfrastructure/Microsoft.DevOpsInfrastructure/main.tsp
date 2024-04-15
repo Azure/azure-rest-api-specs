@@ -613,20 +613,21 @@ interface Sku {
   listByLocation is ArmListBySubscription<ResourceSku>;
 }
 
-@doc("Describes Compute Resource Quota")
+@doc("Describes Resource Quota")
 @parentResource(Location)
 model Quota is ProxyResource<QuotaProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "existing api"
   @doc("The name of the quota.")
   @key("quotaName")
-  @segment("subscriptionUsages")
+  @segment("usages")
   @visibility("read")
   @path
-  name: QuotaName;
+  name: string;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "No ProvisioningState"
-@doc("Describes Compute Resource Quota properties")
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property"
+@doc("Describes Resource Quota properties")
 model QuotaProperties {
   @doc("The unit of usage measurement.")
   unit: string;
@@ -636,6 +637,9 @@ model QuotaProperties {
 
   @doc("The maximum permitted usage of the resource.")
   limit: int64;
+
+  @doc("The details of the quota.")
+  name: QuotaName;
 }
 
 union UsageUnit {
