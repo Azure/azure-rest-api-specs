@@ -42,11 +42,14 @@
           "NetworkSecurityPerimeterConfigurations"
         ],
         "description": "Gets a list of NSP configurations for specified action group.",
-        "operationId": "ActionGroups_NSP_List",
+        "operationId": "ActionGroups_ListNSP",
         "x-ms-examples": {
           "Get an action group": {
             "$ref": "./examples/NSPForActionGroups_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "parameters": [
           {
@@ -70,9 +73,9 @@
             }
           },
           "default": {
-            "description": "An error occurred and the NSP configs could not be retrieved.",
+            "description": "BadRequest",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/ErrorContract"
             }
           }
         }
@@ -84,7 +87,7 @@
           "NetworkSecurityPerimeterConfigurations"
         ],
         "description": "Gets a specified NSP configuration for specified action group.",
-        "operationId": "ActionGroups_NSP_Get",
+        "operationId": "ActionGroups_GetNSP",
         "x-ms-examples": {
           "Get NSP config by name for an action group": {
             "$ref": "./examples/NSPForActionGroups_Get.json"
@@ -119,9 +122,9 @@
             }
           },
           "default": {
-            "description": "An error occurred and the NSP config could not be retrieved.",
+            "description": "BadRequest",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/ErrorContract"
             }
           }
         }
@@ -133,7 +136,7 @@
           "NetworkSecurityPerimeterConfigurations"
         ],
         "description": "Reconciles a specified NSP configuration for specified action group.",
-        "operationId": "ActionGroups_NSP_Reconcile",
+        "operationId": "ActionGroups_ReconcileNSP",
         "x-ms-examples": {
           "Reconcile NSP config by name for an action group": {
             "$ref": "./examples/NSPForActionGroups_Reconcile.json"
@@ -168,9 +171,9 @@
             }
           },
           "default": {
-            "description": "An error occurred and the NSP config could not be reconciled.",
+            "description": "BadRequest",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/ErrorContract"
             }
           }
         }
@@ -218,7 +221,8 @@
       "type": "object",
       "properties": {
         "provisioningState": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "networkSecurityPerimeter": {
           "$ref": "#/definitions/NSPConfigPerimeter"

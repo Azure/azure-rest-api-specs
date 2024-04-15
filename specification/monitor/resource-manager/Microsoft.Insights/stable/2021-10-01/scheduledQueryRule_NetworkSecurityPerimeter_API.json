@@ -40,7 +40,7 @@
           "NetworkSecurityPerimeterConfigurations"
         ],
         "description": "Gets a list of NSP configurations for specified scheduled query rule.",
-        "operationId": "ScheduledQueryRule_NSP_List",
+        "operationId": "ScheduledQueryRule_ListNSP",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -65,9 +65,12 @@
           "default": {
             "description": "BadRequest",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/ErrorContract"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List NSP configs by Scheduled Query Rule": {
@@ -82,7 +85,7 @@
           "NetworkSecurityPerimeterConfigurations"
         ],
         "description": "Gets a network security perimeter configuration.",
-        "operationId": "ScheduledQueryRule_NSP_Get",
+        "operationId": "ScheduledQueryRule_GetNSP",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -113,7 +116,7 @@
           "default": {
             "description": "BadRequest",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/ErrorContract"
             }
           }
         },
@@ -130,7 +133,7 @@
           "NetworkSecurityPerimeterConfigurations"
         ],
         "description": "Reconcile network security perimeter configuration for ScheduledQueryRule resource.",
-        "operationId": "ScheduledQueryRule_NSP_Reconcile",
+        "operationId": "ScheduledQueryRule_ReconcileNSP",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -161,7 +164,7 @@
           "default": {
             "description": "BadRequest",
             "schema": {
-              "$ref": "#/definitions/ErrorContract"
+              "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/ErrorContract"
             }
           }
         },
@@ -214,7 +217,8 @@
       "type": "object",
       "properties": {
         "provisioningState": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "networkSecurityPerimeter": {
           "$ref": "#/definitions/NSPConfigPerimeter"
@@ -368,16 +372,6 @@
           "items": {
             "type": "string"
           }
-        }
-      }
-    },
-    "ErrorContract": {
-      "description": "Describes the format of Error response.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "The error details.",
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
         }
       }
     }

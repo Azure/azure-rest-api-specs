@@ -25,7 +25,7 @@
           "NetworkSecurityPerimeterConfigurations"
         ],
         "summary": "Gets a list of NSP configurations for the specified data collection endpoint.",
-        "operationId": "DataCollectionEndpoints_NSP_List",
+        "operationId": "DataCollectionEndpoints_ListNSP",
         "produces": [
           "application/json"
         ],
@@ -51,9 +51,9 @@
             }
           },
           "default": {
-            "description": "Error",
+            "description": "BadRequest",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseCommonV2"
+              "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/ErrorContract"
             }
           }
         },
@@ -61,6 +61,9 @@
           "List NSP configs by data collection endpoint": {
             "$ref": "./examples/NSPForDataCollectionEndpoints_List.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -70,7 +73,7 @@
           "NetworkSecurityPerimeterConfigurations"
         ],
         "summary": "Gets the specified NSP configuration for the specified data collection endpoint.",
-        "operationId": "DataCollectionEndpoints_NSP_Get",
+        "operationId": "DataCollectionEndpoints_GetNSP",
         "produces": [
           "application/json"
         ],
@@ -102,9 +105,9 @@
             }
           },
           "default": {
-            "description": "Error",
+            "description": "BadRequest",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseCommonV2"
+              "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/ErrorContract"
             }
           }
         },
@@ -115,13 +118,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers//Microsoft.Insights/dataCollectionEndpoints/{dataCollectionEndpointName}/networkSecurityPerimeterConfigurations/{configurationName}/reconcile": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/dataCollectionEndpoints/{dataCollectionEndpointName}/networkSecurityPerimeterConfigurations/{configurationName}/reconcile": {
       "post": {
         "tags": [
           "NetworkSecurityPerimeterConfigurations"
         ],
         "summary": "Reconciles the specified NSP configuration for the specified data collection endpoint.",
-        "operationId": "DataCollectionEndpoints_NSP_Reconcile",
+        "operationId": "DataCollectionEndpoints_ReconcileNSP",
         "produces": [
           "application/json"
         ],
@@ -153,9 +156,9 @@
             }
           },
           "default": {
-            "description": "Error",
+            "description": "BadRequest",
             "schema": {
-              "$ref": "#/definitions/ErrorResponseCommonV2"
+              "$ref": "../../../../common-types/v2/commonMonitoringTypes.json#/definitions/ErrorContract"
             }
           }
         },
@@ -208,7 +211,8 @@
       "type": "object",
       "properties": {
         "provisioningState": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "networkSecurityPerimeter": {
           "$ref": "#/definitions/NSPConfigPerimeter"
