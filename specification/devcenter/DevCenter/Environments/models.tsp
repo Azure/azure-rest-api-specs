@@ -414,12 +414,12 @@ or management group.
 @added(APIVersions.v2024_02_01)
 model EnvironmentDeployOperation extends EnvironmentOperation {
   @doc("The kind of operation that occurred.")
-  kind: "Deploy";
+  kind: EnvironmentOperationKind.Deploy;
 }
 
 @doc("Information about a delete operation on an environment.")
 @added(APIVersions.v2024_02_01)
 model EnvironmentDeleteOperation extends EnvironmentOperation {
   @doc("The kind of operation that occurred.")
-  kind: "Delete";
+  kind: EnvironmentOperationKind.Delete;
 }
