@@ -241,7 +241,7 @@ union StatusLevelTypes {
 }
 
 @doc("The power state of the virtual machine instance")
-union PowerState {
+union PowerStateEnum {
   @doc("Virtual machine deallocated")
   Deallocated: "Deallocated",
 
@@ -1360,7 +1360,7 @@ model VirtualMachineInstanceStatus {
   errorMessage?: string;
 
   @doc("The power state of the virtual machine instance")
-  powerState?: PowerState;
+  powerState?: PowerStateEnum;
 
   @doc("Provisioning status of the virtual machine instance")
   provisioningStatus?: VirtualMachineInstanceStatusProvisioningStatus;
