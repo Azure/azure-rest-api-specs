@@ -19,6 +19,5 @@ enum Versions {
  */
 union ProvisioningState {
   string,
-
   ResourceProvisioningState,
 }

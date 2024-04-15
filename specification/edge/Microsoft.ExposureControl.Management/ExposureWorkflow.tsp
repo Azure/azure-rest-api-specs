@@ -63,19 +63,19 @@ union ExposureWorkflowStatus {
   string,
 
   @doc("Workflow status is waiting.")
-  Waiting : "Waiting",
+  Waiting: "Waiting",
 
   @doc("Workflow started or in-progress.")
-  Active : "Active",
+  Active: "Active",
 
   @doc("Workflow reached completion successfully.")
-  Succeeded : "Succeeded",
+  Succeeded: "Succeeded",
 
   @doc("Workflow is cancelled.")
-  Cancelled : "Cancelled",
+  Cancelled: "Cancelled",
 
   @doc("workflow reached completion with Failed status.")
-  Failed : "Failed",
+  Failed: "Failed",
 }
 
 @doc("Exposure workflow ring configuration Properties")

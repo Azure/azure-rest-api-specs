@@ -79,7 +79,7 @@ union ProgressionType {
   string,
 
   @doc("Fixed time based progression.")
-  TimeBased : "TimeBased",
+  TimeBased: "TimeBased",
 
   @doc("Custom defined progression.")
   Custom: "Custom",

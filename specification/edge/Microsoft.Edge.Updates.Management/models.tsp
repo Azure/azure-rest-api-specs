@@ -20,27 +20,27 @@ union UpdateStatus {
   /**
    * The device is in Unknown state
    */
-  Unknown : "Unknown",
+  Unknown: "Unknown",
 
   /**
    * The device is in UpdateAvailable state
    */
-  UpdateAvailable : "UpdateAvailable",
+  UpdateAvailable: "UpdateAvailable",
 
   /**
    * The device is in UptoDate state
    */
-  UptoDate : "UptoDate",
+  UptoDate: "UptoDate",
 
   /**
    * The device is in UpdateInProgress state
    */
-  UpdateInProgress : "UpdateInProgress",
+  UpdateInProgress: "UpdateInProgress",
 
   /**
    * The device is in NeedsAttention state
    */
-  NeedsAttention : "NeedsAttention",
+  NeedsAttention: "NeedsAttention",
 }
 
 /**
@@ -85,6 +85,5 @@ model ModifyUpdateProperties {
  */
 union ProvisioningState {
   string,
-
   ResourceProvisioningState,
 }

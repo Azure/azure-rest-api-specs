@@ -20,7 +20,7 @@ union ConnectivityStatusEnum {
   /**
    * The device is in Connected state
    */
-  Connected : "Connected",
+  Connected: "Connected",
 
   /**
    * The device was NotRecentlyConnected
@@ -75,6 +75,5 @@ model ConnectivityStatusUpdateProperties {
  */
 union ProvisioningState {
   string,
-
   ResourceProvisioningState,
 }

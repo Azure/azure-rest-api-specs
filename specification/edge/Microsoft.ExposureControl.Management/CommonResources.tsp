@@ -17,20 +17,19 @@ namespace Microsoft.Edge;
 @doc("The provisioning state of a resource.")
 union ProvisioningState {
   string,
-
   ResourceProvisioningState,
 
   @doc("The resource is being provisioned")
-  Provisioning : "Provisioning",
+  Provisioning: "Provisioning",
 
   @doc("The resource is updating")
-  Updating : "Updating",
+  Updating: "Updating",
 
   @doc("The resource is being deleted")
-  Deleting : "Deleting",
+  Deleting: "Deleting",
 
   @doc("The resource create request has been accepted")
-  Accepted : "Accepted",
+  Accepted: "Accepted",
 }
 
 @doc("Ring status enum.")
@@ -38,23 +37,23 @@ union RingStatus {
   string,
 
   @doc("Ring/Stage is waiting for its dependency.")
-  Waiting : "Waiting",
+  Waiting: "Waiting",
 
   @doc("Ring/Stage started and it is in progress.")
-  Active : "Active",
+  Active: "Active",
 
   @doc("Ring/Stage reached completion.")
-  Completed : "Completed",
+  Completed: "Completed",
 
   @doc("Ring/Stage is cancelled.")
-  Cancelled : "Cancelled",
+  Cancelled: "Cancelled",
 
   @doc("Ring/Stage is failed.")
-  Failed : "Failed",
+  Failed: "Failed",
 
   @doc("Ring/Stage is passed for business reasons.")
-  AutoPassed : "AutoPassed",
+  AutoPassed: "AutoPassed",
 
   @doc("Ring/Stage is skipped for business reasons.")
-  Omitted : "Omitted",
+  Omitted: "Omitted",
 }
