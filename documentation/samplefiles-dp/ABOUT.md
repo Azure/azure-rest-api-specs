@@ -1,9 +1,9 @@
+# About `samplefiles-dp`
+
 This `samplefiles-dp` directory contains sample AutoRest configuration files
 for data-plane specs: `README.md`.  
-It also contains the sample hand-written OpenAPI specification files referenced by these files.
-
-You can learn more about AutoRest configuration files at
-[aka.ms/azsdk/autorest](https://aka.ms/azsdk/autorest).
+It also contains the sample hand-written OpenAPI specification files referenced
+by the README files.
 
 > [!CAUTION]
 > The example OpenAPI specification files in this directory are hand-written,
@@ -18,6 +18,12 @@ For a case where a multiple SDK clients are generated,
 see [dataplane samples for multi client](samplefiles-dp-for-multi-client).
 This is an advanced scenario. You can learn more about it at
 [aka.ms/azsdk/spec-dirs#advanced-scenario-service-group](https://aka.ms/azsdk/spec-dirs#advanced-scenario-service-group).
+
+You can learn more about AutoRest configuration files at
+[aka.ms/azsdk/autorest](https://aka.ms/azsdk/autorest).
+
+You can learn more about the overall directory structure at
+[aka.ms/azsdk/spec-dirs](https://aka.ms/azsdk/spec-dirs).
 
 See also: [../samplefiles](../samplefiles)
 
