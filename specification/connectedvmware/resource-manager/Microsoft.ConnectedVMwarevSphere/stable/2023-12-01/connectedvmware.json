@@ -4007,6 +4007,17 @@
           "format": "int32",
           "description": "Sets auto logon count.",
           "type": "integer"
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "Specifies the time zone of the virtual machine. e.g. \"Pacific Standard Time\". Time zone name correspond to time zones listed at Microsoft Time Zone name values(https://learn.microsoft.com/en-us/previous-versions/windows/embedded/ms912391(v=winembedded.11))."
+        },
+        "firstLogonCommands": {
+          "description": "Sets first logon commands",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -6064,7 +6075,8 @@
         },
         "privateKey": {
           "type": "string",
-          "description": "Private key used to authenticate to a virtual machine through ssh."
+          "description": "Private key used to authenticate to a virtual machine through ssh.",
+          "x-ms-secret": true
         }
       }
     },
