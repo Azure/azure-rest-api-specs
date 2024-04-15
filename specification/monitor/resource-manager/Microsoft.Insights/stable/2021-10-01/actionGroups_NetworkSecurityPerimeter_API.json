@@ -177,227 +177,227 @@
       }
     }
   },
-    "definitions": {
-      "NetworkSecurityPerimeterConfiguration": {
-        "description": "NSP Configuration",
-        "type": "object",
-        "allOf": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
-          }
-        ],
+  "definitions": {
+    "NetworkSecurityPerimeterConfiguration": {
+      "description": "NSP Configuration",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
         "properties": {
-          "properties": {
-            "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
-            "description": "Resource properties.",
-            "x-ms-client-flatten": true
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationListResult": {
+      "description": "A list of NSP configurations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkSecurityPerimeterConfigurationProperties": {
+      "description": "The properties of an NSP config.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "type": "string"
+        },
+        "networkSecurityPerimeter": {
+          "$ref": "#/definitions/NSPConfigPerimeter"
+        },
+        "resourceAssociation": {
+          "$ref": "#/definitions/NSPConfigAssociation"
+        },
+        "profile": {
+          "$ref": "#/definitions/NSPConfigProfile"
+        },
+        "provisioningIssues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NSPProvisioningIssue"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "NSPConfigAccessRule": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/NSPConfigAccessRuleProperties"
+        }
+      }
+    },
+    "NSPConfigAccessRuleProperties": {
+      "type": "object",
+      "properties": {
+        "direction": {
+          "type": "string"
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fullyQualifiedDomainNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "subscriptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "networkSecurityPerimeters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NSPConfigNetworkSecurityPerimeterRule"
           }
         }
-      },
-      "NetworkSecurityPerimeterConfigurationListResult": {
-        "description": "A list of NSP configurations.",
-        "type": "object",
-        "properties": {
-          "value": {
-            "description": "Array of results.",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
-            },
-            "readOnly": true
-          },
-          "nextLink": {
-            "description": "Link to retrieve next page of results.",
-            "type": "string",
-            "readOnly": true
-          }
+      }
+    },
+    "NSPConfigAssociation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "accessMode": {
+          "type": "string"
         }
-      },
-      "NetworkSecurityPerimeterConfigurationProperties": {
-        "description": "The properties of an NSP config.",
-        "type": "object",
-        "properties": {
-          "provisioningState": {
-            "type": "string"
-          },
-          "networkSecurityPerimeter": {
-            "$ref": "#/definitions/NSPConfigPerimeter"
-          },
-          "resourceAssociation": {
-            "$ref": "#/definitions/NSPConfigAssociation"
-          },
-          "profile": {
-            "$ref": "#/definitions/NSPConfigProfile"
-          },
-          "provisioningIssues": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/NSPProvisioningIssue"
-            },
-            "x-ms-identifiers": []
-          }
+      }
+    },
+    "NSPConfigNetworkSecurityPerimeterRule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "perimeterGuid": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
         }
-      },
-      "NSPConfigAccessRule": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "properties": {
-            "$ref": "#/definitions/NSPConfigAccessRuleProperties"
-          }
+      }
+    },
+    "NSPConfigPerimeter": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "perimeterGuid": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
         }
-      },
-      "NSPConfigAccessRuleProperties": {
-        "type": "object",
-        "properties": {
-          "direction": {
-            "type": "string"
+      }
+    },
+    "NSPConfigProfile": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "accessRulesVersion": {
+          "type": "string"
+        },
+        "accessRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NSPConfigAccessRule"
           },
-          "addressPrefixes": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "fullyQualifiedDomainNames": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "subscriptions": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "networkSecurityPerimeters": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/NSPConfigNetworkSecurityPerimeterRule"
-            }
-          }
+          "x-ms-identifiers": []
         }
-      },
-      "NSPConfigAssociation": {
-        "type": "object",
+      }
+    },
+    "NSPProvisioningIssue": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
         "properties": {
-          "name": {
-            "type": "string"
-          },
-          "accessMode": {
+          "$ref": "#/definitions/NSPProvisioningIssueProperties"
+        }
+      }
+    },
+    "NSPProvisioningIssueProperties": {
+      "type": "object",
+      "properties": {
+        "issueType": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "suggestedResourceIds": {
+          "type": "array",
+          "items": {
             "type": "string"
           }
-        }
-      },
-      "NSPConfigNetworkSecurityPerimeterRule": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "perimeterGuid": {
-            "type": "string"
-          },
-          "location": {
-            "type": "string"
-          }
-        }
-      },
-      "NSPConfigPerimeter": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "perimeterGuid": {
-            "type": "string"
-          },
-          "location": {
-            "type": "string"
-          }
-        }
-      },
-      "NSPConfigProfile": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "accessRulesVersion": {
-            "type": "string"
-          },
-          "accessRules": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/NSPConfigAccessRule"
-            },
-            "x-ms-identifiers": []
-          }
-        }
-      },
-      "NSPProvisioningIssue": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "properties": {
-            "$ref": "#/definitions/NSPProvisioningIssueProperties"
-          }
-        }
-      },
-      "NSPProvisioningIssueProperties": {
-        "type": "object",
-        "properties": {
-          "issueType": {
-            "type": "string"
-          },
-          "severity": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "suggestedResourceIds": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "suggestedAccessRules": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "ErrorResponse": {
-        "description": "Describes the format of Error response.",
-        "type": "object",
-        "properties": {
-          "code": {
-            "description": "Error code",
-            "type": "string"
-          },
-          "message": {
-            "description": "Error message indicating why the operation failed.",
+        },
+        "suggestedAccessRules": {
+          "type": "array",
+          "items": {
             "type": "string"
           }
         }
       }
     },
-    "parameters": {
-      "ActionGroupNameParameter": {
-        "name": "actionGroupName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "The name of the action group.",
-        "x-ms-parameter-location": "method"
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
       }
     }
+  },
+  "parameters": {
+    "ActionGroupNameParameter": {
+      "name": "actionGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the action group.",
+      "x-ms-parameter-location": "method"
+    }
   }
+}
