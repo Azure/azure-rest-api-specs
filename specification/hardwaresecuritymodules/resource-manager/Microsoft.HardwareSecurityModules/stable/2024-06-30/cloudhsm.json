@@ -804,11 +804,11 @@
             "schema": {
               "$ref": "#/definitions/CloudHsmClusterError"
             }
-          },
-          "x-ms-examples": {
-            "CloudHsmCluster_Restore_MaximumSet_Gen": {
-              "$ref": "./examples/CloudHsmCluster_RequestOrValidate_Restore_MaximumSet_Gen.json"
-            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudHsmCluster_Restore_MaximumSet_Gen": {
+            "$ref": "./examples/CloudHsmCluster_RequestOrValidate_Restore_MaximumSet_Gen.json"
           }
         }
       }
@@ -858,10 +858,10 @@
               "Azure-AsyncOperation": {
                 "description": "The URI to poll for completion status.",
                 "type": "string"
-              },
-              "schema": {
-                "$ref": "#/definitions/RestoreOperationResult"
               }
+            },
+            "schema": {
+              "$ref": "#/definitions/RestoreOperationResult"
             }
           },
           "default": {
@@ -879,51 +879,51 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/{cloudHsmClusterName}/restore/{jobId}/pending": {
-      "get": {
-        "tags": [
-          "Returns Restore Operation Status"
-        ],
-        "operationId": "CloudHsmClusters_RestoreStatus_Get",
-        "description": "Gets the restore operation status of the specified Cloud HSM Cluster",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/cloudHsmClusterName"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/backupRestoreJobId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Cloud HSM Cluster Backup Operation status returned",
-            "schema": {
-              "$ref": "#/definitions/RestoreOperationResult"
+        "get": {
+          "tags": [
+            "Returns Restore Operation Status"
+          ],
+          "operationId": "CloudHsmClusters_RestoreStatus_Get",
+          "description": "Gets the restore operation status of the specified Cloud HSM Cluster",
+          "parameters": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            },
+            {
+              "$ref": "#/parameters/cloudHsmClusterName"
+            },
+            {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/backupRestoreJobId"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Cloud HSM Cluster Backup Operation status returned",
+              "schema": {
+                "$ref": "#/definitions/RestoreOperationResult"
+              }
+            },
+            "default": {
+              "description": "The error response describing why the operation failed",
+              "schema": {
+                "$ref": "#/definitions/CloudHsmClusterError"
+              }
             }
           },
-          "default": {
-            "description": "The error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/CloudHsmClusterError"
+          "x-ms-examples": {
+            "CloudHsmCluster_Get_Restore_Status_MaximumSet_Gen": {
+              "$ref": "./examples/CloudHsmCluster_Restore_Pending_MaximumSet_Gen.json"
             }
-          }
-        },
-        "x-ms-examples": {
-          "CloudHsmCluster_Get_Restore_Status_MaximumSet_Gen": {
-            "$ref": "./examples/CloudHsmCluster_Restore_Pending_MaximumSet_Gen.json"
           }
         }
       }
-    }
-  },
+    },  
   "definitions": {
     "CloudHsmProperties": {
       "type": "object",
@@ -1306,41 +1306,41 @@
       "description": "Backup and Restore operation common properties"
     }
   },
-  "parameters": {
-    "cloudHsmClusterName": {
-      "name": "cloudHsmClusterName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the Cloud HSM Cluster within the specified resource group. Cloud HSM Cluster names must be between 3 and 24 characters in length.",
-      "pattern": "^[a-zA-Z0-9-]{3,24}$",
-      "maxLength": 24,
-      "minLength": 3,
-      "x-ms-parameter-location": "method"
-    },
-    "peConnectionName": {
-      "name": "peConnectionName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Name of the private endpoint connection associated with the Cloud HSM Cluster.",
-      "pattern": "^[a-zA-Z0-9-]{3,24}$",
-      "maxLength": 24,
-      "minLength": 3,
-      "x-ms-parameter-location": "method"
-    },
-    "azureStorageResourceUri": {
-      "name": "azureStorageResourceUri",
-      "in": "body",
-      "type": "string",
-      "description": "Azure storage Resource Uri"
-    },
-    "backupRestoreJobId": {
-      "name": "jobId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The id returned as part of the backup request"
+    "parameters": {
+      "cloudHsmClusterName": {
+        "name": "cloudHsmClusterName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The name of the Cloud HSM Cluster within the specified resource group. Cloud HSM Cluster names must be between 3 and 24 characters in length.",
+        "pattern": "^[a-zA-Z0-9-]{3,24}$",
+        "maxLength": 24,
+        "minLength": 3,
+        "x-ms-parameter-location": "method"
+      },
+      "peConnectionName": {
+        "name": "peConnectionName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "Name of the private endpoint connection associated with the Cloud HSM Cluster.",
+        "pattern": "^[a-zA-Z0-9-]{3,24}$",
+        "maxLength": 24,
+        "minLength": 3,
+        "x-ms-parameter-location": "method"
+      },
+      "azureStorageResourceUri": {
+        "name": "azureStorageResourceUri",
+        "in": "body",
+        "type": "string",
+        "description": "Azure storage Resource Uri"
+      },
+      "backupRestoreJobId": {
+        "name": "jobId",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "description": "The id returned as part of the backup request"
+      }
     }
-  }
 }

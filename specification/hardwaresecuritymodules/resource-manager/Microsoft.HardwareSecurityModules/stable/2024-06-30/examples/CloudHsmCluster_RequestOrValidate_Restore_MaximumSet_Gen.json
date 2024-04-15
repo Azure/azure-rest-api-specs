@@ -4,24 +4,22 @@
     "resourceGroupName": "rgcloudhsm",
     "cloudHsmClusterName": "chsm1",
     "api-version": "2024-06-30",
-    "body": {
-      "restoreProperties": {
-        "foldername": "foldername",
-        "azureStorageResourceUri": "https://myaccount.blob.core.windows.net/sascontainer/sasContainer"
-      }
+    "restoreProperties": {
+      "foldername": "foldername",
+      "azureStorageResourceUri": "https://myaccount.blob.core.windows.net/sascontainer/sasContainer"
     }
   },
-  "response": {
+  "responses": {
     "202": {
       "headers": {
         "Retry-After": 5,
-        "Azure-AsynchOperation": "https://chsm-prebackup-polling-uri/"
+        "Azure-AsyncOperation": "https://chsm-prebackup-polling-uri/"
       },
       "body": {
         "status": "InProgress",
         "statusDetails": "Restore operation is in progress",
         "startTime": "2022-09-12T12:00:00.0000000Z",
-        "endTime": "null",
+        "endTime": "2022-09-12T12:00:00.0000000Z",
         "jobId": "572a45927fc240e1ac075de27371680b"
       }
     }
