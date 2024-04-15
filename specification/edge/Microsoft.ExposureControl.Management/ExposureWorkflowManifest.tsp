@@ -75,21 +75,25 @@ model ProgressionMethod {
 }
 
 @doc("Progression type enum.")
-enum ProgressionType {
+union ProgressionType {
+  string,
+
   @doc("Fixed time based progression.")
-  TimeBased,
+  TimeBased : "TimeBased",
 
   @doc("Custom defined progression.")
-  Custom,
+  Custom: "Custom",
 }
 
 @doc("Progression Gate status enum.")
-enum GateStatus {
+union GateStatus {
+  string,
+
   @doc("Gate status Open when ring is started/active.")
-  Open,
+  Open: "Open",
 
   @doc("Gate status Closed when ring is completed.")
-  Closed,
+  Closed: "Closed",
 }
 
 @doc("Ring configuration Properties")

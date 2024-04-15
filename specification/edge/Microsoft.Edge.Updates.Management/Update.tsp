@@ -39,7 +39,7 @@ interface Updates {
   createOrModify is ArmResourceCreateOrReplaceAsync<
     Update,
     BaseParameters<Update>,
-    ArmAsyncOperationHeader
+    Azure.Core.Foundations.RetryAfterHeader & ArmAsyncOperationHeader
   >;
 
   /**
