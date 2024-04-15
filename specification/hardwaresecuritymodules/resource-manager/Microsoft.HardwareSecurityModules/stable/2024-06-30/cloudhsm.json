@@ -621,7 +621,7 @@
           "200": {
             "description": "OK. Cloud HSM Cluster Backup operation API finished synchronously with Success",
             "schema": {
-              "$ref": "#/definitions/BackupOperationResult"
+              "$ref": "#/definitions/BackupResponse"
             }
           },
           "202": {
@@ -689,7 +689,7 @@
           "200": {
             "description": "OK. Cloud HSM Cluster Backup operation API finished synchronously with Success",
             "schema": {
-              "$ref": "#/definitions/BackupOperationResult"
+              "$ref": "#/definitions/BackupResponse"
             }
           },
           "202": {
@@ -748,7 +748,7 @@
           "200": {
             "description": "Cloud HSM Cluster Backup Operation status returned",
             "schema": {
-              "$ref": "#/definitions/BackupOperationResult"
+              "$ref": "#/definitions/BackupResponse"
             }
           },
           "default": {
@@ -814,7 +814,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/RestoreOperationResult"
+              "$ref": "#/definitions/RestoreResponse"
             }
           },
           "default": {
@@ -879,7 +879,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/RestoreOperationResult"
+              "$ref": "#/definitions/RestoreResponse"
             }
           },
           "default": {
@@ -924,7 +924,7 @@
           "200": {
             "description": "Cloud HSM Cluster Backup Operation status returned",
             "schema": {
-              "$ref": "#/definitions/RestoreOperationResult"
+              "$ref": "#/definitions/RestoreResponse"
             }
           },
           "default": {
@@ -1265,21 +1265,6 @@
         }
       }
     },
-    "BackupOperationResult": {
-      "type": "object",
-      "properties": {
-        "azureStorageResourceUri": {
-          "type": "string",
-          "description": "The Azure blob storage container Uri which contains the backup"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/BackupRestoreCommonOperationResult"
-        }
-      ],
-      "description": "Backup operation Result"
-    },
     "RestoreProperties": {
       "type": "object",
       "description": "Cloud Hsm Cluster restore information",
@@ -1294,16 +1279,7 @@
         }
       }
     },
-    "RestoreOperationResult": {
-      "type": "object",
-      "description": "Restore operation properties",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BackupRestoreCommonOperationResult"
-        }
-      ]
-    },
-    "BackupRestoreCommonOperationResult": {
+    "BackupRestoreBaseResponse": {
       "type": "object",
       "properties": {
         "status": {
@@ -1337,6 +1313,30 @@
         }
       },
       "description": "Backup and Restore operation common properties"
+    },
+    "BackupResponse": {
+      "type": "object",
+      "properties": {
+        "azureStorageResourceUri": {
+          "type": "string",
+          "description": "The Azure blob storage container Uri which contains the backup"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupRestoreBaseResponse"
+        }
+      ],
+      "description": "Backup operation Result"
+    },
+    "RestoreResponse": {
+      "type": "object",
+      "description": "Restore operation properties",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupRestoreBaseResponse"
+        }
+      ]
     }
   },
   "parameters": {
