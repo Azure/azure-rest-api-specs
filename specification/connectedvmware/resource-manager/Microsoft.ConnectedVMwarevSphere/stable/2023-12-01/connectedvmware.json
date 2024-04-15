@@ -3735,26 +3735,31 @@
         "diskSizeGB": {
           "format": "int32",
           "description": "Gets or sets the disk total size.",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "deviceKey": {
           "format": "int32",
           "description": "Gets or sets the device key value.",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "diskMode": {
           "description": "Gets or sets the disk mode.",
-          "$ref": "#/definitions/DiskMode"
+          "$ref": "#/definitions/DiskMode",
+          "readOnly": true
         },
         "controllerKey": {
           "description": "Gets or sets the controller id.",
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "unitNumber": {
           "description": "Gets or sets the unit number of the disk on the controller.",
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "deviceName": {
           "description": "Gets or sets the device name.",
@@ -3768,15 +3773,18 @@
         },
         "diskType": {
           "description": "Gets or sets the disk backing type.",
-          "$ref": "#/definitions/DiskType"
+          "$ref": "#/definitions/DiskType",
+          "readOnly": true
         },
         "eagerlyScrub": {
           "description": "Gets or sets the eagerly scrub property of disk.",
-          "type": "boolean"
+          "type": "boolean",
+          "readOnly": true
         },
         "thinProvisioned": {
           "description": "Gets or sets the thin provisioning property of disk.",
-          "type": "boolean"
+          "type": "boolean",
+          "readOnly": true
         },
         "controllerType": {
           "description": "Gets or sets the controller type.",
@@ -5367,7 +5375,8 @@
         },
         "nicType": {
           "description": "NIC type",
-          "$ref": "#/definitions/NICType"
+          "$ref": "#/definitions/NICType",
+          "readOnly": true
         },
         "networkMoRefId": {
           "description": "Gets or sets the vCenter MoRef (Managed Object Reference) ID of the virtual network\r\nthat the nic is connected to.",
@@ -5382,7 +5391,8 @@
         "deviceKey": {
           "format": "int32",
           "description": "Gets or sets the device key value.",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
@@ -5762,7 +5772,8 @@
         },
         "firmwareType": {
           "description": "Firmware type",
-          "$ref": "#/definitions/FirmwareType"
+          "$ref": "#/definitions/FirmwareType",
+          "readOnly": true
         },
         "changeTrackingSupported": {
           "type": "boolean",
