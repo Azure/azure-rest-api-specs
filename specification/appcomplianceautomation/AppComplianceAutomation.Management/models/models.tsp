@@ -684,7 +684,7 @@ model StorageInfo {
 /**
  * Report's properties.
  */
-model ReportProperties {
+model ReportBaseProperties {
   /**
    * Report name.
    */
@@ -715,18 +715,6 @@ model ReportProperties {
   offerGuid?: string;
 
   /**
-   * Report collection trigger time's time zone, the available list can be obtained by executing "Get-TimeZone -ListAvailable" in PowerShell.
-   * An example of valid timezone id is "Pacific Standard Time".
-   */
-  timeZone?: string;
-
-  /**
-   * Report collection trigger time.
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  triggerTime?: utcDateTime;
-
-  /**
    * Report next collection trigger time.
    */
   @visibility("read")
@@ -745,11 +733,6 @@ model ReportProperties {
    */
   @visibility("read")
   subscriptions?: string[];
-
-  /**
-   * List of resource data.
-   */
-  resources?: ResourceMetadata[];
 
   /**
    * Report compliance status.
@@ -773,6 +756,54 @@ model ReportProperties {
    */
   @visibility("read")
   provisioningState?: ProvisioningState;
+}
+
+/**
+ * Create Report's properties.
+ */
+model ReportProperties {
+  /**
+   * Report collection trigger time.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  triggerTime: utcDateTime;
+
+  /**
+   * Report collection trigger time's time zone, the available list can be obtained by executing "Get-TimeZone -ListAvailable" in PowerShell.
+   * An example of valid timezone id is "Pacific Standard Time".
+   */
+  timeZone: string;
+
+  /**
+   * List of resource data.
+   */
+  resources: ResourceMetadata[];
+
+  ...ReportBaseProperties;
+}
+
+/**
+ * Patch Report's properties.
+ */
+model ReportPatchProperties {
+  /**
+   * Report collection trigger time.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  triggerTime?: utcDateTime;
+
+  /**
+   * Report collection trigger time's time zone, the available list can be obtained by executing "Get-TimeZone -ListAvailable" in PowerShell.
+   * An example of valid timezone id is "Pacific Standard Time".
+   */
+  timeZone?: string;
+
+  /**
+   * List of resource data.
+   */
+  resources?: ResourceMetadata[];
+
+  ...ReportBaseProperties;
 }
 
 /**
@@ -899,7 +930,7 @@ model ReportResourcePatch {
   /**
    * Report property.
    */
-  properties?: ReportProperties;
+  properties?: ReportPatchProperties;
 }
 
 /**
@@ -1594,12 +1625,12 @@ model ScopingAnswer {
    * Question id.
    */
   @pattern("^[-a-zA-Z0-9_]{1,50}$")
-  questionId?: string;
+  questionId: string;
 
   /**
    * Question answer value list.
    */
-  answers?: string[];
+  answers: string[];
 }
 
 /**
@@ -1626,7 +1657,7 @@ model EvidenceProperties {
   /**
    * The path of the file in storage.
    */
-  filePath?: string;
+  filePath: string;
 
   /**
    * Extra data considered as evidence.
