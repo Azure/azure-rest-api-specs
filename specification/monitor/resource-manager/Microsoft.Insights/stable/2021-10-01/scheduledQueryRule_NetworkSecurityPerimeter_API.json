@@ -100,10 +100,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "configurationName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/configurationName"
           }
         ],
         "responses": {
@@ -148,10 +145,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "configurationName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/configurationName"
           }
         ],
         "responses": {
@@ -383,6 +377,15 @@
       "required": true,
       "type": "string",
       "description": "The name of the rule.",
+      "x-ms-parameter-location": "method"
+    },
+    "configurationName": {
+      "name": "networkSecurityPerimeterConfigurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^.*$",
+      "description": "The name for Network Security Perimeter configuration",
       "x-ms-parameter-location": "method"
     }
   }

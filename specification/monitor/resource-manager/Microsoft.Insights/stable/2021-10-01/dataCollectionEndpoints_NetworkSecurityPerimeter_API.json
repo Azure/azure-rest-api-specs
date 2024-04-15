@@ -91,10 +91,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "configurationName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/configurationName"
           }
         ],
         "responses": {
@@ -142,10 +139,7 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "configurationName",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/configurationName"
           }
         ],
         "responses": {
@@ -368,17 +362,6 @@
           }
         }
       }
-    },
-    "ErrorResponseCommonV2": {
-      "title": "Error response",
-      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "The error object.",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
-        }
-      }
     }
   },
   "parameters": {
@@ -388,6 +371,15 @@
       "description": "The name of the data collection endpoint. The name is case insensitive.",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "configurationName": {
+      "name": "networkSecurityPerimeterConfigurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^.*$",
+      "description": "The name for Network Security Perimeter configuration",
       "x-ms-parameter-location": "method"
     }
   },

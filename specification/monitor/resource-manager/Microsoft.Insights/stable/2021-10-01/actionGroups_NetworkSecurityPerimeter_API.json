@@ -104,11 +104,7 @@
             "$ref": "#/parameters/ActionGroupNameParameter"
           },
           {
-            "name": "configurationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the NSP configuration."
+            "$ref": "#/parameters/configurationName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -153,11 +149,7 @@
             "$ref": "#/parameters/ActionGroupNameParameter"
           },
           {
-            "name": "configurationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the NSP configuration."
+            "$ref": "#/parameters/configurationName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -378,20 +370,6 @@
           }
         }
       }
-    },
-    "ErrorResponse": {
-      "description": "Describes the format of Error response.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
-        }
-      }
     }
   },
   "parameters": {
@@ -401,6 +379,15 @@
       "required": true,
       "type": "string",
       "description": "The name of the action group.",
+      "x-ms-parameter-location": "method"
+    },
+    "configurationName": {
+      "name": "networkSecurityPerimeterConfigurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^.*$",
+      "description": "The name for Network Security Perimeter configuration",
       "x-ms-parameter-location": "method"
     }
   }
