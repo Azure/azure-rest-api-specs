@@ -1370,7 +1370,10 @@ directive:
     reason: Error response is inherited via allOf on flagged response.
   - suppress: NoErrorCodeResponses
     from: deploymentStacks.json
-    reason: A 400 response from the validate endpoint indicates a validation failure.
+    reason: A 400 response from the validate endpoint indicates a validation failure and should not throw an exception.
+  - suppress: MissingXmsErrorResponse
+    from: deploymentStacks.json
+    reason: A 400 response from the validate endpoint indicates a validation failure and should not throw an exception.
   - suppress: PathForPutOperation
     from: policyDefinitions.json
     reason: Policy definitions can be created at management group or subscriptions
